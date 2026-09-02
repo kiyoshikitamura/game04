@@ -13,7 +13,7 @@
 
 | Slot | Task | Status | Branch | Exclusive area |
 | --- | --- | --- | --- | --- |
-| Authority | M2-OPERATIONS-001 | IN_PROGRESS | `codex/m2-operations-001` | Migration `20260902000005`, operational state authority, and dev-clean acceptance |
+| Authority | M2-OPERATIONS-001 | BLOCKED — PROTECTED SECRET | `codex/m2-operations-001` | Implementation, dev-clean apply, manual contracts, live transition, CI quality, and Vercel pass; GitHub DB workflow needs `DEV_CLEAN_DATABASE_URL` |
 | Tooling | Unassigned | OPEN | — | Repository and delivery tooling |
 | Product/client | Unassigned | OPEN | — | Product documents and client-only work |
 
@@ -26,6 +26,11 @@ New engineering tasks must name the M2 exit gate they advance. M3 product work
 is tracked separately while awaiting Circle agreement; Character-specific M4
 and gameplay M5 implementation remain outside active slots until their product
 dependencies are accepted.
+
+M2-G6 is in gate review. Its implementation and dev-clean behavior are accepted
+locally and manually, but the exit gate remains open until the protected GitHub
+database-contract workflow completes successfully. Do not copy the missing
+database credential into repository files, task documents, Issues, or chat.
 
 ## Dependency queue
 

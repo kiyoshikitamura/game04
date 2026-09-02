@@ -21,7 +21,7 @@ effort or schedule.
 | --- | --- | ---: | --- |
 | M0 — Development Foundation | COMPLETE | 6 / 6 | GitHub-based Next.js/TypeScript, CI, Vercel, and isolated dev-clean baseline |
 | M1 — Common Core Foundation | COMPLETE | 5 / 5 | Player authority, Inventory, Reward, migration discipline, and extraction boundary |
-| M2 — Engineering Readiness | IN PROGRESS | 5 / 6 | Product-neutral development, test, runtime, asset, observability, and operations foundations |
+| M2 — Engineering Readiness | GATE REVIEW | 5 / 6 | G6 implementation and live dev-clean checks pass; protected database CI configuration remains |
 | M3 — Product & Character Definition | BLOCKED — CIRCLE AGREEMENT | 1 / 6 | Source authority verified; Character and game rules require Circle agreement |
 | M4 — Character & Animation PoC | NOT STARTED | 0 / 4 | Character contract and delivery feasibility |
 | M5 — Playable Vertical Slice | NOT STARTED | 0 / 7 | Login → Character → Gacha → Growth → Push → Community |
@@ -126,6 +126,9 @@ Accepted evidence:
 - G3: `docs/development/acceptance/M2-LIFECYCLE-UX-001.md`
 - G4: `docs/development/acceptance/M2-ASSET-DELIVERY-001.md`
 - G5: `docs/development/acceptance/M2-OBSERVABILITY-001.md`
+- G6 review: `docs/development/acceptance/M2-OPERATIONS-001.md` — implementation,
+  manual contracts, live transition, Quality CI, and deployment pass; protected
+  database workflow awaits `DEV_CLEAN_DATABASE_URL` and is not yet accepted
 
 ## M3 — Product & Character Definition
 
