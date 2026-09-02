@@ -90,11 +90,13 @@ values
 do $$
 declare
   v_inbox_id uuid;
+  v_conflict_inbox_id uuid;
   v_request_id uuid := '30000000-0000-0000-0000-000000000001';
   v_first jsonb;
   v_replay jsonb;
   v_quantity bigint;
   v_count bigint;
+  v_conflict_rejected boolean := false;
 begin
   v_inbox_id := public.enqueue_player_reward(
     '10000000-0000-0000-0000-000000000001',
@@ -131,6 +133,38 @@ begin
 
   if v_count <> 1 then
     raise exception 'one request produced % receipts, expected 1', v_count;
+  end if;
+
+  v_conflict_inbox_id := public.enqueue_player_reward(
+    '10000000-0000-0000-0000-000000000001',
+    '20000000-0000-0000-0000-000000000003',
+    '[{"asset_kind":"conflict-kind","asset_key":"conflict-key","quantity":5}]'::jsonb
+  );
+
+  begin
+    perform public.claim_current_player_reward(v_conflict_inbox_id, v_request_id);
+  exception
+    when invalid_parameter_value then v_conflict_rejected := true;
+  end;
+
+  if not v_conflict_rejected then
+    raise exception 'request ID conflict unexpectedly succeeded';
+  end if;
+
+  if exists (
+    select 1
+    from public.player_inventory
+    where player_id = '10000000-0000-0000-0000-000000000001'
+      and asset_kind = 'conflict-kind'
+      and asset_key = 'conflict-key'
+  ) or not exists (
+    select 1
+    from public.reward_inbox
+    where id = v_conflict_inbox_id
+      and state = 'pending'
+      and claimed_at is null
+  ) then
+    raise exception 'request ID conflict left a partial effect';
   end if;
 
   perform set_config(
