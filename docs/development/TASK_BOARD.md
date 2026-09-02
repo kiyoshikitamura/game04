@@ -11,11 +11,11 @@
 
 | Slot | Task | Status | Branch | Exclusive area |
 | --- | --- | --- | --- | --- |
-| Authority | Unassigned | OPEN | — | DB migrations and mutation authority |
+| Authority | `ARCH-WALLET-DECISION-001` | READY | `codex/arch-wallet-decision-001` | Wallet architecture decision document only |
 | Tooling | Unassigned | OPEN | — | Repository and delivery tooling |
-| Product/client | Unassigned | OPEN | — | Product documents and client-only work |
+| Product/client | `PRODUCT-BATCH-A-BRIEF-001` | READY | `codex/product-batch-a-brief-001` | Batch A product decision brief only |
 
-The first parallel wave is accepted. New work must receive a new task contract and re-evaluate file and migration ownership before dispatch.
+The second parallel wave reserves two non-overlapping documentation areas. It makes no product decision and performs no live-environment mutation.
 
 ## Dependency queue
 
