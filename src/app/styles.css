@@ -17,3 +17,6 @@ h2 { margin: 0 0 8px; font-size: 1.1rem; }
 .auth-panel button { border: 0; cursor: pointer; font: inherit; }
 .auth-panel button:disabled { cursor: wait; opacity: .65; }
 .secondary-action { justify-self: start; border-radius: 9px; padding: 9px 12px; background: transparent; color: var(--muted); }
+.profile-form { display: grid; gap: 10px; margin: 18px 0; }
+.profile-form label { font-size: .9rem; font-weight: 700; }
+.profile-form input { width: 100%; border: 1px solid #75536f; border-radius: 10px; padding: 12px; background: #160e19; color: var(--ink); font: inherit; }
