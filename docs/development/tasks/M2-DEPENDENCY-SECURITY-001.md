@@ -3,7 +3,7 @@
 **TASK ID:** M2-DEPENDENCY-SECURITY-001  
 **OWNER:** INTEGRATION  
 **PRIORITY:** P0  
-**STATUS:** IN_PROGRESS  
+**STATUS:** ACCEPTED
 **SLOT:** TOOLING  
 **BASE COMMIT:** `013e75bbda4d811594b1a0109eab12c2e2cb0f67`  
 **BRANCH:** `codex/m2-dependency-security-001`  
@@ -62,4 +62,10 @@ findings, and replay every accepted engineering validation layer.
 
 ## Blockers
 
-- None known.
+- None.
+
+## Acceptance
+
+- Implementation commit: `5156090`
+- Evidence: `docs/development/acceptance/M2-DEPENDENCY-SECURITY-001.md`
+- Result: PASS; M2.1-G1 accepted.

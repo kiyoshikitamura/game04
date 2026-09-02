@@ -3,9 +3,9 @@
 ## Integration baseline
 
 - Branch: accepted `main`; resolve and record its exact SHA when a task is dispatched
-- Latest accepted baseline: `9bea604`
+- Latest accepted baseline: `5156090`
 - Environment: dev-clean only
-- Current milestone: `M2.1 — Dependency Security Patch` (`0 / 1`; IN PROGRESS)
+- Current milestone: `M2.1 — Dependency Security Patch` (`1 / 1`; COMPLETE)
 - External-decision milestone: `M3 — Product & Character Definition` (`1 / 6`; Circle agreement required)
 - Milestone authority: `docs/development/MILESTONES.md`
 
@@ -14,16 +14,16 @@
 | Slot | Task | Status | Branch | Exclusive area |
 | --- | --- | --- | --- | --- |
 | Authority | Unassigned | OPEN | — | DB migrations and mutation authority |
-| Tooling | M2-DEPENDENCY-SECURITY-001 | IN_PROGRESS | `codex/m2-dependency-security-001` | `package.json`, lockfile, audit and regression evidence |
+| Tooling | Unassigned | OPEN | — | Tooling and dependency work |
 | Product/client | Unassigned | OPEN | — | Product documents and client-only work |
 
 The second parallel wave is accepted. It made no product choice and performed no live-environment mutation.
 
 ## Current milestone gate
 
-M2 is `COMPLETE`; all six engineering readiness gates are accepted. M2.1 is a
-bounded security patch opened from the post-M2 dependency audit and does not
-extend product scope. M3 product work remains pending Circle agreement;
+M2 is `COMPLETE`; all six engineering readiness gates are accepted. M2.1 is
+also `COMPLETE`; its bounded security patch cleared the production dependency
+audit and replayed every accepted engineering gate. M3 product work remains pending Circle agreement;
 Character-specific M4 and gameplay M5 implementation stay outside active slots
 until their product dependencies are accepted.
 
@@ -31,6 +31,10 @@ M2-G6 and M2 are accepted. Protected database workflow run 3 passed all three
 catalog/behavior contracts. The dev-clean connection remains only in the GitHub
 environment secret and must never be copied into repository files, task
 documents, Issues, or chat.
+
+M2.1-G1 is accepted at `5156090`. Quality run 29, protected database workflow
+run 4, browser acceptance, and Vercel deployment all passed; the production
+dependency audit reports zero vulnerabilities.
 
 ## Dependency queue
 
@@ -61,6 +65,7 @@ documents, Issues, or chat.
 | Wallet ledger decision | `1168f75` | implementation deferred until D-14; conditional minimum capability map recorded |
 | Product Batch A brief | `5e1a9c8` | source-verified identity and Character approval sequence |
 | Engineering operations | `3de6ef7`, `9bea604` | feature state, maintenance, audited administration, and protected dev-clean contracts |
+| Dependency security patch | `5156090` | Next.js 16.3.4 baseline, zero production audit findings, and full gate replay |
 
 ## Integration order
 
