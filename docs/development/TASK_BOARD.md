@@ -14,7 +14,7 @@
 | Slot | Task | Status | Branch | Exclusive area |
 | --- | --- | --- | --- | --- |
 | Authority | Unassigned | OPEN | — | DB migrations and mutation authority |
-| Tooling | Unassigned | OPEN | — | Repository and delivery tooling |
+| Tooling | M2-DEV-BOOTSTRAP-001 | VALIDATED | `codex/m2-dev-bootstrap-001` | Bootstrap, environment validation, and developer diagnostics |
 | Product/client | Unassigned | OPEN | — | Product documents and client-only work |
 
 The second parallel wave is accepted. It made no product choice and performed no live-environment mutation.

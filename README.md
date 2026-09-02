@@ -9,14 +9,19 @@ This repository starts as a clean implementation. It is **not** a fork or copy o
 ## Start locally
 
 ```powershell
-Copy-Item .env.example .env.local
-npm install
+npm ci
+npm run bootstrap
+npm run doctor
 npm run dev
 ```
 
 Open `http://localhost:3000`. The initial shell intentionally contains only Title and Home placeholders until the environment is connected.
 
 The first connected flow is email magic-link authentication. Add `/auth/callback` to the allowed redirect URLs for each Supabase environment before testing it.
+
+The bootstrap command never overwrites `.env.local`, and diagnostics never
+print environment values. See [Engineering bootstrap](docs/development/ENGINEERING_BOOTSTRAP.md)
+for disconnected-shell and connected-service readiness checks.
 
 ## Required checks
 
