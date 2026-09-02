@@ -19,6 +19,8 @@ create policy "players can update their own profile"
   using ((select auth.uid()) = id)
   with check ((select auth.uid()) = id);
 
+grant select, update on table public.players to authenticated;
+
 create or replace function public.initialize_current_player()
 returns public.players
 language plpgsql
