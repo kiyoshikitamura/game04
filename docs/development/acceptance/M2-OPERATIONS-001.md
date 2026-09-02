@@ -1,11 +1,12 @@
-# Engineering gate review — M2-OPERATIONS-001
+# Engineering acceptance — M2-OPERATIONS-001
 
 ## Delivery identity
 
 - Milestone gate: M2-G6 — operations foundation and dev-clean acceptance
 - Source commit: `3de6ef7`
+- Database runner correction: `9bea604`
 - GitHub Quality: `https://github.com/kiyoshikitamura/game04/actions/runs/33621539732`
-- Dev-clean contract attempt: `https://github.com/kiyoshikitamura/game04/actions/runs/33621768840`
+- Dev-clean database contracts: `https://github.com/kiyoshikitamura/game04/actions/runs/33623434661`
 - Reviewed by: integration owner
 - Reviewed at: 2026-09-02T10:55:52Z
 
@@ -19,8 +20,9 @@
 | Catalog and behavior | PASS — MANUAL | Exact paired SQL contract completed twice in Supabase SQL Editor with transaction rollback |
 | Live read path | PASS | Public dev deployment reported `enabled` from `dev-clean`, not fallback |
 | Live transition | PASS | Audited `enabled → maintenance → enabled`; public root showed fixed maintenance UI and then recovered |
-| Final database CI | BLOCKED | Workflow stopped before tests because GitHub environment secret `DEV_CLEAN_DATABASE_URL` is absent |
+| Final database CI | PASS | Protected workflow run 3 executed all three catalog/behavior contracts successfully |
 | Vercel deployment | PASS | Commit `3de6ef7` is Ready and serves the operations page |
+| Protected configuration | PASS | DB password rotated; session-pooler URI stored only as GitHub `dev-clean` environment secret |
 
 ## Boundary decision
 
@@ -34,10 +36,7 @@
 
 ## Decision
 
-- Overall result: GATE REVIEW — NOT YET ACCEPTED
-- Code, manual dev-clean contracts, live transition, CI quality, and deployment pass.
-- Acceptance requires one successful protected GitHub database-contract run.
-- Blocker owner action: set `DEV_CLEAN_DATABASE_URL` in the GitHub `dev-clean`
-  environment without sharing it in source, logs, issues, or chat, then re-run
-  Dev-clean database contracts.
-- M2 remains 5/6 until that run passes.
+- Overall result: PASS
+- Code, manual dev-clean contracts, live transition, protected database CI,
+  repository quality, and deployment all pass.
+- M2-G6 is accepted and M2 reaches 6/6 exit gates.

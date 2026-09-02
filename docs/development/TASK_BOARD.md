@@ -3,9 +3,9 @@
 ## Integration baseline
 
 - Branch: accepted `main`; resolve and record its exact SHA when a task is dispatched
-- Latest accepted baseline: `d517f2b`
+- Latest accepted baseline: `9bea604`
 - Environment: dev-clean only
-- Current milestone: `M2 — Engineering Readiness` (`5 / 6` exit gates accepted)
+- Current milestone: `M2 — Engineering Readiness` (`6 / 6`; COMPLETE)
 - External-decision milestone: `M3 — Product & Character Definition` (`1 / 6`; Circle agreement required)
 - Milestone authority: `docs/development/MILESTONES.md`
 
@@ -13,7 +13,7 @@
 
 | Slot | Task | Status | Branch | Exclusive area |
 | --- | --- | --- | --- | --- |
-| Authority | M2-OPERATIONS-001 | BLOCKED — PROTECTED SECRET | `codex/m2-operations-001` | Implementation, dev-clean apply, manual contracts, live transition, CI quality, and Vercel pass; GitHub DB workflow needs `DEV_CLEAN_DATABASE_URL` |
+| Authority | Unassigned | OPEN | — | DB migrations and mutation authority |
 | Tooling | Unassigned | OPEN | — | Repository and delivery tooling |
 | Product/client | Unassigned | OPEN | — | Product documents and client-only work |
 
@@ -21,16 +21,16 @@ The second parallel wave is accepted. It made no product choice and performed no
 
 ## Current milestone gate
 
-M2 is `IN PROGRESS` and contains only product-neutral engineering readiness.
-New engineering tasks must name the M2 exit gate they advance. M3 product work
-is tracked separately while awaiting Circle agreement; Character-specific M4
-and gameplay M5 implementation remain outside active slots until their product
+M2 is `COMPLETE`; all six engineering readiness gates are accepted. New work
+must be assigned to an explicit later milestone rather than extending M2 after
+closure. M3 product work remains pending Circle agreement; Character-specific
+M4 and gameplay M5 implementation stay outside active slots until their product
 dependencies are accepted.
 
-M2-G6 is in gate review. Its implementation and dev-clean behavior are accepted
-locally and manually, but the exit gate remains open until the protected GitHub
-database-contract workflow completes successfully. Do not copy the missing
-database credential into repository files, task documents, Issues, or chat.
+M2-G6 and M2 are accepted. Protected database workflow run 3 passed all three
+catalog/behavior contracts. The dev-clean connection remains only in the GitHub
+environment secret and must never be copied into repository files, task
+documents, Issues, or chat.
 
 ## Dependency queue
 
@@ -60,6 +60,7 @@ database credential into repository files, task documents, Issues, or chat.
 | Reward transaction core | `b16838d` | dev-clean-validated inbox, atomic claim, immutable receipt, and idempotency |
 | Wallet ledger decision | `1168f75` | implementation deferred until D-14; conditional minimum capability map recorded |
 | Product Batch A brief | `5e1a9c8` | source-verified identity and Character approval sequence |
+| Engineering operations | `3de6ef7`, `9bea604` | feature state, maintenance, audited administration, and protected dev-clean contracts |
 
 ## Integration order
 
