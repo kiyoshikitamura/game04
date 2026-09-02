@@ -20,3 +20,19 @@ h2 { margin: 0 0 8px; font-size: 1.1rem; }
 .profile-form { display: grid; gap: 10px; margin: 18px 0; }
 .profile-form label { font-size: .9rem; font-weight: 700; }
 .profile-form input { width: 100%; border: 1px solid #75536f; border-radius: 10px; padding: 12px; background: #160e19; color: var(--ink); font: inherit; }
+.lifecycle-state { display: flex; align-items: flex-start; gap: 12px; margin: 16px 0; padding: 18px; border: 1px solid #583858; border-radius: 14px; background: color-mix(in srgb, var(--panel) 92%, transparent); }
+.lifecycle-state h2 { margin: 0; font-size: 1rem; }
+.lifecycle-state p { margin: 6px 0 0; color: var(--muted); line-height: 1.55; }
+.lifecycle-compact { margin: 8px 0; padding: 13px 15px; }
+.lifecycle-error { border-color: #b85b70; }
+.lifecycle-notice { border-color: #795773; }
+.loading-indicator { width: 18px; height: 18px; flex: 0 0 auto; border: 2px solid #75536f; border-top-color: var(--accent); border-radius: 50%; animation: lifecycle-spin .8s linear infinite; }
+@keyframes lifecycle-spin { to { transform: rotate(360deg); } }
+.confirm-dialog { width: min(calc(100% - 32px), 420px); border: 1px solid #75536f; border-radius: 16px; padding: 22px; background: var(--panel); color: var(--ink); }
+.confirm-dialog::backdrop { background: rgb(6 2 8 / 72%); backdrop-filter: blur(3px); }
+.confirm-dialog p { color: var(--muted); line-height: 1.6; }
+.dialog-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+.dialog-actions button { border: 0; cursor: pointer; font: inherit; }
+.dialog-actions button:disabled { cursor: wait; opacity: .65; }
+.dialog-confirm { width: auto; padding: 10px 14px; }
+@media (prefers-reduced-motion: reduce) { .loading-indicator { animation: none; } }

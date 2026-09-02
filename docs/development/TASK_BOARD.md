@@ -15,7 +15,7 @@
 | --- | --- | --- | --- | --- |
 | Authority | Unassigned | OPEN | — | DB migrations and mutation authority |
 | Tooling | Unassigned | OPEN | — | Repository and delivery tooling |
-| Product/client | Unassigned | OPEN | — | Product documents and client-only work |
+| Product/client | M2-LIFECYCLE-UX-001 | VALIDATED | `codex/m2-lifecycle-ux-001` | Shared lifecycle UI and protected-route behavior |
 
 The second parallel wave is accepted. It made no product choice and performed no live-environment mutation.
 
