@@ -3,9 +3,12 @@ import path from "node:path";
 
 const root = process.cwd();
 const migrationDirectory = path.join(root, "supabase", "migrations");
+const testDirectory = path.join(root, "supabase", "tests");
 const taskDirectory = path.join(root, "docs", "development", "tasks");
 
 const migrationPattern = /^(\d{14})_[a-z0-9_]+\.sql$/;
+const contractTestPattern = /^(\d{14})_[a-z0-9_]+_contract\.sql$/;
+const contractTestStartVersion = "20260902000003";
 const requiredTaskFields = [
   "TASK ID",
   "OWNER",
@@ -33,9 +36,11 @@ function fail(messages) {
 }
 
 async function verifyMigrations() {
-  const files = (await readdir(migrationDirectory)).filter((file) => file.endsWith(".sql"));
+  const files = (await readdir(migrationDirectory)).filter((file) => file.endsWith(".sql")).sort();
+  const testFiles = (await readdir(testDirectory)).filter((file) => file.endsWith(".sql")).sort();
   const errors = [];
   const versions = new Map();
+  const expectedTests = new Set();
 
   for (const file of files) {
     const match = migrationPattern.exec(file);
@@ -49,6 +54,27 @@ async function verifyMigrations() {
       errors.push(`duplicate migration version ${version}: ${versions.get(version)}, ${file}`);
     } else {
       versions.set(version, file);
+    }
+
+    if (version >= contractTestStartVersion) {
+      const expectedTest = file.replace(/\.sql$/, "_contract.sql");
+      expectedTests.add(expectedTest);
+      if (!testFiles.includes(expectedTest)) {
+        errors.push(`migration ${file} is missing contract test supabase/tests/${expectedTest}`);
+      }
+    }
+  }
+
+  for (const testFile of testFiles) {
+    const match = contractTestPattern.exec(testFile);
+    if (!match) {
+      errors.push(`invalid contract test filename: ${testFile}`);
+      continue;
+    }
+
+    const [, version] = match;
+    if (version >= contractTestStartVersion && !expectedTests.has(testFile)) {
+      errors.push(`contract test ${testFile} has no matching migration`);
     }
   }
 
@@ -71,7 +97,8 @@ function sectionBody(markdown, heading) {
 
 async function verifyTasks() {
   const files = (await readdir(taskDirectory))
-    .filter((file) => file.endsWith(".md") && file !== "TEMPLATE.md");
+    .filter((file) => file.endsWith(".md") && file !== "TEMPLATE.md")
+    .sort();
   const errors = [];
   const activeMigrationReservations = new Map();
   const activePlannedPaths = [];

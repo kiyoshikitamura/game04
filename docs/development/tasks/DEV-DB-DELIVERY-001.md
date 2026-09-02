@@ -1,11 +1,11 @@
 # DEV-DB-DELIVERY-001
 
 **TASK ID:** DEV-DB-DELIVERY-001  
-**OWNER:** UNASSIGNED  
+**OWNER:** CODEX TOOLING WORKER
 **PRIORITY:** P1  
-**STATUS:** READY  
+**STATUS:** VALIDATED
 **SLOT:** TOOLING  
-**BASE COMMIT:** Resolve accepted `main` to an exact SHA at dispatch  
+**BASE COMMIT:** `0a5440b15e06bcaf5ee9c0b3e3142c7d9b35880c`
 **BRANCH:** `codex/dev-db-delivery-001`  
 **MIGRATION VERSION:** NONE
 
@@ -52,3 +52,11 @@ Make forward-only database delivery repeatable by documenting the dev-clean appl
 ## Blockers
 
 - Stop if the checker would require credentials or network access.
+
+## Implementation evidence
+
+- Pairing rule: an exact `supabase/tests/<migration-stem>_contract.sql` match is required from version `20260902000003`.
+- Positive proof: `node scripts/verify-repository-contracts.mjs` exits `0` on the accepted Inventory migration/test pair.
+- Negative proof: an isolated fixture containing `20260902000099_missing_pair.sql` without its paired test exits `1` and names `supabase/tests/20260902000099_missing_pair_contract.sql`.
+- Full validation: `npm run check` passes contract checking, lint, typecheck, and the production build.
+- Network and credentials: not used.
