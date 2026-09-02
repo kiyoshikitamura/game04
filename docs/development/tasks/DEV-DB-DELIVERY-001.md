@@ -3,7 +3,7 @@
 **TASK ID:** DEV-DB-DELIVERY-001  
 **OWNER:** CODEX TOOLING WORKER
 **PRIORITY:** P1  
-**STATUS:** VALIDATED
+**STATUS:** ACCEPTED
 **SLOT:** TOOLING  
 **BASE COMMIT:** `0a5440b15e06bcaf5ee9c0b3e3142c7d9b35880c`
 **BRANCH:** `codex/dev-db-delivery-001`  
@@ -60,3 +60,4 @@ Make forward-only database delivery repeatable by documenting the dev-clean appl
 - Negative proof: an isolated fixture containing `20260902000099_missing_pair.sql` without its paired test exits `1` and names `supabase/tests/20260902000099_missing_pair_contract.sql`.
 - Full validation: `npm run check` passes contract checking, lint, typecheck, and the production build.
 - Network and credentials: not used.
+- Integrated commit: `1873afe147f122ce640d7e7b61fdf9a74e18f886`.

@@ -3,7 +3,7 @@
 **TASK ID:** PRODUCT-DECISION-REGISTER-001  
 **OWNER:** product-decision-register-001 worker
 **PRIORITY:** P1  
-**STATUS:** VALIDATED
+**STATUS:** ACCEPTED
 **SLOT:** PRODUCT/CLIENT  
 **BASE COMMIT:** `0a5440b15e06bcaf5ee9c0b3e3142c7d9b35880c`
 **BRANCH:** `codex/product-decision-register-001`  
@@ -63,3 +63,4 @@ Create a decision register that separates fixed GAME04 product direction from op
 - The original handoff attachment is not repository-resident. Entries whose
   exact wording cannot be verified are explicitly marked `SOURCE CHECK REQUIRED`.
 - No product values or implementation defaults were chosen.
+- Integrated commit: `9dd24835733144c01b4029bfaef452c3cd755fd1`.

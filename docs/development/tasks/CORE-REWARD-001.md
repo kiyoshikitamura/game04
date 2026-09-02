@@ -1,11 +1,11 @@
 # CORE-REWARD-001
 
 **TASK ID:** CORE-REWARD-001  
-**OWNER:** UNASSIGNED  
+**OWNER:** CODEX AUTHORITY WORKER
 **PRIORITY:** P1  
-**STATUS:** READY  
+**STATUS:** ACCEPTED
 **SLOT:** AUTHORITY  
-**BASE COMMIT:** Resolve accepted `main` to an exact SHA at dispatch  
+**BASE COMMIT:** `0a5440b15e06bcaf5ee9c0b3e3142c7d9b35880c`
 **BRANCH:** `codex/core-reward-001`  
 **MIGRATION VERSION:** `20260902000004`
 
@@ -55,3 +55,11 @@ Implement a product-neutral reward transaction, immutable receipt, inbox claim l
 ## Blockers
 
 - Reward payload authority must remain server-owned; stop if implementation would expose arbitrary client grants.
+
+## Completion evidence
+
+- Integrated commit: `b16838dc911e96e7a004ec21135cb932b721db5f`.
+- Offline `npm run check`: PASS.
+- Migration and paired SQL contract executed on `game04-dev-clean`: PASS.
+- Behavioral replay proved a single grant on exact retry, cross-player rejection and isolation, transaction rollback on forced failure, and receipt immutability.
+- Vercel deployment for the accepted tree at `f5d2ac5`: Ready.

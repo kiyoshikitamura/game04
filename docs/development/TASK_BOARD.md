@@ -3,7 +3,7 @@
 ## Integration baseline
 
 - Branch: accepted `main`; resolve and record its exact SHA when a task is dispatched
-- Latest completed capability baseline: `73ec9404febcda39799c9b07e8d07e36aeddf3c4`
+- Latest completed capability baseline: `b16838dc911e96e7a004ec21135cb932b721db5f`
 - Environment: dev-clean only
 - Product specification work remains deferred unless the product owner explicitly opens it.
 
@@ -11,11 +11,11 @@
 
 | Slot | Task | Status | Branch | Exclusive area |
 | --- | --- | --- | --- | --- |
-| Authority | `CORE-REWARD-001` | READY | `codex/core-reward-001` | DB migrations, inventory/reward mutation authority |
-| Tooling | `DEV-DB-DELIVERY-001` | READY | `codex/dev-db-delivery-001` | Repository contract checker and DB delivery documentation |
-| Product/client | `PRODUCT-DECISION-REGISTER-001` | READY | `codex/product-decision-register-001` | New product decision documents only |
+| Authority | Unassigned | OPEN | — | DB migrations and mutation authority |
+| Tooling | Unassigned | OPEN | — | Repository and delivery tooling |
+| Product/client | Unassigned | OPEN | — | Product documents and client-only work |
 
-These three tasks have no planned-file overlap. `CORE-REWARD-001` exclusively reserves migration `20260902000004`; the other tasks must not add or edit migrations, tests, runtime authority, or live environments.
+The first parallel wave is accepted. New work must receive a new task contract and re-evaluate file and migration ownership before dispatch.
 
 ## Dependency queue
 
@@ -39,10 +39,10 @@ These three tasks have no planned-file overlap. `CORE-REWARD-001` exclusively re
 | Player Home | `3a92909` | authenticated profile shell |
 | Player authority | `9ee9230` | server-only profile mutation |
 | Inventory ownership | `73ec940` | neutral ownership and read projection |
+| Database delivery discipline | `1873afe` | migration/test pairing, forward-only runbook, and evidence template |
+| Product decision register | `9dd2483` | fixed direction separated from dependency-ordered open decisions |
+| Reward transaction core | `b16838d` | dev-clean-validated inbox, atomic claim, immutable receipt, and idempotency |
 
 ## Integration order
 
-1. `DEV-DB-DELIVERY-001` integrates first because it strengthens checks used to review later migrations.
-2. `PRODUCT-DECISION-REGISTER-001` may integrate before or after tooling; it changes only new product documents.
-3. `CORE-REWARD-001` integrates after rebasing onto accepted tooling changes and after its migration, replay, catalog, and dev-clean checks pass.
-4. The board baseline and task statuses are updated after every integration.
+The first wave integrated in the required order: delivery tooling, product register, then Reward. Future waves must define their own dependency-aware order before dispatch.
