@@ -16,6 +16,8 @@ npm run dev
 
 Open `http://localhost:3000`. The initial shell intentionally contains only Title and Home placeholders until the environment is connected.
 
+The first connected flow is email magic-link authentication. Add `/auth/callback` to the allowed redirect URLs for each Supabase environment before testing it.
+
 ## Required checks
 
 ```powershell
