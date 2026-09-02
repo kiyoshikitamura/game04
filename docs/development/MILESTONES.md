@@ -21,11 +21,12 @@ effort or schedule.
 | --- | --- | ---: | --- |
 | M0 — Development Foundation | COMPLETE | 6 / 6 | GitHub-based Next.js/TypeScript, CI, Vercel, and isolated dev-clean baseline |
 | M1 — Common Core Foundation | COMPLETE | 5 / 5 | Player authority, Inventory, Reward, migration discipline, and extraction boundary |
-| M2 — Product Definition for Vertical Slice | IN PROGRESS | 1 / 6 | Source authority verified; product-owner decisions remain |
-| M3 — Character & Animation PoC | NOT STARTED | 0 / 4 | Character contract and delivery feasibility |
-| M4 — Playable Vertical Slice | NOT STARTED | 0 / 7 | Login → Character → Gacha → Growth → Push → Community |
-| M5 — Full Production Foundation | NOT STARTED | 0 / 5 | Initial roster/content/economy production system |
-| M6 — Pre-open Validation | NOT STARTED | 0 / 6 | Acquisition, retention, community, monetization, and release evidence |
+| M2 — Engineering Readiness | IN PROGRESS | 0 / 6 | Product-neutral development, test, runtime, asset, observability, and operations foundations |
+| M3 — Product & Character Definition | BLOCKED — CIRCLE AGREEMENT | 1 / 6 | Source authority verified; Character and game rules require Circle agreement |
+| M4 — Character & Animation PoC | NOT STARTED | 0 / 4 | Character contract and delivery feasibility |
+| M5 — Playable Vertical Slice | NOT STARTED | 0 / 7 | Login → Character → Gacha → Growth → Push → Community |
+| M6 — Full Production Foundation | NOT STARTED | 0 / 5 | Initial roster/content/economy production system |
+| M7 — Pre-open Validation | NOT STARTED | 0 / 6 | Acquisition, retention, community, monetization, and release evidence |
 
 No milestone has a date commitment yet. Schedule is set only after the relevant
 scope and delivery evidence exist.
@@ -34,13 +35,14 @@ scope and delivery evidence exist.
 
 - [M0 — Development Foundation](https://github.com/kiyoshikitamura/game04/milestone/1): closed, 100%
 - [M1 — Common Core Foundation](https://github.com/kiyoshikitamura/game04/milestone/2): closed, 100%
-- [M2 — Product Definition for Vertical Slice](https://github.com/kiyoshikitamura/game04/milestone/3): open, 1/6 gates accepted
-- [M3 — Character & Animation PoC](https://github.com/kiyoshikitamura/game04/milestone/4): open, not started
-- [M4 — Playable Vertical Slice](https://github.com/kiyoshikitamura/game04/milestone/5): open, not started
-- [M5 — Full Production Foundation](https://github.com/kiyoshikitamura/game04/milestone/6): open, not started
-- [M6 — Pre-open Validation](https://github.com/kiyoshikitamura/game04/milestone/7): open, not started
+- M2 — Engineering Readiness: Markdown authority defined; GitHub synchronization follows this commit
+- [M3 — Product & Character Definition](https://github.com/kiyoshikitamura/game04/milestone/3): external agreement required, 1/6 gates accepted
+- [M4 — Character & Animation PoC](https://github.com/kiyoshikitamura/game04/milestone/4): open, not started
+- [M5 — Playable Vertical Slice](https://github.com/kiyoshikitamura/game04/milestone/5): open, not started
+- [M6 — Full Production Foundation](https://github.com/kiyoshikitamura/game04/milestone/6): open, not started
+- [M7 — Pre-open Validation](https://github.com/kiyoshikitamura/game04/milestone/7): open, not started
 
-M2 gate Issues:
+M3 product gate Issues:
 
 - [G1: authoritative source verification](https://github.com/kiyoshikitamura/game04/issues/3) — accepted
 - [G2: Character contract and subjects](https://github.com/kiyoshikitamura/game04/issues/4) — open
@@ -82,7 +84,33 @@ Exit gates:
 Evidence: `9ee9230`, `73ec940`, `b16838d`, `f5d2ac5`, `1873afe`, and
 `CORE-REWARD-001.md` acceptance evidence.
 
-## M2 — Product Definition for Vertical Slice
+## M2 — Engineering Readiness
+
+Outcome: engineers can add future GAME04 capabilities through reproducible,
+observable, product-neutral delivery paths while Character and game rules are
+being agreed with the Circle.
+
+Exit gates:
+
+- [ ] Fresh-clone bootstrap, environment validation, and local developer diagnostics are reproducible without sharing secrets.
+- [ ] Unit, integration/contract, and browser acceptance test layers have explicit ownership and run through the appropriate CI gates.
+- [ ] Client/server boundaries and shared loading, error, dialog, session-expiry, and route-protection behavior are accepted.
+- [ ] Product-neutral asset delivery supports a validated manifest, loading policy, cache behavior, fallback, and neutral test fixtures.
+- [ ] Product-neutral analytics transport, operational logging, correlation, and sanitized error reporting are accepted without defining GAME04 product events.
+- [ ] Feature-state, maintenance, and minimum administration foundations plus a fresh dev-clean engineering acceptance run are accepted.
+
+Allowed work: tooling, tests, framework adapters, neutral runtime primitives,
+asset plumbing with non-Character fixtures, observability transport, and safe
+operations foundations.
+
+Excluded work: Character identities or masters, Gacha/economy values, Creative
+Awakening behavior, Push/Fandom rules, Community product rules, battle design,
+and any substitute derived from GAME03.
+
+This milestone can complete without Circle product decisions. Its output must
+remain reusable by later M3–M5 work rather than becoming speculative gameplay.
+
+## M3 — Product & Character Definition
 
 Outcome: the product owner has approved the minimum rules needed to select and
 build the 1–3 Character vertical slice without importing GAME03 defaults.
@@ -96,14 +124,15 @@ Exit gates:
 - [ ] D-12 through D-15 define acquisition, duplicate, economy, and growth boundaries; D-14 selects whether Wallet remains unnecessary or which minimum ledger capability is required.
 - [ ] D-07 through D-10 define the minimum Character-centered Community and cooperative activity used by the slice.
 
-Current blocker: the remaining gates require explicit product-owner answers.
-Source verification and architecture recommendations do not silently approve
-those answers.
+Current blocker: the remaining gates require Circle discussion and explicit
+product-owner acceptance. Source verification and architecture recommendations
+do not silently approve those answers. M2 Engineering Readiness proceeds while
+this milestone waits.
 
 Primary decision artifacts: `GAME04_PRODUCT_DECISION_REGISTER.md`,
 `BATCH_A_DECISION_BRIEF.md`, and `WALLET_LEDGER_DECISION.md`.
 
-## M3 — Character & Animation PoC
+## M4 — Character & Animation PoC
 
 Outcome: approved Character data and assets can be produced, normalized, and
 delivered on target mobile browsers before roster-scale production begins.
@@ -115,11 +144,11 @@ Exit gates:
 - [ ] Asset/animation delivery contract, static fallback, lazy loading, and prefetch behavior are accepted.
 - [ ] Mobile Safari proof covers load, memory, loop, scroll, background return, and concurrent Character display.
 
-Opens when: the M2 Character/Awakening gates and selection dependencies are
-approved. It may overlap late M2 only where the work uses content-free technical
-fixtures and cannot create product defaults.
+Opens when: the M3 Character/Awakening gates and selection dependencies are
+approved. Product-neutral asset plumbing belongs to M2; Character-specific PoC
+content cannot be substituted with inferred details.
 
-## M4 — Playable Vertical Slice
+## M5 — Playable Vertical Slice
 
 Outcome: a player can complete the smallest end-to-end GAME04 loop with 1–3
 approved Characters on dev-clean.
@@ -134,9 +163,9 @@ Exit gates:
 - [ ] Character-centered Community activity demonstrates Cooperation > Competition.
 - [ ] End-to-end analytics and human acceptance prove the intended loop.
 
-Opens when: all M2 gates and the required M3 delivery gates are accepted.
+Opens when: all M3 gates and the required M4 delivery gates are accepted.
 
-## M5 — Full Production Foundation
+## M6 — Full Production Foundation
 
 Outcome: the validated slice can scale to the initial roster and recurring
 content without changing its authority model.
@@ -149,9 +178,9 @@ Exit gates:
 - [ ] Community operations, moderation, notification, and administration are accepted.
 - [ ] Preview environment and production content pipeline pass release rehearsal.
 
-Opens when: M4 is accepted and production scope is approved.
+Opens when: M5 is accepted and production scope is approved.
 
-## M6 — Pre-open Validation
+## M7 — Pre-open Validation
 
 Outcome: release decisions are based on measured product and operational
 evidence rather than assumed demand.
@@ -165,7 +194,7 @@ Exit gates:
 - [ ] Monetization behavior and standalone-play constraints are validated.
 - [ ] Security, operations, recovery, support, and release go/no-go are accepted.
 
-Opens when: M5 release rehearsal passes. Production infrastructure remains
+Opens when: M6 release rehearsal passes. Production infrastructure remains
 deferred until its responsible gate.
 
 ## Progress update protocol

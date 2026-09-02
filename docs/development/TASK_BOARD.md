@@ -5,7 +5,8 @@
 - Branch: accepted `main`; resolve and record its exact SHA when a task is dispatched
 - Latest completed capability baseline: `d059a9e`
 - Environment: dev-clean only
-- Current milestone: `M2 — Product Definition for Vertical Slice` (`1 / 6` exit gates accepted)
+- Current milestone: `M2 — Engineering Readiness` (`0 / 6` exit gates accepted)
+- External-decision milestone: `M3 — Product & Character Definition` (`1 / 6`; Circle agreement required)
 - Milestone authority: `docs/development/MILESTONES.md`
 
 ## Active slots
@@ -20,19 +21,22 @@ The second parallel wave is accepted. It made no product choice and performed no
 
 ## Current milestone gate
 
-M2 is `IN PROGRESS` and currently requires product-owner decisions. New tasks
-must name the M2 exit gate they advance. M3/M4 implementation remains outside
-active slots until its dependencies are accepted.
+M2 is `IN PROGRESS` and contains only product-neutral engineering readiness.
+New engineering tasks must name the M2 exit gate they advance. M3 product work
+is tracked separately while awaiting Circle agreement; Character-specific M4
+and gameplay M5 implementation remain outside active slots until their product
+dependencies are accepted.
 
 ## Dependency queue
 
 | Task/capability | State | Opens when | Reason |
 | --- | --- | --- | --- |
 | Generic wallet implementation | DEFERRED | D-14 classifies economy values and operations | Inventory plus narrow receipts remain sufficient unless an approved rule requires journal, classification, expiry, reservation, transfer, or external reconciliation. |
+| Product and Character definition | EXTERNAL AGREEMENT | Circle discussion and Product-owner acceptance | Character, Creative Awakening, Push/Fandom, Economy, and Community rules must not be inferred by engineering. |
 | Character/Gacha vertical slice | WAITING | Reward accepted and product decisions approved | Pools, rates, duplicates, prices, growth, and Character details remain unfixed. |
 | Community implementation | WAITING | Product decision register items for identity, membership, and shared goals are approved | Guild size, Support/Fandom calculation, and shared goals remain unfixed. |
 | Battle authority | WAITING | A concrete GAME04 consumer and Character contract exist | Do not import GAME03 battle modes, masters, values, or presentation speculatively. |
-| Preview environment | DEFERRED | First vertical slice enters human acceptance | dev-clean is sufficient during Common Core extraction. |
+| Preview environment | DEFERRED | First vertical slice enters human acceptance | dev-clean is sufficient during Engineering Readiness. |
 | Production environment | DEFERRED | Pre-open preparation | Avoid current unnecessary infrastructure cost. |
 | Authenticated journey QA | USER-DEPENDENT | A test login is intentionally used | Do not create or send login credentials merely for foundation work. |
 

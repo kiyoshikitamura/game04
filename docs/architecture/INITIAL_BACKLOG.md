@@ -18,11 +18,11 @@
 
 ## Next, in order
 
-1. Obtain Product-owner answers for Batch A D-02 through D-04; D-01 is source verified.
-2. Approve D-14 and related Batch B economy boundaries before any Wallet, Gacha, or economy-shaped growth implementation.
-3. Approve Fandom and Community decisions needed by the vertical slice.
-4. Select the 1–3 Character slice only after its listed dependencies close.
-5. Run a Character animation delivery PoC before committing the production asset pipeline.
+1. Complete M2 Engineering Readiness: developer diagnostics, test layers, shared runtime UX, neutral asset delivery, observability transport, and safe operations foundations.
+2. In parallel outside engineering implementation, obtain Circle/Product-owner decisions for M3 without applying defaults.
+3. Select the 1–3 Character slice only after the M3 dependencies close.
+4. Run the Character-specific animation delivery PoC in M4 before committing the production asset pipeline.
+5. Build the M5 playable vertical slice only from approved M3/M4 contracts.
 
 The extraction baseline and dependency decisions are recorded in `COMMON_CORE_DEPENDENCY_MAP.md`.
 
