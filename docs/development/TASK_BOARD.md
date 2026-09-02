@@ -3,9 +3,9 @@
 ## Integration baseline
 
 - Branch: accepted `main`; resolve and record its exact SHA when a task is dispatched
-- Latest accepted baseline: `808d0e7`
+- Latest accepted baseline: `2473345`
 - Environment: dev-clean only
-- Current milestone: `M2 — Engineering Readiness` (`2 / 6` exit gates accepted)
+- Current milestone: `M2 — Engineering Readiness` (`3 / 6` exit gates accepted)
 - External-decision milestone: `M3 — Product & Character Definition` (`1 / 6`; Circle agreement required)
 - Milestone authority: `docs/development/MILESTONES.md`
 
@@ -15,7 +15,7 @@
 | --- | --- | --- | --- | --- |
 | Authority | Unassigned | OPEN | — | DB migrations and mutation authority |
 | Tooling | Unassigned | OPEN | — | Repository and delivery tooling |
-| Product/client | M2-LIFECYCLE-UX-001 | VALIDATED | `codex/m2-lifecycle-ux-001` | Shared lifecycle UI and protected-route behavior |
+| Product/client | Unassigned | OPEN | — | Product documents and client-only work |
 
 The second parallel wave is accepted. It made no product choice and performed no live-environment mutation.
 

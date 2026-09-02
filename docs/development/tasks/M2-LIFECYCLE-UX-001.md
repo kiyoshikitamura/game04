@@ -3,7 +3,7 @@
 **TASK ID:** M2-LIFECYCLE-UX-001  
 **OWNER:** INTEGRATION  
 **PRIORITY:** P0  
-**STATUS:** VALIDATED
+**STATUS:** CLOSED
 **SLOT:** PRODUCT/CLIENT  
 **BASE COMMIT:** `957c675dc054816510a5b4f076db40e5cd0c2b2a`  
 **BRANCH:** `codex/m2-lifecycle-ux-001`  
@@ -44,6 +44,7 @@ handle client session expiry consistently.
 - `tests/browser/disconnected-shell.spec.ts`
 - `package.json`
 - `docs/architecture/CLIENT_SERVER_LIFECYCLE.md`
+- `docs/development/acceptance/M2-LIFECYCLE-UX-001.md`
 - `docs/development/tasks/M2-LIFECYCLE-UX-001.md`
 - `docs/development/TASK_BOARD.md`
 
@@ -82,3 +83,5 @@ handle client session expiry consistently.
 - Connected live-login human acceptance: not required for this product-neutral gate; server decision is unit-covered and existing auth authority is unchanged
 - Protected database, authority, and product areas: unchanged
 - Merge risk: MEDIUM — login return navigation and `/home` authorization behavior change intentionally
+- Integrated commit: `2473345`
+- Acceptance: `docs/development/acceptance/M2-LIFECYCLE-UX-001.md`
