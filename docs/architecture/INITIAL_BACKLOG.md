@@ -12,12 +12,13 @@
 - Audited Common Core dependency map fixed to TRIBE NEON commit `826f8b7`.
 - Server-authoritative Player profile mutation with direct client writes removed.
 - Product-neutral inventory ownership with an authenticated read-only projection; no client grant or consumption path.
+- Product-neutral reward inbox, atomic claim, immutable receipt, and request idempotency are implemented for integration review; dev-clean validation remains pending.
 
 ## Next, in order
 
 The current parallel wave is defined in `docs/development/TASK_BOARD.md`:
 
-1. Extract atomic reward transaction, receipt, inbox claim, and request idempotency.
+1. Validate and integrate the implemented atomic reward transaction, receipt, inbox claim, and request idempotency.
 2. Strengthen offline migration/test pairing and database delivery evidence.
 3. Prepare the GAME04 product decision register without choosing unfixed values.
 
