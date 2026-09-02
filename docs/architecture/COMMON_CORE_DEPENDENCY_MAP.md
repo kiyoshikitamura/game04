@@ -58,8 +58,8 @@ Every Common Core change must record all of the following in its pull request:
 
 ## Approved implementation sequence
 
-1. Complete Player authority and profile validation.
-2. Introduce generic inventory ownership plus read-only client projection.
+1. ~~Complete Player authority and profile validation.~~ Completed in `9ee9230`.
+2. ~~Introduce generic inventory ownership plus read-only client projection.~~ Completed by `20260902000003_inventory_core.sql`.
 3. Introduce reward transaction/receipt and inbox claim authority.
 4. Decide whether a generic wallet ledger is required before Character or Gacha work.
 5. Add social, battle, and content capabilities only when their immediate GAME04 consumer is known.

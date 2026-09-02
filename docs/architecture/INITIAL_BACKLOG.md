@@ -9,16 +9,17 @@
 - First common-core database migration: authenticated player profile with RLS and an idempotent initialization RPC.
 - Explicit common-core and GAME03 exclusion boundary.
 - Magic-link authentication, authenticated player initialization, and an editable player Home profile.
+- Audited Common Core dependency map fixed to TRIBE NEON commit `826f8b7`.
+- Server-authoritative Player profile mutation with direct client writes removed.
+- Product-neutral inventory ownership with an authenticated read-only projection; no client grant or consumption path.
 
 ## Next, in order
 
-1. Complete Player authority and profile validation from the audited Common Core patterns.
-2. Extract generic inventory ownership without importing any GAME03 asset master.
-3. Extract atomic reward transaction, receipt, inbox claim, and request idempotency.
-4. Decide the minimum generic wallet ledger needed by future Character and Gacha flows.
-5. Produce the GAME04 Product Definition for Character, Push/Fandom, Community, and Economy; do not borrow GAME03 values.
-6. Build the 1–3 character vertical slice: login → character → gacha → growth → push → community.
-7. Run a character animation delivery PoC before committing the production asset pipeline.
+1. Extract atomic reward transaction, receipt, inbox claim, and request idempotency.
+2. Decide the minimum generic wallet ledger needed by future Character and Gacha flows.
+3. Produce the GAME04 Product Definition for Character, Push/Fandom, Community, and Economy; do not borrow GAME03 values.
+4. Build the 1–3 character vertical slice: login → character → gacha → growth → push → community.
+5. Run a character animation delivery PoC before committing the production asset pipeline.
 
 The extraction baseline and dependency decisions are recorded in `COMMON_CORE_DEPENDENCY_MAP.md`.
 
