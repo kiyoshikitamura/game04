@@ -3,7 +3,7 @@
 **TASK ID:** M2-TEST-LAYERS-001  
 **OWNER:** INTEGRATION  
 **PRIORITY:** P0  
-**STATUS:** VALIDATED
+**STATUS:** CLOSED
 **SLOT:** TOOLING  
 **BASE COMMIT:** `042373b1f8ec871d18fdbfd40e3efae4b438236d`  
 **BRANCH:** `codex/m2-test-layers-001`  
@@ -42,6 +42,7 @@ execution in a protected, manually dispatched workflow.
 - `tests/unit/`
 - `tests/browser/`
 - `docs/development/TEST_STRATEGY.md`
+- `docs/development/acceptance/M2-TEST-LAYERS-001.md`
 - `docs/development/tasks/M2-TEST-LAYERS-001.md`
 - `docs/development/TASK_BOARD.md`
 
@@ -79,3 +80,5 @@ execution in a protected, manually dispatched workflow.
 - Protected database, authority, and product areas: unchanged
 - Discovered issue: package audit reports three high-severity dependency findings; no force upgrade was applied outside this gate
 - Merge risk: MEDIUM — CI gains a Chromium installation and browser job
+- Integrated commit: `808d0e7`
+- Acceptance: `docs/development/acceptance/M2-TEST-LAYERS-001.md`
