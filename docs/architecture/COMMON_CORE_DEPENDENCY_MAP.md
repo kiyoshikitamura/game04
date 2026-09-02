@@ -60,8 +60,8 @@ Every Common Core change must record all of the following in its pull request:
 
 1. ~~Complete Player authority and profile validation.~~ Completed in `9ee9230`.
 2. ~~Introduce generic inventory ownership plus read-only client projection.~~ Completed by `20260902000003_inventory_core.sql`.
-3. ~~Introduce reward transaction/receipt and inbox claim authority.~~ Implemented by `20260902000004_reward_transaction_core.sql`; integration and dev-clean validation remain pending.
-4. Decide whether a generic wallet ledger is required before Character or Gacha work.
+3. ~~Introduce reward transaction/receipt and inbox claim authority.~~ Accepted and validated on dev-clean by `20260902000004_reward_transaction_core.sql`.
+4. ~~Decide whether a generic wallet ledger is required before Character or Gacha work.~~ Decision: defer implementation until D-14; use `WALLET_LEDGER_DECISION.md` to select the minimum capability after approval.
 5. Add social, battle, and content capabilities only when their immediate GAME04 consumer is known.
 
 This sequence intentionally avoids building unused abstractions. A reference capability is extracted only when the next GAME04-neutral dependency needs it.

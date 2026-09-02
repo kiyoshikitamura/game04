@@ -3,7 +3,7 @@
 ## Integration baseline
 
 - Branch: accepted `main`; resolve and record its exact SHA when a task is dispatched
-- Latest completed capability baseline: `b16838dc911e96e7a004ec21135cb932b721db5f`
+- Latest completed capability baseline: `5e1a9c8`
 - Environment: dev-clean only
 - Product specification work remains deferred unless the product owner explicitly opens it.
 
@@ -11,17 +11,17 @@
 
 | Slot | Task | Status | Branch | Exclusive area |
 | --- | --- | --- | --- | --- |
-| Authority | `ARCH-WALLET-DECISION-001` | READY | `codex/arch-wallet-decision-001` | Wallet architecture decision document only |
+| Authority | Unassigned | OPEN | — | DB migrations and mutation authority |
 | Tooling | Unassigned | OPEN | — | Repository and delivery tooling |
-| Product/client | `PRODUCT-BATCH-A-BRIEF-001` | READY | `codex/product-batch-a-brief-001` | Batch A product decision brief only |
+| Product/client | Unassigned | OPEN | — | Product documents and client-only work |
 
-The second parallel wave reserves two non-overlapping documentation areas. It makes no product decision and performs no live-environment mutation.
+The second parallel wave is accepted. It made no product choice and performed no live-environment mutation.
 
 ## Dependency queue
 
 | Task/capability | State | Opens when | Reason |
 | --- | --- | --- | --- |
-| Generic wallet decision | WAITING | Reward transaction is accepted | Ledger boundaries depend on the reward receipt and idempotency contract. |
+| Generic wallet implementation | DEFERRED | D-14 classifies economy values and operations | Inventory plus narrow receipts remain sufficient unless an approved rule requires journal, classification, expiry, reservation, transfer, or external reconciliation. |
 | Character/Gacha vertical slice | WAITING | Reward accepted and product decisions approved | Pools, rates, duplicates, prices, growth, and Character details remain unfixed. |
 | Community implementation | WAITING | Product decision register items for identity, membership, and shared goals are approved | Guild size, Support/Fandom calculation, and shared goals remain unfixed. |
 | Battle authority | WAITING | A concrete GAME04 consumer and Character contract exist | Do not import GAME03 battle modes, masters, values, or presentation speculatively. |
@@ -42,7 +42,9 @@ The second parallel wave reserves two non-overlapping documentation areas. It ma
 | Database delivery discipline | `1873afe` | migration/test pairing, forward-only runbook, and evidence template |
 | Product decision register | `9dd2483` | fixed direction separated from dependency-ordered open decisions |
 | Reward transaction core | `b16838d` | dev-clean-validated inbox, atomic claim, immutable receipt, and idempotency |
+| Wallet ledger decision | `1168f75` | implementation deferred until D-14; conditional minimum capability map recorded |
+| Product Batch A brief | `5e1a9c8` | source-verified identity and Character approval sequence |
 
 ## Integration order
 
-The first wave integrated in the required order: delivery tooling, product register, then Reward. Future waves must define their own dependency-aware order before dispatch.
+The first wave integrated in the required order: delivery tooling, product register, then Reward. The second wave integrated the Wallet decision and Batch A brief without file overlap. Future waves must define their own dependency-aware order before dispatch.

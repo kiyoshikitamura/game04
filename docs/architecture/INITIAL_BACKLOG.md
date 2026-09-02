@@ -12,22 +12,17 @@
 - Audited Common Core dependency map fixed to TRIBE NEON commit `826f8b7`.
 - Server-authoritative Player profile mutation with direct client writes removed.
 - Product-neutral inventory ownership with an authenticated read-only projection; no client grant or consumption path.
-- Product-neutral reward inbox, atomic claim, immutable receipt, and request idempotency are implemented for integration review; dev-clean validation remains pending.
+- Product-neutral reward inbox, atomic claim, immutable receipt, and request idempotency are accepted and validated on dev-clean.
+- Wallet implementation is deferred until D-14 identifies an accounting need that Inventory plus narrow transaction receipts cannot satisfy.
+- Product Batch A has a source-verified, dependency-ordered approval brief.
 
 ## Next, in order
 
-The current parallel wave is defined in `docs/development/TASK_BOARD.md`:
-
-1. Validate and integrate the implemented atomic reward transaction, receipt, inbox claim, and request idempotency.
-2. Strengthen offline migration/test pairing and database delivery evidence.
-3. Prepare the GAME04 product decision register without choosing unfixed values.
-
-After that wave:
-
-1. Decide the minimum generic wallet ledger needed by future Character and Gacha flows.
-2. Approve the required Character, Push/Fandom, Community, and Economy product decisions.
-3. Build the 1–3 character vertical slice: login → character → gacha → growth → push → community.
-4. Run a character animation delivery PoC before committing the production asset pipeline.
+1. Obtain Product-owner answers for Batch A D-02 through D-04; D-01 is source verified.
+2. Approve D-14 and related Batch B economy boundaries before any Wallet, Gacha, or economy-shaped growth implementation.
+3. Approve Fandom and Community decisions needed by the vertical slice.
+4. Select the 1–3 Character slice only after its listed dependencies close.
+5. Run a Character animation delivery PoC before committing the production asset pipeline.
 
 The extraction baseline and dependency decisions are recorded in `COMMON_CORE_DEPENDENCY_MAP.md`.
 

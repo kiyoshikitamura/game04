@@ -13,14 +13,14 @@ values. An approval here still requires a separately scoped implementation task.
 
 | Source | Role | Availability | Use |
 | --- | --- | --- | --- |
-| GAME04 Development Start Handoff | Product authority | Bounded handoff summary available; original attachment not stored in this repository | Product direction and explicitly unfixed decisions |
+| GAME04 Development Start Handoff | Product authority | Original attachment directly verified on 2026-09-02; not stored in this repository | Product direction and explicitly unfixed decisions |
 | `COMMON_GAME_CORE_BOUNDARY.md` | Implementation boundary | Available | Common/product/excluded classification and authority rules |
 | `COMMON_CORE_DEPENDENCY_MAP.md` | Extraction order | Available | Downstream technical dependencies and exclusions |
 | TRIBE NEON Engineering Overview / accepted source commit | Technical reference | Architecture audit available | Patterns only; never product defaults |
 
 Confidence labels used below:
 
-- `VERIFIED FROM HANDOFF SUMMARY`: stated in the project-start summary.
+- `VERIFIED FROM HANDOFF`: directly checked against the original attachment.
 - `SOURCE CHECK REQUIRED`: requires comparison with the original handoff before
   product approval or implementation.
 
@@ -40,14 +40,14 @@ These are dependency gates, not release dates.
 
 | ID | Status | Direction | Implementation consequence | Confidence |
 | --- | --- | --- | --- | --- |
-| F-01 | FIXED DIRECTION | GAME04 is an **Identity-first Community** product. | Feature proposals must explain how they support player identity and community participation. | VERIFIED FROM HANDOFF SUMMARY |
-| F-02 | FIXED DIRECTION | The core relationship is **Character → Push/Fandom → Community → Retention**. | Competition cannot silently replace this chain as the primary loop. | VERIFIED FROM HANDOFF SUMMARY |
-| F-03 | FIXED DIRECTION | Character acquisition and development are central, with Character Gacha as a principal acquisition concept. | Gacha infrastructure may be designed only after its GAME04 product rules are approved. | VERIFIED FROM HANDOFF SUMMARY |
-| F-04 | FIXED DIRECTION | Creative Awakening, Push/Fandom, and community are product pillars. | Their detailed triggers, calculations, content, and presentation remain open; names alone are not executable specifications. | VERIFIED FROM HANDOFF SUMMARY |
-| F-05 | FIXED DIRECTION | Cooperation is favored over competition as the current product hypothesis. | PvP, rankings, and GvG are optional decisions, not inherited requirements. | VERIFIED FROM HANDOFF SUMMARY |
-| F-06 | FIXED DIRECTION | GAME04 must stand independently as a general-audience version. | It cannot require knowledge of, assets from, or progression in GAME03. | VERIFIED FROM HANDOFF SUMMARY |
-| F-07 | PLANNED SCOPE | The initial Character count is **20**. | The count is a planning boundary only; identities, attributes, rarity, skills, acquisition, growth, and release distribution are not fixed by it. | VERIFIED FROM HANDOFF SUMMARY |
-| F-08 | SOURCE CHECK REQUIRED | The handoff summary says the Theme is fixed, but its actual wording and constraints are unavailable here. | Do not invent world, setting, terminology, visual motifs, or narrative constraints until checked against the original handoff. | SOURCE CHECK REQUIRED |
+| F-01 | FIXED DIRECTION | GAME04 is an **Identity-first Community** product. | Feature proposals must explain how they support player identity and community participation. | VERIFIED FROM HANDOFF |
+| F-02 | FIXED DIRECTION | The core relationship is **Character → Push/Fandom → Community → Retention**. | Competition cannot silently replace this chain as the primary loop. | VERIFIED FROM HANDOFF |
+| F-03 | FIXED DIRECTION | Character acquisition and development are central, with Character Gacha as a principal acquisition concept. | Gacha infrastructure may be designed only after its GAME04 product rules are approved. | VERIFIED FROM HANDOFF |
+| F-04 | FIXED DIRECTION | Creative Awakening, Push/Fandom, and community are product pillars. | Their detailed triggers, calculations, content, and presentation remain open; names alone are not executable specifications. | VERIFIED FROM HANDOFF |
+| F-05 | FIXED DIRECTION | Cooperation is favored over competition as the current product hypothesis. | PvP, rankings, and GvG are optional decisions, not inherited requirements. | VERIFIED FROM HANDOFF |
+| F-06 | FIXED DIRECTION | GAME04 must stand independently as a general-audience version. | It cannot require knowledge of, assets from, or progression in GAME03. | VERIFIED FROM HANDOFF |
+| F-07 | PLANNED SCOPE | The initial Character count is **20**, with female 15 / male 5 as the basic composition, furry level 2–3 central, and level 4 actively included. | Identities, exact species allocation, master data, stats, skills, acquisition, growth, and release distribution remain open. | VERIFIED FROM HANDOFF |
+| F-08 | FIXED DIRECTION | The Theme is a Furry-first, general-audience, multi-species otherworld game with a bright everyday tone. It avoids a world-saving epic, bad endings, heavy tragedy, entrenched species discrimination, and protagonist domination/subordination. | Character, world, story, and presentation proposals must stay inside these constraints; formal title and world/place proper names remain open. | VERIFIED FROM HANDOFF |
 
 ## Dependency path
 
@@ -66,7 +66,7 @@ not an implementation assignee.
 
 | ID | Topic / open decision | Owner | Prerequisite | Affected downstream systems | Latest responsible milestone | Status / confidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| D-01 | Confirm the exact fixed Theme wording and constraints from the original handoff. | Product owner | Original handoff attachment | Character identity, narrative, terminology, art direction, community expression | M1 | SOURCE CHECK REQUIRED |
+| D-01 | Record and use the exact fixed Theme wording and constraints from the original handoff. | Source authority | Original handoff attachment | Character identity, narrative, terminology, art direction, community expression | M1 | SOURCE VERIFIED |
 | D-02 | Define the initial 20 Characters: identity, role in the world, differentiation, and minimum content required per Character. | Product owner | D-01 | Character master, asset pipeline, acquisition, growth, awakening, Push/Fandom, content schedule | M1 | OPEN |
 | D-03 | Define what Creative Awakening means to the player: eligibility, player action, outcome, persistence, and expression. | Product owner | D-01, D-02 | Character state, assets, growth, rewards, UI, analytics | M1 | OPEN |
 | D-04 | Define which player actions mean “Push/Support” and which do not. | Product owner | D-02 | Support events, analytics, missions, community activity, abuse controls | M1 | OPEN |
@@ -94,7 +94,7 @@ silence never establishes a default.
 
 ### Batch A — Identity and Character foundation (before M1)
 
-1. What is the exact fixed Theme wording in the original handoff?
+1. Acknowledge the source-verified Theme constraints recorded in F-08 and the Batch A brief; no new Theme choice is required.
 2. What must be true of every initial Character, and which details distinguish
    the planned 20?
 3. What player-visible transformation makes Creative Awakening meaningful?
@@ -170,22 +170,22 @@ or presentation behavior is accepted by reference.
 
 ### Contradictions
 
-No contradiction is visible among the available handoff summary,
+No contradiction is visible among the original handoff,
 `COMMON_GAME_CORE_BOUNDARY.md`, and `COMMON_CORE_DEPENDENCY_MAP.md`.
 
-This is not a full-source verification: the original handoff attachment is not
-stored in the repository. If its exact wording conflicts with this register, the
-handoff wins and the conflict must be recorded for product-owner resolution
+The original handoff attachment was directly verified but is not stored in the
+repository. If a later authoritative revision conflicts with this register, the
+newer source wins and the conflict must be recorded for product-owner resolution
 before changing implementation scope.
 
 ### Required source checks
 
 | Check | Owner | Must close before |
 | --- | --- | --- |
-| Compare F-01–F-08 with the original Development Start Handoff wording. | Product owner | First product approval batch |
-| Record the exact fixed Theme and any associated world constraints. | Product owner | D-02 approval |
-| Confirm whether “initial 20 Characters” is a committed launch count or a planning target. | Product owner | Character content production commitment |
-| Confirm whether Collect / Complete / Express is fixed language in the handoff and capture its exact constraints. | Product owner | D-18 approval |
+| Compare F-01–F-08 with the original Development Start Handoff wording. | Integration owner | COMPLETED 2026-09-02 |
+| Record the exact fixed Theme and associated world constraints. | Integration owner | COMPLETED in F-08 and Batch A brief |
+| Confirm whether “initial 20 Characters” is fixed scope or an inferred planning target. | Integration owner | COMPLETED: listed as FIX; details remain UNFIXED |
+| Confirm whether Collect / Complete / Express is fixed language in the handoff. | Integration owner | COMPLETED: direction is fixed; implementation remains D-18 |
 
 ## Approval record
 
@@ -195,4 +195,5 @@ an entry here. Do not delete prior decisions.
 | Date | Batch / decisions | Decision summary | Product owner | Follow-up implementation task |
 | --- | --- | --- | --- | --- |
 | — | — | No product decisions approved in this task. | — | — |
+| 2026-09-02 | D-01 source verification | Original handoff verified; no new product choice made. | Source authority | Batch A acknowledgment, then D-02–D-04 answers |
 

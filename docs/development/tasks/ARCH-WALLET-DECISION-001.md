@@ -3,7 +3,7 @@
 **TASK ID:** ARCH-WALLET-DECISION-001
 **OWNER:** CODEX AUTHORITY WORKER
 **PRIORITY:** P1
-**STATUS:** VALIDATED
+**STATUS:** ACCEPTED
 **SLOT:** AUTHORITY
 **BASE COMMIT:** `0fa9d6de15bb870c891d055e11cb6f545217c8f7`
 **BRANCH:** `codex/arch-wallet-decision-001`
@@ -68,3 +68,4 @@ Decide whether GAME04 needs a generic wallet ledger before Character or Gacha wo
   distinguish when Inventory is sufficient and when a ledger is required.
 - Validation: repository contracts, lint, typecheck, and production build pass
   through `npm run check`; prohibited product-default scan found no match.
+- Integrated commit: `1168f75`.

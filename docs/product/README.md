@@ -9,11 +9,11 @@ documents define implementation boundaries but do not decide product behavior.
 TRIBE NEON is a technical reference only; none of its product values or rules is
 a GAME04 default.
 
-The source attachment is not stored in this repository. Entries that can be
-verified from the handoff summary supplied at project start are marked
-`VERIFIED FROM HANDOFF SUMMARY`. Anything that needs the original attachment is
-marked `SOURCE CHECK REQUIRED` and must not be approved or implemented by
-inference.
+The source attachment is not stored in this repository, but the original
+attachment in the referenced project conversation was directly checked on
+2026-09-02. Verified entries are marked `VERIFIED FROM HANDOFF`. Anything not
+present in that source remains `OPEN` or `SOURCE CHECK REQUIRED` and must not be
+approved or implemented by inference.
 
 ## Register
 
@@ -24,6 +24,9 @@ the working index for:
 - open decisions in dependency order;
 - focused product-owner approval batches;
 - source checks and contradictions.
+
+[`BATCH_A_DECISION_BRIEF.md`](BATCH_A_DECISION_BRIEF.md) is the source-verified,
+dependency-ordered answer sheet for the Identity and Character foundation.
 
 An entry becoming approved does not itself authorize implementation. The
 integration owner opens a separate implementation task with an explicit scope,

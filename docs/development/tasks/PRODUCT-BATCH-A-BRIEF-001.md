@@ -3,7 +3,7 @@
 **TASK ID:** PRODUCT-BATCH-A-BRIEF-001
 **OWNER:** CODEX PRODUCT WORKER
 **PRIORITY:** P1
-**STATUS:** VALIDATED
+**STATUS:** ACCEPTED
 **SLOT:** PRODUCT/CLIENT
 **BASE COMMIT:** `0fa9d6de15bb870c891d055e11cb6f545217c8f7`
 **BRANCH:** `codex/product-batch-a-brief-001`
@@ -65,3 +65,4 @@ Turn Product Decision Register Batch A into a concise, dependency-ordered approv
 - Partial answers retain explicit open fields and cannot create defaults.
 - D-19 remains blocked by D-05 and D-12 through D-15; only its selection
   procedure can be approved in this batch.
+- Integrated commit: `5e1a9c8`.
