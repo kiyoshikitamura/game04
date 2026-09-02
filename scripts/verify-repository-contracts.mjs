@@ -29,6 +29,7 @@ const requiredTaskHeadings = [
   "Expected output",
   "Blockers",
 ];
+const activeRequiredTaskFields = ["MILESTONE", "EXIT GATE"];
 
 function fail(messages) {
   for (const message of messages) console.error(`repository contract: ${message}`);
@@ -117,6 +118,13 @@ async function verifyTasks() {
 
     const status = fieldValue(markdown, "STATUS")?.replaceAll("`", "").toUpperCase();
     if (!new Set(["READY", "IN_PROGRESS"]).has(status)) continue;
+
+    for (const field of activeRequiredTaskFields) {
+      const value = fieldValue(markdown, field)?.replaceAll("`", "");
+      if (!value || value === "REQUIRED") {
+        errors.push(`${file} has no active ${field} assignment`);
+      }
+    }
 
     const taskId = fieldValue(markdown, "TASK ID")?.replaceAll("`", "") ?? file;
 

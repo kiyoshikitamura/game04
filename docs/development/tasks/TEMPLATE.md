@@ -8,10 +8,15 @@
 **BASE COMMIT:** REQUIRED  
 **BRANCH:** `codex/task-id`  
 **MIGRATION VERSION:** NONE
+**MILESTONE:** REQUIRED
+**EXIT GATE:** REQUIRED
 
 ## Scope
 
 Define one bounded outcome.
+
+Name exactly which milestone exit gate this task advances. A task must not span
+multiple milestones.
 
 ## Do not touch
 

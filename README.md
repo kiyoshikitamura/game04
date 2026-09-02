@@ -24,6 +24,13 @@ The first connected flow is email magic-link authentication. Add `/auth/callback
 npm run check
 ```
 
+## Milestone progress
+
+Development is managed by accepted exit gates rather than an open-ended task
+list. The current milestone, progress, blockers, and evidence are maintained in
+[GAME04 milestone roadmap](docs/development/MILESTONES.md). GitHub Milestones
+and Issues mirror that repository record for day-to-day tracking.
+
 ## Environments
 
 | Environment | Purpose | Supabase project | Vercel behavior |

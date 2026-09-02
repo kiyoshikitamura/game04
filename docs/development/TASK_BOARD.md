@@ -3,9 +3,10 @@
 ## Integration baseline
 
 - Branch: accepted `main`; resolve and record its exact SHA when a task is dispatched
-- Latest completed capability baseline: `5e1a9c8`
+- Latest completed capability baseline: `d059a9e`
 - Environment: dev-clean only
-- Product specification work remains deferred unless the product owner explicitly opens it.
+- Current milestone: `M2 — Product Definition for Vertical Slice` (`1 / 6` exit gates accepted)
+- Milestone authority: `docs/development/MILESTONES.md`
 
 ## Active slots
 
@@ -16,6 +17,12 @@
 | Product/client | Unassigned | OPEN | — | Product documents and client-only work |
 
 The second parallel wave is accepted. It made no product choice and performed no live-environment mutation.
+
+## Current milestone gate
+
+M2 is `IN PROGRESS` and currently requires product-owner decisions. New tasks
+must name the M2 exit gate they advance. M3/M4 implementation remains outside
+active slots until its dependencies are accepted.
 
 ## Dependency queue
 

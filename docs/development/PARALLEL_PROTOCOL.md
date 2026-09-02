@@ -12,12 +12,13 @@ This protocol allows independent Common Core work to proceed in parallel without
 
 ## Start procedure
 
-1. Read the architecture boundary and dependency map.
+1. Read the milestone roadmap, architecture boundary, and dependency map.
 2. Read `TASK_BOARD.md` and the assigned task contract.
-3. Resolve the task's `BASE COMMIT` instruction to an exact SHA and record it before editing.
-4. Confirm dependencies and reserved files do not overlap active work.
-5. Create the assigned `codex/<task-id>` branch in a separate worktree.
-6. Change only the listed `PLANNED FILES` and explicitly allowed additions.
+3. Assign exactly one `MILESTONE` and one named `EXIT GATE`; do not activate downstream work whose milestone dependencies are not satisfied.
+4. Resolve the task's `BASE COMMIT` instruction to an exact SHA and record it before editing.
+5. Confirm dependencies and reserved files do not overlap active work.
+6. Create the assigned `codex/<task-id>` branch in a separate worktree.
+7. Change only the listed `PLANNED FILES` and explicitly allowed additions.
 
 If any check fails, report the task as `BLOCKED` before editing.
 
@@ -92,6 +93,7 @@ NEXT RECOMMENDATION:
 
 Before integration, confirm:
 
+- milestone and exit-gate ownership;
 - scope and `DO NOT TOUCH` compliance;
 - no overlap with an active workstream;
 - dependencies and base commit;
@@ -99,3 +101,7 @@ Before integration, confirm:
 - migration version, RLS, grants, RPC exposure, and retry behavior when applicable;
 - dev-clean result for database changes;
 - human acceptance when presentation or product behavior is involved.
+
+After integration, increment milestone progress only when the named exit gate is
+fully accepted. Partial implementation and supporting documents remain evidence
+but do not count as a completed gate.

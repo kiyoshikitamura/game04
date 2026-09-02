@@ -1,0 +1,194 @@
+# GAME04 milestone roadmap
+
+## Purpose
+
+GAME04 is managed by milestone outcomes, not by an unbounded list of next tasks.
+Each implementation task belongs to one milestone and must provide evidence for
+one or more exit gates. A milestone is complete only when every exit gate is
+accepted; code completion alone is not enough when database or human acceptance
+is required.
+
+GitHub Milestones and Issues are the visible progress tracker. This document is
+the repository authority for milestone scope, exit gates, dependencies, and
+evidence rules.
+
+## Current dashboard
+
+Progress is `accepted exit gates / total exit gates`. It is not an estimate of
+effort or schedule.
+
+| Milestone | Status | Gate progress | Current outcome |
+| --- | --- | ---: | --- |
+| M0 — Development Foundation | COMPLETE | 6 / 6 | GitHub-based Next.js/TypeScript, CI, Vercel, and isolated dev-clean baseline |
+| M1 — Common Core Foundation | COMPLETE | 5 / 5 | Player authority, Inventory, Reward, migration discipline, and extraction boundary |
+| M2 — Product Definition for Vertical Slice | IN PROGRESS | 1 / 6 | Source authority verified; product-owner decisions remain |
+| M3 — Character & Animation PoC | NOT STARTED | 0 / 4 | Character contract and delivery feasibility |
+| M4 — Playable Vertical Slice | NOT STARTED | 0 / 7 | Login → Character → Gacha → Growth → Push → Community |
+| M5 — Full Production Foundation | NOT STARTED | 0 / 5 | Initial roster/content/economy production system |
+| M6 — Pre-open Validation | NOT STARTED | 0 / 6 | Acquisition, retention, community, monetization, and release evidence |
+
+No milestone has a date commitment yet. Schedule is set only after the relevant
+scope and delivery evidence exist.
+
+## GitHub tracking
+
+- [M0 — Development Foundation](https://github.com/kiyoshikitamura/game04/milestone/1): closed, 100%
+- [M1 — Common Core Foundation](https://github.com/kiyoshikitamura/game04/milestone/2): closed, 100%
+- [M2 — Product Definition for Vertical Slice](https://github.com/kiyoshikitamura/game04/milestone/3): open, 1/6 gates accepted
+- [M3 — Character & Animation PoC](https://github.com/kiyoshikitamura/game04/milestone/4): open, not started
+- [M4 — Playable Vertical Slice](https://github.com/kiyoshikitamura/game04/milestone/5): open, not started
+- [M5 — Full Production Foundation](https://github.com/kiyoshikitamura/game04/milestone/6): open, not started
+- [M6 — Pre-open Validation](https://github.com/kiyoshikitamura/game04/milestone/7): open, not started
+
+M2 gate Issues:
+
+- [G1: authoritative source verification](https://github.com/kiyoshikitamura/game04/issues/3) — accepted
+- [G2: Character contract and subjects](https://github.com/kiyoshikitamura/game04/issues/4) — open
+- [G3: Creative Awakening contract](https://github.com/kiyoshikitamura/game04/issues/5) — open
+- [G4: Push and Fandom contract](https://github.com/kiyoshikitamura/game04/issues/6) — open
+- [G5: acquisition, economy, and growth boundaries](https://github.com/kiyoshikitamura/game04/issues/7) — open
+- [G6: Community and cooperation boundary](https://github.com/kiyoshikitamura/game04/issues/8) — open
+
+## M0 — Development Foundation
+
+Outcome: contributors can develop, validate, and deploy GAME04 without copying
+the GAME03 repository or sharing environments.
+
+Exit gates:
+
+- [x] GitHub repository and accepted `main` branch exist.
+- [x] Clean Next.js and TypeScript shell builds.
+- [x] Automated lint, typecheck, and production-build quality gate runs.
+- [x] Vercel is connected to `main` and serves the application.
+- [x] Supabase `game04-dev-clean` is isolated; preview and production remain deferred.
+- [x] Environment and secret boundaries are documented.
+
+Evidence: base commits through `3fa6f4c`, `ENVIRONMENT_RELEASE.md`, GitHub
+Actions, and the active Vercel deployment.
+
+## M1 — Common Core Foundation
+
+Outcome: the smallest product-neutral ownership and reward authority needed by
+later gameplay exists and is validated on dev-clean.
+
+Exit gates:
+
+- [x] Authenticated Player initialization and profile authority are accepted.
+- [x] Owner-scoped, read-only Inventory projection is accepted.
+- [x] Server-owned Reward delivery, atomic claim, retry safety, and immutable receipt are accepted.
+- [x] Forward-only migration delivery and paired SQL contract testing are enforced.
+- [x] GAME03/Common/GAME04 boundaries and accepted source SHA are documented.
+
+Evidence: `9ee9230`, `73ec940`, `b16838d`, `f5d2ac5`, `1873afe`, and
+`CORE-REWARD-001.md` acceptance evidence.
+
+## M2 — Product Definition for Vertical Slice
+
+Outcome: the product owner has approved the minimum rules needed to select and
+build the 1–3 Character vertical slice without importing GAME03 defaults.
+
+Exit gates:
+
+- [x] Original GAME04 handoff is directly verified and fixed/open boundaries are recorded.
+- [ ] D-02 defines the Character contract and sufficient approved Character subjects.
+- [ ] D-03 defines Creative Awakening purpose, state, action, outcome, and persistence.
+- [ ] D-04 and D-05 define intentional Push/Support inputs and player-visible Fandom representation.
+- [ ] D-12 through D-15 define acquisition, duplicate, economy, and growth boundaries; D-14 selects whether Wallet remains unnecessary or which minimum ledger capability is required.
+- [ ] D-07 through D-10 define the minimum Character-centered Community and cooperative activity used by the slice.
+
+Current blocker: the remaining gates require explicit product-owner answers.
+Source verification and architecture recommendations do not silently approve
+those answers.
+
+Primary decision artifacts: `GAME04_PRODUCT_DECISION_REGISTER.md`,
+`BATCH_A_DECISION_BRIEF.md`, and `WALLET_LEDGER_DECISION.md`.
+
+## M3 — Character & Animation PoC
+
+Outcome: approved Character data and assets can be produced, normalized, and
+delivered on target mobile browsers before roster-scale production begins.
+
+Exit gates:
+
+- [ ] Versioned Character Master contract and validation are accepted.
+- [ ] Representative 1–3 Characters are selected from approved definitions.
+- [ ] Asset/animation delivery contract, static fallback, lazy loading, and prefetch behavior are accepted.
+- [ ] Mobile Safari proof covers load, memory, loop, scroll, background return, and concurrent Character display.
+
+Opens when: the M2 Character/Awakening gates and selection dependencies are
+approved. It may overlap late M2 only where the work uses content-free technical
+fixtures and cannot create product defaults.
+
+## M4 — Playable Vertical Slice
+
+Outcome: a player can complete the smallest end-to-end GAME04 loop with 1–3
+approved Characters on dev-clean.
+
+Exit gates:
+
+- [ ] Login and Player journey passes human acceptance.
+- [ ] Character ownership and presentation use approved master data.
+- [ ] Gacha acquisition is transactional, retry-safe, disclosed, and product-approved.
+- [ ] Growth and Creative Awakening follow approved rules.
+- [ ] Push/Support produces approved Fandom state and projections.
+- [ ] Character-centered Community activity demonstrates Cooperation > Competition.
+- [ ] End-to-end analytics and human acceptance prove the intended loop.
+
+Opens when: all M2 gates and the required M3 delivery gates are accepted.
+
+## M5 — Full Production Foundation
+
+Outcome: the validated slice can scale to the initial roster and recurring
+content without changing its authority model.
+
+Exit gates:
+
+- [ ] Initial 20 Character master and asset set pass production validation.
+- [ ] Economy, content, and balance masters are versioned and operationally reviewable.
+- [ ] Mission/Quest/retention cycles and Reward sources are accepted.
+- [ ] Community operations, moderation, notification, and administration are accepted.
+- [ ] Preview environment and production content pipeline pass release rehearsal.
+
+Opens when: M4 is accepted and production scope is approved.
+
+## M6 — Pre-open Validation
+
+Outcome: release decisions are based on measured product and operational
+evidence rather than assumed demand.
+
+Exit gates:
+
+- [ ] Game acquisition path and conversion are measured.
+- [ ] Character acquisition, favorite/use, growth, and awakening behavior are measured.
+- [ ] Community participation and shared activity are measured.
+- [ ] Retention and return around Character content are measured.
+- [ ] Monetization behavior and standalone-play constraints are validated.
+- [ ] Security, operations, recovery, support, and release go/no-go are accepted.
+
+Opens when: M5 release rehearsal passes. Production infrastructure remains
+deferred until its responsible gate.
+
+## Progress update protocol
+
+1. Before work starts, assign the task to one milestone and identify the exit
+   gate it advances.
+2. Set the task contract to `READY`, then `IN_PROGRESS`; reserve its branch,
+   files, migration version, and authority area.
+3. Update the dashboard only after evidence is accepted. Partial code does not
+   increment gate progress.
+4. Record repository checks, database apply/replay, deployment, and human
+   acceptance separately when applicable.
+5. Mark a milestone `GATE REVIEW` when every gate has evidence; mark it
+   `COMPLETE` only after integration-owner acceptance.
+6. When blocked, name the unresolved decision or external dependency and leave
+   downstream tasks out of active slots.
+7. At each user progress review, report current milestone, accepted gates,
+   active work, blockers, and the next gate—not merely the next task list.
+
+## Status vocabulary
+
+- `NOT STARTED`: dependencies or prior milestone gates are not yet satisfied.
+- `IN PROGRESS`: at least one gate has active authorized work.
+- `BLOCKED`: active progress requires a named decision or external dependency.
+- `GATE REVIEW`: all evidence exists and awaits final acceptance.
+- `COMPLETE`: every exit gate is accepted and linked to durable evidence.
