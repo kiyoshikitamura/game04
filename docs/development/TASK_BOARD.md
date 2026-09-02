@@ -3,7 +3,7 @@
 ## Integration baseline
 
 - Branch: accepted `main`; resolve and record its exact SHA when a task is dispatched
-- Latest accepted baseline: `2607e23`
+- Latest accepted baseline: `d517f2b`
 - Environment: dev-clean only
 - Current milestone: `M2 — Engineering Readiness` (`5 / 6` exit gates accepted)
 - External-decision milestone: `M3 — Product & Character Definition` (`1 / 6`; Circle agreement required)
@@ -13,7 +13,7 @@
 
 | Slot | Task | Status | Branch | Exclusive area |
 | --- | --- | --- | --- | --- |
-| Authority | Unassigned | OPEN | — | DB migrations and mutation authority |
+| Authority | M2-OPERATIONS-001 | IN_PROGRESS | `codex/m2-operations-001` | Migration `20260902000005`, operational state authority, and dev-clean acceptance |
 | Tooling | Unassigned | OPEN | — | Repository and delivery tooling |
 | Product/client | Unassigned | OPEN | — | Product documents and client-only work |
 
