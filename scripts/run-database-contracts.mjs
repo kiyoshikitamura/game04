@@ -14,14 +14,18 @@ if (!databaseUrl) {
   process.exit(1);
 }
 
-let hostname;
+let connection;
 try {
-  hostname = new URL(databaseUrl).hostname;
+  connection = new URL(databaseUrl);
 } catch {
   console.error("DATABASE_URL is not a valid connection URL.");
   process.exit(1);
 }
-if (/prod|production/i.test(hostname)) {
+if (!new Set(["postgres:", "postgresql:"]).has(connection.protocol)) {
+  console.error("DATABASE_URL must use the Postgres protocol.");
+  process.exit(1);
+}
+if (/prod|production/i.test(connection.hostname)) {
   console.error("A production-labelled database host is not accepted by this runner.");
   process.exit(1);
 }
@@ -34,7 +38,15 @@ if (version.status !== 0) {
 
 const directory = path.join(process.cwd(), "supabase", "tests");
 const files = (await readdir(directory)).filter((file) => file.endsWith("_contract.sql")).sort();
-const childEnvironment = { ...process.env, PGDATABASE: databaseUrl };
+const childEnvironment = {
+  ...process.env,
+  PGHOST: connection.hostname,
+  PGPORT: connection.port || "5432",
+  PGDATABASE: decodeURIComponent(connection.pathname.replace(/^\//, "")) || "postgres",
+  PGUSER: decodeURIComponent(connection.username),
+  PGPASSWORD: decodeURIComponent(connection.password),
+  PGSSLMODE: connection.searchParams.get("sslmode") || "require",
+};
 delete childEnvironment.DATABASE_URL;
 
 for (const file of files) {
