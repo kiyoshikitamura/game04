@@ -12,10 +12,22 @@
 | Slot | Task | Status | Branch | Exclusive area |
 | --- | --- | --- | --- | --- |
 | Authority | `CORE-REWARD-001` | READY | `codex/core-reward-001` | DB migrations, inventory/reward mutation authority |
-| Tooling | Unassigned | — | — | — |
-| Client | Unassigned | — | — | — |
+| Tooling | `DEV-DB-DELIVERY-001` | READY | `codex/dev-db-delivery-001` | Repository contract checker and DB delivery documentation |
+| Product/client | `PRODUCT-DECISION-REGISTER-001` | READY | `codex/product-decision-register-001` | New product decision documents only |
 
-`CORE-REWARD-001` reserves migration `20260902000004`; no other task may add a migration while it is active. The tooling and client slots may be assigned only to tasks with no migration, authority, or planned-file overlap.
+These three tasks have no planned-file overlap. `CORE-REWARD-001` exclusively reserves migration `20260902000004`; the other tasks must not add or edit migrations, tests, runtime authority, or live environments.
+
+## Dependency queue
+
+| Task/capability | State | Opens when | Reason |
+| --- | --- | --- | --- |
+| Generic wallet decision | WAITING | Reward transaction is accepted | Ledger boundaries depend on the reward receipt and idempotency contract. |
+| Character/Gacha vertical slice | WAITING | Reward accepted and product decisions approved | Pools, rates, duplicates, prices, growth, and Character details remain unfixed. |
+| Community implementation | WAITING | Product decision register items for identity, membership, and shared goals are approved | Guild size, Support/Fandom calculation, and shared goals remain unfixed. |
+| Battle authority | WAITING | A concrete GAME04 consumer and Character contract exist | Do not import GAME03 battle modes, masters, values, or presentation speculatively. |
+| Preview environment | DEFERRED | First vertical slice enters human acceptance | dev-clean is sufficient during Common Core extraction. |
+| Production environment | DEFERRED | Pre-open preparation | Avoid current unnecessary infrastructure cost. |
+| Authenticated journey QA | USER-DEPENDENT | A test login is intentionally used | Do not create or send login credentials merely for foundation work. |
 
 ## Completed foundation
 
@@ -30,6 +42,7 @@
 
 ## Integration order
 
-1. `CORE-REWARD-001` integrates after its migration and catalog tests pass on dev-clean.
-2. Independently assigned tooling or client tasks integrate first when they do not alter the reward task's assumptions.
-3. The board baseline is updated after every integration.
+1. `DEV-DB-DELIVERY-001` integrates first because it strengthens checks used to review later migrations.
+2. `PRODUCT-DECISION-REGISTER-001` may integrate before or after tooling; it changes only new product documents.
+3. `CORE-REWARD-001` integrates after rebasing onto accepted tooling changes and after its migration, replay, catalog, and dev-clean checks pass.
+4. The board baseline and task statuses are updated after every integration.

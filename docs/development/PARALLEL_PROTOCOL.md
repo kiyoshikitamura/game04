@@ -36,7 +36,7 @@ The task board supports at most three active workstreams during the foundation s
 
 1. **Authority slot:** database, authentication, server mutation, RLS, or RPC work.
 2. **Tooling slot:** CI, static verification, developer scripts, and documentation automation.
-3. **Client slot:** isolated UI adapters or components that do not decide gameplay or economy state.
+3. **Product/client slot:** decision preparation or isolated UI work that does not decide gameplay or economy state.
 
 Only one task may occupy a slot. The following are exclusive even when filenames differ:
 

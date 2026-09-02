@@ -60,11 +60,21 @@ function fieldValue(markdown, field) {
   return markdown.match(new RegExp(`^\\*\\*${escaped}:\\*\\*\\s*(.+)$`, "mi"))?.[1]?.trim();
 }
 
+function sectionBody(markdown, heading) {
+  const headingMatch = new RegExp(`^## ${heading}\\s*$`, "mi").exec(markdown);
+  if (!headingMatch) return "";
+
+  const remainder = markdown.slice(headingMatch.index + headingMatch[0].length).replace(/^\r?\n/, "");
+  const nextHeadingIndex = remainder.search(/^## /m);
+  return nextHeadingIndex === -1 ? remainder : remainder.slice(0, nextHeadingIndex);
+}
+
 async function verifyTasks() {
   const files = (await readdir(taskDirectory))
     .filter((file) => file.endsWith(".md") && file !== "TEMPLATE.md");
   const errors = [];
   const activeMigrationReservations = new Map();
+  const activePlannedPaths = [];
 
   for (const file of files) {
     const markdown = await readFile(path.join(taskDirectory, file), "utf8");
@@ -80,6 +90,8 @@ async function verifyTasks() {
 
     const status = fieldValue(markdown, "STATUS")?.replaceAll("`", "").toUpperCase();
     if (!new Set(["READY", "IN_PROGRESS"]).has(status)) continue;
+
+    const taskId = fieldValue(markdown, "TASK ID")?.replaceAll("`", "") ?? file;
 
     const branch = fieldValue(markdown, "BRANCH")?.replaceAll("`", "");
     if (!branch?.startsWith("codex/") || branch !== branch.toLowerCase()) {
@@ -97,6 +109,33 @@ async function verifyTasks() {
       } else {
         activeMigrationReservations.set(migrationVersion, file);
       }
+    }
+
+    const plannedSection = sectionBody(markdown, "Planned files");
+    const plannedPaths = plannedSection
+      .split(/\r?\n/)
+      .map((line) => line.match(/^\s*-\s+`([^`]+)`\s*$/)?.[1])
+      .filter(Boolean);
+
+    for (const plannedPath of plannedPaths) {
+      const isDirectory = plannedPath.endsWith("/");
+      const normalizedPath = plannedPath.replaceAll("\\", "/").replace(/\/$/, "");
+
+      for (const existing of activePlannedPaths) {
+        const overlaps = normalizedPath === existing.path
+          || (isDirectory && existing.path.startsWith(`${normalizedPath}/`))
+          || (existing.isDirectory && normalizedPath.startsWith(`${existing.path}/`));
+        if (overlaps) {
+          errors.push(`${taskId} planned path ${plannedPath} overlaps ${existing.taskId}: ${existing.original}`);
+        }
+      }
+
+      activePlannedPaths.push({
+        taskId,
+        path: normalizedPath,
+        original: plannedPath,
+        isDirectory,
+      });
     }
   }
 

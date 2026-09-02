@@ -15,11 +15,18 @@
 
 ## Next, in order
 
+The current parallel wave is defined in `docs/development/TASK_BOARD.md`:
+
 1. Extract atomic reward transaction, receipt, inbox claim, and request idempotency.
-2. Decide the minimum generic wallet ledger needed by future Character and Gacha flows.
-3. Produce the GAME04 Product Definition for Character, Push/Fandom, Community, and Economy; do not borrow GAME03 values.
-4. Build the 1–3 character vertical slice: login → character → gacha → growth → push → community.
-5. Run a character animation delivery PoC before committing the production asset pipeline.
+2. Strengthen offline migration/test pairing and database delivery evidence.
+3. Prepare the GAME04 product decision register without choosing unfixed values.
+
+After that wave:
+
+1. Decide the minimum generic wallet ledger needed by future Character and Gacha flows.
+2. Approve the required Character, Push/Fandom, Community, and Economy product decisions.
+3. Build the 1–3 character vertical slice: login → character → gacha → growth → push → community.
+4. Run a character animation delivery PoC before committing the production asset pipeline.
 
 The extraction baseline and dependency decisions are recorded in `COMMON_CORE_DEPENDENCY_MAP.md`.
 
