@@ -3,7 +3,7 @@
 ## Integration baseline
 
 - Branch: accepted `main`; resolve and record its exact SHA when a task is dispatched
-- Latest completed capability baseline: `d059a9e`
+- Latest accepted baseline: `1adc02f`
 - Environment: dev-clean only
 - Current milestone: `M2 — Engineering Readiness` (`0 / 6` exit gates accepted)
 - External-decision milestone: `M3 — Product & Character Definition` (`1 / 6`; Circle agreement required)

@@ -35,7 +35,7 @@ scope and delivery evidence exist.
 
 - [M0 — Development Foundation](https://github.com/kiyoshikitamura/game04/milestone/1): closed, 100%
 - [M1 — Common Core Foundation](https://github.com/kiyoshikitamura/game04/milestone/2): closed, 100%
-- M2 — Engineering Readiness: Markdown authority defined; GitHub synchronization follows this commit
+- [M2 — Engineering Readiness](https://github.com/kiyoshikitamura/game04/milestone/8): open, 0/6 gates accepted
 - [M3 — Product & Character Definition](https://github.com/kiyoshikitamura/game04/milestone/3): external agreement required, 1/6 gates accepted
 - [M4 — Character & Animation PoC](https://github.com/kiyoshikitamura/game04/milestone/4): open, not started
 - [M5 — Playable Vertical Slice](https://github.com/kiyoshikitamura/game04/milestone/5): open, not started
@@ -50,6 +50,15 @@ M3 product gate Issues:
 - [G4: Push and Fandom contract](https://github.com/kiyoshikitamura/game04/issues/6) — open
 - [G5: acquisition, economy, and growth boundaries](https://github.com/kiyoshikitamura/game04/issues/7) — open
 - [G6: Community and cooperation boundary](https://github.com/kiyoshikitamura/game04/issues/8) — open
+
+M2 engineering gate Issues:
+
+- [G1: fresh-clone bootstrap and diagnostics](https://github.com/kiyoshikitamura/game04/issues/9) — open
+- [G2: test layers and CI ownership](https://github.com/kiyoshikitamura/game04/issues/10) — open
+- [G3: client/server lifecycle UX](https://github.com/kiyoshikitamura/game04/issues/11) — open
+- [G4: product-neutral asset delivery](https://github.com/kiyoshikitamura/game04/issues/12) — open
+- [G5: analytics and observability transport](https://github.com/kiyoshikitamura/game04/issues/13) — open
+- [G6: operations foundation and dev-clean acceptance](https://github.com/kiyoshikitamura/game04/issues/14) — open
 
 ## M0 — Development Foundation
 
