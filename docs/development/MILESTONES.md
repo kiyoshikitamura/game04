@@ -21,7 +21,7 @@ effort or schedule.
 | --- | --- | ---: | --- |
 | M0 — Development Foundation | COMPLETE | 6 / 6 | GitHub-based Next.js/TypeScript, CI, Vercel, and isolated dev-clean baseline |
 | M1 — Common Core Foundation | COMPLETE | 5 / 5 | Player authority, Inventory, Reward, migration discipline, and extraction boundary |
-| M2 — Engineering Readiness | IN PROGRESS | 3 / 6 | Product-neutral development, test, runtime, asset, observability, and operations foundations |
+| M2 — Engineering Readiness | IN PROGRESS | 4 / 6 | Product-neutral development, test, runtime, asset, observability, and operations foundations |
 | M3 — Product & Character Definition | BLOCKED — CIRCLE AGREEMENT | 1 / 6 | Source authority verified; Character and game rules require Circle agreement |
 | M4 — Character & Animation PoC | NOT STARTED | 0 / 4 | Character contract and delivery feasibility |
 | M5 — Playable Vertical Slice | NOT STARTED | 0 / 7 | Login → Character → Gacha → Growth → Push → Community |
@@ -35,7 +35,7 @@ scope and delivery evidence exist.
 
 - [M0 — Development Foundation](https://github.com/kiyoshikitamura/game04/milestone/1): closed, 100%
 - [M1 — Common Core Foundation](https://github.com/kiyoshikitamura/game04/milestone/2): closed, 100%
-- [M2 — Engineering Readiness](https://github.com/kiyoshikitamura/game04/milestone/8): open, 3/6 gates accepted
+- [M2 — Engineering Readiness](https://github.com/kiyoshikitamura/game04/milestone/8): open, 4/6 gates accepted
 - [M3 — Product & Character Definition](https://github.com/kiyoshikitamura/game04/milestone/3): external agreement required, 1/6 gates accepted
 - [M4 — Character & Animation PoC](https://github.com/kiyoshikitamura/game04/milestone/4): open, not started
 - [M5 — Playable Vertical Slice](https://github.com/kiyoshikitamura/game04/milestone/5): open, not started
@@ -56,7 +56,7 @@ M2 engineering gate Issues:
 - [G1: fresh-clone bootstrap and diagnostics](https://github.com/kiyoshikitamura/game04/issues/9) — accepted (`f974808`)
 - [G2: test layers and CI ownership](https://github.com/kiyoshikitamura/game04/issues/10) — accepted (`808d0e7`)
 - [G3: client/server lifecycle UX](https://github.com/kiyoshikitamura/game04/issues/11) — accepted (`2473345`)
-- [G4: product-neutral asset delivery](https://github.com/kiyoshikitamura/game04/issues/12) — open
+- [G4: product-neutral asset delivery](https://github.com/kiyoshikitamura/game04/issues/12) — accepted (`af96d1b`)
 - [G5: analytics and observability transport](https://github.com/kiyoshikitamura/game04/issues/13) — open
 - [G6: operations foundation and dev-clean acceptance](https://github.com/kiyoshikitamura/game04/issues/14) — open
 
@@ -104,7 +104,7 @@ Exit gates:
 - [x] Fresh-clone bootstrap, environment validation, and local developer diagnostics are reproducible without sharing secrets.
 - [x] Unit, integration/contract, and browser acceptance test layers have explicit ownership and run through the appropriate CI gates.
 - [x] Client/server boundaries and shared loading, error, dialog, session-expiry, and route-protection behavior are accepted.
-- [ ] Product-neutral asset delivery supports a validated manifest, loading policy, cache behavior, fallback, and neutral test fixtures.
+- [x] Product-neutral asset delivery supports a validated manifest, loading policy, cache behavior, fallback, and neutral test fixtures.
 - [ ] Product-neutral analytics transport, operational logging, correlation, and sanitized error reporting are accepted without defining GAME04 product events.
 - [ ] Feature-state, maintenance, and minimum administration foundations plus a fresh dev-clean engineering acceptance run are accepted.
 
@@ -124,6 +124,7 @@ Accepted evidence:
 - G1: `docs/development/acceptance/M2-DEV-BOOTSTRAP-001.md`
 - G2: `docs/development/acceptance/M2-TEST-LAYERS-001.md`
 - G3: `docs/development/acceptance/M2-LIFECYCLE-UX-001.md`
+- G4: `docs/development/acceptance/M2-ASSET-DELIVERY-001.md`
 
 ## M3 — Product & Character Definition
 

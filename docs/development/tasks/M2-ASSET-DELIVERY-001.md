@@ -3,7 +3,7 @@
 **TASK ID:** M2-ASSET-DELIVERY-001  
 **OWNER:** INTEGRATION  
 **PRIORITY:** P0  
-**STATUS:** VALIDATED
+**STATUS:** CLOSED
 **SLOT:** TOOLING  
 **BASE COMMIT:** `14e379f6b83b2439316373071e796c2772366d27`  
 **BRANCH:** `codex/m2-asset-delivery-001`  
@@ -42,6 +42,7 @@ neutral engineering fixtures with automated acceptance.
 - `tests/unit/asset-manifest.test.mjs`
 - `tests/browser/assets.spec.ts`
 - `docs/architecture/ASSET_DELIVERY.md`
+- `docs/development/acceptance/M2-ASSET-DELIVERY-001.md`
 - `docs/development/tasks/M2-ASSET-DELIVERY-001.md`
 - `docs/development/TASK_BOARD.md`
 
@@ -80,3 +81,5 @@ neutral engineering fixtures with automated acceptance.
 - Full repository quality check: PASS — 10 unit tests, lint, typecheck, build
 - Protected product, database, authority, and environment areas: unchanged
 - Merge risk: LOW — additive product-neutral delivery path and explicit cache headers
+- Integrated commit: `af96d1b`
+- Acceptance: `docs/development/acceptance/M2-ASSET-DELIVERY-001.md`
