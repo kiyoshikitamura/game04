@@ -3,7 +3,7 @@
 **TASK ID:** M2-OBSERVABILITY-001  
 **OWNER:** INTEGRATION  
 **PRIORITY:** P0  
-**STATUS:** VALIDATED
+**STATUS:** CLOSED
 **SLOT:** TOOLING  
 **BASE COMMIT:** `64ce9123af631b3f58d507f8802b7f342f88758f`  
 **BRANCH:** `codex/m2-observability-001`  
@@ -43,6 +43,7 @@ and global client-error reporting without defining GAME04 product events.
 - `tests/unit/observability.test.mjs`
 - `tests/browser/observability.spec.ts`
 - `docs/architecture/OBSERVABILITY.md`
+- `docs/development/acceptance/M2-OBSERVABILITY-001.md`
 - `docs/development/tasks/M2-OBSERVABILITY-001.md`
 - `docs/development/TASK_BOARD.md`
 
@@ -82,3 +83,5 @@ and global client-error reporting without defining GAME04 product events.
 - Full repository quality check and 6 browser tests: PASS
 - Product analytics taxonomy, database, authority, and live settings: unchanged
 - Merge risk: MEDIUM — adds a public bounded telemetry endpoint and structured runtime output
+- Integrated commit: `2607e23`
+- Acceptance: `docs/development/acceptance/M2-OBSERVABILITY-001.md`

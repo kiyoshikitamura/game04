@@ -3,9 +3,9 @@
 ## Integration baseline
 
 - Branch: accepted `main`; resolve and record its exact SHA when a task is dispatched
-- Latest accepted baseline: `af96d1b`
+- Latest accepted baseline: `2607e23`
 - Environment: dev-clean only
-- Current milestone: `M2 — Engineering Readiness` (`4 / 6` exit gates accepted)
+- Current milestone: `M2 — Engineering Readiness` (`5 / 6` exit gates accepted)
 - External-decision milestone: `M3 — Product & Character Definition` (`1 / 6`; Circle agreement required)
 - Milestone authority: `docs/development/MILESTONES.md`
 
@@ -14,7 +14,7 @@
 | Slot | Task | Status | Branch | Exclusive area |
 | --- | --- | --- | --- | --- |
 | Authority | Unassigned | OPEN | — | DB migrations and mutation authority |
-| Tooling | M2-OBSERVABILITY-001 | VALIDATED | `codex/m2-observability-001` | Technical signal transport, sanitization, correlation, and structured logging |
+| Tooling | Unassigned | OPEN | — | Repository and delivery tooling |
 | Product/client | Unassigned | OPEN | — | Product documents and client-only work |
 
 The second parallel wave is accepted. It made no product choice and performed no live-environment mutation.
