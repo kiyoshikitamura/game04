@@ -3,7 +3,7 @@
 **TASK ID:** M2-DEV-BOOTSTRAP-001  
 **OWNER:** INTEGRATION  
 **PRIORITY:** P0  
-**STATUS:** VALIDATED  
+**STATUS:** CLOSED  
 **SLOT:** TOOLING  
 **BASE COMMIT:** `c2b1b210cef3af7d402fc969a540fc434e844910`  
 **BRANCH:** `codex/m2-dev-bootstrap-001`  
@@ -39,6 +39,7 @@ requiring Supabase credentials for the disconnected application shell.
 - `scripts/lib/developer-environment.mjs`
 - `scripts/verify-bootstrap.mjs`
 - `docs/development/ENGINEERING_BOOTSTRAP.md`
+- `docs/development/acceptance/M2-DEV-BOOTSTRAP-001.md`
 - `docs/development/tasks/M2-DEV-BOOTSTRAP-001.md`
 - `docs/development/TASK_BOARD.md`
 
@@ -74,3 +75,5 @@ requiring Supabase credentials for the disconnected application shell.
 - Repository quality check: PASS
 - Protected database, authentication, and product areas: unchanged
 - Merge risk: LOW — tooling and documentation only
+- Integrated commit: `f974808`
+- Acceptance: `docs/development/acceptance/M2-DEV-BOOTSTRAP-001.md`
