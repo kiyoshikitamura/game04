@@ -3,7 +3,7 @@
 **TASK ID:** PRODUCT-BATCH-A-BRIEF-001
 **OWNER:** CODEX PRODUCT WORKER
 **PRIORITY:** P1
-**STATUS:** READY
+**STATUS:** VALIDATED
 **SLOT:** PRODUCT/CLIENT
 **BASE COMMIT:** `0fa9d6de15bb870c891d055e11cb6f545217c8f7`
 **BRANCH:** `codex/product-batch-a-brief-001`
@@ -53,3 +53,15 @@ Turn Product Decision Register Batch A into a concise, dependency-ordered approv
 ## Blockers
 
 - Missing exact handoff wording must stay visibly marked as a source check.
+
+## Completion evidence
+
+- `docs/product/BATCH_A_DECISION_BRIEF.md` separates known facts, source checks,
+  and product-owner choices.
+- The original Development Start Handoff was checked directly; Theme, initial
+  count, composition direction, and fixed/open boundaries are source verified.
+- Questions are ordered by dependency and state why they are needed, what they
+  unlock, and which parts are required or optional.
+- Partial answers retain explicit open fields and cannot create defaults.
+- D-19 remains blocked by D-05 and D-12 through D-15; only its selection
+  procedure can be approved in this batch.
