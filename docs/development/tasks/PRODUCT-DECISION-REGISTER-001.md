@@ -1,11 +1,11 @@
 # PRODUCT-DECISION-REGISTER-001
 
 **TASK ID:** PRODUCT-DECISION-REGISTER-001  
-**OWNER:** UNASSIGNED  
+**OWNER:** product-decision-register-001 worker
 **PRIORITY:** P1  
-**STATUS:** READY  
+**STATUS:** VALIDATED
 **SLOT:** PRODUCT/CLIENT  
-**BASE COMMIT:** Resolve accepted `main` to an exact SHA at dispatch  
+**BASE COMMIT:** `0a5440b15e06bcaf5ee9c0b3e3142c7d9b35880c`
 **BRANCH:** `codex/product-decision-register-001`  
 **MIGRATION VERSION:** NONE
 
@@ -54,3 +54,12 @@ Create a decision register that separates fixed GAME04 product direction from op
 ## Blockers
 
 - If the authoritative handoff is unavailable or ambiguous for an entry, mark it `SOURCE CHECK REQUIRED`; do not infer the answer.
+
+## Completion evidence
+
+- Product direction, open decisions, prerequisites, downstream systems, and
+  latest responsible milestones are indexed in
+  `docs/product/GAME04_PRODUCT_DECISION_REGISTER.md`.
+- The original handoff attachment is not repository-resident. Entries whose
+  exact wording cannot be verified are explicitly marked `SOURCE CHECK REQUIRED`.
+- No product values or implementation defaults were chosen.
