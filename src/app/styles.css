@@ -36,3 +36,7 @@ h2 { margin: 0 0 8px; font-size: 1.1rem; }
 .dialog-actions button:disabled { cursor: wait; opacity: .65; }
 .dialog-confirm { width: auto; padding: 10px 14px; }
 @media (prefers-reduced-motion: reduce) { .loading-indicator { animation: none; } }
+.engineering-title { margin-top: 12px; font-size: clamp(2.4rem, 11vw, 4.5rem); }
+.asset-grid { display: grid; gap: 16px; }
+.asset-preview { display: block; width: min(100%, 256px); height: auto; margin-top: 14px; border-radius: 16px; }
+.asset-wide { width: 100%; }

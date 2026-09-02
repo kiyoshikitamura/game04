@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "fallbackAssetId": "system.placeholder",
+  "assets": [
+    {
+      "id": "system.placeholder",
+      "kind": "image",
+      "src": "/assets/versioned/system-placeholder-v1.svg",
+      "mediaType": "image/svg+xml",
+      "width": 256,
+      "height": 256,
+      "loading": "eager",
+      "cache": "immutable",
+      "fallbackId": null
+    },
+    {
+      "id": "system.sample.tile",
+      "kind": "image",
+      "src": "/assets/versioned/system-sample-tile-v1.svg",
+      "mediaType": "image/svg+xml",
+      "width": 320,
+      "height": 180,
+      "loading": "lazy",
+      "cache": "immutable",
+      "fallbackId": "system.placeholder"
+    }
+  ]
+}

@@ -20,7 +20,8 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "check:contracts": "node scripts/verify-repository-contracts.mjs",
-    "check": "npm run check:contracts && npm run test:unit && npm run lint && npm run typecheck && npm run build"
+    "check:assets": "node scripts/verify-asset-manifest.mjs",
+    "check": "npm run check:contracts && npm run check:assets && npm run test:unit && npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
     "@supabase/ssr": "^0.8.0",
