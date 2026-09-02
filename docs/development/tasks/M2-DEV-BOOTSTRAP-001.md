@@ -3,7 +3,7 @@
 **TASK ID:** M2-DEV-BOOTSTRAP-001  
 **OWNER:** INTEGRATION  
 **PRIORITY:** P0  
-**STATUS:** CLOSED  
+**STATUS:** CLOSED
 **SLOT:** TOOLING  
 **BASE COMMIT:** `c2b1b210cef3af7d402fc969a540fc434e844910`  
 **BRANCH:** `codex/m2-dev-bootstrap-001`  

@@ -1,0 +1,25 @@
+name: Dev-clean database contracts
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dev-clean-database-contracts
+  cancel-in-progress: false
+
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    environment: dev-clean
+    env:
+      TARGET_ENVIRONMENT: dev-clean
+      DATABASE_URL: ${{ secrets.DEV_CLEAN_DATABASE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require protected database configuration
+        run: test -n "$DATABASE_URL"
+      - name: Run catalog and behavioral contracts
+        run: node scripts/run-database-contracts.mjs

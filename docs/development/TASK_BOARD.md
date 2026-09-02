@@ -14,7 +14,7 @@
 | Slot | Task | Status | Branch | Exclusive area |
 | --- | --- | --- | --- | --- |
 | Authority | Unassigned | OPEN | — | DB migrations and mutation authority |
-| Tooling | Unassigned | OPEN | — | Repository and delivery tooling |
+| Tooling | M2-TEST-LAYERS-001 | VALIDATED | `codex/m2-test-layers-001` | Unit, contract, and browser acceptance test layers |
 | Product/client | Unassigned | OPEN | — | Product documents and client-only work |
 
 The second parallel wave is accepted. It made no product choice and performed no live-environment mutation.
