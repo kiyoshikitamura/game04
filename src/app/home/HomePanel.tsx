@@ -68,10 +68,9 @@ export function HomePanel() {
     setStatus("saving");
     setMessage("");
     const normalizedName = displayName.trim() || null;
-    const { error } = await supabase
-      .from("players")
-      .update({ display_name: normalizedName })
-      .eq("id", session.user.id);
+    const { error } = await supabase.rpc("update_current_player_profile", {
+      p_display_name: normalizedName,
+    });
 
     if (error) {
       setStatus("error");

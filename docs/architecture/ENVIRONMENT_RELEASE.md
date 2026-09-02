@@ -1,6 +1,12 @@
 # Environment and release design
 
-## Isolation contract
+## Current cost-controlled stage
+
+Only `dev-clean` exists during foundation extraction. Vercel `main` currently deploys the development build against that isolated Supabase project. No preview or production game data exists yet.
+
+Create `preview` when the first vertical slice needs persistent human acceptance. Create `production` only for pre-open preparation. Environment creation is a release milestone, not a prerequisite for Common Core extraction.
+
+## Target isolation contract
 
 GAME04 has three isolated environments. Each has its own Supabase project, Vercel environment variables, OAuth redirect URLs, data, and secrets.
 
@@ -22,7 +28,7 @@ The historical generic `dev` environment is deliberately not used. It must not b
 
 ## Supabase setup
 
-Create three projects before adding authentication or game data. For each project:
+Create each project when its release stage begins. For each project:
 
 1. Record its URL and publishable key in the matching local/Vercel environment values.
 2. Configure only that environment's redirect URLs.

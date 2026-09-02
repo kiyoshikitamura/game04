@@ -12,11 +12,15 @@
 
 ## Next, in order
 
-1. Create and connect the three Supabase projects and the Vercel project.
-2. Produce the GAME04 Product Definition for Character, Push/Fandom, Community, and Economy; do not borrow GAME03 values.
-3. Audit one accepted TRIBE NEON source commit for Auth/session and inventory primitives.
-4. Build the 1–3 character vertical slice: login → character → gacha → growth → push → community.
-5. Run a character animation delivery PoC before committing the production asset pipeline.
+1. Complete Player authority and profile validation from the audited Common Core patterns.
+2. Extract generic inventory ownership without importing any GAME03 asset master.
+3. Extract atomic reward transaction, receipt, inbox claim, and request idempotency.
+4. Decide the minimum generic wallet ledger needed by future Character and Gacha flows.
+5. Produce the GAME04 Product Definition for Character, Push/Fandom, Community, and Economy; do not borrow GAME03 values.
+6. Build the 1–3 character vertical slice: login → character → gacha → growth → push → community.
+7. Run a character animation delivery PoC before committing the production asset pipeline.
+
+The extraction baseline and dependency decisions are recorded in `COMMON_CORE_DEPENDENCY_MAP.md`.
 
 ## Decisions intentionally deferred
 
