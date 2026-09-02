@@ -5,7 +5,7 @@
 - Branch: accepted `main`; resolve and record its exact SHA when a task is dispatched
 - Latest accepted baseline: `9bea604`
 - Environment: dev-clean only
-- Current milestone: `M2 — Engineering Readiness` (`6 / 6`; COMPLETE)
+- Current milestone: `M2.1 — Dependency Security Patch` (`0 / 1`; IN PROGRESS)
 - External-decision milestone: `M3 — Product & Character Definition` (`1 / 6`; Circle agreement required)
 - Milestone authority: `docs/development/MILESTONES.md`
 
@@ -14,18 +14,18 @@
 | Slot | Task | Status | Branch | Exclusive area |
 | --- | --- | --- | --- | --- |
 | Authority | Unassigned | OPEN | — | DB migrations and mutation authority |
-| Tooling | Unassigned | OPEN | — | Repository and delivery tooling |
+| Tooling | M2-DEPENDENCY-SECURITY-001 | IN_PROGRESS | `codex/m2-dependency-security-001` | `package.json`, lockfile, audit and regression evidence |
 | Product/client | Unassigned | OPEN | — | Product documents and client-only work |
 
 The second parallel wave is accepted. It made no product choice and performed no live-environment mutation.
 
 ## Current milestone gate
 
-M2 is `COMPLETE`; all six engineering readiness gates are accepted. New work
-must be assigned to an explicit later milestone rather than extending M2 after
-closure. M3 product work remains pending Circle agreement; Character-specific
-M4 and gameplay M5 implementation stay outside active slots until their product
-dependencies are accepted.
+M2 is `COMPLETE`; all six engineering readiness gates are accepted. M2.1 is a
+bounded security patch opened from the post-M2 dependency audit and does not
+extend product scope. M3 product work remains pending Circle agreement;
+Character-specific M4 and gameplay M5 implementation stay outside active slots
+until their product dependencies are accepted.
 
 M2-G6 and M2 are accepted. Protected database workflow run 3 passed all three
 catalog/behavior contracts. The dev-clean connection remains only in the GitHub

@@ -22,6 +22,7 @@ effort or schedule.
 | M0 — Development Foundation | COMPLETE | 6 / 6 | GitHub-based Next.js/TypeScript, CI, Vercel, and isolated dev-clean baseline |
 | M1 — Common Core Foundation | COMPLETE | 5 / 5 | Player authority, Inventory, Reward, migration discipline, and extraction boundary |
 | M2 — Engineering Readiness | COMPLETE | 6 / 6 | Reproducible product-neutral development, tests, runtime, assets, observability, and operations |
+| M2.1 — Dependency Security Patch | IN PROGRESS | 0 / 1 | Patch known high production dependency findings and replay accepted engineering gates |
 | M3 — Product & Character Definition | BLOCKED — CIRCLE AGREEMENT | 1 / 6 | Source authority verified; Character and game rules require Circle agreement |
 | M4 — Character & Animation PoC | NOT STARTED | 0 / 4 | Character contract and delivery feasibility |
 | M5 — Playable Vertical Slice | NOT STARTED | 0 / 7 | Login → Character → Gacha → Growth → Push → Community |
@@ -36,6 +37,7 @@ scope and delivery evidence exist.
 - [M0 — Development Foundation](https://github.com/kiyoshikitamura/game04/milestone/1): closed, 100%
 - [M1 — Common Core Foundation](https://github.com/kiyoshikitamura/game04/milestone/2): closed, 100%
 - [M2 — Engineering Readiness](https://github.com/kiyoshikitamura/game04/milestone/8): closed, 6/6 gates accepted
+- [M2.1 — Dependency Security Patch](https://github.com/kiyoshikitamura/game04/milestone/9): open, 0/1 gate accepted
 - [M3 — Product & Character Definition](https://github.com/kiyoshikitamura/game04/milestone/3): external agreement required, 1/6 gates accepted
 - [M4 — Character & Animation PoC](https://github.com/kiyoshikitamura/game04/milestone/4): open, not started
 - [M5 — Playable Vertical Slice](https://github.com/kiyoshikitamura/game04/milestone/5): open, not started
@@ -127,6 +129,21 @@ Accepted evidence:
 - G4: `docs/development/acceptance/M2-ASSET-DELIVERY-001.md`
 - G5: `docs/development/acceptance/M2-OBSERVABILITY-001.md`
 - G6: `docs/development/acceptance/M2-OPERATIONS-001.md`
+
+## M2.1 — Dependency Security Patch
+
+Outcome: the accepted engineering foundation runs on a supported dependency
+baseline without known high or critical production findings.
+
+Exit gate:
+
+- [ ] Next.js and matched tooling are patched; production dependency audit,
+  repository quality, browser acceptance, protected dev-clean contracts, and
+  deployment verification all pass.
+
+Allowed work: dependency and lockfile updates plus their validation evidence.
+No product, database schema, environment expansion, or GAME03-derived change is
+part of this milestone.
 
 ## M3 — Product & Character Definition
 
