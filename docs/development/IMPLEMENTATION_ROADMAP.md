@@ -1,719 +1,314 @@
 # GAME04 — Specification-first implementation roadmap
 
-## 0. Purpose
+## 0. Development policy
 
-This document is the detailed implementation roadmap below the coarse milestone gates in `MILESTONES.md`.
+This is the detailed implementation roadmap below `MILESTONES.md`.
 
-GAME04 development follows one primary rule:
+> **Freeze specifications as far as practical first. Complete and accept gameplay features one by one. Build Tutorial / First User Journey only after its destination features are stable.**
 
-> **Freeze product specifications as far as practical first, complete and accept features one by one second, and design/implement the Tutorial / First User Journey only after its destination features are stable.**
+GAME03 proved the reusable engineering patterns, but tutorial-first development caused rework while Gacha, Formation, Quest, Battle, Home, PvP, Raid, Guild and related destinations were still changing. GAME04 reverses that order.
 
-GAME03 proved the reusable technical foundation, but its tutorial-first implementation order caused repeated rework while Gacha, Formation, Quest, Battle, Home, PvP, Raid, Guild and other destination features were still changing. GAME04 intentionally reverses that order.
+A currently UNFIXED rule never becomes implementation truth because GAME03 had a value for it.
 
-This roadmap does not approve any currently UNFIXED GAME04 rule. It defines the order in which those decisions and implementations must become authoritative.
+## 1. Authority and reuse
 
----
+GAME04 product specs, approved Circle decisions, GAME04 canonical Master and GAME04 acceptance evidence are authoritative.
 
-## 1. Source authority and reuse rule
+Current FIX direction from the Development Start Handoff includes: Furry/Kemono theme, general-audience Web game, multi-species fantasy, bright daily-life tone, initial 20 Characters with female 15 / male 5 basic direction, Character-centered value, Character Gacha center, Creative evolution through Awakening, Push/Fandom, Community emphasis, Common Game Core reuse, partner asset model and general/adult-content separation.
 
-### GAME04 product authority
+Open decisions include formal title/place names, detailed roster/Master, Gacha price/rate, duplicate requirements, Creative states, Guild size, PvP/GvG, Support formula, Character Ranking, Shared Goal, Raid, Economy, Quest/Mission and release schedule.
 
-GAME04 product specifications, approved Circle decisions, GAME04 canonical Master, and GAME04 acceptance evidence are authoritative for GAME04 behavior.
-
-Current FIX direction includes:
-
-- Furry / Kemono theme and general-audience Web game
-- multi-species fantasy world with bright daily-life tone
-- initial roster of 20 Characters, basic female 15 / male 5 direction
-- Character-centered product value
-- Character Gacha as a monetization center
-- Creative evolution through Awakening
-- Push / Fandom layer
-- Community emphasis
-- Common Game Core reuse
-- partner asset model
-- standalone general-audience product and external adult-content separation
-
-Current open areas include formal title and place names, detailed initial roster and Character Master, Gacha price/rate, duplicate requirements, Creative states, Guild size, PvP/GvG adoption, Push/Support formula, Character Ranking, Shared Goal, Raid, Economy, Quest/Mission and release schedule.
-
-### GAME03 reuse rule
-
-Reuse GAME03 for proven **technical contracts and implementation patterns**, including where accepted:
-
-- Authentication / Player identity patterns
-- ownership and Inventory authority
-- Reward transaction and idempotency patterns
-- RLS / RPC / migration discipline
-- server-authoritative mutation patterns
-- Battle result/replay authority patterns
-- Guild/social infrastructure patterns
-- Payment/operations/analytics infrastructure patterns
-- mobile acceptance and release discipline
-
-Do **not** inherit GAME03 product values, terminology, Masters, schedules, economy, tutorial flow, competition assumptions, visual presentation or content as implicit GAME04 defaults.
+Reuse GAME03 only for accepted technical contracts/patterns: Auth/Player, ownership/Inventory, Reward/idempotency, RLS/RPC/migrations, server authority, Battle result/replay authority, social infrastructure, payment/operations/analytics patterns and mobile/release discipline. Do not inherit GAME03 Masters, values, terminology, schedules, economy, tutorial flow, competition assumptions, visual presentation or content.
 
 ---
 
-## 2. Overall delivery order
+## 2. Overall order
 
 ```text
-A. Engineering Foundation                 COMPLETE / accepted baseline
-B. GAME04 Shell & Design Foundation       early implementation track
+A. Engineering Foundation                 COMPLETE
+B. GAME04 Shell / Design Foundation       IN PROGRESS
 C. Specification Freeze                   NEXT PRIMARY TRACK
-D. Master & Content Architecture
+D. Master / Content Architecture
 E. Feature-by-feature Implementation
 F. Initial Content Production
 G. Cross-feature Integration
-H. Tutorial / First User Journey          LAST GAMEPLAY CONSTRUCTION STEP
+H. Tutorial / First User Journey          LAST GAMEPLAY CONSTRUCTION
 I. Full Acceptance / Release Integration
 J. Pre-open
 ```
 
-The Tutorial must consume accepted features. Features must not be shaped around a temporary tutorial implementation.
+---
+
+# A — Accepted engineering foundation
+
+## A0 Base Environment — COMPLETE
+GitHub, Next.js/React/TypeScript, CI, Vercel, isolated dev-clean, environment/secret boundaries.
+
+## A1 Common Core Minimum — COMPLETE
+Auth/Player initialization, profile authority, owner-scoped Inventory projection, server Reward delivery, atomic/retry-safe claims, migration discipline, GAME03/Common/GAME04 boundary.
+
+## A2 Engineering Readiness — COMPLETE
+Bootstrap/diagnostics, test layers, lifecycle UX, neutral asset delivery, observability, operations/feature-state/maintenance and dependency-security baseline.
+
+These are platform foundations, not the complete Common Game Core feature set.
 
 ---
 
-# PART A — ACCEPTED ENGINEERING FOUNDATION
+# B — GAME04 Shell / Design Foundation
 
-## A0. Base Environment — COMPLETE
+## B0 Application Shell
+Title/Auth connection, protected Home, mobile shell, Header/Footer/navigation primitives, safe area, loading/error/dialog states.
 
-- GitHub repository / branch workflow
-- Next.js / React / TypeScript
-- CI quality gates
-- Vercel integration
-- isolated `dev-clean`
-- environment / secret boundaries
+## B1 Home Visual Shell
+Use the approved Home guideline/mock as visual/information-hierarchy reference. Structural slots may exist for Player/resources, Leader Character, side navigation, Quest/Guild, banner and footer without approving the underlying gameplay.
 
-## A1. Common Core Minimum Foundation — COMPLETE
+## B2 Design System Freeze
+Before page-scale production freeze color, typography, spacing, button/card/dialog hierarchy, badge/state rules, rarity presentation, loading/disabled/coming-soon states, viewport rules and asset safe zones.
 
-- Authentication / Player initialization
-- Player profile authority
-- owner-scoped Inventory projection
-- server-owned Reward delivery
-- atomic claim / retry safety / receipt
-- forward-only migration discipline
-- GAME03/Common/GAME04 extraction boundary
-
-## A2. Engineering Readiness — COMPLETE
-
-- fresh-clone bootstrap / diagnostics
-- unit / contract / browser test layers
-- loading / error / dialog / session lifecycle
-- product-neutral asset delivery
-- observability transport
-- operations / feature-state / maintenance foundation
-- dependency security baseline
-
-These foundations are not the complete game. They are the platform on which the GAME04-specific product is built.
+Exit: later pages should mostly compose a shared system rather than reinvent it.
 
 ---
 
-# PART B — GAME04 SHELL & DESIGN FOUNDATION
+# C — Specification Freeze
 
-## B0. Application Shell
+Full gameplay implementation is blocked until its dependent specification package is accepted. Small technical PoCs are allowed only when needed to make a decision.
 
-Status: IN PROGRESS via Home Shell work.
+## C0 Product / Core Loop
+Product pillars/non-goals, daily loop, long-term loop, Character ownership, Push/Fandom, Community, Cooperation > Competition boundary, session expectations.
 
-Scope:
+## C1 World / Terminology / Naming
+Implementation-facing game/world/city/facility names, Character-facing terminology, Quest/Dungeon/Raid/Community terms, resource names and UI labels. Lore may remain expandable; IDs/labels required by Master/UI may not.
 
-- Title shell
-- Authentication connection
-- protected Home route
-- global mobile shell
-- Header / Footer / navigation primitives
-- safe-area handling
-- shared loading / error / dialog states
+## C2 Character System / Initial Roster
+Character Master contract, initial 20 subjects, IDs, species/Kemono level/gender distribution, role/combat reason, rarity, stats model, profile/relationship fields, Leader/favorite semantics, story/content relationship and presentation requirements.
 
-## B1. Home Visual Shell
+## C3 Creative Awakening
+Awakening states, duplicate/material requirements, stat impact, Creative change points, +0/intermediate/+3/+5 asset contract, animation differences, persistence, UI and duplicate conversion.
 
-Use the approved Home guideline/mock as visual/information hierarchy reference.
+## C4 Economy / Wallet / Reward
+Currencies, paid/free separation if applicable, AP/stamina, materials/items, sources/sinks, Wallet/ledger requirement, caps/overflow, server time and audit rules.
 
-Implement only structural UI before feature approval:
+## C5 Gacha / Acquisition
+Acquisition categories, banners, price/rates/rarity, guarantee/pity/ceiling, duplicate handling, free acquisition, disclosure/history, initial grants and retry/idempotency contract.
 
-- Player / resource header slots
-- central Leader Character presentation slot
-- side navigation slots
-- Quest / Guild primary action slots
-- rotation/banner slot
-- five-item footer
+## C6 Growth / Formation / Loadout
+Level/EXP/resources, Awakening relationship, team size, formation, Leader behavior, Skill/Equipment adoption and scope if any, exposed power/status calculation. GAME03 Skill/Equipment is not assumed.
 
-A visible slot does not approve the underlying product feature.
+## C7 Battle
+Party size, stats, action order, targeting, damage/heal/status, skills, defeat/result, replay compatibility, speed/skip, animation hooks and presentation. Server authority remains non-negotiable.
 
-## B2. Design System Freeze
+## C8 Quest / Dungeon / PvE
+Content taxonomy, progression, cost, Enemy Master, clear/repeat/skip, Reward, unlock and Result behavior.
 
-Before page-scale production:
+## C9 Raid / Cooperative PvE
+Launch adoption, boss lifecycle, participation, contribution, attempts/cost, rewards, ranking if any, reset/schedule.
 
-- color tokens
-- typography
-- spacing / radius / borders
-- button hierarchy
-- cards / panels / dialogs
-- badges / notifications
-- rarity presentation rules
-- loading / disabled / coming-soon states
-- mobile viewport rules
-- asset safe zones
+## C10 Guild / Social / Community
+GAME04 Guild purpose, size, create/join/leave, roles, discovery, Chat/BBS/Activity, profile/Leader exposure and moderation.
 
-Exit: later pages should be composition work, not repeated visual-system invention.
+## C11 Push / Fandom / Shared Goal
+Support inputs, passive inputs if any, anti-abuse, Support state, visible Fandom representation, same-favorite discovery, shared Character goals, contribution/completion, reward/content-production connection and Character Ranking adoption/omission.
+
+## C12 Competition
+Explicitly decide PvP, Ranking and GvG as launch / post-launch / omit. Adopted systems then require separate matching/schedule/scoring/reward/season specifications. Competition must not enter by GAME03 inheritance.
+
+## C13 Retention
+Idle reward, Login Bonus, Daily/Weekly Mission, Present, Event cadence, recurring Character content and notifications.
+
+## C14 Shop / Payment
+Catalog, prices, paid currency/items, limits, purchase history, refund/reconciliation and payment release gate.
+
+## C15 Analytics / Admin / Operations
+Product events and operational requirements for Character acquisition/favorite/use, Awakening, Gacha/economy, Community, Fandom/shared goals, retention, monetization, moderation and content-return behavior.
+
+## C16 Page Map / Navigation / UX
+Freeze the complete page inventory and route graph before page production: Title/Auth, Home, Character, Growth/Awakening, Formation if adopted, Gacha/Result, Quest, Battle/Result, Raid if adopted, Guild/Community/Chat/BBS, Fandom/Shared Goal, competition pages if adopted, Mission/Login/Present, Shop, News/Notification, Settings/Support/Legal. Every page specifies authority, loading/error/empty states, CTA, navigation and mobile first-view acceptance.
+
+## C17 Master Catalog
+Define authoritative contracts for every adopted Master before runtime work: Character, Species, Creative/Awakening, Growth, Item/Material/Currency, Gacha/Banner/Pool, Formation, Skill/Equipment if adopted, Battle, Enemy, Quest/Dungeon, Raid, Guild config, Fandom/Shared Goal, Mission, Login Bonus, Shop product, Feature State/Event Schedule.
+
+### Specification Freeze exit
+Unresolved items must be explicitly post-launch, omitted, or isolated so they cannot silently change already-started feature implementations.
 
 ---
 
-# PART C — SPECIFICATION FREEZE
+# D — Master / Content Architecture
 
-No gameplay feature enters full implementation until the specification package it depends on is accepted. Small technical PoCs are allowed only when needed to make a specification decision.
+## D0 Canonical Master Framework
+ID conventions, schema/versioning, validation, loader, migration/seed policy, environment parity, legacy/default rejection and review path.
 
-## C0. Product Definition / Core Loop
+## D1 Runtime Schema Expansion
+Create only accepted GAME04 state: Character ownership, currencies/items, Growth/Awakening, Formation, progression, Fandom/Support, Community and other approved features. Every set includes RLS, RPC, grants, FK, idempotency, reset implications and contract tests.
 
-Freeze:
-
-- product pillars and non-goals
-- daily loop
-- long-term loop
-- Character ownership loop
-- Push / Fandom loop
-- Community loop
-- Cooperation > Competition boundary
-- session expectations
-- core currencies/resources at conceptual level
-
-## C1. World / Terminology / Naming
-
-Freeze implementation-facing names:
-
-- formal game title when available
-- world / continent / central city names
-- major facilities and Guild terminology
-- Character-facing terminology
-- Quest / Dungeon / Raid / Community terms
-- resource/currency display names
-- UI labels
-
-World lore that does not affect runtime can remain expandable; identifiers and labels required by Master/UI cannot.
-
-## C2. Character System & Initial Roster
-
-Freeze:
-
-- Character Master contract
-- initial 20 Character subjects
-- IDs and naming convention
-- species / Kemono level / gender distribution
-- role / combat participation reason
-- rarity model
-- base stats model
-- profile / relationship fields
-- Leader / favorite semantics
-- Character story/content relationship
-- initial presentation requirements
-
-Initial 20 detailed content can be produced progressively after the schema and roster are approved, but the contract must not keep changing during implementation.
-
-## C3. Creative Awakening
-
-Freeze:
-
-- Awakening levels/states
-- duplicate/material requirements
-- stat impact
-- Creative change points
-- +0 / intermediate / +3 / +5 asset contract
-- animation differences
-- persistence and ownership semantics
-- UI presentation
-- duplicate conversion rules
-
-## C4. Economy / Wallet / Reward
-
-Freeze:
-
-- currencies
-- paid/free currency separation if applicable
-- stamina/AP model
-- materials
-- item categories
-- Reward sources/sinks
-- Wallet/ledger requirement
-- caps / overflow policy
-- server-time rules
-- economy audit requirements
-
-No GAME03 economy value is inherited by default.
-
-## C5. Gacha / Acquisition
-
-Freeze:
-
-- Character-only vs additional acquisition categories
-- banners
-- price
-- rates
-- rarity distribution
-- guarantee / pity / ceiling
-- duplicate handling
-- free acquisition
-- history/disclosure
-- initial grants
-- retry/idempotency behavior
-
-## C6. Growth / Formation / Loadout
-
-Freeze:
-
-- level progression
-- EXP/resources
-- Awakening relationship
-- team size
-- formation rules
-- Leader behavior
-- Skill / Equipment adoption and scope, if any
-- total-power/status calculation if exposed
-
-Do not assume GAME03 Skill/Equipment structure unless explicitly adopted.
-
-## C7. Battle System
-
-Freeze GAME04-specific rules while retaining accepted server-authority principles:
-
-- party size
-- stats
-- action order
-- targeting
-- damage/heal/status model
-- skill model
-- defeat/result rules
-- replay contract compatibility
-- speed/skip behavior
-- Character animation hooks
-- presentation requirements
-
-## C8. Quest / Dungeon / PvE
-
-Freeze:
-
-- content taxonomy
-- progression map
-- stamina/cost
-- enemy/master structure
-- clear conditions
-- repeat/skip rules
-- Reward tables
-- unlock conditions
-- result/next-action behavior
-
-## C9. Raid / Cooperative PvE
-
-Freeze before implementation:
-
-- whether Raid is launch scope
-- boss lifecycle
-- participation model
-- contribution/damage model
-- attempt/cost rules
-- shared vs individual rewards
-- ranking, if any
-- reset/schedule
-
-## C10. Guild / Social / Community
-
-Freeze:
-
-- Guild purpose in GAME04
-- max members
-- create/join/leave rules
-- roles/permissions
-- recommendation/discovery
-- Chat / BBS / Activity scope
-- profile/Leader Character exposure
-- moderation requirements
-- Character-centered community representation
-
-## C11. Push / Fandom / Shared Goal
-
-This is GAME04-specific and must be frozen before implementation.
-
-Define:
-
-- intentional Support inputs
-- passive usage inputs, if any
-- anti-abuse rules
-- Character Support state
-- player-visible Fandom representation
-- same-favorite discovery
-- shared Character goals
-- contribution and completion
-- reward/content-production connection
-- Character ranking adoption or omission
-
-## C12. Competition
-
-Explicit decision gate:
-
-- PvP: adopt / omit / post-launch
-- Ranking: categories and purpose
-- GvG: adopt / omit / post-launch
-
-If adopted, freeze matchmaking, schedules, scoring, rewards, seasons and authority separately. Competition must not become Product Core by accidental GAME03 inheritance.
-
-## C13. Retention Systems
-
-Freeze:
-
-- idle reward
-- Login Bonus
-- Daily/Weekly Mission
-- Present
-- Event cadence
-- recurring Character content
-- notification triggers
-
-## C14. Shop / Payment
-
-Freeze:
-
-- product catalog model
-- price tiers
-- paid currency/items
-- purchase limits
-- refund/reconciliation requirements
-- purchase history
-- payment release gate
-
-## C15. Analytics / Admin / Operations Product Requirements
-
-Freeze event names and operational needs only after product rules are known:
-
-- Character acquisition/favorite/use
-- Awakening +3/+5
-- Gacha/economy
-- Guild/community activity
-- Push/Fandom/shared goal
-- Retention
-- monetization
-- content return behavior
-- moderation/admin actions
-
-## C16. Page Map / Navigation / UX Specification
-
-Before page implementation, freeze the complete page inventory and navigation graph.
-
-Expected categories to decide/cover include:
-
-- Title / Auth
-- Home
-- Character list/detail
-- Growth / Awakening
-- Formation / loadout if adopted
-- Gacha / result
-- Quest / Dungeon
-- Battle / Result
-- Raid if adopted
-- Guild / Community / Chat / BBS
-- Push / Fandom / Shared Goal
-- Ranking/PvP/GvG if adopted
-- Mission / Login Bonus / Present
-- Shop
-- News / Notification
-- Settings / Support / Legal
-
-Each page spec must identify data authority, loading/error/empty states, primary CTA, navigation in/out, and mobile first-view acceptance.
-
-## C17. Master Catalog Freeze
-
-Produce the authoritative Master inventory before gameplay implementation.
-
-At minimum, decide whether GAME04 needs and define contracts for:
-
-- Character
-- Species / taxonomy
-- Character Creative / Awakening
-- Growth
-- Item / Material / Currency
-- Gacha / Banner / Pool
-- Formation
-- Skill / Equipment if adopted
-- Battle
-- Enemy
-- Quest / Dungeon
-- Raid
-- Guild configuration
-- Push / Fandom / Shared Goal
-- Mission
-- Login Bonus
-- Shop product
-- Feature state / event schedule
-
-Exit criteria for PART C: unresolved decisions are explicitly marked post-launch/omitted or isolated so they cannot silently change already-started feature implementations.
+## D2 Asset / Content Contract
+Asset IDs/paths, Character base/Awakening variants, thumbnails/cards/full-body, animation/fallback relation, backgrounds/UI/banners, cache/version and missing-asset behavior.
 
 ---
 
-# PART D — MASTER & CONTENT ARCHITECTURE
+# E — Feature-by-feature implementation
 
-## D0. Canonical Master Framework
-
-- ID rules
-- schema/version rules
-- validation
-- loader
-- migration/seed policy
-- environment parity
-- legacy/default rejection
-- admin/review path
-
-## D1. Ownership / Runtime Schema Expansion
-
-Add GAME04 user-state tables only from accepted specifications:
-
-- Character ownership
-- currencies/items
-- growth/awakening
-- formation
-- progression
-- fandom/support
-- community participation
-- other approved feature state
-
-For each: RLS + RPC + grant + FK + idempotency + reset implications + tests.
-
-## D2. Asset Manifest & Content Contract
-
-- asset IDs and paths
-- Character base/awakening variants
-- thumbnails/cards/full-body
-- animation/fallback relationship
-- background/UI/banner assets
-- cache/version rules
-- missing-asset behavior
-
----
-
-# PART E — FEATURE-BY-FEATURE IMPLEMENTATION
-
-Each feature is completed independently through:
+Every feature follows:
 
 ```text
-Accepted Spec
-→ Master
-→ DB / Authority
-→ Runtime
-→ Page/UI
-→ Automated Tests
-→ Mobile Human Acceptance
-→ COMPLETE
+Accepted Spec → Master → DB/Authority → Runtime → Page/UI
+→ Automated Test → Mobile Human Acceptance → COMPLETE
 ```
 
-A feature is not COMPLETE because its page renders.
+A rendered page is not a completed feature.
 
-## E0. Character Foundation
+## E0 Character Foundation
+Canonical Character Master, ownership, list/detail pages, Leader/favorite, profile/species and Home Character connection.
 
-- Character canonical Master
-- ownership
-- list/detail pages
-- Leader/favorite
-- profile/species information
-- Home Character connection
+## E1 Character Asset / Animation Pipeline
+Use 1–3 representative approved Characters to prove normalization, Idle/Tap/approved Battle hooks, Awakening variants, static fallback, lazy-load/prefetch and Safari load/memory/background return. Freeze the pipeline before 20-Character animation production.
 
-## E1. Character Asset / Animation Pipeline
+## E2 Inventory / Economy Runtime
+Approved currencies/items/materials, Wallet/ledger if required, Reward integration, Inventory presentation and required history.
 
-Run representative 1–3 Character PoC before roster-scale animation production:
+## E3 Gacha / Acquisition
+Master, server draw authority, pity/ceiling, ownership grant, duplicate handling, banner, presentation, Result and disclosure/history.
 
-- normalization
-- Idle / Tap / approved Battle hooks
-- Awakening variants
-- static fallback
-- lazy load / prefetch
-- Safari load/memory/background-return acceptance
+## E4 Growth / Awakening
+Level/materials, Awakening, Creative evolution, before/after state and Character/Home refresh.
 
-Then freeze the production pipeline.
+## E5 Formation / Loadout
+Only adopted systems: party edit, Leader, ownership validation, save authority and Battle handoff.
 
-## E2. Inventory / Economy Runtime
+## E6 Battle Runtime / Presentation
+Adapt accepted common authority/replay patterns to GAME04 Master, stats, Character presentation/animation, damage/status/result and approved speed/skip. Run mobile stress acceptance.
 
-- approved currencies/items/materials
-- wallet/ledger if required
-- Reward integration
-- inventory pages/presentation
-- transaction history where required
+## E7 Quest / Dungeon
+Master/progression, page, start/cost transaction, Battle connection, clear/Reward and Result/retry/next.
 
-## E3. Gacha / Acquisition
+## E8 Raid / Cooperative PvE
+If launch scope: boss state, attempts, Battle, contribution, rewards and projection.
 
-- Master
-- server draw authority
-- pity/ceiling
-- ownership grant
-- duplicate handling
-- banner page
-- draw presentation
-- result page
-- history/disclosure
+## E9 Guild / Community Base
+Create/join/leave, roles, recommendation/discovery, members/profile, Activity, approved Chat/BBS and moderation hooks.
 
-## E4. Growth / Awakening
+## E10 Push / Fandom
+Support ingestion, authoritative aggregation, Character/player projections, same-favorite discovery and Character-centered UI/activity.
 
-- level growth
-- materials
-- Awakening
-- Creative evolution
-- before/after state
-- page/UI
-- Home/Character presentation refresh
+## E11 Shared Goal / Community Event
+Character-specific shared activity, aggregation, completion/Reward, public state and event lifecycle.
 
-## E5. Formation / Loadout
+## E12 Competition
+Only approved modules. PvP, Ranking and GvG are separate feature gates, each with Master/authority/runtime/UI/acceptance.
 
-Only approved systems are implemented.
+## E13 Retention / Reward
+Idle reward, Login Bonus, Mission, Present, Event rewards and future-reward visibility.
 
-- party edit
-- Leader
-- ownership validation
-- save authority
-- combat handoff
+## E14 Shop / Payment
+Shop/Product Master, payment provider, webhook verification, idempotency, reconciliation, refund/chargeback and feature gate.
 
-## E6. Battle Runtime & Presentation
+## E15 Utility Pages
+Notification, News, Settings, Support and Legal.
 
-- adapt accepted common authority/replay pattern
-- GAME04 stats/master connection
-- GAME04 Character presentation/animation
-- damage/status/result
-- 1x/2x/skip as approved
-- mobile stress acceptance
-
-## E7. Quest / Dungeon
-
-- Master/progression
-- stage page
-- cost/start transaction
-- Battle connection
-- clear/reward
-- result/retry/next stage
-
-## E8. Raid / Cooperative PvE
-
-Only if launch scope is approved.
-
-- boss state
-- attempts
-- Battle connection
-- contribution
-- rewards
-- result/projection
-
-## E9. Guild / Community Base
-
-- Guild create/join/leave
-- roles
-- recommendation/discovery
-- member list/profile
-- Activity
-- Chat/BBS approved scope
-- moderation hooks
-
-## E10. Push / Fandom
-
-- Support event ingestion
-- authoritative aggregation
-- Character/player projections
-- favorite-community discovery
-- UI and Character-centered activity
-
-## E11. Shared Goal / Community Event
-
-- Character-specific shared activity
-- progress aggregation
-- completion/reward
-- public state
-- event lifecycle
-
-## E12. Competition Features
-
-Only adopted launch features are implemented.
-
-Possible independent modules:
-
-- PvP
-- personal/Character/Guild Ranking
-- GvG
-
-Each receives its own Master/authority/runtime/UI/acceptance gate.
-
-## E13. Retention / Reward Features
-
-- idle reward
-- Login Bonus
-- Mission
-- Present
-- event rewards
-- future-reward visibility
-
-## E14. Shop / Payment
-
-- Shop UI
-- product Master
-- checkout/payment provider
-- webhook verification
-- idempotency
-- reconciliation
-- refund/chargeback support
-- payment feature gate
-
-## E15. Notification / News / Settings / Support / Legal
-
-Complete the non-gameplay pages and operational UX.
-
-## E16. Analytics / Admin / Operations Product Layer
-
-- approved product events
-- dashboards/queries
-- content/feature controls
-- moderation/admin tools
-- operational runbooks
+## E16 Analytics / Admin / Operations Product Layer
+Approved events, dashboards/queries, content controls, moderation/admin tools and runbooks.
 
 ---
 
-# PART F — INITIAL CONTENT PRODUCTION
+# F — Initial Content Production
 
-Implementation and content production are separate tracks.
+System implementation and content production are separate tracks.
 
-## F0. Initial 20 Character Production
+## F0 Initial 20 Characters
+For all approved Characters: Master, art, required Awakening Creative, animation, profile/story, Battle data and validation.
 
-For all 20 approved Characters:
+## F1 Launch PvE
+Quest/Dungeon, enemies, Raid if adopted and Reward tables.
 
-- Master data
-- art
-- required Creative/Awakening variants
-- animation assets
-- profile/story content
-- battle data
-- validation
+## F2 Launch Economy / Gacha
+Banners/pools, initial/free grants, materials/rewards and Shop products if applicable.
 
-## F1. Launch PvE Content
-
-- Quest/Dungeon stages
-- enemies
-- Raid content if adopted
-- rewards
-
-## F2. Launch Economy / Gacha Content
-
-- banners/pools
-- initial/free grants
-- materials/reward tables
-- Shop products if paid launch includes them
-
-## F3. Launch Community / Event Content
-
-- Shared Goals
-- missions
-- login cycle
-- launch events
-- news/notices
+## F3 Launch Community / Events
+Shared Goals, Missions, Login cycle, launch events and News.
 
 ---
 
-# PART G — CROSS-FEATURE INTEGRATION
+# G — Cross-feature integration
 
-Only after individual features are accepted.
+Only accepted features are connected.
 
-## G0. Home Runtime Integration
+## G0 Home Runtime Integration
+Replace Home Shell placeholders with real accepted state/routes.
 
-Replace shell placeholders with accepted real state and routes.
+## G1 Navigation / State Integration
+Verify page transitions, back behavior, deep links, reload, session expiry, async locks, empty/error states and cross-feature refresh.
 
-## G1. Full Navigation Integration
+## G2 Economy / Reward Integration
+Audit every source/sink and Reward path across Gacha, Growth, Quest, Raid, Mission, Login, Community events and Shop.
 
-Verify every page in/out path, back behavior, deep links, reload and
+## G3 Social / Projection Integration
+Audit profile, Leader Character, Activity, Guild, Fandom, Rankings if adopted and stale-projection behavior.
+
+## G4 Full Feature Acceptance
+Each launch feature must already be independently PASS before Tutorial construction starts.
+
+---
+
+# H — Tutorial / First User Journey — LAST
+
+This is intentionally late.
+
+## H0 Journey Design
+Only now design the optimal first-user route using completed destination features. Decide World Intro, Auth timing, initial grants, first Character acquisition, first Growth/Awakening exposure, Formation/Battle/PvE exposure, Home arrival, Community/Guild/Fandom introduction and Mission guidance.
+
+## H1 Tutorial State Machine
+Implement tutorial progress, one-time grants, resume/reload, auth round-trip, skip/recovery if approved and idempotent completion.
+
+## H2 Tutorial Presentation
+Add guidance overlays, dialogue, spotlight, CTA locks and World Intro without changing destination feature logic.
+
+## H3 Fresh User Human Acceptance
+Run the complete journey on fresh data and target mobile viewports. Tutorial bugs may change Tutorial orchestration; they must not trigger casual redesign of already-accepted features.
+
+---
+
+# I — Full Acceptance / Release Integration
+
+## I0 Full Journey Regression
+Fresh user, returning user, reload/background, low-network, session expiry, duplicate actions, Reward consistency, projection refresh and mobile layout.
+
+## I1 Performance / Asset / Audio
+Cold/warm load, Character/animation memory, prefetch/fallback, long session, background/foreground, browser audio lifecycle and no horizontal overflow.
+
+## I2 Preview Environment
+Create/use isolated Preview DB when responsible features require it; validate migrations, RLS/RPC/grants, OAuth, real data and accepted deployment SHA.
+
+## I3 Production Integration
+Schema baseline, approved forward migrations, secrets/env, feature states, backup, QA/mock disabled, support/legal/maintenance and release-data checks.
+
+## I4 Release Candidate Human Acceptance
+390×844, 412×915, iPhone Safari, Android Chrome and relevant in-app browser coverage.
+
+---
+
+# J — Pre-open
+
+Measure real acquisition, Character acquisition/favorite/use/Awakening, Community/Fandom participation, retention, monetization, operational stability and cumulative ROAS. Product success is not inferred from implementation completion.
+
+---
+
+## 3. Parallel work policy
+
+Parallelize only when authority/data/file boundaries are independent. Good parallel tracks include approved Character asset production, UI composition against frozen page specs, Master content entry against frozen schemas, analytics instrumentation against frozen events and operations tooling.
+
+Do not parallelize unresolved product rules with their implementation, overlapping migrations/authority areas, or Tutorial orchestration with still-changing destination features.
+
+## 4. Immediate next sequence
+
+```text
+1. Finish Home Shell acceptance without treating placeholders as product approval
+2. Complete PART C Specification Freeze as the primary planning track
+3. Freeze Page Map + Master Catalog before broad page/runtime production
+4. Build PART D canonical Master/runtime architecture
+5. Implement PART E feature by feature and accept each independently
+6. Produce launch content through PART F against frozen contracts
+7. Integrate accepted features through PART G
+8. Build Tutorial / First User Journey in PART H
+9. Run full release integration and Pre-open
+```
+
+This sequence is the implementation authority unless an explicit product/release decision updates this document.
