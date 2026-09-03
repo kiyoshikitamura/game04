@@ -17,6 +17,11 @@ approved or implemented by inference.
 
 ## Register
 
+[`GAME03_GAME_FEATURE_INVENTORY.md`](GAME03_GAME_FEATURE_INVENTORY.md) is the
+fact-first comparison surface for reviewing GAME03 capabilities, deciding
+GAME04 use/defer/omit outcomes, and recording GAME04-only additions. Its GAME04
+dispositions are provisional until the Circle approves them.
+
 [`GAME04_PRODUCT_DECISION_REGISTER.md`](GAME04_PRODUCT_DECISION_REGISTER.md) is
 the working index for:
 
