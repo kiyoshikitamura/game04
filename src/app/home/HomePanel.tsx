@@ -15,6 +15,20 @@ type HomePanelProps = {
   accessMode: "offline" | "authenticated";
 };
 
+const leftActions = [
+  ["!", "ミッション"],
+  ["◇", "ギャラリー"],
+  ["♛", "ランキング"],
+  ["…", "チャット"],
+] as const;
+
+const rightActions = [
+  ["⚔", "PvP"],
+  ["◆", "レイド"],
+] as const;
+
+const footerActions = ["ホーム", "キャラ", "育成", "ガチャ", "ショップ"] as const;
+
 export function HomePanel({ accessMode }: HomePanelProps) {
   const router = useRouter();
   const supabase = getSupabaseBrowserClient();
@@ -26,6 +40,7 @@ export function HomePanel({ accessMode }: HomePanelProps) {
   const [saving, setSaving] = useState(false);
   const [retryKey, setRetryKey] = useState(0);
   const [message, setMessage] = useState("");
+  const [editingProfile, setEditingProfile] = useState(false);
 
   useEffect(() => {
     if (accessMode === "offline" || !supabase) return;
@@ -100,6 +115,7 @@ export function HomePanel({ accessMode }: HomePanelProps) {
     setDisplayName(normalizedName ?? "");
     setSaving(false);
     setMessage("表示名を保存しました。");
+    setEditingProfile(false);
   }
 
   if (accessMode === "offline" || !supabase) {
@@ -118,21 +134,84 @@ export function HomePanel({ accessMode }: HomePanelProps) {
     return <LifecycleState kind="loading" title="ログイン状態を確認しています。" />;
   }
 
-  return (
-    <>
-      <section className="card">
-        <h2>{player?.display_name || "Adventurer"}</h2>
-        <p>GAME04へようこそ。Character、Community、Push/Fandomは仕様確定後にここへ接続します。</p>
-      </section>
+  const playerName = player.display_name || "冒険者";
 
-      <form className="profile-form" onSubmit={saveProfile}>
-        <label htmlFor="display-name">表示名</label>
-        <input id="display-name" value={displayName} onChange={(event) => setDisplayName(event.target.value)} maxLength={32} placeholder="表示名を設定" />
-        <button className="secondary-action" type="submit" disabled={saving}>
-          {saving ? "保存中…" : "保存"}
+  return (
+    <section className="home-stage" aria-label="GAME04 Home shell">
+      <header className="home-status-bar">
+        <button className="player-chip" type="button" onClick={() => setEditingProfile((value) => !value)} aria-expanded={editingProfile}>
+          <span className="player-avatar" aria-hidden="true">◎</span>
+          <span className="player-copy"><strong>{playerName}</strong><small>Rank. --</small></span>
         </button>
-        {message && <LifecycleState kind={message.includes("できません") ? "error" : "notice"} title={message} compact />}
-      </form>
-    </>
+        <div className="resource-chip"><small>AP</small><strong>-- / --</strong><span aria-hidden="true">＋</span></div>
+        <div className="currency-chip"><span aria-hidden="true">●</span><strong>--</strong><span aria-hidden="true">＋</span></div>
+        <div className="currency-chip"><span aria-hidden="true">◆</span><strong>--</strong><span aria-hidden="true">＋</span></div>
+        <button className="menu-button" type="button" disabled aria-label="メニュー 準備中">☰</button>
+      </header>
+
+      {editingProfile && (
+        <form className="home-profile-editor" onSubmit={saveProfile}>
+          <label htmlFor="display-name">表示名</label>
+          <input id="display-name" value={displayName} onChange={(event) => setDisplayName(event.target.value)} maxLength={32} placeholder="表示名を設定" />
+          <button className="secondary-action" type="submit" disabled={saving}>{saving ? "保存中…" : "保存"}</button>
+          {message && <LifecycleState kind={message.includes("できません") ? "error" : "notice"} title={message} compact />}
+        </form>
+      )}
+
+      <div className="home-visual-area">
+        <div className="guild-hall-backdrop" aria-hidden="true">
+          <span className="guild-light guild-light-one" />
+          <span className="guild-light guild-light-two" />
+          <span className="guild-banner-mark">◇</span>
+        </div>
+
+        <nav className="side-actions side-actions-left" aria-label="左サイド導線">
+          {leftActions.map(([icon, label]) => (
+            <button key={label} className="round-action" type="button" disabled>
+              <span className="round-action-icon" aria-hidden="true">{icon}</span>
+              <span>{label}</span>
+            </button>
+          ))}
+        </nav>
+
+        <nav className="side-actions side-actions-right" aria-label="右サイド導線">
+          {rightActions.map(([icon, label]) => (
+            <button key={label} className="round-action" type="button" disabled>
+              <span className="round-action-icon" aria-hidden="true">{icon}</span>
+              <span>{label}</span>
+            </button>
+          ))}
+        </nav>
+
+        <div className="leader-character-slot" aria-label="Leader Character presentation slot">
+          <div className="leader-placeholder" aria-hidden="true">
+            <span className="leader-ears">◇</span>
+            <span className="leader-face">•ᴗ•</span>
+          </div>
+          <p>Leader Character</p>
+          <small>Character asset / animation は M3–M4 承認後に接続</small>
+        </div>
+      </div>
+
+      <div className="primary-home-actions">
+        <button className="hero-action quest-action" type="button" disabled><span aria-hidden="true">✦</span><strong>クエスト</strong><small>冒険に出発しよう！</small></button>
+        <button className="hero-action guild-action" type="button" disabled><span aria-hidden="true">♜</span><strong>ギルド</strong><small>仲間と協力しよう！</small></button>
+      </div>
+
+      <button className="gacha-banner-shell" type="button" disabled>
+        <span className="banner-tag">ROTATION BANNER</span>
+        <strong>Character Gacha</strong>
+        <small>正式Creative・価格・確率は未FIXのため表示しません</small>
+      </button>
+
+      <nav className="home-footer-nav" aria-label="メインナビゲーション">
+        {footerActions.map((label, index) => (
+          <button key={label} className={index === 0 ? "footer-action is-active" : "footer-action"} type="button" disabled={index !== 0}>
+            <span aria-hidden="true">{["⌂", "♙", "↑", "◆", "▣"][index]}</span>
+            <small>{label}</small>
+          </button>
+        ))}
+      </nav>
+    </section>
   );
 }
