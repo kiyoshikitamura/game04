@@ -21,7 +21,8 @@ jobs:
           rsync -a --delete --exclude=.git/ "$snapshot_dir/" ./
           rm -f .github/workflows/quality.yml
           cp -a "$overlay_dir/." ./
-          git add -A
+          git add -f -A
+          echo "assembled-tree=$(git write-tree)"
           test "$(git write-tree)" = f4c8674c8b78f7176510dcf47137cb04fb428691
           git -c user.name='GAME04 Import' -c user.email='game04-import@users.noreply.github.com' commit -m 'Import verified GAME03 production snapshot with Sengoku assets'
           git push origin HEAD:codex/game04-production-clone
