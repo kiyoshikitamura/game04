@@ -1,12 +1,14 @@
 # GAME04
 
-GAME04 is a general-audience, identity-first community web game. Its core is:
+GAME04は、ケモノ/Furryという強い嗜好Identityを起点とする一般向けIdentity-first Community Webゲームです。
+
+中核ループ：
 
 `Character → Push / Fandom → Community → Retention`
 
-This repository starts as a clean implementation. It is **not** a fork or copy of TRIBE NEON.
+本RepositoryはTRIBE NEONのforkや単純コピーではなく、Common Game Coreの技術契約を再利用しつつGAME04固有仕様を分離したClean Implementationです。
 
-## Start locally
+## ローカル起動
 
 ```powershell
 npm ci
@@ -15,47 +17,48 @@ npm run doctor
 npm run dev
 ```
 
-Open `http://localhost:3000`. The initial shell intentionally contains only Title and Home placeholders until the environment is connected.
+`http://localhost:3000` を開きます。Supabase接続を検証する場合は各環境の許可Redirect URLへ `/auth/callback` を追加します。
 
-The first connected flow is email magic-link authentication. Add `/auth/callback` to the allowed redirect URLs for each Supabase environment before testing it.
+`bootstrap` は `.env.local` を上書きせず、診断処理も環境変数の値を表示しません。詳細は `docs/development/ENGINEERING_BOOTSTRAP.md` を参照してください。
 
-The bootstrap command never overwrites `.env.local`, and diagnostics never
-print environment values. See [Engineering bootstrap](docs/development/ENGINEERING_BOOTSTRAP.md)
-for disconnected-shell and connected-service readiness checks.
-
-## Required checks
+## 必須チェック
 
 ```powershell
 npm run check
 ```
 
-## Milestone progress
+## 開発管理
 
-Development is managed by accepted exit gates rather than an open-ended task
-list. The current milestone, progress, blockers, and evidence are maintained in
-[GAME04 milestone roadmap](docs/development/MILESTONES.md). GitHub Milestones
-and Issues mirror that repository record for day-to-day tracking.
+開発は無制限なTask Listではなく、MilestoneとExit Gateで管理します。上位Gateは `docs/development/MILESTONES.md`、詳細な実装順序は `docs/development/IMPLEMENTATION_ROADMAP.md` を正本とします。
 
-## Environments
+基本方針は **仕様確定 → 機能単位実装・Acceptance → 機能横断統合 → 最後にTutorial / First User Journey** です。
 
-| Environment | Purpose | Supabase project | Vercel behavior |
-| --- | --- | --- | --- |
-| `development` / dev-clean | local development and automated checks | dedicated development project | local only |
-| `preview` | PR human acceptance | dedicated preview project | branch/PR deployment |
-| `production` | release | dedicated production project | `main` only |
+## 環境
 
-Never share a Supabase project, OAuth callback set, or service-role secret between environments. Details are in [Environment and release design](docs/architecture/ENVIRONMENT_RELEASE.md).
+| 環境 | 用途 | Supabase | Vercel |
+|---|---|---|---|
+| `development` / dev-clean | ローカル開発・自動検証 | 開発専用Project | Local |
+| `preview` | PR Human Acceptance | Preview専用Project | Branch / PR Deployment |
+| `production` | 本番 | Production専用Project | `main` のみ |
 
-## Product boundaries
+Supabase Project、OAuth Callback、Service-role Secretを環境間で共有しません。詳細は `docs/architecture/ENVIRONMENT_RELEASE.md` を参照してください。
 
-GAME03-specific masters, Tokyo bases, GvG schedules, competition design, economics, tutorial flow, UI/art, and battle presentation are out of scope. The initial common-core boundary is documented in [Common Game Core boundary](docs/architecture/COMMON_GAME_CORE_BOUNDARY.md).
+## GAME03との境界
 
-## Repository conventions
+GAME03固有Master、東京7拠点、GvG Schedule、Competition Design、Economy、Tutorial Flow、UI / Art、Battle PresentationをGAME04の既定値として持ち込みません。Common Core境界は `docs/architecture/COMMON_GAME_CORE_BOUNDARY.md` を参照してください。
 
-- `src/app/`: routes and UI
-- `src/lib/`: framework-agnostic application helpers
-- `src/domain/`: future game domain modules; keep GAME04 product rules here
-- `supabase/migrations/`: forward-only schema, RLS, RPC, and grants
-- `docs/architecture/`: technical decisions and acceptance rules
+## Repository規約
 
-Do not put values that are not FIXED in product source or canonical data. Do not allow the client to decide ownership, currency, rewards, draws, battle results, or privileged social actions.
+- `src/app/`：Route / UI
+- `src/lib/`：Framework横断Helper
+- `src/domain/`：GAME04固有Domain
+- `supabase/migrations/`：Forward-only Schema / RLS / RPC / Grant
+- `docs/architecture/`：Architecture / Authority / Release設計
+- `docs/development/`：開発工程 / Task / Acceptance
+- `docs/product/`：Product Decision / GAME04仕様
+
+未FIX値をProduct SourceやCanonical Dataへ入れません。ClientにOwnership、Currency、Reward、Draw、Battle Result、Privileged Social Actionを決定させません。
+
+## ドキュメント言語
+
+GAME04 Repositoryの人間向けドキュメントは原則として**日本語を正本**とします。Code Identifier、Library / API名、Command、File名、固有の技術用語は必要に応じ英語表記を維持します。
