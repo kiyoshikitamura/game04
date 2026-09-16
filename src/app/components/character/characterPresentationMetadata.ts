@@ -1,0 +1,111 @@
+export type CharacterPresentationMetadata = {
+  focalX: number;
+  thumbnailFocalY: number;
+  portraitFocalY: number;
+  cardFocalY: number;
+  thumbnailScale: number;
+  thumbnailX: number;
+  thumbnailY: number;
+  cardScale: number;
+  cardX: number;
+  cardY: number;
+  compactScale: number;
+  compactX: number;
+  compactY: number;
+  revealScale: number;
+  revealX: number;
+  revealY: number;
+  battleScale: number;
+  battleX: number;
+  battleY: number;
+  battleIconScale: number;
+  battleIconX: number;
+  battleIconY: number;
+  cutInScale: number;
+  cutInX: number;
+  cutInY: number;
+  homeScale: number;
+  homeX: number;
+  homeY: number;
+};
+
+const DEFAULT_METADATA: CharacterPresentationMetadata = {
+  focalX: 50,
+  thumbnailFocalY: 0,
+  portraitFocalY: 10,
+  cardFocalY: 12,
+  thumbnailScale: 2.15,
+  thumbnailX: 50,
+  thumbnailY: 0,
+  cardScale: 1,
+  cardX: 50,
+  cardY: 12,
+  compactScale: 1.58,
+  compactX: 50,
+  compactY: 0,
+  revealScale: .96,
+  revealX: 50,
+  revealY: 100,
+  battleScale: 1.08,
+  battleX: 50,
+  battleY: 0,
+  battleIconScale: 2.9,
+  battleIconX: 50,
+  battleIconY: 7,
+  cutInScale: 1.7,
+  cutInX: 50,
+  cutInY: 6,
+  homeScale: 1.34,
+  homeX: 50,
+  homeY: 12,
+};
+
+// Visual framing only. Gameplay and character master data remain server-side.
+const CHARACTER_PRESENTATION_METADATA: Record<string, Partial<CharacterPresentationMetadata>> = {
+  reiji: { focalX: 52, battleIconScale: 2.9, battleIconX: 52, battleIconY: 5, cutInScale: 1.7, cutInX: 52, cutInY: 5 },
+  rui: { focalX: 50 },
+  chang: { focalX: 51 },
+  ageha: { focalX: 48, portraitFocalY: 4, thumbnailScale: 2, thumbnailY: 4, cardScale: .94, cardY: 4, compactScale: 1.48, compactY: 4, revealScale: .92, battleScale: 1.04, battleY: 0, battleIconScale: 2.82, battleIconX: 49, battleIconY: 8, cutInScale: 1.7, cutInX: 49, cutInY: 7 },
+  alice: { focalX: 47 },
+  kaito: { focalX: 51 },
+  go: { focalX: 50, thumbnailScale: 2.05, compactScale: 1.5, battleIconScale: 2.72, battleIconY: 3, cutInScale: 1.7, cutInY: 3 },
+  gou: { focalX: 50, thumbnailScale: 2.05, compactScale: 1.5, battleIconScale: 2.72, battleIconY: 3, cutInScale: 1.7, cutInY: 3 },
+  kaede: { focalX: 49, thumbnailScale: 2.05 },
+  karen: { focalX: 50, thumbnailScale: 2.05 },
+  kengo: { focalX: 51, thumbnailScale: 2.05, battleIconScale: 2.72, battleIconX: 51, battleIconY: 3, cutInScale: 1.7, cutInX: 51, cutInY: 3 },
+  koharu: { focalX: 49, thumbnailScale: 2.05, battleIconScale: 2.86, battleIconX: 49, battleIconY: 7, cutInScale: 1.7, cutInX: 49, cutInY: 6 },
+  leo: { focalX: 54, thumbnailScale: 2.05, battleIconScale: 2.98, battleIconX: 53, battleIconY: 7, cutInScale: 1.7, cutInX: 53, cutInY: 6 },
+  leon: { focalX: 54, thumbnailScale: 2.05 },
+  mio: { focalX: 50, thumbnailScale: 2.05 },
+  miyabi: { focalX: 50, thumbnailScale: 2.05, battleIconScale: 2.98, battleIconY: 7, cutInScale: 1.7, cutInY: 6 },
+  sora: { battleIconScale: 2.92, battleIconY: 6, cutInScale: 1.7, cutInY: 5 },
+  taiga: { battleIconScale: 3.08, battleIconY: 5, cutInScale: 1.7, cutInY: 4 },
+  noa: { battleIconScale: 2.86, battleIconY: 6, cutInScale: 1.7, cutInY: 5 },
+  sakura: { focalX: 52 },
+  yuki: { focalX: 49 },
+};
+
+function publicAssetIdentifier(src: string) {
+  const filename = src.split("?")[0].split("/").pop() || "";
+  return filename.replace(/_transparent_asset\.png$/i, "").toLowerCase();
+}
+
+export function getCharacterPresentationMetadata(src: string): CharacterPresentationMetadata {
+  const override = CHARACTER_PRESENTATION_METADATA[publicAssetIdentifier(src)] || {};
+  const focalX = override.focalX ?? DEFAULT_METADATA.focalX;
+  const thumbnailY = override.thumbnailFocalY ?? DEFAULT_METADATA.thumbnailFocalY;
+  const cardY = override.cardFocalY ?? DEFAULT_METADATA.cardFocalY;
+  return {
+    ...DEFAULT_METADATA,
+    ...override,
+    thumbnailX: override.thumbnailX ?? focalX,
+    thumbnailY: override.thumbnailY ?? thumbnailY,
+    cardX: override.cardX ?? focalX,
+    cardY: override.cardY ?? cardY,
+    compactX: override.compactX ?? focalX,
+    compactY: override.compactY ?? thumbnailY,
+    revealX: override.revealX ?? focalX,
+    battleX: override.battleX ?? focalX,
+    homeX: override.homeX ?? focalX,
+  };
+}

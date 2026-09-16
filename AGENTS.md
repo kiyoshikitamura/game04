@@ -1,22 +1,11 @@
-# GAME04 repository instructions
+# GAME04 作業方針（2026-09-16）
 
-## Canonical sources
+ユーザーの最新指示：GAME03の最新実Productionを完全複製し、キャラ60体とロゴのみ添付の戦国素材へ置換する。他の素材・ゲームシステム・数値は維持し、GAME04専用devで動かす。旧独自Common Core開発方針に優先する。
 
-- Treat `docs/architecture/COMMON_GAME_CORE_BOUNDARY.md` and `docs/architecture/COMMON_CORE_DEPENDENCY_MAP.md` as the implementation boundary.
-- TRIBE NEON is a reference implementation only. Never copy its dirty working tree or import GAME03 masters, assets, values, UI, tutorial, economy, battle presentation, PvP, raid, ranking, GvG, or Tokyo-base assumptions.
-- Product decisions listed as deferred in `docs/architecture/INITIAL_BACKLOG.md` must not be invented as defaults.
-
-## Parallel task rules
-
-- Read `docs/development/PARALLEL_PROTOCOL.md`, `docs/development/TASK_BOARD.md`, and the assigned contract under `docs/development/tasks/` before editing.
-- Work on exactly one assigned task and branch. Do not expand scope or perform unrelated cleanup.
-- Do not start when the task status is not `READY` or `IN_PROGRESS`, its dependency is unmet, or its planned files overlap another active task.
-- Database migrations, authentication authority, shared configuration, and global application state are exclusive areas. Only one active task may own each area.
-- Never edit another task's migration. New database work must use the migration version reserved in its task contract.
-- Report discovered out-of-scope issues without fixing them.
-- A worker may report `IMPLEMENTED` or `VALIDATED`; only the integration owner may mark a task `PASS`, `MERGED`, or `CLOSED`.
-
-## Validation
-
-- Run `npm run check` before handoff.
-- Include the exact changed files, validation results, protected areas left unchanged, branch, commit, and merge risk in the completion report.
+- 元GAME04 main: 01586311987e9623da321fa9fb2a94b90d6377a3。archive/pre-production-clone-20260916で保存。
+- GAME03基準: e2998ff0ecbc2d8e608f3e47f9f43ed0fd6f723c。
+- GAME03 DB/配信への書込み禁止。GAME04 devのみ。
+- 親：本体snapshot・接続設定・統合・配信。assets_replace：キャラ/ロゴと表示対応。game03_production：DB baseline/master/Edge/Cron。game04_inventory：配信経路調査。
+- 担当外ファイル変更は親と調整する。DB適用はDB担当に集約する。
+- 既存GAME04履歴を保持しmainへ直接pushしない。秘密情報をコミット・出力しない。
+- 検証は型、ビルド、素材60体参照、GAME04専用接続、実ゲーム導線を確認する。
