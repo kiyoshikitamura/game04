@@ -1,4 +1,6 @@
 "use client";
+
+import NextImage from "next/image";
 import SeasonHonors, { isSeasonHonorTitle } from "./profile/SeasonHonors";
 import { nextBeginnerAction } from "@/domain/mission/beginnerJourney";
 import { useRaidGuideAvailability } from "@/hooks/useRaidGuideAvailability";
@@ -685,7 +687,7 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
               className="sub-icon-unit active-scale-effect"
               onClick={() => { item.onClick(); playCyberSe("click"); }}
             >
-              <img src={item.icon} alt={item.label} className="sub-png-icon" />
+              <NextImage width={64} height={64} sizes="32px" src={item.icon} alt={item.label} className="sub-png-icon" />
               <span className="sub-icon-label">{item.label}</span>
               {item.badge && item.badge > 0 ? (
                 <span className="small-badge-alert">{item.badge}</span>
@@ -742,7 +744,7 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
                 data-recommended={highlighted ? "true" : undefined}
                 onClick={() => navigateTab(action.destination)}
               >
-                <img src={action.assetPath} alt="" className="circle-menu-img" aria-hidden="true" />
+                <NextImage width={64} height={64} sizes="32px" src={action.assetPath} alt="" className="circle-menu-img" aria-hidden="true" />
                 <span className="circle-menu-label"><strong>{action.label}</strong></span>
                 <span className="circle-menu-status">{status || ""}</span>
               </button>
@@ -751,7 +753,7 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
         </nav>
 
         {primaryCta && <button className="mypage-primary-cta semantic-cta semantic-cta--primary active-scale-effect" onClick={() => void openPrimaryCta()} disabled={activationHandoffPending || primaryCta.disabled} aria-busy={activationHandoffPending}>
-          <img className="sengoku-mission-icon" src="/ui/sengoku/17-scroll-bottom.png" alt="" /><strong>{activationHandoffPending ? "確認中…" : `任務：${primaryCta.title}`}</strong>
+          <NextImage width={52} height={52} sizes="26px" className="sengoku-mission-icon" src="/ui/sengoku/17-scroll-bottom.png" alt="" /><strong>{activationHandoffPending ? "確認中…" : `任務：${primaryCta.title}`}</strong>
           <b aria-hidden="true">›</b>
         </button>}
 
@@ -764,7 +766,7 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
               className="banner-arrow left"
               onClick={() => setBannerIndex((prev) => (prev - 1 + visibleBanners.length) % visibleBanners.length)}
             >
-              <img src="/ui/sengoku/18-arrow-left.png" alt="前のバナー" />
+              <NextImage width={96} height={96} sizes="48px" src="/ui/sengoku/18-arrow-left.png" alt="前のバナー" />
             </button>
             <button
               className={`banner-card${visibleBanners[activeBannerIndex].id === "vip_pass" ? " vip" : ""}`}
@@ -793,7 +795,7 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
               className="banner-arrow right"
               onClick={() => setBannerIndex((prev) => (prev + 1) % visibleBanners.length)}
             >
-              <img src="/ui/sengoku/19-arrow-right.png" alt="次のバナー" />
+              <NextImage width={96} height={96} sizes="48px" src="/ui/sengoku/19-arrow-right.png" alt="次のバナー" />
             </button>
           </div>
           <div className="banner-dots">

@@ -1,5 +1,7 @@
 "use client";
 
+import NextImage from "next/image";
+
 import React, { useEffect } from "react";
 import { loadBillingReadiness } from "@/utils/billing_config_client";
 import { useGame } from "../context/GameContext";
@@ -74,7 +76,7 @@ export default function Footer() {
               playCyberSe("click");
             }}
           >
-            <img src={item.icon} alt={item.label} className="footer-icon" />
+            <NextImage width={64} height={64} sizes="32px" src={item.icon} alt={item.label} className="footer-icon" />
             <span className="footer-label">{item.label}</span>
             {item.id === "bbs" && communityUnreadCount > 0 && (
               <span className="footer-unread-badge" aria-label={`交流未読${communityUnreadCount}件`}>
