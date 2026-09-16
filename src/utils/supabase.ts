@@ -5,7 +5,10 @@ import { shouldAutoDetectAuthReturn } from "./oauthReturnSession";
 
 const appEnvironment = process.env.NEXT_PUBLIC_APP_ENV?.trim().toLowerCase() || "development";
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim() || "";
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim() || "";
+// Preserve the existing GAME04 deployment's public-key setting during cloning.
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim()
+  || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY?.trim()
+  || "";
 const forceMock = process.env.NEXT_PUBLIC_USE_MOCK_DB === "true";
 const isProduction = appEnvironment === "production";
 
@@ -15,7 +18,7 @@ if (isProduction && forceMock) {
 
 if (!forceMock && (!supabaseUrl || !supabaseAnonKey)) {
   throw new Error(
-    `Supabase configuration is missing for ${appEnvironment}. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY, or explicitly enable NEXT_PUBLIC_USE_MOCK_DB outside Production.`,
+    `Supabase configuration is missing for ${appEnvironment}. Set NEXT_PUBLIC_SUPABASE_URL and either NEXT_PUBLIC_SUPABASE_ANON_KEY or NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY, or explicitly enable NEXT_PUBLIC_USE_MOCK_DB outside Production.`,
   );
 }
 
