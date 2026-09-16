@@ -70,9 +70,10 @@ export default function Header() {
           />
         </div>
         <div className="header-mobile-progression" aria-label="プレイヤー進行状況">
-          <span className="header-mobile-level-badge">Lv.{userLevel || 1} · EXP {userXp || 0}{levelRow?.requiredExp ? `/${levelRow.requiredExp}` : ""}</span>
+          <span className="header-mobile-level-badge"><img src="/ui/sengoku/15-crown.png" alt="" className="header-level-icon" />Lv.{userLevel || 1} · EXP {userXp || 0}{levelRow?.requiredExp ? `/${levelRow.requiredExp}` : ""}</span>
           <span className="header-mobile-power"><small>総合力</small><strong>{totalPowerLoading ? "—" : Number(totalPower || 0).toLocaleString()}</strong></span>
         </div>
+        <img className="header-game-logo" src="/branding/tribe-neon-logo.png" alt="戦国姫艶舞" />
         <button
           type="button"
           className="header-mobile-menu-button active-scale-effect"
@@ -89,7 +90,7 @@ export default function Header() {
       <div className="header-mobile-row2">
         {/* 所持キャッシュ */}
         <div className="header-mobile-stat">
-          <img src="/ui/icon_cash.png" alt="Cash" className="header-stat-icon" />
+          <img src="/ui/sengoku/13-coin.png" alt="Cash" className="header-stat-icon" />
           <span className="header-mobile-stat-val header-mobile-stat-cash">
             {(cash || 0).toLocaleString()}
           </span>
@@ -97,7 +98,7 @@ export default function Header() {
 
         {/* 所持ダイヤ */}
         <div className="header-mobile-stat">
-          <img src="/ui/icon_dia.png" alt="Dia" className="header-stat-icon" />
+          <img src="/ui/sengoku/16-diamond.png" alt="Dia" className="header-stat-icon" />
           <span className="header-mobile-stat-val header-mobile-stat-diamond">
             {(diamonds || 0).toLocaleString()}
           </span>
@@ -105,7 +106,7 @@ export default function Header() {
 
         {/* Canonical Quest resource: Vitality */}
         <div className="header-mobile-stat">
-          <span className="header-mobile-stat-label" aria-label="Vitality">⚡</span>
+          <img className="header-stat-icon" src="/ui/sengoku/14-energy.png" alt="活力" />
           <span className={`header-mobile-stat-val header-mobile-stat-energy ${vitality > VITALITY_MAX ? 'header-mobile-stat-overflow' : ''}`}>
             {vitality || 0}/{VITALITY_MAX}
           </span>
@@ -127,8 +128,8 @@ export default function Header() {
           <nav aria-label="ユーティリティ">
             <button type="button" onClick={() => runMenuAction(() => setShowSettingsPanel(true))}><img src="/ui/icon_settings.png" alt="" /><span>設定</span></button>
             <button type="button" className="header-news-button" onClick={() => runMenuAction(() => { setShowInboxPanel(true); setInboxPanelTab("news"); })}><img src="/ui/icon_news.png" alt="" /><span>お知らせ</span>{unreadNewsCount > 0 && <b className="header-mobile-menu-badge" aria-label={`未読お知らせ${unreadNewsCount}件`}>{unreadNewsCount}</b>}</button>
-            <button type="button" aria-label="プレゼント" onClick={() => runMenuAction(() => { setShowInboxPanel(true); setInboxPanelTab("presents"); })}><img src="/ui/icon_present.png" alt="" /><span>プレゼント</span>{unclaimedPresentsCount > 0 && <b aria-hidden="true">{unclaimedPresentsCount}</b>}</button>
-            <button type="button" onClick={() => runMenuAction(() => setShowLoginBonusModal(true))}><img src="/ui/icon_present.png" alt="" /><span>ログインボーナス</span></button>
+            <button type="button" aria-label="プレゼント" onClick={() => runMenuAction(() => { setShowInboxPanel(true); setInboxPanelTab("presents"); })}><img src="/ui/sengoku/01-gift.png" alt="" /><span>プレゼント</span>{unclaimedPresentsCount > 0 && <b aria-hidden="true">{unclaimedPresentsCount}</b>}</button>
+            <button type="button" onClick={() => runMenuAction(() => setShowLoginBonusModal(true))}><img src="/ui/sengoku/01-gift.png" alt="" /><span>ログインボーナス</span></button>
             <button type="button" onClick={() => runMenuAction(() => navigateTab("bag"))}><img src="/ui/icon_bag.png" alt="" /><span>バッグ</span></button>
           </nav>
         </section>
