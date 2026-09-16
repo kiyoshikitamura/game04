@@ -1,5 +1,7 @@
 "use client";
 
+import NextImage from "next/image";
+
 import React, { useEffect } from "react";
 import { loadBillingReadiness } from "@/utils/billing_config_client";
 import { useGame } from "../context/GameContext";
@@ -41,11 +43,11 @@ export default function Footer() {
   }, [shopOpen]);
 
   const navItems = [
-    { id: "home", label: "マイページ", icon: "/ui/icon_footer_mypage.png" },
-    { id: "bbs", label: "コミュニティ", icon: "/ui/icon_community.png" },
-    { id: "character", label: "キャラ", icon: "/ui/icon_footer_character.png" },
-    { id: "gacha", label: "ガチャ", icon: "/ui/icon_footer_gacha.png" },
-    { id: "shop", label: "ショップ", icon: "/ui/icon_footer_shop.png", upcoming: !shopOpen },
+    { id: "home", label: "本拠", icon: "/ui/sengoku/08-castle.png" },
+    { id: "bbs", label: "交流", icon: "/ui/sengoku/09-chat.png" },
+    { id: "character", label: "武将", icon: "/ui/sengoku/10-helmet.png" },
+    { id: "gacha", label: "登用", icon: "/ui/sengoku/11-ticket.png" },
+    { id: "shop", label: "商店", icon: "/ui/sengoku/12-shop.png", upcoming: !shopOpen },
   ];
 
   return (
@@ -57,7 +59,7 @@ export default function Footer() {
             key={item.id}
             className={`footer-item active-scale-effect ${item.id === "shop" ? "footer-item--shop" : ""} ${isActive ? "active" : ""} ${item.upcoming ? "upcoming" : ""}`}
             disabled={item.upcoming}
-            aria-label={item.upcoming ? "ショップは準備中です" : item.label}
+            aria-label={item.upcoming ? "商店は準備中です" : item.label}
             onPointerEnter={item.id === "shop" ? warmShop : undefined}
             onFocus={item.id === "shop" ? warmShop : undefined}
             onPointerDown={item.id === "shop" ? warmShop : undefined}
@@ -74,15 +76,15 @@ export default function Footer() {
               playCyberSe("click");
             }}
           >
-            <img src={item.icon} alt={item.label} className="footer-icon" />
+            <NextImage width={64} height={64} sizes="32px" src={item.icon} alt={item.label} className="footer-icon" />
             <span className="footer-label">{item.label}</span>
             {item.id === "bbs" && communityUnreadCount > 0 && (
-              <span className="footer-unread-badge" aria-label={`コミュニティ未読${communityUnreadCount}件`}>
+              <span className="footer-unread-badge" aria-label={`交流未読${communityUnreadCount}件`}>
                 {communityUnreadCount > 99 ? "99+" : communityUnreadCount}
               </span>
             )}
-            {item.id === "gacha" && hasFreeGacha && <span className="footer-notification-badge" aria-label="無料ガチャあり">FREE</span>}
-            {item.id === "shop" && hasDailyShopNotice && <span className="footer-unread-badge" aria-label="本日のショップ未確認">!</span>}
+            {item.id === "gacha" && hasFreeGacha && <span className="footer-notification-badge" aria-label="無料登用あり">FREE</span>}
+            {item.id === "shop" && hasDailyShopNotice && <span className="footer-unread-badge" aria-label="本日の商店未確認">!</span>}
             {item.upcoming && <span className="footer-upcoming-badge" aria-hidden="true">準備中</span>}
           </button>
         );

@@ -9,11 +9,11 @@ export type HomeActionPresentationSlot = Readonly<{
   exposure: "ACTIVE" | "UPCOMING";
 }>;
 
-// Existing meaningful artwork is a temporary fallback pending the new icon set.
+// GAME04 approved Sengoku artwork; gameplay destinations remain unchanged.
 // Labels and status remain frontend text, independent of the final artwork.
 export const HOME_ACTION_PRESENTATION_SLOTS: readonly HomeActionPresentationSlot[] = [
-  { id: "conquest", label: "クエスト", destination: "patrol", assetPath: "/menu/home_nav_quest.png", deliveryStatus: "EXISTING_FALLBACK", exposure: "ACTIVE" },
-  { id: "fight", label: "バトル", destination: "pvp", assetPath: "/menu/home_nav_pvp.png", deliveryStatus: "EXISTING_FALLBACK", exposure: "ACTIVE" },
-  { id: "raid", label: "レイド", destination: "raid", assetPath: "/menu/home_nav_raid.png", deliveryStatus: "EXISTING_FALLBACK", exposure: "ACTIVE" },
-  { id: "guild", label: "ギルド", destination: "guild", assetPath: "/menu/home_nav_guild.png", deliveryStatus: "EXISTING_FALLBACK", exposure: "ACTIVE" },
+  { id: "conquest", label: "物語", destination: "patrol", assetPath: "/ui/sengoku/04-fan-sakura.png", deliveryStatus: "PRODUCTION_DELIVERED", exposure: "ACTIVE" },
+  { id: "fight", label: "合戦", destination: "pvp", assetPath: "/ui/sengoku/05-crossed-swords.png", deliveryStatus: "PRODUCTION_DELIVERED", exposure: "ACTIVE" },
+  { id: "raid", label: "討伐", destination: "raid", assetPath: "/ui/sengoku/06-oni-mask.png", deliveryStatus: "PRODUCTION_DELIVERED", exposure: "ACTIVE" },
+  { id: "guild", label: "同盟", destination: "guild", assetPath: "/ui/sengoku/07-flower-crest.png", deliveryStatus: "PRODUCTION_DELIVERED", exposure: "ACTIVE" },
 ] as const;

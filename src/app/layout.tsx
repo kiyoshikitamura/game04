@@ -7,6 +7,7 @@ import {
   SOCIAL_IMAGE_PATH,
 } from "./crawlerMetadata";
 import "./globals.css";
+import "./sengoku-theme.css";
 
 const production = isVercelProduction();
 
