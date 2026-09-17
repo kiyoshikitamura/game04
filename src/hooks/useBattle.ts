@@ -347,7 +347,8 @@ async function runBattleStart(context: BattleStartContext,
     const staleRoomUser = () => Boolean(roomBriefing && roomUserRef.current !== startingRoomUserId);
     if (staleRoomUser()) return;
     const savedRoomReceipt = roomBriefing ? roomAttemptRef.current?.savedReceipt() : null;
-    if (mode === "PATROL" && patrolIdOverride && patrolIdOverride === settledPatrolEncounterId) return;
+    if (mode === "PATROL" && patrolIdOverride && patrolIdOverride === settledPatrolEncounterId
+      && patrol?.battle_result !== "DEFEAT") return;
     setTutorialBattleActive(mode === "PATROL" && tutorialStep === "TUTORIAL_BATTLE");
     if (mode === "PATROL") activePatrolEncounterIdRef.current = patrolIdOverride || patrol?.id || null;
     const tutorialBattleRequestId = mode === "PATROL"
@@ -466,6 +467,20 @@ async function runBattleStart(context: BattleStartContext,
           skills: (((enemyData.skills || (typeof npcMaster.skills === "string" ? JSON.parse(npcMaster.skills) : npcMaster.skills) || []) as any[])
             .map(canonicalParticipantSkill).filter(Boolean) as any[]).concat([{ ...BASIC_ATTACK_SKILL, id: "quest_canonical_basic_attack" }])
         };
+        const isShinjukuIntermediate = (patrol?.courseId || patrol?.course_id) === "q_shinjuku_2"
+          || patrolNpcOverride?.quest_id === "q_shinjuku_2"
+          || patrolNpcOverride?.questId === "q_shinjuku_2"
+          || areaIdOrOpponentUserId === "encounter_q_shinjuku_2";
+        if (isShinjukuIntermediate) {
+          const sourcePower = bossMaster.max_hp + bossMaster.atk + bossMaster.def;
+          const targetPower = 60000;
+          const scaledHp = Math.max(10, Math.round(bossMaster.max_hp * targetPower / sourcePower / 10) * 10);
+          const scaledAtk = Math.max(10, Math.round(bossMaster.atk * targetPower / sourcePower / 10) * 10);
+          const scaledDef = Math.max(10, Math.round(bossMaster.def * targetPower / sourcePower / 10) * 10);
+          bossMaster.max_hp = scaledHp;
+          bossMaster.atk = scaledAtk;
+          bossMaster.def = Math.max(10, scaledDef + (targetPower - scaledHp - scaledAtk - scaledDef));
+        }
       }
     }
 

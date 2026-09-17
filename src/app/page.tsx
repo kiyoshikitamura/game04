@@ -41,6 +41,7 @@ import PageShell from "./components/ui/PageShell";
 import TitleView from "./components/TitleView";
 import TitleLegalFooter from "./components/TitleLegalFooter";
 import MoveBaseModal from "./components/MoveBaseModal";
+import QuestProgressionGuide from "./components/quest/QuestProgressionGuide";
 import TutorialWorldIntro from "./components/TutorialWorldIntro";
 import TutorialRuleGuide from "./components/TutorialRuleGuide";
 import AccountAuthenticationModal from "./components/TutorialAuthentication";
@@ -78,6 +79,9 @@ function AppContent() {
     setInboxPanelTab,
     navigateTab,
   } = useGame();
+  const { questGuide, questGuideReady } = useGame() as any;
+  const questGuideLoading = Boolean(onboardingState?.gameplay_authorized && questGuideReady === false);
+  const deferHomePrompts = questGuideLoading || questGuide?.step === 'QUEST_ENTRY';
   const billingOwnerRef = React.useRef(session?.user.id);
   React.useLayoutEffect(() => { billingOwnerRef.current = session?.user.id; }, [session?.user.id]);
   const refreshGrantedPurchase = React.useCallback((owner: string) => {
@@ -120,7 +124,7 @@ function AppContent() {
   const isMandatoryTutorial = Boolean(tutorialStep && !onboardingState?.gameplay_authorized);
   // Reserve Home input before asynchronous entry checks can present a dialog.
   // Existing dialogs keep their own controls; never put a blocker above them.
-  const homeEntryPending = activeTab === "home" && !showTitleView
+  const homeEntryPending = !deferHomePrompts && activeTab === "home" && !showTitleView
     && Boolean(onboardingState?.gameplay_authorized) && !battleState
     && (!loginBonusCheckComplete || !prepMissionDialogCheckComplete || !rankingRewardNotificationCheckComplete)
     && !showLoginBonusModal && !showPrepMissionDialog
@@ -307,10 +311,11 @@ function AppContent() {
         footer={isMandatoryTutorial || Boolean(battleState) ? null : <Footer />}
         overlays={(
           <>
+            <QuestProgressionGuide />
             {/* Layer 3: コンパクトモーダル */}
             <CommonModals />
             <MoveBaseModal />
-            {showLoginBonusModal && <LoginBonusModal
+            {showLoginBonusModal && !deferHomePrompts && activeTab === "home" && <LoginBonusModal
               masters={loginBonusMasters}
               currentStep={userLoginBonus?.current_step || loginBonusClaimResult?.current_step || 1}
               claimResult={loginBonusClaimResult}
@@ -331,19 +336,20 @@ function AppContent() {
             <CardBattleView />
             <TutorialWorldIntro />
             <TutorialRuleGuide />
-            <AuthenticationReminderModal />
-            <AccountAuthenticationModal />
+            {!deferHomePrompts && <AuthenticationReminderModal />}
+            {!deferHomePrompts && <AccountAuthenticationModal />}
 
             {/* Layer 6: 最上位の共通ダイアログとブロッカー */}
-            <PrepMissionEventDialogController />
-            <RankingRewardNotificationController />
+            {!deferHomePrompts && <PrepMissionEventDialogController />}
+            {!deferHomePrompts && <RankingRewardNotificationController />}
             {billingOrderId !== null && onboardingState?.gameplay_authorized && <BillingStatusDialog
               key={`${session.user.id}:${billingOrderId}`}
               orderId={billingOrderId}
               onGranted={refreshGrantedPurchase}
               onClose={closeBillingStatus}
             />}
-            <ConfirmDialog key={confirmDialogConfig?.dialogId} {...confirmDialogConfig} />
+            {!deferHomePrompts && <ConfirmDialog key={confirmDialogConfig?.dialogId} {...confirmDialogConfig} />}
+            {questGuideLoading && <CanonicalDialog loading><div className="spinner" /></CanonicalDialog>}
             {homeEntryPending && <CanonicalDialog title="ログイン情報を確認中" loading>
               <BrandedLoading label="ログイン情報を確認中" />
             </CanonicalDialog>}
@@ -352,7 +358,7 @@ function AppContent() {
         )}
       >
         <QuestRaidEncounter />
-        <BeginnerMissionRewardCta />
+        {!deferHomePrompts && <BeginnerMissionRewardCta />}
         {activeTab === "home" && <HomeTab />}
         {(activeTab === "patrol" || activeTab === "quest") && <PatrolTab />}
         {activeTab === "pvp" && <PvpTab />}

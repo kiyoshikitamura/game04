@@ -110,6 +110,7 @@ type HomeBanner = {
 };
 
 function activityDescription(activity: HomeActivity) {
+  if (activity.activity_type === "SYSTEM_NEWS") return String((activity.display_payload as { title?: string } | undefined)?.title || "運営からのお知らせ");
   return describeHomeActivity(activity.activity_type);
 }
 
@@ -131,6 +132,7 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
     unreadMissionsCount,
     guildChats,
     chatUnreadCounts,
+    setShowInboxPanel, setInboxPanelTab,
     setShowMissionPanel,
     setMissionTab,
     setShowLoginBonusModal,
@@ -156,7 +158,8 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
     featureOperatingStates,
     fetchPlayerDetail,
     setErrorMessage,
-    setGuideGachaCategory
+    setGuideGachaCategory,
+    patrolCourses,
   } = useGame();
 
   const equippedTitleName = ownedTitles.find((title: { id: string }) => title.id === titleEquipped)?.name || titleEquipped;
@@ -396,11 +399,17 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
     raidRoomActivityTracker, isRaidActive);
   const raidAvailability = qaState?.raidAvailability ?? observedRaidAvailability;
 
-  const primaryCta = useMemo(() => qaState ? resolveHomeInitialCta({
+  const legacyPrimaryCta = useMemo(() => qaState ? resolveHomeInitialCta({
     ready: qaState.ctaAuthorityReady !== false, tutorialStep: onboardingState?.tutorial_step,
     gameplayAuthorized: onboardingState?.gameplay_authorized, milestones: funnelMilestones, raidAvailability,
+    shinjukuIntermediateFirstClear: patrolCourses?.some((course: any) => course.id === "q_shinjuku_2" && course.is_first_cleared),
   }) : nextBeginnerAction(beginnerJourney, raidAvailability),
-  [beginnerJourney, raidAvailability, qaState, onboardingState, funnelMilestones]);
+  [beginnerJourney, raidAvailability, qaState, onboardingState, funnelMilestones, patrolCourses]);
+
+  const questGuide = (useGame() as any).questGuide;
+  const primaryCta = questGuide?.step !== "DONE"
+    ? { key: 'quest_progression', title: 'クエストを進めよう', tab: 'patrol', action: undefined, disabled: false }
+    : legacyPrimaryCta;
 
   useEffect(() => {
     if (!session?.user?.id || !primaryCta || lastCtaImpression.current === primaryCta.key) return;
@@ -547,7 +556,9 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
   const latestRescueId = latestActivity ? getRaidRescueActivityId(latestActivity) : null;
 
   const handleLatestActivityTap = () => {
-    if (latestRescueId) {
+    if (latestActivity?.activity_type === "SYSTEM_NEWS") {
+      setInboxPanelTab("news"); setShowInboxPanel(true);
+    } else if (latestRescueId) {
       openRaidRescue(latestRescueId);
     } else {
       setShowActivityLog(true);
@@ -636,6 +647,7 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
             />
             <div className="mypage-activity-log-detail">
               <strong>{activityDescription(activity)}</strong>
+              {activity.activity_type === "SYSTEM_NEWS" && <button type="button" onClick={() => { setShowActivityLog(false); setInboxPanelTab("news"); setShowInboxPanel(true); }}>お知らせを見る</button>}
               <RaidRescueLink rescueId={getRaidRescueActivityId(activity)} entry={rescueCards.byId.get(getRaidRescueActivityId(activity) ?? "")} status={rescueCards.statusFor(getRaidRescueActivityId(activity))} source="activity" onOpen={() => setShowActivityLog(false)} />
               {activity.created_at && <time dateTime={activity.created_at}>{activityTimeLabel(activity.created_at)}</time>}
             </div>
@@ -754,6 +766,7 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
 
         {primaryCta && <button className="mypage-primary-cta semantic-cta semantic-cta--primary active-scale-effect" onClick={() => void openPrimaryCta()} disabled={activationHandoffPending || primaryCta.disabled} aria-busy={activationHandoffPending}>
           <NextImage width={52} height={52} sizes="26px" className="sengoku-mission-icon" src="/ui/sengoku/17-scroll-bottom.png" alt="" /><strong>{activationHandoffPending ? "確認中…" : `任務：${primaryCta.title}`}</strong>
+          {"message" in primaryCta && primaryCta.message && <small>{primaryCta.message}</small>}
           <b aria-hidden="true">›</b>
         </button>}
 
