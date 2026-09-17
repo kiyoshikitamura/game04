@@ -22,6 +22,14 @@ GAME03実Production `bc2f256eddfaa0b53ba136dd7e84f1da21286ed2`（`dpl_FbJikjPe1j
 - TypeScript型チェック: PASS
 - Preview設定でのProductionビルド: PASS
 - 専用QAユーザーの匿名新規登録・初期化、新進行自動有効化: PASS
-- クエスト1周・配信後表示: 実施中
+- 専用QA編成で探索→探索報酬→Edgeサーバー戦闘→初回報酬→次段階解放: PASS（敵5体、初回クリア台帳・報酬receipt各1件）
+- QAユーザー・検証データ削除済み、元の5ユーザーを保持
+- Vercel配信: Ready（`dpl_4ukVVyKsW9EijoGATkEfHNKefP47` / アプリcommit `446827a`）
+- 公開URLで起動・ホーム表示・表示画像24要素読み込み: PASS、アプリ由来console errorなし
+- ホーム確認は `/qa/presentation?scenario=first-home-fresh` の表示fixture。実DBの進行確認は別途上記QAで実施
+
+確認URL: https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/
+
+既存背景選択（自動=城下町、標準=城門）と配置機能は維持。新たな素材制作や地域名・会話本文の改稿は今回の同期対象外。
 
 ユーザー指示により網羅テストは省略。クエストQAは専用fixtureを使用し、既存ユーザーの編成・所持品は変更しない。
