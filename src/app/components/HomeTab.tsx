@@ -676,7 +676,7 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
           onClick={() => { setShowMoveBaseModal(true); playCyberSe("click"); }}
           aria-label={`${baseName}から拠点移動を開く`}
         >
-          <span>{baseName}</span><small>{currentBase.file.toUpperCase()}</small><b aria-hidden="true">›</b>
+          <span>{baseName}</span><small>拠点移動</small><b aria-hidden="true">›</b>
         </button>
 
         {session?.user?.is_anonymous === true
