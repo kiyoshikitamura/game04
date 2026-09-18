@@ -155,6 +155,11 @@ export default function SettingsPanel() {
             <Link href="/legal/terms?from=settings" onClick={rememberLegalReturn}>利用規約</Link>
             <Link href="/legal/privacy?from=settings" onClick={rememberLegalReturn}>プライバシーポリシー</Link>
             <Link href="/legal/tokusho?from=settings" onClick={rememberLegalReturn}>特定商取引法に基づく表記</Link>
+            <Link href="/legal/payments?from=settings" onClick={rememberLegalReturn}>資金決済法に関する表示</Link>
+            <Link href="/legal/cookies?from=settings" onClick={rememberLegalReturn}>Cookie・アクセス解析</Link>
+            <Link href="/legal/age-rating?from=settings" onClick={rememberLegalReturn}>年齢・購入について</Link>
+            <Link href="/legal/rights?from=settings" onClick={rememberLegalReturn}>権利表記</Link>
+            <Link href="/legal/contact?from=settings" onClick={rememberLegalReturn}>お問い合わせ・不具合報告</Link>
           </nav>
         </section>
         <div className="settings-panel-footer">

@@ -149,10 +149,10 @@ export default function ShopTab() {
   };
 
   return <div className="view-container shop-tab-container">
-    <SectionHeader title="ショップ" />
+    <SectionHeader title="商店" />
     {sandbox && availability === "available" && <p className="shop-billing-notice">テスト決済環境</p>}
     <div className="shop-account-actions"><BillingHistory /><PaidAssetExpiry /></div>
-    <SubTabNav className="shop-sub-tabs" tabs={[{id:"LIMITED",label:"スペシャルショップ"},{id:"NORMAL",label:"ダイヤショップ"}]}
+    <SubTabNav className="shop-sub-tabs" tabs={[{id:"LIMITED",label:"特選商店"},{id:"NORMAL",label:"ダイヤ商店"}]}
       activeTabId={shopSubTab} onSelect={setShopSubTab} />
     <p className="shop-tax-note">価格は全て税込み表示です</p>
     {availability === "loading" && <div className="shop-status"><span className="shop-btn-spinner" aria-label="購入情報を確認中" /></div>}
@@ -173,7 +173,7 @@ export default function ShopTab() {
           <div className="shop-section-title">ダイヤ</div>
           {diamonds.map(productCard)}
         </section>
-      </> : <section className="shop-section" aria-label="ダイヤショップ">{normal.map(productCard)}</section>}
+      </> : <section className="shop-section" aria-label="ダイヤ商店">{normal.map(productCard)}</section>}
     </div>
   </div>;
 }

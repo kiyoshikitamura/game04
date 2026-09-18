@@ -9,6 +9,7 @@ import GuideDialog from "./ui/GuideDialog";
 import { useImmediateActionLock } from "@/hooks/useImmediateActionLock";
 import { resolveAvailableGachaCreative, type CanonicalGachaId } from "@/domain/presentation/production_creatives";
 import "./GachaTab.css";
+import { normalGachaRates } from "@/domain/gacha/normalGachaRates";
 import SpecialGachaOffer from "./SpecialGachaOffer";
 import { supabase } from "@/utils/supabase";
 import { parseDailyFreeRates, type DailyFreeRate } from "@/domain/gameplay/dailyFreeRates";
@@ -17,13 +18,13 @@ type GachaCategory = "CHARACTER" | "SKILL" | "EQUIPMENT";
 type GachaSurface = "NORMAL" | "SPECIAL";
 
 const CATEGORY_META: Readonly<Record<GachaCategory, { label: string; prefix: "CHAR" | "SKILL" | "EQUIP"; ticketId: string }>> = {
-  CHARACTER: { label: "キャラクター", prefix: "CHAR", ticketId: "NORMAL_GACHA_TICKET_CHARACTER" },
-  SKILL: { label: "スキル", prefix: "SKILL", ticketId: "NORMAL_GACHA_TICKET_SKILL" },
-  EQUIPMENT: { label: "装備", prefix: "EQUIP", ticketId: "NORMAL_GACHA_TICKET_EQUIPMENT" },
+  CHARACTER: { label: "姫武将", prefix: "CHAR", ticketId: "NORMAL_GACHA_TICKET_CHARACTER" },
+  SKILL: { label: "戦技", prefix: "SKILL", ticketId: "NORMAL_GACHA_TICKET_SKILL" },
+  EQUIPMENT: { label: "武具", prefix: "EQUIP", ticketId: "NORMAL_GACHA_TICKET_EQUIPMENT" },
 };
 
 export default function GachaTab() {
-  const { handleScout, handleExchangePityReward, gachaMasters, gachaRarityRates, dailyFreeGachaFlags, dailyFreeGachaReady, refreshDailyFreeGachaAuthority, userItems, cash, diamonds, upgradeLoading, onboardingState, playSe, guideGachaCategory, questGuide, scoutAnimationState } = useGame();
+  const { handleScout, handleExchangePityReward, gachaMasters, gachaRarityRates, gachaItemsMaster, dailyFreeGachaFlags, dailyFreeGachaReady, refreshDailyFreeGachaAuthority, userItems, cash, diamonds, upgradeLoading, onboardingState, playSe, guideGachaCategory, questGuide, scoutAnimationState } = useGame();
   const isTutorialScout = onboardingState?.tutorial_step === "FREE_GACHA";
   const [activeCategory, setActiveCategory] = useState<GachaCategory>("CHARACTER");
   const [activeSurface, setActiveSurface] = useState<GachaSurface>("NORMAL");
@@ -63,6 +64,10 @@ export default function GachaTab() {
     const amount = Number(value);
     return Number.isFinite(amount) ? (amount * pulls).toLocaleString("ja-JP") : "--";
   };
+
+  const paidItemRates = normalGachaRates(gachaItemsMaster || [], normalGachaId, currentRates);
+  const freeItemRates = normalGachaRates(gachaItemsMaster || [], normalGachaId, currentFreeRates);
+  const freeProbabilityById = new Map(freeItemRates.map(item => [item.item_id, item.probability]));
 
   const runScout = async (count: number, currency: "CASH" | "FREE" | "TICKET" | "DIAMOND") => {
     if (currency === "FREE" && !isTutorialScout && freeRatesStatus !== "ready") return;
@@ -126,7 +131,7 @@ export default function GachaTab() {
           {creative ? <Image src={creative.assetPath} alt="" width={creative.width} height={creative.height} unoptimized priority sizes="(max-width: 430px) 100vw, 430px" /> : <div className="gacha-banner-fallback">{meta.label}ガチャ</div>}
         </section>
 
-        <nav className="gacha-category-tabs" aria-label="ガチャカテゴリ">
+        <nav className="gacha-category-tabs" aria-label="登用カテゴリ">
           {(Object.keys(CATEGORY_META) as GachaCategory[]).map((category) => (
             <button key={category} className={`gacha-tab-btn ${activeCategory === category ? "is-active" : ""}`} onClick={() => setActiveCategory(category)} aria-pressed={activeCategory === category} data-gacha-category={category}>
               {CATEGORY_META[category].label}
@@ -135,9 +140,9 @@ export default function GachaTab() {
           ))}
         </nav>
 
-        <div className="gacha-surface-switch" role="group" aria-label="ガチャ種別">
-          <button className={activeSurface === "NORMAL" ? "is-active" : ""} onClick={() => setActiveSurface("NORMAL")} aria-pressed={activeSurface === "NORMAL"}>ノーマル</button>
-          <button className={activeSurface === "SPECIAL" ? "is-active" : ""} onClick={() => setActiveSurface("SPECIAL")} aria-pressed={activeSurface === "SPECIAL"}>スペシャル</button>
+        <div className="gacha-surface-switch" role="group" aria-label="登用種別">
+          <button className={activeSurface === "NORMAL" ? "is-active" : ""} onClick={() => setActiveSurface("NORMAL")} aria-pressed={activeSurface === "NORMAL"}>通常登用</button>
+          <button className={activeSurface === "SPECIAL" ? "is-active" : ""} onClick={() => setActiveSurface("SPECIAL")} aria-pressed={activeSurface === "SPECIAL"}>特選登用</button>
         </div>
 
         {activeSurface === "SPECIAL" ? (
@@ -147,9 +152,9 @@ export default function GachaTab() {
               try { await handleScout(id, count, currency); } finally { endAction(); }
             }} onExchange={handleExchangePityReward} />
         ) : (
-          <section className="gacha-normal-offer" aria-label={`${meta.label}ノーマルガチャ`}>
+          <section className="gacha-normal-offer" aria-label={`${meta.label}通常登用`}>
             <header>
-              <div><strong>{meta.label}ノーマルガチャ</strong><span>毎日1回、10連無料</span></div>
+              <div><strong>{meta.label}通常登用</strong><span>毎日1回、10連無料</span></div>
               <button type="button" className="gacha-rate-link" onClick={() => setShowRates(true)}>提供割合</button>
             </header>
 
@@ -189,6 +194,15 @@ export default function GachaTab() {
               <div key={rate.rarity}><span>{rate.rarity}</span><strong>{rateWeightTotal > 0 ? `${(Number(rate.weight) / rateWeightTotal * 100).toFixed(2)}%` : "—"}</strong></div>
             ))}
           </div>
+          <h3>登用対象ごとの提供割合</h3>
+          <p>表示は現在の排出対象と提供割合に基づきます。小数点以下は四捨五入しています。</p>
+          {paidItemRates.length ? <div className="gacha-individual-rates" role="region" aria-label="登用対象ごとの提供割合" tabIndex={0}>
+            <div className="gacha-individual-rates-heading"><span>対象</span><span>通常</span><span>無料10連</span></div>
+            {paidItemRates.map(item => <div key={`${item.item_type}:${item.item_id}`}>
+              <span>{item.rarity} {item.name}</span><strong>{item.probability.toFixed(4)}%</strong>
+              <strong>{freeRatesStatus === "ready" && freeItemRates.length ? `${(freeProbabilityById.get(item.item_id) ?? 0).toFixed(4)}%` : "—"}</strong>
+            </div>)}
+          </div> : <p>排出対象を確認できませんでした。画面を閉じて再取得してください。</p>}
         </CanonicalDialog>
       )}
     </fieldset>

@@ -34,10 +34,10 @@ export const WORLD_STAGES: readonly WorldStage[] = [
       { name: "真田幸村", src: "/characters/kaede_transparent_asset.png" },
     ],
   },
-  { text: "この街で、お前のTRIBEが始まる。", highlights: [], characters: [] },
+  { text: "この乱世で、あなたの旗を掲げよう。", highlights: [], characters: [] },
 ] as const;
 
-const AGEHA_INTRO_COPY = `ようこそ、TRIBE NEONへ！
+const AGEHA_INTRO_COPY = `ようこそ、戦国姫艶武へ！
 私は豊臣秀吉。まず、キミの名前を教えて？`;
 const WORLD_INTRO_ASSETS = [
   "/branding/tutorial/tutorial_world_street_bg.png",
@@ -178,7 +178,7 @@ export default function SetupView() {
               </div>
             ))}
           </div>
-          {worldStage === 2 && <img className="setup-world-logo" src="/branding/tribe-neon-logo.png" alt="戦国姫艶舞" />}
+          {worldStage === 2 && <img className="setup-world-logo" src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" />}
           <div className="setup-world-copy"><TypewriterText key={worldStage} text={stage.text} speedMs={34} /></div>
           <div className="setup-world-progress" aria-label={`${worldStage + 1} / ${WORLD_STAGES.length}`}>{WORLD_STAGES.map((_, index) => <i key={index} className={index === worldStage ? "is-active" : ""} />)}</div>
           <button className="setup-world-tap" onClick={advanceWorldStage} disabled={!worldStageComplete} aria-label={`Page ${worldStage + 1} を進む`}>TAP <span aria-hidden="true">⌄</span></button>

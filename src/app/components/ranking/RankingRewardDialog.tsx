@@ -56,8 +56,8 @@ export default function RankingRewardDialog({ category, period, currentRank = nu
             </div>)}</div>
           </section>)}
           {showGuildSeasonCosmetics && <div className="ranking-reward-cosmetic-notes">
-            <p>上位3ギルドにも参加記念ギルド装飾を付与します。</p>
-            <p>ランキング報酬の限定ギルド装飾は、正式オープン後のギルド装飾機能追加時に使用できるようになります。</p>
+            <p>上位3同盟にも参加記念同盟装飾を付与します。</p>
+            <p>ランキング報酬の限定同盟装飾は、正式オープン後の同盟装飾機能追加時に使用できるようになります。</p>
           </div>}
         </div>}
       </div>

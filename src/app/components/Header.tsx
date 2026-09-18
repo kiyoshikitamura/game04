@@ -75,7 +75,7 @@ export default function Header() {
           <span className="header-mobile-level-badge"><NextImage width={96} height={96} sizes="48px" src="/ui/sengoku/15-crown.png" alt="" className="header-level-icon" />Lv.{userLevel || 1} · EXP {userXp || 0}{levelRow?.requiredExp ? `/${levelRow.requiredExp}` : ""}</span>
           <span className="header-mobile-power"><small>総合力</small><strong>{totalPowerLoading ? "—" : Number(totalPower || 0).toLocaleString()}</strong></span>
         </div>
-        <img className="header-game-logo" src="/branding/tribe-neon-logo.png" alt="戦国姫艶舞" />
+        <img className="header-game-logo" src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" />
         <button
           type="button"
           className="header-mobile-menu-button active-scale-effect"

@@ -515,7 +515,7 @@ export default function AccountAuthenticationModal() {
           <strong>
             {accountConflict.method === "GOOGLE"
               ? "このGoogleアカウントは別のゲームデータに連携済みです。現在の未認証データへの連携は完了していません。"
-              : "注意：このメールアドレスには、すでにTRIBE NEONのゲームデータがあります。"}
+              : "注意：このメールアドレスには、すでに戦国姫艶武のゲームデータがあります。"}
           </strong>
           <br /><br />
           {accountConflict.method === "GOOGLE"

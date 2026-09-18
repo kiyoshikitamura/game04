@@ -25,7 +25,7 @@ export default function AuthView() {
     <div className="auth-container" onClick={handleFirstUserInteraction}>
       <div className="auth-card">
         <h1 className="auth-title blink">
-          TRIBE NEON
+          戦国姫艶武
         </h1>
         <p className="auth-subtitle">Tokyo Syndicate System</p>
         

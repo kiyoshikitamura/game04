@@ -374,3 +374,8 @@
 
 @keyframes gacha-v0-pulse { 50% { transform: scale(1.12); opacity: .58; } }
 @media (prefers-reduced-motion: reduce) { .gacha-v0-pulse { animation: none; } }
+
+.gacha-individual-rates { max-height: 42dvh; overflow-y: auto; overscroll-behavior: contain; }
+.gacha-individual-rates > div { display: grid; grid-template-columns: minmax(0, 1fr) 65px 65px; gap: 6px; padding: 7px 0; border-bottom: 1px solid rgba(195, 155, 93, .22); font-size: 11px; }
+.gacha-individual-rates strong { text-align: right; font-variant-numeric: tabular-nums; }
+.gacha-individual-rates-heading { position: sticky; top: 0; background: #211914; color: #d7b77c; }

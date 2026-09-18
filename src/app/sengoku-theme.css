@@ -1,5 +1,9 @@
 /* GAME04: presentation only. Existing navigation and stage geometry are retained. */
 :root {
+  --font-ui: var(--font-sengoku);
+  --font-display: var(--font-sengoku);
+  --font-inter: var(--font-sengoku);
+  --font-outfit: var(--font-sengoku);
   --font-sengoku: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", "Noto Serif JP", serif;
 }
 .header-mobile, .footer-mobile, .mypage-view {
@@ -81,3 +85,16 @@
 .mypage-view .mypage-live-ticker { box-shadow:inset 3px 0 0 #bd5a32; }
 .mypage-view .mypage-live-ticker-body:focus-visible, .mypage-view .mypage-live-ticker-arrow:focus-visible { outline-color:#e0bc80; }
 .mypage-view .mypage-stage-transition { background:linear-gradient(to bottom,transparent,#100b09); }
+
+/* #30: one GAME04 typography rule, including route-loaded battle/gacha/dialog CSS.
+   Only the typeface is overridden; sizes, geometry and game state are unchanged. */
+body.game04-theme,
+body.game04-theme :where(*):not(:where(pre, code, kbd, samp, pre *, code *)) {
+  font-family: var(--font-sengoku) !important;
+}
+body.game04-theme :where(input, textarea, select, button) {
+  font-kerning: normal;
+}
+body.game04-theme :where(.ui-type-numeric, .cg-stats dd, .header-mobile-stat-value) {
+  font-variant-numeric: tabular-nums;
+}

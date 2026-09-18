@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ja_JP",
     url: "/",
-    siteName: "戦国姫艶舞",
+    siteName: "戦国姫艶武",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     images: [
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
         url: SOCIAL_IMAGE_PATH,
         width: 1200,
         height: 630,
-        alt: "戦国姫艶舞",
+        alt: "戦国姫艶武",
       },
     ],
   },
@@ -61,7 +61,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body>{children}</body>
+      <body className="game04-theme">{children}</body>
     </html>
   );
 }

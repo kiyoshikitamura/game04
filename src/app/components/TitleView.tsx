@@ -85,7 +85,7 @@ export default function TitleView() {
         
         {isGameStartTransition || resumeLoading ? (
           <div className="game-start-transition" role="status" aria-live="polite" aria-label="ゲーム開始中">
-            <img src="/branding/tribe-neon-logo.png" alt="戦国姫艶舞" />
+            <img src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" />
             <div className="game-start-signal" aria-hidden="true"><i /><i /><i /></div>
             <strong>{resumeLoading ? "再開中" : "起動中"}</strong>
           </div>

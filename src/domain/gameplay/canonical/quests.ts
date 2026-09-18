@@ -1,3 +1,4 @@
+import { game04QuestPresentation, game04TownName } from "@/theme/world";
 import questData from "./data/quests_20260830.json" with { type: "json" };
 import enemyPoolData from "./data/quest_enemy_pools_20260830.json" with { type: "json" };
 import encounterData from "./data/quest_encounters_20260917.json" with { type: "json" };
@@ -17,7 +18,7 @@ type DifficultyContract = {
 
 const difficultyContracts = questData.difficultyContracts as Record<CanonicalQuestDifficulty, DifficultyContract>;
 
-export const CANONICAL_QUEST_TOWNS = questData.towns;
+export const CANONICAL_QUEST_TOWNS = questData.towns.map(town => ({ ...town, name: game04TownName(town.townId) }));
 export const CANONICAL_QUEST_REWARD_POOLS = questData.rewardPools;
 export const CANONICAL_QUEST_AUTHORITY_GAPS = questData.unresolvedContracts;
 export const CANONICAL_QUEST_ENCOUNTERS = encounterData.encounters;
@@ -123,6 +124,7 @@ export const CANONICAL_QUESTS = questData.quests.map((quest) => {
   const contract = difficultyContracts[quest.difficulty as CanonicalQuestDifficulty];
   return {
     ...quest,
+    ...game04QuestPresentation(quest.questId, quest.name, quest.description),
     difficulty: quest.difficulty as CanonicalQuestDifficulty,
     ...contract,
     rewardPoolId: quest.rewardPoolId,

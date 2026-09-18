@@ -77,7 +77,7 @@ export default function GvgMatchStatusPanel({ guildId, onStartAttack }: { guildI
   const enemyMax = isA ? match.guild_b_phase_max_hp : match.guild_a_phase_max_hp;
   const myCollapses = isA ? match.guild_a_collapses : match.guild_b_collapses;
   const enemyCollapses = isA ? match.guild_b_collapses : match.guild_a_collapses;
-  const enemyLabel = match.guild_b_id ? "対戦ギルド" : (match.npc_guild_name || "NPCギルド");
+  const enemyLabel = match.guild_b_id ? "対戦同盟" : (match.npc_guild_name || "NPC同盟");
 
   return (
     <section className="hud-panel gvg-match-card p-3 flex-col-gap-2">

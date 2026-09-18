@@ -1,5 +1,6 @@
 "use client";
 import { getThemedCharacterName } from "@/theme/characters";
+import { game04WorldText, game04TownName, game04QuestPresentation } from "@/theme/world";
 import { useQuestRaidEncounter } from "./hooks/useQuestRaidEncounter";
 import { useMaintenanceTestAccess } from "./hooks/useMaintenanceTestAccess";
 import { useBeginnerJourney } from "@/hooks/useBeginnerJourney";
@@ -1386,8 +1387,8 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
           const prerequisiteClaimed = !mission.prerequisite_mission_id || claimedMissionIds.has(mission.prerequisite_mission_id);
           return {
             id: mission.id,
-            title: mission.title || "不明なミッション",
-            description: mission.description || mission.desc_text || "",
+            title: game04WorldText(mission.title || "任務"),
+            description: game04WorldText(mission.description || mission.desc_text || ""),
             reward_item: mission.reward_item_id || "CASH",
             reward_amount: mission.reward_quantity || 0,
             rewardItemId: mission.reward_item_id || "CASH",
@@ -1807,6 +1808,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
           const firstClearItems = poolRows.filter((item: any) => item.reward_pool_id === firstPool);
           return {
             ...quest,
+            ...game04QuestPresentation(quest.id, quest.name, quest.description),
             cost_vitality: progressEnabled ? canonical?.progression_vitality_cost ?? quest.cost_vitality : quest.cost_vitality,
             duration_seconds: progressEnabled ? canonical?.progression_duration_sec ?? quest.duration_seconds : quest.duration_seconds,
             reward_cash: (progressEnabled ? canonical?.progression_cash_reward : undefined) ?? canonical?.cash_reward ?? canonicalQuestById(quest.id)?.cashReward ?? quest.cash_reward ?? quest.reward_cash ?? 0,
@@ -1849,7 +1851,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         quest_id: encounter.quest_id,
         town_id: encounter.town_id,
         difficulty: encounter.difficulty,
-        npc_name: "Canonical NPC Party",
+        npc_name: `${game04TownName(encounter.town_id)}の守将`,
         members: encounter.members,
       }));
       // M9-X presentation fixtures intentionally use non-Production quest IDs.

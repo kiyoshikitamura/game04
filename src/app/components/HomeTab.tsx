@@ -442,13 +442,13 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
 
   // 拠点ID → 表示名・画像ファイル名のマッピング
   const baseMap: { [key: string]: { name: string; file: string } } = {
-    shinjuku: { name: "新宿", file: "shinjuku" },
-    shibuya: { name: "渋谷", file: "shibuya" },
-    ikebukuro: { name: "池袋", file: "ikebukuro" },
-    roppongi: { name: "六本木", file: "roppongi" },
-    akihabara: { name: "秋葉原", file: "akihabara" },
-    kawasaki: { name: "川崎", file: "kawasaki" },
-    yokohama: { name: "横浜", file: "yokohama" },
+    shinjuku: { name: "尾張", file: "shinjuku" },
+    shibuya: { name: "美濃", file: "shibuya" },
+    ikebukuro: { name: "近江", file: "ikebukuro" },
+    roppongi: { name: "京洛", file: "roppongi" },
+    akihabara: { name: "甲斐", file: "akihabara" },
+    kawasaki: { name: "越後", file: "kawasaki" },
+    yokohama: { name: "天下分け目", file: "yokohama" },
   };
   const currentBase = baseMap[currentBaseId || "shinjuku"] || baseMap["shinjuku"];
   const baseName = currentBase.name;
@@ -786,9 +786,9 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
               onClick={() => openBanner(visibleBanners[activeBannerIndex].destination)}
               data-banner-id={visibleBanners[activeBannerIndex].id}
               aria-label={visibleBanners[activeBannerIndex].id === "gvg-prep"
-                ? "ギルドバトル準備ミッション"
+                ? "同盟バトル準備ミッション"
                 : visibleBanners[activeBannerIndex].id === "guild-power-ranking"
-                  ? "ギルド総合力ランキング"
+                  ? "同盟総合力ランキング"
                   : visibleBanners[activeBannerIndex].title || "プロモーション"}
               aria-disabled={!visibleBanners[activeBannerIndex].destination}
             >
@@ -839,8 +839,8 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
       </div>
 
       {showGuildRankingCampaign && <CanonicalDialog
-        title="プレオープン限定 ギルド総合力ランキング"
-        ariaLabel="プレオープン限定ギルド総合力ランキングのご案内"
+        title="プレオープン限定 同盟総合力ランキング"
+        ariaLabel="プレオープン限定同盟総合力ランキングのご案内"
         size="large"
         onClose={() => setShowGuildRankingCampaign(false)}
         loading={!guildRankingVisualReady}
@@ -852,14 +852,14 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
         <div className="campaign-keyvisual-dialog">
           <img
             src="/promotion/guild_power_ranking_keyvisual.webp?v=20260905"
-            alt="ギルド総合力ランキング"
+            alt="同盟総合力ランキング"
             onLoad={(event) => {
               const image = event.currentTarget;
               if (typeof image.decode === "function") void image.decode().catch(() => undefined).finally(() => setGuildRankingVisualReady(true));
               else setGuildRankingVisualReady(true);
             }}
           />
-          <p>ギルドメンバー全員のメインデッキ総合力で順位が決まります。<br />報酬は限定ギルド装飾のみで、総合力やバトル性能には影響しません。</p>
+          <p>同盟メンバー全員のメインデッキ総合力で順位が決まります。<br />報酬は限定同盟装飾のみで、総合力やバトル性能には影響しません。</p>
         </div>
       </CanonicalDialog>}
 

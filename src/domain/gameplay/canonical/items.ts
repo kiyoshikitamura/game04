@@ -1,14 +1,15 @@
+import { getThemedMasterName, getThemedItemDescription } from "../../../theme/masters";
 import itemSource from "./data/items_20260822.json" with { type: "json" };
 
 export type CanonicalItem = (typeof itemSource.items)[number];
 
 export const CANONICAL_ITEM_VERSION = itemSource.version;
-export const CANONICAL_ITEMS: readonly CanonicalItem[] = Object.freeze(itemSource.items);
+export const CANONICAL_ITEMS: readonly CanonicalItem[] = Object.freeze(itemSource.items.map((item) => ({ ...item, name: getThemedMasterName(item.id, item.name), description: getThemedItemDescription(item.id, item.description) })));
 export const CANONICAL_ITEM_BY_ID = new Map(CANONICAL_ITEMS.map((item) => [item.id, item]));
 const CANONICAL_REWARD_ALIAS_NAMES: Record<string, string> = {
-  NORMAL_GACHA_TICKET_RANDOM: "ランダムNormalガチャチケット",
-  SPECIAL_TICKET_RANDOM: "ランダムSPガチャチケット",
-  SPECIAL_TICKET_SKILL_OR_EQUIPMENT: "SPスキル・装備チケット",
+  NORMAL_GACHA_TICKET_RANDOM: "ランダム通常召喚札",
+  SPECIAL_TICKET_RANDOM: "ランダム特選召喚札",
+  SPECIAL_TICKET_SKILL_OR_EQUIPMENT: "特選・戦技／武具召喚札",
 };
 
 export function canonicalItemName(itemId: string): string {

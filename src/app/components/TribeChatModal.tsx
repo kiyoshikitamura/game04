@@ -146,13 +146,13 @@ export default function TribeChatModal() {
   };
 
   return createPortal(
-    <FullScreenPanel title={chatChannel === "GUILD" ? `${userGuild?.name || "ギルド"} チャット` : "チャット"} onClose={handleClose} className="tribe-chat-panel">
+    <FullScreenPanel title={chatChannel === "GUILD" ? `${userGuild?.name || "同盟"} チャット` : "チャット"} onClose={handleClose} className="tribe-chat-panel">
       <div className="tribe-modal-container-inner flex-col">
-        {/* チャンネルタブ (全体 / ギルド / DM) */}
+        {/* チャンネルタブ (全体 / 同盟 / DM) */}
         <SubTabNav
           tabs={[
             { id: "GLOBAL", label: `全体${chatUnreadCounts?.GLOBAL ? ` (${chatUnreadCounts.GLOBAL})` : ""}` },
-            { id: "GUILD", label: `ギルド${chatUnreadCounts?.GUILD ? ` (${chatUnreadCounts.GUILD})` : ""}`, disabled: !userGuild },
+            { id: "GUILD", label: `同盟${chatUnreadCounts?.GUILD ? ` (${chatUnreadCounts.GUILD})` : ""}`, disabled: !userGuild },
             { id: "DM", label: `個人(DM)${dmUnreadTotal ? ` (${dmUnreadTotal})` : ""}` }
           ]}
           activeTabId={chatChannel}
@@ -311,7 +311,7 @@ export default function TribeChatModal() {
                   ? `送信制限中 (${chatCooldown}秒)`
                   : chatChannel === "DM"
                   ? "暗号DMを入力..."
-                  : `${chatChannel === "GLOBAL" ? "全体" : "ギルド"}へ送信...`
+                  : `${chatChannel === "GLOBAL" ? "全体" : "同盟"}へ送信...`
               }
               value={chatChannel === "DM" ? localDmText : chatInput}
               onChange={(e) => {

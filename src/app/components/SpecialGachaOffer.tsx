@@ -35,9 +35,9 @@ export default function SpecialGachaOffer({ category, diamonds, userItems, pendi
     }).catch(() => { if (active) { setCatalog(null); setFailed(true); } });
     return () => { active = false; };
   }, [pending, revision]);
-  if (failed) return <section className="special-gacha-offer"><p role="alert">ガチャ情報を取得できませんでした。</p><button onClick={() => setRevision(n => n + 1)}>再取得</button></section>;
-  if (!catalog) return <div className="special-gacha-loading" role="status" aria-label="ガチャ情報を確認中"><span className="spinner" /></div>;
-  if (!catalog.available) return <p>スペシャルガチャは準備中です</p>;
+  if (failed) return <section className="special-gacha-offer"><p role="alert">登用情報を取得できませんでした。</p><button onClick={() => setRevision(n => n + 1)}>再取得</button></section>;
+  if (!catalog) return <div className="special-gacha-loading" role="status" aria-label="登用情報を確認中"><span className="spinner" /></div>;
+  if (!catalog.available) return <p>特選登用は準備中です</p>;
   const offers = catalog.gachas.filter(g => category === "CHARACTER" ? g.id.startsWith("CHAR_") : g.id === (category === "SKILL" ? "SKILL_SPECIAL" : "EQUIP_SPECIAL"));
   const ticketCount = (g: SpecialGacha) => Number(userItems.find(i => i.item_id === specialTicketId(g.id))?.quantity || 0);
   const affordable = (g: SpecialGacha, c: DrawChoice) => c.currency === "TICKET" ? ticketCount(g) >= c.count : diamonds >= g.cost_diamond * c.count;
@@ -51,7 +51,7 @@ export default function SpecialGachaOffer({ category, diamonds, userItems, pendi
       setReceived(reward.name); setReward(null); setExchangeOpen(null); setRevision(n => n + 1);
     }
   };
-  return <section className="special-gacha-offer" aria-label="スペシャルガチャ">
+  return <section className="special-gacha-offer" aria-label="特選登用">
     {offers.map(g => <div key={g.id} className="special-gacha-product">
       <div className="special-gacha-product-header"><p>{SPECIAL_GACHA_COPY[g.id].description}</p><button className="special-gacha-pity" disabled={pending} onClick={() => { setExchangeOpen(g); setReward(null); }}>SSR交換 <span>{g.pity_points} / {catalog.pity_cost}Pt</span></button></div>
       <button className="semantic-cta semantic-cta--primary" disabled={pending} onClick={() => { setSelected(g); setChoice(null); }}>{SPECIAL_GACHA_COPY[g.id].title}</button>

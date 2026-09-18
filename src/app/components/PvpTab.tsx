@@ -234,12 +234,12 @@ export default function PvpTab() {
     <>
     <HubPage
       className="pvp-view"
-      title="バトル"
+      title="合戦"
       status={readiness.status}
       onRetry={readiness.retry}
       hideVisualHeader
     >
-        <section className="pvp-hero" aria-label="バトル対戦">
+        <section className="pvp-hero" aria-label="合戦の対戦">
           <img src="/promotion/battle_page_header.webp" alt="バトル" />
         </section>
         {pvpSubView === "opponents" && <>

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import LegalPage from "../LegalPage";
+import SupportContact from "../SupportContact";
+import { GAME04_LEGAL, pendingLegalValue } from "../legalConfig";
 
 export const metadata: Metadata = {
-  title: "特定商取引法に基づく表記 | TRIBE NEON",
-  description: "TRIBE NEONの特定商取引法に基づく表記です。",
+  title: "特定商取引法に基づく表記 | 戦国姫艶武",
+  description: "戦国姫艶武の特定商取引法に基づく表記です。",
 };
 
 type TokushoPageProps = { searchParams: Promise<{ from?: string }> };
@@ -11,34 +13,24 @@ type TokushoPageProps = { searchParams: Promise<{ from?: string }> };
 export default async function TokushoPage({ searchParams }: TokushoPageProps) {
   const { from } = await searchParams;
   return (
-    <LegalPage title="特定商取引法に基づく表記" updatedAt="2026年9月13日" returnToGame={from === "settings"}>
+    <LegalPage title="特定商取引法に基づく表記" updatedAt="2026年9月18日" returnToGame={from === "settings"}>
       <h2>販売事業者</h2>
-      <p>TRIBE NEON 運営事務局</p>
-      <p>法令上必要となる販売事業者の氏名または名称について、請求があった場合、遅滞なく開示いたします。</p>
-
+      <p>{pendingLegalValue(GAME04_LEGAL.operator)}</p>
       <h2>代表者または通信販売業務責任者</h2>
-      <p>請求があった場合、遅滞なく開示いたします。</p>
-
+      <p>{pendingLegalValue(GAME04_LEGAL.representative)}</p>
       <h2>所在地</h2>
-      <p>請求があった場合、遅滞なく開示いたします。</p>
-
+      <p>{pendingLegalValue(GAME04_LEGAL.address)}</p>
       <h2>電話番号</h2>
-      <p>請求があった場合、遅滞なく開示いたします。</p>
-
+      <p>{pendingLegalValue(GAME04_LEGAL.phone)}</p>
       <h2>連絡先</h2>
-      <p>
-        メールアドレス：
-        <a href="mailto:original.title.support@gmail.com">original.title.support@gmail.com</a>
-      </p>
-      <p>お問い合わせは上記メールアドレスにて受け付けます。</p>
-
+      <p><SupportContact /></p>
       <h2>販売URL</h2>
-      <p><a href="https://www.tribe-neon.com">https://www.tribe-neon.com</a></p>
+      <p>{GAME04_LEGAL.serviceUrl ? <a href={GAME04_LEGAL.serviceUrl}>{GAME04_LEGAL.serviceUrl}</a> : pendingLegalValue(null)}</p>
 
       <h2>販売価格</h2>
       <p>各商品の販売価格は、それぞれの商品ページおよび購入手続き画面に税込価格で表示します。</p>
       <p>
-        商品として販売する「ダイヤ」は、TRIBE NEON内でのみ利用できるゲーム内通貨であり、
+        商品として販売する「ダイヤ」は、戦国姫艶武内でのみ利用できるゲーム内通貨であり、
         現金への換金、第三者への譲渡およびサービス外への移転はできません。
       </p>
       <p>ゲーム内の一部のキャラクター、アイテムその他のコンテンツ・サービスは、購入済みのダイヤを消費して取得します。</p>

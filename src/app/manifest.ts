@@ -3,8 +3,8 @@ import { SITE_DESCRIPTION } from "./crawlerMetadata";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "TRIBE NEON",
-    short_name: "TRIBE NEON",
+    name: "戦国姫艶武",
+    short_name: "戦国姫艶武",
     description: SITE_DESCRIPTION,
     start_url: "/",
     display: "standalone",
