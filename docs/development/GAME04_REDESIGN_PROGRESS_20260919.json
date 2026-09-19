@@ -1,6 +1,6 @@
 {
   "title": "GAME04 全面改修進捗管理",
-  "date": "2026-09-19",
+  "date": "2026-09-20",
   "basisSha": "7369f3dbaf3ef454c33932df55ee308e0b7718cb",
   "previewSha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
   "previewUrl": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
@@ -430,9 +430,64 @@
       "previewEligible": false,
       "sha": "",
       "url": ""
+    },
+    {
+      "id": "TI-01",
+      "phase": "M5",
+      "title": "領土侵攻Home CTA・開催トップ・レイド一覧導線の再編",
+      "status": "未着手",
+      "specStatus": "FIX済み",
+      "notes": "9/20本流仕様FIX。実装は別スレッドで実施。数値はマスター設計待ち。正本: docs/product/GAME04_TERRITORY_INVASION_AUTHORITY_2026-09-20.md",
+      "previewEligible": false,
+      "sha": "",
+      "url": ""
+    },
+    {
+      "id": "TI-02",
+      "phase": "M5",
+      "title": "ユーザー領土侵攻経験値/レベルと成長・解放マスター接続",
+      "status": "未着手",
+      "specStatus": "FIX済み",
+      "notes": "9/20本流仕様FIX。実装は別スレッドで実施。数値はマスター設計待ち。正本: docs/product/GAME04_TERRITORY_INVASION_AUTHORITY_2026-09-20.md",
+      "previewEligible": false,
+      "sha": "",
+      "url": ""
+    },
+    {
+      "id": "TI-03",
+      "phase": "M5",
+      "title": "領土侵攻の開催枠/必要Lv/アイテム同時判定・開催時ルール保持",
+      "status": "未着手",
+      "specStatus": "FIX済み",
+      "notes": "9/20本流仕様FIX。実装は別スレッドで実施。数値はマスター設計待ち。正本: docs/product/GAME04_TERRITORY_INVASION_AUTHORITY_2026-09-20.md",
+      "previewEligible": false,
+      "sha": "",
+      "url": ""
+    },
+    {
+      "id": "TI-04",
+      "phase": "M5",
+      "title": "侵攻クリア時主催者3勝経験値・終了枠解放・結果報酬導線",
+      "status": "未着手",
+      "specStatus": "FIX済み",
+      "notes": "9/20本流仕様FIX。実装は別スレッドで実施。数値はマスター設計待ち。正本: docs/product/GAME04_TERRITORY_INVASION_AUTHORITY_2026-09-20.md",
+      "previewEligible": false,
+      "sha": "",
+      "url": ""
+    },
+    {
+      "id": "TI-05",
+      "phase": "M5",
+      "title": "領土侵攻の境界条件・並行処理・個別戦闘の統合受入",
+      "status": "未着手",
+      "specStatus": "FIX済み",
+      "notes": "9/20本流仕様FIX。実装は別スレッドで実施。数値はマスター設計待ち。正本: docs/product/GAME04_TERRITORY_INVASION_AUTHORITY_2026-09-20.md",
+      "previewEligible": false,
+      "sha": "",
+      "url": ""
     }
   ],
-  "latestDecision": "2026-09-19 本流決定：ランキングは初期リリース対象外。Unlock Raidの個人途中参加Checkpointは正式削除。途中参加者も戦闘開始時の共有Lvで個別バトルを行う。個別勝敗・Raid全体3勝資格・非遡及報酬・共有Lv連動の敵強化は維持。",
+  "latestDecision": "2026-09-20 領土侵攻のHome開催導線・主催者経験値/レベル・同時開催枠/侵攻先解放をFIX。詳細: docs/product/GAME04_TERRITORY_INVASION_AUTHORITY_2026-09-20.md",
   "excludedTasks": [
     {
       "id": "M6-05",

@@ -1,4 +1,9 @@
 # GAME04 / 戦国姫艶武
+
+## 2026-09-20 最新差分Authority
+
+領土侵攻の導線・主催者成長・開催条件は [GAME04_TERRITORY_INVASION_AUTHORITY_2026-09-20.md](./GAME04_TERRITORY_INVASION_AUTHORITY_2026-09-20.md) を優先する。仕様FIX・実装未着手。Unlockの内部方式は維持し、Homeから領土侵攻を開催、レイド一覧は開催中の参加・再開に限定する。
+
 # 方針転換後 全面改修計画
 ## 2026-09-19
 

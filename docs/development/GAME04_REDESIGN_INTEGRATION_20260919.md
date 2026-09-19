@@ -73,3 +73,7 @@ Preview追加確認: `/qa/redesign` の任務中央Dialogで内部スクロー�
 取得接続のdev実API: 6イベント（新規キャラ1、重複魂20、Skill素材2、装備個体2）の正確な取込みと後続読取での二重付与なしを確認。並行get_stateの片方はDB REST上流の非JSON応答で400となったため、並行HTTP受入は未PASS。Missionは正式Master空・不正claimの400拒否まで確認し、有効Missionの実API受取は未検証。
 
 Present実API最終確認: Character/Skill/Equipment各2個を各同時2claimし、各組[200,400]で一方のみ成功。取得検証累計12イベント、新規キャラ+1・魂+40・Skill素材+6・装備個体+4で再取得結果完全一致。無効Mission claim400後もstate不変。`GAME04_ACQUISITION_ACCEPTANCE_20260919.json` に証跡を保存。有効Mission実API受取・Login全日程・実ガチャ抽選は未検証。並行get_stateの一方が上流非JSON400となるKnown Issueは残存。暫定的な上流応答異常であり、CAS競合409とは異なる。
+
+## 2026-09-20 領土侵攻の仕様追加（実装なし）
+
+新正本：`docs/product/GAME04_TERRITORY_INVASION_AUTHORITY_2026-09-20.md`。TI-01〜05を未着手として追加。M5-06/M9-03/M4-06/MS-03の既存実装報告は維持し、新機能の実装完了と混同しない。今回の差分は文書・進捗データのみ。
