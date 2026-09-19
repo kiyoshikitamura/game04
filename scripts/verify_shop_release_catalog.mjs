@@ -1,9 +1,23 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
-const source = readFileSync('src/utils/shop_master_data.ts','utf8');
-const compiled = ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2020}}).outputText;
-const { SHOP_PRODUCTS_MASTER: products, remainingShopPurchases } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`);
+// The catalog now projects approved theme names through shared modules.
+// Load those imports while retaining the existing economy assertions.
+const { resolve, dirname, extname } = await import('node:path');
+const { runInThisContext } = await import('node:vm');
+const modules = new Map();
+function loadTs(file) {
+  const absolute = resolve(extname(file) ? file : `${file}.ts`);
+  if (modules.has(absolute)) return modules.get(absolute);
+  if (absolute.endsWith('.json')) return JSON.parse(readFileSync(absolute, 'utf8'));
+  const module = { exports: {} };
+  modules.set(absolute, module.exports);
+  const code = ts.transpileModule(readFileSync(absolute, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true } }).outputText;
+  const require = name => loadTs(name.startsWith('@/') ? resolve('src', name.slice(2)) : resolve(dirname(absolute), name));
+  runInThisContext(`(function(require,module,exports){${code}\n})`, { filename: absolute })(require, module, module.exports);
+  return module.exports;
+}
+const { SHOP_PRODUCTS_MASTER: products, remainingShopPurchases } = loadTs('src/utils/shop_master_data.ts');
 const packs=products.filter(p=>p.purchaseLimit);
 assert.equal(packs.length,4);
 assert.deepEqual(packs.map(p=>[p.id,p.priceJpy,p.purchaseLimit]),[

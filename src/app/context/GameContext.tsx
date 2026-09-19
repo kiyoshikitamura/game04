@@ -1,8 +1,11 @@
 "use client";
+import { notifyRedesignRewardChange } from "@/utils/redesignRewardSync";
 import { getThemedCharacterName } from "@/theme/characters";
+import { game04WorldText, game04TownName, game04QuestPresentation } from "@/theme/world";
 import { useQuestRaidEncounter } from "./hooks/useQuestRaidEncounter";
 import { useMaintenanceTestAccess } from "./hooks/useMaintenanceTestAccess";
 import { useBeginnerJourney } from "@/hooks/useBeginnerJourney";
+import { useQuestProgressionGuide } from "@/hooks/useQuestProgressionGuide";
 import { canClaimMission } from "@/domain/mission/availability";
 import { useMissionClock } from "@/hooks/useMissionClock";
 
@@ -478,9 +481,10 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   const [questEncounterDismissedVisit, setQuestEncounterDismissedVisit] = useState(false);
   useEffect(() => { setQuestEncounterDismissedVisit(false); }, [activeTab, session?.user?.id]);
   const openQuestEncounterRaid = async (roomId: string) => {
-    if (!session?.user?.id) return;
+    const owner = session?.user?.id;
+    if (!owner) throw new Error("ログインを確認してください。");
     const response = await supabase.rpc("get_raid_room_v1", { p_room_id: roomId });
-    if (response.error) throw new Error("レイドを開けませんでした。もう一度お試しください。");
+    if (response.error || response.data?.roomId !== roomId || currentAuthUserIdRef.current !== owner) throw new Error("レイドを開けませんでした。もう一度お試しください。");
     setRaidRescueTarget(null);
     setRaidRoomReturnTarget({userId: session.user.id, roomId});
     setRaidTopRefreshRevision(value => value + 1);
@@ -1202,6 +1206,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
           // Direct gameplay grants must be reflected in Bag and balances before
           // the success dialog opens. Legacy Present grants still refresh too.
           await syncBootstrapData(userId);
+          notifyRedesignRewardChange(userId);
           if (onboardingState?.gameplay_authorized && activeTab === "home") {
             setShowLoginBonusModal(true);
             setPresentsPrefetched(false);
@@ -1384,8 +1389,8 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
           const prerequisiteClaimed = !mission.prerequisite_mission_id || claimedMissionIds.has(mission.prerequisite_mission_id);
           return {
             id: mission.id,
-            title: mission.title || "不明なミッション",
-            description: mission.description || mission.desc_text || "",
+            title: game04WorldText(mission.title || "任務"),
+            description: game04WorldText(mission.description || mission.desc_text || ""),
             reward_item: mission.reward_item_id || "CASH",
             reward_amount: mission.reward_quantity || 0,
             rewardItemId: mission.reward_item_id || "CASH",
@@ -1798,14 +1803,22 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         setPatrolCourses(questsData.map((quest: any) => {
           const canonical: any = canonicalByQuest.get(quest.id);
           const progression: any = progressionByQuest.get(quest.id);
-          const rewardPoolItems = poolRows.filter((item: any) => item.reward_pool_id === canonical?.reward_pool_id);
-          const firstClearItems = poolRows.filter((item: any) => item.reward_pool_id === canonical?.first_clear_reward_pool_id);
+          const progressEnabled = progression?.progression_enabled === true;
+          const normalPool = progressEnabled ? canonical?.progression_reward_pool_id ?? canonical?.reward_pool_id : canonical?.reward_pool_id;
+          const firstPool = progressEnabled ? canonical?.progression_first_clear_reward_pool_id ?? canonical?.first_clear_reward_pool_id : canonical?.first_clear_reward_pool_id;
+          const rewardPoolItems = poolRows.filter((item: any) => item.reward_pool_id === normalPool);
+          const firstClearItems = poolRows.filter((item: any) => item.reward_pool_id === firstPool);
           return {
             ...quest,
-            reward_cash: canonical?.cash_reward ?? canonicalQuestById(quest.id)?.cashReward ?? quest.cash_reward ?? quest.reward_cash ?? 0,
-            reward_xp: canonical?.user_exp ?? quest.exp_reward ?? quest.reward_xp ?? 0,
+            ...game04QuestPresentation(quest.id, quest.name, quest.description),
+            cost_vitality: progressEnabled ? canonical?.progression_vitality_cost ?? quest.cost_vitality : quest.cost_vitality,
+            duration_seconds: progressEnabled ? canonical?.progression_duration_sec ?? quest.duration_seconds : quest.duration_seconds,
+            reward_cash: (progressEnabled ? canonical?.progression_cash_reward : undefined) ?? canonical?.cash_reward ?? canonicalQuestById(quest.id)?.cashReward ?? quest.cash_reward ?? quest.reward_cash ?? 0,
+            reward_xp: (progressEnabled ? canonical?.progression_user_exp : undefined) ?? canonical?.user_exp ?? quest.exp_reward ?? quest.reward_xp ?? 0,
             reward_items: rewardPoolItems,
-            first_clear_user_exp: canonical?.first_clear_user_exp ?? 0,
+            first_clear_user_exp: (progressEnabled ? canonical?.progression_first_clear_user_exp : undefined) ?? canonical?.first_clear_user_exp ?? 0,
+            first_clear_cash_reward: progressEnabled ? canonical?.progression_first_clear_cash_reward ?? 0 : 0,
+            normal_reward_timing: progressEnabled ? canonical?.progression_normal_reward_timing : null,
             first_clear_items: firstClearItems,
             reward_item_id: rewardPoolItems[0]?.item_id ?? null,
             reward_item_chance: Number(rewardPoolItems[0]?.probability_bp ?? 0) / 100,
@@ -1813,11 +1826,16 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
             is_unlocked: progression?.is_unlocked ?? (typeof canonical?.unlock_condition === "object" ? canonical.unlock_condition.type === "OPEN" : canonical?.unlock_condition === "OPEN"),
             unlock_condition: progression?.unlock_condition ?? canonical?.unlock_condition ?? "OPEN",
             is_first_cleared: progression?.is_first_cleared ?? false,
+            progression_enabled: progression?.progression_enabled ?? false,
+            stage_order: progression?.stage_order ?? null,
+            boss_patrol_id: progression?.boss_patrol_id ?? null,
+            boss_ready: progression?.boss_ready ?? false,
+            last_battle_result: progression?.last_battle_result ?? null,
             enemy_tactic: progression?.enemy_tactic ?? null,
             enemy_member_count: progression?.enemy_member_count ?? 0,
             enemy_members: progression?.enemy_members ?? [],
             recommended_level: progression?.recommended_level ?? null,
-            recommended_power: progression?.recommended_power ?? null,
+            recommended_power: progression?.recommended_power ?? canonicalQuestById(quest.id)?.recommendedPower ?? null,
             enemy_attributes: progression?.enemy_attributes ?? [],
           };
         }));
@@ -1835,7 +1853,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         quest_id: encounter.quest_id,
         town_id: encounter.town_id,
         difficulty: encounter.difficulty,
-        npc_name: "Canonical NPC Party",
+        npc_name: `${game04TownName(encounter.town_id)}の守将`,
         members: encounter.members,
       }));
       // M9-X presentation fixtures intentionally use non-Production quest IDs.
@@ -1851,7 +1869,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
       const { data: userPatrols } = await supabase.from("user_patrols").select("*").eq("user_id", userId);
       
       if (userPatrols && patrolRevisionAtStart === patrolStateRevisionRef.current) {
-        const active = userPatrols.filter((p: any) => p.status !== "COMPLETED");
+        const active = userPatrols.filter((p: any) => p.status === "ONGOING" || p.status === "CLAIMABLE");
         const formattedPatrols = active.map((p: any) => {
           const expiresAt = new Date(p.expires_at).getTime();
           const startedAt = new Date(p.started_at).getTime();
@@ -1873,6 +1891,9 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
             encounterSnapshot: p.encounter_snapshot,
             hometownBonusSnapshot: p.hometown_bonus_snapshot,
             baseCashSnapshot: p.base_cash_snapshot,
+            progression_kind: p.progression_kind ?? "LEGACY",
+            progressionKind: p.progression_kind ?? "LEGACY",
+            active_replay_id: p.active_replay_id ?? null,
             started_at: p.started_at,
             expires_at: p.expires_at
           };
@@ -3560,6 +3581,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
             } : current);
           }
         }
+        notifyRedesignRewardChange(session.user.id);
         setScoutResults(results);
         setScoutFlashingColor(results.some((r: { rarity: string }) => r.rarity === "SSR") ? "GOLD" : results.some((r: { rarity: string }) => r.rarity === "SR") ? "PURPLE" : "BLUE");
         setScoutAnimationState("FLASHING");
@@ -3642,6 +3664,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
           } : current);
         }
       }
+      notifyRedesignRewardChange(session.user.id);
       setScoutResults(assetResults);
       setScoutFlashingColor(assetResults.some((result: { rarity: string }) => result.rarity === "SSR") ? "GOLD" : assetResults.some((result: { rarity: string }) => result.rarity === "SR") ? "PURPLE" : "BLUE");
       await bootstrapPromise;
@@ -3809,6 +3832,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
 
       await syncBootstrapData(session.user.id);
 
+      notifyRedesignRewardChange(session.user.id);
       setScoutResults(results);
       setScoutFlashingColor(highestRarity);
       setScoutAnimationState("FLASHING");
@@ -4278,6 +4302,10 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
 
   const { beginnerJourney, refreshBeginnerJourney } = useBeginnerJourney(session?.user?.id,
     Boolean(onboardingState?.gameplay_authorized), missions);
+  const { questGuide, questGuideReady, refreshQuestGuide, advanceQuestGuide, markQuestStorySeen } = useQuestProgressionGuide(
+    session?.user?.id, Boolean(onboardingState?.gameplay_authorized),
+    `${activeTab}:${battle.battleState}:${onboardingState?.tutorial_step ?? ""}`,
+  );
   const [beginnerMissionTargetIds, setBeginnerMissionTargetIds] = useState<string[]>([]);
   const beginnerRewardGeneration = useRef(0);
   const beginnerRewardOpening = useRef(false);
@@ -4331,6 +4359,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     [activeTab, battle.battleState, scoutAnimationState, showMissionPanel, confirmDialogConfig, refreshBeginnerJourney]);
 
   const value = {
+    questGuide, questGuideReady, refreshQuestGuide, advanceQuestGuide, markQuestStorySeen,
     rankingMissionRewardOrigin, setRankingMissionRewardOrigin,
     questRaidEncounter, questEncounterDismissedVisit, setQuestEncounterDismissedVisit, openQuestEncounterRaid,
     beginnerJourney, refreshBeginnerJourney, beginnerMissionTargetIds, openBeginnerMissionReward, clearBeginnerMissionTarget,

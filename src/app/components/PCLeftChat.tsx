@@ -50,7 +50,7 @@ export default function PCLeftChat() {
         {["GLOBAL", "GUILD"].map((ch, idx) => {
           const isGuildCh = ch === "GUILD";
           const isSelected = chatChannel === ch;
-          const labels = ["全体", "ギルド"];
+          const labels = ["全体", "同盟"];
           return (
             <button
               key={ch}
@@ -96,7 +96,7 @@ export default function PCLeftChat() {
               : `${
                   chatChannel === "GLOBAL"
                     ? "全体"
-                    : "ギルド"
+                    : "同盟"
                 }へ送信...`
           }
           value={chatInput}

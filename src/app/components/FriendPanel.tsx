@@ -218,7 +218,7 @@ export default function FriendPanel() {
 
         {activeTab === "invite" && (
           <div className="flex-col-gap-3">
-            <h3 className="font-size-9 text-color-cyan font-weight-bold">友達をTRIBE NEONへ招待</h3>
+            <h3 className="font-size-9 text-color-cyan font-weight-bold">友達を戦国姫艶武へ招待</h3>
             <p className="font-size-8 text-secondary">招待URLから新規プレイヤー登録が完了すると成立します。最大10人まで招待できます。</p>
             <div className="friend-card border-subtle p-3 bg-black-60">
               <div className="font-size-7 text-secondary">招待実績</div>
@@ -237,7 +237,7 @@ export default function FriendPanel() {
                 }}>招待URLをコピー</OutlawButton>
                 <OutlawButton variant="secondary" onClick={() => {
                   const url = `${window.location.origin}/?invite=${encodeURIComponent(giftCode)}`;
-                  const text = "TRIBE NEONで一緒に東京の頂点を目指そう。";
+                  const text = "戦国姫艶武で一緒に天下を目指そう。";
                   window.open(`https://x.com/intent/post?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, "_blank", "noopener,noreferrer");
                 }}>Xで共有</OutlawButton>
               </>

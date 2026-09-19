@@ -27,7 +27,7 @@ function parsePendingDialog(value: unknown): PendingEventDialog | null {
   return {
     eventId,
     jstDate,
-    displayName: String(row.display_name || "ギルドバトル準備ミッション"),
+    displayName: String(row.display_name || "同盟バトル準備ミッション"),
     imageUrl: resolvePresentableAssetUrl(row.dialog_image_url) || (eventId === "GVG_PREP_20260904" ? "/promotion/gvg_preopen_mission_keyvisual.webp?v=20260905" : null),
     body: String(row.dialog_body || "正式オープンに備えて戦力を強化しよう！\nミッションを達成して報酬を獲得！"),
     primaryLabel: String(row.primary_cta_label || "準備ミッションを見る"),
@@ -158,7 +158,7 @@ export default function PrepMissionEventDialogController() {
 
   return <CanonicalDialog
     title={pending.displayName}
-    ariaLabel="ギルドバトル準備ミッションのご案内"
+    ariaLabel="同盟バトル準備ミッションのご案内"
     loading={!imageReady && !imageFailed}
     actions={[
       { label: pending.secondaryLabel, semantic: "secondary", disabled: !imageReady && !imageFailed, onClick: () => dismiss(false) },

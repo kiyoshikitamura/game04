@@ -122,7 +122,7 @@ const missionClaimKey = (userId: string, missionId: string, cycleDate?: string |
 const canonicalQuestEnemySnapshot = (questId: string, encounterOverride?: ReturnType<typeof generateCanonicalQuestEncounter>) => {
   const encounter = encounterOverride ?? (canonicalQuestById(questId) ? generateCanonicalQuestEncounter(questId) : null);
   if (!encounter) return null;
-  return encounter.members.map((member) => {
+  const members = encounter.members.map((member) => {
     const character = CANONICAL_CHARACTERS.find((entry) => entry.character_id === member.characterId);
     if (!character) throw new Error(`Canonical Quest encounter references unknown Character: ${member.characterId}`);
     const stats = member.stats;
@@ -144,6 +144,25 @@ const canonicalQuestEnemySnapshot = (questId: string, encounterOverride?: Return
       }),
     };
   });
+  if (questId !== "q_shinjuku_2") return members;
+
+  // The q_shinjuku_2 Preview contract is a 60,000 Enemy Power snapshot.
+  // Keep SPD/LUK and the fixed Skill Loadout unchanged; only the three power
+  // contributing stats are proportionally normalized for this one Stage.
+  const power = members.reduce((sum, member) => sum + member.stats.hp + member.stats.atk + member.stats.def, 0);
+  const scaled = members.map((member) => ({
+    ...member,
+    stats: {
+      ...member.stats,
+      hp: Math.max(10, Math.round(member.stats.hp * 60000 / power / 10) * 10),
+      atk: Math.max(10, Math.round(member.stats.atk * 60000 / power / 10) * 10),
+      def: Math.max(10, Math.round(member.stats.def * 60000 / power / 10) * 10),
+    },
+  }));
+  const scaledPower = scaled.reduce((sum, member) => sum + member.stats.hp + member.stats.atk + member.stats.def, 0);
+  const last = scaled[scaled.length - 1];
+  last.stats.def = Math.max(10, last.stats.def + (60000 - scaledPower));
+  return scaled;
 };
 
 const achievedFunnelTriggers = (client: any, userId: string): Set<string> => new Set(
@@ -2221,7 +2240,7 @@ export async function executeMockRpc(client: any, funcName: string, params: any)
       out_diamonds: Number(user.neon_diamonds || user.diamonds || 0),
       raid_first_entry_free: !Boolean(user.raid_free_entry_consumed),
       vitality_next_recovery_at: vitality.value < CANONICAL_ACTION_RESOURCES.resources.VITALITY.naturalMax ? new Date(vitality.lastRecoveredAtMs + 360_000).toISOString() : null,
-      pvp_next_recovery_at: pvp.value < 5 ? new Date(pvp.lastRecoveredAtMs + 7_200_000).toISOString() : null,
+      pvp_next_recovery_at: pvp.value < 5 ? new Date(pvp.lastRecoveredAtMs + 600_000).toISOString() : null,
       raid_next_recovery_at: raid.value < 5 ? new Date(raid.lastRecoveredAtMs + 7_200_000).toISOString() : null,
     }, error: null };
   }
@@ -4286,7 +4305,7 @@ export async function executeMockRpc(client: any, funcName: string, params: any)
       const prerequisite = condition.type === "FIRST_CLEAR" ? condition.questId : null;
       const memberCharacters = encounter.members.map((member) => CANONICAL_CHARACTERS.find((entry) => entry.character_id === member.characterId)!);
       const recommendedPower = encounter.members.reduce((total,member,index) => { const stats=canonicalCharacterStats(memberCharacters[index].lv1,memberCharacters[index].lv100,member.level,member.awakening,memberCharacters[index].growth_pattern); return total+stats.hp+stats.atk+stats.def; },0);
-      return { quest_id:encounter.questId, unlock_condition:condition.type === "OPEN" ? "OPEN" : `FIRST_CLEAR:${prerequisite}`, is_unlocked:condition.type === "OPEN" || firstClears.some((entry:any)=>entry.user_id===userId&&entry.quest_id===prerequisite), is_first_cleared:firstClears.some((entry:any)=>entry.user_id===userId&&entry.quest_id===encounter.questId), enemy_tactic:encounter.enemyTactic, enemy_member_count:encounter.members.length, enemy_members:[], enemy_attributes:[...new Set(memberCharacters.map((entry)=>entry.attribute))], recommended_level:encounter.members[0]?.level ?? null, recommended_power:recommendedPower };
+      return { quest_id:encounter.questId, unlock_condition:condition.type === "OPEN" ? "OPEN" : `FIRST_CLEAR:${prerequisite}`, is_unlocked:condition.type === "OPEN" || firstClears.some((entry:any)=>entry.user_id===userId&&entry.quest_id===prerequisite), is_first_cleared:firstClears.some((entry:any)=>entry.user_id===userId&&entry.quest_id===encounter.questId), enemy_tactic:encounter.enemyTactic, enemy_member_count:encounter.members.length, enemy_members:[], enemy_attributes:[...new Set(memberCharacters.map((entry)=>entry.attribute))], recommended_level:encounter.members[0]?.level ?? null, recommended_power:encounter.questId === "q_shinjuku_2" ? 50000 : recommendedPower };
     }), error:null };
   }
 

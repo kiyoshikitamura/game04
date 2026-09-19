@@ -42,7 +42,7 @@ type PublicProfile = {
 
 const RANKING_TABS = [
   { id: "power", label: "総合力" },
-  { id: "guild_power", label: "ギルド" },
+  { id: "guild_power", label: "同盟" },
   { id: "pvp", label: "バトル" },
 ] as const;
 
@@ -364,7 +364,7 @@ export default function RankingTab() {
     : currentRank ? null : contextError ? "順位取得不可" : rankingSelfStatusText(selfStatus);
 
   const activeCategoryLabel = RANKING_TABS.find((tab) => tab.id === activeTab)?.label || "総合力";
-  const metricLabel = activeTab === "power" ? "総合力" : activeTab === "guild_power" ? "ギルド総合力" : activePeriod === "daily" ? "勝利数" : "RATE";
+  const metricLabel = activeTab === "power" ? "総合力" : activeTab === "guild_power" ? "同盟総合力" : activePeriod === "daily" ? "勝利数" : "RATE";
   const periodLabel = activePeriod === "daily" ? "デイリー" : "シーズン";
   const isGuildSeasonTab = activeTab === "guild_power" && activePeriod === "season";
   const isPreopenGuildSeason = isGuildSeasonTab && isPreopenGuildPowerSeasonContext(guildSeason);
@@ -421,7 +421,7 @@ export default function RankingTab() {
       {isPreopenGuildSeason && <section className={`ranking-guild-season-summary ${guildSeasonFinalized ? "is-finalized" : ""}`} aria-label="プレオープン限定シーズン情報">
         <div><strong>プレオープン限定シーズン</strong><span>{guildSeasonFinalized ? "順位確定" : "集計中"}</span></div>
         <p className="ranking-guild-season-period">{guildSeasonFinalized ? "開催終了" : "プレオープン中開催"}</p>
-        <p>ギルドメンバー全員の総合力で順位が決まります。仲間を集めて戦力を強化し、限定ギルド装飾を獲得しよう！</p>
+        <p>同盟メンバー全員の総合力で順位が決まります。仲間を集めて戦力を強化し、限定同盟装飾を獲得しよう！</p>
       </section>}
 
       <section className="ranking-current" aria-label="あなたの現在地">
@@ -434,7 +434,7 @@ export default function RankingTab() {
 
       {gapLabel && !loading && !error && <p className="ranking-next-target">{gapLabel}</p>}
       <OutlawButton variant="primary" fullWidth className="ranking-category-action" disabled={rewardOpening || (journeyPending && !journeyFailed)} onClick={() => journeyFailed ? setJourneyRetry(value => value + 1) : journeyRewardIds.length ? void openJourneyReward() : setActiveTab(rankingMissionRewardOrigin ? "home" : activeTab === "power" ? "character" : activeTab === "guild_power" ? "guild" : "pvp")}>
-        {journeyPending ? journeyFailed ? "受取状態を再確認" : "受取状態を確認中…" : journeyRewardIds.length ? rewardOpening ? "読み込み中…" : "報酬を受け取る" : rankingMissionRewardOrigin ? "マイページへ" : activeTab === "power" ? "キャラ・編成へ" : activeTab === "guild_power" ? currentGuildId ? "ギルドへ" : "ギルドを探す" : "バトルへ"}
+        {journeyPending ? journeyFailed ? "受取状態を再確認" : "受取状態を確認中…" : journeyRewardIds.length ? rewardOpening ? "読み込み中…" : "報酬を受け取る" : rankingMissionRewardOrigin ? "マイページへ" : activeTab === "power" ? "キャラ・編成へ" : activeTab === "guild_power" ? currentGuildId ? "同盟へ" : "同盟を探す" : "バトルへ"}
       </OutlawButton>
       {periodError && !loading && !error && <div className="ranking-context-error" role="status">集計期間を取得できませんでした。<button type="button" onClick={() => void loadRanking()}>再試行</button></div>}
       {contextError && !loading && !error && <div className="ranking-context-error" role="status">自己・周辺順位の追加情報を取得できませんでした。<button type="button" onClick={() => void loadRanking()}>再試行</button></div>}
@@ -443,8 +443,8 @@ export default function RankingTab() {
         : loading ? <div className="ranking-skeleton" aria-label="ランキング取得中">{[0, 1, 2].map((key) => <span key={key} />)}</div>
           : activeTab === "guild_power" ? <div className="ranking-list">{displayedRows.length > 0 ? displayedRows.map((row) => {
             const rank = validRank(row.rank_position);
-            return <button type="button" key={row.guild_id} className={`ranking-guild-row ${row.guild_id === currentGuildId ? "is-current" : ""}`} onClick={() => openGuild(row.guild_id)}><span className={`ranking-position is-${rank || "out"}`}><RankPresentation rank={rank} /></span><span className="ranking-guild-identity"><strong><GuildIdentity guildId={row.guild_id} name={row.name || row.guild_name || "ギルド"} size="m" /></strong><small>{Number(row.member_count || row.participant_count || 0)} MEMBERS</small></span><span className="ranking-metric">{Number(activePeriod === "daily" ? row.daily_power : row.current_power ?? row.guild_power ?? row.score ?? row.contribution ?? 0).toLocaleString()}<small>総合力</small></span></button>;
-          }) : <div className="ranking-empty">{listView === "nearby" ? contextError ? "周辺順位を取得できませんでした" : currentGuildId || activeTab !== "guild_power" ? "表示できる自己順位がありません" : "ギルドに所属すると確認できます" : "まだランキングデータがありません"}</div>}</div>
+            return <button type="button" key={row.guild_id} className={`ranking-guild-row ${row.guild_id === currentGuildId ? "is-current" : ""}`} onClick={() => openGuild(row.guild_id)}><span className={`ranking-position is-${rank || "out"}`}><RankPresentation rank={rank} /></span><span className="ranking-guild-identity"><strong><GuildIdentity guildId={row.guild_id} name={row.name || row.guild_name || "同盟"} size="m" /></strong><small>{Number(row.member_count || row.participant_count || 0)} MEMBERS</small></span><span className="ranking-metric">{Number(activePeriod === "daily" ? row.daily_power : row.current_power ?? row.guild_power ?? row.score ?? row.contribution ?? 0).toLocaleString()}<small>総合力</small></span></button>;
+          }) : <div className="ranking-empty">{listView === "nearby" ? contextError ? "周辺順位を取得できませんでした" : currentGuildId || activeTab !== "guild_power" ? "表示できる自己順位がありません" : "同盟に所属すると確認できます" : "まだランキングデータがありません"}</div>}</div>
             : <div className="ranking-list">{displayedRows.length > 0 ? displayedRows.map((row) => {
               const profile = profiles[row.user_id];
               const rank = validRank(row.rank_position);
@@ -453,8 +453,8 @@ export default function RankingTab() {
             }) : <div className="ranking-empty">{listView === "nearby" ? contextError ? "周辺順位を取得できませんでした" : "表示できる自己順位がありません" : "まだランキングデータがありません"}</div>}</div>}
 
       {!rankingMissionRewardOrigin && (activationMilestones.has("first_pvp") && !activationMilestones.has("first_raid") && isRaidActive ? <OutlawButton variant="primary" fullWidth className="ranking-return-cta" onClick={() => setActiveTab("raid")}>次はレイドへ挑戦</OutlawButton>
-        : activationMilestones.has("first_pvp") && !userGuildMember ? <OutlawButton variant="primary" fullWidth className="ranking-return-cta" onClick={() => setActiveTab("guild")}>おすすめTRIBEを見る</OutlawButton>
-          : activationMilestones.has("first_pvp") && userGuildMember && !activationMilestones.has("guild_activation") ? <OutlawButton variant="primary" fullWidth className="ranking-return-cta" onClick={() => setActiveTab("guild")}>所属TRIBEへ</OutlawButton>
+        : activationMilestones.has("first_pvp") && !userGuildMember ? <OutlawButton variant="primary" fullWidth className="ranking-return-cta" onClick={() => setActiveTab("guild")}>おすすめ同盟を見る</OutlawButton>
+          : activationMilestones.has("first_pvp") && userGuildMember && !activationMilestones.has("guild_activation") ? <OutlawButton variant="primary" fullWidth className="ranking-return-cta" onClick={() => setActiveTab("guild")}>所属同盟へ</OutlawButton>
             : null)}
       {rewardDialogOpen && <RankingRewardDialog
         currentRank={loading || error ? null : currentRank}

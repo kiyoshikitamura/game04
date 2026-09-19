@@ -13,11 +13,12 @@ export default function TitleLegalFooter({ boot = false }: TitleLegalFooterProps
         <Link href="/legal/terms">利用規約</Link>
         <Link href="/legal/privacy">プライバシーポリシー</Link>
         <Link href="/legal/tokusho">特定商取引法に基づく表記</Link>
+        <Link href="/legal/contact">お問い合わせ</Link>
       </nav>
       {!boot && (
         <div className="title-copyright">
           <span>v0.1.0</span>
-          <span>© 2026 TRIBE NEON</span>
+          <span>戦国姫艶武</span>
         </div>
       )}
     </footer>

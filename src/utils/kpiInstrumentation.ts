@@ -13,7 +13,7 @@ export type AcquisitionObservation =
   | "WORLD_INTRO_COMPLETED"
   | "NAME_COMPLETED";
 
-const MY_PAGE_CONTEXT_KEY = "tribe_kpi_mypage_context_v1";
+const MY_PAGE_CONTEXT_KEY = "game04_kpi_mypage_context_v1";
 
 function randomHex(bytes = 32) {
   const value = new Uint8Array(bytes);

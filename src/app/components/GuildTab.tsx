@@ -14,7 +14,7 @@ import { supabase } from "@/utils/supabase";
 import { GUILD_PRODUCTION, guildMemberCap, guildRecruitmentMode, type GuildRecruitmentMode } from "@/domain/gameplay/canonical/guild_production";
 
 function guildRoleLabel(role?: string | null): string {
-  if (role === "MASTER") return "ギルドマスター";
+  if (role === "MASTER") return "盟主";
   if (role === "SUBMASTER" || role === "SUB_MASTER") return "副団長";
   return "メンバー";
 }
@@ -262,14 +262,14 @@ export default function GuildTab() {
     };
     return (
       <div className="view-container guild-lobby-view">
-        <h1 className="sr-only">ギルド</h1>
+        <h1 className="sr-only">同盟</h1>
         <div className="scroll-container flex-1 guild-lobby-scroll">
           <details className={`guild-lobby-create ${createUnlocked ? "is-ready" : ""}`}>
-            <summary>ギルドを設立する <small>Lv.{GUILD_PRODUCTION.creation.userLevel} / {GUILD_PRODUCTION.creation.cashCost.toLocaleString()}キャッシュ</small></summary>
+            <summary>同盟を設立する <small>Lv.{GUILD_PRODUCTION.creation.userLevel} / {GUILD_PRODUCTION.creation.cashCost.toLocaleString()}キャッシュ</small></summary>
             <div className="guild-create-form">
               <input
                 type="text"
-                placeholder="ギルド名を入力 (12文字)"
+                placeholder="同盟名を入力 (12文字)"
                 value={newGuildName}
                 onChange={(e) => setNewGuildName(e.target.value)}
                 maxLength={GUILD_PRODUCTION.creation.nameMax}
@@ -287,18 +287,18 @@ export default function GuildTab() {
           </details>
 
           <section className="guild-lobby-section">
-            <div className="guild-lobby-section-heading"><span>おすすめギルド</span><small>{recommendedGuilds.length}件</small></div>
+            <div className="guild-lobby-section-heading"><span>おすすめ同盟</span><small>{recommendedGuilds.length}件</small></div>
             <div className="guild-lobby-list">
               {recommendationsLoading && <div className="guild-lobby-empty" role="status"><strong>おすすめを取得中</strong></div>}
               {recommendedGuilds.map(renderGuildCard)}
               {!recommendationsLoading && recommendedGuilds.length === 0 && (
-                <div className="guild-lobby-empty"><strong>おすすめギルドがありません</strong><span>ギルド名から検索できます。</span></div>
+                <div className="guild-lobby-empty"><strong>おすすめ同盟がありません</strong><span>同盟名から検索できます。</span></div>
               )}
             </div>
           </section>
 
           <section className="guild-lobby-section guild-lobby-search-section">
-            <div className="guild-lobby-section-heading"><span>ギルドを検索</span>{hasSearched && <small>{allGuildsDbList.length}件</small>}</div>
+            <div className="guild-lobby-section-heading"><span>同盟を検索</span>{hasSearched && <small>{allGuildsDbList.length}件</small>}</div>
             <div className="guild-search-form mb-3">
               <input
                 type="search"
@@ -308,7 +308,7 @@ export default function GuildTab() {
                   if (event.key === "Enter") void runGuildSearch();
                 }}
                 maxLength={30}
-                placeholder="ギルド名で検索"
+                placeholder="同盟名で検索"
                 className="guild-search-input bg-black-60 border-subtle text-white p-2 rounded outline-none"
               />
               <OutlawButton className="guild-search-button" variant="secondary" onClick={() => void runGuildSearch()} disabled={gvgResetLoading || searchLoading}>
@@ -318,7 +318,7 @@ export default function GuildTab() {
             {hasSearched && <div className="guild-lobby-list guild-search-results">
               {allGuildsDbList.map(renderGuildCard)}
               {allGuildsDbList.length === 0 && (
-                <div className="guild-lobby-empty"><strong>参加できるTRIBEが見つかりません</strong><span>検索条件を変えるか、時間をおいてもう一度確認してください。</span></div>
+                <div className="guild-lobby-empty"><strong>参加できる同盟が見つかりません</strong><span>検索条件を変えるか、時間をおいてもう一度確認してください。</span></div>
               )}
             </div>}
           </section>
@@ -337,7 +337,7 @@ export default function GuildTab() {
     <div className={`view-container guild-main-container ${borderClass} ${decorationClass}`}>
       {emblemEditorOpen && <GuildEmblemEditor key={userGuild.id} guildId={userGuild.id} onChanged={() => refreshGuildEmblem(userGuild.id)} onClose={() => setEmblemEditorOpen(false)} />}
       {guildSubTab === "home" && <div className="guild-my-page-scroll">
-        <section className={`guild-visual-identity ${bannerClass}`} aria-label="ギルド情報">
+        <section className={`guild-visual-identity ${bannerClass}`} aria-label="同盟情報">
           <div className="guild-identity-main">
             <GuildEmblem guildId={userGuild.id} legacySrc={userGuild.logo_icon} size="l" />
             <div className="guild-identity-copy">
@@ -352,7 +352,7 @@ export default function GuildTab() {
           <div className="guild-level-progress"><span>Lv EXP</span><div className="xp-bar-container"><div className="xp-bar-fill" style={{ width: `${xpPercent}%` }} /></div><small>{xpNeeded > 0 ? `${userGuild.xp} / ${xpNeeded}` : "MAX"}</small></div>
         </section>
 
-        <section className="guild-status-strip" aria-label="ギルド状況">
+        <section className="guild-status-strip" aria-label="同盟状況">
           <div><small>戦績</small><strong>準備中</strong></div>
           <div><small>直近7日アクティブ</small><strong>{activeMembers7d ?? "-"}人</strong></div>
           <div><small>資金</small><strong>{Number(userGuild.funds || 0).toLocaleString()}</strong></div>
@@ -363,19 +363,19 @@ export default function GuildTab() {
           <p>{userGuild.welcome_message || "歓迎メッセージは未設定です。"}</p>
         </section>
 
-        <nav className="guild-action-grid" aria-label="ギルド機能">
-          <button type="button" onClick={() => { setChatChannel("GUILD"); setShowTribeChatPanel(true); }}><strong>ギルドチャット</strong><span>メンバーと話す</span></button>
+        <nav className="guild-action-grid" aria-label="同盟機能">
+          <button type="button" onClick={() => { setChatChannel("GUILD"); setShowTribeChatPanel(true); }}><strong>同盟チャット</strong><span>メンバーと話す</span></button>
           <button type="button" onClick={() => setGuildSubTab("members")}><strong>メンバー</strong><span>{guildMembersList.length}人</span></button>
-          <button type="button" className="is-coming-soon" disabled><strong>ギルドバトル</strong><span>準備中</span></button>
+          <button type="button" className="is-coming-soon" disabled><strong>同盟バトル</strong><span>準備中</span></button>
           <button type="button" className="is-coming-soon" disabled><strong>資金＆ショップ</strong><span>COMING SOON</span></button>
         </nav>
 
-        {(isMaster || isSubMaster) && <button type="button" className="guild-settings-link" onClick={() => setGuildSubTab("settings")}>ギルド設定</button>}
-        <div className="guild-leave-action"><button type="button" onClick={handleLeaveGuild} disabled={gvgResetLoading}>ギルドを脱退</button></div>
+        {(isMaster || isSubMaster) && <button type="button" className="guild-settings-link" onClick={() => setGuildSubTab("settings")}>同盟設定</button>}
+        <div className="guild-leave-action"><button type="button" onClick={handleLeaveGuild} disabled={gvgResetLoading}>同盟を脱退</button></div>
       </div>}
 
       {guildSubTab !== "home" && <div className="guild-secondary-view">
-        <div className="guild-secondary-heading"><button type="button" disabled={settingsMutationPending} onClick={() => setGuildSubTab("home")} aria-label="ギルドマイページへ戻る">←</button><strong>{guildSubTab === "members" ? "メンバー" : "ギルド設定"}</strong></div>
+        <div className="guild-secondary-heading"><button type="button" disabled={settingsMutationPending} onClick={() => setGuildSubTab("home")} aria-label="同盟マイページへ戻る">←</button><strong>{guildSubTab === "members" ? "メンバー" : "同盟設定"}</strong></div>
         <div className="scroll-container flex-1">
         
         {/* 1. メンバーリスト表示 */}
@@ -400,7 +400,7 @@ export default function GuildTab() {
                 </div>
               </OutlawCard>
             )}
-            <p className="guild-member-list-note">ギルドマスター、副団長、メンバーの順に表示します。</p>
+            <p className="guild-member-list-note">盟主、副団長、メンバーの順に表示します。</p>
 
             <div className="guild-member-list">
               {[...guildMembersList].sort((a: any, b: any) => {
@@ -506,17 +506,17 @@ export default function GuildTab() {
               pending={savingGuildSettings}
               canEdit={(isMaster || isSubMaster) && !settingsMutationPending}
               onEdit={() => { setEditingWelcome(false); setEditingAttributes(false); setEditingGuildSettings(true); }}
-              summary={<dl><dt>ギルド紹介</dt><dd>{userGuild.description || "未設定"}</dd><dt>募集モード</dt><dd>{recruitmentModeLabel(guildRecruitmentMode(userGuild.recruitment_mode, Boolean(userGuild.approval_required)))}</dd></dl>}
+              summary={<dl><dt>同盟紹介</dt><dd>{userGuild.description || "未設定"}</dd><dt>募集モード</dt><dd>{recruitmentModeLabel(guildRecruitmentMode(userGuild.recruitment_mode, Boolean(userGuild.approval_required)))}</dd></dl>}
             >
-              <label className="editable-setting-label" htmlFor="guild-description">ギルド紹介</label>
-              <textarea id="guild-description" value={guildDescriptionDraft} onChange={(event) => setGuildDescriptionDraft(event.target.value)} maxLength={200} disabled={savingGuildSettings} placeholder="ギルド紹介（200文字以内）" />
+              <label className="editable-setting-label" htmlFor="guild-description">同盟紹介</label>
+              <textarea id="guild-description" value={guildDescriptionDraft} onChange={(event) => setGuildDescriptionDraft(event.target.value)} maxLength={200} disabled={savingGuildSettings} placeholder="同盟紹介（200文字以内）" />
               <div className="editable-setting-meta"><span>{guildDescriptionDraft.length}/200</span></div>
               <ChoiceGroup label="募集モード" value={recruitmentModeDraft} options={recruitmentModeOptions} disabled={savingGuildSettings} onChange={setRecruitmentModeDraft} />
               <div className="editable-setting-actions"><OutlawButton variant="secondary" disabled={savingGuildSettings} onClick={() => { setGuildDescriptionDraft(userGuild.description || ""); setRecruitmentModeDraft(guildRecruitmentMode(userGuild.recruitment_mode, Boolean(userGuild.approval_required))); setEditingGuildSettings(false); }}>キャンセル</OutlawButton><OutlawButton variant="primary" isLoading={savingGuildSettings} loadingLabel="保存中…" disabled={savingGuildSettings} onClick={saveGuildSettings}>設定を保存</OutlawButton></div>
             </EditableSettingSection>
 
             <EditableSettingSection
-              title="ギルド属性"
+              title="同盟属性"
               helper="GvGでのみ有効"
               editing={editingAttributes}
               pending={savingAttributes}

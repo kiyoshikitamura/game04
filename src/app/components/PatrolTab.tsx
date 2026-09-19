@@ -218,13 +218,13 @@ export default function PatrolTab() {
     .map((item) => `${canonicalItemName(String(item.item_id || ""))} ×${item.quantity}${Number(item.probability_bp) < 10000 ? ` (${Number(item.probability_bp) / 100}%)` : ""}`)
     .join(" / ");
   const townTabs = [
-    { id: "shinjuku", label: "新宿" },
-    { id: "shibuya", label: "渋谷" },
-    { id: "ikebukuro", label: "池袋" },
-    { id: "roppongi", label: "六本木" },
-    { id: "akihabara", label: "秋葉原" },
-    { id: "kawasaki", label: "川崎" },
-    { id: "yokohama", label: "横浜" }
+    { id: "shinjuku", label: "尾張" },
+    { id: "shibuya", label: "美濃" },
+    { id: "ikebukuro", label: "近江" },
+    { id: "roppongi", label: "京洛" },
+    { id: "akihabara", label: "甲斐" },
+    { id: "kawasaki", label: "越後" },
+    { id: "yokohama", label: "天下分け目" }
   ];
   const selectedTownLabel = townTabs.find((town) => town.id === selectedTown)?.label || "街";
   const enemyName = (characterId: string) => CHARACTERS_MASTER.find((character) => character.id === characterId)?.jpName || "未確認の敵";
@@ -420,10 +420,10 @@ export default function PatrolTab() {
         : isReturn ? "Q5" : "Q6";
 
     return (
-      <HubPage className="patrol-container tutorial-quest-shell" eyebrow="クエスト" title="クエスト" description="新宿・初級" status={readiness.status} onRetry={readiness.retry}>
+      <HubPage className="patrol-container tutorial-quest-shell" eyebrow="クエスト" title="クエスト" description="尾張・初級" status={readiness.status} onRetry={readiness.retry}>
         <section className={`tutorial-quest-wire state-${acceptanceState.toLowerCase()}`} data-acceptance-state={acceptanceState} style={{ backgroundImage: `linear-gradient(180deg,rgba(2,3,12,.16),rgba(2,2,10,.92)),url(${bgImage})` }}>
           {acceptanceState === "Q1" && <>
-            <header className="tutorial-wire-heading"><span>新宿</span><strong>初級</strong><small>所要時間 {formatClock(tutorialCourse?.duration_seconds)}</small></header>
+            <header className="tutorial-wire-heading"><span>尾張</span><strong>初級</strong><small>所要時間 {formatClock(tutorialCourse?.duration_seconds)}</small></header>
             <div className="tutorial-wire-rewards" aria-label="確定報酬">
               {Number(tutorialCourse?.reward_xp || 0) > 0 && <QuestRewardIcon itemId="PLAYER_XP" quantity={Number(tutorialCourse.reward_xp)} />}
               {guaranteedRewardItems(tutorialCourse?.reward_items).map((item: any) => <QuestRewardIcon key={item.item_id} itemId={String(item.item_id)} quantity={Number(item.quantity || 0)} />)}
@@ -432,24 +432,24 @@ export default function PatrolTab() {
               <CharacterPresentation src={characterImage(tutorialCharacter?.img) || undefined} alt={tutorialCharacter?.jpName || "派遣メンバー"} variant="quest" rarity={tutorialCharacter?.rarity} attribute={tutorialCharacter?.alignment} backgroundSrc={getCharacterLocationBackground(tutorialCharacter?.homeTown)} frameKind="character" rarityBadge attributeBadge />
               <div><small>派遣メンバー</small><b>{tutorialCharacter?.jpName || "メンバー"}</b><span>{tutorialCharacter?.rarity || "SSR"}</span></div>
             </div>
-            <OutlawButton onClick={handleStart} disabled={dispatchLoading || !selectedCourse || !selectedPatrolMember} fullWidth variant="primary">{dispatchLoading ? "派遣準備中…" : "新宿へ派遣する"}</OutlawButton>
+            <OutlawButton onClick={handleStart} disabled={dispatchLoading || !selectedCourse || !selectedPatrolMember} fullWidth variant="primary">{dispatchLoading ? "派遣準備中…" : "尾張へ派遣する"}</OutlawButton>
           </>}
 
           {(acceptanceState === "Q2" || acceptanceState === "Q3") && <>
-            <header className="tutorial-wire-progress-title"><span>新宿へ派遣中</span><small>NEW SHINJUKU DISTRICT</small></header>
+            <header className="tutorial-wire-progress-title"><span>尾張へ派遣中</span><small>尾張への道</small></header>
             <div className="tutorial-wire-progress-character" data-character-id={tutorialCharacter?.id} data-user-character-id={tutorialOwnedCharacter?.id}><CharacterPresentation src={characterImage(tutorialCharacter?.img) || undefined} alt={tutorialCharacter?.jpName || "派遣メンバー"} variant="quest" rarity={tutorialCharacter?.rarity} attribute={tutorialCharacter?.alignment} backgroundSrc={getCharacterLocationBackground(tutorialCharacter?.homeTown)} frameKind="character" rarityBadge attributeBadge /></div>
-            <strong className="tutorial-wire-course">新宿・初級</strong>
+            <strong className="tutorial-wire-course">尾張・初級</strong>
             <div className="tutorial-wire-time">残り時間 <b>{formatClock(remaining)}</b></div>
             <div className="tutorial-wire-progress"><i style={{ width: `${progress}%` }} /></div>
             <OutlawButton onClick={() => tutorialPatrol && void handleTutorialInstant(tutorialPatrol.id)} disabled={dispatchLoading || !tutorialPatrol} fullWidth variant="primary">すぐに時短する <small>無料（残り1回）</small></OutlawButton>
           </>}
 
-          {acceptanceState === "Q4" && <div className="tutorial-wire-speedup" role="status"><h2>新宿へ派遣中</h2><div className="tutorial-wire-speed-icon">»</div><strong>時短中…</strong><div className="tutorial-wire-progress"><i /></div></div>}
+          {acceptanceState === "Q4" && <div className="tutorial-wire-speedup" role="status"><h2>尾張へ派遣中</h2><div className="tutorial-wire-speed-icon">»</div><strong>時短中…</strong><div className="tutorial-wire-progress"><i /></div></div>}
 
           {acceptanceState === "Q5" && <>
             <header className="tutorial-wire-complete"><h2>クエスト完了</h2><small>QUEST COMPLETE</small></header>
             <div className="tutorial-wire-return-character" data-character-id={tutorialCharacter?.id} data-user-character-id={tutorialOwnedCharacter?.id}><CharacterPresentation src={characterImage(tutorialCharacter?.img) || undefined} alt={tutorialCharacter?.jpName || "帰還メンバー"} variant="quest" rarity={tutorialCharacter?.rarity} attribute={tutorialCharacter?.alignment} backgroundSrc={getCharacterLocationBackground(tutorialCharacter?.homeTown)} frameKind="character" rarityBadge attributeBadge /></div>
-            <strong className="tutorial-wire-course">新宿・初級</strong>
+            <strong className="tutorial-wire-course">尾張・初級</strong>
             <div className="tutorial-wire-rewards is-return" aria-label="確定報酬">
               {Number(tutorialCourse?.reward_xp || 0) > 0 && <QuestRewardIcon itemId="PLAYER_XP" quantity={Number(tutorialCourse.reward_xp)} />}
               {guaranteedRewardItems(tutorialCourse?.reward_items).map((item: any) => <QuestRewardIcon key={item.item_id} itemId={String(item.item_id)} quantity={Number(item.quantity || 0)} />)}
@@ -502,7 +502,7 @@ export default function PatrolTab() {
       <div className="patrol-content">
         {isTutorialQuestStep ? (
           <section className="tutorial-quest-city" style={{ backgroundImage: `linear-gradient(180deg,rgba(1,5,10,.12),rgba(1,5,10,.92)),url(${bgImage})` }}>
-            <div><span>QUEST / SHINJUKU</span><h2>新宿</h2><p>初級クエスト</p></div>
+            <div><span>第一章 / 尾張</span><h2>尾張</h2><p>初級クエスト</p></div>
           </section>
         ) : (
           <section className="quest-canonical-context" style={{ backgroundImage: `linear-gradient(90deg,rgba(2,5,12,.86),rgba(2,5,12,.28)),url(${bgImage})` }}>
@@ -524,7 +524,7 @@ export default function PatrolTab() {
         {tutorialStep === "DISPATCH" && (
           <div className="tutorial-quest-guidance">
             <TutorialNavigator message={<>
-              次はクエストね。まずはこの子を新宿に行かせてみよ。<br />
+              次はクエストね。まずはこの子を尾張に行かせてみよ。<br />
               クエストに出すと、時間が経つと帰ってくるよ。経験値やアイテムも手に入るから、少しずつ進めてこ。
             </>} />
           </div>

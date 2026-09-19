@@ -126,7 +126,7 @@ export const LoginBonusModal: React.FC<LoginBonusModalProps> = ({
           >
             閉じる
           </button>
-          <button
+          {(claimResult?.delivery !== 'DIRECT' || onOpenBag) && <button
             className="login-bonus-btn login-bonus-btn-primary"
             onClick={() => {
               onClose();
@@ -147,7 +147,7 @@ export const LoginBonusModal: React.FC<LoginBonusModalProps> = ({
               <polyline points="20 6 9 17 5 12" />
             </svg>
             {claimResult?.delivery === 'DIRECT' ? 'マイバッグへ' : 'プレゼントBOXへ'}
-          </button>
+          </button>}
         </div>
       </div>
     </div>

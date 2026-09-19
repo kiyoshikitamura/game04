@@ -1,6 +1,7 @@
 export type HomeInitialCta = Readonly<{
   key: string;
   title: string;
+  message?: string;
   tab?: string;
   action?: "mission_handoff";
   disabled?: boolean;
@@ -13,6 +14,7 @@ export function resolveHomeInitialCta(input: {
   gameplayAuthorized?: boolean;
   milestones: ReadonlySet<string>;
   raidAvailability: "active" | "inactive" | "unknown";
+  shinjukuIntermediateFirstClear?: boolean;
 }): HomeInitialCta | null {
   if (!input.ready) return null;
   const { tutorialStep, milestones } = input;
@@ -33,11 +35,15 @@ export function resolveHomeInitialCta(input: {
     return { key: "first_main_loadout", title: "装備を整えよう", tab: "character" };
   }
   if (!milestones.has("post_tutorial_quest")) return { key: "post_tutorial_quest", title: "クエストでCASHを集めよう", tab: "patrol" };
+  if (input.shinjukuIntermediateFirstClear && !milestones.has("first_pvp")) return {
+    key: "first_pvp", title: "バトルに参加してみよう",
+    message: "他のプレイヤーの編成と戦ってみましょう。勝敗に応じて報酬を獲得できます。", tab: "pvp",
+  };
   if (!milestones.has("first_pvp")) return { key: "first_pvp", title: "最初のバトルへ挑戦", tab: "pvp" };
   if ((milestones.has("first_raid") || input.raidAvailability === "inactive")
     && !milestones.has("post_tutorial_guild_view") && !milestones.has("guild_detail_view")) {
     return { key: "post_tutorial_guild_view", title: input.raidAvailability === "inactive" && !milestones.has("first_raid")
-      ? "レイド開催待ち・ギルドを見よう" : "ギルドを見よう", tab: "guild" };
+      ? "レイド開催待ち・同盟を見よう" : "同盟を見よう", tab: "guild" };
   }
   if (!milestones.has("first_raid") && input.raidAvailability === "inactive") return {
     key: "activation_mission_handoff", title: "レイド開催待ち・ミッションへ", action: "mission_handoff",
@@ -52,10 +58,11 @@ export function resolveHomeInitialCta(input: {
 
 export function describeHomeActivity(type?: string | null): string {
   switch (type) {
-    case "RAID_HELP_REQUEST": return "レイドの救援を依頼";
-    case "RAID_BOSS_DEFEATED": return "レイドボスを撃破";
-    case "GUILD_CREATED": return "TRIBEを結成";
+    case "RAID_HELP_REQUEST": return "討伐の援軍を要請";
+    case "RAID_BOSS_DEFEATED": return "強敵を討伐";
+    case "GUILD_CREATED": return "同盟を結成";
     case "POWER_RANK_1": return "総戦力ランキング1位に到達";
+    case "PVP_DAILY_RANK_1": return "日次合戦ランキング1位に到達";
     case "SSR_CHARACTER": case "SSR_SKILL": case "SSR_EQUIPMENT": return "SSRを獲得";
     default: return "アクティビティを更新";
   }

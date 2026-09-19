@@ -127,10 +127,10 @@ export const MASTER_AVATARS = [
 ];
 
 export const PROFILE_BACKGROUNDS = [
-  { id: "bg_default", name: "新宿アジト", img: "/bg/bg_street_shinjuku.jpg", desc: "初期解放" },
-  { id: "bg_kabukicho", name: "新宿ネオン街", img: "/bg/bg_street_shinjuku.jpg", desc: "Lv.5以上で解放" },
-  { id: "bg_wharf", name: "東京ドック埠頭", img: "/bg/bg_street_yokohama.jpg", desc: "ギルド加入で解放" },
-  { id: "bg_bazar", name: "渋谷スクランブル", img: "/bg/bg_street_shibuya.jpg", desc: "20,000キャッシュ以上で解放" }
+  { id: "bg_default", name: "夕桜の城門", img: "/bg/sengoku/castle-approach.jpg", desc: "初期解放" },
+  { id: "bg_kabukicho", name: "夕桜の城下町", img: "/bg/sengoku/castle-town.jpg", desc: "Lv.5以上で解放" },
+  { id: "bg_wharf", name: "夕桜の城門", img: "/bg/sengoku/castle-approach.jpg", desc: "ギルド加入で解放" },
+  { id: "bg_bazar", name: "夕桜の城下町", img: "/bg/sengoku/castle-town.jpg", desc: "20,000キャッシュ以上で解放" }
 ];
 
 export const PROFILE_FRONT_EFFECTS = [

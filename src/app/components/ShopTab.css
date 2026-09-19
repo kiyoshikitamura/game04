@@ -1,7 +1,5 @@
-.shop-tab-container { display:flex; flex-direction:column; height:100%; }
-.shop-scroll-body { flex:1; min-height:0; overflow-y:auto; padding-right:4px; }
-.shop-scroll-body::-webkit-scrollbar { width:5px; }
-.shop-scroll-body::-webkit-scrollbar-thumb { background:rgba(160,160,170,.3); border-radius:3px; }
+.shop-tab-container { display:flex; flex-direction:column; min-width:0; min-height:0; height:100%; }
+.shop-scroll-body { flex:1; min-height:0; overflow-y:auto; overflow-x:hidden; overscroll-behavior-y:contain; padding:0 4px max(16px, env(safe-area-inset-bottom)); }
 .shop-section { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
 .shop-section-title { font-size:13px; font-weight:700; }
 .shop-tax-note { font-size:10px; font-weight:400; color:#aeb7c5; margin:0 0 8px; }

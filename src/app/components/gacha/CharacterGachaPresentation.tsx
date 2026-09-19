@@ -87,11 +87,11 @@ export default function CharacterGachaPresentation(props: Props) {
     ...CITIES.map((city) => ({ src: getCharacterLocationBackground(city) })),
     ...props.results.flatMap((result) => [{ src: result.imageUrl }, { src: town(result) }, { src: getRarityBadgeAsset(result.rarity) }, ...(acquisitionBadge(result) ? [{ src: acquisitionBadge(result)! }] : [])]),
   ] });
-  if (textOnly) return <div className="cg-overlay"><section className="cg-loading" role="dialog" aria-modal="true" aria-label="獲得結果">
+  if (textOnly) return <div className="cg-overlay"><section className="cg-loading custom-scrollbar" role="dialog" aria-modal="true" aria-label="獲得結果">
     <h2>獲得結果</h2><ol>{props.results.map((result, index) => <li key={index}>{result.rarity} {result.name} / {outcome(result)}</li>)}</ol>
     <OutlawButton onClick={props.onClose}>{props.tutorial ? "編成へ進む" : "ガチャへ戻る"}</OutlawButton>
   </section></div>;
-  if (readiness.status !== "ready" || !fontReady) return <div className="cg-overlay"><section className="cg-loading" role="dialog" aria-modal="true" aria-label="ガチャ演出の準備">
+  if (readiness.status !== "ready" || !fontReady) return <div className="cg-overlay"><section className="cg-loading custom-scrollbar" role="dialog" aria-modal="true" aria-label="ガチャ演出の準備">
     {readiness.status === "error" ? <p role="status">画像を読み込めませんでした</p> : <i className="cg-loading-spinner" role="status" aria-label="ガチャ演出を準備中" />}
     {readiness.status === "error" && <OutlawButton onClick={readiness.retry}>画像を再読み込み</OutlawButton>}
     {readiness.status === "error" && <button type="button" onClick={() => { props.onReveal(); setTextOnly(true); }}>獲得結果を文字で確認</button>}
@@ -208,7 +208,7 @@ function ReadyCharacterGacha({ results, tutorial, onReveal, onClose, playSound, 
       {failedScene === `${sceneKey}-${imageRetry}` && <button type="button" onClick={() => setImageRetry((value) => value + 1)}>画像を再読み込み</button>}
       {failedScene === `${sceneKey}-${imageRetry}` && <button type="button" onClick={onTextOnly}>獲得結果を文字で確認</button>}
     </section>}
-    <div ref={shell} aria-hidden={!sceneReady} inert={!sceneReady} tabIndex={-1} role="dialog" aria-modal="true" aria-label="ガチャ結果" className={`cg-shell ${sceneReady ? "" : "cg-waiting"} cg-${opening ? highest.toLowerCase() : rarity.toLowerCase()} cg-stage-${stage.toLowerCase()}`} data-gacha-presentation="arrival" data-stage={stage} onKeyDown={(event) => {
+    <div ref={shell} aria-hidden={!sceneReady} inert={!sceneReady} tabIndex={-1} role="dialog" aria-modal="true" aria-label="ガチャ結果" className={`cg-shell custom-scrollbar ${sceneReady ? "" : "cg-waiting"} cg-${opening ? highest.toLowerCase() : rarity.toLowerCase()} cg-stage-${stage.toLowerCase()}`} data-gacha-presentation="arrival" data-stage={stage} onKeyDown={(event) => {
       if (event.key === "Escape" && !opening) { event.preventDefault(); skip(); }
       if (event.key !== "Tab") return;
       const buttons = Array.from(shell.current?.querySelectorAll<HTMLButtonElement>("button:not(:disabled)") || []);

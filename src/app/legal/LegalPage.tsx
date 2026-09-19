@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { LEGAL_SETTINGS_RETURN_QUERY, LEGAL_SETTINGS_RETURN_VALUE } from "@/utils/legalSettingsReturn";
 import "./legal.css";
+import { GAME04_LEGAL } from "./legalConfig";
 
 type LegalPageProps = {
   title: string;
@@ -49,16 +50,22 @@ export default function LegalPage({ title, updatedAt, children, returnToGame = f
     >
       <section className="legal-page-card" aria-labelledby="legal-page-title">
         {!returnToGame && <Link href="/" className="legal-page-back">← タイトルへ戻る</Link>}
-        <p className="legal-page-brand">TRIBE NEON</p>
+        <p className="legal-page-brand">{GAME04_LEGAL.title}</p>
         <h1 id="legal-page-title">{title}</h1>
-        <p className="legal-page-updated">制定日：{updatedAt}</p>
+        <p className="legal-page-updated">{GAME04_LEGAL.status === "draft" ? "草案更新日" : "施行日"}：{GAME04_LEGAL.status === "draft" ? updatedAt : GAME04_LEGAL.effectiveDate}</p>
+        {GAME04_LEGAL.status === "draft" && <p className="legal-page-notice">正式公開前の草案です。運営者情報・問い合わせ窓口・施行日は、正式公開までに掲載します。</p>}
         <div className="legal-page-content">{children}</div>
         <nav className="legal-page-nav" aria-label="法的情報">
           <Link href={legalHref("/legal/terms")} replace={returnToGame}>利用規約</Link>
           <Link href={legalHref("/legal/privacy")} replace={returnToGame}>プライバシーポリシー</Link>
           <Link href={legalHref("/legal/tokusho")} replace={returnToGame}>特定商取引法に基づく表記</Link>
+          <Link href={legalHref("/legal/payments")} replace={returnToGame}>有償通貨・購入品について</Link>
+          <Link href={legalHref("/legal/cookies")} replace={returnToGame}>Cookie・アクセス解析</Link>
+          <Link href={legalHref("/legal/age-rating")} replace={returnToGame}>年齢・課金について</Link>
+          <Link href={legalHref("/legal/rights")} replace={returnToGame}>権利表記・運営者情報</Link>
+          <Link href={legalHref("/legal/contact")} replace={returnToGame}>お問い合わせ</Link>
         </nav>
-        <p className="legal-page-copyright">© 2026 TRIBE NEON</p>
+        <p className="legal-page-copyright">{GAME04_LEGAL.rightsHolder ? `© ${GAME04_LEGAL.rightsHolder}` : GAME04_LEGAL.title}</p>
       </section>
       <div className="legal-page-scroll-track" aria-hidden="true">
         <span

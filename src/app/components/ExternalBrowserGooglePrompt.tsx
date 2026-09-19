@@ -16,7 +16,7 @@ export default function ExternalBrowserGooglePrompt({ url, onClose }: ExternalBr
           外部ブラウザで開いてください
         </div>
         <div className="modal-desc text-left mb-3">
-          Googleログインを続けるには、SafariまたはChromeでTRIBE NEONを開いてください。
+          Googleログインを続けるには、SafariまたはChromeで戦国姫艶武を開いてください。
           <br /><br />
           外部ブラウザで開いた後、もう一度Googleログインしてください。
         </div>

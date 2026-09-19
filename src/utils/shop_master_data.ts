@@ -1,3 +1,5 @@
+import { canonicalItemName } from "@/domain/gameplay/canonical/items";
+
 export interface ShopProductItem {
   itemId: string;
   itemName: string;
@@ -28,7 +30,7 @@ const recoveries = [
   ["bp", "PVP_POINT_TICKET", "ファイトチケット"],
   ["rp", "RAID_POINT_TICKET", "レイドチケット"],
 ];
-export const SHOP_PRODUCTS_MASTER: ShopProduct[] = [
+const sourceProducts: ShopProduct[] = [
   {
     id: "beginner_pack_01", shopType: "LIMITED", category: "BEGINNER",
     title: "ビギナーパック", description: "", priceJpy: 100, purchaseLimit: 1, sortOrder: 1,
@@ -84,6 +86,21 @@ export const SHOP_PRODUCTS_MASTER: ShopProduct[] = [
     items:[{itemId:"CASH",itemName:"CASH",quantity}],sortOrder:110+index,
   })),
 ];
+
+const packTitles: Readonly<Record<string, string>> = {
+  beginner_pack_01: "初陣応援パック", ticket_pack_01: "特選召喚札パック",
+  growth_pack_01: "修練応援パック", awakening_pack_01: "覚醒応援パック",
+};
+export const SHOP_PRODUCTS_MASTER: ShopProduct[] = sourceProducts.map((product) => {
+  const items = product.items.map((item) => ({ ...item, itemName: canonicalItemName(item.itemId) }));
+  const single = items.length === 1 ? items[0] : null;
+  return { ...product, items,
+    title: packTitles[product.id] ?? (single ? `${single.itemName} ×${single.quantity.toLocaleString("ja-JP")}` : product.title),
+    description: product.category === "DIAMOND" ? "登用や商店で使用できるダイヤです。"
+      : product.id.startsWith("cash_") ? "姫武将の育成や通常登用に使えるCASHです。"
+      : items.map(item => `${item.itemName} ×${item.quantity.toLocaleString("ja-JP")}`).join("／"),
+  };
+});
 
 /** 表示用。購入の最終判定はサーバー側の注文・購入履歴を使用する。 */
 export function remainingShopPurchases(product: ShopProduct, purchased: number): number | null {
