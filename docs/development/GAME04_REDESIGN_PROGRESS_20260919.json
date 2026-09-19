@@ -2,7 +2,7 @@
   "title": "GAME04 全面改修進捗管理",
   "date": "2026-09-20",
   "basisSha": "7369f3dbaf3ef454c33932df55ee308e0b7718cb",
-  "previewSha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
+  "previewSha": "f539ba0c92484c6e2c0e446567555311f6265fd2",
   "previewUrl": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
   "db": "lrgyllgzcdcphlbmkknc",
   "scope": "2026-09-19全面再設計42件＋2026-09-20領土侵攻TI-01〜05の実装工程サブセット計47件。初期対象外M6-05はexcludedTasksへ分離。全体141件正本の代替ではなく、旧191件・43件の率を全体率へ流用しない。",
@@ -437,11 +437,11 @@
       "title": "領土侵攻Home CTA・開催トップ・レイド一覧導線の再編",
       "status": "Preview反映済",
       "specStatus": "FIX済み",
-      "notes": "9/20領土侵攻正本の接続実装をPreview反映。正式数値/素材は未FIXのまま。dev実API・DB証跡はterritoryUpdatesと領土侵攻統合台帳参照。",
+      "notes": "9/20領土侵攻の接続実装と限定統合受入をPreview反映。360px offline fixture UI実操作とdev実APIを別試験で確認。正式Master/素材・物理実機・全Lvバランスの最終受入は未実施。",
       "previewEligible": true,
-      "sha": "a74304373f6ee026b50234a879102f1f99b4306e",
+      "sha": "f539ba0c92484c6e2c0e446567555311f6265fd2",
       "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
-      "completionScope": "機構・接続実装のみ。正式Master/素材/最終実機受入とは分離。"
+      "completionScope": "機構・接続実装と限定統合受入のみ。正式Master/素材/物理実機/全Lvバランスは別工程。"
     },
     {
       "id": "TI-02",
@@ -449,11 +449,11 @@
       "title": "ユーザー領土侵攻経験値/レベルと成長・解放マスター接続",
       "status": "Preview反映済",
       "specStatus": "FIX済み",
-      "notes": "9/20領土侵攻正本の接続実装をPreview反映。正式数値/素材は未FIXのまま。dev実API・DB証跡はterritoryUpdatesと領土侵攻統合台帳参照。",
+      "notes": "9/20領土侵攻の接続実装と限定統合受入をPreview反映。360px offline fixture UI実操作とdev実APIを別試験で確認。正式Master/素材・物理実機・全Lvバランスの最終受入は未実施。",
       "previewEligible": true,
-      "sha": "a74304373f6ee026b50234a879102f1f99b4306e",
+      "sha": "f539ba0c92484c6e2c0e446567555311f6265fd2",
       "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
-      "completionScope": "機構・接続実装のみ。正式Master/素材/最終実機受入とは分離。"
+      "completionScope": "機構・接続実装と限定統合受入のみ。正式Master/素材/物理実機/全Lvバランスは別工程。"
     },
     {
       "id": "TI-03",
@@ -461,11 +461,11 @@
       "title": "領土侵攻の開催枠/必要Lv/アイテム同時判定・開催時ルール保持",
       "status": "Preview反映済",
       "specStatus": "FIX済み",
-      "notes": "9/20領土侵攻正本の接続実装をPreview反映。正式数値/素材は未FIXのまま。dev実API・DB証跡はterritoryUpdatesと領土侵攻統合台帳参照。",
+      "notes": "9/20領土侵攻の接続実装と限定統合受入をPreview反映。360px offline fixture UI実操作とdev実APIを別試験で確認。正式Master/素材・物理実機・全Lvバランスの最終受入は未実施。",
       "previewEligible": true,
-      "sha": "a74304373f6ee026b50234a879102f1f99b4306e",
+      "sha": "f539ba0c92484c6e2c0e446567555311f6265fd2",
       "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
-      "completionScope": "機構・接続実装のみ。正式Master/素材/最終実機受入とは分離。"
+      "completionScope": "機構・接続実装と限定統合受入のみ。正式Master/素材/物理実機/全Lvバランスは別工程。"
     },
     {
       "id": "TI-04",
@@ -473,22 +473,23 @@
       "title": "侵攻クリア時主催者3勝経験値・終了枠解放・結果報酬導線",
       "status": "Preview反映済",
       "specStatus": "FIX済み",
-      "notes": "9/20領土侵攻正本の接続実装をPreview反映。正式数値/素材は未FIXのまま。dev実API・DB証跡はterritoryUpdatesと領土侵攻統合台帳参照。",
+      "notes": "9/20領土侵攻の接続実装と限定統合受入をPreview反映。360px offline fixture UI実操作とdev実APIを別試験で確認。正式Master/素材・物理実機・全Lvバランスの最終受入は未実施。",
       "previewEligible": true,
-      "sha": "a74304373f6ee026b50234a879102f1f99b4306e",
+      "sha": "f539ba0c92484c6e2c0e446567555311f6265fd2",
       "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
-      "completionScope": "機構・接続実装のみ。正式Master/素材/最終実機受入とは分離。"
+      "completionScope": "機構・接続実装と限定統合受入のみ。正式Master/素材/物理実機/全Lvバランスは別工程。"
     },
     {
       "id": "TI-05",
       "phase": "M5",
       "title": "領土侵攻の境界条件・並行処理・個別戦闘の統合受入",
-      "status": "着手中",
+      "status": "Preview反映済",
       "specStatus": "FIX済み",
-      "notes": "9/20領土侵攻正本に基づき実装・統合受入を開始。正式数値は未FIX。DB/Edge/Preview反映と受入証跡は確認後に別記。",
-      "previewEligible": false,
-      "sha": "",
-      "url": ""
+      "notes": "9/20領土侵攻の接続実装と限定統合受入をPreview反映。360px offline fixture UI実操作とdev実APIを別試験で確認。正式Master/素材・物理実機・全Lvバランスの最終受入は未実施。",
+      "previewEligible": true,
+      "sha": "f539ba0c92484c6e2c0e446567555311f6265fd2",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "completionScope": "機構・接続実装と限定統合受入のみ。正式Master/素材/物理実機/全Lvバランスは別工程。"
     }
   ],
   "latestDecision": "2026-09-20 領土侵攻のHome開催導線・主催者経験値/レベル・同時開催枠/侵攻先解放をFIX。詳細: docs/product/GAME04_TERRITORY_INVASION_AUTHORITY_2026-09-20.md",
@@ -595,7 +596,7 @@
   "territoryUpdates": {
     "authority": "docs/product/GAME04_TERRITORY_INVASION_AUTHORITY_2026-09-20.md",
     "basisSha": "2ebc36a152c91d3edcdfc23e47a108c41a0cc9b7",
-    "status": "着手中（TI-01〜04はPreview反映済、TI-05最終確認中）",
+    "status": "Preview反映済（接続実装・限定統合受入）",
     "taskIds": [
       "TI-01",
       "TI-02",
@@ -611,21 +612,32 @@
     "verification": {
       "typecheck": "PASS",
       "build": "PASS",
-      "preview": "a743043 Vercel success・branch URL /qa/redesign 領土CTA等表示確認。スマホ幅QA追加commit d1434e3d22c6b9a194f29ae408d559331170be0bはbuild中。",
+      "preview": "f539ba0c92484c6e2c0e446567555311f6265fd2 Vercel success。360px iframe内offline fixtureをブラウザ実操作。dev実APIは別試験。",
       "hostingRollback": "PASS: item0/必要Lv/枠/部分消費なし/同id同room/異payload拒否/snapshot固定/Master更新時不変/expired枠解放・履歴保持/nullMaster拒否",
       "hostingLiveApi": "PASS: Lv1並行2→200/400枠満杯、同request再送同room・items1→0。Lv2 QAfixture既存1開催/所持3で並行2→200/400、計2開催・所持2。",
       "clearXpLiveApi": "PASS: 開始済battle入力+seedの専用QA fixtureをEdge自身でsimulate。途中0/主催2勝最終0/主催3勝不在100/主催最終3勝目100/clear後late3勝非遡及/別救援2Room同時clear200/再送重複なし。主催累計400・救援各0。 DB receipts6件（eligible4/ineligible2）計400と照合。3勝報酬/非遡及PASS。",
       "notAccepted": [
-        "正式数値・素材",
+        "正式Master/数値/素材",
+        "全Lvバランス",
         "大規模負荷",
-        "実機最終受入"
+        "物理スマホ実機・最終総合受入"
       ],
       "battleLiveApi": "PASS: 期限切れ未受取claim、新規通常開始WIN・行動力5消費・共有Lv1→2、旧Lv1結果確定で新HP不加算、次開始敵HP6500→7475、battleRulesがDBsnapshot一致。専用Lv14で通常LOSE/勝利数不増PASS。",
       "evidence": [
         "GAME04_TERRITORY_API_ACCEPTANCE_20260920.json",
         "GAME04_TERRITORY_ACCEPTANCE_20260920.md",
         "GAME04_TERRITORY_HOST_ACCEPTANCE_20260920.json"
-      ]
+      ],
+      "mobileViewportUi": {
+        "home": "CTA各157px・同一top・横overflowなし",
+        "noItem": "0個でもトップ閲覧可・不足理由表示・開催不可",
+        "hostConfirmation": "中央Dialog幅326/高さ330",
+        "battlePreparation": "開催→Raid詳細→出撃準備幅334/高さ614、CTA画面内",
+        "multipleHosting": "複数侵攻をshort IDで識別",
+        "expiredReward": "終了一覧→結果→報酬→受取待ち1→0、受取disabledを実click確認",
+        "scope": "360pxブラウザiframe・offline fixture。物理スマホ実機の受入ではない。"
+      },
+      "edgeVersionScope": "動作境界・DB/実API受入はEdge v4。現行v5は最終Repository bundle（領土侵攻札表示名同期）の再配信のみ。v5 get_state smoke 200、territoryLevel3/experience400/active0/itemName領土侵攻札PASS。"
     },
     "audit": "docs/development/GAME04_TERRITORY_IMPLEMENTATION_20260920.md",
     "developmentDeployment": {
@@ -635,11 +647,11 @@
         "20260919152135_territory_item_label"
       ],
       "edgeFunction": "game04-redesign-api",
-      "edgeVersion": 4,
+      "edgeVersion": 5,
       "edgeStatus": "ACTIVE",
       "verifyJwt": true
     },
-    "previewSha": "a74304373f6ee026b50234a879102f1f99b4306e",
+    "previewSha": "f539ba0c92484c6e2c0e446567555311f6265fd2",
     "previewUrl": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
   }
 }
