@@ -4,6 +4,7 @@ import type { BattleResult } from '@/domain/redesign/battle';
 
 export interface RedesignResponse {
   state: RedesignState;
+  missions?: import('@/domain/redesign/missions').MissionProjection[];
   rooms: RaidRoom[];
   battle?: BattleResult;
   rewards?: import('@/domain/redesign/types').Reward[];

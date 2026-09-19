@@ -1,6 +1,8 @@
 // Bundled with the shared pure gameplay modules before Edge deployment.
 import { BATTLE_RULES, buildBattleParty, buildInitialState, importLegacyAssets, grantReward, CHARACTER_MASTERS, type LegacyAssets } from '../../../src/domain/redesign/masters.ts';
+import { applyAcquisitionEvents, type AcquisitionEvent, type AcquisitionMaster } from '../../../src/domain/redesign/acquisitions.ts';
 import { applyGrowthAction, validateDeck } from '../../../src/domain/redesign/growth.ts';
+import { evaluateMissions, getClaimableMission, type MissionConfig } from '../../../src/domain/redesign/missions.ts';
 import { simulateBattle } from '../../../src/domain/redesign/battle.ts';
 import { getQuestStage, isQuestStageUnlocked } from '../../../src/domain/redesign/quests.ts';
 import { applyRaidAction, createRaidRoom, getRaidMaster, raidEnemy } from '../../../src/domain/redesign/raid.ts';
@@ -24,20 +26,16 @@ async function uuidFor(value: string) {
   const h = [...hash.slice(0, 16)].map(b => b.toString(16).padStart(2, '0')).join('');
   return `${h.slice(0,8)}-${h.slice(8,12)}-${h.slice(12,16)}-${h.slice(16,20)}-${h.slice(20)}`;
 }
-async function legacy(userId: string): Promise<LegacyAssets> {
-  const [characters, skills, equipment] = await Promise.all([
-    db(`user_characters?user_id=eq.${userId}&select=id,character_id,level,awakening_level`),
-    db(`user_skills?user_id=eq.${userId}&select=id,skill_card_id,plus_val`),
-    db(`user_equipments?user_id=eq.${userId}&select=id,equipment_id,level,plus_val`),
-  ]);
-  return { characters, skills, equipment };
+async function acquisitionInput(userId: string): Promise<{legacy: LegacyAssets; events: AcquisitionEvent[]; master: AcquisitionMaster}> {
+  return rpc('game04_acquisition_input', { p_user_id: userId });
 }
 async function stateFor(userId: string): Promise<RedesignState> {
-  const assets = await legacy(userId);
+  const input = await acquisitionInput(userId);
   for (let attempt = 0; attempt < 4; attempt++) {
-    const state: RedesignState = await rpc('game04_get_state', { p_user_id: userId, p_initial: buildInitialState(userId, assets) });
-    const imported = importLegacyAssets(state, assets);
-    if (JSON.stringify(imported.legacyImportedIds) === JSON.stringify(state.legacyImportedIds)) return state;
+    const state: RedesignState = await rpc('game04_get_state', { p_user_id: userId, p_initial: buildInitialState(userId, input.legacy) });
+    const migrated = importLegacyAssets(state, input.legacy);
+    const imported = applyAcquisitionEvents(migrated, input.events, input.master);
+    if (JSON.stringify(imported) === JSON.stringify(state)) return state;
     try { return (await commit(state, imported, crypto.randomUUID())).state; }
     catch (error) { if (!(error instanceof ApiError) || error.status !== 409 || attempt === 3) throw error; }
   }
@@ -60,12 +58,21 @@ async function roomsFor(userId: string) {
     status: row.state.status === 'active' && Date.parse(row.state.expiresAt) <= Date.now() ? 'expired' : row.state.status,
   })).filter((room: RaidRoom) => room.status === 'active' || room.participants.some(p => p.userId === userId));
 }
+async function rewardPolicy(): Promise<AcquisitionMaster> {
+  const [row] = await db('game04_redesign_master?key=eq.acquisition_conversion&select=data');
+  if (!row?.data) throw new ApiError('獲得設定を確認できません。', 503);
+  return row.data;
+}
+async function missionConfig(): Promise<MissionConfig> {
+  const [row] = await db('game04_redesign_master?key=eq.missions&select=data');
+  return row?.data ?? { enabled: false, missions: [] };
+}
 async function responseFor(userId: string, extra: Record<string, unknown> = {}) {
   const [state, rooms, socialEvents, pending] = await Promise.all([stateFor(userId), roomsFor(userId),
     db('game04_social_events?select=*&order=created_at.desc&limit=30'),
     db(`game04_battles?user_id=eq.${userId}&status=eq.started&select=id,kind,target_id&order=created_at.asc&limit=1`),
   ]);
-  return { state, rooms, socialEvents, pendingBattle: pending[0] ?? null, ...extra };
+  return { state, rooms, socialEvents, missions: evaluateMissions(state, await missionConfig()), pendingBattle: pending[0] ?? null, ...extra };
 }
 async function runBattle(userId: string, name: string, payload: any, id: string, playerName: string) {
   let [record] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=*`);
@@ -76,6 +83,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
     const state = await stateFor(userId); validateDeck(state, state.deck);
     const kind = name === 'quest_battle' ? 'quest' : 'raid';
     let waves: BattleInput['waves'], cost: number, targetId: string, raidLevel: number | undefined;
+    let startRoom: (RaidRoom & {version: number}) | null = null;
     if (kind === 'quest') {
       const stage = getQuestStage(String(payload.stageId));
       if (!stage || !isQuestStageUnlocked(stage.id, state.clearedStages)) throw new ApiError('このステージは未解放です。');
@@ -84,13 +92,13 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
       const room = await roomFor(String(payload.roomId)), master = getRaidMaster(room.masterId);
       const me = room.participants.find(p => p.userId === userId);
       if (room.status !== 'active' || Date.parse(room.expiresAt) <= Date.now() || !me || me.leftAt) throw new ApiError('参加できる開催中レイドを選んでください。');
-      if (master.type === 'unlock' && me.joinedLevel > me.checkpoint) throw new ApiError('チェックポイントからの途中参加後の進行仕様を調整中です。');
+      startRoom = room;
       waves = [[raidEnemy(master, room.level)]]; cost = master.energyCost; targetId = room.id; raidLevel = room.level;
     }
     if (state.energy < cost) throw new ApiError('行動力が足りません。');
     const seed = crypto.getRandomValues(new Uint32Array(1))[0];
     const input = { seed, party: buildBattleParty(state), waves, rules: BATTLE_RULES, raidLevel };
-    await commit(state, { ...state, energy: state.energy - cost }, id, { id, kind, targetId, seed, input, status: 'started' });
+    await commit(state, { ...state, energy: state.energy - cost }, id, { id, kind, targetId, seed, input, status: 'started' }, startRoom, startRoom?.version ?? null);
     record = { id, kind, target_id: targetId, input, seed, status: 'started' };
   }
   const battle = simulateBattle(record.input);
@@ -106,7 +114,8 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
       const random = () => { rng = (Math.imul(rng, 1664525) + 1013904223) >>> 0; return rng / 4294967296; };
       const luck = record.input.party.reduce((n: number, p: any) => n + p.stats.luk, 0) / 5;
       rewards.push(...stage.rewards, ...(firstClear ? stage.firstRewards : []), ...stage.rareRewards.filter(r => random() < Math.min(1, (r.chance ?? 0) * (1 + luck / 1000))));
-      for (let i = 0; i < rewards.length; i++) after = grantReward(after, rewards[i], await uuidFor(`reward:${id}:${i}`));
+      const policy = await rewardPolicy();
+      for (let i = 0; i < rewards.length; i++) after = grantReward(after, rewards[i], await uuidFor(`reward:${id}:${i}`), policy);
       if (firstClear) after.clearedStages.push(stage.id);
       if (random() < stage.encounterChance) {
         encounterRaidId = await uuidFor(`encounter:${id}`);
@@ -148,7 +157,13 @@ Deno.serve(async (request: Request) => {
     const [prior] = await db(`game04_requests?user_id=eq.${user.id}&request_id=eq.${requestId}&select=request_id`);
     if (prior) return new Response(JSON.stringify(await responseFor(user.id)), { headers });
     const state = await stateFor(user.id); let after: RedesignState, room: RaidRoom | null = null, version: number | null = null;
-    if (action === 'set_home') {
+    if (action === 'claim_mission') {
+      const mission = getClaimableMission(state, await missionConfig(), String(payload.missionId));
+      after = structuredClone(state);
+      const policy = await rewardPolicy();
+      for (let i = 0; i < mission.rewards.length; i++) after = grantReward(after, mission.rewards[i], await uuidFor(`mission:${user.id}:${mission.id}:${i}`), policy);
+      after.claimedMissionIds = [...(state.claimedMissionIds ?? []), mission.id];
+    } else if (action === 'set_home') {
       after = structuredClone(state);
       if (payload.characterId !== undefined) {
         if (!state.characters.some(c => c.id === payload.characterId) || !CHARACTER_MASTERS.some(c => c.id === payload.characterId)) throw new ApiError('未所持の武将です。');
@@ -166,7 +181,7 @@ Deno.serve(async (request: Request) => {
       room.participants[0].name = profile.username;
     } else if (['raid_join', 'raid_leave', 'raid_rescue', 'raid_claim', 'encounter_ignore'].includes(action)) {
       const current = await roomFor(String(payload.roomId)); version = current.version;
-      const changed = applyRaidAction(current, state, action, { name: profile.username }); room = changed.room; after = changed.state;
+      const changed = applyRaidAction(current, state, action, { name: profile.username }, Date.now(), action === 'raid_claim' ? await rewardPolicy() : undefined); room = changed.room; after = changed.state;
     } else after = applyGrowthAction(state, action, payload);
     await commit(state, after, requestId, null, room, version);
     return new Response(JSON.stringify(await responseFor(user.id)), { headers });

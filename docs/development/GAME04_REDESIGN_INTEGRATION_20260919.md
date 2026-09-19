@@ -1,4 +1,6 @@
-# GAME04 全面改修・初回統合
+# GAME04 全面改修・統合記録
+
+本書前半は初回配信の履歴。現在の追加実装・適用・未受入範囲は末尾の「確定残件接続」を優先する。
 
 基準: `7369f3dbaf3ef454c33932df55ee308e0b7718cb` / `codex/game04-upstream-20260918`。
 正本: docs/product の 2026-09-19 Planning / Implementation / Battle / Home / Quest / Growth / Raid。
@@ -25,13 +27,13 @@
 ## 後工程・制限
 
 - M8チュートリアル、M9商材・ガチャ・Economy・数値FIXは未実施。
-- 旧ガチャ/Shopは既存基盤の開発表示。旧レコードの同一UUIDへの重複更新は、新資産の魂/LB変換へ未接続。
+- 旧ガチャ/Shopは既存基盤の開発表示。獲得イベント接続は下記追加工程で実装。正式な商材・確率・重複変換量は未確定。
 - 新Mission報酬設計、旧Tutorial依存のコミュニティ利用条件、計測最終接続は次工程で統合確認する。
-- 2026-09-19本流決定でUnlock個人Checkpointを削除FIX。現在のコードには出撃保留が残る。M5-06で除去し、途中参加者も戦闘開始時の共有Lvで開始する（実装未着手）。
+- 2026-09-19本流決定でUnlock個人Checkpointを削除FIX。除去実装・共有Lv参加の受入状態は下記M5-06工程で管理する。
 - ランキング全般は初期リリース対象外にFIX。新ランキング軸の設計・実装は初期母集団から除外。
 - Masterの能力・報酬・育成費・敵強度はPreview暫定値。60キャラ、50スキル、160装備、背景/Bossは既存素材を再利用。
 - VIP30日権利・速度・Skip・検証済決済後の付与経路を実装。価格未FIXのため販売は無効。
-- 最終実機確認は未実施。進捗は新43件へ再採番し、Preview反映率と完了率を別々に管理する。
+- 最終実機確認は未実施。Repositoryの進捗JSONはランキング除外後の実装工程42件サブセット。ユーザー引継ぎの全体141件正本とは異なり、全体進捗率を算出しない。
 
 実装別の検証記録は同ディレクトリ `GAME04_REDESIGN_*_20260919.md` を参照。
 
@@ -43,3 +45,23 @@
 - Edge `game04-redesign-api` version 2 / verify_jwt=true。
 - ローカルBattle core・Raid・育成検証、およびDB rollback内CAS/冪等/VIP検証 PASS。
 - 決済reconciliation単独旧スクリプトは拡張子なしimportのNode解決エラー。実決済は行わず、型・Buildと既存検証済注文経路のコード確認まで。
+
+## 確定残件接続（2026-09-19）
+
+監査基準: `137c3eccfb6c66a2a001096900e2edee7dc63b37`。
+
+- M5-06: Checkpointによる個人制限を除去し、共有Lvの個別敵で戦う。3勝資格・非遡及・旧Lv結果の精算を保持。
+- M9-03: 旧所有スナップショットと新獲得イベントを分離。UUID更新型重複をreceiptで捕捉し、新所有と適用台帳を同一CASで保存。
+- M4-06: Mission条件評価・サーバー受取・UIを接続。正式Masterは空/無効で保持。
+- MS-03: Login/Present等の受取後に新所有状態を再取得。明示された新Masterの取得経路をイベントへ接続。未定義の旧Item変換は行わない。
+
+### 適用・検証の現在地
+
+- 型検査・Build: PASS（統合担当確認）。
+- GAME04 dev Migration `20260919144247_game04_acquisition_events`: 適用済み。
+- Edge `game04-redesign-api`: version 3 ACTIVE / verify_jwt=true。
+- ローカル: Raid共有Lv14、WIN/LOSE、3勝、非遡及、旧Lv精算、取得冪等、Mission Fixtureを確認。
+- dev実API: 検証進行中。ローカル検証を実API受入とは扱わない。
+- 今回のPreview: 未反映。今回4項目は着手中であり、Preview反映済・完了へ昇格しない。
+
+全体141件・未FIX/正式承認待ち35件はユーザー引継ぎ申告値。確認したRepository/Libraryでは141件全行の正本所在を確認できていない。旧Excel43件/74.4%や現JSON42件を全体率へ流用しない。詳細は `GAME04_CONFIRMED_REMAINDER_HANDOFF_20260919.md` と進捗JSONの `taskUpdates` を参照。

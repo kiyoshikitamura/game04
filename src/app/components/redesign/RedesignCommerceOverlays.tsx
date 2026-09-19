@@ -12,6 +12,7 @@ import "../CommonModals.css";
 import { userFacingErrorMessage } from "../../lib/userFacingError";
 import CharacterGachaPresentation from "../gacha/CharacterGachaPresentation";
 import CanonicalDialog from "../ui/CanonicalDialog";
+import { LoginBonusModal } from "../LoginBonusModal";
 import ConfirmDialog from "../ui/ConfirmDialog";
 import GlobalInteractionBlocker from "../ui/GlobalInteractionBlocker";
 function gachaLocationBackground(result: any): string {
@@ -21,7 +22,7 @@ function gachaLocationBackground(result: any): string {
 /** Reuse purchase/result infrastructure without legacy guild, PvP, gear or tutorial overlays. */
 export default function RedesignCommerceOverlays() {
  const { scoutAnimationState, setScoutAnimationState, scoutFlashingColor, scoutResults, scoutPresentationCategory,
- errorMessage, setErrorMessage, playCyberSe, playSe, confirmDialogConfig, globalInteractionBlocking } = useGame();
+ showLoginBonusModal, setShowLoginBonusModal, loginBonusMasters, userLoginBonus, loginBonusClaimResult, setShowInboxPanel, setInboxPanelTab, errorMessage, setErrorMessage, playCyberSe, playSe, confirmDialogConfig, globalInteractionBlocking } = useGame();
   const announcedScoutResultRef = useRef<any[] | null>(null);
   const [tutorialPullStarted, setTutorialPullStarted] = React.useState(false);
   const [tutorialPullBurst, setTutorialPullBurst] = React.useState(false);
@@ -74,6 +75,7 @@ export default function RedesignCommerceOverlays() {
   };
 
  return <>
+ {showLoginBonusModal && <LoginBonusModal masters={loginBonusMasters} currentStep={userLoginBonus?.current_step || 1} claimResult={loginBonusClaimResult} onClose={() => setShowLoginBonusModal(false)} onOpenPresents={() => { setShowLoginBonusModal(false); setInboxPanelTab('presents'); setShowInboxPanel(true); }} />}
       {/* 🎰 ガチャ演出モーダル (FLASHING / SHOW_RESULTS) */}
       {scoutAnimationState !== null && isCharacterReveal && (scoutAnimationState === "READY" || scoutAnimationState === "SHOW_RESULTS") ? (
         <CharacterGachaPresentation results={scoutResults} tutorial={false}

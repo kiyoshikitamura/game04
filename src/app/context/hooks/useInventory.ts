@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import { notifyRedesignRewardChange } from "@/utils/redesignRewardSync";
 import { supabase } from "@/utils/supabase";
 import { VITALITY_OVERFLOW_MAX } from "@/utils/game_constants";
 import { canUseEnergyDrink } from "@/domain/gameplay/canonical/action_resources";
@@ -260,6 +261,7 @@ export function useInventory(
         title: p.message?.split(":")[0] || "配布アイテム", loading: false,
         expireText: p.expire_at == null ? "期限なし" : hours <= 0 ? "期限切れ" : hours > 24 ? `期限: あと${Math.ceil(hours / 24)}日` : `期限: あと${hours}時間` };
     }));
+    notifyRedesignRewardChange(owner);
     return rows;
   };
 
@@ -356,6 +358,7 @@ export function useInventory(
     setCash(Number(projection.cash));
     setDiamonds(Number(projection.diamonds));
     onMissionPlayerProgress?.(Number(projection.level), Number(projection.xp));
+    notifyRedesignRewardChange(owner);
     return rows;
   };
 

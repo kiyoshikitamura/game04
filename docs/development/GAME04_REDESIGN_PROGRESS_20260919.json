@@ -5,7 +5,7 @@
   "previewSha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
   "previewUrl": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
   "db": "lrgyllgzcdcphlbmkknc",
-  "scope": "2026-09-19 全面再設計。旧191件は集計対象外。",
+  "scope": "2026-09-19 全面再設計の実装工程サブセット42件。初期対象外M6-05はexcludedTasksへ分離。全体141件正本の代替ではなく、旧191件・43件の率を全体率へ流用しない。",
   "tasks": [
     {
       "id": "M1-01",
@@ -211,8 +211,8 @@
       "id": "M4-06",
       "phase": "M4",
       "title": "ステージ・エリアクリアのMission報酬接続",
-      "status": "未着手",
-      "notes": "進捗表示まで。既存Mission条件・報酬との互換整理後に接続",
+      "status": "着手中",
+      "notes": "stage_clear/area_clearのサーバー評価・受取CAS・中央UIを接続。正式Mission Masterは空/無効。ローカルFixture確認済み。条件・報酬量を独自に設定せず、実API/Preview検証中。",
       "previewEligible": false,
       "sha": "",
       "url": ""
@@ -271,8 +271,8 @@
       "id": "M5-06",
       "phase": "M5",
       "title": "Unlock途中参加Checkpoint廃止・共有Lv参加への統一",
-      "status": "未着手",
-      "notes": "仕様FIX済み。個人Checkpoint・出撃停止・追い付き処理を削除。開始時の共有Lvで個別戦闘。3勝・非遡及・個別勝敗・Lv連動強化は維持。実装変更は未実施。",
+      "status": "着手中",
+      "notes": "個人Checkpoint制限・表示を除去し、見た目段階をappearanceLevelsへ分離。旧保存データ互換とjoinedLevel保持。ローカル共有Lv14 WIN/LOSE・3勝・非遡及・旧Lv精算確認。dev Edge適用済み、実APIとPreview受入は進行中。",
       "previewEligible": false,
       "sha": "",
       "url": "",
@@ -382,8 +382,8 @@
       "id": "M9-03",
       "phase": "M9",
       "title": "新資産の獲得・重複変換最終接続",
-      "status": "未着手",
-      "notes": "未着手: 旧UUID更新型取得の移行を含む",
+      "status": "着手中",
+      "notes": "初期スナップショットと獲得イベントを分離し、Character魂・Skill LB素材・Equipment個体へ接続。冪等receipt/CASを実装。既存仮変換量をMaster化し上限後・未知Masterは保留。dev Migration/Edge適用済み。正式Master待ち、実API/Preview検証中。",
       "previewEligible": false,
       "sha": "",
       "url": ""
@@ -441,5 +441,65 @@
       "sha": "",
       "url": ""
     }
-  ]
+  ],
+  "overallAuthority": {
+    "reportedTaskCount": 141,
+    "reportedUnfixedOrApprovalPendingCount": 35,
+    "source": "2026-09-19 ユーザー開発引継ぎ",
+    "verificationStatus": "全体正本の所在・全行未確認。RepositoryとLibraryの確認済み資料には141件版なし。",
+    "verifiedTaskCount": null,
+    "previewRate": null,
+    "completionRate": null
+  },
+  "taskUpdates": {
+    "basisSha": "137c3eccfb6c66a2a001096900e2edee7dc63b37",
+    "status": "着手中",
+    "previewApplied": false,
+    "implementationSha": null,
+    "previewSha": null,
+    "previewUrl": null,
+    "developmentDeployment": {
+      "db": "lrgyllgzcdcphlbmkknc",
+      "migration": "20260919144247_game04_acquisition_events",
+      "applied": true,
+      "edgeFunction": "game04-redesign-api",
+      "edgeVersion": 3,
+      "edgeStatus": "ACTIVE",
+      "verifyJwt": true
+    },
+    "verification": {
+      "typecheck": "PASS",
+      "build": "PASS",
+      "liveApi": "進行中",
+      "preview": "未反映",
+      "finalAcceptance": "未実施"
+    },
+    "items": [
+      {
+        "id": "M5-06",
+        "scope": "existingImplementationSubset",
+        "status": "着手中",
+        "notes": "個人Checkpoint制限・表示を除去し、見た目段階をappearanceLevelsへ分離。旧保存データ互換とjoinedLevel保持。ローカル共有Lv14 WIN/LOSE・3勝・非遡及・旧Lv精算確認。dev Edge適用済み、実APIとPreview受入は進行中。"
+      },
+      {
+        "id": "M9-03",
+        "scope": "existingImplementationSubset",
+        "status": "着手中",
+        "notes": "初期スナップショットと獲得イベントを分離し、Character魂・Skill LB素材・Equipment個体へ接続。冪等receipt/CASを実装。既存仮変換量をMaster化し上限後・未知Masterは保留。dev Migration/Edge適用済み。正式Master待ち、実API/Preview検証中。"
+      },
+      {
+        "id": "M4-06",
+        "scope": "existingImplementationSubset",
+        "status": "着手中",
+        "notes": "stage_clear/area_clearのサーバー評価・受取CAS・中央UIを接続。正式Mission Masterは空/無効。ローカルFixture確認済み。条件・報酬量を独自に設定せず、実API/Preview検証中。"
+      },
+      {
+        "id": "MS-03",
+        "scope": "handoffOnly; not added to the 42-task subset",
+        "title": "Login／Presentの新資産接続",
+        "status": "着手中",
+        "notes": "既存受取と新状態の再読取を接続。Master一致Character/Skill/Equipmentのイベント付与を実装。旧Item→新Material対応・正式Login日程/報酬は未確定のまま。実API/Preview検証中。"
+      }
+    ]
+  }
 }

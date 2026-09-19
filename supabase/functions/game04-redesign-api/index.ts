@@ -1,3 +1,80 @@
+// src/domain/redesign/acquisitions.ts
+var PREVIEW_ACQUISITION_MASTER = {
+  characterDuplicateSouls: 10,
+  skillDuplicateMaterials: 2,
+  characterAtCap: "pending",
+  skillAtCap: "pending"
+};
+function applyAcquisitionEvents(original, events, master) {
+  const state = structuredClone(original);
+  const applied = new Set(state.appliedAcquisitionIds ?? []);
+  const pending = new Map((state.pendingAcquisitions ?? []).map((p) => [p.id, p]));
+  for (const event of [...pending.values(), ...events]) {
+    if (applied.has(event.id)) continue;
+    if (event.legacyId && state.legacyImportedIds?.includes(`${event.kind}:${event.legacyId}`)) {
+      applied.add(event.id);
+      pending.delete(event.id);
+      continue;
+    }
+    const defer = (reason) => pending.set(event.id, { ...event, reason });
+    if (event.kind === "character") {
+      if (!CHARACTER_MASTERS.some((m) => m.id === event.masterId)) {
+        defer("master_missing");
+        continue;
+      }
+      const owned = state.characters.find((c) => c.id === event.masterId);
+      if (!owned) state.characters.push({ id: event.masterId, level: 1, awakening: 0 });
+      else {
+        if (owned.awakening >= 5 && master.characterAtCap !== "convert") {
+          defer("character_cap_policy_unfixed");
+          continue;
+        }
+        const amount = master.characterDuplicateSouls;
+        if (!Number.isSafeInteger(amount) || amount === null || amount < 0) {
+          defer("conversion_master_unfixed");
+          continue;
+        }
+        state.souls ??= {};
+        state.souls[event.masterId] = (state.souls[event.masterId] ?? 0) + amount;
+      }
+    } else if (event.kind === "skill") {
+      if (!SKILL_MASTERS.some((m) => m.id === event.masterId)) {
+        defer("master_missing");
+        continue;
+      }
+      const owned = state.skills.find((s) => s.id === event.masterId);
+      if (!owned) state.skills.push({ id: event.masterId, level: 0 });
+      else {
+        if (owned.level >= 10 && master.skillAtCap !== "convert") {
+          defer("skill_cap_policy_unfixed");
+          continue;
+        }
+        const amount = master.skillDuplicateMaterials;
+        if (!Number.isSafeInteger(amount) || amount === null || amount < 0) {
+          defer("conversion_master_unfixed");
+          continue;
+        }
+        state.materials.skill += amount;
+      }
+    } else if (event.kind === "equipment") {
+      if (!EQUIPMENT_MASTERS.some((m) => m.id === event.masterId)) {
+        defer("master_missing");
+        continue;
+      }
+      const instanceId = event.instanceId ?? event.id;
+      if (!state.equipment.some((e) => e.instanceId === instanceId)) state.equipment.push({ instanceId, masterId: event.masterId, level: 1, lb: 0 });
+    } else {
+      defer("unsupported_kind");
+      continue;
+    }
+    applied.add(event.id);
+    pending.delete(event.id);
+  }
+  state.appliedAcquisitionIds = [...applied];
+  state.pendingAcquisitions = [...pending.values()];
+  return state;
+}
+
 // src/theme/sengoku-characters.json
 var sengoku_characters_default = [
   {
@@ -8388,11 +8465,11 @@ function createInitialState(userId) {
   const starters = CHARACTER_MASTERS.filter((c) => c.rarity === "N").slice(0, 5);
   return { userId, version: 0, cash: 0, diamonds: 0, energy: 0, energyMax: 50, souls: {}, characters: starters.map((c) => ({ id: c.id, level: 1, awakening: 0 })), skills: SKILL_MASTERS.slice(0, 8).map((s) => ({ id: s.id, level: 0 })), equipment: [], deck: starters.map((c, i) => ({ characterId: c.id, skillIds: [SKILL_MASTERS[i % SKILL_MASTERS.length].id], equipment: {} })), materials: { character: 20, skill: 10, equipment: 20, equipmentLb: 5, unlock: 1 }, clearedStages: [], vipExpiresAt: null };
 }
-function importLegacyAssets(original, legacy2) {
+function importLegacyAssets(original, legacy) {
   const state = structuredClone(original);
   state.souls ??= {};
   const ledger = new Set(state.legacyImportedIds ?? []);
-  for (const c of legacy2.characters) {
+  for (const c of legacy.characters) {
     const key2 = `character:${c.id}`;
     if (ledger.has(key2) || !CHARACTER_MASTERS.some((m) => m.id === c.character_id)) continue;
     const owned = state.characters.find((m) => m.id === c.character_id);
@@ -8403,7 +8480,7 @@ function importLegacyAssets(original, legacy2) {
     } else state.characters.push({ id: c.character_id, level: c.level, awakening: Math.min(5, c.awakening_level) });
     ledger.add(key2);
   }
-  for (const s of legacy2.skills) {
+  for (const s of legacy.skills) {
     const key2 = `skill:${s.id}`;
     if (ledger.has(key2) || !SKILL_MASTERS.some((m) => m.id === s.skill_card_id)) continue;
     const owned = state.skills.find((m) => m.id === s.skill_card_id);
@@ -8413,7 +8490,7 @@ function importLegacyAssets(original, legacy2) {
     } else state.skills.push({ id: s.skill_card_id, level: Math.min(10, s.plus_val) });
     ledger.add(key2);
   }
-  for (const e of legacy2.equipment) {
+  for (const e of legacy.equipment) {
     const key2 = `equipment:${e.id}`;
     if (ledger.has(key2) || !EQUIPMENT_MASTERS.some((m) => m.id === e.equipment_id)) continue;
     state.equipment.push({ instanceId: e.id, masterId: e.equipment_id, level: e.level, lb: e.plus_val });
@@ -8422,12 +8499,17 @@ function importLegacyAssets(original, legacy2) {
   state.legacyImportedIds = [...ledger];
   return state;
 }
-function buildInitialState(userId, legacy2) {
-  return importLegacyAssets(createInitialState(userId), legacy2);
+function buildInitialState(userId, legacy) {
+  return importLegacyAssets(createInitialState(userId), legacy);
 }
-function grantReward(original, reward, instanceId) {
+function grantReward(original, reward, instanceId, acquisitionMaster = PREVIEW_ACQUISITION_MASTER) {
   const state = structuredClone(original);
-  const amount = Math.max(0, Math.floor(reward.amount));
+  const amount = reward.amount;
+  if (!Number.isSafeInteger(amount) || amount < 0) throw new Error("\u5831\u916C\u6570\u91CF\u304C\u4E0D\u6B63\u3067\u3059");
+  if (reward.kind === "character" || reward.kind === "skill" || reward.kind === "equipment") {
+    if (!reward.id || !instanceId) throw new Error("\u7372\u5F97\u30A4\u30D9\u30F3\u30C8ID\u304C\u5FC5\u8981\u3067\u3059");
+    return applyAcquisitionEvents(state, Array.from({ length: amount }, (_, i) => ({ id: `reward:${instanceId}:${i}`, kind: reward.kind, masterId: reward.id, instanceId: amount === 1 ? instanceId : `${instanceId}:${i}` })), acquisitionMaster);
+  }
   switch (reward.kind) {
     case "cash":
       state.cash += amount;
@@ -8451,14 +8533,6 @@ function grantReward(original, reward, instanceId) {
       if (reward.id) {
         state.souls ??= {};
         state.souls[reward.id] = (state.souls[reward.id] ?? 0) + amount;
-      }
-      break;
-    case "equipment":
-      if (reward.id && instanceId && EQUIPMENT_MASTERS.some((e) => e.id === reward.id)) {
-        for (let i = 0; i < amount; i++) {
-          const id = amount === 1 ? instanceId : `${instanceId}:${i}`;
-          if (!state.equipment.some((e) => e.instanceId === id)) state.equipment.push({ instanceId: id, masterId: reward.id, level: 1, lb: 0 });
-        }
       }
       break;
   }
@@ -8590,6 +8664,117 @@ function applyGrowthAction(input, action, payload) {
     return state;
   }
   throw new Error("\u5BFE\u5FDC\u3057\u3066\u3044\u306A\u3044\u80B2\u6210\u64CD\u4F5C\u3067\u3059\u3002");
+}
+
+// src/domain/redesign/quests.ts
+var AREAS = [
+  ["mikawa", "\u4E09\u6CB3\u306E\u5730", "\u6700\u521D\u306E\u4E00\u6B69", "\u6575\u306E\u5C5E\u6027\u3068\u884C\u52D5\u30AB\u30A6\u30F3\u30C8\u3092\u898B\u3066\u3001\u6B66\u5C06\u306E\u4E26\u3073\u3092\u6574\u3048\u3088\u3046\u3002"],
+  ["owari", "\u5C3E\u5F35\u306E\u65D7", "\u71B1\u304D\u65D7\u5370", "\u8907\u6570\u306E\u6575\u306B\u306F\u5168\u4F53\u653B\u6483\u3068\u72D9\u3046\u9806\u756A\u304C\u529B\u306B\u306A\u308B\u3002"],
+  ["mino", "\u7F8E\u6FC3\u306E\u57CE", "\u5805\u57CE\u3078\u306E\u9053", "\u5805\u3044\u5B88\u308A\u306B\u306F\u5B88\u5099\u3092\u4E0B\u3052\u308B\u6280\u3092\u7D44\u307F\u5408\u308F\u305B\u3088\u3046\u3002"],
+  ["omi", "\u8FD1\u6C5F\u306E\u6E56", "\u6E56\u4E0A\u306E\u76DF\u7D04", "\u50B7\u3064\u3044\u305F\u4EF2\u9593\u3092\u56DE\u5FA9\u3057\u3001\u9023\u6226\u3092\u5207\u308A\u629C\u3051\u3088\u3046\u3002"],
+  ["kai", "\u7532\u6590\u306E\u5C71", "\u98A8\u6797\u306E\u8A66\u7DF4", "\u5F37\u3044\u4E00\u6483\u306B\u5099\u3048\u3001\u5B88\u308A\u3068\u653B\u6483\u306E\u9806\u3092\u8003\u3048\u3088\u3046\u3002"],
+  ["echigo", "\u8D8A\u5F8C\u306E\u96EA", "\u96EA\u89E3\u3051\u306E\u7FA9", "\u6575\u306E\u56DE\u5FA9\u5F79\u3092\u3069\u3046\u5D29\u3059\u304B\u304C\u52DD\u6557\u3092\u5206\u3051\u308B\u3002"],
+  ["kyoto", "\u4EAC\u6D1B\u306E\u5F71", "\u82B1\u3068\u7B56\u8B00", "\u5F31\u4F53\u3068\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u3092\u898B\u6975\u3081\u3001\u65E9\u3081\u306B\u6C7A\u7740\u3092\u3064\u3051\u3088\u3046\u3002"],
+  ["izumo", "\u51FA\u96F2\u306E\u793E", "\u7948\u308A\u306E\u5411\u3053\u3046", "\u5149\u3068\u95C7\u306E\u76F8\u6027\u3001\u652F\u63F4\u6280\u306E\u7D44\u307F\u5408\u308F\u305B\u3092\u898B\u76F4\u305D\u3046\u3002"],
+  ["satsuma", "\u85A9\u6469\u306E\u708E", "\u4E0D\u5C48\u306E\u9663", "\u9023\u6226\u306B\u5099\u3048\u3066HP\u3068SP\u3092\u6B8B\u3057\u3001\u6575\u9663\u3092\u7A81\u7834\u3057\u3088\u3046\u3002"],
+  ["sekigahara", "\u95A2\u30F6\u539F", "\u6681\u306E\u7D04\u675F", "\u5909\u308F\u308A\u3086\u304F\u6575\u306E\u9663\u3092\u8AAD\u307F\u3001\u4E94\u4EBA\u306E\u529B\u3092\u7D50\u96C6\u3057\u3088\u3046\u3002"]
+];
+var STAGE_NAMES = ["\u8857\u9053\u306E\u5148\u3078", "\u65D7\u3092\u63B2\u3052\u3066", "\u6E21\u308A\u306E\u9663", "\u591C\u660E\u3051\u306E\u653B\u9632", "\u5D29\u308C\u306C\u8A93\u3044", "\u6C7A\u6226\u524D\u591C", "\u57CE\u9580\u3092\u8D8A\u3048\u3066"];
+function themeSkills(area, source) {
+  const effect = ["damage", "damage", "def_up", "heal", "atk_up", "heal", "poison", "atk_down", "def_up", "damage"][area];
+  const chosen = SKILL_MASTERS.find((s) => s.effects.some((e) => e.type === effect));
+  return chosen ? [chosen, ...source.filter((s) => s.id !== chosen.id)].slice(0, 2) : source.slice(0, 2);
+}
+function enemy(area, stage, wave, slot, boss2) {
+  const master = CHARACTER_MASTERS[(area * 6 + stage + wave + slot) % CHARACTER_MASTERS.length];
+  const rank = area * 7 + stage;
+  const growth = 1 + rank * 0.09;
+  const skills = themeSkills(area, SKILL_MASTERS.filter((s) => s.element === master.element));
+  return {
+    id: `quest-enemy-${area + 1}-${stage + 1}-${wave + 1}-${slot + 1}`,
+    name: master.name,
+    image: master.image,
+    element: master.element,
+    level: 1 + rank,
+    stats: { hp: Math.round((boss2 ? 1100 : 370) * growth), sp: boss2 ? 80 : 40, atk: Math.round((boss2 ? 100 : 55) * growth), def: Math.round((area === 2 ? 55 : 15) * growth), luk: 10 + rank },
+    skills,
+    passives: [],
+    actionCount: boss2 ? 3 : 4 + slot % 2,
+    order: slot,
+    boss: boss2,
+    ...boss2 ? { phases: [{ hpBelow: 0.45, name: "\u6C7A\u6B7B\u306E\u9663", actionCount: 2, skills: themeSkills((area + 1) % 10, skills) }] } : {}
+  };
+}
+var QUEST_AREAS = AREAS.map(([id, name2, chapter, description], area) => ({
+  id,
+  index: area + 1,
+  name: name2,
+  description,
+  image: `/bg/sengoku/${area % 2 ? "castle-town" : "castle-approach"}.jpg`,
+  stages: STAGE_NAMES.map((stageName, stage) => {
+    const waveCount = Math.min(5, 1 + Math.floor(stage / 2) + (area > 5 ? 1 : 0));
+    return {
+      id: `${id}-${stage + 1}`,
+      areaId: id,
+      index: stage + 1,
+      name: stage === 6 ? chapter : stageName,
+      description,
+      energyCost: 3 + Math.floor(area / 2),
+      waves: Array.from({ length: waveCount }, (_, wave) => {
+        const boss2 = stage === 6 && wave === waveCount - 1;
+        return Array.from({ length: boss2 ? 1 : Math.min(3, 1 + Math.floor(stage / 3) + wave % 2) }, (_2, slot) => enemy(area, stage, wave, slot, boss2));
+      }),
+      firstRewards: [{ kind: "cash", amount: 100 + area * 30 }, { kind: "soul", id: CHARACTER_MASTERS[(area * 6 + stage) % CHARACTER_MASTERS.length].id, amount: 2 }],
+      rewards: [{ kind: "cash", amount: 20 + area * 10 }, { kind: "character_material", amount: 1 + Math.floor(area / 3) }, { kind: "skill_material", amount: 1 }, { kind: "equipment_material", amount: 1 }],
+      rareRewards: [{ kind: "soul", id: CHARACTER_MASTERS[(area * 6 + stage) % CHARACTER_MASTERS.length].id, amount: 1, chance: 0.08 }, { kind: "equipment_lb", amount: 1, chance: 0.05 }, { kind: "equipment", id: EQUIPMENT_MASTERS[(area * 7 + stage) % EQUIPMENT_MASTERS.length].id, amount: 1, chance: 0.12 }, ...area >= 2 ? [{ kind: "unlock_item", amount: 1, chance: 0.04 }] : []],
+      encounterChance: 0.08
+    };
+  })
+}));
+var QUEST_STAGES = QUEST_AREAS.flatMap((area) => area.stages);
+function getQuestStage(id) {
+  return QUEST_STAGES.find((stage) => stage.id === id);
+}
+function isQuestStageUnlocked(id, clearedStages) {
+  const index = QUEST_STAGES.findIndex((stage) => stage.id === id);
+  return index >= 0 && (index === 0 || clearedStages.includes(QUEST_STAGES[index - 1].id));
+}
+
+// src/domain/redesign/missions.ts
+function evaluateMissions(state, config) {
+  if (!config.enabled) return [];
+  const cleared = new Set(state.clearedStages);
+  const ids = /* @__PURE__ */ new Set();
+  return config.missions.filter((master) => master.enabled).map((master) => {
+    if (!master.id || ids.has(master.id)) throw new Error("\u4EFB\u52D9\u30DE\u30B9\u30BF\u30FC\u306EID\u304C\u91CD\u8907\u3057\u3066\u3044\u307E\u3059\u3002");
+    ids.add(master.id);
+    let stages;
+    if (master.condition.type === "stage_clear") {
+      const stageId = master.condition.stageId;
+      if (!QUEST_STAGES.some((stage) => stage.id === stageId)) throw new Error("\u4EFB\u52D9\u306E\u5BFE\u8C61\u30B9\u30C6\u30FC\u30B8\u304C\u5B58\u5728\u3057\u307E\u305B\u3093\u3002");
+      stages = [stageId];
+    } else if (master.condition.type === "area_clear") {
+      const areaId = master.condition.areaId;
+      const area = QUEST_AREAS.find((candidate) => candidate.id === areaId);
+      if (!area?.stages.length) throw new Error("\u4EFB\u52D9\u306E\u5BFE\u8C61\u30A8\u30EA\u30A2\u304C\u5B58\u5728\u3057\u307E\u305B\u3093\u3002");
+      stages = area.stages.map((stage) => stage.id);
+    } else throw new Error("\u4EFB\u52D9\u6761\u4EF6\u304C\u672A\u5BFE\u5FDC\u3067\u3059\u3002");
+    const current = stages.filter((id) => cleared.has(id)).length;
+    return {
+      id: master.id,
+      name: master.name,
+      description: master.description,
+      rewards: master.rewards,
+      current,
+      target: stages.length,
+      status: state.claimedMissionIds?.includes(master.id) ? "claimed" : current === stages.length ? "claimable" : "progress"
+    };
+  });
+}
+function getClaimableMission(state, config, id) {
+  const row = evaluateMissions(state, config).find((candidate) => candidate.id === id);
+  if (!row || row.status !== "claimable") throw new Error("\u3053\u306E\u4EFB\u52D9\u306E\u5831\u916C\u306F\u53D7\u3051\u53D6\u308C\u307E\u305B\u3093\u3002");
+  return config.missions.find((master) => master.id === id);
 }
 
 // src/domain/redesign/battle.ts
@@ -8844,111 +9029,37 @@ function simulateBattle(input) {
   return { seed: input.seed, outcome, totalDamage, playerActions, wavesCleared, party: input.party, waves: input.waves, frames, analysis };
 }
 
-// src/domain/redesign/quests.ts
-var AREAS = [
-  ["mikawa", "\u4E09\u6CB3\u306E\u5730", "\u6700\u521D\u306E\u4E00\u6B69", "\u6575\u306E\u5C5E\u6027\u3068\u884C\u52D5\u30AB\u30A6\u30F3\u30C8\u3092\u898B\u3066\u3001\u6B66\u5C06\u306E\u4E26\u3073\u3092\u6574\u3048\u3088\u3046\u3002"],
-  ["owari", "\u5C3E\u5F35\u306E\u65D7", "\u71B1\u304D\u65D7\u5370", "\u8907\u6570\u306E\u6575\u306B\u306F\u5168\u4F53\u653B\u6483\u3068\u72D9\u3046\u9806\u756A\u304C\u529B\u306B\u306A\u308B\u3002"],
-  ["mino", "\u7F8E\u6FC3\u306E\u57CE", "\u5805\u57CE\u3078\u306E\u9053", "\u5805\u3044\u5B88\u308A\u306B\u306F\u5B88\u5099\u3092\u4E0B\u3052\u308B\u6280\u3092\u7D44\u307F\u5408\u308F\u305B\u3088\u3046\u3002"],
-  ["omi", "\u8FD1\u6C5F\u306E\u6E56", "\u6E56\u4E0A\u306E\u76DF\u7D04", "\u50B7\u3064\u3044\u305F\u4EF2\u9593\u3092\u56DE\u5FA9\u3057\u3001\u9023\u6226\u3092\u5207\u308A\u629C\u3051\u3088\u3046\u3002"],
-  ["kai", "\u7532\u6590\u306E\u5C71", "\u98A8\u6797\u306E\u8A66\u7DF4", "\u5F37\u3044\u4E00\u6483\u306B\u5099\u3048\u3001\u5B88\u308A\u3068\u653B\u6483\u306E\u9806\u3092\u8003\u3048\u3088\u3046\u3002"],
-  ["echigo", "\u8D8A\u5F8C\u306E\u96EA", "\u96EA\u89E3\u3051\u306E\u7FA9", "\u6575\u306E\u56DE\u5FA9\u5F79\u3092\u3069\u3046\u5D29\u3059\u304B\u304C\u52DD\u6557\u3092\u5206\u3051\u308B\u3002"],
-  ["kyoto", "\u4EAC\u6D1B\u306E\u5F71", "\u82B1\u3068\u7B56\u8B00", "\u5F31\u4F53\u3068\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u3092\u898B\u6975\u3081\u3001\u65E9\u3081\u306B\u6C7A\u7740\u3092\u3064\u3051\u3088\u3046\u3002"],
-  ["izumo", "\u51FA\u96F2\u306E\u793E", "\u7948\u308A\u306E\u5411\u3053\u3046", "\u5149\u3068\u95C7\u306E\u76F8\u6027\u3001\u652F\u63F4\u6280\u306E\u7D44\u307F\u5408\u308F\u305B\u3092\u898B\u76F4\u305D\u3046\u3002"],
-  ["satsuma", "\u85A9\u6469\u306E\u708E", "\u4E0D\u5C48\u306E\u9663", "\u9023\u6226\u306B\u5099\u3048\u3066HP\u3068SP\u3092\u6B8B\u3057\u3001\u6575\u9663\u3092\u7A81\u7834\u3057\u3088\u3046\u3002"],
-  ["sekigahara", "\u95A2\u30F6\u539F", "\u6681\u306E\u7D04\u675F", "\u5909\u308F\u308A\u3086\u304F\u6575\u306E\u9663\u3092\u8AAD\u307F\u3001\u4E94\u4EBA\u306E\u529B\u3092\u7D50\u96C6\u3057\u3088\u3046\u3002"]
-];
-var STAGE_NAMES = ["\u8857\u9053\u306E\u5148\u3078", "\u65D7\u3092\u63B2\u3052\u3066", "\u6E21\u308A\u306E\u9663", "\u591C\u660E\u3051\u306E\u653B\u9632", "\u5D29\u308C\u306C\u8A93\u3044", "\u6C7A\u6226\u524D\u591C", "\u57CE\u9580\u3092\u8D8A\u3048\u3066"];
-function themeSkills(area, source) {
-  const effect = ["damage", "damage", "def_up", "heal", "atk_up", "heal", "poison", "atk_down", "def_up", "damage"][area];
-  const chosen = SKILL_MASTERS.find((s) => s.effects.some((e) => e.type === effect));
-  return chosen ? [chosen, ...source.filter((s) => s.id !== chosen.id)].slice(0, 2) : source.slice(0, 2);
-}
-function enemy(area, stage, wave, slot, boss2) {
-  const master = CHARACTER_MASTERS[(area * 6 + stage + wave + slot) % CHARACTER_MASTERS.length];
-  const rank = area * 7 + stage;
-  const growth = 1 + rank * 0.09;
-  const skills = themeSkills(area, SKILL_MASTERS.filter((s) => s.element === master.element));
-  return {
-    id: `quest-enemy-${area + 1}-${stage + 1}-${wave + 1}-${slot + 1}`,
-    name: master.name,
-    image: master.image,
-    element: master.element,
-    level: 1 + rank,
-    stats: { hp: Math.round((boss2 ? 1100 : 370) * growth), sp: boss2 ? 80 : 40, atk: Math.round((boss2 ? 100 : 55) * growth), def: Math.round((area === 2 ? 55 : 15) * growth), luk: 10 + rank },
-    skills,
-    passives: [],
-    actionCount: boss2 ? 3 : 4 + slot % 2,
-    order: slot,
-    boss: boss2,
-    ...boss2 ? { phases: [{ hpBelow: 0.45, name: "\u6C7A\u6B7B\u306E\u9663", actionCount: 2, skills: themeSkills((area + 1) % 10, skills) }] } : {}
-  };
-}
-var QUEST_AREAS = AREAS.map(([id, name2, chapter, description], area) => ({
-  id,
-  index: area + 1,
-  name: name2,
-  description,
-  image: `/bg/sengoku/${area % 2 ? "castle-town" : "castle-approach"}.jpg`,
-  stages: STAGE_NAMES.map((stageName, stage) => {
-    const waveCount = Math.min(5, 1 + Math.floor(stage / 2) + (area > 5 ? 1 : 0));
-    return {
-      id: `${id}-${stage + 1}`,
-      areaId: id,
-      index: stage + 1,
-      name: stage === 6 ? chapter : stageName,
-      description,
-      energyCost: 3 + Math.floor(area / 2),
-      waves: Array.from({ length: waveCount }, (_, wave) => {
-        const boss2 = stage === 6 && wave === waveCount - 1;
-        return Array.from({ length: boss2 ? 1 : Math.min(3, 1 + Math.floor(stage / 3) + wave % 2) }, (_2, slot) => enemy(area, stage, wave, slot, boss2));
-      }),
-      firstRewards: [{ kind: "cash", amount: 100 + area * 30 }, { kind: "soul", id: CHARACTER_MASTERS[(area * 6 + stage) % CHARACTER_MASTERS.length].id, amount: 2 }],
-      rewards: [{ kind: "cash", amount: 20 + area * 10 }, { kind: "character_material", amount: 1 + Math.floor(area / 3) }, { kind: "skill_material", amount: 1 }, { kind: "equipment_material", amount: 1 }],
-      rareRewards: [{ kind: "soul", id: CHARACTER_MASTERS[(area * 6 + stage) % CHARACTER_MASTERS.length].id, amount: 1, chance: 0.08 }, { kind: "equipment_lb", amount: 1, chance: 0.05 }, { kind: "equipment", id: EQUIPMENT_MASTERS[(area * 7 + stage) % EQUIPMENT_MASTERS.length].id, amount: 1, chance: 0.12 }, ...area >= 2 ? [{ kind: "unlock_item", amount: 1, chance: 0.04 }] : []],
-      encounterChance: 0.08
-    };
-  })
-}));
-var QUEST_STAGES = QUEST_AREAS.flatMap((area) => area.stages);
-function getQuestStage(id) {
-  return QUEST_STAGES.find((stage) => stage.id === id);
-}
-function isQuestStageUnlocked(id, clearedStages) {
-  const index = QUEST_STAGES.findIndex((stage) => stage.id === id);
-  return index >= 0 && (index === 0 || clearedStages.includes(QUEST_STAGES[index - 1].id));
-}
-
 // src/domain/redesign/raid.ts
 var base = CHARACTER_MASTERS[12];
 var attack = SKILL_MASTERS.find((s) => s.effects.some((e) => e.type === "damage"));
 var boss = { id: "raid_boss", name: "\u708E\u5F71\u306E\u5B88\u5C06", image: base.image, level: 1, element: "fire", stats: { hp: 6500, sp: 110, atk: 160, def: 45, luk: 20 }, skills: [attack], passives: [], actionCount: 4, order: 0, boss: true, phases: [{ hpBelow: 0.4, name: "\u70C8\u706B\u306E\u9663", actionCount: 3 }] };
 var RAID_MASTERS = [
-  { id: "encounter_flame", name: "\u708E\u5F71\u306E\u5B88\u5C06", type: "encounter", enemy: boss, energyCost: 5, durationMinutes: 60, maxParticipants: 10, maxLevel: 1, checkpoints: [1], victoryMultiplier: 1.5, sharedHp: 15e4, participationRewards: [{ kind: "character_material", amount: 2 }], defeatRewards: [{ kind: "character_material", amount: 30 }] },
-  { id: "unlock_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", type: "unlock", enemy: { ...boss, id: "raid_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", element: "dark", image: CHARACTER_MASTERS[24].image }, energyCost: 5, durationMinutes: 4320, maxParticipants: 20, maxLevel: 20, checkpoints: [1, 10, 20], victoryMultiplier: 1.5, sharedHp: 2e5, participationRewards: [{ kind: "skill_material", amount: 2 }], defeatRewards: [{ kind: "skill_material", amount: 15 }, { kind: "equipment_material", amount: 5 }] }
+  { id: "encounter_flame", name: "\u708E\u5F71\u306E\u5B88\u5C06", type: "encounter", enemy: boss, energyCost: 5, durationMinutes: 60, maxParticipants: 10, maxLevel: 1, appearanceLevels: [1], victoryMultiplier: 1.5, sharedHp: 15e4, participationRewards: [{ kind: "character_material", amount: 2 }], defeatRewards: [{ kind: "character_material", amount: 30 }] },
+  { id: "unlock_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", type: "unlock", enemy: { ...boss, id: "raid_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", element: "dark", image: CHARACTER_MASTERS[24].image }, energyCost: 5, durationMinutes: 4320, maxParticipants: 20, maxLevel: 20, appearanceLevels: [1, 10, 20], victoryMultiplier: 1.5, sharedHp: 2e5, participationRewards: [{ kind: "skill_material", amount: 2 }], defeatRewards: [{ kind: "skill_material", amount: 15 }, { kind: "equipment_material", amount: 5 }] }
 ];
 function getRaidMaster(id) {
   const master = RAID_MASTERS.find((m) => m.id === id);
   if (!master) throw new Error("\u5BFE\u8C61\u30EC\u30A4\u30C9\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002");
   return master;
 }
-function raidCheckpoint(master, level) {
-  return Math.max(...master.checkpoints.filter((n) => n <= level));
+function raidAppearanceLevel(master, level) {
+  return Math.max(1, ...master.appearanceLevels.filter((n) => n <= level));
 }
 function raidEnemy(master, level) {
-  const checkpoint = raidCheckpoint(master, level);
-  return { ...structuredClone(master.enemy), level, image: master.type === "unlock" && checkpoint >= 10 ? CHARACTER_MASTERS[checkpoint >= 20 ? 36 : 30].image : master.enemy.image, stats: Object.fromEntries(Object.entries(master.enemy.stats).map(([key2, value]) => [key2, Math.round(value * (1 + (level - 1) * 0.15))])) };
+  const appearanceLevel = raidAppearanceLevel(master, level);
+  return { ...structuredClone(master.enemy), level, image: master.type === "unlock" && appearanceLevel >= 10 ? CHARACTER_MASTERS[appearanceLevel >= 20 ? 36 : 30].image : master.enemy.image, stats: Object.fromEntries(Object.entries(master.enemy.stats).map(([key2, value]) => [key2, Math.round(value * (1 + (level - 1) * 0.15))])) };
 }
 function createRaidRoom(masterId, ownerId, id, now) {
   const m = getRaidMaster(masterId);
-  return { id, masterId, ownerId, level: 1, hp: m.sharedHp, maxHp: m.sharedHp, createdAt: new Date(now).toISOString(), expiresAt: new Date(now + m.durationMinutes * 6e4).toISOString(), status: "active", rescueCount: 0, rescueWindowStartedAt: new Date(now).toISOString(), participants: [{ userId: ownerId, name: "\u4E3B\u50AC\u8005", wins: 0, attempts: 0, totalDamage: 0, joinedLevel: 1, checkpoint: 1 }], settledBattleIds: [], rewardGrants: [] };
+  return { id, masterId, ownerId, level: 1, hp: m.sharedHp, maxHp: m.sharedHp, createdAt: new Date(now).toISOString(), expiresAt: new Date(now + m.durationMinutes * 6e4).toISOString(), status: "active", rescueCount: 0, rescueWindowStartedAt: new Date(now).toISOString(), participants: [{ userId: ownerId, name: "\u4E3B\u50AC\u8005", wins: 0, attempts: 0, totalDamage: 0, joinedLevel: 1 }], settledBattleIds: [], rewardGrants: [] };
 }
-function applyRaidAction(original, originalState, action, payload = {}, now = Date.now()) {
+function applyRaidAction(original, originalState, action, payload = {}, now = Date.now(), acquisitionMaster) {
   const room = structuredClone(original), state = structuredClone(originalState), master = getRaidMaster(room.masterId);
   if (room.status === "active" && Date.parse(room.expiresAt) <= now) room.status = "expired";
   let me = room.participants.find((p) => p.userId === state.userId);
   if (action === "raid_claim") {
     for (const g of room.rewardGrants) if (g.userId === state.userId && !g.claimed) {
-      g.rewards.forEach((r, i) => Object.assign(state, grantReward(state, r, `${room.id}:${g.id}:${i}`)));
+      g.rewards.forEach((r, i) => Object.assign(state, grantReward(state, r, `${room.id}:${g.id}:${i}`, acquisitionMaster)));
       g.claimed = true;
     }
     return { room, state };
@@ -8966,7 +9077,7 @@ function applyRaidAction(original, originalState, action, payload = {}, now = Da
   if (action === "raid_join") {
     if (!me) {
       if (room.participants.filter((p) => !p.leftAt).length >= master.maxParticipants) throw new Error("\u53C2\u52A0\u4EBA\u6570\u304C\u4E0A\u9650\u306B\u9054\u3057\u3066\u3044\u307E\u3059\u3002");
-      me = { userId: state.userId, name: payload.name || "\u53C2\u6226\u8005", wins: 0, attempts: 0, totalDamage: 0, joinedLevel: room.level, checkpoint: raidCheckpoint(master, room.level) };
+      me = { userId: state.userId, name: payload.name || "\u53C2\u6226\u8005", wins: 0, attempts: 0, totalDamage: 0, joinedLevel: room.level };
       room.participants.push(me);
     }
     return { room, state };
@@ -8987,7 +9098,6 @@ function applyRaidAction(original, originalState, action, payload = {}, now = Da
     return { room, state };
   }
   if (action === "raid_battle") {
-    if (master.type === "unlock" && me.joinedLevel > me.checkpoint) throw new Error("\u9014\u4E2D\u53C2\u52A0\u5F8C\u306E\u9032\u884C\u4ED5\u69D8\u3092\u8ABF\u6574\u4E2D\u3067\u3059\u3002");
     if (!payload.battleId || !payload.result) throw new Error("\u30B5\u30FC\u30D0\u30FC\u306E\u6226\u95D8\u7D50\u679C\u304C\u5FC5\u8981\u3067\u3059\u3002");
     if (room.settledBattleIds.includes(payload.battleId)) return { room, state };
     const appliesToSharedHp = payload.battleLevel === room.level && room.status === "active" && !me.leftAt;
@@ -9042,20 +9152,16 @@ async function uuidFor(value) {
   const h = [...hash.slice(0, 16)].map((b) => b.toString(16).padStart(2, "0")).join("");
   return `${h.slice(0, 8)}-${h.slice(8, 12)}-${h.slice(12, 16)}-${h.slice(16, 20)}-${h.slice(20)}`;
 }
-async function legacy(userId) {
-  const [characters, skills, equipment] = await Promise.all([
-    db(`user_characters?user_id=eq.${userId}&select=id,character_id,level,awakening_level`),
-    db(`user_skills?user_id=eq.${userId}&select=id,skill_card_id,plus_val`),
-    db(`user_equipments?user_id=eq.${userId}&select=id,equipment_id,level,plus_val`)
-  ]);
-  return { characters, skills, equipment };
+async function acquisitionInput(userId) {
+  return rpc("game04_acquisition_input", { p_user_id: userId });
 }
 async function stateFor(userId) {
-  const assets = await legacy(userId);
+  const input = await acquisitionInput(userId);
   for (let attempt = 0; attempt < 4; attempt++) {
-    const state = await rpc("game04_get_state", { p_user_id: userId, p_initial: buildInitialState(userId, assets) });
-    const imported = importLegacyAssets(state, assets);
-    if (JSON.stringify(imported.legacyImportedIds) === JSON.stringify(state.legacyImportedIds)) return state;
+    const state = await rpc("game04_get_state", { p_user_id: userId, p_initial: buildInitialState(userId, input.legacy) });
+    const migrated = importLegacyAssets(state, input.legacy);
+    const imported = applyAcquisitionEvents(migrated, input.events, input.master);
+    if (JSON.stringify(imported) === JSON.stringify(state)) return state;
     try {
       return (await commit(state, imported, crypto.randomUUID())).state;
     } catch (error) {
@@ -9091,6 +9197,15 @@ async function roomsFor(userId) {
     status: row.state.status === "active" && Date.parse(row.state.expiresAt) <= Date.now() ? "expired" : row.state.status
   })).filter((room) => room.status === "active" || room.participants.some((p) => p.userId === userId));
 }
+async function rewardPolicy() {
+  const [row] = await db("game04_redesign_master?key=eq.acquisition_conversion&select=data");
+  if (!row?.data) throw new ApiError("\u7372\u5F97\u8A2D\u5B9A\u3092\u78BA\u8A8D\u3067\u304D\u307E\u305B\u3093\u3002", 503);
+  return row.data;
+}
+async function missionConfig() {
+  const [row] = await db("game04_redesign_master?key=eq.missions&select=data");
+  return row?.data ?? { enabled: false, missions: [] };
+}
 async function responseFor(userId, extra = {}) {
   const [state, rooms, socialEvents, pending] = await Promise.all([
     stateFor(userId),
@@ -9098,7 +9213,7 @@ async function responseFor(userId, extra = {}) {
     db("game04_social_events?select=*&order=created_at.desc&limit=30"),
     db(`game04_battles?user_id=eq.${userId}&status=eq.started&select=id,kind,target_id&order=created_at.asc&limit=1`)
   ]);
-  return { state, rooms, socialEvents, pendingBattle: pending[0] ?? null, ...extra };
+  return { state, rooms, socialEvents, missions: evaluateMissions(state, await missionConfig()), pendingBattle: pending[0] ?? null, ...extra };
 }
 async function runBattle(userId, name2, payload, id, playerName) {
   let [record] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=*`);
@@ -9110,6 +9225,7 @@ async function runBattle(userId, name2, payload, id, playerName) {
     validateDeck(state, state.deck);
     const kind = name2 === "quest_battle" ? "quest" : "raid";
     let waves, cost, targetId, raidLevel;
+    let startRoom = null;
     if (kind === "quest") {
       const stage = getQuestStage(String(payload.stageId));
       if (!stage || !isQuestStageUnlocked(stage.id, state.clearedStages)) throw new ApiError("\u3053\u306E\u30B9\u30C6\u30FC\u30B8\u306F\u672A\u89E3\u653E\u3067\u3059\u3002");
@@ -9120,7 +9236,7 @@ async function runBattle(userId, name2, payload, id, playerName) {
       const room = await roomFor(String(payload.roomId)), master = getRaidMaster(room.masterId);
       const me = room.participants.find((p) => p.userId === userId);
       if (room.status !== "active" || Date.parse(room.expiresAt) <= Date.now() || !me || me.leftAt) throw new ApiError("\u53C2\u52A0\u3067\u304D\u308B\u958B\u50AC\u4E2D\u30EC\u30A4\u30C9\u3092\u9078\u3093\u3067\u304F\u3060\u3055\u3044\u3002");
-      if (master.type === "unlock" && me.joinedLevel > me.checkpoint) throw new ApiError("\u30C1\u30A7\u30C3\u30AF\u30DD\u30A4\u30F3\u30C8\u304B\u3089\u306E\u9014\u4E2D\u53C2\u52A0\u5F8C\u306E\u9032\u884C\u4ED5\u69D8\u3092\u8ABF\u6574\u4E2D\u3067\u3059\u3002");
+      startRoom = room;
       waves = [[raidEnemy(master, room.level)]];
       cost = master.energyCost;
       targetId = room.id;
@@ -9129,7 +9245,7 @@ async function runBattle(userId, name2, payload, id, playerName) {
     if (state.energy < cost) throw new ApiError("\u884C\u52D5\u529B\u304C\u8DB3\u308A\u307E\u305B\u3093\u3002");
     const seed = crypto.getRandomValues(new Uint32Array(1))[0];
     const input = { seed, party: buildBattleParty(state), waves, rules: BATTLE_RULES, raidLevel };
-    await commit(state, { ...state, energy: state.energy - cost }, id, { id, kind, targetId, seed, input, status: "started" });
+    await commit(state, { ...state, energy: state.energy - cost }, id, { id, kind, targetId, seed, input, status: "started" }, startRoom, startRoom?.version ?? null);
     record = { id, kind, target_id: targetId, input, seed, status: "started" };
   }
   const battle = simulateBattle(record.input);
@@ -9150,7 +9266,8 @@ async function runBattle(userId, name2, payload, id, playerName) {
       };
       const luck = record.input.party.reduce((n, p) => n + p.stats.luk, 0) / 5;
       rewards.push(...stage.rewards, ...firstClear ? stage.firstRewards : [], ...stage.rareRewards.filter((r) => random() < Math.min(1, (r.chance ?? 0) * (1 + luck / 1e3))));
-      for (let i = 0; i < rewards.length; i++) after = grantReward(after, rewards[i], await uuidFor(`reward:${id}:${i}`));
+      const policy = await rewardPolicy();
+      for (let i = 0; i < rewards.length; i++) after = grantReward(after, rewards[i], await uuidFor(`reward:${id}:${i}`), policy);
       if (firstClear) after.clearedStages.push(stage.id);
       if (random() < stage.encounterChance) {
         encounterRaidId = await uuidFor(`encounter:${id}`);
@@ -9196,7 +9313,13 @@ Deno.serve(async (request) => {
     if (prior) return new Response(JSON.stringify(await responseFor(user.id)), { headers });
     const state = await stateFor(user.id);
     let after, room = null, version = null;
-    if (action === "set_home") {
+    if (action === "claim_mission") {
+      const mission = getClaimableMission(state, await missionConfig(), String(payload.missionId));
+      after = structuredClone(state);
+      const policy = await rewardPolicy();
+      for (let i = 0; i < mission.rewards.length; i++) after = grantReward(after, mission.rewards[i], await uuidFor(`mission:${user.id}:${mission.id}:${i}`), policy);
+      after.claimedMissionIds = [...state.claimedMissionIds ?? [], mission.id];
+    } else if (action === "set_home") {
       after = structuredClone(state);
       if (payload.characterId !== void 0) {
         if (!state.characters.some((c) => c.id === payload.characterId) || !CHARACTER_MASTERS.some((c) => c.id === payload.characterId)) throw new ApiError("\u672A\u6240\u6301\u306E\u6B66\u5C06\u3067\u3059\u3002");
@@ -9217,7 +9340,7 @@ Deno.serve(async (request) => {
     } else if (["raid_join", "raid_leave", "raid_rescue", "raid_claim", "encounter_ignore"].includes(action)) {
       const current = await roomFor(String(payload.roomId));
       version = current.version;
-      const changed = applyRaidAction(current, state, action, { name: profile.username });
+      const changed = applyRaidAction(current, state, action, { name: profile.username }, Date.now(), action === "raid_claim" ? await rewardPolicy() : void 0);
       room = changed.room;
       after = changed.state;
     } else after = applyGrowthAction(state, action, payload);

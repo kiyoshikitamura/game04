@@ -1,3 +1,4 @@
+import { applyAcquisitionEvents, PREVIEW_ACQUISITION_MASTER, type AcquisitionMaster } from './acquisitions';
 import roster from '../../theme/sengoku-characters.json';
 import names from '../../theme/sengoku-masters.json';
 import oldSkills from '../gameplay/canonical/data/skills_20260821.json';
@@ -59,8 +60,13 @@ export function importLegacyAssets(original:RedesignState,legacy:LegacyAssets):R
 export function buildInitialState(userId:string,legacy:LegacyAssets):RedesignState {return importLegacyAssets(createInitialState(userId),legacy);}
 
 /** Caller performs chance roll on server; this function applies one already-selected reward. */
-export function grantReward(original:RedesignState,reward:import('./types').Reward,instanceId?:string):RedesignState {
- const state=structuredClone(original); const amount=Math.max(0,Math.floor(reward.amount));
+export function grantReward(original:RedesignState,reward:import('./types').Reward,instanceId?:string,acquisitionMaster:AcquisitionMaster=PREVIEW_ACQUISITION_MASTER):RedesignState {
+ const state=structuredClone(original); const amount=reward.amount;
+ if(!Number.isSafeInteger(amount)||amount<0) throw new Error('報酬数量が不正です');
+ if(reward.kind==='character'||reward.kind==='skill'||reward.kind==='equipment'){
+  if(!reward.id||!instanceId) throw new Error('獲得イベントIDが必要です');
+  return applyAcquisitionEvents(state,Array.from({length:amount},(_,i)=>({id:`reward:${instanceId}:${i}`,kind:reward.kind as 'character'|'skill'|'equipment',masterId:reward.id!,instanceId:amount===1?instanceId:`${instanceId}:${i}`})),acquisitionMaster);
+ }
  switch(reward.kind){
  case 'cash':state.cash+=amount;break;
  case 'character_material':state.materials.character+=amount;break;
@@ -69,7 +75,6 @@ export function grantReward(original:RedesignState,reward:import('./types').Rewa
  case 'equipment_lb':state.materials.equipmentLb+=amount;break;
  case 'unlock_item':state.materials.unlock+=amount;break;
  case 'soul':if(reward.id){state.souls??={};state.souls[reward.id]=(state.souls[reward.id]??0)+amount;}break;
- case 'equipment':if(reward.id&&instanceId&&EQUIPMENT_MASTERS.some(e=>e.id===reward.id)){for(let i=0;i<amount;i++){const id=amount===1?instanceId:`${instanceId}:${i}`;if(!state.equipment.some(e=>e.instanceId===id))state.equipment.push({instanceId:id,masterId:reward.id,level:1,lb:0});}}break;
  }
  return state;
 }

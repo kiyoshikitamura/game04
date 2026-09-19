@@ -1,11 +1,13 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useGame } from '../../context/GameContext';
+import { REDESIGN_REWARD_SYNC_EVENT } from '@/utils/redesignRewardSync';
 import { redesignRequest, type RedesignResponse } from '@/utils/redesignApi';
 import { buildBattleParty } from '@/domain/redesign/masters';
 import { nextQuestStage } from '@/domain/redesign/quests';
 import { getRaidMaster } from '@/domain/redesign/raid';
 import { isVipActive, VIP_PRODUCT } from '@/domain/redesign/vip';
+import type { AcquisitionState } from '@/domain/redesign/acquisitions';
 import type { BattleResult } from '@/domain/redesign/battle';
 import RedesignShell from './RedesignShell';
 import GrowthView from './GrowthView';
@@ -30,13 +32,16 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   const [battle, setBattle] = useState<BattleResult | null>(null);
   const ownerRef = useRef(owner);
   const lock = useRef(false);
+  const requestGeneration = useRef(0);
+  const rewardRefreshPending = useRef(false);
   ownerRef.current = owner;
   const refresh = useCallback(async () => {
     const requestOwner = owner;
+    const generation = ++requestGeneration.current;
     try {
       const value = await redesignRequest('get_state');
-      if (ownerRef.current === requestOwner) { setData(value); setError(''); }
-    } catch (reason) { if (ownerRef.current === requestOwner) setError(reason instanceof Error ? reason.message : '読み込めませんでした。'); }
+      if (ownerRef.current === requestOwner && generation === requestGeneration.current) { setData(current => current && current.state.userId === value.state.userId && current.state.version > value.state.version ? current : value); setError(''); }
+    } catch (reason) { if (ownerRef.current === requestOwner && generation === requestGeneration.current) setError(reason instanceof Error ? reason.message : '読み込めませんでした。'); }
   }, [owner]);
   useEffect(() => { setData(null); void refresh(); }, [refresh]);
   useEffect(() => {
@@ -45,9 +50,18 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     const timer = setInterval(update, 60000);
     return () => { document.removeEventListener('visibilitychange', update); clearInterval(timer); };
   }, [refresh]);
+  useEffect(() => {
+    const update = (event: Event) => {
+      if ((event as CustomEvent<{ userId: string }>).detail?.userId !== owner) return;
+      if (lock.current) rewardRefreshPending.current = true;
+      else void refresh();
+    };
+    window.addEventListener(REDESIGN_REWARD_SYNC_EVENT, update);
+    return () => window.removeEventListener(REDESIGN_REWARD_SYNC_EVENT, update);
+  }, [owner, refresh]);
   async function action(name: string, payload: Record<string, unknown> = {}, explicitId?: string) {
     if (lock.current) throw new Error('処理中です。');
-    lock.current = true; setBusy(true); setError('');
+    lock.current = true; requestGeneration.current++; setBusy(true); setError('');
     const requestOwner = owner;
     const isBattle = name === 'quest_battle' || name === 'raid_battle';
     const storageKey = `game04:request:${owner}:${name}:${String(payload.stageId || payload.roomId || '')}`;
@@ -64,7 +78,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     } catch (reason) {
       const message = reason instanceof Error ? reason.message : '処理に失敗しました。';
       setError(message); void refresh(); throw reason;
-    } finally { lock.current = false; setBusy(false); }
+    } finally { lock.current = false; setBusy(false); if (rewardRefreshPending.current) { rewardRefreshPending.current = false; void refresh(); } }
   }
   function navigate(next: string) {
     if (busy) return;
@@ -94,9 +108,10 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   if (!data) return <div className="rd-shell"><div className="rd-panel">{error ? <><p role="alert">{error}</p><button className="rd-button" onClick={() => void refresh()}>再読み込み</button></> : <BrandedLoading label="戦国の世界を準備中" />}</div></div>;
   const state = data.state, party = buildBattleParty(state), vipActive = isVipActive(state.vipExpiresAt);
   const encounter = data.rooms.find(r => getRaidMaster(r.masterId).type === 'encounter' && r.status === 'active' && r.participants.some(p => p.userId === state.userId && !p.leftAt));
-  return <RedesignShell state={state} activeTab={tab} onNavigate={navigate} onAction={action} hideChrome={!!battle || questPlaying} socialEvents={data.socialEvents}
+  return <RedesignShell state={state} activeTab={tab} onNavigate={navigate} onAction={action} hideChrome={!!battle || questPlaying} socialEvents={data.socialEvents} missions={data.missions}
     encounterRaid={encounter ? { id: encounter.id, name: getRaidMaster(encounter.masterId).name, expiresAt: encounter.expiresAt } : null}
     notifications={<>
+    {!!(state as AcquisitionState).pendingAcquisitions?.length && <p className="rd-panel" role="status">マスター設定待ちの獲得物が{(state as AcquisitionState).pendingAcquisitions!.length}件あります。確定後に反映します。</p>}
     {error && <p className="rd-panel" role="alert">{error}</p>}
     {data.pendingBattle && !battle && <div className="rd-panel"><p>未完了の戦闘があります。</p><button className="rd-button" disabled={busy} onClick={async () => {
       const p = data.pendingBattle!;

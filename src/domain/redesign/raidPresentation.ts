@@ -9,7 +9,7 @@ export function raidTimeRemaining(expiresAt: string, now: number): string {
   return `${Math.floor(seconds / 60)}分 ${seconds % 60}秒`;
 }
 export function raidRewardLabel(reward: Reward): string {
-  const labels: Record<Reward['kind'], string> = {cash:'銭',character_material:'武将育成素材',skill_material:'スキルLB素材',equipment_material:'装備育成素材',equipment_lb:'装備LB素材',soul:'武将の魂',equipment:'装備',unlock_item:'レイド解禁札'};
+  const labels: Record<Reward['kind'], string> = {character:'武将',skill:'スキル',cash:'銭',character_material:'武将育成素材',skill_material:'スキルLB素材',equipment_material:'装備育成素材',equipment_lb:'装備LB素材',soul:'武将の魂',equipment:'装備',unlock_item:'レイド解禁札'};
   return `${labels[reward.kind]} ×${reward.amount.toLocaleString()}`;
 }
 /** Display only. Server enforces windows atomically; a client clock never grants rescue rights. */

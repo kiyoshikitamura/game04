@@ -1,4 +1,5 @@
 "use client";
+import { notifyRedesignRewardChange } from "@/utils/redesignRewardSync";
 import { getThemedCharacterName } from "@/theme/characters";
 import { game04WorldText, game04TownName, game04QuestPresentation } from "@/theme/world";
 import { useQuestRaidEncounter } from "./hooks/useQuestRaidEncounter";
@@ -1205,6 +1206,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
           // Direct gameplay grants must be reflected in Bag and balances before
           // the success dialog opens. Legacy Present grants still refresh too.
           await syncBootstrapData(userId);
+          notifyRedesignRewardChange(userId);
           if (onboardingState?.gameplay_authorized && activeTab === "home") {
             setShowLoginBonusModal(true);
             setPresentsPrefetched(false);
@@ -3579,6 +3581,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
             } : current);
           }
         }
+        notifyRedesignRewardChange(session.user.id);
         setScoutResults(results);
         setScoutFlashingColor(results.some((r: { rarity: string }) => r.rarity === "SSR") ? "GOLD" : results.some((r: { rarity: string }) => r.rarity === "SR") ? "PURPLE" : "BLUE");
         setScoutAnimationState("FLASHING");
@@ -3661,6 +3664,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
           } : current);
         }
       }
+      notifyRedesignRewardChange(session.user.id);
       setScoutResults(assetResults);
       setScoutFlashingColor(assetResults.some((result: { rarity: string }) => result.rarity === "SSR") ? "GOLD" : assetResults.some((result: { rarity: string }) => result.rarity === "SR") ? "PURPLE" : "BLUE");
       await bootstrapPromise;
@@ -3828,6 +3832,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
 
       await syncBootstrapData(session.user.id);
 
+      notifyRedesignRewardChange(session.user.id);
       setScoutResults(results);
       setScoutFlashingColor(highestRarity);
       setScoutAnimationState("FLASHING");
