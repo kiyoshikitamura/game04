@@ -61,7 +61,15 @@
 - GAME04 dev Migration `20260919144247_game04_acquisition_events`: 適用済み。
 - Edge `game04-redesign-api`: version 3 ACTIVE / verify_jwt=true。
 - ローカル: Raid共有Lv14、WIN/LOSE、3勝、非遡及、旧Lv精算、取得冪等、Mission Fixtureを確認。
-- dev実API: 検証進行中。ローカル検証を実API受入とは扱わない。
-- 今回のPreview: 未反映。今回4項目は着手中であり、Preview反映済・完了へ昇格しない。
+- dev実API: Raid Lv14途中参加WIN/LOSE・再送、3勝資格・非遡及・旧Lv精算・Lv15強化・2参加者並行精算/claim PASS。8戦のうち4戦は開始済み保存fixtureからのAPI再開。全Lvバランス・実ブラウザ中断再現ではない。
+- 今回のPreview: 実装commit `f75a341cda872f043a3ef564f333e09f7f9f9988` をVercel success確認。既存branch URLでroot TAP TO START、`/qa/redesign` Home/Raid表示を確認。
+- M5-06はPreview反映済。M9-03/M4-06/MS-03は接続範囲のみPreview反映済。正式Master承認・全体完了とは分離する。
+- 追加2テーブルのAdvisorはINFO RLS no policyのみ。service-only / browser revokeを意図したもの。
 
 全体141件・未FIX/正式承認待ち35件はユーザー引継ぎ申告値。確認したRepository/Libraryでは141件全行の正本所在を確認できていない。旧Excel43件/74.4%や現JSON42件を全体率へ流用しない。詳細は `GAME04_CONFIRMED_REMAINDER_HANDOFF_20260919.md` と進捗JSONの `taskUpdates` を参照。
+
+Preview追加確認: `/qa/redesign` の任務中央Dialogで内部スクロールを確認（`.rd-modal-body` clientHeight 682 / scrollHeight 953、overflowY auto）。末尾「達成報酬準備中」へ到達。既存スクロール修正を保持。
+
+取得接続のdev実API: 6イベント（新規キャラ1、重複魂20、Skill素材2、装備個体2）の正確な取込みと後続読取での二重付与なしを確認。並行get_stateの片方はDB REST上流の非JSON応答で400となったため、並行HTTP受入は未PASS。Missionは正式Master空・不正claimの400拒否まで確認し、有効Missionの実API受取は未検証。
+
+Present実API最終確認: Character/Skill/Equipment各2個を各同時2claimし、各組[200,400]で一方のみ成功。取得検証累計12イベント、新規キャラ+1・魂+40・Skill素材+6・装備個体+4で再取得結果完全一致。無効Mission claim400後もstate不変。`GAME04_ACQUISITION_ACCEPTANCE_20260919.json` に証跡を保存。有効Mission実API受取・Login全日程・実ガチャ抽選は未検証。並行get_stateの一方が上流非JSON400となるKnown Issueは残存。

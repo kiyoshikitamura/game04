@@ -41,3 +41,20 @@ GAME04 dev `lrgyllgzcdcphlbmkknc` の現行SQLをREAD ONLY確認。
 `verify-game04-acquisitions.ts`: 新規・重複別処理、同じイベントの再送、入力不変、最大育成時保留・正式値投入後再開、未知Master保留、直接Rewardの安定ID、旧Edgeとの二重取込抑止、Equipment個体ID互換、不正数量拒否を検証。
 
 `verify-game04-acquisition-db.sql`: 適用後、Rollback transaction内でINSERT捕捉、同一UUID重複・上限変換のreceipt捕捉、COMPLETED再更新の二重捕捉防止、snapshot境界を検証する。
+
+## 開発DB／Edge実接続結果
+
+- Migration `20260919144247` を親エージェントがGAME04 devへ適用。Edge `game04-redesign-api` v3（JWT検証有効）。
+- 専用QA `67ee9a06-6d41-4858-8de4-b634e982c67e` のみfixture投入。他ユーザー・GAME03・Production変更なし。
+- Rollback SQL：装備INSERT、重複・旧上限変換結果の捕捉、再更新二重捕捉防止、snapshot境界PASS。
+- 実イベント6件：新規Character1、魂20、Skill素材2、装備個体2を過不足なく反映。
+- Present実受取：Character2／Skill2／Equipment2を各同時2要求。各200／400となり一方のみ成功。
+- 最終差分：Character +1、魂 +40、Skill素材 +6、Equipment +4。イベント12件。受取後get_stateと再取得は一致。
+- Mission設定無効：一覧空、不正`claim_mission`は400、所有状態不変。
+- QA認証の期限切れはrefreshで解消。verify_jwtはtrueを維持。
+
+### 既知Issue・未検証
+
+並行get_stateの一方で上流非JSON応答のパースエラーがEdgeから400で返った。他方と後続要求は200、付与台帳の二重反映なし。恒常再現は確認していない。並行HTTP全成功の受入とはしない。CASそのものの失敗とは確認されていない。
+
+今回のガチャ検証は保存済み結果形式に沿った専用QA fixtureによる捕捉と実API取込。実抽選・価格・確率・天井商品の承認ではない。Login日程・正式Mission条件／報酬量、専用資産Master、最大育成後ポリシーは未FIXのまま。Login全日程・全数量・全獲得ルートの網羅受入は行っていない。

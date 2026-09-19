@@ -2,7 +2,7 @@
   "title": "GAME04 全面改修進捗管理",
   "date": "2026-09-19",
   "basisSha": "7369f3dbaf3ef454c33932df55ee308e0b7718cb",
-  "previewSha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+  "previewSha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
   "previewUrl": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
   "db": "lrgyllgzcdcphlbmkknc",
   "scope": "2026-09-19 全面再設計の実装工程サブセット42件。初期対象外M6-05はexcludedTasksへ分離。全体141件正本の代替ではなく、旧191件・43件の率を全体率へ流用しない。",
@@ -211,11 +211,12 @@
       "id": "M4-06",
       "phase": "M4",
       "title": "ステージ・エリアクリアのMission報酬接続",
-      "status": "着手中",
-      "notes": "stage_clear/area_clearのサーバー評価・受取CAS・中央UIを接続。正式Mission Masterは空/無効。ローカルFixture確認済み。条件・報酬量を独自に設定せず、実API/Preview検証中。",
-      "previewEligible": false,
-      "sha": "",
-      "url": ""
+      "status": "Preview反映済",
+      "notes": "接続範囲をPreview反映済。サーバー条件評価・受取CAS・中央UIを接続。正式Mission Masterは空/無効。正式条件・報酬の承認待ちであり運用Missionの完了ではない。",
+      "previewEligible": true,
+      "sha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "completionScope": "接続実装のみ。正式Master待ち"
     },
     {
       "id": "M5-01",
@@ -271,12 +272,13 @@
       "id": "M5-06",
       "phase": "M5",
       "title": "Unlock途中参加Checkpoint廃止・共有Lv参加への統一",
-      "status": "着手中",
-      "notes": "個人Checkpoint制限・表示を除去し、見た目段階をappearanceLevelsへ分離。旧保存データ互換とjoinedLevel保持。ローカル共有Lv14 WIN/LOSE・3勝・非遡及・旧Lv精算確認。dev Edge適用済み、実APIとPreview受入は進行中。",
-      "previewEligible": false,
-      "sha": "",
-      "url": "",
-      "specStatus": "FIX済み"
+      "status": "Preview反映済",
+      "notes": "個人Checkpoint制限・表示を除去。見た目段階分離、旧保存互換・joinedLevel保持。dev実APIでLv14途中参加WIN/LOSE・再送・3勝・非遡及・旧Lv精算・Lv15強化・2参加者並行精算/claimを確認。Preview配信・QA Raid表示確認。全Lvバランス・実機最終受入は未実施。",
+      "previewEligible": true,
+      "sha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "specStatus": "FIX済み",
+      "completionScope": "Checkpoint除去"
     },
     {
       "id": "M6-01",
@@ -382,11 +384,12 @@
       "id": "M9-03",
       "phase": "M9",
       "title": "新資産の獲得・重複変換最終接続",
-      "status": "着手中",
-      "notes": "初期スナップショットと獲得イベントを分離し、Character魂・Skill LB素材・Equipment個体へ接続。冪等receipt/CASを実装。既存仮変換量をMaster化し上限後・未知Masterは保留。dev Migration/Edge適用済み。正式Master待ち、実API/Preview検証中。",
-      "previewEligible": false,
-      "sha": "",
-      "url": ""
+      "status": "Preview反映済",
+      "notes": "接続範囲をPreview反映済。初期snapshot/取得event分離・魂/Skill素材/Equipment個体・receipt/CASを実装。正式変換量・上限後扱い・未知Masterは決定待ち。タスク全体の完了ではない。",
+      "previewEligible": true,
+      "sha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "completionScope": "接続実装のみ。正式Master待ち"
     },
     {
       "id": "M9-04",
@@ -453,11 +456,11 @@
   },
   "taskUpdates": {
     "basisSha": "137c3eccfb6c66a2a001096900e2edee7dc63b37",
-    "status": "着手中",
-    "previewApplied": false,
-    "implementationSha": null,
-    "previewSha": null,
-    "previewUrl": null,
+    "status": "Preview反映済",
+    "previewApplied": true,
+    "implementationSha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
+    "previewSha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
+    "previewUrl": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
     "developmentDeployment": {
       "db": "lrgyllgzcdcphlbmkknc",
       "migration": "20260919144247_game04_acquisition_events",
@@ -465,40 +468,68 @@
       "edgeFunction": "game04-redesign-api",
       "edgeVersion": 3,
       "edgeStatus": "ACTIVE",
-      "verifyJwt": true
+      "verifyJwt": true,
+      "advisor": "追加2テーブルはINFO: RLS enabled no policyのみ。service-only / browser revokeを意図。"
     },
     "verification": {
       "typecheck": "PASS",
       "build": "PASS",
-      "liveApi": "進行中",
-      "preview": "未反映",
-      "finalAcceptance": "未実施"
+      "liveApi": "Raid共有Lv14/15、3勝資格・非遡及・旧Lv精算・2参加者並行処理PASS。取得・Mission実API結果は個別根拠へ追記。",
+      "preview": "Vercel success。branch URLでroot TAP TO START・/qa/redesign Home/Raid表示確認。 /qa/redesign任務中央Dialog・内部スクロール(.rd-modal-body clientHeight682/scrollHeight953, overflowYauto)・末尾「達成報酬準備中」を確認。",
+      "finalAcceptance": "全項目の最終受入は未実施。接続実装と正式Master承認を分離。",
+      "acquisitionApi": "6イベント（新規キャラ1・重複魂20・Skill素材2・装備個体2）の取込みと後続読取の二重付与なしを確認。並行get_stateは片方がDB REST上流非JSON応答による400となり、並行HTTP受入は未PASS。",
+      "missionApi": "正式Masterはmissions=[]。不正claim_missionは400拒否を確認。有効Missionの実API受取は未検証。",
+      "presentApi": "Character/Skill/Equipment各2個のPresentを同時2claimし各[200,400]で一方のみ成功。累計12イベント、新規キャラ+1/魂+40/Skill素材+6/装備個体+4、再取得完全一致。無効Mission claim400後state不変。",
+      "notVerified": [
+        "有効Missionの実API受取",
+        "Login全日程",
+        "実ガチャ抽選",
+        "正式Master・全Lvバランス",
+        "実機最終受入"
+      ],
+      "evidence": [
+        "GAME04_ACQUISITION_ACCEPTANCE_20260919.json",
+        "GAME04_ACQUISITION_CONNECTION_20260919.md",
+        "GAME04_RAID_SHARED_LEVEL_20260919.md"
+      ]
     },
     "items": [
       {
         "id": "M5-06",
         "scope": "existingImplementationSubset",
-        "status": "着手中",
-        "notes": "個人Checkpoint制限・表示を除去し、見た目段階をappearanceLevelsへ分離。旧保存データ互換とjoinedLevel保持。ローカル共有Lv14 WIN/LOSE・3勝・非遡及・旧Lv精算確認。dev Edge適用済み、実APIとPreview受入は進行中。"
+        "status": "Preview反映済",
+        "notes": "個人Checkpoint制限・表示を除去。見た目段階分離、旧保存互換・joinedLevel保持。dev実APIでLv14途中参加WIN/LOSE・再送・3勝・非遡及・旧Lv精算・Lv15強化・2参加者並行精算/claimを確認。Preview配信・QA Raid表示確認。全Lvバランス・実機最終受入は未実施。",
+        "sha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
+        "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+        "scopeAccepted": "Checkpoint除去"
       },
       {
         "id": "M9-03",
         "scope": "existingImplementationSubset",
-        "status": "着手中",
-        "notes": "初期スナップショットと獲得イベントを分離し、Character魂・Skill LB素材・Equipment個体へ接続。冪等receipt/CASを実装。既存仮変換量をMaster化し上限後・未知Masterは保留。dev Migration/Edge適用済み。正式Master待ち、実API/Preview検証中。"
+        "status": "Preview反映済",
+        "notes": "接続範囲をPreview反映済。初期snapshot/取得event分離・魂/Skill素材/Equipment個体・receipt/CASを実装。正式変換量・上限後扱い・未知Masterは決定待ち。タスク全体の完了ではない。",
+        "sha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
+        "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+        "scopeAccepted": "接続実装・既存仮Masterによる確認のみ"
       },
       {
         "id": "M4-06",
         "scope": "existingImplementationSubset",
-        "status": "着手中",
-        "notes": "stage_clear/area_clearのサーバー評価・受取CAS・中央UIを接続。正式Mission Masterは空/無効。ローカルFixture確認済み。条件・報酬量を独自に設定せず、実API/Preview検証中。"
+        "status": "Preview反映済",
+        "notes": "接続範囲をPreview反映済。サーバー条件評価・受取CAS・中央UIを接続。正式Mission Masterは空/無効。正式条件・報酬の承認待ちであり運用Missionの完了ではない。",
+        "sha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
+        "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+        "scopeAccepted": "接続実装・既存仮Masterによる確認のみ"
       },
       {
         "id": "MS-03",
         "scope": "handoffOnly; not added to the 42-task subset",
         "title": "Login／Presentの新資産接続",
-        "status": "着手中",
-        "notes": "既存受取と新状態の再読取を接続。Master一致Character/Skill/Equipmentのイベント付与を実装。旧Item→新Material対応・正式Login日程/報酬は未確定のまま。実API/Preview検証中。"
+        "status": "Preview反映済",
+        "notes": "接続範囲をPreview反映済。受取後の新state再読取と明示Master取得を接続。旧Item→新Material対応・正式Login日程/報酬は未確定。全体完了ではない。",
+        "sha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
+        "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+        "scopeAccepted": "接続実装・既存仮Masterによる確認のみ"
       }
     ]
   }
