@@ -9034,27 +9034,30 @@ var base = CHARACTER_MASTERS[12];
 var attack = SKILL_MASTERS.find((s) => s.effects.some((e) => e.type === "damage"));
 var boss = { id: "raid_boss", name: "\u708E\u5F71\u306E\u5B88\u5C06", image: base.image, level: 1, element: "fire", stats: { hp: 6500, sp: 110, atk: 160, def: 45, luk: 20 }, skills: [attack], passives: [], actionCount: 4, order: 0, boss: true, phases: [{ hpBelow: 0.4, name: "\u70C8\u706B\u306E\u9663", actionCount: 3 }] };
 var RAID_MASTERS = [
-  { id: "encounter_flame", name: "\u708E\u5F71\u306E\u5B88\u5C06", type: "encounter", enemy: boss, energyCost: 5, durationMinutes: 60, maxParticipants: 10, maxLevel: 1, appearanceLevels: [1], victoryMultiplier: 1.5, sharedHp: 15e4, participationRewards: [{ kind: "character_material", amount: 2 }], defeatRewards: [{ kind: "character_material", amount: 30 }] },
-  { id: "unlock_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", type: "unlock", enemy: { ...boss, id: "raid_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", element: "dark", image: CHARACTER_MASTERS[24].image }, energyCost: 5, durationMinutes: 4320, maxParticipants: 20, maxLevel: 20, appearanceLevels: [1, 10, 20], victoryMultiplier: 1.5, sharedHp: 2e5, participationRewards: [{ kind: "skill_material", amount: 2 }], defeatRewards: [{ kind: "skill_material", amount: 15 }, { kind: "equipment_material", amount: 5 }] }
+  { id: "encounter_flame", name: "\u708E\u5F71\u306E\u5B88\u5C06", type: "encounter", enemy: boss, energyCost: 5, durationMinutes: 60, maxParticipants: 10, maxLevel: 1, appearanceLevels: [1], appearanceImages: {}, enemyGrowthPerLevel: 0.15, sharedHpGrowthPerLevel: 0.2, victoryMultiplier: 1.5, sharedHp: 15e4, participationRewards: [{ kind: "character_material", amount: 2 }], defeatRewards: [{ kind: "character_material", amount: 30 }] },
+  { id: "unlock_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", type: "unlock", enemy: { ...boss, id: "raid_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", element: "dark", image: CHARACTER_MASTERS[24].image }, energyCost: 5, durationMinutes: 4320, maxParticipants: 20, maxLevel: 20, appearanceLevels: [1, 10, 20], appearanceImages: { 10: CHARACTER_MASTERS[30].image, 20: CHARACTER_MASTERS[36].image }, enemyGrowthPerLevel: 0.15, sharedHpGrowthPerLevel: 0.2, victoryMultiplier: 1.5, sharedHp: 2e5, participationRewards: [{ kind: "skill_material", amount: 2 }], defeatRewards: [{ kind: "skill_material", amount: 15 }, { kind: "equipment_material", amount: 5 }] }
 ];
 function getRaidMaster(id) {
   const master = RAID_MASTERS.find((m) => m.id === id);
   if (!master) throw new Error("\u5BFE\u8C61\u30EC\u30A4\u30C9\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002");
   return master;
 }
+function getRoomRaidMaster(room) {
+  return room.territorySnapshot?.raidMaster ?? getRaidMaster(room.masterId);
+}
 function raidAppearanceLevel(master, level) {
   return Math.max(1, ...master.appearanceLevels.filter((n) => n <= level));
 }
 function raidEnemy(master, level) {
   const appearanceLevel = raidAppearanceLevel(master, level);
-  return { ...structuredClone(master.enemy), level, image: master.type === "unlock" && appearanceLevel >= 10 ? CHARACTER_MASTERS[appearanceLevel >= 20 ? 36 : 30].image : master.enemy.image, stats: Object.fromEntries(Object.entries(master.enemy.stats).map(([key2, value]) => [key2, Math.round(value * (1 + (level - 1) * 0.15))])) };
+  return { ...structuredClone(master.enemy), level, image: master.appearanceImages[String(appearanceLevel)] ?? master.enemy.image, stats: Object.fromEntries(Object.entries(master.enemy.stats).map(([key2, value]) => [key2, Math.round(value * (1 + (level - 1) * master.enemyGrowthPerLevel))])) };
 }
-function createRaidRoom(masterId, ownerId, id, now) {
-  const m = getRaidMaster(masterId);
-  return { id, masterId, ownerId, level: 1, hp: m.sharedHp, maxHp: m.sharedHp, createdAt: new Date(now).toISOString(), expiresAt: new Date(now + m.durationMinutes * 6e4).toISOString(), status: "active", rescueCount: 0, rescueWindowStartedAt: new Date(now).toISOString(), participants: [{ userId: ownerId, name: "\u4E3B\u50AC\u8005", wins: 0, attempts: 0, totalDamage: 0, joinedLevel: 1 }], settledBattleIds: [], rewardGrants: [] };
+function createRaidRoom(masterId, ownerId, id, now, territorySnapshot) {
+  const m = territorySnapshot?.raidMaster ?? getRaidMaster(masterId);
+  return { ...territorySnapshot ? { territorySnapshot: structuredClone(territorySnapshot) } : {}, id, masterId, ownerId, level: 1, hp: m.sharedHp, maxHp: m.sharedHp, createdAt: new Date(now).toISOString(), expiresAt: new Date(now + m.durationMinutes * 6e4).toISOString(), status: "active", rescueCount: 0, rescueWindowStartedAt: new Date(now).toISOString(), participants: [{ userId: ownerId, name: "\u4E3B\u50AC\u8005", wins: 0, attempts: 0, totalDamage: 0, joinedLevel: 1 }], settledBattleIds: [], rewardGrants: [] };
 }
 function applyRaidAction(original, originalState, action, payload = {}, now = Date.now(), acquisitionMaster) {
-  const room = structuredClone(original), state = structuredClone(originalState), master = getRaidMaster(room.masterId);
+  const room = structuredClone(original), state = structuredClone(originalState), master = getRoomRaidMaster(room);
   if (room.status === "active" && Date.parse(room.expiresAt) <= now) room.status = "expired";
   let me = room.participants.find((p) => p.userId === state.userId);
   if (action === "raid_claim") {
@@ -9118,13 +9121,66 @@ function applyRaidAction(original, originalState, action, payload = {}, now = Da
       for (const p of room.participants) if (!p.leftAt && p.wins >= 3 && p.joinedLevel <= room.level) room.rewardGrants.push({ id: `defeat:${room.level}:${p.userId}`, userId: p.userId, level: room.level, rewards: master.defeatRewards, claimed: false });
       if (master.type === "unlock" && room.level < master.maxLevel) {
         room.level++;
-        room.maxHp = Math.round(master.sharedHp * (1 + (room.level - 1) * 0.2));
+        room.maxHp = Math.round(master.sharedHp * (1 + (room.level - 1) * master.sharedHpGrowthPerLevel));
         room.hp = room.maxHp;
       } else room.status = "defeated";
     }
     return { room, state };
   }
   throw new Error("\u5BFE\u5FDC\u3057\u3066\u3044\u306A\u3044\u30EC\u30A4\u30C9\u64CD\u4F5C\u3067\u3059\u3002");
+}
+
+// src/domain/redesign/territory.ts
+var TERRITORY_MASTER = {
+  version: "PREVIEW_PROVISIONAL_20260920_v1",
+  status: "PREVIEW_PROVISIONAL",
+  initialExp: 0,
+  legacyMigrationExp: 0,
+  levelCap: 3,
+  levels: [{ level: 1, requiredExp: 0, hostingSlots: 1 }, { level: 2, requiredExp: 100, hostingSlots: 2 }, { level: 3, requiredExp: 300, hostingSlots: 3 }],
+  destinations: [
+    { id: "azuchi", name: "\u5B89\u571F\u57CE\u3078\u306E\u4FB5\u653B", castle: "\u5B89\u571F\u57CE", difficulty: "\u901A\u5E38", itemSource: "\u30AF\u30A8\u30B9\u30C8\u306E\u30EC\u30A2\u5831\u916C", raidMasterId: "unlock_shadow", requiredLevel: 1, itemName: "\u9818\u571F\u4FB5\u653B\u672D", itemId: "raid_unlock", itemCount: 1, durationMinutes: 4320, clearExp: 100 },
+    { id: "gifu", name: "\u5C90\u961C\u57CE\u3078\u306E\u4FB5\u653B", castle: "\u5C90\u961C\u57CE", difficulty: "\u4E0A\u4F4D", itemSource: "\u30AF\u30A8\u30B9\u30C8\u306E\u30EC\u30A2\u5831\u916C", raidMasterId: "unlock_shadow", requiredLevel: 2, itemName: "\u9818\u571F\u4FB5\u653B\u672D", itemId: "raid_unlock", itemCount: 1, durationMinutes: 4320, clearExp: 100 }
+  ],
+  battleRules: structuredClone(BATTLE_RULES),
+  raidMasters: structuredClone(RAID_MASTERS.filter((m) => m.type === "unlock"))
+};
+function validateTerritoryMaster(master) {
+  const natural = (v) => Number.isSafeInteger(v) && v >= 0;
+  if (!master.version || !["PREVIEW_PROVISIONAL", "APPROVED"].includes(master.status) || !natural(master.initialExp) || !natural(master.legacyMigrationExp) || !natural(master.levelCap) || master.levelCap < 1 || master.levels.length !== master.levelCap) throw Error("\u9818\u571F\u4FB5\u653B\u30DE\u30B9\u30BF\u30FC\u306E\u6210\u9577\u8A2D\u5B9A\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+  for (let i = 0; i < master.levels.length; i++) {
+    const row = master.levels[i];
+    if (row.level !== i + 1 || !natural(row.requiredExp) || !natural(row.hostingSlots) || row.hostingSlots < 1 || i === 0 && row.requiredExp !== 0 || i > 0 && (row.requiredExp <= master.levels[i - 1].requiredExp || row.hostingSlots < master.levels[i - 1].hostingSlots)) throw Error("\u9818\u571F\u4FB5\u653B\u30EC\u30D9\u30EB\u8868\u306E\u9806\u5E8F\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+  }
+  const positive = (v) => Number.isFinite(v) && v > 0;
+  const nonnegative = (v) => Number.isFinite(v) && v >= 0;
+  const rules = master.battleRules;
+  if (!rules || !positive(rules.advantageMultiplier) || !positive(rules.disadvantageMultiplier) || !positive(rules.spRecoveryDivisor) || !positive(rules.burstLukDivisor) || !positive(rules.enemySpRecoveryDivisor) || !natural(rules.maxPlayerActions) || rules.maxPlayerActions < 1 || !nonnegative(rules.defenseFactor) || !nonnegative(rules.initialSpRatio) || rules.initialSpRatio > 1) throw Error("\u9818\u571F\u4FB5\u653B\u306E\u6226\u95D8\u30EB\u30FC\u30EB\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+  for (const raid of master.raidMasters) {
+    if (!raid.id || !natural(raid.energyCost) || !natural(raid.durationMinutes) || raid.durationMinutes < 1 || !natural(raid.maxParticipants) || raid.maxParticipants < 1 || !natural(raid.maxLevel) || raid.maxLevel < 1 || !positive(raid.sharedHp) || !nonnegative(raid.victoryMultiplier) || !nonnegative(raid.enemyGrowthPerLevel) || !nonnegative(raid.sharedHpGrowthPerLevel)) throw Error("\u9818\u571F\u4FB5\u653B\u306E\u30DC\u30B9\u8A2D\u5B9A\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+    if (!raid.enemy || !positive(raid.enemy.stats.hp) || !Object.values(raid.enemy.stats).every(nonnegative) || !natural(raid.enemy.actionCount) || raid.enemy.actionCount < 1 || !raid.appearanceImages || !Array.isArray(raid.appearanceLevels) || raid.appearanceLevels[0] !== 1 || raid.appearanceLevels.some((lv, i) => !natural(lv) || lv > raid.maxLevel || i > 0 && lv <= raid.appearanceLevels[i - 1])) throw Error("\u9818\u571F\u4FB5\u653B\u306E\u6575\u30FB\u898B\u305F\u76EE\u6BB5\u968E\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+    for (const reward of [...raid.participationRewards, ...raid.defeatRewards]) if (!natural(reward.amount) || reward.chance !== void 0 && (!nonnegative(reward.chance) || reward.chance > 1)) throw Error("\u9818\u571F\u4FB5\u653B\u306E\u5831\u916C\u8A2D\u5B9A\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+  }
+  if (new Set(master.destinations.map((d) => d.id)).size !== master.destinations.length || new Set(master.raidMasters.map((m) => m.id)).size !== master.raidMasters.length) throw Error("\u9818\u571F\u4FB5\u653B\u30DE\u30B9\u30BF\u30FC\u306EID\u304C\u91CD\u8907\u3057\u3066\u3044\u307E\u3059\u3002");
+  for (const d of master.destinations) {
+    const raid = master.raidMasters.find((m) => m.id === d.raidMasterId);
+    if (!d.id || !d.itemId || !natural(d.requiredLevel) || d.requiredLevel < 1 || d.requiredLevel > master.levelCap || !natural(d.itemCount) || d.itemCount < 1 || !natural(d.durationMinutes) || d.durationMinutes < 1 || !natural(d.clearExp) || !raid || raid.type !== "unlock" || !natural(raid.maxLevel) || raid.maxLevel < 1 || !Number.isFinite(raid.enemyGrowthPerLevel) || raid.enemyGrowthPerLevel < 0 || !Number.isFinite(raid.sharedHpGrowthPerLevel) || raid.sharedHpGrowthPerLevel < 0) throw Error("\u9818\u571F\u4FB5\u653B\u5148\u306E\u8A2D\u5B9A\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+  }
+}
+function territoryLevel(master, experience) {
+  const exp = Number.isFinite(experience) ? Math.max(0, experience) : 0;
+  return master.levels.reduce((level, row) => row.requiredExp <= exp ? row.level : level, 1);
+}
+function projectTerritory(master, progress, items, activeHostingCount) {
+  validateTerritoryMaster(master);
+  const experience = Math.max(0, progress.experience), level = territoryLevel(master, experience), hostingSlots = master.levels.find((row) => row.level === level).hostingSlots;
+  return { masterVersion: master.version, status: master.status, experience, level, nextLevelExp: master.levels.find((row) => row.level === level + 1)?.requiredExp ?? null, hostingSlots, activeHostingCount, destinations: master.destinations.map((destination) => {
+    const ownedItemCount = items[destination.itemId] ?? 0, reasons = [];
+    if (level < destination.requiredLevel) reasons.push(`\u9818\u571F\u4FB5\u653BLv.${destination.requiredLevel}\u304C\u5FC5\u8981\u3067\u3059\u3002`);
+    if (activeHostingCount >= hostingSlots) reasons.push("\u540C\u6642\u958B\u50AC\u67A0\u304C\u57CB\u307E\u3063\u3066\u3044\u307E\u3059\u3002");
+    if (ownedItemCount < destination.itemCount) reasons.push(`\u958B\u50AC\u30A2\u30A4\u30C6\u30E0\u304C${destination.itemCount - ownedItemCount}\u500B\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002`);
+    return { ...destination, raidMaster: structuredClone(master.raidMasters.find((m) => m.id === destination.raidMasterId)), ownedItemCount, canHost: reasons.length === 0, reasons };
+  }) };
 }
 
 // supabase/functions/game04-redesign-api/source.ts
@@ -9140,8 +9196,22 @@ var ApiError = class extends Error {
 };
 async function db(path, body) {
   const response = await fetch(`${url}/rest/v1/${path}`, { method: body === void 0 ? "GET" : "POST", headers: { apikey: key, Authorization: `Bearer ${key}`, "Content-Type": "application/json" }, ...body === void 0 ? {} : { body: JSON.stringify(body) } });
-  const result = await response.json();
-  if (!response.ok) throw new ApiError(result.message || "\u30C7\u30FC\u30BF\u3092\u4FDD\u5B58\u3067\u304D\u307E\u305B\u3093\u3067\u3057\u305F\u3002", result.code === "40001" ? 409 : 400);
+  let result;
+  try {
+    result = await response.json();
+  } catch {
+    throw new ApiError("\u63A5\u7D9A\u304C\u6DF7\u307F\u5408\u3063\u3066\u3044\u307E\u3059\u3002\u5C11\u3057\u5F85\u3063\u3066\u518D\u5EA6\u304A\u8A66\u3057\u304F\u3060\u3055\u3044\u3002", 503);
+  }
+  if (!response.ok) {
+    const messages = {
+      TERRITORY_LEVEL_REQUIRED: "\u9818\u571F\u4FB5\u653B\u30EC\u30D9\u30EB\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002",
+      TERRITORY_HOSTING_SLOTS_FULL: "\u540C\u6642\u958B\u50AC\u67A0\u304C\u57CB\u307E\u3063\u3066\u3044\u307E\u3059\u3002\u958B\u50AC\u4E2D\u306E\u4FB5\u653B\u3092\u78BA\u8A8D\u3057\u3066\u304F\u3060\u3055\u3044\u3002",
+      TERRITORY_ITEM_REQUIRED: "\u958B\u50AC\u30A2\u30A4\u30C6\u30E0\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002",
+      TERRITORY_DESTINATION_NOT_FOUND: "\u4FB5\u653B\u5148\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002\u518D\u8AAD\u307F\u8FBC\u307F\u3057\u3066\u304F\u3060\u3055\u3044\u3002",
+      REQUEST_ID_REUSED: "\u3053\u306E\u64CD\u4F5C\u306F\u51E6\u7406\u6E08\u307F\u3067\u3059\u3002\u518D\u8AAD\u307F\u8FBC\u307F\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
+    };
+    throw new ApiError(messages[result.message] ?? result.message ?? "\u30C7\u30FC\u30BF\u3092\u4FDD\u5B58\u3067\u304D\u307E\u305B\u3093\u3067\u3057\u305F\u3002", result.code === "40001" ? 409 : response.status >= 500 ? 503 : 400);
+  }
   return result;
 }
 var rpc = (name2, body) => db(`rpc/${name2}`, body);
@@ -9190,12 +9260,15 @@ async function roomFor(id) {
   return { ...row.state, version: row.version };
 }
 async function roomsFor(userId) {
-  const rows = await db("game04_raid_rooms?select=state,version&order=created_at.desc&limit=200");
+  const rows = await rpc("game04_raid_rooms_for_user", { p_user_id: userId });
   return rows.map((row) => ({
     ...row.state,
     version: row.version,
     status: row.state.status === "active" && Date.parse(row.state.expiresAt) <= Date.now() ? "expired" : row.state.status
-  })).filter((room) => room.status === "active" || room.participants.some((p) => p.userId === userId));
+  }));
+}
+async function territoryContext(userId) {
+  return rpc("game04_territory_context", { p_user_id: userId });
 }
 async function rewardPolicy() {
   const [row] = await db("game04_redesign_master?key=eq.acquisition_conversion&select=data");
@@ -9207,13 +9280,16 @@ async function missionConfig() {
   return row?.data ?? { enabled: false, missions: [] };
 }
 async function responseFor(userId, extra = {}) {
-  const [state, rooms, socialEvents, pending] = await Promise.all([
-    stateFor(userId),
+  const statePromise = stateFor(userId);
+  const [state, rooms, socialEvents, pending, territory, missions] = await Promise.all([
+    statePromise,
     roomsFor(userId),
     db("game04_social_events?select=*&order=created_at.desc&limit=30"),
-    db(`game04_battles?user_id=eq.${userId}&status=eq.started&select=id,kind,target_id&order=created_at.asc&limit=1`)
+    db(`game04_battles?user_id=eq.${userId}&status=eq.started&select=id,kind,target_id&order=created_at.asc&limit=1`),
+    statePromise.then(() => territoryContext(userId)),
+    missionConfig()
   ]);
-  return { state, rooms, socialEvents, missions: evaluateMissions(state, await missionConfig()), pendingBattle: pending[0] ?? null, ...extra };
+  return { state, rooms, socialEvents, missions: evaluateMissions(state, missions), territory: projectTerritory(territory.master, territory.progress, territory.items, territory.activeHostingCount), pendingBattle: pending[0] ?? null, ...extra };
 }
 async function runBattle(userId, name2, payload, id, playerName) {
   let [record] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=*`);
@@ -9233,7 +9309,7 @@ async function runBattle(userId, name2, payload, id, playerName) {
       cost = stage.energyCost;
       targetId = stage.id;
     } else {
-      const room = await roomFor(String(payload.roomId)), master = getRaidMaster(room.masterId);
+      const room = await roomFor(String(payload.roomId)), master = getRoomRaidMaster(room);
       const me = room.participants.find((p) => p.userId === userId);
       if (room.status !== "active" || Date.parse(room.expiresAt) <= Date.now() || !me || me.leftAt) throw new ApiError("\u53C2\u52A0\u3067\u304D\u308B\u958B\u50AC\u4E2D\u30EC\u30A4\u30C9\u3092\u9078\u3093\u3067\u304F\u3060\u3055\u3044\u3002");
       startRoom = room;
@@ -9244,7 +9320,7 @@ async function runBattle(userId, name2, payload, id, playerName) {
     }
     if (state.energy < cost) throw new ApiError("\u884C\u52D5\u529B\u304C\u8DB3\u308A\u307E\u305B\u3093\u3002");
     const seed = crypto.getRandomValues(new Uint32Array(1))[0];
-    const input = { seed, party: buildBattleParty(state), waves, rules: BATTLE_RULES, raidLevel };
+    const input = { seed, party: buildBattleParty(state), waves, rules: startRoom?.territorySnapshot?.battleRules ?? BATTLE_RULES, raidLevel };
     await commit(state, { ...state, energy: state.energy - cost }, id, { id, kind, targetId, seed, input, status: "started" }, startRoom, startRoom?.version ?? null);
     record = { id, kind, target_id: targetId, input, seed, status: "started" };
   }
@@ -9309,6 +9385,16 @@ Deno.serve(async (request) => {
     if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(requestId)) throw new ApiError("\u64CD\u4F5CID\u304C\u4E0D\u6B63\u3067\u3059\u3002");
     if (action === "get_state" || action === "raid_refresh") return new Response(JSON.stringify(await responseFor(user.id)), { headers });
     if (action === "quest_battle" || action === "raid_battle") return new Response(JSON.stringify(await runBattle(user.id, action, payload, requestId, profile.username)), { headers });
+    if (action === "territory_host" || action === "raid_unlock") {
+      await stateFor(user.id);
+      let destinationId = String(payload.destinationId ?? "");
+      if (action === "raid_unlock") {
+        const context = await territoryContext(user.id);
+        destinationId = context.master.destinations.find((d) => d.raidMasterId === String(payload.masterId))?.id ?? "";
+      }
+      const hosted = await rpc("game04_host_territory", { p_user_id: user.id, p_request_id: requestId, p_destination_id: destinationId });
+      return new Response(JSON.stringify(await responseFor(user.id, { territoryRoomId: hosted.room.id })), { headers });
+    }
     const [prior] = await db(`game04_requests?user_id=eq.${user.id}&request_id=eq.${requestId}&select=request_id`);
     if (prior) return new Response(JSON.stringify(await responseFor(user.id)), { headers });
     const state = await stateFor(user.id);
@@ -9329,14 +9415,6 @@ Deno.serve(async (request) => {
         if (!["castle-town", "castle-approach"].includes(payload.backgroundId)) throw new ApiError("\u80CC\u666F\u304C\u4E0D\u6B63\u3067\u3059\u3002");
         after.homeBackgroundId = payload.backgroundId;
       }
-    } else if (action === "raid_unlock") {
-      const master = getRaidMaster(String(payload.masterId));
-      if (master.type !== "unlock" || state.materials.unlock < 1) throw new ApiError("\u30EC\u30A4\u30C9\u89E3\u7981\u672D\u304C\u8DB3\u308A\u307E\u305B\u3093\u3002");
-      after = structuredClone(state);
-      after.materials.unlock--;
-      room = createRaidRoom(master.id, user.id, requestId, Date.now());
-      version = -1;
-      room.participants[0].name = profile.username;
     } else if (["raid_join", "raid_leave", "raid_rescue", "raid_claim", "encounter_ignore"].includes(action)) {
       const current = await roomFor(String(payload.roomId));
       version = current.version;

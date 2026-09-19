@@ -5,7 +5,7 @@
   "previewSha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
   "previewUrl": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
   "db": "lrgyllgzcdcphlbmkknc",
-  "scope": "2026-09-19 全面再設計の実装工程サブセット42件。初期対象外M6-05はexcludedTasksへ分離。全体141件正本の代替ではなく、旧191件・43件の率を全体率へ流用しない。",
+  "scope": "2026-09-19全面再設計42件＋2026-09-20領土侵攻TI-01〜05の実装工程サブセット計47件。初期対象外M6-05はexcludedTasksへ分離。全体141件正本の代替ではなく、旧191件・43件の率を全体率へ流用しない。",
   "tasks": [
     {
       "id": "M1-01",
@@ -435,9 +435,9 @@
       "id": "TI-01",
       "phase": "M5",
       "title": "領土侵攻Home CTA・開催トップ・レイド一覧導線の再編",
-      "status": "未着手",
+      "status": "着手中",
       "specStatus": "FIX済み",
-      "notes": "9/20本流仕様FIX。実装は別スレッドで実施。数値はマスター設計待ち。正本: docs/product/GAME04_TERRITORY_INVASION_AUTHORITY_2026-09-20.md",
+      "notes": "9/20領土侵攻正本に基づき実装・統合受入を開始。正式数値は未FIX。DB/Edge/Preview反映と受入証跡は確認後に別記。",
       "previewEligible": false,
       "sha": "",
       "url": ""
@@ -446,9 +446,9 @@
       "id": "TI-02",
       "phase": "M5",
       "title": "ユーザー領土侵攻経験値/レベルと成長・解放マスター接続",
-      "status": "未着手",
+      "status": "着手中",
       "specStatus": "FIX済み",
-      "notes": "9/20本流仕様FIX。実装は別スレッドで実施。数値はマスター設計待ち。正本: docs/product/GAME04_TERRITORY_INVASION_AUTHORITY_2026-09-20.md",
+      "notes": "9/20領土侵攻正本に基づき実装・統合受入を開始。正式数値は未FIX。DB/Edge/Preview反映と受入証跡は確認後に別記。",
       "previewEligible": false,
       "sha": "",
       "url": ""
@@ -457,9 +457,9 @@
       "id": "TI-03",
       "phase": "M5",
       "title": "領土侵攻の開催枠/必要Lv/アイテム同時判定・開催時ルール保持",
-      "status": "未着手",
+      "status": "着手中",
       "specStatus": "FIX済み",
-      "notes": "9/20本流仕様FIX。実装は別スレッドで実施。数値はマスター設計待ち。正本: docs/product/GAME04_TERRITORY_INVASION_AUTHORITY_2026-09-20.md",
+      "notes": "9/20領土侵攻正本に基づき実装・統合受入を開始。正式数値は未FIX。DB/Edge/Preview反映と受入証跡は確認後に別記。",
       "previewEligible": false,
       "sha": "",
       "url": ""
@@ -468,9 +468,9 @@
       "id": "TI-04",
       "phase": "M5",
       "title": "侵攻クリア時主催者3勝経験値・終了枠解放・結果報酬導線",
-      "status": "未着手",
+      "status": "着手中",
       "specStatus": "FIX済み",
-      "notes": "9/20本流仕様FIX。実装は別スレッドで実施。数値はマスター設計待ち。正本: docs/product/GAME04_TERRITORY_INVASION_AUTHORITY_2026-09-20.md",
+      "notes": "9/20領土侵攻正本に基づき実装・統合受入を開始。正式数値は未FIX。DB/Edge/Preview反映と受入証跡は確認後に別記。",
       "previewEligible": false,
       "sha": "",
       "url": ""
@@ -479,9 +479,9 @@
       "id": "TI-05",
       "phase": "M5",
       "title": "領土侵攻の境界条件・並行処理・個別戦闘の統合受入",
-      "status": "未着手",
+      "status": "着手中",
       "specStatus": "FIX済み",
-      "notes": "9/20本流仕様FIX。実装は別スレッドで実施。数値はマスター設計待ち。正本: docs/product/GAME04_TERRITORY_INVASION_AUTHORITY_2026-09-20.md",
+      "notes": "9/20領土侵攻正本に基づき実装・統合受入を開始。正式数値は未FIX。DB/Edge/Preview反映と受入証跡は確認後に別記。",
       "previewEligible": false,
       "sha": "",
       "url": ""
@@ -587,5 +587,24 @@
         "scopeAccepted": "接続実装・既存仮Masterによる確認のみ"
       }
     ]
+  },
+  "territoryUpdates": {
+    "authority": "docs/product/GAME04_TERRITORY_INVASION_AUTHORITY_2026-09-20.md",
+    "basisSha": "2ebc36a152c91d3edcdfc23e47a108c41a0cc9b7",
+    "status": "着手中",
+    "taskIds": [
+      "TI-01",
+      "TI-02",
+      "TI-03",
+      "TI-04",
+      "TI-05"
+    ],
+    "formalMasterStatus": "未FIX",
+    "implementationSha": null,
+    "developmentDbApplied": false,
+    "edgeApplied": false,
+    "previewApplied": false,
+    "verification": "実装・受入準備中。証跡確認前にPreview反映済・完了としない。",
+    "audit": "docs/development/GAME04_TERRITORY_IMPLEMENTATION_20260920.md"
   }
 }

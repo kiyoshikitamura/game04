@@ -5,7 +5,9 @@ import { applyGrowthAction, validateDeck } from '../../../src/domain/redesign/gr
 import { evaluateMissions, getClaimableMission, type MissionConfig } from '../../../src/domain/redesign/missions.ts';
 import { simulateBattle } from '../../../src/domain/redesign/battle.ts';
 import { getQuestStage, isQuestStageUnlocked } from '../../../src/domain/redesign/quests.ts';
-import { applyRaidAction, createRaidRoom, getRaidMaster, raidEnemy } from '../../../src/domain/redesign/raid.ts';
+import { applyRaidAction, createRaidRoom, getRoomRaidMaster, raidEnemy } from '../../../src/domain/redesign/raid.ts';
+import { projectTerritory } from '../../../src/domain/redesign/territory.ts';
+import type { TerritoryMaster, TerritoryProgress } from '../../../src/domain/redesign/types.ts';
 import type { BattleInput, RaidRoom, RedesignState, Reward } from '../../../src/domain/redesign/types.ts';
 
 const headers = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'authorization, apikey, content-type, x-client-info', 'Access-Control-Allow-Methods': 'POST, OPTIONS', 'Content-Type': 'application/json', 'Cache-Control': 'no-store' };
@@ -15,8 +17,18 @@ const EXPECTED_PROJECT = 'lrgyllgzcdcphlbmkknc';
 class ApiError extends Error { constructor(message: string, public status = 400) { super(message); } }
 async function db(path: string, body?: unknown): Promise<any> {
   const response = await fetch(`${url}/rest/v1/${path}`, { method: body === undefined ? 'GET' : 'POST', headers: { apikey: key, Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' }, ...(body === undefined ? {} : { body: JSON.stringify(body) }) });
-  const result = await response.json();
-  if (!response.ok) throw new ApiError(result.message || 'データを保存できませんでした。', result.code === '40001' ? 409 : 400);
+  let result: any;
+  try { result = await response.json(); } catch { throw new ApiError('接続が混み合っています。少し待って再度お試しください。', 503); }
+  if (!response.ok) {
+    const messages: Record<string, string> = {
+      TERRITORY_LEVEL_REQUIRED: '領土侵攻レベルが不足しています。',
+      TERRITORY_HOSTING_SLOTS_FULL: '同時開催枠が埋まっています。開催中の侵攻を確認してください。',
+      TERRITORY_ITEM_REQUIRED: '開催アイテムが不足しています。',
+      TERRITORY_DESTINATION_NOT_FOUND: '侵攻先が見つかりません。再読み込みしてください。',
+      REQUEST_ID_REUSED: 'この操作は処理済みです。再読み込みしてください。',
+    };
+    throw new ApiError(messages[result.message] ?? result.message ?? 'データを保存できませんでした。', result.code === '40001' ? 409 : response.status >= 500 ? 503 : 400);
+  }
   return result;
 }
 const rpc = (name: string, body: unknown) => db(`rpc/${name}`, body);
@@ -52,11 +64,14 @@ async function roomFor(id: string): Promise<RaidRoom & {version: number}> {
   if (!row) throw new ApiError('レイドが見つかりません。', 404);
   return { ...row.state, version: row.version };
 }
-async function roomsFor(userId: string) {
-  const rows = await db('game04_raid_rooms?select=state,version&order=created_at.desc&limit=200');
+async function roomsFor(userId: string): Promise<(RaidRoom & {version: number})[]> {
+  const rows = await rpc('game04_raid_rooms_for_user', {p_user_id: userId});
   return rows.map((row: any) => ({ ...row.state, version: row.version,
     status: row.state.status === 'active' && Date.parse(row.state.expiresAt) <= Date.now() ? 'expired' : row.state.status,
-  })).filter((room: RaidRoom) => room.status === 'active' || room.participants.some(p => p.userId === userId));
+  }));
+}
+async function territoryContext(userId: string): Promise<{master: TerritoryMaster; progress: TerritoryProgress; activeHostingCount: number; items: Record<string, number>}> {
+  return rpc('game04_territory_context', {p_user_id: userId});
 }
 async function rewardPolicy(): Promise<AcquisitionMaster> {
   const [row] = await db('game04_redesign_master?key=eq.acquisition_conversion&select=data');
@@ -68,11 +83,13 @@ async function missionConfig(): Promise<MissionConfig> {
   return row?.data ?? { enabled: false, missions: [] };
 }
 async function responseFor(userId: string, extra: Record<string, unknown> = {}) {
-  const [state, rooms, socialEvents, pending] = await Promise.all([stateFor(userId), roomsFor(userId),
+  const statePromise = stateFor(userId);
+  const [state, rooms, socialEvents, pending, territory, missions] = await Promise.all([statePromise, roomsFor(userId),
     db('game04_social_events?select=*&order=created_at.desc&limit=30'),
     db(`game04_battles?user_id=eq.${userId}&status=eq.started&select=id,kind,target_id&order=created_at.asc&limit=1`),
+    statePromise.then(() => territoryContext(userId)), missionConfig(),
   ]);
-  return { state, rooms, socialEvents, missions: evaluateMissions(state, await missionConfig()), pendingBattle: pending[0] ?? null, ...extra };
+  return { state, rooms, socialEvents, missions: evaluateMissions(state, missions), territory: projectTerritory(territory.master, territory.progress, territory.items, territory.activeHostingCount), pendingBattle: pending[0] ?? null, ...extra };
 }
 async function runBattle(userId: string, name: string, payload: any, id: string, playerName: string) {
   let [record] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=*`);
@@ -89,7 +106,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
       if (!stage || !isQuestStageUnlocked(stage.id, state.clearedStages)) throw new ApiError('このステージは未解放です。');
       waves = stage.waves; cost = stage.energyCost; targetId = stage.id;
     } else {
-      const room = await roomFor(String(payload.roomId)), master = getRaidMaster(room.masterId);
+      const room = await roomFor(String(payload.roomId)), master = getRoomRaidMaster(room);
       const me = room.participants.find(p => p.userId === userId);
       if (room.status !== 'active' || Date.parse(room.expiresAt) <= Date.now() || !me || me.leftAt) throw new ApiError('参加できる開催中レイドを選んでください。');
       startRoom = room;
@@ -97,7 +114,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
     }
     if (state.energy < cost) throw new ApiError('行動力が足りません。');
     const seed = crypto.getRandomValues(new Uint32Array(1))[0];
-    const input = { seed, party: buildBattleParty(state), waves, rules: BATTLE_RULES, raidLevel };
+    const input = { seed, party: buildBattleParty(state), waves, rules: startRoom?.territorySnapshot?.battleRules ?? BATTLE_RULES, raidLevel };
     await commit(state, { ...state, energy: state.energy - cost }, id, { id, kind, targetId, seed, input, status: 'started' }, startRoom, startRoom?.version ?? null);
     record = { id, kind, target_id: targetId, input, seed, status: 'started' };
   }
@@ -154,6 +171,16 @@ Deno.serve(async (request: Request) => {
     if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(requestId)) throw new ApiError('操作IDが不正です。');
     if (action === 'get_state' || action === 'raid_refresh') return new Response(JSON.stringify(await responseFor(user.id)), { headers });
     if (action === 'quest_battle' || action === 'raid_battle') return new Response(JSON.stringify(await runBattle(user.id, action, payload, requestId, profile.username)), { headers });
+    if (action === 'territory_host' || action === 'raid_unlock') {
+      await stateFor(user.id);
+      let destinationId = String(payload.destinationId ?? '');
+      if (action === 'raid_unlock') {
+        const context = await territoryContext(user.id);
+        destinationId = context.master.destinations.find(d => d.raidMasterId === String(payload.masterId))?.id ?? '';
+      }
+      const hosted = await rpc('game04_host_territory', {p_user_id: user.id, p_request_id: requestId, p_destination_id: destinationId});
+      return new Response(JSON.stringify(await responseFor(user.id, {territoryRoomId: hosted.room.id})), {headers});
+    }
     const [prior] = await db(`game04_requests?user_id=eq.${user.id}&request_id=eq.${requestId}&select=request_id`);
     if (prior) return new Response(JSON.stringify(await responseFor(user.id)), { headers });
     const state = await stateFor(user.id); let after: RedesignState, room: RaidRoom | null = null, version: number | null = null;
@@ -173,12 +200,6 @@ Deno.serve(async (request: Request) => {
         if (!['castle-town', 'castle-approach'].includes(payload.backgroundId)) throw new ApiError('背景が不正です。');
         after.homeBackgroundId = payload.backgroundId;
       }
-    } else if (action === 'raid_unlock') {
-      const master = getRaidMaster(String(payload.masterId));
-      if (master.type !== 'unlock' || state.materials.unlock < 1) throw new ApiError('レイド解禁札が足りません。');
-      after = structuredClone(state); after.materials.unlock--;
-      room = createRaidRoom(master.id, user.id, requestId, Date.now()); version = -1;
-      room.participants[0].name = profile.username;
     } else if (['raid_join', 'raid_leave', 'raid_rescue', 'raid_claim', 'encounter_ignore'].includes(action)) {
       const current = await roomFor(String(payload.roomId)); version = current.version;
       const changed = applyRaidAction(current, state, action, { name: profile.username }, Date.now(), action === 'raid_claim' ? await rewardPolicy() : undefined); room = changed.room; after = changed.state;

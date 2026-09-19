@@ -31,3 +31,13 @@
 .rd-modal-header, .rd-modal-footer { flex: 0 0 auto; }
 .rd-modal-body { flex: 1 1 auto; overscroll-behavior: contain; }
 .rd-modal { min-height: 0; overflow: hidden; }
+
+/* Home's two major actions stay side-by-side, including narrow phones. */
+.rd-home-adventure{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;margin:-8px 0 15px;position:relative;z-index:2}
+.rd-home-adventure .rd-quest-resume{width:100%;min-width:0;margin:0;padding:13px 10px;display:flex;flex-direction:column;justify-content:space-between;gap:6px;overflow-wrap:anywhere}
+.rd-home-adventure .rd-quest-resume strong{font-size:clamp(14px,3.6vw,17px);line-height:1.5}
+.rd-home-adventure .rd-quest-resume>span{align-self:flex-end;font-size:11px}
+.rd-home-adventure .rd-territory-entry{background:linear-gradient(120deg,#4c3920,#251c22)}
+.rd-territory{padding:14px;overflow-wrap:anywhere}.rd-territory h1{margin:0}.rd-territory h2{font-size:18px}.rd-territory h3{font-size:19px;margin:0 0 8px}
+.rd-territory-resume{width:100%;text-align:left;display:grid;gap:8px}.rd-territory-resume b{justify-self:end;color:#e0be83}
+.rd-territory-destination{display:grid;grid-template-columns:85px minmax(0,1fr);gap:12px}.rd-territory-enemy{width:85px;height:125px;object-fit:cover;border-radius:5px}.rd-territory-conditions{grid-column:1/-1}.rd-territory-conditions .rd-primary{width:100%;min-height:44px}.rd-territory-reasons{color:#efb88e;padding-left:20px}

@@ -5,7 +5,7 @@ import { REDESIGN_REWARD_SYNC_EVENT } from '@/utils/redesignRewardSync';
 import { redesignRequest, type RedesignResponse } from '@/utils/redesignApi';
 import { buildBattleParty } from '@/domain/redesign/masters';
 import { nextQuestStage } from '@/domain/redesign/quests';
-import { getRaidMaster } from '@/domain/redesign/raid';
+import { getRoomRaidMaster } from '@/domain/redesign/raid';
 import { isVipActive, VIP_PRODUCT } from '@/domain/redesign/vip';
 import type { AcquisitionState } from '@/domain/redesign/acquisitions';
 import type { BattleResult } from '@/domain/redesign/battle';
@@ -13,6 +13,7 @@ import RedesignShell from './RedesignShell';
 import GrowthView from './GrowthView';
 import QuestView, { type QuestSettlement } from './QuestView';
 import RaidView from './RaidView';
+import TerritoryView from './TerritoryView';
 import BattleView from './BattleView';
 import GachaTab from '../GachaTab';
 import ShopTab from '../ShopTab';
@@ -64,16 +65,17 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     lock.current = true; requestGeneration.current++; setBusy(true); setError('');
     const requestOwner = owner;
     const isBattle = name === 'quest_battle' || name === 'raid_battle';
-    const storageKey = `game04:request:${owner}:${name}:${String(payload.stageId || payload.roomId || '')}`;
+    const persistentRequest = isBattle || name === 'territory_host';
+    const storageKey = `game04:request:${owner}:${name}:${String(payload.stageId || payload.roomId || payload.destinationId || '')}`;
     let requestId = explicitId || crypto.randomUUID();
-    if (isBattle && !explicitId) {
+    if (persistentRequest && !explicitId) {
       try { requestId = sessionStorage.getItem(storageKey) || requestId; sessionStorage.setItem(storageKey, requestId); } catch { /* API also exposes pending battles for resume. */ }
     }
     try {
       const value = await redesignRequest(name, payload, requestId);
       if (requestOwner !== ownerRef.current) throw new Error('ログイン状態が変更されました。');
       setData(value);
-      if (isBattle) try { sessionStorage.removeItem(storageKey); } catch { /* no persistent reliance */ }
+      if (persistentRequest) try { sessionStorage.removeItem(storageKey); } catch { /* no persistent reliance */ }
       return value;
     } catch (reason) {
       const message = reason instanceof Error ? reason.message : '処理に失敗しました。';
@@ -107,9 +109,9 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   }
   if (!data) return <div className="rd-shell"><div className="rd-panel">{error ? <><p role="alert">{error}</p><button className="rd-button" onClick={() => void refresh()}>再読み込み</button></> : <BrandedLoading label="戦国の世界を準備中" />}</div></div>;
   const state = data.state, party = buildBattleParty(state), vipActive = isVipActive(state.vipExpiresAt);
-  const encounter = data.rooms.find(r => getRaidMaster(r.masterId).type === 'encounter' && r.status === 'active' && r.participants.some(p => p.userId === state.userId && !p.leftAt));
+  const encounter = data.rooms.find(r => getRoomRaidMaster(r).type === 'encounter' && r.status === 'active' && r.participants.some(p => p.userId === state.userId && !p.leftAt));
   return <RedesignShell state={state} activeTab={tab} onNavigate={navigate} onAction={action} hideChrome={!!battle || questPlaying} socialEvents={data.socialEvents} missions={data.missions}
-    encounterRaid={encounter ? { id: encounter.id, name: getRaidMaster(encounter.masterId).name, expiresAt: encounter.expiresAt } : null}
+    encounterRaid={encounter ? { id: encounter.id, name: getRoomRaidMaster(encounter).name, expiresAt: encounter.expiresAt } : null}
     notifications={<>
     {!!(state as AcquisitionState).pendingAcquisitions?.length && <p className="rd-panel" role="status">マスター設定待ちの獲得物が{(state as AcquisitionState).pendingAcquisitions!.length}件あります。確定後に反映します。</p>}
     {error && <p className="rd-panel" role="alert">{error}</p>}
@@ -121,6 +123,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     {battle ? <BattleView result={battle} vipActive={vipActive} onComplete={() => { setBattle(null); void refresh(); }} /> : <>
       {tab === 'quest' && <QuestView key={questNavigation} onBattlePlayingChange={setQuestPlaying} state={state} party={party} vipActive={vipActive} initialStageId={questStart} onStart={startQuest} onOpenDeck={() => navigate('character')} onOpenRaid={id => { setRaidId(id); setTab('raid'); }} onIgnoreEncounter={async id => { await action('encounter_ignore', { roomId: id }); }} />}
       {tab === 'character' && <GrowthView state={state} onAction={async (name, payload) => { await action(name, payload); }} />}
+      {tab === 'territory' && <TerritoryView territory={data.territory} rooms={data.rooms} userId={state.userId} onOpenRoom={id => { setRaidId(id); setTab('raid'); }} onHost={async destinationId => { const value = await action('territory_host', { destinationId }); if (!value.territoryRoomId) throw new Error('開催結果を確認できませんでした。'); setRaidId(value.territoryRoomId); setTab('raid'); }} />}
       {tab === 'raid' && <RaidView key={raidId || 'list'} state={state} rooms={data.rooms} party={party} initialRoomId={raidId} onAction={raidAction} onOpenDeck={() => navigate('character')} />}
       {tab === 'gacha' && <><p className="rd-panel rd-muted">開発中：ガチャ基盤を確認できます。排出内容・確率は最終調整前です。</p><GachaTab /></>}
       {tab === 'shop' && <><p className="rd-panel rd-muted">開発中：商品構成・価格は最終調整前です。</p><section className="rd-panel"><h2>{VIP_PRODUCT.name}</h2><p>30日間：バトル速度×3・スキップ</p><p>{vipActive ? `有効期限 ${new Date(state.vipExpiresAt!).toLocaleString('ja-JP')}` : '販売準備中'}</p></section><ShopTab /></>}
