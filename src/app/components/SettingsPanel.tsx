@@ -27,7 +27,7 @@ function getSupabaseErrorMessage(error: unknown): string {
   return "詳細不明のデータベースエラー";
 }
 
-export default function SettingsPanel() {
+export default function SettingsPanel({ redesign = false }: { redesign?: boolean } = {}) {
   const game = useGame();
   const [qaLoading, setQaLoading] = useState(false);
   const [profileEditing, setProfileEditing] = useState(false);
@@ -116,19 +116,19 @@ export default function SettingsPanel() {
           <div className="settings-edit-actions"><OutlawButton variant="secondary" disabled={game.profileLoading} onClick={() => { resetDrafts(); setProfileEditing(false); }}>キャンセル</OutlawButton><OutlawButton variant="primary" isLoading={game.profileLoading} loadingLabel="保存中…" disabled={!usernameDraft.trim()} onClick={() => void saveProfile()}>保存</OutlawButton></div>
         </EditableSettingSection>
 
-        <SeasonHonors ownerId={game.session?.user?.id} scope="USER" editable onEquipped={(slot, id) => { if (slot === "PROFILE_TITLE") game.setTitleEquipped(id); }} />
-        {isPreOpen && <EditableSettingSection title="ホーム背景" helper="背景を選んで保存できます" editing={homeEditing} pending={game.profileLoading} onEdit={() => setHomeEditing(true)} summary={<p>{game.selectedBgMode === "auto" ? "夕桜の城下町（標準）" : availableBackgrounds.find((item) => item.id === game.selectedBgMode)?.name || "未設定"}</p>}>
+        {!redesign && <SeasonHonors ownerId={game.session?.user?.id} scope="USER" editable onEquipped={(slot, id) => { if (slot === "PROFILE_TITLE") game.setTitleEquipped(id); }} />}
+        {!redesign && isPreOpen && <EditableSettingSection title="ホーム背景" helper="背景を選んで保存できます" editing={homeEditing} pending={game.profileLoading} onEdit={() => setHomeEditing(true)} summary={<p>{game.selectedBgMode === "auto" ? "夕桜の城下町（標準）" : availableBackgrounds.find((item) => item.id === game.selectedBgMode)?.name || "未設定"}</p>}>
           <ChoiceGroup label="背景" value={backgroundDraft} disabled={game.profileLoading} onChange={setBackgroundDraft} options={[{ value: "auto", label: "夕桜の城下町（標準）" }, ...availableBackgrounds.map((item) => ({ value: item.id, label: item.name }))]} />
           <div className="settings-edit-actions"><OutlawButton variant="secondary" disabled={game.profileLoading} onClick={() => { resetDrafts(); setHomeEditing(false); }}>キャンセル</OutlawButton><OutlawButton variant="primary" isLoading={game.profileLoading} loadingLabel="保存中…" onClick={() => void saveHome()}>保存</OutlawButton></div>
         </EditableSettingSection>}
-        {!isPreOpen && <EditableSettingSection title="ホーム演出" helper="所持中の装飾を選択できます" editing={homeEditing} pending={game.profileLoading} onEdit={() => setHomeEditing(true)} summary={<dl className="settings-summary"><div><dt>背景</dt><dd>{game.selectedBgMode === "auto" ? "夕桜の城下町（標準）" : availableBackgrounds.find((item) => item.id === game.selectedBgMode)?.name || "未設定"}</dd></div><div><dt>前景</dt><dd>{availableFrontEffects.find((item) => item.id === game.equippedFrontEffect)?.name || "なし"}</dd></div><div><dt>内装</dt><dd>{availableInteriors.find((item) => item.id === game.interiorItem)?.name || "なし"}</dd></div></dl>}>
+        {!redesign && !isPreOpen && <EditableSettingSection title="ホーム演出" helper="所持中の装飾を選択できます" editing={homeEditing} pending={game.profileLoading} onEdit={() => setHomeEditing(true)} summary={<dl className="settings-summary"><div><dt>背景</dt><dd>{game.selectedBgMode === "auto" ? "夕桜の城下町（標準）" : availableBackgrounds.find((item) => item.id === game.selectedBgMode)?.name || "未設定"}</dd></div><div><dt>前景</dt><dd>{availableFrontEffects.find((item) => item.id === game.equippedFrontEffect)?.name || "なし"}</dd></div><div><dt>内装</dt><dd>{availableInteriors.find((item) => item.id === game.interiorItem)?.name || "なし"}</dd></div></dl>}>
           <ChoiceGroup label="背景" value={backgroundDraft} disabled={game.profileLoading} onChange={setBackgroundDraft} options={[{ value: "auto", label: "夕桜の城下町（標準）" }, ...availableBackgrounds.filter((item) => item.id !== "auto").map((item) => ({ value: item.id, label: item.name }))]} />
           <ChoiceGroup label="前景エフェクト" value={foregroundDraft} disabled={game.profileLoading} onChange={setForegroundDraft} options={availableFrontEffects.map((item) => ({ value: item.id, label: item.name }))} />
           <ChoiceGroup label="内装オブジェクト" value={interiorDraft} disabled={game.profileLoading} onChange={setInteriorDraft} options={availableInteriors.map((item) => ({ value: item.id, label: item.name }))} />
           <div className="settings-edit-actions"><OutlawButton variant="secondary" disabled={game.profileLoading} onClick={() => { resetDrafts(); setHomeEditing(false); }}>キャンセル</OutlawButton><OutlawButton variant="primary" isLoading={game.profileLoading} loadingLabel="保存中…" onClick={() => void saveHome()}>保存</OutlawButton></div>
         </EditableSettingSection>}
 
-        {canProvisionQa && <section className="settings-section"><h4 className="settings-section-title">QAテストデータ</h4><p className="settings-help-text">このアカウントのテスト用所持データを再投入します。</p><OutlawButton variant="secondary" fullWidth disabled={qaLoading} onClick={() => void provisionQa()}>{qaLoading ? "投入中..." : "テストデータを投入"}</OutlawButton></section>}
+        {!redesign && canProvisionQa && <section className="settings-section"><h4 className="settings-section-title">QAテストデータ</h4><p className="settings-help-text">このアカウントのテスト用所持データを再投入します。</p><OutlawButton variant="secondary" fullWidth disabled={qaLoading} onClick={() => void provisionQa()}>{qaLoading ? "投入中..." : "テストデータを投入"}</OutlawButton></section>}
         <section className="settings-section">
           <h4 className="settings-section-title">サウンド設定</h4>
           <div className="settings-audio-row">

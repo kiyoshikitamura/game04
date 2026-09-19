@@ -2,6 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { BillingError, billingConfig, validateSession, assertPurchaseOperatingStates } from "./contracts";
 import type { BillingOrder, CheckoutSession } from "./contracts";
 import { reconcileCheckout } from "./reconciliation";
+import { VIP_PRODUCT } from "@/domain/redesign/vip";
 
 export function billingService() {
   const config = billingConfig();
@@ -86,10 +87,20 @@ export function billingService() {
     if (error || !data) throw new BillingError("注文が見つかりません。", 404);
     return data;
   }
-  async function reconcile(session: CheckoutSession, existing?: BillingOrder) {
-    return reconcileCheckout(session, { order, rpc, validate: (value, item) => validateSession(value, item, config.mode) }, existing);
+  async function grantVipForOrder(item: BillingOrder) {
+    if (item.status !== "GRANTED" || item.product_id !== VIP_PRODUCT.id) return;
+    // The delivery ledger makes webhook / browser retries exactly once per order.
+    await rpc("game04_grant_vip", { p_user_id: item.user_id, p_order_id: item.id });
   }
-  return { config, db, authenticatedUser, authenticatedPurchaseUser, assertPurchasingAllowed, rpc, stripe, order, reconcile };
+  async function reconcile(session: CheckoutSession, existing?: BillingOrder) {
+    const result = await reconcileCheckout(session, { order, rpc, validate: (value, item) => validateSession(value, item, config.mode) }, existing);
+    // Re-read the persisted order after payment validation and ordinary fulfillment.
+    // Do not infer entitlement from the redirect or the incoming event payload.
+    const latest = await order(existing?.id ?? session.client_reference_id);
+    await grantVipForOrder(latest);
+    return result;
+  }
+  return { config, db, authenticatedUser, authenticatedPurchaseUser, assertPurchasingAllowed, rpc, stripe, order, reconcile, grantVipForOrder };
 }
 
 export function billingResponse(data: unknown, status = 200) {

@@ -9,7 +9,10 @@ export async function POST(request: Request) {
     const input = await request.json();
     const order = await billing.order(uuid(input.orderId), userId);
     const terminal = terminalOrderResult(order);
-    if (terminal) return billingResponse(terminal);
+    if (terminal) {
+      await billing.grantVipForOrder(order);
+      return billingResponse(terminal);
+    }
     if (!order.stripe_session_id) return billingResponse({ status: "PENDING", order_id: order.id });
     const session = await billing.stripe(`checkout/sessions/${encodeURIComponent(order.stripe_session_id)}`);
     return billingResponse(await billing.reconcile(session, order));
