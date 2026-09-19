@@ -8,6 +8,7 @@ import {
 } from "./crawlerMetadata";
 import "./globals.css";
 import "./sengoku-theme.css";
+import "./scroll-policy.css";
 
 const production = isVercelProduction();
 

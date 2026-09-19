@@ -6,6 +6,7 @@ import { EMAIL_ONBOARDING_INTENT_KEY, readEmailOnboardingIntent, type EmailOnboa
 import { getExternalBrowserUrl, getOAuthCallbackUrl, isXInAppBrowser } from "@/utils/browserDetection";
 import { useGame } from "../context/GameContext";
 import { EXISTING_GOOGLE_LOGIN_INTENT_KEY } from "../context/hooks/useAuth";
+import "./TutorialAuthentication.css";
 import ExternalBrowserGooglePrompt from "./ExternalBrowserGooglePrompt";
 import { commitAccountSwitchIdentityTransition, prepareAccountSwitchIdentityTransition, recordSameSubjectIdentityTransition } from "@/utils/kpiInstrumentation";
 
@@ -507,7 +508,7 @@ export default function AccountAuthenticationModal() {
       />
     ) : accountConflict ? (
     <div className="modal-overlay background-black-95" style={{ zIndex: 20001 }}>
-      <div className="modal-card" style={{ maxWidth: 420 }} role="dialog" aria-modal="true" aria-labelledby="account-switch-title">
+      <div className="modal-card account-auth-scroll-card custom-scrollbar" style={{ maxWidth: 420 }} role="dialog" aria-modal="true" aria-labelledby="account-switch-title">
         <div id="account-switch-title" className="modal-title text-left">
           {accountConflict.method === "GOOGLE" ? "登録済みのGoogleアカウントが見つかりました" : "既存のゲームデータが見つかりました"}
         </div>
@@ -541,7 +542,7 @@ export default function AccountAuthenticationModal() {
     </div>
     ) : (
     <div className="modal-overlay background-black-95" style={{ zIndex: 20000 }}>
-      <div className="modal-card" style={{ maxWidth: 420 }} role="dialog" aria-modal="true" aria-labelledby="account-authentication-title">
+      <div className="modal-card account-auth-scroll-card custom-scrollbar" style={{ maxWidth: 420 }} role="dialog" aria-modal="true" aria-labelledby="account-authentication-title">
         <div id="account-authentication-title" className="modal-title text-left">ゲームデータを保存</div>
         <div className="modal-desc text-left mb-3">
           データを保護・引き継げるよう、Googleまたはメールのどちらか1つを連携してください。同じアカウントで両方を使用することはできません。

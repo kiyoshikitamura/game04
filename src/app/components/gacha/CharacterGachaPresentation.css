@@ -106,3 +106,13 @@
 @media(max-height:700px){.cg-overlay .cg-shell .cg-reveal-copy>blockquote{font-size:18px;line-height:1.5}.cg-overlay .cg-shell .cg-quote-intro blockquote{font-size:23px}}
 .cg-loading-spinner{display:block;width:28px;height:28px;border:2px solid #d0bd9133;border-top-color:#d0bd91;border-radius:50%;animation:cg-loading-spin .8s linear infinite}
 @keyframes cg-loading-spin{to{transform:rotate(360deg)}}
+
+/* Center short fallback results; keep their top reachable when results overflow. */
+.cg-loading {
+  min-height: 0;
+  max-height: 100dvh;
+  justify-content: safe center;
+  overscroll-behavior-y: contain;
+}
+.cg-loading > * { flex-shrink: 0; }
+.cg-shell { overscroll-behavior-y: contain; scroll-padding-block: 16px; }

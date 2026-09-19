@@ -1,8 +1,10 @@
 .inbox-panel-container-inner {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height: 100%;
+  min-width: 0;
 }
+.inbox-panel-container-inner > * { flex-shrink: 0; }
 .inbox-panel-pending{pointer-events:auto;cursor:wait}
 .inbox-panel-pending::after{position:absolute;z-index:10;inset:0;content:"";background:rgba(1,4,9,.24);pointer-events:auto;touch-action:none}
 .inbox-panel-pending .modal-shell-content,.inbox-panel-pending .modal-shell-footer{pointer-events:none;user-select:none}

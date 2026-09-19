@@ -10,6 +10,8 @@ GAME04 dev lrgyllgzcdcphlbmkkncのみ変更。GAME03およびProductionへの書
 未FIX数値はPreview調整Masterと明示。Tutorial、商材最終設計、総合受入は後工程。
 旧191件の進捗率を新計画へ流用しない。
 
+スクロール共通ルールは docs/product/GAME04_SCROLL_UI_AUTHORITY_2026-09-19.md を遵守。長いページ・中央ダイアログにはスクロール所有者を明示し、デザインバーを非表示にしない。
+
 ## 以下は旧方針の記録（現在の仕様Authorityではない）
 
 ユーザーの最新指示：GAME03の最新実Productionを完全複製し、キャラ60体とロゴのみ添付の戦国素材へ置換する。他の素材・ゲームシステム・数値は維持し、GAME04専用devで動かす。旧独自Common Core開発方針に優先する。

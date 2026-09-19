@@ -163,7 +163,7 @@ export default function ShopTab() {
         setAvailabilityAttempt(attempt => attempt + 1);
       }}>再確認する</OutlawButton>
     </div>}
-    <div className="scroll-container flex-1 shop-scroll-body">
+    <div className="scroll-container flex-1 shop-scroll-body custom-scrollbar">
       {shopSubTab === "LIMITED" ? <>
         <section className="shop-section" aria-label="パック">
           {packs.map(productCard)}

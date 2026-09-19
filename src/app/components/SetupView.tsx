@@ -165,7 +165,7 @@ export default function SetupView() {
   }
 
   return (
-    <div className={`setup-container scroll-container ${presentationState === "NAME_INPUT" ? "is-registration" : "is-world-entry"}`} onClick={handleFirstUserInteraction} data-entry-state={presentationState}>
+    <div className={`setup-container scroll-container custom-scrollbar ${presentationState === "NAME_INPUT" ? "is-registration" : "is-world-entry"}`} onClick={handleFirstUserInteraction} data-entry-state={presentationState}>
       <div className="setup-world-shade" aria-hidden="true" />
       {presentationState !== "NAME_INPUT" && <OutlawButton type="button" variant="ghost" className="setup-world-skip" aria-label="SKIP" onClick={skipWorldIntro}>SKIP</OutlawButton>}
       {presentationState === "WORLD_INFORMATION" ? (

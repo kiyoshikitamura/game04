@@ -119,7 +119,7 @@ export default function RedesignCommerceOverlays() {
                 <p>{scoutResults.length}件の獲得結果</p>
               </header>
 
-              <div className={`gacha-result-grid ${isCharacterReveal ? "is-character-results" : "is-asset-results"} ${scoutResults.length >= 10 ? "is-ten-pull" : ""}`}>
+              <div className={`gacha-result-grid custom-scrollbar ${isCharacterReveal ? "is-character-results" : "is-asset-results"} ${scoutResults.length >= 10 ? "is-ten-pull" : ""}`}>
                 {scoutResults.map((res: any, idx: number) => (
                   <article
                     key={`${res.name}-${idx}`}

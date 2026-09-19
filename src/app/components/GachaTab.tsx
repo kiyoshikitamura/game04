@@ -120,7 +120,7 @@ export default function GachaTab() {
 
   return (
     <fieldset className="view-container relative gacha-view-root gacha-action-fieldset" disabled={pending} aria-busy={pending}>
-      <div className="gacha-scroll-shell">
+      <div className="gacha-scroll-shell custom-scrollbar">
         {guideGachaCategory && questGuide?.step !== 'GACHA' && dismissedGuide !== guideGachaCategory && <GuideDialog
           key={guideGachaCategory} title="初心者ガイド" blocked={Boolean(scoutAnimationState) || pending || showRates}
           message={`${guideGachaCategory === "SKILL" ? "スキル" : "装備"}の無料10連を引こう。`}
@@ -196,7 +196,7 @@ export default function GachaTab() {
           </div>
           <h3>登用対象ごとの提供割合</h3>
           <p>表示は現在の排出対象と提供割合に基づきます。小数点以下は四捨五入しています。</p>
-          {paidItemRates.length ? <div className="gacha-individual-rates" role="region" aria-label="登用対象ごとの提供割合" tabIndex={0}>
+          {paidItemRates.length ? <div className="gacha-individual-rates custom-scrollbar" role="region" aria-label="登用対象ごとの提供割合" tabIndex={0}>
             <div className="gacha-individual-rates-heading"><span>対象</span><span>通常</span><span>無料10連</span></div>
             {paidItemRates.map(item => <div key={`${item.item_type}:${item.item_id}`}>
               <span>{item.rarity} {item.name}</span><strong>{item.probability.toFixed(4)}%</strong>
