@@ -34,3 +34,12 @@
 - 最終実機確認は未実施。進捗は新43件へ再採番し、Preview反映率と完了率を別々に管理する。
 
 実装別の検証記録は同ディレクトリ `GAME04_REDESIGN_*_20260919.md` を参照。
+
+## 初回配信検証
+
+- 実装commit: `93d25673202b1e43297bae338ddfc8033aa8d5f6`
+- `npm run typecheck` / `VERCEL_ENV=preview npm run build`: PASS。
+- dev実API: 初期化→Quest勝利→同一requestId再送→Unlock Raid作成→Raid勝利 PASS。
+- Edge `game04-redesign-api` version 2 / verify_jwt=true。
+- ローカルBattle core・Raid・育成検証、およびDB rollback内CAS/冪等/VIP検証 PASS。
+- 決済reconciliation単独旧スクリプトは拡張子なしimportのNode解決エラー。実決済は行わず、型・Buildと既存検証済注文経路のコード確認まで。

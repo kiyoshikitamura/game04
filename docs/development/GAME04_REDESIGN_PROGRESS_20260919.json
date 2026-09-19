@@ -2,8 +2,8 @@
   "title": "GAME04 全面改修進捗管理",
   "date": "2026-09-19",
   "basisSha": "7369f3dbaf3ef454c33932df55ee308e0b7718cb",
-  "previewSha": "",
-  "previewUrl": "",
+  "previewSha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+  "previewUrl": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
   "db": "lrgyllgzcdcphlbmkknc",
   "scope": "2026-09-19 全面再設計。旧191件は集計対象外。",
   "tasks": [
@@ -11,201 +11,201 @@
       "id": "M1-01",
       "phase": "M1",
       "title": "共通型・6属性・5能力値",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "実装済み。数値は仮Master",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M1-02",
       "phase": "M1",
       "title": "Character・Skill・Equipment Master",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "60体・50スキル・160装備",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M1-03",
       "phase": "M1",
       "title": "旧所持資産の非破壊取込み",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "UUID台帳による一度だけの取込み",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M1-04",
       "phase": "M1",
       "title": "新DB・CAS・再送冪等",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "dev Migration適用、旧users hash維持",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M1-05",
       "phase": "M1",
       "title": "サーバー認証・資産更新API",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "Edgeサーバーが認証・計算・更新",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M2-01",
       "phase": "M2",
       "title": "固定行動順・HP・共通SP",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "5キャラ左から右、SPD廃止",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M2-02",
       "phase": "M2",
       "title": "条件スキル・対象選択・SP優先",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "高消費SP優先は暫定FIX",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M2-03",
       "phase": "M2",
       "title": "BURST・敵割込み・個別SP",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "本人抽選、50%消費、最大5行動",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M2-04",
       "phase": "M2",
       "title": "Passive・状態変化・Bossフェーズ",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "同種加算、Wave継続Master",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M2-05",
       "phase": "M2",
       "title": "縦型Battle UI・再生・結果分析",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "既存画像使用、専用演出は仮",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M3-01",
       "phase": "M3",
       "title": "デッキ・編成・自動設定",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "5体、スキルと装備の自動設定",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M3-02",
       "phase": "M3",
       "title": "キャラ育成・魂・覚醒・収集表示",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "魂辞書、+0〜5、スキル枠解放",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M3-03",
       "phase": "M3",
       "title": "共有スキル・LB育成",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "+0〜10、同キャラ重複不可",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M3-04",
       "phase": "M3",
       "title": "装備6枠・Lv・LB",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "属性なし、個別所持",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M3-05",
       "phase": "M3",
       "title": "装備複数選択・分解・ロック",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "中央確認ダイアログ",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M4-01",
       "phase": "M4",
       "title": "10エリア・70ステージMaster",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "1〜5Wave、攻略テーマ別",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M4-02",
       "phase": "M4",
       "title": "エリア・ステージ・情報ダイアログ",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "背景2種を仮流用",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M4-03",
       "phase": "M4",
       "title": "出撃準備・行動力・Wave接続",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "開始時消費、敗北返却なし",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M4-04",
       "phase": "M4",
       "title": "順次解放・周回・3種報酬",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "初回・通常・レアを分離",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M4-05",
       "phase": "M4",
       "title": "クリア時エンカウント・進捗接続",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "遭遇抽選・進捗保存。Mission報酬接続はM4-06",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M4-06",
@@ -221,51 +221,51 @@
       "id": "M5-01",
       "phase": "M5",
       "title": "エンカウントRaid・参加管理",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "60分、最大10人、退出ルール",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M5-02",
       "phase": "M5",
       "title": "共通HP・勝敗・討伐資格",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "3勝資格、勝利倍率は仮",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M5-03",
       "phase": "M5",
       "title": "任意解禁Raid・Lv進行",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "解禁アイテム、3日、最大20人",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M5-04",
       "phase": "M5",
       "title": "救援・報酬台帳・冪等受取",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "6時間窓、全体とActivityへ",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M5-05",
       "phase": "M5",
       "title": "レイドUI・準備・結果",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "仮FIX UI、仮Boss画像",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M5-06",
@@ -281,41 +281,41 @@
       "id": "M6-01",
       "phase": "M6",
       "title": "Home Header・背景・キャラ選択",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "選択素材は後から交換可能",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M6-02",
       "phase": "M6",
       "title": "Quest続き・Footer・ショートカット",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "Home/Quest/Character/Raid/Gacha",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M6-03",
       "phase": "M6",
       "title": "Activity・全体・DM",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "ギルドChat・BBSは非公開",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M6-04",
       "phase": "M6",
       "title": "共通運営機能・旧PvP等の非公開",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "設定・通知・Present等を継続",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M6-05",
@@ -331,21 +331,21 @@
       "id": "M7-01",
       "phase": "M7",
       "title": "VIP権利30日・単発付与基盤",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "価格未FIX、販売は無効",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M7-02",
       "phase": "M7",
       "title": "VIP速度3倍・既存Skip解放",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "非VIPは1倍/2倍のみ",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M8-01",
@@ -411,11 +411,11 @@
       "id": "M10-01",
       "phase": "M10",
       "title": "型・Build・最小回帰・Preview配信",
-      "status": "着手中",
+      "status": "Preview反映済",
       "notes": "統合担当が確認後公開",
       "previewEligible": true,
-      "sha": "",
-      "url": ""
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
     },
     {
       "id": "M10-02",

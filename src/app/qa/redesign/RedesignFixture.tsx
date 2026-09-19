@@ -76,7 +76,7 @@ export default function RedesignFixture() {
     if (result) setBattle(result);
   }
   const game = {
-    session: null, username: '確認用の城主', userLevel: 1,
+    session: null, username: '確認用の城主', userLevel: 1, playCyberSe: noop,
     directMessages: [], dmUnreadConversations: [], dmUnreadTotal: 0, dmRecipientId, setDmRecipientId,
     guildChats, chatInput, setChatInput, chatCooldown: 0, chatSending: false,
     setChatChannel: noop, setShowTribeChatPanel: noop,
