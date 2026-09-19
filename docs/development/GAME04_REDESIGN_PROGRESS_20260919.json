@@ -270,12 +270,13 @@
     {
       "id": "M5-06",
       "phase": "M5",
-      "title": "途中参加Checkpoint詳細",
-      "status": "未FIX",
-      "notes": "未FIX: 共有Lvと個人再開Lvの実行詳細",
+      "title": "Unlock途中参加Checkpoint廃止・共有Lv参加への統一",
+      "status": "未着手",
+      "notes": "仕様FIX済み。個人Checkpoint・出撃停止・追い付き処理を削除。開始時の共有Lvで個別戦闘。3勝・非遡及・個別勝敗・Lv連動強化は維持。実装変更は未実施。",
       "previewEligible": false,
       "sha": "",
-      "url": ""
+      "url": "",
+      "specStatus": "FIX済み"
     },
     {
       "id": "M6-01",
@@ -316,16 +317,6 @@
       "previewEligible": true,
       "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
       "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
-    },
-    {
-      "id": "M6-05",
-      "phase": "M6",
-      "title": "新ランキング軸・表示",
-      "status": "未FIX",
-      "notes": "新ランキング軸は未FIX。PvP RATEは非公開",
-      "previewEligible": false,
-      "sha": "",
-      "url": ""
     },
     {
       "id": "M7-01",
@@ -433,6 +424,19 @@
       "title": "Production Release準備・公開",
       "status": "未着手",
       "notes": "未着手: 今回Production公開なし",
+      "previewEligible": false,
+      "sha": "",
+      "url": ""
+    }
+  ],
+  "latestDecision": "2026-09-19 本流決定：ランキングは初期リリース対象外。Unlock Raidの個人途中参加Checkpointは正式削除。途中参加者も戦闘開始時の共有Lvで個別バトルを行う。個別勝敗・Raid全体3勝資格・非遡及報酬・共有Lv連動の敵強化は維持。",
+  "excludedTasks": [
+    {
+      "id": "M6-05",
+      "phase": "M6",
+      "title": "新ランキング軸・表示",
+      "status": "初期対象外",
+      "notes": "ランキングはリリース時点ではオミット。新評価軸・公開時期は初期未FIXに残さない。",
       "previewEligible": false,
       "sha": "",
       "url": ""
