@@ -38,7 +38,15 @@ export default function RedesignFixture() {
   const [dmRecipientId, setDmRecipientId] = useState<string | null>(null);
   const [guildChats, setGuildChats] = useState<{ id: string; author_name: string; content: string; user_id: string; created_at: string }[]>([]);
   useEffect(() => {
-    setRooms([createRaidRoom('encounter_flame', LOCAL_ID, 'qa-encounter', Date.now()), createRaidRoom('unlock_shadow', LOCAL_ID, 'qa-unlock', Date.now())]);
+    const now = Date.now();
+    // Offline-only receipt fixture. Expired rooms must not occupy a hosting slot.
+    const snapshot = createTerritorySnapshot(TERRITORY_MASTER, TERRITORY_MASTER.destinations[0].id);
+    const expired = createRaidRoom(snapshot.raidMaster.id, LOCAL_ID, 'qa-territory-expired', now - (snapshot.destination.durationMinutes + 1) * 60000, snapshot);
+    expired.status = 'expired';
+    expired.participants[0].attempts = 1;
+    expired.rewardGrants = [{ id: `participation:${LOCAL_ID}`, userId: LOCAL_ID, level: 1,
+      rewards: structuredClone(snapshot.raidMaster.participationRewards), claimed: false }];
+    setRooms([createRaidRoom('encounter_flame', LOCAL_ID, 'qa-encounter', now), createRaidRoom('unlock_shadow', LOCAL_ID, 'qa-unlock', now), expired]);
     const selected = new URLSearchParams(window.location.search).get('view');
     if (selected && ['home','quest','character','raid','territory','battle'].includes(selected)) setTab(selected);
     document.body.classList.add('rd-active');

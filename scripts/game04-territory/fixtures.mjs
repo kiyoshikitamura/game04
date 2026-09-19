@@ -48,3 +48,8 @@ if(phase==='low'){
  q+=`update public.game04_player_state set state=jsonb_set(state,'{characters}',(select jsonb_agg(jsonb_set(c,'{level}','1'::jsonb)) from jsonb_array_elements(state->'characters') c)),version=version+1 where user_id='${ids.owner}';\ncommit;`;
  fs.writeFileSync(`${root}/low.sql`,q);console.log(`${root}/low.sql`);
 }
+
+if(phase==='lose-room'){
+ const r=room('lose',0,20);q+=`update public.game04_raid_rooms set state=jsonb_set(state,'{level}','14'::jsonb),version=version+1 where id='${r.id}';\ncommit;`;
+ fs.writeFileSync(`${root}/lose-fixture.json`,JSON.stringify(fixtures.lose));fs.writeFileSync(`${root}/lose-room.sql`,q);console.log(`${root}/lose-room.sql`);
+}

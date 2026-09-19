@@ -62,7 +62,7 @@ if(phase==='normal-resume'){
  console.log(JSON.stringify({normalStart:'PASS',energyCost:5,oldLevelNoSharedDamage:'PASS',firstEnemyHp:r.battle.frames[0].enemies[0].maxHp,nextEnemyHp:next.battle.frames[0].enemies[0].maxHp}));
 }
 if(phase==='lose'){
- const f=JSON.parse(fs.readFileSync(`${root}/normal-fixture.json`)).normal;const room=d=>d.rooms.find(x=>x.id===f.roomId);
+ const f=JSON.parse(fs.readFileSync(`${root}/lose-fixture.json`));const room=d=>d.rooms.find(x=>x.id===f.roomId);
  const before=await api('owner','get_state');const r=await api('owner','raid_battle',{roomId:f.roomId});assert.equal(r.battle.outcome,'lose');
  assert.equal(room(before).participants.find(p=>p.userId===sessions.owner.user.id).wins,room(r).participants.find(p=>p.userId===sessions.owner.user.id).wins);
  fs.writeFileSync(`${root}/lose-evidence.json`,JSON.stringify(r));console.log(JSON.stringify({normalLose:'PASS',winsUnchanged:true}));
