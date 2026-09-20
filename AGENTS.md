@@ -2,6 +2,8 @@
 
 ## 現在の優先Authority
 
+戦闘共通ルールは docs/product/GAME04_BALANCE_AUTHORITY_V1_2026-09-20.md を最優先とする。未確定案・参考試算は未承認のまま保持する。旧保存戦闘を新ルールで黙って再計算せず、ルール版を保持する。
+
 2026-09-19の全面改修Handoffとdocs/productの同日付企画・UI正本を優先する。
 GAME03ゲームルールの完全複製方針は撤回。共通運営基盤と戦国素材を保持し、シングル攻略・デッキ構築へ再設計する。
 新規機能はsrc/domain/redesign、src/app/components/redesignとgame04_* DBへ分離する。
