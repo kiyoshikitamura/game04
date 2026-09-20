@@ -87,3 +87,9 @@ Present実API最終確認: Character/Skill/Equipment各2個を各同時2claimし
 キャラSP合算→共通SP400、独立バーストゲージ200、装備枠順、条件・効果・敵連続行動・死亡蘇生・Wave保持・300行動上限を対象に実装着手。開始済み戦闘の旧ルールと領土侵攻・報酬等の既存成果を保持する。正式数値は未FIXのままとし、戦闘ルール実装／UI接続／Preview受入／正式数値・バランス受入を分離する。
 
 本工程のSHA・検証・DB／Edge・Preview反映は `GAME04_BATTLE_COMMON_INTEGRATION_20260920.md` と進捗JSON `battleCommonUpdates` を参照。過去のM2配信履歴を新ルールの受入実績に読み替えない。
+
+### 戦闘共通ルールの適用・限定受入結果
+
+実装／Preview SHA `b8675e16c325166ae9ff1215eef2795c0017edc9`、Vercel success。GAME04 dev専用Migration `20260920082351_game04_common_battle_v2_master.sql` とEdge v7を適用。現在のterritory masterのみ仮版へ更新し、既存14開催snapshot・旧保存戦闘・進行は保持した。型検査・Build・24新検証群と3既存回帰がPASS。Quest新規v2の同request並行・旧保存互換、Raid個別WIN/LOSE・3勝非遡及・旧Lv精算・次Lv敵強化、360pxの別SP/ゲージ・中断・詳細ログ・300行動残数を限定確認。
+
+BC-01〜03はPreview反映済（限定受入）、BC-04正式数値・バランスは未FIX。多人並行の今回v2回帰・全Lvバランス・物理実機は未受入。raid_claim同一request再送でも材料・銭・適用台帳が一致し、全grant受取済みを確認。詳細は `GAME04_BATTLE_COMMON_INTEGRATION_20260920.md` を参照。GAME03・Productionは変更していない。

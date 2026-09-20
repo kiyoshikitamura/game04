@@ -42,7 +42,12 @@ node /tmp/game04-battle-tests/verify_game04_territory.js
 
 ## 開発環境・Preview
 
-DB／Edge適用、配信SHA、代表画面検証は統合担当の実施後に追記する。コードのみの段階をPreview反映済みとは扱わない。
+実装・Vercel配信SHA：`b8675e16c325166ae9ff1215eef2795c0017edc9`。型検査・Preview build成功。GAME04 dev `lrgyllgzcdcphlbmkknc` にMigration `20260920082351_game04_common_battle_v2_master.sql` とEdge version 7を適用。
+
+- 実API：旧保存結果・旧開始済み入力の互換、新Quest同一要求の並行実行と再送、Raid WIN／LOSE、3勝資格・非遡及、旧Lv精算、次Lv敵強化、報酬受取再送を確認。専用QAルームの共有HP・Lvおよび保存済み開始入力は境界検証用に設定した。実多人数競合や全Lvバランスの証明とはしない。
+- Preview：360px幅の代表画面でSP／ゲージ、BURST中断、スキル状態、300行動敗北、中央スクロール付き詳細ログを確認。正式な実機全画面受入は未実施。
+- 証跡：`GAME04_BATTLE_COMMON_API_ACCEPTANCE_20260920.json`、配信・制限の詳細：`GAME04_BATTLE_COMMON_INTEGRATION_20260920.md`。
+- 確認URL：<https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/qa/battle-common?scenario=interrupt&viewport=360>。
 
 ## 未受入
 

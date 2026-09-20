@@ -2,7 +2,7 @@
   "title": "GAME04 全面改修進捗管理",
   "date": "2026-09-20",
   "basisSha": "7369f3dbaf3ef454c33932df55ee308e0b7718cb",
-  "previewSha": "f539ba0c92484c6e2c0e446567555311f6265fd2",
+  "previewSha": "b8675e16c325166ae9ff1215eef2795c0017edc9",
   "previewUrl": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
   "db": "lrgyllgzcdcphlbmkknc",
   "scope": "2026-09-19全面再設計42件＋2026-09-20領土侵攻TI-01〜05の実装工程サブセット計47件。初期対象外M6-05はexcludedTasksへ分離。全体141件正本の代替ではなく、旧191件・43件の率を全体率へ流用しない。",
@@ -673,35 +673,56 @@
     "authority": "docs/product/GAME04_BALANCE_AUTHORITY_V1_2026-09-20.md",
     "basisSha": "06a9bd8953ab02a475d58abe4efe9e9ee9dde2fc",
     "authorityIntegrationSha": "9c24e211eeab98030994001078dfcf83f5140f26",
-    "status": "着手中",
+    "status": "Preview反映済（処理ルール・UI接続の限定受入）",
     "scope": "47件の既存実装工程を維持し、今回の4段階を別管理する。旧工程の配信履歴・全体141件申告値を今回の受入率へ流用しない。",
-    "implementationSha": null,
-    "previewSha": null,
-    "previewApplied": false,
-    "developmentDbApplied": false,
-    "edgeApplied": false,
+    "implementationSha": "b8675e16c325166ae9ff1215eef2795c0017edc9",
+    "previewSha": "b8675e16c325166ae9ff1215eef2795c0017edc9",
+    "previewApplied": true,
+    "developmentDbApplied": true,
+    "edgeApplied": true,
     "developmentDb": "lrgyllgzcdcphlbmkknc",
     "stages": [
       {
         "id": "BC-01",
         "title": "戦闘ルール実装",
-        "status": "着手中",
+        "status": "Preview反映済",
         "specStatus": "確定ルールのみFIX",
-        "evidence": []
+        "evidence": [
+          "GAME04_BATTLE_COMMON_ACCEPTANCE_20260920.md",
+          "GAME04_BATTLE_COMMON_INTEGRATION_20260920.md",
+          "GAME04_BATTLE_COMMON_API_ACCEPTANCE_20260920.json"
+        ],
+        "sha": "b8675e16c325166ae9ff1215eef2795c0017edc9",
+        "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+        "completionScope": "仮Masterによる処理ルールと限定代表ケースのみ。正式数値・全Lvバランス・実機総合受入は別工程。"
       },
       {
         "id": "BC-02",
         "title": "戦闘状態・ログ・UI接続",
-        "status": "着手中",
+        "status": "Preview反映済",
         "specStatus": "確定ルールを既存縦型UIへ接続",
-        "evidence": []
+        "evidence": [
+          "GAME04_BATTLE_COMMON_ACCEPTANCE_20260920.md",
+          "GAME04_BATTLE_COMMON_INTEGRATION_20260920.md",
+          "GAME04_BATTLE_COMMON_API_ACCEPTANCE_20260920.json"
+        ],
+        "sha": "b8675e16c325166ae9ff1215eef2795c0017edc9",
+        "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+        "completionScope": "仮Masterによる処理ルールと限定代表ケースのみ。正式数値・全Lvバランス・実機総合受入は別工程。"
       },
       {
         "id": "BC-03",
         "title": "GAME04開発環境／Preview受入",
-        "status": "未着手",
+        "status": "Preview反映済",
         "specStatus": "仮Masterによる処理ルール受入",
-        "evidence": []
+        "evidence": [
+          "GAME04_BATTLE_COMMON_ACCEPTANCE_20260920.md",
+          "GAME04_BATTLE_COMMON_INTEGRATION_20260920.md",
+          "GAME04_BATTLE_COMMON_API_ACCEPTANCE_20260920.json"
+        ],
+        "sha": "b8675e16c325166ae9ff1215eef2795c0017edc9",
+        "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+        "completionScope": "仮Masterによる処理ルールと限定代表ケースのみ。正式数値・全Lvバランス・実機総合受入は別工程。"
       },
       {
         "id": "BC-04",
@@ -712,12 +733,22 @@
       }
     ],
     "verification": {
-      "typecheck": "未実施",
-      "build": "未実施",
-      "local": "未実施",
-      "developmentApi": "未実施",
-      "preview": "未実施",
-      "formalBalance": "未実施"
+      "typecheck": "PASS",
+      "build": "PASS",
+      "local": "24新検証群＋旧版バトル/共有LvRaid/領土侵攻3回帰スクリプトPASS。TEST_ONLYデータ。",
+      "developmentApi": "旧settled/started fixtureの再現、Quest新規v2同request並行で同seed/同結果/1回消費・再送二重報酬なし。専用QA Raid Lv1の2勝討伐報酬なし、旧Lv1結果3勝目はLv2HP不変/過去報酬なし、Lv2敵HP7475>6500、4勝目Lv2討伐報酬あり、Lv14 LOSE。Lv14 LOSEでwins4維持。raid_claim同一request再送でmaterials/cash/appliedAcquisitionIds一致、全grant claimed確認。専用QAroomはexpiredへ変更、削除なし。",
+      "preview": "Vercel success。/qa/battle-common?scenario=interrupt&viewport=360で横overflowなし、SP400/ゲージ200別表示、BURST中断、中央80vh金色スクロール詳細ログ641件。limit最終1339frame残0/300で敗北理由一致。 main PreviewでTAP TO START/戦国姫艶武表示確認。取得console5件は拡張エラーのみ。",
+      "formalBalance": "未FIX・未実施",
+      "notVerified": [
+        "実多人数並行の今回v2回帰",
+        "全Lvバランス",
+        "正式Master/回復式/数値",
+        "物理スマホ実機最終受入"
+      ],
+      "evidence": [
+        "GAME04_BATTLE_COMMON_ACCEPTANCE_20260920.md",
+        "GAME04_BATTLE_COMMON_API_ACCEPTANCE_20260920.json"
+      ]
     },
     "audit": "docs/development/GAME04_BATTLE_COMMON_INTEGRATION_20260920.md",
     "preservation": [
@@ -725,6 +756,27 @@
       "開始済み旧戦闘のルール版保持",
       "既存進行データの一括初期化なし",
       "Quest・Raid・領土侵攻・報酬接続は維持"
-    ]
+    ],
+    "previewUrl": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+    "developmentDeployment": {
+      "db": "lrgyllgzcdcphlbmkknc",
+      "migration": "20260920082351_game04_common_battle_v2_master.sql",
+      "scope": "current territory masterのみPREVIEW_PROVISIONAL_20260920_common_v2へ更新",
+      "existingSnapshotCount": 14,
+      "existingSnapshotDigest": "a32d46f4f218ba4d1e57a4d511204f91",
+      "existingSnapshotPreserved": true,
+      "stateReset": false,
+      "edgeFunction": "game04-redesign-api",
+      "edgeVersion": 7,
+      "edgeStatus": "ACTIVE",
+      "verifyJwt": true,
+      "vercelDeployment": "DDo6LfyppK3yGoCsinvmTc9oXmeV"
+    },
+    "masterStatus": {
+      "version": "PREVIEW_PROVISIONAL_20260920_common_v2",
+      "ruleVersion": "common-v2-20260920",
+      "formalApproval": false,
+      "notes": "既存仮数値を維持。回復casterATK%/蘇生maxHP%/敵被弾SP5は仮値。poison/SP補充と非ATK・DEFパッシブは未採用・保留を明示。既存frozen roomはlegacyを保持。"
+    }
   }
 }
