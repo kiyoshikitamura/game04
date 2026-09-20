@@ -4,7 +4,7 @@ import type { EnemyUnit, RaidMaster, RaidRoom, RedesignState, Reward, TerritoryS
 
 const base = CHARACTER_MASTERS[12];
 const attack = SKILL_MASTERS.find(s=>s.effects.some(e=>e.type==='damage'))!;
-const boss:EnemyUnit={id:'raid_boss',name:'炎影の守将',image:base.image,level:1,element:'fire',stats:{hp:6500,sp:110,atk:160,def:45,luk:20},skills:[attack],passives:[],actionCount:4,order:0,boss:true,phases:[{hpBelow:0.4,name:'烈火の陣',actionCount:3}]};
+const boss:EnemyUnit={hitSpGain:5,id:'raid_boss',name:'炎影の守将',image:base.image,level:1,element:'fire',stats:{hp:6500,sp:110,atk:160,def:45,luk:20},skills:[attack],passives:[],actionCount:4,order:0,boss:true,phases:[{hpBelow:0.4,name:'烈火の陣',actionCount:3}]};
 /** All numbers beyond rule FIX are Preview balance, replaceable without changing UI. */
 export const RAID_MASTERS:RaidMaster[]=[
  {id:'encounter_flame',name:'炎影の守将',type:'encounter',enemy:boss,energyCost:5,durationMinutes:60,maxParticipants:10,maxLevel:1,appearanceLevels:[1],appearanceImages:{},enemyGrowthPerLevel:0.15,sharedHpGrowthPerLevel:0.2,victoryMultiplier:1.5,sharedHp:150000,participationRewards:[{kind:'character_material',amount:2}],defeatRewards:[{kind:'character_material',amount:30}]},

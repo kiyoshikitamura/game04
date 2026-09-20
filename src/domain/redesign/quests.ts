@@ -29,7 +29,7 @@ function enemy(area: number, stage: number, wave: number, slot: number, boss: bo
     id: `quest-enemy-${area + 1}-${stage + 1}-${wave + 1}-${slot + 1}`,
     name: master.name, image: master.image, element: master.element, level: 1 + rank,
     stats: { hp: Math.round((boss ? 1100 : 370) * growth), sp: boss ? 80 : 40, atk: Math.round((boss ? 100 : 55) * growth), def: Math.round((area === 2 ? 55 : 15) * growth), luk: 10 + rank },
-    skills, passives: [], actionCount: boss ? 3 : 4 + (slot % 2), order: slot, boss,
+    skills, passives: [], hitSpGain: 5, actionCount: boss ? 3 : 4 + (slot % 2), order: slot, boss,
     ...(boss ? { phases: [{ hpBelow: .45, name: '決死の陣', actionCount: 2, skills: themeSkills((area + 1) % 10, skills) }] } : {}),
   };
 }

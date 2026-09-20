@@ -1,18 +1,18 @@
-import { BATTLE_RULES } from './masters';
+import { BATTLE_RULES, prepareBattleWaves } from './masters';
 import { RAID_MASTERS, getRoomRaidMaster } from './raid';
 import type { RaidRoom, RedesignState, TerritoryMaster, TerritoryProgress, TerritoryProjection, TerritorySnapshot } from './types';
 export type { TerritoryMaster, TerritoryProgress, TerritoryProjection, TerritorySnapshot } from './types';
 
 /** Development fixture only. No economy value here has formal approval. */
 export const TERRITORY_MASTER:TerritoryMaster={
- version:'PREVIEW_PROVISIONAL_20260920_v1',status:'PREVIEW_PROVISIONAL',initialExp:0,legacyMigrationExp:0,levelCap:3,
+ version:'PREVIEW_PROVISIONAL_20260920_common_v2',status:'PREVIEW_PROVISIONAL',initialExp:0,legacyMigrationExp:0,levelCap:3,
  levels:[{level:1,requiredExp:0,hostingSlots:1},{level:2,requiredExp:100,hostingSlots:2},{level:3,requiredExp:300,hostingSlots:3}],
  destinations:[
   {id:'azuchi',name:'安土城への侵攻',castle:'安土城',difficulty:'通常',itemSource:'クエストのレア報酬',raidMasterId:'unlock_shadow',requiredLevel:1,itemName:'領土侵攻札',itemId:'raid_unlock',itemCount:1,durationMinutes:4320,clearExp:100},
   {id:'gifu',name:'岐阜城への侵攻',castle:'岐阜城',difficulty:'上位',itemSource:'クエストのレア報酬',raidMasterId:'unlock_shadow',requiredLevel:2,itemName:'領土侵攻札',itemId:'raid_unlock',itemCount:1,durationMinutes:4320,clearExp:100},
  ],
  battleRules:structuredClone(BATTLE_RULES),
- raidMasters:structuredClone(RAID_MASTERS.filter(m=>m.type==='unlock')),
+ raidMasters:RAID_MASTERS.filter(m=>m.type==='unlock').map(master=>({...structuredClone(master),enemy:prepareBattleWaves([[master.enemy]],BATTLE_RULES)[0][0]})),
 };
 export function validateTerritoryMaster(master:TerritoryMaster):void {
  const natural=(v:number)=>Number.isSafeInteger(v)&&v>=0;

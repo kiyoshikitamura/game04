@@ -65,37 +65,49 @@
       "notes": "5キャラ左から右、SPD廃止",
       "previewEligible": true,
       "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
-      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "historicalImplementationScope": "9/19初回実装の配信履歴。9/20共通戦闘ルールの実装受入ではない。",
+      "currentRuleAuthority": "docs/product/GAME04_BALANCE_AUTHORITY_V1_2026-09-20.md",
+      "currentRuleProgress": "battleCommonUpdates.stages を参照"
     },
     {
       "id": "M2-02",
       "phase": "M2",
       "title": "条件スキル・対象選択・SP優先",
       "status": "Preview反映済",
-      "notes": "高消費SP優先は暫定FIX",
+      "notes": "9/19高消費SP優先の配信履歴。9/20に味方装備枠順・敵設定優先順へ仕様置換。新仕様の適用状態はbattleCommonUpdatesへ分離。",
       "previewEligible": true,
       "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
-      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "historicalImplementationScope": "9/19初回実装の配信履歴。9/20共通戦闘ルールの実装受入ではない。",
+      "currentRuleAuthority": "docs/product/GAME04_BALANCE_AUTHORITY_V1_2026-09-20.md",
+      "currentRuleProgress": "battleCommonUpdates.stages を参照"
     },
     {
       "id": "M2-03",
       "phase": "M2",
       "title": "BURST・敵割込み・個別SP",
       "status": "Preview反映済",
-      "notes": "本人抽選、50%消費、最大5行動",
+      "notes": "9/19本人抽選の配信履歴。9/20に独立ゲージ200・次の行動可能者開始時抽選へ仕様置換。新仕様の適用状態はbattleCommonUpdatesへ分離。",
       "previewEligible": true,
       "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
-      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "historicalImplementationScope": "9/19初回実装の配信履歴。9/20共通戦闘ルールの実装受入ではない。",
+      "currentRuleAuthority": "docs/product/GAME04_BALANCE_AUTHORITY_V1_2026-09-20.md",
+      "currentRuleProgress": "battleCommonUpdates.stages を参照"
     },
     {
       "id": "M2-04",
       "phase": "M2",
       "title": "Passive・状態変化・Bossフェーズ",
       "status": "Preview反映済",
-      "notes": "同種加算、Wave継続Master",
+      "notes": "9/19のPassive/状態/Phase配信履歴。9/20の独立持続・上限・死亡時処理・Wave共通引継ぎの適用状態はbattleCommonUpdatesへ分離。",
       "previewEligible": true,
       "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
-      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "historicalImplementationScope": "9/19初回実装の配信履歴。9/20共通戦闘ルールの実装受入ではない。",
+      "currentRuleAuthority": "docs/product/GAME04_BALANCE_AUTHORITY_V1_2026-09-20.md",
+      "currentRuleProgress": "battleCommonUpdates.stages を参照"
     },
     {
       "id": "M2-05",
@@ -105,7 +117,10 @@
       "notes": "既存画像使用、専用演出は仮",
       "previewEligible": true,
       "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
-      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "historicalImplementationScope": "9/19初回実装の配信履歴。9/20共通戦闘ルールの実装受入ではない。",
+      "currentRuleAuthority": "docs/product/GAME04_BALANCE_AUTHORITY_V1_2026-09-20.md",
+      "currentRuleProgress": "battleCommonUpdates.stages を参照"
     },
     {
       "id": "M3-01",
@@ -653,5 +668,63 @@
     },
     "previewSha": "f539ba0c92484c6e2c0e446567555311f6265fd2",
     "previewUrl": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+  },
+  "battleCommonUpdates": {
+    "authority": "docs/product/GAME04_BALANCE_AUTHORITY_V1_2026-09-20.md",
+    "basisSha": "06a9bd8953ab02a475d58abe4efe9e9ee9dde2fc",
+    "authorityIntegrationSha": "9c24e211eeab98030994001078dfcf83f5140f26",
+    "status": "着手中",
+    "scope": "47件の既存実装工程を維持し、今回の4段階を別管理する。旧工程の配信履歴・全体141件申告値を今回の受入率へ流用しない。",
+    "implementationSha": null,
+    "previewSha": null,
+    "previewApplied": false,
+    "developmentDbApplied": false,
+    "edgeApplied": false,
+    "developmentDb": "lrgyllgzcdcphlbmkknc",
+    "stages": [
+      {
+        "id": "BC-01",
+        "title": "戦闘ルール実装",
+        "status": "着手中",
+        "specStatus": "確定ルールのみFIX",
+        "evidence": []
+      },
+      {
+        "id": "BC-02",
+        "title": "戦闘状態・ログ・UI接続",
+        "status": "着手中",
+        "specStatus": "確定ルールを既存縦型UIへ接続",
+        "evidence": []
+      },
+      {
+        "id": "BC-03",
+        "title": "GAME04開発環境／Preview受入",
+        "status": "未着手",
+        "specStatus": "仮Masterによる処理ルール受入",
+        "evidence": []
+      },
+      {
+        "id": "BC-04",
+        "title": "正式数値・バランス受入",
+        "status": "未FIX",
+        "specStatus": "個別Master・育成・経済は別スレッド。参考試算を昇格しない",
+        "evidence": []
+      }
+    ],
+    "verification": {
+      "typecheck": "未実施",
+      "build": "未実施",
+      "local": "未実施",
+      "developmentApi": "未実施",
+      "preview": "未実施",
+      "formalBalance": "未実施"
+    },
+    "audit": "docs/development/GAME04_BATTLE_COMMON_INTEGRATION_20260920.md",
+    "preservation": [
+      "GAME03・Production変更禁止",
+      "開始済み旧戦闘のルール版保持",
+      "既存進行データの一括初期化なし",
+      "Quest・Raid・領土侵攻・報酬接続は維持"
+    ]
   }
 }

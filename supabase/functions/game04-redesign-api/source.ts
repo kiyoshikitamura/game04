@@ -1,5 +1,5 @@
 // Bundled with the shared pure gameplay modules before Edge deployment.
-import { BATTLE_RULES, buildBattleParty, buildInitialState, importLegacyAssets, grantReward, CHARACTER_MASTERS, type LegacyAssets } from '../../../src/domain/redesign/masters.ts';
+import { BATTLE_RULES, prepareBattleWaves, buildBattleParty, buildInitialState, importLegacyAssets, grantReward, CHARACTER_MASTERS, type LegacyAssets } from '../../../src/domain/redesign/masters.ts';
 import { applyAcquisitionEvents, type AcquisitionEvent, type AcquisitionMaster } from '../../../src/domain/redesign/acquisitions.ts';
 import { applyGrowthAction, validateDeck } from '../../../src/domain/redesign/growth.ts';
 import { evaluateMissions, getClaimableMission, type MissionConfig } from '../../../src/domain/redesign/missions.ts';
@@ -92,6 +92,7 @@ async function responseFor(userId: string, extra: Record<string, unknown> = {}) 
   return { state, rooms, socialEvents, missions: evaluateMissions(state, missions), territory: projectTerritory(territory.master, territory.progress, territory.items, territory.activeHostingCount), pendingBattle: pending[0] ?? null, ...extra };
 }
 async function runBattle(userId: string, name: string, payload: any, id: string, playerName: string) {
+  let preparedBattle: ReturnType<typeof simulateBattle> | undefined;
   let [record] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=*`);
   if (record?.status === 'settled') return responseFor(userId, record.result);
   if (!record) {
@@ -114,11 +115,20 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
     }
     if (state.energy < cost) throw new ApiError('行動力が足りません。');
     const seed = crypto.getRandomValues(new Uint32Array(1))[0];
-    const input = { seed, party: buildBattleParty(state), waves, rules: startRoom?.territorySnapshot?.battleRules ?? BATTLE_RULES, raidLevel };
+    // Only a new battle receives current rules. Saved started/settled records above are never upgraded.
+    const rules = startRoom?.territorySnapshot?.battleRules ?? BATTLE_RULES;
+    const input = { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel };
+    // Validate and simulate before charging. Invalid provisional masters must not strand a paid pending battle.
+    preparedBattle = simulateBattle(input);
     await commit(state, { ...state, energy: state.energy - cost }, id, { id, kind, targetId, seed, input, status: 'started' }, startRoom, startRoom?.version ?? null);
-    record = { id, kind, target_id: targetId, input, seed, status: 'started' };
+    // A simultaneous retry may have committed another seed under this request ID.
+    // Always settle the persisted input, never this caller's discarded candidate.
+    [record] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=*`);
+    if (!record) throw new ApiError('戦闘の保存状態を確認できません。再開してください。', 503);
+    if (record.status === 'settled') return responseFor(userId, record.result);
+    if (JSON.stringify(record.input) !== JSON.stringify(input)) preparedBattle = undefined;
   }
-  const battle = simulateBattle(record.input);
+  const battle = preparedBattle ?? simulateBattle(record.input);
   const settlementId = await uuidFor(`settlement:${id}`);
   for (let attempt = 0; attempt < 4; attempt++) {
     const state = await stateFor(userId); let after = structuredClone(state);

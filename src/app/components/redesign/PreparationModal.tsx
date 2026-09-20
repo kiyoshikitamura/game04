@@ -15,8 +15,8 @@ function conditionLabel(skill: SkillMaster) {
   if (condition.type === 'ally_dead') return '戦闘不能の味方がいる';
   return '常時';
 }
-export default function PreparationModal({ party, title, energyCost, energy, busy = false, onConfirm, onBack, onOpenDeck, error }: {
-  party: BattleUnit[]; title: string; energyCost: number; energy: number; busy?: boolean;
+export default function PreparationModal({ party, title, energyCost, energy, busy = false, onConfirm, onBack, onOpenDeck, error, commonSpMax = 400 }: {
+  commonSpMax?: number | null; party: BattleUnit[]; title: string; energyCost: number; energy: number; busy?: boolean;
   onConfirm: () => void | Promise<void>; onBack: () => void; onOpenDeck: () => void; error?: string;
 }) {
   const [detail, setDetail] = useState<BattleUnit | null>(null);
@@ -30,7 +30,7 @@ export default function PreparationModal({ party, title, energyCost, energy, bus
       <div className="rq-party">{party.map((unit, index) => <button type="button" key={unit.id} onClick={() => setDetail(unit)} aria-label={`${index + 1}番 ${unit.name}のスキル・パッシブ`}>
         <span className="rq-order">{index + 1}</span><img src={unit.image} alt="" /><strong>{unit.name}</strong><span>Lv.{unit.level}</span><span className={`rq-element rq-element-${unit.element}`}>{ELEMENT_LABELS[unit.element]}</span><small>HP {unit.stats.hp.toLocaleString()}</small>
       </button>)}</div>
-      <p className="rq-total-sp">パーティ共通SP最大値 <strong>{party.reduce((sum, unit) => sum + unit.stats.sp, 0).toLocaleString()}</strong></p>
+      <p className="rq-total-sp">パーティ共通SP最大値 <strong>{commonSpMax ?? '開催時ルールを適用'}</strong></p>
       <p>消費行動力 {energyCost} ／ 所持 {energy}</p>
       <p className="rq-muted">挑戦開始時に消費します。敗北した場合も返却されません。</p>
       {party.length !== 5 && <p role="alert">武将を5人編成してください。</p>}
@@ -38,8 +38,8 @@ export default function PreparationModal({ party, title, energyCost, energy, bus
       {error && <p role="alert">{error}</p>}
     </CanonicalDialog>
     {detail && <CanonicalDialog title={`${detail.name}の詳細`} onClose={() => setDetail(null)} actions={[{ label: '閉じる', onClick: () => setDetail(null) }]}>
-      <h3>スキル</h3>{detail.skills.length === 0 && <p>スキル未設定</p>}
-      {detail.skills.map(skill => <article className="rq-detail-item" key={skill.id}><strong>{skill.name}</strong><p>{ELEMENT_LABELS[skill.element]}属性 ／ 消費SP {skill.spCost}</p><p>条件：{conditionLabel(skill)}</p><p>対象：{TARGET_LABELS[skill.target]}</p><p>{skill.description}</p></article>)}
+      <h3>スキル発動優先順</h3><p>優先1から順に判定し、条件とSPを満たす最初のスキルが発動します。</p>{detail.skills.length === 0 && <p>スキル未設定</p>}
+      {detail.skills.map((skill, index) => <article className="rq-detail-item" key={skill.id}><strong>優先{index + 1}：{skill.name}</strong><p>{ELEMENT_LABELS[skill.element]}属性 ／ 消費SP {skill.spCost}</p><p>条件：{conditionLabel(skill)}</p><p>対象：{TARGET_LABELS[skill.target]}</p><p>{skill.description}</p></article>)}
       <h3>パッシブ</h3>{detail.passives.map(passive => <article className="rq-detail-item" key={passive.id}><strong>{passive.name} Lv.{passive.level ?? 0}</strong><p>{passive.target === 'party' ? 'パーティ全体' : '自身'}の{passive.stat.toUpperCase()} +{Math.round(passive.percent)}%</p></article>)}
     </CanonicalDialog>}
   </div>;

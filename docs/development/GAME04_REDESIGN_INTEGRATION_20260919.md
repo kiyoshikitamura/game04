@@ -1,6 +1,6 @@
 # GAME04 全面改修・統合記録
 
-本書前半は初回配信の履歴。現在の追加実装・適用・未受入範囲は末尾の「確定残件接続」を優先する。
+本書前半は初回配信の履歴。現在の追加実装・適用・未受入範囲は各追加工程と進捗JSONを参照する。戦闘共通ルールは9/20正本が旧SP・BURST・効果等の記述に優先し、今回の実装受入は `GAME04_BATTLE_COMMON_INTEGRATION_20260920.md` に分離する。
 
 基準: `7369f3dbaf3ef454c33932df55ee308e0b7718cb` / `codex/game04-upstream-20260918`。
 正本: docs/product の 2026-09-19 Planning / Implementation / Battle / Home / Quest / Growth / Raid。
@@ -77,3 +77,13 @@ Present実API最終確認: Character/Skill/Equipment各2個を各同時2claimし
 ## 2026-09-20 領土侵攻の仕様追加（実装なし）
 
 新正本：`docs/product/GAME04_TERRITORY_INVASION_AUTHORITY_2026-09-20.md`。TI-01〜05を未着手として追加。M5-06/M9-03/M4-06/MS-03の既存実装報告は維持し、新機能の実装完了と混同しない。今回の差分は文書・進捗データのみ。
+
+上段は仕様追加時の履歴。領土侵攻はその後、実装 `a743043`／Preview確認 `f539ba0`／記録更新 `06a9bd8` で限定受入を反映済み。DB Migration 20260919151837／20260919152135、Edge v5。詳細は `GAME04_TERRITORY_IMPLEMENTATION_20260920.md` と進捗JSON `territoryUpdates` を参照する。
+
+## 2026-09-20 戦闘共通ルール完成版の接続
+
+作業基準 `06a9bd8953ab02a475d58abe4efe9e9ee9dde2fc`、正本統合 `9c24e211eeab98030994001078dfcf83f5140f26`。最優先正本 `docs/product/GAME04_BALANCE_AUTHORITY_V1_2026-09-20.md` を使用する。
+
+キャラSP合算→共通SP400、独立バーストゲージ200、装備枠順、条件・効果・敵連続行動・死亡蘇生・Wave保持・300行動上限を対象に実装着手。開始済み戦闘の旧ルールと領土侵攻・報酬等の既存成果を保持する。正式数値は未FIXのままとし、戦闘ルール実装／UI接続／Preview受入／正式数値・バランス受入を分離する。
+
+本工程のSHA・検証・DB／Edge・Preview反映は `GAME04_BATTLE_COMMON_INTEGRATION_20260920.md` と進捗JSON `battleCommonUpdates` を参照。過去のM2配信履歴を新ルールの受入実績に読み替えない。

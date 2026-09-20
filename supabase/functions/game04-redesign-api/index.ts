@@ -8407,7 +8407,8 @@ var game04_master_assets_default = {
 
 // src/domain/redesign/masters.ts
 var ELEMENTS = ["fire", "water", "earth", "wind", "light", "dark"];
-var BATTLE_RULES = { defenseFactor: 0.45, advantageMultiplier: 1.5, disadvantageMultiplier: 0.75, spRecoveryDivisor: 120, burstLukDivisor: 20, enemySpRecoveryDivisor: 30, maxPlayerActions: 300, initialSpRatio: 0 };
+var LEGACY_BATTLE_RULES = { defenseFactor: 0.45, advantageMultiplier: 1.5, disadvantageMultiplier: 0.75, spRecoveryDivisor: 120, burstLukDivisor: 20, enemySpRecoveryDivisor: 30, maxPlayerActions: 300, initialSpRatio: 0 };
+var BATTLE_RULES = { ...LEGACY_BATTLE_RULES, version: "common-v2-20260920", defenseFactor: 1 };
 var power = { N: 1, R: 1.08, SR: 1.16, SSR: 1.24 };
 var image = (id) => game04_master_assets_default.assets.find((a) => a.id === id)?.path ?? "/menu/event_banner_placeholder.png";
 var name = (id) => sengoku_masters_default[id] ?? id;
@@ -8424,11 +8425,37 @@ var CHARACTER_MASTERS = sengoku_characters_default.map((c, i) => {
     passive: { id: `passive_${c.characterId}`, name: ["\u6B66\u52C7\u306E\u5FC3\u5F97", "\u5B88\u52E2\u306E\u5FC3\u5F97", "\u6148\u611B\u306E\u5FC3\u5F97", "\u9663\u5F62\u306E\u5FC3\u5F97", "\u6A5F\u7565\u306E\u5FC3\u5F97"][i % 5], stat: ["atk", "def", "hp", "sp", "luk"][i % 5], percent: 2, target: "party" }
   };
 });
-var SKILL_MASTERS = skills_20260821_default.skills.filter((s) => !s.exclusive_character_id).map((s, i) => {
+var LEGACY_SKILL_MASTERS = skills_20260821_default.skills.filter((s) => !s.exclusive_character_id).map((s, i) => {
   const kind = i % 8, rarity = s.rarity, f = power[rarity];
   const effect = kind === 1 ? [{ type: "def_up", power: 20, duration: 3, carryAcrossWaves: false }] : kind === 2 ? [{ type: "heal", power: 120 * f }] : kind === 3 ? [{ type: "poison", power: 15, duration: 3, carryAcrossWaves: false }] : kind === 4 ? [{ type: "atk_up", power: 20, duration: 3, carryAcrossWaves: true }] : kind === 5 ? [{ type: "revive", power: 30 }] : kind === 6 ? [{ type: "def_down", power: 25, duration: 3, carryAcrossWaves: false }] : [{ type: "damage", power: (kind === 7 ? 90 : 180) * f }];
   return { id: s.skill_id, name: name(s.skill_id), image: image(s.skill_id), rarity, element: ELEMENTS[i % 6], spCost: 24 + i % 4 * 8, condition: kind === 2 ? { type: "ally_hp_below", value: 0.65 } : kind === 5 ? { type: "ally_dead" } : { type: "always" }, target: kind === 1 || kind === 4 ? "all_allies" : kind === 2 ? "lowest_ally" : kind === 5 ? "dead_ally" : kind === 7 ? "all_enemies" : "lowest_hp", effects: effect, description: ["\u6575\u5358\u4F53\u3078\u5C5E\u6027\u653B\u6483", "\u5473\u65B9\u5168\u4F53\u306E\u5B88\u5099\u3092\u5F37\u5316", "\u50B7\u3064\u3044\u305F\u5473\u65B9\u3092\u56DE\u5FA9", "\u6575\u306B\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8", "\u5473\u65B9\u5168\u4F53\u306E\u653B\u6483\u3092\u5F37\u5316", "\u6226\u95D8\u4E0D\u80FD\u306E\u5473\u65B9\u3092\u8607\u751F", "\u6575\u306E\u5B88\u5099\u3092\u4F4E\u4E0B", "\u6575\u5168\u4F53\u3078\u5C5E\u6027\u653B\u6483"][kind] };
 });
+function commonPreviewSkill(skill) {
+  const unsupported = skill.effects.some((e) => e.type === "poison" || e.type === "sp");
+  return {
+    ...structuredClone(skill),
+    ...unsupported ? { unsupportedReason: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u30FBSP\u88DC\u5145\u306F\u5171\u901A\u30EB\u30FC\u30EB\u672AFIX\u306E\u305F\u3081\u65B0\u6226\u95D8\u3067\u306F\u767A\u52D5\u4FDD\u7559" } : {},
+    effects: skill.effects.filter((e) => e.type !== "poison" && e.type !== "sp").map((e) => ({
+      ...e,
+      ...e.type === "heal" ? { healingFormula: e.healingFormula ?? "caster_atk_percent" } : {},
+      ...e.type === "revive" ? { healingFormula: e.healingFormula ?? "target_max_hp_percent" } : {},
+      ...e.duration ? { carryAcrossWaves: true } : {}
+    })),
+    description: unsupported ? "\u3010\u767A\u52D5\u4FDD\u7559\u30FB\u672AFIX\u3011\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\uFF0FSP\u88DC\u5145\u306E\u8A73\u7D30\u30EB\u30FC\u30EB\u5F85\u3061" : `${skill.description}\uFF08\u500B\u5225\u500D\u7387\u30FB\u6D88\u8CBBSP\u30FB\u56DE\u5FA9\u5F0F\u306F\u958B\u767A\u4EEE\u8A2D\u5B9A\uFF09`
+  };
+}
+var SKILL_MASTERS = LEGACY_SKILL_MASTERS.map(commonPreviewSkill);
+function prepareBattleWaves(waves, rules) {
+  const frozen = structuredClone(waves);
+  if (rules.version !== "common-v2-20260920") return frozen;
+  return frozen.map((wave) => wave.map((enemy2) => ({
+    ...enemy2,
+    hitSpGain: enemy2.hitSpGain ?? 5,
+    skills: enemy2.skills.map(commonPreviewSkill),
+    passives: enemy2.passives.filter((p) => p.stat === "atk" || p.stat === "def"),
+    phases: enemy2.phases?.map((phase) => ({ ...phase, skills: phase.skills?.map(commonPreviewSkill) }))
+  })));
+}
 var EQUIPMENT_MASTERS = equipment_20260821_default.equipments.filter((e) => !e.exclusive_character_id).map((e) => {
   const rarity = e.rarity, f = power[rarity], slot = e.category === "WEAPON" ? "weapon" : e.category === "HEAD" ? "head" : e.category === "BODY" ? "body" : e.category === "LEGS" ? "legs" : "accessory1";
   return { id: e.equipment_id, name: name(e.equipment_id), image: image(e.equipment_id), rarity, slot, stats: { hp: slot === "body" ? Math.round(80 * f) : 0, sp: slot === "accessory1" ? 5 : 0, atk: slot === "weapon" ? Math.round(16 * f) : 0, def: slot === "head" || slot === "legs" ? Math.round(8 * f) : 0, luk: slot === "accessory1" ? 3 : 0 } };
@@ -8442,7 +8469,7 @@ function getCharacterStats(master, level, awakening) {
 function getEquipmentStats(master, level, lb) {
   return Object.fromEntries(Object.entries(master.stats).map(([k, v]) => [k, Math.round(v * (1 + (Math.max(1, level) - 1) * 0.04) * (1 + lb * 0.1))]));
 }
-function buildBattleParty(state) {
+function buildBattleParty(state, rules = BATTLE_RULES) {
   return state.deck.map((member) => {
     const owned = state.characters.find((c) => c.id === member.characterId), master = CHARACTER_MASTERS.find((c) => c.id === member.characterId);
     if (!owned || !master) throw new Error("\u7DE8\u6210\u30AD\u30E3\u30E9\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093");
@@ -8455,10 +8482,10 @@ function buildBattleParty(state) {
       }
     }
     return { id: master.id, name: master.name, image: master.image, level: owned.level, element: master.element, stats, skills: member.skillIds.slice(0, getSkillSlots(owned.awakening)).map((id) => {
-      const s = SKILL_MASTERS.find((s2) => s2.id === id), o = state.skills.find((s2) => s2.id === id);
+      const s = (rules.version === "common-v2-20260920" ? SKILL_MASTERS : LEGACY_SKILL_MASTERS).find((s2) => s2.id === id), o = state.skills.find((s2) => s2.id === id);
       if (!s || !o) throw new Error("\u672A\u6240\u6301\u306E\u30B9\u30AD\u30EB\u3067\u3059");
       return { ...s, effects: s.effects.map((e) => ({ ...e, power: e.power * (1 + o.level * 0.05) })) };
-    }), passives: [{ ...master.passive, level: owned.awakening * 2, percent: master.passive.percent * (1 + owned.awakening * 2) }] };
+    }), passives: rules.version !== "common-v2-20260920" || master.passive.stat === "atk" || master.passive.stat === "def" ? [{ ...master.passive, level: owned.awakening * 2, percent: master.passive.percent * (1 + owned.awakening * 2) }] : [] };
   });
 }
 function createInitialState(userId) {
@@ -8699,6 +8726,7 @@ function enemy(area, stage, wave, slot, boss2) {
     stats: { hp: Math.round((boss2 ? 1100 : 370) * growth), sp: boss2 ? 80 : 40, atk: Math.round((boss2 ? 100 : 55) * growth), def: Math.round((area === 2 ? 55 : 15) * growth), luk: 10 + rank },
     skills,
     passives: [],
+    hitSpGain: 5,
     actionCount: boss2 ? 3 : 4 + slot % 2,
     order: slot,
     boss: boss2,
@@ -8777,7 +8805,7 @@ function getClaimableMission(state, config, id) {
   return config.missions.find((master) => master.id === id);
 }
 
-// src/domain/redesign/battle.ts
+// src/domain/redesign/battleLegacy.ts
 var advantage = { fire: "wind", wind: "earth", earth: "water", water: "fire", light: "dark", dark: "light" };
 function elementMultiplier(attack2, defend, rules) {
   if (advantage[attack2] === defend) return rules.advantageMultiplier;
@@ -9029,10 +9057,478 @@ function simulateBattle(input) {
   return { seed: input.seed, outcome, totalDamage, playerActions, wavesCleared, party: input.party, waves: input.waves, frames, analysis };
 }
 
+// src/domain/redesign/battle.ts
+var advantage2 = { fire: "wind", wind: "earth", earth: "water", water: "fire", light: "dark", dark: "light" };
+function elementMultiplier2(a, d, rules) {
+  return advantage2[a] === d ? rules.advantageMultiplier : advantage2[d] === a ? rules.disadvantageMultiplier : 1;
+}
+var COMMON_BATTLE_VERSION = "common-v2-20260920";
+var commonBurstChance = (luk) => Math.min(0.8, 0.5 + Math.max(0, Math.min(100, luk)) * 3e-3);
+var commonSpGain = (luk, basic) => Math.floor((basic ? 20 : 10) * (1 + Math.max(0, Math.min(100, luk)) / 200));
+function commonDamage(atk, def, power2, element, random) {
+  return Math.max(1, Math.floor((atk * power2 / 100 - def) * element * (0.9 + random * 0.2)));
+}
+function splitDisplayDamage(total, hits) {
+  const n = Math.max(1, Math.floor(hits));
+  return Array.from({ length: n }, (_, i) => Math.floor(total / n) + Number(i < total % n));
+}
+function simulateBattle2(input) {
+  if (input.rules.version === COMMON_BATTLE_VERSION)
+    return simulateCommonBattle(input);
+  if (input.rules.version && input.rules.version !== "legacy-v1")
+    throw new Error("Unsupported battle rules version");
+  return simulateBattle(input);
+}
+function simulateCommonBattle(input) {
+  if (!input.party.length || input.party.length > 5 || !input.waves.length || input.waves.length > 5 || input.waves.some((w) => !w.length || w.length > 3))
+    throw new Error("Invalid battle formation");
+  if (new Set(input.party.map((u) => u.id)).size !== input.party.length)
+    throw new Error("Duplicate party member");
+  const validateCondition = (c) => {
+    if (!["always", "hp_below", "ally_hp_below", "every_n_actions", "enemy_count", "ally_dead"].includes(c.type)) throw new Error("Unsupported skill condition");
+    if (c.value !== void 0 && !Number.isFinite(c.value)) throw new Error("Invalid condition value");
+    if (["every_n_actions", "enemy_count"].includes(c.type) && (c.value === void 0 || !Number.isInteger(c.value) || c.value < 1)) throw new Error("Invalid condition count");
+    if (["hp_below", "ally_hp_below"].includes(c.type) && c.value !== void 0 && (c.value < 0 || c.value > 1)) throw new Error("Invalid HP condition ratio");
+  };
+  const validateEffect = (e) => {
+    if (!["damage", "heal", "revive", "atk_up", "def_up", "atk_down", "def_down", "stun"].includes(e.type))
+      throw new Error(`Unapproved common-v2 effect: ${e.type}`);
+    if (e.duration !== void 0 && (!Number.isInteger(e.duration) || e.duration < 1))
+      throw new Error("Invalid effect duration");
+    if (e.displayHits !== void 0 && (!Number.isInteger(e.displayHits) || e.displayHits < 1 || e.displayHits > 100))
+      throw new Error("Invalid display hit count");
+    if (!Number.isFinite(e.power) || e.power < 0)
+      throw new Error("Invalid effect power");
+    if ((e.type === "heal" || e.type === "revive") && !["caster_atk_percent", "target_max_hp_percent"].includes(e.healingFormula ?? ""))
+      throw new Error("Explicit provisional healingFormula required");
+    if (e.type === "stun" && e.chance === void 0)
+      throw new Error("Explicit provisional stun chance required");
+    if (e.chance !== void 0 && (!Number.isFinite(e.chance) || e.chance < 0 || e.chance > 1))
+      throw new Error("Invalid effect chance");
+  };
+  for (const u of [...input.party, ...input.waves.flat()]) {
+    for (const value of ["hp", "sp", "atk", "def", "luk"].map((k) => u.stats[k]))
+      if (!Number.isFinite(value) || value < 0)
+        throw new Error("Invalid battle stats");
+    if (u.stats.hp <= 0)
+      throw new Error("Invalid HP");
+    for (const p of u.passives) {
+      if (p.condition) validateCondition(p.condition);
+      if (!Number.isFinite(p.percent) || p.percent < 0)
+        throw new Error("Invalid passive strength");
+      if (!["atk", "def"].includes(p.stat))
+        throw new Error(`Unapproved v2 passive stat: ${p.stat}`);
+    }
+    for (const s of [...u.skills, ...(u.phases ?? []).flatMap((p) => p.skills ?? [])]) {
+      validateCondition(s.condition);
+      if (!Number.isFinite(s.spCost) || s.spCost < 0 || input.waves.flat().includes(u) && s.spCost < 1)
+        throw new Error("Invalid active skill SP cost");
+      if (s.effects.filter((e) => e.type === "damage").length > 1)
+        throw new Error("Independent multiple attacks need additional authority");
+      s.effects.forEach(validateEffect);
+    }
+    u.deathEffects?.forEach(validateEffect);
+  }
+  for (const wave2 of input.waves) {
+    if (new Set(wave2.map((u) => u.id)).size !== wave2.length)
+      throw new Error("Duplicate enemy id");
+    for (const e of wave2) {
+      if (e.initialCount !== void 0 && (!Number.isInteger(e.initialCount) || e.initialCount < 1))
+        throw new Error("Invalid enemy initial count");
+      for (const p of e.phases ?? [])
+        if (!Number.isFinite(p.hpBelow) || p.hpBelow < 0 || p.hpBelow > 1 || p.actionCount !== void 0 && (!Number.isInteger(p.actionCount) || p.actionCount < 1) || p.maxSp !== void 0 && (!Number.isFinite(p.maxSp) || p.maxSp < 0))
+          throw new Error("Invalid phase master");
+      if (!Number.isFinite(e.hitSpGain) || e.hitSpGain < 0 || !Number.isInteger(e.actionCount) || e.actionCount < 1)
+        throw new Error("Explicit enemy hitSpGain and positive actionCount required");
+    }
+  }
+  let seed = input.seed >>> 0;
+  const random = () => {
+    seed += 1831565813;
+    let t = seed;
+    t = Math.imul(t ^ t >>> 15, t | 1);
+    t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+  const make = (u, enemy2) => {
+    const e = u;
+    return { ...u, stats: { ...u.stats }, skills: [...u.skills], hp: u.stats.hp, sp: enemy2 ? u.stats.sp : 0, count: enemy2 ? e.initialCount ?? e.actionCount : 0, resetCount: e.actionCount, initialCount: e.initialCount ?? e.actionCount, order: e.order ?? 0, enemy: enemy2, actions: 0, statuses: [], phase: null, phaseIndex: -1, phases: e.phases, dead: false, deaths: 0, usedDeath: /* @__PURE__ */ new Set(), immune: false, passive: { atk: 0, def: 0 }, hitSpGain: e.hitSpGain ?? 0, pendingSp: 0, inBlock: false, revivedAt: -1 };
+  };
+  const party = input.party.map((u) => make(u, false));
+  let wave = 0, enemies = input.waves[0].map((u) => make(u, true));
+  let partySp = 0, gauge = 0, playerActions = 0, serial = 0, totalDamage = 0, wavesCleared = 0, burst = false, ended = null, reason = "";
+  const frames = [];
+  const analysis = party.map((u) => ({ id: u.id, name: u.name, damage: 0, healing: 0, spGenerated: 0, actions: 0, skills: 0, bursts: 0 }));
+  const side = (u) => u.enemy ? enemies : party;
+  const opposite = (u) => u.enemy ? party : enemies;
+  const alive = (u) => u.hp > 0;
+  const sum = (u, type) => u.statuses.filter((s) => s.type === type).reduce((n, s) => n + s.power, 0);
+  const stat = (u, key2) => u.stats[key2] * (1 + u.passive[key2] / 100) * (1 + Math.min(sum(u, `${key2}_up`), key2 === "atk" ? 50 : 100) / 100 - Math.min(sum(u, `${key2}_down`), key2 === "atk" ? 30 : 50) / 100);
+  const snapshot = (u) => ({ id: u.id, hp: u.hp, maxHp: u.stats.hp, sp: u.sp, maxSp: u.stats.sp, count: u.count, actions: u.actions, statuses: u.statuses.map((s) => ({ ...s })), phase: u.phase, image: u.image, stunImmune: u.immune, dead: u.dead, effectiveAtk: stat(u, "atk"), effectiveDef: stat(u, "def"), skills: u.phase ? u.skills : void 0 });
+  const frame = (kind, text, u, skill, extra = {}) => frames.push({ index: frames.length, wave: wave + 1, kind, text, actorId: u?.id, skillId: skill?.id, partySp, maxSp: 400, burst, party: party.map(snapshot), enemies: enemies.map(snapshot), burstGauge: gauge, maxBurstGauge: 200, playerActions, remainingActions: 300 - playerActions, skillStates: Object.fromEntries([...party, ...enemies].map((unit) => [unit.id, unit.skills.map((s) => ({ skillId: s.id, cost: Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)), status: extra.event === "action_start" && unit === u && s === skill ? "active" : !alive(unit) || !usable(unit, s) ? "condition_unmet" : Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)) > (unit.enemy ? unit.sp : partySp) ? "insufficient_sp" : "ready", reason: s.unsupportedReason }))])), ...extra });
+  const condition = (u, c) => {
+    const v = c.value ?? 0.5;
+    switch (c.type) {
+      case "hp_below":
+        return u.hp / u.stats.hp <= v;
+      case "ally_hp_below":
+        return side(u).some((t) => alive(t) && t.hp / t.stats.hp <= v);
+      case "ally_dead":
+        return side(u).some((t) => !alive(t));
+      case "enemy_count":
+        return opposite(u).filter(alive).length >= v;
+      case "every_n_actions":
+        return (u.actions + 1) % Math.max(1, v) === 0;
+      default:
+        return true;
+    }
+  };
+  const passiveConditions = /* @__PURE__ */ new WeakMap();
+  const passives = (reevaluate = true) => {
+    if (reevaluate)
+      for (const owner of [...party, ...enemies])
+        passiveConditions.set(owner, new Map(owner.passives.map((p) => [p.id, !p.condition || condition(owner, p.condition)])));
+    for (const list of [party, enemies])
+      for (const target of list) {
+        const best = /* @__PURE__ */ new Map();
+        for (const owner of list.filter(alive))
+          for (const p of owner.passives)
+            if ((p.target === "party" || owner === target) && (passiveConditions.get(owner)?.get(p.id) ?? false)) {
+              const old = best.get(p.id);
+              if (!old || p.percent > old.percent)
+                best.set(p.id, { stat: p.stat, percent: p.percent });
+            }
+        target.passive = { atk: 0, def: 0 };
+        for (const p of best.values())
+          target.passive[p.stat] += p.percent;
+        target.passive.atk = Math.min(50, target.passive.atk);
+        target.passive.def = Math.min(50, target.passive.def);
+      }
+  };
+  let applyingSkill = false;
+  const applicable = (t, e, skillId) => {
+    if (e.type === "revive")
+      return !alive(t);
+    if (!alive(t))
+      return false;
+    if (e.type === "stun")
+      return !t.immune && !t.statuses.some((s) => s.type === "stun");
+    if (["atk_up", "def_up", "atk_down", "def_down"].includes(e.type)) {
+      const cap = e.type === "atk_up" ? 50 : e.type === "def_up" ? 100 : e.type === "atk_down" ? 30 : 50;
+      return !t.statuses.some((s) => s.sourceSkillId === skillId && !(applyingSkill && s.appliedAction === serial && s.type !== e.type)) && sum(t, e.type) < cap;
+    }
+    return true;
+  };
+  const select = (u, target, candidates, preview = false) => {
+    let list = candidates ?? (["self", "lowest_ally", "all_allies", "dead_ally"].includes(target) ? side(u) : opposite(u)).filter((t) => target === "dead_ally" ? !alive(t) : alive(t));
+    if (target === "self")
+      return list.includes(u) ? [u] : [];
+    if (target === "all_allies" || target === "all_enemies")
+      return list;
+    if (target === "lowest_hp")
+      list = [...list].sort((a, b) => a.hp - b.hp);
+    if (target === "highest_hp")
+      list = [...list].sort((a, b) => b.hp - a.hp);
+    if (target === "lowest_ally" || target === "lowest_hp_ratio")
+      list = [...list].sort((a, b) => a.hp / a.stats.hp - b.hp / b.stats.hp);
+    if (target === "highest_hp_ratio")
+      list = [...list].sort((a, b) => b.hp / b.stats.hp - a.hp / a.stats.hp);
+    if (target === "random" && list.length && !preview)
+      return [list[Math.floor(random() * list.length)]];
+    return list.slice(0, 1);
+  };
+  const effectTargets = (u, skill, e, selected, preview = false) => {
+    const rule = e.target && e.target !== "selected" ? e.target : skill.target;
+    if (e.type === "heal") {
+      if (selected && (!e.target || e.target === "selected"))
+        return selected.filter(alive);
+      const living = side(u).filter(alive);
+      if (rule === "self")
+        return alive(u) ? [u] : [];
+      if (rule === "all_allies")
+        return living.filter((t) => t.hp / t.stats.hp <= 0.6).length >= Math.ceil(living.length / 2) ? living : [];
+      return select(u, "lowest_ally", living.filter((t) => t.hp / t.stats.hp <= 0.5), preview);
+    }
+    if (selected && (!e.target || e.target === "selected"))
+      return selected.filter((t) => applicable(t, e, skill.id));
+    const all = ["self", "lowest_ally", "all_allies", "dead_ally"].includes(rule) ? side(u) : opposite(u);
+    return select(u, rule, all.filter((t) => applicable(t, e, skill.id)), preview);
+  };
+  const usable = (u, s) => !s.unsupportedReason && condition(u, s.condition) && s.effects.some((e) => effectTargets(u, s, e, void 0, true).length > 0);
+  const choose = (u, discount = 1) => u.skills.find((s) => usable(u, s) && Math.ceil(s.spCost * discount) <= (u.enemy ? u.sp : partySp));
+  const basic = (u) => ({ id: "basic", name: "\u901A\u5E38\u653B\u6483", image: "", rarity: "N", element: u.element, spCost: 0, condition: { type: "always" }, target: "first", effects: [{ type: "damage", power: 100 }], description: "" });
+  const applyEffect = (u, targets, e, skill) => {
+    const plans = targets.filter((t) => applicable(t, e, skill.id)).map((t) => {
+      const success = e.chance === void 0 || random() < e.chance;
+      const amount = e.type === "damage" ? commonDamage(stat(u, "atk"), stat(t, "def"), e.power, elementMultiplier2(skill.element, t.element, { ...input.rules, advantageMultiplier: 1.5, disadvantageMultiplier: 0.75 }), random()) : e.type === "heal" || e.type === "revive" ? Math.max(0, Math.floor((e.healingFormula === "caster_atk_percent" ? stat(u, "atk") : t.stats.hp) * e.power / 100)) : e.power;
+      return { t, success, amount };
+    });
+    for (const { t, success, amount } of plans) {
+      if (!success) {
+        frame("action", `${t.name}\uFF1A${e.type} \u4E0D\u6210\u7ACB`, u, skill, { event: "effect_miss", targetIds: [t.id] });
+        continue;
+      }
+      if (e.type === "damage") {
+        const actual = Math.min(t.hp, amount);
+        t.hp -= actual;
+        if (!u.enemy && t.enemy) {
+          totalDamage += amount;
+          const a = analysis.find((a2) => a2.id === u.id);
+          if (a)
+            a.damage += amount;
+        }
+        if (t.enemy && actual > 0) {
+          if (t.inBlock)
+            t.pendingSp += t.hitSpGain;
+          else
+            t.sp = Math.min(t.stats.sp, t.sp + t.hitSpGain);
+        }
+        frame(u.enemy ? "enemy" : "action", `${t.name} \u2212${amount}`, u, skill, { event: "damage", targetIds: [t.id], hits: splitDisplayDamage(amount, e.displayHits ?? 1) });
+      } else if (e.type === "heal" || e.type === "revive") {
+        const actual = Math.min(t.stats.hp - t.hp, amount);
+        t.hp += actual;
+        if (e.type === "revive" && t.hp > 0) {
+          t.dead = false;
+          if (t.enemy) {
+            t.sp = 0;
+            t.count = t.initialCount;
+            t.revivedAt = serial;
+          }
+        }
+        const a = analysis.find((a2) => a2.id === u.id);
+        if (a)
+          a.healing += actual;
+        frame("action", `${t.name} ${e.type === "revive" ? "\u8607\u751F" : "\u56DE\u5FA9"} +${actual}`, u, skill, { event: e.type, targetIds: [t.id] });
+      } else {
+        t.statuses.push({ type: e.type, power: e.power, remaining: e.type === "stun" ? 1 : e.duration ?? 3, carry: true, sourceId: u.id, sourceEnemy: u.enemy, sourceSkillId: skill.id, appliedAction: serial });
+        frame("action", `${t.name}\uFF1A${e.type} \u4ED8\u4E0E`, u, skill, { event: "effect_applied", targetIds: [t.id] });
+      }
+    }
+  };
+  const deaths = (attacker) => {
+    const queue = [];
+    const collect = (cause = attacker) => {
+      for (const u of [...side(cause), ...opposite(cause)])
+        if (u.hp <= 0 && !u.dead) {
+          u.dead = true;
+          u.deaths++;
+          u.statuses = [];
+          u.immune = false;
+          u.sp = 0;
+          u.pendingSp = 0;
+          u.count = 0;
+          frame("action", `${u.name} \u6226\u95D8\u4E0D\u80FD`, u, void 0, { event: "death" });
+          for (let index = 0; index < (u.deathEffects?.length ?? 0); index++)
+            if (!u.usedDeath.has(index)) {
+              u.usedDeath.add(index);
+              queue.push({ u, effect: u.deathEffects[index], index });
+            }
+        }
+    };
+    collect();
+    passives(false);
+    while (queue.length) {
+      const { u, effect, index } = queue.shift();
+      const s = { ...basic(u), id: `death:${u.id}:${index}`, effects: [effect] };
+      const targets = effect.target ? effectTargets(u, { ...s, target: effect.target === "selected" ? "first" : effect.target }, effect) : effect.type === "revive" ? [u] : ["damage", "atk_down", "def_down", "stun"].includes(effect.type) ? opposite(u) : side(u);
+      applyEffect(u, targets, effect, s);
+      collect(u);
+      passives(false);
+    }
+  };
+  const check = () => {
+    if (!party.some(alive)) {
+      ended = "lose";
+      reason = enemies.some(alive) ? "party_defeated" : "mutual_annihilation";
+    } else if (!enemies.some(alive) && wave === input.waves.length - 1) {
+      ended = "win";
+      reason = "final_wave_defeated";
+    }
+  };
+  const phases = () => {
+    for (const u of enemies.filter(alive)) {
+      const next = u.phaseIndex + 1, p = u.phases?.[next];
+      if (p && u.hp / u.stats.hp <= p.hpBelow) {
+        u.phaseIndex = next;
+        u.phase = p.name;
+        if (p.image)
+          u.image = p.image;
+        if (p.skills)
+          u.skills = [...p.skills];
+        if (p.actionCount !== void 0)
+          u.resetCount = p.actionCount;
+        if (p.maxSp !== void 0) {
+          u.stats.sp = p.maxSp;
+          u.sp = Math.min(u.sp, p.maxSp);
+        }
+        frame("phase", `${u.name}\uFF1A${p.name}`, u, void 0, { event: "phase" });
+      }
+    }
+  };
+  const act = (u, skill, discount) => {
+    serial++;
+    if (serial > 1e5)
+      throw new Error("Battle execution safety guard exceeded");
+    if (!u.enemy)
+      playerActions++;
+    const beforeSp = partySp, beforeGauge = gauge;
+    const cost = Math.ceil(skill.spCost * discount);
+    if (u.enemy)
+      u.sp -= cost;
+    else
+      partySp -= cost;
+    frame(u.enemy ? "enemy" : "action", `${u.name} \xB7 ${skill.name} SP \u2212${cost}`, u, skill, { event: "action_start" });
+    const main = skill.effects.find((e) => (!e.target || e.target === "selected") && effectTargets(u, skill, e, void 0, true).length > 0);
+    const selected = main ? effectTargets(u, skill, main) : void 0;
+    applyingSkill = true;
+    for (const e of skill.effects)
+      applyEffect(u, effectTargets(u, skill, e, selected), e, skill);
+    applyingSkill = false;
+    deaths(u);
+    check();
+    if (!ended && enemies.some(alive))
+      phases();
+    u.actions++;
+    for (const s of u.statuses)
+      if (s.type !== "stun" && s.appliedAction !== serial)
+        s.remaining--;
+    for (const s of u.statuses.filter((s2) => s2.remaining <= 0))
+      frame("action", `${u.name}\uFF1A${s.type} \u7D42\u4E86`, u, skill, { event: "effect_expired" });
+    u.statuses = u.statuses.filter((s) => s.remaining > 0);
+    u.immune = false;
+    if (!u.enemy) {
+      const a = analysis.find((a2) => a2.id === u.id);
+      a.actions++;
+      a.skills += Number(skill.id !== "basic");
+      if (!burst) {
+        const gain = commonSpGain(u.stats.luk, skill.id === "basic");
+        partySp = Math.min(400, partySp + gain);
+        gauge = Math.min(200, gauge + gain);
+        a.spGenerated += gain;
+      }
+    }
+    passives();
+    frame(u.enemy ? "enemy" : "action", `${u.name} \u884C\u52D5\u5B8C\u4E86`, u, skill, { event: "action_end", spDelta: partySp - beforeSp, gaugeDelta: gauge - beforeGauge });
+  };
+  const stunned = (u) => u.statuses.some((s) => s.type === "stun");
+  const skip = (u) => {
+    serial++;
+    if (!u.enemy)
+      playerActions++;
+    u.statuses = u.statuses.filter((s) => s.type !== "stun");
+    u.immune = true;
+    frame(u.enemy ? "enemy" : "action", `${u.name} \u884C\u52D5\u4E0D\u80FD\uFF1A\u30B9\u30AD\u30C3\u30D7\u30FB\u518D\u4ED8\u4E0E\u8010\u6027`, u, void 0, { event: "stun_skip" });
+  };
+  const interrupts = () => {
+    for (const e of enemies.filter(alive))
+      if (e.revivedAt !== serial)
+        e.count--;
+    frame("enemy", "\u6575\u306E\u884C\u52D5\u30AB\u30A6\u30F3\u30C8\u66F4\u65B0", void 0, void 0, { event: "counts" });
+    const due = enemies.filter((e) => alive(e) && e.count <= 0).sort((a, b) => a.order - b.order).map((e) => ({ e, deaths: e.deaths }));
+    for (const entry of due) {
+      const u = entry.e;
+      if (!alive(u) || u.deaths !== entry.deaths || ended || !enemies.some(alive))
+        continue;
+      frame("enemy", `${u.name} \u5272\u8FBC\u307F`, u, void 0, { event: "interrupt_start" });
+      if (stunned(u))
+        skip(u);
+      else {
+        u.inBlock = true;
+        const blockDeaths = u.deaths;
+        let skill = choose(u);
+        if (!skill)
+          act(u, basic(u), 1);
+        while (skill && alive(u) && u.deaths === blockDeaths && !ended && enemies.some(alive)) {
+          if (stunned(u)) {
+            skip(u);
+            break;
+          }
+          act(u, skill, 1);
+          if (!alive(u) || ended || stunned(u)) {
+            if (alive(u) && stunned(u) && !ended)
+              skip(u);
+            break;
+          }
+          skill = choose(u);
+        }
+        u.inBlock = false;
+        if (alive(u))
+          u.sp = Math.min(u.stats.sp, u.sp + u.pendingSp);
+        u.pendingSp = 0;
+      }
+      if (alive(u) && u.revivedAt !== serial)
+        u.count = u.resetCount;
+      frame("enemy", `${u.name} \u5272\u8FBC\u307F\u7D42\u4E86`, u, void 0, { event: "interrupt_end" });
+    }
+  };
+  passives();
+  frame("start", "\u5408\u6226\u958B\u59CB\uFF1A\u5171\u901ASP 0/400\u30FB\u30D0\u30FC\u30B9\u30C8\u30B2\u30FC\u30B8 0/200", void 0, void 0, { event: "start" });
+  let cursor = 0;
+  while (!ended) {
+    const u = party[cursor % party.length];
+    cursor++;
+    if (!alive(u))
+      continue;
+    let skipped = false;
+    if (stunned(u)) {
+      skip(u);
+      skipped = true;
+    } else {
+      if (gauge >= 200) {
+        gauge = 0;
+        burst = random() < commonBurstChance(u.stats.luk);
+        if (burst)
+          analysis.find((a) => a.id === u.id).bursts++;
+        frame("burst", burst ? `${u.name} BURST\uFF1A\u6700\u59275\u884C\u52D5` : `${u.name} BURST\u62BD\u9078\u5931\u6557`, u, void 0, { event: burst ? "burst_start" : "burst_failed" });
+      }
+      const deathCount = u.deaths, count = burst ? 5 : 1;
+      for (let n = 0; n < count; n++) {
+        if (stunned(u)) {
+          skip(u);
+          skipped = true;
+          frame("burst", "\u884C\u52D5\u4E0D\u80FD\u3067BURST\u4E2D\u65AD", u, void 0, { event: "burst_interrupted" });
+          break;
+        }
+        act(u, choose(u, burst ? 0.5 : 1) ?? basic(u), burst ? 0.5 : 1);
+        if (ended || !enemies.some(alive) || playerActions >= 300)
+          break;
+        interrupts();
+        if (ended || !alive(u) || u.deaths !== deathCount || !enemies.some(alive))
+          break;
+        if (burst && n < count - 1)
+          frame("burst", `${u.name} BURST\u518D\u958B`, u, void 0, { event: "burst_resume" });
+      }
+    }
+    if (burst) {
+      burst = false;
+      frame("burst", "BURST\u7D42\u4E86", u, void 0, { event: "burst_end" });
+    }
+    check();
+    if (!ended && playerActions >= 300) {
+      ended = "lose";
+      reason = "action_limit";
+    }
+    if (ended)
+      break;
+    if (!enemies.some(alive)) {
+      wavesCleared++;
+      wave++;
+      enemies = input.waves[wave].map((u2) => make(u2, true));
+      passives();
+      frame("wave", `WAVE ${wave + 1}\uFF1AHP\u30FBSP\u30FB\u30B2\u30FC\u30B8\u30FB\u72B6\u614B\u3092\u5F15\u7D99\u304E`, void 0, void 0, { event: "wave" });
+    } else if (skipped)
+      interrupts();
+  }
+  if (!enemies.some(alive))
+    wavesCleared++;
+  frame("end", ended === "win" ? "\u52DD\u5229" : reason === "action_limit" ? "300\u884C\u52D5\u4E0A\u9650\uFF1A\u6557\u5317" : "\u6557\u5317", void 0, void 0, { event: "end", reason });
+  return { seed: input.seed, outcome: ended, totalDamage, playerActions, wavesCleared, party: input.party, waves: input.waves, frames, analysis, rulesVersion: COMMON_BATTLE_VERSION, reason };
+}
+
 // src/domain/redesign/raid.ts
 var base = CHARACTER_MASTERS[12];
 var attack = SKILL_MASTERS.find((s) => s.effects.some((e) => e.type === "damage"));
-var boss = { id: "raid_boss", name: "\u708E\u5F71\u306E\u5B88\u5C06", image: base.image, level: 1, element: "fire", stats: { hp: 6500, sp: 110, atk: 160, def: 45, luk: 20 }, skills: [attack], passives: [], actionCount: 4, order: 0, boss: true, phases: [{ hpBelow: 0.4, name: "\u70C8\u706B\u306E\u9663", actionCount: 3 }] };
+var boss = { hitSpGain: 5, id: "raid_boss", name: "\u708E\u5F71\u306E\u5B88\u5C06", image: base.image, level: 1, element: "fire", stats: { hp: 6500, sp: 110, atk: 160, def: 45, luk: 20 }, skills: [attack], passives: [], actionCount: 4, order: 0, boss: true, phases: [{ hpBelow: 0.4, name: "\u70C8\u706B\u306E\u9663", actionCount: 3 }] };
 var RAID_MASTERS = [
   { id: "encounter_flame", name: "\u708E\u5F71\u306E\u5B88\u5C06", type: "encounter", enemy: boss, energyCost: 5, durationMinutes: 60, maxParticipants: 10, maxLevel: 1, appearanceLevels: [1], appearanceImages: {}, enemyGrowthPerLevel: 0.15, sharedHpGrowthPerLevel: 0.2, victoryMultiplier: 1.5, sharedHp: 15e4, participationRewards: [{ kind: "character_material", amount: 2 }], defeatRewards: [{ kind: "character_material", amount: 30 }] },
   { id: "unlock_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", type: "unlock", enemy: { ...boss, id: "raid_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", element: "dark", image: CHARACTER_MASTERS[24].image }, energyCost: 5, durationMinutes: 4320, maxParticipants: 20, maxLevel: 20, appearanceLevels: [1, 10, 20], appearanceImages: { 10: CHARACTER_MASTERS[30].image, 20: CHARACTER_MASTERS[36].image }, enemyGrowthPerLevel: 0.15, sharedHpGrowthPerLevel: 0.2, victoryMultiplier: 1.5, sharedHp: 2e5, participationRewards: [{ kind: "skill_material", amount: 2 }], defeatRewards: [{ kind: "skill_material", amount: 15 }, { kind: "equipment_material", amount: 5 }] }
@@ -9132,7 +9628,7 @@ function applyRaidAction(original, originalState, action, payload = {}, now = Da
 
 // src/domain/redesign/territory.ts
 var TERRITORY_MASTER = {
-  version: "PREVIEW_PROVISIONAL_20260920_v1",
+  version: "PREVIEW_PROVISIONAL_20260920_common_v2",
   status: "PREVIEW_PROVISIONAL",
   initialExp: 0,
   legacyMigrationExp: 0,
@@ -9143,7 +9639,7 @@ var TERRITORY_MASTER = {
     { id: "gifu", name: "\u5C90\u961C\u57CE\u3078\u306E\u4FB5\u653B", castle: "\u5C90\u961C\u57CE", difficulty: "\u4E0A\u4F4D", itemSource: "\u30AF\u30A8\u30B9\u30C8\u306E\u30EC\u30A2\u5831\u916C", raidMasterId: "unlock_shadow", requiredLevel: 2, itemName: "\u9818\u571F\u4FB5\u653B\u672D", itemId: "raid_unlock", itemCount: 1, durationMinutes: 4320, clearExp: 100 }
   ],
   battleRules: structuredClone(BATTLE_RULES),
-  raidMasters: structuredClone(RAID_MASTERS.filter((m) => m.type === "unlock"))
+  raidMasters: RAID_MASTERS.filter((m) => m.type === "unlock").map((master) => ({ ...structuredClone(master), enemy: prepareBattleWaves([[master.enemy]], BATTLE_RULES)[0][0] }))
 };
 function validateTerritoryMaster(master) {
   const natural = (v) => Number.isSafeInteger(v) && v >= 0;
@@ -9292,6 +9788,7 @@ async function responseFor(userId, extra = {}) {
   return { state, rooms, socialEvents, missions: evaluateMissions(state, missions), territory: projectTerritory(territory.master, territory.progress, territory.items, territory.activeHostingCount), pendingBattle: pending[0] ?? null, ...extra };
 }
 async function runBattle(userId, name2, payload, id, playerName) {
+  let preparedBattle;
   let [record] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=*`);
   if (record?.status === "settled") return responseFor(userId, record.result);
   if (!record) {
@@ -9320,11 +9817,16 @@ async function runBattle(userId, name2, payload, id, playerName) {
     }
     if (state.energy < cost) throw new ApiError("\u884C\u52D5\u529B\u304C\u8DB3\u308A\u307E\u305B\u3093\u3002");
     const seed = crypto.getRandomValues(new Uint32Array(1))[0];
-    const input = { seed, party: buildBattleParty(state), waves, rules: startRoom?.territorySnapshot?.battleRules ?? BATTLE_RULES, raidLevel };
+    const rules = startRoom?.territorySnapshot?.battleRules ?? BATTLE_RULES;
+    const input = { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel };
+    preparedBattle = simulateBattle2(input);
     await commit(state, { ...state, energy: state.energy - cost }, id, { id, kind, targetId, seed, input, status: "started" }, startRoom, startRoom?.version ?? null);
-    record = { id, kind, target_id: targetId, input, seed, status: "started" };
+    [record] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=*`);
+    if (!record) throw new ApiError("\u6226\u95D8\u306E\u4FDD\u5B58\u72B6\u614B\u3092\u78BA\u8A8D\u3067\u304D\u307E\u305B\u3093\u3002\u518D\u958B\u3057\u3066\u304F\u3060\u3055\u3044\u3002", 503);
+    if (record.status === "settled") return responseFor(userId, record.result);
+    if (JSON.stringify(record.input) !== JSON.stringify(input)) preparedBattle = void 0;
   }
-  const battle = simulateBattle(record.input);
+  const battle = preparedBattle ?? simulateBattle2(record.input);
   const settlementId = await uuidFor(`settlement:${id}`);
   for (let attempt = 0; attempt < 4; attempt++) {
     const state = await stateFor(userId);

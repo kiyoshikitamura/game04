@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import type { BattleUnit, RaidRoom, RedesignState, Reward } from '../../../domain/redesign/types';
+import { buildBattleParty } from '../../../domain/redesign/masters';
 import { getRoomRaidMaster, raidEnemy } from '../../../domain/redesign/raid';
 import { raidElementLabels, raidRescueWindow, raidRewardLabel, raidTimeRemaining } from '../../../domain/redesign/raidPresentation';
 import CanonicalDialog from '../ui/CanonicalDialog';
@@ -34,6 +35,6 @@ export default function RaidView({state,rooms,party,onAction,onOpenDeck,initialR
  {room&&master&&modal==='rewards'&&<CanonicalDialog title="報酬" onClose={()=>setModal(null)} actions={[{label:'受け取る',semantic:'primary',disabled:busy||!room.rewardGrants.some(g=>g.userId===state.userId&&!g.claimed),onClick:()=>run('raid_claim')}]}>{error&&<p role="alert" className="rd-raid-error">{error}</p>}<h3>参加報酬</h3><Rewards rewards={master.participationRewards}/><h3>{master.type==='unlock'?'各Lv討伐報酬':'討伐報酬'}</h3><Rewards rewards={master.defeatRewards}/><p>{(me?.wins??0)>=3?'資格取得済み':`あと${3-(me?.wins??0)}勝で討伐報酬資格`}</p><p>参加報酬は初回戦闘後。討伐報酬は資格取得後に討伐されたBossが対象です。</p>{master.type==='unlock'&&<p>参加前・資格取得前に討伐済みのLv報酬は配布されません。次の出撃は現在の共有Lv.{room.level}から開始します。</p>}<p>受取待ち {room.rewardGrants.filter(g=>g.userId===state.userId&&!g.claimed).length}件</p></CanonicalDialog>}
  {room&&master&&window&&modal==='rescue'&&<CanonicalDialog title="救援依頼" onClose={()=>setModal(null)} actions={[{label:'救援を依頼',semantic:'primary',disabled:busy||!available||!me||window.remaining===0,onClick:()=>run('raid_rescue')}]}>{error&&<p role="alert" className="rd-raid-error">{error}</p>}<p>残り {window.remaining} / 3回</p><p>公開先：全体チャット・アクティビティ</p>{window.resetsAt?<p>次回回復：{raidTimeRemaining(window.resetsAt,now)}後（6時間ごと）</p>:<p>このレイドで合計3回まで依頼できます。</p>}</CanonicalDialog>}
  {modal==='leave'&&<CanonicalDialog title="レイドから退出" onClose={()=>setModal(null)} actions={[{label:'戻る',onClick:()=>setModal(null)},{label:'退出する',semantic:'danger',disabled:busy,onClick:()=>run('raid_leave')}]}>{error&&<p role="alert" className="rd-raid-error">{error}</p>}<p>退出すると、このレイドへの参加権を放棄します。再参加はできません。</p></CanonicalDialog>}
- {modal==='prepare'&&room&&master&&<PreparationModal title={`${master.name} Lv.${room.level} · ${raidElementLabels[master.enemy.element]}属性`} party={party} energy={state.energy} energyCost={master.energyCost} busy={busy} error={error} onBack={()=>setModal(null)} onOpenDeck={()=>{setModal(null);onOpenDeck();}} onConfirm={()=>void run('raid_battle')}/>}
+ {modal==='prepare'&&room&&master&&<PreparationModal title={`${master.name} Lv.${room.level} · ${raidElementLabels[master.enemy.element]}属性`} party={room.territorySnapshot ? buildBattleParty(state, room.territorySnapshot.battleRules) : party} commonSpMax={room.territorySnapshot && room.territorySnapshot.battleRules.version !== 'common-v2-20260920' ? null : 400} energy={state.energy} energyCost={master.energyCost} busy={busy} error={error} onBack={()=>setModal(null)} onOpenDeck={()=>{setModal(null);onOpenDeck();}} onConfirm={()=>void run('raid_battle')}/>}
  </section>;
 }
