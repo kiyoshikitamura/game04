@@ -1,3 +1,68 @@
+// src/domain/redesign/growthMaster.ts
+var GROWTH_VERSION = "APPROVED_GROWTH_V1_20260921";
+var EXP_SIZES = ["small", "medium", "large", "xlarge"];
+var EXP_VALUES = { small: 100, medium: 1e3, large: 5e3, xlarge: 2e4 };
+var SOUL_UNLOCK = { N: 20, R: 40, SR: 60, SSR: 80 };
+var AWAKENING_SOULS = { N: [4, 6, 8, 10, 12], R: [8, 12, 16, 20, 24], SR: [12, 18, 24, 30, 36], SSR: [20, 30, 40, 50, 60] };
+var LB_STEPS = [1, 2, 3, 4, 5, 6, 8, 10, 12, 15];
+var SKILL_LB_FACTORS = { N: 1, R: 2, SR: 4, SSR: 8 };
+var EQUIPMENT_LB_FACTORS = { N: 1, R: 2, SR: 3, SSR: 6 };
+var DUPLICATE_SKILL_MATERIALS = { N: 1, R: 2, SR: 5, SSR: 20 };
+var DISMANTLE_MATERIALS = DUPLICATE_SKILL_MATERIALS;
+var EXP_TOTALS = { character: { N: 3e5, R: 45e4, SR: 75e4, SSR: 12e5 }, equipment: { N: 18e4, R: 27e4, SR: 45e4, SSR: 72e4 } };
+function cumulativeExp(kind, rarity, level) {
+  if (!Number.isInteger(level) || level < 1 || level > 100) throw new Error("Lv\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+  return level === 100 ? EXP_TOTALS[kind][rarity] : 10 * Math.floor(EXP_TOTALS[kind][rarity] * Math.pow((level - 1) / 99, 2.2) / 10 + 0.5);
+}
+function cumulativeCash(kind, rarity, level) {
+  const exp = cumulativeExp(kind, rarity, level);
+  return kind === "character" ? exp : Math.floor(exp / 2);
+}
+function playerCumulativeExp(level) {
+  let exp = 0;
+  for (let l = 1; l < Math.min(100, level); l++) exp += (l + 9) ** 2;
+  return exp;
+}
+function applyPlayerExperience(level, exp, gain, energy, energyMax) {
+  if (!Number.isSafeInteger(gain) || gain < 0) throw new Error("\u30D7\u30EC\u30A4\u30E4\u30FCEXP\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+  const nextExp = level >= 100 ? exp : Math.min(playerCumulativeExp(100), exp + gain);
+  let nextLevel = level;
+  while (nextLevel < 100 && nextExp >= playerCumulativeExp(nextLevel + 1)) nextLevel++;
+  return { level: nextLevel, exp: nextExp, energy: nextLevel > level ? Math.max(energy, energyMax) : energy };
+}
+function emptyGrowthInventory() {
+  return { expItems: { character: { small: 0, medium: 0, large: 0, xlarge: 0 }, equipment: { small: 0, medium: 0, large: 0, xlarge: 0 } }, carryExp: { character: 0, equipment: 0 }, genericSouls: { N: 0, R: 0, SR: 0, SSR: 0 }, soulSelectors: { N: 0, R: 0, SR: 0, SSR: 0 } };
+}
+
+// src/domain/redesign/growthReward.ts
+var RARITIES = ["N", "R", "SR", "SSR"];
+function isGrowthRewardKind(kind) {
+  return ["character_exp_item", "equipment_exp_item", "generic_soul", "soul_selector"].includes(kind);
+}
+function grantGrowthReward(original, reward) {
+  if (!Number.isSafeInteger(reward.amount) || reward.amount < 0) throw new Error("\u5831\u916C\u6570\u91CF\u304C\u4E0D\u6B63\u3067\u3059");
+  const state = structuredClone(original);
+  state.growthInventory ??= emptyGrowthInventory();
+  const inventory = state.growthInventory;
+  const add = (old) => {
+    const total = old + reward.amount;
+    if (!Number.isSafeInteger(old) || old < 0 || !Number.isSafeInteger(total)) throw new Error("\u80B2\u6210\u30A2\u30A4\u30C6\u30E0\u6B8B\u9AD8\u304C\u4E0D\u6B63\u3067\u3059");
+    return total;
+  };
+  if (reward.kind === "character_exp_item" || reward.kind === "equipment_exp_item") {
+    if (!EXP_SIZES.includes(reward.id)) throw new Error("EXP\u30A2\u30A4\u30C6\u30E0\u306E\u7A2E\u985E\u304C\u4E0D\u6B63\u3067\u3059");
+    const target = reward.kind === "character_exp_item" ? "character" : "equipment";
+    const size = reward.id;
+    inventory.expItems[target][size] = add(inventory.expItems[target][size]);
+  } else if (reward.kind === "generic_soul" || reward.kind === "soul_selector") {
+    if (!RARITIES.includes(reward.id)) throw new Error("\u9B42\u30A2\u30A4\u30C6\u30E0\u306E\u30EC\u30A2\u30EA\u30C6\u30A3\u304C\u4E0D\u6B63\u3067\u3059");
+    const target = reward.kind === "generic_soul" ? "genericSouls" : "soulSelectors";
+    const rarity = reward.id;
+    inventory[target][rarity] = add(inventory[target][rarity]);
+  } else throw new Error("\u80B2\u6210\u5831\u916C\u306E\u7A2E\u985E\u304C\u4E0D\u6B63\u3067\u3059");
+  return state;
+}
+
 // src/domain/redesign/data/balance-v2.json
 var balance_v2_default = {
   version: "PREVIEW_PROVISIONAL_BALANCE_V2_20260920",
@@ -13587,12 +13652,13 @@ function interpolatePreviewAnchor(level, levels, values) {
 }
 
 // src/domain/redesign/acquisitions.ts
-var PREVIEW_ACQUISITION_MASTER = {
-  characterDuplicateSouls: 10,
-  skillDuplicateMaterials: 2,
-  characterAtCap: "pending",
-  skillAtCap: "pending"
+var APPROVED_ACQUISITION_MASTER = {
+  characterDuplicateSouls: 20,
+  skillDuplicateMaterials: DUPLICATE_SKILL_MATERIALS,
+  characterAtCap: "convert",
+  skillAtCap: "convert"
 };
+var PREVIEW_ACQUISITION_MASTER = APPROVED_ACQUISITION_MASTER;
 function applyAcquisitionEvents(original, events, master) {
   const state = structuredClone(original);
   const applied = new Set(state.appliedAcquisitionIds ?? []);
@@ -13611,14 +13677,14 @@ function applyAcquisitionEvents(original, events, master) {
         continue;
       }
       const owned = state.characters.find((c) => c.id === event.masterId);
-      if (!owned) state.characters.push({ id: event.masterId, level: 1, awakening: 0 });
+      if (!owned) state.characters.push({ id: event.masterId, level: 1, awakening: 0, exp: 0, growthVersion: GROWTH_VERSION });
       else {
         if (owned.awakening >= 5 && master.characterAtCap !== "convert") {
           defer("character_cap_policy_unfixed");
           continue;
         }
         const amount = master.characterDuplicateSouls;
-        if (!Number.isSafeInteger(amount) || amount === null || amount < 0) {
+        if (!Number.isSafeInteger(amount) || typeof amount !== "number" || amount < 0) {
           defer("conversion_master_unfixed");
           continue;
         }
@@ -13626,7 +13692,8 @@ function applyAcquisitionEvents(original, events, master) {
         state.souls[event.masterId] = (state.souls[event.masterId] ?? 0) + amount;
       }
     } else if (event.kind === "skill") {
-      if (!SKILL_MASTERS.some((m) => m.id === event.masterId)) {
+      const skillMaster = SKILL_MASTERS.find((m) => m.id === event.masterId);
+      if (!skillMaster) {
         defer("master_missing");
         continue;
       }
@@ -13637,8 +13704,9 @@ function applyAcquisitionEvents(original, events, master) {
           defer("skill_cap_policy_unfixed");
           continue;
         }
-        const amount = master.skillDuplicateMaterials;
-        if (!Number.isSafeInteger(amount) || amount === null || amount < 0) {
+        const configured = master.skillDuplicateMaterials;
+        const amount = configured && typeof configured === "object" ? configured[skillMaster.rarity] : configured;
+        if (!Number.isSafeInteger(amount) || typeof amount !== "number" || amount < 0) {
           defer("conversion_master_unfixed");
           continue;
         }
@@ -13650,7 +13718,7 @@ function applyAcquisitionEvents(original, events, master) {
         continue;
       }
       const instanceId = event.instanceId ?? event.id;
-      if (!state.equipment.some((e) => e.instanceId === instanceId)) state.equipment.push({ instanceId, masterId: event.masterId, level: 1, lb: 0 });
+      if (!state.equipment.some((e) => e.instanceId === instanceId)) state.equipment.push({ instanceId, masterId: event.masterId, level: 1, lb: 0, exp: 0, growthVersion: GROWTH_VERSION });
     } else {
       defer("unsupported_kind");
       continue;
@@ -22096,7 +22164,7 @@ function buildBattleParty(state, rules = BATTLE_RULES) {
 }
 function createInitialState(userId) {
   const starters = CHARACTER_MASTERS.filter((c) => c.rarity === "N").slice(0, 5);
-  return { userId, version: 0, cash: 0, diamonds: 0, energy: 0, energyMax: 50, souls: {}, characters: starters.map((c) => ({ id: c.id, level: 1, awakening: 0 })), skills: SKILL_MASTERS.slice(0, 8).map((s) => ({ id: s.id, level: 0 })), equipment: [], deck: starters.map((c, i) => ({ characterId: c.id, skillIds: [SKILL_MASTERS[i % SKILL_MASTERS.length].id], equipment: {} })), materials: { character: 20, skill: 10, equipment: 20, equipmentLb: 5, unlock: 1 }, clearedStages: [], vipExpiresAt: null };
+  return { userId, version: 0, cash: 0, diamonds: 0, energy: 0, energyMax: 50, souls: {}, characters: starters.map((c) => ({ id: c.id, level: 1, awakening: 0, exp: 0, growthVersion: GROWTH_VERSION })), skills: SKILL_MASTERS.slice(0, 8).map((s) => ({ id: s.id, level: 0 })), equipment: [], deck: starters.map((c, i) => ({ characterId: c.id, skillIds: [SKILL_MASTERS[i % SKILL_MASTERS.length].id], equipment: {} })), materials: { character: 20, skill: 10, equipment: 20, equipmentLb: 5, unlock: 1 }, clearedStages: [], vipExpiresAt: null };
 }
 function importLegacyAssets(original, legacy) {
   const state = structuredClone(original);
@@ -22136,6 +22204,10 @@ function buildInitialState(userId, legacy) {
   return importLegacyAssets(createInitialState(userId), legacy);
 }
 function grantReward(original, reward, instanceId, acquisitionMaster = PREVIEW_ACQUISITION_MASTER) {
+  if (isGrowthRewardKind(reward.kind)) {
+    if (!reward.id) throw new Error("\u80B2\u6210\u5831\u916CID\u304C\u5FC5\u8981\u3067\u3059");
+    return grantGrowthReward(original, { kind: reward.kind, id: reward.id, amount: reward.amount });
+  }
   const state = structuredClone(original);
   const amount = reward.amount;
   if (!Number.isSafeInteger(amount) || amount < 0) throw new Error("\u5831\u916C\u6570\u91CF\u304C\u4E0D\u6B63\u3067\u3059");
@@ -22172,23 +22244,93 @@ function grantReward(original, reward, instanceId, acquisitionMaster = PREVIEW_A
   return state;
 }
 
-// src/domain/redesign/growth.ts
-var GROWTH_PREVIEW_RULES = {
-  characterLevelCaps: [30, 40, 50, 60, 80, 100],
-  characterCash: 100,
-  characterMaterial: 1,
-  awakeningSouls: [10, 20, 30, 40, 50],
-  unlockSouls: 20,
-  skillMax: 10,
-  skillMaterial: 1,
-  equipmentLevelCap: 100,
-  equipmentLbMax: 10,
-  equipmentCash: 50,
-  equipmentMaterial: 1,
-  equipmentLbMaterial: 1,
-  dismantleCash: 50,
-  dismantleLbMaterial: 1
+// src/domain/redesign/normalGacha.ts
+var NORMAL_GACHA_MASTER = {
+  version: "GROWTH_FIXED_20260921",
+  singleCost: 1e3,
+  dailyFreeCount: 10,
+  // Existing daily contract: Asia/Tokyo midnight. Within-rarity pool rows remain uniform.
+  buckets: [
+    ["N", "CHARACTER", 980],
+    ["N", "SKILL", 1470],
+    ["N", "EQUIPMENT", 2450],
+    ["R", "CHARACTER", 800],
+    ["R", "SKILL", 1200],
+    ["R", "EQUIPMENT", 2e3],
+    ["SR", "CHARACTER", 200],
+    ["SR", "SKILL", 300],
+    ["SR", "EQUIPMENT", 500],
+    ["SSR", "CHARACTER", 20],
+    ["SSR", "SKILL", 30],
+    ["SSR", "EQUIPMENT", 50]
+  ]
 };
+var sources = { CHARACTER: "CHAR_NORMAL", SKILL: "SKILL_NORMAL", EQUIPMENT: "EQUIP_NORMAL" };
+var masters = { CHARACTER: CHARACTER_MASTERS, SKILL: SKILL_MASTERS, EQUIPMENT: EQUIPMENT_MASTERS };
+function normalGachaDay(now) {
+  return new Date(now + 9 * 36e5).toISOString().slice(0, 10);
+}
+function normalGachaPool(pool) {
+  const rows = pool.filter((row) => sources[row.item_type] === row.gacha_id).map((row) => {
+    const group = masters[row.item_type];
+    const master = group?.find((item) => item.id === row.item_id);
+    if (!master) throw new Error("\u6392\u51FA\u5BFE\u8C61\u306E\u63A5\u7D9A\u3092\u78BA\u8A8D\u3067\u304D\u307E\u305B\u3093\u3002\u6D88\u8CBB\u306F\u884C\u3044\u307E\u305B\u3093\u3002");
+    return { ...row, rarity: master.rarity };
+  });
+  for (const [rarity, kind] of NORMAL_GACHA_MASTER.buckets) {
+    const bucket = rows.filter((row) => row.rarity === rarity && row.item_type === kind);
+    if (!bucket.length || bucket.some((row) => !masters[kind].some((master) => master.id === row.item_id))) throw new Error("\u6392\u51FA\u5BFE\u8C61\u306E\u63A5\u7D9A\u3092\u78BA\u8A8D\u3067\u304D\u307E\u305B\u3093\u3002\u6D88\u8CBB\u306F\u884C\u3044\u307E\u305B\u3093\u3002");
+  }
+  return rows;
+}
+function applyNormalGacha(original, payload, pool, requestId, now, policy, random) {
+  const count = payload.count;
+  if (count !== 1 && count !== 10) throw new Error("\u56DE\u6570\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+  if (payload.currency !== "CASH" && payload.currency !== "FREE") throw new Error("\u652F\u6255\u65B9\u6CD5\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+  const rows = normalGachaPool(pool);
+  const free = payload.currency === "FREE";
+  let state = structuredClone(original);
+  if (free && (count !== 10 || state.dailyNormalGachaDate === normalGachaDay(now))) throw new Error("\u672C\u65E5\u306E\u7121\u659910\u9023\u306F\u5229\u7528\u6E08\u307F\u3067\u3059\u3002");
+  const cost = free ? 0 : NORMAL_GACHA_MASTER.singleCost * count;
+  if (state.cash < cost) throw new Error("\u92AD\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002");
+  state.cash -= cost;
+  if (free) state.dailyNormalGachaDate = normalGachaDay(now);
+  const results = [];
+  const draw = () => {
+    const value = random();
+    if (!(value >= 0 && value < 1)) throw new Error("\u62BD\u9078\u5024\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+    return value;
+  };
+  for (let i = 0; i < count; i++) {
+    let roll = draw() * 1e4;
+    const bucket = NORMAL_GACHA_MASTER.buckets.find((b) => {
+      roll -= b[2];
+      return roll < 0;
+    });
+    const choices = rows.filter((row2) => row2.rarity === bucket[0] && row2.item_type === bucket[1]);
+    const row = choices[Math.floor(draw() * choices.length)];
+    const master = masters[bucket[1]].find((m) => m.id === row.item_id);
+    const kind = bucket[1].toLowerCase();
+    const beforeSouls = state.souls[row.item_id] ?? 0, beforeMaterial = state.materials.skill;
+    const existed = kind === "character" ? state.characters.some((c) => c.id === row.item_id) : kind === "skill" ? state.skills.some((s) => s.id === row.item_id) : false;
+    const eventId = `normal_gacha:${requestId}:${i}`;
+    const acquired = applyAcquisitionEvents(state, [{ id: eventId, kind, masterId: row.item_id, instanceId: eventId }], policy);
+    state = acquired;
+    if (!acquired.appliedAcquisitionIds?.includes(eventId)) throw new Error("\u7372\u5F97\u8CC7\u7523\u306E\u63A5\u7D9A\u3092\u78BA\u8A8D\u3067\u304D\u307E\u305B\u3093\u3002\u6D88\u8CBB\u306F\u884C\u3044\u307E\u305B\u3093\u3002");
+    results.push({
+      id: row.item_id,
+      kind,
+      rarity: row.rarity,
+      name: master.name,
+      image: master.image,
+      outcome: kind === "equipment" ? "\u88C5\u5099\u3092\u500B\u4F53\u3067\u7372\u5F97" : !existed ? "\u65B0\u898F\u7372\u5F97" : kind === "character" ? `\u56FA\u6709\u9B42 +${state.souls[row.item_id] - beforeSouls}` : `\u30B9\u30AD\u30EBLB\u7D20\u6750 +${state.materials.skill - beforeMaterial}`
+    });
+  }
+  return { state, results, cost, masterVersion: NORMAL_GACHA_MASTER.version };
+}
+
+// src/domain/redesign/growth.ts
+var GROWTH_PREVIEW_RULES = { characterLevelCaps: [50, 60, 70, 80, 90, 100], skillMax: 10, equipmentLevelCap: 100, equipmentLbMax: 10 };
 var EQUIPMENT_SLOTS = ["weapon", "head", "body", "legs", "accessory1", "accessory2"];
 var getCharacterLevelCap = (awakening) => GROWTH_PREVIEW_RULES.characterLevelCaps[Math.max(0, Math.min(5, awakening))];
 var requireValue = (condition, message) => {
@@ -22221,79 +22363,138 @@ function validateDeck(state, deck) {
     }
   }
 }
+var integer = (value, label) => {
+  requireValue(typeof value === "number" && Number.isSafeInteger(value) && value >= 0, `${label}\u304C\u4E0D\u6B63\u3067\u3059\u3002`);
+  return value;
+};
+var getEquipmentLevelCap = (lb) => 50 + Math.max(0, Math.min(10, lb)) * 5;
+function quoteLevelGrowth(state, kind, id, items = {}) {
+  const owned = kind === "character" ? state.characters.find((c) => c.id === id) : state.equipment.find((e) => e.instanceId === id);
+  const master = kind === "character" ? CHARACTER_MASTERS.find((c) => c.id === id) : EQUIPMENT_MASTERS.find((e) => e.id === state.equipment.find((o) => o.instanceId === id)?.masterId);
+  requireValue(owned && master, "\u80B2\u6210\u5BFE\u8C61\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002");
+  const levelBefore = owned.level;
+  requireValue(owned.growthVersion === GROWTH_VERSION || levelBefore === 1 && (owned.exp === void 0 || owned.exp === 0), "\u65E7\u80B2\u6210\u30C7\u30FC\u30BF\u306E\u79FB\u884C\u78BA\u8A8D\u5F85\u3061\u3067\u3059\u3002\u73FE\u5728Lv\u30FBEXP\u306F\u4FDD\u6301\u3057\u3066\u3044\u307E\u3059\u3002");
+  const levelCap = kind === "character" ? getCharacterLevelCap(owned.awakening) : getEquipmentLevelCap(owned.lb);
+  requireValue(levelBefore < levelCap, "\u89E3\u653E\u6E08\u307FLv\u4E0A\u9650\u3067\u3059\u3002");
+  const expBefore = owned.exp ?? 0, threshold = cumulativeExp(kind, master.rarity, levelBefore);
+  requireValue(Number.isSafeInteger(expBefore) && expBefore >= threshold && expBefore < cumulativeExp(kind, master.rarity, levelBefore + 1), "Lv\u30FBEXP\u306E\u79FB\u884C\u78BA\u8A8D\u304C\u5FC5\u8981\u3067\u3059\u3002");
+  const inventory = state.growthInventory ?? emptyGrowthInventory();
+  const carryBefore = integer(inventory.carryExp[kind], "\u7E70\u8D8AEXP");
+  const room = cumulativeExp(kind, master.rarity, levelCap) - expBefore;
+  let applied = Math.min(room, carryBefore), carryAfter = carryBefore - applied;
+  const consumedItems = { small: 0, medium: 0, large: 0, xlarge: 0 };
+  for (const size of EXP_SIZES) {
+    const selected = integer(items[size] ?? 0, "\u6295\u5165\u500B\u6570");
+    requireValue(selected <= inventory.expItems[kind][size], "EXP\u30A2\u30A4\u30C6\u30E0\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002");
+    if (applied >= room) continue;
+    const used = Math.min(selected, Math.ceil((room - applied) / EXP_VALUES[size]));
+    consumedItems[size] = used;
+    const value = used * EXP_VALUES[size];
+    requireValue(Number.isSafeInteger(value), "\u6295\u5165\u500B\u6570\u304C\u5927\u304D\u3059\u304E\u307E\u3059\u3002");
+    const accepted = Math.min(room - applied, value);
+    applied += accepted;
+    carryAfter += value - accepted;
+  }
+  requireValue(applied > 0, "EXP\u30A2\u30A4\u30C6\u30E0\u307E\u305F\u306F\u7E70\u8D8AEXP\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
+  const expAfter = expBefore + applied;
+  let levelAfter = levelBefore;
+  while (levelAfter < levelCap && expAfter >= cumulativeExp(kind, master.rarity, levelAfter + 1)) levelAfter++;
+  const cash = cumulativeCash(kind, master.rarity, levelAfter) - cumulativeCash(kind, master.rarity, levelBefore);
+  return { levelBefore, levelAfter, expBefore, expAfter, cash, consumedItems, carryBefore, carryAfter, levelCap };
+}
 function applyGrowthAction(input, action, payload) {
   const state = structuredClone(input);
-  const rules = GROWTH_PREVIEW_RULES;
   if (action === "save_deck") {
     validateDeck(state, payload.deck);
     state.deck = structuredClone(payload.deck);
     return state;
   }
-  if (action === "character_unlock") {
-    const id = String(payload.characterId ?? "");
-    requireValue(CHARACTER_MASTERS.some((c) => c.id === id), "\u6B66\u5C06\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002");
-    const owned = state.characters.find((c) => c.id === id);
-    requireValue(!owned, "\u3053\u306E\u6B66\u5C06\u306F\u65E2\u306B\u6240\u6301\u3057\u3066\u3044\u307E\u3059\u3002");
-    requireValue((state.souls[id] ?? 0) >= rules.unlockSouls, "\u6B66\u5C06\u306E\u9B42\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002");
-    state.souls[id] -= rules.unlockSouls;
-    state.characters.push({ id, level: 1, awakening: 0 });
+  if (action === "character_level" || action === "equipment_level") {
+    const kind = action === "character_level" ? "character" : "equipment";
+    const id = String(payload.characterId ?? payload.instanceId ?? "");
+    const items = payload.items;
+    requireValue(items === void 0 || items !== null && typeof items === "object" && !Array.isArray(items), "EXP\u500B\u6570\u3092\u78BA\u8A8D\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
+    const quote = quoteLevelGrowth(state, kind, id, items ?? {});
+    requireValue(state.cash >= quote.cash, "\u92AD\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002\u9078\u629E\u6570\u3092\u5909\u66F4\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
+    const inventory = state.growthInventory ??= emptyGrowthInventory();
+    for (const size of EXP_SIZES) inventory.expItems[kind][size] -= quote.consumedItems[size];
+    inventory.carryExp[kind] = quote.carryAfter;
+    state.cash -= quote.cash;
+    const owned = kind === "character" ? state.characters.find((c) => c.id === id) : state.equipment.find((e) => e.instanceId === id);
+    owned.level = quote.levelAfter;
+    owned.exp = quote.expAfter;
+    owned.growthVersion = GROWTH_VERSION;
     return state;
   }
-  if (action === "character_level" || action === "character_awaken") {
-    const owned = state.characters.find((c) => c.id === payload.characterId && c.level > 0);
-    requireValue(owned, "\u6B66\u5C06\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002");
-    if (action === "character_level") {
-      requireValue(owned.level < getCharacterLevelCap(owned.awakening), "Lv\u4E0A\u9650\u3067\u3059\u3002\u899A\u9192\u3067\u4E0A\u9650\u3092\u89E3\u653E\u3067\u304D\u307E\u3059\u3002");
-      requireValue(state.cash >= rules.characterCash && state.materials.character >= rules.characterMaterial, "\u92AD\u307E\u305F\u306F\u6B66\u5C06\u80B2\u6210\u7D20\u6750\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002");
-      state.cash -= rules.characterCash;
-      state.materials.character -= rules.characterMaterial;
-      owned.level++;
+  if (["character_unlock", "character_awaken", "soul_exchange", "soul_select"].includes(action)) {
+    const id = String(payload.characterId ?? ""), master = CHARACTER_MASTERS.find((c) => c.id === id), owned = state.characters.find((c) => c.id === id);
+    requireValue(master, "\u6B66\u5C06\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002");
+    const rarity = master.rarity;
+    const inventory = state.growthInventory ??= emptyGrowthInventory();
+    if (action === "character_unlock") {
+      requireValue(!owned, "\u3053\u306E\u6B66\u5C06\u306F\u65E2\u306B\u6240\u6301\u3057\u3066\u3044\u307E\u3059\u3002");
+      const cost = SOUL_UNLOCK[rarity];
+      requireValue((state.souls[id] ?? 0) >= cost, "\u56FA\u6709\u9B42\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002\u6C4E\u7528\u9B42\u306F\u521D\u56DE\u89E3\u653E\u306B\u4F7F\u3048\u307E\u305B\u3093\u3002");
+      state.souls[id] -= cost;
+      state.characters.push({ id, level: 1, awakening: 0, exp: 0, growthVersion: GROWTH_VERSION });
+    } else if (action === "soul_exchange") {
+      const amount = integer(payload.amount, "\u4EA4\u63DB\u6570");
+      requireValue(amount > 0 && amount % 2 === 0, "\u56FA\u6709\u9B42\u30922\u500B\u5358\u4F4D\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
+      requireValue((state.souls[id] ?? 0) >= amount, "\u56FA\u6709\u9B42\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002");
+      state.souls[id] -= amount;
+      inventory.genericSouls[rarity] += amount / 2;
+    } else if (action === "soul_select") {
+      const amount = integer(payload.amount ?? 1, "\u9078\u629E\u5F0F\u30A2\u30A4\u30C6\u30E0\u6570");
+      requireValue(amount > 0 && owned && owned.awakening < 5, "\u540C\u30EC\u30A2\u30EA\u30C6\u30A3\u306E\u6240\u6301\u30FB\u672A\u6700\u5927\u899A\u9192\u6B66\u5C06\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
+      requireValue(inventory.soulSelectors[rarity] >= amount, "\u9078\u629E\u5F0F\u30A2\u30A4\u30C6\u30E0\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002");
+      inventory.soulSelectors[rarity] -= amount;
+      state.souls[id] = (state.souls[id] ?? 0) + amount * 10;
     } else {
-      requireValue(owned.awakening < 5, "\u899A\u9192\u306F\u6700\u5927\u3067\u3059\u3002");
-      const cost = rules.awakeningSouls[owned.awakening];
-      requireValue((state.souls[owned.id] ?? 0) >= cost, "\u6B66\u5C06\u306E\u9B42\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002");
-      state.souls[owned.id] -= cost;
+      requireValue(owned && owned.awakening < 5, "\u672A\u6240\u6301\u307E\u305F\u306F\u6700\u5927\u899A\u9192\u3067\u3059\u3002");
+      const cost = AWAKENING_SOULS[rarity][owned.awakening];
+      const specific = integer(payload.specificSouls ?? Math.min(state.souls[id] ?? 0, cost), "\u56FA\u6709\u9B42");
+      const generic = integer(payload.genericSouls ?? cost - specific, "\u6C4E\u7528\u9B42");
+      requireValue(specific + generic === cost, "\u9B42\u306E\u5408\u8A08\u5FC5\u8981\u6570\u304C\u4E00\u81F4\u3057\u307E\u305B\u3093\u3002");
+      requireValue((state.souls[id] ?? 0) >= specific && inventory.genericSouls[rarity] >= generic && state.cash >= cost * 2e3, "\u9B42\u307E\u305F\u306F\u92AD\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002");
+      state.souls[id] = (state.souls[id] ?? 0) - specific;
+      inventory.genericSouls[rarity] -= generic;
+      state.cash -= cost * 2e3;
       owned.awakening++;
     }
     return state;
   }
   if (action === "skill_level") {
-    const skill = state.skills.find((s) => s.id === payload.skillId);
-    requireValue(skill, "\u30B9\u30AD\u30EB\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002");
-    requireValue(skill.level < rules.skillMax, "\u30B9\u30AD\u30EB\u306F\u6700\u5927Lv\u3067\u3059\u3002");
-    requireValue(state.materials.skill >= rules.skillMaterial, "\u30B9\u30AD\u30EBLB\u7D20\u6750\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002");
-    state.materials.skill -= rules.skillMaterial;
-    skill.level++;
+    const owned = state.skills.find((s) => s.id === payload.skillId), master = SKILL_MASTERS.find((s) => s.id === payload.skillId);
+    requireValue(owned && master && owned.level < 10, "\u672A\u6240\u6301\u307E\u305F\u306F\u6700\u5927LB\u3067\u3059\u3002");
+    const cost = LB_STEPS[owned.level] * SKILL_LB_FACTORS[master.rarity];
+    requireValue(state.materials.skill >= cost && state.cash >= cost * 1e3, "\u30B9\u30AD\u30EBLB\u7D20\u6750\u307E\u305F\u306F\u92AD\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002");
+    state.materials.skill -= cost;
+    state.cash -= cost * 1e3;
+    owned.level++;
     return state;
   }
-  if (action === "equipment_level" || action === "equipment_lb") {
-    const equipment = state.equipment.find((e) => e.instanceId === payload.instanceId);
-    requireValue(equipment, "\u88C5\u5099\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002");
-    if (action === "equipment_level") {
-      requireValue(equipment.level < rules.equipmentLevelCap, "\u88C5\u5099\u306F\u6700\u5927Lv\u3067\u3059\u3002");
-      requireValue(state.cash >= rules.equipmentCash && state.materials.equipment >= rules.equipmentMaterial, "\u92AD\u307E\u305F\u306F\u88C5\u5099\u80B2\u6210\u7D20\u6750\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002");
-      state.cash -= rules.equipmentCash;
-      state.materials.equipment -= rules.equipmentMaterial;
-      equipment.level++;
-    } else {
-      requireValue(equipment.lb < rules.equipmentLbMax, "\u88C5\u5099LB\u306F\u6700\u5927\u3067\u3059\u3002");
-      requireValue(state.materials.equipmentLb >= rules.equipmentLbMaterial, "\u88C5\u5099LB\u7D20\u6750\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002");
-      state.materials.equipmentLb -= rules.equipmentLbMaterial;
-      equipment.lb++;
-    }
+  if (action === "equipment_lb") {
+    const owned = state.equipment.find((e) => e.instanceId === payload.instanceId), master = EQUIPMENT_MASTERS.find((e) => e.id === owned?.masterId);
+    requireValue(owned && master && owned.lb < 10, "\u672A\u6240\u6301\u307E\u305F\u306F\u6700\u5927LB\u3067\u3059\u3002");
+    const cost = LB_STEPS[owned.lb] * EQUIPMENT_LB_FACTORS[master.rarity];
+    requireValue(state.materials.equipmentLb >= cost && state.cash >= cost * 500, "\u88C5\u5099LB\u7D20\u6750\u307E\u305F\u306F\u92AD\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002");
+    state.materials.equipmentLb -= cost;
+    state.cash -= cost * 500;
+    owned.lb++;
     return state;
   }
   if (action === "equipment_dismantle") {
     const ids = payload.instanceIds;
     requireValue(Array.isArray(ids) && ids.length > 0 && new Set(ids).size === ids.length, "\u5206\u89E3\u3059\u308B\u88C5\u5099\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
+    let material = 0;
     for (const id of ids) {
-      const equipment = state.equipment.find((e) => e.instanceId === id);
-      requireValue(equipment && !equipment.locked && !isEquipmentAssigned(state, id), "\u88C5\u5099\u4E2D\u30FB\u30ED\u30C3\u30AF\u4E2D\u306E\u88C5\u5099\u306F\u5206\u89E3\u3067\u304D\u307E\u305B\u3093\u3002");
+      const owned = state.equipment.find((e) => e.instanceId === id), master = EQUIPMENT_MASTERS.find((e) => e.id === owned?.masterId);
+      requireValue(owned && master && !owned.locked && !isEquipmentAssigned(state, id), "\u88C5\u5099\u4E2D\u30FB\u30ED\u30C3\u30AF\u4E2D\u306E\u88C5\u5099\u306F\u5206\u89E3\u3067\u304D\u307E\u305B\u3093\u3002");
+      requireValue(owned.level === 1 && owned.lb === 0 && !(owned.exp ?? 0) || payload.confirmTrained === true, "\u80B2\u6210\u6E08\u307F\u88C5\u5099\u306E\u5206\u89E3\u78BA\u8A8D\u304C\u5FC5\u8981\u3067\u3059\u3002\u6295\u5165\u8CC7\u6E90\u306F\u8FD4\u9084\u3055\u308C\u307E\u305B\u3093\u3002");
+      material += DISMANTLE_MATERIALS[master.rarity];
     }
-    const count = ids.length;
     state.equipment = state.equipment.filter((e) => !ids.includes(e.instanceId));
-    state.cash += rules.dismantleCash * count;
-    state.materials.equipmentLb += rules.dismantleLbMaterial * count;
+    state.materials.equipmentLb += material;
     return state;
   }
   throw new Error("\u5BFE\u5FDC\u3057\u3066\u3044\u306A\u3044\u80B2\u6210\u64CD\u4F5C\u3067\u3059\u3002");
@@ -23912,7 +24113,7 @@ async function acquisitionInput(userId) {
 async function stateFor(userId) {
   const input = await acquisitionInput(userId);
   for (let attempt = 0; attempt < 4; attempt++) {
-    const state = await rpc("game04_get_state", { p_user_id: userId, p_initial: buildInitialState(userId, input.legacy) });
+    const state = await rpc("game04_get_growth_state", { p_user_id: userId, p_initial: buildInitialState(userId, input.legacy) });
     const migrated = importLegacyAssets(state, input.legacy);
     const imported = applyAcquisitionEvents(migrated, input.events, input.master);
     if (JSON.stringify(imported) === JSON.stringify(state)) return state;
@@ -23924,8 +24125,8 @@ async function stateFor(userId) {
   }
   throw new ApiError("\u30C7\u30FC\u30BF\u66F4\u65B0\u4E2D\u3067\u3059\u3002\u3082\u3046\u4E00\u5EA6\u304A\u8A66\u3057\u304F\u3060\u3055\u3044\u3002", 409);
 }
-async function commit(before, after, requestId, battle = null, room = null, roomVersion = null) {
-  return rpc("game04_commit_state", {
+async function commit(before, after, requestId, battle = null, room = null, roomVersion = null, receipt = {}) {
+  return rpc("game04_commit_growth_state", {
     p_user_id: before.userId,
     p_expected_version: before.version,
     p_state: after,
@@ -23934,7 +24135,8 @@ async function commit(before, after, requestId, battle = null, room = null, room
     p_request_id: requestId,
     p_battle: battle,
     p_raid: room,
-    p_raid_expected_version: roomVersion
+    p_raid_expected_version: roomVersion,
+    p_receipt: receipt
   });
 }
 async function roomFor(id) {
@@ -23958,6 +24160,13 @@ async function rewardPolicy() {
   const [row] = await db("game04_redesign_master?key=eq.acquisition_conversion&select=data");
   if (!row?.data) throw new ApiError("\u7372\u5F97\u8A2D\u5B9A\u3092\u78BA\u8A8D\u3067\u304D\u307E\u305B\u3093\u3002", 503);
   return row.data;
+}
+async function questPlayerExpReward(stageId) {
+  const [row] = await db("game04_redesign_master?key=eq.quest_player_exp&select=status,data");
+  const amount = row?.data?.stages?.[stageId];
+  if (amount === void 0) return { amount: 0, version: row?.data?.version ?? "UNCONFIGURED", status: "UNCONFIGURED" };
+  if (!Number.isSafeInteger(amount) || amount < 0 || !row?.data?.version) throw new ApiError("\u30AF\u30A8\u30B9\u30C8EXP\u8A2D\u5B9A\u304C\u4E0D\u6B63\u3067\u3059\u3002", 503);
+  return { amount, version: row.data.version, status: row.status };
 }
 async function missionConfig() {
   const [row] = await db("game04_redesign_master?key=eq.missions&select=data");
@@ -24006,7 +24215,7 @@ async function runBattle(userId, name2, payload, id, playerName) {
     if (state.energy < cost) throw new ApiError("\u884C\u52D5\u529B\u304C\u8DB3\u308A\u307E\u305B\u3093\u3002");
     const seed = crypto.getRandomValues(new Uint32Array(1))[0];
     const rules = startRoom?.territorySnapshot?.battleRules ?? BATTLE_RULES;
-    const input = { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel };
+    const input = { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel, ...kind === "quest" ? { playerExpReward: await questPlayerExpReward(targetId) } : {} };
     preparedBattle = simulateBattle3(input);
     await commit(state, { ...state, energy: state.energy - cost }, id, { id, kind, targetId, seed, input, status: "started" }, startRoom, startRoom?.version ?? null);
     [record] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=*`);
@@ -24021,6 +24230,7 @@ async function runBattle(userId, name2, payload, id, playerName) {
     let after = structuredClone(state);
     let room = null, version = null;
     const rewards = [];
+    let playerGrowth;
     let firstClear = false, encounterRaidId = null;
     if (record.kind === "quest" && battle.outcome === "win") {
       const stage = getQuestStage(record.target_id);
@@ -24035,6 +24245,27 @@ async function runBattle(userId, name2, payload, id, playerName) {
       const policy = await rewardPolicy();
       for (let i = 0; i < rewards.length; i++) after = grantReward(after, rewards[i], await uuidFor(`reward:${id}:${i}`), policy);
       if (firstClear) after.clearedStages.push(stage.id);
+      const expReward = record.input.playerExpReward;
+      if (expReward) {
+        const progress = state.playerProgress;
+        if (progress?.version === GROWTH_VERSION && progress.status === "active") {
+          const grown = applyPlayerExperience(progress.level, progress.exp, expReward.amount, after.energy, after.energyMax);
+          after.playerProgress = { ...progress, level: grown.level, exp: grown.exp };
+          after.energy = grown.energy;
+          playerGrowth = {
+            status: expReward.status,
+            rewardVersion: expReward.version,
+            offeredExp: expReward.amount,
+            gainedExp: grown.exp - progress.exp,
+            beforeLevel: progress.level,
+            level: grown.level,
+            exp: grown.exp,
+            energyRecovered: grown.energy - state.energy,
+            energy: grown.energy,
+            energyMax: state.energyMax
+          };
+        } else playerGrowth = { status: "MIGRATION_PENDING", offeredExp: expReward.amount, gainedExp: 0 };
+      }
       if (random() < stage.encounterChance) {
         encounterRaidId = await uuidFor(`encounter:${id}`);
         room = createRaidRoom("encounter_flame", userId, encounterRaidId, Date.now());
@@ -24048,10 +24279,10 @@ async function runBattle(userId, name2, payload, id, playerName) {
       room = transition.room;
       after = transition.state;
     }
-    const result = { battle, rewards, firstClear, encounterRaidId };
+    const result = { battle, rewards, firstClear, encounterRaidId, ...playerGrowth ? { playerGrowth } : {} };
     try {
-      await commit(state, after, settlementId, { id, status: "settled", result }, room, version);
-      return responseFor(userId, result);
+      const settled = await commit(state, after, settlementId, { id, status: "settled", result }, room, version);
+      return responseFor(userId, settled.battleResult ?? result);
     } catch (error) {
       const [saved] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=status,result`);
       if (saved?.status === "settled") return responseFor(userId, saved.result);
@@ -24073,6 +24304,12 @@ Deno.serve(async (request) => {
     if (!profile) throw new ApiError("\u5148\u306B\u30D7\u30EC\u30A4\u30E4\u30FC\u540D\u3092\u767B\u9332\u3057\u3066\u304F\u3060\u3055\u3044\u3002", 409);
     const { action, payload = {}, requestId } = await request.json();
     if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(requestId)) throw new ApiError("\u64CD\u4F5CID\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+    if (action === "normal_gacha_status") {
+      const state2 = await stateFor(user.id);
+      const pool = await db("gacha_items_master?gacha_id=in.(CHAR_NORMAL,SKILL_NORMAL,EQUIP_NORMAL)&select=gacha_id,item_id,item_type,rarity&limit=1000");
+      const day = normalGachaDay(Date.now());
+      return new Response(JSON.stringify(await responseFor(user.id, { normalGacha: { pool, day, available: state2.dailyNormalGachaDate !== day } })), { headers });
+    }
     if (action === "get_state" || action === "raid_refresh") return new Response(JSON.stringify(await responseFor(user.id)), { headers });
     if (action === "quest_battle" || action === "raid_battle") return new Response(JSON.stringify(await runBattle(user.id, action, payload, requestId, profile.username)), { headers });
     if (action === "territory_host" || action === "raid_unlock") {
@@ -24085,10 +24322,26 @@ Deno.serve(async (request) => {
       const hosted = await rpc("game04_host_territory", { p_user_id: user.id, p_request_id: requestId, p_destination_id: destinationId });
       return new Response(JSON.stringify(await responseFor(user.id, { territoryRoomId: hosted.room.id })), { headers });
     }
-    const [prior] = await db(`game04_requests?user_id=eq.${user.id}&request_id=eq.${requestId}&select=request_id`);
-    if (prior) return new Response(JSON.stringify(await responseFor(user.id)), { headers });
+    const [prior] = await db(`game04_requests?user_id=eq.${user.id}&request_id=eq.${requestId}&select=request_id,result`);
+    if (prior) {
+      const response = await responseFor(user.id, prior.result?.receipt ?? {});
+      if (action === "normal_gacha") {
+        const pool = await db("gacha_items_master?gacha_id=in.(CHAR_NORMAL,SKILL_NORMAL,EQUIP_NORMAL)&select=gacha_id,item_id,item_type,rarity&limit=1000");
+        const day = normalGachaDay(Date.now());
+        return new Response(JSON.stringify({ ...response, normalGacha: { pool, day, available: response.state.dailyNormalGachaDate !== day } }), { headers });
+      }
+      return new Response(JSON.stringify(response), { headers });
+    }
     const state = await stateFor(user.id);
     let after, room = null, version = null;
+    if (action === "normal_gacha") {
+      const pool = await db("gacha_items_master?gacha_id=in.(CHAR_NORMAL,SKILL_NORMAL,EQUIP_NORMAL)&select=gacha_id,item_id,item_type,rarity&limit=1000");
+      const drawn = applyNormalGacha(state, payload, pool, requestId, Date.now(), await rewardPolicy(), () => crypto.getRandomValues(new Uint32Array(1))[0] / 4294967296);
+      const receipt = { normalGachaResults: drawn.results, normalGachaCost: drawn.cost, normalGachaMasterVersion: drawn.masterVersion };
+      const saved = await commit(state, drawn.state, requestId, null, null, null, receipt);
+      const day = normalGachaDay(Date.now());
+      return new Response(JSON.stringify(await responseFor(user.id, { ...saved.receipt ?? receipt, normalGacha: { pool, day, available: saved.state?.dailyNormalGachaDate !== day } })), { headers });
+    }
     if (action === "claim_mission") {
       const mission = getClaimableMission(state, await missionConfig(), String(payload.missionId));
       after = structuredClone(state);
