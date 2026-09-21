@@ -778,5 +778,43 @@
       "formalApproval": false,
       "notes": "既存仮数値を維持。回復casterATK%/蘇生maxHP%/敵被弾SP5は仮値。poison/SP補充と非ATK・DEFパッシブは未採用・保留を明示。既存frozen roomはlegacyを保持。"
     }
+  },
+  "balanceV2Updates": {
+    "date": "2026-09-21",
+    "basisSha": "a99818906044ddcb41e0236527fbe808e267a5cd",
+    "authoritySha": "472239e42e346294f87b5bc349d5cb9382c53592",
+    "implementationSha": "c3981fb15a8a73fac9f82ebfed2372bd61df3bab",
+    "previewSha": "c3981fb15a8a73fac9f82ebfed2372bd61df3bab",
+    "db": "lrgyllgzcdcphlbmkknc",
+    "edgeVersion": 9,
+    "masterVersion": "PREVIEW_PROVISIONAL_BALANCE_V2_20260920",
+    "evidence": "GAME04_BALANCE_V2_INTEGRATION_20260920.md",
+    "stages": [
+      {
+        "name": "正本統合",
+        "status": "完了"
+      },
+      {
+        "name": "戦闘ルール",
+        "status": "Preview反映済"
+      },
+      {
+        "name": "キャラ・スキル接続",
+        "status": "Preview反映済"
+      },
+      {
+        "name": "UI・ログ",
+        "status": "Preview反映済"
+      },
+      {
+        "name": "Preview受入",
+        "status": "最終確認中"
+      },
+      {
+        "name": "正式バランス受入",
+        "status": "未FIX"
+      }
+    ],
+    "limits": "代表ケース限定受入。72候補はQA接続、正式所持・排出プール追加ではない。最終見送り理由修正の配信は本コミット後に確認。全体進捗率へ流用しない。"
   }
 }

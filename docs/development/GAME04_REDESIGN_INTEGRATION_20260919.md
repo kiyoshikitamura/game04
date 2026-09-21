@@ -93,3 +93,7 @@ Present実API最終確認: Character/Skill/Equipment各2個を各同時2claimし
 実装／Preview SHA `b8675e16c325166ae9ff1215eef2795c0017edc9`、Vercel success。GAME04 dev専用Migration `20260920082351_game04_common_battle_v2_master.sql` とEdge v7を適用。現在のterritory masterのみ仮版へ更新し、既存14開催snapshot・旧保存戦闘・進行は保持した。型検査・Build・24新検証群と3既存回帰がPASS。Quest新規v2の同request並行・旧保存互換、Raid個別WIN/LOSE・3勝非遡及・旧Lv精算・次Lv敵強化、360pxの別SP/ゲージ・中断・詳細ログ・300行動残数を限定確認。
 
 BC-01〜03はPreview反映済（限定受入）、BC-04正式数値・バランスは未FIX。多人並行の今回v2回帰・全Lvバランス・物理実機は未受入。raid_claim同一request再送でも材料・銭・適用台帳が一致し、全grant受取済みを確認。詳細は `GAME04_BATTLE_COMMON_INTEGRATION_20260920.md` を参照。GAME03・Productionは変更していない。
+
+## 2026-09-21 バランスv2追加仕様
+
+v2本文を優先して16型パッシブ・45体割当・72候補792行・25効果群・統合終了処理を接続。本体Preview `c3981fb15a8a73fac9f82ebfed2372bd61df3bab`、dev Edge v9、既存保存版を保持。正式バランスは未FIX。詳細と受入制限は `GAME04_BALANCE_V2_INTEGRATION_20260920.md`、工程別状態は進捗JSON `balanceV2Updates` を参照。旧工程の履歴・率は変更しない。
