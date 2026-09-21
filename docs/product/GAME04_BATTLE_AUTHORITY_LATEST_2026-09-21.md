@@ -7,7 +7,7 @@
 
 ## 1. 基本
 - 完全Auto Battle。通常攻撃・Skill・Target・BURSTの任意操作なし。
-- 味方最大5人、Enemy最大3体、Questは1Stage 1〜5Wave。
+- 味方最大5人、Enemy最大3体、Questは1Stage 1〜6Wave。
 - 味方行動順はDeck編成順。SPDなし。
 - 初期Criticalなし。
 - 1Battle通算300回の味方行動機会を上限とする。
@@ -68,7 +68,7 @@ ShieldはHPより先に最終Damageを吸収。DOT/HOTは付与時ATKと倍率�
 
 ## 8. Enemy
 - 個別HP / SP / Action Count / Skillを持つ。Enemy BURSTなし。
-- SPはBattle開始時最大。被弾SP量は未決。
+- SP上限と開始SPは別設定。Questは各敵の個別開始SP、Encounter/領土侵攻は上限満タン。被弾SPは直接攻撃1実行・被攻撃敵ごと10。演出多段・DOTでは増加させず、敵連続行動中の獲得は終了後に加算する。
 - CountはEnemy別Master値。味方実行行動・行動不能Skipで生存Enemy Count-1。BURST各行動も-1。演出多段・全体攻撃は1回。
 - Count 0で設定順に割込み。行動後Countを所定値へReset。
 - Enemy SkillはMaster設定優先順で条件/SP判定。各Skill後に再判定し成立する限り連続行動可。
@@ -123,8 +123,11 @@ LUKはSP/BURSTに加えDrop面の利益を持たせ、戦闘だけでは他特�
 - Quest UI: `docs/product/GAME04_SENGOKU_QUEST_UI_AUTHORITY_2026-09-19.md`
 - Raid UI: `docs/product/GAME04_SENGOKU_RAID_UI_AUTHORITY_PROVISIONAL_2026-09-19.md`
 
-個別Skill正式数値、Enemy被弾SP量、Enemy/Stage正式数値など未決項目は別Master工程で確定する。過去の開発仮値を本書の正式値へ昇格させない。
+個別Skill、Enemy/Stage、育成・報酬の初期採用値は `docs/product/GAME04_MASTER_AUTHORITY_LATEST_2026-09-21.md` と同梱表を参照。採用済み数値と未完了の実戦受入を区別する。
 
 
 ## Latest UI integration
 - 全体UI最新正本: `docs/product/GAME04_UI_AUTHORITY_LATEST_2026-09-21.md`
+
+## 最新数値・マスター
+- `docs/product/GAME04_MASTER_AUTHORITY_LATEST_2026-09-21.md`

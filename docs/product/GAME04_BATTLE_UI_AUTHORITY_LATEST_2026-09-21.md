@@ -208,3 +208,7 @@ Result / 詳細では、攻略の答え合わせができる情報を表示可�
 
 ## Latest UI integration
 - 全体UI最新正本: `docs/product/GAME04_UI_AUTHORITY_LATEST_2026-09-21.md`
+
+## 最新数値・マスター
+- `docs/product/GAME04_MASTER_AUTHORITY_LATEST_2026-09-21.md`
+- Wave総数は最大6。敵SP詳細は現在値/上限を表示し、開始値を上限から推定しない。
