@@ -124,3 +124,7 @@ LUKはSP/BURSTに加えDrop面の利益を持たせ、戦闘だけでは他特�
 - Raid UI: `docs/product/GAME04_SENGOKU_RAID_UI_AUTHORITY_PROVISIONAL_2026-09-19.md`
 
 個別Skill正式数値、Enemy被弾SP量、Enemy/Stage正式数値など未決項目は別Master工程で確定する。過去の開発仮値を本書の正式値へ昇格させない。
+
+
+## Latest UI integration
+- 全体UI最新正本: `docs/product/GAME04_UI_AUTHORITY_LATEST_2026-09-21.md`
