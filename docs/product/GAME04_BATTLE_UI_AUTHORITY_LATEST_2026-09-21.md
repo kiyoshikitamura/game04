@@ -204,3 +204,7 @@ Result / 詳細では、攻略の答え合わせができる情報を表示可�
 - `docs/product/GAME04_SENGOKU_RAID_UI_AUTHORITY_PROVISIONAL_2026-09-19.md`
 
 旧 `GAME04_SENGOKU_BATTLE_UI_AUTHORITY_2026-09-19.md` は履歴資料とし、最新制作では本書を使用する。
+
+
+## Latest UI integration
+- 全体UI最新正本: `docs/product/GAME04_UI_AUTHORITY_LATEST_2026-09-21.md`
