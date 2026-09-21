@@ -116,6 +116,7 @@ LUKはSP/BURSTに加えDrop面の利益を持たせ、戦闘だけでは他特�
 万能Deckを避け、対策にはCharacter/Skill/Equipment入替と火力・耐久・SP等の代償を持たせる。
 
 ## 15. 付帯する最新Authority
+- Battle UI最新: `docs/product/GAME04_BATTLE_UI_AUTHORITY_LATEST_2026-09-21.md`
 - 育成: `docs/product/GAME04_GROWTH_AUTHORITY_V1_2026-09-21.md`
 - 企画全体: `docs/product/GAME04_SENGOKU_PLANNING_AUTHORITY_REDESIGN_2026-09-19.md`
 - 領土侵攻/Raid: `docs/product/GAME04_TERRITORY_INVASION_AUTHORITY_2026-09-20.md`
