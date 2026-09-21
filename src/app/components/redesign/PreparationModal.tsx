@@ -3,18 +3,9 @@ import { useState } from 'react';
 import type { BattleUnit, SkillMaster } from '@/domain/redesign/types';
 import CanonicalDialog from '../ui/CanonicalDialog';
 import './QuestView.css';
+import { TARGET_LABELS, passiveDescription, skillConditionText, skillDescription } from './battleLabels';
 
 export const ELEMENT_LABELS: Record<string, string> = { fire: '火', water: '水', earth: '土', wind: '風', light: '光', dark: '闇' };
-const TARGET_LABELS: Record<string, string> = { first: '先頭の敵', lowest_hp: 'HPの低い敵', highest_hp: 'HPの高い敵', random: 'ランダムな敵', all_enemies: '敵全体', lowest_ally: 'HPの低い味方', all_allies: '味方全体', self: '自身', dead_ally: '戦闘不能の味方' };
-function conditionLabel(skill: SkillMaster) {
-  const condition = skill.condition;
-  if (condition.type === 'hp_below') return `自身のHP ${Math.round((condition.value ?? .5) * 100)}%以下`;
-  if (condition.type === 'ally_hp_below') return `味方のHP ${Math.round((condition.value ?? .5) * 100)}%以下`;
-  if (condition.type === 'every_n_actions') return `${condition.value ?? 1}行動ごと`;
-  if (condition.type === 'enemy_count') return `敵が${condition.value ?? 1}体以上`;
-  if (condition.type === 'ally_dead') return '戦闘不能の味方がいる';
-  return '常時';
-}
 export default function PreparationModal({ party, title, energyCost, energy, busy = false, onConfirm, onBack, onOpenDeck, error, commonSpMax = 400 }: {
   commonSpMax?: number | null; party: BattleUnit[]; title: string; energyCost: number; energy: number; busy?: boolean;
   onConfirm: () => void | Promise<void>; onBack: () => void; onOpenDeck: () => void; error?: string;
@@ -39,8 +30,8 @@ export default function PreparationModal({ party, title, energyCost, energy, bus
     </CanonicalDialog>
     {detail && <CanonicalDialog title={`${detail.name}の詳細`} onClose={() => setDetail(null)} actions={[{ label: '閉じる', onClick: () => setDetail(null) }]}>
       <h3>スキル発動優先順</h3><p>優先1から順に判定し、条件とSPを満たす最初のスキルが発動します。</p>{detail.skills.length === 0 && <p>スキル未設定</p>}
-      {detail.skills.map((skill, index) => <article className="rq-detail-item" key={skill.id}><strong>優先{index + 1}：{skill.name}</strong><p>{ELEMENT_LABELS[skill.element]}属性 ／ 消費SP {skill.spCost}</p><p>条件：{conditionLabel(skill)}</p><p>対象：{TARGET_LABELS[skill.target]}</p><p>{skill.description}</p></article>)}
-      <h3>パッシブ</h3>{detail.passives.map(passive => <article className="rq-detail-item" key={passive.id}><strong>{passive.name} Lv.{passive.level ?? 0}</strong><p>{passive.target === 'party' ? 'パーティ全体' : '自身'}の{passive.stat.toUpperCase()} +{Math.round(passive.percent)}%</p></article>)}
+      {detail.skills.map((skill, index) => <article className="rq-detail-item" key={skill.id}><strong>優先{index + 1}：{skill.name}</strong><p>{ELEMENT_LABELS[skill.element]}属性 ／ 消費SP {skill.spCost}</p><p>条件：{skillConditionText(skill)}</p><p>対象：{TARGET_LABELS[skill.target]}</p><p>{skillDescription(skill, commonSpMax !== null)}</p></article>)}
+      {detail.passives.length > 0 && <h3>パッシブ</h3>}{detail.passives.map(passive => <article className="rq-detail-item" key={passive.id}><strong>{passive.name} Lv.{passive.level ?? 0}</strong><p>{passiveDescription(passive)}</p></article>)}
     </CanonicalDialog>}
   </div>;
 }

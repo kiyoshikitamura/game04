@@ -1,3 +1,5 @@
+import { BALANCE_V2_CONFIG, BALANCE_V2_CHARACTER_ASSIGNMENTS, BALANCE_V2_ATTACK_ANCHORS, getCharacterPassive, interpolatePreviewAnchor } from './balanceV2Masters';
+export * from './balanceV2Masters';
 import { applyAcquisitionEvents, PREVIEW_ACQUISITION_MASTER, type AcquisitionMaster } from './acquisitions';
 import roster from '../../theme/sengoku-characters.json';
 import names from '../../theme/sengoku-masters.json';
@@ -12,17 +14,24 @@ export const EQUIPMENT_SLOTS: EquipmentSlot[] = ['weapon','head','body','legs','
 export const SLOT_NAMES: Record<EquipmentSlot,string> = {weapon:'武器',head:'頭',body:'身体',legs:'脚',accessory1:'アクセ1',accessory2:'アクセ2'};
 export const LEGACY_BATTLE_RULES: BattleRules = { defenseFactor:0.45, advantageMultiplier:1.5, disadvantageMultiplier:0.75, spRecoveryDivisor:120, burstLukDivisor:20, enemySpRecoveryDivisor:30, maxPlayerActions:300, initialSpRatio:0 };
 /** Fixed common rules; character, skill and enemy numbers remain provisional. */
-export const BATTLE_RULES: BattleRules = {...LEGACY_BATTLE_RULES,version:'common-v2-20260920',defenseFactor:1};
+export const COMMON_BATTLE_RULES: BattleRules = {...LEGACY_BATTLE_RULES,version:'common-v2-20260920',defenseFactor:1};
+export const BATTLE_RULES: BattleRules = {...COMMON_BATTLE_RULES,version:'balance-v2-20260920',balanceV2:BALANCE_V2_CONFIG};
 export const COMMON_PREVIEW_DATA_STATUS = 'PREVIEW_PROVISIONAL_COMMON_V2_20260920';
 
 const power: Record<Rarity,number> = {N:1,R:1.08,SR:1.16,SSR:1.24};
 const image = (id:string) => assets.assets.find(a=>a.id===id)?.path ?? '/menu/event_banner_placeholder.png';
 const name = (id:string) => (names as Record<string,string>)[id] ?? id;
-export const CHARACTER_MASTERS: CharacterMaster[] = roster.map((c,i) => {
+export const COMMON_CHARACTER_MASTERS: CharacterMaster[] = roster.map((c,i) => {
  const rarity=c.sourceRarity as Rarity, factor=power[rarity], role=['攻撃','守備','回復','支援','技巧'][i%5];
  return {id:c.characterId,name:c.name,image:c.imagePath,rarity,element:ELEMENTS[i%6],role,
  stats:{hp:Math.round((950+(i%5===1?300:0))*factor),sp:60+(i%5)*5,atk:Math.round((110+(i%5===0?30:0))*factor),def:Math.round((45+(i%5===1?20:0))*factor),luk:20+i%15},
  passive:{id:`passive_${c.characterId}`,name:['武勇の心得','守勢の心得','慈愛の心得','陣形の心得','機略の心得'][i%5],stat:(['atk','def','hp','sp','luk'] as (keyof Stats)[])[i%5],percent:2,target:'party'}};
+});
+/** Fixed Appendix B assignments; N element/role and non-attack body stats remain explicitly provisional. */
+export const CHARACTER_MASTERS:CharacterMaster[]=COMMON_CHARACTER_MASTERS.map(old=>{
+ const a=BALANCE_V2_CHARACTER_ASSIGNMENTS.find(a=>a.id===old.id);
+ const master:CharacterMaster={...old,...(a?{rarity:a.rarity as Rarity,element:a.element as Element,role:a.role}:{}),passive:undefined};
+ master.passive=getCharacterPassive(master,0);return master;
 });
 export const LEGACY_SKILL_MASTERS: SkillMaster[] = oldSkills.skills.filter(s=>!s.exclusive_character_id).map((s,i)=> {
  const kind=i%8, rarity=s.rarity as Rarity, f=power[rarity];
@@ -43,10 +52,11 @@ export function commonPreviewSkill(skill:SkillMaster):SkillMaster {
  };
 }
 export const SKILL_MASTERS:SkillMaster[]=LEGACY_SKILL_MASTERS.map(commonPreviewSkill);
+export const COMMON_SKILL_MASTERS=SKILL_MASTERS;
 /** New inputs only. Never run this over a saved battle input or legacy room snapshot. */
 export function prepareBattleWaves(waves:EnemyUnit[][],rules:BattleRules):EnemyUnit[][] {
  const frozen=structuredClone(waves);
- if(rules.version!=='common-v2-20260920')return frozen;
+ if(rules.version!=='common-v2-20260920'&&rules.version!=='balance-v2-20260920')return frozen;
  return frozen.map(wave=>wave.map(enemy=>({...enemy,hitSpGain:enemy.hitSpGain??5,
   skills:enemy.skills.map(commonPreviewSkill),passives:enemy.passives.filter(p=>p.stat==='atk'||p.stat==='def'),
   phases:enemy.phases?.map(phase=>({...phase,skills:phase.skills?.map(commonPreviewSkill)})),
@@ -57,14 +67,24 @@ export const EQUIPMENT_MASTERS: EquipmentMaster[] = oldEquipment.equipments.filt
  return {id:e.equipment_id,name:name(e.equipment_id),image:image(e.equipment_id),rarity,slot,stats:{hp:slot==='body'?Math.round(80*f):0,sp:slot==='accessory1'?5:0,atk:slot==='weapon'?Math.round(16*f):0,def:slot==='head'||slot==='legs'?Math.round(8*f):0,luk:slot==='accessory1'?3:0}};
 });
 export function getSkillSlots(awakening:number) {return awakening>=3?3:awakening>=1?2:1;}
-export function getCharacterStats(master:CharacterMaster,level:number,awakening:number):Stats {return Object.fromEntries(Object.entries(master.stats).map(([k,v])=>[k,Math.round(v*(1+(Math.max(1,level)-1)*0.055)*(awakening>=4?1+(awakening-3)*0.1:1))])) as Stats;}
+export function getLegacyCharacterStats(master:CharacterMaster,level:number,awakening:number):Stats {return Object.fromEntries(Object.entries(master.stats).map(([k,v])=>[k,Math.round(v*(1+(Math.max(1,level)-1)*0.055)*(awakening>=4?1+(awakening-3)*0.1:1))])) as Stats;}
+export function getCharacterStats(master:CharacterMaster,level:number,awakening:number):Stats {
+ const stats=getLegacyCharacterStats(master,level,awakening);
+ if(master.role.includes('攻撃')&&!master.role.includes('支援')){
+  const anchors=BALANCE_V2_ATTACK_ANCHORS[master.rarity];
+  stats.hp=interpolatePreviewAnchor(level,[1,50,100],anchors.hp);
+  stats.def=interpolatePreviewAnchor(level,[1,50,100],anchors.def);
+  stats.atk=interpolatePreviewAnchor(level,[1,10,20,30,40,50,60,70,80,90,100],anchors.atk);
+ }
+ return stats;
+}
 export function getEquipmentStats(master:EquipmentMaster,level:number,lb:number):Stats {return Object.fromEntries(Object.entries(master.stats).map(([k,v])=>[k,Math.round(v*(1+(Math.max(1,level)-1)*0.04)*(1+lb*0.1))])) as Stats;}
 export function buildBattleParty(state:RedesignState,rules:BattleRules=BATTLE_RULES):BattleUnit[] {return state.deck.map(member=> {
- const owned=state.characters.find(c=>c.id===member.characterId), master=CHARACTER_MASTERS.find(c=>c.id===member.characterId);
+ const owned=state.characters.find(c=>c.id===member.characterId), master=(rules.version==='balance-v2-20260920'?CHARACTER_MASTERS:COMMON_CHARACTER_MASTERS).find(c=>c.id===member.characterId);
  if(!owned||!master) throw new Error('編成キャラが見つかりません');
- const stats=getCharacterStats(master,owned.level,owned.awakening);
+ const stats=(rules.version==='balance-v2-20260920'?getCharacterStats:getLegacyCharacterStats)(master,owned.level,owned.awakening);
  for(const instanceId of Object.values(member.equipment)){const e=state.equipment.find(e=>e.instanceId===instanceId),m=EQUIPMENT_MASTERS.find(m=>m.id===e?.masterId);if(e&&m){const bonus=getEquipmentStats(m,e.level,e.lb);for(const key of Object.keys(stats) as (keyof Stats)[])stats[key]+=bonus[key];}}
- return {id:master.id,name:master.name,image:master.image,level:owned.level,element:master.element,stats,skills:member.skillIds.slice(0,getSkillSlots(owned.awakening)).map(id=>{const s=(rules.version==='common-v2-20260920'?SKILL_MASTERS:LEGACY_SKILL_MASTERS).find(s=>s.id===id),o=state.skills.find(s=>s.id===id);if(!s||!o)throw new Error('未所持のスキルです');return {...s,effects:s.effects.map(e=>({...e,power:e.power*(1+o.level*0.05)}))};}),passives:(rules.version!=='common-v2-20260920'||master.passive.stat==='atk'||master.passive.stat==='def')?[{...master.passive,level:owned.awakening*2,percent:master.passive.percent*(1+owned.awakening*2)}]:[]};
+ return {id:master.id,name:master.name,image:master.image,level:owned.level,element:master.element,stats,skills:member.skillIds.slice(0,getSkillSlots(owned.awakening)).map(id=>{const s=(rules.version==='common-v2-20260920'||rules.version==='balance-v2-20260920'?SKILL_MASTERS:LEGACY_SKILL_MASTERS).find(s=>s.id===id),o=state.skills.find(s=>s.id===id);if(!s||!o)throw new Error('未所持のスキルです');return {...s,effects:s.effects.map(e=>({...e,power:e.power*(1+o.level*0.05)}))};}),passives:rules.version==='balance-v2-20260920'?(getCharacterPassive(master,owned.awakening)?[getCharacterPassive(master,owned.awakening)!]:[]):master.passive&&(rules.version!=='common-v2-20260920'||master.passive.stat==='atk'||master.passive.stat==='def')?[{...master.passive,level:owned.awakening*2,percent:master.passive.percent*(1+owned.awakening*2)}]:[]};
  });}
 export function createInitialState(userId:string):RedesignState {
  const starters=CHARACTER_MASTERS.filter(c=>c.rarity==='N').slice(0,5);

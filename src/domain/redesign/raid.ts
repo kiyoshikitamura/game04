@@ -1,4 +1,5 @@
-import { CHARACTER_MASTERS, SKILL_MASTERS, grantReward } from './masters';
+// Keep existing stage/enemy/reward fixtures separate from balance-v2 character and 72-skill candidates.
+import { COMMON_CHARACTER_MASTERS as CHARACTER_MASTERS, COMMON_SKILL_MASTERS as SKILL_MASTERS, grantReward } from './masters';
 import type { AcquisitionMaster } from './acquisitions';
 import type { EnemyUnit, RaidMaster, RaidRoom, RedesignState, Reward, TerritorySnapshot } from './types';
 

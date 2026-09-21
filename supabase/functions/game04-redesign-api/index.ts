@@ -1,3 +1,13591 @@
+// src/domain/redesign/data/balance-v2.json
+var balance_v2_default = {
+  version: "PREVIEW_PROVISIONAL_BALANCE_V2_20260920",
+  status: "PREVIEW_PROVISIONAL",
+  sourceSha256: "f2a900b2a62bd25c23de0667c7c5c62fb45edb08467f58fe6aed74dfa4302a7e",
+  assignments: [
+    {
+      id: "char_ageha_01",
+      name: "\u8C4A\u81E3\u79C0\u5409",
+      rarity: "SSR",
+      element: "light",
+      role: "\u56DE\u5FA9",
+      passiveType: "P10"
+    },
+    {
+      id: "char_go_01",
+      name: "\u6B66\u7530\u4FE1\u7384",
+      rarity: "SSR",
+      element: "fire",
+      role: "\u653B\u5B88\u517C\u4EFB",
+      passiveType: "P16"
+    },
+    {
+      id: "char_kaede_01",
+      name: "\u771F\u7530\u5E78\u6751",
+      rarity: "SSR",
+      element: "fire",
+      role: "\u80CC\u6C34\u653B\u6483",
+      passiveType: "P14"
+    },
+    {
+      id: "char_karen_01",
+      name: "\u5FB3\u5DDD\u5BB6\u5EB7",
+      rarity: "SSR",
+      element: "earth",
+      role: "\u9632\u5FA1\u652F\u63F4",
+      passiveType: "P02"
+    },
+    {
+      id: "char_kengo_01",
+      name: "\u672C\u591A\u5FE0\u52DD",
+      rarity: "SSR",
+      element: "earth",
+      role: "\u53CD\u6483\u5B88\u5099",
+      passiveType: "P13"
+    },
+    {
+      id: "char_koharu_01",
+      name: "\u4E0A\u6749\u8B19\u4FE1",
+      rarity: "SSR",
+      element: "water",
+      role: "\u5358\u4F53\u653B\u6483",
+      passiveType: "P06"
+    },
+    {
+      id: "char_leo_01",
+      name: "\u4F0A\u9054\u653F\u5B97",
+      rarity: "SSR",
+      element: "wind",
+      role: "\u5168\u4F53\u653B\u6483",
+      passiveType: "P07"
+    },
+    {
+      id: "char_mio_01",
+      name: "\u524D\u7530\u6176\u6B21",
+      rarity: "SSR",
+      element: "wind",
+      role: "\u901A\u5E38\u653B\u6483",
+      passiveType: "P05"
+    },
+    {
+      id: "char_miyabi_01",
+      name: "\u660E\u667A\u5149\u79C0",
+      rarity: "SSR",
+      element: "dark",
+      role: "\u5F31\u4F53\u5229\u7528\u653B\u6483",
+      passiveType: "P08"
+    },
+    {
+      id: "char_reiji_01",
+      name: "\u7E54\u7530\u4FE1\u9577",
+      rarity: "SSR",
+      element: "fire",
+      role: "\u653B\u6483\u652F\u63F4",
+      passiveType: "P01"
+    },
+    {
+      id: "char_cecile_01",
+      name: "\u4E95\u4F0A\u76F4\u864E",
+      rarity: "SR",
+      element: "water",
+      role: "\u7D99\u6226\u5B88\u5099",
+      passiveType: "P11"
+    },
+    {
+      id: "char_genji_01",
+      name: "\u4ECA\u5DDD\u7FA9\u5143",
+      rarity: "SR",
+      element: "wind",
+      role: "\u9632\u5FA1\u652F\u63F4",
+      passiveType: "P02"
+    },
+    {
+      id: "char_leon_01",
+      name: "\u52A0\u85E4\u6E05\u6B63",
+      rarity: "SR",
+      element: "earth",
+      role: "\u5B88\u5099",
+      passiveType: "P15"
+    },
+    {
+      id: "char_lucas_01",
+      name: "\u5CF6\u6D25\u7FA9\u5F18",
+      rarity: "SR",
+      element: "fire",
+      role: "\u80CC\u6C34\u653B\u6483",
+      passiveType: "P14"
+    },
+    {
+      id: "char_maya_01",
+      name: "\u670D\u90E8\u534A\u8535",
+      rarity: "SR",
+      element: "dark",
+      role: "\u72B6\u614B\u5229\u7528\u653B\u6483",
+      passiveType: "P09"
+    },
+    {
+      id: "char_noa_01",
+      name: "\u67F4\u7530\u52DD\u5BB6",
+      rarity: "SR",
+      element: "earth",
+      role: "\u901A\u5E38\u653B\u6483",
+      passiveType: "P05"
+    },
+    {
+      id: "char_reina_01",
+      name: "\u6BDB\u5229\u5143\u5C31",
+      rarity: "SR",
+      element: "wind",
+      role: "\u6DF7\u6210\u653B\u6483",
+      passiveType: "P03"
+    },
+    {
+      id: "char_riki_01",
+      name: "\u6FC3\u59EB",
+      rarity: "SR",
+      element: "dark",
+      role: "\u4FDD\u8B77\u652F\u63F4",
+      passiveType: "P12"
+    },
+    {
+      id: "char_rui_01",
+      name: "\u76F4\u6C5F\u517C\u7D9A",
+      rarity: "SR",
+      element: "water",
+      role: "\u653B\u6483\u652F\u63F4",
+      passiveType: "P01"
+    },
+    {
+      id: "char_sakura_01",
+      name: "\u771F\u7530\u660C\u5E78",
+      rarity: "SR",
+      element: "fire",
+      role: "\u4FDD\u8B77\u652F\u63F4",
+      passiveType: "P12"
+    },
+    {
+      id: "char_seiya_01",
+      name: "\u77F3\u7530\u4E09\u6210",
+      rarity: "SR",
+      element: "light",
+      role: "\u6DF7\u6210\u5B88\u5099",
+      passiveType: "P04"
+    },
+    {
+      id: "char_sora_01",
+      name: "\u7ACB\u82B1\u8ABE\u5343\u4EE3",
+      rarity: "SR",
+      element: "light",
+      role: "\u5168\u4F53\u653B\u6483",
+      passiveType: "P07"
+    },
+    {
+      id: "char_taiga_01",
+      name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+      rarity: "SR",
+      element: "water",
+      role: "\u653B\u5B88\u517C\u4EFB",
+      passiveType: "P16"
+    },
+    {
+      id: "char_takuro_01",
+      name: "\u96D1\u8CC0\u5B6B\u5E02",
+      rarity: "SR",
+      element: "wind",
+      role: "\u5358\u4F53\u653B\u6483",
+      passiveType: "P06"
+    },
+    {
+      id: "char_tetsu_01",
+      name: "\u9ED2\u7530\u5B98\u5175\u885B",
+      rarity: "SR",
+      element: "dark",
+      role: "\u5F31\u4F53\u5229\u7528\u653B\u6483",
+      passiveType: "P08"
+    },
+    {
+      id: "char_aoi_01",
+      name: "\u304A\u5E02\u306E\u65B9",
+      rarity: "R",
+      element: "fire",
+      role: "\u56DE\u5FA9",
+      passiveType: "P10"
+    },
+    {
+      id: "char_chang_01",
+      name: "\u4E0A\u6749\u666F\u52DD",
+      rarity: "R",
+      element: "water",
+      role: "\u9632\u5FA1\u652F\u63F4",
+      passiveType: "P02"
+    },
+    {
+      id: "char_daimon_01",
+      name: "\u4E95\u4F0A\u76F4\u653F",
+      rarity: "R",
+      element: "fire",
+      role: "\u5358\u4F53\u653B\u6483",
+      passiveType: "P06"
+    },
+    {
+      id: "char_jihoon_01",
+      name: "\u524D\u7530\u5229\u5BB6",
+      rarity: "R",
+      element: "earth",
+      role: "\u901A\u5E38\u653B\u6483",
+      passiveType: "P05"
+    },
+    {
+      id: "char_joe_01",
+      name: "\u5317\u6761\u6C0F\u5EB7",
+      rarity: "R",
+      element: "earth",
+      role: "\u5B88\u5099",
+      passiveType: "P15"
+    },
+    {
+      id: "char_kaito_01",
+      name: "\u5927\u53CB\u5B97\u9E9F",
+      rarity: "R",
+      element: "light",
+      role: "\u653B\u6483\u652F\u63F4",
+      passiveType: "P01"
+    },
+    {
+      id: "char_makoto_01",
+      name: "\u5C0F\u65E9\u5DDD\u9686\u666F",
+      rarity: "R",
+      element: "water",
+      role: "\u6DF7\u6210\u653B\u6483",
+      passiveType: "P03"
+    },
+    {
+      id: "char_mark_01",
+      name: "\u5C0F\u677E\u59EB",
+      rarity: "R",
+      element: "fire",
+      role: "\u53CD\u6483\u5B88\u5099",
+      passiveType: "P13"
+    },
+    {
+      id: "char_mei_01",
+      name: "\u5C71\u672C\u52D8\u52A9",
+      rarity: "R",
+      element: "fire",
+      role: "\u5F31\u4F53\u5229\u7528\u653B\u6483",
+      passiveType: "P08"
+    },
+    {
+      id: "char_minami_01",
+      name: "\u5CF6\u5DE6\u8FD1",
+      rarity: "R",
+      element: "earth",
+      role: "\u653B\u5B88\u517C\u4EFB",
+      passiveType: "P16"
+    },
+    {
+      id: "char_momoko_01",
+      name: "\u5CF6\u6D25\u7FA9\u4E45",
+      rarity: "R",
+      element: "fire",
+      role: "\u9632\u5FA1\u652F\u63F4",
+      passiveType: "P02"
+    },
+    {
+      id: "char_ren_01",
+      name: "\u658E\u85E4\u9053\u4E09",
+      rarity: "R",
+      element: "dark",
+      role: "\u72B6\u614B\u5229\u7528\u653B\u6483",
+      passiveType: "P09"
+    },
+    {
+      id: "char_ren_male_01",
+      name: "\u672C\u9858\u5BFA\u9855\u5982",
+      rarity: "R",
+      element: "earth",
+      role: "\u56DE\u5FA9",
+      passiveType: "P10"
+    },
+    {
+      id: "char_rin_01",
+      name: "\u6B66\u7530\u52DD\u983C",
+      rarity: "R",
+      element: "fire",
+      role: "\u80CC\u6C34\u653B\u6483",
+      passiveType: "P14"
+    },
+    {
+      id: "char_serika_01",
+      name: "\u6D45\u4E95\u9577\u653F",
+      rarity: "R",
+      element: "wind",
+      role: "\u7D99\u6226\u5B88\u5099",
+      passiveType: "P11"
+    },
+    {
+      id: "char_shin_01",
+      name: "\u7247\u5009\u666F\u7DB1",
+      rarity: "R",
+      element: "wind",
+      role: "\u4FDD\u8B77\u652F\u63F4",
+      passiveType: "P12"
+    },
+    {
+      id: "char_shion_01",
+      name: "\u7532\u6590\u59EB",
+      rarity: "R",
+      element: "water",
+      role: "\u53CD\u6483\u5B88\u5099",
+      passiveType: "P13"
+    },
+    {
+      id: "char_yuji_01",
+      name: "\u7ACB\u82B1\u5B97\u8302",
+      rarity: "R",
+      element: "light",
+      role: "\u5358\u4F53\u653B\u6483",
+      passiveType: "P06"
+    },
+    {
+      id: "char_yuki_01",
+      name: "\u7AF9\u4E2D\u534A\u5175\u885B",
+      rarity: "R",
+      element: "light",
+      role: "\u6DF7\u6210\u5B88\u5099",
+      passiveType: "P04"
+    },
+    {
+      id: "char_yukina_01",
+      name: "\u7D30\u5DDD\u30AC\u30E9\u30B7\u30E3",
+      rarity: "R",
+      element: "light",
+      role: "\u56DE\u5FA9",
+      passiveType: "P10"
+    }
+  ],
+  skills: [
+    {
+      designId: "SKD001",
+      id: "qa_balance_v2_skd001",
+      name: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B",
+      rarity: "N",
+      element: "fire",
+      sp0: 25,
+      sp10: 25,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 105,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD002",
+      id: "qa_balance_v2_skd002",
+      name: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34",
+      rarity: "N",
+      element: "water",
+      sp0: 25,
+      sp10: 25,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 105,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD003",
+      id: "qa_balance_v2_skd003",
+      name: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F",
+      rarity: "N",
+      element: "earth",
+      sp0: 25,
+      sp10: 25,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 105,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD004",
+      id: "qa_balance_v2_skd004",
+      name: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8",
+      rarity: "N",
+      element: "wind",
+      sp0: 25,
+      sp10: 25,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 105,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD005",
+      id: "qa_balance_v2_skd005",
+      name: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149",
+      rarity: "N",
+      element: "light",
+      sp0: 25,
+      sp10: 25,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 105,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD006",
+      id: "qa_balance_v2_skd006",
+      name: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7",
+      rarity: "N",
+      element: "dark",
+      sp0: 25,
+      sp10: 25,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 105,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD007",
+      id: "qa_balance_v2_skd007",
+      name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+      rarity: "R",
+      element: "fire",
+      sp0: 50,
+      sp10: 50,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 120,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 200,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD008",
+      id: "qa_balance_v2_skd008",
+      name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34",
+      rarity: "R",
+      element: "water",
+      sp0: 50,
+      sp10: 50,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 120,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 200,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD009",
+      id: "qa_balance_v2_skd009",
+      name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F",
+      rarity: "R",
+      element: "earth",
+      sp0: 50,
+      sp10: 50,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 120,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 200,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD010",
+      id: "qa_balance_v2_skd010",
+      name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8",
+      rarity: "R",
+      element: "wind",
+      sp0: 50,
+      sp10: 50,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 120,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 200,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD011",
+      id: "qa_balance_v2_skd011",
+      name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149",
+      rarity: "R",
+      element: "light",
+      sp0: 50,
+      sp10: 50,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 120,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 200,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD012",
+      id: "qa_balance_v2_skd012",
+      name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7",
+      rarity: "R",
+      element: "dark",
+      sp0: 50,
+      sp10: 50,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 120,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 200,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD013",
+      id: "qa_balance_v2_skd013",
+      name: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B",
+      rarity: "SSR",
+      element: "fire",
+      sp0: 150,
+      sp10: 150,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 300,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD014",
+      id: "qa_balance_v2_skd014",
+      name: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34",
+      rarity: "SSR",
+      element: "water",
+      sp0: 150,
+      sp10: 150,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 300,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD015",
+      id: "qa_balance_v2_skd015",
+      name: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F",
+      rarity: "SSR",
+      element: "earth",
+      sp0: 150,
+      sp10: 150,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 300,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD016",
+      id: "qa_balance_v2_skd016",
+      name: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8",
+      rarity: "SSR",
+      element: "wind",
+      sp0: 150,
+      sp10: 150,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 300,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD017",
+      id: "qa_balance_v2_skd017",
+      name: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149",
+      rarity: "SSR",
+      element: "light",
+      sp0: 150,
+      sp10: 150,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 300,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD018",
+      id: "qa_balance_v2_skd018",
+      name: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7",
+      rarity: "SSR",
+      element: "dark",
+      sp0: 150,
+      sp10: 150,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 300,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD019",
+      id: "qa_balance_v2_skd019",
+      name: "\u5168\u4F53\u653B\u6483\u30FB\u706B",
+      rarity: "R",
+      element: "fire",
+      sp0: 75,
+      sp10: 75,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 60,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u6575\u5168\u4F53",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD020",
+      id: "qa_balance_v2_skd020",
+      name: "\u5168\u4F53\u653B\u6483\u30FB\u6C34",
+      rarity: "R",
+      element: "water",
+      sp0: 75,
+      sp10: 75,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 60,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u6575\u5168\u4F53",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD021",
+      id: "qa_balance_v2_skd021",
+      name: "\u5168\u4F53\u653B\u6483\u30FB\u571F",
+      rarity: "R",
+      element: "earth",
+      sp0: 75,
+      sp10: 75,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 60,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u6575\u5168\u4F53",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD022",
+      id: "qa_balance_v2_skd022",
+      name: "\u5168\u4F53\u653B\u6483\u30FB\u98A8",
+      rarity: "R",
+      element: "wind",
+      sp0: 75,
+      sp10: 75,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 60,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u6575\u5168\u4F53",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD023",
+      id: "qa_balance_v2_skd023",
+      name: "\u5168\u4F53\u653B\u6483\u30FB\u5149",
+      rarity: "R",
+      element: "light",
+      sp0: 75,
+      sp10: 75,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 60,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u6575\u5168\u4F53",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD024",
+      id: "qa_balance_v2_skd024",
+      name: "\u5168\u4F53\u653B\u6483\u30FB\u95C7",
+      rarity: "R",
+      element: "dark",
+      sp0: 75,
+      sp10: 75,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 60,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u6575\u5168\u4F53",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD025",
+      id: "qa_balance_v2_skd025",
+      name: "\u7D05\u84EE\u306E\u5927\u8A08",
+      rarity: "SSR",
+      element: "fire",
+      sp0: 170,
+      sp10: 170,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 90,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u6575\u5168\u4F53",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD026",
+      id: "qa_balance_v2_skd026",
+      name: "\u5F8C\u9663\u5C04\u3061",
+      rarity: "R",
+      element: "wind",
+      sp0: 55,
+      sp10: 55,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 105,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 180,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u6700\u5F8C\u5C3E\u306E\u751F\u5B58\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD027",
+      id: "qa_balance_v2_skd027",
+      name: "\u8FFD\u3044\u8A0E\u3061",
+      rarity: "R",
+      element: "dark",
+      sp0: 50,
+      sp10: 50,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 110,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 190,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u6B8BHP\u5B9F\u6570\u6700\u5C0F\u306E\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD028",
+      id: "qa_balance_v2_skd028",
+      name: "\u5D29\u3057\u8A0E\u3061",
+      rarity: "SR",
+      element: "earth",
+      sp0: 100,
+      sp10: 100,
+      effects0: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 110,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 140,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 180,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 250,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD029",
+      id: "qa_balance_v2_skd029",
+      name: "\u6BD2\u5203",
+      rarity: "R",
+      element: "dark",
+      sp0: 65,
+      sp10: 65,
+      effects0: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 80,
+          unit: "%"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 10,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 130,
+          unit: "%"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 20,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD030",
+      id: "qa_balance_v2_skd030",
+      name: "\u8755\u307F\u8A0E\u3061",
+      rarity: "SR",
+      element: "dark",
+      sp0: 100,
+      sp10: 100,
+      effects0: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 110,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 145,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 180,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 260,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD031",
+      id: "qa_balance_v2_skd031",
+      name: "\u80CC\u6C34\u65AC\u308A",
+      rarity: "SR",
+      element: "fire",
+      sp0: 100,
+      sp10: 100,
+      effects0: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 110,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 180,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 270,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD032",
+      id: "qa_balance_v2_skd032",
+      name: "\u5F71\u7E2B\u3044",
+      rarity: "R",
+      element: "water",
+      sp0: 65,
+      sp10: 65,
+      effects0: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 35,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 55,
+          unit: "%"
+        }
+      ],
+      duration: 1,
+      targetDescription: "\u914D\u7F6E\u9806\u6700\u521D\u306E\u4ED8\u4E0E\u53EF\u80FD\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD033",
+      id: "qa_balance_v2_skd033",
+      name: "\u6C17\u5408",
+      rarity: "N",
+      element: "fire",
+      sp0: 30,
+      sp10: 30,
+      effects0: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 8,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 15,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u81EA\u8EAB",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD034",
+      id: "qa_balance_v2_skd034",
+      name: "\u8EAB\u69CB\u3048",
+      rarity: "N",
+      element: "earth",
+      sp0: 30,
+      sp10: 30,
+      effects0: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 15,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 30,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u81EA\u8EAB",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD035",
+      id: "qa_balance_v2_skd035",
+      name: "\u9B28\u306E\u58F0",
+      rarity: "R",
+      element: "fire",
+      sp0: 75,
+      sp10: 75,
+      effects0: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 8,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 15,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u5473\u65B9\u5168\u4F53\u306E\u4ED8\u4E0E\u53EF\u80FD\u8005",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD036",
+      id: "qa_balance_v2_skd036",
+      name: "\u5B88\u308A\u306E\u9663",
+      rarity: "R",
+      element: "light",
+      sp0: 75,
+      sp10: 75,
+      effects0: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 15,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 30,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u5473\u65B9\u5168\u4F53\u306E\u4ED8\u4E0E\u53EF\u80FD\u8005",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD037",
+      id: "qa_balance_v2_skd037",
+      name: "\u5A01\u5727",
+      rarity: "R",
+      element: "dark",
+      sp0: 50,
+      sp10: 50,
+      effects0: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 10,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 20,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u6226\u95D8\u4E2DATK\u6700\u5927\u306E\u4ED8\u4E0E\u53EF\u80FD\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD038",
+      id: "qa_balance_v2_skd038",
+      name: "\u93A7\u7815\u304D",
+      rarity: "R",
+      element: "earth",
+      sp0: 50,
+      sp10: 50,
+      effects0: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 12,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 25,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u914D\u7F6E\u9806\u6700\u521D\u306E\u4ED8\u4E0E\u53EF\u80FD\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD039",
+      id: "qa_balance_v2_skd039",
+      name: "\u5FDC\u6025\u624B\u5F53",
+      rarity: "N",
+      element: "water",
+      sp0: 35,
+      sp10: 35,
+      effects0: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 35,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 65,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5171\u901A\u5358\u4F53\u56DE\u5FA9\u6761\u4EF6",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD040",
+      id: "qa_balance_v2_skd040",
+      name: "\u6CBB\u7652\u306E\u7948\u308A",
+      rarity: "SR",
+      element: "water",
+      sp0: 90,
+      sp10: 90,
+      effects0: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 75,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5171\u901A\u5358\u4F53\u56DE\u5FA9\u6761\u4EF6",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD041",
+      id: "qa_balance_v2_skd041",
+      name: "\u5C0F\u4F11\u6B62",
+      rarity: "R",
+      element: "light",
+      sp0: 90,
+      sp10: 90,
+      effects0: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 20,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 40,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5171\u901A\u5168\u4F53\u56DE\u5FA9\u6761\u4EF6",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD042",
+      id: "qa_balance_v2_skd042",
+      name: "\u6148\u611B\u306E\u5927\u7948\u7977",
+      rarity: "SSR",
+      element: "light",
+      sp0: 190,
+      sp10: 190,
+      effects0: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 45,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 90,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5171\u901A\u5168\u4F53\u56DE\u5FA9\u6761\u4EF6",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD043",
+      id: "qa_balance_v2_skd043",
+      name: "\u518D\u751F\u306E\u7948\u308A",
+      rarity: "R",
+      element: "water",
+      sp0: 65,
+      sp10: 65,
+      effects0: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 15,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 30,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "HP\u304C\u6E1B\u3063\u305F\u4ED8\u4E0E\u53EF\u80FD\u5473\u65B9\u306E\u6B8BHP\u5272\u5408\u6700\u4F4E",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD044",
+      id: "qa_balance_v2_skd044",
+      name: "\u8607\u751F\u306E\u7948\u308A",
+      rarity: "SR",
+      element: "light",
+      sp0: 180,
+      sp10: 180,
+      effects0: [
+        {
+          label: "\u8607\u751FHP\u5272\u5408",
+          value: 20,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u8607\u751FHP\u5272\u5408",
+          value: 35,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u914D\u7F6E\u9806\u6700\u521D\u306E\u6226\u95D8\u4E0D\u80FD\u5473\u65B9",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD045",
+      id: "qa_balance_v2_skd045",
+      name: "\u8B77\u8EAB\u969C\u58C1",
+      rarity: "R",
+      element: "earth",
+      sp0: 55,
+      sp10: 55,
+      effects0: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 50,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u81EA\u8EAB",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD046",
+      id: "qa_balance_v2_skd046",
+      name: "\u5B88\u8B77\u306E\u672D",
+      rarity: "SR",
+      element: "light",
+      sp0: 75,
+      sp10: 75,
+      effects0: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 65,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 130,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u4ED8\u4E0E\u53EF\u80FD\u5473\u65B9\u306E\u6B8BHP\u5272\u5408\u6700\u4F4E",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD047",
+      id: "qa_balance_v2_skd047",
+      name: "\u7D50\u754C\u306E\u9663",
+      rarity: "SSR",
+      element: "light",
+      sp0: 180,
+      sp10: 180,
+      effects0: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 35,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 70,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u5473\u65B9\u5168\u4F53\u306E\u4ED8\u4E0E\u53EF\u80FD\u8005",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD048",
+      id: "qa_balance_v2_skd048",
+      name: "\u6311\u767A",
+      rarity: "R",
+      element: "fire",
+      sp0: 40,
+      sp10: 32,
+      effects0: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u81EA\u8EAB",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD049",
+      id: "qa_balance_v2_skd049",
+      name: "\u8FD4\u3057\u5203",
+      rarity: "R",
+      element: "wind",
+      sp0: 65,
+      sp10: 65,
+      effects0: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 45,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 80,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u81EA\u8EAB",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD050",
+      id: "qa_balance_v2_skd050",
+      name: "\u8FCE\u6483\u306E\u69CB\u3048",
+      rarity: "SSR",
+      element: "earth",
+      sp0: 110,
+      sp10: 110,
+      effects0: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        },
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 55,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        },
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u81EA\u8EAB",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD051",
+      id: "qa_balance_v2_skd051",
+      name: "\u7834\u52E2",
+      rarity: "R",
+      element: "wind",
+      sp0: 45,
+      sp10: 36,
+      effects0: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u80FD\u529B\u5F37\u5316\u304C\u3042\u308B\u914D\u7F6E\u9806\u6700\u521D\u306E\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD052",
+      id: "qa_balance_v2_skd052",
+      name: "\u7834\u8B77",
+      rarity: "R",
+      element: "dark",
+      sp0: 45,
+      sp10: 36,
+      effects0: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u4FDD\u8B77\u72B6\u614B\u304C\u3042\u308B\u914D\u7F6E\u9806\u6700\u521D\u306E\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD053",
+      id: "qa_balance_v2_skd053",
+      name: "\u596E\u8D77",
+      rarity: "R",
+      element: "fire",
+      sp0: 40,
+      sp10: 32,
+      effects0: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u80FD\u529B\u4F4E\u4E0B\u304C\u3042\u308B\u914D\u7F6E\u9806\u6700\u521D\u306E\u5473\u65B9",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD054",
+      id: "qa_balance_v2_skd054",
+      name: "\u6D44\u6BD2",
+      rarity: "R",
+      element: "water",
+      sp0: 40,
+      sp10: 32,
+      effects0: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u304C\u3042\u308B\u914D\u7F6E\u9806\u6700\u521D\u306E\u5473\u65B9",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD055",
+      id: "qa_balance_v2_skd055",
+      name: "\u89E3\u7E1B",
+      rarity: "R",
+      element: "light",
+      sp0: 55,
+      sp10: 44,
+      effects0: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u884C\u52D5\u4E0D\u80FD\u306E\u914D\u7F6E\u9806\u6700\u521D\u306E\u5473\u65B9",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD056",
+      id: "qa_balance_v2_skd056",
+      name: "\u7834\u9663\u6483",
+      rarity: "SSR",
+      element: "wind",
+      sp0: 135,
+      sp10: 135,
+      effects0: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 120,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 220,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD057",
+      id: "qa_balance_v2_skd057",
+      name: "\u5F8C\u9663\u5D29\u3057",
+      rarity: "SR",
+      element: "wind",
+      sp0: 115,
+      sp10: 115,
+      effects0: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 10,
+          unit: "%"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 110,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 20,
+          unit: "%"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 200,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u6700\u5F8C\u5C3E\u306E\u751F\u5B58\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD058",
+      id: "qa_balance_v2_skd058",
+      name: "\u8755\u307F\u306E\u9663",
+      rarity: "SR",
+      element: "dark",
+      sp0: 110,
+      sp10: 110,
+      effects0: [
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 12,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 25,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u6575\u5168\u4F53\u306E\u4ED8\u4E0E\u53EF\u80FD\u8005",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD059",
+      id: "qa_balance_v2_skd059",
+      name: "\u5D29\u9663\u306E\u6CE2",
+      rarity: "SR",
+      element: "water",
+      sp0: 130,
+      sp10: 130,
+      effects0: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 65,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 85,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 100,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 145,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u6575\u5168\u4F53",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD060",
+      id: "qa_balance_v2_skd060",
+      name: "\u80CC\u6C34\u306E\u8599\u304E",
+      rarity: "SR",
+      element: "earth",
+      sp0: 130,
+      sp10: 130,
+      effects0: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 65,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 90,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 100,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 155,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u6575\u5168\u4F53",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD061",
+      id: "qa_balance_v2_skd061",
+      name: "\u596E\u6226\u306E\u6A84",
+      rarity: "R",
+      element: "fire",
+      sp0: 45,
+      sp10: 45,
+      effects0: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 10,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 20,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u4ED8\u4E0E\u53EF\u80FD\u5473\u65B9\u306E\u30AD\u30E3\u30E9\uFF0B\u88C5\u5099ATK\u6700\u5927",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD062",
+      id: "qa_balance_v2_skd062",
+      name: "\u5805\u5B88\u306E\u672D",
+      rarity: "R",
+      element: "earth",
+      sp0: 45,
+      sp10: 45,
+      effects0: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 20,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 40,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u914D\u7F6E\u9806\u6700\u521D\u306E\u4ED8\u4E0E\u53EF\u80FD\u5473\u65B9",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD063",
+      id: "qa_balance_v2_skd063",
+      name: "\u7834\u7532\u306E\u9663",
+      rarity: "SR",
+      element: "dark",
+      sp0: 100,
+      sp10: 100,
+      effects0: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 15,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 30,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u6575\u5168\u4F53\u306E\u4ED8\u4E0E\u53EF\u80FD\u8005",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD064",
+      id: "qa_balance_v2_skd064",
+      name: "\u5A01\u5727\u306E\u9663",
+      rarity: "SR",
+      element: "water",
+      sp0: 100,
+      sp10: 100,
+      effects0: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 10,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 20,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u6575\u5168\u4F53\u306E\u4ED8\u4E0E\u53EF\u80FD\u8005",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD065",
+      id: "qa_balance_v2_skd065",
+      name: "\u5C01\u9663",
+      rarity: "SR",
+      element: "water",
+      sp0: 135,
+      sp10: 135,
+      effects0: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 30,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 50,
+          unit: "%"
+        }
+      ],
+      duration: 1,
+      targetDescription: "\u6575\u5168\u4F53\u306E\u4ED8\u4E0E\u53EF\u80FD\u8005",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD066",
+      id: "qa_balance_v2_skd066",
+      name: "\u8ECD\u795E\u306E\u53F7\u4EE4",
+      rarity: "SSR",
+      element: "fire",
+      sp0: 150,
+      sp10: 150,
+      effects0: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 15,
+          unit: "%"
+        },
+        {
+          label: "DEF\u5F37\u5316",
+          value: 15,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 30,
+          unit: "%"
+        },
+        {
+          label: "DEF\u5F37\u5316",
+          value: 30,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u5473\u65B9\u5168\u4F53\u306E\u4ED8\u4E0E\u53EF\u80FD\u8005",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD067",
+      id: "qa_balance_v2_skd067",
+      name: "\u518D\u751F\u306E\u9663",
+      rarity: "SR",
+      element: "water",
+      sp0: 135,
+      sp10: 135,
+      effects0: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 10,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 20,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "HP\u304C\u6E1B\u3063\u305F\u5473\u65B9\u306B\u4ED8\u4E0E\u53EF\u80FD\u8005\u304C\u3044\u308C\u3070\u751F\u5B58\u5473\u65B9\u5168\u4F53",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD068",
+      id: "qa_balance_v2_skd068",
+      name: "\u6551\u8B77\u306E\u672D",
+      rarity: "SR",
+      element: "light",
+      sp0: 120,
+      sp10: 120,
+      effects0: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 55,
+          unit: "%"
+        },
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 35,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 100,
+          unit: "%"
+        },
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 70,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u5171\u901A\u5358\u4F53\u56DE\u5FA9\u6761\u4EF6\u3067\u9078\u3093\u3060\u540C\u3058\u5473\u65B9",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD069",
+      id: "qa_balance_v2_skd069",
+      name: "\u8FD4\u3057\u306E\u53F7\u4EE4",
+      rarity: "SR",
+      element: "wind",
+      sp0: 80,
+      sp10: 80,
+      effects0: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 45,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 85,
+          unit: "%"
+        }
+      ],
+      duration: 3,
+      targetDescription: "\u4ED8\u4E0E\u53EF\u80FD\u306A\u88AB\u5F3E\u8A98\u5C0E\u8005\u512A\u5148\u3001\u306A\u3051\u308C\u3070\u914D\u7F6E\u9806",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD070",
+      id: "qa_balance_v2_skd070",
+      name: "\u6E05\u3081\u306E\u624B\u5F53",
+      rarity: "R",
+      element: "water",
+      sp0: 65,
+      sp10: 65,
+      effects0: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 30,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 60,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u5BFE\u8C61\u512A\u5148\u3001\u306A\u3051\u308C\u3070\u5171\u901A\u5358\u4F53\u56DE\u5FA9\u6761\u4EF6",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD071",
+      id: "qa_balance_v2_skd071",
+      name: "\u5927\u7953\u3044",
+      rarity: "SSR",
+      element: "light",
+      sp0: 140,
+      sp10: 112,
+      effects0: [
+        {
+          label: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5473\u65B9\u5168\u4F53\u30FB1\u4EBA\u3067\u3082\u8A72\u5F53\u72B6\u614B\u3042\u308A",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    },
+    {
+      designId: "SKD072",
+      id: "qa_balance_v2_skd072",
+      name: "\u7834\u52E2\u306E\u4E00\u9583",
+      rarity: "SSR",
+      element: "wind",
+      sp0: 135,
+      sp10: 135,
+      effects0: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 120,
+          unit: "%"
+        }
+      ],
+      effects10: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 220,
+          unit: "%"
+        }
+      ],
+      duration: null,
+      targetDescription: "\u5148\u982D\u6575",
+      legacyId: null,
+      imageStatus: "UNMAPPED_PLACEHOLDER"
+    }
+  ],
+  lbDisplayRows: [
+    {
+      designId: "SKD001",
+      lb: 0,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 105,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD001",
+      lb: 1,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 107.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD001",
+      lb: 2,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 111.02,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD001",
+      lb: 3,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 114.99,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD001",
+      lb: 4,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 119.31,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD001",
+      lb: 5,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 123.92,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD001",
+      lb: 6,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 128.76,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD001",
+      lb: 7,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 133.81,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD001",
+      lb: 8,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 139.05,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD001",
+      lb: 9,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 144.45,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD001",
+      lb: 10,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD002",
+      lb: 0,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 105,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD002",
+      lb: 1,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 107.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD002",
+      lb: 2,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 111.02,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD002",
+      lb: 3,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 114.99,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD002",
+      lb: 4,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 119.31,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD002",
+      lb: 5,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 123.92,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD002",
+      lb: 6,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 128.76,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD002",
+      lb: 7,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 133.81,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD002",
+      lb: 8,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 139.05,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD002",
+      lb: 9,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 144.45,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD002",
+      lb: 10,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD003",
+      lb: 0,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 105,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD003",
+      lb: 1,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 107.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD003",
+      lb: 2,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 111.02,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD003",
+      lb: 3,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 114.99,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD003",
+      lb: 4,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 119.31,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD003",
+      lb: 5,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 123.92,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD003",
+      lb: 6,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 128.76,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD003",
+      lb: 7,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 133.81,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD003",
+      lb: 8,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 139.05,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD003",
+      lb: 9,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 144.45,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD003",
+      lb: 10,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD004",
+      lb: 0,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 105,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD004",
+      lb: 1,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 107.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD004",
+      lb: 2,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 111.02,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD004",
+      lb: 3,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 114.99,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD004",
+      lb: 4,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 119.31,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD004",
+      lb: 5,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 123.92,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD004",
+      lb: 6,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 128.76,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD004",
+      lb: 7,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 133.81,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD004",
+      lb: 8,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 139.05,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD004",
+      lb: 9,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 144.45,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD004",
+      lb: 10,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD005",
+      lb: 0,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 105,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD005",
+      lb: 1,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 107.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD005",
+      lb: 2,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 111.02,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD005",
+      lb: 3,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 114.99,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD005",
+      lb: 4,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 119.31,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD005",
+      lb: 5,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 123.92,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD005",
+      lb: 6,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 128.76,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD005",
+      lb: 7,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 133.81,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD005",
+      lb: 8,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 139.05,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD005",
+      lb: 9,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 144.45,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD005",
+      lb: 10,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD006",
+      lb: 0,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 105,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD006",
+      lb: 1,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 107.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD006",
+      lb: 2,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 111.02,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD006",
+      lb: 3,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 114.99,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD006",
+      lb: 4,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 119.31,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD006",
+      lb: 5,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 123.92,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD006",
+      lb: 6,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 128.76,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD006",
+      lb: 7,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 133.81,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD006",
+      lb: 8,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 139.05,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD006",
+      lb: 9,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 144.45,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD006",
+      lb: 10,
+      sp: 25,
+      burstSp: 13,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD007",
+      lb: 0,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 120,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD007",
+      lb: 1,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 124.5,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD007",
+      lb: 2,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 130.7,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD007",
+      lb: 3,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 137.76,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD007",
+      lb: 4,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 145.45,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD007",
+      lb: 5,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 153.64,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD007",
+      lb: 6,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 162.25,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD007",
+      lb: 7,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 171.22,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD007",
+      lb: 8,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 180.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD007",
+      lb: 9,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 190.13,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD007",
+      lb: 10,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 200,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD008",
+      lb: 0,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 120,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD008",
+      lb: 1,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 124.5,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD008",
+      lb: 2,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 130.7,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD008",
+      lb: 3,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 137.76,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD008",
+      lb: 4,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 145.45,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD008",
+      lb: 5,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 153.64,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD008",
+      lb: 6,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 162.25,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD008",
+      lb: 7,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 171.22,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD008",
+      lb: 8,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 180.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD008",
+      lb: 9,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 190.13,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD008",
+      lb: 10,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 200,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD009",
+      lb: 0,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 120,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD009",
+      lb: 1,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 124.5,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD009",
+      lb: 2,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 130.7,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD009",
+      lb: 3,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 137.76,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD009",
+      lb: 4,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 145.45,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD009",
+      lb: 5,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 153.64,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD009",
+      lb: 6,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 162.25,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD009",
+      lb: 7,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 171.22,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD009",
+      lb: 8,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 180.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD009",
+      lb: 9,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 190.13,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD009",
+      lb: 10,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 200,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD010",
+      lb: 0,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 120,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD010",
+      lb: 1,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 124.5,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD010",
+      lb: 2,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 130.7,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD010",
+      lb: 3,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 137.76,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD010",
+      lb: 4,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 145.45,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD010",
+      lb: 5,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 153.64,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD010",
+      lb: 6,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 162.25,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD010",
+      lb: 7,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 171.22,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD010",
+      lb: 8,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 180.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD010",
+      lb: 9,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 190.13,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD010",
+      lb: 10,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 200,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD011",
+      lb: 0,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 120,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD011",
+      lb: 1,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 124.5,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD011",
+      lb: 2,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 130.7,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD011",
+      lb: 3,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 137.76,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD011",
+      lb: 4,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 145.45,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD011",
+      lb: 5,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 153.64,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD011",
+      lb: 6,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 162.25,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD011",
+      lb: 7,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 171.22,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD011",
+      lb: 8,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 180.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD011",
+      lb: 9,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 190.13,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD011",
+      lb: 10,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 200,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD012",
+      lb: 0,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 120,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD012",
+      lb: 1,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 124.5,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD012",
+      lb: 2,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 130.7,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD012",
+      lb: 3,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 137.76,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD012",
+      lb: 4,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 145.45,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD012",
+      lb: 5,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 153.64,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD012",
+      lb: 6,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 162.25,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD012",
+      lb: 7,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 171.22,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD012",
+      lb: 8,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 180.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD012",
+      lb: 9,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 190.13,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD012",
+      lb: 10,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 200,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD013",
+      lb: 0,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD013",
+      lb: 1,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 158.44,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD013",
+      lb: 2,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 170.06,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD013",
+      lb: 3,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 183.3,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD013",
+      lb: 4,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 197.72,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD013",
+      lb: 5,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 213.07,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD013",
+      lb: 6,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 229.21,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD013",
+      lb: 7,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 246.04,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD013",
+      lb: 8,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 263.49,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD013",
+      lb: 9,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 281.49,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD013",
+      lb: 10,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 300,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD014",
+      lb: 0,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD014",
+      lb: 1,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 158.44,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD014",
+      lb: 2,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 170.06,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD014",
+      lb: 3,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 183.3,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD014",
+      lb: 4,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 197.72,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD014",
+      lb: 5,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 213.07,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD014",
+      lb: 6,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 229.21,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD014",
+      lb: 7,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 246.04,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD014",
+      lb: 8,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 263.49,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD014",
+      lb: 9,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 281.49,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD014",
+      lb: 10,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 300,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD015",
+      lb: 0,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD015",
+      lb: 1,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 158.44,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD015",
+      lb: 2,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 170.06,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD015",
+      lb: 3,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 183.3,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD015",
+      lb: 4,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 197.72,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD015",
+      lb: 5,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 213.07,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD015",
+      lb: 6,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 229.21,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD015",
+      lb: 7,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 246.04,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD015",
+      lb: 8,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 263.49,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD015",
+      lb: 9,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 281.49,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD015",
+      lb: 10,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 300,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD016",
+      lb: 0,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD016",
+      lb: 1,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 158.44,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD016",
+      lb: 2,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 170.06,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD016",
+      lb: 3,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 183.3,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD016",
+      lb: 4,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 197.72,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD016",
+      lb: 5,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 213.07,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD016",
+      lb: 6,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 229.21,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD016",
+      lb: 7,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 246.04,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD016",
+      lb: 8,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 263.49,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD016",
+      lb: 9,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 281.49,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD016",
+      lb: 10,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 300,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD017",
+      lb: 0,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD017",
+      lb: 1,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 158.44,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD017",
+      lb: 2,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 170.06,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD017",
+      lb: 3,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 183.3,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD017",
+      lb: 4,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 197.72,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD017",
+      lb: 5,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 213.07,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD017",
+      lb: 6,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 229.21,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD017",
+      lb: 7,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 246.04,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD017",
+      lb: 8,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 263.49,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD017",
+      lb: 9,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 281.49,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD017",
+      lb: 10,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 300,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD018",
+      lb: 0,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD018",
+      lb: 1,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 158.44,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD018",
+      lb: 2,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 170.06,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD018",
+      lb: 3,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 183.3,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD018",
+      lb: 4,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 197.72,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD018",
+      lb: 5,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 213.07,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD018",
+      lb: 6,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 229.21,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD018",
+      lb: 7,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 246.04,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD018",
+      lb: 8,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 263.49,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD018",
+      lb: 9,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 281.49,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD018",
+      lb: 10,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 300,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD019",
+      lb: 0,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 60,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD019",
+      lb: 1,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 62.25,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD019",
+      lb: 2,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 65.35,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD019",
+      lb: 3,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 68.88,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD019",
+      lb: 4,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 72.72,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD019",
+      lb: 5,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 76.82,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD019",
+      lb: 6,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 81.12,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD019",
+      lb: 7,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 85.61,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD019",
+      lb: 8,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 90.26,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD019",
+      lb: 9,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 95.06,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD019",
+      lb: 10,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD020",
+      lb: 0,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 60,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD020",
+      lb: 1,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 62.25,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD020",
+      lb: 2,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 65.35,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD020",
+      lb: 3,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 68.88,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD020",
+      lb: 4,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 72.72,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD020",
+      lb: 5,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 76.82,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD020",
+      lb: 6,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 81.12,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD020",
+      lb: 7,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 85.61,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD020",
+      lb: 8,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 90.26,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD020",
+      lb: 9,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 95.06,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD020",
+      lb: 10,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD021",
+      lb: 0,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 60,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD021",
+      lb: 1,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 62.25,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD021",
+      lb: 2,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 65.35,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD021",
+      lb: 3,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 68.88,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD021",
+      lb: 4,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 72.72,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD021",
+      lb: 5,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 76.82,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD021",
+      lb: 6,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 81.12,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD021",
+      lb: 7,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 85.61,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD021",
+      lb: 8,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 90.26,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD021",
+      lb: 9,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 95.06,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD021",
+      lb: 10,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD022",
+      lb: 0,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 60,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD022",
+      lb: 1,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 62.25,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD022",
+      lb: 2,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 65.35,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD022",
+      lb: 3,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 68.88,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD022",
+      lb: 4,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 72.72,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD022",
+      lb: 5,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 76.82,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD022",
+      lb: 6,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 81.12,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD022",
+      lb: 7,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 85.61,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD022",
+      lb: 8,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 90.26,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD022",
+      lb: 9,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 95.06,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD022",
+      lb: 10,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD023",
+      lb: 0,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 60,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD023",
+      lb: 1,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 62.25,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD023",
+      lb: 2,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 65.35,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD023",
+      lb: 3,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 68.88,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD023",
+      lb: 4,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 72.72,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD023",
+      lb: 5,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 76.82,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD023",
+      lb: 6,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 81.12,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD023",
+      lb: 7,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 85.61,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD023",
+      lb: 8,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 90.26,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD023",
+      lb: 9,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 95.06,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD023",
+      lb: 10,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD024",
+      lb: 0,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 60,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD024",
+      lb: 1,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 62.25,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD024",
+      lb: 2,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 65.35,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD024",
+      lb: 3,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 68.88,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD024",
+      lb: 4,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 72.72,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD024",
+      lb: 5,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 76.82,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD024",
+      lb: 6,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 81.12,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD024",
+      lb: 7,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 85.61,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD024",
+      lb: 8,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 90.26,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD024",
+      lb: 9,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 95.06,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD024",
+      lb: 10,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD025",
+      lb: 0,
+      sp: 170,
+      burstSp: 85,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 90,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD025",
+      lb: 1,
+      sp: 170,
+      burstSp: 85,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 93.37,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD025",
+      lb: 2,
+      sp: 170,
+      burstSp: 85,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 98.02,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD025",
+      lb: 3,
+      sp: 170,
+      burstSp: 85,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 103.32,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD025",
+      lb: 4,
+      sp: 170,
+      burstSp: 85,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 109.09,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD025",
+      lb: 5,
+      sp: 170,
+      burstSp: 85,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 115.23,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD025",
+      lb: 6,
+      sp: 170,
+      burstSp: 85,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 121.68,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD025",
+      lb: 7,
+      sp: 170,
+      burstSp: 85,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 128.42,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD025",
+      lb: 8,
+      sp: 170,
+      burstSp: 85,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 135.4,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD025",
+      lb: 9,
+      sp: 170,
+      burstSp: 85,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 142.6,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD025",
+      lb: 10,
+      sp: 170,
+      burstSp: 85,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD026",
+      lb: 0,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 105,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD026",
+      lb: 1,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 109.22,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD026",
+      lb: 2,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 115.03,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD026",
+      lb: 3,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 121.65,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD026",
+      lb: 4,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 128.86,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD026",
+      lb: 5,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 136.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD026",
+      lb: 6,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 144.61,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD026",
+      lb: 7,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 153.02,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD026",
+      lb: 8,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 161.74,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD026",
+      lb: 9,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 170.75,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD026",
+      lb: 10,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 180,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD027",
+      lb: 0,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 110,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD027",
+      lb: 1,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 114.5,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD027",
+      lb: 2,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 120.7,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD027",
+      lb: 3,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 127.76,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD027",
+      lb: 4,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 135.45,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD027",
+      lb: 5,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 143.64,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD027",
+      lb: 6,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 152.25,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD027",
+      lb: 7,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 161.22,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD027",
+      lb: 8,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 170.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD027",
+      lb: 9,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 180.13,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD027",
+      lb: 10,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 190,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD028",
+      lb: 0,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 110,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 140,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD028",
+      lb: 1,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 113.94,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 146.19,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD028",
+      lb: 2,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 119.36,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 154.71,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD028",
+      lb: 3,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 125.54,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 164.42,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD028",
+      lb: 4,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 132.27,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 174.99,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD028",
+      lb: 5,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 139.43,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 186.25,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD028",
+      lb: 6,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 146.96,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 198.09,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD028",
+      lb: 7,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 154.82,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 210.43,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD028",
+      lb: 8,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 162.96,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 223.23,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD028",
+      lb: 9,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 171.36,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 236.43,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD028",
+      lb: 10,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 180,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 250,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD029",
+      lb: 0,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 80,
+          unit: "%"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 10,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD029",
+      lb: 1,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 82.81,
+          unit: "%"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 10.56,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD029",
+      lb: 2,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 86.69,
+          unit: "%"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 11.34,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD029",
+      lb: 3,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 91.1,
+          unit: "%"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 12.22,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD029",
+      lb: 4,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 95.91,
+          unit: "%"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 13.18,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD029",
+      lb: 5,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 101.02,
+          unit: "%"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 14.2,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD029",
+      lb: 6,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 106.4,
+          unit: "%"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 15.28,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD029",
+      lb: 7,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 112.01,
+          unit: "%"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 16.4,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD029",
+      lb: 8,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 117.83,
+          unit: "%"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 17.57,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD029",
+      lb: 9,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 123.83,
+          unit: "%"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 18.77,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD029",
+      lb: 10,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 130,
+          unit: "%"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 20,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD030",
+      lb: 0,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 110,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 145,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD030",
+      lb: 1,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 113.94,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 151.47,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD030",
+      lb: 2,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 119.36,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 160.38,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD030",
+      lb: 3,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 125.54,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 170.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD030",
+      lb: 4,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 132.27,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 181.58,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD030",
+      lb: 5,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 139.43,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 193.35,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD030",
+      lb: 6,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 146.96,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 205.73,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD030",
+      lb: 7,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 154.82,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 218.63,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD030",
+      lb: 8,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 162.96,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 232.01,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD030",
+      lb: 9,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 171.36,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 245.81,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD030",
+      lb: 10,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 180,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 260,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD031",
+      lb: 0,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 110,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD031",
+      lb: 1,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 113.94,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 156.75,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD031",
+      lb: 2,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 119.36,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 166.05,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD031",
+      lb: 3,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 125.54,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 176.64,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD031",
+      lb: 4,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 132.27,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 188.17,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD031",
+      lb: 5,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 139.43,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 200.45,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD031",
+      lb: 6,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 146.96,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 213.37,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD031",
+      lb: 7,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 154.82,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 226.83,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD031",
+      lb: 8,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 162.96,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 240.79,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD031",
+      lb: 9,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 171.36,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 255.19,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD031",
+      lb: 10,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 180,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 270,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD032",
+      lb: 0,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 35,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD032",
+      lb: 1,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 36.12,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD032",
+      lb: 2,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 37.67,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD032",
+      lb: 3,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 39.44,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD032",
+      lb: 4,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 41.36,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD032",
+      lb: 5,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 43.41,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD032",
+      lb: 6,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 45.56,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD032",
+      lb: 7,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 47.81,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD032",
+      lb: 8,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 50.13,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD032",
+      lb: 9,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 52.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD032",
+      lb: 10,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 55,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD033",
+      lb: 0,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 8,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD033",
+      lb: 1,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 8.39,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD033",
+      lb: 2,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 8.94,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD033",
+      lb: 3,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 9.55,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD033",
+      lb: 4,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 10.23,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD033",
+      lb: 5,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 10.94,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD033",
+      lb: 6,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 11.7,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD033",
+      lb: 7,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 12.48,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD033",
+      lb: 8,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 13.3,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD033",
+      lb: 9,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 14.14,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD033",
+      lb: 10,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 15,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD034",
+      lb: 0,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 15,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD034",
+      lb: 1,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 15.84,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD034",
+      lb: 2,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 17.01,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD034",
+      lb: 3,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 18.33,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD034",
+      lb: 4,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 19.77,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD034",
+      lb: 5,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 21.31,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD034",
+      lb: 6,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 22.92,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD034",
+      lb: 7,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 24.6,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD034",
+      lb: 8,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 26.35,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD034",
+      lb: 9,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 28.15,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD034",
+      lb: 10,
+      sp: 30,
+      burstSp: 15,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 30,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD035",
+      lb: 0,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 8,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD035",
+      lb: 1,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 8.39,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD035",
+      lb: 2,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 8.94,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD035",
+      lb: 3,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 9.55,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD035",
+      lb: 4,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 10.23,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD035",
+      lb: 5,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 10.94,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD035",
+      lb: 6,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 11.7,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD035",
+      lb: 7,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 12.48,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD035",
+      lb: 8,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 13.3,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD035",
+      lb: 9,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 14.14,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD035",
+      lb: 10,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 15,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD036",
+      lb: 0,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 15,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD036",
+      lb: 1,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 15.84,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD036",
+      lb: 2,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 17.01,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD036",
+      lb: 3,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 18.33,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD036",
+      lb: 4,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 19.77,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD036",
+      lb: 5,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 21.31,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD036",
+      lb: 6,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 22.92,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD036",
+      lb: 7,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 24.6,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD036",
+      lb: 8,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 26.35,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD036",
+      lb: 9,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 28.15,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD036",
+      lb: 10,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 30,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD037",
+      lb: 0,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 10,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD037",
+      lb: 1,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 10.56,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD037",
+      lb: 2,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 11.34,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD037",
+      lb: 3,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 12.22,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD037",
+      lb: 4,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 13.18,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD037",
+      lb: 5,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 14.2,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD037",
+      lb: 6,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 15.28,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD037",
+      lb: 7,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 16.4,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD037",
+      lb: 8,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 17.57,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD037",
+      lb: 9,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 18.77,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD037",
+      lb: 10,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 20,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD038",
+      lb: 0,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 12,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD038",
+      lb: 1,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 12.73,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD038",
+      lb: 2,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 13.74,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD038",
+      lb: 3,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 14.89,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD038",
+      lb: 4,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 16.14,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD038",
+      lb: 5,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 17.47,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD038",
+      lb: 6,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 18.86,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD038",
+      lb: 7,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 20.32,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD038",
+      lb: 8,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 21.84,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD038",
+      lb: 9,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 23.4,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD038",
+      lb: 10,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 25,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD039",
+      lb: 0,
+      sp: 35,
+      burstSp: 18,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 35,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD039",
+      lb: 1,
+      sp: 35,
+      burstSp: 18,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 36.69,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD039",
+      lb: 2,
+      sp: 35,
+      burstSp: 18,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 39.01,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD039",
+      lb: 3,
+      sp: 35,
+      burstSp: 18,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 41.66,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD039",
+      lb: 4,
+      sp: 35,
+      burstSp: 18,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 44.54,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD039",
+      lb: 5,
+      sp: 35,
+      burstSp: 18,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 47.61,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD039",
+      lb: 6,
+      sp: 35,
+      burstSp: 18,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 50.84,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD039",
+      lb: 7,
+      sp: 35,
+      burstSp: 18,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 54.21,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD039",
+      lb: 8,
+      sp: 35,
+      burstSp: 18,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 57.7,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD039",
+      lb: 9,
+      sp: 35,
+      burstSp: 18,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 61.3,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD039",
+      lb: 10,
+      sp: 35,
+      burstSp: 18,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 65,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD040",
+      lb: 0,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 75,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD040",
+      lb: 1,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 79.22,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD040",
+      lb: 2,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 85.03,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD040",
+      lb: 3,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 91.65,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD040",
+      lb: 4,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 98.86,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD040",
+      lb: 5,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 106.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD040",
+      lb: 6,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 114.61,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD040",
+      lb: 7,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 123.02,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD040",
+      lb: 8,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 131.74,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD040",
+      lb: 9,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 140.75,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD040",
+      lb: 10,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 150,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD041",
+      lb: 0,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 20,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD041",
+      lb: 1,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 21.12,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD041",
+      lb: 2,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 22.67,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD041",
+      lb: 3,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 24.44,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD041",
+      lb: 4,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 26.36,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD041",
+      lb: 5,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 28.41,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD041",
+      lb: 6,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 30.56,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD041",
+      lb: 7,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 32.81,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD041",
+      lb: 8,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 35.13,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD041",
+      lb: 9,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 37.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD041",
+      lb: 10,
+      sp: 90,
+      burstSp: 45,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 40,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD042",
+      lb: 0,
+      sp: 190,
+      burstSp: 95,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 45,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD042",
+      lb: 1,
+      sp: 190,
+      burstSp: 95,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 47.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD042",
+      lb: 2,
+      sp: 190,
+      burstSp: 95,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 51.02,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD042",
+      lb: 3,
+      sp: 190,
+      burstSp: 95,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 54.99,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD042",
+      lb: 4,
+      sp: 190,
+      burstSp: 95,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 59.31,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD042",
+      lb: 5,
+      sp: 190,
+      burstSp: 95,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 63.92,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD042",
+      lb: 6,
+      sp: 190,
+      burstSp: 95,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 68.76,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD042",
+      lb: 7,
+      sp: 190,
+      burstSp: 95,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 73.81,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD042",
+      lb: 8,
+      sp: 190,
+      burstSp: 95,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 79.05,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD042",
+      lb: 9,
+      sp: 190,
+      burstSp: 95,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 84.45,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD042",
+      lb: 10,
+      sp: 190,
+      burstSp: 95,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 90,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD043",
+      lb: 0,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 15,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD043",
+      lb: 1,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 15.84,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD043",
+      lb: 2,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 17.01,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD043",
+      lb: 3,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 18.33,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD043",
+      lb: 4,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 19.77,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD043",
+      lb: 5,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 21.31,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD043",
+      lb: 6,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 22.92,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD043",
+      lb: 7,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 24.6,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD043",
+      lb: 8,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 26.35,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD043",
+      lb: 9,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 28.15,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD043",
+      lb: 10,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 30,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD044",
+      lb: 0,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u8607\u751FHP\u5272\u5408",
+          value: 20,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD044",
+      lb: 1,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u8607\u751FHP\u5272\u5408",
+          value: 20.84,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD044",
+      lb: 2,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u8607\u751FHP\u5272\u5408",
+          value: 22.01,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD044",
+      lb: 3,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u8607\u751FHP\u5272\u5408",
+          value: 23.33,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD044",
+      lb: 4,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u8607\u751FHP\u5272\u5408",
+          value: 24.77,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD044",
+      lb: 5,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u8607\u751FHP\u5272\u5408",
+          value: 26.31,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD044",
+      lb: 6,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u8607\u751FHP\u5272\u5408",
+          value: 27.92,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD044",
+      lb: 7,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u8607\u751FHP\u5272\u5408",
+          value: 29.6,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD044",
+      lb: 8,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u8607\u751FHP\u5272\u5408",
+          value: 31.35,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD044",
+      lb: 9,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u8607\u751FHP\u5272\u5408",
+          value: 33.15,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD044",
+      lb: 10,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u8607\u751FHP\u5272\u5408",
+          value: 35,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD045",
+      lb: 0,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 50,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD045",
+      lb: 1,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 52.81,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD045",
+      lb: 2,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 56.69,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD045",
+      lb: 3,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 61.1,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD045",
+      lb: 4,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 65.91,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD045",
+      lb: 5,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 71.02,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD045",
+      lb: 6,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 76.4,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD045",
+      lb: 7,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 82.01,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD045",
+      lb: 8,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 87.83,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD045",
+      lb: 9,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 93.83,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD045",
+      lb: 10,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD046",
+      lb: 0,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 65,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD046",
+      lb: 1,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 68.66,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD046",
+      lb: 2,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 73.69,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD046",
+      lb: 3,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 79.43,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD046",
+      lb: 4,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 85.68,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD046",
+      lb: 5,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 92.33,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD046",
+      lb: 6,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 99.32,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD046",
+      lb: 7,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 106.62,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD046",
+      lb: 8,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 114.18,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD046",
+      lb: 9,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 121.98,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD046",
+      lb: 10,
+      sp: 75,
+      burstSp: 38,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 130,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD047",
+      lb: 0,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 35,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD047",
+      lb: 1,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 36.97,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD047",
+      lb: 2,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 39.68,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD047",
+      lb: 3,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 42.77,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD047",
+      lb: 4,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 46.13,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD047",
+      lb: 5,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 49.72,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD047",
+      lb: 6,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 53.48,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD047",
+      lb: 7,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 57.41,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD047",
+      lb: 8,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 61.48,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD047",
+      lb: 9,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 65.68,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD047",
+      lb: 10,
+      sp: 180,
+      burstSp: 90,
+      displayEffects: [
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 70,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD048",
+      lb: 0,
+      sp: 40,
+      burstSp: 20,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD048",
+      lb: 1,
+      sp: 40,
+      burstSp: 20,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD048",
+      lb: 2,
+      sp: 39,
+      burstSp: 20,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD048",
+      lb: 3,
+      sp: 39,
+      burstSp: 20,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD048",
+      lb: 4,
+      sp: 38,
+      burstSp: 19,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD048",
+      lb: 5,
+      sp: 37,
+      burstSp: 19,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD048",
+      lb: 6,
+      sp: 36,
+      burstSp: 18,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD048",
+      lb: 7,
+      sp: 35,
+      burstSp: 18,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD048",
+      lb: 8,
+      sp: 34,
+      burstSp: 17,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD048",
+      lb: 9,
+      sp: 33,
+      burstSp: 17,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD048",
+      lb: 10,
+      sp: 32,
+      burstSp: 16,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD049",
+      lb: 0,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 45,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD049",
+      lb: 1,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 46.97,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD049",
+      lb: 2,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 49.68,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD049",
+      lb: 3,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 52.77,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD049",
+      lb: 4,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 56.13,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD049",
+      lb: 5,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 59.72,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD049",
+      lb: 6,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 63.48,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD049",
+      lb: 7,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 67.41,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD049",
+      lb: 8,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 71.48,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD049",
+      lb: 9,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 75.68,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD049",
+      lb: 10,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 80,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD050",
+      lb: 0,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        },
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 55,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD050",
+      lb: 1,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        },
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 57.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD050",
+      lb: 2,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        },
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 61.02,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD050",
+      lb: 3,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        },
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 64.99,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD050",
+      lb: 4,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        },
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 69.31,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD050",
+      lb: 5,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        },
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 73.92,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD050",
+      lb: 6,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        },
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 78.76,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD050",
+      lb: 7,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        },
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 83.81,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD050",
+      lb: 8,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        },
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 89.05,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD050",
+      lb: 9,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        },
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 94.45,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD050",
+      lb: 10,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 100,
+          unit: "%"
+        },
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 100,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD051",
+      lb: 0,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD051",
+      lb: 1,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD051",
+      lb: 2,
+      sp: 44,
+      burstSp: 22,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD051",
+      lb: 3,
+      sp: 44,
+      burstSp: 22,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD051",
+      lb: 4,
+      sp: 43,
+      burstSp: 22,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD051",
+      lb: 5,
+      sp: 42,
+      burstSp: 21,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD051",
+      lb: 6,
+      sp: 41,
+      burstSp: 21,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD051",
+      lb: 7,
+      sp: 40,
+      burstSp: 20,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD051",
+      lb: 8,
+      sp: 39,
+      burstSp: 20,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD051",
+      lb: 9,
+      sp: 38,
+      burstSp: 19,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD051",
+      lb: 10,
+      sp: 36,
+      burstSp: 18,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD052",
+      lb: 0,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD052",
+      lb: 1,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD052",
+      lb: 2,
+      sp: 44,
+      burstSp: 22,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD052",
+      lb: 3,
+      sp: 44,
+      burstSp: 22,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD052",
+      lb: 4,
+      sp: 43,
+      burstSp: 22,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD052",
+      lb: 5,
+      sp: 42,
+      burstSp: 21,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD052",
+      lb: 6,
+      sp: 41,
+      burstSp: 21,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD052",
+      lb: 7,
+      sp: 40,
+      burstSp: 20,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD052",
+      lb: 8,
+      sp: 39,
+      burstSp: 20,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD052",
+      lb: 9,
+      sp: 38,
+      burstSp: 19,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD052",
+      lb: 10,
+      sp: 36,
+      burstSp: 18,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD053",
+      lb: 0,
+      sp: 40,
+      burstSp: 20,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD053",
+      lb: 1,
+      sp: 40,
+      burstSp: 20,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD053",
+      lb: 2,
+      sp: 39,
+      burstSp: 20,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD053",
+      lb: 3,
+      sp: 39,
+      burstSp: 20,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD053",
+      lb: 4,
+      sp: 38,
+      burstSp: 19,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD053",
+      lb: 5,
+      sp: 37,
+      burstSp: 19,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD053",
+      lb: 6,
+      sp: 36,
+      burstSp: 18,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD053",
+      lb: 7,
+      sp: 35,
+      burstSp: 18,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD053",
+      lb: 8,
+      sp: 34,
+      burstSp: 17,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD053",
+      lb: 9,
+      sp: 33,
+      burstSp: 17,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD053",
+      lb: 10,
+      sp: 32,
+      burstSp: 16,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD054",
+      lb: 0,
+      sp: 40,
+      burstSp: 20,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD054",
+      lb: 1,
+      sp: 40,
+      burstSp: 20,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD054",
+      lb: 2,
+      sp: 39,
+      burstSp: 20,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD054",
+      lb: 3,
+      sp: 39,
+      burstSp: 20,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD054",
+      lb: 4,
+      sp: 38,
+      burstSp: 19,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD054",
+      lb: 5,
+      sp: 37,
+      burstSp: 19,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD054",
+      lb: 6,
+      sp: 36,
+      burstSp: 18,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD054",
+      lb: 7,
+      sp: 35,
+      burstSp: 18,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD054",
+      lb: 8,
+      sp: 34,
+      burstSp: 17,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD054",
+      lb: 9,
+      sp: 33,
+      burstSp: 17,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD054",
+      lb: 10,
+      sp: 32,
+      burstSp: 16,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD055",
+      lb: 0,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD055",
+      lb: 1,
+      sp: 55,
+      burstSp: 28,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD055",
+      lb: 2,
+      sp: 54,
+      burstSp: 27,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD055",
+      lb: 3,
+      sp: 53,
+      burstSp: 27,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD055",
+      lb: 4,
+      sp: 52,
+      burstSp: 26,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD055",
+      lb: 5,
+      sp: 51,
+      burstSp: 26,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD055",
+      lb: 6,
+      sp: 50,
+      burstSp: 25,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD055",
+      lb: 7,
+      sp: 48,
+      burstSp: 24,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD055",
+      lb: 8,
+      sp: 47,
+      burstSp: 24,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD055",
+      lb: 9,
+      sp: 46,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD055",
+      lb: 10,
+      sp: 44,
+      burstSp: 22,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD056",
+      lb: 0,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 120,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD056",
+      lb: 1,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 125.62,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD056",
+      lb: 2,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 133.37,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD056",
+      lb: 3,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 142.2,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD056",
+      lb: 4,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 151.81,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD056",
+      lb: 5,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 162.04,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD056",
+      lb: 6,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 172.81,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD056",
+      lb: 7,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 184.03,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD056",
+      lb: 8,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 195.66,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD056",
+      lb: 9,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 207.66,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD056",
+      lb: 10,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 220,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD057",
+      lb: 0,
+      sp: 115,
+      burstSp: 58,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 10,
+          unit: "%"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 110,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD057",
+      lb: 1,
+      sp: 115,
+      burstSp: 58,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 10.56,
+          unit: "%"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 115.06,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD057",
+      lb: 2,
+      sp: 115,
+      burstSp: 58,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 11.34,
+          unit: "%"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 122.04,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD057",
+      lb: 3,
+      sp: 115,
+      burstSp: 58,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 12.22,
+          unit: "%"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 129.98,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD057",
+      lb: 4,
+      sp: 115,
+      burstSp: 58,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 13.18,
+          unit: "%"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 138.63,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD057",
+      lb: 5,
+      sp: 115,
+      burstSp: 58,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 14.2,
+          unit: "%"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 147.84,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD057",
+      lb: 6,
+      sp: 115,
+      burstSp: 58,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 15.28,
+          unit: "%"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 157.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD057",
+      lb: 7,
+      sp: 115,
+      burstSp: 58,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 16.4,
+          unit: "%"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 167.63,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD057",
+      lb: 8,
+      sp: 115,
+      burstSp: 58,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 17.57,
+          unit: "%"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 178.09,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD057",
+      lb: 9,
+      sp: 115,
+      burstSp: 58,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 18.77,
+          unit: "%"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 188.89,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD057",
+      lb: 10,
+      sp: 115,
+      burstSp: 58,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 20,
+          unit: "%"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 200,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD058",
+      lb: 0,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 12,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD058",
+      lb: 1,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 12.73,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD058",
+      lb: 2,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 13.74,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD058",
+      lb: 3,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 14.89,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD058",
+      lb: 4,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 16.14,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD058",
+      lb: 5,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 17.47,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD058",
+      lb: 6,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 18.86,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD058",
+      lb: 7,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 20.32,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD058",
+      lb: 8,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 21.84,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD058",
+      lb: 9,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 23.4,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD058",
+      lb: 10,
+      sp: 110,
+      burstSp: 55,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387",
+          value: 25,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD059",
+      lb: 0,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 65,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 85,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD059",
+      lb: 1,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 66.97,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 88.37,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD059",
+      lb: 2,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 69.68,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 93.02,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD059",
+      lb: 3,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 72.77,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 98.32,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD059",
+      lb: 4,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 76.13,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 104.09,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD059",
+      lb: 5,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 79.72,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 110.23,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD059",
+      lb: 6,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 83.48,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 116.68,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD059",
+      lb: 7,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 87.41,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 123.42,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD059",
+      lb: 8,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 91.48,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 130.4,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD059",
+      lb: 9,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 95.68,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 137.6,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD059",
+      lb: 10,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 100,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 145,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD060",
+      lb: 0,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 65,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 90,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD060",
+      lb: 1,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 66.97,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 93.66,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD060",
+      lb: 2,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 69.68,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 98.69,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD060",
+      lb: 3,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 72.77,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 104.43,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD060",
+      lb: 4,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 76.13,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 110.68,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD060",
+      lb: 5,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 79.72,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 117.33,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD060",
+      lb: 6,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 83.48,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 124.32,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD060",
+      lb: 7,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 87.41,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 131.62,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD060",
+      lb: 8,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 91.48,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 139.18,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD060",
+      lb: 9,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 95.68,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 146.98,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD060",
+      lb: 10,
+      sp: 130,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u901A\u5E38\u500D\u7387",
+          value: 100,
+          unit: "%"
+        },
+        {
+          label: "\u6761\u4EF6\u500D\u7387",
+          value: 155,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD061",
+      lb: 0,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 10,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD061",
+      lb: 1,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 10.56,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD061",
+      lb: 2,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 11.34,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD061",
+      lb: 3,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 12.22,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD061",
+      lb: 4,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 13.18,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD061",
+      lb: 5,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 14.2,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD061",
+      lb: 6,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 15.28,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD061",
+      lb: 7,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 16.4,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD061",
+      lb: 8,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 17.57,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD061",
+      lb: 9,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 18.77,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD061",
+      lb: 10,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 20,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD062",
+      lb: 0,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 20,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD062",
+      lb: 1,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 21.12,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD062",
+      lb: 2,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 22.67,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD062",
+      lb: 3,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 24.44,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD062",
+      lb: 4,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 26.36,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD062",
+      lb: 5,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 28.41,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD062",
+      lb: 6,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 30.56,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD062",
+      lb: 7,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 32.81,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD062",
+      lb: 8,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 35.13,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD062",
+      lb: 9,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 37.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD062",
+      lb: 10,
+      sp: 45,
+      burstSp: 23,
+      displayEffects: [
+        {
+          label: "DEF\u5F37\u5316",
+          value: 40,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD063",
+      lb: 0,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 15,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD063",
+      lb: 1,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 15.84,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD063",
+      lb: 2,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 17.01,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD063",
+      lb: 3,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 18.33,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD063",
+      lb: 4,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 19.77,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD063",
+      lb: 5,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 21.31,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD063",
+      lb: 6,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 22.92,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD063",
+      lb: 7,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 24.6,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD063",
+      lb: 8,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 26.35,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD063",
+      lb: 9,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 28.15,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD063",
+      lb: 10,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "DEF\u4F4E\u4E0B",
+          value: 30,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD064",
+      lb: 0,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 10,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD064",
+      lb: 1,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 10.56,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD064",
+      lb: 2,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 11.34,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD064",
+      lb: 3,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 12.22,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD064",
+      lb: 4,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 13.18,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD064",
+      lb: 5,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 14.2,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD064",
+      lb: 6,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 15.28,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD064",
+      lb: 7,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 16.4,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD064",
+      lb: 8,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 17.57,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD064",
+      lb: 9,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 18.77,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD064",
+      lb: 10,
+      sp: 100,
+      burstSp: 50,
+      displayEffects: [
+        {
+          label: "ATK\u4F4E\u4E0B",
+          value: 20,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD065",
+      lb: 0,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 30,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD065",
+      lb: 1,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 31.12,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD065",
+      lb: 2,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 32.67,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD065",
+      lb: 3,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 34.44,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD065",
+      lb: 4,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 36.36,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD065",
+      lb: 5,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 38.41,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD065",
+      lb: 6,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 40.56,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD065",
+      lb: 7,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 42.81,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD065",
+      lb: 8,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 45.13,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD065",
+      lb: 9,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 47.53,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD065",
+      lb: 10,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u4ED8\u4E0E\u7387",
+          value: 50,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD066",
+      lb: 0,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 15,
+          unit: "%"
+        },
+        {
+          label: "DEF\u5F37\u5316",
+          value: 15,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD066",
+      lb: 1,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 15.84,
+          unit: "%"
+        },
+        {
+          label: "DEF\u5F37\u5316",
+          value: 15.84,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD066",
+      lb: 2,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 17.01,
+          unit: "%"
+        },
+        {
+          label: "DEF\u5F37\u5316",
+          value: 17.01,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD066",
+      lb: 3,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 18.33,
+          unit: "%"
+        },
+        {
+          label: "DEF\u5F37\u5316",
+          value: 18.33,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD066",
+      lb: 4,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 19.77,
+          unit: "%"
+        },
+        {
+          label: "DEF\u5F37\u5316",
+          value: 19.77,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD066",
+      lb: 5,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 21.31,
+          unit: "%"
+        },
+        {
+          label: "DEF\u5F37\u5316",
+          value: 21.31,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD066",
+      lb: 6,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 22.92,
+          unit: "%"
+        },
+        {
+          label: "DEF\u5F37\u5316",
+          value: 22.92,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD066",
+      lb: 7,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 24.6,
+          unit: "%"
+        },
+        {
+          label: "DEF\u5F37\u5316",
+          value: 24.6,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD066",
+      lb: 8,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 26.35,
+          unit: "%"
+        },
+        {
+          label: "DEF\u5F37\u5316",
+          value: 26.35,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD066",
+      lb: 9,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 28.15,
+          unit: "%"
+        },
+        {
+          label: "DEF\u5F37\u5316",
+          value: 28.15,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD066",
+      lb: 10,
+      sp: 150,
+      burstSp: 75,
+      displayEffects: [
+        {
+          label: "ATK\u5F37\u5316",
+          value: 30,
+          unit: "%"
+        },
+        {
+          label: "DEF\u5F37\u5316",
+          value: 30,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD067",
+      lb: 0,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 10,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD067",
+      lb: 1,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 10.56,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD067",
+      lb: 2,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 11.34,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD067",
+      lb: 3,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 12.22,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD067",
+      lb: 4,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 13.18,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD067",
+      lb: 5,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 14.2,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD067",
+      lb: 6,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 15.28,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD067",
+      lb: 7,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 16.4,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD067",
+      lb: 8,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 17.57,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD067",
+      lb: 9,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 18.77,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD067",
+      lb: 10,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387",
+          value: 20,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD068",
+      lb: 0,
+      sp: 120,
+      burstSp: 60,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 55,
+          unit: "%"
+        },
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 35,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD068",
+      lb: 1,
+      sp: 120,
+      burstSp: 60,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 57.53,
+          unit: "%"
+        },
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 36.97,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD068",
+      lb: 2,
+      sp: 120,
+      burstSp: 60,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 61.02,
+          unit: "%"
+        },
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 39.68,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD068",
+      lb: 3,
+      sp: 120,
+      burstSp: 60,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 64.99,
+          unit: "%"
+        },
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 42.77,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD068",
+      lb: 4,
+      sp: 120,
+      burstSp: 60,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 69.31,
+          unit: "%"
+        },
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 46.13,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD068",
+      lb: 5,
+      sp: 120,
+      burstSp: 60,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 73.92,
+          unit: "%"
+        },
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 49.72,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD068",
+      lb: 6,
+      sp: 120,
+      burstSp: 60,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 78.76,
+          unit: "%"
+        },
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 53.48,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD068",
+      lb: 7,
+      sp: 120,
+      burstSp: 60,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 83.81,
+          unit: "%"
+        },
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 57.41,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD068",
+      lb: 8,
+      sp: 120,
+      burstSp: 60,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 89.05,
+          unit: "%"
+        },
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 61.48,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD068",
+      lb: 9,
+      sp: 120,
+      burstSp: 60,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 94.45,
+          unit: "%"
+        },
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 65.68,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD068",
+      lb: 10,
+      sp: 120,
+      burstSp: 60,
+      displayEffects: [
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 100,
+          unit: "%"
+        },
+        {
+          label: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387",
+          value: 70,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD069",
+      lb: 0,
+      sp: 80,
+      burstSp: 40,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 45,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD069",
+      lb: 1,
+      sp: 80,
+      burstSp: 40,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 47.25,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD069",
+      lb: 2,
+      sp: 80,
+      burstSp: 40,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 50.35,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD069",
+      lb: 3,
+      sp: 80,
+      burstSp: 40,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 53.88,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD069",
+      lb: 4,
+      sp: 80,
+      burstSp: 40,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 57.72,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD069",
+      lb: 5,
+      sp: 80,
+      burstSp: 40,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 61.82,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD069",
+      lb: 6,
+      sp: 80,
+      burstSp: 40,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 66.12,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD069",
+      lb: 7,
+      sp: 80,
+      burstSp: 40,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 70.61,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD069",
+      lb: 8,
+      sp: 80,
+      burstSp: 40,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 75.26,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD069",
+      lb: 9,
+      sp: 80,
+      burstSp: 40,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 80.06,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD069",
+      lb: 10,
+      sp: 80,
+      burstSp: 40,
+      displayEffects: [
+        {
+          label: "\u53CD\u6483\u500D\u7387",
+          value: 85,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD070",
+      lb: 0,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 30,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD070",
+      lb: 1,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 31.69,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD070",
+      lb: 2,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 34.01,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD070",
+      lb: 3,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 36.66,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD070",
+      lb: 4,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 39.54,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD070",
+      lb: 5,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 42.61,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD070",
+      lb: 6,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 45.84,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD070",
+      lb: 7,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 49.21,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD070",
+      lb: 8,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 52.7,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD070",
+      lb: 9,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 56.3,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD070",
+      lb: 10,
+      sp: 65,
+      burstSp: 33,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u56DE\u5FA9\u500D\u7387",
+          value: 60,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD071",
+      lb: 0,
+      sp: 140,
+      burstSp: 70,
+      displayEffects: [
+        {
+          label: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD071",
+      lb: 1,
+      sp: 139,
+      burstSp: 70,
+      displayEffects: [
+        {
+          label: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD071",
+      lb: 2,
+      sp: 137,
+      burstSp: 69,
+      displayEffects: [
+        {
+          label: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD071",
+      lb: 3,
+      sp: 134,
+      burstSp: 67,
+      displayEffects: [
+        {
+          label: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD071",
+      lb: 4,
+      sp: 132,
+      burstSp: 66,
+      displayEffects: [
+        {
+          label: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD071",
+      lb: 5,
+      sp: 129,
+      burstSp: 65,
+      displayEffects: [
+        {
+          label: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD071",
+      lb: 6,
+      sp: 126,
+      burstSp: 63,
+      displayEffects: [
+        {
+          label: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD071",
+      lb: 7,
+      sp: 123,
+      burstSp: 62,
+      displayEffects: [
+        {
+          label: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD071",
+      lb: 8,
+      sp: 119,
+      burstSp: 60,
+      displayEffects: [
+        {
+          label: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD071",
+      lb: 9,
+      sp: 116,
+      burstSp: 58,
+      displayEffects: [
+        {
+          label: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD071",
+      lb: 10,
+      sp: 112,
+      burstSp: 56,
+      displayEffects: [
+        {
+          label: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        }
+      ]
+    },
+    {
+      designId: "SKD072",
+      lb: 0,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 120,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD072",
+      lb: 1,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 125.62,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD072",
+      lb: 2,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 133.37,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD072",
+      lb: 3,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 142.2,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD072",
+      lb: 4,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 151.81,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD072",
+      lb: 5,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 162.04,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD072",
+      lb: 6,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 172.81,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD072",
+      lb: 7,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 184.03,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD072",
+      lb: 8,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 195.66,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD072",
+      lb: 9,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 207.66,
+          unit: "%"
+        }
+      ]
+    },
+    {
+      designId: "SKD072",
+      lb: 10,
+      sp: 135,
+      burstSp: 68,
+      displayEffects: [
+        {
+          label: "\u89E3\u9664\u4EF6\u6570",
+          value: 1,
+          unit: "\u4EF6"
+        },
+        {
+          label: "\u653B\u6483\u500D\u7387",
+          value: 220,
+          unit: "%"
+        }
+      ]
+    }
+  ]
+};
+
+// src/domain/redesign/balanceV2Masters.ts
+var BALANCE_V2_MASTER_VERSION = balance_v2_default.version;
+var BALANCE_V2_CHARACTER_ASSIGNMENTS = balance_v2_default.assignments;
+var BALANCE_V2_LB_DISPLAY_ROWS = balance_v2_default.lbDisplayRows;
+var BALANCE_V2_CONFIG = { status: "PREVIEW_PROVISIONAL", version: balance_v2_default.version, damageBonusCap: 50, healingBonusCap: 80, shieldBonusCap: 50, shieldHpCap: 0.5, periodicCapMultiplier: 2, lowHpThreshold: 0.4, highHpThreshold: 0.7, diversityFactors: [0, 0.25, 0.5, 0.75, 1] };
+var passiveNames = ["\u540C\u5C5E\u6027ATK\u652F\u63F4", "\u540C\u5C5E\u6027DEF\u652F\u63F4", "\u751F\u5B58\u5473\u65B9\u306E\u5C5E\u6027\u6570\u3067\u81EA\u8EABATK", "\u4ED6\u306E\u751F\u5B58\u5473\u65B9\u304C2\u5C5E\u6027\u4EE5\u4E0A\u3067\u81EA\u8EABDEF", "\u901A\u5E38\u653B\u6483\u30C0\u30E1\u30FC\u30B8", "\u5358\u4F53\u653B\u6483\u30B9\u30AD\u30EB\u30C0\u30E1\u30FC\u30B8", "\u5168\u4F53\u653B\u6483\u30B9\u30AD\u30EB\u30C0\u30E1\u30FC\u30B8", "\u80FD\u529B\u4F4E\u4E0B\u4E2D\u306E\u6575\u3078\u306E\u76F4\u63A5\u30C0\u30E1\u30FC\u30B8", "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u4E2D\u306E\u6575\u3078\u306E\u76F4\u63A5\u30C0\u30E1\u30FC\u30B8", "\u4E0E\u56DE\u5FA9\u91CF\uFF08\u8607\u751F\u9664\u5916\uFF09", "\u88AB\u56DE\u5FA9\u91CF\uFF08\u8607\u751F\u9664\u5916\uFF09", "\u4ED8\u4E0E\u30B7\u30FC\u30EB\u30C9\u91CF", "\u53CD\u6483\u30C0\u30E1\u30FC\u30B8", "HP40%\u4EE5\u4E0B\u3067\u81EA\u8EABATK", "HP70%\u4EE5\u4E0A\u3067\u81EA\u8EABDEF", "\u80FD\u52D5ATK\u5F37\u5316\u4E2D\u306E\u81EA\u8EABDEF"];
+var passiveMax = [[8, 12, 16], [12, 18, 24], [20, 30, 40], [25, 35, 45], [20, 30, 40], [10, 15, 20], [10, 15, 20], [15, 22, 30], [20, 30, 40], [20, 30, 40], [20, 30, 40], [20, 30, 40], [25, 35, 45], [25, 35, 45], [20, 30, 40], [20, 30, 40]];
+function getCharacterPassive(master, awakening) {
+  const a = balance_v2_default.assignments.find((a2) => a2.id === master.id);
+  if (!a || master.rarity === "N") return void 0;
+  const index = Number(a.passiveType.slice(1)) - 1, level = Math.max(0, Math.min(5, awakening)) * 2;
+  const percent = passiveMax[index][["R", "SR", "SSR"].indexOf(a.rarity)] * (0.4 + 0.6 * (level / 10) ** 1.3);
+  return { id: `balance_v2_${a.passiveType}${index < 2 ? "_" + a.element : ""}`, type: a.passiveType, name: passiveNames[index], stat: [1, 3, 14, 15].includes(index) ? "def" : "atk", percent, level, target: index < 2 ? "party" : "self", ...index < 2 ? { targetElement: a.element } : {} };
+}
+function getBalanceV2Skill(designId, lb, options = {}) {
+  if (!Number.isInteger(lb) || lb < 0 || lb > 10) throw new Error("\u691C\u8A3C\u30B9\u30AD\u30EBLB\u306F0\u301C10");
+  const s = balance_v2_default.skills.find((s2) => s2.designId === designId || s2.id === designId);
+  if (!s) throw new Error("\u691C\u8A3C\u30B9\u30AD\u30EBID\u4E0D\u660E");
+  const n = Number(s.designId.slice(3)), ratio = (lb / 10) ** 1.25;
+  const vals = s.effects0.map((e, i) => e.value + (s.effects10[i].value - e.value) * ratio);
+  const lasting = (type, power2) => ({ type, power: power2, duration: s.duration ?? 3, carryAcrossWaves: true });
+  const effects = [];
+  for (let i = 0; i < s.effects0.length; i++) {
+    const label = s.effects0[i].label, v = vals[i];
+    if (label === "\u6761\u4EF6\u500D\u7387") continue;
+    if (label === "\u653B\u6483\u500D\u7387" || label === "\u901A\u5E38\u500D\u7387") effects.push({ type: "damage", power: v, ...label === "\u901A\u5E38\u500D\u7387" ? { bonusPower: vals[i + 1], bonusCondition: [28, 59].includes(n) ? "debuff" : [30].includes(n) ? "dot" : "hp_below", hpThreshold: BALANCE_V2_CONFIG.lowHpThreshold } : {} });
+    else if (label === "\u4ED8\u4E0E\u7387") effects.push({ ...lasting([32, 65].includes(n) ? "stun" : "taunt", 1), chance: v / 100 });
+    else if (label.includes("\u89E3\u9664\u4EF6\u6570")) effects.push({ type: "cleanse", power: v, cleanseCategory: label === "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570" ? "debuff" : label === "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570" ? "dot" : { 51: "buff", 52: "protection", 53: "debuff", 54: "dot", 55: "stun", 56: "protection", 70: "dot", 72: "buff" }[n] });
+    else if (label === "\u56DE\u5FA9\u500D\u7387") effects.push({ type: "heal", power: v, healingFormula: "caster_atk_percent" });
+    else if (label === "\u8607\u751FHP\u5272\u5408") effects.push({ type: "revive", power: v, healingFormula: "target_max_hp_percent" });
+    else {
+      const type = { "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387": "dot", "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387": "hot", "\u30B7\u30FC\u30EB\u30C9\u500D\u7387": "shield", "\u53CD\u6483\u500D\u7387": "counter", "ATK\u5F37\u5316": "atk_up", "DEF\u5F37\u5316": "def_up", "ATK\u4F4E\u4E0B": "atk_down", "DEF\u4F4E\u4E0B": "def_down" }[label];
+      if (!type) throw new Error(`\u672A\u77E5\u52B9\u679C:${label}`);
+      effects.push(lasting(type, v));
+    }
+  }
+  let target = "first";
+  if ([19, 20, 21, 22, 23, 24, 25, 58, 59, 60, 63, 64, 65].includes(n)) target = "all_enemies";
+  else if ([35, 36, 41, 42, 47, 66, 67, 71].includes(n)) target = "all_allies";
+  else if ([33, 34, 45, 48, 49, 50].includes(n)) target = "self";
+  else if ([26, 57].includes(n)) target = "last";
+  else if (n === 27) target = "lowest_hp";
+  else if (n === 37) target = "highest_atk_enemy";
+  else if ([39, 40, 43, 46, 68].includes(n)) target = "lowest_ally";
+  else if (n === 44) target = "dead_ally";
+  else if (n === 61) target = "highest_atk_ally";
+  else if ([53, 54, 55, 62].includes(n)) target = "first_ally";
+  else if (n === 69) target = "counter_ally";
+  else if (n === 70) target = "dot_ally";
+  return { id: s.id, name: `\u3010\u691C\u8A3C\u4EEE\u79F0\u3011${s.name}`, image: "/menu/event_banner_placeholder.png", rarity: s.rarity, element: s.element, spCost: Math.ceil(s.sp0 + (s.sp10 - s.sp0) * ratio), condition: { type: "always" }, target, fixedTarget: [56, 72].includes(n) || [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 28, 29, 30, 31].includes(n) && (options.firstTargetMode ?? "fixed") === "fixed", effects, description: `${s.designId} / LB${lb} / ${s.targetDescription}${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 28, 29, 30, 31].includes(n) ? `\uFF08\u5148\u982D\u72D9\u3044\u89E3\u91C8\u672A\u6C7A\u30FB\u691C\u8A3C\u7528:${options.firstTargetMode ?? "fixed"}\uFF09` : ""}\u3002\u540D\u79F0\u30FB\u753B\u50CF\u672A\u5BFE\u5FDC\u3002\u6570\u5024\u306F\u691C\u8A3C\u7528\u4EEE\u5024 (${balance_v2_default.version})\u3002\u30AC\u30C1\u30E3\u672A\u63A5\u7D9A\u3002` };
+}
+var BALANCE_V2_SKILL_CANDIDATES = balance_v2_default.skills.map((s) => getBalanceV2Skill(s.designId, 0));
+var BALANCE_V2_SKILL_ID_MAPPING = balance_v2_default.skills.map((s) => ({ designId: s.designId, candidateId: s.id, legacyId: null, imageStatus: s.imageStatus, status: "QA_ONLY_NOT_GACHA" }));
+var BALANCE_V2_ATTACK_ANCHORS = {
+  N: { hp: [600, 4600, 13600], def: [30, 380, 1230], atk: [100, 200, 380, 600, 850, 1150, 1500, 1880, 2290, 2730, 3200] },
+  R: { hp: [750, 6300, 19300], def: [40, 550, 1850], atk: [150, 300, 550, 880, 1300, 1800, 2400, 3080, 3850, 4720, 5700] },
+  SR: { hp: [1050, 9700, 30700], def: [60, 880, 3180], atk: [300, 520, 900, 1450, 2200, 3150, 4300, 5650, 7200, 8950, 10900] },
+  SSR: { hp: [1500, 14200, 47200], def: [90, 1400, 5150], atk: [500, 800, 1350, 2100, 3050, 4250, 5850, 7800, 10150, 12900, 16e3] }
+};
+function interpolatePreviewAnchor(level, levels, values) {
+  const l = Math.max(levels[0], Math.min(levels[levels.length - 1], level));
+  for (let i = 1; i < levels.length; i++) if (l <= levels[i]) return Math.round(values[i - 1] + (values[i] - values[i - 1]) * (l - levels[i - 1]) / (levels[i] - levels[i - 1]));
+  return values[values.length - 1];
+}
+
 // src/domain/redesign/acquisitions.ts
 var PREVIEW_ACQUISITION_MASTER = {
   characterDuplicateSouls: 10,
@@ -8408,11 +21996,12 @@ var game04_master_assets_default = {
 // src/domain/redesign/masters.ts
 var ELEMENTS = ["fire", "water", "earth", "wind", "light", "dark"];
 var LEGACY_BATTLE_RULES = { defenseFactor: 0.45, advantageMultiplier: 1.5, disadvantageMultiplier: 0.75, spRecoveryDivisor: 120, burstLukDivisor: 20, enemySpRecoveryDivisor: 30, maxPlayerActions: 300, initialSpRatio: 0 };
-var BATTLE_RULES = { ...LEGACY_BATTLE_RULES, version: "common-v2-20260920", defenseFactor: 1 };
+var COMMON_BATTLE_RULES = { ...LEGACY_BATTLE_RULES, version: "common-v2-20260920", defenseFactor: 1 };
+var BATTLE_RULES = { ...COMMON_BATTLE_RULES, version: "balance-v2-20260920", balanceV2: BALANCE_V2_CONFIG };
 var power = { N: 1, R: 1.08, SR: 1.16, SSR: 1.24 };
 var image = (id) => game04_master_assets_default.assets.find((a) => a.id === id)?.path ?? "/menu/event_banner_placeholder.png";
 var name = (id) => sengoku_masters_default[id] ?? id;
-var CHARACTER_MASTERS = sengoku_characters_default.map((c, i) => {
+var COMMON_CHARACTER_MASTERS = sengoku_characters_default.map((c, i) => {
   const rarity = c.sourceRarity, factor = power[rarity], role = ["\u653B\u6483", "\u5B88\u5099", "\u56DE\u5FA9", "\u652F\u63F4", "\u6280\u5DE7"][i % 5];
   return {
     id: c.characterId,
@@ -8424,6 +22013,12 @@ var CHARACTER_MASTERS = sengoku_characters_default.map((c, i) => {
     stats: { hp: Math.round((950 + (i % 5 === 1 ? 300 : 0)) * factor), sp: 60 + i % 5 * 5, atk: Math.round((110 + (i % 5 === 0 ? 30 : 0)) * factor), def: Math.round((45 + (i % 5 === 1 ? 20 : 0)) * factor), luk: 20 + i % 15 },
     passive: { id: `passive_${c.characterId}`, name: ["\u6B66\u52C7\u306E\u5FC3\u5F97", "\u5B88\u52E2\u306E\u5FC3\u5F97", "\u6148\u611B\u306E\u5FC3\u5F97", "\u9663\u5F62\u306E\u5FC3\u5F97", "\u6A5F\u7565\u306E\u5FC3\u5F97"][i % 5], stat: ["atk", "def", "hp", "sp", "luk"][i % 5], percent: 2, target: "party" }
   };
+});
+var CHARACTER_MASTERS = COMMON_CHARACTER_MASTERS.map((old) => {
+  const a = BALANCE_V2_CHARACTER_ASSIGNMENTS.find((a2) => a2.id === old.id);
+  const master = { ...old, ...a ? { rarity: a.rarity, element: a.element, role: a.role } : {}, passive: void 0 };
+  master.passive = getCharacterPassive(master, 0);
+  return master;
 });
 var LEGACY_SKILL_MASTERS = skills_20260821_default.skills.filter((s) => !s.exclusive_character_id).map((s, i) => {
   const kind = i % 8, rarity = s.rarity, f = power[rarity];
@@ -8445,9 +22040,10 @@ function commonPreviewSkill(skill) {
   };
 }
 var SKILL_MASTERS = LEGACY_SKILL_MASTERS.map(commonPreviewSkill);
+var COMMON_SKILL_MASTERS = SKILL_MASTERS;
 function prepareBattleWaves(waves, rules) {
   const frozen = structuredClone(waves);
-  if (rules.version !== "common-v2-20260920") return frozen;
+  if (rules.version !== "common-v2-20260920" && rules.version !== "balance-v2-20260920") return frozen;
   return frozen.map((wave) => wave.map((enemy2) => ({
     ...enemy2,
     hitSpGain: enemy2.hitSpGain ?? 5,
@@ -8463,17 +22059,27 @@ var EQUIPMENT_MASTERS = equipment_20260821_default.equipments.filter((e) => !e.e
 function getSkillSlots(awakening) {
   return awakening >= 3 ? 3 : awakening >= 1 ? 2 : 1;
 }
-function getCharacterStats(master, level, awakening) {
+function getLegacyCharacterStats(master, level, awakening) {
   return Object.fromEntries(Object.entries(master.stats).map(([k, v]) => [k, Math.round(v * (1 + (Math.max(1, level) - 1) * 0.055) * (awakening >= 4 ? 1 + (awakening - 3) * 0.1 : 1))]));
+}
+function getCharacterStats(master, level, awakening) {
+  const stats = getLegacyCharacterStats(master, level, awakening);
+  if (master.role.includes("\u653B\u6483") && !master.role.includes("\u652F\u63F4")) {
+    const anchors = BALANCE_V2_ATTACK_ANCHORS[master.rarity];
+    stats.hp = interpolatePreviewAnchor(level, [1, 50, 100], anchors.hp);
+    stats.def = interpolatePreviewAnchor(level, [1, 50, 100], anchors.def);
+    stats.atk = interpolatePreviewAnchor(level, [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], anchors.atk);
+  }
+  return stats;
 }
 function getEquipmentStats(master, level, lb) {
   return Object.fromEntries(Object.entries(master.stats).map(([k, v]) => [k, Math.round(v * (1 + (Math.max(1, level) - 1) * 0.04) * (1 + lb * 0.1))]));
 }
 function buildBattleParty(state, rules = BATTLE_RULES) {
   return state.deck.map((member) => {
-    const owned = state.characters.find((c) => c.id === member.characterId), master = CHARACTER_MASTERS.find((c) => c.id === member.characterId);
+    const owned = state.characters.find((c) => c.id === member.characterId), master = (rules.version === "balance-v2-20260920" ? CHARACTER_MASTERS : COMMON_CHARACTER_MASTERS).find((c) => c.id === member.characterId);
     if (!owned || !master) throw new Error("\u7DE8\u6210\u30AD\u30E3\u30E9\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093");
-    const stats = getCharacterStats(master, owned.level, owned.awakening);
+    const stats = (rules.version === "balance-v2-20260920" ? getCharacterStats : getLegacyCharacterStats)(master, owned.level, owned.awakening);
     for (const instanceId of Object.values(member.equipment)) {
       const e = state.equipment.find((e2) => e2.instanceId === instanceId), m = EQUIPMENT_MASTERS.find((m2) => m2.id === e?.masterId);
       if (e && m) {
@@ -8482,10 +22088,10 @@ function buildBattleParty(state, rules = BATTLE_RULES) {
       }
     }
     return { id: master.id, name: master.name, image: master.image, level: owned.level, element: master.element, stats, skills: member.skillIds.slice(0, getSkillSlots(owned.awakening)).map((id) => {
-      const s = (rules.version === "common-v2-20260920" ? SKILL_MASTERS : LEGACY_SKILL_MASTERS).find((s2) => s2.id === id), o = state.skills.find((s2) => s2.id === id);
+      const s = (rules.version === "common-v2-20260920" || rules.version === "balance-v2-20260920" ? SKILL_MASTERS : LEGACY_SKILL_MASTERS).find((s2) => s2.id === id), o = state.skills.find((s2) => s2.id === id);
       if (!s || !o) throw new Error("\u672A\u6240\u6301\u306E\u30B9\u30AD\u30EB\u3067\u3059");
       return { ...s, effects: s.effects.map((e) => ({ ...e, power: e.power * (1 + o.level * 0.05) })) };
-    }), passives: rules.version !== "common-v2-20260920" || master.passive.stat === "atk" || master.passive.stat === "def" ? [{ ...master.passive, level: owned.awakening * 2, percent: master.passive.percent * (1 + owned.awakening * 2) }] : [] };
+    }), passives: rules.version === "balance-v2-20260920" ? getCharacterPassive(master, owned.awakening) ? [getCharacterPassive(master, owned.awakening)] : [] : master.passive && (rules.version !== "common-v2-20260920" || master.passive.stat === "atk" || master.passive.stat === "def") ? [{ ...master.passive, level: owned.awakening * 2, percent: master.passive.percent * (1 + owned.awakening * 2) }] : [] };
   });
 }
 function createInitialState(userId) {
@@ -8709,14 +22315,14 @@ var AREAS = [
 var STAGE_NAMES = ["\u8857\u9053\u306E\u5148\u3078", "\u65D7\u3092\u63B2\u3052\u3066", "\u6E21\u308A\u306E\u9663", "\u591C\u660E\u3051\u306E\u653B\u9632", "\u5D29\u308C\u306C\u8A93\u3044", "\u6C7A\u6226\u524D\u591C", "\u57CE\u9580\u3092\u8D8A\u3048\u3066"];
 function themeSkills(area, source) {
   const effect = ["damage", "damage", "def_up", "heal", "atk_up", "heal", "poison", "atk_down", "def_up", "damage"][area];
-  const chosen = SKILL_MASTERS.find((s) => s.effects.some((e) => e.type === effect));
+  const chosen = COMMON_SKILL_MASTERS.find((s) => s.effects.some((e) => e.type === effect));
   return chosen ? [chosen, ...source.filter((s) => s.id !== chosen.id)].slice(0, 2) : source.slice(0, 2);
 }
 function enemy(area, stage, wave, slot, boss2) {
-  const master = CHARACTER_MASTERS[(area * 6 + stage + wave + slot) % CHARACTER_MASTERS.length];
+  const master = COMMON_CHARACTER_MASTERS[(area * 6 + stage + wave + slot) % COMMON_CHARACTER_MASTERS.length];
   const rank = area * 7 + stage;
   const growth = 1 + rank * 0.09;
-  const skills = themeSkills(area, SKILL_MASTERS.filter((s) => s.element === master.element));
+  const skills = themeSkills(area, COMMON_SKILL_MASTERS.filter((s) => s.element === master.element));
   return {
     id: `quest-enemy-${area + 1}-${stage + 1}-${wave + 1}-${slot + 1}`,
     name: master.name,
@@ -8752,9 +22358,9 @@ var QUEST_AREAS = AREAS.map(([id, name2, chapter, description], area) => ({
         const boss2 = stage === 6 && wave === waveCount - 1;
         return Array.from({ length: boss2 ? 1 : Math.min(3, 1 + Math.floor(stage / 3) + wave % 2) }, (_2, slot) => enemy(area, stage, wave, slot, boss2));
       }),
-      firstRewards: [{ kind: "cash", amount: 100 + area * 30 }, { kind: "soul", id: CHARACTER_MASTERS[(area * 6 + stage) % CHARACTER_MASTERS.length].id, amount: 2 }],
+      firstRewards: [{ kind: "cash", amount: 100 + area * 30 }, { kind: "soul", id: COMMON_CHARACTER_MASTERS[(area * 6 + stage) % COMMON_CHARACTER_MASTERS.length].id, amount: 2 }],
       rewards: [{ kind: "cash", amount: 20 + area * 10 }, { kind: "character_material", amount: 1 + Math.floor(area / 3) }, { kind: "skill_material", amount: 1 }, { kind: "equipment_material", amount: 1 }],
-      rareRewards: [{ kind: "soul", id: CHARACTER_MASTERS[(area * 6 + stage) % CHARACTER_MASTERS.length].id, amount: 1, chance: 0.08 }, { kind: "equipment_lb", amount: 1, chance: 0.05 }, { kind: "equipment", id: EQUIPMENT_MASTERS[(area * 7 + stage) % EQUIPMENT_MASTERS.length].id, amount: 1, chance: 0.12 }, ...area >= 2 ? [{ kind: "unlock_item", amount: 1, chance: 0.04 }] : []],
+      rareRewards: [{ kind: "soul", id: COMMON_CHARACTER_MASTERS[(area * 6 + stage) % COMMON_CHARACTER_MASTERS.length].id, amount: 1, chance: 0.08 }, { kind: "equipment_lb", amount: 1, chance: 0.05 }, { kind: "equipment", id: EQUIPMENT_MASTERS[(area * 7 + stage) % EQUIPMENT_MASTERS.length].id, amount: 1, chance: 0.12 }, ...area >= 2 ? [{ kind: "unlock_item", amount: 1, chance: 0.04 }] : []],
       encounterChance: 0.08
     };
   })
@@ -9057,7 +22663,7 @@ function simulateBattle(input) {
   return { seed: input.seed, outcome, totalDamage, playerActions, wavesCleared, party: input.party, waves: input.waves, frames, analysis };
 }
 
-// src/domain/redesign/battle.ts
+// src/domain/redesign/battleCommonV1.ts
 var advantage2 = { fire: "wind", wind: "earth", earth: "water", water: "fire", light: "dark", dark: "light" };
 function elementMultiplier2(a, d, rules) {
   return advantage2[a] === d ? rules.advantageMultiplier : advantage2[d] === a ? rules.disadvantageMultiplier : 1;
@@ -9525,13 +23131,595 @@ function simulateCommonBattle(input) {
   return { seed: input.seed, outcome: ended, totalDamage, playerActions, wavesCleared, party: input.party, waves: input.waves, frames, analysis, rulesVersion: COMMON_BATTLE_VERSION, reason };
 }
 
+// src/domain/redesign/battleBalanceV2.ts
+var BALANCE_BATTLE_VERSION = "balance-v2-20260920";
+function simulateBalanceBattle(input) {
+  const config = input.rules.balanceV2;
+  if (!config || config.status !== "PREVIEW_PROVISIONAL") throw new Error("Explicit balance v2 configuration required");
+  for (const key2 of ["damageBonusCap", "healingBonusCap", "shieldBonusCap", "shieldHpCap", "periodicCapMultiplier", "lowHpThreshold", "highHpThreshold"]) if (!Number.isFinite(config[key2]) || config[key2] < 0) throw new Error("Invalid balance v2 config: " + key2);
+  if (config.diversityFactors.length !== 5 || config.diversityFactors.some((v) => !Number.isFinite(v) || v < 0)) throw new Error("Invalid diversity config");
+  if (!input.party.length || input.party.length > 5 || !input.waves.length || input.waves.length > 5 || input.waves.some((w) => !w.length || w.length > 3))
+    throw new Error("Invalid battle formation");
+  if (new Set(input.party.map((u) => u.id)).size !== input.party.length)
+    throw new Error("Duplicate party member");
+  const validateCondition = (c) => {
+    if (!["always", "hp_below", "ally_hp_below", "every_n_actions", "enemy_count", "ally_dead"].includes(c.type)) throw new Error("Unsupported skill condition");
+    if (c.value !== void 0 && !Number.isFinite(c.value)) throw new Error("Invalid condition value");
+    if (["every_n_actions", "enemy_count"].includes(c.type) && (c.value === void 0 || !Number.isInteger(c.value) || c.value < 1)) throw new Error("Invalid condition count");
+    if (["hp_below", "ally_hp_below"].includes(c.type) && c.value !== void 0 && (c.value < 0 || c.value > 1)) throw new Error("Invalid HP condition ratio");
+  };
+  const validateEffect = (e) => {
+    if (!["damage", "heal", "revive", "atk_up", "def_up", "atk_down", "def_down", "stun", "dot", "hot", "shield", "taunt", "counter", "cleanse"].includes(e.type))
+      throw new Error(`Unapproved common-v2 effect: ${e.type}`);
+    if (e.type === "cleanse" && (!["buff", "protection", "debuff", "dot", "stun"].includes(e.cleanseCategory ?? "") || !Number.isInteger(e.power) || e.power < 1)) throw new Error("Explicit cleanse category and positive count required");
+    if (e.bonusCondition && (!["debuff", "dot", "hp_below"].includes(e.bonusCondition) || !Number.isFinite(e.bonusPower) || e.bonusPower < 0)) throw new Error("Invalid conditional damage master");
+    if (e.hpThreshold !== void 0 && (!Number.isFinite(e.hpThreshold) || e.hpThreshold < 0 || e.hpThreshold > 1)) throw new Error("Invalid damage HP threshold");
+    if (e.duration !== void 0 && (!Number.isInteger(e.duration) || e.duration < 1))
+      throw new Error("Invalid effect duration");
+    if (e.displayHits !== void 0 && (!Number.isInteger(e.displayHits) || e.displayHits < 1 || e.displayHits > 100))
+      throw new Error("Invalid display hit count");
+    if (!Number.isFinite(e.power) || e.power < 0)
+      throw new Error("Invalid effect power");
+    if ((e.type === "heal" || e.type === "revive") && !["caster_atk_percent", "target_max_hp_percent"].includes(e.healingFormula ?? ""))
+      throw new Error("Explicit provisional healingFormula required");
+    if (e.type === "stun" && e.chance === void 0)
+      throw new Error("Explicit provisional stun chance required");
+    if (e.chance !== void 0 && (!Number.isFinite(e.chance) || e.chance < 0 || e.chance > 1))
+      throw new Error("Invalid effect chance");
+  };
+  for (const u of [...input.party, ...input.waves.flat()]) {
+    for (const value of ["hp", "sp", "atk", "def", "luk"].map((k) => u.stats[k]))
+      if (!Number.isFinite(value) || value < 0)
+        throw new Error("Invalid battle stats");
+    if (u.stats.hp <= 0)
+      throw new Error("Invalid HP");
+    for (const p of u.passives) {
+      if (p.type && !/^P(0[1-9]|1[0-6])$/.test(p.type)) throw new Error("Unsupported passive type");
+      if (p.condition) validateCondition(p.condition);
+      if (!Number.isFinite(p.percent) || p.percent < 0)
+        throw new Error("Invalid passive strength");
+      if (!p.type && !["atk", "def"].includes(p.stat))
+        throw new Error(`Unapproved v2 passive stat: ${p.stat}`);
+    }
+    for (const s of [...u.skills, ...(u.phases ?? []).flatMap((p) => p.skills ?? [])]) {
+      validateCondition(s.condition);
+      if (!Number.isFinite(s.spCost) || s.spCost < 0 || input.waves.flat().includes(u) && s.spCost < 1)
+        throw new Error("Invalid active skill SP cost");
+      s.effects.forEach(validateEffect);
+    }
+    u.deathEffects?.forEach(validateEffect);
+  }
+  for (const wave2 of input.waves) {
+    if (new Set(wave2.map((u) => u.id)).size !== wave2.length)
+      throw new Error("Duplicate enemy id");
+    for (const e of wave2) {
+      if (e.initialCount !== void 0 && (!Number.isInteger(e.initialCount) || e.initialCount < 1))
+        throw new Error("Invalid enemy initial count");
+      for (const p of e.phases ?? [])
+        if (!Number.isFinite(p.hpBelow) || p.hpBelow < 0 || p.hpBelow > 1 || p.actionCount !== void 0 && (!Number.isInteger(p.actionCount) || p.actionCount < 1) || p.maxSp !== void 0 && (!Number.isFinite(p.maxSp) || p.maxSp < 0))
+          throw new Error("Invalid phase master");
+      if (!Number.isFinite(e.hitSpGain) || e.hitSpGain < 0 || !Number.isInteger(e.actionCount) || e.actionCount < 1)
+        throw new Error("Explicit enemy hitSpGain and positive actionCount required");
+    }
+  }
+  let seed = input.seed >>> 0;
+  const random = () => {
+    seed += 1831565813;
+    let t = seed;
+    t = Math.imul(t ^ t >>> 15, t | 1);
+    t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+  const make = (u, enemy2) => {
+    const e = u;
+    return { ...u, stats: { ...u.stats }, skills: [...u.skills], hp: u.stats.hp, sp: enemy2 ? u.stats.sp : 0, count: enemy2 ? e.initialCount ?? e.actionCount : 0, resetCount: e.actionCount, initialCount: e.initialCount ?? e.actionCount, order: e.order ?? 0, enemy: enemy2, actions: 0, statuses: [], phase: null, phaseIndex: -1, phases: e.phases, dead: false, deaths: 0, usedDeath: /* @__PURE__ */ new Set(), immune: false, passive: { atk: 0, def: 0 }, hitSpGain: e.hitSpGain ?? 0, pendingSp: 0, inBlock: false, revivedAt: -1 };
+  };
+  const party = input.party.map((u) => make(u, false));
+  let wave = 0, enemies = input.waves[0].map((u) => make(u, true));
+  let partySp = 0, gauge = 0, playerActions = 0, serial = 0, totalDamage = 0, wavesCleared = 0, burst = false, ended = null, reason = "";
+  const frames = [];
+  const analysis = party.map((u) => ({ id: u.id, name: u.name, damage: 0, healing: 0, spGenerated: 0, actions: 0, skills: 0, bursts: 0 }));
+  const side = (u) => u.enemy ? enemies : party;
+  const opposite = (u) => u.enemy ? party : enemies;
+  const alive = (u) => u.hp > 0;
+  const sum = (u, type) => u.statuses.filter((s) => s.type === type).reduce((n, s) => n + s.power, 0);
+  const stat = (u, key2) => u.stats[key2] * (1 + u.passive[key2] / 100) * (1 + Math.min(sum(u, `${key2}_up`), key2 === "atk" ? 50 : 100) / 100 - Math.min(sum(u, `${key2}_down`), key2 === "atk" ? 30 : 50) / 100);
+  const extraPassives = /* @__PURE__ */ new WeakMap();
+  const snapshot = (u) => ({ id: u.id, hp: u.hp, maxHp: u.stats.hp, sp: u.sp, maxSp: u.stats.sp, count: u.count, actions: u.actions, statuses: u.statuses.map((s) => ({ ...s })), phase: u.phase, image: u.image, stunImmune: u.immune, dead: u.dead, effectiveAtk: stat(u, "atk"), effectiveDef: stat(u, "def"), skills: u.phase ? u.skills : void 0, passiveEffects: u.passives.map((p) => ({ id: p.id, type: p.type, percent: p.percent, targetElement: p.targetElement, active: alive(u) && (passiveConditions.get(u)?.get(p.id) ?? false) })) });
+  const frame = (kind, text, u, skill, extra = {}) => frames.push({ index: frames.length, wave: wave + 1, kind, text, actorId: u?.id, skillId: skill?.id, partySp, maxSp: 400, burst, party: party.map(snapshot), enemies: enemies.map(snapshot), burstGauge: gauge, maxBurstGauge: 200, playerActions, remainingActions: 300 - playerActions, skillStates: Object.fromEntries([...party, ...enemies].map((unit) => [unit.id, unit.skills.map((s) => ({ skillId: s.id, cost: Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)), status: extra.event === "action_start" && unit === u && s === skill ? "active" : !alive(unit) || !usable(unit, s) ? "condition_unmet" : Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)) > (unit.enemy ? unit.sp : partySp) ? "insufficient_sp" : "ready", reason: s.unsupportedReason ?? (!condition(unit, s.condition) ? "condition_unmet" : !usable(unit, s) ? "reapply_unavailable" : void 0) }))])), ...extra });
+  const condition = (u, c) => {
+    const v = c.value ?? 0.5;
+    switch (c.type) {
+      case "hp_below":
+        return u.hp / u.stats.hp <= v;
+      case "ally_hp_below":
+        return side(u).some((t) => alive(t) && t.hp / t.stats.hp <= v);
+      case "ally_dead":
+        return side(u).some((t) => !alive(t));
+      case "enemy_count":
+        return opposite(u).filter(alive).length >= v;
+      case "every_n_actions":
+        return (u.actions + 1) % Math.max(1, v) === 0;
+      default:
+        return true;
+    }
+  };
+  const passiveConditions = /* @__PURE__ */ new WeakMap();
+  const diversitySnapshot = /* @__PURE__ */ new WeakMap();
+  const targetConditions = /* @__PURE__ */ new WeakMap();
+  const passives = (reevaluate = true) => {
+    if (reevaluate) for (const owner of [...party, ...enemies]) {
+      const living = side(owner).filter(alive);
+      diversitySnapshot.set(owner, config.diversityFactors[Math.min(4, new Set(living.map((t) => t.element)).size - 1)] ?? 0);
+      const others = new Set(living.filter((t) => t !== owner).map((t) => t.element)).size;
+      passiveConditions.set(owner, new Map(owner.passives.map((p) => [
+        p.id,
+        (!p.condition || condition(owner, p.condition)) && (p.type !== "P04" || others >= 2) && (p.type !== "P14" || owner.hp / owner.stats.hp <= config.lowHpThreshold) && (p.type !== "P15" || owner.hp / owner.stats.hp >= config.highHpThreshold) && (p.type !== "P16" || owner.statuses.some((s) => s.type === "atk_up"))
+      ])));
+      targetConditions.set(owner, { debuff: owner.statuses.some((s) => s.type === "atk_down" || s.type === "def_down"), dot: owner.statuses.some((s) => s.type === "dot") });
+    }
+    for (const list of [party, enemies]) for (const target of list) {
+      const best = /* @__PURE__ */ new Map();
+      for (const owner of list.filter(alive)) for (const p of owner.passives) {
+        if (!(passiveConditions.get(owner)?.get(p.id) ?? false)) continue;
+        const type = p.type;
+        if (type === "P01" || type === "P02") {
+          if (target.element !== (p.targetElement ?? owner.element)) continue;
+        } else if (type ? owner !== target : p.target !== "party" && owner !== target) continue;
+        let percent = p.percent;
+        if (type === "P03") percent *= diversitySnapshot.get(owner) ?? 0;
+        const key2 = type === "P01" || type === "P02" ? `${type}:${p.targetElement ?? owner.element}` : type ?? p.id;
+        const stat2 = type ? ["P01", "P03", "P14"].includes(type) ? "atk" : ["P02", "P04", "P15", "P16"].includes(type) ? "def" : type : p.stat;
+        if (!best.has(key2) || best.get(key2).percent < percent) best.set(key2, { stat: stat2, percent });
+      }
+      target.passive = { atk: 0, def: 0 };
+      const extra = /* @__PURE__ */ new Map();
+      for (const p of best.values()) {
+        if (p.stat === "atk" || p.stat === "def") target.passive[p.stat] += p.percent;
+        else extra.set(p.stat, (extra.get(p.stat) ?? 0) + p.percent);
+      }
+      target.passive.atk = Math.min(50, target.passive.atk);
+      target.passive.def = Math.min(50, target.passive.def);
+      extraPassives.set(target, extra);
+    }
+  };
+  const bonus = (u, key2) => extraPassives.get(u)?.get(key2) ?? 0;
+  const category = (s) => ["atk_up", "def_up"].includes(s.type) ? "buff" : ["shield", "hot", "counter", "taunt"].includes(s.type) ? "protection" : ["atk_down", "def_down"].includes(s.type) ? "debuff" : s.type;
+  const periodicTotal = (values) => values.length ? Math.min(values.reduce((a, b) => a + b, 0), Math.max(...values) * config.periodicCapMultiplier) : 0;
+  const periodicAmount = (t, s) => (s.amount ?? 0) * (s.type === "hot" ? 1 + Math.min(config.healingBonusCap, (s.healingBonus ?? 0) + bonus(t, "P11")) / 100 : 1);
+  let currentActor;
+  let currentHasDamage = false;
+  let applyingSkill = false;
+  const applicable = (t, e, skillId) => {
+    if (e.type === "cleanse") return alive(t) && t.statuses.some((s) => category(s) === e.cleanseCategory);
+    if (e.type === "revive")
+      return !alive(t);
+    if (!alive(t))
+      return false;
+    if (e.type === "stun")
+      return !t.immune && !t.statuses.some((s) => s.type === "stun");
+    if (["atk_up", "def_up", "atk_down", "def_down"].includes(e.type)) {
+      const cap = e.type === "atk_up" ? 50 : e.type === "def_up" ? 100 : e.type === "atk_down" ? 30 : 50;
+      return !t.statuses.some((s) => s.sourceSkillId === skillId && !(applyingSkill && s.appliedAction === serial && s.type !== e.type)) && sum(t, e.type) < cap;
+    }
+    if (["dot", "hot", "shield", "taunt", "counter"].includes(e.type)) {
+      if (t.statuses.some((s) => s.sourceSkillId === skillId && !(applyingSkill && s.appliedAction === serial && s.type !== e.type))) return false;
+      if (e.type === "shield") return t.statuses.filter((s) => s.type === "shield").reduce((a, s) => a + (s.amount ?? 0), 0) < t.stats.hp * config.shieldHpCap;
+      if ((e.type === "dot" || e.type === "hot") && currentActor && !currentHasDamage) {
+        const values = t.statuses.filter((s) => s.type === e.type).map((s) => periodicAmount(t, s));
+        const amount = stat(currentActor, "atk") * e.power / 100 * (e.type === "hot" ? 1 + Math.min(config.healingBonusCap, bonus(currentActor, "P10") + bonus(t, "P11")) / 100 : 1);
+        return periodicTotal([...values, amount]) > periodicTotal(values);
+      }
+    }
+    return true;
+  };
+  const select = (u, target, candidates, preview = false) => {
+    let list = candidates ?? (["self", "lowest_ally", "all_allies", "dead_ally", "first_ally", "highest_atk_ally", "counter_ally", "dot_ally"].includes(target) ? side(u) : opposite(u)).filter((t) => target === "dead_ally" ? !alive(t) : alive(t));
+    if (target === "self")
+      return list.includes(u) ? [u] : [];
+    if (target === "all_allies" || target === "all_enemies")
+      return list;
+    if (target === "last") list = [...list].reverse();
+    if (target === "highest_atk_ally") list = [...list].sort((a, b) => b.stats.atk - a.stats.atk);
+    if (target === "highest_atk_enemy") list = [...list].sort((a, b) => stat(b, "atk") - stat(a, "atk"));
+    if (target === "counter_ally") list = [...list].sort((a, b) => Number(b.statuses.some((s) => s.type === "taunt")) - Number(a.statuses.some((s) => s.type === "taunt")));
+    if (target === "dot_ally") list = [...list].sort((a, b) => Number(b.statuses.some((s) => s.type === "dot")) - Number(a.statuses.some((s) => s.type === "dot")));
+    if (target === "lowest_hp")
+      list = [...list].sort((a, b) => a.hp - b.hp);
+    if (target === "highest_hp")
+      list = [...list].sort((a, b) => b.hp - a.hp);
+    if (target === "lowest_ally" || target === "lowest_hp_ratio")
+      list = [...list].sort((a, b) => a.hp / a.stats.hp - b.hp / b.stats.hp);
+    if (target === "highest_hp_ratio")
+      list = [...list].sort((a, b) => b.hp / b.stats.hp - a.hp / a.stats.hp);
+    if (target === "random" && list.length && !preview)
+      return [list[Math.floor(random() * list.length)]];
+    return list.slice(0, 1);
+  };
+  const effectTargets = (u, skill, e, selected, preview = false) => {
+    currentActor = u;
+    currentHasDamage = skill.effects.some((e2) => e2.type === "damage");
+    const rule = e.target && e.target !== "selected" ? e.target : skill.target;
+    if (rule === "dot_ally" && (!selected || e.target && e.target !== "selected")) {
+      const poison = side(u).filter((t) => alive(t) && t.statuses.some((s) => s.type === "dot"));
+      if (poison.length) return poison.slice(0, 1);
+      return select(u, "lowest_ally", side(u).filter((t) => alive(t) && t.hp / t.stats.hp <= 0.5), preview);
+    }
+    if (e.type === "heal") {
+      if (selected && (!e.target || e.target === "selected"))
+        return selected.filter(alive);
+      const living = side(u).filter(alive);
+      if (rule === "self")
+        return alive(u) ? [u] : [];
+      if (rule === "all_allies")
+        return living.filter((t) => t.hp / t.stats.hp <= 0.6).length >= Math.ceil(living.length / 2) ? living : [];
+      return select(u, "lowest_ally", living.filter((t) => t.hp / t.stats.hp <= 0.5), preview);
+    }
+    if (selected && (!e.target || e.target === "selected"))
+      return selected.filter((t) => applicable(t, e, skill.id));
+    if (e.type === "damage" && rule === "first" && !skill.fixedTarget) {
+      const taunting = opposite(u).filter((t) => alive(t) && t.statuses.some((s) => s.type === "taunt"));
+      if (taunting.length) return taunting.slice(0, 1);
+    }
+    const all = ["self", "lowest_ally", "all_allies", "dead_ally", "first_ally", "highest_atk_ally", "counter_ally", "dot_ally"].includes(rule) ? side(u) : opposite(u);
+    if (e.type === "hot" && rule === "all_allies" && !all.some((t) => t.hp < t.stats.hp && applicable(t, e, skill.id))) return [];
+    if (e.type === "hot" && rule === "lowest_ally") return select(u, rule, all.filter((t) => t.hp < t.stats.hp && applicable(t, e, skill.id)), preview);
+    return select(u, rule, all.filter((t) => applicable(t, e, skill.id)), preview);
+  };
+  const usable = (u, s) => !s.unsupportedReason && condition(u, s.condition) && s.effects.some((e) => effectTargets(u, s, e, void 0, true).length > 0);
+  const choose = (u, discount = 1) => u.skills.find((s) => usable(u, s) && Math.ceil(s.spCost * discount) <= (u.enemy ? u.sp : partySp));
+  const basic = (u) => ({ id: "basic", name: "\u901A\u5E38\u653B\u6483", image: "", rarity: "N", element: u.element, spCost: 0, condition: { type: "always" }, target: "first", effects: [{ type: "damage", power: 100 }], description: "" });
+  let hitThisAction = /* @__PURE__ */ new Set();
+  let directTargets = /* @__PURE__ */ new Map();
+  let effectSequence = 0;
+  let isCounter = false;
+  const absorb = (t, amount, u, skill) => {
+    let remaining = amount;
+    const shields = t.statuses.filter((s) => s.type === "shield").sort((a, b) => a.remaining - b.remaining || (a.sequence ?? 0) - (b.sequence ?? 0));
+    for (const shield of shields) {
+      const used = Math.min(remaining, shield.amount ?? 0);
+      shield.amount = (shield.amount ?? 0) - used;
+      remaining -= used;
+      if (!remaining) break;
+    }
+    t.statuses = t.statuses.filter((s) => s.type !== "shield" || (s.amount ?? 0) > 0);
+    if (remaining < amount) frame("action", `${t.name} \u30B7\u30FC\u30EB\u30C9\u5438\u53CE ${amount - remaining}`, u, skill, { event: "shield_absorbed", targetIds: [t.id] });
+    t.hp = Math.max(0, t.hp - remaining);
+    return remaining;
+  };
+  const damageBonus = (u, t, skill) => {
+    let value = isCounter ? bonus(u, "P13") : skill.id === "basic" ? bonus(u, "P05") : bonus(u, skill.target === "all_enemies" ? "P07" : "P06");
+    if (targetConditions.get(t)?.debuff) value += bonus(u, "P08");
+    if (targetConditions.get(t)?.dot) value += bonus(u, "P09");
+    return Math.min(config.damageBonusCap, value);
+  };
+  const applyEffect = (u, targets, e, skill) => {
+    currentActor = u;
+    currentHasDamage = skill.effects.some((e2) => e2.type === "damage");
+    const plans = targets.filter((t) => applicable(t, e, skill.id)).map((t) => {
+      const success = e.chance === void 0 || random() < e.chance;
+      let power2 = e.power;
+      if (e.bonusCondition && (e.bonusCondition === "debuff" && t.statuses.some((s) => s.type === "atk_down" || s.type === "def_down") || e.bonusCondition === "dot" && t.statuses.some((s) => s.type === "dot") || e.bonusCondition === "hp_below" && u.hp / u.stats.hp <= (e.hpThreshold ?? config.lowHpThreshold))) power2 = e.bonusPower ?? power2;
+      const amount = e.type === "damage" ? Math.max(1, Math.floor((stat(u, "atk") * power2 / 100 - stat(t, "def")) * elementMultiplier2(skill.element, t.element, { ...input.rules, advantageMultiplier: 1.5, disadvantageMultiplier: 0.75 }) * (0.9 + random() * 0.2) * (1 + damageBonus(u, t, skill) / 100))) : e.type === "heal" ? Math.max(0, Math.floor((e.healingFormula === "target_max_hp_percent" ? t.stats.hp : stat(u, "atk")) * power2 / 100 * (1 + Math.min(config.healingBonusCap, bonus(u, "P10") + bonus(t, "P11")) / 100))) : e.type === "revive" ? Math.max(1, Math.floor(t.stats.hp * power2 / 100)) : e.type === "shield" ? Math.max(0, Math.floor(stat(u, "atk") * power2 / 100 * (1 + Math.min(config.shieldBonusCap, bonus(u, "P12")) / 100))) : e.type === "dot" || e.type === "hot" ? stat(u, "atk") * power2 / 100 : power2;
+      return { t, success, amount };
+    });
+    for (const { t, success, amount } of plans) {
+      if (!success) {
+        frame("action", `${t.name}\uFF1A${e.type} \u4E0D\u6210\u7ACB`, u, skill, { event: "effect_miss", targetIds: [t.id] });
+        continue;
+      }
+      if (e.type === "damage") {
+        const hpDamage = absorb(t, amount, u, skill);
+        if (!u.enemy && t.enemy) {
+          totalDamage += hpDamage;
+          const a = analysis.find((a2) => a2.id === u.id);
+          if (a) a.damage += hpDamage;
+        }
+        if (!isCounter && !skill.id.startsWith("death:")) directTargets.set(t, t.deaths);
+        if (t.enemy && !hitThisAction.has(t) && !skill.id.startsWith("death:")) {
+          hitThisAction.add(t);
+          if (t.inBlock) t.pendingSp += t.hitSpGain;
+          else t.sp = Math.min(t.stats.sp, t.sp + t.hitSpGain);
+        }
+        frame(u.enemy ? "enemy" : "action", `${t.name} \u2212${hpDamage}`, u, skill, { event: isCounter ? "counter" : "damage", targetIds: [t.id], hits: splitDisplayDamage(hpDamage, e.displayHits ?? 1) });
+      } else if (e.type === "heal" || e.type === "revive") {
+        const actual = Math.min(t.stats.hp - t.hp, amount);
+        t.hp += actual;
+        if (e.type === "revive" && t.hp > 0) {
+          t.dead = false;
+          if (t.enemy) {
+            t.sp = 0;
+            t.pendingSp = 0;
+            t.count = t.initialCount;
+            t.revivedAt = serial;
+          }
+        }
+        const a = analysis.find((a2) => a2.id === u.id);
+        if (a) a.healing += actual;
+        frame("action", `${t.name} ${e.type === "revive" ? "\u8607\u751F" : "\u56DE\u5FA9"} +${actual}`, u, skill, { event: e.type, targetIds: [t.id] });
+      } else if (e.type === "cleanse") {
+        const candidates = t.statuses.filter((s) => category(s) === e.cleanseCategory).sort((a, b) => (b.appliedAction ?? 0) - (a.appliedAction ?? 0) || (a.sequence ?? 0) - (b.sequence ?? 0)).slice(0, Math.floor(e.power));
+        t.statuses = t.statuses.filter((s) => !candidates.includes(s));
+        if (candidates.some((s) => s.type === "stun")) t.immune = true;
+        frame("action", `${t.name} ${e.cleanseCategory} ${candidates.length}\u4EF6\u89E3\u9664`, u, skill, { event: "cleanse", targetIds: [t.id], reason: e.cleanseCategory });
+      } else {
+        const stored = e.type === "shield" ? Math.min(amount, Math.max(0, t.stats.hp * config.shieldHpCap - t.statuses.filter((s) => s.type === "shield").reduce((n, s) => n + (s.amount ?? 0), 0))) : amount;
+        if (e.type === "shield" && stored <= 0) continue;
+        t.statuses.push({ type: e.type, power: e.power, remaining: e.type === "stun" ? 1 : e.duration ?? 3, carry: true, sourceId: u.id, sourceEnemy: u.enemy, sourceSkillId: skill.id, appliedAction: serial, amount: ["dot", "hot", "shield"].includes(e.type) ? stored : void 0, healingBonus: e.type === "hot" ? bonus(u, "P10") : void 0, sequence: effectSequence++ });
+        frame("action", `${t.name}\uFF1A${e.type} \u4ED8\u4E0E`, u, skill, { event: "effect_applied", targetIds: [t.id] });
+      }
+    }
+  };
+  const deaths = (attacker) => {
+    const queue = [];
+    const collect = (cause = attacker) => {
+      for (const u of [...side(cause), ...opposite(cause)])
+        if (u.hp <= 0 && !u.dead) {
+          u.dead = true;
+          u.deaths++;
+          u.statuses = [];
+          u.immune = false;
+          u.sp = 0;
+          u.pendingSp = 0;
+          u.count = 0;
+          frame("action", `${u.name} \u6226\u95D8\u4E0D\u80FD`, u, void 0, { event: "death" });
+          for (let index = 0; index < (u.deathEffects?.length ?? 0); index++)
+            if (!u.usedDeath.has(index)) {
+              u.usedDeath.add(index);
+              queue.push({ u, effect: u.deathEffects[index], index });
+            }
+        }
+    };
+    collect();
+    passives(false);
+    while (queue.length) {
+      const { u, effect, index } = queue.shift();
+      const s = { ...basic(u), id: `death:${u.id}:${index}`, effects: [effect] };
+      const targets = effect.target ? effectTargets(u, { ...s, target: effect.target === "selected" ? "first" : effect.target }, effect) : effect.type === "revive" ? [u] : ["damage", "atk_down", "def_down", "stun"].includes(effect.type) ? opposite(u) : side(u);
+      applyEffect(u, targets, effect, s);
+      collect(u);
+      passives(false);
+    }
+  };
+  const check = () => {
+    if (!party.some(alive)) {
+      ended = "lose";
+      reason = enemies.some(alive) ? "party_defeated" : "mutual_annihilation";
+    } else if (!enemies.some(alive) && wave === input.waves.length - 1) {
+      ended = "win";
+      reason = "final_wave_defeated";
+    }
+  };
+  const phases = () => {
+    for (const u of enemies.filter(alive)) {
+      const next = u.phaseIndex + 1, p = u.phases?.[next];
+      if (p && u.hp / u.stats.hp <= p.hpBelow) {
+        u.phaseIndex = next;
+        u.phase = p.name;
+        if (p.image)
+          u.image = p.image;
+        if (p.skills)
+          u.skills = [...p.skills];
+        if (p.actionCount !== void 0)
+          u.resetCount = p.actionCount;
+        if (p.maxSp !== void 0) {
+          u.stats.sp = p.maxSp;
+          u.sp = Math.min(u.sp, p.maxSp);
+        }
+        frame("phase", `${u.name}\uFF1A${p.name}`, u, void 0, { event: "phase" });
+      }
+    }
+  };
+  const act = (u, skill, discount) => {
+    serial++;
+    if (serial > 1e5)
+      throw new Error("Battle execution safety guard exceeded");
+    if (!u.enemy)
+      playerActions++;
+    const beforeSp = partySp, beforeGauge = gauge;
+    const cost = Math.ceil(skill.spCost * discount);
+    if (u.enemy)
+      u.sp -= cost;
+    else
+      partySp -= cost;
+    frame(u.enemy ? "enemy" : "action", `${u.name} \xB7 ${skill.name} SP \u2212${cost}`, u, skill, { event: "action_start" });
+    const main = skill.effects.find((e) => (!e.target || e.target === "selected") && effectTargets(u, skill, e, void 0, true).length > 0);
+    const selected = skill.target === "all_allies" ? side(u).filter(alive) : skill.target === "all_enemies" ? opposite(u).filter(alive) : main ? effectTargets(u, skill, main) : void 0;
+    hitThisAction = /* @__PURE__ */ new Set();
+    directTargets = /* @__PURE__ */ new Map();
+    applyingSkill = true;
+    for (const e of skill.effects)
+      applyEffect(u, effectTargets(u, skill, e, selected), e, skill);
+    applyingSkill = false;
+    deaths(u);
+    const attacked = [...opposite(u)].filter((t) => directTargets.has(t));
+    for (const t of attacked) {
+      if (!alive(u) || !alive(t) || t.deaths !== directTargets.get(t) || stunned(t)) continue;
+      const counter = t.statuses.filter((s) => s.type === "counter").sort((a, b) => b.power - a.power)[0];
+      if (!counter) continue;
+      isCounter = true;
+      hitThisAction = /* @__PURE__ */ new Set();
+      const skillCounter = { ...basic(t), id: `counter:${counter.sourceSkillId}`, name: "\u53CD\u6483", effects: [{ type: "damage", power: counter.power }] };
+      applyEffect(t, [u], skillCounter.effects[0], skillCounter);
+      isCounter = false;
+      deaths(t);
+    }
+    if (alive(u)) {
+      const effects = u.statuses.filter((s) => s.type === "dot" && s.appliedAction !== serial);
+      if (effects.length) {
+        const amount = Math.floor(periodicTotal(effects.map((s) => periodicAmount(u, s))));
+        const hpDamage = absorb(u, amount, u, skill);
+        if (u.enemy) {
+          totalDamage += hpDamage;
+        }
+        frame("action", `${u.name} \u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8 \u2212${hpDamage}`, u, skill, { event: "dot", targetIds: [u.id] });
+        deaths(u);
+      }
+    }
+    if (alive(u)) {
+      const effects = u.statuses.filter((s) => s.type === "hot" && s.appliedAction !== serial);
+      if (effects.length) {
+        const amount = Math.min(u.stats.hp - u.hp, Math.floor(periodicTotal(effects.map((s) => periodicAmount(u, s)))));
+        u.hp += amount;
+        frame("action", `${u.name} \u7D99\u7D9A\u56DE\u5FA9 +${amount}`, u, skill, { event: "hot", targetIds: [u.id] });
+      }
+    }
+    u.actions++;
+    for (const s of u.statuses)
+      if (s.type !== "stun" && s.appliedAction !== serial)
+        s.remaining--;
+    for (const s of u.statuses.filter((s2) => s2.remaining <= 0))
+      frame("action", `${u.name}\uFF1A${s.type} \u7D42\u4E86`, u, skill, { event: "effect_expired" });
+    u.statuses = u.statuses.filter((s) => s.remaining > 0);
+    u.immune = false;
+    if (!u.enemy) {
+      const a = analysis.find((a2) => a2.id === u.id);
+      a.actions++;
+      a.skills += Number(skill.id !== "basic");
+      if (!burst) {
+        const gain = commonSpGain(u.stats.luk, skill.id === "basic");
+        partySp = Math.min(400, partySp + gain);
+        gauge = Math.min(200, gauge + gain);
+        a.spGenerated += gain;
+      }
+    }
+    passives();
+    check();
+    if (!ended && playerActions >= 300) {
+      ended = "lose";
+      reason = "action_limit";
+    }
+    if (!ended && enemies.some(alive)) phases();
+    frame(u.enemy ? "enemy" : "action", `${u.name} \u884C\u52D5\u5B8C\u4E86`, u, skill, { event: "action_end", spDelta: partySp - beforeSp, gaugeDelta: gauge - beforeGauge });
+  };
+  const stunned = (u) => u.statuses.some((s) => s.type === "stun");
+  const skip = (u) => {
+    serial++;
+    if (!u.enemy)
+      playerActions++;
+    u.statuses = u.statuses.filter((s) => s.type !== "stun");
+    u.immune = true;
+    frame(u.enemy ? "enemy" : "action", `${u.name} \u884C\u52D5\u4E0D\u80FD\uFF1A\u30B9\u30AD\u30C3\u30D7\u30FB\u518D\u4ED8\u4E0E\u8010\u6027`, u, void 0, { event: "stun_skip" });
+  };
+  const interrupts = () => {
+    for (const e of enemies.filter(alive))
+      if (e.revivedAt !== serial)
+        e.count--;
+    frame("enemy", "\u6575\u306E\u884C\u52D5\u30AB\u30A6\u30F3\u30C8\u66F4\u65B0", void 0, void 0, { event: "counts" });
+    const due = enemies.filter((e) => alive(e) && e.count <= 0).sort((a, b) => a.order - b.order).map((e) => ({ e, deaths: e.deaths }));
+    for (const entry of due) {
+      const u = entry.e;
+      if (!alive(u) || u.deaths !== entry.deaths || ended || !enemies.some(alive))
+        continue;
+      frame("enemy", `${u.name} \u5272\u8FBC\u307F`, u, void 0, { event: "interrupt_start" });
+      if (stunned(u))
+        skip(u);
+      else {
+        u.inBlock = true;
+        const blockDeaths = u.deaths;
+        let skill = choose(u);
+        if (!skill)
+          act(u, basic(u), 1);
+        while (skill && alive(u) && u.deaths === blockDeaths && !ended && enemies.some(alive)) {
+          if (stunned(u)) {
+            skip(u);
+            break;
+          }
+          act(u, skill, 1);
+          if (!alive(u) || ended || stunned(u)) {
+            if (alive(u) && stunned(u) && !ended)
+              skip(u);
+            break;
+          }
+          skill = choose(u);
+        }
+        u.inBlock = false;
+        if (alive(u))
+          u.sp = Math.min(u.stats.sp, u.sp + u.pendingSp);
+        u.pendingSp = 0;
+      }
+      if (alive(u) && u.revivedAt !== serial)
+        u.count = u.resetCount;
+      frame("enemy", `${u.name} \u5272\u8FBC\u307F\u7D42\u4E86`, u, void 0, { event: "interrupt_end" });
+    }
+  };
+  passives();
+  frame("start", "\u5408\u6226\u958B\u59CB\uFF1A\u5171\u901ASP 0/400\u30FB\u30D0\u30FC\u30B9\u30C8\u30B2\u30FC\u30B8 0/200", void 0, void 0, { event: "start" });
+  let cursor = 0;
+  while (!ended) {
+    const u = party[cursor % party.length];
+    cursor++;
+    if (!alive(u))
+      continue;
+    let skipped = false;
+    if (stunned(u)) {
+      skip(u);
+      skipped = true;
+    } else {
+      if (gauge >= 200) {
+        gauge = 0;
+        burst = random() < commonBurstChance(u.stats.luk);
+        if (burst)
+          analysis.find((a) => a.id === u.id).bursts++;
+        frame("burst", burst ? `${u.name} BURST\uFF1A\u6700\u59275\u884C\u52D5` : `${u.name} BURST\u62BD\u9078\u5931\u6557`, u, void 0, { event: burst ? "burst_start" : "burst_failed" });
+      }
+      const deathCount = u.deaths, count = burst ? 5 : 1;
+      for (let n = 0; n < count; n++) {
+        if (stunned(u)) {
+          skip(u);
+          skipped = true;
+          frame("burst", "\u884C\u52D5\u4E0D\u80FD\u3067BURST\u4E2D\u65AD", u, void 0, { event: "burst_interrupted" });
+          break;
+        }
+        act(u, choose(u, burst ? 0.5 : 1) ?? basic(u), burst ? 0.5 : 1);
+        if (ended || !enemies.some(alive) || playerActions >= 300)
+          break;
+        interrupts();
+        if (ended || !alive(u) || u.deaths !== deathCount || !enemies.some(alive))
+          break;
+        if (burst && n < count - 1)
+          frame("burst", `${u.name} BURST\u518D\u958B`, u, void 0, { event: "burst_resume" });
+      }
+    }
+    if (burst) {
+      burst = false;
+      frame("burst", "BURST\u7D42\u4E86", u, void 0, { event: "burst_end" });
+    }
+    check();
+    if (!ended && playerActions >= 300) {
+      ended = "lose";
+      reason = "action_limit";
+    }
+    if (ended)
+      break;
+    if (!enemies.some(alive)) {
+      wavesCleared++;
+      wave++;
+      enemies = input.waves[wave].map((u2) => make(u2, true));
+      passives();
+      frame("wave", `WAVE ${wave + 1}\uFF1AHP\u30FBSP\u30FB\u30B2\u30FC\u30B8\u30FB\u72B6\u614B\u3092\u5F15\u7D99\u304E`, void 0, void 0, { event: "wave" });
+    } else if (skipped)
+      interrupts();
+  }
+  if (!enemies.some(alive))
+    wavesCleared++;
+  frame("end", ended === "win" ? "\u52DD\u5229" : reason === "action_limit" ? "300\u884C\u52D5\u4E0A\u9650\uFF1A\u6557\u5317" : "\u6557\u5317", void 0, void 0, { event: "end", reason });
+  return { seed: input.seed, outcome: ended, totalDamage, playerActions, wavesCleared, party: input.party, waves: input.waves, frames, analysis, rulesVersion: BALANCE_BATTLE_VERSION, reason };
+}
+
+// src/domain/redesign/battle.ts
+function simulateBattle3(input) {
+  if (input.rules.version === BALANCE_BATTLE_VERSION) return simulateBalanceBattle(input);
+  return simulateBattle2(input);
+}
+
 // src/domain/redesign/raid.ts
-var base = CHARACTER_MASTERS[12];
-var attack = SKILL_MASTERS.find((s) => s.effects.some((e) => e.type === "damage"));
+var base = COMMON_CHARACTER_MASTERS[12];
+var attack = COMMON_SKILL_MASTERS.find((s) => s.effects.some((e) => e.type === "damage"));
 var boss = { hitSpGain: 5, id: "raid_boss", name: "\u708E\u5F71\u306E\u5B88\u5C06", image: base.image, level: 1, element: "fire", stats: { hp: 6500, sp: 110, atk: 160, def: 45, luk: 20 }, skills: [attack], passives: [], actionCount: 4, order: 0, boss: true, phases: [{ hpBelow: 0.4, name: "\u70C8\u706B\u306E\u9663", actionCount: 3 }] };
 var RAID_MASTERS = [
   { id: "encounter_flame", name: "\u708E\u5F71\u306E\u5B88\u5C06", type: "encounter", enemy: boss, energyCost: 5, durationMinutes: 60, maxParticipants: 10, maxLevel: 1, appearanceLevels: [1], appearanceImages: {}, enemyGrowthPerLevel: 0.15, sharedHpGrowthPerLevel: 0.2, victoryMultiplier: 1.5, sharedHp: 15e4, participationRewards: [{ kind: "character_material", amount: 2 }], defeatRewards: [{ kind: "character_material", amount: 30 }] },
-  { id: "unlock_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", type: "unlock", enemy: { ...boss, id: "raid_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", element: "dark", image: CHARACTER_MASTERS[24].image }, energyCost: 5, durationMinutes: 4320, maxParticipants: 20, maxLevel: 20, appearanceLevels: [1, 10, 20], appearanceImages: { 10: CHARACTER_MASTERS[30].image, 20: CHARACTER_MASTERS[36].image }, enemyGrowthPerLevel: 0.15, sharedHpGrowthPerLevel: 0.2, victoryMultiplier: 1.5, sharedHp: 2e5, participationRewards: [{ kind: "skill_material", amount: 2 }], defeatRewards: [{ kind: "skill_material", amount: 15 }, { kind: "equipment_material", amount: 5 }] }
+  { id: "unlock_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", type: "unlock", enemy: { ...boss, id: "raid_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", element: "dark", image: COMMON_CHARACTER_MASTERS[24].image }, energyCost: 5, durationMinutes: 4320, maxParticipants: 20, maxLevel: 20, appearanceLevels: [1, 10, 20], appearanceImages: { 10: COMMON_CHARACTER_MASTERS[30].image, 20: COMMON_CHARACTER_MASTERS[36].image }, enemyGrowthPerLevel: 0.15, sharedHpGrowthPerLevel: 0.2, victoryMultiplier: 1.5, sharedHp: 2e5, participationRewards: [{ kind: "skill_material", amount: 2 }], defeatRewards: [{ kind: "skill_material", amount: 15 }, { kind: "equipment_material", amount: 5 }] }
 ];
 function getRaidMaster(id) {
   const master = RAID_MASTERS.find((m) => m.id === id);
@@ -9628,7 +23816,7 @@ function applyRaidAction(original, originalState, action, payload = {}, now = Da
 
 // src/domain/redesign/territory.ts
 var TERRITORY_MASTER = {
-  version: "PREVIEW_PROVISIONAL_20260920_common_v2",
+  version: "PREVIEW_PROVISIONAL_20260920_balance_v2",
   status: "PREVIEW_PROVISIONAL",
   initialExp: 0,
   legacyMigrationExp: 0,
@@ -9819,14 +24007,14 @@ async function runBattle(userId, name2, payload, id, playerName) {
     const seed = crypto.getRandomValues(new Uint32Array(1))[0];
     const rules = startRoom?.territorySnapshot?.battleRules ?? BATTLE_RULES;
     const input = { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel };
-    preparedBattle = simulateBattle2(input);
+    preparedBattle = simulateBattle3(input);
     await commit(state, { ...state, energy: state.energy - cost }, id, { id, kind, targetId, seed, input, status: "started" }, startRoom, startRoom?.version ?? null);
     [record] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=*`);
     if (!record) throw new ApiError("\u6226\u95D8\u306E\u4FDD\u5B58\u72B6\u614B\u3092\u78BA\u8A8D\u3067\u304D\u307E\u305B\u3093\u3002\u518D\u958B\u3057\u3066\u304F\u3060\u3055\u3044\u3002", 503);
     if (record.status === "settled") return responseFor(userId, record.result);
     if (JSON.stringify(record.input) !== JSON.stringify(input)) preparedBattle = void 0;
   }
-  const battle = preparedBattle ?? simulateBattle2(record.input);
+  const battle = preparedBattle ?? simulateBattle3(record.input);
   const settlementId = await uuidFor(`settlement:${id}`);
   for (let attempt = 0; attempt < 4; attempt++) {
     const state = await stateFor(userId);

@@ -1,4 +1,5 @@
-import { CHARACTER_MASTERS, SKILL_MASTERS, EQUIPMENT_MASTERS } from './masters';
+// Keep existing stage/enemy/reward fixtures separate from balance-v2 character and 72-skill candidates.
+import { COMMON_CHARACTER_MASTERS as CHARACTER_MASTERS, COMMON_SKILL_MASTERS as SKILL_MASTERS, EQUIPMENT_MASTERS } from './masters';
 import type { EnemyUnit, QuestArea, QuestStage, SkillMaster } from './types';
 
 /** Development balance. All content IDs remain stable when numeric masters are tuned. */
