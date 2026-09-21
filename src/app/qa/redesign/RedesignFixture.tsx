@@ -17,9 +17,15 @@ import type { RaidRoom, RedesignState } from '@/domain/redesign/types';
 import '@/app/components/redesign/redesign.css';
 
 const noop = () => undefined;
+import { emptyGrowthInventory } from '@/domain/redesign/growthMaster';
 const LOCAL_ID = 'qa-local-only';
 function fixtureState(): RedesignState {
   const state = createInitialState(LOCAL_ID);
+  state.growthInventory = emptyGrowthInventory();
+  state.growthInventory.expItems.character = {small:100,medium:30,large:20,xlarge:10};
+  state.growthInventory.expItems.equipment = {small:100,medium:30,large:20,xlarge:10};
+  state.growthInventory.genericSouls = {N:100,R:100,SR:100,SSR:100};
+  state.growthInventory.soulSelectors = {N:2,R:2,SR:2,SSR:2};
   state.cash = 30000; state.diamonds = 1000; state.energy = 50;
   state.souls = Object.fromEntries(CHARACTER_MASTERS.map(c => [c.id, 100]));
   state.equipment = EQUIPMENT_MASTERS.slice(0, 14).map((master, index) => ({ instanceId: `qa-equipment-${index}`, masterId: master.id, level: 1, lb: 0 }));
