@@ -5,7 +5,7 @@ import type { EnemyUnit, RaidMaster, RaidRoom, RedesignState, Reward, TerritoryS
 
 const base = CHARACTER_MASTERS[12];
 const attack = SKILL_MASTERS.find(s=>s.effects.some(e=>e.type==='damage'))!;
-const boss:EnemyUnit={hitSpGain:5,id:'raid_boss',name:'炎影の守将',image:base.image,level:1,element:'fire',stats:{hp:6500,sp:110,atk:160,def:45,luk:20},skills:[attack],passives:[],actionCount:4,order:0,boss:true,phases:[{hpBelow:0.4,name:'烈火の陣',actionCount:3}]};
+const boss:EnemyUnit={initialSp:110,hitSpGain:5,id:'raid_boss',name:'炎影の守将',image:base.image,level:1,element:'fire',stats:{hp:6500,sp:110,atk:160,def:45,luk:20},skills:[attack],passives:[],actionCount:4,order:0,boss:true,phases:[{hpBelow:0.4,name:'烈火の陣',actionCount:3}]};
 /** All numbers beyond rule FIX are Preview balance, replaceable without changing UI. */
 export const RAID_MASTERS:RaidMaster[]=[
  {id:'encounter_flame',name:'炎影の守将',type:'encounter',enemy:boss,energyCost:5,durationMinutes:60,maxParticipants:10,maxLevel:1,appearanceLevels:[1],appearanceImages:{},enemyGrowthPerLevel:0.15,sharedHpGrowthPerLevel:0.2,victoryMultiplier:1.5,sharedHp:150000,participationRewards:[{kind:'character_material',amount:2}],defeatRewards:[{kind:'character_material',amount:30}]},
@@ -15,7 +15,12 @@ export function getRaidMaster(id:string) {const master=RAID_MASTERS.find(m=>m.id
 export function getRoomRaidMaster(room:RaidRoom):RaidMaster { return room.territorySnapshot?.raidMaster ?? getRaidMaster(room.masterId); }
 /** Visual stage only: never used for joining, combat access, or rewards. */
 export function raidAppearanceLevel(master:RaidMaster,level:number){return Math.max(1,...master.appearanceLevels.filter(n=>n<=level));}
-export function raidEnemy(master:RaidMaster,level:number):EnemyUnit {const appearanceLevel=raidAppearanceLevel(master,level);return {...structuredClone(master.enemy),level,image:master.appearanceImages[String(appearanceLevel)]??master.enemy.image,stats:Object.fromEntries(Object.entries(master.enemy.stats).map(([key,value])=>[key,Math.round(value*(1+(level-1)*master.enemyGrowthPerLevel))])) as EnemyUnit['stats']};}
+/** Both raid modes start full at the scaled cap. Saved battle inputs are never passed here. */
+export function raidEnemy(master:RaidMaster,level:number):EnemyUnit {
+ const appearanceLevel=raidAppearanceLevel(master,level);
+ const stats=Object.fromEntries(Object.entries(master.enemy.stats).map(([key,value])=>[key,Math.round(value*(1+(level-1)*master.enemyGrowthPerLevel))])) as EnemyUnit['stats'];
+ return {...structuredClone(master.enemy),level,image:master.appearanceImages[String(appearanceLevel)]??master.enemy.image,stats,initialSp:stats.sp};
+}
 export function createRaidRoom(masterId:string,ownerId:string,id:string,now:number,territorySnapshot?:TerritorySnapshot):RaidRoom{const m=territorySnapshot?.raidMaster??getRaidMaster(masterId);return {...(territorySnapshot?{territorySnapshot:structuredClone(territorySnapshot)}:{}),id,masterId,ownerId,level:1,hp:m.sharedHp,maxHp:m.sharedHp,createdAt:new Date(now).toISOString(),expiresAt:new Date(now+m.durationMinutes*60000).toISOString(),status:'active',rescueCount:0,rescueWindowStartedAt:new Date(now).toISOString(),participants:[{userId:ownerId,name:'主催者',wins:0,attempts:0,totalDamage:0,joinedLevel:1}],settledBattleIds:[],rewardGrants:[]};}
 export type RaidActionPayload={name?:string;battleId?:string;battleLevel?:number;energyAlreadyPaid?:boolean;result?:{outcome:string;totalDamage:number}};
 /** Server-only transition: caller must lock room + account and supply a server-simulated result, never client damage. */
@@ -55,3 +60,4 @@ export function applyRaidAction(original:RaidRoom,originalState:RedesignState,ac
  }
  throw new Error('対応していないレイド操作です。');
 }
+

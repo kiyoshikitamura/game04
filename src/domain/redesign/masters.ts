@@ -17,7 +17,7 @@ export const SLOT_NAMES: Record<EquipmentSlot,string> = {weapon:'武器',head:'�
 export const LEGACY_BATTLE_RULES: BattleRules = { defenseFactor:0.45, advantageMultiplier:1.5, disadvantageMultiplier:0.75, spRecoveryDivisor:120, burstLukDivisor:20, enemySpRecoveryDivisor:30, maxPlayerActions:300, initialSpRatio:0 };
 /** Fixed common rules; character, skill and enemy numbers remain provisional. */
 export const COMMON_BATTLE_RULES: BattleRules = {...LEGACY_BATTLE_RULES,version:'common-v2-20260920',defenseFactor:1};
-export const BATTLE_RULES: BattleRules = {...COMMON_BATTLE_RULES,version:'balance-v2-20260920',balanceV2:BALANCE_V2_CONFIG};
+export const BATTLE_RULES: BattleRules = {...COMMON_BATTLE_RULES,version:'balance-v2-20260920',inputVersion:'wave-sp-v1-20260921',balanceV2:BALANCE_V2_CONFIG};
 export const COMMON_PREVIEW_DATA_STATUS = 'PREVIEW_PROVISIONAL_COMMON_V2_20260920';
 
 const power: Record<Rarity,number> = {N:1,R:1.08,SR:1.16,SSR:1.24};
@@ -128,4 +128,5 @@ export function grantReward(original:RedesignState,reward:import('./types').Rewa
  }
  return state;
 }
+
 

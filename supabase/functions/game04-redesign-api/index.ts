@@ -22065,7 +22065,7 @@ var game04_master_assets_default = {
 var ELEMENTS = ["fire", "water", "earth", "wind", "light", "dark"];
 var LEGACY_BATTLE_RULES = { defenseFactor: 0.45, advantageMultiplier: 1.5, disadvantageMultiplier: 0.75, spRecoveryDivisor: 120, burstLukDivisor: 20, enemySpRecoveryDivisor: 30, maxPlayerActions: 300, initialSpRatio: 0 };
 var COMMON_BATTLE_RULES = { ...LEGACY_BATTLE_RULES, version: "common-v2-20260920", defenseFactor: 1 };
-var BATTLE_RULES = { ...COMMON_BATTLE_RULES, version: "balance-v2-20260920", balanceV2: BALANCE_V2_CONFIG };
+var BATTLE_RULES = { ...COMMON_BATTLE_RULES, version: "balance-v2-20260920", inputVersion: "wave-sp-v1-20260921", balanceV2: BALANCE_V2_CONFIG };
 var power = { N: 1, R: 1.08, SR: 1.16, SSR: 1.24 };
 var image = (id) => game04_master_assets_default.assets.find((a) => a.id === id)?.path ?? "/menu/event_banner_placeholder.png";
 var name = (id) => sengoku_masters_default[id] ?? id;
@@ -22204,10 +22204,7 @@ function buildInitialState(userId, legacy) {
   return importLegacyAssets(createInitialState(userId), legacy);
 }
 function grantReward(original, reward, instanceId, acquisitionMaster = PREVIEW_ACQUISITION_MASTER) {
-  if (isGrowthRewardKind(reward.kind)) {
-    if (!reward.id) throw new Error("\u80B2\u6210\u5831\u916CID\u304C\u5FC5\u8981\u3067\u3059");
-    return grantGrowthReward(original, { kind: reward.kind, id: reward.id, amount: reward.amount });
-  }
+  if (isGrowthRewardKind(reward.kind)) return grantGrowthReward(original, { ...reward, kind: reward.kind });
   const state = structuredClone(original);
   const amount = reward.amount;
   if (!Number.isSafeInteger(amount) || amount < 0) throw new Error("\u5831\u916C\u6570\u91CF\u304C\u4E0D\u6B63\u3067\u3059");
@@ -22307,9 +22304,11 @@ function applyNormalGacha(original, payload, pool, requestId, now, policy, rando
       roll -= b[2];
       return roll < 0;
     });
+    if (!bucket) throw new Error("\u62BD\u9078\u30DE\u30B9\u30BF\u30FC\u304C\u4E0D\u6B63\u3067\u3059\u3002");
     const choices = rows.filter((row2) => row2.rarity === bucket[0] && row2.item_type === bucket[1]);
     const row = choices[Math.floor(draw() * choices.length)];
     const master = masters[bucket[1]].find((m) => m.id === row.item_id);
+    if (!master) throw new Error("\u6392\u51FA\u5BFE\u8C61\u3092\u78BA\u8A8D\u3067\u304D\u307E\u305B\u3093\u3002");
     const kind = bucket[1].toLowerCase();
     const beforeSouls = state.souls[row.item_id] ?? 0, beforeMaterial = state.materials.skill;
     const existed = kind === "character" ? state.characters.some((c) => c.id === row.item_id) : kind === "skill" ? state.skills.some((s) => s.id === row.item_id) : false;
@@ -22333,9 +22332,9 @@ function applyNormalGacha(original, payload, pool, requestId, now, policy, rando
 var GROWTH_PREVIEW_RULES = { characterLevelCaps: [50, 60, 70, 80, 90, 100], skillMax: 10, equipmentLevelCap: 100, equipmentLbMax: 10 };
 var EQUIPMENT_SLOTS = ["weapon", "head", "body", "legs", "accessory1", "accessory2"];
 var getCharacterLevelCap = (awakening) => GROWTH_PREVIEW_RULES.characterLevelCaps[Math.max(0, Math.min(5, awakening))];
-var requireValue = (condition, message) => {
+function requireValue(condition, message) {
   if (!condition) throw new Error(message);
-};
+}
 function isEquipmentAssigned(state, id) {
   return state.deck.some((m) => Object.values(m.equipment).includes(id));
 }
@@ -22421,6 +22420,7 @@ function applyGrowthAction(input, action, payload) {
     inventory.carryExp[kind] = quote.carryAfter;
     state.cash -= quote.cash;
     const owned = kind === "character" ? state.characters.find((c) => c.id === id) : state.equipment.find((e) => e.instanceId === id);
+    requireValue(owned, "\u80B2\u6210\u5BFE\u8C61\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002");
     owned.level = quote.levelAfter;
     owned.exp = quote.expAfter;
     owned.growthVersion = GROWTH_VERSION;
@@ -22531,6 +22531,8 @@ function enemy(area, stage, wave, slot, boss2) {
     element: master.element,
     level: 1 + rank,
     stats: { hp: Math.round((boss2 ? 1100 : 370) * growth), sp: boss2 ? 80 : 40, atk: Math.round((boss2 ? 100 : 55) * growth), def: Math.round((area === 2 ? 55 : 15) * growth), luk: 10 + rank },
+    // Existing provisional quest numbers remain unchanged; formal inputs require their own explicit starts.
+    initialSp: boss2 ? 80 : 40,
     skills,
     passives: [],
     hitSpGain: 5,
@@ -23334,12 +23336,15 @@ function simulateCommonBattle(input) {
 
 // src/domain/redesign/battleBalanceV2.ts
 var BALANCE_BATTLE_VERSION = "balance-v2-20260920";
+var WAVE_SP_INPUT_VERSION = "wave-sp-v1-20260921";
 function simulateBalanceBattle(input) {
+  const revisedInput = input.rules.inputVersion === WAVE_SP_INPUT_VERSION;
+  if (input.rules.inputVersion !== void 0 && !revisedInput) throw new Error("Unsupported battle input version");
   const config = input.rules.balanceV2;
   if (!config || config.status !== "PREVIEW_PROVISIONAL") throw new Error("Explicit balance v2 configuration required");
   for (const key2 of ["damageBonusCap", "healingBonusCap", "shieldBonusCap", "shieldHpCap", "periodicCapMultiplier", "lowHpThreshold", "highHpThreshold"]) if (!Number.isFinite(config[key2]) || config[key2] < 0) throw new Error("Invalid balance v2 config: " + key2);
   if (config.diversityFactors.length !== 5 || config.diversityFactors.some((v) => !Number.isFinite(v) || v < 0)) throw new Error("Invalid diversity config");
-  if (!input.party.length || input.party.length > 5 || !input.waves.length || input.waves.length > 5 || input.waves.some((w) => !w.length || w.length > 3))
+  if (!input.party.length || input.party.length > 5 || !input.waves.length || input.waves.length > (revisedInput ? 6 : 5) || input.waves.some((w) => !w.length || w.length > 3))
     throw new Error("Invalid battle formation");
   if (new Set(input.party.map((u) => u.id)).size !== input.party.length)
     throw new Error("Duplicate party member");
@@ -23394,6 +23399,8 @@ function simulateBalanceBattle(input) {
     if (new Set(wave2.map((u) => u.id)).size !== wave2.length)
       throw new Error("Duplicate enemy id");
     for (const e of wave2) {
+      if (revisedInput && (!Number.isFinite(e.initialSp) || e.initialSp < 0 || e.initialSp > e.stats.sp))
+        throw new Error("Explicit enemy initialSp within stats.sp cap required");
       if (e.initialCount !== void 0 && (!Number.isInteger(e.initialCount) || e.initialCount < 1))
         throw new Error("Invalid enemy initial count");
       for (const p of e.phases ?? [])
@@ -23413,7 +23420,7 @@ function simulateBalanceBattle(input) {
   };
   const make = (u, enemy2) => {
     const e = u;
-    return { ...u, stats: { ...u.stats }, skills: [...u.skills], hp: u.stats.hp, sp: enemy2 ? u.stats.sp : 0, count: enemy2 ? e.initialCount ?? e.actionCount : 0, resetCount: e.actionCount, initialCount: e.initialCount ?? e.actionCount, order: e.order ?? 0, enemy: enemy2, actions: 0, statuses: [], phase: null, phaseIndex: -1, phases: e.phases, dead: false, deaths: 0, usedDeath: /* @__PURE__ */ new Set(), immune: false, passive: { atk: 0, def: 0 }, hitSpGain: e.hitSpGain ?? 0, pendingSp: 0, inBlock: false, revivedAt: -1 };
+    return { ...u, stats: { ...u.stats }, skills: [...u.skills], hp: u.stats.hp, sp: enemy2 ? revisedInput ? e.initialSp : u.stats.sp : 0, count: enemy2 ? e.initialCount ?? e.actionCount : 0, resetCount: e.actionCount, initialCount: e.initialCount ?? e.actionCount, order: e.order ?? 0, enemy: enemy2, actions: 0, statuses: [], phase: null, phaseIndex: -1, phases: e.phases, dead: false, deaths: 0, usedDeath: /* @__PURE__ */ new Set(), immune: false, passive: { atk: 0, def: 0 }, hitSpGain: e.hitSpGain ?? 0, pendingSp: 0, inBlock: false, revivedAt: -1 };
   };
   const party = input.party.map((u) => make(u, false));
   let wave = 0, enemies = input.waves[0].map((u) => make(u, true));
@@ -23905,7 +23912,7 @@ function simulateBalanceBattle(input) {
   if (!enemies.some(alive))
     wavesCleared++;
   frame("end", ended === "win" ? "\u52DD\u5229" : reason === "action_limit" ? "300\u884C\u52D5\u4E0A\u9650\uFF1A\u6557\u5317" : "\u6557\u5317", void 0, void 0, { event: "end", reason });
-  return { seed: input.seed, outcome: ended, totalDamage, playerActions, wavesCleared, party: input.party, waves: input.waves, frames, analysis, rulesVersion: BALANCE_BATTLE_VERSION, reason };
+  return { seed: input.seed, outcome: ended, totalDamage, playerActions, wavesCleared, party: input.party, waves: input.waves, frames, analysis, rulesVersion: BALANCE_BATTLE_VERSION, ...revisedInput ? { inputVersion: WAVE_SP_INPUT_VERSION, masterVersion: config.version } : {}, reason };
 }
 
 // src/domain/redesign/battle.ts
@@ -23917,7 +23924,7 @@ function simulateBattle3(input) {
 // src/domain/redesign/raid.ts
 var base = COMMON_CHARACTER_MASTERS[12];
 var attack = COMMON_SKILL_MASTERS.find((s) => s.effects.some((e) => e.type === "damage"));
-var boss = { hitSpGain: 5, id: "raid_boss", name: "\u708E\u5F71\u306E\u5B88\u5C06", image: base.image, level: 1, element: "fire", stats: { hp: 6500, sp: 110, atk: 160, def: 45, luk: 20 }, skills: [attack], passives: [], actionCount: 4, order: 0, boss: true, phases: [{ hpBelow: 0.4, name: "\u70C8\u706B\u306E\u9663", actionCount: 3 }] };
+var boss = { initialSp: 110, hitSpGain: 5, id: "raid_boss", name: "\u708E\u5F71\u306E\u5B88\u5C06", image: base.image, level: 1, element: "fire", stats: { hp: 6500, sp: 110, atk: 160, def: 45, luk: 20 }, skills: [attack], passives: [], actionCount: 4, order: 0, boss: true, phases: [{ hpBelow: 0.4, name: "\u70C8\u706B\u306E\u9663", actionCount: 3 }] };
 var RAID_MASTERS = [
   { id: "encounter_flame", name: "\u708E\u5F71\u306E\u5B88\u5C06", type: "encounter", enemy: boss, energyCost: 5, durationMinutes: 60, maxParticipants: 10, maxLevel: 1, appearanceLevels: [1], appearanceImages: {}, enemyGrowthPerLevel: 0.15, sharedHpGrowthPerLevel: 0.2, victoryMultiplier: 1.5, sharedHp: 15e4, participationRewards: [{ kind: "character_material", amount: 2 }], defeatRewards: [{ kind: "character_material", amount: 30 }] },
   { id: "unlock_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", type: "unlock", enemy: { ...boss, id: "raid_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", element: "dark", image: COMMON_CHARACTER_MASTERS[24].image }, energyCost: 5, durationMinutes: 4320, maxParticipants: 20, maxLevel: 20, appearanceLevels: [1, 10, 20], appearanceImages: { 10: COMMON_CHARACTER_MASTERS[30].image, 20: COMMON_CHARACTER_MASTERS[36].image }, enemyGrowthPerLevel: 0.15, sharedHpGrowthPerLevel: 0.2, victoryMultiplier: 1.5, sharedHp: 2e5, participationRewards: [{ kind: "skill_material", amount: 2 }], defeatRewards: [{ kind: "skill_material", amount: 15 }, { kind: "equipment_material", amount: 5 }] }
@@ -23935,7 +23942,8 @@ function raidAppearanceLevel(master, level) {
 }
 function raidEnemy(master, level) {
   const appearanceLevel = raidAppearanceLevel(master, level);
-  return { ...structuredClone(master.enemy), level, image: master.appearanceImages[String(appearanceLevel)] ?? master.enemy.image, stats: Object.fromEntries(Object.entries(master.enemy.stats).map(([key2, value]) => [key2, Math.round(value * (1 + (level - 1) * master.enemyGrowthPerLevel))])) };
+  const stats = Object.fromEntries(Object.entries(master.enemy.stats).map(([key2, value]) => [key2, Math.round(value * (1 + (level - 1) * master.enemyGrowthPerLevel))]));
+  return { ...structuredClone(master.enemy), level, image: master.appearanceImages[String(appearanceLevel)] ?? master.enemy.image, stats, initialSp: stats.sp };
 }
 function createRaidRoom(masterId, ownerId, id, now, territorySnapshot) {
   const m = territorySnapshot?.raidMaster ?? getRaidMaster(masterId);
@@ -24229,8 +24237,8 @@ async function runBattle(userId, name2, payload, id, playerName) {
     const state = await stateFor(userId);
     let after = structuredClone(state);
     let room = null, version = null;
-    const rewards = [];
     let playerGrowth;
+    const rewards = [];
     let firstClear = false, encounterRaidId = null;
     if (record.kind === "quest" && battle.outcome === "win") {
       const stage = getQuestStage(record.target_id);

@@ -34,6 +34,7 @@ function fixtureState(): RedesignState {
 export default function RedesignFixture() {
   const [state, setState] = useState(fixtureState);
   const [tab, setTab] = useState('home');
+  const [waveSpProbe, setWaveSpProbe] = useState(false);
   const [rooms, setRooms] = useState<RaidRoom[]>([]);
   const [battle, setBattle] = useState<BattleResult | null>(null);
   const [roomId, setRoomId] = useState<string>();
@@ -53,13 +54,23 @@ export default function RedesignFixture() {
     expired.rewardGrants = [{ id: `participation:${LOCAL_ID}`, userId: LOCAL_ID, level: 1,
       rewards: structuredClone(snapshot.raidMaster.participationRewards), claimed: false }];
     setRooms([createRaidRoom('encounter_flame', LOCAL_ID, 'qa-encounter', now), createRaidRoom('unlock_shadow', LOCAL_ID, 'qa-unlock', now), expired]);
-    const selected = new URLSearchParams(window.location.search).get('view');
+    const params = new URLSearchParams(window.location.search);
+    setWaveSpProbe(params.get('probe') === 'wave-sp');
+    const selected = params.get('view');
     if (selected && ['home','quest','character','raid','territory','battle'].includes(selected)) setTab(selected);
     document.body.classList.add('rd-active');
     return () => document.body.classList.remove('rd-active');
   }, []);
   const party = useMemo(() => buildBattleParty(state), [state]);
-  const sampleBattle = useMemo(() => simulateBattle({ seed: 917, party, waves: QUEST_STAGES[2].waves, rules: BATTLE_RULES }), [party]);
+  const sampleBattle = useMemo(() => {
+    // TEST_ONLY: six-wave replay/initial-SP probe, never an economy or formal balance master.
+    if (waveSpProbe) return simulateBattle({ seed: 917, rules: BATTLE_RULES,
+      party: party.map(u => ({...u, stats:{...u.stats,hp:100000,atk:1000},skills:[],passives:[]})),
+      waves: [0,35,50,0,35,175].map((initialSp,i) => [{...QUEST_STAGES[0].waves[0][0],
+        id:`wave-sp-probe-${i}`, initialSp, stats:{hp:1,sp:i===5?180:100,atk:1,def:0,luk:0}, skills:[],passives:[],phases:[],hitSpGain:10}]),
+    });
+    return simulateBattle({ seed: 917, party, waves: QUEST_STAGES[2].waves, rules: BATTLE_RULES });
+  }, [party,waveSpProbe]);
   const navigate = (next: string) => { setMessage(''); setBattle(null); setTab(next.startsWith('quest') ? 'quest' : next); };
   async function action(type: string, payload: Record<string, unknown> = {}) {
     if (type === 'set_home') { setState(previous => ({ ...previous, ...(typeof payload.characterId === 'string' ? { homeCharacterId: payload.characterId } : {}), ...(typeof payload.backgroundId === 'string' ? { homeBackgroundId: payload.backgroundId } : {}) })); return; }
@@ -112,3 +123,4 @@ export default function RedesignFixture() {
     </main>
   </div></GameContext.Provider>;
 }
+

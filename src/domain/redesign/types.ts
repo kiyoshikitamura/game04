@@ -17,9 +17,9 @@ export interface OwnedEquipment { exp?: number; growthVersion?: string; instance
 export interface DeckMember { characterId: string; skillIds: string[]; equipment: Partial<Record<EquipmentSlot, string>>; }
 export interface BattleUnit { id: string; name: string; image: string; level: number; element: Element; stats: Stats; skills: SkillMaster[]; passives: Passive[]; deathEffects?: SkillEffect[]; }
 export interface EnemyPhase { maxSp?: number; hpBelow: number; name: string; image?: string; actionCount?: number; skills?: SkillMaster[]; }
-export interface EnemyUnit extends BattleUnit { hitSpGain?: number; initialCount?: number; actionCount: number; order: number; boss?: boolean; phases?: EnemyPhase[]; }
+export interface EnemyUnit extends BattleUnit { /** Initial SP; stats.sp remains the cap. Legacy inputs ignore this field. */ initialSp?: number; hitSpGain?: number; initialCount?: number; actionCount: number; order: number; boss?: boolean; phases?: EnemyPhase[]; }
 export interface BalanceV2Config { status: 'PREVIEW_PROVISIONAL'; version: string; damageBonusCap: number; healingBonusCap: number; shieldBonusCap: number; shieldHpCap: number; periodicCapMultiplier: number; lowHpThreshold: number; highHpThreshold: number; diversityFactors: number[]; }
-export interface BattleRules { balanceV2?: BalanceV2Config; version?: string; defenseFactor: number; advantageMultiplier: number; disadvantageMultiplier: number; spRecoveryDivisor: number; burstLukDivisor: number; enemySpRecoveryDivisor: number; maxPlayerActions: number; initialSpRatio: number; }
+export interface BattleRules { /** Omitted on saved legacy inputs. */ inputVersion?: 'wave-sp-v1-20260921'; balanceV2?: BalanceV2Config; version?: string; defenseFactor: number; advantageMultiplier: number; disadvantageMultiplier: number; spRecoveryDivisor: number; burstLukDivisor: number; enemySpRecoveryDivisor: number; maxPlayerActions: number; initialSpRatio: number; }
 export interface BattleInput { seed: number; party: BattleUnit[]; waves: EnemyUnit[][]; rules: BattleRules; }
 export interface Reward { kind: 'character_exp_item' | 'equipment_exp_item' | 'generic_soul' | 'soul_selector' | 'character' | 'skill' | 'cash' | 'character_material' | 'skill_material' | 'equipment_material' | 'equipment_lb' | 'soul' | 'equipment' | 'unlock_item'; amount: number; id?: string; chance?: number; }
 export interface QuestStage { id: string; areaId: string; index: number; name: string; description: string; energyCost: number; waves: EnemyUnit[][]; firstRewards: Reward[]; rewards: Reward[]; rareRewards: Reward[]; encounterChance: number; }
@@ -41,3 +41,4 @@ export interface TerritoryProjection { masterVersion: string; status: TerritoryM
 
 export type ExpSize = "small" | "medium" | "large" | "xlarge";
 export interface GrowthInventory { expItems: {character: Record<ExpSize,number>; equipment: Record<ExpSize,number>}; carryExp: {character:number;equipment:number}; genericSouls: Record<Rarity,number>; soulSelectors: Record<Rarity,number>; }
+

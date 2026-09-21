@@ -2,6 +2,7 @@ import type { BattleInput, BattleUnit, EnemyUnit, SkillMaster, SkillEffect, Targ
 import type { BattleStatus, BattleUnitState, BattleFrame, BattleAnalysis, BattleResult, BattleOutcome } from './battle.ts';
 import { commonBurstChance, commonSpGain, elementMultiplier, splitDisplayDamage } from './battleCommonV1.ts';
 export const BALANCE_BATTLE_VERSION = 'balance-v2-20260920';
+export const WAVE_SP_INPUT_VERSION = 'wave-sp-v1-20260921';
 interface Unit extends BattleUnit {
     hp: number;
     sp: number;
@@ -29,11 +30,13 @@ interface Unit extends BattleUnit {
     revivedAt: number;
 }
 export function simulateBalanceBattle(input: BattleInput): BattleResult {
+    const revisedInput = input.rules.inputVersion === WAVE_SP_INPUT_VERSION;
+    if (input.rules.inputVersion !== undefined && !revisedInput) throw new Error('Unsupported battle input version');
     const config = input.rules.balanceV2;
     if (!config || config.status !== 'PREVIEW_PROVISIONAL') throw new Error('Explicit balance v2 configuration required');
     for(const key of ['damageBonusCap','healingBonusCap','shieldBonusCap','shieldHpCap','periodicCapMultiplier','lowHpThreshold','highHpThreshold'] as const) if(!Number.isFinite(config[key])||config[key]<0) throw new Error('Invalid balance v2 config: '+key);
     if(config.diversityFactors.length!==5||config.diversityFactors.some(v=>!Number.isFinite(v)||v<0)) throw new Error('Invalid diversity config');
-    if (!input.party.length || input.party.length > 5 || !input.waves.length || input.waves.length > 5 || input.waves.some(w => !w.length || w.length > 3))
+    if (!input.party.length || input.party.length > 5 || !input.waves.length || input.waves.length > (revisedInput ? 6 : 5) || input.waves.some(w => !w.length || w.length > 3))
         throw new Error('Invalid battle formation');
     if (new Set(input.party.map(u => u.id)).size !== input.party.length)
         throw new Error('Duplicate party member');
@@ -89,6 +92,8 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
         if (new Set(wave.map(u => u.id)).size !== wave.length)
             throw new Error('Duplicate enemy id');
         for (const e of wave) {
+            if (revisedInput && (!Number.isFinite(e.initialSp) || e.initialSp! < 0 || e.initialSp! > e.stats.sp))
+                throw new Error('Explicit enemy initialSp within stats.sp cap required');
             if (e.initialCount !== undefined && (!Number.isInteger(e.initialCount) || e.initialCount < 1))
                 throw new Error('Invalid enemy initial count');
             for (const p of e.phases ?? [])
@@ -100,7 +105,7 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
     }
     let seed = input.seed >>> 0;
     const random = () => { seed += 0x6D2B79F5; let t = seed; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61); return ((t ^ t >>> 14) >>> 0) / 4294967296; };
-    const make = (u: BattleUnit, enemy: boolean): Unit => { const e = u as EnemyUnit; return { ...u, stats: { ...u.stats }, skills: [...u.skills], hp: u.stats.hp, sp: enemy ? u.stats.sp : 0, count: enemy ? e.initialCount ?? e.actionCount : 0, resetCount: e.actionCount, initialCount: e.initialCount ?? e.actionCount, order: e.order ?? 0, enemy, actions: 0, statuses: [], phase: null, phaseIndex: -1, phases: e.phases, dead: false, deaths: 0, usedDeath: new Set(), immune: false, passive: { atk: 0, def: 0 }, hitSpGain: e.hitSpGain ?? 0, pendingSp: 0, inBlock: false, revivedAt: -1 }; };
+    const make = (u: BattleUnit, enemy: boolean): Unit => { const e = u as EnemyUnit; return { ...u, stats: { ...u.stats }, skills: [...u.skills], hp: u.stats.hp, sp: enemy ? (revisedInput ? e.initialSp! : u.stats.sp) : 0, count: enemy ? e.initialCount ?? e.actionCount : 0, resetCount: e.actionCount, initialCount: e.initialCount ?? e.actionCount, order: e.order ?? 0, enemy, actions: 0, statuses: [], phase: null, phaseIndex: -1, phases: e.phases, dead: false, deaths: 0, usedDeath: new Set(), immune: false, passive: { atk: 0, def: 0 }, hitSpGain: e.hitSpGain ?? 0, pendingSp: 0, inBlock: false, revivedAt: -1 }; };
     const party = input.party.map(u => make(u, false));
     let wave = 0, enemies = input.waves[0].map(u => make(u, true));
     let partySp = 0, gauge = 0, playerActions = 0, serial = 0, totalDamage = 0, wavesCleared = 0, burst = false, ended: 'win' | 'lose' | null = null, reason = '';
@@ -538,5 +543,6 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
     if (!enemies.some(alive))
         wavesCleared++;
     frame('end', (ended as BattleOutcome | null) === 'win' ? '勝利' : reason === 'action_limit' ? '300行動上限：敗北' : '敗北', undefined, undefined, { event: 'end', reason });
-    return { seed: input.seed, outcome: ended!, totalDamage, playerActions, wavesCleared, party: input.party, waves: input.waves, frames, analysis, rulesVersion: BALANCE_BATTLE_VERSION, reason };
+    return { seed: input.seed, outcome: ended!, totalDamage, playerActions, wavesCleared, party: input.party, waves: input.waves, frames, analysis, rulesVersion: BALANCE_BATTLE_VERSION, ...(revisedInput ? { inputVersion: WAVE_SP_INPUT_VERSION, masterVersion: config.version } : {}), reason };
 }
+

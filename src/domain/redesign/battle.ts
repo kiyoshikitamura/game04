@@ -85,6 +85,8 @@ export interface BattleResult {
     frames: BattleFrame[];
     analysis: BattleAnalysis[];
     rulesVersion?: string;
+    inputVersion?: string;
+    masterVersion?: string;
     reason?: string;
 }
 const advantage: Record<Element, Element> = { fire: 'wind', wind: 'earth', earth: 'water', water: 'fire', light: 'dark', dark: 'light' };
@@ -103,3 +105,4 @@ export function simulateBattle(input: BattleInput): BattleResult {
     return simulatePreviousBattle(input);
 }
 export { simulateCommonBattle } from './battleCommonV1.ts';
+
