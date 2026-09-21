@@ -816,5 +816,43 @@
       }
     ],
     "limits": "代表ケース限定受入。72候補はQA接続、正式所持・排出プール追加ではない。最終見送り理由修正の配信は本コミット後に確認。全体進捗率へ流用しない。"
+  },
+  "growthUpdates": {
+    "date": "2026-09-21",
+    "basisSha": "acf7ca53cd10ad79ed3a8e4d3d2c38ab609578cb",
+    "implementationSha": "d6de642bcc9d8dc0f98204dabc6de5b92b5fd804",
+    "previewSha": "5fdb6a9ea9209b827f8ef19e3eff522b0959c13b",
+    "db": "lrgyllgzcdcphlbmkknc",
+    "edgeVersion": 10,
+    "stages": [
+      {
+        "name": "正本統合",
+        "status": "保存済"
+      },
+      {
+        "name": "育成・ガチャ実装",
+        "status": "実装済・代表ローカル検証PASS"
+      },
+      {
+        "name": "関連UI",
+        "status": "接続済・Previewローカル操作確認"
+      },
+      {
+        "name": "Preview受入",
+        "status": "ビルド成功・実API再検証未完了"
+      },
+      {
+        "name": "供給・正式バランス",
+        "status": "未検証"
+      }
+    ],
+    "evidence": "GAME04_GROWTH_RESUME_20260921.md",
+    "limits": [
+      "旧Lv・EXP・素材の移行判断保留",
+      "クエストプレイヤーEXP量UNCONFIGURED",
+      "実API再検証は接続タイムアウト",
+      "最終画像・実機確認未完了"
+    ],
+    "scope": "既存47件や戦闘・領土進捗を置換せず今回を別管理"
   }
 }

@@ -8,10 +8,12 @@ import CanonicalDialog from '../ui/CanonicalDialog';
 import PreparationModal, { ELEMENT_LABELS } from './PreparationModal';
 import BattleView from './BattleView';
 import './QuestView.css';
+import { growthRewardLabel } from '@/domain/redesign/growthReward';
 
 export interface QuestSettlement { playerGrowth?: import('@/utils/redesignApi').RedesignResponse['playerGrowth']; battle: BattleResult; rewards: Reward[]; firstClear: boolean; encounterRaidId?: string | null; }
 const REWARD_LABELS: Record<Reward['kind'], string> = { character_exp_item: '武将EXP', equipment_exp_item: '装備EXP', generic_soul: '汎用魂', soul_selector: '魂選択', character: '武将', skill: 'スキル', cash: '銭', character_material: '武将育成素材', skill_material: 'スキルLB素材', equipment_material: '装備育成素材', equipment_lb: '装備LB素材', soul: '武将の魂', equipment: '装備', unlock_item: '領土侵攻札' };
 function rewardLabel(reward: Reward) {
+  const growthLabel = growthRewardLabel(reward); if(growthLabel) return growthLabel;
   if (reward.kind === 'soul') return `${CHARACTER_MASTERS.find(c => c.id === reward.id)?.name ?? ''}の魂`;
   if (reward.kind === 'equipment') return EQUIPMENT_MASTERS.find(e => e.id === reward.id)?.name ?? '装備';
   return REWARD_LABELS[reward.kind];

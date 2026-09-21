@@ -31,3 +31,18 @@ assert.equal(normal.applyNormalGacha(s,{count:1,currency:'CASH'},pool,'one',0,po
 assert.equal(normal.applyNormalGacha(s,{count:10,currency:'CASH'},pool,'ten',0,policy,()=>0).cost,10000);
 const free=normal.applyNormalGacha(s,{count:10,currency:'FREE'},pool,'free',0,policy,()=>0);assert.equal(free.cost,0);assert.throws(()=>normal.applyNormalGacha(free.state,{count:10,currency:'FREE'},pool,'again',0,policy,()=>0));
 console.log('PASS: EXP上限・銭差分・不足時非消費・魂交換/併用・Lv回復境界・有料/無料ガチャ');
+
+const authority=fs.readFileSync(require('node:path').join(__dirname,'../docs/product/GAME04_GROWTH_AUTHORITY_V1_2026-09-21.md'),'utf8');
+const tables=authority.split('## 付録A.')[1].split('## 付録B.')[0].split('### 装備');
+for(const [index,kind] of ['character','equipment'].entries()){
+ const rows=tables[index].split('\n').filter(line=>/^\| \d+ \|/.test(line));assert.equal(rows.length,100);
+ for(const row of rows){const cells=row.split('|').map(x=>x.trim());const level=Number(cells[1]);for(const [r,rarity] of ['N','R','SR','SSR'].entries()){const [exp,cash]=cells[r+2].replaceAll(',','').split('/').map(Number);assert.equal(m.cumulativeExp(kind,rarity,level),exp);assert.equal(m.cumulativeCash(kind,rarity,level),cash);}}
+}
+const equipmentMaster=masters.EQUIPMENT_MASTERS.find(e=>e.rarity==='SSR');
+const eq=structuredClone(s);eq.equipment=[{instanceId:'item',masterId:equipmentMaster.id,level:1,lb:0,exp:0,growthVersion:m.GROWTH_VERSION}];eq.materials.equipmentLb=1000;
+const lb=g.applyGrowthAction(eq,'equipment_lb',{instanceId:'item'});assert.equal(lb.equipment[0].level,1);assert.equal(lb.equipment[0].lb,1);assert.equal(lb.materials.equipmentLb,994);assert.equal(lb.cash,eq.cash-3000);
+const trained=g.applyGrowthAction(eq,'equipment_level',{instanceId:'item',items:{xlarge:20}});assert.equal(trained.equipment[0].level,50);assert.throws(()=>g.applyGrowthAction(trained,'equipment_dismantle',{instanceIds:['item']}));const broken=g.applyGrowthAction(trained,'equipment_dismantle',{instanceIds:['item'],confirmTrained:true});assert.equal(broken.materials.equipmentLb,1020);assert.equal(broken.cash,trained.cash);
+const locked=structuredClone(eq);locked.equipment[0].locked=true;assert.throws(()=>g.applyGrowthAction(locked,'equipment_dismantle',{instanceIds:['item']}));
+const unseen=masters.CHARACTER_MASTERS.find(c=>!s.characters.some(o=>o.id===c.id));const waiting=structuredClone(s);waiting.souls[unseen.id]=99;
+const events=[{id:'char-first',kind:'character',masterId:unseen.id},{id:'char-duplicate',kind:'character',masterId:unseen.id}];const got=acq.applyAcquisitionEvents(waiting,events,policy);assert.equal(got.souls[unseen.id],119);assert.deepEqual(acq.applyAcquisitionEvents(got,events,policy),got);
+console.log('PASS: 正本800件のEXP/銭セル・装備LB/上限/分解・新規/重複/再送');

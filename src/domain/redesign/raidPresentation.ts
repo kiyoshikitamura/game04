@@ -1,3 +1,4 @@
+import { growthRewardLabel } from './growthReward';
 import type { Element, Reward } from './types';
 
 export const raidElementLabels: Record<Element, string> = { fire: '火', water: '水', earth: '土', wind: '風', light: '光', dark: '闇' };
@@ -10,7 +11,7 @@ export function raidTimeRemaining(expiresAt: string, now: number): string {
 }
 export function raidRewardLabel(reward: Reward): string {
   const labels: Record<Reward['kind'], string> = {character_exp_item:'武将EXP',equipment_exp_item:'装備EXP',generic_soul:'汎用魂',soul_selector:'魂選択',character:'武将',skill:'スキル',cash:'銭',character_material:'武将育成素材',skill_material:'スキルLB素材',equipment_material:'装備育成素材',equipment_lb:'装備LB素材',soul:'武将の魂',equipment:'装備',unlock_item:'領土侵攻札'};
-  return `${labels[reward.kind]} ×${reward.amount.toLocaleString()}`;
+  return `${growthRewardLabel(reward) ?? labels[reward.kind]} ×${reward.amount.toLocaleString()}`;
 }
 /** Display only. Server enforces windows atomically; a client clock never grants rescue rights. */
 export function raidRescueWindow(type: 'encounter' | 'unlock', count: number, startedAt: string, now: number) {

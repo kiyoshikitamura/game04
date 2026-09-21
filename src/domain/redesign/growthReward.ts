@@ -28,3 +28,10 @@ export function grantGrowthReward(original: RedesignState, reward: {kind: Growth
   } else throw new Error("育成報酬の種類が不正です");
   return state;
 }
+
+export function growthRewardLabel(reward: {kind: string; id?: string}): string | null {
+ const sizes: Record<string,string> = {small:'小（100 EXP）',medium:'中（1,000 EXP）',large:'大（5,000 EXP）',xlarge:'特大（20,000 EXP）'};
+ if(reward.kind==='character_exp_item'||reward.kind==='equipment_exp_item') return `${reward.kind==='character_exp_item'?'武将EXP':'装備EXP'}${sizes[reward.id??'']??''}`;
+ if(reward.kind==='generic_soul'||reward.kind==='soul_selector') return `${reward.id??''}${reward.kind==='generic_soul'?'汎用魂':'魂選択アイテム'}`;
+ return null;
+}
