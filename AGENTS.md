@@ -1,3 +1,5 @@
+> 育成必要量・魂・EXP繰越・LB素材・Player Lv回復・ノーマルガチャは `docs/product/GAME04_GROWTH_AUTHORITY_V1_2026-09-21.md` と `docs/product/GAME04_GROWTH_NORMAL_GACHA_HANDOFF_2026-09-21.md` が優先。育成以外の戦闘v2・開催snapshot・報酬量・未承認v3は変更しない。旧残高・EXPを黙って換算しない。
+
 > 戦闘・キャラ割当・検証用スキルの最新Authorityは `docs/product/GAME04_BALANCE_AUTHORITY_V2_2026-09-20.md`。v2本文が付録・旧正本に優先し、仮値・未決の状態を保持する。未変更ルールはv1を継承。保存済み戦闘・開催snapshotは開始時のルール版を維持する。
 
 # GAME04 作業方針（2026-09-19）
