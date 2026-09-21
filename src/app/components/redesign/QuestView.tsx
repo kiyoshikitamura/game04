@@ -9,8 +9,8 @@ import PreparationModal, { ELEMENT_LABELS } from './PreparationModal';
 import BattleView from './BattleView';
 import './QuestView.css';
 
-export interface QuestSettlement { battle: BattleResult; rewards: Reward[]; firstClear: boolean; encounterRaidId?: string | null; }
-const REWARD_LABELS: Record<Reward['kind'], string> = { character: '武将', skill: 'スキル', cash: '銭', character_material: '武将育成素材', skill_material: 'スキルLB素材', equipment_material: '装備育成素材', equipment_lb: '装備LB素材', soul: '武将の魂', equipment: '装備', unlock_item: '領土侵攻札' };
+export interface QuestSettlement { playerGrowth?: import('@/utils/redesignApi').RedesignResponse['playerGrowth']; battle: BattleResult; rewards: Reward[]; firstClear: boolean; encounterRaidId?: string | null; }
+const REWARD_LABELS: Record<Reward['kind'], string> = { character_exp_item: '武将EXP', equipment_exp_item: '装備EXP', generic_soul: '汎用魂', soul_selector: '魂選択', character: '武将', skill: 'スキル', cash: '銭', character_material: '武将育成素材', skill_material: 'スキルLB素材', equipment_material: '装備育成素材', equipment_lb: '装備LB素材', soul: '武将の魂', equipment: '装備', unlock_item: '領土侵攻札' };
 function rewardLabel(reward: Reward) {
   if (reward.kind === 'soul') return `${CHARACTER_MASTERS.find(c => c.id === reward.id)?.name ?? ''}の魂`;
   if (reward.kind === 'equipment') return EQUIPMENT_MASTERS.find(e => e.id === reward.id)?.name ?? '装備';
@@ -62,6 +62,7 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
       {settlement.firstClear && <p>初回クリア報酬を獲得しました。</p>}
       <h3>獲得報酬</h3><Rewards rewards={settlement.rewards} />
       {settlement.encounterRaidId ? <><h3>強敵の気配</h3><p>エンカウントレイドが発生しました。</p><p className="rq-muted">無視すると、このレイドへの参加権を失います。</p><button disabled={busy} onClick={() => onOpenRaid(settlement.encounterRaidId!)}>挑む</button><button disabled={busy} onClick={() => void dismissEncounter()}>無視する</button></> : <>
+        {settlement.playerGrowth && <p>プレイヤーEXP +{settlement.playerGrowth.gainedExp ?? 0} {settlement.playerGrowth.level ? `Lv.${settlement.playerGrowth.beforeLevel} → ${settlement.playerGrowth.level}` : '（移行確認待ち）'}{settlement.playerGrowth.energyRecovered !== undefined && `・体力回復 +${settlement.playerGrowth.energyRecovered}（${settlement.playerGrowth.energy}/${settlement.playerGrowth.energyMax}）`}</p>}
         <button onClick={() => { setSettlement(null); setSelected(null); }}>ステージ一覧へ</button>
         {selected && <button onClick={() => { setSettlement(null); setModal('prepare'); }}>再挑戦</button>}
         {settlement.battle.outcome === 'win' && followingStage && <button onClick={() => { setSettlement(null); setAreaId(followingStage.areaId); openStage(followingStage); }}>次のステージへ</button>}

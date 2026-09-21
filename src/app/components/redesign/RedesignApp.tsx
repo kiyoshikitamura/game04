@@ -16,6 +16,7 @@ import RaidView from './RaidView';
 import TerritoryView from './TerritoryView';
 import BattleView from './BattleView';
 import GachaTab from '../GachaTab';
+import NormalGachaView from './NormalGachaView';
 import ShopTab from '../ShopTab';
 import BrandedLoading from '../ui/BrandedLoading';
 
@@ -99,7 +100,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   async function startQuest(stageId: string): Promise<QuestSettlement> {
     const value = await action('quest_battle', { stageId });
     if (!value.battle) throw new Error('戦闘結果を確認できませんでした。');
-    return { battle: value.battle, rewards: value.rewards || [], firstClear: !!value.firstClear, encounterRaidId: value.encounterRaidId };
+    return { battle: value.battle, rewards: value.rewards || [], firstClear: !!value.firstClear, encounterRaidId: value.encounterRaidId, playerGrowth: value.playerGrowth };
   }
   async function raidAction(input: Record<string, unknown>) {
     const { action: name, ...payload } = input;
@@ -125,7 +126,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
       {tab === 'character' && <GrowthView state={state} onAction={async (name, payload) => { await action(name, payload); }} />}
       {tab === 'territory' && <TerritoryView territory={data.territory} rooms={data.rooms} userId={state.userId} onOpenRoom={id => { setRaidId(id); setTab('raid'); }} onHost={async destinationId => { const value = await action('territory_host', { destinationId }); if (!value.territoryRoomId) throw new Error('開催結果を確認できませんでした。'); setRaidId(value.territoryRoomId); setTab('raid'); }} />}
       {tab === 'raid' && <RaidView key={raidId || 'list'} state={state} rooms={data.rooms} party={party} initialRoomId={raidId} onAction={raidAction} onOpenDeck={() => navigate('character')} />}
-      {tab === 'gacha' && <><p className="rd-panel rd-muted">開発中：ガチャ基盤を確認できます。排出内容・確率は最終調整前です。</p><GachaTab /></>}
+      {tab === 'gacha' && <><NormalGachaView data={data} onAction={action}/><GachaTab specialOnly /></>}
       {tab === 'shop' && <><p className="rd-panel rd-muted">開発中：商品構成・価格は最終調整前です。</p><section className="rd-panel"><h2>{VIP_PRODUCT.name}</h2><p>30日間：バトル速度×3・スキップ</p><p>{vipActive ? `有効期限 ${new Date(state.vipExpiresAt!).toLocaleString('ja-JP')}` : '販売準備中'}</p></section><ShopTab /></>}
     </>}
   </RedesignShell>;

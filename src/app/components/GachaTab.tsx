@@ -23,11 +23,11 @@ const CATEGORY_META: Readonly<Record<GachaCategory, { label: string; prefix: "CH
   EQUIPMENT: { label: "武具", prefix: "EQUIP", ticketId: "NORMAL_GACHA_TICKET_EQUIPMENT" },
 };
 
-export default function GachaTab() {
+export default function GachaTab({specialOnly = false}: {specialOnly?: boolean} = {}) {
   const { handleScout, handleExchangePityReward, gachaMasters, gachaRarityRates, gachaItemsMaster, dailyFreeGachaFlags, dailyFreeGachaReady, refreshDailyFreeGachaAuthority, userItems, cash, diamonds, upgradeLoading, onboardingState, playSe, guideGachaCategory, questGuide, scoutAnimationState } = useGame();
-  const isTutorialScout = onboardingState?.tutorial_step === "FREE_GACHA";
+  const isTutorialScout = !specialOnly && onboardingState?.tutorial_step === "FREE_GACHA";
   const [activeCategory, setActiveCategory] = useState<GachaCategory>("CHARACTER");
-  const [activeSurface, setActiveSurface] = useState<GachaSurface>("NORMAL");
+  const [activeSurface, setActiveSurface] = useState<GachaSurface>(specialOnly ? "SPECIAL" : "NORMAL");
   const [showRates, setShowRates] = useState(false);
   const [dismissedGuide, setDismissedGuide] = useState<string | null>(null);
   const [freeRates, setFreeRates] = useState<DailyFreeRate[]>([]);
@@ -85,10 +85,10 @@ export default function GachaTab() {
   }, [dailyFreeGachaReady, refreshDailyFreeGachaAuthority]);
 
   useEffect(() => {
-    if (!guideGachaCategory) return;
+    if (specialOnly || !guideGachaCategory) return;
     setActiveCategory(guideGachaCategory);
     setActiveSurface("NORMAL");
-  }, [guideGachaCategory]);
+  }, [guideGachaCategory, specialOnly]);
 
   if (isTutorialScout) {
     const tutorialCreative = resolveAvailableGachaCreative("CHAR_NORMAL");
@@ -141,7 +141,7 @@ export default function GachaTab() {
         </nav>
 
         <div className="gacha-surface-switch" role="group" aria-label="登用種別">
-          <button className={activeSurface === "NORMAL" ? "is-active" : ""} onClick={() => setActiveSurface("NORMAL")} aria-pressed={activeSurface === "NORMAL"}>通常登用</button>
+          {!specialOnly && <button className={activeSurface === "NORMAL" ? "is-active" : ""} onClick={() => setActiveSurface("NORMAL")} aria-pressed={activeSurface === "NORMAL"}>通常登用</button>}
           <button className={activeSurface === "SPECIAL" ? "is-active" : ""} onClick={() => setActiveSurface("SPECIAL")} aria-pressed={activeSurface === "SPECIAL"}>特選登用</button>
         </div>
 
@@ -208,3 +208,4 @@ export default function GachaTab() {
     </fieldset>
   );
 }
+

@@ -1,3 +1,5 @@
+import { GROWTH_VERSION } from './growthMaster';
+import { grantGrowthReward, isGrowthRewardKind } from './growthReward';
 import { BALANCE_V2_CONFIG, BALANCE_V2_CHARACTER_ASSIGNMENTS, BALANCE_V2_ATTACK_ANCHORS, getCharacterPassive, interpolatePreviewAnchor } from './balanceV2Masters';
 export * from './balanceV2Masters';
 import { applyAcquisitionEvents, PREVIEW_ACQUISITION_MASTER, type AcquisitionMaster } from './acquisitions';
@@ -88,7 +90,7 @@ export function buildBattleParty(state:RedesignState,rules:BattleRules=BATTLE_RU
  });}
 export function createInitialState(userId:string):RedesignState {
  const starters=CHARACTER_MASTERS.filter(c=>c.rarity==='N').slice(0,5);
- return {userId,version:0,cash:0,diamonds:0,energy:0,energyMax:50,souls:{},characters:starters.map(c=>({id:c.id,level:1,awakening:0})),skills:SKILL_MASTERS.slice(0,8).map(s=>({id:s.id,level:0})),equipment:[],deck:starters.map((c,i)=>({characterId:c.id,skillIds:[SKILL_MASTERS[i%SKILL_MASTERS.length].id],equipment:{}})),materials:{character:20,skill:10,equipment:20,equipmentLb:5,unlock:1},clearedStages:[],vipExpiresAt:null};
+ return {userId,version:0,cash:0,diamonds:0,energy:0,energyMax:50,souls:{},characters:starters.map(c=>({id:c.id,level:1,awakening:0,exp:0,growthVersion:GROWTH_VERSION})),skills:SKILL_MASTERS.slice(0,8).map(s=>({id:s.id,level:0})),equipment:[],deck:starters.map((c,i)=>({characterId:c.id,skillIds:[SKILL_MASTERS[i%SKILL_MASTERS.length].id],equipment:{}})),materials:{character:20,skill:10,equipment:20,equipmentLb:5,unlock:1},clearedStages:[],vipExpiresAt:null};
 }
 
 export interface LegacyAssets {
@@ -108,6 +110,7 @@ export function buildInitialState(userId:string,legacy:LegacyAssets):RedesignSta
 
 /** Caller performs chance roll on server; this function applies one already-selected reward. */
 export function grantReward(original:RedesignState,reward:import('./types').Reward,instanceId?:string,acquisitionMaster:AcquisitionMaster=PREVIEW_ACQUISITION_MASTER):RedesignState {
+ if(isGrowthRewardKind(reward.kind)) return grantGrowthReward(original,{...reward,kind:reward.kind});
  const state=structuredClone(original); const amount=reward.amount;
  if(!Number.isSafeInteger(amount)||amount<0) throw new Error('報酬数量が不正です');
  if(reward.kind==='character'||reward.kind==='skill'||reward.kind==='equipment'){
@@ -125,3 +128,4 @@ export function grantReward(original:RedesignState,reward:import('./types').Rewa
  }
  return state;
 }
+

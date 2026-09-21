@@ -4,6 +4,9 @@ import type { RedesignState, RaidRoom } from '@/domain/redesign/types';
 import type { BattleResult } from '@/domain/redesign/battle';
 
 export interface RedesignResponse {
+  normalGacha?: {pool: import('@/domain/redesign/normalGacha').NormalPoolRow[]; day: string; available: boolean};
+  normalGachaResults?: import('@/domain/redesign/normalGacha').NormalGachaResult[];
+  playerGrowth?: {status: string; gainedExp: number; beforeLevel?: number; level?: number; energyRecovered?: number; energy?: number; energyMax?: number};
   state: RedesignState;
   missions?: import('@/domain/redesign/missions').MissionProjection[];
   rooms: RaidRoom[];

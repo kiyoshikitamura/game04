@@ -1,6 +1,8 @@
 // Bundled with the shared pure gameplay modules before Edge deployment.
 import { BATTLE_RULES, prepareBattleWaves, buildBattleParty, buildInitialState, importLegacyAssets, grantReward, CHARACTER_MASTERS, type LegacyAssets } from '../../../src/domain/redesign/masters.ts';
 import { applyAcquisitionEvents, type AcquisitionEvent, type AcquisitionMaster } from '../../../src/domain/redesign/acquisitions.ts';
+import { applyPlayerExperience, GROWTH_VERSION } from '../../../src/domain/redesign/growthMaster.ts';
+import { applyNormalGacha, normalGachaDay } from '../../../src/domain/redesign/normalGacha.ts';
 import { applyGrowthAction, validateDeck } from '../../../src/domain/redesign/growth.ts';
 import { evaluateMissions, getClaimableMission, type MissionConfig } from '../../../src/domain/redesign/missions.ts';
 import { simulateBattle } from '../../../src/domain/redesign/battle.ts';
@@ -44,7 +46,7 @@ async function acquisitionInput(userId: string): Promise<{legacy: LegacyAssets; 
 async function stateFor(userId: string): Promise<RedesignState> {
   const input = await acquisitionInput(userId);
   for (let attempt = 0; attempt < 4; attempt++) {
-    const state: RedesignState = await rpc('game04_get_state', { p_user_id: userId, p_initial: buildInitialState(userId, input.legacy) });
+    const state: RedesignState = await rpc('game04_get_growth_state', { p_user_id: userId, p_initial: buildInitialState(userId, input.legacy) });
     const migrated = importLegacyAssets(state, input.legacy);
     const imported = applyAcquisitionEvents(migrated, input.events, input.master);
     if (JSON.stringify(imported) === JSON.stringify(state)) return state;
@@ -53,10 +55,10 @@ async function stateFor(userId: string): Promise<RedesignState> {
   }
   throw new ApiError('データ更新中です。もう一度お試しください。', 409);
 }
-async function commit(before: RedesignState, after: RedesignState, requestId: string, battle: unknown = null, room: (RaidRoom & {version?: number}) | null = null, roomVersion: number | null = null) {
-  return rpc('game04_commit_state', { p_user_id: before.userId, p_expected_version: before.version, p_state: after,
+async function commit(before: RedesignState, after: RedesignState, requestId: string, battle: unknown = null, room: (RaidRoom & {version?: number}) | null = null, roomVersion: number | null = null, receipt: Record<string, unknown> = {}) {
+  return rpc('game04_commit_growth_state', { p_user_id: before.userId, p_expected_version: before.version, p_state: after,
     p_cash_delta: after.cash - before.cash, p_energy_delta: after.energy - before.energy, p_request_id: requestId,
-    p_battle: battle, p_raid: room, p_raid_expected_version: roomVersion });
+    p_battle: battle, p_raid: room, p_raid_expected_version: roomVersion, p_receipt: receipt });
 }
 async function roomFor(id: string): Promise<RaidRoom & {version: number}> {
   if (!/^[0-9a-f-]{36}$/i.test(id)) throw new ApiError('レイドが不正です。');
@@ -77,6 +79,13 @@ async function rewardPolicy(): Promise<AcquisitionMaster> {
   const [row] = await db('game04_redesign_master?key=eq.acquisition_conversion&select=data');
   if (!row?.data) throw new ApiError('獲得設定を確認できません。', 503);
   return row.data;
+}
+async function questPlayerExpReward(stageId: string) {
+  const [row] = await db("game04_redesign_master?key=eq.quest_player_exp&select=status,data");
+  const amount = row?.data?.stages?.[stageId];
+  if (amount === void 0) return { amount: 0, version: row?.data?.version ?? "UNCONFIGURED", status: "UNCONFIGURED" };
+  if (!Number.isSafeInteger(amount) || amount < 0 || !row?.data?.version) throw new ApiError("クエストEXP設定が不正です。", 503);
+  return { amount, version: row.data.version, status: row.status };
 }
 async function missionConfig(): Promise<MissionConfig> {
   const [row] = await db('game04_redesign_master?key=eq.missions&select=data');
@@ -117,7 +126,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
     const seed = crypto.getRandomValues(new Uint32Array(1))[0];
     // Only a new battle receives current rules. Saved started/settled records above are never upgraded.
     const rules = startRoom?.territorySnapshot?.battleRules ?? BATTLE_RULES;
-    const input = { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel };
+    const input = { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel, ...(kind === 'quest' ? { playerExpReward: await questPlayerExpReward(targetId) } : {}) };
     // Validate and simulate before charging. Invalid provisional masters must not strand a paid pending battle.
     preparedBattle = simulateBattle(input);
     await commit(state, { ...state, energy: state.energy - cost }, id, { id, kind, targetId, seed, input, status: 'started' }, startRoom, startRoom?.version ?? null);
@@ -133,6 +142,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
   for (let attempt = 0; attempt < 4; attempt++) {
     const state = await stateFor(userId); let after = structuredClone(state);
     let room: (RaidRoom & {version?: number}) | null = null, version: number | null = null;
+    let playerGrowth: Record<string, unknown> | undefined;
     const rewards: Reward[] = []; let firstClear = false, encounterRaidId: string | null = null;
     if (record.kind === 'quest' && battle.outcome === 'win') {
       const stage = getQuestStage(record.target_id)!;
@@ -144,6 +154,27 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
       const policy = await rewardPolicy();
       for (let i = 0; i < rewards.length; i++) after = grantReward(after, rewards[i], await uuidFor(`reward:${id}:${i}`), policy);
       if (firstClear) after.clearedStages.push(stage.id);
+      const expReward = record.input.playerExpReward;
+      if (expReward) {
+        const progress = state.playerProgress;
+        if (progress?.version === GROWTH_VERSION && progress.status === "active") {
+          const grown = applyPlayerExperience(progress.level, progress.exp, expReward.amount, after.energy, after.energyMax);
+          after.playerProgress = { ...progress, level: grown.level, exp: grown.exp };
+          after.energy = grown.energy;
+          playerGrowth = {
+            status: expReward.status,
+            rewardVersion: expReward.version,
+            offeredExp: expReward.amount,
+            gainedExp: grown.exp - progress.exp,
+            beforeLevel: progress.level,
+            level: grown.level,
+            exp: grown.exp,
+            energyRecovered: grown.energy - state.energy,
+            energy: grown.energy,
+            energyMax: state.energyMax
+          };
+        } else playerGrowth = { status: "MIGRATION_PENDING", offeredExp: expReward.amount, gainedExp: 0 };
+      }
       if (random() < stage.encounterChance) {
         encounterRaidId = await uuidFor(`encounter:${id}`);
         room = createRaidRoom('encounter_flame', userId, encounterRaidId, Date.now()); room.participants[0].name = playerName; version = -1;
@@ -153,10 +184,10 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
       const transition = applyRaidAction(currentRoom, after, 'raid_battle', { battleId: id, battleLevel: record.input.raidLevel, result: battle, energyAlreadyPaid: true });
       room = transition.room; after = transition.state;
     }
-    const result = { battle, rewards, firstClear, encounterRaidId };
+    const result = { battle, rewards, firstClear, encounterRaidId, ...(playerGrowth ? { playerGrowth } : {}) };
     try {
-      await commit(state, after, settlementId, { id, status: 'settled', result }, room, version);
-      return responseFor(userId, result);
+      const settled = await commit(state, after, settlementId, { id, status: 'settled', result }, room, version);
+      return responseFor(userId, settled.battleResult ?? result);
     } catch (error) {
       const [saved] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=status,result`);
       if (saved?.status === 'settled') return responseFor(userId, saved.result);
@@ -179,6 +210,12 @@ Deno.serve(async (request: Request) => {
     if (!profile) throw new ApiError('先にプレイヤー名を登録してください。', 409);
     const { action, payload = {}, requestId } = await request.json();
     if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(requestId)) throw new ApiError('操作IDが不正です。');
+    if (action === "normal_gacha_status") {
+      const state2 = await stateFor(user.id);
+      const pool = await db("gacha_items_master?gacha_id=in.(CHAR_NORMAL,SKILL_NORMAL,EQUIP_NORMAL)&select=gacha_id,item_id,item_type,rarity&limit=1000");
+      const day = normalGachaDay(Date.now());
+      return new Response(JSON.stringify(await responseFor(user.id, { normalGacha: { pool, day, available: state2.dailyNormalGachaDate !== day } })), { headers });
+    }
     if (action === 'get_state' || action === 'raid_refresh') return new Response(JSON.stringify(await responseFor(user.id)), { headers });
     if (action === 'quest_battle' || action === 'raid_battle') return new Response(JSON.stringify(await runBattle(user.id, action, payload, requestId, profile.username)), { headers });
     if (action === 'territory_host' || action === 'raid_unlock') {
@@ -191,9 +228,25 @@ Deno.serve(async (request: Request) => {
       const hosted = await rpc('game04_host_territory', {p_user_id: user.id, p_request_id: requestId, p_destination_id: destinationId});
       return new Response(JSON.stringify(await responseFor(user.id, {territoryRoomId: hosted.room.id})), {headers});
     }
-    const [prior] = await db(`game04_requests?user_id=eq.${user.id}&request_id=eq.${requestId}&select=request_id`);
-    if (prior) return new Response(JSON.stringify(await responseFor(user.id)), { headers });
+    const [prior] = await db(`game04_requests?user_id=eq.${user.id}&request_id=eq.${requestId}&select=request_id,result`);
+    if (prior) {
+      const response = await responseFor(user.id, prior.result?.receipt ?? {});
+      if (action === "normal_gacha") {
+        const pool = await db("gacha_items_master?gacha_id=in.(CHAR_NORMAL,SKILL_NORMAL,EQUIP_NORMAL)&select=gacha_id,item_id,item_type,rarity&limit=1000");
+        const day = normalGachaDay(Date.now());
+        return new Response(JSON.stringify({ ...response, normalGacha: { pool, day, available: response.state.dailyNormalGachaDate !== day } }), { headers });
+      }
+      return new Response(JSON.stringify(response), { headers });
+    }
     const state = await stateFor(user.id); let after: RedesignState, room: RaidRoom | null = null, version: number | null = null;
+    if (action === "normal_gacha") {
+      const pool = await db("gacha_items_master?gacha_id=in.(CHAR_NORMAL,SKILL_NORMAL,EQUIP_NORMAL)&select=gacha_id,item_id,item_type,rarity&limit=1000");
+      const drawn = applyNormalGacha(state, payload, pool, requestId, Date.now(), await rewardPolicy(), () => crypto.getRandomValues(new Uint32Array(1))[0] / 4294967296);
+      const receipt = { normalGachaResults: drawn.results, normalGachaCost: drawn.cost, normalGachaMasterVersion: drawn.masterVersion };
+      const saved = await commit(state, drawn.state, requestId, null, null, null, receipt);
+      const day = normalGachaDay(Date.now());
+      return new Response(JSON.stringify(await responseFor(user.id, { ...saved.receipt ?? receipt, normalGacha: { pool, day, available: saved.state?.dailyNormalGachaDate !== day } })), { headers });
+    }
     if (action === 'claim_mission') {
       const mission = getClaimableMission(state, await missionConfig(), String(payload.missionId));
       after = structuredClone(state);
