@@ -65,4 +65,3 @@ export function isQuestStageUnlocked(id: string, clearedStages: readonly string[
 export function nextQuestStage(clearedStages: readonly string[]): QuestStage {
   return QUEST_STAGES.find(stage => !clearedStages.includes(stage.id) && isQuestStageUnlocked(stage.id, clearedStages)) ?? QUEST_STAGES[QUEST_STAGES.length - 1];
 }
-

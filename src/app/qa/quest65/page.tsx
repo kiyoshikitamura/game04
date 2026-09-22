@@ -1,5 +1,4 @@
-import fs from 'node:fs';
-import path from 'node:path';
+import savedEvidence from './evidence.json';
 import {notFound} from 'next/navigation';
 import {isQaHarnessAvailable} from '@/domain/presentation/qaHarness';
 import {QUEST_STAGES} from '@/domain/redesign/quests';
@@ -12,7 +11,7 @@ export const dynamic='force-dynamic';
 export default async function Quest65Qa({searchParams}:{searchParams:Promise<Record<string,string|string[]|undefined>>}) {
   if(process.env.VERCEL_ENV==='production'||!isQaHarnessAvailable(process.env.NEXT_PUBLIC_APP_ENV,process.env.NODE_ENV))notFound();
   const params=await searchParams;
-  const evidence=JSON.parse(fs.readFileSync(path.join(process.cwd(),'docs/product/balance_audits_20260922/round17_evidence/final17-results.json'),'utf8'));
+  const evidence=savedEvidence as unknown as {rules:BattleRules;results:{id:string;parties:{main:BattleUnit[]};runs:{main:{seed:number}[]}}[]};
   const stage=QUEST_STAGES.find(s=>s.designId===(params.stage??'7-7'));
   const entry=evidence.results.find((r:{id:string})=>r.id===stage?.designId);
   if(!stage||!entry)notFound();

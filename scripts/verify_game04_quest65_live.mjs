@@ -38,4 +38,3 @@ const report={project:'lrgyllgzcdcphlbmkknc',qaUserId:session.user.id,firstBattl
   scope:'New QA account only; no existing player edits'};
 fs.writeFileSync('docs/development/GAME04_QUEST65_LIVE_20260922.json',JSON.stringify(report,null,2)+'\n');
 console.log(report);
-

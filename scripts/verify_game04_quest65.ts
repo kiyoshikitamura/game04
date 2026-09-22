@@ -83,7 +83,8 @@ globalThis.fetch=async(input:any,options:any)=>{
   }else throw new Error(`Unexpected API request ${path}`);
   return new Response(JSON.stringify(result));
 };
-await import('../scratch/quest65-api.mjs');
+const apiBundleUrl = new URL('../scratch/quest65-api.mjs', import.meta.url);
+await import(apiBundleUrl.href);
 for(const stage of QUEST_STAGES){
   apiState={...structuredClone(state),energy:100};capture=undefined;
   const response=await handler!(new Request('https://test.invalid',{method:'POST',headers:{Authorization:'Bearer test'},body:JSON.stringify({action:'quest_battle',payload:{stageId:stage.id},requestId:crypto.randomUUID()})}));
