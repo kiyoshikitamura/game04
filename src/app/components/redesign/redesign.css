@@ -19,6 +19,9 @@
 
 .rd-rescue-link{display:block;margin-top:6px;padding:5px 9px;font-size:11px}.rd-message>div{min-width:0}
 
+/* Header face crop for the quest review viewport. */
+.rd-avatar>img{object-position:50% 19%!important;transform:scale(1.12);transform-origin:center 22%;}
+
 /* Shared viewport scroll owner: html/body deliberately do not scroll. */
 .rd-shell {
   height: 100vh;
