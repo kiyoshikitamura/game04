@@ -1,4 +1,5 @@
 'use client';
+import { usePresentationBusy, withPresentation } from '../ui/presentationTasks';
 import { game04UiError } from '@/app/lib/game04UiError';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useGame } from '../../context/GameContext';
@@ -97,7 +98,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     setTab(next); setError('');
     if (next === 'gacha' || next === 'shop') {
       game.navigateTab(next);
-      if (owner) void game.syncBootstrapData(owner);
+      if (owner) void withPresentation(()=>game.syncBootstrapData(owner)).catch(reason=>setError(game04UiError(reason)));
     } else void refresh();
   }
   async function startQuest(stageId: string): Promise<QuestSettlement> {
@@ -111,7 +112,8 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     if (value.battle) setBattle(value.battle);
     return value;
   }
-  if (!data) return <div className="rd-shell"><div className="rd-panel">{error ? <><p role="alert">{error}</p><button className="rd-button" onClick={() => void refresh()}>再読み込み</button></> : <BrandedLoading label="戦国の世界を準備中" />}</div></div>;
+  usePresentationBusy(!data && !error);
+  if (!data) return <div className="rd-shell" data-images-ready="true"><div className="rd-panel">{error ? <><p role="alert">{error}</p><button className="rd-button" onClick={() => void refresh()}>再読み込み</button></> : <BrandedLoading label="戦国の世界を準備中" />}</div></div>;
   const state = data.state, party = buildBattleParty(state), vipActive = isVipActive(state.vipExpiresAt);
   const recovery: EnergyRecovery = {
     owned: Number(game.energyDrinks || 0), amount: CANONICAL_ACTION_RESOURCES.recoveryItems.ENERGY_DRINK.amount,
@@ -135,7 +137,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     </>}>
     {battle ? <BattleView result={battle} vipActive={vipActive} onComplete={() => { setBattle(null); void refresh(); }} /> : <>
       {tab === 'quest' && <QuestView recovery={recovery} key={questNavigation} onBattlePlayingChange={setQuestPlaying} state={state} party={party} vipActive={vipActive} initialStageId={questStart} onStart={startQuest} onOpenDeck={() => navigate('character')} onOpenRaid={id => { setRaidId(id); setTab('raid'); }} onIgnoreEncounter={async id => { await action('encounter_ignore', { roomId: id }); }} />}
-      {tab === 'character' && <GrowthView state={state} onAction={async (name, payload) => { await action(name, payload); }} />}
+      {tab === 'character' && <GrowthView state={state} onAction={action} />}
       {tab === 'territory' && <TerritoryView territory={data.territory} rooms={data.rooms} userId={state.userId} onOpenRoom={id => { setRaidId(id); setTab('raid'); }} onHost={async destinationId => { const value = await action('territory_host', { destinationId }); if (!value.territoryRoomId) throw new Error('開催結果を確認できませんでした。'); setRaidId(value.territoryRoomId); setTab('raid'); }} />}
       {tab === 'raid' && <RaidView recovery={recovery} key={raidId || 'list'} state={state} rooms={data.rooms} party={party} initialRoomId={raidId} onAction={raidAction} onOpenDeck={() => navigate('character')} />}
       {tab === 'gacha' && <><NormalGachaView data={data} onAction={action}/><GachaTab specialOnly /></>}

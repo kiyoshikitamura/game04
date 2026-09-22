@@ -2,6 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import { flushSync } from "react-dom";
+import { usePresentationBusy } from "./presentationTasks";
 import DialogSurface from "./DialogSurface";
 import OutlawButton from "./OutlawButton";
 import "./CanonicalDialog.css";
@@ -34,6 +35,7 @@ export default function CanonicalDialog({
 }) {
   const busy = useRef(false);
   const [pending, setPending] = useState(false);
+  usePresentationBusy(pending || loading);
   const runAction = (action: () => unknown) => {
     if (busy.current) return;
     busy.current = true;

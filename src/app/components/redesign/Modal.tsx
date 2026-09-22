@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useId, useState } from 'react';
+import { usePresentationBusy } from '../ui/presentationTasks';
 import DialogSurface from '../ui/DialogSurface';
 
 export default function Modal({ title, onClose, children, footer, className = '', kind = 'detail', dirty = false, busy = false, trackChanges = false, resetKey }: {
@@ -7,6 +8,7 @@ export default function Modal({ title, onClose, children, footer, className = ''
   kind?: 'detail' | 'confirm' | 'edit' | 'result' | 'notice'; dirty?: boolean; busy?: boolean; trackChanges?: boolean; resetKey?: unknown;
 }) {
   const id = useId();
+  usePresentationBusy(busy);
   const [changed, setChanged] = useState(false);
   useEffect(() => { setChanged(false); }, [resetKey]);
   const [discard, setDiscard] = useState(false);

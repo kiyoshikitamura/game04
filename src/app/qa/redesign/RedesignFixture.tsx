@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useViewedEntries, presentViewEntry } from '@/app/context/hooks/useViewedEntries';
 import { CANONICAL_ACTION_RESOURCES, canUseEnergyDrink } from '@/domain/gameplay/canonical/action_resources';
 import type { EnergyRecovery } from '@/app/components/redesign/EnergyRecoveryDialog';
+import { withPresentation } from '@/app/components/ui/presentationTasks';
 import QaOperations from './QaOperations';
 import NormalGachaView from '@/app/components/redesign/NormalGachaView';
 import MissionContent from '@/app/components/redesign/MissionContent';
@@ -48,6 +49,7 @@ function fixtureState(): RedesignState {
   return state;
 }
 export default function RedesignFixture() {
+  const [presentationDelay,setPresentationDelay]=useState(false);
   const [potions, setPotions] = useState(2);
   const [showInboxPanel, setShowInboxPanel] = useState(false);
   const [inboxPanelTab, setInboxPanelTab] = useState('news');
@@ -97,8 +99,11 @@ export default function RedesignFixture() {
   }, [party,waveSpProbe]);
   const navigate = (next: string) => { setMessage(''); setBattle(null); setTab(next.startsWith('quest') ? 'quest' : next); };
   async function action(type: string, payload: Record<string, unknown> = {}) {
+    return withPresentation(async()=>{
+    if(presentationDelay)await new Promise(resolve=>setTimeout(resolve,3000));
     if (type === 'set_home') { setState(previous => ({ ...previous, ...(typeof payload.characterId === 'string' ? { homeCharacterId: payload.characterId } : {}), ...(typeof payload.backgroundId === 'string' ? { homeBackgroundId: payload.backgroundId } : {}) })); return; }
     const next = applyGrowthAction(state, type, payload); setState(next); return next;
+    });
   }
   async function startQuest(stageId: string): Promise<QuestSettlement> {
     const stage = getQuestStage(stageId);
@@ -170,6 +175,8 @@ export default function RedesignFixture() {
     <QaOperations open={qaOpen} onClose={() => setQaOpen(false)} activeView={battle ? 'battle' : tab}
       onSelectView={next => { if (next !== (battle ? 'battle' : tab)) navigate(next); setQaOpen(false); }}
       vip={vip} onVipChange={setVip} cash={state.cash} energy={state.energy} energyMax={state.energyMax} message={message}
+      presentationDelay={presentationDelay} onPresentationDelay={setPresentationDelay}
+      onPresentationFixture={()=>{setState(previous=>({...previous,cash:200000,characters:[...previous.characters,...['SR','SSR'].flatMap(rarity=>{const c=CHARACTER_MASTERS.find(c=>c.rarity===rarity)!;return previous.characters.some(o=>o.id===c.id)?[]:[{id:c.id,level:1,awakening:0}];})]}));setTab('character');setQaOpen(false);}}
       onRecoveryProbe={owned=>{setPotions(owned?2:0);setState(value=>({...value,energy:0}));}}
       onNewNotice={()=>setNewsList(items=>[...items,{id:`qa-news-${Date.now()}`,title:'追加のお知らせ',content:'追加した新着の確認用データです。',date:'2026/9/22'}])}
       onReset={() => { setPotions(2);setState(fixtureState()); setBattle(null); setMessage('QA状態を初期化しました。'); }}

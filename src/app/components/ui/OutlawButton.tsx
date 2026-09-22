@@ -1,3 +1,4 @@
+import { usePresentationBusy } from "./presentationTasks";
 import React, { useRef, useState } from "react";
 import "./OutlawButton.css";
 import { useGame } from "../../context/GameContext";
@@ -26,6 +27,7 @@ export default function OutlawButton({
   const [actionPending, setActionPending] = useState(false);
   const actionPendingRef = useRef(false);
   const busy = isLoading || actionPending;
+  usePresentationBusy(busy);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (actionPendingRef.current || disabled || isLoading) return;

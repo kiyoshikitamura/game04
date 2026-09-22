@@ -1,3 +1,5 @@
+import PresentationRuntime from "./components/ui/PresentationRuntime";
+import "./components/ui/presentation.css";
 import type { Metadata, Viewport } from "next";
 import {
   isVercelProduction,
@@ -63,7 +65,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className="game04-theme">{children}</body>
+      <body className="game04-theme">{children}<PresentationRuntime /></body>
     </html>
   );
 }

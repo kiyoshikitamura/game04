@@ -1,4 +1,6 @@
 'use client';
+import GrowthResult, { RESULT_ACTIONS, type GrowthReceipt } from './GrowthResult';
+import { withPresentation } from '../ui/presentationTasks';
 import { game04UiError } from '@/app/lib/game04UiError';
 import CreativeCharacter from './CreativeCharacter';
 import ElementBadge from './ElementBadge';
@@ -19,9 +21,10 @@ export interface GrowthViewProps { state: RedesignState; onAction: (action:strin
 function Modal({title,onClose,children,art=false,message,resetKey,busy}:{title:string;onClose:()=>void;children:ReactNode;art?:boolean;message?:string;resetKey?:unknown;busy?:boolean}) { return <CentralModal trackChanges={!art} resetKey={resetKey} busy={busy} title={title} onClose={onClose} className={`g4g-modal ${art?'g4g-art':''}`}>{message&&!art&&<p className="g4g-message" role="status">{message}</p>}{children}</CentralModal>; }
 export default function GrowthView({state,onAction}:GrowthViewProps) {
   const [tab,setTab]=useState('デッキ'); const [filter,setFilter]=useState('');const [sort,setSort]=useState('level');const [selected,setSelected]=useState<string|null>(null);const [art,setArt]=useState(false);const [skillDetail,setSkillDetail]=useState<string|null>(null);const [equipmentDetail,setEquipmentDetail]=useState<string|null>(null);const [assign,setAssign]=useState<{kind:'skill'|'equipment';slot:number|EquipmentSlot}|null>(null);const [position,setPosition]=useState(0);const [bulk,setBulk]=useState(false);const [checked,setChecked]=useState<string[]>([]);const [confirm,setConfirm]=useState(false);const [busy,setBusy]=useState(false);const [message,setMessage]=useState('');
+  const [receipt,setReceipt]=useState<GrowthReceipt|null>(null);
   const actionLock = useRef(false);
   const [assignmentDraft, setAssignmentDraft] = useState<string | null>(null);
-  const run=async(action:string,payload:Record<string,unknown>)=>{if(actionLock.current)return;actionLock.current=true;setBusy(true);setMessage('');try{await onAction(action,payload);setMessage('保存しました。');return true;}catch(error){setMessage(game04UiError(error));return false;}finally{actionLock.current=false;setBusy(false);}};
+  const run=async(action:string,payload:Record<string,unknown>)=>{if(actionLock.current)return;actionLock.current=true;setBusy(true);setMessage('');try{const before=structuredClone(state);const response=await withPresentation(()=>onAction(action,payload));const after=response && typeof response==='object' && 'state' in response ? (response as {state:RedesignState}).state : response as RedesignState|undefined;if(RESULT_ACTIONS.includes(action)&&after&&Array.isArray(after.characters)){setReceipt({action,payload,before,after:structuredClone(after)});}setMessage('保存しました。');return true;}catch(error){setMessage(game04UiError(error));return false;}finally{actionLock.current=false;setBusy(false);}};
   const party=useMemo(()=>buildBattleParty(state),[state]);
   const chars=useMemo(()=>state.characters.filter(c=>c.level>0).map(owned=>({owned,master:CHARACTER_MASTERS.find(c=>c.id===owned.id)!})).filter(c=>c.master).filter(c=>!filter||c.master.element===filter||c.master.rarity===filter||c.master.role===filter).sort((a,b)=>sort==='name'?a.master.name.localeCompare(b.master.name,'ja'):sort==='rarity'?RARITIES.indexOf(b.master.rarity)-RARITIES.indexOf(a.master.rarity):sort==='element'?a.master.element.localeCompare(b.master.element):b.owned.level-a.owned.level),[state.characters,filter,sort]);
   const skills=state.skills.map(owned=>({owned,master:SKILL_MASTERS.find(s=>s.id===owned.id)!})).filter(s=>s.master).filter(s=>!filter||s.master.element===filter||s.master.rarity===filter).sort((a,b)=>sort==='name'?a.master.name.localeCompare(b.master.name,'ja'):sort==='rarity'?RARITIES.indexOf(b.master.rarity)-RARITIES.indexOf(a.master.rarity):sort==='sp'?b.master.spCost-a.master.spCost:sort==='element'?a.master.element.localeCompare(b.master.element):b.owned.level-a.owned.level);
@@ -32,6 +35,7 @@ export default function GrowthView({state,onAction}:GrowthViewProps) {
   const updateMember=(update:Partial<DeckMember>)=>saveDeck(state.deck.map(m=>m.characterId===selected?{...m,...update}:m));
   const changeTab=(next:string)=>{setTab(next);setFilter('');setSort('level');};
   const allEligible=equipment.filter(e=>!e.owned.locked&&!isEquipmentAssigned(state,e.owned.instanceId));
+  if(receipt)return <GrowthResult receipt={receipt} onClose={()=>setReceipt(null)}/>;
   if(message && message!=='保存しました。')return <CentralModal kind="notice" onClose={()=>setMessage('')}><p>{message}</p></CentralModal>;
   return <section className="g4-growth"><nav className="g4g-tabs" aria-label="育成"><>{['デッキ','編成','キャラ','スキル','装備'].map(t=><button key={t} aria-pressed={tab===t} onClick={()=>changeTab(t)}>{t}</button>)}</></nav>
     {message&&<p className="g4g-message" role="status">{message}</p>}

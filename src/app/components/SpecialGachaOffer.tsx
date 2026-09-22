@@ -1,4 +1,6 @@
 "use client";
+import { usePresentationBusy } from "./ui/presentationTasks";
+
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -35,7 +37,8 @@ export default function SpecialGachaOffer({ category, diamonds, userItems, pendi
     }).catch(() => { if (active) { setCatalog(null); setFailed(true); } });
     return () => { active = false; };
   }, [pending, revision]);
-  if (failed) return <section className="special-gacha-offer"><p role="alert">登用情報を取得できませんでした。</p><button onClick={() => setRevision(n => n + 1)}>再取得</button></section>;
+  usePresentationBusy((!catalog && !failed) || pending);
+  if (failed) return <section className="special-gacha-offer"><p role="alert">登用情報を取得できませんでした。</p><button onClick={() => {setFailed(false);setRevision(n => n + 1);}}>再取得</button></section>;
   if (!catalog) return <div className="special-gacha-loading" role="status" aria-label="登用情報を確認中"><span className="spinner" /></div>;
   if (!catalog.available) return <p>特選登用は準備中です</p>;
   const offers = catalog.gachas.filter(g => category === "CHARACTER" ? g.id.startsWith("CHAR_") : g.id === (category === "SKILL" ? "SKILL_SPECIAL" : "EQUIP_SPECIAL"));

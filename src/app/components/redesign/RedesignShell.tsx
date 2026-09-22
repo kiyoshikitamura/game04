@@ -11,12 +11,14 @@ import AccountAuthenticationModal from '../TutorialAuthentication';
 import HomeView, { type HomeAction, type HomeEncounter, type HomeSocialEvent } from './HomeView';
 import Modal from './Modal';
 import './redesign.css';
+import { usePreparedImages } from '../ui/usePreparedImages';
 
 const FOOTER = [['home','ホーム','08-castle'],['quest','クエスト','04-fan-sakura'],['character','キャラ','10-helmet'],['raid','レイド','06-oni-mask'],['gacha','ガチャ','11-ticket']] as const;
 export default function RedesignShell({ state, onAction, children, notifications, activeTab, onNavigate, hideChrome = false, encounterRaid, socialEvents, missions, previewOnly = false, onOpenQa }: { state: RedesignState; onAction: HomeAction; children?: React.ReactNode; notifications?: React.ReactNode; activeTab: string; onNavigate: (tab: string) => void; hideChrome?: boolean; encounterRaid?: HomeEncounter | null; socialEvents?: HomeSocialEvent[]; missions?: MissionProjection[]; previewOnly?: boolean; onOpenQa?: () => void }) {
   const game = useGame();
   const scrollRef = useRef<HTMLDivElement>(null);
   useEffect(() => { scrollRef.current?.scrollTo({ top: 0, left: 0 }); }, [activeTab, hideChrome]);
+  usePreparedImages(scrollRef, activeTab);
   const [menu, setMenu] = useState(false);
   useEffect(() => { document.body.classList.add('rd-active'); return () => document.body.classList.remove('rd-active'); }, []);
   const leader = CHARACTER_MASTERS.find(c => c.id === state.deck[0]?.characterId);

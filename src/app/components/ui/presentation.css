@@ -1,0 +1,33 @@
+/* Tunable presentation only; never used for game rules. */
+.g4-preparing{visibility:hidden!important}
+.g4-loading-cover{position:fixed;inset:0;z-index:2147483000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:#151216ed;color:#f4efe6;padding:20px;box-sizing:border-box;overscroll-behavior:contain;touch-action:none}
+.g4-loading-failure{width:min(100%,420px);max-height:100%;overflow:auto;background:#262127;padding:20px;border:1px solid #d8b56d;border-radius:12px;font-size:16px;line-height:1.6}
+.g4-loading-spinner{display:block;width:36px;height:36px;border:3px solid #c3b8aa55;border-top-color:#d8b56d;border-radius:50%;animation:g4-spin .8s linear infinite}
+@keyframes g4-spin{to{transform:rotate(360deg)}}
+body.g4-ui-loading{overflow:hidden!important}
+body.g4-ui-loading :is(.rd-shell,.g4-dialog-surface,.qa-operations){pointer-events:none!important;touch-action:none!important}
+body.g4-ui-loading :is(.outlaw-button-spinner,.spinner){visibility:hidden}
+body.game04-theme button:not(:disabled):active{filter:brightness(.8);translate:0 2px}
+body.game04-theme button:disabled{cursor:default;filter:saturate(.4);opacity:.65}
+.g4-card-shine,.g4-card-particles{position:absolute;inset:0;pointer-events:none;z-index:2}
+.g4-card-shine{background:linear-gradient(110deg,transparent 38%,#fff8 49%,transparent 60%);opacity:0;animation:g4-card-shine var(--g4-card-cycle) ease-in-out infinite;animation-delay:var(--g4-card-delay)}
+.g4-rarity-SSR .g4-card-shine{background:linear-gradient(110deg,transparent 34%,#fffbcbbf 49%,transparent 64%)}
+.g4-rarity-SSR::after{content:'';position:absolute;inset:2%;border:1px solid #ffe7ac;box-shadow:inset 0 0 9px #ffe4aa99,0 0 10px #d8b56d88;opacity:.5;pointer-events:none;z-index:3;animation:g4-aura var(--g4-aura-cycle) ease-in-out infinite alternate;animation-delay:var(--g4-card-delay)}
+.g4-card-particles i{position:absolute;left:3%;top:20%;width:3px;height:3px;background:#fff1ba;border-radius:50%;box-shadow:0 0 5px #ffe1a0;animation:g4-spark var(--g4-particle-cycle) ease-in-out infinite;animation-delay:calc(var(--g4-card-delay) - .4s)}
+.g4-card-particles i:nth-child(2){left:auto;right:3%;top:42%;animation-delay:calc(var(--g4-card-delay) - .8s)}
+.g4-card-particles i:nth-child(3){top:75%;animation-delay:calc(var(--g4-card-delay) - 1.2s)}
+.g4-card-particles i:nth-child(4){left:auto;right:3%;top:86%;animation-delay:calc(var(--g4-card-delay) - 1.6s)}
+@keyframes g4-card-shine{0%,75%,100%{opacity:0;transform:translateX(-110%)}80%{opacity:.32}94%{opacity:.32;transform:translateX(110%)}95%{opacity:0;transform:translateX(110%)}}
+@keyframes g4-aura{to{opacity:.85;box-shadow:inset 0 0 13px #ffe4aa99,0 0 12px #d8b56d88}}
+@keyframes g4-spark{0%,100%{opacity:.15;transform:translateY(3px)}50%{opacity:.85;transform:translateY(-5px)}}
+.g4-growth-result{text-align:center}.g4-growth-result .g4-result-character{width:min(55%,180px);margin:0 auto 14px}.g4-result-change{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;font-size:24px;margin:18px 0}.g4-result-after{position:relative;font-size:36px;font-weight:700;color:#f4efe6;text-shadow:0 0 10px #d8b56d88;animation:g4-result-glow var(--g4-result-duration) ease-out both}.g4-result-after>span{position:relative;z-index:2}.g4-result-sparks{position:absolute;inset:-12px;pointer-events:none}.g4-result-sparks i{position:absolute;left:var(--x);top:var(--y);color:#d8b56d;font-size:16px;animation:g4-result-spark var(--g4-result-duration) ease-out both}
+@keyframes g4-result-glow{0%{filter:brightness(1.9)}100%{filter:brightness(1)}}
+@keyframes g4-result-spark{0%{opacity:0;transform:scale(.2)}30%{opacity:1}100%{opacity:0;transform:translateY(-16px) scale(.6)}}
+.g4-motion-paused .g4-rarity-SSR::after,.g4-motion-paused :is(.g4-card-shine,.g4-card-particles i,.g4-result-after,.g4-result-sparks i){animation-play-state:paused!important}
+@media(prefers-reduced-motion:reduce){.g4-card-shine,.g4-card-particles,.g4-result-sparks{display:none}.g4-rarity-SSR::after,.g4-result-after,.g4-loading-spinner{animation:none!important}body.game04-theme button:active{translate:none}}
+
+.g4-preparing *, .g4-preparing *::after{animation-play-state:paused!important}
+
+.rd-shell:not([data-images-ready]), [data-game-dialog]:not([data-images-ready]){visibility:hidden}
+
+body.g4-ui-loading :is(.rd-shell,.rd-modal-body,.canonical-dialog-body){overflow:hidden!important}

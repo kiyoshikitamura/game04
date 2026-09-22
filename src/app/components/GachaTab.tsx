@@ -1,4 +1,6 @@
 "use client";
+import { usePresentationBusy } from "./ui/presentationTasks";
+
 
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -48,6 +50,7 @@ export default function GachaTab({specialOnly = false}: {specialOnly?: boolean} 
   }, [isTutorialScout, freeRatesRetry]);
   const { isLocked, beginAction, endAction } = useImmediateActionLock();
   const pending = upgradeLoading || isLocked;
+  usePresentationBusy(pending || (!specialOnly && (freeRatesStatus === 'loading' || !dailyFreeGachaReady)));
 
   const meta = CATEGORY_META[activeCategory];
   const normalGachaId = `${meta.prefix}_NORMAL` as CanonicalGachaId;

@@ -1,4 +1,6 @@
 "use client";
+import { usePresentationBusy } from "./ui/presentationTasks";
+
 
 import React, { useState, useEffect } from "react";
 import { useGame } from "../context/GameContext";
@@ -44,6 +46,7 @@ export default function ShopTab() {
     onboardingState, handleGoogleLogin
   } = useGame();
   const busy = profileLoading || upgradeLoading;
+  usePresentationBusy(busy || availability === 'loading');
   const disabled = busy || availability !== "available";
   const packOrder = ["beginner_pack_01", "growth_pack_01", "awakening_pack_01", "ticket_pack_01"];
   const packs = SHOP_PRODUCTS_MASTER.filter(p => p.shopType === "LIMITED" && p.category !== "DIAMOND").sort((a,b) => packOrder.indexOf(a.id)-packOrder.indexOf(b.id));

@@ -1,6 +1,8 @@
 "use client";
 import { useLayoutEffect, useRef, type ReactNode } from 'react';
 import { registerPresentedDialog } from './dialogPresence';
+import { usePreparedImages } from './usePreparedImages';
+import { isPresentationBusy } from './presentationTasks';
 import { createPortal } from 'react-dom';
 
 const stack: HTMLElement[] = [];
@@ -9,7 +11,7 @@ let previousOverflow = '';
 function updateBackground() {
   const top = stack[stack.length - 1];
   for (const child of Array.from(document.body.children)) {
-    if (!(child instanceof HTMLElement) || ['SCRIPT', 'STYLE', 'LINK'].includes(child.tagName)) continue;
+    if (!(child instanceof HTMLElement) || ['SCRIPT', 'STYLE', 'LINK'].includes(child.tagName) || child.hasAttribute('data-ui-loading')) continue;
     if (!priorInert.has(child)) priorInert.set(child, child.inert);
     child.inert = !!top && child !== top && !child.contains(top);
   }
@@ -17,6 +19,7 @@ function updateBackground() {
 /** Portal + visible viewport, focus containment and background scroll lock. */
 export default function DialogSurface({ children, onCancel, className = '' }: { children: ReactNode; onCancel?: () => void; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
+  usePreparedImages(ref);
   const cancelRef = useRef(onCancel); cancelRef.current = onCancel;
   useLayoutEffect(() => {
     const unregister = registerPresentedDialog();
@@ -33,7 +36,7 @@ export default function DialogSurface({ children, onCancel, className = '' }: { 
     const focusable = () => Array.from(node.querySelectorAll<HTMLElement>('button:not(:disabled),a[href],input:not(:disabled),select:not(:disabled),textarea:not(:disabled),[tabindex="0"]')).filter(e => e.getClientRects().length > 0);
     (node.querySelector<HTMLElement>('[autofocus]') ?? focusable()[0] ?? node).focus({ preventScroll: true });
     const key = (event: KeyboardEvent) => {
-      if (stack.at(-1) !== node) return;
+      if (stack.at(-1) !== node || isPresentationBusy()) return;
       if (event.key === 'Escape') { event.preventDefault(); event.stopImmediatePropagation(); cancelRef.current?.(); }
       if (event.key === 'Tab') {
         const items = focusable(), first = items[0], last = items.at(-1);

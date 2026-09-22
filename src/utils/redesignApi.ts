@@ -1,3 +1,4 @@
+import { withPresentation } from '@/app/components/ui/presentationTasks';
 import { getRoomRaidMaster } from '@/domain/redesign/raid';
 import { supabase } from './supabase';
 import type { RedesignState, RaidRoom } from '@/domain/redesign/types';
@@ -22,9 +23,9 @@ export interface RedesignResponse {
 }
 
 export async function redesignRequest(action: string, payload: Record<string, unknown> = {}, requestId = crypto.randomUUID()): Promise<RedesignResponse> {
-  const { data, error } = await supabase.functions.invoke('game04-redesign-api', {
+  const { data, error } = await withPresentation(() => supabase.functions.invoke('game04-redesign-api', {
     body: { action, payload, requestId },
-  });
+  }));
   if (error) {
     let detail = '';
     try { detail = (await error.context?.json())?.error || ''; } catch { /* network error */ }

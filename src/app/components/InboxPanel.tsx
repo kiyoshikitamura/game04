@@ -1,3 +1,4 @@
+import { beginPresentation } from "./ui/presentationTasks";
 import React, { useEffect, useState } from "react";
 import { supabase } from "@/utils/supabase";
 import { useGame } from "../context/GameContext";
@@ -42,6 +43,7 @@ export default function InboxPanel({ previewOnly = false }: { previewOnly?: bool
   useEffect(() => {
     if (previewOnly || !showInboxPanel || inboxPanelTab !== "news") return;
     let cancelled = false;
+    const loading=beginPresentation();
     void supabase.from("news").select("*").order("created_at", { ascending: false })
       .then(({ data, error }) => {
         if (cancelled || error || !data) return;
@@ -50,8 +52,8 @@ export default function InboxPanel({ previewOnly = false }: { previewOnly?: bool
           id: String(news.id),
           date: new Date(news.start_at).toLocaleDateString(),
         })));
-      });
-    return () => { cancelled = true; };
+      }).then(loading.end,loading.end);
+    return () => { cancelled = true; loading.end(); };
   }, [showInboxPanel, inboxPanelTab, setNewsList, previewOnly]);
 
   if (!showInboxPanel) return null;
