@@ -90,7 +90,7 @@ export function buildBattleParty(state:RedesignState,rules:BattleRules=BATTLE_RU
  });}
 export function createInitialState(userId:string):RedesignState {
  const starters=CHARACTER_MASTERS.filter(c=>c.rarity==='N').slice(0,5);
- return {userId,version:0,cash:0,diamonds:0,energy:0,energyMax:50,souls:{},characters:starters.map(c=>({id:c.id,level:1,awakening:0,exp:0,growthVersion:GROWTH_VERSION})),skills:SKILL_MASTERS.slice(0,8).map(s=>({id:s.id,level:0})),equipment:[],deck:starters.map((c,i)=>({characterId:c.id,skillIds:[SKILL_MASTERS[i%SKILL_MASTERS.length].id],equipment:{}})),materials:{character:20,skill:10,equipment:20,equipmentLb:5,unlock:1},clearedStages:[],vipExpiresAt:null};
+ return {userId,version:0,cash:0,diamonds:0,energy:0,energyMax:50,energyDrinks:0,souls:{},characters:starters.map(c=>({id:c.id,level:1,awakening:0,exp:0,growthVersion:GROWTH_VERSION})),skills:SKILL_MASTERS.slice(0,8).map(s=>({id:s.id,level:0})),equipment:[],deck:starters.map((c,i)=>({characterId:c.id,skillIds:[SKILL_MASTERS[i%SKILL_MASTERS.length].id],equipment:{}})),materials:{character:20,skill:10,equipment:20,equipmentLb:5,unlock:1},clearedStages:[],vipExpiresAt:null};
 }
 
 export interface LegacyAssets {

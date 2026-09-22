@@ -116,12 +116,10 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   if (!data) return <div className="rd-shell" data-images-ready="true"><div className="rd-panel">{error ? <><p role="alert">{error}</p><button className="rd-button" onClick={() => void refresh()}>再読み込み</button></> : <BrandedLoading label="戦国の世界を準備中" />}</div></div>;
   const state = data.state, party = buildBattleParty(state), vipActive = isVipActive(state.vipExpiresAt);
   const recovery: EnergyRecovery = {
-    owned: Number(game.energyDrinks || 0), amount: CANONICAL_ACTION_RESOURCES.recoveryItems.ENERGY_DRINK.amount,
-    canUse: !game.itemUseLoading && canUseEnergyDrink(state.energy),
+    owned: Number(state.energyDrinks || 0), amount: CANONICAL_ACTION_RESOURCES.recoveryItems.ENERGY_DRINK.amount,
+    canUse: !busy && Number(state.energyDrinks || 0) > 0 && canUseEnergyDrink(state.energy),
     onUse: async () => {
-      const used = await game.handleUseItem('ENERGY_DRINK', { inline: true });
-      if (!used) throw new Error('処理中です。');
-      await action('get_state');
+      await action('use_energy_drink');
     },
   };
   const encounter = data.rooms.find(r => getRoomRaidMaster(r).type === 'encounter' && r.status === 'active' && r.participants.some(p => p.userId === state.userId && !p.leftAt));
@@ -141,7 +139,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
       {tab === 'territory' && <TerritoryView territory={data.territory} rooms={data.rooms} userId={state.userId} onOpenRoom={id => { setRaidId(id); setTab('raid'); }} onHost={async destinationId => { const value = await action('territory_host', { destinationId }); if (!value.territoryRoomId) throw new Error('開催結果を確認できませんでした。'); setRaidId(value.territoryRoomId); setTab('raid'); }} />}
       {tab === 'raid' && <RaidView recovery={recovery} key={raidId || 'list'} state={state} rooms={data.rooms} party={party} initialRoomId={raidId} onAction={raidAction} onOpenDeck={() => navigate('character')} />}
       {tab === 'gacha' && <><NormalGachaView data={data} onAction={action}/><GachaTab specialOnly /></>}
-      {tab === 'shop' && <><p className="rd-panel rd-muted">開発中：商品構成・価格は最終調整前です。</p><section className="rd-panel"><h2>{VIP_PRODUCT.name}</h2><p>30日間：バトル速度×3・スキップ</p><p>{vipActive ? `有効期限 ${new Date(state.vipExpiresAt!).toLocaleString('ja-JP')}` : '販売準備中'}</p></section><ShopTab /></>}
+      {tab === 'shop' && <><section className="rd-panel"><h2>{VIP_PRODUCT.name}</h2><p>30日間：バトル速度×3・100無償輝石を30回付与</p><p>{vipActive ? `有効期限 ${new Date(state.vipExpiresAt!).toLocaleString('ja-JP')}` : '販売準備中'}</p></section><ShopTab exchange={{ state, onExchange: (payload) => action('shop_exchange', payload) }} /></>}
     </>}
   </RedesignShell>;
 }

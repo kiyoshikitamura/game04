@@ -6,12 +6,13 @@ import ShopTab from "@/app/components/ShopTab";
 import InboxPanel from "@/app/components/InboxPanel";
 import CanonicalDialog from "@/app/components/ui/CanonicalDialog";
 import { supabase } from "@/utils/supabase";
+import type { RedesignState } from "@/domain/redesign/types";
 
 const newsFixture = [{ id: "qa-news", title: "正式オープンのお知らせ（表示確認用）", content: "これは表示確認用の文面です。実際のお知らせ・ユーザーデータには接続しません。", start_at: "2026-09-15T00:00:00Z", date: "2026/9/15", category: "IMPORTANT" }];
 type Dialog = { isOpen: boolean; title?: string; message?: ReactNode; confirmText?: string; onConfirm?: () => unknown; onCancel?: () => unknown };
 
 /** Real components with isolated in-memory transport; no sign-in, checkout or DB writes. */
-export default function ShopUiHarness({ embedded = false }: { embedded?: boolean } = {}) {
+export default function ShopUiHarness({ embedded = false, exchange }: { embedded?: boolean; exchange?: { state: RedesignState; onExchange: (payload: Record<string, unknown>) => Promise<unknown> } } = {}) {
   const [ready, setReady] = useState(false);
   const [shopSubTab, setShopSubTab] = useState("LIMITED");
   const [showInboxPanel, setShowInboxPanel] = useState(false);
@@ -32,7 +33,7 @@ export default function ShopUiHarness({ embedded = false }: { embedded?: boolean
     }) as unknown as typeof originalRpc;
     window.fetch = async (input, init) => {
       const url = new URL(typeof input === "string" ? input : input instanceof URL ? input.href : input.url, window.location.origin);
-      if (url.pathname === "/api/billing/config") return Response.json({ available: true, mode: "sandbox", catalogVersion: "20260913", disabledProductIds: [] });
+      if (url.pathname === "/api/billing/config") return Response.json({ available: true, mode: "sandbox", catalogVersion: "20260922-game04-shop", disabledProductIds: [] });
       if (url.pathname === "/api/billing/history") return Response.json({ orders: [{ id: "qa-order", product_id: "beginner_pack_01", amount_jpy: 100, status: "GRANTED", created_at: "2026-09-15T00:00:00Z" }] });
       if (url.pathname === "/rest/v1/news") return Response.json(newsFixture);
       if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/rest/") || url.pathname.startsWith("/auth/") || url.origin !== window.location.origin) throw new Error("QA harness blocks real API access");
@@ -60,7 +61,7 @@ export default function ShopUiHarness({ embedded = false }: { embedded?: boolean
         <button onClick={() => { setInboxPanelTab("presents"); setShowInboxPanel(true); }}>プレゼントBOX</button>
         <button onClick={() => { setInboxPanelTab("news"); setShowInboxPanel(true); }}>お知らせ</button>
       </div>}
-      <ShopTab />
+      <ShopTab exchange={exchange} />
     </main>
     <InboxPanel previewOnly />
     {dialog.isOpen && <CanonicalDialog title={dialog.title} onClose={() => setDialog({ isOpen: false })} actions={[{ label: dialog.confirmText ?? "閉じる", onClick: dialog.onConfirm ?? (() => setDialog({ isOpen: false })) }]}>{dialog.message}</CanonicalDialog>}

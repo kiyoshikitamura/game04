@@ -23,6 +23,7 @@ import { BATTLE_RULES, CHARACTER_MASTERS, SKILL_MASTERS, EQUIPMENT_MASTERS, buil
 import { CANONICAL_MISSIONS } from '@/domain/gameplay/canonical/masters';
 import { QUEST_STAGES, getQuestStage, isQuestStageUnlocked } from '@/domain/redesign/quests';
 import { applyGrowthAction } from '@/domain/redesign/growth';
+import { applyShopExchange, applyShopEnergyDrink } from '@/domain/redesign/shop';
 import { applyRaidAction, createRaidRoom, getRoomRaidMaster, raidEnemy } from '@/domain/redesign/raid';
 import { simulateBattle, type BattleResult } from '@/domain/redesign/battle';
 import type { RaidRoom, RedesignState } from '@/domain/redesign/types';
@@ -142,9 +143,8 @@ export default function RedesignFixture() {
     setState(result.state);
     return { ...gachaData, state: result.state, normalGachaResults: result.results };
   }
-  const recovery: EnergyRecovery = { owned: potions, amount: CANONICAL_ACTION_RESOURCES.recoveryItems.ENERGY_DRINK.amount, canUse: canUseEnergyDrink(state.energy), onUse: async () => {
-    if (potions < 1) throw new Error('回復薬が足りません。');
-    setPotions(value=>value-1);setState(value=>({...value,energy:value.energy+CANONICAL_ACTION_RESOURCES.recoveryItems.ENERGY_DRINK.amount}));
+  const recovery: EnergyRecovery = { owned: Number(state.energyDrinks ?? potions), amount: CANONICAL_ACTION_RESOURCES.recoveryItems.ENERGY_DRINK.amount, canUse: canUseEnergyDrink(state.energy), onUse: async () => {
+    setState(value => applyShopEnergyDrink(value));
   }};
   const game = {
     ownedHomeCosmeticIds: [], setShowAccountAuthenticationModal: noop, setInboxPanelTab, setShowInboxPanel, setShowSettingsPanel: noop,
@@ -165,7 +165,7 @@ export default function RedesignFixture() {
   return <GameContext.Provider value={game}><RedesignShell state={state} onAction={action} activeTab={tab} onNavigate={navigate} previewOnly hideChrome={Boolean(battle) || tab === 'battle'} encounterRaid={rooms[0] ? { id: rooms[0].id, name: '炎影の守将', expiresAt: rooms[0].expiresAt } : null} onOpenQa={() => setQaOpen(true)}>
       {battle ? <BattleView result={battle} vipActive={vip} title="レイド・ローカル確認" onComplete={() => setBattle(null)} /> : <>
         {tab === 'gacha' && <NormalGachaView data={gachaData} onAction={qaGachaAction} />}
-        {tab === 'shop' && <ShopUiHarness embedded />}
+        {tab === 'shop' && <ShopUiHarness embedded exchange={{ state, onExchange: async payload => { setState(value => applyShopExchange(value, payload)); } }} />}
         {tab === 'missions' && <section className="rd-panel"><h1>ミッション</h1><MissionContent state={state} missions={CANONICAL_MISSIONS.map(mission => ({ id: mission.id, name: mission.title, description: mission.description, rewards: [{ kind: qaMissionRewardKind(mission.rewardItemId) as any, amount: mission.rewardItemId === 'CASH' ? mission.cashReward : mission.rewardQuantity }], status: 'progress' as const, current: 0, target: mission.targetValue }))} missionBusy={false} missionError="" previewOnly onClaim={noop}/></section>}
         {tab === 'quest' && <QuestView recovery={recovery} state={state} party={party} vipActive={vip} onStart={startQuest} onOpenDeck={() => navigate('character')} onOpenRaid={id => { setRoomId(id); navigate('raid'); }} />}
         {tab === 'character' && <GrowthView state={state} onAction={action} />}

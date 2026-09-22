@@ -4,6 +4,7 @@ import { applyAcquisitionEvents, type AcquisitionEvent, type AcquisitionMaster }
 import { applyPlayerExperience, GROWTH_VERSION } from '../../../src/domain/redesign/growthMaster.ts';
 import { applyNormalGacha, normalGachaDay } from '../../../src/domain/redesign/normalGacha.ts';
 import { applyGrowthAction, validateDeck } from '../../../src/domain/redesign/growth.ts';
+import { applyShopExchange, applyShopEnergyDrink } from '../../../src/domain/redesign/shop.ts';
 import { evaluateMissions, getClaimableMission, type MissionConfig } from '../../../src/domain/redesign/missions.ts';
 import { simulateBattle } from '../../../src/domain/redesign/battle.ts';
 import { getQuestStage, isQuestStageUnlocked } from '../../../src/domain/redesign/quests.ts';
@@ -263,6 +264,10 @@ Deno.serve(async (request: Request) => {
         if (!['castle-town', 'castle-approach'].includes(payload.backgroundId)) throw new ApiError('背景が不正です。');
         after.homeBackgroundId = payload.backgroundId;
       }
+    } else if (action === 'shop_exchange') {
+      after = applyShopExchange(state, payload);
+    } else if (action === 'use_energy_drink') {
+      after = applyShopEnergyDrink(state);
     } else if (['raid_join', 'raid_leave', 'raid_rescue', 'raid_claim', 'encounter_ignore'].includes(action)) {
       const current = await roomFor(String(payload.roomId)); version = current.version;
       const changed = applyRaidAction(current, state, action, { name: profile.username }, Date.now(), action === 'raid_claim' ? await rewardPolicy() : undefined); room = changed.room; after = changed.state;
