@@ -22213,6 +22213,11 @@ function grantReward(original, reward, instanceId, acquisitionMaster = PREVIEW_A
     return applyAcquisitionEvents(state, Array.from({ length: amount }, (_, i) => ({ id: `reward:${instanceId}:${i}`, kind: reward.kind, masterId: reward.id, instanceId: amount === 1 ? instanceId : `${instanceId}:${i}` })), acquisitionMaster);
   }
   switch (reward.kind) {
+    case "ticket":
+      if (!reward.id || !["SPECIAL_TICKET_CHARACTER", "SPECIAL_TICKET_SKILL", "SPECIAL_TICKET_EQUIPMENT"].includes(reward.id)) throw new Error("\u5238ID\u304C\u4E0D\u6B63\u3067\u3059");
+      state.questTicketGrants ??= {};
+      state.questTicketGrants[reward.id] = (state.questTicketGrants[reward.id] ?? 0) + amount;
+      break;
     case "cash":
       state.cash += amount;
       break;
@@ -22500,119 +22505,29013 @@ function applyGrowthAction(input, action, payload) {
   throw new Error("\u5BFE\u5FDC\u3057\u3066\u3044\u306A\u3044\u80B2\u6210\u64CD\u4F5C\u3067\u3059\u3002");
 }
 
-// src/domain/redesign/quests.ts
-var AREAS = [
-  ["mikawa", "\u4E09\u6CB3\u306E\u5730", "\u6700\u521D\u306E\u4E00\u6B69", "\u6575\u306E\u5C5E\u6027\u3068\u884C\u52D5\u30AB\u30A6\u30F3\u30C8\u3092\u898B\u3066\u3001\u6B66\u5C06\u306E\u4E26\u3073\u3092\u6574\u3048\u3088\u3046\u3002"],
-  ["owari", "\u5C3E\u5F35\u306E\u65D7", "\u71B1\u304D\u65D7\u5370", "\u8907\u6570\u306E\u6575\u306B\u306F\u5168\u4F53\u653B\u6483\u3068\u72D9\u3046\u9806\u756A\u304C\u529B\u306B\u306A\u308B\u3002"],
-  ["mino", "\u7F8E\u6FC3\u306E\u57CE", "\u5805\u57CE\u3078\u306E\u9053", "\u5805\u3044\u5B88\u308A\u306B\u306F\u5B88\u5099\u3092\u4E0B\u3052\u308B\u6280\u3092\u7D44\u307F\u5408\u308F\u305B\u3088\u3046\u3002"],
-  ["omi", "\u8FD1\u6C5F\u306E\u6E56", "\u6E56\u4E0A\u306E\u76DF\u7D04", "\u50B7\u3064\u3044\u305F\u4EF2\u9593\u3092\u56DE\u5FA9\u3057\u3001\u9023\u6226\u3092\u5207\u308A\u629C\u3051\u3088\u3046\u3002"],
-  ["kai", "\u7532\u6590\u306E\u5C71", "\u98A8\u6797\u306E\u8A66\u7DF4", "\u5F37\u3044\u4E00\u6483\u306B\u5099\u3048\u3001\u5B88\u308A\u3068\u653B\u6483\u306E\u9806\u3092\u8003\u3048\u3088\u3046\u3002"],
-  ["echigo", "\u8D8A\u5F8C\u306E\u96EA", "\u96EA\u89E3\u3051\u306E\u7FA9", "\u6575\u306E\u56DE\u5FA9\u5F79\u3092\u3069\u3046\u5D29\u3059\u304B\u304C\u52DD\u6557\u3092\u5206\u3051\u308B\u3002"],
-  ["kyoto", "\u4EAC\u6D1B\u306E\u5F71", "\u82B1\u3068\u7B56\u8B00", "\u5F31\u4F53\u3068\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u3092\u898B\u6975\u3081\u3001\u65E9\u3081\u306B\u6C7A\u7740\u3092\u3064\u3051\u3088\u3046\u3002"],
-  ["izumo", "\u51FA\u96F2\u306E\u793E", "\u7948\u308A\u306E\u5411\u3053\u3046", "\u5149\u3068\u95C7\u306E\u76F8\u6027\u3001\u652F\u63F4\u6280\u306E\u7D44\u307F\u5408\u308F\u305B\u3092\u898B\u76F4\u305D\u3046\u3002"],
-  ["satsuma", "\u85A9\u6469\u306E\u708E", "\u4E0D\u5C48\u306E\u9663", "\u9023\u6226\u306B\u5099\u3048\u3066HP\u3068SP\u3092\u6B8B\u3057\u3001\u6575\u9663\u3092\u7A81\u7834\u3057\u3088\u3046\u3002"],
-  ["sekigahara", "\u95A2\u30F6\u539F", "\u6681\u306E\u7D04\u675F", "\u5909\u308F\u308A\u3086\u304F\u6575\u306E\u9663\u3092\u8AAD\u307F\u3001\u4E94\u4EBA\u306E\u529B\u3092\u7D50\u96C6\u3057\u3088\u3046\u3002"]
-];
-var STAGE_NAMES = ["\u8857\u9053\u306E\u5148\u3078", "\u65D7\u3092\u63B2\u3052\u3066", "\u6E21\u308A\u306E\u9663", "\u591C\u660E\u3051\u306E\u653B\u9632", "\u5D29\u308C\u306C\u8A93\u3044", "\u6C7A\u6226\u524D\u591C", "\u57CE\u9580\u3092\u8D8A\u3048\u3066"];
-function themeSkills(area, source) {
-  const effect = ["damage", "damage", "def_up", "heal", "atk_up", "heal", "poison", "atk_down", "def_up", "damage"][area];
-  const chosen = COMMON_SKILL_MASTERS.find((s) => s.effects.some((e) => e.type === effect));
-  return chosen ? [chosen, ...source.filter((s) => s.id !== chosen.id)].slice(0, 2) : source.slice(0, 2);
-}
-function enemy(area, stage, wave, slot, boss2) {
-  const master = COMMON_CHARACTER_MASTERS[(area * 6 + stage + wave + slot) % COMMON_CHARACTER_MASTERS.length];
-  const rank = area * 7 + stage;
-  const growth = 1 + rank * 0.09;
-  const skills = themeSkills(area, COMMON_SKILL_MASTERS.filter((s) => s.element === master.element));
-  return {
-    id: `quest-enemy-${area + 1}-${stage + 1}-${wave + 1}-${slot + 1}`,
-    name: master.name,
-    image: master.image,
-    element: master.element,
-    level: 1 + rank,
-    stats: { hp: Math.round((boss2 ? 1100 : 370) * growth), sp: boss2 ? 80 : 40, atk: Math.round((boss2 ? 100 : 55) * growth), def: Math.round((area === 2 ? 55 : 15) * growth), luk: 10 + rank },
-    // Existing provisional quest numbers remain unchanged; formal inputs require their own explicit starts.
-    initialSp: boss2 ? 80 : 40,
-    skills,
-    passives: [],
-    hitSpGain: 5,
-    actionCount: boss2 ? 3 : 4 + slot % 2,
-    order: slot,
-    boss: boss2,
-    ...boss2 ? { phases: [{ hpBelow: 0.45, name: "\u6C7A\u6B7B\u306E\u9663", actionCount: 2, skills: themeSkills((area + 1) % 10, skills) }] } : {}
-  };
-}
-var QUEST_AREAS = AREAS.map(([id, name2, chapter, description], area) => ({
-  id,
-  index: area + 1,
-  name: name2,
-  description,
-  image: `/bg/sengoku/${area % 2 ? "castle-town" : "castle-approach"}.jpg`,
-  stages: STAGE_NAMES.map((stageName, stage) => {
-    const waveCount = Math.min(5, 1 + Math.floor(stage / 2) + (area > 5 ? 1 : 0));
-    return {
-      id: `${id}-${stage + 1}`,
-      areaId: id,
-      index: stage + 1,
-      name: stage === 6 ? chapter : stageName,
-      description,
-      energyCost: 3 + Math.floor(area / 2),
-      waves: Array.from({ length: waveCount }, (_, wave) => {
-        const boss2 = stage === 6 && wave === waveCount - 1;
-        return Array.from({ length: boss2 ? 1 : Math.min(3, 1 + Math.floor(stage / 3) + wave % 2) }, (_2, slot) => enemy(area, stage, wave, slot, boss2));
-      }),
-      firstRewards: [{ kind: "cash", amount: 100 + area * 30 }, { kind: "soul", id: COMMON_CHARACTER_MASTERS[(area * 6 + stage) % COMMON_CHARACTER_MASTERS.length].id, amount: 2 }],
-      rewards: [{ kind: "cash", amount: 20 + area * 10 }, { kind: "character_material", amount: 1 + Math.floor(area / 3) }, { kind: "skill_material", amount: 1 }, { kind: "equipment_material", amount: 1 }],
-      rareRewards: [{ kind: "soul", id: COMMON_CHARACTER_MASTERS[(area * 6 + stage) % COMMON_CHARACTER_MASTERS.length].id, amount: 1, chance: 0.08 }, { kind: "equipment_lb", amount: 1, chance: 0.05 }, { kind: "equipment", id: EQUIPMENT_MASTERS[(area * 7 + stage) % EQUIPMENT_MASTERS.length].id, amount: 1, chance: 0.12 }, ...area >= 2 ? [{ kind: "unlock_item", amount: 1, chance: 0.04 }] : []],
+// src/domain/redesign/data/quest65.json
+var quest65_default = {
+  version: "APPROVED_QUEST65_ROUND17_20260922",
+  counts: [
+    3,
+    4,
+    5,
+    5,
+    6,
+    6,
+    8,
+    8,
+    10,
+    10
+  ],
+  stages: [
+    {
+      id: "mikawa-1",
+      designId: "1-1",
+      areaId: "mikawa",
+      index: 1,
+      name: "\u521D\u671F3\u4EBA\u3067\u6226\u95D8\u3092\u5B66\u3076",
+      description: "\u521D\u671F3\u4EBA\u3067\u6226\u95D8\u3092\u5B66\u3076",
+      energyCost: 5,
+      waves: [
+        [
+          {
+            id: "1-1/W1/1",
+            name: "\u5973\u4F8D",
+            image: "",
+            level: 1,
+            stats: {
+              luk: 0,
+              hp: 650,
+              atk: 35,
+              def: 10,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 0,
+            skills: [],
+            passives: []
+          },
+          {
+            id: "1-1/W1/2",
+            name: "\u6F01\u5E2B",
+            image: "",
+            level: 1,
+            stats: {
+              luk: 0,
+              hp: 450,
+              atk: 30,
+              def: 10,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 8,
+            initialCount: 8,
+            initialSp: 0,
+            skills: [],
+            passives: []
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "character",
+          id: "char_jihoon_01",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 500
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 1
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 25e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 25e-4
+        }
+      ],
+      soulDrops: [],
+      ticketChance: 0.01,
+      playerExp: 20,
+      encounterChance: 0
+    },
+    {
+      id: "mikawa-2",
+      designId: "1-2",
+      areaId: "mikawa",
+      index: 2,
+      name: "\u53D7\u3051\u308B\u5F79\u3092\u6C7A\u3081\u308B",
+      description: "\u53D7\u3051\u308B\u5F79\u3092\u6C7A\u3081\u308B",
+      energyCost: 5,
+      waves: [
+        [
+          {
+            id: "1-2/W1/1",
+            name: "\u50E7\u5175",
+            image: "",
+            level: 3,
+            stats: {
+              luk: 0,
+              hp: 800,
+              atk: 50,
+              def: 45,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 0,
+            skills: [],
+            passives: []
+          },
+          {
+            id: "1-2/W1/2",
+            name: "\u5F13\u5175",
+            image: "",
+            level: 3,
+            stats: {
+              luk: 0,
+              hp: 700,
+              atk: 40,
+              def: 15,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 4,
+            initialCount: 4,
+            initialSp: 0,
+            skills: [],
+            passives: []
+          },
+          {
+            id: "1-2/W1/3",
+            name: "\u753A\u5A18",
+            image: "",
+            level: 3,
+            stats: {
+              luk: 0,
+              hp: 800,
+              atk: 120,
+              def: 20,
+              sp: 100
+            },
+            order: 2,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 35,
+            skills: [
+              {
+                id: "SKD039",
+                name: "\u5FDC\u6025\u624B\u5F53",
+                image: "",
+                rarity: "N",
+                element: "water",
+                spCost: 35,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 35,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "character",
+          id: "char_yuki_01",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 500
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 1
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 25e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 25e-4
+        }
+      ],
+      soulDrops: [],
+      ticketChance: 0.01,
+      playerExp: 20,
+      encounterChance: 0
+    },
+    {
+      id: "mikawa-3",
+      designId: "1-3",
+      areaId: "mikawa",
+      index: 3,
+      name: "\u4E00\u3064\u5909\u3048\u3066\u7A81\u7834\u3059\u308B",
+      description: "\u4E00\u3064\u5909\u3048\u3066\u7A81\u7834\u3059\u308B",
+      energyCost: 5,
+      waves: [
+        [
+          {
+            id: "1-3/W1/1",
+            name: "\u5973\u4F8D",
+            image: "",
+            level: 5,
+            stats: {
+              luk: 0,
+              hp: 700,
+              atk: 60,
+              def: 25,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 0,
+            skills: [],
+            passives: []
+          },
+          {
+            id: "1-3/W1/2",
+            name: "\u5F13\u5175",
+            image: "",
+            level: 5,
+            stats: {
+              luk: 0,
+              hp: 500,
+              atk: 45,
+              def: 15,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 0,
+            skills: [],
+            passives: []
+          }
+        ],
+        [
+          {
+            id: "1-3/W2/1",
+            name: "\u9244\u7832\u5175",
+            image: "",
+            level: 5,
+            stats: {
+              luk: 0,
+              hp: 3640,
+              atk: 310,
+              def: 25,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 6,
+            initialCount: 5,
+            initialSp: 0,
+            skills: [],
+            passives: []
+          },
+          {
+            id: "1-3/W2/2",
+            name: "\u76F4\u6C5F\u517C\u7D9A",
+            image: "",
+            level: 7,
+            stats: {
+              luk: 0,
+              hp: 3e3,
+              atk: 150,
+              def: 60,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD008",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 120
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P01_water",
+                type: "P01",
+                name: "P01",
+                stat: "atk",
+                percent: 4.800000000000001,
+                level: 0,
+                target: "party",
+                targetElement: "water"
+              }
+            ]
+          },
+          {
+            id: "1-3/W2/3",
+            name: "\u753A\u5A18",
+            image: "",
+            level: 5,
+            stats: {
+              luk: 0,
+              hp: 550,
+              atk: 220,
+              def: 20,
+              sp: 100
+            },
+            order: 2,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 35,
+            skills: [
+              {
+                id: "SKD039",
+                name: "\u5FDC\u6025\u624B\u5F53",
+                image: "",
+                rarity: "N",
+                element: "water",
+                spCost: 35,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 35,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_rui_01",
+          amount: 8
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 500
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 1
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_rui_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.1,
+          period: 20
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 25e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 25e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_rui_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.1,
+          period: 20
+        }
+      ],
+      ticketChance: 0.01,
+      playerExp: 20,
+      encounterChance: 0.01
+    },
+    {
+      id: "owari-1",
+      designId: "2-1",
+      areaId: "owari",
+      index: 1,
+      name: "\u307E\u305A1\u4F53\u6E1B\u3089\u3059",
+      description: "\u307E\u305A1\u4F53\u6E1B\u3089\u3059",
+      energyCost: 5,
+      waves: [
+        [
+          {
+            id: "2-1/W1/1",
+            name: "\u5973\u4F8D",
+            image: "",
+            level: 9,
+            stats: {
+              luk: 0,
+              hp: 1130,
+              atk: 540,
+              def: 40,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 9,
+            initialCount: 5,
+            initialSp: 0,
+            skills: [],
+            passives: []
+          },
+          {
+            id: "2-1/W1/2",
+            name: "\u9244\u7832\u5175",
+            image: "",
+            level: 9,
+            stats: {
+              luk: 0,
+              hp: 850,
+              atk: 170,
+              def: 25,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 8,
+            initialCount: 8,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 120
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          }
+        ],
+        [
+          {
+            id: "2-1/W2/1",
+            name: "\u9244\u7832\u5175",
+            image: "",
+            level: 9,
+            stats: {
+              luk: 0,
+              hp: 1130,
+              atk: 540,
+              def: 35,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 9,
+            initialCount: 5,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 120
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          },
+          {
+            id: "2-1/W2/2",
+            name: "\u52A0\u85E4\u6E05\u6B63",
+            image: "",
+            level: 10,
+            stats: {
+              luk: 0,
+              hp: 2300,
+              atk: 200,
+              def: 65,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P15_earth",
+                type: "P15",
+                name: "P15",
+                stat: "def",
+                percent: 12,
+                level: 0,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "2-1/W2/3",
+            name: "\u4F1D\u4EE4",
+            image: "",
+            level: 9,
+            stats: {
+              luk: 0,
+              hp: 1100,
+              atk: 80,
+              def: 30,
+              sp: 100
+            },
+            order: 2,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 4,
+            initialCount: 4,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD035",
+                name: "\u9B28\u306E\u58F0",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "atk_up",
+                    power: 8,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_leon_01",
+          amount: 2
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 800
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 1
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_leon_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.1,
+          period: 20
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 25e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 25e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_leon_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.1,
+          period: 20
+        }
+      ],
+      ticketChance: 0.01,
+      playerExp: 25,
+      encounterChance: 0.01
+    },
+    {
+      id: "owari-2",
+      designId: "2-2",
+      areaId: "owari",
+      index: 2,
+      name: "\u4E26\u3093\u3060\u6575\u3092\u524A\u308B",
+      description: "\u4E26\u3093\u3060\u6575\u3092\u524A\u308B",
+      energyCost: 5,
+      waves: [
+        [
+          {
+            id: "2-2/W1/1",
+            name: "\u6F01\u5E2B",
+            image: "",
+            level: 11,
+            stats: {
+              luk: 0,
+              hp: 2800,
+              atk: 240,
+              def: 10,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 9,
+            initialCount: 7,
+            initialSp: 0,
+            skills: [],
+            passives: []
+          },
+          {
+            id: "2-2/W1/2",
+            name: "\u5F13\u5175",
+            image: "",
+            level: 11,
+            stats: {
+              luk: 0,
+              hp: 300,
+              atk: 240,
+              def: 10,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 9,
+            initialCount: 7,
+            initialSp: 0,
+            skills: [],
+            passives: []
+          },
+          {
+            id: "2-2/W1/3",
+            name: "\u706B\u85AC\u5E2B",
+            image: "",
+            level: 11,
+            stats: {
+              luk: 0,
+              hp: 300,
+              atk: 240,
+              def: 10,
+              sp: 100
+            },
+            order: 2,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 9,
+            initialCount: 7,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD019",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 60
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          }
+        ],
+        [
+          {
+            id: "2-2/W2/1",
+            name: "\u304F\u30CE\u4E00",
+            image: "",
+            level: 12,
+            stats: {
+              luk: 0,
+              hp: 2800,
+              atk: 240,
+              def: 10,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 9,
+            initialCount: 7,
+            initialSp: 0,
+            skills: [],
+            passives: []
+          },
+          {
+            id: "2-2/W2/2",
+            name: "\u706B\u85AC\u5E2B",
+            image: "",
+            level: 12,
+            stats: {
+              luk: 0,
+              hp: 300,
+              atk: 240,
+              def: 10,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 9,
+            initialCount: 7,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD019",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 60
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          },
+          {
+            id: "2-2/W2/3",
+            name: "\u96D1\u8CC0\u5B6B\u5E02",
+            image: "",
+            level: 12,
+            stats: {
+              luk: 0,
+              hp: 300,
+              atk: 240,
+              def: 10,
+              sp: 100
+            },
+            order: 2,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 9,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD010",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 120
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_wind",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 6,
+                level: 0,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_takuro_01",
+          amount: 4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 800
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 1
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_takuro_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.1,
+          period: 20
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 25e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 25e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_takuro_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.1,
+          period: 20
+        }
+      ],
+      ticketChance: 0.01,
+      playerExp: 25,
+      encounterChance: 0.01
+    },
+    {
+      id: "owari-3",
+      designId: "2-3",
+      areaId: "owari",
+      index: 3,
+      name: "\u5F8C\u308D\u306E\u652F\u63F4\u3092\u6B62\u3081\u308B",
+      description: "\u5F8C\u308D\u306E\u652F\u63F4\u3092\u6B62\u3081\u308B",
+      energyCost: 5,
+      waves: [
+        [
+          {
+            id: "2-3/W1/1",
+            name: "\u50E7\u5175",
+            image: "",
+            level: 14,
+            stats: {
+              luk: 0,
+              hp: 5530,
+              atk: 130,
+              def: 160,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 0,
+            skills: [],
+            passives: []
+          },
+          {
+            id: "2-3/W1/2",
+            name: "\u8336\u5C4B\u306E\u5A18",
+            image: "",
+            level: 14,
+            stats: {
+              luk: 0,
+              hp: 650,
+              atk: 1610,
+              def: 35,
+              sp: 180
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 6,
+            initialCount: 4,
+            initialSp: 180,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 75,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          }
+        ],
+        [
+          {
+            id: "2-3/W2/1",
+            name: "\u935B\u51B6\u5E2B",
+            image: "",
+            level: 15,
+            stats: {
+              luk: 0,
+              hp: 5530,
+              atk: 160,
+              def: 160,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 30,
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 15,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          },
+          {
+            id: "2-3/W2/2",
+            name: "\u670D\u90E8\u534A\u8535",
+            image: "",
+            level: 14,
+            stats: {
+              luk: 0,
+              hp: 1500,
+              atk: 170,
+              def: 45,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P09_dark",
+                type: "P09",
+                name: "P09",
+                stat: "atk",
+                percent: 12,
+                level: 0,
+                target: "self",
+                targetElement: "dark"
+              }
+            ]
+          },
+          {
+            id: "2-3/W2/3",
+            name: "\u304A\u5E02\u306E\u65B9",
+            image: "",
+            level: 14,
+            stats: {
+              luk: 0,
+              hp: 650,
+              atk: 1610,
+              def: 40,
+              sp: 180
+            },
+            order: 2,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 6,
+            initialCount: 4,
+            initialSp: 180,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 75,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_fire",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 8,
+                level: 0,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_maya_01",
+          amount: 6
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 800
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 1
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_maya_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.1,
+          period: 20
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 25e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 25e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_maya_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.1,
+          period: 20
+        }
+      ],
+      ticketChance: 0.01,
+      playerExp: 25,
+      encounterChance: 0.01
+    },
+    {
+      id: "owari-4",
+      designId: "2-4",
+      areaId: "owari",
+      index: 4,
+      name: "\u5012\u3059\u9806\u3092\u7D44\u307F\u7ACB\u3066\u308B",
+      description: "\u5012\u3059\u9806\u3092\u7D44\u307F\u7ACB\u3066\u308B",
+      energyCost: 5,
+      waves: [
+        [
+          {
+            id: "2-4/W1/1",
+            name: "\u5973\u4F8D",
+            image: "",
+            level: 16,
+            stats: {
+              luk: 0,
+              hp: 1500,
+              atk: 150,
+              def: 70,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 0,
+            skills: [],
+            passives: []
+          },
+          {
+            id: "2-4/W1/2",
+            name: "\u4F1D\u4EE4",
+            image: "",
+            level: 16,
+            stats: {
+              luk: 0,
+              hp: 1e3,
+              atk: 90,
+              def: 35,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 4,
+            initialCount: 4,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD035",
+                name: "\u9B28\u306E\u58F0",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "atk_up",
+                    power: 8,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          }
+        ],
+        [
+          {
+            id: "2-4/W2/1",
+            name: "\u5C71\u4F0F",
+            image: "",
+            level: 16,
+            stats: {
+              luk: 0,
+              hp: 2100,
+              atk: 180,
+              def: 100,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD036",
+                name: "\u5B88\u308A\u306E\u9663",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 15,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          },
+          {
+            id: "2-4/W2/2",
+            name: "\u8336\u5C4B\u306E\u5A18",
+            image: "",
+            level: 16,
+            stats: {
+              luk: 0,
+              hp: 1200,
+              atk: 300,
+              def: 45,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD043",
+                name: "\u518D\u751F\u306E\u7948\u308A",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "hot",
+                    power: 15,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          }
+        ],
+        [
+          {
+            id: "2-4/W3/1",
+            name: "\u5FB3\u5DDD\u5BB6\u5EB7",
+            image: "",
+            level: 18,
+            stats: {
+              luk: 0,
+              hp: 8e3,
+              atk: 300,
+              def: 300,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD009",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F",
+                image: "",
+                rarity: "R",
+                element: "earth",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 120
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_earth",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 9.600000000000001,
+                level: 0,
+                target: "party",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "2-4/W3/2",
+            name: "\u304A\u5E02\u306E\u65B9",
+            image: "",
+            level: 17,
+            stats: {
+              luk: 0,
+              hp: 2100,
+              atk: 650,
+              def: 60,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 90,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 75,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_fire",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 8,
+                level: 0,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_karen_01",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 800
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 1
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_karen_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.03,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 25e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 25e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_karen_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.03,
+          period: 50
+        }
+      ],
+      ticketChance: 0.01,
+      playerExp: 25,
+      encounterChance: 0.01
+    },
+    {
+      id: "mino-1",
+      designId: "3-1",
+      areaId: "mino",
+      index: 1,
+      name: "\u5F31\u4F53\u306E\u5F8C\u306B\u653B\u3081\u308B",
+      description: "\u5F31\u4F53\u306E\u5F8C\u306B\u653B\u3081\u308B",
+      energyCost: 5,
+      waves: [
+        [
+          {
+            id: "3-1/W1/1",
+            name: "\u935B\u51B6\u5E2B",
+            image: "",
+            level: 19,
+            stats: {
+              luk: 0,
+              hp: 3430,
+              atk: 510,
+              def: 1140,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 6,
+            initialSp: 30,
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 15,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          },
+          {
+            id: "3-1/W1/2",
+            name: "\u50E7\u5175",
+            image: "",
+            level: 19,
+            stats: {
+              luk: 0,
+              hp: 680,
+              atk: 180,
+              def: 260,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 0,
+            skills: [],
+            passives: []
+          }
+        ],
+        [
+          {
+            id: "3-1/W2/1",
+            name: "\u76F4\u6C5F\u517C\u7D9A",
+            image: "",
+            level: 20,
+            stats: {
+              luk: 0,
+              hp: 3430,
+              atk: 510,
+              def: 1140,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 7,
+            initialCount: 6,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD008",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 120
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P01_water",
+                type: "P01",
+                name: "P01",
+                stat: "atk",
+                percent: 4.800000000000001,
+                level: 0,
+                target: "party",
+                targetElement: "water"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_rui_01",
+          amount: 3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 1200
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 3
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 2
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_rui_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.1,
+          period: 20
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 25e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 25e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_rui_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.1,
+          period: 20
+        }
+      ],
+      ticketChance: 0.01,
+      playerExp: 30,
+      encounterChance: 0.02
+    },
+    {
+      id: "mino-2",
+      designId: "3-2",
+      areaId: "mino",
+      index: 2,
+      name: "\u5F37\u5316\u3092\u653B\u6483\u3078\u3064\u306A\u3050",
+      description: "\u5F37\u5316\u3092\u653B\u6483\u3078\u3064\u306A\u3050",
+      energyCost: 5,
+      waves: [
+        [
+          {
+            id: "3-2/W1/1",
+            name: "\u5973\u4F8D",
+            image: "",
+            level: 21,
+            stats: {
+              luk: 0,
+              hp: 3e3,
+              atk: 410,
+              def: 850,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 6,
+            initialSp: 0,
+            skills: [],
+            passives: []
+          },
+          {
+            id: "3-2/W1/2",
+            name: "\u884C\u5546\u4EBA",
+            image: "",
+            level: 21,
+            stats: {
+              luk: 0,
+              hp: 770,
+              atk: 130,
+              def: 50,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 4,
+            initialCount: 4,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD035",
+                name: "\u9B28\u306E\u58F0",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "atk_up",
+                    power: 8,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          }
+        ],
+        [
+          {
+            id: "3-2/W2/1",
+            name: "\u52A0\u85E4\u6E05\u6B63",
+            image: "",
+            level: 22,
+            stats: {
+              luk: 0,
+              hp: 3e3,
+              atk: 410,
+              def: 850,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 6,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD009",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F",
+                image: "",
+                rarity: "R",
+                element: "earth",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 120
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P15_earth",
+                type: "P15",
+                name: "P15",
+                stat: "def",
+                percent: 12,
+                level: 0,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "3-2/W2/2",
+            name: "\u884C\u5546\u4EBA",
+            image: "",
+            level: 21,
+            stats: {
+              luk: 0,
+              hp: 1050,
+              atk: 160,
+              def: 60,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 4,
+            initialCount: 4,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD035",
+                name: "\u9B28\u306E\u58F0",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "atk_up",
+                    power: 8,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_leon_01",
+          amount: 7
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 1200
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 3
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 2
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_leon_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.1,
+          period: 20
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 25e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 25e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_leon_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.1,
+          period: 20
+        }
+      ],
+      ticketChance: 0.01,
+      playerExp: 30,
+      encounterChance: 0.02
+    },
+    {
+      id: "mino-3",
+      designId: "3-3",
+      areaId: "mino",
+      index: 3,
+      name: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u3092\u8DB3\u5834\u306B\u3059\u308B",
+      description: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u3092\u8DB3\u5834\u306B\u3059\u308B",
+      energyCost: 5,
+      waves: [
+        [
+          {
+            id: "3-3/W1/1",
+            name: "\u5C71\u4F0F",
+            image: "",
+            level: 23,
+            stats: {
+              luk: 0,
+              hp: 2500,
+              atk: 240,
+              def: 180,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD036",
+                name: "\u5B88\u308A\u306E\u9663",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 15,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          },
+          {
+            id: "3-3/W1/2",
+            name: "\u304F\u30CE\u4E00",
+            image: "",
+            level: 23,
+            stats: {
+              luk: 0,
+              hp: 1500,
+              atk: 150,
+              def: 60,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 3,
+            initialCount: 3,
+            initialSp: 0,
+            skills: [],
+            passives: []
+          }
+        ],
+        [
+          {
+            id: "3-3/W2/1",
+            name: "\u670D\u90E8\u534A\u8535",
+            image: "",
+            level: 24,
+            stats: {
+              luk: 0,
+              hp: 2780,
+              atk: 500,
+              def: 1290,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 3,
+            initialCount: 3,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD012",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7",
+                image: "",
+                rarity: "R",
+                element: "dark",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 120
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P09_dark",
+                type: "P09",
+                name: "P09",
+                stat: "atk",
+                percent: 12,
+                level: 0,
+                target: "self",
+                targetElement: "dark"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_maya_01",
+          amount: 10
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 1200
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 3
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 2
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_maya_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.1,
+          period: 20
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 25e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 25e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_maya_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.1,
+          period: 20
+        }
+      ],
+      ticketChance: 0.01,
+      playerExp: 30,
+      encounterChance: 0.02
+    },
+    {
+      id: "mino-4",
+      designId: "3-4",
+      areaId: "mino",
+      index: 4,
+      name: "SP\u3092\u4F7F\u3046\u5F79\u3068\u8CAF\u3081\u308B\u5F79",
+      description: "SP\u3092\u4F7F\u3046\u5F79\u3068\u8CAF\u3081\u308B\u5F79",
+      energyCost: 5,
+      waves: [
+        [
+          {
+            id: "3-4/W1/1",
+            name: "\u50E7\u5175",
+            image: "",
+            level: 26,
+            stats: {
+              luk: 0,
+              hp: 3e3,
+              atk: 290,
+              def: 220,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 0,
+            skills: [],
+            passives: []
+          },
+          {
+            id: "3-4/W1/2",
+            name: "\u5F13\u5175",
+            image: "",
+            level: 26,
+            stats: {
+              luk: 0,
+              hp: 1700,
+              atk: 180,
+              def: 70,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 4,
+            initialCount: 4,
+            initialSp: 0,
+            skills: [],
+            passives: []
+          }
+        ],
+        [
+          {
+            id: "3-4/W2/1",
+            name: "\u4E0A\u6749\u8B19\u4FE1",
+            image: "",
+            level: 27,
+            stats: {
+              luk: 0,
+              hp: 18500,
+              atk: 730,
+              def: 560,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD008",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 120
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_water",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 8,
+                level: 0,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_koharu_01",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 1200
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 3
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 2
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_koharu_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.03,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 25e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 25e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_koharu_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.03,
+          period: 50
+        }
+      ],
+      ticketChance: 0.01,
+      playerExp: 30,
+      encounterChance: 0.02
+    },
+    {
+      id: "mino-5",
+      designId: "3-5",
+      areaId: "mino",
+      index: 5,
+      name: "\u4E3B\u8EF8\u3092\u4E00\u3064\u9078\u3076",
+      description: "\u4E3B\u8EF8\u3092\u4E00\u3064\u9078\u3076",
+      energyCost: 5,
+      waves: [
+        [
+          {
+            id: "3-5/W1/1",
+            name: "\u935B\u51B6\u5E2B",
+            image: "",
+            level: 27,
+            stats: {
+              luk: 0,
+              hp: 4020,
+              atk: 620,
+              def: 1640,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 8,
+            initialCount: 7,
+            initialSp: 30,
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 15,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          },
+          {
+            id: "3-5/W1/2",
+            name: "\u706B\u85AC\u5E2B",
+            image: "",
+            level: 27,
+            stats: {
+              luk: 0,
+              hp: 1700,
+              atk: 500,
+              def: 60,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 8,
+            initialCount: 8,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD019",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 60
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          }
+        ],
+        [
+          {
+            id: "3-5/W2/1",
+            name: "\u6226\u5DEB\u5973",
+            image: "",
+            level: 28,
+            stats: {
+              luk: 0,
+              hp: 4020,
+              atk: 620,
+              def: 1640,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 8,
+            initialCount: 6,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD046",
+                name: "\u5B88\u8B77\u306E\u672D",
+                image: "",
+                rarity: "SR",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "shield",
+                    power: 65,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          },
+          {
+            id: "3-5/W2/2",
+            name: "\u9670\u967D\u5E2B",
+            image: "",
+            level: 27,
+            stats: {
+              luk: 0,
+              hp: 1900,
+              atk: 220,
+              def: 70,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD037",
+                name: "\u5A01\u5727",
+                image: "",
+                rarity: "R",
+                element: "dark",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "highest_atk_enemy",
+                effects: [
+                  {
+                    type: "atk_down",
+                    power: 10,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          }
+        ],
+        [
+          {
+            id: "3-5/W3/1",
+            name: "\u7E54\u7530\u4FE1\u9577",
+            image: "",
+            level: 30,
+            stats: {
+              luk: 0,
+              hp: 4020,
+              atk: 620,
+              def: 1640,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 8,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 120
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P01_fire",
+                type: "P01",
+                name: "P01",
+                stat: "atk",
+                percent: 6.4,
+                level: 0,
+                target: "party",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "3-5/W3/2",
+            name: "\u304A\u5E02\u306E\u65B9",
+            image: "",
+            level: 28,
+            stats: {
+              luk: 0,
+              hp: 2600,
+              atk: 850,
+              def: 100,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 90,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 75,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_fire",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 8,
+                level: 0,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_reiji_01",
+          amount: 2
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 2
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 1200
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 3
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 2
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_reiji_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.03,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 25e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 25e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_reiji_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.03,
+          period: 50
+        }
+      ],
+      ticketChance: 0.01,
+      playerExp: 30,
+      encounterChance: 0.02
+    },
+    {
+      id: "omi-1",
+      designId: "4-1",
+      areaId: "omi",
+      index: 1,
+      name: "\u96C6\u4E2D\u653B\u6483\u3092\u53D7\u3051\u308B",
+      description: "\u96C6\u4E2D\u653B\u6483\u3092\u53D7\u3051\u308B",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "4-1/1/1",
+            name: "\u524D\u7530\u5229\u5BB6",
+            image: "",
+            level: 30,
+            stats: {
+              luk: 0,
+              hp: 22480,
+              atk: 870,
+              def: 220,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 3,
+            initialCount: 6,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "4-1/1/2",
+            name: "\u5F13\u5175",
+            image: "",
+            level: 29,
+            stats: {
+              luk: 0,
+              hp: 3100,
+              atk: 360,
+              def: 100,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 3,
+            initialCount: 3,
+            initialSp: 0,
+            skills: [],
+            passives: []
+          }
+        ],
+        [
+          {
+            id: "4-1/2/1",
+            name: "\u4E95\u4F0A\u76F4\u653F",
+            image: "",
+            level: 31,
+            stats: {
+              luk: 0,
+              hp: 22480,
+              atk: 870,
+              def: 260,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 3,
+            initialCount: 6,
+            initialSp: 50,
+            skills: [],
+            passives: [
+              {
+                id: "P06_fire",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 4.740440635264012,
+                level: 2,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "4-1/2/2",
+            name: "\u9244\u7832\u5175",
+            image: "",
+            level: 30,
+            stats: {
+              luk: 0,
+              hp: 3800,
+              atk: 720,
+              def: 120,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 130.7
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          }
+        ],
+        [
+          {
+            id: "4-1/3/1",
+            name: "\u67F4\u7530\u52DD\u5BB6",
+            image: "",
+            level: 32,
+            stats: {
+              luk: 0,
+              hp: 22480,
+              atk: 870,
+              def: 400,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 3,
+            initialCount: 6,
+            initialSp: 30,
+            skills: [],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 14.221321905792035,
+                level: 2,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_noa_01",
+          amount: 3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 1600
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 5
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 3
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_noa_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.01
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 5e-3
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_noa_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        }
+      ],
+      ticketChance: 0.02,
+      playerExp: 48,
+      encounterChance: 0.04
+    },
+    {
+      id: "omi-2",
+      designId: "4-2",
+      areaId: "omi",
+      index: 2,
+      name: "\u53D7\u3051\u305F\u653B\u6483\u3092\u8FD4\u3059",
+      description: "\u53D7\u3051\u305F\u653B\u6483\u3092\u8FD4\u3059",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "4-2/1/1",
+            name: "\u524D\u7530\u5229\u5BB6",
+            image: "",
+            level: 32,
+            stats: {
+              luk: 0,
+              hp: 14960,
+              atk: 470,
+              def: 20,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 1,
+            initialCount: 2,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "4-2/1/2",
+            name: "\u6D45\u4E95\u9577\u653F",
+            image: "",
+            level: 32,
+            stats: {
+              luk: 0,
+              hp: 13640,
+              atk: 470,
+              def: 20,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 1,
+            initialCount: 2,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P11_wind",
+                type: "P11",
+                name: "P11",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "4-2/2/1",
+            name: "\u304F\u30CE\u4E00",
+            image: "",
+            level: 33,
+            stats: {
+              luk: 0,
+              hp: 9900,
+              atk: 470,
+              def: 20,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 1,
+            initialCount: 2,
+            initialSp: 0,
+            skills: [],
+            passives: []
+          },
+          {
+            id: "4-2/2/2",
+            name: "\u4E95\u4F0A\u76F4\u653F",
+            image: "",
+            level: 33,
+            stats: {
+              luk: 0,
+              hp: 19800,
+              atk: 470,
+              def: 20,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 1,
+            initialCount: 2,
+            initialSp: 50,
+            skills: [],
+            passives: [
+              {
+                id: "P06_fire",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 4.740440635264012,
+                level: 2,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "4-2/3/1",
+            name: "\u524D\u7530\u6176\u6B21",
+            image: "",
+            level: 34,
+            stats: {
+              luk: 0,
+              hp: 48400,
+              atk: 470,
+              def: 20,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 1,
+            initialCount: 2,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P05_wind",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 18.961762541056046,
+                level: 2,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_mio_01",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 1600
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 5
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 3
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_mio_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.01
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 5e-3
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_mio_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        }
+      ],
+      ticketChance: 0.02,
+      playerExp: 48,
+      encounterChance: 0.04
+    },
+    {
+      id: "omi-3",
+      designId: "4-3",
+      areaId: "omi",
+      index: 3,
+      name: "\u5168\u54E1\u306E\u88AB\u5BB3\u3092\u623B\u3059",
+      description: "\u5168\u54E1\u306E\u88AB\u5BB3\u3092\u623B\u3059",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "4-3/1/1",
+            name: "\u706B\u85AC\u5E2B",
+            image: "",
+            level: 34,
+            stats: {
+              luk: 0,
+              hp: 6160,
+              atk: 2870,
+              def: 100,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 6,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD022",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 65.35
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          },
+          {
+            id: "4-3/1/2",
+            name: "\u524D\u7530\u5229\u5BB6",
+            image: "",
+            level: 34,
+            stats: {
+              luk: 0,
+              hp: 6e3,
+              atk: 650,
+              def: 260,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "4-3/2/1",
+            name: "\u7ACB\u82B1\u8ABE\u5343\u4EE3",
+            image: "",
+            level: 35,
+            stats: {
+              luk: 0,
+              hp: 16080,
+              atk: 2870,
+              def: 350,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 6,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD022",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 65.35
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P07_light",
+                type: "P07",
+                name: "P07",
+                stat: "atk",
+                percent: 7.110660952896017,
+                level: 2,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          },
+          {
+            id: "4-3/2/2",
+            name: "\u7D30\u5DDD\u30AC\u30E9\u30B7\u30E3",
+            image: "",
+            level: 34,
+            stats: {
+              luk: 0,
+              hp: 4300,
+              atk: 900,
+              def: 160,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 90,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 85.03,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_light",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "4-3/3/1",
+            name: "\u4F0A\u9054\u653F\u5B97",
+            image: "",
+            level: 36,
+            stats: {
+              luk: 0,
+              hp: 34840,
+              atk: 2870,
+              def: 420,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 6,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD022",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 65.35
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P07_wind",
+                type: "P07",
+                name: "P07",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_sora_01",
+          amount: 8
+        },
+        {
+          kind: "soul",
+          id: "char_leo_01",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 1600
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 5
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 3
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_sora_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_leo_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.01
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 5e-3
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_sora_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_leo_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        }
+      ],
+      ticketChance: 0.02,
+      playerExp: 48,
+      encounterChance: 0.04
+    },
+    {
+      id: "omi-4",
+      designId: "4-4",
+      areaId: "omi",
+      index: 4,
+      name: "\u5927\u304D\u306A\u4E00\u6483\u306B\u5099\u3048\u308B",
+      description: "\u5927\u304D\u306A\u4E00\u6483\u306B\u5099\u3048\u308B",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "4-4/1/1",
+            name: "\u5317\u6761\u6C0F\u5EB7",
+            image: "",
+            level: 36,
+            stats: {
+              luk: 0,
+              hp: 31640,
+              atk: 1020,
+              def: 500,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 3,
+            initialCount: 6,
+            initialSp: 30,
+            skills: [],
+            passives: [
+              {
+                id: "P15_earth",
+                type: "P15",
+                name: "P15",
+                stat: "def",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "4-4/1/2",
+            name: "\u5C71\u4F0F",
+            image: "",
+            level: 35,
+            stats: {
+              luk: 0,
+              hp: 4200,
+              atk: 550,
+              def: 200,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD036",
+                name: "\u5B88\u308A\u306E\u9663",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 17.01,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          }
+        ],
+        [
+          {
+            id: "4-4/2/1",
+            name: "\u4E0A\u6749\u8B19\u4FE1",
+            image: "",
+            level: 38,
+            stats: {
+              luk: 0,
+              hp: 31640,
+              atk: 1020,
+              def: 520,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 3,
+            initialCount: 6,
+            initialSp: 150,
+            skills: [],
+            passives: [
+              {
+                id: "P06_water",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_koharu_01",
+          amount: 2
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 1600
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 5
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 3
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_koharu_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.01
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 5e-3
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_koharu_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        }
+      ],
+      ticketChance: 0.02,
+      playerExp: 48,
+      encounterChance: 0.04
+    },
+    {
+      id: "omi-5",
+      designId: "4-5",
+      areaId: "omi",
+      index: 5,
+      name: "\u5B88\u308A\u3059\u304E\u305A\u306B\u52DD\u3064",
+      description: "\u5B88\u308A\u3059\u304E\u305A\u306B\u52DD\u3064",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "4-5/1/1",
+            name: "\u67F4\u7530\u52DD\u5BB6",
+            image: "",
+            level: 38,
+            stats: {
+              luk: 0,
+              hp: 25620,
+              atk: 1870,
+              def: 420,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 8,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD022",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 65.35
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 14.221321905792035,
+                level: 2,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "4-5/2/1",
+            name: "\u4F0A\u9054\u653F\u5B97",
+            image: "",
+            level: 39,
+            stats: {
+              luk: 0,
+              hp: 31720,
+              atk: 1870,
+              def: 460,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 8,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD022",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 65.35
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P07_wind",
+                type: "P07",
+                name: "P07",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "4-5/3/1",
+            name: "\u4E0A\u6749\u8B19\u4FE1",
+            image: "",
+            level: 40,
+            stats: {
+              luk: 0,
+              hp: 41480,
+              atk: 1870,
+              def: 600,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 8,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD022",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 65.35
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_water",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_noa_01",
+          amount: 14
+        },
+        {
+          kind: "soul",
+          id: "char_koharu_01",
+          amount: 2
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 2
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "unlock_item",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 1600
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 5
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 3
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_noa_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_koharu_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.01
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 5e-3
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_noa_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_koharu_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        }
+      ],
+      ticketChance: 0.02,
+      playerExp: 48,
+      encounterChance: 0.04
+    },
+    {
+      id: "kai-1",
+      designId: "5-1",
+      areaId: "kai",
+      index: 1,
+      name: "\u540C\u5C5E\u6027\u3067\u653B\u3081\u308B",
+      description: "\u540C\u5C5E\u6027\u3067\u653B\u3081\u308B",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "5-1/1/1",
+            name: "\u6B66\u7530\u52DD\u983C",
+            image: "",
+            level: 40,
+            stats: {
+              luk: 0,
+              hp: 7e3,
+              atk: 1100,
+              def: 300,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 130.7
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P14_fire",
+                type: "P14",
+                name: "P14",
+                stat: "atk",
+                percent: 11.851101588160029,
+                level: 2,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "5-1/1/2",
+            name: "\u9244\u7832\u5175",
+            image: "",
+            level: 39,
+            stats: {
+              luk: 0,
+              hp: 4200,
+              atk: 900,
+              def: 150,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 130.7
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: []
+          }
+        ],
+        [
+          {
+            id: "5-1/2/1",
+            name: "\u5CF6\u6D25\u7FA9\u5F18",
+            image: "",
+            level: 41,
+            stats: {
+              luk: 0,
+              hp: 11500,
+              atk: 1400,
+              def: 380,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 130.7
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P14_fire",
+                type: "P14",
+                name: "P14",
+                stat: "atk",
+                percent: 16.591542223424042,
+                level: 2,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "5-1/2/2",
+            name: "\u771F\u7530\u660C\u5E78",
+            image: "",
+            level: 40,
+            stats: {
+              luk: 0,
+              hp: 6500,
+              atk: 1200,
+              def: 260,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD046",
+                name: "\u5B88\u8B77\u306E\u672D",
+                image: "",
+                rarity: "SR",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "shield",
+                    power: 73.69,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P12_fire",
+                type: "P12",
+                name: "P12",
+                stat: "atk",
+                percent: 14.221321905792035,
+                level: 2,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "5-1/3/1",
+            name: "\u7E54\u7530\u4FE1\u9577",
+            image: "",
+            level: 42,
+            stats: {
+              luk: 0,
+              hp: 33e3,
+              atk: 1800,
+              def: 700,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 125,
+            skills: [
+              {
+                id: "SKD035",
+                name: "\u9B28\u306E\u58F0",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "atk_up",
+                    power: 8.94,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 130.7
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P01_fire",
+                type: "P01",
+                name: "P01",
+                stat: "atk",
+                percent: 7.584705016422419,
+                level: 2,
+                target: "party",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "5-1/3/2",
+            name: "\u304A\u5E02\u306E\u65B9",
+            image: "",
+            level: 41,
+            stats: {
+              luk: 0,
+              hp: 6500,
+              atk: 1400,
+              def: 240,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 90,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 85.03,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_fire",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_sakura_01",
+          amount: 2
+        },
+        {
+          kind: "soul",
+          id: "char_reiji_01",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 2e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 7
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 4
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_sakura_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_reiji_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.01
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 5e-3
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_sakura_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_reiji_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        }
+      ],
+      ticketChance: 0.02,
+      playerExp: 60,
+      encounterChance: 0.05
+    },
+    {
+      id: "kai-2",
+      designId: "5-2",
+      areaId: "kai",
+      index: 2,
+      name: "\u540C\u5C5E\u6027\u3067\u5B88\u308B",
+      description: "\u540C\u5C5E\u6027\u3067\u5B88\u308B",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "5-2/1/1",
+            name: "\u4E0A\u6749\u666F\u52DD",
+            image: "",
+            level: 42,
+            stats: {
+              luk: 0,
+              hp: 9500,
+              atk: 900,
+              def: 500,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD036",
+                name: "\u5B88\u308A\u306E\u9663",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 17.01,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_water",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 5.688528762316814,
+                level: 2,
+                target: "party",
+                targetElement: "water"
+              }
+            ]
+          },
+          {
+            id: "5-2/1/2",
+            name: "\u5C0F\u65E9\u5DDD\u9686\u666F",
+            image: "",
+            level: 42,
+            stats: {
+              luk: 0,
+              hp: 7500,
+              atk: 1400,
+              def: 280,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD008",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 130.7
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P03_water",
+                type: "P03",
+                name: "P03",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "5-2/2/1",
+            name: "\u4E95\u4F0A\u76F4\u864E",
+            image: "",
+            level: 43,
+            stats: {
+              luk: 0,
+              hp: 14e3,
+              atk: 1050,
+              def: 580,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 30,
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 17.01,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P11_water",
+                type: "P11",
+                name: "P11",
+                stat: "atk",
+                percent: 14.221321905792035,
+                level: 2,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          },
+          {
+            id: "5-2/2/2",
+            name: "\u76F4\u6C5F\u517C\u7D9A",
+            image: "",
+            level: 43,
+            stats: {
+              luk: 0,
+              hp: 10500,
+              atk: 1450,
+              def: 360,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD008",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 130.7
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P01_water",
+                type: "P01",
+                name: "P01",
+                stat: "atk",
+                percent: 5.688528762316814,
+                level: 2,
+                target: "party",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "5-2/3/1",
+            name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+            image: "",
+            level: 44,
+            stats: {
+              luk: 0,
+              hp: 37e3,
+              atk: 1900,
+              def: 680,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 8,
+            initialCount: 8,
+            initialSp: 80,
+            skills: [
+              {
+                id: "SKD033",
+                name: "\u6C17\u5408",
+                image: "",
+                rarity: "N",
+                element: "fire",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "atk_up",
+                    power: 8.94,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD008",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 130.7
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P16_water",
+                type: "P16",
+                name: "P16",
+                stat: "def",
+                percent: 14.221321905792035,
+                level: 2,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_taiga_01",
+          amount: 4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 2e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 7
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 4
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_taiga_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.01
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 5e-3
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_taiga_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        }
+      ],
+      ticketChance: 0.02,
+      playerExp: 60,
+      encounterChance: 0.05
+    },
+    {
+      id: "kai-3",
+      designId: "5-3",
+      areaId: "kai",
+      index: 3,
+      name: "\u653B\u6483\u5C5E\u6027\u3060\u3051\u3092\u66FF\u3048\u308B",
+      description: "\u653B\u6483\u5C5E\u6027\u3060\u3051\u3092\u66FF\u3048\u308B",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "5-3/1/1",
+            name: "\u67F4\u7530\u52DD\u5BB6",
+            image: "",
+            level: 44,
+            stats: {
+              luk: 0,
+              hp: 12e3,
+              atk: 1300,
+              def: 420,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 14.221321905792035,
+                level: 2,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "5-3/1/2",
+            name: "\u672C\u9858\u5BFA\u9855\u5982",
+            image: "",
+            level: 44,
+            stats: {
+              luk: 0,
+              hp: 7500,
+              atk: 1500,
+              def: 300,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 90,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 85.03,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_earth",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "5-3/2/1",
+            name: "\u5FB3\u5DDD\u5BB6\u5EB7",
+            image: "",
+            level: 45,
+            stats: {
+              luk: 0,
+              hp: 34e3,
+              atk: 1450,
+              def: 1100,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 125,
+            skills: [
+              {
+                id: "SKD036",
+                name: "\u5B88\u308A\u306E\u9663",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 17.01,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD009",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F",
+                image: "",
+                rarity: "R",
+                element: "earth",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 130.7
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_earth",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 11.377057524633628,
+                level: 2,
+                target: "party",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "5-3/2/2",
+            name: "\u524D\u7530\u5229\u5BB6",
+            image: "",
+            level: 45,
+            stats: {
+              luk: 0,
+              hp: 11e3,
+              atk: 1200,
+              def: 400,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_noa_01",
+          amount: 6
+        },
+        {
+          kind: "soul",
+          id: "char_karen_01",
+          amount: 2
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 2e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 7
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 4
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_noa_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_karen_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.01
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 5e-3
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_noa_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_karen_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        }
+      ],
+      ticketChance: 0.02,
+      playerExp: 60,
+      encounterChance: 0.05
+    },
+    {
+      id: "kai-4",
+      designId: "5-4",
+      areaId: "kai",
+      index: 4,
+      name: "\u6DF7\u6210\u306E\u5F37\u307F\u3092\u4F7F\u3046",
+      description: "\u6DF7\u6210\u306E\u5F37\u307F\u3092\u4F7F\u3046",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "5-4/1/1",
+            name: "\u5C71\u672C\u52D8\u52A9",
+            image: "",
+            level: 45,
+            stats: {
+              luk: 0,
+              hp: 9500,
+              atk: 1400,
+              def: 350,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 100,
+            skills: [
+              {
+                id: "SKD037",
+                name: "\u5A01\u5727",
+                image: "",
+                rarity: "R",
+                element: "dark",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "highest_atk_enemy",
+                effects: [
+                  {
+                    type: "atk_down",
+                    power: 11.34,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 130.7
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P08_fire",
+                type: "P08",
+                name: "P08",
+                stat: "atk",
+                percent: 7.110660952896017,
+                level: 2,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "5-4/1/2",
+            name: "\u4E0A\u6749\u666F\u52DD",
+            image: "",
+            level: 45,
+            stats: {
+              luk: 0,
+              hp: 1e4,
+              atk: 1e3,
+              def: 500,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD036",
+                name: "\u5B88\u308A\u306E\u9663",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 17.01,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_water",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 5.688528762316814,
+                level: 2,
+                target: "party",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "5-4/2/1",
+            name: "\u96D1\u8CC0\u5B6B\u5E02",
+            image: "",
+            level: 46,
+            stats: {
+              luk: 0,
+              hp: 14e3,
+              atk: 1550,
+              def: 400,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD010",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 130.7
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_wind",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 7.110660952896017,
+                level: 2,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          },
+          {
+            id: "5-4/2/2",
+            name: "\u524D\u7530\u5229\u5BB6",
+            image: "",
+            level: 46,
+            stats: {
+              luk: 0,
+              hp: 12e3,
+              atk: 1250,
+              def: 460,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "5-4/3/1",
+            name: "\u77F3\u7530\u4E09\u6210",
+            image: "",
+            level: 47,
+            stats: {
+              luk: 0,
+              hp: 17e3,
+              atk: 1150,
+              def: 800,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 30,
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 17.01,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P04_light",
+                type: "P04",
+                name: "P04",
+                stat: "def",
+                percent: 16.591542223424042,
+                level: 2,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          },
+          {
+            id: "5-4/3/2",
+            name: "\u6BDB\u5229\u5143\u5C31",
+            image: "",
+            level: 47,
+            stats: {
+              luk: 0,
+              hp: 18e3,
+              atk: 1650,
+              def: 420,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD010",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 130.7
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P03_wind",
+                type: "P03",
+                name: "P03",
+                stat: "atk",
+                percent: 14.221321905792035,
+                level: 2,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          },
+          {
+            id: "5-4/3/3",
+            name: "\u304A\u5E02\u306E\u65B9",
+            image: "",
+            level: 46,
+            stats: {
+              luk: 0,
+              hp: 7500,
+              atk: 1600,
+              def: 320,
+              sp: 100
+            },
+            order: 2,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 90,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 85.03,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_fire",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_reina_01",
+          amount: 8
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 2e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 7
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 4
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_reina_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.01
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 5e-3
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_reina_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        }
+      ],
+      ticketChance: 0.02,
+      playerExp: 60,
+      encounterChance: 0.05
+    },
+    {
+      id: "kai-5",
+      designId: "5-5",
+      areaId: "kai",
+      index: 5,
+      name: "\u82E6\u624B\u5C5E\u6027\u3092\u8AB0\u304C\u53D7\u3051\u308B\u304B",
+      description: "\u82E6\u624B\u5C5E\u6027\u3092\u8AB0\u304C\u53D7\u3051\u308B\u304B",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "5-5/1/1",
+            name: "\u7ACB\u82B1\u5B97\u8302",
+            image: "",
+            level: 47,
+            stats: {
+              luk: 0,
+              hp: 13e3,
+              atk: 1840,
+              def: 400,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 5,
+            initialCount: 4,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD011",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 130.7
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_light",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 4.740440635264012,
+                level: 2,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          },
+          {
+            id: "5-5/1/2",
+            name: "\u7D30\u5DDD\u30AC\u30E9\u30B7\u30E3",
+            image: "",
+            level: 47,
+            stats: {
+              luk: 0,
+              hp: 8e3,
+              atk: 1500,
+              def: 300,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 90,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 85.03,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_light",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "5-5/2/1",
+            name: "\u7ACB\u82B1\u8ABE\u5343\u4EE3",
+            image: "",
+            level: 48,
+            stats: {
+              luk: 0,
+              hp: 18e3,
+              atk: 1840,
+              def: 480,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 5,
+            initialCount: 4,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD023",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u5149",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 65.35
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P07_light",
+                type: "P07",
+                name: "P07",
+                stat: "atk",
+                percent: 7.110660952896017,
+                level: 2,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          },
+          {
+            id: "5-5/2/2",
+            name: "\u5927\u53CB\u5B97\u9E9F",
+            image: "",
+            level: 48,
+            stats: {
+              luk: 0,
+              hp: 1e4,
+              atk: 1100,
+              def: 400,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD035",
+                name: "\u9B28\u306E\u58F0",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "atk_up",
+                    power: 8.94,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P01_light",
+                type: "P01",
+                name: "P01",
+                stat: "atk",
+                percent: 3.7923525082112093,
+                level: 2,
+                target: "party",
+                targetElement: "light"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "5-5/3/1",
+            name: "\u8C4A\u81E3\u79C0\u5409",
+            image: "",
+            level: 49,
+            stats: {
+              luk: 0,
+              hp: 38e3,
+              atk: 1840,
+              def: 650,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 5,
+            initialCount: 4,
+            initialSp: 140,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 85.03,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD011",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 130.7
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_light",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 18.961762541056046,
+                level: 2,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_sora_01",
+          amount: 10
+        },
+        {
+          kind: "soul",
+          id: "char_ageha_01",
+          amount: 3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 2e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 7
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 4
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_sora_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_ageha_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.01
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 5e-3
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_sora_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_ageha_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        }
+      ],
+      ticketChance: 0.02,
+      playerExp: 60,
+      encounterChance: 0.05
+    },
+    {
+      id: "kai-6",
+      designId: "5-6",
+      areaId: "kai",
+      index: 6,
+      name: "\u4E00\u8272\u306B\u5BC4\u305B\u3059\u304E\u306A\u3044",
+      description: "\u4E00\u8272\u306B\u5BC4\u305B\u3059\u304E\u306A\u3044",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "5-6/1/1",
+            name: "\u5C0F\u677E\u59EB",
+            image: "",
+            level: 49,
+            stats: {
+              luk: 0,
+              hp: 1e4,
+              atk: 1200,
+              def: 500,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD049",
+                name: "\u8FD4\u3057\u5203",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "counter",
+                    power: 49.68,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P13_fire",
+                type: "P13",
+                name: "P13",
+                stat: "atk",
+                percent: 11.851101588160029,
+                level: 2,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "5-6/1/2",
+            name: "\u7532\u6590\u59EB",
+            image: "",
+            level: 49,
+            stats: {
+              luk: 0,
+              hp: 1e4,
+              atk: 1200,
+              def: 500,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD049",
+                name: "\u8FD4\u3057\u5203",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "counter",
+                    power: 49.68,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P13_water",
+                type: "P13",
+                name: "P13",
+                stat: "atk",
+                percent: 11.851101588160029,
+                level: 2,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "5-6/2/1",
+            name: "\u7E54\u7530\u4FE1\u9577",
+            image: "",
+            level: 50,
+            stats: {
+              luk: 0,
+              hp: 32e3,
+              atk: 1850,
+              def: 680,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 125,
+            skills: [
+              {
+                id: "SKD035",
+                name: "\u9B28\u306E\u58F0",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "atk_up",
+                    power: 8.94,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 130.7
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P01_fire",
+                type: "P01",
+                name: "P01",
+                stat: "atk",
+                percent: 7.584705016422419,
+                level: 2,
+                target: "party",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "5-6/3/1",
+            name: "\u4E0A\u6749\u8B19\u4FE1",
+            image: "",
+            level: 50,
+            stats: {
+              luk: 0,
+              hp: 34e3,
+              atk: 2e3,
+              def: 700,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 8,
+            initialCount: 8,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD008",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 130.7
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_water",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "5-6/4/1",
+            name: "\u5FB3\u5DDD\u5BB6\u5EB7",
+            image: "",
+            level: 50,
+            stats: {
+              luk: 0,
+              hp: 36e3,
+              atk: 1600,
+              def: 1050,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 125,
+            skills: [
+              {
+                id: "SKD036",
+                name: "\u5B88\u308A\u306E\u9663",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 17.01,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD009",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F",
+                image: "",
+                rarity: "R",
+                element: "earth",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 130.7
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_earth",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 11.377057524633628,
+                level: 2,
+                target: "party",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_karen_01",
+          amount: 4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 2
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "unlock_item",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 2e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 7
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 4
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_karen_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.01
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 5e-3
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_karen_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        }
+      ],
+      ticketChance: 0.02,
+      playerExp: 60,
+      encounterChance: 0.05
+    },
+    {
+      id: "echigo-1",
+      designId: "6-1",
+      areaId: "echigo",
+      index: 1,
+      name: "\u7D99\u7D9A\u88AB\u5BB3\u3092\u6B62\u3081\u308B",
+      description: "\u7D99\u7D9A\u88AB\u5BB3\u3092\u6B62\u3081\u308B",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "6-1/1/1",
+            name: "\u658E\u85E4\u9053\u4E09",
+            image: "",
+            level: 50,
+            stats: {
+              luk: 0,
+              hp: 17100,
+              atk: 8910,
+              def: 380,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 12,
+            initialCount: 4,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD029",
+                name: "\u6BD2\u5203",
+                image: "",
+                rarity: "R",
+                element: "dark",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 95.91
+                  },
+                  {
+                    type: "dot",
+                    power: 13.18,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P09_dark",
+                type: "P09",
+                name: "P09",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "dark"
+              }
+            ]
+          },
+          {
+            id: "6-1/1/2",
+            name: "\u5CF6\u5DE6\u8FD1",
+            image: "",
+            level: 50,
+            stats: {
+              luk: 0,
+              hp: 11e3,
+              atk: 1400,
+              def: 550,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P16_earth",
+                type: "P16",
+                name: "P16",
+                stat: "def",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "6-1/2/1",
+            name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+            image: "",
+            level: 51,
+            stats: {
+              luk: 0,
+              hp: 27900,
+              atk: 8910,
+              def: 580,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 12,
+            initialCount: 4,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD029",
+                name: "\u6BD2\u5203",
+                image: "",
+                rarity: "R",
+                element: "dark",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 95.91
+                  },
+                  {
+                    type: "dot",
+                    power: 13.18,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P16_water",
+                type: "P16",
+                name: "P16",
+                stat: "def",
+                percent: 14.221321905792035,
+                level: 2,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          },
+          {
+            id: "6-1/2/2",
+            name: "\u5C0F\u65E9\u5DDD\u9686\u666F",
+            image: "",
+            level: 51,
+            stats: {
+              luk: 0,
+              hp: 11e3,
+              atk: 1600,
+              def: 430,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD008",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 137.76
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P03_water",
+                type: "P03",
+                name: "P03",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "6-1/3/1",
+            name: "\u670D\u90E8\u534A\u8535",
+            image: "",
+            level: 52,
+            stats: {
+              luk: 0,
+              hp: 64800,
+              atk: 8910,
+              def: 650,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 12,
+            initialCount: 4,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD029",
+                name: "\u6BD2\u5203",
+                image: "",
+                rarity: "R",
+                element: "dark",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 95.91
+                  },
+                  {
+                    type: "dot",
+                    power: 13.18,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P09_dark",
+                type: "P09",
+                name: "P09",
+                stat: "atk",
+                percent: 14.221321905792035,
+                level: 2,
+                target: "self",
+                targetElement: "dark"
+              }
+            ]
+          },
+          {
+            id: "6-1/3/2",
+            name: "\u7247\u5009\u666F\u7DB1",
+            image: "",
+            level: 51,
+            stats: {
+              luk: 0,
+              hp: 9e3,
+              atk: 1650,
+              def: 350,
+              sp: 110
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 110,
+            skills: [
+              {
+                id: "SKD058",
+                name: "\u8755\u307F\u306E\u9663",
+                image: "",
+                rarity: "SR",
+                element: "dark",
+                spCost: 110,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "dot",
+                    power: 14.89,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P12_wind",
+                type: "P12",
+                name: "P12",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_maya_01",
+          amount: 2
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 2500
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 6
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_maya_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.01
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 5e-3
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_maya_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        }
+      ],
+      ticketChance: 0.02,
+      playerExp: 72,
+      encounterChance: 0.06
+    },
+    {
+      id: "echigo-2",
+      designId: "6-2",
+      areaId: "echigo",
+      index: 2,
+      name: "\u843D\u3068\u3055\u308C\u305F\u80FD\u529B\u3092\u623B\u3059",
+      description: "\u843D\u3068\u3055\u308C\u305F\u80FD\u529B\u3092\u623B\u3059",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "6-2/1/1",
+            name: "\u9ED2\u7530\u5B98\u5175\u885B",
+            image: "",
+            level: 52,
+            stats: {
+              luk: 0,
+              hp: 14630,
+              atk: 2280,
+              def: 4390,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 9,
+            initialCount: 2,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD037",
+                name: "\u5A01\u5727",
+                image: "",
+                rarity: "R",
+                element: "dark",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "highest_atk_enemy",
+                effects: [
+                  {
+                    type: "atk_down",
+                    power: 13.18,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P08_dark",
+                type: "P08",
+                name: "P08",
+                stat: "atk",
+                percent: 10.428969397580826,
+                level: 2,
+                target: "self",
+                targetElement: "dark"
+              }
+            ]
+          },
+          {
+            id: "6-2/1/2",
+            name: "\u5C71\u672C\u52D8\u52A9",
+            image: "",
+            level: 52,
+            stats: {
+              luk: 0,
+              hp: 4750,
+              atk: 1500,
+              def: 400,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 4,
+            initialCount: 4,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD037",
+                name: "\u5A01\u5727",
+                image: "",
+                rarity: "R",
+                element: "dark",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "highest_atk_enemy",
+                effects: [
+                  {
+                    type: "atk_down",
+                    power: 12.22,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P08_fire",
+                type: "P08",
+                name: "P08",
+                stat: "atk",
+                percent: 7.110660952896017,
+                level: 2,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "6-2/2/1",
+            name: "\u4E0A\u6749\u666F\u52DD",
+            image: "",
+            level: 52,
+            stats: {
+              luk: 0,
+              hp: 14630,
+              atk: 2280,
+              def: 4390,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 9,
+            initialCount: 2,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD037",
+                name: "\u5A01\u5727",
+                image: "",
+                rarity: "R",
+                element: "dark",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "highest_atk_enemy",
+                effects: [
+                  {
+                    type: "atk_down",
+                    power: 13.18,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_water",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 5.688528762316814,
+                level: 2,
+                target: "party",
+                targetElement: "water"
+              }
+            ]
+          },
+          {
+            id: "6-2/2/2",
+            name: "\u67F4\u7530\u52DD\u5BB6",
+            image: "",
+            level: 53,
+            stats: {
+              luk: 0,
+              hp: 6500,
+              atk: 1650,
+              def: 450,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 14.221321905792035,
+                level: 2,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "6-2/3/1",
+            name: "\u5927\u53CB\u5B97\u9E9F",
+            image: "",
+            level: 53,
+            stats: {
+              luk: 0,
+              hp: 14630,
+              atk: 2280,
+              def: 4390,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 9,
+            initialCount: 2,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD037",
+                name: "\u5A01\u5727",
+                image: "",
+                rarity: "R",
+                element: "dark",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "highest_atk_enemy",
+                effects: [
+                  {
+                    type: "atk_down",
+                    power: 13.18,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P01_light",
+                type: "P01",
+                name: "P01",
+                stat: "atk",
+                percent: 3.7923525082112093,
+                level: 2,
+                target: "party",
+                targetElement: "light"
+              }
+            ]
+          },
+          {
+            id: "6-2/3/2",
+            name: "\u7ACB\u82B1\u5B97\u8302",
+            image: "",
+            level: 53,
+            stats: {
+              luk: 0,
+              hp: 8e3,
+              atk: 2e3,
+              def: 450,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD011",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 137.76
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_light",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 4.740440635264012,
+                level: 2,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "6-2/4/1",
+            name: "\u5C71\u672C\u52D8\u52A9",
+            image: "",
+            level: 54,
+            stats: {
+              luk: 0,
+              hp: 14630,
+              atk: 2280,
+              def: 4390,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 9,
+            initialCount: 2,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD037",
+                name: "\u5A01\u5727",
+                image: "",
+                rarity: "R",
+                element: "dark",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "highest_atk_enemy",
+                effects: [
+                  {
+                    type: "atk_down",
+                    power: 13.18,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P08_fire",
+                type: "P08",
+                name: "P08",
+                stat: "atk",
+                percent: 7.110660952896017,
+                level: 2,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "6-2/4/2",
+            name: "\u9ED2\u7530\u5B98\u5175\u885B",
+            image: "",
+            level: 54,
+            stats: {
+              luk: 0,
+              hp: 15e3,
+              atk: 2300,
+              def: 650,
+              sp: 150
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 8,
+            initialCount: 8,
+            initialSp: 100,
+            skills: [
+              {
+                id: "SKD028",
+                name: "\u5D29\u3057\u8A0E\u3061",
+                image: "",
+                rarity: "SR",
+                element: "earth",
+                spCost: 100,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 125.54,
+                    bonusCondition: "debuff",
+                    bonusPower: 164.42,
+                    hpThreshold: 0.4
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P08_dark",
+                type: "P08",
+                name: "P08",
+                stat: "atk",
+                percent: 10.428969397580826,
+                level: 2,
+                target: "self",
+                targetElement: "dark"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_tetsu_01",
+          amount: 3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 2500
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 6
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_tetsu_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.01
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 5e-3
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_tetsu_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        }
+      ],
+      ticketChance: 0.02,
+      playerExp: 72,
+      encounterChance: 0.06
+    },
+    {
+      id: "echigo-3",
+      designId: "6-3",
+      areaId: "echigo",
+      index: 3,
+      name: "\u6B62\u307E\u3063\u305F\u5F79\u5272\u3092\u88DC\u3046",
+      description: "\u6B62\u307E\u3063\u305F\u5F79\u5272\u3092\u88DC\u3046",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "6-3/1/1",
+            name: "\u7AF9\u4E2D\u534A\u5175\u885B",
+            image: "",
+            level: 54,
+            stats: {
+              luk: 0,
+              hp: 16e3,
+              atk: 1450,
+              def: 600,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 6,
+            initialCount: 3,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD032",
+                name: "\u5F71\u7E2B\u3044",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "stun",
+                    power: 0,
+                    chance: 0.3944,
+                    duration: 1
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P04_light",
+                type: "P04",
+                name: "P04",
+                stat: "def",
+                percent: 11.851101588160029,
+                level: 2,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          },
+          {
+            id: "6-3/1/2",
+            name: "\u96D1\u8CC0\u5B6B\u5E02",
+            image: "",
+            level: 54,
+            stats: {
+              luk: 0,
+              hp: 15e3,
+              atk: 1850,
+              def: 460,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD010",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 137.76
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_wind",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 7.110660952896017,
+                level: 2,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "6-3/2/1",
+            name: "\u771F\u7530\u660C\u5E78",
+            image: "",
+            level: 55,
+            stats: {
+              luk: 0,
+              hp: 34e3,
+              atk: 2100,
+              def: 700,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 7,
+            initialCount: 3,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD032",
+                name: "\u5F71\u7E2B\u3044",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "stun",
+                    power: 0,
+                    chance: 0.3944,
+                    duration: 1
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P12_fire",
+                type: "P12",
+                name: "P12",
+                stat: "atk",
+                percent: 14.221321905792035,
+                level: 2,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "6-3/2/2",
+            name: "\u7532\u6590\u59EB",
+            image: "",
+            level: 55,
+            stats: {
+              luk: 0,
+              hp: 14e3,
+              atk: 1600,
+              def: 650,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P13_water",
+                type: "P13",
+                name: "P13",
+                stat: "atk",
+                percent: 11.851101588160029,
+                level: 2,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          },
+          {
+            id: "6-3/2/3",
+            name: "\u7D30\u5DDD\u30AC\u30E9\u30B7\u30E3",
+            image: "",
+            level: 54,
+            stats: {
+              luk: 0,
+              hp: 1e4,
+              atk: 1750,
+              def: 380,
+              sp: 100
+            },
+            order: 2,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 90,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 91.65,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_light",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_sakura_01",
+          amount: 5
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 2500
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 6
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_sakura_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.01
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 5e-3
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_sakura_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        }
+      ],
+      ticketChance: 0.02,
+      playerExp: 72,
+      encounterChance: 0.06
+    },
+    {
+      id: "echigo-4",
+      designId: "6-4",
+      areaId: "echigo",
+      index: 4,
+      name: "\u6575\u306E\u4E00\u624B\u3092\u9045\u3089\u305B\u308B",
+      description: "\u6575\u306E\u4E00\u624B\u3092\u9045\u3089\u305B\u308B",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "6-4/1/1",
+            name: "\u771F\u7530\u5E78\u6751",
+            image: "",
+            level: 56,
+            stats: {
+              luk: 0,
+              hp: 34130,
+              atk: 8320,
+              def: 600,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 12,
+            initialCount: 7,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD023",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u5149",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 72.72
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P14_fire",
+                type: "P14",
+                name: "P14",
+                stat: "atk",
+                percent: 21.33198285868805,
+                level: 2,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "6-4/2/1",
+            name: "\u4ECA\u5DDD\u7FA9\u5143",
+            image: "",
+            level: 55,
+            stats: {
+              luk: 0,
+              hp: 34130,
+              atk: 8320,
+              def: 650,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 12,
+            initialCount: 7,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD023",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u5149",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 72.72
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_wind",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 8.53279314347522,
+                level: 2,
+                target: "party",
+                targetElement: "wind"
+              }
+            ]
+          },
+          {
+            id: "6-4/2/2",
+            name: "\u4E95\u4F0A\u76F4\u864E",
+            image: "",
+            level: 55,
+            stats: {
+              luk: 0,
+              hp: 16e3,
+              atk: 1500,
+              def: 600,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P11_water",
+                type: "P11",
+                name: "P11",
+                stat: "atk",
+                percent: 14.221321905792035,
+                level: 2,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "6-4/3/1",
+            name: "\u771F\u7530\u5E78\u6751",
+            image: "",
+            level: 57,
+            stats: {
+              luk: 0,
+              hp: 34130,
+              atk: 8320,
+              def: 650,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 12,
+            initialCount: 7,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD023",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u5149",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 72.72
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P14_fire",
+                type: "P14",
+                name: "P14",
+                stat: "atk",
+                percent: 21.33198285868805,
+                level: 2,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "6-4/3/2",
+            name: "\u672C\u9858\u5BFA\u9855\u5982",
+            image: "",
+            level: 56,
+            stats: {
+              luk: 0,
+              hp: 11e3,
+              atk: 1900,
+              def: 400,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 90,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 91.65,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_earth",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_cecile_01",
+          amount: 7
+        },
+        {
+          kind: "soul",
+          id: "char_kaede_01",
+          amount: 4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 2500
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 6
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_cecile_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_kaede_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.01
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 5e-3
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_cecile_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_kaede_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        }
+      ],
+      ticketChance: 0.02,
+      playerExp: 72,
+      encounterChance: 0.06
+    },
+    {
+      id: "echigo-5",
+      designId: "6-5",
+      areaId: "echigo",
+      index: 5,
+      name: "\u72B6\u614B\u4ED8\u4E0E\u3068\u653B\u6483\u3092\u5206\u62C5\u3059\u308B",
+      description: "\u72B6\u614B\u4ED8\u4E0E\u3068\u653B\u6483\u3092\u5206\u62C5\u3059\u308B",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "6-5/1/1",
+            name: "\u6FC3\u59EB",
+            image: "",
+            level: 56,
+            stats: {
+              luk: 0,
+              hp: 17e3,
+              atk: 1750,
+              def: 550,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD046",
+                name: "\u5B88\u8B77\u306E\u672D",
+                image: "",
+                rarity: "SR",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "shield",
+                    power: 79.43,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P12_dark",
+                type: "P12",
+                name: "P12",
+                stat: "atk",
+                percent: 14.221321905792035,
+                level: 2,
+                target: "self",
+                targetElement: "dark"
+              }
+            ]
+          },
+          {
+            id: "6-5/1/2",
+            name: "\u5C0F\u65E9\u5DDD\u9686\u666F",
+            image: "",
+            level: 56,
+            stats: {
+              luk: 0,
+              hp: 13e3,
+              atk: 1700,
+              def: 430,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD008",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 137.76
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P03_water",
+                type: "P03",
+                name: "P03",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "6-5/2/1",
+            name: "\u77F3\u7530\u4E09\u6210",
+            image: "",
+            level: 57,
+            stats: {
+              luk: 0,
+              hp: 21e3,
+              atk: 1650,
+              def: 800,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 30,
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 18.33,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P04_light",
+                type: "P04",
+                name: "P04",
+                stat: "def",
+                percent: 16.591542223424042,
+                level: 2,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          },
+          {
+            id: "6-5/2/2",
+            name: "\u5CF6\u6D25\u7FA9\u4E45",
+            image: "",
+            level: 57,
+            stats: {
+              luk: 0,
+              hp: 13e3,
+              atk: 1550,
+              def: 500,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 40,
+            skills: [
+              {
+                id: "SKD054",
+                name: "\u6D44\u6BD2",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 39,
+                condition: {
+                  type: "always"
+                },
+                target: "first_ally",
+                effects: [
+                  {
+                    type: "cleanse",
+                    power: 1,
+                    cleanseCategory: "dot"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_fire",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 5.688528762316814,
+                level: 2,
+                target: "party",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "6-5/2/3",
+            name: "\u6BDB\u5229\u5143\u5C31",
+            image: "",
+            level: 57,
+            stats: {
+              luk: 0,
+              hp: 17e3,
+              atk: 2e3,
+              def: 460,
+              sp: 100
+            },
+            order: 2,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD010",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 137.76
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P03_wind",
+                type: "P03",
+                name: "P03",
+                stat: "atk",
+                percent: 14.221321905792035,
+                level: 2,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "6-5/3/1",
+            name: "\u5317\u6761\u6C0F\u5EB7",
+            image: "",
+            level: 57,
+            stats: {
+              luk: 0,
+              hp: 19e3,
+              atk: 1550,
+              def: 850,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 30,
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 18.33,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P15_earth",
+                type: "P15",
+                name: "P15",
+                stat: "def",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "6-5/3/2",
+            name: "\u4E0A\u6749\u666F\u52DD",
+            image: "",
+            level: 57,
+            stats: {
+              luk: 0,
+              hp: 14e3,
+              atk: 1500,
+              def: 550,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 40,
+            skills: [
+              {
+                id: "SKD053",
+                name: "\u596E\u8D77",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 39,
+                condition: {
+                  type: "always"
+                },
+                target: "first_ally",
+                effects: [
+                  {
+                    type: "cleanse",
+                    power: 1,
+                    cleanseCategory: "debuff"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_water",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 5.688528762316814,
+                level: 2,
+                target: "party",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "6-5/4/1",
+            name: "\u660E\u667A\u5149\u79C0",
+            image: "",
+            level: 58,
+            stats: {
+              luk: 0,
+              hp: 11970,
+              atk: 1960,
+              def: 5670,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 3,
+            initialCount: 3,
+            initialSp: 100,
+            skills: [
+              {
+                id: "SKD028",
+                name: "\u5D29\u3057\u8A0E\u3061",
+                image: "",
+                rarity: "SR",
+                element: "earth",
+                spCost: 100,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 132.27,
+                    bonusCondition: "debuff",
+                    bonusPower: 174.99,
+                    hpThreshold: 0.4
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P08_dark",
+                type: "P08",
+                name: "P08",
+                stat: "atk",
+                percent: 14.221321905792035,
+                level: 2,
+                target: "self",
+                targetElement: "dark"
+              }
+            ]
+          },
+          {
+            id: "6-5/4/2",
+            name: "\u5C71\u672C\u52D8\u52A9",
+            image: "",
+            level: 57,
+            stats: {
+              luk: 0,
+              hp: 12500,
+              atk: 1650,
+              def: 420,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD038",
+                name: "\u93A7\u7815\u304D",
+                image: "",
+                rarity: "R",
+                element: "earth",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "def_down",
+                    power: 14.89,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P08_fire",
+                type: "P08",
+                name: "P08",
+                stat: "atk",
+                percent: 7.110660952896017,
+                level: 2,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_reina_01",
+          amount: 8
+        },
+        {
+          kind: "soul",
+          id: "char_miyabi_01",
+          amount: 5
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 2500
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 6
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_reina_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_miyabi_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.01
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 5e-3
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_reina_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_miyabi_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        }
+      ],
+      ticketChance: 0.02,
+      playerExp: 72,
+      encounterChance: 0.06
+    },
+    {
+      id: "echigo-6",
+      designId: "6-6",
+      areaId: "echigo",
+      index: 6,
+      name: "\u5BFE\u7B56\u67A0\u3092\u9078\u3076",
+      description: "\u5BFE\u7B56\u67A0\u3092\u9078\u3076",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "6-6/1/1",
+            name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+            image: "",
+            level: 58,
+            stats: {
+              luk: 0,
+              hp: 22480,
+              atk: 7010,
+              def: 600,
+              sp: 110
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 9,
+            initialCount: 4,
+            initialSp: 110,
+            skills: [
+              {
+                id: "SKD058",
+                name: "\u8755\u307F\u306E\u9663",
+                image: "",
+                rarity: "SR",
+                element: "dark",
+                spCost: 110,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "dot",
+                    power: 16.14,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P16_water",
+                type: "P16",
+                name: "P16",
+                stat: "def",
+                percent: 14.221321905792035,
+                level: 2,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          },
+          {
+            id: "6-6/1/2",
+            name: "\u6D45\u4E95\u9577\u653F",
+            image: "",
+            level: 58,
+            stats: {
+              luk: 0,
+              hp: 16e3,
+              atk: 2325,
+              def: 620,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 6,
+            initialCount: 5,
+            initialSp: 100,
+            skills: [
+              {
+                id: "SKD030",
+                name: "\u8755\u307F\u8A0E\u3061",
+                image: "",
+                rarity: "SR",
+                element: "dark",
+                spCost: 100,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 125.54,
+                    bonusCondition: "dot",
+                    bonusPower: 170.53,
+                    hpThreshold: 0.4
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P11_wind",
+                type: "P11",
+                name: "P11",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "6-6/2/1",
+            name: "\u5927\u53CB\u5B97\u9E9F",
+            image: "",
+            level: 58,
+            stats: {
+              luk: 0,
+              hp: 14e3,
+              atk: 1600,
+              def: 430,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 6,
+            initialCount: 3,
+            initialSp: 100,
+            skills: [
+              {
+                id: "SKD064",
+                name: "\u5A01\u5727\u306E\u9663",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 100,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "atk_down",
+                    power: 12.22,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P01_light",
+                type: "P01",
+                name: "P01",
+                stat: "atk",
+                percent: 3.7923525082112093,
+                level: 2,
+                target: "party",
+                targetElement: "light"
+              }
+            ]
+          },
+          {
+            id: "6-6/2/2",
+            name: "\u67F4\u7530\u52DD\u5BB6",
+            image: "",
+            level: 58,
+            stats: {
+              luk: 0,
+              hp: 18e3,
+              atk: 1800,
+              def: 520,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 14.221321905792035,
+                level: 2,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "6-6/3/1",
+            name: "\u7AF9\u4E2D\u534A\u5175\u885B",
+            image: "",
+            level: 59,
+            stats: {
+              luk: 0,
+              hp: 15e3,
+              atk: 1500,
+              def: 700,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 6,
+            initialCount: 3,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD032",
+                name: "\u5F71\u7E2B\u3044",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "stun",
+                    power: 0,
+                    chance: 0.3944,
+                    duration: 1
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P04_light",
+                type: "P04",
+                name: "P04",
+                stat: "def",
+                percent: 11.851101588160029,
+                level: 2,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          },
+          {
+            id: "6-6/3/2",
+            name: "\u96D1\u8CC0\u5B6B\u5E02",
+            image: "",
+            level: 59,
+            stats: {
+              luk: 0,
+              hp: 17e3,
+              atk: 2050,
+              def: 480,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD010",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 137.76
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_wind",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 7.110660952896017,
+                level: 2,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "6-6/4/1",
+            name: "\u4E95\u4F0A\u76F4\u864E",
+            image: "",
+            level: 59,
+            stats: {
+              luk: 0,
+              hp: 22e3,
+              atk: 1750,
+              def: 800,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P11_water",
+                type: "P11",
+                name: "P11",
+                stat: "atk",
+                percent: 14.221321905792035,
+                level: 2,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          },
+          {
+            id: "6-6/4/2",
+            name: "\u672C\u9858\u5BFA\u9855\u5982",
+            image: "",
+            level: 59,
+            stats: {
+              luk: 0,
+              hp: 14e3,
+              atk: 1900,
+              def: 450,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 90,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 91.65,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_earth",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 9.480881270528023,
+                level: 2,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "6-6/5/1",
+            name: "\u6B66\u7530\u4FE1\u7384",
+            image: "",
+            level: 60,
+            stats: {
+              luk: 0,
+              hp: 45e3,
+              atk: 4050,
+              def: 850,
+              sp: 130
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 8,
+            initialCount: 8,
+            initialSp: 130,
+            skills: [
+              {
+                id: "SKD033",
+                name: "\u6C17\u5408",
+                image: "",
+                rarity: "N",
+                element: "fire",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "atk_up",
+                    power: 10.23,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD030",
+                name: "\u8755\u307F\u8A0E\u3061",
+                image: "",
+                rarity: "SR",
+                element: "dark",
+                spCost: 100,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 132.27,
+                    bonusCondition: "dot",
+                    bonusPower: 181.58,
+                    hpThreshold: 0.4
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P16_fire",
+                type: "P16",
+                name: "P16",
+                stat: "def",
+                percent: 18.961762541056046,
+                level: 2,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "6-6/5/2",
+            name: "\u6FC3\u59EB",
+            image: "",
+            level: 59,
+            stats: {
+              luk: 0,
+              hp: 19670,
+              atk: 7010,
+              def: 480,
+              sp: 110
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 9,
+            initialCount: 4,
+            initialSp: 110,
+            skills: [
+              {
+                id: "SKD058",
+                name: "\u8755\u307F\u306E\u9663",
+                image: "",
+                rarity: "SR",
+                element: "dark",
+                spCost: 110,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "dot",
+                    power: 16.14,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P12_dark",
+                type: "P12",
+                name: "P12",
+                stat: "atk",
+                percent: 14.221321905792035,
+                level: 2,
+                target: "self",
+                targetElement: "dark"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_riki_01",
+          amount: 10
+        },
+        {
+          kind: "soul",
+          id: "char_go_01",
+          amount: 6
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 2
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "unlock_item",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 2500
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 6
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_riki_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_go_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 5e-3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.01
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 5e-3
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_riki_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.15,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_go_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.05,
+          period: 50
+        }
+      ],
+      ticketChance: 0.02,
+      playerExp: 72,
+      encounterChance: 0.06
+    },
+    {
+      id: "kyoto-1",
+      designId: "7-1",
+      areaId: "kyoto",
+      index: 1,
+      name: "\u5F37\u5316\u3055\u308C\u305F\u653B\u6483\u3092\u5D29\u3059",
+      description: "\u5F37\u5316\u3055\u308C\u305F\u653B\u6483\u3092\u5D29\u3059",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "7-1/1/1",
+            name: "\u5CF6\u5DE6\u8FD1",
+            image: "",
+            level: 60,
+            stats: {
+              luk: 0,
+              hp: 16800,
+              atk: 5080,
+              def: 450,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 8,
+            initialCount: 3,
+            initialSp: 80,
+            skills: [
+              {
+                id: "SKD033",
+                name: "\u6C17\u5408",
+                image: "",
+                rarity: "N",
+                element: "fire",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "atk_up",
+                    power: 11.7,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P16_earth",
+                type: "P16",
+                name: "P16",
+                stat: "def",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "7-1/1/2",
+            name: "\u5927\u53CB\u5B97\u9E9F",
+            image: "",
+            level: 60,
+            stats: {
+              luk: 0,
+              hp: 1e4,
+              atk: 2100,
+              def: 400,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 4,
+            initialCount: 4,
+            initialSp: 45,
+            skills: [
+              {
+                id: "SKD061",
+                name: "\u596E\u6226\u306E\u6A84",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 45,
+                condition: {
+                  type: "always"
+                },
+                target: "highest_atk_ally",
+                effects: [
+                  {
+                    type: "atk_up",
+                    power: 13.18,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P01_light",
+                type: "P01",
+                name: "P01",
+                stat: "atk",
+                percent: 4.6585429624301575,
+                level: 4,
+                target: "party",
+                targetElement: "light"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "7-1/2/1",
+            name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+            image: "",
+            level: 60,
+            stats: {
+              luk: 0,
+              hp: 56e3,
+              atk: 5080,
+              def: 1e3,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 8,
+            initialCount: 3,
+            initialSp: 80,
+            skills: [
+              {
+                id: "SKD033",
+                name: "\u6C17\u5408",
+                image: "",
+                rarity: "N",
+                element: "fire",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "atk_up",
+                    power: 11.7,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P16_water",
+                type: "P16",
+                name: "P16",
+                stat: "def",
+                percent: 17.46953610911309,
+                level: 4,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "7-1/3/1",
+            name: "\u771F\u7530\u5E78\u6751",
+            image: "",
+            level: 60,
+            stats: {
+              luk: 0,
+              hp: 56e3,
+              atk: 5080,
+              def: 1e3,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 8,
+            initialCount: 3,
+            initialSp: 80,
+            skills: [
+              {
+                id: "SKD033",
+                name: "\u6C17\u5408",
+                image: "",
+                rarity: "N",
+                element: "fire",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "atk_up",
+                    power: 11.7,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P14_fire",
+                type: "P14",
+                name: "P14",
+                stat: "atk",
+                percent: 26.204304163669637,
+                level: 4,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "7-1/3/2",
+            name: "\u7E54\u7530\u4FE1\u9577",
+            image: "",
+            level: 60,
+            stats: {
+              luk: 0,
+              hp: 1e4,
+              atk: 2100,
+              def: 400,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 4,
+            initialCount: 4,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD035",
+                name: "\u9B28\u306E\u58F0",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "atk_up",
+                    power: 10.23,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P01_fire",
+                type: "P01",
+                name: "P01",
+                stat: "atk",
+                percent: 9.317085924860315,
+                level: 4,
+                target: "party",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_taiga_01",
+          amount: 1
+        },
+        {
+          kind: "soul",
+          id: "char_reiji_01",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 3e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 5
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 9
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_taiga_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_reiji_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_taiga_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_reiji_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 90,
+      encounterChance: 0.07
+    },
+    {
+      id: "kyoto-2",
+      designId: "7-2",
+      areaId: "kyoto",
+      index: 2,
+      name: "\u56FA\u3081\u305F\u5B88\u308A\u3092\u5D29\u3059",
+      description: "\u56FA\u3081\u305F\u5B88\u308A\u3092\u5D29\u3059",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "7-2/1/1",
+            name: "\u5317\u6761\u6C0F\u5EB7",
+            image: "",
+            level: 62,
+            stats: {
+              luk: 0,
+              hp: 12312,
+              atk: 1940,
+              def: 4e3,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 30,
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 19.77,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P15_earth",
+                type: "P15",
+                name: "P15",
+                stat: "def",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "7-2/1/2",
+            name: "\u4ECA\u5DDD\u7FA9\u5143",
+            image: "",
+            level: 62,
+            stats: {
+              luk: 0,
+              hp: 10800,
+              atk: 2270,
+              def: 430,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD036",
+                name: "\u5B88\u308A\u306E\u9663",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 19.77,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_wind",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 10.481721665467855,
+                level: 4,
+                target: "party",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "7-2/2/1",
+            name: "\u4E0A\u6749\u666F\u52DD",
+            image: "",
+            level: 62,
+            stats: {
+              luk: 0,
+              hp: 12312,
+              atk: 1940,
+              def: 4e3,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD036",
+                name: "\u5B88\u308A\u306E\u9663",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 19.77,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_water",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 6.987814443645236,
+                level: 4,
+                target: "party",
+                targetElement: "water"
+              }
+            ]
+          },
+          {
+            id: "7-2/2/2",
+            name: "\u524D\u7530\u5229\u5BB6",
+            image: "",
+            level: 62,
+            stats: {
+              luk: 0,
+              hp: 12960,
+              atk: 2480,
+              def: 490,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "7-2/3/1",
+            name: "\u5FB3\u5DDD\u5BB6\u5EB7",
+            image: "",
+            level: 62,
+            stats: {
+              luk: 0,
+              hp: 25920,
+              atk: 3350,
+              def: 4e3,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 8,
+            initialCount: 8,
+            initialSp: 125,
+            skills: [
+              {
+                id: "SKD036",
+                name: "\u5B88\u308A\u306E\u9663",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 19.77,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD009",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F",
+                image: "",
+                rarity: "R",
+                element: "earth",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 145.45
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_earth",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 13.975628887290473,
+                level: 4,
+                target: "party",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_genji_01",
+          amount: 2
+        },
+        {
+          kind: "soul",
+          id: "char_karen_01",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 3e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 5
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 9
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_genji_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_karen_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_genji_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_karen_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 90,
+      encounterChance: 0.07
+    },
+    {
+      id: "kyoto-3",
+      designId: "7-3",
+      areaId: "kyoto",
+      index: 3,
+      name: "\u969C\u58C1\u3092\u53D6\u308A\u9664\u304F",
+      description: "\u969C\u58C1\u3092\u53D6\u308A\u9664\u304F",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "7-3/1/1",
+            name: "\u6FC3\u59EB",
+            image: "",
+            level: 63,
+            stats: {
+              luk: 0,
+              hp: 44800,
+              atk: 18e3,
+              def: 1120,
+              sp: 110
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 8,
+            initialCount: 3,
+            initialSp: 55,
+            skills: [
+              {
+                id: "SKD045",
+                name: "\u8B77\u8EAB\u969C\u58C1",
+                image: "",
+                rarity: "R",
+                element: "earth",
+                spCost: 55,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "shield",
+                    power: 65.91,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P12_dark",
+                type: "P12",
+                name: "P12",
+                stat: "atk",
+                percent: 17.46953610911309,
+                level: 4,
+                target: "self",
+                targetElement: "dark"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "7-3/2/1",
+            name: "\u52A0\u85E4\u6E05\u6B63",
+            image: "",
+            level: 63,
+            stats: {
+              luk: 0,
+              hp: 44800,
+              atk: 3470,
+              def: 1120,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 8,
+            initialCount: 8,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 19.77,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P15_earth",
+                type: "P15",
+                name: "P15",
+                stat: "def",
+                percent: 17.46953610911309,
+                level: 4,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "7-3/2/2",
+            name: "\u771F\u7530\u660C\u5E78",
+            image: "",
+            level: 63,
+            stats: {
+              luk: 0,
+              hp: 13440,
+              atk: 18e3,
+              def: 560,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 8,
+            initialCount: 3,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD046",
+                name: "\u5B88\u8B77\u306E\u672D",
+                image: "",
+                rarity: "SR",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "shield",
+                    power: 85.68,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P12_fire",
+                type: "P12",
+                name: "P12",
+                stat: "atk",
+                percent: 17.46953610911309,
+                level: 4,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_sakura_01",
+          amount: 3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 3e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 5
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 9
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_sakura_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_sakura_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 90,
+      encounterChance: 0.07
+    },
+    {
+      id: "kyoto-4",
+      designId: "7-4",
+      areaId: "kyoto",
+      index: 4,
+      name: "\u56DE\u5FA9\u6E90\u3092\u65AD\u3064",
+      description: "\u56DE\u5FA9\u6E90\u3092\u65AD\u3064",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "7-4/1/1",
+            name: "\u6D45\u4E95\u9577\u653F",
+            image: "",
+            level: 64,
+            stats: {
+              luk: 0,
+              hp: 22040,
+              atk: 2090,
+              def: 1040,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P11_wind",
+                type: "P11",
+                name: "P11",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          },
+          {
+            id: "7-4/1/2",
+            name: "\u7D30\u5DDD\u30AC\u30E9\u30B7\u30E3",
+            image: "",
+            level: 64,
+            stats: {
+              luk: 0,
+              hp: 12760,
+              atk: 12e3,
+              def: 520,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 7,
+            initialCount: 3,
+            initialSp: 90,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 98.86,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_light",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "7-4/2/1",
+            name: "\u4E95\u4F0A\u76F4\u864E",
+            image: "",
+            level: 64,
+            stats: {
+              luk: 0,
+              hp: 22040,
+              atk: 2090,
+              def: 1040,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P11_water",
+                type: "P11",
+                name: "P11",
+                stat: "atk",
+                percent: 17.46953610911309,
+                level: 4,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          },
+          {
+            id: "7-4/2/2",
+            name: "\u304A\u5E02\u306E\u65B9",
+            image: "",
+            level: 64,
+            stats: {
+              luk: 0,
+              hp: 12760,
+              atk: 12e3,
+              def: 520,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 7,
+            initialCount: 3,
+            initialSp: 90,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 98.86,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_fire",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "7-4/3/1",
+            name: "\u672C\u591A\u5FE0\u52DD",
+            image: "",
+            level: 64,
+            stats: {
+              luk: 0,
+              hp: 46400,
+              atk: 3600,
+              def: 1160,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 8,
+            initialCount: 8,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD009",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F",
+                image: "",
+                rarity: "R",
+                element: "earth",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 145.45
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P13_earth",
+                type: "P13",
+                name: "P13",
+                stat: "atk",
+                percent: 26.204304163669637,
+                level: 4,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "7-4/3/2",
+            name: "\u8C4A\u81E3\u79C0\u5409",
+            image: "",
+            level: 64,
+            stats: {
+              luk: 0,
+              hp: 12760,
+              atk: 12e3,
+              def: 520,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 7,
+            initialCount: 3,
+            initialSp: 90,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 98.86,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_light",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 23.292714812150788,
+                level: 4,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_cecile_01",
+          amount: 5
+        },
+        {
+          kind: "soul",
+          id: "char_ageha_01",
+          amount: 2
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 3e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 5
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 9
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_cecile_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_ageha_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_cecile_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_ageha_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 90,
+      encounterChance: 0.07
+    },
+    {
+      id: "kyoto-5",
+      designId: "7-5",
+      areaId: "kyoto",
+      index: 5,
+      name: "\u53CD\u6483\u306B\u4ED8\u304D\u5408\u3044\u3059\u304E\u306A\u3044",
+      description: "\u53CD\u6483\u306B\u4ED8\u304D\u5408\u3044\u3059\u304E\u306A\u3044",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "7-5/1/1",
+            name: "\u5C0F\u677E\u59EB",
+            image: "",
+            level: 65,
+            stats: {
+              luk: 0,
+              hp: 48e3,
+              atk: 3720,
+              def: 1200,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD049",
+                name: "\u8FD4\u3057\u5203",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "counter",
+                    power: 56.13,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P13_fire",
+                type: "P13",
+                name: "P13",
+                stat: "atk",
+                percent: 14.557946757594243,
+                level: 4,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "7-5/2/1",
+            name: "\u672C\u591A\u5FE0\u52DD",
+            image: "",
+            level: 65,
+            stats: {
+              luk: 0,
+              hp: 62400,
+              atk: 4200,
+              def: 1320,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 110,
+            skills: [
+              {
+                id: "SKD050",
+                name: "\u8FCE\u6483\u306E\u69CB\u3048",
+                image: "",
+                rarity: "SSR",
+                element: "earth",
+                spCost: 110,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "taunt",
+                    power: 0,
+                    chance: 1,
+                    duration: 3
+                  },
+                  {
+                    type: "counter",
+                    power: 69.31,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P13_earth",
+                type: "P13",
+                name: "P13",
+                stat: "atk",
+                percent: 26.204304163669637,
+                level: 4,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_kengo_01",
+          amount: 3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 3e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 5
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 9
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_kengo_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_kengo_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 90,
+      encounterChance: 0.07
+    },
+    {
+      id: "kyoto-6",
+      designId: "7-6",
+      areaId: "kyoto",
+      index: 6,
+      name: "\u8A98\u5C0E\u3055\u308C\u305F\u653B\u6483\u3092\u901A\u3059",
+      description: "\u8A98\u5C0E\u3055\u308C\u305F\u653B\u6483\u3092\u901A\u3059",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "7-6/1/1",
+            name: "\u96D1\u8CC0\u5B6B\u5E02",
+            image: "",
+            level: 66,
+            stats: {
+              luk: 0,
+              hp: 28110,
+              atk: 5430,
+              def: 560,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 6,
+            initialCount: 5,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD010",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 145.45
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_wind",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 8.734768054556545,
+                level: 4,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          },
+          {
+            id: "7-6/1/2",
+            name: "\u5317\u6761\u6C0F\u5EB7",
+            image: "",
+            level: 66,
+            stats: {
+              luk: 0,
+              hp: 37490,
+              atk: 2180,
+              def: 1560,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 11,
+            initialCount: 2,
+            initialSp: 36,
+            skills: [
+              {
+                id: "SKD048",
+                name: "\u6311\u767A",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 36,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "taunt",
+                    power: 0,
+                    chance: 1,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P15_earth",
+                type: "P15",
+                name: "P15",
+                stat: "def",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "7-6/2/1",
+            name: "\u6BDB\u5229\u5143\u5C31",
+            image: "",
+            level: 66,
+            stats: {
+              luk: 0,
+              hp: 28110,
+              atk: 5430,
+              def: 560,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 6,
+            initialCount: 5,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD010",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 145.45
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P03_wind",
+                type: "P03",
+                name: "P03",
+                stat: "atk",
+                percent: 17.46953610911309,
+                level: 4,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          },
+          {
+            id: "7-6/2/2",
+            name: "\u4E95\u4F0A\u76F4\u864E",
+            image: "",
+            level: 66,
+            stats: {
+              luk: 0,
+              hp: 37490,
+              atk: 2180,
+              def: 1560,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 11,
+            initialCount: 2,
+            initialSp: 36,
+            skills: [
+              {
+                id: "SKD048",
+                name: "\u6311\u767A",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 36,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "taunt",
+                    power: 0,
+                    chance: 1,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P11_water",
+                type: "P11",
+                name: "P11",
+                stat: "atk",
+                percent: 17.46953610911309,
+                level: 4,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "7-6/3/1",
+            name: "\u4F0A\u9054\u653F\u5B97",
+            image: "",
+            level: 66,
+            stats: {
+              luk: 0,
+              hp: 28110,
+              atk: 5430,
+              def: 1240,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 6,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD022",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 72.72
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P07_wind",
+                type: "P07",
+                name: "P07",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          },
+          {
+            id: "7-6/3/2",
+            name: "\u77F3\u7530\u4E09\u6210",
+            image: "",
+            level: 66,
+            stats: {
+              luk: 0,
+              hp: 37490,
+              atk: 2180,
+              def: 1560,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 11,
+            initialCount: 2,
+            initialSp: 36,
+            skills: [
+              {
+                id: "SKD048",
+                name: "\u6311\u767A",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 36,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "taunt",
+                    power: 0,
+                    chance: 1,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P04_light",
+                type: "P04",
+                name: "P04",
+                stat: "def",
+                percent: 20.38112546063194,
+                level: 4,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_seiya_01",
+          amount: 7
+        },
+        {
+          kind: "soul",
+          id: "char_leo_01",
+          amount: 4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 3e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 5
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 9
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_seiya_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_leo_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_seiya_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_leo_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 90,
+      encounterChance: 0.07
+    },
+    {
+      id: "kyoto-7",
+      designId: "7-7",
+      areaId: "kyoto",
+      index: 7,
+      name: "\u518D\u4ED8\u4E0E\u3088\u308A\u5148\u306B\u6C7A\u7740",
+      description: "\u518D\u4ED8\u4E0E\u3088\u308A\u5148\u306B\u6C7A\u7740",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "7-7/1/1",
+            name: "\u7247\u5009\u666F\u7DB1",
+            image: "",
+            level: 68,
+            stats: {
+              luk: 0,
+              hp: 28110,
+              atk: 3960,
+              def: 3120,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 5,
+            initialCount: 3,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P12_wind",
+                type: "P12",
+                name: "P12",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          },
+          {
+            id: "7-7/1/2",
+            name: "\u524D\u7530\u5229\u5BB6",
+            image: "",
+            level: 68,
+            stats: {
+              luk: 0,
+              hp: 9370,
+              atk: 17490,
+              def: 590,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 18,
+            initialCount: 3,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD046",
+                name: "\u5B88\u8B77\u306E\u672D",
+                image: "",
+                rarity: "SR",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "shield",
+                    power: 99.32,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "7-7/2/1",
+            name: "\u771F\u7530\u660C\u5E78",
+            image: "",
+            level: 68,
+            stats: {
+              luk: 0,
+              hp: 28110,
+              atk: 3960,
+              def: 3120,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P12_fire",
+                type: "P12",
+                name: "P12",
+                stat: "atk",
+                percent: 17.46953610911309,
+                level: 4,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "7-7/2/2",
+            name: "\u5CF6\u6D25\u7FA9\u5F18",
+            image: "",
+            level: 68,
+            stats: {
+              luk: 0,
+              hp: 9370,
+              atk: 17490,
+              def: 590,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 18,
+            initialCount: 3,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD046",
+                name: "\u5B88\u8B77\u306E\u672D",
+                image: "",
+                rarity: "SR",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "shield",
+                    power: 99.32,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P14_fire",
+                type: "P14",
+                name: "P14",
+                stat: "atk",
+                percent: 20.38112546063194,
+                level: 4,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "7-7/3/1",
+            name: "\u76F4\u6C5F\u517C\u7D9A",
+            image: "",
+            level: 68,
+            stats: {
+              luk: 0,
+              hp: 28110,
+              atk: 2770,
+              def: 3120,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 5,
+            initialCount: 2,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P01_water",
+                type: "P01",
+                name: "P01",
+                stat: "atk",
+                percent: 6.987814443645236,
+                level: 4,
+                target: "party",
+                targetElement: "water"
+              }
+            ]
+          },
+          {
+            id: "7-7/3/2",
+            name: "\u4E0A\u6749\u666F\u52DD",
+            image: "",
+            level: 68,
+            stats: {
+              luk: 0,
+              hp: 9370,
+              atk: 17490,
+              def: 1190,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 18,
+            initialCount: 3,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD046",
+                name: "\u5B88\u8B77\u306E\u672D",
+                image: "",
+                rarity: "SR",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "shield",
+                    power: 99.32,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_water",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 6.987814443645236,
+                level: 4,
+                target: "party",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "7-7/4/1",
+            name: "\u5FB3\u5DDD\u5BB6\u5EB7",
+            image: "",
+            level: 68,
+            stats: {
+              luk: 0,
+              hp: 28110,
+              atk: 4090,
+              def: 3120,
+              sp: 130
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 8,
+            initialCount: 2,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P02_earth",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 13.975628887290473,
+                level: 4,
+                target: "party",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "7-7/4/2",
+            name: "\u6FC3\u59EB",
+            image: "",
+            level: 68,
+            stats: {
+              luk: 0,
+              hp: 9370,
+              atk: 17490,
+              def: 660,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 18,
+            initialCount: 3,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD046",
+                name: "\u5B88\u8B77\u306E\u672D",
+                image: "",
+                rarity: "SR",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "shield",
+                    power: 99.32,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P12_dark",
+                type: "P12",
+                name: "P12",
+                stat: "atk",
+                percent: 17.46953610911309,
+                level: 4,
+                target: "self",
+                targetElement: "dark"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_riki_01",
+          amount: 8
+        },
+        {
+          kind: "soul",
+          id: "char_go_01",
+          amount: 4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 3e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 5
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 9
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_riki_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_go_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_riki_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_go_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 90,
+      encounterChance: 0.07
+    },
+    {
+      id: "kyoto-8",
+      designId: "7-8",
+      areaId: "kyoto",
+      index: 8,
+      name: "\u5D29\u3059\u5834\u6240\u3092\u9078\u3076",
+      description: "\u5D29\u3059\u5834\u6240\u3092\u9078\u3076",
+      energyCost: 6,
+      waves: [
+        [
+          {
+            id: "7-8/1/1",
+            name: "\u7532\u6590\u59EB",
+            image: "",
+            level: 70,
+            stats: {
+              luk: 0,
+              hp: 20750,
+              atk: 15410,
+              def: 930,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 9,
+            initialCount: 3,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD049",
+                name: "\u8FD4\u3057\u5203",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "counter",
+                    power: 63.48,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P13_water",
+                type: "P13",
+                name: "P13",
+                stat: "atk",
+                percent: 14.557946757594243,
+                level: 4,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          },
+          {
+            id: "7-8/1/2",
+            name: "\u7D30\u5DDD\u30AC\u30E9\u30B7\u30E3",
+            image: "",
+            level: 70,
+            stats: {
+              luk: 0,
+              hp: 12500,
+              atk: 2810,
+              def: 630,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 90,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 98.86,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_light",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "7-8/2/1",
+            name: "\u52A0\u85E4\u6E05\u6B63",
+            image: "",
+            level: 70,
+            stats: {
+              luk: 0,
+              hp: 20750,
+              atk: 15410,
+              def: 930,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 9,
+            initialCount: 3,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD049",
+                name: "\u8FD4\u3057\u5203",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "counter",
+                    power: 63.48,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P15_earth",
+                type: "P15",
+                name: "P15",
+                stat: "def",
+                percent: 17.46953610911309,
+                level: 4,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "7-8/2/2",
+            name: "\u4ECA\u5DDD\u7FA9\u5143",
+            image: "",
+            level: 70,
+            stats: {
+              luk: 0,
+              hp: 12500,
+              atk: 2810,
+              def: 560,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD036",
+                name: "\u5B88\u308A\u306E\u9663",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 19.77,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_wind",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 10.481721665467855,
+                level: 4,
+                target: "party",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "7-8/3/1",
+            name: "\u672C\u591A\u5FE0\u52DD",
+            image: "",
+            level: 70,
+            stats: {
+              luk: 0,
+              hp: 43680,
+              atk: 15410,
+              def: 930,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 9,
+            initialCount: 3,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD049",
+                name: "\u8FD4\u3057\u5203",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "counter",
+                    power: 63.48,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P13_earth",
+                type: "P13",
+                name: "P13",
+                stat: "atk",
+                percent: 26.204304163669637,
+                level: 4,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "7-8/4/1",
+            name: "\u524D\u7530\u6176\u6B21",
+            image: "",
+            level: 70,
+            stats: {
+              luk: 0,
+              hp: 43680,
+              atk: 15410,
+              def: 930,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 9,
+            initialCount: 3,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD049",
+                name: "\u8FD4\u3057\u5203",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "counter",
+                    power: 63.48,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P05_wind",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 23.292714812150788,
+                level: 4,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          },
+          {
+            id: "7-8/4/2",
+            name: "\u8C4A\u81E3\u79C0\u5409",
+            image: "",
+            level: 70,
+            stats: {
+              luk: 0,
+              hp: 12500,
+              atk: 2810,
+              def: 630,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 90,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 98.86,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_light",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 23.292714812150788,
+                level: 4,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          },
+          {
+            id: "7-8/4/3",
+            name: "\u7247\u5009\u666F\u7DB1",
+            image: "",
+            level: 70,
+            stats: {
+              luk: 0,
+              hp: 16800,
+              atk: 4200,
+              def: 700,
+              sp: 100
+            },
+            order: 2,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD046",
+                name: "\u5B88\u8B77\u306E\u672D",
+                image: "",
+                rarity: "SR",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "shield",
+                    power: 85.68,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P12_wind",
+                type: "P12",
+                name: "P12",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_genji_01",
+          amount: 9
+        },
+        {
+          kind: "soul",
+          id: "char_ageha_01",
+          amount: 5
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 2
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "unlock_item",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 3e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "character_exp_item",
+          id: "small",
+          amount: 5
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 9
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_genji_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_ageha_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_genji_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_ageha_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 90,
+      encounterChance: 0.07
+    },
+    {
+      id: "izumo-1",
+      designId: "8-1",
+      areaId: "izumo",
+      index: 1,
+      name: "\u524A\u3089\u308C\u305F\u307E\u307E\u6B21\u3078\u9032\u3080",
+      description: "\u524A\u3089\u308C\u305F\u307E\u307E\u6B21\u3078\u9032\u3080",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "8-1/1/1",
+            name: "\u4E95\u4F0A\u76F4\u653F",
+            image: "",
+            level: 70,
+            stats: {
+              luk: 0,
+              hp: 22010,
+              atk: 11660,
+              def: 630,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 8,
+            initialCount: 4,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD022",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 81.12
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_fire",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 5.823178703037697,
+                level: 4,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "8-1/1/2",
+            name: "\u7ACB\u82B1\u5B97\u8302",
+            image: "",
+            level: 70,
+            stats: {
+              luk: 0,
+              hp: 16800,
+              atk: 3220,
+              def: 630,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD011",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_light",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 5.823178703037697,
+                level: 4,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-1/2/1",
+            name: "\u7ACB\u82B1\u8ABE\u5343\u4EE3",
+            image: "",
+            level: 70,
+            stats: {
+              luk: 0,
+              hp: 22010,
+              atk: 11660,
+              def: 630,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 8,
+            initialCount: 4,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD022",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 81.12
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P07_light",
+                type: "P07",
+                name: "P07",
+                stat: "atk",
+                percent: 8.734768054556545,
+                level: 4,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-1/3/1",
+            name: "\u6D45\u4E95\u9577\u653F",
+            image: "",
+            level: 70,
+            stats: {
+              luk: 0,
+              hp: 34850,
+              atk: 11660,
+              def: 1260,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 8,
+            initialCount: 4,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD022",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 81.12
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P11_wind",
+                type: "P11",
+                name: "P11",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          },
+          {
+            id: "8-1/3/2",
+            name: "\u5C0F\u65E9\u5DDD\u9686\u666F",
+            image: "",
+            level: 70,
+            stats: {
+              luk: 0,
+              hp: 16800,
+              atk: 3220,
+              def: 630,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD008",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P03_water",
+                type: "P03",
+                name: "P03",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-1/4/1",
+            name: "\u5CF6\u6D25\u7FA9\u5F18",
+            image: "",
+            level: 70,
+            stats: {
+              luk: 0,
+              hp: 73360,
+              atk: 11660,
+              def: 1400,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 8,
+            initialCount: 4,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD022",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 81.12
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P14_fire",
+                type: "P14",
+                name: "P14",
+                stat: "atk",
+                percent: 20.38112546063194,
+                level: 4,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_lucas_01",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 3500
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 2
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_lucas_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_lucas_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 144,
       encounterChance: 0.08
-    };
-  })
-}));
-var QUEST_STAGES = QUEST_AREAS.flatMap((area) => area.stages);
-function getQuestStage(id) {
-  return QUEST_STAGES.find((stage) => stage.id === id);
-}
-function isQuestStageUnlocked(id, clearedStages) {
-  const index = QUEST_STAGES.findIndex((stage) => stage.id === id);
-  return index >= 0 && (index === 0 || clearedStages.includes(QUEST_STAGES[index - 1].id));
-}
-
-// src/domain/redesign/missions.ts
-function evaluateMissions(state, config) {
-  if (!config.enabled) return [];
-  const cleared = new Set(state.clearedStages);
-  const ids = /* @__PURE__ */ new Set();
-  return config.missions.filter((master) => master.enabled).map((master) => {
-    if (!master.id || ids.has(master.id)) throw new Error("\u4EFB\u52D9\u30DE\u30B9\u30BF\u30FC\u306EID\u304C\u91CD\u8907\u3057\u3066\u3044\u307E\u3059\u3002");
-    ids.add(master.id);
-    let stages;
-    if (master.condition.type === "stage_clear") {
-      const stageId = master.condition.stageId;
-      if (!QUEST_STAGES.some((stage) => stage.id === stageId)) throw new Error("\u4EFB\u52D9\u306E\u5BFE\u8C61\u30B9\u30C6\u30FC\u30B8\u304C\u5B58\u5728\u3057\u307E\u305B\u3093\u3002");
-      stages = [stageId];
-    } else if (master.condition.type === "area_clear") {
-      const areaId = master.condition.areaId;
-      const area = QUEST_AREAS.find((candidate) => candidate.id === areaId);
-      if (!area?.stages.length) throw new Error("\u4EFB\u52D9\u306E\u5BFE\u8C61\u30A8\u30EA\u30A2\u304C\u5B58\u5728\u3057\u307E\u305B\u3093\u3002");
-      stages = area.stages.map((stage) => stage.id);
-    } else throw new Error("\u4EFB\u52D9\u6761\u4EF6\u304C\u672A\u5BFE\u5FDC\u3067\u3059\u3002");
-    const current = stages.filter((id) => cleared.has(id)).length;
-    return {
-      id: master.id,
-      name: master.name,
-      description: master.description,
-      rewards: master.rewards,
-      current,
-      target: stages.length,
-      status: state.claimedMissionIds?.includes(master.id) ? "claimed" : current === stages.length ? "claimable" : "progress"
-    };
-  });
-}
-function getClaimableMission(state, config, id) {
-  const row = evaluateMissions(state, config).find((candidate) => candidate.id === id);
-  if (!row || row.status !== "claimable") throw new Error("\u3053\u306E\u4EFB\u52D9\u306E\u5831\u916C\u306F\u53D7\u3051\u53D6\u308C\u307E\u305B\u3093\u3002");
-  return config.missions.find((master) => master.id === id);
-}
+    },
+    {
+      id: "izumo-2",
+      designId: "8-2",
+      areaId: "izumo",
+      index: 2,
+      name: "\u5C0F\u6280\u3068\u4E3B\u7832\u3092\u5171\u5B58\u3055\u305B\u308B",
+      description: "\u5C0F\u6280\u3068\u4E3B\u7832\u3092\u5171\u5B58\u3055\u305B\u308B",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "8-2/1/1",
+            name: "\u524D\u7530\u5229\u5BB6",
+            image: "",
+            level: 71,
+            stats: {
+              luk: 0,
+              hp: 10150,
+              atk: 2480,
+              def: 1270,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "8-2/1/2",
+            name: "\u5317\u6761\u6C0F\u5EB7",
+            image: "",
+            level: 71,
+            stats: {
+              luk: 0,
+              hp: 10150,
+              atk: 2480,
+              def: 1270,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 30,
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 22.92,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P15_earth",
+                type: "P15",
+                name: "P15",
+                stat: "def",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-2/2/1",
+            name: "\u4E0A\u6749\u8B19\u4FE1",
+            image: "",
+            level: 71,
+            stats: {
+              luk: 0,
+              hp: 20290,
+              atk: 5110,
+              def: 8880,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 9,
+            initialCount: 10,
+            initialSp: 150,
+            skills: [
+              {
+                id: "SKD014",
+                name: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34",
+                image: "",
+                rarity: "SSR",
+                element: "water",
+                spCost: 150,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 229.21
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_water",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-2/3/1",
+            name: "\u67F4\u7530\u52DD\u5BB6",
+            image: "",
+            level: 71,
+            stats: {
+              luk: 0,
+              hp: 10150,
+              atk: 2630,
+              def: 1270,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 17.46953610911309,
+                level: 4,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "8-2/3/2",
+            name: "\u96D1\u8CC0\u5B6B\u5E02",
+            image: "",
+            level: 71,
+            stats: {
+              luk: 0,
+              hp: 10150,
+              atk: 3360,
+              def: 1270,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD010",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_wind",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 8.734768054556545,
+                level: 4,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_takuro_01",
+          amount: 2
+        },
+        {
+          kind: "soul",
+          id: "char_koharu_01",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 3500
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 2
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_takuro_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_koharu_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_takuro_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_koharu_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 144,
+      encounterChance: 0.08
+    },
+    {
+      id: "izumo-3",
+      designId: "8-3",
+      areaId: "izumo",
+      index: 3,
+      name: "\u5358\u4F53\u3068\u5168\u4F53\u3092\u4E21\u7ACB\u3059\u308B",
+      description: "\u5358\u4F53\u3068\u5168\u4F53\u3092\u4E21\u7ACB\u3059\u308B",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "8-3/1/1",
+            name: "\u4E95\u4F0A\u76F4\u653F",
+            image: "",
+            level: 72,
+            stats: {
+              luk: 0,
+              hp: 84560,
+              atk: 3660,
+              def: 4650,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 9,
+            initialCount: 8,
+            initialSp: 0,
+            skills: [
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_fire",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 5.823178703037697,
+                level: 4,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "8-3/1/2",
+            name: "\u7ACB\u82B1\u5B97\u8302",
+            image: "",
+            level: 72,
+            stats: {
+              luk: 0,
+              hp: 3810,
+              atk: 9410,
+              def: 0,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 9,
+            initialCount: 8,
+            initialSp: 0,
+            skills: [
+              {
+                id: "SKD011",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_light",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 5.823178703037697,
+                level: 4,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          },
+          {
+            id: "8-3/1/3",
+            name: "\u5C0F\u65E9\u5DDD\u9686\u666F",
+            image: "",
+            level: 72,
+            stats: {
+              luk: 0,
+              hp: 3810,
+              atk: 9410,
+              def: 0,
+              sp: 100
+            },
+            order: 2,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 9,
+            initialCount: 8,
+            initialSp: 0,
+            skills: [
+              {
+                id: "SKD008",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P03_water",
+                type: "P03",
+                name: "P03",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-3/2/1",
+            name: "\u5FB3\u5DDD\u5BB6\u5EB7",
+            image: "",
+            level: 72,
+            stats: {
+              luk: 0,
+              hp: 25370,
+              atk: 3780,
+              def: 4650,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 10,
+            initialCount: 9,
+            initialSp: 125,
+            skills: [
+              {
+                id: "SKD036",
+                name: "\u5B88\u308A\u306E\u9663",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 22.92,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD009",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F",
+                image: "",
+                rarity: "R",
+                element: "earth",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_earth",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 13.975628887290473,
+                level: 4,
+                target: "party",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-3/3/1",
+            name: "\u6BDB\u5229\u5143\u5C31",
+            image: "",
+            level: 72,
+            stats: {
+              luk: 0,
+              hp: 84560,
+              atk: 3660,
+              def: 4650,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 9,
+            initialCount: 8,
+            initialSp: 0,
+            skills: [
+              {
+                id: "SKD010",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P03_wind",
+                type: "P03",
+                name: "P03",
+                stat: "atk",
+                percent: 17.46953610911309,
+                level: 4,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          },
+          {
+            id: "8-3/3/2",
+            name: "\u5CF6\u6D25\u7FA9\u5F18",
+            image: "",
+            level: 72,
+            stats: {
+              luk: 0,
+              hp: 3810,
+              atk: 9410,
+              def: 0,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 9,
+            initialCount: 8,
+            initialSp: 0,
+            skills: [
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P14_fire",
+                type: "P14",
+                name: "P14",
+                stat: "atk",
+                percent: 20.38112546063194,
+                level: 4,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "8-3/3/3",
+            name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+            image: "",
+            level: 72,
+            stats: {
+              luk: 0,
+              hp: 3810,
+              atk: 9410,
+              def: 0,
+              sp: 100
+            },
+            order: 2,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 9,
+            initialCount: 8,
+            initialSp: 0,
+            skills: [
+              {
+                id: "SKD008",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P16_water",
+                type: "P16",
+                name: "P16",
+                stat: "def",
+                percent: 17.46953610911309,
+                level: 4,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-3/4/1",
+            name: "\u4F0A\u9054\u653F\u5B97",
+            image: "",
+            level: 72,
+            stats: {
+              luk: 0,
+              hp: 25370,
+              atk: 3780,
+              def: 4650,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 10,
+            initialCount: 9,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD022",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 81.12
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P07_wind",
+                type: "P07",
+                name: "P07",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_taiga_01",
+          amount: 2
+        },
+        {
+          kind: "soul",
+          id: "char_leo_01",
+          amount: 2
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 3500
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 2
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_taiga_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_leo_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_taiga_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_leo_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 144,
+      encounterChance: 0.08
+    },
+    {
+      id: "izumo-4",
+      designId: "8-4",
+      areaId: "izumo",
+      index: 4,
+      name: "\u6301\u3061\u8D8A\u3057\u305F\u72B6\u614B\u3078\u5BFE\u51E6",
+      description: "\u6301\u3061\u8D8A\u3057\u305F\u72B6\u614B\u3078\u5BFE\u51E6",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "8-4/1/1",
+            name: "\u658E\u85E4\u9053\u4E09",
+            image: "",
+            level: 73,
+            stats: {
+              luk: 0,
+              hp: 18960,
+              atk: 3630,
+              def: 710,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 6,
+            initialCount: 3,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD029",
+                name: "\u6BD2\u5203",
+                image: "",
+                rarity: "R",
+                element: "dark",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 106.4
+                  },
+                  {
+                    type: "dot",
+                    power: 15.28,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P09_dark",
+                type: "P09",
+                name: "P09",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "dark"
+              }
+            ]
+          },
+          {
+            id: "8-4/1/2",
+            name: "\u5CF6\u5DE6\u8FD1",
+            image: "",
+            level: 73,
+            stats: {
+              luk: 0,
+              hp: 50740,
+              atk: 38320,
+              def: 510,
+              sp: 110
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 14,
+            initialCount: 6,
+            initialSp: 110,
+            skills: [
+              {
+                id: "SKD058",
+                name: "\u8755\u307F\u306E\u9663",
+                image: "",
+                rarity: "SR",
+                element: "dark",
+                spCost: 110,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "dot",
+                    power: 18.86,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P16_earth",
+                type: "P16",
+                name: "P16",
+                stat: "def",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-4/2/1",
+            name: "\u67F4\u7530\u52DD\u5BB6",
+            image: "",
+            level: 73,
+            stats: {
+              luk: 0,
+              hp: 50740,
+              atk: 38320,
+              def: 1420,
+              sp: 110
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 14,
+            initialCount: 6,
+            initialSp: 110,
+            skills: [
+              {
+                id: "SKD058",
+                name: "\u8755\u307F\u306E\u9663",
+                image: "",
+                rarity: "SR",
+                element: "dark",
+                spCost: 110,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "dot",
+                    power: 18.86,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 17.46953610911309,
+                level: 4,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-4/3/1",
+            name: "\u5C71\u672C\u52D8\u52A9",
+            image: "",
+            level: 73,
+            stats: {
+              luk: 0,
+              hp: 15800,
+              atk: 3320,
+              def: 630,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 5,
+            initialCount: 3,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD038",
+                name: "\u93A7\u7815\u304D",
+                image: "",
+                rarity: "R",
+                element: "earth",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "def_down",
+                    power: 18.86,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P08_fire",
+                type: "P08",
+                name: "P08",
+                stat: "atk",
+                percent: 8.734768054556545,
+                level: 4,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "8-4/3/2",
+            name: "\u7ACB\u82B1\u8ABE\u5343\u4EE3",
+            image: "",
+            level: 73,
+            stats: {
+              luk: 0,
+              hp: 50740,
+              atk: 38320,
+              def: 710,
+              sp: 110
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 14,
+            initialCount: 6,
+            initialSp: 110,
+            skills: [
+              {
+                id: "SKD058",
+                name: "\u8755\u307F\u306E\u9663",
+                image: "",
+                rarity: "SR",
+                element: "dark",
+                spCost: 110,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "dot",
+                    power: 18.86,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P07_light",
+                type: "P07",
+                name: "P07",
+                stat: "atk",
+                percent: 8.734768054556545,
+                level: 4,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-4/4/1",
+            name: "\u660E\u667A\u5149\u79C0",
+            image: "",
+            level: 73,
+            stats: {
+              luk: 0,
+              hp: 63200,
+              atk: 4900,
+              def: 1580,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 8,
+            initialCount: 8,
+            initialSp: 100,
+            skills: [
+              {
+                id: "SKD028",
+                name: "\u5D29\u3057\u8A0E\u3061",
+                image: "",
+                rarity: "SR",
+                element: "earth",
+                spCost: 100,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 146.96,
+                    bonusCondition: "debuff",
+                    bonusPower: 198.09,
+                    hpThreshold: 0.4
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P08_dark",
+                type: "P08",
+                name: "P08",
+                stat: "atk",
+                percent: 17.46953610911309,
+                level: 4,
+                target: "self",
+                targetElement: "dark"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_sora_01",
+          amount: 3
+        },
+        {
+          kind: "soul",
+          id: "char_miyabi_01",
+          amount: 3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 3500
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 2
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_sora_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_miyabi_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_sora_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_miyabi_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 144,
+      encounterChance: 0.08
+    },
+    {
+      id: "izumo-5",
+      designId: "8-5",
+      areaId: "izumo",
+      index: 5,
+      name: "\u652F\u63F4\u5F79\u3092\u5B88\u308A\u7D9A\u3051\u308B",
+      description: "\u652F\u63F4\u5F79\u3092\u5B88\u308A\u7D9A\u3051\u308B",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "8-5/1/1",
+            name: "\u96D1\u8CC0\u5B6B\u5E02",
+            image: "",
+            level: 74,
+            stats: {
+              luk: 0,
+              hp: 85280,
+              atk: 6660,
+              def: 1640,
+              sp: 110
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 7,
+            initialCount: 5,
+            initialSp: 55,
+            skills: [
+              {
+                id: "SKD026",
+                name: "\u5F8C\u9663\u5C04\u3061",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 55,
+                condition: {
+                  type: "always"
+                },
+                target: "last",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 144.61
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_wind",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 8.734768054556545,
+                level: 4,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-5/2/1",
+            name: "\u52A0\u85E4\u6E05\u6B63",
+            image: "",
+            level: 74,
+            stats: {
+              luk: 0,
+              hp: 40510,
+              atk: 6660,
+              def: 1480,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 5,
+            initialSp: 55,
+            skills: [
+              {
+                id: "SKD026",
+                name: "\u5F8C\u9663\u5C04\u3061",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 55,
+                condition: {
+                  type: "always"
+                },
+                target: "last",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 144.61
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P15_earth",
+                type: "P15",
+                name: "P15",
+                stat: "def",
+                percent: 17.46953610911309,
+                level: 4,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "8-5/2/2",
+            name: "\u6BDB\u5229\u5143\u5C31",
+            image: "",
+            level: 74,
+            stats: {
+              luk: 0,
+              hp: 19680,
+              atk: 3770,
+              def: 740,
+              sp: 110
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 55,
+            skills: [
+              {
+                id: "SKD026",
+                name: "\u5F8C\u9663\u5C04\u3061",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 55,
+                condition: {
+                  type: "always"
+                },
+                target: "last",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 144.61
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P03_wind",
+                type: "P03",
+                name: "P03",
+                stat: "atk",
+                percent: 17.46953610911309,
+                level: 4,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-5/3/1",
+            name: "\u4F0A\u9054\u653F\u5B97",
+            image: "",
+            level: 74,
+            stats: {
+              luk: 0,
+              hp: 85280,
+              atk: 6660,
+              def: 1640,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 7,
+            initialCount: 5,
+            initialSp: 55,
+            skills: [
+              {
+                id: "SKD026",
+                name: "\u5F8C\u9663\u5C04\u3061",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 55,
+                condition: {
+                  type: "always"
+                },
+                target: "last",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 144.61
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P07_wind",
+                type: "P07",
+                name: "P07",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          },
+          {
+            id: "8-5/3/2",
+            name: "\u7ACB\u82B1\u5B97\u8302",
+            image: "",
+            level: 74,
+            stats: {
+              luk: 0,
+              hp: 19680,
+              atk: 3770,
+              def: 740,
+              sp: 110
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 55,
+            skills: [
+              {
+                id: "SKD026",
+                name: "\u5F8C\u9663\u5C04\u3061",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 55,
+                condition: {
+                  type: "always"
+                },
+                target: "last",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 144.61
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_light",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 5.823178703037697,
+                level: 4,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_reina_01",
+          amount: 4
+        },
+        {
+          kind: "soul",
+          id: "char_leo_01",
+          amount: 4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 3500
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 2
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_reina_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_leo_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_reina_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_leo_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 144,
+      encounterChance: 0.08
+    },
+    {
+      id: "izumo-6",
+      designId: "8-6",
+      areaId: "izumo",
+      index: 6,
+      name: "\u4E00\u4EBA\u5931\u3063\u3066\u3082\u7ACB\u3066\u76F4\u3059",
+      description: "\u4E00\u4EBA\u5931\u3063\u3066\u3082\u7ACB\u3066\u76F4\u3059",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "8-6/1/1",
+            name: "\u6B66\u7530\u52DD\u983C",
+            image: "",
+            level: 76,
+            stats: {
+              luk: 0,
+              hp: 21120,
+              atk: 4050,
+              def: 790,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P14_fire",
+                type: "P14",
+                name: "P14",
+                stat: "atk",
+                percent: 14.557946757594243,
+                level: 4,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "8-6/1/2",
+            name: "\u7532\u6590\u59EB",
+            image: "",
+            level: 76,
+            stats: {
+              luk: 0,
+              hp: 14960,
+              atk: 2990,
+              def: 560,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P13_water",
+                type: "P13",
+                name: "P13",
+                stat: "atk",
+                percent: 14.557946757594243,
+                level: 4,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-6/2/1",
+            name: "\u4E0A\u6749\u8B19\u4FE1",
+            image: "",
+            level: 76,
+            stats: {
+              luk: 0,
+              hp: 70400,
+              atk: 5460,
+              def: 1760,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 9,
+            initialCount: 9,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD008",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_water",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-6/3/1",
+            name: "\u5317\u6761\u6C0F\u5EB7",
+            image: "",
+            level: 76,
+            stats: {
+              luk: 0,
+              hp: 14960,
+              atk: 2990,
+              def: 560,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 30,
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 22.92,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P15_earth",
+                type: "P15",
+                name: "P15",
+                stat: "def",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-6/4/1",
+            name: "\u5CF6\u6D25\u7FA9\u5F18",
+            image: "",
+            level: 76,
+            stats: {
+              luk: 0,
+              hp: 21120,
+              atk: 4050,
+              def: 790,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P14_fire",
+                type: "P14",
+                name: "P14",
+                stat: "atk",
+                percent: 20.38112546063194,
+                level: 4,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "8-6/4/2",
+            name: "\u672C\u9858\u5BFA\u9855\u5982",
+            image: "",
+            level: 76,
+            stats: {
+              luk: 0,
+              hp: 19360,
+              atk: 4930,
+              def: 790,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 90,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 114.61,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_earth",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-6/5/1",
+            name: "\u771F\u7530\u5E78\u6751",
+            image: "",
+            level: 76,
+            stats: {
+              luk: 0,
+              hp: 70400,
+              atk: 5460,
+              def: 1760,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 10,
+            initialCount: 10,
+            initialSp: 150,
+            skills: [
+              {
+                id: "SKD013",
+                name: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "SSR",
+                element: "fire",
+                spCost: 150,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 229.21
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P14_fire",
+                type: "P14",
+                name: "P14",
+                stat: "atk",
+                percent: 26.204304163669637,
+                level: 4,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_lucas_01",
+          amount: 5
+        },
+        {
+          kind: "soul",
+          id: "char_kaede_01",
+          amount: 4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 3500
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 2
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_lucas_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_kaede_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_lucas_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_kaede_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 144,
+      encounterChance: 0.08
+    },
+    {
+      id: "izumo-7",
+      designId: "8-7",
+      areaId: "izumo",
+      index: 7,
+      name: "\u52B9\u679C\u304C\u5207\u308C\u305F\u5F8C\u3082\u6226\u3046",
+      description: "\u52B9\u679C\u304C\u5207\u308C\u305F\u5F8C\u3082\u6226\u3046",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "8-7/1/1",
+            name: "\u4ECA\u5DDD\u7FA9\u5143",
+            image: "",
+            level: 78,
+            stats: {
+              luk: 0,
+              hp: 152210,
+              atk: 4530,
+              def: 1690,
+              sp: 300
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 2,
+            initialCount: 3,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P02_wind",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 10.481721665467855,
+                level: 4,
+                target: "party",
+                targetElement: "wind"
+              }
+            ]
+          },
+          {
+            id: "8-7/1/2",
+            name: "\u524D\u7530\u5229\u5BB6",
+            image: "",
+            level: 78,
+            stats: {
+              luk: 0,
+              hp: 22560,
+              atk: 4320,
+              def: 850,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-7/2/1",
+            name: "\u7ACB\u82B1\u8ABE\u5343\u4EE3",
+            image: "",
+            level: 78,
+            stats: {
+              luk: 0,
+              hp: 152210,
+              atk: 4530,
+              def: 1880,
+              sp: 300
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 2,
+            initialCount: 3,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P07_light",
+                type: "P07",
+                name: "P07",
+                stat: "atk",
+                percent: 8.734768054556545,
+                level: 4,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-7/3/1",
+            name: "\u524D\u7530\u6176\u6B21",
+            image: "",
+            level: 78,
+            stats: {
+              luk: 0,
+              hp: 152210,
+              atk: 4530,
+              def: 1880,
+              sp: 300
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 2,
+            initialCount: 3,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P05_wind",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 23.292714812150788,
+                level: 4,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-7/4/1",
+            name: "\u6B66\u7530\u4FE1\u7384",
+            image: "",
+            level: 78,
+            stats: {
+              luk: 0,
+              hp: 152210,
+              atk: 4530,
+              def: 1880,
+              sp: 300
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 2,
+            initialCount: 3,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P16_fire",
+                type: "P16",
+                name: "P16",
+                stat: "def",
+                percent: 23.292714812150788,
+                level: 4,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_sora_01",
+          amount: 6
+        },
+        {
+          kind: "soul",
+          id: "char_go_01",
+          amount: 5
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 3500
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 2
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_sora_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_go_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_sora_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_go_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 144,
+      encounterChance: 0.08
+    },
+    {
+      id: "izumo-8",
+      designId: "8-8",
+      areaId: "izumo",
+      index: 8,
+      name: "\u9023\u6226\u7528\u306E5\u4EBA\u3092\u5B8C\u6210\u3055\u305B\u308B",
+      description: "\u9023\u6226\u7528\u306E5\u4EBA\u3092\u5B8C\u6210\u3055\u305B\u308B",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "8-8/1/1",
+            name: "\u67F4\u7530\u52DD\u5BB6",
+            image: "",
+            level: 80,
+            stats: {
+              luk: 0,
+              hp: 24e3,
+              atk: 4600,
+              def: 900,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 17.46953610911309,
+                level: 4,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "8-8/1/2",
+            name: "\u6D45\u4E95\u9577\u653F",
+            image: "",
+            level: 80,
+            stats: {
+              luk: 0,
+              hp: 38e3,
+              atk: 3600,
+              def: 1800,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P11_wind",
+                type: "P11",
+                name: "P11",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-8/2/1",
+            name: "\u658E\u85E4\u9053\u4E09",
+            image: "",
+            level: 80,
+            stats: {
+              luk: 0,
+              hp: 17e3,
+              atk: 3400,
+              def: 640,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 7,
+            initialCount: 3,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD029",
+                name: "\u6BD2\u5203",
+                image: "",
+                rarity: "R",
+                element: "dark",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 106.4
+                  },
+                  {
+                    type: "dot",
+                    power: 15.28,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P09_dark",
+                type: "P09",
+                name: "P09",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "dark"
+              }
+            ]
+          },
+          {
+            id: "8-8/2/2",
+            name: "\u7247\u5009\u666F\u7DB1",
+            image: "",
+            level: 80,
+            stats: {
+              luk: 0,
+              hp: 24e3,
+              atk: 6e3,
+              def: 1e3,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD046",
+                name: "\u5B88\u8B77\u306E\u672D",
+                image: "",
+                rarity: "SR",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "shield",
+                    power: 99.32,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P12_wind",
+                type: "P12",
+                name: "P12",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-8/3/1",
+            name: "\u4F0A\u9054\u653F\u5B97",
+            image: "",
+            level: 80,
+            stats: {
+              luk: 0,
+              hp: 8e4,
+              atk: 6200,
+              def: 2e3,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 9,
+            initialCount: 9,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD022",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 81.12
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P07_wind",
+                type: "P07",
+                name: "P07",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-8/4/1",
+            name: "\u96D1\u8CC0\u5B6B\u5E02",
+            image: "",
+            level: 80,
+            stats: {
+              luk: 0,
+              hp: 24e3,
+              atk: 4600,
+              def: 900,
+              sp: 110
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 8,
+            initialCount: 3,
+            initialSp: 55,
+            skills: [
+              {
+                id: "SKD026",
+                name: "\u5F8C\u9663\u5C04\u3061",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 55,
+                condition: {
+                  type: "always"
+                },
+                target: "last",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 144.61
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_wind",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 8.734768054556545,
+                level: 4,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          },
+          {
+            id: "8-8/4/2",
+            name: "\u7D30\u5DDD\u30AC\u30E9\u30B7\u30E3",
+            image: "",
+            level: 80,
+            stats: {
+              luk: 0,
+              hp: 22e3,
+              atk: 5600,
+              def: 900,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 90,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 114.61,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_light",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-8/5/1",
+            name: "\u672C\u591A\u5FE0\u52DD",
+            image: "",
+            level: 80,
+            stats: {
+              luk: 0,
+              hp: 8e4,
+              atk: 6200,
+              def: 2e3,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 8,
+            initialCount: 8,
+            initialSp: 110,
+            skills: [
+              {
+                id: "SKD050",
+                name: "\u8FCE\u6483\u306E\u69CB\u3048",
+                image: "",
+                rarity: "SSR",
+                element: "earth",
+                spCost: 110,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "taunt",
+                    power: 0,
+                    chance: 1,
+                    duration: 3
+                  },
+                  {
+                    type: "counter",
+                    power: 78.76,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P13_earth",
+                type: "P13",
+                name: "P13",
+                stat: "atk",
+                percent: 26.204304163669637,
+                level: 4,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "8-8/6/1",
+            name: "\u7E54\u7530\u4FE1\u9577",
+            image: "",
+            level: 80,
+            stats: {
+              luk: 0,
+              hp: 104e3,
+              atk: 7e3,
+              def: 2200,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 9,
+            initialCount: 9,
+            initialSp: 125,
+            skills: [
+              {
+                id: "SKD035",
+                name: "\u9B28\u306E\u58F0",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "atk_up",
+                    power: 11.7,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P01_fire",
+                type: "P01",
+                name: "P01",
+                stat: "atk",
+                percent: 9.317085924860315,
+                level: 4,
+                target: "party",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "8-8/6/2",
+            name: "\u304A\u5E02\u306E\u65B9",
+            image: "",
+            level: 80,
+            stats: {
+              luk: 0,
+              hp: 22e3,
+              atk: 5600,
+              def: 900,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 90,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 114.61,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_fire",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 11.646357406075394,
+                level: 4,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_takuro_01",
+          amount: 7
+        },
+        {
+          kind: "soul",
+          id: "char_reiji_01",
+          amount: 6
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 2
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "unlock_item",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 3500
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 2
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_takuro_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_reiji_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_takuro_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.2,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_reiji_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.08,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 144,
+      encounterChance: 0.08
+    },
+    {
+      id: "satsuma-1",
+      designId: "9-1",
+      areaId: "satsuma",
+      index: 1,
+      name: "\u5358\u4F53\u7A81\u7834\u306E\u6975\u610F",
+      description: "\u5358\u4F53\u7A81\u7834\u306E\u6975\u610F",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "9-1/1/1",
+            name: "\u5317\u6761\u6C0F\u5EB7",
+            image: "",
+            level: 80,
+            stats: {
+              luk: 0,
+              hp: 48e3,
+              atk: 3500,
+              def: 3200,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 30,
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 22.92,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P15_earth",
+                type: "P15",
+                name: "P15",
+                stat: "def",
+                percent: 14.177003843197484,
+                level: 6,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "9-1/1/2",
+            name: "\u4ECA\u5DDD\u7FA9\u5143",
+            image: "",
+            level: 80,
+            stats: {
+              luk: 0,
+              hp: 24e3,
+              atk: 4e3,
+              def: 1400,
+              sp: 150
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD036",
+                name: "\u5B88\u308A\u306E\u9663",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 22.92,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_wind",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 12.759303458877735,
+                level: 6,
+                target: "party",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "9-1/2/1",
+            name: "\u5FB3\u5DDD\u5BB6\u5EB7",
+            image: "",
+            level: 80,
+            stats: {
+              luk: 0,
+              hp: 56890,
+              atk: 8330,
+              def: 15860,
+              sp: 180
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 8,
+            initialCount: 9,
+            initialSp: 125,
+            skills: [
+              {
+                id: "SKD036",
+                name: "\u5B88\u308A\u306E\u9663",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 22.92,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD009",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F",
+                image: "",
+                rarity: "R",
+                element: "earth",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_earth",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 17.01240461183698,
+                level: 6,
+                target: "party",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_karen_01",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 4e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 3
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 8
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_genji_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_karen_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_genji_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_karen_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 176,
+      encounterChance: 0.09
+    },
+    {
+      id: "satsuma-2",
+      designId: "9-2",
+      areaId: "satsuma",
+      index: 2,
+      name: "\u5168\u4F53\u524A\u308A\u306E\u6975\u610F",
+      description: "\u5168\u4F53\u524A\u308A\u306E\u6975\u610F",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "9-2/1/1",
+            name: "\u4E95\u4F0A\u76F4\u653F",
+            image: "",
+            level: 81,
+            stats: {
+              luk: 0,
+              hp: 133140,
+              atk: 11140,
+              def: 240,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 9,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_fire",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 7.088501921598742,
+                level: 6,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "9-2/1/2",
+            name: "\u7ACB\u82B1\u5B97\u8302",
+            image: "",
+            level: 81,
+            stats: {
+              luk: 0,
+              hp: 15730,
+              atk: 11140,
+              def: 240,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 9,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD011",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_light",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 7.088501921598742,
+                level: 6,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          },
+          {
+            id: "9-2/1/3",
+            name: "\u5C0F\u65E9\u5DDD\u9686\u666F",
+            image: "",
+            level: 81,
+            stats: {
+              luk: 0,
+              hp: 15730,
+              atk: 11140,
+              def: 240,
+              sp: 100
+            },
+            order: 2,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 9,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD008",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P03_water",
+                type: "P03",
+                name: "P03",
+                stat: "atk",
+                percent: 14.177003843197484,
+                level: 6,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "9-2/2/1",
+            name: "\u5CF6\u6D25\u7FA9\u5F18",
+            image: "",
+            level: 81,
+            stats: {
+              luk: 0,
+              hp: 133140,
+              atk: 11140,
+              def: 240,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 9,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P14_fire",
+                type: "P14",
+                name: "P14",
+                stat: "atk",
+                percent: 24.809756725595598,
+                level: 6,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "9-2/2/2",
+            name: "\u6BDB\u5229\u5143\u5C31",
+            image: "",
+            level: 81,
+            stats: {
+              luk: 0,
+              hp: 15730,
+              atk: 11140,
+              def: 240,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 9,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD010",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P03_wind",
+                type: "P03",
+                name: "P03",
+                stat: "atk",
+                percent: 21.265505764796227,
+                level: 6,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          },
+          {
+            id: "9-2/2/3",
+            name: "\u7ACB\u82B1\u8ABE\u5343\u4EE3",
+            image: "",
+            level: 81,
+            stats: {
+              luk: 0,
+              hp: 15730,
+              atk: 11140,
+              def: 240,
+              sp: 100
+            },
+            order: 2,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 9,
+            initialCount: 7,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD023",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u5149",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 81.12
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P07_light",
+                type: "P07",
+                name: "P07",
+                stat: "atk",
+                percent: 10.632752882398114,
+                level: 6,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "9-2/3/1",
+            name: "\u4F0A\u9054\u653F\u5B97",
+            image: "",
+            level: 81,
+            stats: {
+              luk: 0,
+              hp: 133900,
+              atk: 6700,
+              def: 3710,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 9,
+            initialCount: 9,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD022",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 81.12
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P07_wind",
+                type: "P07",
+                name: "P07",
+                stat: "atk",
+                percent: 14.177003843197484,
+                level: 6,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          },
+          {
+            id: "9-2/3/2",
+            name: "\u7247\u5009\u666F\u7DB1",
+            image: "",
+            level: 81,
+            stats: {
+              luk: 0,
+              hp: 27810,
+              atk: 6180,
+              def: 1850,
+              sp: 150
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD046",
+                name: "\u5B88\u8B77\u306E\u672D",
+                image: "",
+                rarity: "SR",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "shield",
+                    power: 99.32,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P12_wind",
+                type: "P12",
+                name: "P12",
+                stat: "atk",
+                percent: 14.177003843197484,
+                level: 6,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_sora_01",
+          amount: 1
+        },
+        {
+          kind: "soul",
+          id: "char_leo_01",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 4e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 3
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 8
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_sora_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_leo_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_sora_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_leo_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 176,
+      encounterChance: 0.09
+    },
+    {
+      id: "satsuma-3",
+      designId: "9-3",
+      areaId: "satsuma",
+      index: 3,
+      name: "\u5F8C\u5217\u653B\u7565\u306E\u6975\u610F",
+      description: "\u5F8C\u5217\u653B\u7565\u306E\u6975\u610F",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "9-3/1/1",
+            name: "\u52A0\u85E4\u6E05\u6B63",
+            image: "",
+            level: 82,
+            stats: {
+              luk: 0,
+              hp: 84720,
+              atk: 3340,
+              def: 9080,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 30,
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 22.92,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P15_earth",
+                type: "P15",
+                name: "P15",
+                stat: "def",
+                percent: 21.265505764796227,
+                level: 6,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "9-3/1/2",
+            name: "\u771F\u7530\u660C\u5E78",
+            image: "",
+            level: 82,
+            stats: {
+              luk: 0,
+              hp: 28620,
+              atk: 5720,
+              def: 1910,
+              sp: 150
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD046",
+                name: "\u5B88\u8B77\u306E\u672D",
+                image: "",
+                rarity: "SR",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "shield",
+                    power: 99.32,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P12_fire",
+                type: "P12",
+                name: "P12",
+                stat: "atk",
+                percent: 21.265505764796227,
+                level: 6,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "9-3/1/3",
+            name: "\u7D30\u5DDD\u30AC\u30E9\u30B7\u30E3",
+            image: "",
+            level: 82,
+            stats: {
+              luk: 0,
+              hp: 21790,
+              atk: 20890,
+              def: 1590,
+              sp: 180
+            },
+            order: 2,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 5,
+            initialCount: 3,
+            initialSp: 180,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 131.74,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_light",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 14.177003843197484,
+                level: 6,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "9-3/2/1",
+            name: "\u672C\u591A\u5FE0\u52DD",
+            image: "",
+            level: 82,
+            stats: {
+              luk: 0,
+              hp: 84720,
+              atk: 6200,
+              def: 9080,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 8,
+            initialCount: 8,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD009",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F",
+                image: "",
+                rarity: "R",
+                element: "earth",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P13_earth",
+                type: "P13",
+                name: "P13",
+                stat: "atk",
+                percent: 31.89825864719434,
+                level: 6,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "9-3/2/2",
+            name: "\u6FC3\u59EB",
+            image: "",
+            level: 82,
+            stats: {
+              luk: 0,
+              hp: 28620,
+              atk: 5720,
+              def: 1910,
+              sp: 150
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD046",
+                name: "\u5B88\u8B77\u306E\u672D",
+                image: "",
+                rarity: "SR",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "shield",
+                    power: 99.32,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P12_dark",
+                type: "P12",
+                name: "P12",
+                stat: "atk",
+                percent: 21.265505764796227,
+                level: 6,
+                target: "self",
+                targetElement: "dark"
+              }
+            ]
+          },
+          {
+            id: "9-3/2/3",
+            name: "\u8C4A\u81E3\u79C0\u5409",
+            image: "",
+            level: 82,
+            stats: {
+              luk: 0,
+              hp: 21790,
+              atk: 20890,
+              def: 1590,
+              sp: 180
+            },
+            order: 2,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 5,
+            initialCount: 3,
+            initialSp: 180,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 131.74,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_light",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 28.35400768639497,
+                level: 6,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_riki_01",
+          amount: 1
+        },
+        {
+          kind: "soul",
+          id: "char_ageha_01",
+          amount: 2
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 4e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 3
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 8
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_riki_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_ageha_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_riki_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_ageha_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 176,
+      encounterChance: 0.09
+    },
+    {
+      id: "satsuma-4",
+      designId: "9-4",
+      areaId: "satsuma",
+      index: 4,
+      name: "\u901A\u5E38\u653B\u6483\u306E\u6975\u610F",
+      description: "\u901A\u5E38\u653B\u6483\u306E\u6975\u610F",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "9-4/1/1",
+            name: "\u524D\u7530\u5229\u5BB6",
+            image: "",
+            level: 83,
+            stats: {
+              luk: 0,
+              hp: 140400,
+              atk: 9780,
+              def: 5450,
+              sp: 225
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 8,
+            initialCount: 5,
+            initialSp: 225,
+            skills: [
+              {
+                id: "SKD023",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u5149",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 90.26
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 14.177003843197484,
+                level: 6,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "9-4/1/2",
+            name: "\u6D45\u4E95\u9577\u653F",
+            image: "",
+            level: 83,
+            stats: {
+              luk: 0,
+              hp: 19620,
+              atk: 3600,
+              def: 1420,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P11_wind",
+                type: "P11",
+                name: "P11",
+                stat: "atk",
+                percent: 14.177003843197484,
+                level: 6,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "9-4/2/1",
+            name: "\u6B66\u7530\u4FE1\u7384",
+            image: "",
+            level: 83,
+            stats: {
+              luk: 0,
+              hp: 140400,
+              atk: 9780,
+              def: 5450,
+              sp: 225
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 8,
+            initialCount: 5,
+            initialSp: 225,
+            skills: [
+              {
+                id: "SKD023",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u5149",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 90.26
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P16_fire",
+                type: "P16",
+                name: "P16",
+                stat: "def",
+                percent: 28.35400768639497,
+                level: 6,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "9-4/3/1",
+            name: "\u67F4\u7530\u52DD\u5BB6",
+            image: "",
+            level: 83,
+            stats: {
+              luk: 0,
+              hp: 140400,
+              atk: 9780,
+              def: 5450,
+              sp: 225
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 8,
+            initialCount: 5,
+            initialSp: 225,
+            skills: [
+              {
+                id: "SKD023",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u5149",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 90.26
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 21.265505764796227,
+                level: 6,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "9-4/3/2",
+            name: "\u5CF6\u5DE6\u8FD1",
+            image: "",
+            level: 83,
+            stats: {
+              luk: 0,
+              hp: 34880,
+              atk: 4910,
+              def: 1740,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD009",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F",
+                image: "",
+                rarity: "R",
+                element: "earth",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P16_earth",
+                type: "P16",
+                name: "P16",
+                stat: "def",
+                percent: 14.177003843197484,
+                level: 6,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_noa_01",
+          amount: 2
+        },
+        {
+          kind: "soul",
+          id: "char_go_01",
+          amount: 3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 4e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 3
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 8
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_noa_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_go_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_noa_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_go_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 176,
+      encounterChance: 0.09
+    },
+    {
+      id: "satsuma-5",
+      designId: "9-5",
+      areaId: "satsuma",
+      index: 5,
+      name: "\u5F31\u4F53\u9023\u643A\u306E\u6975\u610F",
+      description: "\u5F31\u4F53\u9023\u643A\u306E\u6975\u610F",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "9-5/1/1",
+            name: "\u4E0A\u6749\u666F\u52DD",
+            image: "",
+            level: 84,
+            stats: {
+              luk: 0,
+              hp: 53760,
+              atk: 3920,
+              def: 3580,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD036",
+                name: "\u5B88\u308A\u306E\u9663",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 22.92,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_water",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 8.50620230591849,
+                level: 6,
+                target: "party",
+                targetElement: "water"
+              }
+            ]
+          },
+          {
+            id: "9-5/1/2",
+            name: "\u524D\u7530\u5229\u5BB6",
+            image: "",
+            level: 84,
+            stats: {
+              luk: 0,
+              hp: 35840,
+              atk: 5040,
+              def: 1790,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 14.177003843197484,
+                level: 6,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "9-5/2/1",
+            name: "\u77F3\u7530\u4E09\u6210",
+            image: "",
+            level: 84,
+            stats: {
+              luk: 0,
+              hp: 53760,
+              atk: 3920,
+              def: 3580,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 30,
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 22.92,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P04_light",
+                type: "P04",
+                name: "P04",
+                stat: "def",
+                percent: 24.809756725595598,
+                level: 6,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          },
+          {
+            id: "9-5/2/2",
+            name: "\u5CF6\u6D25\u7FA9\u4E45",
+            image: "",
+            level: 84,
+            stats: {
+              luk: 0,
+              hp: 26880,
+              atk: 4480,
+              def: 1570,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 40,
+            skills: [
+              {
+                id: "SKD053",
+                name: "\u596E\u8D77",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 36,
+                condition: {
+                  type: "always"
+                },
+                target: "first_ally",
+                effects: [
+                  {
+                    type: "cleanse",
+                    power: 1,
+                    cleanseCategory: "debuff"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_fire",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 8.50620230591849,
+                level: 6,
+                target: "party",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "9-5/2/3",
+            name: "\u6BDB\u5229\u5143\u5C31",
+            image: "",
+            level: 84,
+            stats: {
+              luk: 0,
+              hp: 35840,
+              atk: 5040,
+              def: 1790,
+              sp: 100
+            },
+            order: 2,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD010",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P03_wind",
+                type: "P03",
+                name: "P03",
+                stat: "atk",
+                percent: 21.265505764796227,
+                level: 6,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "9-5/3/1",
+            name: "\u660E\u667A\u5149\u79C0",
+            image: "",
+            level: 84,
+            stats: {
+              luk: 0,
+              hp: 22e3,
+              atk: 7280,
+              def: 22e3,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 8,
+            initialCount: 8,
+            initialSp: 100,
+            skills: [
+              {
+                id: "SKD028",
+                name: "\u5D29\u3057\u8A0E\u3061",
+                image: "",
+                rarity: "SR",
+                element: "earth",
+                spCost: 100,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 146.96,
+                    bonusCondition: "debuff",
+                    bonusPower: 198.09,
+                    hpThreshold: 0.4
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P08_dark",
+                type: "P08",
+                name: "P08",
+                stat: "atk",
+                percent: 21.265505764796227,
+                level: 6,
+                target: "self",
+                targetElement: "dark"
+              }
+            ]
+          },
+          {
+            id: "9-5/3/2",
+            name: "\u5C71\u672C\u52D8\u52A9",
+            image: "",
+            level: 84,
+            stats: {
+              luk: 0,
+              hp: 26880,
+              atk: 4480,
+              def: 1570,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD038",
+                name: "\u93A7\u7815\u304D",
+                image: "",
+                rarity: "R",
+                element: "earth",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "def_down",
+                    power: 18.86,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P08_fire",
+                type: "P08",
+                name: "P08",
+                stat: "atk",
+                percent: 10.632752882398114,
+                level: 6,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_reina_01",
+          amount: 3
+        },
+        {
+          kind: "soul",
+          id: "char_miyabi_01",
+          amount: 4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 4e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 3
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 8
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_reina_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_miyabi_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_reina_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_miyabi_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 176,
+      encounterChance: 0.09
+    },
+    {
+      id: "satsuma-6",
+      designId: "9-6",
+      areaId: "satsuma",
+      index: 6,
+      name: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u306E\u6975\u610F",
+      description: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u306E\u6975\u610F",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "9-6/1/1",
+            name: "\u5317\u6761\u6C0F\u5EB7",
+            image: "",
+            level: 85,
+            stats: {
+              luk: 0,
+              hp: 55200,
+              atk: 4020,
+              def: 3680,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 30,
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 22.92,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P15_earth",
+                type: "P15",
+                name: "P15",
+                stat: "def",
+                percent: 14.177003843197484,
+                level: 6,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "9-6/1/2",
+            name: "\u4E0A\u6749\u666F\u52DD",
+            image: "",
+            level: 85,
+            stats: {
+              luk: 0,
+              hp: 55200,
+              atk: 4020,
+              def: 3680,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD036",
+                name: "\u5B88\u308A\u306E\u9663",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 22.92,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_water",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 8.50620230591849,
+                level: 6,
+                target: "party",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "9-6/2/1",
+            name: "\u524D\u7530\u6176\u6B21",
+            image: "",
+            level: 85,
+            stats: {
+              luk: 0,
+              hp: 22e3,
+              atk: 7470,
+              def: 22e3,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P05_wind",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 28.35400768639497,
+                level: 6,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          },
+          {
+            id: "9-6/2/2",
+            name: "\u304A\u5E02\u306E\u65B9",
+            image: "",
+            level: 85,
+            stats: {
+              luk: 0,
+              hp: 28750,
+              atk: 7470,
+              def: 1720,
+              sp: 180
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 90,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 114.61,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_fire",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 14.177003843197484,
+                level: 6,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_mio_01",
+          amount: 5
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 4e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 3
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 8
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_mio_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_mio_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 176,
+      encounterChance: 0.09
+    },
+    {
+      id: "satsuma-7",
+      designId: "9-7",
+      areaId: "satsuma",
+      index: 7,
+      name: "\u53CD\u6483\u306E\u6975\u610F",
+      description: "\u53CD\u6483\u306E\u6975\u610F",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "9-7/1/1",
+            name: "\u4E95\u4F0A\u76F4\u653F",
+            image: "",
+            level: 86,
+            stats: {
+              luk: 0,
+              hp: 67970,
+              atk: 4410,
+              def: 240,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 2,
+            initialCount: 3,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P06_fire",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 7.088501921598742,
+                level: 6,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "9-7/1/2",
+            name: "\u96D1\u8CC0\u5B6B\u5E02",
+            image: "",
+            level: 86,
+            stats: {
+              luk: 0,
+              hp: 67970,
+              atk: 4410,
+              def: 240,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 2,
+            initialCount: 3,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P06_wind",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 10.632752882398114,
+                level: 6,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "9-7/2/1",
+            name: "\u524D\u7530\u6176\u6B21",
+            image: "",
+            level: 86,
+            stats: {
+              luk: 0,
+              hp: 276120,
+              atk: 4410,
+              def: 240,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 2,
+            initialCount: 3,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P05_wind",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 28.35400768639497,
+                level: 6,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "9-7/3/1",
+            name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+            image: "",
+            level: 86,
+            stats: {
+              luk: 0,
+              hp: 67970,
+              atk: 4410,
+              def: 240,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 2,
+            initialCount: 3,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P16_water",
+                type: "P16",
+                name: "P16",
+                stat: "def",
+                percent: 21.265505764796227,
+                level: 6,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          },
+          {
+            id: "9-7/3/2",
+            name: "\u5CF6\u6D25\u7FA9\u5F18",
+            image: "",
+            level: 86,
+            stats: {
+              luk: 0,
+              hp: 67970,
+              atk: 4410,
+              def: 240,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 2,
+            initialCount: 3,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P14_fire",
+                type: "P14",
+                name: "P14",
+                stat: "atk",
+                percent: 24.809756725595598,
+                level: 6,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "9-7/3/3",
+            name: "\u7ACB\u82B1\u5B97\u8302",
+            image: "",
+            level: 86,
+            stats: {
+              luk: 0,
+              hp: 67970,
+              atk: 4410,
+              def: 240,
+              sp: 100
+            },
+            order: 2,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 2,
+            initialCount: 3,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P06_light",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 7.088501921598742,
+                level: 6,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_lucas_01",
+          amount: 4
+        },
+        {
+          kind: "soul",
+          id: "char_mio_01",
+          amount: 5
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 4e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 3
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 8
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_lucas_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_mio_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_lucas_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_mio_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 176,
+      encounterChance: 0.09
+    },
+    {
+      id: "satsuma-8",
+      designId: "9-8",
+      areaId: "satsuma",
+      index: 8,
+      name: "\u80CC\u6C34\u306E\u6975\u610F",
+      description: "\u80CC\u6C34\u306E\u6975\u610F",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "9-8/1/1",
+            name: "\u67F4\u7530\u52DD\u5BB6",
+            image: "",
+            level: 87,
+            stats: {
+              luk: 0,
+              hp: 38720,
+              atk: 5450,
+              def: 1940,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 21.265505764796227,
+                level: 6,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "9-8/1/2",
+            name: "\u5CF6\u5DE6\u8FD1",
+            image: "",
+            level: 87,
+            stats: {
+              luk: 0,
+              hp: 38720,
+              atk: 5450,
+              def: 1940,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD009",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F",
+                image: "",
+                rarity: "R",
+                element: "earth",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P16_earth",
+                type: "P16",
+                name: "P16",
+                stat: "def",
+                percent: 14.177003843197484,
+                level: 6,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "9-8/2/1",
+            name: "\u771F\u7530\u5E78\u6751",
+            image: "",
+            level: 87,
+            stats: {
+              luk: 0,
+              hp: 199650,
+              atk: 9440,
+              def: 4840,
+              sp: 180
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 10,
+            initialCount: 10,
+            initialSp: 150,
+            skills: [
+              {
+                id: "SKD013",
+                name: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "SSR",
+                element: "fire",
+                spCost: 150,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 229.21
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P14_fire",
+                type: "P14",
+                name: "P14",
+                stat: "atk",
+                percent: 31.89825864719434,
+                level: 6,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_noa_01",
+          amount: 4
+        },
+        {
+          kind: "soul",
+          id: "char_kaede_01",
+          amount: 6
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 4e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 3
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 8
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_noa_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_kaede_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_noa_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_kaede_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 176,
+      encounterChance: 0.09
+    },
+    {
+      id: "satsuma-9",
+      designId: "9-9",
+      areaId: "satsuma",
+      index: 9,
+      name: "\u59A8\u5BB3\u3068\u89E3\u9664\u306E\u6975\u610F",
+      description: "\u59A8\u5BB3\u3068\u89E3\u9664\u306E\u6975\u610F",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "9-9/1/1",
+            name: "\u7AF9\u4E2D\u534A\u5175\u885B",
+            image: "",
+            level: 88,
+            stats: {
+              luk: 0,
+              hp: 48410,
+              atk: 5600,
+              def: 1740,
+              sp: 65
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 9,
+            initialCount: 3,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD032",
+                name: "\u5F71\u7E2B\u3044",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "stun",
+                    power: 0,
+                    chance: 0.5013000000000001,
+                    duration: 1
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P04_light",
+                type: "P04",
+                name: "P04",
+                stat: "def",
+                percent: 17.721254803996857,
+                level: 6,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          },
+          {
+            id: "9-9/1/2",
+            name: "\u96D1\u8CC0\u5B6B\u5E02",
+            image: "",
+            level: 88,
+            stats: {
+              luk: 0,
+              hp: 39680,
+              atk: 5580,
+              def: 1980,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD010",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_wind",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 10.632752882398114,
+                level: 6,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "9-9/2/1",
+            name: "\u6B66\u7530\u52DD\u983C",
+            image: "",
+            level: 88,
+            stats: {
+              luk: 0,
+              hp: 96830,
+              atk: 13210,
+              def: 4460,
+              sp: 75
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 8,
+            initialCount: 7,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD023",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u5149",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 90.26
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P14_fire",
+                type: "P14",
+                name: "P14",
+                stat: "atk",
+                percent: 17.721254803996857,
+                level: 6,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "9-9/3/1",
+            name: "\u658E\u85E4\u9053\u4E09",
+            image: "",
+            level: 88,
+            stats: {
+              luk: 0,
+              hp: 48410,
+              atk: 5600,
+              def: 1740,
+              sp: 65
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 9,
+            initialCount: 3,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD032",
+                name: "\u5F71\u7E2B\u3044",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "stun",
+                    power: 0,
+                    chance: 0.5013000000000001,
+                    duration: 1
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P09_dark",
+                type: "P09",
+                name: "P09",
+                stat: "atk",
+                percent: 14.177003843197484,
+                level: 6,
+                target: "self",
+                targetElement: "dark"
+              }
+            ]
+          },
+          {
+            id: "9-9/3/2",
+            name: "\u771F\u7530\u660C\u5E78",
+            image: "",
+            level: 88,
+            stats: {
+              luk: 0,
+              hp: 161200,
+              atk: 8060,
+              def: 4460,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD032",
+                name: "\u5F71\u7E2B\u3044",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "stun",
+                    power: 0,
+                    chance: 0.4556,
+                    duration: 1
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P12_fire",
+                type: "P12",
+                name: "P12",
+                stat: "atk",
+                percent: 21.265505764796227,
+                level: 6,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_sakura_01",
+          amount: 5
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 4e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 3
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 8
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_sakura_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_sakura_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 176,
+      encounterChance: 0.09
+    },
+    {
+      id: "satsuma-10",
+      designId: "9-10",
+      areaId: "satsuma",
+      index: 10,
+      name: "\u5F97\u610F\u3068\u4E0D\u5F97\u610F\u3092\u898B\u629C\u304F",
+      description: "\u5F97\u610F\u3068\u4E0D\u5F97\u610F\u3092\u898B\u629C\u304F",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "9-10/1/1",
+            name: "\u52A0\u85E4\u6E05\u6B63",
+            image: "",
+            level: 90,
+            stats: {
+              luk: 0,
+              hp: 62400,
+              atk: 4550,
+              def: 4160,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 30,
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 22.92,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P15_earth",
+                type: "P15",
+                name: "P15",
+                stat: "def",
+                percent: 21.265505764796227,
+                level: 6,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "9-10/1/2",
+            name: "\u76F4\u6C5F\u517C\u7D9A",
+            image: "",
+            level: 90,
+            stats: {
+              luk: 0,
+              hp: 31200,
+              atk: 5200,
+              def: 1820,
+              sp: 150
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD035",
+                name: "\u9B28\u306E\u58F0",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "atk_up",
+                    power: 11.7,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P01_water",
+                type: "P01",
+                name: "P01",
+                stat: "atk",
+                percent: 8.50620230591849,
+                level: 6,
+                target: "party",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "9-10/2/1",
+            name: "\u4F0A\u9054\u653F\u5B97",
+            image: "",
+            level: 90,
+            stats: {
+              luk: 0,
+              hp: 169e3,
+              atk: 8450,
+              def: 4680,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 9,
+            initialCount: 9,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD022",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 81.12
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P07_wind",
+                type: "P07",
+                name: "P07",
+                stat: "atk",
+                percent: 14.177003843197484,
+                level: 6,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "9-10/3/1",
+            name: "\u672C\u591A\u5FE0\u52DD",
+            image: "",
+            level: 90,
+            stats: {
+              luk: 0,
+              hp: 169e3,
+              atk: 13940,
+              def: 4680,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 8,
+            initialCount: 8,
+            initialSp: 110,
+            skills: [
+              {
+                id: "SKD050",
+                name: "\u8FCE\u6483\u306E\u69CB\u3048",
+                image: "",
+                rarity: "SSR",
+                element: "earth",
+                spCost: 110,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "taunt",
+                    power: 0,
+                    chance: 1,
+                    duration: 3
+                  },
+                  {
+                    type: "counter",
+                    power: 78.76,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P13_earth",
+                type: "P13",
+                name: "P13",
+                stat: "atk",
+                percent: 31.89825864719434,
+                level: 6,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "9-10/4/1",
+            name: "\u7E54\u7530\u4FE1\u9577",
+            image: "",
+            level: 90,
+            stats: {
+              luk: 0,
+              hp: 169e3,
+              atk: 8450,
+              def: 4680,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 9,
+            initialCount: 9,
+            initialSp: 125,
+            skills: [
+              {
+                id: "SKD035",
+                name: "\u9B28\u306E\u58F0",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "atk_up",
+                    power: 11.7,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.25
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P01_fire",
+                type: "P01",
+                name: "P01",
+                stat: "atk",
+                percent: 11.341603074557987,
+                level: 6,
+                target: "party",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "9-10/4/2",
+            name: "\u304A\u5E02\u306E\u65B9",
+            image: "",
+            level: 90,
+            stats: {
+              luk: 0,
+              hp: 32500,
+              atk: 8450,
+              def: 1950,
+              sp: 180
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 90,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 114.61,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_fire",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 14.177003843197484,
+                level: 6,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_rui_01",
+          amount: 5
+        },
+        {
+          kind: "soul",
+          id: "char_reiji_01",
+          amount: 8
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 2
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "unlock_item",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 4e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 3
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 1
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 8
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_rui_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_reiji_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_rui_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_reiji_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 176,
+      encounterChance: 0.09
+    },
+    {
+      id: "sekigahara-1",
+      designId: "10-1",
+      areaId: "sekigahara",
+      index: 1,
+      name: "\u786C\u3044\u524D\u885B\u3068\u5371\u967A\u306A\u5F8C\u885B",
+      description: "\u786C\u3044\u524D\u885B\u3068\u5371\u967A\u306A\u5F8C\u885B",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "10-1/1/1",
+            name: "\u4E95\u4F0A\u76F4\u864E",
+            image: "",
+            level: 90,
+            stats: {
+              luk: 0,
+              hp: 97850,
+              atk: 5500,
+              def: 10480,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 30,
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 26.35,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P11_water",
+                type: "P11",
+                name: "P11",
+                stat: "atk",
+                percent: 25.46757764864575,
+                level: 8,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          },
+          {
+            id: "10-1/1/2",
+            name: "\u96D1\u8CC0\u5B6B\u5E02",
+            image: "",
+            level: 90,
+            stats: {
+              luk: 0,
+              hp: 25160,
+              atk: 28090,
+              def: 2800,
+              sp: 180
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 5,
+            initialCount: 3,
+            initialSp: 180,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 131.74,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_wind",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 12.733788824322875,
+                level: 8,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "10-1/2/1",
+            name: "\u6BDB\u5229\u5143\u5C31",
+            image: "",
+            level: 90,
+            stats: {
+              luk: 0,
+              hp: 97850,
+              atk: 7e3,
+              def: 10480,
+              sp: 110
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 8,
+            initialCount: 3,
+            initialSp: 55,
+            skills: [
+              {
+                id: "SKD026",
+                name: "\u5F8C\u9663\u5C04\u3061",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 55,
+                condition: {
+                  type: "always"
+                },
+                target: "last",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 161.74
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P03_wind",
+                type: "P03",
+                name: "P03",
+                stat: "atk",
+                percent: 25.46757764864575,
+                level: 8,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          },
+          {
+            id: "10-1/2/2",
+            name: "\u7D30\u5DDD\u30AC\u30E9\u30B7\u30E3",
+            image: "",
+            level: 90,
+            stats: {
+              luk: 0,
+              hp: 25160,
+              atk: 28090,
+              def: 2500,
+              sp: 180
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 5,
+            initialCount: 3,
+            initialSp: 180,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 131.74,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_light",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 16.978385099097167,
+                level: 8,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "10-1/3/1",
+            name: "\u5317\u6761\u6C0F\u5EB7",
+            image: "",
+            level: 90,
+            stats: {
+              luk: 0,
+              hp: 97850,
+              atk: 5500,
+              def: 10480,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 30,
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 26.35,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P15_earth",
+                type: "P15",
+                name: "P15",
+                stat: "def",
+                percent: 16.978385099097167,
+                level: 8,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "10-1/3/2",
+            name: "\u4E0A\u6749\u8B19\u4FE1",
+            image: "",
+            level: 90,
+            stats: {
+              luk: 0,
+              hp: 25160,
+              atk: 28090,
+              def: 6500,
+              sp: 180
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 5,
+            initialCount: 3,
+            initialSp: 180,
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 131.74,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_water",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 16.978385099097167,
+                level: 8,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_koharu_01",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 5e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 4
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 4
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_reina_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_koharu_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_reina_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_koharu_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 208,
+      encounterChance: 0.1
+    },
+    {
+      id: "sekigahara-2",
+      designId: "10-2",
+      areaId: "sekigahara",
+      index: 2,
+      name: "\u5206\u6563\u88AB\u5BB3\u3068\u96C6\u4E2D\u88AB\u5BB3",
+      description: "\u5206\u6563\u88AB\u5BB3\u3068\u96C6\u4E2D\u88AB\u5BB3",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "10-2/1/1",
+            name: "\u7ACB\u82B1\u8ABE\u5343\u4EE3",
+            image: "",
+            level: 91,
+            stats: {
+              luk: 0,
+              hp: 47150,
+              atk: 12548,
+              def: 2870,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 8,
+            initialCount: 3,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD023",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u5149",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 90.26
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P07_light",
+                type: "P07",
+                name: "P07",
+                stat: "atk",
+                percent: 12.733788824322875,
+                level: 8,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          },
+          {
+            id: "10-2/1/2",
+            name: "\u7ACB\u82B1\u5B97\u8302",
+            image: "",
+            level: 91,
+            stats: {
+              luk: 0,
+              hp: 47150,
+              atk: 7170,
+              def: 2870,
+              sp: 150
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD011",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 180.53
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_light",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 8.489192549548584,
+                level: 8,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "10-2/2/1",
+            name: "\u6B66\u7530\u52DD\u983C",
+            image: "",
+            level: 91,
+            stats: {
+              luk: 0,
+              hp: 215250,
+              atk: 10760,
+              def: 6660,
+              sp: 180
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 10,
+            initialCount: 10,
+            initialSp: 150,
+            skills: [
+              {
+                id: "SKD013",
+                name: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "SSR",
+                element: "fire",
+                spCost: 150,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 263.49
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P14_fire",
+                type: "P14",
+                name: "P14",
+                stat: "atk",
+                percent: 21.22298137387146,
+                level: 8,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "10-2/3/1",
+            name: "\u4F0A\u9054\u653F\u5B97",
+            image: "",
+            level: 91,
+            stats: {
+              luk: 0,
+              hp: 215250,
+              atk: 16e3,
+              def: 6660,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 9,
+            initialCount: 3,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD022",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 90.26
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P07_wind",
+                type: "P07",
+                name: "P07",
+                stat: "atk",
+                percent: 16.978385099097167,
+                level: 8,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          },
+          {
+            id: "10-2/3/2",
+            name: "\u4E95\u4F0A\u76F4\u653F",
+            image: "",
+            level: 91,
+            stats: {
+              luk: 0,
+              hp: 47150,
+              atk: 7170,
+              def: 2870,
+              sp: 150
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 180.53
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_fire",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 8.489192549548584,
+                level: 8,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_sora_01",
+          amount: 1
+        },
+        {
+          kind: "soul",
+          id: "char_leo_01",
+          amount: 2
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 5e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 4
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 4
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_sora_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_leo_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_sora_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_leo_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 208,
+      encounterChance: 0.1
+    },
+    {
+      id: "sekigahara-3",
+      designId: "10-3",
+      areaId: "sekigahara",
+      index: 3,
+      name: "\u5F37\u5316\u3068\u4FDD\u8B77\u306E\u4E8C\u91CD\u5B88\u5099",
+      description: "\u5F37\u5316\u3068\u4FDD\u8B77\u306E\u4E8C\u91CD\u5B88\u5099",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "10-3/1/1",
+            name: "\u4E0A\u6749\u666F\u52DD",
+            image: "",
+            level: 92,
+            stats: {
+              luk: 0,
+              hp: 77700,
+              atk: 5780,
+              def: 5780,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD036",
+                name: "\u5B88\u308A\u306E\u9663",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 26.35,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_water",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 10.187031059458299,
+                level: 8,
+                target: "party",
+                targetElement: "water"
+              }
+            ]
+          },
+          {
+            id: "10-3/1/2",
+            name: "\u6FC3\u59EB",
+            image: "",
+            level: 92,
+            stats: {
+              luk: 0,
+              hp: 44100,
+              atk: 8930,
+              def: 3150,
+              sp: 150
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD046",
+                name: "\u5B88\u8B77\u306E\u672D",
+                image: "",
+                rarity: "SR",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "shield",
+                    power: 114.18,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P12_dark",
+                type: "P12",
+                name: "P12",
+                stat: "atk",
+                percent: 25.46757764864575,
+                level: 8,
+                target: "self",
+                targetElement: "dark"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "10-3/2/1",
+            name: "\u52A0\u85E4\u6E05\u6B63",
+            image: "",
+            level: 92,
+            stats: {
+              luk: 0,
+              hp: 77700,
+              atk: 5780,
+              def: 5780,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 30,
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 26.35,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P15_earth",
+                type: "P15",
+                name: "P15",
+                stat: "def",
+                percent: 25.46757764864575,
+                level: 8,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "10-3/2/2",
+            name: "\u771F\u7530\u660C\u5E78",
+            image: "",
+            level: 92,
+            stats: {
+              luk: 0,
+              hp: 44100,
+              atk: 8930,
+              def: 3150,
+              sp: 150
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD046",
+                name: "\u5B88\u8B77\u306E\u672D",
+                image: "",
+                rarity: "SR",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "shield",
+                    power: 114.18,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P12_fire",
+                type: "P12",
+                name: "P12",
+                stat: "atk",
+                percent: 25.46757764864575,
+                level: 8,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "10-3/3/1",
+            name: "\u5FB3\u5DDD\u5BB6\u5EB7",
+            image: "",
+            level: 92,
+            stats: {
+              luk: 0,
+              hp: 220500,
+              atk: 11030,
+              def: 6830,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 9,
+            initialCount: 9,
+            initialSp: 125,
+            skills: [
+              {
+                id: "SKD036",
+                name: "\u5B88\u308A\u306E\u9663",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 26.35,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD009",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F",
+                image: "",
+                rarity: "R",
+                element: "earth",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 180.53
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_earth",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 20.374062118916598,
+                level: 8,
+                target: "party",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "10-3/3/2",
+            name: "\u7247\u5009\u666F\u7DB1",
+            image: "",
+            level: 92,
+            stats: {
+              luk: 0,
+              hp: 44100,
+              atk: 8930,
+              def: 3150,
+              sp: 150
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD046",
+                name: "\u5B88\u8B77\u306E\u672D",
+                image: "",
+                rarity: "SR",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "shield",
+                    power: 114.18,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P12_wind",
+                type: "P12",
+                name: "P12",
+                stat: "atk",
+                percent: 16.978385099097167,
+                level: 8,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_sakura_01",
+          amount: 1
+        },
+        {
+          kind: "soul",
+          id: "char_karen_01",
+          amount: 2
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 5e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 4
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 4
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_sakura_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_karen_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_sakura_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_karen_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 208,
+      encounterChance: 0.1
+    },
+    {
+      id: "sekigahara-4",
+      designId: "10-4",
+      areaId: "sekigahara",
+      index: 4,
+      name: "\u706B\u529B\u4F4E\u4E0B\u3068\u7D99\u7D9A\u88AB\u5BB3",
+      description: "\u706B\u529B\u4F4E\u4E0B\u3068\u7D99\u7D9A\u88AB\u5BB3",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "10-4/1/1",
+            name: "\u5C71\u672C\u52D8\u52A9",
+            image: "",
+            level: 93,
+            stats: {
+              luk: 0,
+              hp: 36550,
+              atk: 6450,
+              def: 2800,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 5,
+            initialCount: 2,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD037",
+                name: "\u5A01\u5727",
+                image: "",
+                rarity: "R",
+                element: "dark",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "highest_atk_enemy",
+                effects: [
+                  {
+                    type: "atk_down",
+                    power: 17.57,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P08_fire",
+                type: "P08",
+                name: "P08",
+                stat: "atk",
+                percent: 12.733788824322875,
+                level: 8,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "10-4/1/2",
+            name: "\u658E\u85E4\u9053\u4E09",
+            image: "",
+            level: 93,
+            stats: {
+              luk: 0,
+              hp: 49450,
+              atk: 7530,
+              def: 3010,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD029",
+                name: "\u6BD2\u5203",
+                image: "",
+                rarity: "R",
+                element: "dark",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 117.83
+                  },
+                  {
+                    type: "dot",
+                    power: 17.57,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P09_dark",
+                type: "P09",
+                name: "P09",
+                stat: "atk",
+                percent: 16.978385099097167,
+                level: 8,
+                target: "self",
+                targetElement: "dark"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "10-4/2/1",
+            name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+            image: "",
+            level: 93,
+            stats: {
+              luk: 0,
+              hp: 49450,
+              atk: 7530,
+              def: 3010,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 7,
+            initialCount: 3,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD029",
+                name: "\u6BD2\u5203",
+                image: "",
+                rarity: "R",
+                element: "dark",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 117.83
+                  },
+                  {
+                    type: "dot",
+                    power: 17.57,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P16_water",
+                type: "P16",
+                name: "P16",
+                stat: "def",
+                percent: 25.46757764864575,
+                level: 8,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          },
+          {
+            id: "10-4/2/2",
+            name: "\u5927\u53CB\u5B97\u9E9F",
+            image: "",
+            level: 93,
+            stats: {
+              luk: 0,
+              hp: 36550,
+              atk: 6450,
+              def: 2800,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 6,
+            initialCount: 6,
+            initialSp: 100,
+            skills: [
+              {
+                id: "SKD064",
+                name: "\u5A01\u5727\u306E\u9663",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 100,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "atk_down",
+                    power: 17.57,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P01_light",
+                type: "P01",
+                name: "P01",
+                stat: "atk",
+                percent: 6.7913540396388665,
+                level: 8,
+                target: "party",
+                targetElement: "light"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "10-4/3/1",
+            name: "\u660E\u667A\u5149\u79C0",
+            image: "",
+            level: 93,
+            stats: {
+              luk: 0,
+              hp: 225750,
+              atk: 11290,
+              def: 6990,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 8,
+            initialCount: 8,
+            initialSp: 100,
+            skills: [
+              {
+                id: "SKD028",
+                name: "\u5D29\u3057\u8A0E\u3061",
+                image: "",
+                rarity: "SR",
+                element: "earth",
+                spCost: 100,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 162.96,
+                    bonusCondition: "debuff",
+                    bonusPower: 223.23,
+                    hpThreshold: 0.4
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P08_dark",
+                type: "P08",
+                name: "P08",
+                stat: "atk",
+                percent: 25.46757764864575,
+                level: 8,
+                target: "self",
+                targetElement: "dark"
+              }
+            ]
+          },
+          {
+            id: "10-4/3/2",
+            name: "\u670D\u90E8\u534A\u8535",
+            image: "",
+            level: 93,
+            stats: {
+              luk: 0,
+              hp: 49450,
+              atk: 7530,
+              def: 3010,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "dark",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 65,
+            skills: [
+              {
+                id: "SKD029",
+                name: "\u6BD2\u5203",
+                image: "",
+                rarity: "R",
+                element: "dark",
+                spCost: 65,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 117.83
+                  },
+                  {
+                    type: "dot",
+                    power: 17.57,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P09_dark",
+                type: "P09",
+                name: "P09",
+                stat: "atk",
+                percent: 25.46757764864575,
+                level: 8,
+                target: "self",
+                targetElement: "dark"
+              }
+            ]
+          },
+          {
+            id: "10-4/3/3",
+            name: "\u5C71\u672C\u52D8\u52A9",
+            image: "",
+            level: 93,
+            stats: {
+              luk: 0,
+              hp: 36550,
+              atk: 6450,
+              def: 2800,
+              sp: 100
+            },
+            order: 2,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD037",
+                name: "\u5A01\u5727",
+                image: "",
+                rarity: "R",
+                element: "dark",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "highest_atk_enemy",
+                effects: [
+                  {
+                    type: "atk_down",
+                    power: 17.57,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P08_fire",
+                type: "P08",
+                name: "P08",
+                stat: "atk",
+                percent: 12.733788824322875,
+                level: 8,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_maya_01",
+          amount: 1
+        },
+        {
+          kind: "soul",
+          id: "char_miyabi_01",
+          amount: 3
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 5e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 4
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 4
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_maya_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_miyabi_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_maya_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_miyabi_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 208,
+      encounterChance: 0.1
+    },
+    {
+      id: "sekigahara-5",
+      designId: "10-5",
+      areaId: "sekigahara",
+      index: 5,
+      name: "\u540C\u5C5E\u6027\u4E3B\u8EF8\u306E\u5F31\u70B9\u3092\u88DC\u3046",
+      description: "\u540C\u5C5E\u6027\u4E3B\u8EF8\u306E\u5F31\u70B9\u3092\u88DC\u3046",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "10-5/1/1",
+            name: "\u4ECA\u5DDD\u7FA9\u5143",
+            image: "",
+            level: 94,
+            stats: {
+              luk: 0,
+              hp: 89540,
+              atk: 10930,
+              def: 6050,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD036",
+                name: "\u5B88\u308A\u306E\u9663",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 26.35,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_wind",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 15.28054658918745,
+                level: 8,
+                target: "party",
+                targetElement: "wind"
+              }
+            ]
+          },
+          {
+            id: "10-5/1/2",
+            name: "\u96D1\u8CC0\u5B6B\u5E02",
+            image: "",
+            level: 94,
+            stats: {
+              luk: 0,
+              hp: 50600,
+              atk: 7700,
+              def: 3080,
+              sp: 150
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD010",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 180.53
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_wind",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 12.733788824322875,
+                level: 8,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "10-5/2/1",
+            name: "\u4E0A\u6749\u666F\u52DD",
+            image: "",
+            level: 94,
+            stats: {
+              luk: 0,
+              hp: 89540,
+              atk: 10930,
+              def: 6050,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD036",
+                name: "\u5B88\u308A\u306E\u9663",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 26.35,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_water",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 10.187031059458299,
+                level: 8,
+                target: "party",
+                targetElement: "water"
+              }
+            ]
+          },
+          {
+            id: "10-5/2/2",
+            name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+            image: "",
+            level: 94,
+            stats: {
+              luk: 0,
+              hp: 50600,
+              atk: 7700,
+              def: 3080,
+              sp: 150
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD008",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 180.53
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P16_water",
+                type: "P16",
+                name: "P16",
+                stat: "def",
+                percent: 25.46757764864575,
+                level: 8,
+                target: "self",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "10-5/3/1",
+            name: "\u7E54\u7530\u4FE1\u9577",
+            image: "",
+            level: 94,
+            stats: {
+              luk: 0,
+              hp: 254100,
+              atk: 10930,
+              def: 7150,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 9,
+            initialCount: 9,
+            initialSp: 125,
+            skills: [
+              {
+                id: "SKD035",
+                name: "\u9B28\u306E\u58F0",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "atk_up",
+                    power: 13.3,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 180.53
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P01_fire",
+                type: "P01",
+                name: "P01",
+                stat: "atk",
+                percent: 13.582708079277733,
+                level: 8,
+                target: "party",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "10-5/3/2",
+            name: "\u5CF6\u6D25\u7FA9\u5F18",
+            image: "",
+            level: 94,
+            stats: {
+              luk: 0,
+              hp: 50600,
+              atk: 7700,
+              def: 3080,
+              sp: 150
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 180.53
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P14_fire",
+                type: "P14",
+                name: "P14",
+                stat: "atk",
+                percent: 29.712173923420043,
+                level: 8,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_lucas_01",
+          amount: 2
+        },
+        {
+          kind: "soul",
+          id: "char_reiji_01",
+          amount: 4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 5e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 4
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 4
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_lucas_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_reiji_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_lucas_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_reiji_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 208,
+      encounterChance: 0.1
+    },
+    {
+      id: "sekigahara-6",
+      designId: "10-6",
+      areaId: "sekigahara",
+      index: 6,
+      name: "\u6761\u4EF6\u706B\u529B\u3092\u7DAD\u6301\u3059\u308B",
+      description: "\u6761\u4EF6\u706B\u529B\u3092\u7DAD\u6301\u3059\u308B",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "10-6/1/1",
+            name: "\u52A0\u85E4\u6E05\u6B63",
+            image: "",
+            level: 95,
+            stats: {
+              luk: 0,
+              hp: 83250,
+              atk: 6190,
+              def: 6190,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 30,
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 26.35,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P15_earth",
+                type: "P15",
+                name: "P15",
+                stat: "def",
+                percent: 25.46757764864575,
+                level: 8,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "10-6/1/2",
+            name: "\u5CF6\u6D25\u7FA9\u4E45",
+            image: "",
+            level: 95,
+            stats: {
+              luk: 0,
+              hp: 38250,
+              atk: 6750,
+              def: 2930,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 40,
+            skills: [
+              {
+                id: "SKD054",
+                name: "\u6D44\u6BD2",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 34,
+                condition: {
+                  type: "always"
+                },
+                target: "first_ally",
+                effects: [
+                  {
+                    type: "cleanse",
+                    power: 1,
+                    cleanseCategory: "dot"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_fire",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 10.187031059458299,
+                level: 8,
+                target: "party",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "10-6/2/1",
+            name: "\u5317\u6761\u6C0F\u5EB7",
+            image: "",
+            level: 95,
+            stats: {
+              luk: 0,
+              hp: 83250,
+              atk: 6190,
+              def: 6190,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 30,
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 26.35,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P15_earth",
+                type: "P15",
+                name: "P15",
+                stat: "def",
+                percent: 16.978385099097167,
+                level: 8,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "10-6/2/2",
+            name: "\u4E0A\u6749\u666F\u52DD",
+            image: "",
+            level: 95,
+            stats: {
+              luk: 0,
+              hp: 38250,
+              atk: 6750,
+              def: 2930,
+              sp: 100
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "water",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 40,
+            skills: [
+              {
+                id: "SKD053",
+                name: "\u596E\u8D77",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 34,
+                condition: {
+                  type: "always"
+                },
+                target: "first_ally",
+                effects: [
+                  {
+                    type: "cleanse",
+                    power: 1,
+                    cleanseCategory: "debuff"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_water",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 10.187031059458299,
+                level: 8,
+                target: "party",
+                targetElement: "water"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "10-6/3/1",
+            name: "\u524D\u7530\u6176\u6B21",
+            image: "",
+            level: 95,
+            stats: {
+              luk: 0,
+              hp: 24e3,
+              atk: 11810,
+              def: 28e3,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "wind",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P05_wind",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 33.956770198194334,
+                level: 8,
+                target: "self",
+                targetElement: "wind"
+              }
+            ]
+          },
+          {
+            id: "10-6/3/2",
+            name: "\u7D30\u5DDD\u30AC\u30E9\u30B7\u30E3",
+            image: "",
+            level: 95,
+            stats: {
+              luk: 0,
+              hp: 45e3,
+              atk: 10130,
+              def: 2810,
+              sp: 150
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 140,
+            skills: [
+              {
+                id: "SKD071",
+                name: "\u5927\u7953\u3044",
+                image: "",
+                rarity: "SSR",
+                element: "light",
+                spCost: 119,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "cleanse",
+                    power: 1,
+                    cleanseCategory: "debuff"
+                  },
+                  {
+                    type: "cleanse",
+                    power: 1,
+                    cleanseCategory: "dot"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_light",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 16.978385099097167,
+                level: 8,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_leon_01",
+          amount: 2
+        },
+        {
+          kind: "soul",
+          id: "char_mio_01",
+          amount: 5
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 5e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 4
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 4
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_leon_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_mio_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_leon_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_mio_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 208,
+      encounterChance: 0.1
+    },
+    {
+      id: "sekigahara-7",
+      designId: "10-7",
+      areaId: "sekigahara",
+      index: 7,
+      name: "\u80CC\u6C34\u3068\u751F\u5B58\u3092\u4E21\u7ACB\u3059\u308B",
+      description: "\u80CC\u6C34\u3068\u751F\u5B58\u3092\u4E21\u7ACB\u3059\u308B",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "10-7/1/1",
+            name: "\u524D\u7530\u5229\u5BB6",
+            image: "",
+            level: 96,
+            stats: {
+              luk: 0,
+              hp: 30750,
+              atk: 37450,
+              def: 420,
+              sp: 100
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 12,
+            initialCount: 1,
+            initialSp: 0,
+            skills: [],
+            passives: [
+              {
+                id: "P05_earth",
+                type: "P05",
+                name: "P05",
+                stat: "atk",
+                percent: 16.978385099097167,
+                level: 8,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          },
+          {
+            id: "10-7/1/2",
+            name: "\u7ACB\u82B1\u5B97\u8302",
+            image: "",
+            level: 96,
+            stats: {
+              luk: 0,
+              hp: 52900,
+              atk: 8050,
+              def: 3220,
+              sp: 50
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "light",
+            actionCount: 7,
+            initialCount: 7,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD011",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 180.53
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_light",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 8.489192549548584,
+                level: 8,
+                target: "self",
+                targetElement: "light"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "10-7/2/1",
+            name: "\u672C\u591A\u5FE0\u52DD",
+            image: "",
+            level: 96,
+            stats: {
+              luk: 0,
+              hp: 41940,
+              atk: 8660,
+              def: 10480,
+              sp: 150
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "earth",
+            actionCount: 12,
+            initialCount: 9,
+            initialSp: 50,
+            skills: [
+              {
+                id: "SKD009",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F",
+                image: "",
+                rarity: "R",
+                element: "earth",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 180.53
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P13_earth",
+                type: "P13",
+                name: "P13",
+                stat: "atk",
+                percent: 38.20136647296862,
+                level: 8,
+                target: "self",
+                targetElement: "earth"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            id: "10-7/3/1",
+            name: "\u771F\u7530\u5E78\u6751",
+            image: "",
+            level: 96,
+            stats: {
+              luk: 0,
+              hp: 41940,
+              atk: 8660,
+              def: 10480,
+              sp: 180
+            },
+            order: 0,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 12,
+            initialCount: 9,
+            initialSp: 150,
+            skills: [
+              {
+                id: "SKD013",
+                name: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "SSR",
+                element: "fire",
+                spCost: 150,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 263.49
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P14_fire",
+                type: "P14",
+                name: "P14",
+                stat: "atk",
+                percent: 38.20136647296862,
+                level: 8,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          },
+          {
+            id: "10-7/3/2",
+            name: "\u771F\u7530\u660C\u5E78",
+            image: "",
+            level: 96,
+            stats: {
+              luk: 0,
+              hp: 48300,
+              atk: 9780,
+              def: 3450,
+              sp: 150
+            },
+            order: 1,
+            hitSpGain: 10,
+            element: "fire",
+            actionCount: 5,
+            initialCount: 5,
+            initialSp: 75,
+            skills: [
+              {
+                id: "SKD046",
+                name: "\u5B88\u8B77\u306E\u672D",
+                image: "",
+                rarity: "SR",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "shield",
+                    power: 114.18,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P12_fire",
+                type: "P12",
+                name: "P12",
+                stat: "atk",
+                percent: 25.46757764864575,
+                level: 8,
+                target: "self",
+                targetElement: "fire"
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_sakura_01",
+          amount: 3
+        },
+        {
+          kind: "soul",
+          id: "char_kaede_01",
+          amount: 6
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 5e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 4
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 4
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_sakura_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_kaede_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_sakura_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_kaede_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 208,
+      encounterChance: 0.1
+    },
+    {
+      id: "sekigahara-8",
+      designId: "10-8",
+      areaId: "sekigahara",
+      index: 8,
+      name: "\u30D5\u30A7\u30FC\u30BA\u5F8C\u3082\u5F79\u5272\u3092\u6B8B\u3059",
+      description: "\u30D5\u30A7\u30FC\u30BA\u5F8C\u3082\u5F79\u5272\u3092\u6B8B\u3059",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "10-8/1/1",
+            name: "\u5CF6\u5DE6\u8FD1",
+            image: "",
+            level: 97,
+            element: "earth",
+            stats: {
+              hp: 81075,
+              atk: 24690,
+              def: 3290,
+              luk: 0,
+              sp: 150
+            },
+            skills: [
+              {
+                id: "SKD009",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F",
+                image: "",
+                rarity: "R",
+                element: "earth",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 180.53
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P16_earth",
+                type: "P16",
+                name: "P16",
+                stat: "def",
+                percent: 16.978385099097167,
+                level: 8,
+                target: "self",
+                targetElement: "earth"
+              }
+            ],
+            initialSp: 50,
+            initialCount: 4,
+            actionCount: 4,
+            order: 0,
+            hitSpGain: 10
+          },
+          {
+            id: "10-8/1/2",
+            name: "\u5927\u53CB\u5B97\u9E9F",
+            image: "",
+            level: 97,
+            element: "light",
+            stats: {
+              hp: 59925,
+              atk: 21150,
+              def: 3060,
+              luk: 0,
+              sp: 100
+            },
+            skills: [
+              {
+                id: "SKD061",
+                name: "\u596E\u6226\u306E\u6A84",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 45,
+                condition: {
+                  type: "always"
+                },
+                target: "highest_atk_ally",
+                effects: [
+                  {
+                    type: "atk_up",
+                    power: 17.57,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P01_light",
+                type: "P01",
+                name: "P01",
+                stat: "atk",
+                percent: 6.7913540396388665,
+                level: 8,
+                target: "party",
+                targetElement: "light"
+              }
+            ],
+            initialSp: 45,
+            initialCount: 3,
+            actionCount: 3,
+            order: 1,
+            hitSpGain: 10
+          }
+        ],
+        [
+          {
+            id: "10-8/2/1",
+            name: "\u7ACB\u82B1\u8ABE\u5343\u4EE3",
+            image: "",
+            level: 97,
+            element: "light",
+            stats: {
+              hp: 81075,
+              atk: 24690,
+              def: 3290,
+              luk: 0,
+              sp: 150
+            },
+            skills: [
+              {
+                id: "SKD023",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u5149",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 90.26
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P07_light",
+                type: "P07",
+                name: "P07",
+                stat: "atk",
+                percent: 12.733788824322875,
+                level: 8,
+                target: "self",
+                targetElement: "light"
+              }
+            ],
+            initialSp: 75,
+            initialCount: 4,
+            actionCount: 4,
+            order: 0,
+            hitSpGain: 10
+          },
+          {
+            id: "10-8/2/2",
+            name: "\u672C\u9858\u5BFA\u9855\u5982",
+            image: "",
+            level: 97,
+            element: "earth",
+            stats: {
+              hp: 70500,
+              atk: 31740,
+              def: 2940,
+              luk: 0,
+              sp: 180
+            },
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 131.74,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_earth",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 16.978385099097167,
+                level: 8,
+                target: "self",
+                targetElement: "earth"
+              }
+            ],
+            initialSp: 90,
+            initialCount: 4,
+            actionCount: 4,
+            order: 1,
+            hitSpGain: 10
+          }
+        ],
+        [
+          {
+            id: "10-8/3/1",
+            name: "\u5FB3\u5DDD\u5BB6\u5EB7",
+            image: "",
+            level: 97,
+            element: "earth",
+            stats: {
+              hp: 475875,
+              atk: 42300,
+              def: 8230,
+              luk: 0,
+              sp: 180
+            },
+            skills: [
+              {
+                id: "SKD036",
+                name: "\u5B88\u308A\u306E\u9663",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 26.35,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD021",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u571F",
+                image: "",
+                rarity: "R",
+                element: "earth",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 90.26
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD015",
+                name: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F",
+                image: "",
+                rarity: "SSR",
+                element: "earth",
+                spCost: 150,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 263.49
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P02_earth",
+                type: "P02",
+                name: "P02",
+                stat: "def",
+                percent: 20.374062118916598,
+                level: 8,
+                target: "party",
+                targetElement: "earth"
+              }
+            ],
+            initialSp: 125,
+            initialCount: 5,
+            actionCount: 5,
+            order: 0,
+            hitSpGain: 10,
+            phases: [
+              {
+                hpBelow: 0.5,
+                name: "\u7B2C2\u5F62\u614B",
+                actionCount: 4,
+                skills: [
+                  {
+                    id: "SKD021",
+                    name: "\u5168\u4F53\u653B\u6483\u30FB\u571F",
+                    image: "",
+                    rarity: "R",
+                    element: "earth",
+                    spCost: 75,
+                    condition: {
+                      type: "always"
+                    },
+                    target: "all_enemies",
+                    effects: [
+                      {
+                        type: "damage",
+                        power: 90.26
+                      }
+                    ],
+                    description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+                  },
+                  {
+                    id: "SKD015",
+                    name: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F",
+                    image: "",
+                    rarity: "SSR",
+                    element: "earth",
+                    spCost: 150,
+                    condition: {
+                      type: "always"
+                    },
+                    target: "first",
+                    effects: [
+                      {
+                        type: "damage",
+                        power: 263.49
+                      }
+                    ],
+                    description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_sora_01",
+          amount: 3
+        },
+        {
+          kind: "soul",
+          id: "char_karen_01",
+          amount: 7
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 5e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 4
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 4
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_sora_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_karen_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_sora_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_karen_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 208,
+      encounterChance: 0.1
+    },
+    {
+      id: "sekigahara-9",
+      designId: "10-9",
+      areaId: "sekigahara",
+      index: 9,
+      name: "\u9577\u3044\u6226\u3044\u3092\u77ED\u304F\u7D42\u3048\u308B",
+      description: "\u9577\u3044\u6226\u3044\u3092\u77ED\u304F\u7D42\u3048\u308B",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "10-9/1/1",
+            name: "\u6D45\u4E95\u9577\u653F",
+            image: "",
+            level: 98,
+            element: "wind",
+            stats: {
+              hp: 28800,
+              atk: 15e3,
+              def: 2640,
+              luk: 0,
+              sp: 100
+            },
+            skills: [],
+            passives: [
+              {
+                id: "P11_wind",
+                type: "P11",
+                name: "P11",
+                stat: "atk",
+                percent: 16.978385099097167,
+                level: 8,
+                target: "self",
+                targetElement: "wind"
+              }
+            ],
+            initialSp: 0,
+            initialCount: 2,
+            actionCount: 2,
+            order: 0,
+            hitSpGain: 10
+          },
+          {
+            id: "10-9/1/2",
+            name: "\u6BDB\u5229\u5143\u5C31",
+            image: "",
+            level: 98,
+            element: "wind",
+            stats: {
+              hp: 55200,
+              atk: 21e3,
+              def: 3360,
+              luk: 0,
+              sp: 150
+            },
+            skills: [
+              {
+                id: "SKD010",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 180.53
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P03_wind",
+                type: "P03",
+                name: "P03",
+                stat: "atk",
+                percent: 25.46757764864575,
+                level: 8,
+                target: "self",
+                targetElement: "wind"
+              }
+            ],
+            initialSp: 50,
+            initialCount: 3,
+            actionCount: 3,
+            order: 1,
+            hitSpGain: 10
+          }
+        ],
+        [
+          {
+            id: "10-9/2/1",
+            name: "\u6FC3\u59EB",
+            image: "",
+            level: 98,
+            element: "dark",
+            stats: {
+              hp: 50400,
+              atk: 25500,
+              def: 3600,
+              luk: 0,
+              sp: 150
+            },
+            skills: [
+              {
+                id: "SKD046",
+                name: "\u5B88\u8B77\u306E\u672D",
+                image: "",
+                rarity: "SR",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "shield",
+                    power: 114.18,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P12_dark",
+                type: "P12",
+                name: "P12",
+                stat: "atk",
+                percent: 25.46757764864575,
+                level: 8,
+                target: "self",
+                targetElement: "dark"
+              }
+            ],
+            initialSp: 75,
+            initialCount: 2,
+            actionCount: 2,
+            order: 0,
+            hitSpGain: 10
+          },
+          {
+            id: "10-9/2/2",
+            name: "\u7D30\u5DDD\u30AC\u30E9\u30B7\u30E3",
+            image: "",
+            level: 98,
+            element: "light",
+            stats: {
+              hp: 48e3,
+              atk: 27e3,
+              def: 3e3,
+              luk: 0,
+              sp: 180
+            },
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 131.74,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_light",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 16.978385099097167,
+                level: 8,
+                target: "self",
+                targetElement: "light"
+              }
+            ],
+            initialSp: 90,
+            initialCount: 3,
+            actionCount: 3,
+            order: 1,
+            hitSpGain: 10
+          }
+        ],
+        [
+          {
+            id: "10-9/3/1",
+            name: "\u771F\u7530\u5E78\u6751",
+            image: "",
+            level: 98,
+            element: "fire",
+            stats: {
+              hp: 252e3,
+              atk: 31500,
+              def: 7800,
+              luk: 0,
+              sp: 180
+            },
+            skills: [
+              {
+                id: "SKD019",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 90.26
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P14_fire",
+                type: "P14",
+                name: "P14",
+                stat: "atk",
+                percent: 38.20136647296862,
+                level: 8,
+                target: "self",
+                targetElement: "fire"
+              }
+            ],
+            initialSp: 75,
+            initialCount: 2,
+            actionCount: 2,
+            order: 0,
+            hitSpGain: 10
+          }
+        ],
+        [
+          {
+            id: "10-9/4/1",
+            name: "\u8C4A\u81E3\u79C0\u5409",
+            image: "",
+            level: 98,
+            element: "light",
+            stats: {
+              hp: 252e3,
+              atk: 31500,
+              def: 7800,
+              luk: 0,
+              sp: 180
+            },
+            skills: [
+              {
+                id: "SKD040",
+                name: "\u6CBB\u7652\u306E\u7948\u308A",
+                image: "",
+                rarity: "SR",
+                element: "water",
+                spCost: 90,
+                condition: {
+                  type: "always"
+                },
+                target: "lowest_ally",
+                effects: [
+                  {
+                    type: "heal",
+                    power: 131.74,
+                    healingFormula: "caster_atk_percent"
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD011",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 180.53
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P10_light",
+                type: "P10",
+                name: "P10",
+                stat: "atk",
+                percent: 33.956770198194334,
+                level: 8,
+                target: "self",
+                targetElement: "light"
+              }
+            ],
+            initialSp: 140,
+            initialCount: 3,
+            actionCount: 3,
+            order: 0,
+            hitSpGain: 10
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_riki_01",
+          amount: 3
+        },
+        {
+          kind: "soul",
+          id: "char_ageha_01",
+          amount: 7
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 5e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 4
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 4
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_riki_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_ageha_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_riki_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_ageha_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 208,
+      encounterChance: 0.1
+    },
+    {
+      id: "sekigahara-10",
+      designId: "10-10",
+      areaId: "sekigahara",
+      index: 10,
+      name: "\u81EA\u5206\u306E\u4E3B\u529B\u3067\u6700\u7D42\u7A81\u7834",
+      description: "\u81EA\u5206\u306E\u4E3B\u529B\u3067\u6700\u7D42\u7A81\u7834",
+      energyCost: 8,
+      waves: [
+        [
+          {
+            id: "10-10/1/1",
+            name: "\u76F4\u6C5F\u517C\u7D9A",
+            image: "",
+            level: 100,
+            element: "water",
+            stats: {
+              hp: 42500,
+              atk: 18750,
+              def: 3250,
+              luk: 0,
+              sp: 150
+            },
+            skills: [
+              {
+                id: "SKD035",
+                name: "\u9B28\u306E\u58F0",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "atk_up",
+                    power: 13.3,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P01_water",
+                type: "P01",
+                name: "P01",
+                stat: "atk",
+                percent: 10.187031059458299,
+                level: 8,
+                target: "party",
+                targetElement: "water"
+              }
+            ],
+            initialSp: 75,
+            initialCount: 3,
+            actionCount: 3,
+            order: 0,
+            hitSpGain: 10
+          },
+          {
+            id: "10-10/1/2",
+            name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+            image: "",
+            level: 100,
+            element: "water",
+            stats: {
+              hp: 57500,
+              atk: 21875,
+              def: 3500,
+              luk: 0,
+              sp: 150
+            },
+            skills: [
+              {
+                id: "SKD008",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34",
+                image: "",
+                rarity: "R",
+                element: "water",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 180.53
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P16_water",
+                type: "P16",
+                name: "P16",
+                stat: "def",
+                percent: 25.46757764864575,
+                level: 8,
+                target: "self",
+                targetElement: "water"
+              }
+            ],
+            initialSp: 50,
+            initialCount: 4,
+            actionCount: 4,
+            order: 1,
+            hitSpGain: 10
+          }
+        ],
+        [
+          {
+            id: "10-10/2/1",
+            name: "\u7ACB\u82B1\u8ABE\u5343\u4EE3",
+            image: "",
+            level: 100,
+            element: "light",
+            stats: {
+              hp: 57500,
+              atk: 21875,
+              def: 3500,
+              luk: 0,
+              sp: 150
+            },
+            skills: [
+              {
+                id: "SKD023",
+                name: "\u5168\u4F53\u653B\u6483\u30FB\u5149",
+                image: "",
+                rarity: "R",
+                element: "light",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_enemies",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 90.26
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P07_light",
+                type: "P07",
+                name: "P07",
+                stat: "atk",
+                percent: 12.733788824322875,
+                level: 8,
+                target: "self",
+                targetElement: "light"
+              }
+            ],
+            initialSp: 75,
+            initialCount: 5,
+            actionCount: 5,
+            order: 0,
+            hitSpGain: 10
+          }
+        ],
+        [
+          {
+            id: "10-10/3/1",
+            name: "\u5C71\u672C\u52D8\u52A9",
+            image: "",
+            level: 100,
+            element: "fire",
+            stats: {
+              hp: 42500,
+              atk: 18750,
+              def: 3250,
+              luk: 0,
+              sp: 100
+            },
+            skills: [
+              {
+                id: "SKD037",
+                name: "\u5A01\u5727",
+                image: "",
+                rarity: "R",
+                element: "dark",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "highest_atk_enemy",
+                effects: [
+                  {
+                    type: "atk_down",
+                    power: 17.57,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P08_fire",
+                type: "P08",
+                name: "P08",
+                stat: "atk",
+                percent: 12.733788824322875,
+                level: 8,
+                target: "self",
+                targetElement: "fire"
+              }
+            ],
+            initialSp: 50,
+            initialCount: 3,
+            actionCount: 3,
+            order: 0,
+            hitSpGain: 10
+          },
+          {
+            id: "10-10/3/2",
+            name: "\u5CF6\u5DE6\u8FD1",
+            image: "",
+            level: 100,
+            element: "earth",
+            stats: {
+              hp: 57500,
+              atk: 21875,
+              def: 3500,
+              luk: 0,
+              sp: 150
+            },
+            skills: [
+              {
+                id: "SKD009",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F",
+                image: "",
+                rarity: "R",
+                element: "earth",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 180.53
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P16_earth",
+                type: "P16",
+                name: "P16",
+                stat: "def",
+                percent: 16.978385099097167,
+                level: 8,
+                target: "self",
+                targetElement: "earth"
+              }
+            ],
+            initialSp: 50,
+            initialCount: 4,
+            actionCount: 4,
+            order: 1,
+            hitSpGain: 10
+          }
+        ],
+        [
+          {
+            id: "10-10/4/1",
+            name: "\u96D1\u8CC0\u5B6B\u5E02",
+            image: "",
+            level: 100,
+            element: "wind",
+            stats: {
+              hp: 57500,
+              atk: 21875,
+              def: 3500,
+              luk: 0,
+              sp: 110
+            },
+            skills: [
+              {
+                id: "SKD026",
+                name: "\u5F8C\u9663\u5C04\u3061",
+                image: "",
+                rarity: "R",
+                element: "wind",
+                spCost: 55,
+                condition: {
+                  type: "always"
+                },
+                target: "last",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 161.74
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P06_wind",
+                type: "P06",
+                name: "P06",
+                stat: "atk",
+                percent: 12.733788824322875,
+                level: 8,
+                target: "self",
+                targetElement: "wind"
+              }
+            ],
+            initialSp: 55,
+            initialCount: 5,
+            actionCount: 5,
+            order: 0,
+            hitSpGain: 10
+          }
+        ],
+        [
+          {
+            id: "10-10/5/1",
+            name: "\u672C\u591A\u5FE0\u52DD",
+            image: "",
+            level: 100,
+            element: "earth",
+            stats: {
+              hp: 262500,
+              atk: 32825,
+              def: 8130,
+              luk: 0,
+              sp: 150
+            },
+            skills: [
+              {
+                id: "SKD050",
+                name: "\u8FCE\u6483\u306E\u69CB\u3048",
+                image: "",
+                rarity: "SSR",
+                element: "earth",
+                spCost: 110,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "taunt",
+                    power: 0,
+                    chance: 1,
+                    duration: 3
+                  },
+                  {
+                    type: "counter",
+                    power: 89.05,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P13_earth",
+                type: "P13",
+                name: "P13",
+                stat: "atk",
+                percent: 38.20136647296862,
+                level: 8,
+                target: "self",
+                targetElement: "earth"
+              }
+            ],
+            initialSp: 110,
+            initialCount: 5,
+            actionCount: 5,
+            order: 0,
+            hitSpGain: 10
+          }
+        ],
+        [
+          {
+            id: "10-10/6/1",
+            name: "\u7E54\u7530\u4FE1\u9577",
+            image: "",
+            level: 100,
+            element: "fire",
+            stats: {
+              hp: 337500,
+              atk: 37500,
+              def: 8750,
+              luk: 0,
+              sp: 180
+            },
+            skills: [
+              {
+                id: "SKD035",
+                name: "\u9B28\u306E\u58F0",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 75,
+                condition: {
+                  type: "always"
+                },
+                target: "all_allies",
+                effects: [
+                  {
+                    type: "atk_up",
+                    power: 13.3,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              },
+              {
+                id: "SKD007",
+                name: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B",
+                image: "",
+                rarity: "R",
+                element: "fire",
+                spCost: 50,
+                condition: {
+                  type: "always"
+                },
+                target: "first",
+                effects: [
+                  {
+                    type: "damage",
+                    power: 180.53
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P01_fire",
+                type: "P01",
+                name: "P01",
+                stat: "atk",
+                percent: 13.582708079277733,
+                level: 8,
+                target: "party",
+                targetElement: "fire"
+              }
+            ],
+            initialSp: 175,
+            initialCount: 5,
+            actionCount: 5,
+            order: 0,
+            hitSpGain: 10
+          },
+          {
+            id: "10-10/6/2",
+            name: "\u52A0\u85E4\u6E05\u6B63",
+            image: "",
+            level: 100,
+            element: "earth",
+            stats: {
+              hp: 92500,
+              atk: 17200,
+              def: 6880,
+              luk: 0,
+              sp: 150
+            },
+            skills: [
+              {
+                id: "SKD034",
+                name: "\u8EAB\u69CB\u3048",
+                image: "",
+                rarity: "N",
+                element: "earth",
+                spCost: 30,
+                condition: {
+                  type: "always"
+                },
+                target: "self",
+                effects: [
+                  {
+                    type: "def_up",
+                    power: 26.35,
+                    duration: 3
+                  }
+                ],
+                description: "\u6B63\u5F0F\u8868\u306E\u691C\u8A3C\u5165\u529B"
+              }
+            ],
+            passives: [
+              {
+                id: "P15_earth",
+                type: "P15",
+                name: "P15",
+                stat: "def",
+                percent: 25.46757764864575,
+                level: 8,
+                target: "self",
+                targetElement: "earth"
+              }
+            ],
+            initialSp: 30,
+            initialCount: 4,
+            actionCount: 4,
+            order: 1,
+            hitSpGain: 10
+          }
+        ]
+      ],
+      firstRewards: [
+        {
+          kind: "soul",
+          id: "char_leon_01",
+          amount: 4
+        },
+        {
+          kind: "soul",
+          id: "char_reiji_01",
+          amount: 8
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 2
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1
+        },
+        {
+          kind: "unlock_item",
+          amount: 1
+        }
+      ],
+      rewards: [
+        {
+          kind: "cash",
+          amount: 5e3
+        },
+        {
+          kind: "character_exp_item",
+          id: "medium",
+          amount: 4
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "medium",
+          amount: 2
+        },
+        {
+          kind: "equipment_exp_item",
+          id: "small",
+          amount: 4
+        }
+      ],
+      rareRewards: [
+        {
+          kind: "soul",
+          id: "char_leon_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_reiji_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_CHARACTER",
+          amount: 1,
+          chance: 75e-4
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_SKILL",
+          amount: 1,
+          chance: 0.015
+        },
+        {
+          kind: "ticket",
+          id: "SPECIAL_TICKET_EQUIPMENT",
+          amount: 1,
+          chance: 75e-4
+        }
+      ],
+      soulDrops: [
+        {
+          kind: "soul",
+          id: "char_leon_01",
+          amount: 1,
+          rarity: "SR",
+          chance: 0.25,
+          period: 20
+        },
+        {
+          kind: "soul",
+          id: "char_reiji_01",
+          amount: 1,
+          rarity: "SSR",
+          chance: 0.12,
+          period: 50
+        }
+      ],
+      ticketChance: 0.03,
+      playerExp: 208,
+      encounterChance: 0.1
+    }
+  ],
+  bindings: [
+    {
+      stage: "1-1",
+      wave: 1,
+      position: 1,
+      enemyId: "1-1/W1/1",
+      characterId: "char_long_01",
+      skills: []
+    },
+    {
+      stage: "1-1",
+      wave: 1,
+      position: 2,
+      enemyId: "1-1/W1/2",
+      characterId: "char_naoto_01",
+      skills: []
+    },
+    {
+      stage: "1-2",
+      wave: 1,
+      position: 1,
+      enemyId: "1-2/W1/1",
+      characterId: "char_kageyama_01",
+      skills: []
+    },
+    {
+      stage: "1-2",
+      wave: 1,
+      position: 2,
+      enemyId: "1-2/W1/2",
+      characterId: "char_masato_01",
+      skills: []
+    },
+    {
+      stage: "1-2",
+      wave: 1,
+      position: 3,
+      enemyId: "1-2/W1/3",
+      characterId: "char_shun_01",
+      skills: [
+        {
+          id: "SKD039",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "1-3",
+      wave: 1,
+      position: 1,
+      enemyId: "1-3/W1/1",
+      characterId: "char_long_01",
+      skills: []
+    },
+    {
+      stage: "1-3",
+      wave: 1,
+      position: 2,
+      enemyId: "1-3/W1/2",
+      characterId: "char_masato_01",
+      skills: []
+    },
+    {
+      stage: "1-3",
+      wave: 2,
+      position: 1,
+      enemyId: "1-3/W2/1",
+      characterId: "char_tomoya_01",
+      skills: []
+    },
+    {
+      stage: "1-3",
+      wave: 2,
+      position: 2,
+      enemyId: "1-3/W2/2",
+      characterId: "char_rui_01",
+      skills: [
+        {
+          id: "SKD008",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "1-3",
+      wave: 2,
+      position: 3,
+      enemyId: "1-3/W2/3",
+      characterId: "char_shun_01",
+      skills: [
+        {
+          id: "SKD039",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "2-1",
+      wave: 1,
+      position: 1,
+      enemyId: "2-1/W1/1",
+      characterId: "char_long_01",
+      skills: []
+    },
+    {
+      stage: "2-1",
+      wave: 1,
+      position: 2,
+      enemyId: "2-1/W1/2",
+      characterId: "char_tomoya_01",
+      skills: [
+        {
+          id: "SKD007",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "2-1",
+      wave: 2,
+      position: 1,
+      enemyId: "2-1/W2/1",
+      characterId: "char_tomoya_01",
+      skills: [
+        {
+          id: "SKD007",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "2-1",
+      wave: 2,
+      position: 2,
+      enemyId: "2-1/W2/2",
+      characterId: "char_leon_01",
+      skills: []
+    },
+    {
+      stage: "2-1",
+      wave: 2,
+      position: 3,
+      enemyId: "2-1/W2/3",
+      characterId: "char_gou_01",
+      skills: [
+        {
+          id: "SKD035",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "2-2",
+      wave: 1,
+      position: 1,
+      enemyId: "2-2/W1/1",
+      characterId: "char_naoto_01",
+      skills: []
+    },
+    {
+      stage: "2-2",
+      wave: 1,
+      position: 2,
+      enemyId: "2-2/W1/2",
+      characterId: "char_masato_01",
+      skills: []
+    },
+    {
+      stage: "2-2",
+      wave: 1,
+      position: 3,
+      enemyId: "2-2/W1/3",
+      characterId: "char_sawat_01",
+      skills: [
+        {
+          id: "SKD019",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "2-2",
+      wave: 2,
+      position: 1,
+      enemyId: "2-2/W2/1",
+      characterId: "char_alice_01",
+      skills: []
+    },
+    {
+      stage: "2-2",
+      wave: 2,
+      position: 2,
+      enemyId: "2-2/W2/2",
+      characterId: "char_sawat_01",
+      skills: [
+        {
+          id: "SKD019",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "2-2",
+      wave: 2,
+      position: 3,
+      enemyId: "2-2/W2/3",
+      characterId: "char_takuro_01",
+      skills: [
+        {
+          id: "SKD010",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "2-3",
+      wave: 1,
+      position: 1,
+      enemyId: "2-3/W1/1",
+      characterId: "char_kageyama_01",
+      skills: []
+    },
+    {
+      stage: "2-3",
+      wave: 1,
+      position: 2,
+      enemyId: "2-3/W1/2",
+      characterId: "char_souta_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "2-3",
+      wave: 2,
+      position: 1,
+      enemyId: "2-3/W2/1",
+      characterId: "char_yoshihiko_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "2-3",
+      wave: 2,
+      position: 2,
+      enemyId: "2-3/W2/2",
+      characterId: "char_maya_01",
+      skills: []
+    },
+    {
+      stage: "2-3",
+      wave: 2,
+      position: 3,
+      enemyId: "2-3/W2/3",
+      characterId: "char_aoi_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "2-4",
+      wave: 1,
+      position: 1,
+      enemyId: "2-4/W1/1",
+      characterId: "char_long_01",
+      skills: []
+    },
+    {
+      stage: "2-4",
+      wave: 1,
+      position: 2,
+      enemyId: "2-4/W1/2",
+      characterId: "char_gou_01",
+      skills: [
+        {
+          id: "SKD035",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "2-4",
+      wave: 2,
+      position: 1,
+      enemyId: "2-4/W2/1",
+      characterId: "char_kenji_01",
+      skills: [
+        {
+          id: "SKD036",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "2-4",
+      wave: 2,
+      position: 2,
+      enemyId: "2-4/W2/2",
+      characterId: "char_souta_01",
+      skills: [
+        {
+          id: "SKD043",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "2-4",
+      wave: 3,
+      position: 1,
+      enemyId: "2-4/W3/1",
+      characterId: "char_karen_01",
+      skills: [
+        {
+          id: "SKD009",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "2-4",
+      wave: 3,
+      position: 2,
+      enemyId: "2-4/W3/2",
+      characterId: "char_aoi_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "3-1",
+      wave: 1,
+      position: 1,
+      enemyId: "3-1/W1/1",
+      characterId: "char_yoshihiko_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "3-1",
+      wave: 1,
+      position: 2,
+      enemyId: "3-1/W1/2",
+      characterId: "char_kageyama_01",
+      skills: []
+    },
+    {
+      stage: "3-1",
+      wave: 2,
+      position: 1,
+      enemyId: "3-1/W2/1",
+      characterId: "char_rui_01",
+      skills: [
+        {
+          id: "SKD008",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "3-2",
+      wave: 1,
+      position: 1,
+      enemyId: "3-2/W1/1",
+      characterId: "char_long_01",
+      skills: []
+    },
+    {
+      stage: "3-2",
+      wave: 1,
+      position: 2,
+      enemyId: "3-2/W1/2",
+      characterId: "char_tatsuya_01",
+      skills: [
+        {
+          id: "SKD035",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "3-2",
+      wave: 2,
+      position: 1,
+      enemyId: "3-2/W2/1",
+      characterId: "char_leon_01",
+      skills: [
+        {
+          id: "SKD009",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "3-2",
+      wave: 2,
+      position: 2,
+      enemyId: "3-2/W2/2",
+      characterId: "char_tatsuya_01",
+      skills: [
+        {
+          id: "SKD035",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "3-3",
+      wave: 1,
+      position: 1,
+      enemyId: "3-3/W1/1",
+      characterId: "char_kenji_01",
+      skills: [
+        {
+          id: "SKD036",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "3-3",
+      wave: 1,
+      position: 2,
+      enemyId: "3-3/W1/2",
+      characterId: "char_alice_01",
+      skills: []
+    },
+    {
+      stage: "3-3",
+      wave: 2,
+      position: 1,
+      enemyId: "3-3/W2/1",
+      characterId: "char_maya_01",
+      skills: [
+        {
+          id: "SKD012",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "3-4",
+      wave: 1,
+      position: 1,
+      enemyId: "3-4/W1/1",
+      characterId: "char_kageyama_01",
+      skills: []
+    },
+    {
+      stage: "3-4",
+      wave: 1,
+      position: 2,
+      enemyId: "3-4/W1/2",
+      characterId: "char_masato_01",
+      skills: []
+    },
+    {
+      stage: "3-4",
+      wave: 2,
+      position: 1,
+      enemyId: "3-4/W2/1",
+      characterId: "char_koharu_01",
+      skills: [
+        {
+          id: "SKD008",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "3-5",
+      wave: 1,
+      position: 1,
+      enemyId: "3-5/W1/1",
+      characterId: "char_yoshihiko_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "3-5",
+      wave: 1,
+      position: 2,
+      enemyId: "3-5/W1/2",
+      characterId: "char_sawat_01",
+      skills: [
+        {
+          id: "SKD019",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "3-5",
+      wave: 2,
+      position: 1,
+      enemyId: "3-5/W2/1",
+      characterId: "char_martina_01",
+      skills: [
+        {
+          id: "SKD046",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "3-5",
+      wave: 2,
+      position: 2,
+      enemyId: "3-5/W2/2",
+      characterId: "char_takeshi_01",
+      skills: [
+        {
+          id: "SKD037",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "3-5",
+      wave: 3,
+      position: 1,
+      enemyId: "3-5/W3/1",
+      characterId: "char_reiji_01",
+      skills: [
+        {
+          id: "SKD007",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "3-5",
+      wave: 3,
+      position: 2,
+      enemyId: "3-5/W3/2",
+      characterId: "char_aoi_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 0
+        }
+      ]
+    },
+    {
+      stage: "4-1",
+      wave: 1,
+      position: 1,
+      enemyId: "4-1/1/1",
+      characterId: "char_jihoon_01",
+      skills: []
+    },
+    {
+      stage: "4-1",
+      wave: 1,
+      position: 2,
+      enemyId: "4-1/1/2",
+      characterId: "char_masato_01",
+      skills: []
+    },
+    {
+      stage: "4-1",
+      wave: 2,
+      position: 1,
+      enemyId: "4-1/2/1",
+      characterId: "char_daimon_01",
+      skills: []
+    },
+    {
+      stage: "4-1",
+      wave: 2,
+      position: 2,
+      enemyId: "4-1/2/2",
+      characterId: "char_tomoya_01",
+      skills: [
+        {
+          id: "SKD007",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "4-1",
+      wave: 3,
+      position: 1,
+      enemyId: "4-1/3/1",
+      characterId: "char_noa_01",
+      skills: []
+    },
+    {
+      stage: "4-2",
+      wave: 1,
+      position: 1,
+      enemyId: "4-2/1/1",
+      characterId: "char_jihoon_01",
+      skills: []
+    },
+    {
+      stage: "4-2",
+      wave: 1,
+      position: 2,
+      enemyId: "4-2/1/2",
+      characterId: "char_serika_01",
+      skills: []
+    },
+    {
+      stage: "4-2",
+      wave: 2,
+      position: 1,
+      enemyId: "4-2/2/1",
+      characterId: "char_alice_01",
+      skills: []
+    },
+    {
+      stage: "4-2",
+      wave: 2,
+      position: 2,
+      enemyId: "4-2/2/2",
+      characterId: "char_daimon_01",
+      skills: []
+    },
+    {
+      stage: "4-2",
+      wave: 3,
+      position: 1,
+      enemyId: "4-2/3/1",
+      characterId: "char_mio_01",
+      skills: []
+    },
+    {
+      stage: "4-3",
+      wave: 1,
+      position: 1,
+      enemyId: "4-3/1/1",
+      characterId: "char_sawat_01",
+      skills: [
+        {
+          id: "SKD022",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "4-3",
+      wave: 1,
+      position: 2,
+      enemyId: "4-3/1/2",
+      characterId: "char_jihoon_01",
+      skills: []
+    },
+    {
+      stage: "4-3",
+      wave: 2,
+      position: 1,
+      enemyId: "4-3/2/1",
+      characterId: "char_sora_01",
+      skills: [
+        {
+          id: "SKD022",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "4-3",
+      wave: 2,
+      position: 2,
+      enemyId: "4-3/2/2",
+      characterId: "char_yukina_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "4-3",
+      wave: 3,
+      position: 1,
+      enemyId: "4-3/3/1",
+      characterId: "char_leo_01",
+      skills: [
+        {
+          id: "SKD022",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "4-4",
+      wave: 1,
+      position: 1,
+      enemyId: "4-4/1/1",
+      characterId: "char_joe_01",
+      skills: []
+    },
+    {
+      stage: "4-4",
+      wave: 1,
+      position: 2,
+      enemyId: "4-4/1/2",
+      characterId: "char_kenji_01",
+      skills: [
+        {
+          id: "SKD036",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "4-4",
+      wave: 2,
+      position: 1,
+      enemyId: "4-4/2/1",
+      characterId: "char_koharu_01",
+      skills: []
+    },
+    {
+      stage: "4-5",
+      wave: 1,
+      position: 1,
+      enemyId: "4-5/1/1",
+      characterId: "char_noa_01",
+      skills: [
+        {
+          id: "SKD022",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "4-5",
+      wave: 2,
+      position: 1,
+      enemyId: "4-5/2/1",
+      characterId: "char_leo_01",
+      skills: [
+        {
+          id: "SKD022",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "4-5",
+      wave: 3,
+      position: 1,
+      enemyId: "4-5/3/1",
+      characterId: "char_koharu_01",
+      skills: [
+        {
+          id: "SKD022",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-1",
+      wave: 1,
+      position: 1,
+      enemyId: "5-1/1/1",
+      characterId: "char_rin_01",
+      skills: [
+        {
+          id: "SKD007",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-1",
+      wave: 1,
+      position: 2,
+      enemyId: "5-1/1/2",
+      characterId: "char_tomoya_01",
+      skills: [
+        {
+          id: "SKD007",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-1",
+      wave: 2,
+      position: 1,
+      enemyId: "5-1/2/1",
+      characterId: "char_lucas_01",
+      skills: [
+        {
+          id: "SKD007",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-1",
+      wave: 2,
+      position: 2,
+      enemyId: "5-1/2/2",
+      characterId: "char_sakura_01",
+      skills: [
+        {
+          id: "SKD046",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-1",
+      wave: 3,
+      position: 1,
+      enemyId: "5-1/3/1",
+      characterId: "char_reiji_01",
+      skills: [
+        {
+          id: "SKD035",
+          lb: 2
+        },
+        {
+          id: "SKD007",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-1",
+      wave: 3,
+      position: 2,
+      enemyId: "5-1/3/2",
+      characterId: "char_aoi_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-2",
+      wave: 1,
+      position: 1,
+      enemyId: "5-2/1/1",
+      characterId: "char_chang_01",
+      skills: [
+        {
+          id: "SKD036",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-2",
+      wave: 1,
+      position: 2,
+      enemyId: "5-2/1/2",
+      characterId: "char_makoto_01",
+      skills: [
+        {
+          id: "SKD008",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-2",
+      wave: 2,
+      position: 1,
+      enemyId: "5-2/2/1",
+      characterId: "char_cecile_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-2",
+      wave: 2,
+      position: 2,
+      enemyId: "5-2/2/2",
+      characterId: "char_rui_01",
+      skills: [
+        {
+          id: "SKD008",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-2",
+      wave: 3,
+      position: 1,
+      enemyId: "5-2/3/1",
+      characterId: "char_taiga_01",
+      skills: [
+        {
+          id: "SKD033",
+          lb: 2
+        },
+        {
+          id: "SKD008",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-3",
+      wave: 1,
+      position: 1,
+      enemyId: "5-3/1/1",
+      characterId: "char_noa_01",
+      skills: []
+    },
+    {
+      stage: "5-3",
+      wave: 1,
+      position: 2,
+      enemyId: "5-3/1/2",
+      characterId: "char_ren_male_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-3",
+      wave: 2,
+      position: 1,
+      enemyId: "5-3/2/1",
+      characterId: "char_karen_01",
+      skills: [
+        {
+          id: "SKD036",
+          lb: 2
+        },
+        {
+          id: "SKD009",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-3",
+      wave: 2,
+      position: 2,
+      enemyId: "5-3/2/2",
+      characterId: "char_jihoon_01",
+      skills: []
+    },
+    {
+      stage: "5-4",
+      wave: 1,
+      position: 1,
+      enemyId: "5-4/1/1",
+      characterId: "char_mei_01",
+      skills: [
+        {
+          id: "SKD037",
+          lb: 2
+        },
+        {
+          id: "SKD007",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-4",
+      wave: 1,
+      position: 2,
+      enemyId: "5-4/1/2",
+      characterId: "char_chang_01",
+      skills: [
+        {
+          id: "SKD036",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-4",
+      wave: 2,
+      position: 1,
+      enemyId: "5-4/2/1",
+      characterId: "char_takuro_01",
+      skills: [
+        {
+          id: "SKD010",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-4",
+      wave: 2,
+      position: 2,
+      enemyId: "5-4/2/2",
+      characterId: "char_jihoon_01",
+      skills: []
+    },
+    {
+      stage: "5-4",
+      wave: 3,
+      position: 1,
+      enemyId: "5-4/3/1",
+      characterId: "char_seiya_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-4",
+      wave: 3,
+      position: 2,
+      enemyId: "5-4/3/2",
+      characterId: "char_reina_01",
+      skills: [
+        {
+          id: "SKD010",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-4",
+      wave: 3,
+      position: 3,
+      enemyId: "5-4/3/3",
+      characterId: "char_aoi_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-5",
+      wave: 1,
+      position: 1,
+      enemyId: "5-5/1/1",
+      characterId: "char_yuji_01",
+      skills: [
+        {
+          id: "SKD011",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-5",
+      wave: 1,
+      position: 2,
+      enemyId: "5-5/1/2",
+      characterId: "char_yukina_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-5",
+      wave: 2,
+      position: 1,
+      enemyId: "5-5/2/1",
+      characterId: "char_sora_01",
+      skills: [
+        {
+          id: "SKD023",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-5",
+      wave: 2,
+      position: 2,
+      enemyId: "5-5/2/2",
+      characterId: "char_kaito_01",
+      skills: [
+        {
+          id: "SKD035",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-5",
+      wave: 3,
+      position: 1,
+      enemyId: "5-5/3/1",
+      characterId: "char_ageha_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 2
+        },
+        {
+          id: "SKD011",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-6",
+      wave: 1,
+      position: 1,
+      enemyId: "5-6/1/1",
+      characterId: "char_mark_01",
+      skills: [
+        {
+          id: "SKD049",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-6",
+      wave: 1,
+      position: 2,
+      enemyId: "5-6/1/2",
+      characterId: "char_shion_01",
+      skills: [
+        {
+          id: "SKD049",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-6",
+      wave: 2,
+      position: 1,
+      enemyId: "5-6/2/1",
+      characterId: "char_reiji_01",
+      skills: [
+        {
+          id: "SKD035",
+          lb: 2
+        },
+        {
+          id: "SKD007",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-6",
+      wave: 3,
+      position: 1,
+      enemyId: "5-6/3/1",
+      characterId: "char_koharu_01",
+      skills: [
+        {
+          id: "SKD008",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "5-6",
+      wave: 4,
+      position: 1,
+      enemyId: "5-6/4/1",
+      characterId: "char_karen_01",
+      skills: [
+        {
+          id: "SKD036",
+          lb: 2
+        },
+        {
+          id: "SKD009",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "6-1",
+      wave: 1,
+      position: 1,
+      enemyId: "6-1/1/1",
+      characterId: "char_ren_01",
+      skills: [
+        {
+          id: "SKD029",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "6-1",
+      wave: 1,
+      position: 2,
+      enemyId: "6-1/1/2",
+      characterId: "char_minami_01",
+      skills: []
+    },
+    {
+      stage: "6-1",
+      wave: 2,
+      position: 1,
+      enemyId: "6-1/2/1",
+      characterId: "char_taiga_01",
+      skills: [
+        {
+          id: "SKD029",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "6-1",
+      wave: 2,
+      position: 2,
+      enemyId: "6-1/2/2",
+      characterId: "char_makoto_01",
+      skills: [
+        {
+          id: "SKD008",
+          lb: 3
+        }
+      ]
+    },
+    {
+      stage: "6-1",
+      wave: 3,
+      position: 1,
+      enemyId: "6-1/3/1",
+      characterId: "char_maya_01",
+      skills: [
+        {
+          id: "SKD029",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "6-1",
+      wave: 3,
+      position: 2,
+      enemyId: "6-1/3/2",
+      characterId: "char_shin_01",
+      skills: [
+        {
+          id: "SKD058",
+          lb: 3
+        }
+      ]
+    },
+    {
+      stage: "6-2",
+      wave: 1,
+      position: 1,
+      enemyId: "6-2/1/1",
+      characterId: "char_tetsu_01",
+      skills: [
+        {
+          id: "SKD037",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "6-2",
+      wave: 1,
+      position: 2,
+      enemyId: "6-2/1/2",
+      characterId: "char_mei_01",
+      skills: [
+        {
+          id: "SKD037",
+          lb: 3
+        }
+      ]
+    },
+    {
+      stage: "6-2",
+      wave: 2,
+      position: 1,
+      enemyId: "6-2/2/1",
+      characterId: "char_chang_01",
+      skills: [
+        {
+          id: "SKD037",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "6-2",
+      wave: 2,
+      position: 2,
+      enemyId: "6-2/2/2",
+      characterId: "char_noa_01",
+      skills: []
+    },
+    {
+      stage: "6-2",
+      wave: 3,
+      position: 1,
+      enemyId: "6-2/3/1",
+      characterId: "char_kaito_01",
+      skills: [
+        {
+          id: "SKD037",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "6-2",
+      wave: 3,
+      position: 2,
+      enemyId: "6-2/3/2",
+      characterId: "char_yuji_01",
+      skills: [
+        {
+          id: "SKD011",
+          lb: 3
+        }
+      ]
+    },
+    {
+      stage: "6-2",
+      wave: 4,
+      position: 1,
+      enemyId: "6-2/4/1",
+      characterId: "char_mei_01",
+      skills: [
+        {
+          id: "SKD037",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "6-2",
+      wave: 4,
+      position: 2,
+      enemyId: "6-2/4/2",
+      characterId: "char_tetsu_01",
+      skills: [
+        {
+          id: "SKD028",
+          lb: 3
+        }
+      ]
+    },
+    {
+      stage: "6-3",
+      wave: 1,
+      position: 1,
+      enemyId: "6-3/1/1",
+      characterId: "char_yuki_01",
+      skills: [
+        {
+          id: "SKD032",
+          lb: 3
+        }
+      ]
+    },
+    {
+      stage: "6-3",
+      wave: 1,
+      position: 2,
+      enemyId: "6-3/1/2",
+      characterId: "char_takuro_01",
+      skills: [
+        {
+          id: "SKD010",
+          lb: 3
+        }
+      ]
+    },
+    {
+      stage: "6-3",
+      wave: 2,
+      position: 1,
+      enemyId: "6-3/2/1",
+      characterId: "char_sakura_01",
+      skills: [
+        {
+          id: "SKD032",
+          lb: 3
+        }
+      ]
+    },
+    {
+      stage: "6-3",
+      wave: 2,
+      position: 2,
+      enemyId: "6-3/2/2",
+      characterId: "char_shion_01",
+      skills: []
+    },
+    {
+      stage: "6-3",
+      wave: 2,
+      position: 3,
+      enemyId: "6-3/2/3",
+      characterId: "char_yukina_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 3
+        }
+      ]
+    },
+    {
+      stage: "6-4",
+      wave: 1,
+      position: 1,
+      enemyId: "6-4/1/1",
+      characterId: "char_kaede_01",
+      skills: [
+        {
+          id: "SKD023",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "6-4",
+      wave: 2,
+      position: 1,
+      enemyId: "6-4/2/1",
+      characterId: "char_genji_01",
+      skills: [
+        {
+          id: "SKD023",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "6-4",
+      wave: 2,
+      position: 2,
+      enemyId: "6-4/2/2",
+      characterId: "char_cecile_01",
+      skills: []
+    },
+    {
+      stage: "6-4",
+      wave: 3,
+      position: 1,
+      enemyId: "6-4/3/1",
+      characterId: "char_kaede_01",
+      skills: [
+        {
+          id: "SKD023",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "6-4",
+      wave: 3,
+      position: 2,
+      enemyId: "6-4/3/2",
+      characterId: "char_ren_male_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 3
+        }
+      ]
+    },
+    {
+      stage: "6-5",
+      wave: 1,
+      position: 1,
+      enemyId: "6-5/1/1",
+      characterId: "char_riki_01",
+      skills: [
+        {
+          id: "SKD046",
+          lb: 3
+        }
+      ]
+    },
+    {
+      stage: "6-5",
+      wave: 1,
+      position: 2,
+      enemyId: "6-5/1/2",
+      characterId: "char_makoto_01",
+      skills: [
+        {
+          id: "SKD008",
+          lb: 3
+        }
+      ]
+    },
+    {
+      stage: "6-5",
+      wave: 2,
+      position: 1,
+      enemyId: "6-5/2/1",
+      characterId: "char_seiya_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 3
+        }
+      ]
+    },
+    {
+      stage: "6-5",
+      wave: 2,
+      position: 2,
+      enemyId: "6-5/2/2",
+      characterId: "char_momoko_01",
+      skills: [
+        {
+          id: "SKD054",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "6-5",
+      wave: 2,
+      position: 3,
+      enemyId: "6-5/2/3",
+      characterId: "char_reina_01",
+      skills: [
+        {
+          id: "SKD010",
+          lb: 3
+        }
+      ]
+    },
+    {
+      stage: "6-5",
+      wave: 3,
+      position: 1,
+      enemyId: "6-5/3/1",
+      characterId: "char_joe_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 3
+        }
+      ]
+    },
+    {
+      stage: "6-5",
+      wave: 3,
+      position: 2,
+      enemyId: "6-5/3/2",
+      characterId: "char_chang_01",
+      skills: [
+        {
+          id: "SKD053",
+          lb: 2
+        }
+      ]
+    },
+    {
+      stage: "6-5",
+      wave: 4,
+      position: 1,
+      enemyId: "6-5/4/1",
+      characterId: "char_miyabi_01",
+      skills: [
+        {
+          id: "SKD028",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "6-5",
+      wave: 4,
+      position: 2,
+      enemyId: "6-5/4/2",
+      characterId: "char_mei_01",
+      skills: [
+        {
+          id: "SKD038",
+          lb: 3
+        }
+      ]
+    },
+    {
+      stage: "6-6",
+      wave: 1,
+      position: 1,
+      enemyId: "6-6/1/1",
+      characterId: "char_taiga_01",
+      skills: [
+        {
+          id: "SKD058",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "6-6",
+      wave: 1,
+      position: 2,
+      enemyId: "6-6/1/2",
+      characterId: "char_serika_01",
+      skills: [
+        {
+          id: "SKD030",
+          lb: 3
+        }
+      ]
+    },
+    {
+      stage: "6-6",
+      wave: 2,
+      position: 1,
+      enemyId: "6-6/2/1",
+      characterId: "char_kaito_01",
+      skills: [
+        {
+          id: "SKD064",
+          lb: 3
+        }
+      ]
+    },
+    {
+      stage: "6-6",
+      wave: 2,
+      position: 2,
+      enemyId: "6-6/2/2",
+      characterId: "char_noa_01",
+      skills: []
+    },
+    {
+      stage: "6-6",
+      wave: 3,
+      position: 1,
+      enemyId: "6-6/3/1",
+      characterId: "char_yuki_01",
+      skills: [
+        {
+          id: "SKD032",
+          lb: 3
+        }
+      ]
+    },
+    {
+      stage: "6-6",
+      wave: 3,
+      position: 2,
+      enemyId: "6-6/3/2",
+      characterId: "char_takuro_01",
+      skills: [
+        {
+          id: "SKD010",
+          lb: 3
+        }
+      ]
+    },
+    {
+      stage: "6-6",
+      wave: 4,
+      position: 1,
+      enemyId: "6-6/4/1",
+      characterId: "char_cecile_01",
+      skills: []
+    },
+    {
+      stage: "6-6",
+      wave: 4,
+      position: 2,
+      enemyId: "6-6/4/2",
+      characterId: "char_ren_male_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 3
+        }
+      ]
+    },
+    {
+      stage: "6-6",
+      wave: 5,
+      position: 1,
+      enemyId: "6-6/5/1",
+      characterId: "char_go_01",
+      skills: [
+        {
+          id: "SKD033",
+          lb: 4
+        },
+        {
+          id: "SKD030",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "6-6",
+      wave: 5,
+      position: 2,
+      enemyId: "6-6/5/2",
+      characterId: "char_riki_01",
+      skills: [
+        {
+          id: "SKD058",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-1",
+      wave: 1,
+      position: 1,
+      enemyId: "7-1/1/1",
+      characterId: "char_minami_01",
+      skills: [
+        {
+          id: "SKD033",
+          lb: 6
+        },
+        {
+          id: "SKD007",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "7-1",
+      wave: 1,
+      position: 2,
+      enemyId: "7-1/1/2",
+      characterId: "char_kaito_01",
+      skills: [
+        {
+          id: "SKD061",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-1",
+      wave: 2,
+      position: 1,
+      enemyId: "7-1/2/1",
+      characterId: "char_taiga_01",
+      skills: [
+        {
+          id: "SKD033",
+          lb: 6
+        },
+        {
+          id: "SKD007",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "7-1",
+      wave: 3,
+      position: 1,
+      enemyId: "7-1/3/1",
+      characterId: "char_kaede_01",
+      skills: [
+        {
+          id: "SKD033",
+          lb: 6
+        },
+        {
+          id: "SKD007",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "7-1",
+      wave: 3,
+      position: 2,
+      enemyId: "7-1/3/2",
+      characterId: "char_reiji_01",
+      skills: [
+        {
+          id: "SKD035",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-2",
+      wave: 1,
+      position: 1,
+      enemyId: "7-2/1/1",
+      characterId: "char_joe_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-2",
+      wave: 1,
+      position: 2,
+      enemyId: "7-2/1/2",
+      characterId: "char_genji_01",
+      skills: [
+        {
+          id: "SKD036",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-2",
+      wave: 2,
+      position: 1,
+      enemyId: "7-2/2/1",
+      characterId: "char_chang_01",
+      skills: [
+        {
+          id: "SKD036",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-2",
+      wave: 2,
+      position: 2,
+      enemyId: "7-2/2/2",
+      characterId: "char_jihoon_01",
+      skills: []
+    },
+    {
+      stage: "7-2",
+      wave: 3,
+      position: 1,
+      enemyId: "7-2/3/1",
+      characterId: "char_karen_01",
+      skills: [
+        {
+          id: "SKD036",
+          lb: 4
+        },
+        {
+          id: "SKD009",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-3",
+      wave: 1,
+      position: 1,
+      enemyId: "7-3/1/1",
+      characterId: "char_riki_01",
+      skills: [
+        {
+          id: "SKD045",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-3",
+      wave: 2,
+      position: 1,
+      enemyId: "7-3/2/1",
+      characterId: "char_leon_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-3",
+      wave: 2,
+      position: 2,
+      enemyId: "7-3/2/2",
+      characterId: "char_sakura_01",
+      skills: [
+        {
+          id: "SKD046",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-4",
+      wave: 1,
+      position: 1,
+      enemyId: "7-4/1/1",
+      characterId: "char_serika_01",
+      skills: []
+    },
+    {
+      stage: "7-4",
+      wave: 1,
+      position: 2,
+      enemyId: "7-4/1/2",
+      characterId: "char_yukina_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-4",
+      wave: 2,
+      position: 1,
+      enemyId: "7-4/2/1",
+      characterId: "char_cecile_01",
+      skills: []
+    },
+    {
+      stage: "7-4",
+      wave: 2,
+      position: 2,
+      enemyId: "7-4/2/2",
+      characterId: "char_aoi_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-4",
+      wave: 3,
+      position: 1,
+      enemyId: "7-4/3/1",
+      characterId: "char_kengo_01",
+      skills: [
+        {
+          id: "SKD009",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-4",
+      wave: 3,
+      position: 2,
+      enemyId: "7-4/3/2",
+      characterId: "char_ageha_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-5",
+      wave: 1,
+      position: 1,
+      enemyId: "7-5/1/1",
+      characterId: "char_mark_01",
+      skills: [
+        {
+          id: "SKD049",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-5",
+      wave: 2,
+      position: 1,
+      enemyId: "7-5/2/1",
+      characterId: "char_kengo_01",
+      skills: [
+        {
+          id: "SKD050",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-6",
+      wave: 1,
+      position: 1,
+      enemyId: "7-6/1/1",
+      characterId: "char_takuro_01",
+      skills: [
+        {
+          id: "SKD010",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-6",
+      wave: 1,
+      position: 2,
+      enemyId: "7-6/1/2",
+      characterId: "char_joe_01",
+      skills: [
+        {
+          id: "SKD048",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "7-6",
+      wave: 2,
+      position: 1,
+      enemyId: "7-6/2/1",
+      characterId: "char_reina_01",
+      skills: [
+        {
+          id: "SKD010",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-6",
+      wave: 2,
+      position: 2,
+      enemyId: "7-6/2/2",
+      characterId: "char_cecile_01",
+      skills: [
+        {
+          id: "SKD048",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "7-6",
+      wave: 3,
+      position: 1,
+      enemyId: "7-6/3/1",
+      characterId: "char_leo_01",
+      skills: [
+        {
+          id: "SKD022",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-6",
+      wave: 3,
+      position: 2,
+      enemyId: "7-6/3/2",
+      characterId: "char_seiya_01",
+      skills: [
+        {
+          id: "SKD048",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "7-7",
+      wave: 1,
+      position: 1,
+      enemyId: "7-7/1/1",
+      characterId: "char_shin_01",
+      skills: []
+    },
+    {
+      stage: "7-7",
+      wave: 1,
+      position: 2,
+      enemyId: "7-7/1/2",
+      characterId: "char_jihoon_01",
+      skills: [
+        {
+          id: "SKD046",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "7-7",
+      wave: 2,
+      position: 1,
+      enemyId: "7-7/2/1",
+      characterId: "char_sakura_01",
+      skills: []
+    },
+    {
+      stage: "7-7",
+      wave: 2,
+      position: 2,
+      enemyId: "7-7/2/2",
+      characterId: "char_lucas_01",
+      skills: [
+        {
+          id: "SKD046",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "7-7",
+      wave: 3,
+      position: 1,
+      enemyId: "7-7/3/1",
+      characterId: "char_rui_01",
+      skills: []
+    },
+    {
+      stage: "7-7",
+      wave: 3,
+      position: 2,
+      enemyId: "7-7/3/2",
+      characterId: "char_chang_01",
+      skills: [
+        {
+          id: "SKD046",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "7-7",
+      wave: 4,
+      position: 1,
+      enemyId: "7-7/4/1",
+      characterId: "char_karen_01",
+      skills: []
+    },
+    {
+      stage: "7-7",
+      wave: 4,
+      position: 2,
+      enemyId: "7-7/4/2",
+      characterId: "char_riki_01",
+      skills: [
+        {
+          id: "SKD046",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "7-8",
+      wave: 1,
+      position: 1,
+      enemyId: "7-8/1/1",
+      characterId: "char_shion_01",
+      skills: [
+        {
+          id: "SKD049",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "7-8",
+      wave: 1,
+      position: 2,
+      enemyId: "7-8/1/2",
+      characterId: "char_yukina_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-8",
+      wave: 2,
+      position: 1,
+      enemyId: "7-8/2/1",
+      characterId: "char_leon_01",
+      skills: [
+        {
+          id: "SKD049",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "7-8",
+      wave: 2,
+      position: 2,
+      enemyId: "7-8/2/2",
+      characterId: "char_genji_01",
+      skills: [
+        {
+          id: "SKD036",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-8",
+      wave: 3,
+      position: 1,
+      enemyId: "7-8/3/1",
+      characterId: "char_kengo_01",
+      skills: [
+        {
+          id: "SKD049",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "7-8",
+      wave: 4,
+      position: 1,
+      enemyId: "7-8/4/1",
+      characterId: "char_mio_01",
+      skills: [
+        {
+          id: "SKD049",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "7-8",
+      wave: 4,
+      position: 2,
+      enemyId: "7-8/4/2",
+      characterId: "char_ageha_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "7-8",
+      wave: 4,
+      position: 3,
+      enemyId: "7-8/4/3",
+      characterId: "char_shin_01",
+      skills: [
+        {
+          id: "SKD046",
+          lb: 4
+        }
+      ]
+    },
+    {
+      stage: "8-1",
+      wave: 1,
+      position: 1,
+      enemyId: "8-1/1/1",
+      characterId: "char_daimon_01",
+      skills: [
+        {
+          id: "SKD022",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-1",
+      wave: 1,
+      position: 2,
+      enemyId: "8-1/1/2",
+      characterId: "char_yuji_01",
+      skills: [
+        {
+          id: "SKD011",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-1",
+      wave: 2,
+      position: 1,
+      enemyId: "8-1/2/1",
+      characterId: "char_sora_01",
+      skills: [
+        {
+          id: "SKD022",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-1",
+      wave: 3,
+      position: 1,
+      enemyId: "8-1/3/1",
+      characterId: "char_serika_01",
+      skills: [
+        {
+          id: "SKD022",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-1",
+      wave: 3,
+      position: 2,
+      enemyId: "8-1/3/2",
+      characterId: "char_makoto_01",
+      skills: [
+        {
+          id: "SKD008",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-1",
+      wave: 4,
+      position: 1,
+      enemyId: "8-1/4/1",
+      characterId: "char_lucas_01",
+      skills: [
+        {
+          id: "SKD022",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-2",
+      wave: 1,
+      position: 1,
+      enemyId: "8-2/1/1",
+      characterId: "char_jihoon_01",
+      skills: []
+    },
+    {
+      stage: "8-2",
+      wave: 1,
+      position: 2,
+      enemyId: "8-2/1/2",
+      characterId: "char_joe_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-2",
+      wave: 2,
+      position: 1,
+      enemyId: "8-2/2/1",
+      characterId: "char_koharu_01",
+      skills: [
+        {
+          id: "SKD014",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-2",
+      wave: 3,
+      position: 1,
+      enemyId: "8-2/3/1",
+      characterId: "char_noa_01",
+      skills: []
+    },
+    {
+      stage: "8-2",
+      wave: 3,
+      position: 2,
+      enemyId: "8-2/3/2",
+      characterId: "char_takuro_01",
+      skills: [
+        {
+          id: "SKD010",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-3",
+      wave: 1,
+      position: 1,
+      enemyId: "8-3/1/1",
+      characterId: "char_daimon_01",
+      skills: [
+        {
+          id: "SKD007",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-3",
+      wave: 1,
+      position: 2,
+      enemyId: "8-3/1/2",
+      characterId: "char_yuji_01",
+      skills: [
+        {
+          id: "SKD011",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-3",
+      wave: 1,
+      position: 3,
+      enemyId: "8-3/1/3",
+      characterId: "char_makoto_01",
+      skills: [
+        {
+          id: "SKD008",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-3",
+      wave: 2,
+      position: 1,
+      enemyId: "8-3/2/1",
+      characterId: "char_karen_01",
+      skills: [
+        {
+          id: "SKD036",
+          lb: 6
+        },
+        {
+          id: "SKD009",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-3",
+      wave: 3,
+      position: 1,
+      enemyId: "8-3/3/1",
+      characterId: "char_reina_01",
+      skills: [
+        {
+          id: "SKD010",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-3",
+      wave: 3,
+      position: 2,
+      enemyId: "8-3/3/2",
+      characterId: "char_lucas_01",
+      skills: [
+        {
+          id: "SKD007",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-3",
+      wave: 3,
+      position: 3,
+      enemyId: "8-3/3/3",
+      characterId: "char_taiga_01",
+      skills: [
+        {
+          id: "SKD008",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-3",
+      wave: 4,
+      position: 1,
+      enemyId: "8-3/4/1",
+      characterId: "char_leo_01",
+      skills: [
+        {
+          id: "SKD022",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-4",
+      wave: 1,
+      position: 1,
+      enemyId: "8-4/1/1",
+      characterId: "char_ren_01",
+      skills: [
+        {
+          id: "SKD029",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-4",
+      wave: 1,
+      position: 2,
+      enemyId: "8-4/1/2",
+      characterId: "char_minami_01",
+      skills: [
+        {
+          id: "SKD058",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-4",
+      wave: 2,
+      position: 1,
+      enemyId: "8-4/2/1",
+      characterId: "char_noa_01",
+      skills: [
+        {
+          id: "SKD058",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-4",
+      wave: 3,
+      position: 1,
+      enemyId: "8-4/3/1",
+      characterId: "char_mei_01",
+      skills: [
+        {
+          id: "SKD038",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-4",
+      wave: 3,
+      position: 2,
+      enemyId: "8-4/3/2",
+      characterId: "char_sora_01",
+      skills: [
+        {
+          id: "SKD058",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-4",
+      wave: 4,
+      position: 1,
+      enemyId: "8-4/4/1",
+      characterId: "char_miyabi_01",
+      skills: [
+        {
+          id: "SKD028",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-5",
+      wave: 1,
+      position: 1,
+      enemyId: "8-5/1/1",
+      characterId: "char_takuro_01",
+      skills: [
+        {
+          id: "SKD026",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-5",
+      wave: 2,
+      position: 1,
+      enemyId: "8-5/2/1",
+      characterId: "char_leon_01",
+      skills: [
+        {
+          id: "SKD026",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-5",
+      wave: 2,
+      position: 2,
+      enemyId: "8-5/2/2",
+      characterId: "char_reina_01",
+      skills: [
+        {
+          id: "SKD026",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-5",
+      wave: 3,
+      position: 1,
+      enemyId: "8-5/3/1",
+      characterId: "char_leo_01",
+      skills: [
+        {
+          id: "SKD026",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-5",
+      wave: 3,
+      position: 2,
+      enemyId: "8-5/3/2",
+      characterId: "char_yuji_01",
+      skills: [
+        {
+          id: "SKD026",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-6",
+      wave: 1,
+      position: 1,
+      enemyId: "8-6/1/1",
+      characterId: "char_rin_01",
+      skills: [
+        {
+          id: "SKD007",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-6",
+      wave: 1,
+      position: 2,
+      enemyId: "8-6/1/2",
+      characterId: "char_shion_01",
+      skills: []
+    },
+    {
+      stage: "8-6",
+      wave: 2,
+      position: 1,
+      enemyId: "8-6/2/1",
+      characterId: "char_koharu_01",
+      skills: [
+        {
+          id: "SKD008",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-6",
+      wave: 3,
+      position: 1,
+      enemyId: "8-6/3/1",
+      characterId: "char_joe_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-6",
+      wave: 4,
+      position: 1,
+      enemyId: "8-6/4/1",
+      characterId: "char_lucas_01",
+      skills: [
+        {
+          id: "SKD007",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-6",
+      wave: 4,
+      position: 2,
+      enemyId: "8-6/4/2",
+      characterId: "char_ren_male_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-6",
+      wave: 5,
+      position: 1,
+      enemyId: "8-6/5/1",
+      characterId: "char_kaede_01",
+      skills: [
+        {
+          id: "SKD013",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-7",
+      wave: 1,
+      position: 1,
+      enemyId: "8-7/1/1",
+      characterId: "char_genji_01",
+      skills: []
+    },
+    {
+      stage: "8-7",
+      wave: 1,
+      position: 2,
+      enemyId: "8-7/1/2",
+      characterId: "char_jihoon_01",
+      skills: []
+    },
+    {
+      stage: "8-7",
+      wave: 2,
+      position: 1,
+      enemyId: "8-7/2/1",
+      characterId: "char_sora_01",
+      skills: []
+    },
+    {
+      stage: "8-7",
+      wave: 3,
+      position: 1,
+      enemyId: "8-7/3/1",
+      characterId: "char_mio_01",
+      skills: []
+    },
+    {
+      stage: "8-7",
+      wave: 4,
+      position: 1,
+      enemyId: "8-7/4/1",
+      characterId: "char_go_01",
+      skills: []
+    },
+    {
+      stage: "8-8",
+      wave: 1,
+      position: 1,
+      enemyId: "8-8/1/1",
+      characterId: "char_noa_01",
+      skills: []
+    },
+    {
+      stage: "8-8",
+      wave: 1,
+      position: 2,
+      enemyId: "8-8/1/2",
+      characterId: "char_serika_01",
+      skills: []
+    },
+    {
+      stage: "8-8",
+      wave: 2,
+      position: 1,
+      enemyId: "8-8/2/1",
+      characterId: "char_ren_01",
+      skills: [
+        {
+          id: "SKD029",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-8",
+      wave: 2,
+      position: 2,
+      enemyId: "8-8/2/2",
+      characterId: "char_shin_01",
+      skills: [
+        {
+          id: "SKD046",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-8",
+      wave: 3,
+      position: 1,
+      enemyId: "8-8/3/1",
+      characterId: "char_leo_01",
+      skills: [
+        {
+          id: "SKD022",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-8",
+      wave: 4,
+      position: 1,
+      enemyId: "8-8/4/1",
+      characterId: "char_takuro_01",
+      skills: [
+        {
+          id: "SKD026",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-8",
+      wave: 4,
+      position: 2,
+      enemyId: "8-8/4/2",
+      characterId: "char_yukina_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-8",
+      wave: 5,
+      position: 1,
+      enemyId: "8-8/5/1",
+      characterId: "char_kengo_01",
+      skills: [
+        {
+          id: "SKD050",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-8",
+      wave: 6,
+      position: 1,
+      enemyId: "8-8/6/1",
+      characterId: "char_reiji_01",
+      skills: [
+        {
+          id: "SKD035",
+          lb: 6
+        },
+        {
+          id: "SKD007",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "8-8",
+      wave: 6,
+      position: 2,
+      enemyId: "8-8/6/2",
+      characterId: "char_aoi_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-1",
+      wave: 1,
+      position: 1,
+      enemyId: "9-1/1/1",
+      characterId: "char_joe_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-1",
+      wave: 1,
+      position: 2,
+      enemyId: "9-1/1/2",
+      characterId: "char_genji_01",
+      skills: [
+        {
+          id: "SKD036",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-1",
+      wave: 2,
+      position: 1,
+      enemyId: "9-1/2/1",
+      characterId: "char_karen_01",
+      skills: [
+        {
+          id: "SKD036",
+          lb: 6
+        },
+        {
+          id: "SKD009",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-2",
+      wave: 1,
+      position: 1,
+      enemyId: "9-2/1/1",
+      characterId: "char_daimon_01",
+      skills: [
+        {
+          id: "SKD007",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-2",
+      wave: 1,
+      position: 2,
+      enemyId: "9-2/1/2",
+      characterId: "char_yuji_01",
+      skills: [
+        {
+          id: "SKD011",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-2",
+      wave: 1,
+      position: 3,
+      enemyId: "9-2/1/3",
+      characterId: "char_makoto_01",
+      skills: [
+        {
+          id: "SKD008",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-2",
+      wave: 2,
+      position: 1,
+      enemyId: "9-2/2/1",
+      characterId: "char_lucas_01",
+      skills: [
+        {
+          id: "SKD007",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-2",
+      wave: 2,
+      position: 2,
+      enemyId: "9-2/2/2",
+      characterId: "char_reina_01",
+      skills: [
+        {
+          id: "SKD010",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-2",
+      wave: 2,
+      position: 3,
+      enemyId: "9-2/2/3",
+      characterId: "char_sora_01",
+      skills: [
+        {
+          id: "SKD023",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-2",
+      wave: 3,
+      position: 1,
+      enemyId: "9-2/3/1",
+      characterId: "char_leo_01",
+      skills: [
+        {
+          id: "SKD022",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-2",
+      wave: 3,
+      position: 2,
+      enemyId: "9-2/3/2",
+      characterId: "char_shin_01",
+      skills: [
+        {
+          id: "SKD046",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-3",
+      wave: 1,
+      position: 1,
+      enemyId: "9-3/1/1",
+      characterId: "char_leon_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-3",
+      wave: 1,
+      position: 2,
+      enemyId: "9-3/1/2",
+      characterId: "char_sakura_01",
+      skills: [
+        {
+          id: "SKD046",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-3",
+      wave: 1,
+      position: 3,
+      enemyId: "9-3/1/3",
+      characterId: "char_yukina_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "9-3",
+      wave: 2,
+      position: 1,
+      enemyId: "9-3/2/1",
+      characterId: "char_kengo_01",
+      skills: [
+        {
+          id: "SKD009",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-3",
+      wave: 2,
+      position: 2,
+      enemyId: "9-3/2/2",
+      characterId: "char_riki_01",
+      skills: [
+        {
+          id: "SKD046",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-3",
+      wave: 2,
+      position: 3,
+      enemyId: "9-3/2/3",
+      characterId: "char_ageha_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "9-4",
+      wave: 1,
+      position: 1,
+      enemyId: "9-4/1/1",
+      characterId: "char_jihoon_01",
+      skills: [
+        {
+          id: "SKD023",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "9-4",
+      wave: 1,
+      position: 2,
+      enemyId: "9-4/1/2",
+      characterId: "char_serika_01",
+      skills: []
+    },
+    {
+      stage: "9-4",
+      wave: 2,
+      position: 1,
+      enemyId: "9-4/2/1",
+      characterId: "char_go_01",
+      skills: [
+        {
+          id: "SKD023",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "9-4",
+      wave: 3,
+      position: 1,
+      enemyId: "9-4/3/1",
+      characterId: "char_noa_01",
+      skills: [
+        {
+          id: "SKD023",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "9-4",
+      wave: 3,
+      position: 2,
+      enemyId: "9-4/3/2",
+      characterId: "char_minami_01",
+      skills: [
+        {
+          id: "SKD009",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-5",
+      wave: 1,
+      position: 1,
+      enemyId: "9-5/1/1",
+      characterId: "char_chang_01",
+      skills: [
+        {
+          id: "SKD036",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-5",
+      wave: 1,
+      position: 2,
+      enemyId: "9-5/1/2",
+      characterId: "char_jihoon_01",
+      skills: []
+    },
+    {
+      stage: "9-5",
+      wave: 2,
+      position: 1,
+      enemyId: "9-5/2/1",
+      characterId: "char_seiya_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-5",
+      wave: 2,
+      position: 2,
+      enemyId: "9-5/2/2",
+      characterId: "char_momoko_01",
+      skills: [
+        {
+          id: "SKD053",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-5",
+      wave: 2,
+      position: 3,
+      enemyId: "9-5/2/3",
+      characterId: "char_reina_01",
+      skills: [
+        {
+          id: "SKD010",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-5",
+      wave: 3,
+      position: 1,
+      enemyId: "9-5/3/1",
+      characterId: "char_miyabi_01",
+      skills: [
+        {
+          id: "SKD028",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-5",
+      wave: 3,
+      position: 2,
+      enemyId: "9-5/3/2",
+      characterId: "char_mei_01",
+      skills: [
+        {
+          id: "SKD038",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-6",
+      wave: 1,
+      position: 1,
+      enemyId: "9-6/1/1",
+      characterId: "char_joe_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-6",
+      wave: 1,
+      position: 2,
+      enemyId: "9-6/1/2",
+      characterId: "char_chang_01",
+      skills: [
+        {
+          id: "SKD036",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-6",
+      wave: 2,
+      position: 1,
+      enemyId: "9-6/2/1",
+      characterId: "char_mio_01",
+      skills: []
+    },
+    {
+      stage: "9-6",
+      wave: 2,
+      position: 2,
+      enemyId: "9-6/2/2",
+      characterId: "char_aoi_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-7",
+      wave: 1,
+      position: 1,
+      enemyId: "9-7/1/1",
+      characterId: "char_daimon_01",
+      skills: []
+    },
+    {
+      stage: "9-7",
+      wave: 1,
+      position: 2,
+      enemyId: "9-7/1/2",
+      characterId: "char_takuro_01",
+      skills: []
+    },
+    {
+      stage: "9-7",
+      wave: 2,
+      position: 1,
+      enemyId: "9-7/2/1",
+      characterId: "char_mio_01",
+      skills: []
+    },
+    {
+      stage: "9-7",
+      wave: 3,
+      position: 1,
+      enemyId: "9-7/3/1",
+      characterId: "char_taiga_01",
+      skills: []
+    },
+    {
+      stage: "9-7",
+      wave: 3,
+      position: 2,
+      enemyId: "9-7/3/2",
+      characterId: "char_lucas_01",
+      skills: []
+    },
+    {
+      stage: "9-7",
+      wave: 3,
+      position: 3,
+      enemyId: "9-7/3/3",
+      characterId: "char_yuji_01",
+      skills: []
+    },
+    {
+      stage: "9-8",
+      wave: 1,
+      position: 1,
+      enemyId: "9-8/1/1",
+      characterId: "char_noa_01",
+      skills: []
+    },
+    {
+      stage: "9-8",
+      wave: 1,
+      position: 2,
+      enemyId: "9-8/1/2",
+      characterId: "char_minami_01",
+      skills: [
+        {
+          id: "SKD009",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-8",
+      wave: 2,
+      position: 1,
+      enemyId: "9-8/2/1",
+      characterId: "char_kaede_01",
+      skills: [
+        {
+          id: "SKD013",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-9",
+      wave: 1,
+      position: 1,
+      enemyId: "9-9/1/1",
+      characterId: "char_yuki_01",
+      skills: [
+        {
+          id: "SKD032",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "9-9",
+      wave: 1,
+      position: 2,
+      enemyId: "9-9/1/2",
+      characterId: "char_takuro_01",
+      skills: [
+        {
+          id: "SKD010",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-9",
+      wave: 2,
+      position: 1,
+      enemyId: "9-9/2/1",
+      characterId: "char_rin_01",
+      skills: [
+        {
+          id: "SKD023",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "9-9",
+      wave: 3,
+      position: 1,
+      enemyId: "9-9/3/1",
+      characterId: "char_ren_01",
+      skills: [
+        {
+          id: "SKD032",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "9-9",
+      wave: 3,
+      position: 2,
+      enemyId: "9-9/3/2",
+      characterId: "char_sakura_01",
+      skills: [
+        {
+          id: "SKD032",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-10",
+      wave: 1,
+      position: 1,
+      enemyId: "9-10/1/1",
+      characterId: "char_leon_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-10",
+      wave: 1,
+      position: 2,
+      enemyId: "9-10/1/2",
+      characterId: "char_rui_01",
+      skills: [
+        {
+          id: "SKD035",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-10",
+      wave: 2,
+      position: 1,
+      enemyId: "9-10/2/1",
+      characterId: "char_leo_01",
+      skills: [
+        {
+          id: "SKD022",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-10",
+      wave: 3,
+      position: 1,
+      enemyId: "9-10/3/1",
+      characterId: "char_kengo_01",
+      skills: [
+        {
+          id: "SKD050",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-10",
+      wave: 4,
+      position: 1,
+      enemyId: "9-10/4/1",
+      characterId: "char_reiji_01",
+      skills: [
+        {
+          id: "SKD035",
+          lb: 6
+        },
+        {
+          id: "SKD007",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "9-10",
+      wave: 4,
+      position: 2,
+      enemyId: "9-10/4/2",
+      characterId: "char_aoi_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 6
+        }
+      ]
+    },
+    {
+      stage: "10-1",
+      wave: 1,
+      position: 1,
+      enemyId: "10-1/1/1",
+      characterId: "char_cecile_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-1",
+      wave: 1,
+      position: 2,
+      enemyId: "10-1/1/2",
+      characterId: "char_takuro_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-1",
+      wave: 2,
+      position: 1,
+      enemyId: "10-1/2/1",
+      characterId: "char_reina_01",
+      skills: [
+        {
+          id: "SKD026",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-1",
+      wave: 2,
+      position: 2,
+      enemyId: "10-1/2/2",
+      characterId: "char_yukina_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-1",
+      wave: 3,
+      position: 1,
+      enemyId: "10-1/3/1",
+      characterId: "char_joe_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-1",
+      wave: 3,
+      position: 2,
+      enemyId: "10-1/3/2",
+      characterId: "char_koharu_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-2",
+      wave: 1,
+      position: 1,
+      enemyId: "10-2/1/1",
+      characterId: "char_sora_01",
+      skills: [
+        {
+          id: "SKD023",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-2",
+      wave: 1,
+      position: 2,
+      enemyId: "10-2/1/2",
+      characterId: "char_yuji_01",
+      skills: [
+        {
+          id: "SKD011",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-2",
+      wave: 2,
+      position: 1,
+      enemyId: "10-2/2/1",
+      characterId: "char_rin_01",
+      skills: [
+        {
+          id: "SKD013",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-2",
+      wave: 3,
+      position: 1,
+      enemyId: "10-2/3/1",
+      characterId: "char_leo_01",
+      skills: [
+        {
+          id: "SKD022",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-2",
+      wave: 3,
+      position: 2,
+      enemyId: "10-2/3/2",
+      characterId: "char_daimon_01",
+      skills: [
+        {
+          id: "SKD007",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-3",
+      wave: 1,
+      position: 1,
+      enemyId: "10-3/1/1",
+      characterId: "char_chang_01",
+      skills: [
+        {
+          id: "SKD036",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-3",
+      wave: 1,
+      position: 2,
+      enemyId: "10-3/1/2",
+      characterId: "char_riki_01",
+      skills: [
+        {
+          id: "SKD046",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-3",
+      wave: 2,
+      position: 1,
+      enemyId: "10-3/2/1",
+      characterId: "char_leon_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-3",
+      wave: 2,
+      position: 2,
+      enemyId: "10-3/2/2",
+      characterId: "char_sakura_01",
+      skills: [
+        {
+          id: "SKD046",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-3",
+      wave: 3,
+      position: 1,
+      enemyId: "10-3/3/1",
+      characterId: "char_karen_01",
+      skills: [
+        {
+          id: "SKD036",
+          lb: 8
+        },
+        {
+          id: "SKD009",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-3",
+      wave: 3,
+      position: 2,
+      enemyId: "10-3/3/2",
+      characterId: "char_shin_01",
+      skills: [
+        {
+          id: "SKD046",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-4",
+      wave: 1,
+      position: 1,
+      enemyId: "10-4/1/1",
+      characterId: "char_mei_01",
+      skills: [
+        {
+          id: "SKD037",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-4",
+      wave: 1,
+      position: 2,
+      enemyId: "10-4/1/2",
+      characterId: "char_ren_01",
+      skills: [
+        {
+          id: "SKD029",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-4",
+      wave: 2,
+      position: 1,
+      enemyId: "10-4/2/1",
+      characterId: "char_taiga_01",
+      skills: [
+        {
+          id: "SKD029",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-4",
+      wave: 2,
+      position: 2,
+      enemyId: "10-4/2/2",
+      characterId: "char_kaito_01",
+      skills: [
+        {
+          id: "SKD064",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-4",
+      wave: 3,
+      position: 1,
+      enemyId: "10-4/3/1",
+      characterId: "char_miyabi_01",
+      skills: [
+        {
+          id: "SKD028",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-4",
+      wave: 3,
+      position: 2,
+      enemyId: "10-4/3/2",
+      characterId: "char_maya_01",
+      skills: [
+        {
+          id: "SKD029",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-4",
+      wave: 3,
+      position: 3,
+      enemyId: "10-4/3/3",
+      characterId: "char_mei_01",
+      skills: [
+        {
+          id: "SKD037",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-5",
+      wave: 1,
+      position: 1,
+      enemyId: "10-5/1/1",
+      characterId: "char_genji_01",
+      skills: [
+        {
+          id: "SKD036",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-5",
+      wave: 1,
+      position: 2,
+      enemyId: "10-5/1/2",
+      characterId: "char_takuro_01",
+      skills: [
+        {
+          id: "SKD010",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-5",
+      wave: 2,
+      position: 1,
+      enemyId: "10-5/2/1",
+      characterId: "char_chang_01",
+      skills: [
+        {
+          id: "SKD036",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-5",
+      wave: 2,
+      position: 2,
+      enemyId: "10-5/2/2",
+      characterId: "char_taiga_01",
+      skills: [
+        {
+          id: "SKD008",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-5",
+      wave: 3,
+      position: 1,
+      enemyId: "10-5/3/1",
+      characterId: "char_reiji_01",
+      skills: [
+        {
+          id: "SKD035",
+          lb: 8
+        },
+        {
+          id: "SKD007",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-5",
+      wave: 3,
+      position: 2,
+      enemyId: "10-5/3/2",
+      characterId: "char_lucas_01",
+      skills: [
+        {
+          id: "SKD007",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-6",
+      wave: 1,
+      position: 1,
+      enemyId: "10-6/1/1",
+      characterId: "char_leon_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-6",
+      wave: 1,
+      position: 2,
+      enemyId: "10-6/1/2",
+      characterId: "char_momoko_01",
+      skills: [
+        {
+          id: "SKD054",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-6",
+      wave: 2,
+      position: 1,
+      enemyId: "10-6/2/1",
+      characterId: "char_joe_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-6",
+      wave: 2,
+      position: 2,
+      enemyId: "10-6/2/2",
+      characterId: "char_chang_01",
+      skills: [
+        {
+          id: "SKD053",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-6",
+      wave: 3,
+      position: 1,
+      enemyId: "10-6/3/1",
+      characterId: "char_mio_01",
+      skills: []
+    },
+    {
+      stage: "10-6",
+      wave: 3,
+      position: 2,
+      enemyId: "10-6/3/2",
+      characterId: "char_yukina_01",
+      skills: [
+        {
+          id: "SKD071",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-7",
+      wave: 1,
+      position: 1,
+      enemyId: "10-7/1/1",
+      characterId: "char_jihoon_01",
+      skills: []
+    },
+    {
+      stage: "10-7",
+      wave: 1,
+      position: 2,
+      enemyId: "10-7/1/2",
+      characterId: "char_yuji_01",
+      skills: [
+        {
+          id: "SKD011",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-7",
+      wave: 2,
+      position: 1,
+      enemyId: "10-7/2/1",
+      characterId: "char_kengo_01",
+      skills: [
+        {
+          id: "SKD009",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-7",
+      wave: 3,
+      position: 1,
+      enemyId: "10-7/3/1",
+      characterId: "char_kaede_01",
+      skills: [
+        {
+          id: "SKD013",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-7",
+      wave: 3,
+      position: 2,
+      enemyId: "10-7/3/2",
+      characterId: "char_sakura_01",
+      skills: [
+        {
+          id: "SKD046",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-8",
+      wave: 1,
+      position: 1,
+      enemyId: "10-8/1/1",
+      characterId: "char_minami_01",
+      skills: [
+        {
+          id: "SKD009",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-8",
+      wave: 1,
+      position: 2,
+      enemyId: "10-8/1/2",
+      characterId: "char_kaito_01",
+      skills: [
+        {
+          id: "SKD061",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-8",
+      wave: 2,
+      position: 1,
+      enemyId: "10-8/2/1",
+      characterId: "char_sora_01",
+      skills: [
+        {
+          id: "SKD023",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-8",
+      wave: 2,
+      position: 2,
+      enemyId: "10-8/2/2",
+      characterId: "char_ren_male_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-8",
+      wave: 3,
+      position: 1,
+      enemyId: "10-8/3/1",
+      characterId: "char_karen_01",
+      skills: [
+        {
+          id: "SKD036",
+          lb: 8
+        },
+        {
+          id: "SKD021",
+          lb: 8
+        },
+        {
+          id: "SKD015",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-9",
+      wave: 1,
+      position: 1,
+      enemyId: "10-9/1/1",
+      characterId: "char_serika_01",
+      skills: []
+    },
+    {
+      stage: "10-9",
+      wave: 1,
+      position: 2,
+      enemyId: "10-9/1/2",
+      characterId: "char_reina_01",
+      skills: [
+        {
+          id: "SKD010",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-9",
+      wave: 2,
+      position: 1,
+      enemyId: "10-9/2/1",
+      characterId: "char_riki_01",
+      skills: [
+        {
+          id: "SKD046",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-9",
+      wave: 2,
+      position: 2,
+      enemyId: "10-9/2/2",
+      characterId: "char_yukina_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-9",
+      wave: 3,
+      position: 1,
+      enemyId: "10-9/3/1",
+      characterId: "char_kaede_01",
+      skills: [
+        {
+          id: "SKD019",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-9",
+      wave: 4,
+      position: 1,
+      enemyId: "10-9/4/1",
+      characterId: "char_ageha_01",
+      skills: [
+        {
+          id: "SKD040",
+          lb: 8
+        },
+        {
+          id: "SKD011",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-10",
+      wave: 1,
+      position: 1,
+      enemyId: "10-10/1/1",
+      characterId: "char_rui_01",
+      skills: [
+        {
+          id: "SKD035",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-10",
+      wave: 1,
+      position: 2,
+      enemyId: "10-10/1/2",
+      characterId: "char_taiga_01",
+      skills: [
+        {
+          id: "SKD008",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-10",
+      wave: 2,
+      position: 1,
+      enemyId: "10-10/2/1",
+      characterId: "char_sora_01",
+      skills: [
+        {
+          id: "SKD023",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-10",
+      wave: 3,
+      position: 1,
+      enemyId: "10-10/3/1",
+      characterId: "char_mei_01",
+      skills: [
+        {
+          id: "SKD037",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-10",
+      wave: 3,
+      position: 2,
+      enemyId: "10-10/3/2",
+      characterId: "char_minami_01",
+      skills: [
+        {
+          id: "SKD009",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-10",
+      wave: 4,
+      position: 1,
+      enemyId: "10-10/4/1",
+      characterId: "char_takuro_01",
+      skills: [
+        {
+          id: "SKD026",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-10",
+      wave: 5,
+      position: 1,
+      enemyId: "10-10/5/1",
+      characterId: "char_kengo_01",
+      skills: [
+        {
+          id: "SKD050",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-10",
+      wave: 6,
+      position: 1,
+      enemyId: "10-10/6/1",
+      characterId: "char_reiji_01",
+      skills: [
+        {
+          id: "SKD035",
+          lb: 8
+        },
+        {
+          id: "SKD007",
+          lb: 8
+        }
+      ]
+    },
+    {
+      stage: "10-10",
+      wave: 6,
+      position: 2,
+      enemyId: "10-10/6/2",
+      characterId: "char_leon_01",
+      skills: [
+        {
+          id: "SKD034",
+          lb: 8
+        }
+      ]
+    }
+  ],
+  mapping: [
+    {
+      legacyId: "mikawa-1",
+      stageId: "mikawa-1",
+      designId: "1-1",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "mikawa-2",
+      stageId: "mikawa-2",
+      designId: "1-2",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "mikawa-3",
+      stageId: "mikawa-3",
+      designId: "1-3",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "mikawa-4",
+      stageId: null,
+      designId: "1-4",
+      disposition: "retain_legacy_record_no_formal_target"
+    },
+    {
+      legacyId: "mikawa-5",
+      stageId: null,
+      designId: "1-5",
+      disposition: "retain_legacy_record_no_formal_target"
+    },
+    {
+      legacyId: "mikawa-6",
+      stageId: null,
+      designId: "1-6",
+      disposition: "retain_legacy_record_no_formal_target"
+    },
+    {
+      legacyId: "mikawa-7",
+      stageId: null,
+      designId: "1-7",
+      disposition: "retain_legacy_record_no_formal_target"
+    },
+    {
+      legacyId: "owari-1",
+      stageId: "owari-1",
+      designId: "2-1",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "owari-2",
+      stageId: "owari-2",
+      designId: "2-2",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "owari-3",
+      stageId: "owari-3",
+      designId: "2-3",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "owari-4",
+      stageId: "owari-4",
+      designId: "2-4",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "owari-5",
+      stageId: null,
+      designId: "2-5",
+      disposition: "retain_legacy_record_no_formal_target"
+    },
+    {
+      legacyId: "owari-6",
+      stageId: null,
+      designId: "2-6",
+      disposition: "retain_legacy_record_no_formal_target"
+    },
+    {
+      legacyId: "owari-7",
+      stageId: null,
+      designId: "2-7",
+      disposition: "retain_legacy_record_no_formal_target"
+    },
+    {
+      legacyId: "mino-1",
+      stageId: "mino-1",
+      designId: "3-1",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "mino-2",
+      stageId: "mino-2",
+      designId: "3-2",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "mino-3",
+      stageId: "mino-3",
+      designId: "3-3",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "mino-4",
+      stageId: "mino-4",
+      designId: "3-4",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "mino-5",
+      stageId: "mino-5",
+      designId: "3-5",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "mino-6",
+      stageId: null,
+      designId: "3-6",
+      disposition: "retain_legacy_record_no_formal_target"
+    },
+    {
+      legacyId: "mino-7",
+      stageId: null,
+      designId: "3-7",
+      disposition: "retain_legacy_record_no_formal_target"
+    },
+    {
+      legacyId: "omi-1",
+      stageId: "omi-1",
+      designId: "4-1",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "omi-2",
+      stageId: "omi-2",
+      designId: "4-2",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "omi-3",
+      stageId: "omi-3",
+      designId: "4-3",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "omi-4",
+      stageId: "omi-4",
+      designId: "4-4",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "omi-5",
+      stageId: "omi-5",
+      designId: "4-5",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "omi-6",
+      stageId: null,
+      designId: "4-6",
+      disposition: "retain_legacy_record_no_formal_target"
+    },
+    {
+      legacyId: "omi-7",
+      stageId: null,
+      designId: "4-7",
+      disposition: "retain_legacy_record_no_formal_target"
+    },
+    {
+      legacyId: "kai-1",
+      stageId: "kai-1",
+      designId: "5-1",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "kai-2",
+      stageId: "kai-2",
+      designId: "5-2",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "kai-3",
+      stageId: "kai-3",
+      designId: "5-3",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "kai-4",
+      stageId: "kai-4",
+      designId: "5-4",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "kai-5",
+      stageId: "kai-5",
+      designId: "5-5",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "kai-6",
+      stageId: "kai-6",
+      designId: "5-6",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "kai-7",
+      stageId: null,
+      designId: "5-7",
+      disposition: "retain_legacy_record_no_formal_target"
+    },
+    {
+      legacyId: "echigo-1",
+      stageId: "echigo-1",
+      designId: "6-1",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "echigo-2",
+      stageId: "echigo-2",
+      designId: "6-2",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "echigo-3",
+      stageId: "echigo-3",
+      designId: "6-3",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "echigo-4",
+      stageId: "echigo-4",
+      designId: "6-4",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "echigo-5",
+      stageId: "echigo-5",
+      designId: "6-5",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "echigo-6",
+      stageId: "echigo-6",
+      designId: "6-6",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "echigo-7",
+      stageId: null,
+      designId: "6-7",
+      disposition: "retain_legacy_record_no_formal_target"
+    },
+    {
+      legacyId: "kyoto-1",
+      stageId: "kyoto-1",
+      designId: "7-1",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "kyoto-2",
+      stageId: "kyoto-2",
+      designId: "7-2",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "kyoto-3",
+      stageId: "kyoto-3",
+      designId: "7-3",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "kyoto-4",
+      stageId: "kyoto-4",
+      designId: "7-4",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "kyoto-5",
+      stageId: "kyoto-5",
+      designId: "7-5",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "kyoto-6",
+      stageId: "kyoto-6",
+      designId: "7-6",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "kyoto-7",
+      stageId: "kyoto-7",
+      designId: "7-7",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: null,
+      stageId: "kyoto-8",
+      designId: "7-8",
+      disposition: "new_stage"
+    },
+    {
+      legacyId: "izumo-1",
+      stageId: "izumo-1",
+      designId: "8-1",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "izumo-2",
+      stageId: "izumo-2",
+      designId: "8-2",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "izumo-3",
+      stageId: "izumo-3",
+      designId: "8-3",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "izumo-4",
+      stageId: "izumo-4",
+      designId: "8-4",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "izumo-5",
+      stageId: "izumo-5",
+      designId: "8-5",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "izumo-6",
+      stageId: "izumo-6",
+      designId: "8-6",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "izumo-7",
+      stageId: "izumo-7",
+      designId: "8-7",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: null,
+      stageId: "izumo-8",
+      designId: "8-8",
+      disposition: "new_stage"
+    },
+    {
+      legacyId: "satsuma-1",
+      stageId: "satsuma-1",
+      designId: "9-1",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "satsuma-2",
+      stageId: "satsuma-2",
+      designId: "9-2",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "satsuma-3",
+      stageId: "satsuma-3",
+      designId: "9-3",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "satsuma-4",
+      stageId: "satsuma-4",
+      designId: "9-4",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "satsuma-5",
+      stageId: "satsuma-5",
+      designId: "9-5",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "satsuma-6",
+      stageId: "satsuma-6",
+      designId: "9-6",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "satsuma-7",
+      stageId: "satsuma-7",
+      designId: "9-7",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: null,
+      stageId: "satsuma-8",
+      designId: "9-8",
+      disposition: "new_stage"
+    },
+    {
+      legacyId: null,
+      stageId: "satsuma-9",
+      designId: "9-9",
+      disposition: "new_stage"
+    },
+    {
+      legacyId: null,
+      stageId: "satsuma-10",
+      designId: "9-10",
+      disposition: "new_stage"
+    },
+    {
+      legacyId: "sekigahara-1",
+      stageId: "sekigahara-1",
+      designId: "10-1",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "sekigahara-2",
+      stageId: "sekigahara-2",
+      designId: "10-2",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "sekigahara-3",
+      stageId: "sekigahara-3",
+      designId: "10-3",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "sekigahara-4",
+      stageId: "sekigahara-4",
+      designId: "10-4",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "sekigahara-5",
+      stageId: "sekigahara-5",
+      designId: "10-5",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "sekigahara-6",
+      stageId: "sekigahara-6",
+      designId: "10-6",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: "sekigahara-7",
+      stageId: "sekigahara-7",
+      designId: "10-7",
+      disposition: "same_area_and_index"
+    },
+    {
+      legacyId: null,
+      stageId: "sekigahara-8",
+      designId: "10-8",
+      disposition: "new_stage"
+    },
+    {
+      legacyId: null,
+      stageId: "sekigahara-9",
+      designId: "10-9",
+      disposition: "new_stage"
+    },
+    {
+      legacyId: null,
+      stageId: "sekigahara-10",
+      designId: "10-10",
+      disposition: "new_stage"
+    }
+  ],
+  sourceHashes: {
+    "docs/product/balance_audits_20260922/round17_effective62.json": "576cc2cb01edaa58d11153a1fe516af3e94ed1e9c5533ee0d98a8431a582eca5",
+    "docs/product/balance_audits_20260922/round17_enemy_skill_check.json": "86fa84f681a72e9b064e63bf6c6dea77fb547091cd0975b7e30d8ef1fc00ff36",
+    "docs/product/balance_audits_20260922/endgame_approved_handoff.md": "09871b9f7f4f9fa6910730ec390cb8171cbe470c8779d6f1377c0c8035b92c22",
+    "docs/product/master_sources_20260921/quest_rewards.md": "a73b0c4bf21f3ba1dcecc2fc1345a51b0a500b6714c6d58eec8ea4b601e47387",
+    "docs/product/master_sources_20260921/equipment_drops.md": "2ca559c64b20397cb455f8caafcf03c5cfc398d1b2838aae4125da464fe6d2a7",
+    "docs/product/master_sources_20260921/area01_03.md": "3055f5028e4ecef226d7995c66f67f78e9f23f140bef2a4ccc7fd1af9078e878",
+    "docs/product/master_sources_20260921/area04_05.md": "42eacfbacfa94d65d274f4d54a10f6c1fec1b13ff758ea788847c4752b4e4665",
+    "docs/product/master_sources_20260921/area06.md": "3cb133b0fe6e0a0f994c10b7e112cd4f21f2247a684af527f0b51a640ecce861",
+    "docs/product/master_sources_20260921/area07_08.md": "256578c73bf679d6624e1fb2b29424e861802771e19e26f0fb8d48afa0a6f7b4",
+    "docs/product/master_sources_20260921/area09_10.md": "e3cba0eeb4559226bbfadd8ddf90922d82992e9b70f01083a48305da53b3e3ac"
+  }
+};
 
 // src/domain/redesign/battleLegacy.ts
 var advantage = { fire: "wind", wind: "earth", earth: "water", water: "fire", light: "dark", dark: "light" };
@@ -23915,10 +52814,203 @@ function simulateBalanceBattle(input) {
   return { seed: input.seed, outcome: ended, totalDamage, playerActions, wavesCleared, party: input.party, waves: input.waves, frames, analysis, rulesVersion: BALANCE_BATTLE_VERSION, ...revisedInput ? { inputVersion: WAVE_SP_INPUT_VERSION, masterVersion: config.version } : {}, reason };
 }
 
+// src/domain/redesign/formalBattleInput.ts
+function createFormalBattleInput(seed, party, waves, rules) {
+  if (!rules.balanceV2?.version) throw new Error("Explicit master version required");
+  if (!waves.length || waves.length > 6 || waves.some((w) => !w.length || w.length > 3)) throw new Error("Invalid battle formation");
+  for (const enemy2 of waves.flat()) {
+    if (!Number.isFinite(enemy2.initialSp) || enemy2.initialSp < 0 || enemy2.initialSp > enemy2.stats.sp) throw new Error("Formal quest requires explicit initialSp within stats.sp cap");
+  }
+  return structuredClone({ seed, party, waves, rules: { ...rules, version: BALANCE_BATTLE_VERSION, inputVersion: WAVE_SP_INPUT_VERSION } });
+}
+
+// src/domain/redesign/questMaster.ts
+var QUEST_MASTER_VERSION = quest65_default.version;
+var QUEST_STAGE_COUNTS = quest65_default.counts;
+var QUEST_ID_MAPPING = quest65_default.mapping;
+var FORMAL_QUEST_STAGES = quest65_default.stages.map((source) => {
+  const stage = structuredClone(source);
+  stage.waves.forEach((wave, wi) => wave.forEach((enemy2, pi) => {
+    const binding = quest65_default.bindings.find((row) => row.stage === stage.designId && row.wave === wi + 1 && row.position === pi + 1 && row.enemyId === enemy2.id);
+    const character = sengoku_characters_default.find((row) => row.characterId === binding?.characterId);
+    if (!binding || !character || character.name !== enemy2.name) throw new Error(`\u6575\u30DE\u30B9\u30BF\u30FC\u5BFE\u5FDC\u304C\u4E0D\u6B63\u3067\u3059: ${enemy2.id}`);
+    enemy2.image = character.imagePath;
+  }));
+  return stage;
+});
+function createQuestBattleInput(seed, party, stage, rules) {
+  const input = createFormalBattleInput(seed, party, stage.waves, rules);
+  return {
+    ...input,
+    questSnapshot: structuredClone(stage),
+    questMasterVersion: QUEST_MASTER_VERSION,
+    playerExpReward: { amount: stage.playerExp, version: QUEST_MASTER_VERSION, status: "APPROVED" }
+  };
+}
+function questEnergyCost(stage, state) {
+  if (state.clearedStages.includes(stage.id)) return stage.energyCost;
+  return (state.questAttempts?.[stage.id] ?? 0) > 0 ? 1 : 0;
+}
+function questVictoryRewards(stage, state, party, seed) {
+  const firstClear = !state.clearedStages.includes(stage.id);
+  const count = (state.questClearCounts?.[stage.id] ?? (firstClear ? 0 : 1)) + 1;
+  const rewards = structuredClone([...stage.rewards, ...firstClear ? stage.firstRewards : []]);
+  let rng = seed >>> 0;
+  const random = () => {
+    rng = Math.imul(rng, 1664525) + 1013904223 >>> 0;
+    return rng / 4294967296;
+  };
+  const luck = party.slice(0, 5).reduce((sum, member) => sum + Math.max(0, Math.min(100, member.stats.luk)), 0) / 5;
+  const guaranteed = [];
+  for (const drop of stage.soulDrops) {
+    if (random() < Math.min(1, drop.chance * (1 + luck / 400))) rewards.push({ kind: "soul", id: drop.id, amount: 1 });
+    if (count % drop.period === 0) guaranteed.push({ kind: "soul", id: drop.id, amount: 1 });
+  }
+  rewards.push(...guaranteed);
+  if (random() < Math.min(1, stage.ticketChance * (1 + luck / 400))) {
+    const roll = random();
+    rewards.push({ kind: "ticket", id: roll < 0.25 ? "SPECIAL_TICKET_CHARACTER" : roll < 0.75 ? "SPECIAL_TICKET_SKILL" : "SPECIAL_TICKET_EQUIPMENT", amount: 1 });
+  }
+  return { rewards, firstClear, count, guaranteed, encounterRoll: random() };
+}
+
+// src/domain/redesign/quests.ts
+var AREAS = [
+  ["mikawa", "\u4E09\u6CB3\u306E\u5730", "\u6700\u521D\u306E\u4E00\u6B69", "\u6575\u306E\u5C5E\u6027\u3068\u884C\u52D5\u30AB\u30A6\u30F3\u30C8\u3092\u898B\u3066\u3001\u6B66\u5C06\u306E\u4E26\u3073\u3092\u6574\u3048\u3088\u3046\u3002"],
+  ["owari", "\u5C3E\u5F35\u306E\u65D7", "\u71B1\u304D\u65D7\u5370", "\u8907\u6570\u306E\u6575\u306B\u306F\u5168\u4F53\u653B\u6483\u3068\u72D9\u3046\u9806\u756A\u304C\u529B\u306B\u306A\u308B\u3002"],
+  ["mino", "\u7F8E\u6FC3\u306E\u57CE", "\u5805\u57CE\u3078\u306E\u9053", "\u5805\u3044\u5B88\u308A\u306B\u306F\u5B88\u5099\u3092\u4E0B\u3052\u308B\u6280\u3092\u7D44\u307F\u5408\u308F\u305B\u3088\u3046\u3002"],
+  ["omi", "\u8FD1\u6C5F\u306E\u6E56", "\u6E56\u4E0A\u306E\u76DF\u7D04", "\u50B7\u3064\u3044\u305F\u4EF2\u9593\u3092\u56DE\u5FA9\u3057\u3001\u9023\u6226\u3092\u5207\u308A\u629C\u3051\u3088\u3046\u3002"],
+  ["kai", "\u7532\u6590\u306E\u5C71", "\u98A8\u6797\u306E\u8A66\u7DF4", "\u5F37\u3044\u4E00\u6483\u306B\u5099\u3048\u3001\u5B88\u308A\u3068\u653B\u6483\u306E\u9806\u3092\u8003\u3048\u3088\u3046\u3002"],
+  ["echigo", "\u8D8A\u5F8C\u306E\u96EA", "\u96EA\u89E3\u3051\u306E\u7FA9", "\u6575\u306E\u56DE\u5FA9\u5F79\u3092\u3069\u3046\u5D29\u3059\u304B\u304C\u52DD\u6557\u3092\u5206\u3051\u308B\u3002"],
+  ["kyoto", "\u4EAC\u6D1B\u306E\u5F71", "\u82B1\u3068\u7B56\u8B00", "\u5F31\u4F53\u3068\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u3092\u898B\u6975\u3081\u3001\u65E9\u3081\u306B\u6C7A\u7740\u3092\u3064\u3051\u3088\u3046\u3002"],
+  ["izumo", "\u51FA\u96F2\u306E\u793E", "\u7948\u308A\u306E\u5411\u3053\u3046", "\u5149\u3068\u95C7\u306E\u76F8\u6027\u3001\u652F\u63F4\u6280\u306E\u7D44\u307F\u5408\u308F\u305B\u3092\u898B\u76F4\u305D\u3046\u3002"],
+  ["satsuma", "\u85A9\u6469\u306E\u708E", "\u4E0D\u5C48\u306E\u9663", "\u9023\u6226\u306B\u5099\u3048\u3066HP\u3068SP\u3092\u6B8B\u3057\u3001\u6575\u9663\u3092\u7A81\u7834\u3057\u3088\u3046\u3002"],
+  ["sekigahara", "\u95A2\u30F6\u539F", "\u6681\u306E\u7D04\u675F", "\u5909\u308F\u308A\u3086\u304F\u6575\u306E\u9663\u3092\u8AAD\u307F\u3001\u4E94\u4EBA\u306E\u529B\u3092\u7D50\u96C6\u3057\u3088\u3046\u3002"]
+];
+var QUEST_AREAS = AREAS.map(([id, name2, , description], area) => ({ id, index: area + 1, name: name2, description, image: `/bg/sengoku/${area % 2 ? "castle-town" : "castle-approach"}.jpg`, stages: FORMAL_QUEST_STAGES.filter((stage) => stage.areaId === id) }));
+var QUEST_STAGES = FORMAL_QUEST_STAGES;
+function getQuestStage(id) {
+  return QUEST_STAGES.find((stage) => stage.id === id);
+}
+function isQuestStageUnlocked(id, clearedStages) {
+  const index = QUEST_STAGES.findIndex((stage) => stage.id === id);
+  return index >= 0 && (index === 0 || clearedStages.includes(id) || clearedStages.includes(QUEST_STAGES[index - 1].id));
+}
+
+// src/domain/redesign/missions.ts
+function evaluateMissions(state, config) {
+  if (!config.enabled) return [];
+  const cleared = new Set(state.clearedStages);
+  const ids = /* @__PURE__ */ new Set();
+  return config.missions.filter((master) => master.enabled).map((master) => {
+    if (!master.id || ids.has(master.id)) throw new Error("\u4EFB\u52D9\u30DE\u30B9\u30BF\u30FC\u306EID\u304C\u91CD\u8907\u3057\u3066\u3044\u307E\u3059\u3002");
+    ids.add(master.id);
+    let stages;
+    if (master.condition.type === "stage_clear") {
+      const stageId = master.condition.stageId;
+      if (!QUEST_STAGES.some((stage) => stage.id === stageId)) throw new Error("\u4EFB\u52D9\u306E\u5BFE\u8C61\u30B9\u30C6\u30FC\u30B8\u304C\u5B58\u5728\u3057\u307E\u305B\u3093\u3002");
+      stages = [stageId];
+    } else if (master.condition.type === "area_clear") {
+      const areaId = master.condition.areaId;
+      const area = QUEST_AREAS.find((candidate) => candidate.id === areaId);
+      if (!area?.stages.length) throw new Error("\u4EFB\u52D9\u306E\u5BFE\u8C61\u30A8\u30EA\u30A2\u304C\u5B58\u5728\u3057\u307E\u305B\u3093\u3002");
+      stages = area.stages.map((stage) => stage.id);
+    } else throw new Error("\u4EFB\u52D9\u6761\u4EF6\u304C\u672A\u5BFE\u5FDC\u3067\u3059\u3002");
+    const current = stages.filter((id) => cleared.has(id)).length;
+    return {
+      id: master.id,
+      name: master.name,
+      description: master.description,
+      rewards: master.rewards,
+      current,
+      target: stages.length,
+      status: state.claimedMissionIds?.includes(master.id) ? "claimed" : current === stages.length ? "claimable" : "progress"
+    };
+  });
+}
+function getClaimableMission(state, config, id) {
+  const row = evaluateMissions(state, config).find((candidate) => candidate.id === id);
+  if (!row || row.status !== "claimable") throw new Error("\u3053\u306E\u4EFB\u52D9\u306E\u5831\u916C\u306F\u53D7\u3051\u53D6\u308C\u307E\u305B\u3093\u3002");
+  return config.missions.find((master) => master.id === id);
+}
+
 // src/domain/redesign/battle.ts
 function simulateBattle3(input) {
   if (input.rules.version === BALANCE_BATTLE_VERSION) return simulateBalanceBattle(input);
   return simulateBattle2(input);
+}
+
+// src/domain/redesign/legacyQuests.ts
+var AREAS2 = [
+  ["mikawa", "\u4E09\u6CB3\u306E\u5730", "\u6700\u521D\u306E\u4E00\u6B69", "\u6575\u306E\u5C5E\u6027\u3068\u884C\u52D5\u30AB\u30A6\u30F3\u30C8\u3092\u898B\u3066\u3001\u6B66\u5C06\u306E\u4E26\u3073\u3092\u6574\u3048\u3088\u3046\u3002"],
+  ["owari", "\u5C3E\u5F35\u306E\u65D7", "\u71B1\u304D\u65D7\u5370", "\u8907\u6570\u306E\u6575\u306B\u306F\u5168\u4F53\u653B\u6483\u3068\u72D9\u3046\u9806\u756A\u304C\u529B\u306B\u306A\u308B\u3002"],
+  ["mino", "\u7F8E\u6FC3\u306E\u57CE", "\u5805\u57CE\u3078\u306E\u9053", "\u5805\u3044\u5B88\u308A\u306B\u306F\u5B88\u5099\u3092\u4E0B\u3052\u308B\u6280\u3092\u7D44\u307F\u5408\u308F\u305B\u3088\u3046\u3002"],
+  ["omi", "\u8FD1\u6C5F\u306E\u6E56", "\u6E56\u4E0A\u306E\u76DF\u7D04", "\u50B7\u3064\u3044\u305F\u4EF2\u9593\u3092\u56DE\u5FA9\u3057\u3001\u9023\u6226\u3092\u5207\u308A\u629C\u3051\u3088\u3046\u3002"],
+  ["kai", "\u7532\u6590\u306E\u5C71", "\u98A8\u6797\u306E\u8A66\u7DF4", "\u5F37\u3044\u4E00\u6483\u306B\u5099\u3048\u3001\u5B88\u308A\u3068\u653B\u6483\u306E\u9806\u3092\u8003\u3048\u3088\u3046\u3002"],
+  ["echigo", "\u8D8A\u5F8C\u306E\u96EA", "\u96EA\u89E3\u3051\u306E\u7FA9", "\u6575\u306E\u56DE\u5FA9\u5F79\u3092\u3069\u3046\u5D29\u3059\u304B\u304C\u52DD\u6557\u3092\u5206\u3051\u308B\u3002"],
+  ["kyoto", "\u4EAC\u6D1B\u306E\u5F71", "\u82B1\u3068\u7B56\u8B00", "\u5F31\u4F53\u3068\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u3092\u898B\u6975\u3081\u3001\u65E9\u3081\u306B\u6C7A\u7740\u3092\u3064\u3051\u3088\u3046\u3002"],
+  ["izumo", "\u51FA\u96F2\u306E\u793E", "\u7948\u308A\u306E\u5411\u3053\u3046", "\u5149\u3068\u95C7\u306E\u76F8\u6027\u3001\u652F\u63F4\u6280\u306E\u7D44\u307F\u5408\u308F\u305B\u3092\u898B\u76F4\u305D\u3046\u3002"],
+  ["satsuma", "\u85A9\u6469\u306E\u708E", "\u4E0D\u5C48\u306E\u9663", "\u9023\u6226\u306B\u5099\u3048\u3066HP\u3068SP\u3092\u6B8B\u3057\u3001\u6575\u9663\u3092\u7A81\u7834\u3057\u3088\u3046\u3002"],
+  ["sekigahara", "\u95A2\u30F6\u539F", "\u6681\u306E\u7D04\u675F", "\u5909\u308F\u308A\u3086\u304F\u6575\u306E\u9663\u3092\u8AAD\u307F\u3001\u4E94\u4EBA\u306E\u529B\u3092\u7D50\u96C6\u3057\u3088\u3046\u3002"]
+];
+var STAGE_NAMES = ["\u8857\u9053\u306E\u5148\u3078", "\u65D7\u3092\u63B2\u3052\u3066", "\u6E21\u308A\u306E\u9663", "\u591C\u660E\u3051\u306E\u653B\u9632", "\u5D29\u308C\u306C\u8A93\u3044", "\u6C7A\u6226\u524D\u591C", "\u57CE\u9580\u3092\u8D8A\u3048\u3066"];
+function themeSkills(area, source) {
+  const effect = ["damage", "damage", "def_up", "heal", "atk_up", "heal", "poison", "atk_down", "def_up", "damage"][area];
+  const chosen = COMMON_SKILL_MASTERS.find((s) => s.effects.some((e) => e.type === effect));
+  return chosen ? [chosen, ...source.filter((s) => s.id !== chosen.id)].slice(0, 2) : source.slice(0, 2);
+}
+function enemy(area, stage, wave, slot, boss2) {
+  const master = COMMON_CHARACTER_MASTERS[(area * 6 + stage + wave + slot) % COMMON_CHARACTER_MASTERS.length];
+  const rank = area * 7 + stage;
+  const growth = 1 + rank * 0.09;
+  const skills = themeSkills(area, COMMON_SKILL_MASTERS.filter((s) => s.element === master.element));
+  return {
+    id: `quest-enemy-${area + 1}-${stage + 1}-${wave + 1}-${slot + 1}`,
+    name: master.name,
+    image: master.image,
+    element: master.element,
+    level: 1 + rank,
+    stats: { hp: Math.round((boss2 ? 1100 : 370) * growth), sp: boss2 ? 80 : 40, atk: Math.round((boss2 ? 100 : 55) * growth), def: Math.round((area === 2 ? 55 : 15) * growth), luk: 10 + rank },
+    // Existing provisional quest numbers remain unchanged; formal inputs require their own explicit starts.
+    initialSp: boss2 ? 80 : 40,
+    skills,
+    passives: [],
+    hitSpGain: 5,
+    actionCount: boss2 ? 3 : 4 + slot % 2,
+    order: slot,
+    boss: boss2,
+    ...boss2 ? { phases: [{ hpBelow: 0.45, name: "\u6C7A\u6B7B\u306E\u9663", actionCount: 2, skills: themeSkills((area + 1) % 10, skills) }] } : {}
+  };
+}
+var QUEST_AREAS2 = AREAS2.map(([id, name2, chapter, description], area) => ({
+  id,
+  index: area + 1,
+  name: name2,
+  description,
+  image: `/bg/sengoku/${area % 2 ? "castle-town" : "castle-approach"}.jpg`,
+  stages: STAGE_NAMES.map((stageName, stage) => {
+    const waveCount = Math.min(5, 1 + Math.floor(stage / 2) + (area > 5 ? 1 : 0));
+    return {
+      id: `${id}-${stage + 1}`,
+      areaId: id,
+      index: stage + 1,
+      name: stage === 6 ? chapter : stageName,
+      description,
+      energyCost: 3 + Math.floor(area / 2),
+      waves: Array.from({ length: waveCount }, (_, wave) => {
+        const boss2 = stage === 6 && wave === waveCount - 1;
+        return Array.from({ length: boss2 ? 1 : Math.min(3, 1 + Math.floor(stage / 3) + wave % 2) }, (_2, slot) => enemy(area, stage, wave, slot, boss2));
+      }),
+      firstRewards: [{ kind: "cash", amount: 100 + area * 30 }, { kind: "soul", id: COMMON_CHARACTER_MASTERS[(area * 6 + stage) % COMMON_CHARACTER_MASTERS.length].id, amount: 2 }],
+      rewards: [{ kind: "cash", amount: 20 + area * 10 }, { kind: "character_material", amount: 1 + Math.floor(area / 3) }, { kind: "skill_material", amount: 1 }, { kind: "equipment_material", amount: 1 }],
+      rareRewards: [{ kind: "soul", id: COMMON_CHARACTER_MASTERS[(area * 6 + stage) % COMMON_CHARACTER_MASTERS.length].id, amount: 1, chance: 0.08 }, { kind: "equipment_lb", amount: 1, chance: 0.05 }, { kind: "equipment", id: EQUIPMENT_MASTERS[(area * 7 + stage) % EQUIPMENT_MASTERS.length].id, amount: 1, chance: 0.12 }, ...area >= 2 ? [{ kind: "unlock_item", amount: 1, chance: 0.04 }] : []],
+      encounterChance: 0.08
+    };
+  })
+}));
+var QUEST_STAGES2 = QUEST_AREAS2.flatMap((area) => area.stages);
+function getQuestStage2(id) {
+  return QUEST_STAGES2.find((stage) => stage.id === id);
 }
 
 // src/domain/redesign/raid.ts
@@ -24169,13 +53261,6 @@ async function rewardPolicy() {
   if (!row?.data) throw new ApiError("\u7372\u5F97\u8A2D\u5B9A\u3092\u78BA\u8A8D\u3067\u304D\u307E\u305B\u3093\u3002", 503);
   return row.data;
 }
-async function questPlayerExpReward(stageId) {
-  const [row] = await db("game04_redesign_master?key=eq.quest_player_exp&select=status,data");
-  const amount = row?.data?.stages?.[stageId];
-  if (amount === void 0) return { amount: 0, version: row?.data?.version ?? "UNCONFIGURED", status: "UNCONFIGURED" };
-  if (!Number.isSafeInteger(amount) || amount < 0 || !row?.data?.version) throw new ApiError("\u30AF\u30A8\u30B9\u30C8EXP\u8A2D\u5B9A\u304C\u4E0D\u6B63\u3067\u3059\u3002", 503);
-  return { amount, version: row.data.version, status: row.status };
-}
 async function missionConfig() {
   const [row] = await db("game04_redesign_master?key=eq.missions&select=data");
   return row?.data ?? { enabled: false, missions: [] };
@@ -24203,12 +53288,14 @@ async function runBattle(userId, name2, payload, id, playerName) {
     validateDeck(state, state.deck);
     const kind = name2 === "quest_battle" ? "quest" : "raid";
     let waves, cost, targetId, raidLevel;
+    let questStage;
     let startRoom = null;
     if (kind === "quest") {
       const stage = getQuestStage(String(payload.stageId));
       if (!stage || !isQuestStageUnlocked(stage.id, state.clearedStages)) throw new ApiError("\u3053\u306E\u30B9\u30C6\u30FC\u30B8\u306F\u672A\u89E3\u653E\u3067\u3059\u3002");
+      questStage = stage;
       waves = stage.waves;
-      cost = stage.energyCost;
+      cost = questEnergyCost(stage, state);
       targetId = stage.id;
     } else {
       const room = await roomFor(String(payload.roomId)), master = getRoomRaidMaster(room);
@@ -24223,9 +53310,9 @@ async function runBattle(userId, name2, payload, id, playerName) {
     if (state.energy < cost) throw new ApiError("\u884C\u52D5\u529B\u304C\u8DB3\u308A\u307E\u305B\u3093\u3002");
     const seed = crypto.getRandomValues(new Uint32Array(1))[0];
     const rules = startRoom?.territorySnapshot?.battleRules ?? BATTLE_RULES;
-    const input = { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel, ...kind === "quest" ? { playerExpReward: await questPlayerExpReward(targetId) } : {} };
+    const input = questStage ? createQuestBattleInput(seed, buildBattleParty(state, rules), questStage, rules) : { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel };
     preparedBattle = simulateBattle3(input);
-    await commit(state, { ...state, energy: state.energy - cost }, id, { id, kind, targetId, seed, input, status: "started" }, startRoom, startRoom?.version ?? null);
+    await commit(state, { ...state, energy: state.energy - cost, ...questStage ? { questAttempts: { ...state.questAttempts, [targetId]: (state.questAttempts?.[targetId] ?? 0) + 1 }, questProgressVersion: QUEST_MASTER_VERSION } : {} }, id, { id, kind, targetId, seed, input, status: "started" }, startRoom, startRoom?.version ?? null);
     [record] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=*`);
     if (!record) throw new ApiError("\u6226\u95D8\u306E\u4FDD\u5B58\u72B6\u614B\u3092\u78BA\u8A8D\u3067\u304D\u307E\u305B\u3093\u3002\u518D\u958B\u3057\u3066\u304F\u3060\u3055\u3044\u3002", 503);
     if (record.status === "settled") return responseFor(userId, record.result);
@@ -24241,7 +53328,8 @@ async function runBattle(userId, name2, payload, id, playerName) {
     const rewards = [];
     let firstClear = false, encounterRaidId = null;
     if (record.kind === "quest" && battle.outcome === "win") {
-      const stage = getQuestStage(record.target_id);
+      const stage = record.input.questSnapshot ?? getQuestStage2(record.target_id);
+      if (!stage) throw new ApiError("\u4FDD\u5B58\u3055\u308C\u305F\u30B9\u30C6\u30FC\u30B8\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002", 503);
       firstClear = !state.clearedStages.includes(stage.id);
       let rng = record.seed >>> 0;
       const random = () => {
@@ -24249,7 +53337,16 @@ async function runBattle(userId, name2, payload, id, playerName) {
         return rng / 4294967296;
       };
       const luck = record.input.party.reduce((n, p) => n + p.stats.luk, 0) / 5;
-      rewards.push(...stage.rewards, ...firstClear ? stage.firstRewards : [], ...stage.rareRewards.filter((r) => random() < Math.min(1, (r.chance ?? 0) * (1 + luck / 1e3))));
+      let encounterRoll;
+      if (record.input.questMasterVersion === QUEST_MASTER_VERSION) {
+        const settlement = questVictoryRewards(stage, state, record.input.party, record.seed);
+        rewards.push(...settlement.rewards);
+        firstClear = settlement.firstClear;
+        after.questClearCounts = { ...after.questClearCounts, [stage.id]: settlement.count };
+        encounterRoll = settlement.encounterRoll;
+      } else {
+        rewards.push(...stage.rewards, ...firstClear ? stage.firstRewards : [], ...stage.rareRewards.filter((r) => random() < Math.min(1, (r.chance ?? 0) * (1 + luck / 1e3))));
+      }
       const policy = await rewardPolicy();
       for (let i = 0; i < rewards.length; i++) after = grantReward(after, rewards[i], await uuidFor(`reward:${id}:${i}`), policy);
       if (firstClear) after.clearedStages.push(stage.id);
@@ -24274,7 +53371,7 @@ async function runBattle(userId, name2, payload, id, playerName) {
           };
         } else playerGrowth = { status: "MIGRATION_PENDING", offeredExp: expReward.amount, gainedExp: 0 };
       }
-      if (random() < stage.encounterChance) {
+      if ((encounterRoll ?? random()) < stage.encounterChance && !(await roomsFor(userId)).some((existing) => existing.ownerId === userId && existing.status === "active" && Date.parse(existing.expiresAt) > Date.now() && !existing.territorySnapshot && existing.masterId === "encounter_flame")) {
         encounterRaidId = await uuidFor(`encounter:${id}`);
         room = createRaidRoom("encounter_flame", userId, encounterRaidId, Date.now());
         room.participants[0].name = playerName;
