@@ -1,0 +1,53 @@
+{
+  "status": "PROPOSED_NOT_FIXED",
+  "baseCommit": "5da8426bcca085d95d8dfc885c235e1ed71a43c1",
+  "waveBase": "第8回統合候補（既存未FIX差分を含む）",
+  "changes": [
+    {
+      "stage": "9-5",
+      "enemyId": "9-5/3/1",
+      "name": "明智光秀",
+      "fields": {
+        "hp": {
+          "before": 145600,
+          "candidate": 22000
+        },
+        "def": {
+          "before": 4030,
+          "candidate": 22000
+        }
+      }
+    },
+    {
+      "stage": "9-6",
+      "enemyId": "9-6/2/1",
+      "name": "前田慶次",
+      "fields": {
+        "hp": {
+          "before": 149500,
+          "candidate": 22000
+        },
+        "def": {
+          "before": 4140,
+          "candidate": 22000
+        }
+      }
+    },
+    {
+      "stage": "10-6",
+      "enemyId": "10-6/3/1",
+      "name": "前田慶次",
+      "fields": {
+        "hp": {
+          "before": 236250,
+          "candidate": 24000
+        },
+        "def": {
+          "before": 7310,
+          "candidate": 28000
+        }
+      }
+    }
+  ],
+  "doNotImplementWithoutFix": true
+}
