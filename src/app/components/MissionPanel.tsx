@@ -20,7 +20,7 @@ const MISSION_STATUS_LABELS: Record<string, string> = {
 
 export default function MissionPanel() {
   const {
-    beginnerMissionTargetIds, clearBeginnerMissionTarget, refreshBeginnerJourney, openBeginnerMissionReward,
+    beginnerMissionTargetIds = [], clearBeginnerMissionTarget, refreshBeginnerJourney, openBeginnerMissionReward,
     showMissionPanel,
     setShowMissionPanel,
     missionTab,

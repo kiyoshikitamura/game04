@@ -4,7 +4,6 @@ import { game04UiError } from '@/app/lib/game04UiError';
 import { characterArt } from '@/theme/creativeAssets';
 import ViewedItem from '../ui/ViewedItem';
 import React, { useEffect, useRef, useState } from 'react';
-import type { MissionProjection } from '@/domain/redesign/missions';
 import type { RedesignState } from '@/domain/redesign/types';
 import { CHARACTER_MASTERS } from '@/domain/redesign/masters';
 import { QUEST_AREAS, nextQuestStage } from '@/domain/redesign/quests';
@@ -15,7 +14,6 @@ import { game04WorldText } from '@/theme/world';
 import { useGame } from '../../context/GameContext';
 import { buildDirectMessageConversations } from '../../context/hooks/directMessageConversations';
 import Modal from './Modal';
-import MissionContent from './MissionContent';
 import backgrounds from '@/theme/local-backgrounds.json';
 import HomeEffect from './HomeEffect';
 
@@ -24,11 +22,8 @@ export type HomeEncounter = { id: string; name: string; expiresAt: string };
 export type HomeAction = (action: string, payload?: Record<string, unknown>) => Promise<unknown>;
 export const HOME_BACKGROUNDS = [{ id: 'castle-approach', name: '武将ゆかりの背景', image: '/bg/sengoku/castle-approach.jpg' }, { id: 'castle-town', name: '夕桜の城下町', image: '/bg/sengoku/castle-town.jpg' }];
 type Activity = { id: string; activity_type?: string; actor_display_name?: string; display_payload?: { title?: string }; created_at?: string };
-export default function HomeView({ state, onAction, onNavigate, encounterRaid, socialEvents = [], missions = [], previewOnly = false }: { state: RedesignState; onAction: HomeAction; onNavigate: (tab: string) => void; encounterRaid?: HomeEncounter | null; socialEvents?: HomeSocialEvent[]; missions?: MissionProjection[]; previewOnly?: boolean }) {
+export default function HomeView({ state, onAction, onNavigate, encounterRaid, socialEvents = [], previewOnly = false }: { state: RedesignState; onAction: HomeAction; onNavigate: (tab: string) => void; encounterRaid?: HomeEncounter | null; socialEvents?: HomeSocialEvent[]; previewOnly?: boolean }) {
   const game = useGame();
-  const [missionsOpen, setMissionsOpen] = useState(false);
-  const [missionBusy, setMissionBusy] = useState(false);
-  const [missionError, setMissionError] = useState('');
   const [homeDraft, setHomeDraft] = useState('');
   const [selector, setSelector] = useState<'character' | 'background' | null>(null);
   const [community, setCommunity] = useState<'activity' | 'global' | 'dm'>('activity');
@@ -58,9 +53,8 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
   useEffect(() => { const timer = window.setInterval(() => { setNow(Date.now()); setBanner(i => (i + 1) % 2); }, 8000); return () => window.clearInterval(timer); }, []);
   useEffect(() => { if (!previewOnly) game.setChatChannel(community === 'dm' ? 'DM' : 'GLOBAL'); }, [community, game.setChatChannel, previewOnly]);
   useEffect(() => { if (previewOnly) return; game.setShowTribeChatPanel(expanded && community !== 'activity'); return () => game.setShowTribeChatPanel(false); }, [expanded, community, game.setShowTribeChatPanel, previewOnly]);
-  usePresentationBusy(saving || missionBusy || Boolean(game.chatSending));
+  usePresentationBusy(saving || Boolean(game.chatSending));
   const homeLock = useRef(false);
-  const missionLock = useRef(false);
   async function saveHome(payload: Record<string, unknown>) {
     if (homeLock.current) return; homeLock.current = true;
     setSaving(true); setSaveError('');
@@ -79,9 +73,8 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
     return conversations.length ? conversations.slice(0, full ? conversations.length : 3).map(c => <button className="rd-message rd-conversation" key={c.userId} onClick={() => { game.setDmRecipientId(c.userId); setExpanded(true); }}><b>{c.userName}{c.unreadCount ? ` (${c.unreadCount})` : ''}</b><span>{c.latestMessage}</span></button>) : <p className="rd-muted">ダイレクトメッセージはまだありません。全体チャットの名前から会話を始められます。</p>;
   }
   return <>
-    <section className="rd-home-visual" style={{ backgroundImage: `url(${background.image})` }} aria-label="お気に入り武将"><img className="rd-home-character" src={characterArt(favorite, 'full')} alt={favorite.name} /><HomeEffect backgroundImage={background.image} /><div className="rd-home-switch"><button onClick={() => { setSaveError(''); setHomeDraft(favorite.id);setSelector('character'); }}>武将切替</button><button onClick={() => { setSaveError(''); setHomeDraft(selectedBackground.id);setSelector('background'); }}>背景切替</button></div>{encounterRaid && Date.parse(encounterRaid.expiresAt) > now && <button className="rd-home-encounter" onClick={() => onNavigate('raid')}><small>エンカウントレイド発生中</small><strong>{encounterRaid.name}</strong><span>残り {raidTimeRemaining(encounterRaid.expiresAt, now)} ›</span></button>}<div className="rd-home-shortcuts"><button onClick={() => setMissionsOpen(true)}><img src="/ui/sengoku/03-trophy.png" alt=""/>任務</button><button onClick={() => onNavigate('shop')}><img src="/ui/sengoku/12-shop.png" alt=""/>商店</button><button disabled title="今後公開予定" aria-label="同盟・ロック中">🔒 同盟</button></div><p className="rd-home-name">{favorite.name}</p></section>
+    <section className="rd-home-visual" style={{ backgroundImage: `url(${background.image})` }} aria-label="お気に入り武将"><img className="rd-home-character" src={characterArt(favorite, 'full')} alt={favorite.name} /><HomeEffect backgroundImage={background.image} /><div className="rd-home-switch"><button onClick={() => { setSaveError(''); setHomeDraft(favorite.id);setSelector('character'); }}>武将切替</button><button onClick={() => { setSaveError(''); setHomeDraft(selectedBackground.id);setSelector('background'); }}>背景切替</button></div>{encounterRaid && Date.parse(encounterRaid.expiresAt) > now && <button className="rd-home-encounter" onClick={() => onNavigate('raid')}><small>エンカウントレイド発生中</small><strong>{encounterRaid.name}</strong><span>残り {raidTimeRemaining(encounterRaid.expiresAt, now)} ›</span></button>}<div className="rd-home-shortcuts"><button onClick={() => game.setShowMissionPanel(true)}><img src="/ui/sengoku/03-trophy.png" alt=""/>任務</button><button onClick={() => onNavigate('shop')}><img src="/ui/sengoku/12-shop.png" alt=""/>商店</button><button disabled title="今後公開予定" aria-label="同盟・ロック中">🔒 同盟</button></div><p className="rd-home-name">{favorite.name}</p></section>
     <div className="rd-home-bottom"><div className="rd-home-adventure"><button className="rd-quest-resume" onClick={() => onNavigate('quest:resume')}><small>クエスト · {area.name}</small><strong>{area.index}-{stage.index} {stage.name}</strong><span>続きから ›</span></button><button className="rd-quest-resume rd-territory-entry" onClick={() => onNavigate('territory')}><small>他領地の城を攻略</small><strong>領土侵攻</strong><span>侵攻先を選ぶ ›</span></button></div><section className="rd-community-preview">{tabs}<div className="rd-community-lines">{messages(false)}</div><button className="rd-text-button" onClick={() => setExpanded(true)}>コミュニティを開く ›</button></section><button className="rd-rotation-banner" onClick={() => onNavigate(banner ? 'shop' : 'gacha')}><span>{banner ? '旅の支度を整える' : '新たな力と出会う'}</span><strong>{banner ? '商店' : '登用'} ›</strong></button></div>
-    {missionsOpen && <Modal title="攻略の記録" onClose={() => setMissionsOpen(false)}><MissionContent state={state} missions={missions} missionBusy={missionBusy} missionError={missionError} previewOnly={previewOnly} onClaim={async missionId => { if(missionLock.current)return;missionLock.current=true;setMissionBusy(true); setMissionError(''); try { await onAction('claim_mission', { missionId }); } catch (reason) { setMissionError(game04UiError(reason)); } finally { missionLock.current=false;setMissionBusy(false); } }} /></Modal>}
     {selector && <Modal kind="edit" busy={saving} dirty={homeDraft !== (selector==='character'?favorite.id:selectedBackground.id)} footer={cancel=><div className="g4-cta-row"><button className="rd-button" disabled={saving} onClick={cancel}>キャンセル</button><button className="rd-button rd-primary" disabled={saving} onClick={()=>void saveHome(selector==='character'?{characterId:homeDraft}:{backgroundId:homeDraft})}>保存</button></div>} title={selector === 'character' ? 'ホーム武将切替' : '背景切替'} onClose={() => { if (!saving) setSelector(null); }}><div className="rd-grid">{selector === 'character' ? state.characters.map(owned => { const c = CHARACTER_MASTERS.find(m => m.id === owned.id); return c && <button key={c.id} disabled={saving} className="rd-choice" aria-pressed={homeDraft===c.id} onClick={() => setHomeDraft(c.id)}><img src={characterArt(c, 'portrait')} alt="" /><span>{c.name}</span></button>; }) : HOME_BACKGROUNDS.map(b => <button className="rd-choice" disabled={saving} key={b.id} aria-pressed={homeDraft===b.id} onClick={() => setHomeDraft(b.id)}><img src={b.id === 'castle-approach' && themedBackground ? themedBackground.image : b.image} alt="" /><span>{b.name}</span></button>)}</div>{saveError && <p role="alert">{saveError}</p>}</Modal>}
     {expanded && <Modal title="コミュニティ" onClose={() => setExpanded(false)} footer={community !== 'activity' && (community !== 'dm' || game.dmRecipientId) ? <form className="rd-row" onSubmit={async e => { e.preventDefault(); setCommunityError(''); try { if (community === 'dm') { if (await game.handleSendDirectMessage(game.dmRecipientId, dmText)) setDmText(''); } else await game.handleSendChat(); } catch { setCommunityError('通信状態を確認し、送信履歴を確認してください。'); } }}><input aria-label="メッセージ" maxLength={500} value={community === 'dm' ? dmText : game.chatInput} onChange={e => community === 'dm' ? setDmText(e.target.value) : game.setChatInput(e.target.value)} /><button className="rd-button" disabled={game.chatSending || game.chatCooldown > 0 || !(community === 'dm' ? dmText : game.chatInput)?.trim()}>送信</button></form> : undefined}>{tabs}{messages(true)}{communityError && <p role="status">{communityError}</p>}</Modal>}
   </>;

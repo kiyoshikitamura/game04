@@ -1,6 +1,5 @@
 import type { RedesignState } from '@/domain/redesign/types';
 import type { MissionProjection } from '@/domain/redesign/missions';
-import { QUEST_AREAS } from '@/domain/redesign/quests';
 import { raidRewardLabel } from '@/domain/redesign/raidPresentation';
 
 type Props = {
@@ -15,13 +14,7 @@ type Props = {
 /** Shared by the existing Home dialog and the offline QA page. */
 export default function MissionContent({ state, missions, missionBusy, missionError, previewOnly, onClaim }: Props) {
   return <>
-    <p>クリア済み {state.clearedStages.length} / {QUEST_AREAS.reduce((sum, area) => sum + area.stages.length, 0)} ステージ</p>
-    <div className="rd-stack">{QUEST_AREAS.map(area => {
-      const cleared = area.stages.filter(stage => state.clearedStages.includes(stage.id)).length;
-      return <div className="rd-panel rd-row" key={area.id}>
-        <strong>{area.name}</strong><span>{cleared}/{area.stages.length}{cleared === area.stages.length ? ' 達成' : ''}</span>
-      </div>;
-    })}</div>
+    <p>正式Mission Master接続確認（攻略の記録は任務一覧に表示しません）</p>
     {missions.length ? <div className="rd-stack">{missions.map(mission => <section className="rd-panel" key={mission.id}>
       <strong>{mission.name}</strong><p>{mission.description}</p><p>{mission.current} / {mission.target}</p>
       <ul>{mission.rewards.map((reward, index) => <li key={index}>{raidRewardLabel(reward)}</li>)}</ul>

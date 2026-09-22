@@ -20,6 +20,7 @@ import { TERRITORY_MASTER, projectTerritory, territoryItems, activeTerritoryCoun
 import RaidView from '@/app/components/redesign/RaidView';
 import BattleView from '@/app/components/redesign/BattleView';
 import { BATTLE_RULES, CHARACTER_MASTERS, SKILL_MASTERS, EQUIPMENT_MASTERS, buildBattleParty, createInitialState, grantReward } from '@/domain/redesign/masters';
+import { CANONICAL_MISSIONS } from '@/domain/gameplay/canonical/masters';
 import { QUEST_STAGES, getQuestStage, isQuestStageUnlocked } from '@/domain/redesign/quests';
 import { applyGrowthAction } from '@/domain/redesign/growth';
 import { applyRaidAction, createRaidRoom, getRoomRaidMaster, raidEnemy } from '@/domain/redesign/raid';
@@ -28,6 +29,7 @@ import type { RaidRoom, RedesignState } from '@/domain/redesign/types';
 import '@/app/components/redesign/redesign.css';
 
 const noop = () => undefined;
+const qaMissionRewardKind = (itemId: string) => itemId === 'CASH' ? 'cash' : itemId.startsWith('CHAR_EXP') ? 'character_exp_item' : itemId.startsWith('EQUIP_EXP') ? 'equipment_exp_item' : itemId === 'EQUIP_LB_PART' ? 'equipment_lb' : itemId === 'SKILL_MANUAL' ? 'skill_material' : 'generic_soul';
 import { emptyGrowthInventory } from '@/domain/redesign/growthMaster';
 const LOCAL_ID = 'qa-local-only';
 const QA_NORMAL_POOL: NormalPoolRow[] = (['CHARACTER', 'SKILL', 'EQUIPMENT'] as const).flatMap(kind =>
@@ -153,6 +155,7 @@ export default function RedesignFixture() {
     isNewsUnread:(n:typeof newsList[number])=>newsViews.isUnread({id:n.id,revision:JSON.stringify([n.title,n.content])}),
     markPresentViewed:(p:typeof presents[number])=>presentViews.markViewed(presentViewEntry(p)),isPresentUnread:(p:typeof presents[number])=>presentViews.isUnread(presentViewEntry(p)),
     session: null, username: '確認用の城主', userLevel: 1, playCyberSe: noop,
+    showMissionPanel: false, setShowMissionPanel: (open: boolean) => { if (open) setTab('missions'); },
     directMessages: [], dmUnreadConversations: [], dmUnreadTotal: 0, dmRecipientId, setDmRecipientId,
     guildChats, chatInput, setChatInput, chatCooldown: 0, chatSending: false,
     setChatChannel: noop, setShowTribeChatPanel: noop,
@@ -163,7 +166,7 @@ export default function RedesignFixture() {
       {battle ? <BattleView result={battle} vipActive={vip} title="レイド・ローカル確認" onComplete={() => setBattle(null)} /> : <>
         {tab === 'gacha' && <NormalGachaView data={gachaData} onAction={qaGachaAction} />}
         {tab === 'shop' && <ShopUiHarness embedded />}
-        {tab === 'missions' && <section className="rd-panel"><h1>ミッション</h1><MissionContent state={state} missions={[]} missionBusy={false} missionError="" previewOnly onClaim={noop}/></section>}
+        {tab === 'missions' && <section className="rd-panel"><h1>ミッション</h1><MissionContent state={state} missions={CANONICAL_MISSIONS.map(mission => ({ id: mission.id, name: mission.title, description: mission.description, rewards: [{ kind: qaMissionRewardKind(mission.rewardItemId) as any, amount: mission.rewardItemId === 'CASH' ? mission.cashReward : mission.rewardQuantity }], status: 'progress' as const, current: 0, target: mission.targetValue }))} missionBusy={false} missionError="" previewOnly onClaim={noop}/></section>}
         {tab === 'quest' && <QuestView recovery={recovery} state={state} party={party} vipActive={vip} onStart={startQuest} onOpenDeck={() => navigate('character')} onOpenRaid={id => { setRoomId(id); navigate('raid'); }} />}
         {tab === 'character' && <GrowthView state={state} onAction={action} />}
         {tab === 'territory' && <TerritoryView territory={territory} rooms={rooms} userId={LOCAL_ID} onOpenRoom={id => { setRoomId(id); navigate('raid'); }} onHost={async destinationId => { const destination = territory.destinations.find(entry => entry.id === destinationId); if (!destination?.canHost) throw new Error(destination?.reasons.join(' ') || '未設定です。'); const snapshot = createTerritorySnapshot(TERRITORY_MASTER, destinationId); const room = createRaidRoom(destination.raidMasterId, LOCAL_ID, `qa-territory-${Date.now()}`, Date.now(), snapshot); setRooms(previous => [...previous, room]); setState(previous => ({ ...previous, materials: { ...previous.materials, unlock: previous.materials.unlock - destination.itemCount } })); setRoomId(room.id); navigate('raid'); }} />}

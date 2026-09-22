@@ -12,8 +12,8 @@ const elements = { fire: '火', water: '水', earth: '土', wind: '風', light: 
 const statusNames = STATUS_LABELS;
 const readinessNames: Record<string, string> = { ready: '発動可能', insufficient_sp: 'SP不足', condition_unmet: '条件未達', active: '発動中' };
 const reasonNames: Record<string, string> = { action_limit: '300回の味方行動機会で未決着のため敗北', party_defeated: '味方全員が戦闘不能', mutual_annihilation: '双方全滅のため敗北', final_wave_defeated: '最終Waveの敵を撃破' };
-const reasonText = (reason: string) => reasonNames[reason] ?? reason;
-const eventText = (text: string) => text.replace(/\b(atk_up|def_up|atk_down|def_down|stun|dot|hot|shield|taunt|counter|cleanse)\b/g, key => statusNames[key]);
+const reasonText = (reason: string) => reasonNames[reason] ?? CLEANSE_LABELS[reason] ?? reason;
+const eventText = (text: string) => text.replace(/\b(atk_up|def_up|atk_down|def_down|stun|dot|hot|shield|taunt|counter|cleanse|protection)\b/g, key => key === 'protection' ? CLEANSE_LABELS.protection : statusNames[key]);
 const signed = (value: number) => `${value > 0 ? '+' : ''}${value}`;
 const meterWidth = (value: number, max: number) => `${Math.max(0, Math.min(100, 100 * value / Math.max(1, max)))}%`;
 // Playback timing only; structural frames remain available in the complete log.
