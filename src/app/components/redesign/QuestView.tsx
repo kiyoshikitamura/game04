@@ -1,4 +1,5 @@
 'use client';
+import TerritoryItemIcon from './TerritoryItemIcon';
 import { characterArt } from '@/theme/creativeAssets';
 import { useEffect, useRef, useState } from 'react';
 import { CHARACTER_MASTERS, EQUIPMENT_MASTERS } from '@/domain/redesign/masters';
@@ -20,7 +21,7 @@ function rewardLabel(reward: Reward) {
   return REWARD_LABELS[reward.kind];
 }
 function Rewards({ rewards }: { rewards: Reward[] }) {
-  return rewards.length ? <ul className="rq-rewards">{rewards.map((reward, index) => <li key={`${reward.kind}-${reward.id ?? ''}-${index}`}>{rewardLabel(reward)} ×{reward.amount.toLocaleString()}</li>)}</ul> : <p className="rq-muted">なし</p>;
+  return rewards.length ? <ul className="rq-rewards">{rewards.map((reward, index) => <li key={`${reward.kind}-${reward.id ?? ''}-${index}`}>{reward.kind === 'unlock_item' && <TerritoryItemIcon />}{rewardLabel(reward)} ×{reward.amount.toLocaleString()}</li>)}</ul> : <p className="rq-muted">なし</p>;
 }
 export default function QuestView({ state, party, vipActive, onStart, onOpenDeck, onOpenRaid, onIgnoreEncounter, initialStageId, onBattlePlayingChange }: {
   state: RedesignState; party: BattleUnit[]; vipActive: boolean; onStart: (stageId: string) => Promise<QuestSettlement>;

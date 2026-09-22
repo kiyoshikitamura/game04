@@ -1,4 +1,5 @@
 'use client';
+import TerritoryItemIcon from './TerritoryItemIcon';
 import { characterArt } from '@/theme/creativeAssets';
 import { useEffect, useRef, useState } from 'react';
 import type { BattleUnit, RaidRoom, RedesignState, Reward } from '../../../domain/redesign/types';
@@ -9,7 +10,7 @@ import CanonicalDialog from '../ui/CanonicalDialog';
 import PreparationModal from './PreparationModal';
 import './RaidView.css';
 export interface RaidViewProps { state:RedesignState;rooms:RaidRoom[];party:BattleUnit[];onAction:(action:Record<string,unknown>)=>Promise<unknown>;onOpenDeck:()=>void;initialRoomId?:string; }
-function Rewards({rewards}:{rewards:Reward[]}) {return <ul>{rewards.map((r,i)=><li key={`${r.kind}-${i}`}>{raidRewardLabel(r)}</li>)}</ul>;}
+function Rewards({rewards}:{rewards:Reward[]}) {return <ul>{rewards.map((r,i)=><li key={`${r.kind}-${i}`}>{r.kind === 'unlock_item' && <TerritoryItemIcon />}{raidRewardLabel(r)}</li>)}</ul>;}
 export default function RaidView({state,rooms,party,onAction,onOpenDeck,initialRoomId}:RaidViewProps){
  const [selected,setSelected]=useState<string|null>(initialRoomId??null),[filter,setFilter]=useState('all'),[modal,setModal]=useState<string|null>(null),[now,setNow]=useState(()=>Date.now()),[busy,setBusy]=useState(false),[error,setError]=useState('');
  const lock=useRef(false);
