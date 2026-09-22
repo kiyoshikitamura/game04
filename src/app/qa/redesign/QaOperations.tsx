@@ -2,7 +2,7 @@
 import { useEffect, useRef } from 'react';
 import './qa-operations.css';
 
-const VIEWS = [['home', 'Home'], ['quest', 'Quest'], ['character', 'Growth'], ['raid', 'Raid'], ['territory', '領土侵攻'], ['battle', 'Battle']] as const;
+const VIEWS = [['home', 'Home'], ['quest', 'Quest'], ['character', 'Growth'], ['raid', 'Raid'], ['territory', '領土侵攻'], ['battle', 'Battle'], ['gacha', 'ガチャ'], ['shop', 'ショップ'], ['missions', 'ミッション']] as const;
 
 type Props = {
   open: boolean; onClose: () => void; activeView: string; onSelectView: (view: string) => void;

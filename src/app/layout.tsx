@@ -9,6 +9,7 @@ import {
 import "./globals.css";
 import "./sengoku-theme.css";
 import "./scroll-policy.css";
+import "./game04-visual-tokens.css";
 
 const production = isVercelProduction();
 

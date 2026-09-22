@@ -11,7 +11,7 @@ const newsFixture = [{ id: "qa-news", title: "正式オープンのお知らせ�
 type Dialog = { isOpen: boolean; title?: string; message?: ReactNode; confirmText?: string; onConfirm?: () => unknown; onCancel?: () => unknown };
 
 /** Real components with isolated in-memory transport; no sign-in, checkout or DB writes. */
-export default function ShopUiHarness() {
+export default function ShopUiHarness({ embedded = false }: { embedded?: boolean } = {}) {
   const [ready, setReady] = useState(false);
   const [shopSubTab, setShopSubTab] = useState("LIMITED");
   const [showInboxPanel, setShowInboxPanel] = useState(false);
@@ -54,12 +54,12 @@ export default function ShopUiHarness() {
     markNewsRead: () => {}, presents, handleClaimPresent: () => setPresents([]), handleClaimAllPresents: () => setPresents([]),
     presentClaimLoading: false, playCyberSe: () => {},
   }}>
-    <main style={{ width: "100%", maxWidth: 390, height: "100dvh", margin: "0 auto", padding: 12, display: "flex", flexDirection: "column", background: "#0b101b", color: "#f1f5f9" }}>
-      <div style={{ fontSize: 11, display: "flex", gap: 8, paddingBottom: 8 }}>
+    <main style={{ width: "100%", maxWidth: embedded ? "100%" : 390, height: embedded ? "auto" : "100dvh", margin: "0 auto", padding: 12, display: "flex", flexDirection: "column", background: "var(--g4-bg)", color: "var(--g4-text)" }}>
+      {!embedded && <div style={{ fontSize: 14, display: "flex", gap: 8, paddingBottom: 8 }}>
         <span>QA 表示確認・実決済なし</span>
         <button onClick={() => { setInboxPanelTab("presents"); setShowInboxPanel(true); }}>プレゼントBOX</button>
         <button onClick={() => { setInboxPanelTab("news"); setShowInboxPanel(true); }}>お知らせ</button>
-      </div>
+      </div>}
       <ShopTab />
     </main>
     <InboxPanel />

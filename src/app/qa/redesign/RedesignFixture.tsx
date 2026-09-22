@@ -1,6 +1,12 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
 import QaOperations from './QaOperations';
+import NormalGachaView from '@/app/components/redesign/NormalGachaView';
+import MissionContent from '@/app/components/redesign/MissionContent';
+import ShopUiHarness from '@/app/qa/shop-ui/ShopUiHarness';
+import type { RedesignResponse } from '@/utils/redesignApi';
+import { applyNormalGacha, type NormalPoolRow, normalGachaDay } from '@/domain/redesign/normalGacha';
+import { PREVIEW_ACQUISITION_MASTER } from '@/domain/redesign/acquisitions';
 import { GameContext } from '@/app/context/GameContext';
 import RedesignShell from '@/app/components/redesign/RedesignShell';
 import QuestView, { type QuestSettlement } from '@/app/components/redesign/QuestView';
@@ -9,7 +15,7 @@ import TerritoryView from '@/app/components/redesign/TerritoryView';
 import { TERRITORY_MASTER, projectTerritory, territoryItems, activeTerritoryCount, createTerritorySnapshot } from '@/domain/redesign/territory';
 import RaidView from '@/app/components/redesign/RaidView';
 import BattleView from '@/app/components/redesign/BattleView';
-import { BATTLE_RULES, CHARACTER_MASTERS, EQUIPMENT_MASTERS, buildBattleParty, createInitialState, grantReward } from '@/domain/redesign/masters';
+import { BATTLE_RULES, CHARACTER_MASTERS, SKILL_MASTERS, EQUIPMENT_MASTERS, buildBattleParty, createInitialState, grantReward } from '@/domain/redesign/masters';
 import { QUEST_STAGES, getQuestStage, isQuestStageUnlocked } from '@/domain/redesign/quests';
 import { applyGrowthAction } from '@/domain/redesign/growth';
 import { applyRaidAction, createRaidRoom, getRoomRaidMaster, raidEnemy } from '@/domain/redesign/raid';
@@ -20,6 +26,12 @@ import '@/app/components/redesign/redesign.css';
 const noop = () => undefined;
 import { emptyGrowthInventory } from '@/domain/redesign/growthMaster';
 const LOCAL_ID = 'qa-local-only';
+const QA_NORMAL_POOL: NormalPoolRow[] = (['CHARACTER', 'SKILL', 'EQUIPMENT'] as const).flatMap(kind =>
+  ({ CHARACTER: CHARACTER_MASTERS, SKILL: SKILL_MASTERS, EQUIPMENT: EQUIPMENT_MASTERS }[kind]).map(master => ({
+    gacha_id: { CHARACTER: 'CHAR_NORMAL', SKILL: 'SKILL_NORMAL', EQUIPMENT: 'EQUIP_NORMAL' }[kind],
+    item_id: master.id, item_type: kind, rarity: master.rarity,
+  }))
+);
 function fixtureState(): RedesignState {
   const state = createInitialState(LOCAL_ID);
   state.growthInventory = emptyGrowthInventory();
@@ -59,7 +71,7 @@ export default function RedesignFixture() {
     const params = new URLSearchParams(window.location.search);
     setWaveSpProbe(params.get('probe') === 'wave-sp');
     const selected = params.get('view');
-    if (selected && ['home','quest','character','raid','territory','battle'].includes(selected)) setTab(selected);
+    if (selected && ['home','quest','character','raid','territory','battle','gacha','shop','missions'].includes(selected)) setTab(selected);
     document.body.classList.add('rd-active');
     return () => document.body.classList.remove('rd-active');
   }, []);
@@ -102,6 +114,17 @@ export default function RedesignFixture() {
     if (result) setBattle(result);
   }
   const territory = projectTerritory(TERRITORY_MASTER, { experience: territoryExp }, territoryItems(state), activeTerritoryCount(LOCAL_ID, rooms));
+  const gachaData: RedesignResponse = {
+    state, rooms,
+    normalGacha: { pool: QA_NORMAL_POOL, day: normalGachaDay(Date.now()), available: state.dailyNormalGachaDate !== normalGachaDay(Date.now()) },
+  };
+  async function qaGachaAction(name: string, payload: Record<string, unknown> = {}, requestId = crypto.randomUUID()): Promise<RedesignResponse> {
+    if (name === 'normal_gacha_status') return gachaData;
+    if (name !== 'normal_gacha') throw new Error('Unsupported local QA action');
+    const result = applyNormalGacha(state, { count: Number(payload.count), currency: String(payload.currency) }, QA_NORMAL_POOL, requestId, Date.now(), PREVIEW_ACQUISITION_MASTER, Math.random);
+    setState(result.state);
+    return { ...gachaData, state: result.state, normalGachaResults: result.results };
+  }
   const game = {
     ownedHomeCosmeticIds: [], setShowAccountAuthenticationModal: noop, setInboxPanelTab: noop, setShowInboxPanel: noop, setShowSettingsPanel: noop,
     session: null, username: '確認用の城主', userLevel: 1, playCyberSe: noop,
@@ -113,12 +136,15 @@ export default function RedesignFixture() {
   };
   return <GameContext.Provider value={game}><RedesignShell state={state} onAction={action} activeTab={tab} onNavigate={navigate} previewOnly hideChrome={Boolean(battle) || tab === 'battle'} encounterRaid={rooms[0] ? { id: rooms[0].id, name: '炎影の守将', expiresAt: rooms[0].expiresAt } : null} onOpenQa={() => setQaOpen(true)}>
       {battle ? <BattleView result={battle} vipActive={vip} title="レイド・ローカル確認" onComplete={() => setBattle(null)} /> : <>
+        {tab === 'gacha' && <NormalGachaView data={gachaData} onAction={qaGachaAction} />}
+        {tab === 'shop' && <ShopUiHarness embedded />}
+        {tab === 'missions' && <section className="rd-panel"><h1>ミッション</h1><MissionContent state={state} missions={[]} missionBusy={false} missionError="" previewOnly onClaim={noop}/></section>}
         {tab === 'quest' && <QuestView state={state} party={party} vipActive={vip} onStart={startQuest} onOpenDeck={() => navigate('character')} onOpenRaid={id => { setRoomId(id); navigate('raid'); }} />}
         {tab === 'character' && <GrowthView state={state} onAction={action} />}
         {tab === 'territory' && <TerritoryView territory={territory} rooms={rooms} userId={LOCAL_ID} onOpenRoom={id => { setRoomId(id); navigate('raid'); }} onHost={async destinationId => { const destination = territory.destinations.find(entry => entry.id === destinationId); if (!destination?.canHost) throw new Error(destination?.reasons.join(' ') || '未設定です。'); const snapshot = createTerritorySnapshot(TERRITORY_MASTER, destinationId); const room = createRaidRoom(destination.raidMasterId, LOCAL_ID, `qa-territory-${Date.now()}`, Date.now(), snapshot); setRooms(previous => [...previous, room]); setState(previous => ({ ...previous, materials: { ...previous.materials, unlock: previous.materials.unlock - destination.itemCount } })); setRoomId(room.id); navigate('raid'); }} />}
         {tab === 'raid' && <RaidView key={roomId || 'list'} state={state} rooms={rooms} party={party} onAction={raidAction} onOpenDeck={() => navigate('character')} initialRoomId={roomId} />}
         {tab === 'battle' && <BattleView result={sampleBattle} vipActive={vip} onComplete={() => navigate('quest')} title="Wave・ローカル確認" />}
-        {!['home','quest','character','raid','territory','battle'].includes(tab) && <div className="rd-panel"><p>この共通機能は確認用画面では接続しません。</p><button className="rd-button" onClick={() => navigate('home')}>Homeへ</button></div>}
+        {!['home','quest','character','raid','territory','battle','gacha','shop','missions'].includes(tab) && <div className="rd-panel"><p>この共通機能は確認用画面では接続しません。</p><button className="rd-button" onClick={() => navigate('home')}>Homeへ</button></div>}
       </>}
   </RedesignShell>
     <QaOperations open={qaOpen} onClose={() => setQaOpen(false)} activeView={battle ? 'battle' : tab}

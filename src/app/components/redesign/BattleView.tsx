@@ -68,7 +68,7 @@ export function BattleView({ result, vipActive, onComplete, title = '合戦', ra
         const active = recorded ? recorded.status === 'active' : !frame.skillStates && frame.actorId === unit.id && frame.skillId === skill.id;
         const status = active ? '発動中' : recorded?.reason === 'reapply_unavailable' ? '再付与不可' : recorded ? readinessNames[recorded.status] ?? recorded.status : '記録なし';
         return <button key={skill.id} className={`${styles.skill} ${active ? styles.skillActive : recorded?.status === 'condition_unmet' ? styles.condition : recorded?.status === 'insufficient_sp' ? styles.shortSp : ''}`} title={`優先${slot + 1} ${skill.name}：${status}`} aria-label={`優先${slot + 1} ${skill.name}：${status}`} onClick={() => setDetail({ skill, readiness: status, cost: recorded?.cost, reason: recorded?.reason })}>
-          <img src={skill.image} alt="" /><span>{active ? '発動' : recorded?.reason === 'reapply_unavailable' ? '残存' : recorded?.status === 'condition_unmet' ? '条件' : recorded?.status === 'insufficient_sp' ? 'SP' : recorded?.status === 'ready' ? '可' : '—'}</span>
+          <img src={skill.image} alt="" /><span>{slot + 1} {active ? '発動' : recorded?.reason === 'reapply_unavailable' ? '残存' : recorded?.status === 'condition_unmet' ? '条件' : recorded?.status === 'insufficient_sp' ? 'SP' : recorded?.status === 'ready' ? '可' : '—'}</span>
         </button>;
       })}</span>}
     </div>;
