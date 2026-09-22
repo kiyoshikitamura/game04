@@ -25,6 +25,15 @@
 - 専用Previewへデプロイ後、390×844でエリア一覧、ステージ一覧、挑戦ダイアログ、出撃準備、キャラ詳細、攻略ヒント、報酬詳細を撮影し、承認モックと比較画像を保存する。
 - 報酬詳細は末尾までスクロールして確認する。
 
+### 今回の実測Preview
+
+- Preview: https://game04-8zk4s7mhn-kiyoshi-kitamura.vercel.app/qa/redesign?view=quest
+- Deployment: `dpl_Ca4S2yksgz1XZ8tyeQXc3VGFvY4Y`（Production昇格なし）
+- 実測比較: [quest-visual-comparison-20260923.png](./comparison/quest-visual-comparison-20260923.png)
+- 実測7画面: `01-area-list.png`、`02-stage-list.png`、`03-challenge.png`、`04-preparation.png`、`05-character-detail.png`、`06-hint-detail.png`、`07-reward-detail.png`。報酬末尾は `07-reward-detail-bottom.png`。
+- 画像はカード／バトル／ポートレート用途を分離し、枠・属性バッジ・Lv・HP・SP400・報酬アイコン・ダイアログ構図を目視確認した。
+- Preview上の取り込み対象216 URL（画像206、演出HTML10）をHEAD確認し、216/216 がHTTP 200。演出HTMLは `HomeEffect` のsandbox iframe経由で参照する。
+
 ## 残件
 
 - 明智光秀のバトル用素材はユーザー供給待ち。
