@@ -80,6 +80,12 @@ function Pending({error,retry}:{error?:string;retry:()=>void}){
     {error?<><p>{error}</p><button type="button" onClick={retry}>再読み込み</button></>:<><span className={styles.spinner}/><span>読み込み中</span></>}
   </div>;
 }
+function ElementMark({src,element,className}:{src:string;element:Element;className?:string}){
+  return <span className={className ? `${styles.elementMark} ${className}` : styles.elementMark}>
+    <img className={styles.element} src={src} alt=""/>
+    <span className={styles.elementLabel}>{labels[element]}</span>
+  </span>;
+}
 export function CharacterCard({subject}:{subject:DisplaySubject}){
   const asset=useArtwork(subject,'card');
   const visible=usePageVisible();
@@ -92,7 +98,7 @@ export function CharacterCard({subject}:{subject:DisplaySubject}){
         <img className={styles.frame} src={asset.frame} alt=""/>
         <span className={styles.sheen} aria-hidden="true"/>
         <span className={styles.aura} aria-hidden="true"/>
-        <img className={styles.element} src={asset.element} alt={labels[subject.element]+'属性'}/>
+        <ElementMark src={asset.element} element={subject.element}/>
         <span className={styles.rarity}>{subject.rarity}</span>
       </div>
       <figcaption className={styles.caption}>{subject.name}</figcaption>
@@ -108,7 +114,7 @@ export function BossDisplay({subject}:{subject:DisplaySubject}){
         <div className={styles.shade}/>
         <div className={styles.bossPerson}><Person src={asset.source} box={asset.box}/></div>
       </div>
-      <figcaption className={styles.bossCaption}><img src={asset.element} alt={labels[subject.element]+'属性'}/><strong>{subject.name}</strong></figcaption>
+      <figcaption className={styles.bossCaption}><ElementMark src={asset.element} element={subject.element} className={styles.bossElement}/><strong>{subject.name}</strong></figcaption>
     </>}
   </figure>;
 }

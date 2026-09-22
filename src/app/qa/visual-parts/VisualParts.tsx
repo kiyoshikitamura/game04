@@ -3,11 +3,12 @@ import { useState } from 'react';
 import { CHARACTER_MASTERS } from '@/domain/redesign/masters';
 import art from '@/theme/local-characters.json';
 import { CharacterCard, BossDisplay } from '@/app/components/redesign/visual-bench/CharacterDisplays';
+import styles from '@/app/components/redesign/visual-bench/CharacterDisplays.module.css';
 export default function VisualParts(){
  const [id,setId]=useState(CHARACTER_MASTERS.find(c=>c.name==='くノ一')?.id??CHARACTER_MASTERS[0].id);
  const selected=CHARACTER_MASTERS.find(c=>c.id===id)!;
  const boss=art.find(c=>c.id===selected.id)?.battle;
- return <main style={{maxWidth:390,minHeight:'100dvh',margin:'0 auto',padding:'24px 16px 40px',background:'#151216',color:'#f4efe6',fontFamily:'"Noto Sans JP",sans-serif'}}>
+ return <main className={styles.qa} style={{maxWidth:390,minHeight:'100dvh',margin:'0 auto',padding:'24px 16px 40px',background:'#151216',color:'#f4efe6'}}>
    <a href="/qa/redesign?view=quest" style={{color:'#d8b56d',display:'inline-block',padding:'12px 0'}}>QAへ戻る</a>
    <h1 style={{fontSize:22}}>カード・ボス表示の確認</h1>
    <p style={{fontSize:16,lineHeight:1.7}}>部品確認用。所持・編成・進行は変更しません。</p>
