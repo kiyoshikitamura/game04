@@ -1,0 +1,9 @@
+.qa-operations{position:fixed;inset:0;margin:0;width:100%;max-width:none;height:100dvh;max-height:none;box-sizing:border-box;border:0;background:#171014;color:#f7ecd8;padding:20px 16px max(20px,env(safe-area-inset-bottom));overflow-y:auto;overscroll-behavior:contain}
+.qa-operations::backdrop{background:#171014}
+.qa-operations-content{max-width:560px;margin:auto}
+.qa-operations-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.qa-operations h1{font-size:22px;margin:0}
+.qa-operations h2{font-size:18px}
+.qa-operations-views{flex-wrap:wrap;margin-bottom:20px}
+.qa-operations button{min-height:40px}
+.qa-operations label{padding:12px 0}
