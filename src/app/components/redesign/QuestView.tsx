@@ -30,6 +30,7 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
   const [areaId, setAreaId] = useState<string | null>(firstStage?.areaId ?? null);
   const [selected, setSelected] = useState<QuestStage | null>(firstStage ?? null);
   const [modal, setModal] = useState<'info' | 'prepare' | null>(firstStage ? 'info' : null);
+  const [detailPanel, setDetailPanel] = useState<'hint' | 'rewards' | null>(null);
   const [settlement, setSettlement] = useState<QuestSettlement | null>(null);
   const [playing, setPlaying] = useState(false);
   useEffect(() => { onBattlePlayingChange?.(playing); return () => onBattlePlayingChange?.(false); }, [playing, onBattlePlayingChange]);
@@ -56,7 +57,14 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
     catch (reason) { setError(reason instanceof Error ? reason.message : '処理に失敗しました。'); }
     finally { actionRef.current = false; setBusy(false); }
   }
-  function openStage(stage: QuestStage) { setSelected(stage); setModal('info'); setError(''); }
+  function openStage(stage: QuestStage) { setSelected(stage); setModal('info'); setDetailPanel(null); setError(''); }
+  const visibleAreas = QUEST_AREAS.filter((entry, index) => {
+    const unlocked = isQuestStageUnlocked(entry.stages[0].id, state.clearedStages);
+    const cleared = entry.stages.every(stage => state.clearedStages.includes(stage.id));
+    const prior = QUEST_AREAS[index - 1];
+    const priorCleared = prior ? prior.stages.every(stage => state.clearedStages.includes(stage.id)) : true;
+    return unlocked || cleared || priorCleared;
+  }).slice(0, Math.max(1, QUEST_AREAS.findIndex(entry => !isQuestStageUnlocked(entry.stages[0].id, state.clearedStages)) + 2));
   if (playing && settlement) return <BattleView result={settlement.battle} vipActive={vipActive} onComplete={() => setPlaying(false)} title={selected?.name} />;
   return <section className="redesign-quest">
     {settlement ? <div className="rq-summary">
@@ -77,16 +85,18 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
         <div className="rq-scroll" aria-label={`${area.name}のステージ一覧`}>{area.stages.map(stage => {
           const cleared = state.clearedStages.includes(stage.id), unlocked = isQuestStageUnlocked(stage.id, state.clearedStages);
           return <button className={`rq-stage ${current.id === stage.id ? 'is-current' : ''}`} key={stage.id} disabled={!unlocked} onClick={() => openStage(stage)}><b>{area.index}-{stage.index}</b><span><strong>{stage.name}</strong><small>消費行動力 {questEnergyCost(stage,state)}</small></span><small>{cleared ? 'クリア済' : unlocked ? '未クリア' : '未解放'}</small></button>;
-        })}</div></> : <><h2>クエスト</h2><div className="rq-scroll" aria-label="エリア一覧">{QUEST_AREAS.map(entry => {
+        })}</div></> : <><h2>クエスト</h2><div className="rq-scroll rq-area-list" aria-label="エリア一覧">{visibleAreas.map(entry => {
           const cleared = entry.stages.every(stage => state.clearedStages.includes(stage.id));
           const unlocked = isQuestStageUnlocked(entry.stages[0].id, state.clearedStages);
           return <button key={entry.id} disabled={!unlocked} className={`rq-area ${entry.id === current.areaId ? 'is-current' : ''}`} style={{ backgroundImage: `linear-gradient(0deg,#0c0806ed,#0c080650),url("${entry.image}")` }} onClick={() => setAreaId(entry.id)}><span>第{entry.index}章</span><strong>{entry.name}</strong><span>{cleared ? 'クリア済' : unlocked ? '攻略中' : '未解放'}</span></button>;
         })}</div></>}
     </>}
-    {selected && modal === 'info' && <div className="redesign-quest-dialog"><CanonicalDialog title={`${QUEST_AREAS.find(entry => entry.id === selected.areaId)?.index}-${selected.index} ${selected.name}`} onClose={() => setModal(null)} actions={[{ label: '閉じる', onClick: () => setModal(null) }, { label: '挑戦', semantic: 'primary', onClick: () => setModal('prepare'), disabled: !isQuestStageUnlocked(selected.id, state.clearedStages) }]}>
-      <p>{selected.waves.length} Wave ／ 消費行動力 {questEnergyCost(selected,state)}</p><p className="rq-muted">{selected.description}</p>
-      {selected.waves.map((enemies, index) => <section key={index}><h3>Wave {index + 1}</h3><div className="rq-enemies">{enemies.map(enemy => <article key={enemy.id} className="rq-enemy"><img src={enemy.image} alt="" /><strong>{enemy.name}</strong><span>Lv.{enemy.level}</span><span className={`rq-element rq-element-${enemy.element}`}>{ELEMENT_LABELS[enemy.element]}</span></article>)}</div></section>)}
-      <h3>初回報酬{state.clearedStages.includes(selected.id) ? '（獲得済）' : ''}</h3><Rewards rewards={selected.firstRewards} /><h3>通常ドロップ</h3><Rewards rewards={selected.rewards} /><h3>レアドロップ</h3><Rewards rewards={selected.rareRewards} />
+    {selected && modal === 'info' && <div className="redesign-quest-dialog"><CanonicalDialog title={`${QUEST_AREAS.find(entry => entry.id === selected.areaId)?.index}-${selected.index} ${selected.name}`} onClose={() => setModal(null)} actions={[{ label: '戻る', onClick: () => setModal(null) }, { label: '挑戦', semantic: 'primary', onClick: () => setModal('prepare'), disabled: !isQuestStageUnlocked(selected.id, state.clearedStages) }]}>
+      <div className="rq-encounter-hero"><span className="rq-kicker">最終Waveのボス</span><div className="rq-bosses">{selected.waves[selected.waves.length - 1].map(enemy => <article key={enemy.id} className="rq-boss"><img src={enemy.image} alt="" /><div><strong>{enemy.name}</strong><span>Lv.{enemy.level} ／ {ELEMENT_LABELS[enemy.element]}属性</span><small>HP {enemy.stats.hp.toLocaleString()}</small></div></article>)}</div></div>
+      <div className="rq-stage-facts"><span>⚔ Wave数：{selected.waves.length}</span><span>♟ 消費行動力：{questEnergyCost(selected,state)}</span></div>
+      <div className="rq-info-actions"><button type="button" onClick={() => setDetailPanel(detailPanel === 'hint' ? null : 'hint')}>📜 攻略のヒント</button><button type="button" onClick={() => setDetailPanel(detailPanel === 'rewards' ? null : 'rewards')}>🎁 報酬を確認</button></div>
+      {detailPanel === 'hint' && <div className="rq-inline-panel"><strong>攻略のヒント</strong><p>{selected.description}</p><p className="rq-muted">Wave 1〜{selected.waves.length}の順に突破します。最終Waveの敵編成は正式クエストマスタを表示しています。</p></div>}
+      {detailPanel === 'rewards' && <div className="rq-inline-panel"><strong>報酬を確認</strong><h4>初回報酬{state.clearedStages.includes(selected.id) ? '（獲得済）' : ''}</h4><Rewards rewards={selected.firstRewards} /><h4>通常ドロップ</h4><Rewards rewards={selected.rewards} /><h4>レアドロップ</h4><Rewards rewards={selected.rareRewards} /></div>}
     </CanonicalDialog></div>}
     {selected && modal === 'prepare' && <PreparationModal party={party} title={selected.name} energyCost={questEnergyCost(selected,state)} energy={state.energy} busy={busy} error={error} onConfirm={start} onBack={() => setModal('info')} onOpenDeck={onOpenDeck} />}
   </section>;
