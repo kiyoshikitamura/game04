@@ -9,6 +9,9 @@
 .rq-enemy-art.is-boss .rq-enemy-attribute{right:5px;bottom:30px;}
 .rq-enemy-art.is-boss .rq-enemy-name{bottom:3px;font-size:13px;background:#100a0dee;}
 .rq-boss .rq-enemy-image{width:100%;height:100%;}
+.rq-card-background{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;filter:saturate(.85) brightness(.7);}
+.rq-card-person,.rq-card-frame,.rq-character-person,.rq-character-frame{z-index:1;}
+.rq-enemy-rarity-text{position:absolute;top:5px;right:5px;z-index:2;padding:2px 5px;border:1px solid #d8b56d;border-radius:3px;background:#151216dd;color:#f8d68f;font-size:10px;font-weight:700;}
 .rq-bosses{align-items:start;}
 .rq-boss{background:linear-gradient(180deg,#180e12aa,#100b0dcc);}
 .rq-party-card .rq-card-visual{width:100%;height:102px;flex:0 0 102px;}

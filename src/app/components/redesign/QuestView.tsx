@@ -11,8 +11,7 @@ import './QuestView.css';
 import { growthRewardLabel } from '@/domain/redesign/growthReward';
 import ElementBadge from './ElementBadge';
 import roster from '@/theme/sengoku-characters.json';
-import { getRarityBadgeAsset, getRarityFrameAsset } from '@/utils/rarityAssets';
-import { characterArt } from '@/theme/creativeAssets';
+import { characterArt, characterFrame } from '@/theme/creativeAssets';
 
 export interface QuestSettlement { playerGrowth?: import('@/utils/redesignApi').RedesignResponse['playerGrowth']; battle: BattleResult; rewards: Reward[]; firstClear: boolean; encounterRaidId?: string | null; }
 const REWARD_LABELS: Record<Reward['kind'], string> = {ticket:'スペシャル券', character_exp_item: '武将EXP', equipment_exp_item: '装備EXP', generic_soul: '汎用魂', soul_selector: '魂選択', character: '武将', skill: 'スキル', cash: '銭', character_material: '武将育成素材', skill_material: 'スキルLB素材', equipment_material: '装備育成素材', equipment_lb: '装備LB素材', soul: '武将の魂', equipment: '装備', unlock_item: '領土侵攻札' };
@@ -42,7 +41,7 @@ function enemyRarity(enemy: QuestStage['waves'][number][number]) {
 }
 function EnemyArt({ enemy, boss = false }: { enemy: QuestStage['waves'][number][number]; boss?: boolean }) {
   const rarity = enemyRarity(enemy);
-  return <div className={`rq-enemy-art ${boss ? 'is-boss' : ''}`}>{!boss && <img className="rq-enemy-frame" src={getRarityFrameAsset('character', rarity)} alt="" />}<img className="rq-enemy-image" src={enemy.image} alt={enemy.name} /><img className="rq-enemy-rarity" src={getRarityBadgeAsset(rarity)} alt={`${rarity}レアリティ`} /><ElementBadge element={enemy.element} className="rq-enemy-attribute" />{!boss && <span className="rq-enemy-name">{enemy.name}</span>}</div>;
+  return <div className={`rq-enemy-art ${boss ? 'is-boss' : ''}`}>{!boss && <img className="rq-enemy-frame" src={characterFrame(rarity)} alt="" />}<img className="rq-enemy-image" src={enemy.image} alt={enemy.name} />{!boss && <span className="rq-enemy-rarity-text">{rarity}</span>}<ElementBadge element={enemy.element} className="rq-enemy-attribute" />{!boss && <span className="rq-enemy-name">{enemy.name}</span>}</div>;
 }
 export default function QuestView({ state, party, vipActive, onStart, onOpenDeck, onOpenRaid, onIgnoreEncounter, initialStageId, onBattlePlayingChange }: {
   state: RedesignState; party: BattleUnit[]; vipActive: boolean; onStart: (stageId: string) => Promise<QuestSettlement>;

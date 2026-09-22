@@ -1,0 +1,107 @@
+@font-face{font-family:"Noto Sans JP";src:url('/fonts/game04/NotoSansJP.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Noto Serif JP";src:url('/fonts/game04/NotoSerifJP.woff2') format('woff2');font-weight:200 900;font-style:normal;font-display:swap}
+:root{--g4-bg:#151216;--g4-panel:#262127;--g4-text:#F4EFE6;--g4-muted:#C3B8AA;--g4-gold:#D8B56D;--g4-primary:#9E353B;--g4-sans:"Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;--g4-serif:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif;--g4-body:16px;--g4-small:14px;--g4-label:14px;--g4-title:24px;--g4-section:20px;--g4-tap:44px;--font-ui:var(--g4-sans);--font-inter:var(--g4-sans);--font-outfit:var(--g4-sans);--font-display:var(--g4-serif);--font-sengoku:var(--g4-sans)}
+body.game04-theme{background:var(--g4-bg);color:var(--g4-text);font-size:var(--g4-body);line-height:1.6;font-weight:400}
+body.game04-theme :where(*):not(:where(pre,code,kbd,samp,pre *,code *)){font-family:var(--g4-sans)!important}
+body.game04-theme :is(h1,h2,.rd-home-name){font-family:var(--g4-serif)!important;font-weight:700;color:var(--g4-gold);line-height:1.4;overflow-wrap:anywhere}
+body.game04-theme h1{font-size:var(--g4-title)}
+body.game04-theme h2{font-size:var(--g4-section)}
+body.game04-theme :is(.rd-shell,.qa-operations,.g4-growth){background:var(--g4-bg);color:var(--g4-text)}
+body.game04-theme :is(.rd-header,.rd-footer,.rd-panel,.rd-modal,.g4g-modal,.canonical-dialog,.modal-shell,.outlaw-card,.shop-product-card,.special-gacha-product,.gacha-normal-offer){background:var(--g4-panel);color:var(--g4-text);text-shadow:none}
+body.game04-theme :is(.rd-shell,.rd-modal,.g4g-modal,.canonical-dialog,.qa-operations) :is(p,li){font-size:var(--g4-body);line-height:1.6;overflow-wrap:anywhere}
+body.game04-theme :is(.rd-shell,.rd-modal,.g4g-modal,.canonical-dialog,.qa-operations) :is(button,select,input,summary){font-size:var(--g4-body);font-weight:600;min-height:var(--g4-tap);min-width:var(--g4-tap);line-height:1.4;white-space:normal;overflow-wrap:anywhere}
+body.game04-theme :is(.rd-shell,.rd-modal,.g4g-modal,.canonical-dialog,.qa-operations) button{color:var(--g4-text);text-shadow:none}
+body.game04-theme :is(.rd-button,.g4-growth button,.g4g-modal button,.rq-back,.rq-stage,.semantic-cta,.outlaw-button,.shop-buy-button){background:var(--g4-panel);border-color:var(--g4-muted);color:var(--g4-text)}
+body.game04-theme :is(.rd-primary,.semantic-cta--primary,.outlaw-button--primary,.shop-buy-button,.rd-quest-resume:not(.rd-territory-entry)){background:var(--g4-primary);color:var(--g4-text);border-color:var(--g4-gold)}
+body.game04-theme :is(.rd-muted,.rq-muted,small,.shop-card-desc,.shop-expiry-notice,.shop-bundle-text,.shop-tax-note){color:var(--g4-muted);font-size:var(--g4-small);line-height:1.6}
+body.game04-theme :is(.rd-shell,.rd-modal,.g4g-modal,.canonical-dialog) :is(button:disabled,[aria-disabled=true]){opacity:1;border-style:dashed;color:var(--g4-muted);cursor:default}
+body.game04-theme :is(.rd-tabs,.g4g-tabs,.gacha-category-tabs,.shop-sub-tabs){flex-wrap:wrap;background:var(--g4-bg)}
+body.game04-theme :is(.rd-tabs,.g4g-tabs,.gacha-category-tabs,.shop-sub-tabs) button{font-size:var(--g4-label);min-width:44px}
+body.game04-theme :is(button[aria-current=page],button[aria-pressed=true],button[aria-selected=true],.rd-tabs button.active,.gacha-tab-btn.is-active){color:var(--g4-gold);border-bottom:3px solid var(--g4-gold);box-shadow:inset 0 0 0 1px var(--g4-gold);background:var(--g4-panel)}
+body.game04-theme :is(button,a,input,select,summary):focus-visible{outline:2px solid var(--g4-gold);outline-offset:2px}
+body.game04-theme :is(.rd-row,.g4g-actions,.g4g-filters,.g4g-totals){flex-wrap:wrap}
+body.game04-theme .rd-shell{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px));scroll-padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
+body.game04-theme .rd-shell-battle{padding-bottom:max(20px,env(safe-area-inset-bottom,0px))}
+body.game04-theme .rd-main{min-width:0}
+body.game04-theme .rd-main>*{max-width:100%;box-sizing:border-box}
+body.game04-theme .rd-identity>img{width:44px;height:44px;object-fit:cover;object-position:50% 12%;border-color:var(--g4-gold)}
+body.game04-theme .rd-identity{gap:8px}
+body.game04-theme .rd-identity strong{font-size:16px}
+body.game04-theme .rd-auth-link{font-size:14px}
+body.game04-theme .rd-guild-slot{font-size:12px;color:var(--g4-muted)}
+body.game04-theme .rd-resources{font-size:16px;color:var(--g4-text);gap:4px}
+body.game04-theme .rd-resources small{font-size:14px}
+body.game04-theme .rd-footer button{font-size:12px;min-height:76px;color:var(--g4-text);padding:8px 0}
+body.game04-theme .rd-footer button>img{width:32px;height:32px;object-fit:contain}
+body.game04-theme .rd-home-switch button,body.game04-theme .rd-home-shortcuts button,body.game04-theme .rd-home-encounter{background:var(--g4-panel);color:var(--g4-text)}
+body.game04-theme .rd-home-switch{max-width:45%}
+body.game04-theme .rd-home-encounter{width:46%;font-size:14px}
+body.game04-theme .rd-home-encounter :is(small,span){font-size:14px;color:var(--g4-text)}
+body.game04-theme .rd-home-shortcuts{bottom:64px}
+body.game04-theme .rd-home-name{font-size:20px;line-height:1.4;background:var(--g4-panel);padding:4px 8px;max-width:calc(100% - 40px);text-shadow:none;bottom:10px;margin:0}
+body.game04-theme .rd-home-shortcuts img{width:40px;height:40px;object-fit:contain}
+body.game04-theme .rd-rotation-banner{height:auto;min-height:76px;background-color:var(--g4-panel);padding:12px}
+body.game04-theme .rd-quest-resume :is(strong,span,small){font-size:16px;line-height:1.5;color:var(--g4-text)}
+body.game04-theme .rd-text-button{color:var(--g4-text)!important;font-size:14px}
+body.game04-theme .g4g-party :is(b,span,small){white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;font-size:14px;line-height:1.4}
+body.game04-theme .g4g-grid b{font-size:14px;font-weight:600}
+body.game04-theme .g4g-grid img:not(.g4-creative-person):not(.g4-creative-frame){width:48px;height:48px;object-fit:contain}
+body.game04-theme :is(.g4g-stats,.g4g-elements,.g4g-grid){font-size:14px;line-height:1.4}
+body.game04-theme .g4g-stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+body.game04-theme .g4g-grid button{font-size:14px}
+body.game04-theme .g4g-party button{min-width:0;font-size:14px}
+body.game04-theme .g4g-filters label{font-size:14px;flex-wrap:wrap;min-width:0}
+body.game04-theme .g4g-tabs button{min-width:0;padding:8px 3px}
+body.game04-theme .g4g-grid .g4-element-badge,body.game04-theme .g4-element-badge{width:58px!important;height:24px!important;object-fit:contain!important}
+body.game04-theme .g4-growth-item-icon{width:48px;height:48px;object-fit:contain}
+body.game04-theme .rq-area :is(strong,span),body.game04-theme .rq-area-head h2{background:var(--g4-panel);padding:3px 6px;color:var(--g4-text)}
+body.game04-theme .rq-area strong{font-size:20px}
+body.game04-theme .rq-area span,body.game04-theme .rq-stage small{font-size:14px}
+body.game04-theme :is(.rq-area,.rq-stage):disabled{opacity:1;filter:none;border-style:dashed}
+body.game04-theme .rq-party :is(strong,span,small){font-size:14px;line-height:1.4;overflow-wrap:anywhere}
+body.game04-theme .rq-party button{min-width:0}
+body.game04-theme .rq-party .rq-order{font-size:12px;min-width:20px;min-height:20px}
+body.game04-theme .rq-stage{grid-template-columns:36px minmax(0,1fr) auto;gap:6px}
+body.game04-theme .rd-raid-tools{grid-template-columns:repeat(2,minmax(0,1fr))}
+body.game04-theme .rd-modal-footer{padding-bottom:max(16px,env(safe-area-inset-bottom,0px))}
+body.game04-theme :is(.rd-modal,.canonical-dialog,.g4g-modal){max-height:calc(100dvh - 32px - env(safe-area-inset-bottom,0px));font-size:16px}
+body.game04-theme :is(.canonical-dialog-body,.rd-modal-body){min-height:0;overflow:auto}
+body.game04-theme .rd-modal-header button{flex:none}
+body.game04-theme .shop-tab-container{height:auto;min-height:60dvh;overflow:visible;background:var(--g4-bg);color:var(--g4-text)}
+body.game04-theme .shop-scroll-body{overflow:visible;flex:none}
+body.game04-theme :is(.shop-price,.shop-card-title,.shop-section-title,.special-gacha-product-header p){font-size:16px;color:var(--g4-text);line-height:1.6}
+body.game04-theme .shop-product-row{flex-wrap:wrap}
+body.game04-theme :is(.shop-card-title,.gacha-tab-btn,.special-gacha-pity,.gacha-rate-link){white-space:normal;overflow-wrap:anywhere}
+body.game04-theme .gacha-action-fieldset{min-width:0;border:0}
+
+:root{--ui-text-primary:var(--g4-text);--ui-text-secondary:var(--g4-muted);--ui-font-body:16px;--ui-font-caption:14px;--ui-font-heading:20px;--ui-font-title:24px;--ui-accent:var(--g4-gold)}
+body.game04-theme .g4-header-face{width:44px;height:44px;flex:none;display:block;overflow:hidden;border-radius:50%;border:1px solid var(--g4-gold);background:var(--g4-panel)}
+body.game04-theme .g4-header-face img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 12%;transform:scale(2.4);transform-origin:50% 18%}
+body.game04-theme .rd-home-shortcuts button{display:flex;align-items:center;gap:5px;padding:5px 8px}
+body.game04-theme .canonical-dialog-body{color:var(--g4-text);font-size:16px;line-height:1.6}
+body.game04-theme .canonical-dialog-header h2{font-size:20px;font-weight:700}
+body.game04-theme :is(.rd-panel,.rd-row,.rd-grid,.g4g-actions,.shop-product-info){min-width:0}
+body.game04-theme .rd-panel table{width:100%;font-size:14px;table-layout:fixed;overflow-wrap:anywhere}
+body.game04-theme .g4g-actions button{flex:1 1 120px}
+body.game04-theme .rd-modal-footer .rd-row>*{flex:1 1 110px}
+
+body.game04-theme .rd-rotation-banner :is(span,strong){background:var(--g4-panel);padding:4px 8px;color:var(--g4-text)}
+body.game04-theme :is(.rd-shell,.rd-modal,.g4g-modal,.canonical-dialog) a.rd-button{min-height:44px;display:flex;align-items:center;font-size:16px}
+
+body.game04-theme :is(.shop-limit-badge,.shop-dia-breakdown,.shop-status,.shop-billing-notice,.bundle-item-chip,.shop-history-list,.special-gacha-rates>div,.gacha-individual-rates>div,.special-gacha-balance){font-size:14px;line-height:1.6;color:var(--g4-muted)}
+body.game04-theme :is(.shop-product-card,.special-gacha-product){border-color:var(--g4-muted)}
+body.game04-theme .shop-card-heading{flex-wrap:wrap}
+body.game04-theme .shop-tab-container :is(.outlaw-card,.outlaw-button){box-shadow:none}
+body.game04-theme .shop-tab-container .outlaw-card::before{background:var(--g4-gold);box-shadow:none}
+body.game04-theme .special-gacha-product-header{flex-wrap:wrap}
+body.game04-theme .special-gacha-product-header p{flex:1 1 160px}
+body.game04-theme .special-gacha-product-header .special-gacha-pity{font-size:14px}
+body.game04-theme .special-gacha-exchange>button{background:var(--g4-panel);color:var(--g4-text)}
+body.game04-theme .shop-sub-tabs .sub-tab-item.active{color:var(--g4-gold);border-bottom:3px solid var(--g4-gold);box-shadow:inset 0 0 0 1px var(--g4-gold)}
+
+body.game04-theme .outlaw-section-header{background:var(--g4-panel);border-color:var(--g4-gold)}
+body.game04-theme .section-header-accent{background:var(--g4-gold);box-shadow:none}
+body.game04-theme .section-header-title{font-size:24px;text-shadow:none}
+body.game04-theme .section-header-subtitle{color:var(--g4-muted);font-size:14px}
+body.game04-theme :is(.rd-shell,.rd-modal,.g4g-modal,.canonical-dialog) button:disabled{background:var(--g4-panel)}
+body.game04-theme .rd-main>section.rd-panel>h2:first-child{font-size:24px}

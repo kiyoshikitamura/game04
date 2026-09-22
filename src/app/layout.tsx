@@ -7,6 +7,7 @@ import {
   SOCIAL_IMAGE_PATH,
 } from "./crawlerMetadata";
 import "./globals.css";
+import "./game04-visual-tokens.css";
 import "./sengoku-theme.css";
 import "./scroll-policy.css";
 
