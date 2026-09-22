@@ -11,7 +11,7 @@ import '@/app/components/redesign/redesign.css';
 export const dynamic = 'force-dynamic';
 export default function CreativeAssetsPage() {
   if (process.env.VERCEL_ENV === 'production' || !isQaHarnessAvailable(process.env.NEXT_PUBLIC_APP_ENV, process.env.NODE_ENV)) notFound();
-  return <main style={{background:'#171014',color:'#f7ecd8',padding:20,minHeight:'100vh'}}>
+  return <main aria-label="素材表示確認" tabIndex={0} style={{background:'#171014',color:'#f7ecd8',padding:20,boxSizing:'border-box',height:'100dvh',minHeight:0,overflowY:'scroll',overflowX:'hidden',scrollbarGutter:'stable',scrollbarColor:'#b38a59 #21171b',WebkitOverflowScrolling:'touch'}}>
     <h1>GAME04 素材表示確認</h1><p>既存素材の接続確認。不足・新規・差し替えの最終判定は実画面確認後です。</p>
     <nav style={{display:'flex',gap:14,flexWrap:'wrap'}}>{['home','quest','character','battle','raid','territory'].map(view => <a key={view} href={`/qa/redesign?view=${view}`}>{view}</a>)}</nav>
     <h2>キャラクター60体</h2><div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(180px,1fr))',gap:16}}>{characters.map(c => <section key={c.id}><h3>{c.name}</h3><CreativeCharacter character={CHARACTER_MASTERS.find(m=>m.id===c.id)!}/><details><summary>全身・汎用・バトル</summary>{(['full','portrait','battle'] as const).map(key => <div key={key}><p>{key}</p>{key in c ? <img loading="lazy" src={(c as unknown as Record<string,string>)[key]} alt={`${c.name} ${key}`} style={{width:'100%',height:220,objectFit:'contain'}}/>:<p>対応未確定・未接続</p>}</div>)}</details></section>)}</div>
