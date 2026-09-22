@@ -177,7 +177,7 @@ export default function ShopTab({ exchange }: { exchange?: ShopExchangeProps } =
           {packs.map(productCard)}
           <p className="shop-expiry-notice">{PACK_EXPIRY_NOTICE}</p>
         </section>
-        <section className="shop-section" aria-label="ダイヤ">
+        <section className="shop-section" aria-label="輝石">
           <div className="shop-section-title">輝石</div>
           {diamonds.map(productCard)}
         </section>
