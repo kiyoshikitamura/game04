@@ -114,8 +114,8 @@ body.game04-theme :is(.rd-tabs,.g4g-tabs,.gacha-category-tabs,.shop-sub-tabs .ou
 body.game04-theme :is(.rd-tabs,.g4g-tabs,.gacha-category-tabs,.shop-sub-tabs) button{flex:1 1 0;white-space:nowrap;overflow-wrap:normal;min-width:max-content;text-align:center;font-size:16px;min-height:48px;padding:8px}
 body.game04-theme .qa-operations-views button{flex:1 1 30%}
 body.game04-theme.g4-dialog-open .rd-shell{overflow:hidden!important;touch-action:none}
-body.game04-theme .g4-dialog-surface{position:fixed!important;inset:auto;z-index:40000;display:grid;place-items:center;box-sizing:border-box;padding:12px;max-width:100vw;background:#000c;overscroll-behavior:contain;touch-action:pan-y}
-body.game04-theme .g4-dialog-surface>:is(.rd-modal,.canonical-dialog){position:relative!important;inset:auto!important;transform:none!important;display:flex;flex-direction:column;min-height:0;width:min(100%,480px);max-height:100%!important;overflow:hidden;padding:0;margin:0;box-sizing:border-box}
+body.game04-theme .g4-dialog-surface{position:fixed!important;inset:auto;z-index:40000;display:grid;place-items:center;box-sizing:border-box;padding:16px;max-width:100vw;background:#000c;overscroll-behavior:contain;touch-action:pan-y}
+body.game04-theme .g4-dialog-surface>:is(.rd-modal,.canonical-dialog){position:relative!important;inset:auto!important;transform:none!important;display:flex;flex-direction:column;min-height:0;width:min(100%,480px);max-height:min(100%,var(--g4-dialog-max-height,80dvh))!important;overflow:hidden;padding:0;margin:0;box-sizing:border-box}
 body.game04-theme :is(.rd-modal-header,.canonical-dialog-header){flex:none;padding:12px;min-height:0;align-items:flex-start}
 body.game04-theme :is(.rd-modal-header,.canonical-dialog-header) h2{margin:0;min-width:0;font-size:20px}
 body.game04-theme :is(.rd-modal-body,.canonical-dialog-body){flex:1 1 auto;min-height:0;overflow-y:auto!important;overscroll-behavior:contain;padding:12px;touch-action:pan-y;white-space:normal}
@@ -135,3 +135,5 @@ body.game04-theme .g4-dialog-surface{grid-template-columns:minmax(0,1fr);grid-te
 body.game04-theme .g4-dialog-surface>.canonical-dialog--large{width:min(100%,520px)}
 body.game04-theme .g4-dialog-surface .special-gacha-rates{max-height:none;overflow:visible}
 body.game04-theme .rd-modal-header .g4-dialog-close{min-height:44px}
+
+@media(max-width:360px){body.game04-theme .g4-dialog-surface{padding:12px}}

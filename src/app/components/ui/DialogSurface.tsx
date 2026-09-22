@@ -30,6 +30,7 @@ export default function DialogSurface({ children, onCancel, className = '' }: { 
     const observer = new MutationObserver(updateBackground); observer.observe(document.body, { childList: true });
     const resize = () => {
       const viewport = window.visualViewport;
+      node.style.setProperty('--g4-dialog-max-height', `${(viewport?.height ?? innerHeight) * 0.8}px`);
       Object.assign(node.style, { top: `${viewport?.offsetTop ?? 0}px`, left: `${viewport?.offsetLeft ?? 0}px`, width: `${viewport?.width ?? innerWidth}px`, height: `${viewport?.height ?? innerHeight}px` });
     };
     resize(); window.visualViewport?.addEventListener('resize', resize); window.visualViewport?.addEventListener('scroll', resize); window.addEventListener('resize', resize);
