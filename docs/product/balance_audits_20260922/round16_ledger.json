@@ -1,0 +1,3406 @@
+{
+  "status": "ALL_62_CLASSIFIED_NOT_FINAL_ACCEPTANCE",
+  "scopeStages": 62,
+  "currentBatch": {
+    "stages": 53,
+    "classified": 53,
+    "unclassified": 0,
+    "retainProposals": 13,
+    "needsDesignRevision": 40
+  },
+  "classificationCounts": {
+    "追加調整なし提案": 15,
+    "修正方針の判断必要": 40,
+    "敵変更候補": 7
+  },
+  "newEnemyNumericChanges": 0,
+  "formalNumericChangeApproved": 0,
+  "allFiveCriteriaAccepted": false,
+  "nextGate": "40面の修正方針と既存候補を一括判断。微小差を合格にせず、同じ無調整比較の反復は終了。",
+  "ledger": [
+    {
+      "stage": "1-1",
+      "concept": "初期3人で戦闘を学ぶ",
+      "disposition": "追加調整なし提案",
+      "group": "維持",
+      "reason": "基本操作の学習面。通常攻撃でも突破可能とし、ここでは対策の必須化を求めない。",
+      "recommendation": "比較した検証入力を維持する。未承認の基礎差分は別途一括承認対象。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 9.8,
+          "hp": 0.9996142644988332,
+          "alive": 3
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 10,
+          "hp": 0.9996142644988332,
+          "alive": 3
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 9.5,
+          "hp": 0.9996142644988332,
+          "alive": 3
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 9.166666666666666,
+          "hp": 0.9996248991916578,
+          "alive": 3
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 4,
+          "hp": 1,
+          "alive": 3
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "維持提案の根拠あり",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "1-2",
+      "concept": "受ける役を決める",
+      "disposition": "追加調整なし提案",
+      "group": "維持",
+      "reason": "前衛を回復役へ変える実配置比較へ訂正。被害の受け役が変わる学習面として維持。旧034除去比較は無効。",
+      "recommendation": "比較した検証入力を維持する。未承認の基礎差分は別途一括承認対象。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 16,
+          "hp": 0.9916846997644968,
+          "alive": 4
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 15.666666666666666,
+          "hp": 0.9486378607831003,
+          "alive": 4
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 16,
+          "hp": 0.9916846997644968,
+          "alive": 4
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 15.833333333333334,
+          "hp": 0.978559489418696,
+          "alive": 4
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 8,
+          "hp": 0.9997581857536603,
+          "alive": 4
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "維持提案の根拠あり",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "1-3",
+      "concept": "一つ変えて突破する",
+      "disposition": "修正方針の判断必要",
+      "group": "導入・攻撃選択",
+      "reason": "現在の火攻撃39.7行動に対し水攻撃38.5。変更前後で突破が変わる証拠がない。",
+      "recommendation": "同じ初期資産で、攻略ヒントに対応する変更を1つ定義し、その変更が敵1行動以上を省く敵配置へ調整する。難度の一律上昇はしない。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 39.7,
+          "hp": 0.8837396334922996,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 38.46666666666667,
+          "hp": 0.8799636842529035,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 39.7,
+          "hp": 0.8837396334922996,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 40.86666666666667,
+          "hp": 0.8832279862001202,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 16.3,
+          "hp": 0.9993079630301278,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "2-1",
+      "concept": "まず1体減らす",
+      "disposition": "修正方針の判断必要",
+      "group": "導入・攻撃選択",
+      "reason": "焦点攻撃を外しても33.2行動、主軸33.1で差がない。",
+      "recommendation": "先に1体倒すことで次の敵割込みを避けられるよう、低HPの危険役と残カウントを組み合わせる。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 33.13333333333333,
+          "hp": 0.978651040726888,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 33.2,
+          "hp": 0.9702524294403757,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 33.13333333333333,
+          "hp": 0.978651040726888,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 33.46666666666667,
+          "hp": 0.9788727630961543,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 13.7,
+          "hp": 0.999919942107508,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "2-2",
+      "concept": "並んだ敵を削る",
+      "disposition": "修正方針の判断必要",
+      "group": "導入・攻撃選択",
+      "reason": "全体攻撃33.0、除去33.1、単体置換33.6行動で選択価値が小さい。",
+      "recommendation": "3体のHP帯と割込みを揃え、全体削りによる複数の行動阻止が生じる構成にする。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 32.96666666666667,
+          "hp": 0.9118484308021626,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 33.1,
+          "hp": 0.912577186546796,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 33.56666666666667,
+          "hp": 0.91168515765719,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 33.46666666666667,
+          "hp": 0.912894958944447,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 13,
+          "hp": 0.9999447876603503,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "2-3",
+      "concept": "後ろの支援を止める",
+      "disposition": "修正方針の判断必要",
+      "group": "後衛・解除対象",
+      "reason": "補足Lv15では後衛攻撃54.4、除去50.5、標準45.3行動。後衛を狙う方が不利。",
+      "recommendation": "前衛の硬さだけでなく後衛支援が有効になる順番と持続を修正し、前衛突破と後衛先攻の両方を成立させる。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 54.43333333333333,
+          "hp": 0.8464688659490222,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 50.53333333333333,
+          "hp": 0.8703057392667464,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 45.266666666666666,
+          "hp": 0.8799736036006752,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 55.6,
+          "hp": 0.8450148078109185,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 20.15,
+          "hp": 0.9983243054916334,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "2-4",
+      "concept": "倒す順を組み立てる",
+      "disposition": "追加調整なし提案",
+      "group": "維持",
+      "reason": "後衛攻撃ありで平均生存2.83人、除去2.23人、標準攻撃置換2.37人。短縮と生存の具体的利点。",
+      "recommendation": "比較した検証入力を維持する。未承認の基礎差分は別途一括承認対象。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 97.5,
+          "hp": 0.4767628735578296,
+          "alive": 2.8333333333333335
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 108.26666666666667,
+          "hp": 0.38830342176997446,
+          "alive": 2.2333333333333334
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 93.2,
+          "hp": 0.43284602387665827,
+          "alive": 2.3666666666666667
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 94.8,
+          "hp": 0.49981382074759356,
+          "alive": 2.933333333333333
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 39.9,
+          "hp": 0.9505407861418522,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "維持提案の根拠あり",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "3-1",
+      "concept": "弱体の後に攻める",
+      "disposition": "修正方針の判断必要",
+      "group": "強化・条件攻撃",
+      "reason": "DEF弱体48.7、除去49.8、標準48.6行動。弱体へ1行動払う利点が薄い。",
+      "recommendation": "敵DEF帯とHPの組を見直し、弱体後の複数打撃で支払った行動を回収できる長さにする。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 48.666666666666664,
+          "hp": 0.9884448754612244,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 49.833333333333336,
+          "hp": 0.9870541567564589,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 48.56666666666667,
+          "hp": 0.9888400523609392,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 50.13333333333333,
+          "hp": 0.9876678208843814,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 14.35,
+          "hp": 0.9999431872559444,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "3-2",
+      "concept": "強化を攻撃へつなぐ",
+      "disposition": "修正方針の判断必要",
+      "group": "強化・条件攻撃",
+      "reason": "ATK強化27.3、除去27.3、標準24.2行動。",
+      "recommendation": "強化後に複数の味方が攻撃できる残HPを確保し、支援直後の戦闘終了を避ける。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 27.266666666666666,
+          "hp": 0.9996485205459267,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 27.266666666666666,
+          "hp": 0.9996542202127495,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 24.166666666666668,
+          "hp": 0.9997055172141549,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 24.5,
+          "hp": 0.9996941178805092,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 12.8,
+          "hp": 0.9999147808839167,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "3-3",
+      "concept": "継続ダメージを足場にする",
+      "disposition": "修正方針の判断必要",
+      "group": "強化・条件攻撃",
+      "reason": "DOT併用41.1、除去38.7、標準39.4行動。",
+      "recommendation": "DOTが有効回数分進む敵行動とDEF帯へ調整する。DOTを待つ前に倒す速攻も代替として残す。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 41.1,
+          "hp": 0.9623650999689896,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 38.666666666666664,
+          "hp": 0.9649774472627772,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 39.4,
+          "hp": 0.9649394494839585,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 41.7,
+          "hp": 0.9614683523888675,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 16.75,
+          "hp": 0.999886374511889,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [
+        "検証編成のみ: 身構えを外し、主砲014を標準008へ替えて対策SP競合を軽減"
+      ],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "3-4",
+      "concept": "SPを使う役と貯める役",
+      "disposition": "追加調整なし提案",
+      "group": "維持",
+      "reason": "主砲だけを最適解にしない。主砲93.3、除去130.7、低消費攻撃88.8行動。SPを攻撃へ回す価値と低消費代替の双方を記録。主砲の価格価値を証明する結果ではない。",
+      "recommendation": "比較した検証入力を維持する。未承認の基礎差分は別途一括承認対象。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 93.3,
+          "hp": 0.8150097137099575,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 130.73333333333332,
+          "hp": 0.8272354990448836,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 88.8,
+          "hp": 0.8321182136230904,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 96.63333333333334,
+          "hp": 0.8149293375714567,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 20.65,
+          "hp": 0.9999147808839167,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "維持提案の根拠あり",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "3-5",
+      "concept": "主軸を一つ選ぶ",
+      "disposition": "修正方針の判断必要",
+      "group": "強化・条件攻撃",
+      "reason": "強化あり51.8、除去50.4行動。主軸選択としての優位差が未証明。",
+      "recommendation": "単体主砲・弱体攻撃・強化通常攻撃の3系統で比較する構成へ置き直す。強化1枚の有無を主軸選択の代理にしない。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 51.766666666666666,
+          "hp": 0.9156334393413108,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 50.4,
+          "hp": 0.9061890492016439,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 57.9,
+          "hp": 0.8821062379519167,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 55.3,
+          "hp": 0.9025716406306831,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 35.15,
+          "hp": 0.9991975199902159,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "4-1",
+      "concept": "集中攻撃を受ける",
+      "disposition": "修正方針の判断必要",
+      "group": "受け・保護",
+      "reason": "ATK弱体45.8、除去40.5で、残HP差もほぼ0。",
+      "recommendation": "敵の集中先と弱体対象を一致させる。受け役の生存差が出る一撃を配置し、全敵ATKの一括増加はしない。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 45.833333333333336,
+          "hp": 0.9379395895693002,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 40.46666666666667,
+          "hp": 0.9374980823592197,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 38.833333333333336,
+          "hp": 0.9383923310595355,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 43.333333333333336,
+          "hp": 0.9401606067558882,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 22.25,
+          "hp": 0.9999523827409752,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [
+        "検証編成のみ: 身構えを外し、主砲014を標準008へ替えて対策SP競合を軽減"
+      ],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "4-2",
+      "concept": "受けた攻撃を返す",
+      "disposition": "修正方針の判断必要",
+      "group": "受け・保護",
+      "reason": "反撃52.8、標準48.6行動。反撃役の配置だけでは利点不足。",
+      "recommendation": "反撃を付ける役のATKと受ける頻度を合わせた編成を基準にし、低威力の複数被弾で反撃の手数が活きる敵にする。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 52.8,
+          "hp": 0.8842902846904387,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 54.4,
+          "hp": 0.8971658931757623,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 48.63333333333333,
+          "hp": 0.8818131259163231,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 51.666666666666664,
+          "hp": 0.8887933750079434,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 27.05,
+          "hp": 0.9999066328254415,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [
+        "検証編成のみ: 身構えを外し、主砲014を標準008へ替えて対策SP競合を軽減"
+      ],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "4-3",
+      "concept": "全員の被害を戻す",
+      "disposition": "修正方針の判断必要",
+      "group": "受け・保護",
+      "reason": "Lv30では生存差があったが、補足Lv35では全体回復の残HP差1.9ポイントに縮む。",
+      "recommendation": "攻略Lv帯で全体回復の発動条件に届く分散被害を設計する。Lv30の敗北差をLv35の合格根拠に流用しない。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 45.36666666666667,
+          "hp": 0.4654184164410889,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 45.03333333333333,
+          "hp": 0.4467632049710399,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 46.53333333333333,
+          "hp": 0.3653646657725333,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 50.733333333333334,
+          "hp": 0.34304500445417796,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 27.8,
+          "hp": 0.8927762030652769,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "4-4",
+      "concept": "大きな一撃に備える",
+      "disposition": "修正方針の判断必要",
+      "group": "受け・保護",
+      "reason": "盾で残HP+3.5ポイントに対し約5行動増。具体的な大技耐えの証明不足。",
+      "recommendation": "1回の予告大技に対し、盾・弱体・先行撃破のいずれかが生存を改善するHP/一撃量へ合わせる。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 58.1,
+          "hp": 0.8704114549872987,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 52.96666666666667,
+          "hp": 0.8354346471535958,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 52.233333333333334,
+          "hp": 0.8398418552582922,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 58.666666666666664,
+          "hp": 0.8110843202838853,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 25.6,
+          "hp": 0.989159137362013,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [
+        "検証編成のみ: 身構えを外し、主砲014を標準008へ替えて対策SP競合を軽減"
+      ],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "4-5",
+      "concept": "守りすぎずに勝つ",
+      "disposition": "修正方針の判断必要",
+      "group": "受け・保護",
+      "reason": "守備削減が速いだけで、生存との明確な境界が薄い。",
+      "recommendation": "攻撃枠を1つ削る場合と回復枠を1つ削る場合を分け、速度と生存の両側に失うものを作る。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 101.73333333333333,
+          "hp": 0.27162732460706895,
+          "alive": 3.2
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 99.66666666666667,
+          "hp": 0.2329454511783398,
+          "alive": 3.2
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 96.03333333333333,
+          "hp": 0.24318678057861112,
+          "alive": 3.1666666666666665
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 99.06666666666666,
+          "hp": 0.26286185424725866,
+          "alive": 3.066666666666667
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 40.5,
+          "hp": 0.9294835077429499,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "5-1",
+      "concept": "同属性で攻める",
+      "disposition": "追加調整なし提案",
+      "group": "維持",
+      "reason": "同レア構成の実キャラ比較で水統一27.8、混成31.1、風統一38.1行動。キャラ・パッシブ込みの編成比較として水主体の利点。",
+      "recommendation": "比較した検証入力を維持する。未承認の基礎差分は別途一括承認対象。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 29.7,
+          "hp": 0.9655973541502388,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 36.13333333333333,
+          "hp": 0.9487553342960798,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 34,
+          "hp": 0.9378857932349256,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 33.9,
+          "hp": 0.9515400221187186,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 21.1,
+          "hp": 0.9999980837681699,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [
+        {
+          "mode": "mixed",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 31.1,
+            "hp": 0.965840925310173,
+            "alive": 5
+          }
+        },
+        {
+          "mode": "mono_水",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 27.816666666666666,
+            "hp": 0.9730704374922639,
+            "alive": 5
+          }
+        },
+        {
+          "mode": "mono_風",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 38.083333333333336,
+            "hp": 0.9015118677667529,
+            "alive": 5
+          }
+        }
+      ],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "維持提案の根拠あり",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "5-2",
+      "concept": "同属性で守る",
+      "disposition": "修正方針の判断必要",
+      "group": "属性・編成",
+      "reason": "水統一は残HP90.8%、混成95.2%。水同属性で守ることの利点は出ていない。",
+      "recommendation": "敵の攻撃属性に対する有利受けと、守備パッシブ対象を対応させる。攻撃スキルだけの属性比較では合格にしない。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 46.06666666666667,
+          "hp": 0.9517835932786527,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 52.666666666666664,
+          "hp": 0.9426069429986781,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 36.166666666666664,
+          "hp": 0.9433519004059621,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 47.63333333333333,
+          "hp": 0.9510001772671687,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 23.35,
+          "hp": 0.9999763664740959,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [
+        {
+          "mode": "mixed",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 46.46666666666667,
+            "hp": 0.9516041197923855,
+            "alive": 5
+          }
+        },
+        {
+          "mode": "mono_水",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 50.25,
+            "hp": 0.9084431208300389,
+            "alive": 5
+          }
+        },
+        {
+          "mode": "mono_風",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 46.333333333333336,
+            "hp": 0.9138143577254556,
+            "alive": 5
+          }
+        }
+      ],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "5-3",
+      "concept": "攻撃属性だけを替える",
+      "disposition": "追加調整なし提案",
+      "group": "維持",
+      "reason": "同レア・同消費SPの風攻撃44.6、水攻撃54.1行動。キャラを変えず攻撃属性を替える価値。",
+      "recommendation": "比較した検証入力を維持する。未承認の基礎差分は別途一括承認対象。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 44.56666666666667,
+          "hp": 0.9756635377014349,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 54.06666666666667,
+          "hp": 0.9694937805128109,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 44.56666666666667,
+          "hp": 0.9756635377014349,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 44.63333333333333,
+          "hp": 0.9767185471690842,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 23.4,
+          "hp": 0.9999482617405885,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "維持提案の根拠あり",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "5-4",
+      "concept": "混成の強みを使う",
+      "disposition": "追加調整なし提案",
+      "group": "維持",
+      "reason": "混成45.0、水統一48.8、風統一50.3行動。実キャラの固有差込みの比較であり混成パッシブ単独効果とは断定しない。",
+      "recommendation": "比較した検証入力を維持する。未承認の基礎差分は別途一括承認対象。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 46.6,
+          "hp": 0.9059181467881317,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 46.06666666666667,
+          "hp": 0.9160890232063169,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 43.766666666666666,
+          "hp": 0.946194276134901,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 49.766666666666666,
+          "hp": 0.9103230813617943,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 25.2,
+          "hp": 0.9999603978755122,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [
+        {
+          "mode": "mixed",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 45.016666666666666,
+            "hp": 0.9108344383583812,
+            "alive": 5
+          }
+        },
+        {
+          "mode": "mono_水",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 48.75,
+            "hp": 0.9147009042848392,
+            "alive": 5
+          }
+        },
+        {
+          "mode": "mono_風",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 50.333333333333336,
+            "hp": 0.8946734650767858,
+            "alive": 5
+          }
+        }
+      ],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "維持提案の根拠あり",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "5-5",
+      "concept": "苦手属性を誰が受けるか",
+      "disposition": "修正方針の判断必要",
+      "group": "属性・編成",
+      "reason": "前衛交換の残HP差は小さく、攻撃属性差の効果と混同していた。",
+      "recommendation": "狙われる前衛と被ダメージ属性を固定して受け役の利点を示す。闇攻撃による短縮を受け属性の根拠にしない。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 39.3,
+          "hp": 0.8886367017711675,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 45.53333333333333,
+          "hp": 0.8420433905863404,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 39.3,
+          "hp": 0.8886367017711675,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 40.233333333333334,
+          "hp": 0.8838172000239443,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 22.3,
+          "hp": 0.9975714955273761,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [
+        {
+          "mode": "mixed",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 39.78333333333333,
+            "hp": 0.88096207364412,
+            "alive": 5
+          }
+        },
+        {
+          "mode": "mono_水",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 43.333333333333336,
+            "hp": 0.8541136780214473,
+            "alive": 5
+          }
+        },
+        {
+          "mode": "mono_風",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 39.36666666666667,
+            "hp": 0.8664409186610287,
+            "alive": 5
+          }
+        },
+        {
+          "mode": "front_swap",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 38.28333333333333,
+            "hp": 0.8711426661365415,
+            "alive": 5
+          }
+        }
+      ],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "5-6",
+      "concept": "一色に寄せすぎない",
+      "disposition": "追加調整なし提案",
+      "group": "維持",
+      "reason": "混成68.5、水統一76.4、風統一64.4行動。風統一は速いが残HPが低い。常に混成が最速という基準にはしない。",
+      "recommendation": "比較した検証入力を維持する。未承認の基礎差分は別途一括承認対象。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 68.83333333333333,
+          "hp": 0.8753620735547571,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 73.03333333333333,
+          "hp": 0.8668556000627885,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 68.83333333333333,
+          "hp": 0.8753620735547571,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 71.96666666666667,
+          "hp": 0.8649974797228231,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 33.6,
+          "hp": 0.9978423229593573,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [
+        {
+          "mode": "mixed",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 68.5,
+            "hp": 0.8644394738637343,
+            "alive": 5
+          }
+        },
+        {
+          "mode": "mono_水",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 76.38333333333334,
+            "hp": 0.8448933634606328,
+            "alive": 5
+          }
+        },
+        {
+          "mode": "mono_風",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 64.38333333333334,
+            "hp": 0.8316994965208656,
+            "alive": 4.966666666666667
+          }
+        }
+      ],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "維持提案の根拠あり",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "6-1",
+      "concept": "継続被害を止める",
+      "disposition": "修正方針の判断必要",
+      "group": "状態対策",
+      "reason": "DOT解除で約3行動増、残HP+3.4ポイント。",
+      "recommendation": "DOTを受けた対象の行動前に解除役が動ける順番と、継続で失うHP量を合わせる。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 32.56666666666667,
+          "hp": 0.9652330750047469,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 29.533333333333335,
+          "hp": 0.9314025609147613,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 28.566666666666666,
+          "hp": 0.9369658849084435,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 32.766666666666666,
+          "hp": 0.9652310879259027,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 18.35,
+          "hp": 0.9898933542448014,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [
+        "検証編成のみ: 身構えを外し、主砲014を標準008へ替えて対策SP競合を軽減"
+      ],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "6-2",
+      "concept": "落とされた能力を戻す",
+      "disposition": "修正方針の判断必要",
+      "group": "状態対策",
+      "reason": "能力低下解除で約2行動増、残HP+1.3ポイント。",
+      "recommendation": "弱体対象を実際の主攻撃役または受け役に合わせ、解除後に有効行動が残る時間窓を作る。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 46.13333333333333,
+          "hp": 0.9679817018158052,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 44.233333333333334,
+          "hp": 0.9548962908579,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 42.733333333333334,
+          "hp": 0.95599514545867,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 47.43333333333333,
+          "hp": 0.9649285551718932,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 26.1,
+          "hp": 0.9999876719310516,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [
+        "検証編成のみ: 身構えを外し、主砲014を標準008へ替えて対策SP競合を軽減"
+      ],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "6-3",
+      "concept": "止まった役割を補う",
+      "disposition": "追加調整なし提案",
+      "group": "第15回証拠を維持",
+      "reason": "救済0／逆転敗北0、平均行動短縮+0.1、生存者増0/30、残HP差-0.000",
+      "recommendation": "第15回の最終検証入力と承認待ち差分を参照。今回再試験対象外。",
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "evidence": "round15_ledger.json / round15_selected_inputs_results.json"
+    },
+    {
+      "stage": "6-4",
+      "concept": "敵の一手を遅らせる",
+      "disposition": "修正方針の判断必要",
+      "group": "状態対策",
+      "reason": "行動不能付与35.7、除去31.4行動。敵1行動を止めても見返り不足。",
+      "recommendation": "止めた大技の回避を価値にする。低危険度の敵を止めるだけの構成を改める。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 35.733333333333334,
+          "hp": 0.9862434531625103,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 31.433333333333334,
+          "hp": 0.9915111991781372,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 31.933333333333334,
+          "hp": 0.9813343748782378,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 37,
+          "hp": 0.9862658077995061,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 21.35,
+          "hp": 0.9999947842785218,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [
+        "検証編成のみ: 身構えを外し、主砲014を標準008へ替えて対策SP競合を軽減"
+      ],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "6-5",
+      "concept": "状態付与と攻撃を分担する",
+      "disposition": "修正方針の判断必要",
+      "group": "強化・条件攻撃",
+      "reason": "DOT連携55.7、除去55.3、標準51.9行動。",
+      "recommendation": "DOT担当と追撃担当の順番、敵解除の割込みまでの猶予を対応させる。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 55.7,
+          "hp": 0.9392311547906821,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 55.333333333333336,
+          "hp": 0.9391352782364557,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 51.93333333333333,
+          "hp": 0.9412107820890858,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 56.63333333333333,
+          "hp": 0.9392092969233973,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 33.05,
+          "hp": 0.9988748266302094,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [
+        "検証編成のみ: 身構えを外し、主砲014を標準008へ替えて対策SP競合を軽減"
+      ],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "6-6",
+      "concept": "対策枠を選ぶ",
+      "disposition": "修正方針の判断必要",
+      "group": "状態対策",
+      "reason": "解除役を後ろへ移しても、対策一式は67.1、除去62.9行動。残HP+3.8ポイント。",
+      "recommendation": "対策3枚全部を最適にするのでなく、最も危険な1状態への対策1枚で生存差を作る。対策なし/1枚/3枚の比較にする。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 67.2,
+          "hp": 0.9002635451190671,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 61.63333333333333,
+          "hp": 0.8364062826163551,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 59.03333333333333,
+          "hp": 0.8088002930054157,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 64.13333333333334,
+          "hp": 0.8996150940902238,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 36.6,
+          "hp": 0.9863950276024436,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [
+        {
+          "mode": "theme_corrected",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 67.13333333333334,
+            "hp": 0.8971815858319161,
+            "alive": 5
+          }
+        },
+        {
+          "mode": "omit",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 62.85,
+            "hp": 0.8589563984934165,
+            "alive": 5
+          }
+        },
+        {
+          "mode": "direct",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 59.86666666666667,
+            "hp": 0.8095479314204966,
+            "alive": 5
+          }
+        }
+      ],
+      "inputNotes": [
+        "検証編成のみ: 身構えを外し、主砲014を標準008へ替えて対策SP競合を軽減"
+      ],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "7-1",
+      "concept": "強化された攻撃を崩す",
+      "disposition": "修正方針の判断必要",
+      "group": "後衛・解除対象",
+      "reason": "SP競合を減らしても強化解除の優位が出ない。",
+      "recommendation": "最高ATK役へ付く敵強化と、先頭しか解除できない051の対象不一致を解消する。単純な全敵ATK増加案は不採用。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 24.366666666666667,
+          "hp": 0.9093514759630263,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 23.9,
+          "hp": 0.9168527626541428,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 24.2,
+          "hp": 0.8610586893087165,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 24.933333333333334,
+          "hp": 0.8795474214486747,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 15.05,
+          "hp": 1,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [
+        "検証編成のみ: 身構えを外し、主砲014を標準008へ替えて対策SP競合を軽減"
+      ],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "7-2",
+      "concept": "固めた守りを崩す",
+      "disposition": "敵変更候補",
+      "group": "第15回証拠を維持",
+      "reason": "救済0／逆転敗北0、平均行動短縮-1.2、生存者増0/30、残HP差-0.001",
+      "recommendation": "第15回の最終検証入力と承認待ち差分を参照。今回再試験対象外。",
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "evidence": "round15_ledger.json / round15_selected_inputs_results.json"
+    },
+    {
+      "stage": "7-3",
+      "concept": "障壁を取り除く",
+      "disposition": "敵変更候補",
+      "group": "第15回証拠を維持",
+      "reason": "救済0／逆転敗北0、平均行動短縮+0.8、生存者増0/30、残HP差-0.000",
+      "recommendation": "第15回の最終検証入力と承認待ち差分を参照。今回再試験対象外。",
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "evidence": "round15_ledger.json / round15_selected_inputs_results.json"
+    },
+    {
+      "stage": "7-4",
+      "concept": "回復源を断つ",
+      "disposition": "敵変更候補",
+      "group": "第15回証拠を維持",
+      "reason": "救済0／逆転敗北0、平均行動短縮-1.1、生存者増0/30、残HP差-0.014",
+      "recommendation": "第15回の最終検証入力と承認待ち差分を参照。今回再試験対象外。",
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "evidence": "round15_ledger.json / round15_selected_inputs_results.json"
+    },
+    {
+      "stage": "7-5",
+      "concept": "反撃に付き合いすぎない",
+      "disposition": "追加調整なし提案",
+      "group": "維持",
+      "reason": "保護解除で残HP92.0%、除去74.1%、標準攻撃置換78.7%。速度と被害抑制の交換関係。",
+      "recommendation": "比較した検証入力を維持する。未承認の基礎差分は別途一括承認対象。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 34.03333333333333,
+          "hp": 0.9202532787834267,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 31.033333333333335,
+          "hp": 0.7412601853412706,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 28.4,
+          "hp": 0.7873422166947398,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 33.3,
+          "hp": 0.9215295218739233,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 17.6,
+          "hp": 0.99517683555937,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "維持提案の根拠あり",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "7-6",
+      "concept": "誘導された攻撃を通す",
+      "disposition": "修正方針の判断必要",
+      "group": "後衛・解除対象",
+      "reason": "破陣撃36.5、除去36.8、標準36.1行動。",
+      "recommendation": "挑発役の裏に倒す価値のある攻撃役を置き、保護解除後の対象選択に意味を持たせる。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 36.5,
+          "hp": 0.8815999058136212,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 36.766666666666666,
+          "hp": 0.8461535134254949,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 36.13333333333333,
+          "hp": 0.8162482830608769,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 36.6,
+          "hp": 0.8794584202857847,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 22.1,
+          "hp": 0.9883545308679694,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [
+        "検証編成のみ: 身構えを外し、主砲014を標準008へ替えて対策SP競合を軽減"
+      ],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "7-7",
+      "concept": "再付与より先に決着",
+      "disposition": "修正方針の判断必要",
+      "group": "後衛・解除対象",
+      "reason": "051では盾を解除できない。052へ訂正しても除去より速くも安全にもならない。",
+      "recommendation": "盾解除を052に統一した上で、再付与前に攻撃者が動ける敵初動/再行動間隔を設計し直す。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 69.93333333333334,
+          "hp": 0.7607709630665971,
+          "alive": 4.766666666666667
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 69.3,
+          "hp": 0.7749663788897256,
+          "alive": 4.733333333333333
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 56.2,
+          "hp": 0.6951329395553817,
+          "alive": 4.133333333333334
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 70.3,
+          "hp": 0.744941111578749,
+          "alive": 4.633333333333334
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 33.25,
+          "hp": 0.9641420296115958,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [
+        {
+          "mode": "theme_corrected",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 68.65,
+            "hp": 0.7647836625087407,
+            "alive": 4.7
+          }
+        },
+        {
+          "mode": "omit",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 69.36666666666666,
+            "hp": 0.7823656347668729,
+            "alive": 4.783333333333333
+          }
+        },
+        {
+          "mode": "direct",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 64.86666666666666,
+            "hp": 0.5878245506694777,
+            "alive": 3.933333333333333
+          }
+        }
+      ],
+      "inputNotes": [
+        "検証編成のみ: 身構えを外し、主砲014を標準008へ替えて対策SP競合を軽減"
+      ],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "7-8",
+      "concept": "崩す場所を選ぶ",
+      "disposition": "修正方針の判断必要",
+      "group": "後衛・解除対象",
+      "reason": "保護解除の平均生存が除去より0.2人低い。",
+      "recommendation": "反撃・DEF強化・回復のうちどれを崩すかでSPと生存の異なる経路を作る。052単独の万能解にはしない。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 64.63333333333334,
+          "hp": 0.6737632405309834,
+          "alive": 4.733333333333333
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 64.06666666666666,
+          "hp": 0.6521892133627478,
+          "alive": 4.933333333333334
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 57.56666666666667,
+          "hp": 0.6205362581161303,
+          "alive": 4.566666666666666
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 64.93333333333334,
+          "hp": 0.6735741728092495,
+          "alive": 4.766666666666667
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 37.05,
+          "hp": 0.9908515889894174,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [
+        "検証編成のみ: 身構えを外し、主砲014を標準008へ替えて対策SP競合を軽減"
+      ],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "8-1",
+      "concept": "削られたまま次へ進む",
+      "disposition": "修正方針の判断必要",
+      "group": "連戦・持越し",
+      "reason": "全体盾で遅くなり残HPも低下。",
+      "recommendation": "前Waveの被害が次Waveの生存に影響する初動を作る。全体盾の空打ちコストだけを残さない。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 23.133333333333333,
+          "hp": 0.9615989388257417,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 21.733333333333334,
+          "hp": 0.9910399101341997,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 21.833333333333332,
+          "hp": 0.9910001035960236,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 24.333333333333332,
+          "hp": 0.9591462436658198,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 14.65,
+          "hp": 1,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [
+        "検証編成のみ: 身構えを外し、主砲014を標準008へ替えて対策SP競合を軽減"
+      ],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "8-2",
+      "concept": "小技と主砲を共存させる",
+      "disposition": "修正方針の判断必要",
+      "group": "導入・攻撃選択",
+      "reason": "小技と主砲併用の差は1行動程度。",
+      "recommendation": "小技だけでは硬い1体に時間がかかり、主砲だけでは複数の残敵に過剰となるHP配分にする。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 23.7,
+          "hp": 0.9256603156703994,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 24.766666666666666,
+          "hp": 0.9256603156703994,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 24.2,
+          "hp": 0.924801552241917,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 23.633333333333333,
+          "hp": 0.9261319249930555,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 17.15,
+          "hp": 1,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "8-3",
+      "concept": "単体と全体を両立する",
+      "disposition": "修正方針の判断必要",
+      "group": "導入・攻撃選択",
+      "reason": "全体攻撃を標準へ替えた方が約5行動速い。",
+      "recommendation": "複数Waveの3体編成で、全体攻撃1回が単体攻撃複数回を代替するHP分布にする。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 40.03333333333333,
+          "hp": 0.9218458471904981,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 36.8,
+          "hp": 0.9230973870201439,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 35.06666666666667,
+          "hp": 0.920725975140973,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 40.8,
+          "hp": 0.9266616032075959,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 26.5,
+          "hp": 0.9981367401352473,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "8-4",
+      "concept": "持ち越した状態へ対処",
+      "disposition": "修正方針の判断必要",
+      "group": "連戦・持越し",
+      "reason": "全体解除の有無で差がほぼ0。",
+      "recommendation": "Wave終了直前の付与と次Waveの行動順を対応させ、持ち越し状態が実際に影響する戦闘へ組み直す。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 26.233333333333334,
+          "hp": 0.9638389612921918,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 26.233333333333334,
+          "hp": 0.9638389612921918,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 23.433333333333334,
+          "hp": 0.9958072302237266,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 27.066666666666666,
+          "hp": 0.9564380072328518,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 16.95,
+          "hp": 1,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [
+        "検証編成のみ: 身構えを外し、主砲014を標準008へ替えて対策SP競合を軽減"
+      ],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "8-5",
+      "concept": "支援役を守り続ける",
+      "disposition": "修正方針の判断必要",
+      "group": "受け・保護",
+      "reason": "全体盾の残HP改善は約5.8ポイントだが支援役の落命回避は未証明。",
+      "recommendation": "後衛攻撃を受ける支援役のHPと保護量を比較し、単体保護/全体保護/後衛速攻の代替を作る。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 38.233333333333334,
+          "hp": 0.8948829024753469,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 36.4,
+          "hp": 0.8364416154523654,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 34.43333333333333,
+          "hp": 0.8325494824679108,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 37.36666666666667,
+          "hp": 0.8885575600489587,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 23.45,
+          "hp": 0.9876944213259842,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [
+        "検証編成のみ: 身構えを外し、主砲014を標準008へ替えて対策SP競合を軽減"
+      ],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "8-6",
+      "concept": "一人失っても立て直す",
+      "disposition": "追加調整なし提案",
+      "group": "第15回証拠を維持",
+      "reason": "救済0／逆転敗北0、平均行動短縮+0.0、生存者増0/30、残HP差+0.000",
+      "recommendation": "第15回の最終検証入力と承認待ち差分を参照。今回再試験対象外。",
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "evidence": "round15_ledger.json / round15_selected_inputs_results.json"
+    },
+    {
+      "stage": "8-7",
+      "concept": "効果が切れた後も戦う",
+      "disposition": "修正方針の判断必要",
+      "group": "連戦・持越し",
+      "reason": "守備強化により遅くなり残HPも下がる。",
+      "recommendation": "強化終了前後の被弾差を作り、再付与・短期撃破・常時耐久を比較できるWaveにする。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 51.7,
+          "hp": 0.7412007149063605,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 45.2,
+          "hp": 0.7947538703882877,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 45.733333333333334,
+          "hp": 0.7012236113602174,
+          "alive": 4.6
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 52.93333333333333,
+          "hp": 0.727986057701524,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 31.45,
+          "hp": 0.999984160851227,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [
+        "検証編成のみ: 身構えを外し、主砲014を標準008へ替えて対策SP競合を軽減"
+      ],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "8-8",
+      "concept": "連戦用の5人を完成させる",
+      "disposition": "追加調整なし提案",
+      "group": "維持",
+      "reason": "全体保護で残HP78.5%、除去66.9%、標準攻撃置換59.9%。行動数増と引き換えの連戦生存維持。",
+      "recommendation": "比較した検証入力を維持する。未承認の基礎差分は別途一括承認対象。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 80.76666666666667,
+          "hp": 0.7845637336848562,
+          "alive": 4.933333333333334
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 76.7,
+          "hp": 0.6692547705501449,
+          "alive": 4.933333333333334
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 72.46666666666667,
+          "hp": 0.5991105328669774,
+          "alive": 4.833333333333333
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 82.5,
+          "hp": 0.7669464252561419,
+          "alive": 4.766666666666667
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 50.9,
+          "hp": 0.9688052284683345,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [
+        "検証編成のみ: 身構えを外し、主砲014を標準008へ替えて対策SP競合を軽減"
+      ],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "維持提案の根拠あり",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "9-1",
+      "concept": "単体突破の極意",
+      "disposition": "修正方針の判断必要",
+      "group": "導入・攻撃選択",
+      "reason": "主砲36.1に対し標準攻撃34.0行動。",
+      "recommendation": "主砲の一撃が敵割込みを1回減らせるHP/DEF帯へ。主砲所持を必須にせず弱体通常攻撃を代替に残す。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 36.06666666666667,
+          "hp": 0.9386894652678702,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 41.833333333333336,
+          "hp": 0.9773376119285097,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 34,
+          "hp": 0.9241419278174283,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 32.63333333333333,
+          "hp": 0.8796751900895952,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 21.55,
+          "hp": 0.9676328363307549,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "9-2",
+      "concept": "全体削りの極意",
+      "disposition": "修正方針の判断必要",
+      "group": "導入・攻撃選択",
+      "reason": "全体43.1、標準36.7行動。",
+      "recommendation": "全体で複数同時撃破が成立するHPと支援再行動を調整する。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 43.1,
+          "hp": 0.9003020250917795,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 45.333333333333336,
+          "hp": 0.8984325688367238,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 36.7,
+          "hp": 0.9326853159267516,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 41.56666666666667,
+          "hp": 0.9059350578850485,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 28.55,
+          "hp": 0.9948716408811664,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "9-3",
+      "concept": "後列攻略の極意",
+      "disposition": "修正方針の判断必要",
+      "group": "後衛・解除対象",
+      "reason": "後衛攻撃45.7、標準37.4行動で標準の残HPも高い。",
+      "recommendation": "後衛の盾/回復が前衛へ有効に作用する初動にし、後衛先攻のコストに見合う差を作る。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 45.733333333333334,
+          "hp": 0.8396026958060563,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 56.86666666666667,
+          "hp": 0.9295909438385288,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 37.36666666666667,
+          "hp": 0.8752649535645783,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 45.13333333333333,
+          "hp": 0.8517000162147247,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 25.3,
+          "hp": 0.979359108534884,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "9-4",
+      "concept": "通常攻撃の極意",
+      "disposition": "修正方針の判断必要",
+      "group": "強化・条件攻撃",
+      "reason": "強化通常40.8、標準攻撃35.6行動。",
+      "recommendation": "通常攻撃主体の利点をSP温存先まで含めて設計する。単に攻撃スキルを抜くだけの比較をやめる。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 40.766666666666666,
+          "hp": 0.9869188160953191,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 42.06666666666667,
+          "hp": 0.9590941313294157,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 35.56666666666667,
+          "hp": 0.970001027006716,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 41.766666666666666,
+          "hp": 0.9057773485078878,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 22.2,
+          "hp": 0.9660407851050702,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "9-5",
+      "concept": "弱体連携の極意",
+      "disposition": "敵変更候補",
+      "group": "第15回証拠を維持",
+      "reason": "標準攻撃置換0/100→連携100/100。別攻略も100/100。正式採用前",
+      "recommendation": "第15回の最終検証入力と承認待ち差分を参照。今回再試験対象外。",
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "evidence": "round15_ledger.json / round15_selected_inputs_results.json"
+    },
+    {
+      "stage": "9-6",
+      "concept": "継続ダメージの極意",
+      "disposition": "敵変更候補",
+      "group": "第15回証拠を維持",
+      "reason": "標準攻撃置換0/100→連携100/100。別攻略も100/100。正式採用前",
+      "recommendation": "第15回の最終検証入力と承認待ち差分を参照。今回再試験対象外。",
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "evidence": "round15_ledger.json / round15_selected_inputs_results.json"
+    },
+    {
+      "stage": "9-7",
+      "concept": "反撃の極意",
+      "disposition": "修正方針の判断必要",
+      "group": "受け・保護",
+      "reason": "反撃は標準攻撃より遅く残HPも悪化。",
+      "recommendation": "守備型前衛への反撃付与だけでなく、攻守型の受け・反撃回数が活きる敵頻度で設計する。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 43.96666666666667,
+          "hp": 0.8142872491909983,
+          "alive": 4.966666666666667
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 45.6,
+          "hp": 0.8819849377838181,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 40.3,
+          "hp": 0.830478722910685,
+          "alive": 4.9
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 41.9,
+          "hp": 0.8509677082705277,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 25.4,
+          "hp": 0.9885563184377208,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [
+        "検証編成のみ: 身構えを外し、主砲014を標準008へ替えて対策SP競合を軽減"
+      ],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "9-8",
+      "concept": "背水の極意",
+      "disposition": "追加調整なし提案",
+      "group": "維持",
+      "reason": "背水あり平均5.00人生存、除去4.10人。標準攻撃でも4.90人生存する代替経路がある。",
+      "recommendation": "比較した検証入力を維持する。未承認の基礎差分は別途一括承認対象。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 40.166666666666664,
+          "hp": 0.8732232344882469,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 49.4,
+          "hp": 0.8098294026366368,
+          "alive": 4.1
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 40.5,
+          "hp": 0.8598424044926192,
+          "alive": 4.9
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 40.63333333333333,
+          "hp": 0.7959130175900122,
+          "alive": 4.7
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 24.45,
+          "hp": 0.9497711659880423,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "維持提案の根拠あり",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "9-9",
+      "concept": "妨害と解除の極意",
+      "disposition": "修正方針の判断必要",
+      "group": "状態対策",
+      "reason": "解除055を空き枠へ入れても、対策なし46.5に対し53.9行動。",
+      "recommendation": "妨害すべき敵と味方解除の対象を分け、どちらか一方の対策で落命を防げる構成にする。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 54.53333333333333,
+          "hp": 0.94162313579799,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 47.03333333333333,
+          "hp": 0.9769950131631531,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 40.86666666666667,
+          "hp": 0.869018981135427,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 54.13333333333333,
+          "hp": 0.9317922216059553,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 31.95,
+          "hp": 0.9719836580402882,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [
+        {
+          "mode": "theme_corrected",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 53.93333333333333,
+            "hp": 0.9518750859165463,
+            "alive": 5
+          }
+        },
+        {
+          "mode": "omit",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 46.46666666666667,
+            "hp": 0.9696178674763946,
+            "alive": 5
+          }
+        },
+        {
+          "mode": "direct",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 37.21666666666667,
+            "hp": 0.8619454149508164,
+            "alive": 5
+          }
+        }
+      ],
+      "inputNotes": [
+        "検証編成のみ: 身構えを外し、主砲014を標準008へ替えて対策SP競合を軽減"
+      ],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "9-10",
+      "concept": "得意と不得意を見抜く",
+      "disposition": "修正方針の判断必要",
+      "group": "連戦・持越し",
+      "reason": "解除の生存利益は小さく行動数が増える。万能編成の弱点を示す比較も未成立。",
+      "recommendation": "解除・単体・全体の各主軸が得意/不得意のWaveを1つ以上持つ比較を設計する。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 91.6,
+          "hp": 0.7067146465811158,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 86.4,
+          "hp": 0.6894005828130834,
+          "alive": 4.733333333333333
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 81.3,
+          "hp": 0.5907218758801237,
+          "alive": 4.433333333333334
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 98.56666666666666,
+          "hp": 0.7622637727050309,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 48.05,
+          "hp": 0.9499709212151394,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "10-1",
+      "concept": "硬い前衛と危険な後衛",
+      "disposition": "修正方針の判断必要",
+      "group": "後衛・解除対象",
+      "reason": "後衛攻撃61.6、標準54.4行動で、標準の残HPも高い。",
+      "recommendation": "前衛の硬さと後衛の危険度を対にして見直す。火力だけで前衛を抜く代替は残す。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 61.6,
+          "hp": 0.8066546617526228,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 71.06666666666666,
+          "hp": 0.8585447380835648,
+          "alive": 5
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 54.4,
+          "hp": 0.8483947174303699,
+          "alive": 5
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 61.53333333333333,
+          "hp": 0.8108450520001832,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 32.45,
+          "hp": 0.9296298675892601,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "10-2",
+      "concept": "分散被害と集中被害",
+      "disposition": "敵変更候補",
+      "group": "第15回証拠を維持",
+      "reason": "救済10／逆転敗北0、平均行動短縮-10.1、生存者増13/30、残HP差+0.071",
+      "recommendation": "第15回の最終検証入力と承認待ち差分を参照。今回再試験対象外。",
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "evidence": "round15_ledger.json / round15_selected_inputs_results.json"
+    },
+    {
+      "stage": "10-3",
+      "concept": "強化と保護の二重守備",
+      "disposition": "追加調整なし提案",
+      "group": "維持",
+      "reason": "解除一式で74.6行動・4.67人生存、除去114.9・4.47人。標準攻撃置換は58.7・4.00人。速度と生存の差。",
+      "recommendation": "比較した検証入力を維持する。未承認の基礎差分は別途一括承認対象。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 74.56666666666666,
+          "hp": 0.8536505716659943,
+          "alive": 4.666666666666667
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 114.86666666666666,
+          "hp": 0.8423439519157604,
+          "alive": 4.466666666666667
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 58.666666666666664,
+          "hp": 0.7352764154580895,
+          "alive": 4
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 78.06666666666666,
+          "hp": 0.900501772999349,
+          "alive": 4.866666666666666
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 32,
+          "hp": 0.9635589506780773,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "維持提案の根拠あり",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "10-4",
+      "concept": "火力低下と継続被害",
+      "disposition": "追加調整なし提案",
+      "group": "維持",
+      "reason": "全体解除で残HP94.6%・5.00人生存、除去83.6%・4.67人、標準攻撃置換76.6%・4.17人。",
+      "recommendation": "比較した検証入力を維持する。未承認の基礎差分は別途一括承認対象。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 60.3,
+          "hp": 0.9455285237331558,
+          "alive": 5
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 62.166666666666664,
+          "hp": 0.8361814204368485,
+          "alive": 4.666666666666667
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 49.46666666666667,
+          "hp": 0.7664013091825939,
+          "alive": 4.166666666666667
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 61.233333333333334,
+          "hp": 0.9130458431410078,
+          "alive": 5
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 38.4,
+          "hp": 0.9289854738723631,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "維持提案の根拠あり",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "10-5",
+      "concept": "同属性主軸の弱点を補う",
+      "disposition": "修正方針の判断必要",
+      "group": "属性・編成",
+      "reason": "攻撃属性の変更差はあるが、同属性主軸の弱点補完とは別。現SSRプールで同レア5人の水/風統一は成立しない。",
+      "recommendation": "完全単色5人を仮定せず、実在する同属性2〜3人の主軸と補完役2人で比較する。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 57.5,
+          "hp": 0.5229044922764121,
+          "alive": 3.066666666666667
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 64.06666666666666,
+          "hp": 0.5585334193251914,
+          "alive": 3.2
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 54.6,
+          "hp": 0.48950213969796913,
+          "alive": 3
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 60.166666666666664,
+          "hp": 0.6167551803345936,
+          "alive": 3.3333333333333335
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 31.05,
+          "hp": 0.9087247480356514,
+          "alive": 5
+        }
+      },
+      "themeComparisons": [
+        {
+          "mode": "mixed",
+          "summary": {
+            "wins": 60,
+            "n": 60,
+            "actions": 57.21666666666667,
+            "hp": 0.5107413304482793,
+            "alive": 3.0166666666666666
+          }
+        },
+        {
+          "mode": "mono_水",
+          "unavailable": "No mono 伊達政宗水"
+        },
+        {
+          "mode": "mono_風",
+          "unavailable": "No mono 織田信長風"
+        }
+      ],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    },
+    {
+      "stage": "10-6",
+      "concept": "条件火力を維持する",
+      "disposition": "敵変更候補",
+      "group": "第15回証拠を維持",
+      "reason": "標準攻撃置換0/100→連携100/100。別攻略も100/100。正式採用前",
+      "recommendation": "第15回の最終検証入力と承認待ち差分を参照。今回再試験対象外。",
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "evidence": "round15_ledger.json / round15_selected_inputs_results.json"
+    },
+    {
+      "stage": "10-7",
+      "concept": "背水と生存を両立する",
+      "disposition": "修正方針の判断必要",
+      "group": "強化・条件攻撃",
+      "reason": "背水106.0、標準107.9行動。直接置換との差が小さく、背水採用価値の根拠として不足。",
+      "recommendation": "低HP条件中の攻撃回数と保護の必要性を合わせ、標準攻撃より大技を1回減らせる境界を作る。",
+      "cases": {
+        "main": {
+          "wins": 30,
+          "n": 30,
+          "actions": 105.96666666666667,
+          "hp": 0.3721269546708146,
+          "alive": 2.3
+        },
+        "control": {
+          "wins": 30,
+          "n": 30,
+          "actions": 116.6,
+          "hp": 0.36260570443236834,
+          "alive": 2.2666666666666666
+        },
+        "direct": {
+          "wins": 30,
+          "n": 30,
+          "actions": 107.86666666666666,
+          "hp": 0.3464658304905614,
+          "alive": 2.1333333333333333
+        },
+        "alternative": {
+          "wins": 30,
+          "n": 30,
+          "actions": 112.7,
+          "hp": 0.211417382622189,
+          "alive": 1.5333333333333334
+        },
+        "farm": {
+          "wins": 20,
+          "n": 20,
+          "actions": 42.55,
+          "hp": 0.8162417555315216,
+          "alive": 4.1
+        }
+      },
+      "themeComparisons": [],
+      "inputNotes": [],
+      "numericFixed": false,
+      "allFiveCriteriaAccepted": false,
+      "criteria": {
+        "formalInput": "最新計算器照合済み。育成・装備fixture由来。候補敵を含む。",
+        "progression": "指定到達資産で主軸/代替各30回勝利。取得時期・下限Lvの全面保証ではない。",
+        "counterValue": "不足/逆転。理由参照",
+        "alternatives": "実キャラ代替30回勝利。万能編成不存在まで証明しない。",
+        "farm": "20回勝利。実再生時間とUI認知は開発受入。"
+      }
+    }
+  ]
+}
