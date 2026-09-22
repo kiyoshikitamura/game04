@@ -37,7 +37,7 @@
       <div class="note">演出内容：雪の落下・左右の揺らぎ・画面外での再発生のみ<br>前景は大きく、遠景は小さく描画</div>
     </aside>
   </main>
-  <style>html,body{margin:0!important;padding:0!important;background:transparent!important;overflow:hidden!important;width:100%;height:100%}body>:not(canvas){display:none!important}body>canvas{position:fixed!important;inset:0!important;width:100%!important;height:100%!important;pointer-events:none}</style><script>document.querySelectorAll('canvas').forEach(c=>document.body.appendChild(c));</script><script>
+  <style>html,body{color-scheme:normal!important;margin:0!important;padding:0!important;background:transparent!important;overflow:hidden!important;width:100%;height:100%}body>:not(canvas){display:none!important}body>canvas{position:fixed!important;inset:0!important;width:100%!important;height:100%!important;pointer-events:none}</style><script>document.querySelectorAll('canvas').forEach(c=>document.body.appendChild(c));</script><script>
     const W=768,H=1376;
     const characters=[['伊達政宗','assets/date_masamune.png'],['上杉謙信','assets/uesugi_kenshin.png'],['織田信長','assets/oda_nobunaga.png'],['真田幸村','assets/sanada_yukimura.png'],['前田慶次','assets/maeda_keiji.png'],['徳川家康','assets/tokugawa_ieyasu.png'],['武田信玄','assets/takeda_shingen.png'],['豊臣秀吉','assets/toyotomi_hideyoshi.png'],['本多忠勝','assets/honda_tadakatsu.png'],['明智光秀','assets/akechi_mitsuhide.png']];
     const rear=document.querySelector('#rearFx'),front=document.querySelector('#frontFx'),rearCtx=rear.getContext('2d'),frontCtx=front.getContext('2d'),character=document.querySelector('#character'),list=document.querySelector('#characters');
