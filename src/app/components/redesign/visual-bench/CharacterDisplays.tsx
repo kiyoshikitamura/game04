@@ -86,11 +86,11 @@ function ElementMark({src,element,className}:{src:string;element:Element;classNa
     <span className={styles.elementLabel}>{labels[element]}</span>
   </span>;
 }
-export function CharacterCard({subject}:{subject:DisplaySubject}){
+export function CharacterCard({subject,compact=false,className}:{subject:DisplaySubject;compact?:boolean;className?:string}){
   const asset=useArtwork(subject,'card');
   const visible=usePageVisible();
   const phase=Array.from(subject.id).reduce((sum,c)=>sum+c.charCodeAt(0),0)%5000;
-  return <figure className={styles.card} data-rarity={subject.rarity} data-paused={!visible} aria-label={subject.name+' '+subject.rarity+' '+labels[subject.element]+'属性'} style={{'--phase':(-phase)+'ms'} as CSSProperties}>
+  return <figure className={[styles.card,compact?styles.compact:'',className??''].filter(Boolean).join(' ')} data-rarity={subject.rarity} data-paused={!visible} aria-label={subject.name+' '+subject.rarity+' '+labels[subject.element]+'属性'} style={{'--phase':(-phase)+'ms'} as CSSProperties}>
     {!asset.box||!asset.source||!asset.background?<Pending error={asset.error} retry={asset.retry}/>:<>
       <div className={styles.cardArt}>
         <img className={styles.backdrop} src={asset.background} alt=""/>
@@ -105,9 +105,9 @@ export function CharacterCard({subject}:{subject:DisplaySubject}){
     </>}
   </figure>;
 }
-export function BossDisplay({subject}:{subject:DisplaySubject}){
+export function BossDisplay({subject,compact=false,className}:{subject:DisplaySubject;compact?:boolean;className?:string}){
   const asset=useArtwork(subject,'battle');
-  return <figure className={styles.boss} aria-label={'ボス '+subject.name}>
+  return <figure className={[styles.boss,compact?styles.compact:'',className??''].filter(Boolean).join(' ')} aria-label={'ボス '+subject.name}>
     {!asset.box||!asset.source||!asset.background?<Pending error={asset.error} retry={asset.retry}/>:<>
       <div className={styles.bossArt}>
         <img className={styles.backdrop} src={asset.background} alt=""/>
