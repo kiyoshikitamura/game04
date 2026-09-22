@@ -32,6 +32,13 @@
 - `npm run verify:canonical-missions`: PASS（既存スクリプトは旧Production Master 37件を検証するため、最新Master 183件の受入とは別）
 - Mock Preview `npm run build`（`NEXT_PUBLIC_USE_MOCK_DB=true`）: PASS、26ページ生成
 - `npm run verify:battle-presentation`: 既存スクリプトの拡張子なし `src/theme/masters` importで起動前失敗。今回変更由来ではない。
-- Vercel固定Preview: 未配信。CloneにVercel project linkとPreview環境値／資格情報がなく、Production公開は行っていない。
+- Vercel Preview: READY。
+  - Project: `kiyoshi-kitamura/game04`（`.vercel/project.json` はGit管理外）
+  - Deployment: `dpl_2yDnaJW2FQoSe46v3wFMnDph8jmf`
+  - 固定確認URL: `https://game04-95o6efjjp-kiyoshi-kitamura.vercel.app/qa/redesign`
+  - 対象Branch: `codex/game04-header-pr-22-ui-preview`
+  - Preview環境は対象Branch限定で `NEXT_PUBLIC_ENABLE_QA_TOOLS=true`、`NEXT_PUBLIC_USE_MOCK_DB=false` を設定。既存のRepository内Preview公開設定 `config/game04-preview-public.json` を使用し、秘密鍵は追加していない。
+  - `vercel inspect`でREADYを確認し、Deployment Protection bypass経由のHTTP取得で`/qa/redesign`のHTML応答を確認。
+  - Production公開・昇格は行っていない。
 
 本書は実装完了・ローカルPreview確認・ユーザー受入・最終演出受入を分離して記録する。Draft解除・マージ・Production公開は行わない。
