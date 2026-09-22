@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>戦国姫 艶舞・降雪エフェクトモック</title>
+  <style>
+    :root{color-scheme:dark;font-family:"Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif}*{box-sizing:border-box}
+    body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at 50% 20%,#1c2d49,#080c14 72%);color:#edf5ff;overflow:hidden}
+    .app{display:grid;grid-template-columns:auto minmax(220px,290px);gap:18px;align-items:center;padding:14px}
+    .stage{position:relative;width:min(52vh,92vw);aspect-ratio:768/1376;overflow:hidden;border:1px solid rgba(177,211,255,.34);border-radius:8px;background:#bcd2ee;box-shadow:0 18px 70px rgba(0,0,0,.65),0 0 32px rgba(99,164,255,.12);isolation:isolate}
+    .background,.character,canvas{position:absolute;inset:0;width:100%;height:100%}.background{object-fit:cover}canvas{pointer-events:none}#rearFx{z-index:1}
+    .character{z-index:2;inset:auto auto 4% 50%;width:78%;height:auto;transform:translateX(-50%);object-fit:contain;filter:drop-shadow(0 10px 12px rgba(24,43,70,.34));transition:opacity .18s ease}.character.changing{opacity:0}#frontFx{z-index:3}
+    .panel{padding:16px;border:1px solid rgba(177,211,255,.24);border-radius:10px;background:rgba(8,16,29,.9);box-shadow:0 12px 38px rgba(0,0,0,.38);backdrop-filter:blur(12px);max-height:94vh;overflow:auto}
+    h1{margin:0 0 6px;font-size:17px;letter-spacing:.08em}.sub{margin:0 0 14px;color:#9fb5d2;font-size:12px;line-height:1.6}.characters{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+    button{border:1px solid #405b7d;border-radius:6px;padding:8px 7px;background:linear-gradient(#243a58,#17283f);color:#eaf3ff;cursor:pointer;font:inherit;font-size:12px}button:hover{border-color:#7da9df}button.active{color:#fff;border-color:#a8d0ff;background:linear-gradient(#426991,#294969);box-shadow:inset 0 0 12px rgba(190,224,255,.13)}#toggle{width:100%;margin-top:14px}
+    label{display:block;margin-top:14px;font-size:12px;color:#bdd0e8}input{width:100%;accent-color:#80b8ed}.note{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.09);font-size:11px;line-height:1.7;color:#849ab5}
+    @media(max-width:760px){body{overflow:auto}.app{grid-template-columns:1fr;justify-items:center}.stage{width:min(92vw,60vh)}.panel{width:min(92vw,460px);max-height:none}}
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="stage" aria-label="降雪エフェクトプレビュー">
+      <img class="background" alt="雪の春日山城">
+      <canvas id="rearFx"></canvas>
+      <img id="character" class="character" alt="上杉謙信">
+      <canvas id="frontFx"></canvas>
+    </section>
+    <aside class="panel">
+      <h1>汎用・降雪演出</h1>
+      <p class="sub">遠景と前景に分けた雪が、ゆっくり揺れながら降り続けます。</p>
+      <div id="characters" class="characters"></div>
+      <button id="toggle">一時停止</button>
+      <label>雪の量 <span id="amountValue">100%</span></label><input id="amount" type="range" min="25" max="170" value="100">
+      <label>落下速度 <span id="speedValue">100%</span></label><input id="speed" type="range" min="35" max="170" value="100">
+      <label>風向き <span id="windValue">0</span></label><input id="wind" type="range" min="-100" max="100" value="0">
+      <div class="note">演出内容：雪の落下・左右の揺らぎ・画面外での再発生のみ<br>前景は大きく、遠景は小さく描画</div>
+    </aside>
+  </main>
+  <style>html,body{margin:0!important;padding:0!important;background:transparent!important;overflow:hidden!important;width:100%;height:100%}body>:not(canvas){display:none!important}body>canvas{position:fixed!important;inset:0!important;width:100%!important;height:100%!important;pointer-events:none}</style><script>document.querySelectorAll('canvas').forEach(c=>document.body.appendChild(c));</script><script>
+    const W=768,H=1376;
+    const characters=[['伊達政宗','assets/date_masamune.png'],['上杉謙信','assets/uesugi_kenshin.png'],['織田信長','assets/oda_nobunaga.png'],['真田幸村','assets/sanada_yukimura.png'],['前田慶次','assets/maeda_keiji.png'],['徳川家康','assets/tokugawa_ieyasu.png'],['武田信玄','assets/takeda_shingen.png'],['豊臣秀吉','assets/toyotomi_hideyoshi.png'],['本多忠勝','assets/honda_tadakatsu.png'],['明智光秀','assets/akechi_mitsuhide.png']];
+    const rear=document.querySelector('#rearFx'),front=document.querySelector('#frontFx'),rearCtx=rear.getContext('2d'),frontCtx=front.getContext('2d'),character=document.querySelector('#character'),list=document.querySelector('#characters');
+    const amount=document.querySelector('#amount'),speed=document.querySelector('#speed'),wind=document.querySelector('#wind'),amountValue=document.querySelector('#amountValue'),speedValue=document.querySelector('#speedValue'),windValue=document.querySelector('#windValue'),toggle=document.querySelector('#toggle');
+    let density=1,speedRate=1,windRate=0,running=true,elapsed=0,previous=performance.now();
+    function setup(canvas,ctx){const dpr=Math.min(devicePixelRatio||1,2);canvas.width=W*dpr;canvas.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}setup(rear,rearCtx);setup(front,frontCtx);
+    characters.forEach(([name,src],index)=>{const button=document.createElement('button');button.textContent=name;button.className=name==='上杉謙信'?'active':'';button.addEventListener('click',()=>{if(character.src.endsWith(src))return;document.querySelectorAll('.characters button').forEach(b=>b.classList.remove('active'));button.classList.add('active');character.classList.add('changing');const next=new Image();next.onload=()=>{character.src=src;character.alt=name;requestAnimationFrame(()=>character.classList.remove('changing'))};next.src=src});list.appendChild(button)});
+    const flakes=Array.from({length:110},(_,i)=>{const front=i%4===0;return{x:(i*173)%W,y:(i*127)%H,front,size:front?3.1+(i%5)*.75:1.1+(i%4)*.48,fall:front?36+(i%7)*5:17+(i%6)*3,sway:front?17+(i%5)*5:8+(i%4)*3,phase:i*.73,alpha:front?.72+(i%3)*.08:.38+(i%4)*.09}});
+    function snowflake(ctx,x,y,f){ctx.save();ctx.translate(x,y);ctx.globalAlpha=f.alpha;ctx.shadowBlur=f.front?5:2;ctx.shadowColor='rgba(35,72,115,.72)';const g=ctx.createRadialGradient(-f.size*.25,-f.size*.25,0,0,0,f.size*1.5);g.addColorStop(0,'rgba(255,255,255,1)');g.addColorStop(.65,'rgba(232,245,255,.95)');g.addColorStop(1,'rgba(126,164,205,.08)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,f.size*1.5,0,Math.PI*2);ctx.fill();if(f.front&&f.size>5){ctx.strokeStyle='rgba(245,251,255,.62)';ctx.lineWidth=.75;for(let a=0;a<3;a++){ctx.rotate(Math.PI/3);ctx.beginPath();ctx.moveTo(-f.size*1.1,0);ctx.lineTo(f.size*1.1,0);ctx.stroke()}}ctx.restore()}
+    function drawSnow(ctx,time,frontLayer){const count=Math.round(flakes.length*Math.min(density,1.7));flakes.slice(0,count).forEach((f,i)=>{if(f.front!==frontLayer)return;const fallTime=time*speedRate,y=(f.y+fallTime*f.fall)%(H+100)-50,x=((f.x+Math.sin(fallTime*.55+f.phase)*f.sway+fallTime*windRate*9+W+80)%(W+80))-40;snowflake(ctx,x,y,f)})}
+    function render(time){rearCtx.clearRect(0,0,W,H);frontCtx.clearRect(0,0,W,H);drawSnow(rearCtx,time,false);drawSnow(frontCtx,time,true)}
+    function frame(now){const dt=Math.min((now-previous)/1000,.05);previous=now;if(running)elapsed+=dt;render(elapsed);requestAnimationFrame(frame)}requestAnimationFrame(frame);
+    toggle.addEventListener('click',()=>{running=!running;toggle.textContent=running?'一時停止':'再生'});amount.addEventListener('input',()=>{density=Number(amount.value)/100;amountValue.textContent=`${amount.value}%`});speed.addEventListener('input',()=>{speedRate=Number(speed.value)/100;speedValue.textContent=`${speed.value}%`});wind.addEventListener('input',()=>{windRate=Number(wind.value)/100;windValue.textContent=wind.value>0?`右 ${wind.value}`:wind.value<0?`左 ${Math.abs(wind.value)}`:'0'});document.addEventListener('visibilitychange',()=>{previous=performance.now()});
+  </script>
+</body>
+</html>
