@@ -1,5 +1,5 @@
 {
-  "status": "BULK_FIX_PROPOSAL_READY",
+  "status": "BULK_NUMERIC_FIX_APPROVED_NOT_IMPLEMENTED",
   "scopeStages": 62,
   "coverage": {
     "comparisonRecorded": 62,
@@ -7,7 +7,7 @@
     "newlyValidatedStages": 40,
     "priorCandidateStages": 7,
     "retainStages": 15,
-    "formalNumericChangeApproved": 0
+    "approvedStageDecisions": 62
   },
   "remainingStageJudgment": [],
   "remainingStageJudgmentCount": 0,
@@ -17,21 +17,20 @@
     "UI上で攻略意図が伝わること"
   ],
   "nextCloseoutSteps": [
-    "62面の候補一式の一括FIX承認",
-    "承認内容の正本状態更新・開発引継ぎ"
+    "開発へ承認済み差分を引継ぎ",
+    "実装反映・実再生時間・UI認知の受入"
   ],
   "notes": [
-    "40面の修正・最終比較を完了。全62面の候補を統合し一括FIX承認待ち。",
+    "全62面の一式をユーザー承認済み。数値変更なし、実装未反映。",
     "主軸・実キャラ代替は各60回、育成後周回は各30回の観測結果。全ユーザーの勝率保証ではない。",
     "実再生時間・UI認知は開発受入。"
   ],
   "classificationCounts": {
-    "今回修正候補": 40,
-    "既存変更候補": 7,
-    "維持提案": 15
+    "今回修正採用": 40,
+    "既存候補採用": 7,
+    "維持": 15
   },
   "designRevisionRequired": 0,
-  "numericFixApprovedThisRound": 0,
   "candidateLineage": {
     "currentEnemyDeltaStages": 39,
     "currentEnemyDeltaEnemies": 150,
@@ -40,5 +39,11 @@
     "note": "監査開始時入力との累計差分。現行DBとの差分ではない。"
   },
   "current40Validated": 40,
-  "newNumericFixApproved": 0
+  "approval": {
+    "date": "2026-09-22",
+    "userStatement": "FIXします。",
+    "approvedSourceCommit": "f8741827daf9ffbb76b097c6d12a3950434af449",
+    "scopeStages": 62,
+    "record": "round17_approval.md"
+  }
 }
