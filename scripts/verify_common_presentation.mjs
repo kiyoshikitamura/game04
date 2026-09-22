@@ -15,7 +15,7 @@ try {
  await page.route('**/*',async route=>{if(slow&&route.request().resourceType()==='image'&&route.request().url().includes('/creative/'))await hold;await route.continue();});
  await page.goto(`${base}/qa/redesign`,{waitUntil:'domcontentloaded'});
  await page.locator('[data-ui-loading]').waitFor();
- await page.waitForTimeout(1750);
+ await page.locator('[data-ui-loading] .branded-loading').waitFor({timeout:15000});
  assert.equal(await page.locator('[data-ui-loading] .branded-loading').count(),1);
  assert.equal(await page.locator('[data-ui-loading] .g4-loading-spinner').count(),1);
  assert.equal(await page.locator('.rd-shell').evaluate(el=>getComputedStyle(el).visibility),'hidden');
