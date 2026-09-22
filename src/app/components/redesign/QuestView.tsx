@@ -9,8 +9,7 @@ import PreparationModal, { ELEMENT_LABELS } from './PreparationModal';
 import BattleView from './BattleView';
 import './QuestView.css';
 import { growthRewardLabel } from '@/domain/redesign/growthReward';
-import CardIcon from '../CardIcon';
-import AttributeBadge from '../AttributeBadge';
+import ElementBadge from './ElementBadge';
 import roster from '@/theme/sengoku-characters.json';
 import { getRarityBadgeAsset, getRarityFrameAsset } from '@/utils/rarityAssets';
 
@@ -19,6 +18,8 @@ const REWARD_LABELS: Record<Reward['kind'], string> = {ticket:'スペシャル�
 function rewardLabel(reward: Reward) {
   const growthLabel = growthRewardLabel(reward); if(growthLabel) return growthLabel;
   if (reward.kind === 'ticket') return ({SPECIAL_TICKET_CHARACTER:'キャラ券',SPECIAL_TICKET_SKILL:'スキル券',SPECIAL_TICKET_EQUIPMENT:'装備券'} as Record<string,string>)[reward.id??''] ?? 'スペシャル券';
+  if (reward.kind === 'character') return CHARACTER_MASTERS.find(c => c.id === reward.id)?.name ?? '武将';
+  if (reward.kind === 'skill') return `スキル：${reward.id ?? '未定義'}`;
   if (reward.kind === 'soul') return `${CHARACTER_MASTERS.find(c => c.id === reward.id)?.name ?? ''}の魂`;
   if (reward.kind === 'equipment') return EQUIPMENT_MASTERS.find(e => e.id === reward.id)?.name ?? '装備';
   return REWARD_LABELS[reward.kind];
@@ -29,6 +30,7 @@ function rewardIcon(reward: Reward) {
   if (reward.kind === 'equipment_exp_item') return `/items/equip_exp_${reward.id === 'large' ? 'l' : reward.id === 'medium' ? 'm' : 's'}.png`;
   if (reward.kind === 'skill_material') return '/items/skill_manual.png';
   if (reward.kind === 'ticket') return `/items/${String(reward.id).toLowerCase()}.png`;
+  if (reward.kind === 'character' && reward.id) return roster.find(c => c.characterId === reward.id)?.imagePath ?? '/ui/sengoku/10-helmet.png';
   if (reward.kind === 'soul' && reward.id) return roster.find(c => c.characterId === reward.id)?.imagePath ?? '/ui/sengoku/10-helmet.png';
   return reward.kind === 'unlock_item' ? '/items/energy_drink.png' : '/ui/sengoku/13-coin.png';
 }
@@ -38,12 +40,9 @@ function Rewards({ rewards }: { rewards: Reward[] }) {
 function enemyRarity(enemy: QuestStage['waves'][number][number]) {
   return roster.find(c => c.imagePath === enemy.image)?.runtimeRarity ?? 'N';
 }
-function enemyAttribute(element: string) {
-  return ({ fire: 'EVIL', water: 'JUSTICE', earth: 'ORDER', wind: 'CHAOS', light: 'JUSTICE', dark: 'EVIL' } as Record<string, string>)[element] ?? 'JUSTICE';
-}
 function EnemyArt({ enemy, boss = false }: { enemy: QuestStage['waves'][number][number]; boss?: boolean }) {
   const rarity = enemyRarity(enemy);
-  return <div className={`rq-enemy-art ${boss ? 'is-boss' : ''}`}><img className="rq-enemy-frame" src={getRarityFrameAsset('character', rarity)} alt="" /><img className="rq-enemy-image" src={enemy.image} alt={enemy.name} /><img className="rq-enemy-rarity" src={getRarityBadgeAsset(rarity)} alt={rarity} /><AttributeBadge attribute={enemyAttribute(enemy.element)} size={boss ? 40 : 30} className="rq-enemy-attribute" /><span className="rq-enemy-name">{enemy.name}</span></div>;
+  return <div className={`rq-enemy-art ${boss ? 'is-boss' : ''}`}><img className="rq-enemy-frame" src={getRarityFrameAsset('character', rarity)} alt="" /><img className="rq-enemy-image" src={enemy.image} alt={enemy.name} /><img className="rq-enemy-rarity" src={getRarityBadgeAsset(rarity)} alt={rarity} /><ElementBadge element={enemy.element} className="rq-enemy-attribute" /><span className="rq-enemy-name">{enemy.name}</span></div>;
 }
 export default function QuestView({ state, party, vipActive, onStart, onOpenDeck, onOpenRaid, onIgnoreEncounter, initialStageId, onBattlePlayingChange }: {
   state: RedesignState; party: BattleUnit[]; vipActive: boolean; onStart: (stageId: string) => Promise<QuestSettlement>;
@@ -114,7 +113,7 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
         })}</div></>}
     </>}
     {selected && modal === 'info' && <div className="redesign-quest-dialog"><CanonicalDialog title={`${QUEST_AREAS.find(entry => entry.id === selected.areaId)?.index}-${selected.index}`} onClose={() => setModal(null)} actions={[{ label: '戻る', onClick: () => setModal(null) }, { label: '挑戦', semantic: 'primary', onClick: () => setModal('prepare'), disabled: !isQuestStageUnlocked(selected.id, state.clearedStages) }]}>
-      <div className="rq-encounter-hero"><span className="rq-kicker">最終Waveのボス</span><div className="rq-bosses">{selected.waves[selected.waves.length - 1].map(enemy => <article key={enemy.id} className="rq-boss"><EnemyArt enemy={enemy} boss /><div><strong>{enemy.name}</strong><span>Lv.{enemy.level} ／ {ELEMENT_LABELS[enemy.element]}属性</span><small>HP {enemy.stats.hp.toLocaleString()}</small></div></article>)}</div></div>
+      <div className="rq-encounter-hero"><span className="rq-kicker">最終Waveのボス</span><div className="rq-bosses">{selected.waves[selected.waves.length - 1].map(enemy => <article key={enemy.id} className="rq-boss"><EnemyArt enemy={enemy} boss /><div><strong>{enemy.name}</strong><span><ElementBadge element={enemy.element} /> {ELEMENT_LABELS[enemy.element]}属性 ／ Lv.{enemy.level}</span><small>HP {enemy.stats.hp.toLocaleString()} ・ ATK {enemy.stats.atk.toLocaleString()} ・ DEF {enemy.stats.def.toLocaleString()}</small>{enemy.skills.length > 0 && <div className="rq-enemy-skills">{enemy.skills.map(skill => <span key={skill.id}><img src={skill.image} alt="" />{skill.name}</span>)}</div>}</div></article>)}</div></div>
       <div className="rq-stage-facts"><span>⚔ Wave数：{selected.waves.length}</span><span>♟ 消費行動力：{questEnergyCost(selected,state)}</span></div>
       <div className="rq-info-actions"><button type="button" onClick={() => setDetailPanel(detailPanel === 'hint' ? null : 'hint')}>📜 攻略のヒント</button><button type="button" onClick={() => setDetailPanel(detailPanel === 'rewards' ? null : 'rewards')}>🎁 報酬を確認</button></div>
     </CanonicalDialog></div>}

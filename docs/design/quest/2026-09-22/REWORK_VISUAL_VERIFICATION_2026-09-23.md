@@ -36,3 +36,7 @@ The comparison artifact includes the approved mock and the five actual Preview c
 - Preview deployment: `https://game04-demfi1n0c-kiyoshi-kitamura.vercel.app`
 - Deployment: `dpl_DnUt3VNHq4srMX7Y44byuRSFu68q`
 - Production promotion and merge: not performed.
+
+## Correction for assets/layout review (1f6ef03950599fce010d45e02a5846631f7a2979)
+
+The previous record's statement that the six elements were presented through existing production badges was incorrect. Those screenshots used GAME03 alignment badges and are retained as historical evidence only. The corrected implementation and new seven-screen evidence are recorded in `REWORK_ASSETS_LAYOUT_VERIFICATION_2026-09-23.md`.

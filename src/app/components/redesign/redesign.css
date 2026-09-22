@@ -1,5 +1,9 @@
 .rd-shell { --rd-gold:#cfac74; --rd-ink:#160f12; --rd-red:#742b29; width:100%; max-width:560px; min-height:100dvh; margin:auto; background:#171014; color:#f7ecd8; padding-bottom:78px; }
+@font-face{font-family:G4NotoSans;src:url('/fonts/game04/NotoSansJP.woff2') format('woff2');font-weight:100 900;font-display:swap}
+@font-face{font-family:G4NotoSerif;src:url('/fonts/game04/NotoSerifJP.woff2') format('woff2');font-weight:400 900;font-display:swap}
+.rd-shell{--ui-bg-root:#151216;--ui-bg-surface:#262127;--ui-bg-raised:#262127;--ui-text-primary:#F4EFE6;--ui-text-secondary:#C3B8AA;--ui-border:#665b61;--ui-accent:#9E353B;--ui-combat:#9E353B;--font-ui:G4NotoSans,'Noto Sans JP',sans-serif;--font-inter:var(--font-ui);--font-display:G4NotoSerif,'Noto Serif JP',serif;--ui-radius-sm:4px;--ui-radius-lg:8px}
 .rd-shell *, .rd-modal * { box-sizing:border-box; }
+.rd-avatar{position:relative;display:block;width:52px;height:58px;flex:0 0 52px}.rd-avatar>img{width:52px!important;height:58px!important;object-fit:cover!important;object-position:50% 10%!important}.rd-avatar>b{position:absolute;left:1px;bottom:1px;padding:1px 4px;border:1px solid #d8b56d;border-radius:3px;color:#151216;background:#d8b56d;font-size:10px;line-height:1}
 .rd-shell button, .rd-modal button { cursor:pointer; color:inherit; }
 .rd-shell button:disabled, .rd-modal button:disabled { cursor:default; opacity:.45; }
 .rd-shell button:focus-visible,.rd-modal button:focus-visible,.rd-modal input:focus-visible { outline:2px solid #efd6a1; outline-offset:3px; }
