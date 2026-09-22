@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>戦国姫 艶舞・金色粒子エフェクトモック</title>
+  <style>
+    :root { color-scheme: dark; font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100vh; display:grid; place-items:center; background:radial-gradient(circle at 50% 20%,#241c18,#090807 72%); color:#f5ead2; overflow:hidden; }
+    .app { display:grid; grid-template-columns:auto minmax(220px,290px); gap:18px; align-items:center; padding:14px; }
+    .stage { position:relative; width:min(52vh,92vw); aspect-ratio:768/1376; overflow:hidden; border:1px solid rgba(232,190,112,.28); border-radius:8px; background:#15110d; box-shadow:0 18px 70px rgba(0,0,0,.65),0 0 32px rgba(219,161,58,.1); isolation:isolate; }
+    .background,.character,canvas { position:absolute; inset:0; width:100%; height:100%; }
+    .background { object-fit:cover; }
+    canvas { pointer-events:none; }
+    #rearFx { z-index:1; }
+    .character { z-index:2; inset:auto auto 4% 50%; width:78%; height:auto; transform:translateX(-50%); object-fit:contain; filter:drop-shadow(0 10px 12px rgba(0,0,0,.36)); transition:opacity .18s ease; }
+    .character.changing { opacity:0; }
+    #frontFx { z-index:3; }
+    .panel { padding:16px; border:1px solid rgba(232,190,112,.22); border-radius:10px; background:rgba(14,11,8,.88); box-shadow:0 12px 38px rgba(0,0,0,.38); backdrop-filter:blur(12px); max-height:94vh; overflow:auto; }
+    h1 { margin:0 0 6px; font-size:17px; letter-spacing:.08em; }
+    .sub { margin:0 0 14px; color:#ad9b7c; font-size:12px; line-height:1.6; }
+    .characters { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+    button { border:1px solid #6d5734; border-radius:6px; padding:8px 7px; background:linear-gradient(#33271a,#211910); color:#f0e5cf; cursor:pointer; font:inherit; font-size:12px; }
+    button:hover { border-color:#b38b4e; }
+    button.active { color:#fff7dc; border-color:#e0ad52; background:linear-gradient(#664a21,#3c2b18); box-shadow:inset 0 0 12px rgba(255,201,96,.12); }
+    #toggle { width:100%; margin-top:14px; }
+    label { display:block; margin-top:14px; font-size:12px; color:#c7b797; }
+    input { width:100%; accent-color:#d9a13c; }
+    .note { margin-top:14px; padding-top:12px; border-top:1px solid rgba(255,255,255,.09); font-size:11px; line-height:1.7; color:#8e806a; }
+    @media(max-width:760px) { body{overflow:auto}.app{grid-template-columns:1fr;justify-items:center}.stage{width:min(92vw,60vh)}.panel{width:min(92vw,460px);max-height:none} }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="stage" aria-label="金色粒子エフェクトプレビュー">
+      <img class="background" alt="確認用背景">
+      <canvas id="rearFx"></canvas>
+      <img id="character" class="character" alt="伊達政宗">
+      <canvas id="frontFx"></canvas>
+    </section>
+    <aside class="panel">
+      <h1>汎用・金色粒子演出</h1>
+      <p class="sub">キャラクターを切り替えて、共通の粒子演出を確認できます。</p>
+      <div id="characters" class="characters"></div>
+      <button id="toggle">一時停止</button>
+      <label>粒子量 <span id="amountValue">100%</span></label>
+      <input id="amount" type="range" min="30" max="160" value="100">
+      <label>移動速度 <span id="speedValue">100%</span></label>
+      <input id="speed" type="range" min="40" max="170" value="100">
+      <div class="note">演出内容：金色粒子の発生・上昇・揺らぎ・消滅のみ<br>基準画面：768×1376／約7秒で循環</div>
+    </aside>
+  </main>
+  <style>html,body{color-scheme:normal!important;margin:0!important;padding:0!important;background:transparent!important;overflow:hidden!important;width:100%;height:100%}body>:not(canvas){display:none!important}body>canvas{position:fixed!important;inset:0!important;width:100%!important;height:100%!important;pointer-events:none}</style><script>document.querySelectorAll('canvas').forEach(c=>document.body.appendChild(c));</script><script>
+    const W=768,H=1376,LOOP=7;
+    const characters=[
+      ['伊達政宗','assets/date_masamune.png'],['上杉謙信','assets/uesugi_kenshin.png'],
+      ['織田信長','assets/oda_nobunaga.png'],['真田幸村','assets/sanada_yukimura.png'],
+      ['前田慶次','assets/maeda_keiji.png'],['徳川家康','assets/tokugawa_ieyasu.png'],
+      ['武田信玄','assets/takeda_shingen.png'],['豊臣秀吉','assets/toyotomi_hideyoshi.png'],
+      ['本多忠勝','assets/honda_tadakatsu.png'],['明智光秀','assets/akechi_mitsuhide.png']
+    ];
+    const rear=document.querySelector('#rearFx'),front=document.querySelector('#frontFx');
+    const rearCtx=rear.getContext('2d'),frontCtx=front.getContext('2d');
+    const character=document.querySelector('#character'),list=document.querySelector('#characters');
+    const amount=document.querySelector('#amount'),speed=document.querySelector('#speed');
+    const amountValue=document.querySelector('#amountValue'),speedValue=document.querySelector('#speedValue'),toggle=document.querySelector('#toggle');
+    let intensity=1,speedRate=1,running=true,elapsed=0,previous=performance.now();
+    function setup(canvas,ctx){const dpr=Math.min(devicePixelRatio||1,2);canvas.width=W*dpr;canvas.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
+    setup(rear,rearCtx);setup(front,frontCtx);
+    characters.forEach(([name,src],index)=>{const button=document.createElement('button');button.textContent=name;button.className=index===0?'active':'';button.addEventListener('click',()=>{if(character.src.endsWith(src))return;document.querySelectorAll('.characters button').forEach(b=>b.classList.remove('active'));button.classList.add('active');character.classList.add('changing');const next=new Image();next.onload=()=>{character.src=src;character.alt=name;requestAnimationFrame(()=>character.classList.remove('changing'))};next.src=src});list.appendChild(button)});
+    const motes=Array.from({length:34},(_,i)=>({x:118+((i*149)%535),y:1260-((i*89)%760),size:1.2+(i%5)*.55,phase:(i*.37)%LOOP,rise:42+(i%6)*10,drift:10+(i%5)*5,twinkle:.75+(i%4)*.16}));
+    function drawMotes(ctx,time,foreground){ctx.save();ctx.globalCompositeOperation='lighter';const visibleCount=Math.round(motes.length*Math.min(intensity,1.6));motes.slice(0,visibleCount).forEach((m,i)=>{if((i%4===0)!==foreground)return;const age=(time*speedRate+m.phase)%LOOP,life=age/LOOP,fade=Math.sin(life*Math.PI),pulse=.72+Math.sin(age*3.1*m.twinkle+i)*.28,alpha=fade*pulse*(foreground?.72:.48)*Math.min(intensity,1.15),x=m.x+Math.sin(age*1.05+i*.8)*m.drift,y=m.y-age*m.rise,radius=m.size*(foreground?5:4.2),glow=ctx.createRadialGradient(x,y,0,x,y,radius);glow.addColorStop(0,`rgba(255,250,205,${alpha})`);glow.addColorStop(.18,`rgba(255,218,112,${alpha*.95})`);glow.addColorStop(.48,`rgba(242,168,48,${alpha*.42})`);glow.addColorStop(1,'rgba(224,130,20,0)');ctx.fillStyle=glow;ctx.beginPath();ctx.arc(x,y,radius,0,Math.PI*2);ctx.fill()});ctx.restore()}
+    function render(time){rearCtx.clearRect(0,0,W,H);frontCtx.clearRect(0,0,W,H);drawMotes(rearCtx,time,false);drawMotes(frontCtx,time,true)}
+    function frame(now){const dt=Math.min((now-previous)/1000,.05);previous=now;if(running)elapsed=(elapsed+dt)%LOOP;render(elapsed);requestAnimationFrame(frame)}
+    requestAnimationFrame(frame);
+    toggle.addEventListener('click',()=>{running=!running;toggle.textContent=running?'一時停止':'再生'});
+    amount.addEventListener('input',()=>{intensity=Number(amount.value)/100;amountValue.textContent=`${amount.value}%`});
+    speed.addEventListener('input',()=>{speedRate=Number(speed.value)/100;speedValue.textContent=`${speed.value}%`});
+    document.addEventListener('visibilitychange',()=>{previous=performance.now()});
+  </script>
+</body>
+</html>

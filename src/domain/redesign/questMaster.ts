@@ -1,5 +1,6 @@
 import data from './data/quest65.json';
 import roster from '../../theme/sengoku-characters.json';
+import { characterArt } from '../../theme/creativeAssets';
 import type { BattleRules, BattleUnit, EnemyUnit, QuestStage, RedesignState, Reward } from './types';
 import { createFormalBattleInput } from './formalBattleInput';
 
@@ -17,7 +18,7 @@ export const FORMAL_QUEST_STAGES: FormalQuestStage[] = data.stages.map(source =>
     const binding = data.bindings.find(row => row.stage === stage.designId && row.wave === wi + 1 && row.position === pi + 1 && row.enemyId === enemy.id);
     const character = roster.find(row => row.characterId === binding?.characterId);
     if (!binding || !character || character.name !== enemy.name) throw new Error(`敵マスター対応が不正です: ${enemy.id}`);
-    enemy.image = character.imagePath;
+    enemy.image = characterArt({ id: character.characterId, name: character.name, image: character.imagePath }, 'battle') ?? character.imagePath;
   }));
   return stage;
 });

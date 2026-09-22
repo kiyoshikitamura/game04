@@ -12,6 +12,7 @@ import { growthRewardLabel } from '@/domain/redesign/growthReward';
 import ElementBadge from './ElementBadge';
 import roster from '@/theme/sengoku-characters.json';
 import { getRarityBadgeAsset, getRarityFrameAsset } from '@/utils/rarityAssets';
+import { characterArt } from '@/theme/creativeAssets';
 
 export interface QuestSettlement { playerGrowth?: import('@/utils/redesignApi').RedesignResponse['playerGrowth']; battle: BattleResult; rewards: Reward[]; firstClear: boolean; encounterRaidId?: string | null; }
 const REWARD_LABELS: Record<Reward['kind'], string> = {ticket:'スペシャル券', character_exp_item: '武将EXP', equipment_exp_item: '装備EXP', generic_soul: '汎用魂', soul_selector: '魂選択', character: '武将', skill: 'スキル', cash: '銭', character_material: '武将育成素材', skill_material: 'スキルLB素材', equipment_material: '装備育成素材', equipment_lb: '装備LB素材', soul: '武将の魂', equipment: '装備', unlock_item: '領土侵攻札' };
@@ -30,8 +31,7 @@ function rewardIcon(reward: Reward) {
   if (reward.kind === 'equipment_exp_item') return `/items/equip_exp_${reward.id === 'large' ? 'l' : reward.id === 'medium' ? 'm' : 's'}.png`;
   if (reward.kind === 'skill_material') return '/items/skill_manual.png';
   if (reward.kind === 'ticket') return `/items/${String(reward.id).toLowerCase()}.png`;
-  if (reward.kind === 'character' && reward.id) return roster.find(c => c.characterId === reward.id)?.imagePath ?? '/ui/sengoku/10-helmet.png';
-  if (reward.kind === 'soul' && reward.id) return roster.find(c => c.characterId === reward.id)?.imagePath ?? '/ui/sengoku/10-helmet.png';
+  if ((reward.kind === 'character' || reward.kind === 'soul') && reward.id) { const match = roster.find(c => c.characterId === reward.id); return match ? characterArt({ id: match.characterId, name: match.name, image: match.imagePath }, 'portrait') ?? match.imagePath : '/ui/sengoku/10-helmet.png'; }
   return reward.kind === 'unlock_item' ? '/items/energy_drink.png' : '/ui/sengoku/13-coin.png';
 }
 function Rewards({ rewards }: { rewards: Reward[] }) {

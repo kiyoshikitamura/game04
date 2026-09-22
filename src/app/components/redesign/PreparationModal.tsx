@@ -8,6 +8,7 @@ import ElementBadge from './ElementBadge';
 import { CHARACTER_MASTERS } from '@/domain/redesign/masters';
 import { getRarityFrameAsset } from '@/utils/rarityAssets';
 import localSkills from '@/theme/local-skills.json';
+import { characterArt } from '@/theme/creativeAssets';
 
 export const ELEMENT_LABELS: Record<string, string> = { fire: '火', water: '水', earth: '土', wind: '風', light: '光', dark: '闇' };
 function displaySkillDescription(description: string) {
@@ -29,7 +30,7 @@ export default function PreparationModal({ party, title, energyCost, energy, bus
     ]}>
       <h3>{title}</h3>
       <div className="rq-party">{party.map((unit, index) => { const master = CHARACTER_MASTERS.find(entry => entry.id === unit.id); return <button type="button" key={unit.id} className="rq-party-card" onClick={() => setDetail(unit)} aria-label={`${index + 1}番 ${unit.name}のスキル・パッシブ`}>
-        <span className="rq-order">{index + 1}</span><div className="rq-card-visual"><img className="rq-card-person" src={unit.image} alt="" /><img className="rq-card-frame" src={getRarityFrameAsset('character', master?.rarity ?? 'N')} alt="" /><ElementBadge element={unit.element} className="rq-card-element" /></div><div className="rq-party-meta"><strong>{unit.name}</strong><span className="rq-rarity-line"><b>{master?.rarity ?? 'N'}</b> <ElementBadge element={unit.element} /> Lv.{unit.level}</span><small>HP {unit.stats.hp.toLocaleString()}</small></div>
+        <span className="rq-order">{index + 1}</span><div className="rq-card-visual"><img className="rq-card-person" src={characterArt(unit, 'card') ?? unit.image} alt="" /><img className="rq-card-frame" src={getRarityFrameAsset('character', master?.rarity ?? 'N')} alt="" /><ElementBadge element={unit.element} className="rq-card-element" /></div><div className="rq-party-meta"><strong>{unit.name}</strong><span className="rq-rarity-line"><b>{master?.rarity ?? 'N'}</b> <ElementBadge element={unit.element} /> Lv.{unit.level}</span><small>HP {unit.stats.hp.toLocaleString()}</small></div>
       </button>; })}</div>
       <p className="rq-total-sp">合計SP <strong>{commonSpMax ?? '開催時ルールを適用'}</strong></p>
       <button type="button" className="rq-edit-button" onClick={onOpenDeck} disabled={busy}>編成変更</button>
@@ -38,7 +39,7 @@ export default function PreparationModal({ party, title, energyCost, energy, bus
       {error && <p role="alert">{error}</p>}
     </CanonicalDialog>
     {detail && <CanonicalDialog title={`${detail.name}の詳細`} onClose={() => setDetail(null)} actions={[{ label: '閉じる', onClick: () => setDetail(null) }]}>
-      <div className="rq-detail-profile"><div className="rq-character-visual"><img className="rq-character-person" src={detail.image} alt={detail.name} /><img className="rq-character-frame" src={getRarityFrameAsset('character', CHARACTER_MASTERS.find(entry => entry.id === detail.id)?.rarity ?? 'N')} alt="" /></div><div><h3>{detail.name}</h3><p className="rq-rarity-line"><b>{CHARACTER_MASTERS.find(entry => entry.id === detail.id)?.rarity ?? 'N'}</b> <ElementBadge element={detail.element} /> · Lv.{detail.level}</p><p>HP {detail.stats.hp.toLocaleString()}</p></div></div>
+      <div className="rq-detail-profile"><div className="rq-character-visual"><img className="rq-character-person" src={characterArt(detail, 'portrait') ?? detail.image} alt={detail.name} /><img className="rq-character-frame" src={getRarityFrameAsset('character', CHARACTER_MASTERS.find(entry => entry.id === detail.id)?.rarity ?? 'N')} alt="" /></div><div><h3>{detail.name}</h3><p className="rq-rarity-line"><b>{CHARACTER_MASTERS.find(entry => entry.id === detail.id)?.rarity ?? 'N'}</b> <ElementBadge element={detail.element} /> · Lv.{detail.level}</p><p>HP {detail.stats.hp.toLocaleString()}</p></div></div>
       <dl className="rq-detail-stats">{Object.entries(detail.stats).map(([key, value]) => <div key={key}><dt>{key.toUpperCase()}</dt><dd>{value.toLocaleString()}</dd></div>)}</dl>
       <h3>装備スキル</h3>{detail.skills.length === 0 && <p>スキル未設定</p>}
       {detail.skills.map((skill) => { const asset = formalSkillAsset(skill); return <article className="rq-detail-item" key={skill.id}><div className="rq-skill-head"><img src={asset.image} alt="" /><div><strong>{asset.name}</strong><p><ElementBadge element={skill.element} /> ／ 消費SP {skill.spCost}</p></div></div><p>{displaySkillDescription(skill.description || skillDescription(skill, commonSpMax !== null))}</p></article>; })}
