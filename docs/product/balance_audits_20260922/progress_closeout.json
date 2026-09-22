@@ -1,51 +1,44 @@
 {
-  "status": "ALL_62_CLASSIFIED_NOT_FINAL_ACCEPTANCE",
+  "status": "BULK_FIX_PROPOSAL_READY",
   "scopeStages": 62,
   "coverage": {
     "comparisonRecorded": 62,
     "initialClearExampleRecorded": 62,
-    "candidateStages": 7,
-    "candidateEnemies": 12,
+    "newlyValidatedStages": 40,
+    "priorCandidateStages": 7,
+    "retainStages": 15,
     "formalNumericChangeApproved": 0
   },
-  "evidencePackagePreparedStages": [
-    "6-3",
-    "7-2",
-    "7-3",
-    "7-4",
-    "8-6",
-    "9-5",
-    "9-6",
-    "10-2",
-    "10-6"
-  ],
   "remainingStageJudgment": [],
   "remainingStageJudgmentCount": 0,
   "externalAcceptance": [
+    "アプリ実装への差分反映",
     "実再生時間",
-    "攻略意図が画面で伝わること"
+    "UI上で攻略意図が伝わること"
   ],
   "nextCloseoutSteps": [
-    "40面の修正方針を一括判断し、対象敵/比較編成を一式で修正する",
-    "変更候補を統合して受入基準で確認し、数値FIX一式へまとめる"
+    "62面の候補一式の一括FIX承認",
+    "承認内容の正本状態更新・開発引継ぎ"
   ],
   "notes": [
-    "53面の分類は完了。40面の対策価値不足を数値FIX完了とは扱わない。",
-    "追加承認要求は今回行わない。個別確認を再開しない。",
-    "実再生時間・UI認知は別工程。"
+    "40面の修正・最終比較を完了。全62面の候補を統合し一括FIX承認待ち。",
+    "主軸・実キャラ代替は各60回、育成後周回は各30回の観測結果。全ユーザーの勝率保証ではない。",
+    "実再生時間・UI認知は開発受入。"
   ],
   "classificationCounts": {
-    "追加調整なし提案": 15,
-    "修正方針の判断必要": 40,
-    "敵変更候補": 7
+    "今回修正候補": 40,
+    "既存変更候補": 7,
+    "維持提案": 15
   },
-  "designRevisionRequired": 40,
+  "designRevisionRequired": 0,
   "numericFixApprovedThisRound": 0,
   "candidateLineage": {
-    "recentDeltaStages": 7,
-    "recentDeltaEnemies": 12,
-    "allAuditCandidateStages": 17,
-    "allAuditCandidateEnemies": 38,
-    "note": "全候補は監査開始時入力との差。今回の新規数値変更数ではない。"
-  }
+    "currentEnemyDeltaStages": 39,
+    "currentEnemyDeltaEnemies": 150,
+    "allAuditCandidateStages": 49,
+    "allAuditCandidateEnemies": 175,
+    "note": "監査開始時入力との累計差分。現行DBとの差分ではない。"
+  },
+  "current40Validated": 40,
+  "newNumericFixApproved": 0
 }
