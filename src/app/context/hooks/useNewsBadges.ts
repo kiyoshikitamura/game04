@@ -51,8 +51,10 @@ export function useNewsBadges(userId: string | undefined) {
     const seen = { ...(seenState.userId === userId ? seenState.seen : {}), ...readSeen(storageKey), [String(item.id)]: version(item) };
     try { localStorage.setItem(storageKey, JSON.stringify(seen)); } catch { /* In-memory fallback. */ }
     setSeenState({ userId, seen });
+    setNewsState(current => ({ userId, news: current.userId === userId ? [...current.news.filter(news => String(news.id) !== String(item.id)), item] : [item] }));
   }, [storageKey, userId, seenState]);
   const unreadNewsCount = useMemo(() => userId && seenState.userId === userId && newsState.userId === userId
     ? newsState.news.filter(item => seenState.seen[String(item.id)] !== version(item)).length : 0, [newsState, seenState, userId]);
-  return { unreadNewsCount, markNewsRead };
+  const isNewsUnread = useCallback((item: News) => !!userId && seenState.userId === userId && seenState.seen[String(item.id)] !== version(item), [userId, seenState]);
+  return { unreadNewsCount, markNewsRead, isNewsUnread };
 }

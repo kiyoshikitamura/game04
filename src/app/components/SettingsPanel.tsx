@@ -1,9 +1,11 @@
 import SeasonHonors from "./profile/SeasonHonors";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { supabase } from "@/utils/supabase";
 import { PROFILE_BACKGROUNDS, PROFILE_FRONT_EFFECTS, PROFILE_INTERIORS } from "@/utils/game_constants";
 import { useGame } from "../context/GameContext";
+import CanonicalDialog from "./ui/CanonicalDialog";
+import { game04UiError } from "@/app/lib/game04UiError";
 import FullScreenPanel from "./ui/FullScreenPanel";
 import OutlawButton from "./ui/OutlawButton";
 import "./SettingsPanel.css";
@@ -29,6 +31,8 @@ function getSupabaseErrorMessage(error: unknown): string {
 
 export default function SettingsPanel({ redesign = false }: { redesign?: boolean } = {}) {
   const game = useGame();
+  const saveLock = useRef(false);
+  const [discardTarget, setDiscardTarget] = useState<"close" | "profile" | "home" | null>(null);
   const [qaLoading, setQaLoading] = useState(false);
   const [profileEditing, setProfileEditing] = useState(false);
   const [homeEditing, setHomeEditing] = useState(false);
@@ -74,8 +78,9 @@ export default function SettingsPanel({ redesign = false }: { redesign?: boolean
   };
 
   const saveProfile = async () => {
-    const saved = await game.handleUpdateProfile({ username: usernameDraft, bio: bioDraft });
-    if (saved) setProfileEditing(false);
+    if (saveLock.current) return; saveLock.current = true;
+    try { const saved = await game.handleUpdateProfile({ username: usernameDraft, bio: bioDraft }); if (saved) setProfileEditing(false); }
+    finally { saveLock.current = false; }
   };
 
   const saveHome = async () => {
@@ -105,10 +110,33 @@ export default function SettingsPanel({ redesign = false }: { redesign?: boolean
     }
   };
 
+  const discard = (target: 'close' | 'profile' | 'home') => {
+    resetDrafts(); setDiscardTarget(null);
+    if (target === 'close') close();
+    else if (target === 'profile') setProfileEditing(false);
+    else setHomeEditing(false);
+  };
+  const cancelEdit = (target: 'close' | 'profile' | 'home') => {
+    if (game.profileLoading) return;
+    const dirty = (profileEditing && (usernameDraft !== game.username || bioDraft !== game.bio)) ||
+      (homeEditing && (backgroundDraft !== game.selectedBgMode || foregroundDraft !== game.equippedFrontEffect || interiorDraft !== game.interiorItem));
+    if (dirty) setDiscardTarget(target); else discard(target);
+  };
+  if (discardTarget) return <CanonicalDialog kind="confirm" title="変更を破棄しますか？" onClose={()=>setDiscardTarget(null)} actions={[
+    {label:'キャンセル',onClick:()=>setDiscardTarget(null)}, {label:'破棄する',semantic:'primary',onClick:()=>discard(discardTarget)}
+  ]}><p>保存していない変更を破棄して戻ります。</p></CanonicalDialog>;
+  if (redesign && profileEditing) return <CanonicalDialog kind="edit" title="プロフィール編集" onClose={game.profileLoading ? undefined : ()=>cancelEdit('profile')} actions={[
+    {label:'キャンセル',onClick:()=>cancelEdit('profile'),disabled:game.profileLoading},
+    {label:'保存',onClick:saveProfile,semantic:'primary',disabled:game.profileLoading||!usernameDraft.trim()}
+  ]}>
+    <label htmlFor="profile-name">プレイヤー名</label><input id="profile-name" className="settings-input" value={usernameDraft} maxLength={8} disabled={game.profileLoading} onChange={event=>setUsernameDraft(event.target.value)}/>
+    <label htmlFor="profile-bio">自己紹介</label><textarea id="profile-bio" className="settings-textarea" value={bioDraft} maxLength={USER_BIO_MAX_LENGTH} rows={4} disabled={game.profileLoading} onChange={event=>setBioDraft(event.target.value)}/>
+    <p>{Array.from(bioDraft).length} / {USER_BIO_MAX_LENGTH}</p>{game.errorMessage&&<p role="alert">{game04UiError(game.errorMessage)}</p>}
+  </CanonicalDialog>;
   return (
-    <FullScreenPanel title="設定 / プロフィール" onClose={() => { if (!game.profileLoading) close(); }}>
+    <FullScreenPanel title="設定 / プロフィール" onClose={() => cancelEdit("close")}>
       <div className="settings-panel-container-inner">
-        {game.errorMessage && <div className="settings-error-message">{game.errorMessage}</div>}
+        {game.errorMessage && <div className="settings-error-message">{game04UiError(game.errorMessage)}</div>}
 
         <EditableSettingSection title="プロフィール" editing={profileEditing} pending={game.profileLoading} onEdit={() => setProfileEditing(true)} summary={<dl className="settings-summary"><div><dt>プレイヤー名</dt><dd>{game.username}</dd></div><div><dt>自己紹介</dt><dd>{game.bio || "未設定"}</dd></div></dl>}>
           <div className="settings-field"><label htmlFor="profile-name">プレイヤー名</label><input id="profile-name" className="settings-input" value={usernameDraft} maxLength={8} disabled={game.profileLoading} onChange={(event) => setUsernameDraft(event.target.value)} /></div>

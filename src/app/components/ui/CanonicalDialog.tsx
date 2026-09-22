@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { flushSync } from "react-dom";
-import { registerPresentedDialog } from "./dialogPresence";
+import DialogSurface from "./DialogSurface";
 import OutlawButton from "./OutlawButton";
 import "./CanonicalDialog.css";
 
@@ -21,6 +21,7 @@ export default function CanonicalDialog({
   size = "standard",
   ariaLabel,
   loading = false,
+  kind = "detail",
 }: {
   title?: string;
   children: React.ReactNode;
@@ -29,10 +30,10 @@ export default function CanonicalDialog({
   size?: "standard" | "large";
   ariaLabel?: string;
   loading?: boolean;
+  kind?: "detail" | "confirm" | "edit" | "result" | "notice";
 }) {
   const busy = useRef(false);
   const [pending, setPending] = useState(false);
-  useLayoutEffect(registerPresentedDialog, []);
   const runAction = (action: () => unknown) => {
     if (busy.current) return;
     busy.current = true;
@@ -54,17 +55,17 @@ export default function CanonicalDialog({
       setPending(false);
     });
   };
-  return <div className="canonical-dialog-overlay" onMouseDown={(event) => {
-    if (event.target === event.currentTarget && onClose && !pending) runAction(onClose);
-  }}>
+  const close = kind === 'result' || kind === 'notice' ? undefined : onClose;
+  const visibleActions = kind === 'detail' && close && actions.length === 1 && actions[0].label === '閉じる' ? [] : actions;
+  return <DialogSurface className="canonical-dialog-overlay" onCancel={close && !pending ? () => runAction(close) : undefined}>
     <section className={`canonical-dialog canonical-dialog--${size}`} role="dialog" aria-modal="true" aria-label={ariaLabel || title || "ダイアログ"}>
-      <header className="canonical-dialog-header">
+      {(title || close) && <header className="canonical-dialog-header">
         {title ? <h2>{title}</h2> : <span />}
-        {onClose && <button type="button" className="canonical-dialog-close" disabled={pending} onClick={() => runAction(onClose)} aria-label="閉じる">×</button>}
-      </header>
+        {close && <button type="button" className="canonical-dialog-close" disabled={pending} onClick={() => runAction(close!)} aria-label="閉じる">×</button>}
+      </header>}
       <div className={`canonical-dialog-body ${loading ? "is-loading" : ""}`}>{children}</div>
-      {actions.length > 0 && <footer className="canonical-dialog-actions">
-        {actions.map((action) => <OutlawButton
+      {visibleActions.length > 0 && <footer className="canonical-dialog-actions">
+        {visibleActions.map((action) => <OutlawButton
           key={action.label}
           variant={action.semantic === "danger" ? "danger" : action.semantic === "primary" ? "primary" : "secondary"}
           disabled={action.disabled || pending}
@@ -72,5 +73,5 @@ export default function CanonicalDialog({
         >{action.label}</OutlawButton>)}
       </footer>}
     </section>
-  </div>;
+  </DialogSurface>;
 }

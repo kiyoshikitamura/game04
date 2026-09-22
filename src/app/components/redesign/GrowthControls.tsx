@@ -1,4 +1,5 @@
 'use client';
+import { game04UiError } from '@/app/lib/game04UiError';
 import './creative.css';
 import { useState } from 'react';
 import type { ExpSize, RedesignState } from '@/domain/redesign/types';
@@ -14,7 +15,7 @@ export function LevelGrowthControls({ state, kind, id, run, busy }: { state: Red
   const inventory = state.growthInventory ?? emptyGrowthInventory();
   let quote: ReturnType<typeof quoteLevelGrowth> | undefined;
   let error = '';
-  try { quote = quoteLevelGrowth(state, kind, id, items); } catch (e) { error = e instanceof Error ? e.message : '投入数を確認してください。'; }
+  try { quote = quoteLevelGrowth(state, kind, id, items); } catch (e) { error = game04UiError(e); }
   const owned = kind === 'character' ? state.characters.find(c => c.id === id) : state.equipment.find(e => e.instanceId === id);
   return <fieldset disabled={busy}><legend>{kind === 'character' ? '武将' : '装備'}EXP育成（最大Lv100）</legend>
     <p>現在Lv.{owned?.level}・累計EXP {owned?.exp ?? 0}・繰越EXP {inventory.carryExp[kind].toLocaleString()}</p>

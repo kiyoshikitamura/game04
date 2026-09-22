@@ -8,7 +8,7 @@ type Props = {
   open: boolean; onClose: () => void; activeView: string; onSelectView: (view: string) => void;
   vip: boolean; onVipChange: (value: boolean) => void;
   cash: number; energy: number; energyMax: number; message: string;
-  onReset: () => void; onEmptyItems: () => void; onReplenish: () => void;
+  onRecoveryProbe: (owned: boolean) => void; onNewNotice: () => void; onReset: () => void; onEmptyItems: () => void; onReplenish: () => void;
 };
 
 /** Full-screen QA surface: the fixture and underlying view stay mounted. */
@@ -23,7 +23,7 @@ export default function QaOperations(props: Props) {
       <header className="qa-operations-header"><h1 id="qa-operations-title">QA操作</h1><button className="rd-button" autoFocus onClick={props.onClose}>確認画面へ戻る</button></header>
       <p><strong>表示確認専用・ローカル操作</strong></p><p>保存・API接続・認証・決済は行いません。再読込で初期化されます。</p>
       <h2>確認対象</h2><div className="rd-tabs qa-operations-views">{VIEWS.map(([id, label]) => <button key={id} className={props.activeView === id ? 'active' : ''} aria-current={props.activeView === id ? 'page' : undefined} onClick={() => props.onSelectView(id)}>{label}</button>)}</div>
-      <section className="rd-stack"><label><input type="checkbox" checked={props.vip} onChange={event => props.onVipChange(event.target.checked)} /> VIP表示確認</label>
+      <section className="rd-stack"><button className="rd-button" onClick={() => props.onRecoveryProbe(true)}>QA 行動力0・回復薬あり</button><button className="rd-button" onClick={() => props.onRecoveryProbe(false)}>QA 行動力0・回復薬なし</button><button className="rd-button" onClick={props.onNewNotice}>QA 新着追加</button><label><input type="checkbox" checked={props.vip} onChange={event => props.onVipChange(event.target.checked)} /> VIP表示確認</label>
         <button className="rd-button" onClick={props.onReset}>QA初期化</button>
         <button className="rd-button" onClick={props.onEmptyItems}>QA 開催アイテム0</button>
         <button className="rd-button" onClick={props.onReplenish}>QA 開催枠とアイテム補充</button>

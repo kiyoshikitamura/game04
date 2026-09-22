@@ -57,8 +57,8 @@ export default function SpecialGachaOffer({ category, diamonds, userItems, pendi
       <button className="semantic-cta semantic-cta--primary" disabled={pending} onClick={() => { setSelected(g); setChoice(null); }}>{SPECIAL_GACHA_COPY[g.id].title}</button>
       <button className="gacha-rate-link" onClick={() => setRates(g)}>提供割合</button>
     </div>)}
-    {selected && <CanonicalDialog title={SPECIAL_GACHA_COPY[selected.id].title} onClose={pending ? undefined : () => { setSelected(null); setChoice(null); }} actions={choice ? [
-      { label: "戻る", onClick: () => setChoice(null), disabled: pending },
+    {selected && <CanonicalDialog kind="confirm" title={SPECIAL_GACHA_COPY[selected.id].title} onClose={pending ? undefined : () => { setSelected(null); setChoice(null); }} actions={choice ? [
+      { label: "キャンセル", onClick: () => {setSelected(null);setChoice(null);}, disabled: pending },
       { label: `${choice.count}連を引く`, semantic: "primary", disabled: pending || !affordable(selected, choice), onClick: async () => {
         const gacha = selected; const draw = choice;
         setSelected(null); setChoice(null);
@@ -74,10 +74,10 @@ export default function SpecialGachaOffer({ category, diamonds, userItems, pendi
     {rates && createPortal(<div className="special-gacha-rates-dialog"><CanonicalDialog title={`${SPECIAL_GACHA_COPY[rates.id].title} 提供割合`} onClose={() => setRates(null)} actions={[{ label: "閉じる", onClick: () => setRates(null) }]}>
       <div className="special-gacha-rates custom-scrollbar" tabIndex={0} role="region" aria-label="提供割合一覧">{rates.items.map(item => <div key={item.item_id}><span>{item.rarity} {item.name}{item.is_exclusive ? "（専用）" : ""}</span><strong>{item.probability.toFixed(4)}%</strong></div>)}</div>
     </CanonicalDialog></div>, document.body)}
-    {exchangeOpen && <CanonicalDialog title={`${SPECIAL_GACHA_COPY[exchangeOpen.id].title} SSR交換`} onClose={pending ? undefined : () => { setExchangeOpen(null); setReward(null); }} actions={reward ? [{ label: "100Ptで交換", semantic: "primary", disabled: pending || Number(exchangeOpen.pity_points) < catalog.pity_cost, onClick: exchange }] : []}>
+    {exchangeOpen && <CanonicalDialog kind="confirm" title={`${SPECIAL_GACHA_COPY[exchangeOpen.id].title} SSR交換`} onClose={pending ? undefined : () => { setExchangeOpen(null); setReward(null); }} actions={reward ? [{label:"キャンセル",onClick:()=>{setExchangeOpen(null);setReward(null);},disabled:pending},{ label: "交換する", semantic: "primary", disabled: pending || Number(exchangeOpen.pity_points) < catalog.pity_cost, onClick: exchange }] : []}>
       <p>{exchangeOpen.pity_points}Pt / 交換に必要：{catalog.pity_cost}Pt</p>
       <div className="special-gacha-exchange">{exchangeItems([exchangeOpen]).map(item => <button key={`${item.item_type}:${item.item_id}`} aria-pressed={reward?.item_id === item.item_id && reward.item_type === item.item_type} disabled={pending} onClick={() => setReward(item)}>{item.name}{item.is_exclusive ? "（専用）" : ""}</button>)}</div>
     </CanonicalDialog>}
-    {received && <CanonicalDialog title="交換完了" onClose={() => setReceived(null)} actions={[{ label: "確認する", semantic: "primary", onClick: () => setReceived(null) }]}><p>{received}を獲得しました。</p></CanonicalDialog>}
+    {received && <CanonicalDialog kind="result" title="交換完了" onClose={() => setReceived(null)} actions={[{ label: "確認する", semantic: "primary", onClick: () => setReceived(null) }]}><p>{received}を獲得しました。</p></CanonicalDialog>}
   </section>;
 }

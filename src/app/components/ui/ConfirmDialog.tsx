@@ -63,7 +63,7 @@ export default function ConfirmDialog({
         if (!result || typeof result.then !== "function") setDismissed(true);
       });
     } catch {
-      setActionError("処理を完了できませんでした。もう一度お試しください。");
+      setActionError("結果の確認が必要です。通信状態を確認し、画面を更新してください。");
       actionStartedRef.current = false;
       setPending(false);
       return;
@@ -74,7 +74,7 @@ export default function ConfirmDialog({
         actionStartedRef.current = false;
         setPending(false);
       }, () => {
-        setActionError("処理を完了できませんでした。もう一度お試しください。");
+        setActionError("結果の確認が必要です。通信状態を確認し、画面を更新してください。");
         actionStartedRef.current = false;
         setPending(false);
       });
@@ -97,7 +97,8 @@ export default function ConfirmDialog({
   if (presentation === "canonical") {
     return (
       <CanonicalDialog
-        title={title}
+        title={title === "エラー" ? undefined : title}
+        kind={kind === "result" || kind === "reward" ? "result" : cancelText ? "confirm" : "notice"}
         onClose={pending ? undefined : () => runAndDismiss(onCancel)}
         actions={[
           ...(cancelText ? [{ label: cancelText, semantic: "secondary" as const, disabled: pending, onClick: () => runAndDismiss(onCancel) }] : []),

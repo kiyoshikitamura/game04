@@ -178,7 +178,7 @@ export function useChat(
   }, [chatChannel, currentUserId, refreshChatUnreadCounts, userGuildMember?.guild_id]);
 
   useEffect(() => {
-    if (!showTribeChatPanel || chatChannel === "DM") return;
+    if (!showTribeChatPanel || chatChannel === "DM" || document.body.classList.contains("rd-active")) return;
     void markChatChannelRead(chatChannel);
   }, [showTribeChatPanel, chatChannel, guildChats.length, markChatChannelRead]);
 
@@ -304,7 +304,7 @@ export function useChat(
     const messages = projectDirectMessageIdentities(rawMessages, currentUserId, actorProfiles)
       .sort((left, right) => String(left.created_at || "").localeCompare(String(right.created_at || "")));
     setDirectMessages(messages);
-    if (showTribeChatPanel && chatChannel === "DM" && dmRecipientId) {
+    if (!document.body.classList.contains("rd-active") && showTribeChatPanel && chatChannel === "DM" && dmRecipientId) {
       void markDirectMessagesRead(messages
         .filter((message) => message.sender_id === dmRecipientId && message.recipient_id === currentUserId && !message.is_read)
         .map((message) => message.id));
@@ -329,7 +329,7 @@ export function useChat(
             || (message.sender_id === dmRecipientId && message.recipient_id === currentUserId);
           if (isConversationMessage) {
             void hydrateDirectMessage(message);
-            if (showTribeChatPanel && chatChannel === "DM" && message.recipient_id === currentUserId && !message.is_read) {
+            if (!document.body.classList.contains("rd-active") && showTribeChatPanel && chatChannel === "DM" && message.recipient_id === currentUserId && !message.is_read) {
               void markDirectMessagesRead([message.id]);
             } else {
               void refreshDirectMessageUnreadCounts();
@@ -536,7 +536,7 @@ export function useChat(
     refreshDirectMessageUnreadCounts,
     chatUnreadCounts,
     refreshChatUnreadCounts,
-    markChatChannelRead,
+    markChatChannelRead, markDirectMessagesRead,
     bbsThreads, setBbsThreads,
     bbsActiveThread, setBbsActiveThread,
     bbsPosts, setBbsPosts,

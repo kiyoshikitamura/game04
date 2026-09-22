@@ -9,7 +9,7 @@ import { GACHA_RARITY_ASSETS } from "../../lib/screenManifests";
 import { preloadAssetManifest } from "../../lib/screenAssets";
 import { getCharacterLocationBackground } from "@/utils/characterVisualAssets";
 import "../CommonModals.css";
-import { userFacingErrorMessage } from "../../lib/userFacingError";
+import { game04UiError } from "../../lib/game04UiError";
 import CharacterGachaPresentation from "../gacha/CharacterGachaPresentation";
 import CanonicalDialog from "../ui/CanonicalDialog";
 import { LoginBonusModal } from "../LoginBonusModal";
@@ -185,8 +185,8 @@ export default function RedesignCommerceOverlays() {
 
       {/* ❌ 汎用エラーモーダル */}
       {errorMessage && (
-        <CanonicalDialog title="エラー" onClose={() => setErrorMessage(null)} actions={[{ label: "閉じる", semantic: "secondary", onClick: () => setErrorMessage(null) }]}>
-          {userFacingErrorMessage(errorMessage)}
+        <CanonicalDialog kind="notice" actions={[{ label: "閉じる", semantic: "secondary", onClick: () => setErrorMessage(null) }]}>
+          {game04UiError(errorMessage)}
         </CanonicalDialog>
       )}
 

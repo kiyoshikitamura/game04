@@ -1,5 +1,8 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
+import { useViewedEntries, presentViewEntry } from '@/app/context/hooks/useViewedEntries';
+import { CANONICAL_ACTION_RESOURCES, canUseEnergyDrink } from '@/domain/gameplay/canonical/action_resources';
+import type { EnergyRecovery } from '@/app/components/redesign/EnergyRecoveryDialog';
 import QaOperations from './QaOperations';
 import NormalGachaView from '@/app/components/redesign/NormalGachaView';
 import MissionContent from '@/app/components/redesign/MissionContent';
@@ -45,6 +48,13 @@ function fixtureState(): RedesignState {
   return state;
 }
 export default function RedesignFixture() {
+  const [potions, setPotions] = useState(2);
+  const [showInboxPanel, setShowInboxPanel] = useState(false);
+  const [inboxPanelTab, setInboxPanelTab] = useState('news');
+  const [newsList, setNewsList] = useState([{id:'qa-ui-v11-news-1',title:'共通UI確認のお知らせ',content:'確認用のお知らせです。実際のユーザーデータには接続していません。',date:'2026/9/22'}]);
+  const [presents, setPresents] = useState(Array.from({length:12},(_,index)=>({id:`qa-ui-v11-present-${index}`,title:`表示確認の贈り物 ${index+1}`,itemId:'CASH',qty:100,status:'UNCLAIMED'})));
+  const newsViews=useViewedEntries(LOCAL_ID,'news',newsList.map(n=>({id:n.id,revision:JSON.stringify([n.title,n.content])})));
+  const presentViews=useViewedEntries(LOCAL_ID,'presents',presents.map(presentViewEntry));
   const [state, setState] = useState(fixtureState);
   const [tab, setTab] = useState('home');
   const [qaOpen, setQaOpen] = useState(false);
@@ -125,8 +135,18 @@ export default function RedesignFixture() {
     setState(result.state);
     return { ...gachaData, state: result.state, normalGachaResults: result.results };
   }
+  const recovery: EnergyRecovery = { owned: potions, amount: CANONICAL_ACTION_RESOURCES.recoveryItems.ENERGY_DRINK.amount, canUse: canUseEnergyDrink(state.energy), onUse: async () => {
+    if (potions < 1) throw new Error('回復薬が足りません。');
+    setPotions(value=>value-1);setState(value=>({...value,energy:value.energy+CANONICAL_ACTION_RESOURCES.recoveryItems.ENERGY_DRINK.amount}));
+  }};
   const game = {
-    ownedHomeCosmeticIds: [], setShowAccountAuthenticationModal: noop, setInboxPanelTab: noop, setShowInboxPanel: noop, setShowSettingsPanel: noop,
+    ownedHomeCosmeticIds: [], setShowAccountAuthenticationModal: noop, setInboxPanelTab, setShowInboxPanel, setShowSettingsPanel: noop,
+    showInboxPanel,inboxPanelTab,newsList,setNewsList,presents,presentClaimLoading:false,
+    handleClaimPresent:async(id:string)=>setPresents(items=>items.filter(p=>p.id!==id)),handleClaimAllPresents:async()=>setPresents([]),
+    unreadNewsCount:newsViews.unreadCount,unreadPresentsCount:presentViews.unreadCount,
+    markNewsRead:(n:typeof newsList[number])=>newsViews.markViewed({id:n.id,revision:JSON.stringify([n.title,n.content])}),
+    isNewsUnread:(n:typeof newsList[number])=>newsViews.isUnread({id:n.id,revision:JSON.stringify([n.title,n.content])}),
+    markPresentViewed:(p:typeof presents[number])=>presentViews.markViewed(presentViewEntry(p)),isPresentUnread:(p:typeof presents[number])=>presentViews.isUnread(presentViewEntry(p)),
     session: null, username: '確認用の城主', userLevel: 1, playCyberSe: noop,
     directMessages: [], dmUnreadConversations: [], dmUnreadTotal: 0, dmRecipientId, setDmRecipientId,
     guildChats, chatInput, setChatInput, chatCooldown: 0, chatSending: false,
@@ -139,10 +159,10 @@ export default function RedesignFixture() {
         {tab === 'gacha' && <NormalGachaView data={gachaData} onAction={qaGachaAction} />}
         {tab === 'shop' && <ShopUiHarness embedded />}
         {tab === 'missions' && <section className="rd-panel"><h1>ミッション</h1><MissionContent state={state} missions={[]} missionBusy={false} missionError="" previewOnly onClaim={noop}/></section>}
-        {tab === 'quest' && <QuestView state={state} party={party} vipActive={vip} onStart={startQuest} onOpenDeck={() => navigate('character')} onOpenRaid={id => { setRoomId(id); navigate('raid'); }} />}
+        {tab === 'quest' && <QuestView recovery={recovery} state={state} party={party} vipActive={vip} onStart={startQuest} onOpenDeck={() => navigate('character')} onOpenRaid={id => { setRoomId(id); navigate('raid'); }} />}
         {tab === 'character' && <GrowthView state={state} onAction={action} />}
         {tab === 'territory' && <TerritoryView territory={territory} rooms={rooms} userId={LOCAL_ID} onOpenRoom={id => { setRoomId(id); navigate('raid'); }} onHost={async destinationId => { const destination = territory.destinations.find(entry => entry.id === destinationId); if (!destination?.canHost) throw new Error(destination?.reasons.join(' ') || '未設定です。'); const snapshot = createTerritorySnapshot(TERRITORY_MASTER, destinationId); const room = createRaidRoom(destination.raidMasterId, LOCAL_ID, `qa-territory-${Date.now()}`, Date.now(), snapshot); setRooms(previous => [...previous, room]); setState(previous => ({ ...previous, materials: { ...previous.materials, unlock: previous.materials.unlock - destination.itemCount } })); setRoomId(room.id); navigate('raid'); }} />}
-        {tab === 'raid' && <RaidView key={roomId || 'list'} state={state} rooms={rooms} party={party} onAction={raidAction} onOpenDeck={() => navigate('character')} initialRoomId={roomId} />}
+        {tab === 'raid' && <RaidView recovery={recovery} key={roomId || 'list'} state={state} rooms={rooms} party={party} onAction={raidAction} onOpenDeck={() => navigate('character')} initialRoomId={roomId} />}
         {tab === 'battle' && <BattleView result={sampleBattle} vipActive={vip} onComplete={() => navigate('quest')} title="Wave・ローカル確認" />}
         {!['home','quest','character','raid','territory','battle','gacha','shop','missions'].includes(tab) && <div className="rd-panel"><p>この共通機能は確認用画面では接続しません。</p><button className="rd-button" onClick={() => navigate('home')}>Homeへ</button></div>}
       </>}
@@ -150,7 +170,9 @@ export default function RedesignFixture() {
     <QaOperations open={qaOpen} onClose={() => setQaOpen(false)} activeView={battle ? 'battle' : tab}
       onSelectView={next => { if (next !== (battle ? 'battle' : tab)) navigate(next); setQaOpen(false); }}
       vip={vip} onVipChange={setVip} cash={state.cash} energy={state.energy} energyMax={state.energyMax} message={message}
-      onReset={() => { setState(fixtureState()); setBattle(null); setMessage('QA状態を初期化しました。'); }}
+      onRecoveryProbe={owned=>{setPotions(owned?2:0);setState(value=>({...value,energy:0}));}}
+      onNewNotice={()=>setNewsList(items=>[...items,{id:`qa-news-${Date.now()}`,title:'追加のお知らせ',content:'追加した新着の確認用データです。',date:'2026/9/22'}])}
+      onReset={() => { setPotions(2);setState(fixtureState()); setBattle(null); setMessage('QA状態を初期化しました。'); }}
       onEmptyItems={() => setState(previous => ({ ...previous, materials: { ...previous.materials, unlock: 0 } }))}
       onReplenish={() => { setTerritoryExp(300); setState(previous => ({ ...previous, materials: { ...previous.materials, unlock: 5 } })); }} />
   </GameContext.Provider>;

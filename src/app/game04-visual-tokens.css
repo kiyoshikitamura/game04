@@ -105,3 +105,33 @@ body.game04-theme .section-header-title{font-size:24px;text-shadow:none}
 body.game04-theme .section-header-subtitle{color:var(--g4-muted);font-size:14px}
 body.game04-theme :is(.rd-shell,.rd-modal,.g4g-modal,.canonical-dialog) button:disabled{background:var(--g4-panel)}
 body.game04-theme .rd-main>section.rd-panel>h2:first-child{font-size:24px}
+
+/* Common UI v1.1: actions and tabs never shrink or wrap their labels. */
+body.game04-theme :is(.rd-button,.semantic-cta,.g4g-actions button,.g4g-modal fieldset button,.g4g-modal>button,.rq-summary>button,.rd-modal-footer button,.canonical-dialog-actions button){min-height:48px;height:auto;font-size:16px;font-weight:700;white-space:nowrap;overflow-wrap:normal;max-width:100%;padding:10px 12px}
+body.game04-theme :is(.g4-cta-row,.canonical-dialog-actions,.rd-modal-footer .rd-row,.g4g-actions){display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;gap:8px;grid-auto-flow:unset}
+body.game04-theme :is(.g4-cta-row,.canonical-dialog-actions,.rd-modal-footer .rd-row,.g4g-actions)>button{flex:1 1 calc(50% - 8px);min-width:max-content;max-width:100%;width:auto}
+body.game04-theme :is(.rd-tabs,.g4g-tabs,.gacha-category-tabs,.shop-sub-tabs .outlaw-sub-tab-nav){justify-content:center;display:flex;flex-wrap:wrap;gap:4px}
+body.game04-theme :is(.rd-tabs,.g4g-tabs,.gacha-category-tabs,.shop-sub-tabs) button{flex:1 1 0;white-space:nowrap;overflow-wrap:normal;min-width:max-content;text-align:center;font-size:16px;min-height:48px;padding:8px}
+body.game04-theme .qa-operations-views button{flex:1 1 30%}
+body.game04-theme.g4-dialog-open .rd-shell{overflow:hidden!important;touch-action:none}
+body.game04-theme .g4-dialog-surface{position:fixed!important;inset:auto;z-index:40000;display:grid;place-items:center;box-sizing:border-box;padding:12px;max-width:100vw;background:#000c;overscroll-behavior:contain;touch-action:pan-y}
+body.game04-theme .g4-dialog-surface>:is(.rd-modal,.canonical-dialog){position:relative!important;inset:auto!important;transform:none!important;display:flex;flex-direction:column;min-height:0;width:min(100%,480px);max-height:100%!important;overflow:hidden;padding:0;margin:0;box-sizing:border-box}
+body.game04-theme :is(.rd-modal-header,.canonical-dialog-header){flex:none;padding:12px;min-height:0;align-items:flex-start}
+body.game04-theme :is(.rd-modal-header,.canonical-dialog-header) h2{margin:0;min-width:0;font-size:20px}
+body.game04-theme :is(.rd-modal-body,.canonical-dialog-body){flex:1 1 auto;min-height:0;overflow-y:auto!important;overscroll-behavior:contain;padding:12px;touch-action:pan-y;white-space:normal}
+body.game04-theme :is(.rd-modal-footer,.canonical-dialog-actions){flex:none;padding:12px;padding-bottom:max(12px,env(safe-area-inset-bottom));background:var(--g4-panel)}
+body.game04-theme :is(.g4-dialog-close,.canonical-dialog-close,.rd-modal-header>button){flex:0 0 44px;width:44px;min-width:44px;min-height:44px;height:44px;padding:0;font-size:24px}
+body.game04-theme .g4g-art .rd-modal-header{position:static;background:var(--g4-panel)}
+body.game04-theme .g4g-art h2{display:block}
+body.game04-theme .g4g-modal .rd-modal-body>button:not(.g4g-row),body.game04-theme .g4g-modal fieldset button{display:block;width:100%;margin:8px 0}
+body.game04-theme .g4g-tabs{position:relative}
+body.game04-theme .g4-unread{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--g4-primary);outline:1px solid var(--g4-text);margin-left:6px;vertical-align:middle}
+body.game04-theme .rd-footer .g4-unread{position:absolute;top:8px;right:12px}
+body.game04-theme .rd-footer button{position:relative}
+body.game04-theme .g4-recovery-icon{width:48px;height:48px;object-fit:contain}
+@media(max-width:360px){body.game04-theme :is(.g4-cta-row,.canonical-dialog-actions,.rd-modal-footer .rd-row,.g4g-actions)>button{flex-basis:100%}}
+
+body.game04-theme .g4-dialog-surface{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
+body.game04-theme .g4-dialog-surface>.canonical-dialog--large{width:min(100%,520px)}
+body.game04-theme .g4-dialog-surface .special-gacha-rates{max-height:none;overflow:visible}
+body.game04-theme .rd-modal-header .g4-dialog-close{min-height:44px}

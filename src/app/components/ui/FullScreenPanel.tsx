@@ -1,7 +1,7 @@
 import React from "react";
 import "./FullScreenPanel.css";
 import OutlawButton from "./OutlawButton";
-import ModalShell from "./ModalShell";
+import CanonicalDialog from "./CanonicalDialog";
 import { useGame } from "../../context/GameContext";
 
 interface FullScreenPanelProps {
@@ -28,17 +28,7 @@ export default function FullScreenPanel({
     onClose();
   };
 
-  return (
-    <ModalShell
-      title={title}
-      className={`outlaw-fullscreen-panel ${className}`}
-      footer={showCloseButton ? (
-          <OutlawButton variant="secondary" onClick={handleClose} disabled={closeDisabled} fullWidth className="fullscreen-close-btn">
-            閉じる
-          </OutlawButton>
-      ) : undefined}
-    >
-      {children}
-    </ModalShell>
-  );
+  return <CanonicalDialog title={title} size="large" onClose={showCloseButton && !closeDisabled ? handleClose : undefined}>
+    <div className={className}>{children}</div>
+  </CanonicalDialog>;
 }

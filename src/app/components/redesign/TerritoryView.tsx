@@ -1,4 +1,5 @@
 'use client';
+import { game04UiError } from '@/app/lib/game04UiError';
 import { characterArt } from '@/theme/creativeAssets';
 import { useEffect, useRef, useState } from 'react';
 import type { RaidRoom } from '@/domain/redesign/types';
@@ -24,10 +25,11 @@ export default function TerritoryView({ territory, rooms, userId, onHost, onOpen
     if (!destination || !destination.canHost || lock.current) return;
     lock.current = true; setBusy(true); setError('');
     try { await onHost(destination.id); setSelected(null); }
-    catch (reason) { setError(reason instanceof Error ? reason.message : '開催できませんでした。'); }
+    catch (reason) { setError(game04UiError(reason)); }
     finally { lock.current = false; setBusy(false); }
   }
   const duration = (minutes: number) => minutes % 1440 === 0 ? `${minutes / 1440}日` : minutes % 60 === 0 ? `${minutes / 60}時間` : `${minutes}分`;
+  if (error) return <Modal kind="notice" onClose={() => setError('')}><p>{error}</p></Modal>;
   return <section className="rd-stack rd-territory">
     <h1>領土侵攻</h1>{territory?.status === 'PREVIEW_PROVISIONAL' && <p className="rd-muted">開発用の仮設定です。経験値・開催条件・報酬は調整予定です。</p>}<p>他領地の城に挑み、仲間とともに制圧を目指しましょう。</p>
     {territory ? <section className="rd-panel"><h2>領土侵攻レベル {territory.level}</h2><p>領土侵攻経験値 {territory.experience.toLocaleString()}{territory.nextLevelExp != null ? ` ／ 次のLvまで ${Math.max(0, territory.nextLevelExp - territory.experience).toLocaleString()}` : ' ／ 上限到達'}</p><p>同時開催枠 {territory.activeHostingCount} / {territory.hostingSlots}</p><p className="rd-muted">主催した侵攻を最終ボスまでクリアし、その時点で個別バトルに3勝していると経験値を獲得します。</p></section> : <p className="rd-panel" role="status">開催条件を読み込めませんでした。画面を開き直してください。</p>}
@@ -41,6 +43,6 @@ export default function TerritoryView({ territory, rooms, userId, onHost, onOpen
       {!entry.canHost && <ul className="rd-territory-reasons">{entry.reasons.map(reason => <li key={reason}>{reason}</li>)}</ul>}
       <button className="rd-button rd-primary" disabled={busy || !entry.canHost} onClick={() => { setError(''); setSelected(entry.id); }}>開催内容を確認</button></div>
     </section>)}
-    {destination && <Modal title="領土侵攻の開催確認" onClose={() => { if (!busy) setSelected(null); }} footer={<div className="rd-row"><button className="rd-button" disabled={busy} onClick={() => setSelected(null)}>戻る</button><button className="rd-button rd-primary" disabled={busy || !destination.canHost} onClick={() => void host()}>{busy ? '開催中…' : 'アイテムを消費して開催'}</button></div>}><h3>{destination.castle} · {destination.name}</h3><p>開催期間 {duration(destination.durationMinutes)}</p><p><TerritoryItemIcon itemId={destination.itemId} />{destination.itemName} ×{destination.itemCount}を消費します。（所持 {destination.ownedItemCount}）</p><p>同時開催枠 {territory!.activeHostingCount} / {territory!.hostingSlots}</p><p>開催後はレイド詳細から出撃できます。</p>{!destination.canHost && <ul>{destination.reasons.map(reason => <li key={reason}>{reason}</li>)}</ul>}{error && <p role="alert">{error}</p>}</Modal>}
+    {destination && <Modal kind="confirm" busy={busy} title="領土侵攻の開催確認" onClose={() => { if (!busy) setSelected(null); }} footer={<div className="rd-row"><button className="rd-button" disabled={busy} onClick={() => setSelected(null)}>キャンセル</button><button className="rd-button rd-primary" disabled={busy || !destination.canHost} onClick={() => void host()}>{busy ? '開催中…' : '開催する'}</button></div>}><h3>{destination.castle} · {destination.name}</h3><p>開催期間 {duration(destination.durationMinutes)}</p><p><TerritoryItemIcon itemId={destination.itemId} />{destination.itemName} ×{destination.itemCount}を消費します。（所持 {destination.ownedItemCount}）</p><p>同時開催枠 {territory!.activeHostingCount} / {territory!.hostingSlots}</p><p>開催後はレイド詳細から出撃できます。</p>{!destination.canHost && <ul>{destination.reasons.map(reason => <li key={reason}>{reason}</li>)}</ul>}{error && <p role="alert">{error}</p>}</Modal>}
   </section>;
 }

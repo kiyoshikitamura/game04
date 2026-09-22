@@ -175,12 +175,14 @@ export function useInventory(
     setConfirmDialogConfig({ isOpen: true, title, message, confirmText: "閉じる", cancelText: "", presentation: "canonical", onConfirm: () => setConfirmDialogConfig(null), onCancel: () => setConfirmDialogConfig(null) });
   };
 
-  const handleUseItem = async (itemId: string) => {
-    if (!session || !beginItemUse()) return;
+  const handleUseItem = async (itemId: string, options?: { inline?: boolean }) => {
+    if (!session || !beginItemUse()) return false;
     try {
     
     if (itemId === "ENERGY_DRINK") {
+      if (options?.inline && energyDrinks < 1) throw new Error("回復薬が足りません。");
       if (!canUseEnergyDrink(vitality)) {
+        if (options?.inline) throw new Error("回復上限に達しています。");
         setConfirmDialogConfig({ isOpen: true, title: "アイテム使用", message: "最大値なので回復できません。", confirmText: "閉じる", cancelText: "", presentation: "canonical", onConfirm: () => setConfirmDialogConfig(null), onCancel: () => setConfirmDialogConfig(null) });
         return;
       }
@@ -192,16 +194,21 @@ export function useInventory(
       setEnergyDrinks(prev => Math.max(0, prev - 1));
       setVitality(nextVitality);
       
+      let consumed = false;
       try {
         const res = await supabase.rpc("use_energy_drink");
         if (res.error) throw res.error;
         if (res.data?.error) throw new Error(res.data.error);
+        consumed = true;
 
         await syncBootstrapData(session.user.id);
+        if (options?.inline) return true;
         setConfirmDialogConfig({ isOpen: true, title: "アイテム使用", message: `エナジードリンクを使用しました。スタミナが50回復しました。（${prevVitality} → ${nextVitality}）`, confirmText: "OK", cancelText: "", presentation: "canonical", onConfirm: () => setConfirmDialogConfig(null), onCancel: () => setConfirmDialogConfig(null) });
       } catch (err: any) {
+        if (options?.inline && consumed) { notifyRedesignRewardChange(session.user.id); throw err; }
         setEnergyDrinks(prevQuantity);
         setVitality(prevVitality);
+        if (options?.inline) throw err;
         showActionError("アイテムを使用できませんでした", err);
       }
     } else if (itemId === "PVP_POINT_TICKET" || itemId === "RAID_POINT_TICKET") {

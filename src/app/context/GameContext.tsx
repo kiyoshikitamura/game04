@@ -1,4 +1,5 @@
 "use client";
+import { useViewedEntries, presentViewEntry } from './hooks/useViewedEntries';
 import { notifyRedesignRewardChange } from "@/utils/redesignRewardSync";
 import { getThemedCharacterName } from "@/theme/characters";
 import { game04WorldText, game04TownName, game04QuestPresentation } from "@/theme/world";
@@ -611,7 +612,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     refreshDirectMessageUnreadCounts,
     chatUnreadCounts,
     refreshChatUnreadCounts,
-    markChatChannelRead,
+    markChatChannelRead, markDirectMessagesRead,
     bbsThreads, setBbsThreads,
     bbsActiveThread, setBbsActiveThread,
     bbsPosts, setBbsPosts,
@@ -705,7 +706,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   const loginBonusRequestUserRef = useRef<string | null>(null);
 
   const [newsList, setNewsList] = useState<any[]>([]);
-  const { unreadNewsCount, markNewsRead } = useNewsBadges(session?.user?.id);
+  const { unreadNewsCount, markNewsRead, isNewsUnread } = useNewsBadges(session?.user?.id);
   const [selectedNews, setSelectedNews] = useState<any | null>(null);
   const [totalPower, setTotalPower] = useState<number>(0);
   // A displayed zero is valid only after the character and deck data has loaded.
@@ -4222,6 +4223,10 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
 
   const missionNow = useMissionClock(missions);
   const unreadMissionsCount = missions.filter(m => canClaimMission(m, missionNow)).length;
+  const presentViews = useViewedEntries(session?.user?.id, 'presents', presents.map(presentViewEntry));
+  const unreadPresentsCount = presentViews.unreadCount;
+  const markPresentViewed = (item: Parameters<typeof presentViewEntry>[0]) => presentViews.markViewed(presentViewEntry(item));
+  const isPresentUnread = (item: Parameters<typeof presentViewEntry>[0]) => presentViews.isUnread(presentViewEntry(item));
   const unclaimedPresentsCount = presents.filter(p => p.status === "UNCLAIMED").length;
 
   const openRaidRescue = (rescueId: string) => {
@@ -4533,7 +4538,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     checkAndClaimLoginBonus,
 
     newsList, setNewsList,
-    unreadNewsCount, markNewsRead,
+    unreadNewsCount, markNewsRead, isNewsUnread, unreadPresentsCount, markPresentViewed, isPresentUnread,
     selectedNews, setSelectedNews,
     guildChats, setGuildChats,
     chatHasMore,
@@ -4542,7 +4547,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     chatChannel, setChatChannel,
     chatUnreadCounts,
     refreshChatUnreadCounts,
-    markChatChannelRead,
+    markChatChannelRead, markDirectMessagesRead,
     chatInput, setChatInput,
     chatReplyTo, setChatReplyTo,
     chatSending, setChatSending,

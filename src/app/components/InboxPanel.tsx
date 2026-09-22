@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "@/utils/supabase";
 import { useGame } from "../context/GameContext";
+import ViewedItem from "./ui/ViewedItem";
+import { presentViewEntry } from "../context/hooks/useViewedEntries";
 import FullScreenPanel from "./ui/FullScreenPanel";
 import SubTabNav from "./ui/SubTabNav";
 import OutlawButton from "./ui/OutlawButton";
@@ -17,7 +19,7 @@ function PresentRewardIcon({ itemId }: { itemId: string }) {
   return <CanonicalItemIcon itemId={itemId} alt="" className="inbox-present-reward-icon" />;
 }
 
-export default function InboxPanel() {
+export default function InboxPanel({ previewOnly = false }: { previewOnly?: boolean } = {}) {
   const {
     showInboxPanel,
     setShowInboxPanel,
@@ -25,7 +27,7 @@ export default function InboxPanel() {
     setInboxPanelTab,
     newsList,
     setNewsList,
-    markNewsRead,
+    markNewsRead, isNewsUnread, markPresentViewed, isPresentUnread,
     presents,
     handleClaimPresent,
     handleClaimAllPresents,
@@ -38,7 +40,7 @@ export default function InboxPanel() {
   // Refresh on opening so already logged-in players can read a new release.
   // Publication and time-window filtering are enforced by news RLS.
   useEffect(() => {
-    if (!showInboxPanel || inboxPanelTab !== "news") return;
+    if (previewOnly || !showInboxPanel || inboxPanelTab !== "news") return;
     let cancelled = false;
     void supabase.from("news").select("*").order("created_at", { ascending: false })
       .then(({ data, error }) => {
@@ -50,7 +52,7 @@ export default function InboxPanel() {
         })));
       });
     return () => { cancelled = true; };
-  }, [showInboxPanel, inboxPanelTab, setNewsList]);
+  }, [showInboxPanel, inboxPanelTab, setNewsList, previewOnly]);
 
   if (!showInboxPanel) return null;
 
@@ -71,11 +73,11 @@ export default function InboxPanel() {
           <div
             key={news.id}
             className="inbox-news-item active-scale-effect"
-            onClick={() => { setSelectedNews(news); markNewsRead(news); playCyberSe("click"); }}
+            onClick={() => { setSelectedNews(news); playCyberSe("click"); }}
           >
             <div className="inbox-news-item-header">
               {news.category === "IMPORTANT" && <span className="news-badge important">重要</span>}
-              {news.isNew && <span className="news-badge new">NEW</span>}
+              {isNewsUnread?.(news) && <span className="news-badge new">NEW</span>}
               <span className="news-date">{news.date || news.created_at}</span>
             </div>
             <div className="inbox-news-item-title">{news.title}</div>
@@ -104,11 +106,11 @@ export default function InboxPanel() {
           <div className="inbox-empty">未受取のプレゼントはありません</div>
         ) : (
           unclaimedPresents.map((p: any) => (
-            <div key={p.id} className="inbox-present-item">
+            <ViewedItem key={`${p.id}:${presentViewEntry(p).revision}`} className="inbox-present-item" onViewed={() => markPresentViewed?.(p)}>
               <div className="inbox-present-info">
-                <div className="inbox-present-title">{battleDisplayText(p.title || p.message)}</div>
+                <div className="inbox-present-title">{isPresentUnread?.(p) && <span className="g4-unread" aria-label="未読"/>}{battleDisplayText(p.title || p.message)}</div>
                 <div className="inbox-present-reward">{(() => { const itemId = String(p.itemId || p.item_id || ""); const quantity = Number(p.qty ?? p.quantity ?? 0); return <><PresentRewardIcon itemId={itemId} /><span>{canonicalItemName(itemId)} <strong>× {quantity.toLocaleString()}</strong></span></>; })()}</div>
-                <div className="inbox-present-expire">{p.expireText || "期限なし"}</div>
+                <div className="inbox-present-expire"><span>受取可能 · </span>{p.expireText || "期限なし"}</div>
               </div>
               <OutlawButton
                 variant="primary"
@@ -119,7 +121,7 @@ export default function InboxPanel() {
               >
                 受け取る
               </OutlawButton>
-            </div>
+            </ViewedItem>
           ))
         )}
       </div>
@@ -128,7 +130,7 @@ export default function InboxPanel() {
 
   return (
     <>
-      <FullScreenPanel
+      {!selectedNews && <FullScreenPanel
         title="受信箱"
         onClose={handleClose}
         closeDisabled={presentClaimLoading}
@@ -147,11 +149,11 @@ export default function InboxPanel() {
 
           {inboxPanelTab === "news" ? renderNewsContent() : renderPresentsContent()}
         </div>
-      </FullScreenPanel>
+      </FullScreenPanel>}
 
       {selectedNews && (
-        <CanonicalDialog title={selectedNews.title} onClose={() => setSelectedNews(null)} actions={[{ label: "閉じる", semantic: "secondary", onClick: () => setSelectedNews(null) }]}>
-          <p className="inbox-news-modal-text">{selectedNews.content || selectedNews.desc}</p>
+        <CanonicalDialog title={selectedNews.title} onClose={() => setSelectedNews(null)} actions={[{ label: "戻る", semantic: "secondary", onClick: () => setSelectedNews(null) }]}>
+          <ViewedItem key={`${selectedNews.id}:${selectedNews.updated_at || selectedNews.created_at}:${selectedNews.title}:${selectedNews.content || selectedNews.desc}`} onViewed={() => markNewsRead?.(selectedNews)}><p className="inbox-news-modal-text">{selectedNews.content || selectedNews.desc}</p></ViewedItem>
         </CanonicalDialog>
       )}
     </>

@@ -1,4 +1,6 @@
 'use client';
+import type { EnergyRecovery } from './EnergyRecoveryDialog';
+import { game04UiError } from '@/app/lib/game04UiError';
 import TerritoryItemIcon from './TerritoryItemIcon';
 import { characterArt } from '@/theme/creativeAssets';
 import { useEffect, useRef, useState } from 'react';
@@ -23,8 +25,8 @@ function rewardLabel(reward: Reward) {
 function Rewards({ rewards }: { rewards: Reward[] }) {
   return rewards.length ? <ul className="rq-rewards">{rewards.map((reward, index) => <li key={`${reward.kind}-${reward.id ?? ''}-${index}`}>{reward.kind === 'unlock_item' && <TerritoryItemIcon />}{rewardLabel(reward)} ×{reward.amount.toLocaleString()}</li>)}</ul> : <p className="rq-muted">なし</p>;
 }
-export default function QuestView({ state, party, vipActive, onStart, onOpenDeck, onOpenRaid, onIgnoreEncounter, initialStageId, onBattlePlayingChange }: {
-  state: RedesignState; party: BattleUnit[]; vipActive: boolean; onStart: (stageId: string) => Promise<QuestSettlement>;
+export default function QuestView({ state, party, vipActive, onStart, onOpenDeck, onOpenRaid, onIgnoreEncounter, initialStageId, onBattlePlayingChange, recovery }: {
+  recovery?: EnergyRecovery; state: RedesignState; party: BattleUnit[]; vipActive: boolean; onStart: (stageId: string) => Promise<QuestSettlement>;
   onOpenDeck: () => void; onOpenRaid: (raidId: string) => void; onIgnoreEncounter?: (raidId: string) => Promise<void>; initialStageId?: string; onBattlePlayingChange?: (playing: boolean) => void;
 }) {
   const firstStage = initialStageId ? getQuestStage(initialStageId) : undefined;
@@ -46,7 +48,7 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
     try {
       const result = await onStart(selected.id);
       setSettlement(result); setPlaying(true); setModal(null);
-    } catch (reason) { setError(reason instanceof Error ? reason.message : '出撃できませんでした。もう一度お試しください。'); }
+    } catch (reason) { setError(game04UiError(reason)); }
     finally { actionRef.current = false; setBusy(false); }
   }
   async function dismissEncounter() {
@@ -54,7 +56,7 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
     if (!onIgnoreEncounter) { setError('参加権の放棄を処理できませんでした。'); return; }
     actionRef.current = true; setBusy(true); setError('');
     try { await onIgnoreEncounter(settlement.encounterRaidId); setSettlement({ ...settlement, encounterRaidId: null }); }
-    catch (reason) { setError(reason instanceof Error ? reason.message : '処理に失敗しました。'); }
+    catch (reason) { setError(game04UiError(reason)); }
     finally { actionRef.current = false; setBusy(false); }
   }
   function openStage(stage: QuestStage) { setSelected(stage); setModal('info'); setError(''); }
@@ -84,11 +86,11 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
           return <button key={entry.id} disabled={!unlocked} className={`rq-area ${entry.id === current.areaId ? 'is-current' : ''}`} style={{ backgroundImage: `linear-gradient(0deg,#0c0806ed,#0c080650),url("${entry.image}")` }} onClick={() => setAreaId(entry.id)}><span>第{entry.index}章</span><strong>{entry.name}</strong><span>{cleared ? 'クリア済' : unlocked ? '攻略中' : '未解放'}</span></button>;
         })}</div></>}
     </>}
-    {selected && modal === 'info' && <div className="redesign-quest-dialog"><CanonicalDialog title={`${QUEST_AREAS.find(entry => entry.id === selected.areaId)?.index}-${selected.index} ${selected.name}`} onClose={() => setModal(null)} actions={[{ label: '閉じる', onClick: () => setModal(null) }, { label: '挑戦', semantic: 'primary', onClick: () => setModal('prepare'), disabled: !isQuestStageUnlocked(selected.id, state.clearedStages) }]}>
+    {selected && modal === 'info' && <div className="redesign-quest-dialog"><CanonicalDialog title={`${QUEST_AREAS.find(entry => entry.id === selected.areaId)?.index}-${selected.index} ${selected.name}`} onClose={() => setModal(null)} actions={[{ label: '挑戦', semantic: 'primary', onClick: () => setModal('prepare'), disabled: !isQuestStageUnlocked(selected.id, state.clearedStages) }]}>
       <p>{selected.waves.length} Wave ／ 消費行動力 {selected.energyCost}</p><p className="rq-muted">{selected.description}</p>
       {selected.waves.map((enemies, index) => <section key={index}><h3>Wave {index + 1}</h3><div className="rq-enemies">{enemies.map(enemy => <article key={enemy.id} className="rq-enemy">{characterArt(enemy, 'battle') && <img src={characterArt(enemy, 'battle')} alt="" />}<strong>{enemy.name}</strong><span>Lv.{enemy.level}</span><span className={`rq-element rq-element-${enemy.element}`}>{ELEMENT_LABELS[enemy.element]}</span></article>)}</div></section>)}
       <h3>初回報酬{state.clearedStages.includes(selected.id) ? '（獲得済）' : ''}</h3><Rewards rewards={selected.firstRewards} /><h3>通常ドロップ</h3><Rewards rewards={selected.rewards} /><h3>レアドロップ</h3><Rewards rewards={selected.rareRewards} />
     </CanonicalDialog></div>}
-    {selected && modal === 'prepare' && <PreparationModal party={party} title={selected.name} energyCost={selected.energyCost} energy={state.energy} busy={busy} error={error} onConfirm={start} onBack={() => setModal('info')} onOpenDeck={onOpenDeck} />}
+    {selected && modal === 'prepare' && <PreparationModal recovery={recovery} party={party} title={selected.name} energyCost={selected.energyCost} energy={state.energy} busy={busy} error={error} onConfirm={start} onBack={() => setModal('info')} onOpenDeck={onOpenDeck} />}
   </section>;
 }

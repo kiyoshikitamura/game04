@@ -62,7 +62,7 @@ export default function ShopUiHarness({ embedded = false }: { embedded?: boolean
       </div>}
       <ShopTab />
     </main>
-    <InboxPanel />
+    <InboxPanel previewOnly />
     {dialog.isOpen && <CanonicalDialog title={dialog.title} onClose={() => setDialog({ isOpen: false })} actions={[{ label: dialog.confirmText ?? "閉じる", onClick: dialog.onConfirm ?? (() => setDialog({ isOpen: false })) }]}>{dialog.message}</CanonicalDialog>}
   </GameContext.Provider>;
 }
