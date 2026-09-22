@@ -5,7 +5,9 @@
 - 作業基準: codex/game04-upstream-20260918 @ 60fe2f382c56c4902ca5eecaf38401a491d02c0e。実装前・保存前に同ブランチの最新値を再確認。main不使用。
 - 既存PRを確認したが65面接続の並走実装はなかったため、この専用ブランチで実装。
 - dd4572eb5245ac3c1b0c368c67ce4563499ea64a の検証コード・600戦一致・阻害報告はGitHubへ保存済み。600戦は再実行していない。
-- 実装コミットは本ファイルを追加したコミット。対象ブランチ: codex/game04-round17-acceptance-20260922。
+- 実装コミットb59805da227745c16ac64236a216ba968149ecb6、Preview可搬性修正5dd9abe2c61ce40893ed0c86da760d0d7b0613d6。対象ブランチ: codex/game04-round17-acceptance-20260922。
+- 固定Preview: https://game04-bo45ls7em-kiyoshi-kitamura.vercel.app / 配信SHA5dd9abe2c61ce40893ed0c86da760d0d7b0613d6 / Vercel Ready確認済み / 接続DB lrgyllgzcdcphlbmkknc。
+- PR: https://github.com/kiyoshikitamura/game04/pull/22 （指定upstream向けDraft）。最初のPreview失敗は検証コードのscratch静的importが原因で、5dd9abeで修正して再配信成功。
 
 ## 65面接続
 
@@ -27,7 +29,7 @@
 対象は lrgyllgzcdcphlbmkknc のみ。Edge game04-redesign-api v12、verify_jwt=true。
 DBへquest65承認マスターと旧questAreasの保管を追加し、release_manifestのquestAreasだけを更新。変更前値のmd5ガードを用いたSQL履歴は scripts/quest65_master_applied.sql。
 questAreas以外のmanifestハッシュは前後とも16cfa3ae5be577a91c6f994f402fe9d1。
-状態の試行・勝利件数移行と券付与トリガーのmigrationを適用。DB側適用番号20260922113054、ローカル元ファイル20260922112416_game04_quest65_connection.sql。
+状態の試行・勝利件数移行と券付与トリガーのmigrationを適用。DB側適用番号20260922113054。ローカルファイル名も20260922113054_game04_quest65_connection.sqlへ合わせ、二重適用を避けた。
 新規QAアカウントのみで実APIの1-1→1-2クリア、初回0体力、初回報酬、同requestId再送の重複付与なしを確認。両戦闘の保存wavesとDBマスターも一致。GAME04_QUEST65_LIVE_20260922.json参照。
 Supabase security advisor前後127項目、新規指摘なし。既存指摘の仕様変更は実施していない。
 
@@ -42,7 +44,8 @@ localhost:3104、現在のBattleView、保存済みmain編成/seed、倍速2、S
 
 一覧→1-1出撃→勝利→結果→次のステージで1-2の解放と詳細表示をブラウザ確認。
 7-7保護解除は「片倉景綱 protection 1件解除」と表示される。英語内部カテゴリが残り、最終的な認知品質の合格とはしない。
-現在のBattleViewにはカットインの接続がなく、最終演出込みの所要時間は未確認。9-9 seed25001では解除イベントが出ないため状態解除の画面受入には未使用。QAルートは存在しないeventを指定すると404を返し、先頭画面で成功扱いしない。
+現在のBattleViewにはカットインの接続がなく、最終演出込みの所要時間は未確認。9-9 seed25001では解除イベントが出ないため、保存済みseed25003を追加確認し「本多忠勝 行動不能1件解除」を視認。7-7の割込みでは対象枠の強調と「片倉景綱 割込み」を視認。スクリーンショットはquest65-ui/に保存。
+QAルートは存在しないeventを指定すると404を返し、先頭画面で成功扱いしない。
 並走演出のコンポーネント・CSS・素材は変更していない。最終カットイン接続後の倍速実測、状態解除・割込みを含む認知受入は残件。確定数値は変更しない。
 
 ## 共有参照・変更範囲
