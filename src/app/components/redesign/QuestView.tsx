@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { CHARACTER_MASTERS, EQUIPMENT_MASTERS } from '@/domain/redesign/masters';
-import { QUEST_AREAS, QUEST_STAGES, getQuestStage, isQuestStageUnlocked, nextQuestStage } from '@/domain/redesign/quests';
+import { QUEST_AREAS, QUEST_STAGES, getQuestStage, isQuestStageUnlocked, nextQuestStage, questEnergyCost } from '@/domain/redesign/quests';
 import type { BattleUnit, QuestStage, RedesignState, Reward } from '@/domain/redesign/types';
 import type { BattleResult } from '@/domain/redesign/battle';
 import CanonicalDialog from '../ui/CanonicalDialog';
@@ -11,9 +11,10 @@ import './QuestView.css';
 import { growthRewardLabel } from '@/domain/redesign/growthReward';
 
 export interface QuestSettlement { playerGrowth?: import('@/utils/redesignApi').RedesignResponse['playerGrowth']; battle: BattleResult; rewards: Reward[]; firstClear: boolean; encounterRaidId?: string | null; }
-const REWARD_LABELS: Record<Reward['kind'], string> = { character_exp_item: '武将EXP', equipment_exp_item: '装備EXP', generic_soul: '汎用魂', soul_selector: '魂選択', character: '武将', skill: 'スキル', cash: '銭', character_material: '武将育成素材', skill_material: 'スキルLB素材', equipment_material: '装備育成素材', equipment_lb: '装備LB素材', soul: '武将の魂', equipment: '装備', unlock_item: '領土侵攻札' };
+const REWARD_LABELS: Record<Reward['kind'], string> = {ticket:'スペシャル券', character_exp_item: '武将EXP', equipment_exp_item: '装備EXP', generic_soul: '汎用魂', soul_selector: '魂選択', character: '武将', skill: 'スキル', cash: '銭', character_material: '武将育成素材', skill_material: 'スキルLB素材', equipment_material: '装備育成素材', equipment_lb: '装備LB素材', soul: '武将の魂', equipment: '装備', unlock_item: '領土侵攻札' };
 function rewardLabel(reward: Reward) {
   const growthLabel = growthRewardLabel(reward); if(growthLabel) return growthLabel;
+  if (reward.kind === 'ticket') return ({SPECIAL_TICKET_CHARACTER:'キャラ券',SPECIAL_TICKET_SKILL:'スキル券',SPECIAL_TICKET_EQUIPMENT:'装備券'} as Record<string,string>)[reward.id??''] ?? 'スペシャル券';
   if (reward.kind === 'soul') return `${CHARACTER_MASTERS.find(c => c.id === reward.id)?.name ?? ''}の魂`;
   if (reward.kind === 'equipment') return EQUIPMENT_MASTERS.find(e => e.id === reward.id)?.name ?? '装備';
   return REWARD_LABELS[reward.kind];
@@ -75,7 +76,7 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
       {area ? <><button className="rq-back" onClick={() => setAreaId(null)}>‹ エリア一覧</button><header className="rq-area-head" style={{ backgroundImage: `linear-gradient(90deg,#100a08d9,#100a0859),url("${area.image}")` }}><h2>{area.name}</h2></header>
         <div className="rq-scroll" aria-label={`${area.name}のステージ一覧`}>{area.stages.map(stage => {
           const cleared = state.clearedStages.includes(stage.id), unlocked = isQuestStageUnlocked(stage.id, state.clearedStages);
-          return <button className={`rq-stage ${current.id === stage.id ? 'is-current' : ''}`} key={stage.id} disabled={!unlocked} onClick={() => openStage(stage)}><b>{area.index}-{stage.index}</b><span><strong>{stage.name}</strong><small>消費行動力 {stage.energyCost}</small></span><small>{cleared ? 'クリア済' : unlocked ? '未クリア' : '未解放'}</small></button>;
+          return <button className={`rq-stage ${current.id === stage.id ? 'is-current' : ''}`} key={stage.id} disabled={!unlocked} onClick={() => openStage(stage)}><b>{area.index}-{stage.index}</b><span><strong>{stage.name}</strong><small>消費行動力 {questEnergyCost(stage,state)}</small></span><small>{cleared ? 'クリア済' : unlocked ? '未クリア' : '未解放'}</small></button>;
         })}</div></> : <><h2>クエスト</h2><div className="rq-scroll" aria-label="エリア一覧">{QUEST_AREAS.map(entry => {
           const cleared = entry.stages.every(stage => state.clearedStages.includes(stage.id));
           const unlocked = isQuestStageUnlocked(entry.stages[0].id, state.clearedStages);
@@ -83,10 +84,10 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
         })}</div></>}
     </>}
     {selected && modal === 'info' && <div className="redesign-quest-dialog"><CanonicalDialog title={`${QUEST_AREAS.find(entry => entry.id === selected.areaId)?.index}-${selected.index} ${selected.name}`} onClose={() => setModal(null)} actions={[{ label: '閉じる', onClick: () => setModal(null) }, { label: '挑戦', semantic: 'primary', onClick: () => setModal('prepare'), disabled: !isQuestStageUnlocked(selected.id, state.clearedStages) }]}>
-      <p>{selected.waves.length} Wave ／ 消費行動力 {selected.energyCost}</p><p className="rq-muted">{selected.description}</p>
+      <p>{selected.waves.length} Wave ／ 消費行動力 {questEnergyCost(selected,state)}</p><p className="rq-muted">{selected.description}</p>
       {selected.waves.map((enemies, index) => <section key={index}><h3>Wave {index + 1}</h3><div className="rq-enemies">{enemies.map(enemy => <article key={enemy.id} className="rq-enemy"><img src={enemy.image} alt="" /><strong>{enemy.name}</strong><span>Lv.{enemy.level}</span><span className={`rq-element rq-element-${enemy.element}`}>{ELEMENT_LABELS[enemy.element]}</span></article>)}</div></section>)}
       <h3>初回報酬{state.clearedStages.includes(selected.id) ? '（獲得済）' : ''}</h3><Rewards rewards={selected.firstRewards} /><h3>通常ドロップ</h3><Rewards rewards={selected.rewards} /><h3>レアドロップ</h3><Rewards rewards={selected.rareRewards} />
     </CanonicalDialog></div>}
-    {selected && modal === 'prepare' && <PreparationModal party={party} title={selected.name} energyCost={selected.energyCost} energy={state.energy} busy={busy} error={error} onConfirm={start} onBack={() => setModal('info')} onOpenDeck={onOpenDeck} />}
+    {selected && modal === 'prepare' && <PreparationModal party={party} title={selected.name} energyCost={questEnergyCost(selected,state)} energy={state.energy} busy={busy} error={error} onConfirm={start} onBack={() => setModal('info')} onOpenDeck={onOpenDeck} />}
   </section>;
 }

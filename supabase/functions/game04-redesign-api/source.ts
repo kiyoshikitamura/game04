@@ -6,6 +6,8 @@ import { applyNormalGacha, normalGachaDay } from '../../../src/domain/redesign/n
 import { applyGrowthAction, validateDeck } from '../../../src/domain/redesign/growth.ts';
 import { evaluateMissions, getClaimableMission, type MissionConfig } from '../../../src/domain/redesign/missions.ts';
 import { simulateBattle } from '../../../src/domain/redesign/battle.ts';
+import { getQuestStage as getLegacyQuestStage } from '../../../src/domain/redesign/legacyQuests.ts';
+import { createQuestBattleInput, questEnergyCost, questVictoryRewards, QUEST_MASTER_VERSION, type FormalQuestStage } from '../../../src/domain/redesign/questMaster.ts';
 import { getQuestStage, isQuestStageUnlocked } from '../../../src/domain/redesign/quests.ts';
 import { applyRaidAction, createRaidRoom, getRoomRaidMaster, raidEnemy } from '../../../src/domain/redesign/raid.ts';
 import { projectTerritory } from '../../../src/domain/redesign/territory.ts';
@@ -110,11 +112,12 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
     const state = await stateFor(userId); validateDeck(state, state.deck);
     const kind = name === 'quest_battle' ? 'quest' : 'raid';
     let waves: BattleInput['waves'], cost: number, targetId: string, raidLevel: number | undefined;
+    let questStage: FormalQuestStage | undefined;
     let startRoom: (RaidRoom & {version: number}) | null = null;
     if (kind === 'quest') {
       const stage = getQuestStage(String(payload.stageId));
       if (!stage || !isQuestStageUnlocked(stage.id, state.clearedStages)) throw new ApiError('このステージは未解放です。');
-      waves = stage.waves; cost = stage.energyCost; targetId = stage.id;
+      questStage = stage; waves = stage.waves; cost = questEnergyCost(stage, state); targetId = stage.id;
     } else {
       const room = await roomFor(String(payload.roomId)), master = getRoomRaidMaster(room);
       const me = room.participants.find(p => p.userId === userId);
@@ -126,10 +129,10 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
     const seed = crypto.getRandomValues(new Uint32Array(1))[0];
     // Only a new battle receives current rules. Saved started/settled records above are never upgraded.
     const rules = startRoom?.territorySnapshot?.battleRules ?? BATTLE_RULES;
-    const input = { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel, ...(kind === 'quest' ? { playerExpReward: await questPlayerExpReward(targetId) } : {}) };
+    const input = questStage ? createQuestBattleInput(seed, buildBattleParty(state, rules), questStage, rules) : { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel,  };
     // Validate and simulate before charging. Invalid provisional masters must not strand a paid pending battle.
     preparedBattle = simulateBattle(input);
-    await commit(state, { ...state, energy: state.energy - cost }, id, { id, kind, targetId, seed, input, status: 'started' }, startRoom, startRoom?.version ?? null);
+    await commit(state, { ...state, energy: state.energy - cost, ...(questStage ? {questAttempts:{...state.questAttempts,[targetId]:(state.questAttempts?.[targetId]??0)+1},questProgressVersion:QUEST_MASTER_VERSION} : {}) }, id, { id, kind, targetId, seed, input, status: 'started' }, startRoom, startRoom?.version ?? null);
     // A simultaneous retry may have committed another seed under this request ID.
     // Always settle the persisted input, never this caller's discarded candidate.
     [record] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=*`);
@@ -145,12 +148,22 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
     let playerGrowth: Record<string, unknown> | undefined;
     const rewards: Reward[] = []; let firstClear = false, encounterRaidId: string | null = null;
     if (record.kind === 'quest' && battle.outcome === 'win') {
-      const stage = getQuestStage(record.target_id)!;
+      const stage = record.input.questSnapshot ?? getLegacyQuestStage(record.target_id);
+      if (!stage) throw new ApiError('保存されたステージが見つかりません。', 503);
       firstClear = !state.clearedStages.includes(stage.id);
       let rng = record.seed >>> 0;
       const random = () => { rng = (Math.imul(rng, 1664525) + 1013904223) >>> 0; return rng / 4294967296; };
       const luck = record.input.party.reduce((n: number, p: any) => n + p.stats.luk, 0) / 5;
-      rewards.push(...stage.rewards, ...(firstClear ? stage.firstRewards : []), ...stage.rareRewards.filter(r => random() < Math.min(1, (r.chance ?? 0) * (1 + luck / 1000))));
+      let encounterRoll: number | undefined;
+      if (record.input.questMasterVersion === QUEST_MASTER_VERSION) {
+        const settlement = questVictoryRewards(stage, state, record.input.party, record.seed);
+        rewards.push(...settlement.rewards);
+        firstClear = settlement.firstClear;
+        after.questClearCounts = {...after.questClearCounts, [stage.id]:settlement.count};
+        encounterRoll = settlement.encounterRoll;
+      } else {
+        rewards.push(...stage.rewards, ...(firstClear ? stage.firstRewards : []), ...stage.rareRewards.filter((r: Reward) => random() < Math.min(1, (r.chance ?? 0) * (1 + luck / 1000))));
+      }
       const policy = await rewardPolicy();
       for (let i = 0; i < rewards.length; i++) after = grantReward(after, rewards[i], await uuidFor(`reward:${id}:${i}`), policy);
       if (firstClear) after.clearedStages.push(stage.id);
@@ -175,7 +188,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
           };
         } else playerGrowth = { status: "MIGRATION_PENDING", offeredExp: expReward.amount, gainedExp: 0 };
       }
-      if (random() < stage.encounterChance) {
+      if ((encounterRoll ?? random()) < stage.encounterChance && !(await roomsFor(userId)).some(existing => existing.ownerId === userId && existing.status === 'active' && Date.parse(existing.expiresAt) > Date.now() && !existing.territorySnapshot && existing.masterId === 'encounter_flame')) {
         encounterRaidId = await uuidFor(`encounter:${id}`);
         room = createRaidRoom('encounter_flame', userId, encounterRaidId, Date.now()); room.participants[0].name = playerName; version = -1;
       }

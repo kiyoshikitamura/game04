@@ -9,6 +9,7 @@ import { TERRITORY_MASTER, projectTerritory, territoryItems, activeTerritoryCoun
 import RaidView from '@/app/components/redesign/RaidView';
 import BattleView from '@/app/components/redesign/BattleView';
 import { BATTLE_RULES, CHARACTER_MASTERS, EQUIPMENT_MASTERS, buildBattleParty, createInitialState, grantReward } from '@/domain/redesign/masters';
+import {createQuestBattleInput, questEnergyCost, questVictoryRewards} from '@/domain/redesign/questMaster';
 import { QUEST_STAGES, getQuestStage, isQuestStageUnlocked } from '@/domain/redesign/quests';
 import { applyGrowthAction } from '@/domain/redesign/growth';
 import { applyRaidAction, createRaidRoom, getRoomRaidMaster, raidEnemy } from '@/domain/redesign/raid';
@@ -79,11 +80,14 @@ export default function RedesignFixture() {
   async function startQuest(stageId: string): Promise<QuestSettlement> {
     const stage = getQuestStage(stageId);
     if (!stage || !isQuestStageUnlocked(stageId, state.clearedStages)) throw new Error('未解放です。');
-    if (state.energy < stage.energyCost) throw new Error('行動力不足です。QA初期化で戻せます。');
-    const result = simulateBattle({ seed: 917, party, waves: stage.waves, rules: BATTLE_RULES });
-    let next = { ...state, energy: state.energy - stage.energyCost };
+    const cost=questEnergyCost(stage,state);
+    if (state.energy < cost) throw new Error('行動力不足です。QA初期化で戻せます。');
+    const result = simulateBattle(createQuestBattleInput(917, party, stage, BATTLE_RULES));
+    let next: RedesignState = { ...state, energy: state.energy - cost,questAttempts:{...state.questAttempts,[stageId]:(state.questAttempts?.[stageId]??0)+1} };
     const firstClear = result.outcome === 'win' && !state.clearedStages.includes(stageId);
-    const rewards = result.outcome === 'win' ? [...stage.rewards, ...(firstClear ? stage.firstRewards : [])] : [];
+    const settled=questVictoryRewards(stage,state,party,917);
+    const rewards = result.outcome === 'win' ? settled.rewards : [];
+    if(result.outcome==='win')next.questClearCounts={...next.questClearCounts,[stageId]:settled.count};
     rewards.forEach((reward, index) => { next = grantReward(next, reward, `qa-${stageId}-${index}`); });
     if (result.outcome === 'win') next.clearedStages = [...new Set([...next.clearedStages, stageId])];
     setState(next);
