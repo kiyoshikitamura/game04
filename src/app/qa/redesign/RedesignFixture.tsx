@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
 import { GameContext } from '@/app/context/GameContext';
-import HomeView from '@/app/components/redesign/HomeView';
+import RedesignShell from '@/app/components/redesign/RedesignShell';
 import QuestView, { type QuestSettlement } from '@/app/components/redesign/QuestView';
 import GrowthView from '@/app/components/redesign/GrowthView';
 import TerritoryView from '@/app/components/redesign/TerritoryView';
@@ -101,6 +101,7 @@ export default function RedesignFixture() {
   }
   const territory = projectTerritory(TERRITORY_MASTER, { experience: territoryExp }, territoryItems(state), activeTerritoryCount(LOCAL_ID, rooms));
   const game = {
+    ownedHomeCosmeticIds: [], setShowAccountAuthenticationModal: noop, setInboxPanelTab: noop, setShowInboxPanel: noop, setShowSettingsPanel: noop,
     session: null, username: '確認用の城主', userLevel: 1, playCyberSe: noop,
     directMessages: [], dmUnreadConversations: [], dmUnreadTotal: 0, dmRecipientId, setDmRecipientId,
     guildChats, chatInput, setChatInput, chatCooldown: 0, chatSending: false,
@@ -108,11 +109,9 @@ export default function RedesignFixture() {
     handleSendChat: async () => { if (chatInput.trim()) setGuildChats(previous => [...previous, { id: `qa-${Date.now()}`, author_name: '確認用の城主', content: chatInput, user_id: LOCAL_ID, created_at: new Date().toISOString() }]); setChatInput(''); },
     handleSendDirectMessage: async () => { setMessage('DMは確認用画面では送信されません。'); },
   };
-  return <GameContext.Provider value={game}><div className="rd-shell">
-    <aside style={{ padding: 12, background: '#46361e', fontSize: 12 }}><strong>表示確認専用・ローカル操作</strong><p>保存・API接続・認証・決済は行いません。再読込で初期化されます。</p><div className="rd-tabs">{[['home','Home'],['quest','Quest'],['character','Growth'],['raid','Raid'],['territory','領土侵攻'],['battle','Battle']].map(([id,label]) => <button key={id} className={tab === id ? 'active' : ''} onClick={() => navigate(id)}>{label}</button>)}</div><label><input type="checkbox" checked={vip} onChange={event => setVip(event.target.checked)} /> VIP表示確認</label><button className="rd-button" onClick={() => { setState(fixtureState()); setBattle(null); setMessage('QA状態を初期化しました。'); }}>QA初期化</button><button className="rd-button" onClick={() => setState(previous => ({ ...previous, materials: { ...previous.materials, unlock: 0 } }))}>QA 開催アイテム0</button><button className="rd-button" onClick={() => { setTerritoryExp(300); setState(previous => ({ ...previous, materials: { ...previous.materials, unlock: 5 } })); }}>QA 開催枠とアイテム補充</button><p>銭 {state.cash} ／ 行動力 {state.energy}/{state.energyMax}</p>{message && <p role="status">{message}</p>}</aside>
-    <main className="rd-main">
+  return <GameContext.Provider value={game}><RedesignShell state={state} onAction={action} activeTab={tab} onNavigate={navigate} previewOnly hideChrome={Boolean(battle) || tab === 'battle'} encounterRaid={rooms[0] ? { id: rooms[0].id, name: '炎影の守将', expiresAt: rooms[0].expiresAt } : null} notifications={
+    <aside style={{ padding: 12, background: '#46361e', fontSize: 12 }}><strong>表示確認専用・ローカル操作</strong><p>保存・API接続・認証・決済は行いません。再読込で初期化されます。</p><div className="rd-tabs">{[['home','Home'],['quest','Quest'],['character','Growth'],['raid','Raid'],['territory','領土侵攻'],['battle','Battle']].map(([id,label]) => <button key={id} className={tab === id ? 'active' : ''} onClick={() => navigate(id)}>{label}</button>)}</div><label><input type="checkbox" checked={vip} onChange={event => setVip(event.target.checked)} /> VIP表示確認</label><button className="rd-button" onClick={() => { setState(fixtureState()); setBattle(null); setMessage('QA状態を初期化しました。'); }}>QA初期化</button><button className="rd-button" onClick={() => setState(previous => ({ ...previous, materials: { ...previous.materials, unlock: 0 } }))}>QA 開催アイテム0</button><button className="rd-button" onClick={() => { setTerritoryExp(300); setState(previous => ({ ...previous, materials: { ...previous.materials, unlock: 5 } })); }}>QA 開催枠とアイテム補充</button><p>銭 {state.cash} ／ 行動力 {state.energy}/{state.energyMax}</p>{message && <p role="status">{message}</p>}</aside>}>
       {battle ? <BattleView result={battle} vipActive={vip} title="レイド・ローカル確認" onComplete={() => setBattle(null)} /> : <>
-        {tab === 'home' && <HomeView state={state} onAction={action} onNavigate={navigate} previewOnly encounterRaid={rooms[0] ? { id: rooms[0].id, name: '炎影の守将', expiresAt: rooms[0].expiresAt } : null} />}
         {tab === 'quest' && <QuestView state={state} party={party} vipActive={vip} onStart={startQuest} onOpenDeck={() => navigate('character')} onOpenRaid={id => { setRoomId(id); navigate('raid'); }} />}
         {tab === 'character' && <GrowthView state={state} onAction={action} />}
         {tab === 'territory' && <TerritoryView territory={territory} rooms={rooms} userId={LOCAL_ID} onOpenRoom={id => { setRoomId(id); navigate('raid'); }} onHost={async destinationId => { const destination = territory.destinations.find(entry => entry.id === destinationId); if (!destination?.canHost) throw new Error(destination?.reasons.join(' ') || '未設定です。'); const snapshot = createTerritorySnapshot(TERRITORY_MASTER, destinationId); const room = createRaidRoom(destination.raidMasterId, LOCAL_ID, `qa-territory-${Date.now()}`, Date.now(), snapshot); setRooms(previous => [...previous, room]); setState(previous => ({ ...previous, materials: { ...previous.materials, unlock: previous.materials.unlock - destination.itemCount } })); setRoomId(room.id); navigate('raid'); }} />}
@@ -120,7 +119,6 @@ export default function RedesignFixture() {
         {tab === 'battle' && <BattleView key={`${vip}`} result={sampleBattle} vipActive={vip} onComplete={() => navigate('quest')} title="Wave・ローカル確認" />}
         {!['home','quest','character','raid','territory','battle'].includes(tab) && <div className="rd-panel"><p>この共通機能は確認用画面では接続しません。</p><button className="rd-button" onClick={() => navigate('home')}>Homeへ</button></div>}
       </>}
-    </main>
-  </div></GameContext.Provider>;
+  </RedesignShell></GameContext.Provider>;
 }
 

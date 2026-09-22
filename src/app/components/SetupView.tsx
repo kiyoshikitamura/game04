@@ -46,7 +46,7 @@ const WORLD_INTRO_ASSETS = [
   "/characters/go_transparent_asset.png",
   "/characters/karen_transparent_asset.png",
   "/characters/kaede_transparent_asset.png",
-  "/branding/tribe-neon-logo.png",
+  "/creative/branding/logo.png",
 ].map((src) => ({ src, required: true }));
 const BACKGROUND_HOLD_MS = 450;
 const CHARACTER_REVEAL_INTERVAL_MS = 850;
@@ -178,7 +178,7 @@ export default function SetupView() {
               </div>
             ))}
           </div>
-          {worldStage === 2 && <img className="setup-world-logo" src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" />}
+          {worldStage === 2 && <img className="setup-world-logo" src="/creative/branding/logo.png" alt="戦国姫艶武" />}
           <div className="setup-world-copy"><TypewriterText key={worldStage} text={stage.text} speedMs={34} /></div>
           <div className="setup-world-progress" aria-label={`${worldStage + 1} / ${WORLD_STAGES.length}`}>{WORLD_STAGES.map((_, index) => <i key={index} className={index === worldStage ? "is-active" : ""} />)}</div>
           <button className="setup-world-tap" onClick={advanceWorldStage} disabled={!worldStageComplete} aria-label={`Page ${worldStage + 1} を進む`}>TAP <span aria-hidden="true">⌄</span></button>

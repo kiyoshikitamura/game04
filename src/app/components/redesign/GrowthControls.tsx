@@ -1,4 +1,5 @@
 'use client';
+import './creative.css';
 import { useState } from 'react';
 import type { ExpSize, RedesignState } from '@/domain/redesign/types';
 import { CHARACTER_MASTERS, getSkillSlots } from '@/domain/redesign/masters';
@@ -17,7 +18,7 @@ export function LevelGrowthControls({ state, kind, id, run, busy }: { state: Red
   const owned = kind === 'character' ? state.characters.find(c => c.id === id) : state.equipment.find(e => e.instanceId === id);
   return <fieldset disabled={busy}><legend>{kind === 'character' ? '武将' : '装備'}EXP育成（最大Lv100）</legend>
     <p>現在Lv.{owned?.level}・累計EXP {owned?.exp ?? 0}・繰越EXP {inventory.carryExp[kind].toLocaleString()}</p>
-    {EXP_SIZES.map(size => <label className="g4g-row" key={size}>EXP{labels[size]}（{EXP_VALUES[size].toLocaleString()}） 所持{inventory.expItems[kind][size]}<input aria-label={`${kind === 'character' ? '武将' : '装備'}EXP${labels[size]}投入数`} type="number" min={0} max={inventory.expItems[kind][size]} step={1} value={items[size] ?? 0} onChange={e => setItems({ ...items, [size]: Number(e.target.value) })}/></label>)}
+    {EXP_SIZES.map(size => <label className="g4g-row" key={size}>{size !== 'xlarge' && <img className="g4-growth-item-icon" src={`/items/${kind === 'character' ? 'char' : 'equip'}_exp_${({small:'s',medium:'m',large:'l'} as const)[size]}.png`} alt=""/>}EXP{labels[size]}（{EXP_VALUES[size].toLocaleString()}） 所持{inventory.expItems[kind][size]}<input aria-label={`${kind === 'character' ? '武将' : '装備'}EXP${labels[size]}投入数`} type="number" min={0} max={inventory.expItems[kind][size]} step={1} value={items[size] ?? 0} onChange={e => setItems({ ...items, [size]: Number(e.target.value) })}/></label>)}
     <button type="button" onClick={() => setItems({ ...inventory.expItems[kind] })}>所持数を一括選択</button><button type="button" onClick={() => setItems({})}>選択を解除</button>
     {quote ? <><p>Lv.{quote.levelBefore} → {quote.levelAfter} / 解放上限{quote.levelCap}</p><p>実消費：{EXP_SIZES.map(s => `${labels[s]}${quote!.consumedItems[s]}個`).join('・')}</p><p>必要銭 {quote.cash.toLocaleString()} / 所持 {state.cash.toLocaleString()}</p><p>繰越EXP {quote.carryBefore.toLocaleString()} → {quote.carryAfter.toLocaleString()}</p><button disabled={busy || state.cash < quote.cash} onClick={() => void run(`${kind}_level`, { [kind === 'character' ? 'characterId' : 'instanceId']: id, items })}>この内容で育成する</button>{state.cash < quote.cash && <p>銭が不足しています。投入数を変更してください。</p>}</> : <p role="status">{error}</p>}
   </fieldset>;

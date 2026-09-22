@@ -215,12 +215,12 @@ export default function CommonModals() {
                   aria-label="戦国姫艶武 ガチャ結果を開く"
                   data-gacha-logo-gate
                 >
-                  <img src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" />
+                  <img src="/creative/branding/logo.png" alt="戦国姫艶武" />
                   <span>TAP!</span>
                 </button>
               ) : scoutAnimationState === "READY" ? (
                 <div className={`gacha-opening-release ${tutorialPullBurst ? "is-ready" : ""}`} role="status" aria-label="ガチャ結果を表示中">
-                  <img src="/branding/tribe-neon-logo.png" alt="" aria-hidden="true" />
+                  <img src="/creative/branding/logo.png" alt="" aria-hidden="true" />
                   <i />
                 </div>
               ) : (

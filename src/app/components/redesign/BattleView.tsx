@@ -1,8 +1,10 @@
 'use client';
+import { characterArt } from '@/theme/creativeAssets';
 import { useEffect, useState } from 'react';
 import type { BattleResult, BattleUnitState } from '../../../domain/redesign/battle';
 import type { BattleUnit, SkillMaster } from '../../../domain/redesign/types';
 import styles from './BattleView.module.css';
+import ElementBadge from './ElementBadge';
 import { STATUS_LABELS, TARGET_LABELS, passiveDescription, skillConditionText, READINESS_REASONS, CLEANSE_LABELS, skillDescription, LEGACY_SKILL_MAPPING_NOTICE } from './battleLabels';
 
 const elements = { fire: '火', water: '水', earth: '土', wind: '風', light: '光', dark: '闇' };
@@ -52,9 +54,9 @@ export function BattleView({ result, vipActive, onComplete, title = '合戦', ra
     const unit = lookup(state.id); if (!unit) return null;
     return <div className={`${enemy ? styles.enemy : styles.member} ${state.hp <= 0 ? styles.dead : ''} ${frame.actorId === state.id ? styles.active : ''}`} key={state.id}>
       <button className={styles.unitButton} onClick={() => setDetail({ unit, state })} aria-label={`${unit.name}の戦闘詳細`}>
-        <img src={state.image || unit.image} alt="" className={enemy ? styles.enemyImage : styles.memberImage} />
+        {characterArt(unit, enemy ? 'battle' : 'card') ? <img src={characterArt(unit, enemy ? 'battle' : 'card')} alt="" className={enemy ? styles.enemyImage : styles.memberImage} /> : <span className={styles.enemyImage} role="img" aria-label={`${unit.name}の画像は未接続`}>画像未接続</span>}
         <span className={styles.unitName}>{!enemy && `${order + 1}. `}{unit.name}</span>
-        <span className={styles.level}>Lv.{unit.level} <b data-element={unit.element}>{elements[unit.element]}</b></span>
+        <span className={styles.level}>Lv.{unit.level} <ElementBadge element={unit.element}/></span>
         <span className={styles.hp}><span style={{ width: meterWidth(state.hp, state.maxHp) }} /></span>
         <span className={styles.hpNumber}>{state.hp.toLocaleString()} / {state.maxHp.toLocaleString()}</span>
         {enemy && <span className={styles.count}>{state.hp > 0 ? `あと ${state.count}` : '撃破'}</span>}

@@ -63,8 +63,8 @@ export const HOME_BOOT_ASSETS = SCREEN_ASSET_MANIFESTS.home.map((asset) => asset
  * release roster here.
  */
 export const BOOT_CRITICAL_ASSETS: AssetRequest[] = [
-  { src: "/branding/title-key-visual.png", required: true },
-  { src: "/branding/tribe-neon-logo.png", required: true },
+  { src: "/creative/branding/key-visual.png", required: true },
+  { src: "/creative/branding/logo.png", required: true },
   { src: "/bg/bg_street_shinjuku.jpg", required: true },
   { src: "/characters/ageha_transparent_asset.png", required: true },
 ];
@@ -106,7 +106,7 @@ export const TUTORIAL_STEP_ASSET_MANIFESTS: Record<string, AssetRequest[]> = {
     "/branding/tutorial/tutorial_world_street_bg.png",
     "/characters/reiji_transparent_asset.png", "/characters/ageha_transparent_asset.png",
     "/characters/go_transparent_asset.png", "/characters/karen_transparent_asset.png",
-    "/characters/kaede_transparent_asset.png", "/branding/tribe-neon-logo.png",
+    "/characters/kaede_transparent_asset.png", "/creative/branding/logo.png",
   ]),
   FREE_GACHA: requiredAssets([
     ...FRAME_ASSETS,

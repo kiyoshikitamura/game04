@@ -1,4 +1,5 @@
 'use client';
+import { characterArt } from '@/theme/creativeAssets';
 import { useState } from 'react';
 import type { BattleUnit, SkillMaster } from '@/domain/redesign/types';
 import CanonicalDialog from '../ui/CanonicalDialog';
@@ -19,7 +20,7 @@ export default function PreparationModal({ party, title, energyCost, energy, bus
     ]}>
       <h3>{title}</h3><p className="rq-muted">行動順：左 → 右</p>
       <div className="rq-party">{party.map((unit, index) => <button type="button" key={unit.id} onClick={() => setDetail(unit)} aria-label={`${index + 1}番 ${unit.name}のスキル・パッシブ`}>
-        <span className="rq-order">{index + 1}</span><img src={unit.image} alt="" /><strong>{unit.name}</strong><span>Lv.{unit.level}</span><span className={`rq-element rq-element-${unit.element}`}>{ELEMENT_LABELS[unit.element]}</span><small>HP {unit.stats.hp.toLocaleString()}</small>
+        <span className="rq-order">{index + 1}</span><img src={characterArt(unit, 'card')} alt="" /><strong>{unit.name}</strong><span>Lv.{unit.level}</span><span className={`rq-element rq-element-${unit.element}`}>{ELEMENT_LABELS[unit.element]}</span><small>HP {unit.stats.hp.toLocaleString()}</small>
       </button>)}</div>
       <p className="rq-total-sp">パーティ共通SP最大値 <strong>{commonSpMax ?? '開催時ルールを適用'}</strong></p>
       <p>消費行動力 {energyCost} ／ 所持 {energy}</p>

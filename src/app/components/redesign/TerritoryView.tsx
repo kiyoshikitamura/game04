@@ -1,4 +1,5 @@
 'use client';
+import { characterArt } from '@/theme/creativeAssets';
 import { useEffect, useRef, useState } from 'react';
 import type { RaidRoom } from '@/domain/redesign/types';
 import type { TerritoryProjection } from '@/domain/redesign/territory';
@@ -33,7 +34,7 @@ export default function TerritoryView({ territory, rooms, userId, onHost, onOpen
     <h2>侵攻先</h2>
     {territory?.destinations.length === 0 && <p className="rd-panel">侵攻先は準備中です。</p>}
     {territory?.destinations.map(entry => <section key={entry.id} className="rd-panel rd-territory-destination">
-      <img className="rd-territory-enemy" src={entry.raidMaster.enemy.image} alt={entry.raidMaster.enemy.name} />
+      {characterArt(entry.raidMaster.enemy, 'battle') && <img className="rd-territory-enemy" src={characterArt(entry.raidMaster.enemy, 'battle')} alt={entry.raidMaster.enemy.name} />}
       <div><h3>{entry.castle}</h3><strong>{entry.name}</strong><p>{entry.difficulty} · {raidElementLabels[entry.raidMaster.enemy.element]}属性</p><p>守将：{entry.raidMaster.enemy.name}</p><p>{entry.raidMaster.enemy.skills.map(skill => skill.description || skill.name).join(' ／ ')}</p></div>
       <div className="rd-territory-conditions"><p>開催期間 {duration(entry.durationMinutes)} · 最終ボスLv.{entry.raidMaster.maxLevel}</p><p>必要領土侵攻レベル {entry.requiredLevel}</p><p>開催アイテム {entry.itemName} ×{entry.itemCount}（所持 {entry.ownedItemCount}）</p><p>入手方法：{entry.itemSource}</p><h4>参加報酬</h4><ul>{entry.raidMaster.participationRewards.map((reward, index) => <li key={index}>{raidRewardLabel(reward)}</li>)}</ul><h4>各ボスLvの討伐報酬</h4><ul>{entry.raidMaster.defeatRewards.map((reward, index) => <li key={index}>{raidRewardLabel(reward)}</li>)}</ul><p>侵攻クリア時の主催者経験値 {entry.clearExp.toLocaleString()}（クリア時3勝が必要）</p>
       {!entry.canHost && <ul className="rd-territory-reasons">{entry.reasons.map(reason => <li key={reason}>{reason}</li>)}</ul>}

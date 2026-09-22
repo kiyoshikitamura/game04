@@ -1,4 +1,5 @@
 'use client';
+import { characterArt } from '@/theme/creativeAssets';
 import { useEffect, useRef, useState } from 'react';
 import { CHARACTER_MASTERS, EQUIPMENT_MASTERS } from '@/domain/redesign/masters';
 import { QUEST_AREAS, QUEST_STAGES, getQuestStage, isQuestStageUnlocked, nextQuestStage } from '@/domain/redesign/quests';
@@ -84,7 +85,7 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
     </>}
     {selected && modal === 'info' && <div className="redesign-quest-dialog"><CanonicalDialog title={`${QUEST_AREAS.find(entry => entry.id === selected.areaId)?.index}-${selected.index} ${selected.name}`} onClose={() => setModal(null)} actions={[{ label: '閉じる', onClick: () => setModal(null) }, { label: '挑戦', semantic: 'primary', onClick: () => setModal('prepare'), disabled: !isQuestStageUnlocked(selected.id, state.clearedStages) }]}>
       <p>{selected.waves.length} Wave ／ 消費行動力 {selected.energyCost}</p><p className="rq-muted">{selected.description}</p>
-      {selected.waves.map((enemies, index) => <section key={index}><h3>Wave {index + 1}</h3><div className="rq-enemies">{enemies.map(enemy => <article key={enemy.id} className="rq-enemy"><img src={enemy.image} alt="" /><strong>{enemy.name}</strong><span>Lv.{enemy.level}</span><span className={`rq-element rq-element-${enemy.element}`}>{ELEMENT_LABELS[enemy.element]}</span></article>)}</div></section>)}
+      {selected.waves.map((enemies, index) => <section key={index}><h3>Wave {index + 1}</h3><div className="rq-enemies">{enemies.map(enemy => <article key={enemy.id} className="rq-enemy">{characterArt(enemy, 'battle') && <img src={characterArt(enemy, 'battle')} alt="" />}<strong>{enemy.name}</strong><span>Lv.{enemy.level}</span><span className={`rq-element rq-element-${enemy.element}`}>{ELEMENT_LABELS[enemy.element]}</span></article>)}</div></section>)}
       <h3>初回報酬{state.clearedStages.includes(selected.id) ? '（獲得済）' : ''}</h3><Rewards rewards={selected.firstRewards} /><h3>通常ドロップ</h3><Rewards rewards={selected.rewards} /><h3>レアドロップ</h3><Rewards rewards={selected.rareRewards} />
     </CanonicalDialog></div>}
     {selected && modal === 'prepare' && <PreparationModal party={party} title={selected.name} energyCost={selected.energyCost} energy={state.energy} busy={busy} error={error} onConfirm={start} onBack={() => setModal('info')} onOpenDeck={onOpenDeck} />}
