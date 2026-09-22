@@ -25,8 +25,8 @@ if (!projectRef || projectRef !== explicitRef) {
   console.error(`Ref mismatch before link: environment=${environment}.`);
   process.exit(1);
 }
-if (new Set(Object.values(targets)).size !== Object.values(targets).length) {
-  console.error("Development, Preview, and Production project refs must all differ.");
+if (!["development", "preview"].includes(environment) || projectRef !== "lrgyllgzcdcphlbmkknc") {
+  console.error("GAME04 currently permits only its dedicated development database (shared by Development and Preview).");
   process.exit(1);
 }
 if (environment === "preview" && process.env.SUPABASE_PREVIEW_PROJECT_REF?.trim() !== projectRef) {

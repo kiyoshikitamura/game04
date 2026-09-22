@@ -13,6 +13,7 @@ import "./TribeChatModal.css";
 
 export default function TribeChatModal() {
   const {
+    setShowInboxPanel, setInboxPanelTab,
     showTribeChatPanel,
     setShowTribeChatPanel,
     session,
@@ -145,13 +146,13 @@ export default function TribeChatModal() {
   };
 
   return createPortal(
-    <FullScreenPanel title={chatChannel === "GUILD" ? `${userGuild?.name || "ギルド"} チャット` : "チャット"} onClose={handleClose} className="tribe-chat-panel">
+    <FullScreenPanel title={chatChannel === "GUILD" ? `${userGuild?.name || "同盟"} チャット` : "チャット"} onClose={handleClose} className="tribe-chat-panel">
       <div className="tribe-modal-container-inner flex-col">
-        {/* チャンネルタブ (全体 / ギルド / DM) */}
+        {/* チャンネルタブ (全体 / 同盟 / DM) */}
         <SubTabNav
           tabs={[
             { id: "GLOBAL", label: `全体${chatUnreadCounts?.GLOBAL ? ` (${chatUnreadCounts.GLOBAL})` : ""}` },
-            { id: "GUILD", label: `ギルド${chatUnreadCounts?.GUILD ? ` (${chatUnreadCounts.GUILD})` : ""}`, disabled: !userGuild },
+            { id: "GUILD", label: `同盟${chatUnreadCounts?.GUILD ? ` (${chatUnreadCounts.GUILD})` : ""}`, disabled: !userGuild },
             { id: "DM", label: `個人(DM)${dmUnreadTotal ? ` (${dmUnreadTotal})` : ""}` }
           ]}
           activeTabId={chatChannel}
@@ -271,7 +272,7 @@ export default function TribeChatModal() {
                   <div key={msg.id} className={`tribe-msg-row ${isSelf ? "self" : "other"}`}>
                     <div className="tribe-msg-header">
                       <div className="tribe-msg-identity"><UserIdentityRow
-                        userName={identity?.username || msg.author_name || "ユーザー"}
+                        userName={msg.is_system ? (msg.author_name || "運営") : identity?.username || msg.author_name || "ユーザー"}
                         guildName={chatChannel === "GLOBAL" ? identity?.guild_name || null : userGuild?.name || null}
                         guildId={chatChannel === "GLOBAL" ? identity?.guild_id : userGuild?.id}
                         leaderCharacterId={leaderCharacterId}
@@ -283,7 +284,7 @@ export default function TribeChatModal() {
                     {msg.reply_to_message_id && (
                       <div className="tribe-msg-reply-source">返信先のメッセージ</div>
                     )}
-                    <div className="tribe-msg-bubble">{msg.content || ""}<RaidRescueLink rescueId={msg.raid_rescue_id} entry={rescueCards.byId.get(msg.raid_rescue_id)} status={rescueCards.statusFor(msg.raid_rescue_id)} source={chatChannel === "GUILD" ? "guild_chat" : "activity"} /></div>
+                    <div className="tribe-msg-bubble">{msg.content || ""}{msg.is_system && String(msg.content || "").startsWith("【運営からのお知らせ】") && <button type="button" onClick={() => { setShowTribeChatPanel(false); setInboxPanelTab("news"); setShowInboxPanel(true); }}>お知らせを見る</button>}<RaidRescueLink rescueId={msg.raid_rescue_id} entry={rescueCards.byId.get(msg.raid_rescue_id)} status={rescueCards.statusFor(msg.raid_rescue_id)} source={chatChannel === "GUILD" ? "guild_chat" : "activity"} /></div>
                     {!msg.is_system && (
                       <button type="button" className="tribe-msg-reply" onClick={() => setChatReplyTo(msg)}>返信</button>
                     )}
@@ -310,7 +311,7 @@ export default function TribeChatModal() {
                   ? `送信制限中 (${chatCooldown}秒)`
                   : chatChannel === "DM"
                   ? "暗号DMを入力..."
-                  : `${chatChannel === "GLOBAL" ? "全体" : "ギルド"}へ送信...`
+                  : `${chatChannel === "GLOBAL" ? "全体" : "同盟"}へ送信...`
               }
               value={chatChannel === "DM" ? localDmText : chatInput}
               onChange={(e) => {

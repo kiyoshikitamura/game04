@@ -1,4 +1,6 @@
 "use client";
+
+import NextImage from "next/image";
 import SeasonHonors, { isSeasonHonorTitle } from "./profile/SeasonHonors";
 import { nextBeginnerAction } from "@/domain/mission/beginnerJourney";
 import { useRaidGuideAvailability } from "@/hooks/useRaidGuideAvailability";
@@ -108,6 +110,7 @@ type HomeBanner = {
 };
 
 function activityDescription(activity: HomeActivity) {
+  if (activity.activity_type === "SYSTEM_NEWS") return String((activity.display_payload as { title?: string } | undefined)?.title || "運営からのお知らせ");
   return describeHomeActivity(activity.activity_type);
 }
 
@@ -129,6 +132,7 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
     unreadMissionsCount,
     guildChats,
     chatUnreadCounts,
+    setShowInboxPanel, setInboxPanelTab,
     setShowMissionPanel,
     setMissionTab,
     setShowLoginBonusModal,
@@ -154,7 +158,8 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
     featureOperatingStates,
     fetchPlayerDetail,
     setErrorMessage,
-    setGuideGachaCategory
+    setGuideGachaCategory,
+    patrolCourses,
   } = useGame();
 
   const equippedTitleName = ownedTitles.find((title: { id: string }) => title.id === titleEquipped)?.name || titleEquipped;
@@ -394,11 +399,17 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
     raidRoomActivityTracker, isRaidActive);
   const raidAvailability = qaState?.raidAvailability ?? observedRaidAvailability;
 
-  const primaryCta = useMemo(() => qaState ? resolveHomeInitialCta({
+  const legacyPrimaryCta = useMemo(() => qaState ? resolveHomeInitialCta({
     ready: qaState.ctaAuthorityReady !== false, tutorialStep: onboardingState?.tutorial_step,
     gameplayAuthorized: onboardingState?.gameplay_authorized, milestones: funnelMilestones, raidAvailability,
+    shinjukuIntermediateFirstClear: patrolCourses?.some((course: any) => course.id === "q_shinjuku_2" && course.is_first_cleared),
   }) : nextBeginnerAction(beginnerJourney, raidAvailability),
-  [beginnerJourney, raidAvailability, qaState, onboardingState, funnelMilestones]);
+  [beginnerJourney, raidAvailability, qaState, onboardingState, funnelMilestones, patrolCourses]);
+
+  const questGuide = (useGame() as any).questGuide;
+  const primaryCta = questGuide?.step !== "DONE"
+    ? { key: 'quest_progression', title: 'クエストを進めよう', tab: 'patrol', action: undefined, disabled: false }
+    : legacyPrimaryCta;
 
   useEffect(() => {
     if (!session?.user?.id || !primaryCta || lastCtaImpression.current === primaryCta.key) return;
@@ -431,13 +442,13 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
 
   // 拠点ID → 表示名・画像ファイル名のマッピング
   const baseMap: { [key: string]: { name: string; file: string } } = {
-    shinjuku: { name: "新宿", file: "shinjuku" },
-    shibuya: { name: "渋谷", file: "shibuya" },
-    ikebukuro: { name: "池袋", file: "ikebukuro" },
-    roppongi: { name: "六本木", file: "roppongi" },
-    akihabara: { name: "秋葉原", file: "akihabara" },
-    kawasaki: { name: "川崎", file: "kawasaki" },
-    yokohama: { name: "横浜", file: "yokohama" },
+    shinjuku: { name: "尾張", file: "shinjuku" },
+    shibuya: { name: "美濃", file: "shibuya" },
+    ikebukuro: { name: "近江", file: "ikebukuro" },
+    roppongi: { name: "京洛", file: "roppongi" },
+    akihabara: { name: "甲斐", file: "akihabara" },
+    kawasaki: { name: "越後", file: "kawasaki" },
+    yokohama: { name: "天下分け目", file: "yokohama" },
   };
   const currentBase = baseMap[currentBaseId || "shinjuku"] || baseMap["shinjuku"];
   const baseName = currentBase.name;
@@ -452,7 +463,7 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
   const isSsrLeader = leaderMaster?.rarity === "SSR";
 
   // 選択中背景URL
-  let bgUrl = `/bg/bg_street_${currentBase.file}.jpg`;
+  let bgUrl = "/bg/sengoku/castle-town.jpg";
   if (selectedBgMode && selectedBgMode !== "auto") {
     const foundBg = PROFILE_BACKGROUNDS.find((b) => b.id === selectedBgMode);
     if (foundBg?.img) bgUrl = foundBg.img;
@@ -521,20 +532,20 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
     {
       id: "login-bonus",
       label: "ボーナス",
-      icon: "/ui/icon_present.png",
+      icon: "/ui/sengoku/01-gift.png",
       onClick: () => setShowLoginBonusModal(true)
     },
     {
       id: "mission",
-      label: "ミッション",
-      icon: "/menu/home_nav_mission.png",
+      label: "任務",
+      icon: "/ui/sengoku/02-scroll-top.png",
       badge: unreadMissionsCount,
       onClick: () => setShowMissionPanel(true)
     },
     {
       id: "ranking",
-      label: "ランキング",
-      icon: "/menu/home_nav_ranking.png",
+      label: "順位",
+      icon: "/ui/sengoku/03-trophy.png",
       onClick: () => navigateTab("ranking")
     }
   ];
@@ -545,7 +556,9 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
   const latestRescueId = latestActivity ? getRaidRescueActivityId(latestActivity) : null;
 
   const handleLatestActivityTap = () => {
-    if (latestRescueId) {
+    if (latestActivity?.activity_type === "SYSTEM_NEWS") {
+      setInboxPanelTab("news"); setShowInboxPanel(true);
+    } else if (latestRescueId) {
       openRaidRescue(latestRescueId);
     } else {
       setShowActivityLog(true);
@@ -634,6 +647,7 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
             />
             <div className="mypage-activity-log-detail">
               <strong>{activityDescription(activity)}</strong>
+              {activity.activity_type === "SYSTEM_NEWS" && <button type="button" onClick={() => { setShowActivityLog(false); setInboxPanelTab("news"); setShowInboxPanel(true); }}>お知らせを見る</button>}
               <RaidRescueLink rescueId={getRaidRescueActivityId(activity)} entry={rescueCards.byId.get(getRaidRescueActivityId(activity) ?? "")} status={rescueCards.statusFor(getRaidRescueActivityId(activity))} source="activity" onOpen={() => setShowActivityLog(false)} />
               {activity.created_at && <time dateTime={activity.created_at}>{activityTimeLabel(activity.created_at)}</time>}
             </div>
@@ -662,7 +676,7 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
           onClick={() => { setShowMoveBaseModal(true); playCyberSe("click"); }}
           aria-label={`${baseName}から拠点移動を開く`}
         >
-          <span>{baseName}</span><small>{currentBase.file.toUpperCase()}</small><b aria-hidden="true">›</b>
+          <span>{baseName}</span><small>拠点移動</small><b aria-hidden="true">›</b>
         </button>
 
         {session?.user?.is_anonymous === true
@@ -685,7 +699,7 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
               className="sub-icon-unit active-scale-effect"
               onClick={() => { item.onClick(); playCyberSe("click"); }}
             >
-              <img src={item.icon} alt={item.label} className="sub-png-icon" />
+              <NextImage width={64} height={64} sizes="32px" src={item.icon} alt={item.label} className="sub-png-icon" />
               <span className="sub-icon-label">{item.label}</span>
               {item.badge && item.badge > 0 ? (
                 <span className="small-badge-alert">{item.badge}</span>
@@ -728,7 +742,7 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
       </div>
 
       <div className="mypage-lower-content">
-        <nav className="mypage-circle-menu-area" data-home-action-assets="existing-fallback" aria-label="メインコンテンツ">
+        <nav className="mypage-circle-menu-area" data-home-action-assets="sengoku-delivered" aria-label="メインコンテンツ">
           {HOME_ACTION_PRESENTATION_SLOTS.map((action) => {
             const status = actionStatus[action.id];
             const highlighted = !primaryCta?.disabled && primaryCta?.tab === action.destination;
@@ -742,7 +756,7 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
                 data-recommended={highlighted ? "true" : undefined}
                 onClick={() => navigateTab(action.destination)}
               >
-                <img src={action.assetPath} alt="" className="circle-menu-img" aria-hidden="true" />
+                <NextImage width={64} height={64} sizes="32px" src={action.assetPath} alt="" className="circle-menu-img" aria-hidden="true" />
                 <span className="circle-menu-label"><strong>{action.label}</strong></span>
                 <span className="circle-menu-status">{status || ""}</span>
               </button>
@@ -751,7 +765,8 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
         </nav>
 
         {primaryCta && <button className="mypage-primary-cta semantic-cta semantic-cta--primary active-scale-effect" onClick={() => void openPrimaryCta()} disabled={activationHandoffPending || primaryCta.disabled} aria-busy={activationHandoffPending}>
-          <strong>{activationHandoffPending ? "確認中…" : `ミッション：${primaryCta.title}`}</strong>
+          <NextImage width={52} height={52} sizes="26px" className="sengoku-mission-icon" src="/ui/sengoku/17-scroll-bottom.png" alt="" /><strong>{activationHandoffPending ? "確認中…" : `任務：${primaryCta.title}`}</strong>
+          {"message" in primaryCta && primaryCta.message && <small>{primaryCta.message}</small>}
           <b aria-hidden="true">›</b>
         </button>}
 
@@ -764,16 +779,16 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
               className="banner-arrow left"
               onClick={() => setBannerIndex((prev) => (prev - 1 + visibleBanners.length) % visibleBanners.length)}
             >
-              ‹
+              <NextImage width={96} height={96} sizes="48px" src="/ui/sengoku/18-arrow-left.png" alt="前のバナー" />
             </button>
             <button
               className={`banner-card${visibleBanners[activeBannerIndex].id === "vip_pass" ? " vip" : ""}`}
               onClick={() => openBanner(visibleBanners[activeBannerIndex].destination)}
               data-banner-id={visibleBanners[activeBannerIndex].id}
               aria-label={visibleBanners[activeBannerIndex].id === "gvg-prep"
-                ? "ギルドバトル準備ミッション"
+                ? "同盟バトル準備ミッション"
                 : visibleBanners[activeBannerIndex].id === "guild-power-ranking"
-                  ? "ギルド総合力ランキング"
+                  ? "同盟総合力ランキング"
                   : visibleBanners[activeBannerIndex].title || "プロモーション"}
               aria-disabled={!visibleBanners[activeBannerIndex].destination}
             >
@@ -793,7 +808,7 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
               className="banner-arrow right"
               onClick={() => setBannerIndex((prev) => (prev + 1) % visibleBanners.length)}
             >
-              ›
+              <NextImage width={96} height={96} sizes="48px" src="/ui/sengoku/19-arrow-right.png" alt="次のバナー" />
             </button>
           </div>
           <div className="banner-dots">
@@ -824,8 +839,8 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
       </div>
 
       {showGuildRankingCampaign && <CanonicalDialog
-        title="プレオープン限定 ギルド総合力ランキング"
-        ariaLabel="プレオープン限定ギルド総合力ランキングのご案内"
+        title="プレオープン限定 同盟総合力ランキング"
+        ariaLabel="プレオープン限定同盟総合力ランキングのご案内"
         size="large"
         onClose={() => setShowGuildRankingCampaign(false)}
         loading={!guildRankingVisualReady}
@@ -837,14 +852,14 @@ function MainMyPage({ qaState }: { qaState?: HomeTabQaState }) {
         <div className="campaign-keyvisual-dialog">
           <img
             src="/promotion/guild_power_ranking_keyvisual.webp?v=20260905"
-            alt="ギルド総合力ランキング"
+            alt="同盟総合力ランキング"
             onLoad={(event) => {
               const image = event.currentTarget;
               if (typeof image.decode === "function") void image.decode().catch(() => undefined).finally(() => setGuildRankingVisualReady(true));
               else setGuildRankingVisualReady(true);
             }}
           />
-          <p>ギルドメンバー全員のメインデッキ総合力で順位が決まります。<br />報酬は限定ギルド装飾のみで、総合力やバトル性能には影響しません。</p>
+          <p>同盟メンバー全員のメインデッキ総合力で順位が決まります。<br />報酬は限定同盟装飾のみで、総合力やバトル性能には影響しません。</p>
         </div>
       </CanonicalDialog>}
 

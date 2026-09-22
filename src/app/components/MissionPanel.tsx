@@ -153,8 +153,8 @@ export default function MissionPanel() {
   const available = listMissions.filter((m: any) => m.status === "CLEAR");
   const pending = listMissions.filter((m: any) => m.status === "IN_PROGRESS");
   const fallbackCta = (m: any) => {
-    if (m.id === "MIS_N_P010") return { ...m, ctaTab: "guild", ctaAction: null, ctaLabel: "TRIBEへ" };
-    if (needsMissionGuild(m) && !userGuildMember?.guild_id) return { ...m, ctaTab: "guild", ctaAction: null, ctaLabel: "ギルドを探す" };
+    if (m.id === "MIS_N_P010") return { ...m, ctaTab: "guild", ctaAction: null, ctaLabel: "同盟へ" };
+    if (needsMissionGuild(m) && !userGuildMember?.guild_id) return { ...m, ctaTab: "guild", ctaAction: null, ctaLabel: "同盟を探す" };
     if (m.ctaTab || m.ctaAction) return m;
     const type = String(m.triggerType || "");
     const route = type.includes("GACHA") ? ["gacha", "ガチャへ"]
@@ -162,7 +162,7 @@ export default function MissionPanel() {
       : type.startsWith("QUEST") ? ["patrol", "クエストへ"]
       : type.startsWith("PVP") ? ["pvp", "バトルへ"]
       : type.startsWith("RAID") ? ["raid", "レイドへ"]
-      : type.startsWith("GUILD") ? ["guild", "ギルドへ"] : null;
+      : type.startsWith("GUILD") ? ["guild", "同盟へ"] : null;
     return route ? { ...m, ctaTab: route[0], ctaLabel: route[1] } : m;
   };
   const dateLabel = (value: string) => {
@@ -173,7 +173,7 @@ export default function MissionPanel() {
     const m = fallbackCta(mission);
     const expired = missionClaimExpired(m, now);
     const eventEnded = m.category === "SPECIAL" && missionProgressEnded(m, now);
-    const unavailable = needsMissionGuild(m) && !userGuildMember?.guild_id ? "ギルド未加入"
+    const unavailable = needsMissionGuild(m) && !userGuildMember?.guild_id ? "同盟未加入"
       : (m.ctaTab === "raid" || String(m.triggerType).startsWith("RAID")) && raidAvailability === "inactive" ? "開催待ち" : null;
     const target = Math.max(1, Number(m.target_value || 1));
     const progress = Math.max(0, Number(m.current_progress || 0));
@@ -234,7 +234,7 @@ export default function MissionPanel() {
           {available.map((m: any) => renderRow(m, missionTab === "NORMAL"))}
           {missionTab === "NORMAL" ? (["PROGRESS", "GROWTH", "BATTLE", "GUILD"] as const).map(group => {
             const rows = pending.filter((m: any) => m.displayGroup === group);
-            return rows.length > 0 && <section key={group} className="mission-current-group"><h3>{{ PROGRESS: "初回目標", GROWTH: "育成", BATTLE: "バトル・レイド", GUILD: "ギルド" }[group]}</h3>{rows.map((m: any) => renderRow(m, true))}</section>;
+            return rows.length > 0 && <section key={group} className="mission-current-group"><h3>{{ PROGRESS: "初回目標", GROWTH: "育成", BATTLE: "バトル・レイド", GUILD: "同盟" }[group]}</h3>{rows.map((m: any) => renderRow(m, true))}</section>;
           }) : pending.map((m: any) => renderRow(m))}
           {missionTab === "NORMAL" && pending.filter((m: any) => !["PROGRESS", "GROWTH", "BATTLE", "GUILD"].includes(m.displayGroup)).map((m: any) => renderRow(m, true))}
           {currentMissions.length === 0 && <div className="mission-empty">{missionTab === "SPECIAL" ? missionEventsError ? "イベントを取得できませんでした。画面を再読み込みしてください" : "現在開催中のイベントミッションはありません" : "ミッションはありません"}</div>}

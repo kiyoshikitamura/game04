@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import LegalPage from "../LegalPage";
+import SupportContact from "../SupportContact";
 
 export const metadata: Metadata = {
-  title: "プライバシーポリシー | TRIBE NEON",
-  description: "TRIBE NEONのプライバシーポリシーです。",
+  title: "プライバシーポリシー | 戦国姫艶武",
+  description: "戦国姫艶武のプライバシーポリシーです。",
 };
 
 type PrivacyPageProps = { searchParams: Promise<{ from?: string }> };
@@ -11,9 +12,9 @@ type PrivacyPageProps = { searchParams: Promise<{ from?: string }> };
 export default async function PrivacyPage({ searchParams }: PrivacyPageProps) {
   const { from } = await searchParams;
   return (
-    <LegalPage title="プライバシーポリシー" updatedAt="2026年9月4日" returnToGame={from === "settings"}>
+    <LegalPage title="プライバシーポリシー" updatedAt="2026年9月18日" returnToGame={from === "settings"}>
       <p>
-        『TRIBE NEON』（以下「本サービス」といいます。）の運営者（以下「運営者」といいます。）は、
+        『戦国姫艶武』（以下「本サービス」といいます。）の運営者（以下「運営者」といいます。）は、
         本サービスにおける利用者の個人情報その他の情報の取扱いについて、以下のとおりプライバシーポリシー
         （以下「本ポリシー」といいます。）を定めます。
       </p>
@@ -107,8 +108,8 @@ export default async function PrivacyPage({ searchParams }: PrivacyPageProps) {
       <h2>第12条（お問い合わせ）</h2>
       <p>
         個人情報の取扱い、開示等の請求その他本ポリシーに関するお問い合わせは、
-        <a href="mailto:original.title.support@gmail.com">original.title.support@gmail.com</a>
-        で受け付けます。
+        <SupportContact />
+        をご確認ください。
       </p>
     </LegalPage>
   );

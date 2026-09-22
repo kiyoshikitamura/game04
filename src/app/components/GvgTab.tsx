@@ -1,5 +1,6 @@
 "use client";
 
+import { game04WorldText } from "@/theme/world";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useGame } from "../context/GameContext";
@@ -184,7 +185,7 @@ export default function GvgTab() {
   const isFinalDay = phase === "FINALS";
   const isOfficialActive = isGvgOpen && officialMatch?.status === "ACTIVE";
 
-  // 自ギルドのアライメントと一致する守備（ホーム）拠点を動的マッピング
+  // 自同盟のアライメントと一致する守備（ホーム）拠点を動的マッピング
   const myGuildAlignment = userGuild?.main_alignment || "";
   const getHomeBaseId = (align: string) => {
     if (align === "ORDER") return "shinjuku";
@@ -195,7 +196,7 @@ export default function GvgTab() {
   };
   const myHomeBaseId = getHomeBaseId(myGuildAlignment);
 
-  // マッチング対戦相手のギルド名を取得
+  // マッチング対戦相手の同盟名を取得
   const opponentGuildName = myGvgMatch
     ? (myGvgMatch.guild_a_id === userGuild?.id ? myGvgMatch.guild_b?.name : myGvgMatch.guild_a?.name) || "対戦組織"
     : "対戦相手なし (NPC)";
@@ -204,7 +205,7 @@ export default function GvgTab() {
     <HubPage
       className="gvg-view"
       eyebrow="GUILD VS GUILD"
-      title="ギルドバトル（GvG）"
+      title="同盟バトル（GvG）"
       description="連合の仲間と役割を分担し、決められた時間に敵対連合と競います。"
       status={readiness.status}
       onRetry={readiness.retry}
@@ -224,7 +225,7 @@ export default function GvgTab() {
             <Badge tone={isOfficialActive ? "danger" : "magenta"}>
               {isOfficialActive ? "BATTLE LIVE" : isGvgOpen ? "PREPARATION" : "COMING SOON"}
             </Badge>
-            <span>{isOfficialActive ? "公式マッチ終了まで" : "次のギルドバトル開始まで"}</span>
+            <span>{isOfficialActive ? "公式マッチ終了まで" : "次の同盟バトル開始まで"}</span>
           </div>
           <strong>{isOfficialActive
             ? formatTimeLeft(new Date(officialMatch.scheduled_end_at))
@@ -232,7 +233,7 @@ export default function GvgTab() {
               ? formatTimeLeft(currentSession.nextStartsAt)
               : "--:--:--"}</strong>
         </div>
-        <p>{userGuild ? `${userGuild.name}のギルドバトル状況` : "ギルドバトルへの参加にはギルド所属が必要です。"}</p>
+        <p>{userGuild ? `${userGuild.name}の同盟バトル状況` : "同盟バトルへの参加には同盟所属が必要です。"}</p>
       </HeroPanel>
 
       <PeriodStatus
@@ -359,12 +360,12 @@ export default function GvgTab() {
                   </div>
                   <div className="border-top-subtle mt-1 pt-1 flex-row-space-between align-center">
                     <div className="flex-col">
-                      <span className="font-size-7 text-secondary">対戦ギルド</span>
+                      <span className="font-size-7 text-secondary">対戦同盟</span>
                       <span className="font-size-9 font-weight-bold text-white">{opponentGuildName}</span>
                     </div>
                     <div className="flex-row-gap-2 align-center">
                       <div className="text-right">
-                        <span className="font-size-7 block text-secondary">自ギルドpt / 相手pt</span>
+                        <span className="font-size-7 block text-secondary">自同盟pt / 相手pt</span>
                         <span className="font-size-9 font-weight-bold text-color-cyan">
                           {myGvgMatch ? `${myGvgMatch.guild_a_id === userGuild.id ? myGvgMatch.guild_a_points : myGvgMatch.guild_b_points} pts` : "0 pts"}
                         </span>
@@ -378,7 +379,7 @@ export default function GvgTab() {
                 </div>
               ) : (
                 <div className="bg-black-40 border-subtle rounded p-2 text-center font-size-8 text-secondary">
-                  現在、ギルドバトルの開催時間外です。メンバーは「守備登録」を行い、次戦に備えてください。
+                  現在、同盟バトルの開催時間外です。メンバーは「守備登録」を行い、次戦に備えてください。
                 </div>
               )}
             </div>
@@ -390,7 +391,7 @@ export default function GvgTab() {
                   <span className="font-size-10 font-weight-bold text-color-cyan block">
                     守備拠点: {BASE_MAP_MASTER.find(b => b.id === myHomeBaseId)?.name || "設定なし"}
                   </span>
-                  <span className="font-size-7 text-secondary">（ギルドのメインアライメントと一致する拠点を防衛します）</span>
+                  <span className="font-size-7 text-secondary">（同盟のメインアライメントと一致する拠点を防衛します）</span>
                 </div>
                 <button
                   onClick={openDefenseModal}
@@ -429,7 +430,7 @@ export default function GvgTab() {
                           <span className={`gvg-rank-badge-${b.rank.toLowerCase()} font-size-8 font-weight-bold px-2 py-0.5 rounded`}>
                             Rank {b.rank}
                           </span>
-                          <span className="font-size-10 font-weight-bold text-white">{b.name}</span>
+                          <span className="font-size-10 font-weight-bold text-white">{game04WorldText(b.name)}</span>
                         </div>
                       </div>
                       <div className="flex-row-gap-2 align-center">
@@ -440,7 +441,7 @@ export default function GvgTab() {
                       </div>
                     </div>
 
-                    <div className="font-size-8 text-secondary line-height-14">{b.description}</div>
+                    <div className="font-size-8 text-secondary line-height-14">{game04WorldText(b.description)}</div>
 
                     {!isHome && (
                       <div className="flex-row-space-between align-center border-top-subtle pt-2 mt-1">
@@ -457,7 +458,7 @@ export default function GvgTab() {
                           </button>
                           <button
                             disabled
-                            onClick={() => startCardBattle("GVG", `${b.name}防衛チーム`, b.id)}
+                            onClick={() => startCardBattle("GVG", `${game04WorldText(b.name)}防衛チーム`, b.id)}
                             className={`sub-btn height-26 px-4 font-size-8 font-weight-bold active-scale-effect ${
                               isRoundActive && vitality >= 20 ? "border-cyan text-color-cyan" : "border-subtle text-secondary opacity-50"
                             }`}
@@ -472,11 +473,11 @@ export default function GvgTab() {
               })}
             </div>
 
-            {/* 練習用: 自ギルドの防衛チームとの演習バトル */}
+            {/* 練習用: 自同盟の防衛チームとの演習バトル */}
             <div className="gvg-base-card p-3 flex-row-space-between align-center border-magenta-subtle" hidden>
               <div className="flex-col">
                 <span className="font-size-9 font-weight-bold text-color-magenta block">防衛演習 (練習バトル)</span>
-                <span className="font-size-7 text-secondary">自ギルドの登録防衛デッキと模擬戦を行い、防衛力を試せます。</span>
+                <span className="font-size-7 text-secondary">自同盟の登録防衛デッキと模擬戦を行い、防衛力を試せます。</span>
               </div>
               <button
                 disabled
@@ -489,7 +490,7 @@ export default function GvgTab() {
           </div>
         ) : (
           <div className="battle-card border-danger text-color-danger font-size-10 text-center p-4">
-            ギルド未所属のため、ギルドバトルに参加できません。
+            同盟未所属のため、同盟バトルに参加できません。
           </div>
         )}
       </div>

@@ -1,0 +1,36 @@
+{
+  "user": "67ee9a06-6d41-4858-8de4-b634e982c67e",
+  "edgeVersion": 3,
+  "stateRead": 200,
+  "parallelState": "one 200 / one 400 (upstream non-JSON); subsequent get_state 200, no duplicate grants",
+  "receiptEvents": 6,
+  "presentClaims": [
+    [
+      200,
+      400
+    ],
+    [
+      200,
+      400
+    ],
+    [
+      200,
+      400
+    ]
+  ],
+  "finalEvents": 12,
+  "characterDelta": 1,
+  "soulDelta": 40,
+  "skillMaterialDelta": 6,
+  "equipmentDelta": 4,
+  "repeatStable": true,
+  "missionDisabled": {
+    "status": 400,
+    "body": {
+      "error": "この任務の報酬は受け取れません。"
+    }
+  },
+  "dbMigration": "20260919144247",
+  "rollbackSql": "PASS",
+  "fixtureScope": "Dedicated QA user only; no production or regular user writes"
+}

@@ -1,3 +1,5 @@
+import { getThemedCharacterName } from "../../theme/characters.ts";
+import { getThemedMasterName } from "../../theme/masters.ts";
 import type { ParticipantState } from "./battleTypes";
 
 export type ServerBattleEvent = {
@@ -25,10 +27,11 @@ export function patrolSnapshotToParticipants(snapshot: unknown, isEnemy: boolean
       : {};
     const id = String(unit.id ?? `${isEnemy ? "enemy" : "ally"}_snapshot_${index}`);
     const hp = Math.max(1, numberValue(stats.hp, 1));
+    const characterId = String(unit.characterId ?? (isEnemy ? id.replace(/^enemy_/, "") : id.replace(/^ally_/, "")));
     const skills = records(unit.skills).map((skill) => ({
       id: String(skill.id ?? "BASIC_ATTACK"),
       skill_card_id: String(skill.id ?? "BASIC_ATTACK"),
-      name: String(skill.name ?? "通常攻撃"),
+      name: getThemedMasterName(String(skill.id ?? "BASIC_ATTACK"), String(skill.name ?? "通常攻撃")),
       power: numberValue(skill.powerPercent, 100),
       effect_type: skill.kind === "HEAL" ? "HEAL" : skill.kind === "BUFF" ? "SUPPORT" : skill.kind === "DEBUFF" ? "JAMMER" : "ATTACK",
       target_type: String(skill.target ?? "ENEMY_SINGLE"),
@@ -36,8 +39,8 @@ export function patrolSnapshotToParticipants(snapshot: unknown, isEnemy: boolean
     }));
     return {
       id,
-      name: String(unit.name ?? (isEnemy ? "ENEMY" : "ALLY")),
-      characterId: String(unit.characterId ?? (isEnemy ? id.replace(/^enemy_/, "") : id.replace(/^ally_/, ""))),
+      name: getThemedCharacterName(characterId, String(unit.name ?? (isEnemy ? "敵将" : "味方"))),
+      characterId,
       equipmentMasterIds: records(unit.equipment).map((entry) => String(entry.equipmentId ?? "")).filter(Boolean),
       alignment: String(unit.alignment ?? (isEnemy ? "CHAOS" : "ORDER")),
       level: Math.max(1, numberValue(unit.level, 1)),

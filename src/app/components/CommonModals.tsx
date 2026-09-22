@@ -31,7 +31,7 @@ const guildAlignmentLabel = (value?: string | null) => ({
 }[String(value || "").toUpperCase()] || "未設定");
 
 const guildRoleLabel = (role?: string | null) => {
-  if (role === "MASTER") return "ギルドマスター";
+  if (role === "MASTER") return "盟主";
   if (role === "SUB_MASTER" || role === "SUBMASTER") return "副団長";
   return "メンバー";
 };
@@ -212,10 +212,10 @@ export default function CommonModals() {
                     setTutorialPullStarted(true);
                     playCyberSe("click");
                   }}
-                  aria-label="TRIBE NEON ガチャ結果を開く"
+                  aria-label="戦国姫艶武 ガチャ結果を開く"
                   data-gacha-logo-gate
                 >
-                  <img src="/branding/tribe-neon-logo.png" alt="戦国姫艶舞" />
+                  <img src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" />
                   <span>TAP!</span>
                 </button>
               ) : scoutAnimationState === "READY" ? (
@@ -332,7 +332,7 @@ export default function CommonModals() {
         />
       )}
 
-      {/* 🏢 ギルド紹介ポップアップ */}
+      {/* 🏢 同盟紹介ポップアップ */}
       {activeGuildDetail && (
         <CanonicalDialog
           title={activeGuildDetail.name}
@@ -347,7 +347,7 @@ export default function CommonModals() {
               </div>
               <div className="guild-meta-section flex justify-between mb-3">
                 <div className="guild-public-master">
-                  <small>ギルドマスター</small>
+                  <small>盟主</small>
                   <UserIdentityRow
                     userName={activeGuildDetail.leaderName}
                     guildName={activeGuildDetail.name} guildId={activeGuildDetail.id}
@@ -409,7 +409,7 @@ export default function CommonModals() {
                   }));
                   await handleDemoJoinGuild(targetGuild.id, targetGuild.name, targetGuild.recruitment_mode === "APPLICATION_REQUIRED" || targetGuild.approval_required);
                 }}>
-                  {pendingRequest ? "申請中" : activeGuildDetail.recruitment_mode === "CLOSED" ? "募集停止" : Number(activeGuildDetail.member_count || 0) >= Number(activeGuildDetail.member_limit || 0) ? "満員" : activeGuildDetail.recruitment_mode === "APPLICATION_REQUIRED" || activeGuildDetail.approval_required ? "加入申請する" : "このギルドに加入する"}
+                  {pendingRequest ? "申請中" : activeGuildDetail.recruitment_mode === "CLOSED" ? "募集停止" : Number(activeGuildDetail.member_count || 0) >= Number(activeGuildDetail.member_limit || 0) ? "満員" : activeGuildDetail.recruitment_mode === "APPLICATION_REQUIRED" || activeGuildDetail.approval_required ? "加入申請する" : "この同盟に加入する"}
                 </OutlawButton>;
               })()}
             </div>

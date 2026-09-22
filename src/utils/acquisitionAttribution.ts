@@ -4,9 +4,11 @@ import {
   type AcquisitionLandingMetadata,
 } from "./acquisitionAttributionMetadata";
 
-const TOKEN_KEY = "tribe_acquisition_journey_token_v1";
-const METADATA_KEY = "tribe_acquisition_landing_metadata_v1";
-const GAME_START_KEY = "tribe_acquisition_game_start_v1";
+const TOKEN_KEY = "game04_acquisition_journey_token_v1";
+const METADATA_KEY = "game04_acquisition_landing_metadata_v1";
+const GAME_START_KEY = "game04_acquisition_game_start_v1";
+// DB RPC contract requires web_v1. GAME04 is isolated by DB and browser storage,
+// while utm_source keeps the shared x/meta/organic/direct dimensions.
 const SOURCE = "web_v1";
 
 export type AcquisitionObservation =
@@ -119,7 +121,7 @@ function getIntroObservations(token: string) {
   if (!observations) {
     observations = {};
     try {
-      const stored = JSON.parse(window.sessionStorage.getItem(`tribe_world_intro_events_v1:${token}`) || "{}");
+      const stored = JSON.parse(window.sessionStorage.getItem(`game04_world_intro_events_v1:${token}`) || "{}");
       for (const event of worldIntroEvents) {
         if (stored[event] === "pending" || stored[event] === "sent") observations[event] = stored[event];
       }
@@ -131,7 +133,7 @@ function getIntroObservations(token: string) {
 
 function saveIntroObservations(token: string) {
   try {
-    window.sessionStorage.setItem(`tribe_world_intro_events_v1:${token}`, JSON.stringify(getIntroObservations(token)));
+    window.sessionStorage.setItem(`game04_world_intro_events_v1:${token}`, JSON.stringify(getIntroObservations(token)));
   } catch { /* 計測の保存失敗で画面遷移を止めない。 */ }
 }
 

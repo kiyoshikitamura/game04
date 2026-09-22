@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import { notifyRedesignRewardChange } from "@/utils/redesignRewardSync";
 import { supabase } from "@/utils/supabase";
 import { VITALITY_OVERFLOW_MAX } from "@/utils/game_constants";
 import { canUseEnergyDrink } from "@/domain/gameplay/canonical/action_resources";
@@ -236,7 +237,7 @@ export function useInventory(
   const refreshPresentClaimState = async (owner: string, isCurrent: () => boolean) => {
     const generation = beginUserItemsProjectionRequest(owner);
     const [wallet, items, inbox, equipment] = await Promise.all([
-      supabase.from("users").select("cash,neon_diamonds").eq("id", owner).single(),
+      supabase.from("users").select("cash,neon_diamonds,level,xp,vitality").eq("id", owner).single(),
       supabase.from("user_items").select("*").eq("user_id", owner),
       supabase.from("presents").select("*").eq("user_id", owner).order("sent_at", { ascending: false }),
       supabase.from("user_equipments").select("*").eq("user_id", owner).order("created_at", { ascending: false }),
@@ -249,6 +250,8 @@ export function useInventory(
     if (!wallet.data) throw new Error("Present wallet projection unavailable");
     setCash(Number(wallet.data.cash));
     setDiamonds(Number(wallet.data.neon_diamonds));
+    onMissionPlayerProgress?.(Number(wallet.data.level), Number(wallet.data.xp));
+    setVitality(Number(wallet.data.vitality));
     projectUserItems(items.data || [], owner, generation);
     onPresentEquipmentProjection?.(equipment.data || [], owner);
     const rows = inbox.data || [];
@@ -258,6 +261,7 @@ export function useInventory(
         title: p.message?.split(":")[0] || "配布アイテム", loading: false,
         expireText: p.expire_at == null ? "期限なし" : hours <= 0 ? "期限切れ" : hours > 24 ? `期限: あと${Math.ceil(hours / 24)}日` : `期限: あと${hours}時間` };
     }));
+    notifyRedesignRewardChange(owner);
     return rows;
   };
 
@@ -354,6 +358,7 @@ export function useInventory(
     setCash(Number(projection.cash));
     setDiamonds(Number(projection.diamonds));
     onMissionPlayerProgress?.(Number(projection.level), Number(projection.xp));
+    notifyRedesignRewardChange(owner);
     return rows;
   };
 

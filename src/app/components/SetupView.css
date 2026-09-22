@@ -20,3 +20,28 @@
 @media(min-width:700px){.setup-ageha-character,.setup-name-ageha{width:304px;justify-self:center;margin-right:0;margin-left:0}}
 @media(max-height:700px){.setup-world-cast{bottom:24%}.setup-world-copy{min-height:78px;padding-top:10px;padding-bottom:10px}.setup-ageha-presentation{grid-template-rows:minmax(210px,38vh) auto auto}}
 @media(prefers-reduced-motion:reduce){.setup-world-motion,.setup-world-character,.setup-world-logo,.setup-world-tap,.setup-world-transition,.tutorial-typewriter-caret{animation-duration:.01ms}}
+
+/* Let long copy, registration errors and short viewports extend the page. */
+.setup-container {
+  align-items: start;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scroll-padding-block: 16px;
+}
+.setup-world-presentation {
+  height: auto;
+  min-height: 100%;
+  grid-template-rows: minmax(180px, 1fr) auto auto auto;
+}
+.setup-ageha-presentation,
+.setup-name-scene {
+  height: auto;
+  min-height: 100%;
+  align-content: start;
+}
+.setup-preload-screen {
+  min-height: 0;
+  overflow-y: auto;
+  align-content: safe center;
+}

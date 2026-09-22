@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import LegalPage from "../LegalPage";
+import SupportContact from "../SupportContact";
 
 export const metadata: Metadata = {
-  title: "利用規約 | TRIBE NEON",
-  description: "TRIBE NEONの利用規約です。",
+  title: "利用規約 | 戦国姫艶武",
+  description: "戦国姫艶武の利用規約です。",
 };
 
 type TermsPageProps = { searchParams: Promise<{ from?: string }> };
@@ -11,10 +12,10 @@ type TermsPageProps = { searchParams: Promise<{ from?: string }> };
 export default async function TermsPage({ searchParams }: TermsPageProps) {
   const { from } = await searchParams;
   return (
-    <LegalPage title="利用規約" updatedAt="2026年9月13日" returnToGame={from === "settings"}>
+    <LegalPage title="利用規約" updatedAt="2026年9月18日" returnToGame={from === "settings"}>
       <p>
-        この利用規約（以下「本規約」といいます。）は、TRIBE NEON運営事務局（以下「運営者」といいます。）が提供する
-        『TRIBE NEON』（以下「本サービス」といいます。）の利用条件を定めるものです。
+        この利用規約（以下「本規約」といいます。）は、本サービスの運営者（以下「運営者」といいます。）が提供する
+        『戦国姫艶武』（以下「本サービス」といいます。）の利用条件を定めるものです。
       </p>
 
       <h2>第1条（適用）</h2>
@@ -139,8 +140,8 @@ export default async function TermsPage({ searchParams }: TermsPageProps) {
       <h2>第18条（お問い合わせ）</h2>
       <p>
         本サービスおよび本規約に関するお問い合わせは、
-        <a href="mailto:original.title.support@gmail.com">original.title.support@gmail.com</a>
-        で受け付けます。
+        <SupportContact />
+        をご確認ください。
       </p>
     </LegalPage>
   );

@@ -297,7 +297,7 @@ export default function BbsTab() {
               ← 一覧に戻る
             </button>
             <span className="bbs-detail-category-badge">
-              {bbsActiveThread.category === "RECRUIT" ? "ギルドメンバー募集" : "攻略＆雑談"}
+              {bbsActiveThread.category === "RECRUIT" ? "同盟メンバー募集" : "攻略＆雑談"}
             </span>
           </div>
 
@@ -359,7 +359,7 @@ export default function BbsTab() {
                 playCyberSe("click");
               }}
             >
-              ギルドメンバー募集
+              同盟メンバー募集
             </button>
             <button
               className={`bbs-category-tab active-scale-effect ${activeCategory === "STRATEGY_CHAT" ? "active" : ""}`}

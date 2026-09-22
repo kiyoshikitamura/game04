@@ -1,3 +1,5 @@
+import { getThemedGachaItemName } from "../../theme/masters";
+
 export const SPECIAL_GACHA_IDS = [
   "CHAR_JUSTICE_EVIL_SPECIAL", "CHAR_ORDER_CHAOS_SPECIAL", "SKILL_SPECIAL", "EQUIP_SPECIAL",
 ] as const;
@@ -8,10 +10,10 @@ export type SpecialGachaItem = {
 };
 export type SpecialGacha = { id: SpecialGachaId; name: string; cost_diamond: number; pity_points?: number; items: SpecialGachaItem[] };
 export const SPECIAL_GACHA_COPY: Record<SpecialGachaId, { title: string; description: string }> = {
-  CHAR_JUSTICE_EVIL_SPECIAL: { title: "正義・悪ガチャ", description: "正義と悪属性のキャラクターのみ出現！" },
-  CHAR_ORDER_CHAOS_SPECIAL: { title: "秩序・混沌ガチャ", description: "秩序と混沌属性のキャラクターのみ出現！" },
-  SKILL_SPECIAL: { title: "スペシャルスキルガチャ", description: "SSRとSRキャラクター専用スキル入り！" },
-  EQUIP_SPECIAL: { title: "スペシャル装備ガチャ", description: "SSRキャラクター専用装備入り！" },
+  CHAR_JUSTICE_EVIL_SPECIAL: { title: "正義・悪 特選登用", description: "正義と悪属性の姫武将のみ出現！" },
+  CHAR_ORDER_CHAOS_SPECIAL: { title: "秩序・混沌 特選登用", description: "秩序と混沌属性の姫武将のみ出現！" },
+  SKILL_SPECIAL: { title: "戦技の特選登用", description: "SSRとSR姫武将専用戦技入り！" },
+  EQUIP_SPECIAL: { title: "武具の特選登用", description: "SSR姫武将専用武具入り！" },
 };
 export type SpecialGachaCatalog = { available: boolean; pity_points: number; pity_cost: number; gachas: SpecialGacha[] };
 export function isSpecialGachaId(id: string): id is SpecialGachaId {
@@ -39,7 +41,9 @@ export function parseSpecialGachaCatalog(value: unknown): SpecialGachaCatalog | 
     }
     if (Math.abs(total - 100) > 0.00001) return null;
   }
-  return ids.size === 4 ? input as SpecialGachaCatalog : null;
+  if (ids.size !== 4) return null;
+  const catalog = input as SpecialGachaCatalog;
+  return { ...catalog, gachas: catalog.gachas.map(gacha => ({ ...gacha, items: gacha.items.map(item => ({ ...item, name: getThemedGachaItemName(item.item_type, item.item_id, item.name) })) })) };
 }
 export function specialTicketId(gacha: SpecialGachaId): string {
   return gacha.startsWith("CHAR_") ? "SPECIAL_TICKET_CHARACTER" : gacha === "SKILL_SPECIAL" ? "SPECIAL_TICKET_SKILL" : "SPECIAL_TICKET_EQUIPMENT";

@@ -1,0 +1,13 @@
+import fs from'node:fs';import{evaluate,judge}from'./repair17-helper.mjs';import{skill}from'./model.mjs';
+const read=p=>JSON.parse(fs.readFileSync(p)),copy=structuredClone,src=read('battle-check/last17-screen.json').results,round=v=>Math.max(1,Math.round(v/10)*10),results=[];
+for(const id of ['7-7','8-3','10-7']){const variants=[];for(let t=0;t<6;t++){const c=copy(src.find(b=>b.id===id).variants[t]),p=c.parties.main,w=c.waves,lb=c.lb,A=Math.max(...p.map(u=>u.stats.atk)),H=p.reduce((s,u)=>s+u.stats.hp,0)/5,D=p.reduce((s,u)=>s+u.stats.def,0)/5,k=t%3,T=Math.floor(t/3);
+ if(id==='7-7'){p[1].skills=[skill('SKD014',lb)];for(const wave of w){wave[0].stats.def=round(A*(.35+.15*k));wave[0].stats.hp=round(A*(4+.5*T));wave.at(-1).actionCount=18;}c.notes.push('解除後に使う主砲を持ち、DEFのある前衛を窓内に突破する');}
+ if(id==='8-3'){for(const wave of w){if(wave.length>=3){for(let j=0;j<wave.length;j++){const e=wave[j];e.stats.hp=round(A*(j===0?8+k:.45+.05*T));e.stats.def=j===0?round(A*.55):0;e.stats.atk=j===0?round(D+H*.04):round(D+H*(.16+.06*k));e.initialCount=8;e.actionCount=9;}}else{wave[0].stats.def=round(A*.55);wave[0].stats.hp=round(A*(3+.5*T));}}c.notes.push('8行動目の後衛2体の割込み前に全体で落とす。単体はDEFのあるボスで使用');}
+ if(id==='10-7'){for(const u of p)u.skills=[];p[0].skills=[skill('SKD045',lb),skill('SKD031',lb)];c.focus=['SKD031'];for(let j=1;j<w.length;j++){w[j][0].stats.def=round(A*(.75+.1*k));w[j][0].stats.hp=round(A*(3+.5*T));}c.notes.push('低HPの本人が自己盾→背水の優先順で2枠を使用。他者への盾配布によるSP消費を止める');}
+ c.parties.control=copy(p);c.parties.direct=copy(p);for(const u of c.parties.control)u.skills=u.skills.filter(s=>!c.focus.includes(s.id));for(const u of c.parties.direct)u.skills=u.skills.map(s=>c.focus.includes(s.id)?skill(({fire:'SKD007',water:'SKD008',earth:'SKD009',wind:'SKD010',light:'SKD011',dark:'SKD012'})[s.element],lb):s);
+ if(id==='8-3'){c.parties.control=copy(p);c.parties.direct=copy(p);for(const u of c.parties.control)u.skills=u.skills.map(s=>s.id==='SKD008'?skill('SKD020',lb):s);for(const u of c.parties.direct)u.skills=u.skills.map(s=>s.id==='SKD020'?skill('SKD008',lb):s);}
+ for(let i=0;i<c.parties.alternative.length;i++)c.parties.alternative[i].skills=copy(p[i].skills);
+ c.tier='mechanic-'+t;const cases={};for(const mode of ['main','control','direct'])cases[mode]=evaluate(c.parties[mode],w,21001,12);variants.push({...c,screen:cases,judgment:judge(cases)});
+ }
+ const best=[...variants].sort((a,b)=>Number(b.judgment.qualifiedScreen)-Number(a.judgment.qualifiedScreen)||b.judgment.score-a.judgment.score)[0];results.push({id,variants,selectedTier:best.tier});console.log(id,best.tier,best.judgment.qualifiedScreen,best.judgment.score);}
+fs.writeFileSync('battle-check/mechanic17-screen.json',JSON.stringify({status:'CANDIDATE_NOT_FIXED',results}));
