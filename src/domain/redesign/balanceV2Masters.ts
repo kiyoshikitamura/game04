@@ -1,3 +1,4 @@
+import localSkillArt from '../../theme/local-skills.json';
 import data from './data/balance-v2.json';
 import type { BalanceV2Config, CharacterMaster, Passive, PassiveType, SkillEffect, SkillMaster, TargetRule, Rarity, Element } from './types';
 export const BALANCE_V2_MASTER_VERSION = data.version;
@@ -43,10 +44,10 @@ export function getBalanceV2Skill(designId:string,lb:number,options:{firstTarget
  else if([53,54,55,62].includes(n))target='first_ally';
  else if(n===69)target='counter_ally';
  else if(n===70)target='dot_ally';
- return {id:s.id,name:`【検証仮称】${s.name}`,image:'/menu/event_banner_placeholder.png',rarity:s.rarity as Rarity,element:s.element as Element,spCost:Math.ceil(s.sp0+(s.sp10-s.sp0)*ratio),condition:{type:'always'},target,fixedTarget:[56,72].includes(n)||([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,28,29,30,31].includes(n)&&(options.firstTargetMode??'fixed')==='fixed'),effects,description:`${s.designId} / LB${lb} / ${s.targetDescription}${[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,28,29,30,31].includes(n)?`（先頭狙い解釈未決・検証用:${options.firstTargetMode??'fixed'}）`:''}。名称・画像未対応。数値は検証用仮値 (${data.version})。ガチャ未接続。`};
+ return {id:s.id,name:`【検証仮称】${s.name}`,image:localSkillArt.find(a=>a.designId===s.designId)?.path ?? '/menu/event_banner_placeholder.png',rarity:s.rarity as Rarity,element:s.element as Element,spCost:Math.ceil(s.sp0+(s.sp10-s.sp0)*ratio),condition:{type:'always'},target,fixedTarget:[56,72].includes(n)||([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,28,29,30,31].includes(n)&&(options.firstTargetMode??'fixed')==='fixed'),effects,description:`${s.designId} / LB${lb} / ${s.targetDescription}${[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,28,29,30,31].includes(n)?`（先頭狙い解釈未決・検証用:${options.firstTargetMode??'fixed'}）`:''}。名称は仮称・画像は既存素材を割当済み。数値は検証用仮値 (${data.version})。ガチャ未接続。`};
 }
 export const BALANCE_V2_SKILL_CANDIDATES:SkillMaster[]=data.skills.map(s=>getBalanceV2Skill(s.designId,0));
-export const BALANCE_V2_SKILL_ID_MAPPING=data.skills.map(s=>({designId:s.designId,candidateId:s.id,legacyId:null,imageStatus:s.imageStatus,status:'QA_ONLY_NOT_GACHA'}));
+export const BALANCE_V2_SKILL_ID_MAPPING=data.skills.map(s=>({designId:s.designId,candidateId:s.id,legacyId:null,imageStatus:localSkillArt.some(a=>a.designId===s.designId)?'LOCAL_ART_ASSIGNED':s.imageStatus,status:'QA_ONLY_NOT_GACHA'}));
 /** Fixed attack-role body anchors. Interpolation between anchors is preview-only; awakening is not added twice. */
 export const BALANCE_V2_ATTACK_ANCHORS:Record<Rarity,{hp:number[];def:number[];atk:number[]}>= {
  N:{hp:[600,4600,13600],def:[30,380,1230],atk:[100,200,380,600,850,1150,1500,1880,2290,2730,3200]},

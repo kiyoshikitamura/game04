@@ -1,3 +1,5 @@
+import localSkills from '@/theme/local-skills.json';
+
 const SKILL_ICON_SLUGS = [
   "street_punch","quick_shield","noise_heal","step_dash","poison_needle","iron_guard","toxic_slang","smart_snipe","drug_injection","light_flash",
   "meditate","lucky_shoot","charge_slash","blunt_sweep","recovery_program","smoke_screen","acid_spray","jamming_wave","impulse_barrier","indomitable_will",
@@ -9,6 +11,8 @@ const SKILL_ICON_SLUGS = [
 ] as const;
 
 export function getCanonicalSkillIcon(skillId: unknown): string | undefined {
+  const local = localSkills.find(s => s.designId === skillId || s.candidateId === skillId);
+  if (local) return local.path;
   const match = /^SKILL_(\d{3})$/.exec(String(skillId || ""));
   if (!match) return undefined;
   const index = Number(match[1]) - 1;
