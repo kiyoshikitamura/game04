@@ -27,6 +27,7 @@
   scroll-padding-bottom: calc(94px + env(safe-area-inset-bottom, 0px));
 }
 .rd-shell-battle { padding-bottom: max(20px, env(safe-area-inset-bottom, 0px)); }
+.rd-menu-button{border:1px solid #b78b50;background:#1b1115;color:#f8e6c0;padding:8px 10px;font-size:12px}.rd-auth-link{font-size:10px;color:#e6c486;margin-left:4px}.rd-qa-backdrop{position:fixed;inset:0;z-index:1000;display:flex;justify-content:flex-end;background:#08050bb8}.rd-qa-panel{width:min(88vw,330px);height:100%;padding:18px;background:linear-gradient(160deg,#35232a,#171019);border-left:1px solid #c0975b;box-shadow:-12px 0 35px #000b;color:#f7ead0;overflow:auto}.rd-qa-title{display:flex;justify-content:space-between;align-items:center;font-size:20px}.rd-qa-title button{border:1px solid #a57a46;background:#25151a;color:#ffe6b2;font-size:20px;width:36px;height:36px}.rd-qa-muted{font-size:11px;color:#ccb98f;line-height:1.6}.rd-qa-links{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:15px 0}.rd-qa-links button,.rd-qa-panel>.rd-button{border:1px solid #967144;background:#24161a;color:#f7e6c1;padding:10px 8px}.rd-qa-panel>.rd-button{width:100%;margin-top:8px}.rd-qa-check{display:flex;gap:8px;align-items:center;font-size:12px;margin:12px 0}.rd-footer{z-index:400}.rd-footer button{color:#f6e7c7}.rd-footer button>img{height:27px;width:32px;object-fit:contain;margin:auto}
 .rd-main { min-width: 0; }
 .rd-modal-header, .rd-modal-footer { flex: 0 0 auto; }
 .rd-modal-body { flex: 1 1 auto; overscroll-behavior: contain; }

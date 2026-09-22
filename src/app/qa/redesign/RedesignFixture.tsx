@@ -35,6 +35,7 @@ function fixtureState(): RedesignState {
 export default function RedesignFixture() {
   const [state, setState] = useState(fixtureState);
   const [tab, setTab] = useState('home');
+  const [qaOpen, setQaOpen] = useState(false);
   const [waveSpProbe, setWaveSpProbe] = useState(false);
   const [rooms, setRooms] = useState<RaidRoom[]>([]);
   const [battle, setBattle] = useState<BattleResult | null>(null);
@@ -113,7 +114,8 @@ export default function RedesignFixture() {
     handleSendDirectMessage: async () => { setMessage('DMは確認用画面では送信されません。'); },
   };
   return <GameContext.Provider value={game}><div className="rd-shell">
-    <aside style={{ padding: 12, background: '#46361e', fontSize: 12 }}><strong>表示確認専用・ローカル操作</strong><p>保存・API接続・認証・決済は行いません。再読込で初期化されます。</p><div className="rd-tabs">{[['home','Home'],['quest','Quest'],['character','Growth'],['raid','Raid'],['territory','領土侵攻'],['battle','Battle']].map(([id,label]) => <button key={id} className={tab === id ? 'active' : ''} onClick={() => navigate(id)}>{label}</button>)}</div><label><input type="checkbox" checked={vip} onChange={event => setVip(event.target.checked)} /> VIP表示確認</label><button className="rd-button" onClick={() => { setState(fixtureState()); setBattle(null); setMessage('QA状態を初期化しました。'); }}>QA初期化</button><button className="rd-button" onClick={() => setState(previous => ({ ...previous, materials: { ...previous.materials, unlock: 0 } }))}>QA 開催アイテム0</button><button className="rd-button" onClick={() => { setTerritoryExp(300); setState(previous => ({ ...previous, materials: { ...previous.materials, unlock: 5 } })); }}>QA 開催枠とアイテム補充</button><p>銭 {state.cash} ／ 行動力 {state.energy}/{state.energyMax}</p>{message && <p role="status">{message}</p>}</aside>
+    <header className="rd-header"><div className="rd-identity"><img src={party[0]?.image} alt={party[0]?.name || '先頭武将'} /><div><small>Lv.1</small><strong>確認用の城主 <span className="rd-auth-link">未認証</span></strong><span className="rd-guild-slot">◇ 同盟 —</span></div></div><button className="rd-menu-button" onClick={() => setQaOpen(true)} aria-label="メニュー">MENU ☰</button><div className="rd-resources"><span><small>銭</small> {state.cash.toLocaleString()}</span><span><small>輝石</small> {state.diamonds.toLocaleString()}</span><span><small>行動力</small> {state.energy}/{state.energyMax}</span></div></header>
+    {qaOpen && <div className="rd-qa-backdrop" role="dialog" aria-modal="true" aria-label="QAメニュー"><aside className="rd-qa-panel"><div className="rd-qa-title"><strong>QAメニュー</strong><button onClick={() => setQaOpen(false)} aria-label="閉じる">×</button></div><p className="rd-qa-muted">表示確認専用。保存・API接続・認証・決済は行いません。</p><div className="rd-qa-links">{[['home','Home'],['quest','Quest'],['character','Growth'],['raid','Raid'],['territory','領土侵攻'],['battle','Battle']].map(([id,label]) => <button key={id} onClick={() => { navigate(id); setQaOpen(false); }}>{label}</button>)}</div><label className="rd-qa-check"><input type="checkbox" checked={vip} onChange={event => setVip(event.target.checked)} /> VIP表示確認</label><button className="rd-button" onClick={() => { setState(fixtureState()); setBattle(null); setMessage('QA状態を初期化しました。'); }}>QA初期化</button><button className="rd-button" onClick={() => setState(previous => ({ ...previous, materials: { ...previous.materials, unlock: 0 } }))}>QA 開催アイテム0</button><button className="rd-button" onClick={() => { setTerritoryExp(300); setState(previous => ({ ...previous, materials: { ...previous.materials, unlock: 5 } })); }}>QA 開催枠とアイテム補充</button></aside></div>}
     <main className="rd-main">
       {battle ? <BattleView result={battle} vipActive={vip} title="レイド・ローカル確認" onComplete={() => setBattle(null)} /> : <>
         {tab === 'home' && <HomeView state={state} onAction={action} onNavigate={navigate} previewOnly encounterRaid={rooms[0] ? { id: rooms[0].id, name: '炎影の守将', expiresAt: rooms[0].expiresAt } : null} />}
@@ -125,6 +127,7 @@ export default function RedesignFixture() {
         {!['home','quest','character','raid','territory','battle'].includes(tab) && <div className="rd-panel"><p>この共通機能は確認用画面では接続しません。</p><button className="rd-button" onClick={() => navigate('home')}>Homeへ</button></div>}
       </>}
     </main>
+    <nav className="rd-footer" aria-label="メインナビゲーション">{[['home','ホーム','08-castle'],['quest','クエスト','04-fan-sakura'],['character','キャラ','10-helmet'],['raid','レイド','06-oni-mask'],['battle','ガチャ','11-ticket']].map(([id,label,icon]) => <button key={id} aria-current={tab === id ? 'page' : undefined} onClick={() => navigate(id)}><img src={`/ui/sengoku/${icon}.png`} alt="" />{label}</button>)}</nav>
   </div></GameContext.Provider>;
 }
 
