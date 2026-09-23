@@ -120,9 +120,9 @@ export function CharacterCard({subject,compact=false,className,hideMarks=false}:
     </>}
   </figure>;
 }
-export function BossDisplay({subject,compact=false,className,hideCaption=false}:{subject:DisplaySubject;compact?:boolean;className?:string;hideCaption?:boolean}){
+export function BossDisplay({subject,compact=false,className,hideCaption=false,presentation='card'}:{subject:DisplaySubject;compact?:boolean;className?:string;hideCaption?:boolean;presentation?:'card'|'quest'}){
   const asset=useArtwork(subject,'battle');
-  return <figure className={[styles.boss,compact?styles.compact:'',className??''].filter(Boolean).join(' ')} aria-label={'ボス '+subject.name}>
+  return <figure className={[styles.boss,compact?styles.compact:'',presentation==='quest'?styles.questBoss:'',className??''].filter(Boolean).join(' ')} aria-label={'ボス '+subject.name}>
     {!asset.box||!asset.source||!asset.background?<Pending error={asset.error} retry={asset.retry}/>:<>
       <div className={styles.bossArt}>
         <img className={styles.backdrop} src={asset.background} alt=""/>

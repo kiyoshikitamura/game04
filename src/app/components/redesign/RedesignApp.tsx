@@ -29,6 +29,8 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   const [busy, setBusy] = useState(false);
   const [raidId, setRaidId] = useState<string>();
   const [questStart, setQuestStart] = useState<string>();
+  const [questPreparation, setQuestPreparation] = useState(false);
+  const [questDeckReturn, setQuestDeckReturn] = useState<string>();
   const [questNavigation, setQuestNavigation] = useState(0);
   const [questPlaying, setQuestPlaying] = useState(false);
   const [battle, setBattle] = useState<BattleResult | null>(null);
@@ -84,7 +86,10 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     } finally { lock.current = false; setBusy(false); if (rewardRefreshPending.current) { rewardRefreshPending.current = false; void refresh(); } }
   }
   function navigate(next: string) {
-    if (busy) return;
+    if (busy || lock.current) return;
+    if (next === 'quest' && questDeckReturn) { returnToQuestPreparation(); return; }
+    setQuestDeckReturn(undefined);
+    setQuestPreparation(false);
     if (next.startsWith('raid:')) { setRaidId(next.slice(5)); next = 'raid'; }
     if (next === 'quest:resume' || next === 'quest') {
       setQuestStart(next === 'quest:resume' && data ? nextQuestStage(data.state.clearedStages).id : undefined);
@@ -96,6 +101,22 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
       game.navigateTab(next);
       if (owner) void game.syncBootstrapData(owner);
     } else void refresh();
+  }
+  function openQuestDeck(stageId?: string) {
+    if (busy || lock.current) return;
+    setQuestDeckReturn(stageId);
+    setTab('character');
+    setError('');
+  }
+  function returnToQuestPreparation() {
+    if (!questDeckReturn || busy || lock.current) return;
+    setQuestStart(questDeckReturn);
+    setQuestPreparation(true);
+    setQuestDeckReturn(undefined);
+    setQuestNavigation(value => value + 1);
+    setTab('quest');
+    setError('');
+    void refresh();
   }
   async function startQuest(stageId: string): Promise<QuestSettlement> {
     const value = await action('quest_battle', { stageId });
@@ -125,8 +146,8 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     }}>戦闘を再開</button></div>}
     </>}>
     {battle ? <BattleView result={battle} vipActive={vipActive} onComplete={() => { setBattle(null); void refresh(); }} /> : <>
-      {tab === 'quest' && <QuestView key={questNavigation} onBattlePlayingChange={setQuestPlaying} state={state} party={party} vipActive={vipActive} initialStageId={questStart} onStart={startQuest} onOpenDeck={() => navigate('character')} onOpenRaid={id => { setRaidId(id); setTab('raid'); }} onIgnoreEncounter={async id => { await action('encounter_ignore', { roomId: id }); }} />}
-      {tab === 'character' && <GrowthView state={state} onAction={async (name, payload) => { await action(name, payload); }} />}
+      {tab === 'quest' && <QuestView key={questNavigation} onBattlePlayingChange={setQuestPlaying} state={state} party={party} vipActive={vipActive} initialStageId={questStart} initialPreparation={questPreparation} onStart={startQuest} onOpenDeck={openQuestDeck} onOpenRaid={id => { setRaidId(id); setTab('raid'); }} onIgnoreEncounter={async id => { await action('encounter_ignore', { roomId: id }); }} />}
+      {tab === 'character' && <>{questDeckReturn && <button type="button" className="rd-button" disabled={busy} onClick={returnToQuestPreparation}>出撃準備に戻る</button>}<GrowthView state={state} onAction={async (name, payload) => { await action(name, payload); }} /></>}
       {tab === 'territory' && <TerritoryView territory={data.territory} rooms={data.rooms} userId={state.userId} onOpenRoom={id => { setRaidId(id); setTab('raid'); }} onHost={async destinationId => { const value = await action('territory_host', { destinationId }); if (!value.territoryRoomId) throw new Error('開催結果を確認できませんでした。'); setRaidId(value.territoryRoomId); setTab('raid'); }} />}
       {tab === 'raid' && <RaidView key={raidId || 'list'} state={state} rooms={data.rooms} party={party} initialRoomId={raidId} onAction={raidAction} onOpenDeck={() => navigate('character')} />}
       {tab === 'gacha' && <><NormalGachaView data={data} onAction={action}/><GachaTab specialOnly /></>}
