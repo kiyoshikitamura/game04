@@ -4,6 +4,7 @@ import { applyAcquisitionEvents, type AcquisitionEvent, type AcquisitionMaster }
 import { applyPlayerExperience, GROWTH_VERSION } from '../../../src/domain/redesign/growthMaster.ts';
 import { applyNormalGacha, normalGachaDay } from '../../../src/domain/redesign/normalGacha.ts';
 import { applyGrowthAction, validateDeck } from '../../../src/domain/redesign/growth.ts';
+import { applyHomeSelection } from '../../../src/domain/redesign/home.ts';
 import { evaluateMissions, getClaimableMission, type MissionConfig } from '../../../src/domain/redesign/missions.ts';
 import { simulateBattle } from '../../../src/domain/redesign/battle.ts';
 import { getQuestStage as getLegacyQuestStage } from '../../../src/domain/redesign/legacyQuests.ts';
@@ -305,15 +306,8 @@ Deno.serve(async (request: Request) => {
       for (let i = 0; i < mission.rewards.length; i++) after = grantReward(after, mission.rewards[i], await uuidFor(`mission:${user.id}:${mission.id}:${i}`), policy);
       after.claimedMissionIds = [...(state.claimedMissionIds ?? []), mission.id];
     } else if (action === 'set_home') {
-      after = structuredClone(state);
-      if (payload.characterId !== undefined) {
-        if (!state.characters.some(c => c.id === payload.characterId) || !CHARACTER_MASTERS.some(c => c.id === payload.characterId)) throw new ApiError('未所持の武将です。');
-        after.homeCharacterId = payload.characterId;
-      }
-      if (payload.backgroundId !== undefined) {
-        if (!['castle-town', 'castle-approach'].includes(payload.backgroundId)) throw new ApiError('背景が不正です。');
-        after.homeBackgroundId = payload.backgroundId;
-      }
+      try { after = applyHomeSelection(state, payload); }
+      catch (error) { throw new ApiError(error instanceof Error ? error.message : '本陣の変更を保存できませんでした。'); }
     } else if (['raid_join', 'raid_leave', 'raid_rescue', 'raid_claim', 'encounter_ignore'].includes(action)) {
       const current = await roomFor(String(payload.roomId)); version = current.version;
       if (action === 'raid_join' && getRoomRaidMaster(current).type === 'unlock' && !current.participants.some(p => p.userId === user.id && !p.leftAt) && !isTerritoryUnlocked(state)) throw new ApiError('領土侵攻は通常クエスト3-5クリアで解放されます。');

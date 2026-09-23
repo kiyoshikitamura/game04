@@ -82,7 +82,7 @@ function getGoogleLinkError(code?: string, fallback?: string) {
   return fallback || "Google連携を完了できませんでした。もう一度お試しください。";
 }
 
-export default function AccountAuthenticationModal() {
+export default function AccountAuthenticationModal({ redesign = false, explicitOpen = false, onExplicitClose }: { redesign?: boolean; explicitOpen?: boolean; onExplicitClose?: () => void } = {}) {
   const {
     session,
     onboardingState,
@@ -91,10 +91,15 @@ export default function AccountAuthenticationModal() {
     navigateTab,
     showTitleView,
     setShowTitleView,
-    showAccountAuthenticationModal,
-    setShowAccountAuthenticationModal,
+    showAccountAuthenticationModal: contextAccountModalOpen,
+    setShowAccountAuthenticationModal: setContextAccountModalOpen,
     setShowAuthenticationReminder,
   } = useGame();
+  const showAccountAuthenticationModal = contextAccountModalOpen || (redesign && explicitOpen);
+  const setShowAccountAuthenticationModal = useCallback((open: boolean) => {
+    setContextAccountModalOpen(open);
+    if (!open) onExplicitClose?.();
+  }, [onExplicitClose, setContextAccountModalOpen]);
   const step = onboardingState?.tutorial_step ?? null;
   const isTutorialCompletion = step === "COMPLETE" && !onboardingState?.authentication_pending;
   const [email, setEmail] = useState(() => readEmailOnboardingIntent()?.email || "");
@@ -318,7 +323,12 @@ export default function AccountAuthenticationModal() {
     && onboardingState?.user_id === session.user.id
     && onboardingState?.is_anonymous;
 
-  if ((!ownsAnonymousOnboardingState && !accountConflict && !googleIdentityMismatch && !emailCompletionAuthorityReady && !emailIdentityMismatch)
+  // GAME04 has its own tutorial projection. An explicit account-link action
+  // may open the existing form for the current anonymous session; identity
+  // verification and completion remain enforced by the unchanged auth flow.
+  const explicitRedesignLink = redesign && showAccountAuthenticationModal && session?.user?.is_anonymous === true;
+
+  if ((!ownsAnonymousOnboardingState && !explicitRedesignLink && !accountConflict && !googleIdentityMismatch && !emailCompletionAuthorityReady && !emailIdentityMismatch)
     || (!isTutorialCompletion && !showAccountAuthenticationModal && !accountConflict && !error && !googleIdentityMismatch && !emailCompletionAuthorityReady && !emailIdentityMismatch)
     || (showTitleView && hiddenForTitle)) return null;
 
