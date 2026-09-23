@@ -12,6 +12,9 @@
 .rd-raid--detail{padding:0;position:relative}
 .rd-raid-back{position:absolute;left:9px;top:8px;z-index:2;min-height:32px;padding:5px 12px}
 .rd-raid-detail-stage{min-height:0}
+/* Keep enough scroll travel to bring the compact summary below the sticky header. */
+.rd-raid-detail-stage>.raid-approved-detail:has(.raid-approved-detail__compact){min-height:calc(100dvh - 156px)}
+@media(min-width:480px){.rd-raid-detail-stage>.raid-approved-detail:has(.raid-approved-detail__compact){min-height:calc(100dvh - 176px)}}
 .rd-raid-error{padding:10px;background:#511a1a;color:#ffe1d5}
 .rd-raid-participants{list-style:none;padding:0}
 .rd-raid-participants li{padding:10px 0;border-bottom:1px solid #795735}
