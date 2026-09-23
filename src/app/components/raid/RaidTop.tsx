@@ -14,6 +14,7 @@ import SectionHeader from "../ui/SectionHeader";
 import "./RaidTop.css";
 import RaidStrategySummary from "./RaidStrategySummary";
 import RaidRewardComparison from "./RaidRewardComparison";
+import RaidTopApproved from "./RaidTopApproved";
 
 const FALLBACK = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128'%3E%3Crect width='128' height='128' fill='%23151d2a'/%3E%3Ccircle cx='64' cy='43' r='18' fill='%23697482'/%3E%3Cpath d='M24 118V98a40 40 0 0 1 80 0v20' fill='%23697482'/%3E%3C/svg%3E";
 const BACKGROUND_FALLBACK = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cpath fill='%23151d2a' d='M0 0h128v128H0z'/%3E%3C/svg%3E";
@@ -98,6 +99,8 @@ export default function RaidTop({ data, onOpenRoom, onChooseEnemy, onBrowse, onR
   const resolve: ImageResolver = url => assets?.results.find(result => result.requestedSrc === url)?.resolvedSrc ?? FALLBACK;
   if ([data.participating, data.rescues, data.dailyTargets].some(resource => resource.status === "loading") || assets?.key !== assetKey) return <Spinner />;
   if (assets.results.some(result => result.status === "failed")) return <div className="raid-top__notice" role="alert"><p>画像を取得できませんでした</p><OutlawButton loadingLabel="" onClick={() => { setAssets(null); setRetry(value => value + 1); }}>再試行</OutlawButton></div>;
+  return <RaidTopApproved participating={data.participating} rescues={data.rescues} now={now} resolve={resolve} onOpenRoom={onOpenRoom} onRefresh={onRefresh} disabled={disabled} />;
+  /* Legacy presentation retained below for history; the approved presentation above is the live Room UI.
   return <div className="raid-top" data-testid="raid-top">
     {showParticipating && <section aria-label="参戦中" className="raid-top__section"><SectionHeader title="参戦中" />
       <ResourceNotice resource={data.participating} onRefresh={onRefresh} disabled={disabled} unavailable="参戦情報は現在確認できません" />
@@ -125,4 +128,5 @@ export default function RaidTop({ data, onOpenRoom, onChooseEnemy, onBrowse, onR
     <RaidRewardComparison />
     <section aria-label="開催中のレイドを探す" className="raid-top__section raid-top__browse"><OutlawButton loadingLabel="" fullWidth onClick={onBrowse} disabled={disabled}><span className="raid-top__browse-copy"><strong>開催中のレイドを探す</strong><small>ほかの挑戦者に加勢する</small></span><span aria-hidden="true">›</span></OutlawButton></section>
   </div>;
+  */
 }
