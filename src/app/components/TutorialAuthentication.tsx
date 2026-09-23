@@ -82,7 +82,7 @@ function getGoogleLinkError(code?: string, fallback?: string) {
   return fallback || "Google連携を完了できませんでした。もう一度お試しください。";
 }
 
-export default function AccountAuthenticationModal({ redesign = false }: { redesign?: boolean } = {}) {
+export default function AccountAuthenticationModal({ redesign = false, explicitOpen = false, onExplicitClose }: { redesign?: boolean; explicitOpen?: boolean; onExplicitClose?: () => void } = {}) {
   const {
     session,
     onboardingState,
@@ -91,10 +91,15 @@ export default function AccountAuthenticationModal({ redesign = false }: { redes
     navigateTab,
     showTitleView,
     setShowTitleView,
-    showAccountAuthenticationModal,
-    setShowAccountAuthenticationModal,
+    showAccountAuthenticationModal: contextAccountModalOpen,
+    setShowAccountAuthenticationModal: setContextAccountModalOpen,
     setShowAuthenticationReminder,
   } = useGame();
+  const showAccountAuthenticationModal = contextAccountModalOpen || (redesign && explicitOpen);
+  const setShowAccountAuthenticationModal = useCallback((open: boolean) => {
+    setContextAccountModalOpen(open);
+    if (!open) onExplicitClose?.();
+  }, [onExplicitClose, setContextAccountModalOpen]);
   const step = onboardingState?.tutorial_step ?? null;
   const isTutorialCompletion = step === "COMPLETE" && !onboardingState?.authentication_pending;
   const [email, setEmail] = useState(() => readEmailOnboardingIntent()?.email || "");
