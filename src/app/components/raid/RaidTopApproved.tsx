@@ -3,11 +3,10 @@
 import { useMemo, useState } from 'react';
 import type { RaidTopData, RaidTopEntry } from '@/domain/raidTop';
 import { getRaidDifficultyLabel } from '@/domain/raidRoomPresentation';
-import { getRaidRoomLifecyclePresentation } from '@/domain/raidRoomLifecyclePresentation';
 import type { RaidPlayerSummary } from '@/domain/raidRoom';
 import OutlawButton from '../ui/OutlawButton';
 import './RaidTopApproved.css';
-import './RaidCardOverlay.css';
+import { RaidApprovedCard, RaidApprovedIcon } from './RaidApprovedVisual';
 
 type Props = Pick<RaidTopData, 'participating' | 'rescues'> & {
   now: number | null;
@@ -18,32 +17,24 @@ type Props = Pick<RaidTopData, 'participating' | 'rescues'> & {
   disabled?: boolean;
 };
 
-const icon = (name: 'clock' | 'people' | 'chest' | 'medal') => <img className="raid-approved-ui__icon" src={`/ui/raid/${name}.svg`} alt="" />;
+const icon = (name: 'chest') => <RaidApprovedIcon name={name} />;
 const attributeLabel: Record<string, string> = { EVIL: '悪', ORDER: '秩序', JUSTICE: '正義', CHAOS: '混沌', UNKNOWN: '属性未確認' };
-const attributeIcon = (value: string) => value === 'UNKNOWN' ? null : <img className="raid-approved-ui__icon" src={`/creative/ui/element-${({ EVIL: 'fire', CHAOS: 'dark', ORDER: 'water', JUSTICE: 'wind' } as Record<string, string>)[value] ?? 'light'}.png`} alt="" />;
 const ownerOf = (entry: RaidTopEntry): RaidPlayerSummary | null => entry.room.owner.status === 'available' ? entry.room.owner.value : null;
 const enemyOf = (entry: RaidTopEntry) => entry.enemy.status === 'available' ? entry.enemy.value : null;
 
-function Owner({ entry, resolve }: { entry: RaidTopEntry; resolve: Props['resolve'] }) {
+function cardData(entry: RaidTopEntry, now: number | null, compact = false) {
   const owner = ownerOf(entry);
-  const image = owner?.leaderIconUrl.status === 'available' && owner.leaderIconUrl.value ? resolve(owner.leaderIconUrl.value) : undefined;
-  return <div className="raid-approved-ui__owner">{image ? <img src={image} alt="" /> : <span className="raid-approved-ui__owner-fallback" />}<strong>開催者　{owner?.name ?? '未確認'}</strong></div>;
-}
-
-function Hp({ entry, now, compact = false }: { entry: RaidTopEntry; now: number | null; compact?: boolean }) {
   const hp = entry.room.hp.status === 'available' && entry.room.hp.value.max > 0 ? entry.room.hp.value : null;
   const percent = hp ? Math.max(0, Math.min(100, hp.current / hp.max * 100)) : null;
-  const lifecycle = getRaidRoomLifecyclePresentation(entry.room, now);
   const remaining = now !== null && entry.room.expiresAt.status === 'available' ? Math.max(0, Date.parse(entry.room.expiresAt.value) - now) : null;
   const minutes = remaining === null ? null : Math.ceil(remaining / 60000);
   const timeLabel = minutes === null ? '未確認' : minutes >= 60 ? `${Math.floor(minutes / 60)}時間${minutes % 60}分` : `${minutes}分`;
-  return <div className="raid-approved-ui__battle"><div className="raid-approved-ui__hpbar"><span style={{ width: `${percent ?? 0}%` }} /></div><div className="raid-approved-ui__hptext">{compact ? `HP ${percent === null ? '未確認' : `${percent.toFixed(0)}%`}` : hp ? `HP ${hp.current.toLocaleString()} / ${hp.max.toLocaleString()}　(${percent?.toFixed(0)}%)` : 'HP 未確認'}</div><div className="raid-approved-ui__facts"><span>{icon('clock')}{timeLabel}</span><span>{icon('people')}{entry.room.participantCount.status === 'available' ? `${entry.room.participantCount.value}/20人` : '未確認'}</span></div></div>;
+  return { bossName: enemyOf(entry)?.bossName ?? '敵情報未確認', attributeLabel: attributeLabel[enemyOf(entry)?.attribute ?? 'UNKNOWN'], attributeIconUrl: enemyOf(entry)?.attribute === 'UNKNOWN' ? undefined : `/creative/ui/element-${({ EVIL: 'fire', CHAOS: 'dark', ORDER: 'water', JUSTICE: 'wind' } as Record<string, string>)[enemyOf(entry)?.attribute ?? ''] ?? 'light'}.png`, ownerName: owner?.name ?? '未確認', ownerImageUrl: owner?.leaderIconUrl.status === 'available' ? owner.leaderIconUrl.value ?? undefined : undefined, hpPercent: percent, hpText: compact ? `HP ${percent === null ? '未確認' : `${percent.toFixed(0)}%`}` : hp ? `HP ${hp.current.toLocaleString()} / ${hp.max.toLocaleString()}　(${percent?.toFixed(0)}%)` : 'HP 未確認', remainingLabel: timeLabel, participantLabel: entry.room.participantCount.status === 'available' ? `${entry.room.participantCount.value}/20人` : '未確認' };
 }
 
 function Card({ entry, now, resolve, onOpenRoom, disabled, rescue }: { entry: RaidTopEntry; now: number | null; resolve: Props['resolve']; onOpenRoom: Props['onOpenRoom']; disabled?: boolean; rescue?: boolean }) {
   const enemy = enemyOf(entry);
-  const attribute = enemy?.attribute ?? 'UNKNOWN';
-  return <article className="raid-approved-ui__card"><div className="raid-approved-ui__card-art">{enemy && <><img src={resolve(enemy.backgroundUrl)} alt="" /><img src={resolve(enemy.leaderImageUrl)} alt="" /></>}</div><div className="raid-approved-ui__card-copy"><div className="raid-approved-ui__badges"><span>{rescue ? '救援' : getRaidDifficultyLabel(entry.room.difficultyId)}</span><span>{rescue ? '参加可能' : '参加中'}</span></div><h3>{enemy?.bossName ?? '敵情報未確認'} <small>Lv.1</small></h3><p className="raid-approved-ui__attribute">{attributeIcon(attribute)}{attributeLabel[attribute]}属性</p><Owner entry={entry} resolve={resolve}/><Hp entry={entry} now={now} compact={rescue}/><OutlawButton loadingLabel="" variant="primary" disabled={disabled} onClick={() => onOpenRoom(entry.room.roomId, entry.rescue.status === 'available' ? entry.rescue.value.rescueId : undefined)}>{rescue ? '救援に向かう' : '続きへ'} ›</OutlawButton></div></article>;
+  return <RaidApprovedCard data={{ ...cardData(entry, now, rescue), backgroundUrl: enemy?.backgroundUrl, characterUrl: enemy?.leaderImageUrl, badgeLabel: rescue ? '救援' : getRaidDifficultyLabel(entry.room.difficultyId), statusLabel: rescue ? '参加可能' : '参加中' }} resolve={resolve} action={<OutlawButton loadingLabel="" variant="primary" disabled={disabled} onClick={() => onOpenRoom(entry.room.roomId, entry.rescue.status === 'available' ? entry.rescue.value.rescueId : undefined)}>{rescue ? '救援に向かう' : '続きへ'} ›</OutlawButton>} />;
 }
 
 function remaining(entry: RaidTopEntry): number {
