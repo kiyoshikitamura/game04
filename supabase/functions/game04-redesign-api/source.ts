@@ -14,7 +14,7 @@ import { applyRaidAction, createRaidRoom, getRoomRaidMaster, raidEnemies } from 
 import { createFormalBattleInput } from '../../../src/domain/redesign/formalBattleInput.ts';
 import { createFormalInvasionMaster } from '../../../src/domain/redesign/raidInvasionMaster.ts';
 import { selectEncounterMaster } from '../../../src/domain/redesign/raidFormalMaster.ts';
-import { projectTerritory } from '../../../src/domain/redesign/territory.ts';
+import { projectTerritory, isTerritoryUnlocked, TERRITORY_HOST_POLICY_VERSION } from '../../../src/domain/redesign/territory.ts';
 import type { TerritoryMaster, TerritoryProgress } from '../../../src/domain/redesign/types.ts';
 import type { BattleInput, RaidRoom, RedesignState, Reward } from '../../../src/domain/redesign/types.ts';
 
@@ -29,7 +29,8 @@ async function db(path: string, body?: unknown): Promise<any> {
   try { result = await response.json(); } catch { throw new ApiError('接続が混み合っています。少し待って再度お試しください。', 503); }
   if (!response.ok) {
     const messages: Record<string, string> = {
-      TERRITORY_LEVEL_REQUIRED: '領土侵攻レベルが不足しています。',
+      TERRITORY_LEVEL_REQUIRED: '主催者Lvが不足しています。',
+      TERRITORY_FEATURE_LOCKED: '領土侵攻は通常クエスト3-5クリアで解放されます。',
       TERRITORY_HOSTING_SLOTS_FULL: '同時開催枠が埋まっています。開催中の侵攻を確認してください。',
       TERRITORY_ITEM_REQUIRED: '開催アイテムが不足しています。',
       TERRITORY_DESTINATION_NOT_FOUND: '侵攻先が見つかりません。再読み込みしてください。',
@@ -140,6 +141,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
       const room = await roomFor(String(payload.roomId)), master = getRoomRaidMaster(room);
       const me = room.participants.find(p => p.userId === userId);
       if (room.status !== 'active' || Date.parse(room.expiresAt) <= Date.now() || !me || me.leftAt) throw new ApiError('参加できる開催中レイドを選んでください。');
+      if (master.type === 'unlock' && room.territorySnapshot?.masterVersion === TERRITORY_HOST_POLICY_VERSION && !isTerritoryUnlocked(state)) throw new ApiError('領土侵攻は通常クエスト3-5クリアで解放されます。');
       startRoom = room;
       raidLevel = payload.level === undefined ? room.level : Number(payload.level);
       if(!Number.isInteger(raidLevel)||raidLevel<me.joinedLevel||raidLevel>room.level||(master.type!=='unlock'&&raidLevel!==room.level))throw new ApiError('この段階には挑戦できません。');
@@ -314,6 +316,7 @@ Deno.serve(async (request: Request) => {
       }
     } else if (['raid_join', 'raid_leave', 'raid_rescue', 'raid_claim', 'encounter_ignore'].includes(action)) {
       const current = await roomFor(String(payload.roomId)); version = current.version;
+      if (action === 'raid_join' && getRoomRaidMaster(current).type === 'unlock' && !current.participants.some(p => p.userId === user.id && !p.leftAt) && !isTerritoryUnlocked(state)) throw new ApiError('領土侵攻は通常クエスト3-5クリアで解放されます。');
       const changed = applyRaidAction(current, state, action, { name: profile.username }, Date.now(), action === 'raid_claim' ? await rewardPolicy() : undefined); room = changed.room; after = changed.state;
     } else after = applyGrowthAction(state, action, payload);
     await commit(state, after, requestId, null, room, version);

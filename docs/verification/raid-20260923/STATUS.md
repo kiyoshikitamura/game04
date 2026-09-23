@@ -67,3 +67,7 @@
 本体最終確認: RQAWALL (`125d6b0d-0b4a-40dd-ba80-ee64bf3690e4`)、正式ERB01開催 `d8fbc5f0-ce83-407e-95b4-2b1e3c99fc51`。既存QA前候補RQAWEND等は証跡のため保持し、一般プレイヤー資産へ変更しない。正式安土のAPI開催確認 `f4a0896a-c777-42e0-b180-3982ea3d7397` はQA主催者RQAWGstの開催。
 
 最終本体では累計貢献41,298、4勝、討伐成功、銭14,600→討伐報酬受取後19,600を確認。素材一括表示：[asset-review.html](asset-review.html)。
+
+## 2026-09-23 主催方針の仮FIX採用・適用
+
+ユーザー採用により主催条件の未承認残件を解消。後日正式レベルデザイン予定。API v15、新規開催はGAME04_TERRITORY_HOST_PROVISIONAL_20260923。旧開催snapshot保持。採用値はdocs/product/GAME04_RAID_HOST_POLICY_PROVISIONAL_2026-09-23.md、今回の限定検証は../GAME04_TERRITORY_POLICY_2026-09-23.mdを参照。旧記録の未承認記述は履歴。

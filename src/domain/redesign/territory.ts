@@ -15,17 +15,30 @@ export const TERRITORY_MASTER:TerritoryMaster={
  battleRules:structuredClone(BATTLE_RULES),
  raidMasters:RAID_MASTERS.filter(m=>m.type==='unlock').map(master=>({...structuredClone(master),enemy:prepareBattleWaves([[master.enemy]],BATTLE_RULES)[0][0]})),
 };
-/** Preserve existing hosting policy; never promote the unapproved host level/EXP supplement. */
+/** User-adopted provisional hosting progression; combat balance remains independently versioned. */
+export const TERRITORY_HOST_POLICY_VERSION='GAME04_TERRITORY_HOST_PROVISIONAL_20260923';
+export const TERRITORY_UNLOCK_STAGE_ID='mino-5';
+export function isTerritoryUnlocked(state:Pick<RedesignState,'clearedStages'>):boolean{return state.clearedStages.includes(TERRITORY_UNLOCK_STAGE_ID);}
+export const TERRITORY_HOST_LEVELS=Array.from({length:10},(_,index)=>({level:index+1,requiredExp:index*(index+1)*50,hostingSlots:1}));
+export const TERRITORY_CASTLE_HOST_POLICY=[
+ {id:'TI01',requiredLevel:1,clearExp:100},
+ {id:'TI02',requiredLevel:2,clearExp:150},
+ {id:'TI03',requiredLevel:4,clearExp:250},
+ {id:'TI04',requiredLevel:6,clearExp:400},
+ {id:'TI05',requiredLevel:8,clearExp:600},
+];
 export function withFormalTerritoryRaids(existing:TerritoryMaster):TerritoryMaster {
  const master=structuredClone(existing);
- master.version='GAME04_RAID_FORMAL_20260923';
- master.levels=master.levels.map(level=>({...level,hostingSlots:1}));
+ master.version=TERRITORY_HOST_POLICY_VERSION;
+ master.status='PREVIEW_PROVISIONAL';
+ master.unlockStageId=TERRITORY_UNLOCK_STAGE_ID;
+ master.initialExp=0;master.legacyMigrationExp=0;master.levelCap=10;
+ master.levels=structuredClone(TERRITORY_HOST_LEVELS);
  master.raidMasters=[...master.raidMasters.filter(raid=>!FORMAL_CASTLES.some(c=>c.id===raid.id)),...FORMAL_CASTLES.map(c=>createFormalInvasionMaster(c.id,()=>0))];
- for(const castle of FORMAL_CASTLES){
-  const previous=master.destinations.find(d=>d.castle===castle.name);
-  if(previous){previous.raidMasterId=castle.id;previous.itemName='侵攻令';previous.itemCount=1;previous.durationMinutes=4320;continue;}
-  master.destinations.push({id:castle.id,name:`${castle.name}への侵攻`,castle:castle.name,difficulty:'正式12段階',itemSource:'交換所・報酬',raidMasterId:castle.id,requiredLevel:1,itemName:'侵攻令',itemId:'raid_unlock',itemCount:1,durationMinutes:4320,clearExp:0,unavailableReason:'主催解放条件・主催者EXPの設定待ち'});
- }
+ master.destinations=FORMAL_CASTLES.map(castle=>{
+  const previous=existing.destinations.find(d=>d.castle===castle.name),policy=TERRITORY_CASTLE_HOST_POLICY.find(p=>p.id===castle.id)!;
+  return {id:previous?.id??castle.id,name:`${castle.name}への侵攻`,castle:castle.name,difficulty:'正式12段階',itemSource:'交換所・報酬',raidMasterId:castle.id,requiredLevel:policy.requiredLevel,itemName:'侵攻令',itemId:'raid_unlock',itemCount:1,durationMinutes:4320,clearExp:policy.clearExp};
+ });
  return master;
 }
 export function validateTerritoryMaster(master:TerritoryMaster):void {
@@ -54,8 +67,9 @@ export function activeTerritoryCount(userId:string,rooms:RaidRoom[],now=Date.now
 export function projectTerritory(master:TerritoryMaster,progress:TerritoryProgress,items:Record<string,number>,activeHostingCount:number):TerritoryProjection {
  validateTerritoryMaster(master);
  const experience=Math.max(0,progress.experience),level=territoryLevel(master,experience),hostingSlots=master.levels.find(row=>row.level===level)!.hostingSlots;
- return {masterVersion:master.version,status:master.status,experience,level,nextLevelExp:master.levels.find(row=>row.level===level+1)?.requiredExp??null,hostingSlots,activeHostingCount,destinations:master.destinations.map(destination=>{
+ return {masterVersion:master.version,status:master.status,unlocked:!master.unlockStageId||progress.unlocked===true,experience,level,nextLevelExp:master.levels.find(row=>row.level===level+1)?.requiredExp??null,hostingSlots,activeHostingCount,destinations:master.destinations.map(destination=>{
   const ownedItemCount=items[destination.itemId]??0,reasons:string[]=[];
+  if(master.unlockStageId&&progress.unlocked!==true)reasons.push('通常クエスト3-5クリアで解放されます。');
   if(destination.unavailableReason)reasons.push(destination.unavailableReason);
   if(level<destination.requiredLevel)reasons.push(`領土侵攻Lv.${destination.requiredLevel}が必要です。`);
   if(activeHostingCount>=hostingSlots)reasons.push('同時開催枠が埋まっています。');

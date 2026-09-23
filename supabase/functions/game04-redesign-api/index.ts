@@ -57867,6 +57867,12 @@ var TERRITORY_MASTER = {
   battleRules: structuredClone(BATTLE_RULES),
   raidMasters: RAID_MASTERS.filter((m) => m.type === "unlock").map((master) => ({ ...structuredClone(master), enemy: prepareBattleWaves([[master.enemy]], BATTLE_RULES)[0][0] }))
 };
+var TERRITORY_HOST_POLICY_VERSION = "GAME04_TERRITORY_HOST_PROVISIONAL_20260923";
+var TERRITORY_UNLOCK_STAGE_ID = "mino-5";
+function isTerritoryUnlocked(state) {
+  return state.clearedStages.includes(TERRITORY_UNLOCK_STAGE_ID);
+}
+var TERRITORY_HOST_LEVELS = Array.from({ length: 10 }, (_, index) => ({ level: index + 1, requiredExp: index * (index + 1) * 50, hostingSlots: 1 }));
 function validateTerritoryMaster(master) {
   const natural = (v) => Number.isSafeInteger(v) && v >= 0;
   if (!master.version || !["PREVIEW_PROVISIONAL", "APPROVED"].includes(master.status) || !natural(master.initialExp) || !natural(master.legacyMigrationExp) || !natural(master.levelCap) || master.levelCap < 1 || master.levels.length !== master.levelCap) throw Error("\u9818\u571F\u4FB5\u653B\u30DE\u30B9\u30BF\u30FC\u306E\u6210\u9577\u8A2D\u5B9A\u304C\u4E0D\u6B63\u3067\u3059\u3002");
@@ -57896,8 +57902,9 @@ function territoryLevel(master, experience) {
 function projectTerritory(master, progress, items, activeHostingCount) {
   validateTerritoryMaster(master);
   const experience = Math.max(0, progress.experience), level = territoryLevel(master, experience), hostingSlots = master.levels.find((row) => row.level === level).hostingSlots;
-  return { masterVersion: master.version, status: master.status, experience, level, nextLevelExp: master.levels.find((row) => row.level === level + 1)?.requiredExp ?? null, hostingSlots, activeHostingCount, destinations: master.destinations.map((destination) => {
+  return { masterVersion: master.version, status: master.status, unlocked: !master.unlockStageId || progress.unlocked === true, experience, level, nextLevelExp: master.levels.find((row) => row.level === level + 1)?.requiredExp ?? null, hostingSlots, activeHostingCount, destinations: master.destinations.map((destination) => {
     const ownedItemCount = items[destination.itemId] ?? 0, reasons = [];
+    if (master.unlockStageId && progress.unlocked !== true) reasons.push("\u901A\u5E38\u30AF\u30A8\u30B9\u30C83-5\u30AF\u30EA\u30A2\u3067\u89E3\u653E\u3055\u308C\u307E\u3059\u3002");
     if (destination.unavailableReason) reasons.push(destination.unavailableReason);
     if (level < destination.requiredLevel) reasons.push(`\u9818\u571F\u4FB5\u653BLv.${destination.requiredLevel}\u304C\u5FC5\u8981\u3067\u3059\u3002`);
     if (activeHostingCount >= hostingSlots) reasons.push("\u540C\u6642\u958B\u50AC\u67A0\u304C\u57CB\u307E\u3063\u3066\u3044\u307E\u3059\u3002");
@@ -57927,7 +57934,8 @@ async function db(path, body) {
   }
   if (!response.ok) {
     const messages = {
-      TERRITORY_LEVEL_REQUIRED: "\u9818\u571F\u4FB5\u653B\u30EC\u30D9\u30EB\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002",
+      TERRITORY_LEVEL_REQUIRED: "\u4E3B\u50AC\u8005Lv\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002",
+      TERRITORY_FEATURE_LOCKED: "\u9818\u571F\u4FB5\u653B\u306F\u901A\u5E38\u30AF\u30A8\u30B9\u30C83-5\u30AF\u30EA\u30A2\u3067\u89E3\u653E\u3055\u308C\u307E\u3059\u3002",
       TERRITORY_HOSTING_SLOTS_FULL: "\u540C\u6642\u958B\u50AC\u67A0\u304C\u57CB\u307E\u3063\u3066\u3044\u307E\u3059\u3002\u958B\u50AC\u4E2D\u306E\u4FB5\u653B\u3092\u78BA\u8A8D\u3057\u3066\u304F\u3060\u3055\u3044\u3002",
       TERRITORY_ITEM_REQUIRED: "\u958B\u50AC\u30A2\u30A4\u30C6\u30E0\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002",
       TERRITORY_DESTINATION_NOT_FOUND: "\u4FB5\u653B\u5148\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002\u518D\u8AAD\u307F\u8FBC\u307F\u3057\u3066\u304F\u3060\u3055\u3044\u3002",
@@ -58050,6 +58058,7 @@ async function runBattle(userId, name2, payload, id, playerName) {
       const room = await roomFor(String(payload.roomId)), master = getRoomRaidMaster(room);
       const me = room.participants.find((p) => p.userId === userId);
       if (room.status !== "active" || Date.parse(room.expiresAt) <= Date.now() || !me || me.leftAt) throw new ApiError("\u53C2\u52A0\u3067\u304D\u308B\u958B\u50AC\u4E2D\u30EC\u30A4\u30C9\u3092\u9078\u3093\u3067\u304F\u3060\u3055\u3044\u3002");
+      if (master.type === "unlock" && room.territorySnapshot?.masterVersion === TERRITORY_HOST_POLICY_VERSION && !isTerritoryUnlocked(state)) throw new ApiError("\u9818\u571F\u4FB5\u653B\u306F\u901A\u5E38\u30AF\u30A8\u30B9\u30C83-5\u30AF\u30EA\u30A2\u3067\u89E3\u653E\u3055\u308C\u307E\u3059\u3002");
       startRoom = room;
       raidLevel = payload.level === void 0 ? room.level : Number(payload.level);
       if (!Number.isInteger(raidLevel) || raidLevel < me.joinedLevel || raidLevel > room.level || master.type !== "unlock" && raidLevel !== room.level) throw new ApiError("\u3053\u306E\u6BB5\u968E\u306B\u306F\u6311\u6226\u3067\u304D\u307E\u305B\u3093\u3002");
@@ -58232,6 +58241,7 @@ Deno.serve(async (request) => {
     } else if (["raid_join", "raid_leave", "raid_rescue", "raid_claim", "encounter_ignore"].includes(action)) {
       const current = await roomFor(String(payload.roomId));
       version = current.version;
+      if (action === "raid_join" && getRoomRaidMaster(current).type === "unlock" && !current.participants.some((p) => p.userId === user.id && !p.leftAt) && !isTerritoryUnlocked(state)) throw new ApiError("\u9818\u571F\u4FB5\u653B\u306F\u901A\u5E38\u30AF\u30A8\u30B9\u30C83-5\u30AF\u30EA\u30A2\u3067\u89E3\u653E\u3055\u308C\u307E\u3059\u3002");
       const changed = applyRaidAction(current, state, action, { name: profile.username }, Date.now(), action === "raid_claim" ? await rewardPolicy() : void 0);
       room = changed.room;
       after = changed.state;
