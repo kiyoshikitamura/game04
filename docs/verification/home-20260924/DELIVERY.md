@@ -43,8 +43,8 @@ Headerは顔/Lv/名前/認証/同盟欄/メニュー/銭/輝石/行動力。Foot
 | 本体 | 領土侵攻・任務・商店 | 正式画面/解放状態/任務情報へ遷移 |
 | 本体 | Footer出陣・武将・共闘・召喚、本陣へ復帰 | 正式画面へ遷移、共通Header/Footerを保持 |
 | 本体 | メニュー・アカウント連携 | お知らせ/BOX/設定等の既存入口、Google/メール既存フォームの表示と閉じるを確認 |
-| 本体 | 活動/全体/DM、交流を開く | データ切替、全体入力、空DM表示、空送信disabledを確認。送信はしていない |
-| 本体＋静的 | 未読・任務バッジ | 既存dmUnreadTotal/conversations、Inbox未読/BOX未受取、claimable任務へ接続。既読処理は既存chat panel状態を共用。実QAのDM未読は0、正の未読配送は作成していない |
+| 本体 | 活動/全体/DM、交流を開く | データ切替、全体入力、空DM表示、空送信disabledを確認。2026-09-24のユーザー承認後、専用QA間だけでDM返信送信を確認 |
+| 本体＋静的 | 未読・任務バッジ | 既存dmUnreadTotal/conversations、Inbox未読/BOX未受取、claimable任務へ接続。既読処理は既存chat panel状態を共用。専用QAへの実配送でDM (1)・会話 (1)→会話を開くと両方解除→DB既読true→再読込後も0件を確認。詳細はDM_VERIFICATION.md |
 | 本体 | ローテーションバナー | 8秒で召喚/商店切替。各表示をクリックし通常登用/正式商店への一致を確認 |
 | 本体＋QA seed | 共闘通知 | 正式Master生成roomの柴田勝家/残り時間/IDが詳細HP39000・主催者と一致 |
 | 本体＋QA seed | 通知期限切れ | 17:59:44 UTCの期限到達で通知が自動消滅。DB statusがactiveのままでも非表示 |
@@ -55,7 +55,7 @@ Headerは顔/Lv/名前/認証/同盟欄/メニュー/銭/輝石/行動力。Foot
 | ドメイン | 10エリア対応/解放境界/旧ID/原子性 | verify_game04_home_selection.mjs PASS |
 | ビルド | TypeScript/Next build、最終Vercel build | PASS。これだけをUI完成判定にはしていない |
 
-OAuth/メールを実送信しての認証完了、課金、チャット送信、自然遭遇を発生させる周回は実施していない。今回は各既存機能の入口・表示・状態接続を確認し、外部送信や購入を起こしていない。正の未読配送は上表の通り未実施であり、実操作PASSに含めない。
+OAuth/メールを実送信しての認証完了、課金、全体チャット送信、自然遭遇を発生させる周回は実施していない。専用QA間のDM送信のみ、2026-09-24の明示承認後に実施した。今回は各既存機能の入口・表示・状態接続を確認し、専用QA以外への送信や購入を起こしていない。正のDM未読配送・解除・再読込維持は追加検証で確認済み。
 
 標準画面は専用Branch aliasの `/qa/home-live-viewport` 内で実本体 `/` を操作した。同経路は幅を固定するiframeだけで、fixtureデータや本体CSSを注入しない。最終実装SHA配信後の低画面・認証入口・再保存を確認。固定URL上でも `/qa/home-state` の読込ゲート・連打排他・保存中×無効を再確認。
 
@@ -79,3 +79,7 @@ GAME04 dev project `lrgyllgzcdcphlbmkknc` の `game04-redesign-api` v18（verify
 共通変更は親担当がRedesignShell/ShellChrome/Modal/TutorialAuthenticationへ集約。ModalのcloseDisabledは任意・既定falseで他Dialogの挙動を保持。共闘/出陣/武将のHeader/Footerと遷移を確認。担当外のページ本文は変更していない。各ページ内部に残る登用/キャラ/ダイヤ等の用語は担当ラインへ引継ぐ名称マップとして記録し、無断改名していない。
 
 実装の未解消不具合は今回の検証範囲ではなし。上表の未実施項目を実検証済みとは扱わない。
+
+## 残件クローズ（2026-09-24）
+
+[DMの実配送・未読解除・再読込検証](DM_VERIFICATION.md) を完了。コード変更・再配信なし。固定Previewと実装SHAは上記のまま。これまで保留していた本陣の未読検証をクローズする。
