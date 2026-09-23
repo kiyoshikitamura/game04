@@ -20,7 +20,7 @@ type Props = Pick<RaidTopData, 'participating' | 'rescues'> & {
 
 const icon = (name: 'clock' | 'people' | 'chest' | 'medal') => <img className="raid-approved-ui__icon" src={`/ui/raid/${name}.svg`} alt="" />;
 const attributeLabel: Record<string, string> = { EVIL: '悪', ORDER: '秩序', JUSTICE: '正義', CHAOS: '混沌', UNKNOWN: '属性未確認' };
-const attributeIcon = (value: string) => value === 'UNKNOWN' ? null : <img className="raid-approved-ui__icon" src={`/ui/rarity/attribute-badge-${value.toLowerCase()}.png`} alt="" />;
+const attributeIcon = (value: string) => value === 'UNKNOWN' ? null : <img className="raid-approved-ui__icon" src={`/creative/ui/element-${({ EVIL: 'fire', CHAOS: 'dark', ORDER: 'water', JUSTICE: 'wind' } as Record<string, string>)[value] ?? 'light'}.png`} alt="" />;
 const ownerOf = (entry: RaidTopEntry): RaidPlayerSummary | null => entry.room.owner.status === 'available' ? entry.room.owner.value : null;
 const enemyOf = (entry: RaidTopEntry) => entry.enemy.status === 'available' ? entry.enemy.value : null;
 

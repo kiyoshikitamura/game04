@@ -16,10 +16,10 @@
 | 通貨・行動力 | 正式な銭・輝石・行動力 | 既存接続確認 |
 | 属性 | GAME04正式6属性 | `raid_bosses_20260822.json` のEVIL/ORDER/JUSTICE/CHAOSを表示接続。残りエリアの正式属性と最新productionへの統合は未確定 |
 | 開催者顔 | 対応キャラの正式顔クロップ | 開催者データ接続確認 |
-| ボス・背景 | 正式武将と対応背景 | `raid_production_20260830.json` のvariant／memberCharacterIds／areaIdへ接続済み。承認モック専用背景が必要な差分のみ制作待ち |
+| ボス・背景 | GAME04正式武将と対応背景 | `src/domain/redesign/raid.ts` の `encounter_flame` / `unlock_shadow` と `src/theme/sengoku-characters.json` へ接続。承認モック専用背景のみ制作待ち |
 | Header／Footer | 共通正式アイコン | 既存接続維持 |
 
-採用元：ボス／武将／背景は`src/domain/gameplay/canonical/data/raid_production_20260830.json`を`GAME04_RAID_PRODUCTION_MASTER`として読み、`src/domain/raidTopAssets.ts`で表示モデルへ解決する。開催者顔は`RaidTopEntry.room.owner`の開催者IDに紐づく表示データ。今回制作した9図柄は承認モックに不足していた専用図柄であり、正式アート監修済み共通アイコンではない。Production公開前に共通素材担当が正式版を供給し、同一パスまたは明示マッピングで置換する。
+採用元：ボス／武将は`src/domain/redesign/raid.ts` と `src/domain/redesign/masters.ts`、領土侵攻の投入履歴は`supabase/migrations/20260919151837_game04_territory_invasion.sql`。開催者顔は`RaidTopEntry.room.owner`の開催者IDに紐づく表示データ。今回制作した9図柄は承認モックに不足していた専用図柄であり、正式アート監修済み共通アイコンではない。Production公開前に共通素材担当が正式版を供給し、同一パスまたは明示マッピングで置換する。
 
 比較画像：`comparison/raid-approved-preview-1536.png`、`comparison/raid-approved-preview-390.png`。固定Preview：`/qa/raid-approved`（Mock環境のみ）。
 不足はユーザー側の制作へ渡せる具体的な依頼にする。無理な代用・無断生成・装飾省略はしない。

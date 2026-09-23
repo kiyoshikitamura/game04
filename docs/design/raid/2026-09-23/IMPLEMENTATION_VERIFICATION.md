@@ -5,8 +5,8 @@
 | 境界 | 結果 | 接続先 |
 |---|---|---|
 | レイド本体トップ | PASS | `RaidRoomConnectedBrowser → RaidTop → RaidTopApproved` |
-| ボス／武将／属性／背景 | PASS (master connected) | 採用マスターは `src/domain/gameplay/canonical/data/raid_production_20260830.json`。IDは `RAID_SHINJUKU_V1` 等の `raidVariantId`。`GAME04_RAID_PRODUCTION_MASTER → resolveRaidTopEnemy → RaidTopEntry.enemy → RaidTopApproved / RaidRoomDetail / ApprovedRaidPreview` の同一経路で接続。武将IDは各variantの `memberCharacterIds`、属性は `raid_bosses_20260822.json` のtownId対応。背景はareaId対応の表示素材へ解決 |
-| 属性 | PASS (source version noted) | `raid_bosses_20260822.json` の正式凍結属性を `CANONICAL_RAID_ATTRIBUTE_MASTER` 経由で表示。2026-08-30 raid production本体に属性列がないため、戦闘値の変更はしていない |
+| ボス／武将／属性／背景 | PASS (GAME04 redesign master) | `src/domain/redesign/raid.ts` の `RAID_MASTERS`（`encounter_flame` / `unlock_shadow`）を `resolveRaidTopEnemy → RaidTopEntry.enemy → RaidTopApproved / RaidRoomDetail / ApprovedRaidPreview` へ接続。旧 `raid_production_20260830.json` はGAME03スナップショットとして表示経路から除外 |
+| 属性 | PASS (GAME04 master) | `RAID_MASTERS[].enemy.element`（火／闇）を表示属性へ変換。旧 `raid_bosses_20260822.json` のGAME03属性経路は対象3画面で使用しない |
 | レイド分類 | PARTIAL | RPCに `origin` がある場合のみ `encounter` / `territory` を使用。未提供時は `difficultyId` で推測せず未分類のまま |
 | 開催者 | PASS | `RaidTopEntry.room.owner` の `userId` / `name` / `leaderIconUrl`。閲覧者・最後の参加者で代用しない |
 | Room詳細 | PASS | `RaidRoomDetail`。`briefing`、`display`、`participants`、`room.hp`、lifecycle を既存 resource から表示 |
@@ -26,7 +26,7 @@
 - QA専用ツールバー、Mockシナリオ説明、戦闘帰還Mock、比較用の実装注記は本体表示から除去した。
 - 詳細アクションは2列×2行に修正し、時計・人数・挑戦・行動力のUnicode代用を専用SVGへ統一した。
 - 本体の表示は `RaidTopEntry.room.owner` と `room.hp`、`participantCount`、`expiresAt`、敵属性を直接参照する。承認モック固有の固定名・固定HP・固定キャラ画像は残していない。
-- 旧 `src/domain/redesign/raid.ts` の `RAID_MASTERS` は今回のレイド一覧・詳細・比較QAの表示経路から使用していない。対象3画面はGAME04 master経路へ統一した。
+- 旧 `raid_production_20260830.json` をGAME04正本とした前回記録は訂正済み。対象3画面と比較QAは `src/domain/redesign/raid.ts` のGAME04 `RAID_MASTERS`へ統一した。
 - 一覧カードは画像領域／テキスト領域の左右分割を廃止し、全面背景・キャラクター・情報・操作を同一カード内で重ねる構造へ変更した。
 - ソート処理は維持し、説明文「残り時間が短い順」は本体・Preview・Redesign一覧から削除した。
 - QA詳細は実際の `.ui-hub-page-scroll` を縦スクロールし、詳細下部のCTAまで到達できることを確認した。スクロールバーは7px、金色トラック／つまみで承認デザインに合わせた。
@@ -53,8 +53,8 @@
 
 | 区分 | 残件 | 完了扱い |
 |---|---|---|
-| 正式データ | 最新raid production本体に属性列とorigin列がない。属性は旧正式凍結boss masterを参照して表示し、origin未提供時は分類を推測しない | 属性表示は実装済み。最新本体への属性/origin統合は未接続 |
-| 素材 | `bg_street_*.jpg` は現行GAME04エリア表示素材として接続済み。ただし承認モックと同一の専用レイド背景が別途必要な場合はその画像のみ制作待ち | UI実装完了。専用背景画像のみ供給待ち |
+| 正式データ | `game04_redesign_master` の投入版は `PREVIEW_PROVISIONAL_20260920_v1`。本体は同じIDを持つ `RAID_MASTERS`へ接続済み。正式承認版への昇格は未完了 | UI接続完了、正式承認版の投入待ち |
+| 素材 | 承認モックと同一の専用レイド背景が未納。GAME03市街地背景への代用はしていない | 専用背景のみ未完了 |
 | 素材供給 | `public/ui/raid/` のSVG9種は比較用の未承認制作物。正式共通アイコン供給後に差替え | 未完了。正式採用済みとして扱わない |
 | QA検証 | Mock RPCに `get_quest_raid_bonus_v1` の未処理呼出しが残る。PGRST202相当では画面表示を阻害しないが、console clean受入にはQA stubまたは正式RPCが必要 | 未完了。機能接続残件 |
 

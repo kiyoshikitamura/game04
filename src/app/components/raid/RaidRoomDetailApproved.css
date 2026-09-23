@@ -1,4 +1,8 @@
 .raid-detail__contribution-values>div:first-child::before{content:'';position:absolute;left:0;top:0;width:42px;height:42px;background:url('/ui/raid/swords.svg') center/contain no-repeat}
+.raid-detail__eligibility{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding-top:12px;border-top:1px solid #393840;color:#d9c98f;font-size:12px}
+.raid-detail__eligibility-steps{display:flex;gap:8px}
+.raid-detail__eligibility-steps span{display:grid;place-items:center;width:28px;height:28px;border:1px solid #a88c50;border-radius:50%;color:#b8aa83;font-family:Georgia,serif;font-size:14px}
+.raid-detail__eligibility-steps span.is-done{background:#b58a35;color:#171318;border-color:#e5c96e;box-shadow:0 0 0 2px rgba(229,201,110,.18)}
 .raid-detail__action .outlaw-button::after{content:'消費行動力 5';font-size:12px;margin-left:auto;padding-left:24px;background:url('/ui/raid/clock.svg') left center/18px no-repeat}
 .raid-detail__battle-facts>div:first-child strong::before,.raid-detail__battle-facts>div:last-child strong::before{content:'';display:inline-block;width:22px;height:22px;margin-right:5px;vertical-align:-5px;background:center/contain no-repeat}
 .raid-detail__battle-facts>div:first-child strong::before{background-image:url('/ui/raid/clock.svg')}

@@ -24,6 +24,6 @@
 ## 未修正点
 
 - ボス・背景など正式素材の差分は素材供給・正本マッピング待ち。簡易図形や別用途素材には置換していない。
-- 今回の比較では、ボス名・武将・属性・背景は `raid_production_20260830.json` のvariant IDを起点にした同一表示経路で確認した。
+- 今回の比較では、ボス名・武将・属性・背景は `src/domain/redesign/raid.ts` の `RAID_MASTERS`（`encounter_flame` / `unlock_shadow`）を起点にした同一表示経路で確認した。旧 `raid_production_20260830.json` をGAME04正本とした前回記録は誤記として訂正済み。
 - マスターの全variant／武将IDは [master-connection.md](./master-connection.md) に固定記録した。
 - レイド専用SVG9種は未承認素材のまま。正式採用扱いにはしていない。

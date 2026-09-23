@@ -9,7 +9,7 @@ import '../../components/raid/RaidCardOverlay.css';
 type IconName = 'clock' | 'people' | 'swords' | 'scroll' | 'handshake' | 'chest' | 'armor' | 'victory' | 'medal';
 const icon = (name: IconName, label = '') => <img className="raid-approved__icon" src={`/ui/raid/${name}.svg`} alt={label} />;
 const attrLabel: Record<RaidTopEnemy['attribute'], string> = { EVIL: '悪', ORDER: '秩序', JUSTICE: '正義', CHAOS: '混沌', UNKNOWN: '未確認' };
-const attrIcon = (value: RaidTopEnemy['attribute']) => value === 'UNKNOWN' ? null : <img className="raid-approved__icon" src={`/ui/rarity/attribute-badge-${value.toLowerCase()}.png`} alt="" />;
+const attrIcon = (value: RaidTopEnemy['attribute']) => value === 'UNKNOWN' ? null : <img className="raid-approved__icon" src={`/creative/ui/element-${({ EVIL: 'fire', CHAOS: 'dark', ORDER: 'water', JUSTICE: 'wind' } as Record<string, string>)[value] ?? 'light'}.png`} alt="" />;
 const fixture = createTopFixture('approved');
 const entries = fixture.participating.status === 'ready' ? fixture.participating.data : [];
 function owner(entry: RaidTopEntry) { return entry.room.owner.status === 'available' ? entry.room.owner.value : null; }

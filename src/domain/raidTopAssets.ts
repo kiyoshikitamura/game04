@@ -1,26 +1,31 @@
-import { CANONICAL_RAID_ATTRIBUTE_MASTER, GAME04_RAID_PRODUCTION_MASTER } from '@/domain/gameplay/canonical/combat_production';
-import { CHARACTERS_MASTER, getCanonicalBattleAreaName, getCanonicalBattleBackground, getCharacterTransparentImg } from '@/utils/game_constants';
+import { RAID_MASTERS } from '@/domain/redesign/raid';
+import { CHARACTER_MASTERS } from '@/domain/redesign/masters';
 import type { RaidTopEnemy } from './raidTop';
 
-/** 表示素材だけを実マスターから引く。日次選出/戦闘編成の生成には使用しない。 */
+const FORMAL_ROSTER = [12, 24, 30, 36, 5] as const;
+const FORMAL_PRESENTATION = {
+  encounter_flame: { baseId: 'azuchi', areaName: '安土城', backgroundUrl: '/creative/backgrounds/char_koharu_01.png' },
+  unlock_shadow: { baseId: 'azuchi', areaName: '安土城', backgroundUrl: '/creative/backgrounds/char_go_01.png' },
+} as const;
+const attributeFor = (element: string): RaidTopEnemy['attribute'] => ({ fire: 'EVIL', dark: 'CHAOS', water: 'ORDER', earth: 'JUSTICE', wind: 'JUSTICE', light: 'ORDER' }[element] ?? 'UNKNOWN') as RaidTopEnemy['attribute'];
+
+/** GAME04再設計の開催Masterだけを表示経路へ供給する。旧GAME03 canonicalは参照しない。 */
 export function resolveRaidTopEnemy(variantId: string, memberCharacterIds?: readonly string[] | null): RaidTopEnemy | null {
-  const variant = GAME04_RAID_PRODUCTION_MASTER.variants.find((entry) => entry.raidVariantId === variantId);
-  if (!variant || memberCharacterIds === null) return null;
-  const baseId = variant.areaId.toLowerCase();
-  const areaName = getCanonicalBattleAreaName(baseId);
-  const backgroundUrl = getCanonicalBattleBackground(baseId);
-  const ids = memberCharacterIds ?? variant.memberCharacterIds;
-  if (ids.length !== 5 || new Set(ids).size !== 5) return null;
+  const master = RAID_MASTERS.find((entry) => entry.id === variantId);
+  const presentation = master ? FORMAL_PRESENTATION[master.id as keyof typeof FORMAL_PRESENTATION] : null;
+  if (!master || !presentation || memberCharacterIds === null) return null;
+  const ids = memberCharacterIds ?? FORMAL_ROSTER.map(index => CHARACTER_MASTERS[index]?.id);
+  if (ids.length !== 5 || new Set(ids).size !== 5 || ids.some(id => !id)) return null;
   const roster = ids.map((id) => {
-    const character = CHARACTERS_MASTER.find((entry) => entry.id === id);
-    return character ? { id, name: character.jpName, imageUrl: getCharacterTransparentImg(character.name) } : null;
+    const character = CHARACTER_MASTERS.find((entry) => entry.id === id);
+    return character ? { id, name: character.name, imageUrl: character.image } : null;
   });
-  if (!areaName || !backgroundUrl || roster.length !== 5 || roster.some((entry) => entry === null)) return null;
+  if (roster.some((entry) => entry === null)) return null;
   const members = roster.filter((entry): entry is NonNullable<typeof entry> => entry !== null);
-  return { variantId, baseId, areaName, bossName: variant.raidName, attribute: (CANONICAL_RAID_ATTRIBUTE_MASTER[baseId] ?? 'UNKNOWN') as RaidTopEnemy['attribute'], backgroundUrl, leaderImageUrl: members[0].imageUrl, roster: members };
+  return { variantId, baseId: presentation.baseId, areaName: presentation.areaName, bossName: master.name, attribute: attributeFor(master.enemy.element), backgroundUrl: presentation.backgroundUrl, leaderImageUrl: master.enemy.image, roster: members };
 }
 
-/** 全7エリアの素材目録。『本日の対象』ではない。 */
-export const RAID_TOP_ENEMIES: readonly RaidTopEnemy[] = GAME04_RAID_PRODUCTION_MASTER.variants
-  .map((variant) => resolveRaidTopEnemy(variant.raidVariantId))
+/** GAME04正式開催Masterの素材目録。『本日の対象』ではない。 */
+export const RAID_TOP_ENEMIES: readonly RaidTopEnemy[] = RAID_MASTERS
+  .map((master) => resolveRaidTopEnemy(master.id))
   .filter((enemy): enemy is RaidTopEnemy => enemy !== null);

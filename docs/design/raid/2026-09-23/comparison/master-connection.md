@@ -1,19 +1,23 @@
-# GAME04レイドマスター接続記録
++# GAME04レイド正本接続記録
 
-採用ファイル: `src/domain/gameplay/canonical/data/raid_production_20260830.json`
+## 誤記訂正
 
-| raidVariantId | areaId | raidName | 武将ID（memberCharacterIds） |
-|---|---|---|---|
-| `RAID_SHINJUKU_V1` | `SHINJUKU` | キングス・クラウン | `char_reiji_01`, `char_mio_01`, `char_takuro_01`, `char_leon_01`, `char_kageyama_01` |
-| `RAID_SHIBUYA_V1` | `SHIBUYA` | ハイスピード・スターズ | `char_ageha_01`, `char_leo_01`, `char_sora_01`, `char_reina_01`, `char_noa_01` |
-| `RAID_IKEBUKURO_V1` | `IKEBUKURO` | アイアンウォール | `char_koharu_01`, `char_takeshi_01`, `char_momoko_01`, `char_riki_01`, `char_sakura_01` |
-| `RAID_ROPPONGI_V1` | `ROPPONGI` | ロイヤル・フラッシュ | `char_kaede_01`, `char_taiga_01`, `char_maya_01`, `char_seiya_01`, `char_cecile_01` |
-| `RAID_AKIHABARA_V1` | `AKIHABARA` | グリッチ・コード | `char_karen_01`, `char_miyabi_01`, `char_alice_01`, `char_rui_01`, `char_maya_01` |
-| `RAID_KAWASAKI_V1` | `KAWASAKI` | ブレイクダウン | `char_go_01`, `char_kengo_01`, `char_tetsu_01`, `char_lucas_01`, `char_riki_01` |
-| `RAID_YOKOHAMA_V1` | `YOKOHAMA` | ブルー・レクイエム | `char_genji_01`, `char_long_01`, `char_sakura_01`, `char_cecile_01`, `char_taiga_01` |
+前回記録で `src/domain/gameplay/canonical/data/raid_production_20260830.json` をGAME04正本として扱っていたが、同ファイルは `RAID_SHINJUKU_V1`、`キングス・クラウン`、`SHINJUKU`、`char_reiji_01` を含むGAME03本番スナップショットである。GAME04接続済みとした記録は誤りであり、今回訂正した。旧ファイルは履歴保全のため削除せず、レイド一覧・詳細・比較QAの表示経路からは除外した。
 
-接続経路:
+## 採用正本
 
-`raid_production_20260830.json` → `GAME04_RAID_PRODUCTION_MASTER` → `resolveRaidTopEnemy(raidVariantId)` → `RaidTopEntry.enemy` → `RaidTopApproved` / `RaidRoomDetail` / `ApprovedRaidPreview`。
+| 区分 | 所在 | 版／ID |
+|---|---|---|
+| GAME04再設計のレイドMaster | `src/domain/redesign/raid.ts` | `RAID_MASTERS` / `encounter_flame`, `unlock_shadow` |
+| 領土侵攻の投入履歴 | `supabase/migrations/20260919151837_game04_territory_invasion.sql` | `game04_redesign_master` / `PREVIEW_PROVISIONAL_20260920_v1` / `raidMasters[0].id=unlock_shadow` |
+| キャラクター正本 | `src/domain/redesign/masters.ts` → `src/theme/sengoku-characters.json` | GAME04戦国キャラクターID群 |
 
-属性は `raid_bosses_20260822.json` の `townId` 対応を `CANONICAL_RAID_ATTRIBUTE_MASTER` で参照する。背景は `areaId` 対応の表示素材、武将画像は `memberCharacterIds` を `CHARACTERS_MASTER` に解決する。旧 `src/domain/redesign/raid.ts` の `RAID_MASTERS` は対象3画面の表示経路では使用しない。
+接続経路は `RAID_MASTERS → resolveRaidTopEnemy → RaidTopEntry.enemy → RaidTopApproved / RaidRoomDetail / ApprovedRaidPreview`。詳細も一覧と同じ `resolveRaidTopEnemy` を通るため、旧 `raid_production_20260830.json` の名前・武将・背景は表示しない。比較QAの `createTopFixture` は `RAID_TOP_ENEMIES` を使い、同じ正本経路を検証する。
+
+## 画面へ渡すID
+
+- `encounter_flame`：炎影の守将、火属性
+- `unlock_shadow`：常闇の覇将、闇属性
+
+正式GAME04の専用レイド背景はまだ別納品されていないため、現在は既存のGAME04戦国背景を表示モデルへ接続し、専用背景だけを素材残件として明示する。GAME03の市街地背景は使用しない。
+
