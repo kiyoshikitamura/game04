@@ -61,7 +61,7 @@ ASSET_REQUIREMENTS.mdに既存採用元と不足を区別して記載し、制�
 ## 実装・固定Preview記録
 
 - 固定Preview：`/qa/raid-approved`（`NEXT_PUBLIC_USE_MOCK_DB=true`、`NEXT_PUBLIC_APP_ENV=development` のQA環境限定）。3面比較、一覧→詳細の遷移、一覧3フィルタ、詳細4導線、詳細下部CTAを同一画面で確認できる。
-- 比較画像：`comparison/raid-approved-preview-1536.png`、`comparison/raid-approved-preview-390.png`。
+- 比較画像：`comparison/raid-approved-preview-1536.png`、`comparison/raid-approved-preview-390.png`。本体確認画像と対象一覧は `comparison/comparison-inventory.md` に記録。
 - 実装：`src/app/qa/raid-approved/ApprovedRaidPreview.tsx` / `.css`。
 - 不足図柄：`public/ui/raid/*.svg`へ専用透過SVGを制作し、対応状況は `ASSET_REQUIREMENTS.md` に記録。正式共通アイコン供給後の差替え対象であり、絵文字や別用途素材による代用はしていない。
-- Production公開、mainマージ、Preview外部配信は未実施。
+- 実装コミット：`fdd25f4724427e43dc5da2c68514c6c765ff20fe`。Previewは専用ブランチから配信済み。Production公開・mainマージは未実施。
