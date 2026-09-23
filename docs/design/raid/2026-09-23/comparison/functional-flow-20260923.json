@@ -13,10 +13,11 @@
       "rewardClaimed": "PASS"
     },
     "bodyRpcFlow": {
-      "migrationAppliedToPreviewDatabase": "NOT_VERIFIED",
+      "migrationAppliedToPreviewDatabase": "PASS",
+      "readProjectionRpc": "PASS",
       "participateToBattleToReturn": "NOT_VERIFIED",
       "reloadConsistency": "NOT_VERIFIED",
-      "reason": "The preview database was not modified in this task; the new functional projection migration is committed but not applied."
+      "reason": "GAME04 dev migration is applied and authenticated read RPCs return 200 with empty results. No active/ended room or approved GAME04 master exists in the database, and create_raid_room_v1 rejected the disposable anonymous user as user unavailable; no old GAME03-ID test room was created."
     },
     "visual": {
       "comparisonImage": "raid-approved-mock-full-shell-vs-body-1536.png",
@@ -30,8 +31,8 @@
     }
   },
   "externalRequired": [
-    "Apply supabase/migrations/20260923000100_raid_room_functional_projection.sql to the authorized GAME04 dev/Preview database.",
-    "Populate/promote the approved GAME04 raid master so canonical room IDs do not remain GAME03 IDs.",
+    "Populate the latest approved GAME04 raid master and migrate canonical room IDs; the repository currently contains only PREVIEW_PROVISIONAL_20260920_v1 and legacy RAID_*_V1 data.",
+    "Provide an authorized disposable GAME04 QA account and an executable room/battle fixture for the body-RPC end-to-end test.",
     "Supply and approve the nine unapproved raid SVG assets and any mock-only backgrounds."
   ]
 }

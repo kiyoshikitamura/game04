@@ -13,7 +13,7 @@ language sql stable security definer set search_path=public,pg_temp as $$
   from public.raid_rooms r
   join public.raid_bosses b on b.id=r.raid_boss_instance_id
   left join public.canonical_raid_boss_master master on master.boss_id=coalesce(b.boss_master_id,b.boss_id)
-  left join public.raid_room_difficulty_rules rule on rule.difficulty=r.difficulty_id
+  left join public.raid_room_lifecycle_rules rule on rule.difficulty=r.difficulty_id
   where r.id=p_room_id
 $$;
 

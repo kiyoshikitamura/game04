@@ -12,7 +12,9 @@
 - 報酬確認は `RaidRoomConnectedBrowser → createRaidRoomClearRewardClient → get_raid_room_clear_reward_v1`、受取は既存Present導線へ接続している。
 - ただし、終了・未受取レイドを選択する本体一覧RPC `list_raid_room_cards_v1` は `ACTIVE` かつ未終了のみを返す。終了レイドを選ぶための正式な履歴RPCが未提供のため、「対象レイド選択→報酬確認→受取」は本体経路で完了確認できず、機能接続完了とは報告しない。
 - 参加→出撃→勝敗確定→詳細復帰→数値更新→報酬受取の実アカウント通し確認は、旧 `raidVariantId` 移行未完了と終了レイド選択RPC未提供のため未完了。敗北時に勝利数が増えないことも、本体の勝利数フィールド未提供のためUI記録は未実施。
-- 追加実装 `supabase/migrations/20260923000100_raid_room_functional_projection.sql` で、終了履歴RPC、正式レベル・属性・定員、挑戦数・勝利数・直近状態・報酬資格の投影を追加。MigrationはDBへ未適用のため、本体接続完了とは扱わない。
+- 追加実装 `supabase/migrations/20260923000100_raid_room_functional_projection.sql` はGAME04 devへ適用済み。Supabase側の適用履歴は `20260923120719 / raid_room_functional_projection`。投影RPCの存在を確認した。
+- 匿名Previewセッションで `list_raid_room_cards_v2` と `list_raid_room_history_v1` はHTTP 200・空結果を返した。これは本体RPCの読取接続確認であり、参加・出撃・勝敗確定・報酬受取の通し確認ではない。
+- 実DBのレイドルームは適用時点で active/ended とも0件。作成RPCは `user unavailable` で拒否されたため、旧GAME03 IDのテストルームを作成して成功扱いにはしていない。
 - GAME04再設計ドメインの参加→敗北→勝利→終了→報酬生成→受取は実行PASS。これは本体RPC通し検証ではない。
 
 ## 前回記録の訂正
@@ -61,7 +63,8 @@
 ## 残件
 
 - 本体RPCの旧 `raidVariantId` からGAME04 IDへのサーバー側移行。
-- `20260923000100_raid_room_functional_projection.sql` のGAME04 dev/Preview DB適用と、本体RPC通し検証。
+- 正式承認済みGAME04レイドマスタの投入・旧 `raidVariantId` からの正式ID移行。本正本が未提供のため、暫定値の昇格やID創作はしていない。
+- 実DBのQAアカウント、開催可能な正式GAME04ルーム、戦闘結果を再現できる検証fixture。本体RPC通し検証にはこれらが必要。
 - `game04_redesign_master` の `PREVIEW_PROVISIONAL_20260920_v1` から正式承認版への昇格。
 - 承認モック専用背景の供給。
 - 未承認SVG9種：`clock.svg`、`people.svg`、`swords.svg`、`scroll.svg`、`handshake.svg`、`chest.svg`、`armor.svg`、`victory.svg`、`medal.svg`。正式採用済みとは扱わない。
