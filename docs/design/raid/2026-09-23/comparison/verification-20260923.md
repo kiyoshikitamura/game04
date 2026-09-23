@@ -2,8 +2,8 @@
 
 - Branch: `codex/game04-raid-approved-implementation-20260923`
 - Implementation SHA: `9fff68a`
-- Fixed Preview: https://game04-de5oalkcd-kiyoshi-kitamura.vercel.app
-- Deployment: `dpl_3LiRqPkbcGosW53KLd2qwHvXrJMS` / Ready / Preview
+- Fixed Preview: https://game04-atensfo27-kiyoshi-kitamura.vercel.app
+- Deployment: `dpl_65pgbqAUmZt2jx6Dgb6LMVvnrhcG` / Ready / Preview
 
 ## 機能接続の追加検証（2026-09-23）
 
