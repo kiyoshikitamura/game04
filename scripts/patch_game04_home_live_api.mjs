@@ -13,6 +13,8 @@ const { build, version } = createRequire(path.resolve(esbuildPackage))('esbuild'
 assert.equal(version, '0.25.10', 'Use the reviewed bundler version');
 const sha = value => createHash('sha256').update(value).digest('hex');
 const live = await fs.readFile(input, 'utf8');
+// Reviewed input is the get_edge_function tool file content plus one trailing newline.
+// Its hash below includes that added newline; do not silently normalize the input.
 const reviewedSha = '685a752162156140ee49ee2a63e2f1d0db15f9e666efbdff553e17b9b77956c4';
 assert.equal(sha(live), reviewedSha, 'Live API changed; review its new source before rebasing this patch');
 const startToken = '    } else if (action === "set_home") {';

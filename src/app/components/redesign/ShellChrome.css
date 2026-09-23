@@ -2,7 +2,8 @@
 body.game04-theme .rd-shell>.rd-header.rd-chrome-header{position:sticky;top:0;z-index:45;grid-template-columns:minmax(0,1fr) auto;gap:0 4px;padding:6px 10px 0;background:linear-gradient(110deg,#190f17f5,#080708f5);border:1px solid #c69b50;border-radius:5px}
 body.game04-theme .rd-chrome-header .rd-identity{gap:8px;align-items:center;min-width:0}
 body.game04-theme .rd-chrome-header .g4-header-face{position:relative;width:44px;height:46px;overflow:visible;flex:none;border:0;border-radius:0;background:transparent}
-body.game04-theme .rd-chrome-header .g4-header-face img{width:42px;height:42px;object-fit:cover;object-position:50% 22%;transform:none;clip-path:none;border:1px solid #d8b05e;border-radius:50%;background:#24131b}
+body.game04-theme .rd-chrome-header .rd-chrome-face-crop{display:block;width:42px;height:42px;overflow:hidden;border:1px solid #d8b05e;border-radius:50%;background:#24131b}
+body.game04-theme .rd-chrome-header .g4-header-face img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 12%;transform:scale(2.4);transform-origin:50% 18%;clip-path:none;border:0;border-radius:0;background:transparent}
 body.game04-theme .rd-chrome-header .rd-chrome-level{position:absolute;left:1px;right:1px;bottom:0;z-index:1;text-align:center;font-size:10px;line-height:13px;color:#211308;background:linear-gradient(#ffe39c,#c6994e);border-radius:3px;padding:0 3px}
 body.game04-theme .rd-chrome-header .rd-identity strong{display:block;max-width:100%;font-size:15px;line-height:1.2;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 body.game04-theme .rd-chrome-header .rd-guild-slot{font-size:10px;line-height:1.3;color:#e0c687}

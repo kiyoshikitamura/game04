@@ -35,6 +35,7 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
   const [expanded, setExpanded] = useState(false);
   const [activities, setActivities] = useState<Activity[]>([]);
   const [profileFaces, setProfileFaces] = useState<Record<string, string>>({});
+  const [profileNames, setProfileNames] = useState<Record<string, string>>({});
   const [communityError, setCommunityError] = useState('');
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState('');
@@ -68,13 +69,14 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
         const { data: profiles } = await supabase.rpc('get_public_profiles', { p_user_ids: ids });
         if (cancelled) return;
         const faces: Record<string, string> = {};
-        for (const profile of profiles ?? []) { const character = CHARACTER_MASTERS.find(c => c.id === profile.favorite_character_id); if (character) faces[profile.user_id || profile.id] = characterArt(character, 'portrait') ?? character.image; }
-        setProfileFaces(faces);
+        const names: Record<string, string> = {};
+        for (const profile of profiles ?? []) { const id = profile.user_id || profile.id; const character = CHARACTER_MASTERS.find(c => c.id === profile.favorite_character_id); if (character) faces[id] = characterArt(character, 'portrait') ?? character.image; if (profile.username) names[id] = profile.username; }
+        setProfileFaces(faces); setProfileNames(names);
       }
       setActivities(visible);
     })();
     return () => { cancelled = true; };
-  }, [state.userId, previewOnly]);
+  }, [state.userId, previewOnly, socialEvents.map(event => event.author_id).join('|')]);
   useEffect(() => { const timer = window.setInterval(() => setNow(Date.now()), 1000); const rotation = window.setInterval(() => setBanner(i => (i + 1) % 2), 8000); return () => { window.clearInterval(timer); window.clearInterval(rotation); }; }, []);
   useEffect(() => { if (!previewOnly) game.setChatChannel(community === 'dm' ? 'DM' : 'GLOBAL'); }, [community, game.setChatChannel, previewOnly]);
   useEffect(() => { if (previewOnly) return; game.setShowTribeChatPanel(expanded && community !== 'activity'); return () => game.setShowTribeChatPanel(false); }, [expanded, community, game.setShowTribeChatPanel, previewOnly]);
@@ -91,10 +93,10 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
   function messages(full: boolean) {
     if (community !== 'dm') {
       const legacy: { id: string; createdAt: string; author: string; body: string; userId?: string }[] = community === 'activity'
-        ? activities.map(a => ({ id: a.id, createdAt: a.created_at ?? '', author: a.actor_display_name || '戦国便り', userId: a.actor_user_id, body: game04WorldText(a.display_payload?.title || describeHomeActivity(a.activity_type)) }))
+        ? activities.map(a => ({ id: a.id, createdAt: a.created_at ?? '', author: (a.actor_user_id && profileNames[a.actor_user_id]) || a.actor_display_name || '戦国便り', userId: a.actor_user_id, body: homeSystemText(a.display_payload?.title || describeHomeActivity(a.activity_type)) }))
         : (game.guildChats ?? []).map((m: { id: string; created_at?: string; author_name?: string; content?: string; user_id?: string }) => ({ id: m.id, createdAt: m.created_at ?? '', author: m.author_name || 'プレイヤー', body: m.content ?? '', userId: m.user_id }));
-      const merged = [...legacy.map(m => ({ ...m, roomId: '' })), ...socialEvents.map(e => ({ id: e.id, createdAt: e.created_at, author: '援軍要請', body: typeof e.body === 'string' ? e.body : '共闘の援軍を求めています。', roomId: e.room_id, userId: e.author_id }))].sort((a,b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
-      return merged.length ? merged.slice(0, full ? merged.length : 3).map(m => <div className="rd-message" key={m.id}>{m.userId && profileFaces[m.userId] && <img className="g4-home-message-face" src={profileFaces[m.userId]} alt="" />}<button className="rd-text-button" disabled={!homeImages.ready} onClick={() => { if (m.userId && m.userId !== state.userId) { game.setDmRecipientId(m.userId); setCommunity('dm'); setExpanded(true); } }}>{m.author}</button><div><span>{m.body}</span>{m.roomId && <button className="rd-button rd-rescue-link" disabled={!homeImages.ready} onClick={() => { setExpanded(false); onNavigate(`raid:${m.roomId}`); }}>共闘を確認 ›</button>}</div>{m.createdAt && <time className="g4-home-message-time" dateTime={m.createdAt}>{activityTime(m.createdAt, now)}</time>}{m.userId && m.userId !== state.userId && <button className="g4-home-message-open" disabled={!homeImages.ready} aria-label={`${m.author}にDM`} onClick={() => { game.setDmRecipientId(m.userId!); setCommunity('dm'); setExpanded(true); }}><img src="/ui/sengoku/09-chat.png" alt="" /></button>}</div>) : <p className="rd-muted">{community === 'activity' ? communityError || '新しい活動はまだありません' : '全体にひとこと送ってみましょう'}</p>;
+      const merged = [...legacy.map(m => ({ ...m, roomId: '' })), ...socialEvents.map(e => ({ id: e.id, createdAt: e.created_at, author: profileNames[e.author_id] || '援軍要請', body: homeSystemText(typeof e.body === 'string' ? e.body : '共闘の援軍を求めています。'), roomId: e.room_id, userId: e.author_id }))].sort((a,b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
+      return merged.length ? merged.slice(0, full ? merged.length : 3).map(m => <div className="rd-message" key={m.id}>{m.userId && profileFaces[m.userId] && <img className="g4-home-message-face" src={profileFaces[m.userId]} alt="" />}<button className="rd-text-button" disabled={!homeImages.ready} onClick={() => { if (m.userId && m.userId !== state.userId) { game.setDmRecipientId(m.userId); setCommunity('dm'); setExpanded(true); } }}>{m.author}</button><div>{m.roomId ? <button className="g4-home-rescue-body" disabled={!homeImages.ready} aria-label={`${m.body} 共闘を確認`} onClick={() => { setExpanded(false); onNavigate(`raid:${m.roomId}`); }}>{m.body}<span aria-hidden="true"> ›</span></button> : <span>{m.body}</span>}</div>{m.createdAt && <time className="g4-home-message-time" dateTime={m.createdAt}>{activityTime(m.createdAt, now)}</time>}{m.userId && m.userId !== state.userId && <button className="g4-home-message-open" disabled={!homeImages.ready} aria-label={`${m.author}にDM`} onClick={() => { game.setDmRecipientId(m.userId!); setCommunity('dm'); setExpanded(true); }}><img src="/ui/sengoku/09-chat.png" alt="" /></button>}</div>) : <p className="rd-muted">{community === 'activity' ? communityError || '新しい活動はまだありません' : '全体にひとこと送ってみましょう'}</p>;
     }
     if (full && game.dmRecipientId) return <><button className="rd-button" onClick={() => game.setDmRecipientId(null)}>会話一覧へ</button><h3>{activeDm?.userName || 'プレイヤー'}</h3>{direct.map((m: {id:string;sender_name?:string;message?:string;content?:string}) => <p className="rd-message" key={m.id}><b>{m.sender_name || 'プレイヤー'}</b><span>{m.message || m.content}</span></p>)}</>;
     return conversations.length ? conversations.slice(0, full ? conversations.length : 3).map(c => <button className="rd-message rd-conversation" disabled={!homeImages.ready} key={c.userId} onClick={() => { game.setDmRecipientId(c.userId); setExpanded(true); }}><b>{c.userName}{c.unreadCount ? ` (${c.unreadCount})` : ''}</b><span>{c.latestMessage}</span></button>) : <p className="rd-muted">ダイレクトメッセージはまだありません。全体チャットの名前から会話を始められます。</p>;
@@ -159,3 +161,6 @@ function activityTime(value: string, now: number) {
   if (!Number.isFinite(minutes)) return '';
   return minutes < 1 ? 'たった今' : minutes < 60 ? `${minutes}分前` : minutes < 1440 ? `${Math.floor(minutes / 60)}時間前` : `${Math.floor(minutes / 1440)}日前`;
 }
+
+/** System generated activity text only; player chat/DM content stays unchanged. */
+function homeSystemText(value: string) { return game04WorldText(value).replaceAll('レイド', '共闘').replaceAll('クエスト', '出陣').replaceAll('ガチャ', '召喚'); }
