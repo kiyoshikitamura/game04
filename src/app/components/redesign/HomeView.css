@@ -1,0 +1,85 @@
+/* 本陣専用。共有Header/Footer/Dialogや他画面のルールを上書きしない。 */
+.g4-home{position:relative;isolation:isolate;background-size:cover;background-position:center top;background-repeat:no-repeat;color:#fff3d5;font-family:G4NotoSerif,'Noto Serif JP',serif;padding-bottom:12px;min-height:100%;}
+.g4-home button{touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:filter .15s,transform .15s;}
+.g4-home button:active:not(:disabled),.g4-home-selector button:active:not(:disabled){filter:brightness(1.22);transform:translateY(1px)}
+.g4-home-stage{position:relative;height:clamp(390px,calc(100dvh - 258px),680px)}
+.g4-home.has-encounter .g4-home-stage{height:clamp(330px,calc(100dvh - 322px),616px)}
+.g4-home-visual{position:absolute;inset:0;overflow:hidden}
+.g4-home-person{position:absolute;height:96%;width:100%;max-width:none;object-fit:contain;object-position:center bottom;inset:auto 0 0;filter:drop-shadow(0 4px 9px #10061166);z-index:2;}
+.g4-home .g4-home-effect{z-index:1}
+.g4-home-shortcuts{position:absolute;top:9px;left:9px;z-index:4;display:grid;gap:7px;width:53px}
+.g4-home-shortcuts button{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:63px;width:53px;border:1px solid #b69a6170;border-radius:3px;background:linear-gradient(120deg,#090909e6,#130c0bbf);padding:5px 2px;color:#fff3d5;font-size:15px;text-shadow:0 1px 3px #000;line-height:1.25;box-shadow:0 2px 4px #0005}
+.g4-home-shortcuts button.g4-home-switch{min-height:34px;font-size:14px;border-color:transparent;background:#080709b5;padding:7px 0}
+.g4-home-shortcuts img{width:29px;height:28px;object-fit:contain;}
+.g4-home-shortcuts small{font-size:9px;line-height:1.2;color:#eee1c4}
+.g4-home-shortcuts button:disabled{opacity:.7;filter:grayscale(1)}
+.g4-home-shortcuts i{position:absolute;right:3px;top:3px;width:8px;height:8px;border-radius:50%;background:#e44133;box-shadow:0 0 5px #ffae6c}
+.g4-home-bottom{position:relative;padding:7px 10px 0;z-index:3}
+.g4-home-gold-frame{border:1.5px solid #dfbc64;border-radius:7px;box-shadow:inset 0 0 0 2px #2a1809,inset 0 0 0 3px #bf925b66,0 2px 6px #000a;background-image:url('/ui/raid/v2/panel-sakura-overlay.png');background-size:100% 100%;overflow:hidden}
+.g4-home-actions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;margin:0 0 9px}
+.g4-home-actions button{min-width:0;height:64px;display:flex;align-items:center;justify-content:center;gap:6px;padding:6px;color:#fff2c5;white-space:nowrap;text-shadow:0 2px 3px #000;}
+.g4-home-actions strong{font-size:clamp(16px,4.4vw,24px);font-weight:650;letter-spacing:.04em}
+.g4-home-actions img{width:35px;height:35px;object-fit:contain;flex:none}
+.g4-home-quest{background-color:#60170f;background-image:url('/ui/raid/v2/panel-sakura-overlay.png'),linear-gradient(130deg,#a62c13,#3c0809 75%)}
+.g4-home-territory{background-color:#091c2b;background-image:url('/ui/raid/v2/panel-sakura-overlay.png'),linear-gradient(120deg,#193951,#030b15 80%)}
+.g4-home-encounter{width:100%;height:54px;margin:0 0 10px;display:flex;align-items:center;gap:6px;padding:6px 8px;background-color:#160a0ae8;text-align:left;white-space:nowrap;}
+.g4-home-encounter>img{width:28px;height:31px;object-fit:contain;flex:none}
+.g4-home-encounter strong{font-size:17px;color:#fff1d1;text-shadow:0 0 6px #ff3c16;flex:none}
+.g4-home-boss{font-size:12px;overflow:hidden;text-overflow:ellipsis;min-width:0;border-left:1px solid #ae8a52;padding-left:6px;}
+.g4-home-encounter time{font:11px G4NotoSans,sans-serif;margin-left:auto;font-variant-numeric:tabular-nums;flex:none}
+.g4-home-confirm{border:1px solid #c19b52;background:linear-gradient(#9b311a,#4d0d0b);border-radius:4px;padding:7px 5px;font-size:13px;flex:none}
+.g4-home-community{background:#0d0b0cdd;border:1px solid #a78a54;border-radius:6px;overflow:hidden;}
+.g4-home-community .rd-tabs{margin:0;border-bottom:1px solid #a78a5480;height:38px}
+.g4-home-community .rd-tabs button{padding:5px 2px;font:17px G4NotoSerif,serif;position:relative;border:0;color:#fff5dd}
+.g4-home-community .rd-tabs button+button:before{content:'';position:absolute;left:0;top:7px;bottom:7px;width:1px;background:linear-gradient(transparent,#b99b5d,transparent)}
+.g4-home-community .rd-tabs button.active{background:linear-gradient(#72231d,#c9401e);border:1px solid #dbad60;border-radius:5px;box-shadow:inset 0 0 8px #c38c2155}
+.g4-home-community-lines{padding:0 7px;min-height:122px}
+.g4-home-community .rd-message{min-height:40px;align-items:center;margin:0;padding:6px 0;font-size:11px;border-bottom:1px solid #9b794745;gap:5px}
+.g4-home-community .rd-message:last-child{border:0}
+.g4-home-community .rd-message>.rd-text-button{font-size:11px;min-width:62px;max-width:80px;flex:none;padding:0 3px;text-align:left}
+.g4-home-community .rd-muted{margin:15px 4px;min-height:83px;font-family:G4NotoSans,sans-serif}
+.g4-home-community-open{display:block;margin-left:auto;padding:3px 10px 7px;color:#e7c690;border:0;background:none;font-size:11px}
+.g4-home-banner{position:relative;display:flex;align-items:center;justify-content:flex-end;width:100%;height:61px;margin-top:9px;padding:3px 13px;background-color:#290911;background-image:url('/ui/raid/v2/panel-sakura-overlay.png'),linear-gradient(90deg,#8c2634,#12090edc);gap:24px;text-shadow:0 2px 4px #000}
+.g4-home-banner-person{position:absolute;left:4%;top:-53%;width:66%;height:280%;object-fit:contain;object-position:center top;pointer-events:none;mask-image:linear-gradient(90deg,transparent,#000 20%,#000 75%,transparent)}
+.g4-home-banner strong,.g4-home-banner>span{position:relative;z-index:1;font-size:26px;letter-spacing:.15em}
+.g4-home-banner>span{font-size:35px}
+.g4-home-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:180px;height:100%;font-size:13px;color:#eedaa5;background:#190f11b5}
+.g4-home-selector{width:min(88vw,470px);max-height:84dvh;background:#0c0a0bec url('/ui/raid/v2/panel-sakura-overlay.png') center/100% 100%;border:2px solid #ddbc69;border-radius:13px;box-shadow:0 15px 70px #000d,inset 0 0 0 3px #98723455;font-family:G4NotoSerif,'Noto Serif JP',serif;}
+.g4-home-selector .rd-modal-header{padding:9px 11px;border-bottom:1px solid #b19751;background:#06070844;position:relative;min-height:48px}
+.g4-home-selector .rd-modal-header h2{font:650 26px G4NotoSerif,serif;letter-spacing:.14em;color:#f6d778;text-align:center;width:100%;padding-left:30px}
+.g4-home-selector .rd-modal-header>button{width:32px;height:32px;padding:0;flex:none;border-radius:50%;font:26px G4NotoSans,sans-serif;background:#110c12a6;border-color:#dbbc6e}
+.g4-home-selector .rd-modal-body{padding:10px 11px;scrollbar-width:thin;scrollbar-color:#d6b76d #171014}
+.g4-home-selector h3{font:650 21px G4NotoSerif,serif;color:#f4d785;letter-spacing:.14em;margin:0 0 8px;padding-left:3px}
+.g4-home-selector h3:not(:first-child){margin-top:14px}
+.g4-home-character-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.g4-home-background-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.g4-home-choice{min-width:0;border:1px solid #b89e5e;border-radius:6px;padding:0;overflow:hidden;display:flex;flex-direction:column;background:#0b0a0bef;color:#fff0d0;text-align:center;position:relative}
+.g4-home-choice[aria-pressed=true]{border:2px solid #ffe7ac;box-shadow:0 0 9px #ffbd4a,inset 0 0 7px #f6ab32}
+.g4-home-choice-art{width:100%;aspect-ratio: .73;background-position:center;background-size:cover;overflow:hidden}
+.g4-home-choice-art>img{width:100%;height:100%;object-fit:cover;object-position:center 14%;}
+.g4-home-choice>strong{display:flex;align-items:center;justify-content:center;width:100%;font-size:13px;line-height:1.35;min-height:34px;padding:4px 2px;border-top:1px solid #b89b5366;font-weight:600;}
+.g4-home-choice>small{width:100%;min-height:23px;padding:3px 2px;color:#f6d471;font-size:11px;line-height:1.35;border-top:1px solid #a88b5155;background:url('/ui/raid/v2/panel-sakura-overlay.png') center/100% 100%}
+.g4-home-background-art{width:100%;aspect-ratio:1.9;overflow:hidden;display:block}
+.g4-home-background-art>img{width:100%;height:100%;object-fit:cover;object-position:center 42%}
+.g4-home-background-choices .g4-home-choice>strong{font-size:12px;min-height:30px}
+.g4-home-selector .g4-home-choice.is-locked{opacity:.65;filter:grayscale(.65)}
+.g4-home-selector .rd-modal-footer{padding:10px 12px;border-top:1px solid #c49a5470;background:#0d0a0cc9}
+.g4-home-selector-actions{display:flex;justify-content:center;gap:10px}
+.g4-home-selector-actions .rd-button{min-height:42px;flex:1;max-width:180px;font-family:inherit;font-size:17px;border-color:#d9b76d;background:#130d11}
+.g4-home-selector-actions .rd-primary{background:linear-gradient(#852718,#3f0e11)}
+.g4-home-error{color:#ffd2b6;font:12px G4NotoSans,sans-serif;margin:10px 0 0}
+@media(max-width:360px){.g4-home-actions strong{font-size:15px}.g4-home-actions img{width:28px;height:28px}.g4-home-encounter{gap:4px;padding-inline:5px}.g4-home-encounter strong{font-size:14px}.g4-home-encounter>img{width:23px}.g4-home-encounter time{font-size:10px}.g4-home-confirm{font-size:11px}.g4-home-choice>strong{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.g4-home button{transition:none}}
+.g4-home-lock{color:#bebdc3;flex:none;margin:1px 0}
+.g4-home-message-face{width:35px;height:39px;object-fit:cover;object-position:center 12%;border:1px solid #b3915e;border-radius:5px;flex:none}
+.g4-home-message-time{flex:none;margin-left:auto;font:9px G4NotoSans,sans-serif;color:#bcb6af;white-space:nowrap}
+.g4-home-message-open{border:0;border-radius:50%;background:#272227b0;padding:5px;width:24px;height:26px;flex:none}
+.g4-home-message-open img{width:14px;height:14px;object-fit:contain;filter:grayscale(1)}
+.g4-home-community .rd-message>.rd-text-button{min-width:36px;max-width:58px;font-size:10px}
+.g4-home-community .rd-message>div{flex:1}
+.g4-home-spinner{width:26px;height:26px;border:3px solid #c3b8aa55;border-top-color:#d8b56d;border-radius:50%;animation:g4-home-spin .85s linear infinite}
+@keyframes g4-home-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.g4-home-spinner{animation:none;border-color:#d8b56d}}
+/* The same left controls remain visible while scrolling within the character stage. */
+.g4-home-stage{padding-top:9px}
+.g4-home-shortcuts{position:sticky;top:96px;left:auto;margin-left:9px}

@@ -25,6 +25,8 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   const owner = game.session?.user.id;
   const [data, setData] = useState<RedesignResponse | null>(null);
   const [tab, setTab] = useState(initialTab);
+  const [encounterNow, setEncounterNow] = useState(Date.now);
+  useEffect(() => { if (tab !== 'home') return; const timer = setInterval(() => setEncounterNow(Date.now()), 1000); return () => clearInterval(timer); }, [tab]);
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
   const [raidId, setRaidId] = useState<string>();
@@ -113,7 +115,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   }
   if (!data) return <div className="rd-shell"><div className="rd-panel">{error ? <><p role="alert">{error}</p><button className="rd-button" onClick={() => void refresh()}>再読み込み</button></> : <BrandedLoading label="戦国の世界を準備中" />}</div></div>;
   const state = data.state, party = buildBattleParty(state), vipActive = isVipActive(state.vipExpiresAt);
-  const encounter = data.rooms.find(r => getRoomRaidMaster(r).type === 'encounter' && r.status === 'active' && r.participants.some(p => p.userId === state.userId && !p.leftAt));
+  const encounter = data.rooms.find(r => getRoomRaidMaster(r).type === 'encounter' && r.status === 'active' && Date.parse(r.expiresAt) > encounterNow && r.participants.some(p => p.userId === state.userId && !p.leftAt));
   return <RedesignShell state={state} activeTab={tab} onNavigate={navigate} onAction={action} hideChrome={!!battle || questPlaying} socialEvents={data.socialEvents} missions={data.missions}
     encounterRaid={encounter ? { id: encounter.id, name: getRoomRaidMaster(encounter).name, expiresAt: encounter.expiresAt } : null}
     notifications={<>
