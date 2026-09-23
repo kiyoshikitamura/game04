@@ -1,0 +1,33 @@
+{
+  "implementationSha": "9fff68a",
+  "branch": "codex/game04-raid-approved-implementation-20260923",
+  "preview": "https://game04-mxvdc2dh4-kiyoshi-kitamura.vercel.app",
+  "deployment": "dpl_2AebJvUNwYKgjTVGadHzsjbT7RD5",
+  "checks": {
+    "redesignDomainFlow": {
+      "participate": "PASS",
+      "defeatDoesNotIncrementVictoryCount": "PASS",
+      "victoryCountAfterWins": 3,
+      "endedRoom": "PASS",
+      "rewardGrantCreated": "PASS",
+      "rewardClaimed": "PASS"
+    },
+    "bodyRpcFlow": {
+      "migrationAppliedToPreviewDatabase": "NOT_VERIFIED",
+      "participateToBattleToReturn": "NOT_VERIFIED",
+      "reloadConsistency": "NOT_VERIFIED",
+      "reason": "The preview database was not modified in this task; the new functional projection migration is committed but not applied."
+    },
+    "visual": {
+      "comparisonImage": "raid-approved-mock-full-shell-vs-body-1536.png",
+      "sameWidth": 1536,
+      "loadingCapture": "NOT_RECORDED_IN_THIS_CHANGESET",
+      "note": "The visual implementation was not changed by the functional contract commit; the prior approved comparison artifact is retained."
+    }
+  },
+  "externalRequired": [
+    "Apply supabase/migrations/20260923000100_raid_room_functional_projection.sql to the authorized GAME04 dev/Preview database.",
+    "Populate/promote the approved GAME04 raid master so canonical room IDs do not remain GAME03 IDs.",
+    "Supply and approve the nine unapproved raid SVG assets and any mock-only backgrounds."
+  ]
+}
