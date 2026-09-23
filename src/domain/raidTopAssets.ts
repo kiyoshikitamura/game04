@@ -1,4 +1,4 @@
-import { CANONICAL_RAID_PRODUCTION } from '@/domain/gameplay/canonical/combat_production';
+import { CANONICAL_RAID_ATTRIBUTE_MASTER, CANONICAL_RAID_PRODUCTION } from '@/domain/gameplay/canonical/combat_production';
 import { CHARACTERS_MASTER, getCanonicalBattleAreaName, getCanonicalBattleBackground, getCharacterTransparentImg } from '@/utils/game_constants';
 import type { RaidTopEnemy } from './raidTop';
 
@@ -17,7 +17,7 @@ export function resolveRaidTopEnemy(variantId: string, memberCharacterIds?: read
   });
   if (!areaName || !backgroundUrl || roster.length !== 5 || roster.some((entry) => entry === null)) return null;
   const members = roster.filter((entry): entry is NonNullable<typeof entry> => entry !== null);
-  return { variantId, baseId, areaName, bossName: variant.raidName, backgroundUrl, leaderImageUrl: members[0].imageUrl, roster: members };
+  return { variantId, baseId, areaName, bossName: variant.raidName, attribute: (CANONICAL_RAID_ATTRIBUTE_MASTER[baseId] ?? 'UNKNOWN') as RaidTopEnemy['attribute'], backgroundUrl, leaderImageUrl: members[0].imageUrl, roster: members };
 }
 
 /** 全7エリアの素材目録。『本日の対象』ではない。 */

@@ -12,10 +12,13 @@ export interface RaidTopEnemy {
   readonly baseId: string;
   readonly areaName: string;
   readonly bossName: string;
+  readonly attribute: 'EVIL' | 'ORDER' | 'JUSTICE' | 'CHAOS' | 'UNKNOWN';
   readonly backgroundUrl: string;
   readonly leaderImageUrl: string;
   readonly roster: readonly { readonly id: string; readonly name: string; readonly imageUrl: string }[];
 }
+
+export type RaidOrigin = 'encounter' | 'territory';
 
 export interface RaidTopEntry {
   readonly room: RaidRoomDto;
@@ -24,6 +27,8 @@ export interface RaidTopEntry {
   readonly participants: RaidObserved<readonly RaidPlayerSummary[]>;
   readonly membership: RaidObserved<'owner' | 'member' | 'rescue' | 'not_joined'>;
   readonly rescue: RaidObserved<{ readonly rescueId: string; readonly source: 'activity' | 'guild_chat'; readonly scope?: 'ACTIVITY' | 'GUILD'; readonly guildId?: string | null }>;
+  /** RPCが返す正式分類。未提供時はunknownのまま保持し、difficultyIdで推測しない。 */
+  readonly origin?: RaidObserved<RaidOrigin>;
 }
 
 /** 日次正本の返値を受け取る。全7エリアやクライアント独自抽選で代替しない。 */

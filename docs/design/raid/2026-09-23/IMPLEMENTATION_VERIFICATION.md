@@ -5,7 +5,9 @@
 | 境界 | 結果 | 接続先 |
 |---|---|---|
 | レイド本体トップ | PASS | `RaidRoomConnectedBrowser → RaidTop → RaidTopApproved` |
-| ボス／背景 | PASS | `resolveRaidTopEnemy` / `CANONICAL_RAID_PRODUCTION` / canonical character & background assets |
+| ボス／背景 | PARTIAL | `resolveRaidTopEnemy` が `CANONICAL_RAID_PRODUCTION` と既存表示素材を解決。背景パスは現行マスターに代替の正式レイド背景がないため、旧表示マッピングの残件を明示 |
+| 属性 | PASS (source version noted) | `raid_bosses_20260822.json` の正式凍結属性を `CANONICAL_RAID_ATTRIBUTE_MASTER` 経由で表示。2026-08-30 raid production本体に属性列がないため、戦闘値の変更はしていない |
+| レイド分類 | PARTIAL | RPCに `origin` がある場合のみ `encounter` / `territory` を使用。未提供時は `difficultyId` で推測せず未分類のまま |
 | 開催者 | PASS | `RaidTopEntry.room.owner` の `userId` / `name` / `leaderIconUrl`。閲覧者・最後の参加者で代用しない |
 | Room詳細 | PASS | `RaidRoomDetail`。`briefing`、`display`、`participants`、`room.hp`、lifecycle を既存 resource から表示 |
 | 詳細アクション | PASS | 敵情報・参加者・報酬・救援を既存Dialog callbackへ接続 |
@@ -20,10 +22,11 @@
 - 本体トップ：`comparison/raid-body-top-390.png`
 - 本体詳細：`comparison/raid-body-detail-390.png`
 - 確認ルート：`/qa/raid-top`、`/qa/raid-detail`、`/qa/raid-approved`
-- Mock環境でHTTP 200、一覧3フィルタ、続きへ、詳細2列アクション、挑むCTA、390px表示を確認。
+- Mock環境でHTTP 200、一覧3フィルタ、続きへ、詳細2列アクション、挑むCTA、390px表示を確認。実本体の一覧・詳細・詳細下部を同じデータ契約で再確認する。
 - QA専用ツールバー、Mockシナリオ説明、戦闘帰還Mock、比較用の実装注記は本体表示から除去した。
 - 詳細アクションは2列×2行に修正し、時計・人数・挑戦・行動力のUnicode代用を専用SVGへ統一した。
-- 本体の正式canonical画像は承認モックの検討画像とは異なるため、画像差分を隠さず正式素材由来の差分として扱う。GAME03素材への差替えは行っていない。
+- 本体の表示は `RaidTopEntry.room.owner` と `room.hp`、`participantCount`、`expiresAt`、敵属性を直接参照する。承認モック固有の固定名・固定HP・固定キャラ画像は残していない。
+- 本体の正式表示背景に旧エリア背景マッピングが残っている。GAME03素材への差替えは行っていないが、正式GAME04レイド背景の供給・マッピング確定が必要。
 
 ## 素材
 
@@ -45,7 +48,8 @@
 
 | 区分 | 残件 | 完了扱い |
 |---|---|---|
-| 正式データ | 一覧の属性表示は `RaidTopData` 契約に正式属性値がないため、架空の属性文を追加せず省略 | 未完了。正式属性データの供給待ち |
+| 正式データ | 最新raid production本体に属性列とorigin列がない。属性は旧正式凍結boss masterを参照して表示し、origin未提供時は分類を推測しない | 属性表示は実装済み。最新本体への属性/origin統合は未接続 |
+| 素材・背景 | `getCanonicalBattleBackground` が `bg_street_*.jpg` を参照。正式GAME04レイド背景の確定マッピングが未供給 | 未完了。素材制作・正本マッピング待ち |
 | 素材供給 | `public/ui/raid/` のSVG9種は比較用の未承認制作物。正式共通アイコン供給後に差替え | 未完了。正式採用済みとして扱わない |
 | QA検証 | Mock RPCに `get_quest_raid_bonus_v1` の未処理呼出しが残る。PGRST202相当では画面表示を阻害しないが、console clean受入にはQA stubまたは正式RPCが必要 | 未完了。供給／接続待ち |
 

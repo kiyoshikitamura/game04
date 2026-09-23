@@ -93,6 +93,10 @@ async function entry(value: unknown): Promise<RaidTopEntry> {
       }
       throw new Error('Invalid raid top rescue scope');
     }),
+    ...(item.origin === undefined ? {} : { origin: observed(item.origin, (value) => {
+      if (value !== 'encounter' && value !== 'territory') throw new Error('Invalid raid top origin');
+      return value;
+    }) }),
   };
 }
 async function resource<T>(value: unknown, parse: (value: unknown) => Promise<T>): Promise<RaidTopResource<T>> {

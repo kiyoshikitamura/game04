@@ -18,6 +18,8 @@ type Props = Pick<RaidTopData, 'participating' | 'rescues'> & {
 };
 
 const icon = (name: 'clock' | 'people' | 'chest' | 'medal') => <img className="raid-approved-ui__icon" src={`/ui/raid/${name}.svg`} alt="" />;
+const attributeLabel: Record<string, string> = { EVIL: '悪', ORDER: '秩序', JUSTICE: '正義', CHAOS: '混沌', UNKNOWN: '属性未確認' };
+const attributeIcon = (value: string) => value === 'UNKNOWN' ? null : <img className="raid-approved-ui__icon" src={`/ui/rarity/attribute-badge-${value.toLowerCase()}.png`} alt="" />;
 const ownerOf = (entry: RaidTopEntry): RaidPlayerSummary | null => entry.room.owner.status === 'available' ? entry.room.owner.value : null;
 const enemyOf = (entry: RaidTopEntry) => entry.enemy.status === 'available' ? entry.enemy.value : null;
 
@@ -36,14 +38,21 @@ function Hp({ entry, now, compact = false }: { entry: RaidTopEntry; now: number 
 
 function Card({ entry, now, resolve, onOpenRoom, disabled, rescue }: { entry: RaidTopEntry; now: number | null; resolve: Props['resolve']; onOpenRoom: Props['onOpenRoom']; disabled?: boolean; rescue?: boolean }) {
   const enemy = enemyOf(entry);
-  return <article className="raid-approved-ui__card"><div className="raid-approved-ui__card-art">{enemy && <><img src={resolve(enemy.backgroundUrl)} alt="" /><img src={resolve(enemy.leaderImageUrl)} alt="" /></>}</div><div className="raid-approved-ui__card-copy"><div className="raid-approved-ui__badges"><span>{rescue ? '救援' : getRaidDifficultyLabel(entry.room.difficultyId)}</span><span>{rescue ? '参加可能' : '参加中'}</span></div><h3>{enemy?.bossName ?? '敵情報未確認'} <small>Lv.1</small></h3><Owner entry={entry} resolve={resolve}/><Hp entry={entry} now={now} compact={rescue}/><OutlawButton loadingLabel="" variant="primary" disabled={disabled} onClick={() => onOpenRoom(entry.room.roomId, entry.rescue.status === 'available' ? entry.rescue.value.rescueId : undefined)}>{rescue ? '救援に向かう' : '続きへ'} ›</OutlawButton></div></article>;
+  const attribute = enemy?.attribute ?? 'UNKNOWN';
+  return <article className="raid-approved-ui__card"><div className="raid-approved-ui__card-art">{enemy && <><img src={resolve(enemy.backgroundUrl)} alt="" /><img src={resolve(enemy.leaderImageUrl)} alt="" /></>}</div><div className="raid-approved-ui__card-copy"><div className="raid-approved-ui__badges"><span>{rescue ? '救援' : getRaidDifficultyLabel(entry.room.difficultyId)}</span><span>{rescue ? '参加可能' : '参加中'}</span></div><h3>{enemy?.bossName ?? '敵情報未確認'} <small>Lv.1</small></h3><p className="raid-approved-ui__attribute">{attributeIcon(attribute)}{attributeLabel[attribute]}属性</p><Owner entry={entry} resolve={resolve}/><Hp entry={entry} now={now} compact={rescue}/><OutlawButton loadingLabel="" variant="primary" disabled={disabled} onClick={() => onOpenRoom(entry.room.roomId, entry.rescue.status === 'available' ? entry.rescue.value.rescueId : undefined)}>{rescue ? '救援に向かう' : '続きへ'} ›</OutlawButton></div></article>;
 }
+
+function remaining(entry: RaidTopEntry): number {
+  return entry.room.expiresAt.status === 'available' ? Date.parse(entry.room.expiresAt.value) : Number.POSITIVE_INFINITY;
+}
+function byRemaining(entries: readonly RaidTopEntry[]) { return [...entries].sort((a, b) => remaining(a) - remaining(b)); }
 
 export default function RaidTopApproved({ participating, rescues, now, resolve, onOpenRoom, onOpenRewards, onRefresh, disabled }: Props) {
   const [tab, setTab] = useState<'all' | 'encounter' | 'territory'>('all');
-  const joined = participating.status === 'ready' ? participating.data : [];
-  const help = rescues.status === 'ready' ? rescues.data : [];
-  const visibleJoined = tab === 'territory' ? joined.filter(entry => entry.room.difficultyId !== 'beginner') : tab === 'encounter' ? joined.filter(entry => entry.room.difficultyId === 'beginner') : joined;
+  const joined = participating.status === 'ready' ? byRemaining(participating.data) : [];
+  const help = rescues.status === 'ready' ? byRemaining(rescues.data) : [];
+  const origin = (entry: RaidTopEntry) => entry.origin?.status === 'available' ? entry.origin.value : null;
+  const visibleJoined = tab === 'territory' ? joined.filter(entry => origin(entry) === 'territory') : tab === 'encounter' ? joined.filter(entry => origin(entry) === 'encounter') : joined;
   const visibleHelp = tab === 'all' ? help.slice(0, 1) : [];
   const empty = visibleJoined.length === 0 && visibleHelp.length === 0;
   const tabs = useMemo(() => [['all', 'すべて'], ['encounter', 'エンカウント'], ['territory', '領土侵攻']] as const, []);

@@ -1,6 +1,7 @@
 import pvpSource from "./data/pvp_production_20260830.json" with { type: "json" };
 import matchmakingSource from "./data/pvp_matchmaking_20260822.json" with { type: "json" };
 import raidSource from "./data/raid_production_20260830.json" with { type: "json" };
+import raidBossSource from "./data/raid_bosses_20260822.json" with { type: "json" };
 import raidRewardsSource from "./data/raid_rewards_20260830.json" with { type: "json" };
 import rankingSource from "./data/ranking_competition_20260822.json" with { type: "json" };
 import rankingRewardsSource from "./data/ranking_season_rewards_20260830.json" with { type: "json" };
@@ -10,6 +11,9 @@ export const CANONICAL_PVP_MATCHMAKING = Object.freeze(matchmakingSource);
 export const CANONICAL_RANKING_REWARDS = Object.freeze(rankingRewardsSource);
 export const CANONICAL_PVP_RANKING_REWARDS = Object.freeze(rankingRewardsSource);
 export const CANONICAL_RAID_PRODUCTION = Object.freeze(raidSource);
+export const CANONICAL_RAID_ATTRIBUTE_MASTER = Object.freeze(
+  Object.fromEntries(raidBossSource.bosses.map((boss) => [boss.townId.toLowerCase(), boss.attribute])),
+);
 export const CANONICAL_RAID_BOSSES = Object.freeze({
   version: raidSource.version,
   bosses: raidSource.variants.map((variant) => ({
@@ -17,7 +21,7 @@ export const CANONICAL_RAID_BOSSES = Object.freeze({
     townId: variant.areaId.toLowerCase(),
     displayName: variant.raidName,
     profileType: "PARTY",
-    attribute: "NEUTRAL",
+    attribute: CANONICAL_RAID_ATTRIBUTE_MASTER[variant.areaId.toLowerCase()] ?? "UNKNOWN",
     referenceLevel: 30,
     maxHp: variant.maxHp,
     atk: variant.atk,
