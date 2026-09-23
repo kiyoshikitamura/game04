@@ -4,8 +4,8 @@
 .raid-approved-visual__icon{width:24px;height:24px;object-fit:contain;flex:none}
 .raid-approved-card{position:relative;isolation:isolate;height:200px;overflow:hidden;border:1px solid #a48b5c;border-radius:4px;background:#17151b}
 .raid-approved-card__art{position:absolute;inset:0;z-index:-2}
-.raid-approved-card__art img:first-child:not(:last-child){position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.raid-approved-card__art img:last-child{position:absolute;left:-20%;top:0;width:82%;height:160%;object-fit:contain;object-position:center top;filter:drop-shadow(2px 2px 4px #0008)}
+.raid-approved-card__background{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.raid-approved-card__character{position:absolute;left:-20%;top:0;width:82%;height:160%;object-fit:contain;object-position:center top;filter:drop-shadow(2px 2px 4px #0008)}
 .raid-approved-card:after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,transparent 24%,#100e1660 44%,#100e1699 100%);pointer-events:none}
 .raid-approved-card__copy{margin-left:37%;padding:8px 8px 0 0}
 .raid-approved-card__badges{display:flex;gap:5px}

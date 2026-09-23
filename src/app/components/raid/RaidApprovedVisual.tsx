@@ -26,7 +26,7 @@ export interface RaidApprovedCardData {
 
 export function RaidApprovedCard({ data, resolve = value => value, action }: { data: RaidApprovedCardData; resolve?: (url: string) => string; action: ReactNode }) {
   return <article className="raid-approved-card">
-    <div className="raid-approved-card__art">{data.backgroundUrl && <img src={resolve(data.backgroundUrl)} alt="" />}{data.characterUrl && <img src={resolve(data.characterUrl)} alt="" />}</div>
+    <div className="raid-approved-card__art">{data.backgroundUrl && <img className="raid-approved-card__background" src={resolve(data.backgroundUrl)} alt="" />}{data.characterUrl && <img className="raid-approved-card__character" src={resolve(data.characterUrl)} alt="" />}</div>
     <div className="raid-approved-card__copy">
       <div className="raid-approved-card__badges"><span>{data.badgeLabel}</span>{data.statusLabel && <span>{data.statusLabel}</span>}</div>
       <h3>{data.bossName} <small>{data.levelLabel}</small></h3>
