@@ -47,6 +47,7 @@ function Portrait({ url, name }: { url: string; name: string }) {
 
 export default function RaidRoomDetail({ room, briefing, display, participants, currentUserId, now, busy, onParticipants, onRewards, onEnemyInfo, action, rescue }: RaidRoomDetailProps) {
   const [rescueOpen, setRescueOpen] = useState(false);
+  const [compactHeader, setCompactHeader] = useState(false);
   const details = display.status === "success" && display.data?.roomId === room.roomId ? display.data : null;
   const brief = briefing.status === "success" && briefing.data?.roomId === room.roomId ? briefing.data : null;
   const enemy = brief?.raidVariantId ? resolveRaidTopEnemy(brief.raidVariantId) : null;
@@ -69,11 +70,20 @@ export default function RaidRoomDetail({ room, briefing, display, participants, 
     { src: ownerUrl, fallbackSrc: PERSON_FALLBACK, required: true },
     ...faceImages.map(entry => ({ src: entry.url, fallbackSrc: PERSON_FALLBACK, required: true })),
     ...ENTRANCES.map(entry => ({ src: entry.icon, fallbackSrc: BACKGROUND_FALLBACK, required: true })),
+    ...(rescue ? [{ src: "/ui/raid/handshake.svg", fallbackSrc: BACKGROUND_FALLBACK, required: true }] : []),
     ...(enemy ? [{ src: enemy.backgroundUrl, fallbackSrc: BACKGROUND_FALLBACK, required: true }, { src: enemy.leaderImageUrl, fallbackSrc: PERSON_FALLBACK, required: true }] : []),
   ];
   const manifestKey = JSON.stringify(manifest);
   const [assets, setAssets] = useState<{ key: string; results: AssetResult[] } | null>(null);
   const [retry, setRetry] = useState(0);
+  useEffect(() => {
+    const scrollOwner = document.querySelector<HTMLElement>('.ui-hub-page-scroll');
+    if (!scrollOwner) return;
+    const update = () => setCompactHeader(scrollOwner.scrollTop > 180);
+    update();
+    scrollOwner.addEventListener('scroll', update, { passive: true });
+    return () => scrollOwner.removeEventListener('scroll', update);
+  }, []);
   useEffect(() => {
     let cancelled = false;
     void preloadAssetManifest(JSON.parse(manifestKey)).then(results => { if (!cancelled) setAssets({ key: manifestKey, results }); });
@@ -88,6 +98,7 @@ export default function RaidRoomDetail({ room, briefing, display, participants, 
   const guild = details?.ownerGuild.status === "available" ? details.ownerGuild.value?.name ?? "Guild未所属" : "Guild未確認";
   const expires = room.expiresAt.status === "available" ? Date.parse(room.expiresAt.value) : NaN;
   return <div className="raid-detail" data-testid="raid-room-detail">
+    {compactHeader && <div className="raid-detail__compact-header" aria-label="レイド詳細コンパクト表示"><strong>{enemy?.bossName ?? brief?.bossName ?? "敵情報未確認"} <small>Lv.1</small></strong><span>{owner?.name ?? "開催者未確認"}</span><b>{hp ? `${number(hp.current)} / ${number(hp.max)}` : "HP未確認"}</b></div>}
     <section className="raid-detail__hero" aria-label="対戦する敵">
       {enemy && <><img className="raid-detail__background" src={resolve(enemy.backgroundUrl)} alt="" /><img className="raid-detail__enemy" src={resolve(enemy.leaderImageUrl)} alt="" /></>}
       <span className="raid-detail__difficulty">{getRaidDifficultyLabel(room.difficultyId)}</span>

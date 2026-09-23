@@ -34,7 +34,10 @@ function Hp({ entry, now, compact = false }: { entry: RaidTopEntry; now: number 
   const hp = entry.room.hp.status === 'available' && entry.room.hp.value.max > 0 ? entry.room.hp.value : null;
   const percent = hp ? Math.max(0, Math.min(100, hp.current / hp.max * 100)) : null;
   const lifecycle = getRaidRoomLifecyclePresentation(entry.room, now);
-  return <div className="raid-approved-ui__battle"><div className="raid-approved-ui__hpbar"><span style={{ width: `${percent ?? 0}%` }} /></div><div className="raid-approved-ui__hptext">{compact ? `HP ${percent === null ? '未確認' : `${percent.toFixed(0)}%`}` : hp ? `HP ${hp.current.toLocaleString()} / ${hp.max.toLocaleString()}　(${percent?.toFixed(0)}%)` : 'HP 未確認'}</div><div className="raid-approved-ui__facts"><span>{icon('clock')}{lifecycle.remainingLabel}</span><span>{icon('people')}{entry.room.participantCount.status === 'available' ? `${entry.room.participantCount.value}/20人` : '未確認'}</span></div></div>;
+  const remaining = now !== null && entry.room.expiresAt.status === 'available' ? Math.max(0, Date.parse(entry.room.expiresAt.value) - now) : null;
+  const minutes = remaining === null ? null : Math.ceil(remaining / 60000);
+  const timeLabel = minutes === null ? '未確認' : minutes >= 60 ? `${Math.floor(minutes / 60)}時間${minutes % 60}分` : `${minutes}分`;
+  return <div className="raid-approved-ui__battle"><div className="raid-approved-ui__hpbar"><span style={{ width: `${percent ?? 0}%` }} /></div><div className="raid-approved-ui__hptext">{compact ? `HP ${percent === null ? '未確認' : `${percent.toFixed(0)}%`}` : hp ? `HP ${hp.current.toLocaleString()} / ${hp.max.toLocaleString()}　(${percent?.toFixed(0)}%)` : 'HP 未確認'}</div><div className="raid-approved-ui__facts"><span>{icon('clock')}{timeLabel}</span><span>{icon('people')}{entry.room.participantCount.status === 'available' ? `${entry.room.participantCount.value}/20人` : '未確認'}</span></div></div>;
 }
 
 function Card({ entry, now, resolve, onOpenRoom, disabled, rescue }: { entry: RaidTopEntry; now: number | null; resolve: Props['resolve']; onOpenRoom: Props['onOpenRoom']; disabled?: boolean; rescue?: boolean }) {

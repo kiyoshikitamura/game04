@@ -178,10 +178,8 @@ export default function RaidRoomBrowser({ controller, onBattleReady, onBriefingR
           {snapshot.briefing.status === "error" && <p role="alert">参加条件を取得できませんでした。レイドを更新してください。</p>}
 
           {briefing?.membershipStatus === "joined" ? <>
-            <p>参加済み</p>
-            <p className="raid-room-muted">出撃時に編成を確認します。</p>
             {!briefing.battleStartEnabled || !onBriefingReady
-              ? <p>現在は出撃できません。</p>
+              ? null
               : <OutlawButton loadingLabel="" fullWidth disabled={busy || !!lifecycle?.blockJoin} aria-label="出撃準備" onClick={async () => {
                 setTransitioning(true); setTransitionError(null);
                 try { await onBriefingReady(briefing); }
