@@ -67,12 +67,13 @@ export default function RaidRoomDetail({ room, briefing, display, participants, 
   const [assets, setAssets] = useState<{ key: string; results: AssetResult[] } | null>(null);
   const [retry, setRetry] = useState(0);
   useEffect(() => {
-    const scrollOwner = document.querySelector<HTMLElement>('.ui-hub-page-scroll');
-    if (!scrollOwner) return;
-    const update = () => setCompactHeader(scrollOwner.scrollTop > 180);
+    const candidate = document.querySelector<HTMLElement>('.ui-hub-page-scroll');
+    const readTop = () => Math.max(candidate?.scrollTop ?? 0, window.scrollY);
+    const update = () => setCompactHeader(readTop() > 120);
     update();
-    scrollOwner.addEventListener('scroll', update, { passive: true });
-    return () => scrollOwner.removeEventListener('scroll', update);
+    candidate?.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('scroll', update, { passive: true });
+    return () => { candidate?.removeEventListener('scroll', update); window.removeEventListener('scroll', update); };
   }, []);
   useEffect(() => {
     let cancelled = false;
@@ -89,6 +90,6 @@ export default function RaidRoomDetail({ room, briefing, display, participants, 
   const expires = room.expiresAt.status === "available" ? Date.parse(room.expiresAt.value) : NaN;
   const detailData = { areaLabel: enemy?.areaName ?? "エリア未確認", bossName: enemy?.bossName ?? brief?.bossName ?? "敵情報未確認", backgroundUrl: enemy?.backgroundUrl, characterUrl: enemy?.leaderImageUrl, ownerName: owner?.name ?? "未確認", ownerImageUrl: ownerUrl, guildLabel: guild, hpPercent: percent, hpValueLabel: hp ? `${number(hp.current)} / ${number(hp.max)}` : "HP未確認", remainingLabel: lifecycle.remainingLabel, expiryLabel: Number.isFinite(expires) ? `期限 ${new Date(expires).toLocaleString("ja-JP", { timeZone: "Asia/Tokyo", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" })} JST` : "期限未確認", participantLabel: room.participantCount.status === "available" ? `${number(room.participantCount.value)}人` : "未確認", faces: faceImages };
   const detailActions = <>{ENTRANCES.map(entry => <OutlawButton key={entry.id} loadingLabel="" disabled={busy || (entry.id === "participants" && !isJoined)} aria-label={entry.label === "参加者" ? "参加者一覧" : entry.label} onClick={entry.id === "participants" ? onParticipants : entry.id === "rewards" ? onRewards : onEnemyInfo}><img src={resolve(entry.icon)} alt="" /><span>{entry.label}</span></OutlawButton>)}{rescue && <OutlawButton loadingLabel="" disabled={busy} aria-label="救援" onClick={() => setRescueOpen(true)}><img src={resolve("/ui/raid/handshake.svg")} alt="" /><span>救援</span></OutlawButton>}</>;
-  const contribution = isJoined ? <RaidApprovedContribution damageLabel={participants.status === "error" ? "未確認" : "確認済み"} damageValue={me?.appliedDamage.status === "available" ? number(me.appliedDamage.value) : "未確認"} battlesLabel={me?.finalizedBattles.status === "available" ? `${number(me.finalizedBattles.value)}戦` : "未確認"} eligibilityLabel="討伐資格 3勝" completed={me?.finalizedBattles.status === "available" ? me.finalizedBattles.value : 0} /> : null;
+  const contribution = isJoined ? <RaidApprovedContribution damageLabel="未挑戦" damageValue={me?.appliedDamage.status === "available" ? number(me.appliedDamage.value) : "未確認"} battlesLabel={me?.finalizedBattles.status === "available" ? `${number(me.finalizedBattles.value)}戦` : "未確認"} eligibilityLabel="討伐報酬資格まで　あと3勝" completed={me?.finalizedBattles.status === "available" ? me.finalizedBattles.value : 0} /> : null;
   return <div className="raid-detail" data-testid="raid-room-detail"><RaidApprovedDetailVisual data={detailData} resolve={resolve} compact={compactHeader} actions={detailActions} contribution={contribution} challenge={<RaidApprovedChallenge>{action}</RaidApprovedChallenge>} /><QuestRaidBonus roomId={room.roomId} />{rescue && rescueOpen && createPortal(<CanonicalDialog title="救援" onClose={() => setRescueOpen(false)} actions={[{label:"閉じる",semantic:"secondary",onClick:()=>setRescueOpen(false)}]}>{rescue}</CanonicalDialog>, document.body)}</div>;
 }
