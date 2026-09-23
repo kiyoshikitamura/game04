@@ -105,7 +105,10 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   async function raidAction(input: Record<string, unknown>) {
     const { action: name, ...payload } = input;
     const value = await action(String(name), payload);
-    if (value.battle) setBattle(value.battle);
+    if (value.battle) {
+      if (name === 'raid_battle' && typeof payload.roomId === 'string') setRaidId(payload.roomId);
+      setBattle(value.battle);
+    }
     return value;
   }
   if (!data) return <div className="rd-shell"><div className="rd-panel">{error ? <><p role="alert">{error}</p><button className="rd-button" onClick={() => void refresh()}>再読み込み</button></> : <BrandedLoading label="戦国の世界を準備中" />}</div></div>;
@@ -118,7 +121,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     {error && <p className="rd-panel" role="alert">{error}</p>}
     {data.pendingBattle && !battle && <div className="rd-panel"><p>未完了の戦闘があります。</p><button className="rd-button" disabled={busy} onClick={async () => {
       const p = data.pendingBattle!;
-      try { const value = await action(p.kind === 'quest' ? 'quest_battle' : 'raid_battle', p.kind === 'quest' ? { stageId: p.target_id } : { roomId: p.target_id }, p.id); if (value.battle) setBattle(value.battle); } catch { /* message shown above */ }
+      try { const value = await action(p.kind === 'quest' ? 'quest_battle' : 'raid_battle', p.kind === 'quest' ? { stageId: p.target_id } : { roomId: p.target_id }, p.id); if (value.battle) { if (p.kind === 'raid') { setRaidId(p.target_id); setTab('raid'); } setBattle(value.battle); } } catch { /* message shown above */ }
     }}>戦闘を再開</button></div>}
     </>}>
     {battle ? <BattleView result={battle} vipActive={vipActive} onComplete={() => { setBattle(null); void refresh(); }} /> : <>
