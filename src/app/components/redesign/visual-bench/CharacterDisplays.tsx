@@ -6,6 +6,14 @@ import styles from './CharacterDisplays.module.css';
 
 type Element = 'fire'|'water'|'earth'|'wind'|'light'|'dark';
 export type DisplaySubject = { id:string; name:string; rarity:'N'|'R'|'SR'|'SSR'; element:Element };
+export const CARD_OPENINGS = {
+  N: { top: 7.2, right: 6.7, bottom: 7.1, left: 6.9 },
+  R: { top: 7.2, right: 6.7, bottom: 7.1, left: 6.9 },
+  SR: { top: 7.3, right: 6.6, bottom: 7.1, left: 6.9 },
+  SSR: { top: 8.0, right: 7.2, bottom: 8.1, left: 7.4 },
+} as const;
+// The existing public/ui/rarity files are not accepted as GAME04 formal assets until their provenance is confirmed.
+export const FORMAL_RARITY_BADGES: Record<DisplaySubject['rarity'], string | null> = { N: null, R: null, SR: null, SSR: null };
 type Box = { x:number; y:number; width:number; height:number; naturalWidth:number; naturalHeight:number };
 const labels:Record<Element,string>={fire:'火',water:'水',earth:'土',wind:'風',light:'光',dark:'闇'};
 const pending = new Map<string,Promise<HTMLImageElement>>();
@@ -85,20 +93,28 @@ function ElementMark({src,element,className}:{src:string;element:Element;classNa
     <img className={styles.element} src={src} alt={`${labels[element]}属性`}/>
   </span>;
 }
+export function RarityBadge({rarity}:{rarity:DisplaySubject['rarity']}){
+  const src=FORMAL_RARITY_BADGES[rarity];
+  return src ? <img className={styles.rarityBadge} src={src} alt={`${rarity}レアリティ`}/> : null;
+}
 export function CharacterCard({subject,compact=false,className,hideMarks=false}:{subject:DisplaySubject;compact?:boolean;className?:string;hideMarks?:boolean}){
   const asset=useArtwork(subject,'card');
   const visible=usePageVisible();
   const phase=Array.from(subject.id).reduce((sum,c)=>sum+c.charCodeAt(0),0)%5000;
-  return <figure className={[styles.card,compact?styles.compact:'',className??''].filter(Boolean).join(' ')} data-rarity={subject.rarity} data-paused={!visible} aria-label={subject.name+' '+subject.rarity+' '+labels[subject.element]+'属性'} style={{'--phase':(-phase)+'ms'} as CSSProperties}>
+  const opening=CARD_OPENINGS[subject.rarity];
+  const openingStyle={ '--open-top': `${opening.top}%`, '--open-right': `${opening.right}%`, '--open-bottom': `${opening.bottom}%`, '--open-left': `${opening.left}%`, '--phase': `${-phase}ms` } as CSSProperties;
+  return <figure className={[styles.card,compact?styles.compact:'',className??''].filter(Boolean).join(' ')} data-rarity={subject.rarity} data-paused={!visible} aria-label={subject.name+' '+subject.rarity+' '+labels[subject.element]} style={openingStyle}>
     {!asset.box||!asset.source||!asset.background?<Pending error={asset.error} retry={asset.retry}/>:<>
       <div className={styles.cardArt}>
-        <img className={styles.backdrop} src={asset.background} alt=""/>
-        <div className={styles.cardPerson}><Person src={asset.source} box={asset.box}/></div>
+        <div className={styles.cardOpening}>
+          <img className={styles.backdrop} src={asset.background} alt=""/>
+          <div className={styles.cardPerson}><Person src={asset.source} box={asset.box}/></div>
+        </div>
         <img className={styles.frame} src={asset.frame} alt=""/>
         <span className={styles.sheen} aria-hidden="true"/>
         <span className={styles.aura} aria-hidden="true"/>
         {!hideMarks && <ElementMark src={asset.element} element={subject.element}/>}
-        {!hideMarks && <img className={styles.rarityBadge} src={`/ui/rarity/rarity-badge-${subject.rarity.toLowerCase()}.png`} alt={`${subject.rarity}レアリティ`}/>}
+        {!hideMarks && <RarityBadge rarity={subject.rarity}/>}
       </div>
       <figcaption className={styles.caption}>{subject.name}</figcaption>
     </>}

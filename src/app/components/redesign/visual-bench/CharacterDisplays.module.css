@@ -10,11 +10,12 @@
 .card.compact .elementMark{left:2px;bottom:2px;gap:2px;min-height:18px;padding:1px;border-radius:10px}
 .card.compact .element{width:24px!important;height:12px!important;flex-basis:24px}
 .card.compact .rarityBadge{top:2px;right:2px;width:28px;height:20px}
-.cardArt{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:8px}
+.cardArt{position:relative;aspect-ratio:1060/1484;overflow:visible;border-radius:8px}
+.cardOpening{position:absolute;inset:var(--open-top) var(--open-right) var(--open-bottom) var(--open-left);overflow:hidden;border-radius:1px;isolation:isolate}
 .backdrop{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:cover!important;opacity:1!important;transform:none!important}
-.cardPerson{position:absolute;inset:7% 8% 9%;z-index:1}
+.cardPerson{position:absolute;inset:0;z-index:1}
 .person{display:block;width:100%;height:100%;overflow:visible}
-.frame{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:fill!important;z-index:2;pointer-events:none;transform:none!important}
+.frame{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:contain!important;aspect-ratio:1060/1484;z-index:2;pointer-events:none;transform:none!important}
 .elementMark{position:absolute;left:12px;bottom:12px;z-index:4;display:inline-flex;align-items:center;min-height:28px;padding:2px;color:#f4efe6;background:#151216e6;border:1px solid #d8b56d;border-radius:14px;font-family:"Noto Sans JP",sans-serif!important}
 .element{position:static!important;display:block;width:48px!important;height:24px!important;object-fit:contain!important;flex:0 0 48px;transform:none!important}
 .rarityBadge{position:absolute;right:12px;top:12px;z-index:4;width:42px;height:28px;object-fit:contain;filter:drop-shadow(0 1px 2px #000)}

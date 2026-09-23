@@ -7,7 +7,7 @@ import { passiveDescription, skillDescription } from './battleLabels';
 import ElementBadge from './ElementBadge';
 import { CHARACTER_MASTERS } from '@/domain/redesign/masters';
 import localSkills from '@/theme/local-skills.json';
-import { CharacterCard } from './visual-bench/CharacterDisplays';
+import { CharacterCard, RarityBadge } from './visual-bench/CharacterDisplays';
 
 export const ELEMENT_LABELS: Record<string, string> = { fire: '火', water: '水', earth: '土', wind: '風', light: '光', dark: '闇' };
 function displaySkillDescription(description: string) {
@@ -29,7 +29,7 @@ export default function PreparationModal({ party, title, energyCost, energy, bus
     ]}>
       <h3>{title}</h3>
       <div className="rq-party">{party.map((unit, index) => { const master = CHARACTER_MASTERS.find(entry => entry.id === unit.id); const subject = master ? { id: master.id, name: unit.name, rarity: master.rarity, element: unit.element as 'fire'|'water'|'earth'|'wind'|'light'|'dark' } : null; return <button type="button" key={unit.id} className="rq-party-card" onClick={() => setDetail(unit)} aria-label={`${index + 1}番 ${unit.name}のスキル・パッシブ`}>
-        <span className="rq-order">{index + 1}</span><div className="rq-party-visual-wrap">{subject ? <CharacterCard subject={subject} compact hideMarks className="rq-party-visual-card" /> : <div className="rq-card-visual"><img className="rq-card-person" src={unit.image} alt={unit.name} /></div>}<div className="rq-party-badges"><img src={`/ui/rarity/rarity-badge-${(master?.rarity ?? 'N').toLowerCase()}.png`} alt={`${master?.rarity ?? 'N'}レアリティ`} /><ElementBadge element={unit.element} /></div></div><div className="rq-party-meta"><strong>{unit.name}</strong><span className="rq-rarity-line">Lv.{unit.level}</span><small>HP {unit.stats.hp.toLocaleString()}</small></div>
+        <span className="rq-order">{index + 1}</span><div className="rq-party-visual-wrap">{subject ? <CharacterCard subject={subject} compact hideMarks className="rq-party-visual-card" /> : <div className="rq-card-visual"><img className="rq-card-person" src={unit.image} alt={unit.name} /></div>}<div className="rq-party-badges"><RarityBadge rarity={master?.rarity ?? 'N'} /><ElementBadge element={unit.element} /></div></div><div className="rq-party-meta"><strong>{unit.name}</strong><span className="rq-rarity-line">Lv.{unit.level}</span><small>HP {unit.stats.hp.toLocaleString()}</small></div>
       </button>; })}</div>
       <p className="rq-total-sp">合計SP <strong>{commonSpMax ?? '開催時ルールを適用'}</strong></p>
       <button type="button" className="rq-edit-button" onClick={onOpenDeck} disabled={busy}>編成変更</button>
@@ -38,7 +38,7 @@ export default function PreparationModal({ party, title, energyCost, energy, bus
       {error && <p role="alert">{error}</p>}
     </CanonicalDialog>
     {detail && <CanonicalDialog title={`${detail.name}の詳細`} onClose={() => setDetail(null)} actions={[{ label: '閉じる', onClick: () => setDetail(null) }]}>
-      <div className="rq-detail-profile"><div className="rq-detail-visual"><CharacterCard subject={{id: detail.id, name: detail.name, rarity: CHARACTER_MASTERS.find(entry => entry.id === detail.id)?.rarity ?? 'N', element: detail.element as 'fire'|'water'|'earth'|'wind'|'light'|'dark'}} compact hideMarks className="rq-detail-card" /><h3>{detail.name}</h3><div className="rq-detail-badges"><img src={`/ui/rarity/rarity-badge-${(CHARACTER_MASTERS.find(entry => entry.id === detail.id)?.rarity ?? 'N').toLowerCase()}.png`} alt={`${CHARACTER_MASTERS.find(entry => entry.id === detail.id)?.rarity ?? 'N'}レアリティ`} /><ElementBadge element={detail.element} /><span>Lv.{detail.level}</span></div></div></div>
+      <div className="rq-detail-profile"><div className="rq-detail-visual"><CharacterCard subject={{id: detail.id, name: detail.name, rarity: CHARACTER_MASTERS.find(entry => entry.id === detail.id)?.rarity ?? 'N', element: detail.element as 'fire'|'water'|'earth'|'wind'|'light'|'dark'}} compact hideMarks className="rq-detail-card" /><h3>{detail.name}</h3><div className="rq-detail-badges"><RarityBadge rarity={CHARACTER_MASTERS.find(entry => entry.id === detail.id)?.rarity ?? 'N'} /><ElementBadge element={detail.element} /><span>Lv.{detail.level}</span></div></div></div>
       <dl className="rq-detail-stats">{Object.entries(detail.stats).map(([key, value]) => <div key={key}><dt>{key.toUpperCase()}</dt><dd>{value.toLocaleString()}</dd></div>)}</dl>
       <h3>装備スキル</h3>{detail.skills.length === 0 && <p>スキル未設定</p>}
       {detail.skills.map((skill) => { const asset = formalSkillAsset(skill); return <article className="rq-detail-item" key={skill.id}><div className="rq-skill-head"><img src={asset.image} alt="" /><div><strong>{asset.name}</strong><p><ElementBadge element={skill.element} /> ／ 消費SP {skill.spCost}</p></div></div><p>{displaySkillDescription(skill.description || skillDescription(skill, commonSpMax !== null))}</p></article>; })}
