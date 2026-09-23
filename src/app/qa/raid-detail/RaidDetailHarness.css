@@ -2,5 +2,12 @@
 .raid-detail-qa-tools { display: none; }
 .raid-detail-qa-tools label { display: flex; align-items: center; gap: 8px; }
 .raid-detail-qa-tools select { background: #22252c; color: #eee; min-height: 32px; max-width: 160px; }
-.raid-detail-qa-content { flex: 1; min-height: 0; overflow: hidden; }
+.raid-detail-qa-content { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: thin; scrollbar-color: #d6b95f #211f26; }
+.raid-detail-qa-content::-webkit-scrollbar { width: 7px; }
+.raid-detail-qa-content::-webkit-scrollbar-track { background: #211f26; }
+.raid-detail-qa-content::-webkit-scrollbar-thumb { background: #d6b95f; border: 1px solid #7f672f; border-radius: 3px; }
+.raid-detail-qa-content .ui-hub-page-scroll { scrollbar-width: thin; scrollbar-color: #d6b95f #211f26; }
+.raid-detail-qa-content .ui-hub-page-scroll::-webkit-scrollbar { width: 7px; }
+.raid-detail-qa-content .ui-hub-page-scroll::-webkit-scrollbar-track { background: #211f26; }
+.raid-detail-qa-content .ui-hub-page-scroll::-webkit-scrollbar-thumb { background: #d6b95f; border: 1px solid #7f672f; border-radius: 3px; }
 .raid-detail-qa-footer { display: none; }

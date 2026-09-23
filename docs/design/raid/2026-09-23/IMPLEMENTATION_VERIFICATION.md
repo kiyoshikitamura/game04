@@ -26,6 +26,9 @@
 - QA専用ツールバー、Mockシナリオ説明、戦闘帰還Mock、比較用の実装注記は本体表示から除去した。
 - 詳細アクションは2列×2行に修正し、時計・人数・挑戦・行動力のUnicode代用を専用SVGへ統一した。
 - 本体の表示は `RaidTopEntry.room.owner` と `room.hp`、`participantCount`、`expiresAt`、敵属性を直接参照する。承認モック固有の固定名・固定HP・固定キャラ画像は残していない。
+- ソート処理は維持し、説明文「残り時間が短い順」は本体・Preview・Redesign一覧から削除した。
+- QA詳細は実際の `.ui-hub-page-scroll` を縦スクロールし、詳細下部のCTAまで到達できることを確認した。スクロールバーは7px、金色トラック／つまみで承認デザインに合わせた。
+- 承認Previewのパネルも固定高さ＋縦スクロールへ変更し、不透明stickyフッターがカード内容を視覚的に覆わない配置へ修正した。
 - 本体の正式表示背景に旧エリア背景マッピングが残っている。GAME03素材への差替えは行っていないが、正式GAME04レイド背景の供給・マッピング確定が必要。
 
 ## 素材
@@ -51,7 +54,7 @@
 | 正式データ | 最新raid production本体に属性列とorigin列がない。属性は旧正式凍結boss masterを参照して表示し、origin未提供時は分類を推測しない | 属性表示は実装済み。最新本体への属性/origin統合は未接続 |
 | 素材・背景 | `getCanonicalBattleBackground` が `bg_street_*.jpg` を参照。正式GAME04レイド背景の確定マッピングが未供給 | 未完了。素材制作・正本マッピング待ち |
 | 素材供給 | `public/ui/raid/` のSVG9種は比較用の未承認制作物。正式共通アイコン供給後に差替え | 未完了。正式採用済みとして扱わない |
-| QA検証 | Mock RPCに `get_quest_raid_bonus_v1` の未処理呼出しが残る。PGRST202相当では画面表示を阻害しないが、console clean受入にはQA stubまたは正式RPCが必要 | 未完了。供給／接続待ち |
+| QA検証 | Mock RPCに `get_quest_raid_bonus_v1` の未処理呼出しが残る。PGRST202相当では画面表示を阻害しないが、console clean受入にはQA stubまたは正式RPCが必要 | 未完了。機能接続残件 |
 
 ## 検証コマンド
 
