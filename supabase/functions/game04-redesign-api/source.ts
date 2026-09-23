@@ -10,7 +10,10 @@ import { getQuestStage as getLegacyQuestStage } from '../../../src/domain/redesi
 import { createQuestBattleInput, questEnergyCost, questVictoryRewards, QUEST_MASTER_VERSION, type FormalQuestStage } from '../../../src/domain/redesign/questMaster.ts';
 import { getQuestStage, isQuestStageUnlocked } from '../../../src/domain/redesign/quests.ts';
 import { characterArt } from '../../../src/theme/creativeAssets.ts';
-import { applyRaidAction, createRaidRoom, getRoomRaidMaster, raidEnemy } from '../../../src/domain/redesign/raid.ts';
+import { applyRaidAction, createRaidRoom, getRoomRaidMaster, raidEnemies } from '../../../src/domain/redesign/raid.ts';
+import { createFormalBattleInput } from '../../../src/domain/redesign/formalBattleInput.ts';
+import { createFormalInvasionMaster } from '../../../src/domain/redesign/raidInvasionMaster.ts';
+import { selectEncounterMaster } from '../../../src/domain/redesign/raidFormalMaster.ts';
 import { projectTerritory } from '../../../src/domain/redesign/territory.ts';
 import type { TerritoryMaster, TerritoryProgress } from '../../../src/domain/redesign/types.ts';
 import type { BattleInput, RaidRoom, RedesignState, Reward } from '../../../src/domain/redesign/types.ts';
@@ -138,13 +141,15 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
       const me = room.participants.find(p => p.userId === userId);
       if (room.status !== 'active' || Date.parse(room.expiresAt) <= Date.now() || !me || me.leftAt) throw new ApiError('参加できる開催中レイドを選んでください。');
       startRoom = room;
-      waves = [[raidEnemy(master, room.level)]]; cost = master.energyCost; targetId = room.id; raidLevel = room.level;
+      raidLevel = payload.level === undefined ? room.level : Number(payload.level);
+      if(!Number.isInteger(raidLevel)||raidLevel<me.joinedLevel||raidLevel>room.level||(master.type!=='unlock'&&raidLevel!==room.level))throw new ApiError('この段階には挑戦できません。');
+      waves = [raidEnemies(master, raidLevel)]; cost = master.energyCost; targetId = room.id;
     }
     if (state.energy < cost) throw new ApiError('行動力が足りません。');
     const seed = crypto.getRandomValues(new Uint32Array(1))[0];
     // Only a new battle receives current rules. Saved started/settled records above are never upgraded.
     const rules = startRoom?.territorySnapshot?.battleRules ?? BATTLE_RULES;
-    const input = questStage ? createQuestBattleInput(seed, buildBattleParty(state, rules), questStage, rules) : { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel,  };
+    const input = questStage ? createQuestBattleInput(seed, buildBattleParty(state, rules), questStage, rules) : startRoom && getRoomRaidMaster(startRoom).masterVersion ? {...createFormalBattleInput(seed,buildBattleParty(state,rules),waves as (import('../../../src/domain/redesign/types.ts').EnemyUnit & {initialSp:number})[][],rules),raidLevel,raidMasterVersion:getRoomRaidMaster(startRoom).masterVersion,playerExpReward:{amount:getRoomRaidMaster(startRoom).playerExp??0,version:getRoomRaidMaster(startRoom).masterVersion,status:'APPROVED'}} : { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel,  };
     // Validate and simulate before charging. Invalid provisional masters must not strand a paid pending battle.
     preparedBattle = simulateBattle(input);
     await commit(state, { ...state, energy: state.energy - cost, ...(questStage ? {questAttempts:{...state.questAttempts,[targetId]:(state.questAttempts?.[targetId]??0)+1},questProgressVersion:QUEST_MASTER_VERSION} : {}) }, id, { id, kind, targetId, seed, input, status: 'started' }, startRoom, startRoom?.version ?? null);
@@ -203,14 +208,24 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
           };
         } else playerGrowth = { status: "MIGRATION_PENDING", offeredExp: expReward.amount, gainedExp: 0 };
       }
-      if ((encounterRoll ?? random()) < stage.encounterChance && !(await roomsFor(userId)).some(existing => existing.ownerId === userId && existing.status === 'active' && Date.parse(existing.expiresAt) > Date.now() && !existing.territorySnapshot && existing.masterId === 'encounter_flame')) {
+      if ((encounterRoll ?? random()) < stage.encounterChance && !(await roomsFor(userId)).some(existing => existing.ownerId === userId && existing.status === 'active' && Date.parse(existing.expiresAt) > Date.now() && !existing.territorySnapshot && getRoomRaidMaster(existing).type === 'encounter')) {
         encounterRaidId = await uuidFor(`encounter:${id}`);
-        room = createRaidRoom('encounter_flame', userId, encounterRaidId, Date.now()); room.participants[0].name = playerName; version = -1;
+        const encounterMaster=record.input.questMasterVersion===QUEST_MASTER_VERSION?selectEncounterMaster(Number(stage.designId.split('-')[0]),random):null;
+        room = createRaidRoom(encounterMaster?.id??'encounter_flame', userId, encounterRaidId, Date.now()); room.participants[0].name = playerName; version = -1;
       }
     } else if (record.kind === 'raid') {
       const currentRoom = await roomFor(record.target_id); version = currentRoom.version;
-      const transition = applyRaidAction(currentRoom, after, 'raid_battle', { battleId: id, battleLevel: record.input.raidLevel, result: battle, energyAlreadyPaid: true });
-      room = transition.room; after = transition.state;
+      const transition = applyRaidAction(currentRoom, after, 'raid_battle', { battleId: id, battleLevel: record.input.raidLevel, result: battle, energyAlreadyPaid: true, seed:record.seed, luck:record.input.party.reduce((sum:number,p:any)=>sum+Math.max(0,Math.min(100,p.stats.luk)),0)/5 });
+      room = transition.room; after = transition.state; rewards.push(...transition.rewards);
+      if(battle.outcome==='win'&&record.input.raidMasterVersion&&record.input.playerExpReward?.amount){
+        const progress=after.playerProgress, amount=record.input.playerExpReward.amount;
+        if(progress?.version===GROWTH_VERSION&&progress.status==='active'){
+          const priorEnergy=after.energy;const grown=applyPlayerExperience(progress.level,progress.exp,amount,after.energy,after.energyMax);
+          after.playerProgress={...progress,level:grown.level,exp:grown.exp};after.energy=grown.energy;
+          playerGrowth={status:'APPROVED',rewardVersion:record.input.raidMasterVersion,offeredExp:amount,gainedExp:amount,beforeLevel:progress.level,level:grown.level,exp:grown.exp,energyRecovered:grown.energy-priorEnergy,energy:grown.energy,energyMax:after.energyMax};
+        }else playerGrowth={status:'MIGRATION_PENDING',offeredExp:amount,gainedExp:0};
+      }
+
     }
     const result = { battle, rewards, firstClear, encounterRaidId, ...(playerGrowth ? { playerGrowth } : {}) };
     try {
@@ -253,7 +268,13 @@ Deno.serve(async (request: Request) => {
         const context = await territoryContext(user.id);
         destinationId = context.master.destinations.find(d => d.raidMasterId === String(payload.masterId))?.id ?? '';
       }
-      const hosted = await rpc('game04_host_territory', {p_user_id: user.id, p_request_id: requestId, p_destination_id: destinationId});
+      const context=await territoryContext(user.id), destination=context.master.destinations.find(d=>d.id===destinationId);
+      if(!destination)throw new ApiError('侵攻先が見つかりません。');
+      if(destination.unavailableReason)throw new ApiError(destination.unavailableReason);
+      const formalMaster=context.master.raidMasters.find(m=>m.id===destination.raidMasterId);
+      const hosted = formalMaster?.masterVersion
+        ? await rpc('game04_host_formal_territory', {p_user_id:user.id,p_request_id:requestId,p_destination_id:destinationId,p_raid_master:createFormalInvasionMaster(formalMaster.id,()=>crypto.getRandomValues(new Uint32Array(1))[0]/4294967296)})
+        : await rpc('game04_host_territory', {p_user_id: user.id, p_request_id: requestId, p_destination_id: destinationId});
       return new Response(JSON.stringify(await responseFor(user.id, {territoryRoomId: hosted.room.id})), {headers});
     }
     const [prior] = await db(`game04_requests?user_id=eq.${user.id}&request_id=eq.${requestId}&select=request_id,result`);

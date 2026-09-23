@@ -26,16 +26,18 @@ export interface QuestStage { id: string; areaId: string; index: number; name: s
 export interface QuestArea { id: string; index: number; name: string; description: string; image: string; stages: QuestStage[]; }
 export interface RedesignState { questAttempts?: Record<string, number>; questClearCounts?: Record<string, number>; questTicketGrants?: Record<string, number>; questProgressVersion?: string; dailyNormalGachaDate?: string; growthInventory?: GrowthInventory; playerProgress?: {version: string; level: number; exp: number; status: "active" | "migration_pending"}; territoryItems?: Record<string, number>; claimedMissionIds?: string[]; legacyImportedIds?: string[]; homeCharacterId?: string; homeBackgroundId?: string; userId: string; souls: Record<string, number>; version: number; cash: number; diamonds: number; energy: number; energyMax: number; characters: OwnedCharacter[]; skills: OwnedSkill[]; equipment: OwnedEquipment[]; deck: DeckMember[]; materials: { character: number; skill: number; equipment: number; equipmentLb: number; unlock: number }; clearedStages: string[]; vipExpiresAt: string | null; }
 export interface RaidMaster {
+  masterVersion?: string; characterId?: string; area?: number; enemies?: EnemyUnit[]; stages?: RaidStage[]; victoryRewards?: Reward[]; playerExp?: number;
   /** Approved raid background only; no character/background fallback. */
   backgroundUrl?: string; id: string; name: string; type: 'encounter' | 'unlock'; enemy: EnemyUnit; energyCost: number; durationMinutes: number; maxParticipants: number; maxLevel: number; appearanceLevels: number[]; appearanceImages: Record<string, string>; enemyGrowthPerLevel: number; sharedHpGrowthPerLevel: number; victoryMultiplier: number; sharedHp: number; participationRewards: Reward[]; defeatRewards: Reward[]; }
 export interface RaidParticipant {
   /** Current owner profile portrait, projected by the server. */
   portraitUrl?: string; userId: string; name: string; wins: number; attempts: number; totalDamage: number; joinedLevel: number; leftAt?: string; lastResult?: string; }
-export interface RaidRoom { territorySnapshot?: TerritorySnapshot; id: string; masterId: string; ownerId: string; level: number; hp: number; maxHp: number; expiresAt: string; createdAt: string; status: 'active' | 'defeated' | 'expired'; rescueCount: number; rescueWindowStartedAt: string; participants: RaidParticipant[]; settledBattleIds: string[]; rewardGrants: { id: string; userId: string; level: number; rewards: Reward[]; claimed: boolean }[]; }
+export interface RaidStage { level: number; enemies: EnemyUnit[]; sharedHp: number; defeatRewards: Reward[]; source?: string; }
+export interface RaidRoom { raidSnapshot?: RaidMaster; territorySnapshot?: TerritorySnapshot; id: string; masterId: string; ownerId: string; level: number; hp: number; maxHp: number; expiresAt: string; createdAt: string; status: 'active' | 'defeated' | 'expired'; rescueCount: number; rescueWindowStartedAt: string; participants: RaidParticipant[]; settledBattleIds: string[]; rewardGrants: { id: string; userId: string; level: number; rewards: Reward[]; claimed: boolean }[]; }
 
 export type TerritoryMasterStatus = 'PREVIEW_PROVISIONAL' | 'APPROVED';
 export interface TerritoryLevel { level: number; requiredExp: number; hostingSlots: number; }
-export interface TerritoryDestination { id: string; name: string; castle: string; difficulty: string; itemSource: string; raidMasterId: string; requiredLevel: number; itemName: string; itemId: string; itemCount: number; durationMinutes: number; clearExp: number; }
+export interface TerritoryDestination { unavailableReason?: string; id: string; name: string; castle: string; difficulty: string; itemSource: string; raidMasterId: string; requiredLevel: number; itemName: string; itemId: string; itemCount: number; durationMinutes: number; clearExp: number; }
 export interface TerritoryMaster { version: string; status: TerritoryMasterStatus; initialExp: number; legacyMigrationExp: number; levelCap: number; levels: TerritoryLevel[]; destinations: TerritoryDestination[]; raidMasters: RaidMaster[]; battleRules: BattleRules; }
 export interface TerritoryProgress { experience: number; }
 export interface TerritorySnapshot { masterVersion: string; status: TerritoryMasterStatus; destination: TerritoryDestination; raidMaster: RaidMaster; battleRules: BattleRules; }
@@ -45,4 +47,3 @@ export interface TerritoryProjection { masterVersion: string; status: TerritoryM
 
 export type ExpSize = "small" | "medium" | "large" | "xlarge";
 export interface GrowthInventory { expItems: {character: Record<ExpSize,number>; equipment: Record<ExpSize,number>}; carryExp: {character:number;equipment:number}; genericSouls: Record<Rarity,number>; soulSelectors: Record<Rarity,number>; }
-

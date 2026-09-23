@@ -114,3 +114,48 @@
 }
 
 @media(min-width:480px){.raid-approved-card__attribute img,.raid-approved-detail__attribute img{width:27px;height:27px}}
+/* Keep shared theme defaults from flattening the approved raid typography. */
+body.game04-theme .rd-shell:has(.rd-raid) :is(.raid-approved-card,.raid-approved-detail) :is(h2,h3,p,strong,span,b,button,small){font-family:var(--font-display,'Noto Serif JP',serif)!important}
+body.game04-theme .raid-approved-detail .raid-approved-detail__title h2{font-size:27px;line-height:1.3}
+body.game04-theme .raid-approved-detail .raid-approved-detail__title h2 small{font-size:.78em;line-height:inherit;color:inherit}
+body.game04-theme .raid-approved-card h3 small{font-size:.85em;line-height:inherit;color:inherit}
+body.game04-theme .rd-shell .raid-approved-card__attribute{font-size:13px;line-height:1.4}
+body.game04-theme .rd-shell .raid-approved-detail__contribution>p{font-size:13px;line-height:1.5}
+body.game04-theme .raid-approved-detail .raid-approved-detail__compact h2{font-size:19px}
+body.game04-theme .raid-approved-detail .raid-approved-detail__contribution h2{font-size:22px;font-weight:500;line-height:1.3}
+body.game04-theme .rd-shell .raid-approved-detail__challenge>button{min-height:46px}
+@media(min-width:480px){
+ .raid-approved-card{height:auto;aspect-ratio:1.95}
+ .raid-approved-card h3{font-size:27px}
+ .raid-approved-card__owner{font-size:18px}
+ body.game04-theme .rd-shell .raid-approved-card__attribute{font-size:16px}
+ body.game04-theme .raid-approved-detail .raid-approved-detail__title h2{font-size:35px}
+ body.game04-theme .raid-approved-detail .raid-approved-detail__compact h2{font-size:25px}
+ .raid-approved-detail__owner{font-size:19px}
+ .raid-approved-detail__hp strong{font-size:17px}
+ .raid-approved-detail__facts>span{font-size:19px}
+ .raid-approved-detail__actions>button{min-height:58px}
+}
+@media(min-width:480px){
+ .raid-approved-detail__contribution{padding:10px 16px}
+ body.game04-theme .raid-approved-detail .raid-approved-detail__contribution h2{font-size:28px;padding-bottom:9px}
+ .raid-approved-detail__damage{padding:12px 0}
+ .raid-approved-detail__damage>.raid-approved-visual__icon{width:48px;height:48px}
+ .raid-approved-detail__damage>span{font-size:16px}
+ .raid-approved-detail__damage strong{font-size:37px}
+ .raid-approved-detail__damage b{font-size:18px;padding:6px 22px}
+ .raid-approved-detail__stats{padding:11px 0;font-size:17px}
+ .raid-approved-detail__eligibility{padding:14px 0;font-size:17px}
+ .raid-approved-detail__eligibility>div{gap:13px}
+ .raid-approved-detail__eligibility>div>span{width:60px;height:60px}
+ .raid-approved-detail__eligibility img{width:39px;height:39px}
+ body.game04-theme .rd-shell .raid-approved-detail__contribution>p{font-size:16px;margin-top:9px}
+ .raid-approved-detail__challenge>button{min-height:59px}
+ body.game04-theme .rd-shell .raid-approved-detail__challenge>button{min-height:59px}
+}
+body.game04-theme .rd-shell .raid-approved-detail__actions>button{min-height:46px;font-weight:500;white-space:nowrap}
+body.game04-theme .rd-shell .raid-approved-card__footer button{min-height:36px;font-size:13px;white-space:nowrap}
+@media(min-width:480px){body.game04-theme .rd-shell .raid-approved-detail__actions>button{min-height:58px;font-size:19px}body.game04-theme .rd-shell .raid-approved-card__footer button{min-height:45px;font-size:16px}}
+/* Candidate medal artwork already includes its circular rim. */
+.raid-approved-detail__eligibility>div>span,.raid-approved-detail__eligibility>div>span.is-done{border:0;box-shadow:none;background:transparent}
+.raid-approved-detail__eligibility>div>span>img{width:100%;height:100%;object-fit:contain}

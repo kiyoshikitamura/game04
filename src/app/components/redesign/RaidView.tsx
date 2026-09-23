@@ -29,7 +29,7 @@ export default function RaidView({state,rooms,party,onAction,onOpenDeck,initialR
  function visual(value:RaidRoom){
   const m=getRoomRaidMaster(value),e=raidEnemy(m,value.level),owner=value.participants.find(p=>p.userId===value.ownerId);
   const percent=value.maxHp>0?Math.max(0,Math.min(100,value.hp/value.maxHp*100)):0;
-  return {bossName:m.name,characterUrl:characterArt(e,'full'),backgroundUrl:m.backgroundUrl,ownerName:owner?.name??'開催者情報を取得できません',ownerImageUrl:owner?.portraitUrl,
+  return {bossName:m.name,characterUrl:characterArt(e,'full'),backgroundUrl:m.backgroundUrl??'/bg/raid/raid-castle-moonlight-v1.webp',ownerName:owner?.name??'開催者情報を取得できません',ownerImageUrl:owner?.portraitUrl,
    attributeLabel:raidElementLabels[e.element],attributeIconUrl:`/ui/raid/v2/element-${e.element}.png`,levelLabel:`Lv.${value.level}`,hpPercent:percent,
    hpText:`HP ${Math.ceil(percent)}%`,hpValueLabel:`HP ${value.hp.toLocaleString()} / ${value.maxHp.toLocaleString()}（${Math.ceil(percent)}%）`,
    remainingLabel:active(value)?raidTimeRemaining(value.expiresAt,now):value.status==='defeated'?'討伐成功':'開催終了',participantLabel:`${value.participants.filter(p=>!p.leftAt).length}/${m.maxParticipants}人`,

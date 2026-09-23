@@ -1,5 +1,6 @@
 import { BATTLE_RULES, prepareBattleWaves } from './masters';
 import { RAID_MASTERS, getRoomRaidMaster } from './raid';
+import { FORMAL_CASTLES, createFormalInvasionMaster } from './raidInvasionMaster';
 import type { RaidRoom, RedesignState, TerritoryMaster, TerritoryProgress, TerritoryProjection, TerritorySnapshot } from './types';
 export type { TerritoryMaster, TerritoryProgress, TerritoryProjection, TerritorySnapshot } from './types';
 
@@ -14,6 +15,19 @@ export const TERRITORY_MASTER:TerritoryMaster={
  battleRules:structuredClone(BATTLE_RULES),
  raidMasters:RAID_MASTERS.filter(m=>m.type==='unlock').map(master=>({...structuredClone(master),enemy:prepareBattleWaves([[master.enemy]],BATTLE_RULES)[0][0]})),
 };
+/** Preserve existing hosting policy; never promote the unapproved host level/EXP supplement. */
+export function withFormalTerritoryRaids(existing:TerritoryMaster):TerritoryMaster {
+ const master=structuredClone(existing);
+ master.version='GAME04_RAID_FORMAL_20260923';
+ master.levels=master.levels.map(level=>({...level,hostingSlots:1}));
+ master.raidMasters=[...master.raidMasters.filter(raid=>!FORMAL_CASTLES.some(c=>c.id===raid.id)),...FORMAL_CASTLES.map(c=>createFormalInvasionMaster(c.id,()=>0))];
+ for(const castle of FORMAL_CASTLES){
+  const previous=master.destinations.find(d=>d.castle===castle.name);
+  if(previous){previous.raidMasterId=castle.id;previous.itemName='侵攻令';previous.itemCount=1;previous.durationMinutes=4320;continue;}
+  master.destinations.push({id:castle.id,name:`${castle.name}への侵攻`,castle:castle.name,difficulty:'正式12段階',itemSource:'交換所・報酬',raidMasterId:castle.id,requiredLevel:1,itemName:'侵攻令',itemId:'raid_unlock',itemCount:1,durationMinutes:4320,clearExp:0,unavailableReason:'主催解放条件・主催者EXPの設定待ち'});
+ }
+ return master;
+}
 export function validateTerritoryMaster(master:TerritoryMaster):void {
  const natural=(v:number)=>Number.isSafeInteger(v)&&v>=0;
  if(!master.version||!['PREVIEW_PROVISIONAL','APPROVED'].includes(master.status)||!natural(master.initialExp)||!natural(master.legacyMigrationExp)||!natural(master.levelCap)||master.levelCap<1||master.levels.length!==master.levelCap)throw Error('領土侵攻マスターの成長設定が不正です。');
@@ -42,6 +56,7 @@ export function projectTerritory(master:TerritoryMaster,progress:TerritoryProgre
  const experience=Math.max(0,progress.experience),level=territoryLevel(master,experience),hostingSlots=master.levels.find(row=>row.level===level)!.hostingSlots;
  return {masterVersion:master.version,status:master.status,experience,level,nextLevelExp:master.levels.find(row=>row.level===level+1)?.requiredExp??null,hostingSlots,activeHostingCount,destinations:master.destinations.map(destination=>{
   const ownedItemCount=items[destination.itemId]??0,reasons:string[]=[];
+  if(destination.unavailableReason)reasons.push(destination.unavailableReason);
   if(level<destination.requiredLevel)reasons.push(`領土侵攻Lv.${destination.requiredLevel}が必要です。`);
   if(activeHostingCount>=hostingSlots)reasons.push('同時開催枠が埋まっています。');
   if(ownedItemCount<destination.itemCount)reasons.push(`開催アイテムが${destination.itemCount-ownedItemCount}個不足しています。`);

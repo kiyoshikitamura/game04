@@ -15,17 +15,17 @@ function cumulativeExp(kind, rarity, level) {
   return level === 100 ? EXP_TOTALS[kind][rarity] : 10 * Math.floor(EXP_TOTALS[kind][rarity] * Math.pow((level - 1) / 99, 2.2) / 10 + 0.5);
 }
 function cumulativeCash(kind, rarity, level) {
-  const exp = cumulativeExp(kind, rarity, level);
-  return kind === "character" ? exp : Math.floor(exp / 2);
+  const exp2 = cumulativeExp(kind, rarity, level);
+  return kind === "character" ? exp2 : Math.floor(exp2 / 2);
 }
 function playerCumulativeExp(level) {
-  let exp = 0;
-  for (let l = 1; l < Math.min(100, level); l++) exp += (l + 9) ** 2;
-  return exp;
+  let exp2 = 0;
+  for (let l = 1; l < Math.min(100, level); l++) exp2 += (l + 9) ** 2;
+  return exp2;
 }
-function applyPlayerExperience(level, exp, gain, energy, energyMax) {
+function applyPlayerExperience(level, exp2, gain, energy, energyMax) {
   if (!Number.isSafeInteger(gain) || gain < 0) throw new Error("\u30D7\u30EC\u30A4\u30E4\u30FCEXP\u304C\u4E0D\u6B63\u3067\u3059\u3002");
-  const nextExp = level >= 100 ? exp : Math.min(playerCumulativeExp(100), exp + gain);
+  const nextExp = level >= 100 ? exp2 : Math.min(playerCumulativeExp(100), exp2 + gain);
   let nextLevel = level;
   while (nextLevel < 100 && nextExp >= playerCumulativeExp(nextLevel + 1)) nextLevel++;
   return { level: nextLevel, exp: nextExp, energy: nextLevel > level ? Math.max(energy, energyMax) : energy };
@@ -22093,18 +22093,18 @@ var LEGACY_SKILL_MASTERS = skills_20260821_default.skills.filter((s) => !s.exclu
   const effect = kind === 1 ? [{ type: "def_up", power: 20, duration: 3, carryAcrossWaves: false }] : kind === 2 ? [{ type: "heal", power: 120 * f }] : kind === 3 ? [{ type: "poison", power: 15, duration: 3, carryAcrossWaves: false }] : kind === 4 ? [{ type: "atk_up", power: 20, duration: 3, carryAcrossWaves: true }] : kind === 5 ? [{ type: "revive", power: 30 }] : kind === 6 ? [{ type: "def_down", power: 25, duration: 3, carryAcrossWaves: false }] : [{ type: "damage", power: (kind === 7 ? 90 : 180) * f }];
   return { id: s.skill_id, name: name(s.skill_id), image: image(s.skill_id), rarity, element: ELEMENTS[i % 6], spCost: 24 + i % 4 * 8, condition: kind === 2 ? { type: "ally_hp_below", value: 0.65 } : kind === 5 ? { type: "ally_dead" } : { type: "always" }, target: kind === 1 || kind === 4 ? "all_allies" : kind === 2 ? "lowest_ally" : kind === 5 ? "dead_ally" : kind === 7 ? "all_enemies" : "lowest_hp", effects: effect, description: ["\u6575\u5358\u4F53\u3078\u5C5E\u6027\u653B\u6483", "\u5473\u65B9\u5168\u4F53\u306E\u5B88\u5099\u3092\u5F37\u5316", "\u50B7\u3064\u3044\u305F\u5473\u65B9\u3092\u56DE\u5FA9", "\u6575\u306B\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8", "\u5473\u65B9\u5168\u4F53\u306E\u653B\u6483\u3092\u5F37\u5316", "\u6226\u95D8\u4E0D\u80FD\u306E\u5473\u65B9\u3092\u8607\u751F", "\u6575\u306E\u5B88\u5099\u3092\u4F4E\u4E0B", "\u6575\u5168\u4F53\u3078\u5C5E\u6027\u653B\u6483"][kind] };
 });
-function commonPreviewSkill(skill) {
-  const unsupported = skill.effects.some((e) => e.type === "poison" || e.type === "sp");
+function commonPreviewSkill(skill2) {
+  const unsupported = skill2.effects.some((e) => e.type === "poison" || e.type === "sp");
   return {
-    ...structuredClone(skill),
+    ...structuredClone(skill2),
     ...unsupported ? { unsupportedReason: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u30FBSP\u88DC\u5145\u306F\u5171\u901A\u30EB\u30FC\u30EB\u672AFIX\u306E\u305F\u3081\u65B0\u6226\u95D8\u3067\u306F\u767A\u52D5\u4FDD\u7559" } : {},
-    effects: skill.effects.filter((e) => e.type !== "poison" && e.type !== "sp").map((e) => ({
+    effects: skill2.effects.filter((e) => e.type !== "poison" && e.type !== "sp").map((e) => ({
       ...e,
       ...e.type === "heal" ? { healingFormula: e.healingFormula ?? "caster_atk_percent" } : {},
       ...e.type === "revive" ? { healingFormula: e.healingFormula ?? "target_max_hp_percent" } : {},
       ...e.duration ? { carryAcrossWaves: true } : {}
     })),
-    description: unsupported ? "\u3010\u767A\u52D5\u4FDD\u7559\u30FB\u672AFIX\u3011\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\uFF0FSP\u88DC\u5145\u306E\u8A73\u7D30\u30EB\u30FC\u30EB\u5F85\u3061" : `${skill.description}\uFF08\u500B\u5225\u500D\u7387\u30FB\u6D88\u8CBBSP\u30FB\u56DE\u5FA9\u5F0F\u306F\u958B\u767A\u4EEE\u8A2D\u5B9A\uFF09`
+    description: unsupported ? "\u3010\u767A\u52D5\u4FDD\u7559\u30FB\u672AFIX\u3011\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\uFF0FSP\u88DC\u5145\u306E\u8A73\u7D30\u30EB\u30FC\u30EB\u5F85\u3061" : `${skill2.description}\uFF08\u500B\u5225\u500D\u7387\u30FB\u6D88\u8CBBSP\u30FB\u56DE\u5FA9\u5F0F\u306F\u958B\u767A\u4EEE\u8A2D\u5B9A\uFF09`
   };
 }
 var SKILL_MASTERS = LEGACY_SKILL_MASTERS.map(commonPreviewSkill);
@@ -22298,20 +22298,20 @@ function applyNormalGacha(original, payload, pool, requestId, now, policy, rando
   state.cash -= cost;
   if (free) state.dailyNormalGachaDate = normalGachaDay(now);
   const results = [];
-  const draw = () => {
+  const draw2 = () => {
     const value = random();
     if (!(value >= 0 && value < 1)) throw new Error("\u62BD\u9078\u5024\u304C\u4E0D\u6B63\u3067\u3059\u3002");
     return value;
   };
   for (let i = 0; i < count; i++) {
-    let roll = draw() * 1e4;
+    let roll = draw2() * 1e4;
     const bucket = NORMAL_GACHA_MASTER.buckets.find((b) => {
       roll -= b[2];
       return roll < 0;
     });
     if (!bucket) throw new Error("\u62BD\u9078\u30DE\u30B9\u30BF\u30FC\u304C\u4E0D\u6B63\u3067\u3059\u3002");
     const choices = rows.filter((row2) => row2.rarity === bucket[0] && row2.item_type === bucket[1]);
-    const row = choices[Math.floor(draw() * choices.length)];
+    const row = choices[Math.floor(draw2() * choices.length)];
     const master = masters[bucket[1]].find((m) => m.id === row.item_id);
     if (!master) throw new Error("\u6392\u51FA\u5BFE\u8C61\u3092\u78BA\u8A8D\u3067\u304D\u307E\u305B\u3093\u3002");
     const kind = bucket[1].toLowerCase();
@@ -52095,7 +52095,7 @@ function simulateBattle(input) {
   const applyPassives = (units) => {
     for (const target of units) {
       const sums = {};
-      for (const owner of units) for (const passive of owner.passives) if (passive.target === "party" || owner.id === target.id) sums[passive.stat] = (sums[passive.stat] ?? 0) + passive.percent;
+      for (const owner of units) for (const passive2 of owner.passives) if (passive2.target === "party" || owner.id === target.id) sums[passive2.stat] = (sums[passive2.stat] ?? 0) + passive2.percent;
       for (const key2 of Object.keys(sums)) target.stats[key2] = Math.max(1, Math.round(target.stats[key2] * (1 + (sums[key2] ?? 0) / 100)));
       target.hp = target.stats.hp;
       if (target.enemy) target.sp = target.stats.sp;
@@ -52114,9 +52114,9 @@ function simulateBattle(input) {
   const side = (u) => u.enemy ? enemies : party;
   const opposite = (u) => u.enemy ? party : enemies;
   const stat = (u, key2) => Math.max(1, u.stats[key2] * (1 + u.statuses.reduce((v, s) => v + (s.type === `${key2}_up` ? s.power / 100 : s.type === `${key2}_down` ? -s.power / 100 : 0), 0)));
-  const condition = (u, skill) => {
-    const value = skill.condition.value ?? 0.5;
-    switch (skill.condition.type) {
+  const condition = (u, skill2) => {
+    const value = skill2.condition.value ?? 0.5;
+    switch (skill2.condition.type) {
       case "hp_below":
         return u.hp / u.stats.hp <= value;
       case "ally_hp_below":
@@ -52131,10 +52131,10 @@ function simulateBattle(input) {
         return true;
     }
   };
-  const choose = (u, sp, discount = 1) => u.skills.map((skill, slot) => ({ skill, slot })).filter(({ skill }) => skill.spCost > 0 && condition(u, skill) && Math.ceil(skill.spCost * discount) <= sp).sort((a, b) => b.skill.spCost - a.skill.spCost || a.slot - b.slot)[0]?.skill;
-  const targets = (u, skill) => {
+  const choose = (u, sp, discount = 1) => u.skills.map((skill2, slot) => ({ skill: skill2, slot })).filter(({ skill: skill2 }) => skill2.spCost > 0 && condition(u, skill2) && Math.ceil(skill2.spCost * discount) <= sp).sort((a, b) => b.skill.spCost - a.skill.spCost || a.slot - b.slot)[0]?.skill;
+  const targets = (u, skill2) => {
     const allies = side(u).filter((t) => t.hp > 0), foes = opposite(u).filter((t) => t.hp > 0);
-    switch (skill.target) {
+    switch (skill2.target) {
       case "self":
         return [u];
       case "dead_ally":
@@ -52219,15 +52219,15 @@ function simulateBattle(input) {
       }
     });
   };
-  const act = (u, skill, discount = 1) => {
-    const cost = Math.ceil(skill.spCost * discount);
+  const act = (u, skill2, discount = 1) => {
+    const cost = Math.ceil(skill2.spCost * discount);
     if (u.enemy) u.sp -= cost;
     else partySp -= cost;
     const spentSp = partySp;
     let achievement = 0;
     const texts = [];
-    for (const t of targets(u, skill)) for (const e of skill.effects) {
-      const applied = effect(u, t, e, skill.element);
+    for (const t of targets(u, skill2)) for (const e of skill2.effects) {
+      const applied = effect(u, t, e, skill2.element);
       achievement += applied.achievement;
       if (applied.text) texts.push(applied.text);
     }
@@ -52237,7 +52237,7 @@ function simulateBattle(input) {
       partySp = Math.min(maxSp, partySp + gained);
       const a = analysis.find((x) => x.id === u.id);
       a.actions++;
-      a.skills += Number(skill.id !== "basic");
+      a.skills += Number(skill2.id !== "basic");
       a.spGenerated += partySp - before;
       texts.push(`SP +${partySp - before}`);
       playerActions++;
@@ -52256,7 +52256,7 @@ function simulateBattle(input) {
     u.statuses = u.statuses.map((s) => ({ ...s, remaining: s.remaining - 1 })).filter((s) => s.remaining > 0);
     handleDeaths();
     phases();
-    frame(u.enemy ? "enemy" : "action", `${u.name} \xB7 ${skill.name}\u3000${texts.join(" / ")}`, u.id, skill.id);
+    frame(u.enemy ? "enemy" : "action", `${u.name} \xB7 ${skill2.name}\u3000${texts.join(" / ")}`, u.id, skill2.id);
     return spentSp < maxSp && partySp >= maxSp;
   };
   const enemyInterrupts = () => {
@@ -52266,12 +52266,12 @@ function simulateBattle(input) {
     for (const u of [...enemies].sort((a, b) => a.order - b.order)) {
       if (u.hp <= 0 || u.count > 0 || !party.some((t) => t.hp > 0)) continue;
       frame("enemy", `${u.name}\uFF1AEnemy Action`, u.id);
-      let skill = choose(u, u.sp);
-      if (!skill) act(u, basic(u));
+      let skill2 = choose(u, u.sp);
+      if (!skill2) act(u, basic(u));
       let guard = 0;
-      while (skill && u.hp > 0 && party.some((t) => t.hp > 0) && guard++ < 100) {
-        act(u, skill);
-        skill = choose(u, u.sp);
+      while (skill2 && u.hp > 0 && party.some((t) => t.hp > 0) && guard++ < 100) {
+        act(u, skill2);
+        skill2 = choose(u, u.sp);
       }
       u.count = u.hp > 0 ? u.resetCount : 0;
       frame("enemy", `${u.name}\uFF1A\u6B21\u306E\u884C\u52D5\u307E\u3067 ${u.count}`, u.id);
@@ -52301,9 +52301,9 @@ function simulateBattle(input) {
     enemyInterrupts();
     if (burst) {
       for (let n = 0; n < 5 && partySp > 0 && u.hp > 0 && enemies.some((e) => e.hp > 0) && playerActions < rules.maxPlayerActions; n++) {
-        const skill = choose(u, partySp, 0.5);
-        if (!skill) break;
-        act(u, skill, 0.5);
+        const skill2 = choose(u, partySp, 0.5);
+        if (!skill2) break;
+        act(u, skill2, 0.5);
         enemyInterrupts();
       }
       burst = false;
@@ -52424,7 +52424,7 @@ function simulateCommonBattle(input) {
   const sum = (u, type) => u.statuses.filter((s) => s.type === type).reduce((n, s) => n + s.power, 0);
   const stat = (u, key2) => u.stats[key2] * (1 + u.passive[key2] / 100) * (1 + Math.min(sum(u, `${key2}_up`), key2 === "atk" ? 50 : 100) / 100 - Math.min(sum(u, `${key2}_down`), key2 === "atk" ? 30 : 50) / 100);
   const snapshot = (u) => ({ id: u.id, hp: u.hp, maxHp: u.stats.hp, sp: u.sp, maxSp: u.stats.sp, count: u.count, actions: u.actions, statuses: u.statuses.map((s) => ({ ...s })), phase: u.phase, image: u.image, stunImmune: u.immune, dead: u.dead, effectiveAtk: stat(u, "atk"), effectiveDef: stat(u, "def"), skills: u.phase ? u.skills : void 0 });
-  const frame = (kind, text, u, skill, extra = {}) => frames.push({ index: frames.length, wave: wave + 1, kind, text, actorId: u?.id, skillId: skill?.id, partySp, maxSp: 400, burst, party: party.map(snapshot), enemies: enemies.map(snapshot), burstGauge: gauge, maxBurstGauge: 200, playerActions, remainingActions: 300 - playerActions, skillStates: Object.fromEntries([...party, ...enemies].map((unit) => [unit.id, unit.skills.map((s) => ({ skillId: s.id, cost: Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)), status: extra.event === "action_start" && unit === u && s === skill ? "active" : !alive(unit) || !usable(unit, s) ? "condition_unmet" : Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)) > (unit.enemy ? unit.sp : partySp) ? "insufficient_sp" : "ready", reason: s.unsupportedReason }))])), ...extra });
+  const frame = (kind, text, u, skill2, extra = {}) => frames.push({ index: frames.length, wave: wave + 1, kind, text, actorId: u?.id, skillId: skill2?.id, partySp, maxSp: 400, burst, party: party.map(snapshot), enemies: enemies.map(snapshot), burstGauge: gauge, maxBurstGauge: 200, playerActions, remainingActions: 300 - playerActions, skillStates: Object.fromEntries([...party, ...enemies].map((unit) => [unit.id, unit.skills.map((s) => ({ skillId: s.id, cost: Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)), status: extra.event === "action_start" && unit === u && s === skill2 ? "active" : !alive(unit) || !usable(unit, s) ? "condition_unmet" : Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)) > (unit.enemy ? unit.sp : partySp) ? "insufficient_sp" : "ready", reason: s.unsupportedReason }))])), ...extra });
   const condition = (u, c) => {
     const v = c.value ?? 0.5;
     switch (c.type) {
@@ -52496,8 +52496,8 @@ function simulateCommonBattle(input) {
       return [list[Math.floor(random() * list.length)]];
     return list.slice(0, 1);
   };
-  const effectTargets = (u, skill, e, selected, preview = false) => {
-    const rule = e.target && e.target !== "selected" ? e.target : skill.target;
+  const effectTargets = (u, skill2, e, selected, preview = false) => {
+    const rule = e.target && e.target !== "selected" ? e.target : skill2.target;
     if (e.type === "heal") {
       if (selected && (!e.target || e.target === "selected"))
         return selected.filter(alive);
@@ -52509,22 +52509,22 @@ function simulateCommonBattle(input) {
       return select(u, "lowest_ally", living.filter((t) => t.hp / t.stats.hp <= 0.5), preview);
     }
     if (selected && (!e.target || e.target === "selected"))
-      return selected.filter((t) => applicable(t, e, skill.id));
+      return selected.filter((t) => applicable(t, e, skill2.id));
     const all = ["self", "lowest_ally", "all_allies", "dead_ally"].includes(rule) ? side(u) : opposite(u);
-    return select(u, rule, all.filter((t) => applicable(t, e, skill.id)), preview);
+    return select(u, rule, all.filter((t) => applicable(t, e, skill2.id)), preview);
   };
   const usable = (u, s) => !s.unsupportedReason && condition(u, s.condition) && s.effects.some((e) => effectTargets(u, s, e, void 0, true).length > 0);
   const choose = (u, discount = 1) => u.skills.find((s) => usable(u, s) && Math.ceil(s.spCost * discount) <= (u.enemy ? u.sp : partySp));
   const basic = (u) => ({ id: "basic", name: "\u901A\u5E38\u653B\u6483", image: "", rarity: "N", element: u.element, spCost: 0, condition: { type: "always" }, target: "first", effects: [{ type: "damage", power: 100 }], description: "" });
-  const applyEffect = (u, targets, e, skill) => {
-    const plans = targets.filter((t) => applicable(t, e, skill.id)).map((t) => {
+  const applyEffect = (u, targets, e, skill2) => {
+    const plans = targets.filter((t) => applicable(t, e, skill2.id)).map((t) => {
       const success = e.chance === void 0 || random() < e.chance;
-      const amount = e.type === "damage" ? commonDamage(stat(u, "atk"), stat(t, "def"), e.power, elementMultiplier2(skill.element, t.element, { ...input.rules, advantageMultiplier: 1.5, disadvantageMultiplier: 0.75 }), random()) : e.type === "heal" || e.type === "revive" ? Math.max(0, Math.floor((e.healingFormula === "caster_atk_percent" ? stat(u, "atk") : t.stats.hp) * e.power / 100)) : e.power;
+      const amount = e.type === "damage" ? commonDamage(stat(u, "atk"), stat(t, "def"), e.power, elementMultiplier2(skill2.element, t.element, { ...input.rules, advantageMultiplier: 1.5, disadvantageMultiplier: 0.75 }), random()) : e.type === "heal" || e.type === "revive" ? Math.max(0, Math.floor((e.healingFormula === "caster_atk_percent" ? stat(u, "atk") : t.stats.hp) * e.power / 100)) : e.power;
       return { t, success, amount };
     });
     for (const { t, success, amount } of plans) {
       if (!success) {
-        frame("action", `${t.name}\uFF1A${e.type} \u4E0D\u6210\u7ACB`, u, skill, { event: "effect_miss", targetIds: [t.id] });
+        frame("action", `${t.name}\uFF1A${e.type} \u4E0D\u6210\u7ACB`, u, skill2, { event: "effect_miss", targetIds: [t.id] });
         continue;
       }
       if (e.type === "damage") {
@@ -52542,7 +52542,7 @@ function simulateCommonBattle(input) {
           else
             t.sp = Math.min(t.stats.sp, t.sp + t.hitSpGain);
         }
-        frame(u.enemy ? "enemy" : "action", `${t.name} \u2212${amount}`, u, skill, { event: "damage", targetIds: [t.id], hits: splitDisplayDamage(amount, e.displayHits ?? 1) });
+        frame(u.enemy ? "enemy" : "action", `${t.name} \u2212${amount}`, u, skill2, { event: "damage", targetIds: [t.id], hits: splitDisplayDamage(amount, e.displayHits ?? 1) });
       } else if (e.type === "heal" || e.type === "revive") {
         const actual = Math.min(t.stats.hp - t.hp, amount);
         t.hp += actual;
@@ -52557,10 +52557,10 @@ function simulateCommonBattle(input) {
         const a = analysis.find((a2) => a2.id === u.id);
         if (a)
           a.healing += actual;
-        frame("action", `${t.name} ${e.type === "revive" ? "\u8607\u751F" : "\u56DE\u5FA9"} +${actual}`, u, skill, { event: e.type, targetIds: [t.id] });
+        frame("action", `${t.name} ${e.type === "revive" ? "\u8607\u751F" : "\u56DE\u5FA9"} +${actual}`, u, skill2, { event: e.type, targetIds: [t.id] });
       } else {
-        t.statuses.push({ type: e.type, power: e.power, remaining: e.type === "stun" ? 1 : e.duration ?? 3, carry: true, sourceId: u.id, sourceEnemy: u.enemy, sourceSkillId: skill.id, appliedAction: serial });
-        frame("action", `${t.name}\uFF1A${e.type} \u4ED8\u4E0E`, u, skill, { event: "effect_applied", targetIds: [t.id] });
+        t.statuses.push({ type: e.type, power: e.power, remaining: e.type === "stun" ? 1 : e.duration ?? 3, carry: true, sourceId: u.id, sourceEnemy: u.enemy, sourceSkillId: skill2.id, appliedAction: serial });
+        frame("action", `${t.name}\uFF1A${e.type} \u4ED8\u4E0E`, u, skill2, { event: "effect_applied", targetIds: [t.id] });
       }
     }
   };
@@ -52624,24 +52624,24 @@ function simulateCommonBattle(input) {
       }
     }
   };
-  const act = (u, skill, discount) => {
+  const act = (u, skill2, discount) => {
     serial++;
     if (serial > 1e5)
       throw new Error("Battle execution safety guard exceeded");
     if (!u.enemy)
       playerActions++;
     const beforeSp = partySp, beforeGauge = gauge;
-    const cost = Math.ceil(skill.spCost * discount);
+    const cost = Math.ceil(skill2.spCost * discount);
     if (u.enemy)
       u.sp -= cost;
     else
       partySp -= cost;
-    frame(u.enemy ? "enemy" : "action", `${u.name} \xB7 ${skill.name} SP \u2212${cost}`, u, skill, { event: "action_start" });
-    const main = skill.effects.find((e) => (!e.target || e.target === "selected") && effectTargets(u, skill, e, void 0, true).length > 0);
-    const selected = main ? effectTargets(u, skill, main) : void 0;
+    frame(u.enemy ? "enemy" : "action", `${u.name} \xB7 ${skill2.name} SP \u2212${cost}`, u, skill2, { event: "action_start" });
+    const main = skill2.effects.find((e) => (!e.target || e.target === "selected") && effectTargets(u, skill2, e, void 0, true).length > 0);
+    const selected = main ? effectTargets(u, skill2, main) : void 0;
     applyingSkill = true;
-    for (const e of skill.effects)
-      applyEffect(u, effectTargets(u, skill, e, selected), e, skill);
+    for (const e of skill2.effects)
+      applyEffect(u, effectTargets(u, skill2, e, selected), e, skill2);
     applyingSkill = false;
     deaths(u);
     check();
@@ -52652,22 +52652,22 @@ function simulateCommonBattle(input) {
       if (s.type !== "stun" && s.appliedAction !== serial)
         s.remaining--;
     for (const s of u.statuses.filter((s2) => s2.remaining <= 0))
-      frame("action", `${u.name}\uFF1A${s.type} \u7D42\u4E86`, u, skill, { event: "effect_expired" });
+      frame("action", `${u.name}\uFF1A${s.type} \u7D42\u4E86`, u, skill2, { event: "effect_expired" });
     u.statuses = u.statuses.filter((s) => s.remaining > 0);
     u.immune = false;
     if (!u.enemy) {
       const a = analysis.find((a2) => a2.id === u.id);
       a.actions++;
-      a.skills += Number(skill.id !== "basic");
+      a.skills += Number(skill2.id !== "basic");
       if (!burst) {
-        const gain = commonSpGain(u.stats.luk, skill.id === "basic");
+        const gain = commonSpGain(u.stats.luk, skill2.id === "basic");
         partySp = Math.min(400, partySp + gain);
         gauge = Math.min(200, gauge + gain);
         a.spGenerated += gain;
       }
     }
     passives();
-    frame(u.enemy ? "enemy" : "action", `${u.name} \u884C\u52D5\u5B8C\u4E86`, u, skill, { event: "action_end", spDelta: partySp - beforeSp, gaugeDelta: gauge - beforeGauge });
+    frame(u.enemy ? "enemy" : "action", `${u.name} \u884C\u52D5\u5B8C\u4E86`, u, skill2, { event: "action_end", spDelta: partySp - beforeSp, gaugeDelta: gauge - beforeGauge });
   };
   const stunned = (u) => u.statuses.some((s) => s.type === "stun");
   const skip = (u) => {
@@ -52694,21 +52694,21 @@ function simulateCommonBattle(input) {
       else {
         u.inBlock = true;
         const blockDeaths = u.deaths;
-        let skill = choose(u);
-        if (!skill)
+        let skill2 = choose(u);
+        if (!skill2)
           act(u, basic(u), 1);
-        while (skill && alive(u) && u.deaths === blockDeaths && !ended && enemies.some(alive)) {
+        while (skill2 && alive(u) && u.deaths === blockDeaths && !ended && enemies.some(alive)) {
           if (stunned(u)) {
             skip(u);
             break;
           }
-          act(u, skill, 1);
+          act(u, skill2, 1);
           if (!alive(u) || ended || stunned(u)) {
             if (alive(u) && stunned(u) && !ended)
               skip(u);
             break;
           }
-          skill = choose(u);
+          skill2 = choose(u);
         }
         u.inBlock = false;
         if (alive(u))
@@ -52884,7 +52884,7 @@ function simulateBalanceBattle(input) {
   const stat = (u, key2) => u.stats[key2] * (1 + u.passive[key2] / 100) * (1 + Math.min(sum(u, `${key2}_up`), key2 === "atk" ? 50 : 100) / 100 - Math.min(sum(u, `${key2}_down`), key2 === "atk" ? 30 : 50) / 100);
   const extraPassives = /* @__PURE__ */ new WeakMap();
   const snapshot = (u) => ({ id: u.id, hp: u.hp, maxHp: u.stats.hp, sp: u.sp, maxSp: u.stats.sp, count: u.count, actions: u.actions, statuses: u.statuses.map((s) => ({ ...s })), phase: u.phase, image: u.image, stunImmune: u.immune, dead: u.dead, effectiveAtk: stat(u, "atk"), effectiveDef: stat(u, "def"), skills: u.phase ? u.skills : void 0, passiveEffects: u.passives.map((p) => ({ id: p.id, type: p.type, percent: p.percent, targetElement: p.targetElement, active: alive(u) && (passiveConditions.get(u)?.get(p.id) ?? false) })) });
-  const frame = (kind, text, u, skill, extra = {}) => frames.push({ index: frames.length, wave: wave + 1, kind, text, actorId: u?.id, skillId: skill?.id, partySp, maxSp: 400, burst, party: party.map(snapshot), enemies: enemies.map(snapshot), burstGauge: gauge, maxBurstGauge: 200, playerActions, remainingActions: 300 - playerActions, skillStates: Object.fromEntries([...party, ...enemies].map((unit) => [unit.id, unit.skills.map((s) => ({ skillId: s.id, cost: Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)), status: extra.event === "action_start" && unit === u && s === skill ? "active" : !alive(unit) || !usable(unit, s) ? "condition_unmet" : Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)) > (unit.enemy ? unit.sp : partySp) ? "insufficient_sp" : "ready", reason: s.unsupportedReason ?? (!condition(unit, s.condition) ? "condition_unmet" : !usable(unit, s) ? s.effects.some((e) => ["atk_up", "def_up", "atk_down", "def_down", "dot", "hot", "shield", "taunt", "counter", "stun"].includes(e.type)) && [...party, ...enemies].some((t) => alive(t) && t.statuses.some((effect) => effect.sourceSkillId === s.id)) ? "reapply_unavailable" : "condition_unmet" : void 0) }))])), ...extra });
+  const frame = (kind, text, u, skill2, extra = {}) => frames.push({ index: frames.length, wave: wave + 1, kind, text, actorId: u?.id, skillId: skill2?.id, partySp, maxSp: 400, burst, party: party.map(snapshot), enemies: enemies.map(snapshot), burstGauge: gauge, maxBurstGauge: 200, playerActions, remainingActions: 300 - playerActions, skillStates: Object.fromEntries([...party, ...enemies].map((unit) => [unit.id, unit.skills.map((s) => ({ skillId: s.id, cost: Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)), status: extra.event === "action_start" && unit === u && s === skill2 ? "active" : !alive(unit) || !usable(unit, s) ? "condition_unmet" : Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)) > (unit.enemy ? unit.sp : partySp) ? "insufficient_sp" : "ready", reason: s.unsupportedReason ?? (!condition(unit, s.condition) ? "condition_unmet" : !usable(unit, s) ? s.effects.some((e) => ["atk_up", "def_up", "atk_down", "def_down", "dot", "hot", "shield", "taunt", "counter", "stun"].includes(e.type)) && [...party, ...enemies].some((t) => alive(t) && t.statuses.some((effect) => effect.sourceSkillId === s.id)) ? "reapply_unavailable" : "condition_unmet" : void 0) }))])), ...extra });
   const condition = (u, c) => {
     const v = c.value ?? 0.5;
     switch (c.type) {
@@ -52994,10 +52994,10 @@ function simulateBalanceBattle(input) {
       return [list[Math.floor(random() * list.length)]];
     return list.slice(0, 1);
   };
-  const effectTargets = (u, skill, e, selected, preview = false) => {
+  const effectTargets = (u, skill2, e, selected, preview = false) => {
     currentActor = u;
-    currentHasDamage = skill.effects.some((e2) => e2.type === "damage");
-    const rule = e.target && e.target !== "selected" ? e.target : skill.target;
+    currentHasDamage = skill2.effects.some((e2) => e2.type === "damage");
+    const rule = e.target && e.target !== "selected" ? e.target : skill2.target;
     if (rule === "dot_ally" && (!selected || e.target && e.target !== "selected")) {
       const poison = side(u).filter((t) => alive(t) && t.statuses.some((s) => s.type === "dot"));
       if (poison.length) return poison.slice(0, 1);
@@ -53014,15 +53014,15 @@ function simulateBalanceBattle(input) {
       return select(u, "lowest_ally", living.filter((t) => t.hp / t.stats.hp <= 0.5), preview);
     }
     if (selected && (!e.target || e.target === "selected"))
-      return selected.filter((t) => applicable(t, e, skill.id));
-    if (e.type === "damage" && rule === "first" && !skill.fixedTarget) {
+      return selected.filter((t) => applicable(t, e, skill2.id));
+    if (e.type === "damage" && rule === "first" && !skill2.fixedTarget) {
       const taunting = opposite(u).filter((t) => alive(t) && t.statuses.some((s) => s.type === "taunt"));
       if (taunting.length) return taunting.slice(0, 1);
     }
     const all = ["self", "lowest_ally", "all_allies", "dead_ally", "first_ally", "highest_atk_ally", "counter_ally", "dot_ally"].includes(rule) ? side(u) : opposite(u);
-    if (e.type === "hot" && rule === "all_allies" && !all.some((t) => t.hp < t.stats.hp && applicable(t, e, skill.id))) return [];
-    if (e.type === "hot" && rule === "lowest_ally") return select(u, rule, all.filter((t) => t.hp < t.stats.hp && applicable(t, e, skill.id)), preview);
-    return select(u, rule, all.filter((t) => applicable(t, e, skill.id)), preview);
+    if (e.type === "hot" && rule === "all_allies" && !all.some((t) => t.hp < t.stats.hp && applicable(t, e, skill2.id))) return [];
+    if (e.type === "hot" && rule === "lowest_ally") return select(u, rule, all.filter((t) => t.hp < t.stats.hp && applicable(t, e, skill2.id)), preview);
+    return select(u, rule, all.filter((t) => applicable(t, e, skill2.id)), preview);
   };
   const usable = (u, s) => !s.unsupportedReason && condition(u, s.condition) && s.effects.some((e) => effectTargets(u, s, e, void 0, true).length > 0);
   const choose = (u, discount = 1) => u.skills.find((s) => usable(u, s) && Math.ceil(s.spCost * discount) <= (u.enemy ? u.sp : partySp));
@@ -53031,7 +53031,7 @@ function simulateBalanceBattle(input) {
   let directTargets = /* @__PURE__ */ new Map();
   let effectSequence = 0;
   let isCounter = false;
-  const absorb = (t, amount, u, skill) => {
+  const absorb = (t, amount, u, skill2) => {
     let remaining = amount;
     const shields = t.statuses.filter((s) => s.type === "shield").sort((a, b) => a.remaining - b.remaining || (a.sequence ?? 0) - (b.sequence ?? 0));
     for (const shield of shields) {
@@ -53041,45 +53041,45 @@ function simulateBalanceBattle(input) {
       if (!remaining) break;
     }
     t.statuses = t.statuses.filter((s) => s.type !== "shield" || (s.amount ?? 0) > 0);
-    if (remaining < amount) frame("action", `${t.name} \u30B7\u30FC\u30EB\u30C9\u5438\u53CE ${amount - remaining}`, u, skill, { event: "shield_absorbed", targetIds: [t.id] });
+    if (remaining < amount) frame("action", `${t.name} \u30B7\u30FC\u30EB\u30C9\u5438\u53CE ${amount - remaining}`, u, skill2, { event: "shield_absorbed", targetIds: [t.id] });
     t.hp = Math.max(0, t.hp - remaining);
     return remaining;
   };
-  const damageBonus = (u, t, skill) => {
-    let value = isCounter ? bonus(u, "P13") : skill.id === "basic" ? bonus(u, "P05") : bonus(u, skill.target === "all_enemies" ? "P07" : "P06");
+  const damageBonus = (u, t, skill2) => {
+    let value = isCounter ? bonus(u, "P13") : skill2.id === "basic" ? bonus(u, "P05") : bonus(u, skill2.target === "all_enemies" ? "P07" : "P06");
     if (targetConditions.get(t)?.debuff) value += bonus(u, "P08");
     if (targetConditions.get(t)?.dot) value += bonus(u, "P09");
     return Math.min(config.damageBonusCap, value);
   };
-  const applyEffect = (u, targets, e, skill) => {
+  const applyEffect = (u, targets, e, skill2) => {
     currentActor = u;
-    currentHasDamage = skill.effects.some((e2) => e2.type === "damage");
-    const plans = targets.filter((t) => applicable(t, e, skill.id)).map((t) => {
+    currentHasDamage = skill2.effects.some((e2) => e2.type === "damage");
+    const plans = targets.filter((t) => applicable(t, e, skill2.id)).map((t) => {
       const success = e.chance === void 0 || random() < e.chance;
       let power2 = e.power;
       if (e.bonusCondition && (e.bonusCondition === "debuff" && t.statuses.some((s) => s.type === "atk_down" || s.type === "def_down") || e.bonusCondition === "dot" && t.statuses.some((s) => s.type === "dot") || e.bonusCondition === "hp_below" && u.hp / u.stats.hp <= (e.hpThreshold ?? config.lowHpThreshold))) power2 = e.bonusPower ?? power2;
-      const amount = e.type === "damage" ? Math.max(1, Math.floor((stat(u, "atk") * power2 / 100 - stat(t, "def")) * elementMultiplier2(skill.element, t.element, { ...input.rules, advantageMultiplier: 1.5, disadvantageMultiplier: 0.75 }) * (0.9 + random() * 0.2) * (1 + damageBonus(u, t, skill) / 100))) : e.type === "heal" ? Math.max(0, Math.floor((e.healingFormula === "target_max_hp_percent" ? t.stats.hp : stat(u, "atk")) * power2 / 100 * (1 + Math.min(config.healingBonusCap, bonus(u, "P10") + bonus(t, "P11")) / 100))) : e.type === "revive" ? Math.max(1, Math.floor(t.stats.hp * power2 / 100)) : e.type === "shield" ? Math.max(0, Math.floor(stat(u, "atk") * power2 / 100 * (1 + Math.min(config.shieldBonusCap, bonus(u, "P12")) / 100))) : e.type === "dot" || e.type === "hot" ? stat(u, "atk") * power2 / 100 : power2;
+      const amount = e.type === "damage" ? Math.max(1, Math.floor((stat(u, "atk") * power2 / 100 - stat(t, "def")) * elementMultiplier2(skill2.element, t.element, { ...input.rules, advantageMultiplier: 1.5, disadvantageMultiplier: 0.75 }) * (0.9 + random() * 0.2) * (1 + damageBonus(u, t, skill2) / 100))) : e.type === "heal" ? Math.max(0, Math.floor((e.healingFormula === "target_max_hp_percent" ? t.stats.hp : stat(u, "atk")) * power2 / 100 * (1 + Math.min(config.healingBonusCap, bonus(u, "P10") + bonus(t, "P11")) / 100))) : e.type === "revive" ? Math.max(1, Math.floor(t.stats.hp * power2 / 100)) : e.type === "shield" ? Math.max(0, Math.floor(stat(u, "atk") * power2 / 100 * (1 + Math.min(config.shieldBonusCap, bonus(u, "P12")) / 100))) : e.type === "dot" || e.type === "hot" ? stat(u, "atk") * power2 / 100 : power2;
       return { t, success, amount };
     });
     for (const { t, success, amount } of plans) {
       if (!success) {
-        frame("action", `${t.name}\uFF1A${e.type} \u4E0D\u6210\u7ACB`, u, skill, { event: "effect_miss", targetIds: [t.id] });
+        frame("action", `${t.name}\uFF1A${e.type} \u4E0D\u6210\u7ACB`, u, skill2, { event: "effect_miss", targetIds: [t.id] });
         continue;
       }
       if (e.type === "damage") {
-        const hpDamage = absorb(t, amount, u, skill);
+        const hpDamage = absorb(t, amount, u, skill2);
         if (!u.enemy && t.enemy) {
           totalDamage += hpDamage;
           const a = analysis.find((a2) => a2.id === u.id);
           if (a) a.damage += hpDamage;
         }
-        if (!isCounter && !skill.id.startsWith("death:")) directTargets.set(t, t.deaths);
-        if (t.enemy && !hitThisAction.has(t) && !skill.id.startsWith("death:")) {
+        if (!isCounter && !skill2.id.startsWith("death:")) directTargets.set(t, t.deaths);
+        if (t.enemy && !hitThisAction.has(t) && !skill2.id.startsWith("death:")) {
           hitThisAction.add(t);
           if (t.inBlock) t.pendingSp += t.hitSpGain;
           else t.sp = Math.min(t.stats.sp, t.sp + t.hitSpGain);
         }
-        frame(u.enemy ? "enemy" : "action", `${t.name} \u2212${hpDamage}`, u, skill, { event: isCounter ? "counter" : "damage", targetIds: [t.id], hits: splitDisplayDamage(hpDamage, e.displayHits ?? 1) });
+        frame(u.enemy ? "enemy" : "action", `${t.name} \u2212${hpDamage}`, u, skill2, { event: isCounter ? "counter" : "damage", targetIds: [t.id], hits: splitDisplayDamage(hpDamage, e.displayHits ?? 1) });
       } else if (e.type === "heal" || e.type === "revive") {
         const actual = Math.min(t.stats.hp - t.hp, amount);
         t.hp += actual;
@@ -53094,17 +53094,17 @@ function simulateBalanceBattle(input) {
         }
         const a = analysis.find((a2) => a2.id === u.id);
         if (a) a.healing += actual;
-        frame("action", `${t.name} ${e.type === "revive" ? "\u8607\u751F" : "\u56DE\u5FA9"} +${actual}`, u, skill, { event: e.type, targetIds: [t.id] });
+        frame("action", `${t.name} ${e.type === "revive" ? "\u8607\u751F" : "\u56DE\u5FA9"} +${actual}`, u, skill2, { event: e.type, targetIds: [t.id] });
       } else if (e.type === "cleanse") {
         const candidates = t.statuses.filter((s) => category(s) === e.cleanseCategory).sort((a, b) => (b.appliedAction ?? 0) - (a.appliedAction ?? 0) || (a.sequence ?? 0) - (b.sequence ?? 0)).slice(0, Math.floor(e.power));
         t.statuses = t.statuses.filter((s) => !candidates.includes(s));
         if (candidates.some((s) => s.type === "stun")) t.immune = true;
-        frame("action", `${t.name} ${e.cleanseCategory} ${candidates.length}\u4EF6\u89E3\u9664`, u, skill, { event: "cleanse", targetIds: [t.id], reason: e.cleanseCategory });
+        frame("action", `${t.name} ${e.cleanseCategory} ${candidates.length}\u4EF6\u89E3\u9664`, u, skill2, { event: "cleanse", targetIds: [t.id], reason: e.cleanseCategory });
       } else {
         const stored = e.type === "shield" ? Math.min(amount, Math.max(0, t.stats.hp * config.shieldHpCap - t.statuses.filter((s) => s.type === "shield").reduce((n, s) => n + (s.amount ?? 0), 0))) : amount;
         if (e.type === "shield" && stored <= 0) continue;
-        t.statuses.push({ type: e.type, power: e.power, remaining: e.type === "stun" ? 1 : e.duration ?? 3, carry: true, sourceId: u.id, sourceEnemy: u.enemy, sourceSkillId: skill.id, appliedAction: serial, amount: ["dot", "hot", "shield"].includes(e.type) ? stored : void 0, healingBonus: e.type === "hot" ? bonus(u, "P10") : void 0, sequence: effectSequence++ });
-        frame("action", `${t.name}\uFF1A${e.type} \u4ED8\u4E0E`, u, skill, { event: "effect_applied", targetIds: [t.id] });
+        t.statuses.push({ type: e.type, power: e.power, remaining: e.type === "stun" ? 1 : e.duration ?? 3, carry: true, sourceId: u.id, sourceEnemy: u.enemy, sourceSkillId: skill2.id, appliedAction: serial, amount: ["dot", "hot", "shield"].includes(e.type) ? stored : void 0, healingBonus: e.type === "hot" ? bonus(u, "P10") : void 0, sequence: effectSequence++ });
+        frame("action", `${t.name}\uFF1A${e.type} \u4ED8\u4E0E`, u, skill2, { event: "effect_applied", targetIds: [t.id] });
       }
     }
   };
@@ -53168,26 +53168,26 @@ function simulateBalanceBattle(input) {
       }
     }
   };
-  const act = (u, skill, discount) => {
+  const act = (u, skill2, discount) => {
     serial++;
     if (serial > 1e5)
       throw new Error("Battle execution safety guard exceeded");
     if (!u.enemy)
       playerActions++;
     const beforeSp = partySp, beforeGauge = gauge;
-    const cost = Math.ceil(skill.spCost * discount);
+    const cost = Math.ceil(skill2.spCost * discount);
     if (u.enemy)
       u.sp -= cost;
     else
       partySp -= cost;
-    frame(u.enemy ? "enemy" : "action", `${u.name} \xB7 ${skill.name} SP \u2212${cost}`, u, skill, { event: "action_start" });
-    const main = skill.effects.find((e) => (!e.target || e.target === "selected") && effectTargets(u, skill, e, void 0, true).length > 0);
-    const selected = skill.target === "all_allies" ? side(u).filter(alive) : skill.target === "all_enemies" ? opposite(u).filter(alive) : main ? effectTargets(u, skill, main) : void 0;
+    frame(u.enemy ? "enemy" : "action", `${u.name} \xB7 ${skill2.name} SP \u2212${cost}`, u, skill2, { event: "action_start" });
+    const main = skill2.effects.find((e) => (!e.target || e.target === "selected") && effectTargets(u, skill2, e, void 0, true).length > 0);
+    const selected = skill2.target === "all_allies" ? side(u).filter(alive) : skill2.target === "all_enemies" ? opposite(u).filter(alive) : main ? effectTargets(u, skill2, main) : void 0;
     hitThisAction = /* @__PURE__ */ new Set();
     directTargets = /* @__PURE__ */ new Map();
     applyingSkill = true;
-    for (const e of skill.effects)
-      applyEffect(u, effectTargets(u, skill, e, selected), e, skill);
+    for (const e of skill2.effects)
+      applyEffect(u, effectTargets(u, skill2, e, selected), e, skill2);
     applyingSkill = false;
     deaths(u);
     const attacked = [...opposite(u)].filter((t) => directTargets.has(t));
@@ -53206,11 +53206,11 @@ function simulateBalanceBattle(input) {
       const effects = u.statuses.filter((s) => s.type === "dot" && s.appliedAction !== serial);
       if (effects.length) {
         const amount = Math.floor(periodicTotal(effects.map((s) => periodicAmount(u, s))));
-        const hpDamage = absorb(u, amount, u, skill);
+        const hpDamage = absorb(u, amount, u, skill2);
         if (u.enemy) {
           totalDamage += hpDamage;
         }
-        frame("action", `${u.name} \u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8 \u2212${hpDamage}`, u, skill, { event: "dot", targetIds: [u.id] });
+        frame("action", `${u.name} \u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8 \u2212${hpDamage}`, u, skill2, { event: "dot", targetIds: [u.id] });
         deaths(u);
       }
     }
@@ -53219,7 +53219,7 @@ function simulateBalanceBattle(input) {
       if (effects.length) {
         const amount = Math.min(u.stats.hp - u.hp, Math.floor(periodicTotal(effects.map((s) => periodicAmount(u, s)))));
         u.hp += amount;
-        frame("action", `${u.name} \u7D99\u7D9A\u56DE\u5FA9 +${amount}`, u, skill, { event: "hot", targetIds: [u.id] });
+        frame("action", `${u.name} \u7D99\u7D9A\u56DE\u5FA9 +${amount}`, u, skill2, { event: "hot", targetIds: [u.id] });
       }
     }
     u.actions++;
@@ -53227,15 +53227,15 @@ function simulateBalanceBattle(input) {
       if (s.type !== "stun" && s.appliedAction !== serial)
         s.remaining--;
     for (const s of u.statuses.filter((s2) => s2.remaining <= 0))
-      frame("action", `${u.name}\uFF1A${s.type} \u7D42\u4E86`, u, skill, { event: "effect_expired" });
+      frame("action", `${u.name}\uFF1A${s.type} \u7D42\u4E86`, u, skill2, { event: "effect_expired" });
     u.statuses = u.statuses.filter((s) => s.remaining > 0);
     u.immune = false;
     if (!u.enemy) {
       const a = analysis.find((a2) => a2.id === u.id);
       a.actions++;
-      a.skills += Number(skill.id !== "basic");
+      a.skills += Number(skill2.id !== "basic");
       if (!burst) {
-        const gain = commonSpGain(u.stats.luk, skill.id === "basic");
+        const gain = commonSpGain(u.stats.luk, skill2.id === "basic");
         partySp = Math.min(400, partySp + gain);
         gauge = Math.min(200, gauge + gain);
         a.spGenerated += gain;
@@ -53248,7 +53248,7 @@ function simulateBalanceBattle(input) {
       reason = "action_limit";
     }
     if (!ended && enemies.some(alive)) phases();
-    frame(u.enemy ? "enemy" : "action", `${u.name} \u884C\u52D5\u5B8C\u4E86`, u, skill, { event: "action_end", spDelta: partySp - beforeSp, gaugeDelta: gauge - beforeGauge });
+    frame(u.enemy ? "enemy" : "action", `${u.name} \u884C\u52D5\u5B8C\u4E86`, u, skill2, { event: "action_end", spDelta: partySp - beforeSp, gaugeDelta: gauge - beforeGauge });
   };
   const stunned = (u) => u.statuses.some((s) => s.type === "stun");
   const skip = (u) => {
@@ -53275,21 +53275,21 @@ function simulateBalanceBattle(input) {
       else {
         u.inBlock = true;
         const blockDeaths = u.deaths;
-        let skill = choose(u);
-        if (!skill)
+        let skill2 = choose(u);
+        if (!skill2)
           act(u, basic(u), 1);
-        while (skill && alive(u) && u.deaths === blockDeaths && !ended && enemies.some(alive)) {
+        while (skill2 && alive(u) && u.deaths === blockDeaths && !ended && enemies.some(alive)) {
           if (stunned(u)) {
             skip(u);
             break;
           }
-          act(u, skill, 1);
+          act(u, skill2, 1);
           if (!alive(u) || ended || stunned(u)) {
             if (alive(u) && stunned(u) && !ended)
               skip(u);
             break;
           }
-          skill = choose(u);
+          skill2 = choose(u);
         }
         u.inBlock = false;
         if (alive(u))
@@ -53383,9 +53383,9 @@ var FORMAL_QUEST_STAGES = quest65_default.stages.map((source) => {
   const stage = structuredClone(source);
   stage.waves.forEach((wave, wi) => wave.forEach((enemy2, pi) => {
     const binding = quest65_default.bindings.find((row) => row.stage === stage.designId && row.wave === wi + 1 && row.position === pi + 1 && row.enemyId === enemy2.id);
-    const character = sengoku_characters_default.find((row) => row.characterId === binding?.characterId);
-    if (!binding || !character || character.name !== enemy2.name) throw new Error(`\u6575\u30DE\u30B9\u30BF\u30FC\u5BFE\u5FDC\u304C\u4E0D\u6B63\u3067\u3059: ${enemy2.id}`);
-    enemy2.image = characterArt({ id: character.characterId, name: character.name, image: character.imagePath }, "battle") ?? character.imagePath;
+    const character2 = sengoku_characters_default.find((row) => row.characterId === binding?.characterId);
+    if (!binding || !character2 || character2.name !== enemy2.name) throw new Error(`\u6575\u30DE\u30B9\u30BF\u30FC\u5BFE\u5FDC\u304C\u4E0D\u6B63\u3067\u3059: ${enemy2.id}`);
+    enemy2.image = characterArt({ id: character2.characterId, name: character2.name, image: character2.imagePath }, "battle") ?? character2.imagePath;
   }));
   return stage;
 });
@@ -53405,7 +53405,7 @@ function questEnergyCost(stage, state) {
 function questVictoryRewards(stage, state, party, seed) {
   const firstClear = !state.clearedStages.includes(stage.id);
   const count = (state.questClearCounts?.[stage.id] ?? (firstClear ? 0 : 1)) + 1;
-  const rewards = structuredClone([...stage.rewards, ...firstClear ? stage.firstRewards : []]);
+  const rewards2 = structuredClone([...stage.rewards, ...firstClear ? stage.firstRewards : []]);
   let rng = seed >>> 0;
   const random = () => {
     rng = Math.imul(rng, 1664525) + 1013904223 >>> 0;
@@ -53414,15 +53414,15 @@ function questVictoryRewards(stage, state, party, seed) {
   const luck = party.slice(0, 5).reduce((sum, member) => sum + Math.max(0, Math.min(100, member.stats.luk)), 0) / 5;
   const guaranteed = [];
   for (const drop of stage.soulDrops) {
-    if (random() < Math.min(1, drop.chance * (1 + luck / 400))) rewards.push({ kind: "soul", id: drop.id, amount: 1 });
+    if (random() < Math.min(1, drop.chance * (1 + luck / 400))) rewards2.push({ kind: "soul", id: drop.id, amount: 1 });
     if (count % drop.period === 0) guaranteed.push({ kind: "soul", id: drop.id, amount: 1 });
   }
-  rewards.push(...guaranteed);
+  rewards2.push(...guaranteed);
   if (random() < Math.min(1, stage.ticketChance * (1 + luck / 400))) {
     const roll = random();
-    rewards.push({ kind: "ticket", id: roll < 0.25 ? "SPECIAL_TICKET_CHARACTER" : roll < 0.75 ? "SPECIAL_TICKET_SKILL" : "SPECIAL_TICKET_EQUIPMENT", amount: 1 });
+    rewards2.push({ kind: "ticket", id: roll < 0.25 ? "SPECIAL_TICKET_CHARACTER" : roll < 0.75 ? "SPECIAL_TICKET_SKILL" : "SPECIAL_TICKET_EQUIPMENT", amount: 1 });
   }
-  return { rewards, firstClear, count, guaranteed, encounterRoll: random() };
+  return { rewards: rewards2, firstClear, count, guaranteed, encounterRoll: random() };
 }
 
 // src/theme/local-backgrounds.json
@@ -53618,6 +53618,1424 @@ function getQuestStage2(id) {
   return QUEST_STAGES2.find((stage) => stage.id === id);
 }
 
+// src/domain/redesign/data/raid-skill-values.json
+var raid_skill_values_default = [{ design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 0, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:105.00%" }, { design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 1, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:107.53%" }, { design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 2, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:111.02%" }, { design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 3, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:114.99%" }, { design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 4, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:119.31%" }, { design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 5, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:123.92%" }, { design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 6, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:128.76%" }, { design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 7, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:133.81%" }, { design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 8, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:139.05%" }, { design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 9, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:144.45%" }, { design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 10, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 0, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:105.00%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 1, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:107.53%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 2, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:111.02%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 3, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:114.99%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 4, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:119.31%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 5, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:123.92%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 6, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:128.76%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 7, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:133.81%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 8, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:139.05%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 9, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:144.45%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 10, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 0, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:105.00%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 1, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:107.53%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 2, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:111.02%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 3, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:114.99%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 4, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:119.31%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 5, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:123.92%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 6, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:128.76%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 7, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:133.81%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 8, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:139.05%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 9, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:144.45%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 10, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 0, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:105.00%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 1, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:107.53%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 2, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:111.02%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 3, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:114.99%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 4, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:119.31%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 5, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:123.92%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 6, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:128.76%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 7, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:133.81%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 8, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:139.05%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 9, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:144.45%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 10, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 0, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:105.00%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 1, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:107.53%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 2, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:111.02%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 3, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:114.99%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 4, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:119.31%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 5, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:123.92%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 6, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:128.76%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 7, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:133.81%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 8, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:139.05%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 9, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:144.45%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 10, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 0, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:105.00%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 1, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:107.53%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 2, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:111.02%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 3, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:114.99%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 4, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:119.31%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 5, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:123.92%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 6, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:128.76%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 7, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:133.81%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 8, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:139.05%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 9, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:144.45%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 10, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 0, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:120.00%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 1, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:124.50%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 2, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:130.70%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 3, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:137.76%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 4, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:145.45%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 5, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:153.64%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 6, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:162.25%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 7, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:171.22%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 8, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:180.53%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 9, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:190.13%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 10, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:200.00%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 0, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:120.00%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 1, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:124.50%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 2, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:130.70%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 3, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:137.76%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 4, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:145.45%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 5, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:153.64%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 6, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:162.25%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 7, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:171.22%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 8, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:180.53%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 9, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:190.13%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 10, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:200.00%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 0, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:120.00%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 1, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:124.50%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 2, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:130.70%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 3, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:137.76%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 4, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:145.45%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 5, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:153.64%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 6, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:162.25%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 7, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:171.22%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 8, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:180.53%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 9, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:190.13%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 10, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:200.00%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 0, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:120.00%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 1, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:124.50%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 2, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:130.70%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 3, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:137.76%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 4, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:145.45%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 5, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:153.64%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 6, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:162.25%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 7, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:171.22%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 8, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:180.53%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 9, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:190.13%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 10, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:200.00%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 0, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:120.00%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 1, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:124.50%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 2, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:130.70%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 3, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:137.76%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 4, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:145.45%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 5, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:153.64%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 6, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:162.25%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 7, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:171.22%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 8, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:180.53%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 9, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:190.13%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 10, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:200.00%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 0, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:120.00%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 1, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:124.50%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 2, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:130.70%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 3, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:137.76%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 4, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:145.45%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 5, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:153.64%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 6, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:162.25%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 7, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:171.22%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 8, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:180.53%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 9, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:190.13%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 10, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:200.00%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 0, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 1, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:158.44%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 2, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:170.06%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 3, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:183.30%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 4, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:197.72%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 5, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:213.07%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 6, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:229.21%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 7, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:246.04%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 8, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:263.49%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 9, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:281.49%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 10, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:300.00%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 0, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 1, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:158.44%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 2, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:170.06%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 3, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:183.30%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 4, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:197.72%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 5, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:213.07%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 6, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:229.21%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 7, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:246.04%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 8, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:263.49%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 9, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:281.49%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 10, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:300.00%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 0, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 1, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:158.44%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 2, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:170.06%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 3, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:183.30%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 4, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:197.72%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 5, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:213.07%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 6, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:229.21%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 7, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:246.04%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 8, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:263.49%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 9, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:281.49%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 10, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:300.00%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 0, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 1, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:158.44%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 2, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:170.06%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 3, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:183.30%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 4, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:197.72%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 5, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:213.07%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 6, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:229.21%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 7, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:246.04%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 8, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:263.49%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 9, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:281.49%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 10, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:300.00%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 0, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 1, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:158.44%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 2, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:170.06%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 3, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:183.30%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 4, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:197.72%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 5, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:213.07%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 6, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:229.21%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 7, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:246.04%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 8, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:263.49%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 9, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:281.49%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 10, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:300.00%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 0, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 1, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:158.44%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 2, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:170.06%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 3, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:183.30%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 4, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:197.72%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 5, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:213.07%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 6, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:229.21%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 7, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:246.04%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 8, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:263.49%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 9, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:281.49%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 10, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:300.00%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 0, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:60.00%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 1, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:62.25%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 2, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:65.35%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 3, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:68.88%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 4, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:72.72%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 5, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:76.82%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 6, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:81.12%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 7, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:85.61%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 8, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:90.26%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 9, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:95.06%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 10, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:100.00%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 0, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:60.00%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 1, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:62.25%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 2, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:65.35%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 3, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:68.88%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 4, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:72.72%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 5, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:76.82%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 6, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:81.12%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 7, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:85.61%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 8, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:90.26%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 9, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:95.06%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 10, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:100.00%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 0, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:60.00%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 1, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:62.25%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 2, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:65.35%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 3, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:68.88%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 4, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:72.72%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 5, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:76.82%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 6, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:81.12%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 7, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:85.61%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 8, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:90.26%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 9, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:95.06%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 10, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:100.00%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 0, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:60.00%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 1, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:62.25%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 2, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:65.35%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 3, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:68.88%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 4, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:72.72%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 5, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:76.82%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 6, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:81.12%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 7, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:85.61%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 8, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:90.26%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 9, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:95.06%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 10, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:100.00%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 0, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:60.00%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 1, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:62.25%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 2, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:65.35%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 3, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:68.88%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 4, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:72.72%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 5, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:76.82%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 6, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:81.12%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 7, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:85.61%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 8, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:90.26%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 9, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:95.06%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 10, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:100.00%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 0, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:60.00%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 1, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:62.25%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 2, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:65.35%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 3, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:68.88%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 4, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:72.72%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 5, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:76.82%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 6, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:81.12%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 7, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:85.61%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 8, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:90.26%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 9, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:95.06%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 10, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:100.00%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 0, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:90.00%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 1, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:93.37%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 2, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:98.02%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 3, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:103.32%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 4, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:109.09%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 5, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:115.23%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 6, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:121.68%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 7, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:128.42%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 8, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:135.40%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 9, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:142.60%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 10, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 0, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:105.00%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 1, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:109.22%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 2, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:115.03%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 3, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:121.65%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 4, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:128.86%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 5, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:136.53%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 6, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:144.61%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 7, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:153.02%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 8, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:161.74%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 9, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:170.75%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 10, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:180.00%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 0, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:110.00%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 1, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:114.50%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 2, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:120.70%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 3, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:127.76%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 4, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:135.45%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 5, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:143.64%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 6, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:152.25%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 7, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:161.22%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 8, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:170.53%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 9, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:180.13%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 10, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:190.00%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 0, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:110.00%\uFF0F\u6761\u4EF6\u500D\u7387:140.00%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 1, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:113.94%\uFF0F\u6761\u4EF6\u500D\u7387:146.19%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 2, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:119.36%\uFF0F\u6761\u4EF6\u500D\u7387:154.71%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 3, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:125.54%\uFF0F\u6761\u4EF6\u500D\u7387:164.42%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 4, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:132.27%\uFF0F\u6761\u4EF6\u500D\u7387:174.99%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 5, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:139.43%\uFF0F\u6761\u4EF6\u500D\u7387:186.25%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 6, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:146.96%\uFF0F\u6761\u4EF6\u500D\u7387:198.09%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 7, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:154.82%\uFF0F\u6761\u4EF6\u500D\u7387:210.43%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 8, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:162.96%\uFF0F\u6761\u4EF6\u500D\u7387:223.23%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 9, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:171.36%\uFF0F\u6761\u4EF6\u500D\u7387:236.43%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 10, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:180.00%\uFF0F\u6761\u4EF6\u500D\u7387:250.00%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 0, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:80.00%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:10.00%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 1, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:82.81%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:10.56%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 2, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:86.69%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:11.34%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 3, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:91.10%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:12.22%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 4, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:95.91%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:13.18%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 5, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:101.02%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:14.20%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 6, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:106.40%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:15.28%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 7, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:112.01%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:16.40%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 8, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:117.83%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:17.57%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 9, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:123.83%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:18.77%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 10, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:130.00%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:20.00%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 0, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:110.00%\uFF0F\u6761\u4EF6\u500D\u7387:145.00%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 1, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:113.94%\uFF0F\u6761\u4EF6\u500D\u7387:151.47%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 2, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:119.36%\uFF0F\u6761\u4EF6\u500D\u7387:160.38%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 3, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:125.54%\uFF0F\u6761\u4EF6\u500D\u7387:170.53%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 4, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:132.27%\uFF0F\u6761\u4EF6\u500D\u7387:181.58%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 5, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:139.43%\uFF0F\u6761\u4EF6\u500D\u7387:193.35%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 6, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:146.96%\uFF0F\u6761\u4EF6\u500D\u7387:205.73%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 7, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:154.82%\uFF0F\u6761\u4EF6\u500D\u7387:218.63%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 8, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:162.96%\uFF0F\u6761\u4EF6\u500D\u7387:232.01%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 9, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:171.36%\uFF0F\u6761\u4EF6\u500D\u7387:245.81%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 10, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:180.00%\uFF0F\u6761\u4EF6\u500D\u7387:260.00%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 0, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:110.00%\uFF0F\u6761\u4EF6\u500D\u7387:150.00%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 1, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:113.94%\uFF0F\u6761\u4EF6\u500D\u7387:156.75%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 2, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:119.36%\uFF0F\u6761\u4EF6\u500D\u7387:166.05%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 3, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:125.54%\uFF0F\u6761\u4EF6\u500D\u7387:176.64%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 4, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:132.27%\uFF0F\u6761\u4EF6\u500D\u7387:188.17%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 5, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:139.43%\uFF0F\u6761\u4EF6\u500D\u7387:200.45%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 6, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:146.96%\uFF0F\u6761\u4EF6\u500D\u7387:213.37%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 7, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:154.82%\uFF0F\u6761\u4EF6\u500D\u7387:226.83%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 8, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:162.96%\uFF0F\u6761\u4EF6\u500D\u7387:240.79%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 9, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:171.36%\uFF0F\u6761\u4EF6\u500D\u7387:255.19%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 10, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:180.00%\uFF0F\u6761\u4EF6\u500D\u7387:270.00%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 0, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:35.00%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 1, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:36.12%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 2, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:37.67%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 3, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:39.44%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 4, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:41.36%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 5, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:43.41%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 6, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:45.56%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 7, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:47.81%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 8, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:50.13%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 9, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:52.53%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 10, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:55.00%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 0, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:8.00%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 1, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:8.39%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 2, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:8.94%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 3, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:9.55%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 4, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:10.23%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 5, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:10.94%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 6, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:11.70%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 7, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:12.48%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 8, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:13.30%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 9, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:14.14%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 10, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:15.00%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 0, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:15.00%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 1, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:15.84%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 2, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:17.01%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 3, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:18.33%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 4, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:19.77%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 5, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:21.31%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 6, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:22.92%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 7, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:24.60%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 8, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:26.35%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 9, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:28.15%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 10, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:30.00%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 0, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:8.00%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 1, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:8.39%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 2, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:8.94%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 3, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:9.55%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 4, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:10.23%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 5, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:10.94%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 6, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:11.70%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 7, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:12.48%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 8, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:13.30%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 9, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:14.14%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 10, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:15.00%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 0, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:15.00%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 1, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:15.84%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 2, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:17.01%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 3, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:18.33%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 4, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:19.77%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 5, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:21.31%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 6, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:22.92%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 7, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:24.60%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 8, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:26.35%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 9, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:28.15%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 10, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:30.00%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 0, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:10.00%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 1, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:10.56%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 2, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:11.34%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 3, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:12.22%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 4, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:13.18%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 5, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:14.20%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 6, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:15.28%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 7, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:16.40%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 8, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:17.57%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 9, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:18.77%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 10, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:20.00%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 0, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:12.00%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 1, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:12.73%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 2, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:13.74%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 3, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:14.89%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 4, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:16.14%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 5, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:17.47%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 6, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:18.86%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 7, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:20.32%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 8, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:21.84%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 9, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:23.40%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 10, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:25.00%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 0, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:35.00%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 1, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:36.69%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 2, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:39.01%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 3, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:41.66%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 4, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:44.54%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 5, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:47.61%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 6, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:50.84%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 7, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:54.21%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 8, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:57.70%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 9, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:61.30%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 10, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:65.00%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 0, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:75.00%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 1, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:79.22%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 2, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:85.03%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 3, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:91.65%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 4, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:98.86%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 5, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:106.53%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 6, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:114.61%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 7, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:123.02%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 8, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:131.74%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 9, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:140.75%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 10, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:150.00%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 0, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:20.00%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 1, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:21.12%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 2, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:22.67%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 3, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:24.44%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 4, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:26.36%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 5, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:28.41%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 6, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:30.56%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 7, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:32.81%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 8, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:35.13%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 9, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:37.53%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 10, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:40.00%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 0, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:45.00%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 1, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:47.53%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 2, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:51.02%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 3, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:54.99%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 4, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:59.31%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 5, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:63.92%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 6, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:68.76%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 7, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:73.81%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 8, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:79.05%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 9, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:84.45%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 10, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:90.00%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 0, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:15.00%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 1, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:15.84%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 2, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:17.01%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 3, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:18.33%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 4, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:19.77%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 5, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:21.31%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 6, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:22.92%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 7, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:24.60%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 8, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:26.35%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 9, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:28.15%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 10, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:30.00%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 0, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:20.00%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 1, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:20.84%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 2, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:22.01%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 3, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:23.33%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 4, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:24.77%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 5, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:26.31%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 6, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:27.92%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 7, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:29.60%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 8, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:31.35%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 9, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:33.15%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 10, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:35.00%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 0, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:50.00%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 1, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:52.81%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 2, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:56.69%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 3, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:61.10%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 4, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:65.91%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 5, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:71.02%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 6, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:76.40%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 7, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:82.01%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 8, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:87.83%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 9, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:93.83%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 10, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:100.00%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 0, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:65.00%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 1, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:68.66%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 2, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:73.69%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 3, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:79.43%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 4, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:85.68%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 5, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:92.33%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 6, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:99.32%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 7, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:106.62%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 8, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:114.18%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 9, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:121.98%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 10, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:130.00%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 0, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:35.00%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 1, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:36.97%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 2, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:39.68%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 3, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:42.77%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 4, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:46.13%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 5, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:49.72%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 6, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:53.48%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 7, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:57.41%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 8, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:61.48%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 9, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:65.68%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 10, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:70.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 0, sp: 40, burst_sp: 20, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 1, sp: 40, burst_sp: 20, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 2, sp: 39, burst_sp: 20, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 3, sp: 39, burst_sp: 20, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 4, sp: 38, burst_sp: 19, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 5, sp: 37, burst_sp: 19, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 6, sp: 36, burst_sp: 18, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 7, sp: 35, burst_sp: 18, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 8, sp: 34, burst_sp: 17, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 9, sp: 33, burst_sp: 17, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 10, sp: 32, burst_sp: 16, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 0, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:45.00%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 1, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:46.97%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 2, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:49.68%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 3, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:52.77%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 4, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:56.13%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 5, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:59.72%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 6, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:63.48%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 7, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:67.41%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 8, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:71.48%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 9, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:75.68%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 10, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:80.00%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 0, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:55.00%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 1, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:57.53%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 2, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:61.02%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 3, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:64.99%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 4, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:69.31%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 5, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:73.92%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 6, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:78.76%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 7, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:83.81%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 8, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:89.05%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 9, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:94.45%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 10, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:100.00%" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 0, sp: 45, burst_sp: 23, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 1, sp: 45, burst_sp: 23, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 2, sp: 44, burst_sp: 22, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 3, sp: 44, burst_sp: 22, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 4, sp: 43, burst_sp: 22, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 5, sp: 42, burst_sp: 21, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 6, sp: 41, burst_sp: 21, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 7, sp: 40, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 8, sp: 39, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 9, sp: 38, burst_sp: 19, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 10, sp: 36, burst_sp: 18, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 0, sp: 45, burst_sp: 23, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 1, sp: 45, burst_sp: 23, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 2, sp: 44, burst_sp: 22, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 3, sp: 44, burst_sp: 22, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 4, sp: 43, burst_sp: 22, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 5, sp: 42, burst_sp: 21, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 6, sp: 41, burst_sp: 21, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 7, sp: 40, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 8, sp: 39, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 9, sp: 38, burst_sp: 19, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 10, sp: 36, burst_sp: 18, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 0, sp: 40, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 1, sp: 40, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 2, sp: 39, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 3, sp: 39, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 4, sp: 38, burst_sp: 19, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 5, sp: 37, burst_sp: 19, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 6, sp: 36, burst_sp: 18, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 7, sp: 35, burst_sp: 18, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 8, sp: 34, burst_sp: 17, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 9, sp: 33, burst_sp: 17, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 10, sp: 32, burst_sp: 16, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 0, sp: 40, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 1, sp: 40, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 2, sp: 39, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 3, sp: 39, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 4, sp: 38, burst_sp: 19, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 5, sp: 37, burst_sp: 19, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 6, sp: 36, burst_sp: 18, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 7, sp: 35, burst_sp: 18, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 8, sp: 34, burst_sp: 17, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 9, sp: 33, burst_sp: 17, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 10, sp: 32, burst_sp: 16, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 0, sp: 55, burst_sp: 28, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 1, sp: 55, burst_sp: 28, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 2, sp: 54, burst_sp: 27, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 3, sp: 53, burst_sp: 27, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 4, sp: 52, burst_sp: 26, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 5, sp: 51, burst_sp: 26, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 6, sp: 50, burst_sp: 25, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 7, sp: 48, burst_sp: 24, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 8, sp: 47, burst_sp: 24, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 9, sp: 46, burst_sp: 23, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 10, sp: 44, burst_sp: 22, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 0, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:120.00%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 1, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:125.62%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 2, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:133.37%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 3, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:142.20%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 4, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:151.81%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 5, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:162.04%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 6, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:172.81%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 7, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:184.03%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 8, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:195.66%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 9, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:207.66%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 10, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:220.00%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 0, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:10.00%\uFF0F\u653B\u6483\u500D\u7387:110.00%" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 1, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:10.56%\uFF0F\u653B\u6483\u500D\u7387:115.06%" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 2, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:11.34%\uFF0F\u653B\u6483\u500D\u7387:122.04%" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 3, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:12.22%\uFF0F\u653B\u6483\u500D\u7387:129.98%" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 4, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:13.18%\uFF0F\u653B\u6483\u500D\u7387:138.63%" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 5, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:14.20%\uFF0F\u653B\u6483\u500D\u7387:147.84%" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 6, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:15.28%\uFF0F\u653B\u6483\u500D\u7387:157.53%" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 7, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:16.40%\uFF0F\u653B\u6483\u500D\u7387:167.63%" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 8, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:17.57%\uFF0F\u653B\u6483\u500D\u7387:178.09%" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 9, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:18.77%\uFF0F\u653B\u6483\u500D\u7387:188.89%" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 10, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:20.00%\uFF0F\u653B\u6483\u500D\u7387:200.00%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 0, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:12.00%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 1, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:12.73%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 2, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:13.74%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 3, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:14.89%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 4, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:16.14%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 5, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:17.47%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 6, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:18.86%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 7, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:20.32%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 8, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:21.84%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 9, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:23.40%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 10, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:25.00%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 0, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:65.00%\uFF0F\u6761\u4EF6\u500D\u7387:85.00%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 1, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:66.97%\uFF0F\u6761\u4EF6\u500D\u7387:88.37%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 2, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:69.68%\uFF0F\u6761\u4EF6\u500D\u7387:93.02%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 3, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:72.77%\uFF0F\u6761\u4EF6\u500D\u7387:98.32%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 4, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:76.13%\uFF0F\u6761\u4EF6\u500D\u7387:104.09%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 5, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:79.72%\uFF0F\u6761\u4EF6\u500D\u7387:110.23%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 6, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:83.48%\uFF0F\u6761\u4EF6\u500D\u7387:116.68%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 7, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:87.41%\uFF0F\u6761\u4EF6\u500D\u7387:123.42%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 8, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:91.48%\uFF0F\u6761\u4EF6\u500D\u7387:130.40%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 9, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:95.68%\uFF0F\u6761\u4EF6\u500D\u7387:137.60%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 10, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:100.00%\uFF0F\u6761\u4EF6\u500D\u7387:145.00%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 0, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:65.00%\uFF0F\u6761\u4EF6\u500D\u7387:90.00%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 1, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:66.97%\uFF0F\u6761\u4EF6\u500D\u7387:93.66%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 2, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:69.68%\uFF0F\u6761\u4EF6\u500D\u7387:98.69%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 3, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:72.77%\uFF0F\u6761\u4EF6\u500D\u7387:104.43%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 4, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:76.13%\uFF0F\u6761\u4EF6\u500D\u7387:110.68%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 5, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:79.72%\uFF0F\u6761\u4EF6\u500D\u7387:117.33%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 6, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:83.48%\uFF0F\u6761\u4EF6\u500D\u7387:124.32%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 7, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:87.41%\uFF0F\u6761\u4EF6\u500D\u7387:131.62%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 8, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:91.48%\uFF0F\u6761\u4EF6\u500D\u7387:139.18%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 9, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:95.68%\uFF0F\u6761\u4EF6\u500D\u7387:146.98%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 10, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:100.00%\uFF0F\u6761\u4EF6\u500D\u7387:155.00%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 0, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:10.00%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 1, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:10.56%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 2, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:11.34%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 3, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:12.22%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 4, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:13.18%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 5, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:14.20%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 6, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:15.28%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 7, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:16.40%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 8, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:17.57%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 9, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:18.77%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 10, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:20.00%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 0, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:20.00%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 1, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:21.12%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 2, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:22.67%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 3, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:24.44%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 4, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:26.36%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 5, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:28.41%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 6, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:30.56%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 7, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:32.81%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 8, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:35.13%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 9, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:37.53%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 10, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:40.00%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 0, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:15.00%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 1, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:15.84%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 2, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:17.01%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 3, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:18.33%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 4, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:19.77%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 5, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:21.31%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 6, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:22.92%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 7, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:24.60%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 8, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:26.35%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 9, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:28.15%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 10, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:30.00%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 0, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:10.00%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 1, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:10.56%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 2, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:11.34%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 3, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:12.22%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 4, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:13.18%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 5, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:14.20%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 6, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:15.28%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 7, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:16.40%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 8, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:17.57%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 9, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:18.77%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 10, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:20.00%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 0, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:30.00%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 1, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:31.12%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 2, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:32.67%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 3, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:34.44%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 4, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:36.36%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 5, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:38.41%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 6, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:40.56%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 7, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:42.81%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 8, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:45.13%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 9, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:47.53%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 10, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:50.00%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 0, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:15.00%\uFF0FDEF\u5F37\u5316:15.00%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 1, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:15.84%\uFF0FDEF\u5F37\u5316:15.84%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 2, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:17.01%\uFF0FDEF\u5F37\u5316:17.01%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 3, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:18.33%\uFF0FDEF\u5F37\u5316:18.33%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 4, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:19.77%\uFF0FDEF\u5F37\u5316:19.77%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 5, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:21.31%\uFF0FDEF\u5F37\u5316:21.31%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 6, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:22.92%\uFF0FDEF\u5F37\u5316:22.92%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 7, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:24.60%\uFF0FDEF\u5F37\u5316:24.60%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 8, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:26.35%\uFF0FDEF\u5F37\u5316:26.35%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 9, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:28.15%\uFF0FDEF\u5F37\u5316:28.15%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 10, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:30.00%\uFF0FDEF\u5F37\u5316:30.00%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 0, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:10.00%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 1, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:10.56%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 2, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:11.34%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 3, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:12.22%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 4, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:13.18%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 5, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:14.20%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 6, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:15.28%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 7, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:16.40%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 8, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:17.57%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 9, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:18.77%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 10, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:20.00%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 0, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:55.00%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:35.00%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 1, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:57.53%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:36.97%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 2, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:61.02%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:39.68%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 3, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:64.99%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:42.77%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 4, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:69.31%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:46.13%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 5, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:73.92%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:49.72%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 6, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:78.76%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:53.48%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 7, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:83.81%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:57.41%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 8, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:89.05%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:61.48%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 9, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:94.45%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:65.68%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 10, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:100.00%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:70.00%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 0, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:45.00%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 1, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:47.25%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 2, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:50.35%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 3, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:53.88%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 4, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:57.72%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 5, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:61.82%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 6, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:66.12%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 7, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:70.61%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 8, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:75.26%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 9, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:80.06%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 10, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:85.00%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 0, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:30.00%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 1, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:31.69%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 2, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:34.01%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 3, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:36.66%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 4, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:39.54%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 5, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:42.61%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 6, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:45.84%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 7, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:49.21%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 8, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:52.70%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 9, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:56.30%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 10, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:60.00%" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 0, sp: 140, burst_sp: 70, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 1, sp: 139, burst_sp: 70, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 2, sp: 137, burst_sp: 69, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 3, sp: 134, burst_sp: 67, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 4, sp: 132, burst_sp: 66, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 5, sp: 129, burst_sp: 65, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 6, sp: 126, burst_sp: 63, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 7, sp: 123, burst_sp: 62, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 8, sp: 119, burst_sp: 60, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 9, sp: 116, burst_sp: 58, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 10, sp: 112, burst_sp: 56, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 0, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:120.00%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 1, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:125.62%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 2, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:133.37%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 3, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:142.20%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 4, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:151.81%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 5, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:162.04%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 6, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:172.81%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 7, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:184.03%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 8, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:195.66%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 9, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:207.66%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 10, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:220.00%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }];
+
+// src/domain/redesign/raidFormalSkills.ts
+function getFormalRaidSkill(id, lb) {
+  const row = raid_skill_values_default.find((r) => r.design_id === id && r.lb === lb);
+  if (!row) throw Error(`\u6B63\u5F0F\u30EC\u30A4\u30C9\u6280\u80FD\u304C\u3042\u308A\u307E\u305B\u3093: ${id}/${lb}`);
+  const skill2 = getBalanceV2Skill(id, lb), values = {};
+  for (const text of row.performance_text.split("\uFF0F")) {
+    const match = text.match(/^(.+):([\d.]+)/);
+    if (match) values[match[1]] = Number(match[2]);
+  }
+  const labels = { heal: "\u56DE\u5FA9\u500D\u7387", revive: "\u8607\u751FHP\u5272\u5408", dot: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387", hot: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387", shield: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387", counter: "\u53CD\u6483\u500D\u7387", atk_up: "ATK\u5F37\u5316", def_up: "DEF\u5F37\u5316", atk_down: "ATK\u4F4E\u4E0B", def_down: "DEF\u4F4E\u4E0B" };
+  for (const effect of skill2.effects) {
+    if (effect.type === "damage") {
+      effect.power = values["\u653B\u6483\u500D\u7387"] ?? values["\u901A\u5E38\u500D\u7387"] ?? effect.power;
+      if (values["\u6761\u4EF6\u500D\u7387"] !== void 0) effect.bonusPower = values["\u6761\u4EF6\u500D\u7387"];
+    } else if (effect.type === "stun" || effect.type === "taunt") effect.chance = (values["\u4ED8\u4E0E\u7387"] ?? effect.chance * 100) / 100;
+    else if (labels[effect.type] && values[labels[effect.type]] !== void 0) effect.power = values[labels[effect.type]];
+  }
+  return { ...skill2, id, name: row.name_provisional, image: "", spCost: row.sp, description: `${id} / LB${lb}` };
+}
+
+// src/domain/redesign/data/raid-encounter.json
+var raid_encounter_default = {
+  version: "GAME04_RAID_FORMAL_20260923",
+  bosses: [
+    {
+      designId: "ERB01",
+      name: "\u67F4\u7530\u52DD\u5BB6",
+      rarity: "SR",
+      skills: [],
+      sp: 100
+    },
+    {
+      designId: "ERB02",
+      name: "\u4E95\u4F0A\u76F4\u864E",
+      rarity: "SR",
+      skills: [
+        "SKD039",
+        "SKD008"
+      ],
+      sp: 100
+    },
+    {
+      designId: "ERB03",
+      name: "\u96D1\u8CC0\u5B6B\u5E02",
+      rarity: "SR",
+      skills: [
+        "SKD026"
+      ],
+      sp: 110
+    },
+    {
+      designId: "ERB04",
+      name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+      rarity: "SR",
+      skills: [
+        "SKD033",
+        "SKD008"
+      ],
+      sp: 130
+    },
+    {
+      designId: "ERB05",
+      name: "\u52A0\u85E4\u6E05\u6B63",
+      rarity: "SR",
+      skills: [
+        "SKD034",
+        "SKD009"
+      ],
+      sp: 130
+    },
+    {
+      designId: "ERB06",
+      name: "\u5CF6\u6D25\u7FA9\u5F18",
+      rarity: "SR",
+      skills: [
+        "SKD031"
+      ],
+      sp: 150
+    },
+    {
+      designId: "ERB07",
+      name: "\u7ACB\u82B1\u8ABE\u5343\u4EE3",
+      rarity: "SR",
+      skills: [
+        "SKD023"
+      ],
+      sp: 150
+    },
+    {
+      designId: "ERB08",
+      name: "\u76F4\u6C5F\u517C\u7D9A",
+      rarity: "SR",
+      skills: [
+        "SKD035",
+        "SKD008"
+      ],
+      sp: 150
+    },
+    {
+      designId: "ERB09",
+      name: "\u4ECA\u5DDD\u7FA9\u5143",
+      rarity: "SR",
+      skills: [
+        "SKD036",
+        "SKD010"
+      ],
+      sp: 150
+    },
+    {
+      designId: "ERB10",
+      name: "\u6BDB\u5229\u5143\u5C31",
+      rarity: "SR",
+      skills: [
+        "SKD010"
+      ],
+      sp: 100
+    },
+    {
+      designId: "ERB11",
+      name: "\u670D\u90E8\u534A\u8535",
+      rarity: "SR",
+      skills: [
+        "SKD029"
+      ],
+      sp: 130
+    },
+    {
+      designId: "ERB12",
+      name: "\u9ED2\u7530\u5B98\u5175\u885B",
+      rarity: "SR",
+      skills: [
+        "SKD038",
+        "SKD028"
+      ],
+      sp: 150
+    },
+    {
+      designId: "ERB13",
+      name: "\u6FC3\u59EB",
+      rarity: "SR",
+      skills: [
+        "SKD045",
+        "SKD012"
+      ],
+      sp: 150
+    },
+    {
+      designId: "ERB14",
+      name: "\u771F\u7530\u660C\u5E78",
+      rarity: "SR",
+      skills: [
+        "SKD045",
+        "SKD032"
+      ],
+      sp: 130
+    },
+    {
+      designId: "ERB15",
+      name: "\u77F3\u7530\u4E09\u6210",
+      rarity: "SR",
+      skills: [
+        "SKD034",
+        "SKD011"
+      ],
+      sp: 130
+    },
+    {
+      designId: "ERB16",
+      name: "\u4F0A\u9054\u653F\u5B97",
+      rarity: "SSR",
+      skills: [
+        "SKD022"
+      ],
+      sp: 150
+    },
+    {
+      designId: "ERB17",
+      name: "\u672C\u591A\u5FE0\u52DD",
+      rarity: "SSR",
+      skills: [
+        "SKD049",
+        "SKD009"
+      ],
+      sp: 150
+    },
+    {
+      designId: "ERB18",
+      name: "\u771F\u7530\u5E78\u6751",
+      rarity: "SSR",
+      skills: [
+        "SKD031"
+      ],
+      sp: 150
+    },
+    {
+      designId: "ERB19",
+      name: "\u4E0A\u6749\u8B19\u4FE1",
+      rarity: "SSR",
+      skills: [
+        "SKD014"
+      ],
+      sp: 150
+    },
+    {
+      designId: "ERB20",
+      name: "\u5FB3\u5DDD\u5BB6\u5EB7",
+      rarity: "SSR",
+      skills: [
+        "SKD036",
+        "SKD009"
+      ],
+      sp: 150
+    },
+    {
+      designId: "ERB21",
+      name: "\u660E\u667A\u5149\u79C0",
+      rarity: "SSR",
+      skills: [
+        "SKD038",
+        "SKD028"
+      ],
+      sp: 150
+    },
+    {
+      designId: "ERB22",
+      name: "\u6B66\u7530\u4FE1\u7384",
+      rarity: "SSR",
+      skills: [
+        "SKD033",
+        "SKD007"
+      ],
+      sp: 130
+    },
+    {
+      designId: "ERB23",
+      name: "\u524D\u7530\u6176\u6B21",
+      rarity: "SSR",
+      skills: [],
+      sp: 100
+    },
+    {
+      designId: "ERB24",
+      name: "\u8C4A\u81E3\u79C0\u5409",
+      rarity: "SSR",
+      skills: [
+        "SKD040",
+        "SKD011"
+      ],
+      sp: 180
+    },
+    {
+      designId: "ERB25",
+      name: "\u7E54\u7530\u4FE1\u9577",
+      rarity: "SSR",
+      skills: [
+        "SKD035",
+        "SKD007"
+      ],
+      sp: 180
+    }
+  ],
+  encounters: [
+    {
+      area: 1,
+      designId: "ERB01",
+      name: "\u67F4\u7530\u52DD\u5BB6",
+      level: 10,
+      hp: 6500,
+      atk: 480,
+      def: 80,
+      count: 7,
+      lb: 0,
+      totalHp: 6500,
+      sharedHp: 39e3
+    },
+    {
+      area: 2,
+      designId: "ERB01",
+      name: "\u67F4\u7530\u52DD\u5BB6",
+      level: 16,
+      hp: 10400,
+      atk: 710,
+      def: 130,
+      count: 7,
+      lb: 0,
+      totalHp: 10400,
+      sharedHp: 93600
+    },
+    {
+      area: 2,
+      designId: "ERB02",
+      name: "\u4E95\u4F0A\u76F4\u864E",
+      level: 15,
+      hp: 10730,
+      atk: 530,
+      def: 150,
+      count: 10,
+      lb: 0,
+      totalHp: 10730,
+      sharedHp: 96570
+    },
+    {
+      area: 3,
+      designId: "ERB02",
+      name: "\u4E95\u4F0A\u76F4\u864E",
+      level: 25,
+      hp: 20350,
+      atk: 880,
+      def: 270,
+      count: 10,
+      lb: 1,
+      totalHp: 20350,
+      sharedHp: 244200
+    },
+    {
+      area: 3,
+      designId: "ERB03",
+      name: "\u96D1\u8CC0\u5B6B\u5E02",
+      level: 27,
+      hp: 20700,
+      atk: 1220,
+      def: 230,
+      count: 10,
+      lb: 1,
+      totalHp: 20700,
+      sharedHp: 248400
+    },
+    {
+      area: 3,
+      designId: "ERB04",
+      name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+      level: 26,
+      hp: 21560,
+      atk: 1020,
+      def: 280,
+      count: 10,
+      lb: 1,
+      totalHp: 21560,
+      sharedHp: 258720
+    },
+    {
+      area: 3,
+      designId: "ERB16",
+      name: "\u4F0A\u9054\u653F\u5B97",
+      level: 30,
+      hp: 3e4,
+      atk: 1080,
+      def: 330,
+      count: 12,
+      lb: 1,
+      totalHp: 3e4,
+      sharedHp: 36e4
+    },
+    {
+      area: 4,
+      designId: "ERB05",
+      name: "\u52A0\u85E4\u6E05\u6B63",
+      level: 35,
+      hp: 41600,
+      atk: 1240,
+      def: 600,
+      count: 8,
+      lb: 2,
+      totalHp: 41600,
+      sharedHp: 748800
+    },
+    {
+      area: 4,
+      designId: "ERB06",
+      name: "\u5CF6\u6D25\u7FA9\u5F18",
+      level: 37,
+      hp: 35200,
+      atk: 1940,
+      def: 370,
+      count: 9,
+      lb: 2,
+      totalHp: 35200,
+      sharedHp: 633600
+    },
+    {
+      area: 4,
+      designId: "ERB07",
+      name: "\u7ACB\u82B1\u8ABE\u5343\u4EE3",
+      level: 36,
+      hp: 33600,
+      atk: 1330,
+      def: 400,
+      count: 10,
+      lb: 2,
+      totalHp: 33600,
+      sharedHp: 604800
+    },
+    {
+      area: 4,
+      designId: "ERB17",
+      name: "\u672C\u591A\u5FE0\u52DD",
+      level: 40,
+      hp: 65e3,
+      atk: 1670,
+      def: 800,
+      count: 9,
+      lb: 2,
+      totalHp: 65e3,
+      sharedHp: 117e4
+    },
+    {
+      area: 4,
+      designId: "ERB18",
+      name: "\u771F\u7530\u5E78\u6751",
+      level: 40,
+      hp: 5e4,
+      atk: 2400,
+      def: 460,
+      count: 9,
+      lb: 2,
+      totalHp: 5e4,
+      sharedHp: 9e5
+    },
+    {
+      area: 5,
+      designId: "ERB08",
+      name: "\u76F4\u6C5F\u517C\u7D9A",
+      level: 45,
+      hp: 57750,
+      atk: 2350,
+      def: 660,
+      count: 9,
+      lb: 3,
+      totalHp: 57750,
+      sharedHp: 1386e3
+    },
+    {
+      area: 5,
+      designId: "ERB09",
+      name: "\u4ECA\u5DDD\u7FA9\u5143",
+      level: 47,
+      hp: 74750,
+      atk: 2020,
+      def: 1e3,
+      count: 9,
+      lb: 3,
+      totalHp: 74750,
+      sharedHp: 1794e3
+    },
+    {
+      area: 5,
+      designId: "ERB10",
+      name: "\u6BDB\u5229\u5143\u5C31",
+      level: 46,
+      hp: 60500,
+      atk: 2440,
+      def: 690,
+      count: 8,
+      lb: 3,
+      totalHp: 84700,
+      sharedHp: 2032800
+    },
+    {
+      area: 5,
+      designId: "ERB19",
+      name: "\u4E0A\u6749\u8B19\u4FE1",
+      level: 50,
+      hp: 81250,
+      atk: 3540,
+      def: 700,
+      count: 10,
+      lb: 3,
+      totalHp: 81250,
+      sharedHp: 195e4
+    },
+    {
+      area: 5,
+      designId: "ERB20",
+      name: "\u5FB3\u5DDD\u5BB6\u5EB7",
+      level: 50,
+      hp: 105630,
+      atk: 2460,
+      def: 1230,
+      count: 9,
+      lb: 3,
+      totalHp: 105630,
+      sharedHp: 2535120
+    },
+    {
+      area: 6,
+      designId: "ERB11",
+      name: "\u670D\u90E8\u534A\u8535",
+      level: 55,
+      hp: 84e3,
+      atk: 2970,
+      def: 930,
+      count: 8,
+      lb: 4,
+      totalHp: 84e3,
+      sharedHp: 252e4
+    },
+    {
+      area: 6,
+      designId: "ERB12",
+      name: "\u9ED2\u7530\u5B98\u5175\u885B",
+      level: 57,
+      hp: 90300,
+      atk: 3150,
+      def: 990,
+      count: 9,
+      lb: 4,
+      totalHp: 90300,
+      sharedHp: 2709e3
+    },
+    {
+      area: 6,
+      designId: "ERB13",
+      name: "\u6FC3\u59EB",
+      level: 56,
+      hp: 107900,
+      atk: 2720,
+      def: 1410,
+      count: 9,
+      lb: 4,
+      totalHp: 107900,
+      sharedHp: 3237e3
+    },
+    {
+      area: 6,
+      designId: "ERB21",
+      name: "\u660E\u667A\u5149\u79C0",
+      level: 60,
+      hp: 124690,
+      atk: 3760,
+      def: 1200,
+      count: 9,
+      lb: 4,
+      totalHp: 124690,
+      sharedHp: 3740700
+    },
+    {
+      area: 6,
+      designId: "ERB22",
+      name: "\u6B66\u7530\u4FE1\u7384",
+      level: 60,
+      hp: 130630,
+      atk: 4180,
+      def: 1270,
+      count: 8,
+      lb: 4,
+      totalHp: 130630,
+      sharedHp: 3918900
+    },
+    {
+      area: 7,
+      designId: "ERB14",
+      name: "\u771F\u7530\u660C\u5E78",
+      level: 65,
+      hp: 120750,
+      atk: 4010,
+      def: 1310,
+      count: 10,
+      lb: 5,
+      totalHp: 120750,
+      sharedHp: 4347e3
+    },
+    {
+      area: 7,
+      designId: "ERB15",
+      name: "\u77F3\u7530\u4E09\u6210",
+      level: 67,
+      hp: 159900,
+      atk: 3770,
+      def: 2050,
+      count: 9,
+      lb: 5,
+      totalHp: 223860,
+      sharedHp: 8058960
+    },
+    {
+      area: 7,
+      designId: "ERB05",
+      name: "\u52A0\u85E4\u6E05\u6B63",
+      level: 65,
+      hp: 149500,
+      atk: 3560,
+      def: 1930,
+      count: 8,
+      lb: 5,
+      totalHp: 149500,
+      sharedHp: 5382e3
+    },
+    {
+      area: 7,
+      designId: "ERB23",
+      name: "\u524D\u7530\u6176\u6B21",
+      level: 70,
+      hp: 168750,
+      atk: 6450,
+      def: 1410,
+      count: 5,
+      lb: 5,
+      totalHp: 168750,
+      sharedHp: 6075e3
+    },
+    {
+      area: 7,
+      designId: "ERB24",
+      name: "\u8C4A\u81E3\u79C0\u5409",
+      level: 70,
+      hp: 185630,
+      atk: 5050,
+      def: 1760,
+      count: 9,
+      lb: 5,
+      totalHp: 185630,
+      sharedHp: 6682680
+    },
+    {
+      area: 7,
+      designId: "ERB17",
+      name: "\u672C\u591A\u5FE0\u52DD",
+      level: 70,
+      hp: 219380,
+      atk: 4490,
+      def: 2460,
+      count: 9,
+      lb: 5,
+      totalHp: 219380,
+      sharedHp: 7897680
+    },
+    {
+      area: 8,
+      designId: "ERB07",
+      name: "\u7ACB\u82B1\u8ABE\u5343\u4EE3",
+      level: 76,
+      hp: 162e3,
+      atk: 4870,
+      def: 1820,
+      count: 10,
+      lb: 6,
+      totalHp: 162e3,
+      sharedHp: 6804e3
+    },
+    {
+      area: 8,
+      designId: "ERB03",
+      name: "\u96D1\u8CC0\u5B6B\u5E02",
+      level: 77,
+      hp: 166500,
+      atk: 6990,
+      def: 1670,
+      count: 8,
+      lb: 6,
+      totalHp: 166500,
+      sharedHp: 6993e3
+    },
+    {
+      area: 8,
+      designId: "ERB06",
+      name: "\u5CF6\u6D25\u7FA9\u5F18",
+      level: 77,
+      hp: 166500,
+      atk: 6990,
+      def: 1670,
+      count: 9,
+      lb: 6,
+      totalHp: 166500,
+      sharedHp: 6993e3
+    },
+    {
+      area: 8,
+      designId: "ERB25",
+      name: "\u7E54\u7530\u4FE1\u9577",
+      level: 80,
+      hp: 225e3,
+      atk: 8220,
+      def: 2020,
+      count: 9,
+      lb: 6,
+      totalHp: 225e3,
+      sharedHp: 945e4
+    },
+    {
+      area: 8,
+      designId: "ERB16",
+      name: "\u4F0A\u9054\u653F\u5B97",
+      level: 80,
+      hp: 225e3,
+      atk: 5860,
+      def: 2280,
+      count: 10,
+      lb: 6,
+      totalHp: 225e3,
+      sharedHp: 945e4
+    },
+    {
+      area: 8,
+      designId: "ERB19",
+      name: "\u4E0A\u6749\u8B19\u4FE1",
+      level: 80,
+      hp: 225e3,
+      atk: 8220,
+      def: 2020,
+      count: 10,
+      lb: 6,
+      totalHp: 225e3,
+      sharedHp: 945e4
+    },
+    {
+      area: 8,
+      designId: "ERB18",
+      name: "\u771F\u7530\u5E78\u6751",
+      level: 80,
+      hp: 225e3,
+      atk: 8220,
+      def: 2020,
+      count: 9,
+      lb: 6,
+      totalHp: 225e3,
+      sharedHp: 945e4
+    },
+    {
+      area: 9,
+      designId: "ERB01",
+      name: "\u67F4\u7530\u52DD\u5BB6",
+      level: 86,
+      hp: 216e3,
+      atk: 8510,
+      def: 2270,
+      count: 5,
+      lb: 7,
+      totalHp: 216e3,
+      sharedHp: 10368e3
+    },
+    {
+      area: 9,
+      designId: "ERB02",
+      name: "\u4E95\u4F0A\u76F4\u864E",
+      level: 85,
+      hp: 231e3,
+      atk: 6530,
+      def: 2750,
+      count: 8,
+      lb: 7,
+      totalHp: 231e3,
+      sharedHp: 11088e3
+    },
+    {
+      area: 9,
+      designId: "ERB03",
+      name: "\u96D1\u8CC0\u5B6B\u5E02",
+      level: 87,
+      hp: 222e3,
+      atk: 8680,
+      def: 2340,
+      count: 8,
+      lb: 7,
+      totalHp: 222e3,
+      sharedHp: 10656e3
+    },
+    {
+      area: 9,
+      designId: "ERB04",
+      name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+      level: 86,
+      hp: 237600,
+      atk: 7400,
+      def: 2840,
+      count: 8,
+      lb: 7,
+      totalHp: 237600,
+      sharedHp: 11404800
+    },
+    {
+      area: 9,
+      designId: "ERB05",
+      name: "\u52A0\u85E4\u6E05\u6B63",
+      level: 85,
+      hp: 273e3,
+      atk: 5800,
+      def: 3850,
+      count: 8,
+      lb: 7,
+      totalHp: 273e3,
+      sharedHp: 13104e3
+    },
+    {
+      area: 9,
+      designId: "ERB06",
+      name: "\u5CF6\u6D25\u7FA9\u5F18",
+      level: 87,
+      hp: 222e3,
+      atk: 8680,
+      def: 2340,
+      count: 9,
+      lb: 7,
+      totalHp: 222e3,
+      sharedHp: 10656e3
+    },
+    {
+      area: 9,
+      designId: "ERB07",
+      name: "\u7ACB\u82B1\u8ABE\u5343\u4EE3",
+      level: 86,
+      hp: 216e3,
+      atk: 6070,
+      def: 2560,
+      count: 10,
+      lb: 7,
+      totalHp: 216e3,
+      sharedHp: 10368e3
+    },
+    {
+      area: 9,
+      designId: "ERB08",
+      name: "\u76F4\u6C5F\u517C\u7D9A",
+      level: 85,
+      hp: 231e3,
+      atk: 7250,
+      def: 2750,
+      count: 9,
+      lb: 7,
+      totalHp: 231e3,
+      sharedHp: 11088e3
+    },
+    {
+      area: 9,
+      designId: "ERB09",
+      name: "\u4ECA\u5DDD\u7FA9\u5143",
+      level: 87,
+      hp: 288600,
+      atk: 6040,
+      def: 4100,
+      count: 9,
+      lb: 7,
+      totalHp: 288600,
+      sharedHp: 13852800
+    },
+    {
+      area: 9,
+      designId: "ERB10",
+      name: "\u6BDB\u5229\u5143\u5C31",
+      level: 86,
+      hp: 237600,
+      atk: 7400,
+      def: 2840,
+      count: 8,
+      lb: 7,
+      totalHp: 332640,
+      sharedHp: 15966720
+    },
+    {
+      area: 9,
+      designId: "ERB11",
+      name: "\u670D\u90E8\u534A\u8535",
+      level: 85,
+      hp: 220500,
+      atk: 6530,
+      def: 2610,
+      count: 8,
+      lb: 7,
+      totalHp: 220500,
+      sharedHp: 10584e3
+    },
+    {
+      area: 9,
+      designId: "ERB12",
+      name: "\u9ED2\u7530\u5B98\u5175\u885B",
+      level: 87,
+      hp: 233100,
+      atk: 6800,
+      def: 2780,
+      count: 9,
+      lb: 7,
+      totalHp: 233100,
+      sharedHp: 11188800
+    },
+    {
+      area: 9,
+      designId: "ERB13",
+      name: "\u6FC3\u59EB",
+      level: 86,
+      hp: 280800,
+      atk: 5920,
+      def: 3980,
+      count: 9,
+      lb: 7,
+      totalHp: 280800,
+      sharedHp: 13478400
+    },
+    {
+      area: 9,
+      designId: "ERB14",
+      name: "\u771F\u7530\u660C\u5E78",
+      level: 85,
+      hp: 220500,
+      atk: 6530,
+      def: 2610,
+      count: 10,
+      lb: 7,
+      totalHp: 220500,
+      sharedHp: 10584e3
+    },
+    {
+      area: 9,
+      designId: "ERB15",
+      name: "\u77F3\u7530\u4E09\u6210",
+      level: 87,
+      hp: 288600,
+      atk: 6040,
+      def: 4100,
+      count: 9,
+      lb: 7,
+      totalHp: 404040,
+      sharedHp: 19393920
+    },
+    {
+      area: 9,
+      designId: "ERB16",
+      name: "\u4F0A\u9054\u653F\u5B97",
+      level: 90,
+      hp: 3e5,
+      atk: 7220,
+      def: 3170,
+      count: 10,
+      lb: 7,
+      totalHp: 3e5,
+      sharedHp: 144e5
+    },
+    {
+      area: 9,
+      designId: "ERB17",
+      name: "\u672C\u591A\u5FE0\u52DD",
+      level: 90,
+      hp: 39e4,
+      atk: 7040,
+      def: 4930,
+      count: 9,
+      lb: 7,
+      totalHp: 39e4,
+      sharedHp: 1872e4
+    },
+    {
+      area: 9,
+      designId: "ERB18",
+      name: "\u771F\u7530\u5E78\u6751",
+      level: 90,
+      hp: 3e5,
+      atk: 10120,
+      def: 2820,
+      count: 9,
+      lb: 7,
+      totalHp: 3e5,
+      sharedHp: 144e5
+    },
+    {
+      area: 9,
+      designId: "ERB19",
+      name: "\u4E0A\u6749\u8B19\u4FE1",
+      level: 90,
+      hp: 3e5,
+      atk: 10120,
+      def: 2820,
+      count: 10,
+      lb: 7,
+      totalHp: 3e5,
+      sharedHp: 144e5
+    },
+    {
+      area: 9,
+      designId: "ERB20",
+      name: "\u5FB3\u5DDD\u5BB6\u5EB7",
+      level: 90,
+      hp: 39e4,
+      atk: 7040,
+      def: 4930,
+      count: 9,
+      lb: 7,
+      totalHp: 39e4,
+      sharedHp: 1872e4
+    },
+    {
+      area: 9,
+      designId: "ERB21",
+      name: "\u660E\u667A\u5149\u79C0",
+      level: 90,
+      hp: 315e3,
+      atk: 7920,
+      def: 3340,
+      count: 9,
+      lb: 7,
+      totalHp: 315e3,
+      sharedHp: 1512e4
+    },
+    {
+      area: 9,
+      designId: "ERB22",
+      name: "\u6B66\u7530\u4FE1\u7384",
+      level: 90,
+      hp: 33e4,
+      atk: 8800,
+      def: 3520,
+      count: 8,
+      lb: 7,
+      totalHp: 33e4,
+      sharedHp: 1584e4
+    },
+    {
+      area: 9,
+      designId: "ERB23",
+      name: "\u524D\u7530\u6176\u6B21",
+      level: 90,
+      hp: 3e5,
+      atk: 10120,
+      def: 2820,
+      count: 5,
+      lb: 7,
+      totalHp: 3e5,
+      sharedHp: 144e5
+    },
+    {
+      area: 9,
+      designId: "ERB24",
+      name: "\u8C4A\u81E3\u79C0\u5409",
+      level: 90,
+      hp: 33e4,
+      atk: 7920,
+      def: 3520,
+      count: 9,
+      lb: 7,
+      totalHp: 33e4,
+      sharedHp: 1584e4
+    },
+    {
+      area: 9,
+      designId: "ERB25",
+      name: "\u7E54\u7530\u4FE1\u9577",
+      level: 90,
+      hp: 3e5,
+      atk: 10120,
+      def: 2820,
+      count: 9,
+      lb: 7,
+      totalHp: 3e5,
+      sharedHp: 144e5
+    },
+    {
+      area: 10,
+      designId: "ERB01",
+      name: "\u67F4\u7530\u52DD\u5BB6",
+      level: 96,
+      hp: 282e3,
+      atk: 10440,
+      def: 3180,
+      count: 5,
+      lb: 8,
+      totalHp: 282e3,
+      sharedHp: 15228e3
+    },
+    {
+      area: 10,
+      designId: "ERB02",
+      name: "\u4E95\u4F0A\u76F4\u864E",
+      level: 95,
+      hp: 302500,
+      atk: 8010,
+      def: 3850,
+      count: 8,
+      lb: 8,
+      totalHp: 302500,
+      sharedHp: 16335e3
+    },
+    {
+      area: 10,
+      designId: "ERB03",
+      name: "\u96D1\u8CC0\u5B6B\u5E02",
+      level: 97,
+      hp: 289e3,
+      atk: 10650,
+      def: 3290,
+      count: 8,
+      lb: 8,
+      totalHp: 289e3,
+      sharedHp: 15606e3
+    },
+    {
+      area: 10,
+      designId: "ERB04",
+      name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+      level: 96,
+      hp: 310200,
+      atk: 9080,
+      def: 3980,
+      count: 8,
+      lb: 8,
+      totalHp: 310200,
+      sharedHp: 16750800
+    },
+    {
+      area: 10,
+      designId: "ERB05",
+      name: "\u52A0\u85E4\u6E05\u6B63",
+      level: 95,
+      hp: 357500,
+      atk: 7120,
+      def: 5390,
+      count: 8,
+      lb: 8,
+      totalHp: 357500,
+      sharedHp: 19305e3
+    },
+    {
+      area: 10,
+      designId: "ERB06",
+      name: "\u5CF6\u6D25\u7FA9\u5F18",
+      level: 97,
+      hp: 289e3,
+      atk: 10650,
+      def: 3290,
+      count: 9,
+      lb: 8,
+      totalHp: 289e3,
+      sharedHp: 15606e3
+    },
+    {
+      area: 10,
+      designId: "ERB07",
+      name: "\u7ACB\u82B1\u8ABE\u5343\u4EE3",
+      level: 96,
+      hp: 282e3,
+      atk: 7450,
+      def: 3580,
+      count: 10,
+      lb: 8,
+      totalHp: 282e3,
+      sharedHp: 15228e3
+    },
+    {
+      area: 10,
+      designId: "ERB08",
+      name: "\u76F4\u6C5F\u517C\u7D9A",
+      level: 95,
+      hp: 302500,
+      atk: 8900,
+      def: 3850,
+      count: 9,
+      lb: 8,
+      totalHp: 302500,
+      sharedHp: 16335e3
+    },
+    {
+      area: 10,
+      designId: "ERB09",
+      name: "\u4ECA\u5DDD\u7FA9\u5143",
+      level: 97,
+      hp: 375700,
+      atk: 7410,
+      def: 5750,
+      count: 9,
+      lb: 8,
+      totalHp: 375700,
+      sharedHp: 20287800
+    },
+    {
+      area: 10,
+      designId: "ERB10",
+      name: "\u6BDB\u5229\u5143\u5C31",
+      level: 96,
+      hp: 310200,
+      atk: 9080,
+      def: 3980,
+      count: 8,
+      lb: 8,
+      totalHp: 434280,
+      sharedHp: 23451120
+    },
+    {
+      area: 10,
+      designId: "ERB11",
+      name: "\u670D\u90E8\u534A\u8535",
+      level: 95,
+      hp: 288750,
+      atk: 8010,
+      def: 3660,
+      count: 8,
+      lb: 8,
+      totalHp: 288750,
+      sharedHp: 15592500
+    },
+    {
+      area: 10,
+      designId: "ERB12",
+      name: "\u9ED2\u7530\u5B98\u5175\u885B",
+      level: 97,
+      hp: 303450,
+      atk: 8330,
+      def: 3900,
+      count: 9,
+      lb: 8,
+      totalHp: 303450,
+      sharedHp: 16386300
+    },
+    {
+      area: 10,
+      designId: "ERB13",
+      name: "\u6FC3\u59EB",
+      level: 96,
+      hp: 366600,
+      atk: 7260,
+      def: 5570,
+      count: 9,
+      lb: 8,
+      totalHp: 366600,
+      sharedHp: 19796400
+    },
+    {
+      area: 10,
+      designId: "ERB14",
+      name: "\u771F\u7530\u660C\u5E78",
+      level: 95,
+      hp: 288750,
+      atk: 8010,
+      def: 3660,
+      count: 10,
+      lb: 8,
+      totalHp: 288750,
+      sharedHp: 15592500
+    },
+    {
+      area: 10,
+      designId: "ERB15",
+      name: "\u77F3\u7530\u4E09\u6210",
+      level: 97,
+      hp: 375700,
+      atk: 7410,
+      def: 5750,
+      count: 9,
+      lb: 8,
+      totalHp: 525980,
+      sharedHp: 28402920
+    },
+    {
+      area: 10,
+      designId: "ERB16",
+      name: "\u4F0A\u9054\u653F\u5B97",
+      level: 100,
+      hp: 387500,
+      atk: 8840,
+      def: 4460,
+      count: 10,
+      lb: 8,
+      totalHp: 387500,
+      sharedHp: 20925e3
+    },
+    {
+      area: 10,
+      designId: "ERB17",
+      name: "\u672C\u591A\u5FE0\u52DD",
+      level: 100,
+      hp: 503750,
+      atk: 8620,
+      def: 6930,
+      count: 9,
+      lb: 8,
+      totalHp: 503750,
+      sharedHp: 27202500
+    },
+    {
+      area: 10,
+      designId: "ERB18",
+      name: "\u771F\u7530\u5E78\u6751",
+      level: 100,
+      hp: 387500,
+      atk: 12400,
+      def: 3960,
+      count: 9,
+      lb: 8,
+      totalHp: 387500,
+      sharedHp: 20925e3
+    },
+    {
+      area: 10,
+      designId: "ERB19",
+      name: "\u4E0A\u6749\u8B19\u4FE1",
+      level: 100,
+      hp: 387500,
+      atk: 12400,
+      def: 3960,
+      count: 10,
+      lb: 8,
+      totalHp: 387500,
+      sharedHp: 20925e3
+    },
+    {
+      area: 10,
+      designId: "ERB20",
+      name: "\u5FB3\u5DDD\u5BB6\u5EB7",
+      level: 100,
+      hp: 503750,
+      atk: 8620,
+      def: 6930,
+      count: 9,
+      lb: 8,
+      totalHp: 503750,
+      sharedHp: 27202500
+    },
+    {
+      area: 10,
+      designId: "ERB21",
+      name: "\u660E\u667A\u5149\u79C0",
+      level: 100,
+      hp: 406880,
+      atk: 9700,
+      def: 4700,
+      count: 9,
+      lb: 8,
+      totalHp: 406880,
+      sharedHp: 21971520
+    },
+    {
+      area: 10,
+      designId: "ERB22",
+      name: "\u6B66\u7530\u4FE1\u7384",
+      level: 100,
+      hp: 426250,
+      atk: 10780,
+      def: 4950,
+      count: 8,
+      lb: 8,
+      totalHp: 426250,
+      sharedHp: 23017500
+    },
+    {
+      area: 10,
+      designId: "ERB23",
+      name: "\u524D\u7530\u6176\u6B21",
+      level: 100,
+      hp: 387500,
+      atk: 12400,
+      def: 3960,
+      count: 5,
+      lb: 8,
+      totalHp: 387500,
+      sharedHp: 20925e3
+    },
+    {
+      area: 10,
+      designId: "ERB24",
+      name: "\u8C4A\u81E3\u79C0\u5409",
+      level: 100,
+      hp: 426250,
+      atk: 9700,
+      def: 4950,
+      count: 9,
+      lb: 8,
+      totalHp: 426250,
+      sharedHp: 23017500
+    },
+    {
+      area: 10,
+      designId: "ERB25",
+      name: "\u7E54\u7530\u4FE1\u9577",
+      level: 100,
+      hp: 387500,
+      atk: 12400,
+      def: 3960,
+      count: 9,
+      lb: 8,
+      totalHp: 387500,
+      sharedHp: 20925e3
+    }
+  ]
+};
+
+// src/domain/redesign/raidFormalMaster.ts
+var RAID_MASTER_VERSION = raid_encounter_default.version;
+function raidExpItems(kind, amount) {
+  const rewards2 = [];
+  for (const [id, value] of [["xlarge", 2e4], ["large", 5e3], ["medium", 1e3], ["small", 100]]) {
+    const count = Math.floor(amount / value);
+    if (count) rewards2.push({ kind, id, amount: count });
+    amount %= value;
+  }
+  if (amount) throw Error("EXP\u5831\u916C\u306F100\u5358\u4F4D\u3067\u8A2D\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
+  return rewards2;
+}
+function formalRaidCharacter(name2) {
+  const character2 = sengoku_characters_default.find((c) => c.name === name2);
+  if (!character2) throw Error(`\u6B63\u5F0F\u6B66\u5C06\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093: ${name2}`);
+  const assignment2 = BALANCE_V2_CHARACTER_ASSIGNMENTS.find((c) => c.id === character2.characterId);
+  if (!assignment2) throw Error(`\u6B63\u5F0F\u5272\u5F53\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093: ${name2}`);
+  return { id: character2.characterId, name: character2.name, image: characterArt({ id: character2.characterId, name: character2.name, image: character2.imagePath }, "battle") ?? character2.imagePath, rarity: assignment2.rarity, element: assignment2.element };
+}
+function raidSkill(id, lb) {
+  const skill2 = getFormalRaidSkill(id, lb);
+  if (["SKD039", "SKD040"].includes(id)) skill2.condition = { type: "ally_hp_below", value: 0.5 };
+  return skill2;
+}
+var FORMAL_ENCOUNTER_MASTERS = raid_encounter_default.encounters.map((row) => {
+  const definition = raid_encounter_default.bosses.find((b) => b.designId === row.designId);
+  const character2 = formalRaidCharacter(row.name), band = row.area <= 3 ? 0 : row.area <= 6 ? 1 : row.area <= 8 ? 2 : 3;
+  const passiveLevel = row.area <= 3 ? 0 : row.area <= 6 ? 2 : row.area <= 8 ? 4 : row.area === 9 ? 6 : 8;
+  const passive2 = getCharacterPassive(character2, passiveLevel / 2);
+  const enemy2 = { id: `encounter_a${row.area}_${row.designId}`, name: character2.name, image: character2.image, element: character2.element, level: row.level, stats: { hp: row.hp, atk: row.atk, def: row.def, sp: definition.sp, luk: 0 }, initialSp: definition.sp, hitSpGain: 10, initialCount: row.count, actionCount: row.count, order: 0, boss: true, skills: definition.skills.map((id) => raidSkill(id, row.lb)), passives: passive2 ? [passive2] : [] };
+  const escorts = { ERB10: [["\u5C71\u672C\u52D8\u52A9", ["SKD037"]], ["\u524D\u7530\u5229\u5BB6", []]], ERB15: [["\u4E0A\u6749\u666F\u52DD", ["SKD036"]], ["\u304A\u5E02\u306E\u65B9", ["SKD039"]]] };
+  const enemies = [enemy2, ...(escorts[row.designId] ?? []).map(([name2, skills], index) => {
+    const c = formalRaidCharacter(name2), p = getCharacterPassive(c, passiveLevel / 2), round102 = (value) => Math.round(value / 10) * 10;
+    return { id: `${enemy2.id}_escort${index + 1}`, name: c.name, image: c.image, element: c.element, level: row.level, stats: { hp: round102(row.hp * 0.2), atk: round102(row.atk * 0.45), def: round102(row.def * 0.5), sp: 100, luk: 0 }, initialSp: 100, hitSpGain: 10, initialCount: 9, actionCount: 9, order: index + 1, skills: skills.map((id) => raidSkill(id, row.lb)), passives: p ? [p] : [] };
+  })];
+  const victoryRewards = [{ kind: "cash", amount: [3e3, 6e3, 9e3, 12e3][band] }, ...raidExpItems("character_exp_item", [1e3, 2500, 5e3, 1e4][band]), ...raidExpItems("equipment_exp_item", [500, 1500, 3e3, 6e3][band]), { kind: "soul", id: character2.id, amount: character2.rarity === "SR" && band > 0 ? 2 : 1, chance: (character2.rarity === "SR" ? [0.75, 0.5, 0.6, 0.75] : [0.3, 0.4, 0.6, 0.7])[band] }];
+  return { id: enemy2.id, masterVersion: RAID_MASTER_VERSION, characterId: character2.id, area: row.area, name: character2.name, type: "encounter", enemy: enemy2, enemies, energyCost: 20, durationMinutes: 60, maxParticipants: 10, maxLevel: 1, appearanceLevels: [1], appearanceImages: {}, enemyGrowthPerLevel: 0, sharedHpGrowthPerLevel: 0, victoryMultiplier: 1.5, sharedHp: row.sharedHp, participationRewards: [], victoryRewards, playerExp: [80, 100, 120, 160, 200, 240, 300, 360, 440, 520][row.area - 1], defeatRewards: [{ kind: "soul", id: character2.id, amount: band < 2 ? 1 : 2 }, ...raidExpItems("character_exp_item", [5e3, 2e4, 2e4, 4e4][band]), ...raidExpItems("equipment_exp_item", [5e3, 2e4, 2e4, 4e4][band]), { kind: "skill_material", amount: [2, 4, 6, 8][band] }, { kind: "equipment_lb", amount: [2, 4, 6, 8][band] }, { kind: "cash", amount: [5e3, 1e4, 2e4, 3e4][band] }] };
+});
+function selectEncounterMaster(area, random) {
+  const ssr = random() < [0, 0, 0.1, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.7][area - 1];
+  const choices = FORMAL_ENCOUNTER_MASTERS.filter((m) => m.area === area && formalRaidCharacter(m.name).rarity === "SSR" === ssr);
+  if (!choices.length) throw Error("\u6B63\u5F0F\u906D\u9047\u30D7\u30FC\u30EB\u304C\u3042\u308A\u307E\u305B\u3093\u3002");
+  return choices[Math.min(choices.length - 1, Math.floor(random() * choices.length))];
+}
+
 // src/domain/redesign/raid.ts
 var base = COMMON_CHARACTER_MASTERS[12];
 var attack = COMMON_SKILL_MASTERS.find((s) => s.effects.some((e) => e.type === "damage"));
@@ -53627,27 +55045,35 @@ var RAID_MASTERS = [
   { id: "unlock_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", type: "unlock", enemy: { ...boss, id: "raid_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", element: "dark", image: COMMON_CHARACTER_MASTERS[24].image }, energyCost: 20, durationMinutes: 4320, maxParticipants: 20, maxLevel: 20, appearanceLevels: [1, 10, 20], appearanceImages: { 10: COMMON_CHARACTER_MASTERS[30].image, 20: COMMON_CHARACTER_MASTERS[36].image }, enemyGrowthPerLevel: 0.15, sharedHpGrowthPerLevel: 0.2, victoryMultiplier: 1.5, sharedHp: 2e5, participationRewards: [{ kind: "skill_material", amount: 2 }], defeatRewards: [{ kind: "skill_material", amount: 15 }, { kind: "equipment_material", amount: 5 }] }
 ];
 function getRaidMaster(id) {
-  const master = RAID_MASTERS.find((m) => m.id === id);
+  const master = [...RAID_MASTERS, ...FORMAL_ENCOUNTER_MASTERS].find((m) => m.id === id);
   if (!master) throw new Error("\u5BFE\u8C61\u30EC\u30A4\u30C9\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002");
   return master;
 }
 function getRoomRaidMaster(room) {
-  return room.territorySnapshot?.raidMaster ?? getRaidMaster(room.masterId);
+  const master = room.raidSnapshot ?? room.territorySnapshot?.raidMaster ?? getRaidMaster(room.masterId);
+  const stage = master.stages?.find((s) => s.level === room.level);
+  return stage ? { ...master, enemy: stage.enemies.find((e) => e.boss) ?? stage.enemies[0], enemies: stage.enemies, defeatRewards: stage.defeatRewards } : master;
 }
 function raidAppearanceLevel(master, level) {
   return Math.max(1, ...master.appearanceLevels.filter((n) => n <= level));
 }
 function raidEnemy(master, level) {
+  const stage = master.stages?.find((s) => s.level === level);
+  if (master.masterVersion) {
+    const enemy2 = stage?.enemies.find((e) => e.boss) ?? stage?.enemies[0] ?? master.enemy;
+    return { ...structuredClone(enemy2), initialSp: enemy2.stats.sp };
+  }
   const appearanceLevel = raidAppearanceLevel(master, level);
   const stats = Object.fromEntries(Object.entries(master.enemy.stats).map(([key2, value]) => [key2, Math.round(value * (1 + (level - 1) * master.enemyGrowthPerLevel))]));
   return { ...structuredClone(master.enemy), level, image: master.appearanceImages[String(appearanceLevel)] ?? master.enemy.image, stats, initialSp: stats.sp };
 }
 function createRaidRoom(masterId, ownerId, id, now, territorySnapshot) {
   const m = territorySnapshot?.raidMaster ?? getRaidMaster(masterId);
-  return { ...territorySnapshot ? { territorySnapshot: structuredClone(territorySnapshot) } : {}, id, masterId, ownerId, level: 1, hp: m.sharedHp, maxHp: m.sharedHp, createdAt: new Date(now).toISOString(), expiresAt: new Date(now + m.durationMinutes * 6e4).toISOString(), status: "active", rescueCount: 0, rescueWindowStartedAt: new Date(now).toISOString(), participants: [{ userId: ownerId, name: "\u4E3B\u50AC\u8005", wins: 0, attempts: 0, totalDamage: 0, joinedLevel: 1 }], settledBattleIds: [], rewardGrants: [] };
+  return { ...m.masterVersion && !territorySnapshot ? { raidSnapshot: structuredClone(m) } : {}, ...territorySnapshot ? { territorySnapshot: structuredClone(territorySnapshot) } : {}, id, masterId, ownerId, level: 1, hp: m.sharedHp, maxHp: m.sharedHp, createdAt: new Date(now).toISOString(), expiresAt: new Date(now + m.durationMinutes * 6e4).toISOString(), status: "active", rescueCount: 0, rescueWindowStartedAt: new Date(now).toISOString(), participants: [{ userId: ownerId, name: "\u4E3B\u50AC\u8005", wins: 0, attempts: 0, totalDamage: 0, joinedLevel: 1 }], settledBattleIds: [], rewardGrants: [] };
 }
 function applyRaidAction(original, originalState, action, payload = {}, now = Date.now(), acquisitionMaster) {
   const room = structuredClone(original), state = structuredClone(originalState), master = getRoomRaidMaster(room);
+  const rewards2 = [];
   if (room.status === "active" && Date.parse(room.expiresAt) <= now) room.status = "expired";
   let me = room.participants.find((p) => p.userId === state.userId);
   if (action === "raid_claim") {
@@ -53655,15 +55081,15 @@ function applyRaidAction(original, originalState, action, payload = {}, now = Da
       g.rewards.forEach((r, i) => Object.assign(state, grantReward(state, r, `${room.id}:${g.id}:${i}`, acquisitionMaster)));
       g.claimed = true;
     }
-    return { room, state };
+    return { room, state, rewards: rewards2 };
   }
-  if (action === "raid_refresh") return { room, state };
-  if (action === "raid_battle" && payload.battleId && room.settledBattleIds.includes(payload.battleId)) return { room, state };
+  if (action === "raid_refresh") return { room, state, rewards: rewards2 };
+  if (action === "raid_battle" && payload.battleId && room.settledBattleIds.includes(payload.battleId)) return { room, state, rewards: rewards2 };
   if (action === "encounter_ignore") {
     if (master.type !== "encounter" || room.ownerId !== state.userId || !me || me.attempts > 0) throw new Error("\u3053\u306E\u906D\u9047\u306F\u7121\u8996\u3067\u304D\u307E\u305B\u3093\u3002");
     me.leftAt = new Date(now).toISOString();
     room.status = "expired";
-    return { room, state };
+    return { room, state, rewards: rewards2 };
   }
   if (room.status !== "active" && action !== "raid_battle") throw new Error("\u3053\u306E\u30EC\u30A4\u30C9\u306F\u7D42\u4E86\u3057\u307E\u3057\u305F\u3002");
   if (me?.leftAt && action !== "raid_battle") throw new Error("\u9000\u51FA\u6E08\u307F\u306E\u30EC\u30A4\u30C9\u306B\u306F\u518D\u53C2\u52A0\u3067\u304D\u307E\u305B\u3093\u3002");
@@ -53673,13 +55099,13 @@ function applyRaidAction(original, originalState, action, payload = {}, now = Da
       me = { userId: state.userId, name: payload.name || "\u53C2\u6226\u8005", wins: 0, attempts: 0, totalDamage: 0, joinedLevel: room.level };
       room.participants.push(me);
     }
-    return { room, state };
+    return { room, state, rewards: rewards2 };
   }
   if (!me) throw new Error("\u5148\u306B\u30EC\u30A4\u30C9\u3078\u53C2\u52A0\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
   if (action === "raid_leave") {
     if (room.ownerId === state.userId) throw new Error("\u4E3B\u50AC\u8005\u306F\u9000\u51FA\u3067\u304D\u307E\u305B\u3093\u3002");
     me.leftAt = new Date(now).toISOString();
-    return { room, state };
+    return { room, state, rewards: rewards2 };
   }
   if (action === "raid_rescue") {
     if (master.type === "unlock" && now - Date.parse(room.rescueWindowStartedAt) >= 216e5) {
@@ -53688,11 +55114,11 @@ function applyRaidAction(original, originalState, action, payload = {}, now = Da
     }
     if (room.rescueCount >= 3) throw new Error("\u6551\u63F4\u4F9D\u983C\u306E\u6B8B\u308A\u56DE\u6570\u304C\u3042\u308A\u307E\u305B\u3093\u3002");
     room.rescueCount++;
-    return { room, state };
+    return { room, state, rewards: rewards2 };
   }
   if (action === "raid_battle") {
     if (!payload.battleId || !payload.result) throw new Error("\u30B5\u30FC\u30D0\u30FC\u306E\u6226\u95D8\u7D50\u679C\u304C\u5FC5\u8981\u3067\u3059\u3002");
-    if (room.settledBattleIds.includes(payload.battleId)) return { room, state };
+    if (room.settledBattleIds.includes(payload.battleId)) return { room, state, rewards: rewards2 };
     const appliesToSharedHp = payload.battleLevel === room.level && room.status === "active" && !me.leftAt;
     if (!payload.energyAlreadyPaid) {
       if (state.energy < master.energyCost) throw new Error("\u884C\u52D5\u529B\u304C\u8DB3\u308A\u307E\u305B\u3093\u3002");
@@ -53706,18 +55132,2724 @@ function applyRaidAction(original, originalState, action, payload = {}, now = Da
     me.lastResult = payload.result.outcome === "win" ? "\u52DD\u5229" : "\u6557\u5317";
     if (appliesToSharedHp) room.hp = Math.max(0, room.hp - damage);
     room.settledBattleIds.push(payload.battleId);
-    if (me.attempts === 1) room.rewardGrants.push({ id: `participation:${state.userId}`, userId: state.userId, level: room.level, rewards: master.participationRewards, claimed: false });
+    if (master.masterVersion && payload.result.outcome === "win") {
+      let rng = (payload.seed ?? 0) >>> 0;
+      const random = () => {
+        rng = Math.imul(rng, 1664525) + 1013904223 >>> 0;
+        return rng / 4294967296;
+      };
+      for (const [i, reward] of (master.victoryRewards ?? []).entries()) if (reward.chance === void 0 || random() < Math.min(1, reward.chance * (1 + Math.max(0, Math.min(100, payload.luck ?? 0)) / 400))) {
+        const earned = { ...reward, chance: void 0 };
+        rewards2.push(earned);
+        Object.assign(state, grantReward(state, earned, `${payload.battleId}:victory:${i}`, acquisitionMaster));
+      }
+    }
+    if (!master.masterVersion && me.attempts === 1) room.rewardGrants.push({ id: `participation:${state.userId}`, userId: state.userId, level: room.level, rewards: master.participationRewards, claimed: false });
     if (appliesToSharedHp && room.hp === 0) {
       for (const p of room.participants) if (!p.leftAt && p.wins >= 3 && p.joinedLevel <= room.level) room.rewardGrants.push({ id: `defeat:${room.level}:${p.userId}`, userId: p.userId, level: room.level, rewards: master.defeatRewards, claimed: false });
       if (master.type === "unlock" && room.level < master.maxLevel) {
         room.level++;
-        room.maxHp = Math.round(master.sharedHp * (1 + (room.level - 1) * master.sharedHpGrowthPerLevel));
+        room.maxHp = master.stages?.find((stage) => stage.level === room.level)?.sharedHp ?? Math.round(master.sharedHp * (1 + (room.level - 1) * master.sharedHpGrowthPerLevel));
         room.hp = room.maxHp;
       } else room.status = "defeated";
     }
-    return { room, state };
+    return { room, state, rewards: rewards2 };
   }
   throw new Error("\u5BFE\u5FDC\u3057\u3066\u3044\u306A\u3044\u30EC\u30A4\u30C9\u64CD\u4F5C\u3067\u3059\u3002");
+}
+function raidEnemies(master, level) {
+  return structuredClone(master.stages?.find((stage) => stage.level === level)?.enemies ?? master.enemies ?? [raidEnemy(master, level)]);
+}
+
+// src/domain/redesign/data/raid-invasion.json
+var raid_invasion_default = {
+  version: "invasion-20260921-section10",
+  candidates: [
+    {
+      level: 1,
+      source: "4-1/3",
+      names: [
+        "\u67F4\u7530\u52DD\u5BB6"
+      ],
+      skills: [
+        [
+          "SKD034"
+        ]
+      ]
+    },
+    {
+      level: 1,
+      source: "4-2/3",
+      names: [
+        "\u524D\u7530\u6176\u6B21"
+      ],
+      skills: [
+        []
+      ]
+    },
+    {
+      level: 1,
+      source: "5-2/3",
+      names: [
+        "\u9577\u5B97\u6211\u90E8\u5143\u89AA"
+      ],
+      skills: [
+        [
+          "SKD033",
+          "SKD008"
+        ]
+      ]
+    },
+    {
+      level: 2,
+      source: "5-2/2",
+      names: [
+        "\u4E95\u4F0A\u76F4\u864E",
+        "\u76F4\u6C5F\u517C\u7D9A"
+      ],
+      skills: [
+        [
+          "SKD034"
+        ],
+        [
+          "SKD008"
+        ]
+      ]
+    },
+    {
+      level: 2,
+      source: "7-6/1",
+      names: [
+        "\u96D1\u8CC0\u5B6B\u5E02",
+        "\u5317\u6761\u6C0F\u5EB7"
+      ],
+      skills: [
+        [
+          "SKD010"
+        ],
+        [
+          "SKD048"
+        ]
+      ]
+    },
+    {
+      level: 2,
+      source: "10-5/1",
+      names: [
+        "\u4ECA\u5DDD\u7FA9\u5143",
+        "\u96D1\u8CC0\u5B6B\u5E02"
+      ],
+      skills: [
+        [
+          "SKD036"
+        ],
+        [
+          "SKD010"
+        ]
+      ]
+    },
+    {
+      level: 4,
+      source: "5-3/1",
+      names: [
+        "\u67F4\u7530\u52DD\u5BB6",
+        "\u672C\u9858\u5BFA\u9855\u5982"
+      ],
+      skills: [
+        [],
+        [
+          "SKD040"
+        ]
+      ]
+    },
+    {
+      level: 4,
+      source: "7-4/1",
+      names: [
+        "\u6D45\u4E95\u9577\u653F",
+        "\u7D30\u5DDD\u30AC\u30E9\u30B7\u30E3"
+      ],
+      skills: [
+        [],
+        [
+          "SKD040"
+        ]
+      ]
+    },
+    {
+      level: 4,
+      source: "9-6/2",
+      names: [
+        "\u524D\u7530\u6176\u6B21",
+        "\u304A\u5E02\u306E\u65B9"
+      ],
+      skills: [
+        [],
+        [
+          "SKD040"
+        ]
+      ]
+    },
+    {
+      level: 5,
+      source: "9-2/1",
+      names: [
+        "\u4E95\u4F0A\u76F4\u653F",
+        "\u7ACB\u82B1\u5B97\u8302",
+        "\u5C0F\u65E9\u5DDD\u9686\u666F"
+      ],
+      skills: [
+        [
+          "SKD007"
+        ],
+        [
+          "SKD011"
+        ],
+        [
+          "SKD008"
+        ]
+      ]
+    },
+    {
+      level: 5,
+      source: "9-2/2",
+      names: [
+        "\u5CF6\u6D25\u7FA9\u5F18",
+        "\u6BDB\u5229\u5143\u5C31",
+        "\u7ACB\u82B1\u8ABE\u5343\u4EE3"
+      ],
+      skills: [
+        [
+          "SKD007"
+        ],
+        [
+          "SKD010"
+        ],
+        [
+          "SKD023"
+        ]
+      ]
+    },
+    {
+      level: 5,
+      source: "9-7/3",
+      names: [
+        "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+        "\u5CF6\u6D25\u7FA9\u5F18",
+        "\u7ACB\u82B1\u5B97\u8302"
+      ],
+      skills: [
+        [
+          "SKD008"
+        ],
+        [
+          "SKD007"
+        ],
+        [
+          "SKD011"
+        ]
+      ]
+    },
+    {
+      level: 7,
+      source: "6-1/2",
+      names: [
+        "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+        "\u5C0F\u65E9\u5DDD\u9686\u666F"
+      ],
+      skills: [
+        [
+          "SKD029"
+        ],
+        [
+          "SKD008"
+        ]
+      ]
+    },
+    {
+      level: 7,
+      source: "6-2/1",
+      names: [
+        "\u9ED2\u7530\u5B98\u5175\u885B",
+        "\u5C71\u672C\u52D8\u52A9"
+      ],
+      skills: [
+        [
+          "SKD028"
+        ],
+        [
+          "SKD037"
+        ]
+      ]
+    },
+    {
+      level: 7,
+      source: "10-4/1",
+      names: [
+        "\u5C71\u672C\u52D8\u52A9",
+        "\u658E\u85E4\u9053\u4E09"
+      ],
+      skills: [
+        [
+          "SKD037"
+        ],
+        [
+          "SKD029"
+        ]
+      ]
+    },
+    {
+      level: 8,
+      source: "6-3/1",
+      names: [
+        "\u7AF9\u4E2D\u534A\u5175\u885B",
+        "\u96D1\u8CC0\u5B6B\u5E02"
+      ],
+      skills: [
+        [
+          "SKD032"
+        ],
+        [
+          "SKD010"
+        ]
+      ]
+    },
+    {
+      level: 8,
+      source: "6-3/2",
+      names: [
+        "\u771F\u7530\u660C\u5E78",
+        "\u7532\u6590\u59EB",
+        "\u7D30\u5DDD\u30AC\u30E9\u30B7\u30E3"
+      ],
+      skills: [
+        [
+          "SKD032"
+        ],
+        [],
+        [
+          "SKD040"
+        ]
+      ]
+    },
+    {
+      level: 8,
+      source: "10-1/1",
+      names: [
+        "\u4E95\u4F0A\u76F4\u864E",
+        "\u96D1\u8CC0\u5B6B\u5E02"
+      ],
+      skills: [
+        [
+          "SKD034"
+        ],
+        [
+          "SKD026"
+        ]
+      ]
+    },
+    {
+      level: 10,
+      source: "4-3/3",
+      names: [
+        "\u4F0A\u9054\u653F\u5B97"
+      ],
+      skills: [
+        [
+          "SKD022"
+        ]
+      ]
+    },
+    {
+      level: 10,
+      source: "6-4/1",
+      names: [
+        "\u771F\u7530\u5E78\u6751"
+      ],
+      skills: [
+        [
+          "SKD013"
+        ]
+      ]
+    },
+    {
+      level: 10,
+      source: "7-5/2",
+      names: [
+        "\u672C\u591A\u5FE0\u52DD"
+      ],
+      skills: [
+        [
+          "SKD050"
+        ]
+      ]
+    },
+    {
+      level: 11,
+      source: "5-4/3",
+      names: [
+        "\u77F3\u7530\u4E09\u6210",
+        "\u6BDB\u5229\u5143\u5C31",
+        "\u304A\u5E02\u306E\u65B9"
+      ],
+      skills: [
+        [
+          "SKD034"
+        ],
+        [
+          "SKD010"
+        ],
+        [
+          "SKD040"
+        ]
+      ]
+    },
+    {
+      level: 11,
+      source: "6-5/2",
+      names: [
+        "\u77F3\u7530\u4E09\u6210",
+        "\u5CF6\u6D25\u7FA9\u4E45",
+        "\u6BDB\u5229\u5143\u5C31"
+      ],
+      skills: [
+        [
+          "SKD034"
+        ],
+        [
+          "SKD054"
+        ],
+        [
+          "SKD010"
+        ]
+      ]
+    },
+    {
+      level: 11,
+      source: "9-3/1",
+      names: [
+        "\u52A0\u85E4\u6E05\u6B63",
+        "\u771F\u7530\u660C\u5E78",
+        "\u7D30\u5DDD\u30AC\u30E9\u30B7\u30E3"
+      ],
+      skills: [
+        [
+          "SKD034"
+        ],
+        [
+          "SKD046"
+        ],
+        [
+          "SKD040"
+        ]
+      ]
+    }
+  ],
+  fixed: [
+    {
+      castleId: "TI01",
+      level: 3,
+      order: 0,
+      name: "\u67F4\u7530\u52DD\u5BB6",
+      role: "D",
+      enemyLevel: 36,
+      hp: 15210,
+      atk: 650,
+      defense: 510,
+      count: 6,
+      sp: 100,
+      skills: [
+        "SKD034"
+      ]
+    },
+    {
+      castleId: "TI01",
+      level: 3,
+      order: 1,
+      name: "\u4E95\u4F0A\u76F4\u864E",
+      role: "H",
+      enemyLevel: 36,
+      hp: 7600,
+      atk: 1070,
+      defense: 220,
+      count: 7,
+      sp: 100,
+      skills: [
+        "SKD039"
+      ]
+    },
+    {
+      castleId: "TI01",
+      level: 6,
+      order: 0,
+      name: "\u52A0\u85E4\u6E05\u6B63",
+      role: "D",
+      enemyLevel: 39,
+      hp: 17290,
+      atk: 740,
+      defense: 580,
+      count: 7,
+      sp: 100,
+      skills: [
+        "SKD034"
+      ]
+    },
+    {
+      castleId: "TI01",
+      level: 6,
+      order: 1,
+      name: "\u96D1\u8CC0\u5B6B\u5E02",
+      role: "A",
+      enemyLevel: 39,
+      hp: 11520,
+      atk: 1160,
+      defense: 310,
+      count: 8,
+      sp: 110,
+      skills: [
+        "SKD026"
+      ]
+    },
+    {
+      castleId: "TI01",
+      level: 9,
+      order: 0,
+      name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+      role: "A",
+      enemyLevel: 42,
+      hp: 12820,
+      atk: 1290,
+      defense: 340,
+      count: 9,
+      sp: 130,
+      skills: [
+        "SKD033",
+        "SKD008"
+      ]
+    },
+    {
+      castleId: "TI01",
+      level: 9,
+      order: 1,
+      name: "\u5CF6\u6D25\u7FA9\u5F18",
+      role: "A",
+      enemyLevel: 42,
+      hp: 12820,
+      atk: 1290,
+      defense: 340,
+      count: 8,
+      sp: 100,
+      skills: [
+        "SKD007"
+      ]
+    },
+    {
+      castleId: "TI01",
+      level: 12,
+      order: 0,
+      name: "\u5FB3\u5DDD\u5BB6\u5EB7",
+      role: "B",
+      enemyLevel: 45,
+      hp: 54240,
+      atk: 1830,
+      defense: 630,
+      count: 10,
+      sp: 150,
+      skills: [
+        "SKD036",
+        "SKD009"
+      ]
+    },
+    {
+      castleId: "TI01",
+      level: 12,
+      order: 1,
+      name: "\u4E95\u4F0A\u76F4\u864E",
+      role: "H",
+      enemyLevel: 45,
+      hp: 10850,
+      atk: 1500,
+      defense: 320,
+      count: 7,
+      sp: 100,
+      skills: [
+        "SKD039"
+      ]
+    },
+    {
+      castleId: "TI02",
+      level: 3,
+      order: 0,
+      name: "\u7ACB\u82B1\u8ABE\u5343\u4EE3",
+      role: "A",
+      enemyLevel: 51,
+      hp: 18340,
+      atk: 1800,
+      defense: 500,
+      count: 9,
+      sp: 150,
+      skills: [
+        "SKD023"
+      ]
+    },
+    {
+      castleId: "TI02",
+      level: 3,
+      order: 1,
+      name: "\u76F4\u6C5F\u517C\u7D9A",
+      role: "S",
+      enemyLevel: 51,
+      hp: 14680,
+      atk: 1310,
+      defense: 430,
+      count: 7,
+      sp: 100,
+      skills: [
+        "SKD035"
+      ]
+    },
+    {
+      castleId: "TI02",
+      level: 6,
+      order: 0,
+      name: "\u4ECA\u5DDD\u7FA9\u5143",
+      role: "D",
+      enemyLevel: 54,
+      hp: 30710,
+      atk: 1270,
+      defense: 1040,
+      count: 8,
+      sp: 150,
+      skills: [
+        "SKD036"
+      ]
+    },
+    {
+      castleId: "TI02",
+      level: 6,
+      order: 1,
+      name: "\u9ED2\u7530\u5B98\u5175\u885B",
+      role: "S",
+      enemyLevel: 54,
+      hp: 16380,
+      atk: 1450,
+      defense: 490,
+      count: 9,
+      sp: 150,
+      skills: [
+        "SKD038",
+        "SKD012"
+      ]
+    },
+    {
+      castleId: "TI02",
+      level: 9,
+      order: 0,
+      name: "\u77F3\u7530\u4E09\u6210",
+      role: "D",
+      enemyLevel: 57,
+      hp: 34040,
+      atk: 1400,
+      defense: 1160,
+      count: 7,
+      sp: 100,
+      skills: [
+        "SKD034"
+      ]
+    },
+    {
+      castleId: "TI02",
+      level: 9,
+      order: 1,
+      name: "\u670D\u90E8\u534A\u8535",
+      role: "A",
+      enemyLevel: 57,
+      hp: 22700,
+      atk: 2210,
+      defense: 620,
+      count: 8,
+      sp: 130,
+      skills: [
+        "SKD029"
+      ]
+    },
+    {
+      castleId: "TI02",
+      level: 12,
+      order: 0,
+      name: "\u52A0\u85E4\u6E05\u6B63",
+      role: "D",
+      enemyLevel: 60,
+      hp: 37500,
+      atk: 1540,
+      defense: 1280,
+      count: 8,
+      sp: 100,
+      skills: [
+        "SKD034"
+      ]
+    },
+    {
+      castleId: "TI02",
+      level: 12,
+      order: 1,
+      name: "\u8C4A\u81E3\u79C0\u5409",
+      role: "B",
+      enemyLevel: 60,
+      hp: 93750,
+      atk: 3080,
+      defense: 1110,
+      count: 10,
+      sp: 180,
+      skills: [
+        "SKD040",
+        "SKD011"
+      ]
+    },
+    {
+      castleId: "TI03",
+      level: 3,
+      order: 0,
+      name: "\u672C\u591A\u5FE0\u52DD",
+      role: "B",
+      enemyLevel: 66,
+      hp: 89150,
+      atk: 3740,
+      defense: 1490,
+      count: 9,
+      sp: 150,
+      skills: [
+        "SKD049",
+        "SKD009"
+      ]
+    },
+    {
+      castleId: "TI03",
+      level: 6,
+      order: 0,
+      name: "\u96D1\u8CC0\u5B6B\u5E02",
+      role: "A",
+      enemyLevel: 69,
+      hp: 32670,
+      atk: 3260,
+      defense: 1060,
+      count: 9,
+      sp: 110,
+      skills: [
+        "SKD026"
+      ]
+    },
+    {
+      castleId: "TI03",
+      level: 6,
+      order: 1,
+      name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+      role: "A",
+      enemyLevel: 69,
+      hp: 32670,
+      atk: 3260,
+      defense: 1060,
+      count: 8,
+      sp: 100,
+      skills: [
+        "SKD008"
+      ]
+    },
+    {
+      castleId: "TI03",
+      level: 9,
+      order: 0,
+      name: "\u52A0\u85E4\u6E05\u6B63",
+      role: "D",
+      enemyLevel: 72,
+      hp: 53750,
+      atk: 2300,
+      defense: 2290,
+      count: 8,
+      sp: 100,
+      skills: [
+        "SKD034"
+      ]
+    },
+    {
+      castleId: "TI03",
+      level: 9,
+      order: 1,
+      name: "\u4F0A\u9054\u653F\u5B97",
+      role: "B",
+      enemyLevel: 72,
+      hp: 107500,
+      atk: 4600,
+      defense: 1990,
+      count: 10,
+      sp: 150,
+      skills: [
+        "SKD022"
+      ]
+    },
+    {
+      castleId: "TI03",
+      level: 12,
+      order: 0,
+      name: "\u4E0A\u6749\u8B19\u4FE1",
+      role: "B",
+      enemyLevel: 75,
+      hp: 146850,
+      atk: 5060,
+      defense: 2260,
+      count: 11,
+      sp: 180,
+      skills: [
+        "SKD014"
+      ]
+    },
+    {
+      castleId: "TI04",
+      level: 3,
+      order: 0,
+      name: "\u5CF6\u6D25\u7FA9\u5F18",
+      role: "A",
+      enemyLevel: 81,
+      hp: 45820,
+      atk: 4690,
+      defense: 1720,
+      count: 10,
+      sp: 150,
+      skills: [
+        "SKD031"
+      ]
+    },
+    {
+      castleId: "TI04",
+      level: 3,
+      order: 1,
+      name: "\u771F\u7530\u660C\u5E78",
+      role: "P",
+      enemyLevel: 81,
+      hp: 36660,
+      atk: 4260,
+      defense: 1510,
+      count: 7,
+      sp: 100,
+      skills: [
+        "SKD046"
+      ]
+    },
+    {
+      castleId: "TI04",
+      level: 6,
+      order: 0,
+      name: "\u9ED2\u7530\u5B98\u5175\u885B",
+      role: "A",
+      enemyLevel: 84,
+      hp: 49350,
+      atk: 4990,
+      defense: 1900,
+      count: 10,
+      sp: 180,
+      skills: [
+        "SKD038",
+        "SKD028"
+      ]
+    },
+    {
+      castleId: "TI04",
+      level: 6,
+      order: 1,
+      name: "\u76F4\u6C5F\u517C\u7D9A",
+      role: "S",
+      enemyLevel: 84,
+      hp: 39480,
+      atk: 3630,
+      defense: 1660,
+      count: 7,
+      sp: 100,
+      skills: [
+        "SKD035"
+      ]
+    },
+    {
+      castleId: "TI04",
+      level: 9,
+      order: 0,
+      name: "\u660E\u667A\u5149\u79C0",
+      role: "B",
+      enemyLevel: 87,
+      hp: 160530,
+      atk: 6790,
+      defense: 3430,
+      count: 10,
+      sp: 180,
+      skills: [
+        "SKD038",
+        "SKD028"
+      ]
+    },
+    {
+      castleId: "TI04",
+      level: 9,
+      order: 1,
+      name: "\u6FC3\u59EB",
+      role: "P",
+      enemyLevel: 87,
+      hp: 42810,
+      atk: 4850,
+      defense: 1850,
+      count: 7,
+      sp: 100,
+      skills: [
+        "SKD046"
+      ]
+    },
+    {
+      castleId: "TI04",
+      level: 12,
+      order: 0,
+      name: "\u6B66\u7530\u4FE1\u7384",
+      role: "B",
+      enemyLevel: 90,
+      hp: 217720,
+      atk: 7280,
+      defense: 3810,
+      count: 11,
+      sp: 200,
+      skills: [
+        "SKD066",
+        "SKD007"
+      ]
+    },
+    {
+      castleId: "TI04",
+      level: 12,
+      order: 1,
+      name: "\u771F\u7530\u660C\u5E78",
+      role: "P",
+      enemyLevel: 90,
+      hp: 46450,
+      atk: 5200,
+      defense: 2050,
+      count: 7,
+      sp: 100,
+      skills: [
+        "SKD046"
+      ]
+    },
+    {
+      castleId: "TI05",
+      level: 3,
+      order: 0,
+      name: "\u5FB3\u5DDD\u5BB6\u5EB7",
+      role: "B",
+      enemyLevel: 91,
+      hp: 178920,
+      atk: 7450,
+      defense: 3940,
+      count: 10,
+      sp: 150,
+      skills: [
+        "SKD036",
+        "SKD009"
+      ]
+    },
+    {
+      castleId: "TI05",
+      level: 3,
+      order: 1,
+      name: "\u96D1\u8CC0\u5B6B\u5E02",
+      role: "A",
+      enemyLevel: 91,
+      hp: 59640,
+      atk: 5850,
+      defense: 2420,
+      count: 9,
+      sp: 110,
+      skills: [
+        "SKD026"
+      ]
+    },
+    {
+      castleId: "TI05",
+      level: 6,
+      order: 0,
+      name: "\u771F\u7530\u5E78\u6751",
+      role: "A",
+      enemyLevel: 94,
+      hp: 64550,
+      atk: 6270,
+      defense: 2670,
+      count: 10,
+      sp: 150,
+      skills: [
+        "SKD031"
+      ]
+    },
+    {
+      castleId: "TI05",
+      level: 6,
+      order: 1,
+      name: "\u8C4A\u81E3\u79C0\u5409",
+      role: "H",
+      enemyLevel: 94,
+      hp: 48420,
+      atk: 6550,
+      defense: 2170,
+      count: 8,
+      sp: 180,
+      skills: [
+        "SKD040"
+      ]
+    },
+    {
+      castleId: "TI05",
+      level: 9,
+      order: 0,
+      name: "\u4E0A\u6749\u8B19\u4FE1",
+      role: "B",
+      enemyLevel: 97,
+      hp: 209050,
+      atk: 8530,
+      defense: 4760,
+      count: 12,
+      sp: 180,
+      skills: [
+        "SKD014"
+      ]
+    },
+    {
+      castleId: "TI05",
+      level: 9,
+      order: 1,
+      name: "\u4F0A\u9054\u653F\u5B97",
+      role: "A",
+      enemyLevel: 97,
+      hp: 69680,
+      atk: 6700,
+      defense: 2930,
+      count: 11,
+      sp: 150,
+      skills: [
+        "SKD022"
+      ]
+    },
+    {
+      castleId: "TI05",
+      level: 12,
+      order: 0,
+      name: "\u52A0\u85E4\u6E05\u6B63",
+      role: "D",
+      enemyLevel: 100,
+      hp: 112500,
+      atk: 4550,
+      defense: 6e3,
+      count: 8,
+      sp: 100,
+      skills: [
+        "SKD034"
+      ]
+    },
+    {
+      castleId: "TI05",
+      level: 12,
+      order: 1,
+      name: "\u7E54\u7530\u4FE1\u9577",
+      role: "B",
+      enemyLevel: 100,
+      hp: 281250,
+      atk: 9100,
+      defense: 5200,
+      count: 11,
+      sp: 175,
+      skills: [
+        "SKD035",
+        "SKD007"
+      ]
+    },
+    {
+      castleId: "TI05",
+      level: 12,
+      order: 2,
+      name: "\u6FC3\u59EB",
+      role: "P",
+      enemyLevel: 100,
+      hp: 6e4,
+      atk: 6500,
+      defense: 2800,
+      count: 7,
+      sp: 100,
+      skills: [
+        "SKD046"
+      ]
+    }
+  ],
+  normalHp: [
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 1,
+      source: "4-1/3",
+      enemyLevel: 35,
+      referenceHp: 20780,
+      sharedHp: 63e3
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 1,
+      source: "4-2/3",
+      enemyLevel: 35,
+      referenceHp: 23040,
+      sharedHp: 7e4
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 1,
+      source: "5-2/3",
+      enemyLevel: 35,
+      referenceHp: 25830,
+      sharedHp: 78e3
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 2,
+      source: "5-2/2",
+      enemyLevel: 35,
+      referenceHp: 17810,
+      sharedHp: 54e3
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 2,
+      source: "7-6/1",
+      enemyLevel: 35,
+      referenceHp: 12530,
+      sharedHp: 38e3
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 2,
+      source: "10-5/1",
+      enemyLevel: 35,
+      referenceHp: 19820,
+      sharedHp: 6e4
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 4,
+      source: "5-3/1",
+      enemyLevel: 37,
+      referenceHp: 14880,
+      sharedHp: 45e3
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 4,
+      source: "7-4/1",
+      enemyLevel: 37,
+      referenceHp: 13210,
+      sharedHp: 4e4
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 4,
+      source: "9-6/2",
+      enemyLevel: 37,
+      referenceHp: 37250,
+      sharedHp: 112e3
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 5,
+      source: "9-2/1",
+      enemyLevel: 38,
+      referenceHp: 13410,
+      sharedHp: 41e3
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 5,
+      source: "9-2/2",
+      enemyLevel: 38,
+      referenceHp: 23850,
+      sharedHp: 72e3
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 5,
+      source: "9-7/3",
+      enemyLevel: 38,
+      referenceHp: 24060,
+      sharedHp: 73e3
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 7,
+      source: "6-1/2",
+      enemyLevel: 40,
+      referenceHp: 17340,
+      sharedHp: 53e3
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 7,
+      source: "6-2/1",
+      enemyLevel: 40,
+      referenceHp: 21740,
+      sharedHp: 66e3
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 7,
+      source: "10-4/1",
+      enemyLevel: 40,
+      referenceHp: 16410,
+      sharedHp: 5e4
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 8,
+      source: "6-3/1",
+      enemyLevel: 41,
+      referenceHp: 18710,
+      sharedHp: 57e3
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 8,
+      source: "6-3/2",
+      enemyLevel: 41,
+      referenceHp: 34010,
+      sharedHp: 103e3
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 8,
+      source: "10-1/1",
+      enemyLevel: 41,
+      referenceHp: 25540,
+      sharedHp: 77e3
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 10,
+      source: "4-3/3",
+      enemyLevel: 43,
+      referenceHp: 34200,
+      sharedHp: 103e3
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 10,
+      source: "6-4/1",
+      enemyLevel: 43,
+      referenceHp: 17010,
+      sharedHp: 52e3
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 10,
+      source: "7-5/2",
+      enemyLevel: 43,
+      referenceHp: 28900,
+      sharedHp: 87e3
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 11,
+      source: "5-4/3",
+      enemyLevel: 44,
+      referenceHp: 37890,
+      sharedHp: 114e3
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 11,
+      source: "6-5/2",
+      enemyLevel: 44,
+      referenceHp: 31200,
+      sharedHp: 94e3
+    },
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      level: 11,
+      source: "9-3/1",
+      enemyLevel: 44,
+      referenceHp: 31380,
+      sharedHp: 95e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 1,
+      source: "4-1/3",
+      enemyLevel: 50,
+      referenceHp: 37850,
+      sharedHp: 114e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 1,
+      source: "4-2/3",
+      enemyLevel: 50,
+      referenceHp: 41990,
+      sharedHp: 126e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 1,
+      source: "5-2/3",
+      enemyLevel: 50,
+      referenceHp: 47060,
+      sharedHp: 142e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 2,
+      source: "5-2/2",
+      enemyLevel: 50,
+      referenceHp: 32450,
+      sharedHp: 98e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 2,
+      source: "7-6/1",
+      enemyLevel: 50,
+      referenceHp: 22840,
+      sharedHp: 69e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 2,
+      source: "10-5/1",
+      enemyLevel: 50,
+      referenceHp: 36110,
+      sharedHp: 109e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 4,
+      source: "5-3/1",
+      enemyLevel: 52,
+      referenceHp: 26750,
+      sharedHp: 81e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 4,
+      source: "7-4/1",
+      enemyLevel: 52,
+      referenceHp: 23750,
+      sharedHp: 72e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 4,
+      source: "9-6/2",
+      enemyLevel: 52,
+      referenceHp: 66970,
+      sharedHp: 201e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 5,
+      source: "9-2/1",
+      enemyLevel: 53,
+      referenceHp: 23970,
+      sharedHp: 72e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 5,
+      source: "9-2/2",
+      enemyLevel: 53,
+      referenceHp: 42630,
+      sharedHp: 128e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 5,
+      source: "9-7/3",
+      enemyLevel: 53,
+      referenceHp: 42960,
+      sharedHp: 129e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 7,
+      source: "6-1/2",
+      enemyLevel: 55,
+      referenceHp: 30640,
+      sharedHp: 92e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 7,
+      source: "6-2/1",
+      enemyLevel: 55,
+      referenceHp: 38420,
+      sharedHp: 116e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 7,
+      source: "10-4/1",
+      enemyLevel: 55,
+      referenceHp: 28990,
+      sharedHp: 87e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 8,
+      source: "6-3/1",
+      enemyLevel: 56,
+      referenceHp: 33230,
+      sharedHp: 1e5
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 8,
+      source: "6-3/2",
+      enemyLevel: 56,
+      referenceHp: 60400,
+      sharedHp: 182e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 8,
+      source: "10-1/1",
+      enemyLevel: 56,
+      referenceHp: 45360,
+      sharedHp: 137e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 10,
+      source: "4-3/3",
+      enemyLevel: 58,
+      referenceHp: 60150,
+      sharedHp: 181e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 10,
+      source: "6-4/1",
+      enemyLevel: 58,
+      referenceHp: 29930,
+      sharedHp: 9e4
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 10,
+      source: "7-5/2",
+      enemyLevel: 58,
+      referenceHp: 50840,
+      sharedHp: 153e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 11,
+      source: "5-4/3",
+      enemyLevel: 59,
+      referenceHp: 66100,
+      sharedHp: 199e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 11,
+      source: "6-5/2",
+      enemyLevel: 59,
+      referenceHp: 54420,
+      sharedHp: 164e3
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      level: 11,
+      source: "9-3/1",
+      enemyLevel: 59,
+      referenceHp: 54750,
+      sharedHp: 165e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 1,
+      source: "4-1/3",
+      enemyLevel: 65,
+      referenceHp: 61710,
+      sharedHp: 186e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 1,
+      source: "4-2/3",
+      enemyLevel: 65,
+      referenceHp: 68450,
+      sharedHp: 206e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 1,
+      source: "5-2/3",
+      enemyLevel: 65,
+      referenceHp: 76720,
+      sharedHp: 231e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 2,
+      source: "5-2/2",
+      enemyLevel: 65,
+      referenceHp: 52900,
+      sharedHp: 159e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 2,
+      source: "7-6/1",
+      enemyLevel: 65,
+      referenceHp: 37250,
+      sharedHp: 112e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 2,
+      source: "10-5/1",
+      enemyLevel: 65,
+      referenceHp: 58870,
+      sharedHp: 177e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 4,
+      source: "5-3/1",
+      enemyLevel: 67,
+      referenceHp: 43080,
+      sharedHp: 13e4
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 4,
+      source: "7-4/1",
+      enemyLevel: 67,
+      referenceHp: 38260,
+      sharedHp: 115e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 4,
+      source: "9-6/2",
+      enemyLevel: 67,
+      referenceHp: 107880,
+      sharedHp: 324e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 5,
+      source: "9-2/1",
+      enemyLevel: 68,
+      referenceHp: 38430,
+      sharedHp: 116e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 5,
+      source: "9-2/2",
+      enemyLevel: 68,
+      referenceHp: 68310,
+      sharedHp: 205e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 5,
+      source: "9-7/3",
+      enemyLevel: 68,
+      referenceHp: 68880,
+      sharedHp: 207e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 7,
+      source: "6-1/2",
+      enemyLevel: 70,
+      referenceHp: 48690,
+      sharedHp: 147e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 7,
+      source: "6-2/1",
+      enemyLevel: 70,
+      referenceHp: 61070,
+      sharedHp: 184e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 7,
+      source: "10-4/1",
+      enemyLevel: 70,
+      referenceHp: 46090,
+      sharedHp: 139e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 8,
+      source: "6-3/1",
+      enemyLevel: 71,
+      referenceHp: 52640,
+      sharedHp: 158e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 8,
+      source: "6-3/2",
+      enemyLevel: 71,
+      referenceHp: 95660,
+      sharedHp: 287e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 8,
+      source: "10-1/1",
+      enemyLevel: 71,
+      referenceHp: 71840,
+      sharedHp: 216e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 10,
+      source: "4-3/3",
+      enemyLevel: 73,
+      referenceHp: 94700,
+      sharedHp: 285e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 10,
+      source: "6-4/1",
+      enemyLevel: 73,
+      referenceHp: 47110,
+      sharedHp: 142e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 10,
+      source: "7-5/2",
+      enemyLevel: 73,
+      referenceHp: 80040,
+      sharedHp: 241e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 11,
+      source: "5-4/3",
+      enemyLevel: 74,
+      referenceHp: 103800,
+      sharedHp: 312e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 11,
+      source: "6-5/2",
+      enemyLevel: 74,
+      referenceHp: 85470,
+      sharedHp: 257e3
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      level: 11,
+      source: "9-3/1",
+      enemyLevel: 74,
+      referenceHp: 85970,
+      sharedHp: 258e3
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 1,
+      source: "4-1/3",
+      enemyLevel: 80,
+      referenceHp: 96460,
+      sharedHp: 29e4
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 1,
+      source: "4-2/3",
+      enemyLevel: 80,
+      referenceHp: 107e3,
+      sharedHp: 321e3
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 1,
+      source: "5-2/3",
+      enemyLevel: 80,
+      referenceHp: 119920,
+      sharedHp: 36e4
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 2,
+      source: "5-2/2",
+      enemyLevel: 80,
+      referenceHp: 82680,
+      sharedHp: 249e3
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 2,
+      source: "7-6/1",
+      enemyLevel: 80,
+      referenceHp: 58210,
+      sharedHp: 175e3
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 2,
+      source: "10-5/1",
+      enemyLevel: 80,
+      referenceHp: 92010,
+      sharedHp: 277e3
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 4,
+      source: "5-3/1",
+      enemyLevel: 82,
+      referenceHp: 65860,
+      sharedHp: 198e3
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 4,
+      source: "7-4/1",
+      enemyLevel: 82,
+      referenceHp: 58490,
+      sharedHp: 176e3
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 4,
+      source: "9-6/2",
+      enemyLevel: 82,
+      referenceHp: 164920,
+      sharedHp: 495e3
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 5,
+      source: "9-2/1",
+      enemyLevel: 83,
+      referenceHp: 58350,
+      sharedHp: 176e3
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 5,
+      source: "9-2/2",
+      enemyLevel: 83,
+      referenceHp: 103740,
+      sharedHp: 312e3
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 5,
+      source: "9-7/3",
+      enemyLevel: 83,
+      referenceHp: 104580,
+      sharedHp: 314e3
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 7,
+      source: "6-1/2",
+      enemyLevel: 85,
+      referenceHp: 73220,
+      sharedHp: 22e4
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 7,
+      source: "6-2/1",
+      enemyLevel: 85,
+      referenceHp: 91830,
+      sharedHp: 276e3
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 7,
+      source: "10-4/1",
+      enemyLevel: 85,
+      referenceHp: 69310,
+      sharedHp: 208e3
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 8,
+      source: "6-3/1",
+      enemyLevel: 86,
+      referenceHp: 78850,
+      sharedHp: 237e3
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 8,
+      source: "6-3/2",
+      enemyLevel: 86,
+      referenceHp: 143310,
+      sharedHp: 43e4
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 8,
+      source: "10-1/1",
+      enemyLevel: 86,
+      referenceHp: 107630,
+      sharedHp: 323e3
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 10,
+      source: "4-3/3",
+      enemyLevel: 88,
+      referenceHp: 141020,
+      sharedHp: 424e3
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 10,
+      source: "6-4/1",
+      enemyLevel: 88,
+      referenceHp: 70160,
+      sharedHp: 211e3
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 10,
+      source: "7-5/2",
+      enemyLevel: 88,
+      referenceHp: 119190,
+      sharedHp: 358e3
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 11,
+      source: "5-4/3",
+      enemyLevel: 89,
+      referenceHp: 154190,
+      sharedHp: 463e3
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 11,
+      source: "6-5/2",
+      enemyLevel: 89,
+      referenceHp: 126970,
+      sharedHp: 381e3
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      level: 11,
+      source: "9-3/1",
+      enemyLevel: 89,
+      referenceHp: 127730,
+      sharedHp: 384e3
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 1,
+      source: "4-1/3",
+      enemyLevel: 90,
+      referenceHp: 124450,
+      sharedHp: 374e3
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 1,
+      source: "4-2/3",
+      enemyLevel: 90,
+      referenceHp: 138050,
+      sharedHp: 415e3
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 1,
+      source: "5-2/3",
+      enemyLevel: 90,
+      referenceHp: 154720,
+      sharedHp: 465e3
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 2,
+      source: "5-2/2",
+      enemyLevel: 90,
+      referenceHp: 106680,
+      sharedHp: 321e3
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 2,
+      source: "7-6/1",
+      enemyLevel: 90,
+      referenceHp: 75100,
+      sharedHp: 226e3
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 2,
+      source: "10-5/1",
+      enemyLevel: 90,
+      referenceHp: 118720,
+      sharedHp: 357e3
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 4,
+      source: "5-3/1",
+      enemyLevel: 92,
+      referenceHp: 86030,
+      sharedHp: 259e3
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 4,
+      source: "7-4/1",
+      enemyLevel: 92,
+      referenceHp: 76400,
+      sharedHp: 23e4
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 4,
+      source: "9-6/2",
+      enemyLevel: 92,
+      referenceHp: 215410,
+      sharedHp: 647e3
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 5,
+      source: "9-2/1",
+      enemyLevel: 93,
+      referenceHp: 76320,
+      sharedHp: 229e3
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 5,
+      source: "9-2/2",
+      enemyLevel: 93,
+      referenceHp: 135720,
+      sharedHp: 408e3
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 5,
+      source: "9-7/3",
+      enemyLevel: 93,
+      referenceHp: 136800,
+      sharedHp: 411e3
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 7,
+      source: "6-1/2",
+      enemyLevel: 95,
+      referenceHp: 95690,
+      sharedHp: 288e3
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 7,
+      source: "6-2/1",
+      enemyLevel: 95,
+      referenceHp: 120020,
+      sharedHp: 361e3
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 7,
+      source: "10-4/1",
+      enemyLevel: 95,
+      referenceHp: 90590,
+      sharedHp: 272e3
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 8,
+      source: "6-3/1",
+      enemyLevel: 96,
+      referenceHp: 102890,
+      sharedHp: 309e3
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 8,
+      source: "6-3/2",
+      enemyLevel: 96,
+      referenceHp: 187010,
+      sharedHp: 562e3
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 8,
+      source: "10-1/1",
+      enemyLevel: 96,
+      referenceHp: 140450,
+      sharedHp: 422e3
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 10,
+      source: "4-3/3",
+      enemyLevel: 98,
+      referenceHp: 183200,
+      sharedHp: 55e4
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 10,
+      source: "6-4/1",
+      enemyLevel: 98,
+      referenceHp: 91140,
+      sharedHp: 274e3
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 10,
+      source: "7-5/2",
+      enemyLevel: 98,
+      referenceHp: 154840,
+      sharedHp: 465e3
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 11,
+      source: "5-4/3",
+      enemyLevel: 99,
+      referenceHp: 199780,
+      sharedHp: 6e5
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 11,
+      source: "6-5/2",
+      enemyLevel: 99,
+      referenceHp: 164500,
+      sharedHp: 494e3
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      level: 11,
+      source: "9-3/1",
+      enemyLevel: 99,
+      referenceHp: 165480,
+      sharedHp: 497e3
+    }
+  ],
+  fixedHp: [
+    {
+      castle: "\u5CA1\u5D0E\u57CE",
+      values: [
+        137e3,
+        173e3,
+        154e3,
+        782e3
+      ]
+    },
+    {
+      castle: "\u9577\u6D5C\u57CE",
+      values: [
+        199e3,
+        283e3,
+        341e3,
+        1575e3
+      ]
+    },
+    {
+      castle: "\u6625\u65E5\u5C71\u57CE",
+      values: [
+        535e3,
+        393e3,
+        968e3,
+        1763e3
+      ]
+    },
+    {
+      castle: "\u8E91\u8E85\u30F6\u5D0E\u9928",
+      values: [
+        495e3,
+        533e3,
+        1221e3,
+        3171e3
+      ]
+    },
+    {
+      castle: "\u5B89\u571F\u57CE",
+      values: [
+        1432e3,
+        678e3,
+        1673e3,
+        5445e3
+      ]
+    }
+  ],
+  original: [
+    {
+      id: "4-1/3/1",
+      name: "\u67F4\u7530\u52DD\u5BB6",
+      level: 32,
+      hp: 18e3,
+      atk: 1050,
+      defense: 400,
+      count: 5,
+      sp: 100,
+      source: "area04_05.md"
+    },
+    {
+      id: "4-2/3/1",
+      name: "\u524D\u7530\u6176\u6B21",
+      level: 34,
+      hp: 22e3,
+      atk: 1e3,
+      defense: 350,
+      count: 3,
+      sp: 100,
+      source: "area04_05.md"
+    },
+    {
+      id: "4-3/3/1",
+      name: "\u4F0A\u9054\u653F\u5B97",
+      level: 36,
+      hp: 26e3,
+      atk: 2e3,
+      defense: 420,
+      count: 8,
+      sp: 100,
+      source: "area04_05.md"
+    },
+    {
+      id: "5-2/2/1",
+      name: "\u4E95\u4F0A\u76F4\u864E",
+      level: 43,
+      hp: 14e3,
+      atk: 1050,
+      defense: 580,
+      count: 6,
+      sp: 100,
+      source: "area04_05.md"
+    },
+    {
+      id: "5-2/2/2",
+      name: "\u76F4\u6C5F\u517C\u7D9A",
+      level: 43,
+      hp: 10500,
+      atk: 1450,
+      defense: 360,
+      count: 7,
+      sp: 100,
+      source: "area04_05.md"
+    },
+    {
+      id: "5-2/3/1",
+      name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+      level: 44,
+      hp: 37e3,
+      atk: 1900,
+      defense: 680,
+      count: 8,
+      sp: 100,
+      source: "area04_05.md"
+    },
+    {
+      id: "5-3/1/1",
+      name: "\u67F4\u7530\u52DD\u5BB6",
+      level: 44,
+      hp: 12e3,
+      atk: 1300,
+      defense: 420,
+      count: 5,
+      sp: 100,
+      source: "area04_05.md"
+    },
+    {
+      id: "5-3/1/2",
+      name: "\u672C\u9858\u5BFA\u9855\u5982",
+      level: 44,
+      hp: 7500,
+      atk: 1500,
+      defense: 300,
+      count: 6,
+      sp: 100,
+      source: "area04_05.md"
+    },
+    {
+      id: "5-4/3/1",
+      name: "\u77F3\u7530\u4E09\u6210",
+      level: 47,
+      hp: 17e3,
+      atk: 1150,
+      defense: 800,
+      count: 6,
+      sp: 100,
+      source: "area04_05.md"
+    },
+    {
+      id: "5-4/3/2",
+      name: "\u6BDB\u5229\u5143\u5C31",
+      level: 47,
+      hp: 18e3,
+      atk: 1650,
+      defense: 420,
+      count: 7,
+      sp: 100,
+      source: "area04_05.md"
+    },
+    {
+      id: "5-4/3/3",
+      name: "\u304A\u5E02\u306E\u65B9",
+      level: 46,
+      hp: 7500,
+      atk: 1600,
+      defense: 320,
+      count: 6,
+      sp: 100,
+      source: "area04_05.md"
+    },
+    {
+      id: "6-1/2/1",
+      name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+      level: 51,
+      hp: 15500,
+      atk: 1800,
+      defense: 580,
+      count: 7,
+      sp: 100,
+      source: "area06.md"
+    },
+    {
+      id: "6-1/2/2",
+      name: "\u5C0F\u65E9\u5DDD\u9686\u666F",
+      level: 51,
+      hp: 11e3,
+      atk: 1600,
+      defense: 430,
+      count: 7,
+      sp: 100,
+      source: "area06.md"
+    },
+    {
+      id: "6-2/1/1",
+      name: "\u9ED2\u7530\u5B98\u5175\u885B",
+      level: 52,
+      hp: 25e3,
+      atk: 2e3,
+      defense: 600,
+      count: 7,
+      sp: 150,
+      source: "area06.md"
+    },
+    {
+      id: "6-2/1/2",
+      name: "\u5C71\u672C\u52D8\u52A9",
+      level: 52,
+      hp: 9500,
+      atk: 1500,
+      defense: 400,
+      count: 4,
+      sp: 100,
+      source: "area06.md"
+    },
+    {
+      id: "6-3/1/1",
+      name: "\u7AF9\u4E2D\u534A\u5175\u885B",
+      level: 54,
+      hp: 16e3,
+      atk: 1450,
+      defense: 600,
+      count: 6,
+      sp: 100,
+      source: "area06.md"
+    },
+    {
+      id: "6-3/1/2",
+      name: "\u96D1\u8CC0\u5B6B\u5E02",
+      level: 54,
+      hp: 15e3,
+      atk: 1850,
+      defense: 460,
+      count: 7,
+      sp: 100,
+      source: "area06.md"
+    },
+    {
+      id: "6-3/2/1",
+      name: "\u771F\u7530\u660C\u5E78",
+      level: 55,
+      hp: 34e3,
+      atk: 2100,
+      defense: 700,
+      count: 7,
+      sp: 100,
+      source: "area06.md"
+    },
+    {
+      id: "6-3/2/2",
+      name: "\u7532\u6590\u59EB",
+      level: 55,
+      hp: 14e3,
+      atk: 1600,
+      defense: 650,
+      count: 6,
+      sp: 100,
+      source: "area06.md"
+    },
+    {
+      id: "6-3/2/3",
+      name: "\u7D30\u5DDD\u30AC\u30E9\u30B7\u30E3",
+      level: 54,
+      hp: 1e4,
+      atk: 1750,
+      defense: 380,
+      count: 7,
+      sp: 100,
+      source: "area06.md"
+    },
+    {
+      id: "6-4/1/1",
+      name: "\u771F\u7530\u5E78\u6751",
+      level: 56,
+      hp: 28e3,
+      atk: 2700,
+      defense: 600,
+      count: 10,
+      sp: 150,
+      source: "area06.md"
+    },
+    {
+      id: "6-5/2/1",
+      name: "\u77F3\u7530\u4E09\u6210",
+      level: 57,
+      hp: 21e3,
+      atk: 1650,
+      defense: 800,
+      count: 6,
+      sp: 100,
+      source: "area06.md"
+    },
+    {
+      id: "6-5/2/2",
+      name: "\u5CF6\u6D25\u7FA9\u4E45",
+      level: 57,
+      hp: 13e3,
+      atk: 1550,
+      defense: 500,
+      count: 7,
+      sp: 100,
+      source: "area06.md"
+    },
+    {
+      id: "6-5/2/3",
+      name: "\u6BDB\u5229\u5143\u5C31",
+      level: 57,
+      hp: 17e3,
+      atk: 2e3,
+      defense: 460,
+      count: 7,
+      sp: 100,
+      source: "area06.md"
+    },
+    {
+      id: "7-4/1/1",
+      name: "\u6D45\u4E95\u9577\u653F",
+      level: 64,
+      hp: 22040,
+      atk: 2090,
+      defense: 1040,
+      count: 6,
+      sp: 100,
+      source: "area07_08.md"
+    },
+    {
+      id: "7-4/1/2",
+      name: "\u7D30\u5DDD\u30AC\u30E9\u30B7\u30E3",
+      level: 64,
+      hp: 12760,
+      atk: 3250,
+      defense: 520,
+      count: 7,
+      sp: 100,
+      source: "area07_08.md"
+    },
+    {
+      id: "7-5/2/1",
+      name: "\u672C\u591A\u5FE0\u52DD",
+      level: 65,
+      hp: 62400,
+      atk: 4200,
+      defense: 1320,
+      count: 7,
+      sp: 150,
+      source: "area07_08.md"
+    },
+    {
+      id: "7-6/1/1",
+      name: "\u96D1\u8CC0\u5B6B\u5E02",
+      level: 66,
+      hp: 14880,
+      atk: 2850,
+      defense: 560,
+      count: 6,
+      sp: 100,
+      source: "area07_08.md"
+    },
+    {
+      id: "7-6/1/2",
+      name: "\u5317\u6761\u6C0F\u5EB7",
+      level: 66,
+      hp: 23560,
+      atk: 2230,
+      defense: 1120,
+      count: 3,
+      sp: 100,
+      source: "area07_08.md"
+    },
+    {
+      id: "9-2/1/1",
+      name: "\u4E95\u4F0A\u76F4\u653F",
+      level: 81,
+      hp: 18540,
+      atk: 3400,
+      defense: 1340,
+      count: 7,
+      sp: 100,
+      source: "area09_10.md"
+    },
+    {
+      id: "9-2/1/2",
+      name: "\u7ACB\u82B1\u5B97\u8302",
+      level: 81,
+      hp: 18540,
+      atk: 3400,
+      defense: 1340,
+      count: 7,
+      sp: 100,
+      source: "area09_10.md"
+    },
+    {
+      id: "9-2/1/3",
+      name: "\u5C0F\u65E9\u5DDD\u9686\u666F",
+      level: 81,
+      hp: 18540,
+      atk: 3400,
+      defense: 1340,
+      count: 7,
+      sp: 100,
+      source: "area09_10.md"
+    },
+    {
+      id: "9-2/2/1",
+      name: "\u5CF6\u6D25\u7FA9\u5F18",
+      level: 81,
+      hp: 32960,
+      atk: 4640,
+      defense: 1650,
+      count: 7,
+      sp: 100,
+      source: "area09_10.md"
+    },
+    {
+      id: "9-2/2/2",
+      name: "\u6BDB\u5229\u5143\u5C31",
+      level: 81,
+      hp: 32960,
+      atk: 4640,
+      defense: 1650,
+      count: 7,
+      sp: 100,
+      source: "area09_10.md"
+    },
+    {
+      id: "9-2/2/3",
+      name: "\u7ACB\u82B1\u8ABE\u5343\u4EE3",
+      level: 81,
+      hp: 32960,
+      atk: 4640,
+      defense: 1650,
+      count: 8,
+      sp: 100,
+      source: "area09_10.md"
+    },
+    {
+      id: "9-3/1/1",
+      name: "\u52A0\u85E4\u6E05\u6B63",
+      level: 82,
+      hp: 50880,
+      atk: 3710,
+      defense: 3390,
+      count: 7,
+      sp: 100,
+      source: "area09_10.md"
+    },
+    {
+      id: "9-3/1/2",
+      name: "\u771F\u7530\u660C\u5E78",
+      level: 82,
+      hp: 28620,
+      atk: 6360,
+      defense: 1910,
+      count: 5,
+      sp: 150,
+      source: "area09_10.md"
+    },
+    {
+      id: "9-3/1/3",
+      name: "\u7D30\u5DDD\u30AC\u30E9\u30B7\u30E3",
+      level: 82,
+      hp: 26500,
+      atk: 6890,
+      defense: 1590,
+      count: 7,
+      sp: 180,
+      source: "area09_10.md"
+    },
+    {
+      id: "9-6/2/1",
+      name: "\u524D\u7530\u6176\u6B21",
+      level: 85,
+      hp: 149500,
+      atk: 7470,
+      defense: 4140,
+      count: 5,
+      sp: 100,
+      source: "area09_10.md"
+    },
+    {
+      id: "9-6/2/2",
+      name: "\u304A\u5E02\u306E\u65B9",
+      level: 85,
+      hp: 28750,
+      atk: 7470,
+      defense: 1720,
+      count: 7,
+      sp: 180,
+      source: "area09_10.md"
+    },
+    {
+      id: "9-7/3/1",
+      name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+      level: 86,
+      hp: 37760,
+      atk: 5310,
+      defense: 1890,
+      count: 7,
+      sp: 100,
+      source: "area09_10.md"
+    },
+    {
+      id: "9-7/3/2",
+      name: "\u5CF6\u6D25\u7FA9\u5F18",
+      level: 86,
+      hp: 37760,
+      atk: 5310,
+      defense: 1890,
+      count: 7,
+      sp: 100,
+      source: "area09_10.md"
+    },
+    {
+      id: "9-7/3/3",
+      name: "\u7ACB\u82B1\u5B97\u8302",
+      level: 86,
+      hp: 37760,
+      atk: 5310,
+      defense: 1890,
+      count: 7,
+      sp: 100,
+      source: "area09_10.md"
+    },
+    {
+      id: "10-1/1/1",
+      name: "\u4E95\u4F0A\u76F4\u864E",
+      level: 90,
+      hp: 74e3,
+      atk: 5500,
+      defense: 5500,
+      count: 7,
+      sp: 150,
+      source: "area09_10.md"
+    },
+    {
+      id: "10-1/1/2",
+      name: "\u96D1\u8CC0\u5B6B\u5E02",
+      level: 90,
+      hp: 46e3,
+      atk: 7e3,
+      defense: 2800,
+      count: 8,
+      sp: 110,
+      source: "area09_10.md"
+    },
+    {
+      id: "10-4/1/1",
+      name: "\u5C71\u672C\u52D8\u52A9",
+      level: 93,
+      hp: 36550,
+      atk: 6450,
+      defense: 2800,
+      count: 5,
+      sp: 100,
+      source: "area09_10.md"
+    },
+    {
+      id: "10-4/1/2",
+      name: "\u658E\u85E4\u9053\u4E09",
+      level: 93,
+      hp: 49450,
+      atk: 7530,
+      defense: 3010,
+      count: 7,
+      sp: 100,
+      source: "area09_10.md"
+    },
+    {
+      id: "10-5/1/1",
+      name: "\u4ECA\u5DDD\u7FA9\u5143",
+      level: 94,
+      hp: 81400,
+      atk: 6050,
+      defense: 6050,
+      count: 7,
+      sp: 150,
+      source: "area09_10.md"
+    },
+    {
+      id: "10-5/1/2",
+      name: "\u96D1\u8CC0\u5B6B\u5E02",
+      level: 94,
+      hp: 50600,
+      atk: 7700,
+      defense: 3080,
+      count: 7,
+      sp: 150,
+      source: "area09_10.md"
+    }
+  ]
+};
+
+// src/domain/redesign/raidInvasionMaster.ts
+var castleNames = ["\u5CA1\u5D0E\u57CE", "\u9577\u6D5C\u57CE", "\u6625\u65E5\u5C71\u57CE", "\u8E91\u8E85\u30F6\u5D0E\u9928", "\u5B89\u571F\u57CE"];
+var lords = ["\u5FB3\u5DDD\u5BB6\u5EB7", "\u8C4A\u81E3\u79C0\u5409", "\u4E0A\u6749\u8B19\u4FE1", "\u6B66\u7530\u4FE1\u7384", "\u7E54\u7530\u4FE1\u9577"];
+var FORMAL_CASTLES = castleNames.map((name2, i) => ({ id: `TI0${i + 1}`, name: name2, characterId: character(lords[i]).characterId }));
+function character(name2) {
+  const row = sengoku_characters_default.find((c) => c.name === name2);
+  if (!row) throw new Error(`\u4FB5\u653B\u6B66\u5C06\u4E0D\u660E: ${name2}`);
+  return row;
+}
+function assignment(name2) {
+  const c = character(name2), a = BALANCE_V2_CHARACTER_ASSIGNMENTS.find((r) => r.id === c.characterId);
+  if (!a) throw new Error(`\u4FB5\u653B\u5C5E\u6027\u4E0D\u660E: ${name2}`);
+  return a;
+}
+function passive(name2, level) {
+  const c = character(name2), a = assignment(name2);
+  const lv = level <= 30 ? 0 : level <= 60 ? 2 : level <= 80 ? 4 : level <= 90 ? 6 : 8;
+  const p = getCharacterPassive({ id: c.characterId, rarity: c.sourceRarity, element: a.element }, lv / 2);
+  return p ? [p] : [];
+}
+function skill(id, lb) {
+  const s = getFormalRaidSkill(id, lb);
+  if (["SKD039", "SKD040"].includes(id)) s.condition = { type: "ally_hp_below", value: 0.5 };
+  return s;
+}
+function basis(lv, key2) {
+  const anchors = { hp: [12e3, 25e3, 45e3, 75e3], atk: [1100, 2200, 4200, 6500], def: [400, 850, 2100, 4e3] }[key2];
+  if (lv < 40) return anchors[0] * (lv / 40) ** 1.6;
+  const i = Math.min(2, Math.floor((lv - 40) / 20)), t = ((lv - (40 + i * 20)) / 20) ** 1.2;
+  return anchors[i] + (anchors[i + 1] - anchors[i]) * t;
+}
+var round10 = (n) => Math.round(n / 10) * 10;
+var normalLevels = [1, 2, 4, 5, 7, 8, 10, 11];
+function draw(castle, random) {
+  const choices = normalLevels.map((level) => raid_invasion_default.candidates.filter((c) => c.level === level && !c.names.includes(lords[castle])));
+  const valid = [];
+  function visit(path) {
+    if (path.length === choices.length) {
+      valid.push([...path]);
+      return;
+    }
+    for (const c of choices[path.length]) {
+      if (path.some((p) => p.names[0] === c.names[0])) continue;
+      const element = assignment(c.names[0]).element;
+      if (path.length >= 2 && path.slice(-2).every((p) => assignment(p.names[0]).element === element)) continue;
+      path.push(c);
+      visit(path);
+      path.pop();
+    }
+  }
+  visit([]);
+  if (!valid.length) throw new Error("\u4FB5\u653B\u901A\u5E38\u6226\u306E\u9069\u5408\u7D44\u5408\u305B\u304C\u3042\u308A\u307E\u305B\u3093");
+  const r = random();
+  if (r < 0 || r >= 1 || !Number.isFinite(r)) throw new Error("\u4FB5\u653B\u62BD\u9078\u5024\u304C\u4E0D\u6B63\u3067\u3059");
+  return valid[Math.floor(r * valid.length)];
+}
+function exp(kind, amount) {
+  const result = [];
+  for (const [id, value] of [["xlarge", 2e4], ["large", 5e3], ["medium", 1e3], ["small", 100]]) {
+    const n = Math.floor(amount / value);
+    if (n) result.push({ kind, id, amount: n });
+    amount %= value;
+  }
+  if (amount) throw new Error("\u4FB5\u653BEXP\u5831\u916C\u7AEF\u6570");
+  return result;
+}
+var rewardRows = [[2500, 1e3, 500, 1e3, 1, 5e3, 5e3, 2, 2e4, 2e4, 6, 1, 2, 1, 1], [4e3, 2e3, 1e3, 2e3, 1, 1e4, 1e4, 4, 4e4, 4e4, 12, 1, 3, 1, 1], [6e3, 3e3, 1500, 3e3, 1, 15e3, 15e3, 6, 6e4, 6e4, 18, 2, 4, 2, 1], [8e3, 4e3, 2e3, 4e3, 1, 2e4, 2e4, 8, 8e4, 8e4, 24, 2, 5, 2, 2], [1e4, 5e3, 2500, 5e3, 1, 25e3, 25e3, 10, 1e5, 1e5, 30, 3, 6, 3, 2]];
+function rewards(castle, level) {
+  const r = rewardRows[castle], final = level === 12, gate = level % 3 === 0;
+  const cash = final ? r[8] : gate ? r[5] : r[3], lb = final ? r[10] : gate ? r[7] : r[4], xp = final ? r[9] : gate ? r[6] : 0;
+  const out = [{ kind: "cash", amount: cash }, { kind: "skill_material", amount: lb }, { kind: "equipment_lb", amount: lb }, ...exp("character_exp_item", xp), ...exp("equipment_exp_item", xp)];
+  if (final) out.push(...["SPECIAL_TICKET_CHARACTER", "SPECIAL_TICKET_SKILL", "SPECIAL_TICKET_EQUIPMENT"].map((id, i) => ({ kind: "ticket", id, amount: r[11 + i] })), { kind: "soul", id: FORMAL_CASTLES[castle].characterId, amount: r[14] });
+  return out;
+}
+function createFormalInvasionMaster(castleId, random = Math.random) {
+  const ci = FORMAL_CASTLES.findIndex((c) => c.id === castleId);
+  if (ci < 0) throw new Error(`\u4FB5\u653B\u57CEID\u4E0D\u660E: ${castleId}`);
+  const castle = FORMAL_CASTLES[ci], lb = [2, 4, 6, 8, 9][ci], selected = draw(ci, random), stages = [];
+  for (let level = 1; level <= 12; level++) {
+    const candidate = selected.find((c) => c.level === level);
+    let enemies, sharedHp, source;
+    if (candidate) {
+      const [designId, wave] = candidate.source.split("/");
+      const original = FORMAL_QUEST_STAGES.find((s) => s.designId === designId)?.waves[Number(wave) - 1];
+      if (!original || original.length !== candidate.names.length) throw new Error(`\u4FB5\u653B\u53C2\u7167Wave\u4E0D\u6B63: ${candidate.source}`);
+      const row = raid_invasion_default.normalHp.find((h) => h.castle === castle.name && h.level === level && h.source === candidate.source);
+      enemies = original.map((base2, i) => {
+        if (base2.name !== candidate.names[i]) throw new Error(`\u4FB5\u653B\u914D\u7F6E\u4E0D\u4E00\u81F4: ${candidate.source}`);
+        const origin = raid_invasion_default.original.find((o) => o.id === `${candidate.source}/${i + 1}`);
+        const e = structuredClone(base2), target = row.enemyLevel;
+        e.actionCount = origin.count;
+        e.initialCount = origin.count;
+        e.stats.sp = origin.sp;
+        e.phases = void 0;
+        e.id = `${castleId}/${level}/${i + 1}`;
+        e.level = target;
+        for (const key2 of ["hp", "atk", "def"]) e.stats[key2] = round10((key2 === "def" ? origin.defense : origin[key2]) * basis(target, key2) / basis(origin.level, key2));
+        e.initialSp = e.stats.sp;
+        e.hitSpGain = 10;
+        e.passives = passive(e.name, target);
+        e.skills = candidate.skills[i].map((id) => skill(id, lb));
+        return e;
+      });
+      sharedHp = row.sharedHp;
+      source = `invasion source tables 20260921:${candidate.source}; section10 H=${row.referenceHp}`;
+    } else {
+      enemies = raid_invasion_default.fixed.filter((f) => f.castleId === castleId && f.level === level).map((f) => {
+        const c = character(f.name);
+        return { id: `${castleId}/${level}/${f.order + 1}`, name: f.name, image: characterArt({ id: c.characterId, name: c.name, image: c.imagePath }, "battle") ?? c.imagePath, level: f.enemyLevel, element: assignment(f.name).element, stats: { hp: f.hp, atk: f.atk, def: f.defense, sp: f.sp, luk: 0 }, initialSp: f.sp, hitSpGain: 10, actionCount: f.count, initialCount: f.count, order: f.order, boss: f.role === "B", skills: f.skills.map((id) => skill(id, lb)), passives: passive(f.name, f.enemyLevel) };
+      });
+      sharedHp = raid_invasion_default.fixedHp[ci].values[level / 3 - 1];
+      source = `${raid_invasion_default.version}:${castleId}/${level}`;
+    }
+    stages.push({ level, enemies, sharedHp, defeatRewards: rewards(ci, level), source });
+  }
+  const r = rewardRows[ci];
+  return { id: castleId, name: castle.name, type: "unlock", masterVersion: raid_invasion_default.version, characterId: castle.characterId, enemy: stages[0].enemies[0], enemies: stages[0].enemies, stages, energyCost: 20, durationMinutes: 4320, maxParticipants: 20, maxLevel: 12, appearanceLevels: [1], appearanceImages: {}, enemyGrowthPerLevel: 0, sharedHpGrowthPerLevel: 0, victoryMultiplier: 1.5, sharedHp: stages[0].sharedHp, participationRewards: [], defeatRewards: stages[0].defeatRewards, victoryRewards: [{ kind: "cash", amount: r[0] }, ...exp("character_exp_item", r[1]), ...exp("equipment_exp_item", r[2])], playerExp: 0 };
 }
 
 // src/domain/redesign/territory.ts
@@ -53758,14 +57890,15 @@ function validateTerritoryMaster(master) {
   }
 }
 function territoryLevel(master, experience) {
-  const exp = Number.isFinite(experience) ? Math.max(0, experience) : 0;
-  return master.levels.reduce((level, row) => row.requiredExp <= exp ? row.level : level, 1);
+  const exp2 = Number.isFinite(experience) ? Math.max(0, experience) : 0;
+  return master.levels.reduce((level, row) => row.requiredExp <= exp2 ? row.level : level, 1);
 }
 function projectTerritory(master, progress, items, activeHostingCount) {
   validateTerritoryMaster(master);
   const experience = Math.max(0, progress.experience), level = territoryLevel(master, experience), hostingSlots = master.levels.find((row) => row.level === level).hostingSlots;
   return { masterVersion: master.version, status: master.status, experience, level, nextLevelExp: master.levels.find((row) => row.level === level + 1)?.requiredExp ?? null, hostingSlots, activeHostingCount, destinations: master.destinations.map((destination) => {
     const ownedItemCount = items[destination.itemId] ?? 0, reasons = [];
+    if (destination.unavailableReason) reasons.push(destination.unavailableReason);
     if (level < destination.requiredLevel) reasons.push(`\u9818\u571F\u4FB5\u653BLv.${destination.requiredLevel}\u304C\u5FC5\u8981\u3067\u3059\u3002`);
     if (activeHostingCount >= hostingSlots) reasons.push("\u540C\u6642\u958B\u50AC\u67A0\u304C\u57CB\u307E\u3063\u3066\u3044\u307E\u3059\u3002");
     if (ownedItemCount < destination.itemCount) reasons.push(`\u958B\u50AC\u30A2\u30A4\u30C6\u30E0\u304C${destination.itemCount - ownedItemCount}\u500B\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002`);
@@ -53918,15 +58051,16 @@ async function runBattle(userId, name2, payload, id, playerName) {
       const me = room.participants.find((p) => p.userId === userId);
       if (room.status !== "active" || Date.parse(room.expiresAt) <= Date.now() || !me || me.leftAt) throw new ApiError("\u53C2\u52A0\u3067\u304D\u308B\u958B\u50AC\u4E2D\u30EC\u30A4\u30C9\u3092\u9078\u3093\u3067\u304F\u3060\u3055\u3044\u3002");
       startRoom = room;
-      waves = [[raidEnemy(master, room.level)]];
+      raidLevel = payload.level === void 0 ? room.level : Number(payload.level);
+      if (!Number.isInteger(raidLevel) || raidLevel < me.joinedLevel || raidLevel > room.level || master.type !== "unlock" && raidLevel !== room.level) throw new ApiError("\u3053\u306E\u6BB5\u968E\u306B\u306F\u6311\u6226\u3067\u304D\u307E\u305B\u3093\u3002");
+      waves = [raidEnemies(master, raidLevel)];
       cost = master.energyCost;
       targetId = room.id;
-      raidLevel = room.level;
     }
     if (state.energy < cost) throw new ApiError("\u884C\u52D5\u529B\u304C\u8DB3\u308A\u307E\u305B\u3093\u3002");
     const seed = crypto.getRandomValues(new Uint32Array(1))[0];
     const rules = startRoom?.territorySnapshot?.battleRules ?? BATTLE_RULES;
-    const input = questStage ? createQuestBattleInput(seed, buildBattleParty(state, rules), questStage, rules) : { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel };
+    const input = questStage ? createQuestBattleInput(seed, buildBattleParty(state, rules), questStage, rules) : startRoom && getRoomRaidMaster(startRoom).masterVersion ? { ...createFormalBattleInput(seed, buildBattleParty(state, rules), waves, rules), raidLevel, raidMasterVersion: getRoomRaidMaster(startRoom).masterVersion, playerExpReward: { amount: getRoomRaidMaster(startRoom).playerExp ?? 0, version: getRoomRaidMaster(startRoom).masterVersion, status: "APPROVED" } } : { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel };
     preparedBattle = simulateBattle3(input);
     await commit(state, { ...state, energy: state.energy - cost, ...questStage ? { questAttempts: { ...state.questAttempts, [targetId]: (state.questAttempts?.[targetId] ?? 0) + 1 }, questProgressVersion: QUEST_MASTER_VERSION } : {} }, id, { id, kind, targetId, seed, input, status: "started" }, startRoom, startRoom?.version ?? null);
     [record] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=*`);
@@ -53941,7 +58075,7 @@ async function runBattle(userId, name2, payload, id, playerName) {
     let after = structuredClone(state);
     let room = null, version = null;
     let playerGrowth;
-    const rewards = [];
+    const rewards2 = [];
     let firstClear = false, encounterRaidId = null;
     if (record.kind === "quest" && battle.outcome === "win") {
       const stage = record.input.questSnapshot ?? getQuestStage2(record.target_id);
@@ -53956,15 +58090,15 @@ async function runBattle(userId, name2, payload, id, playerName) {
       let encounterRoll;
       if (record.input.questMasterVersion === QUEST_MASTER_VERSION) {
         const settlement = questVictoryRewards(stage, state, record.input.party, record.seed);
-        rewards.push(...settlement.rewards);
+        rewards2.push(...settlement.rewards);
         firstClear = settlement.firstClear;
         after.questClearCounts = { ...after.questClearCounts, [stage.id]: settlement.count };
         encounterRoll = settlement.encounterRoll;
       } else {
-        rewards.push(...stage.rewards, ...firstClear ? stage.firstRewards : [], ...stage.rareRewards.filter((r) => random() < Math.min(1, (r.chance ?? 0) * (1 + luck / 1e3))));
+        rewards2.push(...stage.rewards, ...firstClear ? stage.firstRewards : [], ...stage.rareRewards.filter((r) => random() < Math.min(1, (r.chance ?? 0) * (1 + luck / 1e3))));
       }
       const policy = await rewardPolicy();
-      for (let i = 0; i < rewards.length; i++) after = grantReward(after, rewards[i], await uuidFor(`reward:${id}:${i}`), policy);
+      for (let i = 0; i < rewards2.length; i++) after = grantReward(after, rewards2[i], await uuidFor(`reward:${id}:${i}`), policy);
       if (firstClear) after.clearedStages.push(stage.id);
       const expReward = record.input.playerExpReward;
       if (expReward) {
@@ -53987,20 +58121,32 @@ async function runBattle(userId, name2, payload, id, playerName) {
           };
         } else playerGrowth = { status: "MIGRATION_PENDING", offeredExp: expReward.amount, gainedExp: 0 };
       }
-      if ((encounterRoll ?? random()) < stage.encounterChance && !(await roomsFor(userId)).some((existing) => existing.ownerId === userId && existing.status === "active" && Date.parse(existing.expiresAt) > Date.now() && !existing.territorySnapshot && existing.masterId === "encounter_flame")) {
+      if ((encounterRoll ?? random()) < stage.encounterChance && !(await roomsFor(userId)).some((existing) => existing.ownerId === userId && existing.status === "active" && Date.parse(existing.expiresAt) > Date.now() && !existing.territorySnapshot && getRoomRaidMaster(existing).type === "encounter")) {
         encounterRaidId = await uuidFor(`encounter:${id}`);
-        room = createRaidRoom("encounter_flame", userId, encounterRaidId, Date.now());
+        const encounterMaster = record.input.questMasterVersion === QUEST_MASTER_VERSION ? selectEncounterMaster(Number(stage.designId.split("-")[0]), random) : null;
+        room = createRaidRoom(encounterMaster?.id ?? "encounter_flame", userId, encounterRaidId, Date.now());
         room.participants[0].name = playerName;
         version = -1;
       }
     } else if (record.kind === "raid") {
       const currentRoom = await roomFor(record.target_id);
       version = currentRoom.version;
-      const transition = applyRaidAction(currentRoom, after, "raid_battle", { battleId: id, battleLevel: record.input.raidLevel, result: battle, energyAlreadyPaid: true });
+      const transition = applyRaidAction(currentRoom, after, "raid_battle", { battleId: id, battleLevel: record.input.raidLevel, result: battle, energyAlreadyPaid: true, seed: record.seed, luck: record.input.party.reduce((sum, p) => sum + Math.max(0, Math.min(100, p.stats.luk)), 0) / 5 });
       room = transition.room;
       after = transition.state;
+      rewards2.push(...transition.rewards);
+      if (battle.outcome === "win" && record.input.raidMasterVersion && record.input.playerExpReward?.amount) {
+        const progress = after.playerProgress, amount = record.input.playerExpReward.amount;
+        if (progress?.version === GROWTH_VERSION && progress.status === "active") {
+          const priorEnergy = after.energy;
+          const grown = applyPlayerExperience(progress.level, progress.exp, amount, after.energy, after.energyMax);
+          after.playerProgress = { ...progress, level: grown.level, exp: grown.exp };
+          after.energy = grown.energy;
+          playerGrowth = { status: "APPROVED", rewardVersion: record.input.raidMasterVersion, offeredExp: amount, gainedExp: amount, beforeLevel: progress.level, level: grown.level, exp: grown.exp, energyRecovered: grown.energy - priorEnergy, energy: grown.energy, energyMax: after.energyMax };
+        } else playerGrowth = { status: "MIGRATION_PENDING", offeredExp: amount, gainedExp: 0 };
+      }
     }
-    const result = { battle, rewards, firstClear, encounterRaidId, ...playerGrowth ? { playerGrowth } : {} };
+    const result = { battle, rewards: rewards2, firstClear, encounterRaidId, ...playerGrowth ? { playerGrowth } : {} };
     try {
       const settled = await commit(state, after, settlementId, { id, status: "settled", result }, room, version);
       return responseFor(userId, settled.battleResult ?? result);
@@ -54037,10 +58183,14 @@ Deno.serve(async (request) => {
       await stateFor(user.id);
       let destinationId = String(payload.destinationId ?? "");
       if (action === "raid_unlock") {
-        const context = await territoryContext(user.id);
-        destinationId = context.master.destinations.find((d) => d.raidMasterId === String(payload.masterId))?.id ?? "";
+        const context2 = await territoryContext(user.id);
+        destinationId = context2.master.destinations.find((d) => d.raidMasterId === String(payload.masterId))?.id ?? "";
       }
-      const hosted = await rpc("game04_host_territory", { p_user_id: user.id, p_request_id: requestId, p_destination_id: destinationId });
+      const context = await territoryContext(user.id), destination = context.master.destinations.find((d) => d.id === destinationId);
+      if (!destination) throw new ApiError("\u4FB5\u653B\u5148\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002");
+      if (destination.unavailableReason) throw new ApiError(destination.unavailableReason);
+      const formalMaster = context.master.raidMasters.find((m) => m.id === destination.raidMasterId);
+      const hosted = formalMaster?.masterVersion ? await rpc("game04_host_formal_territory", { p_user_id: user.id, p_request_id: requestId, p_destination_id: destinationId, p_raid_master: createFormalInvasionMaster(formalMaster.id, () => crypto.getRandomValues(new Uint32Array(1))[0] / 4294967296) }) : await rpc("game04_host_territory", { p_user_id: user.id, p_request_id: requestId, p_destination_id: destinationId });
       return new Response(JSON.stringify(await responseFor(user.id, { territoryRoomId: hosted.room.id })), { headers });
     }
     const [prior] = await db(`game04_requests?user_id=eq.${user.id}&request_id=eq.${requestId}&select=request_id,result`);
