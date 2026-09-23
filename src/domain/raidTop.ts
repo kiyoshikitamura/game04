@@ -44,6 +44,7 @@ export interface RaidTopProps {
   readonly onOpenRoom: (roomId: string, rescueId?: string) => void;
   readonly onChooseEnemy: (enemy: RaidTopEnemy) => void;
   readonly onBrowse: () => void;
+  readonly onOpenRewards?: () => void;
   readonly onRefresh: () => void;
   readonly disabled?: boolean;
 }

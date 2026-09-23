@@ -12,6 +12,7 @@ type Props = Pick<RaidTopData, 'participating' | 'rescues'> & {
   now: number | null;
   resolve: (url: string) => string;
   onOpenRoom: (roomId: string, rescueId?: string) => void;
+  onOpenRewards: () => void;
   onRefresh: () => void;
   disabled?: boolean;
 };
@@ -38,7 +39,7 @@ function Card({ entry, now, resolve, onOpenRoom, disabled, rescue }: { entry: Ra
   return <article className="raid-approved-ui__card"><div className="raid-approved-ui__card-art">{enemy && <><img src={resolve(enemy.backgroundUrl)} alt="" /><img src={resolve(enemy.leaderImageUrl)} alt="" /></>}</div><div className="raid-approved-ui__card-copy"><div className="raid-approved-ui__badges"><span>{rescue ? '救援' : getRaidDifficultyLabel(entry.room.difficultyId)}</span><span>{rescue ? '参加可能' : '参加中'}</span></div><h3>{enemy?.bossName ?? '敵情報未確認'} <small>Lv.1</small></h3><Owner entry={entry} resolve={resolve}/><Hp entry={entry} now={now} compact={rescue}/><OutlawButton loadingLabel="" variant="primary" disabled={disabled} onClick={() => onOpenRoom(entry.room.roomId, entry.rescue.status === 'available' ? entry.rescue.value.rescueId : undefined)}>{rescue ? '救援に向かう' : '続きへ'} ›</OutlawButton></div></article>;
 }
 
-export default function RaidTopApproved({ participating, rescues, now, resolve, onOpenRoom, onRefresh, disabled }: Props) {
+export default function RaidTopApproved({ participating, rescues, now, resolve, onOpenRoom, onOpenRewards, onRefresh, disabled }: Props) {
   const [tab, setTab] = useState<'all' | 'encounter' | 'territory'>('all');
   const joined = participating.status === 'ready' ? participating.data : [];
   const help = rescues.status === 'ready' ? rescues.data : [];
@@ -46,5 +47,5 @@ export default function RaidTopApproved({ participating, rescues, now, resolve, 
   const visibleHelp = tab === 'all' ? help.slice(0, 1) : [];
   const empty = visibleJoined.length === 0 && visibleHelp.length === 0;
   const tabs = useMemo(() => [['all', 'すべて'], ['encounter', 'エンカウント'], ['territory', '領土侵攻']] as const, []);
-  return <div className="raid-approved-ui" data-testid="raid-top-approved"><div className="raid-approved-ui__heading"><h1>レイド</h1><button type="button" onClick={onRefresh}>更新</button></div><div className="raid-approved-ui__tabs">{tabs.map(([value, label]) => <button key={value} type="button" className={tab === value ? 'is-active' : ''} onClick={() => setTab(value)}>{label}</button>)}</div><p className="raid-approved-ui__sort">残り時間が短い順</p>{empty ? <div className="raid-approved-ui__empty">現在開催中のレイドはありません</div> : <div className="raid-approved-ui__cards">{visibleJoined.map(entry => <Card key={entry.room.roomId} entry={entry} now={now} resolve={resolve} onOpenRoom={onOpenRoom} disabled={disabled}/>) }{visibleHelp.map(entry => <Card key={`${entry.room.roomId}-rescue`} entry={entry} now={now} resolve={resolve} onOpenRoom={onOpenRoom} disabled={disabled} rescue/>)}</div>}<button className="raid-approved-ui__ended" type="button">{icon('chest')}<span>終了したレイド・未受取報酬</span><b>›</b></button></div>;
+  return <div className="raid-approved-ui" data-testid="raid-top-approved"><div className="raid-approved-ui__heading"><h1>レイド</h1><button type="button" onClick={onRefresh}>更新</button></div><div className="raid-approved-ui__tabs">{tabs.map(([value, label]) => <button key={value} type="button" className={tab === value ? 'is-active' : ''} onClick={() => setTab(value)}>{label}</button>)}</div><p className="raid-approved-ui__sort">残り時間が短い順</p>{empty ? <div className="raid-approved-ui__empty">現在開催中のレイドはありません</div> : <div className="raid-approved-ui__cards">{visibleJoined.map(entry => <Card key={entry.room.roomId} entry={entry} now={now} resolve={resolve} onOpenRoom={onOpenRoom} disabled={disabled}/>) }{visibleHelp.map(entry => <Card key={`${entry.room.roomId}-rescue`} entry={entry} now={now} resolve={resolve} onOpenRoom={onOpenRoom} disabled={disabled} rescue/>)}</div>}<button className="raid-approved-ui__ended" type="button" onClick={onOpenRewards}>{icon('chest')}<span>終了したレイド・未受取報酬</span><b>›</b></button></div>;
 }

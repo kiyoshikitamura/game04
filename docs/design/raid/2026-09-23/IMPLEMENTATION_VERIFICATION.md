@@ -9,6 +9,7 @@
 | 開催者 | PASS | `RaidTopEntry.room.owner` の `userId` / `name` / `leaderIconUrl`。閲覧者・最後の参加者で代用しない |
 | Room詳細 | PASS | `RaidRoomDetail`。`briefing`、`display`、`participants`、`room.hp`、lifecycle を既存 resource から表示 |
 | 詳細アクション | PASS | 敵情報・参加者・報酬・救援を既存Dialog callbackへ接続 |
+| 終了レイド報酬 | PASS | 一覧カードから `RaidRoomBrowser` の既存報酬Dialog stateへ接続 |
 | 出撃 | PASS | 既存 `action` / `onBriefingReady` / `prepareRaidRoomBattle` 経路を維持 |
 | 報酬・救援・プロフィール | PASS | 既存 `RaidRoomDialogs`、`RaidRoomRescuePanel`、profile callbackを維持 |
 
@@ -44,7 +45,6 @@
 
 | 区分 | 残件 | 完了扱い |
 |---|---|---|
-| 機能接続 | 一覧の「終了したレイド・未受取報酬」カードは、現在の `RaidTopProps` に報酬Dialogを開くcallbackがなく、表示のみ。既存の報酬受取機能は詳細の報酬導線から接続済み | 未完了。親側でcallback追加後に接続する |
 | 正式データ | 一覧の属性表示は `RaidTopData` 契約に正式属性値がないため、架空の属性文を追加せず省略 | 未完了。正式属性データの供給待ち |
 | 素材供給 | `public/ui/raid/` のSVG9種は比較用の未承認制作物。正式共通アイコン供給後に差替え | 未完了。正式採用済みとして扱わない |
 | QA検証 | Mock RPCに `get_quest_raid_bonus_v1` の未処理呼出しが残る。PGRST202相当では画面表示を阻害しないが、console clean受入にはQA stubまたは正式RPCが必要 | 未完了。供給／接続待ち |

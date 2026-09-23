@@ -57,7 +57,7 @@ function ResourceNotice({ resource, onRefresh, unavailable, disabled }: { resour
   return <div className="raid-top__notice" role={resource.status === "error" ? "alert" : "status"}><p>{resource.status === "error" ? "取得できませんでした" : unavailable}</p>{resource.status === "error" && <OutlawButton loadingLabel="" onClick={onRefresh} disabled={disabled}>再試行</OutlawButton>}</div>;
 }
 
-export default function RaidTop({ data, onOpenRoom, onChooseEnemy, onBrowse, onRefresh, disabled }: RaidTopProps) {
+export default function RaidTop({ data, onOpenRoom, onChooseEnemy, onBrowse, onOpenRewards, onRefresh, disabled }: RaidTopProps) {
   const [rescueChoice, setRescueChoice] = useState({key:"", index:0});
   const [now, setNow] = useState<number | null>(null);
   const [retry, setRetry] = useState(0);
@@ -99,7 +99,7 @@ export default function RaidTop({ data, onOpenRoom, onChooseEnemy, onBrowse, onR
   const resolve: ImageResolver = url => assets?.results.find(result => result.requestedSrc === url)?.resolvedSrc ?? FALLBACK;
   if ([data.participating, data.rescues, data.dailyTargets].some(resource => resource.status === "loading") || assets?.key !== assetKey) return <Spinner />;
   if (assets.results.some(result => result.status === "failed")) return <div className="raid-top__notice" role="alert"><p>画像を取得できませんでした</p><OutlawButton loadingLabel="" onClick={() => { setAssets(null); setRetry(value => value + 1); }}>再試行</OutlawButton></div>;
-  return <RaidTopApproved participating={data.participating} rescues={data.rescues} now={now} resolve={resolve} onOpenRoom={onOpenRoom} onRefresh={onRefresh} disabled={disabled} />;
+  return <RaidTopApproved participating={data.participating} rescues={data.rescues} now={now} resolve={resolve} onOpenRoom={onOpenRoom} onOpenRewards={onOpenRewards ?? (() => undefined)} onRefresh={onRefresh} disabled={disabled} />;
   /* Legacy presentation retained below for history; the approved presentation above is the live Room UI.
   return <div className="raid-top" data-testid="raid-top">
     {showParticipating && <section aria-label="参戦中" className="raid-top__section"><SectionHeader title="参戦中" />

@@ -126,6 +126,7 @@ export default function RaidRoomBrowser({ controller, onBattleReady, onBriefingR
         void controller.loadBossChoices();
       }}
       onBrowse={() => { setCreateOpen(false);  setBrowseOpen(true); }}
+      onOpenRewards={() => setDialog('rewards')}
       onRefresh={() => onTopRefresh?.()} /> : <>
     {!snapshot.selectedRoomId ? <>
       {topData && <OutlawButton loadingLabel="" disabled={busy} onClick={() => void returnToTop()}>トップへ</OutlawButton>}
