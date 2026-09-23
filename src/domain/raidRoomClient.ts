@@ -32,6 +32,7 @@ export interface RaidRoomTransport {
   listBossChoices?(): Promise<readonly RaidBossChoice[]>;
   createRoom?(request: RaidRoomCreateRequest): Promise<RaidRoomDto>;
   listRooms(): Promise<readonly RaidRoomDto[]>;
+  listRoomHistory?(): Promise<readonly RaidRoomDto[]>;
   getRoom(roomId: string): Promise<RaidRoomDto>;
   listParticipants(roomId: string): Promise<readonly RaidParticipantDto[]>;
   getRewards(roomId: string): Promise<readonly RaidRewardDto[]>;
@@ -46,6 +47,7 @@ export interface RaidRoomResource<T> {
 
 export interface RaidRoomClientState {
   readonly rooms: RaidRoomResource<readonly RaidRoomDto[]>;
+  readonly endedRooms: RaidRoomResource<readonly RaidRoomDto[]>;
   readonly selectedRoomId: string | null;
   readonly room: RaidRoomResource<RaidRoomDto>;
   readonly participants: RaidRoomResource<readonly RaidParticipantDto[]>;
@@ -66,6 +68,7 @@ export interface RaidRoomController {
   getSnapshot(): RaidRoomClientState;
   subscribe(listener: () => void): () => void;
   loadRooms(): Promise<void>;
+  loadEndedRooms(): Promise<void>;
   loadBossChoices(): Promise<void>;
   resetCreateRequest(): void;
   createRoom(difficultyId: RaidDifficultyId, raidVariantId: string): Promise<RaidRoomDto | null>;
@@ -85,6 +88,7 @@ const failure = <T>(): RaidRoomResource<T> => ({ status: 'error', data: null, er
 export function createRaidRoomController(transport: RaidRoomTransport): RaidRoomController {
   let state: RaidRoomClientState = {
     rooms: idle(), selectedRoomId: null, room: idle(), participants: idle(), rewards: idle(),
+    endedRooms: idle(),
     canRegister: !!transport.registerParticipation && !!transport.getBriefing, briefing: idle(), registering: false, registrationError: null,
     joining: false, joinError: null, canCreate: !!transport.createRoom && !!transport.listBossChoices, bossChoices: idle(), creating: false, createError: null,
   };
@@ -214,6 +218,12 @@ export function createRaidRoomController(transport: RaidRoomTransport): RaidRoom
       } catch {
         if (!disposed && revision === listRevision) update({ rooms: failure() });
       }
+    },
+    async loadEndedRooms() {
+      if (disposed || !transport.listRoomHistory) return;
+      update({ endedRooms: loading() });
+      try { const rooms = await transport.listRoomHistory(); if (!disposed) update({ endedRooms: success(rooms) }); }
+      catch { if (!disposed) update({ endedRooms: failure() }); }
     },
     async selectRoom(roomId, sourceRescueId) {
       if (disposed) return;

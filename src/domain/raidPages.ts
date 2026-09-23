@@ -25,7 +25,7 @@ async function entries(value: unknown): Promise<readonly RaidTopEntry[]> {
 }
 async function rpc(client: RaidRoomRpcClient, name: string, args: Record<string, unknown>) { const response = await client.rpc(name, args); if (response.error) throw Error('Raid page request failed'); return record(response.data); }
 export async function loadRaidListPage(client: RaidRoomRpcClient, difficulty: RaidDifficultyId, offset: number): Promise<RaidListPage> {
-  const data = await rpc(client, 'list_raid_room_cards_v1', { p_difficulty_id: difficulty, p_offset: offset });
+  const data = await rpc(client, 'list_raid_room_cards_v2', { p_difficulty_id: difficulty, p_offset: offset });
   if (data.nextOffset !== null && (typeof data.nextOffset !== 'number' || !Number.isSafeInteger(data.nextOffset) || data.nextOffset !== offset + 20)) throw Error('Invalid raid page cursor');
   const page = await entries(data.entries);
   if (page.some(entry => entry.room.difficultyId !== difficulty) || (data.nextOffset !== null && page.length !== 20)) throw Error('Invalid raid page');

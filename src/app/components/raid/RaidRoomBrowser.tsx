@@ -59,6 +59,7 @@ export default function RaidRoomBrowser({ controller, onBattleReady, onBriefingR
   const [difficulty, setDifficulty] = useState<RaidDifficultyId>("beginner");
   const [createOpen, setCreateOpen] = useState(false);
   const [browseOpen, setBrowseOpen] = useState(false);
+  const [endedOpen, setEndedOpen] = useState(false);
 
   const [variantId, setVariantId] = useState("");
   const [dialog, setDialog] = useState<"participants" | "rewards" | null>(null);
@@ -75,6 +76,7 @@ export default function RaidRoomBrowser({ controller, onBattleReady, onBriefingR
   useEffect(() => { if (listingVisible && !loadListPage) void controller.loadRooms(); }, [controller, listingVisible, listRefreshRevision, loadListPage]);
   useEffect(() => { setInteractionBlocking(busy); return () => setInteractionBlocking(false); }, [busy, setInteractionBlocking]);
   useEffect(() => { setDialog(null); setEnemyOpen(false); setInfoVariant(null); setTransitionError(null); setBattleReference(null); }, [snapshot.selectedRoomId]);
+  const openEndedRewards = () => { setEndedOpen(true); setBrowseOpen(true); setCreateOpen(false); void controller.loadEndedRooms(); };
 
   const room = snapshot.room.status === "success" ? snapshot.room.data : null;
   const display = useRaidRoomDisplay(snapshot.selectedRoomId, room, currentUserId, loadDisplay);
@@ -126,11 +128,11 @@ export default function RaidRoomBrowser({ controller, onBattleReady, onBriefingR
         void controller.loadBossChoices();
       }}
       onBrowse={() => { setCreateOpen(false);  setBrowseOpen(true); }}
-      onOpenRewards={() => setDialog('rewards')}
+      onOpenRewards={openEndedRewards}
       onRefresh={() => onTopRefresh?.()} /> : <>
     {!snapshot.selectedRoomId ? <>
       {topData && <OutlawButton loadingLabel="" disabled={busy} onClick={() => void returnToTop()}>トップへ</OutlawButton>}
-      {!createOpen && <><SectionHeader title="開催中のレイド" /><div className="raid-room-list-toolbar"><div className="raid-room-tabs" role="tablist" aria-label="難易度">
+      {!createOpen && <>{endedOpen && <section className="raid-room-history" aria-label="終了したレイド・未受取報酬"><SectionHeader title="終了したレイド・未受取報酬" /><p className="raid-room-muted">レイドを選択して報酬を確認してください。</p>{snapshot.endedRooms.status === 'loading' && <Spinner />}{snapshot.endedRooms.status === 'error' && <p role="alert">終了したレイドを取得できませんでした。更新して再度お試しください。</p>}{snapshot.endedRooms.status === 'success' && <div className="raid-room-list">{snapshot.endedRooms.data?.map(entry => <RaidRoomListCard key={entry.roomId} room={entry} now={now} onOpen={id => void controller.selectRoom(id)} busy={busy} />)}{!snapshot.endedRooms.data?.length && <p>未受取報酬のあるレイドはありません。</p>}</div>}</section>}<SectionHeader title="開催中のレイド" /><div className="raid-room-list-toolbar"><div className="raid-room-tabs" role="tablist" aria-label="難易度">
         {RAID_DIFFICULTIES.map((entry) => <OutlawButton loadingLabel="" key={entry.id} aria-label={entry.label} role="tab" aria-selected={difficulty === entry.id} disabled={busy} variant={difficulty === entry.id ? "primary" : "secondary"} onClick={() => { if (difficulty !== entry.id) { setDifficulty(entry.id); setPageOffset(0); controller.resetCreateRequest(); } }}>{entry.label}</OutlawButton>)}
       </div><OutlawButton loadingLabel="" disabled={busy} aria-label="更新" onClick={refreshList}>更新</OutlawButton></div>
       <p className="raid-room-requirement">{getRaidParticipationRequirement(difficulty)}</p>

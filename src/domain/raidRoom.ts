@@ -78,6 +78,10 @@ export interface RaidRoomDto {
   readonly hp: RaidObserved<{ readonly current: number; readonly max: number }>;
   readonly participantCount: RaidObserved<number>;
   readonly serverEligibility: RaidServerEligibility;
+  readonly raidVariantId?: RaidObserved<string>;
+  readonly raidLevel?: RaidObserved<number>;
+  readonly attribute?: RaidObserved<string>;
+  readonly capacity?: RaidObserved<number>;
 }
 
 export interface RaidParticipantDto {
@@ -88,6 +92,10 @@ export interface RaidParticipantDto {
   readonly finalizedBattles: RaidObserved<number>;
   readonly rawDamage: RaidObserved<number>;
   readonly appliedDamage: RaidObserved<number>;
+  readonly victoryCount?: RaidObserved<number>;
+  readonly recentState?: RaidObserved<'victory' | 'defeat' | null>;
+  readonly rewardEligibility?: RaidServerEligibility;
+  readonly participationProgress?: RaidObserved<number>;
 }
 
 export interface RaidRescueDto {

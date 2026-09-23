@@ -47,6 +47,9 @@ function observed<T>(value: unknown, parse: (entry: unknown) => T): RaidObserved
   if (entry.status !== 'available') invalid();
   return { status: 'available', value: parse(entry.value) };
 }
+function optionalObserved<T>(entry: Record<string, unknown>, key: string, parse: (value: unknown) => T): RaidObserved<T> | undefined {
+  return key in entry ? observed(entry[key], parse) : undefined;
+}
 function nullable<T>(parse: (entry: unknown) => T): (entry: unknown) => T | null {
   return (entry) => entry === null ? null : parse(entry);
 }
@@ -102,16 +105,25 @@ function room(value: unknown): RaidRoomDto {
       return count;
     }),
     serverEligibility: eligibility(entry.serverEligibility),
+    ...(optionalObserved(entry, 'raidVariantId', text) ? { raidVariantId: optionalObserved(entry, 'raidVariantId', text) } : {}),
+    ...(optionalObserved(entry, 'raidLevel', integer) ? { raidLevel: optionalObserved(entry, 'raidLevel', integer) } : {}),
+    ...(optionalObserved(entry, 'attribute', text) ? { attribute: optionalObserved(entry, 'attribute', text) } : {}),
+    ...(optionalObserved(entry, 'capacity', integer) ? { capacity: optionalObserved(entry, 'capacity', integer) } : {}),
   };
 }
 function participant(value: unknown): RaidParticipantDto {
   const entry = object(value);
+  const recent = optionalObserved(entry, 'recentState', (value) => value === null ? null : choice(value, ['victory', 'defeat'] as const));
   return {
     roomId: text(entry.roomId), player: player(entry.player),
     currentGuild: observed(entry.currentGuild, nullable(guild)),
     battleGuildSnapshot: observed(entry.battleGuildSnapshot, nullable(guild)),
     finalizedBattles: observed(entry.finalizedBattles, integer),
     rawDamage: observed(entry.rawDamage, integer), appliedDamage: observed(entry.appliedDamage, integer),
+    ...(optionalObserved(entry, 'victoryCount', integer) ? { victoryCount: optionalObserved(entry, 'victoryCount', integer) } : {}),
+    ...(recent ? { recentState: recent } : {}),
+    ...(entry.rewardEligibility !== undefined ? { rewardEligibility: eligibility(entry.rewardEligibility) } : {}),
+    ...(optionalObserved(entry, 'participationProgress', integer) ? { participationProgress: optionalObserved(entry, 'participationProgress', integer) } : {}),
   };
 }
 function reward(value: unknown): RaidRewardDto {
@@ -223,6 +235,7 @@ export function createRaidRoomRpcTransport(client: RaidRoomRpcClient, authoritie
       },
     } : {}),
     listRooms: () => pages('list_raid_rooms_v1', { p_difficulty_id: null }, 'rooms', room, (entry) => entry.roomId),
+    ...(client ? { async listRoomHistory() { return pages('list_raid_room_history_v1', {}, 'rooms', room, (entry) => entry.roomId); } } : {}),
     async getRoom(roomId) {
       const id = text(roomId);
       const result = room(await rpc('get_raid_room_v1', { p_room_id: id }));
@@ -231,7 +244,7 @@ export function createRaidRoomRpcTransport(client: RaidRoomRpcClient, authoritie
     },
     async listParticipants(roomId) {
       const id = text(roomId);
-      return pages('get_raid_room_participants_v1', { p_room_id: id }, 'participants', (value) => {
+      return pages('get_raid_room_participants_v2', { p_room_id: id }, 'participants', (value) => {
         const result = participant(value);
         if (result.roomId !== id) invalid();
         return result;
