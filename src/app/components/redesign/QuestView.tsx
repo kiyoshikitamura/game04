@@ -8,6 +8,7 @@ import CanonicalDialog from '../ui/CanonicalDialog';
 import PreparationModal from './PreparationModal';
 import BattleView from './BattleView';
 import './QuestView.css';
+import { useQuestAssets } from './questAssets';
 import { growthRewardLabel } from '@/domain/redesign/growthReward';
 import ElementBadge from './ElementBadge';
 import roster from '@/theme/sengoku-characters.json';
@@ -92,8 +93,11 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
     const cleared = entry.stages.every(stage => state.clearedStages.includes(stage.id));
     return cleared || firstLockedArea < 0 || index <= firstLockedArea;
   });
+  const viewAssets = useQuestAssets(area ? [area.image] : visibleAreas.map(entry => entry.image));
+  const encounterAssets = useQuestAssets(selected && modal === 'info' ? [selectRepresentativeBoss(selected.waves[selected.waves.length - 1]).image, QUEST_AREAS.find(entry => entry.id === selected.areaId)?.image ?? ''].filter(Boolean) : []);
   if (playing && settlement) return <BattleView result={settlement.battle} vipActive={vipActive} onComplete={() => setPlaying(false)} title={selectedLabel} />;
   return <section className="redesign-quest">
+    {!viewAssets.ready && !settlement && <p role={viewAssets.failed ? "alert" : "status"}>{viewAssets.failed ? <>画像を読み込めませんでした。<button onClick={viewAssets.retry}>再読み込み</button></> : '読み込み中…'}</p>}
     {settlement ? <div className="rq-summary">
       <h2>{settlement.battle.outcome === 'win' ? 'ステージクリア' : '再び、戦場へ'}</h2>
       <p>{selectedLabel}</p>
@@ -111,14 +115,15 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
       {area ? <><button className="rq-back" onClick={() => setAreaId(null)}>‹ エリア一覧</button><header className="rq-area-head" style={{ backgroundImage: `linear-gradient(90deg,#100a0888,transparent 76%),url("${area.image}")` }}><h2>{area.name}</h2></header>
         <div className="rq-scroll" aria-label={`${area.name}のステージ一覧`}>{area.stages.map(stage => {
           const cleared = state.clearedStages.includes(stage.id), unlocked = isQuestStageUnlocked(stage.id, state.clearedStages);
-          return <button className={`rq-stage ${current.id === stage.id ? 'is-current' : ''}`} key={stage.id} disabled={!unlocked} onClick={() => openStage(stage)} style={{ backgroundImage: `linear-gradient(90deg,#302015aa,#14100e88),url("${area.image}")` }}><b className="rq-stage-number">{area.index}-{stage.index}</b><span><strong>{formalStageName(stage) ?? stage.name}</strong><small><img src="/ui/sengoku/14-energy.png" alt="" />消費行動力 {questEnergyCost(stage,state)}</small></span><small className={`rq-state-label ${cleared ? 'is-cleared' : unlocked ? 'is-current' : 'is-locked'}`}>{cleared ? 'クリア済' : unlocked ? '挑戦可能' : '未解放'}</small></button>;
+          return <button className={`rq-stage ${current.id === stage.id ? 'is-current' : ''}`} key={stage.id} disabled={!unlocked || !viewAssets.ready} onClick={() => openStage(stage)} style={{ backgroundImage: `linear-gradient(90deg,#302015aa,#14100e88),url("${area.image}")` }}><b className="rq-stage-number">{area.index}-{stage.index}</b><span><strong>{formalStageName(stage) ?? stage.name}</strong><small><img src="/ui/sengoku/14-energy.png" alt="" />消費行動力 {questEnergyCost(stage,state)}</small></span><small className={`rq-state-label ${cleared ? 'is-cleared' : unlocked ? 'is-current' : 'is-locked'}`}>{cleared ? 'クリア済' : unlocked ? '挑戦可能' : '未解放'}</small></button>;
         })}</div></> : <><h2>出陣</h2><div className="rq-scroll rq-area-list" aria-label="エリア一覧">{visibleAreas.map(entry => {
           const cleared = entry.stages.every(stage => state.clearedStages.includes(stage.id));
           const unlocked = isQuestStageUnlocked(entry.stages[0].id, state.clearedStages);
-          return <button key={entry.id} disabled={!unlocked} className={`rq-area ${entry.id === current.areaId ? 'is-current' : ''}`} style={{ backgroundImage: `linear-gradient(0deg,#0c080690,transparent 72%),url("${entry.image}")` }} onClick={() => setAreaId(entry.id)}><strong>{entry.name}</strong><span className="rq-area-description">{entry.description}</span><span className={`rq-area-status ${cleared ? 'is-cleared' : unlocked ? 'is-current' : 'is-locked'}`}><img src="/ui/sengoku/07-flower-crest.png" alt="" />{cleared ? '攻略済' : unlocked ? '攻略中' : '未解放'}</span></button>;
+          return <button key={entry.id} disabled={!unlocked || !viewAssets.ready} className={`rq-area ${entry.id === current.areaId ? 'is-current' : ''}`} style={{ backgroundImage: `linear-gradient(0deg,#0c080690,transparent 72%),url("${entry.image}")` }} onClick={() => setAreaId(entry.id)}><strong>{entry.name}</strong><span className="rq-area-description">{entry.description}</span><span className={`rq-area-status ${cleared ? 'is-cleared' : unlocked ? 'is-current' : 'is-locked'}`}><img src="/ui/sengoku/07-flower-crest.png" alt="" />{cleared ? '攻略済' : unlocked ? '攻略中' : '未解放'}</span></button>;
         })}</div></>}
     </>}
-    {selected && modal === 'info' && <div className="redesign-quest-dialog"><CanonicalDialog title={`${selectedLabel} ${formalStageName(selected) ?? selected.name}`} onClose={() => setModal(null)} actions={[{ label: '挑戦', semantic: 'primary', onClick: () => setModal('prepare'), disabled: !isQuestStageUnlocked(selected.id, state.clearedStages) }]}>
+    {selected && modal === 'info' && <div className="redesign-quest-dialog"><CanonicalDialog title={`${selectedLabel} ${formalStageName(selected) ?? selected.name}`} onClose={() => setModal(null)} actions={[{ label: '挑戦', semantic: 'primary', onClick: () => setModal('prepare'), disabled: !encounterAssets.ready || !isQuestStageUnlocked(selected.id, state.clearedStages) }]}>
+      {!encounterAssets.ready && <p role={encounterAssets.failed ? "alert" : "status"}>{encounterAssets.failed ? <>画像を読み込めませんでした。<button onClick={encounterAssets.retry}>再読み込み</button></> : '読み込み中…'}</p>}
       <div className="rq-encounter-hero" style={{ backgroundImage: `linear-gradient(180deg,#2b1c2433,#110c0e77),url("${QUEST_AREAS.find(entry => entry.id === selected.areaId)?.image ?? ''}")` }}><span className="rq-kicker">最終Waveのボス</span>{(() => { const enemy = selectRepresentativeBoss(selected.waves[selected.waves.length - 1]); const subject = bossSubject(enemy); return <article className="rq-boss"><div className="rq-boss-stage">{subject ? <BossDisplay subject={subject} presentation="quest" compact hideCaption className="rq-boss-display" /> : <img className="rq-formal-boss" src={enemy.image} alt={enemy.name} />}</div><div className="rq-boss-title"><strong>{enemy.name}</strong><ElementBadge element={enemy.element} /></div></article>; })()}</div>
       <div className="rq-stage-facts"><span><img src="/ui/sengoku/05-crossed-swords.png" alt="" />Wave数：{selected.waves.length}</span><span><img src="/ui/sengoku/14-energy.png" alt="" />消費行動力：{questEnergyCost(selected,state)}</span></div>
       <div className="rq-info-actions"><button type="button" onClick={() => setDetailPanel('hint')}><img src="/ui/sengoku/02-scroll-top.png" alt="" />攻略のヒント</button><button type="button" onClick={() => setDetailPanel('rewards')}><img src="/ui/sengoku/01-gift.png" alt="" />報酬を確認</button></div>
