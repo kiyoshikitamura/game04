@@ -18,7 +18,7 @@ export interface QuestSettlement { playerGrowth?: import('@/utils/redesignApi').
 const REWARD_LABELS: Record<Reward['kind'], string> = {ticket:'スペシャル券', character_exp_item: '武将EXP', equipment_exp_item: '装備EXP', generic_soul: '汎用魂', soul_selector: '魂選択', character: '武将', skill: 'スキル', cash: '銭', character_material: '武将育成素材', skill_material: 'スキルLB素材', equipment_material: '装備育成素材', equipment_lb: '装備LB素材', soul: '武将の魂', equipment: '装備', unlock_item: '領土侵攻札' };
 function rewardLabel(reward: Reward) {
   const growthLabel = growthRewardLabel(reward); if(growthLabel) return growthLabel;
-  if (reward.kind === 'ticket') return ({SPECIAL_TICKET_CHARACTER:'キャラ券',SPECIAL_TICKET_SKILL:'スキル券',SPECIAL_TICKET_EQUIPMENT:'装備券'} as Record<string,string>)[reward.id??''] ?? 'スペシャル券';
+  if (reward.kind === 'ticket') return ({SPECIAL_TICKET_CHARACTER:'キャラガチャ券',SPECIAL_TICKET_SKILL:'スキルガチャ券',SPECIAL_TICKET_EQUIPMENT:'装備ガチャ券'} as Record<string,string>)[reward.id??''] ?? 'スペシャル券';
   if (reward.kind === 'character') return CHARACTER_MASTERS.find(c => c.id === reward.id)?.name ?? '武将';
   if (reward.kind === 'skill') return `スキル：${reward.id ?? '未定義'}`;
   if (reward.kind === 'soul') return `${CHARACTER_MASTERS.find(c => c.id === reward.id)?.name ?? ''}の魂`;
@@ -47,6 +47,15 @@ function EnemyArt({ enemy, boss = false }: { enemy: QuestStage['waves'][number][
 function bossSubject(enemy: QuestStage['waves'][number][number]): DisplaySubject | null {
   const match = roster.find(candidate => candidate.name === enemy.name);
   return match ? { id: match.characterId, name: match.name, rarity: match.runtimeRarity as DisplaySubject['rarity'], element: enemy.element as DisplaySubject['element'] } : null;
+}
+function formalStageName(stage: QuestStage) {
+  return stage.name.trim() && stage.name.trim() !== stage.description.trim() ? stage.name : null;
+}
+function formalStageHint(stage: QuestStage) {
+  return stage.description.trim() && stage.description.trim() !== stage.name.trim() ? stage.description : null;
+}
+function selectRepresentativeBoss(wave: QuestStage['waves'][number]) {
+  return wave.reduce((best, enemy) => enemy.level > best.level || (enemy.level === best.level && enemy.stats.hp > best.stats.hp) ? enemy : best, wave[0]);
 }
 export default function QuestView({ state, party, vipActive, onStart, onOpenDeck, onOpenRaid, onIgnoreEncounter, initialStageId, onBattlePlayingChange }: {
   state: RedesignState; party: BattleUnit[]; vipActive: boolean; onStart: (stageId: string) => Promise<QuestSettlement>;
@@ -109,7 +118,7 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
       {area ? <><button className="rq-back" onClick={() => setAreaId(null)}>‹ エリア一覧</button><header className="rq-area-head" style={{ backgroundImage: `linear-gradient(90deg,#100a08d9,#100a0859),url("${area.image}")` }}><h2>{area.name}</h2></header>
         <div className="rq-scroll" aria-label={`${area.name}のステージ一覧`}>{area.stages.map(stage => {
           const cleared = state.clearedStages.includes(stage.id), unlocked = isQuestStageUnlocked(stage.id, state.clearedStages);
-          return <button className={`rq-stage ${current.id === stage.id ? 'is-current' : ''}`} key={stage.id} disabled={!unlocked} onClick={() => openStage(stage)} style={{ backgroundImage: `linear-gradient(90deg,#302015e8,#14100edc),url("${area.image}")` }}><b className="rq-stage-number">{area.index}-{stage.index}</b><span><strong>{stage.name}</strong><small><code>{(stage as QuestStage & { designId?: string }).designId ?? `${area.index}-${stage.index}`}</code> · 消費行動力 {questEnergyCost(stage,state)}</small></span><small className={`rq-state-label ${cleared ? 'is-cleared' : unlocked ? 'is-current' : 'is-locked'}`}><i aria-hidden="true">{cleared ? '✓' : unlocked ? '◆' : '×'}</i>{cleared ? 'クリア済' : unlocked ? '挑戦可能' : '未解放'}</small></button>;
+          return <button className={`rq-stage ${current.id === stage.id ? 'is-current' : ''}`} key={stage.id} disabled={!unlocked} onClick={() => openStage(stage)} style={{ backgroundImage: `linear-gradient(90deg,#302015e8,#14100edc),url("${area.image}")` }}><b className="rq-stage-number">{area.index}-{stage.index}</b><span><strong>{formalStageName(stage) ?? '表示名未定義'}</strong><small>消費行動力 {questEnergyCost(stage,state)}</small></span><small className={`rq-state-label ${cleared ? 'is-cleared' : unlocked ? 'is-current' : 'is-locked'}`}><i aria-hidden="true">{cleared ? '✓' : unlocked ? '◆' : '×'}</i>{cleared ? 'クリア済' : unlocked ? '挑戦可能' : '未解放'}</small></button>;
         })}</div></> : <><h2>クエスト</h2><div className="rq-scroll rq-area-list" aria-label="エリア一覧">{visibleAreas.map(entry => {
           const cleared = entry.stages.every(stage => state.clearedStages.includes(stage.id));
           const unlocked = isQuestStageUnlocked(entry.stages[0].id, state.clearedStages);
@@ -117,12 +126,12 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
         })}</div></>}
     </>}
     {selected && modal === 'info' && <div className="redesign-quest-dialog"><CanonicalDialog title={`${QUEST_AREAS.find(entry => entry.id === selected.areaId)?.index}-${selected.index}`} onClose={() => setModal(null)} actions={[{ label: '戻る', onClick: () => setModal(null) }, { label: '挑戦', semantic: 'primary', onClick: () => setModal('prepare'), disabled: !isQuestStageUnlocked(selected.id, state.clearedStages) }]}>
-      <div className="rq-encounter-hero" style={{ backgroundImage: `linear-gradient(180deg,#2b1c24cc,#110c0eee),url("${QUEST_AREAS.find(entry => entry.id === selected.areaId)?.image ?? ''}")` }}><span className="rq-kicker">最終Waveのボス</span><div className="rq-bosses">{selected.waves[selected.waves.length - 1].map(enemy => { const subject = bossSubject(enemy); return <article key={enemy.id} className="rq-boss">{subject ? <BossDisplay subject={subject} compact className="rq-boss-display" /> : <EnemyArt enemy={enemy} boss />}<div>{!subject && <><strong>{enemy.name}</strong><span><ElementBadge element={enemy.element} /> {ELEMENT_LABELS[enemy.element]}属性 ／ Lv.{enemy.level}</span></>}<small>HP {enemy.stats.hp.toLocaleString()} ・ ATK {enemy.stats.atk.toLocaleString()} ・ DEF {enemy.stats.def.toLocaleString()}</small>{enemy.skills.length > 0 && <div className="rq-enemy-skills">{enemy.skills.map(skill => <span key={skill.id}><img src={skill.image} alt="" />{skill.name}</span>)}</div>}</div></article>; })}</div></div>
+      <div className="rq-encounter-hero" style={{ backgroundImage: `linear-gradient(180deg,#2b1c24cc,#110c0eee),url("${QUEST_AREAS.find(entry => entry.id === selected.areaId)?.image ?? ''}")` }}><span className="rq-kicker">最終Waveの代表ボス</span>{(() => { const enemy = selectRepresentativeBoss(selected.waves[selected.waves.length - 1]); const subject = bossSubject(enemy); return <div className="rq-bosses"><article key={enemy.id} className="rq-boss rq-boss-single"><div className="rq-boss-stage">{subject ? <BossDisplay subject={subject} compact hideCaption className="rq-boss-display" /> : <div className="rq-boss-missing">正式バトル素材供給待ち</div>}<div className="rq-boss-overlay"><strong>Lv.{enemy.level} {enemy.name}</strong><span><ElementBadge element={enemy.element} /></span><small>HP {enemy.stats.hp.toLocaleString()} ／ ATK {enemy.stats.atk.toLocaleString()} ／ DEF {enemy.stats.def.toLocaleString()}</small>{enemy.skills.length > 0 ? <div className="rq-enemy-skills">{enemy.skills.map(skill => <span key={skill.id}><img src={skill.image} alt="" />{skill.name}</span>)}</div> : <small>スキル：無し</small>}</div></div></article></div>; })()}</div>
       <div className="rq-stage-facts"><span>⚔ Wave数：{selected.waves.length}</span><span>♟ 消費行動力：{questEnergyCost(selected,state)}</span></div>
       <div className="rq-info-actions"><button type="button" onClick={() => setDetailPanel(detailPanel === 'hint' ? null : 'hint')}>📜 攻略のヒント</button><button type="button" onClick={() => setDetailPanel(detailPanel === 'rewards' ? null : 'rewards')}>🎁 報酬を確認</button></div>
     </CanonicalDialog></div>}
     {selected && detailPanel && <div className="redesign-quest-dialog"><CanonicalDialog title={detailPanel === 'hint' ? '攻略のヒント' : '報酬を確認'} onClose={() => setDetailPanel(null)} actions={[{ label: '戻る', onClick: () => setDetailPanel(null) }]}>
-      {detailPanel === 'hint' ? <><p className="rq-detail-lead">{selected.description}</p><p className="rq-muted">Wave 1〜{selected.waves.length}を順番に突破します。</p></> : <><h3>初回報酬{state.clearedStages.includes(selected.id) ? '（獲得済）' : ''}</h3><Rewards rewards={selected.firstRewards} /><h3>通常ドロップ</h3><Rewards rewards={selected.rewards} /><h3>レアドロップ</h3><Rewards rewards={selected.rareRewards} /></>}
+      {detailPanel === 'hint' ? <>{formalStageHint(selected) ? <p className="rq-detail-lead">{formalStageHint(selected)}</p> : <p className="rq-detail-lead">正式な攻略ヒント未定義</p>}</> : <><h3>初回報酬{state.clearedStages.includes(selected.id) ? '（獲得済）' : ''}</h3><Rewards rewards={selected.firstRewards} /><h3>通常ドロップ</h3><Rewards rewards={selected.rewards} /><h3>レアドロップ</h3><Rewards rewards={selected.rareRewards} /></>}
     </CanonicalDialog></div>}
     {selected && modal === 'prepare' && <PreparationModal party={party} title={selectedLabel ?? ''} energyCost={questEnergyCost(selected,state)} energy={state.energy} busy={busy} error={error} onConfirm={start} onBack={() => setModal('info')} onOpenDeck={onOpenDeck} />}
   </section>;

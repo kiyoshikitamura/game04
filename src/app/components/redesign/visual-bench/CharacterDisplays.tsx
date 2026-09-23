@@ -82,11 +82,10 @@ function Pending({error,retry}:{error?:string;retry:()=>void}){
 }
 function ElementMark({src,element,className}:{src:string;element:Element;className?:string}){
   return <span className={className ? `${styles.elementMark} ${className}` : styles.elementMark}>
-    <img className={styles.element} src={src} alt=""/>
-    <span className={styles.elementLabel}>{labels[element]}</span>
+    <img className={styles.element} src={src} alt={`${labels[element]}属性`}/>
   </span>;
 }
-export function CharacterCard({subject,compact=false,className}:{subject:DisplaySubject;compact?:boolean;className?:string}){
+export function CharacterCard({subject,compact=false,className,hideMarks=false}:{subject:DisplaySubject;compact?:boolean;className?:string;hideMarks?:boolean}){
   const asset=useArtwork(subject,'card');
   const visible=usePageVisible();
   const phase=Array.from(subject.id).reduce((sum,c)=>sum+c.charCodeAt(0),0)%5000;
@@ -98,14 +97,14 @@ export function CharacterCard({subject,compact=false,className}:{subject:Display
         <img className={styles.frame} src={asset.frame} alt=""/>
         <span className={styles.sheen} aria-hidden="true"/>
         <span className={styles.aura} aria-hidden="true"/>
-        <ElementMark src={asset.element} element={subject.element}/>
-        <span className={styles.rarity}>{subject.rarity}</span>
+        {!hideMarks && <ElementMark src={asset.element} element={subject.element}/>}
+        {!hideMarks && <img className={styles.rarityBadge} src={`/ui/rarity/rarity-badge-${subject.rarity.toLowerCase()}.png`} alt={`${subject.rarity}レアリティ`}/>}
       </div>
       <figcaption className={styles.caption}>{subject.name}</figcaption>
     </>}
   </figure>;
 }
-export function BossDisplay({subject,compact=false,className}:{subject:DisplaySubject;compact?:boolean;className?:string}){
+export function BossDisplay({subject,compact=false,className,hideCaption=false}:{subject:DisplaySubject;compact?:boolean;className?:string;hideCaption?:boolean}){
   const asset=useArtwork(subject,'battle');
   return <figure className={[styles.boss,compact?styles.compact:'',className??''].filter(Boolean).join(' ')} aria-label={'ボス '+subject.name}>
     {!asset.box||!asset.source||!asset.background?<Pending error={asset.error} retry={asset.retry}/>:<>
@@ -114,7 +113,7 @@ export function BossDisplay({subject,compact=false,className}:{subject:DisplaySu
         <div className={styles.shade}/>
         <div className={styles.bossPerson}><Person src={asset.source} box={asset.box}/></div>
       </div>
-      <figcaption className={styles.bossCaption}><ElementMark src={asset.element} element={subject.element} className={styles.bossElement}/><strong>{subject.name}</strong></figcaption>
+      {!hideCaption && <figcaption className={styles.bossCaption}><ElementMark src={asset.element} element={subject.element} className={styles.bossElement}/><strong>{subject.name}</strong></figcaption>}
     </>}
   </figure>;
 }
