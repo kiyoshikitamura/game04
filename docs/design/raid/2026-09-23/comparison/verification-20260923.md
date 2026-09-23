@@ -48,6 +48,8 @@
 - [一覧比較](./raid-approved-mock-list-vs-body.png)
 - [詳細比較](./raid-approved-mock-detail-vs-body.png)
 - [詳細下部比較](./raid-approved-mock-lower-vs-body.png)
+- [固定Preview QA一覧再撮影](./raid-approved-preview-qa-1536.png)
+- [固定Preview QA詳細再撮影](./raid-detail-preview-qa-1536.png)
 - [機能通し検証記録](./functional-flow-20260923.json)
 
 ## 接続保持
