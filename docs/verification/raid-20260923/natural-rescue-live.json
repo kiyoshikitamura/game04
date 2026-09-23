@@ -1,0 +1,288 @@
+{
+  "status": "pass",
+  "roomId": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+  "priorEvidence": "docs/verification/raid-20260923/natural-invasion-live.json",
+  "conditions": "Continuation after solo attempt reached final stage and stopped at quest 9-1 three losses. Pre-grown SR5/no equipment/no active skills remain QA prerequisites. Two helpers use their existing normal energy <=50, at most two battles each; no manual energy refill. This is cooperative resource/API flow evidence, not solo/balance/visual acceptance.",
+  "startedAt": "2026-09-23T15:37:13.861Z",
+  "baselines": {
+    "host": {
+      "hostExp": 100,
+      "playerProgress": {
+        "exp": 3184,
+        "level": 13,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "energy": 9,
+      "wins": 26
+    },
+    "helperB": {
+      "energy": 50,
+      "energyMax": 50,
+      "hostExp": 0,
+      "playerProgress": {
+        "exp": 0,
+        "level": 1,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "orders": 2,
+      "characters": [
+        {
+          "id": "char_lucas_01",
+          "exp": 750000,
+          "level": 100,
+          "awakening": 5,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "id": "char_maya_01",
+          "exp": 750000,
+          "level": 100,
+          "awakening": 5,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "id": "char_noa_01",
+          "exp": 750000,
+          "level": 100,
+          "awakening": 5,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "id": "char_reina_01",
+          "exp": 750000,
+          "level": 100,
+          "awakening": 5,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "id": "char_rui_01",
+          "exp": 750000,
+          "level": 100,
+          "awakening": 5,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        }
+      ],
+      "deck": [
+        {
+          "skillIds": [],
+          "equipment": {},
+          "characterId": "char_lucas_01"
+        },
+        {
+          "skillIds": [],
+          "equipment": {},
+          "characterId": "char_maya_01"
+        },
+        {
+          "skillIds": [],
+          "equipment": {},
+          "characterId": "char_noa_01"
+        },
+        {
+          "skillIds": [],
+          "equipment": {},
+          "characterId": "char_reina_01"
+        },
+        {
+          "skillIds": [],
+          "equipment": {},
+          "characterId": "char_rui_01"
+        }
+      ]
+    },
+    "helperOwner": {
+      "energy": 41,
+      "energyMax": 50,
+      "hostExp": 0,
+      "playerProgress": {
+        "exp": 0,
+        "level": 1,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "orders": 2,
+      "characters": [
+        {
+          "id": "char_lucas_01",
+          "exp": 750000,
+          "level": 100,
+          "awakening": 5,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "id": "char_maya_01",
+          "exp": 750000,
+          "level": 100,
+          "awakening": 5,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "id": "char_noa_01",
+          "exp": 750000,
+          "level": 100,
+          "awakening": 5,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "id": "char_reina_01",
+          "exp": 750000,
+          "level": 100,
+          "awakening": 5,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "id": "char_rui_01",
+          "exp": 750000,
+          "level": 100,
+          "awakening": 5,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        }
+      ],
+      "deck": [
+        {
+          "skillIds": [],
+          "equipment": {},
+          "characterId": "char_lucas_01"
+        },
+        {
+          "skillIds": [],
+          "equipment": {},
+          "characterId": "char_maya_01"
+        },
+        {
+          "skillIds": [],
+          "equipment": {},
+          "characterId": "char_noa_01"
+        },
+        {
+          "skillIds": [],
+          "equipment": {},
+          "characterId": "char_reina_01"
+        },
+        {
+          "skillIds": [],
+          "equipment": {},
+          "characterId": "char_rui_01"
+        }
+      ]
+    }
+  },
+  "battles": [
+    {
+      "role": "helperB",
+      "requestId": "dbc2727e-24dc-4d63-b16e-e68802217eb0",
+      "outcome": "win",
+      "damage": 77395,
+      "level": 12,
+      "hp": 320567,
+      "status": "active",
+      "beforeEnergy": 50,
+      "energy": 30,
+      "naturalRecovery": 0,
+      "wins": 1,
+      "hostExp": 0,
+      "orders": 2,
+      "playerProgress": {
+        "exp": 0,
+        "level": 1,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "at": "2026-09-23T15:37:40.002Z"
+    },
+    {
+      "role": "helperB",
+      "requestId": "96b63a35-83f6-40fa-b6db-b149294bbb93",
+      "outcome": "win",
+      "damage": 76405,
+      "level": 12,
+      "hp": 205960,
+      "status": "active",
+      "beforeEnergy": 30,
+      "energy": 10,
+      "naturalRecovery": 0,
+      "wins": 2,
+      "hostExp": 0,
+      "orders": 2,
+      "playerProgress": {
+        "exp": 0,
+        "level": 1,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "at": "2026-09-23T15:37:43.488Z"
+    },
+    {
+      "role": "helperOwner",
+      "requestId": "f0b8db93-fa8f-406f-af23-bc304cd74a5a",
+      "outcome": "win",
+      "damage": 74014,
+      "level": 12,
+      "hp": 94939,
+      "status": "active",
+      "beforeEnergy": 41,
+      "energy": 21,
+      "naturalRecovery": 0,
+      "wins": 1,
+      "hostExp": 0,
+      "orders": 2,
+      "playerProgress": {
+        "exp": 0,
+        "level": 1,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "at": "2026-09-23T15:37:49.296Z"
+    },
+    {
+      "role": "helperOwner",
+      "requestId": "8bd943c3-f9c9-48f9-b316-9295249a4287",
+      "outcome": "win",
+      "damage": 76261,
+      "level": 12,
+      "hp": 0,
+      "status": "defeated",
+      "beforeEnergy": 21,
+      "energy": 1,
+      "naturalRecovery": 0,
+      "wins": 2,
+      "hostExp": 0,
+      "orders": 2,
+      "playerProgress": {
+        "exp": 0,
+        "level": 1,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "at": "2026-09-23T15:37:52.625Z"
+    }
+  ],
+  "checks": [
+    "original solo natural-resource evidence retained without rewriting its stop",
+    "host rescue and helper joins without order consumption",
+    "helpers max2 battles each; normal energy debit ledger; no PlayerEXP/hostEXP",
+    "cooperative final defeat and host EXP100 once",
+    "helpers below3 wins receive no defeat reward",
+    "host claim twice and reload keep assets/EXP unchanged"
+  ],
+  "rescueRequestId": "c150af5e-1cc2-4e23-bae8-9a06a807203c",
+  "rescueSent": true,
+  "joinIds": {
+    "helperB": "fc349fae-e525-4d1d-b64c-8c85a807d454",
+    "helperOwner": "9a25463a-f858-4bf0-b1af-08d0ae483b7e"
+  },
+  "pending": null,
+  "pass": true,
+  "finishedAt": "2026-09-23T15:38:01.563Z",
+  "final": {
+    "status": "defeated",
+    "level": 12,
+    "hp": 0,
+    "hostExp": 200,
+    "hostEnergy": 9,
+    "hostWins": 26,
+    "helperBattles": 4
+  }
+}

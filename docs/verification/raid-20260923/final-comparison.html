@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GAME04 レイド｜最終ビジュアル比較</title><style>
+*{box-sizing:border-box}body{margin:0;background:#151318;color:#efe8d9;font:15px/1.65 system-ui,sans-serif}main{max-width:1280px;margin:auto;padding:24px}h1{font-size:25px;margin:0 0 8px}h2{font-size:20px;color:#e1c178;margin:24px 0 10px}p{margin:8px 0}a{color:#eed397}code{overflow-wrap:anywhere;font-size:12px}.meta,.note{padding:14px 18px;background:#211d24;border:1px solid #61543e;border-radius:6px}.meta{margin:16px 0}.mock{display:block;width:100%;max-width:768px;margin:auto}.shots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}figure{margin:0;padding:10px;background:#211d24;border:1px solid #61543e;border-radius:6px}figure img{display:block;width:100%;height:auto}figcaption{margin-bottom:8px}figcaption strong{display:block;color:#e7c67e}figcaption span{font-size:12px;color:#ccc0b2}table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;margin:12px 0}th,td{padding:8px;border-bottom:1px solid #55483c;text-align:left;font-size:13px}.muted{color:#bdb1a4;font-size:13px}@media(max-width:650px){main{padding:14px}.shots{grid-template-columns:1fr}figure{max-width:470px;margin:auto}h1{font-size:22px}th,td{padding:6px;font-size:11px}}
+</style></head><body><main>
+<h1>GAME04 レイド｜最終ビジュアル比較</h1>
+<p>同一Previewの実API本体を390px／1536pxで確認。各画像をタップすると撮影原寸を開きます。</p>
+<div class="meta"><a href="https://game04-jsmckf7gy-kiyoshi-kitamura.vercel.app/">固定Previewを開く</a> · <a href="final-visual-comparison.md">比較記録</a><br>実装SHA：<code>87161e39388cb73338adbaae6cf81f7c3d34ca50</code><br><span class="muted">実寸iframeの src="/" は本体・実API接続。オフラインfixtureではありません。画像読込完了・画像寸法を確認済み。</span></div>
+<details><summary>承認モックを見る</summary><a href="../../design/raid/2026-09-23/raid-approved-mock.png"><img class="mock" src="../../design/raid/2026-09-23/raid-approved-mock.png" alt="承認モック：一覧・詳細・下部"></a></details>
+<h2>390 × 844px</h2><div class="shots">
+<figure><figcaption><strong>01 一覧</strong><span>人物・情報・HP・CTAの配置</span></figcaption><a href="body/final-390-list.jpg"><img src="body/final-390-list.jpg" alt="390px本体レイド一覧" width="390" height="844"></a></figure>
+<figure><figcaption><strong>02 詳細先頭</strong><span>人物領域からHP・4操作への構成</span></figcaption><a href="body/final-390-detail.jpg"><img src="body/final-390-detail.jpg" alt="390px本体レイド詳細先頭" width="390" height="844"></a></figure>
+<figure><figcaption><strong>03 同一詳細の下部</strong><span>余剰高さを貢献内へ配分・CTA到達</span></figcaption><a href="body/final-390-lower.jpg"><img src="body/final-390-lower.jpg" alt="390px本体レイド詳細下部" width="390" height="844"></a></figure>
+</div>
+<h2>1536 × 936px</h2><div class="shots">
+<figure><figcaption><strong>01 一覧</strong><span>中央ゲーム枠・実開催件数を表示</span></figcaption><a href="body/final-1536-list.jpg"><img src="body/final-1536-list.jpg" alt="1536px本体レイド一覧" width="1536" height="936"></a></figure>
+<figure><figcaption><strong>02 詳細先頭</strong><span>人物比率を調整・先頭は4操作まで</span></figcaption><a href="body/final-1536-detail.jpg"><img src="body/final-1536-detail.jpg" alt="1536px本体レイド詳細先頭" width="1536" height="936"></a></figure>
+<figure><figcaption><strong>03 同一詳細の下部</strong><span>正規戦闘後の貢献・資格の更新を表示</span></figcaption><a href="body/final-1536-lower.jpg"><img src="body/final-1536-lower.jpg" alt="1536px本体レイド詳細下部" width="1536" height="936"></a></figure>
+</div>
+<h2>下部の位置確認</h2><table><thead><tr><th>幅</th><th>Header下端</th><th>小型詳細上端</th><th>CTA下端</th><th>Footer上端</th></tr></thead><tbody><tr><td>390px</td><td>86px</td><td>86px</td><td>764px</td><td>772.203px</td></tr><tr><td>1536px</td><td>106px</td><td>106px</td><td>856px</td><td>864.203px</td></tr></tbody></table>
+<div class="note"><strong>指定2幅・各3状態の構図と視認性を確認。</strong> Header直下から詳細が始まり、CTAはFooter上に収まります。重大な重なり・隠れ・画像不足は見られません。新素材17点はユーザー採用済みです。</div>
+<p class="muted">正式人物・名称・数値・開催件数・参加状態は実データのため、モックの仮値へ合わせていません。撮影時刻や戦闘後の同期により値は変化します。厳密な画素一致は主張せず、desktopのHeader／Footerの相対寸法や細かな余白の差を保持します。画像は加工せずHTML表示だけを画面幅に合わせています。全状態・全人物の検証や機能の通し操作は別記録です。</p>
+</main></body></html>
