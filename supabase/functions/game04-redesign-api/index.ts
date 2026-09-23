@@ -1,3 +1,1115 @@
+// src/domain/redesign/data/formal-character-stats.json
+var formal_character_stats_default = {
+  version: "GAME04_CHARACTER_NUMERIC_20260921",
+  source: "docs/product/master_sources_20260921/numeric.md",
+  sourceSha256: "749fbb58f0719ab495e6f7e8966c9da03d5db1781a483d3ba12cb9caaa7d8b39",
+  levels: [
+    1,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100
+  ],
+  anchors: {
+    N: {
+      atk: [
+        100,
+        200,
+        380,
+        600,
+        850,
+        1150,
+        1500,
+        1880,
+        2290,
+        2730,
+        3200
+      ],
+      hp: [
+        600,
+        1e3,
+        1600,
+        2400,
+        3400,
+        4600,
+        6e3,
+        7600,
+        9400,
+        11400,
+        13600
+      ],
+      def: [
+        30,
+        60,
+        110,
+        180,
+        270,
+        380,
+        510,
+        660,
+        830,
+        1020,
+        1230
+      ]
+    },
+    R: {
+      atk: [
+        150,
+        300,
+        550,
+        880,
+        1300,
+        1800,
+        2400,
+        3080,
+        3850,
+        4720,
+        5700
+      ],
+      hp: [
+        750,
+        1300,
+        2100,
+        3200,
+        4600,
+        6300,
+        8300,
+        10600,
+        13200,
+        16100,
+        19300
+      ],
+      def: [
+        40,
+        80,
+        150,
+        250,
+        380,
+        550,
+        750,
+        980,
+        1240,
+        1530,
+        1850
+      ]
+    },
+    SR: {
+      atk: [
+        300,
+        520,
+        900,
+        1450,
+        2200,
+        3150,
+        4300,
+        5650,
+        7200,
+        8950,
+        10900
+      ],
+      hp: [
+        1050,
+        1900,
+        3100,
+        4800,
+        7e3,
+        9700,
+        12900,
+        16600,
+        20800,
+        25500,
+        30700
+      ],
+      def: [
+        60,
+        120,
+        230,
+        390,
+        600,
+        880,
+        1220,
+        1620,
+        2080,
+        2600,
+        3180
+      ]
+    },
+    SSR: {
+      atk: [
+        500,
+        800,
+        1350,
+        2100,
+        3050,
+        4250,
+        5850,
+        7800,
+        10150,
+        12900,
+        16e3
+      ],
+      hp: [
+        1500,
+        2700,
+        4500,
+        7e3,
+        10200,
+        14200,
+        19e3,
+        24700,
+        31300,
+        38800,
+        47200
+      ],
+      def: [
+        90,
+        180,
+        350,
+        600,
+        950,
+        1400,
+        1950,
+        2600,
+        3350,
+        4200,
+        5150
+      ]
+    }
+  },
+  roles: {
+    \u653B\u6483: {
+      hp: 1,
+      atk: 1,
+      def: 1
+    },
+    \u5B88\u5099: {
+      hp: 1.4,
+      atk: 0.65,
+      def: 1.3
+    },
+    \u653B\u5B88: {
+      hp: 1.2,
+      atk: 0.85,
+      def: 1.15
+    },
+    "\u56DE\u5FA9\u30FB\u4FDD\u8B77": {
+      hp: 1.1,
+      atk: 0.9,
+      def: 1.05
+    },
+    \u652F\u63F4: {
+      hp: 1.2,
+      atk: 0.75,
+      def: 1.15
+    }
+  },
+  profiles: {
+    \u653B\u6483\u5BC4\u308A: {
+      hp: 0.97,
+      atk: 1.05,
+      def: 0.98,
+      luk: 0
+    },
+    HP\u5BC4\u308A: {
+      hp: 1.05,
+      atk: 0.97,
+      def: 0.98,
+      luk: 0
+    },
+    DEF\u5BC4\u308A: {
+      hp: 0.98,
+      atk: 0.97,
+      def: 1.05,
+      luk: 0
+    },
+    \u653B\u5B88\u5BC4\u308A: {
+      hp: 0.96,
+      atk: 1.02,
+      def: 1.02,
+      luk: 0
+    },
+    \u8010\u4E45\u5BC4\u308A: {
+      hp: 1.03,
+      atk: 0.95,
+      def: 1.02,
+      luk: 0
+    },
+    LUK\u5BC4\u308A: {
+      hp: 0.98,
+      atk: 0.97,
+      def: 1,
+      luk: 3
+    }
+  },
+  characters: [
+    {
+      id: "char_ageha_01",
+      name: "\u8C4A\u81E3\u79C0\u5409",
+      rarity: "SSR",
+      element: "\u5149",
+      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
+      profile: "HP\u5BC4\u308A",
+      expected100: {
+        hp: 54516,
+        atk: 13968,
+        def: 5299.35,
+        luk: 30
+      }
+    },
+    {
+      id: "char_alice_01",
+      name: "\u304F\u30CE\u4E00",
+      rarity: "N",
+      element: "\u6C34",
+      role: "\u653B\u6483",
+      profile: "LUK\u5BC4\u308A",
+      expected100: {
+        hp: 13328,
+        atk: 3104,
+        def: 1230,
+        luk: 33
+      }
+    },
+    {
+      id: "char_aoi_01",
+      name: "\u304A\u5E02\u306E\u65B9",
+      rarity: "R",
+      element: "\u706B",
+      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
+      profile: "\u653B\u6483\u5BC4\u308A",
+      expected100: {
+        hp: 20593.1,
+        atk: 5386.5,
+        def: 1903.65,
+        luk: 30
+      }
+    },
+    {
+      id: "char_cecile_01",
+      name: "\u4E95\u4F0A\u76F4\u864E",
+      rarity: "SR",
+      element: "\u6C34",
+      role: "\u5B88\u5099",
+      profile: "HP\u5BC4\u308A",
+      expected100: {
+        hp: 45129,
+        atk: 6872.45,
+        def: 4051.32,
+        luk: 30
+      }
+    },
+    {
+      id: "char_chang_01",
+      name: "\u4E0A\u6749\u666F\u52DD",
+      rarity: "R",
+      element: "\u6C34",
+      role: "\u652F\u63F4",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 23854.8,
+        atk: 4061.25,
+        def: 2170.05,
+        luk: 30
+      }
+    },
+    {
+      id: "char_daimon_01",
+      name: "\u4E95\u4F0A\u76F4\u653F",
+      rarity: "R",
+      element: "\u706B",
+      role: "\u653B\u6483",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 18528,
+        atk: 5814,
+        def: 1887,
+        luk: 30
+      }
+    },
+    {
+      id: "char_genji_01",
+      name: "\u4ECA\u5DDD\u7FA9\u5143",
+      rarity: "SR",
+      element: "\u98A8",
+      role: "\u652F\u63F4",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 37945.2,
+        atk: 7766.25,
+        def: 3730.14,
+        luk: 30
+      }
+    },
+    {
+      id: "char_go_01",
+      name: "\u6B66\u7530\u4FE1\u7384",
+      rarity: "SSR",
+      element: "\u706B",
+      role: "\u653B\u5B88",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 58339.2,
+        atk: 12920,
+        def: 6040.95,
+        luk: 30
+      }
+    },
+    {
+      id: "char_gou_01",
+      name: "\u4F1D\u4EE4",
+      rarity: "N",
+      element: "\u571F",
+      role: "\u652F\u63F4",
+      profile: "LUK\u5BC4\u308A",
+      expected100: {
+        hp: 15993.6,
+        atk: 2328,
+        def: 1414.5,
+        luk: 33
+      }
+    },
+    {
+      id: "char_jihoon_01",
+      name: "\u524D\u7530\u5229\u5BB6",
+      rarity: "R",
+      element: "\u571F",
+      role: "\u653B\u5B88",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 22233.6,
+        atk: 4941.9,
+        def: 2170.05,
+        luk: 30
+      }
+    },
+    {
+      id: "char_joe_01",
+      name: "\u5317\u6761\u6C0F\u5EB7",
+      rarity: "R",
+      element: "\u571F",
+      role: "\u5B88\u5099",
+      profile: "DEF\u5BC4\u308A",
+      expected100: {
+        hp: 26479.6,
+        atk: 3593.85,
+        def: 2525.25,
+        luk: 30
+      }
+    },
+    {
+      id: "char_kaede_01",
+      name: "\u771F\u7530\u5E78\u6751",
+      rarity: "SSR",
+      element: "\u706B",
+      role: "\u653B\u6483",
+      profile: "\u653B\u6483\u5BC4\u308A",
+      expected100: {
+        hp: 45784,
+        atk: 16800,
+        def: 5047,
+        luk: 30
+      }
+    },
+    {
+      id: "char_kageyama_01",
+      name: "\u50E7\u5175",
+      rarity: "N",
+      element: "\u706B",
+      role: "\u5B88\u5099",
+      profile: "HP\u5BC4\u308A",
+      expected100: {
+        hp: 19992,
+        atk: 2017.6,
+        def: 1567.02,
+        luk: 30
+      }
+    },
+    {
+      id: "char_kaito_01",
+      name: "\u5927\u53CB\u5B97\u9E9F",
+      rarity: "R",
+      element: "\u5149",
+      role: "\u652F\u63F4",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 23854.8,
+        atk: 4061.25,
+        def: 2170.05,
+        luk: 30
+      }
+    },
+    {
+      id: "char_karen_01",
+      name: "\u5FB3\u5DDD\u5BB6\u5EB7",
+      rarity: "SSR",
+      element: "\u571F",
+      role: "\u652F\u63F4",
+      profile: "DEF\u5BC4\u308A",
+      expected100: {
+        hp: 55507.2,
+        atk: 11640,
+        def: 6218.625,
+        luk: 30
+      }
+    },
+    {
+      id: "char_kengo_01",
+      name: "\u672C\u591A\u5FE0\u52DD",
+      rarity: "SSR",
+      element: "\u571F",
+      role: "\u653B\u5B88",
+      profile: "DEF\u5BC4\u308A",
+      expected100: {
+        hp: 55507.2,
+        atk: 13192,
+        def: 6218.625,
+        luk: 30
+      }
+    },
+    {
+      id: "char_kenji_01",
+      name: "\u5C71\u4F0F",
+      rarity: "N",
+      element: "\u5149",
+      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
+      profile: "HP\u5BC4\u308A",
+      expected100: {
+        hp: 15708,
+        atk: 2793.6,
+        def: 1265.67,
+        luk: 30
+      }
+    },
+    {
+      id: "char_koharu_01",
+      name: "\u4E0A\u6749\u8B19\u4FE1",
+      rarity: "SSR",
+      element: "\u6C34",
+      role: "\u653B\u6483",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 45312,
+        atk: 16320,
+        def: 5253,
+        luk: 30
+      }
+    },
+    {
+      id: "char_leo_01",
+      name: "\u4F0A\u9054\u653F\u5B97",
+      rarity: "SSR",
+      element: "\u98A8",
+      role: "\u653B\u6483",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 45312,
+        atk: 16320,
+        def: 5253,
+        luk: 30
+      }
+    },
+    {
+      id: "char_leon_01",
+      name: "\u52A0\u85E4\u6E05\u6B63",
+      rarity: "SR",
+      element: "\u571F",
+      role: "\u5B88\u5099",
+      profile: "DEF\u5BC4\u308A",
+      expected100: {
+        hp: 42120.4,
+        atk: 6872.45,
+        def: 4340.7,
+        luk: 30
+      }
+    },
+    {
+      id: "char_long_01",
+      name: "\u5973\u4F8D",
+      rarity: "N",
+      element: "\u571F",
+      role: "\u653B\u5B88",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 15667.2,
+        atk: 2774.4,
+        def: 1442.79,
+        luk: 30
+      }
+    },
+    {
+      id: "char_lucas_01",
+      name: "\u5CF6\u6D25\u7FA9\u5F18",
+      rarity: "SR",
+      element: "\u706B",
+      role: "\u653B\u6483",
+      profile: "\u653B\u6483\u5BC4\u308A",
+      expected100: {
+        hp: 29779,
+        atk: 11445,
+        def: 3116.4,
+        luk: 30
+      }
+    },
+    {
+      id: "char_makoto_01",
+      name: "\u5C0F\u65E9\u5DDD\u9686\u666F",
+      rarity: "R",
+      element: "\u6C34",
+      role: "\u653B\u6483",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 18528,
+        atk: 5814,
+        def: 1887,
+        luk: 30
+      }
+    },
+    {
+      id: "char_mark_01",
+      name: "\u5C0F\u677E\u59EB",
+      rarity: "R",
+      element: "\u706B",
+      role: "\u653B\u5B88",
+      profile: "DEF\u5BC4\u308A",
+      expected100: {
+        hp: 22696.8,
+        atk: 4699.65,
+        def: 2233.875,
+        luk: 30
+      }
+    },
+    {
+      id: "char_martina_01",
+      name: "\u6226\u5DEB\u5973",
+      rarity: "N",
+      element: "\u706B",
+      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 15408.8,
+        atk: 2736,
+        def: 1317.33,
+        luk: 30
+      }
+    },
+    {
+      id: "char_masato_01",
+      name: "\u5F13\u5175",
+      rarity: "N",
+      element: "\u6C34",
+      role: "\u653B\u6483",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 13056,
+        atk: 3264,
+        def: 1254.6,
+        luk: 30
+      }
+    },
+    {
+      id: "char_maya_01",
+      name: "\u670D\u90E8\u534A\u8535",
+      rarity: "SR",
+      element: "\u95C7",
+      role: "\u653B\u6483",
+      profile: "LUK\u5BC4\u308A",
+      expected100: {
+        hp: 30086,
+        atk: 10573,
+        def: 3180,
+        luk: 33
+      }
+    },
+    {
+      id: "char_mei_01",
+      name: "\u5C71\u672C\u52D8\u52A9",
+      rarity: "R",
+      element: "\u706B",
+      role: "\u653B\u6483",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 19879,
+        atk: 5415,
+        def: 1887,
+        luk: 30
+      }
+    },
+    {
+      id: "char_minami_01",
+      name: "\u5CF6\u5DE6\u8FD1",
+      rarity: "R",
+      element: "\u571F",
+      role: "\u653B\u5B88",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 23854.8,
+        atk: 4602.75,
+        def: 2170.05,
+        luk: 30
+      }
+    },
+    {
+      id: "char_mio_01",
+      name: "\u524D\u7530\u6176\u6B21",
+      rarity: "SSR",
+      element: "\u98A8",
+      role: "\u653B\u5B88",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 54374.4,
+        atk: 13872,
+        def: 6040.95,
+        luk: 30
+      }
+    },
+    {
+      id: "char_miyabi_01",
+      name: "\u660E\u667A\u5149\u79C0",
+      rarity: "SSR",
+      element: "\u95C7",
+      role: "\u653B\u6483",
+      profile: "LUK\u5BC4\u308A",
+      expected100: {
+        hp: 46256,
+        atk: 15520,
+        def: 5150,
+        luk: 33
+      }
+    },
+    {
+      id: "char_momoko_01",
+      name: "\u5CF6\u6D25\u7FA9\u4E45",
+      rarity: "R",
+      element: "\u706B",
+      role: "\u652F\u63F4",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 23854.8,
+        atk: 4061.25,
+        def: 2170.05,
+        luk: 30
+      }
+    },
+    {
+      id: "char_naoto_01",
+      name: "\u6F01\u5E2B",
+      rarity: "N",
+      element: "\u571F",
+      role: "\u653B\u5B88",
+      profile: "HP\u5BC4\u308A",
+      expected100: {
+        hp: 17136,
+        atk: 2638.4,
+        def: 1386.21,
+        luk: 30
+      }
+    },
+    {
+      id: "char_noa_01",
+      name: "\u67F4\u7530\u52DD\u5BB6",
+      rarity: "SR",
+      element: "\u571F",
+      role: "\u653B\u5B88",
+      profile: "HP\u5BC4\u308A",
+      expected100: {
+        hp: 38682,
+        atk: 8987.05,
+        def: 3583.86,
+        luk: 30
+      }
+    },
+    {
+      id: "char_reiji_01",
+      name: "\u7E54\u7530\u4FE1\u9577",
+      rarity: "SSR",
+      element: "\u706B",
+      role: "\u652F\u63F4",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 54374.4,
+        atk: 12240,
+        def: 6040.95,
+        luk: 30
+      }
+    },
+    {
+      id: "char_reina_01",
+      name: "\u6BDB\u5229\u5143\u5C31",
+      rarity: "SR",
+      element: "\u98A8",
+      role: "\u653B\u6483",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 31621,
+        atk: 10355,
+        def: 3243.6,
+        luk: 30
+      }
+    },
+    {
+      id: "char_ren_01",
+      name: "\u658E\u85E4\u9053\u4E09",
+      rarity: "R",
+      element: "\u95C7",
+      role: "\u653B\u6483",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 18528,
+        atk: 5814,
+        def: 1887,
+        luk: 30
+      }
+    },
+    {
+      id: "char_ren_male_01",
+      name: "\u672C\u9858\u5BFA\u9855\u5982",
+      rarity: "R",
+      element: "\u571F",
+      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 21866.9,
+        atk: 4873.5,
+        def: 1981.35,
+        luk: 30
+      }
+    },
+    {
+      id: "char_riki_01",
+      name: "\u6FC3\u59EB",
+      rarity: "SR",
+      element: "\u95C7",
+      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 34783.1,
+        atk: 9319.5,
+        def: 3405.78,
+        luk: 30
+      }
+    },
+    {
+      id: "char_rin_01",
+      name: "\u6B66\u7530\u52DD\u983C",
+      rarity: "R",
+      element: "\u706B",
+      role: "\u653B\u6483",
+      profile: "\u653B\u6483\u5BC4\u308A",
+      expected100: {
+        hp: 18721,
+        atk: 5985,
+        def: 1813,
+        luk: 30
+      }
+    },
+    {
+      id: "char_rui_01",
+      name: "\u76F4\u6C5F\u517C\u7D9A",
+      rarity: "SR",
+      element: "\u6C34",
+      role: "\u652F\u63F4",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 37945.2,
+        atk: 7766.25,
+        def: 3730.14,
+        luk: 30
+      }
+    },
+    {
+      id: "char_sakura_01",
+      name: "\u771F\u7530\u660C\u5E78",
+      rarity: "SR",
+      element: "\u706B",
+      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 34783.1,
+        atk: 9319.5,
+        def: 3405.78,
+        luk: 30
+      }
+    },
+    {
+      id: "char_sawat_01",
+      name: "\u706B\u85AC\u5E2B",
+      rarity: "N",
+      element: "\u706B",
+      role: "\u653B\u6483",
+      profile: "\u653B\u6483\u5BC4\u308A",
+      expected100: {
+        hp: 13192,
+        atk: 3360,
+        def: 1205.4,
+        luk: 30
+      }
+    },
+    {
+      id: "char_seiya_01",
+      name: "\u77F3\u7530\u4E09\u6210",
+      rarity: "SR",
+      element: "\u5149",
+      role: "\u5B88\u5099",
+      profile: "DEF\u5BC4\u308A",
+      expected100: {
+        hp: 42120.4,
+        atk: 6872.45,
+        def: 4340.7,
+        luk: 30
+      }
+    },
+    {
+      id: "char_serika_01",
+      name: "\u6D45\u4E95\u9577\u653F",
+      rarity: "R",
+      element: "\u98A8",
+      role: "\u5B88\u5099",
+      profile: "HP\u5BC4\u308A",
+      expected100: {
+        hp: 28371,
+        atk: 3593.85,
+        def: 2356.9,
+        luk: 30
+      }
+    },
+    {
+      id: "char_shin_01",
+      name: "\u7247\u5009\u666F\u7DB1",
+      rarity: "R",
+      element: "\u98A8",
+      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 21866.9,
+        atk: 4873.5,
+        def: 1981.35,
+        luk: 30
+      }
+    },
+    {
+      id: "char_shion_01",
+      name: "\u7532\u6590\u59EB",
+      rarity: "R",
+      element: "\u6C34",
+      role: "\u653B\u5B88",
+      profile: "HP\u5BC4\u308A",
+      expected100: {
+        hp: 24318,
+        atk: 4699.65,
+        def: 2084.95,
+        luk: 30
+      }
+    },
+    {
+      id: "char_shun_01",
+      name: "\u753A\u5A18",
+      rarity: "N",
+      element: "\u95C7",
+      role: "\u652F\u63F4",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 16809.6,
+        atk: 2280,
+        def: 1442.79,
+        luk: 30
+      }
+    },
+    {
+      id: "char_sora_01",
+      name: "\u7ACB\u82B1\u8ABE\u5343\u4EE3",
+      rarity: "SR",
+      element: "\u5149",
+      role: "\u653B\u6483",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 29472,
+        atk: 11118,
+        def: 3243.6,
+        luk: 30
+      }
+    },
+    {
+      id: "char_souta_01",
+      name: "\u8336\u5C4B\u306E\u5A18",
+      rarity: "N",
+      element: "\u6C34",
+      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
+      profile: "HP\u5BC4\u308A",
+      expected100: {
+        hp: 15708,
+        atk: 2793.6,
+        def: 1265.67,
+        luk: 30
+      }
+    },
+    {
+      id: "char_taiga_01",
+      name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+      rarity: "SR",
+      element: "\u6C34",
+      role: "\u653B\u5B88",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 35366.4,
+        atk: 9450.3,
+        def: 3730.14,
+        luk: 30
+      }
+    },
+    {
+      id: "char_takeshi_01",
+      name: "\u9670\u967D\u5E2B",
+      rarity: "N",
+      element: "\u98A8",
+      role: "\u652F\u63F4",
+      profile: "LUK\u5BC4\u308A",
+      expected100: {
+        hp: 15993.6,
+        atk: 2328,
+        def: 1414.5,
+        luk: 33
+      }
+    },
+    {
+      id: "char_takuro_01",
+      name: "\u96D1\u8CC0\u5B6B\u5E02",
+      rarity: "SR",
+      element: "\u98A8",
+      role: "\u653B\u6483",
+      profile: "\u653B\u6483\u5BC4\u308A",
+      expected100: {
+        hp: 29779,
+        atk: 11445,
+        def: 3116.4,
+        luk: 30
+      }
+    },
+    {
+      id: "char_tatsuya_01",
+      name: "\u884C\u5546\u4EBA",
+      rarity: "N",
+      element: "\u95C7",
+      role: "\u652F\u63F4",
+      profile: "LUK\u5BC4\u308A",
+      expected100: {
+        hp: 15993.6,
+        atk: 2328,
+        def: 1414.5,
+        luk: 33
+      }
+    },
+    {
+      id: "char_tetsu_01",
+      name: "\u9ED2\u7530\u5B98\u5175\u885B",
+      rarity: "SR",
+      element: "\u95C7",
+      role: "\u653B\u6483",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 31621,
+        atk: 10355,
+        def: 3243.6,
+        luk: 30
+      }
+    },
+    {
+      id: "char_tomoya_01",
+      name: "\u9244\u7832\u5175",
+      rarity: "N",
+      element: "\u6C34",
+      role: "\u653B\u6483",
+      profile: "\u653B\u6483\u5BC4\u308A",
+      expected100: {
+        hp: 13192,
+        atk: 3360,
+        def: 1205.4,
+        luk: 30
+      }
+    },
+    {
+      id: "char_yoshihiko_01",
+      name: "\u935B\u51B6\u5E2B",
+      rarity: "N",
+      element: "\u571F",
+      role: "\u5B88\u5099",
+      profile: "DEF\u5BC4\u308A",
+      expected100: {
+        hp: 18659.2,
+        atk: 2017.6,
+        def: 1678.95,
+        luk: 30
+      }
+    },
+    {
+      id: "char_yuji_01",
+      name: "\u7ACB\u82B1\u5B97\u8302",
+      rarity: "R",
+      element: "\u5149",
+      role: "\u653B\u6483",
+      profile: "\u653B\u6483\u5BC4\u308A",
+      expected100: {
+        hp: 18721,
+        atk: 5985,
+        def: 1813,
+        luk: 30
+      }
+    },
+    {
+      id: "char_yuki_01",
+      name: "\u7AF9\u4E2D\u534A\u5175\u885B",
+      rarity: "R",
+      element: "\u5149",
+      role: "\u5B88\u5099",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 27830.6,
+        atk: 3519.75,
+        def: 2453.1,
+        luk: 30
+      }
+    },
+    {
+      id: "char_yukina_01",
+      name: "\u7D30\u5DDD\u30AC\u30E9\u30B7\u30E3",
+      rarity: "R",
+      element: "\u5149",
+      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
+      profile: "LUK\u5BC4\u308A",
+      expected100: {
+        hp: 20805.4,
+        atk: 4976.1,
+        def: 1942.5,
+        luk: 33
+      }
+    }
+  ]
+};
+
+// src/domain/redesign/formalCharacterStats.ts
+var FORMAL_CHARACTER_STATS_VERSION = formal_character_stats_default.version;
+var elements = { \u706B: "fire", \u6C34: "water", \u571F: "earth", \u98A8: "wind", \u5149: "light", \u95C7: "dark" };
+var FORMAL_CHARACTER_ASSIGNMENTS = formal_character_stats_default.characters.map((row) => ({ ...row, rarity: row.rarity, element: elements[row.element] }));
+function interpolate(level, values) {
+  for (let i = 1; i < formal_character_stats_default.levels.length; i++) if (level <= formal_character_stats_default.levels[i]) return values[i - 1] + (values[i] - values[i - 1]) * (level - formal_character_stats_default.levels[i - 1]) / (formal_character_stats_default.levels[i] - formal_character_stats_default.levels[i - 1]);
+  return values[values.length - 1];
+}
+function getFormalCharacterStats(characterId, level, baseSp) {
+  if (!Number.isInteger(level) || level < 1 || level > 100) throw Error("\u6B66\u5C06Lv\u306F1\u301C100\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
+  const character2 = formal_character_stats_default.characters.find((row) => row.id === characterId);
+  if (!character2) throw Error(`\u6B63\u5F0F\u6B66\u5C06\u80FD\u529B\u304C\u3042\u308A\u307E\u305B\u3093: ${characterId}`);
+  const anchors = formal_character_stats_default.anchors[character2.rarity];
+  const role = formal_character_stats_default.roles[character2.role], profile = formal_character_stats_default.profiles[character2.profile];
+  const body = (key2) => interpolate(level, anchors[key2]) * role[key2] * profile[key2];
+  const luk = (level <= 50 ? 10 + 10 * (level - 1) / 49 : 20 + 10 * (level - 50) / 50) + profile.luk;
+  return { hp: body("hp"), atk: body("atk"), def: body("def"), luk, sp: baseSp };
+}
+
 // src/domain/redesign/growthMaster.ts
 var GROWTH_VERSION = "APPROVED_GROWTH_V1_20260921";
 var EXP_SIZES = ["small", "medium", "large", "xlarge"];
@@ -13639,17 +14751,6 @@ function getBalanceV2Skill(designId, lb, options = {}) {
 }
 var BALANCE_V2_SKILL_CANDIDATES = balance_v2_default.skills.map((s) => getBalanceV2Skill(s.designId, 0));
 var BALANCE_V2_SKILL_ID_MAPPING = balance_v2_default.skills.map((s) => ({ designId: s.designId, candidateId: s.id, legacyId: null, imageStatus: s.imageStatus, status: "QA_ONLY_NOT_GACHA" }));
-var BALANCE_V2_ATTACK_ANCHORS = {
-  N: { hp: [600, 4600, 13600], def: [30, 380, 1230], atk: [100, 200, 380, 600, 850, 1150, 1500, 1880, 2290, 2730, 3200] },
-  R: { hp: [750, 6300, 19300], def: [40, 550, 1850], atk: [150, 300, 550, 880, 1300, 1800, 2400, 3080, 3850, 4720, 5700] },
-  SR: { hp: [1050, 9700, 30700], def: [60, 880, 3180], atk: [300, 520, 900, 1450, 2200, 3150, 4300, 5650, 7200, 8950, 10900] },
-  SSR: { hp: [1500, 14200, 47200], def: [90, 1400, 5150], atk: [500, 800, 1350, 2100, 3050, 4250, 5850, 7800, 10150, 12900, 16e3] }
-};
-function interpolatePreviewAnchor(level, levels, values) {
-  const l = Math.max(levels[0], Math.min(levels[levels.length - 1], level));
-  for (let i = 1; i < levels.length; i++) if (l <= levels[i]) return Math.round(values[i - 1] + (values[i] - values[i - 1]) * (l - levels[i - 1]) / (levels[i] - levels[i - 1]));
-  return values[values.length - 1];
-}
 
 // src/domain/redesign/acquisitions.ts
 var APPROVED_ACQUISITION_MASTER = {
@@ -22083,7 +23184,7 @@ var COMMON_CHARACTER_MASTERS = sengoku_characters_default.map((c, i) => {
   };
 });
 var CHARACTER_MASTERS = COMMON_CHARACTER_MASTERS.map((old) => {
-  const a = BALANCE_V2_CHARACTER_ASSIGNMENTS.find((a2) => a2.id === old.id);
+  const a = FORMAL_CHARACTER_ASSIGNMENTS.find((a2) => a2.id === old.id);
   const master = { ...old, ...a ? { rarity: a.rarity, element: a.element, role: a.role } : {}, passive: void 0 };
   master.passive = getCharacterPassive(master, 0);
   return master;
@@ -22131,14 +23232,7 @@ function getLegacyCharacterStats(master, level, awakening) {
   return Object.fromEntries(Object.entries(master.stats).map(([k, v]) => [k, Math.round(v * (1 + (Math.max(1, level) - 1) * 0.055) * (awakening >= 4 ? 1 + (awakening - 3) * 0.1 : 1))]));
 }
 function getCharacterStats(master, level, awakening) {
-  const stats = getLegacyCharacterStats(master, level, awakening);
-  if (master.role.includes("\u653B\u6483") && !master.role.includes("\u652F\u63F4")) {
-    const anchors = BALANCE_V2_ATTACK_ANCHORS[master.rarity];
-    stats.hp = interpolatePreviewAnchor(level, [1, 50, 100], anchors.hp);
-    stats.def = interpolatePreviewAnchor(level, [1, 50, 100], anchors.def);
-    stats.atk = interpolatePreviewAnchor(level, [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], anchors.atk);
-  }
-  return stats;
+  return getFormalCharacterStats(master.id, level, getLegacyCharacterStats(master, level, awakening).sp);
 }
 function getEquipmentStats(master, level, lb) {
   return Object.fromEntries(Object.entries(master.stats).map(([k, v]) => [k, Math.round(v * (1 + (Math.max(1, level) - 1) * 0.04) * (1 + lb * 0.1))]));

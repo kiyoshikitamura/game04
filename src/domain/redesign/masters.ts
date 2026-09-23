@@ -1,6 +1,7 @@
+import { FORMAL_CHARACTER_ASSIGNMENTS, getFormalCharacterStats } from './formalCharacterStats';
 import { GROWTH_VERSION } from './growthMaster';
 import { grantGrowthReward, isGrowthRewardKind } from './growthReward';
-import { BALANCE_V2_CONFIG, BALANCE_V2_CHARACTER_ASSIGNMENTS, BALANCE_V2_ATTACK_ANCHORS, getCharacterPassive, interpolatePreviewAnchor } from './balanceV2Masters';
+import { BALANCE_V2_CONFIG, getCharacterPassive } from './balanceV2Masters';
 export * from './balanceV2Masters';
 import { applyAcquisitionEvents, PREVIEW_ACQUISITION_MASTER, type AcquisitionMaster } from './acquisitions';
 import roster from '../../theme/sengoku-characters.json';
@@ -29,9 +30,9 @@ export const COMMON_CHARACTER_MASTERS: CharacterMaster[] = roster.map((c,i) => {
  stats:{hp:Math.round((950+(i%5===1?300:0))*factor),sp:60+(i%5)*5,atk:Math.round((110+(i%5===0?30:0))*factor),def:Math.round((45+(i%5===1?20:0))*factor),luk:20+i%15},
  passive:{id:`passive_${c.characterId}`,name:['武勇の心得','守勢の心得','慈愛の心得','陣形の心得','機略の心得'][i%5],stat:(['atk','def','hp','sp','luk'] as (keyof Stats)[])[i%5],percent:2,target:'party'}};
 });
-/** Fixed Appendix B assignments; N element/role and non-attack body stats remain explicitly provisional. */
+/** Approved 60-character rarity, element and ability type; legacy masters remain separate. */
 export const CHARACTER_MASTERS:CharacterMaster[]=COMMON_CHARACTER_MASTERS.map(old=>{
- const a=BALANCE_V2_CHARACTER_ASSIGNMENTS.find(a=>a.id===old.id);
+ const a=FORMAL_CHARACTER_ASSIGNMENTS.find(a=>a.id===old.id);
  const master:CharacterMaster={...old,...(a?{rarity:a.rarity as Rarity,element:a.element as Element,role:a.role}:{}),passive:undefined};
  master.passive=getCharacterPassive(master,0);return master;
 });
@@ -71,14 +72,7 @@ export const EQUIPMENT_MASTERS: EquipmentMaster[] = oldEquipment.equipments.filt
 export function getSkillSlots(awakening:number) {return awakening>=3?3:awakening>=1?2:1;}
 export function getLegacyCharacterStats(master:CharacterMaster,level:number,awakening:number):Stats {return Object.fromEntries(Object.entries(master.stats).map(([k,v])=>[k,Math.round(v*(1+(Math.max(1,level)-1)*0.055)*(awakening>=4?1+(awakening-3)*0.1:1))])) as Stats;}
 export function getCharacterStats(master:CharacterMaster,level:number,awakening:number):Stats {
- const stats=getLegacyCharacterStats(master,level,awakening);
- if(master.role.includes('攻撃')&&!master.role.includes('支援')){
-  const anchors=BALANCE_V2_ATTACK_ANCHORS[master.rarity];
-  stats.hp=interpolatePreviewAnchor(level,[1,50,100],anchors.hp);
-  stats.def=interpolatePreviewAnchor(level,[1,50,100],anchors.def);
-  stats.atk=interpolatePreviewAnchor(level,[1,10,20,30,40,50,60,70,80,90,100],anchors.atk);
- }
- return stats;
+ return getFormalCharacterStats(master.id,level,getLegacyCharacterStats(master,level,awakening).sp);
 }
 export function getEquipmentStats(master:EquipmentMaster,level:number,lb:number):Stats {return Object.fromEntries(Object.entries(master.stats).map(([k,v])=>[k,Math.round(v*(1+(Math.max(1,level)-1)*0.04)*(1+lb*0.1))])) as Stats;}
 export function buildBattleParty(state:RedesignState,rules:BattleRules=BATTLE_RULES):BattleUnit[] {return state.deck.map(member=> {
