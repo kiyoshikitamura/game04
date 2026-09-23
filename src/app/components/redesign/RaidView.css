@@ -1,1 +1,33 @@
-.rd-raid{padding:14px;gap:12px}.rd-raid h1,.rd-raid h2{margin:6px 0}.rd-raid p{margin:7px 0}.rd-raid meter{display:block;width:100%;height:14px;accent-color:#d0634c}.rd-raid-card{display:grid;grid-template-columns:88px 1fr;gap:12px;text-align:left;width:100%;color:inherit;cursor:pointer}.rd-raid-card>img{width:88px;height:150px;object-fit:cover;object-position:top;border-radius:5px}.rd-raid-labels{display:flex;flex-wrap:wrap;gap:5px}.rd-raid-labels span{font-size:11px;padding:2px 6px;border:1px solid #9b7549;border-radius:3px;color:#edcf99}.rd-raid-unlock{display:grid;grid-template-columns:34% 1fr;gap:12px;background:linear-gradient(120deg,#311e36,#251316)}.rd-raid-unlock>img{width:100%;height:195px;object-fit:cover;object-position:top}.rd-raid-detail{text-align:center}.rd-raid-detail .rd-raid-labels{justify-content:center}.rd-raid-boss{height:245px;max-width:100%;object-fit:contain}.rd-raid-tools{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.rd-raid-tools button{padding:10px 2px}.rd-raid-error{padding:10px;background:#511a1a;color:#ffe1d5}.rd-raid-participants{list-style:none;padding:0}.rd-raid-participants li{padding:10px 0;border-bottom:1px solid #795735}.rd-raid-participants span{display:block;font-size:13px}.rd-raid .canonical-dialog{max-height:80dvh}.rd-raid .canonical-dialog-body{overflow:auto;scrollbar-width:thin;scrollbar-color:#ad8150 #211915}.rd-raid .canonical-dialog-body::-webkit-scrollbar{width:5px}.rd-raid .canonical-dialog-body::-webkit-scrollbar-thumb{background:#ad8150;border-radius:4px}
+.rd-raid{padding:10px 8px;color:#f5eee1;font-family:var(--font-display,serif)}
+.rd-raid-heading{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.rd-raid-heading h1{font-size:27px;letter-spacing:.12em;color:#efd185;margin:0}
+.rd-raid-heading button,.rd-raid-back{border:1px solid #baac92;border-radius:3px;background:#17151bd9;color:inherit;padding:7px 14px;font:inherit}
+.rd-raid-tabs{display:grid;grid-template-columns:1fr 1.15fr 1.15fr;gap:3px;border-bottom:2px solid #bdb2a0;margin:0 4px 10px}
+.rd-raid-tabs button{min-height:36px;border:1px solid #383239;border-radius:3px 3px 0 0;background:#252127;color:inherit;font:inherit;font-size:13px;white-space:nowrap}
+.rd-raid-tabs button[aria-pressed=true]{border-color:#d4b56c;box-shadow:inset 0 -3px #d4b56c;background:#201c22}
+.rd-raid-cards{display:grid;gap:9px}
+.rd-raid-history{display:flex;align-items:center;gap:12px;margin-top:10px;width:100%;min-height:46px;padding:8px 12px;border:1px solid #b39b6b;border-radius:3px;background:#211b21;color:inherit;font:inherit;font-size:14px;text-align:left}
+.rd-raid-history span{margin-left:auto;font-size:24px}
+.rd-raid-history img{width:32px;height:32px}
+.rd-raid--detail{padding:0;position:relative}
+.rd-raid-back{position:absolute;left:9px;top:8px;z-index:2;min-height:32px;padding:5px 12px}
+.rd-raid-detail-stage{min-height:790px}
+.rd-raid-error{padding:10px;background:#511a1a;color:#ffe1d5}
+.rd-raid-participants{list-style:none;padding:0}
+.rd-raid-participants li{padding:10px 0;border-bottom:1px solid #795735}
+.rd-raid-participants span{display:block;font-size:13px}
+.rd-shell:has(.rd-raid){scrollbar-width:thin;scrollbar-color:#c9a65d #342c21}
+.rd-shell:has(.rd-raid)::-webkit-scrollbar{width:7px}
+.rd-shell:has(.rd-raid)::-webkit-scrollbar-track{background:#342c21}
+.rd-shell:has(.rd-raid)::-webkit-scrollbar-thumb{background:#c9a65d;border:1px solid #342c21;border-radius:4px}
+
+.rd-shell:has(.rd-raid)>.rd-header{position:sticky;top:0;z-index:20}
+
+.rd-shell:has(.rd-raid)>.rd-header{padding:8px 12px 0}
+.rd-shell:has(.rd-raid) .rd-identity{min-height:44px;gap:8px;padding-bottom:6px}
+.rd-shell:has(.rd-raid) .rd-identity>div{display:grid;gap:2px}
+.rd-shell:has(.rd-raid) .rd-identity strong{font-size:14px}
+.rd-shell:has(.rd-raid) .g4-header-face{position:relative;overflow:visible}
+.rd-shell:has(.rd-raid) .g4-header-face img{clip-path:circle(21% at 50% 30%)}
+.rd-raid-header-level{position:absolute;left:0;bottom:-2px;z-index:1;padding:0 4px;background:#d6b568;border-radius:2px;color:#1b1411;font:11px Georgia,serif}
+.rd-shell:has(.rd-raid) .rd-resources{padding:6px 0;font-size:14px}

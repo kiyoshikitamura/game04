@@ -9,6 +9,7 @@ import { simulateBattle } from '../../../src/domain/redesign/battle.ts';
 import { getQuestStage as getLegacyQuestStage } from '../../../src/domain/redesign/legacyQuests.ts';
 import { createQuestBattleInput, questEnergyCost, questVictoryRewards, QUEST_MASTER_VERSION, type FormalQuestStage } from '../../../src/domain/redesign/questMaster.ts';
 import { getQuestStage, isQuestStageUnlocked } from '../../../src/domain/redesign/quests.ts';
+import { characterArt } from '../../../src/theme/creativeAssets.ts';
 import { applyRaidAction, createRaidRoom, getRoomRaidMaster, raidEnemy } from '../../../src/domain/redesign/raid.ts';
 import { projectTerritory } from '../../../src/domain/redesign/territory.ts';
 import type { TerritoryMaster, TerritoryProgress } from '../../../src/domain/redesign/types.ts';
@@ -70,9 +71,23 @@ async function roomFor(id: string): Promise<RaidRoom & {version: number}> {
 }
 async function roomsFor(userId: string): Promise<(RaidRoom & {version: number})[]> {
   const rows = await rpc('game04_raid_rooms_for_user', {p_user_id: userId});
-  return rows.map((row: any) => ({ ...row.state, version: row.version,
-    status: row.state.status === 'active' && Date.parse(row.state.expiresAt) <= Date.now() ? 'expired' : row.state.status,
-  }));
+  // Resolve the actual owner's equipped leader, never the viewer or the boss.
+  const ownerIds = [...new Set<string>(rows.map((row: any) => row.state.ownerId))];
+  const [profiles, players] = ownerIds.length ? await Promise.all([
+    db(`users?id=in.(${ownerIds.join(',')})&select=id,username`),
+    db(`game04_player_state?user_id=in.(${ownerIds.join(',')})&select=user_id,state`),
+  ]) : [[], []];
+  return rows.map((row: any) => {
+    const profile = profiles.find((entry: any) => entry.id === row.state.ownerId);
+    const player = players.find((entry: any) => entry.user_id === row.state.ownerId);
+    const leader = CHARACTER_MASTERS.find(entry => entry.id === player?.state?.deck?.[0]?.characterId);
+    return { ...row.state, version: row.version,
+      participants: row.state.participants.map((participant: any) => participant.userId === row.state.ownerId
+        ? { ...participant, name: profile?.username ?? participant.name, portraitUrl: leader ? characterArt(leader, 'portrait') : undefined }
+        : participant),
+      status: row.state.status === 'active' && Date.parse(row.state.expiresAt) <= Date.now() ? 'expired' : row.state.status,
+    };
+  });
 }
 async function territoryContext(userId: string): Promise<{master: TerritoryMaster; progress: TerritoryProgress; activeHostingCount: number; items: Record<string, number>}> {
   return rpc('game04_territory_context', {p_user_id: userId});

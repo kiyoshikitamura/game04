@@ -51513,6 +51513,557 @@ var quest65_default = {
   }
 };
 
+// src/theme/local-characters.json
+var local_characters_default = [
+  {
+    id: "char_ageha_01",
+    name: "\u8C4A\u81E3\u79C0\u5409",
+    legacyImage: "/characters/ageha_transparent_asset.png",
+    full: "/characters/ageha_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_ageha_01.png",
+    card: "/creative/characters/card/char_ageha_01.png",
+    battle: "/creative/characters/battle/char_ageha_01.png"
+  },
+  {
+    id: "char_alice_01",
+    name: "\u304F\u30CE\u4E00",
+    legacyImage: "/characters/alice_transparent_asset.png",
+    full: "/characters/alice_transparent_asset.png",
+    card: "/creative/characters/card/char_alice_01.png",
+    battle: "/creative/characters/battle/char_alice_01.png",
+    portrait: "/creative/characters/portrait/char_alice_01.png"
+  },
+  {
+    id: "char_aoi_01",
+    name: "\u304A\u5E02\u306E\u65B9",
+    legacyImage: "/characters/aoi_transparent_asset.png",
+    full: "/characters/aoi_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_aoi_01.png",
+    card: "/creative/characters/card/char_aoi_01.png",
+    battle: "/creative/characters/battle/char_aoi_01.png"
+  },
+  {
+    id: "char_cecile_01",
+    name: "\u4E95\u4F0A\u76F4\u864E",
+    legacyImage: "/characters/cecile_transparent_asset.png",
+    full: "/characters/cecile_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_cecile_01.png",
+    card: "/creative/characters/card/char_cecile_01.png",
+    battle: "/creative/characters/battle/char_cecile_01.png"
+  },
+  {
+    id: "char_chang_01",
+    name: "\u4E0A\u6749\u666F\u52DD",
+    legacyImage: "/characters/chang_transparent_asset.png",
+    full: "/characters/chang_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_chang_01.png",
+    card: "/creative/characters/card/char_chang_01.png",
+    battle: "/creative/characters/battle/char_chang_01.png"
+  },
+  {
+    id: "char_daimon_01",
+    name: "\u4E95\u4F0A\u76F4\u653F",
+    legacyImage: "/characters/daimon_transparent_asset.png",
+    full: "/characters/daimon_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_daimon_01.png",
+    card: "/creative/characters/card/char_daimon_01.png",
+    battle: "/creative/characters/battle/char_daimon_01.png"
+  },
+  {
+    id: "char_genji_01",
+    name: "\u4ECA\u5DDD\u7FA9\u5143",
+    legacyImage: "/characters/genji_transparent_asset.png",
+    full: "/characters/genji_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_genji_01.png",
+    card: "/creative/characters/card/char_genji_01.png",
+    battle: "/creative/characters/battle/char_genji_01.png"
+  },
+  {
+    id: "char_go_01",
+    name: "\u6B66\u7530\u4FE1\u7384",
+    legacyImage: "/characters/go_transparent_asset.png",
+    full: "/characters/go_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_go_01.png",
+    card: "/creative/characters/card/char_go_01.png",
+    battle: "/creative/characters/battle/char_go_01.png"
+  },
+  {
+    id: "char_gou_01",
+    name: "\u4F1D\u4EE4",
+    legacyImage: "/characters/gou_transparent_asset.png",
+    full: "/characters/gou_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_gou_01.png",
+    card: "/creative/characters/card/char_gou_01.png",
+    battle: "/creative/characters/battle/char_gou_01.png"
+  },
+  {
+    id: "char_jihoon_01",
+    name: "\u524D\u7530\u5229\u5BB6",
+    legacyImage: "/characters/jihoon_transparent_asset.png",
+    full: "/characters/jihoon_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_jihoon_01.png",
+    card: "/creative/characters/card/char_jihoon_01.png",
+    battle: "/creative/characters/battle/char_jihoon_01.png"
+  },
+  {
+    id: "char_joe_01",
+    name: "\u5317\u6761\u6C0F\u5EB7",
+    legacyImage: "/characters/joe_transparent_asset.png",
+    full: "/characters/joe_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_joe_01.png",
+    card: "/creative/characters/card/char_joe_01.png",
+    battle: "/creative/characters/battle/char_joe_01.png"
+  },
+  {
+    id: "char_kaede_01",
+    name: "\u771F\u7530\u5E78\u6751",
+    legacyImage: "/characters/kaede_transparent_asset.png",
+    full: "/characters/kaede_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_kaede_01.png",
+    card: "/creative/characters/card/char_kaede_01.png",
+    battle: "/creative/characters/battle/char_kaede_01.png"
+  },
+  {
+    id: "char_kageyama_01",
+    name: "\u50E7\u5175",
+    legacyImage: "/characters/kageyama_transparent_asset.png",
+    full: "/characters/kageyama_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_kageyama_01.png",
+    card: "/creative/characters/card/char_kageyama_01.png",
+    battle: "/creative/characters/battle/char_kageyama_01.png"
+  },
+  {
+    id: "char_kaito_01",
+    name: "\u5927\u53CB\u5B97\u9E9F",
+    legacyImage: "/characters/kaito_transparent_asset.png",
+    full: "/characters/kaito_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_kaito_01.png",
+    card: "/creative/characters/card/char_kaito_01.png",
+    battle: "/creative/characters/battle/char_kaito_01.png"
+  },
+  {
+    id: "char_karen_01",
+    name: "\u5FB3\u5DDD\u5BB6\u5EB7",
+    legacyImage: "/characters/karen_transparent_asset.png",
+    full: "/characters/karen_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_karen_01.png",
+    card: "/creative/characters/card/char_karen_01.png",
+    battle: "/creative/characters/battle/char_karen_01.png"
+  },
+  {
+    id: "char_kengo_01",
+    name: "\u672C\u591A\u5FE0\u52DD",
+    legacyImage: "/characters/kengo_transparent_asset.png",
+    full: "/characters/kengo_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_kengo_01.png",
+    card: "/creative/characters/card/char_kengo_01.png",
+    battle: "/creative/characters/battle/char_kengo_01.png"
+  },
+  {
+    id: "char_kenji_01",
+    name: "\u5C71\u4F0F",
+    legacyImage: "/characters/kenji_transparent_asset.png",
+    full: "/characters/kenji_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_kenji_01.png",
+    card: "/creative/characters/card/char_kenji_01.png",
+    battle: "/creative/characters/battle/char_kenji_01.png"
+  },
+  {
+    id: "char_koharu_01",
+    name: "\u4E0A\u6749\u8B19\u4FE1",
+    legacyImage: "/characters/koharu_transparent_asset.png",
+    full: "/characters/koharu_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_koharu_01.png",
+    card: "/creative/characters/card/char_koharu_01.png",
+    battle: "/creative/characters/battle/char_koharu_01.png"
+  },
+  {
+    id: "char_leo_01",
+    name: "\u4F0A\u9054\u653F\u5B97",
+    legacyImage: "/characters/leo_transparent_asset.png",
+    full: "/characters/leo_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_leo_01.png",
+    card: "/creative/characters/card/char_leo_01.png",
+    battle: "/creative/characters/battle/char_leo_01.png"
+  },
+  {
+    id: "char_leon_01",
+    name: "\u52A0\u85E4\u6E05\u6B63",
+    legacyImage: "/characters/leon_transparent_asset.png",
+    full: "/characters/leon_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_leon_01.png",
+    card: "/creative/characters/card/char_leon_01.png",
+    battle: "/creative/characters/battle/char_leon_01.png"
+  },
+  {
+    id: "char_long_01",
+    name: "\u5973\u4F8D",
+    legacyImage: "/characters/long_transparent_asset.png",
+    full: "/characters/long_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_long_01.png",
+    card: "/creative/characters/card/char_long_01.png",
+    battle: "/creative/characters/battle/char_long_01.png"
+  },
+  {
+    id: "char_lucas_01",
+    name: "\u5CF6\u6D25\u7FA9\u5F18",
+    legacyImage: "/characters/lucas_transparent_asset.png",
+    full: "/characters/lucas_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_lucas_01.png",
+    card: "/creative/characters/card/char_lucas_01.png",
+    battle: "/creative/characters/battle/char_lucas_01.png"
+  },
+  {
+    id: "char_makoto_01",
+    name: "\u5C0F\u65E9\u5DDD\u9686\u666F",
+    legacyImage: "/characters/makoto_transparent_asset.png",
+    full: "/characters/makoto_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_makoto_01.png",
+    card: "/creative/characters/card/char_makoto_01.png",
+    battle: "/creative/characters/battle/char_makoto_01.png"
+  },
+  {
+    id: "char_mark_01",
+    name: "\u5C0F\u677E\u59EB",
+    legacyImage: "/characters/mark_transparent_asset.png",
+    full: "/characters/mark_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_mark_01.png",
+    card: "/creative/characters/card/char_mark_01.png",
+    battle: "/creative/characters/battle/char_mark_01.png"
+  },
+  {
+    id: "char_martina_01",
+    name: "\u6226\u5DEB\u5973",
+    legacyImage: "/characters/martina_transparent_asset.png",
+    full: "/characters/martina_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_martina_01.png",
+    card: "/creative/characters/card/char_martina_01.png",
+    battle: "/creative/characters/battle/char_martina_01.png"
+  },
+  {
+    id: "char_masato_01",
+    name: "\u5F13\u5175",
+    legacyImage: "/characters/masato_transparent_asset.png",
+    full: "/characters/masato_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_masato_01.png",
+    card: "/creative/characters/card/char_masato_01.png",
+    battle: "/creative/characters/battle/char_masato_01.png"
+  },
+  {
+    id: "char_maya_01",
+    name: "\u670D\u90E8\u534A\u8535",
+    legacyImage: "/characters/maya_transparent_asset.png",
+    full: "/characters/maya_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_maya_01.png",
+    card: "/creative/characters/card/char_maya_01.png",
+    battle: "/creative/characters/battle/char_maya_01.png"
+  },
+  {
+    id: "char_mei_01",
+    name: "\u5C71\u672C\u52D8\u52A9",
+    legacyImage: "/characters/mei_transparent_asset.png",
+    full: "/characters/mei_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_mei_01.png",
+    card: "/creative/characters/card/char_mei_01.png",
+    battle: "/creative/characters/battle/char_mei_01.png"
+  },
+  {
+    id: "char_minami_01",
+    name: "\u5CF6\u5DE6\u8FD1",
+    legacyImage: "/characters/minami_transparent_asset.png",
+    full: "/characters/minami_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_minami_01.png",
+    card: "/creative/characters/card/char_minami_01.png",
+    battle: "/creative/characters/battle/char_minami_01.png"
+  },
+  {
+    id: "char_mio_01",
+    name: "\u524D\u7530\u6176\u6B21",
+    legacyImage: "/characters/mio_transparent_asset.png",
+    full: "/characters/mio_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_mio_01.png",
+    card: "/creative/characters/card/char_mio_01.png",
+    battle: "/creative/characters/battle/char_mio_01.png"
+  },
+  {
+    id: "char_miyabi_01",
+    name: "\u660E\u667A\u5149\u79C0",
+    legacyImage: "/characters/miyabi_transparent_asset.png",
+    full: "/characters/miyabi_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_miyabi_01.png",
+    card: "/creative/characters/card/char_miyabi_01.png"
+  },
+  {
+    id: "char_momoko_01",
+    name: "\u5CF6\u6D25\u7FA9\u4E45",
+    legacyImage: "/characters/momoko_transparent_asset.png",
+    full: "/characters/momoko_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_momoko_01.png",
+    battle: "/creative/characters/battle/char_momoko_01.png",
+    card: "/creative/characters/card/char_momoko_01.png"
+  },
+  {
+    id: "char_naoto_01",
+    name: "\u6F01\u5E2B",
+    legacyImage: "/characters/naoto_transparent_asset.png",
+    full: "/characters/naoto_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_naoto_01.png",
+    card: "/creative/characters/card/char_naoto_01.png",
+    battle: "/creative/characters/battle/char_naoto_01.png"
+  },
+  {
+    id: "char_noa_01",
+    name: "\u67F4\u7530\u52DD\u5BB6",
+    legacyImage: "/characters/noa_transparent_asset.png",
+    full: "/characters/noa_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_noa_01.png",
+    card: "/creative/characters/card/char_noa_01.png",
+    battle: "/creative/characters/battle/char_noa_01.png"
+  },
+  {
+    id: "char_reiji_01",
+    name: "\u7E54\u7530\u4FE1\u9577",
+    legacyImage: "/characters/reiji_transparent_asset.png",
+    full: "/characters/reiji_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_reiji_01.png",
+    card: "/creative/characters/card/char_reiji_01.png",
+    battle: "/creative/characters/battle/char_reiji_01.png"
+  },
+  {
+    id: "char_reina_01",
+    name: "\u6BDB\u5229\u5143\u5C31",
+    legacyImage: "/characters/reina_transparent_asset.png",
+    full: "/characters/reina_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_reina_01.png",
+    card: "/creative/characters/card/char_reina_01.png",
+    battle: "/creative/characters/battle/char_reina_01.png"
+  },
+  {
+    id: "char_ren_01",
+    name: "\u658E\u85E4\u9053\u4E09",
+    legacyImage: "/characters/ren_transparent_asset.png",
+    full: "/characters/ren_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_ren_01.png",
+    card: "/creative/characters/card/char_ren_01.png",
+    battle: "/creative/characters/battle/char_ren_01.png"
+  },
+  {
+    id: "char_ren_male_01",
+    name: "\u672C\u9858\u5BFA\u9855\u5982",
+    legacyImage: "/characters/ren_male_transparent_asset.png",
+    full: "/characters/ren_male_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_ren_male_01.png",
+    card: "/creative/characters/card/char_ren_male_01.png",
+    battle: "/creative/characters/battle/char_ren_male_01.png"
+  },
+  {
+    id: "char_riki_01",
+    name: "\u6FC3\u59EB",
+    legacyImage: "/characters/riki_transparent_asset.png",
+    full: "/characters/riki_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_riki_01.png",
+    card: "/creative/characters/card/char_riki_01.png",
+    battle: "/creative/characters/battle/char_riki_01.png"
+  },
+  {
+    id: "char_rin_01",
+    name: "\u6B66\u7530\u52DD\u983C",
+    legacyImage: "/characters/rin_transparent_asset.png",
+    full: "/characters/rin_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_rin_01.png",
+    card: "/creative/characters/card/char_rin_01.png",
+    battle: "/creative/characters/battle/char_rin_01.png"
+  },
+  {
+    id: "char_rui_01",
+    name: "\u76F4\u6C5F\u517C\u7D9A",
+    legacyImage: "/characters/rui_transparent_asset.png",
+    full: "/characters/rui_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_rui_01.png",
+    card: "/creative/characters/card/char_rui_01.png",
+    battle: "/creative/characters/battle/char_rui_01.png"
+  },
+  {
+    id: "char_sakura_01",
+    name: "\u771F\u7530\u660C\u5E78",
+    legacyImage: "/characters/sakura_transparent_asset.png",
+    full: "/characters/sakura_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_sakura_01.png",
+    card: "/creative/characters/card/char_sakura_01.png",
+    battle: "/creative/characters/battle/char_sakura_01.png"
+  },
+  {
+    id: "char_sawat_01",
+    name: "\u706B\u85AC\u5E2B",
+    legacyImage: "/characters/sawat_transparent_asset.png",
+    full: "/characters/sawat_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_sawat_01.png",
+    card: "/creative/characters/card/char_sawat_01.png",
+    battle: "/creative/characters/battle/char_sawat_01.png"
+  },
+  {
+    id: "char_seiya_01",
+    name: "\u77F3\u7530\u4E09\u6210",
+    legacyImage: "/characters/seiya_transparent_asset.png",
+    full: "/characters/seiya_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_seiya_01.png",
+    card: "/creative/characters/card/char_seiya_01.png",
+    battle: "/creative/characters/battle/char_seiya_01.png"
+  },
+  {
+    id: "char_serika_01",
+    name: "\u6D45\u4E95\u9577\u653F",
+    legacyImage: "/characters/serika_transparent_asset.png",
+    full: "/characters/serika_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_serika_01.png",
+    card: "/creative/characters/card/char_serika_01.png",
+    battle: "/creative/characters/battle/char_serika_01.png"
+  },
+  {
+    id: "char_shin_01",
+    name: "\u7247\u5009\u666F\u7DB1",
+    legacyImage: "/characters/shin_transparent_asset.png",
+    full: "/characters/shin_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_shin_01.png",
+    card: "/creative/characters/card/char_shin_01.png",
+    battle: "/creative/characters/battle/char_shin_01.png"
+  },
+  {
+    id: "char_shion_01",
+    name: "\u7532\u6590\u59EB",
+    legacyImage: "/characters/shion_transparent_asset.png",
+    full: "/characters/shion_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_shion_01.png",
+    card: "/creative/characters/card/char_shion_01.png",
+    battle: "/creative/characters/battle/char_shion_01.png"
+  },
+  {
+    id: "char_shun_01",
+    name: "\u753A\u5A18",
+    legacyImage: "/characters/shun_transparent_asset.png",
+    full: "/characters/shun_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_shun_01.png",
+    card: "/creative/characters/card/char_shun_01.png",
+    battle: "/creative/characters/battle/char_shun_01.png"
+  },
+  {
+    id: "char_sora_01",
+    name: "\u7ACB\u82B1\u8ABE\u5343\u4EE3",
+    legacyImage: "/characters/sora_transparent_asset.png",
+    full: "/characters/sora_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_sora_01.png",
+    card: "/creative/characters/card/char_sora_01.png",
+    battle: "/creative/characters/battle/char_sora_01.png"
+  },
+  {
+    id: "char_souta_01",
+    name: "\u8336\u5C4B\u306E\u5A18",
+    legacyImage: "/characters/souta_transparent_asset.png",
+    full: "/characters/souta_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_souta_01.png",
+    card: "/creative/characters/card/char_souta_01.png",
+    battle: "/creative/characters/battle/char_souta_01.png"
+  },
+  {
+    id: "char_taiga_01",
+    name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+    legacyImage: "/characters/taiga_transparent_asset.png",
+    full: "/characters/taiga_transparent_asset.png",
+    card: "/creative/characters/card/char_taiga_01.png",
+    battle: "/creative/characters/battle/char_taiga_01.png",
+    portrait: "/creative/characters/portrait/char_taiga_01.png"
+  },
+  {
+    id: "char_takeshi_01",
+    name: "\u9670\u967D\u5E2B",
+    legacyImage: "/characters/takeshi_transparent_asset.png",
+    full: "/characters/takeshi_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_takeshi_01.png",
+    card: "/creative/characters/card/char_takeshi_01.png",
+    battle: "/creative/characters/battle/char_takeshi_01.png"
+  },
+  {
+    id: "char_takuro_01",
+    name: "\u96D1\u8CC0\u5B6B\u5E02",
+    legacyImage: "/characters/takuro_transparent_asset.png",
+    full: "/characters/takuro_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_takuro_01.png",
+    card: "/creative/characters/card/char_takuro_01.png",
+    battle: "/creative/characters/battle/char_takuro_01.png"
+  },
+  {
+    id: "char_tatsuya_01",
+    name: "\u884C\u5546\u4EBA",
+    legacyImage: "/characters/tatsuya_transparent_asset.png",
+    full: "/characters/tatsuya_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_tatsuya_01.png",
+    card: "/creative/characters/card/char_tatsuya_01.png",
+    battle: "/creative/characters/battle/char_tatsuya_01.png"
+  },
+  {
+    id: "char_tetsu_01",
+    name: "\u9ED2\u7530\u5B98\u5175\u885B",
+    legacyImage: "/characters/tetsu_transparent_asset.png",
+    full: "/characters/tetsu_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_tetsu_01.png",
+    card: "/creative/characters/card/char_tetsu_01.png",
+    battle: "/creative/characters/battle/char_tetsu_01.png"
+  },
+  {
+    id: "char_tomoya_01",
+    name: "\u9244\u7832\u5175",
+    legacyImage: "/characters/tomoya_transparent_asset.png",
+    full: "/characters/tomoya_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_tomoya_01.png",
+    card: "/creative/characters/card/char_tomoya_01.png",
+    battle: "/creative/characters/battle/char_tomoya_01.png"
+  },
+  {
+    id: "char_yoshihiko_01",
+    name: "\u935B\u51B6\u5E2B",
+    legacyImage: "/characters/yoshihiko_transparent_asset.png",
+    full: "/characters/yoshihiko_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_yoshihiko_01.png",
+    card: "/creative/characters/card/char_yoshihiko_01.png",
+    battle: "/creative/characters/battle/char_yoshihiko_01.png"
+  },
+  {
+    id: "char_yuji_01",
+    name: "\u7ACB\u82B1\u5B97\u8302",
+    legacyImage: "/characters/yuuji_transparent_asset.png",
+    full: "/characters/yuuji_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_yuji_01.png",
+    card: "/creative/characters/card/char_yuji_01.png",
+    battle: "/creative/characters/battle/char_yuji_01.png"
+  },
+  {
+    id: "char_yuki_01",
+    name: "\u7AF9\u4E2D\u534A\u5175\u885B",
+    legacyImage: "/characters/yuki_transparent_asset.png",
+    full: "/characters/yuki_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_yuki_01.png",
+    card: "/creative/characters/card/char_yuki_01.png",
+    battle: "/creative/characters/battle/char_yuki_01.png"
+  },
+  {
+    id: "char_yukina_01",
+    name: "\u7D30\u5DDD\u30AC\u30E9\u30B7\u30E3",
+    legacyImage: "/characters/yukina_transparent_asset.png",
+    full: "/characters/yukina_transparent_asset.png",
+    portrait: "/creative/characters/portrait/char_yukina_01.png",
+    card: "/creative/characters/card/char_yukina_01.png",
+    battle: "/creative/characters/battle/char_yukina_01.png"
+  }
+];
+
+// src/theme/creativeAssets.ts
+var art = local_characters_default;
+function characterArt(subject, variant) {
+  const match = art.find((c) => c.id === subject.id) ?? art.find((c) => c.name === subject.name) ?? art.find((c) => c.legacyImage === subject.image || Object.values(c).includes(subject.image ?? ""));
+  if (variant === "battle") return match?.battle;
+  return match?.[variant] ?? match?.portrait ?? match?.full ?? subject.image;
+}
+
 // src/domain/redesign/battleLegacy.ts
 var advantage = { fire: "wind", wind: "earth", earth: "water", water: "fire", light: "dark", dark: "light" };
 function elementMultiplier(attack2, defend, rules) {
@@ -52834,7 +53385,7 @@ var FORMAL_QUEST_STAGES = quest65_default.stages.map((source) => {
     const binding = quest65_default.bindings.find((row) => row.stage === stage.designId && row.wave === wi + 1 && row.position === pi + 1 && row.enemyId === enemy2.id);
     const character = sengoku_characters_default.find((row) => row.characterId === binding?.characterId);
     if (!binding || !character || character.name !== enemy2.name) throw new Error(`\u6575\u30DE\u30B9\u30BF\u30FC\u5BFE\u5FDC\u304C\u4E0D\u6B63\u3067\u3059: ${enemy2.id}`);
-    enemy2.image = character.imagePath;
+    enemy2.image = characterArt({ id: character.characterId, name: character.name, image: character.imagePath }, "battle") ?? character.imagePath;
   }));
   return stage;
 });
@@ -52874,6 +53425,60 @@ function questVictoryRewards(stage, state, party, seed) {
   return { rewards, firstClear, count, guaranteed, encounterRoll: random() };
 }
 
+// src/theme/local-backgrounds.json
+var local_backgrounds_default = [
+  {
+    characterId: "char_koharu_01",
+    name: "\u96EA\u306E\u6625\u65E5\u5C71\u57CE",
+    image: "/creative/backgrounds/char_koharu_01.png"
+  },
+  {
+    characterId: "char_leo_01",
+    name: "\u9752\u8449\u57CE\u3068\u4ED9\u53F0\u57CE\u4E0B",
+    image: "/creative/backgrounds/char_leo_01.png"
+  },
+  {
+    characterId: "char_mio_01",
+    name: "\u7C73\u6CA2\u57CE\u4E0B\u30FB\u82B1\u306E\u5BB4",
+    image: "/creative/backgrounds/char_mio_01.png"
+  },
+  {
+    characterId: "char_karen_01",
+    name: "\u99FF\u5E9C\u57CE\u3068\u57CE\u4E0B",
+    image: "/creative/backgrounds/char_karen_01.png"
+  },
+  {
+    characterId: "char_miyabi_01",
+    name: "\u7435\u7436\u6E56\u7554\u306E\u5742\u672C\u57CE",
+    image: "/creative/backgrounds/char_miyabi_01.png"
+  },
+  {
+    characterId: "char_kengo_01",
+    name: "\u5927\u591A\u559C\u57CE\u3092\u671B\u3080\u5C71\u9053",
+    image: "/creative/backgrounds/char_kengo_01.png"
+  },
+  {
+    characterId: "char_go_01",
+    name: "\u8E91\u8E85\u30F6\u5D0E\u9928\u3068\u7532\u5E9C\u76C6\u5730",
+    image: "/creative/backgrounds/char_go_01.png"
+  },
+  {
+    characterId: "char_kaede_01",
+    name: "\u4E0A\u7530\u57CE",
+    image: "/creative/backgrounds/char_kaede_01.png"
+  },
+  {
+    characterId: "char_reiji_01",
+    name: "\u5B89\u571F\u57CE",
+    image: "/creative/backgrounds/char_reiji_01.png"
+  },
+  {
+    characterId: "char_ageha_01",
+    name: "\u9EC4\u91D1\u671F\u306E\u5927\u5742\u57CE",
+    image: "/creative/backgrounds/char_ageha_01.png"
+  }
+];
+
 // src/domain/redesign/quests.ts
 var AREAS = [
   ["mikawa", "\u4E09\u6CB3\u306E\u5730", "\u6700\u521D\u306E\u4E00\u6B69", "\u6575\u306E\u5C5E\u6027\u3068\u884C\u52D5\u30AB\u30A6\u30F3\u30C8\u3092\u898B\u3066\u3001\u6B66\u5C06\u306E\u4E26\u3073\u3092\u6574\u3048\u3088\u3046\u3002"],
@@ -52887,7 +53492,7 @@ var AREAS = [
   ["satsuma", "\u85A9\u6469\u306E\u708E", "\u4E0D\u5C48\u306E\u9663", "\u9023\u6226\u306B\u5099\u3048\u3066HP\u3068SP\u3092\u6B8B\u3057\u3001\u6575\u9663\u3092\u7A81\u7834\u3057\u3088\u3046\u3002"],
   ["sekigahara", "\u95A2\u30F6\u539F", "\u6681\u306E\u7D04\u675F", "\u5909\u308F\u308A\u3086\u304F\u6575\u306E\u9663\u3092\u8AAD\u307F\u3001\u4E94\u4EBA\u306E\u529B\u3092\u7D50\u96C6\u3057\u3088\u3046\u3002"]
 ];
-var QUEST_AREAS = AREAS.map(([id, name2, , description], area) => ({ id, index: area + 1, name: name2, description, image: `/bg/sengoku/${area % 2 ? "castle-town" : "castle-approach"}.jpg`, stages: FORMAL_QUEST_STAGES.filter((stage) => stage.areaId === id) }));
+var QUEST_AREAS = AREAS.map(([id, name2, , description], area) => ({ id, index: area + 1, name: name2, description, image: local_backgrounds_default[area]?.image ?? `/bg/sengoku/${area % 2 ? "castle-town" : "castle-approach"}.jpg`, stages: FORMAL_QUEST_STAGES.filter((stage) => stage.areaId === id) }));
 var QUEST_STAGES = FORMAL_QUEST_STAGES;
 function getQuestStage(id) {
   return QUEST_STAGES.find((stage) => stage.id === id);
@@ -53018,8 +53623,8 @@ var base = COMMON_CHARACTER_MASTERS[12];
 var attack = COMMON_SKILL_MASTERS.find((s) => s.effects.some((e) => e.type === "damage"));
 var boss = { initialSp: 110, hitSpGain: 5, id: "raid_boss", name: "\u708E\u5F71\u306E\u5B88\u5C06", image: base.image, level: 1, element: "fire", stats: { hp: 6500, sp: 110, atk: 160, def: 45, luk: 20 }, skills: [attack], passives: [], actionCount: 4, order: 0, boss: true, phases: [{ hpBelow: 0.4, name: "\u70C8\u706B\u306E\u9663", actionCount: 3 }] };
 var RAID_MASTERS = [
-  { id: "encounter_flame", name: "\u708E\u5F71\u306E\u5B88\u5C06", type: "encounter", enemy: boss, energyCost: 5, durationMinutes: 60, maxParticipants: 10, maxLevel: 1, appearanceLevels: [1], appearanceImages: {}, enemyGrowthPerLevel: 0.15, sharedHpGrowthPerLevel: 0.2, victoryMultiplier: 1.5, sharedHp: 15e4, participationRewards: [{ kind: "character_material", amount: 2 }], defeatRewards: [{ kind: "character_material", amount: 30 }] },
-  { id: "unlock_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", type: "unlock", enemy: { ...boss, id: "raid_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", element: "dark", image: COMMON_CHARACTER_MASTERS[24].image }, energyCost: 5, durationMinutes: 4320, maxParticipants: 20, maxLevel: 20, appearanceLevels: [1, 10, 20], appearanceImages: { 10: COMMON_CHARACTER_MASTERS[30].image, 20: COMMON_CHARACTER_MASTERS[36].image }, enemyGrowthPerLevel: 0.15, sharedHpGrowthPerLevel: 0.2, victoryMultiplier: 1.5, sharedHp: 2e5, participationRewards: [{ kind: "skill_material", amount: 2 }], defeatRewards: [{ kind: "skill_material", amount: 15 }, { kind: "equipment_material", amount: 5 }] }
+  { id: "encounter_flame", name: "\u708E\u5F71\u306E\u5B88\u5C06", type: "encounter", enemy: boss, energyCost: 20, durationMinutes: 60, maxParticipants: 10, maxLevel: 1, appearanceLevels: [1], appearanceImages: {}, enemyGrowthPerLevel: 0.15, sharedHpGrowthPerLevel: 0.2, victoryMultiplier: 1.5, sharedHp: 15e4, participationRewards: [{ kind: "character_material", amount: 2 }], defeatRewards: [{ kind: "character_material", amount: 30 }] },
+  { id: "unlock_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", type: "unlock", enemy: { ...boss, id: "raid_shadow", name: "\u5E38\u95C7\u306E\u8987\u5C06", element: "dark", image: COMMON_CHARACTER_MASTERS[24].image }, energyCost: 20, durationMinutes: 4320, maxParticipants: 20, maxLevel: 20, appearanceLevels: [1, 10, 20], appearanceImages: { 10: COMMON_CHARACTER_MASTERS[30].image, 20: COMMON_CHARACTER_MASTERS[36].image }, enemyGrowthPerLevel: 0.15, sharedHpGrowthPerLevel: 0.2, victoryMultiplier: 1.5, sharedHp: 2e5, participationRewards: [{ kind: "skill_material", amount: 2 }], defeatRewards: [{ kind: "skill_material", amount: 15 }, { kind: "equipment_material", amount: 5 }] }
 ];
 function getRaidMaster(id) {
   const master = RAID_MASTERS.find((m) => m.id === id);
@@ -53247,11 +53852,22 @@ async function roomFor(id) {
 }
 async function roomsFor(userId) {
   const rows = await rpc("game04_raid_rooms_for_user", { p_user_id: userId });
-  return rows.map((row) => ({
-    ...row.state,
-    version: row.version,
-    status: row.state.status === "active" && Date.parse(row.state.expiresAt) <= Date.now() ? "expired" : row.state.status
-  }));
+  const ownerIds = [...new Set(rows.map((row) => row.state.ownerId))];
+  const [profiles, players] = ownerIds.length ? await Promise.all([
+    db(`users?id=in.(${ownerIds.join(",")})&select=id,username`),
+    db(`game04_player_state?user_id=in.(${ownerIds.join(",")})&select=user_id,state`)
+  ]) : [[], []];
+  return rows.map((row) => {
+    const profile = profiles.find((entry) => entry.id === row.state.ownerId);
+    const player = players.find((entry) => entry.user_id === row.state.ownerId);
+    const leader = CHARACTER_MASTERS.find((entry) => entry.id === player?.state?.deck?.[0]?.characterId);
+    return {
+      ...row.state,
+      version: row.version,
+      participants: row.state.participants.map((participant) => participant.userId === row.state.ownerId ? { ...participant, name: profile?.username ?? participant.name, portraitUrl: leader ? characterArt(leader, "portrait") : void 0 } : participant),
+      status: row.state.status === "active" && Date.parse(row.state.expiresAt) <= Date.now() ? "expired" : row.state.status
+    };
+  });
 }
 async function territoryContext(userId) {
   return rpc("game04_territory_context", { p_user_id: userId });
