@@ -15,5 +15,8 @@
   "expiresAt": "2026-09-23T17:59:44.138778+00:00",
   "expiredNotificationObserved": true,
   "databaseStatusAfterExpiry": "active",
-  "note": "本体はstatusとexpiresAtの両方を評価。DBがactiveのままでも期限到達後の通知は消える。"
+  "note": "本体はstatusとexpiresAtの両方を評価。DBがactiveのままでも期限到達後の通知は消える。",
+  "endedStateObserved": true,
+  "endedTest": "専用fixtureをdefeated/HP0、期限を未来へ一時変更し、本体再読込で通知不在を確認。終了テスト後は元期限へ戻した。資産・報酬変更なし。",
+  "finalDatabaseStatus": "defeated"
 }
