@@ -1,34 +1,34 @@
-# レイドUI表示層 書き直し検証記録
+# レイドUI表示層・承認モック再照合記録
 
 - Branch: `codex/game04-raid-approved-implementation-20260923`
-- Implementation SHA: `6018f2a5d00fcb6ab56bb9cb26e65fbb25a9445a`
-- Fixed Preview: https://game04-8fes2ifvp-kiyoshi-kitamura.vercel.app
-- Deployment: `dpl_DZy6PBMFySwqZdg1E7TVkeedUBty` / Ready / Preview
+- Implementation SHA: `7801337ee521e2c8851f71993341a282c3bce906`
+- Fixed Preview: https://game04-o02w9r1kk-kiyoshi-kitamura.vercel.app
+- Deployment: `dpl_J2ijwnp5wiJgGSZiAPWF9ikhZJ21` / Ready / Preview
 
-## 実装範囲
+## 今回の修正
 
-- `RaidApprovedVisual.tsx/.css` を新設し、カード、詳細ヒーロー、開催者、戦況、アクション、貢献欄、進捗意匠、赤CTAを共通表示部品化。
-- 本体一覧 `RaidTopApproved`、本体詳細 `RaidRoomDetail`、比較QA `/qa/raid-approved` が同じ共通表示部品を使用。
-- 旧 `RaidCardOverlay.css`、旧 `RaidRoomDetailApproved.css`、QA専用 `ApprovedRaidPreviewCorrection.css` を削除。旧クラス体系と重複上書きを対象範囲から除去。
-- 正式データ取得、開催者情報、既存の報酬・救援・挑戦コールバックは親コンポーネント側で保持。
+- コンパクト表示の固定帯に、小さい開催者顔・ボス名・開催者名・HPを集約。本文側のボス名／開催者／HPを重複表示しない。
+- 詳細から `確認用Guild`、期限のJST表示、`登録参加者`、参加者画像列を除去。
+- 開催者画像は顔が見えるクロップへ調整。
+- 貢献欄を `自分の貢献`、`未挑戦`、`討伐報酬資格まで あと3勝`、`参加時の共通進行 Lv.1` の構成へ修正。
+- CTAは暗い内側ボタンを残さず、赤いボタン面・剣アイコン・消費行動力を共通部品内で描画。
+- 比較QAの3パネルに本体と同じ共通Header／Footerを含め、一覧・詳細・詳細下部を同一表示範囲で確認。
 
 ## 固定Preview検証
 
-必須データ・画像の読み込み完了後に撮影。ローディング表示中の画像は提出していない。
+読み込み完了後に撮影し、ローディング中の画像は提出していない。
 
-| Route | HTTP | GAME03旧文字列 | 表示確認 |
+| Route | HTTP | GAME03旧文字列 | 検証結果 |
 |---|---:|---:|---|
-| `/qa/raid-approved` | 200 | 0 | 共通カード2件 |
+| `/qa/raid-approved` | 200 | 0 | 共通カード2件・詳細2状態・Footer3件 |
+| `/qa/raid-detail` | 200 | 0 | 共通詳細1件・loader=0 |
 | `/qa/raid-top` | 200 | 0 | 共通カード4件 |
-| `/qa/raid-detail` | 200 | 0 | 共通詳細1件、loader=0 |
 
-- 詳細下部は同一 `.ui-hub-page-scroll` を操作し、`scrollTop=305 / scrollHeight=1149 / clientHeight=844` を確認。
-- 同じ詳細表示部品で、コンパクト表示=1、アクション=4、貢献欄=1、赤CTA=1を確認。
-- `npm run typecheck`: PASS。
-- `NEXT_PUBLIC_USE_MOCK_DB=true` 等で `npm run build`: PASS。
+固定Previewの比較QAでは、`確認用Guild`、`JST`、`登録参加者`を各0件、赤CTAを2件確認。`npm run typecheck`、`npm run build` はPASS。
 
 ## 比較画像
 
+- [共通Header／Footer込み3状態](./raid-approved-full-shell-1536.png)
 - [一覧比較](./raid-approved-mock-list-vs-body.png)
 - [詳細比較](./raid-approved-mock-detail-vs-body.png)
 - [詳細下部比較](./raid-approved-mock-lower-vs-body.png)
@@ -36,13 +36,11 @@
 - [本体詳細上部](./raid-body-detail-390.png)
 - [本体詳細下部](./raid-body-detail-lower-390.png)
 
-## データ接続
+## 接続保持
 
-- GAME04マスター：`src/domain/redesign/raid.ts` の `RAID_MASTERS`。
-- 採用ID：`encounter_flame` / `unlock_shadow`。
-- 表示経路：`RAID_MASTERS → resolveRaidTopEnemy → RaidTopEntry.enemy → 共通表示部品`。
-- 開催者・HP・参加者・期限・報酬・救援・挑戦の取得／操作経路は変更していない。
-- `キングス・クラウン`、`SHINJUKU`、`char_reiji_01` は3ルートの表示本文に0件。
+- GAME04マスター：`src/domain/redesign/raid.ts` の `RAID_MASTERS`、IDは `encounter_flame` / `unlock_shadow`。
+- 表示経路：`RAID_MASTERS → resolveRaidTopEnemy → RaidTopEntry.enemy → RaidApprovedVisual`。
+- 開催者、HP、参加者、期限、報酬、救援、挑戦の取得・操作コールバックは保持。
 
 ## 残件
 
@@ -51,6 +49,6 @@
 - 承認モック専用背景の供給。
 - 未承認SVG9種：`clock.svg`、`people.svg`、`swords.svg`、`scroll.svg`、`handshake.svg`、`chest.svg`、`armor.svg`、`victory.svg`、`medal.svg`。正式採用済みとは扱わない。
 
-配置・透過・旧レイアウト除去・重複表示除去・詳細下部のスクロール構造は素材待ちではなく今回完了扱い。
+配置・透過・不要情報削除・重複表示除去・顔クロップ・貢献欄・赤CTA・Header／Footer込みの比較は今回修正済み。素材とデータ移行の残件を表示未実装の理由にはしていない。
 
 Production公開・mainマージは実施していない。
