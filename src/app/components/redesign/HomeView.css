@@ -112,3 +112,5 @@ body.game04-theme .rd-modal.g4-home-selector .rd-modal-footer .rd-primary{backgr
 body.game04-theme .g4-home-rescue-body{display:inline;background:none;border:0;padding:0;color:#f3e7d1;font:inherit;font-size:12px;font-weight:400;min-height:0;min-width:0;line-height:1.5;text-align:left;white-space:normal;overflow-wrap:anywhere}
 body.game04-theme .rd-shell .g4-home-community .g4-home-rescue-body{min-height:30px;min-width:0;font-size:11px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 body.game04-theme .g4-home-rescue-body>span{color:#e4bd6f}
+/* Preserve the existing sakura overlay's 3:2 ratio inside the taller dialog. */
+body.game04-theme .rd-modal.g4-home-selector{background-size:100% auto;background-repeat:no-repeat;background-position:center top}
