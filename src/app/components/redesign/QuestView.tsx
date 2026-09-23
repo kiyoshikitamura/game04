@@ -19,7 +19,7 @@ export interface QuestSettlement { playerGrowth?: import('@/utils/redesignApi').
 const REWARD_LABELS: Record<Reward['kind'], string> = {ticket:'スペシャル券', character_exp_item: '武将EXP', equipment_exp_item: '装備EXP', generic_soul: '汎用魂', soul_selector: '魂選択', character: '武将', skill: 'スキル', cash: '銭', character_material: '武将育成素材', skill_material: 'スキルLB素材', equipment_material: '装備育成素材', equipment_lb: '装備LB素材', soul: '武将の魂', equipment: '装備', unlock_item: '領土侵攻札' };
 function rewardLabel(reward: Reward) {
   const growthLabel = growthRewardLabel(reward); if(growthLabel) return growthLabel;
-  if (reward.kind === 'ticket') return ({SPECIAL_TICKET_CHARACTER:'キャラガチャ券',SPECIAL_TICKET_SKILL:'スキルガチャ券',SPECIAL_TICKET_EQUIPMENT:'装備ガチャ券'} as Record<string,string>)[reward.id??''] ?? 'スペシャル券';
+  if (reward.kind === 'ticket') return ({SPECIAL_TICKET_CHARACTER:'武将召喚券',SPECIAL_TICKET_SKILL:'スキル召喚券',SPECIAL_TICKET_EQUIPMENT:'装備召喚券'} as Record<string,string>)[reward.id??''] ?? 'スペシャル券';
   if (reward.kind === 'character') return CHARACTER_MASTERS.find(c => c.id === reward.id)?.name ?? '武将';
   if (reward.kind === 'skill') return SKILL_MASTERS.find(skill => skill.id === reward.id)?.name ?? 'スキル';
   if (reward.kind === 'soul') return `${CHARACTER_MASTERS.find(c => c.id === reward.id)?.name ?? ''}の魂`;
@@ -119,7 +119,7 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
         })}</div></> : <><h2>出陣</h2><div className="rq-scroll rq-area-list" aria-label="エリア一覧">{visibleAreas.map(entry => {
           const cleared = entry.stages.every(stage => state.clearedStages.includes(stage.id));
           const unlocked = isQuestStageUnlocked(entry.stages[0].id, state.clearedStages);
-          return <button key={entry.id} disabled={!unlocked || !viewAssets.ready} className={`rq-area ${entry.id === current.areaId ? 'is-current' : ''}`} style={{ backgroundImage: `linear-gradient(0deg,#0c080690,transparent 72%),url("${entry.image}")` }} onClick={() => setAreaId(entry.id)}><strong>{entry.name}</strong><span className="rq-area-description">{entry.description}</span><span className={`rq-area-status ${cleared ? 'is-cleared' : unlocked ? 'is-current' : 'is-locked'}`}><img src="/ui/sengoku/07-flower-crest.png" alt="" />{cleared ? '攻略済' : unlocked ? '攻略中' : '未解放'}</span></button>;
+          return <button key={entry.id} disabled={!unlocked || !viewAssets.ready} className={`rq-area ${entry.id === current.areaId ? 'is-current' : ''}`} style={{ backgroundImage: `linear-gradient(0deg,#0c080690,transparent 72%),url("${entry.image}")` }} onClick={() => setAreaId(entry.id)}><strong>{entry.name}</strong><span className="rq-area-description">{entry.description}</span><span className={`rq-area-status ${cleared ? 'is-cleared' : unlocked ? 'is-current' : 'is-locked'}`}>{unlocked && <img src="/ui/sengoku/07-flower-crest.png" alt="" />}<span className="rq-area-status-text">{cleared ? '攻略済' : unlocked ? '攻略中' : '未解放'}</span></span></button>;
         })}</div></>}
     </>}
     {selected && modal === 'info' && <div className="redesign-quest-dialog"><CanonicalDialog title={`${selectedLabel} ${formalStageName(selected) ?? selected.name}`} onClose={() => setModal(null)} actions={[{ label: '挑戦', semantic: 'primary', onClick: () => setModal('prepare'), disabled: !encounterAssets.ready || !isQuestStageUnlocked(selected.id, state.clearedStages) }]}>
