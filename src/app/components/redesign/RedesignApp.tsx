@@ -66,8 +66,9 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     lock.current = true; requestGeneration.current++; setBusy(true); setError('');
     const requestOwner = owner;
     const isBattle = name === 'quest_battle' || name === 'raid_battle';
-    const persistentRequest = isBattle || name === 'territory_host';
-    const storageKey = `game04:request:${owner}:${name}:${String(payload.stageId || payload.roomId || payload.destinationId || '')}`;
+    const isGrowth = ['save_deck','character_level','character_awaken','character_unlock','soul_exchange','soul_select','skill_level','equipment_level','equipment_lb','equipment_lock','equipment_dismantle'].includes(name);
+    const persistentRequest = isBattle || name === 'territory_host' || isGrowth;
+    const storageKey = `game04:request:${owner}:${name}:${isGrowth ? JSON.stringify(payload) : String(payload.stageId || payload.roomId || payload.destinationId || '')}`;
     let requestId = explicitId || crypto.randomUUID();
     if (persistentRequest && !explicitId) {
       try { requestId = sessionStorage.getItem(storageKey) || requestId; sessionStorage.setItem(storageKey, requestId); } catch { /* API also exposes pending battles for resume. */ }
@@ -75,7 +76,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     try {
       const value = await redesignRequest(name, payload, requestId);
       if (requestOwner !== ownerRef.current) throw new Error('ログイン状態が変更されました。');
-      setData(value);
+      setData(current => current && current.state.userId === value.state.userId && current.state.version > value.state.version ? current : value);
       if (persistentRequest) try { sessionStorage.removeItem(storageKey); } catch { /* no persistent reliance */ }
       return value;
     } catch (reason) {
@@ -126,7 +127,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     </>}>
     {battle ? <BattleView result={battle} vipActive={vipActive} onComplete={() => { setBattle(null); void refresh(); }} /> : <>
       {tab === 'quest' && <QuestView key={questNavigation} onBattlePlayingChange={setQuestPlaying} state={state} party={party} vipActive={vipActive} initialStageId={questStart} onStart={startQuest} onOpenDeck={() => navigate('character')} onOpenRaid={id => { setRaidId(id); setTab('raid'); }} onIgnoreEncounter={async id => { await action('encounter_ignore', { roomId: id }); }} />}
-      {tab === 'character' && <GrowthView state={state} onAction={async (name, payload) => { await action(name, payload); }} />}
+      {tab === 'character' && <GrowthView state={state} onAction={action} />}
       {tab === 'territory' && <TerritoryView territory={data.territory} rooms={data.rooms} userId={state.userId} onOpenRoom={id => { setRaidId(id); setTab('raid'); }} onHost={async destinationId => { const value = await action('territory_host', { destinationId }); if (!value.territoryRoomId) throw new Error('開催結果を確認できませんでした。'); setRaidId(value.territoryRoomId); setTab('raid'); }} />}
       {tab === 'raid' && <RaidView key={raidId || 'list'} state={state} rooms={data.rooms} party={party} initialRoomId={raidId} onAction={raidAction} onOpenDeck={() => navigate('character')} />}
       {tab === 'gacha' && <><NormalGachaView data={data} onAction={action}/><GachaTab specialOnly /></>}

@@ -1,3 +1,4 @@
+import { FORMAL_GROWTH_EQUIPMENT_MASTERS, getFormalEquipmentStats } from './formalGrowthMasters';
 import { FORMAL_CHARACTER_ASSIGNMENTS, getFormalCharacterStats } from './formalCharacterStats';
 import { GROWTH_VERSION } from './growthMaster';
 import { grantGrowthReward, isGrowthRewardKind } from './growthReward';
@@ -65,21 +66,23 @@ export function prepareBattleWaves(waves:EnemyUnit[][],rules:BattleRules):EnemyU
   phases:enemy.phases?.map(phase=>({...phase,skills:phase.skills?.map(commonPreviewSkill)})),
  })));
 }
-export const EQUIPMENT_MASTERS: EquipmentMaster[] = oldEquipment.equipments.filter(e=>!e.exclusive_character_id).map(e=> {
+export const LEGACY_EQUIPMENT_MASTERS: EquipmentMaster[] = oldEquipment.equipments.filter(e=>!e.exclusive_character_id).map(e=> {
  const rarity=e.rarity as Rarity, f=power[rarity], slot: EquipmentSlot = e.category==='WEAPON'?'weapon':e.category==='HEAD'?'head':e.category==='BODY'?'body':e.category==='LEGS'?'legs':'accessory1';
  return {id:e.equipment_id,name:name(e.equipment_id),image:image(e.equipment_id),rarity,slot,stats:{hp:slot==='body'?Math.round(80*f):0,sp:slot==='accessory1'?5:0,atk:slot==='weapon'?Math.round(16*f):0,def:slot==='head'||slot==='legs'?Math.round(8*f):0,luk:slot==='accessory1'?3:0}};
 });
+export const EQUIPMENT_MASTERS = FORMAL_GROWTH_EQUIPMENT_MASTERS;
 export function getSkillSlots(awakening:number) {return awakening>=3?3:awakening>=1?2:1;}
 export function getLegacyCharacterStats(master:CharacterMaster,level:number,awakening:number):Stats {return Object.fromEntries(Object.entries(master.stats).map(([k,v])=>[k,Math.round(v*(1+(Math.max(1,level)-1)*0.055)*(awakening>=4?1+(awakening-3)*0.1:1))])) as Stats;}
 export function getCharacterStats(master:CharacterMaster,level:number,awakening:number):Stats {
  return getFormalCharacterStats(master.id,level,getLegacyCharacterStats(master,level,awakening).sp);
 }
-export function getEquipmentStats(master:EquipmentMaster,level:number,lb:number):Stats {return Object.fromEntries(Object.entries(master.stats).map(([k,v])=>[k,Math.round(v*(1+(Math.max(1,level)-1)*0.04)*(1+lb*0.1))])) as Stats;}
+export function getLegacyEquipmentStats(master:EquipmentMaster,level:number,lb:number):Stats {return Object.fromEntries(Object.entries(master.stats).map(([k,v])=>[k,Math.round(v*(1+(Math.max(1,level)-1)*0.04)*(1+lb*0.1))])) as Stats;}
+export function getEquipmentStats(master:EquipmentMaster,level:number,_lb:number):Stats {return getFormalEquipmentStats(master.id,level);}
 export function buildBattleParty(state:RedesignState,rules:BattleRules=BATTLE_RULES):BattleUnit[] {return state.deck.map(member=> {
  const owned=state.characters.find(c=>c.id===member.characterId), master=(rules.version==='balance-v2-20260920'?CHARACTER_MASTERS:COMMON_CHARACTER_MASTERS).find(c=>c.id===member.characterId);
  if(!owned||!master) throw new Error('編成キャラが見つかりません');
  const stats=(rules.version==='balance-v2-20260920'?getCharacterStats:getLegacyCharacterStats)(master,owned.level,owned.awakening);
- for(const instanceId of Object.values(member.equipment)){const e=state.equipment.find(e=>e.instanceId===instanceId),m=EQUIPMENT_MASTERS.find(m=>m.id===e?.masterId);if(e&&m){const bonus=getEquipmentStats(m,e.level,e.lb);for(const key of Object.keys(stats) as (keyof Stats)[])stats[key]+=bonus[key];}}
+ for(const instanceId of Object.values(member.equipment)){const e=state.equipment.find(e=>e.instanceId===instanceId),m=(rules.version==='balance-v2-20260920'?EQUIPMENT_MASTERS:LEGACY_EQUIPMENT_MASTERS).find(m=>m.id===e?.masterId);if(e&&m){const bonus=(rules.version==='balance-v2-20260920'?getEquipmentStats:getLegacyEquipmentStats)(m,e.level,e.lb);for(const key of Object.keys(stats) as (keyof Stats)[])stats[key]+=bonus[key];}}
  return {id:master.id,name:master.name,image:master.image,level:owned.level,element:master.element,stats,skills:member.skillIds.slice(0,getSkillSlots(owned.awakening)).map(id=>{const s=(rules.version==='common-v2-20260920'||rules.version==='balance-v2-20260920'?SKILL_MASTERS:LEGACY_SKILL_MASTERS).find(s=>s.id===id),o=state.skills.find(s=>s.id===id);if(!s||!o)throw new Error('未所持のスキルです');return {...s,effects:s.effects.map(e=>({...e,power:e.power*(1+o.level*0.05)}))};}),passives:rules.version==='balance-v2-20260920'?(getCharacterPassive(master,owned.awakening)?[getCharacterPassive(master,owned.awakening)!]:[]):master.passive&&(rules.version!=='common-v2-20260920'||master.passive.stat==='atk'||master.passive.stat==='def')?[{...master.passive,level:owned.awakening*2,percent:master.passive.percent*(1+owned.awakening*2)}]:[]};
  });}
 export function createInitialState(userId:string):RedesignState {
