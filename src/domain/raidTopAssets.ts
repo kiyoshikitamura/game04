@@ -22,7 +22,7 @@ export function resolveRaidTopEnemy(variantId: string, memberCharacterIds?: read
   });
   if (roster.some((entry) => entry === null)) return null;
   const members = roster.filter((entry): entry is NonNullable<typeof entry> => entry !== null);
-  return { variantId, baseId: presentation.baseId, areaName: presentation.areaName, bossName: master.name, attribute: attributeFor(master.enemy.element), backgroundUrl: presentation.backgroundUrl, leaderImageUrl: master.enemy.image, roster: members };
+  return { variantId, baseId: presentation.baseId, areaName: presentation.areaName, bossName: master.name, attribute: attributeFor(master.enemy.element), level: master.enemy.level, maxParticipants: master.maxParticipants, maxLevel: master.maxLevel, backgroundUrl: presentation.backgroundUrl, leaderImageUrl: master.enemy.image, roster: members };
 }
 
 /** GAME04正式開催Masterの素材目録。『本日の対象』ではない。 */

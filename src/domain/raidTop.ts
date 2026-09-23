@@ -13,6 +13,9 @@ export interface RaidTopEnemy {
   readonly areaName: string;
   readonly bossName: string;
   readonly attribute: 'EVIL' | 'ORDER' | 'JUSTICE' | 'CHAOS' | 'UNKNOWN';
+  readonly level: number;
+  readonly maxParticipants: number;
+  readonly maxLevel: number;
   readonly backgroundUrl: string;
   readonly leaderImageUrl: string;
   readonly roster: readonly { readonly id: string; readonly name: string; readonly imageUrl: string }[];
