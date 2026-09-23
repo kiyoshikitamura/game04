@@ -2,8 +2,8 @@
 
 - Branch: `codex/game04-raid-approved-implementation-20260923`
 - Implementation SHA: `9fff68a`
-- Fixed Preview: https://game04-mxvdc2dh4-kiyoshi-kitamura.vercel.app
-- Deployment: `dpl_2AebJvUNwYKgjTVGadHzsjbT7RD5` / Ready / Preview
+- Fixed Preview: https://game04-de5oalkcd-kiyoshi-kitamura.vercel.app
+- Deployment: `dpl_3LiRqPkbcGosW53KLd2qwHvXrJMS` / Ready / Preview
 
 ## 機能接続の追加検証（2026-09-23）
 
@@ -32,8 +32,8 @@
 
 | Route | HTTP | GAME03旧文字列 | 検証結果 |
 |---|---:|---:|---|
-| `/qa/raid-approved` | 未確認（Preview直HTTPは404） | 0 | Build routeは生成済み。固定Previewでの目視再撮影は未完了 |
-| `/qa/raid-detail` | 未確認（Preview直HTTPは404） | 0 | Build routeは生成済み。実本体機能の代替にはしない |
+| `/qa/raid-approved` | 200 | 0 | QA用Preview環境変数付き固定PreviewでHTML疎通を確認。目視比較画像はGit保存済み |
+| `/qa/raid-detail` | 200 | 0 | QA用Preview環境変数付き固定PreviewでHTML疎通を確認。実本体機能の代替にはしない |
 | `/qa/raid-top` | 未確認 | 0 | Build routeは生成済み |
 
 - 共通Header／Footer込みの承認モック・本体比較で、コンパクト戦況画像=1、4アクション、赤CTA=2を確認。
