@@ -1,9 +1,17 @@
 # レイドUI承認モック再照合記録
 
 - Branch: `codex/game04-raid-approved-implementation-20260923`
-- Implementation SHA: `ffbc5ced9a3e5793e1fc25ba056d930007730428`
-- Fixed Preview: https://game04-eyhnk6w4i-kiyoshi-kitamura.vercel.app
-- Deployment: `dpl_ECUXUJbUoKK7au6shLmrDqqW8PX3` / Ready / Preview
+- Implementation SHA: `de0d6dc`
+- Fixed Preview: https://game04-14bw4srzu-kiyoshi-kitamura.vercel.app
+- Deployment: `dpl_QzT8da6T49SKz1FzkvEhtXhKWGaE` / Ready / Preview
+
+## 機能接続の追加検証（2026-09-23）
+
+- 一覧・詳細のレベル、定員、属性は `RAID_MASTERS` の正式値を `resolveRaidTopEnemy` から表示へ渡すよう修正。定員 `/20` と `Lv.1` の固定表示を除去。
+- 挑戦数は本体 `RaidParticipantDto.finalizedBattles` を表示。勝利数、直近状態、報酬資格、参加時進行は現行本体RPCの応答に存在しないため、勝敗や挑戦数から推測せず `未取得` と表示するよう訂正。
+- 報酬確認は `RaidRoomConnectedBrowser → createRaidRoomClearRewardClient → get_raid_room_clear_reward_v1`、受取は既存Present導線へ接続している。
+- ただし、終了・未受取レイドを選択する本体一覧RPC `list_raid_room_cards_v1` は `ACTIVE` かつ未終了のみを返す。終了レイドを選ぶための正式な履歴RPCが未提供のため、「対象レイド選択→報酬確認→受取」は本体経路で完了確認できず、機能接続完了とは報告しない。
+- 参加→出撃→勝敗確定→詳細復帰→数値更新→報酬受取の実アカウント通し確認は、旧 `raidVariantId` 移行未完了と終了レイド選択RPC未提供のため未完了。敗北時に勝利数が増えないことも、本体の勝利数フィールド未提供のためUI記録は未実施。
 
 ## 前回記録の訂正
 
@@ -29,7 +37,7 @@
 - 共通Header／Footer込みの承認モック・本体比較で、コンパクト戦況画像=1、4アクション、赤CTA=2を確認。
 - `確認用Guild`、`JST`、`登録参加者`は固定Preview本文で各0件。
 - `npm run typecheck`: PASS。
-- `npm run build`: PASS。
+- `npm run build`: Preview環境 PASS。ローカルはSupabase環境変数未設定のため `/auth/callback` prerenderで停止。
 
 ## 比較画像
 
