@@ -23,6 +23,8 @@ Production公開・mainマージなし。クエストの仮FIXを変更しない
 
 ## 完成と扱えない差分
 
+Headerの高さ、人物のトリミング、詳細下部の余白など、素材以外の見た目差分も残っている。比較画像は検査用の未完了証跡であり、承認モック一致の証明ではない。
+
 1. 正式資料は存在する。`docs/product/GAME04_MASTER_AUTHORITY_LATEST_2026-09-21.md` と `master_sources_20260921/encounter.md` / `invasion.md` / `rewards.md`。従来の「正本がない」は不正確。
 2. 本体 `RAID_MASTERS` は引き続き2件の暫定実装。25ボス85組合せ・侵攻12段階・正式報酬への変換と接続は完了していない。`encounter_flame` / `unlock_shadow` を正式ID採用済みとはしない。
 3. 正式レイド背景の対応は未供給。`RaidMaster.backgroundUrl` が未設定なら背景を差し込まない。キャラ用背景・GAME03背景を便宜的に使わない。そのため承認モックとの背景差分は残る。
@@ -45,3 +47,13 @@ Typecheck / Build / HTTP 200だけで受入完了にしない。残差をユー�
 - 390pxでHeader位置0、scrollTop279、scrollHeight1123、clientHeight844。最終Preview上の再検証はbrowser-results.jsonのURLで識別する。
 
 **総合判定: 未完了。機能検証PASSを、モック一致・正式Master統合完了へ読み替えない。**
+
+## 引き渡し先
+
+実装SHA: `0eb659c6909b238f063e44355055d9f7c035db22`。
+旧作業ブランチは上書きせず、最新受領SHAから専用ブランチへ保存した。
+受入要求・素材承認要求・追加の細部指示要求は行っていない。
+
+最終確認Preview: https://game04-4dilcz1m2-kiyoshi-kitamura.vercel.app/qa/raid-integrated
+Deployment: `dpl_C9PM8CYYEuAueJoMmCrsrqvMdtnn`（GitHub Vercel status success）。
+このPreviewでブラウザー検証を再実行しPASS。`mock-vs-body-390.png` は承認モック各面を等比で390px幅へ揃えた比較。画像差分は上記の通り残存。
