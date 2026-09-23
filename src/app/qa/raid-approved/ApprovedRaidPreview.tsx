@@ -4,6 +4,7 @@ import type { RaidTopEntry, RaidTopEnemy } from '@/domain/raidTop';
 import { createTopFixture } from '@/app/qa/raid-top/topFixture';
 import './ApprovedRaidPreview.css';
 import './ApprovedRaidScrollbar.css';
+import '../../components/raid/RaidCardOverlay.css';
 
 type IconName = 'clock' | 'people' | 'swords' | 'scroll' | 'handshake' | 'chest' | 'armor' | 'victory' | 'medal';
 const icon = (name: IconName, label = '') => <img className="raid-approved__icon" src={`/ui/raid/${name}.svg`} alt={label} />;

@@ -7,6 +7,7 @@ import { getRaidRoomLifecyclePresentation } from '@/domain/raidRoomLifecyclePres
 import type { RaidPlayerSummary } from '@/domain/raidRoom';
 import OutlawButton from '../ui/OutlawButton';
 import './RaidTopApproved.css';
+import './RaidCardOverlay.css';
 
 type Props = Pick<RaidTopData, 'participating' | 'rescues'> & {
   now: number | null;

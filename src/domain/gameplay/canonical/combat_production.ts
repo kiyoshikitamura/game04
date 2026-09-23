@@ -11,6 +11,8 @@ export const CANONICAL_PVP_MATCHMAKING = Object.freeze(matchmakingSource);
 export const CANONICAL_RANKING_REWARDS = Object.freeze(rankingRewardsSource);
 export const CANONICAL_PVP_RANKING_REWARDS = Object.freeze(rankingRewardsSource);
 export const CANONICAL_RAID_PRODUCTION = Object.freeze(raidSource);
+/** GAME04 レイド表示・開催契約の採用マスター。raid_production_20260830.json のIDを保持する。 */
+export const GAME04_RAID_PRODUCTION_MASTER = Object.freeze(raidSource);
 export const CANONICAL_RAID_ATTRIBUTE_MASTER = Object.freeze(
   Object.fromEntries(raidBossSource.bosses.map((boss) => [boss.townId.toLowerCase(), boss.attribute])),
 );

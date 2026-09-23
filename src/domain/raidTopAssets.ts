@@ -1,10 +1,10 @@
-import { CANONICAL_RAID_ATTRIBUTE_MASTER, CANONICAL_RAID_PRODUCTION } from '@/domain/gameplay/canonical/combat_production';
+import { CANONICAL_RAID_ATTRIBUTE_MASTER, GAME04_RAID_PRODUCTION_MASTER } from '@/domain/gameplay/canonical/combat_production';
 import { CHARACTERS_MASTER, getCanonicalBattleAreaName, getCanonicalBattleBackground, getCharacterTransparentImg } from '@/utils/game_constants';
 import type { RaidTopEnemy } from './raidTop';
 
 /** 表示素材だけを実マスターから引く。日次選出/戦闘編成の生成には使用しない。 */
 export function resolveRaidTopEnemy(variantId: string, memberCharacterIds?: readonly string[] | null): RaidTopEnemy | null {
-  const variant = CANONICAL_RAID_PRODUCTION.variants.find((entry) => entry.raidVariantId === variantId);
+  const variant = GAME04_RAID_PRODUCTION_MASTER.variants.find((entry) => entry.raidVariantId === variantId);
   if (!variant || memberCharacterIds === null) return null;
   const baseId = variant.areaId.toLowerCase();
   const areaName = getCanonicalBattleAreaName(baseId);
@@ -21,6 +21,6 @@ export function resolveRaidTopEnemy(variantId: string, memberCharacterIds?: read
 }
 
 /** 全7エリアの素材目録。『本日の対象』ではない。 */
-export const RAID_TOP_ENEMIES: readonly RaidTopEnemy[] = CANONICAL_RAID_PRODUCTION.variants
+export const RAID_TOP_ENEMIES: readonly RaidTopEnemy[] = GAME04_RAID_PRODUCTION_MASTER.variants
   .map((variant) => resolveRaidTopEnemy(variant.raidVariantId))
   .filter((enemy): enemy is RaidTopEnemy => enemy !== null);
