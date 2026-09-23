@@ -1,4 +1,6 @@
 # レイド 素材対応・制作候補
+> Work切替後の最新素材対応は [WORK_ASSET_MAPPING.md](./WORK_ASSET_MAPPING.md) と [WORK_ASSET_MANIFEST.json](./WORK_ASSET_MANIFEST.json) を参照。専用背景1点・UI9点・丸形属性6点・パネル装飾1点を新規未承認候補として制作・保存。以下は旧SVG実装時点の記録であり、正式採用済みを意味しない。
+
 2026-09-23／承認モック実装時点の対応表。
 基準：raid-approved-mock.png。主指示：README.md。
 
