@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { RAID_TOP_ENEMIES } from '@/domain/raidTopAssets';
 import './ApprovedRaidPreview.css';
 
@@ -42,10 +42,10 @@ function ListCard({ enemy, encounter = false }: { enemy: typeof RAID_TOP_ENEMIES
   return <article className="raid-approved__list-card"><div className="raid-approved__list-art"><img src={enemy.backgroundUrl} alt="" /><img src={enemy.leaderImageUrl} alt="" /></div><div className="raid-approved__list-copy"><div className="raid-approved__badges"><span>{encounter ? 'エンカウント' : '領土侵攻'}</span><span>参加中</span></div><h3>{enemy.bossName} <small>Lv.1</small></h3><p className="raid-approved__attribute">{icon('medal')} {encounter ? '火属性・強敵' : '闇属性・高難度'}</p><Owner name={encounter ? 'さくら' : 'あかね'} /><Hp /></div><div className="raid-approved__card-bottom"><Meta /><button type="button">続きへ ›</button></div></article>;
 }
 
-function Listing({ onDetail }: { onDetail: () => void }) {
+function Listing() {
   const [tab, setTab] = useState('すべて');
   const [first, second] = RAID_TOP_ENEMIES;
-  return <section className="raid-approved__screen"><div className="raid-approved__screen-head"><h1>レイド</h1><button type="button">更新</button></div><div className="raid-approved__tabs">{['すべて', 'エンカウント', '領土侵攻'].map(value => <button key={value} className={tab === value ? 'is-active' : ''} onClick={() => setTab(value)} type="button">{value}</button>)}</div><p className="raid-approved__sort">残り時間が短い順</p><div className="raid-approved__list"><ListCard enemy={first} encounter={tab !== '領土侵攻'} /><ListCard enemy={second} /></div><button className="raid-approved__ended" type="button">{icon('chest')}終了したレイド・未受取報酬 <b>›</b></button><button className="raid-approved__detail-link" type="button" onClick={onDetail}>承認モックの詳細を開く</button></section>;
+  return <section className="raid-approved__screen"><div className="raid-approved__screen-head"><h1>レイド</h1><button type="button">更新</button></div><div className="raid-approved__tabs">{['すべて', 'エンカウント', '領土侵攻'].map(value => <button key={value} className={tab === value ? 'is-active' : ''} onClick={() => setTab(value)} type="button">{value}</button>)}</div><p className="raid-approved__sort">残り時間が短い順</p><div className="raid-approved__list"><ListCard enemy={first} encounter={tab !== '領土侵攻'} /><ListCard enemy={second} /></div><button className="raid-approved__ended" type="button">{icon('chest')}終了したレイド・未受取報酬 <b>›</b></button></section>;
 }
 
 function Detail({ lower = false }: { lower?: boolean }) {
@@ -54,7 +54,6 @@ function Detail({ lower = false }: { lower?: boolean }) {
 }
 
 export default function ApprovedRaidPreview() {
-  const [screen, setScreen] = useState<'all' | 'listing' | 'detail'>('all');
-  const screens = useMemo(() => screen === 'all' ? ['listing', 'detail', 'lower'] : [screen], [screen]);
-  return <main className="raid-approved"><div className="raid-approved__board"><div className="raid-approved__panels">{screens.map((kind, index) => <div className="raid-approved__panel" key={kind}><h2 className="raid-approved__panel-title">{index === 0 && kind === 'listing' ? '01　レイド一覧' : kind === 'detail' ? '02　レイド詳細' : '03　詳細・下部'}</h2><ResourceHeader />{kind === 'listing' ? <Listing onDetail={() => setScreen('detail')} /> : <Detail lower={kind === 'lower'} />}<Footer /></div>)}</div><div className="raid-approved__controls"><button type="button" onClick={() => setScreen('all')}>3面比較</button><button type="button" onClick={() => setScreen('listing')}>一覧Preview</button><button type="button" onClick={() => setScreen('detail')}>詳細Preview</button></div><p className="raid-approved__note">ビジュアル比較用・開催者名は仮名／実装は正式開催者データへ接続</p></div></main>;
+  const screens = ['listing', 'detail', 'lower'] as const;
+  return <main className="raid-approved"><div className="raid-approved__board"><div className="raid-approved__panels">{screens.map((kind, index) => <div className="raid-approved__panel" key={kind}><h2 className="raid-approved__panel-title">{index === 0 && kind === 'listing' ? '01　レイド一覧' : kind === 'detail' ? '02　レイド詳細' : '03　詳細・下部'}</h2><ResourceHeader />{kind === 'listing' ? <Listing /> : <Detail lower={kind === 'lower'} />}<Footer /></div>)}</div></div></main>;
 }

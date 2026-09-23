@@ -23,3 +23,9 @@
 
 比較画像：`comparison/raid-approved-preview-1536.png`、`comparison/raid-approved-preview-390.png`。固定Preview：`/qa/raid-approved`（Mock環境のみ）。
 不足はユーザー側の制作へ渡せる具体的な依頼にする。無理な代用・無断生成・装飾省略はしない。
+
+## Visual correction後の制作依頼
+
+- 時計、人数、刀、巻物、握手、宝箱、鎧、勝利、メダリオンの正式共通SVGを、現在の9種と同一用途・表示寸法で供給する。
+- 金色線幅、透過余白、未達／達成状態、押下／無効状態を承認モックに合わせて納品し、`public/ui/raid/*.svg` の仮制作物と差替える。
+- 供給完了までは本実装を完成扱いにせず、今回の9種を正式採用済みと報告しない。

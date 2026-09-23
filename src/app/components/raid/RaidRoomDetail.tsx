@@ -53,7 +53,6 @@ export default function RaidRoomDetail({ room, briefing, display, participants, 
   const owner = room.owner.status === "available" ? room.owner.value : null;
   const role = details?.membership ?? (owner?.userId === currentUserId && currentUserId ? "owner" : brief?.membershipStatus === "joined" ? "joined_unknown" : brief?.membershipStatus === "not_joined" ? "not_joined" : "unknown");
   const isJoined = role === "owner" || role === "member" || role === "rescue" || role === "joined_unknown";
-  const roleLabel = { owner: "挑戦者", member: "通常参加", rescue: "救援参加", not_joined: "未参加", joined_unknown: "参加中・参加経路未確認", unknown: "参加状態未確認" }[role];
   const memberList = participants.status === "success" ? participants.data?.filter(entry => entry.roomId === room.roomId) ?? [] : [];
   const faces = memberList.slice(0, 5);
   const me = currentUserId ? memberList.find(entry => entry.player.userId === currentUserId) : undefined;
@@ -97,7 +96,6 @@ export default function RaidRoomDetail({ room, briefing, display, participants, 
     <section className="raid-detail__owner" aria-label="開催者">
       <Portrait url={resolve(ownerUrl)} name={owner?.name ?? "開催者未確認"} />
       <div className="raid-detail__identity"><strong>開催者　{owner?.name ?? "未確認"}</strong><span>{guild}</span></div>
-      <span className="raid-detail__role">{roleLabel}</span>
     </section>
     {(briefing.status === "error" || display.status === "error") && <p className="raid-detail__notice" role="alert">{briefing.status === "error" ? "敵・参加条件" : "所属・参加状態"}を取得できませんでした。画面を更新してください。</p>}
     <section className="raid-detail__battle" aria-label="戦況">
@@ -108,7 +106,6 @@ export default function RaidRoomDetail({ room, briefing, display, participants, 
       {faces.length > 0 && <div className="raid-detail__faces" aria-label="登録参加者のリーダー">{faceImages.map(person => <Portrait key={person.id} url={resolve(person.url)} name={person.name} />)}</div>}
     </section>
     <nav className="raid-detail__entrances" aria-label="レイドの詳細情報">{ENTRANCES.map(entry => <OutlawButton key={entry.id} loadingLabel="" disabled={busy || (entry.id === "participants" && !isJoined)} aria-label={entry.label === "参加者" ? "参加者一覧" : entry.label} onClick={entry.id === "participants" ? onParticipants : entry.id === "rewards" ? onRewards : onEnemyInfo}><img src={resolve(entry.icon)} alt="" /><span>{entry.label}</span></OutlawButton>)}{rescue && <OutlawButton loadingLabel="" disabled={busy} aria-label="救援" onClick={() => setRescueOpen(true)}><img src={resolve("/ui/raid/handshake.svg")} alt="" /><span>救援</span></OutlawButton>}</nav>
-    {!isJoined && <p className="raid-detail__hint">参加者の詳細は参戦後に確認できます。</p>}
     {isJoined && <OutlawCard className="raid-detail__contribution"><SectionHeader title="あなたの貢献" />{participants.status === "loading" ? <Spinner /> : <><div className="raid-detail__contribution-values"><div><span>貢献ダメージ</span><strong>{me?.appliedDamage.status === "available" ? number(me.appliedDamage.value) : "未確認"}</strong></div><div><span>戦闘回数</span><strong>{me?.finalizedBattles.status === "available" ? `${number(me.finalizedBattles.value)}戦` : "未確認"}</strong></div></div>{participants.status === "error" && <p className="raid-detail__notice" role="alert">貢献情報を取得できませんでした。</p>}</>}</OutlawCard>}
     <QuestRaidBonus roomId={room.roomId} />
     <div className="raid-detail__action">{action}</div>

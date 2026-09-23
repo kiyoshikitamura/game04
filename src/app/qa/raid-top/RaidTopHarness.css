@@ -6,7 +6,7 @@
 .raid-top-qa-footer { position: fixed; bottom: 0; width: 100%; max-width: 430px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: #171920; border-top: 1px solid #555; z-index: 20; box-sizing: border-box; }
 .raid-top-qa { height: 100dvh; overflow-y: auto; box-sizing: border-box; }
 .raid-top-qa { display: flex; flex-direction: column; height: 100dvh; overflow: hidden; padding-bottom: 0; }
-.raid-top-qa-tools { flex-shrink: 0; }
+.raid-top-qa-tools, .raid-top-qa-footer { display: none; }
 .raid-top-qa-product { flex: 1; min-height: 0; overflow: hidden; }
 .raid-top-qa-output { display: none; }
 .raid-top-qa-footer { position: static; flex-shrink: 0; }
