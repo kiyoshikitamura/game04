@@ -12,6 +12,7 @@ import Modal from './Modal';
 import './territory.css';
 
 function ElementBadge({ element }: { element: keyof typeof raidElementLabels }) { return <img className="g4-element-badge" src={`/ui/raid/v2/element-${element}.png`} alt={`${raidElementLabels[element]}属性`} />; }
+const INVASION_TICKET = '/creative/items/territory-invasion-ticket.png';
 const CASTLE_ART = '/bg/raid/raid-castle-moonlight-v1.webp';
 function Art({ src, alt, className = '' }: { src: string; alt: string; className?: string }) {
   const [ready, setReady] = useState(false), [failed, setFailed] = useState(false);
@@ -61,7 +62,7 @@ export default function TerritoryView({ territory, rooms, userId, onHost, onOpen
   const imageKey = useMemo(() => {
     const visibleStages = destination ? stages : [...previews.values()].map(entries => entries[0]);
     const rewards = destination ? [...stages.flatMap(stage => stage.defeatRewards), ...destination.raidMaster.participationRewards] : [...previews.values()].flatMap(entries => entries.at(-1)!.defeatRewards.slice(0, 3));
-    return [...new Set([CASTLE_ART, '/ui/sengoku/08-castle.png', ...visibleStages.flatMap(stage => [territoryEnemyArt(stage.enemy, 'portrait'), ...(destination ? [territoryEnemyArt(stage.enemy, 'card')] : []), `/ui/raid/v2/element-${stage.enemy.element}.png`]), ...rewards.map(rewardIcon).filter((value): value is string => Boolean(value))])].join('|');
+    return [...new Set([CASTLE_ART, INVASION_TICKET, '/ui/sengoku/08-castle.png', ...visibleStages.flatMap(stage => [territoryEnemyArt(stage.enemy, 'portrait'), ...(destination ? [territoryEnemyArt(stage.enemy, 'card')] : []), `/ui/raid/v2/element-${stage.enemy.element}.png`]), ...rewards.map(rewardIcon).filter((value): value is string => Boolean(value))])].join('|');
   }, [destination, stages, previews]);
   const [readyImages, setReadyImages] = useState('');
   const [imageError, setImageError] = useState(false);
@@ -103,7 +104,7 @@ export default function TerritoryView({ territory, rooms, userId, onHost, onOpen
         return <article key={entry.id} className="inv-destination inv-frame">
           <Castle name={entry.castle} /><span className={`inv-status ${entry.canHost ? 'is-available' : ''}`}>{entry.canHost ? '侵攻可能' : territory.level < entry.requiredLevel ? `侵攻Lv.${entry.requiredLevel}で解放` : '条件未達'}</span>
           <div className="inv-card-preview"><div className="inv-card-enemy"><Art key={first.enemy.id} src={territoryEnemyArt(first.enemy, 'portrait')} alt={first.enemy.name} /><div><ElementBadge element={first.enemy.element} /><strong>{first.enemy.name}</strong><small>開始 · 敵Lv.{first.enemy.level}</small></div></div><Rewards compact rewards={last.defeatRewards.slice(0, 3)} /></div>
-          <p className="inv-card-conditions">必要侵攻Lv. <b>{entry.requiredLevel}</b><span>期間 {territoryDuration(entry.durationMinutes)}</span><span>{entry.itemName} {entry.ownedItemCount} / 必要 {entry.itemCount}</span></p>
+          <p className="inv-card-conditions">必要侵攻Lv. <b>{entry.requiredLevel}</b><span>期間 {territoryDuration(entry.durationMinutes)}</span><span><img className="inv-ticket" src={INVASION_TICKET} alt="" />{entry.itemName} {entry.ownedItemCount} / 必要 {entry.itemCount}</span></p>
           <button className="inv-button inv-primary" disabled={!imagesReady} onClick={() => navigate(entry.id)}>詳細を見る <span aria-hidden="true">›</span></button>
         </article>;
       })}</div>
@@ -117,7 +118,7 @@ export default function TerritoryView({ territory, rooms, userId, onHost, onOpen
         <section className="inv-enemy-info" aria-live="polite"><Art key={active.enemy.id} src={territoryEnemyArt(active.enemy, 'portrait')} alt="" /><div><h3>{active.enemy.name} <ElementBadge element={active.enemy.element} /><span>敵Lv.{active.enemy.level}</span></h3><dl className="inv-stats"><div><dt>HP</dt><dd>{active.enemy.stats.hp.toLocaleString()}</dd></div><div><dt>ATK</dt><dd>{active.enemy.stats.atk.toLocaleString()}</dd></div><div><dt>DEF</dt><dd>{active.enemy.stats.def.toLocaleString()}</dd></div></dl></div></section>
         {active.isRepresentative && <p className="inv-note">通常戦の敵は侵攻時に決定します。表示は候補の一例です。</p>}
         <details className="inv-enemy-skills"><summary>敵編成・所持スキルを見る（{active.enemies.length}体）</summary>{active.enemies.map(enemy => <div key={enemy.id}><h4>{enemy.name} · 敵Lv.{enemy.level}</h4><p>HP {enemy.stats.hp.toLocaleString()} / ATK {enemy.stats.atk.toLocaleString()} / DEF {enemy.stats.def.toLocaleString()}</p><ul>{enemy.skills.map((skill, i) => <li key={i}><strong>{skill.name}</strong>：{skill.description}</li>)}</ul></div>)}</details>
-        <dl className="inv-conditions"><div><dt>開催期間</dt><dd>{territoryDuration(destination.durationMinutes)}</dd></div><div><dt>必要侵攻Lv.</dt><dd>{destination.requiredLevel}</dd></div><div><dt>開催枠</dt><dd>{territory!.activeHostingCount} / {territory!.hostingSlots}</dd></div><div><dt>{destination.itemName}</dt><dd>所持 {destination.ownedItemCount} / 必要 {destination.itemCount}<button className="inv-source" onClick={() => setSource(true)}>入手方法 ›</button></dd></div></dl>
+        <dl className="inv-conditions"><div><dt>開催期間</dt><dd>{territoryDuration(destination.durationMinutes)}</dd></div><div><dt>必要侵攻Lv.</dt><dd>{destination.requiredLevel}</dd></div><div><dt>開催枠</dt><dd>{territory!.activeHostingCount} / {territory!.hostingSlots}</dd></div><div><dt>{destination.itemName}</dt><dd><img className="inv-ticket" src={INVASION_TICKET} alt="" />所持 {destination.ownedItemCount} / 必要 {destination.itemCount}<button className="inv-source" onClick={() => setSource(true)}>入手方法 ›</button></dd></div></dl>
         <section className="inv-prizes"><h2 className="inv-section-title">◇ {active.label}段階の討伐報酬</h2><Rewards rewards={active.defeatRewards} /><p className="inv-note">個別バトル3勝で討伐報酬の対象になります。資格獲得前の報酬は受け取れません。</p>{destination.raidMaster.participationRewards.length > 0 && <details className="inv-enemy-skills"><summary>参加報酬</summary><Rewards rewards={destination.raidMaster.participationRewards} /></details>}<p className="inv-exp-reward">侵攻クリア時：主催者EXP <b>{destination.clearExp.toLocaleString()}</b></p><p className="inv-note">主催者のみ、クリア時点で個別バトル3勝が必要です。</p></section>
         {!destination.canHost && <ul className="inv-reasons">{destination.reasons.map(reason => <li key={reason}>{reason}</li>)}</ul>}
         <button className="inv-button inv-primary" disabled={!destination.canHost || busy || !imagesReady} onClick={() => { setError(''); setConfirm(true); }}>侵攻する <span aria-hidden="true">›</span></button>
@@ -128,7 +129,7 @@ export default function TerritoryView({ territory, rooms, userId, onHost, onOpen
       <Castle name={destination.castle} />
       <div className="inv-confirm-enemy"><Art key={initial.enemy.id} src={territoryEnemyArt(initial.enemy, 'portrait')} alt={initial.enemy.name} /><div><h3><ElementBadge element={initial.enemy.element} />{initial.enemy.name}</h3><p><span className="inv-tag">開始</span> ボスLv.{initial.level} · 敵Lv.{initial.enemy.level}</p></div></div>
       {initial.isRepresentative && <p className="inv-note">通常戦の敵は侵攻時に決定します。</p>}
-      <dl className="inv-conditions"><div><dt>開催期間</dt><dd>{territoryDuration(destination.durationMinutes)}</dd></div><div><dt>消費アイテム</dt><dd>{destination.itemName} ×{destination.itemCount}</dd></div><div><dt>所持数</dt><dd>{destination.ownedItemCount} → {Math.max(0, destination.ownedItemCount - destination.itemCount)}</dd></div><div><dt>開催枠</dt><dd>{territory!.activeHostingCount} / {territory!.hostingSlots} → <b>{territory!.activeHostingCount + 1} / {territory!.hostingSlots}</b></dd></div></dl>
+      <dl className="inv-conditions"><div><dt>開催期間</dt><dd>{territoryDuration(destination.durationMinutes)}</dd></div><div><dt>消費アイテム</dt><dd><img className="inv-ticket" src={INVASION_TICKET} alt="" />{destination.itemName} ×{destination.itemCount}</dd></div><div><dt>所持数</dt><dd>{destination.ownedItemCount} → {Math.max(0, destination.ownedItemCount - destination.itemCount)}</dd></div><div><dt>開催枠</dt><dd>{territory!.activeHostingCount} / {territory!.hostingSlots} → <b>{territory!.activeHostingCount + 1} / {territory!.hostingSlots}</b></dd></div></dl>
       {!destination.canHost && <ul className="inv-reasons">{destination.reasons.map(reason => <li key={reason}>{reason}</li>)}</ul>}{error && <p className="inv-reasons" role="alert">{error}</p>}
     </Modal>}
   </section>;

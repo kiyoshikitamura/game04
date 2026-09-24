@@ -5,12 +5,12 @@
 |対象|参照先|扱い|
 |---|---|---|
 |開始・中間・最終の敵|`TerritoryProjection.destinations[].raidMaster.stages` → `raidEnemy` → `characterArt`|正式人物・正式能力値。開始は抽選前の代表編成|
-|敵立ち絵・顔|`src/theme/local-characters.json` の full／portrait|既存60武将画像を再利用。画像内例示の人物を固定しない|
+|敵立ち絵・顔|`src/theme/local-characters.json` の card／portrait|既存60武将画像を再利用。画像内例示の人物を固定しない|
 |侵攻令|`public/creative/items/territory-invasion-ticket.png`|既存正式アイテム素材|
-|城・侵攻背景候補|`public/bg/raid/raid-castle-moonlight-v1.webp`、`public/bg/sengoku/castle-approach.jpg`、`public/bg/sengoku/castle-town.jpg`|既存素材。城ごとの専用史実外観とは扱わない|
+|城・侵攻背景|`public/bg/raid/raid-castle-moonlight-v1.webp`|共闘採用済み共通背景を使用。城ごとの専用史実外観とは扱わない|
 |城アイコン|`public/ui/sengoku/08-castle.png`|既存素材|
 |属性|`public/ui/raid/v2/element-{fire,water,wind,earth,light,dark}.png`|クローズ済み共闘の採用素材を再利用|
-|報酬・期間・戦闘装飾|`public/ui/raid/v2/{chest,clock,swords,scroll}.png`|クローズ済み共闘の採用素材を再利用|
+|報酬|`public/ui/sengoku/13-coin.png`、`public/items/skill_manual.png`、`public/items/equip_lb_part.png`、該当武将portrait|正式報酬種別へ接続。未知の報酬種別は文字のみで示し、無関係な画像を補わない|
 
 ## 正式接続
 
