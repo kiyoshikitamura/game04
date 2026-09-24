@@ -13,4 +13,8 @@ export const READINESS_REASONS: Record<string,string> = { reapply_unavailable: '
 export const CLEANSE_LABELS: Record<string,string> = { buff:'能力強化', protection:'保護効果', debuff:'能力低下', dot:'継続ダメージ', stun:'行動不能' };
 
 export const LEGACY_SKILL_MAPPING_NOTICE = 'このスキルは現在の戦闘では使用できません。';
-export function skillDescription(skill: SkillMaster, latest = true) { return latest && skill.unsupportedReason ? LEGACY_SKILL_MAPPING_NOTICE : skill.description; }
+// Presentation only: keep master/snapshot values and unresolved skill eligibility intact.
+export function displaySkillDescription(description: string) {
+  return description.replace(/（個別倍率・消費SP・回復式は開発仮設定）$/, '');
+}
+export function skillDescription(skill: SkillMaster, latest = true) { return latest && skill.unsupportedReason ? LEGACY_SKILL_MAPPING_NOTICE : displaySkillDescription(skill.description); }
