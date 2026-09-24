@@ -41,7 +41,7 @@
 
 ## 必須未完・依存
 
-1. 停止receiverのクラウド配信/不変URL/health確認。配信担当の結果を追記する。
+1. 停止receiverのクラウド配信/不変URL/health確認。フォルダアップロード呼出しが約399秒無応答で中断。最後の成功観測は配信0だが、中断後の配信開始有無は未確認。成功扱いにせず、読取り確認後に続行する。
 2. Supabase管理画面に既存ログインがなく、新規signup停止、backup実在/成功時刻、Micro実設定/SMTP/providerの確認が未完。管理ログインが必要。接続済みMCPは当該設定操作非対応。
 3. 正式domain、Google/SMTP、Stripe本番商品/通知先、リーガル問い合わせ先はP01〜P04の確定待ち。追加の費用判断は今回発生していない。
 4. G2/P02/P03は現状本番を拒否するコードがある。本番ref許可表とserver側公開制御を担当契約に沿ってM候補へ接続する。
@@ -53,3 +53,7 @@ P06合格、M本番受入、G6公開合格とはしない。費用の再承認�
 
 Branch: work/game04-p06-20260925 / Draft PR #32。G2との衝突を避けinfra/game04-productionとP06専用docsのみ変更。
 G2/P02〜P04にはCONNECTION_CONTRACT.mdで本番refと担当境界を受渡す。M手順はGAME04_M_本番移行・復旧手順.md。最終SHAはPR headを参照。
+
+管理画面への次の操作: Supabaseへログインした状態で本番projectを開き、Allow new users signupを停止して保存確認、Backup成功時刻・Compute Micro・SMTP/Google未接続状態を確認する。追加費用の承認は再度求めない。
+
+RLS policyなしINFOの説明: https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy 。private台帳をclientへ公開しないため意図した設定。
