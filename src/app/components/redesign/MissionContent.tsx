@@ -17,6 +17,8 @@ const STATUS_FILTERS = [
   ['claimable', '受取可'], ['progress', '進行中'], ['claimed', '受取済み'],
 ] as const;
 const PAGE_SIZE = 20;
+// Presentation only: keep accepted master names, IDs and conditions unchanged.
+const missionLabel = (value: string) => value.replace(/キャラクター|キャラ/g, '武将');
 
 /** Formal projections only; legacy daily missions are not substituted for undecided rules. */
 export default function MissionContent({ missions, missionBusy, missionError, previewOnly, onClaim }: Props) {
@@ -34,8 +36,8 @@ export default function MissionContent({ missions, missionBusy, missionError, pr
         disabled={missionBusy} onClick={() => { setFilter(status); setPage(0); }}>{label} ({missions.filter(mission => mission.status === status).length})</button>)}
     </div>
     {visible.length ? <div className="rd-stack" aria-busy={missionBusy}>{visible.map(mission => <section className="rd-panel" key={mission.id}>
-      <strong>{mission.name}</strong>
-      {mission.description && mission.description !== mission.name && <p className="rd-muted">{mission.description}</p>}
+      <strong>{missionLabel(mission.name)}</strong>
+      {mission.description && mission.description !== mission.name && <p className="rd-muted">{missionLabel(mission.description)}</p>}
       <p>{mission.current.toLocaleString()} / {mission.target.toLocaleString()}</p>
       <ul>{mission.rewards.map((reward, index) => <li key={index}>{raidRewardLabel(reward)}</li>)}</ul>
       <button type="button" className="rd-button rd-primary" disabled={missionBusy || previewOnly || mission.status !== 'claimable'} onClick={() => onClaim(mission.id)}>

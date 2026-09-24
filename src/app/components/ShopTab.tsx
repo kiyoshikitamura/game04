@@ -24,7 +24,7 @@ function Bundle({ product }: { product: ShopProduct }) {
   </p>;
 }
 
-export type ShopExchangeProps = { state: RedesignState; onExchange: (payload: Record<string, unknown>) => Promise<unknown> };
+export type ShopExchangeProps = { state: RedesignState; onExchange: (payload: Record<string, unknown>) => Promise<unknown>; onUseEnergyDrink?: () => Promise<unknown> };
 export default function ShopTab({ exchange }: { exchange?: ShopExchangeProps } = {}) {
   const [initialReadiness] = useState(peekBillingReadiness);
   const [availability, setAvailability] = useState<"loading" | "available" | "unavailable">(initialReadiness ? "available" : "loading");
