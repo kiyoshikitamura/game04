@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { preloadAsset } from '@/app/lib/screenAssets';
 import characterArt from '@/theme/local-characters.json';
 import backgrounds from '@/theme/character-backgrounds.json';
 import type { CharacterMaster } from '@/domain/redesign/types';
@@ -9,14 +10,11 @@ const readyImages = new Set<string>();
 function decodeImage(src: string) {
   let task = decoded.get(src);
   if (!task) {
-    task = new Promise<void>((resolve, reject) => {
-      const image = new Image();
-      image.onload = () => {
-        if (!image.naturalWidth) { reject(new Error('画像を読み込めませんでした。')); return; }
-        void image.decode().then(() => { readyImages.add(src); resolve(); }, reject);
-      };
-      image.onerror = () => reject(new Error('画像を読み込めませんでした。'));
-      image.src = src;
+    // Use the shared bounded loader so a stalled request/decode can reach the
+    // existing error + retry UI instead of leaving the character Dialog forever.
+    task = preloadAsset({ src, required: true }).then(result => {
+      if (result.status !== 'loaded') throw new Error('画像を読み込めませんでした。');
+      readyImages.add(src);
     });
     decoded.set(src, task);
     task.catch(() => decoded.delete(src));

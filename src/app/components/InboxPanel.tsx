@@ -34,23 +34,35 @@ export default function InboxPanel() {
   } = useGame();
 
   const [selectedNews, setSelectedNews] = useState<any | null>(null);
+  const [newsLoading, setNewsLoading] = useState(false);
+  const [newsError, setNewsError] = useState(false);
+  const [newsRetry, setNewsRetry] = useState(0);
 
   // Refresh on opening so already logged-in players can read a new release.
   // Publication and time-window filtering are enforced by news RLS.
   useEffect(() => {
     if (!showInboxPanel || inboxPanelTab !== "news") return;
     let cancelled = false;
-    void supabase.from("news").select("*").order("created_at", { ascending: false })
-      .then(({ data, error }) => {
-        if (cancelled || error || !data) return;
+    setNewsLoading(true);
+    setNewsError(false);
+    void (async () => {
+      try {
+        const { data, error } = await supabase.from("news").select("*").order("created_at", { ascending: false });
+        if (cancelled) return;
+        if (error || !data) throw error || new Error("News unavailable");
         setNewsList(data.map((news) => ({
           ...news,
           id: String(news.id),
           date: new Date(news.start_at).toLocaleDateString(),
         })));
-      });
+      } catch {
+        if (!cancelled) setNewsError(true);
+      } finally {
+        if (!cancelled) setNewsLoading(false);
+      }
+    })();
     return () => { cancelled = true; };
-  }, [showInboxPanel, inboxPanelTab, setNewsList]);
+  }, [showInboxPanel, inboxPanelTab, setNewsList, newsRetry]);
 
   if (!showInboxPanel) return null;
 
@@ -63,12 +75,18 @@ export default function InboxPanel() {
   const unclaimedPresents = (presents || []).filter((p: any) => p.status === "UNCLAIMED");
 
   const renderNewsContent = () => (
-    <div className="inbox-news-list">
+    <div className="inbox-news-list" aria-busy={newsLoading}>
+      {newsLoading && <p role="status">お知らせを更新中…</p>}
+      {newsError && <div className="inbox-news-error" role="alert">
+        <p>お知らせを取得できませんでした。</p>
+        <OutlawButton variant="secondary" onClick={() => setNewsRetry((value) => value + 1)}>再試行</OutlawButton>
+      </div>}
       {(newsList || []).length === 0 ? (
-        <div className="inbox-empty">お知らせはありません</div>
+        !newsLoading && !newsError && <div className="inbox-empty">お知らせはありません</div>
       ) : (
         newsList.map((news: any) => (
-          <div
+          <button
+            type="button"
             key={news.id}
             className="inbox-news-item active-scale-effect"
             onClick={() => { setSelectedNews(news); markNewsRead(news); playCyberSe("click"); }}
@@ -79,7 +97,7 @@ export default function InboxPanel() {
               <span className="news-date">{news.date || news.created_at}</span>
             </div>
             <div className="inbox-news-item-title">{news.title}</div>
-          </div>
+          </button>
         ))
       )}
     </div>

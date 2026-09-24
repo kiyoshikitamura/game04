@@ -8,6 +8,7 @@ import { applyHomeSelection } from '../../../src/domain/redesign/home.ts';
 import { applyShopExchange, applyShopEnergyDrink } from '../../../src/domain/redesign/shop.ts';
 import { evaluateMissions, getClaimableMission, type MissionConfig } from '../../../src/domain/redesign/missions.ts';
 import { FORMAL_MISSION_CONFIG } from '../../../src/domain/redesign/formalMissions.ts';
+import { gameplayMeasurementReceipt } from '../../../src/domain/redesign/gameplayMeasurement.ts';
 import { captureMissionAssets, recordMissionEvent } from '../../../src/domain/redesign/missionProgress.ts';
 import { raidBattleMissionEvent, raidRescueMissionEvent, reconcileRaidMissionProgress } from '../../../src/domain/redesign/missionRaidProgress.ts';
 import { simulateBattle } from '../../../src/domain/redesign/battle.ts';
@@ -348,7 +349,7 @@ Deno.serve(async (request: Request) => {
       if (action === 'character_unlock') growthCounters.push('soul_unlock');
       if (growthCounters.length) after = recordMissionEvent(after, { id: `growth:${requestId}`, at: Date.now(), counters: growthCounters });
     }
-    await commit(state, after, requestId, null, room, version);
+    await commit(state, after, requestId, null, room, version, gameplayMeasurementReceipt(action, state, after));
     return new Response(JSON.stringify(await responseFor(user.id)), { headers });
   } catch (error) {
     const conflict = error instanceof ApiError && error.status === 409;

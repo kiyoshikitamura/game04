@@ -983,7 +983,10 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         setActiveTab("shop");
         setShowTitleView(false);
       }
-      if (nextState.gameplay_authorized && hasPendingLegalSettingsReturn(userId)) {
+      // Restore presentation for the same authenticated GAME04 profile; the
+      // legacy tutorial completion flag is not the redesigned game's entry gate.
+      // page.tsx still waits for the authenticated player projection.
+      if (nextState.has_profile && hasPendingLegalSettingsReturn(userId)) {
         setShowTitleView(false);
         setShowSettingsPanel(true);
         clearLegalSettingsReturn();
@@ -1501,30 +1504,35 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         .eq("id", userId)
         .single().then((result) => result);
 
+      // Pass entitlement is independent of resource recovery/profile projection.
+      // Start it alongside those reads instead of serializing the Home HUD.
+      const monthlyPassProjectionPromise = (async () => {
+        try {
+          const { data: mpData } = await supabase
+            .from("user_monthly_passes")
+            .select("*")
+            .eq("user_id", userId)
+            .eq("is_active", true)
+            .gte("expires_at", new Date().toISOString());
+
+          if (currentAuthUserIdRef.current !== userId) return;
+          if (mpData && mpData.length > 0) {
+            setMonthlyPassActive(true);
+            const today = new Date().toISOString().split("T")[0];
+            setMonthlyPassClaimedToday(mpData[0].daily_claimed_at === today);
+          } else {
+            setMonthlyPassActive(false);
+            setMonthlyPassClaimedToday(false);
+          }
+        } catch (err) {
+          console.warn("Failed to fetch monthly pass:", err);
+        }
+
+      })();
+
       const { data: recovered } = await supabase.rpc("sync_and_recover_vitality_and_pvp_points", {
         p_user_id: userId
       });
-      
-      // 月額パス状態フェッチ
-      try {
-        const { data: mpData } = await supabase
-          .from("user_monthly_passes")
-          .select("*")
-          .eq("user_id", userId)
-          .eq("is_active", true)
-          .gte("expires_at", new Date().toISOString());
-
-        if (mpData && mpData.length > 0) {
-          setMonthlyPassActive(true);
-          const today = new Date().toISOString().split("T")[0];
-          setMonthlyPassClaimedToday(mpData[0].daily_claimed_at === today);
-        } else {
-          setMonthlyPassActive(false);
-          setMonthlyPassClaimedToday(false);
-        }
-      } catch (err) {
-        console.warn("Failed to fetch monthly pass:", err);
-      }
       
       if (recovered) {
         const row = Array.isArray(recovered) ? recovered[0] : recovered;
@@ -2298,7 +2306,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         })));
       }
 
-      await homeBadgeProjectionPromise;
+      await Promise.all([homeBadgeProjectionPromise, monthlyPassProjectionPromise]);
 
     } catch (err: any) {
       console.warn("Sync error:", err.message);

@@ -60471,6 +60471,36 @@ var FORMAL_MISSION_CONFIG = { enabled: true, missions: [
   ...FORMAL_DAILY_MISSIONS
 ] };
 
+// src/domain/redesign/gameplayMeasurement.ts
+var ACTIONS = /* @__PURE__ */ new Set([
+  "save_deck",
+  "character_level",
+  "equipment_level",
+  "skill_level",
+  "equipment_lb",
+  "soul_exchange",
+  "soul_select",
+  "character_unlock",
+  "use_energy_drink",
+  "claim_mission",
+  "set_home",
+  "raid_join",
+  "raid_leave",
+  "raid_rescue",
+  "encounter_ignore"
+]);
+function gameplayMeasurementReceipt(action, before, after) {
+  if (!ACTIONS.has(action)) return {};
+  return { gameplayMeasurement: {
+    contractVersion: "game04-gameplay-v1",
+    action,
+    stateVersionBefore: before.version,
+    stateVersionAfter: before.version + 1,
+    cashDelta: after.cash - before.cash,
+    energyDelta: after.energy - before.energy
+  } };
+}
+
 // src/domain/redesign/data/raid-encounter.json
 var raid_encounter_default = {
   version: "GAME04_RAID_FORMAL_20260923",
@@ -65240,7 +65270,7 @@ Deno.serve(async (request) => {
       if (action === "character_unlock") growthCounters.push("soul_unlock");
       if (growthCounters.length) after = recordMissionEvent(after, { id: `growth:${requestId}`, at: Date.now(), counters: growthCounters });
     }
-    await commit(state, after, requestId, null, room, version);
+    await commit(state, after, requestId, null, room, version, gameplayMeasurementReceipt(action, state, after));
     return new Response(JSON.stringify(await responseFor(user.id)), { headers });
   } catch (error) {
     const conflict = error instanceof ApiError && error.status === 409;

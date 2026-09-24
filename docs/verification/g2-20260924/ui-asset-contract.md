@@ -53,7 +53,7 @@ G1判断事項の内訳はXL2・汎用魂4・選択券4。既存public/itemsに�
 |TI04|躑躅ヶ崎館|/bg/raid/raid-castle-moonlight-v1.webp|あり|/creative/backgrounds/char_go_01.png|
 |TI05|安土城|/bg/raid/raid-castle-moonlight-v1.webp|あり|/creative/backgrounds/char_reiji_01.png|
 
-現状は採用済み共闘背景1点を5城すべてに共用。配信404とは別の「用途対応未決」。推奨は既存3候補＋追加2城、代案は現行月夜城を共通装飾として明示承認。城別の絵と誤認させない表示を含め比較する。既存採用17素材の承認は城別背景対応の承認を意味しない。
+再開時訂正：共通背景の5城使用は9/24領土侵攻ASSET_MAPPINGで明示承認済み。用途対応未決・再承認対象から外す。上表の城別画像は将来追加候補であり、G2必須欠落5件として数えない。根拠と採用済み17点の対応はresume-assets.mdを参照。実表示のデコード・切抜き検証は別途維持。
 
 ## 公開導線と仮表示点検
 
