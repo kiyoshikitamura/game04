@@ -77,7 +77,7 @@ export default function RedesignFixture() {
   const navigate = (next: string) => { setMessage(''); setBattle(null); setTab(next.startsWith('quest') ? 'quest' : next); };
   async function action(type: string, payload: Record<string, unknown> = {}) {
     if (type === 'set_home') { setState(previous => ({ ...previous, ...(typeof payload.characterId === 'string' ? { homeCharacterId: payload.characterId } : {}), ...(typeof payload.backgroundId === 'string' ? { homeBackgroundId: payload.backgroundId } : {}) })); return; }
-    const next = applyGrowthAction(state, type, payload); setState(next); return next;
+    const next = applyGrowthAction(state, type, payload); setState(next); return { state: next };
   }
   async function startQuest(stageId: string): Promise<QuestSettlement> {
     const stage = getQuestStage(stageId);
