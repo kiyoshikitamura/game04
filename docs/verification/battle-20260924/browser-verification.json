@@ -1,0 +1,123 @@
+{
+  "implementationSha": "e62d3894b54ce70aede4a23a8fc2599c40b744da",
+  "preview": "https://game04-git-work-game04-battle-finish-20260924-kiyoshi-kitamura.vercel.app",
+  "initialCheck": {
+    "route": "/qa/battle-common?scenario=presentation",
+    "status": "FAIL",
+    "reason": "v2 skill placeholder /menu/event_banner_placeholder.png has naturalWidth=0; gate blocks replay",
+    "retry": "same result",
+    "characterLogoElementImages": "loaded",
+    "fix": "Known unassigned v2 skill placeholders rendered as effect-type SVG; image gate remains for real missing assets."
+  },
+  "mobileComparisons": "PASS: final 390px three states and 360px normal; screenshot crops exclude QA controls. Remaining figures/values use canonical assets or synthetic replay inputs.",
+  "playbackControls": "PASS on eb750903 / earlier recorded checks, inherited through CSS-only final changes.",
+  "formalReplayMeasurements": {
+    "scope": "Images ready, initial frame paused, 2x selected; REPL timestamp immediately before Resume click through first Results CTA observation. Sequential foreground playback; 500ms polling plus tool latency. Not a pass/fail performance threshold.",
+    "7-7": {
+      "seed": 22001,
+      "level": 55,
+      "seconds": 55.131,
+      "waves": 4,
+      "outcome": "win",
+      "previousComparisonSeconds": 50.66
+    },
+    "9-9": {
+      "seed": 25001,
+      "level": 75,
+      "seconds": 33.568,
+      "waves": 3,
+      "outcome": "win",
+      "previousComparisonSeconds": 30.01
+    }
+  },
+  "mainBodyFlow": {
+    "status": "PASS_QA_STATE",
+    "route": "/qa/redesign",
+    "sequence": [
+      "home",
+      "quest",
+      "area 1",
+      "stage 1-1",
+      "prepare",
+      "BattleView",
+      "natural victory",
+      "result rewards",
+      "stage list"
+    ],
+    "nonVipSkipHidden": true,
+    "cashBefore": 30000,
+    "cashAfter": 30500,
+    "stage1_2Unlocked": true,
+    "limitation": "Uses real UI components and in-memory QA state; no authenticated DB settlement tested."
+  },
+  "intermediateSha": "87abd025e71a2fda3e48ce555883cc4a42c24a7c",
+  "intermediateChecks": {
+    "imageGate": "PASS after fix",
+    "pause": "PASS: region text and HP unchanged across separate calls",
+    "resume2x": "PASS",
+    "skip": "PASS: victory/end snapshot and result CTA, no cut-in actor displayed",
+    "mobile390": "Observed; enemy full-body small relative to mock; next CSS/art variant correction pending"
+  },
+  "replayVerifiedSha": "eb750903e80271c1719d0b25d1b7235bd873cd7d",
+  "sixWavePlayback": {
+    "status": "PASS",
+    "speed": 2,
+    "wavesObserved": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "result": "6 Wave突破・勝利・総ダメージ21,700"
+  },
+  "dialogCheck": {
+    "sha": "33f4d56f2b2286d9c6edeec6893f01fa71b41512",
+    "nativeModal": true,
+    "bodyScrollLock": true,
+    "escapeClose": true,
+    "enemySp": "20/80",
+    "tabFocus": "One Tab from only Close button moves browser focus to BODY, not an underlying interactive button; no claim of strict element-only focus loop."
+  },
+  "deploymentId": "dpl_Ee5KubkGr1Vg3SDExH8BpU1vihLJ",
+  "finalChecks": {
+    "390": {
+      "documentClientWidth": 388,
+      "documentScrollWidth": 388,
+      "brokenImages": 0
+    },
+    "360": {
+      "documentClientWidth": 358,
+      "documentScrollWidth": 358,
+      "brokenImages": 0
+    },
+    "font": "Noto Sans JP, Hiragino Kaku Gothic ProN, Yu Gothic, Meiryo, sans-serif",
+    "damageFrame": {
+      "index": 10,
+      "targetHp": 12858,
+      "targetMaxHp": 15000,
+      "damage": 1007,
+      "hits": [
+        336,
+        336,
+        335
+      ],
+      "cutInAbsent": true,
+      "impactVisibleWhilePaused": true
+    },
+    "burstFrame": {
+      "index": 86,
+      "actor": "上杉景勝",
+      "largeCutIn": true,
+      "statusesVisible": true
+    },
+    "images": [
+      "final-normal-390.jpg",
+      "final-skill-390.jpg",
+      "final-burst-390.jpg",
+      "final-normal-360.jpg",
+      "approved-vs-implemented.jpg"
+    ]
+  }
+}
