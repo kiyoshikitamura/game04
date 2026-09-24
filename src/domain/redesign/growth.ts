@@ -184,8 +184,29 @@ export function applyGrowthAction(input: RedesignState, action: string, payload:
   throw new Error("対応していない育成操作です。");
 }
 
-export function autoEquipSkills(state:RedesignState): DeckMember[] { const skills=[...state.skills].sort((a,b)=>b.level-a.level || (SKILL_MASTERS.find(s=>s.id===b.id)?.spCost??0)-(SKILL_MASTERS.find(s=>s.id===a.id)?.spCost??0));return state.deck.map(m=>({...m,skillIds:skills.slice(0,getSkillSlots(state.characters.find(c=>c.id===m.characterId)?.awakening??0)).map(s=>s.id)})); }
-export function autoEquipEquipment(state:RedesignState):DeckMember[] { const used=new Set<string>(); return state.deck.map(m=>{const equipment:DeckMember['equipment']={}; for(const slot of EQUIPMENT_SLOTS){const best=[...state.equipment].filter(e=>!used.has(e.instanceId)&&equipmentFits(slot,EQUIPMENT_MASTERS.find(master=>master.id===e.masterId)?.slot??'weapon')).sort((a,b)=>b.level-a.level||b.lb-a.lb)[0];if(best){equipment[slot]=best.instanceId;used.add(best.instanceId);}}return {...m,equipment};}); }
+export function autoEquipSkills(state: RedesignState): DeckMember[] {
+  const masters = new Map(SKILL_MASTERS.map(master => [master.id, master]));
+  // Preserve unresolved retained assets in inventory without selecting an invalid deck.
+  const skills = state.skills.filter(skill => masters.has(skill.id)).sort((a, b) =>
+    b.level - a.level || masters.get(b.id)!.spCost - masters.get(a.id)!.spCost);
+  return state.deck.map(member => ({ ...member,
+    skillIds: skills.slice(0, getSkillSlots(state.characters.find(character => character.id === member.characterId)?.awakening ?? 0)).map(skill => skill.id),
+  }));
+}
+export function autoEquipEquipment(state: RedesignState): DeckMember[] {
+  const masters = new Map(EQUIPMENT_MASTERS.map(master => [master.id, master]));
+  const candidates = state.equipment.filter(item => masters.has(item.masterId));
+  const used = new Set<string>();
+  return state.deck.map(member => {
+    const equipment: DeckMember['equipment'] = {};
+    for (const slot of EQUIPMENT_SLOTS) {
+      const best = candidates.filter(item => !used.has(item.instanceId) && equipmentFits(slot, masters.get(item.masterId)!.slot))
+        .sort((a, b) => b.level - a.level || b.lb - a.lb)[0];
+      if (best) { equipment[slot] = best.instanceId; used.add(best.instanceId); }
+    }
+    return { ...member, equipment };
+  });
+}
 
 
 export const SLOT_LABELS: Record<EquipmentSlot,string> = {weapon:"武器",head:"頭",body:"身体",legs:"脚",accessory1:"アクセ1",accessory2:"アクセ2"};

@@ -16,3 +16,13 @@ body.game04-theme .redesign-quest-dialog .rq-boss-stats{display:grid;grid-templa
 body.game04-theme .redesign-quest-dialog .rq-boss-stats>div{display:grid;gap:3px;min-width:0;text-align:center}
 body.game04-theme .redesign-quest-dialog .rq-boss-stats dt{font-size:11px;color:#d8c29a}
 body.game04-theme .redesign-quest-dialog .rq-boss-stats dd{margin:0;font-size:14px;line-height:1.4;overflow-wrap:anywhere}
+
+/* Preserve full names and quantities inside narrow detail dialogs. */
+.redesign-quest-dialog .rq-rewards li{grid-template-columns:32px minmax(0,1fr) minmax(0,auto)}
+.redesign-quest-dialog .rq-rewards li :is(span,strong),.redesign-quest-dialog .rq-detail-item :is(strong,p){min-width:0;overflow-wrap:anywhere}
+.redesign-quest-dialog .rq-detail-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+.redesign-quest-dialog .rq-detail-stats>div{min-width:0;gap:6px}
+.redesign-quest-dialog .rq-detail-stats dt{flex:none}
+.redesign-quest-dialog .rq-detail-stats dd{min-width:0;text-align:right;overflow-wrap:anywhere}
+.redesign-quest-dialog .rq-boss-title{flex-wrap:wrap}
+.redesign-quest-dialog .rq-boss-title strong{min-width:0;overflow-wrap:anywhere}

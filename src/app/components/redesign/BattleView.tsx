@@ -47,6 +47,7 @@ export function BattleView({ result, vipActive, onComplete, title = '合戦', ba
   const [assetState, setAssetState] = useState<{ result: BattleResult; key: string; status: 'loading' | 'ready' | 'error' }>({ result, key: '', status: 'loading' });
   const [retry, setRetry] = useState(0);
   const loadingDialog = useRef<HTMLDialogElement>(null);
+  const recoveredResult = useRef<BattleResult | null>(null);
   const detailDialog = useRef<HTMLDialogElement>(null);
   const assetsBlocked = assetState.result !== result || assetState.status !== 'ready';
   const { index, frame, finished, speed, paused, playbackPaused, setPaused, cycleSpeed, skip } = useRecordedBattlePlayback({ result, initialFrame, initialPaused, vipActive, blocked: !!detail || showLog || assetsBlocked });
@@ -54,6 +55,15 @@ export function BattleView({ result, vipActive, onComplete, title = '合戦', ba
   const imageKey = JSON.stringify([...new Set(['/branding/tribe-neon-logo.png', backgroundSrc, ...(frame ? [...frame.party, ...frame.enemies].flatMap(state => { const unit = result.party.find(item => item.id === state.id) ?? result.waves[frame.wave - 1]?.find(item => item.id === state.id); return [unit ? unitArt(unit, state, 'full') : state.image, unit && frame.party.some(member => member.id === state.id) ? unitArt(unit, state, 'portrait') : undefined, unit ? `/ui/raid/v2/element-${unit.element}.png` : undefined, ...(state.skills ?? unit?.skills ?? []).filter(skill => !isUnassignedSkillImage(skill.image)).map(skill => skill.image)]; }) : [])].filter((src): src is string => !!src))]);
   const decoded = (JSON.parse(imageKey) as string[]).every(isBattleImageReady);
   const visibleLoading = !decoded;
+  const assetError = assetState.result === result && assetState.key === imageKey && assetState.status === 'error';
+  // The API has already settled this result. Recovery leaves playback only; it must
+  // neither start another battle nor grant the normal VIP-only skip capability.
+  const leaveFailedPlayback = () => {
+    if (!assetError || recoveredResult.current === result) return;
+    recoveredResult.current = result;
+    loadingDialog.current?.close();
+    onComplete();
+  };
   useEffect(() => {
     let cancelled = false;
     if ((JSON.parse(imageKey) as string[]).every(isBattleImageReady)) {
@@ -124,7 +134,7 @@ export function BattleView({ result, vipActive, onComplete, title = '合戦', ba
     </div>;
   };
   return <section className={styles.battle} aria-label={title} data-playback-paused={playbackPaused} style={{ '--battle-speed': speed, '--battle-background': `url(${JSON.stringify(backgroundSrc)})` } as CSSProperties}>
-    <dialog ref={loadingDialog} className={styles.loading} onCancel={event => event.preventDefault()} aria-label="戦闘画面の読み込み"><img src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" />{assetState.status === 'error' ? <><p>戦闘画像を読み込めませんでした。</p><button onClick={() => setRetry(value => value + 1)}>再試行</button></> : <><span className={styles.spinner} /><p>戦闘の準備中</p></>}</dialog>
+    <dialog ref={loadingDialog} className={styles.loading} onCancel={event => event.preventDefault()} aria-label="戦闘画面の読み込み"><img src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" />{assetError ? <><p>戦闘画像を読み込めませんでした。</p><button onClick={() => { setAssetState({ result, key: imageKey, status: 'loading' }); setRetry(value => value + 1); }}>再試行</button><button onClick={leaveFailedPlayback}>再生を終了する</button></> : <><span className={styles.spinner} /><p>戦闘の準備中</p></>}</dialog>
     <div className={visibleLoading ? styles.loadingContent : undefined}>
     <header className={styles.header}><img src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" /><strong>WAVE <b>{frame.wave}</b>/{result.waves.length}</strong><div><button onClick={cycleSpeed} aria-label={`再生速度 ${speed}倍`}>▶▶ ×{speed}</button><button onClick={() => setPaused(p => !p)} disabled={finished} aria-label={paused ? '再開' : '一時停止'}>{paused ? '▶' : 'Ⅱ'}</button>{vipActive && <button className={styles.skip} disabled={finished} onClick={skip}>SKIP</button>}</div></header>
     {displayedRaidHp && <div className={styles.raidHp}>{displayedRaidHp.label} <span>{Math.floor(displayedRaidHp.current).toLocaleString()} / {Math.floor(displayedRaidHp.max).toLocaleString()}</span></div>}
@@ -145,4 +155,3 @@ export function BattleView({ result, vipActive, onComplete, title = '合戦', ba
   </section>;
 }
 export default BattleView;
-

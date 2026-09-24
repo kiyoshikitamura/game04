@@ -1,0 +1,49 @@
+{
+  "baseline": "79669373",
+  "runtime": "v24.19.0",
+  "scope": "Local domain and static contract only; no live API/DB/browser acceptance",
+  "results": [
+    {
+      "script": "scripts/verify_game04_g2_master_growth.cjs",
+      "exitCode": 0,
+      "seconds": 0.46,
+      "stdout": "PASS 72 IDs / 792 LB rows / 122 separate ownership entries / legacy 50 unchanged / shared exact LB / replay idempotence / failure nonconsumption / cumulative cash / 19999 carry / overcap retention\n",
+      "stderr": ""
+    },
+    {
+      "script": "scripts/verify_game04_g2_supply.mjs",
+      "exitCode": 0,
+      "seconds": 0.19,
+      "stdout": "PASS: approved 30-login totals/JST/repeat/no-backfill; VIP exact 24h/696h/720h/retry/repurchase; medicine overflow/non-consumption; exchange integer/ID/quantity guards. DOMAIN ONLY.\nPASS: normal183/daily10 unique master; first clear reward/no duplicate claim; dismantled instance history; settled event dedupe; approved cash/LB/soul totals. Daily unresolved policies remain disabled.\n",
+      "stderr": "(node:15) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///workspace/scratch/084b09c597a9/game04/src/domain/redesign/loginBonus.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to /workspace/scratch/084b09c597a9/game04/package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+    },
+    {
+      "script": "scripts/verify_game04_g2_kpi.cjs",
+      "exitCode": 0,
+      "seconds": 0.4,
+      "stdout": "PASS: explicit validated action receipt, state versions/resource deltas, no PII, unknown/purchase/battle actions excluded. DB transaction dedup requires integration test.\nPASS: Next matcher selects gameplay route; unconfigured 503, missing/wrong credentials 401, valid test credentials continue.\n",
+      "stderr": ""
+    },
+    {
+      "script": "scripts/verify_game04_g2_battle_raid.cjs",
+      "exitCode": 0,
+      "seconds": 0.59,
+      "stdout": "{\n  \"status\": \"PASS\",\n  \"scope\": \"synthetic domain/cache regression, not live acceptance\",\n  \"checks\": [\n    \"6 Wave and distinct enemy initial/cap SP retained\",\n    \"SKD068 does not spend SP on healthy ally through shield eligibility\",\n    \"same battle settlement and reward claim replay do not charge/grant twice\",\n    \"decoded image cache deduplicates loads and failed loads remain retryable\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "scripts/verify_game04_g2_raid_missions.cjs",
+      "exitCode": 0,
+      "seconds": 0.61,
+      "stdout": "{\n  \"status\": \"PASS\",\n  \"checks\": [\n    \"settlement only participation/win/other-host\",\n    \"same battle replay ignored\",\n    \"NM164 own host only\",\n    \"qualified defeat proof and dedupe\",\n    \"no retroactive grant from current wins\",\n    \"castle gate/final host proof\",\n    \"claimed grants and repeated room synchronization\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "scripts/verify_game04_g2_raid_start_snapshot.cjs",
+      "exitCode": 0,
+      "seconds": 0.5,
+      "stdout": "PASS: persisted start survives reload, stage advancement and current-room refresh; old snapshot/current fallback and quest absence retained.\n",
+      "stderr": ""
+    }
+  ]
+}
