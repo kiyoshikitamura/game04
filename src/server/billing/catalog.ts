@@ -1,3 +1,4 @@
+import { VIP_PRODUCT } from "@/domain/redesign/vip";
 import { SHOP_CATALOG_VERSION } from "@/utils/shop_master_data";
 
 export const CATALOG_VERSION = SHOP_CATALOG_VERSION;
@@ -11,11 +12,16 @@ export const DIA_PRODUCTS = [[300,300,0],[500,500,0],[1000,1000,0],[3000,3000,0]
   id: `diamond_${total}`, amount_jpy: paid, purchase_limit: 0,
   items: [{itemId:"DIAMOND",quantity:paid,validity_days:120}, ...(free ? [{itemId:"DIAMOND",quantity:free,validity_days:null}] : [])],
 }));
-export const PAID_PRODUCT_IDS = [...PAID_PACKS.map(p=>p.id),...DIA_PRODUCTS.map(p=>p.id)];
+export const VIP_CATALOG_PRODUCT = { id: VIP_PRODUCT.id, amount_jpy: VIP_PRODUCT.priceJpy, purchase_limit: 0, validity_days: 120, items: [] };
+export const PAID_PRODUCT_IDS = [...PAID_PACKS.map(p=>p.id),...DIA_PRODUCTS.map(p=>p.id), VIP_PRODUCT.id];
 type CatalogRow = { id: string; amount_jpy: number; purchase_limit: number; validity_days: number; items: { itemId: string; quantity: number; validity_days?: number | null }[] };
 /** UIとDBの価格・内容・有償無償内訳が一致する場合だけ販売可能。 */
 export function catalogMatches(rows: CatalogRow[]) {
-  return PAID_PACKS.every(expected => {
+  const vip = rows.find(row => row.id === VIP_PRODUCT.id);
+  // VIP contains no ordinary assets: U09 alone creates entitlement and 30 deliveries.
+  const vipValid = !vip || (vip.amount_jpy === VIP_PRODUCT.priceJpy && vip.purchase_limit === 0 &&
+    vip.validity_days === 120 && Array.isArray(vip.items) && vip.items.length === 0);
+  return vipValid && PAID_PACKS.every(expected => {
     const actual = rows.find(row => row.id === expected.id);
     const quantities = Object.entries(expected.items);
     return actual?.amount_jpy === expected.amount_jpy && actual.purchase_limit === expected.purchase_limit &&
