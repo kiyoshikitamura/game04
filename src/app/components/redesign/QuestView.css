@@ -10,3 +10,9 @@ body.game04-theme .redesign-quest .rq-area-status{position:absolute;top:0;right:
 @media(max-width:390px){body.game04-theme .redesign-quest .rq-stage{grid-template-columns:56px minmax(0,1fr) max-content;column-gap:8px;padding:9px 6px}.rq-stage-number{width:46px;height:46px}.rq-stage strong{font-size:14px}body.game04-theme .redesign-quest .rq-stage .rq-state-label{font-size:9px;padding:4px}.redesign-quest-dialog .canonical-dialog-body{padding:10px}.rq-party-badges{flex-direction:column;gap:1px}body.game04-theme .redesign-quest-dialog .rq-party-meta strong{font-size:9px}.rq-detail-card{width:min(270px,80vw)!important}.rq-stage-facts span{font-size:11px}}
 .game04-theme .redesign-quest-dialog .rq-info-actions button{white-space:nowrap!important;min-width:0;font-size:12px!important;gap:4px;padding:9px 4px!important}.game04-theme .redesign-quest-dialog .rq-info-actions img{flex:none;width:23px;height:23px}
 @media(max-width:340px){.game04-theme .redesign-quest-dialog .rq-info-actions button{font-size:10px!important;gap:2px}.game04-theme .redesign-quest-dialog .rq-info-actions img{width:18px;height:18px}}
+
+/* Stage-specific enemy stats: separate from the artwork, unchanged battle values. */
+body.game04-theme .redesign-quest-dialog .rq-boss-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 10px 4px;padding:8px 6px;background:#110c0ecc;border-radius:4px;color:#fff0d5;font-variant-numeric:tabular-nums}
+body.game04-theme .redesign-quest-dialog .rq-boss-stats>div{display:grid;gap:3px;min-width:0;text-align:center}
+body.game04-theme .redesign-quest-dialog .rq-boss-stats dt{font-size:11px;color:#d8c29a}
+body.game04-theme .redesign-quest-dialog .rq-boss-stats dd{margin:0;font-size:14px;line-height:1.4;overflow-wrap:anywhere}
