@@ -33,3 +33,19 @@
 原因はGameContextの復帰条件が旧`nextState.gameplay_authorized`（旧チュートリアル完了条件）を要求する一方、G2本体page.tsxは同UIDのauthenticatedProjectionReadyで入場する仕様との差異。`hasPendingLegalSettingsReturn(userId)`で同じ利用者のマーカーを確認できても、旧条件falseでmarkerを削除してタイトルへ戻していた。
 
 修正依頼を親へ送付：すでにRPCのuser_id照合を済ませた位置なので、`nextState.has_profile && hasPendingLegalSettingsReturn(userId)`で設定表示を復帰し、実際の本体描画は従来どおりauthenticatedProjectionReadyで待機する。queryやstorageをゲーム権限とみなさずAPI認証は保持する。共有GameContext編集は親へ集約、担当UIからの無断編集なし。配信後同一QAの設定復帰を独立再確認する。
+
+## RUI07 タイトルに旧ゲームの画像
+
+0e12候補を独立担当が確認した `qa-resume/08-new-title-old-art.jpg`（390×568本体iframe）を実装担当も目視し、巨大TRIBE NEONロゴ、ネオン街、ストリート人物が描かれていることを確認。Footerは戦国姫艶武。旧画像残骸Q03として必須修正対象。G4の新しいチュートリアル制作とは区別する。
+
+TitleView.cssは `/branding/title-key-visual.png` を参照。G1の同パスblobは `ba0adc4e90d86aeab71d8068a1334d4598523cdf`。開始中logo `/branding/tribe-neon-logo.png` は `8bf8a509d2980d0221eaf76ba66f4c9ce3c17779` で、バトル承認素材対応表は『既存GAME04ロゴ。ファイル名を変更していない』としている。名前だけを根拠に不適切と判定しない。
+
+採用済みGAME04タイトル素材を親が照合中。本担当は承認不明の新画像・寄せ集め画面へ勝手に置換していない。ローカル画像ファイルは未復元、配信画像のshell取得は25秒timeout。画像の見た目自体は独立ブラウザ証拠で確認済み。
+
+TAP無反応の疑いは、独立担当root別tabでTAP→はじめからが正常に進んだためアプリ不具合と断定しない。iframeでのDOM操作timeoutと認証API Failed to fetchを区別し、旧画像と同一原因扱いしない。
+
+### RUI07 追加修正（親指示に基づく既存役割表への接続）
+
+`config/game04-local-other-assets.json` は既存取込資産の役割を title/KV（source kv/kv.png）→ `/creative/branding/key-visual.png`、logo/KV → `/creative/branding/logo.png` と指定する。TitleView.css背景・TitleView開始中ロゴ・BOOT_CRITICAL_ASSETSの3ファイルを、この同一役割表のパスへ修正した。新規素材の制作・加工・採用は行わず、旧画像ファイルそのものも削除していない。G3/G4の導線・初期付与を変更していない。
+
+ブラウザtab22で固定Preview上のcreative/branding/key-visual.pngへgotoはtimeoutしたが、続く現在画面のscreenshotは取得できた。画像上部の『戦国姫艶武』ロゴと和装女性を目視確認し、旧TRIBE NEON画像とは異なることを確認。下半分は読み込み中の灰色で、全画像・切抜き品質確認済みとはしない。logo画像タブはタイムアウト/待機のため追加取得を中止。**役割表整合の修正済み、実表示・切抜き再検証未完。**

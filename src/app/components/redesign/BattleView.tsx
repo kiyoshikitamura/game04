@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState, useRef, type CSSProperties } from 'react';
 import { useRecordedBattlePlayback } from '@/hooks/redesign/useRecordedBattlePlayback';
+import { projectRaidBattleHp } from '../../../domain/presentation/raidBattleHpPresentation';
 import { projectRecordedBattleFrame } from '../../../domain/presentation/recordedBattlePresentation';
 import type { BattleResult, BattleUnitState } from '../../../domain/redesign/battle';
 import type { BattleUnit, SkillMaster } from '../../../domain/redesign/types';
@@ -40,6 +41,7 @@ interface Props { result: BattleResult; vipActive: boolean; onComplete: () => vo
 
 /** Every visible value is projected from the recorded server frame. */
 export function BattleView({ result, vipActive, onComplete, title = '合戦', backgroundSrc = '/creative/backgrounds/char_reiji_01.png', raidHp, initialFrame = 0, initialPaused = false }: Props) {
+  const displayedRaidHp = projectRaidBattleHp(result.raidStartSnapshot, raidHp);
   const [detail, setDetail] = useState<{ unit?: BattleUnit; state?: BattleUnitState; skill?: SkillMaster; readiness?: string; cost?: number; reason?: string } | null>(null);
   const [showLog, setShowLog] = useState(false);
   const [assetState, setAssetState] = useState<{ result: BattleResult; key: string; status: 'loading' | 'ready' | 'error' }>({ result, key: '', status: 'loading' });
@@ -125,7 +127,7 @@ export function BattleView({ result, vipActive, onComplete, title = '合戦', ba
     <dialog ref={loadingDialog} className={styles.loading} onCancel={event => event.preventDefault()} aria-label="戦闘画面の読み込み"><img src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" />{assetState.status === 'error' ? <><p>戦闘画像を読み込めませんでした。</p><button onClick={() => setRetry(value => value + 1)}>再試行</button></> : <><span className={styles.spinner} /><p>戦闘の準備中</p></>}</dialog>
     <div className={visibleLoading ? styles.loadingContent : undefined}>
     <header className={styles.header}><img src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" /><strong>WAVE <b>{frame.wave}</b>/{result.waves.length}</strong><div><button onClick={cycleSpeed} aria-label={`再生速度 ${speed}倍`}>▶▶ ×{speed}</button><button onClick={() => setPaused(p => !p)} disabled={finished} aria-label={paused ? '再開' : '一時停止'}>{paused ? '▶' : 'Ⅱ'}</button>{vipActive && <button className={styles.skip} disabled={finished} onClick={skip}>SKIP</button>}</div></header>
-    {raidHp && <div className={styles.raidHp}>現在の共通HP{raidHp.level !== undefined ? `（Lv.${raidHp.level}）` : ''} <span>{Math.floor(raidHp.current).toLocaleString()} / {Math.floor(raidHp.max).toLocaleString()}</span></div>}
+    {displayedRaidHp && <div className={styles.raidHp}>{displayedRaidHp.label} <span>{Math.floor(displayedRaidHp.current).toLocaleString()} / {Math.floor(displayedRaidHp.max).toLocaleString()}</span></div>}
     <div className={styles.arena}>
       <div className={styles.enemyZone} data-count={frame.enemies.length}>{frame.enemies.map((u, i) => unitCard(u, true, i))}</div>
       {presentation.cutIn && presentation.actor && <div className={`${styles.cutIn} ${presentation.cutIn === 'burst' ? styles.burstCutIn : styles.skillCutIn}`} key={`cutin-${frame.index}`} aria-label={`${presentation.actor.name} ${presentation.cutIn === 'burst' ? 'BURST' : presentation.skill?.name ?? 'スキル'}`}><div className={styles.cutInLight} /><img src={unitArt(presentation.actor, presentation.actorState, 'full')} alt="" /><strong>{presentation.cutIn === 'burst' ? 'BURST' : presentation.skill?.name}</strong><span>{presentation.actor.name}</span></div>}

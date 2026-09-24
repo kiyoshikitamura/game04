@@ -161,7 +161,8 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
     const seed = crypto.getRandomValues(new Uint32Array(1))[0];
     // Only a new battle receives current rules. Saved started/settled records above are never upgraded.
     const rules = startRoom?.territorySnapshot?.battleRules ?? BATTLE_RULES;
-    const input = questStage ? createQuestBattleInput(seed, buildBattleParty(state, rules), questStage, rules) : startRoom && getRoomRaidMaster(startRoom).masterVersion ? {...createFormalBattleInput(seed,buildBattleParty(state,rules),waves as (import('../../../src/domain/redesign/types.ts').EnemyUnit & {initialSp:number})[][],rules),raidLevel,raidMasterVersion:getRoomRaidMaster(startRoom).masterVersion,playerExpReward:{amount:getRoomRaidMaster(startRoom).playerExp??0,version:getRoomRaidMaster(startRoom).masterVersion,status:'APPROVED'}} : { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel,  };
+    const battleInput = questStage ? createQuestBattleInput(seed, buildBattleParty(state, rules), questStage, rules) : startRoom && getRoomRaidMaster(startRoom).masterVersion ? {...createFormalBattleInput(seed,buildBattleParty(state,rules),waves as (import('../../../src/domain/redesign/types.ts').EnemyUnit & {initialSp:number})[][],rules),raidLevel,raidMasterVersion:getRoomRaidMaster(startRoom).masterVersion,playerExpReward:{amount:getRoomRaidMaster(startRoom).playerExp??0,version:getRoomRaidMaster(startRoom).masterVersion,status:'APPROVED'}} : { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel,  };
+    const input = startRoom ? { ...battleInput, raidStartSnapshot: { roomId: startRoom.id, level: startRoom.level, hp: startRoom.hp, maxHp: startRoom.maxHp } } : battleInput;
     // Validate and simulate before charging. Invalid provisional masters must not strand a paid pending battle.
     preparedBattle = simulateBattle(input);
     await commit(state, { ...state, energy: state.energy - cost, ...(questStage ? {questAttempts:{...state.questAttempts,[targetId]:(state.questAttempts?.[targetId]??0)+1},questProgressVersion:QUEST_MASTER_VERSION} : {}) }, id, { id, kind, targetId, seed, input, status: 'started' }, startRoom, startRoom?.version ?? null);
@@ -172,7 +173,11 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
     if (record.status === 'settled') return responseFor(userId, record.result);
     if (JSON.stringify(record.input) !== JSON.stringify(input)) preparedBattle = undefined;
   }
-  const battle = preparedBattle ?? simulateBattle(record.input);
+  const simulatedBattle = preparedBattle ?? simulateBattle(record.input);
+  // Read only persisted start context. Never reconstruct old starts from the settled room.
+  const battle = record.kind === 'raid' && record.input.raidStartSnapshot
+    ? { ...simulatedBattle, raidStartSnapshot: record.input.raidStartSnapshot }
+    : simulatedBattle;
   const settlementId = await uuidFor(`settlement:${id}`);
   for (let attempt = 0; attempt < 4; attempt++) {
     const state = await stateFor(userId); let after = structuredClone(state);
