@@ -13,3 +13,7 @@ dialog.backdrop{margin:0;width:100%;height:100%;max-width:none;max-height:none;b
 .memberPortrait{display:block;width:100%;height:clamp(86px,25vw,130px);overflow:hidden;position:relative}.memberPortrait .memberImage{width:100%;height:100%;object-fit:cover;object-position:var(--face-x,50%) var(--face-y,4%);transform:scale(var(--face-scale,2.1));transform-origin:var(--face-x,50%) 12%;mask-image:none}.member .unitInfo{margin-top:0}.member .status:empty{min-height:0;margin-top:3px}.member .status{min-height:27px;margin-top:3px}.enemyZone[data-count='3'] .enemy[data-order='1'],.enemyZone[data-count='3'] .enemy[data-order='2']{height:58%}@keyframes impactRise{from{opacity:1;transform:translate(-50%,-45%) scale(1)}to{opacity:1;transform:translate(-50%,-60%) scale(1)}}
 
 .header>strong,.burst,.cutIn>strong,.cutIn>span,.result h2,.modal h2{font-family:G4NotoSerif,"Hiragino Mincho ProN",serif}.unitName,.level,.hpNumber,.member .hpNumber,.sp strong,.feedback,.header button,.modal p{font-family:G4NotoSans,"Hiragino Kaku Gothic ProN",Meiryo,sans-serif}
+.battle .skill{flex:0 0 calc((100% - 4px)/3);max-width:calc((100% - 4px)/3)}
+
+/* Legacy global theme enforces this inherited token with !important. */
+.battle{--font-sengoku:var(--g4-sans,"Noto Sans JP",sans-serif)}
