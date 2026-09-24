@@ -22,7 +22,7 @@ function decodeImage(src: string) {
 export function characterImageSources(character: Pick<CharacterMaster, 'id'|'rarity'|'element'>): string[] {
   const artwork = characterArt.find(row => row.id === character.id);
   const background = backgrounds.find(row => row.characterId === character.id);
-  return [artwork?.card, background?.background, `/creative/ui/frame-${character.rarity}.png`, `/creative/ui/element-${character.element}.png`].filter((path): path is string => Boolean(path));
+  return [artwork?.portrait, background?.background, `/creative/ui/frame-${character.rarity}.png`, `/creative/ui/element-${character.element}.png`].filter((path): path is string => Boolean(path));
 }
 export function useCharacterImageReadiness(sources: string[]) {
   const key = [...new Set(sources.filter(Boolean))].sort().join('\n');

@@ -142,3 +142,11 @@ body.game04-theme .g4g-portrait .g4g-portrait-frame{object-fit:contain!important
 .g4g-portrait-sheen{position:absolute;inset:var(--portrait-top) var(--portrait-right) var(--portrait-bottom) var(--portrait-left);z-index:1;pointer-events:none;background:linear-gradient(110deg,transparent 32%,#fff7d566 48%,transparent 64%);background-size:300% 100%;animation:g4g-portrait-shine 7s ease-in-out infinite}
 @keyframes g4g-portrait-shine{0%,70%,100%{background-position:100% 0;opacity:0}75%{opacity:1}90%{background-position:0 0;opacity:0}}
 @media(prefers-reduced-motion:reduce){.g4g-portrait-sheen{animation:none;opacity:.3}}
+/* Narrow deck slots retain frame corners with nine-slice rather than stretching the artwork. */
+body.game04-theme .g4-growth .g4g-party .g4g-portrait{height:170px;aspect-ratio:auto;border:6px solid transparent;border-image-source:var(--portrait-frame);border-image-slice:100;border-image-width:6px;border-image-repeat:stretch}
+body.game04-theme .g4-growth .g4g-party .g4g-portrait-opening{inset:0}
+body.game04-theme .g4-growth .g4g-party .g4g-portrait-frame{display:none}
+body.game04-theme .g4-growth .g4g-party .g4g-portrait-sheen{inset:0}
+body.game04-theme .g4-growth .g4g-party>button>.g4g-empty-slot{position:relative;min-height:170px;padding-top:48px}
+body.game04-theme .g4-growth .g4g-party>button:disabled .g4g-empty-slot::before{content:"";position:absolute;top:65px;left:calc(50% - 9px);width:18px;height:16px;border-radius:2px;background:#b7b0a7}
+body.game04-theme .g4-growth .g4g-party>button:disabled .g4g-empty-slot::after{content:"";position:absolute;top:54px;left:calc(50% - 7px);width:14px;height:14px;border:3px solid #b7b0a7;border-radius:9px 9px 0 0}
