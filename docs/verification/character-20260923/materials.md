@@ -19,6 +19,10 @@
 - キャラ：人物は既存GAME04名簿、固定背景は `src/theme/character-backgrounds.json`、フレームは `public/creative/ui/frame-{N,R,SR,SSR}.png` の既存共通表示部品を使用する。未承認の旧レアリティ画像は使用せず、レアリティは人物から独立した文字領域で示す。
 - スキルLB素材は奥義指南書、装備LB素材は鍛冶の秘鋼。覚醒の秘巻を魂の代用品にはしない。
 
+## 今回追加接続した承認済み装飾
+
+`docs/design/raid/2026-09-23/WORK_ASSET_MAPPING.md` の17点採用記録を根拠とし、`public/ui/raid/v2/people.png`（おまかせ編成）、`armor.png`（おまかせ装備）、`scroll.png`（おまかせスキル）、`panel-sakura-overlay.png`（見出し・Dialogの桜装飾）を使用。新規意匠の独自採用ではない。4点とも画像準備判定に含める。
+
 ## 不足素材と必要な採用判断
 
 | 対象 | 点数 | 既存素材で解決できるか | 必要な判断 |
