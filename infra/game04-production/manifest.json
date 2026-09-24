@@ -10,8 +10,21 @@
     "projectId": "prj_sFLd5kZeu7pjveQIkeL88ShfN8i8",
     "projectName": "game04-production-receiver",
     "gitConnected": false,
-    "deploymentId": null,
-    "protectionVerified": true
+    "deploymentId": "dpl_F21SNQXmXdce4wRJ2Y8WELUAkeJR",
+    "protectionVerified": true,
+    "deploymentStatus": "READY",
+    "deploymentEnvironment": "production",
+    "sourceSha": "bf1309128266f622d15fada810357761e32ccd67",
+    "immutableUrl": "https://game04-production-receiver-fe5swww0u-kiyoshi-kitamura.vercel.app",
+    "defaultAlias": "https://project-0jsj9.vercel.app",
+    "branchAlias": "https://game04-production-receiver-git-work-gam-880f26-kiyoshi-kitamura.vercel.app",
+    "rootDirectory": "infra/game04-production/receiver",
+    "includeOutsideRoot": false,
+    "buildMachine": "basic",
+    "cronExecutionEnabled": false,
+    "anonymousProtectionChecksPassed": 12,
+    "cloudHandlerVerified": false,
+    "healthTokenConfigured": false
   },
   "production": {
     "supabaseProjectRef": "soiksqgtmcnspfedmanr",
@@ -48,7 +61,7 @@
     "existingGame04ProjectId": "prj_vV06TC8bU3TEFRpNXFNdONiZmULE"
   },
   "blockers": [
-    "receiver_upload_and_cloud_health",
+    "receiver_authenticated_cloud_health",
     "p01_domain",
     "p02_p04_final_contract",
     "schema_backup_restore_monitoring",

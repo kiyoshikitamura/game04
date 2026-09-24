@@ -13,7 +13,7 @@
 |素材保存先|game04-assets|private、素材未投入。正式素材はG5候補をMで配置|
 |復旧用保存先|game04-ops-backups|private、実backup未格納。DBバックアップとStorage実体を別保全|
 |基盤API|game04-p06-health v1 / verify_jwt=true|ACTIVE、未認証401、anon JWT503。service_roleだけ許可するコード。管理用HTTP成功試験は未実施|
-|停止receiver|infra/game04-production/receiver|ゲーム/DB/決済依存なし。専用health handlerと常時503catchall。HTTP/routing2試験PASS|
+|停止receiver|infra/game04-production/receiver|ゲーム/DB/決済依存なし。専用health handlerと常時503catchall。bf13091を専用projectへ配信、READY。HTTP/routing2試験PASS|
 |復旧確認|private ops JSON→制約付きTEMP復元→比較→ROLLBACK|1行復元/一致ともtrue。DB物理backup復旧の合格ではない|
 |監視|DB/API/Edge/Auth/Storage/Realtimeログ|実ログ読取成功。DB容量10,882,195 bytes、接続8は観測値。通知送信先は未指定|
 
@@ -41,7 +41,7 @@
 
 ## 必須未完・依存
 
-1. 停止receiverのクラウド配信/不変URL/health確認。フォルダアップロード呼出しが約399秒無応答で中断。最後の成功観測は配信0だが、中断後の配信開始有無は未確認。成功扱いにせず、読取り確認後に続行する。
+1. 停止receiver配信は今回完了。匿名遮断12経路PASS。認証通過後のクラウド関数503/health200確認は未完。P06_HEALTH_TOKENは未設定。ブラウザは対象URLでERR_BLOCKED_BY_CLIENTとなり、保護を解除して試験していない。
 2. Supabase管理画面に既存ログインがなく、新規signup停止、backup実在/成功時刻、Micro実設定/SMTP/providerの確認が未完。管理ログインが必要。接続済みMCPは当該設定操作非対応。
 3. 正式domain、Google/SMTP、Stripe本番商品/通知先、リーガル問い合わせ先はP01〜P04の確定待ち。追加の費用判断は今回発生していない。
 4. G2/P02/P03は現状本番を拒否するコードがある。本番ref許可表とserver側公開制御を担当契約に沿ってM候補へ接続する。
@@ -57,3 +57,14 @@ G2/P02〜P04にはCONNECTION_CONTRACT.mdで本番refと担当境界を受渡す�
 管理画面への次の操作: Supabaseへログインした状態で本番projectを開き、Allow new users signupを停止して保存確認、Backup成功時刻・Compute Micro・SMTP/Google未接続状態を確認する。追加費用の承認は再度求めない。
 
 RLS policyなしINFOの説明: https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy 。private台帳をclientへ公開しないため意図した設定。
+
+## 再開時の配信構築結果（2026-09-25 JST）
+
+- Deployment: `dpl_F21SNQXmXdce4wRJ2Y8WELUAkeJR` / READY / source `bf1309128266f622d15fada810357761e32ccd67`。
+- 不変URL: https://game04-production-receiver-fe5swww0u-kiyoshi-kitamura.vercel.app
+- 既定alias: https://project-0jsj9.vercel.app （正式domainではない）。branch alias: https://game04-production-receiver-git-work-gam-880f26-kiyoshi-kitamura.vercel.app
+- フォルダアップロードはファイル選択成功後も配信なし。代替としてRoot Directoryを`infra/game04-production/receiver`に固定し、フォルダ外ファイルを除外、Basic build machineへ設定。既存GitHub接続で対象repoを一時接続し、上記SHAを指定して配信した。
+- 作成ボタンはPreview表記だったが、結果は専用projectのProduction。ゲーム本体は含まず、既存game04 project/main/共有aliasは未変更。配信後にGit接続をRemove Connectionで解除し、未接続状態を確認した。
+- All Deployments / Require Log Inは配信後も保存状態を確認。独立担当の匿名GET（Cookie/Authorizationなし、redirect追随なし）で3ホスト×4経路が全て302→Vercel SSO。`RECEIVER_DEPLOYMENT_EVIDENCE.json`参照。
+- 専用projectのVercel Cron実行をDisabledへ変更。ジョブ定義なし。Mで定義と許可対象を受入するまで再有効化しない。
+- 本配信はゲーム受入でもDB接続確認でもない。cloud healthとSupabase管理設定等の必須未完は残るためP06未合格を維持。
