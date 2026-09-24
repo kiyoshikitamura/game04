@@ -24,3 +24,6 @@
 - 新service専用正式BOX関数はanon/authenticated直接execute不可、本人claim_presentのみauthenticated可。
 - セキュリティadvisor取得、新規追加2関数について指摘なし。既存全体の無関係な権限改修はしていない。
 - branchURLはbrowser ERR_BLOCKED_BY_CLIENT、shellproxy接続timeout。Vercel接続アプリも対象accessなし。別の既存ログイン済みVercel画面から固定URLを取得し、権限追加や共有alias変更なしで再検証へ移行。
+
+## 最終追加候補
+コード182a2a35、APIv23 ACTIVE。新規開始HP snapshot保存/表示、旧記録fallback保持。タイトルを既存GAME04役割表KV/logoへ接続。配信dpl_CdJhdXUce8YEybEeAjcBshUrgsBJ READY、最終不変URL/実表示は通信停止で未確認。RV01/RV02修正を20260924170339/20260924170618で適用、独立17ケースrollback PASS。最新判断は統合受入結果の再開追補を優先。

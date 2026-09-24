@@ -26,3 +26,7 @@
 ## RV02 正式version JSON null境界
 
 claim_presentの正式version検査が `<>` のため、キーが存在し値がJSON nullの場合、SQL三値論理で拒否条件全体がNULLになり通過する（source/fundingが正常な場合）。`IS DISTINCT FROM`へ変更を親へ依頼。上記rollbackテストの17ケース目にJSON null版の拒否・状態/version不変・UNCLAIMED維持検査を追加した。サーバー生成metadata不正への整合性検査であり、一般利用者への書込権限を示すものではない。
+
+## 親実行結果の受領
+
+親からRV01/RV02修正適用後の17ケースrollback PASS報告を受領。さらに正式sourceでversionキー欠落も拒否し、旧source版なしを保持する補強が入った。ここでのDB実行者は親、独立担当は試験候補作成・修正コードレビューを担当した。

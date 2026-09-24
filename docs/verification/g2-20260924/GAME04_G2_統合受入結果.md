@@ -1,4 +1,43 @@
 # GAME04 G2 統合受入結果
+
+## 再開後の現行結果（以前の記載より優先）
+
+G2判定は **未完・受入不可**。実行環境が復旧したため、原本保全・追加実装・開発DB/API反映・独立レビューを再開した。下段の切断時報告は履歴として保持する。
+
+- 最終追加コード: 182a2a35d4f599f60103e4b8cc64eee6b463c7c1（Draft PR #30、main未マージ）。
+- 当該配信: dpl_CdJhdXUce8YEybEeAjcBshUrgsBJ。GitHub配信記録でREADY確認。最終不変URLと実表示はブラウザ停止により未取得。
+- 一つ前の候補0e12b62dae1fa50168e6b9fc6aa2af1368b3a32eはREADY、https://game04-g8sktl9yj-kiyoshi-kitamura.vercel.app / dpl_6eV43HvatddiaWxbH7kBUwGvAUxM。最終追加コードと同一ではない。
+- 主API: ACTIVE v23 / verify_jwt=true / hash 1767241b8845188e8c8697d891c5ba06f495e2c142fef067cb987e4f14c18363。v22の成功transaction計測を保持し、新規侵攻の開始HP保存のみ追加。GAME04開発lrgyllgzcdcphlbmkkncのみ。
+- 追加DB差分: 20260924164519 game04_g2_kpi_gameplay、20260924164558 game04_g2_formal_present_inventory、20260924165049 game04_g2_kpi_dedicated_receipts、20260924170339 game04_g2_formal_present_structure、20260924170618 game04_g2_formal_present_version。
+
+### 今回閉じた作業と残る本体受入
+
+|対象|追加実装・確認|受入上の限界|
+|---|---|---|
+|証拠保全/U00|切断前qa-e/qa-f-final画像・DOM・SQL原本をe960238へ保存。再開後の7画像/DOM/独立結果も182aへ保存|欠落02/07原本は各記録で明示、取得済み扱いにしない|
+|BOX/U02/U07|明示正式版・無償sourceの新BOX19IDを新在庫へ原子的接続。旧BOX/残高は換算なし。独立レビューで構造/版nullの2件を修正|有償lot/期限接続は別。既存producer全件接続と本体受取→使用→保存は未完|
+|BOX境界|19ID/二重/旧在庫不変/CAS/bulk失敗/期限/別userのrollback PASS。独立17 malformedケースも拒否・未受取・state/version保持PASS|SQL検査を本体合格に読み替えない|
+|Q02/Q04|BOX長名/数量折返し、news失敗と0件の分離/再試行、法務scrollbar、通貨名修正|新候補の全実表示再検証未完|
+|設定復帰/U10|747で問い合わせ→タイトルへ戻る不具合を独立再現。旧tutorial条件を同UID/has_profileの復帰へ修正|認証投影は維持。新候補での実復帰未確認|
+|画像待ち/Q01|747で画像待ち継続を独立再現。既存12秒loaderへ共通化、失敗時inline再試行/他画面離脱、月額read並列化|時間改善/TTI/API/画像待ちの実測未完。旧2034→2030等を改善証拠にしない|
+|計測/U10/C09|新battle保存行＋成功receipt、JST・開発分離・時点QA除外・管理者routeを接続。shop/host同transaction receipt・再送1件PASS|管理者HTTP/管理画面、BOX/logbo/VIP/購入/復帰等の全計測未完|
+|QA除外|既知4QAだけ作成時点から分類。188戦はexcluded8/included180、各started/settled同数|180を正式通常実績とは認定しない。未分類QA調査が必要。全件development|
+|開始HP/U04/U06|新規raid input/resultへ開始HP/Lv保存、再生は開始値表示。既存記録は明示current fallback。6Wave/敵SP/計算不変回帰PASS|本体新規raid→保存/表示/結果の独立確認未完|
+|旧タイトル/Q03|0e12でTRIBE NEON画像残存を独立発見。既存GAME04 role表のcreative/branding title/logoへ参照とBOOT manifestを一致|KV上部のみ画像目視。最終全体/切抜き/起動再検証未完|
+|背景/Q05/Q06|9/24承認記録から侵攻5城共通背景の採用を再確認|5城画像共用の再承認・専用5城新規必須という前回残件を撤回。出陣10/素材10/SKD名称画像等は残る|
+
+### 現在の実接続阻害とQA状態
+
+0e12の本体rootでTAPは動作したが、新規開始はsignInAnonymouslyのFailed to fetchで停止。旧747の既存QAへ切り替える代替もnavigateが70秒超未完。最後のVercel画面は23秒timeout。同失敗の反復を中止。アプリ/通信どちらが原因か断定しない。外部認証設定を無断変更していない。
+
+専用QA G2QA再検 / 4c888ed3-283e-4857-a596-4f4316efab26へ、受取経路確認用の正式BOX CHAR_EXP_M×3 / ENERGY_DRINK×1 / SOUL_SELECTOR_N×1を作成。source GAME04_QA / fixture G2_BOX_RESUME_20260924、期限7日。3件ともDBでUNCLAIMEDを確認し、本体claimは未実施。直接在庫付与・自然進行・G4受入ではない。
+
+残る必須項目は、修正版本体再検証、全画面/状態・実機・性能、正式SKD名称画像・素材・出陣背景対応、旧資産方針、daily10と侵攻過剰damage算入判断、P02外部決済/P03連携/P04運用値、計測全経路。採用済み侵攻背景/主催仮FIX/P05方針の再承認は不要。
+
+詳細: RESUME_INTEGRATION.md、resume-ui.md、resume-loading.md、resume-assets.md、resume-battle-snapshot.md、resume-supply/、U10_KPI_GAMEPLAY_INTEGRATION.md、qa-resume/。テストコード/SQL/証拠をRepositoryへ保存。Production・GAME03・main・共有alias変更なし。
+
+---
+
 記録日: 2026-09-24。判定: **G2未完・受入不可**。これは実行環境切断時の保全版であり、最終合格報告ではない。子担当の実装と独立検証を実施したが、同一最終候補の全対象受入は完了していない。
 
 ## 版対応
