@@ -25,11 +25,12 @@ export default function PreparationModal({ party, ownedCharacters, title, energy
   const [detailId, setDetailId] = useState<string | null>(null);
   const detail = party.find(unit => unit.id === detailId) ?? null;
   const assets = useQuestAssets(partyArtwork(party));
+  const invalidPartySize = party.length < 1 || party.length > 5;
   const detailSlots = detail ? getSkillSlots(ownedCharacters?.find(unit => unit.id === detail.id)?.awakening ?? 0) : 0;
   return <div className="redesign-quest-dialog">
     <CanonicalDialog title="出撃準備" onClose={busy ? undefined : onBack} actions={[
       { label: 'キャンセル', onClick: onBack, disabled: busy },
-      { label: busy ? '出撃中…' : '出撃する', onClick: onConfirm, semantic: 'primary', disabled: busy || !assets.ready || energy < energyCost || party.length !== 5 },
+      { label: busy ? '出撃中…' : '出撃する', onClick: onConfirm, semantic: 'primary', disabled: busy || !assets.ready || energy < energyCost || invalidPartySize },
     ]}>
       <h3>{title}</h3>{!assets.ready && <p role={assets.failed ? "alert" : "status"}>{assets.failed ? <>画像を読み込めませんでした。<button onClick={assets.retry}>再読み込み</button></> : '読み込み中…'}</p>}
       <div className="rq-party">{party.map((unit, index) => { const master = CHARACTER_MASTERS.find(entry => entry.id === unit.id); const subject = master ? { id: master.id, name: unit.name, rarity: master.rarity, element: unit.element as 'fire'|'water'|'earth'|'wind'|'light'|'dark' } : null; return <button type="button" key={unit.id} className="rq-party-card" disabled={busy || !assets.ready} onClick={() => setDetailId(unit.id)} aria-label={`${index + 1}番 ${unit.name}のスキル・パッシブ`}>
@@ -37,7 +38,7 @@ export default function PreparationModal({ party, ownedCharacters, title, energy
       </button>; })}</div>
       <p className="rq-total-sp"><img src="/ui/sengoku/07-flower-crest.png" alt="" />共通SP <strong>{commonSpMax === null ? '開催時ルール' : `0 / ${commonSpMax}`}</strong></p>
       <button type="button" className="rq-edit-button" onClick={onOpenDeck} disabled={busy || !assets.ready}>編成変更</button>
-      {party.length !== 5 && <p role="alert">武将を5人編成してください。</p>}
+      {invalidPartySize && <p role="alert">武将を1〜5人編成してください。</p>}
       {energy < energyCost && <p role="alert">行動力が不足しています。</p>}
       {error && <p role="alert">{error}</p>}
     </CanonicalDialog>
