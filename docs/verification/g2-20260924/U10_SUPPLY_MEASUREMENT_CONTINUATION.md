@@ -21,3 +21,10 @@
 - BOX producerの19ID契約への対応は別の必須残件。旧GvG/useStoryを正式sourceへ機械変換しない。
 - daily10の失効・日跨ぎ・侵攻令対象、P02有償期限・購入、旧資産方針の未決を維持。G3/G4/main/Productionは変更なし。
 - Supabaseスキルと公式Triggers文書を確認。changelog.md取得は検索サービスのContent-type非対応で失敗。新しいSupabase APIやCLI依存は導入しない。
+
+## 交換所表示名と薬の実接続確認（親検証）
+
+- 親のf45候補本体で、所持表示「活力丸：1個」と商品表示「回復薬 ×1」の不一致を発見。
+- 根拠は `docs/product/GAME04_SHOP_IMPLEMENTATION_HANDOFF_2026-09-22.md` の正式名称「活力丸」と `src/domain/redesign/shop.ts` の既存title/reward。同日の正式ショップ表示方針へ合わせ、`ShopExchangePanel.tsx` のローカル商品ラベル1箇所のみ「活力丸 ×1」へ修正。価格50輝石・使用効果+50・API/DBの変更なし。
+- 親が本体で確認した使用前Dialogは行動力52→102。送信時にサーバー自然回復が1進み、実使用は53+50=103/100。DB照合はversion7、energyDrinks0、vitality103、cash11720。表示値との差1は自然回復時差を含み、薬が+51回復した結果とは扱わない。
+- この名称修正後の専用Preview表示は親の次候補で再確認する。薬使用の上記証拠は修正前候補の実機能検証であり、名称修正の配信確認と区別する。

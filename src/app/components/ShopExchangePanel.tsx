@@ -8,7 +8,7 @@ import CanonicalDialog from "./ui/CanonicalDialog";
 import OutlawButton from "./ui/OutlawButton";
 
 type Props = { state: RedesignState; onExchange: (payload: Record<string, unknown>) => Promise<unknown>; onUseEnergyDrink?: () => Promise<unknown> };
-const labels: Record<ShopExchangeId, string> = { energy_drink: "回復薬 ×1", cash_3000: "銭 ×3,000", cash_5000: "銭 ×5,000", cash_10000: "銭 ×10,000", cash_30000: "銭 ×30,000", cash_50000: "銭 ×50,000", raid_unlock: "侵攻令 ×1", soul_generic: "同一レアリティ魂 → 汎用魂" };
+const labels: Record<ShopExchangeId, string> = { energy_drink: "活力丸 ×1", cash_3000: "銭 ×3,000", cash_5000: "銭 ×5,000", cash_10000: "銭 ×10,000", cash_30000: "銭 ×30,000", cash_50000: "銭 ×50,000", raid_unlock: "侵攻令 ×1", soul_generic: "同一レアリティ魂 → 汎用魂" };
 
 export default function ShopExchangePanel({ state, onExchange, onUseEnergyDrink }: Props) {
   const [useMedicineOpen, setUseMedicineOpen] = useState(false);

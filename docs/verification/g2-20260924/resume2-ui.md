@@ -42,3 +42,26 @@ API/DB/ガチャ/チュートリアル/初期資産/本番/main/外部設定は�
 `node scripts/verify_g2_news_async.cjs` PASS。実ソースeffectを実行し、成功・RPCエラー・throw・未settle timeout・abort・遅延応答・再試行で空一覧成功・cleanupを確認。配信版での本体表示は親へ引継ぐ。
 
 追加変更: `src/app/components/InboxPanel.tsx`、`scripts/verify_g2_news_async.cjs`、本記録。
+
+## 最終候補 f45d523 後の限定追加点検（コード変更なし）
+
+親の依頼により独立修正可能な残件を2件以内で抽出。
+
+1. 育成/覚醒送信中のDialog操作遮断。`GrowthView.tsx`ローカルModalがsavingを共通ModalのcloseDisabledへ伝えないため、送信中も×/Escape/背面クリック・内部戻るが可能。runのactionLockは二重消費を防ぐが、正本17.3の他操作遮断と異なる。ローカルModalでpending中のclose/内容操作を遮断する限定変更が可能。実操作再現と親の所有調整後に修正する。
+2. 育成結果の右上×。共通UI正本の育成結果仕様は下部「閉じる」のみ、右上×なし。現在は共通Modalの×も表示する。結果Dialog限定で上部×を除去し、下部終了を維持できる。規約上の差異でありデータ障害とは分ける。
+
+武将個別Dialogの上下「Lv育成／覚醒」は同じ操作を2回表示している。UI最新正本のCharacter詳細では操作の種類は明示されるが、上下配置の指定なし。共通正本ではCTA重複を点検対象にしている。一方、当該武将承認モック原本は今回復元資料にないため、スクロール便宜として承認済みとは断定せず、未承認の重複と断定して撤去もしない。原本照合を親へ依頼。
+
+上記報告時点で追加編集なし。共有台帳はE/親が管理する。
+
+## R2UI06 / R2UI07 親指示による上記2件の限定修正
+
+正本の育成結果仕様は **16.3**（前の連絡の16.2は誤記）。上下の育成/覚醒CTAは保持。
+
+- R2UI06: GrowthViewの全12ローカルModalへ `pending={saving}` を接続。pending中は本文divをinertにし、共通Modalの既存closeDisabledで×/Escape/背面クリックを遮断。本文の戻る/入力等も操作不可。処理後は解除し、確認済み結果または失敗表示へ戻る。fieldset追加だと既存CSSが全子buttonに作用するためdiv inertとした。DOMを置換して一覧/スクロールを捨てる変更はしていない。
+- R2UI07: 共通Modalに後方互換 `hideCloseButton=false` を追加。育成結果のみtrueとして右上×をDOM・アクセシビリティ木から除去。resultOnly時closeDisabledでEscape/背面終了も抑止し、下部「閉じる」から終了する。結果以外の×は従来どおり。
+- `node scripts/verify_g2_growth_dialog_guard.cjs` PASS。実ソースを変換し、pending時inert/closeDisabled、通常復帰、全caller、結果の×DOM除去、既存共通Dialogの既定挙動、背面クリック保護を検証。
+- `npm run typecheck` PASS。
+- 独立Eソースreview: 全12caller、既存背景inert保持、16.3一致、後方互換、wrapperと既存直接子CSSを確認、阻害不具合なし。実ブラウザでのinert/スクロール/下部終了は別受入。
+
+変更: `GrowthView.tsx`、`Modal.tsx`、`scripts/verify_g2_growth_dialog_guard.cjs`、本記録。親のみ統合/Git保存。
