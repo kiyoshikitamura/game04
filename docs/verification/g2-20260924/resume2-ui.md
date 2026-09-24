@@ -34,3 +34,11 @@ API/DB/ガチャ/チュートリアル/初期資産/本番/main/外部設定は�
 - 実effect + fake clockで未settle timeout、abort signal、遅延応答抑止、再試行成功、cleanupを追加しPASS。
 
 実API/ブラウザ上でのtimeout表示と再試行は親の独立再検証へ残す。
+
+## R2UI05 お知らせの未応答からの復帰
+
+親の追加点検で `InboxPanel.tsx` も取得未settle時の無限待機が残ると判明。R2UI04で適用した既存12秒のread-only復帰境界をお知らせ読取へ適用。AbortControllerで中断し、transport未settle/abort無視でもtimerからerror/retryへ移行。既存一覧保持、正常完了のtimer解除、close/tab切替cleanupと遅延応答破棄を維持。プレゼント受取mutationには適用しない。
+
+`node scripts/verify_g2_news_async.cjs` PASS。実ソースeffectを実行し、成功・RPCエラー・throw・未settle timeout・abort・遅延応答・再試行で空一覧成功・cleanupを確認。配信版での本体表示は親へ引継ぐ。
+
+追加変更: `src/app/components/InboxPanel.tsx`、`scripts/verify_g2_news_async.cjs`、本記録。

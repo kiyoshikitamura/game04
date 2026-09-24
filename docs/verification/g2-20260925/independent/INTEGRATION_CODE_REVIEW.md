@@ -65,3 +65,15 @@ E02はコード・局所試験としてクローズ。配信版本陣/交流Dial
 親よりGAME04開発migration `20260924183511` 適用、rollback内の全ASSERT通過、`ledger_count=0` によるrollback確認の報告を受領。E自身がDB実行したものではない。AdvisorのRLS enabled/no policiesはservice-only台帳の意図と一致。一般ユーザー読み取りを追加する必要はない。
 
 親のbundle比較でbaseline/updated API hash完全一致、今回のautoEquip関数がAPI bundleに含まれないことを確認したとの報告を受領。稼働API v23維持と今回フロント修正は両立する。API未配信不具合として再計上しない。
+
+### R2UI05 お知らせread timeout 独立確認
+
+Dの `InboxPanel.tsx` / `verify_g2_news_async.cjs` を独立読解し、試験を再実行PASS。実行時hash/出力を `integration-targeted-results.json` のfollowupR2UI05へ保存。
+
+- news一覧readだけへ12秒timer/AbortControllerを追加。タイムアウトはtimer自身からerror/loading解除を行い、transport未settleでも再試行状態へ移る。
+- timeout後や閉じる/tab切替cleanup後のresponseはcancelledで破棄。timer・signalを正常完了/cleanupで解放。
+- 一覧は成功時だけ置換し、エラー時は既取得一覧を保持。空結果成功はerrorなしの空表示になる。現render条件でもloading/errorと「お知らせはありません」を同時表示しない。
+- 受取/一括受取とpresentClaimLoadingの排他は変更なし。read timeoutを金銭/在庫mutationのロック解除へ流用していない。
+- 取得成功、応答error、throw、未settle、abort、後着抑止、再試行空成功、cleanupを抽出effect試験で確認。DOM/ブラウザを実行した証拠ではない。
+
+コード・局所試験としてR2UI05の是正成立。配信版本体でのtimeout/retry CTA・一覧保持の観測は親の実検証へ残る。新たな修正要求なし。

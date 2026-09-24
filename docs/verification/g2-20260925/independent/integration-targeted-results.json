@@ -49,5 +49,15 @@
     "stdout": "PASS G2 home activity: first success/filter, optional profile independence, error retention, thrown transport, cancelled response, stalled timeout, late response, retry recovery\n",
     "stderr": "",
     "scope": "Actual extracted effect body with stub state setters/transport/timers. Not React component DOM or browser acceptance."
+  },
+  "followupR2UI05": {
+    "filesSha256": {
+      "src/app/components/InboxPanel.tsx": "242c6f85ba4301958f6ac4513b78920d1eefe9c984147d1052c9d3441058739e",
+      "scripts/verify_g2_news_async.cjs": "d714597651ca36d27aab60ce58f9920d378ba66226927539ba254d59acc2a250"
+    },
+    "exitCode": 0,
+    "stdout": "PASS G2 news: success, retained list on error/throw, stalled timeout/retry, late response, cleanup\n",
+    "stderr": "",
+    "scope": "Actual extracted news read effect with stub state setters/transport/timers; not React DOM or live browser acceptance."
   }
 }

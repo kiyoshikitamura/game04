@@ -10,6 +10,9 @@ import { canonicalItemName } from "@/domain/gameplay/canonical/items";
 import { battleDisplayText } from "@/domain/presentation/battleTerminology";
 import "./InboxPanel.css";
 
+// Existing community read recovery bound; never used for present mutations.
+const NEWS_READ_TIMEOUT_MS = 12_000;
+
 function PresentRewardIcon({ itemId }: { itemId: string }) {
   if (itemId === "PLAYER_XP") return <span className="inbox-present-reward-icon" aria-label="プレイヤー経験値">XP</span>;
   if (itemId === "CASH") return <img src="/ui/icon_cash.png" alt="" className="inbox-present-reward-icon" />;
@@ -43,11 +46,19 @@ export default function InboxPanel() {
   useEffect(() => {
     if (!showInboxPanel || inboxPanelTab !== "news") return;
     let cancelled = false;
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => {
+      if (cancelled) return;
+      cancelled = true;
+      controller.abort();
+      setNewsError(true);
+      setNewsLoading(false);
+    }, NEWS_READ_TIMEOUT_MS);
     setNewsLoading(true);
     setNewsError(false);
     void (async () => {
       try {
-        const { data, error } = await supabase.from("news").select("*").order("created_at", { ascending: false });
+        const { data, error } = await supabase.from("news").select("*").order("created_at", { ascending: false }).abortSignal(controller.signal);
         if (cancelled) return;
         if (error || !data) throw error || new Error("News unavailable");
         setNewsList(data.map((news) => ({
@@ -58,10 +69,11 @@ export default function InboxPanel() {
       } catch {
         if (!cancelled) setNewsError(true);
       } finally {
+        window.clearTimeout(timer);
         if (!cancelled) setNewsLoading(false);
       }
     })();
-    return () => { cancelled = true; };
+    return () => { cancelled = true; window.clearTimeout(timer); controller.abort(); };
   }, [showInboxPanel, inboxPanelTab, setNewsList, newsRetry]);
 
   if (!showInboxPanel) return null;
