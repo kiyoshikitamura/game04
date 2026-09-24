@@ -63,3 +63,48 @@
 - query自体は認証権限ではなく表示経路。復帰時は引き続きhas_profileと同UID markerが必要。API/DB/認証条件の緩和なし。
 - supportEmail設定済みのmailtoは既存どおり。未設定の問い合わせページfallbackだけに設定起点を伝播。
 - コード/局所確認PASS、blocking issueなし。本体の設定→本文の別法務ページ→閉じる→同ゲーム設定の再表示は親の最新Preview QAへ。5分を超える閲覧/marker失効時は既存のタイトル復帰条件が残る。今回それを新たに合格扱い・変更しない。
+
+### R3UI04 メニュー直行入口の補足
+
+RedesignShellの「お問い合わせ」も確認。既存session.user.idでarmLegalSettingsReturnを呼び`/legal/contact?from=settings`へ遷移する。SettingsPanelと同じ復帰方式を再利用し、独自認証判定を追加しない。UIDなしではmarkerを作らず、復帰時の既存profile/markerチェックを迂回しない。
+
+## R3QA01 Q01観測経路の独立review
+
+対象: next.config.ts、redesignQaTelemetry.ts、redesignPerformance.ts、CharacterImageReadiness.ts、HomeView.tsx、questAssets.ts、QA viewport page/TimingViewport.tsx、verify_g2_qa_timing.cjs。
+
+- build許可フラグはVERCEL_ENV=productionでfalse。サーバーQAページもproduction/QA未許可を404。client送信も許可flag/QAflag/APP_ENVを確認し、通常トップレベルではparent===windowにより無送信。
+- postMessageのtargetはlocation.origin。受信側はorigin一致＋自身のiframe.contentWindow一致＋shape検査が必要。外部origin/別windowは受け付けない。最大100件、timeOrigin変更時の旧計測破棄を実装。
+- messageは固定scope・件数・数値時刻・結果だけへ明示投影。request payload、userId、resource URLを含めない。通常本体には計測panelを出さない。
+- requestは認証・通信・応答検査を含むinvoke全体。画像は既存preloadAssetのload/decodeを含むグループ待機であり、画像転送時間・decode単独時間とは違う。失敗時は最初のrejectまで、非表示化/離脱でcancelされた試行は送信しない。
+- Navigation/FCPはブラウザ指標を表示。TTIは「未計測」と明示。画像グループ完了を操作可能時刻に置換しない。battle画像の観測は今回のhome/growth/quest scopeに含めない。
+- 初回レビューでpaints:[null]のshape検査がthrowすることを指摘。担当へ非null判定と通常トップレベル無送信・未知scope検査追加を依頼。修正確認結果は次段へ追記する。
+
+R3QA01再確認: 非null object guard修正後に独立再実行PASS。paints:[null]はthrowせずfalse、未知scopeはotherへ投影、通常トップレベルは無送信。origin/source拒否・payload/URL/ID非投影・100件・reload消去・production guard・画像count/outcomeの局所試験が全件通過。blocking issueなし。最新配信でpanelに実測が届くこと、各待機の時間比較、実機性能は親の本体検証で確定する。
+
+## R3UI05 設定サマリーと5196222a QAflag修正・独立確認
+
+R3UI05: SettingsPanelの実構造はdl.settings-summary > div > dt/dd。共有EditableSettingSectionのdl 2列ルールが外側にも適用され、内側2列と重なる原因を確認した。限定selectorで外側を常時1列、412px以下は各組のラベル/値も1列に変更。既存ddのoverflow-wrap:anywhereに加え左寄せ・改行保持、min-width:0で長い名前/自己紹介を必要情報の削除なしに表示する。編集入力・保存処理・スクロール所有者は変更なし。source review PASS、実幅360/375/390と低高さの表示・CTA到達は親の再検証へ。
+
+QAflag: 前回PreviewのQA route404に対し、専用G2 Previewだけ未設定flagの既定値をtrueにする修正を独立確認。VERCEL_ENV=previewかつcommit ref=work/game04-g2-20260924の完全一致が必要。明示false/空/未知値はtrueへ上書きしない。他枝は明示trueのみ。VERCEL_ENV productionまたはAPP_ENV productionなら明示trueでも常にfalse。ENABLE_QA_TOOLSとMETRICS_ALLOWEDが同じeffective値を使う。
+
+`verify_g2_qa_timing.cjs`再実行PASS。実next.configをtranspileし、専用枝未設定・明示false・Production+true・APP_ENV production・他枝未設定・他枝明示true・ローカル未設定の7環境を独立実行した。通常本体無送信・shape/source/origin・cap100等の前回追加試験もPASS。フラグの既定は承認済み専用開発Previewに限定され、Productionや共有alias設定を変更しない。実配信で404が解消したかは親の応答確認結果で確定する。
+
+## フッターbusy表示の独立確認
+
+親の観測訂正を反映: 結果Dialogが残った状態で背景のフッターが操作できないことは正常であり、その挙動を不具合修正の根拠にしない。今回の限定差分は、既存navigateがbusy/lock中に遷移を拒否する一方、5つのフッターボタンがenabled表示だった不一致だけを是正する。
+
+RedesignAppの既存busyをRedesignShell.navigationBusyへ渡し、nav aria-busyと全5button.disabledへ反映。既存navigateのbusy || lock.currentチェックは維持。mutationの通信/排他/結果Dialog/報酬処理を変更せず、idle時はdisabled解除、既存shell呼出側は省略時falseを維持する。`verify_g2_footer_busy.cjs`を独立実行してPASS（5buttonのbusy/idle両状態、parent接続、既存navigate排他確認）。blocking issueなし、統合可能。実表示の再確認は親の最終候補QAへ。
+
+## 行動力103→98→100観測の切り分け（修正不要）
+
+同じ専用QA `2b544996-e7f4-4e88-a5d2-b20f1f50b4b2`のみをread-only照合。上限超過103から再戦で5消費した後、結果文98と後続header100が異なる観測を調査した。Supabase skillを読み、稼働get_state/commit定義と本人request receipt・battleを確認。共有変更は実施しない。
+
+|証拠|内容|
+|---|---|
+|開始request 4b07bab2-e8df-41df-812f-7988d7d58c11|2026-09-24 22:43:07.519807 UTC、version15、保存energy98|
+|決着request 3b2328f8-5478-4095-992c-e94697d5da6f|22:43:08.782149 UTC、version16、保存energy98|
+|決着playerGrowth|beforeLevel1→level1、EXP60、energy98、energyRecovered0。Lv回復ではない|
+|稼働get_state|energy>=100ならanchor=now。上限超過中の数時間を古いanchorとして蓄積しない|
+|親の可視計測原本|five-result-and-timing-519.txt、quest_battle362139→365905ms、末尾get_state1652674ms。約21分の実経過|
+
+開始・決着receiptがともに98のため、当該戦闘の直後に古いanchorで100へ戻ったという仮説を支持しない。後続読込まで約21分経過しており、300秒ごとの自然回復で2回復して100へ到達できる。結果は決着時snapshot、headerは後続の現在値として整合する。この観測を確定不具合に数えず、数値/anchor/API/DBは修正しない。別の長時間停止・競合境界を今回の観測だけで全件合格にもしていない。

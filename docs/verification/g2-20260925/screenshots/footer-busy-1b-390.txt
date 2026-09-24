@@ -1,0 +1,215 @@
+- iframe [active]:
+  - alert
+  - region "ゲーム画面":
+    - img "くノ一"
+    - generic: Lv.1
+    - strong: G2継続QA
+    - generic "将来の同盟表示枠": ◇ 同盟 —
+    - button "アカウント連携": 未認証
+    - button "メニュー"
+    - generic: 銭 13,220
+    - generic: 輝石 200
+    - generic: 行動力 100/100
+    - main:
+      - navigation "育成":
+        - button "デッキ"
+        - button "編成" [pressed]
+        - button "武将"
+        - button "スキル"
+        - button "装備"
+      - heading "出撃メンバー" [level=3]
+      - generic "選択武将の行動順":
+        - button "← 移動" [disabled]
+        - button "移動 →" [disabled]
+      - button "1 くノ一 N 水 くノ一 N 水 Lv.8 +0":
+        - emphasis: "1"
+        - figure "くノ一 N 水"
+        - generic: くノ一
+        - generic: N 水
+        - generic: Lv.8 +0
+      - button "2 伝令 N 土 伝令 N 土 Lv.1 +0":
+        - emphasis: "2"
+        - figure "伝令 N 土"
+        - generic: 伝令
+        - generic: N 土
+        - generic: Lv.1 +0
+      - button "3 僧兵 N 火 僧兵 N 火 Lv.1 +0":
+        - emphasis: "3"
+        - figure "僧兵 N 火"
+        - generic: 僧兵
+        - generic: N 火
+        - generic: Lv.1 +0
+      - button "4 前田利家 R 土 前田利家 R 土 Lv.1 +0":
+        - emphasis: "4"
+        - figure "前田利家 R 土"
+        - generic: 前田利家
+        - generic: R 土
+        - generic: Lv.1 +0
+      - button "5 竹中半兵衛 R 光 竹中半兵衛 R 光 Lv.1 +0":
+        - emphasis: "5"
+        - figure "竹中半兵衛 R 光"
+        - generic: 竹中半兵衛
+        - generic: R 光
+        - generic: Lv.1 +0
+      - text: 絞り込み
+      - combobox "絞り込み":
+        - option "すべて" [selected]
+        - option "N"
+        - option "R"
+        - option "SR"
+        - option "SSR"
+        - option "火"
+        - option "水"
+        - option "土"
+        - option "風"
+        - option "光"
+        - option "闇"
+      - text: 並び替え
+      - combobox "並び替え":
+        - option "Lv" [selected]
+        - option "レアリティ"
+        - option "名前"
+        - option "属性"
+      - button "くノ一 N 水 くノ一 N・水・攻撃 Lv.8 覚醒+0 編成中" [disabled]:
+        - figure "くノ一 N 水"
+        - generic: くノ一
+        - generic: N・水・攻撃
+        - generic: Lv.8 覚醒+0
+        - generic: 編成中
+      - button "伝令 N 土 伝令 N・土・支援 Lv.1 覚醒+0 編成中" [disabled]:
+        - figure "伝令 N 土"
+        - generic: 伝令
+        - generic: N・土・支援
+        - generic: Lv.1 覚醒+0
+        - generic: 編成中
+      - button "僧兵 N 火 僧兵 N・火・守備 Lv.1 覚醒+0 編成中" [disabled]:
+        - figure "僧兵 N 火"
+        - generic: 僧兵
+        - generic: N・火・守備
+        - generic: Lv.1 覚醒+0
+        - generic: 編成中
+      - button "山伏 N 光 山伏 N・光・回復・保護 Lv.1 覚醒+0" [disabled]:
+        - figure "山伏 N 光"
+        - generic: 山伏
+        - generic: N・光・回復・保護
+        - generic: Lv.1 覚醒+0
+      - button "女侍 N 土 女侍 N・土・攻守 Lv.1 覚醒+0" [disabled]:
+        - figure "女侍 N 土"
+        - generic: 女侍
+        - generic: N・土・攻守
+        - generic: Lv.1 覚醒+0
+      - button "前田利家 R 土 前田利家 R・土・攻守 Lv.1 覚醒+0 編成中" [disabled]:
+        - figure "前田利家 R 土"
+        - generic: 前田利家
+        - generic: R・土・攻守
+        - generic: Lv.1 覚醒+0
+        - generic: 編成中
+      - button "竹中半兵衛 R 光 竹中半兵衛 R・光・守備 Lv.1 覚醒+0 編成中" [disabled]:
+        - figure "竹中半兵衛 R 光"
+        - generic: 竹中半兵衛
+        - generic: R・光・守備
+        - generic: Lv.1 覚醒+0
+        - generic: 編成中
+    - navigation "メインナビゲーション":
+      - button "本陣" [disabled]
+      - button "出陣" [disabled]
+      - button "武将" [disabled]
+      - button "共闘" [disabled]
+      - button "召喚" [disabled]
+- region "QA読み込み計測":
+  - heading "QA読み込み計測" [level=2]
+  - paragraph: 本体は上の実寸iframeです。APIは認証・通信・応答確認を含む総待機時間。画像は必須画像グループの待機時間（キャッシュを含む）です。操作可能時刻・TTIは未計測。
+  - button "本体を再読込して計測を消去"
+  - paragraph: 件数：11 / 100
+  - generic "ブラウザ初回表示指標":
+    - paragraph: Navigation：navigate ／ responseStart 282.2 ms ／ responseEnd 284.1 ms ／ DCL 390.5 ms
+    - paragraph: first-paint：656.0 ms
+    - paragraph: first-contentful-paint：656.0 ms
+  - table:
+    - rowgroup:
+      - row "種別 / 対象 枚数 開始ms 完了ms 待機ms 結果":
+        - columnheader "種別 / 対象"
+        - columnheader "枚数"
+        - columnheader "開始ms"
+        - columnheader "完了ms"
+        - columnheader "待機ms"
+        - columnheader "結果"
+    - rowgroup:
+      - row "request / get_state — 15451.0 17210.5 1759.5 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "15451.0"
+        - cell "17210.5"
+        - cell "1759.5"
+        - cell "success"
+      - row "image-group / home 9 17240.2 17645.3 405.1 success":
+        - cell "image-group / home"
+        - cell "9"
+        - cell "17240.2"
+        - cell "17645.3"
+        - cell "405.1"
+        - cell "success"
+      - row "image-group / quest 2 44258.4 44624.7 366.3 success":
+        - cell "image-group / quest"
+        - cell "2"
+        - cell "44258.4"
+        - cell "44624.7"
+        - cell "366.3"
+        - cell "success"
+      - row "request / get_state — 44254.2 45641.4 1387.2 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "44254.2"
+        - cell "45641.4"
+        - cell "1387.2"
+        - cell "success"
+      - row "image-group / quest 1 51369.0 51369.1 0.1 success":
+        - cell "image-group / quest"
+        - cell "1"
+        - cell "51369.0"
+        - cell "51369.1"
+        - cell "0.1"
+        - cell "success"
+      - row "image-group / quest 1 57780.6 57781.0 0.4 success":
+        - cell "image-group / quest"
+        - cell "1"
+        - cell "57780.6"
+        - cell "57781.0"
+        - cell "0.4"
+        - cell "success"
+      - row "request / get_state — 75451.5 76920.9 1469.4 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "75451.5"
+        - cell "76920.9"
+        - cell "1469.4"
+        - cell "success"
+      - row "image-group / growth 22 128976.8 129502.1 525.3 success":
+        - cell "image-group / growth"
+        - cell "22"
+        - cell "128976.8"
+        - cell "129502.1"
+        - cell "525.3"
+        - cell "success"
+      - row "request / get_state — 128963.8 130581.4 1617.6 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "128963.8"
+        - cell "130581.4"
+        - cell "1617.6"
+        - cell "success"
+      - row "request / get_state — 135451.7 136893.0 1441.3 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "135451.7"
+        - cell "136893.0"
+        - cell "1441.3"
+        - cell "success"
+      - row "image-group / growth 20 136641.3 137015.0 373.7 success":
+        - cell "image-group / growth"
+        - cell "20"
+        - cell "136641.3"
+        - cell "137015.0"
+        - cell "373.7"
+        - cell "success"
+- alert

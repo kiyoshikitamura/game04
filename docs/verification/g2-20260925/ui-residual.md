@@ -37,3 +37,47 @@ Q03/U10。設定からcontactへ直接移動し閉じる既存経路は、sameUI
 画像読込直後の1度目無反応/2度目成功について、FooterからRedesignApp.navigateに画像readyの条件は存在しない。navigate先頭はbusy/lockのみ、画像待機は各View内の操作を制限する。コードのみでは所見と一致する確定原因がなく、推測でbusy/lockを除去しない。実表示・イベント/送信状態の証拠追加が再開条件。外部依存やUI完了扱いに移さず未確認として保持。
 
 Coverage表は未表示状態を実装不足と同一扱いしない。今回の確定接続不備以外、保存済みの通常出陣・育成・BOX・薬の機能を未実装へ戻さず、最新候補の代表状態受入は親へ引き継ぐ。
+
+## R3QA01: 明示QA計測表（Q01）
+
+親の実ブラウザ計測を補助する明示観測経路。通常本体には計測UIを出さない。
+
+- `home-live-viewport` の実寸iframe下にQA計測表。既存本体360/375/390/512の寸法、保存状態は変更しない。
+- `redesignPerformance` の認証/通信/応答検証を含むrequest待機時間と、Navigation responseStart/responseEnd/DCL、Paint/FCPを表示。
+- `CharacterImageReadiness` のグループ開始→完了/失敗でHome/Growth/Questの画像待機時間・枚数・成否を通知。cacheを含む。`screenAssets` はdecode失敗時にもnaturalWidthでloadedへ復帰するため「decode完了」と断定しない。操作可能時刻/TTIは未計測。
+- postMessageはtargetOriginをsame origin指定し、受信側もoriginとiframe Windowのsource一致を必須。隠れたstate/DOM/Performanceの外部探索なし。
+- payload、URL、残高、ID、tokenは通知しない。request名/画像scopeも固定allowlistに限定。最大100件、iframeのtimeOrigin変更時と再読込ボタンで旧値消去。
+- QAflag必須、NextビルドでProduction時はQA許可値false強制、routeでもVERCEL_ENV/APP_ENV Production拒否。通常ページの既存console診断は変更しない。
+- `node scripts/verify_g2_qa_timing.cjs`: PASS。無送信条件、明示フィールド投影、origin/source検証、NaN拒否、上限100、navigation変更消去、画像枚数/成否、server/build Production条件。
+- `npx tsc --noEmit`: PASS（追加計測実装時）。実iframeイベント表示・冷/warm同条件の測定は親のPreview確認待ち。測定UIの実装を性能基準達成としない。
+
+## R3UI05: 設定プロフィールが縦1文字になる実表示不具合
+
+親681の360×568実表示で「未設定」が1文字ずつ縦並びとなることを確認。根本原因は共通`.editable-setting-summary dl`が直下dt/ddを想定した2列なのに、SettingsPanelは`dl > div > dt/dd`の項目グループ構造だったこと。外側2列×内側2列に二重分割される。
+
+- SettingsPanelのグループ付きdlだけ外側1列へ明示。モバイル412px以下は各項目のラベル/値も縦配置し本文幅を確保。
+- 自己紹介の改行を保持し、文字省略・overflow hiddenで隠さない。
+- `SettingsPanel.css`だけの局所CSS変更。既存編集・プロフィール保存・未設定文言は保持。
+- 親の修正前画像`legal-return-360x568.png`が根拠。修正後実表示は統合Previewで確認待ち。
+
+### R3QA01 Preview既定flag是正
+
+親87ef Previewでharness404を確認。routeへ追加したQA必須flagに対し、Git-linked専用G2 Previewのflag未設定を補う既定値が欠落していた。`next.config.ts`でVERCEL_ENV=previewかつbranch=`work/game04-g2-20260924`、QAflag未設定の場合だけtrueを補完。明示falseを尊重し、他branchは明示trueのみ、Productionは必ずfalse。`ENABLE_QA_TOOLS`と計測許可を同じeffective値へ揃えた。外部ダッシュボード設定変更なし。
+
+局所試験は実next.configをtranspileし、専用branch未設定/明示false/Production明示true/APP_ENV production/他branch未設定/他branch明示true/local未設定の7条件を確認、PASS。配信後harnessは親で再確認する。
+
+## R3UI06: Footerの送信中表示と受付状態の同期
+
+親の追加スクリーンショット確認で、save_deck後は「編成保存結果／更新しました／閉じる」が表示されていた。Footer無反応は結果overlay背面への操作であり、結果を閉じてから遷移する正常仕様。今回所見を不具合の根拠にはしない。一方、独立したソース上の整合改善として、navigateがbusy/lock中をreturnするのにFooterにはbusyの伝達がなく常に押せる表示だった点を是正する。
+
+- RedesignAppのbusyをRedesignShellのnavigationBusyへ伝達。
+- Footer5ボタンをdisabledへ同期、nav aria-busyとdisabled外観を追加。
+- navigateのbusy/lock排他は保持。画像待機を新たなロック条件にしない。終了/失敗時は既存finally setBusy(false)で戻る。
+- `node scripts/verify_g2_footer_busy.cjs`: PASS。実Shell renderをbusy/idleで比較し5ボタン、aria-busy、親接続/既存排他保持を確認。
+- 親で保存中disabled→完了後有効の実確認待ち。結果Dialog中の背面Footer操作は引き続き不可で正しい。
+
+- R3UI06追加時 `npx tsc --noEmit`: PASS。
+
+### R3UI06 親の実送信受入追記
+
+親が1b4473cd/390×568で専用QAデッキ5枠目の左移動を実送信。送信中Footer全5ボタンdisabled、保存完了後enabledへ復帰、編成保存結果Dialogを閉じることを確認。`/workspace/scratch/g2-r3/footer-busy-1b-390.txt` / `footer-settled-1b-390.txt`が原本。本担当のread-onlyとは別の親実証として保持。

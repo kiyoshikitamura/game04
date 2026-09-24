@@ -1,0 +1,159 @@
+- iframe [active]:
+  - alert
+  - region "ゲーム画面":
+    - img "くノ一"
+    - generic: Lv.1
+    - strong: G2継続QA
+    - generic "将来の同盟表示枠": ◇ 同盟 —
+    - button "アカウント連携": 未認証
+    - button "メニュー"
+    - generic: 銭 13,220
+    - generic: 輝石 200
+    - generic: 行動力 100/100
+    - main:
+      - button "‹ エリア一覧"
+      - heading "三河の地" [level=2]
+      - generic "三河の地のステージ一覧":
+        - button "1-1 初期3人で戦闘を学ぶ 消費行動力 5 クリア済":
+          - generic: 1-1
+          - strong: 初期3人で戦闘を学ぶ
+          - generic: 消費行動力 5
+          - generic: クリア済
+        - button "1-2 受ける役を決める 消費行動力 5 クリア済":
+          - generic: 1-2
+          - strong: 受ける役を決める
+          - generic: 消費行動力 5
+          - generic: クリア済
+        - button "1-3 一つ変えて突破する 消費行動力 0 挑戦可能":
+          - generic: 1-3
+          - strong: 一つ変えて突破する
+          - generic: 消費行動力 0
+          - generic: 挑戦可能
+      - dialog "1-3 一つ変えて突破する":
+        - heading "1-3 一つ変えて突破する" [level=2]
+        - button "閉じる": ×
+        - generic: ステージボス
+        - article:
+          - figure "ボス 直江兼続":
+          - strong: 直江兼続
+          - generic: Lv.7
+          - img "水属性"
+          - generic "ステージボスの能力値":
+            - term: HP
+            - definition: 3,000
+            - term: ATK
+            - definition: "150"
+            - term: DEF
+            - definition: "60"
+        - generic: Wave数：2
+        - generic: 消費行動力：0
+        - button "攻略のヒント"
+        - button "報酬を確認" [active]
+        - button "挑戦":
+          - generic: 挑戦
+      - dialog "報酬を確認":
+        - heading "報酬を確認" [level=2]
+        - button "閉じる": ×
+        - heading "初回報酬" [level=3]
+        - list:
+          - generic: 直江兼続の魂
+          - strong: ×8
+          - generic: 武将召喚券
+          - strong: ×1
+          - generic: 装備召喚券
+          - strong: ×1
+        - heading "通常ドロップ" [level=3]
+        - list:
+          - generic: 銭
+          - strong: ×500
+          - generic: 武将EXP小（100 EXP）
+          - strong: ×1
+          - generic: 装備EXP小（100 EXP）
+          - strong: ×1
+        - heading "レアドロップ" [level=3]
+        - list:
+          - generic: 直江兼続の魂
+          - strong: ×1
+          - generic: 武将召喚券
+          - strong: ×1
+          - generic: スキル召喚券
+          - strong: ×1
+          - generic: 装備召喚券
+          - strong: ×1
+        - button "戻る":
+          - generic: 戻る
+    - navigation "メインナビゲーション":
+      - button "本陣"
+      - button "出陣"
+      - button "武将"
+      - button "共闘"
+      - button "召喚"
+- region "QA読み込み計測":
+  - heading "QA読み込み計測" [level=2]
+  - paragraph: 本体は上の実寸iframeです。APIは認証・通信・応答確認を含む総待機時間。画像は必須画像グループの待機時間（キャッシュを含む）です。操作可能時刻・TTIは未計測。
+  - button "本体を再読込して計測を消去"
+  - paragraph: 件数：7 / 100
+  - generic "ブラウザ初回表示指標":
+    - paragraph: Navigation：navigate ／ responseStart 282.2 ms ／ responseEnd 284.1 ms ／ DCL 390.5 ms
+    - paragraph: first-paint：656.0 ms
+    - paragraph: first-contentful-paint：656.0 ms
+  - table:
+    - rowgroup:
+      - row "種別 / 対象 枚数 開始ms 完了ms 待機ms 結果":
+        - columnheader "種別 / 対象"
+        - columnheader "枚数"
+        - columnheader "開始ms"
+        - columnheader "完了ms"
+        - columnheader "待機ms"
+        - columnheader "結果"
+    - rowgroup:
+      - row "request / get_state — 15451.0 17210.5 1759.5 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "15451.0"
+        - cell "17210.5"
+        - cell "1759.5"
+        - cell "success"
+      - row "image-group / home 9 17240.2 17645.3 405.1 success":
+        - cell "image-group / home"
+        - cell "9"
+        - cell "17240.2"
+        - cell "17645.3"
+        - cell "405.1"
+        - cell "success"
+      - row "image-group / quest 2 44258.4 44624.7 366.3 success":
+        - cell "image-group / quest"
+        - cell "2"
+        - cell "44258.4"
+        - cell "44624.7"
+        - cell "366.3"
+        - cell "success"
+      - row "request / get_state — 44254.2 45641.4 1387.2 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "44254.2"
+        - cell "45641.4"
+        - cell "1387.2"
+        - cell "success"
+      - row "image-group / quest 1 51369.0 51369.1 0.1 success":
+        - cell "image-group / quest"
+        - cell "1"
+        - cell "51369.0"
+        - cell "51369.1"
+        - cell "0.1"
+        - cell "success"
+      - row "image-group / quest 1 57780.6 57781.0 0.4 success":
+        - cell "image-group / quest"
+        - cell "1"
+        - cell "57780.6"
+        - cell "57781.0"
+        - cell "0.4"
+        - cell "success"
+      - row "request / get_state — 75451.5 76920.9 1469.4 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "75451.5"
+        - cell "76920.9"
+        - cell "1469.4"
+        - cell "success"
+- alert

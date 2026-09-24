@@ -1,4 +1,14 @@
 # ローディング測定保全記録
+
+## R3追補（2026-09-25・下の履歴より優先）
+
+5196222aでQA明示計測表を実装し、可視表からAPI総待機と必須画像グループ待機を取得できた。原本44行・条件・解釈は `../g2-20260925/live-browser-r3.md` と `timing-519-observed.json`、DOM原本 `screenshots/five-result-and-timing-519.txt`。
+
+初回FCP1,700ms、get_state全記録1,316〜2,109.4ms、初回本陣9枚429.9ms・再訪4.3ms、育成17枚490.9ms、出陣2枚317.0ms。画像とAPIが並行している区間を確認。既存セッション/cache・回線制限なしのcloud Chrome CSS iframe360×568。TTI、resourceごとのcache/transfer/decode、cold同条件比較、実機は未取得。単一セッションの定期取得を独立試行としてp95計算しない。操作待ち時間を起動時間に含めない。
+
+長時間切替秒数等は共通UI正本§16.1で未FIX。追加性能目標は `../g2-20260925/G2_一括判断事項.md` D04の提案としてまとめ、承認済み・達成済みとしない。以下の「分離未取得」は以前の版の履歴であり、今回の部分取得と区別する。
+
+## R2までの履歴
 Cloud Chrome本体・CSS iframe。実機ではない。warm代表出陣 baseline2034ms / candidate2030ms、任務2046ms /2052ms。単発で有意改善は示さない。candidate cold/warmup出陣9853ms。HTTP cache HIT headers/total10306/10335対8689/8720msは別測定でありTTIではない。API/画像/操作可能時刻の分離未取得。Performance API利用制約あり。承認済閾値との合格判定なし。実装修正（取得共通化・並列化・再マウント等抑制）と性能受入を混同しない。原本のGit保全未完。
 
 ## 継続検証（2026-09-24 UTC）
