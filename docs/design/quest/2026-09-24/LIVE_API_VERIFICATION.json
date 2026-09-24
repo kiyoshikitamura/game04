@@ -1,0 +1,21 @@
+{
+  "status": "BLOCKED",
+  "project": "lrgyllgzcdcphlbmkknc",
+  "checkedAt": "2026-09-23T17:45:33.439Z",
+  "error": "The operation was aborted due to timeout",
+  "cause": 23,
+  "scope": "New QA session only. No existing user edits. No database or API deployment.",
+  "verified": false,
+  "blockedAt": "POST /auth/v1/signup (new QA account creation)",
+  "requestTimeoutMs": 10000,
+  "verifiedChecks": [],
+  "unverifiedChecks": [
+    "battle start",
+    "same request replay",
+    "ticket duplicate prevention",
+    "quest attempts",
+    "next stage",
+    "get_state reload"
+  ],
+  "accountCreation": "Response not received; account creation not confirmed."
+}

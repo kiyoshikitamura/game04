@@ -1,6 +1,7 @@
 'use client';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { GameContext } from '@/app/context/GameContext';
+import ShopUiHarness from '@/app/qa/shop-ui/ShopUiHarness';
 import HomeView from '@/app/components/redesign/HomeView';
 import QuestView, { type QuestSettlement } from '@/app/components/redesign/QuestView';
 import GrowthView from '@/app/components/redesign/GrowthView';
@@ -12,6 +13,7 @@ import { BATTLE_RULES, CHARACTER_MASTERS, EQUIPMENT_MASTERS, buildBattleParty, c
 import {createQuestBattleInput, questEnergyCost, questVictoryRewards} from '@/domain/redesign/questMaster';
 import { QUEST_STAGES, getQuestStage, isQuestStageUnlocked } from '@/domain/redesign/quests';
 import { applyGrowthAction } from '@/domain/redesign/growth';
+import { applyShopExchange } from '@/domain/redesign/shop';
 import { applyRaidAction, createRaidRoom, getRoomRaidMaster, raidEnemy } from '@/domain/redesign/raid';
 import { simulateBattle, type BattleResult } from '@/domain/redesign/battle';
 import type { RaidRoom, RedesignState } from '@/domain/redesign/types';
@@ -19,6 +21,7 @@ import '@/app/components/redesign/redesign.css';
 import { characterArt } from '@/theme/creativeAssets';
 
 const noop = () => undefined;
+const qaMissionRewardKind = (itemId: string) => itemId === 'CASH' ? 'cash' : itemId.startsWith('CHAR_EXP') ? 'character_exp_item' : itemId.startsWith('EQUIP_EXP') ? 'equipment_exp_item' : itemId === 'EQUIP_LB_PART' ? 'equipment_lb' : itemId === 'SKILL_MANUAL' ? 'skill_material' : 'generic_soul';
 import { emptyGrowthInventory } from '@/domain/redesign/growthMaster';
 const LOCAL_ID = 'qa-local-only';
 function fixtureState(): RedesignState {
@@ -60,7 +63,7 @@ export default function RedesignFixture() {
     const params = new URLSearchParams(window.location.search);
     setWaveSpProbe(params.get('probe') === 'wave-sp');
     const selected = params.get('view');
-    if (selected && ['home','quest','character','raid','territory','battle'].includes(selected)) setTab(selected);
+    if (selected && ['home','quest','character','raid','territory','battle','shop'].includes(selected)) setTab(selected);
     document.body.classList.add('rd-active');
     return () => document.body.classList.remove('rd-active');
   }, []);
@@ -75,9 +78,12 @@ export default function RedesignFixture() {
     return simulateBattle({ seed: 917, party, waves: QUEST_STAGES[2].waves, rules: BATTLE_RULES });
   }, [party,waveSpProbe]);
   const navigate = (next: string) => { setMessage(''); setBattle(null); setTab(next.startsWith('quest') ? 'quest' : next); };
+  const rejectedOnce = useRef(false);
   async function action(type: string, payload: Record<string, unknown> = {}) {
+    const rejectOnce = new URLSearchParams(window.location.search).get('rejectOnce');
+    if (!rejectedOnce.current && ['character_level','character_awaken','save_deck'].includes(type) && rejectOnce === type) { rejectedOnce.current = true; throw new Error('保存できませんでした。もう一度お試しください。'); }
     if (type === 'set_home') { setState(previous => ({ ...previous, ...(typeof payload.characterId === 'string' ? { homeCharacterId: payload.characterId } : {}), ...(typeof payload.backgroundId === 'string' ? { homeBackgroundId: payload.backgroundId } : {}) })); return; }
-    const next = applyGrowthAction(state, type, payload); setState(next); return next;
+    const next = applyGrowthAction(state, type, payload); setState(next); return { state: next };
   }
   async function startQuest(stageId: string): Promise<QuestSettlement> {
     const stage = getQuestStage(stageId);
@@ -108,6 +114,7 @@ export default function RedesignFixture() {
   const territory = projectTerritory(TERRITORY_MASTER, { experience: territoryExp }, territoryItems(state), activeTerritoryCount(LOCAL_ID, rooms));
   const game = {
     session: null, username: '確認用の城主', userLevel: 1, playCyberSe: noop,
+    showMissionPanel: false, setShowMissionPanel: (open: boolean) => { if (open) setTab('missions'); },
     directMessages: [], dmUnreadConversations: [], dmUnreadTotal: 0, dmRecipientId, setDmRecipientId,
     guildChats, chatInput, setChatInput, chatCooldown: 0, chatSending: false,
     setChatChannel: noop, setShowTribeChatPanel: noop,
@@ -119,13 +126,14 @@ export default function RedesignFixture() {
     {qaOpen && <div className="rd-qa-backdrop" role="dialog" aria-modal="true" aria-label="QAメニュー"><aside className="rd-qa-panel"><div className="rd-qa-title"><strong>QAメニュー</strong><button onClick={() => setQaOpen(false)} aria-label="閉じる">×</button></div><p className="rd-qa-muted">表示確認専用。保存・API接続・認証・決済は行いません。</p><div className="rd-qa-links">{[['home','Home'],['quest','Quest'],['character','Growth'],['raid','Raid'],['territory','領土侵攻'],['battle','Battle']].map(([id,label]) => <button key={id} onClick={() => { navigate(id); setQaOpen(false); }}>{label}</button>)}</div><label className="rd-qa-check"><input type="checkbox" checked={vip} onChange={event => setVip(event.target.checked)} /> VIP表示確認</label><button className="rd-button" onClick={() => { setState(fixtureState()); setBattle(null); setMessage('QA状態を初期化しました。'); }}>QA初期化</button><button className="rd-button" onClick={() => setState(previous => ({ ...previous, materials: { ...previous.materials, unlock: 0 } }))}>QA 開催アイテム0</button><button className="rd-button" onClick={() => { setTerritoryExp(300); setState(previous => ({ ...previous, materials: { ...previous.materials, unlock: 5 } })); }}>QA 開催枠とアイテム補充</button></aside></div>}
     <main className="rd-main">
       {battle ? <BattleView result={battle} vipActive={vip} title="レイド・ローカル確認" onComplete={() => setBattle(null)} /> : <>
+        {tab === 'shop' && <ShopUiHarness embedded exchange={{ state, onExchange: async payload => { setState(value => applyShopExchange(value, payload)); } }} />}
         {tab === 'home' && <HomeView state={state} onAction={action} onNavigate={navigate} previewOnly encounterRaid={rooms[0] ? { id: rooms[0].id, name: '炎影の守将', expiresAt: rooms[0].expiresAt } : null} />}
         {tab === 'quest' && <QuestView state={state} party={party} vipActive={vip} onStart={startQuest} onOpenDeck={() => navigate('character')} onOpenRaid={id => { setRoomId(id); navigate('raid'); }} />}
         {tab === 'character' && <GrowthView state={state} onAction={action} />}
         {tab === 'territory' && <TerritoryView territory={territory} rooms={rooms} userId={LOCAL_ID} onOpenRoom={id => { setRoomId(id); navigate('raid'); }} onHost={async destinationId => { const destination = territory.destinations.find(entry => entry.id === destinationId); if (!destination?.canHost) throw new Error(destination?.reasons.join(' ') || '未設定です。'); const snapshot = createTerritorySnapshot(TERRITORY_MASTER, destinationId); const room = createRaidRoom(destination.raidMasterId, LOCAL_ID, `qa-territory-${Date.now()}`, Date.now(), snapshot); setRooms(previous => [...previous, room]); setState(previous => ({ ...previous, materials: { ...previous.materials, unlock: previous.materials.unlock - destination.itemCount } })); setRoomId(room.id); navigate('raid'); }} />}
         {tab === 'raid' && <RaidView key={roomId || 'list'} state={state} rooms={rooms} party={party} onAction={raidAction} onOpenDeck={() => navigate('character')} initialRoomId={roomId} />}
         {tab === 'battle' && <BattleView key={`${vip}`} result={sampleBattle} vipActive={vip} onComplete={() => navigate('quest')} title="Wave・ローカル確認" />}
-        {!['home','quest','character','raid','territory','battle'].includes(tab) && <div className="rd-panel"><p>この共通機能は確認用画面では接続しません。</p><button className="rd-button" onClick={() => navigate('home')}>Homeへ</button></div>}
+        {!['home','quest','character','raid','territory','battle','shop'].includes(tab) && <div className="rd-panel"><p>この共通機能は確認用画面では接続しません。</p><button className="rd-button" onClick={() => navigate('home')}>Homeへ</button></div>}
       </>}
     </main>
     <nav className="rd-footer" aria-label="メインナビゲーション">{[['home','ホーム','08-castle'],['quest','クエスト','04-fan-sakura'],['character','キャラ','10-helmet'],['raid','レイド','06-oni-mask'],['battle','ガチャ','11-ticket']].map(([id,label,icon]) => <button key={id} aria-current={tab === id ? 'page' : undefined} onClick={() => navigate(id)}><img src={`/ui/sengoku/${icon}.png`} alt="" />{label}</button>)}</nav>

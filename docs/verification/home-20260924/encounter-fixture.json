@@ -1,0 +1,22 @@
+{
+  "provenance": "QA seed from live v18 createRaidRoom and selectEncounterMaster(1, random=0); real API/body UI display; not natural encounter evidence",
+  "sourceSha256": "5b0361a779d3f45bbe6c4831687c960d20f165e5444543c02561751fbe635ae9",
+  "roomId": "5b72bc0a-bbc0-44d1-a6ad-26489157fd18",
+  "username": "本陣QA924",
+  "masterId": "encounter_a1_ERB01",
+  "boss": "柴田勝家",
+  "hp": 39000,
+  "maxHp": 39000,
+  "formalDurationMinutes": 60,
+  "remainingMinutesAtInsert": 10,
+  "writes": "one new game04_raid_rooms row only; no assets/growth/progression or existing room changes",
+  "applied": true,
+  "appliedAt": "2026-09-23T17:49:44.138778+00:00",
+  "expiresAt": "2026-09-23T17:59:44.138778+00:00",
+  "expiredNotificationObserved": true,
+  "databaseStatusAfterExpiry": "active",
+  "note": "本体はstatusとexpiresAtの両方を評価。DBがactiveのままでも期限到達後の通知は消える。",
+  "endedStateObserved": true,
+  "endedTest": "専用fixtureをdefeated/HP0、期限を未来へ一時変更し、本体再読込で通知不在を確認。終了テスト後は元期限へ戻した。資産・報酬変更なし。",
+  "finalDatabaseStatus": "defeated"
+}

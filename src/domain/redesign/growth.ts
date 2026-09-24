@@ -13,8 +13,13 @@ export function isEquipmentAssigned(state: RedesignState, id: string) {
 export function equipmentFits(slot: string, masterSlot: string) {
   return slot.startsWith("accessory") ? masterSlot.startsWith("accessory") : slot === masterSlot;
 }
+export function getUnlockedDeckSlots(state: RedesignState): number {
+  const progressSlots = state.clearedStages.includes('mikawa-2') ? 5 : state.clearedStages.includes('mikawa-1') ? 4 : 3;
+  return Math.min(5, Math.max(progressSlots, state.deck.length));
+}
 export function validateDeck(state: RedesignState, deck: DeckMember[]) {
-  requireValue(Array.isArray(deck) && deck.length === 5, "武将を5人編成してください。");
+  requireValue(Array.isArray(deck) && deck.length >= 1 && deck.length <= 5, "武将を1〜5人編成してください。");
+  requireValue(deck.length <= getUnlockedDeckSlots(state), "編成枠が未解放です。");
   requireValue(new Set(deck.map((m) => m.characterId)).size === deck.length, "同じ武将は編成できません。");
   const usedEquipment = /* @__PURE__ */ new Set<string>();
   for (const member of deck) {
@@ -111,7 +116,7 @@ export function applyGrowthAction(input: RedesignState, action: string, payload:
       state.characters.push({ id, level: 1, awakening: 0, exp: 0, growthVersion: GROWTH_VERSION });
     } else if (action === "soul_exchange") {
       const amount = integer(payload.amount, "交換数");
-      requireValue(amount > 0 && amount % 2 === 0, "固有魂を2個単位で指定してください。");
+      requireValue(amount >= 10 && amount % 2 === 0, "固有魂を10個以上・2個単位で指定してください。");
       requireValue((state.souls[id] ?? 0) >= amount, "固有魂が不足しています。");
       state.souls[id] -= amount;
       inventory.genericSouls[rarity] += amount / 2;
@@ -155,6 +160,13 @@ export function applyGrowthAction(input: RedesignState, action: string, payload:
     owned.lb++;
     return state;
   }
+  if (action === "equipment_lock") {
+    const owned = state.equipment.find((e) => e.instanceId === payload.instanceId);
+    requireValue(owned, "装備が見つかりません。");
+    requireValue(typeof payload.locked === "boolean", "保護状態を指定してください。");
+    owned.locked = payload.locked;
+    return state;
+  }
   if (action === "equipment_dismantle") {
     const ids = payload.instanceIds;
     requireValue(Array.isArray(ids) && ids.length > 0 && new Set(ids).size === ids.length, "分解する装備を選択してください。");
@@ -177,4 +189,4 @@ export function autoEquipEquipment(state:RedesignState):DeckMember[] { const use
 
 
 export const SLOT_LABELS: Record<EquipmentSlot,string> = {weapon:"武器",head:"頭",body:"身体",legs:"脚",accessory1:"アクセ1",accessory2:"アクセ2"};
-export type GrowthAction = "save_deck" | "character_level" | "character_awaken" | "character_unlock" | "soul_exchange" | "soul_select" | "skill_level" | "equipment_level" | "equipment_lb" | "equipment_dismantle";
+export type GrowthAction = "save_deck" | "character_level" | "character_awaken" | "character_unlock" | "soul_exchange" | "soul_select" | "skill_level" | "equipment_level" | "equipment_lb" | "equipment_dismantle" | "equipment_lock";

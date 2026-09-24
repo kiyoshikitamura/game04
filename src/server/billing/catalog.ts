@@ -1,11 +1,13 @@
-export const CATALOG_VERSION = "20260913";
+import { SHOP_CATALOG_VERSION } from "@/utils/shop_master_data";
+
+export const CATALOG_VERSION = SHOP_CATALOG_VERSION;
 export const PAID_PACKS = [
-  { id: "beginner_pack_01", amount_jpy: 100, purchase_limit: 1, items: { CASH: 1000, SPECIAL_TICKET_CHARACTER: 1, SPECIAL_TICKET_SKILL: 1, SPECIAL_TICKET_EQUIPMENT: 1, RAID_POINT_TICKET: 3 } },
+  { id: "beginner_pack_01", amount_jpy: 100, purchase_limit: 1, items: { SPECIAL_TICKET_CHARACTER: 1, SPECIAL_TICKET_SKILL: 3, SPECIAL_TICKET_EQUIPMENT: 1, ENERGY_DRINK: 2, CASH: 10000 } },
   { id: "ticket_pack_01", amount_jpy: 1500, purchase_limit: 3, items: { SPECIAL_TICKET_CHARACTER: 5, SPECIAL_TICKET_SKILL: 5, SPECIAL_TICKET_EQUIPMENT: 5 } },
-  { id: "growth_pack_01", amount_jpy: 500, purchase_limit: 3, items: { CHAR_EXP_L: 30, EQUIP_EXP_L: 20, CASH: 10000 } },
-  { id: "awakening_pack_01", amount_jpy: 1000, purchase_limit: 3, items: { AWAKENING_BOOK: 3, SKILL_MANUAL: 3, EQUIP_LB_PART: 3, CASH: 20000 } },
+  { id: "growth_pack_01", amount_jpy: 500, purchase_limit: 3, items: { CHAR_EXP_XL: 5, EQUIP_EXP_XL: 15, CASH: 100000 } },
+  { id: "awakening_pack_01", amount_jpy: 1000, purchase_limit: 3, items: { SOUL_SELECTOR_SSR: 3, SKILL_LB_PART: 100, EQUIP_LB_PART: 150, CASH: 50000 } },
 ] as const;
-export const DIA_PRODUCTS = [[300,300,0],[500,500,0],[1030,1000,30],[2080,2000,80],[5240,5000,240],[10680,10000,680]].map(([total,paid,free]) => ({
+export const DIA_PRODUCTS = [[300,300,0],[500,500,0],[1000,1000,0],[3000,3000,0],[5000,5000,0],[10000,10000,0]].map(([total,paid,free]) => ({
   id: `diamond_${total}`, amount_jpy: paid, purchase_limit: 0,
   items: [{itemId:"DIAMOND",quantity:paid,validity_days:120}, ...(free ? [{itemId:"DIAMOND",quantity:free,validity_days:null}] : [])],
 }));

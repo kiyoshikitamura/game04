@@ -1,0 +1,78 @@
+{
+  "status": "PASS",
+  "scope": "Local fixture using unchanged saved Edge handler; all fetch calls intercepted in memory; no live HTTP/DB access.",
+  "checks": [
+    {
+      "name": "locked stage",
+      "status": "PASS",
+      "httpStatus": 400,
+      "commitCalls": 0,
+      "stateUnchanged": true,
+      "rejection": "このステージは未解放です。",
+      "transportCalls": [
+        "/auth/v1/user",
+        "/rest/v1/users",
+        "/rest/v1/game04_battles",
+        "/rest/v1/game04_battles",
+        "/rest/v1/rpc/game04_acquisition_input",
+        "/rest/v1/rpc/game04_get_growth_state"
+      ]
+    },
+    {
+      "name": "insufficient energy",
+      "status": "PASS",
+      "httpStatus": 400,
+      "commitCalls": 0,
+      "stateUnchanged": true,
+      "rejection": "行動力が足りません。",
+      "transportCalls": [
+        "/auth/v1/user",
+        "/rest/v1/users",
+        "/rest/v1/game04_battles",
+        "/rest/v1/game04_battles",
+        "/rest/v1/rpc/game04_acquisition_input",
+        "/rest/v1/rpc/game04_get_growth_state"
+      ]
+    },
+    {
+      "name": "insufficient party",
+      "status": "PASS",
+      "httpStatus": 400,
+      "commitCalls": 0,
+      "stateUnchanged": true,
+      "rejection": "武将を5人編成してください。",
+      "transportCalls": [
+        "/auth/v1/user",
+        "/rest/v1/users",
+        "/rest/v1/game04_battles",
+        "/rest/v1/game04_battles",
+        "/rest/v1/rpc/game04_acquisition_input",
+        "/rest/v1/rpc/game04_get_growth_state"
+      ]
+    },
+    {
+      "name": "settled request replay",
+      "status": "PASS",
+      "httpStatus": 200,
+      "commitCalls": 0,
+      "stateUnchanged": true,
+      "savedResultReturned": true,
+      "transportCalls": [
+        "/auth/v1/user",
+        "/rest/v1/users",
+        "/rest/v1/game04_battles",
+        "/rest/v1/rpc/game04_acquisition_input",
+        "/rest/v1/rpc/game04_raid_rooms_for_user",
+        "/rest/v1/game04_social_events",
+        "/rest/v1/game04_battles",
+        "/rest/v1/game04_redesign_master",
+        "/rest/v1/rpc/game04_get_growth_state",
+        "/rest/v1/rpc/game04_territory_context"
+      ]
+    }
+  ],
+  "limitations": [
+    "Does not verify deployment environment or database transaction concurrency.",
+    "UI double-click/live DB evidence is recorded separately in LIVE_DB_READBACK.json."
+  ]
+}

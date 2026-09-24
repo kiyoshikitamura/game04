@@ -25,10 +25,14 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   const owner = game.session?.user.id;
   const [data, setData] = useState<RedesignResponse | null>(null);
   const [tab, setTab] = useState(initialTab);
+  const [encounterNow, setEncounterNow] = useState(Date.now);
+  useEffect(() => { if (tab !== 'home') return; const timer = setInterval(() => setEncounterNow(Date.now()), 1000); return () => clearInterval(timer); }, [tab]);
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
   const [raidId, setRaidId] = useState<string>();
   const [questStart, setQuestStart] = useState<string>();
+  const [questPreparation, setQuestPreparation] = useState(false);
+  const [questDeckReturn, setQuestDeckReturn] = useState<string>();
   const [questNavigation, setQuestNavigation] = useState(0);
   const [questPlaying, setQuestPlaying] = useState(false);
   const [battle, setBattle] = useState<BattleResult | null>(null);
@@ -66,8 +70,9 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     lock.current = true; requestGeneration.current++; setBusy(true); setError('');
     const requestOwner = owner;
     const isBattle = name === 'quest_battle' || name === 'raid_battle';
-    const persistentRequest = isBattle || name === 'territory_host';
-    const storageKey = `game04:request:${owner}:${name}:${String(payload.stageId || payload.roomId || payload.destinationId || '')}`;
+    const isGrowth = ['save_deck','character_level','character_awaken','character_unlock','soul_exchange','soul_select','skill_level','equipment_level','equipment_lb','equipment_lock','equipment_dismantle'].includes(name);
+    const persistentRequest = isBattle || name === 'territory_host' || isGrowth;
+    const storageKey = `game04:request:${owner}:${name}:${isGrowth ? JSON.stringify(payload) : String(payload.stageId || payload.roomId || payload.destinationId || '')}`;
     let requestId = explicitId || crypto.randomUUID();
     if (persistentRequest && !explicitId) {
       try { requestId = sessionStorage.getItem(storageKey) || requestId; sessionStorage.setItem(storageKey, requestId); } catch { /* API also exposes pending battles for resume. */ }
@@ -75,7 +80,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     try {
       const value = await redesignRequest(name, payload, requestId);
       if (requestOwner !== ownerRef.current) throw new Error('ログイン状態が変更されました。');
-      setData(value);
+      setData(current => current && current.state.userId === value.state.userId && current.state.version > value.state.version ? current : value);
       if (persistentRequest) try { sessionStorage.removeItem(storageKey); } catch { /* no persistent reliance */ }
       return value;
     } catch (reason) {
@@ -84,7 +89,10 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     } finally { lock.current = false; setBusy(false); if (rewardRefreshPending.current) { rewardRefreshPending.current = false; void refresh(); } }
   }
   function navigate(next: string) {
-    if (busy) return;
+    if (busy || lock.current) return;
+    if (next === 'quest' && questDeckReturn) { returnToQuestPreparation(); return; }
+    setQuestDeckReturn(undefined);
+    setQuestPreparation(false);
     if (next.startsWith('raid:')) { setRaidId(next.slice(5)); next = 'raid'; }
     if (next === 'quest:resume' || next === 'quest') {
       setQuestStart(next === 'quest:resume' && data ? nextQuestStage(data.state.clearedStages).id : undefined);
@@ -96,6 +104,22 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
       game.navigateTab(next);
       if (owner) void game.syncBootstrapData(owner);
     } else void refresh();
+  }
+  function openQuestDeck(stageId?: string) {
+    if (busy || lock.current) return;
+    setQuestDeckReturn(stageId);
+    setTab('character');
+    setError('');
+  }
+  function returnToQuestPreparation() {
+    if (!questDeckReturn || busy || lock.current) return;
+    setQuestStart(questDeckReturn);
+    setQuestPreparation(true);
+    setQuestDeckReturn(undefined);
+    setQuestNavigation(value => value + 1);
+    setTab('quest');
+    setError('');
+    void refresh();
   }
   async function startQuest(stageId: string): Promise<QuestSettlement> {
     const value = await action('quest_battle', { stageId });
@@ -113,7 +137,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   }
   if (!data) return <div className="rd-shell"><div className="rd-panel">{error ? <><p role="alert">{error}</p><button className="rd-button" onClick={() => void refresh()}>再読み込み</button></> : <BrandedLoading label="戦国の世界を準備中" />}</div></div>;
   const state = data.state, party = buildBattleParty(state), vipActive = isVipActive(state.vipExpiresAt);
-  const encounter = data.rooms.find(r => getRoomRaidMaster(r).type === 'encounter' && r.status === 'active' && r.participants.some(p => p.userId === state.userId && !p.leftAt));
+  const encounter = data.rooms.find(r => getRoomRaidMaster(r).type === 'encounter' && r.status === 'active' && Date.parse(r.expiresAt) > encounterNow && r.participants.some(p => p.userId === state.userId && !p.leftAt));
   return <RedesignShell state={state} activeTab={tab} onNavigate={navigate} onAction={action} hideChrome={!!battle || questPlaying} socialEvents={data.socialEvents} missions={data.missions}
     encounterRaid={encounter ? { id: encounter.id, name: getRoomRaidMaster(encounter).name, expiresAt: encounter.expiresAt } : null}
     notifications={<>
@@ -125,12 +149,12 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     }}>戦闘を再開</button></div>}
     </>}>
     {battle ? <BattleView result={battle} vipActive={vipActive} onComplete={() => { setBattle(null); void refresh(); }} /> : <>
-      {tab === 'quest' && <QuestView key={questNavigation} onBattlePlayingChange={setQuestPlaying} state={state} party={party} vipActive={vipActive} initialStageId={questStart} onStart={startQuest} onOpenDeck={() => navigate('character')} onOpenRaid={id => { setRaidId(id); setTab('raid'); }} onIgnoreEncounter={async id => { await action('encounter_ignore', { roomId: id }); }} />}
-      {tab === 'character' && <GrowthView state={state} onAction={async (name, payload) => { await action(name, payload); }} />}
-      {tab === 'territory' && <TerritoryView territory={data.territory} rooms={data.rooms} userId={state.userId} onOpenRoom={id => { setRaidId(id); setTab('raid'); }} onHost={async destinationId => { const value = await action('territory_host', { destinationId }); if (!value.territoryRoomId) throw new Error('開催結果を確認できませんでした。'); setRaidId(value.territoryRoomId); setTab('raid'); }} />}
+      {tab === 'quest' && <QuestView key={questNavigation} onBattlePlayingChange={setQuestPlaying} state={state} party={party} vipActive={vipActive} initialStageId={questStart} initialPreparation={questPreparation} onStart={startQuest} onOpenDeck={openQuestDeck} onOpenRaid={id => { setRaidId(id); setTab('raid'); }} onIgnoreEncounter={async id => { await action('encounter_ignore', { roomId: id }); }} />}
+      {tab === 'character' && <>{questDeckReturn && <button type="button" className="rd-button" disabled={busy} onClick={returnToQuestPreparation}>出撃準備に戻る</button>}<GrowthView state={state} onAction={action} /></>}
+      {tab === 'territory' && <TerritoryView territory={data.territory} rooms={data.rooms} userId={state.userId} onOpenRoom={id => { setRaidId(id); setTab('raid'); }} onHost={async destinationId => { const value = await action('territory_host', { destinationId }); if (!value.territoryRoomId) throw new Error('侵攻結果を確認できませんでした。'); setRaidId(value.territoryRoomId); setTab('raid'); }} />}
       {tab === 'raid' && <RaidView key={raidId || 'list'} state={state} rooms={data.rooms} party={party} initialRoomId={raidId} onAction={raidAction} onOpenDeck={() => navigate('character')} />}
       {tab === 'gacha' && <><NormalGachaView data={data} onAction={action}/><GachaTab specialOnly /></>}
-      {tab === 'shop' && <><p className="rd-panel rd-muted">開発中：商品構成・価格は最終調整前です。</p><section className="rd-panel"><h2>{VIP_PRODUCT.name}</h2><p>30日間：バトル速度×3・スキップ</p><p>{vipActive ? `有効期限 ${new Date(state.vipExpiresAt!).toLocaleString('ja-JP')}` : '販売準備中'}</p></section><ShopTab /></>}
+      {tab === 'shop' && <><section className="rd-panel"><h2>{VIP_PRODUCT.name}</h2><p>30日間：バトル速度×3・100無償輝石を30回付与</p><p>{vipActive ? `有効期限 ${new Date(state.vipExpiresAt!).toLocaleString('ja-JP')}` : '販売準備中'}</p></section><ShopTab exchange={{ state, onExchange: (payload) => action('shop_exchange', payload) }} /></>}
     </>}
   </RedesignShell>;
 }

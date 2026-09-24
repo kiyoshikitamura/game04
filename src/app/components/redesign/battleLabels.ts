@@ -10,7 +10,7 @@ export function passiveDescription(passive: Passive) {
 export function skillConditionText(skill: SkillMaster) { const value = skill.condition.value ?? .5; switch(skill.condition.type) { case 'hp_below': return `自身のHP ${value*100}%以下`; case 'ally_hp_below': return `味方のHP ${value*100}%以下`; case 'enemy_count': return `敵が${value}体以上`; case 'ally_dead': return '戦闘不能の味方がいる'; case 'every_n_actions': return `${value}行動ごと`; default: return '常時（対象・効果の付与可否も判定）'; } }
 export const READINESS_REASONS: Record<string,string> = { reapply_unavailable: '同じスキルの効果が残っているため再付与不可', condition_unmet: '条件未達', insufficient_sp: 'SP不足' };
 
-export const CLEANSE_LABELS: Record<string,string> = { buff:'能力強化', protection:'保護（シールド・継続回復・反撃・被弾誘導）', debuff:'能力低下', dot:'継続ダメージ', stun:'行動不能' };
+export const CLEANSE_LABELS: Record<string,string> = { buff:'能力強化', protection:'保護効果', debuff:'能力低下', dot:'継続ダメージ', stun:'行動不能' };
 
 export const LEGACY_SKILL_MAPPING_NOTICE = '旧所持IDと新しい効果・数値の対応が未確定のため発動保留。72候補は検証画面のみで接続しており、所持品・ガチャには追加していません。';
 export function skillDescription(skill: SkillMaster, latest = true) { return latest && skill.unsupportedReason ? LEGACY_SKILL_MAPPING_NOTICE : skill.description; }
