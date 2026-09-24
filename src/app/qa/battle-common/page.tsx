@@ -5,7 +5,7 @@ import { commonBattleFixture } from './fixture';
 import BattleReplayFixture from './BattleReplayFixture';
 
 export const dynamic = 'force-dynamic';
-const scenarios = { burst: 'SP・BURST・スキル優先順', interrupt: '割込み・行動不能', waves: 'Wave引継ぎ', limit: '300回上限', legacy: '保存済み旧形式互換' };
+const scenarios = { presentation: '承認モック・演出比較', 'six-waves': '最大6Wave・敵開始SP', burst: 'SP・BURST・スキル優先順', interrupt: '割込み・行動不能', waves: 'Wave引継ぎ', limit: '300回上限', legacy: '保存済み旧形式互換' };
 export default async function CommonBattleQaPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   if (process.env.VERCEL_ENV === 'production' || !isQaHarnessAvailable(process.env.NEXT_PUBLIC_APP_ENV, process.env.NODE_ENV)) notFound();
   const params = await searchParams;
@@ -15,6 +15,6 @@ export default async function CommonBattleQaPage({ searchParams }: { searchParam
   return <main style={{ height: '100dvh', overflow: 'auto', background: '#120d09', color: '#ead3aa' }}><div style={{ maxWidth: 500, padding: '12px 10px 40px', margin: 'auto' }}>
     <h1 style={{ fontSize: 20 }}>共通戦闘ルール・表示確認</h1><p style={{ fontSize: 12 }}>検証用仮マスター／保存・報酬なし。サーバーで確定した記録を再生します。正式数値によるバランス受入ではありません。</p>
     <nav aria-label="検証シナリオ" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, fontSize: 12 }}>{Object.entries(scenarios).map(([id, label]) => <a key={id} style={{ color: '#f7d993' }} href={`?scenario=${id}`} aria-current={scenario === id ? 'page' : undefined}>{label}</a>)}</nav>
-    <BattleReplayFixture result={result} />
+    <BattleReplayFixture result={result} vipActive={params.vip !== '0'} />
   </div></main>;
 }

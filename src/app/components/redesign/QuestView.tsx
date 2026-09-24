@@ -95,7 +95,7 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
   });
   const viewAssets = useQuestAssets(area ? [area.image] : visibleAreas.map(entry => entry.image));
   const encounterAssets = useQuestAssets(selected && modal === 'info' ? [selectRepresentativeBoss(selected.waves[selected.waves.length - 1]).image, QUEST_AREAS.find(entry => entry.id === selected.areaId)?.image ?? ''].filter(Boolean) : []);
-  if (playing && settlement) return <BattleView result={settlement.battle} vipActive={vipActive} onComplete={() => setPlaying(false)} title={selectedLabel} />;
+  if (playing && settlement) return <BattleView result={settlement.battle} vipActive={vipActive} onComplete={() => setPlaying(false)} title={selectedLabel} backgroundSrc={QUEST_AREAS.find(entry => entry.id === selected?.areaId)?.image} />;
   return <section className="redesign-quest">
     {!viewAssets.ready && !settlement && <p role={viewAssets.failed ? "alert" : "status"}>{viewAssets.failed ? <>画像を読み込めませんでした。<button onClick={viewAssets.retry}>再読み込み</button></> : '読み込み中…'}</p>}
     {settlement ? <div className="rq-summary">
