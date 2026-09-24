@@ -1,0 +1,66 @@
+- iframe [active]:
+  - alert
+  - region "ゲーム画面":
+    - main:
+      - region "合戦":
+        - img "戦国姫艶武"
+        - strong: WAVE 1/1
+        - button "再生速度 2倍" [active]: ▶▶ ×2
+        - button "一時停止" [disabled]: Ⅱ
+        - text: レイド共通HP
+        - generic: 34,004 / 70,000
+        - button "前田慶次の戦闘詳細":
+          - img "風"
+          - generic: Lv.35
+          - text: 前田慶次
+          - text: "0"
+          - generic: / 23,040
+          - generic: 撃破
+        - generic "前田慶次の状態"
+        - generic: 勝利
+        - generic: 共通SP
+        - meter "共通SP":
+          - strong: 186 / 400
+        - generic "BURSTは戦闘記録に従って自動発動します":
+          - text: BURST
+          - generic: 0/200
+        - meter "バーストゲージ"
+        - generic: "1"
+        - button "くノ一の戦闘詳細":
+          - generic: くノ一
+          - generic: Lv.100
+          - generic: 13,325
+          - generic: / 13,328
+        - generic "くノ一の状態":
+          - button "防↑ 残り1回":
+            - generic: "1"
+        - button "優先1 大祓い：条件未達":
+        - generic: "2"
+        - button "伝令の戦闘詳細":
+          - generic: 伝令
+          - generic: Lv.100
+          - generic: 15,993
+          - generic: / 15,993
+        - generic "伝令の状態"
+        - button "優先1 竹束の守り：発動可能"
+        - generic: "3"
+        - button "僧兵の戦闘詳細":
+          - generic: 僧兵
+          - generic: Lv.100
+          - generic: 19,992
+          - generic: / 19,992
+        - generic "僧兵の状態":
+          - button "防↑ 残り1回":
+            - generic: "1"
+        - button "優先1 薬師の手当：条件未達"
+        - paragraph:
+          - text: 残り味方行動機会
+          - strong: "288"
+          - text: / 300
+        - heading "勝利" [level=2]
+        - paragraph: 最終Waveの敵を撃破
+        - paragraph: 1 Wave突破 · 総ダメージ 23,992
+        - generic "戦果と編成の分析"
+        - button "戦闘ログ"
+        - button "結果へ"
+- alert

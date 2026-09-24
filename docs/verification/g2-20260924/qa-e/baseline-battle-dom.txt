@@ -1,0 +1,68 @@
+- alert
+- region "ゲーム画面":
+  - main:
+    - region "1-1":
+      - img "戦国姫艶武"
+      - strong: WAVE 1/1
+      - button "再生速度 1倍": ▶▶ ×1
+      - button "再開" [active]: ▶
+      - button "女侍の戦闘詳細":
+        - img "土"
+        - generic: Lv.1
+        - text: 女侍
+        - text: "302"
+        - generic: / 650
+        - text: あと
+        - generic: "4"
+      - generic "女侍の状態"
+      - button "漁師の戦闘詳細":
+        - img "水"
+        - generic: Lv.1
+        - text: 漁師
+        - text: "188"
+        - generic: / 450
+        - text: あと
+        - generic: "8"
+      - generic "漁師の状態"
+      - generic: 僧兵 行動完了
+      - generic: 共通SP
+      - meter "共通SP":
+        - strong: 76 / 400
+      - generic "BURSTは戦闘記録に従って自動発動します":
+        - text: BURST
+        - generic: 156/200
+      - meter "バーストゲージ"
+      - generic: "1"
+      - button "くノ一の戦闘詳細":
+        - generic: くノ一
+        - generic: Lv.1
+        - generic: "586"
+        - generic: / 588
+      - generic "くノ一の状態":
+        - button "防↑ 残り2回":
+          - generic: "2"
+      - button "優先1 一文字斬り：発動可能"
+      - generic: "2"
+      - button "伝令の戦闘詳細":
+        - generic: 伝令
+        - generic: Lv.1
+        - generic: "705"
+        - generic: / 705
+      - generic "伝令の状態":
+        - button "防↑ 残り2回":
+          - generic: "2"
+      - button "優先1 竹束の守り：再付与不可"
+      - generic: "3"
+      - button "僧兵の戦闘詳細":
+        - generic: 僧兵
+        - generic: Lv.1
+        - generic: "882"
+        - generic: / 882
+      - generic "僧兵の状態":
+        - button "防↑ 残り1回":
+          - generic: "1"
+      - button "優先1 薬師の手当：条件未達"
+      - paragraph:
+        - text: 残り味方行動機会
+        - strong: "291"
+        - text: / 300

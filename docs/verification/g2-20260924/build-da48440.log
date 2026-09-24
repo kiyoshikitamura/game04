@@ -1,0 +1,95 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> game04-sengoku@0.1.0 build
+> next build --webpack
+
+▲ Next.js 16.2.10 (webpack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 9.3s
+  Running TypeScript ...
+  Finished TypeScript in 15.8s ...
+  Collecting page data using 8 workers ...
+  Generating static pages using 8 workers (0/25) ...
+  Generating static pages using 8 workers (6/25) 
+  Generating static pages using 8 workers (12/25) 
+  Generating static pages using 8 workers (18/25) 
+✓ Generating static pages using 8 workers (25/25) in 462ms
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /admin/kpi
+├ ƒ /admin/kpi/day/[date]
+├ ƒ /api/admin/kpi/marketing
+├ ƒ /api/admin/kpi/refresh
+├ ƒ /api/admin/kpi/snapshots
+├ ƒ /api/admin/kpi/timeseries
+├ ƒ /api/admin/kpi/v2/acquisition
+├ ƒ /api/admin/kpi/v2/community
+├ ƒ /api/admin/kpi/v2/daily
+├ ƒ /api/admin/kpi/v2/guild
+├ ƒ /api/admin/kpi/v2/marketing
+├ ƒ /api/admin/kpi/v2/post-tutorial
+├ ƒ /api/admin/kpi/v2/retention
+├ ƒ /api/admin/kpi/v2/tutorial
+├ ƒ /api/admin/kpi/v2/validation
+├ ƒ /api/auth/replace-google
+├ ƒ /api/billing/checkout
+├ ƒ /api/billing/config
+├ ƒ /api/billing/history
+├ ƒ /api/billing/restore
+├ ƒ /api/billing/shop
+├ ƒ /api/billing/webhook
+├ ƒ /api/kpi/identity-transition
+├ ƒ /api/qa/activity
+├ ƒ /api/qa/deployment
+├ ƒ /api/qa/quest-deployment
+├ ○ /auth/callback
+├ ƒ /billing/return
+├ ƒ /legal/age-rating
+├ ƒ /legal/commercial
+├ ƒ /legal/contact
+├ ƒ /legal/cookies
+├ ƒ /legal/payments
+├ ƒ /legal/privacy
+├ ƒ /legal/rights
+├ ƒ /legal/terms
+├ ƒ /legal/tokusho
+├ ○ /manifest.webmanifest
+├ ○ /open
+├ ƒ /qa/audio
+├ ƒ /qa/battle-additions
+├ ƒ /qa/battle-common
+├ ƒ /qa/battle-flow-v3
+├ ƒ /qa/battle-full-skill-load
+├ ƒ /qa/battle-live
+├ ƒ /qa/battle-presentation-v3
+├ ƒ /qa/home-live-viewport
+├ ƒ /qa/home-state
+├ ○ /qa/identity
+├ ƒ /qa/invasion-approved
+├ ƒ /qa/presentation
+├ ƒ /qa/quest-live-viewport
+├ ƒ /qa/quest65
+├ ƒ /qa/raid-approved
+├ ƒ /qa/raid-detail
+├ ƒ /qa/raid-integrated
+├ ƒ /qa/raid-live-viewport
+├ ƒ /qa/raid-pages
+├ ƒ /qa/raid-room
+├ ƒ /qa/raid-top
+├ ƒ /qa/redesign
+├ ƒ /qa/shop-ui
+├ ƒ /qa/visual-parts
+├ ○ /robots.txt
+└ ○ /sitemap.xml
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
