@@ -10,6 +10,7 @@ import { resolveBattleFrameEffects } from './battleEffectPresentation';
 import { preloadBattleImage } from '../battle/battleAssetPreload';
 import { characterArt } from '@/theme/creativeAssets';
 import characterAssets from '@/theme/local-characters.json';
+import { getCharacterPresentationMetadata } from '../character/characterPresentationMetadata';
 import { STATUS_LABELS, TARGET_LABELS, passiveDescription, skillConditionText, READINESS_REASONS, CLEANSE_LABELS, skillDescription, LEGACY_SKILL_MAPPING_NOTICE } from './battleLabels';
 
 const knownCharacterImages = new Set(characterAssets.flatMap(entry => Object.entries(entry).filter(([key]) => !['id', 'name'].includes(key)).map(([, value]) => value)));
@@ -80,11 +81,13 @@ export function BattleView({ result, vipActive, onComplete, title = '合戦', ba
     const unit = lookup(state.id); if (!unit) return null;
     const impact = presentation.impacts.find(item => item.targetId === state.id);
     const active = presentation.activeActorId === state.id;
+    const artSource = unitArt(unit, state, enemy ? 'full' : 'portrait');
+    const faceCrop = getCharacterPresentationMetadata(artSource);
     return <div data-unit-id={state.id} data-order={order} className={`${enemy ? styles.enemy : styles.member} ${state.hp <= 0 ? styles.dead : ''} ${active ? styles.active : ''}`} key={state.id}>
       {!enemy && <span className={styles.order}>{order + 1}</span>}
       {!enemy && active && <span className={styles.acting}>行動中</span>}
       <button className={styles.unitButton} onClick={() => setDetail({ unit, state })} aria-label={`${unit.name}の戦闘詳細`}>
-        <img src={unitArt(unit, state, enemy ? 'full' : 'portrait')} alt="" className={enemy ? styles.enemyImage : styles.memberImage} />
+        {enemy ? <img src={artSource} alt="" className={styles.enemyImage} /> : <span className={styles.memberPortrait}><img src={artSource} alt="" className={styles.memberImage} style={{ '--face-scale': faceCrop.thumbnailScale, '--face-x': `${faceCrop.thumbnailX}%`, '--face-y': `${faceCrop.thumbnailY}%` } as CSSProperties} /></span>}
         <span className={styles.unitInfo}>
           <span className={styles.unitName}>{enemy && <img className={styles.element} src={`/ui/raid/v2/element-${unit.element}.png`} alt={elements[unit.element]} />}{enemy && <small>Lv.{unit.level} </small>}{unit.name}</span>
           {!enemy && <span className={styles.level}>Lv.{unit.level}</span>}

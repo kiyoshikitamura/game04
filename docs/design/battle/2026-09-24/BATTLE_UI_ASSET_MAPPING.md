@@ -10,7 +10,7 @@
 |共闘・領土侵攻背景|`backgroundSrc` ← 開催snapshotを優先する `getRoomRaidMaster(room).backgroundUrl`|中断再開を含め既存開催に対応する背景を接続|
 |背景指定のない保存戦闘・QA|`/creative/backgrounds/char_reiji_01.png`|既存の安土城。暫定フォールバックであり全ステージの正式背景とは扱わない|
 |背景の視認性調整|CSS `saturate(.3) brightness(.6) blur(1px)` と濃い暗色グラデーション|既存素材自体は加工せず、人物・文字を優先して描画|
-|敵・味方画像|記録frameの `state.image`、なければ該当 `unit.image` を既存 `characterArt` で表示解決|登録済み人物素材の場合、敵・カットインは `full`、味方カードは `portrait`。武将同一性とsnapshotを保持。未登録の別形態画像は元の記録画像を優先し、名前一致だけで通常姿へ戻さない|
+|敵・味方画像|記録frameの `state.image`、なければ該当 `unit.image` を既存 `characterArt` で表示解決|登録済み人物素材の場合、敵・カットインは `full`、味方カードは `portrait` ＋既存 `characterPresentationMetadata` のthumbnailScale/X/Yで顔中心に切り出す。武将同一性とsnapshotを保持。未登録の別形態画像は元の記録画像を優先し、名前一致だけで通常姿へ戻さない|
 |敵属性|`/ui/raid/v2/element-{element}.png`|共闘で使う既存属性素材と統一|
 |味方スキル画像|`(state.skills ?? unit.skills)[].image`|変身・フェーズ変更を含め記録側を優先。最大3枠|
 |状態アイコン|BattleView内のSVGパス|既存QAのSVG意匠を本体用に移植。攻撃・防御・継続効果・シールド・行動不能・反撃等を正式status typeへ接続。残り回数は `remaining`、シールド残量は詳細へ表示|
