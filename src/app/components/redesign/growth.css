@@ -162,3 +162,70 @@ body.game04-theme .g4-growth .g4g-auto-actions>button::before{opacity:.2}
 body.game04-theme .g4g-modal .rd-modal-header::before{background-size:180px auto;opacity:.28}
 body.game04-theme .g4g-modal .rd-modal-body::before{background-size:100% auto;opacity:.17}
 body.game04-theme .g4g-modal .g4g-result-subject{border-radius:5px;box-shadow:inset 0 0 35px #bd8e2526}
+/* Keep formation candidates directly below the slots, as in the approved composition. */
+body.game04-theme .g4-growth .g4g-formation-order{display:flex;gap:5px}
+body.game04-theme .g4-growth .g4g-formation-order>button{font-size:11px;min-height:32px;padding:4px 6px;white-space:nowrap}
+body.game04-theme .g4-growth .g4g-equipment-filters{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;align-items:center;gap:5px}
+body.game04-theme .g4-growth .g4g-equipment-filters label{display:flex;flex-wrap:nowrap;font-size:10px;gap:3px;white-space:nowrap}
+body.game04-theme .g4-growth .g4g-equipment-filters select{width:48px;min-width:0;font-size:11px;padding:5px 0;min-height:36px}
+body.game04-theme .g4-growth .g4g-equipment-filters>button{font-size:11px;padding:5px;min-height:36px;white-space:nowrap}
+body.game04-theme .g4g-portrait .g4g-portrait-person{transform:scale(1.3);transform-origin:50% 18%}
+@media(max-height:650px){body.game04-theme .g4g-modal .g4g-result-subject>figure{width:112px!important}body.game04-theme .g4g-modal .g4g-result-subject{gap:4px;padding-bottom:7px}body.game04-theme .g4g-modal .g4g-result h3{font-size:18px;margin:8px 0}body.game04-theme .g4g-modal .g4g-result-row{padding:8px 4px}}
+/* Compact growth panels retain the approved side-by-side preview and internal action row. */
+body.game04-theme .g4g-modal .g4g-growth-hero{display:grid;grid-template-columns:104px minmax(0,1fr);gap:12px;align-items:center;margin:2px 0 12px}
+body.game04-theme .g4g-modal .g4g-growth-portrait{width:104px;min-width:0}
+body.game04-theme .g4g-modal .g4g-growth-portrait>figure{width:100%;max-height:146px}
+body.game04-theme .g4g-modal .g4g-growth-hero>.g4g-detail-icon,body.game04-theme .g4g-modal .g4g-growth-portrait>img{width:100%;height:130px;object-fit:contain;margin:0}
+body.game04-theme .g4g-modal .g4g-growth-summary h3{font-size:18px;margin:0 0 7px;color:#f3d793}
+body.game04-theme .g4g-modal .g4g-growth-summary p{font-size:12px;margin:4px 0}
+body.game04-theme .g4g-modal .g4g-growth-transition{display:block;color:#ffe1a0;font-size:19px;padding:5px 0}
+body.game04-theme .g4g-modal .g4g-growth-comparison{width:100%;font-size:11px;border-collapse:collapse}
+body.game04-theme .g4g-modal .g4g-growth-comparison :is(th,td){padding:4px 2px;text-align:left;border-bottom:1px solid #8a71454d;font-weight:400}
+body.game04-theme .g4g-modal .g4g-growth-comparison td:last-child{color:#f7daa0;text-align:right}
+body.game04-theme .g4g-modal .g4g-growth-controls{margin:0}
+body.game04-theme .g4g-modal .g4g-growth-controls p{font-size:12px;margin:6px 0;line-height:1.5}
+body.game04-theme .g4g-modal .g4g-growth-section-head{display:flex;align-items:center;justify-content:space-between;gap:5px;margin:8px 0;font-size:12px}
+body.game04-theme .g4g-modal .g4g-growth-section-head :is(h3,h4){margin:0;font-size:14px}
+body.game04-theme .g4g-modal .g4g-growth-section-head button{min-height:30px;padding:3px 5px;font-size:10px;margin:0}
+body.game04-theme .g4g-modal .g4g-growth-controls .g4g-material-grid{gap:6px}
+body.game04-theme .g4g-modal .g4g-growth-controls .g4g-material-choice{display:grid;grid-template-columns:32px minmax(0,1fr);align-items:center;gap:4px;padding:6px;font-size:11px;min-height:88px}
+body.game04-theme .g4g-modal .g4g-growth-controls .g4g-material-choice>img{width:32px;height:32px;object-fit:contain}
+body.game04-theme .g4g-modal .g4g-material-info{min-width:0;display:grid;gap:2px;font-size:10px}
+body.game04-theme .g4g-modal .g4g-material-info strong{font-size:12px}
+body.game04-theme .g4g-modal .g4g-stepper{display:flex;grid-column:1/-1;align-items:center;justify-content:center;gap:4px}
+body.game04-theme .g4g-modal .g4g-stepper button{width:30px;min-width:30px;min-height:30px;padding:2px;margin:0;font-size:16px}
+body.game04-theme .g4g-modal .g4g-stepper input{width:48px!important;min-width:0;min-height:30px;font-size:13px;padding:2px}
+body.game04-theme .g4g-modal .g4g-growth-ledger{display:grid;gap:0;border:1px solid #846a43;border-radius:4px;padding:5px 8px;margin:10px 0;background:#14121999;font-size:12px}
+body.game04-theme .g4g-modal .g4g-growth-ledger>div{display:flex;justify-content:space-between;gap:8px;padding:4px 0}
+body.game04-theme .g4g-modal .g4g-growth-ledger :is(dt,dd){margin:0}
+body.game04-theme .g4g-modal .g4g-growth-ledger dd{color:#f0d59b;text-align:right}
+body.game04-theme .g4g-modal .g4g-growth-footer{display:grid;grid-template-columns:1fr 1.6fr;gap:7px;margin-top:10px}
+body.game04-theme .g4g-modal .g4g-growth-footer>button{width:100%;margin:0;min-height:43px;font-size:13px;padding:7px 4px;border-color:#c19b59}
+body.game04-theme .g4g-modal .g4g-growth-footer>button:last-child{background:linear-gradient(#a93840,#70141f);color:#fff0d5}
+body.game04-theme .g4g-modal .g4g-soul-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+body.game04-theme .g4g-modal .g4g-soul-choice{display:flex;flex-direction:column;align-items:center;gap:5px;border:1px solid #9b7c48;border-radius:5px;background:#19141bba;padding:10px 6px;font-size:12px}
+body.game04-theme .g4g-modal .g4g-soul-choice input{width:70px;min-height:32px;text-align:center;background:#16131a;color:#f5e3c1;border:1px solid #9d814d}
+body.game04-theme .g4g-modal .g4g-unlock-cost{border:1px solid #967846;padding:12px;background:#18131c9c;text-align:center;border-radius:5px}
+body.game04-theme .g4g-modal .g4g-performance{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:10px 0}
+body.game04-theme .g4g-modal .g4g-performance>div{display:grid;gap:7px;text-align:center;border:1px solid #967a49;border-radius:4px;padding:8px 4px;font-size:12px;background:#16141cb3}
+body.game04-theme .g4g-modal .g4g-performance span{color:#e4c68c;border-bottom:1px solid #76623e;padding-bottom:5px}
+body.game04-theme .g4g-modal .g4g-skill-note{font-size:11px}
+/* Collection portraits are wider than deck slots; their frame corners remain undistorted. */
+body.game04-theme .g4-growth .g4g-grid>button>.g4g-portrait{aspect-ratio:1.2;border:5px solid transparent;border-image-source:var(--portrait-frame);border-image-slice:100;border-image-width:5px;border-image-repeat:stretch}
+body.game04-theme .g4-growth .g4g-grid>button>.g4g-portrait .g4g-portrait-opening,body.game04-theme .g4-growth .g4g-grid>button>.g4g-portrait .g4g-portrait-sheen{inset:0}
+body.game04-theme .g4-growth .g4g-grid>button>.g4g-portrait .g4g-portrait-frame{display:none}
+body.game04-theme .g4-growth .g4g-grid>button:has(>.g4g-portrait){padding:0 0 5px;gap:3px}
+body.game04-theme .g4-growth .g4g-grid>button:has(>.g4g-portrait)>b{margin:0;font-size:13px;padding:3px 0}
+body.game04-theme .g4-growth .g4g-grid>button:has(>.g4g-portrait)>span{font-size:11px;line-height:1.4}
+body.game04-theme .g4-growth .g4g-grid>button:has(>.g4g-portrait)>small{font-size:11px;line-height:1.4}
+body.game04-theme .g4g-modal .g4g-character-summary .g4g-actions{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+body.game04-theme .g4g-modal .g4g-character-summary .g4g-actions>button{min-width:0;min-height:40px;font-size:12px;padding:6px 2px;white-space:nowrap}
+body.game04-theme .g4g-modal .g4g-material-info small,body.game04-theme .g4g-modal .g4g-growth-note{font-size:10px;line-height:1.4}
+body.game04-theme .g4g-modal .g4g-growth-portrait{width:92px}
+body.game04-theme .g4g-modal .g4g-material-placeholder{display:grid;place-items:center;width:32px;height:32px;color:#d1b886;font-size:10px;border:1px solid #806643;border-radius:4px}
+body.game04-theme .g4g-modal .g4g-unlock-cost+.g4g-unlock-cost{margin-top:8px}
+body.game04-theme .g4g-modal .g4g-growth-controls .g4g-growth-ledger{margin:8px 0;padding:4px 8px}
+body.game04-theme .g4g-modal .g4g-growth-controls .g4g-growth-ledger>div{padding:2px 0;line-height:1.3}
+body.game04-theme .g4g-modal .g4g-growth-controls .g4g-growth-ledger :is(dt,dd){font-size:12px;line-height:1.3}
+body.game04-theme .g4g-modal .g4g-growth-controls .g4g-growth-hero{margin-bottom:8px}
+body.game04-theme .g4g-modal .g4g-growth-note{display:block;margin:5px 0}
