@@ -5,8 +5,9 @@ const nextConfig: NextConfig = {
   // Existing Git-linked Preview builds must work without dashboard env setup.
   // These are browser-public dev credentials, never server/service-role keys.
   // Production and local builds do not receive these defaults.
-  ...(process.env.VERCEL_ENV === "preview" ? {
-    env: {
+  env: {
+    NEXT_PUBLIC_GAME04_QA_METRICS_ALLOWED: process.env.VERCEL_ENV !== "production" && process.env.NEXT_PUBLIC_ENABLE_QA_TOOLS === "true" && process.env.NEXT_PUBLIC_APP_ENV !== "production" ? "true" : "false",
+    ...(process.env.VERCEL_ENV === "preview" ? {
       NEXT_PUBLIC_APP_ENV: process.env.NEXT_PUBLIC_APP_ENV?.trim() || "preview",
       NEXT_PUBLIC_KPI_DATA_ENV: process.env.NEXT_PUBLIC_KPI_DATA_ENV?.trim() || "preview",
       NEXT_PUBLIC_RAID_ROOM_UI_ENABLED: process.env.NEXT_PUBLIC_RAID_ROOM_UI_ENABLED?.trim() || "true",
@@ -14,8 +15,8 @@ const nextConfig: NextConfig = {
       NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim()
         || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY?.trim()
         || previewPublicConfig.supabaseAnonKey,
-    },
-  } : {}),
+    } : {}),
+  },
   // Visual acceptance screenshots must represent the release canvas rather
   // than the Next.js development toolbar badge.
   devIndicators: false,

@@ -168,7 +168,7 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
 
 /** Keep the presentation hidden and controls disabled until its actual images decode. */
 function useHomeImages(urls: string[]) {
-  const images = useCharacterImageReadiness(urls);
+  const images = useCharacterImageReadiness(urls, 'home');
   return { ready: images.ready, error: images.failed, retry: images.retry };
 }
 

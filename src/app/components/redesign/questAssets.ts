@@ -14,5 +14,5 @@ export function partyArtwork(party: BattleUnit[]) {
   });
 }
 export function useQuestAssets(sources: string[]) {
-  return useCharacterImageReadiness(sources);
+  return useCharacterImageReadiness(sources, 'quest');
 }

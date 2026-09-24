@@ -1,3 +1,4 @@
+import { emitQaTiming } from './redesignQaTelemetry';
 /** Browser-local diagnostics only. Never records payloads, balances, IDs or tokens. */
 export interface RedesignRequestMetric {
   action: string;
@@ -24,6 +25,7 @@ export function beginRedesignRequestMetric(action: string) {
       ...(window.__GAME04_REQUEST_METRICS__ || []).slice(-99),
       { action, startedAt, settledAt, durationMs: settledAt - startedAt, outcome },
     ];
+    emitQaTiming({ kind: 'request', scope: action, startedAt, settledAt, durationMs: settledAt - startedAt, outcome });
     // The managed QA browser exposes console records but not Performance in its
     // read-only DOM scope. Keep this output explicitly limited to QA builds.
     if (process.env.NEXT_PUBLIC_ENABLE_QA_TOOLS === 'true' && process.env.NEXT_PUBLIC_APP_ENV !== 'production') {
