@@ -10,6 +10,11 @@
 .shop-sub-tabs .sub-tab-scroll-button { display:none; }
 .shop-sub-tabs .sub-tab-item { min-width:0; padding:10px 4px; font-size:12px; letter-spacing:0; }
 .shop-product-card { padding:10px; }
+.shop-exchange-list { display:grid; gap:8px; }
+.shop-exchange-card { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px; align-items:center; padding:10px; border:1px solid var(--g4-border); border-radius:8px; background:var(--g4-panel); }
+.shop-exchange-card p, .shop-exchange-balance { margin:4px 0 0; font-size:12px; }
+.shop-exchange-soul { margin-top:12px; }
+.shop-exchange-card label { display:block; }
 .shop-product-card .outlaw-card-inner { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:8px; padding:0; }
 .shop-product-info { min-width:0; }
 .shop-card-heading { display:flex; align-items:center; justify-content:space-between; gap:6px; }

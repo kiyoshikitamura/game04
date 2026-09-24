@@ -4,7 +4,9 @@ import './creative.css';
 import backgrounds from '@/theme/local-backgrounds.json';
 
 export default function HomeEffect({ backgroundImage }: { backgroundImage: string }) {
-  const effectId = backgrounds.find(entry=>entry.image===backgroundImage)?.characterId;
+  // Both original castle backgrounds depict cherry blossoms; reuse the approved sakura effect.
+  const legacySakura = backgroundImage === '/bg/sengoku/castle-approach.jpg' || backgroundImage === '/bg/sengoku/castle-town.jpg';
+  const effectId = legacySakura ? 'char_kaede_01' : backgrounds.find(entry=>entry.image===backgroundImage)?.characterId;
   const [enabled, setEnabled] = useState(false);
   useEffect(() => {
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');

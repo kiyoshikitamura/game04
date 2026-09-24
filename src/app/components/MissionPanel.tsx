@@ -18,9 +18,11 @@ const MISSION_STATUS_LABELS: Record<string, string> = {
   LOCKED: "未達成",
 };
 
-export default function MissionPanel() {
+const redesignMissionTabs: Record<string, string> = { home: 'home', patrol: 'quest', quest: 'quest', character: 'character', skill: 'character', equipment: 'character', deck: 'character', raid: 'raid', territory: 'territory', gacha: 'gacha', shop: 'shop' };
+
+export default function MissionPanel({ onNavigate }: { onNavigate?: (tab: string) => void } = {}) {
   const {
-    beginnerMissionTargetIds, clearBeginnerMissionTarget, refreshBeginnerJourney, openBeginnerMissionReward,
+    beginnerMissionTargetIds = [], clearBeginnerMissionTarget, refreshBeginnerJourney, openBeginnerMissionReward,
     showMissionPanel,
     setShowMissionPanel,
     missionTab,
@@ -125,11 +127,12 @@ export default function MissionPanel() {
         <CanonicalItemIcon itemId={reward.itemId} alt="" className="mission-reward-art" />
         <strong>{canonicalMissionRewardName(String(reward.itemId || ""))} × {Number(reward.quantity || 0).toLocaleString()}</strong>
       </React.Fragment>)}
-      {Number(mission.cashReward || 0) > 0 && <><CanonicalItemIcon itemId="CASH" alt="" className="mission-reward-art" /><strong>キャッシュ × {Number(mission.cashReward).toLocaleString()}</strong></>}
+      {Number(mission.cashReward || 0) > 0 && <><CanonicalItemIcon itemId="CASH" alt="" className="mission-reward-art" /><strong>銭 × {Number(mission.cashReward).toLocaleString()}</strong></>}
     </div>;
   };
 
   const handleMissionCta = (mission: any) => {
+    if (onNavigate && !redesignMissionTabs[mission.ctaTab]) return;
     playCyberSe("click");
     void import("../../utils/supabase").then(({ supabase }) => supabase.rpc("record_client_funnel_event", {
       p_event_name: "mission_cta_click",
@@ -140,7 +143,8 @@ export default function MissionPanel() {
     }));
     clearBeginnerMissionTarget();
     setShowMissionPanel(false);
-    if (mission.ctaAction === "guild_chat" && userGuildMember?.guild_id) setShowTribeChatPanel(true);
+    if (onNavigate) onNavigate(redesignMissionTabs[mission.ctaTab]);
+    else if (mission.ctaAction === "guild_chat" && userGuildMember?.guild_id) setShowTribeChatPanel(true);
     else if (mission.ctaAction === "guild_chat") navigateTab("guild");
     else if (mission.ctaTab) navigateTab(mission.ctaTab);
   };
@@ -157,11 +161,11 @@ export default function MissionPanel() {
     if (needsMissionGuild(m) && !userGuildMember?.guild_id) return { ...m, ctaTab: "guild", ctaAction: null, ctaLabel: "同盟を探す" };
     if (m.ctaTab || m.ctaAction) return m;
     const type = String(m.triggerType || "");
-    const route = type.includes("GACHA") ? ["gacha", "ガチャへ"]
-      : /CHARACTER|SKILL|EQUIPMENT/.test(type) ? ["character", "キャラへ"]
-      : type.startsWith("QUEST") ? ["patrol", "クエストへ"]
+    const route = type.includes("GACHA") ? ["gacha", "召喚へ"]
+      : /CHARACTER|SKILL|EQUIPMENT/.test(type) ? ["character", "武将へ"]
+      : type.startsWith("QUEST") ? ["patrol", "出陣へ"]
       : type.startsWith("PVP") ? ["pvp", "バトルへ"]
-      : type.startsWith("RAID") ? ["raid", "レイドへ"]
+      : type.startsWith("RAID") ? ["raid", "共闘へ"]
       : type.startsWith("GUILD") ? ["guild", "同盟へ"] : null;
     return route ? { ...m, ctaTab: route[0], ctaLabel: route[1] } : m;
   };
@@ -173,11 +177,12 @@ export default function MissionPanel() {
     const m = fallbackCta(mission);
     const expired = missionClaimExpired(m, now);
     const eventEnded = m.category === "SPECIAL" && missionProgressEnded(m, now);
-    const unavailable = needsMissionGuild(m) && !userGuildMember?.guild_id ? "同盟未加入"
+    const unavailable = onNavigate && (m.ctaTab || m.ctaAction) && !redesignMissionTabs[m.ctaTab] ? "準備中"
+      : needsMissionGuild(m) && !userGuildMember?.guild_id ? "同盟未加入"
       : (m.ctaTab === "raid" || String(m.triggerType).startsWith("RAID")) && raidAvailability === "inactive" ? "開催待ち" : null;
     const target = Math.max(1, Number(m.target_value || 1));
     const progress = Math.max(0, Number(m.current_progress || 0));
-    const title = m.triggerType === "QUEST_COMPLETE_COUNT" && m.title === "派遣に出よう" ? `クエストを${target}回完了する` : missionDisplayText(m.title);
+    const title = m.triggerType === "QUEST_COMPLETE_COUNT" && m.title === "派遣に出よう" ? `出陣を${target}回完了する` : missionDisplayText(m.title);
     const description = missionDisplayText(m.description || "");
     const next = currentMissions.filter((n: any) => n.prerequisiteMissionId === m.id && n.status === "LOCKED");
     return <article key={m.id} className={`mission-item ${m.status}`}>
@@ -194,7 +199,7 @@ export default function MissionPanel() {
               : eventEnded ? <OutlawButton disabled>挑戦期間終了</OutlawButton>
               : isMilestone(m) ? <OutlawButton disabled>あと{Math.max(0, target - completed)}件</OutlawButton>
               : m.status === "LOCKED" ? <span className="mission-status">前段階の受取で解放</span>
-              : m.ctaTab || m.ctaAction ? <OutlawButton onClick={() => handleMissionCta(m)}>{m.ctaLabel || "挑戦する"}</OutlawButton>
+              : m.ctaTab || m.ctaAction ? <OutlawButton disabled={!!unavailable} onClick={() => handleMissionCta(m)}>{unavailable || m.ctaLabel || "挑戦する"}</OutlawButton>
               : <span className="mission-status">{MISSION_STATUS_LABELS[m.status] || "進行中"}</span>}
           </div>
         </div>
@@ -205,10 +210,10 @@ export default function MissionPanel() {
   };
   const event = currentMissions.find((m: any) => m.eventId);
   return (
-    <FullScreenPanel title="ミッション" onClose={handleClose} closeDisabled={missionClaimLoading}>
+    <FullScreenPanel title="任務" onClose={handleClose} closeDisabled={missionClaimLoading}>
       <fieldset className="mission-panel-container-inner mission-operation-surface" disabled={missionClaimLoading} aria-busy={missionClaimLoading}>
         {missionTab === "DAILY" && standards.length > 0 && <div className="mission-daily-progress">
-          <progress max={standards.length} value={completed} aria-label="本日のデイリーミッション達成数" />
+          <progress max={standards.length} value={completed} aria-label="本日のデイリー任務達成数" />
           <span>{completed}/{standards.length}</span>
         </div>}
         <SubTabNav tabs={[
@@ -218,9 +223,9 @@ export default function MissionPanel() {
         ]} activeTabId={missionTab} onSelect={(id) => setMissionTab(id as any)} />
         {beginnerMissionTargetIds.length > 0 && beginnerTargets.length === 0 && <p role="status">対象の受取状態を確認できません。<OutlawButton onClick={() => void openBeginnerMissionReward(beginnerMissionTargetIds)}>再確認</OutlawButton></p>}
         {beginnerTargets.length > 0 && beginnerTargets.every((m: any) => m.status === "CLAIMED") && <OutlawButton onClick={finishBeginnerReceipt}>マイページへ</OutlawButton>}
-        {missionTab === "SPECIAL" && events.length > 1 && <label>イベント <select aria-label="イベント選択" value={activeEventId || ""} onChange={e => setSelectedEventId(e.target.value)}>{events.map(event => <option key={event.eventId || "unassigned"} value={event.eventId || "unassigned"}>{event.eventTitle || "イベントミッション"}</option>)}</select></label>}
+        {missionTab === "SPECIAL" && events.length > 1 && <label>イベント <select aria-label="イベント選択" value={activeEventId || ""} onChange={e => setSelectedEventId(e.target.value)}>{events.map(event => <option key={event.eventId || "unassigned"} value={event.eventId || "unassigned"}>{event.eventTitle || "イベント任務"}</option>)}</select></label>}
         {missionTab === "SPECIAL" && event && <section className="mission-overview">
-          <h3>{event.eventTitle || "イベントミッション"}</h3>
+          <h3>{event.eventTitle || "イベント任務"}</h3>
           {event.eventStartAt && event.eventProgressEndAt && <p>開催：{dateLabel(event.eventStartAt)} ～ {dateLabel(event.eventProgressEndAt)} JST</p>}
           {event.eventClaimEndAt && <p>受取期限：{dateLabel(event.eventClaimEndAt)} JST</p>}
           <p role="status">{currentMissions.every((m: any) => m.status === "CLAIMED") ? "全報酬受取済み" : missionClaimExpired(event, now) ? "受取期間終了" : missionProgressEnded(event, now) ? "開催終了・報酬受取期間" : "開催中"}</p>
@@ -234,10 +239,10 @@ export default function MissionPanel() {
           {available.map((m: any) => renderRow(m, missionTab === "NORMAL"))}
           {missionTab === "NORMAL" ? (["PROGRESS", "GROWTH", "BATTLE", "GUILD"] as const).map(group => {
             const rows = pending.filter((m: any) => m.displayGroup === group);
-            return rows.length > 0 && <section key={group} className="mission-current-group"><h3>{{ PROGRESS: "初回目標", GROWTH: "育成", BATTLE: "バトル・レイド", GUILD: "同盟" }[group]}</h3>{rows.map((m: any) => renderRow(m, true))}</section>;
+            return rows.length > 0 && <section key={group} className="mission-current-group"><h3>{{ PROGRESS: "初回目標", GROWTH: "育成", BATTLE: "バトル・共闘", GUILD: "同盟" }[group]}</h3>{rows.map((m: any) => renderRow(m, true))}</section>;
           }) : pending.map((m: any) => renderRow(m))}
           {missionTab === "NORMAL" && pending.filter((m: any) => !["PROGRESS", "GROWTH", "BATTLE", "GUILD"].includes(m.displayGroup)).map((m: any) => renderRow(m, true))}
-          {currentMissions.length === 0 && <div className="mission-empty">{missionTab === "SPECIAL" ? missionEventsError ? "イベントを取得できませんでした。画面を再読み込みしてください" : "現在開催中のイベントミッションはありません" : "ミッションはありません"}</div>}
+          {currentMissions.length === 0 && <div className="mission-empty">{missionTab === "SPECIAL" ? missionEventsError ? "イベントを取得できませんでした。画面を再読み込みしてください" : "現在開催中のイベント任務はありません" : "任務はありません"}</div>}
         </div>
         {received.length > 0 && <details className="mission-received"><summary>受取済み {received.length}件</summary>{received.map((m: any) => renderRow(m))}</details>}
       </fieldset>
