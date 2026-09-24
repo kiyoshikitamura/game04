@@ -150,3 +150,15 @@ body.game04-theme .g4-growth .g4g-party .g4g-portrait-sheen{inset:0}
 body.game04-theme .g4-growth .g4g-party>button>.g4g-empty-slot{position:relative;min-height:170px;padding-top:48px}
 body.game04-theme .g4-growth .g4g-party>button:disabled .g4g-empty-slot::before{content:"";position:absolute;top:65px;left:calc(50% - 9px);width:18px;height:16px;border-radius:2px;background:#b7b0a7}
 body.game04-theme .g4-growth .g4g-party>button:disabled .g4g-empty-slot::after{content:"";position:absolute;top:54px;left:calc(50% - 7px);width:14px;height:14px;border:3px solid #b7b0a7;border-radius:9px 9px 0 0}
+/* Adopted GAME04 ornament and gold icons, shared with the approved visual language. */
+body.game04-theme .g4-growth .g4g-auto-actions>button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:67px;padding:6px 2px!important}
+body.game04-theme .g4-growth .g4g-auto-actions>button>img{width:28px;height:28px;object-fit:contain}
+body.game04-theme .g4-growth .g4g-auto-actions>button>span{font-size:11px;white-space:nowrap}
+body.game04-theme .g4-growth :is(.g4g-section-heading,.g4g-selected-skills),body.game04-theme .g4-growth .g4g-auto-actions>button,body.game04-theme .g4g-modal :is(.rd-modal-header,.rd-modal-body){position:relative;isolation:isolate}
+body.game04-theme .g4-growth :is(.g4g-section-heading,.g4g-selected-skills)::before,body.game04-theme .g4-growth .g4g-auto-actions>button::before,body.game04-theme .g4g-modal :is(.rd-modal-header,.rd-modal-body)::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url('/ui/raid/v2/panel-sakura-overlay.png') right top / cover no-repeat;opacity:.23;border-radius:inherit}
+body.game04-theme .g4-growth .g4g-section-heading::before{background-size:170px auto;opacity:.32}
+body.game04-theme .g4-growth .g4g-selected-skills::before{background-size:100% auto;opacity:.2}
+body.game04-theme .g4-growth .g4g-auto-actions>button::before{opacity:.2}
+body.game04-theme .g4g-modal .rd-modal-header::before{background-size:180px auto;opacity:.28}
+body.game04-theme .g4g-modal .rd-modal-body::before{background-size:100% auto;opacity:.17}
+body.game04-theme .g4g-modal .g4g-result-subject{border-radius:5px;box-shadow:inset 0 0 35px #bd8e2526}
