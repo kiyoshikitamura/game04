@@ -71,4 +71,4 @@ API/DB/Vercelログ、cron.job_run_details、注文滞留、VIP最古未付与�
 7. 新空receiverはfallback表示として使えるがDB/API直アクセスや受理済み通知を停止する機能はない。これだけで全サービス復旧/停止完了としない。
 
 ## 9. 現在の未完
-本番DB/ref、受け皿配信/認証保護、domain・外部設定、base/delta適用、backup保管/復旧試験、監視実接続、G5最終manifest、M限定アカウントと決済検証方針は未完。P06のlocal HTTP試験を本番復旧試験と報告しない。
+本番DB/refは作成済、非公開基盤migration20260924163630と2 private buckets、Edge health v1を適用済。受け皿のAll Deployments認証保護も保存済。配信/本番Auth/backup実在確認の最新状態はP06結果を参照。domain・外部設定、ゲームbase/delta適用、完全restore試験、通知連携、G5最終manifest、M限定アカウントと決済検証方針は未完。P06のlocal HTTP試験を本番復旧試験と報告しない。

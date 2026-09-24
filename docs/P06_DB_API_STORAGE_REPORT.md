@@ -1,6 +1,25 @@
+# 費用承認後の現行結果
+
+2026-09-25 JST追記。ユーザーの追加費用承認を受領し、既存組織に game04-prod / soiksqgtmcnspfedmanr / ap-northeast-1 を作成。ACTIVE_HEALTHY。以下の費用承認待ち/本番未作成は過去の調査記録として保持する。
+
+- 確定P06基盤: migration 20260924163630 game04_p06_private_foundation。private schema game04_ops、RLS/anon・authenticated権限なし、service_role SELECTのみ。
+- game04-assets / game04-ops-backups はともにprivate。ゲームデータ・素材・secret backupは未投入。
+- Edge game04-p06-health v1 ACTIVE / verify_jwt=true。未認証401、anon JWT503。管理用service roleのHTTP成功試験は未実施。
+- private schema REST照会は406/PGRST106で非公開を確認。public API照会の一部は502/通信エラーのため安定疎通合格としていない。
+- SQL疎通、権限確認、管理台帳のTEMP表へのJSON復元/一致/ROLLBACKを実確認。DB実バックアップからの全体復旧とは区別。
+- auth.users=0、public game tables=0、storage objects=0、cron未導入。GAME03/開発データの複製なし。
+- managed logsのDB/API/Edge/Auth/Storageへの読取を確認。通知宛先未設定、通知送信なし。
+- Supabase Dashboard既存ログインがなく、signup停止/backup実在/SMTP provider設定確認は未完。Micro構成は作成時見積と承認構成、UIでのcompute size確認は未完。
+
+現行の移行準備判定は docs/operations/p06-20260925/GAME04_P06_本番環境構築結果.md を参照。
+
+---
+
 # P06 DB・API・素材・復旧調査
 
 確認日: 2026-09-25 UTC。Supabaseリモート変更なし。接続済みツールによる読取り結果。ローカル停止後、同じ観測証拠からGitHubへ保存。
+
+## 前回調査（費用承認前の履歴）
 
 ## 資源・費用
 

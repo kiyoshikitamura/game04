@@ -1,0 +1,85 @@
+{
+  "project": {
+    "ref": "soiksqgtmcnspfedmanr",
+    "name": "game04-prod",
+    "region": "ap-northeast-1",
+    "status": "ACTIVE_HEALTHY"
+  },
+  "cost_approved": true,
+  "migration": {
+    "version": "20260924163630",
+    "name": "game04_p06_private_foundation"
+  },
+  "state": {
+    "environment": "production",
+    "schema_version": "p06-v1",
+    "maintenance": true,
+    "public_enabled": false,
+    "payments_enabled": false,
+    "jobs_enabled": false,
+    "g5_candidate_sha": null
+  },
+  "role_checks": {
+    "anon_schema_usage": false,
+    "authenticated_schema_usage": false,
+    "service_role_update": false,
+    "service_role_select": true
+  },
+  "buckets": [
+    {
+      "id": "game04-assets",
+      "public": false
+    },
+    {
+      "id": "game04-ops-backups",
+      "public": false
+    }
+  ],
+  "observed_counts": {
+    "public_tables": 0,
+    "auth_users": 0,
+    "storage_objects": 0,
+    "cron_installed": false,
+    "database_bytes": 10882195,
+    "connections": 8
+  },
+  "limited_restore": {
+    "method": "JSON roundtrip into constraint-preserving TEMP table, rolled back",
+    "restored_one_row": true,
+    "content_matches": true,
+    "physical_backup_restore": false
+  },
+  "edge": {
+    "name": "game04-p06-health",
+    "version": 1,
+    "verify_jwt": true,
+    "ezbr_sha256": "0ad1a703c512a763aace25fa83417d4568cb0390e2dd4ea4f39642ee48f0d7cd",
+    "unauthenticated_http": 401,
+    "anon_jwt_http": 503,
+    "service_role_http_tested": false
+  },
+  "storage_public_probe_http": 400,
+  "rest_initial_probe_http": 502,
+  "logs_available": [
+    "postgrest_logs",
+    "function_edge_logs",
+    "realtime_logs",
+    "storage_logs",
+    "pgbouncer_logs",
+    "auth_logs",
+    "edge_logs",
+    "postgres_logs",
+    "function_logs"
+  ],
+  "advisors": {
+    "security_error_count": 0,
+    "info": "private ops table RLS enabled without client policies; intentional deny"
+  },
+  "game_installed": false,
+  "full_backup_restore_verified": false,
+  "rest_private_schema_probe": {
+    "http": 406,
+    "code": "PGRST106",
+    "result": "schema not exposed"
+  }
+}

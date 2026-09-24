@@ -1,50 +1,55 @@
 # GAME04 P06 本番環境構築結果
 
-判定: **一部構築済み / 移行準備未完 / P06未合格**。2026-09-25 JST。
-空の本番配信受け皿を作成。隔離停止コードを実装してローカルHTTP/独立検証を実施。DB新設費用と外部接続依存に加え、実行環境の切断で保護設定保存・アップロードが未完。資源だけを作ってP06全面完了とはしない。
+2026-09-25 JST更新。**基盤構築済み部分あり / 移行準備未完 / P06未合格**。
+ユーザーから月額約US$10追加の承認を受領。本番DBを実作成し、前回の費用待ちと実行環境切断は解消した。
 
-## 構築済み・検証状態
+## 構築・確認した対象
 
-|対象|状態|実施・証拠/残件|
+|対象|識別子/適用版|状態|
 |---|---|---|
-|配信受け皿|構築済み|game04-production-receiver / prj_sFLd5kZeu7pjveQIkeL88ShfN8i8。既存Pro team内で空project作成・改名を管理画面で確認|
-|Git/自動配信分離|確認済み|新projectはGit未接続、Production/Previewなし、requests/functions=0。main/既存aliasは変更なし|
-|隔離receiver|コード実装・local検証済み|infra/game04-production/receiver。ゲーム/DB/決済依存なし。未知経路含め503、healthのみ32文字以上の秘密認証。未設定は503。稼働先へ未配信|
-|Vercel Authentication|未保存|Require Log Inのチェック操作中にbrowser応答停止。Save未実行。全URL保護設定済みとはしない|
-|基盤クラウド疎通|未確認|Deploymentなし。コードのlocal PASSを本番疎通へ換算しない|
-|本番DB/API/Storage|未作成|既存7projectsに専用本番なし。新規Micro約US$10/月の判断待ち。本番ref未発行|
-|baseline/migration|分類準備済み|開発71履歴を記録、全apply_now=false。一括適用しない。確定基盤の本番適用はDB作成後|
-|設定・外部認証/決済/メール|依存待ち|接続契約を保存。P02/P03コードは現在本番を拒否。秘密値コピーなし|
-|ジョブ/監視|仕様・手順準備、実設定未完|開発9jobsの採否と停止状態を分類。VIP毎分は開発の実観測。新本番ではジョブ未登録|
-|バックアップ/復旧|手順準備、実復旧未確認|DB/Storage/秘密設定の分離復旧を記録。本番DB未作成、復旧試験未実施|
-|M/G6|未着手|G5合格ゲーム移行、実金銭決済、一般公開は実施なし|
+|専用配信先|game04-production-receiver / prj_sFLd5kZeu7pjveQIkeL88ShfN8i8|既存Pro team、Git未接続。All Deployments Vercel Authentication保存・reload確認済み|
+|本番DB|game04-prod / soiksqgtmcnspfedmanr / ap-northeast-1|ACTIVE_HEALTHY。既存組織mvkvwqhvpoxpvxbumfjk内。SQL接続確認済み|
+|確定基盤schema|20260924163630 game04_p06_private_foundation / p06-v1|private game04_ops管理台帳。maintenance=true、公開/課金/job=false。RLSとrole権限確認|
+|素材保存先|game04-assets|private、素材未投入。正式素材はG5候補をMで配置|
+|復旧用保存先|game04-ops-backups|private、実backup未格納。DBバックアップとStorage実体を別保全|
+|基盤API|game04-p06-health v1 / verify_jwt=true|ACTIVE、未認証401、anon JWT503。service_roleだけ許可するコード。管理用HTTP成功試験は未実施|
+|停止receiver|infra/game04-production/receiver|ゲーム/DB/決済依存なし。専用health handlerと常時503catchall。HTTP/routing2試験PASS|
+|復旧確認|private ops JSON→制約付きTEMP復元→比較→ROLLBACK|1行復元/一致ともtrue。DB物理backup復旧の合格ではない|
+|監視|DB/API/Edge/Auth/Storage/Realtimeログ|実ログ読取成功。DB容量10,882,195 bytes、接続8は観測値。通知送信先は未指定|
 
-## 環境対応表
+本番schemaにはゲームテーブル0、ユーザー0、Storage object0。cron未導入、ゲームAPI/正式master未移行。開発DB全量コピーやユーザー/注文/QA複製なし。
+管理台帳は停止状態を記録するが、Mで移すゲームAPIに停止を自動強制する実装ではない。Mのserver/API制御が別途必要。
 
-|環境/用途|配信先/識別子|DB/API/素材|版・状態|公開制御|
-|---|---|---|---|---|
-|GAME03参照のみ|tribe-neon / www.tribe-neon.com|本番ktpolnkyyfkowxdmijww、preview sufvuqdnqohpfzkwxohqは既知保護対象|本作業で更新・配信なし|GAME03設定変更なし|
-|GAME04開発|game04 / prj_vV06TC8bU3TEFRpNXFNdONiZmULE、G1固定Previewは参照履歴|lrgyllgzcdcphlbmkknc / game04-dev-clean / eu-central-1、storage0|G2 SHA7476566、主API v21、補助resolve-battle v2、migration最新20260924125412|G2作業環境は変更なし|
-|GAME04既存Production・保全対象|game04-gray.vercel.app / game04-8qmsr2wmx-kiyoshi-kitamura.vercel.app / dpl_bTDf5APqABYyVA5eSk1QhfWTTeFN|サーバー設定・実データ接続先は今回未確認。DBなしと断定しない|main a83a94adf1c83ecfdaf439d67a6d74aa93206344、9/16 Readyを管理画面確認|Vercel認証保護なし。main push自動配信あり。今回切替/設定変更なし|
-|GAME04新本番受け皿|game04-production-receiver / prj_sFLd5kZeu7pjveQIkeL88ShfN8i8 / team_ounFOJd7sfCvcytYCkExbj77|DB/API未接続、素材未配置|空project、配信なし、Git未接続|未承認ゲームなし。保護設定保存と全URL実測は未完|
-|GAME04本番DB提案|game04-prod（まだ名称案）|既存組織mvkvwqhvpoxpvxbumfjk、ap-northeast-1、Micro|費用承認待ち、ref/API/bucket/適用版なし|未作成。既存資源の転用なし|
+## 環境分離
 
-API v21 hash: d3599cf9bfede3850553f143bd9df830ab99fc92a19cab1309fcba1f56b5eae0。URL固定はDB/API固定を意味しない。上表の既存Productionを非公開化したとは報告しない。
+|用途|配信/DB|今回の扱い|
+|---|---|---|
+|GAME03|tribe-neon / ktpolnkyyfkowxdmijww、本番参照のみ|変更なし。秘密値/商品をコピーしない|
+|GAME04開発|game04 / lrgyllgzcdcphlbmkknc、G2 branch work/game04-g2-20260924|変更なし。基準7476566、観測API v21。G1 v19へ戻さない|
+|既存GAME04 Production|game04-gray.vercel.app / prj_vV06TC8bU3TEFRpNXFNdONiZmULE / a83a94a|既存main連動配信を保全。認証保護なしとの前回観測。今回切替/alias変更なし|
+|新本番受け皿|game04-production-receiver / soiksqgtmcnspfedmanr|既存配信と別資源、ゲーム移行/一般公開なし|
 
-## 検証・保存・障害
+## 独立確認・証拠
 
-receiver HTTP test: 1件/0失敗。GET/POST/HEAD/OPTIONSでroot、checkout、webhook、Edge様path、QA、asset、未知経路を503確認。healthは未設定/不正/短いtoken拒否、正tokenのみ200、レスポンスにDB未接続を明示。
-独立担当も再実行PASS。正tokenでも非health拒否、PUT/DELETE/PATCH拒否、末尾slash/encoded path/偽headerで昇格しないことを追加確認。
-Vercel rewrite後にreq.urlがhealth pathを保持するかはクラウド未確認。保持しない場合は安全側503になる。専用health handlerへ分離する案は未適用。配信時にこの一点を必須確認する。
+- DB anon/authenticatedのprivate schema利用不可、service_role更新不可/SELECTのみを確認。
+- RESTのprivate schema要求は406/PGRST106で非公開を確認。public経路の一部502/通信エラーは安定疎通合格としない。
+- Storageは2bucketともpublic=false、client policyなし。公開path試験400。実素材未配置なので実体読取受入はM。
+- security advisorはprivate opsのRLS policyなしINFOのみ。意図したclient拒否であり公開policyを追加しない。
+- Edge hash: 0ad1a703c512a763aace25fa83417d4568cb0390e2dd4ea4f39642ee48f0d7cd。
+- FOUNDATION_EVIDENCE.json、AUTH_BACKUP_ACCESS.md、INDEPENDENT_VERIFICATION.md、DB reportに範囲を記録。
+- 停止receiverのHTTP/route2試験PASS。ゲーム本体未変更、本体npm run check未実施。
 
-検証後、exec-serverが409 environment_offlineになり、browserも応答停止。追加コード変更・保護保存・アップロード・復旧試験は実行不能。既存GitHub接続でコード/記録を保存。通常cloneは取得できたが本体全体のnpm run checkは未実施。本体変更なし、receiver依存ゼロの限定試験に限る。
-Vercel管理コネクタは既存/新projectとも404。管理画面では実在確認できたため不存在とは解釈しない。CLI tokenなし。権限迂回や新しい認証情報抽出は行わない。
+## 必須未完・依存
 
-## 判断と残作業の集約
+1. 停止receiverのクラウド配信/不変URL/health確認。配信担当の結果を追記する。
+2. Supabase管理画面に既存ログインがなく、新規signup停止、backup実在/成功時刻、Micro実設定/SMTP/providerの確認が未完。管理ログインが必要。接続済みMCPは当該設定操作非対応。
+3. 正式domain、Google/SMTP、Stripe本番商品/通知先、リーガル問い合わせ先はP01〜P04の確定待ち。追加の費用判断は今回発生していない。
+4. G2/P02/P03は現状本番を拒否するコードがある。本番ref許可表とserver側公開制御を担当契約に沿ってM候補へ接続する。
+5. G5最終manifest、確定ゲームschema差分、正式master/material allowlist、完全backup復旧確認、監視通知接続、本番操作/認証/決済受入は未完。
 
-1. **追加費用**: Supabase既存Pro組織にgame04-prod / 東京 / Microを新設、compute約US$10/月追加（利用超過別）。既存game04-dev-cleanの転用/開発DB丸ごとcloneはしない。承認後に新規作成・確定基盤適用・Storage分離・非公開API疎通・復旧試験を進める。
-2. **外部設定**: P01の正式domain、P03のGoogle/SMTP送信元、P02のStripe利用主体/本番商品/専用Webhook、P04問い合わせ先は担当契約確定待ち。値を仮作成しない。既存GAME03秘密値は無条件コピーしない。
-3. **実行環境復旧後の担当作業**: 作成済みprojectの再読→保護設定保存→隔離receiver配信→不変URL/alias全体の未認証拒否と認証health確認。新project再作成不要。ユーザーに個別チェック操作を中継依頼しない。
-4. **G5までの必須準備**: 本番refのコード許可表、server停止制御、P02 live契約、監視・backup保管/復旧確認、移行master allowlistと差分manifest。既存共有guardを削って無理に接続しない。
+P06合格、M本番受入、G6公開合格とはしない。費用の再承認は不要。GAME03/開発/既存Production変更、mainマージ、一般公開、実金銭決済、ドメイン購入は行っていない。
 
-新規有料契約/プラン変更/ドメイン購入/実金銭決済/本番ゲーム移行/mainマージ/公開はなし。今回作成したVercel空projectで有料保護オプションは採用していない。
+## 保存・受渡し
+
+Branch: work/game04-p06-20260925 / Draft PR #32。G2との衝突を避けinfra/game04-productionとP06専用docsのみ変更。
+G2/P02〜P04にはCONNECTION_CONTRACT.mdで本番refと担当境界を受渡す。M手順はGAME04_M_本番移行・復旧手順.md。最終SHAはPR headを参照。

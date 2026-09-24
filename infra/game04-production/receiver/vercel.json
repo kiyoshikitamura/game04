@@ -3,9 +3,8 @@
   "buildCommand": "",
   "installCommand": "",
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/api/receiver"
-    }
+    { "source": "/healthz", "destination": "/api/healthz" },
+    { "source": "/api/healthz", "destination": "/api/healthz" },
+    { "source": "/(.*)", "destination": "/api/receiver" }
   ]
 }

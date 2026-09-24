@@ -6,7 +6,7 @@ P02-P04基準7476566、OWNERSHIP blob c4d69408fa6d9868e4e986bf02d14ba65318c500�
 |設定/経路|所有・用途|現状/反映条件|
 |---|---|---|
 |NEXT_PUBLIC_APP_ENV|G2環境判定/P06値|本番production明示。未設定developmentへfallbackするためdeploy targetだけを根拠にしない|
-|NEXT_PUBLIC_SUPABASE_URL|P06本番origin|本番ref未発行。G2/P03 validatorはdevelopment/preview＋dev ref限定、要契約更新|
+|NEXT_PUBLIC_SUPABASE_URL|P06本番origin|本番ref soiksqgtmcnspfedmanr 発行済み。G2/P03 validatorはdevelopment/preview＋dev ref限定、要契約更新|
 |NEXT_PUBLIC_SUPABASE_ANON_KEY / NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY|P06公開キー|本番由来のみ。service roleを公開しない|
 |SUPABASE_SERVICE_ROLE_KEY|P06サーバー秘密|本番専用秘密保管。文書/ログへ値を書かない|
 |NEXT_PUBLIC_USE_MOCK_DB / NEXT_PUBLIC_ENABLE_QA_TOOLS|G2/P06|本番false。QA routeはserver側拒否も確認|
@@ -31,3 +31,7 @@ P03 Google置換もnon-production限定。上記の本番ref契約はM候補へ�
 - 監視: API 5xx/遅延/DB接続と容量、cron失敗、VIP未付与最古due、Stripe受信失敗と注文滞留を対象。実装と本番値設定の両方が必要。
 - 通知先は未指定。外部へ送信していない。担当別既存dashboardで読む構成を準備し、通知先確定後に接続。
 - P02/P03が未完成なのでP06設定済みには繰り上げない。
+
+## 費用承認後の受渡し
+本番DB: soiksqgtmcnspfedmanr / https://soiksqgtmcnspfedmanr.supabase.co / Tokyo。P06基盤のみ適用、game04-redesign-api/正式masterは未移行。P02/P03/G2は既存の開発ref保護を維持し、本番許可表とserver側の非公開制御を最終候補へ接続する。
+game04_ops.deployment_stateは非公開管理台帳であり、未移植のゲームAPIに停止を自動強制する仕組みではない。

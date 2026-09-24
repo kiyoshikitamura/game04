@@ -1,5 +1,5 @@
 {
-  "status": "incomplete",
+  "status": "foundation-created-integration-pending",
   "base": {
     "branch": "work/game04-g2-20260924",
     "sha": "7476566f945708a8e752f71d4d6b90c23f3b937a",
@@ -11,16 +11,27 @@
     "projectName": "game04-production-receiver",
     "gitConnected": false,
     "deploymentId": null,
-    "protectionVerified": false
+    "protectionVerified": true
   },
   "production": {
-    "supabaseProjectRef": null,
-    "supabaseOrigin": null,
-    "apiVersion": null,
-    "apiSourceHash": null,
-    "schemaVersion": null,
+    "supabaseProjectRef": "soiksqgtmcnspfedmanr",
+    "supabaseOrigin": "https://soiksqgtmcnspfedmanr.supabase.co",
+    "apiVersion": "game04-p06-health v1 (foundation only)",
+    "apiSourceHash": "0ad1a703c512a763aace25fa83417d4568cb0390e2dd4ea4f39642ee48f0d7cd",
+    "schemaVersion": "20260924163630 / p06-v1",
     "formalDomain": null,
-    "assetsManifest": null
+    "assetsManifest": null,
+    "region": "ap-northeast-1",
+    "buckets": [
+      {
+        "id": "game04-assets",
+        "public": false
+      },
+      {
+        "id": "game04-ops-backups",
+        "public": false
+      }
+    ]
   },
   "release": {
     "gameInstalled": false,
@@ -37,13 +48,15 @@
     "existingGame04ProjectId": "prj_vV06TC8bU3TEFRpNXFNdONiZmULE"
   },
   "blockers": [
-    "new_database_cost_approval",
-    "runtime_environment_offline",
-    "deployment_protection_save",
     "receiver_upload_and_cloud_health",
     "p01_domain",
     "p02_p04_final_contract",
     "schema_backup_restore_monitoring",
     "g5_candidate"
-  ]
+  ],
+  "cost": {
+    "approved": true,
+    "additional_compute_usd_monthly": 10,
+    "organizationId": "mvkvwqhvpoxpvxbumfjk"
+  }
 }
