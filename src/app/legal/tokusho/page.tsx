@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import LegalPage from "../LegalPage";
+import Link from "next/link";
 import SupportContact from "../SupportContact";
 import { GAME04_LEGAL, pendingLegalValue } from "../legalConfig";
 
@@ -13,7 +14,7 @@ type TokushoPageProps = { searchParams: Promise<{ from?: string }> };
 export default async function TokushoPage({ searchParams }: TokushoPageProps) {
   const { from } = await searchParams;
   return (
-    <LegalPage title="特定商取引法に基づく表記" updatedAt="2026年9月18日" returnToGame={from === "settings"}>
+    <LegalPage title="特定商取引法に基づく表記" updatedAt="2026年9月24日" returnToGame={from === "settings"}>
       <h2>販売事業者</h2>
       <p>{pendingLegalValue(GAME04_LEGAL.operator)}</p>
       <h2>代表者または通信販売業務責任者</h2>
@@ -23,17 +24,21 @@ export default async function TokushoPage({ searchParams }: TokushoPageProps) {
       <h2>電話番号</h2>
       <p>{pendingLegalValue(GAME04_LEGAL.phone)}</p>
       <h2>連絡先</h2>
-      <p><SupportContact /></p>
+      <p><SupportContact returnToGame={from === "settings"} /></p>
       <h2>販売URL</h2>
       <p>{GAME04_LEGAL.serviceUrl ? <a href={GAME04_LEGAL.serviceUrl}>{GAME04_LEGAL.serviceUrl}</a> : pendingLegalValue(null)}</p>
 
       <h2>販売価格</h2>
       <p>各商品の販売価格は、それぞれの商品ページおよび購入手続き画面に税込価格で表示します。</p>
       <p>
-        商品として販売する「ダイヤ」は、戦国姫艶武内でのみ利用できるゲーム内通貨であり、
+        商品として販売する「輝石」は、戦国姫艶武内でのみ利用できるゲーム内通貨であり、
         現金への換金、第三者への譲渡およびサービス外への移転はできません。
       </p>
-      <p>ゲーム内の一部のキャラクター、アイテムその他のコンテンツ・サービスは、購入済みのダイヤを消費して取得します。</p>
+      <p>ゲーム内の一部のキャラクター、アイテムその他のコンテンツ・サービスは、購入済みの輝石を消費して取得します。</p>
+
+      <h2>VIP・パックの販売条件</h2>
+      <p>VIPは税込480円・720時間の買い切りで、自動更新はありません。有効中は再購入できず、終了後に再購入できます。初回パックは通算1回、育成パック・覚醒・LBパック・ガチャパックは各通算3回までです。</p>
+      <p><Link href={from === "settings" ? "/legal/payments?from=settings" : "/legal/payments"}>VIPの付与時期・購入品の詳細</Link></p>
 
       <h2>受付可能な決済手段</h2>
       <p>クレジットカードその他、購入手続き画面に表示される決済方法。</p>
@@ -48,21 +53,19 @@ export default async function TokushoPage({ searchParams }: TokushoPageProps) {
 
       <h2>支払時期</h2>
       <p>
-        クレジットカードその他の決済方法について、購入手続き時に決済されます。
+        各決済方法の支払時期は購入手続き画面に表示します。
         具体的な引落時期等は、利用する決済事業者またはカード会社等の定めによります。
       </p>
 
       <h2>商品の提供時期</h2>
-      <p>決済完了後、原則として速やかにゲーム内へ反映します。</p>
+      <p>決済事業者による支払成功の確認後、原則として速やかにゲーム内へ反映します。購入画面から戻っただけでは反映されない場合があります。</p>
       <p>通信障害、システム障害その他の事情により反映まで時間を要する場合があります。</p>
 
       <h2>商品の提供方法</h2>
-      <p>購入したダイヤその他の商品は、本サービス内の利用者アカウントまたはゲームデータへ付与されます。</p>
+      <p>購入した輝石その他の商品は、本サービス内の利用者アカウントまたはゲームデータへ付与されます。</p>
 
       <h2>有効期限・使用条件</h2>
-      <p>有償ダイヤおよび有料パックで購入した未使用の銭・アイテム・チケットは、最初のゲーム内付与から120日で失効します。プレゼント受取による期限の延長はありません。無償分および既存無料資産には、この期限を適用しません。</p>
-      <p>有効期限の近い購入分から消費します。有償ダイヤから交換した銭・回復アイテムは元の期限を引き継ぎ、混合支払では期限順に配分します。分割できない1個の交換品には先に使用した有償分の期限を適用します。</p>
-      <p>使用後のキャラクター・装備・育成結果、回復済みAP・BP・RP、ガチャポイントは、この期限による失効対象ではありません。購入前に期限条件、所持画面に内訳・期限・数量を表示します。</p>
+      <p>輝石は無償分から先に使用します。有償輝石および購入品の期限条件・交換品への期限引継ぎは、販売開始までに確定して購入前に表示します。現時点の草案は、有償商品の販売開始を案内するものではありません。</p>
 
       <h2>返品・キャンセル・返金</h2>
       <p>デジタルコンテンツの性質上、商品提供後の利用者都合による返品、キャンセルまたは返金は原則としてお受けしておりません。</p>
