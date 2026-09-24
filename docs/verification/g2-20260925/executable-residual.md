@@ -1,0 +1,65 @@
+# G2 残件の実行区分・正式報酬経路の独立確認
+
+2026-09-25、継承コード49177788 / 記録04d2dc97。親の統合候補へ引き継ぐ差分。G2未完を維持し、以下の局所確認を本体・DB・実機合格へ読み替えない。
+
+## 直ちに実行可能な作業
+
+|ID|具体作業|今回結果/残る行為|
+|---|---|---|
+|EXEC01|正式producerごとの報酬kind/ID→state在庫先の検査|372供給定義、2515報酬行の実grantReward検査PASS。下記に範囲固定。全producer未実装という扱いを解消し、実接続の不足へ分離|
+|EXEC02|交換Dialogの入力変更・多重操作防止、狭幅対策|別担当の4ファイルを独立review、局所test実行PASS。実UIは親検証へ|
+|EXEC03|72スキル/素材10/出陣背景の候補とID対応表|素材担当が作成。採用待ちでも候補制作は実行可。未承認画像の本体差替えは別|
+|EXEC04|daily10/侵攻overkillの正本照合・具体比較|領域担当が照合。既承認の主催仮FIX・侵攻背景は再判断対象外|
+|EXEC05|本体全画面のQA、同一候補の再生/保存照合|ブラウザが利用可能なら直ちに実行。過去timeoutだけで恒久待ちへ置かない。親の現行セッション結果で分類更新|
+|EXEC06|取得済み画像/DOM/SQLとコード/Previewの版対応保存|親が一元保存、後続コードの証拠を旧候補から流用しない|
+
+## 実際に環境不能な範囲だけを待ちとして保持
+
+- 前回491の360×568新規tab Runtime.evaluate timeout、既存tab Page.enable timeout。前回確認できなかった低高さ戦闘/BURST/長名/多数状態/画像失敗/問い合わせ復帰は、新セッション利用結果を親が更新する。
+- iOS Safari実機、実キーボード表示、実回線の確認はcloud Chromeと区別。担当の実行環境に端末がない場合、実機受入が再開条件。
+- cold/TTI/API/画像待ち別の同条件比較は計測経路が利用できる分を進める。HTTP応答だけでTTI合格にしない。
+
+## 外部依存・真の判断待ち
+
+|対象|待ちの範囲・再開条件|
+|---|---|
+|P02〜P04|ドメイン取得・関連実装完了後の外部設定/同一候補統合受入。無料BOX/通常供給の独立検査を止めない|
+|P06|別スレッド管理。G2から本番変更しない|
+|72名称画像・素材・背景|承認照合後に残る未決だけ候補付きで判断。候補制作はEXEC03|
+|daily10/overkill|具体正本と未決行の対照後に判断。EXEC04の根拠に従う|
+|旧BOX/旧資産・有償物資|件数/ID/由来の対応と方針確定後に限定変換。単なる旧ID検出で新在庫へ移さない。P02の有償lot/期限は無料正式BOXと別|
+
+## 正式producer→在庫の接続表
+
+|供給元|実装経路/保存先|検査と未受入|
+|---|---|---|
+|正式65面|questVictoryRewards→grantReward→commit。cash、growthInventory.expItems、souls、questTicketGrants、初回character|749報酬行の到達先PASS。ticket抽選は3ID候補を検査し確率/抽選回数の受入を主張しない。旧rareRewards配列は現行formal settlementでは不使用|
+|通常183＋侵攻供給4任務|claim_mission→getClaimableMission→grantReward→claimedMissionIds→commit|495行PASS（NM171の追加侵攻令を含む）。二重/CAS/全任務本体は既存検証＋親の今後の実操作へ。日次未決10は有効化しない|
+|正式共闘|FORMAL_ENCOUNTER_MASTERS→raid victory/raid_claim→grantReward→room/state commit|930行PASS。新規開始snapshot・再送・実UIは別。旧GvG/旧raid SQLはこの経路でない|
+|正式侵攻5城|createFormalInvasionMaster→各12Lv撃破/勝利→grantReward→commit|263行PASS。抽選敵固定seedで報酬表を抽出。超過damage算入は変更しない|
+|累計30ログボ|loginBonusForDay→正式ログボSQLのjsonb state更新＋wallet|78行をdomain上の同報酬から検査。SQL実経路/台帳は既存親記録でday1成立、30日SQL境界は既存rollback。今回domain PASSをSQL全件証明にしない|
+|商店交換|applyShopExchange→game04_commit_shop_exchange|既存接続。薬energyDrinks、侵攻令materials.unlock、汎用魂growthInventory.genericSouls、銭wallet。交換最低10→5を正本どおり維持|
+|正式無償BOX19ID|明示source/version/funding→claim_present→game04_apply_formal_present|既存19ID rollback・実3種成立。今回追加変換なし。正式metadataなし旧BOXは既存経路で保持|
+|VIP|支払確定→game04_grant_vip→schedule→無償輝石wallet|既存DB境界のみ。P02の決済から統合未受入|
+|課金pack|billing order/lot/期限→grant_present_payload等|P02側との統合対象。無料正式BOXに自動転用しない|
+|旧useStory/GvG/運営旧SQL|legacy presents/user_items等|現行G2公開導線の正式producerではない。G4/履歴/運用との区別を保ち、無断source metadata追記禁止。稼働DB定義と呼出有無が未取得なら接続完了とはしない|
+
+検査ファイル: `scripts/verify_game04_g2_reward_routes.cjs`。結果: `reward-routes-result.json`。入力を変更せず、growth報酬は旧materialsへ混入しないことも検査。正式数量・確率の正本全件再照合ではなく、現行採用マスターからの在庫接続検査である。固有魂選択/汎用魂はこれらproducer集合に出現せず、19ID BOX境界で追跡する。ログボ輝石は別walletなのでこのgrantReward行数に含めない。
+
+## 共通Dialogの独立review
+
+対象: CanonicalDialog.tsx/.css、ShopExchangePanel.tsx、ShopTab.css、および `verify_g2_canonical_pending.cjs`。独立実行PASS。
+
+- 同じactionを即時2回呼んでもPromise pending中は1回。本文inertと閉じる無効、背面閉じ抑止、reject後の再操作復帰をelement-tree試験で確認。
+- aria-busyはpending/loadingへ追従。入力自身disabledもbusyへ追従し、交換値の編集を送信中に制限。
+- bodyのoverflow-y:auto/min-height:0、footer別領域は維持。min-width:0とgrid minmax(0,1fr)は折返し・CTA幅配分を是正し、内容隠蔽を追加しない。
+- 変更によるblocking issueなし。実ブラウザのinert/キーボード/低高さスクロール、全利用画面は別未受入。既存loading時のclose許可は変更していない。
+
+## R3UI04 法務本文リンクの復帰条件・独立review追補
+
+7ページ（rights / age-rating / payments / cookies / terms / privacy / tokusho）とSupportContactの差分を確認。`verify_g2_legal_return_links.cjs`を独立実行してPASS（設定起点/直アクセスの14組＋窓口fallback2組）。原因は本文リンクだけが`?from=settings`を落とし、法務ページの閉じる導線が直アクセス扱いに変わること。設定起点でのみqueryとreplaceを伝播し、直アクセスの動作は維持する限定修正として妥当。
+
+- SettingsPanelのarmLegalSettingsReturn、LegalPageのreturn query、legalSettingsReturnの同UID・5分有効期限・不正marker破棄、GameContextの認証済みprofile照合は変更なし。これら4ファイルのgit差分なしを確認。
+- query自体は認証権限ではなく表示経路。復帰時は引き続きhas_profileと同UID markerが必要。API/DB/認証条件の緩和なし。
+- supportEmail設定済みのmailtoは既存どおり。未設定の問い合わせページfallbackだけに設定起点を伝播。
+- コード/局所確認PASS、blocking issueなし。本体の設定→本文の別法務ページ→閉じる→同ゲーム設定の再表示は親の最新Preview QAへ。5分を超える閲覧/marker失効時は既存のタイトル復帰条件が残る。今回それを新たに合格扱い・変更しない。

@@ -21,7 +21,7 @@ export default async function Page({ searchParams }: PageProps) {
       <p>タブを閉じるまで保持する情報と、ブラウザを閉じた後も保持する情報があります。ブラウザの設定から保存情報を削除できますが、ログイン状態や設定が失われる場合があります。未連携のゲームデータがある場合は、先にアカウントの連携状況をご確認ください。</p>
       <h2>外部サービス</h2>
       <p>認証・データ保存・配信等に外部サービスを利用します。広告事業者への情報送信、送信先・送信内容・停止方法については、正式公開時の利用サービスに合わせて掲載します。</p>
-      <p><Link href="/legal/privacy">個人情報の取扱い</Link></p>
+      <p><Link href={from === "settings" ? "/legal/privacy?from=settings" : "/legal/privacy"} replace={from === "settings"}>個人情報の取扱い</Link></p>
     </LegalPage>
   );
 }

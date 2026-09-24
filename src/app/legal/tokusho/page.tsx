@@ -23,7 +23,7 @@ export default async function TokushoPage({ searchParams }: TokushoPageProps) {
       <h2>電話番号</h2>
       <p>{pendingLegalValue(GAME04_LEGAL.phone)}</p>
       <h2>連絡先</h2>
-      <p><SupportContact /></p>
+      <p><SupportContact returnToGame={from === "settings"} /></p>
       <h2>販売URL</h2>
       <p>{GAME04_LEGAL.serviceUrl ? <a href={GAME04_LEGAL.serviceUrl}>{GAME04_LEGAL.serviceUrl}</a> : pendingLegalValue(null)}</p>
 

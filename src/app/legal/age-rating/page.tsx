@@ -20,7 +20,7 @@ export default async function Page({ searchParams }: PageProps) {
       </ul>
       <p>商品内容が反映されない場合は、繰り返し購入せず、購入履歴を確認してお問い合わせください。</p>
       <p>対象年齢および年齢別の購入制限の案内は、正式公開までに掲載します。</p>
-      <p><Link href="/legal/contact">お問い合わせ</Link></p>
+      <p><Link href={from === "settings" ? "/legal/contact?from=settings" : "/legal/contact"} replace={from === "settings"}>お問い合わせ</Link></p>
     </LegalPage>
   );
 }

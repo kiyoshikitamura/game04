@@ -20,7 +20,7 @@ export default async function Page({ searchParams }: PageProps) {
       <p>商品内容・税込価格・購入回数の上限・有効期限を購入画面で確認してください。有償・無償の内訳と期限別の数量は所持画面で確認できます。</p>
       <h2>法令に基づく表示</h2>
       <p>資金決済法に基づく表示の要否と掲載内容は、販売条件と発行・管理方法を確認したうえで、販売開始までに確定します。</p>
-      <p><Link href="/legal/tokusho">販売条件・返品について</Link></p>
+      <p><Link href={from === "settings" ? "/legal/tokusho?from=settings" : "/legal/tokusho"} replace={from === "settings"}>販売条件・返品について</Link></p>
     </LegalPage>
   );
 }

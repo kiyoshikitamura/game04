@@ -108,7 +108,7 @@ export default async function PrivacyPage({ searchParams }: PrivacyPageProps) {
       <h2>第12条（お問い合わせ）</h2>
       <p>
         個人情報の取扱い、開示等の請求その他本ポリシーに関するお問い合わせは、
-        <SupportContact />
+        <SupportContact returnToGame={from === "settings"} />
         をご確認ください。
       </p>
     </LegalPage>

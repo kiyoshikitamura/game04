@@ -17,3 +17,6 @@
 .canonical-dialog-header h2{min-width:0;overflow-wrap:anywhere}
 .canonical-dialog-body{overflow-wrap:anywhere}
 .canonical-dialog-actions button{min-width:0;white-space:normal;overflow-wrap:anywhere}
+
+.canonical-dialog-body { min-width:0; }
+.canonical-dialog-actions { grid-auto-columns:minmax(0,1fr); }

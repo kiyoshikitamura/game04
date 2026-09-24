@@ -57,12 +57,12 @@ export default function CanonicalDialog({
   return <div className="canonical-dialog-overlay" onMouseDown={(event) => {
     if (event.target === event.currentTarget && onClose && !pending) runAction(onClose, true);
   }}>
-    <section className={`canonical-dialog canonical-dialog--${size}`} role="dialog" aria-modal="true" aria-label={ariaLabel || title || "ダイアログ"}>
+    <section className={`canonical-dialog canonical-dialog--${size}`} role="dialog" aria-modal="true" aria-busy={pending || loading} aria-label={ariaLabel || title || "ダイアログ"}>
       <header className="canonical-dialog-header">
         {title ? <h2>{title}</h2> : <span />}
         {onClose && <button type="button" className="canonical-dialog-close" disabled={pending} onClick={() => runAction(onClose, true)} aria-label="閉じる">×</button>}
       </header>
-      <div className={`canonical-dialog-body ${loading ? "is-loading" : ""}`}>{children}</div>
+      <div className={`canonical-dialog-body ${loading ? "is-loading" : ""}`} inert={pending}>{children}</div>
       {actions.length > 0 && <footer className="canonical-dialog-actions">
         {actions.map((action) => <OutlawButton
           key={action.label}

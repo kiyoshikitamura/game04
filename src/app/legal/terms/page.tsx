@@ -140,7 +140,7 @@ export default async function TermsPage({ searchParams }: TermsPageProps) {
       <h2>第18条（お問い合わせ）</h2>
       <p>
         本サービスおよび本規約に関するお問い合わせは、
-        <SupportContact />
+        <SupportContact returnToGame={from === "settings"} />
         をご確認ください。
       </p>
     </LegalPage>
