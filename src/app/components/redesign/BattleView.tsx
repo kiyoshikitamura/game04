@@ -10,6 +10,7 @@ import { resolveBattleFrameEffects } from './battleEffectPresentation';
 import { preloadBattleImage } from '../battle/battleAssetPreload';
 import { STATUS_LABELS, TARGET_LABELS, passiveDescription, skillConditionText, READINESS_REASONS, CLEANSE_LABELS, skillDescription, LEGACY_SKILL_MAPPING_NOTICE } from './battleLabels';
 
+const isUnassignedSkillImage = (src?: string) => src === '/menu/event_banner_placeholder.png';
 const elements = { fire: '火', water: '水', earth: '土', wind: '風', light: '光', dark: '闇' };
 const statusNames: Record<string, string> = { ...STATUS_LABELS, damage: 'ダメージ', heal: '回復', revive: '蘇生', sp: 'SP回復' };
 const readinessNames: Record<string, string> = { ready: '発動可能', insufficient_sp: 'SP不足', condition_unmet: '条件未達', active: '発動中' };
@@ -38,7 +39,7 @@ export function BattleView({ result, vipActive, onComplete, title = '合戦', ba
   const assetsBlocked = assetState.result !== result || assetState.status !== 'ready';
   const { index, frame, finished, speed, paused, playbackPaused, setPaused, cycleSpeed, skip } = useRecordedBattlePlayback({ result, initialFrame, initialPaused, vipActive, blocked: !!detail || showLog || assetsBlocked });
   const presentation = projectRecordedBattleFrame(result, index);
-  const imageKey = JSON.stringify([...new Set(['/branding/tribe-neon-logo.png', backgroundSrc, ...(frame ? [...frame.party, ...frame.enemies].flatMap(state => { const unit = result.party.find(item => item.id === state.id) ?? result.waves[frame.wave - 1]?.find(item => item.id === state.id); return [state.image || unit?.image, unit ? `/ui/raid/v2/element-${unit.element}.png` : undefined, ...(state.skills ?? unit?.skills ?? []).map(skill => skill.image)]; }) : [])].filter((src): src is string => !!src))]);
+  const imageKey = JSON.stringify([...new Set(['/branding/tribe-neon-logo.png', backgroundSrc, ...(frame ? [...frame.party, ...frame.enemies].flatMap(state => { const unit = result.party.find(item => item.id === state.id) ?? result.waves[frame.wave - 1]?.find(item => item.id === state.id); return [state.image || unit?.image, unit ? `/ui/raid/v2/element-${unit.element}.png` : undefined, ...(state.skills ?? unit?.skills ?? []).filter(skill => !isUnassignedSkillImage(skill.image)).map(skill => skill.image)]; }) : [])].filter((src): src is string => !!src))]);
   const visibleLoading = assetsBlocked || assetState.key !== imageKey;
   useEffect(() => {
     let cancelled = false;
@@ -90,7 +91,7 @@ export function BattleView({ result, vipActive, onComplete, title = '合戦', ba
         const skillActive = recorded ? recorded.status === 'active' : !frame.skillStates && active && frame.skillId === skill.id;
         const status = skillActive ? '発動中' : recorded?.reason === 'reapply_unavailable' ? '再付与不可' : recorded ? readinessNames[recorded.status] ?? recorded.status : '記録なし';
         return <button key={`${skill.id}-${slot}`} className={`${styles.skill} ${skillActive ? styles.skillActive : recorded?.status === 'condition_unmet' ? styles.condition : recorded?.status === 'insufficient_sp' ? styles.shortSp : ''}`} title={`優先${slot + 1} ${skill.name}：${status}`} aria-label={`優先${slot + 1} ${skill.name}：${status}`} onClick={() => setDetail({ skill, readiness: status, cost: recorded?.cost, reason: recorded?.reason })}>
-          <img src={skill.image} alt="" /><span>{skillActive ? '発動' : recorded?.status === 'insufficient_sp' ? 'SP' : ''}</span>
+          {isUnassignedSkillImage(skill.image) ? <svg className={styles.skillTypeIcon} viewBox="0 0 24 24" aria-hidden="true"><path d={statusPaths[skill.effects[0]?.type] ?? (skill.effects[0]?.type === 'heal' || skill.effects[0]?.type === 'revive' ? statusPaths.hot : statusPaths.atk_up)} /></svg> : <img src={skill.image} alt="" />}<span>{skillActive ? '発動' : recorded?.status === 'insufficient_sp' ? 'SP' : ''}</span>
         </button>;
       })}</span>}
       {effects.filter(effect => effect.targetId === state.id).map(effect => <BattleEffects key={`${frame.index}-${effect.family}`} family={effect.family} paused={playbackPaused} speed={speed} />)}
