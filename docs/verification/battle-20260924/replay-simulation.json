@@ -1,0 +1,160 @@
+{
+  "status": "PASS",
+  "scope": "Synthetic inputs through actual battle simulator; browser playback is a separate verification",
+  "scenarios": [
+    {
+      "scenario": "presentation",
+      "frames": 290,
+      "waves": 1,
+      "wavesCleared": 1,
+      "outcome": "win",
+      "events": [
+        "start",
+        "action_start",
+        "damage",
+        "action_end",
+        "counts",
+        "interrupt_start",
+        "interrupt_end",
+        "effect_applied",
+        "burst_start",
+        "burst_resume",
+        "effect_expired",
+        "burst_end",
+        "death",
+        "end"
+      ]
+    },
+    {
+      "scenario": "six-waves",
+      "frames": 152,
+      "waves": 6,
+      "wavesCleared": 6,
+      "outcome": "win",
+      "events": [
+        "start",
+        "action_start",
+        "damage",
+        "action_end",
+        "counts",
+        "interrupt_start",
+        "interrupt_end",
+        "death",
+        "wave",
+        "effect_applied",
+        "burst_start",
+        "burst_end",
+        "effect_expired",
+        "burst_resume",
+        "end"
+      ]
+    },
+    {
+      "scenario": "burst",
+      "frames": 339,
+      "waves": 1,
+      "wavesCleared": 1,
+      "outcome": "win",
+      "events": [
+        "start",
+        "action_start",
+        "damage",
+        "action_end",
+        "counts",
+        "interrupt_start",
+        "interrupt_end",
+        "effect_applied",
+        "burst_start",
+        "burst_resume",
+        "effect_expired",
+        "burst_end",
+        "burst_failed",
+        "heal",
+        "death",
+        "end"
+      ]
+    },
+    {
+      "scenario": "interrupt",
+      "frames": 567,
+      "waves": 1,
+      "wavesCleared": 1,
+      "outcome": "win",
+      "events": [
+        "start",
+        "action_start",
+        "damage",
+        "action_end",
+        "counts",
+        "interrupt_start",
+        "interrupt_end",
+        "effect_applied",
+        "stun_skip",
+        "burst_failed",
+        "heal",
+        "effect_expired",
+        "burst_start",
+        "burst_resume",
+        "burst_end",
+        "death",
+        "end"
+      ]
+    },
+    {
+      "scenario": "waves",
+      "frames": 264,
+      "waves": 2,
+      "wavesCleared": 2,
+      "outcome": "win",
+      "events": [
+        "start",
+        "action_start",
+        "damage",
+        "action_end",
+        "counts",
+        "interrupt_start",
+        "interrupt_end",
+        "effect_applied",
+        "burst_start",
+        "burst_resume",
+        "effect_expired",
+        "burst_end",
+        "death",
+        "wave",
+        "burst_failed",
+        "end"
+      ]
+    },
+    {
+      "scenario": "limit",
+      "frames": 1339,
+      "waves": 1,
+      "wavesCleared": 0,
+      "outcome": "lose",
+      "events": [
+        "start",
+        "action_start",
+        "damage",
+        "action_end",
+        "counts",
+        "burst_start",
+        "burst_resume",
+        "burst_end",
+        "burst_failed",
+        "interrupt_start",
+        "interrupt_end",
+        "end"
+      ]
+    },
+    {
+      "scenario": "legacy",
+      "frames": 72,
+      "waves": 1,
+      "wavesCleared": 1,
+      "outcome": "win",
+      "events": [
+        null
+      ]
+    }
+  ]
+}

@@ -12,7 +12,7 @@ export function commonBattleFixture(scenario: string): BattleInput {
     id: `qa-player-${index}`, name: character.name, image: character.image, level: 1, element: character.element,
     stats: { hp: 1000, sp: 60, atk: 100, def: 20, luk: 100 }, skills: index === 0 ? [heal, buff, attack] : [attack], passives: [],
   }));
-  const enemy: EnemyUnit = { id: 'qa-enemy', name: '検証用の敵', image: portrait, level: 1, element: 'wind', stats: { hp: 7500, sp: 40, atk: 60, def: 20, luk: 0 }, skills: [skill('敵攻撃', [{ type: 'damage', power: 100 }], 20)], passives: [], actionCount: 3, order: 0, hitSpGain: 5 };
+  const enemy: EnemyUnit = { id: 'qa-enemy', name: '検証用の敵', image: portrait, level: 1, element: 'wind', stats: { hp: 7500, sp: 40, atk: 60, def: 20, luk: 0 }, skills: [skill('敵攻撃', [{ type: 'damage', power: 100 }], 20)], passives: [], initialSp: 0, actionCount: 3, order: 0, hitSpGain: 5 };
   if (scenario === 'limit') {
     for (const unit of party) { unit.stats.hp = 100000; unit.skills = []; }
     enemy.stats = { hp: 1000000, sp: 1, atk: 1, def: 100000, luk: 0 }; enemy.skills = []; enemy.actionCount = 100;
@@ -20,6 +20,15 @@ export function commonBattleFixture(scenario: string): BattleInput {
   if (scenario === 'interrupt') {
     enemy.actionCount = 1; enemy.skills = [skill('敵行動不能', [{ type: 'stun', power: 0, chance: 1 }], 20)];
   }
+  if (scenario === 'presentation') {
+    party.forEach((unit, i) => { unit.level = 80; unit.stats = { hp: 42000, sp: 80, atk: 700, def: 350, luk: 400 }; unit.skills = i === 0 ? [buff, attack] : [attack]; });
+    enemy.stats = { hp: 15000, sp: 80, atk: 500, def: 200, luk: 0 }; enemy.initialSp = 20; enemy.level = 82;
+  }
   const waves = scenario === 'waves' ? [[{ ...enemy, stats: { ...enemy.stats, hp: 3000 } }], [{ ...enemy, id: 'qa-enemy-wave2', stats: { ...enemy.stats, hp: 3000 } }]] : [[enemy]];
+  if (scenario === 'presentation') waves[0] = CHARACTER_MASTERS.slice(5, 8).map((c, i) => ({ ...enemy, id: `qa-visual-enemy-${i}`, name: c.name, image: c.image, element: c.element, order: i, stats: { ...enemy.stats, hp: i === 0 ? 15000 : 7500 } }));
+  if (scenario === 'six-waves') {
+    party.forEach(unit => { unit.stats = { hp: 100000, sp: 80, atk: 500, def: 100, luk: 400 }; });
+    waves.splice(0, waves.length, ...Array.from({ length: 6 }, (_, i) => [{ ...enemy, id: `qa-wave-${i + 1}`, name: `第${i + 1}陣 検証敵`, initialSp: i * 5, stats: { ...enemy.stats, hp: 3000, sp: 80 } }]));
+  }
   return { seed: 7, party, waves, rules: scenario === 'legacy' ? LEGACY_BATTLE_RULES : BATTLE_RULES };
 }

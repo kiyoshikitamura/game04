@@ -4,7 +4,7 @@ import { useGame } from '../../context/GameContext';
 import { REDESIGN_REWARD_SYNC_EVENT } from '@/utils/redesignRewardSync';
 import { redesignRequest, type RedesignResponse } from '@/utils/redesignApi';
 import { buildBattleParty } from '@/domain/redesign/masters';
-import { nextQuestStage } from '@/domain/redesign/quests';
+import { getQuestStage, QUEST_AREAS, nextQuestStage } from '@/domain/redesign/quests';
 import { getRoomRaidMaster } from '@/domain/redesign/raid';
 import { isVipActive, VIP_PRODUCT } from '@/domain/redesign/vip';
 import type { AcquisitionState } from '@/domain/redesign/acquisitions';
@@ -36,6 +36,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   const [questNavigation, setQuestNavigation] = useState(0);
   const [questPlaying, setQuestPlaying] = useState(false);
   const [battle, setBattle] = useState<BattleResult | null>(null);
+  const [battleBackground, setBattleBackground] = useState<string>();
   const ownerRef = useRef(owner);
   const lock = useRef(false);
   const requestGeneration = useRef(0);
@@ -131,6 +132,8 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     const value = await action(String(name), payload);
     if (value.battle) {
       if (name === 'raid_battle' && typeof payload.roomId === 'string') setRaidId(payload.roomId);
+      const room = value.rooms.find(entry => entry.id === payload.roomId) ?? data?.rooms.find(entry => entry.id === payload.roomId);
+      setBattleBackground(room ? getRoomRaidMaster(room).backgroundUrl : undefined);
       setBattle(value.battle);
     }
     return value;
@@ -145,10 +148,10 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     {error && <p className="rd-panel" role="alert">{error}</p>}
     {data.pendingBattle && !battle && <div className="rd-panel"><p>未完了の戦闘があります。</p><button className="rd-button" disabled={busy} onClick={async () => {
       const p = data.pendingBattle!;
-      try { const value = await action(p.kind === 'quest' ? 'quest_battle' : 'raid_battle', p.kind === 'quest' ? { stageId: p.target_id } : { roomId: p.target_id }, p.id); if (value.battle) { if (p.kind === 'raid') { setRaidId(p.target_id); setTab('raid'); } setBattle(value.battle); } } catch { /* message shown above */ }
+      try { const value = await action(p.kind === 'quest' ? 'quest_battle' : 'raid_battle', p.kind === 'quest' ? { stageId: p.target_id } : { roomId: p.target_id }, p.id); if (value.battle) { if (p.kind === 'raid') { setRaidId(p.target_id); setTab('raid'); const room = value.rooms.find(entry => entry.id === p.target_id) ?? data.rooms.find(entry => entry.id === p.target_id); setBattleBackground(room ? getRoomRaidMaster(room).backgroundUrl : undefined); } else { const stage = getQuestStage(p.target_id); setBattleBackground(QUEST_AREAS.find(entry => entry.id === stage?.areaId)?.image); } setBattle(value.battle); } } catch { /* message shown above */ }
     }}>戦闘を再開</button></div>}
     </>}>
-    {battle ? <BattleView result={battle} vipActive={vipActive} onComplete={() => { setBattle(null); void refresh(); }} /> : <>
+    {battle ? <BattleView result={battle} vipActive={vipActive} backgroundSrc={battleBackground} onComplete={() => { setBattle(null); setBattleBackground(undefined); void refresh(); }} /> : <>
       {tab === 'quest' && <QuestView key={questNavigation} onBattlePlayingChange={setQuestPlaying} state={state} party={party} vipActive={vipActive} initialStageId={questStart} initialPreparation={questPreparation} onStart={startQuest} onOpenDeck={openQuestDeck} onOpenRaid={id => { setRaidId(id); setTab('raid'); }} onIgnoreEncounter={async id => { await action('encounter_ignore', { roomId: id }); }} />}
       {tab === 'character' && <>{questDeckReturn && <button type="button" className="rd-button" disabled={busy} onClick={returnToQuestPreparation}>出撃準備に戻る</button>}<GrowthView state={state} onAction={action} /></>}
       {tab === 'territory' && <TerritoryView territory={data.territory} rooms={data.rooms} userId={state.userId} onOpenRoom={id => { setRaidId(id); setTab('raid'); }} onHost={async destinationId => { const value = await action('territory_host', { destinationId }); if (!value.territoryRoomId) throw new Error('侵攻結果を確認できませんでした。'); setRaidId(value.territoryRoomId); setTab('raid'); }} />}
