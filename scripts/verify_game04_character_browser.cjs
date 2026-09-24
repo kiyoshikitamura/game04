@@ -53,12 +53,12 @@ async function main(){
    await page.getByRole('dialog').getByRole('button',{name:'Lv育成',exact:true}).first().click();await capture('character-growth');
    await page.getByRole('spinbutton',{name:'武将EXP小投入数'}).fill('1');
    await page.getByRole('button',{name:'キャンセル',exact:true}).click();await page.getByRole('dialog').getByRole('button',{name:'Lv育成',exact:true}).first().click();await page.getByRole('spinbutton',{name:'武将EXP小投入数'}).fill('1');
-   await page.getByRole('button',{name:'この内容で育成する',exact:true}).evaluate(e=>{e.click();e.click();});await capture('character-result');assert.match(await page.getByRole('dialog').innerText(),/29,940/);
+   await page.getByRole('button',{name:'育成する',exact:true}).evaluate(e=>{e.click();e.click();});await capture('character-result');assert.match(await page.getByRole('dialog').innerText(),/29,940/);
    await page.getByRole('dialog').getByRole('button',{name:'閉じる',exact:true}).last().click();
    if(await page.getByRole('dialog').count())await page.getByRole('dialog').getByRole('button',{name:'閉じる',exact:true}).first().click();
    await page.locator('.g4g-grid button').first().click();await page.getByRole('dialog').getByRole('button',{name:'覚醒',exact:true}).first().click();
-   await page.getByRole('button',{name:'この内訳で覚醒する',exact:true}).click();await capture('character-awaken-result');await page.getByRole('dialog').getByRole('button',{name:'閉じる',exact:true}).last().click();await page.getByRole('dialog').getByRole('button',{name:'閉じる',exact:true}).first().click();
-   await page.getByRole('button',{name:/魂の操作/}).first().click();await capture('character-unlock');await page.getByRole('button',{name:'固有魂で武将を迎える',exact:true}).click();await capture('character-unlock-result');await page.getByRole('dialog').getByRole('button',{name:'閉じる',exact:true}).last().click();if(await page.getByRole('dialog').count())await page.getByRole('dialog').getByRole('button',{name:'閉じる',exact:true}).first().click();
+   await page.getByRole('button',{name:'覚醒する',exact:true}).click();await capture('character-awaken-result');await page.getByRole('dialog').getByRole('button',{name:'閉じる',exact:true}).last().click();await page.getByRole('dialog').getByRole('button',{name:'閉じる',exact:true}).first().click();
+   await page.getByRole('button',{name:/魂の操作/}).first().click();await capture('character-unlock');await page.getByRole('button',{name:'解放する',exact:true}).click();await capture('character-unlock-result');await page.getByRole('dialog').getByRole('button',{name:'閉じる',exact:true}).last().click();if(await page.getByRole('dialog').count())await page.getByRole('dialog').getByRole('button',{name:'閉じる',exact:true}).first().click();
    for(const [tab,name]of [['スキル','skill'],['装備','equipment']]){
     await page.locator('.g4g-tabs').getByRole('button',{name:tab,exact:true}).click();await capture(`${name}-list`);
     await page.locator('.g4g-grid button').first().click();await capture(`${name}-detail`);
@@ -66,7 +66,7 @@ async function main(){
      await page.getByRole('button',{name:'LBを上げる',exact:true}).evaluate(e=>{e.click();e.click();});await capture('skill-result');
      await page.getByRole('dialog').getByRole('button',{name:'閉じる',exact:true}).last().click();
     }else{
-     await page.getByRole('button',{name:'Lv育成',exact:true}).click();await capture('equipment-growth');await page.getByRole('spinbutton',{name:'装備EXP小投入数'}).fill('1');await page.getByRole('button',{name:'この内容で育成する',exact:true}).click();await capture('equipment-result');await page.getByRole('dialog').getByRole('button',{name:'閉じる',exact:true}).last().click();
+     await page.getByRole('button',{name:'Lv育成',exact:true}).click();await capture('equipment-growth');await page.getByRole('spinbutton',{name:'装備EXP小投入数'}).fill('1');await page.getByRole('button',{name:'育成する',exact:true}).click();await capture('equipment-result');await page.getByRole('dialog').getByRole('button',{name:'閉じる',exact:true}).last().click();
      await page.getByRole('button',{name:'LBで上限を解放',exact:true}).click();await capture('equipment-lb-result');await page.getByRole('dialog').getByRole('button',{name:'閉じる',exact:true}).last().click();
      await page.getByRole('button',{name:'保護する',exact:true}).click();await capture('equipment-protect-result');await page.getByRole('dialog').getByRole('button',{name:'閉じる',exact:true}).last().click();assert.equal(await page.getByRole('button',{name:'分解',exact:true}).isDisabled(),true);
      await capture('equipment-protected');await page.getByRole('button',{name:'保護を解除',exact:true}).click();await page.getByRole('dialog').getByRole('button',{name:'閉じる',exact:true}).last().click();

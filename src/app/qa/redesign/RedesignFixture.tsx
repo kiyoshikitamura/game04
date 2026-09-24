@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { GameContext } from '@/app/context/GameContext';
 import HomeView from '@/app/components/redesign/HomeView';
 import QuestView, { type QuestSettlement } from '@/app/components/redesign/QuestView';
@@ -75,7 +75,10 @@ export default function RedesignFixture() {
     return simulateBattle({ seed: 917, party, waves: QUEST_STAGES[2].waves, rules: BATTLE_RULES });
   }, [party,waveSpProbe]);
   const navigate = (next: string) => { setMessage(''); setBattle(null); setTab(next.startsWith('quest') ? 'quest' : next); };
+  const rejectedOnce = useRef(false);
   async function action(type: string, payload: Record<string, unknown> = {}) {
+    const rejectOnce = new URLSearchParams(window.location.search).get('rejectOnce');
+    if (!rejectedOnce.current && ['character_level','character_awaken','save_deck'].includes(type) && rejectOnce === type) { rejectedOnce.current = true; throw new Error('保存できませんでした。もう一度お試しください。'); }
     if (type === 'set_home') { setState(previous => ({ ...previous, ...(typeof payload.characterId === 'string' ? { homeCharacterId: payload.characterId } : {}), ...(typeof payload.backgroundId === 'string' ? { homeBackgroundId: payload.backgroundId } : {}) })); return; }
     const next = applyGrowthAction(state, type, payload); setState(next); return { state: next };
   }

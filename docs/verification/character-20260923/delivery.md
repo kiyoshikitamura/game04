@@ -5,10 +5,10 @@
 ## 保存・配信
 
 - Branch: `work/game04-character-finish-20260923`
-- 表示実装SHA（最終修正前）: `e5aa44d123f3061d0b7d0d4a9b6d416b5b064eb2`
-- 固定Preview: https://game04-wtnokgunj-kiyoshi-kitamura.vercel.app
-- Deployment: `dpl_3shuy5L4pVoMuiF7zLDT49KF82m4`
-- GitHub Deployment: `6628373730` / Preview / success
+- 表示実装SHA: `49959d27ba85c171207da772ce911b7e8ea55885`
+- 固定Preview: https://game04-btsnlophl-kiyoshi-kitamura.vercel.app
+- Deployment: `dpl_ApC9deG9mq17TTMqpYKX5sstXBRd`
+- GitHub Deployment: `6628520633` / Preview / success
 - Production公開・Production環境変更・mainマージなし。
 
 ## 証跡
@@ -31,3 +31,7 @@
 2. 特大EXP2点、汎用魂4点、魂選択券4点の正式画像。制作または承認済み素材対応の一括決定が必要。
 
 未解消事項をQA fixture成功で完成扱いにしない。
+
+## 最終修正
+
+編成の候補一覧を押し出していた重複集計を整理。育成は人物右に現在/到達値、素材選択、費用、左右CTAを配置。保存失敗時は入力Dialog内へエラーを表示して素材数・魂内訳を保持し、編成の選択位置は保存成功時だけ更新する。共通CSSのDialog高さ上書きを修正し、レイド・クエストの認証不要18画面を再検証。故障注入3ケースは `failure-retry.json` に記録する。
