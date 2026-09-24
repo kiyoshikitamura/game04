@@ -114,3 +114,9 @@ body.game04-theme .rd-shell .g4-home-community .g4-home-rescue-body{min-height:3
 body.game04-theme .g4-home-rescue-body>span{color:#e4bd6f}
 /* Preserve the existing sakura overlay's 3:2 ratio inside the taller dialog. */
 body.game04-theme .rd-modal.g4-home-selector{background-size:100% auto;background-repeat:no-repeat;background-position:center top}
+
+/* Message content, including long names and uninterrupted strings, owns its column. */
+body.game04-theme .g4-home-community .rd-message{flex-wrap:wrap}
+body.game04-theme .g4-home-community .rd-message>div{min-width:0;overflow-wrap:anywhere}
+body.game04-theme .g4-home-community .rd-message>.rd-text-button{overflow-wrap:anywhere;white-space:normal}
+body.game04-theme .g4-home-choice>strong{overflow-wrap:anywhere}

@@ -13,3 +13,7 @@
 @keyframes canonical-dialog-in{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
 @media(max-width:412px){.canonical-dialog-overlay{padding-inline:12px}.canonical-dialog-body{padding:15px}.canonical-dialog-actions{padding:10px 15px 15px}}
 @media(prefers-reduced-motion:reduce){.canonical-dialog-overlay,.canonical-dialog{animation:none}}
+
+.canonical-dialog-header h2{min-width:0;overflow-wrap:anywhere}
+.canonical-dialog-body{overflow-wrap:anywhere}
+.canonical-dialog-actions button{min-width:0;white-space:normal;overflow-wrap:anywhere}

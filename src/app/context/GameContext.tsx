@@ -127,6 +127,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   const lastValidatedAuthUserIdRef = useRef<string | null>(null);
   const currentAuthUserIdRef = useRef<string | null>(null);
   const bootstrapSerialRef = useRef<Promise<void>>(Promise.resolve());
+  const queuedBootstrapRef = useRef(new Map<string, Promise<void>>());
   const onboardingCheckRef = useRef<Map<string, Promise<void>>>(new Map());
   const tutorialResultCommitRef = useRef(false);
   const patrolStateRevisionRef = useRef(0);
@@ -349,10 +350,12 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     (userId: string) => syncBootstrapData(userId),
     setShowSettingsPanel,
     setErrorMessage,
-    setConfirmDialogConfig
+    setConfirmDialogConfig,
+    Boolean(onboardingState?.has_profile && onboardingState.user_id === session?.user?.id)
   );
 
   const {
+    profileRevisionRef,
     username, setUsername,
     bio, setBio,
     avatarUrl, setAvatarUrl,
@@ -587,7 +590,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
 
 
   const chat = useChat(
-    session,
+    onboardingState?.has_profile && onboardingState.user_id === session?.user?.id ? session : null,
     username,
     userGuildMember,
     showTribeChatPanel,
@@ -1288,15 +1291,23 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   // ==========================================
   // 4. Supabase DB実データ同期ロード
   // ==========================================
-  const syncBootstrapData = async (userId: string) => {
-    const previousBootstrap = bootstrapSerialRef.current.catch(() => undefined);
-    let releaseBootstrap!: () => void;
-    bootstrapSerialRef.current = new Promise<void>((resolve) => { releaseBootstrap = resolve; });
-    await previousBootstrap;
-    if (currentAuthUserIdRef.current && currentAuthUserIdRef.current !== userId) {
-      releaseBootstrap();
-      return;
-    }
+  const syncBootstrapData = (userId: string): Promise<void> => {
+    // Preserve a post-mutation refresh, but collapse simultaneous queued reads.
+    // Once a read starts, later mutations get one fresh follow-up read.
+    const queued = queuedBootstrapRef.current.get(userId);
+    if (queued) return queued;
+    const next = bootstrapSerialRef.current.catch(() => undefined).then(async () => {
+      queuedBootstrapRef.current.delete(userId);
+      if (currentAuthUserIdRef.current !== userId) return;
+      await runBootstrapData(userId);
+    });
+    queuedBootstrapRef.current.set(userId, next);
+    bootstrapSerialRef.current = next;
+    return next;
+  };
+
+  const runBootstrapData = async (userId: string) => {
+    const profileRevisionAtStart = profileRevisionRef.current;
     setQuestSkipsAuthorityOwner(null);
     const patrolRevisionAtStart = patrolStateRevisionRef.current;
     let coreProjectionReady = false;
@@ -1320,24 +1331,26 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     // Materialize the current mission cycle/event state before reading the Home
     // projection. Fresh users can otherwise render SPECIAL missions at zero
     // until the next reload, including missing start-time power achievements.
-    try {
-      const { error: missionSyncError } = await supabase.rpc("sync_current_missions");
-      if (missionSyncError) throw missionSyncError;
-    } catch (err) {
-      console.warn("Failed to sync current missions:", err);
-    }
+    const missionSyncPromise = (async () => {
+      try {
+        const { error } = await supabase.rpc("sync_current_missions");
+        if (error) throw error;
+      } catch (error) {
+        console.warn("Failed to sync current missions:", error);
+      }
+    })();
 
     // Home badges are independent projections. Start their canonical reads at
     // bootstrap entry so Mission / Present badges do not wait behind the wider
     // inventory, social and battle bootstrap. The overlays already reserve no
     // layout space, so an authoritative update cannot shift Home geometry.
-    const homeBadgeProjectionPromise = Promise.all([
+    const homeBadgeProjectionPromise = missionSyncPromise.then(() => Promise.all([
       supabase.from("presents").select("*").eq("user_id", userId).order("sent_at", { ascending: false }),
       supabase.from("missions").select("*").eq("is_enabled", true),
       supabase.from("user_missions").select("*").eq("user_id", userId),
       supabase.from("mission_reward_components").select("mission_id,item_id,quantity,reward_order").order("reward_order", { ascending: true }),
       supabase.rpc("get_active_mission_events"),
-    ]).then(([presentsResult, missionMasterResult, userMissionResult, rewardComponentResult, activeEventResult]) => {
+    ])).then(([presentsResult, missionMasterResult, userMissionResult, rewardComponentResult, activeEventResult]) => {
       if (currentAuthUserIdRef.current && currentAuthUserIdRef.current !== userId) return;
       if (presentsResult.data) {
         setPresents(presentsResult.data.map((present) => {
@@ -1475,13 +1488,19 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         console.warn("Failed to fetch master data:", err);
       });
 
-      await syncActiveUsers(userId);
+      void syncActiveUsers(userId).catch((error) => console.warn("Active user refresh failed:", error));
       void supabase.rpc("record_current_guild_login").then(({ error }) => {
         if (error && error.code !== "PGRST202") console.warn("Failed to record Guild login activity:", error.message);
       });
       // Friend/Friend Helper are PRE-OPEN OMIT. Existing relationship data is
       // retained server-side, but bootstrap does not expose or notify it.
       
+      const userProfilePromise = supabase
+        .from("users")
+        .select("id, username, favorite_character_id, bio, avatar_url, sound_settings, current_base_id, daily_cash_skips_count, daily_cash_skips_reset_date, quest_free_skips_count, quest_paid_skips_count, quest_skips_reset_date, last_guild_left_at, gift_code, title_equipped, equipped_background, equipped_front_effect, selected_bg_mode, interior_item, level, xp, created_at")
+        .eq("id", userId)
+        .single().then((result) => result);
+
       const { data: recovered } = await supabase.rpc("sync_and_recover_vitality_and_pvp_points", {
         p_user_id: userId
       });
@@ -1519,11 +1538,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         setDiamonds(row.out_diamonds);
       }
 
-      const { data: userProfile, error: userProfileError } = await supabase
-        .from("users")
-        .select("id, username, favorite_character_id, bio, avatar_url, sound_settings, current_base_id, daily_cash_skips_count, daily_cash_skips_reset_date, quest_free_skips_count, quest_paid_skips_count, quest_skips_reset_date, last_guild_left_at, gift_code, title_equipped, equipped_background, equipped_front_effect, selected_bg_mode, interior_item, level, xp, created_at")
-        .eq("id", userId)
-        .single();
+      const { data: userProfile, error: userProfileError } = await userProfilePromise;
       markHomeReloadStage("profileReady");
 
       if (userProfileError || userProfile?.id !== userId) {
@@ -1541,11 +1556,11 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
       await identityAuthorityPromise;
       
       if (userProfile) {
-        setUsername(userProfile.username);
+        if (profileRevisionAtStart === profileRevisionRef.current) setUsername(userProfile.username);
         if (userProfile.favorite_character_id) {
           setSelectedLeader(userProfile.favorite_character_id);
         }
-        setBio(normalizeUserBio(userProfile.bio));
+        if (profileRevisionAtStart === profileRevisionRef.current) setBio(normalizeUserBio(userProfile.bio));
         setAvatarUrl(userProfile.avatar_url || "/characters/reiji_transparent_asset.png");
         setDailyCashSkips(userProfile.quest_free_skips_count ?? userProfile.daily_cash_skips_count ?? 0);
         setDailyPaidSkips(userProfile.quest_paid_skips_count ?? 0);
@@ -1554,7 +1569,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         setCurrentBaseId(userProfile.current_base_id || "shinjuku");
         setLastGuildLeftAt(userProfile.last_guild_left_at);
         setGiftCode(userProfile.gift_code || null);
-        setTitleEquipped(userProfile.title_equipped || "title_none");
+        if (profileRevisionAtStart === profileRevisionRef.current) setTitleEquipped(userProfile.title_equipped || "title_none");
         setEquippedBackground(userProfile.equipped_background || "bg_default");
         setEquippedFrontEffect(userProfile.equipped_front_effect || "effect_none");
         if ((userProfile as any).selected_bg_mode) setSelectedBgMode((userProfile as any).selected_bg_mode);
@@ -2292,7 +2307,6 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
       }
     } finally {
       setTotalPowerLoading(false);
-      releaseBootstrap();
     }
   };
 

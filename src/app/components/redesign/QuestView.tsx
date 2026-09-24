@@ -13,10 +13,10 @@ import { growthRewardLabel } from '@/domain/redesign/growthReward';
 import ElementBadge from './ElementBadge';
 import roster from '@/theme/sengoku-characters.json';
 import { characterArt } from '@/theme/creativeAssets';
-import { BossDisplay, type DisplaySubject } from './visual-bench/CharacterDisplays';
+import { BossDisplay, useArtworkPreload, type DisplaySubject } from './visual-bench/CharacterDisplays';
 
 export interface QuestSettlement { playerGrowth?: import('@/utils/redesignApi').RedesignResponse['playerGrowth']; battle: BattleResult; rewards: Reward[]; firstClear: boolean; encounterRaidId?: string | null; }
-const REWARD_LABELS: Record<Reward['kind'], string> = {ticket:'スペシャル券', character_exp_item: '武将EXP', equipment_exp_item: '装備EXP', generic_soul: '汎用魂', soul_selector: '魂選択', character: '武将', skill: 'スキル', cash: '銭', character_material: '武将育成素材', skill_material: 'スキルLB素材', equipment_material: '装備育成素材', equipment_lb: '装備LB素材', soul: '武将の魂', equipment: '装備', unlock_item: '領土侵攻札' };
+const REWARD_LABELS: Record<Reward['kind'], string> = {ticket:'スペシャル券', character_exp_item: '武将EXP', equipment_exp_item: '装備EXP', generic_soul: '汎用魂', soul_selector: '魂選択', character: '武将', skill: 'スキル', cash: '銭', character_material: '武将育成素材', skill_material: 'スキルLB素材', equipment_material: '装備育成素材', equipment_lb: '装備LB素材', soul: '武将の魂', equipment: '装備', unlock_item: '侵攻令' };
 function rewardLabel(reward: Reward) {
   const growthLabel = growthRewardLabel(reward); if(growthLabel) return growthLabel;
   if (reward.kind === 'ticket') return ({SPECIAL_TICKET_CHARACTER:'武将召喚券',SPECIAL_TICKET_SKILL:'スキル召喚券',SPECIAL_TICKET_EQUIPMENT:'装備召喚券'} as Record<string,string>)[reward.id??''] ?? 'スペシャル券';
@@ -28,8 +28,10 @@ function rewardLabel(reward: Reward) {
 }
 function rewardIcon(reward: Reward) {
   if (reward.kind === 'cash') return '/ui/sengoku/13-coin.png';
-  if (reward.kind === 'character_exp_item') return `/items/char_exp_${reward.id === 'large' ? 'l' : reward.id === 'medium' ? 'm' : 's'}.png`;
-  if (reward.kind === 'equipment_exp_item') return `/items/equip_exp_${reward.id === 'large' ? 'l' : reward.id === 'medium' ? 'm' : 's'}.png`;
+  if (reward.kind === 'character_exp_item' || reward.kind === 'equipment_exp_item') {
+    const size = ({ small: 's', medium: 'm', large: 'l' } as Record<string, string>)[reward.id ?? ''];
+    return size ? `/items/${reward.kind === 'character_exp_item' ? 'char' : 'equip'}_exp_${size}.png` : null;
+  }
   if (reward.kind === 'skill_material') return '/items/skill_manual.png';
   if (reward.kind === 'ticket') return `/items/${String(reward.id).toLowerCase()}.png`;
   if ((reward.kind === 'character' || reward.kind === 'soul') && reward.id) { const match = roster.find(c => c.characterId === reward.id); return match ? characterArt({ id: match.characterId, name: match.name, image: match.imagePath }, 'portrait') ?? match.imagePath : '/ui/sengoku/10-helmet.png'; }
@@ -94,17 +96,21 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
     return cleared || firstLockedArea < 0 || index <= firstLockedArea;
   });
   const viewAssets = useQuestAssets(area ? [area.image] : visibleAreas.map(entry => entry.image));
-  const encounterAssets = useQuestAssets(selected && modal === 'info' ? [selectRepresentativeBoss(selected.waves[selected.waves.length - 1]).image, QUEST_AREAS.find(entry => entry.id === selected.areaId)?.image ?? ''].filter(Boolean) : []);
+  const selectedBoss = selected && modal === 'info' ? selectRepresentativeBoss(selected.waves[selected.waves.length - 1]) : null;
+  const selectedSubject = selectedBoss ? bossSubject(selectedBoss) : null;
+  const bossAssets = useArtworkPreload(selectedSubject ? [selectedSubject] : [], 'battle');
+  const encounterBackgrounds = useQuestAssets(selectedBoss ? [selectedSubject ? '' : selectedBoss.image, QUEST_AREAS.find(entry => entry.id === selected?.areaId)?.image ?? ''].filter(Boolean) : []);
+  const encounterAssets = { ready: bossAssets.ready && encounterBackgrounds.ready, failed: bossAssets.failed || encounterBackgrounds.failed, retry: () => { bossAssets.retry(); encounterBackgrounds.retry(); } };
   if (playing && settlement) return <BattleView result={settlement.battle} vipActive={vipActive} onComplete={() => setPlaying(false)} title={selectedLabel} backgroundSrc={QUEST_AREAS.find(entry => entry.id === selected?.areaId)?.image} />;
   return <section className="redesign-quest">
-    {!viewAssets.ready && !settlement && <p role={viewAssets.failed ? "alert" : "status"}>{viewAssets.failed ? <>画像を読み込めませんでした。<button onClick={viewAssets.retry}>再読み込み</button></> : '読み込み中…'}</p>}
+    {!viewAssets.ready && !settlement && !modal && <p role={viewAssets.failed ? "alert" : "status"}>{viewAssets.failed ? <>画像を読み込めませんでした。<button onClick={viewAssets.retry}>再読み込み</button></> : '読み込み中…'}</p>}
     {settlement ? <div className="rq-summary">
       <h2>{settlement.battle.outcome === 'win' ? 'ステージクリア' : '再び、戦場へ'}</h2>
       <p>{selectedLabel}</p>
       {settlement.firstClear && <p>初回クリア報酬を獲得しました。</p>}
       <h3>獲得報酬</h3><Rewards rewards={settlement.rewards} />
       {settlement.encounterRaidId ? <><h3>強敵の気配</h3><p>遭遇戦が発生しました。</p><p className="rq-muted">無視すると、この共闘への参加権を失います。</p><button disabled={busy} onClick={() => onOpenRaid(settlement.encounterRaidId!)}>挑む</button><button disabled={busy} onClick={() => void dismissEncounter()}>無視する</button></> : <>
-        {settlement.playerGrowth && <p>プレイヤーEXP +{settlement.playerGrowth.gainedExp ?? 0} {settlement.playerGrowth.level ? `Lv.${settlement.playerGrowth.beforeLevel} → ${settlement.playerGrowth.level}` : '（移行確認待ち）'}{settlement.playerGrowth.energyRecovered !== undefined && `・体力回復 +${settlement.playerGrowth.energyRecovered}（${settlement.playerGrowth.energy}/${settlement.playerGrowth.energyMax}）`}</p>}
+        {settlement.playerGrowth && <p>プレイヤーEXP +{settlement.playerGrowth.gainedExp ?? 0} {settlement.playerGrowth.level ? `Lv.${settlement.playerGrowth.beforeLevel} → ${settlement.playerGrowth.level}` : '（移行確認待ち）'}{settlement.playerGrowth.energyRecovered !== undefined && `・行動力回復 +${settlement.playerGrowth.energyRecovered}（${settlement.playerGrowth.energy}/${settlement.playerGrowth.energyMax}）`}</p>}
         <button onClick={() => { setSettlement(null); setSelected(null); }}>ステージ一覧へ</button>
         {selected && <button onClick={() => { setSettlement(null); setModal('prepare'); }}>再挑戦</button>}
         {settlement.battle.outcome === 'win' && followingStage && <button onClick={() => { setSettlement(null); setAreaId(followingStage.areaId); openStage(followingStage); }}>次のステージへ</button>}
@@ -124,7 +130,7 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
     </>}
     {selected && modal === 'info' && <div className="redesign-quest-dialog"><CanonicalDialog title={`${selectedLabel} ${formalStageName(selected) ?? selected.name}`} onClose={() => setModal(null)} actions={[{ label: '挑戦', semantic: 'primary', onClick: () => setModal('prepare'), disabled: !encounterAssets.ready || !isQuestStageUnlocked(selected.id, state.clearedStages) }]}>
       {!encounterAssets.ready && <p role={encounterAssets.failed ? "alert" : "status"}>{encounterAssets.failed ? <>画像を読み込めませんでした。<button onClick={encounterAssets.retry}>再読み込み</button></> : '読み込み中…'}</p>}
-      <div className="rq-encounter-hero" style={{ backgroundImage: `linear-gradient(180deg,#2b1c2433,#110c0e77),url("${QUEST_AREAS.find(entry => entry.id === selected.areaId)?.image ?? ''}")` }}><span className="rq-kicker">ステージボス</span>{(() => { const enemy = selectRepresentativeBoss(selected.waves[selected.waves.length - 1]); const subject = bossSubject(enemy); return <article className="rq-boss"><div className="rq-boss-stage">{subject ? <BossDisplay subject={subject} presentation="quest" compact hideCaption className="rq-boss-display" /> : <img className="rq-formal-boss" src={enemy.image} alt={enemy.name} />}</div><div className="rq-boss-title"><strong>{enemy.name}</strong><span className="rq-boss-level">Lv.{enemy.level}</span><ElementBadge element={enemy.element} /></div><dl className="rq-boss-stats" aria-label="ステージボスの能力値"><div><dt>HP</dt><dd>{enemy.stats.hp.toLocaleString('ja-JP')}</dd></div><div><dt>ATK</dt><dd>{enemy.stats.atk.toLocaleString('ja-JP')}</dd></div><div><dt>DEF</dt><dd>{enemy.stats.def.toLocaleString('ja-JP')}</dd></div></dl></article>; })()}</div>
+      {encounterAssets.ready && <div className="rq-encounter-hero" style={{ backgroundImage: `linear-gradient(180deg,#2b1c2433,#110c0e77),url("${QUEST_AREAS.find(entry => entry.id === selected.areaId)?.image ?? ''}")` }}><span className="rq-kicker">ステージボス</span>{(() => { const enemy = selectRepresentativeBoss(selected.waves[selected.waves.length - 1]); const subject = bossSubject(enemy); return <article className="rq-boss"><div className="rq-boss-stage">{subject ? <BossDisplay subject={subject} presentation="quest" compact hideCaption className="rq-boss-display" /> : <img className="rq-formal-boss" src={enemy.image} alt={enemy.name} />}</div><div className="rq-boss-title"><strong>{enemy.name}</strong><span className="rq-boss-level">Lv.{enemy.level}</span><ElementBadge element={enemy.element} /></div><dl className="rq-boss-stats" aria-label="ステージボスの能力値"><div><dt>HP</dt><dd>{enemy.stats.hp.toLocaleString('ja-JP')}</dd></div><div><dt>ATK</dt><dd>{enemy.stats.atk.toLocaleString('ja-JP')}</dd></div><div><dt>DEF</dt><dd>{enemy.stats.def.toLocaleString('ja-JP')}</dd></div></dl></article>; })()}</div>}
       <div className="rq-stage-facts"><span><img src="/ui/sengoku/05-crossed-swords.png" alt="" />Wave数：{selected.waves.length}</span><span><img src="/ui/sengoku/14-energy.png" alt="" />消費行動力：{questEnergyCost(selected,state)}</span></div>
       <div className="rq-info-actions"><button type="button" onClick={() => setDetailPanel('hint')}><img src="/ui/sengoku/02-scroll-top.png" alt="" />攻略のヒント</button><button type="button" onClick={() => setDetailPanel('rewards')}><img src="/ui/sengoku/01-gift.png" alt="" />報酬を確認</button></div>
     </CanonicalDialog></div>}

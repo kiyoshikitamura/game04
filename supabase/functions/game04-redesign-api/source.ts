@@ -311,6 +311,8 @@ Deno.serve(async (request: Request) => {
       catch (error) { throw new ApiError(error instanceof Error ? error.message : '本陣の変更を保存できませんでした。'); }
     } else if (action === 'shop_exchange') {
       after = applyShopExchange(state, payload);
+      await rpc('game04_commit_shop_exchange', { p_user_id: state.userId, p_expected_version: state.version, p_state: after, p_before_diamonds: state.diamonds, p_diamond_cost: state.diamonds - after.diamonds, p_cash_delta: after.cash - state.cash, p_request_id: requestId });
+      return new Response(JSON.stringify(await responseFor(user.id)), { headers });
     } else if (action === 'use_energy_drink') {
       after = applyShopEnergyDrink(state);
     } else if (['raid_join', 'raid_leave', 'raid_rescue', 'raid_claim', 'encounter_ignore'].includes(action)) {

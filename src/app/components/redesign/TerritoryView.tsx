@@ -9,13 +9,15 @@ import { raidElementLabels } from '@/domain/redesign/raidPresentation';
 import roster from '@/theme/sengoku-characters.json';
 import { characterArt } from '@/theme/creativeAssets';
 import Modal from './Modal';
+import { isBattleImageReady, preloadBattleImage } from '../battle/battleAssetPreload';
 import './territory.css';
 
 function ElementBadge({ element }: { element: keyof typeof raidElementLabels }) { return <img className="g4-element-badge" src={`/ui/raid/v2/element-${element}.png`} alt={`${raidElementLabels[element]}属性`} />; }
 const INVASION_TICKET = '/creative/items/territory-invasion-ticket.png';
 const CASTLE_ART = '/bg/raid/raid-castle-moonlight-v1.webp';
 function Art({ src, alt, className = '' }: { src: string; alt: string; className?: string }) {
-  const [ready, setReady] = useState(false), [failed, setFailed] = useState(false);
+  const [ready, setReady] = useState(() => isBattleImageReady(src)), [failed, setFailed] = useState(false);
+  useEffect(() => { setReady(isBattleImageReady(src)); setFailed(false); }, [src]);
   return <span className={`inv-art ${className} ${ready ? 'is-ready' : ''}`}>
     {!ready && <span className="inv-art-status" role="status">{failed ? '画像を読み込めません' : '読込中…'}</span>}
     <img src={src} alt={alt} onLoad={() => setReady(true)} onError={() => setFailed(true)} />
@@ -67,12 +69,10 @@ export default function TerritoryView({ territory, rooms, userId, onHost, onOpen
   const [readyImages, setReadyImages] = useState('');
   const [imageError, setImageError] = useState(false);
   const [imageAttempt, setImageAttempt] = useState(0);
-  const imagesReady = readyImages === imageKey;
+  const imagesReady = readyImages === imageKey || imageKey.split('|').every(isBattleImageReady);
   useEffect(() => {
     let cancelled = false; setImageError(false);
-    Promise.all(imageKey.split('|').map(src => new Promise<void>((resolve, reject) => {
-      const img = new Image(); img.onload = () => resolve(); img.onerror = () => reject(); img.src = src;
-    }))).then(() => { if (!cancelled) setReadyImages(imageKey); }).catch(() => { if (!cancelled) setImageError(true); });
+    Promise.all(imageKey.split('|').map(preloadBattleImage)).then(() => { if (!cancelled) setReadyImages(imageKey); }).catch(() => { if (!cancelled) setImageError(true); });
     return () => { cancelled = true; };
   }, [imageKey, imageAttempt]);
   useEffect(() => {
@@ -114,7 +114,7 @@ export default function TerritoryView({ territory, rooms, userId, onHost, onOpen
       <Castle name={destination.castle} className="inv-detail-castle" />
       <div className="inv-detail-content">
         <h2 className="inv-section-title">◇ 出現する敵</h2>
-        <div className="inv-stages" role="group" aria-label="敵の進行段階">{stages.map((stage, index) => <div key={stage.key} className="inv-stage-wrap"><button className={`inv-stage ${index === stageIndex ? 'is-selected' : ''}`} aria-label={`${stage.label} ボスLv.${stage.level}`} aria-pressed={index === stageIndex} disabled={!imagesReady} onClick={() => setStageIndex(index)}><strong>{stage.label}{stage.key === 'middle' ? '（仮）' : ''}</strong><Art key={`${stage.key}-${stage.enemy.id}`} src={territoryEnemyArt(stage.enemy, 'card')} alt={stage.enemy.name} /><span><ElementBadge element={stage.enemy.element} />ボスLv.{stage.level}</span></button>{index < stages.length - 1 && <span className="inv-stage-arrow" aria-hidden="true">›</span>}</div>)}</div>
+        <div className="inv-stages" role="group" aria-label="敵の進行段階">{stages.map((stage, index) => <div key={stage.key} className="inv-stage-wrap"><button className={`inv-stage ${index === stageIndex ? 'is-selected' : ''}`} aria-label={`${stage.label} ボスLv.${stage.level}`} aria-pressed={index === stageIndex} disabled={!imagesReady} onClick={() => setStageIndex(index)}><strong>{stage.label}</strong><Art key={`${stage.key}-${stage.enemy.id}`} src={territoryEnemyArt(stage.enemy, 'card')} alt={stage.enemy.name} /><span><ElementBadge element={stage.enemy.element} />ボスLv.{stage.level}</span></button>{index < stages.length - 1 && <span className="inv-stage-arrow" aria-hidden="true">›</span>}</div>)}</div>
         <section className="inv-enemy-info" aria-live="polite"><Art key={active.enemy.id} src={territoryEnemyArt(active.enemy, 'portrait')} alt="" /><div><h3>{active.enemy.name} <ElementBadge element={active.enemy.element} /><span>敵Lv.{active.enemy.level}</span></h3><dl className="inv-stats"><div><dt>HP</dt><dd>{active.enemy.stats.hp.toLocaleString()}</dd></div><div><dt>ATK</dt><dd>{active.enemy.stats.atk.toLocaleString()}</dd></div><div><dt>DEF</dt><dd>{active.enemy.stats.def.toLocaleString()}</dd></div></dl></div></section>
         {active.isRepresentative && <p className="inv-note">通常戦の敵は侵攻時に決定します。表示は候補の一例です。</p>}
         <details className="inv-enemy-skills"><summary>敵編成・所持スキルを見る（{active.enemies.length}体）</summary>{active.enemies.map(enemy => <div key={enemy.id}><h4>{enemy.name} · 敵Lv.{enemy.level}</h4><p>HP {enemy.stats.hp.toLocaleString()} / ATK {enemy.stats.atk.toLocaleString()} / DEF {enemy.stats.def.toLocaleString()}</p><ul>{enemy.skills.map((skill, i) => <li key={i}><strong>{skill.name}</strong>：{skill.description}</li>)}</ul></div>)}</details>

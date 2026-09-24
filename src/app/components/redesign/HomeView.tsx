@@ -12,6 +12,7 @@ import { useGame } from '../../context/GameContext';
 import { buildDirectMessageConversations } from '../../context/hooks/directMessageConversations';
 import Modal from './Modal';
 import HomeEffect from './HomeEffect';
+import { useCharacterImageReadiness } from './CharacterImageReadiness';
 import { characterArt, characterBackground } from '@/theme/creativeAssets';
 import { HOME_BACKGROUNDS, isHomeBackgroundUnlocked, resolveHomeBackground } from '@/domain/redesign/home';
 import './HomeView.css';
@@ -43,7 +44,7 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
   const background = resolveHomeBackground(state.homeBackgroundId);
   const ownedCharacters = state.characters.map(owned => CHARACTER_MASTERS.find(c => c.id === owned.id)).filter((c): c is typeof CHARACTER_MASTERS[number] => !!c);
   const personImage = characterArt(favorite, 'full') ?? favorite.image;
-  const homeImages = useHomeImages([...Object.values(profileFaces), background.image, personImage, characterArt(favorite, 'card') ?? personImage, '/ui/sengoku/09-chat.png', '/ui/sengoku/02-scroll-top.png', '/ui/sengoku/12-shop.png', '/ui/sengoku/07-flower-crest.png', '/ui/sengoku/04-fan-sakura.png', '/ui/sengoku/05-crossed-swords.png', '/ui/raid/v2/panel-sakura-overlay.png']);
+  const homeImages = useHomeImages([background.image, personImage, characterArt(favorite, 'card') ?? personImage, '/ui/sengoku/09-chat.png', '/ui/sengoku/02-scroll-top.png', '/ui/sengoku/12-shop.png', '/ui/sengoku/04-fan-sakura.png', '/ui/sengoku/05-crossed-swords.png', '/ui/raid/v2/panel-sakura-overlay.png']);
   const dialogImages = useHomeImages(selector ? [...ownedCharacters.flatMap(c => [characterArt(c, 'card') ?? c.image, characterBackground(c) ?? background.image]), ...HOME_BACKGROUNDS.map(b => b.image)] : []);
   const encounterActive = !!encounterRaid && Date.parse(encounterRaid.expiresAt) > now;
   const claimableMissions = missions.filter(m => m.status === 'claimable').length;
@@ -134,19 +135,8 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
 
 /** Keep the presentation hidden and controls disabled until its actual images decode. */
 function useHomeImages(urls: string[]) {
-  const key = [...new Set(urls.filter(Boolean))].join('|');
-  const [loaded, setLoaded] = useState('');
-  const [error, setError] = useState(false);
-  const [attempt, setAttempt] = useState(0);
-  useEffect(() => {
-    let cancelled = false; setError(false);
-    if (!key) { setLoaded(key); return; }
-    void Promise.all(key.split('|').map(src => new Promise<void>((resolve, reject) => {
-      const img = new Image(); img.onload = () => { if (!img.naturalWidth) { reject(); return; } void img.decode().then(resolve, reject); }; img.onerror = reject; img.src = src;
-    }))).then(() => { if (!cancelled) setLoaded(key); }).catch(() => { if (!cancelled) setError(true); });
-    return () => { cancelled = true; };
-  }, [key, attempt]);
-  return { ready: loaded === key && !error, error, retry: () => { setLoaded(''); setAttempt(n => n + 1); } };
+  const images = useCharacterImageReadiness(urls);
+  return { ready: images.ready, error: images.failed, retry: images.retry };
 }
 
 function HomeLock() {

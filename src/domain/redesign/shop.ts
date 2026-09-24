@@ -10,7 +10,7 @@ export const SHOP_EXCHANGE_OPTIONS = [
   { id: 'cash_10000', title: '銭 10,000', description: '育成や通常召喚に使う銭', cost: 1000, reward: '銭 ×10,000', maxQuantity: 1 },
   { id: 'cash_30000', title: '銭 30,000', description: '育成や通常召喚に使う銭', cost: 3000, reward: '銭 ×30,000', maxQuantity: 1 },
   { id: 'cash_50000', title: '銭 50,000', description: '育成や通常召喚に使う銭', cost: 5000, reward: '銭 ×50,000', maxQuantity: 1 },
-  { id: 'raid_unlock', title: '領土侵攻札', description: '領土へ侵攻するための札', cost: 100, reward: '領土侵攻札 ×1', maxQuantity: 1 },
+  { id: 'raid_unlock', title: '侵攻令', description: '領土侵攻の主催に使用', cost: 100, reward: '侵攻令 ×1', maxQuantity: 1 },
   { id: 'soul_generic', title: '固有魂を汎用魂へ交換', description: '同じレアリティの固有魂2個を汎用魂1個へ交換', cost: 0, reward: '汎用魂 ×1 / 固有魂2個', maxQuantity: 0 },
 ] as const;
 
@@ -45,6 +45,7 @@ export function applyShopExchange(original: RedesignState, payload: Record<strin
     return state;
   }
   if (exchangeId === 'raid_unlock') {
+    if (quantity !== 1) throw new Error('この交換は1回ずつ行います。');
     if (state.diamonds < 100) throw new Error('輝石が足りません。');
     state.diamonds -= 100;
     state.materials.unlock += 1;
@@ -61,7 +62,7 @@ export function applyShopExchange(original: RedesignState, payload: Record<strin
     state.growthInventory.genericSouls[character.rarity] += amount / 2;
     return state;
   }
-  if (!(exchangeId in CASH_REWARDS)) throw new Error('交換対象が不正です。');
+  if (!Object.prototype.hasOwnProperty.call(CASH_REWARDS, exchangeId)) throw new Error('交換対象が不正です。');
   if (quantity !== 1) throw new Error('この交換は1回ずつ行います。');
   const cashId = exchangeId as CashExchangeId;
   if (state.diamonds < CASH_COSTS[cashId]) throw new Error('輝石が足りません。');
@@ -75,6 +76,6 @@ export function applyShopEnergyDrink(original: RedesignState): RedesignState {
   if ((state.energyDrinks ?? 0) < 1) throw new Error('活力丸がありません。');
   if (state.energy >= state.energyMax) throw new Error('行動力が上限に達しています。');
   state.energyDrinks = (state.energyDrinks ?? 0) - 1;
-  state.energy = Math.min(state.energyMax, state.energy + 50);
+  state.energy += 50;
   return state;
 }

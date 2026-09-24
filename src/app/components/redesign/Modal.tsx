@@ -1,11 +1,13 @@
 'use client';
-import React, { useEffect, useId, useRef } from 'react';
+import React, { useEffect, useId, useLayoutEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { registerPresentedDialog } from '../ui/dialogPresence';
 
 const inertShells = new WeakMap<HTMLElement, { count: number; previous: boolean }>();
 
 export default function Modal({ title, onClose, children, footer, className = '', closeDisabled = false }: { title: string; onClose: () => void; children: React.ReactNode; footer?: React.ReactNode; className?: string; closeDisabled?: boolean }) {
   const id = useId();
+  useLayoutEffect(registerPresentedDialog, []);
   const ref = useRef<HTMLElement>(null);
   const closeRef = useRef(onClose);
   useEffect(() => { closeRef.current = () => { if (!closeDisabled) onClose(); }; }, [onClose, closeDisabled]);

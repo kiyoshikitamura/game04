@@ -26,7 +26,7 @@ export function getGrowthResult(before: RedesignState, after: RedesignState, act
       const pa = getCharacterPassive(master, ca.awakening), pb = getCharacterPassive(master, cb.awakening);
       if (pa && pb) add(pa.name, `${pa.percent.toFixed(2)}%`, `${pb.percent.toFixed(2)}%`);
       const a = getCharacterStats(master, ca.level, ca.awakening), b = getCharacterStats(master, cb.level, cb.awakening);
-      for (const stat of ['hp', 'atk', 'def', 'luk'] as const) add(stat.toUpperCase(), Math.round(a[stat]), Math.round(b[stat]));
+      for (const stat of ['hp', 'atk', 'def', 'luk'] as const) add(stat.toUpperCase(), Math.floor(a[stat]), Math.floor(b[stat]));
     }
   }
   if (id) {
@@ -45,7 +45,7 @@ export function getGrowthResult(before: RedesignState, after: RedesignState, act
     const master = EQUIPMENT_MASTERS.find(e => e.id === eb.masterId);
     if (master) {
       const a = getEquipmentStats(master, ea.level, ea.lb), b = getEquipmentStats(master, eb.level, eb.lb);
-      for (const stat of ['hp', 'atk', 'def', 'luk'] as const) add(stat.toUpperCase(), Math.round(a[stat]), Math.round(b[stat]));
+      for (const stat of ['hp', 'atk', 'def', 'luk'] as const) add(stat.toUpperCase(), Math.floor(a[stat]), Math.floor(b[stat]));
     }
   }
   add('スキルLB素材', before.materials.skill, after.materials.skill);

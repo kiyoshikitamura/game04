@@ -7,7 +7,7 @@ import type { BattleUnit, SkillMaster } from '../../../domain/redesign/types';
 import styles from './BattleView.module.css';
 import BattleEffects from './BattleEffects';
 import { resolveBattleFrameEffects } from './battleEffectPresentation';
-import { preloadBattleImage } from '../battle/battleAssetPreload';
+import { isBattleImageReady, preloadBattleImage } from '../battle/battleAssetPreload';
 import { characterArt } from '@/theme/creativeAssets';
 import characterAssets from '@/theme/local-characters.json';
 import { getCharacterPresentationMetadata } from '../character/characterPresentationMetadata';
@@ -19,7 +19,7 @@ function unitArt(unit: BattleUnit, state: BattleUnitState | undefined, variant: 
   // Unknown phase art remains authoritative; only known variants use the existing character mapping.
   return knownCharacterImages.has(source) ? characterArt({ id: unit.id, name: unit.name, image: source }, variant) ?? source : source;
 }
-const isUnassignedSkillImage = (src?: string) => src === '/menu/event_banner_placeholder.png';
+const isUnassignedSkillImage = (src?: string) => !src || src === '/menu/event_banner_placeholder.png';
 const elements = { fire: '火', water: '水', earth: '土', wind: '風', light: '光', dark: '闇' };
 const statusNames: Record<string, string> = { ...STATUS_LABELS, damage: 'ダメージ', heal: '回復', revive: '蘇生', sp: 'SP回復' };
 const readinessNames: Record<string, string> = { ready: '発動可能', insufficient_sp: 'SP不足', condition_unmet: '条件未達', active: '発動中' };
@@ -50,9 +50,14 @@ export function BattleView({ result, vipActive, onComplete, title = '合戦', ba
   const { index, frame, finished, speed, paused, playbackPaused, setPaused, cycleSpeed, skip } = useRecordedBattlePlayback({ result, initialFrame, initialPaused, vipActive, blocked: !!detail || showLog || assetsBlocked });
   const presentation = projectRecordedBattleFrame(result, index);
   const imageKey = JSON.stringify([...new Set(['/branding/tribe-neon-logo.png', backgroundSrc, ...(frame ? [...frame.party, ...frame.enemies].flatMap(state => { const unit = result.party.find(item => item.id === state.id) ?? result.waves[frame.wave - 1]?.find(item => item.id === state.id); return [unit ? unitArt(unit, state, 'full') : state.image, unit && frame.party.some(member => member.id === state.id) ? unitArt(unit, state, 'portrait') : undefined, unit ? `/ui/raid/v2/element-${unit.element}.png` : undefined, ...(state.skills ?? unit?.skills ?? []).filter(skill => !isUnassignedSkillImage(skill.image)).map(skill => skill.image)]; }) : [])].filter((src): src is string => !!src))]);
-  const visibleLoading = assetsBlocked || assetState.key !== imageKey;
+  const decoded = (JSON.parse(imageKey) as string[]).every(isBattleImageReady);
+  const visibleLoading = !decoded;
   useEffect(() => {
     let cancelled = false;
+    if ((JSON.parse(imageKey) as string[]).every(isBattleImageReady)) {
+      setAssetState({ result, key: imageKey, status: 'ready' });
+      return;
+    }
     setAssetState({ result, key: imageKey, status: 'loading' });
     Promise.all((JSON.parse(imageKey) as string[]).map(preloadBattleImage)).then(() => { if (!cancelled) setAssetState({ result, key: imageKey, status: 'ready' }); }, () => { if (!cancelled) setAssetState({ result, key: imageKey, status: 'error' }); });
     return () => { cancelled = true; };

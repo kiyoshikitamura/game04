@@ -1,5 +1,5 @@
 import type { RedesignState, DeckMember, EquipmentSlot, OwnedCharacter, OwnedEquipment, ExpSize } from './types';
-import { CHARACTER_MASTERS, SKILL_MASTERS, EQUIPMENT_MASTERS, getSkillSlots } from './masters';
+import { CHARACTER_MASTERS, OWNABLE_SKILL_MASTERS as SKILL_MASTERS, EQUIPMENT_MASTERS, getSkillSlots } from './masters';
 import { GROWTH_VERSION, EXP_SIZES, EXP_VALUES, SOUL_UNLOCK, AWAKENING_SOULS, LB_STEPS, SKILL_LB_FACTORS, EQUIPMENT_LB_FACTORS, DISMANTLE_MATERIALS, cumulativeExp, cumulativeCash, emptyGrowthInventory, type GrowthKind } from './growthMaster';
 export const GROWTH_PREVIEW_RULES = { characterLevelCaps: [50, 60, 70, 80, 90, 100], skillMax: 10, equipmentLevelCap: 100, equipmentLbMax: 10 };
 export const EQUIPMENT_SLOTS: EquipmentSlot[] = ["weapon", "head", "body", "legs", "accessory1", "accessory2"];
@@ -27,7 +27,7 @@ export function validateDeck(state: RedesignState, deck: DeckMember[]) {
     requireValue(owned && owned.level > 0, "未所持の武将です。");
     requireValue(Array.isArray(member.skillIds) && member.skillIds.length <= getSkillSlots(owned.awakening), "スキル枠が不足しています。");
     requireValue(new Set(member.skillIds).size === member.skillIds.length, "同じ武将に同一スキルは装備できません。");
-    requireValue(member.skillIds.every((id) => state.skills.some((s) => s.id === id)), "未所持のスキルです。");
+    requireValue(member.skillIds.every((id) => state.skills.some((s) => s.id === id) && SKILL_MASTERS.some((s) => s.id === id)), "未所持のスキルです。");
     requireValue(member.equipment && typeof member.equipment === "object", "装備設定を確認してください。");
     for (const [slot, id] of Object.entries(member.equipment)) {
       requireValue(EQUIPMENT_SLOTS.includes(slot as EquipmentSlot), "装備部位が不正です。");
