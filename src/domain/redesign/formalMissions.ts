@@ -46,4 +46,12 @@ export const FORMAL_DAILY_MISSIONS:MissionMaster[]=[
  {id:'DM008',name:'育成を1回行う',description:'デイリー',enabled:false,condition:{type:'metric',key:'growth',target:1,daily:true},rewards:[{kind:'cash',amount:2000}]},
  ...[3,5].map((target,i)=>({id:`DM0${i+9}`,name:`デイリー任務を${target}件達成`,description:'デイリー',enabled:false,condition:{type:'metric' as const,key:'daily_completed',target,daily:true},rewards:[{kind:'cash' as const,amount:[5000,10000][i]},{kind:i===0?'character_exp_item' as const:'equipment_exp_item' as const,id:'medium',amount:1}]})),
 ];
-export const FORMAL_MISSION_CONFIG:MissionConfig={enabled:true,missions:[...FORMAL_NORMAL_MISSIONS,...FORMAL_DAILY_MISSIONS]};
+// Latest authority adds invasion-order supply without replacing the accepted 183 rows.
+export const INVASION_SUPPLY_MISSIONS:MissionMaster[]=[5,10,20,30].map(target=>({
+ id:`NM_INVASION_WIN_${target}`,name:`領土侵攻の個人戦で${target}回勝利`,description:'領土侵攻',enabled:true,
+ condition:{type:'metric',key:'invasion_win',target},rewards:[{kind:'unlock_item',amount:1}],
+}));
+export const FORMAL_MISSION_CONFIG:MissionConfig={enabled:true,missions:[
+ ...FORMAL_NORMAL_MISSIONS.map(m=>m.id==='NM171'?{...m,rewards:[...m.rewards,{kind:'unlock_item' as const,amount:1}]}:m),
+ ...INVASION_SUPPLY_MISSIONS,...FORMAL_DAILY_MISSIONS,
+]};

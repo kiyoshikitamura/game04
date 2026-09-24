@@ -25420,8 +25420,8 @@ function applyNormalGacha(original, payload, pool, requestId, now, policy, rando
 var GROWTH_PREVIEW_RULES = { characterLevelCaps: [50, 60, 70, 80, 90, 100], skillMax: 10, equipmentLevelCap: 100, equipmentLbMax: 10 };
 var EQUIPMENT_SLOTS = ["weapon", "head", "body", "legs", "accessory1", "accessory2"];
 var getCharacterLevelCap = (awakening) => GROWTH_PREVIEW_RULES.characterLevelCaps[Math.max(0, Math.min(5, awakening))];
-function requireValue(condition, message) {
-  if (!condition) throw new Error(message);
+function requireValue(condition2, message) {
+  if (!condition2) throw new Error(message);
 }
 function isEquipmentAssigned(state, id) {
   return state.deck.some((m) => Object.values(m.equipment).includes(id));
@@ -55209,7 +55209,7 @@ function simulateBattle(input) {
   const side = (u) => u.enemy ? enemies : party;
   const opposite = (u) => u.enemy ? party : enemies;
   const stat = (u, key2) => Math.max(1, u.stats[key2] * (1 + u.statuses.reduce((v, s) => v + (s.type === `${key2}_up` ? s.power / 100 : s.type === `${key2}_down` ? -s.power / 100 : 0), 0)));
-  const condition = (u, skill2) => {
+  const condition2 = (u, skill2) => {
     const value = skill2.condition.value ?? 0.5;
     switch (skill2.condition.type) {
       case "hp_below":
@@ -55226,7 +55226,7 @@ function simulateBattle(input) {
         return true;
     }
   };
-  const choose = (u, sp, discount = 1) => u.skills.map((skill2, slot) => ({ skill: skill2, slot })).filter(({ skill: skill2 }) => skill2.spCost > 0 && condition(u, skill2) && Math.ceil(skill2.spCost * discount) <= sp).sort((a, b) => b.skill.spCost - a.skill.spCost || a.slot - b.slot)[0]?.skill;
+  const choose = (u, sp, discount = 1) => u.skills.map((skill2, slot) => ({ skill: skill2, slot })).filter(({ skill: skill2 }) => skill2.spCost > 0 && condition2(u, skill2) && Math.ceil(skill2.spCost * discount) <= sp).sort((a, b) => b.skill.spCost - a.skill.spCost || a.slot - b.slot)[0]?.skill;
   const targets = (u, skill2) => {
     const allies = side(u).filter((t) => t.hp > 0), foes = opposite(u).filter((t) => t.hp > 0);
     switch (skill2.target) {
@@ -55520,7 +55520,7 @@ function simulateCommonBattle(input) {
   const stat = (u, key2) => u.stats[key2] * (1 + u.passive[key2] / 100) * (1 + Math.min(sum(u, `${key2}_up`), key2 === "atk" ? 50 : 100) / 100 - Math.min(sum(u, `${key2}_down`), key2 === "atk" ? 30 : 50) / 100);
   const snapshot = (u) => ({ id: u.id, hp: u.hp, maxHp: u.stats.hp, sp: u.sp, maxSp: u.stats.sp, count: u.count, actions: u.actions, statuses: u.statuses.map((s) => ({ ...s })), phase: u.phase, image: u.image, stunImmune: u.immune, dead: u.dead, effectiveAtk: stat(u, "atk"), effectiveDef: stat(u, "def"), skills: u.phase ? u.skills : void 0 });
   const frame = (kind, text, u, skill2, extra = {}) => frames.push({ index: frames.length, wave: wave + 1, kind, text, actorId: u?.id, skillId: skill2?.id, partySp, maxSp: 400, burst, party: party.map(snapshot), enemies: enemies.map(snapshot), burstGauge: gauge, maxBurstGauge: 200, playerActions, remainingActions: 300 - playerActions, skillStates: Object.fromEntries([...party, ...enemies].map((unit) => [unit.id, unit.skills.map((s) => ({ skillId: s.id, cost: Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)), status: extra.event === "action_start" && unit === u && s === skill2 ? "active" : !alive(unit) || !usable(unit, s) ? "condition_unmet" : Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)) > (unit.enemy ? unit.sp : partySp) ? "insufficient_sp" : "ready", reason: s.unsupportedReason }))])), ...extra });
-  const condition = (u, c) => {
+  const condition2 = (u, c) => {
     const v = c.value ?? 0.5;
     switch (c.type) {
       case "hp_below":
@@ -55541,7 +55541,7 @@ function simulateCommonBattle(input) {
   const passives = (reevaluate = true) => {
     if (reevaluate)
       for (const owner of [...party, ...enemies])
-        passiveConditions.set(owner, new Map(owner.passives.map((p) => [p.id, !p.condition || condition(owner, p.condition)])));
+        passiveConditions.set(owner, new Map(owner.passives.map((p) => [p.id, !p.condition || condition2(owner, p.condition)])));
     for (const list of [party, enemies])
       for (const target of list) {
         const best = /* @__PURE__ */ new Map();
@@ -55608,7 +55608,7 @@ function simulateCommonBattle(input) {
     const all = ["self", "lowest_ally", "all_allies", "dead_ally"].includes(rule) ? side(u) : opposite(u);
     return select(u, rule, all.filter((t) => applicable(t, e, skill2.id)), preview);
   };
-  const usable = (u, s) => !s.unsupportedReason && condition(u, s.condition) && s.effects.some((e) => effectTargets(u, s, e, void 0, true).length > 0);
+  const usable = (u, s) => !s.unsupportedReason && condition2(u, s.condition) && s.effects.some((e) => effectTargets(u, s, e, void 0, true).length > 0);
   const choose = (u, discount = 1) => u.skills.find((s) => usable(u, s) && Math.ceil(s.spCost * discount) <= (u.enemy ? u.sp : partySp));
   const basic = (u) => ({ id: "basic", name: "\u901A\u5E38\u653B\u6483", image: "", rarity: "N", element: u.element, spCost: 0, condition: { type: "always" }, target: "first", effects: [{ type: "damage", power: 100 }], description: "" });
   const applyEffect = (u, targets, e, skill2) => {
@@ -55979,8 +55979,8 @@ function simulateBalanceBattle(input) {
   const stat = (u, key2) => u.stats[key2] * (1 + u.passive[key2] / 100) * (1 + Math.min(sum(u, `${key2}_up`), key2 === "atk" ? 50 : 100) / 100 - Math.min(sum(u, `${key2}_down`), key2 === "atk" ? 30 : 50) / 100);
   const extraPassives = /* @__PURE__ */ new WeakMap();
   const snapshot = (u) => ({ id: u.id, hp: u.hp, maxHp: u.stats.hp, sp: u.sp, maxSp: u.stats.sp, count: u.count, actions: u.actions, statuses: u.statuses.map((s) => ({ ...s })), phase: u.phase, image: u.image, stunImmune: u.immune, dead: u.dead, effectiveAtk: stat(u, "atk"), effectiveDef: stat(u, "def"), skills: u.phase ? u.skills : void 0, passiveEffects: u.passives.map((p) => ({ id: p.id, type: p.type, percent: p.percent, targetElement: p.targetElement, active: alive(u) && (passiveConditions.get(u)?.get(p.id) ?? false) })) });
-  const frame = (kind, text, u, skill2, extra = {}) => frames.push({ index: frames.length, wave: wave + 1, kind, text, actorId: u?.id, skillId: skill2?.id, partySp, maxSp: 400, burst, party: party.map(snapshot), enemies: enemies.map(snapshot), burstGauge: gauge, maxBurstGauge: 200, playerActions, remainingActions: 300 - playerActions, skillStates: Object.fromEntries([...party, ...enemies].map((unit) => [unit.id, unit.skills.map((s) => ({ skillId: s.id, cost: Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)), status: extra.event === "action_start" && unit === u && s === skill2 ? "active" : !alive(unit) || !usable(unit, s) ? "condition_unmet" : Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)) > (unit.enemy ? unit.sp : partySp) ? "insufficient_sp" : "ready", reason: s.unsupportedReason ?? (!condition(unit, s.condition) ? "condition_unmet" : !usable(unit, s) ? s.effects.some((e) => ["atk_up", "def_up", "atk_down", "def_down", "dot", "hot", "shield", "taunt", "counter", "stun"].includes(e.type)) && [...party, ...enemies].some((t) => alive(t) && t.statuses.some((effect) => effect.sourceSkillId === s.id)) ? "reapply_unavailable" : "condition_unmet" : void 0) }))])), ...extra });
-  const condition = (u, c) => {
+  const frame = (kind, text, u, skill2, extra = {}) => frames.push({ index: frames.length, wave: wave + 1, kind, text, actorId: u?.id, skillId: skill2?.id, partySp, maxSp: 400, burst, party: party.map(snapshot), enemies: enemies.map(snapshot), burstGauge: gauge, maxBurstGauge: 200, playerActions, remainingActions: 300 - playerActions, skillStates: Object.fromEntries([...party, ...enemies].map((unit) => [unit.id, unit.skills.map((s) => ({ skillId: s.id, cost: Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)), status: extra.event === "action_start" && unit === u && s === skill2 ? "active" : !alive(unit) || !usable(unit, s) ? "condition_unmet" : Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)) > (unit.enemy ? unit.sp : partySp) ? "insufficient_sp" : "ready", reason: s.unsupportedReason ?? (!condition2(unit, s.condition) ? "condition_unmet" : !usable(unit, s) ? s.effects.some((e) => ["atk_up", "def_up", "atk_down", "def_down", "dot", "hot", "shield", "taunt", "counter", "stun"].includes(e.type)) && [...party, ...enemies].some((t) => alive(t) && t.statuses.some((effect) => effect.sourceSkillId === s.id)) ? "reapply_unavailable" : "condition_unmet" : void 0) }))])), ...extra });
+  const condition2 = (u, c) => {
     const v = c.value ?? 0.5;
     switch (c.type) {
       case "hp_below":
@@ -56007,7 +56007,7 @@ function simulateBalanceBattle(input) {
       const others = new Set(living.filter((t) => t !== owner).map((t) => t.element)).size;
       passiveConditions.set(owner, new Map(owner.passives.map((p) => [
         p.id,
-        (!p.condition || condition(owner, p.condition)) && (p.type !== "P04" || others >= 2) && (p.type !== "P14" || owner.hp / owner.stats.hp <= config.lowHpThreshold) && (p.type !== "P15" || owner.hp / owner.stats.hp >= config.highHpThreshold) && (p.type !== "P16" || owner.statuses.some((s) => s.type === "atk_up"))
+        (!p.condition || condition2(owner, p.condition)) && (p.type !== "P04" || others >= 2) && (p.type !== "P14" || owner.hp / owner.stats.hp <= config.lowHpThreshold) && (p.type !== "P15" || owner.hp / owner.stats.hp >= config.highHpThreshold) && (p.type !== "P16" || owner.statuses.some((s) => s.type === "atk_up"))
       ])));
       targetConditions.set(owner, { debuff: owner.statuses.some((s) => s.type === "atk_down" || s.type === "def_down"), dot: owner.statuses.some((s) => s.type === "dot") });
     }
@@ -56119,7 +56119,7 @@ function simulateBalanceBattle(input) {
     if (e.type === "hot" && rule === "lowest_ally") return select(u, rule, all.filter((t) => t.hp < t.stats.hp && applicable(t, e, skill2.id)), preview);
     return select(u, rule, all.filter((t) => applicable(t, e, skill2.id)), preview);
   };
-  const usable = (u, s) => !s.unsupportedReason && condition(u, s.condition) && s.effects.some((e) => effectTargets(u, s, e, void 0, true).length > 0);
+  const usable = (u, s) => !s.unsupportedReason && condition2(u, s.condition) && s.effects.some((e) => effectTargets(u, s, e, void 0, true).length > 0);
   const choose = (u, discount = 1) => u.skills.find((s) => usable(u, s) && Math.ceil(s.spCost * discount) <= (u.enemy ? u.sp : partySp));
   const basic = (u) => ({ id: "basic", name: "\u901A\u5E38\u653B\u6483", image: "", rarity: "N", element: u.element, spCost: 0, condition: { type: "always" }, target: "first", effects: [{ type: "damage", power: 100 }], description: "" });
   let hitThisAction = /* @__PURE__ */ new Set();
@@ -56710,14 +56710,92 @@ function applyShopEnergyDrink(original) {
   return state;
 }
 
+// src/domain/redesign/loginBonus.ts
+function jstLoginDate(now) {
+  if (!Number.isFinite(now)) throw new Error("\u30ED\u30B0\u30A4\u30F3\u65E5\u6642\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+  return new Date(now + 9 * 60 * 60 * 1e3).toISOString().slice(0, 10);
+}
+
+// src/domain/redesign/missionProgress.ts
+function captureMissionAssets(original) {
+  const state = structuredClone(original);
+  const p = state.missionProgress ??= { version: "game04-missions-v1", counters: {}, daily: {}, seenEvents: [], character: {}, skill: {}, equipment: {} };
+  for (const c of state.characters) p.character[c.id] = { level: Math.max(p.character[c.id]?.level ?? 0, c.level), awakening: Math.max(p.character[c.id]?.awakening ?? 0, c.awakening) };
+  for (const s of state.skills) p.skill[s.id] = Math.max(p.skill[s.id] ?? 0, s.level);
+  for (const e of state.equipment) p.equipment[e.instanceId] = { masterId: e.masterId, level: Math.max(p.equipment[e.instanceId]?.level ?? 0, e.level), lb: Math.max(p.equipment[e.instanceId]?.lb ?? 0, e.lb) };
+  return state;
+}
+function recordMissionEvent(original, event) {
+  const state = captureMissionAssets(original), p = state.missionProgress;
+  if (!event.id || event.counters.some((k) => !k || ["__proto__", "constructor", "prototype"].includes(k))) throw new Error("\u4EFB\u52D9\u306E\u9032\u884C\u30A4\u30D9\u30F3\u30C8\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+  if (p.seenEvents.includes(event.id)) return state;
+  const date = jstLoginDate(event.at), daily = p.daily[date] ??= {};
+  for (const key2 of new Set(event.counters)) {
+    p.counters[key2] = (p.counters[key2] ?? 0) + 1;
+    daily[key2] = (daily[key2] ?? 0) + 1;
+  }
+  p.seenEvents.push(event.id);
+  return state;
+}
+
 // src/domain/redesign/missions.ts
-function evaluateMissions(state, config) {
+function evaluateMissions(state, config, now = Date.now()) {
   if (!config.enabled) return [];
   const cleared = new Set(state.clearedStages);
   const ids = /* @__PURE__ */ new Set();
+  const progress = captureMissionAssets(state).missionProgress;
   return config.missions.filter((master) => master.enabled).map((master) => {
     if (!master.id || ids.has(master.id)) throw new Error("\u4EFB\u52D9\u30DE\u30B9\u30BF\u30FC\u306EID\u304C\u91CD\u8907\u3057\u3066\u3044\u307E\u3059\u3002");
     ids.add(master.id);
+    if (master.condition.type === "metric") {
+      const c = master.condition, p = progress;
+      let value = 0;
+      if (c.daily) {
+        const daily = p.daily[jstLoginDate(now)] ?? {};
+        value = c.key === "daily_completed" ? [1, 3, 5].filter((n) => (daily.battle ?? 0) >= n).length + [1, 3, 5].filter((n) => (daily.quest_clear ?? 0) >= n).length + Number((daily.normal_gacha ?? 0) >= 1) + Number((daily.growth ?? 0) >= 1) : daily[c.key] ?? 0;
+      } else switch (c.key) {
+        case "quest_clear":
+          value = Object.values(state.questClearCounts ?? {}).reduce((a, b) => a + b, 0);
+          break;
+        case "player_level":
+          value = state.playerProgress?.level ?? 0;
+          break;
+        case "character_count":
+          value = Object.keys(p.character).length;
+          break;
+        case "ssr_character_count":
+          value = Object.keys(p.character).filter((id) => CHARACTER_MASTERS.some((m) => m.id === id && m.rarity === "SSR")).length;
+          break;
+        case "character_level":
+          value = Object.values(p.character).filter((v) => v.level >= (c.threshold ?? 0)).length;
+          break;
+        case "character_awakening":
+          value = Object.values(p.character).filter((v) => v.awakening >= (c.threshold ?? 0)).length;
+          break;
+        case "skill_count":
+          value = Object.keys(p.skill).length;
+          break;
+        case "ssr_skill_count":
+          value = Object.keys(p.skill).filter((id) => OWNABLE_SKILL_MASTERS.some((m) => m.id === id && m.rarity === "SSR")).length;
+          break;
+        case "skill_lb":
+          value = Object.values(p.skill).filter((v) => v >= (c.threshold ?? 0)).length;
+          break;
+        case "ssr_equipment_count":
+          value = new Set(Object.values(p.equipment).filter((v) => EQUIPMENT_MASTERS.some((m) => m.id === v.masterId && m.rarity === "SSR")).map((v) => v.masterId)).size;
+          break;
+        case "equipment_level":
+          value = Object.values(p.equipment).filter((v) => v.level >= (c.threshold ?? 0)).length;
+          break;
+        case "equipment_lb":
+          value = Object.values(p.equipment).filter((v) => v.lb >= (c.threshold ?? 0)).length;
+          break;
+        default:
+          value = p.counters[c.key] ?? 0;
+      }
+      const claimId = c.daily ? `${master.id}:${jstLoginDate(now)}` : master.id;
+      return { id: claimId, name: master.name, description: master.description, rewards: master.rewards, current: Math.min(value, c.target), target: c.target, status: state.claimedMissionIds?.includes(claimId) ? "claimed" : value >= c.target ? "claimable" : "progress" };
+    }
     let stages;
     if (master.condition.type === "stage_clear") {
       const stageId = master.condition.stageId;
@@ -56744,87 +56822,3654 @@ function evaluateMissions(state, config) {
 function getClaimableMission(state, config, id) {
   const row = evaluateMissions(state, config).find((candidate) => candidate.id === id);
   if (!row || row.status !== "claimable") throw new Error("\u3053\u306E\u4EFB\u52D9\u306E\u5831\u916C\u306F\u53D7\u3051\u53D6\u308C\u307E\u305B\u3093\u3002");
-  return config.missions.find((master) => master.id === id);
+  const master = config.missions.find((master2) => master2.id === id || master2.condition.type === "metric" && master2.condition.daily && `${master2.id}:${jstLoginDate(Date.now())}` === id);
+  if (!master) throw new Error("\u4EFB\u52D9\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002");
+  return { ...master, id };
 }
 
-// src/domain/redesign/battle.ts
-function simulateBattle3(input) {
-  if (input.rules.version === BALANCE_BATTLE_VERSION) return simulateBalanceBattle(input);
-  return simulateBattle2(input);
-}
-
-// src/domain/redesign/legacyQuests.ts
-var AREAS2 = [
-  ["mikawa", "\u4E09\u6CB3\u306E\u5730", "\u6700\u521D\u306E\u4E00\u6B69", "\u6575\u306E\u5C5E\u6027\u3068\u884C\u52D5\u30AB\u30A6\u30F3\u30C8\u3092\u898B\u3066\u3001\u6B66\u5C06\u306E\u4E26\u3073\u3092\u6574\u3048\u3088\u3046\u3002"],
-  ["owari", "\u5C3E\u5F35\u306E\u65D7", "\u71B1\u304D\u65D7\u5370", "\u8907\u6570\u306E\u6575\u306B\u306F\u5168\u4F53\u653B\u6483\u3068\u72D9\u3046\u9806\u756A\u304C\u529B\u306B\u306A\u308B\u3002"],
-  ["mino", "\u7F8E\u6FC3\u306E\u57CE", "\u5805\u57CE\u3078\u306E\u9053", "\u5805\u3044\u5B88\u308A\u306B\u306F\u5B88\u5099\u3092\u4E0B\u3052\u308B\u6280\u3092\u7D44\u307F\u5408\u308F\u305B\u3088\u3046\u3002"],
-  ["omi", "\u8FD1\u6C5F\u306E\u6E56", "\u6E56\u4E0A\u306E\u76DF\u7D04", "\u50B7\u3064\u3044\u305F\u4EF2\u9593\u3092\u56DE\u5FA9\u3057\u3001\u9023\u6226\u3092\u5207\u308A\u629C\u3051\u3088\u3046\u3002"],
-  ["kai", "\u7532\u6590\u306E\u5C71", "\u98A8\u6797\u306E\u8A66\u7DF4", "\u5F37\u3044\u4E00\u6483\u306B\u5099\u3048\u3001\u5B88\u308A\u3068\u653B\u6483\u306E\u9806\u3092\u8003\u3048\u3088\u3046\u3002"],
-  ["echigo", "\u8D8A\u5F8C\u306E\u96EA", "\u96EA\u89E3\u3051\u306E\u7FA9", "\u6575\u306E\u56DE\u5FA9\u5F79\u3092\u3069\u3046\u5D29\u3059\u304B\u304C\u52DD\u6557\u3092\u5206\u3051\u308B\u3002"],
-  ["kyoto", "\u4EAC\u6D1B\u306E\u5F71", "\u82B1\u3068\u7B56\u8B00", "\u5F31\u4F53\u3068\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u3092\u898B\u6975\u3081\u3001\u65E9\u3081\u306B\u6C7A\u7740\u3092\u3064\u3051\u3088\u3046\u3002"],
-  ["izumo", "\u51FA\u96F2\u306E\u793E", "\u7948\u308A\u306E\u5411\u3053\u3046", "\u5149\u3068\u95C7\u306E\u76F8\u6027\u3001\u652F\u63F4\u6280\u306E\u7D44\u307F\u5408\u308F\u305B\u3092\u898B\u76F4\u305D\u3046\u3002"],
-  ["satsuma", "\u85A9\u6469\u306E\u708E", "\u4E0D\u5C48\u306E\u9663", "\u9023\u6226\u306B\u5099\u3048\u3066HP\u3068SP\u3092\u6B8B\u3057\u3001\u6575\u9663\u3092\u7A81\u7834\u3057\u3088\u3046\u3002"],
-  ["sekigahara", "\u95A2\u30F6\u539F", "\u6681\u306E\u7D04\u675F", "\u5909\u308F\u308A\u3086\u304F\u6575\u306E\u9663\u3092\u8AAD\u307F\u3001\u4E94\u4EBA\u306E\u529B\u3092\u7D50\u96C6\u3057\u3088\u3046\u3002"]
+// src/domain/redesign/data/formalMissions.json
+var formalMissions_default = [
+  {
+    id: "NM001",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "1-1\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM002",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "1-2\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM003",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "1-3\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM004",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "2-1\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 2e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 2
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 2
+      }
+    ]
+  },
+  {
+    id: "NM005",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "2-2\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 2e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 2
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 2
+      }
+    ]
+  },
+  {
+    id: "NM006",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "2-3\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 2e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 2
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 2
+      }
+    ]
+  },
+  {
+    id: "NM007",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "2-4\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 2e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 2
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 2
+      }
+    ]
+  },
+  {
+    id: "NM008",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "3-1\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 3e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 3
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM009",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "3-2\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 3e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 3
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM010",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "3-3\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 3e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 3
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM011",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "3-4\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 3e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 3
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM012",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "3-5\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 3e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 3
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM013",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "4-1\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 4e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 4
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 4
+      }
+    ]
+  },
+  {
+    id: "NM014",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "4-2\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 4e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 4
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 4
+      }
+    ]
+  },
+  {
+    id: "NM015",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "4-3\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 4e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 4
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 4
+      }
+    ]
+  },
+  {
+    id: "NM016",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "4-4\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 4e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 4
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 4
+      }
+    ]
+  },
+  {
+    id: "NM017",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "4-5\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 4e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 4
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 4
+      }
+    ]
+  },
+  {
+    id: "NM018",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "5-1\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 5e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 5
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM019",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "5-2\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 5e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 5
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM020",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "5-3\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 5e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 5
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM021",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "5-4\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 5e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 5
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM022",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "5-5\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 5e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 5
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM023",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "5-6\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 5e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 5
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM024",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "6-1\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 6e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 6
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 6
+      }
+    ]
+  },
+  {
+    id: "NM025",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "6-2\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 6e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 6
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 6
+      }
+    ]
+  },
+  {
+    id: "NM026",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "6-3\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 6e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 6
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 6
+      }
+    ]
+  },
+  {
+    id: "NM027",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "6-4\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 6e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 6
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 6
+      }
+    ]
+  },
+  {
+    id: "NM028",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "6-5\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 6e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 6
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 6
+      }
+    ]
+  },
+  {
+    id: "NM029",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "6-6\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 6e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 6
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 6
+      }
+    ]
+  },
+  {
+    id: "NM030",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "7-1\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 7e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 7
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 7
+      }
+    ]
+  },
+  {
+    id: "NM031",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "7-2\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 7e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 7
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 7
+      }
+    ]
+  },
+  {
+    id: "NM032",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "7-3\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 7e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 7
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 7
+      }
+    ]
+  },
+  {
+    id: "NM033",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "7-4\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 7e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 7
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 7
+      }
+    ]
+  },
+  {
+    id: "NM034",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "7-5\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 7e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 7
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 7
+      }
+    ]
+  },
+  {
+    id: "NM035",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "7-6\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 7e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 7
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 7
+      }
+    ]
+  },
+  {
+    id: "NM036",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "7-7\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 7e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 7
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 7
+      }
+    ]
+  },
+  {
+    id: "NM037",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "7-8\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 7e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 7
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 7
+      }
+    ]
+  },
+  {
+    id: "NM038",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "8-1\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 8e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 8
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 8
+      }
+    ]
+  },
+  {
+    id: "NM039",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "8-2\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 8e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 8
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 8
+      }
+    ]
+  },
+  {
+    id: "NM040",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "8-3\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 8e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 8
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 8
+      }
+    ]
+  },
+  {
+    id: "NM041",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "8-4\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 8e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 8
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 8
+      }
+    ]
+  },
+  {
+    id: "NM042",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "8-5\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 8e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 8
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 8
+      }
+    ]
+  },
+  {
+    id: "NM043",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "8-6\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 8e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 8
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 8
+      }
+    ]
+  },
+  {
+    id: "NM044",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "8-7\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 8e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 8
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 8
+      }
+    ]
+  },
+  {
+    id: "NM045",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "8-8\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 8e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 8
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 8
+      }
+    ]
+  },
+  {
+    id: "NM046",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "9-1\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 9e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 9
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM047",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "9-2\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 9e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 9
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM048",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "9-3\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 9e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 9
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM049",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "9-4\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 9e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 9
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM050",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "9-5\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 9e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 9
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM051",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "9-6\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 9e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 9
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM052",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "9-7\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 9e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 9
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM053",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "9-8\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 9e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 9
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM054",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "9-9\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 9e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 9
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM055",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "9-10\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 9e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 9
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM056",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "10-1\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e4
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM057",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "10-2\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e4
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM058",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "10-3\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e4
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM059",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "10-4\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e4
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM060",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "10-5\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e4
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM061",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "10-6\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e4
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM062",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "10-7\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e4
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM063",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "10-8\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e4
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM064",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "10-9\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e4
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM065",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "10-10\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e4
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM066",
+    group: "\u30A8\u30EA\u30A2\u30AF\u30EA\u30A2",
+    name: "\u30A8\u30EA\u30A21\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "soul",
+        id: "char_rui_01",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM067",
+    group: "\u30A8\u30EA\u30A2\u30AF\u30EA\u30A2",
+    name: "\u30A8\u30EA\u30A22\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "soul",
+        id: "char_takuro_01",
+        amount: 5
+      },
+      {
+        kind: "soul",
+        id: "char_karen_01",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM068",
+    group: "\u30A8\u30EA\u30A2\u30AF\u30EA\u30A2",
+    name: "\u30A8\u30EA\u30A23\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "soul",
+        id: "char_maya_01",
+        amount: 7
+      },
+      {
+        kind: "soul",
+        id: "char_reiji_01",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM069",
+    group: "\u30A8\u30EA\u30A2\u30AF\u30EA\u30A2",
+    name: "\u30A8\u30EA\u30A24\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "soul",
+        id: "char_noa_01",
+        amount: 7
+      },
+      {
+        kind: "soul",
+        id: "char_mio_01",
+        amount: 2
+      }
+    ]
+  },
+  {
+    id: "NM070",
+    group: "\u30A8\u30EA\u30A2\u30AF\u30EA\u30A2",
+    name: "\u30A8\u30EA\u30A25\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "soul",
+        id: "char_reina_01",
+        amount: 8
+      },
+      {
+        kind: "soul",
+        id: "char_karen_01",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM071",
+    group: "\u30A8\u30EA\u30A2\u30AF\u30EA\u30A2",
+    name: "\u30A8\u30EA\u30A26\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "soul",
+        id: "char_riki_01",
+        amount: 8
+      },
+      {
+        kind: "soul",
+        id: "char_go_01",
+        amount: 4
+      }
+    ]
+  },
+  {
+    id: "NM072",
+    group: "\u30A8\u30EA\u30A2\u30AF\u30EA\u30A2",
+    name: "\u30A8\u30EA\u30A27\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "soul",
+        id: "char_genji_01",
+        amount: 7
+      },
+      {
+        kind: "soul",
+        id: "char_ageha_01",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM073",
+    group: "\u30A8\u30EA\u30A2\u30AF\u30EA\u30A2",
+    name: "\u30A8\u30EA\u30A28\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "soul",
+        id: "char_lucas_01",
+        amount: 6
+      },
+      {
+        kind: "soul",
+        id: "char_leo_01",
+        amount: 6
+      }
+    ]
+  },
+  {
+    id: "NM074",
+    group: "\u30A8\u30EA\u30A2\u30AF\u30EA\u30A2",
+    name: "\u30A8\u30EA\u30A29\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "soul",
+        id: "char_seiya_01",
+        amount: 5
+      },
+      {
+        kind: "soul",
+        id: "char_kaede_01",
+        amount: 8
+      }
+    ]
+  },
+  {
+    id: "NM075",
+    group: "\u30A8\u30EA\u30A2\u30AF\u30EA\u30A2",
+    name: "\u30A8\u30EA\u30A210\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "soul",
+        id: "char_tetsu_01",
+        amount: 4
+      },
+      {
+        kind: "soul",
+        id: "char_reiji_01",
+        amount: 10
+      }
+    ]
+  },
+  {
+    id: "NM076",
+    group: "\u30AF\u30A8\u30B9\u30C8\u7D2F\u8A08",
+    name: "10\u56DE\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 2
+      },
+      {
+        kind: "equipment_lb",
+        amount: 2
+      },
+      {
+        kind: "soul",
+        id: "char_rui_01",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM077",
+    group: "\u30AF\u30A8\u30B9\u30C8\u7D2F\u8A08",
+    name: "30\u56DE\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 3
+      },
+      {
+        kind: "equipment_lb",
+        amount: 3
+      },
+      {
+        kind: "soul",
+        id: "char_leon_01",
+        amount: 4
+      }
+    ]
+  },
+  {
+    id: "NM078",
+    group: "\u30AF\u30A8\u30B9\u30C8\u7D2F\u8A08",
+    name: "50\u56DE\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 5
+      },
+      {
+        kind: "equipment_lb",
+        amount: 5
+      },
+      {
+        kind: "soul",
+        id: "char_maya_01",
+        amount: 5
+      },
+      {
+        kind: "soul",
+        id: "char_kengo_01",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM079",
+    group: "\u30AF\u30A8\u30B9\u30C8\u7D2F\u8A08",
+    name: "100\u56DE\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 10
+      },
+      {
+        kind: "equipment_lb",
+        amount: 10
+      },
+      {
+        kind: "soul",
+        id: "char_taiga_01",
+        amount: 5
+      },
+      {
+        kind: "soul",
+        id: "char_koharu_01",
+        amount: 2
+      }
+    ]
+  },
+  {
+    id: "NM080",
+    group: "\u30AF\u30A8\u30B9\u30C8\u7D2F\u8A08",
+    name: "200\u56DE\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 15
+      },
+      {
+        kind: "equipment_lb",
+        amount: 15
+      },
+      {
+        kind: "soul",
+        id: "char_sakura_01",
+        amount: 5
+      },
+      {
+        kind: "soul",
+        id: "char_miyabi_01",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM081",
+    group: "\u30AF\u30A8\u30B9\u30C8\u7D2F\u8A08",
+    name: "500\u56DE\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 25
+      },
+      {
+        kind: "equipment_lb",
+        amount: 25
+      },
+      {
+        kind: "soul",
+        id: "char_cecile_01",
+        amount: 4
+      },
+      {
+        kind: "soul",
+        id: "char_kengo_01",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM082",
+    group: "\u30AF\u30A8\u30B9\u30C8\u7D2F\u8A08",
+    name: "1000\u56DE\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 40
+      },
+      {
+        kind: "equipment_lb",
+        amount: 40
+      },
+      {
+        kind: "soul",
+        id: "char_tetsu_01",
+        amount: 4
+      },
+      {
+        kind: "soul",
+        id: "char_koharu_01",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM083",
+    group: "\u30D7\u30EC\u30A4\u30E4\u30FCLv",
+    name: "Lv5",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "cash",
+        amount: 5e3
+      }
+    ]
+  },
+  {
+    id: "NM084",
+    group: "\u30D7\u30EC\u30A4\u30E4\u30FCLv",
+    name: "Lv10",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "cash",
+        amount: 1e4
+      }
+    ]
+  },
+  {
+    id: "NM085",
+    group: "\u30D7\u30EC\u30A4\u30E4\u30FCLv",
+    name: "Lv20",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "cash",
+        amount: 2e4
+      }
+    ]
+  },
+  {
+    id: "NM086",
+    group: "\u30D7\u30EC\u30A4\u30E4\u30FCLv",
+    name: "Lv30",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "cash",
+        amount: 3e4
+      }
+    ]
+  },
+  {
+    id: "NM087",
+    group: "\u30D7\u30EC\u30A4\u30E4\u30FCLv",
+    name: "Lv40",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "cash",
+        amount: 4e4
+      }
+    ]
+  },
+  {
+    id: "NM088",
+    group: "\u30D7\u30EC\u30A4\u30E4\u30FCLv",
+    name: "Lv50",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "cash",
+        amount: 5e4
+      }
+    ]
+  },
+  {
+    id: "NM089",
+    group: "\u30D7\u30EC\u30A4\u30E4\u30FCLv",
+    name: "Lv60",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "cash",
+        amount: 6e4
+      }
+    ]
+  },
+  {
+    id: "NM090",
+    group: "\u30D7\u30EC\u30A4\u30E4\u30FCLv",
+    name: "Lv80",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "cash",
+        amount: 8e4
+      }
+    ]
+  },
+  {
+    id: "NM091",
+    group: "\u30D7\u30EC\u30A4\u30E4\u30FCLv",
+    name: "Lv100",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "cash",
+        amount: 1e5
+      }
+    ]
+  },
+  {
+    id: "NM092",
+    group: "\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "\u7D2F\u8A085\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM093",
+    group: "\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "\u7D2F\u8A0810\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM094",
+    group: "\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "\u7D2F\u8A0820\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM095",
+    group: "\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "\u7D2F\u8A0830\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM096",
+    group: "\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "\u7D2F\u8A0840\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM097",
+    group: "\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "\u7D2F\u8A0850\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM098",
+    group: "\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "\u7D2F\u8A0860\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 5,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM099",
+    group: "SSR\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "SSR\u30AD\u30E3\u30E9\u7D2F\u8A081\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM100",
+    group: "SSR\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "SSR\u30AD\u30E3\u30E9\u7D2F\u8A083\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM101",
+    group: "SSR\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "SSR\u30AD\u30E3\u30E9\u7D2F\u8A085\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM102",
+    group: "SSR\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "SSR\u30AD\u30E3\u30E9\u7D2F\u8A0810\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 5,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM103",
+    group: "\u9B42\u89E3\u653E",
+    name: "\u9B42\u3067\u30AD\u30E3\u30E9\u3092\u521D\u89E3\u653E",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "cash",
+        amount: 1e4
+      }
+    ]
+  },
+  {
+    id: "NM104",
+    group: "\u30AD\u30E3\u30E9Lv\u80B2\u6210",
+    name: "Lv20\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 2
+      },
+      {
+        kind: "cash",
+        amount: 4e3
+      }
+    ]
+  },
+  {
+    id: "NM105",
+    group: "\u30AD\u30E3\u30E9Lv\u80B2\u6210",
+    name: "Lv20\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "large",
+        amount: 2
+      },
+      {
+        kind: "cash",
+        amount: 2e4
+      }
+    ]
+  },
+  {
+    id: "NM106",
+    group: "\u30AD\u30E3\u30E9Lv\u80B2\u6210",
+    name: "Lv50\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "large",
+        amount: 1
+      },
+      {
+        kind: "cash",
+        amount: 1e4
+      }
+    ]
+  },
+  {
+    id: "NM107",
+    group: "\u30AD\u30E3\u30E9Lv\u80B2\u6210",
+    name: "Lv50\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "xlarge",
+        amount: 1
+      },
+      {
+        kind: "character_exp_item",
+        id: "large",
+        amount: 1
+      },
+      {
+        kind: "cash",
+        amount: 5e4
+      }
+    ]
+  },
+  {
+    id: "NM108",
+    group: "\u30AD\u30E3\u30E9Lv\u80B2\u6210",
+    name: "Lv80\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "large",
+        amount: 1
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 3
+      },
+      {
+        kind: "cash",
+        amount: 16e3
+      }
+    ]
+  },
+  {
+    id: "NM109",
+    group: "\u30AD\u30E3\u30E9Lv\u80B2\u6210",
+    name: "Lv80\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "xlarge",
+        amount: 2
+      },
+      {
+        kind: "cash",
+        amount: 8e4
+      }
+    ]
+  },
+  {
+    id: "NM110",
+    group: "\u30AD\u30E3\u30E9Lv\u80B2\u6210",
+    name: "Lv100\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "large",
+        amount: 2
+      },
+      {
+        kind: "cash",
+        amount: 2e4
+      }
+    ]
+  },
+  {
+    id: "NM111",
+    group: "\u30AD\u30E3\u30E9Lv\u80B2\u6210",
+    name: "Lv100\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "xlarge",
+        amount: 2
+      },
+      {
+        kind: "character_exp_item",
+        id: "large",
+        amount: 2
+      },
+      {
+        kind: "cash",
+        amount: 1e5
+      }
+    ]
+  },
+  {
+    id: "NM112",
+    group: "\u899A\u9192",
+    name: "\u899A\u9192+1\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "cash",
+        amount: 5e3
+      }
+    ]
+  },
+  {
+    id: "NM113",
+    group: "\u899A\u9192",
+    name: "\u899A\u9192+1\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "large",
+        amount: 1
+      },
+      {
+        kind: "cash",
+        amount: 25e3
+      }
+    ]
+  },
+  {
+    id: "NM114",
+    group: "\u899A\u9192",
+    name: "\u899A\u9192+3\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 3
+      },
+      {
+        kind: "cash",
+        amount: 15e3
+      }
+    ]
+  },
+  {
+    id: "NM115",
+    group: "\u899A\u9192",
+    name: "\u899A\u9192+3\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "large",
+        amount: 3
+      },
+      {
+        kind: "cash",
+        amount: 75e3
+      }
+    ]
+  },
+  {
+    id: "NM116",
+    group: "\u899A\u9192",
+    name: "\u899A\u9192+5\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "large",
+        amount: 1
+      },
+      {
+        kind: "cash",
+        amount: 25e3
+      }
+    ]
+  },
+  {
+    id: "NM117",
+    group: "\u899A\u9192",
+    name: "\u899A\u9192+5\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "xlarge",
+        amount: 1
+      },
+      {
+        kind: "character_exp_item",
+        id: "large",
+        amount: 1
+      },
+      {
+        kind: "cash",
+        amount: 125e3
+      }
+    ]
+  },
+  {
+    id: "NM118",
+    group: "\u30B9\u30AD\u30EB\u7A2E\u985E",
+    name: "\u7D2F\u8A085\u7A2E\u985E\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_SKILL"
+      }
+    ]
+  },
+  {
+    id: "NM119",
+    group: "\u30B9\u30AD\u30EB\u7A2E\u985E",
+    name: "\u7D2F\u8A0810\u7A2E\u985E\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_SKILL"
+      }
+    ]
+  },
+  {
+    id: "NM120",
+    group: "\u30B9\u30AD\u30EB\u7A2E\u985E",
+    name: "\u7D2F\u8A0820\u7A2E\u985E\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      }
+    ]
+  },
+  {
+    id: "NM121",
+    group: "\u30B9\u30AD\u30EB\u7A2E\u985E",
+    name: "\u7D2F\u8A0830\u7A2E\u985E\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      }
+    ]
+  },
+  {
+    id: "NM122",
+    group: "\u30B9\u30AD\u30EB\u7A2E\u985E",
+    name: "\u7D2F\u8A0850\u7A2E\u985E\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_SKILL"
+      }
+    ]
+  },
+  {
+    id: "NM123",
+    group: "\u30B9\u30AD\u30EB\u7A2E\u985E",
+    name: "\u7D2F\u8A0870\u7A2E\u985E\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 5,
+        id: "SPECIAL_TICKET_SKILL"
+      }
+    ]
+  },
+  {
+    id: "NM124",
+    group: "SSR\u30B9\u30AD\u30EB",
+    name: "SSR\u30B9\u30AD\u30EB\u521D\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_SKILL"
+      }
+    ]
+  },
+  {
+    id: "NM125",
+    group: "\u30B9\u30AD\u30EBLB\u80B2\u6210",
+    name: "LB1\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM126",
+    group: "\u30B9\u30AD\u30EBLB\u80B2\u6210",
+    name: "LB1\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM127",
+    group: "\u30B9\u30AD\u30EBLB\u80B2\u6210",
+    name: "LB3\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM128",
+    group: "\u30B9\u30AD\u30EBLB\u80B2\u6210",
+    name: "LB3\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 15
+      }
+    ]
+  },
+  {
+    id: "NM129",
+    group: "\u30B9\u30AD\u30EBLB\u80B2\u6210",
+    name: "LB5\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM130",
+    group: "\u30B9\u30AD\u30EBLB\u80B2\u6210",
+    name: "LB5\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 25
+      }
+    ]
+  },
+  {
+    id: "NM131",
+    group: "\u30B9\u30AD\u30EBLB\u80B2\u6210",
+    name: "LB10\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 10
+      }
+    ]
+  },
+  {
+    id: "NM132",
+    group: "\u30B9\u30AD\u30EBLB\u80B2\u6210",
+    name: "LB10\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 50
+      }
+    ]
+  },
+  {
+    id: "NM133",
+    group: "SSR\u88C5\u5099",
+    name: "SSR\u88C5\u5099\u521D\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM134",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv20\u4EE5\u4E0A\u30921\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM135",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv20\u4EE5\u4E0A\u309210\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "large",
+        amount: 2
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM136",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv20\u4EE5\u4E0A\u309230\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "xlarge",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "large",
+        amount: 2
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM137",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv50\u4EE5\u4E0A\u30921\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 2
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 5
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM138",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv50\u4EE5\u4E0A\u309210\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "xlarge",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "large",
+        amount: 1
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM139",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv50\u4EE5\u4E0A\u309230\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "xlarge",
+        amount: 3
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "large",
+        amount: 3
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM140",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv80\u4EE5\u4E0A\u30921\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 4
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM141",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv80\u4EE5\u4E0A\u309210\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "xlarge",
+        amount: 2
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM142",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv80\u4EE5\u4E0A\u309230\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "xlarge",
+        amount: 6
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM143",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv100\u4EE5\u4E0A\u30921\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "large",
+        amount: 1
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM144",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv100\u4EE5\u4E0A\u309210\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "xlarge",
+        amount: 2
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "large",
+        amount: 2
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM145",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv100\u4EE5\u4E0A\u309230\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "xlarge",
+        amount: 7
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "large",
+        amount: 2
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM146",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB1\u4EE5\u4E0A\u30921\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM147",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB1\u4EE5\u4E0A\u309210\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM148",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB1\u4EE5\u4E0A\u309230\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM149",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB3\u4EE5\u4E0A\u30921\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM150",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB3\u4EE5\u4E0A\u309210\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM151",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB3\u4EE5\u4E0A\u309230\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 15
+      }
+    ]
+  },
+  {
+    id: "NM152",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB5\u4EE5\u4E0A\u30921\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM153",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB5\u4EE5\u4E0A\u309210\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 15
+      }
+    ]
+  },
+  {
+    id: "NM154",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB5\u4EE5\u4E0A\u309230\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 25
+      }
+    ]
+  },
+  {
+    id: "NM155",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB10\u4EE5\u4E0A\u30921\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 10
+      }
+    ]
+  },
+  {
+    id: "NM156",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB10\u4EE5\u4E0A\u309210\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 30
+      }
+    ]
+  },
+  {
+    id: "NM157",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB10\u4EE5\u4E0A\u309230\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 50
+      }
+    ]
+  },
+  {
+    id: "NM158",
+    group: "\u7DE8\u6210",
+    name: "5\u4EBA\u7DE8\u6210\u3067\u30AF\u30A8\u30B9\u30C8\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_SKILL"
+      }
+    ]
+  },
+  {
+    id: "NM159",
+    group: "\u8FFD\u52A0\u30B9\u30AD\u30EB\u67A0",
+    name: "\u7B2C2\u67A0\u306B\u30B9\u30AD\u30EB\u3092\u88C5\u5099\u3057\u305F\u30AD\u30E3\u30E9\u3092\u542B\u3081\u30AF\u30A8\u30B9\u30C8\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      }
+    ]
+  },
+  {
+    id: "NM160",
+    group: "\u8FFD\u52A0\u30B9\u30AD\u30EB\u67A0",
+    name: "\u7B2C3\u67A0\u306B\u30B9\u30AD\u30EB\u3092\u88C5\u5099\u3057\u305F\u30AD\u30E3\u30E9\u3092\u542B\u3081\u30AF\u30A8\u30B9\u30C8\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      }
+    ]
+  },
+  {
+    id: "NM161",
+    group: "\u30A8\u30F3\u30AB\u30A6\u30F3\u30C8\u5C0E\u5165",
+    name: "\u521D\u53C2\u52A0\u30FB\u521D\u500B\u4EBA\u6226\u7D50\u679C\u78BA\u5B9A",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 2
+      },
+      {
+        kind: "equipment_lb",
+        amount: 2
+      },
+      {
+        kind: "cash",
+        amount: 5e3
+      }
+    ]
+  },
+  {
+    id: "NM162",
+    group: "\u30A8\u30F3\u30AB\u30A6\u30F3\u30C8\u5C0E\u5165",
+    name: "\u500B\u4EBA\u6226\u521D\u52DD\u5229",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 3
+      },
+      {
+        kind: "equipment_lb",
+        amount: 3
+      },
+      {
+        kind: "cash",
+        amount: 1e4
+      }
+    ]
+  },
+  {
+    id: "NM163",
+    group: "\u30A8\u30F3\u30AB\u30A6\u30F3\u30C8\u5C0E\u5165",
+    name: "\u4ED6\u8005\u958B\u50AC\u3067\u500B\u4EBA\u6226\u521D\u52DD\u5229",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 5
+      },
+      {
+        kind: "equipment_lb",
+        amount: 5
+      },
+      {
+        kind: "cash",
+        amount: 1e4
+      }
+    ]
+  },
+  {
+    id: "NM164",
+    group: "\u30A8\u30F3\u30AB\u30A6\u30F3\u30C8\u5C0E\u5165",
+    name: "\u81EA\u5206\u306E\u958B\u50AC\u3067\u6551\u63F4\u521D\u9001\u4FE1\u6210\u529F",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 2
+      },
+      {
+        kind: "equipment_lb",
+        amount: 2
+      },
+      {
+        kind: "cash",
+        amount: 5e3
+      }
+    ]
+  },
+  {
+    id: "NM165",
+    group: "\u30A8\u30F3\u30AB\u30A6\u30F3\u30C8\u8A0E\u4F10",
+    name: "\u8CC7\u683C\u3092\u6E80\u305F\u3057\u3066\u7D2F\u8A081\u958B\u50AC\u8A0E\u4F10",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 5
+      },
+      {
+        kind: "equipment_lb",
+        amount: 5
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM166",
+    group: "\u30A8\u30F3\u30AB\u30A6\u30F3\u30C8\u8A0E\u4F10",
+    name: "\u8CC7\u683C\u3092\u6E80\u305F\u3057\u3066\u7D2F\u8A085\u958B\u50AC\u8A0E\u4F10",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 10
+      },
+      {
+        kind: "equipment_lb",
+        amount: 10
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM167",
+    group: "\u30A8\u30F3\u30AB\u30A6\u30F3\u30C8\u8A0E\u4F10",
+    name: "\u8CC7\u683C\u3092\u6E80\u305F\u3057\u3066\u7D2F\u8A0810\u958B\u50AC\u8A0E\u4F10",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 15
+      },
+      {
+        kind: "equipment_lb",
+        amount: 15
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM168",
+    group: "\u30A8\u30F3\u30AB\u30A6\u30F3\u30C8\u8A0E\u4F10",
+    name: "\u8CC7\u683C\u3092\u6E80\u305F\u3057\u3066\u7D2F\u8A0830\u958B\u50AC\u8A0E\u4F10",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 25
+      },
+      {
+        kind: "equipment_lb",
+        amount: 25
+      },
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM169",
+    group: "\u30A8\u30F3\u30AB\u30A6\u30F3\u30C8\u8A0E\u4F10",
+    name: "\u8CC7\u683C\u3092\u6E80\u305F\u3057\u3066\u7D2F\u8A0850\u958B\u50AC\u8A0E\u4F10",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 40
+      },
+      {
+        kind: "equipment_lb",
+        amount: 40
+      },
+      {
+        kind: "ticket",
+        amount: 5,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 5,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM170",
+    group: "\u4FB5\u653B\u5C0E\u5165",
+    name: "\u521D\u53C2\u52A0\u30FB\u521D\u500B\u4EBA\u6226\u7D50\u679C\u78BA\u5B9A",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 3
+      },
+      {
+        kind: "equipment_lb",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM171",
+    group: "\u4FB5\u653B\u5C0E\u5165",
+    name: "\u500B\u4EBA\u6226\u521D\u52DD\u5229",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 5
+      },
+      {
+        kind: "equipment_lb",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM172",
+    group: "\u4FB5\u653B\u95A2\u9580",
+    name: "\u5CA1\u5D0E\u306E\u3044\u305A\u308C\u304B\u306E\u95A2\u9580\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u7A81\u7834",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 10
+      },
+      {
+        kind: "equipment_lb",
+        amount: 10
+      }
+    ]
+  },
+  {
+    id: "NM173",
+    group: "\u4FB5\u653B\u57CE\u4E3B",
+    name: "\u5CA1\u5D0E\u57CE\u4E3B\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u8A0E\u4F10",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "skill_material",
+        amount: 20
+      },
+      {
+        kind: "equipment_lb",
+        amount: 20
+      }
+    ]
+  },
+  {
+    id: "NM174",
+    group: "\u4FB5\u653B\u95A2\u9580",
+    name: "\u9577\u6D5C\u306E\u3044\u305A\u308C\u304B\u306E\u95A2\u9580\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u7A81\u7834",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 10
+      },
+      {
+        kind: "equipment_lb",
+        amount: 10
+      }
+    ]
+  },
+  {
+    id: "NM175",
+    group: "\u4FB5\u653B\u57CE\u4E3B",
+    name: "\u9577\u6D5C\u57CE\u4E3B\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u8A0E\u4F10",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "skill_material",
+        amount: 20
+      },
+      {
+        kind: "equipment_lb",
+        amount: 20
+      }
+    ]
+  },
+  {
+    id: "NM176",
+    group: "\u4FB5\u653B\u95A2\u9580",
+    name: "\u6625\u65E5\u5C71\u306E\u3044\u305A\u308C\u304B\u306E\u95A2\u9580\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u7A81\u7834",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 10
+      },
+      {
+        kind: "equipment_lb",
+        amount: 10
+      }
+    ]
+  },
+  {
+    id: "NM177",
+    group: "\u4FB5\u653B\u57CE\u4E3B",
+    name: "\u6625\u65E5\u5C71\u57CE\u4E3B\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u8A0E\u4F10",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "skill_material",
+        amount: 20
+      },
+      {
+        kind: "equipment_lb",
+        amount: 20
+      }
+    ]
+  },
+  {
+    id: "NM178",
+    group: "\u4FB5\u653B\u95A2\u9580",
+    name: "\u8E91\u8E85\u30F6\u5D0E\u9928\u306E\u3044\u305A\u308C\u304B\u306E\u95A2\u9580\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u7A81\u7834",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 10
+      },
+      {
+        kind: "equipment_lb",
+        amount: 10
+      }
+    ]
+  },
+  {
+    id: "NM179",
+    group: "\u4FB5\u653B\u57CE\u4E3B",
+    name: "\u8E91\u8E85\u30F6\u5D0E\u9928\u57CE\u4E3B\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u8A0E\u4F10",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "skill_material",
+        amount: 20
+      },
+      {
+        kind: "equipment_lb",
+        amount: 20
+      }
+    ]
+  },
+  {
+    id: "NM180",
+    group: "\u4FB5\u653B\u95A2\u9580",
+    name: "\u5B89\u571F\u306E\u3044\u305A\u308C\u304B\u306E\u95A2\u9580\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u7A81\u7834",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 10
+      },
+      {
+        kind: "equipment_lb",
+        amount: 10
+      }
+    ]
+  },
+  {
+    id: "NM181",
+    group: "\u4FB5\u653B\u57CE\u4E3B",
+    name: "\u5B89\u571F\u57CE\u4E3B\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u8A0E\u4F10",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "skill_material",
+        amount: 20
+      },
+      {
+        kind: "equipment_lb",
+        amount: 20
+      }
+    ]
+  },
+  {
+    id: "NM182",
+    group: "\u4FB5\u653B\u4E3B\u50AC",
+    name: "\u521D\u4E3B\u50AC\u6210\u529F",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 5
+      },
+      {
+        kind: "equipment_lb",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM183",
+    group: "\u4FB5\u653B\u4E3B\u50AC",
+    name: "\u4E3B\u50AC\u3057\u305F\u958B\u50AC\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u6700\u7D42\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "skill_material",
+        amount: 10
+      },
+      {
+        kind: "equipment_lb",
+        amount: 10
+      }
+    ]
+  }
 ];
-var STAGE_NAMES = ["\u8857\u9053\u306E\u5148\u3078", "\u65D7\u3092\u63B2\u3052\u3066", "\u6E21\u308A\u306E\u9663", "\u591C\u660E\u3051\u306E\u653B\u9632", "\u5D29\u308C\u306C\u8A93\u3044", "\u6C7A\u6226\u524D\u591C", "\u57CE\u9580\u3092\u8D8A\u3048\u3066"];
-function themeSkills(area, source) {
-  const effect = ["damage", "damage", "def_up", "heal", "atk_up", "heal", "poison", "atk_down", "def_up", "damage"][area];
-  const chosen = COMMON_SKILL_MASTERS.find((s) => s.effects.some((e) => e.type === effect));
-  return chosen ? [chosen, ...source.filter((s) => s.id !== chosen.id)].slice(0, 2) : source.slice(0, 2);
+
+// src/domain/redesign/formalMissions.ts
+function condition(row) {
+  const n = Number(row.id.slice(2));
+  if (n <= 65) {
+    const designId = row.name.match(/\d+-\d+/)[0], stage = QUEST_STAGES.find((s) => s.designId === designId);
+    if (!stage) throw Error(`\u4EFB\u52D9\u30B9\u30C6\u30FC\u30B8\u306A\u3057:${row.id}`);
+    return { type: "stage_clear", stageId: stage.id };
+  }
+  if (n <= 75) return { type: "area_clear", areaId: QUEST_AREAS[n - 66].id };
+  const nums = (row.name.match(/\d+/g) ?? []).map(Number);
+  let key2, threshold, target = nums[0] ?? 1;
+  if (n <= 82) key2 = "quest_clear";
+  else if (n <= 91) key2 = "player_level";
+  else if (n <= 98) key2 = "character_count";
+  else if (n <= 102) key2 = "ssr_character_count";
+  else if (n === 103) key2 = "soul_unlock";
+  else if (n <= 111) {
+    key2 = "character_level";
+    threshold = nums[0];
+    target = nums[1];
+  } else if (n <= 117) {
+    key2 = "character_awakening";
+    threshold = nums[0];
+    target = nums[1];
+  } else if (n <= 123) key2 = "skill_count";
+  else if (n === 124) key2 = "ssr_skill_count";
+  else if (n <= 132) {
+    key2 = "skill_lb";
+    threshold = nums[0];
+    target = nums[1];
+  } else if (n === 133) key2 = "ssr_equipment_count";
+  else if (n <= 145) {
+    key2 = "equipment_level";
+    threshold = nums[0];
+    target = nums[1];
+  } else if (n <= 157) {
+    key2 = "equipment_lb";
+    threshold = nums[0];
+    target = nums[1];
+  } else if (n === 158) {
+    key2 = "quest_five_party";
+    target = 1;
+  } else if (n === 159) {
+    key2 = "quest_skill_slot2";
+    target = 1;
+  } else if (n === 160) {
+    key2 = "quest_skill_slot3";
+    target = 1;
+  } else if (n === 161) key2 = "encounter_battle";
+  else if (n === 162) key2 = "encounter_win";
+  else if (n === 163) key2 = "encounter_other_win";
+  else if (n === 164) key2 = "encounter_rescue";
+  else if (n <= 169) key2 = "encounter_qualified_defeat";
+  else if (n === 170) key2 = "invasion_battle";
+  else if (n === 171) key2 = "invasion_win";
+  else if (n <= 181) key2 = `invasion_${["okazaki", "nagahama", "kasugayama", "tsutsujigasaki", "azuchi"][Math.floor((n - 172) / 2)]}_${n % 2 === 0 ? "gate" : "lord"}`;
+  else if (n === 182) key2 = "invasion_host";
+  else key2 = "invasion_host_qualified_clear";
+  return { type: "metric", key: key2, target, threshold };
 }
-function enemy(area, stage, wave, slot, boss2) {
-  const master = COMMON_CHARACTER_MASTERS[(area * 6 + stage + wave + slot) % COMMON_CHARACTER_MASTERS.length];
-  const rank = area * 7 + stage;
-  const growth = 1 + rank * 0.09;
-  const skills = themeSkills(area, COMMON_SKILL_MASTERS.filter((s) => s.element === master.element));
-  return {
-    id: `quest-enemy-${area + 1}-${stage + 1}-${wave + 1}-${slot + 1}`,
-    name: master.name,
-    image: master.image,
-    element: master.element,
-    level: 1 + rank,
-    stats: { hp: Math.round((boss2 ? 1100 : 370) * growth), sp: boss2 ? 80 : 40, atk: Math.round((boss2 ? 100 : 55) * growth), def: Math.round((area === 2 ? 55 : 15) * growth), luk: 10 + rank },
-    // Existing provisional quest numbers remain unchanged; formal inputs require their own explicit starts.
-    initialSp: boss2 ? 80 : 40,
-    skills,
-    passives: [],
-    hitSpGain: 5,
-    actionCount: boss2 ? 3 : 4 + slot % 2,
-    order: slot,
-    boss: boss2,
-    ...boss2 ? { phases: [{ hpBelow: 0.45, name: "\u6C7A\u6B7B\u306E\u9663", actionCount: 2, skills: themeSkills((area + 1) % 10, skills) }] } : {}
-  };
-}
-var QUEST_AREAS2 = AREAS2.map(([id, name2, chapter, description], area) => ({
-  id,
-  index: area + 1,
-  name: name2,
-  description,
-  image: `/bg/sengoku/${area % 2 ? "castle-town" : "castle-approach"}.jpg`,
-  stages: STAGE_NAMES.map((stageName, stage) => {
-    const waveCount = Math.min(5, 1 + Math.floor(stage / 2) + (area > 5 ? 1 : 0));
-    return {
-      id: `${id}-${stage + 1}`,
-      areaId: id,
-      index: stage + 1,
-      name: stage === 6 ? chapter : stageName,
-      description,
-      energyCost: 3 + Math.floor(area / 2),
-      waves: Array.from({ length: waveCount }, (_, wave) => {
-        const boss2 = stage === 6 && wave === waveCount - 1;
-        return Array.from({ length: boss2 ? 1 : Math.min(3, 1 + Math.floor(stage / 3) + wave % 2) }, (_2, slot) => enemy(area, stage, wave, slot, boss2));
-      }),
-      firstRewards: [{ kind: "cash", amount: 100 + area * 30 }, { kind: "soul", id: COMMON_CHARACTER_MASTERS[(area * 6 + stage) % COMMON_CHARACTER_MASTERS.length].id, amount: 2 }],
-      rewards: [{ kind: "cash", amount: 20 + area * 10 }, { kind: "character_material", amount: 1 + Math.floor(area / 3) }, { kind: "skill_material", amount: 1 }, { kind: "equipment_material", amount: 1 }],
-      rareRewards: [{ kind: "soul", id: COMMON_CHARACTER_MASTERS[(area * 6 + stage) % COMMON_CHARACTER_MASTERS.length].id, amount: 1, chance: 0.08 }, { kind: "equipment_lb", amount: 1, chance: 0.05 }, { kind: "equipment", id: EQUIPMENT_MASTERS[(area * 7 + stage) % EQUIPMENT_MASTERS.length].id, amount: 1, chance: 0.12 }, ...area >= 2 ? [{ kind: "unlock_item", amount: 1, chance: 0.04 }] : []],
-      encounterChance: 0.08
-    };
-  })
+var FORMAL_NORMAL_MISSIONS = formalMissions_default.map((row) => ({ id: row.id, name: row.name, description: row.group, enabled: true, condition: condition(row), rewards: row.rewards }));
+var FORMAL_DAILY_MISSIONS = [
+  ...[1, 3, 5].map((target, i) => ({ id: `DM00${i + 1}`, name: `\u6226\u95D8\u306B${target}\u56DE\u6311\u6226`, description: "\u30C7\u30A4\u30EA\u30FC", enabled: false, condition: { type: "metric", key: "battle", target, daily: true }, rewards: [{ kind: "cash", amount: [1e3, 2e3, 3e3][i] }, { kind: "character_exp_item", id: "small", amount: [2, 3, 5][i] }] })),
+  ...[1, 3, 5].map((target, i) => ({ id: `DM00${i + 4}`, name: `\u51FA\u9663\u3067${target}\u56DE\u52DD\u5229`, description: "\u30C7\u30A4\u30EA\u30FC", enabled: false, condition: { type: "metric", key: "quest_clear", target, daily: true }, rewards: [{ kind: "cash", amount: [1e3, 2e3, 3e3][i] }, { kind: "equipment_exp_item", id: "small", amount: [2, 3, 5][i] }] })),
+  { id: "DM007", name: "\u30CE\u30FC\u30DE\u30EB\u53EC\u559A\u30921\u56DE\u884C\u3046", description: "\u30C7\u30A4\u30EA\u30FC", enabled: false, condition: { type: "metric", key: "normal_gacha", target: 1, daily: true }, rewards: [{ kind: "cash", amount: 1e3 }] },
+  { id: "DM008", name: "\u80B2\u6210\u30921\u56DE\u884C\u3046", description: "\u30C7\u30A4\u30EA\u30FC", enabled: false, condition: { type: "metric", key: "growth", target: 1, daily: true }, rewards: [{ kind: "cash", amount: 2e3 }] },
+  ...[3, 5].map((target, i) => ({ id: `DM0${i + 9}`, name: `\u30C7\u30A4\u30EA\u30FC\u4EFB\u52D9\u3092${target}\u4EF6\u9054\u6210`, description: "\u30C7\u30A4\u30EA\u30FC", enabled: false, condition: { type: "metric", key: "daily_completed", target, daily: true }, rewards: [{ kind: "cash", amount: [5e3, 1e4][i] }, { kind: i === 0 ? "character_exp_item" : "equipment_exp_item", id: "medium", amount: 1 }] }))
+];
+var INVASION_SUPPLY_MISSIONS = [5, 10, 20, 30].map((target) => ({
+  id: `NM_INVASION_WIN_${target}`,
+  name: `\u9818\u571F\u4FB5\u653B\u306E\u500B\u4EBA\u6226\u3067${target}\u56DE\u52DD\u5229`,
+  description: "\u9818\u571F\u4FB5\u653B",
+  enabled: true,
+  condition: { type: "metric", key: "invasion_win", target },
+  rewards: [{ kind: "unlock_item", amount: 1 }]
 }));
-var QUEST_STAGES2 = QUEST_AREAS2.flatMap((area) => area.stages);
-function getQuestStage2(id) {
-  return QUEST_STAGES2.find((stage) => stage.id === id);
-}
+var FORMAL_MISSION_CONFIG = { enabled: true, missions: [
+  ...FORMAL_NORMAL_MISSIONS.map((m) => m.id === "NM171" ? { ...m, rewards: [...m.rewards, { kind: "unlock_item", amount: 1 }] } : m),
+  ...INVASION_SUPPLY_MISSIONS,
+  ...FORMAL_DAILY_MISSIONS
+] };
 
 // src/domain/redesign/data/raid-encounter.json
 var raid_encounter_default = {
@@ -58344,6 +61989,136 @@ function applyRaidAction(original, originalState, action, payload = {}, now = Da
 }
 function raidEnemies(master, level) {
   return structuredClone(master.stages?.find((stage) => stage.level === level)?.enemies ?? master.enemies ?? [raidEnemy(master, level)]);
+}
+
+// src/domain/redesign/missionRaidProgress.ts
+var castleKeys = { TI01: "okazaki", TI02: "nagahama", TI03: "kasugayama", TI04: "tsutsujigasaki", TI05: "azuchi" };
+function raidBattleMissionEvent(before, after, userId, battleId, outcome, at) {
+  if (before.id !== after.id || before.settledBattleIds.includes(battleId) || !after.settledBattleIds.includes(battleId) || !after.participants.some((p) => p.userId === userId)) return null;
+  const type = getRoomRaidMaster(after).type;
+  const counters = ["battle", type === "encounter" ? "encounter_battle" : "invasion_battle"];
+  if (outcome === "win") {
+    counters.push(type === "encounter" ? "encounter_win" : "invasion_win");
+    if (type === "encounter" && after.ownerId !== userId) counters.push("encounter_other_win");
+  }
+  return { id: `raid-battle:${after.id}:${battleId}:${userId}`, counters, at };
+}
+function raidRescueMissionEvent(room, userId, requestId, at) {
+  if (getRoomRaidMaster(room).type !== "encounter" || room.ownerId !== userId || !room.participants.some((p) => p.userId === userId && !p.leftAt) || room.rescueCount < 1) return null;
+  return { id: `raid-rescue:${room.id}:${requestId}:${userId}`, counters: ["encounter_rescue"], at };
+}
+function raidHostMissionEvent(room, userId) {
+  if (room.ownerId !== userId || getRoomRaidMaster(room).type !== "unlock") return null;
+  const at = Date.parse(room.createdAt);
+  if (!Number.isFinite(at)) return null;
+  return { id: `invasion-host:${room.id}:${userId}`, counters: ["invasion_host"], at };
+}
+function raidQualificationMissionEvents(room, userId, at) {
+  const master = getRoomRaidMaster(room), castle = castleKeys[master.id];
+  const events = [];
+  for (const grant of room.rewardGrants) {
+    if (grant.userId !== userId || grant.id !== `defeat:${grant.level}:${userId}` || !Number.isInteger(grant.level) || grant.level < 1) continue;
+    const defeated = room.level > grant.level || room.status === "defeated" && room.level === grant.level;
+    if (!defeated) continue;
+    const counters = [];
+    if (master.type === "encounter") {
+      if (room.status === "defeated" && grant.level === master.maxLevel) counters.push("encounter_qualified_defeat");
+    } else {
+      if (castle && [3, 6, 9].includes(grant.level)) counters.push(`invasion_${castle}_gate`);
+      if (castle && grant.level === 12 && room.status === "defeated") counters.push(`invasion_${castle}_lord`);
+      if (grant.level === master.maxLevel && room.status === "defeated" && room.ownerId === userId) counters.push("invasion_host_qualified_clear");
+    }
+    if (counters.length) events.push({ id: `raid-qualified:${room.id}:${grant.id}`, counters, at });
+  }
+  return events;
+}
+function reconcileRaidMissionProgress(original, rooms, at) {
+  let state = original;
+  for (const room of rooms) {
+    const hosted = raidHostMissionEvent(room, state.userId);
+    const events = [...hosted ? [hosted] : [], ...raidQualificationMissionEvents(room, state.userId, at)];
+    for (const event of events) state = recordMissionEvent(state, event);
+  }
+  return state;
+}
+
+// src/domain/redesign/battle.ts
+function simulateBattle3(input) {
+  if (input.rules.version === BALANCE_BATTLE_VERSION) return simulateBalanceBattle(input);
+  return simulateBattle2(input);
+}
+
+// src/domain/redesign/legacyQuests.ts
+var AREAS2 = [
+  ["mikawa", "\u4E09\u6CB3\u306E\u5730", "\u6700\u521D\u306E\u4E00\u6B69", "\u6575\u306E\u5C5E\u6027\u3068\u884C\u52D5\u30AB\u30A6\u30F3\u30C8\u3092\u898B\u3066\u3001\u6B66\u5C06\u306E\u4E26\u3073\u3092\u6574\u3048\u3088\u3046\u3002"],
+  ["owari", "\u5C3E\u5F35\u306E\u65D7", "\u71B1\u304D\u65D7\u5370", "\u8907\u6570\u306E\u6575\u306B\u306F\u5168\u4F53\u653B\u6483\u3068\u72D9\u3046\u9806\u756A\u304C\u529B\u306B\u306A\u308B\u3002"],
+  ["mino", "\u7F8E\u6FC3\u306E\u57CE", "\u5805\u57CE\u3078\u306E\u9053", "\u5805\u3044\u5B88\u308A\u306B\u306F\u5B88\u5099\u3092\u4E0B\u3052\u308B\u6280\u3092\u7D44\u307F\u5408\u308F\u305B\u3088\u3046\u3002"],
+  ["omi", "\u8FD1\u6C5F\u306E\u6E56", "\u6E56\u4E0A\u306E\u76DF\u7D04", "\u50B7\u3064\u3044\u305F\u4EF2\u9593\u3092\u56DE\u5FA9\u3057\u3001\u9023\u6226\u3092\u5207\u308A\u629C\u3051\u3088\u3046\u3002"],
+  ["kai", "\u7532\u6590\u306E\u5C71", "\u98A8\u6797\u306E\u8A66\u7DF4", "\u5F37\u3044\u4E00\u6483\u306B\u5099\u3048\u3001\u5B88\u308A\u3068\u653B\u6483\u306E\u9806\u3092\u8003\u3048\u3088\u3046\u3002"],
+  ["echigo", "\u8D8A\u5F8C\u306E\u96EA", "\u96EA\u89E3\u3051\u306E\u7FA9", "\u6575\u306E\u56DE\u5FA9\u5F79\u3092\u3069\u3046\u5D29\u3059\u304B\u304C\u52DD\u6557\u3092\u5206\u3051\u308B\u3002"],
+  ["kyoto", "\u4EAC\u6D1B\u306E\u5F71", "\u82B1\u3068\u7B56\u8B00", "\u5F31\u4F53\u3068\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u3092\u898B\u6975\u3081\u3001\u65E9\u3081\u306B\u6C7A\u7740\u3092\u3064\u3051\u3088\u3046\u3002"],
+  ["izumo", "\u51FA\u96F2\u306E\u793E", "\u7948\u308A\u306E\u5411\u3053\u3046", "\u5149\u3068\u95C7\u306E\u76F8\u6027\u3001\u652F\u63F4\u6280\u306E\u7D44\u307F\u5408\u308F\u305B\u3092\u898B\u76F4\u305D\u3046\u3002"],
+  ["satsuma", "\u85A9\u6469\u306E\u708E", "\u4E0D\u5C48\u306E\u9663", "\u9023\u6226\u306B\u5099\u3048\u3066HP\u3068SP\u3092\u6B8B\u3057\u3001\u6575\u9663\u3092\u7A81\u7834\u3057\u3088\u3046\u3002"],
+  ["sekigahara", "\u95A2\u30F6\u539F", "\u6681\u306E\u7D04\u675F", "\u5909\u308F\u308A\u3086\u304F\u6575\u306E\u9663\u3092\u8AAD\u307F\u3001\u4E94\u4EBA\u306E\u529B\u3092\u7D50\u96C6\u3057\u3088\u3046\u3002"]
+];
+var STAGE_NAMES = ["\u8857\u9053\u306E\u5148\u3078", "\u65D7\u3092\u63B2\u3052\u3066", "\u6E21\u308A\u306E\u9663", "\u591C\u660E\u3051\u306E\u653B\u9632", "\u5D29\u308C\u306C\u8A93\u3044", "\u6C7A\u6226\u524D\u591C", "\u57CE\u9580\u3092\u8D8A\u3048\u3066"];
+function themeSkills(area, source) {
+  const effect = ["damage", "damage", "def_up", "heal", "atk_up", "heal", "poison", "atk_down", "def_up", "damage"][area];
+  const chosen = COMMON_SKILL_MASTERS.find((s) => s.effects.some((e) => e.type === effect));
+  return chosen ? [chosen, ...source.filter((s) => s.id !== chosen.id)].slice(0, 2) : source.slice(0, 2);
+}
+function enemy(area, stage, wave, slot, boss2) {
+  const master = COMMON_CHARACTER_MASTERS[(area * 6 + stage + wave + slot) % COMMON_CHARACTER_MASTERS.length];
+  const rank = area * 7 + stage;
+  const growth = 1 + rank * 0.09;
+  const skills = themeSkills(area, COMMON_SKILL_MASTERS.filter((s) => s.element === master.element));
+  return {
+    id: `quest-enemy-${area + 1}-${stage + 1}-${wave + 1}-${slot + 1}`,
+    name: master.name,
+    image: master.image,
+    element: master.element,
+    level: 1 + rank,
+    stats: { hp: Math.round((boss2 ? 1100 : 370) * growth), sp: boss2 ? 80 : 40, atk: Math.round((boss2 ? 100 : 55) * growth), def: Math.round((area === 2 ? 55 : 15) * growth), luk: 10 + rank },
+    // Existing provisional quest numbers remain unchanged; formal inputs require their own explicit starts.
+    initialSp: boss2 ? 80 : 40,
+    skills,
+    passives: [],
+    hitSpGain: 5,
+    actionCount: boss2 ? 3 : 4 + slot % 2,
+    order: slot,
+    boss: boss2,
+    ...boss2 ? { phases: [{ hpBelow: 0.45, name: "\u6C7A\u6B7B\u306E\u9663", actionCount: 2, skills: themeSkills((area + 1) % 10, skills) }] } : {}
+  };
+}
+var QUEST_AREAS2 = AREAS2.map(([id, name2, chapter, description], area) => ({
+  id,
+  index: area + 1,
+  name: name2,
+  description,
+  image: `/bg/sengoku/${area % 2 ? "castle-town" : "castle-approach"}.jpg`,
+  stages: STAGE_NAMES.map((stageName, stage) => {
+    const waveCount = Math.min(5, 1 + Math.floor(stage / 2) + (area > 5 ? 1 : 0));
+    return {
+      id: `${id}-${stage + 1}`,
+      areaId: id,
+      index: stage + 1,
+      name: stage === 6 ? chapter : stageName,
+      description,
+      energyCost: 3 + Math.floor(area / 2),
+      waves: Array.from({ length: waveCount }, (_, wave) => {
+        const boss2 = stage === 6 && wave === waveCount - 1;
+        return Array.from({ length: boss2 ? 1 : Math.min(3, 1 + Math.floor(stage / 3) + wave % 2) }, (_2, slot) => enemy(area, stage, wave, slot, boss2));
+      }),
+      firstRewards: [{ kind: "cash", amount: 100 + area * 30 }, { kind: "soul", id: COMMON_CHARACTER_MASTERS[(area * 6 + stage) % COMMON_CHARACTER_MASTERS.length].id, amount: 2 }],
+      rewards: [{ kind: "cash", amount: 20 + area * 10 }, { kind: "character_material", amount: 1 + Math.floor(area / 3) }, { kind: "skill_material", amount: 1 }, { kind: "equipment_material", amount: 1 }],
+      rareRewards: [{ kind: "soul", id: COMMON_CHARACTER_MASTERS[(area * 6 + stage) % COMMON_CHARACTER_MASTERS.length].id, amount: 1, chance: 0.08 }, { kind: "equipment_lb", amount: 1, chance: 0.05 }, { kind: "equipment", id: EQUIPMENT_MASTERS[(area * 7 + stage) % EQUIPMENT_MASTERS.length].id, amount: 1, chance: 0.12 }, ...area >= 2 ? [{ kind: "unlock_item", amount: 1, chance: 0.04 }] : []],
+      encounterChance: 0.08
+    };
+  })
+}));
+var QUEST_STAGES2 = QUEST_AREAS2.flatMap((area) => area.stages);
+function getQuestStage2(id) {
+  return QUEST_STAGES2.find((stage) => stage.id === id);
 }
 
 // src/domain/redesign/data/raid-invasion.json
@@ -61144,9 +64919,9 @@ async function acquisitionInput(userId) {
 async function stateFor(userId) {
   const input = await acquisitionInput(userId);
   for (let attempt = 0; attempt < 4; attempt++) {
-    const state = await rpc("game04_get_growth_state", { p_user_id: userId, p_initial: buildInitialState(userId, input.legacy) });
+    const state = await rpc("game04_get_session_state", { p_user_id: userId, p_initial: buildInitialState(userId, input.legacy) });
     const migrated = importLegacyAssets(state, input.legacy);
-    const imported = applyAcquisitionEvents(migrated, input.events, input.master);
+    const imported = captureMissionAssets(applyAcquisitionEvents(migrated, input.events, input.master));
     if (JSON.stringify(imported) === JSON.stringify(state)) return state;
     try {
       return (await commit(state, imported, crypto.randomUUID())).state;
@@ -61160,7 +64935,7 @@ async function commit(before, after, requestId, battle = null, room = null, room
   return rpc("game04_commit_growth_state", {
     p_user_id: before.userId,
     p_expected_version: before.version,
-    p_state: after,
+    p_state: captureMissionAssets(after),
     p_cash_delta: after.cash - before.cash,
     p_energy_delta: after.energy - before.energy,
     p_request_id: requestId,
@@ -61204,12 +64979,11 @@ async function rewardPolicy() {
   return row.data;
 }
 async function missionConfig() {
-  const [row] = await db("game04_redesign_master?key=eq.missions&select=data");
-  return row?.data ?? { enabled: false, missions: [] };
+  return FORMAL_MISSION_CONFIG;
 }
 async function responseFor(userId, extra = {}) {
   const statePromise = stateFor(userId);
-  const [state, rooms, socialEvents, pending, territory, missions] = await Promise.all([
+  const [loadedState, rooms, socialEvents, pending, territory, missions] = await Promise.all([
     statePromise,
     roomsFor(userId),
     db("game04_social_events?select=*&order=created_at.desc&limit=30"),
@@ -61217,6 +64991,18 @@ async function responseFor(userId, extra = {}) {
     statePromise.then(() => territoryContext(userId)),
     missionConfig()
   ]);
+  let state = loadedState;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const reconciled = reconcileRaidMissionProgress(state, rooms, Date.now());
+    if (JSON.stringify(reconciled) === JSON.stringify(state)) break;
+    try {
+      state = (await commit(state, reconciled, crypto.randomUUID())).state;
+      break;
+    } catch (error) {
+      if (!(error instanceof ApiError) || error.status !== 409 || attempt === 2) throw error;
+      state = await stateFor(userId);
+    }
+  }
   return { state, rooms, socialEvents, missions: evaluateMissions(state, missions), territory: projectTerritory(territory.master, territory.progress, territory.items, territory.activeHostingCount), pendingBattle: pending[0] ?? null, ...extra };
 }
 async function runBattle(userId, name2, payload, id, playerName) {
@@ -61329,6 +65115,9 @@ async function runBattle(userId, name2, payload, id, playerName) {
       room = transition.room;
       after = transition.state;
       rewards2.push(...transition.rewards);
+      const raidEvent = raidBattleMissionEvent(currentRoom, transition.room, userId, id, battle.outcome, Date.now());
+      if (raidEvent) after = recordMissionEvent(after, raidEvent);
+      after = reconcileRaidMissionProgress(after, [transition.room], Date.now());
       if (battle.outcome === "win" && record.input.raidMasterVersion && record.input.playerExpReward?.amount) {
         const progress = after.playerProgress, amount = record.input.playerExpReward.amount;
         if (progress?.version === GROWTH_VERSION && progress.status === "active") {
@@ -61340,6 +65129,14 @@ async function runBattle(userId, name2, payload, id, playerName) {
         } else playerGrowth = { status: "MIGRATION_PENDING", offeredExp: amount, gainedExp: 0 };
       }
     }
+    const missionCounters = record.kind === "quest" ? ["battle"] : [];
+    if (record.kind === "quest" && battle.outcome === "win") {
+      missionCounters.push("quest_clear");
+      if (record.input.party.length === 5) missionCounters.push("quest_five_party");
+      if (record.input.party.some((unit) => unit.skills.length >= 2)) missionCounters.push("quest_skill_slot2");
+      if (record.input.party.some((unit) => unit.skills.length >= 3)) missionCounters.push("quest_skill_slot3");
+    }
+    if (missionCounters.length) after = recordMissionEvent(after, { id: `battle:${id}`, at: Date.now(), counters: missionCounters });
     const result = { battle, rewards: rewards2, firstClear, encounterRaidId, ...playerGrowth ? { playerGrowth } : {} };
     try {
       const settled = await commit(state, after, settlementId, { id, status: "settled", result }, room, version);
@@ -61432,7 +65229,17 @@ Deno.serve(async (request) => {
       const changed = applyRaidAction(current, state, action, { name: profile.username }, Date.now(), action === "raid_claim" ? await rewardPolicy() : void 0);
       room = changed.room;
       after = changed.state;
-    } else after = applyGrowthAction(state, action, payload);
+      if (action === "raid_rescue") {
+        const rescueEvent = raidRescueMissionEvent(room, user.id, requestId, Date.now());
+        if (rescueEvent) after = recordMissionEvent(after, rescueEvent);
+      }
+      after = reconcileRaidMissionProgress(after, [room], Date.now());
+    } else {
+      after = applyGrowthAction(state, action, payload);
+      const growthCounters = ["character_level", "character_awaken", "skill_level", "equipment_level", "equipment_lb"].includes(action) ? ["growth"] : [];
+      if (action === "character_unlock") growthCounters.push("soul_unlock");
+      if (growthCounters.length) after = recordMissionEvent(after, { id: `growth:${requestId}`, at: Date.now(), counters: growthCounters });
+    }
     await commit(state, after, requestId, null, room, version);
     return new Response(JSON.stringify(await responseFor(user.id)), { headers });
   } catch (error) {

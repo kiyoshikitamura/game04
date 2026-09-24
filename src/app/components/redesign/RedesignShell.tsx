@@ -6,7 +6,7 @@ import type { RedesignState } from '@/domain/redesign/types';
 import { CHARACTER_MASTERS } from '@/domain/redesign/masters';
 import InboxPanel from '../InboxPanel';
 import SettingsPanel from '../SettingsPanel';
-import MissionPanel from '../MissionPanel';
+import MissionContent from './MissionContent';
 import AccountAuthenticationModal from '../TutorialAuthentication';
 import HomeView, { type HomeAction, type HomeEncounter, type HomeSocialEvent } from './HomeView';
 import Modal from './Modal';
@@ -20,6 +20,17 @@ export default function RedesignShell({ state, onAction, children, notifications
   const scrollRef = useRef<HTMLDivElement>(null);
   useEffect(() => { scrollRef.current?.scrollTo({ top: 0, left: 0 }); }, [activeTab, hideChrome]);
   const [menu, setMenu] = useState(false);
+  const [missionBusy, setMissionBusy] = useState(false);
+  const [missionError, setMissionError] = useState('');
+  const missionLock = useRef(false);
+  async function claimMission(missionId: string) {
+    if (missionLock.current || previewOnly) return;
+    missionLock.current = true; setMissionBusy(true); setMissionError('');
+    try { await onAction('claim_mission', { missionId }); }
+    catch (error) { setMissionError(error instanceof Error ? error.message : '報酬を受け取れませんでした。'); }
+    finally { missionLock.current = false; setMissionBusy(false); }
+  }
+  function closeMissions() { if (!missionLock.current) { setMissionError(''); game.setShowMissionPanel(false); } }
   const [accountOpen, setAccountOpen] = useState(false);
   const closeAccount = useCallback(() => setAccountOpen(false), []);
   useEffect(() => { document.body.classList.add('rd-active'); return () => document.body.classList.remove('rd-active'); }, []);
@@ -31,6 +42,10 @@ export default function RedesignShell({ state, onAction, children, notifications
     <main className="rd-main">{notifications}{activeTab === 'home' && !hideChrome ? <HomeView state={state} onAction={onAction} onNavigate={onNavigate} encounterRaid={encounterRaid} socialEvents={socialEvents} missions={missions} previewOnly={previewOnly} /> : children}</main>
     {!hideChrome && <nav className="rd-footer rd-chrome-footer" aria-label="メインナビゲーション">{FOOTER.map(([id,label,icon]) => <button aria-current={activeTab === id ? 'page' : undefined} key={id} onClick={() => onNavigate(id)}><img src={`/ui/sengoku/${icon}.png`} alt="" />{label}</button>)}</nav>}
     {menu && <Modal title="メニュー" onClose={() => setMenu(false)}><div className="rd-stack"><button className="rd-button" onClick={() => run(() => { game.setInboxPanelTab('news'); game.setShowInboxPanel(true); })}>お知らせ{game.unreadNewsCount ? ` (${game.unreadNewsCount})` : ''}</button><button className="rd-button" onClick={() => run(() => { game.setInboxPanelTab('presents'); game.setShowInboxPanel(true); })}>プレゼントBOX{game.unreadPresentsCount > 0 && <i className="g4-unread" aria-label="未読あり" />}</button><button className="rd-button" onClick={() => run(() => game.setShowSettingsPanel(true))}>設定</button><button className="rd-button" onClick={() => run(() => setAccountOpen(true))}>アカウント連携</button><a className="rd-button" href="/legal/contact">お問い合わせ</a></div></Modal>}
-    <InboxPanel /><MissionPanel onNavigate={onNavigate} /><SettingsPanel redesign /><AccountAuthenticationModal redesign explicitOpen={accountOpen} onExplicitClose={closeAccount} />
+    <InboxPanel />
+    {game.showMissionPanel && <Modal title="任務" onClose={closeMissions} closeDisabled={missionBusy}>
+      <MissionContent state={state} missions={missions ?? []} missionBusy={missionBusy} missionError={missionError} previewOnly={previewOnly} onClaim={id => void claimMission(id)} />
+    </Modal>}
+    <SettingsPanel redesign /><AccountAuthenticationModal redesign explicitOpen={accountOpen} onExplicitClose={closeAccount} />
   </div>;
 }

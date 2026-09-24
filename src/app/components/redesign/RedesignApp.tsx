@@ -6,6 +6,7 @@ import { redesignRequest, type RedesignResponse } from '@/utils/redesignApi';
 import { buildBattleParty } from '@/domain/redesign/masters';
 import { getQuestStage, QUEST_AREAS, nextQuestStage } from '@/domain/redesign/quests';
 import { getRoomRaidMaster } from '@/domain/redesign/raid';
+import { jstLoginDate, LOGIN_BONUS_VERSION } from '@/domain/redesign/loginBonus';
 import { isVipActive, VIP_PRODUCT } from '@/domain/redesign/vip';
 import type { AcquisitionState } from '@/domain/redesign/acquisitions';
 import type { BattleResult } from '@/domain/redesign/battle';
@@ -169,6 +170,19 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     }
     return value;
   }
+  const loginReceipt = data?.state.loginBonusReceipt;
+  const shownLoginReceipt = useRef('');
+  useEffect(() => {
+    if (!owner || !loginReceipt || loginReceipt.masterVersion !== LOGIN_BONUS_VERSION || loginReceipt.last_claimed_date !== jstLoginDate(Date.now()) || busy || battle || questPlaying) return;
+    const key = `game04:login-receipt:${owner}:${loginReceipt.last_claimed_date}`;
+    if (shownLoginReceipt.current === key) return;
+    try { if (sessionStorage.getItem(key)) { shownLoginReceipt.current = key; return; } } catch { /* in-memory fallback */ }
+    shownLoginReceipt.current = key;
+    try { sessionStorage.setItem(key, 'shown'); } catch { /* no storage required to claim */ }
+    game.setLoginBonusClaimResult(loginReceipt);
+    game.setUserLoginBonus({ user_id: owner, current_step: loginReceipt.current_step, total_logins: loginReceipt.total_logins, last_claimed_date: loginReceipt.last_claimed_date });
+    game.setShowLoginBonusModal(true);
+  }, [owner, loginReceipt, busy, battle, questPlaying, game.setLoginBonusClaimResult, game.setUserLoginBonus, game.setShowLoginBonusModal]);
   if (!data) return <div className="rd-shell"><div className="rd-panel">{error ? <><p role="alert">{error}</p><button className="rd-button" onClick={() => void refresh()}>再読み込み</button></> : <BrandedLoading label="戦国の世界を準備中" />}</div></div>;
   const state = data.state, party = buildBattleParty(state), vipActive = isVipActive(state.vipExpiresAt);
   const battleRoom = battle && raidId ? data.rooms.find(room => room.id === raidId) : undefined;

@@ -66,3 +66,11 @@ D11/Q05: 出陣報酬のxlargeが既定elseでsmall画像に誤割当される�
 `npm run typecheck`: D変更の型エラーなし。全体は復元欠落 `supabase/functions/resolve-battle/engine.ts` への既存importによりTS2307で終了（親へ連絡済み）。build/typecheckだけで本体受入は代替しない。
 
 担当8ファイルESLint: 0 errors / 34 warnings（主に既存img要素、依存配列警告）。React best-practicesで並列取得、成功cache、effects cleanup、busy/ref二重操作防止を確認。
+
+## 追加 D12 任務の本体導線接続
+
+- RedesignShellの旧MissionPanelを外し、既存 `game.showMissionPanel` から共通Modal＋正式MissionContentを表示。
+- `onAction('claim_mission', { missionId })` に接続。ref lockによる連打防止、処理中close禁止、失敗表示、既存setShowMissionPanelによるcloseを保持。
+- 受取可/進行中/受取済みで分類し各20件ページング。183件すべてに到達可能。分類・ページ変更はDialog本文先頭へ戻す。
+- 未決dailyは旧任務で代替しない。サーバーprojectionのみ表示。
+- 追加後 `npm run typecheck` 全体PASS。ブラウザ実claim/再読込・低高さCTA確認は統合候補で必要。

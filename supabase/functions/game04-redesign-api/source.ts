@@ -7,6 +7,9 @@ import { applyGrowthAction, validateDeck } from '../../../src/domain/redesign/gr
 import { applyHomeSelection } from '../../../src/domain/redesign/home.ts';
 import { applyShopExchange, applyShopEnergyDrink } from '../../../src/domain/redesign/shop.ts';
 import { evaluateMissions, getClaimableMission, type MissionConfig } from '../../../src/domain/redesign/missions.ts';
+import { FORMAL_MISSION_CONFIG } from '../../../src/domain/redesign/formalMissions.ts';
+import { captureMissionAssets, recordMissionEvent } from '../../../src/domain/redesign/missionProgress.ts';
+import { raidBattleMissionEvent, raidRescueMissionEvent, reconcileRaidMissionProgress } from '../../../src/domain/redesign/missionRaidProgress.ts';
 import { simulateBattle } from '../../../src/domain/redesign/battle.ts';
 import { getQuestStage as getLegacyQuestStage } from '../../../src/domain/redesign/legacyQuests.ts';
 import { createQuestBattleInput, questEnergyCost, questVictoryRewards, QUEST_MASTER_VERSION, type FormalQuestStage } from '../../../src/domain/redesign/questMaster.ts';
@@ -55,9 +58,9 @@ async function acquisitionInput(userId: string): Promise<{legacy: LegacyAssets; 
 async function stateFor(userId: string): Promise<RedesignState> {
   const input = await acquisitionInput(userId);
   for (let attempt = 0; attempt < 4; attempt++) {
-    const state: RedesignState = await rpc('game04_get_growth_state', { p_user_id: userId, p_initial: buildInitialState(userId, input.legacy) });
+    const state: RedesignState = await rpc('game04_get_session_state', { p_user_id: userId, p_initial: buildInitialState(userId, input.legacy) });
     const migrated = importLegacyAssets(state, input.legacy);
-    const imported = applyAcquisitionEvents(migrated, input.events, input.master);
+    const imported = captureMissionAssets(applyAcquisitionEvents(migrated, input.events, input.master));
     if (JSON.stringify(imported) === JSON.stringify(state)) return state;
     try { return (await commit(state, imported, crypto.randomUUID())).state; }
     catch (error) { if (!(error instanceof ApiError) || error.status !== 409 || attempt === 3) throw error; }
@@ -65,7 +68,7 @@ async function stateFor(userId: string): Promise<RedesignState> {
   throw new ApiError('データ更新中です。もう一度お試しください。', 409);
 }
 async function commit(before: RedesignState, after: RedesignState, requestId: string, battle: unknown = null, room: (RaidRoom & {version?: number}) | null = null, roomVersion: number | null = null, receipt: Record<string, unknown> = {}) {
-  return rpc('game04_commit_growth_state', { p_user_id: before.userId, p_expected_version: before.version, p_state: after,
+  return rpc('game04_commit_growth_state', { p_user_id: before.userId, p_expected_version: before.version, p_state: captureMissionAssets(after),
     p_cash_delta: after.cash - before.cash, p_energy_delta: after.energy - before.energy, p_request_id: requestId,
     p_battle: battle, p_raid: room, p_raid_expected_version: roomVersion, p_receipt: receipt });
 }
@@ -110,17 +113,21 @@ async function questPlayerExpReward(stageId: string) {
   if (!Number.isSafeInteger(amount) || amount < 0 || !row?.data?.version) throw new ApiError("クエストEXP設定が不正です。", 503);
   return { amount, version: row.data.version, status: row.status };
 }
-async function missionConfig(): Promise<MissionConfig> {
-  const [row] = await db('game04_redesign_master?key=eq.missions&select=data');
-  return row?.data ?? { enabled: false, missions: [] };
-}
+async function missionConfig(): Promise<MissionConfig> { return FORMAL_MISSION_CONFIG; }
 async function responseFor(userId: string, extra: Record<string, unknown> = {}) {
   const statePromise = stateFor(userId);
-  const [state, rooms, socialEvents, pending, territory, missions] = await Promise.all([statePromise, roomsFor(userId),
+  const [loadedState, rooms, socialEvents, pending, territory, missions] = await Promise.all([statePromise, roomsFor(userId),
     db('game04_social_events?select=*&order=created_at.desc&limit=30'),
     db(`game04_battles?user_id=eq.${userId}&status=eq.started&select=id,kind,target_id&order=created_at.asc&limit=1`),
     statePromise.then(() => territoryContext(userId)), missionConfig(),
   ]);
+  let state = loadedState;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const reconciled = reconcileRaidMissionProgress(state, rooms, Date.now());
+    if (JSON.stringify(reconciled) === JSON.stringify(state)) break;
+    try { state = (await commit(state, reconciled, crypto.randomUUID())).state; break; }
+    catch (error) { if (!(error instanceof ApiError) || error.status !== 409 || attempt === 2) throw error; state = await stateFor(userId); }
+  }
   return { state, rooms, socialEvents, missions: evaluateMissions(state, missions), territory: projectTerritory(territory.master, territory.progress, territory.items, territory.activeHostingCount), pendingBattle: pending[0] ?? null, ...extra };
 }
 async function runBattle(userId: string, name: string, payload: any, id: string, playerName: string) {
@@ -221,6 +228,9 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
       const currentRoom = await roomFor(record.target_id); version = currentRoom.version;
       const transition = applyRaidAction(currentRoom, after, 'raid_battle', { battleId: id, battleLevel: record.input.raidLevel, result: battle, energyAlreadyPaid: true, seed:record.seed, luck:record.input.party.reduce((sum:number,p:any)=>sum+Math.max(0,Math.min(100,p.stats.luk)),0)/5 });
       room = transition.room; after = transition.state; rewards.push(...transition.rewards);
+      const raidEvent = raidBattleMissionEvent(currentRoom, transition.room, userId, id, battle.outcome, Date.now());
+      if (raidEvent) after = recordMissionEvent(after, raidEvent);
+      after = reconcileRaidMissionProgress(after, [transition.room], Date.now());
       if(battle.outcome==='win'&&record.input.raidMasterVersion&&record.input.playerExpReward?.amount){
         const progress=after.playerProgress, amount=record.input.playerExpReward.amount;
         if(progress?.version===GROWTH_VERSION&&progress.status==='active'){
@@ -231,6 +241,14 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
       }
 
     }
+    const missionCounters = record.kind === 'quest' ? ['battle'] : [];
+    if (record.kind === 'quest' && battle.outcome === 'win') {
+      missionCounters.push('quest_clear');
+      if (record.input.party.length === 5) missionCounters.push('quest_five_party');
+      if (record.input.party.some((unit: any) => unit.skills.length >= 2)) missionCounters.push('quest_skill_slot2');
+      if (record.input.party.some((unit: any) => unit.skills.length >= 3)) missionCounters.push('quest_skill_slot3');
+    }
+    if (missionCounters.length) after = recordMissionEvent(after, { id: `battle:${id}`, at: Date.now(), counters: missionCounters });
     const result = { battle, rewards, firstClear, encounterRaidId, ...(playerGrowth ? { playerGrowth } : {}) };
     try {
       const settled = await commit(state, after, settlementId, { id, status: 'settled', result }, room, version);
@@ -319,7 +337,17 @@ Deno.serve(async (request: Request) => {
       const current = await roomFor(String(payload.roomId)); version = current.version;
       if (action === 'raid_join' && getRoomRaidMaster(current).type === 'unlock' && !current.participants.some(p => p.userId === user.id && !p.leftAt) && !isTerritoryUnlocked(state)) throw new ApiError('領土侵攻は通常クエスト3-5クリアで解放されます。');
       const changed = applyRaidAction(current, state, action, { name: profile.username }, Date.now(), action === 'raid_claim' ? await rewardPolicy() : undefined); room = changed.room; after = changed.state;
-    } else after = applyGrowthAction(state, action, payload);
+      if (action === 'raid_rescue') {
+        const rescueEvent = raidRescueMissionEvent(room, user.id, requestId, Date.now());
+        if (rescueEvent) after = recordMissionEvent(after, rescueEvent);
+      }
+      after = reconcileRaidMissionProgress(after, [room], Date.now());
+    } else {
+      after = applyGrowthAction(state, action, payload);
+      const growthCounters = ['character_level', 'character_awaken', 'skill_level', 'equipment_level', 'equipment_lb'].includes(action) ? ['growth'] : [];
+      if (action === 'character_unlock') growthCounters.push('soul_unlock');
+      if (growthCounters.length) after = recordMissionEvent(after, { id: `growth:${requestId}`, at: Date.now(), counters: growthCounters });
+    }
     await commit(state, after, requestId, null, room, version);
     return new Response(JSON.stringify(await responseFor(user.id)), { headers });
   } catch (error) {

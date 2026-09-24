@@ -108,7 +108,7 @@ export default function SettingsPanel({ redesign = false }: { redesign?: boolean
   return (
     <FullScreenPanel title="設定 / プロフィール" onClose={() => { if (!game.profileLoading) close(); }}>
       <div className="settings-panel-container-inner">
-        {game.errorMessage && <div className="settings-error-message">{game.errorMessage}</div>}
+        {!redesign && game.errorMessage && <div className="settings-error-message">{game.errorMessage}</div>}
 
         <EditableSettingSection title="プロフィール" editing={profileEditing} pending={game.profileLoading} onEdit={() => setProfileEditing(true)} summary={<dl className="settings-summary"><div><dt>プレイヤー名</dt><dd>{game.username}</dd></div><div><dt>自己紹介</dt><dd>{game.bio || "未設定"}</dd></div></dl>}>
           <div className="settings-field"><label htmlFor="profile-name">プレイヤー名</label><input id="profile-name" className="settings-input" value={usernameDraft} maxLength={8} disabled={game.profileLoading} onChange={(event) => setUsernameDraft(event.target.value)} /></div>

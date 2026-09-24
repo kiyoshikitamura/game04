@@ -50,3 +50,16 @@
 - 対象URLは `?width=360` / `?width=375` / `?width=390` / `?width=390&height=568`。
 - この経路で確認できるのは指定CSS viewport内の実本体表示/操作。実端末、OSキーボード、touch環境、safe-areaの物理端末挙動とは区別する。
 - 未配信変更のため、修正候補配信後に独立browser担当が検証する。
+
+## U07 / 共闘・侵攻任務の接続helper
+
+`src/domain/redesign/missionRaidProgress.ts` を追加。ソースAPI本体は親が統合する。
+
+- `raidBattleMissionEvent`: before未決済→after決済済のbattle IDだけ参加/個人勝利/他者開催勝利。単なる入室は数えない。generic `battle`も含むため別eventで二重加算しない。
+- `raidRescueMissionEvent`: 成功した救援のみ、NM164正本どおり本人開催のエンカウントに限定。
+- `raidHostMissionEvent`: 主催成功の永続room証拠で1開催1回。
+- `raidQualificationMissionEvents`: `defeat:段階:userId` の既存reward grantを、突破時の3勝資格証拠として使用。現在winsから過去突破を推定しない。参加報酬や個人勝利から代用しない。侵攻関門3/6/9、城主12、本人主催最終clearを別counterへ。
+- `reconcileRaidMissionProgress`: 他者が最後に共通HPを削った場合も、対象参加者の次回同期にdurable grantから反映。claimed状態に依らず同一event IDで一度だけ。戻りstateは親のCASで永続化が必要。表示だけの投影で完了にしない。
+- 主催eventのatはroom.createdAt。資格付き突破の旧grantにはtimestampがないため観測時刻を使用するが、対象は累計NMであり日次目標へ接続していない。
+
+`node scripts/verify_game04_g2_raid_missions.cjs`: PASS。決済限定、再送、本人主催救援、資格証拠、過去資格への非遡及、城主/関門、claimed grantを含む繰り返し同期。結果 `agent-c-raid-missions.json`。実API反映・保存照合は親統合後に必要。
