@@ -1,0 +1,40 @@
+- iframe [active]:
+  - alert
+  - region "ゲーム画面":
+    - img "くノ一"
+    - generic: Lv.1
+    - strong: G2継続QA
+    - generic "将来の同盟表示枠": ◇ 同盟 —
+    - button "アカウント連携": 未認証
+    - button "メニュー"
+    - generic: 銭 12,220
+    - generic: 輝石 200
+    - generic: 行動力 103/100
+    - main:
+      - heading "ステージクリア" [level=2]
+      - paragraph: 1-1
+      - paragraph: 初回クリア報酬を獲得しました。
+      - heading "獲得報酬" [level=3]
+      - list:
+        - generic: 銭
+        - strong: ×500
+        - generic: 武将EXP小（100 EXP）
+        - strong: ×1
+        - generic: 装備EXP小（100 EXP）
+        - strong: ×1
+        - generic: スキル召喚券
+        - strong: ×1
+        - generic: 前田利家
+        - strong: ×1
+      - paragraph: プレイヤーEXP +20 Lv.1 → 1・行動力回復 +0（103/100）
+      - button "ステージ一覧へ"
+      - button "再挑戦"
+      - button "次のステージへ"
+      - button "編成を見直す"
+    - navigation "メインナビゲーション":
+      - button "本陣"
+      - button "出陣"
+      - button "武将"
+      - button "共闘"
+      - button "召喚"
+- alert

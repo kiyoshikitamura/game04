@@ -59,5 +59,16 @@
     "stdout": "PASS G2 news: success, retained list on error/throw, stalled timeout/retry, late response, cleanup\n",
     "stderr": "",
     "scope": "Actual extracted news read effect with stub state setters/transport/timers; not React DOM or live browser acceptance."
+  },
+  "followupShortBattle49177788": {
+    "code": "49177788f9965e72291fb1e27be959b3e544793e",
+    "filesSha256": {
+      "src/app/components/redesign/BattleView.module.css": "1e59a9063f0f1cc47b1a30dac98774ebf12e7a3db66874410c2c1e26b69f7852",
+      "scripts/verify_game04_g2_battle_short_viewport.cjs": "4b4acd4f89e8c5a170402b8513b619f29934ea85870fca2fc3da6f26e0d37a56"
+    },
+    "exitCode": 0,
+    "stdout": "{\n  \"status\": \"PASS\",\n  \"scope\": \"static CSS and formal quest data only; not rendered visibility acceptance\",\n  \"questStages\": 65,\n  \"maxFormalQuestEnemies\": 3,\n  \"viewports\": [\n    {\n      \"width\": 360,\n      \"height\": 568,\n      \"arenaHeight\": 190,\n      \"portraitHeight\": 54,\n      \"partyColumns\": 5\n    },\n    {\n      \"width\": 375,\n      \"height\": 568,\n      \"arenaHeight\": 190,\n      \"portraitHeight\": 54,\n      \"partyColumns\": 5\n    },\n    {\n      \"width\": 390,\n      \"height\": 568,\n      \"arenaHeight\": 190,\n      \"portraitHeight\": 54,\n      \"partyColumns\": 5\n    }\n  ],\n  \"denseLegacyRecords\": \"previous 4–6 enemy two-row height retained; may scroll\"\n}\n",
+    "stderr": "",
+    "scope": "Static PostCSS/formal quest data and independent source review. Not rendered geometry."
   }
 }

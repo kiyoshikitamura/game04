@@ -77,3 +77,13 @@ Dの `InboxPanel.tsx` / `verify_g2_news_async.cjs` を独立読解し、試験�
 - 取得成功、応答error、throw、未settle、abort、後着抑止、再試行空成功、cleanupを抽出effect試験で確認。DOM/ブラウザを実行した証拠ではない。
 
 コード・局所試験としてR2UI05の是正成立。配信版本体でのtimeout/retry CTA・一覧保持の観測は親の実検証へ残る。新たな修正要求なし。
+
+### 49177788 低高さ戦闘CSS・カットインの独立確認
+
+親提示コード `49177788f9965e72291fb1e27be959b3e544793e` のshort mediaを再読、`verify_game04_g2_battle_short_viewport.cjs` を独立再実行PASS。CSS parse、文字/targets/5列を変更しないこと、正式65面の敵数最大3を確認。height568時arena190/portrait54はCSS式の計算値であり、実描画測定ではない。
+
+親の修正前画像 `battle-paused.jpg` を目視し、390×568で味方カードが下へ押し出される事象を確認。1〜3敵は主に立絵の高さ/配置を再配分し、HP等の文字と5列HUDを保持。4〜6敵の過去記録は元の二段高さを維持し、短画面常時性の合格とはしない。
+
+独立指摘したカットインの割合位置依存を、short mediaでBURST文字bottom42px・発動者bottom8px/line-height1.2、skill名bottom34pxへ是正したことを再読確認。通常の一行テキストのレイアウト上、BURST名21×1.2=25.2pxとの名目間隔は8.8px、skillの発動者15×1.2=18pxとの間隔は8px。文字サイズを下げない修正として成立。
+
+これは描画上の重なり/視覚品質の合格ではない。BURSTの既存回転、長い名称、実フォント、カットイン人物crop、多状態/5人HUDの実画像を最新配信で確認する必要がある。新たなコード修正要求なし。計算/APIはこのCSS差分では変更していない。

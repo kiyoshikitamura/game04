@@ -1,5 +1,63 @@
 # GAME04 G2 画面品質・差分台帳
 
+## 新スレッド継続版の追補（以下の旧候補記載より優先）
+
+現行コード `49177788f9965e72291fb1e27be959b3e544793e` / Draft PR #30 / Branch `work/game04-g2-20260924`。継承点79669373から30f5候補、後続f45→7d→491へ進行。491 READY、最終本体受入はブラウザ停止で未完。API v23/hash据置、開発DB追加 `20260924183511 game04_g2_kpi_supply`。Preview https://game04-nb14xcwec-kiyoshi-kitamura.vercel.app / `dpl_BH2b8dj7GSAUCDKbfeRwZKtB1hCe`。
+
+本体再検証は491のブラウザ停止で終了し、取得済み証拠のみ記録。以下の局所PASSは配信本体・全画面・実端末PASSではない。旧記録は履歴として保持し、旧候補を同一候補合格へ合算しない。
+
+|ID|画面/状態・Q/U|根拠/原因と修正|担当・修正候補|独立/DB確認|配信後の残件|
+|---|---|---|---|---|---|
+|A-CONT-01|編成おまかせ/不明master Q03/U01/U02|既存正式master/旧資産保持契約。不明ID候補化でvalidateDeck失敗→解決可能masterのみ自動選択。所持原本保持|A/30f5→f45含む|E専用回帰・育成PASS、正式SKD/旧50候補維持|本体おまかせ→保存/復帰|
+|R2BATTLE01|戦闘画像失敗 Q01/U04/U06|失敗時retryだけで離脱不能→同result/keyのerror時に再生終了。二重コール防止、再戦/再付与なし|C/30f5→f45含む|E review、既存6Wave/開始SP/cache/開始snapshot回帰PASS|本体error/timeout→終了、結果・共闘復帰|
+|E01|戦闘失敗CTA Q04/U04|QuestとraidでonComplete遷移先が異なるため「結果へ進む」→共通「再生を終了する」|C/30f5→f45含む|E是正再読済。コード指摘クローズ|実表示未受入|
+|R2UI01|本陣活動 Q01/U05|プロフィール直列待機/救援author更新でfeed再取得→別effect化・依存分離|D/30f5→f45含む|E抽出effect成功/独立取得PASS|profile遅延時の本体先行表示/測定|
+|R2UI02|本陣活動error/空 Q01/Q04/U05|失敗で一覧消失/throw/再試行なし→既存保持、error/empty/loading分離|D/30f5→f45含む|E失敗/throw/cleanup後応答破棄PASS|本陣/交流Dialogのエラー・再読込操作|
+|R2UI03|出陣報酬/武将詳細Dialog Q02/U05|grid/flex最小幅→minmax(0,...)/min-width:0/折返し|D/30f5→f45含む|CSS read、必要情報をhiddenで隠さない|360/375/390・低高さの長名/大数量/CTA|
+|R2UI04/E02|本陣活動未応答 Q01/U05|E指摘。未settle→既存コミュニティread上限12秒、abort/error復帰、後着破棄|D/30f5→f45含む|E抽出effect timeout/abort/再試行/後着抑止PASS。コード指摘クローズ|配信実時間/CTA再試行。全API性能基準とはしない|
+|R2UI05|お知らせ未応答 Q01/U05/U10|親指摘。news readへ12秒abort/error復帰、既存一覧/後着破棄を維持。BOX mutation排他は無変更|D/後続f45|E抽出effect成功/失敗/throw/timeout/再試行空成功/cleanup PASS|配信news timeout/retry、空/既存一覧保持|
+|R2KPI01|ログボ/BOX/VIP計測 U10/C09|正式producer receipt一致のログボ今後履歴、新旧付与行から供給集計。過去推測復元なし、QA/未結合分離|B/30f5→f45含む、DB20260924183511|E SQL/route review、matcher/認証局所PASS。親DB全ASSERT/rollback確認|本体供給件数→管理者HTTP/管理画面。購入売上/全計測合格ではない|
+
+対象実行時hashと生出力は `../g2-20260925/independent/integration-targeted-results.json`、レビューは同dir `INTEGRATION_CODE_REVIEW.md`。抽出effectは実ソース処理を試験用setter/transport/timerで実行する局所検査。React DOM/認証API/DB保存/実機は代替しない。
+
+### 継続本体QAの追補台帳（親実行）
+
+cloud Chrome CSS iframe390×568、専用新規QA `2b544996-e7f4-4e88-a5d2-b20f1f50b4b2`。実機ではない。実証は30f5/f45、育成結果追加は7d/375×844。491全体受入へ合算しない。画像DOM原本は親が `qa-continuation/` へ保存済み、Git記録commit待ち。
+
+|ID|画面/状態・分類|観測・DB照合|判定/残件|
+|---|---|---|---|
+|LIVE-CONT-01|BOX3種受取 U02/U07|30f5で正式fixture bulk受取、version2→5。CHAR_EXP_M3/薬1/selectorN1が一致|3種本体接続成立。全19ID/producerは未完|
+|LIVE-CONT-02|武将Lv育成/再読込 U02/U11|30f5で中1個、Lv1→8 EXP1000/銭12600→11720/中3→2/version6。f45再読込一致|BOX→育成→保存復帰成立。最新7d/全境界未確認|
+|LIVE-CONT-03|薬使用/超過 U03/U08|f45確認52→102、送信後103/100・薬1→0/version7/DB vitality103 cash11720|超過保持成立。自然回復の時差があり直前53未取得。厳密な52→102実更新証拠としない|
+|LIVE-CONT-04|出陣1-1/停止/再開/2倍速/結果 U04/U11|f45で勝利、version9/mikawa-1 clear/playerExp20/cash12220/vitality103/武将小1・装備小1。結果表示一致|通常1戦経路成立。全状態/6Wave/最新候補は未確認|
+|LIVE-CONT-05|news空 Q01/Q04/U10|f45本体0件表示|空のみ成立。失敗/timeout/retryは局所試験|
+|LIVE-CONT-06|設定→問い合わせ→戻り U10|f45問い合わせ表示まで成立、閉じた後runtime timeout|本体復帰未確認を維持。アプリ原因/ツール原因を断定しない|
+|LIVE-CONT-07|低高さバトル Q02/U04|f45で立絵が大きく味方の常時情報が画面外へ押し出される。491で1〜3敵arena/portrait高さを調整|C修正・E静的PASS。親491/360×568はRuntime.evaluate/Page.enable timeoutで停止、修正後表示未確認|
+|R2UI06|育成Dialog送信中 Q01/U02|7dで全12Modalにpending/inert/closeDisabled接続。E局所/コードreview PASS|7d本体pending/inert/Escape/scroll未確認|
+|R2UI07|育成結果 Q04/U02|7dで右上×を除去・背面/Escape終了禁止、下部閉じる保持。E局所PASS。親375×844で結果上×なし/下閉じる→詳細を実確認|結果表示/下部閉じる成立。実Escapeは未検証|
+|LIVE-CONT-08|7d育成追加 U02/U11|EXP1000→1100、小1→0、Lv8/銭12220据置、version10。growth-375-result.jpg目視|小EXP使用・途中EXP非重複課金の今回例/結果復帰成立。全境界ではない|
+|LIVE-CONT-09|供給SQL照合 U10/C09|専用QA login1/1、CHAR_EXP_M1/3、薬1/1、selectorN1/1（event/quantity）、全development/excluded|本体受取/ログボ件数一致。管理者HTTP/全producer/全計測未完|
+|R2BATTLE02|低高さcutin Q02/U04|491でBURST bottom42px/発動者8px、skill34pxへ調整。文字/targets/5列保持、正式65面最大敵3の静的PASS|実回転/長名/人物crop/BURST/多状態未確認。旧4〜6敵は既存高さ維持|
+|R2NAME|名称表示 Q03/U05|7d名称関連修正、独立局所PASSの親報告|7d本体未確認。正式72名称採用の決定とは別|
+
+BOX/素材使用の従来未完はこのQA・3種・30f5/f45の範囲で更新する。外部P依存、最新候補横断、画像失敗回復、低高さ戦闘修正、問い合わせ復帰、実機は未完。
+
+### 最終491の実表示阻害
+
+新規360×568 tabのDOMでRuntime.evaluate timeout、既存375幅tab→390×568切替でもPage.enable timeout。親は復旧の反復を終了。491低高さ修正後の実画像はなく、修正前battleと7d育成実証までの取得済み原本のみ保存する。未取得画像や491表示を合格にしない。コード配信READY/局所静的PASSと本体受入未完を分離する。
+
+### 全画面/状態の未完追跡
+
+`../g2-20260925/independent/U10_U11_COVERAGE_REVIEW.md` に本陣、武将/編成/育成、出陣、バトル、共闘、侵攻、任務、ログボ、BOX、商店/VIP、設定/news/法務、認証、共通Chrome/Dialogの既存証拠と具体不足を対応づけた。BOX3種→中素材育成→保存/再読込は上記30f5/f45で成立。最新候補の全群、設定/問い合わせ復帰、新規侵攻snapshot、画像失敗復帰、全群計測照合は未受入。
+
+Q05/Q06の真の不足は72名称画像/素材10/出陣10背景/レア度表示採用照合、旧資産/供給方針、daily10/過剰damage未決。採用済み侵攻5城共通背景、共闘17素材、主催仮FIXは再判断不要。P02〜P04別候補#31の外部準備・統合受入、P06ログイン待ちは依存として保持。
+
+未完理由は区別する。**承認不足**: 72名称画像/素材/背景/レア度採用、旧資産、daily10/overkill。**外部依存**: P02購入/有償期限、P03外部認証、P04運用値と#31統合。**未検証**: 491全状態・画像失敗/問い合わせ復帰/処理中Dialog/供給全件/共闘侵攻再送/管理者HTTP・全計測。**環境・測定不足**: 実機Safari/キーボード・条件別性能。いずれもG2未完のまま保持し、後工程名だけを付けて除外しない。
+
+旧台帳のU00原本保存障害は回収済み分を現在の欠落へ戻さず、取得不能02/07は明記を保持。Q01の同条件性能比較、Q02全幅/全状態/実機、U11同一候補の横断受入が未完のため、G2は未完・受入不可。
+
+---
+
 ## 再開追補（以前の未保存・分類記載より優先）
 
 最終追加コード182a2a35 / API v23。画像・DOM原本の保存障害はe960238で解消。新候補の本体再検証は通信/ブラウザ停止により未完。
