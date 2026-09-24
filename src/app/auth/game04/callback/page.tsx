@@ -36,5 +36,5 @@ export default function Game04AuthCallback() {
       setMessage('認証を完了できませんでした。連携済みとは扱っていません。連携画面で状態を再確認してください。ゲームデータの統合・削除は行いません。');
     });
   }, []);
-  return <main style={{ minHeight: '100dvh', overflowY: 'auto', padding: 24, background: '#16130f', color: '#f5eddf' }}><h1>アカウント連携</h1><p role="status">{message}</p><a style={{ color: '#e7c979' }} href="/auth/game04">連携画面へ戻る</a></main>;
+  return <main style={{ height: '100dvh', boxSizing: 'border-box', overflowY: 'auto', padding: 24, background: '#16130f', color: '#f5eddf' }}><h1>アカウント連携</h1><p role="status">{message}</p><a style={{ color: '#e7c979' }} href="/auth/game04">連携画面へ戻る</a></main>;
 }
