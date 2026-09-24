@@ -17,12 +17,38 @@
 - 商店の正式既存交換UI・状態接続を取り込み。価格・ゲームルールの新規判断はしていない。
 - Edge sourceでは本陣保存・商店交換の両処理を保持。index.tsは統合ドメインから再bundle。配信は未実施。稼働APIを旧一式で上書きしない。
 
-## 検証状況
+## 検証状況（2026-09-24更新）
 
-- 統合sourceのTypeScriptチェック成功。
-- 最初の統合build成功。任務の遷移・共通Dialog補修後も最終buildを実施する。
-- Preview・ビジュアル比較・実API横断検証は未完了。各担当の過去証跡を今回の統合受入結果として扱わない。
-- 現在のVercel connectorはgame04を取得できず、別projectのみ参照可能。GitHub側のVercel自動配信を確認する。
+- 統合コードSHA: `1d426a6fc9a2a7e8d9ea6ae2d8fd6184bc80881d`
+- Branch: `work/game04-ui-integration-20260924`
+- Draft PR: https://github.com/kiyoshikitamura/game04/pull/28
+- 固定Preview: https://game04-3d371l5m5-kiyoshi-kitamura.vercel.app
+- Deployment: `dpl_4SRU32x8ZPvAvfEV1wNaH9PdfCBk`
+- 最終コードTypecheck成功。編成人数修正後のローカルBuild成功。最終コードのVercel配信成功、公開配信情報のSHA一致を確認。
+- **統合保存・Preview配信は完了。全体受入は未完了。** 実アカウント未ログインのため、実API操作・永続化確認は未実施。各担当の過去証跡を今回の統合受入結果として扱わない。
+
+### ブラウザで確認した範囲
+
+初回統合3380b239の固定Previewで、本陣の統合切替Dialog、出陣のエリア→ステージ→挑戦→出撃準備、武将編成、侵攻の敵段階表示、共闘詳細、商店表示を390pxのQA fixtureで確認。共通Shellの本陣QAでは新名称のHeader/Footerと中央メニューDialogを確認（画面中央との縦方向差0px）。
+
+QA fixtureは保存なし。旧Header/Footer名称・旧侵攻Masterが残る別枠であり、本体の正式データ確認を代替しない。添付画像2枚は初回統合3380b239のQA画面。最終コードの再確認はJSON記録のfinal-code-initial-three-preparationを参照。
+
+統合検証で初期3人編成なのに出撃準備が常に5人を要求する不整合を発見。既存ドメインの1〜5人判定に表示側を合わせた。最終固定Previewで画像読込完了後、3人の出撃準備の「出撃する」が有効になることを再確認。武将側の可視名称と侵攻結果エラーの旧「開催」表記も修正。
+
+本体では開始→既存データのログイン画面まで確認。実APIの報酬受取・交換・育成・侵攻・本陣保存・再読込の確認には検証用アカウントのログインが必要。認証情報をチャットやソースへ記載しない。
+
+### 今回残る受入項目
+
+- 本体の認証後、全8領域の遷移・実処理・保存再読込を横断確認する。
+- 全承認モックとの同幅比較、低い画面のDialog末尾到達、固定Header/Footer、未読・連打・不足時の挙動は全体として未完了。
+- RaidViewの旧「レイド」名称、商店商品の「キャラEXP」名称が残る。正式名称へ揃える対象として記録。
+- 任務CTA接続は型確認まで。本体の任務受取・遷移はログイン後に確認する。
+- 稼働APIは変更していない。統合したshop/home処理との差分を確認し、必要な配信は別途集約する。
+
+画像とDOM記録:
+- [切替Dialog](game04-integration-switch-ready.jpg)
+- [共通メニュー](game04-integration-shared-menu.jpg)
+- [ブラウザ確認記録](game04-integration-browser-evidence.json)
 
 ## 統合Previewの確認対象
 
