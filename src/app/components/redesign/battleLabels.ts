@@ -15,6 +15,7 @@ export const CLEANSE_LABELS: Record<string,string> = { buff:'能力強化', prot
 export const LEGACY_SKILL_MAPPING_NOTICE = 'このスキルは現在の戦闘では使用できません。';
 // Presentation only: keep master/snapshot values and unresolved skill eligibility intact.
 export function displaySkillDescription(description: string) {
+  if (description === '【発動保留・未FIX】継続ダメージ／SP補充の詳細ルール待ち') return LEGACY_SKILL_MAPPING_NOTICE;
   return description.replace(/（個別倍率・消費SP・回復式は開発仮設定）$/, '');
 }
 export function skillDescription(skill: SkillMaster, latest = true) { return latest && skill.unsupportedReason ? LEGACY_SKILL_MAPPING_NOTICE : displaySkillDescription(skill.description); }

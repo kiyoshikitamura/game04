@@ -11,9 +11,6 @@ import localSkills from '@/theme/local-skills.json';
 import { CharacterCard, useArtworkPreload, type DisplaySubject } from './visual-bench/CharacterDisplays';
 
 export const ELEMENT_LABELS: Record<string, string> = { fire: '火', water: '水', earth: '土', wind: '風', light: '光', dark: '闇' };
-function displaySkillDescription(description: string) {
-  return description.replace(/（個別倍率・消費SP・回復式は開発仮設定）$/, '');
-}
 function formalSkillAsset(skill: { id: string; image: string; name: string }) {
   const entry = localSkills.find(candidate => candidate.sourceId === skill.id);
   return { image: entry?.path ?? skill.image, name: entry?.sourceName ?? skill.name };
@@ -48,7 +45,7 @@ export default function PreparationModal({ party, ownedCharacters, title, energy
     {detail && <CanonicalDialog title={detail.name} onClose={() => setDetailId(null)} actions={[{ label: '戻る', onClick: () => setDetailId(null) }]}>
       <div className="rq-detail-profile"><div className="rq-detail-visual"><CharacterCard subject={{id: detail.id, name: detail.name, rarity: CHARACTER_MASTERS.find(entry => entry.id === detail.id)?.rarity ?? 'N', element: detail.element as 'fire'|'water'|'earth'|'wind'|'light'|'dark'}} compact hideMarks className="rq-detail-card" /><div className="rq-detail-badges"><span className="rq-rarity">{CHARACTER_MASTERS.find(entry => entry.id === detail.id)?.rarity ?? 'N'}</span><ElementBadge element={detail.element} /><span>Lv.{detail.level}</span></div></div></div>
       <dl className="rq-detail-stats">{Object.entries(detail.stats).filter(([key]) => key !== 'sp').map(([key, value]) => <div key={key}><dt>{key.toUpperCase()}</dt><dd>{(['hp', 'atk', 'def', 'luk'].includes(key) ? Math.floor(value) : value).toLocaleString()}</dd></div>)}</dl>
-      <h3>装着スキル</h3><div className="rq-skill-slots">{Array.from({ length: 3 }, (_, index) => { const skill = detail.skills[index]; const asset = skill ? formalSkillAsset(skill) : null; return <article className="rq-detail-item" key={index}><span className="rq-slot-number">{index + 1}</span>{skill && asset ? <>{asset.image && <img className="rq-skill-icon" src={asset.image} alt="" />}<strong>{asset.name}</strong><p className="rq-skill-cost"><ElementBadge element={skill.element} />消費SP {skill.spCost}</p><p>{displaySkillDescription(skill.description || skillDescription(skill, commonSpMax !== null))}</p></> : <span className="rq-empty-slot">{index < detailSlots ? '未装着' : '未解放'}</span>}</article>; })}</div>
+      <h3>装着スキル</h3><div className="rq-skill-slots">{Array.from({ length: 3 }, (_, index) => { const skill = detail.skills[index]; const asset = skill ? formalSkillAsset(skill) : null; return <article className="rq-detail-item" key={index}><span className="rq-slot-number">{index + 1}</span>{skill && asset ? <>{asset.image && <img className="rq-skill-icon" src={asset.image} alt="" />}<strong>{asset.name}</strong><p className="rq-skill-cost"><ElementBadge element={skill.element} />消費SP {skill.spCost}</p><p>{skillDescription(skill, commonSpMax !== null)}</p></> : <span className="rq-empty-slot">{index < detailSlots ? '未装着' : '未解放'}</span>}</article>; })}</div>
       {detail.passives.length > 0 && <h3>パッシブ</h3>}{detail.passives.map(passive => <article className="rq-detail-item" key={passive.id}><strong>{passive.name} Lv.{passive.level ?? 0}</strong><p>{passiveDescription(passive)}</p></article>)}
     </CanonicalDialog>}
   </div>;
