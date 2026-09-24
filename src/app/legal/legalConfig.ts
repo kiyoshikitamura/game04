@@ -18,7 +18,7 @@ export const GAME04_LEGAL: {
   representative: null,
   address: null,
   phone: null,
-  supportEmail: null,
+  supportEmail: "original.title.support@gmail.com",
   serviceUrl: null,
   rightsHolder: null,
 };

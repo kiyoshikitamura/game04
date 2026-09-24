@@ -27,6 +27,7 @@ export default function LegalPage({ title, updatedAt, children, returnToGame = f
   }, []);
 
   useEffect(() => {
+    scrollRef.current?.scrollTo({ top: 0 });
     updateScrollProgress();
     const element = scrollRef.current;
     if (!element || typeof ResizeObserver === "undefined") return;
@@ -35,7 +36,7 @@ export default function LegalPage({ title, updatedAt, children, returnToGame = f
     const card = element.querySelector(".legal-page-card");
     if (card) observer.observe(card);
     return () => observer.disconnect();
-  }, [updateScrollProgress]);
+  }, [updateScrollProgress, title]);
 
   const legalHref = (path: string) => returnToGame ? `${path}?from=settings` : path;
   const closeToGame = () => {
@@ -47,13 +48,15 @@ export default function LegalPage({ title, updatedAt, children, returnToGame = f
       ref={scrollRef}
       className={`legal-page${returnToGame ? " legal-page--from-game" : ""}`}
       onScroll={updateScrollProgress}
+      tabIndex={0}
+      aria-label={title}
     >
       <section className="legal-page-card" aria-labelledby="legal-page-title">
         {!returnToGame && <Link href="/" className="legal-page-back">← タイトルへ戻る</Link>}
         <p className="legal-page-brand">{GAME04_LEGAL.title}</p>
         <h1 id="legal-page-title">{title}</h1>
         <p className="legal-page-updated">{GAME04_LEGAL.status === "draft" ? "草案更新日" : "施行日"}：{GAME04_LEGAL.status === "draft" ? updatedAt : GAME04_LEGAL.effectiveDate}</p>
-        {GAME04_LEGAL.status === "draft" && <p className="legal-page-notice">正式公開前の草案です。運営者情報・問い合わせ窓口・施行日は、正式公開までに掲載します。</p>}
+        {GAME04_LEGAL.status === "draft" && <p className="legal-page-notice">正式公開前の草案です。運営者情報・販売条件の最終確認・施行日は、正式公開までに掲載します。</p>}
         <div className="legal-page-content">{children}</div>
         <nav className="legal-page-nav" aria-label="法的情報">
           <Link href={legalHref("/legal/terms")} replace={returnToGame}>利用規約</Link>

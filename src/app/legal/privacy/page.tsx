@@ -12,7 +12,7 @@ type PrivacyPageProps = { searchParams: Promise<{ from?: string }> };
 export default async function PrivacyPage({ searchParams }: PrivacyPageProps) {
   const { from } = await searchParams;
   return (
-    <LegalPage title="プライバシーポリシー" updatedAt="2026年9月18日" returnToGame={from === "settings"}>
+    <LegalPage title="プライバシーポリシー" updatedAt="2026年9月24日" returnToGame={from === "settings"}>
       <p>
         『戦国姫艶武』（以下「本サービス」といいます。）の運営者（以下「運営者」といいます。）は、
         本サービスにおける利用者の個人情報その他の情報の取扱いについて、以下のとおりプライバシーポリシー
@@ -30,12 +30,12 @@ export default async function PrivacyPage({ searchParams }: PrivacyPageProps) {
         <li>利用者ID、ユーザー名、ゲーム内プロフィールその他本サービス上で利用者が設定する情報。</li>
         <li>ゲームの利用履歴、ゲームデータ、購入履歴その他本サービスの利用状況に関する情報。</li>
         <li>IPアドレス、User-Agent、Cookie、アクセス日時、利用端末・ブラウザに関する情報その他アクセスログ等の技術情報。</li>
-        <li>全体チャット、ギルドチャット、ダイレクトメッセージ（DM）、BBS（掲示板）その他投稿機能におけるメッセージ、投稿内容、送信日時その他の投稿ログ。</li>
+        <li>本サービスで提供する投稿機能におけるメッセージ、投稿内容、送信日時その他の投稿ログ。</li>
         <li>メールによるお問い合わせ時に利用者から提供される情報。</li>
         <li>その他、本サービスの提供に必要な範囲で利用者から提供される情報。</li>
       </ol>
       <p>
-        有償ダイヤその他の購入に使用されるクレジットカード番号等の決済情報は決済代行事業者によって処理され、
+        有償輝石その他の購入に使用されるクレジットカード番号等の決済情報は決済代行事業者によって処理され、
         運営者は原則として当該カード情報を保持しません。
       </p>
 
@@ -76,7 +76,7 @@ export default async function PrivacyPage({ searchParams }: PrivacyPageProps) {
       <h2>第7条（投稿ログ）</h2>
       <p>
         運営者は、利用規約違反、不正利用、迷惑行為への対応、利用者保護、法的手続への対応その他本サービスの適切な運営に必要な範囲で、
-        全体チャット、ギルドチャット、DM、BBS等の投稿ログを保存・確認し、必要な措置を行うことがあります。
+        本サービスで提供する投稿機能のログを保存・確認し、必要な措置を行うことがあります。
       </p>
 
       <h2>第8条（開示、訂正、利用停止等）</h2>
@@ -95,9 +95,11 @@ export default async function PrivacyPage({ searchParams }: PrivacyPageProps) {
 
       <h2>第10条（外部サービス）</h2>
       <p>
-        本サービスでは、認証、決済、インフラその他本サービスの提供に必要な外部サービスを利用する場合があります。
-        実際に利用する外部サービスおよび法令上明示が必要な事項は、実装内容に応じて本ポリシーその他適切な場所に表示します。
+        本サービスでは、Google（外部認証）、Supabase（認証・ゲームデータ保存）、Stripe（決済処理）、Vercel（Web配信）を利用します。
+        各サービスへ、その機能に必要な認証情報、ゲームデータ、注文情報、アクセス情報等を送信します。カード番号等はStripeの購入画面で取り扱われます。
       </p>
+
+      <p>委託先の所在国、保存場所・保存期間、外国への個人データ提供に関する必要事項は、本番構成の確定に合わせて販売開始までに掲載します。</p>
 
       <h2>第11条（本ポリシーの変更）</h2>
       <ol>
@@ -108,7 +110,7 @@ export default async function PrivacyPage({ searchParams }: PrivacyPageProps) {
       <h2>第12条（お問い合わせ）</h2>
       <p>
         個人情報の取扱い、開示等の請求その他本ポリシーに関するお問い合わせは、
-        <SupportContact />
+        <SupportContact returnToGame={from === "settings"} />
         をご確認ください。
       </p>
     </LegalPage>

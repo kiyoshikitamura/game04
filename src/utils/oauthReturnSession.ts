@@ -6,7 +6,7 @@ export function shouldAutoDetectAuthReturn(href?: string): boolean {
   if (!href) return true;
   const url = new URL(href);
   const hash = new URLSearchParams(url.hash.slice(1));
-  return url.pathname.replace(/\/$/, "") !== "/auth/callback"
+  return !["/auth/callback", "/auth/game04/callback"].includes(url.pathname.replace(/\/$/, ""))
     && ![url.searchParams, hash].some(params =>
       params.has("error") || params.has("error_code") || params.has("error_description"));
 }
