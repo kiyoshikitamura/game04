@@ -60,3 +60,14 @@
 - 認証routeやP callbackは既存経路。認証報酬・新しい毎日文言は追加しない。
 - 追加公開RPCはUID/名前/bio/お気に入り/認証boolean/VIP期限のみ。メール・identity ID・password等は返さず、呼出しにはAuth UIDを要求。匿名Authユーザーの閲覧/投稿を禁止しない。
 - G3活動はreceiptの読取投影。G3が別の活動producerを実装する場合は二重ソースにならないよう片方へ統一する。
+
+## 再現コマンド
+
+```
+node node_modules/typescript/bin/tsc --noEmit
+node node_modules/eslint/bin/eslint.js src/app/components/redesign/Community*.tsx src/domain/redesign/community.ts src/app/qa/community/*.tsx
+COMMUNITY_BUILD_RUNTIME_DIR=/path/to/test-runtime NODE_PATH=/path/to/test-runtime/node_modules node tests/community/run.mjs
+node --experimental-strip-types tests/p02-p04/independent-billing.mjs
+```
+
+テスト用runtimeにはesbuild 0.25.12、jsdom 26.1.0、React/ReactDOM、@testing-library/reactを使用。アプリ依存・lockfileは変更なし。JSDOM由来の残存handleで終了が滞らないようNodeの `--test-force-exit` を指定、7件の終了・集計を確認している。
