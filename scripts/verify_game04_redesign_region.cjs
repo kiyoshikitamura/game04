@@ -8,4 +8,7 @@ for (const path of ['src/utils/redesignApi.ts', 'src/utils/redesignRestoreObserv
   assert.doesNotMatch(source, /forceFunctionRegion|['"]x-region['"]/, `${path}: use the official SDK region option instead of a partial custom header/query implementation`);
 }
 
-console.log('PASS GAME04 redesign API uses official Supabase eu-central-1 regional invocation on both client paths.');
+const edgeSource = fs.readFileSync('supabase/functions/game04-redesign-api/source.ts', 'utf8');
+assert.match(edgeSource, /'Access-Control-Allow-Headers':\s*'[^']*\bx-region\b[^']*'/, 'Edge CORS must allow the x-region header sent by the official SDK region option');
+
+console.log('PASS GAME04 redesign API uses official Supabase eu-central-1 regional invocation and allows its x-region CORS header.');
