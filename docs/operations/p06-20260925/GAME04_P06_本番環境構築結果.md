@@ -42,7 +42,7 @@
 ## 必須未完・依存
 
 1. 停止receiver配信は今回完了。匿名遮断12経路PASS。認証通過後のクラウド関数503/health200確認は未完。P06_HEALTH_TOKENは未設定。ブラウザは対象URLでERR_BLOCKED_BY_CLIENTとなり、保護を解除して試験していない。
-2. Supabase管理画面に既存ログインがなく、新規signup停止、backup実在/成功時刻、Micro実設定/SMTP/providerの確認が未完。管理ログインが必要。接続済みMCPは当該設定操作非対応。
+2. 2026-09-25 12:51 JSTにユーザーが本番管理設定完了を報告。signup停止はユーザー実施報告として受領。添付で物理backup 2件とMicro選択表示を確認（詳細は末尾）。SMTP/provider設定と認証後の管理検証は未完。作業ブラウザ接続不一致のため直接画面確認は未回復。
 3. 正式domain、Google/SMTP、Stripe本番商品/通知先、リーガル問い合わせ先はP01〜P04の確定待ち。追加の費用判断は今回発生していない。
 4. G2/P02/P03は現状本番を拒否するコードがある。本番ref許可表とserver側公開制御を担当契約に沿ってM候補へ接続する。
 5. G5最終manifest、確定ゲームschema差分、正式master/material allowlist、完全backup復旧確認、監視通知接続、本番操作/認証/決済受入は未完。
@@ -54,7 +54,7 @@ P06合格、M本番受入、G6公開合格とはしない。費用の再承認�
 Branch: work/game04-p06-20260925 / Draft PR #32。G2との衝突を避けinfra/game04-productionとP06専用docsのみ変更。
 G2/P02〜P04にはCONNECTION_CONTRACT.mdで本番refと担当境界を受渡す。M手順はGAME04_M_本番移行・復旧手順.md。最終SHAはPR headを参照。
 
-管理画面への次の操作: Supabaseへログインした状態で本番projectを開き、Allow new users signupを停止して保存確認、Backup成功時刻・Compute Micro・SMTP/Google未接続状態を確認する。追加費用の承認は再度求めない。
+管理画面のsignup停止・backup・Microについては末尾のユーザー実施報告と添付確認を参照。再ログインや同じ設定操作は求めない。SMTP/Google等の外部接続設定はP03契約に沿って継続確認する。
 
 RLS policyなしINFOの説明: https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy 。private台帳をclientへ公開しないため意図した設定。
 
@@ -68,3 +68,18 @@ RLS policyなしINFOの説明: https://supabase.com/docs/guides/database/databas
 - All Deployments / Require Log Inは配信後も保存状態を確認。独立担当の匿名GET（Cookie/Authorizationなし、redirect追随なし）で3ホスト×4経路が全て302→Vercel SSO。`RECEIVER_DEPLOYMENT_EVIDENCE.json`参照。
 - 専用projectのVercel Cron実行をDisabledへ変更。ジョブ定義なし。Mで定義と許可対象を受入するまで再有効化しない。
 - 本配信はゲーム受入でもDB接続確認でもない。cloud healthとSupabase管理設定等の必須未完は残るためP06未合格を維持。
+
+## 管理設定のユーザー実施・添付確認（2026-09-25 12:51 JST）
+
+対象は直前に指定した `game04-prod / soiksqgtmcnspfedmanr`。添付は画面の一部でproject識別子を含まないため、対象との対応はユーザー報告に基づく。
+
+|項目|結果|証拠の範囲|
+|---|---|---|
+|Allow new users to sign up OFF・保存|ユーザー「設定完了」を受領|Auth画面画像なし。担当によるAPI再検証は未実施|
+|Scheduled backups|PHYSICAL 2件とRestoreボタンの表示を確認|2026-09-24 22:23:33 UTC（09-25 07:23:33 JST）、09-24 16:25:32 UTC（09-25 01:25:32 JST）。実バックアップの存在確認。復元試験は未実施|
+|Compute|MICRO選択表示、1 GB memory / Shared compute、US$0.01344/hour|ユーザー設定完了報告＋添付表示。30日換算US$9.6768、31日換算US$9.99936。compute単体で他利用料を含まない|
+
+添付画像1の注意書きどおり、Storage object実体はDB backupに含まれない。Mで素材manifestと実体を別保全する。
+最新backupは基盤migration適用時刻より後。ただしbackup内部のschemaや復旧結果を確認したものではない。
+証拠元: ユーザー添付 file_000000000f8882069e4a0536a5f680e0（Database Backups）、file_000000008660820995f9f84661284be8（Compute）。秘密値なし。
+この更新でbackup実在確認待ちを解消。signupはユーザー実施済み、Microは画面確認済みとして管理し、P06全体の合格とはしない。
