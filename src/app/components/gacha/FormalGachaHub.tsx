@@ -124,7 +124,7 @@ export default function FormalGachaHub({
       {confirm && <GachaModalPortal onEscape={pending ? undefined : () => setConfirm(null)}><CanonicalDialog title="登用確認" onClose={pending ? undefined : () => setConfirm(null)} actions={[
         { label: "戻る", disabled: pending, onClick: () => setConfirm(null) },
         { label: `${confirm.count === 10 ? "10連" : "1回"}引く`, semantic: "primary", disabled: pending || !canPay(confirm), onClick: async () => { const request = confirm; setConfirm(null); await onDraw(request); } },
-      ]}><p className="formal-gacha__confirm"><b>{paymentText(confirm)}</b>を消費します。<br />別の支払方法へ自動で切り替わることはありません。</p></CanonicalDialog></GachaModalPortal>}
+      ]}><p className="formal-gacha__confirm">{confirm.payment === "FREE" ? "無料で10連登用します。" : <><b>{paymentText(confirm)}</b>を消費します。</>}</p></CanonicalDialog></GachaModalPortal>}
 
       {ratesOpen && <GachaModalPortal onEscape={() => setRatesOpen(false)}><CanonicalDialog title={surface === "NORMAL" ? "通常登用 提供割合" : `${meta.label}特選 提供割合`} onClose={() => setRatesOpen(false)} actions={[{ label: "閉じる", semantic: "primary", onClick: () => setRatesOpen(false) }]}>
         <div className="formal-gacha__rates custom-scrollbar" tabIndex={0} role="region" aria-label="提供割合と排出一覧">

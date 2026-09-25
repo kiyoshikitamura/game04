@@ -19,9 +19,13 @@
     "11_auth_and_fixture_generator.sql": "db8d22b2aea81b0217f860f68c2bcfd828b10d1623ae44e71cd135882e7422c9",
     "12_lock_fixture_generators.sql": "bf4f8d88b2b76cc56715a9950033d314fed8e9351678ee34526f0d495259f5d4",
     "13_g3_player_initialization.sql": "6ba39be84ba3b16d6eef31364d0eee1cbac45d1177e8a3fe5954a77d045dd023",
-    "90_verify.sql": "f9f7add99ee980838d66a3be13b1b5a5983cb75623ac0885b549fb8054df875c",
-    "APPLY_ORDER.txt": "16465b5470a736512b27a94be081ffca5ec9fe1b98195c149f0af0e530eb7210",
-    "README.md": "dfed11e5f3ab07d3062308ad50762f20662fec92a1448f633dd25ab442fcffd9",
+    "14_g3_room_read_projection.sql": "034f372c4ddae9502537c94a7f85ac8691c55ab2dd95efe02e11ce6478e3aa1a",
+    "15_g3_initial_read_runtime.sql": "9751eb23ef693e171c26ea296b4b5db64874a572bab4e1e13d2a1b11015f2a44",
+    "16_g3_current_territory_master.sql": "6e362769b769a5a6b19b35e3ea9fe05114c7501c0d8a8e2710409826338537fa",
+    "17_g3_territory_validator_reconciliation.sql": "f0857e8d3532710148a863ef7d6573332f48f304450bf457a415a848e73c0963",
+    "90_verify.sql": "64021c966af4f496e95c53c2bcec08c53df69bb2270126c4f0b86374d6437b13",
+    "APPLY_ORDER.txt": "327cd19f958ab62cd8c1af9f9f221a4ae1a6095330ab63f694d732ed2dcc86bd",
+    "README.md": "6bf86e5defea32131dcb1099ef502616cba47ce7ad631a2c20e3638df7e5c804",
     "RUNTIME_GATE.md": "1e0b940aa542748023ac11ff560eca951818f83cfbb6bdf0b67886de616002ba",
     "formal_gacha_pool.sql": "c547aff89a75844d4642fe8a204713caecf75ef0407d0f1cb792f852509fd394",
     "gacha_atomic_commit.sql": "36820a8b2f1d3e715f46b388c6b9ef5b63b18f434a20ac2310309ab1938a4a91",
@@ -62,7 +66,7 @@
   "intentionalDifferences": [
     "users.guild_id is retained as a compatibility column without importing guild/GAME03 tables or its foreign key",
     "legacy broad anon/authenticated master-table grants are narrowed to SELECT-only policies in the isolated project",
-    "unrelated users triggers, performance candidates, battle/raid/territory functions and historical rows are excluded",
+    "unrelated user triggers, performance candidates, battle/raid writers and historical rows are excluded; only the territory read context needed by responseFor is retained",
     "Auth users are created with Auth Admin API after project creation, never copied or inserted by this snapshot",
     "KPI acquisition funnel dependencies used only outside G3 gacha acceptance remain a documented blocker"
   ]

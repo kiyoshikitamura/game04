@@ -347,19 +347,19 @@ Deno.serve(async (request: Request) => {
     ]);
     if (!profile) throw new ApiError('先にプレイヤー名を登録してください。', 409);
     if (action === "normal_gacha_status") {
-      const state2 = await stateFor(user.id);
+      const response = await responseFor(user.id),state2=response.state;
       const pool = normalGachaCompatibilityPool();
       const day = normalGachaDay(Date.now());
-      return new Response(JSON.stringify(await responseFor(user.id, { normalGacha: { pool, day, available: state2.dailyNormalGachaDate !== day, masterVersion:FORMAL_GACHA_VERSION, rule:NORMAL_GACHA_RULE, rates:formalGachaDisplayRates('normal') } })), { headers });
+      return new Response(JSON.stringify({...response,normalGacha:{pool,day,available:state2.dailyNormalGachaDate!==day,masterVersion:FORMAL_GACHA_VERSION,rule:NORMAL_GACHA_RULE,rates:formalGachaDisplayRates('normal')}}),{headers});
     }
     if (action === 'special_gacha_status') {
-      const [state2,tickets]=await Promise.all([stateFor(user.id),gachaTicketBalances(user.id)]);
+      const [response,tickets]=await Promise.all([responseFor(user.id),gachaTicketBalances(user.id)]),state2=response.state;
       const categories=Object.fromEntries(GACHA_CATEGORIES.map(category=>[category,{rule:SPECIAL_GACHA_RULES[category],pool:specialGachaPool(category),rates:formalGachaDisplayRates('special',category)}]));
-      return new Response(JSON.stringify(await responseFor(user.id,{specialGacha:{masterVersion:FORMAL_GACHA_VERSION,categories,points:state2.specialGachaPoints??{},tickets}},state2)),{headers});
+      return new Response(JSON.stringify({...response,specialGacha:{masterVersion:FORMAL_GACHA_VERSION,categories,points:state2.specialGachaPoints??{},tickets}}),{headers});
     }
     if (action === 'formal_gacha_status') {
-      const [state2,tickets]=await Promise.all([stateFor(user.id),gachaTicketBalances(user.id)]),now=Date.now();
-      return new Response(JSON.stringify(await responseFor(user.id,{formalGacha:formalGachaCatalog(state2,tickets,now)},state2)),{headers});
+      const [response,tickets]=await Promise.all([responseFor(user.id),gachaTicketBalances(user.id)]),now=Date.now();
+      return new Response(JSON.stringify({...response,formalGacha:formalGachaCatalog(response.state,tickets,now)}),{headers});
     }
     if (action === 'observe_state_restore') {
       const observedVersion = payload.observedVersion;
@@ -393,8 +393,8 @@ Deno.serve(async (request: Request) => {
       } else {
         return new Response(JSON.stringify(await responseFor(user.id, prior.result?.receipt ?? {})), { headers });
       }
-      const response = await responseFor(user.id, prior.result?.receipt ?? {});
-      const replayNow=Date.now(),tickets=await gachaTicketBalances(user.id);
+      const [response,tickets]=await Promise.all([responseFor(user.id, prior.result?.receipt ?? {}),gachaTicketBalances(user.id)]);
+      const replayNow=Date.now();
       const responseWithCatalog={...response,replayed:true,formalGacha:formalGachaCatalog(response.state,tickets,replayNow)};
       if (action === "normal_gacha") {
         const pool = normalGachaCompatibilityPool();
@@ -417,8 +417,9 @@ Deno.serve(async (request: Request) => {
       const normalGachaResults=drawn.receipt.results.map(result=>({id:result.id,kind:result.category,rarity:result.rarity,name:result.name,image:result.image,outcome:result.acquisition==='instance'?'装備を個体で獲得':result.acquisition==='new'?'新規獲得':result.category==='character'?`固有魂 +${result.convertedAmount}`:`スキルLB素材 +${result.convertedAmount}`}));
       const receipt = { operation:action,...gachaMeasurementReceipt(action,state,drawn.state,drawn.receipt),formalGachaReceipt:drawn.receipt,formalGachaResults:drawn.receipt.results,normalGachaResults,normalGachaCost:drawn.receipt.cost,normalGachaMasterVersion:drawn.receipt.masterVersion,normalGachaJstDay:normalGachaDay(now) };
       const saved = await commitGacha(state, drawn.state, requestId, 0, action, normalizedGachaRequestPayload(action,payload), receipt);
-      const [tickets,settledNow]=[await gachaTicketBalances(user.id),Date.now()],day=normalGachaDay(settledNow);
-      return new Response(JSON.stringify(await responseFor(user.id, { ...(saved.receipt ?? receipt), replayed:Boolean(saved.replayed), normalGacha: { pool, day, available: saved.state?.dailyNormalGachaDate !== day }, formalGacha:formalGachaCatalog(saved.state,tickets,settledNow) }, saved.state)), { headers });
+      const settledNow=Date.now(),day=normalGachaDay(settledNow);
+      const [tickets,response]=await Promise.all([gachaTicketBalances(user.id),responseFor(user.id,{...(saved.receipt??receipt),replayed:Boolean(saved.replayed),normalGacha:{pool,day,available:saved.state?.dailyNormalGachaDate!==day}},saved.state)]);
+      return new Response(JSON.stringify({...response,formalGacha:formalGachaCatalog(saved.state,tickets,settledNow)}),{headers});
     }
     if(action==='special_gacha'||action==='special_gacha_exchange'){
       const ticketBalances=await gachaTicketBalances(user.id);
@@ -429,8 +430,9 @@ Deno.serve(async (request: Request) => {
       const receipt={operation:action,...gachaMeasurementReceipt(action,state,resolved.state,resolved.receipt),formalGachaReceipt:resolved.receipt,formalGachaResults:resolved.receipt.results,specialGachaResults:resolved.receipt.results,specialGachaCost:resolved.receipt.payment==='DIAMONDS'?resolved.receipt.cost:0,specialGachaPoints:resolved.state.specialGachaPoints??{},specialGachaMasterVersion:resolved.receipt.masterVersion,specialGachaCategory:payload.category,specialGachaItemId:payload.itemId??null,specialGachaPayment:payload.payment??null};
       const requestPayload=normalizedGachaRequestPayload(action,payload);
       const saved=await commitGacha(state,resolved.state,requestId,resolved.receipt.payment==='DIAMONDS'?resolved.receipt.cost:0,action,requestPayload,receipt);
-      const updatedTickets=await gachaTicketBalances(user.id);
-      return new Response(JSON.stringify(await responseFor(user.id,{...(saved.receipt??receipt),replayed:Boolean(saved.replayed),formalGacha:formalGachaCatalog(saved.state,updatedTickets,Date.now())},saved.state)),{headers});
+      const catalogNow=Date.now();
+      const [updatedTickets,response]=await Promise.all([gachaTicketBalances(user.id),responseFor(user.id,{...(saved.receipt??receipt),replayed:Boolean(saved.replayed)},saved.state)]);
+      return new Response(JSON.stringify({...response,formalGacha:formalGachaCatalog(saved.state,updatedTickets,catalogNow)}),{headers});
     }
     if (action === 'claim_mission') {
       const mission = getClaimableMission(state, await missionConfig(), String(payload.missionId));

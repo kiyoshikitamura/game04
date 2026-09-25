@@ -1,4 +1,5 @@
 import { getRoomRaidMaster } from '@/domain/redesign/raid';
+import { FunctionRegion } from '@supabase/supabase-js';
 import { supabase } from './supabase';
 import { beginRedesignRequestMetric } from './redesignPerformance';
 import type { RedesignState, RaidRoom } from '@/domain/redesign/types';
@@ -37,6 +38,7 @@ export async function redesignRequest(action: string, payload: Record<string, un
 async function invokeRedesignRequest(action: string, payload: Record<string, unknown>, requestId: string): Promise<RedesignResponse> {
   const { data, error } = await supabase.functions.invoke('game04-redesign-api', {
     body: { action, payload, requestId },
+    region: FunctionRegion.EuCentral1,
   });
   if (error) {
     let detail = '';

@@ -8,8 +8,12 @@
 10_live_runtime_additions.sql
 11_auth_and_fixture_generator.sql
 13_g3_player_initialization.sql
+14_g3_room_read_projection.sql
+15_g3_initial_read_runtime.sql
+16_g3_current_territory_master.sql
+17_g3_territory_validator_reconciliation.sql
 
-# STOP: compare pg_get_functiondef MD5 against manifest.json before continuing.
+# STOP: verify the isolated marker, current territory version and function contracts before continuing.
 
 ../../manual/game04_g3_gacha_atomic_commit.sql
 ../../manual/game04_g2_kpi_gameplay.sql

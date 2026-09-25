@@ -15,10 +15,20 @@ begin
   raise exception 'FORMAL_GACHA_MASTER_MISSING';end if;
  if (select count(*) from public.gacha_items_master where gacha_id like '%_NORMAL')<>292 then raise exception 'NORMAL_POOL_COUNT_MISMATCH';end if;
  if (select count(*) from public.gacha_items_master where gacha_id like '%_SPECIAL')<>233 then raise exception 'SPECIAL_POOL_COUNT_MISMATCH';end if;
+ if to_regclass('public.guilds') is null or to_regclass('public.guild_members') is null
+  or to_regclass('public.game04_territory_progress') is null then raise exception 'INITIAL_READ_TABLE_MISSING';end if;
+ if exists(select 1 from public.guilds) or exists(select 1 from public.guild_members) then raise exception 'ISOLATED_GUILD_DATA_MUST_BE_EMPTY';end if;
+ if (select data->>'version' from public.game04_redesign_master where key='territory') is distinct from 'GAME04_TERRITORY_HOST_PROVISIONAL_20260923'
+  or (select jsonb_array_length(data->'destinations') from public.game04_redesign_master where key='territory')<>5
+  or (select jsonb_array_length(data->'raidMasters') from public.game04_redesign_master where key='territory')<>6 then
+  raise exception 'CURRENT_TERRITORY_MASTER_MISSING';end if;
  if to_regprocedure('public.game04_commit_gacha(uuid,bigint,jsonb,bigint,integer,integer,uuid,text,jsonb,jsonb)') is null
   or to_regprocedure('public.game04_get_session_state(uuid,jsonb)') is null
   or to_regprocedure('public.initialize_current_player(text,text)') is null
   or to_regprocedure('public.get_current_onboarding_state()') is null
+  or to_regprocedure('public.game04_raid_rooms_for_user(uuid)') is null
+  or to_regprocedure('public.game04_raid_rooms_with_owners(uuid)') is null
+  or to_regprocedure('public.game04_territory_context(uuid)') is null
   or to_regprocedure('public.game04_kpi_gameplay_daily(timestamptz,timestamptz)') is null
   or to_regprocedure('public.kpi_is_subject_excluded(uuid,timestamptz)') is null then raise exception 'REQUIRED_RPC_MISSING';end if;
  if to_regprocedure('public.game04_prepare_isolated_g3_qa(uuid,uuid)') is not null
@@ -30,7 +40,7 @@ begin
 end $$;
 
 select key,status,md5(data::text) data_md5 from public.game04_redesign_master
-where key in ('isolated_environment','runtime','acquisition_conversion','formal_gacha') order by key;
+where key in ('isolated_environment','runtime','acquisition_conversion','formal_gacha','territory') order by key;
 select p.proname,pg_get_function_identity_arguments(p.oid) args,p.prosecdef,
  md5(pg_get_functiondef(p.oid)) installed_definition_md5
 from pg_proc p join pg_namespace n on n.oid=p.pronamespace

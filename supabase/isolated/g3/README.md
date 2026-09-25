@@ -12,6 +12,10 @@ For MCP-only setup, install `11_auth_and_fixture_generator.sql`. After the two A
 
 `13_g3_player_initialization.sql` supplies the exact frontend overloads `initialize_current_player(text)` and `(text,text)`, plus the onboarding projection required before SetupView. It creates only the current Auth UID's `public.users` row and QA classification. It deliberately returns `tutorial_step: COMPLETE` without creating tutorial progress, starter characters/equipment, invitation rewards or any gacha action; all of those remain G4/P02 scope.
 
+`14_g3_room_read_projection.sql` is the two-function read-only dependency used by the G3 hub bootstrap. It lists visible room JSON and joins owner display fields only; it installs no raid writer, reward logic or performance candidate.
+
+`15_g3_initial_read_runtime.sql` adds the only two fatal initial-read contracts missing from the limited snapshot: empty `guilds`/`guild_members` projections for the authenticated profile bootstrap, and the service-only territory context/progress contract used by Edge `responseFor`. `16_g3_current_territory_master.sql` immediately replaces the bootstrap territory row with the repository-generated `GAME04_TERRITORY_HOST_PROVISIONAL_20260923` five-castle master; `17_g3_territory_validator_reconciliation.sql` then restores the exact live validator checks. None of these files imports guild membership, territory progress, room or user rows.
+
 The formal pool seed remains the generated repository authority at `supabase/manual/game04_g3_formal_gacha_pool.sql`. Do not dump the live pool or copy live rows back into this directory.
 
 ## Apply sequence and fail-closed stop
@@ -40,7 +44,7 @@ psql "$ISOLATED_DATABASE_URL" -v ON_ERROR_STOP=1 \
 
 No password, token or database URL is committed. Disable all Cron jobs and do not configure Stripe secrets or webhook URLs.
 
-The approved destination was checked read-only before application: PostgreSQL 17.6, zero `public` base tables, zero `public` routines, zero Auth users and no `cron` schema. `90_verify.sql` rejects the wrong project marker, unclassified application users, missing QA periods, pool count drift, missing privileged RPCs, browser execution grants and any enabled `pg_cron` extension.
+The approved destination was checked read-only before application: PostgreSQL 17.6, zero `public` base tables, zero `public` routines, zero Auth users and no `cron` schema. `90_verify.sql` rejects the wrong project marker, unclassified application users, missing QA periods, pool count drift, missing initial-read contracts, a non-current territory master, browser execution grants and any enabled `pg_cron` extension.
 
 ## Remaining blockers before unattended empty-DB construction
 
