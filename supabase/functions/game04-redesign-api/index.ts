@@ -65384,8 +65384,9 @@ async function stateFor(userId, acquired) {
   }
   throw new ApiError("\u30C7\u30FC\u30BF\u66F4\u65B0\u4E2D\u3067\u3059\u3002\u3082\u3046\u4E00\u5EA6\u304A\u8A66\u3057\u304F\u3060\u3055\u3044\u3002", 409);
 }
-async function commit(before, after, requestId, battle = null, room = null, roomVersion = null, receipt = {}) {
-  return rpc("game04_commit_growth_state", {
+async function commit(before, after, requestId, battle = null, room = null, roomVersion = null, receipt = {}, withSaveContext = false) {
+  const rpcName = withSaveContext ? "game04_commit_deck_with_context" : "game04_commit_growth_state";
+  return rpc(rpcName, {
     p_user_id: before.userId,
     p_expected_version: before.version,
     p_state: captureMissionAssets(synchronizeHomeBackgroundUnlocks(after)),
@@ -65406,6 +65407,9 @@ async function roomFor(id) {
 }
 async function roomsFor(userId) {
   const rows = await rpc("game04_raid_rooms_with_owners", { p_user_id: userId });
+  return projectRooms(rows);
+}
+function projectRooms(rows) {
   return rows.map((row) => {
     const leader = CHARACTER_MASTERS.find((entry) => entry.id === row.ownerLeaderCharacterId);
     return {
@@ -65427,14 +65431,14 @@ async function rewardPolicy() {
 async function missionConfig() {
   return FORMAL_MISSION_CONFIG;
 }
-async function responseFor(userId, extra = {}, committedState) {
+async function responseFor(userId, extra = {}, committedState, context) {
   const statePromise = committedState ? Promise.resolve(committedState) : stateFor(userId);
   const [loadedState, rooms, socialEvents, pending, territory, missions] = await Promise.all([
     statePromise,
-    roomsFor(userId),
-    db("game04_social_events?select=*&order=created_at.desc&limit=30"),
-    db(`game04_battles?user_id=eq.${userId}&status=eq.started&select=id,kind,target_id&order=created_at.asc&limit=1`),
-    statePromise.then(() => territoryContext(userId)),
+    context ? Promise.resolve(projectRooms(context.rooms)) : roomsFor(userId),
+    context ? Promise.resolve(context.socialEvents) : db("game04_social_events?select=*&order=created_at.desc&limit=30"),
+    context ? Promise.resolve(context.pending) : db(`game04_battles?user_id=eq.${userId}&status=eq.started&select=id,kind,target_id&order=created_at.asc&limit=1`),
+    context ? Promise.resolve(context.territory) : statePromise.then(() => territoryContext(userId)),
     missionConfig()
   ]);
   let state = loadedState;
@@ -65702,8 +65706,9 @@ Deno.serve(async (request) => {
       if (action === "character_unlock") growthCounters.push("soul_unlock");
       if (growthCounters.length) after = recordMissionEvent(after, { id: `growth:${requestId}`, at: Date.now(), counters: growthCounters });
     }
-    const saved = await commit(state, after, requestId, null, room, version, measurementReceipt ?? gameplayMeasurementReceipt(action, state, after));
-    return new Response(JSON.stringify(await responseFor(user.id, {}, saved.state)), { headers });
+    const withSaveContext = action === "save_deck" && Deno.env.get("GAME04_SAVE_CONTEXT_RPC") === "true";
+    const saved = await commit(state, after, requestId, null, room, version, measurementReceipt ?? gameplayMeasurementReceipt(action, state, after), withSaveContext);
+    return new Response(JSON.stringify(await responseFor(user.id, {}, saved.state, withSaveContext ? saved.responseContext : void 0)), { headers });
   } catch (error) {
     const conflict = error instanceof ApiError && error.status === 409;
     const message = conflict ? "\u4ED6\u306E\u64CD\u4F5C\u3067\u66F4\u65B0\u3055\u308C\u307E\u3057\u305F\u3002\u518D\u8AAD\u307F\u8FBC\u307F\u3057\u3066\u304A\u8A66\u3057\u304F\u3060\u3055\u3044\u3002" : error instanceof Error ? error.message : "\u51E6\u7406\u306B\u5931\u6557\u3057\u307E\u3057\u305F\u3002";

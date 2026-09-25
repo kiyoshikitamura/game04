@@ -17,7 +17,7 @@ async function run(options={}){
  const identity=s=>s;const context={URL,Response,Request,console,crypto:require('node:crypto').webcrypto,structuredClone,TextEncoder,
   Deno:{env:{get:n=>n==='SUPABASE_URL'?'https://lrgyllgzcdcphlbmkknc.supabase.co':'fake-service-key'},serve:f=>handler=f},
   buildInitialState:()=>state,importLegacyAssets:identity,applyAcquisitionEvents:identity,captureMissionAssets:identity,synchronizeHomeBackgroundUnlocks:identity,reconcileRaidMissionProgress:identity,
-  FORMAL_GACHA_VERSION:'qa',GACHA_CATEGORIES:['character','skill','equipment'],SPECIAL_GACHA_RULES:{},NORMAL_GACHA_RULE:{},specialGachaPool:()=>[],normalGachaPool:()=>[],normalGachaCompatibilityPool:()=>[],formalGachaDisplayRates:()=>[],normalGachaDay:()=>'2026-09-25',
+  FORMAL_GACHA_VERSION:'qa',GACHA_CATEGORIES:['character','skill','equipment'],SPECIAL_GACHA_RULES:{},SPECIAL_GACHA_TICKET_IDS:{character:'SPECIAL_TICKET_CHARACTER',skill:'SPECIAL_TICKET_SKILL',equipment:'SPECIAL_TICKET_EQUIPMENT'},NORMAL_GACHA_RULE:{},specialGachaPool:()=>[],normalGachaPool:()=>[],normalGachaCompatibilityPool:()=>[],formalGachaDisplayRates:()=>[],normalGachaDay:()=>'2026-09-25',
   FORMAL_MISSION_CONFIG:{enabled:true,missions:[]},evaluateMissions:()=>[],projectTerritory:()=>({}),gameplayMeasurementReceipt:()=>({}),applyGrowthAction:s=>({...s,cash:s.cash+1}),
   fetch:async(url,init)=>{const p=new URL(url).pathname+new URL(url).search;calls.push(p);let result;
    if(p==='/auth/v1/user')return Response.json(options.authFail?{}:{id:'qa'},{status:options.authFail?401:200});
