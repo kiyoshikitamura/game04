@@ -56,8 +56,8 @@ async function uuidFor(value: string) {
 async function acquisitionInput(userId: string): Promise<{legacy: LegacyAssets; events: AcquisitionEvent[]; master: AcquisitionMaster}> {
   return rpc('game04_acquisition_input', { p_user_id: userId });
 }
-async function stateFor(userId: string): Promise<RedesignState> {
-  const input = await acquisitionInput(userId);
+async function stateFor(userId: string, acquired?: Awaited<ReturnType<typeof acquisitionInput>>): Promise<RedesignState> {
+  const input = acquired ?? await acquisitionInput(userId);
   for (let attempt = 0; attempt < 4; attempt++) {
     const state: RedesignState = await rpc('game04_get_session_state', { p_user_id: userId, p_initial: buildInitialState(userId, input.legacy) });
     const migrated = importLegacyAssets(state, input.legacy);
@@ -279,10 +279,17 @@ Deno.serve(async (request: Request) => {
     const auth = await fetch(`${url}/auth/v1/user`, { headers: { apikey: key, Authorization: authorization } });
     const user = await auth.json();
     if (!auth.ok || !user.id) throw new ApiError('ログインし直してください。', 401);
-    const [profile] = await db(`users?id=eq.${user.id}&select=id,username`);
-    if (!profile) throw new ApiError('先にプレイヤー名を登録してください。', 409);
     const { action, payload = {}, requestId } = await request.json();
     if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(requestId)) throw new ApiError('操作IDが不正です。');
+    // Only read-only preparation overlaps. Never run session initialization, login
+    // rewards or a commit before profile validation and the request replay check.
+    const standardMutation = !['normal_gacha_status','observe_state_restore','get_state','raid_refresh','quest_battle','raid_battle','territory_host','raid_unlock'].includes(action);
+    const [[profile], priorRows, acquired] = await Promise.all([
+      db(`users?id=eq.${user.id}&select=id,username`),
+      standardMutation ? db(`game04_requests?user_id=eq.${user.id}&request_id=eq.${requestId}&select=request_id,result`) : Promise.resolve([]),
+      standardMutation ? acquisitionInput(user.id).then(input => ({input}), error => ({error})) : Promise.resolve(undefined),
+    ]);
+    if (!profile) throw new ApiError('先にプレイヤー名を登録してください。', 409);
     if (action === "normal_gacha_status") {
       const state2 = await stateFor(user.id);
       const pool = await db("gacha_items_master?gacha_id=in.(CHAR_NORMAL,SKILL_NORMAL,EQUIP_NORMAL)&select=gacha_id,item_id,item_type,rarity&limit=1000");
@@ -313,7 +320,7 @@ Deno.serve(async (request: Request) => {
         : await rpc('game04_host_territory', {p_user_id: user.id, p_request_id: requestId, p_destination_id: destinationId});
       return new Response(JSON.stringify(await responseFor(user.id, {territoryRoomId: hosted.room.id})), {headers});
     }
-    const [prior] = await db(`game04_requests?user_id=eq.${user.id}&request_id=eq.${requestId}&select=request_id,result`);
+    const [prior] = priorRows;
     if (prior) {
       const response = await responseFor(user.id, prior.result?.receipt ?? {});
       if (action === "normal_gacha") {
@@ -323,8 +330,11 @@ Deno.serve(async (request: Request) => {
       }
       return new Response(JSON.stringify(response), { headers });
     }
+    // A replay above deliberately ignores this speculative read and reloads current
+    // state via the existing response path. Read failures cannot bypass mutation safety.
+    if (acquired && 'error' in acquired) throw acquired.error;
     let measurementReceipt: Record<string, unknown> | undefined;
-    const state = await stateFor(user.id); let after: RedesignState, room: RaidRoom | null = null, version: number | null = null;
+    const state = await stateFor(user.id, acquired?.input); let after: RedesignState, room: RaidRoom | null = null, version: number | null = null;
     if (action === "normal_gacha") {
       const pool = await db("gacha_items_master?gacha_id=in.(CHAR_NORMAL,SKILL_NORMAL,EQUIP_NORMAL)&select=gacha_id,item_id,item_type,rarity&limit=1000");
       const drawn = applyNormalGacha(state, payload, pool, requestId, Date.now(), await rewardPolicy(), () => crypto.getRandomValues(new Uint32Array(1))[0] / 4294967296);

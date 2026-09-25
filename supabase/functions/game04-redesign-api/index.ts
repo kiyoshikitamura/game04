@@ -65369,8 +65369,8 @@ async function uuidFor(value) {
 async function acquisitionInput(userId) {
   return rpc("game04_acquisition_input", { p_user_id: userId });
 }
-async function stateFor(userId) {
-  const input = await acquisitionInput(userId);
+async function stateFor(userId, acquired) {
+  const input = acquired ?? await acquisitionInput(userId);
   for (let attempt = 0; attempt < 4; attempt++) {
     const state = await rpc("game04_get_session_state", { p_user_id: userId, p_initial: buildInitialState(userId, input.legacy) });
     const migrated = importLegacyAssets(state, input.legacy);
@@ -65613,10 +65613,15 @@ Deno.serve(async (request) => {
     const auth = await fetch(`${url}/auth/v1/user`, { headers: { apikey: key, Authorization: authorization } });
     const user = await auth.json();
     if (!auth.ok || !user.id) throw new ApiError("\u30ED\u30B0\u30A4\u30F3\u3057\u76F4\u3057\u3066\u304F\u3060\u3055\u3044\u3002", 401);
-    const [profile] = await db(`users?id=eq.${user.id}&select=id,username`);
-    if (!profile) throw new ApiError("\u5148\u306B\u30D7\u30EC\u30A4\u30E4\u30FC\u540D\u3092\u767B\u9332\u3057\u3066\u304F\u3060\u3055\u3044\u3002", 409);
     const { action, payload = {}, requestId } = await request.json();
     if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(requestId)) throw new ApiError("\u64CD\u4F5CID\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+    const standardMutation = !["normal_gacha_status", "observe_state_restore", "get_state", "raid_refresh", "quest_battle", "raid_battle", "territory_host", "raid_unlock"].includes(action);
+    const [[profile], priorRows, acquired] = await Promise.all([
+      db(`users?id=eq.${user.id}&select=id,username`),
+      standardMutation ? db(`game04_requests?user_id=eq.${user.id}&request_id=eq.${requestId}&select=request_id,result`) : Promise.resolve([]),
+      standardMutation ? acquisitionInput(user.id).then((input) => ({ input }), (error) => ({ error })) : Promise.resolve(void 0)
+    ]);
+    if (!profile) throw new ApiError("\u5148\u306B\u30D7\u30EC\u30A4\u30E4\u30FC\u540D\u3092\u767B\u9332\u3057\u3066\u304F\u3060\u3055\u3044\u3002", 409);
     if (action === "normal_gacha_status") {
       const state2 = await stateFor(user.id);
       const pool = await db("gacha_items_master?gacha_id=in.(CHAR_NORMAL,SKILL_NORMAL,EQUIP_NORMAL)&select=gacha_id,item_id,item_type,rarity&limit=1000");
@@ -65645,7 +65650,7 @@ Deno.serve(async (request) => {
       const hosted = formalMaster?.masterVersion ? await rpc("game04_host_formal_territory", { p_user_id: user.id, p_request_id: requestId, p_destination_id: destinationId, p_raid_master: createFormalInvasionMaster(formalMaster.id, () => crypto.getRandomValues(new Uint32Array(1))[0] / 4294967296) }) : await rpc("game04_host_territory", { p_user_id: user.id, p_request_id: requestId, p_destination_id: destinationId });
       return new Response(JSON.stringify(await responseFor(user.id, { territoryRoomId: hosted.room.id })), { headers });
     }
-    const [prior] = await db(`game04_requests?user_id=eq.${user.id}&request_id=eq.${requestId}&select=request_id,result`);
+    const [prior] = priorRows;
     if (prior) {
       const response = await responseFor(user.id, prior.result?.receipt ?? {});
       if (action === "normal_gacha") {
@@ -65655,8 +65660,9 @@ Deno.serve(async (request) => {
       }
       return new Response(JSON.stringify(response), { headers });
     }
+    if (acquired && "error" in acquired) throw acquired.error;
     let measurementReceipt;
-    const state = await stateFor(user.id);
+    const state = await stateFor(user.id, acquired?.input);
     let after, room = null, version = null;
     if (action === "normal_gacha") {
       const pool = await db("gacha_items_master?gacha_id=in.(CHAR_NORMAL,SKILL_NORMAL,EQUIP_NORMAL)&select=gacha_id,item_id,item_type,rarity&limit=1000");

@@ -209,3 +209,6 @@
     right: max(2px, env(safe-area-inset-right, 0px));
   }
 }
+
+.legal-page a:active { transform: scale(0.98); }
+.legal-page :focus-visible { outline: 2px solid #e3c692; outline-offset: 3px; }

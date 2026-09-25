@@ -57,7 +57,7 @@ export default function TitleView() {
     handleFirstUserInteraction();
     playCyberSe("click");
     if (session) await resumeCurrentSession();
-    else setShowTitleView(false);
+    else window.location.assign("/auth/game04");
   };
 
   const beginNewGame = async (event: React.MouseEvent) => {
