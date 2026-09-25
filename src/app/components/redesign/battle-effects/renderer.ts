@@ -46,7 +46,7 @@ export function mountEffect(root: HTMLDivElement, family: BattleEffectFamily, si
       if(stun) element(fx,'flash');
       sprites.push(elapsed=>{
         const time=elapsed*config.speed;
-        const frame=Math.min(stun?11:7,Math.floor(time/(stun?90:650/8)));
+        const frame=Math.max(0,Math.min(stun?11:7,Math.floor(time/(stun?90:650/8))));
         sprite.style.backgroundPosition=`${(frame%4)*100/3}% ${Math.floor(frame/4)*(stun?50:100)}%`;
         if(!stun){const [dx,dy]=projectileOffsets[frame];sprite.style.setProperty('--dx',dx/443.5*100+'%');sprite.style.setProperty('--dy',dy/443.5*100+'%');}
       });
@@ -55,9 +55,12 @@ export function mountEffect(root: HTMLDivElement, family: BattleEffectFamily, si
   if(family==='slash_all') {
     const layer=element(root,'effect-layer');
     const types=['a','b','a','c','a','b','c']; const angles=[-3,2,4,-8,7,-4,9];
+    const widths=[41,49,41,41,49,41,49], yOffsets=[0,0,0,-1,1,-1,-1];
     for(let i=0;i<GROUP_SLASH_COUNT;i++) {
       const wrap=element(layer,'slash '+types[i],{angle:angles[i]+'deg'}); const sprite=element(wrap,'sprite');
-      placements.push(points=>{const ordered=[...points].sort((a,b)=>a.x-b.x);const p=ordered[i===6?Math.floor(ordered.length/2):i%ordered.length];position(wrap,p,side==='ally'?27:p.w===66?49:41);});
+      // 14's source has only an enemy sequence. Retain its individual base
+      // widths/angles on both sides, and remap positions to recorded targets.
+      placements.push(points=>{const ordered=[...points].sort((a,b)=>a.x-b.x);const p=ordered[i===6?Math.floor(ordered.length/2):i%ordered.length];position(wrap,{...p,y:p.y+yOffsets[i]},widths[i]);});
       sprites.push(elapsed=>{const t=elapsed-i*110;wrap.style.visibility=t>=0&&t<300?'visible':'hidden';const frame=Math.max(0,Math.min(5,Math.floor(t/50)));sprite.style.backgroundPosition=`${frame%3*50}% ${Math.floor(frame/3)*100}%`;});
     }
   }
@@ -79,6 +82,7 @@ export function mountEffect(root: HTMLDivElement, family: BattleEffectFamily, si
     placements.push(points=>{const c=center(points);field.style.setProperty('--field-y',c.y+'%');field.style.setProperty('--field-width',(side==='ally'?105:118)+'%');cross.style.setProperty('--cross-top',(c.y-(side==='ally'?28:29))+'%');});
     targets.forEach((_,i)=>{const unit=element(fx,'unit',{delay:i*GROUP_HEAL_STAGGER+'ms'});for(const [cls,file] of [['aura','spd-back-aura'],['rise','spd-thin-rise'],['sparks','spd-sparks']])picture(unit,`/battle-effects/heal_all/${file}.png`,cls);placements.push(points=>{position(unit,points[i]);unit.style.setProperty('--size','1');});});
   }
+  let anchorsReady=false;
   function layout() {
     const stage=root.parentElement!; const bounds=root.getBoundingClientRect();
     const nodes=Array.from(stage.querySelectorAll<HTMLElement>('[data-unit-id]'));
@@ -88,13 +92,14 @@ export function mountEffect(root: HTMLDivElement, family: BattleEffectFamily, si
       const rect=anchor?.getBoundingClientRect();
       return rect&&bounds.width&&bounds.height?{x:(rect.left+rect.width/2-bounds.left)/bounds.width*100,y:(rect.top+rect.height/2-bounds.top)/bounds.height*100,w:side==='ally'?27:targets.length===1||node?.dataset.order==='0'?66:47}:null;
     });
-    if(points.some(p=>!p)){root.style.visibility='hidden';return;}
+    anchorsReady=points.every(p=>p!==null);
+    if(!anchorsReady){root.style.visibility='hidden';return;}
     placements.forEach(place=>place(points as Point[]));
   }
   layout();
   const observer=new ResizeObserver(layout); observer.observe(root.parentElement!);
   const animations=root.getAnimations({subtree:true}); animations.forEach(a=>{a.pause();a.currentTime=0;});
-  function seek(elapsed:number){root.style.visibility=elapsed>=duration?'hidden':'visible';animations.forEach(a=>a.currentTime=elapsed);sprites.forEach(tick=>tick(elapsed));}
+  function seek(elapsed:number){root.style.visibility=!anchorsReady||elapsed>=duration?'hidden':'visible';animations.forEach(a=>a.currentTime=elapsed);sprites.forEach(tick=>tick(elapsed));}
   seek(0);
   return { duration, seek, dispose(){observer.disconnect();animations.forEach(a=>a.cancel());root.replaceChildren();} };
 }

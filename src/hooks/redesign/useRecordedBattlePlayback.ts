@@ -9,11 +9,12 @@ interface Options {
   initialPaused?: boolean;
   vipActive: boolean;
   blocked?: boolean;
+  minimumFrameDuration?: (result: BattleResult, index: number) => number;
 }
 const clampFrame = (index: number, result: BattleResult) => Math.max(0, Math.min(Number.isFinite(index) ? Math.floor(index) : 0, result.frames.length - 1));
 
 /** A single cancellable clock controls all recorded state, including HP, SP and cut-ins. */
-export function useRecordedBattlePlayback({ result, initialFrame = 0, initialPaused = false, vipActive, blocked = false }: Options) {
+export function useRecordedBattlePlayback({ result, initialFrame = 0, initialPaused = false, vipActive, blocked = false, minimumFrameDuration }: Options) {
   const [index, setIndex] = useState(() => clampFrame(initialFrame, result));
   const [speed, setSpeed] = useState(1);
   const [paused, setPaused] = useState(initialPaused);
@@ -32,7 +33,7 @@ export function useRecordedBattlePlayback({ result, initialFrame = 0, initialPau
   useEffect(() => { if (!vipActive && speed > 2) setSpeed(1); }, [vipActive, speed]);
   useEffect(() => {
     if (!clock.current || clock.current.result !== result || clock.current.index !== index) {
-      clock.current = { result, index, remaining: recordedBattleFrameDuration(frame) };
+      clock.current = { result, index, remaining: Math.max(recordedBattleFrameDuration(frame), minimumFrameDuration?.(result,index) ?? 0) };
     }
     if (playbackPaused) return;
     const activeClock = clock.current;
@@ -47,7 +48,7 @@ export function useRecordedBattlePlayback({ result, initialFrame = 0, initialPau
       clearTimeout(timer);
       activeClock.remaining = Math.max(0, activeClock.remaining - (performance.now() - startedAt) * speed);
     };
-  }, [result, index, frame, speed, playbackPaused]);
+  }, [result, index, frame, speed, playbackPaused, minimumFrameDuration]);
 
   const cycleSpeed = useCallback(() => setSpeed(value => value >= (vipActive ? 3 : 2) ? 1 : value + 1), [vipActive]);
   const skip = useCallback(() => {

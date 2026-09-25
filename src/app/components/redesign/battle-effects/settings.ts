@@ -13,7 +13,7 @@ export const EFFECT_SETTINGS: Record<BattleEffectFamily, EffectSettings> = {
   heal: { size: [60,40], speed: 1, duration: 1000, variables: {'mist-opacity':.8} },
   atk_up: { size: [60,40], speed: 1, duration: 1000, variables: {'mist-opacity':.8} },
   poison: { size: [60,50], speed: 1, duration: 1300, variables: {'mist-opacity':.3,'skull-opacity':.75,'drops-opacity':.8} },
-  projectile: { size: [65,45], speed: 1.6, duration: 731.25, variables: {alpha:1} },
+  projectile: { size: [65,45], speed: 1.6, duration: 650, variables: {alpha:1} },
   impact: { size: [55,35], speed: 1.1, duration: 750, variables: {'mist-opacity':.3,'burst-opacity':.55,'particles-opacity':.9} },
   def_up: { size: [60,40], speed: 1, duration: 1000, variables: {'mist-opacity':.8} },
   spd_up: { size: [60,40], speed: 1, duration: 1000, variables: {'mist-opacity':.8} },
@@ -32,6 +32,8 @@ export const GROUP_IMPACT_INTERVAL = 120;
 export const GROUP_HEAL_STAGGER = 70;
 export function effectDuration(family: BattleEffectFamily, targetCount = 1) {
   const config = EFFECT_SETTINGS[family];
+  // The projectile mock holds frame 8 for at least 120ms after seven frame steps.
+  if (family === 'projectile') return 650 / config.speed * 7 / 8 + Math.max(120,650 / config.speed / 4);
   return config.duration / config.speed + (family === 'heal_all' ? Math.max(0,targetCount-1)*GROUP_HEAL_STAGGER : 0);
 }
 export function displaySize(family: BattleEffectFamily, side: TargetSide) {

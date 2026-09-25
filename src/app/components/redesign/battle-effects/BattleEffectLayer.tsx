@@ -25,7 +25,9 @@ function Effect({family,side,targets,paused,speed}:{family:BattleEffectFamily;si
   useLayoutEffect(()=>{
     if(paused)return;
     let request=0, previous=performance.now();
-    const tick=(now:number)=>{const instance=controller.current;if(!instance)return;elapsed.current+=(now-previous)*speed;previous=now;instance.seek(elapsed.current);if(elapsed.current<instance.duration)request=requestAnimationFrame(tick);};
+    // The first RAF timestamp can precede layout-effect setup within the same
+    // browser frame. Never move the effect clock backwards (sprite index -1).
+    const tick=(now:number)=>{const instance=controller.current;if(!instance)return;elapsed.current+=Math.max(0,now-previous)*speed;previous=now;instance.seek(elapsed.current);if(elapsed.current<instance.duration)request=requestAnimationFrame(tick);};
     request=requestAnimationFrame(tick);
     return ()=>{cancelAnimationFrame(request);};
   },[paused,speed,family,side,targetKey]);
