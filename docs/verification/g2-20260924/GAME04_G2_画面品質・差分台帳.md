@@ -2,7 +2,27 @@
 
 # GAME04 G2 画面品質・差分台帳
 
-## R3最終追補（継続作業の最新状況・下の途中記録より優先）
+## R4 現在欄（2026-09-25）
+
+現在の残件正本は[統合受入結果](GAME04_G2_統合受入結果.md)のR/D/H一覧。下段のR3以前の未確認・再配信待ちは当時の履歴であり、ここへ戻さない。表示の変更は個別実機指摘と同原因回帰のみ。
+
+- コード `0e7f37c90ad7023dc165fe7cb209c6913e0f7d09`、[不変Preview](https://game04-nh6a0tnip-kiyoshi-kitamura.vercel.app)、Deployment `dpl_HzrGrsYdssKDfLcq4VNN21TbghjY`。
+- 開発API ACTIVE v24 / verify_jwt=true / hash `d3a4952f50fb3bac2ad037c7096cb3dd178db43aa47d570e3b5e5944a37d2eba`。
+- DB限定差分：`20260925003813 game04_g2_kpi_observations`、`20260925003959 game04_g2_kpi_detail_qualified_columns`。GAME04 devのみ、旧migration一括再適用なし。
+
+|追跡ID|変更箇所・原因|修正とR4再確認|残る範囲|
+|---|---|---|---|
+|R01/R04/R08・Q01|装備任務履歴のJSONキー順差で無変更get_stateも保存/版増加|履歴順序/最大値を保持。独立試験PASS、v24実read/同ID再送で版安定|当該不具合クローズ。性能全体合格には拡張しない|
+|R01/R02/R03/R04/R13|以前の未確認経路|おまかせ所持保持、SKD071能力低下/dot解除、新共闘/侵攻snapshot・資格・受取、魂交換成功/失敗/再送、Lv回復の実API/DB検証が成立|ブラウザボタン/演出の実機合格とは分離。既存表示検証は保持|
+|R05/R06・Q01|通信/画像失敗後の復帰|通信503/切断/12秒timeoutは本体read effect＋実HTTPで再試行成功。started fixtureから実API pending再開/同ID再送でsettled1/pending0、receipt開始/確定各1|pending保存復帰は解消。実Previewの通信/画像障害表示・復帰操作、自然切断は未確認|
+|R08・Q01|操作可能時刻とAPI/画像待ちの混同|QA専用CTA観測を追加。独立reviewでクリック前誤記録を是正。本陣/武将5往復、保存結果/出陣前詳細各3回の同条件実測原本を保存|cold保証・実戦闘生成/画像preloadを含む開始経路・同条件前後改善立証・D04基準。FCP/全画面TTIとは区別|
+|R09・U10|grant/復帰ACK/流入結合が未接続|状態transactionの新規grant receipt、初回ACK、集計RPC/画面へ接続。実raid1grant/6報酬数量一致・QAexcluded、本体ACK1件excluded、一般RPC実RESTはanon401/認証QA403拒否|実管理者HTTP503（認証設定なし）。設定後の認証HTTP/権限/画面受入、旧included30userの根拠確認（今回battle集合のunmapped0、保存QA ID一致0）|
+|R09・U10|ACK共通parser不整合・同ID競合・SQL列曖昧参照|専用helper、保存version再確認、RPC alias明示へ是正。独立コード/局所試験＋親SQL再実行|上記管理者HTTPに集約|
+|H01〜H03/H07|ドメイン購入待ち|`sengoku-hime-ennbu.com`取得済み。法務へ文字表示、URL/emailは未稼働を推定せず保持|DNS/TLS・メール・外部認証/決済・P候補統合受入は別工程|
+
+根拠：[R01/R04/R13](../g2-20260925/r4/r01-r04-r13.md)、[R02/R03](../g2-20260925/r4/r02-r03.md)、[R05/R06](../g2-20260925/r4/r05-r06.md)、[R08測定](../g2-20260925/r4/r08-measurement-results.md)、[R09](../g2-20260925/r4/r09.md)、[独立確認](../g2-20260925/r4/r10-independent.md)。G2完了判定・本番変更・mainマージは行わない。
+
+## R3最終追補（履歴。当時の途中記録に対する優先欄）
 
 G2は引き続き未完・受入不可。既存49177788/04d2dc97を保持して追加修正・本体検証・候補作成を進めた。主な成果は `../g2-20260925/live-browser-r3.md`、独立検証は `executable-residual.md`、一括判断は `G2_一括判断事項.md` を参照。
 
