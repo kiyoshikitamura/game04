@@ -1,0 +1,2683 @@
+{
+  "version": "approved-context-names-20260925",
+  "approvalRef": "User approval 2026-09-25 20:24 JST: はい、問題ないです。採用します。",
+  "quests": {
+    "mikawa-1": "初陣の野",
+    "mikawa-2": "街道の関所",
+    "mikawa-3": "夕映えの陣",
+    "owari-1": "朝霧の街道",
+    "owari-2": "里境の狼煙",
+    "owari-3": "月下の砦",
+    "owari-4": "尾張の旗風",
+    "mino-1": "川霧の渡し",
+    "mino-2": "稲穂の小径",
+    "mino-3": "山あいの影",
+    "mino-4": "峠に立つ旗",
+    "mino-5": "美濃の夕嵐",
+    "omi-1": "湖畔の番所",
+    "omi-2": "湖風の往来",
+    "omi-3": "宵の水辺",
+    "omi-4": "山門のかがり火",
+    "omi-5": "近江の夜明け",
+    "kai-1": "赤き旗の道",
+    "kai-2": "山裾の陣屋",
+    "kai-3": "谷間の渡り",
+    "kai-4": "峰をゆく風",
+    "kai-5": "夕立の山路",
+    "kai-6": "甲斐の遠雷",
+    "echigo-1": "霧深き境",
+    "echigo-2": "雪解けの道",
+    "echigo-3": "杉林の分かれ道",
+    "echigo-4": "峠の残雪",
+    "echigo-5": "暮色の峡谷",
+    "echigo-6": "越後の白嵐",
+    "kyoto-1": "洛外の騒ぎ",
+    "kyoto-2": "御門のかがり火",
+    "kyoto-3": "石垣に落ちる影",
+    "kyoto-4": "花散る辻",
+    "kyoto-5": "夜半の鐘",
+    "kyoto-6": "灯の消えた通り",
+    "kyoto-7": "暁を待つ都",
+    "kyoto-8": "京を渡る風",
+    "izumo-1": "海風の街道",
+    "izumo-2": "松林の狼煙",
+    "izumo-3": "入江に立つ旗",
+    "izumo-4": "暮れゆく古道",
+    "izumo-5": "社のかがり火",
+    "izumo-6": "雨上がりの坂",
+    "izumo-7": "雲間の月",
+    "izumo-8": "出雲の朝凪",
+    "satsuma-1": "南道の関",
+    "satsuma-2": "入り江の砲声",
+    "satsuma-3": "宵闇の陣屋",
+    "satsuma-4": "鉄火の街道",
+    "satsuma-5": "山路の密書",
+    "satsuma-6": "野に立つ傾奇旗",
+    "satsuma-7": "浜辺の旗影",
+    "satsuma-8": "紅に染まる野",
+    "satsuma-9": "霧の軍議",
+    "satsuma-10": "薩摩の大かがり",
+    "sekigahara-1": "霧中の布陣",
+    "sekigahara-2": "野を裂く狼煙",
+    "sekigahara-3": "幾重の旗影",
+    "sekigahara-4": "夜襲の足音",
+    "sekigahara-5": "暁の先陣",
+    "sekigahara-6": "決戦前夜",
+    "sekigahara-7": "紅の誓い",
+    "sekigahara-8": "葵の本陣",
+    "sekigahara-9": "黄金の本陣",
+    "sekigahara-10": "天下の行方"
+  },
+  "questEnemies": {
+    "1-1/W1/1": {
+      "canonicalName": "女侍",
+      "name": "巡回の女侍",
+      "role": "大将",
+      "characterId": "char_long_01"
+    },
+    "1-1/W1/2": {
+      "canonicalName": "漁師",
+      "name": "渡し守",
+      "role": "本陣の一隊",
+      "characterId": "char_naoto_01"
+    },
+    "1-2/W1/1": {
+      "canonicalName": "僧兵",
+      "name": "山門の僧兵",
+      "role": "大将",
+      "characterId": "char_kageyama_01"
+    },
+    "1-2/W1/2": {
+      "canonicalName": "弓兵",
+      "name": "見張りの弓兵",
+      "role": "本陣の一隊",
+      "characterId": "char_masato_01"
+    },
+    "1-2/W1/3": {
+      "canonicalName": "町娘",
+      "name": "里の見張り役",
+      "role": "本陣の一隊",
+      "characterId": "char_shun_01"
+    },
+    "1-3/W1/1": {
+      "canonicalName": "女侍",
+      "name": "巡回の女侍",
+      "role": "先陣",
+      "characterId": "char_long_01"
+    },
+    "1-3/W1/2": {
+      "canonicalName": "弓兵",
+      "name": "見張りの弓兵",
+      "role": "先陣",
+      "characterId": "char_masato_01"
+    },
+    "1-3/W2/1": {
+      "canonicalName": "鉄砲兵",
+      "name": "鉄砲足軽",
+      "role": "本陣の一隊",
+      "characterId": "char_tomoya_01"
+    },
+    "1-3/W2/2": {
+      "canonicalName": "直江兼続",
+      "name": "直江兼続",
+      "role": "大将",
+      "characterId": "char_rui_01"
+    },
+    "1-3/W2/3": {
+      "canonicalName": "町娘",
+      "name": "里の見張り役",
+      "role": "本陣の一隊",
+      "characterId": "char_shun_01"
+    },
+    "2-1/W1/1": {
+      "canonicalName": "女侍",
+      "name": "巡回の女侍",
+      "role": "先陣",
+      "characterId": "char_long_01"
+    },
+    "2-1/W1/2": {
+      "canonicalName": "鉄砲兵",
+      "name": "鉄砲足軽",
+      "role": "先陣",
+      "characterId": "char_tomoya_01"
+    },
+    "2-1/W2/1": {
+      "canonicalName": "鉄砲兵",
+      "name": "鉄砲足軽",
+      "role": "本陣の一隊",
+      "characterId": "char_tomoya_01"
+    },
+    "2-1/W2/2": {
+      "canonicalName": "加藤清正",
+      "name": "加藤清正",
+      "role": "大将",
+      "characterId": "char_leon_01"
+    },
+    "2-1/W2/3": {
+      "canonicalName": "伝令",
+      "name": "陣中の伝令",
+      "role": "本陣の一隊",
+      "characterId": "char_gou_01"
+    },
+    "2-2/W1/1": {
+      "canonicalName": "漁師",
+      "name": "渡し守",
+      "role": "先陣",
+      "characterId": "char_naoto_01"
+    },
+    "2-2/W1/2": {
+      "canonicalName": "弓兵",
+      "name": "見張りの弓兵",
+      "role": "先陣",
+      "characterId": "char_masato_01"
+    },
+    "2-2/W1/3": {
+      "canonicalName": "火薬師",
+      "name": "火薬運び",
+      "role": "先陣",
+      "characterId": "char_sawat_01"
+    },
+    "2-2/W2/1": {
+      "canonicalName": "くノ一",
+      "name": "忍びの斥候",
+      "role": "大将",
+      "characterId": "char_alice_01"
+    },
+    "2-2/W2/2": {
+      "canonicalName": "火薬師",
+      "name": "火薬運び",
+      "role": "本陣の一隊",
+      "characterId": "char_sawat_01"
+    },
+    "2-2/W2/3": {
+      "canonicalName": "雑賀孫市",
+      "name": "雑賀孫市",
+      "role": "本陣の一隊",
+      "characterId": "char_takuro_01"
+    },
+    "2-3/W1/1": {
+      "canonicalName": "僧兵",
+      "name": "山門の僧兵",
+      "role": "先陣",
+      "characterId": "char_kageyama_01"
+    },
+    "2-3/W1/2": {
+      "canonicalName": "茶屋の娘",
+      "name": "茶屋の情報屋",
+      "role": "先陣",
+      "characterId": "char_souta_01"
+    },
+    "2-3/W2/1": {
+      "canonicalName": "鍛冶師",
+      "name": "陣付きの鍛冶師",
+      "role": "大将",
+      "characterId": "char_yoshihiko_01"
+    },
+    "2-3/W2/2": {
+      "canonicalName": "服部半蔵",
+      "name": "服部半蔵",
+      "role": "本陣の一隊",
+      "characterId": "char_maya_01"
+    },
+    "2-3/W2/3": {
+      "canonicalName": "お市の方",
+      "name": "お市の方",
+      "role": "本陣の一隊",
+      "characterId": "char_aoi_01"
+    },
+    "2-4/W1/1": {
+      "canonicalName": "女侍",
+      "name": "巡回の女侍",
+      "role": "先陣",
+      "characterId": "char_long_01"
+    },
+    "2-4/W1/2": {
+      "canonicalName": "伝令",
+      "name": "陣中の伝令",
+      "role": "先陣",
+      "characterId": "char_gou_01"
+    },
+    "2-4/W2/1": {
+      "canonicalName": "山伏",
+      "name": "山路の修験者",
+      "role": "道中の一隊",
+      "characterId": "char_kenji_01"
+    },
+    "2-4/W2/2": {
+      "canonicalName": "茶屋の娘",
+      "name": "茶屋の情報屋",
+      "role": "道中の一隊",
+      "characterId": "char_souta_01"
+    },
+    "2-4/W3/1": {
+      "canonicalName": "徳川家康",
+      "name": "徳川家康",
+      "role": "大将",
+      "characterId": "char_karen_01"
+    },
+    "2-4/W3/2": {
+      "canonicalName": "お市の方",
+      "name": "お市の方",
+      "role": "本陣の一隊",
+      "characterId": "char_aoi_01"
+    },
+    "3-1/W1/1": {
+      "canonicalName": "鍛冶師",
+      "name": "陣付きの鍛冶師",
+      "role": "先陣",
+      "characterId": "char_yoshihiko_01"
+    },
+    "3-1/W1/2": {
+      "canonicalName": "僧兵",
+      "name": "山門の僧兵",
+      "role": "先陣",
+      "characterId": "char_kageyama_01"
+    },
+    "3-1/W2/1": {
+      "canonicalName": "直江兼続",
+      "name": "直江兼続",
+      "role": "大将",
+      "characterId": "char_rui_01"
+    },
+    "3-2/W1/1": {
+      "canonicalName": "女侍",
+      "name": "巡回の女侍",
+      "role": "先陣",
+      "characterId": "char_long_01"
+    },
+    "3-2/W1/2": {
+      "canonicalName": "行商人",
+      "name": "道中の行商人",
+      "role": "先陣",
+      "characterId": "char_tatsuya_01"
+    },
+    "3-2/W2/1": {
+      "canonicalName": "加藤清正",
+      "name": "加藤清正",
+      "role": "大将",
+      "characterId": "char_leon_01"
+    },
+    "3-2/W2/2": {
+      "canonicalName": "行商人",
+      "name": "道中の行商人",
+      "role": "本陣の一隊",
+      "characterId": "char_tatsuya_01"
+    },
+    "3-3/W1/1": {
+      "canonicalName": "山伏",
+      "name": "山路の修験者",
+      "role": "先陣",
+      "characterId": "char_kenji_01"
+    },
+    "3-3/W1/2": {
+      "canonicalName": "くノ一",
+      "name": "忍びの斥候",
+      "role": "先陣",
+      "characterId": "char_alice_01"
+    },
+    "3-3/W2/1": {
+      "canonicalName": "服部半蔵",
+      "name": "服部半蔵",
+      "role": "大将",
+      "characterId": "char_maya_01"
+    },
+    "3-4/W1/1": {
+      "canonicalName": "僧兵",
+      "name": "山門の僧兵",
+      "role": "先陣",
+      "characterId": "char_kageyama_01"
+    },
+    "3-4/W1/2": {
+      "canonicalName": "弓兵",
+      "name": "見張りの弓兵",
+      "role": "先陣",
+      "characterId": "char_masato_01"
+    },
+    "3-4/W2/1": {
+      "canonicalName": "上杉謙信",
+      "name": "上杉謙信",
+      "role": "大将",
+      "characterId": "char_koharu_01"
+    },
+    "3-5/W1/1": {
+      "canonicalName": "鍛冶師",
+      "name": "陣付きの鍛冶師",
+      "role": "先陣",
+      "characterId": "char_yoshihiko_01"
+    },
+    "3-5/W1/2": {
+      "canonicalName": "火薬師",
+      "name": "火薬運び",
+      "role": "先陣",
+      "characterId": "char_sawat_01"
+    },
+    "3-5/W2/1": {
+      "canonicalName": "戦巫女",
+      "name": "祈祷の巫女",
+      "role": "道中の一隊",
+      "characterId": "char_martina_01"
+    },
+    "3-5/W2/2": {
+      "canonicalName": "陰陽師",
+      "name": "旅の陰陽師",
+      "role": "道中の一隊",
+      "characterId": "char_takeshi_01"
+    },
+    "3-5/W3/1": {
+      "canonicalName": "織田信長",
+      "name": "織田信長",
+      "role": "大将",
+      "characterId": "char_reiji_01"
+    },
+    "3-5/W3/2": {
+      "canonicalName": "お市の方",
+      "name": "お市の方",
+      "role": "本陣の一隊",
+      "characterId": "char_aoi_01"
+    },
+    "4-1/1/1": {
+      "canonicalName": "前田利家",
+      "name": "前田利家",
+      "role": "先陣",
+      "characterId": "char_jihoon_01"
+    },
+    "4-1/1/2": {
+      "canonicalName": "弓兵",
+      "name": "見張りの弓兵",
+      "role": "先陣",
+      "characterId": "char_masato_01"
+    },
+    "4-1/2/1": {
+      "canonicalName": "井伊直政",
+      "name": "井伊直政",
+      "role": "道中の一隊",
+      "characterId": "char_daimon_01"
+    },
+    "4-1/2/2": {
+      "canonicalName": "鉄砲兵",
+      "name": "鉄砲足軽",
+      "role": "道中の一隊",
+      "characterId": "char_tomoya_01"
+    },
+    "4-1/3/1": {
+      "canonicalName": "柴田勝家",
+      "name": "柴田勝家",
+      "role": "大将",
+      "characterId": "char_noa_01"
+    },
+    "4-2/1/1": {
+      "canonicalName": "前田利家",
+      "name": "前田利家",
+      "role": "先陣",
+      "characterId": "char_jihoon_01"
+    },
+    "4-2/1/2": {
+      "canonicalName": "浅井長政",
+      "name": "浅井長政",
+      "role": "先陣",
+      "characterId": "char_serika_01"
+    },
+    "4-2/2/1": {
+      "canonicalName": "くノ一",
+      "name": "忍びの斥候",
+      "role": "道中の一隊",
+      "characterId": "char_alice_01"
+    },
+    "4-2/2/2": {
+      "canonicalName": "井伊直政",
+      "name": "井伊直政",
+      "role": "道中の一隊",
+      "characterId": "char_daimon_01"
+    },
+    "4-2/3/1": {
+      "canonicalName": "前田慶次",
+      "name": "前田慶次",
+      "role": "大将",
+      "characterId": "char_mio_01"
+    },
+    "4-3/1/1": {
+      "canonicalName": "火薬師",
+      "name": "火薬運び",
+      "role": "先陣",
+      "characterId": "char_sawat_01"
+    },
+    "4-3/1/2": {
+      "canonicalName": "前田利家",
+      "name": "前田利家",
+      "role": "先陣",
+      "characterId": "char_jihoon_01"
+    },
+    "4-3/2/1": {
+      "canonicalName": "立花誾千代",
+      "name": "立花誾千代",
+      "role": "道中の一隊",
+      "characterId": "char_sora_01"
+    },
+    "4-3/2/2": {
+      "canonicalName": "細川ガラシャ",
+      "name": "細川ガラシャ",
+      "role": "道中の一隊",
+      "characterId": "char_yukina_01"
+    },
+    "4-3/3/1": {
+      "canonicalName": "伊達政宗",
+      "name": "伊達政宗",
+      "role": "大将",
+      "characterId": "char_leo_01"
+    },
+    "4-4/1/1": {
+      "canonicalName": "北条氏康",
+      "name": "北条氏康",
+      "role": "先陣",
+      "characterId": "char_joe_01"
+    },
+    "4-4/1/2": {
+      "canonicalName": "山伏",
+      "name": "山路の修験者",
+      "role": "先陣",
+      "characterId": "char_kenji_01"
+    },
+    "4-4/2/1": {
+      "canonicalName": "上杉謙信",
+      "name": "上杉謙信",
+      "role": "大将",
+      "characterId": "char_koharu_01"
+    },
+    "4-5/1/1": {
+      "canonicalName": "柴田勝家",
+      "name": "柴田勝家",
+      "role": "先陣",
+      "characterId": "char_noa_01"
+    },
+    "4-5/2/1": {
+      "canonicalName": "伊達政宗",
+      "name": "伊達政宗",
+      "role": "道中の一隊",
+      "characterId": "char_leo_01"
+    },
+    "4-5/3/1": {
+      "canonicalName": "上杉謙信",
+      "name": "上杉謙信",
+      "role": "大将",
+      "characterId": "char_koharu_01"
+    },
+    "5-1/1/1": {
+      "canonicalName": "武田勝頼",
+      "name": "武田勝頼",
+      "role": "先陣",
+      "characterId": "char_rin_01"
+    },
+    "5-1/1/2": {
+      "canonicalName": "鉄砲兵",
+      "name": "鉄砲足軽",
+      "role": "先陣",
+      "characterId": "char_tomoya_01"
+    },
+    "5-1/2/1": {
+      "canonicalName": "島津義弘",
+      "name": "島津義弘",
+      "role": "道中の一隊",
+      "characterId": "char_lucas_01"
+    },
+    "5-1/2/2": {
+      "canonicalName": "真田昌幸",
+      "name": "真田昌幸",
+      "role": "道中の一隊",
+      "characterId": "char_sakura_01"
+    },
+    "5-1/3/1": {
+      "canonicalName": "織田信長",
+      "name": "織田信長",
+      "role": "大将",
+      "characterId": "char_reiji_01"
+    },
+    "5-1/3/2": {
+      "canonicalName": "お市の方",
+      "name": "お市の方",
+      "role": "本陣の一隊",
+      "characterId": "char_aoi_01"
+    },
+    "5-2/1/1": {
+      "canonicalName": "上杉景勝",
+      "name": "上杉景勝",
+      "role": "先陣",
+      "characterId": "char_chang_01"
+    },
+    "5-2/1/2": {
+      "canonicalName": "小早川隆景",
+      "name": "小早川隆景",
+      "role": "先陣",
+      "characterId": "char_makoto_01"
+    },
+    "5-2/2/1": {
+      "canonicalName": "井伊直虎",
+      "name": "井伊直虎",
+      "role": "道中の一隊",
+      "characterId": "char_cecile_01"
+    },
+    "5-2/2/2": {
+      "canonicalName": "直江兼続",
+      "name": "直江兼続",
+      "role": "道中の一隊",
+      "characterId": "char_rui_01"
+    },
+    "5-2/3/1": {
+      "canonicalName": "長宗我部元親",
+      "name": "長宗我部元親",
+      "role": "大将",
+      "characterId": "char_taiga_01"
+    },
+    "5-3/1/1": {
+      "canonicalName": "柴田勝家",
+      "name": "柴田勝家",
+      "role": "先陣",
+      "characterId": "char_noa_01"
+    },
+    "5-3/1/2": {
+      "canonicalName": "本願寺顕如",
+      "name": "本願寺顕如",
+      "role": "先陣",
+      "characterId": "char_ren_male_01"
+    },
+    "5-3/2/1": {
+      "canonicalName": "徳川家康",
+      "name": "徳川家康",
+      "role": "大将",
+      "characterId": "char_karen_01"
+    },
+    "5-3/2/2": {
+      "canonicalName": "前田利家",
+      "name": "前田利家",
+      "role": "本陣の一隊",
+      "characterId": "char_jihoon_01"
+    },
+    "5-4/1/1": {
+      "canonicalName": "山本勘助",
+      "name": "山本勘助",
+      "role": "先陣",
+      "characterId": "char_mei_01"
+    },
+    "5-4/1/2": {
+      "canonicalName": "上杉景勝",
+      "name": "上杉景勝",
+      "role": "先陣",
+      "characterId": "char_chang_01"
+    },
+    "5-4/2/1": {
+      "canonicalName": "雑賀孫市",
+      "name": "雑賀孫市",
+      "role": "道中の一隊",
+      "characterId": "char_takuro_01"
+    },
+    "5-4/2/2": {
+      "canonicalName": "前田利家",
+      "name": "前田利家",
+      "role": "道中の一隊",
+      "characterId": "char_jihoon_01"
+    },
+    "5-4/3/1": {
+      "canonicalName": "石田三成",
+      "name": "石田三成",
+      "role": "本陣の一隊",
+      "characterId": "char_seiya_01"
+    },
+    "5-4/3/2": {
+      "canonicalName": "毛利元就",
+      "name": "毛利元就",
+      "role": "大将",
+      "characterId": "char_reina_01"
+    },
+    "5-4/3/3": {
+      "canonicalName": "お市の方",
+      "name": "お市の方",
+      "role": "本陣の一隊",
+      "characterId": "char_aoi_01"
+    },
+    "5-5/1/1": {
+      "canonicalName": "立花宗茂",
+      "name": "立花宗茂",
+      "role": "先陣",
+      "characterId": "char_yuji_01"
+    },
+    "5-5/1/2": {
+      "canonicalName": "細川ガラシャ",
+      "name": "細川ガラシャ",
+      "role": "先陣",
+      "characterId": "char_yukina_01"
+    },
+    "5-5/2/1": {
+      "canonicalName": "立花誾千代",
+      "name": "立花誾千代",
+      "role": "道中の一隊",
+      "characterId": "char_sora_01"
+    },
+    "5-5/2/2": {
+      "canonicalName": "大友宗麟",
+      "name": "大友宗麟",
+      "role": "道中の一隊",
+      "characterId": "char_kaito_01"
+    },
+    "5-5/3/1": {
+      "canonicalName": "豊臣秀吉",
+      "name": "豊臣秀吉",
+      "role": "大将",
+      "characterId": "char_ageha_01"
+    },
+    "5-6/1/1": {
+      "canonicalName": "小松姫",
+      "name": "小松姫",
+      "role": "先陣",
+      "characterId": "char_mark_01"
+    },
+    "5-6/1/2": {
+      "canonicalName": "甲斐姫",
+      "name": "甲斐姫",
+      "role": "先陣",
+      "characterId": "char_shion_01"
+    },
+    "5-6/2/1": {
+      "canonicalName": "織田信長",
+      "name": "織田信長",
+      "role": "道中の一隊",
+      "characterId": "char_reiji_01"
+    },
+    "5-6/3/1": {
+      "canonicalName": "上杉謙信",
+      "name": "上杉謙信",
+      "role": "道中の一隊",
+      "characterId": "char_koharu_01"
+    },
+    "5-6/4/1": {
+      "canonicalName": "徳川家康",
+      "name": "徳川家康",
+      "role": "大将",
+      "characterId": "char_karen_01"
+    },
+    "6-1/1/1": {
+      "canonicalName": "斎藤道三",
+      "name": "斎藤道三",
+      "role": "先陣",
+      "characterId": "char_ren_01"
+    },
+    "6-1/1/2": {
+      "canonicalName": "島左近",
+      "name": "島左近",
+      "role": "先陣",
+      "characterId": "char_minami_01"
+    },
+    "6-1/2/1": {
+      "canonicalName": "長宗我部元親",
+      "name": "長宗我部元親",
+      "role": "道中の一隊",
+      "characterId": "char_taiga_01"
+    },
+    "6-1/2/2": {
+      "canonicalName": "小早川隆景",
+      "name": "小早川隆景",
+      "role": "道中の一隊",
+      "characterId": "char_makoto_01"
+    },
+    "6-1/3/1": {
+      "canonicalName": "服部半蔵",
+      "name": "服部半蔵",
+      "role": "大将",
+      "characterId": "char_maya_01"
+    },
+    "6-1/3/2": {
+      "canonicalName": "片倉景綱",
+      "name": "片倉景綱",
+      "role": "本陣の一隊",
+      "characterId": "char_shin_01"
+    },
+    "6-2/1/1": {
+      "canonicalName": "黒田官兵衛",
+      "name": "黒田官兵衛",
+      "role": "先陣",
+      "characterId": "char_tetsu_01"
+    },
+    "6-2/1/2": {
+      "canonicalName": "山本勘助",
+      "name": "山本勘助",
+      "role": "先陣",
+      "characterId": "char_mei_01"
+    },
+    "6-2/2/1": {
+      "canonicalName": "上杉景勝",
+      "name": "上杉景勝",
+      "role": "道中の一隊",
+      "characterId": "char_chang_01"
+    },
+    "6-2/2/2": {
+      "canonicalName": "柴田勝家",
+      "name": "柴田勝家",
+      "role": "道中の一隊",
+      "characterId": "char_noa_01"
+    },
+    "6-2/3/1": {
+      "canonicalName": "大友宗麟",
+      "name": "大友宗麟",
+      "role": "道中の一隊",
+      "characterId": "char_kaito_01"
+    },
+    "6-2/3/2": {
+      "canonicalName": "立花宗茂",
+      "name": "立花宗茂",
+      "role": "道中の一隊",
+      "characterId": "char_yuji_01"
+    },
+    "6-2/4/1": {
+      "canonicalName": "山本勘助",
+      "name": "山本勘助",
+      "role": "本陣の一隊",
+      "characterId": "char_mei_01"
+    },
+    "6-2/4/2": {
+      "canonicalName": "黒田官兵衛",
+      "name": "黒田官兵衛",
+      "role": "大将",
+      "characterId": "char_tetsu_01"
+    },
+    "6-3/1/1": {
+      "canonicalName": "竹中半兵衛",
+      "name": "竹中半兵衛",
+      "role": "先陣",
+      "characterId": "char_yuki_01"
+    },
+    "6-3/1/2": {
+      "canonicalName": "雑賀孫市",
+      "name": "雑賀孫市",
+      "role": "先陣",
+      "characterId": "char_takuro_01"
+    },
+    "6-3/2/1": {
+      "canonicalName": "真田昌幸",
+      "name": "真田昌幸",
+      "role": "大将",
+      "characterId": "char_sakura_01"
+    },
+    "6-3/2/2": {
+      "canonicalName": "甲斐姫",
+      "name": "甲斐姫",
+      "role": "本陣の一隊",
+      "characterId": "char_shion_01"
+    },
+    "6-3/2/3": {
+      "canonicalName": "細川ガラシャ",
+      "name": "細川ガラシャ",
+      "role": "本陣の一隊",
+      "characterId": "char_yukina_01"
+    },
+    "6-4/1/1": {
+      "canonicalName": "真田幸村",
+      "name": "真田幸村",
+      "role": "先陣",
+      "characterId": "char_kaede_01"
+    },
+    "6-4/2/1": {
+      "canonicalName": "今川義元",
+      "name": "今川義元",
+      "role": "道中の一隊",
+      "characterId": "char_genji_01"
+    },
+    "6-4/2/2": {
+      "canonicalName": "井伊直虎",
+      "name": "井伊直虎",
+      "role": "道中の一隊",
+      "characterId": "char_cecile_01"
+    },
+    "6-4/3/1": {
+      "canonicalName": "真田幸村",
+      "name": "真田幸村",
+      "role": "大将",
+      "characterId": "char_kaede_01"
+    },
+    "6-4/3/2": {
+      "canonicalName": "本願寺顕如",
+      "name": "本願寺顕如",
+      "role": "本陣の一隊",
+      "characterId": "char_ren_male_01"
+    },
+    "6-5/1/1": {
+      "canonicalName": "濃姫",
+      "name": "濃姫",
+      "role": "先陣",
+      "characterId": "char_riki_01"
+    },
+    "6-5/1/2": {
+      "canonicalName": "小早川隆景",
+      "name": "小早川隆景",
+      "role": "先陣",
+      "characterId": "char_makoto_01"
+    },
+    "6-5/2/1": {
+      "canonicalName": "石田三成",
+      "name": "石田三成",
+      "role": "道中の一隊",
+      "characterId": "char_seiya_01"
+    },
+    "6-5/2/2": {
+      "canonicalName": "島津義久",
+      "name": "島津義久",
+      "role": "道中の一隊",
+      "characterId": "char_momoko_01"
+    },
+    "6-5/2/3": {
+      "canonicalName": "毛利元就",
+      "name": "毛利元就",
+      "role": "道中の一隊",
+      "characterId": "char_reina_01"
+    },
+    "6-5/3/1": {
+      "canonicalName": "北条氏康",
+      "name": "北条氏康",
+      "role": "道中の一隊",
+      "characterId": "char_joe_01"
+    },
+    "6-5/3/2": {
+      "canonicalName": "上杉景勝",
+      "name": "上杉景勝",
+      "role": "道中の一隊",
+      "characterId": "char_chang_01"
+    },
+    "6-5/4/1": {
+      "canonicalName": "明智光秀",
+      "name": "明智光秀",
+      "role": "大将",
+      "characterId": "char_miyabi_01"
+    },
+    "6-5/4/2": {
+      "canonicalName": "山本勘助",
+      "name": "山本勘助",
+      "role": "本陣の一隊",
+      "characterId": "char_mei_01"
+    },
+    "6-6/1/1": {
+      "canonicalName": "長宗我部元親",
+      "name": "長宗我部元親",
+      "role": "先陣",
+      "characterId": "char_taiga_01"
+    },
+    "6-6/1/2": {
+      "canonicalName": "浅井長政",
+      "name": "浅井長政",
+      "role": "先陣",
+      "characterId": "char_serika_01"
+    },
+    "6-6/2/1": {
+      "canonicalName": "大友宗麟",
+      "name": "大友宗麟",
+      "role": "道中の一隊",
+      "characterId": "char_kaito_01"
+    },
+    "6-6/2/2": {
+      "canonicalName": "柴田勝家",
+      "name": "柴田勝家",
+      "role": "道中の一隊",
+      "characterId": "char_noa_01"
+    },
+    "6-6/3/1": {
+      "canonicalName": "竹中半兵衛",
+      "name": "竹中半兵衛",
+      "role": "道中の一隊",
+      "characterId": "char_yuki_01"
+    },
+    "6-6/3/2": {
+      "canonicalName": "雑賀孫市",
+      "name": "雑賀孫市",
+      "role": "道中の一隊",
+      "characterId": "char_takuro_01"
+    },
+    "6-6/4/1": {
+      "canonicalName": "井伊直虎",
+      "name": "井伊直虎",
+      "role": "道中の一隊",
+      "characterId": "char_cecile_01"
+    },
+    "6-6/4/2": {
+      "canonicalName": "本願寺顕如",
+      "name": "本願寺顕如",
+      "role": "道中の一隊",
+      "characterId": "char_ren_male_01"
+    },
+    "6-6/5/1": {
+      "canonicalName": "武田信玄",
+      "name": "武田信玄",
+      "role": "大将",
+      "characterId": "char_go_01"
+    },
+    "6-6/5/2": {
+      "canonicalName": "濃姫",
+      "name": "濃姫",
+      "role": "本陣の一隊",
+      "characterId": "char_riki_01"
+    },
+    "7-1/1/1": {
+      "canonicalName": "島左近",
+      "name": "島左近",
+      "role": "先陣",
+      "characterId": "char_minami_01"
+    },
+    "7-1/1/2": {
+      "canonicalName": "大友宗麟",
+      "name": "大友宗麟",
+      "role": "先陣",
+      "characterId": "char_kaito_01"
+    },
+    "7-1/2/1": {
+      "canonicalName": "長宗我部元親",
+      "name": "長宗我部元親",
+      "role": "道中の一隊",
+      "characterId": "char_taiga_01"
+    },
+    "7-1/3/1": {
+      "canonicalName": "真田幸村",
+      "name": "真田幸村",
+      "role": "大将",
+      "characterId": "char_kaede_01"
+    },
+    "7-1/3/2": {
+      "canonicalName": "織田信長",
+      "name": "織田信長",
+      "role": "本陣の一隊",
+      "characterId": "char_reiji_01"
+    },
+    "7-2/1/1": {
+      "canonicalName": "北条氏康",
+      "name": "北条氏康",
+      "role": "先陣",
+      "characterId": "char_joe_01"
+    },
+    "7-2/1/2": {
+      "canonicalName": "今川義元",
+      "name": "今川義元",
+      "role": "先陣",
+      "characterId": "char_genji_01"
+    },
+    "7-2/2/1": {
+      "canonicalName": "上杉景勝",
+      "name": "上杉景勝",
+      "role": "道中の一隊",
+      "characterId": "char_chang_01"
+    },
+    "7-2/2/2": {
+      "canonicalName": "前田利家",
+      "name": "前田利家",
+      "role": "道中の一隊",
+      "characterId": "char_jihoon_01"
+    },
+    "7-2/3/1": {
+      "canonicalName": "徳川家康",
+      "name": "徳川家康",
+      "role": "大将",
+      "characterId": "char_karen_01"
+    },
+    "7-3/1/1": {
+      "canonicalName": "濃姫",
+      "name": "濃姫",
+      "role": "先陣",
+      "characterId": "char_riki_01"
+    },
+    "7-3/2/1": {
+      "canonicalName": "加藤清正",
+      "name": "加藤清正",
+      "role": "大将",
+      "characterId": "char_leon_01"
+    },
+    "7-3/2/2": {
+      "canonicalName": "真田昌幸",
+      "name": "真田昌幸",
+      "role": "本陣の一隊",
+      "characterId": "char_sakura_01"
+    },
+    "7-4/1/1": {
+      "canonicalName": "浅井長政",
+      "name": "浅井長政",
+      "role": "先陣",
+      "characterId": "char_serika_01"
+    },
+    "7-4/1/2": {
+      "canonicalName": "細川ガラシャ",
+      "name": "細川ガラシャ",
+      "role": "先陣",
+      "characterId": "char_yukina_01"
+    },
+    "7-4/2/1": {
+      "canonicalName": "井伊直虎",
+      "name": "井伊直虎",
+      "role": "道中の一隊",
+      "characterId": "char_cecile_01"
+    },
+    "7-4/2/2": {
+      "canonicalName": "お市の方",
+      "name": "お市の方",
+      "role": "道中の一隊",
+      "characterId": "char_aoi_01"
+    },
+    "7-4/3/1": {
+      "canonicalName": "本多忠勝",
+      "name": "本多忠勝",
+      "role": "大将",
+      "characterId": "char_kengo_01"
+    },
+    "7-4/3/2": {
+      "canonicalName": "豊臣秀吉",
+      "name": "豊臣秀吉",
+      "role": "本陣の一隊",
+      "characterId": "char_ageha_01"
+    },
+    "7-5/1/1": {
+      "canonicalName": "小松姫",
+      "name": "小松姫",
+      "role": "先陣",
+      "characterId": "char_mark_01"
+    },
+    "7-5/2/1": {
+      "canonicalName": "本多忠勝",
+      "name": "本多忠勝",
+      "role": "大将",
+      "characterId": "char_kengo_01"
+    },
+    "7-6/1/1": {
+      "canonicalName": "雑賀孫市",
+      "name": "雑賀孫市",
+      "role": "先陣",
+      "characterId": "char_takuro_01"
+    },
+    "7-6/1/2": {
+      "canonicalName": "北条氏康",
+      "name": "北条氏康",
+      "role": "先陣",
+      "characterId": "char_joe_01"
+    },
+    "7-6/2/1": {
+      "canonicalName": "毛利元就",
+      "name": "毛利元就",
+      "role": "道中の一隊",
+      "characterId": "char_reina_01"
+    },
+    "7-6/2/2": {
+      "canonicalName": "井伊直虎",
+      "name": "井伊直虎",
+      "role": "道中の一隊",
+      "characterId": "char_cecile_01"
+    },
+    "7-6/3/1": {
+      "canonicalName": "伊達政宗",
+      "name": "伊達政宗",
+      "role": "本陣の一隊",
+      "characterId": "char_leo_01"
+    },
+    "7-6/3/2": {
+      "canonicalName": "石田三成",
+      "name": "石田三成",
+      "role": "大将",
+      "characterId": "char_seiya_01"
+    },
+    "7-7/1/1": {
+      "canonicalName": "片倉景綱",
+      "name": "片倉景綱",
+      "role": "先陣",
+      "characterId": "char_shin_01"
+    },
+    "7-7/1/2": {
+      "canonicalName": "前田利家",
+      "name": "前田利家",
+      "role": "先陣",
+      "characterId": "char_jihoon_01"
+    },
+    "7-7/2/1": {
+      "canonicalName": "真田昌幸",
+      "name": "真田昌幸",
+      "role": "道中の一隊",
+      "characterId": "char_sakura_01"
+    },
+    "7-7/2/2": {
+      "canonicalName": "島津義弘",
+      "name": "島津義弘",
+      "role": "道中の一隊",
+      "characterId": "char_lucas_01"
+    },
+    "7-7/3/1": {
+      "canonicalName": "直江兼続",
+      "name": "直江兼続",
+      "role": "道中の一隊",
+      "characterId": "char_rui_01"
+    },
+    "7-7/3/2": {
+      "canonicalName": "上杉景勝",
+      "name": "上杉景勝",
+      "role": "道中の一隊",
+      "characterId": "char_chang_01"
+    },
+    "7-7/4/1": {
+      "canonicalName": "徳川家康",
+      "name": "徳川家康",
+      "role": "大将",
+      "characterId": "char_karen_01"
+    },
+    "7-7/4/2": {
+      "canonicalName": "濃姫",
+      "name": "濃姫",
+      "role": "本陣の一隊",
+      "characterId": "char_riki_01"
+    },
+    "7-8/1/1": {
+      "canonicalName": "甲斐姫",
+      "name": "甲斐姫",
+      "role": "先陣",
+      "characterId": "char_shion_01"
+    },
+    "7-8/1/2": {
+      "canonicalName": "細川ガラシャ",
+      "name": "細川ガラシャ",
+      "role": "先陣",
+      "characterId": "char_yukina_01"
+    },
+    "7-8/2/1": {
+      "canonicalName": "加藤清正",
+      "name": "加藤清正",
+      "role": "道中の一隊",
+      "characterId": "char_leon_01"
+    },
+    "7-8/2/2": {
+      "canonicalName": "今川義元",
+      "name": "今川義元",
+      "role": "道中の一隊",
+      "characterId": "char_genji_01"
+    },
+    "7-8/3/1": {
+      "canonicalName": "本多忠勝",
+      "name": "本多忠勝",
+      "role": "道中の一隊",
+      "characterId": "char_kengo_01"
+    },
+    "7-8/4/1": {
+      "canonicalName": "前田慶次",
+      "name": "前田慶次",
+      "role": "大将",
+      "characterId": "char_mio_01"
+    },
+    "7-8/4/2": {
+      "canonicalName": "豊臣秀吉",
+      "name": "豊臣秀吉",
+      "role": "本陣の一隊",
+      "characterId": "char_ageha_01"
+    },
+    "7-8/4/3": {
+      "canonicalName": "片倉景綱",
+      "name": "片倉景綱",
+      "role": "本陣の一隊",
+      "characterId": "char_shin_01"
+    },
+    "8-1/1/1": {
+      "canonicalName": "井伊直政",
+      "name": "井伊直政",
+      "role": "先陣",
+      "characterId": "char_daimon_01"
+    },
+    "8-1/1/2": {
+      "canonicalName": "立花宗茂",
+      "name": "立花宗茂",
+      "role": "先陣",
+      "characterId": "char_yuji_01"
+    },
+    "8-1/2/1": {
+      "canonicalName": "立花誾千代",
+      "name": "立花誾千代",
+      "role": "道中の一隊",
+      "characterId": "char_sora_01"
+    },
+    "8-1/3/1": {
+      "canonicalName": "浅井長政",
+      "name": "浅井長政",
+      "role": "道中の一隊",
+      "characterId": "char_serika_01"
+    },
+    "8-1/3/2": {
+      "canonicalName": "小早川隆景",
+      "name": "小早川隆景",
+      "role": "道中の一隊",
+      "characterId": "char_makoto_01"
+    },
+    "8-1/4/1": {
+      "canonicalName": "島津義弘",
+      "name": "島津義弘",
+      "role": "大将",
+      "characterId": "char_lucas_01"
+    },
+    "8-2/1/1": {
+      "canonicalName": "前田利家",
+      "name": "前田利家",
+      "role": "先陣",
+      "characterId": "char_jihoon_01"
+    },
+    "8-2/1/2": {
+      "canonicalName": "北条氏康",
+      "name": "北条氏康",
+      "role": "先陣",
+      "characterId": "char_joe_01"
+    },
+    "8-2/2/1": {
+      "canonicalName": "上杉謙信",
+      "name": "上杉謙信",
+      "role": "道中の一隊",
+      "characterId": "char_koharu_01"
+    },
+    "8-2/3/1": {
+      "canonicalName": "柴田勝家",
+      "name": "柴田勝家",
+      "role": "大将",
+      "characterId": "char_noa_01"
+    },
+    "8-2/3/2": {
+      "canonicalName": "雑賀孫市",
+      "name": "雑賀孫市",
+      "role": "本陣の一隊",
+      "characterId": "char_takuro_01"
+    },
+    "8-3/1/1": {
+      "canonicalName": "井伊直政",
+      "name": "井伊直政",
+      "role": "先陣",
+      "characterId": "char_daimon_01"
+    },
+    "8-3/1/2": {
+      "canonicalName": "立花宗茂",
+      "name": "立花宗茂",
+      "role": "先陣",
+      "characterId": "char_yuji_01"
+    },
+    "8-3/1/3": {
+      "canonicalName": "小早川隆景",
+      "name": "小早川隆景",
+      "role": "先陣",
+      "characterId": "char_makoto_01"
+    },
+    "8-3/2/1": {
+      "canonicalName": "徳川家康",
+      "name": "徳川家康",
+      "role": "道中の一隊",
+      "characterId": "char_karen_01"
+    },
+    "8-3/3/1": {
+      "canonicalName": "毛利元就",
+      "name": "毛利元就",
+      "role": "道中の一隊",
+      "characterId": "char_reina_01"
+    },
+    "8-3/3/2": {
+      "canonicalName": "島津義弘",
+      "name": "島津義弘",
+      "role": "道中の一隊",
+      "characterId": "char_lucas_01"
+    },
+    "8-3/3/3": {
+      "canonicalName": "長宗我部元親",
+      "name": "長宗我部元親",
+      "role": "道中の一隊",
+      "characterId": "char_taiga_01"
+    },
+    "8-3/4/1": {
+      "canonicalName": "伊達政宗",
+      "name": "伊達政宗",
+      "role": "大将",
+      "characterId": "char_leo_01"
+    },
+    "8-4/1/1": {
+      "canonicalName": "斎藤道三",
+      "name": "斎藤道三",
+      "role": "先陣",
+      "characterId": "char_ren_01"
+    },
+    "8-4/1/2": {
+      "canonicalName": "島左近",
+      "name": "島左近",
+      "role": "先陣",
+      "characterId": "char_minami_01"
+    },
+    "8-4/2/1": {
+      "canonicalName": "柴田勝家",
+      "name": "柴田勝家",
+      "role": "道中の一隊",
+      "characterId": "char_noa_01"
+    },
+    "8-4/3/1": {
+      "canonicalName": "山本勘助",
+      "name": "山本勘助",
+      "role": "道中の一隊",
+      "characterId": "char_mei_01"
+    },
+    "8-4/3/2": {
+      "canonicalName": "立花誾千代",
+      "name": "立花誾千代",
+      "role": "道中の一隊",
+      "characterId": "char_sora_01"
+    },
+    "8-4/4/1": {
+      "canonicalName": "明智光秀",
+      "name": "明智光秀",
+      "role": "大将",
+      "characterId": "char_miyabi_01"
+    },
+    "8-5/1/1": {
+      "canonicalName": "雑賀孫市",
+      "name": "雑賀孫市",
+      "role": "先陣",
+      "characterId": "char_takuro_01"
+    },
+    "8-5/2/1": {
+      "canonicalName": "加藤清正",
+      "name": "加藤清正",
+      "role": "道中の一隊",
+      "characterId": "char_leon_01"
+    },
+    "8-5/2/2": {
+      "canonicalName": "毛利元就",
+      "name": "毛利元就",
+      "role": "道中の一隊",
+      "characterId": "char_reina_01"
+    },
+    "8-5/3/1": {
+      "canonicalName": "伊達政宗",
+      "name": "伊達政宗",
+      "role": "大将",
+      "characterId": "char_leo_01"
+    },
+    "8-5/3/2": {
+      "canonicalName": "立花宗茂",
+      "name": "立花宗茂",
+      "role": "本陣の一隊",
+      "characterId": "char_yuji_01"
+    },
+    "8-6/1/1": {
+      "canonicalName": "武田勝頼",
+      "name": "武田勝頼",
+      "role": "先陣",
+      "characterId": "char_rin_01"
+    },
+    "8-6/1/2": {
+      "canonicalName": "甲斐姫",
+      "name": "甲斐姫",
+      "role": "先陣",
+      "characterId": "char_shion_01"
+    },
+    "8-6/2/1": {
+      "canonicalName": "上杉謙信",
+      "name": "上杉謙信",
+      "role": "道中の一隊",
+      "characterId": "char_koharu_01"
+    },
+    "8-6/3/1": {
+      "canonicalName": "北条氏康",
+      "name": "北条氏康",
+      "role": "道中の一隊",
+      "characterId": "char_joe_01"
+    },
+    "8-6/4/1": {
+      "canonicalName": "島津義弘",
+      "name": "島津義弘",
+      "role": "道中の一隊",
+      "characterId": "char_lucas_01"
+    },
+    "8-6/4/2": {
+      "canonicalName": "本願寺顕如",
+      "name": "本願寺顕如",
+      "role": "道中の一隊",
+      "characterId": "char_ren_male_01"
+    },
+    "8-6/5/1": {
+      "canonicalName": "真田幸村",
+      "name": "真田幸村",
+      "role": "大将",
+      "characterId": "char_kaede_01"
+    },
+    "8-7/1/1": {
+      "canonicalName": "今川義元",
+      "name": "今川義元",
+      "role": "先陣",
+      "characterId": "char_genji_01"
+    },
+    "8-7/1/2": {
+      "canonicalName": "前田利家",
+      "name": "前田利家",
+      "role": "先陣",
+      "characterId": "char_jihoon_01"
+    },
+    "8-7/2/1": {
+      "canonicalName": "立花誾千代",
+      "name": "立花誾千代",
+      "role": "道中の一隊",
+      "characterId": "char_sora_01"
+    },
+    "8-7/3/1": {
+      "canonicalName": "前田慶次",
+      "name": "前田慶次",
+      "role": "道中の一隊",
+      "characterId": "char_mio_01"
+    },
+    "8-7/4/1": {
+      "canonicalName": "武田信玄",
+      "name": "武田信玄",
+      "role": "大将",
+      "characterId": "char_go_01"
+    },
+    "8-8/1/1": {
+      "canonicalName": "柴田勝家",
+      "name": "柴田勝家",
+      "role": "先陣",
+      "characterId": "char_noa_01"
+    },
+    "8-8/1/2": {
+      "canonicalName": "浅井長政",
+      "name": "浅井長政",
+      "role": "先陣",
+      "characterId": "char_serika_01"
+    },
+    "8-8/2/1": {
+      "canonicalName": "斎藤道三",
+      "name": "斎藤道三",
+      "role": "道中の一隊",
+      "characterId": "char_ren_01"
+    },
+    "8-8/2/2": {
+      "canonicalName": "片倉景綱",
+      "name": "片倉景綱",
+      "role": "道中の一隊",
+      "characterId": "char_shin_01"
+    },
+    "8-8/3/1": {
+      "canonicalName": "伊達政宗",
+      "name": "伊達政宗",
+      "role": "道中の一隊",
+      "characterId": "char_leo_01"
+    },
+    "8-8/4/1": {
+      "canonicalName": "雑賀孫市",
+      "name": "雑賀孫市",
+      "role": "道中の一隊",
+      "characterId": "char_takuro_01"
+    },
+    "8-8/4/2": {
+      "canonicalName": "細川ガラシャ",
+      "name": "細川ガラシャ",
+      "role": "道中の一隊",
+      "characterId": "char_yukina_01"
+    },
+    "8-8/5/1": {
+      "canonicalName": "本多忠勝",
+      "name": "本多忠勝",
+      "role": "道中の一隊",
+      "characterId": "char_kengo_01"
+    },
+    "8-8/6/1": {
+      "canonicalName": "織田信長",
+      "name": "織田信長",
+      "role": "大将",
+      "characterId": "char_reiji_01"
+    },
+    "8-8/6/2": {
+      "canonicalName": "お市の方",
+      "name": "お市の方",
+      "role": "本陣の一隊",
+      "characterId": "char_aoi_01"
+    },
+    "9-1/1/1": {
+      "canonicalName": "北条氏康",
+      "name": "北条氏康",
+      "role": "先陣",
+      "characterId": "char_joe_01"
+    },
+    "9-1/1/2": {
+      "canonicalName": "今川義元",
+      "name": "今川義元",
+      "role": "先陣",
+      "characterId": "char_genji_01"
+    },
+    "9-1/2/1": {
+      "canonicalName": "徳川家康",
+      "name": "徳川家康",
+      "role": "大将",
+      "characterId": "char_karen_01"
+    },
+    "9-2/1/1": {
+      "canonicalName": "井伊直政",
+      "name": "井伊直政",
+      "role": "先陣",
+      "characterId": "char_daimon_01"
+    },
+    "9-2/1/2": {
+      "canonicalName": "立花宗茂",
+      "name": "立花宗茂",
+      "role": "先陣",
+      "characterId": "char_yuji_01"
+    },
+    "9-2/1/3": {
+      "canonicalName": "小早川隆景",
+      "name": "小早川隆景",
+      "role": "先陣",
+      "characterId": "char_makoto_01"
+    },
+    "9-2/2/1": {
+      "canonicalName": "島津義弘",
+      "name": "島津義弘",
+      "role": "道中の一隊",
+      "characterId": "char_lucas_01"
+    },
+    "9-2/2/2": {
+      "canonicalName": "毛利元就",
+      "name": "毛利元就",
+      "role": "道中の一隊",
+      "characterId": "char_reina_01"
+    },
+    "9-2/2/3": {
+      "canonicalName": "立花誾千代",
+      "name": "立花誾千代",
+      "role": "道中の一隊",
+      "characterId": "char_sora_01"
+    },
+    "9-2/3/1": {
+      "canonicalName": "伊達政宗",
+      "name": "伊達政宗",
+      "role": "大将",
+      "characterId": "char_leo_01"
+    },
+    "9-2/3/2": {
+      "canonicalName": "片倉景綱",
+      "name": "片倉景綱",
+      "role": "本陣の一隊",
+      "characterId": "char_shin_01"
+    },
+    "9-3/1/1": {
+      "canonicalName": "加藤清正",
+      "name": "加藤清正",
+      "role": "先陣",
+      "characterId": "char_leon_01"
+    },
+    "9-3/1/2": {
+      "canonicalName": "真田昌幸",
+      "name": "真田昌幸",
+      "role": "先陣",
+      "characterId": "char_sakura_01"
+    },
+    "9-3/1/3": {
+      "canonicalName": "細川ガラシャ",
+      "name": "細川ガラシャ",
+      "role": "先陣",
+      "characterId": "char_yukina_01"
+    },
+    "9-3/2/1": {
+      "canonicalName": "本多忠勝",
+      "name": "本多忠勝",
+      "role": "大将",
+      "characterId": "char_kengo_01"
+    },
+    "9-3/2/2": {
+      "canonicalName": "濃姫",
+      "name": "濃姫",
+      "role": "本陣の一隊",
+      "characterId": "char_riki_01"
+    },
+    "9-3/2/3": {
+      "canonicalName": "豊臣秀吉",
+      "name": "豊臣秀吉",
+      "role": "本陣の一隊",
+      "characterId": "char_ageha_01"
+    },
+    "9-4/1/1": {
+      "canonicalName": "前田利家",
+      "name": "前田利家",
+      "role": "先陣",
+      "characterId": "char_jihoon_01"
+    },
+    "9-4/1/2": {
+      "canonicalName": "浅井長政",
+      "name": "浅井長政",
+      "role": "先陣",
+      "characterId": "char_serika_01"
+    },
+    "9-4/2/1": {
+      "canonicalName": "武田信玄",
+      "name": "武田信玄",
+      "role": "道中の一隊",
+      "characterId": "char_go_01"
+    },
+    "9-4/3/1": {
+      "canonicalName": "柴田勝家",
+      "name": "柴田勝家",
+      "role": "大将",
+      "characterId": "char_noa_01"
+    },
+    "9-4/3/2": {
+      "canonicalName": "島左近",
+      "name": "島左近",
+      "role": "本陣の一隊",
+      "characterId": "char_minami_01"
+    },
+    "9-5/1/1": {
+      "canonicalName": "上杉景勝",
+      "name": "上杉景勝",
+      "role": "先陣",
+      "characterId": "char_chang_01"
+    },
+    "9-5/1/2": {
+      "canonicalName": "前田利家",
+      "name": "前田利家",
+      "role": "先陣",
+      "characterId": "char_jihoon_01"
+    },
+    "9-5/2/1": {
+      "canonicalName": "石田三成",
+      "name": "石田三成",
+      "role": "道中の一隊",
+      "characterId": "char_seiya_01"
+    },
+    "9-5/2/2": {
+      "canonicalName": "島津義久",
+      "name": "島津義久",
+      "role": "道中の一隊",
+      "characterId": "char_momoko_01"
+    },
+    "9-5/2/3": {
+      "canonicalName": "毛利元就",
+      "name": "毛利元就",
+      "role": "道中の一隊",
+      "characterId": "char_reina_01"
+    },
+    "9-5/3/1": {
+      "canonicalName": "明智光秀",
+      "name": "明智光秀",
+      "role": "本陣の一隊",
+      "characterId": "char_miyabi_01"
+    },
+    "9-5/3/2": {
+      "canonicalName": "山本勘助",
+      "name": "山本勘助",
+      "role": "大将",
+      "characterId": "char_mei_01"
+    },
+    "9-6/1/1": {
+      "canonicalName": "北条氏康",
+      "name": "北条氏康",
+      "role": "先陣",
+      "characterId": "char_joe_01"
+    },
+    "9-6/1/2": {
+      "canonicalName": "上杉景勝",
+      "name": "上杉景勝",
+      "role": "先陣",
+      "characterId": "char_chang_01"
+    },
+    "9-6/2/1": {
+      "canonicalName": "前田慶次",
+      "name": "前田慶次",
+      "role": "本陣の一隊",
+      "characterId": "char_mio_01"
+    },
+    "9-6/2/2": {
+      "canonicalName": "お市の方",
+      "name": "お市の方",
+      "role": "大将",
+      "characterId": "char_aoi_01"
+    },
+    "9-7/1/1": {
+      "canonicalName": "井伊直政",
+      "name": "井伊直政",
+      "role": "先陣",
+      "characterId": "char_daimon_01"
+    },
+    "9-7/1/2": {
+      "canonicalName": "雑賀孫市",
+      "name": "雑賀孫市",
+      "role": "先陣",
+      "characterId": "char_takuro_01"
+    },
+    "9-7/2/1": {
+      "canonicalName": "前田慶次",
+      "name": "前田慶次",
+      "role": "道中の一隊",
+      "characterId": "char_mio_01"
+    },
+    "9-7/3/1": {
+      "canonicalName": "長宗我部元親",
+      "name": "長宗我部元親",
+      "role": "大将",
+      "characterId": "char_taiga_01"
+    },
+    "9-7/3/2": {
+      "canonicalName": "島津義弘",
+      "name": "島津義弘",
+      "role": "本陣の一隊",
+      "characterId": "char_lucas_01"
+    },
+    "9-7/3/3": {
+      "canonicalName": "立花宗茂",
+      "name": "立花宗茂",
+      "role": "本陣の一隊",
+      "characterId": "char_yuji_01"
+    },
+    "9-8/1/1": {
+      "canonicalName": "柴田勝家",
+      "name": "柴田勝家",
+      "role": "先陣",
+      "characterId": "char_noa_01"
+    },
+    "9-8/1/2": {
+      "canonicalName": "島左近",
+      "name": "島左近",
+      "role": "先陣",
+      "characterId": "char_minami_01"
+    },
+    "9-8/2/1": {
+      "canonicalName": "真田幸村",
+      "name": "真田幸村",
+      "role": "大将",
+      "characterId": "char_kaede_01"
+    },
+    "9-9/1/1": {
+      "canonicalName": "竹中半兵衛",
+      "name": "竹中半兵衛",
+      "role": "先陣",
+      "characterId": "char_yuki_01"
+    },
+    "9-9/1/2": {
+      "canonicalName": "雑賀孫市",
+      "name": "雑賀孫市",
+      "role": "先陣",
+      "characterId": "char_takuro_01"
+    },
+    "9-9/2/1": {
+      "canonicalName": "武田勝頼",
+      "name": "武田勝頼",
+      "role": "道中の一隊",
+      "characterId": "char_rin_01"
+    },
+    "9-9/3/1": {
+      "canonicalName": "斎藤道三",
+      "name": "斎藤道三",
+      "role": "本陣の一隊",
+      "characterId": "char_ren_01"
+    },
+    "9-9/3/2": {
+      "canonicalName": "真田昌幸",
+      "name": "真田昌幸",
+      "role": "大将",
+      "characterId": "char_sakura_01"
+    },
+    "9-10/1/1": {
+      "canonicalName": "加藤清正",
+      "name": "加藤清正",
+      "role": "先陣",
+      "characterId": "char_leon_01"
+    },
+    "9-10/1/2": {
+      "canonicalName": "直江兼続",
+      "name": "直江兼続",
+      "role": "先陣",
+      "characterId": "char_rui_01"
+    },
+    "9-10/2/1": {
+      "canonicalName": "伊達政宗",
+      "name": "伊達政宗",
+      "role": "道中の一隊",
+      "characterId": "char_leo_01"
+    },
+    "9-10/3/1": {
+      "canonicalName": "本多忠勝",
+      "name": "本多忠勝",
+      "role": "道中の一隊",
+      "characterId": "char_kengo_01"
+    },
+    "9-10/4/1": {
+      "canonicalName": "織田信長",
+      "name": "織田信長",
+      "role": "大将",
+      "characterId": "char_reiji_01"
+    },
+    "9-10/4/2": {
+      "canonicalName": "お市の方",
+      "name": "お市の方",
+      "role": "本陣の一隊",
+      "characterId": "char_aoi_01"
+    },
+    "10-1/1/1": {
+      "canonicalName": "井伊直虎",
+      "name": "井伊直虎",
+      "role": "先陣",
+      "characterId": "char_cecile_01"
+    },
+    "10-1/1/2": {
+      "canonicalName": "雑賀孫市",
+      "name": "雑賀孫市",
+      "role": "先陣",
+      "characterId": "char_takuro_01"
+    },
+    "10-1/2/1": {
+      "canonicalName": "毛利元就",
+      "name": "毛利元就",
+      "role": "道中の一隊",
+      "characterId": "char_reina_01"
+    },
+    "10-1/2/2": {
+      "canonicalName": "細川ガラシャ",
+      "name": "細川ガラシャ",
+      "role": "道中の一隊",
+      "characterId": "char_yukina_01"
+    },
+    "10-1/3/1": {
+      "canonicalName": "北条氏康",
+      "name": "北条氏康",
+      "role": "大将",
+      "characterId": "char_joe_01"
+    },
+    "10-1/3/2": {
+      "canonicalName": "上杉謙信",
+      "name": "上杉謙信",
+      "role": "本陣の一隊",
+      "characterId": "char_koharu_01"
+    },
+    "10-2/1/1": {
+      "canonicalName": "立花誾千代",
+      "name": "立花誾千代",
+      "role": "先陣",
+      "characterId": "char_sora_01"
+    },
+    "10-2/1/2": {
+      "canonicalName": "立花宗茂",
+      "name": "立花宗茂",
+      "role": "先陣",
+      "characterId": "char_yuji_01"
+    },
+    "10-2/2/1": {
+      "canonicalName": "武田勝頼",
+      "name": "武田勝頼",
+      "role": "道中の一隊",
+      "characterId": "char_rin_01"
+    },
+    "10-2/3/1": {
+      "canonicalName": "伊達政宗",
+      "name": "伊達政宗",
+      "role": "大将",
+      "characterId": "char_leo_01"
+    },
+    "10-2/3/2": {
+      "canonicalName": "井伊直政",
+      "name": "井伊直政",
+      "role": "本陣の一隊",
+      "characterId": "char_daimon_01"
+    },
+    "10-3/1/1": {
+      "canonicalName": "上杉景勝",
+      "name": "上杉景勝",
+      "role": "先陣",
+      "characterId": "char_chang_01"
+    },
+    "10-3/1/2": {
+      "canonicalName": "濃姫",
+      "name": "濃姫",
+      "role": "先陣",
+      "characterId": "char_riki_01"
+    },
+    "10-3/2/1": {
+      "canonicalName": "加藤清正",
+      "name": "加藤清正",
+      "role": "道中の一隊",
+      "characterId": "char_leon_01"
+    },
+    "10-3/2/2": {
+      "canonicalName": "真田昌幸",
+      "name": "真田昌幸",
+      "role": "道中の一隊",
+      "characterId": "char_sakura_01"
+    },
+    "10-3/3/1": {
+      "canonicalName": "徳川家康",
+      "name": "徳川家康",
+      "role": "大将",
+      "characterId": "char_karen_01"
+    },
+    "10-3/3/2": {
+      "canonicalName": "片倉景綱",
+      "name": "片倉景綱",
+      "role": "本陣の一隊",
+      "characterId": "char_shin_01"
+    },
+    "10-4/1/1": {
+      "canonicalName": "山本勘助",
+      "name": "山本勘助",
+      "role": "先陣",
+      "characterId": "char_mei_01"
+    },
+    "10-4/1/2": {
+      "canonicalName": "斎藤道三",
+      "name": "斎藤道三",
+      "role": "先陣",
+      "characterId": "char_ren_01"
+    },
+    "10-4/2/1": {
+      "canonicalName": "長宗我部元親",
+      "name": "長宗我部元親",
+      "role": "道中の一隊",
+      "characterId": "char_taiga_01"
+    },
+    "10-4/2/2": {
+      "canonicalName": "大友宗麟",
+      "name": "大友宗麟",
+      "role": "道中の一隊",
+      "characterId": "char_kaito_01"
+    },
+    "10-4/3/1": {
+      "canonicalName": "明智光秀",
+      "name": "明智光秀",
+      "role": "大将",
+      "characterId": "char_miyabi_01"
+    },
+    "10-4/3/2": {
+      "canonicalName": "服部半蔵",
+      "name": "服部半蔵",
+      "role": "本陣の一隊",
+      "characterId": "char_maya_01"
+    },
+    "10-4/3/3": {
+      "canonicalName": "山本勘助",
+      "name": "山本勘助",
+      "role": "本陣の一隊",
+      "characterId": "char_mei_01"
+    },
+    "10-5/1/1": {
+      "canonicalName": "今川義元",
+      "name": "今川義元",
+      "role": "先陣",
+      "characterId": "char_genji_01"
+    },
+    "10-5/1/2": {
+      "canonicalName": "雑賀孫市",
+      "name": "雑賀孫市",
+      "role": "先陣",
+      "characterId": "char_takuro_01"
+    },
+    "10-5/2/1": {
+      "canonicalName": "上杉景勝",
+      "name": "上杉景勝",
+      "role": "道中の一隊",
+      "characterId": "char_chang_01"
+    },
+    "10-5/2/2": {
+      "canonicalName": "長宗我部元親",
+      "name": "長宗我部元親",
+      "role": "道中の一隊",
+      "characterId": "char_taiga_01"
+    },
+    "10-5/3/1": {
+      "canonicalName": "織田信長",
+      "name": "織田信長",
+      "role": "大将",
+      "characterId": "char_reiji_01"
+    },
+    "10-5/3/2": {
+      "canonicalName": "島津義弘",
+      "name": "島津義弘",
+      "role": "本陣の一隊",
+      "characterId": "char_lucas_01"
+    },
+    "10-6/1/1": {
+      "canonicalName": "加藤清正",
+      "name": "加藤清正",
+      "role": "先陣",
+      "characterId": "char_leon_01"
+    },
+    "10-6/1/2": {
+      "canonicalName": "島津義久",
+      "name": "島津義久",
+      "role": "先陣",
+      "characterId": "char_momoko_01"
+    },
+    "10-6/2/1": {
+      "canonicalName": "北条氏康",
+      "name": "北条氏康",
+      "role": "道中の一隊",
+      "characterId": "char_joe_01"
+    },
+    "10-6/2/2": {
+      "canonicalName": "上杉景勝",
+      "name": "上杉景勝",
+      "role": "道中の一隊",
+      "characterId": "char_chang_01"
+    },
+    "10-6/3/1": {
+      "canonicalName": "前田慶次",
+      "name": "前田慶次",
+      "role": "本陣の一隊",
+      "characterId": "char_mio_01"
+    },
+    "10-6/3/2": {
+      "canonicalName": "細川ガラシャ",
+      "name": "細川ガラシャ",
+      "role": "大将",
+      "characterId": "char_yukina_01"
+    },
+    "10-7/1/1": {
+      "canonicalName": "前田利家",
+      "name": "前田利家",
+      "role": "先陣",
+      "characterId": "char_jihoon_01"
+    },
+    "10-7/1/2": {
+      "canonicalName": "立花宗茂",
+      "name": "立花宗茂",
+      "role": "先陣",
+      "characterId": "char_yuji_01"
+    },
+    "10-7/2/1": {
+      "canonicalName": "本多忠勝",
+      "name": "本多忠勝",
+      "role": "道中の一隊",
+      "characterId": "char_kengo_01"
+    },
+    "10-7/3/1": {
+      "canonicalName": "真田幸村",
+      "name": "真田幸村",
+      "role": "本陣の一隊",
+      "characterId": "char_kaede_01"
+    },
+    "10-7/3/2": {
+      "canonicalName": "真田昌幸",
+      "name": "真田昌幸",
+      "role": "大将",
+      "characterId": "char_sakura_01"
+    },
+    "10-8/1/1": {
+      "canonicalName": "島左近",
+      "name": "島左近",
+      "role": "先陣",
+      "characterId": "char_minami_01"
+    },
+    "10-8/1/2": {
+      "canonicalName": "大友宗麟",
+      "name": "大友宗麟",
+      "role": "先陣",
+      "characterId": "char_kaito_01"
+    },
+    "10-8/2/1": {
+      "canonicalName": "立花誾千代",
+      "name": "立花誾千代",
+      "role": "道中の一隊",
+      "characterId": "char_sora_01"
+    },
+    "10-8/2/2": {
+      "canonicalName": "本願寺顕如",
+      "name": "本願寺顕如",
+      "role": "道中の一隊",
+      "characterId": "char_ren_male_01"
+    },
+    "10-8/3/1": {
+      "canonicalName": "徳川家康",
+      "name": "徳川家康",
+      "role": "大将",
+      "characterId": "char_karen_01"
+    },
+    "10-9/1/1": {
+      "canonicalName": "浅井長政",
+      "name": "浅井長政",
+      "role": "先陣",
+      "characterId": "char_serika_01"
+    },
+    "10-9/1/2": {
+      "canonicalName": "毛利元就",
+      "name": "毛利元就",
+      "role": "先陣",
+      "characterId": "char_reina_01"
+    },
+    "10-9/2/1": {
+      "canonicalName": "濃姫",
+      "name": "濃姫",
+      "role": "道中の一隊",
+      "characterId": "char_riki_01"
+    },
+    "10-9/2/2": {
+      "canonicalName": "細川ガラシャ",
+      "name": "細川ガラシャ",
+      "role": "道中の一隊",
+      "characterId": "char_yukina_01"
+    },
+    "10-9/3/1": {
+      "canonicalName": "真田幸村",
+      "name": "真田幸村",
+      "role": "道中の一隊",
+      "characterId": "char_kaede_01"
+    },
+    "10-9/4/1": {
+      "canonicalName": "豊臣秀吉",
+      "name": "豊臣秀吉",
+      "role": "大将",
+      "characterId": "char_ageha_01"
+    },
+    "10-10/1/1": {
+      "canonicalName": "直江兼続",
+      "name": "直江兼続",
+      "role": "先陣",
+      "characterId": "char_rui_01"
+    },
+    "10-10/1/2": {
+      "canonicalName": "長宗我部元親",
+      "name": "長宗我部元親",
+      "role": "先陣",
+      "characterId": "char_taiga_01"
+    },
+    "10-10/2/1": {
+      "canonicalName": "立花誾千代",
+      "name": "立花誾千代",
+      "role": "道中の一隊",
+      "characterId": "char_sora_01"
+    },
+    "10-10/3/1": {
+      "canonicalName": "山本勘助",
+      "name": "山本勘助",
+      "role": "道中の一隊",
+      "characterId": "char_mei_01"
+    },
+    "10-10/3/2": {
+      "canonicalName": "島左近",
+      "name": "島左近",
+      "role": "道中の一隊",
+      "characterId": "char_minami_01"
+    },
+    "10-10/4/1": {
+      "canonicalName": "雑賀孫市",
+      "name": "雑賀孫市",
+      "role": "道中の一隊",
+      "characterId": "char_takuro_01"
+    },
+    "10-10/5/1": {
+      "canonicalName": "本多忠勝",
+      "name": "本多忠勝",
+      "role": "道中の一隊",
+      "characterId": "char_kengo_01"
+    },
+    "10-10/6/1": {
+      "canonicalName": "織田信長",
+      "name": "織田信長",
+      "role": "大将",
+      "characterId": "char_reiji_01"
+    },
+    "10-10/6/2": {
+      "canonicalName": "加藤清正",
+      "name": "加藤清正",
+      "role": "本陣の一隊",
+      "characterId": "char_leon_01"
+    }
+  },
+  "encounters": {
+    "encounter_a1_ERB01": {
+      "title": "荒野をゆく先鋒",
+      "bossName": "柴田勝家",
+      "area": "三河"
+    },
+    "encounter_a2_ERB01": {
+      "title": "荒野をゆく先鋒",
+      "bossName": "柴田勝家",
+      "area": "尾張"
+    },
+    "encounter_a2_ERB02": {
+      "title": "谷あいの守備陣",
+      "bossName": "井伊直虎",
+      "area": "尾張"
+    },
+    "encounter_a3_ERB02": {
+      "title": "谷あいの守備陣",
+      "bossName": "井伊直虎",
+      "area": "美濃"
+    },
+    "encounter_a3_ERB03": {
+      "title": "山際に響く銃声",
+      "bossName": "雑賀孫市",
+      "area": "美濃"
+    },
+    "encounter_a3_ERB04": {
+      "title": "海路からの来援",
+      "bossName": "長宗我部元親",
+      "area": "美濃"
+    },
+    "encounter_a3_ERB16": {
+      "title": "宵を駆ける騎影",
+      "bossName": "伊達政宗",
+      "area": "美濃"
+    },
+    "encounter_a4_ERB05": {
+      "title": "街道を塞ぐ陣",
+      "bossName": "加藤清正",
+      "area": "近江"
+    },
+    "encounter_a4_ERB06": {
+      "title": "野営地の強襲",
+      "bossName": "島津義弘",
+      "area": "近江"
+    },
+    "encounter_a4_ERB07": {
+      "title": "雷鳴の出陣",
+      "bossName": "立花誾千代",
+      "area": "近江"
+    },
+    "encounter_a4_ERB17": {
+      "title": "槍影の進軍",
+      "bossName": "本多忠勝",
+      "area": "近江"
+    },
+    "encounter_a4_ERB18": {
+      "title": "紅旗の急襲",
+      "bossName": "真田幸村",
+      "area": "近江"
+    },
+    "encounter_a5_ERB08": {
+      "title": "義を掲げる軍勢",
+      "bossName": "直江兼続",
+      "area": "甲斐"
+    },
+    "encounter_a5_ERB09": {
+      "title": "雅なる陣列",
+      "bossName": "今川義元",
+      "area": "甲斐"
+    },
+    "encounter_a5_ERB10": {
+      "title": "水辺の包囲陣",
+      "bossName": "毛利元就",
+      "area": "甲斐"
+    },
+    "encounter_a5_ERB19": {
+      "title": "白旗の出陣",
+      "bossName": "上杉謙信",
+      "area": "甲斐"
+    },
+    "encounter_a5_ERB20": {
+      "title": "動かぬ本営",
+      "bossName": "徳川家康",
+      "area": "甲斐"
+    },
+    "encounter_a6_ERB11": {
+      "title": "夜道に潜む影",
+      "bossName": "服部半蔵",
+      "area": "越後"
+    },
+    "encounter_a6_ERB12": {
+      "title": "霧中の軍略",
+      "bossName": "黒田官兵衛",
+      "area": "越後"
+    },
+    "encounter_a6_ERB13": {
+      "title": "月下の密会",
+      "bossName": "濃姫",
+      "area": "越後"
+    },
+    "encounter_a6_ERB21": {
+      "title": "夜半の軍旗",
+      "bossName": "明智光秀",
+      "area": "越後"
+    },
+    "encounter_a6_ERB22": {
+      "title": "山道を埋める軍勢",
+      "bossName": "武田信玄",
+      "area": "越後"
+    },
+    "encounter_a7_ERB14": {
+      "title": "山あいの密策",
+      "bossName": "真田昌幸",
+      "area": "京"
+    },
+    "encounter_a7_ERB15": {
+      "title": "密書を運ぶ一隊",
+      "bossName": "石田三成",
+      "area": "京"
+    },
+    "encounter_a7_ERB05": {
+      "title": "街道を塞ぐ陣",
+      "bossName": "加藤清正",
+      "area": "京"
+    },
+    "encounter_a7_ERB23": {
+      "title": "野をゆく傾奇者",
+      "bossName": "前田慶次",
+      "area": "京"
+    },
+    "encounter_a7_ERB24": {
+      "title": "黄金の旗印",
+      "bossName": "豊臣秀吉",
+      "area": "京"
+    },
+    "encounter_a7_ERB17": {
+      "title": "槍影の進軍",
+      "bossName": "本多忠勝",
+      "area": "京"
+    },
+    "encounter_a8_ERB07": {
+      "title": "雷鳴の出陣",
+      "bossName": "立花誾千代",
+      "area": "出雲"
+    },
+    "encounter_a8_ERB03": {
+      "title": "山際に響く銃声",
+      "bossName": "雑賀孫市",
+      "area": "出雲"
+    },
+    "encounter_a8_ERB06": {
+      "title": "野営地の強襲",
+      "bossName": "島津義弘",
+      "area": "出雲"
+    },
+    "encounter_a8_ERB25": {
+      "title": "覇者の行軍",
+      "bossName": "織田信長",
+      "area": "出雲"
+    },
+    "encounter_a8_ERB16": {
+      "title": "宵を駆ける騎影",
+      "bossName": "伊達政宗",
+      "area": "出雲"
+    },
+    "encounter_a8_ERB19": {
+      "title": "白旗の出陣",
+      "bossName": "上杉謙信",
+      "area": "出雲"
+    },
+    "encounter_a8_ERB18": {
+      "title": "紅旗の急襲",
+      "bossName": "真田幸村",
+      "area": "出雲"
+    },
+    "encounter_a9_ERB01": {
+      "title": "荒野をゆく先鋒",
+      "bossName": "柴田勝家",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB02": {
+      "title": "谷あいの守備陣",
+      "bossName": "井伊直虎",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB03": {
+      "title": "山際に響く銃声",
+      "bossName": "雑賀孫市",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB04": {
+      "title": "海路からの来援",
+      "bossName": "長宗我部元親",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB05": {
+      "title": "街道を塞ぐ陣",
+      "bossName": "加藤清正",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB06": {
+      "title": "野営地の強襲",
+      "bossName": "島津義弘",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB07": {
+      "title": "雷鳴の出陣",
+      "bossName": "立花誾千代",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB08": {
+      "title": "義を掲げる軍勢",
+      "bossName": "直江兼続",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB09": {
+      "title": "雅なる陣列",
+      "bossName": "今川義元",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB10": {
+      "title": "水辺の包囲陣",
+      "bossName": "毛利元就",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB11": {
+      "title": "夜道に潜む影",
+      "bossName": "服部半蔵",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB12": {
+      "title": "霧中の軍略",
+      "bossName": "黒田官兵衛",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB13": {
+      "title": "月下の密会",
+      "bossName": "濃姫",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB14": {
+      "title": "山あいの密策",
+      "bossName": "真田昌幸",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB15": {
+      "title": "密書を運ぶ一隊",
+      "bossName": "石田三成",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB16": {
+      "title": "宵を駆ける騎影",
+      "bossName": "伊達政宗",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB17": {
+      "title": "槍影の進軍",
+      "bossName": "本多忠勝",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB18": {
+      "title": "紅旗の急襲",
+      "bossName": "真田幸村",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB19": {
+      "title": "白旗の出陣",
+      "bossName": "上杉謙信",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB20": {
+      "title": "動かぬ本営",
+      "bossName": "徳川家康",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB21": {
+      "title": "夜半の軍旗",
+      "bossName": "明智光秀",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB22": {
+      "title": "山道を埋める軍勢",
+      "bossName": "武田信玄",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB23": {
+      "title": "野をゆく傾奇者",
+      "bossName": "前田慶次",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB24": {
+      "title": "黄金の旗印",
+      "bossName": "豊臣秀吉",
+      "area": "薩摩"
+    },
+    "encounter_a9_ERB25": {
+      "title": "覇者の行軍",
+      "bossName": "織田信長",
+      "area": "薩摩"
+    },
+    "encounter_a10_ERB01": {
+      "title": "荒野をゆく先鋒",
+      "bossName": "柴田勝家",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB02": {
+      "title": "谷あいの守備陣",
+      "bossName": "井伊直虎",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB03": {
+      "title": "山際に響く銃声",
+      "bossName": "雑賀孫市",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB04": {
+      "title": "海路からの来援",
+      "bossName": "長宗我部元親",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB05": {
+      "title": "街道を塞ぐ陣",
+      "bossName": "加藤清正",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB06": {
+      "title": "野営地の強襲",
+      "bossName": "島津義弘",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB07": {
+      "title": "雷鳴の出陣",
+      "bossName": "立花誾千代",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB08": {
+      "title": "義を掲げる軍勢",
+      "bossName": "直江兼続",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB09": {
+      "title": "雅なる陣列",
+      "bossName": "今川義元",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB10": {
+      "title": "水辺の包囲陣",
+      "bossName": "毛利元就",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB11": {
+      "title": "夜道に潜む影",
+      "bossName": "服部半蔵",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB12": {
+      "title": "霧中の軍略",
+      "bossName": "黒田官兵衛",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB13": {
+      "title": "月下の密会",
+      "bossName": "濃姫",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB14": {
+      "title": "山あいの密策",
+      "bossName": "真田昌幸",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB15": {
+      "title": "密書を運ぶ一隊",
+      "bossName": "石田三成",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB16": {
+      "title": "宵を駆ける騎影",
+      "bossName": "伊達政宗",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB17": {
+      "title": "槍影の進軍",
+      "bossName": "本多忠勝",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB18": {
+      "title": "紅旗の急襲",
+      "bossName": "真田幸村",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB19": {
+      "title": "白旗の出陣",
+      "bossName": "上杉謙信",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB20": {
+      "title": "動かぬ本営",
+      "bossName": "徳川家康",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB21": {
+      "title": "夜半の軍旗",
+      "bossName": "明智光秀",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB22": {
+      "title": "山道を埋める軍勢",
+      "bossName": "武田信玄",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB23": {
+      "title": "野をゆく傾奇者",
+      "bossName": "前田慶次",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB24": {
+      "title": "黄金の旗印",
+      "bossName": "豊臣秀吉",
+      "area": "関ヶ原"
+    },
+    "encounter_a10_ERB25": {
+      "title": "覇者の行軍",
+      "bossName": "織田信長",
+      "area": "関ヶ原"
+    }
+  },
+  "invasions": {
+    "TI01": {
+      "titles": [
+        "城下の警戒網",
+        "岡崎の関門",
+        "葵の居城"
+      ],
+      "lordName": "徳川家康",
+      "lordCharacterId": "char_karen_01"
+    },
+    "TI02": {
+      "titles": [
+        "湖岸の見張り",
+        "長浜の関門",
+        "黄金の居城"
+      ],
+      "lordName": "豊臣秀吉",
+      "lordCharacterId": "char_ageha_01"
+    },
+    "TI03": {
+      "titles": [
+        "山麓の警戒網",
+        "春日山の関門",
+        "山頂の本丸"
+      ],
+      "lordName": "上杉謙信",
+      "lordCharacterId": "char_koharu_01"
+    },
+    "TI04": {
+      "titles": [
+        "館外の警戒網",
+        "躑躅ヶ崎の関門",
+        "甲斐の本営"
+      ],
+      "lordName": "武田信玄",
+      "lordCharacterId": "char_go_01"
+    },
+    "TI05": {
+      "titles": [
+        "城下の布陣",
+        "安土の関門",
+        "天主の旗印"
+      ],
+      "lordName": "織田信長",
+      "lordCharacterId": "char_reiji_01"
+    }
+  }
+}

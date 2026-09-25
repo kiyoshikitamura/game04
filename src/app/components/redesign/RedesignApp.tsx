@@ -1,4 +1,5 @@
 'use client';
+import { raidDisplayLabel } from '@/domain/redesign/contextNames';
 import { raidBattleBackground } from '@/domain/redesign/approvedBackgrounds';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useGame } from '../../context/GameContext';
@@ -219,7 +220,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   const battleRoom = battle && battleKind === 'raid' && raidId ? data.rooms.find(room => room.id === raidId) : undefined;
   const encounter = data.rooms.find(r => getRoomRaidMaster(r).type === 'encounter' && r.status === 'active' && Date.parse(r.expiresAt) > encounterNow && r.participants.some(p => p.userId === state.userId && !p.leftAt));
   return <RedesignShell state={state} activeTab={tab} navigationBusy={busy} onNavigate={navigate} onAction={action} hideChrome={!!battle || questPlaying} socialEvents={data.socialEvents} missions={data.missions}
-    encounterRaid={encounter ? { id: encounter.id, name: getRoomRaidMaster(encounter).name, expiresAt: encounter.expiresAt } : null}
+    encounterRaid={encounter ? { id: encounter.id, name: raidDisplayLabel(getRoomRaidMaster(encounter), encounter.level), expiresAt: encounter.expiresAt } : null}
     notifications={<>
     {!!(state as AcquisitionState).pendingAcquisitions?.length && <p className="rd-panel" role="status">受け取り保留中の獲得物が{(state as AcquisitionState).pendingAcquisitions!.length}件あります。</p>}
     {error && <p className="rd-panel" role="alert">{error}</p>}

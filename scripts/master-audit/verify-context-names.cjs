@@ -1,0 +1,10 @@
+const assert=require('assert/strict'),fs=require('fs'),cp=require('child_process');const {req,json}=require('./runtime.cjs');
+const ui=req('contextNames'),data=json('src/domain/redesign/data/context-names.json'),proposal=json('docs/verification/master-audit-20260925/naming-proposal.json');
+const before=JSON.parse(cp.execFileSync('git',['show','def223bd3ef46a7c0669c6bfc2793475de684d8e:src/domain/redesign/data/quest65.json'],{encoding:'utf8',maxBuffer:8*1024*1024}));
+const after=json('src/domain/redesign/data/quest65.json');for(const s of before.stages)s.name=data.quests[s.id];assert.deepEqual(after,before,'Only approved quest name may change; stats, IDs, rewards, hints intact');
+assert.equal(Object.keys(data.quests).length,65);assert.equal(new Set(Object.values(data.quests)).size,65);
+for(const q of proposal.quests)assert.equal(ui.questDisplayName({id:q.id,name:q.currentName}),q.proposedName);
+for(const e of proposal.questEnemies){const unit={id:e.enemyId,name:e.canonicalName};const snapshot=JSON.stringify(unit);assert.equal(ui.enemyDisplayName(unit),e.proposedContextName);assert.equal(ui.enemyRoleLabel(unit),e.roleLabel);assert.equal(JSON.stringify(unit),snapshot);assert.equal(ui.enemyDisplayName({id:e.characterId,name:e.canonicalName}),e.canonicalName,'owned character must not be relabeled');assert.equal(ui.enemyDisplayName({id:e.enemyId,name:'別名の旧snapshot'}),'別名の旧snapshot');}
+for(const e of proposal.encounters){const unit={id:e.id,name:e.bossName};assert.equal(ui.raidDisplayTitle(unit),e.proposedTitle);assert(ui.raidDisplayLabel(unit).includes(e.bossName));}
+for(const m of proposal.invasions)for(const s of m.stages){assert.equal(ui.invasionSceneName(m.id,s.level),s.proposedTitle);for(const e of s.sampleEnemies)assert.equal(ui.enemyRoleLabel(e),e.role);}
+console.log('PASS: 65 titles / 356 enemy identities / 85 encounter IDs / 60 invasion stages; no non-name quest change, owned-name or snapshot mutation');

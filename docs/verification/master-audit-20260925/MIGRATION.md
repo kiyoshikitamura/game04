@@ -60,3 +60,5 @@ node scripts/master-audit/verify-snapshot.cjs evidence
 MA07追加停止条件：本文の未丸め計算と効果値が異なる、または丸め方針の後続明示承認が未確認。表示表一致だけでこの停止を解除しない。
 
 MA08追加停止条件：クエスト名称が攻略コンセプトと同じ、正式名称/承認根拠が欠落、敵名称のID対応不一致。65面の命名決定前に空文字・面番号・推測名で基準を通さない。名称だけでなくgeneratorからの再流入とHome title/出陣一覧/詳細/出撃確認の参照先を再照合。
+
+名称は2026-09-25 20:24 JST採用済み。G5ではNAMING_ADOPTION.mdを優先し、名称の再承認を求めない。旧approved-valuesとの比較はname-authority.jsonを優先するverify-snapshotを使用する。直接比較で旧名へ戻さない。contextNames.tsとcontext-names.jsonの新規依存もG5変更確認対象。
