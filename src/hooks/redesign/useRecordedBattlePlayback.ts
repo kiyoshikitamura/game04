@@ -21,6 +21,7 @@ export function useRecordedBattlePlayback({ result, initialFrame = 0, initialPau
   const clock = useRef<{ result: BattleResult; index: number; remaining: number } | null>(null);
   const generation = useRef(0);
   const frame = result.frames[clampFrame(index, result)];
+  const effectiveSpeed = speed / (frame?.burst ? 1 : 1.3);
   const finished = !frame || index >= result.frames.length - 1;
   const playbackPaused = paused || blocked || finished;
 
@@ -43,12 +44,12 @@ export function useRecordedBattlePlayback({ result, initialFrame = 0, initialPau
       if (generation.current !== activeGeneration) return;
       activeClock.remaining = 0;
       setIndex(current => Math.min(current + 1, result.frames.length - 1));
-    }, Math.max(0, activeClock.remaining / speed));
+    }, Math.max(0, activeClock.remaining / effectiveSpeed));
     return () => {
       clearTimeout(timer);
-      activeClock.remaining = Math.max(0, activeClock.remaining - (performance.now() - startedAt) * speed);
+      activeClock.remaining = Math.max(0, activeClock.remaining - (performance.now() - startedAt) * effectiveSpeed);
     };
-  }, [result, index, frame, speed, playbackPaused, minimumFrameDuration]);
+  }, [result, index, frame, effectiveSpeed, playbackPaused, minimumFrameDuration]);
 
   const cycleSpeed = useCallback(() => setSpeed(value => value >= (vipActive ? 3 : 2) ? 1 : value + 1), [vipActive]);
   const skip = useCallback(() => {
@@ -57,5 +58,5 @@ export function useRecordedBattlePlayback({ result, initialFrame = 0, initialPau
     clock.current = null;
     setIndex(Math.max(0, result.frames.length - 1));
   }, [vipActive, result]);
-  return { index, frame, finished, speed, paused, playbackPaused, setPaused, cycleSpeed, skip };
+  return { index, frame, finished, speed, effectiveSpeed, paused, playbackPaused, setPaused, cycleSpeed, skip };
 }

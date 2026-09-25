@@ -12,6 +12,7 @@ const castIds = [...new Set([
 export const TUTORIAL_ASSETS: string[] = [...new Set([
   ...Object.values(BACKGROUNDS),
   '/branding/tribe-neon-logo.png',
+  ...['N','R'].flatMap(rarity => [`/creative/ui/frame-${rarity}.png`, `/creative/card-backgrounds/${rarity}.png`]),
   ...castIds.flatMap(id => {
     const master = CHARACTER_MASTERS.find(character => character.id === id)!;
     return [characterArt(master, 'full'),

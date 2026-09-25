@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState, type ReactNode } from 'react';
-import Modal from '@/app/components/redesign/Modal';
-import { isBattleImageReady, preloadBattleImage } from '@/app/components/battle/battleAssetPreload';
+import BrandedLoading from '@/app/components/ui/BrandedLoading';
+import { isBattleImageReady, preloadBattleImages } from '@/app/components/battle/battleAssetPreload';
 
 /** One entry gate for the complete tutorial bundle; never remounted on a scene tap. */
 export default function TutorialSceneAssets({ assets, children }: { assets: string[]; children: ReactNode }) {
@@ -12,15 +12,12 @@ export default function TutorialSceneAssets({ assets, children }: { assets: stri
   const [attempt, setAttempt] = useState(0);
   useEffect(() => {
     let active = true;
-    Promise.all((JSON.parse(key) as string[]).map(preloadBattleImage)).then(() => {
+    preloadBattleImages(JSON.parse(key) as string[]).then(() => {
       if (active) setReadyKey(key);
     }, () => { if (active) setError(true); });
     return () => { active = false; };
   }, [key, attempt]);
-  if (!ready) return <Modal title={error ? '画像を読み込めませんでした' : 'チュートリアルの準備'} onClose={() => undefined} hideCloseButton closeDisabled className="tutorial-notice"
-    footer={error ? <button className="rd-button tutorial-next" onClick={() => { setError(false); setAttempt(value => value + 1); }}>再試行</button> : undefined}>
-    <p role="status">{error ? '通信状況を確認して、もう一度お試しください。' : '最初に必要な画像をまとめて準備しています…'}</p>
-  </Modal>;
+  if (!ready) return <><BrandedLoading />{error && <div className="tutorial-load-error" role="alert"><p>画像を読み込めませんでした。</p><button onClick={() => { setError(false); setAttempt(value => value + 1); }}>再試行</button></div>}</>;
   return children;
 }
 

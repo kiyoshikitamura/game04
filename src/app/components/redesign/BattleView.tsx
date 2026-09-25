@@ -3,7 +3,7 @@ import { useAudio } from '@/audio/AudioProvider';
 import { SE_ASSETS, type BgmScene, type SeEvent } from '@/audio/audioContract';
 import { recordedBattleSounds } from '@/audio/recordedBattleSound';
 import { enemyDisplayName, enemyRoleLabel } from '@/domain/redesign/contextNames';
-import { useEffect, useState, useRef, type CSSProperties } from 'react';
+import { useEffect, useMemo, useState, useRef, type CSSProperties } from 'react';
 import { beginQaImageGroup } from '@/utils/redesignQaTelemetry';
 import { useRecordedBattlePlayback } from '@/hooks/redesign/useRecordedBattlePlayback';
 import { projectRaidBattleHp } from '../../../domain/presentation/raidBattleHpPresentation';
@@ -14,14 +14,14 @@ import styles from './BattleView.module.css';
 import { BattleEffectLayer } from './battle-effects/BattleEffectLayer';
 import { effectAssetPaths, minimumEffectFrameDuration } from './battle-effects/recordedEffects';
 import { resolveBattleFrameEffects } from './battleEffectPresentation';
-import { isBattleImageReady, preloadBattleImage } from '../battle/battleAssetPreload';
+import { isBattleImageReady, preloadBattleImages } from '../battle/battleAssetPreload';
 import { characterArt } from '@/theme/creativeAssets';
 import characterAssets from '@/theme/local-characters.json';
 import { getCharacterPresentationMetadata } from '../character/characterPresentationMetadata';
 import { STATUS_LABELS, TARGET_LABELS, passiveDescription, skillConditionText, READINESS_REASONS, CLEANSE_LABELS, skillDescription, LEGACY_SKILL_MAPPING_NOTICE } from './battleLabels';
 
 const knownCharacterImages = new Set(characterAssets.flatMap(entry => Object.entries(entry).filter(([key]) => !['id', 'name'].includes(key)).map(([, value]) => value)));
-function unitArt(unit: BattleUnit, state: BattleUnitState | undefined, variant: 'full' | 'portrait') {
+function unitArt(unit: BattleUnit, state: BattleUnitState | undefined, variant: 'full' | 'portrait' | 'battle') {
   const source = state?.image || unit.image;
   // Unknown phase art remains authoritative; only known variants use the existing character mapping.
   return knownCharacterImages.has(source) ? characterArt({ id: unit.id, name: unit.name, image: source }, variant) ?? source : source;
@@ -67,9 +67,10 @@ export function BattleView({ bgmScene = 'BATTLE', requirePlaybackCompletion = fa
   const measuredImageResult = useRef<BattleResult | null>(null);
   const detailDialog = useRef<HTMLDialogElement>(null);
   const assetsBlocked = assetState.result !== result || assetState.status !== 'ready';
-  const { index, frame, finished, speed, paused, playbackPaused, setPaused, cycleSpeed, skip } = useRecordedBattlePlayback({ result, initialFrame, initialPaused, vipActive, blocked: !!detail || showLog || assetsBlocked, minimumFrameDuration: minimumEffectFrameDuration });
+  const { index, frame, finished, speed, effectiveSpeed, paused, playbackPaused, setPaused, cycleSpeed, skip } = useRecordedBattlePlayback({ result, initialFrame, initialPaused, vipActive, blocked: !!detail || showLog || assetsBlocked, minimumFrameDuration: minimumEffectFrameDuration });
   const presentation = projectRecordedBattleFrame(result, index);
-  useEffect(() => { if (finished) stopBgm(); }, [finished, stopBgm]);
+  const battleRoot = useRef<HTMLElement>(null);
+  useEffect(() => { if (finished) { stopBgm(); battleRoot.current?.scrollIntoView({ block: 'start' }); } }, [finished, stopBgm]);
   useEffect(() => {
     stopSe();
     if (!frame || assetsBlocked || paused || detail || showLog || heardFrame.current === index) return;
@@ -83,7 +84,18 @@ export function BattleView({ bgmScene = 'BATTLE', requirePlaybackCompletion = fa
     return stopSe;
   }, [result, index, frame, speed, assetsBlocked, paused, detail, showLog, playSe, stopSe]);
   const effects = frame ? resolveBattleFrameEffects(frame, result.frames[index - 1], presentation.skill) : [];
-  const imageKey = JSON.stringify([...new Set([...effectAssetPaths(effects), '/branding/tribe-neon-logo.png', backgroundSrc, ...(frame ? [...frame.party, ...frame.enemies].flatMap(state => { const unit = result.party.find(item => item.id === state.id) ?? result.waves[frame.wave - 1]?.find(item => item.id === state.id); return [unit ? unitArt(unit, state, 'full') : state.image, unit && frame.party.some(member => member.id === state.id) ? unitArt(unit, state, 'portrait') : undefined, unit ? `/ui/raid/v2/element-${unit.element}.png` : undefined, ...(state.skills ?? unit?.skills ?? []).filter(skill => !isUnassignedSkillImage(skill.image)).map(skill => skill.image)]; }) : [])].filter((src): src is string => !!src))]);
+  // A result-wide gate avoids hiding the battle when a later effect first appears.
+  const imageKey = useMemo(() => JSON.stringify([...new Set([
+    '/branding/tribe-neon-logo.png', backgroundSrc,
+    ...result.frames.flatMap((record, i) => effectAssetPaths(resolveBattleFrameEffects(record, result.frames[i - 1], projectRecordedBattleFrame(result, i).skill))),
+    ...result.frames.flatMap(record => [...record.party, ...record.enemies].flatMap(state => {
+      const unit = result.party.find(item => item.id === state.id) ?? result.waves[record.wave - 1]?.find(item => item.id === state.id);
+      return [unit ? unitArt(unit, state, 'battle') : state.image, unit ? unitArt(unit, state, 'full') : undefined,
+        unit && record.party.some(member => member.id === state.id) ? unitArt(unit, state, 'portrait') : undefined,
+        unit ? `/ui/raid/v2/element-${unit.element}.png` : undefined,
+        ...(state.skills ?? unit?.skills ?? []).filter(skill => !isUnassignedSkillImage(skill.image)).map(skill => skill.image)];
+    }))
+  ].filter((src): src is string => !!src))]), [result, backgroundSrc]);
   const decoded = (JSON.parse(imageKey) as string[]).every(isBattleImageReady);
   const visibleLoading = !decoded;
   const assetError = assetState.result === result && assetState.key === imageKey && assetState.status === 'error';
@@ -105,7 +117,7 @@ export function BattleView({ bgmScene = 'BATTLE', requirePlaybackCompletion = fa
       return;
     }
     setAssetState({ result, key: imageKey, status: 'loading' });
-    Promise.all((JSON.parse(imageKey) as string[]).map(preloadBattleImage)).then(() => { if (!cancelled) { setAssetState({ result, key: imageKey, status: 'ready' }); finishImageTiming?.('success'); } }, () => { if (!cancelled) { setAssetState({ result, key: imageKey, status: 'error' }); finishImageTiming?.('error'); } });
+    preloadBattleImages(JSON.parse(imageKey) as string[]).then(() => { if (!cancelled) { setAssetState({ result, key: imageKey, status: 'ready' }); finishImageTiming?.('success'); } }, () => { if (!cancelled) { setAssetState({ result, key: imageKey, status: 'error' }); finishImageTiming?.('error'); } });
     return () => { cancelled = true; };
   }, [result, imageKey, retry]);
   useEffect(() => {
@@ -133,12 +145,12 @@ export function BattleView({ bgmScene = 'BATTLE', requirePlaybackCompletion = fa
     const unit = lookup(state.id); if (!unit) return null;
     const impact = presentation.impacts.find(item => item.targetId === state.id);
     const active = presentation.activeActorId === state.id;
-    const artSource = unitArt(unit, state, enemy ? 'full' : 'portrait');
+    const artSource = unitArt(unit, state, enemy ? 'battle' : 'portrait');
     const faceCrop = getCharacterPresentationMetadata(artSource);
-    return <div data-unit-id={state.id} data-order={order} className={`${enemy ? styles.enemy : styles.member} ${state.hp <= 0 ? styles.dead : ''} ${active ? styles.active : ''}`} key={state.id}>
+    return <div data-unit-id={state.id} data-order={order} data-hit={impact?.type === 'damage' ? frame.index : undefined} className={`${enemy ? styles.enemy : styles.member} ${state.hp <= 0 ? styles.dead : ''} ${active ? styles.active : ''}`} key={state.id}>
       {!enemy && <span className={styles.order}>{order + 1}</span>}
       {!enemy && active && <span className={styles.acting}>行動中</span>}
-      <button className={styles.unitButton} onClick={() => setDetail({ unit, state })} aria-label={`${enemyDisplayName(unit)}の戦闘詳細`}>
+      <button key={impact?.type === 'damage' ? `hit-${frame.index}` : 'idle'} className={`${styles.unitButton} ${impact?.type === 'damage' ? styles.hit : ''}`} onClick={() => setDetail({ unit, state })} aria-label={`${enemyDisplayName(unit)}の戦闘詳細`}>
         {enemy ? <img data-effect-anchor src={artSource} alt="" className={styles.enemyImage} /> : <span data-effect-anchor className={styles.memberPortrait}><img src={artSource} alt="" className={styles.memberImage} style={{ '--face-scale': faceCrop.thumbnailScale, '--face-x': `${faceCrop.thumbnailX}%`, '--face-y': `${faceCrop.thumbnailY}%` } as CSSProperties} /></span>}
         <span className={styles.unitInfo}>
           <span className={styles.unitName}>{enemy && <img className={styles.element} src={`/ui/raid/v2/element-${unit.element}.png`} alt={elements[unit.element]} />}{enemy && <small>Lv.{unit.level} </small>}{enemyDisplayName(unit)}</span>
@@ -165,23 +177,24 @@ export function BattleView({ bgmScene = 'BATTLE', requirePlaybackCompletion = fa
       {impact && <div key={`${frame.index}-${state.id}`} className={`${styles.impact} ${impact.type === 'heal' ? styles.healing : ''}`} data-impact-target={state.id}><strong>{impact.type === 'miss' ? 'MISS' : impact.type === 'status' ? ({effect_applied:'付与',effect_miss:'不成立',cleanse:'解除',shield_absorbed:'吸収'}[frame.event ?? ''] ?? '') : `${impact.type === 'heal' ? '+' : ''}${Math.abs(impact.amount).toLocaleString()}`}</strong>{impact.hits && impact.hits.length > 1 && <small>{impact.hits.length} HITS</small>}</div>}
     </div>;
   };
-  return <section className={styles.battle} aria-label={title} data-playback-paused={playbackPaused} data-playback-frame={index} style={{ '--battle-speed': speed, '--battle-background': `url(${JSON.stringify(backgroundSrc)})` } as CSSProperties}>
+  return <section ref={battleRoot} className={styles.battle} aria-label={title} data-playback-paused={playbackPaused} data-playback-frame={index} style={{ '--battle-speed': effectiveSpeed, '--battle-background': `url(${JSON.stringify(backgroundSrc)})` } as CSSProperties}>
     <dialog ref={loadingDialog} className={styles.loading} onCancel={event => event.preventDefault()} aria-label="戦闘画面の読み込み"><img src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" />{assetError ? <><p>戦闘画像を読み込めませんでした。</p><button onClick={() => { setAssetState({ result, key: imageKey, status: 'loading' }); setRetry(value => value + 1); }}>再試行</button>{!requirePlaybackCompletion && <button onClick={leaveFailedPlayback}>再生を終了する</button>}</> : <><span className={styles.spinner} /><p>戦闘の準備中</p></>}</dialog>
     <div className={visibleLoading ? styles.loadingContent : undefined}>
-    <header className={styles.header}><img src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" /><strong>WAVE <b>{frame.wave}</b>/{result.waves.length}</strong><div><button onClick={cycleSpeed} aria-label={`再生速度 ${speed}倍`}>▶▶ ×{speed}</button><button onClick={() => setPaused(p => !p)} disabled={finished} aria-label={paused ? '再開' : '一時停止'}>{paused ? '▶' : 'Ⅱ'}</button>{vipActive && <button className={styles.skip} disabled={finished} onClick={skip}>SKIP</button>}</div></header>
+    {!finished && <><header className={styles.header}><img src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" /><strong>WAVE <b>{frame.wave}</b>/{result.waves.length}</strong><div><button onClick={cycleSpeed} aria-label={`再生速度 ${speed}倍`}>▶▶ ×{speed}</button><button onClick={() => setPaused(p => !p)} disabled={finished} aria-label={paused ? '再開' : '一時停止'}>{paused ? '▶' : 'Ⅱ'}</button>{vipActive && <button className={styles.skip} disabled={finished} onClick={skip}>SKIP</button>}</div></header>
     {displayedRaidHp && <div className={styles.raidHp}>{displayedRaidHp.label} <span>{Math.floor(displayedRaidHp.current).toLocaleString()} / {Math.floor(displayedRaidHp.max).toLocaleString()}</span></div>}
     <div className={styles.arena}>
       <div className={styles.enemyZone} data-count={frame.enemies.length}>{frame.enemies.map((u, i) => unitCard(u, true, i))}</div>
       {presentation.cutIn && presentation.actor && <div className={`${styles.cutIn} ${presentation.cutIn === 'burst' ? styles.burstCutIn : styles.skillCutIn}`} key={`cutin-${frame.index}`} aria-label={`${presentation.actor.name} ${presentation.cutIn === 'burst' ? 'BURST' : presentation.skill?.name ?? 'スキル'}`}><div className={styles.cutInLight} /><img src={unitArt(presentation.actor, presentation.actorState, 'full')} alt="" /><strong>{presentation.cutIn === 'burst' ? 'BURST' : presentation.skill?.name}</strong><span>{presentation.actor.name}</span></div>}
-      <div className={`${styles.feedback} ${presentation.isSkill ? styles.skillFeedback : ''}`} key={frame.index} aria-live="off">{presentation.isSkill && presentation.actor && presentation.skill ? <><span>{presentation.actor.name}</span>　{presentation.skill.name}</> : eventText(frame.text)}{frame.hits && frame.hits.length > 1 && <small className={styles.hitBreakdown}>{frame.hits.join(' + ')}</small>}</div>
+      {presentation.isSkill && presentation.actor && presentation.skill && <div className={`${styles.feedback} ${styles.skillFeedback}`} key={frame.index}><span>{presentation.actor.name}</span>{presentation.skill.name}</div>}
     </div>
-    <div className={styles.resources}><div className={styles.spPanel}><span>共通SP</span><div className={styles.sp} role="meter" aria-label="共通SP" aria-valuemin={0} aria-valuemax={frame.maxSp} aria-valuenow={frame.partySp}><span style={{ width: meterWidth(frame.partySp, frame.maxSp) }} /><strong>{frame.partySp} / {frame.maxSp}</strong></div></div><div className={`${styles.burst} ${frame.burst ? styles.burstOn : ''}`} title="BURSTは戦闘記録に従って自動発動します">BURST{frame.burstGauge !== undefined && <small>{frame.burstGauge}/{frame.maxBurstGauge ?? 200}</small>}</div></div>
+    <div className={`${styles.resources} ${frame.maxSp > 0 && frame.partySp >= frame.maxSp ? styles.spFull : ''}`}><div className={styles.spPanel}><span>共通SP</span><div className={styles.sp} role="meter" aria-label="共通SP" aria-valuemin={0} aria-valuemax={frame.maxSp} aria-valuenow={frame.partySp}><span style={{ width: meterWidth(frame.partySp, frame.maxSp) }} /><strong>{frame.partySp} / {frame.maxSp}</strong></div></div><div className={`${styles.burst} ${frame.burst ? styles.burstOn : ''}`} title="BURSTは戦闘記録に従って自動発動します">BURST{frame.burstGauge !== undefined && <small>{frame.burstGauge}/{frame.maxBurstGauge ?? 200}</small>}</div></div>
     {frame.burstGauge !== undefined && <div className={`${styles.sp} ${styles.gauge}`} role="meter" aria-label="バーストゲージ" aria-valuemin={0} aria-valuemax={frame.maxBurstGauge ?? 200} aria-valuenow={frame.burstGauge}><span style={{ width: meterWidth(frame.burstGauge, frame.maxBurstGauge ?? 200) }} /></div>}
     <div className={styles.party}>{frame.party.map((u, i) => unitCard(u, false, i))}</div>
     {frame.remainingActions !== undefined && <p className={styles.actionLimit}>残り味方行動機会 <strong>{frame.remainingActions}</strong> / 300</p>}
-    {finished && <div className={styles.result}><h2>{result.outcome === 'win' ? '勝利' : result.outcome === 'lose' ? '敗北' : '行動上限'}</h2><p>{frame.reason ? reasonText(frame.reason) : eventText(frame.text)}</p><p>{result.wavesCleared} Wave突破 · 総ダメージ {result.totalDamage.toLocaleString()}</p><details><summary>戦果と編成の分析</summary><div className={styles.tableWrap}><table><thead><tr><th>武将</th><th>与ダメージ</th><th>回復</th><th>SP獲得</th><th>BURST</th></tr></thead><tbody>{result.analysis.map(a => <tr key={a.id}><th>{a.name}</th><td>{a.damage.toLocaleString()}</td><td>{a.healing.toLocaleString()}</td><td>{a.spGenerated}</td><td>{a.bursts}</td></tr>)}</tbody></table></div><p>敵の属性・行動カウントを見直し、編成順とスキル優先順を調整できます。</p></details><button onClick={() => setShowLog(true)}>戦闘ログ</button><button className={styles.primary} onClick={onComplete}>結果へ</button></div>}
+    </>}
+    {finished && <div className={styles.result} role="status"><h2>{result.outcome === 'win' ? '勝利' : result.outcome === 'lose' ? '敗北' : '行動上限'}</h2><p>{frame.reason ? reasonText(frame.reason) : eventText(frame.text)}</p><p>{result.wavesCleared} Wave突破 · 総ダメージ {result.totalDamage.toLocaleString()}</p><details><summary>戦果と編成の分析</summary><div className={styles.tableWrap}><table><thead><tr><th>武将</th><th>与ダメージ</th><th>回復</th><th>SP獲得</th><th>BURST</th></tr></thead><tbody>{result.analysis.map(a => <tr key={a.id}><th>{a.name}</th><td>{a.damage.toLocaleString()}</td><td>{a.healing.toLocaleString()}</td><td>{a.spGenerated}</td><td>{a.bursts}</td></tr>)}</tbody></table></div><p></p></details><button onClick={() => setShowLog(true)}>戦闘ログ</button><button className={styles.primary} onClick={onComplete}>結果へ</button></div>}
     </div>
-    {!finished && !assetsBlocked && <BattleEffectLayer key={index} effects={effects} partyIds={frame.party.map(unit => unit.id)} paused={playbackPaused} speed={speed} />}
+    {!finished && !assetsBlocked && <BattleEffectLayer key={index} effects={effects} partyIds={frame.party.map(unit => unit.id)} paused={playbackPaused} speed={effectiveSpeed} />}
     {(detail || showLog) && <dialog ref={detailDialog} className={styles.backdrop} aria-label={showLog ? '戦闘ログ' : '戦闘詳細'} onCancel={event => { event.preventDefault(); close(); }}><section className={styles.modal}><button className={styles.close} onClick={close} autoFocus>閉じる</button>{showLog ? <>
       <h2>戦闘ログ</h2>{result.frames.map(f => <article className={styles.logEntry} key={f.index}><strong>#{f.index + 1} W{f.wave} {f.actorId ? lookup(f.actorId, f.wave)?.name ?? f.actorId : ''}</strong><p>{eventText(f.text)}</p>{f.targetIds?.length ? <p>対象：{f.targetIds.map(id => lookup(id, f.wave)?.name ?? id).join('、')}</p> : null}<p>SP {f.partySp}/{f.maxSp}{f.spDelta !== undefined ? ` (${signed(f.spDelta)})` : ''}{f.burstGauge !== undefined ? ` · ゲージ ${f.burstGauge}/${f.maxBurstGauge ?? 200}` : ''}{f.gaugeDelta !== undefined ? ` (${signed(f.gaugeDelta)})` : ''}{f.remainingActions !== undefined ? ` · 残り${f.remainingActions}回` : ''}</p><p>敵SP：{f.enemies.map(enemy => `${lookup(enemy.id, f.wave)?.name ?? enemy.id} ${enemy.sp}/${enemy.maxSp}`).join(' · ')}</p>{f.hits && f.hits.length > 1 && <p>ヒット表示：{f.hits.join(' + ')}</p>}{f.reason && <p>{reasonText(f.reason)}</p>}</article>)}
     </> : detail?.skill ? <><h2>{detail.skill.name}</h2><p>{detail.readiness}{detail.cost !== undefined ? ` · 今回の消費SP ${detail.cost}` : ''}</p>{showDetailReason && <p>{detailReason}</p>}<p>基本消費SP {detail.skill.spCost} · {elements[detail.skill.element]}</p><p>{skillDescription(detail.skill, result.rulesVersion === 'balance-v2-20260920')}</p><p>条件：{skillConditionText(detail.skill)}</p><p>対象：{TARGET_LABELS[detail.skill.target] ?? detail.skill.target}</p><p>効果順：{detail.skill.effects.map(effect => `${statusNames[effect.type] ?? '状態効果'}${effect.cleanseCategory ? `（${CLEANSE_LABELS[effect.cleanseCategory]}）` : ''}`).join(' → ')}</p></> : detail?.unit && <><h2>{enemyDisplayName(detail.unit)}</h2>{enemyRoleLabel(detail.unit) && <p>{enemyRoleLabel(detail.unit)}</p>}<p>HP {detail.state ? Math.floor(detail.state.hp).toLocaleString() : undefined} / {detail.state ? Math.floor(detail.state.maxHp).toLocaleString() : undefined}</p>{detail.state && result.waves[frame.wave - 1]?.some(u => u.id === detail.unit?.id) && <p>SP {detail.state.sp} / {detail.state.maxSp} · あと {detail.state.count} 行動で割り込み</p>}{detail.unit.passives.length > 0 && <><h3>パッシブ</h3>{detail.unit.passives.map((p, i) => <p key={`${p.id}-${i}`}><strong>{p.name} Lv.{p.level ?? 0}</strong><br />{passiveDescription(p)}{detail.state?.passiveEffects?.find(entry=>entry.id===p.id) && <><br />記録時：{detail.state.passiveEffects.find(entry=>entry.id===p.id)?.active ? '条件成立' : '条件不成立・無効'}</>}</p>)}</>}<h3>スキル発動優先順</h3>{(detail.state?.skills ?? detail.unit.skills).map((s, slot) => <p key={s.id}><strong>優先{slot + 1}：{s.name}</strong>（SP {s.spCost}）<br />{skillConditionText(s)}<br />{skillDescription(s, result.rulesVersion === 'balance-v2-20260920')}</p>)}<h3>状態</h3>{detail.state?.statuses.length ? detail.state.statuses.map((s, i) => <p key={i}>{statusNames[s.type] ?? s.type} {s.type === 'shield' ? `残量 ${(s.amount ?? 0).toLocaleString()}` : ['dot','hot'].includes(s.type) ? `保持基礎量 ${s.amount ?? 0}` : ['stun','taunt'].includes(s.type) ? '' : `${s.power}%`} · 残り{s.remaining}回{s.sourceSkillId ? ` · 付与元 ${[...result.party, ...(result.waves[frame.wave - 1] ?? [])].flatMap(unit => unit.skills).find(skill => skill.id === s.sourceSkillId)?.name ?? '状態付与スキル'}` : ''}</p>) : <p>なし</p>}{detail.state?.stunImmune && <p>行動不能の再付与耐性：次の実行行動完了まで</p>}</>}</section></dialog>}

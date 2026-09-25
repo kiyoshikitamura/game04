@@ -8,7 +8,6 @@ type TitleLegalFooterProps = {
 export default function TitleLegalFooter({ boot = false }: TitleLegalFooterProps) {
   return (
     <footer className={`title-footer${boot ? " title-footer--boot" : ""}`}>
-      <p className="title-play-note">アプリのダウンロード不要でプレイできます。</p>
       <nav className="title-legal-links" aria-label="法的情報" onClick={(event) => event.stopPropagation()}>
         <Link href="/legal/terms">利用規約</Link>
         <Link href="/legal/privacy">プライバシーポリシー</Link>

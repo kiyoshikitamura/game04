@@ -242,7 +242,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     game.setUserLoginBonus({ user_id: owner, current_step: loginReceipt.current_step, total_logins: loginReceipt.total_logins, last_claimed_date: loginReceipt.last_claimed_date });
     game.setShowLoginBonusModal(true);
   }, [owner, loginReceipt, busy, battle, questPlaying, game.setLoginBonusClaimResult, game.setUserLoginBonus, game.setShowLoginBonusModal, data?.state.tutorial?.loginEligible, tab]);
-  if (!data) return <div className="rd-shell"><div className="rd-panel">{error ? <><p role="alert">{error}</p><button className="rd-button" onClick={() => void refresh()}>再読み込み</button></> : <BrandedLoading label="戦国の世界を準備中" />}</div></div>;
+  if (!data) return <div className="rd-shell"><div>{error ? <><p role="alert">{error}</p><button className="rd-button" onClick={() => void refresh()}>再読み込み</button></> : <BrandedLoading label="戦国の世界を準備中" />}</div></div>;
   if(data.state.tutorial && data.state.tutorial.step<SCENES.length) return <IntegratedTutorial state={data.state} busy={busy} onNext={async(step,name)=>{const result=await action('tutorial_next',{step,name});if(result.state.tutorial?.name)game.setUsername(result.state.tutorial.name);return result;}}/>;
   const state = data.state, vipActive = isVipActive(state.vipExpiresAt);
   const battleRoom = battle && battleKind === 'raid' && raidId ? data.rooms.find(room => room.id === raidId) : undefined;

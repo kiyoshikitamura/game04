@@ -15,6 +15,7 @@ import './QuestView.css';
 import { useQuestAssets } from './questAssets';
 import { growthRewardLabel } from '@/domain/redesign/growthReward';
 import ElementBadge from './ElementBadge';
+import LoadingSpinner from '../ui/LoadingSpinner';
 import roster from '@/theme/sengoku-characters.json';
 import { characterArt } from '@/theme/creativeAssets';
 import { BossDisplay, useArtworkPreload, type DisplaySubject } from './visual-bench/CharacterDisplays';
@@ -109,8 +110,8 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
   const encounterBackgrounds = useQuestAssets(selectedBoss ? [selectedSubject ? '' : selectedBoss.image, QUEST_AREAS.find(entry => entry.id === selected?.areaId)?.image ?? ''].filter(Boolean) : []);
   const encounterAssets = { ready: bossAssets.ready && encounterBackgrounds.ready, failed: bossAssets.failed || encounterBackgrounds.failed, retry: () => { bossAssets.retry(); encounterBackgrounds.retry(); } };
   if (playing && settlement) return <BattleView bgmScene={questBattleBgm(selected?.id)} result={settlement.battle} vipActive={vipActive} onComplete={() => setPlaying(false)} title={selected ? `${selectedLabel} ${questDisplayName(selected)}` : selectedLabel} backgroundSrc={QUEST_AREAS.find(entry => entry.id === selected?.areaId)?.image} />;
-  return <section className="redesign-quest">
-    {!viewAssets.ready && !settlement && !modal && <p role={viewAssets.failed ? "alert" : "status"}>{viewAssets.failed ? <>画像を読み込めませんでした。<button onClick={viewAssets.retry}>再読み込み</button></> : '読み込み中…'}</p>}
+  return <section className="redesign-quest" style={area ? { backgroundImage: `linear-gradient(#120d0860,#120d0890),url("${area.image}")` } : undefined}>
+    {!viewAssets.ready && !settlement && !modal && <p role={viewAssets.failed ? "alert" : "status"}>{viewAssets.failed ? <>画像を読み込めませんでした。<button onClick={viewAssets.retry}>再読み込み</button></> : <LoadingSpinner />}</p>}
     {settlement ? <div className="rq-summary">
       <h2>{settlement.battle.outcome === 'win' ? 'ステージクリア' : '再び、戦場へ'}</h2>
       <p>{selectedLabel} {selected && questDisplayName(selected)}</p>
@@ -132,7 +133,7 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
         })}</div></> : <><h2>出陣</h2><div className="rq-scroll rq-area-list" aria-label="エリア一覧">{visibleAreas.map(entry => {
           const cleared = entry.stages.every(stage => state.clearedStages.includes(stage.id));
           const unlocked = isQuestStageUnlocked(entry.stages[0].id, state.clearedStages);
-          return <button key={entry.id} disabled={!unlocked || !viewAssets.ready} className={`rq-area ${entry.id === current.areaId ? 'is-current' : ''}`} style={{ backgroundImage: `linear-gradient(0deg,#0c080690,transparent 72%),url("${entry.image}")` }} onClick={() => setAreaId(entry.id)}><strong>{entry.name}</strong><span className="rq-area-description">{entry.description}</span><span className={`rq-area-status ${cleared ? 'is-cleared' : unlocked ? 'is-current' : 'is-locked'}`}>{unlocked && <img src="/ui/sengoku/07-flower-crest.png" alt="" />}<span className="rq-area-status-text">{cleared ? '攻略済' : unlocked ? '攻略中' : '未解放'}</span></span></button>;
+          return <button key={entry.id} disabled={!unlocked || !viewAssets.ready} className={`rq-area ${entry.id === current.areaId ? 'is-current' : ''}`} style={{ backgroundImage: `linear-gradient(0deg,#0c080690,transparent 72%),url("${entry.image}")` }} onClick={() => setAreaId(entry.id)}><strong>{entry.name}</strong><span className={`rq-area-status ${cleared ? 'is-cleared' : unlocked ? 'is-current' : 'is-locked'}`}>{unlocked && <img src="/ui/sengoku/07-flower-crest.png" alt="" />}<span className="rq-area-status-text">{cleared ? '攻略済' : unlocked ? '攻略中' : '未解放'}</span></span></button>;
         })}</div></>}
     </>}
     {selected && modal === 'info' && <div className="redesign-quest-dialog"><CanonicalDialog title={`${selectedLabel} ${formalStageName(selected) ?? selected.name}`} onClose={() => setModal(null)} actions={[{ label: '挑戦', semantic: 'primary', onClick: () => setModal('prepare'), disabled: !encounterAssets.ready || !isQuestStageUnlocked(selected.id, state.clearedStages) }]}>

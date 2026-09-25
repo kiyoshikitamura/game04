@@ -41,3 +41,25 @@ dialog.backdrop{margin:0;width:100%;height:100%;max-width:none;max-height:none;b
   .cutIn>span{bottom:8px;line-height:1.2}
   .skillCutIn>strong{bottom:34px}
 }
+
+
+/* DBG-006–014: viewport budget, original battle art proportions and result replacement. */
+.battle:before{background:linear-gradient(#09122130,#09132130 55%,#0a0d1560),var(--battle-background) center/cover;filter:none;transform:none}
+.arena{height:clamp(160px,calc(100svh - 395px),350px)}
+.enemyZone{bottom:0;display:flex;align-items:end;justify-content:center;gap:4px}
+.enemyZone .enemy[data-order]{position:relative;left:auto;right:auto;bottom:auto;width:auto;flex:1;height:100%;margin:0}
+.enemyZone .enemy[data-order] .enemyImage{left:0;top:66px;width:100%;height:calc(100% - 66px);object-fit:contain;object-position:center bottom;filter:none}
+.memberPortrait{height:clamp(48px,calc(100svh - 580px),88px)}
+.party{margin-top:5px}.actionLimit{margin:3px 0}.member .unitName{min-height:0;font-size:12px}.member .hpNumber span{display:inline}.member .hpNumber{font-size:10px}
+.skillFeedback{bottom:0;min-height:0;padding:3px;pointer-events:none}
+.cutIn,.skillCutIn{inset:0;min-height:0}
+.cutIn>img,.skillCutIn>img,.cutIn:not(.skillCutIn)>img{width:65%;height:100%;left:0;bottom:0;object-fit:contain;object-position:center top;filter:none}
+.cutIn>strong,.skillCutIn>strong{font-size:clamp(22px,7vw,38px);max-width:55%;right:3%;bottom:25%;overflow-wrap:anywhere}
+.cutIn>span,.skillCutIn>span{right:3%;bottom:12%;font-size:16px}
+.hit{animation:deviceHit calc(.32s / var(--battle-speed)) ease-out}
+@keyframes deviceHit{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+.spFull .spPanel{box-shadow:0 0 8px #70eaff,0 0 16px #70eaff99;border-color:#b8faff}
+.spFull .burst{animation:burstReady 1s ease-in-out infinite}
+@keyframes burstReady{50%{filter:brightness(1.7);box-shadow:0 0 12px #ffd270}}
+.result{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100svh - 60px);margin:0;border:0;gap:12px;padding:24px 12px}.result h2{font-size:44px}.result .primary{margin:0}.result details{width:100%}
+@media(prefers-reduced-motion:reduce){.hit,.spFull .burst{animation:none}}

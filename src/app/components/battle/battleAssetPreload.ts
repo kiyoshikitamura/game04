@@ -27,3 +27,12 @@ export function preloadBattleImage(src: string): Promise<void> {
   decodedImages.set(src, pending);
   return pending;
 }
+
+/** Bound simultaneous image decodes on mobile; a battle still has one entry gate. */
+export async function preloadBattleImages(sources: readonly string[]) {
+  const queue = [...new Set(sources)];
+  let cursor = 0;
+  await Promise.all(Array.from({ length: Math.min(3, queue.length) }, async () => {
+    while (cursor < queue.length) await preloadBattleImage(queue[cursor++]);
+  }));
+}

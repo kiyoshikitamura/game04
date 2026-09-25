@@ -14,7 +14,7 @@ body.game04-theme :is(.rd-shell,.rd-modal,.g4g-modal,.canonical-dialog,.qa-opera
 body.game04-theme :is(.rd-button,.g4-growth button,.g4g-modal button,.rq-back,.rq-stage,.semantic-cta,.outlaw-button,.shop-buy-button){background:var(--g4-panel);border-color:var(--g4-muted);color:var(--g4-text)}
 body.game04-theme :is(.rd-primary,.semantic-cta--primary,.outlaw-button--primary,.shop-buy-button,.rd-quest-resume:not(.rd-territory-entry)){background:var(--g4-primary);color:var(--g4-text);border-color:var(--g4-gold)}
 body.game04-theme :is(.rd-muted,.rq-muted,small,.shop-card-desc,.shop-expiry-notice,.shop-bundle-text,.shop-tax-note){color:var(--g4-muted);font-size:var(--g4-small);line-height:1.6}
-body.game04-theme :is(.rd-shell,.rd-modal,.g4g-modal,.canonical-dialog) :is(button:disabled,[aria-disabled=true]){opacity:1;border-style:dashed;color:var(--g4-muted);cursor:default}
+body.game04-theme :is(.rd-shell,.rd-modal,.g4g-modal,.canonical-dialog) :is(button:disabled,[aria-disabled=true]){opacity:1;border-style:solid;color:var(--g4-muted);cursor:default}
 body.game04-theme :is(.rd-tabs,.g4g-tabs,.gacha-category-tabs,.shop-sub-tabs){flex-wrap:wrap;background:var(--g4-bg)}
 body.game04-theme :is(.rd-tabs,.g4g-tabs,.gacha-category-tabs,.shop-sub-tabs) button{font-size:var(--g4-label);min-width:44px}
 body.game04-theme :is(button[aria-current=page],button[aria-pressed=true],button[aria-selected=true],.rd-tabs button.active,.gacha-tab-btn.is-active){color:var(--g4-gold);border-bottom:3px solid var(--g4-gold);box-shadow:inset 0 0 0 1px var(--g4-gold);background:var(--g4-panel)}
@@ -57,7 +57,7 @@ body.game04-theme .g4-growth-item-icon{width:48px;height:48px;object-fit:contain
 body.game04-theme .rq-area :is(strong,span),body.game04-theme .rq-area-head h2{background:var(--g4-panel);padding:3px 6px;color:var(--g4-text)}
 body.game04-theme .rq-area strong{font-size:20px}
 body.game04-theme .rq-area span,body.game04-theme .rq-stage small{font-size:14px}
-body.game04-theme :is(.rq-area,.rq-stage):disabled{opacity:1;filter:none;border-style:dashed}
+body.game04-theme :is(.rq-area,.rq-stage):disabled{opacity:1;filter:none;border-style:solid}
 body.game04-theme .rq-party :is(strong,span,small){font-size:14px;line-height:1.4;overflow-wrap:anywhere}
 body.game04-theme .rq-party button{min-width:0}
 body.game04-theme .rq-party .rq-order{font-size:12px;min-width:20px;min-height:20px}

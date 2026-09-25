@@ -27,7 +27,8 @@ function readImage(src:string) {
       image.src=src;
     });
     pending.set(src,task);
-    task.catch(()=>pending.delete(src));
+    // Retain measured bounds, not decoded full-resolution Image objects for the session.
+    task.then(()=>pending.delete(src),()=>pending.delete(src));
   }
   return task;
 }

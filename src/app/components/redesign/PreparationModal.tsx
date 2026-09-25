@@ -4,6 +4,7 @@ import { useQuestAssets } from './questAssets';
 import type { BattleUnit, OwnedCharacter } from '@/domain/redesign/types';
 import CanonicalDialog from '../ui/CanonicalDialog';
 import './QuestView.css';
+import LoadingSpinner from '../ui/LoadingSpinner';
 import { passiveDescription, skillDescription } from './battleLabels';
 import ElementBadge from './ElementBadge';
 import { CHARACTER_MASTERS, getSkillSlots } from '@/domain/redesign/masters';
@@ -32,12 +33,12 @@ export default function PreparationModal({ party, ownedCharacters, title, energy
       { label: 'キャンセル', onClick: onBack, disabled: busy },
       { label: busy ? '出撃中…' : '出撃する', onClick: onConfirm, semantic: 'primary', disabled: busy || !assets.ready || energy < energyCost || invalidPartySize },
     ]}>
-      <h3>{title}</h3>{!assets.ready && <p role={assets.failed ? "alert" : "status"}>{assets.failed ? <>画像を読み込めませんでした。<button onClick={assets.retry}>再読み込み</button></> : '読み込み中…'}</p>}
-      {assets.ready && <div className="rq-party">{party.map((unit, index) => { const master = CHARACTER_MASTERS.find(entry => entry.id === unit.id); const subject = master ? { id: master.id, name: unit.name, rarity: master.rarity, element: unit.element as 'fire'|'water'|'earth'|'wind'|'light'|'dark' } : null; return <button type="button" key={unit.id} className="rq-party-card" disabled={busy || !assets.ready} onClick={() => setDetailId(unit.id)} aria-label={`${index + 1}番 ${unit.name}のスキル・パッシブ`}>
+      <h3>{title}</h3>{!assets.ready && <p role={assets.failed ? "alert" : "status"}>{assets.failed ? <>画像を読み込めませんでした。<button onClick={assets.retry}>再読み込み</button></> : <LoadingSpinner />}</p>}
+      {assets.ready && <div className="rq-party" data-count={party.length}>{party.map((unit, index) => { const master = CHARACTER_MASTERS.find(entry => entry.id === unit.id); const subject = master ? { id: master.id, name: unit.name, rarity: master.rarity, element: unit.element as 'fire'|'water'|'earth'|'wind'|'light'|'dark' } : null; return <button type="button" key={unit.id} className="rq-party-card" disabled={busy || !assets.ready} onClick={() => setDetailId(unit.id)} aria-label={`${index + 1}番 ${unit.name}のスキル・パッシブ`}>
         <span className="rq-order">{index + 1}</span><div className="rq-party-visual-wrap">{subject ? <CharacterCard subject={subject} compact hideMarks className="rq-party-visual-card" /> : <div className="rq-card-visual"><img className="rq-card-person" src={unit.image} alt={unit.name} /></div>}<div className="rq-party-badges"><span className="rq-rarity">{master?.rarity ?? 'N'}</span><ElementBadge element={unit.element} /></div></div><div className="rq-party-meta"><strong>{unit.name}</strong><span className="rq-rarity-line">Lv.{unit.level}</span><small>HP {Math.floor(unit.stats.hp).toLocaleString()}</small></div>
       </button>; })}</div>}
-      <p className="rq-total-sp"><img src="/ui/sengoku/07-flower-crest.png" alt="" />共通SP <strong>{commonSpMax === null ? '開催時ルール' : `0 / ${commonSpMax}`}</strong></p>
-      <button type="button" className="rq-edit-button" onClick={onOpenDeck} disabled={busy || !assets.ready}>編成変更</button>
+      <div className="rq-preparation-tools"><p className="rq-total-sp"><img src="/ui/sengoku/07-flower-crest.png" alt="" />共通SP <strong>{commonSpMax === null ? '開催時ルール' : `0 / ${commonSpMax}`}</strong></p>
+      <button type="button" className="rq-edit-button" onClick={onOpenDeck} disabled={busy || !assets.ready}>編成変更</button></div>
       {invalidPartySize && <p role="alert">武将を1〜5人編成してください。</p>}
       {energy < energyCost && <p role="alert">行動力が不足しています。</p>}
       {error && <p role="alert">{error}</p>}
