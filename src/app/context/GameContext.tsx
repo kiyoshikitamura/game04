@@ -70,12 +70,6 @@ import {
 
 const ONBOARDING_AUTH_INTENT_KEY = "tribe_onboarding_auth_intent";
 const ONBOARDING_AUTH_INTENT_MAX_AGE_MS = 30 * 60 * 1000;
-const AUTHENTICATION_REMINDER_KEY_PREFIX = "tribe_account_authentication_reminder";
-
-function authenticationReminderKey(userId: string) {
-  return `${AUTHENTICATION_REMINDER_KEY_PREFIX}:${userId}`;
-}
-
 function hasValidExistingGoogleLoginIntent(): boolean {
   if (typeof window === "undefined") return false;
   try {
@@ -1237,59 +1231,9 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     void checkAndClaimLoginBonus(userId);
   }, [activeTab, onboardingState?.gameplay_authorized, session?.user?.id, showTitleView]);
 
-  useLayoutEffect(() => {
-    const userId = session?.user?.id;
-    const emailConfirmationPending = Boolean(
-      userId
-      && !session?.user?.is_anonymous
-      && onboardingState?.user_id === userId
-      && onboardingState?.tutorial_step === "COMPLETE"
-      && onboardingState?.auth_method === "EMAIL"
-      && onboardingState?.identity_integrity_valid
-    );
-    const authenticationPending = Boolean(
-      userId
-      && onboardingState?.user_id === userId
-      && onboardingState?.is_anonymous
-      && onboardingState?.authentication_pending
-      && onboardingState?.gameplay_authorized
-    );
-    if (emailConfirmationPending) {
-      setShowAuthenticationReminder(false);
-      setShowAccountAuthenticationModal(true);
-      return;
-    }
-    if (!authenticationPending) {
-      setShowAuthenticationReminder(false);
-      setShowAccountAuthenticationModal(false);
-      return;
-    }
-    if (showTitleView
-      || activeTab !== "home"
-      || !loginBonusCheckComplete
-      || showLoginBonusModal
-      || !prepMissionDialogCheckComplete
-      || showPrepMissionDialog
-      || !rankingRewardNotificationCheckComplete
-      || showAccountAuthenticationModal) return;
-    const reminderKey = authenticationReminderKey(userId!);
-    const today = getJstDateString();
-    if (window.localStorage.getItem(reminderKey) === today) return;
-    // Record on presentation so a reload cannot duplicate the same day's guide.
-    window.localStorage.setItem(reminderKey, today);
-    setShowAuthenticationReminder(true);
-  }, [
-    activeTab,
-    loginBonusCheckComplete,
-    prepMissionDialogCheckComplete,
-    rankingRewardNotificationCheckComplete,
-    onboardingState,
-    session?.user?.id,
-    showAccountAuthenticationModal,
-    showLoginBonusModal,
-    showPrepMissionDialog,
-    showTitleView,
-  ]);
+  // GAME04 daily authentication presentation is owned by the mounted
+  // CommunityAuthenticationReminder, after the formal login dialog. Legacy
+  // ranking/prep checks must not consume the daily key without rendering it.
 
   // ==========================================
   // 4. Supabase DB実データ同期ロード

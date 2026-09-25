@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import type { MissionProjection } from '@/domain/redesign/missions';
 import type { RedesignState } from '@/domain/redesign/types';
-import { CHARACTER_MASTERS } from '@/domain/redesign/masters';
+import { CHARACTER_MASTERS, OWNABLE_SKILL_MASTERS, EQUIPMENT_MASTERS } from '@/domain/redesign/masters';
 import { QUEST_AREAS, nextQuestStage } from '@/domain/redesign/quests';
 import { raidTimeRemaining, raidRewardLabel } from '@/domain/redesign/raidPresentation';
 import { supabase } from '@/utils/supabase';
@@ -16,6 +16,8 @@ import { useCharacterImageReadiness } from './CharacterImageReadiness';
 import { characterArt, characterBackground } from '@/theme/creativeAssets';
 import { HOME_BACKGROUNDS, isHomeBackgroundUnlocked, resolveHomeBackground } from '@/domain/redesign/home';
 import './HomeView.css';
+import { CommunityBadges, useCommunityProfiles } from './CommunityIdentity';
+import { COMMUNITY_ACTIVITY_TYPES, COMMUNITY_MESSAGE_MAX_LENGTH, uniqueCommunityRows } from '@/domain/redesign/community';
 export { HOME_BACKGROUNDS } from '@/domain/redesign/home';
 
 // Match the existing community read refresh bound in useChat.ts. This is
@@ -26,7 +28,7 @@ export type HomeSocialEvent = { id: string; room_id: string; author_id: string; 
 export type HomeEncounter = { id: string; name: string; expiresAt: string };
 export type HomeAction = (action: string, payload?: Record<string, unknown>) => Promise<unknown>;
 
-type Activity = { id: string; activity_type?: string; actor_display_name?: string; actor_user_id?: string; actor_favorite_character_id?: string; display_payload?: { title?: string }; created_at?: string };
+type Activity = { id: string; activity_type?: string; actor_display_name?: string; actor_user_id?: string; actor_favorite_character_id?: string; object_master_id?: string; display_payload?: { title?: string; item_name?: string; character_name?: string; skill_name?: string; equipment_name?: string }; created_at?: string };
 export default function HomeView({ state, onAction, onNavigate, encounterRaid, socialEvents = [], missions = [], previewOnly = false }: { state: RedesignState; onAction: HomeAction; onNavigate: (tab: string) => void; encounterRaid?: HomeEncounter | null; socialEvents?: HomeSocialEvent[]; missions?: MissionProjection[]; previewOnly?: boolean }) {
   const game = useGame();
   const [selector, setSelector] = useState(false);
@@ -36,8 +38,7 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
   const [community, setCommunity] = useState<'activity' | 'global' | 'dm'>('activity');
   const [expanded, setExpanded] = useState(false);
   const [activities, setActivities] = useState<Activity[]>([]);
-  const [profileFaces, setProfileFaces] = useState<Record<string, string>>({});
-  const [profileNames, setProfileNames] = useState<Record<string, string>>({});
+  const [profileId, setProfileId] = useState('');
   const [communityError, setCommunityError] = useState('');
   const [activityError, setActivityError] = useState('');
   const [activityLoading, setActivityLoading] = useState(!previewOnly);
@@ -76,10 +77,12 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
     setActivityError('');
     void (async () => {
       try {
-        const { data, error } = await supabase.rpc('get_recent_social_activity_feed', { p_limit: 20 }).abortSignal(controller.signal);
+        let response = await supabase.rpc('game04_get_community_activity', { p_limit: 20 }).abortSignal(controller.signal);
+        if (response.error?.code === 'PGRST202') response = await supabase.rpc('get_recent_social_activity_feed', { p_limit: 20 }).abortSignal(controller.signal);
+        const { data, error } = response;
         if (cancelled) return;
         if (error) throw error;
-        const visible = (data ?? []).filter((item: Activity) => !/PVP|GVG|GUILD/.test(item.activity_type ?? '')) as Activity[];
+        const visible = uniqueCommunityRows((data ?? []).filter((item: Activity) => COMMUNITY_ACTIVITY_TYPES.has(item.activity_type ?? ''))) as Activity[];
         // Author decoration must not hold the already available activity feed.
         setActivities(visible);
       } catch {
@@ -90,23 +93,12 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
       }
     })();
     return () => { cancelled = true; window.clearTimeout(timer); controller.abort(); };
-  }, [state.userId, previewOnly, activityAttempt]);
-  const profileUserIds = [...new Set([...activities.map(a => a.actor_user_id), ...socialEvents.map(e => e.author_id)].filter((id): id is string => !!id))].sort().join('|');
-  useEffect(() => {
-    if (previewOnly || !profileUserIds) return;
-    let cancelled = false;
-    void (async () => {
-      try {
-        const { data: profiles, error } = await supabase.rpc('get_public_profiles', { p_user_ids: profileUserIds.split('|') });
-        if (cancelled || error) return;
-        const faces: Record<string, string> = {};
-        const names: Record<string, string> = {};
-        for (const profile of profiles ?? []) { const id = profile.user_id || profile.id; const character = CHARACTER_MASTERS.find(c => c.id === profile.favorite_character_id); if (character) faces[id] = characterArt(character, 'portrait') ?? character.image; if (profile.username) names[id] = profile.username; }
-        setProfileFaces(faces); setProfileNames(names);
-      } catch { /* Keep feed-provided names when optional public profiles fail. */ }
-    })();
-    return () => { cancelled = true; };
-  }, [state.userId, previewOnly, profileUserIds]);
+  }, [state.userId, previewOnly, activityAttempt, expanded]);
+  const profiles = useCommunityProfiles(state.userId, [state.userId, profileId, ...activities.map(a => a.actor_user_id ?? ''), ...socialEvents.map(e => e.author_id), ...(game.guildChats ?? []).map((m: { user_id?: string; author_id?: string }) => m.user_id || m.author_id || ''), ...(game.directMessages ?? []).flatMap((m: { sender_id: string; recipient_id: string }) => [m.sender_id, m.recipient_id]), ...conversations.map(c => c.userId)], !previewOnly, `${expanded}:${profileId}:${activityAttempt}:${game.session?.access_token}:${game.username}:${game.bio}`);
+  const profileFaces: Record<string, string> = {};
+  for (const profile of Object.values(profiles)) { const character = CHARACTER_MASTERS.find(c => c.id === profile.favorite_character_id); if (character) profileFaces[profile.user_id] = characterArt(character, 'portrait') ?? character.image; }
+  const profileName = (id: string | undefined, fallback: string) => id === state.userId ? game.username || fallback : (id && profiles[id]?.username) || fallback;
+  const badges = (id?: string) => <CommunityBadges authenticated={id ? profiles[id]?.authenticated : false} vipExpiresAt={id ? profiles[id]?.vip_expires_at : null} now={now} />;
   useEffect(() => { const timer = window.setInterval(() => setNow(Date.now()), 1000); const rotation = window.setInterval(() => setBanner(i => (i + 1) % 2), 8000); return () => { window.clearInterval(timer); window.clearInterval(rotation); }; }, []);
   useEffect(() => { if (!previewOnly) game.setChatChannel(community === 'dm' ? 'DM' : 'GLOBAL'); }, [community, game.setChatChannel, previewOnly]);
   useEffect(() => { if (previewOnly) return; game.setShowTribeChatPanel(expanded && community !== 'activity'); return () => game.setShowTribeChatPanel(false); }, [expanded, community, game.setShowTribeChatPanel, previewOnly]);
@@ -124,13 +116,13 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
   function messages(full: boolean) {
     if (community !== 'dm') {
       const legacy: { id: string; createdAt: string; author: string; body: string; userId?: string }[] = community === 'activity'
-        ? activities.map(a => ({ id: a.id, createdAt: a.created_at ?? '', author: (a.actor_user_id && profileNames[a.actor_user_id]) || a.actor_display_name || '戦国便り', userId: a.actor_user_id, body: homeSystemText(a.display_payload?.title || describeHomeActivity(a.activity_type)) }))
-        : (game.guildChats ?? []).map((m: { id: string; created_at?: string; author_name?: string; content?: string; user_id?: string }) => ({ id: m.id, createdAt: m.created_at ?? '', author: m.author_name || 'プレイヤー', body: m.content ?? '', userId: m.user_id }));
-      const merged = [...legacy.map(m => ({ ...m, roomId: '' })), ...socialEvents.map(e => ({ id: e.id, createdAt: e.created_at, author: profileNames[e.author_id] || '援軍要請', body: homeSystemText(typeof e.body === 'string' ? e.body : '共闘の援軍を求めています。'), roomId: e.room_id, userId: e.author_id }))].sort((a,b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
-      return merged.length ? merged.slice(0, full ? merged.length : 3).map(m => <div className="rd-message" key={m.id}>{m.userId && profileFaces[m.userId] && <img className="g4-home-message-face" src={profileFaces[m.userId]} alt="" />}<button className="rd-text-button" disabled={!homeImages.ready} onClick={() => { if (m.userId && m.userId !== state.userId) { game.setDmRecipientId(m.userId); setCommunity('dm'); setExpanded(true); } }}>{m.author}</button><div>{m.roomId ? <button className="g4-home-rescue-body" disabled={!homeImages.ready} aria-label={`${m.body} 共闘を確認`} onClick={() => { setExpanded(false); onNavigate(`raid:${m.roomId}`); }}>{m.body}<span aria-hidden="true"> ›</span></button> : <span>{m.body}</span>}</div>{m.createdAt && <time className="g4-home-message-time" dateTime={m.createdAt}>{activityTime(m.createdAt, now)}</time>}{m.userId && m.userId !== state.userId && <button className="g4-home-message-open" disabled={!homeImages.ready} aria-label={`${m.author}にDM`} onClick={() => { game.setDmRecipientId(m.userId!); setCommunity('dm'); setExpanded(true); }}><img src="/ui/sengoku/09-chat.png" alt="" /></button>}</div>) : <p className="rd-muted">{community === 'activity' ? activityLoading || activityError ? '' : '新しい活動はまだありません' : '全体にひとこと送ってみましょう'}</p>;
+        ? activities.map(a => ({ id: a.id, createdAt: a.created_at ?? '', author: profileName(a.actor_user_id, a.actor_display_name || '戦国便り'), userId: a.actor_user_id, body: activityBody(a) }))
+        : (game.guildChats ?? []).map((m: { id: string; created_at?: string; author_name?: string; content?: string; user_id?: string }) => ({ id: m.id, createdAt: m.created_at ?? '', author: profileName(m.user_id, m.author_name || 'プレイヤー'), body: m.content ?? '', userId: m.user_id }));
+      const merged = uniqueCommunityRows([...legacy.map(m => ({ ...m, roomId: '' })), ...socialEvents.map(e => ({ id: e.id, createdAt: e.created_at, author: profileName(e.author_id, '援軍要請'), body: homeSystemText(typeof e.body === 'string' ? e.body : '共闘の援軍を求めています。'), roomId: e.room_id, userId: e.author_id }))]).sort((a,b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
+      return merged.length ? merged.slice(0, full ? merged.length : 3).map(m => <div className="rd-message" key={m.id}>{m.userId && profileFaces[m.userId] && <img className="g4-home-message-face" src={profileFaces[m.userId]} alt="" />}<button className="rd-text-button" disabled={!homeImages.ready} onClick={() => { if (m.userId) setProfileId(m.userId); }}>{m.author}{badges(m.userId)}</button><div>{m.roomId ? <button className="g4-home-rescue-body" disabled={!homeImages.ready} aria-label={`${m.body} 共闘を確認`} onClick={() => { setExpanded(false); onNavigate(`raid:${m.roomId}`); }}>{m.body}<span aria-hidden="true"> ›</span></button> : <span>{m.body}</span>}</div>{m.createdAt && <time className="g4-home-message-time" dateTime={m.createdAt}>{activityTime(m.createdAt, now)}</time>}{m.userId && m.userId !== state.userId && <button className="g4-home-message-open" disabled={!homeImages.ready} aria-label={`${m.author}にDM`} onClick={() => { game.setDmRecipientId(m.userId!); setCommunity('dm'); setExpanded(true); }}><img src="/ui/sengoku/09-chat.png" alt="" /></button>}</div>) : <p className="rd-muted">{community === 'activity' ? activityLoading || activityError ? '' : '新しい活動はまだありません' : '全体にひとこと送ってみましょう'}</p>;
     }
-    if (full && game.dmRecipientId) return <><button className="rd-button" onClick={() => game.setDmRecipientId(null)}>会話一覧へ</button><h3>{activeDm?.userName || 'プレイヤー'}</h3>{direct.map((m: {id:string;sender_name?:string;message?:string;content?:string}) => <p className="rd-message" key={m.id}><b>{m.sender_name || 'プレイヤー'}</b><span>{m.message || m.content}</span></p>)}</>;
-    return conversations.length ? conversations.slice(0, full ? conversations.length : 3).map(c => <button className="rd-message rd-conversation" disabled={!homeImages.ready} key={c.userId} onClick={() => { game.setDmRecipientId(c.userId); setExpanded(true); }}><b>{c.userName}{c.unreadCount ? ` (${c.unreadCount})` : ''}</b><span>{c.latestMessage}</span></button>) : <p className="rd-muted">ダイレクトメッセージはまだありません。全体チャットの名前から会話を始められます。</p>;
+    if (full && game.dmRecipientId) return <><button className="rd-button" onClick={() => game.setDmRecipientId(null)}>会話一覧へ</button><h3>{profileName(game.dmRecipientId, activeDm?.userName || 'プレイヤー')}{badges(game.dmRecipientId)}</h3>{direct.map((m: {id:string;sender_id:string;sender_name?:string;message?:string;content?:string}) => <p className="rd-message" key={m.id}><button className="rd-text-button" onClick={() => setProfileId(m.sender_id)}>{profileName(m.sender_id, m.sender_name || 'プレイヤー')}{badges(m.sender_id)}</button><span>{m.message || m.content}</span></p>)}</>;
+    return conversations.length ? conversations.slice(0, full ? conversations.length : 3).map(c => <button className="rd-message rd-conversation" disabled={!homeImages.ready} key={c.userId} onClick={() => { game.setDmRecipientId(c.userId); setExpanded(true); }}><b>{profileName(c.userId, c.userName)}{badges(c.userId)}{c.unreadCount ? ` (${c.unreadCount})` : ''}</b><span>{c.latestMessage}</span></button>) : <p className="rd-muted">ダイレクトメッセージはまだありません。全体チャットの名前から会話を始められます。</p>;
   }
   return <>
     <div className={`g4-home ${encounterActive ? 'has-encounter' : ''}`} style={{ backgroundImage: `url(${background.image})` }} aria-busy={!homeImages.ready}>
@@ -162,7 +154,10 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
         <h3>背景</h3><div className="g4-home-background-choices">{HOME_BACKGROUNDS.map(b => { const unlocked = isHomeBackgroundUnlocked(b, state.clearedStages, state.unlockedHomeBackgroundIds); return <button key={b.id} disabled={saving || !unlocked} aria-pressed={draftBackground === b.id} className={`g4-home-choice ${unlocked ? '' : 'is-locked'}`} onClick={() => setDraftBackground(b.id)}><span className="g4-home-background-art"><img src={b.image} alt="" /></span><strong>{b.name}</strong><small>{unlocked ? draftBackground === b.id ? '選択中' : '\u00a0' : b.conditionLabel}</small></button>; })}</div>
       </>}{saveError && <p className="g4-home-error" role="alert">{saveError}</p>}
     </Modal>}
-    {expanded && <Modal title="コミュニティ" onClose={() => setExpanded(false)} footer={community !== 'activity' && (community !== 'dm' || game.dmRecipientId) ? <form className="rd-row" onSubmit={async e => { e.preventDefault(); setCommunityError(''); try { if (community === 'dm') { if (await game.handleSendDirectMessage(game.dmRecipientId, dmText)) setDmText(''); } else await game.handleSendChat(); } catch { setCommunityError('送信できませんでした。もう一度お試しください。'); } }}><input aria-label="メッセージ" maxLength={500} value={community === 'dm' ? dmText : game.chatInput} onChange={e => community === 'dm' ? setDmText(e.target.value) : game.setChatInput(e.target.value)} /><button className="rd-button" disabled={game.chatSending || game.chatCooldown > 0 || !(community === 'dm' ? dmText : game.chatInput)?.trim()}>送信</button></form> : undefined}>{tabs}{activityStatus}{messages(true)}{communityError && <p role="status">{communityError}</p>}</Modal>}
+    {profileId && <Modal title="プロフィール" onClose={() => setProfileId('')} footer={profileId !== state.userId ? <button className="rd-button" onClick={() => { game.setDmRecipientId(profileId); setProfileId(''); setCommunity('dm'); setExpanded(true); }}>DMを送る</button> : undefined}>
+      {profiles[profileId] ? <><h3>{profileName(profileId, 'プレイヤー')}{badges(profileId)}</h3><p style={{ whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}>{profileId === state.userId ? game.bio || '自己紹介は未設定です。' : profiles[profileId].bio || '自己紹介は未設定です。'}</p></> : <><p>プロフィールを取得できない場合は再読み込みしてください。</p><button className="rd-button" onClick={() => setActivityAttempt(n => n + 1)}>再読み込み</button></>}
+    </Modal>}
+    {expanded && !profileId && <Modal title="コミュニティ" onClose={() => setExpanded(false)} footer={community !== 'activity' && (community !== 'dm' || game.dmRecipientId) ? <form className="rd-row" onSubmit={async e => { e.preventDefault(); setCommunityError(''); try { if (community === 'dm') { if (await game.handleSendDirectMessage(game.dmRecipientId, dmText)) setDmText(''); } else await game.handleSendChat(); } catch { setCommunityError('送信できませんでした。もう一度お試しください。'); } }}><input aria-label="メッセージ" maxLength={COMMUNITY_MESSAGE_MAX_LENGTH} value={community === 'dm' ? dmText : game.chatInput} onChange={e => community === 'dm' ? setDmText(e.target.value) : game.setChatInput(e.target.value)} /><button className="rd-button" disabled={game.chatSending || (community === 'global' && game.chatCooldown > 0) || !(community === 'dm' ? dmText : game.chatInput)?.trim()}>送信</button></form> : undefined}>{tabs}{activityStatus}{messages(true)}{communityError && <p role="status">{communityError}</p>}</Modal>}
   </>;
 }
 
@@ -183,3 +178,13 @@ function activityTime(value: string, now: number) {
 
 /** System generated activity text only; player chat/DM content stays unchanged. */
 function homeSystemText(value: string) { return game04WorldText(value).replaceAll('レイド', '共闘').replaceAll('クエスト', '出陣').replaceAll('ガチャ', '召喚'); }
+
+function activityBody(activity: Activity) {
+  const type = activity.activity_type ?? '';
+  if (type.startsWith('SSR_')) {
+    const masters = type === 'SSR_CHARACTER' ? CHARACTER_MASTERS : type === 'SSR_SKILL' ? OWNABLE_SKILL_MASTERS : EQUIPMENT_MASTERS;
+    const name = masters.find(item => item.id === activity.object_master_id)?.name || activity.display_payload?.item_name || activity.display_payload?.character_name || activity.display_payload?.skill_name || activity.display_payload?.equipment_name;
+    if (name) return `SSR「${name}」を獲得`;
+  }
+  return homeSystemText(activity.display_payload?.title || describeHomeActivity(type));
+}
