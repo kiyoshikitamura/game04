@@ -1,11 +1,10 @@
 'use client';
-import { questDisplayName, raidDisplayLabel } from '@/domain/redesign/contextNames';
+import { questDisplayName, raidRescueDisplayLabel } from '@/domain/redesign/contextNames';
 import React, { useEffect, useRef, useState } from 'react';
 import type { MissionProjection } from '@/domain/redesign/missions';
 import type { RedesignState } from '@/domain/redesign/types';
 import { CHARACTER_MASTERS, OWNABLE_SKILL_MASTERS, EQUIPMENT_MASTERS } from '@/domain/redesign/masters';
 import { QUEST_AREAS, nextQuestStage } from '@/domain/redesign/quests';
-import { getRaidMaster } from '@/domain/redesign/raid';
 import { raidTimeRemaining, raidRewardLabel } from '@/domain/redesign/raidPresentation';
 import { supabase } from '@/utils/supabase';
 import { describeHomeActivity } from '@/domain/presentation/homeInitialGuide';
@@ -194,6 +193,7 @@ function activityBody(activity: Activity) {
 
 function rescueActivityBody(body: HomeSocialEvent['body']) {
  if(typeof body==='string')return homeSystemText(body);
- if(body?.masterId)try{return `${raidDisplayLabel(getRaidMaster(body.masterId),body.level??1)} の援軍を求めています。`;}catch{/* old or retired master keeps generic fallback */}
+ const label=body?.masterId?raidRescueDisplayLabel(body.masterId,body.level??1):null;
+ if(label)return `${label} の援軍を求めています。`;
  return '共闘の援軍を求めています。';
 }

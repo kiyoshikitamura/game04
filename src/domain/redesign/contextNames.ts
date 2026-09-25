@@ -33,3 +33,10 @@ export function raidDisplayLabel(master: { id: string; name: string }, level = 1
   const title = raidDisplayTitle(master), subtitle = raidDisplaySubtitle(master, level);
   return subtitle ? `${title} — ${subtitle}` : title;
 }
+
+/** Rescue events carry stable master ID and level; historical free-text posts stay untouched. */
+export function raidRescueDisplayLabel(masterId: string, level: number) {
+ const encounter=encounters[masterId],castle=invasions[masterId];
+ const label=encounter?`${encounter.title} — ${encounter.bossName} · ${encounter.area}`:castle?`${invasionSceneName(masterId,level)} — ${castle.lordName}`:'';
+ return label?`${label} · Lv.${level}`:null;
+}
