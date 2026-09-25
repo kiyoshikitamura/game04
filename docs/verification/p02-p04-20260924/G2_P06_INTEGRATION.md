@@ -20,7 +20,7 @@
 6. P02イベント台帳は通知ID・注文・session・処理状態・試行数のみ。秘密/生payload/カードデータを記録しない。再通知を台帳の存在だけでskipしない。
 7. 通常商品は既存lot/BOX経路を再利用。**BOX→正式在庫、使用・保存、有償由来交換品のlot/期限引継ぎはG2 U02/U08と実統合受入が必要**。P02が別途ゲーム在庫へ重複加算しない。
 8. VIP購入確定後の期限・100×30・24h周期・再購入・戦闘権利はU09、cron管理はP06。P02が独自schedulerを作らない。
-9. 有償期限/返金は業務条件確定後、表示・lot・消費・返金対応を一つの契約で反映。旧120日を新たなGAME04承認として自動採用しない。
+9. 2026-09-25ユーザー確定：有償期限は120日継承、年齢・購入制限と返金等はGAME03同様。表示・lot・消費・返金対応を一つの契約で反映する。
 
 ## G2 U10・P03/P04
 - 独立入口 `/auth/game04`、戻り先 `/auth/game04/callback`。GAME03のメール+パスワード、Google linkIdentity/OAuthを維持する。
@@ -50,8 +50,8 @@
 |MAINTENANCE/PAYMENT/SHOP operating state|購入公開制御|開発/本番別|G2/P06|勝手にOPENにしない。テスト対象限定の契約を照合|
 |Supabase Auth許可redirect URL|新callbackへ戻す|preview|P03/P06|設定未実施/未取得|
 |Google provider/client設定|Googleリンク/再ログイン|preview|P03/P06|外部設定未確認、秘密未取得|
-|Email provider/SMTP送信元/template|確認メール+パスワード方式|preview|P03/P06|設定未確認、許可テスト宛先未指定|
-|専用確認Google/メールアカウント|実認証受入|test|ユーザー/P03|未指定。実利用者宛に送らない|
+|Email provider/SMTP送信元/template|確認メール+パスワード方式|preview|P03/P06|設定未確認。許可テスト宛先指定済み|
+|専用確認Google/メールアカウント|実認証受入|test|ユーザー/P03|kiyoshi.kitamura@scopenext.jp 指定済み。他の実利用者宛に送らない|
 |game04-g2-vip-delivery|VIP定期付与|開発/本番別|U09/P06|開発既存jobをP06記録で確認。本番は未構築/未有効化|
 |anonymous-onboarding-cleanup-daily|旧匿名cleanup|開発/本番別|P03/P06|P03資産保持契約と照合後に本番採否。共有cronは未変更|
 |正式ドメイン/本番Auth/Stripe/live許可|M受入|production|P01/P06|未着手。test-onlyコードを設定値だけでlive化できるとは扱わない|
@@ -65,3 +65,12 @@
 
 ## M本番受入
 正式domainと接続先/配信SHA/API版/schema、test/live完全分離、Googleとメールの実成功、問い合わせ/特商法実掲載、購入停止/再開、注文通知付与照合・未処理復旧、返金例外、VIP cronの失敗検知、QAデータ除外を同じ候補で受け入れる。G5/M/G6を本起票のPreview成功で代替しない。
+
+## 2026-09-25 ユーザー指定のUI是正
+
+今回照合G2 SHA: 180b45abb198370f8ee01f65838d95f30a7efff2。P02-P04候補基点: 83673c24deebb24dd3446b64a8895f42010e8b6b。
+- TitleLegalFooter.tsx/SettingsPanel.tsxは両基点で一致。追加問い合わせ/法的情報リンクのみ削除し、タイトルcopyrightを指定表記へ変更。
+- RedesignShell.tsxはG2側にnavigationBusy・問い合わせ戻り先追加がある。ファイル全体を旧候補から上書きしない。G2側では問い合わせa要素と未使用になるarmLegalSettingsReturn importのみを削除し、navigationBusy等を保持する。
+- legal/**変更は今回ユーザー承認済みの本文/3リンク化。公開窓口original.title.support@gmail.comを維持。確認用メールを公開窓口へ転用しない。
+- 専用branchへの適用はG2統合済みを意味しない。G2適用後、タイトル・設定・メニュー・本文戻り先を回帰確認。
+

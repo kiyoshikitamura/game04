@@ -10,7 +10,7 @@ for (const width of [320, 390, 768]) {
       await expect(page.locator("h1")).toBeVisible();
       await expect(page).toHaveTitle(/戦国姫艶武/);
       const root = page.locator(".legal-page");
-      await expect(root).toContainText("草案");
+      await expect(page.locator(".legal-page-nav a")).toHaveCount(3);
       const bounds = await root.evaluate((node) => {
         node.scrollTop = node.scrollHeight;
         return { width: node.clientWidth, scrollWidth: node.scrollWidth, top: node.scrollTop, height: node.clientHeight, total: node.scrollHeight };
@@ -31,7 +31,8 @@ test("VIP terms and existing contact match GAME04 authority", async ({ page }) =
   await expect(page.locator("main")).toContainText("720時間");
   await expect(page.locator("main")).toContainText("696時間");
   await expect(page.locator("main")).toContainText("自動更新はありません");
-  await expect(page.locator("main")).toContainText("無償分から先");
+  await expect(page.locator("main")).toContainText("無償分を先");
   await page.goto("/legal/contact");
   await expect(page.getByRole("link", { name: "original.title.support@gmail.com", exact: true })).toHaveAttribute("href", /^mailto:original.title.support@gmail.com\?subject=/);
 });
+

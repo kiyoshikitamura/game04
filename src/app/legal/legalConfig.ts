@@ -14,13 +14,14 @@ export const GAME04_LEGAL: {
   title: "戦国姫艶武",
   status: "draft",
   effectiveDate: null,
-  operator: null,
-  representative: null,
-  address: null,
-  phone: null,
+  operator: "戦国姫艶舞 運営事務局",
+  representative: "請求があった場合、遅滞なく開示いたします。",
+  address: "請求があった場合、遅滞なく開示いたします。",
+  phone: "請求があった場合、遅滞なく開示いたします。",
   supportEmail: "original.title.support@gmail.com",
   serviceUrl: null,
-  rightsHolder: null,
+  rightsHolder: "2026 戦国姫艶舞",
 };
 
 export const pendingLegalValue = (value: string | null) => value || "正式公開までに掲載します。";
+
