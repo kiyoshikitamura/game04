@@ -1,105 +1,87 @@
-# GAME04 G3 統合記録（R8統合済み・配信未開始・未受入）
+# GAME04 G3 最終提出記録 — 隔離単体候補
 
-2026-09-25 18:03 JSTの後続指示で隔離環境新設は承認済み。正式費用は月額換算10米ドルで想定内。現在のVercel接続ではgame04へのアクセスを確認できず、作成前条件を満たすまで新設していない。詳細は [ISOLATION_PREFLIGHT.md](./ISOLATION_PREFLIGHT.md)。新設承認待ちは解消済み。停止前には後続統合での継続利用を確認する。
+2026-09-25。配信・実接続機能検証・独立レビュー修正を実施。**機能は確認済みだが、cold応答性能と連携アカウントの再ログイン受入が未完了のため、G3最終完了判定は保留を提案する。** G2統合受入を代替しない。最終判断はメイン進行チャット。
 
-最新状態は [R8_INTEGRATION.md](./R8_INTEGRATION.md)。PR30 `29b1515` のv31保持patchを受領・統合済みで、下記の旧「v31 source未保存待ち」は解消。現ブロッカーは旧実行の停止・共有環境の排他を確認できないこと。復旧/待機を繰り返さず [分離環境案](./ISOLATED_ENVIRONMENT_PROPOSAL.md) を作成。G2の既定OFF性能候補は不採用。今回の共有API/DB/state変更は0。前回remoteのPNG2点/bundle転送不備もR8記録で訂正し、完全原本と全blob照合により保存し直す。
+初期共有環境での経過は [HISTORICAL_SHARED_CHECKPOINT.md](HISTORICAL_SHARED_CHECKPOINT.md)。下記を最新状態とし、旧Auth停止・旧配信待ちを現在の残件へ戻さない。
 
-## 所有・候補
+## 成果と配信先
 
-- 正本候補: Draft PR #33 / `work/game04-g3-20260925`。
-- 最初のremote候補: `945fb678b45d4ba008138d30286e466c4a1bef2a`。G2 `af640e291d3e79e511833dcef1e16f0ff7528b94` を親として保持。
-- 並走していたローカルCodexは独立レビューへ切替。別実装は採用しない。レビュー全文は [INDEPENDENT_LOCAL_REVIEW.md](./INDEPENDENT_LOCAL_REVIEW.md)。
-- mainマージ、Production、GAME03変更なし。G2完了判定、G4/G5開始なし。
+- Draft PR: https://github.com/kiyoshikitamura/game04/pull/33
+- ブランチ: `work/game04-g3-20260925`
+- 実装SHA・証拠SHA・不変Preview: [ISOLATED_DEPLOYMENT.md](ISOLATED_DEPLOYMENT.md)
+- 隔離Supabase: `znakrkaazliexzwihxge` / `game04-g3-acceptance` / eu-central-1 / Micro。
+- API: `game04-redesign-api` v3 ACTIVE、JWT検証有効。
+- source SHA256: `57be17cef08185ced05e92bf9650e119ffb193b65d31d9d149d31370f2036975`
+- tracked bundle SHA256: `7f8899d51de1bc0b3708c66c0eaa1fb063f0a3064721bb48f08b57a59bc304d3`
+- 配信管理hash: `f0e4aa527baf6cf0cf0c49cb81f154486ff5d4b1170ba45f1feea388dfadc679`
+- 最終ブラウザーでx-regionのCORS許可漏れを発見しAPI v3で修正。OPTIONSと実本体接続を再確認。
+- Vercel専用ブランチへ新環境URL/鍵を設定。18:59 JSTの本人設定後、認証停止を解消して実接続を開始。
+- 今回の隔離作業では既存dev・main・本番へ書込みなし。G2既定OFF性能候補は不採用。
 
-## 正式仕様対応
+## 正式仕様対応表
 
-| 対象 | 正式契約 / 実装 |
+| 項目 | 実装・照合結果 |
 |---|---|
-| ノーマル | 1回1,000銭 / 10回10,000銭 / 日次無料10回。N49,R40,SR10,SSR1%。各レア内キャラ20,スキル30,装備50%。 |
-| 特選キャラ | 300 / 3,000輝石。SSR3,SR32,R65%。交換200Pt。 |
-| 特選スキル | 300 / 3,000輝石。SSR5,SR35,R60%。交換100Pt。 |
-| 特選装備 | 200 / 2,000輝石。SSR10,SR40,R50%。交換100Pt。 |
-| プール | キャラ60 / 正式スキル72 / 装備160。特選45 / 63 / 125。ID全件は `src/domain/redesign/data/formalGachaMaster.json`。 |
-| 個別確率 | ノーマル: レア率×カテゴリ率÷同レア同カテゴリ件数。特選: レア率÷同レア件数。表示丸めは抽選に使わない。 |
-| ポイント | 特選1抽選1Pt、券も対象。カテゴリ別、自然SSRでresetしない。交換必要量のみ減算。 |
-| 重複 | キャラ固有魂20。スキルN/R/SR/SSR=1/2/5/20共通LB素材。装備は別個体。 |
-| SSR背景 | G2 `synchronizeHomeBackgroundUnlocks` を付与後の原子保存で共用。自動切替なし。 |
-| 演出 | 添付の開門PNG7点。サーバー成功後に演出、skipしても保存済み結果は不変。 |
-| チュートリアル | 強制ガチャ・固定抽選・追加無料ガチャを追加しない。正式初期配布はG4。 |
+| 通常 | 1,000/10,000銭、日次無料10連1回JST0。N/R/SR/SSR=49/40/10/1%。各レア内キャラ/スキル/装備=20/30/50%。 |
+| 特選キャラ | 300/3,000輝石、SSR/SR/R=3/32/65%、交換200Pt。 |
+| 特選スキル | 300/3,000輝石、SSR/SR/R=5/35/60%、交換100Pt。 |
+| 特選装備 | 200/2,000輝石、SSR/SR/R=10/40/50%、交換100Pt。 |
+| 正式プール | キャラ60、スキル72、装備160。通常292、特選233（45/63/125）。装飾枠由来の二重IDなし、旧スキルなし。 |
+| 抽選重み | レア→カテゴリ→同カテゴリ同レア均等。丸めた表示率は使わない。独自保証・割引・天井確率変更なし。 |
+| SSR交換 | 同カテゴリの排出SSRと一致。必要ポイントだけ減算、余り保持、交換自体のポイント加算なし。 |
+| 付与 | キャラ初回取得/重複固有魂20。スキル初回LB0/重複N/R/SR/SSR=1/2/5/20共通素材。装備別個体、自動分解なし。 |
+| 保存 | 消費/抽選結果/付与/重複/ポイント/任務/KPI/背景をサーバー確定し原子保存。同ID再送は既存receipt。 |
+| 任務 | 通常有料/無料成功のみ通常ガチャ日次へ計上。特選・交換は誤計上しない。共通JST時刻、種類数は重複で増えない。 |
+| 背景 | G2共通解放処理を使用。初回対応SSR・既所持同期・永続化、自動切替なし。選択保存。 |
+| UI | 実マスターの割合/一覧/交換対象。通常/特選3カテゴリ/価格/券/ポイント/無料状態。保存後演出、skip/reloadで結果不変。 |
+| G4境界 | 強制ガチャ/固定抽選/追加無料10連なし。隔離QA初期化は正式チュートリアル・初期配布へ採用しない。 |
 
-## 配信履歴
+## ID・券・ポイント対応
 
-- 開発専用Supabase: `lrgyllgzcdcphlbmkknc`。
-- API v28 / verify_jwt=true。LF source SHA256 `1712993f7eece34aea04ae829499dcf9853fe0c57be6f5087f3f5e3d78b82778`。
-- v28はGitのbundleをesbuild 0.25.12でminifyして配信。配信入力SHA256 `86fbdf3fd339910e8c4beaa1dbe0710b7ca6932faf914ec8daba15602db5fc6c`。
-- DB: `game04_commit_gacha` と正式プールに限定して反映。全migration再適用なし。
-- プール525行（normal292 + special233）、checksum `713ae72ca355c334f574fe3988f7136e`。
-- atomic RPC: SECURITY INVOKER、anon/authenticated execute不可、service_roleのみ。
-- 最初のPreview: deployment `dpl_JBQUD5CC7veinJxsb8Tg5VcvYGpz`、GitHub Vercel READY。ブランチURL `https://game04-git-work-game04-g3-20260925-kiyoshi-kitamura.vercel.app`。不変URL未取得。
+全排出ID/レアリティ/重み/交換対象は `src/domain/redesign/data/formalGachaMaster.json` と正式生成SQLを保存。DB formal master MD5 `748bde1a107fc2e37aa0c33a6752561f`。
 
-## 実施済み検証と発見
+| カテゴリ | 正式在庫ID（user_items） | ポイント | 交換対象 |
+|---|---|---|---|
+| キャラ | SPECIAL_TICKET_CHARACTER | character、券含め1抽選1Pt | 排出SSR10件 |
+| スキル | SPECIAL_TICKET_SKILL | skill、券含め1抽選1Pt | 排出SSR14件 |
+| 装備 | SPECIAL_TICKET_EQUIPMENT | equipment、券含め1抽選1Pt | 排出SSR20件 |
+| 通常/無料 | 銭/日次利用権 | 対象外 | 対象外 |
 
-- 初回候補: static 91/91、formal domain/adverse、G2 R6背景10/10、型検査、build、bundle hash PASS。これらは実接続受入を代用しない。
-- 実APIでSQL `result`変数と列の衝突を発見。`v_result`に改名して開発DBへ限定修正。失敗QA user `4cc07316-2555-4556-88da-c8d08dbfd388` の無料使用日null・normal receipt 0件を確認。
-- QA user `ef05e7a9-f572-4b41-ad6e-84708cff9bb6`: free10成功、同ID再送結果一致、異なるpayload再送409。
-- 上記HTTP往復ms: status1720 / free1685 / replay1277 / mismatch655。初回値であり性能合格ではない。意図した開門演出約4秒と分離。
-- SSR交換fixtureのDB versionだけを増やしたためstate.version不整合で409。テスト準備不備として記録し、交換の製品合否根拠にしない。
-- 専用QAはG2 `kpi_account_classification_periods` のqa分類で除外。大量抽選による確率検証なし。
-- Preview QA画面の提供割合Dialogで `useGame must be used within a GameProvider` を再現。未修正候補の表示合格は撤回。
+`questTicketGrants`は累計付与台帳であり減算しない。有効paid-lotとuser_itemsを原子的消費。期限切れは全体rollback。通貨不足時の券への自動切替なし。
 
-## 受入前修正・残件
+## 修正・検証結果
 
-1. 券実在庫 `user_items` 原子的消費・残数表示。`questTicketGrants` は累計付与台帳として維持。
-2. jsonbキー順非依存の再送照合。特選・交換の実HTTP再送確認。
-3. ユーザー別永続pending、結果前離脱復帰、未解決時の新操作抑止。
-4. JST0の開きっぱなしUI更新、抽選/任務timestamp共通化、DB決済日の整合。
-5. 共通Dialog focus/背景遮断契約、16/14px文字、44px操作領域、長い結果の全文表示。
-6. QA Dialog provider不足修正。
-7. Windows pathはpath.joinへ修正、bundle検査はLF正規化へ修正済み。Windows実行自体は未再実施。
-8. 同一修正候補で各支払・不足・並列・交換/背景・再認証の実API/DB検証、本体UI・モバイル・性能、最終SHA/不変Preview固定。
+- 独立レビュー全文: [INDEPENDENT_LOCAL_REVIEW.md](INDEPENDENT_LOCAL_REVIEW.md)。別タスク未配信実装は混在させない。
+- P1: 券台帳誤消費→正式在庫デビット。jsonbキー順→canonical比較。同一payloadの特選/交換再送成功。
+- P1: 永続pending（ユーザー別localStorage）、同ID復旧、Web Locks、確認前離脱でも同一結果復元。
+- P2: 開きっぱなしJST0更新、抽選/任務共通timestamp、DB確定日整合。全背後inert、focus trap/復元、Enter/Space抑止、16/14pxと44px操作領域。
+- 実接続機能9項目: [live-isolated-b.json](live-isolated-b.json)。無料/再送/不正payload、不正支払非消費、特選、券実在庫と台帳分離、期限切れrollback、同ID並列一回決済、SSR交換/背景、refresh再認証の保存保持。
+- DB照合: [ISOLATED_DB_RECONCILIATION.md](ISOLATED_DB_RECONCILIATION.md)。失敗操作receipt0、QA分類、実売上0、ポイント/任務/在庫/背景と一致。
+- 実ブラウザー: [BROWSER_ISOLATED_ACCEPTANCE.md](BROWSER_ISOLATED_ACCEPTANCE.md)。本体→認証API→保存→結果前reload→続きから→同結果。360/390px、価格/不足/券/提供割合/SSR交換対象/フォーカスを確認。
+- local formal/domain/adverse/static98/measurement/typecheck/bundle/region/build PASS。確率検証は計算とdomainテストで実施、DB大量抽選なし。
+- Windowsパス/LF正規化の修正あり。Windows実機での再実行自体は未実施。
 
-## 判定
+## 性能と実際の残件
 
-現時点はG3未受入。修正中の候補を完成扱いにしない。最終受入はメイン進行チャットで判断。
+地域をDBと同じEUへ指定し、G3 statusの重複state取得を除去、レスポンス生成と券読取を並列化。G2既定OFF保存候補とは別のG3読取限定修正。
 
-## 独立レビュー反映後のチェックポイント
+[performance-isolated-v2.json](performance-isolated-v2.json): warm725〜1,315ms、cold9,444〜14,139ms。管理ログの関数実行649〜1,610ms、boot36〜49ms。大きな遅延は関数開始前の地域ルーティング/割当待ちに相関する。コード内だけで解決したとは言えず、coldを除外して合格にしない。cronによる常時保温や費用増を加えていない。
 
-上記「受入前修正・残件」は初回レビュー時点の一覧。以下が最新状態。
+ブラウザー390pxでは入力→click0.7ms、busy反映2.7ms、CTA操作可能1487.9msを観測。意図した開門約4秒はAPI待ち時間と別扱い。
 
-| 指摘 | 最新の修正・検証状態 |
-|---|---|
-| P1 券台帳の誤消費 | `user_items`をロックして原子減算。`questTicketGrants`維持。開発API/DBで通常券・有効paid-lot券消費、期限切れpaid-lot券の全体rollbackを確認。 |
-| P1 jsonbキー順 | API canonical比較、DB jsonb比較。特選・交換の同一内容再送成功、異なるpayload409を実HTTP確認。 |
-| P1 reload/pending | ユーザー別localStorage、同一ID復旧、結果確認まで保持、Web Locks、ユーザー切替隔離。UI修正保存済み。MemoryStorage helper回帰4件PASS。実ブラウザー離脱・再ログイン受入は未実施。 |
-| P2 JST | 一つの抽選timestampを任務と共用。DBでnormal有料/無料の確定JST日を検査。UI次JST0/visibility再取得。実時刻境界の実接続受入は未実施。 |
-| P2 演出・UI | portalによる全背後inert、focus trap/復元、Enter/Space既定動作抑止、主要16px/補助14px/44px target。360/390px専用QA追加。新候補Previewのブラウザー確認は未実施。 |
-| QA Dialog crash | provider不足修正。初回Previewの失敗記録は保持し、修正後の表示合格を推定しない。 |
-| Windows検証 | URL.pathnameをpath.joinへ修正。bundle hash LF正規化。Windows実機での再実行は未実施。 |
-| G2 KPI接続 | 新たに欠落を発見し、共通gameplayMeasurement・既存KPI3関数の限定差分を実装。ローカル型/domain/measurement検査PASS。SQL適用・bundle配信・実接続検証は保留。 |
+残件は次に限定する。
 
-### 実接続証拠と性能
+1. 承認性能基準の全条件達成（特にEdge呼出し前cold遅延）。
+2. 連携済みアカウントのログアウト→資格情報入力→再ログインによる同一所持/背景確認。匿名ゲストreloadとrefresh試験をこの合格へ読み替えない。
+3. 実時刻JST0を跨ぐ開きっぱなし/DB実接続の観測。計算/domain/DBガード検証と区別。
+4. 最新G2成果と同一候補にした統合受入。隔離単体結果だけでは統合完了にしない。
 
-- 詳細: [live-v30.json](./live-v30.json)。ファイル名はテスト開始時のAPI版。試験中にG2によるv31配信が確認されたため、全項目を同一v30候補の受入としない。
-- 確認済み: 正式292件、支払不正時非消費、券実在庫/台帳分離、paid-lot期限切れrollback、同一normal並列の一回決済、SSR交換/再送/背景解放・選択、refresh-token再認証後の保存保持。
-- refresh-token試験は本体UIでのログアウト→ログイン受入ではない。
-- HTTP16観測中13件が1秒目標超過。特選1578ms、券1516ms、交換1596ms、並列再送10957ms。性能は未合格。開門の意図した約4秒はAPI待ち時間に合算しない。
-- static98/98、formal domain、pending helper4件、UI対象eslint0 errors、型検査PASS。これらは最終同一候補の実接続受入を代替しない。
+## DB差分・引渡し・環境方針
 
-### G2統合・配信停止理由
+資材: `supabase/isolated/g3/manifest.json`、`APPLY_ORDER.txt`。限定schema/正式マスター/付与・KPI・背景・原子commit/認証binding、実接続で不足を発見したrooms/territory/guild読取依存14〜17を追加。旧devのユーザー/履歴/Stripe/webhook/Cronは移行なし。fixture writerは試験後に12で削除済み。
 
-- ローカルはG2 `b41d35b7d6639df700be22a6087726b4eccdf6bc`までmerge済み。VIP購入表示・戦闘再生計測などG2後続成果を保持。
-- G3親が配信したv30: source `b86e10a46b5feeb3dcc6ea999f84805a614ce906c4717c7f0798c4cac8557ac0`、bundle `224e867d7d6464a1ef0a149e00fe6cec2c6f16b330ab2c753508457cc5dce7cb`、配信入力 `0e5d46dec49671223b0f549b5fb260b37cc94533e71e4a2d02d3364e9fc27cce`。
-- 最新liveはG2 v31、管理hash `70c20710ef9a7a36b103630cd67548da2fa62f314efa2d0797a482db11fb9c6f`。PR30 b41の差分にはsource/index保存がない。roomsFor RPC最適化との報告はあるが、完全な編集元がGit未保存のため、旧bundle上書きを防ぐ目的でG3次回API/DB配信を停止。
-- PR33コメントでv31の完全source/bundleのGit保存と共有API書込み窓の調整を依頼済み。minified配信bundleだけから推定復元して配信しない。
-- KPI SQLは新APIのmeasurementを必須とするため、旧API稼働中には適用しない。候補は [G3_KPI_CONNECTION_REVIEW.md](./G3_KPI_CONNECTION_REVIEW.md) に記録。
-- 修正後の新Previewと不変URL取得は未完了。既存branch Preview成功を統合受入扱いにしない。
+G2 R8 PR30 `29b1515f677bb475cb22b956c9802b88f51c2411` のv31保持差分は [R8_INTEGRATION.md](R8_INTEGRATION.md) のとおり選択統合。旧bundle上書きや全migration再適用なし。
 
-### 再開条件・引継ぎ
+引渡し先: G2 PR #30の統合担当、G3 PR #33、メイン進行チャット。渡すものは正式マスター、G3 domain/UI/API差分、券原子消費/receipt/KPI/背景接続SQL、配信hash、実接続証拠、上記4残件。隔離専用URLガード/QA初期化を共有環境へそのまま移さない。
 
-1. G2 v31完全source/bundleの保存SHAとAPI/DB書込み順を確定。
-2. G3計測差分を統合、bundle再生成、同一候補build/回帰、開発限定SQL/API切替。
-3. 性能超過（特に並列再送）を修正・再計測。
-4. 同一候補の本体→認証付きAPI→DB→本体再ログイン、pending離脱復旧、JST境界、モバイル・フォーカス受入。
-5. PR33の実装/証拠SHA・不変Previewを固定し、メイン進行チャットへ最終提出。
-
-G3完了提案は保留。G4のチュートリアル・正式初期配布、G5の後続受入へ自動移行しない。
+後続G2同一候補検証で必要なため**環境は停止せず維持**。初期利用見直し日2026-09-28 JST。正式見積の月額換算USD10（使用量・税別）。統合担当の利用終了確認後に停止判断を記録する。G4/G5へ自動移行しない。

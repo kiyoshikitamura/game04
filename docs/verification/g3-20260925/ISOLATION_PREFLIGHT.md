@@ -2,6 +2,8 @@
 
 2026-09-25。新設、EU/Micro、費用はユーザー承認済み。既存 dev/main/Production は変更しない。
 
+最新受入状況は [RESULT.md](RESULT.md) と [ISOLATED_DEPLOYMENT.md](ISOLATED_DEPLOYMENT.md)。下記の初回Auth停止は2026-09-25 18:59 JSTの本人設定で解消。
+
 ## 接続と費用
 
 - 組織: `kiyoshikitamura's Org` / `mvkvwqhvpoxpvxbumfjk`
@@ -14,7 +16,7 @@
 - 確認画面: https://vercel.com/kiyoshi-kitamura/game04/settings/environment-variables
 - `work/game04-g3-20260925` のみを選択し、Production / 全Preview / Development は選択せず保存。
 - 保存済み: NEXT_PUBLIC_SUPABASE_URL、新環境 anon 公開鍵、USE_MOCK_DB=false、ENABLE_QA_TOOLS=true、APP_ENV=preview。
-- サーバー側キーはG3ブランチ限定の明示的無効値 `G3_ISOLATED_UNCONFIGURED` でoverride済み。旧共有値は変更せず継承を遮断。新環境の正規キー取得後に当該overrideだけ置換する。
+- 初回はG3ブランチ限定の無効値で旧キー継承を遮断。2026-09-25 18:59 JSTに本人が新環境キーへ設定済みと回答。その後の認証付きQA routeは認証判定を通過し、匿名Authと正式APIの実接続も成功。秘密値は記録しない。
 
 ## DB / API
 
@@ -33,7 +35,7 @@
 - 配信応答 ezbr_sha256: `1744b84f403ecf33943c6523ed23430b8656811f8344b44a52d718634d9e5d16`
 - API URL: https://znakrkaazliexzwihxge.supabase.co/functions/v1/game04-redesign-api
 
-## 検証状況（未完了）
+## 初回検証履歴（下記Auth停止は解消済み）
 
 ローカルformal/adverse/static98/measurement/typecheck/bundle、隔離接続設定でのproduction buildはPASS。
 DB formal/contract gateはPASS。これらを本体→認証API→DB→再ログインの実接続受入の代用としない。

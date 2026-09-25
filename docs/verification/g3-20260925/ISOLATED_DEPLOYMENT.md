@@ -1,42 +1,42 @@
-# G3 isolated deployment checkpoint — 2026-09-25
+# G3 isolated deployment — final candidate 2026-09-25
 
-## Candidate and destinations
+## Saved candidate
 
-- PR: https://github.com/kiyoshikitamura/game04/pull/33 (Draft)
-- Implementation: `a14f20f1df03588e2033537d929ffe8d5323a05b`
-- Tree: `c2bcbc968d20bfa887c3d913174a9ea0bc047b69` (local `d9e308d` tree identical; remote diff 0)
-- Vercel: `dpl_Di9C9PN4agxnDdQAhjJdawEzt4ZG`, Preview, Ready, 58s build
-- Immutable Preview: https://game04-6pzqsgof9-kiyoshi-kitamura.vercel.app/
-- Deployment record: https://vercel.com/kiyoshi-kitamura/game04/Di9C9PN4agxnDdQAhjJdawEzt4ZG
-- Supabase: `znakrkaazliexzwihxge` / `game04-g3-acceptance` / eu-central-1 / approved monthly USD10
-- Edge: `game04-redesign-api` v1 ACTIVE / verify_jwt=true
-- Source/hash/DB details: [ISOLATION_PREFLIGHT.md](ISOLATION_PREFLIGHT.md), [ISOLATED_BUILD.md](ISOLATED_BUILD.md), `supabase/isolated/g3/manifest.json`
+- Draft PR: https://github.com/kiyoshikitamura/game04/pull/33
+- Final implementation SHA: `c47c1f4d92e331802ef350df940b47e3b7b6e0c3` (API CORS-only follow-up).
+- Browser client SHA: `7f8956ec0fb75d743f2849714056b1396c282bb8`; client files are identical in c47c1f4.
+- Final tree: `6793993867ec7e462ec2c7670261bc916a8267a6` (local `7c9b985` tree identical; remote diff 0). Client snapshot tree `5436f688d92ef8b864ce83e8c98b8e73f74f8002`.
+- Vercel: `dpl_3axt1TdAHZnS48Gib9MNRkU7jpRd`, **Preview**, Ready, 58s build.
+- Immutable Preview: https://game04-942ioj0ag-kiyoshi-kitamura.vercel.app/
+- Deployment: https://vercel.com/kiyoshi-kitamura/game04/3axt1TdAHZnS48Gib9MNRkU7jpRd
+- Supabase: `znakrkaazliexzwihxge` / `game04-g3-acceptance` / EU/Micro / approved monthly equivalent USD10.
+- API v3 ACTIVE / verify_jwt=true / management ezbr `f0e4aa527baf6cf0cf0c49cb81f154486ff5d4b1170ba45f1feea388dfadc679`.
+- Source SHA256: `57be17cef08185ced05e92bf9650e119ffb193b65d31d9d149d31370f2036975`.
+- Tracked index SHA256: `7f8899d51de1bc0b3708c66c0eaa1fb063f0a3064721bb48f08b57a59bc304d3`.
+- Minified artifact SHA256 (file with trailing LF): `f1cc9cd973108520268177a9cdfc4e0786a663c238133e2404f9772a6ea340a1`; deploy tool input removes trailing LF. Management digest above is independent service digest.
+- DB assets/apply order: `supabase/isolated/g3/manifest.json`, `APPLY_ORDER.txt`.
 
-## Verified and not verified
+The implementation commit contains 16 changed blobs; all uploaded SHA/readbacks match local Git. Large index 1,792,043 bytes transferred in chunks, no truncated bundle. Local build required isolated URL build configuration; its first missing-env stop is recorded, then Next16.2.10/TypeScript/28-page build passed. Vercel actual Preview build also passed.
 
-Verified: local formal/adverse/static98/measurement/typecheck/bundle/build; DB formal 292/233 and rates; limited runtime dependencies and service-role-only gacha commit; API rejects unauthenticated request HTTP401; Vercel Ready; actual browser title screen loads.
+## Actual acceptance and correction history
 
-Actual browser path `TAP TO START` → `はじめから` ends in `Anonymous sign-ins are disabled`. Auth settings readback independently confirmed `external.anonymous_users=false`, email enabled, email autoconfirm=false. This is an actual acceptance blocker, not a gacha PASS. No Auth user, game user, draw receipt or order existed at the final database gate.
+1. Initial a14f Preview `game04-6pzqsgof9-kiyoshi-kitamura.vercel.app`: anonymous Auth disabled; recorded FAIL, never PASS.
+2. User configured isolated anonymous Auth and branch-only service key, reported done at 18:59 JST. Sentinel inheritance block replaced by actual isolated key; no key values recorded.
+3. a14f redeploy `dpl_GSx8QxmmQfYE6yMrqjunACsapDJs` / https://game04-6e1a3d50y-kiyoshi-kitamura.vercel.app/ Ready. Actual anonymous identities A/B authenticated successfully.
+4. Actual initial reads found missing room/territory/guild dependencies. Limited DB assets14–17 applied only to isolated project.
+5. API v1 functional suite9 PASS, real browser free10/reload receipt restore PASS. Performance FAIL, not waived.
+6. G3 read-path overlap/duplicate-read removal + client EU region routing saved and API v2 deployed. Fixed-ID replay regression retained exact results; function/edge logs identify cold pre-invocation delay. Warm725–1315ms, cold9444–14139ms; performance remains FAIL.
+7. Final client candidate 7f8956e deployed at above immutable URL. Actual browser found missing x-region CORS permission; API-only c47c1f4/v3 fixes it. Browser read and new mutation succeeded after v3. Final UI validation is recorded in `BROWSER_ISOLATED_ACCEPTANCE.md`.
+8. Fixture writers removed by `12_lock_fixture_generators.sql`. `90_verify.sql` PASS; evidence `isolated-final-90-gate.json`.
 
-Not verified: authenticated new-environment draw/receipt/debit/KPI/relogin, mobile gacha interactions, actual latency thresholds, final G2 integration. Previous old-dev or mock success cannot replace these checks.
+## Scope and lifecycle
 
-Evidence: [isolated-preview-auth-block.jpg](isolated-preview-auth-block.jpg), [vercel-isolated-env.jpg](vercel-isolated-env.jpg).
+This is G3 standalone acceptance. See [RESULT.md](RESULT.md) for specification mapping, actual remaining items and completion proposal; [ISOLATED_DB_RECONCILIATION.md](ISOLATED_DB_RECONCILIATION.md) for receipt/inventory/KPI proof. Refresh and anonymous reload do not replace credential-login acceptance. QA-only initializer is not G4 tutorial/starter supply.
 
-## Remaining one-time authentication setup
+Root's isolated write window began with project creation at 2026-09-25T09:02:26.735333Z; final implementation deployment was Ready at 10:25:20Z. API v2 deployed at 10:18:55Z; final API v3 at 10:30:08Z. Final evidence save marks the end of G3 writes and handoff. No exclusive control over old dev was assumed.
 
-Vercel access is resolved; no Vercel reauthorization is needed. Supabase management UI is signed out. User stated GitHub uses Google authentication. The available cloud GitHub login screen did not show a Google option; no password method is substituted.
+Handoff destination: G3 PR33, G2 PR30 integration owner, final decision in main progress chat. Retain the isolated project for pending G2 same-candidate integration; initial review2026-09-28 JST, monthly equivalent USD10 plus usage/tax. Do not stop before downstream use is confirmed complete. No G2 default-OFF performance candidate, existing-dev write, main merge or Production deployment by this task.
 
-The user must complete management-site sign-in in the shared browser. Completion means Supabase displays `kiyoshikitamura's Org` and `game04-g3-acceptance`. Then the agent will enable anonymous Auth only in this project, obtain/configure its server key through the authenticated settings path, replace the G3-only sentinel override, and continue the prepared live acceptance. Secrets are never requested in chat or committed.
+## End of write window
 
-Current branch-only `SUPABASE_SERVICE_ROLE_KEY=G3_ISOLATED_UNCONFIGURED` explicitly blocks inheritance of the old shared credential. No existing shared secret was changed.
-
-## Resume / handoff / lifecycle
-
-1. Enable isolated Auth and replace G3 branch server-key sentinel; redeploy Preview.
-2. Create exactly two isolated QA identities; initialize/classify via prepared RPC; apply scoped fixture; drop temporary fixture writers with `12_lock_fixture_generators.sql`.
-3. Run prepared real authenticated acceptance, browser recovery/relogin/mobile checks, and latency checks. Fix only demonstrated failures and save evidence.
-4. Run `90_verify.sql`, record immutable accepted SHA/Preview and hand off to G2 PR #30 / G3 PR #33 / main progress chat.
-
-This checkpoint is G3 standalone, not G2 integrated acceptance or G3 completion. Keep the environment for the pending G3 acceptance and later G2 same-candidate integration. Initial retention review: 2026-09-28 JST; monthly equivalent USD10 plus any usage/tax. Do not pause before confirming that later integration no longer needs it.
-
-G2 default-OFF performance changes, existing dev, main and Production remain untouched. Isolated initializer is a QA profile-only adapter; its COMPLETE projection bypasses tutorial for G3 and is not G4 implementation or starter-distribution approval.
+2026-09-25 19:34 JST: final API v3 active, C browser mutation/reload/end/ack complete, 3 QA users and one C free10 receipt reconciled; no further DB/API writes planned in this task. Final records saved to PR33 for G2 handoff. Actual preflight evidence `cors-preflight-isolated-v3.json`, final C receipt evidence `isolated-final-c.json`.
