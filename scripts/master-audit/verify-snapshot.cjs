@@ -3,6 +3,7 @@ const dir=process.argv[2];if(!dir)throw Error('Usage: node verify-snapshot.cjs E
 for(const [key,value]of Object.entries(expected.runtime))differences.push(...diff(value,actual[key],'/runtime/'+key));
 for(const [key,value]of Object.entries(expected.database))differences.push(...diff(value,db[key],'/database/'+key));
 for(const key of ['sourceSha','apiVersion','apiSha256','databaseProject','capturedAt'])if(!meta[key])differences.push({path:'/metadata/'+key,kind:'missing'});
+const unresolvedAuthorityIssues=JSON.parse(fs.readFileSync(base+'/unresolved-authority.json'));
 const missingIntegration=expected.requiredIntegration.filter(k=>meta.integration?.[k]!==true);
 if(meta.sourceSha!==meta.verifiedSourceSha)missingIntegration.push('same source SHA verified');
-console.log(JSON.stringify({status:differences.length||missingIntegration.length?'STOP':'MATCH',differenceCount:differences.length,differences,missingIntegration},null,2));process.exitCode=differences.length||missingIntegration.length?1:0;
+console.log(JSON.stringify({status:differences.length||missingIntegration.length||unresolvedAuthorityIssues.length?'STOP':'MATCH',differenceCount:differences.length,differences,missingIntegration,unresolvedAuthorityIssues},null,2));process.exitCode=differences.length||missingIntegration.length||unresolvedAuthorityIssues.length?1:0;

@@ -2,7 +2,7 @@
 
 ## 基準の扱い
 
-本監査はPR30 `29b1515` とv31/devに対するもの。`approved-values.json`はID/各値を保持する比較正本であり、現在のDB全体を承認したdumpではない。runtimeには実APIから確認できた正式値、localOnlyにはログボ/販売/交換/旧アイテム等のローカル定義、tutorialGrantにはPR34の最終付与契約を分けている。新しい承認がない限り比較の期待値を実測値へ自動更新してはいけない。
+本監査はPR30 `29b1515` とv31/devに対するもの。`approved-values.json`はID/各値を保持する比較基準であり、現在のDB全体を承認したdumpではない。runtimeには実APIから確認できた正式値、localOnlyにはログボ/販売/交換/旧アイテム等のローカル定義、tutorialGrantにはPR34の最終付与契約を分けている。新しい承認がない限り比較の期待値を実測値へ自動更新してはいけない。MA07が未解決の技能値は取得一致用の基準であり、内部計算の正解として承認済みとは扱わない。`unresolved-authority.json`が残る限り値一致でもSTOP。解消には根拠・修正・候補再照合記録が必要。
 
 `observed/`は取得時点の証拠。現状はSTOPが正常。namedAssetSkillIds不足とinvasionMasters旧定義、G4/G3/Pの未受入を隠さない。差分450はJSON位置単位であり、450件のマスタ欠落という意味ではない。
 
@@ -31,6 +31,7 @@ node scripts/master-audit/live-v31.cjs captured-index.ts evidence/runtime.json
 - 現在のAPIはdev projectを固定している。本番/分離DBへの接続差分はP/G3担当の環境別設定として照合し、dev用bundleをそのまま本番で使わない。今回は本番projectへアクセスしていない。
 
 ```sh
+node scripts/master-audit/verify-skill-design.cjs
 node scripts/master-audit/verify-authority.cjs
 node scripts/master-audit/verify-candidates.cjs
 node scripts/master-audit/test-compare.cjs
@@ -54,3 +55,5 @@ node scripts/master-audit/verify-snapshot.cjs evidence
 全てのSTOPが根拠付きで解消された候補のみメインへ提出する。本手順自体は本番変更・mainマージ・一般公開の指示ではない。
 
 `verify-tutorial-grant`は専用統合アカウントのチュートリアル終了直後・ログボ/出陣前のサーバー保存stateを入力する。個人stateはGitへ保存せず比較結果だけ保持する。後続の報酬取得後stateとの比較は行わない。
+
+MA07追加停止条件：本文の未丸め計算と効果値が異なる、または丸め方針の後続明示承認が未確認。表示表一致だけでこの停止を解除しない。

@@ -48,6 +48,22 @@
     {
       "command": "node scripts/master-audit/verify-snapshot.cjs docs/verification/master-audit-20260925/observed",
       "result": "STOP as expected; 450 JSON pointer differences, 4 integration conditions unconfirmed"
+    },
+    {
+      "command": "node scripts/master-audit/verify-skill-design.cjs",
+      "result": "STOP (expected exit 1): each of repository and captured v31 has 666 field differences across 65 skills / 585 LB rows. Independent numeric.md oracle; 8800 checks each. See observed/skill-design-comparison.json."
+    },
+    {
+      "command": "git apply --check docs/verification/master-audit-20260925/skill-precision-candidate.patch",
+      "result": "PASS; patch not applied"
+    },
+    {
+      "command": "synthetic snapshot identical to expected with all integration flags true",
+      "result": "PASS: verify-snapshot exit 1, zero value differences, MA07 still blocks"
+    },
+    {
+      "command": "node scripts/master-audit/verify-authority.cjs && node scripts/master-audit/test-compare.cjs",
+      "result": "PASS; table equality is not internal unrounded formula compliance"
     }
   ],
   "additional": {
