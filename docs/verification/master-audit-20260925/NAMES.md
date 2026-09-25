@@ -111,3 +111,7 @@
 統合時は承認済み65名称を設定し、generator・生成JSON・API・DB・比較manifestの該当nameだけを更新する。旧battle/room snapshot・既存進行・Lv・EXP・能力・報酬は変更しない。descriptionの攻略ヒントを名称へ戻さない。差分はname限定で検査し、名称以外の変更が出たら停止する。
 
 `node scripts/master-audit/verify-names.cjs`は現在STOP（終了1）が正しい。承認記録未確定、conceptと同じ名称、ID違い/欠落、敵名称のID対応不一致を検出する。統合後は新候補のruntime/DB証拠を入力するよう採取adapterを更新し、古い観測を最新受入と混同しない。名称承認後も変更差分・表示参照経路を確認してからMA08を解除する。
+
+## 名称体験の一括提案
+
+ユーザーの追加指示により、ID整合性に加えて出陣・共闘・侵攻での呼び分けを検討した。`NAMING_PROPOSAL.md` / `naming-proposal.json`に65場面名、共闘25主題/85組、敵356配置、侵攻5城60段階、一般敵15配役を保存。状態は提案・未承認。本人名と場面名を分け、敵nameを直接改変して参照切れを起こさない。名称案の採用前はMA08を解除しない。
