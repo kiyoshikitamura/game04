@@ -22,6 +22,9 @@ import BattleView from './BattleView';
 import FormalGachaView from './FormalGachaView';
 import ShopTab from '../ShopTab';
 import BrandedLoading from '../ui/BrandedLoading';
+import IntegratedTutorial from './IntegratedTutorial';
+import Modal from './Modal';
+import { SCENES,FIRST_SORTIE_TEXT,FIRST_DEFEAT_TEXT } from '@/domain/redesign/tutorial/content';
 
 export default function RedesignApp({ initialTab = 'home' }: { initialTab?: string } = {}) {
   const game = useGame();
@@ -118,7 +121,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     const requestOwner = owner;
     const isBattle = name === 'quest_battle' || name === 'raid_battle';
     const isGrowth = ['save_deck','character_level','character_awaken','character_unlock','soul_exchange','soul_select','skill_level','equipment_level','equipment_lb','equipment_lock','equipment_dismantle'].includes(name);
-    const persistentRequest = isBattle || name === 'territory_host' || isGrowth || ['shop_exchange', 'use_energy_drink', 'claim_mission', 'raid_claim'].includes(name);
+    const persistentRequest = name.startsWith('tutorial_') || isBattle || name === 'territory_host' || isGrowth || ['shop_exchange', 'use_energy_drink', 'claim_mission', 'raid_claim'].includes(name);
     const storageKey = `game04:request:${owner}:${name}:${!isBattle ? JSON.stringify(payload) : String(payload.stageId || payload.roomId || payload.destinationId || '')}`;
     let requestId = explicitId || crypto.randomUUID();
     if (persistentRequest && !explicitId) {
@@ -139,6 +142,11 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   }
   function navigate(next: string) {
     if (busy || lock.current) return;
+    if(data?.state.tutorial && !data.state.tutorial.departed) {
+      if(!next.startsWith('quest'))return;
+      void action('tutorial_depart').then(()=>{setTab('quest');setQuestNavigation(v=>v+1);});return;
+    }
+    if(next==='home'&&tab!=='home'&&data?.state.tutorial&&!data.state.tutorial.loginEligible){void action('tutorial_home').then(()=>setTab('home'));return;}
     if (next === 'raid' && raidDeckReturn) { returnToRaidPreparation(); return; }
     setRaidDeckReturn(undefined); setRaidPreparationLevel(undefined);
     if (next === 'quest' && questDeckReturn) { returnToQuestPreparation(); return; }
@@ -200,9 +208,14 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     }
     return value;
   }
+  const tutorialEntry = useRef(false);
+  useEffect(()=>{if(!data||tutorialEntry.current)return;tutorialEntry.current=true;
+   if(data.state.tutorial&&data.state.tutorial.step>=SCENES.length&&!data.state.tutorial.loginEligible&&tab==='home')void action('tutorial_home');
+  },[data?.state.userId]);
   const loginReceipt = data?.state.loginBonusReceipt;
   const shownLoginReceipt = useRef('');
   useEffect(() => {
+    if (data?.state.tutorial && (!data.state.tutorial.loginEligible || tab!=='home')) return;
     if (!owner || !loginReceipt || loginReceipt.masterVersion !== LOGIN_BONUS_VERSION || loginReceipt.last_claimed_date !== jstLoginDate(Date.now()) || busy || battle || questPlaying) return;
     const key = `game04:login-receipt:${owner}:${loginReceipt.last_claimed_date}`;
     if (shownLoginReceipt.current === key) return;
@@ -212,14 +225,17 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     game.setLoginBonusClaimResult(loginReceipt);
     game.setUserLoginBonus({ user_id: owner, current_step: loginReceipt.current_step, total_logins: loginReceipt.total_logins, last_claimed_date: loginReceipt.last_claimed_date });
     game.setShowLoginBonusModal(true);
-  }, [owner, loginReceipt, busy, battle, questPlaying, game.setLoginBonusClaimResult, game.setUserLoginBonus, game.setShowLoginBonusModal]);
+  }, [owner, loginReceipt, busy, battle, questPlaying, game.setLoginBonusClaimResult, game.setUserLoginBonus, game.setShowLoginBonusModal, data?.state.tutorial?.loginEligible, tab]);
   if (!data) return <div className="rd-shell"><div className="rd-panel">{error ? <><p role="alert">{error}</p><button className="rd-button" onClick={() => void refresh()}>再読み込み</button></> : <BrandedLoading label="戦国の世界を準備中" />}</div></div>;
+  if(data.state.tutorial && data.state.tutorial.step<SCENES.length) return <IntegratedTutorial state={data.state} busy={busy} onNext={async(step,name)=>{const result=await action('tutorial_next',{step,name});if(result.state.tutorial?.name)game.setUsername(result.state.tutorial.name);return result;}}/>;
   const state = data.state, vipActive = isVipActive(state.vipExpiresAt);
   const battleRoom = battle && battleKind === 'raid' && raidId ? data.rooms.find(room => room.id === raidId) : undefined;
   const encounter = data.rooms.find(r => getRoomRaidMaster(r).type === 'encounter' && r.status === 'active' && Date.parse(r.expiresAt) > encounterNow && r.participants.some(p => p.userId === state.userId && !p.leftAt));
   return <RedesignShell state={state} activeTab={tab} navigationBusy={busy} onNavigate={navigate} onAction={action} hideChrome={!!battle || questPlaying} socialEvents={data.socialEvents} missions={data.missions}
     encounterRaid={encounter ? { id: encounter.id, name: getRoomRaidMaster(encounter).name, expiresAt: encounter.expiresAt } : null}
     notifications={<>
+    {state.tutorial&&!state.tutorial.departed&&tab==='home'&&<Modal title="ご案内" hideCloseButton closeDisabled onClose={()=>{}} footer={<button className="rd-button" disabled={busy} onClick={()=>navigate('quest')}>出陣へ</button>}><p>{FIRST_SORTIE_TEXT}</p></Modal>}
+    {state.tutorial?.defeatPending&&!battle&&!questPlaying&&<Modal title="ご案内" hideCloseButton closeDisabled onClose={()=>{}} footer={<button className="rd-button" disabled={busy} onClick={()=>void action('tutorial_dismiss_defeat').then(()=>game.setShowMissionPanel(true))}>任務へ</button>}><p>{FIRST_DEFEAT_TEXT}</p></Modal>}
     {!!(state as AcquisitionState).pendingAcquisitions?.length && <p className="rd-panel" role="status">受け取り保留中の獲得物が{(state as AcquisitionState).pendingAcquisitions!.length}件あります。</p>}
     {error && <p className="rd-panel" role="alert">{error}</p>}
     {data.pendingBattle && !battle && <div className="rd-panel"><p>未完了の戦闘があります。</p><button className="rd-button" disabled={busy} onClick={async () => {

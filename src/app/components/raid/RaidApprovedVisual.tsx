@@ -14,6 +14,7 @@ export interface RaidApprovedCardData {
   attributeLabel: string;
   attributeIconUrl?: string;
   ownerName: string;
+  ownerBadges?: ReactNode;
   ownerImageUrl?: string;
   hpPercent: number | null;
   hpText: string;
@@ -31,7 +32,7 @@ export function RaidApprovedCard({ data, resolve = value => value, action }: { d
       <div className="raid-approved-card__badges"><span>{data.badgeLabel}</span>{data.statusLabel && <span>{data.statusLabel}</span>}</div>
       <h3>{data.bossName} <small>{data.levelLabel}</small></h3>
       <p className="raid-approved-card__attribute">{data.attributeIconUrl ? <img src={resolve(data.attributeIconUrl)} alt="" /> : null}<span>{data.attributeLabel}属性</span></p>
-      <div className="raid-approved-card__owner"><span>{data.ownerImageUrl && <img src={resolve(data.ownerImageUrl)} alt="" />}</span><strong>開催者　{data.ownerName}</strong></div>
+      <div className="raid-approved-card__owner"><span>{data.ownerImageUrl && <img src={resolve(data.ownerImageUrl)} alt="" />}</span><strong>開催者　{data.ownerName}{data.ownerBadges}</strong></div>
       <div className="raid-approved-card__hp"><div><span style={{ width: `${data.hpPercent ?? 0}%` }} /></div><strong>{data.hpText}</strong></div>
     </div>
     <div className="raid-approved-card__footer"><div><span><RaidApprovedIcon name="clock" />{data.remainingLabel}</span><span><RaidApprovedIcon name="people" />{data.participantLabel}</span></div>{action}</div>
@@ -44,6 +45,7 @@ export interface RaidApprovedDetailData {
   backgroundUrl?: string;
   characterUrl?: string;
   ownerName: string;
+  ownerBadges?: ReactNode;
   ownerImageUrl?: string;
   guildLabel: string;
   hpPercent: number | null;
@@ -59,7 +61,7 @@ export interface RaidApprovedDetailData {
 }
 
 export function RaidApprovedDetailVisual({ data, resolve = value => value, compact = false, actions, contribution, challenge }: { data: RaidApprovedDetailData; resolve?: (url: string) => string; compact?: boolean; actions: ReactNode; contribution: ReactNode; challenge: ReactNode }) {
-  const owner = <div className="raid-approved-detail__owner"><span>{data.ownerImageUrl && <img src={resolve(data.ownerImageUrl)} alt="" />}</span><strong>開催者　{data.ownerName}</strong></div>;
+  const owner = <div className="raid-approved-detail__owner"><span>{data.ownerImageUrl && <img src={resolve(data.ownerImageUrl)} alt="" />}</span><strong>開催者　{data.ownerName}{data.ownerBadges}</strong></div>;
   const hp = <div className="raid-approved-detail__hp"><div role="meter" aria-label="共通HP" aria-valuemin={0} aria-valuemax={100} aria-valuenow={data.hpPercent ?? undefined}><span style={{width:`${data.hpPercent??0}%`}}/></div><strong>{data.hpValueLabel}</strong></div>;
   const facts = <div className="raid-approved-detail__facts"><span><RaidApprovedIcon name="clock"/>{data.remainingLabel}</span><span><RaidApprovedIcon name="people"/>{data.participantLabel}</span></div>;
   const name = <h2>{data.bossName} <small>{data.levelLabel}</small></h2>;

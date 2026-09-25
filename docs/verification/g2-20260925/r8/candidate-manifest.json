@@ -1,0 +1,47 @@
+{
+  "base": "d328cc292ecdbf4ac163e6f33f2de95e399f0c3b",
+  "g3SourceBase": "2d280db6104bbdcf1e6a06e9c6bab752312df24a",
+  "deployed": false,
+  "apiVersionUnchanged": 31,
+  "featureFlag": "GAME04_SAVE_CONTEXT_RPC",
+  "defaultEnabled": false,
+  "bundleTool": "esbuild 0.25.0",
+  "g2BundleContainsG3": false,
+  "files": {
+    "supabase/functions/game04-redesign-api/source.ts": {
+      "bytes": 32958,
+      "sha256": "e298685f7abcd2d94603141c27e573e611b64c4d3d456e6a80dbf169f2b80d1a"
+    },
+    "supabase/functions/game04-redesign-api/index.ts": {
+      "bytes": 1737403,
+      "sha256": "301696f5df8d9be7e7f493c6c0ea98f5f0a0e43e0dd3340d12ff316c060cad8a"
+    },
+    "supabase/manual/game04_g2_commit_deck_with_context.sql": {
+      "bytes": 2616,
+      "sha256": "7258365a4df30056959d6e9fa737461111c967522ae524369e82ad81f87c2dd6"
+    },
+    "scripts/verify_g2_save_context.cjs": {
+      "bytes": 9116,
+      "sha256": "e9d27cb967abeaad082eaa2c7518aa3f85b496f3c739cc24eaafe1a1f255a9c8"
+    },
+    "scripts/verify_g2_session_read_boundary.cjs": {
+      "bytes": 2970,
+      "sha256": "2eb133de404af08f4be6f61c9b27dffd38d9b489d332ac8b3f38f298304534dd"
+    },
+    "docs/verification/g2-20260925/r8/g3-v31-rooms-source.ts.txt": {
+      "bytes": 41771,
+      "sha256": "d2a2b0adce5945df7c939e6c2f09c050e9e9239f6451647c89724f52c6850678"
+    },
+    "docs/verification/g2-20260925/r8/g3-v31-rooms.patch": {
+      "bytes": 1924,
+      "sha256": "cc3e796429c0f4ffe0d7ff9e61560ec3b6b014dc6116f1ca74f81f38c178c2fa"
+    }
+  },
+  "bundleOptions": {
+    "bundle": true,
+    "platform": "neutral",
+    "format": "esm",
+    "target": "es2022",
+    "minify": false
+  }
+}

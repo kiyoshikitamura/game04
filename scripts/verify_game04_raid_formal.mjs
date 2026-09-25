@@ -59,7 +59,7 @@ const now=Date.parse('2026-09-23T12:00:00Z'),master=FORMAL_ENCOUNTER_MASTERS[0];
 let room=createRaidRoom(master.id,'tester','formal-test',now),state=createInitialState('tester');state.energy=100;
 const snapshot=JSON.stringify(room.raidSnapshot),originalMasterHp=master.sharedHp;master.sharedHp=1;assert.equal(getRoomRaidMaster(room).sharedHp,originalMasterHp);master.sharedHp=originalMasterHp;assert.equal(JSON.stringify(room.raidSnapshot),snapshot);
 function action(name,payload={},time=now){const out=applyRaidAction(room,state,name,payload,time);room=out.room;state=out.state;return out;}
-function battle(id,outcome,damage){return action('raid_battle',{battleId:id,battleLevel:room.level,seed:42,result:{outcome,totalDamage:damage}});}
+function battle(id,outcome,damage){return action('raid_battle',{battleId:id,battleLevel:room.level,seed:42,result:{outcome,totalDamage:damage,actualHpDamage:damage}});}
 const beforeLoss=structuredClone(state);const loss=battle('lose','lose',100);assert.deepEqual(loss.rewards,[]);assert.equal(state.cash,beforeLoss.cash);assert.equal(room.rewardGrants.length,0);assert.equal(room.hp,originalMasterHp-100);
 for(let i=1;i<=2;i++){const out=battle(`win${i}`,'win',100);assert.ok(out.rewards.length>0);assert.equal(room.rewardGrants.length,0);}
 const win=battle('win3','win',100);assert.equal(room.participants[0].wins,3);assert.equal(room.rewardGrants.length,0,'qualification alone grants nothing');
@@ -77,11 +77,11 @@ const territorySnapshot={masterVersion:invasion.masterVersion,status:'PREVIEW_PR
 room=createRaidRoom(invasion.id,'tester','invasion-transitions',now,territorySnapshot);state=createInitialState('tester');state.energy=100;
 battle('stage1-win','win',room.hp);assert.equal(room.level,2);assert.equal(room.rewardGrants.length,0);
 const hp2=room.hp;
-for(const id of ['oldstage-win2','oldstage-win3'])action('raid_battle',{battleId:id,battleLevel:1,energyAlreadyPaid:true,result:{outcome:'win',totalDamage:999999}});
+for(const id of ['oldstage-win2','oldstage-win3'])action('raid_battle',{battleId:id,battleLevel:1,energyAlreadyPaid:true,result:{outcome:'win',totalDamage:999999,actualHpDamage:999999}});
 assert.equal(room.hp,hp2);assert.equal(room.participants[0].wins,3);assert.equal(room.rewardGrants.length,0,'no retroactive stage1 grants');
 for(let level=2;level<=12;level++){
  assert.equal(room.level,level);assert.deepEqual(getRoomRaidMaster(room).defeatRewards,invasion.stages[level-1].defeatRewards);
- action('raid_battle',{battleId:`stage${level}`,battleLevel:level,energyAlreadyPaid:true,result:{outcome:'win',totalDamage:room.hp}});
+ action('raid_battle',{battleId:`stage${level}`,battleLevel:level,energyAlreadyPaid:true,result:{outcome:'win',totalDamage:room.hp,actualHpDamage:room.hp}});
  assert.equal(room.rewardGrants.filter(g=>g.level===level).length,1);
  if(level<12)assert.equal(room.hp,invasion.stages[level].sharedHp);
 }

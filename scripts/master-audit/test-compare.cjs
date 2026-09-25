@@ -1,0 +1,3 @@
+const assert=require('assert/strict'),{diff}=require('./compare.cjs');const before={skills:{SKD001:{power:105},SKD002:{power:110}},rows:[{id:'x',value:0}]};
+for(const [name,change]of [['same count ID replacement',x=>{x.skills.SKD003=x.skills.SKD001;delete x.skills.SKD001}],['old value',x=>x.skills.SKD001.power=100],['empty',x=>x.skills={}],['null',x=>x.rows[0].value=null],['missing field',x=>delete x.rows[0].value]]){const x=structuredClone(before);change(x);assert(diff(before,x).length,name);}
+assert.equal(diff(before,{rows:[{value:0,id:'x'}],skills:{SKD002:{power:110},SKD001:{power:105}}}).length,0);console.log('PASS ID replacement / value rollback / empty / null / missing / object key order');

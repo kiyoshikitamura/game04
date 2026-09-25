@@ -26,6 +26,11 @@ import { projectTerritory, isTerritoryUnlocked, TERRITORY_HOST_POLICY_VERSION } 
 import type { TerritoryMaster, TerritoryProgress } from '../../../src/domain/redesign/types.ts';
 import type { BattleInput, RaidRoom, RedesignState, Reward } from '../../../src/domain/redesign/types.ts';
 
+import { applyTutorialTransition } from '../../../src/domain/redesign/tutorial/integration.ts';
+import { SCENES } from '../../../src/domain/redesign/tutorial/content.ts';
+
+import { progressionActivities } from '../../../src/domain/redesign/activityEvents.ts';
+
 const headers = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'authorization, apikey, content-type, x-client-info, x-region', 'Access-Control-Allow-Methods': 'POST, OPTIONS', 'Content-Type': 'application/json', 'Cache-Control': 'no-store' };
 const url = Deno.env.get('SUPABASE_URL')!;
 const key = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
@@ -73,8 +78,9 @@ async function stateFor(userId: string, acquired?: Awaited<ReturnType<typeof acq
   }
   throw new ApiError('データ更新中です。もう一度お試しください。', 409);
 }
-async function commit(before: RedesignState, after: RedesignState, requestId: string, battle: unknown = null, room: (RaidRoom & {version?: number}) | null = null, roomVersion: number | null = null, receipt: Record<string, unknown> = {}) {
-  return rpc('game04_commit_growth_state', { p_user_id: before.userId, p_expected_version: before.version, p_state: captureMissionAssets(synchronizeHomeBackgroundUnlocks(after)),
+async function commit(before: RedesignState, after: RedesignState, requestId: string, battle: unknown = null, room: (RaidRoom & {version?: number}) | null = null, roomVersion: number | null = null, receipt: Record<string, unknown> = {}, withSaveContext = false) {
+  const rpcName = withSaveContext ? 'game04_commit_deck_with_context' : 'game04_commit_growth_state';
+  return rpc(rpcName, { p_user_id: before.userId, p_expected_version: before.version, p_state: captureMissionAssets(synchronizeHomeBackgroundUnlocks(after)),
     p_cash_delta: after.cash - before.cash, p_energy_delta: after.energy - before.energy, p_request_id: requestId,
     p_battle: battle, p_raid: room, p_raid_expected_version: roomVersion, p_receipt: receipt });
 }
@@ -91,7 +97,10 @@ async function roomFor(id: string): Promise<RaidRoom & {version: number}> {
 }
 async function roomsFor(userId: string): Promise<(RaidRoom & {version: number})[]> {
   const rows = await rpc('game04_raid_rooms_with_owners', {p_user_id: userId});
-  // Preserve the existing owner projection; SQL only collapses dependent reads.
+  return projectRooms(rows);
+}
+function projectRooms(rows: any[]): (RaidRoom & {version: number})[] {
+  // Both ordinary reads and the post-commit snapshot share the same projection.
   return rows.map((row: any) => {
     const leader = CHARACTER_MASTERS.find(entry => entry.id === row.ownerLeaderCharacterId);
     return { ...row.state, version: row.version,
@@ -170,14 +179,15 @@ function gachaMeasurementReceipt(action: 'normal_gacha'|'special_gacha'|'special
       resultSummary },
   } };
 }
-async function responseFor(userId: string, extra: Record<string, unknown> = {}, committedState?: RedesignState) {
+type SaveResponseContext = { rooms: any[]; socialEvents: any[]; pending: any[]; territory: Awaited<ReturnType<typeof territoryContext>> };
+async function responseFor(userId: string, extra: Record<string, unknown> = {}, committedState?: RedesignState, context?: SaveResponseContext) {
   // Reuse the authoritative state returned by this request's atomic commit.
   // Conflict/replay/read paths still load current state; never substitute a client draft.
   const statePromise = committedState ? Promise.resolve(committedState) : stateFor(userId);
-  const [loadedState, rooms, socialEvents, pending, territory, missions] = await Promise.all([statePromise, roomsFor(userId),
-    db('game04_social_events?select=*&order=created_at.desc&limit=30'),
-    db(`game04_battles?user_id=eq.${userId}&status=eq.started&select=id,kind,target_id&order=created_at.asc&limit=1`),
-    statePromise.then(() => territoryContext(userId)), missionConfig(),
+  const [loadedState, rooms, socialEvents, pending, territory, missions] = await Promise.all([statePromise, context ? Promise.resolve(projectRooms(context.rooms)) : roomsFor(userId),
+    context ? Promise.resolve(context.socialEvents) : db('game04_social_events?select=*&order=created_at.desc&limit=30'),
+    context ? Promise.resolve(context.pending) : db(`game04_battles?user_id=eq.${userId}&status=eq.started&select=id,kind,target_id&order=created_at.asc&limit=1`),
+    context ? Promise.resolve(context.territory) : statePromise.then(() => territoryContext(userId)), missionConfig(),
   ]);
   let state = loadedState;
   for (let attempt = 0; attempt < 3; attempt++) {
@@ -195,7 +205,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
   if (!record) {
     const outstanding = await db(`game04_battles?user_id=eq.${userId}&status=eq.started&select=id&limit=1`);
     if (outstanding.length) throw new ApiError('未完了の戦闘を再開してください。', 409);
-    const state = await stateFor(userId); validateDeck(state, state.deck);
+    const state = await stateFor(userId); if(state.tutorial&&state.tutorial.step<SCENES.length)throw new ApiError('チュートリアルを完了してください。'); validateDeck(state, state.deck);
     const kind = name === 'quest_battle' ? 'quest' : 'raid';
     let waves: BattleInput['waves'], cost: number, targetId: string, raidLevel: number | undefined;
     let questStage: FormalQuestStage | undefined;
@@ -239,6 +249,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
   for (let attempt = 0; attempt < 4; attempt++) {
     const state = await stateFor(userId); let after = structuredClone(state);
     let room: (RaidRoom & {version?: number}) | null = null, version: number | null = null;
+    let activityRoomBefore: RaidRoom | undefined;
     let playerGrowth: Record<string, unknown> | undefined;
     const rewards: Reward[] = []; let firstClear = false, encounterRaidId: string | null = null;
     if (record.kind === 'quest' && battle.outcome === 'win') {
@@ -288,7 +299,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
         room = createRaidRoom(encounterMaster?.id??'encounter_flame', userId, encounterRaidId, Date.now()); room.participants[0].name = playerName; version = -1;
       }
     } else if (record.kind === 'raid') {
-      const currentRoom = await roomFor(record.target_id); version = currentRoom.version;
+      const currentRoom = await roomFor(record.target_id); activityRoomBefore=currentRoom; version = currentRoom.version;
       const transition = applyRaidAction(currentRoom, after, 'raid_battle', { battleId: id, battleLevel: record.input.raidLevel, result: battle, energyAlreadyPaid: true, seed:record.seed, luck:record.input.party.reduce((sum:number,p:any)=>sum+Math.max(0,Math.min(100,p.stats.luk)),0)/5 });
       room = transition.room; after = transition.state; rewards.push(...transition.rewards);
       const raidEvent = raidBattleMissionEvent(currentRoom, transition.room, userId, id, battle.outcome, Date.now());
@@ -312,9 +323,11 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
       if (record.input.party.some((unit: any) => unit.skills.length >= 3)) missionCounters.push('quest_skill_slot3');
     }
     if (missionCounters.length) after = recordMissionEvent(after, { id: `battle:${id}`, at: Date.now(), counters: missionCounters });
+    if(record.kind==='quest'&&battle.outcome!=='win'&&after.tutorial&&!after.tutorial.defeatSeen)after.tutorial={...after.tutorial,defeatSeen:true,defeatPending:true};
+    const activityEvents=progressionActivities(state,after,record.kind==='quest'?'quest_settle':'raid_settle',activityRoomBefore,room??undefined);
     const result = { battle, rewards, firstClear, encounterRaidId, ...(playerGrowth ? { playerGrowth } : {}) };
     try {
-      const settled = await commit(state, after, settlementId, { id, status: 'settled', result }, room, version);
+      const settled = await commit(state, after, settlementId, { id, status: 'settled', result }, room, version,{activityEvents});
       return responseFor(userId, settled.battleResult ?? result, settled.state);
     } catch (error) {
       const [saved] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=status,result`);
@@ -370,7 +383,7 @@ Deno.serve(async (request: Request) => {
     if (action === 'get_state' || action === 'raid_refresh') return new Response(JSON.stringify(await responseFor(user.id)), { headers });
     if (action === 'quest_battle' || action === 'raid_battle') return new Response(JSON.stringify(await runBattle(user.id, action, payload, requestId, profile.username)), { headers });
     if (action === 'territory_host' || action === 'raid_unlock') {
-      await stateFor(user.id);
+      const initialState=await stateFor(user.id); if(initialState.tutorial&&initialState.tutorial.step<SCENES.length)throw new ApiError('チュートリアルを完了してください。');
       let destinationId = String(payload.destinationId ?? '');
       if (action === 'raid_unlock') {
         const context = await territoryContext(user.id);
@@ -387,6 +400,7 @@ Deno.serve(async (request: Request) => {
     }
     const [prior] = priorRows;
     if (prior) {
+      if(action.startsWith('tutorial_')&&(prior.result?.receipt?.tutorialAction!==action||canonicalJson(prior.result?.receipt?.tutorialPayload)!==canonicalJson(payload)))throw new ApiError('操作IDが別の操作ですでに使用されています。',409);
       if (['normal_gacha','special_gacha','special_gacha_exchange'].includes(action)) {
         const requestPayload=normalizedGachaRequestPayload(action,payload);
         if(prior.result?.operation!==action||canonicalJson(prior.result?.requestPayload)!==canonicalJson(requestPayload))throw new ApiError('操作IDが別の操作ですでに使用されています。',409);
@@ -408,6 +422,12 @@ Deno.serve(async (request: Request) => {
     if (acquired && 'error' in acquired) throw acquired.error;
     let measurementReceipt: Record<string, unknown> | undefined;
     const state = await stateFor(user.id, acquired?.input); let after: RedesignState, room: RaidRoom | null = null, version: number | null = null;
+    if(state.tutorial&&state.tutorial.step<SCENES.length&&!action.startsWith('tutorial_'))throw new ApiError('チュートリアルを完了してください。');
+    if(action.startsWith('tutorial_')){
+      const next=applyTutorialTransition(state,action,payload);
+      const saved=await rpc('game04_commit_tutorial',{p_user_id:user.id,p_expected_version:state.version,p_state:next,p_request_id:requestId,p_action:action,p_payload:payload});
+      return new Response(JSON.stringify(await responseFor(user.id,{},action==='tutorial_home'?undefined:saved.state)),{headers});
+    }
     if (action === "normal_gacha") {
       const pool = normalGachaCompatibilityPool();
       const payment=String(payload.currency??payload.payment).toUpperCase();
@@ -465,8 +485,11 @@ Deno.serve(async (request: Request) => {
       if (action === 'character_unlock') growthCounters.push('soul_unlock');
       if (growthCounters.length) after = recordMissionEvent(after, { id: `growth:${requestId}`, at: Date.now(), counters: growthCounters });
     }
-    const saved = await commit(state, after, requestId, null, room, version, measurementReceipt ?? gameplayMeasurementReceipt(action, state, after));
-    return new Response(JSON.stringify(await responseFor(user.id, {}, saved.state)), { headers });
+    // Candidate only: enable after the additive RPC is verified on the integrated G3 baseline.
+    // No speculative state mutation or pre-commit owner projection; all context is read AFTER commit.
+    const withSaveContext = action === 'save_deck' && Deno.env.get('GAME04_SAVE_CONTEXT_RPC') === 'true';
+    const saved = await commit(state, after, requestId, null, room, version, {...(measurementReceipt ?? gameplayMeasurementReceipt(action, state, after)),activityEvents:progressionActivities(state,after,action)}, withSaveContext);
+    return new Response(JSON.stringify(await responseFor(user.id, {}, saved.state, withSaveContext ? saved.responseContext : undefined)), { headers });
   } catch (error) {
     const conflict = error instanceof ApiError && error.status === 409;
     const message = conflict ? '他の操作で更新されました。再読み込みしてお試しください。' : error instanceof Error ? error.message : '処理に失敗しました。';

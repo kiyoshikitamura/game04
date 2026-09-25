@@ -4,6 +4,7 @@ import "./TitleView.css";
 import { markTitleAssetReady } from "../lib/screenAssets";
 import ConfirmDialog from "./ui/ConfirmDialog";
 import TitleLegalFooter from "./TitleLegalFooter";
+import HomeEffect from "./redesign/HomeEffect";
 import { recordAcquisitionObservation } from "@/utils/kpiInstrumentation";
 
 export default function TitleView() {
@@ -81,7 +82,8 @@ export default function TitleView() {
   return (
     <div className="title-view-overlay">
       <div className="title-view-container">
-        {/* 背景画像 (CSSで指定) */}
+        {/* 桜_上田城：既存の透過演出をタイトル背景の上へ重ねる。 */}
+        <HomeEffect effectId="char_kaede_01" />
         
         {isGameStartTransition || resumeLoading ? (
           <div className="game-start-transition" role="status" aria-live="polite" aria-label="ゲーム開始中">

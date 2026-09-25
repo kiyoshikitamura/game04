@@ -1,4 +1,5 @@
 "use client";
+import { validCommunityMessage, settleCommunityMessage } from "@/domain/redesign/community";
 
 import { useState, useEffect, useCallback } from "react";
 import { supabase, usingMockSupabase } from "@/utils/supabase";
@@ -363,6 +364,7 @@ export function useChat(
 
   const handleSendChat = async () => {
     if (!session || !chatInput.trim() || chatCooldown > 0 || chatSending) return;
+    if (!validCommunityMessage(chatInput)) { setErrorMessage("メッセージは140文字以内で入力してください。"); return; }
     setChatSending(true);
     playCyberSe("click");
 
@@ -393,7 +395,7 @@ export function useChat(
       });
       if (error) throw error;
       if (data) {
-        setGuildChats((previous) => previous.map((message) => message.id === temporaryMessageId ? data : message));
+        setGuildChats((previous) => settleCommunityMessage(previous, temporaryMessageId, data));
       }
       setChatInput("");
       setChatReplyTo(null);
@@ -419,6 +421,7 @@ export function useChat(
   const handleSendDirectMessage = async (recipientId: string, text: string) => {
     if (!session?.user?.id || !recipientId || !text.trim()) return false;
     if (chatSending) return false;
+    if (!validCommunityMessage(text)) { setErrorMessage("メッセージは140文字以内で入力してください。"); return false; }
     setChatSending(true);
     playCyberSe("click");
     try {

@@ -1,0 +1,53 @@
+const fs = require('node:fs');
+const ts = require('typescript');
+require.extensions['.ts'] = (module, filename) => module._compile(ts.transpileModule(fs.readFileSync(filename, 'utf8'), {compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true,resolveJsonModule:true}}).outputText,filename);
+const assert = require('node:assert/strict');
+const {newTutorial,advanceTutorial} = require('../src/domain/redesign/tutorial/state.ts');
+const {createTutorialBattle} = require('../src/domain/redesign/tutorial/battle.ts');
+const {SCENES,STARTERS,STARTER_SKILLS,BACKGROUNDS} = require('../src/domain/redesign/tutorial/content.ts');
+let state = newTutorial('test');
+assert.equal(state.game.characters.length,0);
+assert.equal(state.game.skills.length,0);
+assert.throws(()=>advanceTutorial(state,{type:'home',now:Date.now()},'premature'));
+for(let step=0;step<SCENES.length;step++) {
+ const action = {type:'next',step,name:'検証城主'};
+ const next = advanceTutorial(state,action,`next-${step}`);
+ assert.equal(advanceTutorial(next,action,`next-${step}`),next,'repeated request must be idempotent');
+ assert.equal(advanceTutorial(next,action,`stale-${step}`),next,'stale scene must not progress');
+ state = JSON.parse(JSON.stringify(next));
+ if(SCENES[state.step]?.id==='characters') assert.deepEqual(state.game.characters.map(c=>c.id),STARTERS);
+ if(SCENES[state.step]?.id==='skills') assert.deepEqual(state.game.skills.map(c=>c.id),STARTER_SKILLS);
+ if(SCENES[state.step]?.id==='battle') {
+  const result=createTutorialBattle(state.game);
+  const hits=result.frames.filter(f=>f.event==='damage');
+  assert.deepEqual(hits.map(f=>f.enemies[0].hp),[49,48,47,47,27,7,0]);
+  assert.deepEqual(hits.filter(f=>f.skillId==='SKD003').map(f=>f.hits),[[20],[20],[20]]);
+  assert.equal(result.frames.filter(f=>f.event==='action_start'&&f.skillId==='SKD003').length,3);
+  const aoe=hits.find(f=>f.skillId==='SKD025');
+  aoe.party.forEach((p,i)=>assert.equal(result.party[i].stats.hp-p.hp,50));
+  assert.ok(result.frames.filter(f=>f.skillId==='SKD003').every(f=>f.burst));
+  assert.deepEqual(result.party.map(p=>p.skills[0].id),STARTER_SKILLS);
+  assert.equal(result.waves[0][0].stats.hp,50);
+  assert.equal(result.waves[0][0].skills[0].rarity,'SSR');
+  assert.equal(result.totalDamage,63); assert.equal(result.actualHpDamage,50);
+ }
+}
+assert.equal(state.name,'検証城主');
+assert.equal(state.game.characters.length,3); assert.equal(state.game.skills.length,3);
+const now=Date.parse('2026-09-25T14:59:00Z');
+state=advanceTutorial(state,{type:'home',now},'home-1');
+assert.equal(state.homeVisits,1); assert.equal(state.loginPending,false); assert.equal(state.game.cash,0);
+state=advanceTutorial(state,{type:'depart'},'depart'); assert.equal(state.departed,true);
+state=advanceTutorial(state,{type:'home',now},'home-2');
+assert.equal(state.loginPending,true); assert.equal(state.game.cash,10000);
+state=advanceTutorial(state,{type:'dismiss-login'},'dismiss');
+state=advanceTutorial(state,{type:'home',now},'home-3');
+assert.equal(state.loginPending,false); assert.equal(state.game.cash,10000);
+state=advanceTutorial(state,{type:'home',now:now+60000},'home-next-day');
+assert.equal(state.loginPending,true); assert.equal(state.game.cash,20000);
+state=advanceTutorial(state,{type:'defeat'},'lose-1'); assert.equal(state.defeatPending,true);
+state=advanceTutorial(state,{type:'dismiss-defeat'},'dismiss-defeat');
+state=advanceTutorial(state,{type:'defeat'},'lose-2'); assert.equal(state.defeatPending,false);
+for(const path of Object.values(BACKGROUNDS)) assert.ok(fs.existsSync(`public${path}`),path);
+console.log('PASS: grants, equipment, deterministic battle (7 damage events / 3 casts), resume/idempotency, home visits, JST rollover, one-time defeat, approved backgrounds');
+

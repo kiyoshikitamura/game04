@@ -1,0 +1,11 @@
+--- docs/verification/g2-20260925/r7/shared-api/live-v30.pretty.ts.txt	2026-09-25 15:26:16.499587671 +0900
++++ docs/verification/g2-20260925/r7/shared-api/live-v30-rooms.ts.txt	2026-09-25 15:26:46.543970491 +0900
+@@ -1249,7 +1249,7 @@
+ async function Gu(e) { if (!/^[0-9a-f-]{36}$/i.test(e))
+     throw new ue("\u30EC\u30A4\u30C9\u304C\u4E0D\u6B63\u3067\u3059\u3002"); const [u] = await _e(`game04_raid_rooms?id=eq.${e}&select=state,version`); if (!u)
+     throw new ue("\u30EC\u30A4\u30C9\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002", 404); return { ...u.state, version: u.version }; }
+-async function ta(e) { const u = await Ae("game04_raid_rooms_for_user", { p_user_id: e }), t = [...new Set(u.map(r => r.state.ownerId))], [a, s] = t.length ? await Promise.all([_e(`users?id=in.(${t.join(",")})&select=id,username`), _e(`game04_player_state?user_id=in.(${t.join(",")})&select=user_id,state`)]) : [[], []]; return u.map(r => { const i = a.find(o => o.id === r.state.ownerId), l = s.find(o => o.user_id === r.state.ownerId), p = De.find(o => o.id === l?.state?.deck?.[0]?.characterId); return { ...r.state, version: r.version, participants: r.state.participants.map(o => o.userId === r.state.ownerId ? { ...o, name: i?.username ?? o.name, portraitUrl: p ? su(p, "portrait") : void 0 } : o), status: r.state.status === "active" && Date.parse(r.state.expiresAt) <= Date.now() ? "expired" : r.state.status }; }); }
++async function ta(e) { const u = await Ae("game04_raid_rooms_with_owners", { p_user_id: e }); return u.map(r => { const p = De.find(o => o.id === r.ownerLeaderCharacterId); return { ...r.state, version: r.version, participants: r.state.participants.map(o => o.userId === r.state.ownerId ? { ...o, name: r.ownerName ?? o.name, portraitUrl: p ? su(p, "portrait") : void 0 } : o), status: r.state.status === "active" && Date.parse(r.state.expiresAt) <= Date.now() ? "expired" : r.state.status }; }); }
+ async function Mu(e) { return Ae("game04_territory_context", { p_user_id: e }); }
+ async function Ou() { const [e] = await _e("game04_redesign_master?key=eq.acquisition_conversion&select=data"); if (!e?.data)
+     throw new ue("\u7372\u5F97\u8A2D\u5B9A\u3092\u78BA\u8A8D\u3067\u304D\u307E\u305B\u3093\u3002", 503); return e.data; }
