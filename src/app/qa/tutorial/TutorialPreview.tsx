@@ -4,6 +4,9 @@ import { GameContext } from '@/app/context/GameContext';
 import BattleView from '@/app/components/redesign/BattleView';
 import HomeView from '@/app/components/redesign/HomeView';
 import HomeEffect from '@/app/components/redesign/HomeEffect';
+import MissionContent from '@/app/components/redesign/MissionContent';
+import { evaluateMissions } from '@/domain/redesign/missions';
+import { FORMAL_MISSION_CONFIG } from '@/domain/redesign/formalMissions';
 import QuestView, { type QuestSettlement } from '@/app/components/redesign/QuestView';
 import GrowthView from '@/app/components/redesign/GrowthView';
 import { CHARACTER_MASTERS, buildBattleParty, BATTLE_RULES, grantReward } from '@/domain/redesign/masters';
@@ -41,6 +44,7 @@ export default function TutorialPreview() {
   const inFlight = useRef(false);
   const [name, setName] = useState('');
   const [tab, setTab] = useState('home');
+  const [missionOpen, setMissionOpen] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(false);
   const entryReceipt = useRef('');
@@ -86,6 +90,7 @@ export default function TutorialPreview() {
   }
   function navigate(destination: string) {
     if (!save || (!save.departed && !destination.startsWith('quest'))) return;
+    if (destination === 'missions') { setMissionOpen(true); return; }
     const target = destination.startsWith('quest') ? 'quest' : destination;
     if (target === 'home' && tab !== 'home') act([{ type: 'home', now: Date.now() }], () => setTab('home'));
     else if (!save.departed && target === 'quest') act([{ type: 'depart' }], () => setTab('quest'));
@@ -120,12 +125,13 @@ export default function TutorialPreview() {
     return { battle: result, rewards, firstClear };
   }
   const gameContext = { session: null, username: save?.name || '', userLevel: 1, playCyberSe: noop,
-    setShowMissionPanel: () => navigate('missions'), directMessages: [], dmUnreadConversations: [], dmUnreadTotal: 0,
+    showMissionPanel: missionOpen, setShowMissionPanel: (open: boolean) => { if (!open || save?.departed) setMissionOpen(open); }, directMessages: [], dmUnreadConversations: [], dmUnreadTotal: 0,
     guildChats: [], chatInput: '', chatCooldown: 0, chatSending: false, dmRecipientId: null,
     setDmRecipientId: noop, setChatInput: noop, setChatChannel: noop, setShowTribeChatPanel: noop,
     handleSendChat: async () => undefined, handleSendDirectMessage: async () => false };
   if (!save) return <main className="rd-shell tutorial-loading"><p role="status">{error || 'チュートリアルを準備しています…'}</p>{error && <button className="rd-button" onClick={() => window.location.reload()}>再読み込み</button>}</main>;
   const scene = SCENES[save.step];
+  const missions = evaluateMissions(save.game, FORMAL_MISSION_CONFIG);
   const world = scene && 'cast' in scene;
   const acquisition = scene?.id === 'characters' || scene?.id === 'skills';
   const background = world ? scene.background : BACKGROUNDS.guide;
@@ -150,23 +156,25 @@ export default function TutorialPreview() {
       </main> : <>
       <header className="tutorial-header"><strong>{save.name}</strong><span>Lv.1</span><span>銭 {save.game.cash.toLocaleString()}</span><span>行動力 {save.game.energy}</span></header>
       <main className="rd-main" inert={!save.departed && tab === 'home' ? true : undefined}>
-        {tab === 'home' && <HomeView state={save.game} onAction={action} onNavigate={navigate} previewOnly />}
+        {tab === 'home' && <HomeView state={save.game} onAction={action} onNavigate={navigate} missions={missions} previewOnly />}
         {tab === 'quest' && <QuestView state={save.game} party={party} vipActive={false} onStart={startQuest} onOpenDeck={() => navigate('character')} onOpenRaid={() => navigate('raid')} onBattlePlayingChange={setPlaying} />}
         {tab === 'character' && <GrowthView state={save.game} onAction={action} />}
-        {tab === 'missions' && <section className="rd-panel"><h1>任務</h1><p>任務を進めながら部隊を強化しましょう。</p><button className="rd-button" onClick={() => navigate('character')}>武将を育成する</button><button className="rd-button" onClick={() => navigate('quest')}>出陣する</button><p className="rd-muted">専用確認環境では、通常の任務報酬は付与しません。</p></section>}
-        {!['home', 'quest', 'character', 'missions'].includes(tab) && <section className="rd-panel"><h1>{tab === 'shop' ? '商店' : tab === 'gacha' ? '雇用' : '共闘'}</h1><p>チュートリアルによるロックは解除されています。この確認環境では通常機能への接続を省いています。</p><button className="rd-button" onClick={() => navigate('home')}>マイページへ</button></section>}
+        {!['home', 'quest', 'character'].includes(tab) && <section className="rd-panel"><h1>{tab === 'shop' ? '商店' : tab === 'gacha' ? '雇用' : '共闘'}</h1><p>チュートリアルによるロックは解除されています。この確認環境では通常機能への接続を省いています。</p><button className="rd-button" onClick={() => navigate('home')}>マイページへ</button></section>}
       </main>
       {!playing && <nav className="rd-footer" aria-label="メインナビゲーション">{[['home', 'ホーム'], ['quest', '出陣'], ['character', '武将'], ['raid', '共闘'], ['gacha', '雇用']].map(([id, label]) => <button key={id} disabled={busy || (!save.departed && id !== 'quest')} aria-current={tab === id ? 'page' : undefined} onClick={() => navigate(id)}>{label}</button>)}</nav>}
       {!error && !save.departed && !save.loginPending && tab === 'home' && <Notice text={FIRST_SORTIE_TEXT} button="出陣へ" busy={busy} onClick={() => navigate('quest')} />}
       {!error && save.loginPending && tab === 'home' && <Notice text={`ログインボーナス ${save.loginDays % 30 || 30}日目\n本日の報酬を受け取りました。`} button="閉じる" busy={busy} onClick={() => act([{ type: 'dismiss-login' }])} />}
-      {!error && save.defeatPending && !playing && !(save.loginPending && tab === 'home') && <Notice text={FIRST_DEFEAT_TEXT} button="任務へ" busy={busy} onClick={() => act([{ type: 'dismiss-defeat' }], () => setTab('missions'))} />}
+      {!error && save.defeatPending && !playing && !(save.loginPending && tab === 'home') && <Notice text={FIRST_DEFEAT_TEXT} button="任務へ" busy={busy} onClick={() => act([{ type: 'dismiss-defeat' }], () => setMissionOpen(true))} />}
     </>}
+    {!scene && missionOpen && !error && <Modal title="任務" onClose={() => setMissionOpen(false)} className="tutorial-notice">
+      <MissionContent state={save.game} missions={missions} missionBusy={false} missionError="" previewOnly onClaim={noop} />
+    </Modal>}
     {errorView}
     <details className="tutorial-review" open={toolsOpen} onToggle={e => setToolsOpen(e.currentTarget.open)}><summary>確認メニュー</summary><p>通常プレイと独立した確認用データです。</p><button disabled={busy} onClick={() => {
       if (inFlight.current) return;
       inFlight.current = true; setBusy(true);
       const reset = newTutorial(save.game.userId); reset.revision = save.revision + 1;
-      void persistTutorial(save, reset).then(state => { current.current = state; setSave(state); setName(''); setTab('home'); setToolsOpen(false); }).catch(e => setError(e.message)).finally(() => { inFlight.current = false; setBusy(false); });
+      void persistTutorial(save, reset).then(state => { current.current = state; setSave(state); setName(''); setTab('home'); setMissionOpen(false); setToolsOpen(false); }).catch(e => setError(e.message)).finally(() => { inFlight.current = false; setBusy(false); });
     }}>最初から確認する</button>{!scene && <button disabled={busy} onClick={() => act([{ type: 'defeat' }])}>初敗北の案内を確認する</button>}</details>
   </div></GameContext.Provider></TutorialSceneAssets>;
 }
