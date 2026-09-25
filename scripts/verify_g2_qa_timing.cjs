@@ -15,7 +15,7 @@ assert.equal(api.isQaTimingMessage({...msg,paints:[null]}),false);
 api.emitQaTiming({...m,scope:'unrecognized_private_value'});assert.equal(messages.at(-1)[0].metric.scope,'other');
 const parent=win.parent;win.parent=win;const count=messages.length;api.emitQaTiming(m);assert.equal(messages.length,count,'top-level page does not send');win.parent=parent;
 messages.splice(1);
-let list=[];for(let i=0;i<120;i++)list=api.appendQaTiming(list,msg);assert.equal(list.length,100);list=api.appendQaTiming(list,{...msg,timeOrigin:124});assert.equal(list.length,1,'new iframe navigation clears previous measurements');
+let list=[];for(let i=0;i<240;i++)list=api.appendQaTiming(list,msg);assert.equal(list.length,200);list=api.appendQaTiming(list,{...msg,timeOrigin:124});assert.equal(list.length,1,'new iframe navigation clears previous measurements');
 api.beginQaImageGroup('home',0)('success');assert.equal(messages.length,1,'empty image group omitted');api.beginQaImageGroup('quest',3)('error');assert.equal(messages.at(-1)[0].metric.count,3);
 const config=fs.readFileSync('next.config.ts','utf8');const configJs=ts.transpile(config,{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS,esModuleInterop:true});
 function configFlags(env){const out={};new Function('require','exports','process',configJs)(()=>({}),out,{env});return out.default.env;}
@@ -23,4 +23,6 @@ const branchEnv={VERCEL_ENV:'preview',VERCEL_GIT_COMMIT_REF:'work/game04-g2-2026
 for(const [env,expected] of [[branchEnv,'true'],[{...branchEnv,NEXT_PUBLIC_ENABLE_QA_TOOLS:'false'},'false'],[{...branchEnv,VERCEL_ENV:'production',NEXT_PUBLIC_ENABLE_QA_TOOLS:'true'},'false'],[{...branchEnv,NEXT_PUBLIC_APP_ENV:'production'},'false'],[{VERCEL_ENV:'preview',VERCEL_GIT_COMMIT_REF:'other'},'false'],[{VERCEL_ENV:'preview',VERCEL_GIT_COMMIT_REF:'other',NEXT_PUBLIC_ENABLE_QA_TOOLS:'true'},'true'],[{NODE_ENV:'development'},'false']]){const flags=configFlags(env);assert.equal(flags.NEXT_PUBLIC_ENABLE_QA_TOOLS,expected);assert.equal(flags.NEXT_PUBLIC_GAME04_QA_METRICS_ALLOWED,expected);}
 
 const route=fs.readFileSync('src/app/qa/home-live-viewport/page.tsx','utf8');assert.match(route,/NEXT_PUBLIC_ENABLE_QA_TOOLS !== 'true'/);assert.match(route,/VERCEL_ENV === 'production'/);
-console.log('PASS QA metrics: no-send gates, projection, source/origin, validation, cap100, reload reset, image count/outcome, server/build production guards');
+console.log('PASS QA metrics: no-send gates, projection, source/origin, validation, cap200, reload reset, image count/outcome, server/build production guards');
+
+for(const kind of ['action-feedback','action-result']){api.emitQaTiming({...m,kind,scope:'set_home'});assert.equal(messages.at(-1)[0].metric.scope,'set_home');assert(api.isQaTimingMessage(messages.at(-1)[0]));}

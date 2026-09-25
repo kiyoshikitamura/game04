@@ -4,7 +4,7 @@ import { applyAcquisitionEvents, type AcquisitionEvent, type AcquisitionMaster }
 import { applyPlayerExperience, GROWTH_VERSION } from '../../../src/domain/redesign/growthMaster.ts';
 import { applyNormalGacha, normalGachaDay } from '../../../src/domain/redesign/normalGacha.ts';
 import { applyGrowthAction, validateDeck } from '../../../src/domain/redesign/growth.ts';
-import { applyHomeSelection } from '../../../src/domain/redesign/home.ts';
+import { applyHomeSelection, synchronizeHomeBackgroundUnlocks } from '../../../src/domain/redesign/home.ts';
 import { applyShopExchange, applyShopEnergyDrink } from '../../../src/domain/redesign/shop.ts';
 import { evaluateMissions, getClaimableMission, type MissionConfig } from '../../../src/domain/redesign/missions.ts';
 import { FORMAL_MISSION_CONFIG } from '../../../src/domain/redesign/formalMissions.ts';
@@ -61,7 +61,7 @@ async function stateFor(userId: string): Promise<RedesignState> {
   for (let attempt = 0; attempt < 4; attempt++) {
     const state: RedesignState = await rpc('game04_get_session_state', { p_user_id: userId, p_initial: buildInitialState(userId, input.legacy) });
     const migrated = importLegacyAssets(state, input.legacy);
-    const imported = captureMissionAssets(applyAcquisitionEvents(migrated, input.events, input.master));
+    const imported = captureMissionAssets(synchronizeHomeBackgroundUnlocks(applyAcquisitionEvents(migrated, input.events, input.master)));
     if (JSON.stringify(imported) === JSON.stringify(state)) return state;
     try { return (await commit(state, imported, crypto.randomUUID())).state; }
     catch (error) { if (!(error instanceof ApiError) || error.status !== 409 || attempt === 3) throw error; }
@@ -69,7 +69,7 @@ async function stateFor(userId: string): Promise<RedesignState> {
   throw new ApiError('データ更新中です。もう一度お試しください。', 409);
 }
 async function commit(before: RedesignState, after: RedesignState, requestId: string, battle: unknown = null, room: (RaidRoom & {version?: number}) | null = null, roomVersion: number | null = null, receipt: Record<string, unknown> = {}) {
-  return rpc('game04_commit_growth_state', { p_user_id: before.userId, p_expected_version: before.version, p_state: captureMissionAssets(after),
+  return rpc('game04_commit_growth_state', { p_user_id: before.userId, p_expected_version: before.version, p_state: captureMissionAssets(synchronizeHomeBackgroundUnlocks(after)),
     p_cash_delta: after.cash - before.cash, p_energy_delta: after.energy - before.energy, p_request_id: requestId,
     p_battle: battle, p_raid: room, p_raid_expected_version: roomVersion, p_receipt: receipt });
 }
@@ -115,8 +115,10 @@ async function questPlayerExpReward(stageId: string) {
   return { amount, version: row.data.version, status: row.status };
 }
 async function missionConfig(): Promise<MissionConfig> { return FORMAL_MISSION_CONFIG; }
-async function responseFor(userId: string, extra: Record<string, unknown> = {}) {
-  const statePromise = stateFor(userId);
+async function responseFor(userId: string, extra: Record<string, unknown> = {}, committedState?: RedesignState) {
+  // Reuse the authoritative state returned by this request's atomic commit.
+  // Conflict/replay/read paths still load current state; never substitute a client draft.
+  const statePromise = committedState ? Promise.resolve(committedState) : stateFor(userId);
   const [loadedState, rooms, socialEvents, pending, territory, missions] = await Promise.all([statePromise, roomsFor(userId),
     db('game04_social_events?select=*&order=created_at.desc&limit=30'),
     db(`game04_battles?user_id=eq.${userId}&status=eq.started&select=id,kind,target_id&order=created_at.asc&limit=1`),
@@ -258,7 +260,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
     const result = { battle, rewards, firstClear, encounterRaidId, ...(playerGrowth ? { playerGrowth } : {}) };
     try {
       const settled = await commit(state, after, settlementId, { id, status: 'settled', result }, room, version);
-      return responseFor(userId, settled.battleResult ?? result);
+      return responseFor(userId, settled.battleResult ?? result, settled.state);
     } catch (error) {
       const [saved] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=status,result`);
       if (saved?.status === 'settled') return responseFor(userId, saved.result);
@@ -329,7 +331,7 @@ Deno.serve(async (request: Request) => {
       const receipt = { normalGachaResults: drawn.results, normalGachaCost: drawn.cost, normalGachaMasterVersion: drawn.masterVersion };
       const saved = await commit(state, drawn.state, requestId, null, null, null, receipt);
       const day = normalGachaDay(Date.now());
-      return new Response(JSON.stringify(await responseFor(user.id, { ...saved.receipt ?? receipt, normalGacha: { pool, day, available: saved.state?.dailyNormalGachaDate !== day } })), { headers });
+      return new Response(JSON.stringify(await responseFor(user.id, { ...saved.receipt ?? receipt, normalGacha: { pool, day, available: saved.state?.dailyNormalGachaDate !== day } }, saved.state)), { headers });
     }
     if (action === 'claim_mission') {
       const mission = getClaimableMission(state, await missionConfig(), String(payload.missionId));
@@ -341,9 +343,9 @@ Deno.serve(async (request: Request) => {
       try { after = applyHomeSelection(state, payload); }
       catch (error) { throw new ApiError(error instanceof Error ? error.message : '本陣の変更を保存できませんでした。'); }
     } else if (action === 'shop_exchange') {
-      after = applyShopExchange(state, payload);
-      await rpc('game04_commit_shop_exchange', { p_user_id: state.userId, p_expected_version: state.version, p_state: after, p_before_diamonds: state.diamonds, p_diamond_cost: state.diamonds - after.diamonds, p_cash_delta: after.cash - state.cash, p_request_id: requestId });
-      return new Response(JSON.stringify(await responseFor(user.id)), { headers });
+      after = synchronizeHomeBackgroundUnlocks(applyShopExchange(state, payload));
+      const saved = await rpc('game04_commit_shop_exchange', { p_user_id: state.userId, p_expected_version: state.version, p_state: after, p_before_diamonds: state.diamonds, p_diamond_cost: state.diamonds - after.diamonds, p_cash_delta: after.cash - state.cash, p_request_id: requestId });
+      return new Response(JSON.stringify(await responseFor(user.id, {}, saved?.state)), { headers });
     } else if (action === 'use_energy_drink') {
       after = applyShopEnergyDrink(state);
     } else if (['raid_join', 'raid_leave', 'raid_rescue', 'raid_claim', 'encounter_ignore'].includes(action)) {
@@ -362,8 +364,8 @@ Deno.serve(async (request: Request) => {
       if (action === 'character_unlock') growthCounters.push('soul_unlock');
       if (growthCounters.length) after = recordMissionEvent(after, { id: `growth:${requestId}`, at: Date.now(), counters: growthCounters });
     }
-    await commit(state, after, requestId, null, room, version, measurementReceipt ?? gameplayMeasurementReceipt(action, state, after));
-    return new Response(JSON.stringify(await responseFor(user.id)), { headers });
+    const saved = await commit(state, after, requestId, null, room, version, measurementReceipt ?? gameplayMeasurementReceipt(action, state, after));
+    return new Response(JSON.stringify(await responseFor(user.id, {}, saved.state)), { headers });
   } catch (error) {
     const conflict = error instanceof ApiError && error.status === 409;
     const message = conflict ? '他の操作で更新されました。再読み込みしてお試しください。' : error instanceof Error ? error.message : '処理に失敗しました。';

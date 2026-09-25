@@ -25966,6 +25966,83 @@ function applyGrowthAction(input, action, payload) {
   throw new Error("\u5BFE\u5FDC\u3057\u3066\u3044\u306A\u3044\u80B2\u6210\u64CD\u4F5C\u3067\u3059\u3002");
 }
 
+// src/domain/redesign/approvedBackgrounds.ts
+var QUEST_BACKGROUND_PATHS = Object.fromEntries(
+  ["mikawa", "owari", "mino", "omi", "kai", "echigo", "kyoto", "izumo", "satsuma", "sekigahara"].map((id) => [id, `/bg/approved-20260925/quest-${id}.webp`])
+);
+var SSR_HOME_BACKGROUNDS = [
+  {
+    "id": "ssr:char_koharu_01",
+    "name": "\u96EA\u306E\u6625\u65E5\u5C71\u57CE",
+    "image": "/bg/approved-20260925/ssr-char_koharu_01.webp",
+    "characterId": "char_koharu_01",
+    "characterName": "\u4E0A\u6749\u8B19\u4FE1"
+  },
+  {
+    "id": "ssr:char_leo_01",
+    "name": "\u9752\u8449\u57CE\u3068\u4ED9\u53F0\u57CE\u4E0B",
+    "image": "/bg/approved-20260925/ssr-char_leo_01.webp",
+    "characterId": "char_leo_01",
+    "characterName": "\u4F0A\u9054\u653F\u5B97"
+  },
+  {
+    "id": "ssr:char_mio_01",
+    "name": "\u7C73\u6CA2\u57CE\u4E0B\u30FB\u82B1\u306E\u5BB4",
+    "image": "/bg/approved-20260925/ssr-char_mio_01.webp",
+    "characterId": "char_mio_01",
+    "characterName": "\u524D\u7530\u6176\u6B21"
+  },
+  {
+    "id": "ssr:char_karen_01",
+    "name": "\u99FF\u5E9C\u57CE\u3068\u57CE\u4E0B",
+    "image": "/bg/approved-20260925/ssr-char_karen_01.webp",
+    "characterId": "char_karen_01",
+    "characterName": "\u5FB3\u5DDD\u5BB6\u5EB7"
+  },
+  {
+    "id": "ssr:char_miyabi_01",
+    "name": "\u7435\u7436\u6E56\u7554\u306E\u5742\u672C\u57CE",
+    "image": "/bg/approved-20260925/ssr-char_miyabi_01.webp",
+    "characterId": "char_miyabi_01",
+    "characterName": "\u660E\u667A\u5149\u79C0"
+  },
+  {
+    "id": "ssr:char_kengo_01",
+    "name": "\u5927\u591A\u559C\u57CE\u3092\u671B\u3080\u5C71\u9053",
+    "image": "/bg/approved-20260925/ssr-char_kengo_01.webp",
+    "characterId": "char_kengo_01",
+    "characterName": "\u672C\u591A\u5FE0\u52DD"
+  },
+  {
+    "id": "ssr:char_go_01",
+    "name": "\u8E91\u8E85\u30F6\u5D0E\u9928\u3068\u7532\u5E9C\u76C6\u5730",
+    "image": "/bg/approved-20260925/ssr-char_go_01.webp",
+    "characterId": "char_go_01",
+    "characterName": "\u6B66\u7530\u4FE1\u7384"
+  },
+  {
+    "id": "ssr:char_kaede_01",
+    "name": "\u4E0A\u7530\u57CE",
+    "image": "/bg/approved-20260925/ssr-char_kaede_01.webp",
+    "characterId": "char_kaede_01",
+    "characterName": "\u771F\u7530\u5E78\u6751"
+  },
+  {
+    "id": "ssr:char_reiji_01",
+    "name": "\u5B89\u571F\u57CE",
+    "image": "/bg/approved-20260925/ssr-char_reiji_01.webp",
+    "characterId": "char_reiji_01",
+    "characterName": "\u7E54\u7530\u4FE1\u9577"
+  },
+  {
+    "id": "ssr:char_ageha_01",
+    "name": "\u9EC4\u91D1\u671F\u306E\u5927\u5742\u57CE",
+    "image": "/bg/approved-20260925/ssr-char_ageha_01.webp",
+    "characterId": "char_ageha_01",
+    "characterName": "\u8C4A\u81E3\u79C0\u5409"
+  }
+];
+
 // src/domain/redesign/data/quest65.json
 var quest65_default = {
   version: "APPROVED_QUEST65_ROUND17_20260922",
@@ -56888,11 +56965,6 @@ function questVictoryRewards(stage, state, party, seed) {
   return { rewards: rewards2, firstClear, count, guaranteed, encounterRoll: random() };
 }
 
-// src/domain/redesign/approvedBackgrounds.ts
-var QUEST_BACKGROUND_PATHS = Object.fromEntries(
-  ["mikawa", "owari", "mino", "omi", "kai", "echigo", "kyoto", "izumo", "satsuma", "sekigahara"].map((id) => [id, `/bg/approved-20260925/quest-${id}.webp`])
-);
-
 // src/domain/redesign/quests.ts
 var AREAS = [
   ["mikawa", "\u4E09\u6CB3\u306E\u5730", "\u6700\u521D\u306E\u4E00\u6B69", "\u6575\u306E\u5C5E\u6027\u3068\u884C\u52D5\u30AB\u30A6\u30F3\u30C8\u3092\u898B\u3066\u3001\u6B66\u5C06\u306E\u4E26\u3073\u3092\u6574\u3048\u3088\u3046\u3002"],
@@ -56920,6 +56992,10 @@ function isQuestStageUnlocked(id, clearedStages) {
 var HOME_BACKGROUNDS = [
   { id: "castle-approach", name: "\u5915\u685C\u306E\u57CE\u9580", image: "/bg/sengoku/castle-approach.jpg", conditionLabel: "" },
   { id: "castle-town", name: "\u5915\u685C\u306E\u57CE\u4E0B\u753A", image: "/bg/sengoku/castle-town.jpg", conditionLabel: "" },
+  ...SSR_HOME_BACKGROUNDS.map((background) => ({
+    ...background,
+    conditionLabel: `${background.characterName}\u306E\u5165\u624B\u3067\u9078\u629E\u53EF\u80FD`
+  })),
   ...QUEST_AREAS.map((area) => ({
     id: `area:${area.id}`,
     name: area.name,
@@ -56935,9 +57011,19 @@ var LEGACY_BACKGROUND_IDS = {
 function findHomeBackground(id) {
   return HOME_BACKGROUNDS.find((background) => background.id === (id ? LEGACY_BACKGROUND_IDS[id] ?? id : void 0));
 }
-function isHomeBackgroundUnlocked(background, clearedStages) {
-  if (!background.areaId) return HOME_BACKGROUNDS.some((entry) => entry.id === background.id && !entry.areaId);
-  const area = QUEST_AREAS.find((entry) => entry.id === background.areaId);
+function synchronizeHomeBackgroundUnlocks(state) {
+  const owned = new Set(state.characters.map((character2) => character2.id));
+  const unlocked = new Set(state.unlockedHomeBackgroundIds ?? []);
+  const additions = SSR_HOME_BACKGROUNDS.filter((background) => owned.has(background.characterId) && CHARACTER_MASTERS.some((character2) => character2.id === background.characterId && character2.rarity === "SSR") && !unlocked.has(background.id)).map((background) => background.id);
+  if (!additions.length) return state;
+  return { ...state, unlockedHomeBackgroundIds: [...unlocked, ...additions] };
+}
+function isHomeBackgroundUnlocked(background, clearedStages, unlockedIds = []) {
+  const registered = findHomeBackground(background.id);
+  if (!registered) return false;
+  if (registered.characterId) return unlockedIds.includes(registered.id);
+  if (!registered.areaId) return true;
+  const area = QUEST_AREAS.find((entry) => entry.id === registered.areaId);
   return !!area?.stages[0] && isQuestStageUnlocked(area.stages[0].id, clearedStages);
 }
 function applyHomeSelection(state, payload) {
@@ -56948,7 +57034,7 @@ function applyHomeSelection(state, payload) {
     if (typeof payload.backgroundId !== "string") throw new Error("\u80CC\u666F\u304C\u4E0D\u6B63\u3067\u3059\u3002");
     const background = findHomeBackground(payload.backgroundId);
     if (!background) throw new Error("\u80CC\u666F\u304C\u4E0D\u6B63\u3067\u3059\u3002");
-    if (!isHomeBackgroundUnlocked(background, state.clearedStages)) throw new Error(background.conditionLabel);
+    if (!isHomeBackgroundUnlocked(background, state.clearedStages, state.unlockedHomeBackgroundIds)) throw new Error(background.conditionLabel);
   }
   return {
     ...state,
@@ -65288,7 +65374,7 @@ async function stateFor(userId) {
   for (let attempt = 0; attempt < 4; attempt++) {
     const state = await rpc("game04_get_session_state", { p_user_id: userId, p_initial: buildInitialState(userId, input.legacy) });
     const migrated = importLegacyAssets(state, input.legacy);
-    const imported = captureMissionAssets(applyAcquisitionEvents(migrated, input.events, input.master));
+    const imported = captureMissionAssets(synchronizeHomeBackgroundUnlocks(applyAcquisitionEvents(migrated, input.events, input.master)));
     if (JSON.stringify(imported) === JSON.stringify(state)) return state;
     try {
       return (await commit(state, imported, crypto.randomUUID())).state;
@@ -65302,7 +65388,7 @@ async function commit(before, after, requestId, battle = null, room = null, room
   return rpc("game04_commit_growth_state", {
     p_user_id: before.userId,
     p_expected_version: before.version,
-    p_state: captureMissionAssets(after),
+    p_state: captureMissionAssets(synchronizeHomeBackgroundUnlocks(after)),
     p_cash_delta: after.cash - before.cash,
     p_energy_delta: after.energy - before.energy,
     p_request_id: requestId,
@@ -65348,8 +65434,8 @@ async function rewardPolicy() {
 async function missionConfig() {
   return FORMAL_MISSION_CONFIG;
 }
-async function responseFor(userId, extra = {}) {
-  const statePromise = stateFor(userId);
+async function responseFor(userId, extra = {}, committedState) {
+  const statePromise = committedState ? Promise.resolve(committedState) : stateFor(userId);
   const [loadedState, rooms, socialEvents, pending, territory, missions] = await Promise.all([
     statePromise,
     roomsFor(userId),
@@ -65509,7 +65595,7 @@ async function runBattle(userId, name2, payload, id, playerName) {
     const result = { battle, rewards: rewards2, firstClear, encounterRaidId, ...playerGrowth ? { playerGrowth } : {} };
     try {
       const settled = await commit(state, after, settlementId, { id, status: "settled", result }, room, version);
-      return responseFor(userId, settled.battleResult ?? result);
+      return responseFor(userId, settled.battleResult ?? result, settled.state);
     } catch (error) {
       const [saved] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=status,result`);
       if (saved?.status === "settled") return responseFor(userId, saved.result);
@@ -65576,9 +65662,9 @@ Deno.serve(async (request) => {
       const pool = await db("gacha_items_master?gacha_id=in.(CHAR_NORMAL,SKILL_NORMAL,EQUIP_NORMAL)&select=gacha_id,item_id,item_type,rarity&limit=1000");
       const drawn = applyNormalGacha(state, payload, pool, requestId, Date.now(), await rewardPolicy(), () => crypto.getRandomValues(new Uint32Array(1))[0] / 4294967296);
       const receipt = { normalGachaResults: drawn.results, normalGachaCost: drawn.cost, normalGachaMasterVersion: drawn.masterVersion };
-      const saved = await commit(state, drawn.state, requestId, null, null, null, receipt);
+      const saved2 = await commit(state, drawn.state, requestId, null, null, null, receipt);
       const day = normalGachaDay(Date.now());
-      return new Response(JSON.stringify(await responseFor(user.id, { ...saved.receipt ?? receipt, normalGacha: { pool, day, available: saved.state?.dailyNormalGachaDate !== day } })), { headers });
+      return new Response(JSON.stringify(await responseFor(user.id, { ...saved2.receipt ?? receipt, normalGacha: { pool, day, available: saved2.state?.dailyNormalGachaDate !== day } }, saved2.state)), { headers });
     }
     if (action === "claim_mission") {
       const mission = getClaimableMission(state, await missionConfig(), String(payload.missionId));
@@ -65593,9 +65679,9 @@ Deno.serve(async (request) => {
         throw new ApiError(error instanceof Error ? error.message : "\u672C\u9663\u306E\u5909\u66F4\u3092\u4FDD\u5B58\u3067\u304D\u307E\u305B\u3093\u3067\u3057\u305F\u3002");
       }
     } else if (action === "shop_exchange") {
-      after = applyShopExchange(state, payload);
-      await rpc("game04_commit_shop_exchange", { p_user_id: state.userId, p_expected_version: state.version, p_state: after, p_before_diamonds: state.diamonds, p_diamond_cost: state.diamonds - after.diamonds, p_cash_delta: after.cash - state.cash, p_request_id: requestId });
-      return new Response(JSON.stringify(await responseFor(user.id)), { headers });
+      after = synchronizeHomeBackgroundUnlocks(applyShopExchange(state, payload));
+      const saved2 = await rpc("game04_commit_shop_exchange", { p_user_id: state.userId, p_expected_version: state.version, p_state: after, p_before_diamonds: state.diamonds, p_diamond_cost: state.diamonds - after.diamonds, p_cash_delta: after.cash - state.cash, p_request_id: requestId });
+      return new Response(JSON.stringify(await responseFor(user.id, {}, saved2?.state)), { headers });
     } else if (action === "use_energy_drink") {
       after = applyShopEnergyDrink(state);
     } else if (["raid_join", "raid_leave", "raid_rescue", "raid_claim", "encounter_ignore"].includes(action)) {
@@ -65617,8 +65703,8 @@ Deno.serve(async (request) => {
       if (action === "character_unlock") growthCounters.push("soul_unlock");
       if (growthCounters.length) after = recordMissionEvent(after, { id: `growth:${requestId}`, at: Date.now(), counters: growthCounters });
     }
-    await commit(state, after, requestId, null, room, version, measurementReceipt ?? gameplayMeasurementReceipt(action, state, after));
-    return new Response(JSON.stringify(await responseFor(user.id)), { headers });
+    const saved = await commit(state, after, requestId, null, room, version, measurementReceipt ?? gameplayMeasurementReceipt(action, state, after));
+    return new Response(JSON.stringify(await responseFor(user.id, {}, saved.state)), { headers });
   } catch (error) {
     const conflict = error instanceof ApiError && error.status === 409;
     const message = conflict ? "\u4ED6\u306E\u64CD\u4F5C\u3067\u66F4\u65B0\u3055\u308C\u307E\u3057\u305F\u3002\u518D\u8AAD\u307F\u8FBC\u307F\u3057\u3066\u304A\u8A66\u3057\u304F\u3060\u3055\u3044\u3002" : error instanceof Error ? error.message : "\u51E6\u7406\u306B\u5931\u6557\u3057\u307E\u3057\u305F\u3002";

@@ -1,9 +1,10 @@
 'use client';
 import { raidBattleBackground } from '@/domain/redesign/approvedBackgrounds';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useGame } from '../../context/GameContext';
 import { observeRedesignRestore } from '@/utils/redesignRestoreObservation';
 import { REDESIGN_REWARD_SYNC_EVENT } from '@/utils/redesignRewardSync';
+import { emitQaTiming } from '@/utils/redesignQaTelemetry';
 import { redesignRequest, type RedesignResponse } from '@/utils/redesignApi';
 import { buildBattleParty } from '@/domain/redesign/masters';
 import { getQuestStage, QUEST_AREAS, nextQuestStage } from '@/domain/redesign/quests';
@@ -47,6 +48,21 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   const ownerRef = useRef(owner);
   const restoredOwner = useRef<string | null>(null);
   const lock = useRef(false);
+  const actionTiming = useRef<{owner:string|undefined;name:string;start:number;feedback:boolean;outcome?:'success'|'error'} | null>(null);
+  // Countdown and local tab changes do not change the authoritative party input.
+  const party = useMemo(() => data ? buildBattleParty(data.state) : [], [data?.state]);
+  useLayoutEffect(() => {
+    const timing = actionTiming.current;
+    if (!timing || timing.owner !== owner) return;
+    const settledAt = performance.now();
+    if (busy && !timing.feedback) {
+      timing.feedback = true;
+      emitQaTiming({kind:'action-feedback',scope:timing.name,startedAt:timing.start,settledAt,durationMs:settledAt-timing.start,outcome:'success'});
+    } else if (!busy && timing.outcome) {
+      emitQaTiming({kind:'action-result',scope:timing.name,startedAt:timing.start,settledAt,durationMs:settledAt-timing.start,outcome:timing.outcome});
+      actionTiming.current = null;
+    }
+  }, [busy, data, owner]);
   const requestGeneration = useRef(0);
   const rewardRefreshPending = useRef(false);
   const refreshing = useRef<{ owner: string; generation: number; promise: Promise<void> } | null>(null);
@@ -98,6 +114,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   }, [owner, refresh]);
   async function action(name: string, payload: Record<string, unknown> = {}, explicitId?: string, reportError = true) {
     if (lock.current) throw new Error('処理中です。');
+    actionTiming.current = {owner,name,start:performance.now(),feedback:false};
     lock.current = true; requestGeneration.current++; setBusy(true); setError('');
     const requestOwner = owner;
     const isBattle = name === 'quest_battle' || name === 'raid_battle';
@@ -113,8 +130,10 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
       if (requestOwner !== ownerRef.current) throw new Error('ログイン状態が変更されました。');
       setData(current => current && current.state.userId === value.state.userId && current.state.version > value.state.version ? current : value);
       if (persistentRequest) try { sessionStorage.removeItem(storageKey); } catch { /* no persistent reliance */ }
+      if (actionTiming.current?.owner === requestOwner) actionTiming.current.outcome = 'success';
       return value;
     } catch (reason) {
+      if (actionTiming.current?.owner === requestOwner) actionTiming.current.outcome = 'error';
       const message = reason instanceof Error ? reason.message : '処理に失敗しました。';
       if (reportError) setError(message); rewardRefreshPending.current = true; throw reason;
     } finally { lock.current = false; setBusy(false); if (rewardRefreshPending.current) { rewardRefreshPending.current = false; void refresh(); } }
@@ -196,7 +215,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     game.setShowLoginBonusModal(true);
   }, [owner, loginReceipt, busy, battle, questPlaying, game.setLoginBonusClaimResult, game.setUserLoginBonus, game.setShowLoginBonusModal]);
   if (!data) return <div className="rd-shell"><div className="rd-panel">{error ? <><p role="alert">{error}</p><button className="rd-button" onClick={() => void refresh()}>再読み込み</button></> : <BrandedLoading label="戦国の世界を準備中" />}</div></div>;
-  const state = data.state, party = buildBattleParty(state), vipActive = isVipActive(state.vipExpiresAt);
+  const state = data.state, vipActive = isVipActive(state.vipExpiresAt);
   const battleRoom = battle && battleKind === 'raid' && raidId ? data.rooms.find(room => room.id === raidId) : undefined;
   const encounter = data.rooms.find(r => getRoomRaidMaster(r).type === 'encounter' && r.status === 'active' && Date.parse(r.expiresAt) > encounterNow && r.participants.some(p => p.userId === state.userId && !p.leftAt));
   return <RedesignShell state={state} activeTab={tab} navigationBusy={busy} onNavigate={navigate} onAction={action} hideChrome={!!battle || questPlaying} socialEvents={data.socialEvents} missions={data.missions}

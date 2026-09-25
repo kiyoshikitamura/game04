@@ -1,4 +1,5 @@
 import { CHARACTER_MASTERS } from './masters';
+import { SSR_HOME_BACKGROUNDS } from './approvedBackgrounds';
 import { QUEST_AREAS, isQuestStageUnlocked } from './quests';
 import type { RedesignState } from './types';
 
@@ -7,6 +8,7 @@ export type HomeBackground = {
   name: string;
   image: string;
   areaId?: string;
+  characterId?: string;
   conditionLabel: string;
 };
 
@@ -14,6 +16,9 @@ export type HomeBackground = {
 export const HOME_BACKGROUNDS: HomeBackground[] = [
   { id: 'castle-approach', name: '夕桜の城門', image: '/bg/sengoku/castle-approach.jpg', conditionLabel: '' },
   { id: 'castle-town', name: '夕桜の城下町', image: '/bg/sengoku/castle-town.jpg', conditionLabel: '' },
+  ...SSR_HOME_BACKGROUNDS.map(background => ({
+    ...background, conditionLabel: `${background.characterName}の入手で選択可能`,
+  })),
   ...QUEST_AREAS.map(area => ({
     id: `area:${area.id}`, name: area.name, image: area.image, areaId: area.id,
     conditionLabel: `出陣「${area.name}」解放で選択可能`,
@@ -32,9 +37,23 @@ export function resolveHomeBackground(id?: string): HomeBackground {
   return findHomeBackground(id) ?? HOME_BACKGROUNDS[0];
 }
 
-export function isHomeBackgroundUnlocked(background: HomeBackground, clearedStages: readonly string[]): boolean {
-  if (!background.areaId) return HOME_BACKGROUNDS.some(entry => entry.id === background.id && !entry.areaId);
-  const area = QUEST_AREAS.find(entry => entry.id === background.areaId);
+/** Append once after acquisition or an existing-owner read; never select a background implicitly. */
+export function synchronizeHomeBackgroundUnlocks(state: RedesignState): RedesignState {
+  const owned = new Set(state.characters.map(character => character.id));
+  const unlocked = new Set(state.unlockedHomeBackgroundIds ?? []);
+  const additions = SSR_HOME_BACKGROUNDS.filter(background => owned.has(background.characterId)
+    && CHARACTER_MASTERS.some(character => character.id === background.characterId && character.rarity === 'SSR')
+    && !unlocked.has(background.id)).map(background => background.id);
+  if (!additions.length) return state;
+  return { ...state, unlockedHomeBackgroundIds: [...unlocked, ...additions] };
+}
+
+export function isHomeBackgroundUnlocked(background: HomeBackground, clearedStages: readonly string[], unlockedIds: readonly string[] = []): boolean {
+  const registered = findHomeBackground(background.id);
+  if (!registered) return false;
+  if (registered.characterId) return unlockedIds.includes(registered.id);
+  if (!registered.areaId) return true;
+  const area = QUEST_AREAS.find(entry => entry.id === registered.areaId);
   return !!area?.stages[0] && isQuestStageUnlocked(area.stages[0].id, clearedStages);
 }
 
@@ -49,7 +68,7 @@ export function applyHomeSelection(state: RedesignState, payload: Record<string,
     if (typeof payload.backgroundId !== 'string') throw new Error('背景が不正です。');
     const background = findHomeBackground(payload.backgroundId);
     if (!background) throw new Error('背景が不正です。');
-    if (!isHomeBackgroundUnlocked(background, state.clearedStages)) throw new Error(background.conditionLabel);
+    if (!isHomeBackgroundUnlocked(background, state.clearedStages, state.unlockedHomeBackgroundIds)) throw new Error(background.conditionLabel);
   }
   return {
     ...state,
