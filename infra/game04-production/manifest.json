@@ -30,9 +30,9 @@
       "www": "www.sengoku-hime-ennbu.com",
       "wwwRedirectStatus": 308,
       "registered": true,
-      "dnsStatus": "SERVFAIL; authoritative REFUSED",
-      "tlsIssued": false,
-      "customDomainAnonymousVerified": false,
+      "dnsStatus": "verified: NOERROR, expected A/CNAME, TTL 3600",
+      "tlsIssued": true,
+      "customDomainAnonymousVerified": true,
       "requiredRecords": [
         {
           "type": "A",
@@ -44,7 +44,11 @@
           "name": "www",
           "value": "346e02207322e8c5.vercel-dns-016.com."
         }
-      ]
+      ],
+      "anonymousChecksPassed": 8,
+      "wwwAuthenticatedRedirectVerified": false,
+      "certificateExpirationDate": "2026-12-24",
+      "certificateRenewal": "Auto"
     }
   },
   "production": {
@@ -91,7 +95,6 @@
   },
   "blockers": [
     "receiver_authenticated_cloud_health",
-    "p01_external_dns_zone_and_tls",
     "p02_p04_final_contract",
     "schema_backup_restore_monitoring",
     "g5_candidate"
