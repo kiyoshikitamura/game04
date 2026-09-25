@@ -88,6 +88,22 @@
     {
       "command": "node scripts/master-audit/verify-names.cjs",
       "result": "repository 0 name issues; captured v31/DB each 65; STOP pending integration"
+    },
+    {
+      "command": "node scripts/master-audit/verify-raid-supply.cjs",
+      "result": "PASS: independent latest approval, full comparison, old snapshots unchanged/new snapshots updated"
+    },
+    {
+      "command": "node -r ./scripts/master-audit/git-assets-preload.cjs scripts/verify_game04_raid_formal.mjs",
+      "result": "PASS after explicit 20:50 JST authority override"
+    },
+    {
+      "command": "npx tsc --noEmit --incremental false",
+      "result": "PASS supply revision"
+    },
+    {
+      "command": "node scripts/master-audit/verify-candidates.cjs",
+      "result": "PASS: CAS candidate 333 changed fields incl only 5 approved final soul amounts; SQL not executed"
     }
   ],
   "additional": {

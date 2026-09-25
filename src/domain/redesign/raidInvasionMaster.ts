@@ -1,5 +1,6 @@
 import { getFormalRaidSkill } from './raidFormalSkills';
 import data from './data/raid-invasion.json';
+import supply from './data/raid-supply-approved.json';
 import roster from '../../theme/sengoku-characters.json';
 import { characterArt } from '../../theme/creativeAssets';
 import { BALANCE_V2_CHARACTER_ASSIGNMENTS, getCharacterPassive } from './balanceV2Masters';
@@ -24,8 +25,8 @@ function draw(castle:number,random:()=>number) {
  visit([]);if(!valid.length)throw new Error('侵攻通常戦の適合組合せがありません');const r=random();if(r<0||r>=1||!Number.isFinite(r))throw new Error('侵攻抽選値が不正です');return valid[Math.floor(r*valid.length)];
 }
 function exp(kind:'character_exp_item'|'equipment_exp_item',amount:number):Reward[]{const result:Reward[]=[];for(const [id,value] of [['xlarge',20000],['large',5000],['medium',1000],['small',100]] as const){const n=Math.floor(amount/value);if(n)result.push({kind,id,amount:n});amount%=value;}if(amount)throw new Error('侵攻EXP報酬端数');return result;}
-const rewardRows=[[2500,1000,500,1000,1,5000,5000,2,20000,20000,6,1,2,1,1],[4000,2000,1000,2000,1,10000,10000,4,40000,40000,12,1,3,1,1],[6000,3000,1500,3000,1,15000,15000,6,60000,60000,18,2,4,2,1],[8000,4000,2000,4000,1,20000,20000,8,80000,80000,24,2,5,2,2],[10000,5000,2500,5000,1,25000,25000,10,100000,100000,30,3,6,3,2]];
-function rewards(castle:number,level:number):Reward[]{const r=rewardRows[castle],final=level===12,gate=level%3===0;const cash=final?r[8]:gate?r[5]:r[3],lb=final?r[10]:gate?r[7]:r[4],xp=final?r[9]:gate?r[6]:0;const out:Reward[]=[{kind:'cash',amount:cash},{kind:'skill_material',amount:lb},{kind:'equipment_lb',amount:lb},...exp('character_exp_item',xp),...exp('equipment_exp_item',xp)];if(final)out.push(...['SPECIAL_TICKET_CHARACTER','SPECIAL_TICKET_SKILL','SPECIAL_TICKET_EQUIPMENT'].map((id,i)=>({kind:'ticket' as const,id,amount:r[11+i]})),{kind:'soul',id:FORMAL_CASTLES[castle].characterId,amount:r[14]});return out;}
+const rewardRows=[[2500,1000,500,1000,1,5000,5000,2,20000,20000,6,1,2,1],[4000,2000,1000,2000,1,10000,10000,4,40000,40000,12,1,3,1],[6000,3000,1500,3000,1,15000,15000,6,60000,60000,18,2,4,2],[8000,4000,2000,4000,1,20000,20000,8,80000,80000,24,2,5,2],[10000,5000,2500,5000,1,25000,25000,10,100000,100000,30,3,6,3]];
+function rewards(castle:number,level:number):Reward[]{const r=rewardRows[castle],final=level===12,gate=level%3===0;const cash=final?r[8]:gate?r[5]:r[3],lb=final?r[10]:gate?r[7]:r[4],xp=final?r[9]:gate?r[6]:0;const out:Reward[]=[{kind:'cash',amount:cash},{kind:'skill_material',amount:lb},{kind:'equipment_lb',amount:lb},...exp('character_exp_item',xp),...exp('equipment_exp_item',xp)];if(final)out.push(...['SPECIAL_TICKET_CHARACTER','SPECIAL_TICKET_SKILL','SPECIAL_TICKET_EQUIPMENT'].map((id,i)=>({kind:'ticket' as const,id,amount:r[11+i]})),{kind:'soul',id:FORMAL_CASTLES[castle].characterId,amount:(supply.invasionFinalSouls as Record<string,number>)[FORMAL_CASTLES[castle].id]});return out;}
 
 /** New hosting only. Persist the whole returned master in the room snapshot. */
 export function createFormalInvasionMaster(castleId:string,random:()=>number=Math.random):RaidMaster {

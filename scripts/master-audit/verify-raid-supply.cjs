@@ -1,0 +1,11 @@
+const assert=require('assert/strict');const {collect,json,req}=require('./runtime.cjs');const {areas,castles}=require('./supply-authority.cjs');const {diff}=require('./compare.cjs');
+const live=json('docs/verification/master-audit-20260925/observed/runtime.json'),actual=collect(),expected=structuredClone(live),names=json('src/domain/redesign/data/context-names.json');
+for(const q of Object.values(expected.quests)){const [a,i]=q.designId.split('-').map(Number);q.name=names.quests[q.id];q.encounterChance=a===1&&i<3?0:areas[a].encounterChance;}
+const roster=Object.fromEntries(json('src/theme/sengoku-characters.json').map(c=>[c.characterId,c.sourceRarity]));
+for(const m of Object.values(expected.encounters)){const rule=areas[m.area][roster[m.characterId]],soul=m.victoryRewards.find(r=>r.kind==='soul');assert(rule);Object.assign(soul,rule);assert.equal(m.defeatRewards.find(r=>r.kind==='soul').amount,areas[m.area].defeatSoul);}
+for(const m of Object.values(expected.invasions)){const soul=m.stages.find(s=>s.level===12).defeatRewards.find(r=>r.kind==='soul');soul.amount=castles[m.id];}
+for(const key of ['quests','encounters','invasions'])assert.deepEqual(diff(expected[key],actual[key]),[],key+' unexpected changes');
+const {createRaidRoom,getRoomRaidMaster}=req('raid');
+for(const m of Object.values(live.encounters)){const old={masterId:m.id,level:1,raidSnapshot:structuredClone(m)};assert.deepEqual(getRoomRaidMaster(old),m,'old reward snapshot changed');const fresh=createRaidRoom(m.id,'AUDIT','AUDIT',0);assert.deepEqual(fresh.raidSnapshot,actual.encounters[m.id]);}
+for(const m of Object.values(live.invasions)){const old={masterId:m.id,level:12,territorySnapshot:{raidMaster:structuredClone(m)}};assert.deepEqual(getRoomRaidMaster(old).defeatRewards,m.stages.find(s=>s.level===12).defeatRewards,'old final reward changed');}
+const changes=Object.fromEntries(['quests','encounters','invasions'].map(k=>[k,diff(live[k],actual[k]).length]));console.log(JSON.stringify({status:'PASS',scope:'approved supply-only differences plus previously approved names; old snapshots preserved; no deployed changes',changes,threeWinsAndDefeatSsr:[7,8,9,10].map(a=>({area:a,expectedSouls:3*areas[a].SSR.chance*areas[a].SSR.amount+areas[a].defeatSoul}))},null,2));
