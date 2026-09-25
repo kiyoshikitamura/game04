@@ -8,7 +8,7 @@ export async function POST(request: Request) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || '';
   // This preview bridge must never address GAME03 or an unapproved live project.
-  if (url.replace(/\/$/, '') !== 'https://lrgyllgzcdcphlbmkknc.supabase.co' || !key) {
+  if (url.replace(/\/$/, '') !== 'https://znakrkaazliexzwihxge.supabase.co' || !key) {
     return Response.json({ error: '認証環境の設定を確認中です。' }, { status: 503, headers });
   }
   let finalize = false;

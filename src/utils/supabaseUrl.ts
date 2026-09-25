@@ -1,5 +1,5 @@
-// GAME04初期段階は独立devのみ。Productionは接続先確定まで拒否する。
-export const GAME04_DEV_PROJECT_REF = "lrgyllgzcdcphlbmkknc";
+// G3 acceptance candidate is isolated from the shared development and Production projects.
+export const GAME04_DEV_PROJECT_REF = "znakrkaazliexzwihxge";
 export const GAME04_DEV_SUPABASE_ORIGIN = `https://${GAME04_DEV_PROJECT_REF}.supabase.co`;
 const STANDARD_SUPABASE_ORIGIN_PATTERN = /^https:\/\/([a-z0-9-]+)\.supabase\.co\/?$/i;
 

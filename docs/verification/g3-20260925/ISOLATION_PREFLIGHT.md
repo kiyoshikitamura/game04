@@ -1,53 +1,50 @@
-# G3隔離環境・新設承認後の事前確認
+# G3 隔離環境の作成・配信記録
 
-2026-09-25 18:03 JSTのユーザー指示を受領。
+2026-09-25。新設、EU/Micro、費用はユーザー承認済み。既存 dev/main/Production は変更しない。
 
-## 承認済み範囲
+## 接続と費用
 
-- 組織 `kiyoshikitamura's Org` / `mvkvwqhvpoxpvxbumfjk`。
-- EU `eu-central-1` / Micro / `game04-g3-acceptance` の新設。
-- 作成前に専用Vercel Preview設定経路と正式費用を確認。想定外増額がなければ作成・配信・G3単体受入・Git保存。
-- 既存dev・本番の変更なし。G2既定OFF保存性能候補を混ぜない。
-- 終了時は成果、DB差分、受入記録、G2引渡し先を記録。後続統合で継続使用が必要か確認してから停止する。必要なら保持期間・費用を報告する。
+- 組織: `kiyoshikitamura's Org` / `mvkvwqhvpoxpvxbumfjk`
+- 正式 get_cost 応答: project / monthly / USD 10。承認範囲内。
+- 作成済み: `game04-g3-acceptance` / `znakrkaazliexzwihxge` / `eu-central-1` / ACTIVE_HEALTHY
+- 作成応答時刻: `2026-09-25T09:02:26.735333Z`（サービス応答値）。
+- Vercel connector の slug 404 は認証済みブラウザー経路で解消。再認可は不要。
+- Vercel team: `kiyoshi-kitamura` / `team_ounFOJd7sfCvcytYCkExbj77`
+- Vercel project: `game04` / `prj_vV06TC8bU3TEFRpNXFNdONiZmULE`
+- 確認画面: https://vercel.com/kiyoshi-kitamura/game04/settings/environment-variables
+- `work/game04-g3-20260925` のみを選択し、Production / 全Preview / Development は選択せず保存。
+- 保存済み: NEXT_PUBLIC_SUPABASE_URL、新環境 anon 公開鍵、USE_MOCK_DB=false、ENABLE_QA_TOOLS=true、APP_ENV=preview。
+- サーバー側キーはG3ブランチ限定の明示的無効値 `G3_ISOLATED_UNCONFIGURED` でoverride済み。旧共有値は変更せず継承を遮断。新環境の正規キー取得後に当該overrideだけ置換する。
 
-新設・組織選択の承認は取得済み。接続解消後に同じ新設承認を求め直さない。
+## DB / API
 
-## 正式費用確認
+新環境に限定schema、正式プール、必要runtime、Auth binding、原子的ガチャcommit、G2共通KPI/G3接続を適用。
+適用記録は新環境migration履歴に保持。資材と依存契約は `supabase/isolated/g3/`。
+旧migrationの一括再実行ではなく、必要なGAME04 runtime定義だけを選択して適用。
+旧devのユーザー、Auth、履歴、Stripe/webhook/Cronは移行しない。
 
-Supabase `get_cost(organization_id=mvkvwqhvpoxpvxbumfjk,type=project)` の応答:
+- formal master data MD5: `748bde1a107fc2e37aa0c33a6752561f`
+- normal 292 / special 233 / skills 72 / 旧skill 0 / 各rate合計100
+- G2 R8 roomsFor保持。G2既定OFF性能候補は除外。
+- API source SHA256: `35d31759e93e729aae8e27a95fedd9f917de4e9c4368f47389f9756f10ae3f4f`
+- 配信用minified artifact SHA256: `114f3581ff8f7365ad5bc1d1e1e1ce9570bb7660fe55edf3ef6b4c2e6c9719ca`
+- tracked bundle SHA256: `e43232bfeb3eb2019c1c96ff707af60716bde3b3d8447ed136f7dfc6555cac8b`
+- 新環境 API `game04-redesign-api` v1 ACTIVE / verify_jwt=true
+- 配信応答 ezbr_sha256: `1744b84f403ecf33943c6523ed23430b8656811f8344b44a52d718634d9e5d16`
+- API URL: https://znakrkaazliexzwihxge.supabase.co/functions/v1/game04-redesign-api
 
-```json
-{"type":"project","recurrence":"monthly","amount":10}
-```
+## 検証状況（未完了）
 
-承認済みのMicro月額換算約10米ドルと一致し、想定外増額なし。72時間約0.97米ドルは公開時間単価に基づく計算資源の目安であり、上記の正式応答は月額換算。従量・税を含む固定総額を保証しない。
+ローカルformal/adverse/static98/measurement/typecheck/bundle、隔離接続設定でのproduction buildはPASS。
+DB formal/contract gateはPASS。これらを本体→認証API→DB→再ログインの実接続受入の代用としない。
+Auth設定のread-only確認はHTTP 200。`anonymous_users=false`、`email=true`、`mailer_autoconfirm=false` であり、匿名ユーザー有効化が実接続受入の確定blocker。Auth users、game users、orders、requestsはいずれも0件。専用Preview配信、実接続・UI・性能受入は未実施。
+隔離専用initializerはプロフィールとQA分類だけを作り、UI互換のCOMPLETE投影でチュートリアルを迂回する。G4正式配布・チュートリアル実装を代用せず、G2へそのまま採用しない。
+GitHubパスワード入力要求はユーザー辞退。ユーザー指定はGoogle認証。表示されたGitHubログイン画面にGoogle選択がないため、パスワード方式へ切替えず、認証設定変更は保留する。
 
-## Vercel設定経路
+## 継続利用と引渡し
 
-今回の接続から確認できたteam:
-
-- `kiyoshi-kitamura` / `team_ounFOJd7sfCvcytYCkExbj77`
-
-同teamのproject一覧には `tribe-neon` 1件のみ。`get_project(projectId=game04,teamId=kiyoshi-kitamura)` は404 Not Found。
-現接続ではGAME04の専用Preview設定・設定readbackへのアクセスを確認できない。
-404だけでGAME04 project自体の不存在や設定不備と断定しない。
-
-有料環境だけが作られることを避けるため、project作成・cost confirmation・新環境配信は未実施。
-別projectへの誤配信、権限制約を回避する経路、秘密値のGit保存は使わない。
-
-## 再開に必要な操作
-
-Vercel接続を、対象team `kiyoshi-kitamura` の `game04` projectへアクセス可能な権限で再認可するか、
-同projectの専用Preview環境変数を設定・readbackできる正式な担当経路を用意する。
-秘密値をチャットに貼る必要はない。
-
-接続経路が確立したら、既承認の組織・EU/Microと同じ費用条件で続行する。新projectのrefをAPIの
-`EXPECTED_PROJECT`と専用Preview接続先に固定し、旧devへfallbackさせない。
-
-## 終了・引渡し条件
-
-- この環境の受入はG3単体。G2との最終統合受入やG3完了判定へ自動的に読み替えない。
-- 成果の引渡し先: G3 PR #33、G2 PR #30、最終判断はメイン進行チャット。
-- 72時間は初期利用目安。ユーザーの後続指示に従い、停止前にG2の後続統合候補で再利用する必要を確認する。
-- 継続利用が必要なら停止せず、所有担当・利用目的・延長期間・費用を記録する。作成前なので現在の課金開始・終了予定は未発生。
-- 今回のSupabase project作成、API/DB/state書込み、Vercel設定変更は0。
+この環境の受入はG3単体。G2最終統合やG3完了判定へ自動読み替えしない。
+引渡し先はG3 PR #33、G2 PR #30、最終判断はメイン進行チャット。
+72時間を初期利用目安とし、後続G2統合検証で必要なため自動停止しない。
+初期確認日は2026-09-28 JST。継続する間は月額換算USD10の計算資源費（従量・税は別）。
+統合検証の利用終了が確認できた時点で停止判断を記録する。

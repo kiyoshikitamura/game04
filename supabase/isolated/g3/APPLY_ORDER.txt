@@ -1,0 +1,25 @@
+00_schema.sql
+01_core_seed.sql
+../../manual/game04_g3_formal_gacha_pool.sql
+
+# Reviewed GAME04-only source slices; do not apply any other migration file.
+../../migrations/20260919123634_game04_redesign_runtime.sql
+../../migrations/20260921023857_game04_growth_v1_runtime.sql
+10_live_runtime_additions.sql
+11_auth_and_fixture_generator.sql
+13_g3_player_initialization.sql
+
+# STOP: compare pg_get_functiondef MD5 against manifest.json before continuing.
+
+../../manual/game04_g3_gacha_atomic_commit.sql
+../../manual/game04_g2_kpi_gameplay.sql
+../../manual/game04_g2_kpi_supply.sql
+../../manual/game04_g2_kpi_observations.sql
+../../manual/game04_g3_gacha_kpi_connection.sql
+
+# Create exactly two Auth users. Invoke game04_prepare_isolated_g3_qa(UUID,UUID), then initialize
+# both state rows through authenticated Edge GET, then invoke game04_finalize_isolated_g3_qa(UUID,TEXT).
+# 02/03 remain equivalent psql fallbacks and must not be run in addition to the generator RPCs.
+12_lock_fixture_generators.sql
+../../manual/game04_g3_formal_gacha_pool_verify.sql
+90_verify.sql

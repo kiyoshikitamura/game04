@@ -29,7 +29,7 @@ import type { BattleInput, RaidRoom, RedesignState, Reward } from '../../../src/
 const headers = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'authorization, apikey, content-type, x-client-info', 'Access-Control-Allow-Methods': 'POST, OPTIONS', 'Content-Type': 'application/json', 'Cache-Control': 'no-store' };
 const url = Deno.env.get('SUPABASE_URL')!;
 const key = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-const EXPECTED_PROJECT = 'lrgyllgzcdcphlbmkknc';
+const EXPECTED_PROJECT = 'znakrkaazliexzwihxge';
 class ApiError extends Error { constructor(message: string, public status = 400) { super(message); } }
 async function db(path: string, body?: unknown): Promise<any> {
   const response = await fetch(`${url}/rest/v1/${path}`, { method: body === undefined ? 'GET' : 'POST', headers: { apikey: key, Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' }, ...(body === undefined ? {} : { body: JSON.stringify(body) }) });
