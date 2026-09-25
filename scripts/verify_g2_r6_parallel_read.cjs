@@ -4,7 +4,7 @@ let source=fs.readFileSync(process.env.G2_API_SOURCE || 'supabase/functions/game
 if(process.env.G2_API_BUNDLE==='1'){
  // Isolate the deployed API layer; domain functions are the same test doubles as source mode.
  source=source.slice(source.indexOf('var oe = {'));
- source='var va=buildInitialState,m0=importLegacyAssets,je=captureMissionAssets,ru=synchronizeHomeBackgroundUnlocks,fu=applyAcquisitionEvents,Ru=reconcileRaidMissionProgress,Ua=applyGrowthAction,ht=gameplayMeasurementReceipt,N0=evaluateMissions,Jt=projectTerritory,Ct=FORMAL_MISSION_CONFIG,Ne=FORMAL_GACHA_VERSION,uu=GACHA_CATEGORIES,He=SPECIAL_GACHA_RULES,Be=NORMAL_GACHA_RULE,Te=specialGachaPool,We=normalGachaPool,tu=formalGachaDisplayRates,eu=normalGachaDay;\n'+source;
+ source='var va=buildInitialState,m0=importLegacyAssets,je=captureMissionAssets,ru=synchronizeHomeBackgroundUnlocks,fu=applyAcquisitionEvents,Ru=reconcileRaidMissionProgress,Ua=applyGrowthAction,ht=gameplayMeasurementReceipt,N0=evaluateMissions,Jt=projectTerritory,Ct=FORMAL_MISSION_CONFIG,Ne=FORMAL_GACHA_VERSION,uu=GACHA_CATEGORIES,He=SPECIAL_GACHA_RULES,Fe=SPECIAL_GACHA_TICKET_IDS,Be=NORMAL_GACHA_RULE,Te=specialGachaPool,We=normalGachaPool,tu=formalGachaDisplayRates,eu=normalGachaDay;\n'+source;
 }
 const js=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.None}}).outputText;
 async function run(options={}){
@@ -13,7 +13,7 @@ async function run(options={}){
  const identity=s=>s;const context={URL,Response,Request,console,crypto:require('node:crypto').webcrypto,structuredClone,TextEncoder,
   Deno:{env:{get:n=>n==='SUPABASE_URL'?'https://lrgyllgzcdcphlbmkknc.supabase.co':'fake-service-key'},serve:f=>handler=f},
   buildInitialState:()=>state,importLegacyAssets:identity,applyAcquisitionEvents:identity,captureMissionAssets:identity,synchronizeHomeBackgroundUnlocks:identity,reconcileRaidMissionProgress:identity,
-  FORMAL_GACHA_VERSION:'qa',GACHA_CATEGORIES:['character','skill','equipment'],SPECIAL_GACHA_RULES:{},NORMAL_GACHA_RULE:{},specialGachaPool:()=>[],normalGachaPool:()=>[],normalGachaCompatibilityPool:()=>[],formalGachaDisplayRates:()=>[],normalGachaDay:()=>'2026-09-25',
+  FORMAL_GACHA_VERSION:'qa',GACHA_CATEGORIES:['character','skill','equipment'],SPECIAL_GACHA_RULES:{},SPECIAL_GACHA_TICKET_IDS:{character:'SPECIAL_TICKET_CHARACTER',skill:'SPECIAL_TICKET_SKILL',equipment:'SPECIAL_TICKET_EQUIPMENT'},NORMAL_GACHA_RULE:{},specialGachaPool:()=>[],normalGachaPool:()=>[],normalGachaCompatibilityPool:()=>[],formalGachaDisplayRates:()=>[],normalGachaDay:()=>'2026-09-25',
   FORMAL_MISSION_CONFIG:{enabled:true,missions:[]},evaluateMissions:()=>[],projectTerritory:()=>({}),gameplayMeasurementReceipt:()=>({}),applyGrowthAction:s=>({...s,cash:s.cash+1}),
   fetch:async(url,init)=>{const p=new URL(url).pathname+new URL(url).search;calls.push(p);let result;
    if(p==='/auth/v1/user')return Response.json(options.authFail?{}:{id:'qa'},{status:options.authFail?401:200});
@@ -22,6 +22,7 @@ async function run(options={}){
    if(isProfile)result=options.noProfile?[]:[{id:'qa',username:'QA'}];
    else if(isPrior){if(options.priorFail)return Response.json({message:'request lookup unavailable'},{status:503});result=options.replay?[{request_id:'x',result:{receipt:{saved:'previous'},operation:options.priorOperation,requestPayload:options.priorPayload}}]:[];}
    else if(isAcq){acquisitions++;if(options.acqFail&&(options.replay?acquisitions===1:true))return Response.json({message:'acquisition unavailable'},{status:503});result={legacy:{},events:[],master:{}};}
+   else if(p.startsWith('/rest/v1/user_items?'))result=[];
    else if(p.endsWith('/game04_get_session_state'))result=state;
    else if(p.endsWith('/game04_commit_growth_state')){commits++;if(options.conflict)return Response.json({code:'40001',message:'conflict'},{status:400});result={state:{...JSON.parse(init.body).p_state,version:6}};}
    else if(p.endsWith('/game04_raid_rooms_for_user')||p.includes('/game04_social_events?')||p.includes('/game04_battles?'))result=[];

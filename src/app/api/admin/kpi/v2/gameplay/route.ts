@@ -24,6 +24,7 @@ export async function GET(request: NextRequest) {
         battles: 'durable battle rows; started and settled counted separately',
         actions: 'versioned committed receipts only; historical empty receipts are unmeasured',
         purchases: 'unavailable; P02 verified purchase integration pending',
+        gacha_spend: 'in-game resources only; diamond_spent and game_cash_spent are never purchase or cash-revenue amounts',
         unmapped: 'separate from included; QA classifications evaluated at event time',
       },
       series: gameplay.data ?? [], supply: supply.data ?? [], detail: detail.data,
@@ -31,6 +32,7 @@ export async function GET(request: NextRequest) {
         raid_rewards: 'Newly claimed grant receipts only; pre-instrumentation claims unmeasured. Grant counts across reward kinds are not additive.',
         restore: 'Client state acknowledgement at matching server version; not identity-provider login acceptance.',
         acquisition: 'Earliest bound journey source per subject, event-time QA exclusion; unbound explicit. Activity counts are not conversion rates.',
+        gacha: 'Committed formal draws/exchanges only; replay returns the saved receipt without another success fact. QA is classified at event time.',
       },
     };
   });

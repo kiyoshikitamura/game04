@@ -185,6 +185,7 @@
     "verify:kpi-tutorial-union": "node --experimental-strip-types scripts/verify_kpi_tutorial_union.mjs",
     "verify:game03-daily-cta-activity": "node --experimental-strip-types scripts/verify_game03_daily_cta_activity.mjs",
     "verify:game03-short-tutorial-character-setup": "node --experimental-strip-types scripts/verify_game03_short_tutorial_character_setup.mjs",
+    "verify:game04-g3-formal-gacha": "node scripts/verify_game04_g3_formal_gacha.cjs",
     "check": "npm run typecheck && npm run build"
   },
   "dependencies": {

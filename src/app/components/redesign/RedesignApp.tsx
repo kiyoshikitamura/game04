@@ -19,8 +19,7 @@ import QuestView, { type QuestSettlement } from './QuestView';
 import RaidView from './RaidView';
 import TerritoryView from './TerritoryView';
 import BattleView from './BattleView';
-import GachaTab from '../GachaTab';
-import NormalGachaView from './NormalGachaView';
+import FormalGachaView from './FormalGachaView';
 import ShopTab from '../ShopTab';
 import BrandedLoading from '../ui/BrandedLoading';
 
@@ -233,7 +232,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
       {tab === 'character' && <>{raidDeckReturn && <button type="button" className="rd-button" disabled={busy} onClick={returnToRaidPreparation}>共闘の出撃準備に戻る</button>}{questDeckReturn && <button type="button" className="rd-button" disabled={busy} onClick={returnToQuestPreparation}>出撃準備に戻る</button>}<GrowthView state={state} onAction={action} /></>}
       {tab === 'territory' && <TerritoryView territory={data.territory} rooms={data.rooms} userId={state.userId} onOpenRoom={id => { setRaidId(id); setTab('raid'); }} onHost={async destinationId => { const value = await action('territory_host', { destinationId }); if (!value.territoryRoomId) throw new Error('侵攻結果を確認できませんでした。'); setRaidId(value.territoryRoomId); setTab('raid'); }} />}
       {tab === 'raid' && <RaidView key={`${raidId || 'list'}:${raidNavigation}`} initialPreparationLevel={raidPreparationLevel} state={state} rooms={data.rooms} party={party} initialRoomId={raidId} onAction={raidAction} onOpenDeck={openRaidDeck} />}
-      {tab === 'gacha' && <><NormalGachaView data={data} onAction={action}/><GachaTab specialOnly /></>}
+      {tab === 'gacha' && <FormalGachaView key={state.userId} data={data} onAction={action} />}
       {tab === 'shop' && <><section className="rd-panel"><h2>{VIP_PRODUCT.name}</h2><p>30日間：バトル速度×3・100無償輝石を30回付与</p><p>{vipActive ? `有効期限 ${new Date(state.vipExpiresAt!).toLocaleString('ja-JP')}` : '未購入'}</p></section><ShopTab exchange={{ state, onExchange: (payload) => action('shop_exchange', payload, undefined, false), onUseEnergyDrink: () => action('use_energy_drink', {}, undefined, false) }} /></>}
     </>}
   </RedesignShell>;
