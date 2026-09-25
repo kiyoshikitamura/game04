@@ -40,6 +40,9 @@ export default function TutorialPreview() {
   const [playing, setPlaying] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(false);
   const entryReceipt = useRef('');
+  const shell = useRef<HTMLDivElement>(null);
+  const step = save?.step;
+  useEffect(() => { shell.current?.scrollTo({ top: 0 }); }, [step, tab]);
   const party = useMemo(() => save?.game.deck.length ? buildBattleParty(save.game) : [], [save]);
   const practice = useMemo(() => save?.game.deck.length ? createTutorialBattle(save.game) : null, [save]);
   useEffect(() => {
@@ -122,7 +125,7 @@ export default function TutorialPreview() {
   const background = world ? scene.background : BACKGROUNDS.guide;
   const cast = world ? scene.cast : ['char_ageha_01'];
   const errorView = error && <div className="tutorial-error" role="alert">{error}<button onClick={() => window.location.reload()}>再読み込み</button></div>;
-  return <GameContext.Provider value={gameContext}><div className={`rd-shell tutorial-shell ${scene ? '' : 'is-complete'}`}>
+  return <GameContext.Provider value={gameContext}><div ref={shell} className={`rd-shell tutorial-shell ${scene ? '' : 'is-complete'}`}>
     {scene ? scene.id === 'battle' && practice ? <BattleView requirePlaybackCompletion result={practice} vipActive={false} onComplete={next} title="模擬戦" backgroundSrc={BACKGROUNDS.battle} /> :
       <main className={`tutorial-scene ${world ? 'is-world' : ''}`} style={{ backgroundImage: `linear-gradient(0deg, #160f0beb, transparent 65%), url('${background}')` }} data-scene={scene.id}>
         <div className={`tutorial-cast count-${cast.length}`} aria-label={world ? '乱世の武将たち' : '豊臣秀吉'}>
