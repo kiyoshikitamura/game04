@@ -1,0 +1,66 @@
+{
+  "scope": "read-only master audit and local deterministic checks; no full battle/UI sweep",
+  "checks": [
+    {
+      "command": "node scripts/verify_game04_g2_master_growth.cjs",
+      "result": "PASS"
+    },
+    {
+      "command": "node scripts/verify_game04_formal_character_stats.cjs",
+      "result": "PASS"
+    },
+    {
+      "command": "node -r ./scripts/master-audit/git-assets-preload.cjs scripts/verify_game04_raid_formal.mjs",
+      "result": "PASS after fixture-only actualHpDamage correction; asset existence resolved from Git tree"
+    },
+    {
+      "command": "node scripts/verify_game04_g2_supply.mjs",
+      "result": "PASS"
+    },
+    {
+      "command": "node scripts/verify_game04_g2_r5_rules.cjs",
+      "result": "PASS"
+    },
+    {
+      "command": "node scripts/verify_game04_g2_r5_damage_edges.cjs",
+      "result": "PASS"
+    },
+    {
+      "command": "node scripts/verify_game04_g2_raid_missions.cjs",
+      "result": "PASS"
+    },
+    {
+      "command": "node scripts/master-audit/verify-authority.cjs",
+      "result": "PASS"
+    },
+    {
+      "command": "node scripts/master-audit/test-compare.cjs",
+      "result": "PASS"
+    },
+    {
+      "command": "node scripts/master-audit/verify-candidates.cjs",
+      "result": "PASS static/data only; SQL not applied"
+    },
+    {
+      "command": "node scripts/master-audit/verify-source.cjs",
+      "result": "MATCH 146 files"
+    },
+    {
+      "command": "node scripts/master-audit/verify-snapshot.cjs docs/verification/master-audit-20260925/observed",
+      "result": "STOP as expected; 450 JSON pointer differences, 4 integration conditions unconfirmed"
+    }
+  ],
+  "additional": {
+    "liveVsRepository": "characters/skills/equipment/quests/encounters/invasions/missions/battleRules/acquisition/growth all exact",
+    "gacha": "G3 b6b135db definition = DB formal_gacha = API v31",
+    "paidProducts": "catalogMatches true: 11 products",
+    "legacyItemSemantics": "18/18 IDs and runtime fields identical",
+    "playerExp": "100/100 local vs immutable SQL function identical",
+    "endReadback": "API version/hash and all redesign master data/status unchanged"
+  },
+  "limitations": [
+    "SQL candidates not executed",
+    "no player mutations",
+    "G3/G4/P integration acceptance not substituted"
+  ]
+}
