@@ -25,7 +25,7 @@ async function run(options={}){
    else if(p.startsWith('/rest/v1/user_items?'))result=[];
    else if(p.endsWith('/game04_get_session_state'))result=state;
    else if(p.endsWith('/game04_commit_growth_state')){commits++;if(options.conflict)return Response.json({code:'40001',message:'conflict'},{status:400});result={state:{...JSON.parse(init.body).p_state,version:6}};}
-   else if(p.endsWith('/game04_raid_rooms_for_user')||p.includes('/game04_social_events?')||p.includes('/game04_battles?'))result=[];
+   else if(p.endsWith('/game04_raid_rooms_for_user')||p.endsWith('/game04_raid_rooms_with_owners')||p.includes('/game04_social_events?')||p.includes('/game04_battles?'))result=[];
    else if(p.endsWith('/game04_territory_context'))result={master:{},progress:{},items:{},activeHostingCount:0};
    else throw Error('unexpected '+p);
    return Response.json(result);

@@ -1,4 +1,6 @@
-# GAME04 G3 統合記録（修正保存・共有API統合待ち・未受入）
+# GAME04 G3 統合記録（R8統合済み・配信未開始・未受入）
+
+最新状態は [R8_INTEGRATION.md](./R8_INTEGRATION.md)。PR30 `29b1515` のv31保持patchを受領・統合済みで、下記の旧「v31 source未保存待ち」は解消。現ブロッカーは旧実行の停止・共有環境の排他を確認できないこと。復旧/待機を繰り返さず [分離環境案](./ISOLATED_ENVIRONMENT_PROPOSAL.md) を作成。G2の既定OFF性能候補は不採用。今回の共有API/DB/state変更は0。前回remoteのPNG2点/bundle転送不備もR8記録で訂正し、完全原本と全blob照合により保存し直す。
 
 ## 所有・候補
 

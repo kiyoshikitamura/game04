@@ -90,20 +90,13 @@ async function roomFor(id: string): Promise<RaidRoom & {version: number}> {
   return { ...row.state, version: row.version };
 }
 async function roomsFor(userId: string): Promise<(RaidRoom & {version: number})[]> {
-  const rows = await rpc('game04_raid_rooms_for_user', {p_user_id: userId});
-  // Resolve the actual owner's equipped leader, never the viewer or the boss.
-  const ownerIds = [...new Set<string>(rows.map((row: any) => row.state.ownerId))];
-  const [profiles, players] = ownerIds.length ? await Promise.all([
-    db(`users?id=in.(${ownerIds.join(',')})&select=id,username`),
-    db(`game04_player_state?user_id=in.(${ownerIds.join(',')})&select=user_id,state`),
-  ]) : [[], []];
+  const rows = await rpc('game04_raid_rooms_with_owners', {p_user_id: userId});
+  // Preserve the existing owner projection; SQL only collapses dependent reads.
   return rows.map((row: any) => {
-    const profile = profiles.find((entry: any) => entry.id === row.state.ownerId);
-    const player = players.find((entry: any) => entry.user_id === row.state.ownerId);
-    const leader = CHARACTER_MASTERS.find(entry => entry.id === player?.state?.deck?.[0]?.characterId);
+    const leader = CHARACTER_MASTERS.find(entry => entry.id === row.ownerLeaderCharacterId);
     return { ...row.state, version: row.version,
       participants: row.state.participants.map((participant: any) => participant.userId === row.state.ownerId
-        ? { ...participant, name: profile?.username ?? participant.name, portraitUrl: leader ? characterArt(leader, 'portrait') : undefined }
+        ? { ...participant, name: row.ownerName ?? participant.name, portraitUrl: leader ? characterArt(leader, 'portrait') : undefined }
         : participant),
       status: row.state.status === 'active' && Date.parse(row.state.expiresAt) <= Date.now() ? 'expired' : row.state.status,
     };
