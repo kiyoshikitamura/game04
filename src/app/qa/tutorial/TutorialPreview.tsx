@@ -122,7 +122,7 @@ export default function TutorialPreview() {
   const background = world ? scene.background : BACKGROUNDS.guide;
   const cast = world ? scene.cast : ['char_ageha_01'];
   const errorView = error && <div className="tutorial-error" role="alert">{error}<button onClick={() => window.location.reload()}>再読み込み</button></div>;
-  return <GameContext.Provider value={gameContext}><div className="rd-shell tutorial-shell">
+  return <GameContext.Provider value={gameContext}><div className={`rd-shell tutorial-shell ${scene ? '' : 'is-complete'}`}>
     {scene ? scene.id === 'battle' && practice ? <BattleView requirePlaybackCompletion result={practice} vipActive={false} onComplete={next} title="模擬戦" backgroundSrc={BACKGROUNDS.battle} /> :
       <main className={`tutorial-scene ${world ? 'is-world' : ''}`} style={{ backgroundImage: `linear-gradient(0deg, #160f0beb, transparent 65%), url('${background}')` }} data-scene={scene.id}>
         <div className={`tutorial-cast count-${cast.length}`} aria-label={world ? '乱世の武将たち' : '豊臣秀吉'}>
@@ -147,8 +147,8 @@ export default function TutorialPreview() {
         {!['home', 'quest', 'character', 'missions'].includes(tab) && <section className="rd-panel"><h1>{tab === 'shop' ? '商店' : tab === 'gacha' ? '雇用' : '共闘'}</h1><p>チュートリアルによるロックは解除されています。この確認環境では通常機能への接続を省いています。</p><button className="rd-button" onClick={() => navigate('home')}>マイページへ</button></section>}
       </main>
       {!playing && <nav className="rd-footer" aria-label="メインナビゲーション">{[['home', 'ホーム'], ['quest', '出陣'], ['character', '武将'], ['raid', '共闘'], ['gacha', '雇用']].map(([id, label]) => <button key={id} disabled={busy || (!save.departed && id !== 'quest')} aria-current={tab === id ? 'page' : undefined} onClick={() => navigate(id)}>{label}</button>)}</nav>}
-      {!save.departed && tab === 'home' && <Notice text={FIRST_SORTIE_TEXT} button="出陣へ" busy={busy} onClick={() => navigate('quest')} />}
-      {save.departed && save.loginPending && tab === 'home' && <Notice text={`ログインボーナス ${save.loginDays % 30 || 30}日目\n本日の報酬を受け取りました。`} button="閉じる" busy={busy} onClick={() => act([{ type: 'dismiss-login' }])} />}
+      {!save.departed && !save.loginPending && tab === 'home' && <Notice text={FIRST_SORTIE_TEXT} button="出陣へ" busy={busy} onClick={() => navigate('quest')} />}
+      {save.loginPending && tab === 'home' && <Notice text={`ログインボーナス ${save.loginDays % 30 || 30}日目\n本日の報酬を受け取りました。`} button="閉じる" busy={busy} onClick={() => act([{ type: 'dismiss-login' }])} />}
       {save.defeatPending && !playing && <Notice text={FIRST_DEFEAT_TEXT} button="任務へ" busy={busy} onClick={() => act([{ type: 'dismiss-defeat' }], () => setTab('missions'))} />}
     </>}
     {errorView}

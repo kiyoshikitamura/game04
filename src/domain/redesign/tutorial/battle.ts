@@ -18,6 +18,13 @@ export function createTutorialBattle(game: RedesignState): BattleResult {
   function emit(kind: BattleFrame['kind'], event: string, text: string, extra: Partial<BattleFrame> = {}) {
     frames.push({ index: frames.length, wave: 1, kind, event, text, partySp: sp, maxSp: 75,
       burst, burstGauge: sp, maxBurstGauge: 75, playerActions: actions, remainingActions: 300 - actions,
+      skillStates: Object.fromEntries(party.map(unit => [unit.id, unit.skills.map(skill => ({
+        skillId: skill.id, cost: skill.spCost,
+        status: event === 'action_start' && extra.actorId === unit.id && extra.skillId === skill.id ? 'active' as const
+          : sp < skill.spCost ? 'insufficient_sp' as const
+          : skill.condition.type === 'ally_hp_below' && !allies.some(ally => ally.hp / ally.maxHp * 100 < (skill.condition.value ?? 50)) ? 'condition_unmet' as const
+          : 'ready' as const,
+      }))])),
       party: structuredClone(allies), enemies: structuredClone(enemies), ...extra });
   }
   emit('start', 'battle_start', '模擬戦 — 伊達政宗');
@@ -32,7 +39,7 @@ export function createTutorialBattle(game: RedesignState): BattleResult {
   const aoe = { actorId: enemy.id, skillId: 'SKD025', targetIds: party.map(u => u.id) };
   emit('enemy', 'action_start', '伊達政宗の紅蓮の大計', aoe);
   allies.forEach(unit => { unit.hp = Math.max(1, unit.hp - 50); });
-  enemies[0].actions++;
+  enemies[0].actions++; enemies[0].count = 3;
   emit('enemy', 'damage', '味方全員に50ダメージ', aoe);
   emit('enemy', 'action_end', '伊達政宗の攻撃が終わった', aoe);
   actions++; burst = true;
