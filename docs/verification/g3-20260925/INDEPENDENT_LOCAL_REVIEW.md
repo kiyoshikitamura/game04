@@ -13,7 +13,8 @@ The local Codex task discovered a concurrent implementation in task 「ガチャ
 |P1|src/app/components/redesign/FormalGachaView.tsx:84|Pending operation exists only in useRef; reload or unmount loses ID/payload/results. Switching payment after an ambiguous failure also replaces the ID. Persist per-user pending operation before submission and recover immutable server receipt; block new operation until prior outcome resolved.|
 |P2|src/app/components/redesign/FormalGachaView.tsx:119|Free availability uses day captured at initial status request. Refresh at JST midnight/foreground so an open screen becomes usable on the new day.|
 |P2|src/app/components/gacha/SengokuGateOpening.tsx:42|Fullscreen section does not trap focus or make background inert; keyboard handler does not prevent default. Background hub becomes enabled when request finishes, during opening. Apply shared dialog interaction/focus contract.|
-|P2|FormalGachaHub.css:13; FormalGachaView.css:1; SengokuGateOpening.css:71|Prices/results are 9–11px and skip target 38px; common UI authority requires 16px body/price, 14px supporting text and 44px tap targets. Long results are ellipsized. Verify scoped mobile corrections.|
+|P2|FormalGachaHub.css:13; FormalGachaView.css:1; SengokuGateOpening.css:64|Prices/results are 9–11px and skip target 38px; common UI authority requires 16px body/price, 14px supporting text and 44px tap targets. Long results are ellipsized. Verify scoped mobile corrections.|
+|P2|supabase/functions/game04-redesign-api/source.ts:355|Free-use date and mission timestamp use separate Date.now calls and the commit wrapper does not check settlement JST day. Use a shared timestamp and handle a boundary crossed before commit.|
 |P2|scripts/verify_game04_g3_adverse.cjs:50|URL.pathname produces C:\\C:\\Users\\Kiyoshi%20Kitamura... on Windows, stopping suite with ENOENT. Use fileURLToPath or path.resolve.|
 
 ## Verification actually performed
