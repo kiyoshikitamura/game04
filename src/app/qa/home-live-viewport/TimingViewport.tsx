@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import InteractionProbe from './InteractionProbe';
 import { acceptsQaTimingEvent, appendQaTiming, qaTimingEnabled, type QaTimingMessage } from '@/utils/redesignQaTelemetry';
 
 export default function TimingViewport({ width, height }: { width: number; height: number }) {
@@ -20,7 +21,7 @@ export default function TimingViewport({ width, height }: { width: number; heigh
     <iframe key={reload} ref={frame} title={`実API本体 ${width}px`} src="/" width={width} height={height} style={{ display: 'block', border: 0, width, height, maxWidth: 'none' }} />
     {qaTimingEnabled() && <section aria-label="QA読み込み計測" style={{ background:'#151515', color:'#fff', padding:12, fontSize:12, overflowWrap:'anywhere' }}>
       <h2>QA読み込み計測</h2>
-      <p>本体は上の実寸iframeです。APIは認証・通信・応答確認を含む総待機時間。画像は必須画像グループの待機時間（キャッシュを含む）です。操作可能時刻・TTIは未計測。</p>
+      <p>本体は上の実寸iframeです。APIは認証・通信・応答確認を含む総待機時間。画像は必須画像グループの待機時間（キャッシュを含む）です。対象CTAの操作可能時刻は下段で別計測。FCPをTTIとは扱いません。</p>
       <button onClick={() => { setList([]); setReload(value => value + 1); }}>本体を再読込して計測を消去</button>
       <p>件数：{list.length} / 100</p>
       {latest && <div aria-label="ブラウザ初回表示指標">
@@ -30,5 +31,6 @@ export default function TimingViewport({ width, height }: { width: number; heigh
       </div>}
       <div style={{overflowX:'auto'}}><table><thead><tr><th>種別 / 対象</th><th>枚数</th><th>開始ms</th><th>完了ms</th><th>待機ms</th><th>結果</th></tr></thead><tbody>{list.map((row,index) => <tr key={index}><td>{row.metric.kind} / {row.metric.scope}</td><td>{row.metric.count ?? '—'}</td><td>{row.metric.startedAt.toFixed(1)}</td><td>{row.metric.settledAt.toFixed(1)}</td><td>{row.metric.durationMs.toFixed(1)}</td><td>{row.metric.outcome}</td></tr>)}</tbody></table></div>
     </section>}
+    <InteractionProbe frame={frame} />
   </>;
 }

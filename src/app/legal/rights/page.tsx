@@ -19,7 +19,7 @@ export default async function Page({ searchParams }: PageProps) {
       <p>{pendingLegalValue(GAME04_LEGAL.rightsHolder)}</p>
       <p>使用素材の権利者および必要な個別クレジットは、確認後に掲載します。</p>
       <h2>公式サイト</h2>
-      <p>{GAME04_LEGAL.serviceUrl ? <a href={GAME04_LEGAL.serviceUrl}>{GAME04_LEGAL.serviceUrl}</a> : pendingLegalValue(null)}</p>
+      <p>{GAME04_LEGAL.serviceUrl ? <a href={GAME04_LEGAL.serviceUrl}>{GAME04_LEGAL.serviceUrl}</a> : GAME04_LEGAL.serviceDomain || pendingLegalValue(null)}</p>
       <p><Link href={from === "settings" ? "/legal/contact?from=settings" : "/legal/contact"} replace={from === "settings"}>権利に関するお問い合わせ</Link></p>
     </LegalPage>
   );

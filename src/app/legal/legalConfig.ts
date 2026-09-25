@@ -9,6 +9,7 @@ export const GAME04_LEGAL: {
   phone: string | null;
   supportEmail: string | null;
   serviceUrl: string | null;
+  serviceDomain: string | null;
   rightsHolder: string | null;
 } = {
   title: "戦国姫艶武",
@@ -19,7 +20,8 @@ export const GAME04_LEGAL: {
   address: null,
   phone: null,
   supportEmail: null,
-  serviceUrl: null,
+  serviceUrl: null, // DNS / HTTPS未設定のため公開URLとしては未確定。
+  serviceDomain: "sengoku-hime-ennbu.com",
   rightsHolder: null,
 };
 

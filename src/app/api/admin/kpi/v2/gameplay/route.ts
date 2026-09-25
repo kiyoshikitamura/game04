@@ -11,10 +11,13 @@ export async function GET(request: NextRequest) {
     if (process.env.NEXT_PUBLIC_SUPABASE_URL?.replace(/\/$/, '') !== GAME04_DEV_SUPABASE_ORIGIN) {
       throw new Error('GAME04 development KPI target mismatch');
     }
-    const { data, error } = await service.rpc('game04_kpi_gameplay_daily', {
-      p_from: range.fromAt, p_to: range.toAt,
-    });
-    if (error) throw error;
+    const params = { p_from: range.fromAt, p_to: range.toAt };
+    const [gameplay, supply, detail] = await Promise.all([
+      service.rpc('game04_kpi_gameplay_daily', params),
+      service.rpc('game04_kpi_supply_daily', params),
+      service.rpc('game04_kpi_receipt_detail', params),
+    ]);
+    for (const result of [gameplay, supply, detail]) if (result.error) throw result.error;
     return {
       definition_version: 'game04-gameplay-v1', environment: 'development', timezone: 'Asia/Tokyo',
       coverage: {
@@ -23,7 +26,12 @@ export async function GET(request: NextRequest) {
         purchases: 'unavailable; P02 verified purchase integration pending',
         unmapped: 'separate from included; QA classifications evaluated at event time',
       },
-      series: data ?? [],
+      series: gameplay.data ?? [], supply: supply.data ?? [], detail: detail.data,
+      detail_coverage: {
+        raid_rewards: 'Newly claimed grant receipts only; pre-instrumentation claims unmeasured. Grant counts across reward kinds are not additive.',
+        restore: 'Client state acknowledgement at matching server version; not identity-provider login acceptance.',
+        acquisition: 'Earliest bound journey source per subject, event-time QA exclusion; unbound explicit. Activity counts are not conversion rates.',
+      },
     };
   });
 }

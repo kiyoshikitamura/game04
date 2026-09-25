@@ -13,9 +13,11 @@ export type MissionState = RedesignState & { missionProgress?: MissionProgress }
 export function captureMissionAssets(original: RedesignState): MissionState {
  const state: MissionState=structuredClone(original);
  const p=state.missionProgress??={version:'game04-missions-v1',counters:{},daily:{},seenEvents:[],character:{},skill:{},equipment:{}};
- for(const c of state.characters) p.character[c.id]={level:Math.max(p.character[c.id]?.level??0,c.level),awakening:Math.max(p.character[c.id]?.awakening??0,c.awakening)};
+ // Preserve persisted object key order: stateFor compares JSON after a jsonb round trip.
+ // Rebuilding equal equipment history with a different order causes a save on every read.
+ for(const c of state.characters) p.character[c.id]={...p.character[c.id],level:Math.max(p.character[c.id]?.level??0,c.level),awakening:Math.max(p.character[c.id]?.awakening??0,c.awakening)};
  for(const s of state.skills) p.skill[s.id]=Math.max(p.skill[s.id]??0,s.level);
- for(const e of state.equipment) p.equipment[e.instanceId]={masterId:e.masterId,level:Math.max(p.equipment[e.instanceId]?.level??0,e.level),lb:Math.max(p.equipment[e.instanceId]?.lb??0,e.lb)};
+ for(const e of state.equipment) p.equipment[e.instanceId]={...p.equipment[e.instanceId],masterId:e.masterId,level:Math.max(p.equipment[e.instanceId]?.level??0,e.level),lb:Math.max(p.equipment[e.instanceId]?.lb??0,e.lb)};
  return state;
 }
 /** Only called after an authoritative settled battle/growth action, in the same CAS transaction. */

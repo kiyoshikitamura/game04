@@ -56720,9 +56720,9 @@ function jstLoginDate(now) {
 function captureMissionAssets(original) {
   const state = structuredClone(original);
   const p = state.missionProgress ??= { version: "game04-missions-v1", counters: {}, daily: {}, seenEvents: [], character: {}, skill: {}, equipment: {} };
-  for (const c of state.characters) p.character[c.id] = { level: Math.max(p.character[c.id]?.level ?? 0, c.level), awakening: Math.max(p.character[c.id]?.awakening ?? 0, c.awakening) };
+  for (const c of state.characters) p.character[c.id] = { ...p.character[c.id], level: Math.max(p.character[c.id]?.level ?? 0, c.level), awakening: Math.max(p.character[c.id]?.awakening ?? 0, c.awakening) };
   for (const s of state.skills) p.skill[s.id] = Math.max(p.skill[s.id] ?? 0, s.level);
-  for (const e of state.equipment) p.equipment[e.instanceId] = { masterId: e.masterId, level: Math.max(p.equipment[e.instanceId]?.level ?? 0, e.level), lb: Math.max(p.equipment[e.instanceId]?.lb ?? 0, e.lb) };
+  for (const e of state.equipment) p.equipment[e.instanceId] = { ...p.equipment[e.instanceId], masterId: e.masterId, level: Math.max(p.equipment[e.instanceId]?.level ?? 0, e.level), lb: Math.max(p.equipment[e.instanceId]?.lb ?? 0, e.lb) };
   return state;
 }
 function recordMissionEvent(original, event) {
@@ -60475,6 +60475,7 @@ var FORMAL_MISSION_CONFIG = { enabled: true, missions: [
 var ACTIONS = /* @__PURE__ */ new Set([
   "save_deck",
   "character_level",
+  "character_awaken",
   "equipment_level",
   "skill_level",
   "equipment_lb",
@@ -60498,6 +60499,20 @@ function gameplayMeasurementReceipt(action, before, after) {
     stateVersionAfter: before.version + 1,
     cashDelta: after.cash - before.cash,
     energyDelta: after.energy - before.energy
+  } };
+}
+function raidClaimMeasurementReceipt(before, after, prior, next) {
+  const grants = prior.rewardGrants.filter((g) => g.userId === before.userId && !g.claimed && next.rewardGrants.some((n) => n.id === g.id && n.userId === g.userId && n.claimed)).map((g) => ({ grantId: g.id, rewards: g.rewards.map((r) => ({ kind: r.kind, id: r.id ?? null, amount: r.amount })) }));
+  if (!grants.length) return {};
+  return { gameplayMeasurement: {
+    contractVersion: "game04-gameplay-v1",
+    action: "raid_claim",
+    stateVersionBefore: before.version,
+    stateVersionAfter: before.version + 1,
+    cashDelta: after.cash - before.cash,
+    energyDelta: after.energy - before.energy,
+    roomId: prior.id,
+    grants
   } };
 }
 
@@ -65200,6 +65215,12 @@ Deno.serve(async (request) => {
       const day = normalGachaDay(Date.now());
       return new Response(JSON.stringify(await responseFor(user.id, { normalGacha: { pool, day, available: state2.dailyNormalGachaDate !== day } })), { headers });
     }
+    if (action === "observe_state_restore") {
+      const observedVersion = payload.observedVersion;
+      if (!Number.isSafeInteger(observedVersion) || observedVersion < 0) throw new ApiError("\u89B3\u6E2C\u30D0\u30FC\u30B8\u30E7\u30F3\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+      const observation = await rpc("game04_observe_state_restore", { p_user_id: user.id, p_request_id: requestId, p_observed_version: observedVersion });
+      return new Response(JSON.stringify({ observation }), { headers });
+    }
     if (action === "get_state" || action === "raid_refresh") return new Response(JSON.stringify(await responseFor(user.id)), { headers });
     if (action === "quest_battle" || action === "raid_battle") return new Response(JSON.stringify(await runBattle(user.id, action, payload, requestId, profile.username)), { headers });
     if (action === "territory_host" || action === "raid_unlock") {
@@ -65226,6 +65247,7 @@ Deno.serve(async (request) => {
       }
       return new Response(JSON.stringify(response), { headers });
     }
+    let measurementReceipt;
     const state = await stateFor(user.id);
     let after, room = null, version = null;
     if (action === "normal_gacha") {
@@ -65261,6 +65283,7 @@ Deno.serve(async (request) => {
       const changed = applyRaidAction(current, state, action, { name: profile.username }, Date.now(), action === "raid_claim" ? await rewardPolicy() : void 0);
       room = changed.room;
       after = changed.state;
+      if (action === "raid_claim") measurementReceipt = raidClaimMeasurementReceipt(state, after, current, room);
       if (action === "raid_rescue") {
         const rescueEvent = raidRescueMissionEvent(room, user.id, requestId, Date.now());
         if (rescueEvent) after = recordMissionEvent(after, rescueEvent);
@@ -65272,7 +65295,7 @@ Deno.serve(async (request) => {
       if (action === "character_unlock") growthCounters.push("soul_unlock");
       if (growthCounters.length) after = recordMissionEvent(after, { id: `growth:${requestId}`, at: Date.now(), counters: growthCounters });
     }
-    await commit(state, after, requestId, null, room, version, gameplayMeasurementReceipt(action, state, after));
+    await commit(state, after, requestId, null, room, version, measurementReceipt ?? gameplayMeasurementReceipt(action, state, after));
     return new Response(JSON.stringify(await responseFor(user.id)), { headers });
   } catch (error) {
     const conflict = error instanceof ApiError && error.status === 409;

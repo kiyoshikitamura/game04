@@ -1,6 +1,7 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useGame } from '../../context/GameContext';
+import { observeRedesignRestore } from '@/utils/redesignRestoreObservation';
 import { REDESIGN_REWARD_SYNC_EVENT } from '@/utils/redesignRewardSync';
 import { redesignRequest, type RedesignResponse } from '@/utils/redesignApi';
 import { buildBattleParty } from '@/domain/redesign/masters';
@@ -43,6 +44,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   const [battle, setBattle] = useState<BattleResult | null>(null);
   const [battleBackground, setBattleBackground] = useState<string>();
   const ownerRef = useRef(owner);
+  const restoredOwner = useRef<string | null>(null);
   const lock = useRef(false);
   const requestGeneration = useRef(0);
   const rewardRefreshPending = useRef(false);
@@ -71,6 +73,13 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     return promise;
   }, [owner]);
   useEffect(() => { setData(null); void refresh(); }, [refresh]);
+  useEffect(() => {
+    if (!data || data.state.userId !== owner || restoredOwner.current === owner) return;
+    restoredOwner.current = owner;
+    // Acknowledge committed React state once per mounted owner, never each polling refresh.
+    // Failure leaves gameplay intact and the observation absent; no automatic retry loop.
+    void observeRedesignRestore(data.state.version).catch(() => {});
+  }, [data, owner]);
   useEffect(() => {
     const update = () => { if (document.visibilityState === 'visible' && !lock.current) void refresh(); };
     document.addEventListener('visibilitychange', update);

@@ -25,7 +25,7 @@ export default async function TokushoPage({ searchParams }: TokushoPageProps) {
       <h2>連絡先</h2>
       <p><SupportContact returnToGame={from === "settings"} /></p>
       <h2>販売URL</h2>
-      <p>{GAME04_LEGAL.serviceUrl ? <a href={GAME04_LEGAL.serviceUrl}>{GAME04_LEGAL.serviceUrl}</a> : pendingLegalValue(null)}</p>
+      <p>{GAME04_LEGAL.serviceUrl ? <a href={GAME04_LEGAL.serviceUrl}>{GAME04_LEGAL.serviceUrl}</a> : GAME04_LEGAL.serviceDomain || pendingLegalValue(null)}</p>
 
       <h2>販売価格</h2>
       <p>各商品の販売価格は、それぞれの商品ページおよび購入手続き画面に税込価格で表示します。</p>

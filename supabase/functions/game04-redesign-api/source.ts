@@ -8,7 +8,7 @@ import { applyHomeSelection } from '../../../src/domain/redesign/home.ts';
 import { applyShopExchange, applyShopEnergyDrink } from '../../../src/domain/redesign/shop.ts';
 import { evaluateMissions, getClaimableMission, type MissionConfig } from '../../../src/domain/redesign/missions.ts';
 import { FORMAL_MISSION_CONFIG } from '../../../src/domain/redesign/formalMissions.ts';
-import { gameplayMeasurementReceipt } from '../../../src/domain/redesign/gameplayMeasurement.ts';
+import { gameplayMeasurementReceipt, raidClaimMeasurementReceipt } from '../../../src/domain/redesign/gameplayMeasurement.ts';
 import { captureMissionAssets, recordMissionEvent } from '../../../src/domain/redesign/missionProgress.ts';
 import { raidBattleMissionEvent, raidRescueMissionEvent, reconcileRaidMissionProgress } from '../../../src/domain/redesign/missionRaidProgress.ts';
 import { simulateBattle } from '../../../src/domain/redesign/battle.ts';
@@ -287,6 +287,12 @@ Deno.serve(async (request: Request) => {
       const day = normalGachaDay(Date.now());
       return new Response(JSON.stringify(await responseFor(user.id, { normalGacha: { pool, day, available: state2.dailyNormalGachaDate !== day } })), { headers });
     }
+    if (action === 'observe_state_restore') {
+      const observedVersion = payload.observedVersion;
+      if (!Number.isSafeInteger(observedVersion) || observedVersion < 0) throw new ApiError('観測バージョンが不正です。');
+      const observation = await rpc('game04_observe_state_restore', { p_user_id: user.id, p_request_id: requestId, p_observed_version: observedVersion });
+      return new Response(JSON.stringify({ observation }), { headers });
+    }
     if (action === 'get_state' || action === 'raid_refresh') return new Response(JSON.stringify(await responseFor(user.id)), { headers });
     if (action === 'quest_battle' || action === 'raid_battle') return new Response(JSON.stringify(await runBattle(user.id, action, payload, requestId, profile.username)), { headers });
     if (action === 'territory_host' || action === 'raid_unlock') {
@@ -315,6 +321,7 @@ Deno.serve(async (request: Request) => {
       }
       return new Response(JSON.stringify(response), { headers });
     }
+    let measurementReceipt: Record<string, unknown> | undefined;
     const state = await stateFor(user.id); let after: RedesignState, room: RaidRoom | null = null, version: number | null = null;
     if (action === "normal_gacha") {
       const pool = await db("gacha_items_master?gacha_id=in.(CHAR_NORMAL,SKILL_NORMAL,EQUIP_NORMAL)&select=gacha_id,item_id,item_type,rarity&limit=1000");
@@ -343,6 +350,7 @@ Deno.serve(async (request: Request) => {
       const current = await roomFor(String(payload.roomId)); version = current.version;
       if (action === 'raid_join' && getRoomRaidMaster(current).type === 'unlock' && !current.participants.some(p => p.userId === user.id && !p.leftAt) && !isTerritoryUnlocked(state)) throw new ApiError('領土侵攻は通常クエスト3-5クリアで解放されます。');
       const changed = applyRaidAction(current, state, action, { name: profile.username }, Date.now(), action === 'raid_claim' ? await rewardPolicy() : undefined); room = changed.room; after = changed.state;
+      if (action === 'raid_claim') measurementReceipt = raidClaimMeasurementReceipt(state, after, current, room);
       if (action === 'raid_rescue') {
         const rescueEvent = raidRescueMissionEvent(room, user.id, requestId, Date.now());
         if (rescueEvent) after = recordMissionEvent(after, rescueEvent);
@@ -354,7 +362,7 @@ Deno.serve(async (request: Request) => {
       if (action === 'character_unlock') growthCounters.push('soul_unlock');
       if (growthCounters.length) after = recordMissionEvent(after, { id: `growth:${requestId}`, at: Date.now(), counters: growthCounters });
     }
-    await commit(state, after, requestId, null, room, version, gameplayMeasurementReceipt(action, state, after));
+    await commit(state, after, requestId, null, room, version, measurementReceipt ?? gameplayMeasurementReceipt(action, state, after));
     return new Response(JSON.stringify(await responseFor(user.id)), { headers });
   } catch (error) {
     const conflict = error instanceof ApiError && error.status === 409;
