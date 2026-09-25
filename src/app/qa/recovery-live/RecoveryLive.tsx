@@ -47,7 +47,7 @@ export default function RecoveryLive({ result }: { result: BattleResult }) {
     <p>read障害は実本体＋SDKに対するQA応答注入。認証・保存・戦闘POSTは通常通信。画像戦闘は保存・報酬なしのfixtureで、実戦DB受入とは別です。</p>
     <fieldset><legend>読み取り障害</legend>
       <label>対象<select value={target} onChange={event => change(event.target.value as Target, mode)}><option value="news">お知らせ</option><option value="activity">活動</option><option value="profiles">補助プロフィール</option></select></label>
-      <label>障害<select value={mode} onChange={event => change(target, event.target.value as Mode)}><option value="pass">通常</option><option value="error">503</option><option value="timeout">無応答（本体12秒中断）</option></select></label>
+      <label>障害<select value={mode} onChange={event => change(target, event.target.value as Mode)}><option value="pass">通常</option><option value="error">503</option><option value="timeout">{target === 'profiles' ? '補助取得を無応答化（本体表示は継続）' : '無応答（本体12秒中断）'}</option></select></label>
       <button disabled={!ready || app} onClick={() => setApp(true)}>実本体を表示</button>
     </fieldset>
     <fieldset><legend>画像HTTP障害（非VIP fixture）</legend>

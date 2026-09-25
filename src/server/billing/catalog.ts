@@ -19,7 +19,7 @@ type CatalogRow = { id: string; amount_jpy: number; purchase_limit: number; vali
 export function catalogMatches(rows: CatalogRow[]) {
   const vip = rows.find(row => row.id === VIP_PRODUCT.id);
   // VIP contains no ordinary assets: U09 alone creates entitlement and 30 deliveries.
-  const vipValid = !vip || (vip.amount_jpy === VIP_PRODUCT.priceJpy && vip.purchase_limit === 0 &&
+  const vipValid = !!vip && (vip.amount_jpy === VIP_PRODUCT.priceJpy && vip.purchase_limit === 0 &&
     vip.validity_days === 120 && Array.isArray(vip.items) && vip.items.length === 0);
   return vipValid && PAID_PACKS.every(expected => {
     const actual = rows.find(row => row.id === expected.id);
