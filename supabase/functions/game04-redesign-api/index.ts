@@ -65405,20 +65405,13 @@ async function roomFor(id) {
   return { ...row.state, version: row.version };
 }
 async function roomsFor(userId) {
-  const rows = await rpc("game04_raid_rooms_for_user", { p_user_id: userId });
-  const ownerIds = [...new Set(rows.map((row) => row.state.ownerId))];
-  const [profiles, players] = ownerIds.length ? await Promise.all([
-    db(`users?id=in.(${ownerIds.join(",")})&select=id,username`),
-    db(`game04_player_state?user_id=in.(${ownerIds.join(",")})&select=user_id,state`)
-  ]) : [[], []];
+  const rows = await rpc("game04_raid_rooms_with_owners", { p_user_id: userId });
   return rows.map((row) => {
-    const profile = profiles.find((entry) => entry.id === row.state.ownerId);
-    const player = players.find((entry) => entry.user_id === row.state.ownerId);
-    const leader = CHARACTER_MASTERS.find((entry) => entry.id === player?.state?.deck?.[0]?.characterId);
+    const leader = CHARACTER_MASTERS.find((entry) => entry.id === row.ownerLeaderCharacterId);
     return {
       ...row.state,
       version: row.version,
-      participants: row.state.participants.map((participant) => participant.userId === row.state.ownerId ? { ...participant, name: profile?.username ?? participant.name, portraitUrl: leader ? characterArt(leader, "portrait") : void 0 } : participant),
+      participants: row.state.participants.map((participant) => participant.userId === row.state.ownerId ? { ...participant, name: row.ownerName ?? participant.name, portraitUrl: leader ? characterArt(leader, "portrait") : void 0 } : participant),
       status: row.state.status === "active" && Date.parse(row.state.expiresAt) <= Date.now() ? "expired" : row.state.status
     };
   });

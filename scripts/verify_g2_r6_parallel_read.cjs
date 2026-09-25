@@ -4,7 +4,11 @@ let source=fs.readFileSync(process.env.G2_API_SOURCE || 'supabase/functions/game
 if(process.env.G2_API_BUNDLE==='1'){
  // Isolate the deployed API layer; domain functions are the same test doubles as source mode.
  source=source.slice(source.indexOf('var oe = {'));
+ if(process.env.G2_API_BUNDLE_VERSION==='30'){
+ source='var La=buildInitialState,g0=importLegacyAssets,$e=captureMissionAssets,nu=synchronizeHomeBackgroundUnlocks,hu=applyAcquisitionEvents,Lu=reconcileRaidMissionProgress,Ja=applyGrowthAction,bt=gameplayMeasurementReceipt,O0=evaluateMissions,ii=projectTerritory,yt=FORMAL_MISSION_CONFIG,Ne=FORMAL_GACHA_VERSION,au=GACHA_CATEGORIES,Ue=SPECIAL_GACHA_RULES,Be=NORMAL_GACHA_RULE,Te=specialGachaPool,Ye=normalGachaPool,iu=formalGachaDisplayRates,We=normalGachaDay,Na={character:"SPECIAL_TICKET_CHARACTER",skill:"SPECIAL_TICKET_SKILL",equipment:"SPECIAL_TICKET_EQUIPMENT"};\n'+source;
+ }else{
  source='var va=buildInitialState,m0=importLegacyAssets,je=captureMissionAssets,ru=synchronizeHomeBackgroundUnlocks,fu=applyAcquisitionEvents,Ru=reconcileRaidMissionProgress,Ua=applyGrowthAction,ht=gameplayMeasurementReceipt,N0=evaluateMissions,Jt=projectTerritory,Ct=FORMAL_MISSION_CONFIG,Ne=FORMAL_GACHA_VERSION,uu=GACHA_CATEGORIES,He=SPECIAL_GACHA_RULES,Be=NORMAL_GACHA_RULE,Te=specialGachaPool,We=normalGachaPool,tu=formalGachaDisplayRates,eu=normalGachaDay;\n'+source;
+ }
 }
 const js=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.None}}).outputText;
 async function run(options={}){
@@ -24,7 +28,8 @@ async function run(options={}){
    else if(isAcq){acquisitions++;if(options.acqFail&&(options.replay?acquisitions===1:true))return Response.json({message:'acquisition unavailable'},{status:503});result={legacy:{},events:[],master:{}};}
    else if(p.endsWith('/game04_get_session_state'))result=state;
    else if(p.endsWith('/game04_commit_growth_state')){commits++;if(options.conflict)return Response.json({code:'40001',message:'conflict'},{status:400});result={state:{...JSON.parse(init.body).p_state,version:6}};}
-   else if(p.endsWith('/game04_raid_rooms_for_user')||p.includes('/game04_social_events?')||p.includes('/game04_battles?'))result=[];
+   else if(p.includes('/user_items?'))result=[];
+   else if(p.endsWith('/game04_raid_rooms_for_user')||p.endsWith('/game04_raid_rooms_with_owners')||p.includes('/game04_social_events?')||p.includes('/game04_battles?'))result=[];
    else if(p.endsWith('/game04_territory_context'))result={master:{},progress:{},items:{},activeHostingCount:0};
    else throw Error('unexpected '+p);
    return Response.json(result);

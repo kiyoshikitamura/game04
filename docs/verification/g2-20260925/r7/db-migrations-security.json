@@ -1,0 +1,81 @@
+{
+  "project": "lrgyllgzcdcphlbmkknc",
+  "checkedAt": "2026-09-25T06:32:39Z",
+  "scope": "R7 applied migrations and changed objects only; no project-wide audit or changes",
+  "migrations": [
+    {
+      "version": "20260925060654",
+      "name": "game04_g2_p02_billing_wrappers"
+    },
+    {
+      "version": "20260925060708",
+      "name": "game04_g2_p03_auth_binding"
+    },
+    {
+      "version": "20260925060852",
+      "name": "game04_g2_p02_formal_catalog"
+    },
+    {
+      "version": "20260925061459",
+      "name": "game04_g2_paid_formal_rollback_probe"
+    },
+    {
+      "version": "20260925061512",
+      "name": "game04_g2_p02_paid_formal_inventory"
+    },
+    {
+      "version": "20260925061641",
+      "name": "game04_g2_derived_lot_rollback_probe"
+    },
+    {
+      "version": "20260925061652",
+      "name": "game04_g2_p02_exchange_derived_lots"
+    },
+    {
+      "version": "20260925062515",
+      "name": "game04_g2_raid_rooms_owner_projection"
+    }
+  ],
+  "securityAdvisors": [
+    {
+      "name": "rls_enabled_no_policy",
+      "level": "INFO",
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy",
+      "detail": "Table \\`public.game04_billing_events\\` has RLS enabled, but no policies exist",
+      "metadata": {
+        "name": "game04_billing_events",
+        "type": "table",
+        "schema": "public"
+      },
+      "observed_at": "2026-09-25T06:32:39.275Z"
+    },
+    {
+      "name": "authenticated_security_definer_function_executable",
+      "level": "WARN",
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable",
+      "detail": "Function `public.claim_present(p_present_id uuid)` can be executed by the `authenticated` role as a `SECURITY DEFINER` function via `/rest/v1/rpc/claim_present`. Revoke `EXECUTE` or switch it to `SECURITY INVOKER` if that is not intentional.",
+      "metadata": {
+        "name": "claim_present",
+        "schema": "public",
+        "language": "plpgsql",
+        "arguments": "p_present_id uuid",
+        "security_definer": true
+      },
+      "observed_at": "2026-09-25T06:32:39.275Z"
+    },
+    {
+      "name": "authenticated_security_definer_function_executable",
+      "level": "WARN",
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable",
+      "detail": "Function `public.game04_auth_binding(p_finalize boolean)` can be executed by the `authenticated` role as a `SECURITY DEFINER` function via `/rest/v1/rpc/game04_auth_binding`. Revoke `EXECUTE` or switch it to `SECURITY INVOKER` if that is not intentional.",
+      "metadata": {
+        "name": "game04_auth_binding",
+        "schema": "public",
+        "language": "plpgsql",
+        "arguments": "p_finalize boolean",
+        "security_definer": true
+      },
+      "observed_at": "2026-09-25T06:32:39.275Z"
+    }
+  ]
+}

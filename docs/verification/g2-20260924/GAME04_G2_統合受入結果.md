@@ -5,7 +5,7 @@
 1. **限定機能検証の多くは完了**：R01のおまかせ保存・所持保持、R02の正式SKD071能力低下/dot解除、R03の共闘参加/資格/受取・共闘/侵攻の開始snapshot・再送、R04の魂交換/拒否非消費/応答破棄後再送、R13の複数Lv回復/超過保持を認証API・DBで確認。R05通信失敗とR06画像失敗の実表示・操作による復帰は証拠範囲を分け、下表の残りだけ継続する。
 2. **日次任務と侵攻超過ダメージ**はD01〜D03の判断を今回解消し、R5で実装反映。JST0失効・結果確定日計上、侵攻令はDM005「出陣3勝」1枚、新規侵攻は実HP減少分を採用。R07で日次達成・受取／再送／前日拒否と新旧侵攻の認証API・DB照合を完了。日付境界・特殊ダメージ境界は注入時刻／局所試験の証拠と分けて記録。**名称・画像の採用判断D05/D06も解消**し、72スキル・素材10点・添付エリア10／侵攻15背景をR12で反映。SSR10背景と6細則は承認済み。af640e2実装とR6認証API/DB受入を継承。ブラウザ再ログインは未測定。
 3. **R08/R09の限定残り**：操作可能CTA/API/画像の分離観測を追加し同一条件の反復測定を実施。保存結果と出陣前詳細も各3回観測。cold・実戦闘生成/画像preload・性能改善の立証は別。D04は最新の1秒基準等を承認済み。grant数量/復帰ACK/流入subject計測を接続し実SQLで照合。管理者HTTPは実503（認証設定なし）であり、設定後の認証成功・権限・画面受入を残す。
-4. **P02〜P04の統合・外部受入**（H01〜H03）。`sengoku-hime-ennbu.com`は取得済み、DNS未設定。購入判断待ちは解消し、法務のドメイン文字へ反映。HTTPS・メール・外部認証・決済完了とは扱わない。
+4. **P02〜P04の統合・外部受入**（H01〜H03）。`sengoku-hime-ennbu.com`は取得済み。DNSは前回未設定、今回の名前解決は環境エラーで現況未確認。購入判断待ちは解消し、法務のドメイン文字へ反映。HTTPS・メール・外部認証・決済完了とは扱わない。
 
 旧資産の一括変換は実行待ちの既定作業ではない。現状保持・互換検査を継承し、旧供給を置換する際の契約はH04へ分離する。旧「同一候補の全対象・全状態をもう一度点検」は撤回された表示方針に従い終了し、未確認表示を合格へ変更しない。
 
@@ -15,13 +15,14 @@
 
 この本文が現在の残件台帳。重複した途中追補は [a46時点の履歴](GAME04_G2_統合受入結果_a46履歴.md) に原文保存した。古い成果を取り消したものではない。後続のない「未確認」は不具合の確定とも合格とも扱わない。
 
-## R7継続確認（実行中）
+## R7継続確認（最新）
 
 - PR30 head `af640e291d3e79e511833dcef1e16f0ff7528b94` を再取得。実不変Preview `https://game04-89wfoohev-kiyoshi-kitamura.vercel.app` のGitHub成功statusとR6配信記録を照合。R5 Previewを最新証拠へ流用しない。
 - 旧停止領域のR6原本を回収。認証後read並列化は未保存・未配信だったため復旧し独立handler試験。
-- 稼働API v28はG3を含む。G2単独bundleによる上書きを禁止し、v28実コードを保存して最小差分統合。
-- PR31 latest `3ca2e73ccca1a816bef6d8aa3a3dbecca3494a79` の差分を3way統合。外部受入は未完。
-- R09は最新Previewでも503（管理者認証設定不足）。R11の新個別実機指摘は本起票に無し。
+- G3入りlive v28→v29（認証後read並列化）、G3更新v30を再取得→v31（rooms owner投影1往復化）。各live原本を保存しG3を保持。最終確認v31/hash `70c20710ef9a7a36b103630cd67548da2fa62f314efa2d0797a482db11fb9c6f`。
+- PR31 latest `3ca2e73ccca1a816bef6d8aa3a3dbecca3494a79` の39ファイルを3way統合、法務・auth・VIP入口・正式購入在庫/有償派生lotのDB差分を開発へ反映。外部受入は未完。
+- R09は新Previewでも503（管理者認証設定不足）。R11の新個別実機指摘は本起票に無し。
+- 最新結果・配信対応・性能判定・外部依存は [R7 RESULT](../g2-20260925/r7/RESULT.md) を参照。R5証拠を後続配信の証拠へ読み替えない。
 
 ## 版対応
 
@@ -38,7 +39,7 @@
 |R4 Deployment|`dpl_HzrGrsYdssKDfLcq4VNN21TbghjY`|
 |API（親のR4最終確認）|`game04-redesign-api` ACTIVE v24 / verify_jwt=true / hash `d3a4952f50fb3bac2ad037c7096cb3dd178db43aa47d570e3b5e5944a37d2eba`|
 |DB（R4限定適用）|game04-dev-clean / `lrgyllgzcdcphlbmkknc`。`20260925003813 game04_g2_kpi_observations`、`20260925003959 game04_g2_kpi_detail_qualified_columns`。過去migration再適用なし。専用QA fixture/通常操作だけを使用|
-|P02〜P04候補（R4親がhead再確認）|[Draft PR #31](https://github.com/kiyoshikitamura/game04/pull/31) head `83673c24deebb24dd3446b64a8895f42010e8b6b`。移植実装済み・G2へ未統合、外部受入未完|
+|P02〜P04統合（R7）|[Draft PR #31](https://github.com/kiyoshikitamura/game04/pull/31) head `3ca2e73ccca1a816bef6d8aa3a3dbecca3494a79` をG2へ統合。開発DB適用・rollback受入、外部受入未完|
 
 DB適用履歴は[a46履歴](GAME04_G2_統合受入結果_a46履歴.md)、[RESUME_INTEGRATION](RESUME_INTEGRATION.md)、[KPI接続記録](U10_KPI_GAMEPLAY_INTEGRATION.md)を継承。v19/v21へ戻さず、既存migrationの一括再適用をしない。R4は専用QAで実API/DB照合を追加した。R02発動証拠はv23、R03受取・R01/R04/R13再検証はv24であり、後続版との対応を各記録に記載する。
 
@@ -72,12 +73,12 @@ DB適用履歴は[a46履歴](GAME04_G2_統合受入結果_a46履歴.md)、[RESUM
 |R02 U01/U04|限定効果発動の実接続完了。72ID/792値の既存検査を継承|正式SKD071 LB1/SP139、kai-4の能力低下/echigo-6のdotありで実発動→対象状態減少→保存battle/同request再取得一致。[R02/R03](../g2-20260925/r4/r02-r03.md)。全792入力の再演・全演出の実機合格へ拡張しない|
 |R03 U04/U06|変更経路の実接続完了|別QA参加→4戦/3勝以上資格→撃破grant1件/6報酬→v24受取・再送→DB/数量集計一致。共闘開始HP39000/侵攻63000がinput/result一致、初戦再送で開始値不変。終了room新戦闘400は非消費。[R02/R03](../g2-20260925/r4/r02-r03.md)。共闘room作成は専用QA fixture、自然遭遇/実機再生とは別。このR4試験時点は旧式・旧fallbackを保持。R5新規開催式の変更受入はR07へ|
 |R04 U02/U08・Q01|限定認証HTTP・DB検証完了|魂10→5、12→6、8/11/不足400で非消費。送信前中断非消費、成功応答破棄後は既存ID再送で一度だけ消費。固有魂2/汎用N16/v19がDB一致。[R01/R04/R13](../g2-20260925/r4/r01-r04-r13.md)。送信中UIは既存局所結果を維持し実機個別確認へ|
-|R05 U05/U10・Q01|実HTTP障害付き局所検証完了。実Preview復帰表示は未確認|本体read effect＋supabase-js＋loopback HTTPで503/切断/12秒timeout→一覧保持/中断→再試行6件成功、profile待ち分離。[R05/R06](../g2-20260925/r4/r05-r06.md)。残りは対象readだけの実Preview障害時エラー/保持表示→再試行操作。局所試験をReact DOM合格にしない|
-|R06 U04/U10・Q01|started保存からの実API pending復帰は完了。画像障害実UIは未確認|専用QA開始checkpoint fixture→get_state pending→同ID再開/再送→DB settled1/pending0、開始/確定receipt各1。v25→26/energy99維持、敗北報酬0を確認。[R05/R06](../g2-20260925/r4/r05-r06.md)。残りは実画像error/timeout→retry/終了→保存済み結果/共闘復帰。自然通信切断・画像障害操作と勝利報酬非重複をこのfixture試験で合格にしない|
+|R05 U05/U10・Q01|局所試験と新Preview失敗→再試行を確認|61e5af88不変Preview/実本体readのnews・activity 503/12秒timeout→エラー表示→再試行成功、補助profile待ちで本文維持。[R7](../g2-20260925/r7/r05-r06.md)。非空一覧保持はR4局所証拠を維持、実DOMは一覧0件につき未確認。|
+|R06 U04/U10・Q01|保存済みAPI再開・再送完了を維持。画像失敗UIも限定確認|R4 pending→同ID再開/再送→settled1/pending0・receipt各1、共闘報酬非重複の証拠を維持。61e5af88実BattleView fixtureでHTTP503/timeout→retry成功・永続失敗→終了を確認。[R7独立境界](../g2-20260925/r7/r10-recovery-timing-review.md)。実戦画像故障→保存済み結果/共闘復帰＋receipt不変の組合せのみ残る。|
 |R07 U06/U07・Q06|D01〜D03判断クローズ。R5限定API/DB検証済み|DM005当日出陣2→3勝、令2→3・銭+2000、同request再送state不変／新ID再受取400／前日ID400。DB成功receipt1件・拒否ID保存なし。新TI01開催令消費・policy保存、表示38756／敵実HP25830／倍率後38745、共有HP78000→39255・貢献38745、再送/再読込/DB一致。旧開催はpolicyなし・表示1445を旧式算入し互換保持。[独立実接続](../g2-20260925/r5/independent.md)、[実API](../g2-20260925/r5/live-api-independent.json)。実JST0待機は未実施、日付境界は注入時刻局所試験。端数cap/3勝/段階跨ぎは局所試験証拠と区別。DM007正式召喚はH05|
-|R08 U05・Q01/C06|分離観測追加・同条件反復実測済み。cold/性能改善判定は未完|QA専用CTA操作可能観測を既存API/画像と同一timeOriginへ接続。click前ready誤観測は独立指摘で是正。同一cloud Chrome/390×568/warmの5往復10観測。API中央値は武将1504.8ms/本陣1231.3ms、画像4.7/3.5ms。CTA中央値2028.7msは描画頻度を含む上限観測で精密TTIではない。[測定記録](../g2-20260925/r4/r08-measurement-results.md)。追加で保存結果CTA3回2310.5〜3394.6ms（API2279.2〜3364.2ms）、出陣前詳細CTA3回40.3〜48.3ms/画像0.1〜0.5ms。後者は実戦闘生成/preload完了ではない。cold保証・実戦闘開始経路・変更前後比較を残す。D04閾値判断待ちは解消|
-|R09 U10/C05/C09|計測接続・実DB照合済み。管理者HTTP・旧分類の根拠確認が残る|grant単位receipt/復帰ACK/流入subjectと集計画面を接続。raid1grant/6報酬数量がRPC一致しQAexcluded、本体初回復帰ACK1件もexcluded。過去空receiptを推測補完せずunmappedを通常実績にしない。read-only追加照合で現在battle204行=included183/30user、excluded21/5user、unmapped0。旧180はbattle行数で同一集合と断定しない。included30userは保存済QA ID一致0、元の分類根拠を得るまで通常実績/QAと認定しない。[分類記録](../g2-20260925/r4/r09-classification-scope.md)。一般RPCの実REST権限はanon401/認証QA403（permission denied 42501）で拒否を確認。実管理者HTTPは503「KPI authentication is not configured」。`KPI_BASIC_AUTH_USER` / `KPI_BASIC_AUTH_PASSWORD` の設定と許可された資格情報が利用可能になった後に成功HTTP・401/権限・画面と数量の一致を受入。[R09](../g2-20260925/r4/r09.md)。購入/外部連携はH01/H02|
-|R10 U11|変更経路の独立確認・専用Preview反映を実施|R4コード0e7f37c9/APIv24/適用DB差分に限定経路証拠を対応づけ。[独立確認](../g2-20260925/r4/r10-independent.md)でack/parser・競合・CTA観測・任務履歴修正を確認。R05/R06/R08/R09の未検証を合格にせず残す。全画面再監査・P統合受入への拡張なし R5は9e9a0a67/APIv25/DB schema差分0と[独立確認](../g2-20260925/r5/independent.md)・実API/DB・画像HTTP・限定表示を対応。|
+|R08 U05・Q01/C06|保存改善・同条件各20回。性能合格には未達|R6 warm本陣/武将CTA各20回1秒以内を継承（主要情報全体TTIではない）。v28→v29保存中央値1716.4→1562.2ms、v30→v31は1408.85→1297.7ms。v31は1秒0/20・1.5秒18/20で例外不成立。API/画像/CTAを分離し[保存性能](../g2-20260925/r7/save-performance.md)に記録。cold独立5回、実機Safari、受取/交換各20回は未測定。実戦闘20回は[R7結果](../g2-20260925/r7/RESULT.md)参照。|
+|R09 U10/C05/C09|DB数量・RPC権限確認を維持。認証設定後HTTPが残る|[R7 read-only確認](../g2-20260925/r7/ssr-admin-review.md)：当該時点battle210行=included186/31user・excluded24/5user、6報酬行/1grantの数量整合。旧180は行数でQA根拠は未確認、推測再分類なし。最新Previewでも管理者HTTP503。KPI_BASIC_AUTH_USER/PASSWORD設定後200/401・同期間UI数量照合を残す。|
+|R10 U11|今回変更の独立確認・専用Preview・版対応保存|R4/R5/R6の完了範囲を維持。R7ではread並列化、rooms同値/権限、購入在庫/派生lot、R05/R06/計測差分を独立確認。[R7 RESULT](../g2-20260925/r7/RESULT.md)。mock・rollback・実DB/API・実UIの証拠範囲を分離し、外部受入/実機合格へ拡張しない。|
 |R11 U05・Q02/Q04|表示はユーザー個別確認方式。現在の依頼には新しい個別不具合の指定なし|指摘ごとに対象/原因/修正SHA/Preview/同原因回帰/実機確認結果を追記する。全画面再監査や未指摘画面再設計を起票しない|
 |R12 U01/U02/U05・Q05|採用確定・本体反映と画像配信／限定表示を確認|72名称・既存40＋新32画像、素材10、エリア10／侵攻15背景を接続。107 unique画像HTTP200/SHA一致、正式72＋旧8の本体一覧画像全loaded、390×568で「火走り」詳細を確認。[配信照合](../g2-20260925/r5/asset-http-evidence.json)、[限定表示](../g2-20260925/r5/browser-limited.md)。独立試験で792性能不変・35背景対応/配信形式・5城60Lv区分・旧snapshot fallbackを確認。実機合格／全使用箇所の表示合格には拡張しない。SSR10素材は採用／正規化済み、6細則承認済み、R6で解放・選択・保存のAPI/DB受入済み|
 |R13 U03|限定実接続完了|正式8-1報酬でPlayer Lv1/EXP99→Lv3/243。行動力149は保持/回復0、20→100は回復80のみ。API/DB/再読込/同ID再送で追加回復なし。[R01/R04/R13](../g2-20260925/r4/r01-r04-r13.md)。QA解放・強化編成をG4自然進行合格にはしない|
@@ -109,9 +110,9 @@ R03/R04の再送・失敗非消費はR4で確認済み。C05の残りはR06画�
 
 |ID|引継ぎ先|実施条件と受入内容|
 |---|---|---|
-|H01 U08/U09/C04|P02担当 → G2親の統合受入|取得済みドメインのDNS/TLS・関連実装完了、PR31候補統合/必要SQL・API差分の開発反映後。テスト決済→本人紐付け→署名/再送/失敗→原子的付与、有償lot/期限、VIP480円/30日・100×30・再購入制限を確認。既存DB境界は保持、fixture注文を実決済合格にしない|
+|H01 U08/U09/C04|P02 → G2外部受入|PR31コード/必要SQLの開発反映・正式在庫/有償派生lot rollback検証済。PreviewのStripe test key/webhook secret/service_role/開発DB/return origin/sandbox enable不足を設定後、実test決済→署名/再送/失敗→原子的付与・120日期限・VIP30日配布/再購入制限を受入。fixture注文を実決済合格にしない。|
 |H02 U10/C02|P03担当 → G2親の統合受入|同条件でメール/Google設定・redirect等が整った後。匿名既存UIDへの連携、再ログイン/別端末の同一保存復帰・失敗を確認。PR31の入口実装や681法務復帰は代替証拠でない|
-|H03 U10/C07/C10/C12|P04担当 → G2親の統合受入|ドメイン文字は確定・本体反映済み。連絡先・法務運用値の確定と関連実装完了後。PR31の法務ページ値・問い合わせ先・認証/決済導線を同候補で受入。P06の管理画面待ちと混同しない|
+|H03 U10/C07/C10/C12|P04 → G2外部運用接続|承認済み運営・権利・120日期限・GAME03準拠条件・指定メールをPR31最新から反映、法務HTTP200。再判断を求めない。取得済みドメインのDNS/TLS・メール運用の実設定確認を残す。P06本番変更は別担当。|
 |H04 U01/U02/Q03|G3旧供給置換契約、必要時G4資産互換へ明示引継ぎ|旧50と正式72は独立ID、旧所持/LB/編成/snapshot保持を推奨。2026-09-24のstate40件/旧所持320行とlegacy27行は重複し得るため合算不可。新供給置換・移行が必要になった時点で最新件数/由来/対応表/影響を揃え承認。無断一括換算をG2残実装にしない。G2不明master保存互換はR01|
 |H05 U07/C11|G3正式ガチャ → G2日次DM007接続受入|G3正式抽選イベントが利用可能になった後、日次1回計上/再送非重複・券/在庫との整合を確認。旧ガチャで代替合格しない。他の日次はR07|
 |H06 C11|G4チュートリアル/正式初期付与|正式初期配布と自然進行条件が成立後。QA付与SKD・高Lv・開放fixtureを自然進行実績にしない。既存G2の保存検証は保持|
