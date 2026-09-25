@@ -109,3 +109,16 @@ P02/P03引継ぎは P01_P02_P03_DOMAIN_CONTRACT.md。PR31 head 3ca2e73ccca1a816b
 DNS回復後はVercel Refresh→Valid Configuration→TLS/SAN/有効期間→apex/www/既定URLの匿名GET・POST遮断→認証済み限定確認の順。wwwの転送設定は保存済みだが保護との応答順も実測する。Stripeサーバー通知は保護と干渉するため、サイト全体を解除せず経路限定方式をPR31担当と確定する。現在通知endpointは未有効化。
 
 追加費用判断なし。G2/G3開発DB/API・既存GAME04・GAME03は変更していない。P06移行準備未完、G5後M、G6公開判断を維持。
+
+## DNS保存後の実接続確認（2026-09-25 16時頃 JST）
+
+ユーザーが15:58 JSTにお名前.com DNS保存完了を報告。以下により前節のDNSエラー・TLS未発行・正式domain匿名確認待ちを解消。
+
+- Google DNSはapex A、www CNAMEともStatus 0。A=216.150.1.1、CNAME=346e02207322e8c5.vercel-dns-016.com.、TTL各3600。
+- Vercelで両domain Valid Configuration。apexは専用receiver Production、wwwはapexへの308転送設定。
+- TLS管理証明書: apex cert_hf4rOUpJpwSCJzK21pLhXqYW、www cert_taMl9AQnq12VG1y3y4ckQEH9。両方Auto更新、有効期限表示2026-12-24。両HTTPS要求成功。
+- Cookie/Authorizationなし・redirect非追随で、apex/www各4経路（GET /、GET /auth/game04/callback、GET /api/health、POST /api/billing/webhook）の計8要求が全て302→Vercel SSO。匿名公開なし。
+- wwwは匿名時に308より認証保護が先に応答。認証通過後の実308は未確認。healthも匿名遮断試験であり、認証済みhealth200/DB接続成功とはしない。
+- WebhookのPOSTも保護で遮断される。P02/Mは署名検証付き限定通知入口を確定すること。全体保護は解除していない。
+- DNSの追加本人操作は不要。正式URLは https://sengoku-hime-ennbu.com 。接続契約はP01_P02_P03_DOMAIN_CONTRACT.mdでPR31担当へ受渡し。Google/SMTP/決済外部設定、正のhealth確認、実復元等の残件は継続。
+- Git自動配信解除・Cron無効維持。ゲーム移行なし・公開なし・P06全体未合格。G5後M、G6公開判断を維持。
