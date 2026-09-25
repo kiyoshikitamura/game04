@@ -45,5 +45,7 @@ GAME04 dev `lrgyllgzcdcphlbmkknc` の新規 `game04_tutorial_preview_states` だ
 - 対象ファイルESLint: エラーなし（既存方針と同様、素材表示のimg推奨警告のみ）。
 - Vercel Previewビルド成功。ブラウザで導入3画面、固定獲得、獲得画面リロード、自動装備、模擬戦完了、名前反映、初回Homeロック、出陣後解除、2回目ログイン付与、同日再読み込み時の非表示を確認。
 - Supabase新規テーブルのRLS・本人制約を確認。
+- ブラウザで初敗北案内→任務画面→2度目の敗北案内非表示を確認。別ユーザーとしてSELECTした専用snapshotは0件。
+- 360px幅・568px高の確認画面を用意し、短い画面でもスクロールできる構成とした。
 
 GAME03・main・Production・既存の共有Edge Functionは変更していない。
