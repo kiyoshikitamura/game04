@@ -1,4 +1,5 @@
 'use client';
+import { raidBattleBackground } from '@/domain/redesign/approvedBackgrounds';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useGame } from '../../context/GameContext';
 import { observeRedesignRestore } from '@/utils/redesignRestoreObservation';
@@ -176,7 +177,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
       setBattleKind(name === 'raid_battle' ? 'raid' : 'quest');
       if (name === 'raid_battle' && typeof payload.roomId === 'string') setRaidId(payload.roomId);
       const room = value.rooms.find(entry => entry.id === payload.roomId) ?? data?.rooms.find(entry => entry.id === payload.roomId);
-      setBattleBackground(room ? getRoomRaidMaster(room).backgroundUrl : undefined);
+      setBattleBackground(room ? raidBattleBackground(room, getRoomRaidMaster(room), value.battle.raidStartSnapshot) : undefined);
       setBattle(value.battle);
     }
     return value;
@@ -205,7 +206,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     {error && <p className="rd-panel" role="alert">{error}</p>}
     {data.pendingBattle && !battle && <div className="rd-panel"><p>未完了の戦闘があります。</p><button className="rd-button" disabled={busy} onClick={async () => {
       const p = data.pendingBattle!;
-      try { const value = await action(p.kind === 'quest' ? 'quest_battle' : 'raid_battle', p.kind === 'quest' ? { stageId: p.target_id } : { roomId: p.target_id }, p.id); if (value.battle) { setBattleKind(p.kind === 'raid' ? 'raid' : 'quest'); if (p.kind === 'raid') { setRaidId(p.target_id); setTab('raid'); const room = value.rooms.find(entry => entry.id === p.target_id) ?? data.rooms.find(entry => entry.id === p.target_id); setBattleBackground(room ? getRoomRaidMaster(room).backgroundUrl : undefined); } else { const stage = getQuestStage(p.target_id); setBattleBackground(QUEST_AREAS.find(entry => entry.id === stage?.areaId)?.image); } setBattle(value.battle); } } catch { /* message shown above */ }
+      try { const value = await action(p.kind === 'quest' ? 'quest_battle' : 'raid_battle', p.kind === 'quest' ? { stageId: p.target_id } : { roomId: p.target_id }, p.id); if (value.battle) { setBattleKind(p.kind === 'raid' ? 'raid' : 'quest'); if (p.kind === 'raid') { setRaidId(p.target_id); setTab('raid'); const room = value.rooms.find(entry => entry.id === p.target_id) ?? data.rooms.find(entry => entry.id === p.target_id); setBattleBackground(room ? raidBattleBackground(room, getRoomRaidMaster(room), value.battle.raidStartSnapshot) : undefined); } else { const stage = getQuestStage(p.target_id); setBattleBackground(QUEST_AREAS.find(entry => entry.id === stage?.areaId)?.image); } setBattle(value.battle); } } catch { /* message shown above */ }
     }}>戦闘を再開</button></div>}
     </>}>
     {battle ? <BattleView result={battle} vipActive={vipActive} backgroundSrc={battleBackground} raidHp={battleRoom ? { current: battleRoom.hp, max: battleRoom.maxHp, level: battleRoom.level } : undefined} onComplete={() => { setBattle(null); setBattleKind(null); setBattleBackground(undefined); void refresh(); }} /> : <>

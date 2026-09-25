@@ -1,4 +1,5 @@
 'use client';
+import { growthRewardImage } from '@/domain/redesign/growthAssetPresentation';
 import { useEffect, useRef, useState } from 'react';
 import { CHARACTER_MASTERS, EQUIPMENT_MASTERS, SKILL_MASTERS } from '@/domain/redesign/masters';
 import { QUEST_AREAS, QUEST_STAGES, getQuestStage, isQuestStageUnlocked, nextQuestStage, questEnergyCost } from '@/domain/redesign/quests';
@@ -27,6 +28,7 @@ function rewardLabel(reward: Reward) {
   return REWARD_LABELS[reward.kind];
 }
 function rewardIcon(reward: Reward) {
+  const growthImage = growthRewardImage(reward); if (growthImage) return growthImage;
   if (reward.kind === 'cash') return '/ui/sengoku/13-coin.png';
   if (reward.kind === 'character_exp_item' || reward.kind === 'equipment_exp_item') {
     const size = ({ small: 's', medium: 'm', large: 'l' } as Record<string, string>)[reward.id ?? ''];

@@ -108,7 +108,7 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
     const make = (u: BattleUnit, enemy: boolean): Unit => { const e = u as EnemyUnit; return { ...u, stats: { ...u.stats }, skills: [...u.skills], hp: u.stats.hp, sp: enemy ? (revisedInput ? e.initialSp! : u.stats.sp) : 0, count: enemy ? e.initialCount ?? e.actionCount : 0, resetCount: e.actionCount, initialCount: e.initialCount ?? e.actionCount, order: e.order ?? 0, enemy, actions: 0, statuses: [], phase: null, phaseIndex: -1, phases: e.phases, dead: false, deaths: 0, usedDeath: new Set(), immune: false, passive: { atk: 0, def: 0 }, hitSpGain: e.hitSpGain ?? 0, pendingSp: 0, inBlock: false, revivedAt: -1 }; };
     const party = input.party.map(u => make(u, false));
     let wave = 0, enemies = input.waves[0].map(u => make(u, true));
-    let partySp = 0, gauge = 0, playerActions = 0, serial = 0, totalDamage = 0, wavesCleared = 0, burst = false, ended: 'win' | 'lose' | null = null, reason = '';
+    let partySp = 0, gauge = 0, playerActions = 0, serial = 0, totalDamage = 0, actualHpDamage = 0, wavesCleared = 0, burst = false, ended: 'win' | 'lose' | null = null, reason = '';
     const frames: BattleFrame[] = [];
     const analysis: BattleAnalysis[] = party.map(u => ({ id: u.id, name: u.name, damage: 0, healing: 0, spGenerated: 0, actions: 0, skills: 0, bursts: 0 }));
     const side = (u: Unit) => u.enemy ? enemies : party;
@@ -254,6 +254,8 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
         for(const shield of shields) {const used=Math.min(remaining,shield.amount??0); shield.amount=(shield.amount??0)-used; remaining-=used; if(!remaining) break;}
         t.statuses=t.statuses.filter(s=>s.type!=='shield'||(s.amount??0)>0);
         if(remaining<amount) frame('action',`${t.name} シールド吸収 ${amount-remaining}`,u,skill,{event:'shield_absorbed',targetIds:[t.id]});
+        const lostHp=Math.min(t.hp,remaining);
+        if(t.enemy && (!u.enemy || u===t)) actualHpDamage+=lostHp;
         t.hp=Math.max(0,t.hp-remaining); return remaining;
     };
     const damageBonus = (u:Unit,t:Unit,skill:SkillMaster) => {
@@ -543,6 +545,6 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
     if (!enemies.some(alive))
         wavesCleared++;
     frame('end', (ended as BattleOutcome | null) === 'win' ? '勝利' : reason === 'action_limit' ? '300行動上限：敗北' : '敗北', undefined, undefined, { event: 'end', reason });
-    return { seed: input.seed, outcome: ended!, totalDamage, playerActions, wavesCleared, party: input.party, waves: input.waves, frames, analysis, rulesVersion: BALANCE_BATTLE_VERSION, ...(revisedInput ? { inputVersion: WAVE_SP_INPUT_VERSION, masterVersion: config.version } : {}), reason };
+    return { seed: input.seed, outcome: ended!, totalDamage, ...(input.raidDamagePolicy==='actual-hp-v1-20260925'?{actualHpDamage}:{}), playerActions, wavesCleared, party: input.party, waves: input.waves, frames, analysis, rulesVersion: BALANCE_BATTLE_VERSION, ...(revisedInput ? { inputVersion: WAVE_SP_INPUT_VERSION, masterVersion: config.version } : {}), reason };
 }
 

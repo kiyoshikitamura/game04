@@ -38,13 +38,13 @@ function condition(row: typeof rows[number]): MissionMaster['condition'] {
  return {type:'metric',key,target,threshold};
 }
 export const FORMAL_NORMAL_MISSIONS:MissionMaster[]=rows.map(row=>({id:row.id,name:row.name,description:row.group,enabled:true,condition:condition(row),rewards:row.rewards as Reward[]}));
-/** Daily master retained but not enabled until midnight/unclaimed policy is accepted. */
+/** Approved 2026-09-25: JST midnight expiry, settlement day, DM005 invasion order. */
 export const FORMAL_DAILY_MISSIONS:MissionMaster[]=[
- ...[1,3,5].map((target,i)=>({id:`DM00${i+1}`,name:`戦闘に${target}回挑戦`,description:'デイリー',enabled:false,condition:{type:'metric' as const,key:'battle',target,daily:true},rewards:[{kind:'cash' as const,amount:[1000,2000,3000][i]},{kind:'character_exp_item' as const,id:'small',amount:[2,3,5][i]}]})),
- ...[1,3,5].map((target,i)=>({id:`DM00${i+4}`,name:`出陣で${target}回勝利`,description:'デイリー',enabled:false,condition:{type:'metric' as const,key:'quest_clear',target,daily:true},rewards:[{kind:'cash' as const,amount:[1000,2000,3000][i]},{kind:'equipment_exp_item' as const,id:'small',amount:[2,3,5][i]}]})),
- {id:'DM007',name:'ノーマル召喚を1回行う',description:'デイリー',enabled:false,condition:{type:'metric',key:'normal_gacha',target:1,daily:true},rewards:[{kind:'cash',amount:1000}]},
- {id:'DM008',name:'育成を1回行う',description:'デイリー',enabled:false,condition:{type:'metric',key:'growth',target:1,daily:true},rewards:[{kind:'cash',amount:2000}]},
- ...[3,5].map((target,i)=>({id:`DM0${i+9}`,name:`デイリー任務を${target}件達成`,description:'デイリー',enabled:false,condition:{type:'metric' as const,key:'daily_completed',target,daily:true},rewards:[{kind:'cash' as const,amount:[5000,10000][i]},{kind:i===0?'character_exp_item' as const:'equipment_exp_item' as const,id:'medium',amount:1}]})),
+ ...[1,3,5].map((target,i)=>({id:`DM00${i+1}`,name:`戦闘に${target}回挑戦`,description:'デイリー',enabled:true,condition:{type:'metric' as const,key:'battle',target,daily:true},rewards:[{kind:'cash' as const,amount:[1000,2000,3000][i]},{kind:'character_exp_item' as const,id:'small',amount:[2,3,5][i]}]})),
+ ...[1,3,5].map((target,i)=>({id:`DM00${i+4}`,name:`出陣で${target}回勝利`,description:'デイリー',enabled:true,condition:{type:'metric' as const,key:'quest_clear',target,daily:true},rewards:[{kind:'cash' as const,amount:[1000,2000,3000][i]},{kind:'equipment_exp_item' as const,id:'small',amount:[2,3,5][i]},...(target===3?[{kind:'unlock_item' as const,amount:1}]:[])]})),
+ {id:'DM007',name:'ノーマル召喚を1回行う',description:'デイリー',enabled:true,condition:{type:'metric',key:'normal_gacha',target:1,daily:true},rewards:[{kind:'cash',amount:1000}]},
+ {id:'DM008',name:'育成を1回行う',description:'デイリー',enabled:true,condition:{type:'metric',key:'growth',target:1,daily:true},rewards:[{kind:'cash',amount:2000}]},
+ ...[3,5].map((target,i)=>({id:`DM0${i+9}`,name:`デイリー任務を${target}件達成`,description:'デイリー',enabled:true,condition:{type:'metric' as const,key:'daily_completed',target,daily:true},rewards:[{kind:'cash' as const,amount:[5000,10000][i]},{kind:i===0?'character_exp_item' as const:'equipment_exp_item' as const,id:'medium',amount:1}]})),
 ];
 // Latest authority adds invasion-order supply without replacing the accepted 183 rows.
 export const INVASION_SUPPLY_MISSIONS:MissionMaster[]=[5,10,20,30].map(target=>({

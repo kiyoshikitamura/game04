@@ -3,7 +3,7 @@ import definitions from './data/balance-v2.json';
 import { getFormalRaidSkill } from './raidFormalSkills';
 import type { SkillMaster } from './types';
 
-/** Numeric authority only. Names/art remain an explicit creative acceptance dependency.
+/** Numeric authority and presentation approved independently (art/name adoption 2026-09-25).
  * Design IDs are independent of legacy ownership IDs; no positional migration. */
 export const FORMAL_SKILL_IDS = definitions.skills.map(skill => skill.designId);
 export const isFormalSkillId = (id: string) => FORMAL_SKILL_IDS.includes(id);
@@ -16,5 +16,5 @@ export function formalSkillPerformance(id: string, lb: number): string | null {
   return row ? `${row.performance_text}／消費SP ${row.sp}` : null;
 }
 export const FORMAL_SKILL_CREATIVE_STATUS = FORMAL_SKILL_IDS.map(id => ({
-  id, nameStatus: 'approval_pending', imageStatus: 'missing', legacyId: null,
+  id, nameStatus: 'approved', imageStatus: 'approved', legacyId: null,
 }));

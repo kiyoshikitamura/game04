@@ -64,10 +64,10 @@ export function evaluateMissions(state: RedesignState, config: MissionConfig, no
       current, target: stages.length, status: state.claimedMissionIds?.includes(master.id) ? 'claimed' : current === stages.length ? 'claimable' : 'progress' };
   });
 }
-export function getClaimableMission(state: RedesignState, config: MissionConfig, id: string): MissionMaster {
-  const row = evaluateMissions(state, config).find(candidate => candidate.id === id);
+export function getClaimableMission(state: RedesignState, config: MissionConfig, id: string, now=Date.now()): MissionMaster {
+  const row = evaluateMissions(state, config, now).find(candidate => candidate.id === id);
   if (!row || row.status !== 'claimable') throw new Error('この任務の報酬は受け取れません。');
-  const master=config.missions.find(master => master.id === id || (master.condition.type==='metric' && master.condition.daily && `${master.id}:${jstLoginDate(Date.now())}`===id));
+  const master=config.missions.find(master => master.id === id || (master.condition.type==='metric' && master.condition.daily && `${master.id}:${jstLoginDate(now)}`===id));
   if(!master)throw new Error('任務が見つかりません。');
   return {...master,id};
 }

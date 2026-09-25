@@ -79,6 +79,8 @@ export interface BattleResult {
     raidStartSnapshot?: RaidBattleStartSnapshot;
     seed: number;
     outcome: BattleOutcome;
+    /** Separate accounting, only emitted for approved new invasion inputs. */
+    actualHpDamage?: number;
     totalDamage: number;
     playerActions: number;
     wavesCleared: number;

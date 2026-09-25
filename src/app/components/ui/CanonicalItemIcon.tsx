@@ -1,4 +1,5 @@
 import React from "react";
+import { approvedGrowthItemImage } from "@/domain/redesign/growthAssetPresentation";
 import { ITEMS_MASTER_DATA } from "@/utils/items_master_data";
 
 interface CanonicalItemIconProps {
@@ -9,7 +10,7 @@ interface CanonicalItemIconProps {
 }
 
 export function canonicalItemAssetPath(itemId?: string | null) {
-  return ITEMS_MASTER_DATA.find((item) => item.id === itemId)?.assetPath ?? null;
+  return approvedGrowthItemImage(itemId) ?? ITEMS_MASTER_DATA.find((item) => item.id === itemId)?.assetPath ?? null;
 }
 
 export default function CanonicalItemIcon({ itemId, alt = "", className = "", fallback = "◆" }: CanonicalItemIconProps) {

@@ -25,7 +25,7 @@ export function raidEnemy(master:RaidMaster,level:number):EnemyUnit {
  return {...structuredClone(master.enemy),level,image:master.appearanceImages[String(appearanceLevel)]??master.enemy.image,stats,initialSp:stats.sp};
 }
 export function createRaidRoom(masterId:string,ownerId:string,id:string,now:number,territorySnapshot?:TerritorySnapshot):RaidRoom{const m=territorySnapshot?.raidMaster??getRaidMaster(masterId);return {...(m.masterVersion&&!territorySnapshot?{raidSnapshot:structuredClone(m)}:{}),...(territorySnapshot?{territorySnapshot:structuredClone(territorySnapshot)}:{}),id,masterId,ownerId,level:1,hp:m.sharedHp,maxHp:m.sharedHp,createdAt:new Date(now).toISOString(),expiresAt:new Date(now+m.durationMinutes*60000).toISOString(),status:'active',rescueCount:0,rescueWindowStartedAt:new Date(now).toISOString(),participants:[{userId:ownerId,name:'主催者',wins:0,attempts:0,totalDamage:0,joinedLevel:1}],settledBattleIds:[],rewardGrants:[]};}
-export type RaidActionPayload={seed?:number;luck?:number;name?:string;battleId?:string;battleLevel?:number;energyAlreadyPaid?:boolean;result?:{outcome:string;totalDamage:number}};
+export type RaidActionPayload={seed?:number;luck?:number;name?:string;battleId?:string;battleLevel?:number;energyAlreadyPaid?:boolean;result?:{outcome:string;totalDamage:number;actualHpDamage?:number}};
 /** Server-only transition: caller must lock room + account and supply a server-simulated result, never client damage. */
 export function applyRaidAction(original:RaidRoom,originalState:RedesignState,action:string,payload:RaidActionPayload={},now=Date.now(),acquisitionMaster?:AcquisitionMaster){
  // Historical JSON may retain participant.checkpoint; it is intentionally ignored.
@@ -53,9 +53,12 @@ export function applyRaidAction(original:RaidRoom,originalState:RedesignState,ac
   if(room.settledBattleIds.includes(payload.battleId))return {room,state,rewards};
   const appliesToSharedHp=payload.battleLevel===room.level&&room.status==='active'&&!me.leftAt;
   if(!payload.energyAlreadyPaid){if(state.energy<master.energyCost)throw new Error('行動力が足りません。');state.energy-=master.energyCost;}
-  const damage=Math.max(0,Math.floor(payload.result.totalDamage*(payload.result.outcome==='win'?master.victoryMultiplier:1)));
+  const actualPolicy=master.type==='unlock'&&master.damagePolicy==='actual-hp-v1-20260925';
+  const damageBasis=actualPolicy?payload.result.actualHpDamage:payload.result.totalDamage;
+  if(actualPolicy&&(damageBasis===undefined||!Number.isFinite(damageBasis)||damageBasis<0))throw new Error('戦闘の実HP減少量を確認できません。');
+  const damage=Math.max(0,Math.floor((damageBasis??Number.NaN)*(payload.result.outcome==='win'?master.victoryMultiplier:1)));
   if(!Number.isFinite(damage))throw new Error('戦闘結果が不正です。');
-  me.attempts++;me.wins+=payload.result.outcome==='win'?1:0;me.totalDamage+=damage;me.lastResult=payload.result.outcome==='win'?'勝利':'敗北';if(appliesToSharedHp)room.hp=Math.max(0,room.hp-damage);room.settledBattleIds.push(payload.battleId);
+  me.attempts++;me.wins+=payload.result.outcome==='win'?1:0;me.totalDamage+=actualPolicy?(appliesToSharedHp?Math.min(room.hp,damage):0):damage;me.lastResult=payload.result.outcome==='win'?'勝利':'敗北';if(appliesToSharedHp)room.hp=Math.max(0,room.hp-damage);room.settledBattleIds.push(payload.battleId);
   if(master.masterVersion&&payload.result.outcome==='win'){
    let rng=(payload.seed??0)>>>0;const random=()=>{rng=(Math.imul(rng,1664525)+1013904223)>>>0;return rng/4294967296;};
    for(const [i,reward] of (master.victoryRewards??[]).entries())if(reward.chance===undefined||random()<Math.min(1,reward.chance*(1+Math.max(0,Math.min(100,payload.luck??0))/400))){const earned={...reward,chance:undefined};rewards.push(earned);Object.assign(state,grantReward(state,earned,`${payload.battleId}:victory:${i}`,acquisitionMaster));}

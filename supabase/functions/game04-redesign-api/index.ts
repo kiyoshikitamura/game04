@@ -13524,6 +13524,370 @@ var balance_v2_default = {
   ]
 };
 
+// src/domain/redesign/data/formal-skill-presentation.json
+var formal_skill_presentation_default = [
+  {
+    id: "SKD001",
+    name: "\u706B\u8D70\u308A",
+    image: "/skills/formal/SKD001.webp"
+  },
+  {
+    id: "SKD002",
+    name: "\u6C34\u8D70\u308A",
+    image: "/skills/formal/SKD002.webp"
+  },
+  {
+    id: "SKD003",
+    name: "\u571F\u5272\u308A",
+    image: "/skills/formal/SKD003.webp"
+  },
+  {
+    id: "SKD004",
+    name: "\u98A8\u5207\u308A",
+    image: "/skills/formal/SKD004.webp"
+  },
+  {
+    id: "SKD005",
+    name: "\u5149\u5DEE\u3057",
+    image: "/skills/formal/SKD005.webp"
+  },
+  {
+    id: "SKD006",
+    name: "\u5F71\u5207\u308A",
+    image: "/skills/formal/SKD006.webp"
+  },
+  {
+    id: "SKD007",
+    name: "\u708E\u65AD",
+    image: "/skills/formal/SKD007.webp"
+  },
+  {
+    id: "SKD008",
+    name: "\u6C34\u65AD",
+    image: "/skills/formal/SKD008.webp"
+  },
+  {
+    id: "SKD009",
+    name: "\u5CA9\u65AD",
+    image: "/skills/formal/SKD009.webp"
+  },
+  {
+    id: "SKD010",
+    name: "\u98A8\u65AD",
+    image: "/skills/formal/SKD010.webp"
+  },
+  {
+    id: "SKD011",
+    name: "\u5149\u65AD",
+    image: "/skills/formal/SKD011.webp"
+  },
+  {
+    id: "SKD012",
+    name: "\u5F71\u65AD",
+    image: "/skills/formal/SKD012.webp"
+  },
+  {
+    id: "SKD013",
+    name: "\u7D05\u84EE\u4E00\u9583",
+    image: "/skills/formal/SKD013.webp"
+  },
+  {
+    id: "SKD014",
+    name: "\u84BC\u6CE2\u4E00\u9583",
+    image: "/skills/formal/SKD014.webp"
+  },
+  {
+    id: "SKD015",
+    name: "\u5730\u88C2\u4E00\u9583",
+    image: "/skills/formal/SKD015.webp"
+  },
+  {
+    id: "SKD016",
+    name: "\u5929\u5D50\u4E00\u9583",
+    image: "/skills/formal/SKD016.webp"
+  },
+  {
+    id: "SKD017",
+    name: "\u5929\u5149\u4E00\u9583",
+    image: "/skills/formal/SKD017.webp"
+  },
+  {
+    id: "SKD018",
+    name: "\u5BB5\u95C7\u4E00\u9583",
+    image: "/skills/formal/SKD018.webp"
+  },
+  {
+    id: "SKD019",
+    name: "\u706B\u306E\u8599\u304E",
+    image: "/skills/formal/SKD019.webp"
+  },
+  {
+    id: "SKD020",
+    name: "\u6C34\u306E\u8599\u304E",
+    image: "/skills/formal/SKD020.webp"
+  },
+  {
+    id: "SKD021",
+    name: "\u8599\u304E\u6255\u3044",
+    image: "/skills/formal/SKD021.webp"
+  },
+  {
+    id: "SKD022",
+    name: "\u98A8\u306E\u8599\u304E",
+    image: "/skills/formal/SKD022.webp"
+  },
+  {
+    id: "SKD023",
+    name: "\u5149\u306E\u8599\u304E",
+    image: "/skills/formal/SKD023.webp"
+  },
+  {
+    id: "SKD024",
+    name: "\u95C7\u306E\u8599\u304E",
+    image: "/skills/formal/SKD024.webp"
+  },
+  {
+    id: "SKD025",
+    name: "\u7D05\u84EE\u306E\u5927\u8A08",
+    image: "/skills/skill_015_recovery_program.jpg"
+  },
+  {
+    id: "SKD026",
+    name: "\u5F8C\u9663\u5C04\u3061",
+    image: "/skills/skill_008_smart_snipe.jpg"
+  },
+  {
+    id: "SKD027",
+    name: "\u8FFD\u3044\u8A0E\u3061",
+    image: "/skills/skill_021_high_voltage.jpg"
+  },
+  {
+    id: "SKD028",
+    name: "\u5D29\u3057\u8A0E\u3061",
+    image: "/skills/skill_028_nanomachine_storm.jpg"
+  },
+  {
+    id: "SKD029",
+    name: "\u6BD2\u5203",
+    image: "/skills/skill_032_stun_grenade.jpg"
+  },
+  {
+    id: "SKD030",
+    name: "\u8755\u307F\u8A0E\u3061",
+    image: "/skills/skill_005_poison_needle.jpg"
+  },
+  {
+    id: "SKD031",
+    name: "\u80CC\u6C34\u65AC\u308A",
+    image: "/skills/skill_035_hologram_decoy.jpg"
+  },
+  {
+    id: "SKD032",
+    name: "\u5F71\u7E2B\u3044",
+    image: "/skills/formal/SKD032.webp"
+  },
+  {
+    id: "SKD033",
+    name: "\u6C17\u5408",
+    image: "/skills/skill_009_drug_injection.jpg"
+  },
+  {
+    id: "SKD034",
+    name: "\u8EAB\u69CB\u3048",
+    image: "/skills/skill_006_iron_guard.jpg"
+  },
+  {
+    id: "SKD035",
+    name: "\u9B28\u306E\u58F0",
+    image: "/skills/skill_017_acid_spray.jpg"
+  },
+  {
+    id: "SKD036",
+    name: "\u5B88\u308A\u306E\u9663",
+    image: "/skills/skill_024_inspiring_roar.jpg"
+  },
+  {
+    id: "SKD037",
+    name: "\u5A01\u5727",
+    image: "/skills/skill_007_toxic_slang.jpg"
+  },
+  {
+    id: "SKD038",
+    name: "\u93A7\u7815\u304D",
+    image: "/skills/skill_015_recovery_program.jpg"
+  },
+  {
+    id: "SKD039",
+    name: "\u5FDC\u6025\u624B\u5F53",
+    image: "/skills/skill_003_noise_heal.jpg"
+  },
+  {
+    id: "SKD040",
+    name: "\u6CBB\u7652\u306E\u7948\u308A",
+    image: "/skills/skill_023_double_drive.jpg"
+  },
+  {
+    id: "SKD041",
+    name: "\u5C0F\u4F11\u6B62",
+    image: "/skills/skill_013_charge_slash.jpg"
+  },
+  {
+    id: "SKD042",
+    name: "\u6148\u611B\u306E\u5927\u7948\u7977",
+    image: "/skills/skill_039_timeline_rush.jpg"
+  },
+  {
+    id: "SKD043",
+    name: "\u518D\u751F\u306E\u7948\u308A",
+    image: "/skills/skill_029_toxic_gas.jpg"
+  },
+  {
+    id: "SKD044",
+    name: "\u8607\u751F\u306E\u7948\u308A",
+    image: "/skills/formal/SKD044.webp"
+  },
+  {
+    id: "SKD045",
+    name: "\u8B77\u8EAB\u969C\u58C1",
+    image: "/skills/skill_002_quick_shield.jpg"
+  },
+  {
+    id: "SKD046",
+    name: "\u5B88\u8B77\u306E\u672D",
+    image: "/skills/skill_016_smoke_screen.jpg"
+  },
+  {
+    id: "SKD047",
+    name: "\u7D50\u754C\u306E\u9663",
+    image: "/skills/skill_038_barrier_shatter.jpg"
+  },
+  {
+    id: "SKD048",
+    name: "\u6311\u767A",
+    image: "/skills/skill_007_toxic_slang.jpg"
+  },
+  {
+    id: "SKD049",
+    name: "\u8FD4\u3057\u5203",
+    image: "/skills/skill_044_cycle_off.jpg"
+  },
+  {
+    id: "SKD050",
+    name: "\u8FCE\u6483\u306E\u69CB\u3048",
+    image: "/skills/skill_031_hyper_accel.jpg"
+  },
+  {
+    id: "SKD051",
+    name: "\u7834\u52E2",
+    image: "/skills/formal/SKD051.webp"
+  },
+  {
+    id: "SKD052",
+    name: "\u7834\u8B77",
+    image: "/skills/formal/SKD052.webp"
+  },
+  {
+    id: "SKD053",
+    name: "\u596E\u8D77",
+    image: "/skills/skill_026_venom_blade.jpg"
+  },
+  {
+    id: "SKD054",
+    name: "\u6D44\u6BD2",
+    image: "/skills/skill_023_double_drive.jpg"
+  },
+  {
+    id: "SKD055",
+    name: "\u89E3\u7E1B",
+    image: "/skills/formal/SKD055.webp"
+  },
+  {
+    id: "SKD056",
+    name: "\u7834\u9663\u6483",
+    image: "/skills/skill_028_nanomachine_storm.jpg"
+  },
+  {
+    id: "SKD057",
+    name: "\u5F8C\u9663\u5D29\u3057",
+    image: "/skills/skill_022_tactical_reload.jpg"
+  },
+  {
+    id: "SKD058",
+    name: "\u8755\u307F\u306E\u9663",
+    image: "/skills/skill_040_execution_strike.jpg"
+  },
+  {
+    id: "SKD059",
+    name: "\u5D29\u9663\u306E\u6CE2",
+    image: "/skills/formal/SKD059.webp"
+  },
+  {
+    id: "SKD060",
+    name: "\u80CC\u6C34\u306E\u8599\u304E",
+    image: "/skills/skill_012_lucky_shoot.jpg"
+  },
+  {
+    id: "SKD061",
+    name: "\u596E\u6226\u306E\u6A84",
+    image: "/skills/skill_045_preparation.jpg"
+  },
+  {
+    id: "SKD062",
+    name: "\u5805\u5B88\u306E\u672D",
+    image: "/skills/skill_024_inspiring_roar.jpg"
+  },
+  {
+    id: "SKD063",
+    name: "\u7834\u7532\u306E\u9663",
+    image: "/skills/skill_015_recovery_program.jpg"
+  },
+  {
+    id: "SKD064",
+    name: "\u5A01\u5727\u306E\u9663",
+    image: "/skills/skill_007_toxic_slang.jpg"
+  },
+  {
+    id: "SKD065",
+    name: "\u5C01\u9663",
+    image: "/skills/formal/SKD065.webp"
+  },
+  {
+    id: "SKD066",
+    name: "\u8ECD\u795E\u306E\u53F7\u4EE4",
+    image: "/skills/skill_041_quick_search.jpg"
+  },
+  {
+    id: "SKD067",
+    name: "\u518D\u751F\u306E\u9663",
+    image: "/skills/skill_039_timeline_rush.jpg"
+  },
+  {
+    id: "SKD068",
+    name: "\u6551\u8B77\u306E\u672D",
+    image: "/skills/formal/SKD068.webp"
+  },
+  {
+    id: "SKD069",
+    name: "\u8FD4\u3057\u306E\u53F7\u4EE4",
+    image: "/skills/skill_031_hyper_accel.jpg"
+  },
+  {
+    id: "SKD070",
+    name: "\u6E05\u3081\u306E\u624B\u5F53",
+    image: "/skills/skill_013_charge_slash.jpg"
+  },
+  {
+    id: "SKD071",
+    name: "\u5927\u7953\u3044",
+    image: "/skills/skill_033_atomic_cannon.jpg"
+  },
+  {
+    id: "SKD072",
+    name: "\u7834\u52E2\u306E\u4E00\u9583",
+    image: "/skills/skill_036_power_of_unity.jpg"
+  }
+];
+
 // src/domain/redesign/balanceV2Masters.ts
 var BALANCE_V2_MASTER_VERSION = balance_v2_default.version;
 var BALANCE_V2_CHARACTER_ASSIGNMENTS = balance_v2_default.assignments;
@@ -13597,7 +13961,9 @@ function getFormalRaidSkill(id, lb) {
     else if (labels[effect.type] && values[labels[effect.type]] !== void 0) effect.power = values[labels[effect.type]];
   }
   const definition = balance_v2_default.skills.find((entry) => entry.designId === id);
-  return { ...skill2, id, name: row.name_provisional, image: "", spCost: row.sp, description: `${definition.targetDescription}\u30FB${row.performance_text}${definition.duration ? `\u30FB${definition.duration}\u30BF\u30FC\u30F3` : ""}` };
+  const art2 = formal_skill_presentation_default.find((entry) => entry.id === id);
+  if (!art2) throw Error(`\u6B63\u5F0F\u6280\u80FD\u306E\u8868\u793A\u5B9A\u7FA9\u304C\u3042\u308A\u307E\u305B\u3093: ${id}`);
+  return { ...skill2, id, name: art2.name, image: art2.image, spCost: row.sp, description: `${definition.targetDescription}\u30FB${row.performance_text}${definition.duration ? `\u30FB${definition.duration}\u30BF\u30FC\u30F3` : ""}` };
 }
 
 // src/domain/redesign/formalOwnedSkills.ts
@@ -13609,8 +13975,8 @@ function getFormalOwnedSkill(id, lb) {
 var FORMAL_SKILL_MASTERS = FORMAL_SKILL_IDS.map((id) => getFormalOwnedSkill(id, 0));
 var FORMAL_SKILL_CREATIVE_STATUS = FORMAL_SKILL_IDS.map((id) => ({
   id,
-  nameStatus: "approval_pending",
-  imageStatus: "missing",
+  nameStatus: "approved",
+  imageStatus: "approved",
   legacyId: null
 }));
 
@@ -55969,7 +56335,7 @@ function simulateBalanceBattle(input) {
   };
   const party = input.party.map((u) => make(u, false));
   let wave = 0, enemies = input.waves[0].map((u) => make(u, true));
-  let partySp = 0, gauge = 0, playerActions = 0, serial = 0, totalDamage = 0, wavesCleared = 0, burst = false, ended = null, reason = "";
+  let partySp = 0, gauge = 0, playerActions = 0, serial = 0, totalDamage = 0, actualHpDamage = 0, wavesCleared = 0, burst = false, ended = null, reason = "";
   const frames = [];
   const analysis = party.map((u) => ({ id: u.id, name: u.name, damage: 0, healing: 0, spGenerated: 0, actions: 0, skills: 0, bursts: 0 }));
   const side = (u) => u.enemy ? enemies : party;
@@ -56137,6 +56503,8 @@ function simulateBalanceBattle(input) {
     }
     t.statuses = t.statuses.filter((s) => s.type !== "shield" || (s.amount ?? 0) > 0);
     if (remaining < amount) frame("action", `${t.name} \u30B7\u30FC\u30EB\u30C9\u5438\u53CE ${amount - remaining}`, u, skill2, { event: "shield_absorbed", targetIds: [t.id] });
+    const lostHp = Math.min(t.hp, remaining);
+    if (t.enemy && (!u.enemy || u === t)) actualHpDamage += lostHp;
     t.hp = Math.max(0, t.hp - remaining);
     return remaining;
   };
@@ -56457,7 +56825,7 @@ function simulateBalanceBattle(input) {
   if (!enemies.some(alive))
     wavesCleared++;
   frame("end", ended === "win" ? "\u52DD\u5229" : reason === "action_limit" ? "300\u884C\u52D5\u4E0A\u9650\uFF1A\u6557\u5317" : "\u6557\u5317", void 0, void 0, { event: "end", reason });
-  return { seed: input.seed, outcome: ended, totalDamage, playerActions, wavesCleared, party: input.party, waves: input.waves, frames, analysis, rulesVersion: BALANCE_BATTLE_VERSION, ...revisedInput ? { inputVersion: WAVE_SP_INPUT_VERSION, masterVersion: config.version } : {}, reason };
+  return { seed: input.seed, outcome: ended, totalDamage, ...input.raidDamagePolicy === "actual-hp-v1-20260925" ? { actualHpDamage } : {}, playerActions, wavesCleared, party: input.party, waves: input.waves, frames, analysis, rulesVersion: BALANCE_BATTLE_VERSION, ...revisedInput ? { inputVersion: WAVE_SP_INPUT_VERSION, masterVersion: config.version } : {}, reason };
 }
 
 // src/domain/redesign/formalBattleInput.ts
@@ -56520,59 +56888,10 @@ function questVictoryRewards(stage, state, party, seed) {
   return { rewards: rewards2, firstClear, count, guaranteed, encounterRoll: random() };
 }
 
-// src/theme/local-backgrounds.json
-var local_backgrounds_default = [
-  {
-    characterId: "char_koharu_01",
-    name: "\u96EA\u306E\u6625\u65E5\u5C71\u57CE",
-    image: "/creative/backgrounds/char_koharu_01.png"
-  },
-  {
-    characterId: "char_leo_01",
-    name: "\u9752\u8449\u57CE\u3068\u4ED9\u53F0\u57CE\u4E0B",
-    image: "/creative/backgrounds/char_leo_01.png"
-  },
-  {
-    characterId: "char_mio_01",
-    name: "\u7C73\u6CA2\u57CE\u4E0B\u30FB\u82B1\u306E\u5BB4",
-    image: "/creative/backgrounds/char_mio_01.png"
-  },
-  {
-    characterId: "char_karen_01",
-    name: "\u99FF\u5E9C\u57CE\u3068\u57CE\u4E0B",
-    image: "/creative/backgrounds/char_karen_01.png"
-  },
-  {
-    characterId: "char_miyabi_01",
-    name: "\u7435\u7436\u6E56\u7554\u306E\u5742\u672C\u57CE",
-    image: "/creative/backgrounds/char_miyabi_01.png"
-  },
-  {
-    characterId: "char_kengo_01",
-    name: "\u5927\u591A\u559C\u57CE\u3092\u671B\u3080\u5C71\u9053",
-    image: "/creative/backgrounds/char_kengo_01.png"
-  },
-  {
-    characterId: "char_go_01",
-    name: "\u8E91\u8E85\u30F6\u5D0E\u9928\u3068\u7532\u5E9C\u76C6\u5730",
-    image: "/creative/backgrounds/char_go_01.png"
-  },
-  {
-    characterId: "char_kaede_01",
-    name: "\u4E0A\u7530\u57CE",
-    image: "/creative/backgrounds/char_kaede_01.png"
-  },
-  {
-    characterId: "char_reiji_01",
-    name: "\u5B89\u571F\u57CE",
-    image: "/creative/backgrounds/char_reiji_01.png"
-  },
-  {
-    characterId: "char_ageha_01",
-    name: "\u9EC4\u91D1\u671F\u306E\u5927\u5742\u57CE",
-    image: "/creative/backgrounds/char_ageha_01.png"
-  }
-];
+// src/domain/redesign/approvedBackgrounds.ts
+var QUEST_BACKGROUND_PATHS = Object.fromEntries(
+  ["mikawa", "owari", "mino", "omi", "kai", "echigo", "kyoto", "izumo", "satsuma", "sekigahara"].map((id) => [id, `/bg/approved-20260925/quest-${id}.webp`])
+);
 
 // src/domain/redesign/quests.ts
 var AREAS = [
@@ -56587,7 +56906,7 @@ var AREAS = [
   ["satsuma", "\u85A9\u6469\u306E\u708E", "\u4E0D\u5C48\u306E\u9663", "\u9023\u6226\u306B\u5099\u3048\u3066HP\u3068SP\u3092\u6B8B\u3057\u3001\u6575\u9663\u3092\u7A81\u7834\u3057\u3088\u3046\u3002"],
   ["sekigahara", "\u95A2\u30F6\u539F", "\u6681\u306E\u7D04\u675F", "\u5909\u308F\u308A\u3086\u304F\u6575\u306E\u9663\u3092\u8AAD\u307F\u3001\u4E94\u4EBA\u306E\u529B\u3092\u7D50\u96C6\u3057\u3088\u3046\u3002"]
 ];
-var QUEST_AREAS = AREAS.map(([id, name2, , description], area) => ({ id, index: area + 1, name: name2, description, image: local_backgrounds_default[area]?.image ?? `/bg/sengoku/${area % 2 ? "castle-town" : "castle-approach"}.jpg`, stages: FORMAL_QUEST_STAGES.filter((stage) => stage.areaId === id) }));
+var QUEST_AREAS = AREAS.map(([id, name2, , description], area) => ({ id, index: area + 1, name: name2, description, image: QUEST_BACKGROUND_PATHS[id], stages: FORMAL_QUEST_STAGES.filter((stage) => stage.areaId === id) }));
 var QUEST_STAGES = FORMAL_QUEST_STAGES;
 function getQuestStage(id) {
   return QUEST_STAGES.find((stage) => stage.id === id);
@@ -56819,10 +57138,10 @@ function evaluateMissions(state, config, now = Date.now()) {
     };
   });
 }
-function getClaimableMission(state, config, id) {
-  const row = evaluateMissions(state, config).find((candidate) => candidate.id === id);
+function getClaimableMission(state, config, id, now = Date.now()) {
+  const row = evaluateMissions(state, config, now).find((candidate) => candidate.id === id);
   if (!row || row.status !== "claimable") throw new Error("\u3053\u306E\u4EFB\u52D9\u306E\u5831\u916C\u306F\u53D7\u3051\u53D6\u308C\u307E\u305B\u3093\u3002");
-  const master = config.missions.find((master2) => master2.id === id || master2.condition.type === "metric" && master2.condition.daily && `${master2.id}:${jstLoginDate(Date.now())}` === id);
+  const master = config.missions.find((master2) => master2.id === id || master2.condition.type === "metric" && master2.condition.daily && `${master2.id}:${jstLoginDate(now)}` === id);
   if (!master) throw new Error("\u4EFB\u52D9\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002");
   return { ...master, id };
 }
@@ -60451,11 +60770,11 @@ function condition(row) {
 }
 var FORMAL_NORMAL_MISSIONS = formalMissions_default.map((row) => ({ id: row.id, name: row.name, description: row.group, enabled: true, condition: condition(row), rewards: row.rewards }));
 var FORMAL_DAILY_MISSIONS = [
-  ...[1, 3, 5].map((target, i) => ({ id: `DM00${i + 1}`, name: `\u6226\u95D8\u306B${target}\u56DE\u6311\u6226`, description: "\u30C7\u30A4\u30EA\u30FC", enabled: false, condition: { type: "metric", key: "battle", target, daily: true }, rewards: [{ kind: "cash", amount: [1e3, 2e3, 3e3][i] }, { kind: "character_exp_item", id: "small", amount: [2, 3, 5][i] }] })),
-  ...[1, 3, 5].map((target, i) => ({ id: `DM00${i + 4}`, name: `\u51FA\u9663\u3067${target}\u56DE\u52DD\u5229`, description: "\u30C7\u30A4\u30EA\u30FC", enabled: false, condition: { type: "metric", key: "quest_clear", target, daily: true }, rewards: [{ kind: "cash", amount: [1e3, 2e3, 3e3][i] }, { kind: "equipment_exp_item", id: "small", amount: [2, 3, 5][i] }] })),
-  { id: "DM007", name: "\u30CE\u30FC\u30DE\u30EB\u53EC\u559A\u30921\u56DE\u884C\u3046", description: "\u30C7\u30A4\u30EA\u30FC", enabled: false, condition: { type: "metric", key: "normal_gacha", target: 1, daily: true }, rewards: [{ kind: "cash", amount: 1e3 }] },
-  { id: "DM008", name: "\u80B2\u6210\u30921\u56DE\u884C\u3046", description: "\u30C7\u30A4\u30EA\u30FC", enabled: false, condition: { type: "metric", key: "growth", target: 1, daily: true }, rewards: [{ kind: "cash", amount: 2e3 }] },
-  ...[3, 5].map((target, i) => ({ id: `DM0${i + 9}`, name: `\u30C7\u30A4\u30EA\u30FC\u4EFB\u52D9\u3092${target}\u4EF6\u9054\u6210`, description: "\u30C7\u30A4\u30EA\u30FC", enabled: false, condition: { type: "metric", key: "daily_completed", target, daily: true }, rewards: [{ kind: "cash", amount: [5e3, 1e4][i] }, { kind: i === 0 ? "character_exp_item" : "equipment_exp_item", id: "medium", amount: 1 }] }))
+  ...[1, 3, 5].map((target, i) => ({ id: `DM00${i + 1}`, name: `\u6226\u95D8\u306B${target}\u56DE\u6311\u6226`, description: "\u30C7\u30A4\u30EA\u30FC", enabled: true, condition: { type: "metric", key: "battle", target, daily: true }, rewards: [{ kind: "cash", amount: [1e3, 2e3, 3e3][i] }, { kind: "character_exp_item", id: "small", amount: [2, 3, 5][i] }] })),
+  ...[1, 3, 5].map((target, i) => ({ id: `DM00${i + 4}`, name: `\u51FA\u9663\u3067${target}\u56DE\u52DD\u5229`, description: "\u30C7\u30A4\u30EA\u30FC", enabled: true, condition: { type: "metric", key: "quest_clear", target, daily: true }, rewards: [{ kind: "cash", amount: [1e3, 2e3, 3e3][i] }, { kind: "equipment_exp_item", id: "small", amount: [2, 3, 5][i] }, ...target === 3 ? [{ kind: "unlock_item", amount: 1 }] : []] })),
+  { id: "DM007", name: "\u30CE\u30FC\u30DE\u30EB\u53EC\u559A\u30921\u56DE\u884C\u3046", description: "\u30C7\u30A4\u30EA\u30FC", enabled: true, condition: { type: "metric", key: "normal_gacha", target: 1, daily: true }, rewards: [{ kind: "cash", amount: 1e3 }] },
+  { id: "DM008", name: "\u80B2\u6210\u30921\u56DE\u884C\u3046", description: "\u30C7\u30A4\u30EA\u30FC", enabled: true, condition: { type: "metric", key: "growth", target: 1, daily: true }, rewards: [{ kind: "cash", amount: 2e3 }] },
+  ...[3, 5].map((target, i) => ({ id: `DM0${i + 9}`, name: `\u30C7\u30A4\u30EA\u30FC\u4EFB\u52D9\u3092${target}\u4EF6\u9054\u6210`, description: "\u30C7\u30A4\u30EA\u30FC", enabled: true, condition: { type: "metric", key: "daily_completed", target, daily: true }, rewards: [{ kind: "cash", amount: [5e3, 1e4][i] }, { kind: i === 0 ? "character_exp_item" : "equipment_exp_item", id: "medium", amount: 1 }] }))
 ];
 var INVASION_SUPPLY_MISSIONS = [5, 10, 20, 30].map((target) => ({
   id: `NM_INVASION_WIN_${target}`,
@@ -61999,11 +62318,14 @@ function applyRaidAction(original, originalState, action, payload = {}, now = Da
       if (state.energy < master.energyCost) throw new Error("\u884C\u52D5\u529B\u304C\u8DB3\u308A\u307E\u305B\u3093\u3002");
       state.energy -= master.energyCost;
     }
-    const damage = Math.max(0, Math.floor(payload.result.totalDamage * (payload.result.outcome === "win" ? master.victoryMultiplier : 1)));
+    const actualPolicy = master.type === "unlock" && master.damagePolicy === "actual-hp-v1-20260925";
+    const damageBasis = actualPolicy ? payload.result.actualHpDamage : payload.result.totalDamage;
+    if (actualPolicy && (damageBasis === void 0 || !Number.isFinite(damageBasis) || damageBasis < 0)) throw new Error("\u6226\u95D8\u306E\u5B9FHP\u6E1B\u5C11\u91CF\u3092\u78BA\u8A8D\u3067\u304D\u307E\u305B\u3093\u3002");
+    const damage = Math.max(0, Math.floor((damageBasis ?? Number.NaN) * (payload.result.outcome === "win" ? master.victoryMultiplier : 1)));
     if (!Number.isFinite(damage)) throw new Error("\u6226\u95D8\u7D50\u679C\u304C\u4E0D\u6B63\u3067\u3059\u3002");
     me.attempts++;
     me.wins += payload.result.outcome === "win" ? 1 : 0;
-    me.totalDamage += damage;
+    me.totalDamage += actualPolicy ? appliesToSharedHp ? Math.min(room.hp, damage) : 0 : damage;
     me.lastResult = payload.result.outcome === "win" ? "\u52DD\u5229" : "\u6557\u5317";
     if (appliesToSharedHp) room.hp = Math.max(0, room.hp - damage);
     room.settledBattleIds.push(payload.battleId);
@@ -64854,7 +65176,7 @@ function createFormalInvasionMaster(castleId, random = Math.random) {
     stages.push({ level, enemies, sharedHp, defeatRewards: rewards(ci, level), source });
   }
   const r = rewardRows[ci];
-  return { id: castleId, name: castle.name, type: "unlock", masterVersion: raid_invasion_default.version, characterId: castle.characterId, enemy: stages[0].enemies[0], enemies: stages[0].enemies, stages, energyCost: 20, durationMinutes: 4320, maxParticipants: 20, maxLevel: 12, appearanceLevels: [1], appearanceImages: {}, enemyGrowthPerLevel: 0, sharedHpGrowthPerLevel: 0, victoryMultiplier: 1.5, sharedHp: stages[0].sharedHp, participationRewards: [], defeatRewards: stages[0].defeatRewards, victoryRewards: [{ kind: "cash", amount: r[0] }, ...exp("character_exp_item", r[1]), ...exp("equipment_exp_item", r[2])], playerExp: 0 };
+  return { id: castleId, name: castle.name, type: "unlock", damagePolicy: "actual-hp-v1-20260925", masterVersion: raid_invasion_default.version, characterId: castle.characterId, enemy: stages[0].enemies[0], enemies: stages[0].enemies, stages, energyCost: 20, durationMinutes: 4320, maxParticipants: 20, maxLevel: 12, appearanceLevels: [1], appearanceImages: {}, enemyGrowthPerLevel: 0, sharedHpGrowthPerLevel: 0, victoryMultiplier: 1.5, sharedHp: stages[0].sharedHp, participationRewards: [], defeatRewards: stages[0].defeatRewards, victoryRewards: [{ kind: "cash", amount: r[0] }, ...exp("character_exp_item", r[1]), ...exp("equipment_exp_item", r[2])], playerExp: 0 };
 }
 
 // src/domain/redesign/territory.ts
@@ -65086,7 +65408,7 @@ async function runBattle(userId, name2, payload, id, playerName) {
     const seed = crypto.getRandomValues(new Uint32Array(1))[0];
     const rules = startRoom?.territorySnapshot?.battleRules ?? BATTLE_RULES;
     const battleInput = questStage ? createQuestBattleInput(seed, buildBattleParty(state, rules), questStage, rules) : startRoom && getRoomRaidMaster(startRoom).masterVersion ? { ...createFormalBattleInput(seed, buildBattleParty(state, rules), waves, rules), raidLevel, raidMasterVersion: getRoomRaidMaster(startRoom).masterVersion, playerExpReward: { amount: getRoomRaidMaster(startRoom).playerExp ?? 0, version: getRoomRaidMaster(startRoom).masterVersion, status: "APPROVED" } } : { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel };
-    const input = startRoom ? { ...battleInput, raidStartSnapshot: { roomId: startRoom.id, level: startRoom.level, hp: startRoom.hp, maxHp: startRoom.maxHp } } : battleInput;
+    const input = startRoom ? { ...battleInput, ...getRoomRaidMaster(startRoom).damagePolicy ? { raidDamagePolicy: getRoomRaidMaster(startRoom).damagePolicy } : {}, raidStartSnapshot: { roomId: startRoom.id, level: startRoom.level, hp: startRoom.hp, maxHp: startRoom.maxHp } } : battleInput;
     preparedBattle = simulateBattle3(input);
     await commit(state, { ...state, energy: state.energy - cost, ...questStage ? { questAttempts: { ...state.questAttempts, [targetId]: (state.questAttempts?.[targetId] ?? 0) + 1 }, questProgressVersion: QUEST_MASTER_VERSION } : {} }, id, { id, kind, targetId, seed, input, status: "started" }, startRoom, startRoom?.version ?? null);
     [record] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=*`);

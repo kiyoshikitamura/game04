@@ -62,7 +62,7 @@ const { captureMissionAssets, recordMissionEvent } = await import('../src/domain
 const { createInitialState } = await import('../src/domain/redesign/masters.ts');
 assert.equal(FORMAL_NORMAL_MISSIONS.length,183);assert.equal(FORMAL_DAILY_MISSIONS.length,10);
 assert.equal(new Set(FORMAL_MISSION_CONFIG.missions.map(m=>m.id)).size,197);
-assert.equal(FORMAL_MISSION_CONFIG.missions.flatMap(m=>m.rewards).filter(r=>r.kind==='unlock_item').reduce((n,r)=>n+r.amount,0),5);
+assert.equal(FORMAL_MISSION_CONFIG.missions.flatMap(m=>m.rewards).filter(r=>r.kind==='unlock_item').reduce((n,r)=>n+r.amount,0),6);
 const initial=createInitialState('mission-test');
 const cleared={...initial,clearedStages:['mikawa-1']};
 assert.equal(evaluateMissions(cleared,FORMAL_MISSION_CONFIG).find(m=>m.id==='NM001').status,'claimable');
@@ -77,4 +77,4 @@ assert.equal(twice.missionProgress.counters.battle,1);
 assert.equal(twice.missionProgress.daily['2026-09-24'].quest_clear,1);
 const missionTotals={};for(const m of FORMAL_NORMAL_MISSIONS)for(const r of m.rewards)missionTotals[r.kind]=(missionTotals[r.kind]??0)+r.amount;
 assert.equal(missionTotals.cash,1427000);assert.equal(missionTotals.skill_material,494);assert.equal(missionTotals.equipment_lb,551);assert.equal(missionTotals.soul,150);
-console.log('PASS: normal183/daily10 unique master; first clear reward/no duplicate claim; dismantled instance history; settled event dedupe; approved cash/LB/soul totals. Daily unresolved policies remain disabled.');
+console.log('PASS: normal183/daily10 unique master; first clear reward/no duplicate claim; dismantled instance history; settled event dedupe; approved cash/LB/soul totals. Daily policies approved 2026-09-25; DM005 daily order included.');
