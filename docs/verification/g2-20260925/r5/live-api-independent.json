@@ -1,0 +1,184 @@
+{
+  "status": "PASS",
+  "code": "9e9a0a67da69ee34c9297b123bdf4bf7e06e233b",
+  "apiVersion": 25,
+  "project": "lrgyllgzcdcphlbmkknc",
+  "qaOnly": true,
+  "calls": [
+    {
+      "step": "r5-quest",
+      "requestId": "b935bc22-a050-44a2-b72a-8091f7bed823",
+      "status": 200,
+      "elapsedMs": 13492.3,
+      "stateVersion": 30,
+      "unlock": 2,
+      "energy": 95,
+      "error": null
+    },
+    {
+      "step": "r5-current-a",
+      "requestId": "d0a2cc34-13b6-4e06-afcb-0b6d920c7eea",
+      "status": 200,
+      "elapsedMs": 9881.8,
+      "stateVersion": 30,
+      "unlock": 2,
+      "energy": 95,
+      "error": null
+    },
+    {
+      "step": "r5-daily-claim",
+      "requestId": "54ac31cd-5ad9-4ee4-b1a4-e8140e8a007f",
+      "status": 200,
+      "elapsedMs": 10152.3,
+      "stateVersion": 31,
+      "unlock": 3,
+      "energy": 95,
+      "error": null
+    },
+    {
+      "step": "r5-daily-replay",
+      "requestId": "54ac31cd-5ad9-4ee4-b1a4-e8140e8a007f",
+      "status": 200,
+      "elapsedMs": 10361.5,
+      "stateVersion": 31,
+      "unlock": 3,
+      "energy": 95,
+      "error": null
+    },
+    {
+      "step": "r5-daily-new-id",
+      "requestId": "6a1ec6ed-655d-4282-a0a3-ae1af3152da2",
+      "status": 400,
+      "elapsedMs": 7971.1,
+      "stateVersion": null,
+      "unlock": null,
+      "energy": null,
+      "error": "この任務の報酬は受け取れません。"
+    },
+    {
+      "step": "r5-daily-old-day",
+      "requestId": "93443368-78fa-466a-aff0-815180baaf1f",
+      "status": 400,
+      "elapsedMs": 11617.0,
+      "stateVersion": null,
+      "unlock": null,
+      "energy": null,
+      "error": "この任務の報酬は受け取れません。"
+    },
+    {
+      "step": "r5-daily-reload",
+      "requestId": "fe2236bf-c0f3-401b-94ae-96a1287a5e6e",
+      "status": 200,
+      "elapsedMs": 8614.5,
+      "stateVersion": 31,
+      "unlock": 3,
+      "energy": 95,
+      "error": null
+    },
+    {
+      "step": "r5-host",
+      "requestId": "1d72d93b-e1d2-4a0e-9cea-314d5c35c67d",
+      "status": 200,
+      "elapsedMs": 10814.5,
+      "stateVersion": 33,
+      "unlock": 2,
+      "energy": 95,
+      "error": null
+    },
+    {
+      "step": "r5-new-raid",
+      "requestId": "54ab7396-de24-42e0-8e20-66b9f19d0305",
+      "status": 200,
+      "elapsedMs": 14081.9,
+      "stateVersion": 35,
+      "unlock": 2,
+      "energy": 75,
+      "error": null
+    },
+    {
+      "step": "r5-new-raid-replay",
+      "requestId": "54ab7396-de24-42e0-8e20-66b9f19d0305",
+      "status": 200,
+      "elapsedMs": 10593.7,
+      "stateVersion": 35,
+      "unlock": 2,
+      "energy": 75,
+      "error": null
+    },
+    {
+      "step": "r5-new-raid-reload",
+      "requestId": "fbf28d15-ad17-4f6f-bf94-46727551ac79",
+      "status": 200,
+      "elapsedMs": 9690.5,
+      "stateVersion": 35,
+      "unlock": 2,
+      "energy": 75,
+      "error": null
+    },
+    {
+      "step": "r5-old-raid",
+      "requestId": "09ff2bf4-afb8-4a32-a237-4d07cf4eb48f",
+      "status": 200,
+      "elapsedMs": 12574.5,
+      "stateVersion": 28,
+      "unlock": 2,
+      "energy": 80,
+      "error": null
+    }
+  ],
+  "daily": {
+    "id": "DM005:2026-09-25",
+    "questClearBefore": 2,
+    "questClearAfter": 3,
+    "unlockBefore": 2,
+    "unlockAfterClaim": 3,
+    "sameRequestStateUnchanged": true,
+    "newRequestRejected": true,
+    "oldDayRejected": true,
+    "dbVersion": 31,
+    "receiptCount": 1
+  },
+  "newInvasion": {
+    "roomId": "8ebe12e0-2637-412b-a6fa-ba6744551932",
+    "battleId": "54ab7396-de24-42e0-8e20-66b9f19d0305",
+    "policy": "actual-hp-v1-20260925",
+    "beforeHp": 78000,
+    "afterHp": 39255,
+    "displayDamage": 38756,
+    "actualHpDamage": 25830,
+    "multiplier": 1.5,
+    "contribution": 38745,
+    "sameRequestStateAndRoomUnchanged": true,
+    "dbStateVersion": 35,
+    "dbRoomVersion": 2,
+    "enemySkills": [
+      {
+        "id": "SKD033",
+        "name": "気合",
+        "image": "/skills/skill_009_drug_injection.jpg"
+      },
+      {
+        "id": "SKD008",
+        "name": "水断",
+        "image": "/skills/formal/SKD008.webp"
+      }
+    ]
+  },
+  "oldInvasion": {
+    "roomId": "75b670f1-ca4f-482f-b8ea-8f0a5a92cb3f",
+    "battleId": "09ff2bf4-afb8-4a32-a237-4d07cf4eb48f",
+    "policy": null,
+    "beforeHp": 61492,
+    "afterHp": 60047,
+    "displayDamage": 1445,
+    "actualHpDamage": null,
+    "contributionDelta": 1445,
+    "dbStateVersion": 28,
+    "dbRoomVersion": 4
+  },
+  "limits": [
+    "JST actual clock boundary not crossed; local injected-clock tests separately",
+    "new damage overflow/shared-HP cap edge covered locally; live battle did not finish stage",
+    "QA fixtures are not natural account progression acceptance"
+  ]
+}
