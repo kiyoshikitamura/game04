@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { GameContext } from '@/app/context/GameContext';
 import BattleView from '@/app/components/redesign/BattleView';
 import HomeView from '@/app/components/redesign/HomeView';
+import HomeEffect from '@/app/components/redesign/HomeEffect';
 import QuestView, { type QuestSettlement } from '@/app/components/redesign/QuestView';
 import GrowthView from '@/app/components/redesign/GrowthView';
 import { CHARACTER_MASTERS, buildBattleParty, BATTLE_RULES, grantReward } from '@/domain/redesign/masters';
@@ -133,6 +134,7 @@ export default function TutorialPreview() {
   return <GameContext.Provider value={gameContext}><div ref={shell} className={`rd-shell tutorial-shell ${scene ? '' : 'is-complete'}`}>
     {scene ? scene.id === 'battle' && practice ? <BattleView requirePlaybackCompletion result={practice} vipActive={false} onComplete={next} title="模擬戦" backgroundSrc={BACKGROUNDS.battle} /> :
       <TutorialSceneAssets key={scene.id} assets={sceneAssets}><main className={`tutorial-scene ${world ? 'is-world' : ''}`} style={{ backgroundImage: `linear-gradient(0deg, #160f0beb, transparent 65%), url('${background}')` }} data-scene={scene.id}>
+        {world && <HomeEffect effectId={scene.effectId} />}
         <div className={`tutorial-cast count-${cast.length}`} aria-label={world ? '乱世の武将たち' : '豊臣秀吉'}>
           {!acquisition && cast.map(id => <img key={id} src={characterArt(castMember(id), 'full')} alt={castMember(id).name} />)}
           {scene.id === 'characters' && <div className="tutorial-rewards">{STARTERS.map(id => <figure key={id}><img src={characterArt(castMember(id), 'card')} alt={castMember(id).name} /><figcaption><b>{id === 'char_aoi_01' ? 'お市' : castMember(id).name}</b><span>R　Lv.1・覚醒0</span></figcaption></figure>)}</div>}

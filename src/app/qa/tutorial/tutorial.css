@@ -33,3 +33,9 @@
 @keyframes tutorial-character-fade{from{opacity:0}to{opacity:1}}
 @media(max-width:360px){.tutorial-scene{padding-left:12px;padding-right:12px}.tutorial-notice.rd-modal{width:calc(100vw - 24px)}}
 @media(prefers-reduced-motion:reduce){.tutorial-scene{animation:none}}
+
+/* Keep ambient effects inside the scene, behind all interactive copy. */
+.tutorial-scene{position:relative}
+.tutorial-scene>.g4-home-effect{z-index:1}
+.tutorial-scene>.tutorial-cast{z-index:2}
+.tutorial-scene>.tutorial-copy{z-index:3}

@@ -57,3 +57,12 @@ GAME03・main・Production・既存の共有Edge Functionは変更していな�
 - 終了後の案内を独自native dialogから共通Modalへ変更。中央配置、本文内部スクロール、CTA固定、背景操作停止を共通化。
 - 本文16px、補足14px、主CTA朱赤/16px、44px以上の操作領域に是正。
 - **初敗北の実戦導線は未検証**。前項の確認メニューによる敗北イベント投入と自動テストは実戦敗北の受入を意味しない。ユーザーも未検証と報告。
+
+## タイトル・World Introductionの背景演出追加
+
+- タイトル：桜_上田城（char_kaede_01）。既存キービジュアルを維持し透過演出を追加。
+- World 1 安土城：火の粉（char_reiji_01）。
+- World 2 春日山城：雪（char_koharu_01）。
+- World 3 駿府城：木の葉（char_karen_01）。
+- 保存済みの透過Canvas素材と共通HomeEffectを再利用。文字・CTAは演出より前面、演出は操作を遮らない。非表示タブ・動きを減らす設定では停止。
+- 背景・武将の一括読み込みとフェードを維持。タイトルは専用ブランチのルート画面、World Introductionは /qa/tutorial で確認。
