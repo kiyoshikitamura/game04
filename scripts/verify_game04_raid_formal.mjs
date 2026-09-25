@@ -1,3 +1,4 @@
+import supplyAuthority from './master-audit/supply-authority.cjs';
 /** Local contract tests only: not evidence of live API or browser acceptance.
  * Run: node scripts/verify_game04_raid_formal.mjs
  * Reference expectations are parsed directly from the adopted Markdown tables.
@@ -31,7 +32,7 @@ for(const r of encounterRows){
  const rr=encounterRewards.find(x=>{const [lo,hi]=x[0].split('–').map(Number);return m.area>=lo&&m.area<=hi;});assert.ok(rr);
  assert.equal(amount(m.victoryRewards,'cash'),num(rr[3]));assert.equal(exp(m.victoryRewards,'character_exp_item'),num(rr[4]));assert.equal(exp(m.victoryRewards,'equipment_exp_item'),num(rr[5]));
  const soul=m.victoryRewards.find(x=>x.kind==='soul'),sr=formalRaidCharacter(m.name).rarity==='SR',soulExpected=rr[sr?1:2].match(/(\d+)%×(\d+)/);
- assert.equal(soul.chance,Number(soulExpected[1])/100);assert.equal(soul.amount,Number(soulExpected[2]));assert.equal(soul.id,m.characterId);
+ assert.equal(soul.chance,supplyAuthority.areas[m.area][sr?'SR':'SSR'].chance);assert.equal(soul.amount,supplyAuthority.areas[m.area][sr?'SR':'SSR'].amount);assert.equal(soul.id,m.characterId);
  assert.equal(amount(m.defeatRewards,'soul'),num(rr[6]));assert.equal(exp(m.defeatRewards,'character_exp_item'),num(rr[7]));assert.equal(exp(m.defeatRewards,'equipment_exp_item'),num(rr[7]));assert.equal(amount(m.defeatRewards,'skill_material'),num(rr[8]));assert.equal(amount(m.defeatRewards,'equipment_lb'),num(rr[8]));assert.equal(amount(m.defeatRewards,'cash'),num(rr[9]));
  assert.equal(m.playerExp,[80,100,120,160,200,240,300,360,440,520][m.area-1]);assert.equal(m.energyCost,20);assert.equal(m.maxLevel,1);assert.equal(m.durationMinutes,60);assert.equal([...m.victoryRewards,...m.defeatRewards].some(r=>r.kind==='ticket'),false);
 }
@@ -48,7 +49,7 @@ for(const [ci,castle] of FORMAL_CASTLES.entries())for(const randomValue of [0,.5
  for(const s of m.stages){const final=s.level===12,gate=s.level%3===0;
   assert.equal(amount(s.defeatRewards,'cash'),num(rr[final?9:gate?6:4]));assert.equal(amount(s.defeatRewards,'skill_material'),num(rr[final?11:gate?8:5]));assert.equal(amount(s.defeatRewards,'equipment_lb'),num(rr[final?11:gate?8:5]));
   assert.equal(exp(s.defeatRewards,'character_exp_item'),final?num(rr[10]):gate?num(rr[7]):0);assert.equal(exp(s.defeatRewards,'equipment_exp_item'),final?num(rr[10]):gate?num(rr[7]):0);
-  assert.equal(amount(s.defeatRewards,'soul'),final?num(rr[13]):0);assert.equal(amount(s.defeatRewards,'ticket'),final?rr[12].split('/').map(Number).reduce((a,b)=>a+b,0):0);
+  assert.equal(amount(s.defeatRewards,'soul'),final?supplyAuthority.castles[m.id]:0);assert.equal(amount(s.defeatRewards,'ticket'),final?rr[12].split('/').map(Number).reduce((a,b)=>a+b,0):0);
   for(const e of s.enemies){assert.equal(e.initialSp,e.stats.sp);assert.equal(e.hitSpGain,10);}
   if(gate){const expected=fixedRows.filter(r=>r[0].startsWith(`${castle.id}/${s.level}/`));assert.equal(s.enemies.length,expected.length);for(const [i,e] of s.enemies.entries()){const r=expected[i];assert.equal(e.name,r[1]);assert.deepEqual([e.level,e.stats.hp,e.stats.atk,e.stats.def,e.actionCount,e.initialSp],[r[3],r[4],r[5],r[6],r[7],r[8].split('/')[0]].map(num));}}
   const hpRows=rows(invasionText.split('## 10.')[1]);const hp=gate?hpRows.find(r=>r[0]===castle.name&&r.length===5)?.[s.level/3]:hpRows.find(r=>r[0]===castle.name&&Number(r[1])===s.level&&s.source.includes(`:${r[2]};`))?.[5];assert.ok(hp,`${castle.id}/${s.level} adopted HP row`);assert.equal(s.sharedHp,num(hp));
@@ -59,7 +60,7 @@ const now=Date.parse('2026-09-23T12:00:00Z'),master=FORMAL_ENCOUNTER_MASTERS[0];
 let room=createRaidRoom(master.id,'tester','formal-test',now),state=createInitialState('tester');state.energy=100;
 const snapshot=JSON.stringify(room.raidSnapshot),originalMasterHp=master.sharedHp;master.sharedHp=1;assert.equal(getRoomRaidMaster(room).sharedHp,originalMasterHp);master.sharedHp=originalMasterHp;assert.equal(JSON.stringify(room.raidSnapshot),snapshot);
 function action(name,payload={},time=now){const out=applyRaidAction(room,state,name,payload,time);room=out.room;state=out.state;return out;}
-function battle(id,outcome,damage){return action('raid_battle',{battleId:id,battleLevel:room.level,seed:42,result:{outcome,totalDamage:damage}});}
+function battle(id,outcome,damage){return action('raid_battle',{battleId:id,battleLevel:room.level,seed:42,result:{outcome,totalDamage:damage,actualHpDamage:damage}});}
 const beforeLoss=structuredClone(state);const loss=battle('lose','lose',100);assert.deepEqual(loss.rewards,[]);assert.equal(state.cash,beforeLoss.cash);assert.equal(room.rewardGrants.length,0);assert.equal(room.hp,originalMasterHp-100);
 for(let i=1;i<=2;i++){const out=battle(`win${i}`,'win',100);assert.ok(out.rewards.length>0);assert.equal(room.rewardGrants.length,0);}
 const win=battle('win3','win',100);assert.equal(room.participants[0].wins,3);assert.equal(room.rewardGrants.length,0,'qualification alone grants nothing');
@@ -77,11 +78,11 @@ const territorySnapshot={masterVersion:invasion.masterVersion,status:'PREVIEW_PR
 room=createRaidRoom(invasion.id,'tester','invasion-transitions',now,territorySnapshot);state=createInitialState('tester');state.energy=100;
 battle('stage1-win','win',room.hp);assert.equal(room.level,2);assert.equal(room.rewardGrants.length,0);
 const hp2=room.hp;
-for(const id of ['oldstage-win2','oldstage-win3'])action('raid_battle',{battleId:id,battleLevel:1,energyAlreadyPaid:true,result:{outcome:'win',totalDamage:999999}});
+for(const id of ['oldstage-win2','oldstage-win3'])action('raid_battle',{battleId:id,battleLevel:1,energyAlreadyPaid:true,result:{outcome:'win',totalDamage:999999,actualHpDamage:999999}});
 assert.equal(room.hp,hp2);assert.equal(room.participants[0].wins,3);assert.equal(room.rewardGrants.length,0,'no retroactive stage1 grants');
 for(let level=2;level<=12;level++){
  assert.equal(room.level,level);assert.deepEqual(getRoomRaidMaster(room).defeatRewards,invasion.stages[level-1].defeatRewards);
- action('raid_battle',{battleId:`stage${level}`,battleLevel:level,energyAlreadyPaid:true,result:{outcome:'win',totalDamage:room.hp}});
+ action('raid_battle',{battleId:`stage${level}`,battleLevel:level,energyAlreadyPaid:true,result:{outcome:'win',totalDamage:room.hp,actualHpDamage:room.hp}});
  assert.equal(room.rewardGrants.filter(g=>g.level===level).length,1);
  if(level<12)assert.equal(room.hp,invasion.stages[level].sharedHp);
 }

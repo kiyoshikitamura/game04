@@ -1,4 +1,5 @@
 'use client';
+import { questDisplayName } from '@/domain/redesign/contextNames';
 import React, { useEffect, useRef, useState } from 'react';
 import type { MissionProjection } from '@/domain/redesign/missions';
 import type { RedesignState } from '@/domain/redesign/types';
@@ -149,7 +150,7 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
       <div className="g4-home-bottom">
         {encounterActive && encounterRaid && <button className="g4-home-encounter g4-home-gold-frame" disabled={!homeImages.ready} onClick={() => onNavigate(`raid:${encounterRaid.id}`)}><img src="/ui/sengoku/05-crossed-swords.png" alt="" /><strong>共闘発生</strong><span className="g4-home-boss">{encounterRaid.name}</span><time>残り {raidTimeRemaining(encounterRaid.expiresAt, now)}</time><span className="g4-home-confirm">確認 ›</span></button>}
         <div className="g4-home-actions">
-          <button className="g4-home-quest g4-home-gold-frame" disabled={!homeImages.ready} title={`${area.name} ${area.index}-${stage.index} ${stage.name}`} onClick={() => onNavigate('quest:resume')}><img src="/ui/sengoku/04-fan-sakura.png" alt="" /><strong>出陣の続き</strong></button>
+          <button className="g4-home-quest g4-home-gold-frame" disabled={!homeImages.ready} title={`${area.name} ${area.index}-${stage.index} ${questDisplayName(stage)}`} onClick={() => onNavigate('quest:resume')}><img src="/ui/sengoku/04-fan-sakura.png" alt="" /><strong>出陣の続き</strong></button>
           <button className="g4-home-territory g4-home-gold-frame" disabled={!homeImages.ready} onClick={() => onNavigate('territory')}><img src="/ui/sengoku/05-crossed-swords.png" alt="" /><strong>領土侵攻</strong></button>
         </div>
         <section className="g4-home-community" aria-label="交流">{tabs}<div className="g4-home-community-lines">{activityStatus}{messages(false)}</div><button className="g4-home-community-open" disabled={!homeImages.ready} onClick={() => setExpanded(true)}>交流を開く ›</button></section>

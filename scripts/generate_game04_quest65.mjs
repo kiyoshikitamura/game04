@@ -8,6 +8,7 @@ const prefix = 'docs/product/';
 const audit = prefix + 'balance_audits_20260922/';
 const source = prefix + 'master_sources_20260921/';
 const counts = [3,4,5,5,6,6,8,8,10,10];
+const supply = json('src/domain/redesign/data/raid-supply-approved.json');
 const areas = ['mikawa','owari','mino','omi','kai','echigo','kyoto','izumo','satsuma','sekigahara'];
 const fixed = json(audit + 'round17_effective62.json');
 const refs = json(audit + 'round17_enemy_skill_check.json').rows;
@@ -18,6 +19,22 @@ const files = ['area01_03.md','area04_05.md','area06.md','area07_08.md','area09_
 for (const file of files) for (const line of text(source + file).split('\n')) {
   const row = line.split('|').slice(1,-1).map(s => s.trim());
   if (/^10-(8|9|10)$/.test(row[0]) && /^\d$/.test(row[2]) && !concepts.has(row[0])) concepts.set(row[0], row[1]);
+}
+// A design concept is not a player-facing title. Fail before generating outputs.
+const contextNames = json('src/domain/redesign/data/context-names.json');
+const nameAuthority = {quests: Object.entries(contextNames.quests).map(([id, approvedName]) => {
+  const areaIndex = areas.findIndex(area => id.startsWith(area + '-'));
+  return {id, approvedName, approvalRef: contextNames.approvalRef, designId: `${areaIndex + 1}-${id.slice(id.lastIndexOf('-') + 1)}`};
+})};
+assert.equal(nameAuthority.quests.length, 65);
+const approvedNames = new Map(nameAuthority.quests.map(row => [row.id, row]));
+assert.equal(approvedNames.size, 65, 'duplicate quest name IDs');
+for (const [id, row] of approvedNames) {
+  const [area, stage] = row.designId.split('-').map(Number);
+  assert.equal(id, `${areas[area - 1]}-${stage}`, 'quest name identity mismatch');
+  assert(stage >= 1 && stage <= counts[area - 1], 'unknown quest name ID');
+  assert(row.approvedName?.trim() && row.approvalRef?.trim(), `名称承認未完了: ${id}`);
+  assert.notEqual(row.approvedName, concepts.get(row.designId), `攻略文の名称流用: ${id}`);
 }
 const character = name => {
   const matches = formal.characters.filter(c => c.display_name_provisional === name);
@@ -66,10 +83,10 @@ const stages = rewardRows.map(r => {
   if(area>=4 && index===counts[area-1])firstRewards.push({kind:'unlock_item',amount:1});
   if(r[0]==='1-1')firstRewards.push({kind:'character',id:character('前田利家'),amount:1});
   if(r[0]==='1-2')firstRewards.push({kind:'character',id:character('竹中半兵衛'),amount:1});
-  return {id:`${areas[area-1]}-${index}`,designId:r[0],areaId:areas[area-1],index,name:concepts.get(r[0])??r[0],description:concepts.get(r[0])??r[0],energyCost:row[1],
+  return {id:`${areas[area-1]}-${index}`,designId:r[0],areaId:areas[area-1],index,name:approvedNames.get(`${areas[area-1]}-${index}`).approvedName,description:concepts.get(r[0])??r[0],energyCost:row[1],
     waves,firstRewards,rewards:[{kind:'cash',amount:row[2]},...expItems('character_exp_item',row[3]),...expItems('equipment_exp_item',row[4])],
     rareRewards:[...soulDrops,...tickets.map((id,i)=>({kind:'ticket',id,amount:1,chance:[.01,.02,.03,.03][band]*[.25,.5,.25][i]}))],
-    soulDrops,ticketChance:[.01,.02,.03,.03][band],playerExp:row[5],encounterChance:area===1&&index<3?0:[.01,.01,.02,.04,.05,.06,.07,.08,.09,.10][area-1]};
+    soulDrops,ticketChance:[.01,.02,.03,.03][band],playerExp:row[5],encounterChance:area===1&&index<3?0:supply.encounterChance[area-1]};
 });
 assert.deepEqual(counts,areas.map(id=>stages.filter(s=>s.areaId===id).length));
 const mapping = areas.flatMap((area,a)=>Array.from({length:Math.max(7,counts[a])},(_,i)=>({legacyId:i<7?`${area}-${i+1}`:null,stageId:i<counts[a]?`${area}-${i+1}`:null,designId:`${a+1}-${i+1}`,disposition:i>=counts[a]?'retain_legacy_record_no_formal_target':i>=7?'new_stage':'same_area_and_index'})));

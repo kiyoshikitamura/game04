@@ -1,4 +1,5 @@
 'use client';
+import { questDisplayName, enemyDisplayName, enemyRoleLabel } from '@/domain/redesign/contextNames';
 import { growthRewardImage } from '@/domain/redesign/growthAssetPresentation';
 import { useEffect, useRef, useState } from 'react';
 import { CHARACTER_MASTERS, EQUIPMENT_MASTERS, SKILL_MASTERS } from '@/domain/redesign/masters';
@@ -47,7 +48,7 @@ function bossSubject(enemy: QuestStage['waves'][number][number]): DisplaySubject
   return match ? { id: match.characterId, name: match.name, rarity: match.runtimeRarity as DisplaySubject['rarity'], element: enemy.element as DisplaySubject['element'] } : null;
 }
 function formalStageName(stage: QuestStage) {
-  return stage.name.trim() || null;
+  return questDisplayName(stage).trim() || null;
 }
 function formalStageHint(stage: QuestStage) {
   return stage.description.trim() || null;
@@ -103,12 +104,12 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
   const bossAssets = useArtworkPreload(selectedSubject ? [selectedSubject] : [], 'battle');
   const encounterBackgrounds = useQuestAssets(selectedBoss ? [selectedSubject ? '' : selectedBoss.image, QUEST_AREAS.find(entry => entry.id === selected?.areaId)?.image ?? ''].filter(Boolean) : []);
   const encounterAssets = { ready: bossAssets.ready && encounterBackgrounds.ready, failed: bossAssets.failed || encounterBackgrounds.failed, retry: () => { bossAssets.retry(); encounterBackgrounds.retry(); } };
-  if (playing && settlement) return <BattleView result={settlement.battle} vipActive={vipActive} onComplete={() => setPlaying(false)} title={selectedLabel} backgroundSrc={QUEST_AREAS.find(entry => entry.id === selected?.areaId)?.image} />;
+  if (playing && settlement) return <BattleView result={settlement.battle} vipActive={vipActive} onComplete={() => setPlaying(false)} title={selected ? `${selectedLabel} ${questDisplayName(selected)}` : selectedLabel} backgroundSrc={QUEST_AREAS.find(entry => entry.id === selected?.areaId)?.image} />;
   return <section className="redesign-quest">
     {!viewAssets.ready && !settlement && !modal && <p role={viewAssets.failed ? "alert" : "status"}>{viewAssets.failed ? <>画像を読み込めませんでした。<button onClick={viewAssets.retry}>再読み込み</button></> : '読み込み中…'}</p>}
     {settlement ? <div className="rq-summary">
       <h2>{settlement.battle.outcome === 'win' ? 'ステージクリア' : '再び、戦場へ'}</h2>
-      <p>{selectedLabel}</p>
+      <p>{selectedLabel} {selected && questDisplayName(selected)}</p>
       {settlement.firstClear && <p>初回クリア報酬を獲得しました。</p>}
       <h3>獲得報酬</h3><Rewards rewards={settlement.rewards} />
       {settlement.encounterRaidId ? <><h3>強敵の気配</h3><p>遭遇戦が発生しました。</p><p className="rq-muted">無視すると、この共闘への参加権を失います。</p><button disabled={busy} onClick={() => onOpenRaid(settlement.encounterRaidId!)}>挑む</button><button disabled={busy} onClick={() => void dismissEncounter()}>無視する</button></> : <>
@@ -132,7 +133,7 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
     </>}
     {selected && modal === 'info' && <div className="redesign-quest-dialog"><CanonicalDialog title={`${selectedLabel} ${formalStageName(selected) ?? selected.name}`} onClose={() => setModal(null)} actions={[{ label: '挑戦', semantic: 'primary', onClick: () => setModal('prepare'), disabled: !encounterAssets.ready || !isQuestStageUnlocked(selected.id, state.clearedStages) }]}>
       {!encounterAssets.ready && <p role={encounterAssets.failed ? "alert" : "status"}>{encounterAssets.failed ? <>画像を読み込めませんでした。<button onClick={encounterAssets.retry}>再読み込み</button></> : '読み込み中…'}</p>}
-      {encounterAssets.ready && <div className="rq-encounter-hero" style={{ backgroundImage: `linear-gradient(180deg,#2b1c2433,#110c0e77),url("${QUEST_AREAS.find(entry => entry.id === selected.areaId)?.image ?? ''}")` }}><span className="rq-kicker">ステージボス</span>{(() => { const enemy = selectRepresentativeBoss(selected.waves[selected.waves.length - 1]); const subject = bossSubject(enemy); return <article className="rq-boss"><div className="rq-boss-stage">{subject ? <BossDisplay subject={subject} presentation="quest" compact hideCaption className="rq-boss-display" /> : <img className="rq-formal-boss" src={enemy.image} alt={enemy.name} />}</div><div className="rq-boss-title"><strong>{enemy.name}</strong><span className="rq-boss-level">Lv.{enemy.level}</span><ElementBadge element={enemy.element} /></div><dl className="rq-boss-stats" aria-label="ステージボスの能力値"><div><dt>HP</dt><dd>{enemy.stats.hp.toLocaleString('ja-JP')}</dd></div><div><dt>ATK</dt><dd>{enemy.stats.atk.toLocaleString('ja-JP')}</dd></div><div><dt>DEF</dt><dd>{enemy.stats.def.toLocaleString('ja-JP')}</dd></div></dl></article>; })()}</div>}
+      {encounterAssets.ready && <div className="rq-encounter-hero" style={{ backgroundImage: `linear-gradient(180deg,#2b1c2433,#110c0e77),url("${QUEST_AREAS.find(entry => entry.id === selected.areaId)?.image ?? ''}")` }}><span className="rq-kicker">ステージボス</span>{(() => { const enemy = selectRepresentativeBoss(selected.waves[selected.waves.length - 1]); const subject = bossSubject(enemy); return <article className="rq-boss"><div className="rq-boss-stage">{subject ? <BossDisplay subject={subject} presentation="quest" compact hideCaption className="rq-boss-display" /> : <img className="rq-formal-boss" src={enemy.image} alt={enemyDisplayName(enemy)} />}</div><div className="rq-boss-title"><strong>{enemyRoleLabel(enemy)} {enemyDisplayName(enemy)}</strong><span className="rq-boss-level">Lv.{enemy.level}</span><ElementBadge element={enemy.element} /></div><dl className="rq-boss-stats" aria-label="ステージボスの能力値"><div><dt>HP</dt><dd>{enemy.stats.hp.toLocaleString('ja-JP')}</dd></div><div><dt>ATK</dt><dd>{enemy.stats.atk.toLocaleString('ja-JP')}</dd></div><div><dt>DEF</dt><dd>{enemy.stats.def.toLocaleString('ja-JP')}</dd></div></dl></article>; })()}</div>}
       <div className="rq-stage-facts"><span><img src="/ui/sengoku/05-crossed-swords.png" alt="" />Wave数：{selected.waves.length}</span><span><img src="/ui/sengoku/14-energy.png" alt="" />消費行動力：{questEnergyCost(selected,state)}</span></div>
       <div className="rq-info-actions"><button type="button" onClick={() => setDetailPanel('hint')}><img src="/ui/sengoku/02-scroll-top.png" alt="" />攻略のヒント</button><button type="button" onClick={() => setDetailPanel('rewards')}><img src="/ui/sengoku/01-gift.png" alt="" />報酬を確認</button></div>
     </CanonicalDialog></div>}
