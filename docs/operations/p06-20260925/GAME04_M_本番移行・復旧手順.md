@@ -72,3 +72,8 @@ API/DB/Vercelログ、cron.job_run_details、注文滞留、VIP最古未付与�
 
 ## 9. 現在の未完
 本番DB/refは作成済、非公開基盤migration20260924163630と2 private buckets、Edge health v1を適用済。受け皿のAll Deployments認証保護も保存済。配信/本番Auth/backup実在確認の最新状態はP06結果を参照。domain・外部設定、ゲームbase/delta適用、完全restore試験、通知連携、G5最終manifest、M限定アカウントと決済検証方針は未完。P06のlocal HTTP試験を本番復旧試験と報告しない。
+
+## P01/P02/P03追補（2026-09-25）
+正式originは https://sengoku-hime-ennbu.com、wwwは308転送として登録済み。現時点はDNS SERVFAIL/TLS未発行のため接続完了ではない。P01_P02_P03_DOMAIN_CONTRACT.md の正確なcallback/return/webhookと環境別所有を採用する。
+DNS管理では変更前レコードを保存し、必要A/CNAMEだけ適用する。TLSと匿名遮断を実測するまで認証/決済通知を有効化しない。障害時は既存レコードの保存値へ該当変更のみ戻し、All Deploymentsを維持する。Google/Supabase/Stripeの秘密は管理設定へ直接投入しGitへ残さない。
+本番signup停止はAPIで確認済み。M限定テストで登録が必要な場合も一般signupを無制限に開かず、許可対象と期間を定める。Stripe経路限定入口は未確定であり、サイト全体の保護解除や通知を破棄する200応答を採用しない。

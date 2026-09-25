@@ -83,3 +83,29 @@ RLS policyなしINFOの説明: https://supabase.com/docs/guides/database/databas
 最新backupは基盤migration適用時刻より後。ただしbackup内部のschemaや復旧結果を確認したものではない。
 証拠元: ユーザー添付 file_000000000f8882069e4a0536a5f680e0（Database Backups）、file_000000008660820995f9f84661284be8（Compute）。秘密値なし。
 この更新でbackup実在確認待ちを解消。signupはユーザー実施済み、Microは画面確認済みとして管理し、P06全体の合格とはしない。
+
+## P01ドメイン接続・本番設定の追加実施（2026-09-25）
+
+この節が上の正式domain未確定・signup API未確認という過去状態を更新する。
+
+|対象|実施・観測結果|
+|---|---|
+|正式URL|https://sengoku-hime-ennbu.com に確定。専用receiverのProductionへ登録済み|
+|www|www.sengoku-hime-ennbu.com を登録し、apexへの308 Permanent Redirectを保存|
+|DNS|外部DNS。Vercel DNS編集不可。既存レコード/NSは変更していない|
+|必要レコード|A @ = 216.150.1.1 / CNAME www = 346e02207322e8c5.vercel-dns-016.com.|
+|現在のDNS|Google DNSのNS/A/www CNAME照会でStatus 2 SERVFAIL。権威DNSがREFUSED、lame delegationの可能性との応答。単なる伝播待ちとは判定しない|
+|TLS|Vercelで証明書未発行。両domain Invalid Configuration。HTTPS成功・正式domain匿名遮断・実308転送はDNS解消後に検証|
+|公開制御|Require Log In / All Deploymentsを管理画面で再確認。設定変更なし。Git解除・Cron無効を維持|
+|Supabase signup|本番refの /auth/v1/settings を公開用キーで読取りHTTP200、disable_signup=true、anonymous_users=false。ユーザー完了報告をAPIで確認済み|
+|認証provider|google=false、email=true、mailer_autoconfirm=false。SMTP配送受入を意味しない|
+|実backup|添付でPHYSICAL2件の存在確認済み。実restoreは未実施|
+|クラウドhealth|認証付きVercel取得は接続権限エラー、ブラウザはERR_BLOCKED_BY_CLIENT。保護解除せず未確認。P06_HEALTH_TOKEN未設定。Edge service-role HTTP成功も未確認|
+
+P02/P03引継ぎは P01_P02_P03_DOMAIN_CONTRACT.md。PR31 head 3ca2e73ccca1a816bef6d8aa3a3dbecca3494a79 を読取り照合し、アプリcallback=/auth/game04/callback、決済return=/billing/return、Webhook=POST /api/billing/webhook を固定した。Google登録callbackはSupabase originの /auth/v1/callback。外部provider/Stripe endpoint/本番envは契約準備であり、今回設定済みとはしない。PR31アプリは本番接続/live billingをまだ拒否する。
+
+必要な本人操作は外部DNS管理へのアクセス提供、または次の一括設定：既存ゾーンとMX/TXT/CAA等を保全し、権威DNSでこのドメインのゾーンが有効か確認、上記2レコードを設定。同名A/AAAA/CNAME競合があれば用途を確認してから整理する。NS全変更や他レコード削除は求めない。DNSサービス名は未特定で、Vercel画面はThird Partyと表示。
+
+DNS回復後はVercel Refresh→Valid Configuration→TLS/SAN/有効期間→apex/www/既定URLの匿名GET・POST遮断→認証済み限定確認の順。wwwの転送設定は保存済みだが保護との応答順も実測する。Stripeサーバー通知は保護と干渉するため、サイト全体を解除せず経路限定方式をPR31担当と確定する。現在通知endpointは未有効化。
+
+追加費用判断なし。G2/G3開発DB/API・既存GAME04・GAME03は変更していない。P06移行準備未完、G5後M、G6公開判断を維持。
