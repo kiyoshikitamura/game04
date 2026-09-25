@@ -1,0 +1,124 @@
+# GAME04 P06 本番環境構築結果
+
+2026-09-25 JST更新。**基盤構築済み部分あり / 移行準備未完 / P06未合格**。
+ユーザーから月額約US$10追加の承認を受領。本番DBを実作成し、前回の費用待ちと実行環境切断は解消した。
+
+## 構築・確認した対象
+
+|対象|識別子/適用版|状態|
+|---|---|---|
+|専用配信先|game04-production-receiver / prj_sFLd5kZeu7pjveQIkeL88ShfN8i8|既存Pro team、Git未接続。All Deployments Vercel Authentication保存・reload確認済み|
+|本番DB|game04-prod / soiksqgtmcnspfedmanr / ap-northeast-1|ACTIVE_HEALTHY。既存組織mvkvwqhvpoxpvxbumfjk内。SQL接続確認済み|
+|確定基盤schema|20260924163630 game04_p06_private_foundation / p06-v1|private game04_ops管理台帳。maintenance=true、公開/課金/job=false。RLSとrole権限確認|
+|素材保存先|game04-assets|private、素材未投入。正式素材はG5候補をMで配置|
+|復旧用保存先|game04-ops-backups|private、実backup未格納。DBバックアップとStorage実体を別保全|
+|基盤API|game04-p06-health v1 / verify_jwt=true|ACTIVE、未認証401、anon JWT503。service_roleだけ許可するコード。管理用HTTP成功試験は未実施|
+|停止receiver|infra/game04-production/receiver|ゲーム/DB/決済依存なし。専用health handlerと常時503catchall。bf13091を専用projectへ配信、READY。HTTP/routing2試験PASS|
+|復旧確認|private ops JSON→制約付きTEMP復元→比較→ROLLBACK|1行復元/一致ともtrue。DB物理backup復旧の合格ではない|
+|監視|DB/API/Edge/Auth/Storage/Realtimeログ|実ログ読取成功。DB容量10,882,195 bytes、接続8は観測値。通知送信先は未指定|
+
+本番schemaにはゲームテーブル0、ユーザー0、Storage object0。cron未導入、ゲームAPI/正式master未移行。開発DB全量コピーやユーザー/注文/QA複製なし。
+管理台帳は停止状態を記録するが、Mで移すゲームAPIに停止を自動強制する実装ではない。Mのserver/API制御が別途必要。
+
+## 環境分離
+
+|用途|配信/DB|今回の扱い|
+|---|---|---|
+|GAME03|tribe-neon / ktpolnkyyfkowxdmijww、本番参照のみ|変更なし。秘密値/商品をコピーしない|
+|GAME04開発|game04 / lrgyllgzcdcphlbmkknc、G2 branch work/game04-g2-20260924|変更なし。基準7476566、観測API v21。G1 v19へ戻さない|
+|既存GAME04 Production|game04-gray.vercel.app / prj_vV06TC8bU3TEFRpNXFNdONiZmULE / a83a94a|既存main連動配信を保全。認証保護なしとの前回観測。今回切替/alias変更なし|
+|新本番受け皿|game04-production-receiver / soiksqgtmcnspfedmanr|既存配信と別資源、ゲーム移行/一般公開なし|
+
+## 独立確認・証拠
+
+- DB anon/authenticatedのprivate schema利用不可、service_role更新不可/SELECTのみを確認。
+- RESTのprivate schema要求は406/PGRST106で非公開を確認。public経路の一部502/通信エラーは安定疎通合格としない。
+- Storageは2bucketともpublic=false、client policyなし。公開path試験400。実素材未配置なので実体読取受入はM。
+- security advisorはprivate opsのRLS policyなしINFOのみ。意図したclient拒否であり公開policyを追加しない。
+- Edge hash: 0ad1a703c512a763aace25fa83417d4568cb0390e2dd4ea4f39642ee48f0d7cd。
+- FOUNDATION_EVIDENCE.json、AUTH_BACKUP_ACCESS.md、INDEPENDENT_VERIFICATION.md、DB reportに範囲を記録。
+- 停止receiverのHTTP/route2試験PASS。ゲーム本体未変更、本体npm run check未実施。
+
+## 必須未完・依存
+
+1. 停止receiver配信は今回完了。匿名遮断12経路PASS。認証通過後のクラウド関数503/health200確認は未完。P06_HEALTH_TOKENは未設定。ブラウザは対象URLでERR_BLOCKED_BY_CLIENTとなり、保護を解除して試験していない。
+2. 2026-09-25 12:51 JSTにユーザーが本番管理設定完了を報告。signup停止はユーザー実施報告として受領。添付で物理backup 2件とMicro選択表示を確認（詳細は末尾）。SMTP/provider設定と認証後の管理検証は未完。作業ブラウザ接続不一致のため直接画面確認は未回復。
+3. 正式domain、Google/SMTP、Stripe本番商品/通知先、リーガル問い合わせ先はP01〜P04の確定待ち。追加の費用判断は今回発生していない。
+4. G2/P02/P03は現状本番を拒否するコードがある。本番ref許可表とserver側公開制御を担当契約に沿ってM候補へ接続する。
+5. G5最終manifest、確定ゲームschema差分、正式master/material allowlist、完全backup復旧確認、監視通知接続、本番操作/認証/決済受入は未完。
+
+P06合格、M本番受入、G6公開合格とはしない。費用の再承認は不要。GAME03/開発/既存Production変更、mainマージ、一般公開、実金銭決済、ドメイン購入は行っていない。
+
+## 保存・受渡し
+
+Branch: work/game04-p06-20260925 / Draft PR #32。G2との衝突を避けinfra/game04-productionとP06専用docsのみ変更。
+G2/P02〜P04にはCONNECTION_CONTRACT.mdで本番refと担当境界を受渡す。M手順はGAME04_M_本番移行・復旧手順.md。最終SHAはPR headを参照。
+
+管理画面のsignup停止・backup・Microについては末尾のユーザー実施報告と添付確認を参照。再ログインや同じ設定操作は求めない。SMTP/Google等の外部接続設定はP03契約に沿って継続確認する。
+
+RLS policyなしINFOの説明: https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy 。private台帳をclientへ公開しないため意図した設定。
+
+## 再開時の配信構築結果（2026-09-25 JST）
+
+- Deployment: `dpl_F21SNQXmXdce4wRJ2Y8WELUAkeJR` / READY / source `bf1309128266f622d15fada810357761e32ccd67`。
+- 不変URL: https://game04-production-receiver-fe5swww0u-kiyoshi-kitamura.vercel.app
+- 既定alias: https://project-0jsj9.vercel.app （正式domainではない）。branch alias: https://game04-production-receiver-git-work-gam-880f26-kiyoshi-kitamura.vercel.app
+- フォルダアップロードはファイル選択成功後も配信なし。代替としてRoot Directoryを`infra/game04-production/receiver`に固定し、フォルダ外ファイルを除外、Basic build machineへ設定。既存GitHub接続で対象repoを一時接続し、上記SHAを指定して配信した。
+- 作成ボタンはPreview表記だったが、結果は専用projectのProduction。ゲーム本体は含まず、既存game04 project/main/共有aliasは未変更。配信後にGit接続をRemove Connectionで解除し、未接続状態を確認した。
+- All Deployments / Require Log Inは配信後も保存状態を確認。独立担当の匿名GET（Cookie/Authorizationなし、redirect追随なし）で3ホスト×4経路が全て302→Vercel SSO。`RECEIVER_DEPLOYMENT_EVIDENCE.json`参照。
+- 専用projectのVercel Cron実行をDisabledへ変更。ジョブ定義なし。Mで定義と許可対象を受入するまで再有効化しない。
+- 本配信はゲーム受入でもDB接続確認でもない。cloud healthとSupabase管理設定等の必須未完は残るためP06未合格を維持。
+
+## 管理設定のユーザー実施・添付確認（2026-09-25 12:51 JST）
+
+対象は直前に指定した `game04-prod / soiksqgtmcnspfedmanr`。添付は画面の一部でproject識別子を含まないため、対象との対応はユーザー報告に基づく。
+
+|項目|結果|証拠の範囲|
+|---|---|---|
+|Allow new users to sign up OFF・保存|ユーザー「設定完了」を受領|Auth画面画像なし。担当によるAPI再検証は未実施|
+|Scheduled backups|PHYSICAL 2件とRestoreボタンの表示を確認|2026-09-24 22:23:33 UTC（09-25 07:23:33 JST）、09-24 16:25:32 UTC（09-25 01:25:32 JST）。実バックアップの存在確認。復元試験は未実施|
+|Compute|MICRO選択表示、1 GB memory / Shared compute、US$0.01344/hour|ユーザー設定完了報告＋添付表示。30日換算US$9.6768、31日換算US$9.99936。compute単体で他利用料を含まない|
+
+添付画像1の注意書きどおり、Storage object実体はDB backupに含まれない。Mで素材manifestと実体を別保全する。
+最新backupは基盤migration適用時刻より後。ただしbackup内部のschemaや復旧結果を確認したものではない。
+証拠元: ユーザー添付 file_000000000f8882069e4a0536a5f680e0（Database Backups）、file_000000008660820995f9f84661284be8（Compute）。秘密値なし。
+この更新でbackup実在確認待ちを解消。signupはユーザー実施済み、Microは画面確認済みとして管理し、P06全体の合格とはしない。
+
+## P01ドメイン接続・本番設定の追加実施（2026-09-25）
+
+この節が上の正式domain未確定・signup API未確認という過去状態を更新する。
+
+|対象|実施・観測結果|
+|---|---|
+|正式URL|https://sengoku-hime-ennbu.com に確定。専用receiverのProductionへ登録済み|
+|www|www.sengoku-hime-ennbu.com を登録し、apexへの308 Permanent Redirectを保存|
+|DNS|外部DNS。Vercel DNS編集不可。既存レコード/NSは変更していない|
+|必要レコード|A @ = 216.150.1.1 / CNAME www = 346e02207322e8c5.vercel-dns-016.com.|
+|現在のDNS|Google DNSのNS/A/www CNAME照会でStatus 2 SERVFAIL。権威DNSがREFUSED、lame delegationの可能性との応答。単なる伝播待ちとは判定しない|
+|TLS|Vercelで証明書未発行。両domain Invalid Configuration。HTTPS成功・正式domain匿名遮断・実308転送はDNS解消後に検証|
+|公開制御|Require Log In / All Deploymentsを管理画面で再確認。設定変更なし。Git解除・Cron無効を維持|
+|Supabase signup|本番refの /auth/v1/settings を公開用キーで読取りHTTP200、disable_signup=true、anonymous_users=false。ユーザー完了報告をAPIで確認済み|
+|認証provider|google=false、email=true、mailer_autoconfirm=false。SMTP配送受入を意味しない|
+|実backup|添付でPHYSICAL2件の存在確認済み。実restoreは未実施|
+|クラウドhealth|認証付きVercel取得は接続権限エラー、ブラウザはERR_BLOCKED_BY_CLIENT。保護解除せず未確認。P06_HEALTH_TOKEN未設定。Edge service-role HTTP成功も未確認|
+
+P02/P03引継ぎは P01_P02_P03_DOMAIN_CONTRACT.md。PR31 head 3ca2e73ccca1a816bef6d8aa3a3dbecca3494a79 を読取り照合し、アプリcallback=/auth/game04/callback、決済return=/billing/return、Webhook=POST /api/billing/webhook を固定した。Google登録callbackはSupabase originの /auth/v1/callback。外部provider/Stripe endpoint/本番envは契約準備であり、今回設定済みとはしない。PR31アプリは本番接続/live billingをまだ拒否する。
+
+必要な本人操作は外部DNS管理へのアクセス提供、または次の一括設定：既存ゾーンとMX/TXT/CAA等を保全し、権威DNSでこのドメインのゾーンが有効か確認、上記2レコードを設定。同名A/AAAA/CNAME競合があれば用途を確認してから整理する。NS全変更や他レコード削除は求めない。DNSサービス名は未特定で、Vercel画面はThird Partyと表示。
+
+DNS回復後はVercel Refresh→Valid Configuration→TLS/SAN/有効期間→apex/www/既定URLの匿名GET・POST遮断→認証済み限定確認の順。wwwの転送設定は保存済みだが保護との応答順も実測する。Stripeサーバー通知は保護と干渉するため、サイト全体を解除せず経路限定方式をPR31担当と確定する。現在通知endpointは未有効化。
+
+追加費用判断なし。G2/G3開発DB/API・既存GAME04・GAME03は変更していない。P06移行準備未完、G5後M、G6公開判断を維持。
+
+## DNS保存後の実接続確認（2026-09-25 16時頃 JST）
+
+ユーザーが15:58 JSTにお名前.com DNS保存完了を報告。以下により前節のDNSエラー・TLS未発行・正式domain匿名確認待ちを解消。
+
+- Google DNSはapex A、www CNAMEともStatus 0。A=216.150.1.1、CNAME=346e02207322e8c5.vercel-dns-016.com.、TTL各3600。
+- Vercelで両domain Valid Configuration。apexは専用receiver Production、wwwはapexへの308転送設定。
+- TLS管理証明書: apex cert_hf4rOUpJpwSCJzK21pLhXqYW、www cert_taMl9AQnq12VG1y3y4ckQEH9。両方Auto更新、有効期限表示2026-12-24。両HTTPS要求成功。
+- Cookie/Authorizationなし・redirect非追随で、apex/www各4経路（GET /、GET /auth/game04/callback、GET /api/health、POST /api/billing/webhook）の計8要求が全て302→Vercel SSO。匿名公開なし。
+- wwwは匿名時に308より認証保護が先に応答。認証通過後の実308は未確認。healthも匿名遮断試験であり、認証済みhealth200/DB接続成功とはしない。
+- WebhookのPOSTも保護で遮断される。P02/Mは署名検証付き限定通知入口を確定すること。全体保護は解除していない。
+- DNSの追加本人操作は不要。正式URLは https://sengoku-hime-ennbu.com 。接続契約はP01_P02_P03_DOMAIN_CONTRACT.mdでPR31担当へ受渡し。Google/SMTP/決済外部設定、正のhealth確認、実復元等の残件は継続。
+- Git自動配信解除・Cron無効維持。ゲーム移行なし・公開なし・P06全体未合格。G5後M、G6公開判断を維持。

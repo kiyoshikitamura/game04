@@ -1,0 +1,125 @@
+{
+  "checked_at": "2026-09-24T17:37:19.250047+00:00",
+  "deployment_id": "dpl_F21SNQXmXdce4wRJ2Y8WELUAkeJR",
+  "source_sha_reported_by_parent": "bf1309128266f622d15fada810357761e32ccd67",
+  "anonymous_http": {
+    "unique_deployment": {
+      "checked_at": "2026-09-24T17:37:02.761239+00:00",
+      "url": "https://game04-production-receiver-fe5swww0u-kiyoshi-kitamura.vercel.app",
+      "redirects_followed": false,
+      "results": [
+        {
+          "path": "/",
+          "status": 302,
+          "location": "https://vercel.com/sso-api",
+          "content_type": "text/plain",
+          "vercel_auth_marker": false
+        },
+        {
+          "path": "/healthz",
+          "status": 302,
+          "location": "https://vercel.com/sso-api",
+          "content_type": "text/plain",
+          "vercel_auth_marker": false
+        },
+        {
+          "path": "/api/healthz",
+          "status": 302,
+          "location": "https://vercel.com/sso-api",
+          "content_type": "text/plain",
+          "vercel_auth_marker": false
+        },
+        {
+          "path": "/api/arbitrary",
+          "status": 302,
+          "location": "https://vercel.com/sso-api",
+          "content_type": "text/plain",
+          "vercel_auth_marker": false
+        }
+      ]
+    },
+    "aliases": {
+      "checked_at": "2026-09-24T17:36:58.854896+00:00",
+      "redirects_followed": false,
+      "results": [
+        {
+          "url": "https://project-0jsj9.vercel.app/",
+          "status": 302,
+          "location": "https://vercel.com/sso-api",
+          "content_type": "text/plain",
+          "vercel_auth_marker": false
+        },
+        {
+          "url": "https://project-0jsj9.vercel.app/healthz",
+          "status": 302,
+          "location": "https://vercel.com/sso-api",
+          "content_type": "text/plain",
+          "vercel_auth_marker": false
+        },
+        {
+          "url": "https://project-0jsj9.vercel.app/api/healthz",
+          "status": 302,
+          "location": "https://vercel.com/sso-api",
+          "content_type": "text/plain",
+          "vercel_auth_marker": false
+        },
+        {
+          "url": "https://project-0jsj9.vercel.app/api/arbitrary",
+          "status": 302,
+          "location": "https://vercel.com/sso-api",
+          "content_type": "text/plain",
+          "vercel_auth_marker": false
+        },
+        {
+          "url": "https://game04-production-receiver-git-work-gam-880f26-kiyoshi-kitamura.vercel.app/",
+          "status": 302,
+          "location": "https://vercel.com/sso-api",
+          "content_type": "text/plain",
+          "vercel_auth_marker": false
+        },
+        {
+          "url": "https://game04-production-receiver-git-work-gam-880f26-kiyoshi-kitamura.vercel.app/healthz",
+          "status": 302,
+          "location": "https://vercel.com/sso-api",
+          "content_type": "text/plain",
+          "vercel_auth_marker": false
+        },
+        {
+          "url": "https://game04-production-receiver-git-work-gam-880f26-kiyoshi-kitamura.vercel.app/api/healthz",
+          "status": 302,
+          "location": "https://vercel.com/sso-api",
+          "content_type": "text/plain",
+          "vercel_auth_marker": false
+        },
+        {
+          "url": "https://game04-production-receiver-git-work-gam-880f26-kiyoshi-kitamura.vercel.app/api/arbitrary",
+          "status": 302,
+          "location": "https://vercel.com/sso-api",
+          "content_type": "text/plain",
+          "vercel_auth_marker": false
+        }
+      ]
+    },
+    "passed": true,
+    "request_credentials": "none; urllib default opener; no cookies or Authorization supplied",
+    "redirects_followed": false
+  },
+  "local_tests": {
+    "command": "npm test",
+    "passed": 2,
+    "failed": 0
+  },
+  "review": {
+    "game_code_included": false,
+    "database_client_or_network_calls": false,
+    "package_dependencies": "none",
+    "unauthenticated_health": "503",
+    "authorized_health": "GET/HEAD only; P06_HEALTH_TOKEN minimum 32 characters; SHA256 timing-safe comparison",
+    "catchall": "503 unavailable with no-store and noindex",
+    "limitations": [
+      "Cloud function 503 and authenticated 200 not established by anonymous requests; Vercel protection intercepts first.",
+      "Local source reviewed; deployment source SHA supplied by parent; no remote artifact comparison performed.",
+      "Status-only receiver intentionally does not test database connectivity."
+    ]
+  }
+}
