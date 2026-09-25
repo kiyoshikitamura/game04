@@ -1,18 +1,24 @@
 /** Share decoded assets across setup visits; failed or stalled loads remain retryable. */
 const decodedImages = new Map<string, Promise<void>>();
+const readyImages = new Set<string>();
+/** Synchronous readiness prevents a cached scene from flashing its loading dialog. */
+export const isBattleImageReady = (src: string): boolean => readyImages.has(src);
 export function preloadBattleImage(src: string): Promise<void> {
   const cached = decodedImages.get(src);
   if (cached) return cached;
   const pending = new Promise<void>((resolve, reject) => {
     const image = new Image();
+    let settled = false;
     const timer = setTimeout(() => {
-      image.onload = null;
-      image.onerror = null;
-      reject(new Error('Battle image timed out'));
+      finish(new Error('Battle image timed out'));
     }, 12000);
     const finish = (error?: unknown) => {
+      if (settled) return;
+      settled = true;
       clearTimeout(timer);
-      if (error) reject(error); else resolve();
+      image.onload = null;
+      image.onerror = null;
+      if (error) reject(error); else { readyImages.add(src); resolve(); }
     };
     image.onload = () => image.decode().then(() => finish(), finish);
     image.onerror = () => finish(new Error('Battle image unavailable'));

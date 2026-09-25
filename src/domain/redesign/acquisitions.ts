@@ -1,4 +1,4 @@
-import { CHARACTER_MASTERS, SKILL_MASTERS, EQUIPMENT_MASTERS } from './masters';
+import { CHARACTER_MASTERS, OWNABLE_SKILL_MASTERS as SKILL_MASTERS, EQUIPMENT_MASTERS } from './masters';
 import { GROWTH_VERSION, DUPLICATE_SKILL_MATERIALS } from './growthMaster';
 import type { RedesignState, Rarity } from './types';
 

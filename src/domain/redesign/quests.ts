@@ -1,6 +1,6 @@
 import { FORMAL_QUEST_STAGES } from './questMaster';
 import type { QuestArea } from './types';
-import backgrounds from '../../theme/local-backgrounds.json';
+import { QUEST_BACKGROUND_PATHS } from './approvedBackgrounds';
 export { questEnergyCost } from './questMaster';
 const AREAS = [
   ['mikawa', '三河の地', '最初の一歩', '敵の属性と行動カウントを見て、武将の並びを整えよう。'],
@@ -15,7 +15,7 @@ const AREAS = [
   ['sekigahara', '関ヶ原', '暁の約束', '変わりゆく敵の陣を読み、五人の力を結集しよう。'],
 ] as const;
 
-export const QUEST_AREAS: QuestArea[] = AREAS.map(([id, name, , description], area) => ({id,index:area+1,name,description,image:backgrounds[area]?.image ?? `/bg/sengoku/${area % 2 ? 'castle-town' : 'castle-approach'}.jpg`,stages:FORMAL_QUEST_STAGES.filter(stage=>stage.areaId===id)}));
+export const QUEST_AREAS: QuestArea[] = AREAS.map(([id, name, , description], area) => ({id,index:area+1,name,description,image:QUEST_BACKGROUND_PATHS[id],stages:FORMAL_QUEST_STAGES.filter(stage=>stage.areaId===id)}));
 export const QUEST_STAGES = FORMAL_QUEST_STAGES;
 export function getQuestStage(id:string) { return QUEST_STAGES.find(stage=>stage.id===id); }
 export function isQuestStageUnlocked(id:string, clearedStages:readonly string[]):boolean {

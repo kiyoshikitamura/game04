@@ -1,0 +1,70 @@
+{
+  "checkedAt": "2026-09-25T00:33:58.925Z",
+  "userId": "b1b9ee70-39d0-4e55-baef-a3df034dedfe",
+  "checks": [
+    {
+      "name": "R01 skills auto selection / save / reload / unresolved inventory retained",
+      "pass": true,
+      "version": 8
+    },
+    {
+      "name": "R01 equipment auto selection / save / reload / unresolved inventory retained",
+      "pass": true,
+      "version": 12
+    }
+  ],
+  "requests": [
+    {
+      "action": "get_state",
+      "requestId": "d013f559-5cf1-4ae0-8b84-122fea9675a6",
+      "status": 200,
+      "version": 4
+    },
+    {
+      "action": "save_deck",
+      "requestId": "1a1d00d8-c78b-4cec-bcd7-dc404d83020c",
+      "status": 200,
+      "version": 7
+    },
+    {
+      "action": "get_state",
+      "requestId": "6cd7615e-9c6c-42ad-b978-532de8a5d669",
+      "status": 200,
+      "version": 8
+    },
+    {
+      "action": "save_deck",
+      "requestId": "bb1d1017-d4d1-403c-a6ea-347522ff591d",
+      "status": 200,
+      "version": 11
+    },
+    {
+      "action": "get_state",
+      "requestId": "2dda4dcf-9e92-4898-bc7e-38c81aaff84d",
+      "status": 200,
+      "version": 12
+    },
+    {
+      "action": "soul_exchange",
+      "requestId": "33021f47-70d7-4b9e-a8e7-d1a82c8ee823",
+      "status": 200,
+      "version": 15
+    },
+    {
+      "action": "get_state",
+      "requestId": "7e822c94-2e0f-4536-8e14-70921e638c31",
+      "status": 200,
+      "version": 16
+    },
+    {
+      "action": "soul_exchange",
+      "requestId": "33021f47-70d7-4b9e-a8e7-d1a82c8ee823",
+      "status": 200,
+      "version": 17
+    }
+  ],
+  "scope": "Authenticated HTTP and get_state, not browser / physical device verification",
+  "pass": false,
+  "resumedAt": "2026-09-25T00:35:20.769Z",
+  "error": "Expected values to be strictly equal:\n\n17 !== 16\n"
+}

@@ -1,7 +1,7 @@
 import { simulateBattle as simulatePreviousBattle } from './battleCommonV1.ts';
 import { simulateBalanceBattle, BALANCE_BATTLE_VERSION } from './battleBalanceV2.ts';
 export { BALANCE_BATTLE_VERSION } from './battleBalanceV2.ts';
-import type { BattleInput, BattleUnit, EnemyUnit, SkillMaster, SkillEffect, Element, TargetRule } from './types.ts';
+import type { BattleInput, RaidBattleStartSnapshot, BattleUnit, EnemyUnit, SkillMaster, SkillEffect, Element, TargetRule } from './types.ts';
 import { simulateBattle as simulateLegacy, burstChance as legacyBurstChance } from './battleLegacy.ts';
 export type BattleOutcome = 'win' | 'lose' | 'limit';
 export interface BattleStatus {
@@ -75,8 +75,12 @@ export interface BattleAnalysis {
     bursts: number;
 }
 export interface BattleResult {
+    /** Server-persisted start context, absent on old recordings. Not a simulated frame value. */
+    raidStartSnapshot?: RaidBattleStartSnapshot;
     seed: number;
     outcome: BattleOutcome;
+    /** Separate accounting, only emitted for approved new invasion inputs. */
+    actualHpDamage?: number;
     totalDamage: number;
     playerActions: number;
     wavesCleared: number;

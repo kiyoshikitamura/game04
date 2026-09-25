@@ -30,7 +30,7 @@ export default function BillingStatusDialog({ orderId, onClose, onGranted }: {
       const result = await billingFetch("restore", data.session.access_token, { orderId });
       if (!mounted.current) return;
       setMessage(result.status === "GRANTED"
-        ? "購入が完了しました。プレゼントBOXで商品をお受け取りください。"
+        ? "購入が完了しました。パック・輝石はプレゼントBOXでお受け取りください。VIP特典は自動で反映されます。"
         : result.status === "EXPIRED"
           ? "お支払い期限が終了しました。ショップから商品を選び直してください。"
           : "お支払いはまだ確定していません。中断した場合は、ショップで同じ商品を選ぶと再開できます。");

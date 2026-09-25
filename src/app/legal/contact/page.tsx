@@ -9,7 +9,7 @@ type PageProps = { searchParams: Promise<{ from?: string }> };
 export default async function Page({ searchParams }: PageProps) {
   const { from } = await searchParams;
   return (
-    <LegalPage title="お問い合わせ" updatedAt="2026年9月18日" returnToGame={from === "settings"}>
+    <LegalPage title="お問い合わせ" updatedAt="2026年9月24日" returnToGame={from === "settings"}>
       <h2>お問い合わせ窓口</h2>
       {GAME04_LEGAL.supportEmail ? <p><a href={`mailto:${GAME04_LEGAL.supportEmail}?subject=${encodeURIComponent("戦国姫艶武 お問い合わせ")}`}>{GAME04_LEGAL.supportEmail}</a></p> : <p>正式公開に向けて窓口を準備しています。開発確認中の不具合は、このゲームをご案内した連絡先へお知らせください。</p>}
       <h2>不具合の報告に必要な情報</h2>

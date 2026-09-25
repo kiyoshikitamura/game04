@@ -1,6 +1,6 @@
-﻿"use client";
+"use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/utils/supabase";
 import { USER_BIO_MAX_LENGTH } from "@/domain/presentation/userBio";
 
@@ -18,8 +18,11 @@ export function useUserProfile(
   syncBootstrapData: (userId: string) => Promise<void>,
   setShowSettingsPanel: (show: boolean) => void,
   setErrorMessage: (msg: string | null) => void,
-  setConfirmDialogConfig: React.Dispatch<React.SetStateAction<import("@/app/components/ui/ConfirmDialog").ConfirmDialogConfig | null>>
+  setConfirmDialogConfig: React.Dispatch<React.SetStateAction<import("@/app/components/ui/ConfirmDialog").ConfirmDialogConfig | null>>,
+  profileReady: boolean = false
 ) {
+  const profileRevisionRef = useRef(0);
+  const saveInFlightRef = useRef(false);
   const [ownedTitles, setOwnedTitles] = useState<Array<{ id: string; name: string }>>([]);
   const [username, setUsername] = useState<string>("");
   const [bio, setBio] = useState<string>("");
@@ -81,7 +84,7 @@ export function useUserProfile(
   };
 
   useEffect(() => {
-    if (!session?.user?.id) {
+    if (!session?.user?.id || !profileReady) {
       setOwnedTitles([]);
       return;
     }
@@ -97,17 +100,17 @@ export function useUserProfile(
       setOwnedTitles((data || []).map((row: any) => ({ id: row.title_id, name: row.title_master?.name || row.title_id })));
     };
     void loadOwnedTitles();
-  }, [session?.user?.id]);
+  }, [session?.user?.id, profileReady]);
 
   useEffect(() => {
-    if (!session?.user?.id) {
+    if (!session?.user?.id || !profileReady) {
       setOwnedHomeCosmeticIds(null);
       return;
     }
     void syncSharedHomeCosmetics().catch((error) => {
       console.warn("Shared cosmetics are unavailable:", error.message);
     });
-  }, [session?.user?.id]);
+  }, [session?.user?.id, profileReady]);
 
   const [selectedLeader, setSelectedLeader] = useState<string>("");
   const [upgradeSelectedCharId, setUpgradeSelectedCharId] = useState<string>("");
@@ -120,7 +123,7 @@ export function useUserProfile(
     foreground: string;
     interior: string;
   }> = {}) => {
-    if (!session || profileLoading) return false;
+    if (!session || saveInFlightRef.current) return false;
     const nextUsername = (overrides.username ?? username).trim();
     const nextBio = (overrides.bio ?? bio).trim();
     if (!nextUsername) {
@@ -135,6 +138,7 @@ export function useUserProfile(
       setErrorMessage(`自己紹介は${USER_BIO_MAX_LENGTH}文字以内で入力してください。`);
       return false;
     }
+    saveInFlightRef.current = true;
     setProfileLoading(true);
     playCyberSe("click");
 
@@ -151,17 +155,12 @@ export function useUserProfile(
     if (safeBg === "bg_bazar" && cash < 20000) safeBg = "auto";
 
     try {
-      if (updatesProfile && safeTitle !== titleEquipped) {
-        const { error: titleError } = await supabase.rpc("equip_owned_title", { p_title_id: safeTitle });
-        if (titleError) throw titleError;
-      }
-
       if (updatesProfile) {
-        const { error } = await supabase
-          .from("users")
-          .update({ username: nextUsername, bio: nextBio })
-          .eq("id", session.user.id);
-
+        const { data, error } = await supabase.rpc("game04_update_own_profile", {
+          p_username: nextUsername,
+          p_bio: nextBio,
+          p_title_id: safeTitle !== titleEquipped ? safeTitle : null,
+        });
         if (error) {
           if (error.code === "23505") {
             setErrorMessage("このユーザー名は既に他のプレイヤーが登録しています。");
@@ -169,6 +168,7 @@ export function useUserProfile(
           }
           throw error;
         }
+        if (!data || data.id !== session.user.id) throw new Error("Profile response owner mismatch");
       }
 
       if (updatesHome) {
@@ -191,6 +191,7 @@ export function useUserProfile(
       }
 
       if (updatesProfile) {
+        profileRevisionRef.current += 1;
         setUsername(nextUsername);
         setBio(nextBio);
         setTitleEquipped(safeTitle);
@@ -201,7 +202,9 @@ export function useUserProfile(
         setEquippedFrontEffect(safeForeground);
         setInteriorItem(safeInterior);
       }
-      await syncBootstrapData(session.user.id);
+      // The save response confirms this profile. Unrelated inventory/social reads
+      // must not hold the save dialog open or overwrite its freshly saved fields.
+
       setConfirmDialogConfig({ isOpen: true, title: "保存完了", message: "設定を保存しました。", confirmText: "OK", cancelText: "", presentation: "canonical", onConfirm: () => setConfirmDialogConfig(null), onCancel: () => setConfirmDialogConfig(null) });
       return true;
     } catch (err: any) {
@@ -215,6 +218,7 @@ export function useUserProfile(
       }
       return false;
     } finally {
+      saveInFlightRef.current = false;
       setProfileLoading(false);
     }
   };
@@ -228,19 +232,21 @@ export function useUserProfile(
   };
 
   const handleUpdateBio = async (value: string) => {
-    if (!session?.user?.id || profileLoading) return false;
+    if (!session?.user?.id || saveInFlightRef.current) return false;
     const nextBio = value.trim();
     if (Array.from(nextBio).length > USER_BIO_MAX_LENGTH) {
       setErrorMessage(`自己紹介は${USER_BIO_MAX_LENGTH}文字以内で入力してください。`);
       return false;
     }
+    saveInFlightRef.current = true;
     setProfileLoading(true);
     playCyberSe("click");
     try {
-      const { error } = await supabase.from("users").update({ bio: nextBio }).eq("id", session.user.id);
+      const { data, error } = await supabase.rpc("game04_update_own_profile", { p_bio: nextBio });
       if (error) throw error;
-      setBio(nextBio);
-      await syncBootstrapData(session.user.id);
+      if (!data || data.id !== session.user.id) throw new Error("Profile response owner mismatch");
+      profileRevisionRef.current += 1;
+      setBio(data.bio ?? "");
       setConfirmDialogConfig({ isOpen: true, title: "保存完了", message: "自己紹介を保存しました。", confirmText: "OK", cancelText: "", presentation: "canonical", onConfirm: () => setConfirmDialogConfig(null), onCancel: () => setConfirmDialogConfig(null) });
       return true;
     } catch (error: any) {
@@ -248,11 +254,13 @@ export function useUserProfile(
       else setErrorMessage("自己紹介の保存に失敗しました。");
       return false;
     } finally {
+      saveInFlightRef.current = false;
       setProfileLoading(false);
     }
   };
 
   return {
+    profileRevisionRef,
     username, setUsername,
     bio, setBio,
     avatarUrl, setAvatarUrl,

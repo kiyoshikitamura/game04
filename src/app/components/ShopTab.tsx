@@ -13,6 +13,7 @@ import BillingHistory from "./BillingHistory";
 import PaidAssetExpiry from "./PaidAssetExpiry";
 import ShopExchangePanel from "./ShopExchangePanel";
 import type { RedesignState } from "@/domain/redesign/types";
+import { isVipActive } from "@/domain/redesign/vip";
 import { SHOP_CATALOG_VERSION } from "@/utils/shop_master_data";
 
 const PACK_EXPIRY_NOTICE = "パックの未使用アイテム・銭は付与から120日で失効します。プレゼント受取による期限延長はありません。";
@@ -20,11 +21,12 @@ const shopText = (value: string) => value.replaceAll("CASH", "銭").replaceAll("
 
 function Bundle({ product }: { product: ShopProduct }) {
   return <p className="shop-bundle-text">
+    {product.category === "VIP" && product.description}
     {product.items.map(item => `${shopText(item.itemName)} ×${item.quantity.toLocaleString("ja-JP")}`).join(" / ")}
   </p>;
 }
 
-export type ShopExchangeProps = { state: RedesignState; onExchange: (payload: Record<string, unknown>) => Promise<unknown> };
+export type ShopExchangeProps = { state: RedesignState; onExchange: (payload: Record<string, unknown>) => Promise<unknown>; onUseEnergyDrink?: () => Promise<unknown> };
 export default function ShopTab({ exchange }: { exchange?: ShopExchangeProps } = {}) {
   const [initialReadiness] = useState(peekBillingReadiness);
   const [availability, setAvailability] = useState<"loading" | "available" | "unavailable">(initialReadiness ? "available" : "loading");
@@ -50,16 +52,16 @@ export default function ShopTab({ exchange }: { exchange?: ShopExchangeProps } =
   } = useGame();
   const busy = profileLoading || upgradeLoading;
   const disabled = busy || availability !== "available";
-  const packOrder = ["beginner_pack_01", "growth_pack_01", "awakening_pack_01", "ticket_pack_01"];
+  const packOrder = ["beginner_pack_01", "growth_pack_01", "awakening_pack_01", "ticket_pack_01", "game04_vip_30d"];
   const packs = SHOP_PRODUCTS_MASTER.filter(p => p.shopType === "LIMITED" && p.category !== "DIAMOND").sort((a,b) => packOrder.indexOf(a.id)-packOrder.indexOf(b.id));
   const diamonds = SHOP_PRODUCTS_MASTER.filter(p => p.category === "DIAMOND").sort((a,b) => a.sortOrder-b.sortOrder);
   const normal = SHOP_PRODUCTS_MASTER.filter(p => p.shopType === "NORMAL").sort((a,b) => a.sortOrder-b.sortOrder);
   const purchaseAuthReady = Boolean(session?.user?.id
     && session.user.is_anonymous !== true
-    && onboardingState?.user_id === session.user.id
+    && (exchange || (onboardingState?.user_id === session.user.id
     && onboardingState.has_profile
     && onboardingState.identity_integrity_valid
-    && onboardingState.gameplay_authorized);
+    && onboardingState.gameplay_authorized)));
 
   const showPurchaseAuthGate = () => {
     window.localStorage.setItem("tribe_purchase_auth_return", "shop");
@@ -75,7 +77,8 @@ export default function ShopTab({ exchange }: { exchange?: ShopExchangeProps } =
       presentation: "canonical",
       onConfirm: async () => {
         setConfirmDialogConfig({ isOpen: false });
-        await handleGoogleLogin();
+        if (exchange) window.location.assign("/auth/game04");
+        else await handleGoogleLogin();
       },
       onCancel: () => {
         window.localStorage.removeItem("tribe_purchase_auth_return");
@@ -93,7 +96,7 @@ export default function ShopTab({ exchange }: { exchange?: ShopExchangeProps } =
         {boughtResultModal.items.map((item: ShopProductItem) => <div key={item.itemId} className="bundle-item-chip">
           <span>{shopText(item.itemName)}</span><span>×{item.quantity.toLocaleString("ja-JP")}</span>
         </div>)}
-        <p className="shop-card-desc">プレゼントBOXに届きました。</p>
+        <p className="shop-card-desc">{boughtResultModal.productTitle === "VIPパス" ? "VIP特典が反映されました。" : "プレゼントBOXに届きました。"}</p>
       </div>,
       confirmText: "確認する", onConfirm: close, onCancel: close
     });
@@ -106,7 +109,9 @@ export default function ShopTab({ exchange }: { exchange?: ShopExchangeProps } =
       showPurchaseAuthGate();
       return;
     }
-    const isPack = paid && product.category !== "DIAMOND";
+    const vip = product.category === "VIP";
+    if (vip && exchange && isVipActive(exchange.state.vipExpiresAt)) return;
+    const isPack = paid && product.category !== "DIAMOND" && !vip;
     const remaining = remainingShopPurchases(product, userShopPurchases[product.id] || 0);
     setConfirmDialogConfig({
       isOpen: true, title: shopText(product.title),
@@ -116,7 +121,7 @@ export default function ShopTab({ exchange }: { exchange?: ShopExchangeProps } =
         {!paid && <p className="shop-expiry-notice">有償輝石で交換した分は、元の有効期限を引き継ぎます。</p>}
         {remaining !== null && <p className="shop-card-desc">残り{remaining} / {product.purchaseLimit}回</p>}
         {isPack && <p className="shop-expiry-notice">{PACK_EXPIRY_NOTICE}</p>}
-        {paid && !isPack && <p className="shop-expiry-notice">有償{product.priceJpy?.toLocaleString("ja-JP")}＋無償{((product.items[0]?.quantity ?? 0)-(product.priceJpy ?? 0)).toLocaleString("ja-JP")} 輝石。有償分は付与から120日、無償分は無期限です。</p>}
+        {paid && !isPack && !vip && <p className="shop-expiry-notice">有償{product.priceJpy?.toLocaleString("ja-JP")}＋無償{((product.items[0]?.quantity ?? 0)-(product.priceJpy ?? 0)).toLocaleString("ja-JP")} 輝石。有償分は付与から120日、無償分は無期限です。</p>}
       </div>,
       confirmText: paid ? "お支払いへ" : "購入する",
       onConfirm: async () => {
@@ -130,7 +135,8 @@ export default function ShopTab({ exchange }: { exchange?: ShopExchangeProps } =
 
   const productCard = (product: ShopProduct) => {
     const remaining = remainingShopPurchases(product, userShopPurchases[product.id] || 0);
-    const soldOut = remaining === 0;
+    const vipActive = product.category === "VIP" && !!exchange && isVipActive(exchange.state.vipExpiresAt);
+    const soldOut = remaining === 0 || vipActive;
     const compact = product.category === "DIAMOND" || product.shopType === "NORMAL";
     const price = product.priceJpy !== undefined
       ? `¥${product.priceJpy.toLocaleString("ja-JP")}`
@@ -148,7 +154,7 @@ export default function ShopTab({ exchange }: { exchange?: ShopExchangeProps } =
       <OutlawButton variant="primary" className="shop-buy-button"
         aria-label={`${shopText(product.title)}を${price}で購入`}
         disabled={disabled || soldOut || disabledProductIds.includes(product.id)} onClick={() => confirmPurchase(product)}>
-        {busy ? <span className="shop-btn-spinner" aria-label="処理中" /> : soldOut ? "購入済み" : disabledProductIds.includes(product.id) ? "準備中" : price}
+        {busy ? <span className="shop-btn-spinner" aria-label="処理中" /> : soldOut ? (vipActive ? "有効中" : "購入済み") : disabledProductIds.includes(product.id) ? "準備中" : price}
       </OutlawButton>
     </OutlawCard>;
   };

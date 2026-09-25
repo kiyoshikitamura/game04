@@ -1,3 +1,4 @@
+import { FORMAL_SKILL_MASTERS, getFormalOwnedSkill, isFormalSkillId } from './formalOwnedSkills';
 import { FORMAL_GROWTH_EQUIPMENT_MASTERS, getFormalEquipmentStats } from './formalGrowthMasters';
 import { FORMAL_CHARACTER_ASSIGNMENTS, getFormalCharacterStats } from './formalCharacterStats';
 import { GROWTH_VERSION } from './growthMaster';
@@ -57,6 +58,12 @@ export function commonPreviewSkill(skill:SkillMaster):SkillMaster {
 }
 export const SKILL_MASTERS:SkillMaster[]=LEGACY_SKILL_MASTERS.map(commonPreviewSkill);
 export const COMMON_SKILL_MASTERS=SKILL_MASTERS;
+/** Ownership catalog; legacy gacha and initial grants keep their separate unchanged pool. */
+export const OWNABLE_SKILL_MASTERS:SkillMaster[]=[...SKILL_MASTERS,...FORMAL_SKILL_MASTERS];
+export function getOwnedSkillMaster(id:string,lb:number):SkillMaster|undefined {
+ if(isFormalSkillId(id))return getFormalOwnedSkill(id,lb);
+ return SKILL_MASTERS.find(skill=>skill.id===id);
+}
 /** New inputs only. Never run this over a saved battle input or legacy room snapshot. */
 export function prepareBattleWaves(waves:EnemyUnit[][],rules:BattleRules):EnemyUnit[][] {
  const frozen=structuredClone(waves);
@@ -83,11 +90,11 @@ export function buildBattleParty(state:RedesignState,rules:BattleRules=BATTLE_RU
  if(!owned||!master) throw new Error('編成キャラが見つかりません');
  const stats=(rules.version==='balance-v2-20260920'?getCharacterStats:getLegacyCharacterStats)(master,owned.level,owned.awakening);
  for(const instanceId of Object.values(member.equipment)){const e=state.equipment.find(e=>e.instanceId===instanceId),m=(rules.version==='balance-v2-20260920'?EQUIPMENT_MASTERS:LEGACY_EQUIPMENT_MASTERS).find(m=>m.id===e?.masterId);if(e&&m){const bonus=(rules.version==='balance-v2-20260920'?getEquipmentStats:getLegacyEquipmentStats)(m,e.level,e.lb);for(const key of Object.keys(stats) as (keyof Stats)[])stats[key]+=bonus[key];}}
- return {id:master.id,name:master.name,image:master.image,level:owned.level,element:master.element,stats,skills:member.skillIds.slice(0,getSkillSlots(owned.awakening)).map(id=>{const s=(rules.version==='common-v2-20260920'||rules.version==='balance-v2-20260920'?SKILL_MASTERS:LEGACY_SKILL_MASTERS).find(s=>s.id===id),o=state.skills.find(s=>s.id===id);if(!s||!o)throw new Error('未所持のスキルです');return {...s,effects:s.effects.map(e=>({...e,power:e.power*(1+o.level*0.05)}))};}),passives:rules.version==='balance-v2-20260920'?(getCharacterPassive(master,owned.awakening)?[getCharacterPassive(master,owned.awakening)!]:[]):master.passive&&(rules.version!=='common-v2-20260920'||master.passive.stat==='atk'||master.passive.stat==='def')?[{...master.passive,level:owned.awakening*2,percent:master.passive.percent*(1+owned.awakening*2)}]:[]};
+ return {id:master.id,name:master.name,image:master.image,level:owned.level,element:master.element,stats,skills:member.skillIds.slice(0,getSkillSlots(owned.awakening)).map(id=>{const o=state.skills.find(s=>s.id===id);if(o&&isFormalSkillId(id))return getFormalOwnedSkill(id,o.level);const s=(rules.version==='common-v2-20260920'||rules.version==='balance-v2-20260920'?SKILL_MASTERS:LEGACY_SKILL_MASTERS).find(s=>s.id===id);if(!s||!o)throw new Error('未所持のスキルです');return {...s,effects:s.effects.map(e=>({...e,power:e.power*(1+o.level*0.05)}))};}),passives:rules.version==='balance-v2-20260920'?(getCharacterPassive(master,owned.awakening)?[getCharacterPassive(master,owned.awakening)!]:[]):master.passive&&(rules.version!=='common-v2-20260920'||master.passive.stat==='atk'||master.passive.stat==='def')?[{...master.passive,level:owned.awakening*2,percent:master.passive.percent*(1+owned.awakening*2)}]:[]};
  });}
 export function createInitialState(userId:string):RedesignState {
  const starters=CHARACTER_MASTERS.filter(c=>c.rarity==='N').slice(0,5);
- return {userId,version:0,cash:0,diamonds:0,energy:0,energyMax:50,energyDrinks:0,souls:{},characters:starters.map(c=>({id:c.id,level:1,awakening:0,exp:0,growthVersion:GROWTH_VERSION})),skills:SKILL_MASTERS.slice(0,8).map(s=>({id:s.id,level:0})),equipment:[],deck:starters.slice(0,3).map((c,i)=>({characterId:c.id,skillIds:[SKILL_MASTERS[i%SKILL_MASTERS.length].id],equipment:{}})),materials:{character:20,skill:10,equipment:20,equipmentLb:5,unlock:1},clearedStages:[],vipExpiresAt:null};
+ return {userId,version:0,cash:0,diamonds:0,energy:0,energyMax:100,energyDrinks:0,souls:{},characters:starters.map(c=>({id:c.id,level:1,awakening:0,exp:0,growthVersion:GROWTH_VERSION})),skills:SKILL_MASTERS.slice(0,8).map(s=>({id:s.id,level:0})),equipment:[],deck:starters.slice(0,3).map((c,i)=>({characterId:c.id,skillIds:[SKILL_MASTERS[i%SKILL_MASTERS.length].id],equipment:{}})),materials:{character:20,skill:10,equipment:20,equipmentLb:5,unlock:1},clearedStages:[],vipExpiresAt:null};
 }
 
 export interface LegacyAssets {

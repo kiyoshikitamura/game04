@@ -1,0 +1,40 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const ts = require('typescript');
+const source = fs.readFileSync('src/app/components/InboxPanel.tsx', 'utf8');
+const start = source.indexOf('  useEffect(() => {');
+const end = source.indexOf('\n\n  if (!showInboxPanel)', start);
+assert.ok(start > 0 && end > start);
+const effectCode = ts.transpile(source.slice(start, end), { target: ts.ScriptTarget.ES2020 });
+const flush = () => new Promise(resolve => setImmediate(resolve));
+const deferred = () => { let resolve, reject; const promise = new Promise((a,b) => {resolve=a;reject=b;}); return {promise, resolve, reject}; };
+function mount(request, initial = []) {
+  const result = { list: initial, loading: false, error: false, signal: null, timer: null };
+  let cleanup;
+  const fakeWindow = { setTimeout: (fn, duration) => {assert.equal(duration,12000);result.timer=fn;return 1;}, clearTimeout: () => {result.timer=null;} };
+  const builder = {select: () => builder, order: () => builder, abortSignal: signal => {result.signal=signal;return request.promise;}};
+  const run = new Function('useEffect','showInboxPanel','inboxPanelTab','newsRetry','supabase','setNewsLoading','setNewsError','setNewsList','window','NEWS_READ_TIMEOUT_MS', effectCode);
+  run(fn => {cleanup = fn();}, true, 'news', 0, {from: table => {assert.equal(table,'news');return builder;}}, value => result.loading=value, value => result.error=value, value => result.list=value, fakeWindow, 12000);
+  return {result, cleanup};
+}
+(async () => {
+  const old = [{id:'confirmed'}];
+  const request = deferred(); const normal = mount(request, old);
+  assert.equal(normal.result.loading,true);
+  request.resolve({data:[{id:42,start_at:'2026-09-25T00:00:00Z',title:'new'}],error:null}); await flush();
+  assert.equal(normal.result.list[0].id,'42'); assert.equal(normal.result.loading,false); assert.equal(normal.result.timer,null);
+  const failure=deferred(); const failed=mount(failure,old);
+  failure.resolve({data:null,error:{message:'offline'}}); await flush();
+  assert.equal(failed.result.list,old); assert.equal(failed.result.error,true); assert.equal(failed.result.loading,false);
+  const reject=deferred(); const rejected=mount(reject,old); reject.reject(new Error('transport')); await flush();
+  assert.equal(rejected.result.list,old); assert.equal(rejected.result.error,true);
+  const stalled=deferred(); const timed=mount(stalled,old); timed.result.timer();
+  assert.equal(timed.result.signal.aborted,true); assert.equal(timed.result.loading,false); assert.equal(timed.result.error,true); assert.equal(timed.result.list,old);
+  stalled.resolve({data:[{id:'late'}],error:null}); await flush(); assert.equal(timed.result.list,old);
+  const retryRequest=deferred(); const retry=mount(retryRequest,old); retryRequest.resolve({data:[],error:null}); await flush();
+  assert.deepEqual(retry.result.list,[]); assert.equal(retry.result.error,false); assert.equal(retry.result.loading,false);
+  const stale=deferred(); const cancelled=mount(stale,old); cancelled.cleanup();
+  assert.equal(cancelled.result.signal.aborted,true); assert.equal(cancelled.result.timer,null);
+  stale.resolve({data:[{id:'after-close'}],error:null}); await flush(); assert.equal(cancelled.result.list,old);
+  console.log('PASS G2 news: success, retained list on error/throw, stalled timeout/retry, late response, cleanup');
+})();

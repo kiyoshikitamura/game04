@@ -39,3 +39,8 @@
 .shop-history-list p { margin:4px 0; }
 .shop-btn-spinner { width:16px; height:16px; border:2px solid rgba(255,255,255,.3); border-top-color:#fff; border-radius:50%; animation:shopSpinnerRotate .6s linear infinite; display:inline-block; }
 @keyframes shopSpinnerRotate { from {transform:rotate(0deg)} to {transform:rotate(360deg)} }
+
+/* Exchange controls wrap within the shared dialog at mobile widths. */
+.shop-exchange-field { display:flex; flex-direction:column; gap:6px; min-width:0; margin-block:8px; }
+.shop-exchange-field input, .shop-exchange-field select { box-sizing:border-box; width:100%; max-width:100%; min-width:0; min-height:40px; font:inherit; }
+.shop-exchange-card > div { min-width:0; overflow-wrap:anywhere; }

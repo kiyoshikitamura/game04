@@ -10,7 +10,7 @@ type PageProps = { searchParams: Promise<{ from?: string }> };
 export default async function Page({ searchParams }: PageProps) {
   const { from } = await searchParams;
   return (
-    <LegalPage title="権利表記・運営者情報" updatedAt="2026年9月18日" returnToGame={from === "settings"}>
+    <LegalPage title="権利表記・運営者情報" updatedAt="2026年9月24日" returnToGame={from === "settings"}>
       <h2>コンテンツの権利</h2>
       <p>本サービスの画像、文章、音声、プログラム等に関する権利は、運営者または正当な権利を有する第三者に帰属します。利用規約で認められる範囲を超えて利用することはできません。</p>
       <h2>運営主体</h2>
@@ -19,8 +19,8 @@ export default async function Page({ searchParams }: PageProps) {
       <p>{pendingLegalValue(GAME04_LEGAL.rightsHolder)}</p>
       <p>使用素材の権利者および必要な個別クレジットは、確認後に掲載します。</p>
       <h2>公式サイト</h2>
-      <p>{GAME04_LEGAL.serviceUrl ? <a href={GAME04_LEGAL.serviceUrl}>{GAME04_LEGAL.serviceUrl}</a> : pendingLegalValue(null)}</p>
-      <p><Link href="/legal/contact">権利に関するお問い合わせ</Link></p>
+      <p>{GAME04_LEGAL.serviceUrl ? <a href={GAME04_LEGAL.serviceUrl}>{GAME04_LEGAL.serviceUrl}</a> : GAME04_LEGAL.serviceDomain || pendingLegalValue(null)}</p>
+      <p><Link href={from === "settings" ? "/legal/contact?from=settings" : "/legal/contact"} replace={from === "settings"}>権利に関するお問い合わせ</Link></p>
     </LegalPage>
   );
 }

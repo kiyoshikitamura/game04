@@ -56,3 +56,9 @@
 .game04-theme .canonical-dialog-body.is-loading { min-height: min(220px, 30dvh); }
 .game04-theme .canonical-dialog-actions { grid-auto-flow: row; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
 .game04-theme :is(.canonical-dialog-overlay, .rd-modal-backdrop) { overflow-y: auto; }
+
+/* Long headings and the software keyboard must not force the central dialog wider. */
+.game04-theme .rd-modal-header h2{min-width:0;overflow-wrap:anywhere}
+.game04-theme .rd-modal-header>button{flex:none}
+.game04-theme .rd-modal-body{min-width:0;overflow-wrap:anywhere}
+.game04-theme .rd-modal-backdrop{padding-top:max(16px,env(safe-area-inset-top));padding-bottom:max(16px,env(safe-area-inset-bottom))}

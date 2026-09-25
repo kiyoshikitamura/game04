@@ -57,7 +57,7 @@ export default function TitleView() {
     handleFirstUserInteraction();
     playCyberSe("click");
     if (session) await resumeCurrentSession();
-    else setShowTitleView(false);
+    else window.location.assign("/auth/game04");
   };
 
   const beginNewGame = async (event: React.MouseEvent) => {
@@ -85,7 +85,7 @@ export default function TitleView() {
         
         {isGameStartTransition || resumeLoading ? (
           <div className="game-start-transition" role="status" aria-live="polite" aria-label="ゲーム開始中">
-            <img src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" />
+            <img src="/creative/branding/logo.png" alt="戦国姫艶武" />
             <div className="game-start-signal" aria-hidden="true"><i /><i /><i /></div>
             <strong>{resumeLoading ? "再開中" : "起動中"}</strong>
           </div>

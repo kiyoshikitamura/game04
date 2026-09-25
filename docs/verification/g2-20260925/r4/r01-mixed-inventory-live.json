@@ -1,0 +1,399 @@
+{
+  "checkedAt": "2026-09-25T00:41:08.328Z",
+  "userId": "b1b9ee70-39d0-4e55-baef-a3df034dedfe",
+  "checks": [
+    {
+      "name": "R01 skills auto selection / save / reload / unresolved inventory retained",
+      "pass": true,
+      "version": 22
+    },
+    {
+      "name": "R01 equipment auto selection / save / reload / unresolved inventory retained",
+      "pass": true,
+      "version": 23
+    }
+  ],
+  "requests": [
+    {
+      "action": "get_state",
+      "requestId": "e086b2a5-5a46-44bd-854d-b2fcaf63e118",
+      "status": 200,
+      "version": 21
+    },
+    {
+      "action": "save_deck",
+      "requestId": "371d2626-9393-4854-917d-f25821456527",
+      "status": 200,
+      "version": 22
+    },
+    {
+      "action": "get_state",
+      "requestId": "0ed89898-63f2-499f-abb6-5857070ef7e7",
+      "status": 200,
+      "version": 22
+    },
+    {
+      "action": "save_deck",
+      "requestId": "b0ea8754-dcca-4244-a839-f82edf6ec31d",
+      "status": 200,
+      "version": 23
+    },
+    {
+      "action": "get_state",
+      "requestId": "0d56e65f-8241-4c4c-beb5-34e87bed1ec2",
+      "status": 200,
+      "version": 23
+    }
+  ],
+  "scope": "Authenticated HTTP and get_state, not browser / physical device verification",
+  "original": {
+    "souls": {
+      "char_alice_01": 2,
+      "char_reiji_01": 2
+    },
+    "growthInventory": {
+      "carryExp": {
+        "character": 0,
+        "equipment": 0
+      },
+      "expItems": {
+        "character": {
+          "large": 0,
+          "small": 0,
+          "medium": 0,
+          "xlarge": 0
+        },
+        "equipment": {
+          "large": 0,
+          "small": 0,
+          "medium": 0,
+          "xlarge": 0
+        }
+      },
+      "genericSouls": {
+        "N": 16,
+        "R": 0,
+        "SR": 0,
+        "SSR": 0
+      },
+      "soulSelectors": {
+        "N": 0,
+        "R": 0,
+        "SR": 0,
+        "SSR": 0
+      }
+    }
+  },
+  "final": {
+    "version": 23,
+    "deck": [
+      {
+        "skillIds": [
+          "SKILL_004",
+          "SKILL_008",
+          "SKILL_003"
+        ],
+        "equipment": {
+          "body": "g2-r4-48",
+          "head": "g2-r4-76",
+          "legs": "g2-r4-95",
+          "weapon": "g2-r4-114",
+          "accessory1": "g2-r4-0",
+          "accessory2": "g2-r4-1"
+        },
+        "characterId": "char_ageha_01"
+      },
+      {
+        "skillIds": [
+          "SKILL_004",
+          "SKILL_008",
+          "SKILL_003"
+        ],
+        "equipment": {
+          "body": "g2-r4-49",
+          "head": "g2-r4-77",
+          "legs": "g2-r4-96",
+          "weapon": "g2-r4-115",
+          "accessory1": "g2-r4-2",
+          "accessory2": "g2-r4-3"
+        },
+        "characterId": "char_go_01"
+      },
+      {
+        "skillIds": [
+          "SKILL_004",
+          "SKILL_008",
+          "SKILL_003"
+        ],
+        "equipment": {
+          "body": "g2-r4-50",
+          "head": "g2-r4-78",
+          "legs": "g2-r4-97",
+          "weapon": "g2-r4-116",
+          "accessory1": "g2-r4-4",
+          "accessory2": "g2-r4-5"
+        },
+        "characterId": "char_kaede_01"
+      },
+      {
+        "skillIds": [
+          "SKILL_004",
+          "SKILL_008",
+          "SKILL_003"
+        ],
+        "equipment": {
+          "body": "g2-r4-51",
+          "head": "g2-r4-79",
+          "legs": "g2-r4-98",
+          "weapon": "g2-r4-117",
+          "accessory1": "g2-r4-6",
+          "accessory2": "g2-r4-7"
+        },
+        "characterId": "char_karen_01"
+      },
+      {
+        "skillIds": [
+          "SKILL_004",
+          "SKILL_008",
+          "SKILL_003"
+        ],
+        "equipment": {
+          "body": "g2-r4-52",
+          "head": "g2-r4-80",
+          "legs": "g2-r4-99",
+          "weapon": "g2-r4-118",
+          "accessory1": "g2-r4-8",
+          "accessory2": "g2-r4-9"
+        },
+        "characterId": "char_kengo_01"
+      }
+    ],
+    "skillInventory": [
+      {
+        "id": "SKILL_001",
+        "level": 0
+      },
+      {
+        "id": "SKILL_002",
+        "level": 0
+      },
+      {
+        "id": "SKILL_003",
+        "level": 0
+      },
+      {
+        "id": "SKILL_004",
+        "level": 0
+      },
+      {
+        "id": "SKILL_005",
+        "level": 0
+      },
+      {
+        "id": "SKILL_006",
+        "level": 0
+      },
+      {
+        "id": "SKILL_007",
+        "level": 0
+      },
+      {
+        "id": "SKILL_008",
+        "level": 0
+      },
+      {
+        "id": "G2QA_R4_UNKNOWN_SKILL",
+        "level": 10
+      }
+    ],
+    "equipmentInventory": [
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "G2QA_R4_UNKNOWN_MASTER",
+        "instanceId": "G2QA_R4_UNKNOWN_EQUIP"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "ACCESSORY_001",
+        "instanceId": "g2-r4-0"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "ACCESSORY_002",
+        "instanceId": "g2-r4-1"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "ACCESSORY_003",
+        "instanceId": "g2-r4-2"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "ACCESSORY_004",
+        "instanceId": "g2-r4-3"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "ACCESSORY_005",
+        "instanceId": "g2-r4-4"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "ACCESSORY_006",
+        "instanceId": "g2-r4-5"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "ACCESSORY_007",
+        "instanceId": "g2-r4-6"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "ACCESSORY_008",
+        "instanceId": "g2-r4-7"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "ACCESSORY_009",
+        "instanceId": "g2-r4-8"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "ACCESSORY_010",
+        "instanceId": "g2-r4-9"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "BODY_001",
+        "instanceId": "g2-r4-48"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "BODY_002",
+        "instanceId": "g2-r4-49"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "BODY_003",
+        "instanceId": "g2-r4-50"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "BODY_004",
+        "instanceId": "g2-r4-51"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "BODY_005",
+        "instanceId": "g2-r4-52"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "HEAD_001",
+        "instanceId": "g2-r4-76"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "HEAD_002",
+        "instanceId": "g2-r4-77"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "HEAD_003",
+        "instanceId": "g2-r4-78"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "HEAD_004",
+        "instanceId": "g2-r4-79"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "HEAD_005",
+        "instanceId": "g2-r4-80"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "LEGS_001",
+        "instanceId": "g2-r4-95"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "LEGS_002",
+        "instanceId": "g2-r4-96"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "LEGS_003",
+        "instanceId": "g2-r4-97"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "LEGS_004",
+        "instanceId": "g2-r4-98"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "LEGS_005",
+        "instanceId": "g2-r4-99"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "WEAPON_001",
+        "instanceId": "g2-r4-114"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "WEAPON_002",
+        "instanceId": "g2-r4-115"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "WEAPON_003",
+        "instanceId": "g2-r4-116"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "WEAPON_004",
+        "instanceId": "g2-r4-117"
+      },
+      {
+        "lb": 10,
+        "level": 100,
+        "masterId": "WEAPON_005",
+        "instanceId": "g2-r4-118"
+      }
+    ]
+  },
+  "pass": true
+}

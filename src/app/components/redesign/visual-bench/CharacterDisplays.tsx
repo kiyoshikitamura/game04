@@ -51,27 +51,58 @@ function visibleBox(image:HTMLImageElement):Box {
   right=Math.min(canvas.width-1,right+2);bottom=Math.min(canvas.height-1,bottom+2);
   return {x:left/ratio,y:top/ratio,width:(right-left+1)/ratio,height:(bottom-top+1)/ratio,naturalWidth:width,naturalHeight:height};
 }
+const artworkBoxes = new Map<string, Box>();
+const preparingArtwork = new Map<string, Promise<Box>>();
+function artworkDefinition(subject: DisplaySubject, variant: 'card'|'battle') {
+  const source = art.find(row => row.id === subject.id)?.[variant];
+  const background = backgrounds.find(row => row.characterId === subject.id)?.background;
+  const frame = '/creative/ui/frame-' + subject.rarity + '.png';
+  const element = '/creative/ui/element-' + subject.element + '.png';
+  return { source, background, frame, element, key: [source, background, frame, element, variant].join('|'), variant };
+}
+function prepareArtwork(asset: ReturnType<typeof artworkDefinition>): Promise<Box> {
+  const cached = artworkBoxes.get(asset.key);
+  if (cached) return Promise.resolve(cached);
+  const pendingTask = preparingArtwork.get(asset.key);
+  if (pendingTask) return pendingTask;
+  if (!asset.source || !asset.background) return Promise.reject(new Error('画像を読み込めませんでした'));
+  const required = asset.variant === 'card' ? [asset.source, asset.background, asset.frame, asset.element] : [asset.source, asset.background, asset.element];
+  const task = Promise.all(required.map(readImage)).then(([person]) => {
+    const box = visibleBox(person); artworkBoxes.set(asset.key, box); return box;
+  });
+  preparingArtwork.set(asset.key, task);
+  task.finally(() => preparingArtwork.delete(asset.key)).catch(() => {});
+  return task;
+}
+/** Parent dialog owns one loading state; cards reuse its decoded artwork and measured crop. */
+export function useArtworkPreload(subjects: DisplaySubject[], variant: 'card'|'battle') {
+  const definitions = subjects.map(subject => artworkDefinition(subject, variant));
+  const key = definitions.map(asset => asset.key).sort().join('\n');
+  const [attempt, setAttempt] = useState(0);
+  const [result, setResult] = useState({ key: '', attempt: -1, failed: false });
+  useEffect(() => {
+    let active = true;
+    Promise.all(definitions.map(prepareArtwork)).then(() => {
+      if (active) setResult({ key, attempt, failed: false });
+    }, () => { if (active) setResult({ key, attempt, failed: true }); });
+    return () => { active = false; };
+  }, [key, attempt]);
+  return { ready: definitions.every(asset => artworkBoxes.has(asset.key)),
+    failed: result.key === key && result.attempt === attempt && result.failed,
+    retry: () => setAttempt(value => value + 1) };
+}
 function useArtwork(subject:DisplaySubject,variant:'card'|'battle') {
-  const entry=art.find(row=>row.id===subject.id);
-  const source=entry?.[variant];
-  const background=backgrounds.find(row=>row.characterId===subject.id)?.background;
-  const frame='/creative/ui/frame-'+subject.rarity+'.png';
-  const element='/creative/ui/element-'+subject.element+'.png';
+  const asset = artworkDefinition(subject, variant);
   const [attempt,setAttempt]=useState(0);
-  const key=[source,background,frame,element,variant,attempt].join('|');
   const [result,setResult]=useState<{key:string;box?:Box;error?:string}>({key:''});
   useEffect(()=>{
     let active=true;
-    if(!source||!background){setResult({key,error:'必要な素材の割り当てがありません'});return;}
-    const required=variant==='card'?[source,background,frame,element]:[source,background,element];
-    Promise.all(required.map(readImage)).then(([person])=>{
-      const box=visibleBox(person);
-      if(active)setResult({key,box});
-    }).catch(()=>{if(active)setResult({key,error:'画像を読み込めませんでした'});});
+    prepareArtwork(asset).then(box => { if(active)setResult({key:asset.key,box}); })
+      .catch(()=>{if(active)setResult({key:asset.key,error:'画像を読み込めませんでした'});});
     return ()=>{active=false;};
-  },[key,source,background,frame,element,variant]);
-  return {source,background,frame,element,box:result.key===key?result.box:undefined,
-    error:result.key===key?result.error:undefined,retry:()=>setAttempt(value=>value+1)};
+  },[asset.key,attempt]);
+  return {...asset,box:artworkBoxes.get(asset.key) ?? (result.key===asset.key?result.box:undefined),
+    error:result.key===asset.key?result.error:undefined,retry:()=>setAttempt(value=>value+1)};
 }
 function usePageVisible(){
   const [visible,setVisible]=useState(false);

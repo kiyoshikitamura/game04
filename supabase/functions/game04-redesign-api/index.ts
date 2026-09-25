@@ -1,6498 +1,5 @@
-// src/domain/redesign/data/formal-growth-equipment.json
-var formal_growth_equipment_default = {
-  authority: "docs/product/GAME04_MASTER_AUTHORITY_LATEST_2026-09-21.md",
-  equipment: [
-    {
-      id: "ACCESSORY_001",
-      rarity: "N",
-      slot: "ACCESSORY",
-      performance_type: "A1 \u6A19\u6E96",
-      level100: {
-        hp: 270,
-        atk: 360,
-        def: 36,
-        luk: 2
-      }
-    },
-    {
-      id: "ACCESSORY_002",
-      rarity: "N",
-      slot: "ACCESSORY",
-      performance_type: "A2 ATK",
-      level100: {
-        hp: 90,
-        atk: 576,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "ACCESSORY_003",
-      rarity: "N",
-      slot: "ACCESSORY",
-      performance_type: "A3 HP",
-      level100: {
-        hp: 900,
-        atk: 144,
-        def: 36,
-        luk: 2
-      }
-    },
-    {
-      id: "ACCESSORY_004",
-      rarity: "N",
-      slot: "ACCESSORY",
-      performance_type: "A4 DEF",
-      level100: {
-        hp: 180,
-        atk: 144,
-        def: 198,
-        luk: 2
-      }
-    },
-    {
-      id: "ACCESSORY_005",
-      rarity: "N",
-      slot: "ACCESSORY",
-      performance_type: "A5 LUK",
-      level100: {
-        hp: 180,
-        atk: 216,
-        def: 18,
-        luk: 6
-      }
-    },
-    {
-      id: "ACCESSORY_006",
-      rarity: "N",
-      slot: "ACCESSORY",
-      performance_type: "A1 \u6A19\u6E96",
-      level100: {
-        hp: 270,
-        atk: 360,
-        def: 36,
-        luk: 2
-      }
-    },
-    {
-      id: "ACCESSORY_007",
-      rarity: "N",
-      slot: "ACCESSORY",
-      performance_type: "A2 ATK",
-      level100: {
-        hp: 90,
-        atk: 576,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "ACCESSORY_008",
-      rarity: "N",
-      slot: "ACCESSORY",
-      performance_type: "A3 HP",
-      level100: {
-        hp: 900,
-        atk: 144,
-        def: 36,
-        luk: 2
-      }
-    },
-    {
-      id: "ACCESSORY_009",
-      rarity: "N",
-      slot: "ACCESSORY",
-      performance_type: "A4 DEF",
-      level100: {
-        hp: 180,
-        atk: 144,
-        def: 198,
-        luk: 2
-      }
-    },
-    {
-      id: "ACCESSORY_010",
-      rarity: "N",
-      slot: "ACCESSORY",
-      performance_type: "A5 LUK",
-      level100: {
-        hp: 180,
-        atk: 216,
-        def: 18,
-        luk: 6
-      }
-    },
-    {
-      id: "ACCESSORY_011",
-      rarity: "N",
-      slot: "ACCESSORY",
-      performance_type: "A1 \u6A19\u6E96",
-      level100: {
-        hp: 270,
-        atk: 360,
-        def: 36,
-        luk: 2
-      }
-    },
-    {
-      id: "ACCESSORY_012",
-      rarity: "R",
-      slot: "ACCESSORY",
-      performance_type: "A1 \u6A19\u6E96",
-      level100: {
-        hp: 480,
-        atk: 640,
-        def: 64,
-        luk: 3
-      }
-    },
-    {
-      id: "ACCESSORY_013",
-      rarity: "R",
-      slot: "ACCESSORY",
-      performance_type: "A2 ATK",
-      level100: {
-        hp: 160,
-        atk: 1024,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "ACCESSORY_014",
-      rarity: "R",
-      slot: "ACCESSORY",
-      performance_type: "A3 HP",
-      level100: {
-        hp: 1600,
-        atk: 256,
-        def: 64,
-        luk: 3
-      }
-    },
-    {
-      id: "ACCESSORY_015",
-      rarity: "R",
-      slot: "ACCESSORY",
-      performance_type: "A4 DEF",
-      level100: {
-        hp: 320,
-        atk: 256,
-        def: 352,
-        luk: 3
-      }
-    },
-    {
-      id: "ACCESSORY_016",
-      rarity: "R",
-      slot: "ACCESSORY",
-      performance_type: "A5 LUK",
-      level100: {
-        hp: 320,
-        atk: 384,
-        def: 32,
-        luk: 9
-      }
-    },
-    {
-      id: "ACCESSORY_017",
-      rarity: "R",
-      slot: "ACCESSORY",
-      performance_type: "A1 \u6A19\u6E96",
-      level100: {
-        hp: 480,
-        atk: 640,
-        def: 64,
-        luk: 3
-      }
-    },
-    {
-      id: "ACCESSORY_018",
-      rarity: "R",
-      slot: "ACCESSORY",
-      performance_type: "A2 ATK",
-      level100: {
-        hp: 160,
-        atk: 1024,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "ACCESSORY_019",
-      rarity: "R",
-      slot: "ACCESSORY",
-      performance_type: "A3 HP",
-      level100: {
-        hp: 1600,
-        atk: 256,
-        def: 64,
-        luk: 3
-      }
-    },
-    {
-      id: "ACCESSORY_020",
-      rarity: "R",
-      slot: "ACCESSORY",
-      performance_type: "A4 DEF",
-      level100: {
-        hp: 320,
-        atk: 256,
-        def: 352,
-        luk: 3
-      }
-    },
-    {
-      id: "ACCESSORY_021",
-      rarity: "R",
-      slot: "ACCESSORY",
-      performance_type: "A5 LUK",
-      level100: {
-        hp: 320,
-        atk: 384,
-        def: 32,
-        luk: 9
-      }
-    },
-    {
-      id: "ACCESSORY_022",
-      rarity: "R",
-      slot: "ACCESSORY",
-      performance_type: "A1 \u6A19\u6E96",
-      level100: {
-        hp: 480,
-        atk: 640,
-        def: 64,
-        luk: 3
-      }
-    },
-    {
-      id: "ACCESSORY_023",
-      rarity: "R",
-      slot: "ACCESSORY",
-      performance_type: "A2 ATK",
-      level100: {
-        hp: 160,
-        atk: 1024,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "ACCESSORY_024",
-      rarity: "R",
-      slot: "ACCESSORY",
-      performance_type: "A3 HP",
-      level100: {
-        hp: 1600,
-        atk: 256,
-        def: 64,
-        luk: 3
-      }
-    },
-    {
-      id: "ACCESSORY_025",
-      rarity: "R",
-      slot: "ACCESSORY",
-      performance_type: "A4 DEF",
-      level100: {
-        hp: 320,
-        atk: 256,
-        def: 352,
-        luk: 3
-      }
-    },
-    {
-      id: "ACCESSORY_026",
-      rarity: "R",
-      slot: "ACCESSORY",
-      performance_type: "A5 LUK",
-      level100: {
-        hp: 320,
-        atk: 384,
-        def: 32,
-        luk: 9
-      }
-    },
-    {
-      id: "ACCESSORY_027",
-      rarity: "SR",
-      slot: "ACCESSORY",
-      performance_type: "A1 \u6A19\u6E96",
-      level100: {
-        hp: 900,
-        atk: 1200,
-        def: 120,
-        luk: 4
-      }
-    },
-    {
-      id: "ACCESSORY_028",
-      rarity: "SR",
-      slot: "ACCESSORY",
-      performance_type: "A2 ATK",
-      level100: {
-        hp: 300,
-        atk: 1920,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "ACCESSORY_029",
-      rarity: "SR",
-      slot: "ACCESSORY",
-      performance_type: "A3 HP",
-      level100: {
-        hp: 3e3,
-        atk: 480,
-        def: 120,
-        luk: 4
-      }
-    },
-    {
-      id: "ACCESSORY_030",
-      rarity: "SR",
-      slot: "ACCESSORY",
-      performance_type: "A4 DEF",
-      level100: {
-        hp: 600,
-        atk: 480,
-        def: 660,
-        luk: 4
-      }
-    },
-    {
-      id: "ACCESSORY_031",
-      rarity: "SR",
-      slot: "ACCESSORY",
-      performance_type: "A5 LUK",
-      level100: {
-        hp: 600,
-        atk: 720,
-        def: 60,
-        luk: 12
-      }
-    },
-    {
-      id: "ACCESSORY_032",
-      rarity: "SR",
-      slot: "ACCESSORY",
-      performance_type: "A1 \u6A19\u6E96",
-      level100: {
-        hp: 900,
-        atk: 1200,
-        def: 120,
-        luk: 4
-      }
-    },
-    {
-      id: "ACCESSORY_033",
-      rarity: "SR",
-      slot: "ACCESSORY",
-      performance_type: "A2 ATK",
-      level100: {
-        hp: 300,
-        atk: 1920,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "ACCESSORY_034",
-      rarity: "SR",
-      slot: "ACCESSORY",
-      performance_type: "A3 HP",
-      level100: {
-        hp: 3e3,
-        atk: 480,
-        def: 120,
-        luk: 4
-      }
-    },
-    {
-      id: "ACCESSORY_035",
-      rarity: "SR",
-      slot: "ACCESSORY",
-      performance_type: "A4 DEF",
-      level100: {
-        hp: 600,
-        atk: 480,
-        def: 660,
-        luk: 4
-      }
-    },
-    {
-      id: "ACCESSORY_036",
-      rarity: "SR",
-      slot: "ACCESSORY",
-      performance_type: "A5 LUK",
-      level100: {
-        hp: 600,
-        atk: 720,
-        def: 60,
-        luk: 12
-      }
-    },
-    {
-      id: "ACCESSORY_037",
-      rarity: "SR",
-      slot: "ACCESSORY",
-      performance_type: "A1 \u6A19\u6E96",
-      level100: {
-        hp: 900,
-        atk: 1200,
-        def: 120,
-        luk: 4
-      }
-    },
-    {
-      id: "ACCESSORY_038",
-      rarity: "SR",
-      slot: "ACCESSORY",
-      performance_type: "A2 ATK",
-      level100: {
-        hp: 300,
-        atk: 1920,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "ACCESSORY_039",
-      rarity: "SR",
-      slot: "ACCESSORY",
-      performance_type: "A3 HP",
-      level100: {
-        hp: 3e3,
-        atk: 480,
-        def: 120,
-        luk: 4
-      }
-    },
-    {
-      id: "ACCESSORY_040",
-      rarity: "SR",
-      slot: "ACCESSORY",
-      performance_type: "A4 DEF",
-      level100: {
-        hp: 600,
-        atk: 480,
-        def: 660,
-        luk: 4
-      }
-    },
-    {
-      id: "ACCESSORY_041",
-      rarity: "SR",
-      slot: "ACCESSORY",
-      performance_type: "A5 LUK",
-      level100: {
-        hp: 600,
-        atk: 720,
-        def: 60,
-        luk: 12
-      }
-    },
-    {
-      id: "ACCESSORY_042",
-      rarity: "SSR",
-      slot: "ACCESSORY",
-      performance_type: "A1 \u6A19\u6E96",
-      level100: {
-        hp: 1500,
-        atk: 2e3,
-        def: 200,
-        luk: 5
-      }
-    },
-    {
-      id: "ACCESSORY_043",
-      rarity: "SSR",
-      slot: "ACCESSORY",
-      performance_type: "A2 ATK",
-      level100: {
-        hp: 500,
-        atk: 3200,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "ACCESSORY_044",
-      rarity: "SSR",
-      slot: "ACCESSORY",
-      performance_type: "A3 HP",
-      level100: {
-        hp: 5e3,
-        atk: 800,
-        def: 200,
-        luk: 5
-      }
-    },
-    {
-      id: "ACCESSORY_045",
-      rarity: "SSR",
-      slot: "ACCESSORY",
-      performance_type: "A4 DEF",
-      level100: {
-        hp: 1e3,
-        atk: 800,
-        def: 1100,
-        luk: 5
-      }
-    },
-    {
-      id: "ACCESSORY_046",
-      rarity: "SSR",
-      slot: "ACCESSORY",
-      performance_type: "A5 LUK",
-      level100: {
-        hp: 1e3,
-        atk: 1200,
-        def: 100,
-        luk: 15
-      }
-    },
-    {
-      id: "ACCESSORY_047",
-      rarity: "SSR",
-      slot: "ACCESSORY",
-      performance_type: "A1 \u6A19\u6E96",
-      level100: {
-        hp: 1500,
-        atk: 2e3,
-        def: 200,
-        luk: 5
-      }
-    },
-    {
-      id: "ACCESSORY_048",
-      rarity: "SSR",
-      slot: "ACCESSORY",
-      performance_type: "A2 ATK",
-      level100: {
-        hp: 500,
-        atk: 3200,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_001",
-      rarity: "N",
-      slot: "BODY",
-      performance_type: "B1 \u6A19\u6E96",
-      level100: {
-        hp: 1440,
-        atk: 0,
-        def: 288,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_002",
-      rarity: "N",
-      slot: "BODY",
-      performance_type: "B2 HP",
-      level100: {
-        hp: 2520,
-        atk: 0,
-        def: 72,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_003",
-      rarity: "N",
-      slot: "BODY",
-      performance_type: "B3 DEF",
-      level100: {
-        hp: 540,
-        atk: 0,
-        def: 468,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_004",
-      rarity: "N",
-      slot: "BODY",
-      performance_type: "B1 \u6A19\u6E96",
-      level100: {
-        hp: 1440,
-        atk: 0,
-        def: 288,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_005",
-      rarity: "N",
-      slot: "BODY",
-      performance_type: "B2 HP",
-      level100: {
-        hp: 2520,
-        atk: 0,
-        def: 72,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_006",
-      rarity: "N",
-      slot: "BODY",
-      performance_type: "B3 DEF",
-      level100: {
-        hp: 540,
-        atk: 0,
-        def: 468,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_007",
-      rarity: "R",
-      slot: "BODY",
-      performance_type: "B1 \u6A19\u6E96",
-      level100: {
-        hp: 2560,
-        atk: 0,
-        def: 512,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_008",
-      rarity: "R",
-      slot: "BODY",
-      performance_type: "B2 HP",
-      level100: {
-        hp: 4480,
-        atk: 0,
-        def: 128,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_009",
-      rarity: "R",
-      slot: "BODY",
-      performance_type: "B3 DEF",
-      level100: {
-        hp: 960,
-        atk: 0,
-        def: 832,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_010",
-      rarity: "R",
-      slot: "BODY",
-      performance_type: "B1 \u6A19\u6E96",
-      level100: {
-        hp: 2560,
-        atk: 0,
-        def: 512,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_011",
-      rarity: "R",
-      slot: "BODY",
-      performance_type: "B2 HP",
-      level100: {
-        hp: 4480,
-        atk: 0,
-        def: 128,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_012",
-      rarity: "R",
-      slot: "BODY",
-      performance_type: "B3 DEF",
-      level100: {
-        hp: 960,
-        atk: 0,
-        def: 832,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_013",
-      rarity: "R",
-      slot: "BODY",
-      performance_type: "B1 \u6A19\u6E96",
-      level100: {
-        hp: 2560,
-        atk: 0,
-        def: 512,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_014",
-      rarity: "R",
-      slot: "BODY",
-      performance_type: "B2 HP",
-      level100: {
-        hp: 4480,
-        atk: 0,
-        def: 128,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_015",
-      rarity: "R",
-      slot: "BODY",
-      performance_type: "B3 DEF",
-      level100: {
-        hp: 960,
-        atk: 0,
-        def: 832,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_016",
-      rarity: "SR",
-      slot: "BODY",
-      performance_type: "B1 \u6A19\u6E96",
-      level100: {
-        hp: 4800,
-        atk: 0,
-        def: 960,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_017",
-      rarity: "SR",
-      slot: "BODY",
-      performance_type: "B2 HP",
-      level100: {
-        hp: 8400,
-        atk: 0,
-        def: 240,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_018",
-      rarity: "SR",
-      slot: "BODY",
-      performance_type: "B3 DEF",
-      level100: {
-        hp: 1800,
-        atk: 0,
-        def: 1560,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_019",
-      rarity: "SR",
-      slot: "BODY",
-      performance_type: "B1 \u6A19\u6E96",
-      level100: {
-        hp: 4800,
-        atk: 0,
-        def: 960,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_020",
-      rarity: "SR",
-      slot: "BODY",
-      performance_type: "B2 HP",
-      level100: {
-        hp: 8400,
-        atk: 0,
-        def: 240,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_021",
-      rarity: "SR",
-      slot: "BODY",
-      performance_type: "B3 DEF",
-      level100: {
-        hp: 1800,
-        atk: 0,
-        def: 1560,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_022",
-      rarity: "SR",
-      slot: "BODY",
-      performance_type: "B1 \u6A19\u6E96",
-      level100: {
-        hp: 4800,
-        atk: 0,
-        def: 960,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_023",
-      rarity: "SR",
-      slot: "BODY",
-      performance_type: "B2 HP",
-      level100: {
-        hp: 8400,
-        atk: 0,
-        def: 240,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_024",
-      rarity: "SR",
-      slot: "BODY",
-      performance_type: "B3 DEF",
-      level100: {
-        hp: 1800,
-        atk: 0,
-        def: 1560,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_025",
-      rarity: "SR",
-      slot: "BODY",
-      performance_type: "B1 \u6A19\u6E96",
-      level100: {
-        hp: 4800,
-        atk: 0,
-        def: 960,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_026",
-      rarity: "SSR",
-      slot: "BODY",
-      performance_type: "B1 \u6A19\u6E96",
-      level100: {
-        hp: 8e3,
-        atk: 0,
-        def: 1600,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_027",
-      rarity: "SSR",
-      slot: "BODY",
-      performance_type: "B2 HP",
-      level100: {
-        hp: 14e3,
-        atk: 0,
-        def: 400,
-        luk: 0
-      }
-    },
-    {
-      id: "BODY_028",
-      rarity: "SSR",
-      slot: "BODY",
-      performance_type: "B3 DEF",
-      level100: {
-        hp: 3e3,
-        atk: 0,
-        def: 2600,
-        luk: 0
-      }
-    },
-    {
-      id: "HEAD_001",
-      rarity: "N",
-      slot: "HEAD",
-      performance_type: "H1 \u6A19\u6E96",
-      level100: {
-        hp: 720,
-        atk: 0,
-        def: 144,
-        luk: 0
-      }
-    },
-    {
-      id: "HEAD_002",
-      rarity: "N",
-      slot: "HEAD",
-      performance_type: "H2 HP",
-      level100: {
-        hp: 1260,
-        atk: 0,
-        def: 36,
-        luk: 0
-      }
-    },
-    {
-      id: "HEAD_003",
-      rarity: "N",
-      slot: "HEAD",
-      performance_type: "H3 DEF",
-      level100: {
-        hp: 270,
-        atk: 0,
-        def: 234,
-        luk: 0
-      }
-    },
-    {
-      id: "HEAD_004",
-      rarity: "N",
-      slot: "HEAD",
-      performance_type: "H1 \u6A19\u6E96",
-      level100: {
-        hp: 720,
-        atk: 0,
-        def: 144,
-        luk: 0
-      }
-    },
-    {
-      id: "HEAD_005",
-      rarity: "N",
-      slot: "HEAD",
-      performance_type: "H2 HP",
-      level100: {
-        hp: 1260,
-        atk: 0,
-        def: 36,
-        luk: 0
-      }
-    },
-    {
-      id: "HEAD_006",
-      rarity: "R",
-      slot: "HEAD",
-      performance_type: "H1 \u6A19\u6E96",
-      level100: {
-        hp: 1280,
-        atk: 0,
-        def: 256,
-        luk: 0
-      }
-    },
-    {
-      id: "HEAD_007",
-      rarity: "R",
-      slot: "HEAD",
-      performance_type: "H2 HP",
-      level100: {
-        hp: 2240,
-        atk: 0,
-        def: 64,
-        luk: 0
-      }
-    },
-    {
-      id: "HEAD_008",
-      rarity: "R",
-      slot: "HEAD",
-      performance_type: "H3 DEF",
-      level100: {
-        hp: 480,
-        atk: 0,
-        def: 416,
-        luk: 0
-      }
-    },
-    {
-      id: "HEAD_009",
-      rarity: "R",
-      slot: "HEAD",
-      performance_type: "H1 \u6A19\u6E96",
-      level100: {
-        hp: 1280,
-        atk: 0,
-        def: 256,
-        luk: 0
-      }
-    },
-    {
-      id: "HEAD_010",
-      rarity: "R",
-      slot: "HEAD",
-      performance_type: "H2 HP",
-      level100: {
-        hp: 2240,
-        atk: 0,
-        def: 64,
-        luk: 0
-      }
-    },
-    {
-      id: "HEAD_011",
-      rarity: "R",
-      slot: "HEAD",
-      performance_type: "H3 DEF",
-      level100: {
-        hp: 480,
-        atk: 0,
-        def: 416,
-        luk: 0
-      }
-    },
-    {
-      id: "HEAD_012",
-      rarity: "SR",
-      slot: "HEAD",
-      performance_type: "H1 \u6A19\u6E96",
-      level100: {
-        hp: 2400,
-        atk: 0,
-        def: 480,
-        luk: 0
-      }
-    },
-    {
-      id: "HEAD_013",
-      rarity: "SR",
-      slot: "HEAD",
-      performance_type: "H2 HP",
-      level100: {
-        hp: 4200,
-        atk: 0,
-        def: 120,
-        luk: 0
-      }
-    },
-    {
-      id: "HEAD_014",
-      rarity: "SR",
-      slot: "HEAD",
-      performance_type: "H3 DEF",
-      level100: {
-        hp: 900,
-        atk: 0,
-        def: 780,
-        luk: 0
-      }
-    },
-    {
-      id: "HEAD_015",
-      rarity: "SR",
-      slot: "HEAD",
-      performance_type: "H1 \u6A19\u6E96",
-      level100: {
-        hp: 2400,
-        atk: 0,
-        def: 480,
-        luk: 0
-      }
-    },
-    {
-      id: "HEAD_016",
-      rarity: "SR",
-      slot: "HEAD",
-      performance_type: "H2 HP",
-      level100: {
-        hp: 4200,
-        atk: 0,
-        def: 120,
-        luk: 0
-      }
-    },
-    {
-      id: "HEAD_017",
-      rarity: "SR",
-      slot: "HEAD",
-      performance_type: "H3 DEF",
-      level100: {
-        hp: 900,
-        atk: 0,
-        def: 780,
-        luk: 0
-      }
-    },
-    {
-      id: "HEAD_018",
-      rarity: "SSR",
-      slot: "HEAD",
-      performance_type: "H1 \u6A19\u6E96",
-      level100: {
-        hp: 4e3,
-        atk: 0,
-        def: 800,
-        luk: 0
-      }
-    },
-    {
-      id: "HEAD_019",
-      rarity: "SSR",
-      slot: "HEAD",
-      performance_type: "H3 DEF",
-      level100: {
-        hp: 1500,
-        atk: 0,
-        def: 1300,
-        luk: 0
-      }
-    },
-    {
-      id: "LEGS_001",
-      rarity: "N",
-      slot: "LEGS",
-      performance_type: "L1 DEF",
-      level100: {
-        hp: 900,
-        atk: 0,
-        def: 216,
-        luk: 0
-      }
-    },
-    {
-      id: "LEGS_002",
-      rarity: "N",
-      slot: "LEGS",
-      performance_type: "L2 HP",
-      level100: {
-        hp: 1260,
-        atk: 0,
-        def: 108,
-        luk: 0
-      }
-    },
-    {
-      id: "LEGS_003",
-      rarity: "N",
-      slot: "LEGS",
-      performance_type: "L3 LUK",
-      level100: {
-        hp: 540,
-        atk: 0,
-        def: 108,
-        luk: 4
-      }
-    },
-    {
-      id: "LEGS_004",
-      rarity: "N",
-      slot: "LEGS",
-      performance_type: "L1 DEF",
-      level100: {
-        hp: 900,
-        atk: 0,
-        def: 216,
-        luk: 0
-      }
-    },
-    {
-      id: "LEGS_005",
-      rarity: "N",
-      slot: "LEGS",
-      performance_type: "L2 HP",
-      level100: {
-        hp: 1260,
-        atk: 0,
-        def: 108,
-        luk: 0
-      }
-    },
-    {
-      id: "LEGS_006",
-      rarity: "R",
-      slot: "LEGS",
-      performance_type: "L1 DEF",
-      level100: {
-        hp: 1600,
-        atk: 0,
-        def: 384,
-        luk: 0
-      }
-    },
-    {
-      id: "LEGS_007",
-      rarity: "R",
-      slot: "LEGS",
-      performance_type: "L2 HP",
-      level100: {
-        hp: 2240,
-        atk: 0,
-        def: 192,
-        luk: 0
-      }
-    },
-    {
-      id: "LEGS_008",
-      rarity: "R",
-      slot: "LEGS",
-      performance_type: "L3 LUK",
-      level100: {
-        hp: 960,
-        atk: 0,
-        def: 192,
-        luk: 6
-      }
-    },
-    {
-      id: "LEGS_009",
-      rarity: "R",
-      slot: "LEGS",
-      performance_type: "L1 DEF",
-      level100: {
-        hp: 1600,
-        atk: 0,
-        def: 384,
-        luk: 0
-      }
-    },
-    {
-      id: "LEGS_010",
-      rarity: "R",
-      slot: "LEGS",
-      performance_type: "L2 HP",
-      level100: {
-        hp: 2240,
-        atk: 0,
-        def: 192,
-        luk: 0
-      }
-    },
-    {
-      id: "LEGS_011",
-      rarity: "R",
-      slot: "LEGS",
-      performance_type: "L3 LUK",
-      level100: {
-        hp: 960,
-        atk: 0,
-        def: 192,
-        luk: 6
-      }
-    },
-    {
-      id: "LEGS_012",
-      rarity: "SR",
-      slot: "LEGS",
-      performance_type: "L1 DEF",
-      level100: {
-        hp: 3e3,
-        atk: 0,
-        def: 720,
-        luk: 0
-      }
-    },
-    {
-      id: "LEGS_013",
-      rarity: "SR",
-      slot: "LEGS",
-      performance_type: "L2 HP",
-      level100: {
-        hp: 4200,
-        atk: 0,
-        def: 360,
-        luk: 0
-      }
-    },
-    {
-      id: "LEGS_014",
-      rarity: "SR",
-      slot: "LEGS",
-      performance_type: "L3 LUK",
-      level100: {
-        hp: 1800,
-        atk: 0,
-        def: 360,
-        luk: 8
-      }
-    },
-    {
-      id: "LEGS_015",
-      rarity: "SR",
-      slot: "LEGS",
-      performance_type: "L1 DEF",
-      level100: {
-        hp: 3e3,
-        atk: 0,
-        def: 720,
-        luk: 0
-      }
-    },
-    {
-      id: "LEGS_016",
-      rarity: "SR",
-      slot: "LEGS",
-      performance_type: "L2 HP",
-      level100: {
-        hp: 4200,
-        atk: 0,
-        def: 360,
-        luk: 0
-      }
-    },
-    {
-      id: "LEGS_017",
-      rarity: "SR",
-      slot: "LEGS",
-      performance_type: "L3 LUK",
-      level100: {
-        hp: 1800,
-        atk: 0,
-        def: 360,
-        luk: 8
-      }
-    },
-    {
-      id: "LEGS_018",
-      rarity: "SSR",
-      slot: "LEGS",
-      performance_type: "L1 DEF",
-      level100: {
-        hp: 5e3,
-        atk: 0,
-        def: 1200,
-        luk: 0
-      }
-    },
-    {
-      id: "LEGS_019",
-      rarity: "SSR",
-      slot: "LEGS",
-      performance_type: "L3 LUK",
-      level100: {
-        hp: 3e3,
-        atk: 0,
-        def: 600,
-        luk: 10
-      }
-    },
-    {
-      id: "WEAPON_001",
-      rarity: "N",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 720,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_002",
-      rarity: "N",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 720,
-        atk: 360,
-        def: 72,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_003",
-      rarity: "N",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 720,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_004",
-      rarity: "N",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 720,
-        atk: 360,
-        def: 72,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_005",
-      rarity: "N",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 720,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_006",
-      rarity: "N",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 720,
-        atk: 360,
-        def: 72,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_007",
-      rarity: "N",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 720,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_008",
-      rarity: "N",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 720,
-        atk: 360,
-        def: 72,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_009",
-      rarity: "R",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 1280,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_010",
-      rarity: "R",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 1280,
-        atk: 640,
-        def: 128,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_011",
-      rarity: "R",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 1280,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_012",
-      rarity: "R",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 1280,
-        atk: 640,
-        def: 128,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_013",
-      rarity: "R",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 1280,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_014",
-      rarity: "R",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 1280,
-        atk: 640,
-        def: 128,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_015",
-      rarity: "R",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 1280,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_016",
-      rarity: "R",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 1280,
-        atk: 640,
-        def: 128,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_017",
-      rarity: "R",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 1280,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_018",
-      rarity: "R",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 1280,
-        atk: 640,
-        def: 128,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_019",
-      rarity: "R",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 1280,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_020",
-      rarity: "R",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 1280,
-        atk: 640,
-        def: 128,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_021",
-      rarity: "R",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 1280,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_022",
-      rarity: "R",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 1280,
-        atk: 640,
-        def: 128,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_023",
-      rarity: "SR",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 2400,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_024",
-      rarity: "SR",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 2400,
-        atk: 1200,
-        def: 240,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_025",
-      rarity: "SR",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 2400,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_026",
-      rarity: "SR",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 2400,
-        atk: 1200,
-        def: 240,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_027",
-      rarity: "SR",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 2400,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_028",
-      rarity: "SR",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 2400,
-        atk: 1200,
-        def: 240,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_029",
-      rarity: "SR",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 2400,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_030",
-      rarity: "SR",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 2400,
-        atk: 1200,
-        def: 240,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_031",
-      rarity: "SR",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 2400,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_032",
-      rarity: "SR",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 2400,
-        atk: 1200,
-        def: 240,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_033",
-      rarity: "SR",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 2400,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_034",
-      rarity: "SR",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 2400,
-        atk: 1200,
-        def: 240,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_035",
-      rarity: "SR",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 2400,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_036",
-      rarity: "SR",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 2400,
-        atk: 1200,
-        def: 240,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_037",
-      rarity: "SR",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 2400,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_038",
-      rarity: "SR",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 2400,
-        atk: 1200,
-        def: 240,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_039",
-      rarity: "SR",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 2400,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_040",
-      rarity: "SR",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 2400,
-        atk: 1200,
-        def: 240,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_041",
-      rarity: "SSR",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 4e3,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_042",
-      rarity: "SSR",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 4e3,
-        atk: 2e3,
-        def: 400,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_043",
-      rarity: "SSR",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 4e3,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_044",
-      rarity: "SSR",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 4e3,
-        atk: 2e3,
-        def: 400,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_045",
-      rarity: "SSR",
-      slot: "WEAPON",
-      performance_type: "W1 \u653B\u6483",
-      level100: {
-        hp: 0,
-        atk: 4e3,
-        def: 0,
-        luk: 0
-      }
-    },
-    {
-      id: "WEAPON_046",
-      rarity: "SSR",
-      slot: "WEAPON",
-      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
-      level100: {
-        hp: 4e3,
-        atk: 2e3,
-        def: 400,
-        luk: 0
-      }
-    }
-  ]
-};
-
-// config/game04-master-assets.json
-var game04_master_assets_default = {
-  version: "2026-09-18",
-  namingAuthority: "GAME04_SENGOKU_ITEM_SKILL_EQUIPMENT_NAME_FIX_2026-09-16",
-  connectedAssetSourceCommit: "aa72725",
-  summary: {
-    total: 258,
-    sengokuConnected: 63,
-    awaitingGenericImage: 165,
-    awaitingExclusiveImage: 30
-  },
-  assets: [
-    {
-      id: "CHAR_EXP_S",
-      name: "\u4FEE\u7DF4\u306E\u5175\u7CE7\u4E38\u30FB\u5C0F",
-      category: "ITEM",
-      path: "/items/char_exp_s.png",
-      format: "PNG",
-      size: [
-        512,
-        512
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "CHAR_EXP_M",
-      name: "\u4FEE\u7DF4\u306E\u5175\u7CE7\u4E38\u30FB\u4E2D",
-      category: "ITEM",
-      path: "/items/char_exp_m.png",
-      format: "PNG",
-      size: [
-        512,
-        512
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "CHAR_EXP_L",
-      name: "\u4FEE\u7DF4\u306E\u5175\u7CE7\u4E38\u30FB\u5927",
-      category: "ITEM",
-      path: "/items/char_exp_l.png",
-      format: "PNG",
-      size: [
-        512,
-        512
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "EQUIP_EXP_S",
-      name: "\u935B\u932C\u306E\u7825\u77F3\u30FB\u5C0F",
-      category: "ITEM",
-      path: "/items/equip_exp_s.png",
-      format: "PNG",
-      size: [
-        512,
-        512
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "EQUIP_EXP_M",
-      name: "\u935B\u932C\u306E\u7825\u77F3\u30FB\u4E2D",
-      category: "ITEM",
-      path: "/items/equip_exp_m.png",
-      format: "PNG",
-      size: [
-        512,
-        512
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "EQUIP_EXP_L",
-      name: "\u935B\u932C\u306E\u7825\u77F3\u30FB\u5927",
-      category: "ITEM",
-      path: "/items/equip_exp_l.png",
-      format: "PNG",
-      size: [
-        512,
-        512
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "AWAKENING_BOOK",
-      name: "\u899A\u9192\u306E\u79D8\u5DFB",
-      category: "ITEM",
-      path: "/items/awakening_book.png",
-      format: "PNG",
-      size: [
-        512,
-        512
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_MANUAL",
-      name: "\u5965\u7FA9\u6307\u5357\u66F8",
-      category: "ITEM",
-      path: "/items/skill_manual.png",
-      format: "PNG",
-      size: [
-        512,
-        512
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "EQUIP_LB_PART",
-      name: "\u935B\u51B6\u306E\u79D8\u92FC",
-      category: "ITEM",
-      path: "/items/equip_lb_part.png",
-      format: "PNG",
-      size: [
-        512,
-        512
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "ENERGY_DRINK",
-      name: "\u6D3B\u529B\u4E38",
-      category: "ITEM",
-      path: "/items/energy_drink.png",
-      format: "PNG",
-      size: [
-        512,
-        512
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "PVP_POINT_TICKET",
-      name: "\u6C7A\u95D8\u72B6",
-      category: "ITEM",
-      path: "/items/pvp_point_ticket.png",
-      format: "PNG",
-      size: [
-        512,
-        512
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "RAID_POINT_TICKET",
-      name: "\u8A0E\u4F10\u4EE4",
-      category: "ITEM",
-      path: "/items/raid_point_ticket.png",
-      format: "PNG",
-      size: [
-        512,
-        512
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "NORMAL_GACHA_TICKET_CHARACTER",
-      name: "\u59EB\u6B66\u5C06\u53EC\u559A\u672D",
-      category: "ITEM",
-      path: "/items/normal_gacha_ticket_character.png",
-      format: "PNG",
-      size: [
-        512,
-        512
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "NORMAL_GACHA_TICKET_SKILL",
-      name: "\u6226\u6280\u53EC\u559A\u672D",
-      category: "ITEM",
-      path: "/items/normal_gacha_ticket_skill.png",
-      format: "PNG",
-      size: [
-        512,
-        512
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "NORMAL_GACHA_TICKET_EQUIPMENT",
-      name: "\u6B66\u5177\u53EC\u559A\u672D",
-      category: "ITEM",
-      path: "/items/normal_gacha_ticket_equipment.png",
-      format: "PNG",
-      size: [
-        512,
-        512
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SPECIAL_TICKET_CHARACTER",
-      name: "\u7279\u9078\u30FB\u59EB\u6B66\u5C06\u53EC\u559A\u672D",
-      category: "ITEM",
-      path: "/items/special_ticket_character.png",
-      format: "PNG",
-      size: [
-        512,
-        512
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SPECIAL_TICKET_SKILL",
-      name: "\u7279\u9078\u30FB\u6226\u6280\u53EC\u559A\u672D",
-      category: "ITEM",
-      path: "/items/special_ticket_skill.png",
-      format: "PNG",
-      size: [
-        512,
-        512
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SPECIAL_TICKET_EQUIPMENT",
-      name: "\u7279\u9078\u30FB\u6B66\u5177\u53EC\u559A\u672D",
-      category: "ITEM",
-      path: "/items/special_ticket_equipment.png",
-      format: "PNG",
-      size: [
-        512,
-        512
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_001",
-      name: "\u4E00\u6587\u5B57\u65AC\u308A",
-      category: "SKILL",
-      path: "/skills/skill_001_street_punch.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_002",
-      name: "\u7AF9\u675F\u306E\u5B88\u308A",
-      category: "SKILL",
-      path: "/skills/skill_002_quick_shield.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_003",
-      name: "\u85AC\u5E2B\u306E\u624B\u5F53",
-      category: "SKILL",
-      path: "/skills/skill_003_noise_heal.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_004",
-      name: "\u75BE\u98A8\u306E\u8DB3\u904B\u3073",
-      category: "SKILL",
-      path: "/skills/skill_004_step_dash.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_005",
-      name: "\u5FCD\u6CD5\u30FB\u6BD2\u91DD",
-      category: "SKILL",
-      path: "/skills/skill_005_poison_needle.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_006",
-      name: "\u9244\u58C1\u306E\u69CB\u3048",
-      category: "SKILL",
-      path: "/skills/skill_006_iron_guard.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_007",
-      name: "\u6311\u767A\u306E\u9B28",
-      category: "SKILL",
-      path: "/skills/skill_007_toxic_slang.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_008",
-      name: "\u5F13\u53D6\u308A\u306E\u4E00\u5C04",
-      category: "SKILL",
-      path: "/skills/skill_008_smart_snipe.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_009",
-      name: "\u596E\u8D77\u306E\u9663\u592A\u9F13",
-      category: "SKILL",
-      path: "/skills/skill_009_drug_injection.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_010",
-      name: "\u76EE\u6F70\u3057\u7C89",
-      category: "SKILL",
-      path: "/skills/skill_010_light_flash.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_011",
-      name: "\u6E3E\u8EAB\u306E\u592A\u5200",
-      category: "SKILL",
-      path: "/skills/skill_011_meditate.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_012",
-      name: "\u8599\u5200\u30FB\u5927\u65CB\u98A8",
-      category: "SKILL",
-      path: "/skills/skill_012_lucky_shoot.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_013",
-      name: "\u85AC\u5E2B\u306E\u5FDC\u6025\u624B\u5F53",
-      category: "SKILL",
-      path: "/skills/skill_013_charge_slash.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_014",
-      name: "\u7159\u5E55\u306E\u5B88\u9663",
-      category: "SKILL",
-      path: "/skills/skill_014_blunt_sweep.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_015",
-      name: "\u7834\u7532\u306E\u706B\u85AC\u7389",
-      category: "SKILL",
-      path: "/skills/skill_015_recovery_program.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_016",
-      name: "\u4EC1\u738B\u7ACB\u3061\u30FB\u7AF9\u675F\u76FE",
-      category: "SKILL",
-      path: "/skills/skill_016_smoke_screen.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_017",
-      name: "\u9B28\u306E\u58F0",
-      category: "SKILL",
-      path: "/skills/skill_017_acid_spray.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_018",
-      name: "\u91D1\u7815\u68D2\u30FB\u8133\u5929\u6483\u3061",
-      category: "SKILL",
-      path: "/skills/skill_018_jamming_wave.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_019",
-      name: "\u8840\u5438\u3044\u306E\u9023\u5203",
-      category: "SKILL",
-      path: "/skills/skill_019_impulse_barrier.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_020",
-      name: "\u65E9\u99C6\u3051\u306E\u53F7\u4EE4",
-      category: "SKILL",
-      path: "/skills/skill_020_indomitable_will.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_021",
-      name: "\u6025\u6240\u5C04\u3061",
-      category: "SKILL",
-      path: "/skills/skill_021_high_voltage.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_022",
-      name: "\u5927\u8599\u5200\u30FB\u93A7\u5D29\u3057",
-      category: "SKILL",
-      path: "/skills/skill_022_tactical_reload.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_023",
-      name: "\u79D8\u85AC\u30FB\u91D1\u5275\u818F",
-      category: "SKILL",
-      path: "/skills/skill_023_double_drive.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_024",
-      name: "\u7AF9\u675F\u30FB\u9244\u58C1\u9663",
-      category: "SKILL",
-      path: "/skills/skill_024_inspiring_roar.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_025",
-      name: "\u5FCD\u6CD5\u30FB\u7159\u7389\u4E71\u821E",
-      category: "SKILL",
-      path: "/skills/skill_025_protect_shield.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_026",
-      name: "\u6C7A\u8D77\u306E\u5927\u53F7\u4EE4",
-      category: "SKILL",
-      path: "/skills/skill_026_venom_blade.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_027",
-      name: "\u8840\u98A8\u65AC\u308A",
-      category: "SKILL",
-      path: "/skills/skill_027_synapse_burst.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_028",
-      name: "\u93A7\u901A\u3057",
-      category: "SKILL",
-      path: "/skills/skill_028_nanomachine_storm.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_029",
-      name: "\u85AC\u5E2B\u306E\u6D3B\u547D\u8853",
-      category: "SKILL",
-      path: "/skills/skill_029_toxic_gas.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_030",
-      name: "\u4E71\u7834\u30FB\u4F1D\u4EE4\u5C01\u3058",
-      category: "SKILL",
-      path: "/skills/skill_030_force_field.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_031",
-      name: "\u653B\u9632\u4E00\u4F53\u30FB\u69CD\u887E",
-      category: "SKILL",
-      path: "/skills/skill_031_hyper_accel.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_032",
-      name: "\u5FCD\u6CD5\u30FB\u6BD2\u5203",
-      category: "SKILL",
-      path: "/skills/skill_032_stun_grenade.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_033",
-      name: "\u660E\u93E1\u6B62\u6C34",
-      category: "SKILL",
-      path: "/skills/skill_033_atomic_cannon.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_034",
-      name: "\u5FCD\u6CD5\u30FB\u9583\u5149\u7389",
-      category: "SKILL",
-      path: "/skills/skill_034_life_steal.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_035",
-      name: "\u80CC\u6C34\u306E\u9663",
-      category: "SKILL",
-      path: "/skills/skill_035_hologram_decoy.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_036",
-      name: "\u5965\u7FA9\u30FB\u4E00\u5200\u4E21\u65AD",
-      category: "SKILL",
-      path: "/skills/skill_036_power_of_unity.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_037",
-      name: "\u5965\u7FA9\u30FB\u5343\u5203\u4E71\u821E",
-      category: "SKILL",
-      path: "/skills/skill_037_crimson_end_bullet.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_038",
-      name: "\u91D1\u57CE\u9244\u58C1",
-      category: "SKILL",
-      path: "/skills/skill_038_barrier_shatter.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_039",
-      name: "\u79D8\u5965\u7FA9\u30FB\u795E\u533B\u306E\u9663",
-      category: "SKILL",
-      path: "/skills/skill_039_timeline_rush.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_040",
-      name: "\u5996\u8853\u30FB\u8755\u307F\u306E\u9ED2\u9727",
-      category: "SKILL",
-      path: "/skills/skill_040_execution_strike.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_041",
-      name: "\u8987\u9053\u306E\u5927\u53F7\u4EE4",
-      category: "SKILL",
-      path: "/skills/skill_041_quick_search.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_042",
-      name: "\u79D8\u5965\u7FA9\u30FB\u8840\u685C\u4E71\u821E",
-      category: "SKILL",
-      path: "/skills/skill_042_linked_strike.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_043",
-      name: "\u5965\u7FA9\u30FB\u5730\u88C2\u5927\u69CC",
-      category: "SKILL",
-      path: "/skills/skill_043_gouge_wound.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_044",
-      name: "\u80CC\u6C34\u30FB\u4FEE\u7F85\u8FD4\u3057",
-      category: "SKILL",
-      path: "/skills/skill_044_cycle_off.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_045",
-      name: "\u8ECD\u7565\u30FB\u7DCF\u653B\u3081\u306E\u53F7\u4EE4",
-      category: "SKILL",
-      path: "/skills/skill_045_preparation.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "SENGOKU_CONNECTED"
-    },
-    {
-      id: "SKILL_046",
-      name: "\u5996\u8853\u30FB\u6BD2\u8718\u86DB\u306E\u9663",
-      category: "SKILL",
-      path: "/skills/skill_046_life_extension.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "SKILL_047",
-      name: "\u5805\u9663\u30FB\u53CD\u6483\u306E\u69CD\u887E",
-      category: "SKILL",
-      path: "/skills/skill_047_chain_shield.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "SKILL_048",
-      name: "\u4E0D\u5C48\u30FB\u547D\u8108\u306E\u7948\u308A",
-      category: "SKILL",
-      path: "/skills/skill_048_provocation_trigger.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "SKILL_049",
-      name: "\u5FCD\u6CD5\u30FB\u5BB5\u95C7\u5C01\u3058",
-      category: "SKILL",
-      path: "/skills/skill_049_toxic_propagation.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "SKILL_050",
-      name: "\u79D8\u5965\u7FA9\u30FB\u93A7\u65AD\u3061",
-      category: "SKILL",
-      path: "/skills/skill_050_combo_heal.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "SKILL_051",
-      name: "\u525B\u62F3\u30FB\u4E00\u6483\u5FC5\u5012",
-      category: "SKILL",
-      path: "/skills/skill_051_draw_smash.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "SKILL_052",
-      name: "\u4FEE\u7F85\u306E\u731B\u653B",
-      category: "SKILL",
-      path: "/skills/skill_052_in_sync_breathing.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "SKILL_053",
-      name: "\u4EC1\u738B\u7ACB\u3061",
-      category: "SKILL",
-      path: "/skills/skill_053_coordinated_care.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "SKILL_054",
-      name: "\u8987\u738B\u306E\u5A01\u5727",
-      category: "SKILL",
-      path: "/skills/skill_054_trump_card.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "SKILL_055",
-      name: "\u75BE\u98A8\u8FC5\u96F7",
-      category: "SKILL",
-      path: "/skills/skill_055_reserve_draw.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "SKILL_056",
-      name: "\u98A8\u5207\u308A\u306E\u592A\u5200",
-      category: "SKILL",
-      path: "/skills/skill_056_ap_accelerator.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "SKILL_057",
-      name: "\u72D0\u706B\u306E\u622F\u308C",
-      category: "SKILL",
-      path: "/skills/skill_057_tactical_charge.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "SKILL_058",
-      name: "\u5BB5\u95C7\u306E\u5E7B\u60D1",
-      category: "SKILL",
-      path: "/skills/skill_058_toxic_stimulation.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "SKILL_059",
-      name: "\u6226\u59EB\u306E\u5A01\u5149",
-      category: "SKILL",
-      path: "/skills/skill_059_venom_catalyst.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "SKILL_060",
-      name: "\u79D8\u5965\u7FA9\u30FB\u547D\u7E4B\u304E",
-      category: "SKILL",
-      path: "/skills/skill_060_tactical_draw.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "SKILL_061",
-      name: "\u91D1\u525B\u5D29\u3057",
-      category: "SKILL",
-      path: "/skills/skill_061_adrenaline_rush.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "SKILL_062",
-      name: "\u80CC\u6C34\u306E\u4E00\u592A\u5200",
-      category: "SKILL",
-      path: "/skills/skill_062_cycle_advance.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "SKILL_063",
-      name: "\u8001\u7DF4\u306E\u5B88\u308A",
-      category: "SKILL",
-      path: "/skills/skill_063_limiter_release.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "SKILL_064",
-      name: "\u6D41\u6C34\u53CD\u6483",
-      category: "SKILL",
-      path: "/skills/skill_064_search_destroy.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "SKILL_065",
-      name: "\u97CB\u99C4\u5929\u306E\u5148\u99C6\u3051",
-      category: "SKILL",
-      path: "/skills/skill_065_absolute_discipline.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "SKILL_066",
-      name: "\u75BE\u98A8\u9023\u65AC",
-      category: "SKILL",
-      path: "/skills/skill_066_discard_storm.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "SKILL_067",
-      name: "\u5FCD\u6CD5\u30FB\u53E3\u5C01\u3058",
-      category: "SKILL",
-      path: "/skills/skill_067_blessing_of_neon.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "SKILL_068",
-      name: "\u4E7E\u5764\u4E00\u64F2",
-      category: "SKILL",
-      path: "/skills/skill_068_underhand_deal.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "SKILL_069",
-      name: "\u7D05\u84EE\u306E\u4E00\u6483",
-      category: "SKILL",
-      path: "/skills/skill_069_disruption.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "SKILL_070",
-      name: "\u5BB5\u95C7\u306E\u546A\u8A5B",
-      category: "SKILL",
-      path: "/skills/skill_070_jamming_barrier.jpg",
-      format: "JPEG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "WEAPON_001",
-      name: "\u5C0F\u5200",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_001.png",
-      format: "PNG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_002",
-      name: "\u706B\u7E04\u77ED\u7B52",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_002.png",
-      format: "PNG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_003",
-      name: "\u91D1\u7815\u68D2",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_003.png",
-      format: "PNG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_004",
-      name: "\u5C71\u5200",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_004.png",
-      format: "PNG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_005",
-      name: "\u5341\u624B",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_005.png",
-      format: "PNG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_006",
-      name: "\u5C0F\u67C4",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_006.png",
-      format: "PNG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_007",
-      name: "\u9244\u68D2",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_007.png",
-      format: "PNG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_008",
-      name: "\u9244\u62F3",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_008.png",
-      format: "PNG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_009",
-      name: "\u9244\u9264\u68D2",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_009.png",
-      format: "PNG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_010",
-      name: "\u5927\u53E3\u5F84\u77ED\u7B52",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_010.png",
-      format: "PNG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_011",
-      name: "\u77ED\u5200",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_011.png",
-      format: "PNG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_012",
-      name: "\u6539\u826F\u706B\u7E04\u77ED\u7B52",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_012.png",
-      format: "PNG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_013",
-      name: "\u6563\u5F3E\u706B\u7E04\u9283",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_013.png",
-      format: "PNG",
-      size: [
-        1024,
-        1024
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_014",
-      name: "\u6226\u5834\u5C0F\u5200",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_014.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_015",
-      name: "\u9244\u5341\u624B",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_015.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_016",
-      name: "\u5FCD\u3073\u9023\u5F29",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_016.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_017",
-      name: "\u5927\u69CC",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_017.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_018",
-      name: "\u53CC\u5203\u5C0F\u5200",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_018.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_019",
-      name: "\u92FC\u7CF8",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_019.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_020",
-      name: "\u5F37\u5F13",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_020.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_021",
-      name: "\u9264\u722A",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_021.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_022",
-      name: "\u5357\u86EE\u5927\u7B52",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_022.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_023",
-      name: "\u75FA\u308C\u6BD2\u306E\u77ED\u5200",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_023.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_024",
-      name: "\u9023\u5F29\u30FB\u75BE\u98A8",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_024.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_025",
-      name: "\u7834\u57CE\u5927\u69CC",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_025.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_026",
-      name: "\u4ED5\u8FBC\u307F\u5200\u300E\u9ED2\u66DC\u300F",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_026.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_027",
-      name: "\u9244\u7832\u300E\u70C8\u706B\u300F",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_027.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_028",
-      name: "\u5996\u5200\u300E\u5438\u8840\u300F",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_028.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_029",
-      name: "\u6BD2\u4ED5\u8FBC\u307F\u77ED\u5200",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_029.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_030",
-      name: "\u6563\u5F3E\u706B\u7E04\u9283\u300E\u96F7\u5EA7\u300F",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_030.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_031",
-      name: "\u5927\u7B52\u300E\u68FA\u300F",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_031.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_032",
-      name: "\u53CC\u77ED\u7B52",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_032.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_033",
-      name: "\u5341\u624B\u300E\u91D1\u525B\u300F",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_033.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_034",
-      name: "\u5FCD\u5200",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_034.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_035",
-      name: "\u96A0\u3057\u77ED\u7B52",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_035.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_036",
-      name: "\u5200\u300E\u5F71\u6253\u3061\u300F",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_036.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_037",
-      name: "\u72D9\u6483\u706B\u7E04\u9283",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_037.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_038",
-      name: "\u9244\u9264\u722A",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_038.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_039",
-      name: "\u5FCD\u5F13\u300E\u9759\u5BC2\u300F",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_039.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_040",
-      name: "\u86C7\u8179\u5263",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_040.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_041",
-      name: "\u5927\u8EAB\u69CD",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_041.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_042",
-      name: "\u9244\u62F3\u300E\u963F\u4FEE\u7F85\u300F",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_042.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_043",
-      name: "\u5996\u5200\u300E\u6BD2\u86C7\u300F",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_043.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_044",
-      name: "\u5200\u300E\u96FB\u5149\u77F3\u706B\u300F",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_044.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_045",
-      name: "\u5927\u7B52\u300E\u7D42\u672B\u306E\u9418\u300F",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_045.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_046",
-      name: "\u91D1\u7259\u306E\u77ED\u5200",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_046.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "WEAPON_047",
-      name: "\u8C6A\u5263\u300E\u70B9\u706B\u300F",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_047.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "WEAPON_048",
-      name: "\u75BE\u98A8\u5200",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_048.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "WEAPON_049",
-      name: "\u6BD2\u86C7\u306E\u9ED2\u5203",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_049.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "WEAPON_050",
-      name: "\u652F\u914D\u8005\u306E\u9244\u6247",
-      category: "EQUIPMENT",
-      path: "/equipments/weapon_050.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "HEAD_001",
-      name: "\u6728\u7DBF\u9262\u5DFB",
-      category: "EQUIPMENT",
-      path: "/equipments/head_001.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "HEAD_002",
-      name: "\u8D64\u5099\u3048\u9262\u5DFB",
-      category: "EQUIPMENT",
-      path: "/equipments/head_002.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "HEAD_003",
-      name: "\u982D\u5DFE",
-      category: "EQUIPMENT",
-      path: "/equipments/head_003.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "HEAD_004",
-      name: "\u4F5C\u696D\u7B20",
-      category: "EQUIPMENT",
-      path: "/equipments/head_004.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "HEAD_005",
-      name: "\u52DD\u904B\u306E\u70CF\u5E3D\u5B50",
-      category: "EQUIPMENT",
-      path: "/equipments/head_005.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "HEAD_006",
-      name: "\u5FCD\u3073\u982D\u5DFE",
-      category: "EQUIPMENT",
-      path: "/equipments/head_006.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "HEAD_007",
-      name: "\u9ED2\u6F06\u9663\u7B20",
-      category: "EQUIPMENT",
-      path: "/equipments/head_007.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "HEAD_008",
-      name: "\u85AC\u5E2B\u306E\u8986\u9762",
-      category: "EQUIPMENT",
-      path: "/equipments/head_008.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "HEAD_009",
-      name: "\u9244\u515C",
-      category: "EQUIPMENT",
-      path: "/equipments/head_009.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "HEAD_010",
-      name: "\u9060\u898B\u773C\u93E1",
-      category: "EQUIPMENT",
-      path: "/equipments/head_010.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "HEAD_011",
-      name: "\u9244\u88FD\u9663\u7B20",
-      category: "EQUIPMENT",
-      path: "/equipments/head_011.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "HEAD_012",
-      name: "\u591C\u898B\u306E\u9060\u773C\u93E1",
-      category: "EQUIPMENT",
-      path: "/equipments/head_012.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "HEAD_013",
-      name: "\u9762\u982C\u30FB\u906E\u5149",
-      category: "EQUIPMENT",
-      path: "/equipments/head_013.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "HEAD_014",
-      name: "\u9244\u9762\u982C",
-      category: "EQUIPMENT",
-      path: "/equipments/head_014.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "HEAD_015",
-      name: "\u75BE\u98A8\u306E\u76EE\u5E87",
-      category: "EQUIPMENT",
-      path: "/equipments/head_015.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "HEAD_016",
-      name: "\u96A0\u5BC6\u982D\u5DFE",
-      category: "EQUIPMENT",
-      path: "/equipments/head_016.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "HEAD_017",
-      name: "\u9262\u91D1\u300E\u5343\u91CC\u773C\u300F",
-      category: "EQUIPMENT",
-      path: "/equipments/head_017.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "HEAD_018",
-      name: "\u515C\u300E\u9632\u5841\u300F",
-      category: "EQUIPMENT",
-      path: "/equipments/head_018.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "HEAD_019",
-      name: "\u8987\u8005\u306E\u76EE\u5E87",
-      category: "EQUIPMENT",
-      path: "/equipments/head_019.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "HEAD_020",
-      name: "\u8276\u82B1\u306E\u9ED2\u7C2A",
-      category: "EQUIPMENT",
-      path: "/equipments/head_020.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "BODY_001",
-      name: "\u9EBB\u7FBD\u7E54",
-      category: "EQUIPMENT",
-      path: "/equipments/body_001.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_002",
-      name: "\u6728\u7DBF\u9663\u7FBD\u7E54",
-      category: "EQUIPMENT",
-      path: "/equipments/body_002.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_003",
-      name: "\u91CE\u826F\u7740",
-      category: "EQUIPMENT",
-      path: "/equipments/body_003.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_004",
-      name: "\u7D79\u7FBD\u7E54",
-      category: "EQUIPMENT",
-      path: "/equipments/body_004.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_005",
-      name: "\u9769\u80F4",
-      category: "EQUIPMENT",
-      path: "/equipments/body_005.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_006",
-      name: "\u3086\u3063\u305F\u308A\u5C0F\u8896",
-      category: "EQUIPMENT",
-      path: "/equipments/body_006.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_007",
-      name: "\u4E0A\u7B49\u9663\u7FBD\u7E54",
-      category: "EQUIPMENT",
-      path: "/equipments/body_007.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_008",
-      name: "\u9ED2\u9769\u9577\u7FBD\u7E54",
-      category: "EQUIPMENT",
-      path: "/equipments/body_008.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_009",
-      name: "\u4E8C\u679A\u80F4\u5177\u8DB3",
-      category: "EQUIPMENT",
-      path: "/equipments/body_009.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_010",
-      name: "\u8EFD\u88C5\u5C0F\u8896",
-      category: "EQUIPMENT",
-      path: "/equipments/body_010.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_011",
-      name: "\u6B66\u50CD\u304D\u306E\u9663\u7FBD\u7E54",
-      category: "EQUIPMENT",
-      path: "/equipments/body_011.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_012",
-      name: "\u7DBF\u5165\u308C\u80F4\u7740",
-      category: "EQUIPMENT",
-      path: "/equipments/body_012.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_013",
-      name: "\u98DB\u811A\u7FBD\u7E54",
-      category: "EQUIPMENT",
-      path: "/equipments/body_013.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_014",
-      name: "\u9244\u677F\u80F4",
-      category: "EQUIPMENT",
-      path: "/equipments/body_014.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_015",
-      name: "\u5FCD\u88C5\u675F",
-      category: "EQUIPMENT",
-      path: "/equipments/body_015.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_016",
-      name: "\u5927\u93A7\u30FB\u525B",
-      category: "EQUIPMENT",
-      path: "/equipments/body_016.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_017",
-      name: "\u9396\u5E37\u5B50",
-      category: "EQUIPMENT",
-      path: "/equipments/body_017.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_018",
-      name: "\u5357\u86EE\u80F4\u7FBD\u7E54",
-      category: "EQUIPMENT",
-      path: "/equipments/body_018.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_019",
-      name: "\u92F2\u6253\u9769\u80F4",
-      category: "EQUIPMENT",
-      path: "/equipments/body_019.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_020",
-      name: "\u5F53\u4E16\u5177\u8DB3\u30FB\u525B\u529B",
-      category: "EQUIPMENT",
-      path: "/equipments/body_020.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_021",
-      name: "\u75BE\u98A8\u9663\u7FBD\u7E54",
-      category: "EQUIPMENT",
-      path: "/equipments/body_021.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_022",
-      name: "\u4E0A\u7B49\u7F85\u7D17\u9663\u7FBD\u7E54",
-      category: "EQUIPMENT",
-      path: "/equipments/body_022.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_023",
-      name: "\u5927\u93A7\u300E\u76FE\u58C1\u300F",
-      category: "EQUIPMENT",
-      path: "/equipments/body_023.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_024",
-      name: "\u96A0\u5BC6\u9396\u5E37\u5B50",
-      category: "EQUIPMENT",
-      path: "/equipments/body_024.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_025",
-      name: "\u5929\u9D5E\u7D68\u306E\u9663\u7FBD\u7E54",
-      category: "EQUIPMENT",
-      path: "/equipments/body_025.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_026",
-      name: "\u8987\u738B\u306E\u5927\u93A7",
-      category: "EQUIPMENT",
-      path: "/equipments/body_026.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_027",
-      name: "\u86C7\u7D0B\u306E\u7D79\u5C0F\u8896",
-      category: "EQUIPMENT",
-      path: "/equipments/body_027.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_028",
-      name: "\u6226\u59EB\u306E\u8EFD\u88C5\u5177\u8DB3",
-      category: "EQUIPMENT",
-      path: "/equipments/body_028.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "BODY_029",
-      name: "\u7D05\u84EE\u306E\u9663\u7FBD\u7E54",
-      category: "EQUIPMENT",
-      path: "/equipments/body_029.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "BODY_030",
-      name: "\u822C\u82E5\u523A\u7E4D\u306E\u9663\u7FBD\u7E54",
-      category: "EQUIPMENT",
-      path: "/equipments/body_030.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "LEGS_001",
-      name: "\u8EFD\u88C5\u88B4",
-      category: "EQUIPMENT",
-      path: "/equipments/legs_001.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "LEGS_002",
-      name: "\u7D99\u304E\u5F53\u3066\u88B4",
-      category: "EQUIPMENT",
-      path: "/equipments/legs_002.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "LEGS_003",
-      name: "\u91CE\u88B4",
-      category: "EQUIPMENT",
-      path: "/equipments/legs_003.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "LEGS_004",
-      name: "\u8349\u978B\u30FB\u75BE\u98A8",
-      category: "EQUIPMENT",
-      path: "/equipments/legs_004.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "LEGS_005",
-      name: "\u811A\u7D46",
-      category: "EQUIPMENT",
-      path: "/equipments/legs_005.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "LEGS_006",
-      name: "\u9769\u88B4",
-      category: "EQUIPMENT",
-      path: "/equipments/legs_006.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "LEGS_007",
-      name: "\u5F37\u5316\u91CE\u88B4",
-      category: "EQUIPMENT",
-      path: "/equipments/legs_007.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "LEGS_008",
-      name: "\u4F0A\u8CC0\u88B4",
-      category: "EQUIPMENT",
-      path: "/equipments/legs_008.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "LEGS_009",
-      name: "\u7D30\u8EAB\u88B4",
-      category: "EQUIPMENT",
-      path: "/equipments/legs_009.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "LEGS_010",
-      name: "\u4F5C\u696D\u88B4",
-      category: "EQUIPMENT",
-      path: "/equipments/legs_010.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "LEGS_011",
-      name: "\u9632\u8B77\u91CE\u88B4",
-      category: "EQUIPMENT",
-      path: "/equipments/legs_011.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "LEGS_012",
-      name: "\u9244\u92F2\u811A\u7D46",
-      category: "EQUIPMENT",
-      path: "/equipments/legs_012.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "LEGS_013",
-      name: "\u5FCD\u3073\u811A\u7D46",
-      category: "EQUIPMENT",
-      path: "/equipments/legs_013.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "LEGS_014",
-      name: "\u91CD\u88C5\u811B\u5F53",
-      category: "EQUIPMENT",
-      path: "/equipments/legs_014.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "LEGS_015",
-      name: "\u901A\u6C17\u9396\u811A\u7D46",
-      category: "EQUIPMENT",
-      path: "/equipments/legs_015.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "LEGS_016",
-      name: "\u92F2\u6253\u9769\u88B4",
-      category: "EQUIPMENT",
-      path: "/equipments/legs_016.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "LEGS_017",
-      name: "\u75BE\u98A8\u8DB3\u888B\u300E\u9583\u5149\u300F",
-      category: "EQUIPMENT",
-      path: "/equipments/legs_017.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "LEGS_018",
-      name: "\u5927\u811B\u5F53\u300E\u9632\u5841\u300F",
-      category: "EQUIPMENT",
-      path: "/equipments/legs_018.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "LEGS_019",
-      name: "\u97CB\u99C4\u5929\u306E\u8349\u978B",
-      category: "EQUIPMENT",
-      path: "/equipments/legs_019.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "LEGS_020",
-      name: "\u6F06\u9ED2\u306E\u5FCD\u3073\u811A\u7D46",
-      category: "EQUIPMENT",
-      path: "/equipments/legs_020.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "ACCESSORY_001",
-      name: "\u9285\u306E\u8033\u98FE\u308A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_001.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_002",
-      name: "\u9244\u8F2A\u306E\u6307\u74B0",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_002.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_003",
-      name: "\u9769\u7D10\u306E\u9996\u98FE\u308A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_003.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_004",
-      name: "\u6B66\u904B\u306E\u6728\u672D",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_004.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_005",
-      name: "\u75BE\u98A8\u306E\u624B\u7532\u7D10",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_005.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_006",
-      name: "\u9280\u9396\u306E\u9996\u98FE\u308A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_006.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_007",
-      name: "\u771F\u936E\u306E\u8155\u8F2A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_007.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_008",
-      name: "\u98A8\u9234\u306E\u6839\u4ED8",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_008.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_009",
-      name: "\u9B3C\u9762\u306E\u6839\u4ED8",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_009.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_010",
-      name: "\u7DE8\u9769\u306E\u8155\u8F2A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_010.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_011",
-      name: "\u65E9\u99C6\u3051\u306E\u5B88\u308A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_011.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_012",
-      name: "\u9EC4\u91D1\u5927\u9396",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_012.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_013",
-      name: "\u6B66\u529F\u306E\u5370\u5224\u6307\u8F2A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_013.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_014",
-      name: "\u9244\u8F2A\u306E\u9996\u98FE\u308A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_014.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_015",
-      name: "\u68D8\u9244\u306E\u8155\u8F2A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_015.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_016",
-      name: "\u5C0F\u67C4\u306E\u9996\u98FE\u308A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_016.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_017",
-      name: "\u52DD\u8CA0\u8CFD",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_017.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_018",
-      name: "\u6B66\u5177\u5E2F",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_018.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_019",
-      name: "\u9AD1\u9ACF\u9280\u8F2A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_019.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_020",
-      name: "\u75BE\u98A8\u306E\u8033\u98FE\u308A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_020.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_021",
-      name: "\u9244\u9396\u306E\u8170\u98FE\u308A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_021.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_022",
-      name: "\u5357\u86EE\u5341\u5B57\u5B88",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_022.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_023",
-      name: "\u65E9\u99C6\u3051\u306E\u8B77\u7B26",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_023.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_024",
-      name: "\u86C7\u7D0B\u8155\u8F2A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_024.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_025",
-      name: "\u706B\u7E04\u5F3E\u306E\u9996\u98FE\u308A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_025.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_026",
-      name: "\u5F62\u898B\u306E\u5B88\u888B",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_026.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_027",
-      name: "\u767D\u91D1\u5370\u5224\u6307\u8F2A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_027.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_028",
-      name: "\u8170\u5DEE\u3057\u77E2\u7B52",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_028.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_029",
-      name: "\u84BC\u7389\u306E\u6307\u8F2A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_029.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_030",
-      name: "\u767D\u9280\u5927\u9396",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_030.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_031",
-      name: "\u6B7B\u795E\u306E\u9280\u5B88",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_031.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_032",
-      name: "\u767E\u5408\u7D0B\u9996\u98FE\u308A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_032.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_033",
-      name: "\u9B3C\u68D8\u306E\u9996\u8F2A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_033.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_034",
-      name: "\u91D1\u525B\u77F3\u306E\u8B77\u8F2A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_034.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_035",
-      name: "\u539F\u77F3\u7FE1\u7FE0\u8155\u8F2A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_035.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_036",
-      name: "\u6C34\u6676\u306E\u5FA1\u5B88",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_036.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_037",
-      name: "\u98A8\u8AAD\u307F\u306E\u8155\u8F2A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_037.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_038",
-      name: "\u9ED2\u7D0B\u306E\u8B77\u7B26",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_038.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_039",
-      name: "\u9244\u67B7\u306E\u8155\u8F2A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_039.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_040",
-      name: "\u7D05\u7389\u91D1\u98FE\u308A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_040.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_041",
-      name: "\u7C60\u624B\u30FB\u525B",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_041.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_042",
-      name: "\u86C7\u795E\u306E\u8DB3\u8F2A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_042.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_043",
-      name: "\u9AD1\u9ACF\u9244\u5B88",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_043.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_044",
-      name: "\u91D1\u525B\u306E\u8155\u7532",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_044.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_045",
-      name: "\u6708\u767D\u77F3\u306E\u895F\u98FE\u308A",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_045.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_046",
-      name: "\u6B66\u5C06\u306E\u7FE1\u7FE0\u5B88",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_046.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_047",
-      name: "\u6F06\u5857\u308A\u306E\u685C\u6839\u4ED8",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_047.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_048",
-      name: "\u5BB5\u95C7\u306E\u5B9D\u73E0",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_048.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_GENERIC_IMAGE"
-    },
-    {
-      id: "ACCESSORY_049",
-      name: "\u904B\u547D\u306E\u8B77\u7B26",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_049.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    },
-    {
-      id: "ACCESSORY_050",
-      name: "\u5973\u738B\u306E\u5370\u5224",
-      category: "EQUIPMENT",
-      path: "/equipments/accessory_050.png",
-      format: "PNG",
-      size: [
-        341,
-        341
-      ],
-      status: "AWAITING_EXCLUSIVE_IMAGE"
-    }
-  ]
-};
-
-// src/theme/sengoku-masters.json
-var sengoku_masters_default = {
-  ACCESSORY_001: "\u9285\u306E\u8033\u98FE\u308A",
-  ACCESSORY_002: "\u9244\u8F2A\u306E\u6307\u74B0",
-  ACCESSORY_003: "\u9769\u7D10\u306E\u9996\u98FE\u308A",
-  ACCESSORY_004: "\u6B66\u904B\u306E\u6728\u672D",
-  ACCESSORY_005: "\u75BE\u98A8\u306E\u624B\u7532\u7D10",
-  ACCESSORY_006: "\u9280\u9396\u306E\u9996\u98FE\u308A",
-  ACCESSORY_007: "\u771F\u936E\u306E\u8155\u8F2A",
-  ACCESSORY_008: "\u98A8\u9234\u306E\u6839\u4ED8",
-  ACCESSORY_009: "\u9B3C\u9762\u306E\u6839\u4ED8",
-  ACCESSORY_010: "\u7DE8\u9769\u306E\u8155\u8F2A",
-  ACCESSORY_011: "\u65E9\u99C6\u3051\u306E\u5B88\u308A",
-  ACCESSORY_012: "\u9EC4\u91D1\u5927\u9396",
-  ACCESSORY_013: "\u6B66\u529F\u306E\u5370\u5224\u6307\u8F2A",
-  ACCESSORY_014: "\u9244\u8F2A\u306E\u9996\u98FE\u308A",
-  ACCESSORY_015: "\u68D8\u9244\u306E\u8155\u8F2A",
-  ACCESSORY_016: "\u5C0F\u67C4\u306E\u9996\u98FE\u308A",
-  ACCESSORY_017: "\u52DD\u8CA0\u8CFD",
-  ACCESSORY_018: "\u6B66\u5177\u5E2F",
-  ACCESSORY_019: "\u9AD1\u9ACF\u9280\u8F2A",
-  ACCESSORY_020: "\u75BE\u98A8\u306E\u8033\u98FE\u308A",
-  ACCESSORY_021: "\u9244\u9396\u306E\u8170\u98FE\u308A",
-  ACCESSORY_022: "\u5357\u86EE\u5341\u5B57\u5B88",
-  ACCESSORY_023: "\u65E9\u99C6\u3051\u306E\u8B77\u7B26",
-  ACCESSORY_024: "\u86C7\u7D0B\u8155\u8F2A",
-  ACCESSORY_025: "\u706B\u7E04\u5F3E\u306E\u9996\u98FE\u308A",
-  ACCESSORY_026: "\u5F62\u898B\u306E\u5B88\u888B",
-  ACCESSORY_027: "\u767D\u91D1\u5370\u5224\u6307\u8F2A",
-  ACCESSORY_028: "\u8170\u5DEE\u3057\u77E2\u7B52",
-  ACCESSORY_029: "\u84BC\u7389\u306E\u6307\u8F2A",
-  ACCESSORY_030: "\u767D\u9280\u5927\u9396",
-  ACCESSORY_031: "\u6B7B\u795E\u306E\u9280\u5B88",
-  ACCESSORY_032: "\u767E\u5408\u7D0B\u9996\u98FE\u308A",
-  ACCESSORY_033: "\u9B3C\u68D8\u306E\u9996\u8F2A",
-  ACCESSORY_034: "\u91D1\u525B\u77F3\u306E\u8B77\u8F2A",
-  ACCESSORY_035: "\u539F\u77F3\u7FE1\u7FE0\u8155\u8F2A",
-  ACCESSORY_036: "\u6C34\u6676\u306E\u5FA1\u5B88",
-  ACCESSORY_037: "\u98A8\u8AAD\u307F\u306E\u8155\u8F2A",
-  ACCESSORY_038: "\u9ED2\u7D0B\u306E\u8B77\u7B26",
-  ACCESSORY_039: "\u9244\u67B7\u306E\u8155\u8F2A",
-  ACCESSORY_040: "\u7D05\u7389\u91D1\u98FE\u308A",
-  ACCESSORY_041: "\u7C60\u624B\u30FB\u525B",
-  ACCESSORY_042: "\u86C7\u795E\u306E\u8DB3\u8F2A",
-  ACCESSORY_043: "\u9AD1\u9ACF\u9244\u5B88",
-  ACCESSORY_044: "\u91D1\u525B\u306E\u8155\u7532",
-  ACCESSORY_045: "\u6708\u767D\u77F3\u306E\u895F\u98FE\u308A",
-  ACCESSORY_046: "\u6B66\u5C06\u306E\u7FE1\u7FE0\u5B88",
-  ACCESSORY_047: "\u6F06\u5857\u308A\u306E\u685C\u6839\u4ED8",
-  ACCESSORY_048: "\u5BB5\u95C7\u306E\u5B9D\u73E0",
-  ACCESSORY_049: "\u904B\u547D\u306E\u8B77\u7B26",
-  ACCESSORY_050: "\u5973\u738B\u306E\u5370\u5224",
-  AWAKENING_BOOK: "\u899A\u9192\u306E\u79D8\u5DFB",
-  BODY_001: "\u9EBB\u7FBD\u7E54",
-  BODY_002: "\u6728\u7DBF\u9663\u7FBD\u7E54",
-  BODY_003: "\u91CE\u826F\u7740",
-  BODY_004: "\u7D79\u7FBD\u7E54",
-  BODY_005: "\u9769\u80F4",
-  BODY_006: "\u3086\u3063\u305F\u308A\u5C0F\u8896",
-  BODY_007: "\u4E0A\u7B49\u9663\u7FBD\u7E54",
-  BODY_008: "\u9ED2\u9769\u9577\u7FBD\u7E54",
-  BODY_009: "\u4E8C\u679A\u80F4\u5177\u8DB3",
-  BODY_010: "\u8EFD\u88C5\u5C0F\u8896",
-  BODY_011: "\u6B66\u50CD\u304D\u306E\u9663\u7FBD\u7E54",
-  BODY_012: "\u7DBF\u5165\u308C\u80F4\u7740",
-  BODY_013: "\u98DB\u811A\u7FBD\u7E54",
-  BODY_014: "\u9244\u677F\u80F4",
-  BODY_015: "\u5FCD\u88C5\u675F",
-  BODY_016: "\u5927\u93A7\u30FB\u525B",
-  BODY_017: "\u9396\u5E37\u5B50",
-  BODY_018: "\u5357\u86EE\u80F4\u7FBD\u7E54",
-  BODY_019: "\u92F2\u6253\u9769\u80F4",
-  BODY_020: "\u5F53\u4E16\u5177\u8DB3\u30FB\u525B\u529B",
-  BODY_021: "\u75BE\u98A8\u9663\u7FBD\u7E54",
-  BODY_022: "\u4E0A\u7B49\u7F85\u7D17\u9663\u7FBD\u7E54",
-  BODY_023: "\u5927\u93A7\u300E\u76FE\u58C1\u300F",
-  BODY_024: "\u96A0\u5BC6\u9396\u5E37\u5B50",
-  BODY_025: "\u5929\u9D5E\u7D68\u306E\u9663\u7FBD\u7E54",
-  BODY_026: "\u8987\u738B\u306E\u5927\u93A7",
-  BODY_027: "\u86C7\u7D0B\u306E\u7D79\u5C0F\u8896",
-  BODY_028: "\u6226\u59EB\u306E\u8EFD\u88C5\u5177\u8DB3",
-  BODY_029: "\u7D05\u84EE\u306E\u9663\u7FBD\u7E54",
-  BODY_030: "\u822C\u82E5\u523A\u7E4D\u306E\u9663\u7FBD\u7E54",
-  CHAR_EXP_L: "\u4FEE\u7DF4\u306E\u5175\u7CE7\u4E38\u30FB\u5927",
-  CHAR_EXP_M: "\u4FEE\u7DF4\u306E\u5175\u7CE7\u4E38\u30FB\u4E2D",
-  CHAR_EXP_S: "\u4FEE\u7DF4\u306E\u5175\u7CE7\u4E38\u30FB\u5C0F",
-  ENERGY_DRINK: "\u6D3B\u529B\u4E38",
-  EQUIP_EXP_L: "\u935B\u932C\u306E\u7825\u77F3\u30FB\u5927",
-  EQUIP_EXP_M: "\u935B\u932C\u306E\u7825\u77F3\u30FB\u4E2D",
-  EQUIP_EXP_S: "\u935B\u932C\u306E\u7825\u77F3\u30FB\u5C0F",
-  EQUIP_LB_PART: "\u935B\u51B6\u306E\u79D8\u92FC",
-  HEAD_001: "\u6728\u7DBF\u9262\u5DFB",
-  HEAD_002: "\u8D64\u5099\u3048\u9262\u5DFB",
-  HEAD_003: "\u982D\u5DFE",
-  HEAD_004: "\u4F5C\u696D\u7B20",
-  HEAD_005: "\u52DD\u904B\u306E\u70CF\u5E3D\u5B50",
-  HEAD_006: "\u5FCD\u3073\u982D\u5DFE",
-  HEAD_007: "\u9ED2\u6F06\u9663\u7B20",
-  HEAD_008: "\u85AC\u5E2B\u306E\u8986\u9762",
-  HEAD_009: "\u9244\u515C",
-  HEAD_010: "\u9060\u898B\u773C\u93E1",
-  HEAD_011: "\u9244\u88FD\u9663\u7B20",
-  HEAD_012: "\u591C\u898B\u306E\u9060\u773C\u93E1",
-  HEAD_013: "\u9762\u982C\u30FB\u906E\u5149",
-  HEAD_014: "\u9244\u9762\u982C",
-  HEAD_015: "\u75BE\u98A8\u306E\u76EE\u5E87",
-  HEAD_016: "\u96A0\u5BC6\u982D\u5DFE",
-  HEAD_017: "\u9262\u91D1\u300E\u5343\u91CC\u773C\u300F",
-  HEAD_018: "\u515C\u300E\u9632\u5841\u300F",
-  HEAD_019: "\u8987\u8005\u306E\u76EE\u5E87",
-  HEAD_020: "\u8276\u82B1\u306E\u9ED2\u7C2A",
-  LEGS_001: "\u8EFD\u88C5\u88B4",
-  LEGS_002: "\u7D99\u304E\u5F53\u3066\u88B4",
-  LEGS_003: "\u91CE\u88B4",
-  LEGS_004: "\u8349\u978B\u30FB\u75BE\u98A8",
-  LEGS_005: "\u811A\u7D46",
-  LEGS_006: "\u9769\u88B4",
-  LEGS_007: "\u5F37\u5316\u91CE\u88B4",
-  LEGS_008: "\u4F0A\u8CC0\u88B4",
-  LEGS_009: "\u7D30\u8EAB\u88B4",
-  LEGS_010: "\u4F5C\u696D\u88B4",
-  LEGS_011: "\u9632\u8B77\u91CE\u88B4",
-  LEGS_012: "\u9244\u92F2\u811A\u7D46",
-  LEGS_013: "\u5FCD\u3073\u811A\u7D46",
-  LEGS_014: "\u91CD\u88C5\u811B\u5F53",
-  LEGS_015: "\u901A\u6C17\u9396\u811A\u7D46",
-  LEGS_016: "\u92F2\u6253\u9769\u88B4",
-  LEGS_017: "\u75BE\u98A8\u8DB3\u888B\u300E\u9583\u5149\u300F",
-  LEGS_018: "\u5927\u811B\u5F53\u300E\u9632\u5841\u300F",
-  LEGS_019: "\u97CB\u99C4\u5929\u306E\u8349\u978B",
-  LEGS_020: "\u6F06\u9ED2\u306E\u5FCD\u3073\u811A\u7D46",
-  NORMAL_GACHA_TICKET_CHARACTER: "\u59EB\u6B66\u5C06\u53EC\u559A\u672D",
-  NORMAL_GACHA_TICKET_EQUIPMENT: "\u6B66\u5177\u53EC\u559A\u672D",
-  NORMAL_GACHA_TICKET_SKILL: "\u6226\u6280\u53EC\u559A\u672D",
-  PVP_POINT_TICKET: "\u6C7A\u95D8\u72B6",
-  RAID_POINT_TICKET: "\u8A0E\u4F10\u4EE4",
-  SKILL_001: "\u4E00\u6587\u5B57\u65AC\u308A",
-  SKILL_002: "\u7AF9\u675F\u306E\u5B88\u308A",
-  SKILL_003: "\u85AC\u5E2B\u306E\u624B\u5F53",
-  SKILL_004: "\u75BE\u98A8\u306E\u8DB3\u904B\u3073",
-  SKILL_005: "\u5FCD\u6CD5\u30FB\u6BD2\u91DD",
-  SKILL_006: "\u9244\u58C1\u306E\u69CB\u3048",
-  SKILL_007: "\u6311\u767A\u306E\u9B28",
-  SKILL_008: "\u5F13\u53D6\u308A\u306E\u4E00\u5C04",
-  SKILL_009: "\u596E\u8D77\u306E\u9663\u592A\u9F13",
-  SKILL_010: "\u76EE\u6F70\u3057\u7C89",
-  SKILL_011: "\u6E3E\u8EAB\u306E\u592A\u5200",
-  SKILL_012: "\u8599\u5200\u30FB\u5927\u65CB\u98A8",
-  SKILL_013: "\u85AC\u5E2B\u306E\u5FDC\u6025\u624B\u5F53",
-  SKILL_014: "\u7159\u5E55\u306E\u5B88\u9663",
-  SKILL_015: "\u7834\u7532\u306E\u706B\u85AC\u7389",
-  SKILL_016: "\u4EC1\u738B\u7ACB\u3061\u30FB\u7AF9\u675F\u76FE",
-  SKILL_017: "\u9B28\u306E\u58F0",
-  SKILL_018: "\u91D1\u7815\u68D2\u30FB\u8133\u5929\u6483\u3061",
-  SKILL_019: "\u8840\u5438\u3044\u306E\u9023\u5203",
-  SKILL_020: "\u65E9\u99C6\u3051\u306E\u53F7\u4EE4",
-  SKILL_021: "\u6025\u6240\u5C04\u3061",
-  SKILL_022: "\u5927\u8599\u5200\u30FB\u93A7\u5D29\u3057",
-  SKILL_023: "\u79D8\u85AC\u30FB\u91D1\u5275\u818F",
-  SKILL_024: "\u7AF9\u675F\u30FB\u9244\u58C1\u9663",
-  SKILL_025: "\u5FCD\u6CD5\u30FB\u7159\u7389\u4E71\u821E",
-  SKILL_026: "\u6C7A\u8D77\u306E\u5927\u53F7\u4EE4",
-  SKILL_027: "\u8840\u98A8\u65AC\u308A",
-  SKILL_028: "\u93A7\u901A\u3057",
-  SKILL_029: "\u85AC\u5E2B\u306E\u6D3B\u547D\u8853",
-  SKILL_030: "\u4E71\u7834\u30FB\u4F1D\u4EE4\u5C01\u3058",
-  SKILL_031: "\u653B\u9632\u4E00\u4F53\u30FB\u69CD\u887E",
-  SKILL_032: "\u5FCD\u6CD5\u30FB\u6BD2\u5203",
-  SKILL_033: "\u660E\u93E1\u6B62\u6C34",
-  SKILL_034: "\u5FCD\u6CD5\u30FB\u9583\u5149\u7389",
-  SKILL_035: "\u80CC\u6C34\u306E\u9663",
-  SKILL_036: "\u5965\u7FA9\u30FB\u4E00\u5200\u4E21\u65AD",
-  SKILL_037: "\u5965\u7FA9\u30FB\u5343\u5203\u4E71\u821E",
-  SKILL_038: "\u91D1\u57CE\u9244\u58C1",
-  SKILL_039: "\u79D8\u5965\u7FA9\u30FB\u795E\u533B\u306E\u9663",
-  SKILL_040: "\u5996\u8853\u30FB\u8755\u307F\u306E\u9ED2\u9727",
-  SKILL_041: "\u8987\u9053\u306E\u5927\u53F7\u4EE4",
-  SKILL_042: "\u79D8\u5965\u7FA9\u30FB\u8840\u685C\u4E71\u821E",
-  SKILL_043: "\u5965\u7FA9\u30FB\u5730\u88C2\u5927\u69CC",
-  SKILL_044: "\u80CC\u6C34\u30FB\u4FEE\u7F85\u8FD4\u3057",
-  SKILL_045: "\u8ECD\u7565\u30FB\u7DCF\u653B\u3081\u306E\u53F7\u4EE4",
-  SKILL_046: "\u5996\u8853\u30FB\u6BD2\u8718\u86DB\u306E\u9663",
-  SKILL_047: "\u5805\u9663\u30FB\u53CD\u6483\u306E\u69CD\u887E",
-  SKILL_048: "\u4E0D\u5C48\u30FB\u547D\u8108\u306E\u7948\u308A",
-  SKILL_049: "\u5FCD\u6CD5\u30FB\u5BB5\u95C7\u5C01\u3058",
-  SKILL_050: "\u79D8\u5965\u7FA9\u30FB\u93A7\u65AD\u3061",
-  SKILL_051: "\u525B\u62F3\u30FB\u4E00\u6483\u5FC5\u5012",
-  SKILL_052: "\u4FEE\u7F85\u306E\u731B\u653B",
-  SKILL_053: "\u4EC1\u738B\u7ACB\u3061",
-  SKILL_054: "\u8987\u738B\u306E\u5A01\u5727",
-  SKILL_055: "\u75BE\u98A8\u8FC5\u96F7",
-  SKILL_056: "\u98A8\u5207\u308A\u306E\u592A\u5200",
-  SKILL_057: "\u72D0\u706B\u306E\u622F\u308C",
-  SKILL_058: "\u5BB5\u95C7\u306E\u5E7B\u60D1",
-  SKILL_059: "\u6226\u59EB\u306E\u5A01\u5149",
-  SKILL_060: "\u79D8\u5965\u7FA9\u30FB\u547D\u7E4B\u304E",
-  SKILL_061: "\u91D1\u525B\u5D29\u3057",
-  SKILL_062: "\u80CC\u6C34\u306E\u4E00\u592A\u5200",
-  SKILL_063: "\u8001\u7DF4\u306E\u5B88\u308A",
-  SKILL_064: "\u6D41\u6C34\u53CD\u6483",
-  SKILL_065: "\u97CB\u99C4\u5929\u306E\u5148\u99C6\u3051",
-  SKILL_066: "\u75BE\u98A8\u9023\u65AC",
-  SKILL_067: "\u5FCD\u6CD5\u30FB\u53E3\u5C01\u3058",
-  SKILL_068: "\u4E7E\u5764\u4E00\u64F2",
-  SKILL_069: "\u7D05\u84EE\u306E\u4E00\u6483",
-  SKILL_070: "\u5BB5\u95C7\u306E\u546A\u8A5B",
-  SKILL_MANUAL: "\u5965\u7FA9\u6307\u5357\u66F8",
-  SPECIAL_TICKET_CHARACTER: "\u7279\u9078\u30FB\u59EB\u6B66\u5C06\u53EC\u559A\u672D",
-  SPECIAL_TICKET_EQUIPMENT: "\u7279\u9078\u30FB\u6B66\u5177\u53EC\u559A\u672D",
-  SPECIAL_TICKET_SKILL: "\u7279\u9078\u30FB\u6226\u6280\u53EC\u559A\u672D",
-  WEAPON_001: "\u5C0F\u5200",
-  WEAPON_002: "\u706B\u7E04\u77ED\u7B52",
-  WEAPON_003: "\u91D1\u7815\u68D2",
-  WEAPON_004: "\u5C71\u5200",
-  WEAPON_005: "\u5341\u624B",
-  WEAPON_006: "\u5C0F\u67C4",
-  WEAPON_007: "\u9244\u68D2",
-  WEAPON_008: "\u9244\u62F3",
-  WEAPON_009: "\u9244\u9264\u68D2",
-  WEAPON_010: "\u5927\u53E3\u5F84\u77ED\u7B52",
-  WEAPON_011: "\u77ED\u5200",
-  WEAPON_012: "\u6539\u826F\u706B\u7E04\u77ED\u7B52",
-  WEAPON_013: "\u6563\u5F3E\u706B\u7E04\u9283",
-  WEAPON_014: "\u6226\u5834\u5C0F\u5200",
-  WEAPON_015: "\u9244\u5341\u624B",
-  WEAPON_016: "\u5FCD\u3073\u9023\u5F29",
-  WEAPON_017: "\u5927\u69CC",
-  WEAPON_018: "\u53CC\u5203\u5C0F\u5200",
-  WEAPON_019: "\u92FC\u7CF8",
-  WEAPON_020: "\u5F37\u5F13",
-  WEAPON_021: "\u9264\u722A",
-  WEAPON_022: "\u5357\u86EE\u5927\u7B52",
-  WEAPON_023: "\u75FA\u308C\u6BD2\u306E\u77ED\u5200",
-  WEAPON_024: "\u9023\u5F29\u30FB\u75BE\u98A8",
-  WEAPON_025: "\u7834\u57CE\u5927\u69CC",
-  WEAPON_026: "\u4ED5\u8FBC\u307F\u5200\u300E\u9ED2\u66DC\u300F",
-  WEAPON_027: "\u9244\u7832\u300E\u70C8\u706B\u300F",
-  WEAPON_028: "\u5996\u5200\u300E\u5438\u8840\u300F",
-  WEAPON_029: "\u6BD2\u4ED5\u8FBC\u307F\u77ED\u5200",
-  WEAPON_030: "\u6563\u5F3E\u706B\u7E04\u9283\u300E\u96F7\u5EA7\u300F",
-  WEAPON_031: "\u5927\u7B52\u300E\u68FA\u300F",
-  WEAPON_032: "\u53CC\u77ED\u7B52",
-  WEAPON_033: "\u5341\u624B\u300E\u91D1\u525B\u300F",
-  WEAPON_034: "\u5FCD\u5200",
-  WEAPON_035: "\u96A0\u3057\u77ED\u7B52",
-  WEAPON_036: "\u5200\u300E\u5F71\u6253\u3061\u300F",
-  WEAPON_037: "\u72D9\u6483\u706B\u7E04\u9283",
-  WEAPON_038: "\u9244\u9264\u722A",
-  WEAPON_039: "\u5FCD\u5F13\u300E\u9759\u5BC2\u300F",
-  WEAPON_040: "\u86C7\u8179\u5263",
-  WEAPON_041: "\u5927\u8EAB\u69CD",
-  WEAPON_042: "\u9244\u62F3\u300E\u963F\u4FEE\u7F85\u300F",
-  WEAPON_043: "\u5996\u5200\u300E\u6BD2\u86C7\u300F",
-  WEAPON_044: "\u5200\u300E\u96FB\u5149\u77F3\u706B\u300F",
-  WEAPON_045: "\u5927\u7B52\u300E\u7D42\u672B\u306E\u9418\u300F",
-  WEAPON_046: "\u91D1\u7259\u306E\u77ED\u5200",
-  WEAPON_047: "\u8C6A\u5263\u300E\u70B9\u706B\u300F",
-  WEAPON_048: "\u75BE\u98A8\u5200",
-  WEAPON_049: "\u6BD2\u86C7\u306E\u9ED2\u5203",
-  WEAPON_050: "\u652F\u914D\u8005\u306E\u9244\u6247"
-};
-
 // src/domain/redesign/data/raid-skill-values.json
 var raid_skill_values_default = [{ design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 0, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:105.00%" }, { design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 1, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:107.53%" }, { design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 2, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:111.02%" }, { design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 3, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:114.99%" }, { design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 4, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:119.31%" }, { design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 5, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:123.92%" }, { design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 6, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:128.76%" }, { design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 7, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:133.81%" }, { design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 8, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:139.05%" }, { design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 9, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:144.45%" }, { design_id: "SKD001", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 10, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 0, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:105.00%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 1, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:107.53%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 2, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:111.02%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 3, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:114.99%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 4, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:119.31%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 5, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:123.92%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 6, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:128.76%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 7, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:133.81%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 8, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:139.05%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 9, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:144.45%" }, { design_id: "SKD002", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 10, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 0, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:105.00%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 1, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:107.53%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 2, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:111.02%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 3, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:114.99%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 4, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:119.31%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 5, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:123.92%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 6, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:128.76%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 7, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:133.81%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 8, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:139.05%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 9, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:144.45%" }, { design_id: "SKD003", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 10, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 0, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:105.00%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 1, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:107.53%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 2, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:111.02%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 3, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:114.99%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 4, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:119.31%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 5, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:123.92%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 6, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:128.76%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 7, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:133.81%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 8, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:139.05%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 9, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:144.45%" }, { design_id: "SKD004", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 10, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 0, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:105.00%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 1, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:107.53%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 2, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:111.02%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 3, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:114.99%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 4, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:119.31%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 5, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:123.92%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 6, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:128.76%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 7, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:133.81%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 8, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:139.05%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 9, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:144.45%" }, { design_id: "SKD005", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 10, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 0, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:105.00%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 1, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:107.53%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 2, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:111.02%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 3, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:114.99%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 4, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:119.31%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 5, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:123.92%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 6, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:128.76%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 7, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:133.81%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 8, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:139.05%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 9, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:144.45%" }, { design_id: "SKD006", name_provisional: "\u4F4E\u6D88\u8CBB\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 10, sp: 25, burst_sp: 13, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 0, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:120.00%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 1, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:124.50%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 2, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:130.70%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 3, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:137.76%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 4, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:145.45%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 5, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:153.64%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 6, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:162.25%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 7, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:171.22%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 8, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:180.53%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 9, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:190.13%" }, { design_id: "SKD007", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 10, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:200.00%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 0, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:120.00%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 1, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:124.50%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 2, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:130.70%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 3, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:137.76%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 4, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:145.45%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 5, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:153.64%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 6, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:162.25%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 7, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:171.22%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 8, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:180.53%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 9, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:190.13%" }, { design_id: "SKD008", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 10, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:200.00%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 0, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:120.00%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 1, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:124.50%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 2, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:130.70%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 3, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:137.76%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 4, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:145.45%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 5, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:153.64%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 6, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:162.25%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 7, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:171.22%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 8, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:180.53%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 9, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:190.13%" }, { design_id: "SKD009", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 10, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:200.00%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 0, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:120.00%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 1, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:124.50%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 2, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:130.70%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 3, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:137.76%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 4, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:145.45%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 5, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:153.64%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 6, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:162.25%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 7, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:171.22%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 8, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:180.53%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 9, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:190.13%" }, { design_id: "SKD010", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 10, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:200.00%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 0, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:120.00%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 1, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:124.50%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 2, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:130.70%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 3, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:137.76%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 4, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:145.45%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 5, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:153.64%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 6, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:162.25%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 7, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:171.22%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 8, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:180.53%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 9, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:190.13%" }, { design_id: "SKD011", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 10, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:200.00%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 0, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:120.00%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 1, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:124.50%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 2, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:130.70%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 3, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:137.76%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 4, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:145.45%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 5, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:153.64%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 6, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:162.25%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 7, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:171.22%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 8, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:180.53%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 9, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:190.13%" }, { design_id: "SKD012", name_provisional: "\u6A19\u6E96\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 10, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:200.00%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 0, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 1, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:158.44%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 2, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:170.06%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 3, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:183.30%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 4, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:197.72%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 5, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:213.07%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 6, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:229.21%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 7, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:246.04%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 8, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:263.49%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 9, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:281.49%" }, { design_id: "SKD013", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u706B", lb: 10, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:300.00%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 0, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 1, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:158.44%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 2, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:170.06%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 3, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:183.30%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 4, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:197.72%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 5, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:213.07%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 6, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:229.21%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 7, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:246.04%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 8, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:263.49%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 9, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:281.49%" }, { design_id: "SKD014", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u6C34", lb: 10, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:300.00%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 0, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 1, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:158.44%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 2, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:170.06%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 3, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:183.30%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 4, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:197.72%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 5, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:213.07%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 6, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:229.21%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 7, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:246.04%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 8, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:263.49%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 9, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:281.49%" }, { design_id: "SKD015", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u571F", lb: 10, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:300.00%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 0, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 1, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:158.44%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 2, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:170.06%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 3, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:183.30%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 4, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:197.72%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 5, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:213.07%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 6, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:229.21%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 7, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:246.04%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 8, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:263.49%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 9, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:281.49%" }, { design_id: "SKD016", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u98A8", lb: 10, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:300.00%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 0, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 1, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:158.44%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 2, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:170.06%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 3, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:183.30%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 4, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:197.72%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 5, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:213.07%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 6, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:229.21%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 7, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:246.04%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 8, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:263.49%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 9, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:281.49%" }, { design_id: "SKD017", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u5149", lb: 10, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:300.00%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 0, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 1, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:158.44%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 2, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:170.06%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 3, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:183.30%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 4, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:197.72%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 5, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:213.07%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 6, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:229.21%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 7, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:246.04%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 8, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:263.49%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 9, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:281.49%" }, { design_id: "SKD018", name_provisional: "\u9AD8\u5A01\u529B\u5358\u4F53\u653B\u6483\u30FB\u95C7", lb: 10, sp: 150, burst_sp: 75, performance_text: "\u653B\u6483\u500D\u7387:300.00%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 0, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:60.00%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 1, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:62.25%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 2, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:65.35%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 3, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:68.88%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 4, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:72.72%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 5, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:76.82%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 6, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:81.12%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 7, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:85.61%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 8, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:90.26%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 9, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:95.06%" }, { design_id: "SKD019", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u706B", lb: 10, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:100.00%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 0, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:60.00%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 1, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:62.25%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 2, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:65.35%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 3, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:68.88%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 4, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:72.72%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 5, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:76.82%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 6, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:81.12%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 7, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:85.61%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 8, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:90.26%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 9, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:95.06%" }, { design_id: "SKD020", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u6C34", lb: 10, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:100.00%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 0, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:60.00%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 1, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:62.25%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 2, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:65.35%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 3, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:68.88%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 4, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:72.72%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 5, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:76.82%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 6, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:81.12%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 7, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:85.61%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 8, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:90.26%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 9, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:95.06%" }, { design_id: "SKD021", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u571F", lb: 10, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:100.00%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 0, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:60.00%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 1, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:62.25%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 2, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:65.35%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 3, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:68.88%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 4, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:72.72%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 5, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:76.82%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 6, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:81.12%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 7, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:85.61%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 8, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:90.26%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 9, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:95.06%" }, { design_id: "SKD022", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u98A8", lb: 10, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:100.00%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 0, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:60.00%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 1, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:62.25%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 2, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:65.35%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 3, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:68.88%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 4, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:72.72%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 5, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:76.82%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 6, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:81.12%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 7, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:85.61%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 8, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:90.26%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 9, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:95.06%" }, { design_id: "SKD023", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u5149", lb: 10, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:100.00%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 0, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:60.00%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 1, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:62.25%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 2, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:65.35%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 3, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:68.88%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 4, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:72.72%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 5, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:76.82%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 6, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:81.12%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 7, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:85.61%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 8, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:90.26%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 9, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:95.06%" }, { design_id: "SKD024", name_provisional: "\u5168\u4F53\u653B\u6483\u30FB\u95C7", lb: 10, sp: 75, burst_sp: 38, performance_text: "\u653B\u6483\u500D\u7387:100.00%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 0, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:90.00%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 1, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:93.37%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 2, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:98.02%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 3, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:103.32%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 4, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:109.09%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 5, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:115.23%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 6, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:121.68%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 7, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:128.42%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 8, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:135.40%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 9, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:142.60%" }, { design_id: "SKD025", name_provisional: "\u7D05\u84EE\u306E\u5927\u8A08", lb: 10, sp: 170, burst_sp: 85, performance_text: "\u653B\u6483\u500D\u7387:150.00%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 0, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:105.00%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 1, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:109.22%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 2, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:115.03%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 3, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:121.65%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 4, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:128.86%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 5, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:136.53%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 6, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:144.61%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 7, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:153.02%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 8, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:161.74%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 9, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:170.75%" }, { design_id: "SKD026", name_provisional: "\u5F8C\u9663\u5C04\u3061", lb: 10, sp: 55, burst_sp: 28, performance_text: "\u653B\u6483\u500D\u7387:180.00%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 0, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:110.00%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 1, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:114.50%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 2, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:120.70%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 3, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:127.76%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 4, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:135.45%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 5, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:143.64%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 6, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:152.25%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 7, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:161.22%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 8, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:170.53%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 9, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:180.13%" }, { design_id: "SKD027", name_provisional: "\u8FFD\u3044\u8A0E\u3061", lb: 10, sp: 50, burst_sp: 25, performance_text: "\u653B\u6483\u500D\u7387:190.00%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 0, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:110.00%\uFF0F\u6761\u4EF6\u500D\u7387:140.00%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 1, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:113.94%\uFF0F\u6761\u4EF6\u500D\u7387:146.19%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 2, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:119.36%\uFF0F\u6761\u4EF6\u500D\u7387:154.71%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 3, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:125.54%\uFF0F\u6761\u4EF6\u500D\u7387:164.42%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 4, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:132.27%\uFF0F\u6761\u4EF6\u500D\u7387:174.99%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 5, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:139.43%\uFF0F\u6761\u4EF6\u500D\u7387:186.25%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 6, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:146.96%\uFF0F\u6761\u4EF6\u500D\u7387:198.09%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 7, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:154.82%\uFF0F\u6761\u4EF6\u500D\u7387:210.43%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 8, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:162.96%\uFF0F\u6761\u4EF6\u500D\u7387:223.23%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 9, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:171.36%\uFF0F\u6761\u4EF6\u500D\u7387:236.43%" }, { design_id: "SKD028", name_provisional: "\u5D29\u3057\u8A0E\u3061", lb: 10, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:180.00%\uFF0F\u6761\u4EF6\u500D\u7387:250.00%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 0, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:80.00%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:10.00%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 1, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:82.81%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:10.56%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 2, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:86.69%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:11.34%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 3, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:91.10%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:12.22%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 4, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:95.91%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:13.18%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 5, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:101.02%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:14.20%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 6, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:106.40%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:15.28%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 7, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:112.01%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:16.40%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 8, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:117.83%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:17.57%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 9, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:123.83%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:18.77%" }, { design_id: "SKD029", name_provisional: "\u6BD2\u5203", lb: 10, sp: 65, burst_sp: 33, performance_text: "\u653B\u6483\u500D\u7387:130.00%\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:20.00%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 0, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:110.00%\uFF0F\u6761\u4EF6\u500D\u7387:145.00%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 1, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:113.94%\uFF0F\u6761\u4EF6\u500D\u7387:151.47%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 2, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:119.36%\uFF0F\u6761\u4EF6\u500D\u7387:160.38%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 3, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:125.54%\uFF0F\u6761\u4EF6\u500D\u7387:170.53%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 4, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:132.27%\uFF0F\u6761\u4EF6\u500D\u7387:181.58%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 5, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:139.43%\uFF0F\u6761\u4EF6\u500D\u7387:193.35%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 6, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:146.96%\uFF0F\u6761\u4EF6\u500D\u7387:205.73%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 7, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:154.82%\uFF0F\u6761\u4EF6\u500D\u7387:218.63%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 8, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:162.96%\uFF0F\u6761\u4EF6\u500D\u7387:232.01%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 9, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:171.36%\uFF0F\u6761\u4EF6\u500D\u7387:245.81%" }, { design_id: "SKD030", name_provisional: "\u8755\u307F\u8A0E\u3061", lb: 10, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:180.00%\uFF0F\u6761\u4EF6\u500D\u7387:260.00%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 0, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:110.00%\uFF0F\u6761\u4EF6\u500D\u7387:150.00%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 1, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:113.94%\uFF0F\u6761\u4EF6\u500D\u7387:156.75%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 2, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:119.36%\uFF0F\u6761\u4EF6\u500D\u7387:166.05%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 3, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:125.54%\uFF0F\u6761\u4EF6\u500D\u7387:176.64%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 4, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:132.27%\uFF0F\u6761\u4EF6\u500D\u7387:188.17%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 5, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:139.43%\uFF0F\u6761\u4EF6\u500D\u7387:200.45%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 6, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:146.96%\uFF0F\u6761\u4EF6\u500D\u7387:213.37%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 7, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:154.82%\uFF0F\u6761\u4EF6\u500D\u7387:226.83%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 8, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:162.96%\uFF0F\u6761\u4EF6\u500D\u7387:240.79%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 9, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:171.36%\uFF0F\u6761\u4EF6\u500D\u7387:255.19%" }, { design_id: "SKD031", name_provisional: "\u80CC\u6C34\u65AC\u308A", lb: 10, sp: 100, burst_sp: 50, performance_text: "\u901A\u5E38\u500D\u7387:180.00%\uFF0F\u6761\u4EF6\u500D\u7387:270.00%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 0, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:35.00%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 1, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:36.12%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 2, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:37.67%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 3, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:39.44%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 4, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:41.36%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 5, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:43.41%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 6, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:45.56%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 7, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:47.81%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 8, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:50.13%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 9, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:52.53%" }, { design_id: "SKD032", name_provisional: "\u5F71\u7E2B\u3044", lb: 10, sp: 65, burst_sp: 33, performance_text: "\u4ED8\u4E0E\u7387:55.00%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 0, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:8.00%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 1, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:8.39%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 2, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:8.94%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 3, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:9.55%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 4, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:10.23%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 5, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:10.94%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 6, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:11.70%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 7, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:12.48%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 8, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:13.30%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 9, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:14.14%" }, { design_id: "SKD033", name_provisional: "\u6C17\u5408", lb: 10, sp: 30, burst_sp: 15, performance_text: "ATK\u5F37\u5316:15.00%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 0, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:15.00%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 1, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:15.84%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 2, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:17.01%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 3, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:18.33%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 4, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:19.77%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 5, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:21.31%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 6, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:22.92%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 7, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:24.60%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 8, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:26.35%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 9, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:28.15%" }, { design_id: "SKD034", name_provisional: "\u8EAB\u69CB\u3048", lb: 10, sp: 30, burst_sp: 15, performance_text: "DEF\u5F37\u5316:30.00%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 0, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:8.00%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 1, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:8.39%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 2, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:8.94%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 3, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:9.55%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 4, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:10.23%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 5, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:10.94%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 6, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:11.70%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 7, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:12.48%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 8, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:13.30%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 9, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:14.14%" }, { design_id: "SKD035", name_provisional: "\u9B28\u306E\u58F0", lb: 10, sp: 75, burst_sp: 38, performance_text: "ATK\u5F37\u5316:15.00%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 0, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:15.00%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 1, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:15.84%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 2, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:17.01%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 3, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:18.33%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 4, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:19.77%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 5, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:21.31%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 6, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:22.92%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 7, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:24.60%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 8, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:26.35%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 9, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:28.15%" }, { design_id: "SKD036", name_provisional: "\u5B88\u308A\u306E\u9663", lb: 10, sp: 75, burst_sp: 38, performance_text: "DEF\u5F37\u5316:30.00%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 0, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:10.00%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 1, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:10.56%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 2, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:11.34%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 3, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:12.22%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 4, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:13.18%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 5, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:14.20%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 6, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:15.28%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 7, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:16.40%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 8, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:17.57%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 9, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:18.77%" }, { design_id: "SKD037", name_provisional: "\u5A01\u5727", lb: 10, sp: 50, burst_sp: 25, performance_text: "ATK\u4F4E\u4E0B:20.00%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 0, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:12.00%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 1, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:12.73%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 2, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:13.74%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 3, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:14.89%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 4, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:16.14%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 5, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:17.47%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 6, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:18.86%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 7, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:20.32%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 8, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:21.84%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 9, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:23.40%" }, { design_id: "SKD038", name_provisional: "\u93A7\u7815\u304D", lb: 10, sp: 50, burst_sp: 25, performance_text: "DEF\u4F4E\u4E0B:25.00%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 0, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:35.00%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 1, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:36.69%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 2, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:39.01%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 3, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:41.66%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 4, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:44.54%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 5, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:47.61%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 6, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:50.84%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 7, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:54.21%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 8, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:57.70%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 9, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:61.30%" }, { design_id: "SKD039", name_provisional: "\u5FDC\u6025\u624B\u5F53", lb: 10, sp: 35, burst_sp: 18, performance_text: "\u56DE\u5FA9\u500D\u7387:65.00%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 0, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:75.00%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 1, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:79.22%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 2, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:85.03%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 3, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:91.65%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 4, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:98.86%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 5, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:106.53%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 6, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:114.61%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 7, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:123.02%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 8, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:131.74%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 9, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:140.75%" }, { design_id: "SKD040", name_provisional: "\u6CBB\u7652\u306E\u7948\u308A", lb: 10, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:150.00%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 0, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:20.00%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 1, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:21.12%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 2, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:22.67%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 3, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:24.44%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 4, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:26.36%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 5, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:28.41%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 6, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:30.56%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 7, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:32.81%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 8, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:35.13%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 9, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:37.53%" }, { design_id: "SKD041", name_provisional: "\u5C0F\u4F11\u6B62", lb: 10, sp: 90, burst_sp: 45, performance_text: "\u56DE\u5FA9\u500D\u7387:40.00%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 0, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:45.00%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 1, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:47.53%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 2, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:51.02%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 3, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:54.99%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 4, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:59.31%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 5, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:63.92%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 6, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:68.76%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 7, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:73.81%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 8, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:79.05%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 9, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:84.45%" }, { design_id: "SKD042", name_provisional: "\u6148\u611B\u306E\u5927\u7948\u7977", lb: 10, sp: 190, burst_sp: 95, performance_text: "\u56DE\u5FA9\u500D\u7387:90.00%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 0, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:15.00%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 1, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:15.84%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 2, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:17.01%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 3, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:18.33%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 4, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:19.77%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 5, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:21.31%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 6, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:22.92%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 7, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:24.60%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 8, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:26.35%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 9, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:28.15%" }, { design_id: "SKD043", name_provisional: "\u518D\u751F\u306E\u7948\u308A", lb: 10, sp: 65, burst_sp: 33, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:30.00%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 0, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:20.00%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 1, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:20.84%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 2, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:22.01%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 3, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:23.33%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 4, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:24.77%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 5, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:26.31%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 6, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:27.92%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 7, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:29.60%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 8, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:31.35%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 9, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:33.15%" }, { design_id: "SKD044", name_provisional: "\u8607\u751F\u306E\u7948\u308A", lb: 10, sp: 180, burst_sp: 90, performance_text: "\u8607\u751FHP\u5272\u5408:35.00%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 0, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:50.00%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 1, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:52.81%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 2, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:56.69%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 3, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:61.10%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 4, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:65.91%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 5, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:71.02%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 6, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:76.40%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 7, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:82.01%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 8, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:87.83%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 9, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:93.83%" }, { design_id: "SKD045", name_provisional: "\u8B77\u8EAB\u969C\u58C1", lb: 10, sp: 55, burst_sp: 28, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:100.00%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 0, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:65.00%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 1, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:68.66%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 2, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:73.69%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 3, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:79.43%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 4, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:85.68%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 5, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:92.33%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 6, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:99.32%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 7, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:106.62%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 8, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:114.18%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 9, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:121.98%" }, { design_id: "SKD046", name_provisional: "\u5B88\u8B77\u306E\u672D", lb: 10, sp: 75, burst_sp: 38, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:130.00%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 0, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:35.00%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 1, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:36.97%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 2, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:39.68%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 3, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:42.77%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 4, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:46.13%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 5, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:49.72%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 6, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:53.48%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 7, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:57.41%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 8, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:61.48%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 9, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:65.68%" }, { design_id: "SKD047", name_provisional: "\u7D50\u754C\u306E\u9663", lb: 10, sp: 180, burst_sp: 90, performance_text: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387:70.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 0, sp: 40, burst_sp: 20, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 1, sp: 40, burst_sp: 20, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 2, sp: 39, burst_sp: 20, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 3, sp: 39, burst_sp: 20, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 4, sp: 38, burst_sp: 19, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 5, sp: 37, burst_sp: 19, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 6, sp: 36, burst_sp: 18, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 7, sp: 35, burst_sp: 18, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 8, sp: 34, burst_sp: 17, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 9, sp: 33, burst_sp: 17, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD048", name_provisional: "\u6311\u767A", lb: 10, sp: 32, burst_sp: 16, performance_text: "\u4ED8\u4E0E\u7387:100.00%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 0, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:45.00%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 1, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:46.97%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 2, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:49.68%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 3, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:52.77%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 4, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:56.13%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 5, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:59.72%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 6, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:63.48%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 7, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:67.41%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 8, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:71.48%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 9, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:75.68%" }, { design_id: "SKD049", name_provisional: "\u8FD4\u3057\u5203", lb: 10, sp: 65, burst_sp: 33, performance_text: "\u53CD\u6483\u500D\u7387:80.00%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 0, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:55.00%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 1, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:57.53%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 2, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:61.02%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 3, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:64.99%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 4, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:69.31%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 5, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:73.92%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 6, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:78.76%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 7, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:83.81%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 8, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:89.05%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 9, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:94.45%" }, { design_id: "SKD050", name_provisional: "\u8FCE\u6483\u306E\u69CB\u3048", lb: 10, sp: 110, burst_sp: 55, performance_text: "\u4ED8\u4E0E\u7387:100.00%\uFF0F\u53CD\u6483\u500D\u7387:100.00%" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 0, sp: 45, burst_sp: 23, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 1, sp: 45, burst_sp: 23, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 2, sp: 44, burst_sp: 22, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 3, sp: 44, burst_sp: 22, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 4, sp: 43, burst_sp: 22, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 5, sp: 42, burst_sp: 21, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 6, sp: 41, burst_sp: 21, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 7, sp: 40, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 8, sp: 39, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 9, sp: 38, burst_sp: 19, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD051", name_provisional: "\u7834\u52E2", lb: 10, sp: 36, burst_sp: 18, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 0, sp: 45, burst_sp: 23, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 1, sp: 45, burst_sp: 23, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 2, sp: 44, burst_sp: 22, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 3, sp: 44, burst_sp: 22, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 4, sp: 43, burst_sp: 22, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 5, sp: 42, burst_sp: 21, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 6, sp: 41, burst_sp: 21, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 7, sp: 40, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 8, sp: 39, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 9, sp: 38, burst_sp: 19, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD052", name_provisional: "\u7834\u8B77", lb: 10, sp: 36, burst_sp: 18, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 0, sp: 40, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 1, sp: 40, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 2, sp: 39, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 3, sp: 39, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 4, sp: 38, burst_sp: 19, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 5, sp: 37, burst_sp: 19, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 6, sp: 36, burst_sp: 18, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 7, sp: 35, burst_sp: 18, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 8, sp: 34, burst_sp: 17, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 9, sp: 33, burst_sp: 17, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD053", name_provisional: "\u596E\u8D77", lb: 10, sp: 32, burst_sp: 16, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 0, sp: 40, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 1, sp: 40, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 2, sp: 39, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 3, sp: 39, burst_sp: 20, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 4, sp: 38, burst_sp: 19, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 5, sp: 37, burst_sp: 19, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 6, sp: 36, burst_sp: 18, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 7, sp: 35, burst_sp: 18, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 8, sp: 34, burst_sp: 17, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 9, sp: 33, burst_sp: 17, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD054", name_provisional: "\u6D44\u6BD2", lb: 10, sp: 32, burst_sp: 16, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 0, sp: 55, burst_sp: 28, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 1, sp: 55, burst_sp: 28, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 2, sp: 54, burst_sp: 27, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 3, sp: 53, burst_sp: 27, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 4, sp: 52, burst_sp: 26, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 5, sp: 51, burst_sp: 26, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 6, sp: 50, burst_sp: 25, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 7, sp: 48, burst_sp: 24, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 8, sp: 47, burst_sp: 24, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 9, sp: 46, burst_sp: 23, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD055", name_provisional: "\u89E3\u7E1B", lb: 10, sp: 44, burst_sp: 22, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 0, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:120.00%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 1, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:125.62%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 2, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:133.37%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 3, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:142.20%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 4, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:151.81%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 5, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:162.04%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 6, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:172.81%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 7, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:184.03%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 8, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:195.66%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 9, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:207.66%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD056", name_provisional: "\u7834\u9663\u6483", lb: 10, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:220.00%", effect_order_override: "\u4FDD\u8B771\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 0, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:10.00%\uFF0F\u653B\u6483\u500D\u7387:110.00%" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 1, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:10.56%\uFF0F\u653B\u6483\u500D\u7387:115.06%" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 2, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:11.34%\uFF0F\u653B\u6483\u500D\u7387:122.04%" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 3, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:12.22%\uFF0F\u653B\u6483\u500D\u7387:129.98%" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 4, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:13.18%\uFF0F\u653B\u6483\u500D\u7387:138.63%" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 5, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:14.20%\uFF0F\u653B\u6483\u500D\u7387:147.84%" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 6, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:15.28%\uFF0F\u653B\u6483\u500D\u7387:157.53%" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 7, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:16.40%\uFF0F\u653B\u6483\u500D\u7387:167.63%" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 8, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:17.57%\uFF0F\u653B\u6483\u500D\u7387:178.09%" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 9, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:18.77%\uFF0F\u653B\u6483\u500D\u7387:188.89%" }, { design_id: "SKD057", name_provisional: "\u5F8C\u9663\u5D29\u3057", lb: 10, sp: 115, burst_sp: 58, performance_text: "DEF\u4F4E\u4E0B:20.00%\uFF0F\u653B\u6483\u500D\u7387:200.00%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 0, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:12.00%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 1, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:12.73%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 2, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:13.74%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 3, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:14.89%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 4, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:16.14%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 5, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:17.47%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 6, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:18.86%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 7, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:20.32%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 8, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:21.84%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 9, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:23.40%" }, { design_id: "SKD058", name_provisional: "\u8755\u307F\u306E\u9663", lb: 10, sp: 110, burst_sp: 55, performance_text: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387:25.00%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 0, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:65.00%\uFF0F\u6761\u4EF6\u500D\u7387:85.00%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 1, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:66.97%\uFF0F\u6761\u4EF6\u500D\u7387:88.37%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 2, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:69.68%\uFF0F\u6761\u4EF6\u500D\u7387:93.02%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 3, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:72.77%\uFF0F\u6761\u4EF6\u500D\u7387:98.32%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 4, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:76.13%\uFF0F\u6761\u4EF6\u500D\u7387:104.09%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 5, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:79.72%\uFF0F\u6761\u4EF6\u500D\u7387:110.23%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 6, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:83.48%\uFF0F\u6761\u4EF6\u500D\u7387:116.68%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 7, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:87.41%\uFF0F\u6761\u4EF6\u500D\u7387:123.42%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 8, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:91.48%\uFF0F\u6761\u4EF6\u500D\u7387:130.40%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 9, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:95.68%\uFF0F\u6761\u4EF6\u500D\u7387:137.60%" }, { design_id: "SKD059", name_provisional: "\u5D29\u9663\u306E\u6CE2", lb: 10, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:100.00%\uFF0F\u6761\u4EF6\u500D\u7387:145.00%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 0, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:65.00%\uFF0F\u6761\u4EF6\u500D\u7387:90.00%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 1, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:66.97%\uFF0F\u6761\u4EF6\u500D\u7387:93.66%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 2, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:69.68%\uFF0F\u6761\u4EF6\u500D\u7387:98.69%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 3, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:72.77%\uFF0F\u6761\u4EF6\u500D\u7387:104.43%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 4, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:76.13%\uFF0F\u6761\u4EF6\u500D\u7387:110.68%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 5, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:79.72%\uFF0F\u6761\u4EF6\u500D\u7387:117.33%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 6, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:83.48%\uFF0F\u6761\u4EF6\u500D\u7387:124.32%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 7, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:87.41%\uFF0F\u6761\u4EF6\u500D\u7387:131.62%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 8, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:91.48%\uFF0F\u6761\u4EF6\u500D\u7387:139.18%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 9, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:95.68%\uFF0F\u6761\u4EF6\u500D\u7387:146.98%" }, { design_id: "SKD060", name_provisional: "\u80CC\u6C34\u306E\u8599\u304E", lb: 10, sp: 130, burst_sp: 65, performance_text: "\u901A\u5E38\u500D\u7387:100.00%\uFF0F\u6761\u4EF6\u500D\u7387:155.00%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 0, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:10.00%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 1, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:10.56%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 2, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:11.34%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 3, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:12.22%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 4, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:13.18%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 5, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:14.20%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 6, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:15.28%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 7, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:16.40%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 8, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:17.57%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 9, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:18.77%" }, { design_id: "SKD061", name_provisional: "\u596E\u6226\u306E\u6A84", lb: 10, sp: 45, burst_sp: 23, performance_text: "ATK\u5F37\u5316:20.00%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 0, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:20.00%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 1, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:21.12%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 2, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:22.67%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 3, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:24.44%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 4, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:26.36%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 5, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:28.41%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 6, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:30.56%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 7, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:32.81%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 8, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:35.13%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 9, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:37.53%" }, { design_id: "SKD062", name_provisional: "\u5805\u5B88\u306E\u672D", lb: 10, sp: 45, burst_sp: 23, performance_text: "DEF\u5F37\u5316:40.00%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 0, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:15.00%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 1, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:15.84%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 2, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:17.01%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 3, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:18.33%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 4, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:19.77%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 5, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:21.31%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 6, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:22.92%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 7, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:24.60%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 8, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:26.35%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 9, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:28.15%" }, { design_id: "SKD063", name_provisional: "\u7834\u7532\u306E\u9663", lb: 10, sp: 100, burst_sp: 50, performance_text: "DEF\u4F4E\u4E0B:30.00%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 0, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:10.00%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 1, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:10.56%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 2, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:11.34%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 3, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:12.22%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 4, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:13.18%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 5, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:14.20%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 6, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:15.28%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 7, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:16.40%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 8, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:17.57%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 9, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:18.77%" }, { design_id: "SKD064", name_provisional: "\u5A01\u5727\u306E\u9663", lb: 10, sp: 100, burst_sp: 50, performance_text: "ATK\u4F4E\u4E0B:20.00%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 0, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:30.00%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 1, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:31.12%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 2, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:32.67%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 3, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:34.44%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 4, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:36.36%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 5, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:38.41%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 6, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:40.56%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 7, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:42.81%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 8, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:45.13%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 9, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:47.53%" }, { design_id: "SKD065", name_provisional: "\u5C01\u9663", lb: 10, sp: 135, burst_sp: 68, performance_text: "\u4ED8\u4E0E\u7387:50.00%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 0, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:15.00%\uFF0FDEF\u5F37\u5316:15.00%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 1, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:15.84%\uFF0FDEF\u5F37\u5316:15.84%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 2, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:17.01%\uFF0FDEF\u5F37\u5316:17.01%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 3, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:18.33%\uFF0FDEF\u5F37\u5316:18.33%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 4, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:19.77%\uFF0FDEF\u5F37\u5316:19.77%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 5, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:21.31%\uFF0FDEF\u5F37\u5316:21.31%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 6, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:22.92%\uFF0FDEF\u5F37\u5316:22.92%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 7, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:24.60%\uFF0FDEF\u5F37\u5316:24.60%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 8, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:26.35%\uFF0FDEF\u5F37\u5316:26.35%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 9, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:28.15%\uFF0FDEF\u5F37\u5316:28.15%" }, { design_id: "SKD066", name_provisional: "\u8ECD\u795E\u306E\u53F7\u4EE4", lb: 10, sp: 150, burst_sp: 75, performance_text: "ATK\u5F37\u5316:30.00%\uFF0FDEF\u5F37\u5316:30.00%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 0, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:10.00%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 1, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:10.56%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 2, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:11.34%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 3, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:12.22%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 4, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:13.18%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 5, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:14.20%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 6, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:15.28%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 7, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:16.40%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 8, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:17.57%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 9, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:18.77%" }, { design_id: "SKD067", name_provisional: "\u518D\u751F\u306E\u9663", lb: 10, sp: 135, burst_sp: 68, performance_text: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387:20.00%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 0, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:55.00%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:35.00%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 1, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:57.53%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:36.97%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 2, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:61.02%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:39.68%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 3, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:64.99%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:42.77%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 4, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:69.31%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:46.13%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 5, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:73.92%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:49.72%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 6, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:78.76%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:53.48%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 7, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:83.81%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:57.41%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 8, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:89.05%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:61.48%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 9, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:94.45%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:65.68%" }, { design_id: "SKD068", name_provisional: "\u6551\u8B77\u306E\u672D", lb: 10, sp: 120, burst_sp: 60, performance_text: "\u56DE\u5FA9\u500D\u7387:100.00%\uFF0F\u30B7\u30FC\u30EB\u30C9\u500D\u7387:70.00%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 0, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:45.00%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 1, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:47.25%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 2, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:50.35%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 3, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:53.88%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 4, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:57.72%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 5, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:61.82%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 6, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:66.12%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 7, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:70.61%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 8, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:75.26%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 9, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:80.06%" }, { design_id: "SKD069", name_provisional: "\u8FD4\u3057\u306E\u53F7\u4EE4", lb: 10, sp: 80, burst_sp: 40, performance_text: "\u53CD\u6483\u500D\u7387:85.00%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 0, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:30.00%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 1, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:31.69%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 2, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:34.01%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 3, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:36.66%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 4, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:39.54%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 5, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:42.61%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 6, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:45.84%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 7, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:49.21%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 8, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:52.70%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 9, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:56.30%" }, { design_id: "SKD070", name_provisional: "\u6E05\u3081\u306E\u624B\u5F53", lb: 10, sp: 65, burst_sp: 33, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u56DE\u5FA9\u500D\u7387:60.00%" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 0, sp: 140, burst_sp: 70, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 1, sp: 139, burst_sp: 70, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 2, sp: 137, burst_sp: 69, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 3, sp: 134, burst_sp: 67, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 4, sp: 132, burst_sp: 66, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 5, sp: 129, burst_sp: 65, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 6, sp: 126, burst_sp: 63, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 7, sp: 123, burst_sp: 62, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 8, sp: 119, burst_sp: 60, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 9, sp: 116, burst_sp: 58, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD071", name_provisional: "\u5927\u7953\u3044", lb: 10, sp: 112, burst_sp: 56, performance_text: "\u80FD\u529B\u4F4E\u4E0B\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u89E3\u9664\u4EF6\u6570:1.00\u4EF6" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 0, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:120.00%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 1, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:125.62%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 2, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:133.37%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 3, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:142.20%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 4, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:151.81%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 5, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:162.04%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 6, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:172.81%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 7, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:184.03%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 8, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:195.66%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 9, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:207.66%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }, { design_id: "SKD072", name_provisional: "\u7834\u52E2\u306E\u4E00\u9583", lb: 10, sp: 135, burst_sp: 68, performance_text: "\u89E3\u9664\u4EF6\u6570:1.00\u4EF6\uFF0F\u653B\u6483\u500D\u7387:220.00%", effect_order_override: "\u80FD\u52D5ATK/DEF\u5F37\u53161\u4EF6\u89E3\u9664\u2192\u653B\u6483" }];
-
-// src/domain/redesign/formalGrowthMasters.ts
-var slots = { WEAPON: "weapon", HEAD: "head", BODY: "body", LEGS: "legs", ACCESSORY: "accessory1" };
-function getFormalEquipmentStats(id, level) {
-  if (!Number.isInteger(level) || level < 1 || level > 100) throw new Error("\u88C5\u5099Lv\u304C\u4E0D\u6B63\u3067\u3059\u3002");
-  const row = formal_growth_equipment_default.equipment.find((e) => e.id === id);
-  if (!row) throw new Error("\u6B63\u5F0F\u88C5\u5099\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002");
-  const factor = 0.03 + 0.97 * ((level - 1) / 99) ** 1.5;
-  return { hp: row.level100.hp * factor, atk: row.level100.atk * factor, def: row.level100.def * factor, luk: row.level100.luk * factor, sp: 0 };
-}
-var FORMAL_GROWTH_EQUIPMENT_MASTERS = formal_growth_equipment_default.equipment.map((row) => {
-  const asset = game04_master_assets_default.assets.find((a) => a.id === row.id);
-  if (!asset || !slots[row.slot]) throw new Error(`\u6B63\u5F0F\u88C5\u5099\u306E\u7D20\u6750\u30FB\u90E8\u4F4D\u304C\u3042\u308A\u307E\u305B\u3093: ${row.id}`);
-  return { id: row.id, rarity: row.rarity, slot: slots[row.slot], name: sengoku_masters_default[row.id] ?? row.id, image: asset.path, stats: getFormalEquipmentStats(row.id, 1) };
-});
-var FORMAL_GROWTH_SKILL_IDS = raid_skill_values_default.filter((row) => row.lb === 0).map((row) => row.design_id);
-
-// src/domain/redesign/data/formal-character-stats.json
-var formal_character_stats_default = {
-  version: "GAME04_CHARACTER_NUMERIC_20260921",
-  source: "docs/product/master_sources_20260921/numeric.md",
-  sourceSha256: "749fbb58f0719ab495e6f7e8966c9da03d5db1781a483d3ba12cb9caaa7d8b39",
-  levels: [
-    1,
-    10,
-    20,
-    30,
-    40,
-    50,
-    60,
-    70,
-    80,
-    90,
-    100
-  ],
-  anchors: {
-    N: {
-      atk: [
-        100,
-        200,
-        380,
-        600,
-        850,
-        1150,
-        1500,
-        1880,
-        2290,
-        2730,
-        3200
-      ],
-      hp: [
-        600,
-        1e3,
-        1600,
-        2400,
-        3400,
-        4600,
-        6e3,
-        7600,
-        9400,
-        11400,
-        13600
-      ],
-      def: [
-        30,
-        60,
-        110,
-        180,
-        270,
-        380,
-        510,
-        660,
-        830,
-        1020,
-        1230
-      ]
-    },
-    R: {
-      atk: [
-        150,
-        300,
-        550,
-        880,
-        1300,
-        1800,
-        2400,
-        3080,
-        3850,
-        4720,
-        5700
-      ],
-      hp: [
-        750,
-        1300,
-        2100,
-        3200,
-        4600,
-        6300,
-        8300,
-        10600,
-        13200,
-        16100,
-        19300
-      ],
-      def: [
-        40,
-        80,
-        150,
-        250,
-        380,
-        550,
-        750,
-        980,
-        1240,
-        1530,
-        1850
-      ]
-    },
-    SR: {
-      atk: [
-        300,
-        520,
-        900,
-        1450,
-        2200,
-        3150,
-        4300,
-        5650,
-        7200,
-        8950,
-        10900
-      ],
-      hp: [
-        1050,
-        1900,
-        3100,
-        4800,
-        7e3,
-        9700,
-        12900,
-        16600,
-        20800,
-        25500,
-        30700
-      ],
-      def: [
-        60,
-        120,
-        230,
-        390,
-        600,
-        880,
-        1220,
-        1620,
-        2080,
-        2600,
-        3180
-      ]
-    },
-    SSR: {
-      atk: [
-        500,
-        800,
-        1350,
-        2100,
-        3050,
-        4250,
-        5850,
-        7800,
-        10150,
-        12900,
-        16e3
-      ],
-      hp: [
-        1500,
-        2700,
-        4500,
-        7e3,
-        10200,
-        14200,
-        19e3,
-        24700,
-        31300,
-        38800,
-        47200
-      ],
-      def: [
-        90,
-        180,
-        350,
-        600,
-        950,
-        1400,
-        1950,
-        2600,
-        3350,
-        4200,
-        5150
-      ]
-    }
-  },
-  roles: {
-    \u653B\u6483: {
-      hp: 1,
-      atk: 1,
-      def: 1
-    },
-    \u5B88\u5099: {
-      hp: 1.4,
-      atk: 0.65,
-      def: 1.3
-    },
-    \u653B\u5B88: {
-      hp: 1.2,
-      atk: 0.85,
-      def: 1.15
-    },
-    "\u56DE\u5FA9\u30FB\u4FDD\u8B77": {
-      hp: 1.1,
-      atk: 0.9,
-      def: 1.05
-    },
-    \u652F\u63F4: {
-      hp: 1.2,
-      atk: 0.75,
-      def: 1.15
-    }
-  },
-  profiles: {
-    \u653B\u6483\u5BC4\u308A: {
-      hp: 0.97,
-      atk: 1.05,
-      def: 0.98,
-      luk: 0
-    },
-    HP\u5BC4\u308A: {
-      hp: 1.05,
-      atk: 0.97,
-      def: 0.98,
-      luk: 0
-    },
-    DEF\u5BC4\u308A: {
-      hp: 0.98,
-      atk: 0.97,
-      def: 1.05,
-      luk: 0
-    },
-    \u653B\u5B88\u5BC4\u308A: {
-      hp: 0.96,
-      atk: 1.02,
-      def: 1.02,
-      luk: 0
-    },
-    \u8010\u4E45\u5BC4\u308A: {
-      hp: 1.03,
-      atk: 0.95,
-      def: 1.02,
-      luk: 0
-    },
-    LUK\u5BC4\u308A: {
-      hp: 0.98,
-      atk: 0.97,
-      def: 1,
-      luk: 3
-    }
-  },
-  characters: [
-    {
-      id: "char_ageha_01",
-      name: "\u8C4A\u81E3\u79C0\u5409",
-      rarity: "SSR",
-      element: "\u5149",
-      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
-      profile: "HP\u5BC4\u308A",
-      expected100: {
-        hp: 54516,
-        atk: 13968,
-        def: 5299.35,
-        luk: 30
-      }
-    },
-    {
-      id: "char_alice_01",
-      name: "\u304F\u30CE\u4E00",
-      rarity: "N",
-      element: "\u6C34",
-      role: "\u653B\u6483",
-      profile: "LUK\u5BC4\u308A",
-      expected100: {
-        hp: 13328,
-        atk: 3104,
-        def: 1230,
-        luk: 33
-      }
-    },
-    {
-      id: "char_aoi_01",
-      name: "\u304A\u5E02\u306E\u65B9",
-      rarity: "R",
-      element: "\u706B",
-      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
-      profile: "\u653B\u6483\u5BC4\u308A",
-      expected100: {
-        hp: 20593.1,
-        atk: 5386.5,
-        def: 1903.65,
-        luk: 30
-      }
-    },
-    {
-      id: "char_cecile_01",
-      name: "\u4E95\u4F0A\u76F4\u864E",
-      rarity: "SR",
-      element: "\u6C34",
-      role: "\u5B88\u5099",
-      profile: "HP\u5BC4\u308A",
-      expected100: {
-        hp: 45129,
-        atk: 6872.45,
-        def: 4051.32,
-        luk: 30
-      }
-    },
-    {
-      id: "char_chang_01",
-      name: "\u4E0A\u6749\u666F\u52DD",
-      rarity: "R",
-      element: "\u6C34",
-      role: "\u652F\u63F4",
-      profile: "\u8010\u4E45\u5BC4\u308A",
-      expected100: {
-        hp: 23854.8,
-        atk: 4061.25,
-        def: 2170.05,
-        luk: 30
-      }
-    },
-    {
-      id: "char_daimon_01",
-      name: "\u4E95\u4F0A\u76F4\u653F",
-      rarity: "R",
-      element: "\u706B",
-      role: "\u653B\u6483",
-      profile: "\u653B\u5B88\u5BC4\u308A",
-      expected100: {
-        hp: 18528,
-        atk: 5814,
-        def: 1887,
-        luk: 30
-      }
-    },
-    {
-      id: "char_genji_01",
-      name: "\u4ECA\u5DDD\u7FA9\u5143",
-      rarity: "SR",
-      element: "\u98A8",
-      role: "\u652F\u63F4",
-      profile: "\u8010\u4E45\u5BC4\u308A",
-      expected100: {
-        hp: 37945.2,
-        atk: 7766.25,
-        def: 3730.14,
-        luk: 30
-      }
-    },
-    {
-      id: "char_go_01",
-      name: "\u6B66\u7530\u4FE1\u7384",
-      rarity: "SSR",
-      element: "\u706B",
-      role: "\u653B\u5B88",
-      profile: "\u8010\u4E45\u5BC4\u308A",
-      expected100: {
-        hp: 58339.2,
-        atk: 12920,
-        def: 6040.95,
-        luk: 30
-      }
-    },
-    {
-      id: "char_gou_01",
-      name: "\u4F1D\u4EE4",
-      rarity: "N",
-      element: "\u571F",
-      role: "\u652F\u63F4",
-      profile: "LUK\u5BC4\u308A",
-      expected100: {
-        hp: 15993.6,
-        atk: 2328,
-        def: 1414.5,
-        luk: 33
-      }
-    },
-    {
-      id: "char_jihoon_01",
-      name: "\u524D\u7530\u5229\u5BB6",
-      rarity: "R",
-      element: "\u571F",
-      role: "\u653B\u5B88",
-      profile: "\u653B\u5B88\u5BC4\u308A",
-      expected100: {
-        hp: 22233.6,
-        atk: 4941.9,
-        def: 2170.05,
-        luk: 30
-      }
-    },
-    {
-      id: "char_joe_01",
-      name: "\u5317\u6761\u6C0F\u5EB7",
-      rarity: "R",
-      element: "\u571F",
-      role: "\u5B88\u5099",
-      profile: "DEF\u5BC4\u308A",
-      expected100: {
-        hp: 26479.6,
-        atk: 3593.85,
-        def: 2525.25,
-        luk: 30
-      }
-    },
-    {
-      id: "char_kaede_01",
-      name: "\u771F\u7530\u5E78\u6751",
-      rarity: "SSR",
-      element: "\u706B",
-      role: "\u653B\u6483",
-      profile: "\u653B\u6483\u5BC4\u308A",
-      expected100: {
-        hp: 45784,
-        atk: 16800,
-        def: 5047,
-        luk: 30
-      }
-    },
-    {
-      id: "char_kageyama_01",
-      name: "\u50E7\u5175",
-      rarity: "N",
-      element: "\u706B",
-      role: "\u5B88\u5099",
-      profile: "HP\u5BC4\u308A",
-      expected100: {
-        hp: 19992,
-        atk: 2017.6,
-        def: 1567.02,
-        luk: 30
-      }
-    },
-    {
-      id: "char_kaito_01",
-      name: "\u5927\u53CB\u5B97\u9E9F",
-      rarity: "R",
-      element: "\u5149",
-      role: "\u652F\u63F4",
-      profile: "\u8010\u4E45\u5BC4\u308A",
-      expected100: {
-        hp: 23854.8,
-        atk: 4061.25,
-        def: 2170.05,
-        luk: 30
-      }
-    },
-    {
-      id: "char_karen_01",
-      name: "\u5FB3\u5DDD\u5BB6\u5EB7",
-      rarity: "SSR",
-      element: "\u571F",
-      role: "\u652F\u63F4",
-      profile: "DEF\u5BC4\u308A",
-      expected100: {
-        hp: 55507.2,
-        atk: 11640,
-        def: 6218.625,
-        luk: 30
-      }
-    },
-    {
-      id: "char_kengo_01",
-      name: "\u672C\u591A\u5FE0\u52DD",
-      rarity: "SSR",
-      element: "\u571F",
-      role: "\u653B\u5B88",
-      profile: "DEF\u5BC4\u308A",
-      expected100: {
-        hp: 55507.2,
-        atk: 13192,
-        def: 6218.625,
-        luk: 30
-      }
-    },
-    {
-      id: "char_kenji_01",
-      name: "\u5C71\u4F0F",
-      rarity: "N",
-      element: "\u5149",
-      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
-      profile: "HP\u5BC4\u308A",
-      expected100: {
-        hp: 15708,
-        atk: 2793.6,
-        def: 1265.67,
-        luk: 30
-      }
-    },
-    {
-      id: "char_koharu_01",
-      name: "\u4E0A\u6749\u8B19\u4FE1",
-      rarity: "SSR",
-      element: "\u6C34",
-      role: "\u653B\u6483",
-      profile: "\u653B\u5B88\u5BC4\u308A",
-      expected100: {
-        hp: 45312,
-        atk: 16320,
-        def: 5253,
-        luk: 30
-      }
-    },
-    {
-      id: "char_leo_01",
-      name: "\u4F0A\u9054\u653F\u5B97",
-      rarity: "SSR",
-      element: "\u98A8",
-      role: "\u653B\u6483",
-      profile: "\u653B\u5B88\u5BC4\u308A",
-      expected100: {
-        hp: 45312,
-        atk: 16320,
-        def: 5253,
-        luk: 30
-      }
-    },
-    {
-      id: "char_leon_01",
-      name: "\u52A0\u85E4\u6E05\u6B63",
-      rarity: "SR",
-      element: "\u571F",
-      role: "\u5B88\u5099",
-      profile: "DEF\u5BC4\u308A",
-      expected100: {
-        hp: 42120.4,
-        atk: 6872.45,
-        def: 4340.7,
-        luk: 30
-      }
-    },
-    {
-      id: "char_long_01",
-      name: "\u5973\u4F8D",
-      rarity: "N",
-      element: "\u571F",
-      role: "\u653B\u5B88",
-      profile: "\u653B\u5B88\u5BC4\u308A",
-      expected100: {
-        hp: 15667.2,
-        atk: 2774.4,
-        def: 1442.79,
-        luk: 30
-      }
-    },
-    {
-      id: "char_lucas_01",
-      name: "\u5CF6\u6D25\u7FA9\u5F18",
-      rarity: "SR",
-      element: "\u706B",
-      role: "\u653B\u6483",
-      profile: "\u653B\u6483\u5BC4\u308A",
-      expected100: {
-        hp: 29779,
-        atk: 11445,
-        def: 3116.4,
-        luk: 30
-      }
-    },
-    {
-      id: "char_makoto_01",
-      name: "\u5C0F\u65E9\u5DDD\u9686\u666F",
-      rarity: "R",
-      element: "\u6C34",
-      role: "\u653B\u6483",
-      profile: "\u653B\u5B88\u5BC4\u308A",
-      expected100: {
-        hp: 18528,
-        atk: 5814,
-        def: 1887,
-        luk: 30
-      }
-    },
-    {
-      id: "char_mark_01",
-      name: "\u5C0F\u677E\u59EB",
-      rarity: "R",
-      element: "\u706B",
-      role: "\u653B\u5B88",
-      profile: "DEF\u5BC4\u308A",
-      expected100: {
-        hp: 22696.8,
-        atk: 4699.65,
-        def: 2233.875,
-        luk: 30
-      }
-    },
-    {
-      id: "char_martina_01",
-      name: "\u6226\u5DEB\u5973",
-      rarity: "N",
-      element: "\u706B",
-      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
-      profile: "\u8010\u4E45\u5BC4\u308A",
-      expected100: {
-        hp: 15408.8,
-        atk: 2736,
-        def: 1317.33,
-        luk: 30
-      }
-    },
-    {
-      id: "char_masato_01",
-      name: "\u5F13\u5175",
-      rarity: "N",
-      element: "\u6C34",
-      role: "\u653B\u6483",
-      profile: "\u653B\u5B88\u5BC4\u308A",
-      expected100: {
-        hp: 13056,
-        atk: 3264,
-        def: 1254.6,
-        luk: 30
-      }
-    },
-    {
-      id: "char_maya_01",
-      name: "\u670D\u90E8\u534A\u8535",
-      rarity: "SR",
-      element: "\u95C7",
-      role: "\u653B\u6483",
-      profile: "LUK\u5BC4\u308A",
-      expected100: {
-        hp: 30086,
-        atk: 10573,
-        def: 3180,
-        luk: 33
-      }
-    },
-    {
-      id: "char_mei_01",
-      name: "\u5C71\u672C\u52D8\u52A9",
-      rarity: "R",
-      element: "\u706B",
-      role: "\u653B\u6483",
-      profile: "\u8010\u4E45\u5BC4\u308A",
-      expected100: {
-        hp: 19879,
-        atk: 5415,
-        def: 1887,
-        luk: 30
-      }
-    },
-    {
-      id: "char_minami_01",
-      name: "\u5CF6\u5DE6\u8FD1",
-      rarity: "R",
-      element: "\u571F",
-      role: "\u653B\u5B88",
-      profile: "\u8010\u4E45\u5BC4\u308A",
-      expected100: {
-        hp: 23854.8,
-        atk: 4602.75,
-        def: 2170.05,
-        luk: 30
-      }
-    },
-    {
-      id: "char_mio_01",
-      name: "\u524D\u7530\u6176\u6B21",
-      rarity: "SSR",
-      element: "\u98A8",
-      role: "\u653B\u5B88",
-      profile: "\u653B\u5B88\u5BC4\u308A",
-      expected100: {
-        hp: 54374.4,
-        atk: 13872,
-        def: 6040.95,
-        luk: 30
-      }
-    },
-    {
-      id: "char_miyabi_01",
-      name: "\u660E\u667A\u5149\u79C0",
-      rarity: "SSR",
-      element: "\u95C7",
-      role: "\u653B\u6483",
-      profile: "LUK\u5BC4\u308A",
-      expected100: {
-        hp: 46256,
-        atk: 15520,
-        def: 5150,
-        luk: 33
-      }
-    },
-    {
-      id: "char_momoko_01",
-      name: "\u5CF6\u6D25\u7FA9\u4E45",
-      rarity: "R",
-      element: "\u706B",
-      role: "\u652F\u63F4",
-      profile: "\u8010\u4E45\u5BC4\u308A",
-      expected100: {
-        hp: 23854.8,
-        atk: 4061.25,
-        def: 2170.05,
-        luk: 30
-      }
-    },
-    {
-      id: "char_naoto_01",
-      name: "\u6F01\u5E2B",
-      rarity: "N",
-      element: "\u571F",
-      role: "\u653B\u5B88",
-      profile: "HP\u5BC4\u308A",
-      expected100: {
-        hp: 17136,
-        atk: 2638.4,
-        def: 1386.21,
-        luk: 30
-      }
-    },
-    {
-      id: "char_noa_01",
-      name: "\u67F4\u7530\u52DD\u5BB6",
-      rarity: "SR",
-      element: "\u571F",
-      role: "\u653B\u5B88",
-      profile: "HP\u5BC4\u308A",
-      expected100: {
-        hp: 38682,
-        atk: 8987.05,
-        def: 3583.86,
-        luk: 30
-      }
-    },
-    {
-      id: "char_reiji_01",
-      name: "\u7E54\u7530\u4FE1\u9577",
-      rarity: "SSR",
-      element: "\u706B",
-      role: "\u652F\u63F4",
-      profile: "\u653B\u5B88\u5BC4\u308A",
-      expected100: {
-        hp: 54374.4,
-        atk: 12240,
-        def: 6040.95,
-        luk: 30
-      }
-    },
-    {
-      id: "char_reina_01",
-      name: "\u6BDB\u5229\u5143\u5C31",
-      rarity: "SR",
-      element: "\u98A8",
-      role: "\u653B\u6483",
-      profile: "\u8010\u4E45\u5BC4\u308A",
-      expected100: {
-        hp: 31621,
-        atk: 10355,
-        def: 3243.6,
-        luk: 30
-      }
-    },
-    {
-      id: "char_ren_01",
-      name: "\u658E\u85E4\u9053\u4E09",
-      rarity: "R",
-      element: "\u95C7",
-      role: "\u653B\u6483",
-      profile: "\u653B\u5B88\u5BC4\u308A",
-      expected100: {
-        hp: 18528,
-        atk: 5814,
-        def: 1887,
-        luk: 30
-      }
-    },
-    {
-      id: "char_ren_male_01",
-      name: "\u672C\u9858\u5BFA\u9855\u5982",
-      rarity: "R",
-      element: "\u571F",
-      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
-      profile: "\u8010\u4E45\u5BC4\u308A",
-      expected100: {
-        hp: 21866.9,
-        atk: 4873.5,
-        def: 1981.35,
-        luk: 30
-      }
-    },
-    {
-      id: "char_riki_01",
-      name: "\u6FC3\u59EB",
-      rarity: "SR",
-      element: "\u95C7",
-      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
-      profile: "\u8010\u4E45\u5BC4\u308A",
-      expected100: {
-        hp: 34783.1,
-        atk: 9319.5,
-        def: 3405.78,
-        luk: 30
-      }
-    },
-    {
-      id: "char_rin_01",
-      name: "\u6B66\u7530\u52DD\u983C",
-      rarity: "R",
-      element: "\u706B",
-      role: "\u653B\u6483",
-      profile: "\u653B\u6483\u5BC4\u308A",
-      expected100: {
-        hp: 18721,
-        atk: 5985,
-        def: 1813,
-        luk: 30
-      }
-    },
-    {
-      id: "char_rui_01",
-      name: "\u76F4\u6C5F\u517C\u7D9A",
-      rarity: "SR",
-      element: "\u6C34",
-      role: "\u652F\u63F4",
-      profile: "\u8010\u4E45\u5BC4\u308A",
-      expected100: {
-        hp: 37945.2,
-        atk: 7766.25,
-        def: 3730.14,
-        luk: 30
-      }
-    },
-    {
-      id: "char_sakura_01",
-      name: "\u771F\u7530\u660C\u5E78",
-      rarity: "SR",
-      element: "\u706B",
-      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
-      profile: "\u8010\u4E45\u5BC4\u308A",
-      expected100: {
-        hp: 34783.1,
-        atk: 9319.5,
-        def: 3405.78,
-        luk: 30
-      }
-    },
-    {
-      id: "char_sawat_01",
-      name: "\u706B\u85AC\u5E2B",
-      rarity: "N",
-      element: "\u706B",
-      role: "\u653B\u6483",
-      profile: "\u653B\u6483\u5BC4\u308A",
-      expected100: {
-        hp: 13192,
-        atk: 3360,
-        def: 1205.4,
-        luk: 30
-      }
-    },
-    {
-      id: "char_seiya_01",
-      name: "\u77F3\u7530\u4E09\u6210",
-      rarity: "SR",
-      element: "\u5149",
-      role: "\u5B88\u5099",
-      profile: "DEF\u5BC4\u308A",
-      expected100: {
-        hp: 42120.4,
-        atk: 6872.45,
-        def: 4340.7,
-        luk: 30
-      }
-    },
-    {
-      id: "char_serika_01",
-      name: "\u6D45\u4E95\u9577\u653F",
-      rarity: "R",
-      element: "\u98A8",
-      role: "\u5B88\u5099",
-      profile: "HP\u5BC4\u308A",
-      expected100: {
-        hp: 28371,
-        atk: 3593.85,
-        def: 2356.9,
-        luk: 30
-      }
-    },
-    {
-      id: "char_shin_01",
-      name: "\u7247\u5009\u666F\u7DB1",
-      rarity: "R",
-      element: "\u98A8",
-      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
-      profile: "\u8010\u4E45\u5BC4\u308A",
-      expected100: {
-        hp: 21866.9,
-        atk: 4873.5,
-        def: 1981.35,
-        luk: 30
-      }
-    },
-    {
-      id: "char_shion_01",
-      name: "\u7532\u6590\u59EB",
-      rarity: "R",
-      element: "\u6C34",
-      role: "\u653B\u5B88",
-      profile: "HP\u5BC4\u308A",
-      expected100: {
-        hp: 24318,
-        atk: 4699.65,
-        def: 2084.95,
-        luk: 30
-      }
-    },
-    {
-      id: "char_shun_01",
-      name: "\u753A\u5A18",
-      rarity: "N",
-      element: "\u95C7",
-      role: "\u652F\u63F4",
-      profile: "\u8010\u4E45\u5BC4\u308A",
-      expected100: {
-        hp: 16809.6,
-        atk: 2280,
-        def: 1442.79,
-        luk: 30
-      }
-    },
-    {
-      id: "char_sora_01",
-      name: "\u7ACB\u82B1\u8ABE\u5343\u4EE3",
-      rarity: "SR",
-      element: "\u5149",
-      role: "\u653B\u6483",
-      profile: "\u653B\u5B88\u5BC4\u308A",
-      expected100: {
-        hp: 29472,
-        atk: 11118,
-        def: 3243.6,
-        luk: 30
-      }
-    },
-    {
-      id: "char_souta_01",
-      name: "\u8336\u5C4B\u306E\u5A18",
-      rarity: "N",
-      element: "\u6C34",
-      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
-      profile: "HP\u5BC4\u308A",
-      expected100: {
-        hp: 15708,
-        atk: 2793.6,
-        def: 1265.67,
-        luk: 30
-      }
-    },
-    {
-      id: "char_taiga_01",
-      name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
-      rarity: "SR",
-      element: "\u6C34",
-      role: "\u653B\u5B88",
-      profile: "\u653B\u5B88\u5BC4\u308A",
-      expected100: {
-        hp: 35366.4,
-        atk: 9450.3,
-        def: 3730.14,
-        luk: 30
-      }
-    },
-    {
-      id: "char_takeshi_01",
-      name: "\u9670\u967D\u5E2B",
-      rarity: "N",
-      element: "\u98A8",
-      role: "\u652F\u63F4",
-      profile: "LUK\u5BC4\u308A",
-      expected100: {
-        hp: 15993.6,
-        atk: 2328,
-        def: 1414.5,
-        luk: 33
-      }
-    },
-    {
-      id: "char_takuro_01",
-      name: "\u96D1\u8CC0\u5B6B\u5E02",
-      rarity: "SR",
-      element: "\u98A8",
-      role: "\u653B\u6483",
-      profile: "\u653B\u6483\u5BC4\u308A",
-      expected100: {
-        hp: 29779,
-        atk: 11445,
-        def: 3116.4,
-        luk: 30
-      }
-    },
-    {
-      id: "char_tatsuya_01",
-      name: "\u884C\u5546\u4EBA",
-      rarity: "N",
-      element: "\u95C7",
-      role: "\u652F\u63F4",
-      profile: "LUK\u5BC4\u308A",
-      expected100: {
-        hp: 15993.6,
-        atk: 2328,
-        def: 1414.5,
-        luk: 33
-      }
-    },
-    {
-      id: "char_tetsu_01",
-      name: "\u9ED2\u7530\u5B98\u5175\u885B",
-      rarity: "SR",
-      element: "\u95C7",
-      role: "\u653B\u6483",
-      profile: "\u8010\u4E45\u5BC4\u308A",
-      expected100: {
-        hp: 31621,
-        atk: 10355,
-        def: 3243.6,
-        luk: 30
-      }
-    },
-    {
-      id: "char_tomoya_01",
-      name: "\u9244\u7832\u5175",
-      rarity: "N",
-      element: "\u6C34",
-      role: "\u653B\u6483",
-      profile: "\u653B\u6483\u5BC4\u308A",
-      expected100: {
-        hp: 13192,
-        atk: 3360,
-        def: 1205.4,
-        luk: 30
-      }
-    },
-    {
-      id: "char_yoshihiko_01",
-      name: "\u935B\u51B6\u5E2B",
-      rarity: "N",
-      element: "\u571F",
-      role: "\u5B88\u5099",
-      profile: "DEF\u5BC4\u308A",
-      expected100: {
-        hp: 18659.2,
-        atk: 2017.6,
-        def: 1678.95,
-        luk: 30
-      }
-    },
-    {
-      id: "char_yuji_01",
-      name: "\u7ACB\u82B1\u5B97\u8302",
-      rarity: "R",
-      element: "\u5149",
-      role: "\u653B\u6483",
-      profile: "\u653B\u6483\u5BC4\u308A",
-      expected100: {
-        hp: 18721,
-        atk: 5985,
-        def: 1813,
-        luk: 30
-      }
-    },
-    {
-      id: "char_yuki_01",
-      name: "\u7AF9\u4E2D\u534A\u5175\u885B",
-      rarity: "R",
-      element: "\u5149",
-      role: "\u5B88\u5099",
-      profile: "\u8010\u4E45\u5BC4\u308A",
-      expected100: {
-        hp: 27830.6,
-        atk: 3519.75,
-        def: 2453.1,
-        luk: 30
-      }
-    },
-    {
-      id: "char_yukina_01",
-      name: "\u7D30\u5DDD\u30AC\u30E9\u30B7\u30E3",
-      rarity: "R",
-      element: "\u5149",
-      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
-      profile: "LUK\u5BC4\u308A",
-      expected100: {
-        hp: 20805.4,
-        atk: 4976.1,
-        def: 1942.5,
-        luk: 33
-      }
-    }
-  ]
-};
-
-// src/domain/redesign/formalCharacterStats.ts
-var FORMAL_CHARACTER_STATS_VERSION = formal_character_stats_default.version;
-var elements = { \u706B: "fire", \u6C34: "water", \u571F: "earth", \u98A8: "wind", \u5149: "light", \u95C7: "dark" };
-var FORMAL_CHARACTER_ASSIGNMENTS = formal_character_stats_default.characters.map((row) => ({ ...row, rarity: row.rarity, element: elements[row.element] }));
-function interpolate(level, values) {
-  for (let i = 1; i < formal_character_stats_default.levels.length; i++) if (level <= formal_character_stats_default.levels[i]) return values[i - 1] + (values[i] - values[i - 1]) * (level - formal_character_stats_default.levels[i - 1]) / (formal_character_stats_default.levels[i] - formal_character_stats_default.levels[i - 1]);
-  return values[values.length - 1];
-}
-function getFormalCharacterStats(characterId, level, baseSp) {
-  if (!Number.isInteger(level) || level < 1 || level > 100) throw Error("\u6B66\u5C06Lv\u306F1\u301C100\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
-  const character2 = formal_character_stats_default.characters.find((row) => row.id === characterId);
-  if (!character2) throw Error(`\u6B63\u5F0F\u6B66\u5C06\u80FD\u529B\u304C\u3042\u308A\u307E\u305B\u3093: ${characterId}`);
-  const anchors = formal_character_stats_default.anchors[character2.rarity];
-  const role = formal_character_stats_default.roles[character2.role], profile = formal_character_stats_default.profiles[character2.profile];
-  const body = (key2) => interpolate(level, anchors[key2]) * role[key2] * profile[key2];
-  const luk = (level <= 50 ? 10 + 10 * (level - 1) / 49 : 20 + 10 * (level - 50) / 50) + profile.luk;
-  return { hp: body("hp"), atk: body("atk"), def: body("def"), luk, sp: baseSp };
-}
-
-// src/domain/redesign/growthMaster.ts
-var GROWTH_VERSION = "APPROVED_GROWTH_V1_20260921";
-var EXP_SIZES = ["small", "medium", "large", "xlarge"];
-var EXP_VALUES = { small: 100, medium: 1e3, large: 5e3, xlarge: 2e4 };
-var SOUL_UNLOCK = { N: 20, R: 40, SR: 60, SSR: 80 };
-var AWAKENING_SOULS = { N: [4, 6, 8, 10, 12], R: [8, 12, 16, 20, 24], SR: [12, 18, 24, 30, 36], SSR: [20, 30, 40, 50, 60] };
-var LB_STEPS = [1, 2, 3, 4, 5, 6, 8, 10, 12, 15];
-var SKILL_LB_FACTORS = { N: 1, R: 2, SR: 4, SSR: 8 };
-var EQUIPMENT_LB_FACTORS = { N: 1, R: 2, SR: 3, SSR: 6 };
-var DUPLICATE_SKILL_MATERIALS = { N: 1, R: 2, SR: 5, SSR: 20 };
-var DISMANTLE_MATERIALS = DUPLICATE_SKILL_MATERIALS;
-var EXP_TOTALS = { character: { N: 3e5, R: 45e4, SR: 75e4, SSR: 12e5 }, equipment: { N: 18e4, R: 27e4, SR: 45e4, SSR: 72e4 } };
-function cumulativeExp(kind, rarity, level) {
-  if (!Number.isInteger(level) || level < 1 || level > 100) throw new Error("Lv\u304C\u4E0D\u6B63\u3067\u3059\u3002");
-  return level === 100 ? EXP_TOTALS[kind][rarity] : 10 * Math.floor(EXP_TOTALS[kind][rarity] * Math.pow((level - 1) / 99, 2.2) / 10 + 0.5);
-}
-function cumulativeCash(kind, rarity, level) {
-  const exp2 = cumulativeExp(kind, rarity, level);
-  return kind === "character" ? exp2 : Math.floor(exp2 / 2);
-}
-function playerCumulativeExp(level) {
-  let exp2 = 0;
-  for (let l = 1; l < Math.min(100, level); l++) exp2 += (l + 9) ** 2;
-  return exp2;
-}
-function applyPlayerExperience(level, exp2, gain, energy, energyMax) {
-  if (!Number.isSafeInteger(gain) || gain < 0) throw new Error("\u30D7\u30EC\u30A4\u30E4\u30FCEXP\u304C\u4E0D\u6B63\u3067\u3059\u3002");
-  const nextExp = level >= 100 ? exp2 : Math.min(playerCumulativeExp(100), exp2 + gain);
-  let nextLevel = level;
-  while (nextLevel < 100 && nextExp >= playerCumulativeExp(nextLevel + 1)) nextLevel++;
-  return { level: nextLevel, exp: nextExp, energy: nextLevel > level ? Math.max(energy, energyMax) : energy };
-}
-function emptyGrowthInventory() {
-  return { expItems: { character: { small: 0, medium: 0, large: 0, xlarge: 0 }, equipment: { small: 0, medium: 0, large: 0, xlarge: 0 } }, carryExp: { character: 0, equipment: 0 }, genericSouls: { N: 0, R: 0, SR: 0, SSR: 0 }, soulSelectors: { N: 0, R: 0, SR: 0, SSR: 0 } };
-}
-
-// src/domain/redesign/growthReward.ts
-var RARITIES = ["N", "R", "SR", "SSR"];
-function isGrowthRewardKind(kind) {
-  return ["character_exp_item", "equipment_exp_item", "generic_soul", "soul_selector"].includes(kind);
-}
-function grantGrowthReward(original, reward) {
-  if (!Number.isSafeInteger(reward.amount) || reward.amount < 0) throw new Error("\u5831\u916C\u6570\u91CF\u304C\u4E0D\u6B63\u3067\u3059");
-  const state = structuredClone(original);
-  state.growthInventory ??= emptyGrowthInventory();
-  const inventory = state.growthInventory;
-  const add = (old) => {
-    const total = old + reward.amount;
-    if (!Number.isSafeInteger(old) || old < 0 || !Number.isSafeInteger(total)) throw new Error("\u80B2\u6210\u30A2\u30A4\u30C6\u30E0\u6B8B\u9AD8\u304C\u4E0D\u6B63\u3067\u3059");
-    return total;
-  };
-  if (reward.kind === "character_exp_item" || reward.kind === "equipment_exp_item") {
-    if (!EXP_SIZES.includes(reward.id)) throw new Error("EXP\u30A2\u30A4\u30C6\u30E0\u306E\u7A2E\u985E\u304C\u4E0D\u6B63\u3067\u3059");
-    const target = reward.kind === "character_exp_item" ? "character" : "equipment";
-    const size = reward.id;
-    inventory.expItems[target][size] = add(inventory.expItems[target][size]);
-  } else if (reward.kind === "generic_soul" || reward.kind === "soul_selector") {
-    if (!RARITIES.includes(reward.id)) throw new Error("\u9B42\u30A2\u30A4\u30C6\u30E0\u306E\u30EC\u30A2\u30EA\u30C6\u30A3\u304C\u4E0D\u6B63\u3067\u3059");
-    const target = reward.kind === "generic_soul" ? "genericSouls" : "soulSelectors";
-    const rarity = reward.id;
-    inventory[target][rarity] = add(inventory[target][rarity]);
-  } else throw new Error("\u80B2\u6210\u5831\u916C\u306E\u7A2E\u985E\u304C\u4E0D\u6B63\u3067\u3059");
-  return state;
-}
 
 // src/domain/redesign/data/balance-v2.json
 var balance_v2_default = {
@@ -20017,6 +13524,370 @@ var balance_v2_default = {
   ]
 };
 
+// src/domain/redesign/data/formal-skill-presentation.json
+var formal_skill_presentation_default = [
+  {
+    id: "SKD001",
+    name: "\u706B\u8D70\u308A",
+    image: "/skills/formal/SKD001.webp"
+  },
+  {
+    id: "SKD002",
+    name: "\u6C34\u8D70\u308A",
+    image: "/skills/formal/SKD002.webp"
+  },
+  {
+    id: "SKD003",
+    name: "\u571F\u5272\u308A",
+    image: "/skills/formal/SKD003.webp"
+  },
+  {
+    id: "SKD004",
+    name: "\u98A8\u5207\u308A",
+    image: "/skills/formal/SKD004.webp"
+  },
+  {
+    id: "SKD005",
+    name: "\u5149\u5DEE\u3057",
+    image: "/skills/formal/SKD005.webp"
+  },
+  {
+    id: "SKD006",
+    name: "\u5F71\u5207\u308A",
+    image: "/skills/formal/SKD006.webp"
+  },
+  {
+    id: "SKD007",
+    name: "\u708E\u65AD",
+    image: "/skills/formal/SKD007.webp"
+  },
+  {
+    id: "SKD008",
+    name: "\u6C34\u65AD",
+    image: "/skills/formal/SKD008.webp"
+  },
+  {
+    id: "SKD009",
+    name: "\u5CA9\u65AD",
+    image: "/skills/formal/SKD009.webp"
+  },
+  {
+    id: "SKD010",
+    name: "\u98A8\u65AD",
+    image: "/skills/formal/SKD010.webp"
+  },
+  {
+    id: "SKD011",
+    name: "\u5149\u65AD",
+    image: "/skills/formal/SKD011.webp"
+  },
+  {
+    id: "SKD012",
+    name: "\u5F71\u65AD",
+    image: "/skills/formal/SKD012.webp"
+  },
+  {
+    id: "SKD013",
+    name: "\u7D05\u84EE\u4E00\u9583",
+    image: "/skills/formal/SKD013.webp"
+  },
+  {
+    id: "SKD014",
+    name: "\u84BC\u6CE2\u4E00\u9583",
+    image: "/skills/formal/SKD014.webp"
+  },
+  {
+    id: "SKD015",
+    name: "\u5730\u88C2\u4E00\u9583",
+    image: "/skills/formal/SKD015.webp"
+  },
+  {
+    id: "SKD016",
+    name: "\u5929\u5D50\u4E00\u9583",
+    image: "/skills/formal/SKD016.webp"
+  },
+  {
+    id: "SKD017",
+    name: "\u5929\u5149\u4E00\u9583",
+    image: "/skills/formal/SKD017.webp"
+  },
+  {
+    id: "SKD018",
+    name: "\u5BB5\u95C7\u4E00\u9583",
+    image: "/skills/formal/SKD018.webp"
+  },
+  {
+    id: "SKD019",
+    name: "\u706B\u306E\u8599\u304E",
+    image: "/skills/formal/SKD019.webp"
+  },
+  {
+    id: "SKD020",
+    name: "\u6C34\u306E\u8599\u304E",
+    image: "/skills/formal/SKD020.webp"
+  },
+  {
+    id: "SKD021",
+    name: "\u8599\u304E\u6255\u3044",
+    image: "/skills/formal/SKD021.webp"
+  },
+  {
+    id: "SKD022",
+    name: "\u98A8\u306E\u8599\u304E",
+    image: "/skills/formal/SKD022.webp"
+  },
+  {
+    id: "SKD023",
+    name: "\u5149\u306E\u8599\u304E",
+    image: "/skills/formal/SKD023.webp"
+  },
+  {
+    id: "SKD024",
+    name: "\u95C7\u306E\u8599\u304E",
+    image: "/skills/formal/SKD024.webp"
+  },
+  {
+    id: "SKD025",
+    name: "\u7D05\u84EE\u306E\u5927\u8A08",
+    image: "/skills/skill_015_recovery_program.jpg"
+  },
+  {
+    id: "SKD026",
+    name: "\u5F8C\u9663\u5C04\u3061",
+    image: "/skills/skill_008_smart_snipe.jpg"
+  },
+  {
+    id: "SKD027",
+    name: "\u8FFD\u3044\u8A0E\u3061",
+    image: "/skills/skill_021_high_voltage.jpg"
+  },
+  {
+    id: "SKD028",
+    name: "\u5D29\u3057\u8A0E\u3061",
+    image: "/skills/skill_028_nanomachine_storm.jpg"
+  },
+  {
+    id: "SKD029",
+    name: "\u6BD2\u5203",
+    image: "/skills/skill_032_stun_grenade.jpg"
+  },
+  {
+    id: "SKD030",
+    name: "\u8755\u307F\u8A0E\u3061",
+    image: "/skills/skill_005_poison_needle.jpg"
+  },
+  {
+    id: "SKD031",
+    name: "\u80CC\u6C34\u65AC\u308A",
+    image: "/skills/skill_035_hologram_decoy.jpg"
+  },
+  {
+    id: "SKD032",
+    name: "\u5F71\u7E2B\u3044",
+    image: "/skills/formal/SKD032.webp"
+  },
+  {
+    id: "SKD033",
+    name: "\u6C17\u5408",
+    image: "/skills/skill_009_drug_injection.jpg"
+  },
+  {
+    id: "SKD034",
+    name: "\u8EAB\u69CB\u3048",
+    image: "/skills/skill_006_iron_guard.jpg"
+  },
+  {
+    id: "SKD035",
+    name: "\u9B28\u306E\u58F0",
+    image: "/skills/skill_017_acid_spray.jpg"
+  },
+  {
+    id: "SKD036",
+    name: "\u5B88\u308A\u306E\u9663",
+    image: "/skills/skill_024_inspiring_roar.jpg"
+  },
+  {
+    id: "SKD037",
+    name: "\u5A01\u5727",
+    image: "/skills/skill_007_toxic_slang.jpg"
+  },
+  {
+    id: "SKD038",
+    name: "\u93A7\u7815\u304D",
+    image: "/skills/skill_015_recovery_program.jpg"
+  },
+  {
+    id: "SKD039",
+    name: "\u5FDC\u6025\u624B\u5F53",
+    image: "/skills/skill_003_noise_heal.jpg"
+  },
+  {
+    id: "SKD040",
+    name: "\u6CBB\u7652\u306E\u7948\u308A",
+    image: "/skills/skill_023_double_drive.jpg"
+  },
+  {
+    id: "SKD041",
+    name: "\u5C0F\u4F11\u6B62",
+    image: "/skills/skill_013_charge_slash.jpg"
+  },
+  {
+    id: "SKD042",
+    name: "\u6148\u611B\u306E\u5927\u7948\u7977",
+    image: "/skills/skill_039_timeline_rush.jpg"
+  },
+  {
+    id: "SKD043",
+    name: "\u518D\u751F\u306E\u7948\u308A",
+    image: "/skills/skill_029_toxic_gas.jpg"
+  },
+  {
+    id: "SKD044",
+    name: "\u8607\u751F\u306E\u7948\u308A",
+    image: "/skills/formal/SKD044.webp"
+  },
+  {
+    id: "SKD045",
+    name: "\u8B77\u8EAB\u969C\u58C1",
+    image: "/skills/skill_002_quick_shield.jpg"
+  },
+  {
+    id: "SKD046",
+    name: "\u5B88\u8B77\u306E\u672D",
+    image: "/skills/skill_016_smoke_screen.jpg"
+  },
+  {
+    id: "SKD047",
+    name: "\u7D50\u754C\u306E\u9663",
+    image: "/skills/skill_038_barrier_shatter.jpg"
+  },
+  {
+    id: "SKD048",
+    name: "\u6311\u767A",
+    image: "/skills/skill_007_toxic_slang.jpg"
+  },
+  {
+    id: "SKD049",
+    name: "\u8FD4\u3057\u5203",
+    image: "/skills/skill_044_cycle_off.jpg"
+  },
+  {
+    id: "SKD050",
+    name: "\u8FCE\u6483\u306E\u69CB\u3048",
+    image: "/skills/skill_031_hyper_accel.jpg"
+  },
+  {
+    id: "SKD051",
+    name: "\u7834\u52E2",
+    image: "/skills/formal/SKD051.webp"
+  },
+  {
+    id: "SKD052",
+    name: "\u7834\u8B77",
+    image: "/skills/formal/SKD052.webp"
+  },
+  {
+    id: "SKD053",
+    name: "\u596E\u8D77",
+    image: "/skills/skill_026_venom_blade.jpg"
+  },
+  {
+    id: "SKD054",
+    name: "\u6D44\u6BD2",
+    image: "/skills/skill_023_double_drive.jpg"
+  },
+  {
+    id: "SKD055",
+    name: "\u89E3\u7E1B",
+    image: "/skills/formal/SKD055.webp"
+  },
+  {
+    id: "SKD056",
+    name: "\u7834\u9663\u6483",
+    image: "/skills/skill_028_nanomachine_storm.jpg"
+  },
+  {
+    id: "SKD057",
+    name: "\u5F8C\u9663\u5D29\u3057",
+    image: "/skills/skill_022_tactical_reload.jpg"
+  },
+  {
+    id: "SKD058",
+    name: "\u8755\u307F\u306E\u9663",
+    image: "/skills/skill_040_execution_strike.jpg"
+  },
+  {
+    id: "SKD059",
+    name: "\u5D29\u9663\u306E\u6CE2",
+    image: "/skills/formal/SKD059.webp"
+  },
+  {
+    id: "SKD060",
+    name: "\u80CC\u6C34\u306E\u8599\u304E",
+    image: "/skills/skill_012_lucky_shoot.jpg"
+  },
+  {
+    id: "SKD061",
+    name: "\u596E\u6226\u306E\u6A84",
+    image: "/skills/skill_045_preparation.jpg"
+  },
+  {
+    id: "SKD062",
+    name: "\u5805\u5B88\u306E\u672D",
+    image: "/skills/skill_024_inspiring_roar.jpg"
+  },
+  {
+    id: "SKD063",
+    name: "\u7834\u7532\u306E\u9663",
+    image: "/skills/skill_015_recovery_program.jpg"
+  },
+  {
+    id: "SKD064",
+    name: "\u5A01\u5727\u306E\u9663",
+    image: "/skills/skill_007_toxic_slang.jpg"
+  },
+  {
+    id: "SKD065",
+    name: "\u5C01\u9663",
+    image: "/skills/formal/SKD065.webp"
+  },
+  {
+    id: "SKD066",
+    name: "\u8ECD\u795E\u306E\u53F7\u4EE4",
+    image: "/skills/skill_041_quick_search.jpg"
+  },
+  {
+    id: "SKD067",
+    name: "\u518D\u751F\u306E\u9663",
+    image: "/skills/skill_039_timeline_rush.jpg"
+  },
+  {
+    id: "SKD068",
+    name: "\u6551\u8B77\u306E\u672D",
+    image: "/skills/formal/SKD068.webp"
+  },
+  {
+    id: "SKD069",
+    name: "\u8FD4\u3057\u306E\u53F7\u4EE4",
+    image: "/skills/skill_031_hyper_accel.jpg"
+  },
+  {
+    id: "SKD070",
+    name: "\u6E05\u3081\u306E\u624B\u5F53",
+    image: "/skills/skill_013_charge_slash.jpg"
+  },
+  {
+    id: "SKD071",
+    name: "\u5927\u7953\u3044",
+    image: "/skills/skill_033_atomic_cannon.jpg"
+  },
+  {
+    id: "SKD072",
+    name: "\u7834\u52E2\u306E\u4E00\u9583",
+    image: "/skills/skill_036_power_of_unity.jpg"
+  }
+];
+
 // src/domain/redesign/balanceV2Masters.ts
 var BALANCE_V2_MASTER_VERSION = balance_v2_default.version;
 var BALANCE_V2_CHARACTER_ASSIGNMENTS = balance_v2_default.assignments;
@@ -20071,6 +13942,6537 @@ function getBalanceV2Skill(designId, lb, options = {}) {
 var BALANCE_V2_SKILL_CANDIDATES = balance_v2_default.skills.map((s) => getBalanceV2Skill(s.designId, 0));
 var BALANCE_V2_SKILL_ID_MAPPING = balance_v2_default.skills.map((s) => ({ designId: s.designId, candidateId: s.id, legacyId: null, imageStatus: s.imageStatus, status: "QA_ONLY_NOT_GACHA" }));
 
+// src/domain/redesign/raidFormalSkills.ts
+function getFormalRaidSkill(id, lb) {
+  const row = raid_skill_values_default.find((r) => r.design_id === id && r.lb === lb);
+  if (!row) throw Error(`\u6B63\u5F0F\u30EC\u30A4\u30C9\u6280\u80FD\u304C\u3042\u308A\u307E\u305B\u3093: ${id}/${lb}`);
+  const skill2 = getBalanceV2Skill(id, lb), values = {};
+  if (["SKD039", "SKD040", "SKD068"].includes(id)) skill2.condition = { type: "ally_hp_below", value: 0.5 };
+  for (const text of row.performance_text.split("\uFF0F")) {
+    const match = text.match(/^(.+):([\d.]+)/);
+    if (match) values[match[1]] = Number(match[2]);
+  }
+  const labels = { heal: "\u56DE\u5FA9\u500D\u7387", revive: "\u8607\u751FHP\u5272\u5408", dot: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387", hot: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387", shield: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387", counter: "\u53CD\u6483\u500D\u7387", atk_up: "ATK\u5F37\u5316", def_up: "DEF\u5F37\u5316", atk_down: "ATK\u4F4E\u4E0B", def_down: "DEF\u4F4E\u4E0B" };
+  for (const effect of skill2.effects) {
+    if (effect.type === "damage") {
+      effect.power = values["\u653B\u6483\u500D\u7387"] ?? values["\u901A\u5E38\u500D\u7387"] ?? effect.power;
+      if (values["\u6761\u4EF6\u500D\u7387"] !== void 0) effect.bonusPower = values["\u6761\u4EF6\u500D\u7387"];
+    } else if (effect.type === "stun" || effect.type === "taunt") effect.chance = (values["\u4ED8\u4E0E\u7387"] ?? effect.chance * 100) / 100;
+    else if (labels[effect.type] && values[labels[effect.type]] !== void 0) effect.power = values[labels[effect.type]];
+  }
+  const definition = balance_v2_default.skills.find((entry) => entry.designId === id);
+  const art2 = formal_skill_presentation_default.find((entry) => entry.id === id);
+  if (!art2) throw Error(`\u6B63\u5F0F\u6280\u80FD\u306E\u8868\u793A\u5B9A\u7FA9\u304C\u3042\u308A\u307E\u305B\u3093: ${id}`);
+  return { ...skill2, id, name: art2.name, image: art2.image, spCost: row.sp, description: `${definition.targetDescription}\u30FB${row.performance_text}${definition.duration ? `\u30FB${definition.duration}\u30BF\u30FC\u30F3` : ""}` };
+}
+
+// src/domain/redesign/formalOwnedSkills.ts
+var FORMAL_SKILL_IDS = balance_v2_default.skills.map((skill2) => skill2.designId);
+var isFormalSkillId = (id) => FORMAL_SKILL_IDS.includes(id);
+function getFormalOwnedSkill(id, lb) {
+  return getFormalRaidSkill(id, lb);
+}
+var FORMAL_SKILL_MASTERS = FORMAL_SKILL_IDS.map((id) => getFormalOwnedSkill(id, 0));
+var FORMAL_SKILL_CREATIVE_STATUS = FORMAL_SKILL_IDS.map((id) => ({
+  id,
+  nameStatus: "approved",
+  imageStatus: "approved",
+  legacyId: null
+}));
+
+// src/domain/redesign/data/formal-growth-equipment.json
+var formal_growth_equipment_default = {
+  authority: "docs/product/GAME04_MASTER_AUTHORITY_LATEST_2026-09-21.md",
+  equipment: [
+    {
+      id: "ACCESSORY_001",
+      rarity: "N",
+      slot: "ACCESSORY",
+      performance_type: "A1 \u6A19\u6E96",
+      level100: {
+        hp: 270,
+        atk: 360,
+        def: 36,
+        luk: 2
+      }
+    },
+    {
+      id: "ACCESSORY_002",
+      rarity: "N",
+      slot: "ACCESSORY",
+      performance_type: "A2 ATK",
+      level100: {
+        hp: 90,
+        atk: 576,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "ACCESSORY_003",
+      rarity: "N",
+      slot: "ACCESSORY",
+      performance_type: "A3 HP",
+      level100: {
+        hp: 900,
+        atk: 144,
+        def: 36,
+        luk: 2
+      }
+    },
+    {
+      id: "ACCESSORY_004",
+      rarity: "N",
+      slot: "ACCESSORY",
+      performance_type: "A4 DEF",
+      level100: {
+        hp: 180,
+        atk: 144,
+        def: 198,
+        luk: 2
+      }
+    },
+    {
+      id: "ACCESSORY_005",
+      rarity: "N",
+      slot: "ACCESSORY",
+      performance_type: "A5 LUK",
+      level100: {
+        hp: 180,
+        atk: 216,
+        def: 18,
+        luk: 6
+      }
+    },
+    {
+      id: "ACCESSORY_006",
+      rarity: "N",
+      slot: "ACCESSORY",
+      performance_type: "A1 \u6A19\u6E96",
+      level100: {
+        hp: 270,
+        atk: 360,
+        def: 36,
+        luk: 2
+      }
+    },
+    {
+      id: "ACCESSORY_007",
+      rarity: "N",
+      slot: "ACCESSORY",
+      performance_type: "A2 ATK",
+      level100: {
+        hp: 90,
+        atk: 576,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "ACCESSORY_008",
+      rarity: "N",
+      slot: "ACCESSORY",
+      performance_type: "A3 HP",
+      level100: {
+        hp: 900,
+        atk: 144,
+        def: 36,
+        luk: 2
+      }
+    },
+    {
+      id: "ACCESSORY_009",
+      rarity: "N",
+      slot: "ACCESSORY",
+      performance_type: "A4 DEF",
+      level100: {
+        hp: 180,
+        atk: 144,
+        def: 198,
+        luk: 2
+      }
+    },
+    {
+      id: "ACCESSORY_010",
+      rarity: "N",
+      slot: "ACCESSORY",
+      performance_type: "A5 LUK",
+      level100: {
+        hp: 180,
+        atk: 216,
+        def: 18,
+        luk: 6
+      }
+    },
+    {
+      id: "ACCESSORY_011",
+      rarity: "N",
+      slot: "ACCESSORY",
+      performance_type: "A1 \u6A19\u6E96",
+      level100: {
+        hp: 270,
+        atk: 360,
+        def: 36,
+        luk: 2
+      }
+    },
+    {
+      id: "ACCESSORY_012",
+      rarity: "R",
+      slot: "ACCESSORY",
+      performance_type: "A1 \u6A19\u6E96",
+      level100: {
+        hp: 480,
+        atk: 640,
+        def: 64,
+        luk: 3
+      }
+    },
+    {
+      id: "ACCESSORY_013",
+      rarity: "R",
+      slot: "ACCESSORY",
+      performance_type: "A2 ATK",
+      level100: {
+        hp: 160,
+        atk: 1024,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "ACCESSORY_014",
+      rarity: "R",
+      slot: "ACCESSORY",
+      performance_type: "A3 HP",
+      level100: {
+        hp: 1600,
+        atk: 256,
+        def: 64,
+        luk: 3
+      }
+    },
+    {
+      id: "ACCESSORY_015",
+      rarity: "R",
+      slot: "ACCESSORY",
+      performance_type: "A4 DEF",
+      level100: {
+        hp: 320,
+        atk: 256,
+        def: 352,
+        luk: 3
+      }
+    },
+    {
+      id: "ACCESSORY_016",
+      rarity: "R",
+      slot: "ACCESSORY",
+      performance_type: "A5 LUK",
+      level100: {
+        hp: 320,
+        atk: 384,
+        def: 32,
+        luk: 9
+      }
+    },
+    {
+      id: "ACCESSORY_017",
+      rarity: "R",
+      slot: "ACCESSORY",
+      performance_type: "A1 \u6A19\u6E96",
+      level100: {
+        hp: 480,
+        atk: 640,
+        def: 64,
+        luk: 3
+      }
+    },
+    {
+      id: "ACCESSORY_018",
+      rarity: "R",
+      slot: "ACCESSORY",
+      performance_type: "A2 ATK",
+      level100: {
+        hp: 160,
+        atk: 1024,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "ACCESSORY_019",
+      rarity: "R",
+      slot: "ACCESSORY",
+      performance_type: "A3 HP",
+      level100: {
+        hp: 1600,
+        atk: 256,
+        def: 64,
+        luk: 3
+      }
+    },
+    {
+      id: "ACCESSORY_020",
+      rarity: "R",
+      slot: "ACCESSORY",
+      performance_type: "A4 DEF",
+      level100: {
+        hp: 320,
+        atk: 256,
+        def: 352,
+        luk: 3
+      }
+    },
+    {
+      id: "ACCESSORY_021",
+      rarity: "R",
+      slot: "ACCESSORY",
+      performance_type: "A5 LUK",
+      level100: {
+        hp: 320,
+        atk: 384,
+        def: 32,
+        luk: 9
+      }
+    },
+    {
+      id: "ACCESSORY_022",
+      rarity: "R",
+      slot: "ACCESSORY",
+      performance_type: "A1 \u6A19\u6E96",
+      level100: {
+        hp: 480,
+        atk: 640,
+        def: 64,
+        luk: 3
+      }
+    },
+    {
+      id: "ACCESSORY_023",
+      rarity: "R",
+      slot: "ACCESSORY",
+      performance_type: "A2 ATK",
+      level100: {
+        hp: 160,
+        atk: 1024,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "ACCESSORY_024",
+      rarity: "R",
+      slot: "ACCESSORY",
+      performance_type: "A3 HP",
+      level100: {
+        hp: 1600,
+        atk: 256,
+        def: 64,
+        luk: 3
+      }
+    },
+    {
+      id: "ACCESSORY_025",
+      rarity: "R",
+      slot: "ACCESSORY",
+      performance_type: "A4 DEF",
+      level100: {
+        hp: 320,
+        atk: 256,
+        def: 352,
+        luk: 3
+      }
+    },
+    {
+      id: "ACCESSORY_026",
+      rarity: "R",
+      slot: "ACCESSORY",
+      performance_type: "A5 LUK",
+      level100: {
+        hp: 320,
+        atk: 384,
+        def: 32,
+        luk: 9
+      }
+    },
+    {
+      id: "ACCESSORY_027",
+      rarity: "SR",
+      slot: "ACCESSORY",
+      performance_type: "A1 \u6A19\u6E96",
+      level100: {
+        hp: 900,
+        atk: 1200,
+        def: 120,
+        luk: 4
+      }
+    },
+    {
+      id: "ACCESSORY_028",
+      rarity: "SR",
+      slot: "ACCESSORY",
+      performance_type: "A2 ATK",
+      level100: {
+        hp: 300,
+        atk: 1920,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "ACCESSORY_029",
+      rarity: "SR",
+      slot: "ACCESSORY",
+      performance_type: "A3 HP",
+      level100: {
+        hp: 3e3,
+        atk: 480,
+        def: 120,
+        luk: 4
+      }
+    },
+    {
+      id: "ACCESSORY_030",
+      rarity: "SR",
+      slot: "ACCESSORY",
+      performance_type: "A4 DEF",
+      level100: {
+        hp: 600,
+        atk: 480,
+        def: 660,
+        luk: 4
+      }
+    },
+    {
+      id: "ACCESSORY_031",
+      rarity: "SR",
+      slot: "ACCESSORY",
+      performance_type: "A5 LUK",
+      level100: {
+        hp: 600,
+        atk: 720,
+        def: 60,
+        luk: 12
+      }
+    },
+    {
+      id: "ACCESSORY_032",
+      rarity: "SR",
+      slot: "ACCESSORY",
+      performance_type: "A1 \u6A19\u6E96",
+      level100: {
+        hp: 900,
+        atk: 1200,
+        def: 120,
+        luk: 4
+      }
+    },
+    {
+      id: "ACCESSORY_033",
+      rarity: "SR",
+      slot: "ACCESSORY",
+      performance_type: "A2 ATK",
+      level100: {
+        hp: 300,
+        atk: 1920,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "ACCESSORY_034",
+      rarity: "SR",
+      slot: "ACCESSORY",
+      performance_type: "A3 HP",
+      level100: {
+        hp: 3e3,
+        atk: 480,
+        def: 120,
+        luk: 4
+      }
+    },
+    {
+      id: "ACCESSORY_035",
+      rarity: "SR",
+      slot: "ACCESSORY",
+      performance_type: "A4 DEF",
+      level100: {
+        hp: 600,
+        atk: 480,
+        def: 660,
+        luk: 4
+      }
+    },
+    {
+      id: "ACCESSORY_036",
+      rarity: "SR",
+      slot: "ACCESSORY",
+      performance_type: "A5 LUK",
+      level100: {
+        hp: 600,
+        atk: 720,
+        def: 60,
+        luk: 12
+      }
+    },
+    {
+      id: "ACCESSORY_037",
+      rarity: "SR",
+      slot: "ACCESSORY",
+      performance_type: "A1 \u6A19\u6E96",
+      level100: {
+        hp: 900,
+        atk: 1200,
+        def: 120,
+        luk: 4
+      }
+    },
+    {
+      id: "ACCESSORY_038",
+      rarity: "SR",
+      slot: "ACCESSORY",
+      performance_type: "A2 ATK",
+      level100: {
+        hp: 300,
+        atk: 1920,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "ACCESSORY_039",
+      rarity: "SR",
+      slot: "ACCESSORY",
+      performance_type: "A3 HP",
+      level100: {
+        hp: 3e3,
+        atk: 480,
+        def: 120,
+        luk: 4
+      }
+    },
+    {
+      id: "ACCESSORY_040",
+      rarity: "SR",
+      slot: "ACCESSORY",
+      performance_type: "A4 DEF",
+      level100: {
+        hp: 600,
+        atk: 480,
+        def: 660,
+        luk: 4
+      }
+    },
+    {
+      id: "ACCESSORY_041",
+      rarity: "SR",
+      slot: "ACCESSORY",
+      performance_type: "A5 LUK",
+      level100: {
+        hp: 600,
+        atk: 720,
+        def: 60,
+        luk: 12
+      }
+    },
+    {
+      id: "ACCESSORY_042",
+      rarity: "SSR",
+      slot: "ACCESSORY",
+      performance_type: "A1 \u6A19\u6E96",
+      level100: {
+        hp: 1500,
+        atk: 2e3,
+        def: 200,
+        luk: 5
+      }
+    },
+    {
+      id: "ACCESSORY_043",
+      rarity: "SSR",
+      slot: "ACCESSORY",
+      performance_type: "A2 ATK",
+      level100: {
+        hp: 500,
+        atk: 3200,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "ACCESSORY_044",
+      rarity: "SSR",
+      slot: "ACCESSORY",
+      performance_type: "A3 HP",
+      level100: {
+        hp: 5e3,
+        atk: 800,
+        def: 200,
+        luk: 5
+      }
+    },
+    {
+      id: "ACCESSORY_045",
+      rarity: "SSR",
+      slot: "ACCESSORY",
+      performance_type: "A4 DEF",
+      level100: {
+        hp: 1e3,
+        atk: 800,
+        def: 1100,
+        luk: 5
+      }
+    },
+    {
+      id: "ACCESSORY_046",
+      rarity: "SSR",
+      slot: "ACCESSORY",
+      performance_type: "A5 LUK",
+      level100: {
+        hp: 1e3,
+        atk: 1200,
+        def: 100,
+        luk: 15
+      }
+    },
+    {
+      id: "ACCESSORY_047",
+      rarity: "SSR",
+      slot: "ACCESSORY",
+      performance_type: "A1 \u6A19\u6E96",
+      level100: {
+        hp: 1500,
+        atk: 2e3,
+        def: 200,
+        luk: 5
+      }
+    },
+    {
+      id: "ACCESSORY_048",
+      rarity: "SSR",
+      slot: "ACCESSORY",
+      performance_type: "A2 ATK",
+      level100: {
+        hp: 500,
+        atk: 3200,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_001",
+      rarity: "N",
+      slot: "BODY",
+      performance_type: "B1 \u6A19\u6E96",
+      level100: {
+        hp: 1440,
+        atk: 0,
+        def: 288,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_002",
+      rarity: "N",
+      slot: "BODY",
+      performance_type: "B2 HP",
+      level100: {
+        hp: 2520,
+        atk: 0,
+        def: 72,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_003",
+      rarity: "N",
+      slot: "BODY",
+      performance_type: "B3 DEF",
+      level100: {
+        hp: 540,
+        atk: 0,
+        def: 468,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_004",
+      rarity: "N",
+      slot: "BODY",
+      performance_type: "B1 \u6A19\u6E96",
+      level100: {
+        hp: 1440,
+        atk: 0,
+        def: 288,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_005",
+      rarity: "N",
+      slot: "BODY",
+      performance_type: "B2 HP",
+      level100: {
+        hp: 2520,
+        atk: 0,
+        def: 72,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_006",
+      rarity: "N",
+      slot: "BODY",
+      performance_type: "B3 DEF",
+      level100: {
+        hp: 540,
+        atk: 0,
+        def: 468,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_007",
+      rarity: "R",
+      slot: "BODY",
+      performance_type: "B1 \u6A19\u6E96",
+      level100: {
+        hp: 2560,
+        atk: 0,
+        def: 512,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_008",
+      rarity: "R",
+      slot: "BODY",
+      performance_type: "B2 HP",
+      level100: {
+        hp: 4480,
+        atk: 0,
+        def: 128,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_009",
+      rarity: "R",
+      slot: "BODY",
+      performance_type: "B3 DEF",
+      level100: {
+        hp: 960,
+        atk: 0,
+        def: 832,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_010",
+      rarity: "R",
+      slot: "BODY",
+      performance_type: "B1 \u6A19\u6E96",
+      level100: {
+        hp: 2560,
+        atk: 0,
+        def: 512,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_011",
+      rarity: "R",
+      slot: "BODY",
+      performance_type: "B2 HP",
+      level100: {
+        hp: 4480,
+        atk: 0,
+        def: 128,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_012",
+      rarity: "R",
+      slot: "BODY",
+      performance_type: "B3 DEF",
+      level100: {
+        hp: 960,
+        atk: 0,
+        def: 832,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_013",
+      rarity: "R",
+      slot: "BODY",
+      performance_type: "B1 \u6A19\u6E96",
+      level100: {
+        hp: 2560,
+        atk: 0,
+        def: 512,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_014",
+      rarity: "R",
+      slot: "BODY",
+      performance_type: "B2 HP",
+      level100: {
+        hp: 4480,
+        atk: 0,
+        def: 128,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_015",
+      rarity: "R",
+      slot: "BODY",
+      performance_type: "B3 DEF",
+      level100: {
+        hp: 960,
+        atk: 0,
+        def: 832,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_016",
+      rarity: "SR",
+      slot: "BODY",
+      performance_type: "B1 \u6A19\u6E96",
+      level100: {
+        hp: 4800,
+        atk: 0,
+        def: 960,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_017",
+      rarity: "SR",
+      slot: "BODY",
+      performance_type: "B2 HP",
+      level100: {
+        hp: 8400,
+        atk: 0,
+        def: 240,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_018",
+      rarity: "SR",
+      slot: "BODY",
+      performance_type: "B3 DEF",
+      level100: {
+        hp: 1800,
+        atk: 0,
+        def: 1560,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_019",
+      rarity: "SR",
+      slot: "BODY",
+      performance_type: "B1 \u6A19\u6E96",
+      level100: {
+        hp: 4800,
+        atk: 0,
+        def: 960,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_020",
+      rarity: "SR",
+      slot: "BODY",
+      performance_type: "B2 HP",
+      level100: {
+        hp: 8400,
+        atk: 0,
+        def: 240,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_021",
+      rarity: "SR",
+      slot: "BODY",
+      performance_type: "B3 DEF",
+      level100: {
+        hp: 1800,
+        atk: 0,
+        def: 1560,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_022",
+      rarity: "SR",
+      slot: "BODY",
+      performance_type: "B1 \u6A19\u6E96",
+      level100: {
+        hp: 4800,
+        atk: 0,
+        def: 960,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_023",
+      rarity: "SR",
+      slot: "BODY",
+      performance_type: "B2 HP",
+      level100: {
+        hp: 8400,
+        atk: 0,
+        def: 240,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_024",
+      rarity: "SR",
+      slot: "BODY",
+      performance_type: "B3 DEF",
+      level100: {
+        hp: 1800,
+        atk: 0,
+        def: 1560,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_025",
+      rarity: "SR",
+      slot: "BODY",
+      performance_type: "B1 \u6A19\u6E96",
+      level100: {
+        hp: 4800,
+        atk: 0,
+        def: 960,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_026",
+      rarity: "SSR",
+      slot: "BODY",
+      performance_type: "B1 \u6A19\u6E96",
+      level100: {
+        hp: 8e3,
+        atk: 0,
+        def: 1600,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_027",
+      rarity: "SSR",
+      slot: "BODY",
+      performance_type: "B2 HP",
+      level100: {
+        hp: 14e3,
+        atk: 0,
+        def: 400,
+        luk: 0
+      }
+    },
+    {
+      id: "BODY_028",
+      rarity: "SSR",
+      slot: "BODY",
+      performance_type: "B3 DEF",
+      level100: {
+        hp: 3e3,
+        atk: 0,
+        def: 2600,
+        luk: 0
+      }
+    },
+    {
+      id: "HEAD_001",
+      rarity: "N",
+      slot: "HEAD",
+      performance_type: "H1 \u6A19\u6E96",
+      level100: {
+        hp: 720,
+        atk: 0,
+        def: 144,
+        luk: 0
+      }
+    },
+    {
+      id: "HEAD_002",
+      rarity: "N",
+      slot: "HEAD",
+      performance_type: "H2 HP",
+      level100: {
+        hp: 1260,
+        atk: 0,
+        def: 36,
+        luk: 0
+      }
+    },
+    {
+      id: "HEAD_003",
+      rarity: "N",
+      slot: "HEAD",
+      performance_type: "H3 DEF",
+      level100: {
+        hp: 270,
+        atk: 0,
+        def: 234,
+        luk: 0
+      }
+    },
+    {
+      id: "HEAD_004",
+      rarity: "N",
+      slot: "HEAD",
+      performance_type: "H1 \u6A19\u6E96",
+      level100: {
+        hp: 720,
+        atk: 0,
+        def: 144,
+        luk: 0
+      }
+    },
+    {
+      id: "HEAD_005",
+      rarity: "N",
+      slot: "HEAD",
+      performance_type: "H2 HP",
+      level100: {
+        hp: 1260,
+        atk: 0,
+        def: 36,
+        luk: 0
+      }
+    },
+    {
+      id: "HEAD_006",
+      rarity: "R",
+      slot: "HEAD",
+      performance_type: "H1 \u6A19\u6E96",
+      level100: {
+        hp: 1280,
+        atk: 0,
+        def: 256,
+        luk: 0
+      }
+    },
+    {
+      id: "HEAD_007",
+      rarity: "R",
+      slot: "HEAD",
+      performance_type: "H2 HP",
+      level100: {
+        hp: 2240,
+        atk: 0,
+        def: 64,
+        luk: 0
+      }
+    },
+    {
+      id: "HEAD_008",
+      rarity: "R",
+      slot: "HEAD",
+      performance_type: "H3 DEF",
+      level100: {
+        hp: 480,
+        atk: 0,
+        def: 416,
+        luk: 0
+      }
+    },
+    {
+      id: "HEAD_009",
+      rarity: "R",
+      slot: "HEAD",
+      performance_type: "H1 \u6A19\u6E96",
+      level100: {
+        hp: 1280,
+        atk: 0,
+        def: 256,
+        luk: 0
+      }
+    },
+    {
+      id: "HEAD_010",
+      rarity: "R",
+      slot: "HEAD",
+      performance_type: "H2 HP",
+      level100: {
+        hp: 2240,
+        atk: 0,
+        def: 64,
+        luk: 0
+      }
+    },
+    {
+      id: "HEAD_011",
+      rarity: "R",
+      slot: "HEAD",
+      performance_type: "H3 DEF",
+      level100: {
+        hp: 480,
+        atk: 0,
+        def: 416,
+        luk: 0
+      }
+    },
+    {
+      id: "HEAD_012",
+      rarity: "SR",
+      slot: "HEAD",
+      performance_type: "H1 \u6A19\u6E96",
+      level100: {
+        hp: 2400,
+        atk: 0,
+        def: 480,
+        luk: 0
+      }
+    },
+    {
+      id: "HEAD_013",
+      rarity: "SR",
+      slot: "HEAD",
+      performance_type: "H2 HP",
+      level100: {
+        hp: 4200,
+        atk: 0,
+        def: 120,
+        luk: 0
+      }
+    },
+    {
+      id: "HEAD_014",
+      rarity: "SR",
+      slot: "HEAD",
+      performance_type: "H3 DEF",
+      level100: {
+        hp: 900,
+        atk: 0,
+        def: 780,
+        luk: 0
+      }
+    },
+    {
+      id: "HEAD_015",
+      rarity: "SR",
+      slot: "HEAD",
+      performance_type: "H1 \u6A19\u6E96",
+      level100: {
+        hp: 2400,
+        atk: 0,
+        def: 480,
+        luk: 0
+      }
+    },
+    {
+      id: "HEAD_016",
+      rarity: "SR",
+      slot: "HEAD",
+      performance_type: "H2 HP",
+      level100: {
+        hp: 4200,
+        atk: 0,
+        def: 120,
+        luk: 0
+      }
+    },
+    {
+      id: "HEAD_017",
+      rarity: "SR",
+      slot: "HEAD",
+      performance_type: "H3 DEF",
+      level100: {
+        hp: 900,
+        atk: 0,
+        def: 780,
+        luk: 0
+      }
+    },
+    {
+      id: "HEAD_018",
+      rarity: "SSR",
+      slot: "HEAD",
+      performance_type: "H1 \u6A19\u6E96",
+      level100: {
+        hp: 4e3,
+        atk: 0,
+        def: 800,
+        luk: 0
+      }
+    },
+    {
+      id: "HEAD_019",
+      rarity: "SSR",
+      slot: "HEAD",
+      performance_type: "H3 DEF",
+      level100: {
+        hp: 1500,
+        atk: 0,
+        def: 1300,
+        luk: 0
+      }
+    },
+    {
+      id: "LEGS_001",
+      rarity: "N",
+      slot: "LEGS",
+      performance_type: "L1 DEF",
+      level100: {
+        hp: 900,
+        atk: 0,
+        def: 216,
+        luk: 0
+      }
+    },
+    {
+      id: "LEGS_002",
+      rarity: "N",
+      slot: "LEGS",
+      performance_type: "L2 HP",
+      level100: {
+        hp: 1260,
+        atk: 0,
+        def: 108,
+        luk: 0
+      }
+    },
+    {
+      id: "LEGS_003",
+      rarity: "N",
+      slot: "LEGS",
+      performance_type: "L3 LUK",
+      level100: {
+        hp: 540,
+        atk: 0,
+        def: 108,
+        luk: 4
+      }
+    },
+    {
+      id: "LEGS_004",
+      rarity: "N",
+      slot: "LEGS",
+      performance_type: "L1 DEF",
+      level100: {
+        hp: 900,
+        atk: 0,
+        def: 216,
+        luk: 0
+      }
+    },
+    {
+      id: "LEGS_005",
+      rarity: "N",
+      slot: "LEGS",
+      performance_type: "L2 HP",
+      level100: {
+        hp: 1260,
+        atk: 0,
+        def: 108,
+        luk: 0
+      }
+    },
+    {
+      id: "LEGS_006",
+      rarity: "R",
+      slot: "LEGS",
+      performance_type: "L1 DEF",
+      level100: {
+        hp: 1600,
+        atk: 0,
+        def: 384,
+        luk: 0
+      }
+    },
+    {
+      id: "LEGS_007",
+      rarity: "R",
+      slot: "LEGS",
+      performance_type: "L2 HP",
+      level100: {
+        hp: 2240,
+        atk: 0,
+        def: 192,
+        luk: 0
+      }
+    },
+    {
+      id: "LEGS_008",
+      rarity: "R",
+      slot: "LEGS",
+      performance_type: "L3 LUK",
+      level100: {
+        hp: 960,
+        atk: 0,
+        def: 192,
+        luk: 6
+      }
+    },
+    {
+      id: "LEGS_009",
+      rarity: "R",
+      slot: "LEGS",
+      performance_type: "L1 DEF",
+      level100: {
+        hp: 1600,
+        atk: 0,
+        def: 384,
+        luk: 0
+      }
+    },
+    {
+      id: "LEGS_010",
+      rarity: "R",
+      slot: "LEGS",
+      performance_type: "L2 HP",
+      level100: {
+        hp: 2240,
+        atk: 0,
+        def: 192,
+        luk: 0
+      }
+    },
+    {
+      id: "LEGS_011",
+      rarity: "R",
+      slot: "LEGS",
+      performance_type: "L3 LUK",
+      level100: {
+        hp: 960,
+        atk: 0,
+        def: 192,
+        luk: 6
+      }
+    },
+    {
+      id: "LEGS_012",
+      rarity: "SR",
+      slot: "LEGS",
+      performance_type: "L1 DEF",
+      level100: {
+        hp: 3e3,
+        atk: 0,
+        def: 720,
+        luk: 0
+      }
+    },
+    {
+      id: "LEGS_013",
+      rarity: "SR",
+      slot: "LEGS",
+      performance_type: "L2 HP",
+      level100: {
+        hp: 4200,
+        atk: 0,
+        def: 360,
+        luk: 0
+      }
+    },
+    {
+      id: "LEGS_014",
+      rarity: "SR",
+      slot: "LEGS",
+      performance_type: "L3 LUK",
+      level100: {
+        hp: 1800,
+        atk: 0,
+        def: 360,
+        luk: 8
+      }
+    },
+    {
+      id: "LEGS_015",
+      rarity: "SR",
+      slot: "LEGS",
+      performance_type: "L1 DEF",
+      level100: {
+        hp: 3e3,
+        atk: 0,
+        def: 720,
+        luk: 0
+      }
+    },
+    {
+      id: "LEGS_016",
+      rarity: "SR",
+      slot: "LEGS",
+      performance_type: "L2 HP",
+      level100: {
+        hp: 4200,
+        atk: 0,
+        def: 360,
+        luk: 0
+      }
+    },
+    {
+      id: "LEGS_017",
+      rarity: "SR",
+      slot: "LEGS",
+      performance_type: "L3 LUK",
+      level100: {
+        hp: 1800,
+        atk: 0,
+        def: 360,
+        luk: 8
+      }
+    },
+    {
+      id: "LEGS_018",
+      rarity: "SSR",
+      slot: "LEGS",
+      performance_type: "L1 DEF",
+      level100: {
+        hp: 5e3,
+        atk: 0,
+        def: 1200,
+        luk: 0
+      }
+    },
+    {
+      id: "LEGS_019",
+      rarity: "SSR",
+      slot: "LEGS",
+      performance_type: "L3 LUK",
+      level100: {
+        hp: 3e3,
+        atk: 0,
+        def: 600,
+        luk: 10
+      }
+    },
+    {
+      id: "WEAPON_001",
+      rarity: "N",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 720,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_002",
+      rarity: "N",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 720,
+        atk: 360,
+        def: 72,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_003",
+      rarity: "N",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 720,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_004",
+      rarity: "N",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 720,
+        atk: 360,
+        def: 72,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_005",
+      rarity: "N",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 720,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_006",
+      rarity: "N",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 720,
+        atk: 360,
+        def: 72,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_007",
+      rarity: "N",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 720,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_008",
+      rarity: "N",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 720,
+        atk: 360,
+        def: 72,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_009",
+      rarity: "R",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 1280,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_010",
+      rarity: "R",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 1280,
+        atk: 640,
+        def: 128,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_011",
+      rarity: "R",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 1280,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_012",
+      rarity: "R",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 1280,
+        atk: 640,
+        def: 128,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_013",
+      rarity: "R",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 1280,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_014",
+      rarity: "R",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 1280,
+        atk: 640,
+        def: 128,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_015",
+      rarity: "R",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 1280,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_016",
+      rarity: "R",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 1280,
+        atk: 640,
+        def: 128,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_017",
+      rarity: "R",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 1280,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_018",
+      rarity: "R",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 1280,
+        atk: 640,
+        def: 128,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_019",
+      rarity: "R",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 1280,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_020",
+      rarity: "R",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 1280,
+        atk: 640,
+        def: 128,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_021",
+      rarity: "R",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 1280,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_022",
+      rarity: "R",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 1280,
+        atk: 640,
+        def: 128,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_023",
+      rarity: "SR",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 2400,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_024",
+      rarity: "SR",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 2400,
+        atk: 1200,
+        def: 240,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_025",
+      rarity: "SR",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 2400,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_026",
+      rarity: "SR",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 2400,
+        atk: 1200,
+        def: 240,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_027",
+      rarity: "SR",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 2400,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_028",
+      rarity: "SR",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 2400,
+        atk: 1200,
+        def: 240,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_029",
+      rarity: "SR",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 2400,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_030",
+      rarity: "SR",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 2400,
+        atk: 1200,
+        def: 240,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_031",
+      rarity: "SR",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 2400,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_032",
+      rarity: "SR",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 2400,
+        atk: 1200,
+        def: 240,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_033",
+      rarity: "SR",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 2400,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_034",
+      rarity: "SR",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 2400,
+        atk: 1200,
+        def: 240,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_035",
+      rarity: "SR",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 2400,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_036",
+      rarity: "SR",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 2400,
+        atk: 1200,
+        def: 240,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_037",
+      rarity: "SR",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 2400,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_038",
+      rarity: "SR",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 2400,
+        atk: 1200,
+        def: 240,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_039",
+      rarity: "SR",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 2400,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_040",
+      rarity: "SR",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 2400,
+        atk: 1200,
+        def: 240,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_041",
+      rarity: "SSR",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 4e3,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_042",
+      rarity: "SSR",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 4e3,
+        atk: 2e3,
+        def: 400,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_043",
+      rarity: "SSR",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 4e3,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_044",
+      rarity: "SSR",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 4e3,
+        atk: 2e3,
+        def: 400,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_045",
+      rarity: "SSR",
+      slot: "WEAPON",
+      performance_type: "W1 \u653B\u6483",
+      level100: {
+        hp: 0,
+        atk: 4e3,
+        def: 0,
+        luk: 0
+      }
+    },
+    {
+      id: "WEAPON_046",
+      rarity: "SSR",
+      slot: "WEAPON",
+      performance_type: "W2 \u8010\u4E45\u6DF7\u5408",
+      level100: {
+        hp: 4e3,
+        atk: 2e3,
+        def: 400,
+        luk: 0
+      }
+    }
+  ]
+};
+
+// config/game04-master-assets.json
+var game04_master_assets_default = {
+  version: "2026-09-18",
+  namingAuthority: "GAME04_SENGOKU_ITEM_SKILL_EQUIPMENT_NAME_FIX_2026-09-16",
+  connectedAssetSourceCommit: "aa72725",
+  summary: {
+    total: 258,
+    sengokuConnected: 63,
+    awaitingGenericImage: 165,
+    awaitingExclusiveImage: 30
+  },
+  assets: [
+    {
+      id: "CHAR_EXP_S",
+      name: "\u4FEE\u7DF4\u306E\u5175\u7CE7\u4E38\u30FB\u5C0F",
+      category: "ITEM",
+      path: "/items/char_exp_s.png",
+      format: "PNG",
+      size: [
+        512,
+        512
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "CHAR_EXP_M",
+      name: "\u4FEE\u7DF4\u306E\u5175\u7CE7\u4E38\u30FB\u4E2D",
+      category: "ITEM",
+      path: "/items/char_exp_m.png",
+      format: "PNG",
+      size: [
+        512,
+        512
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "CHAR_EXP_L",
+      name: "\u4FEE\u7DF4\u306E\u5175\u7CE7\u4E38\u30FB\u5927",
+      category: "ITEM",
+      path: "/items/char_exp_l.png",
+      format: "PNG",
+      size: [
+        512,
+        512
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "EQUIP_EXP_S",
+      name: "\u935B\u932C\u306E\u7825\u77F3\u30FB\u5C0F",
+      category: "ITEM",
+      path: "/items/equip_exp_s.png",
+      format: "PNG",
+      size: [
+        512,
+        512
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "EQUIP_EXP_M",
+      name: "\u935B\u932C\u306E\u7825\u77F3\u30FB\u4E2D",
+      category: "ITEM",
+      path: "/items/equip_exp_m.png",
+      format: "PNG",
+      size: [
+        512,
+        512
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "EQUIP_EXP_L",
+      name: "\u935B\u932C\u306E\u7825\u77F3\u30FB\u5927",
+      category: "ITEM",
+      path: "/items/equip_exp_l.png",
+      format: "PNG",
+      size: [
+        512,
+        512
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "AWAKENING_BOOK",
+      name: "\u899A\u9192\u306E\u79D8\u5DFB",
+      category: "ITEM",
+      path: "/items/awakening_book.png",
+      format: "PNG",
+      size: [
+        512,
+        512
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_MANUAL",
+      name: "\u5965\u7FA9\u6307\u5357\u66F8",
+      category: "ITEM",
+      path: "/items/skill_manual.png",
+      format: "PNG",
+      size: [
+        512,
+        512
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "EQUIP_LB_PART",
+      name: "\u935B\u51B6\u306E\u79D8\u92FC",
+      category: "ITEM",
+      path: "/items/equip_lb_part.png",
+      format: "PNG",
+      size: [
+        512,
+        512
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "ENERGY_DRINK",
+      name: "\u6D3B\u529B\u4E38",
+      category: "ITEM",
+      path: "/items/energy_drink.png",
+      format: "PNG",
+      size: [
+        512,
+        512
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "PVP_POINT_TICKET",
+      name: "\u6C7A\u95D8\u72B6",
+      category: "ITEM",
+      path: "/items/pvp_point_ticket.png",
+      format: "PNG",
+      size: [
+        512,
+        512
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "RAID_POINT_TICKET",
+      name: "\u8A0E\u4F10\u4EE4",
+      category: "ITEM",
+      path: "/items/raid_point_ticket.png",
+      format: "PNG",
+      size: [
+        512,
+        512
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "NORMAL_GACHA_TICKET_CHARACTER",
+      name: "\u59EB\u6B66\u5C06\u53EC\u559A\u672D",
+      category: "ITEM",
+      path: "/items/normal_gacha_ticket_character.png",
+      format: "PNG",
+      size: [
+        512,
+        512
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "NORMAL_GACHA_TICKET_SKILL",
+      name: "\u6226\u6280\u53EC\u559A\u672D",
+      category: "ITEM",
+      path: "/items/normal_gacha_ticket_skill.png",
+      format: "PNG",
+      size: [
+        512,
+        512
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "NORMAL_GACHA_TICKET_EQUIPMENT",
+      name: "\u6B66\u5177\u53EC\u559A\u672D",
+      category: "ITEM",
+      path: "/items/normal_gacha_ticket_equipment.png",
+      format: "PNG",
+      size: [
+        512,
+        512
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SPECIAL_TICKET_CHARACTER",
+      name: "\u7279\u9078\u30FB\u59EB\u6B66\u5C06\u53EC\u559A\u672D",
+      category: "ITEM",
+      path: "/items/special_ticket_character.png",
+      format: "PNG",
+      size: [
+        512,
+        512
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SPECIAL_TICKET_SKILL",
+      name: "\u7279\u9078\u30FB\u6226\u6280\u53EC\u559A\u672D",
+      category: "ITEM",
+      path: "/items/special_ticket_skill.png",
+      format: "PNG",
+      size: [
+        512,
+        512
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SPECIAL_TICKET_EQUIPMENT",
+      name: "\u7279\u9078\u30FB\u6B66\u5177\u53EC\u559A\u672D",
+      category: "ITEM",
+      path: "/items/special_ticket_equipment.png",
+      format: "PNG",
+      size: [
+        512,
+        512
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_001",
+      name: "\u4E00\u6587\u5B57\u65AC\u308A",
+      category: "SKILL",
+      path: "/skills/skill_001_street_punch.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_002",
+      name: "\u7AF9\u675F\u306E\u5B88\u308A",
+      category: "SKILL",
+      path: "/skills/skill_002_quick_shield.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_003",
+      name: "\u85AC\u5E2B\u306E\u624B\u5F53",
+      category: "SKILL",
+      path: "/skills/skill_003_noise_heal.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_004",
+      name: "\u75BE\u98A8\u306E\u8DB3\u904B\u3073",
+      category: "SKILL",
+      path: "/skills/skill_004_step_dash.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_005",
+      name: "\u5FCD\u6CD5\u30FB\u6BD2\u91DD",
+      category: "SKILL",
+      path: "/skills/skill_005_poison_needle.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_006",
+      name: "\u9244\u58C1\u306E\u69CB\u3048",
+      category: "SKILL",
+      path: "/skills/skill_006_iron_guard.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_007",
+      name: "\u6311\u767A\u306E\u9B28",
+      category: "SKILL",
+      path: "/skills/skill_007_toxic_slang.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_008",
+      name: "\u5F13\u53D6\u308A\u306E\u4E00\u5C04",
+      category: "SKILL",
+      path: "/skills/skill_008_smart_snipe.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_009",
+      name: "\u596E\u8D77\u306E\u9663\u592A\u9F13",
+      category: "SKILL",
+      path: "/skills/skill_009_drug_injection.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_010",
+      name: "\u76EE\u6F70\u3057\u7C89",
+      category: "SKILL",
+      path: "/skills/skill_010_light_flash.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_011",
+      name: "\u6E3E\u8EAB\u306E\u592A\u5200",
+      category: "SKILL",
+      path: "/skills/skill_011_meditate.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_012",
+      name: "\u8599\u5200\u30FB\u5927\u65CB\u98A8",
+      category: "SKILL",
+      path: "/skills/skill_012_lucky_shoot.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_013",
+      name: "\u85AC\u5E2B\u306E\u5FDC\u6025\u624B\u5F53",
+      category: "SKILL",
+      path: "/skills/skill_013_charge_slash.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_014",
+      name: "\u7159\u5E55\u306E\u5B88\u9663",
+      category: "SKILL",
+      path: "/skills/skill_014_blunt_sweep.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_015",
+      name: "\u7834\u7532\u306E\u706B\u85AC\u7389",
+      category: "SKILL",
+      path: "/skills/skill_015_recovery_program.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_016",
+      name: "\u4EC1\u738B\u7ACB\u3061\u30FB\u7AF9\u675F\u76FE",
+      category: "SKILL",
+      path: "/skills/skill_016_smoke_screen.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_017",
+      name: "\u9B28\u306E\u58F0",
+      category: "SKILL",
+      path: "/skills/skill_017_acid_spray.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_018",
+      name: "\u91D1\u7815\u68D2\u30FB\u8133\u5929\u6483\u3061",
+      category: "SKILL",
+      path: "/skills/skill_018_jamming_wave.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_019",
+      name: "\u8840\u5438\u3044\u306E\u9023\u5203",
+      category: "SKILL",
+      path: "/skills/skill_019_impulse_barrier.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_020",
+      name: "\u65E9\u99C6\u3051\u306E\u53F7\u4EE4",
+      category: "SKILL",
+      path: "/skills/skill_020_indomitable_will.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_021",
+      name: "\u6025\u6240\u5C04\u3061",
+      category: "SKILL",
+      path: "/skills/skill_021_high_voltage.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_022",
+      name: "\u5927\u8599\u5200\u30FB\u93A7\u5D29\u3057",
+      category: "SKILL",
+      path: "/skills/skill_022_tactical_reload.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_023",
+      name: "\u79D8\u85AC\u30FB\u91D1\u5275\u818F",
+      category: "SKILL",
+      path: "/skills/skill_023_double_drive.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_024",
+      name: "\u7AF9\u675F\u30FB\u9244\u58C1\u9663",
+      category: "SKILL",
+      path: "/skills/skill_024_inspiring_roar.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_025",
+      name: "\u5FCD\u6CD5\u30FB\u7159\u7389\u4E71\u821E",
+      category: "SKILL",
+      path: "/skills/skill_025_protect_shield.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_026",
+      name: "\u6C7A\u8D77\u306E\u5927\u53F7\u4EE4",
+      category: "SKILL",
+      path: "/skills/skill_026_venom_blade.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_027",
+      name: "\u8840\u98A8\u65AC\u308A",
+      category: "SKILL",
+      path: "/skills/skill_027_synapse_burst.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_028",
+      name: "\u93A7\u901A\u3057",
+      category: "SKILL",
+      path: "/skills/skill_028_nanomachine_storm.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_029",
+      name: "\u85AC\u5E2B\u306E\u6D3B\u547D\u8853",
+      category: "SKILL",
+      path: "/skills/skill_029_toxic_gas.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_030",
+      name: "\u4E71\u7834\u30FB\u4F1D\u4EE4\u5C01\u3058",
+      category: "SKILL",
+      path: "/skills/skill_030_force_field.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_031",
+      name: "\u653B\u9632\u4E00\u4F53\u30FB\u69CD\u887E",
+      category: "SKILL",
+      path: "/skills/skill_031_hyper_accel.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_032",
+      name: "\u5FCD\u6CD5\u30FB\u6BD2\u5203",
+      category: "SKILL",
+      path: "/skills/skill_032_stun_grenade.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_033",
+      name: "\u660E\u93E1\u6B62\u6C34",
+      category: "SKILL",
+      path: "/skills/skill_033_atomic_cannon.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_034",
+      name: "\u5FCD\u6CD5\u30FB\u9583\u5149\u7389",
+      category: "SKILL",
+      path: "/skills/skill_034_life_steal.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_035",
+      name: "\u80CC\u6C34\u306E\u9663",
+      category: "SKILL",
+      path: "/skills/skill_035_hologram_decoy.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_036",
+      name: "\u5965\u7FA9\u30FB\u4E00\u5200\u4E21\u65AD",
+      category: "SKILL",
+      path: "/skills/skill_036_power_of_unity.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_037",
+      name: "\u5965\u7FA9\u30FB\u5343\u5203\u4E71\u821E",
+      category: "SKILL",
+      path: "/skills/skill_037_crimson_end_bullet.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_038",
+      name: "\u91D1\u57CE\u9244\u58C1",
+      category: "SKILL",
+      path: "/skills/skill_038_barrier_shatter.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_039",
+      name: "\u79D8\u5965\u7FA9\u30FB\u795E\u533B\u306E\u9663",
+      category: "SKILL",
+      path: "/skills/skill_039_timeline_rush.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_040",
+      name: "\u5996\u8853\u30FB\u8755\u307F\u306E\u9ED2\u9727",
+      category: "SKILL",
+      path: "/skills/skill_040_execution_strike.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_041",
+      name: "\u8987\u9053\u306E\u5927\u53F7\u4EE4",
+      category: "SKILL",
+      path: "/skills/skill_041_quick_search.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_042",
+      name: "\u79D8\u5965\u7FA9\u30FB\u8840\u685C\u4E71\u821E",
+      category: "SKILL",
+      path: "/skills/skill_042_linked_strike.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_043",
+      name: "\u5965\u7FA9\u30FB\u5730\u88C2\u5927\u69CC",
+      category: "SKILL",
+      path: "/skills/skill_043_gouge_wound.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_044",
+      name: "\u80CC\u6C34\u30FB\u4FEE\u7F85\u8FD4\u3057",
+      category: "SKILL",
+      path: "/skills/skill_044_cycle_off.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_045",
+      name: "\u8ECD\u7565\u30FB\u7DCF\u653B\u3081\u306E\u53F7\u4EE4",
+      category: "SKILL",
+      path: "/skills/skill_045_preparation.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "SENGOKU_CONNECTED"
+    },
+    {
+      id: "SKILL_046",
+      name: "\u5996\u8853\u30FB\u6BD2\u8718\u86DB\u306E\u9663",
+      category: "SKILL",
+      path: "/skills/skill_046_life_extension.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "SKILL_047",
+      name: "\u5805\u9663\u30FB\u53CD\u6483\u306E\u69CD\u887E",
+      category: "SKILL",
+      path: "/skills/skill_047_chain_shield.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "SKILL_048",
+      name: "\u4E0D\u5C48\u30FB\u547D\u8108\u306E\u7948\u308A",
+      category: "SKILL",
+      path: "/skills/skill_048_provocation_trigger.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "SKILL_049",
+      name: "\u5FCD\u6CD5\u30FB\u5BB5\u95C7\u5C01\u3058",
+      category: "SKILL",
+      path: "/skills/skill_049_toxic_propagation.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "SKILL_050",
+      name: "\u79D8\u5965\u7FA9\u30FB\u93A7\u65AD\u3061",
+      category: "SKILL",
+      path: "/skills/skill_050_combo_heal.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "SKILL_051",
+      name: "\u525B\u62F3\u30FB\u4E00\u6483\u5FC5\u5012",
+      category: "SKILL",
+      path: "/skills/skill_051_draw_smash.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "SKILL_052",
+      name: "\u4FEE\u7F85\u306E\u731B\u653B",
+      category: "SKILL",
+      path: "/skills/skill_052_in_sync_breathing.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "SKILL_053",
+      name: "\u4EC1\u738B\u7ACB\u3061",
+      category: "SKILL",
+      path: "/skills/skill_053_coordinated_care.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "SKILL_054",
+      name: "\u8987\u738B\u306E\u5A01\u5727",
+      category: "SKILL",
+      path: "/skills/skill_054_trump_card.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "SKILL_055",
+      name: "\u75BE\u98A8\u8FC5\u96F7",
+      category: "SKILL",
+      path: "/skills/skill_055_reserve_draw.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "SKILL_056",
+      name: "\u98A8\u5207\u308A\u306E\u592A\u5200",
+      category: "SKILL",
+      path: "/skills/skill_056_ap_accelerator.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "SKILL_057",
+      name: "\u72D0\u706B\u306E\u622F\u308C",
+      category: "SKILL",
+      path: "/skills/skill_057_tactical_charge.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "SKILL_058",
+      name: "\u5BB5\u95C7\u306E\u5E7B\u60D1",
+      category: "SKILL",
+      path: "/skills/skill_058_toxic_stimulation.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "SKILL_059",
+      name: "\u6226\u59EB\u306E\u5A01\u5149",
+      category: "SKILL",
+      path: "/skills/skill_059_venom_catalyst.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "SKILL_060",
+      name: "\u79D8\u5965\u7FA9\u30FB\u547D\u7E4B\u304E",
+      category: "SKILL",
+      path: "/skills/skill_060_tactical_draw.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "SKILL_061",
+      name: "\u91D1\u525B\u5D29\u3057",
+      category: "SKILL",
+      path: "/skills/skill_061_adrenaline_rush.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "SKILL_062",
+      name: "\u80CC\u6C34\u306E\u4E00\u592A\u5200",
+      category: "SKILL",
+      path: "/skills/skill_062_cycle_advance.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "SKILL_063",
+      name: "\u8001\u7DF4\u306E\u5B88\u308A",
+      category: "SKILL",
+      path: "/skills/skill_063_limiter_release.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "SKILL_064",
+      name: "\u6D41\u6C34\u53CD\u6483",
+      category: "SKILL",
+      path: "/skills/skill_064_search_destroy.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "SKILL_065",
+      name: "\u97CB\u99C4\u5929\u306E\u5148\u99C6\u3051",
+      category: "SKILL",
+      path: "/skills/skill_065_absolute_discipline.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "SKILL_066",
+      name: "\u75BE\u98A8\u9023\u65AC",
+      category: "SKILL",
+      path: "/skills/skill_066_discard_storm.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "SKILL_067",
+      name: "\u5FCD\u6CD5\u30FB\u53E3\u5C01\u3058",
+      category: "SKILL",
+      path: "/skills/skill_067_blessing_of_neon.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "SKILL_068",
+      name: "\u4E7E\u5764\u4E00\u64F2",
+      category: "SKILL",
+      path: "/skills/skill_068_underhand_deal.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "SKILL_069",
+      name: "\u7D05\u84EE\u306E\u4E00\u6483",
+      category: "SKILL",
+      path: "/skills/skill_069_disruption.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "SKILL_070",
+      name: "\u5BB5\u95C7\u306E\u546A\u8A5B",
+      category: "SKILL",
+      path: "/skills/skill_070_jamming_barrier.jpg",
+      format: "JPEG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "WEAPON_001",
+      name: "\u5C0F\u5200",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_001.png",
+      format: "PNG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_002",
+      name: "\u706B\u7E04\u77ED\u7B52",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_002.png",
+      format: "PNG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_003",
+      name: "\u91D1\u7815\u68D2",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_003.png",
+      format: "PNG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_004",
+      name: "\u5C71\u5200",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_004.png",
+      format: "PNG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_005",
+      name: "\u5341\u624B",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_005.png",
+      format: "PNG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_006",
+      name: "\u5C0F\u67C4",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_006.png",
+      format: "PNG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_007",
+      name: "\u9244\u68D2",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_007.png",
+      format: "PNG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_008",
+      name: "\u9244\u62F3",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_008.png",
+      format: "PNG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_009",
+      name: "\u9244\u9264\u68D2",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_009.png",
+      format: "PNG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_010",
+      name: "\u5927\u53E3\u5F84\u77ED\u7B52",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_010.png",
+      format: "PNG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_011",
+      name: "\u77ED\u5200",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_011.png",
+      format: "PNG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_012",
+      name: "\u6539\u826F\u706B\u7E04\u77ED\u7B52",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_012.png",
+      format: "PNG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_013",
+      name: "\u6563\u5F3E\u706B\u7E04\u9283",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_013.png",
+      format: "PNG",
+      size: [
+        1024,
+        1024
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_014",
+      name: "\u6226\u5834\u5C0F\u5200",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_014.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_015",
+      name: "\u9244\u5341\u624B",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_015.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_016",
+      name: "\u5FCD\u3073\u9023\u5F29",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_016.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_017",
+      name: "\u5927\u69CC",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_017.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_018",
+      name: "\u53CC\u5203\u5C0F\u5200",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_018.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_019",
+      name: "\u92FC\u7CF8",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_019.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_020",
+      name: "\u5F37\u5F13",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_020.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_021",
+      name: "\u9264\u722A",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_021.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_022",
+      name: "\u5357\u86EE\u5927\u7B52",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_022.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_023",
+      name: "\u75FA\u308C\u6BD2\u306E\u77ED\u5200",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_023.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_024",
+      name: "\u9023\u5F29\u30FB\u75BE\u98A8",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_024.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_025",
+      name: "\u7834\u57CE\u5927\u69CC",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_025.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_026",
+      name: "\u4ED5\u8FBC\u307F\u5200\u300E\u9ED2\u66DC\u300F",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_026.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_027",
+      name: "\u9244\u7832\u300E\u70C8\u706B\u300F",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_027.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_028",
+      name: "\u5996\u5200\u300E\u5438\u8840\u300F",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_028.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_029",
+      name: "\u6BD2\u4ED5\u8FBC\u307F\u77ED\u5200",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_029.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_030",
+      name: "\u6563\u5F3E\u706B\u7E04\u9283\u300E\u96F7\u5EA7\u300F",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_030.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_031",
+      name: "\u5927\u7B52\u300E\u68FA\u300F",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_031.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_032",
+      name: "\u53CC\u77ED\u7B52",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_032.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_033",
+      name: "\u5341\u624B\u300E\u91D1\u525B\u300F",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_033.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_034",
+      name: "\u5FCD\u5200",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_034.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_035",
+      name: "\u96A0\u3057\u77ED\u7B52",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_035.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_036",
+      name: "\u5200\u300E\u5F71\u6253\u3061\u300F",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_036.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_037",
+      name: "\u72D9\u6483\u706B\u7E04\u9283",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_037.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_038",
+      name: "\u9244\u9264\u722A",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_038.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_039",
+      name: "\u5FCD\u5F13\u300E\u9759\u5BC2\u300F",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_039.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_040",
+      name: "\u86C7\u8179\u5263",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_040.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_041",
+      name: "\u5927\u8EAB\u69CD",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_041.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_042",
+      name: "\u9244\u62F3\u300E\u963F\u4FEE\u7F85\u300F",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_042.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_043",
+      name: "\u5996\u5200\u300E\u6BD2\u86C7\u300F",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_043.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_044",
+      name: "\u5200\u300E\u96FB\u5149\u77F3\u706B\u300F",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_044.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_045",
+      name: "\u5927\u7B52\u300E\u7D42\u672B\u306E\u9418\u300F",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_045.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_046",
+      name: "\u91D1\u7259\u306E\u77ED\u5200",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_046.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "WEAPON_047",
+      name: "\u8C6A\u5263\u300E\u70B9\u706B\u300F",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_047.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "WEAPON_048",
+      name: "\u75BE\u98A8\u5200",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_048.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "WEAPON_049",
+      name: "\u6BD2\u86C7\u306E\u9ED2\u5203",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_049.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "WEAPON_050",
+      name: "\u652F\u914D\u8005\u306E\u9244\u6247",
+      category: "EQUIPMENT",
+      path: "/equipments/weapon_050.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "HEAD_001",
+      name: "\u6728\u7DBF\u9262\u5DFB",
+      category: "EQUIPMENT",
+      path: "/equipments/head_001.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "HEAD_002",
+      name: "\u8D64\u5099\u3048\u9262\u5DFB",
+      category: "EQUIPMENT",
+      path: "/equipments/head_002.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "HEAD_003",
+      name: "\u982D\u5DFE",
+      category: "EQUIPMENT",
+      path: "/equipments/head_003.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "HEAD_004",
+      name: "\u4F5C\u696D\u7B20",
+      category: "EQUIPMENT",
+      path: "/equipments/head_004.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "HEAD_005",
+      name: "\u52DD\u904B\u306E\u70CF\u5E3D\u5B50",
+      category: "EQUIPMENT",
+      path: "/equipments/head_005.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "HEAD_006",
+      name: "\u5FCD\u3073\u982D\u5DFE",
+      category: "EQUIPMENT",
+      path: "/equipments/head_006.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "HEAD_007",
+      name: "\u9ED2\u6F06\u9663\u7B20",
+      category: "EQUIPMENT",
+      path: "/equipments/head_007.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "HEAD_008",
+      name: "\u85AC\u5E2B\u306E\u8986\u9762",
+      category: "EQUIPMENT",
+      path: "/equipments/head_008.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "HEAD_009",
+      name: "\u9244\u515C",
+      category: "EQUIPMENT",
+      path: "/equipments/head_009.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "HEAD_010",
+      name: "\u9060\u898B\u773C\u93E1",
+      category: "EQUIPMENT",
+      path: "/equipments/head_010.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "HEAD_011",
+      name: "\u9244\u88FD\u9663\u7B20",
+      category: "EQUIPMENT",
+      path: "/equipments/head_011.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "HEAD_012",
+      name: "\u591C\u898B\u306E\u9060\u773C\u93E1",
+      category: "EQUIPMENT",
+      path: "/equipments/head_012.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "HEAD_013",
+      name: "\u9762\u982C\u30FB\u906E\u5149",
+      category: "EQUIPMENT",
+      path: "/equipments/head_013.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "HEAD_014",
+      name: "\u9244\u9762\u982C",
+      category: "EQUIPMENT",
+      path: "/equipments/head_014.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "HEAD_015",
+      name: "\u75BE\u98A8\u306E\u76EE\u5E87",
+      category: "EQUIPMENT",
+      path: "/equipments/head_015.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "HEAD_016",
+      name: "\u96A0\u5BC6\u982D\u5DFE",
+      category: "EQUIPMENT",
+      path: "/equipments/head_016.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "HEAD_017",
+      name: "\u9262\u91D1\u300E\u5343\u91CC\u773C\u300F",
+      category: "EQUIPMENT",
+      path: "/equipments/head_017.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "HEAD_018",
+      name: "\u515C\u300E\u9632\u5841\u300F",
+      category: "EQUIPMENT",
+      path: "/equipments/head_018.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "HEAD_019",
+      name: "\u8987\u8005\u306E\u76EE\u5E87",
+      category: "EQUIPMENT",
+      path: "/equipments/head_019.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "HEAD_020",
+      name: "\u8276\u82B1\u306E\u9ED2\u7C2A",
+      category: "EQUIPMENT",
+      path: "/equipments/head_020.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "BODY_001",
+      name: "\u9EBB\u7FBD\u7E54",
+      category: "EQUIPMENT",
+      path: "/equipments/body_001.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_002",
+      name: "\u6728\u7DBF\u9663\u7FBD\u7E54",
+      category: "EQUIPMENT",
+      path: "/equipments/body_002.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_003",
+      name: "\u91CE\u826F\u7740",
+      category: "EQUIPMENT",
+      path: "/equipments/body_003.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_004",
+      name: "\u7D79\u7FBD\u7E54",
+      category: "EQUIPMENT",
+      path: "/equipments/body_004.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_005",
+      name: "\u9769\u80F4",
+      category: "EQUIPMENT",
+      path: "/equipments/body_005.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_006",
+      name: "\u3086\u3063\u305F\u308A\u5C0F\u8896",
+      category: "EQUIPMENT",
+      path: "/equipments/body_006.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_007",
+      name: "\u4E0A\u7B49\u9663\u7FBD\u7E54",
+      category: "EQUIPMENT",
+      path: "/equipments/body_007.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_008",
+      name: "\u9ED2\u9769\u9577\u7FBD\u7E54",
+      category: "EQUIPMENT",
+      path: "/equipments/body_008.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_009",
+      name: "\u4E8C\u679A\u80F4\u5177\u8DB3",
+      category: "EQUIPMENT",
+      path: "/equipments/body_009.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_010",
+      name: "\u8EFD\u88C5\u5C0F\u8896",
+      category: "EQUIPMENT",
+      path: "/equipments/body_010.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_011",
+      name: "\u6B66\u50CD\u304D\u306E\u9663\u7FBD\u7E54",
+      category: "EQUIPMENT",
+      path: "/equipments/body_011.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_012",
+      name: "\u7DBF\u5165\u308C\u80F4\u7740",
+      category: "EQUIPMENT",
+      path: "/equipments/body_012.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_013",
+      name: "\u98DB\u811A\u7FBD\u7E54",
+      category: "EQUIPMENT",
+      path: "/equipments/body_013.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_014",
+      name: "\u9244\u677F\u80F4",
+      category: "EQUIPMENT",
+      path: "/equipments/body_014.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_015",
+      name: "\u5FCD\u88C5\u675F",
+      category: "EQUIPMENT",
+      path: "/equipments/body_015.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_016",
+      name: "\u5927\u93A7\u30FB\u525B",
+      category: "EQUIPMENT",
+      path: "/equipments/body_016.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_017",
+      name: "\u9396\u5E37\u5B50",
+      category: "EQUIPMENT",
+      path: "/equipments/body_017.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_018",
+      name: "\u5357\u86EE\u80F4\u7FBD\u7E54",
+      category: "EQUIPMENT",
+      path: "/equipments/body_018.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_019",
+      name: "\u92F2\u6253\u9769\u80F4",
+      category: "EQUIPMENT",
+      path: "/equipments/body_019.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_020",
+      name: "\u5F53\u4E16\u5177\u8DB3\u30FB\u525B\u529B",
+      category: "EQUIPMENT",
+      path: "/equipments/body_020.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_021",
+      name: "\u75BE\u98A8\u9663\u7FBD\u7E54",
+      category: "EQUIPMENT",
+      path: "/equipments/body_021.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_022",
+      name: "\u4E0A\u7B49\u7F85\u7D17\u9663\u7FBD\u7E54",
+      category: "EQUIPMENT",
+      path: "/equipments/body_022.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_023",
+      name: "\u5927\u93A7\u300E\u76FE\u58C1\u300F",
+      category: "EQUIPMENT",
+      path: "/equipments/body_023.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_024",
+      name: "\u96A0\u5BC6\u9396\u5E37\u5B50",
+      category: "EQUIPMENT",
+      path: "/equipments/body_024.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_025",
+      name: "\u5929\u9D5E\u7D68\u306E\u9663\u7FBD\u7E54",
+      category: "EQUIPMENT",
+      path: "/equipments/body_025.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_026",
+      name: "\u8987\u738B\u306E\u5927\u93A7",
+      category: "EQUIPMENT",
+      path: "/equipments/body_026.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_027",
+      name: "\u86C7\u7D0B\u306E\u7D79\u5C0F\u8896",
+      category: "EQUIPMENT",
+      path: "/equipments/body_027.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_028",
+      name: "\u6226\u59EB\u306E\u8EFD\u88C5\u5177\u8DB3",
+      category: "EQUIPMENT",
+      path: "/equipments/body_028.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "BODY_029",
+      name: "\u7D05\u84EE\u306E\u9663\u7FBD\u7E54",
+      category: "EQUIPMENT",
+      path: "/equipments/body_029.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "BODY_030",
+      name: "\u822C\u82E5\u523A\u7E4D\u306E\u9663\u7FBD\u7E54",
+      category: "EQUIPMENT",
+      path: "/equipments/body_030.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "LEGS_001",
+      name: "\u8EFD\u88C5\u88B4",
+      category: "EQUIPMENT",
+      path: "/equipments/legs_001.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "LEGS_002",
+      name: "\u7D99\u304E\u5F53\u3066\u88B4",
+      category: "EQUIPMENT",
+      path: "/equipments/legs_002.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "LEGS_003",
+      name: "\u91CE\u88B4",
+      category: "EQUIPMENT",
+      path: "/equipments/legs_003.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "LEGS_004",
+      name: "\u8349\u978B\u30FB\u75BE\u98A8",
+      category: "EQUIPMENT",
+      path: "/equipments/legs_004.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "LEGS_005",
+      name: "\u811A\u7D46",
+      category: "EQUIPMENT",
+      path: "/equipments/legs_005.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "LEGS_006",
+      name: "\u9769\u88B4",
+      category: "EQUIPMENT",
+      path: "/equipments/legs_006.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "LEGS_007",
+      name: "\u5F37\u5316\u91CE\u88B4",
+      category: "EQUIPMENT",
+      path: "/equipments/legs_007.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "LEGS_008",
+      name: "\u4F0A\u8CC0\u88B4",
+      category: "EQUIPMENT",
+      path: "/equipments/legs_008.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "LEGS_009",
+      name: "\u7D30\u8EAB\u88B4",
+      category: "EQUIPMENT",
+      path: "/equipments/legs_009.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "LEGS_010",
+      name: "\u4F5C\u696D\u88B4",
+      category: "EQUIPMENT",
+      path: "/equipments/legs_010.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "LEGS_011",
+      name: "\u9632\u8B77\u91CE\u88B4",
+      category: "EQUIPMENT",
+      path: "/equipments/legs_011.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "LEGS_012",
+      name: "\u9244\u92F2\u811A\u7D46",
+      category: "EQUIPMENT",
+      path: "/equipments/legs_012.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "LEGS_013",
+      name: "\u5FCD\u3073\u811A\u7D46",
+      category: "EQUIPMENT",
+      path: "/equipments/legs_013.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "LEGS_014",
+      name: "\u91CD\u88C5\u811B\u5F53",
+      category: "EQUIPMENT",
+      path: "/equipments/legs_014.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "LEGS_015",
+      name: "\u901A\u6C17\u9396\u811A\u7D46",
+      category: "EQUIPMENT",
+      path: "/equipments/legs_015.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "LEGS_016",
+      name: "\u92F2\u6253\u9769\u88B4",
+      category: "EQUIPMENT",
+      path: "/equipments/legs_016.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "LEGS_017",
+      name: "\u75BE\u98A8\u8DB3\u888B\u300E\u9583\u5149\u300F",
+      category: "EQUIPMENT",
+      path: "/equipments/legs_017.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "LEGS_018",
+      name: "\u5927\u811B\u5F53\u300E\u9632\u5841\u300F",
+      category: "EQUIPMENT",
+      path: "/equipments/legs_018.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "LEGS_019",
+      name: "\u97CB\u99C4\u5929\u306E\u8349\u978B",
+      category: "EQUIPMENT",
+      path: "/equipments/legs_019.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "LEGS_020",
+      name: "\u6F06\u9ED2\u306E\u5FCD\u3073\u811A\u7D46",
+      category: "EQUIPMENT",
+      path: "/equipments/legs_020.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "ACCESSORY_001",
+      name: "\u9285\u306E\u8033\u98FE\u308A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_001.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_002",
+      name: "\u9244\u8F2A\u306E\u6307\u74B0",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_002.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_003",
+      name: "\u9769\u7D10\u306E\u9996\u98FE\u308A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_003.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_004",
+      name: "\u6B66\u904B\u306E\u6728\u672D",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_004.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_005",
+      name: "\u75BE\u98A8\u306E\u624B\u7532\u7D10",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_005.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_006",
+      name: "\u9280\u9396\u306E\u9996\u98FE\u308A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_006.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_007",
+      name: "\u771F\u936E\u306E\u8155\u8F2A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_007.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_008",
+      name: "\u98A8\u9234\u306E\u6839\u4ED8",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_008.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_009",
+      name: "\u9B3C\u9762\u306E\u6839\u4ED8",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_009.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_010",
+      name: "\u7DE8\u9769\u306E\u8155\u8F2A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_010.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_011",
+      name: "\u65E9\u99C6\u3051\u306E\u5B88\u308A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_011.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_012",
+      name: "\u9EC4\u91D1\u5927\u9396",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_012.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_013",
+      name: "\u6B66\u529F\u306E\u5370\u5224\u6307\u8F2A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_013.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_014",
+      name: "\u9244\u8F2A\u306E\u9996\u98FE\u308A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_014.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_015",
+      name: "\u68D8\u9244\u306E\u8155\u8F2A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_015.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_016",
+      name: "\u5C0F\u67C4\u306E\u9996\u98FE\u308A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_016.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_017",
+      name: "\u52DD\u8CA0\u8CFD",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_017.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_018",
+      name: "\u6B66\u5177\u5E2F",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_018.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_019",
+      name: "\u9AD1\u9ACF\u9280\u8F2A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_019.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_020",
+      name: "\u75BE\u98A8\u306E\u8033\u98FE\u308A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_020.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_021",
+      name: "\u9244\u9396\u306E\u8170\u98FE\u308A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_021.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_022",
+      name: "\u5357\u86EE\u5341\u5B57\u5B88",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_022.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_023",
+      name: "\u65E9\u99C6\u3051\u306E\u8B77\u7B26",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_023.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_024",
+      name: "\u86C7\u7D0B\u8155\u8F2A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_024.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_025",
+      name: "\u706B\u7E04\u5F3E\u306E\u9996\u98FE\u308A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_025.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_026",
+      name: "\u5F62\u898B\u306E\u5B88\u888B",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_026.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_027",
+      name: "\u767D\u91D1\u5370\u5224\u6307\u8F2A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_027.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_028",
+      name: "\u8170\u5DEE\u3057\u77E2\u7B52",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_028.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_029",
+      name: "\u84BC\u7389\u306E\u6307\u8F2A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_029.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_030",
+      name: "\u767D\u9280\u5927\u9396",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_030.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_031",
+      name: "\u6B7B\u795E\u306E\u9280\u5B88",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_031.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_032",
+      name: "\u767E\u5408\u7D0B\u9996\u98FE\u308A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_032.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_033",
+      name: "\u9B3C\u68D8\u306E\u9996\u8F2A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_033.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_034",
+      name: "\u91D1\u525B\u77F3\u306E\u8B77\u8F2A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_034.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_035",
+      name: "\u539F\u77F3\u7FE1\u7FE0\u8155\u8F2A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_035.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_036",
+      name: "\u6C34\u6676\u306E\u5FA1\u5B88",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_036.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_037",
+      name: "\u98A8\u8AAD\u307F\u306E\u8155\u8F2A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_037.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_038",
+      name: "\u9ED2\u7D0B\u306E\u8B77\u7B26",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_038.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_039",
+      name: "\u9244\u67B7\u306E\u8155\u8F2A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_039.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_040",
+      name: "\u7D05\u7389\u91D1\u98FE\u308A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_040.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_041",
+      name: "\u7C60\u624B\u30FB\u525B",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_041.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_042",
+      name: "\u86C7\u795E\u306E\u8DB3\u8F2A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_042.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_043",
+      name: "\u9AD1\u9ACF\u9244\u5B88",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_043.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_044",
+      name: "\u91D1\u525B\u306E\u8155\u7532",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_044.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_045",
+      name: "\u6708\u767D\u77F3\u306E\u895F\u98FE\u308A",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_045.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_046",
+      name: "\u6B66\u5C06\u306E\u7FE1\u7FE0\u5B88",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_046.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_047",
+      name: "\u6F06\u5857\u308A\u306E\u685C\u6839\u4ED8",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_047.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_048",
+      name: "\u5BB5\u95C7\u306E\u5B9D\u73E0",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_048.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_GENERIC_IMAGE"
+    },
+    {
+      id: "ACCESSORY_049",
+      name: "\u904B\u547D\u306E\u8B77\u7B26",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_049.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    },
+    {
+      id: "ACCESSORY_050",
+      name: "\u5973\u738B\u306E\u5370\u5224",
+      category: "EQUIPMENT",
+      path: "/equipments/accessory_050.png",
+      format: "PNG",
+      size: [
+        341,
+        341
+      ],
+      status: "AWAITING_EXCLUSIVE_IMAGE"
+    }
+  ]
+};
+
+// src/theme/sengoku-masters.json
+var sengoku_masters_default = {
+  ACCESSORY_001: "\u9285\u306E\u8033\u98FE\u308A",
+  ACCESSORY_002: "\u9244\u8F2A\u306E\u6307\u74B0",
+  ACCESSORY_003: "\u9769\u7D10\u306E\u9996\u98FE\u308A",
+  ACCESSORY_004: "\u6B66\u904B\u306E\u6728\u672D",
+  ACCESSORY_005: "\u75BE\u98A8\u306E\u624B\u7532\u7D10",
+  ACCESSORY_006: "\u9280\u9396\u306E\u9996\u98FE\u308A",
+  ACCESSORY_007: "\u771F\u936E\u306E\u8155\u8F2A",
+  ACCESSORY_008: "\u98A8\u9234\u306E\u6839\u4ED8",
+  ACCESSORY_009: "\u9B3C\u9762\u306E\u6839\u4ED8",
+  ACCESSORY_010: "\u7DE8\u9769\u306E\u8155\u8F2A",
+  ACCESSORY_011: "\u65E9\u99C6\u3051\u306E\u5B88\u308A",
+  ACCESSORY_012: "\u9EC4\u91D1\u5927\u9396",
+  ACCESSORY_013: "\u6B66\u529F\u306E\u5370\u5224\u6307\u8F2A",
+  ACCESSORY_014: "\u9244\u8F2A\u306E\u9996\u98FE\u308A",
+  ACCESSORY_015: "\u68D8\u9244\u306E\u8155\u8F2A",
+  ACCESSORY_016: "\u5C0F\u67C4\u306E\u9996\u98FE\u308A",
+  ACCESSORY_017: "\u52DD\u8CA0\u8CFD",
+  ACCESSORY_018: "\u6B66\u5177\u5E2F",
+  ACCESSORY_019: "\u9AD1\u9ACF\u9280\u8F2A",
+  ACCESSORY_020: "\u75BE\u98A8\u306E\u8033\u98FE\u308A",
+  ACCESSORY_021: "\u9244\u9396\u306E\u8170\u98FE\u308A",
+  ACCESSORY_022: "\u5357\u86EE\u5341\u5B57\u5B88",
+  ACCESSORY_023: "\u65E9\u99C6\u3051\u306E\u8B77\u7B26",
+  ACCESSORY_024: "\u86C7\u7D0B\u8155\u8F2A",
+  ACCESSORY_025: "\u706B\u7E04\u5F3E\u306E\u9996\u98FE\u308A",
+  ACCESSORY_026: "\u5F62\u898B\u306E\u5B88\u888B",
+  ACCESSORY_027: "\u767D\u91D1\u5370\u5224\u6307\u8F2A",
+  ACCESSORY_028: "\u8170\u5DEE\u3057\u77E2\u7B52",
+  ACCESSORY_029: "\u84BC\u7389\u306E\u6307\u8F2A",
+  ACCESSORY_030: "\u767D\u9280\u5927\u9396",
+  ACCESSORY_031: "\u6B7B\u795E\u306E\u9280\u5B88",
+  ACCESSORY_032: "\u767E\u5408\u7D0B\u9996\u98FE\u308A",
+  ACCESSORY_033: "\u9B3C\u68D8\u306E\u9996\u8F2A",
+  ACCESSORY_034: "\u91D1\u525B\u77F3\u306E\u8B77\u8F2A",
+  ACCESSORY_035: "\u539F\u77F3\u7FE1\u7FE0\u8155\u8F2A",
+  ACCESSORY_036: "\u6C34\u6676\u306E\u5FA1\u5B88",
+  ACCESSORY_037: "\u98A8\u8AAD\u307F\u306E\u8155\u8F2A",
+  ACCESSORY_038: "\u9ED2\u7D0B\u306E\u8B77\u7B26",
+  ACCESSORY_039: "\u9244\u67B7\u306E\u8155\u8F2A",
+  ACCESSORY_040: "\u7D05\u7389\u91D1\u98FE\u308A",
+  ACCESSORY_041: "\u7C60\u624B\u30FB\u525B",
+  ACCESSORY_042: "\u86C7\u795E\u306E\u8DB3\u8F2A",
+  ACCESSORY_043: "\u9AD1\u9ACF\u9244\u5B88",
+  ACCESSORY_044: "\u91D1\u525B\u306E\u8155\u7532",
+  ACCESSORY_045: "\u6708\u767D\u77F3\u306E\u895F\u98FE\u308A",
+  ACCESSORY_046: "\u6B66\u5C06\u306E\u7FE1\u7FE0\u5B88",
+  ACCESSORY_047: "\u6F06\u5857\u308A\u306E\u685C\u6839\u4ED8",
+  ACCESSORY_048: "\u5BB5\u95C7\u306E\u5B9D\u73E0",
+  ACCESSORY_049: "\u904B\u547D\u306E\u8B77\u7B26",
+  ACCESSORY_050: "\u5973\u738B\u306E\u5370\u5224",
+  AWAKENING_BOOK: "\u899A\u9192\u306E\u79D8\u5DFB",
+  BODY_001: "\u9EBB\u7FBD\u7E54",
+  BODY_002: "\u6728\u7DBF\u9663\u7FBD\u7E54",
+  BODY_003: "\u91CE\u826F\u7740",
+  BODY_004: "\u7D79\u7FBD\u7E54",
+  BODY_005: "\u9769\u80F4",
+  BODY_006: "\u3086\u3063\u305F\u308A\u5C0F\u8896",
+  BODY_007: "\u4E0A\u7B49\u9663\u7FBD\u7E54",
+  BODY_008: "\u9ED2\u9769\u9577\u7FBD\u7E54",
+  BODY_009: "\u4E8C\u679A\u80F4\u5177\u8DB3",
+  BODY_010: "\u8EFD\u88C5\u5C0F\u8896",
+  BODY_011: "\u6B66\u50CD\u304D\u306E\u9663\u7FBD\u7E54",
+  BODY_012: "\u7DBF\u5165\u308C\u80F4\u7740",
+  BODY_013: "\u98DB\u811A\u7FBD\u7E54",
+  BODY_014: "\u9244\u677F\u80F4",
+  BODY_015: "\u5FCD\u88C5\u675F",
+  BODY_016: "\u5927\u93A7\u30FB\u525B",
+  BODY_017: "\u9396\u5E37\u5B50",
+  BODY_018: "\u5357\u86EE\u80F4\u7FBD\u7E54",
+  BODY_019: "\u92F2\u6253\u9769\u80F4",
+  BODY_020: "\u5F53\u4E16\u5177\u8DB3\u30FB\u525B\u529B",
+  BODY_021: "\u75BE\u98A8\u9663\u7FBD\u7E54",
+  BODY_022: "\u4E0A\u7B49\u7F85\u7D17\u9663\u7FBD\u7E54",
+  BODY_023: "\u5927\u93A7\u300E\u76FE\u58C1\u300F",
+  BODY_024: "\u96A0\u5BC6\u9396\u5E37\u5B50",
+  BODY_025: "\u5929\u9D5E\u7D68\u306E\u9663\u7FBD\u7E54",
+  BODY_026: "\u8987\u738B\u306E\u5927\u93A7",
+  BODY_027: "\u86C7\u7D0B\u306E\u7D79\u5C0F\u8896",
+  BODY_028: "\u6226\u59EB\u306E\u8EFD\u88C5\u5177\u8DB3",
+  BODY_029: "\u7D05\u84EE\u306E\u9663\u7FBD\u7E54",
+  BODY_030: "\u822C\u82E5\u523A\u7E4D\u306E\u9663\u7FBD\u7E54",
+  CHAR_EXP_L: "\u4FEE\u7DF4\u306E\u5175\u7CE7\u4E38\u30FB\u5927",
+  CHAR_EXP_M: "\u4FEE\u7DF4\u306E\u5175\u7CE7\u4E38\u30FB\u4E2D",
+  CHAR_EXP_S: "\u4FEE\u7DF4\u306E\u5175\u7CE7\u4E38\u30FB\u5C0F",
+  ENERGY_DRINK: "\u6D3B\u529B\u4E38",
+  EQUIP_EXP_L: "\u935B\u932C\u306E\u7825\u77F3\u30FB\u5927",
+  EQUIP_EXP_M: "\u935B\u932C\u306E\u7825\u77F3\u30FB\u4E2D",
+  EQUIP_EXP_S: "\u935B\u932C\u306E\u7825\u77F3\u30FB\u5C0F",
+  EQUIP_LB_PART: "\u935B\u51B6\u306E\u79D8\u92FC",
+  HEAD_001: "\u6728\u7DBF\u9262\u5DFB",
+  HEAD_002: "\u8D64\u5099\u3048\u9262\u5DFB",
+  HEAD_003: "\u982D\u5DFE",
+  HEAD_004: "\u4F5C\u696D\u7B20",
+  HEAD_005: "\u52DD\u904B\u306E\u70CF\u5E3D\u5B50",
+  HEAD_006: "\u5FCD\u3073\u982D\u5DFE",
+  HEAD_007: "\u9ED2\u6F06\u9663\u7B20",
+  HEAD_008: "\u85AC\u5E2B\u306E\u8986\u9762",
+  HEAD_009: "\u9244\u515C",
+  HEAD_010: "\u9060\u898B\u773C\u93E1",
+  HEAD_011: "\u9244\u88FD\u9663\u7B20",
+  HEAD_012: "\u591C\u898B\u306E\u9060\u773C\u93E1",
+  HEAD_013: "\u9762\u982C\u30FB\u906E\u5149",
+  HEAD_014: "\u9244\u9762\u982C",
+  HEAD_015: "\u75BE\u98A8\u306E\u76EE\u5E87",
+  HEAD_016: "\u96A0\u5BC6\u982D\u5DFE",
+  HEAD_017: "\u9262\u91D1\u300E\u5343\u91CC\u773C\u300F",
+  HEAD_018: "\u515C\u300E\u9632\u5841\u300F",
+  HEAD_019: "\u8987\u8005\u306E\u76EE\u5E87",
+  HEAD_020: "\u8276\u82B1\u306E\u9ED2\u7C2A",
+  LEGS_001: "\u8EFD\u88C5\u88B4",
+  LEGS_002: "\u7D99\u304E\u5F53\u3066\u88B4",
+  LEGS_003: "\u91CE\u88B4",
+  LEGS_004: "\u8349\u978B\u30FB\u75BE\u98A8",
+  LEGS_005: "\u811A\u7D46",
+  LEGS_006: "\u9769\u88B4",
+  LEGS_007: "\u5F37\u5316\u91CE\u88B4",
+  LEGS_008: "\u4F0A\u8CC0\u88B4",
+  LEGS_009: "\u7D30\u8EAB\u88B4",
+  LEGS_010: "\u4F5C\u696D\u88B4",
+  LEGS_011: "\u9632\u8B77\u91CE\u88B4",
+  LEGS_012: "\u9244\u92F2\u811A\u7D46",
+  LEGS_013: "\u5FCD\u3073\u811A\u7D46",
+  LEGS_014: "\u91CD\u88C5\u811B\u5F53",
+  LEGS_015: "\u901A\u6C17\u9396\u811A\u7D46",
+  LEGS_016: "\u92F2\u6253\u9769\u88B4",
+  LEGS_017: "\u75BE\u98A8\u8DB3\u888B\u300E\u9583\u5149\u300F",
+  LEGS_018: "\u5927\u811B\u5F53\u300E\u9632\u5841\u300F",
+  LEGS_019: "\u97CB\u99C4\u5929\u306E\u8349\u978B",
+  LEGS_020: "\u6F06\u9ED2\u306E\u5FCD\u3073\u811A\u7D46",
+  NORMAL_GACHA_TICKET_CHARACTER: "\u59EB\u6B66\u5C06\u53EC\u559A\u672D",
+  NORMAL_GACHA_TICKET_EQUIPMENT: "\u6B66\u5177\u53EC\u559A\u672D",
+  NORMAL_GACHA_TICKET_SKILL: "\u6226\u6280\u53EC\u559A\u672D",
+  PVP_POINT_TICKET: "\u6C7A\u95D8\u72B6",
+  RAID_POINT_TICKET: "\u8A0E\u4F10\u4EE4",
+  SKILL_001: "\u4E00\u6587\u5B57\u65AC\u308A",
+  SKILL_002: "\u7AF9\u675F\u306E\u5B88\u308A",
+  SKILL_003: "\u85AC\u5E2B\u306E\u624B\u5F53",
+  SKILL_004: "\u75BE\u98A8\u306E\u8DB3\u904B\u3073",
+  SKILL_005: "\u5FCD\u6CD5\u30FB\u6BD2\u91DD",
+  SKILL_006: "\u9244\u58C1\u306E\u69CB\u3048",
+  SKILL_007: "\u6311\u767A\u306E\u9B28",
+  SKILL_008: "\u5F13\u53D6\u308A\u306E\u4E00\u5C04",
+  SKILL_009: "\u596E\u8D77\u306E\u9663\u592A\u9F13",
+  SKILL_010: "\u76EE\u6F70\u3057\u7C89",
+  SKILL_011: "\u6E3E\u8EAB\u306E\u592A\u5200",
+  SKILL_012: "\u8599\u5200\u30FB\u5927\u65CB\u98A8",
+  SKILL_013: "\u85AC\u5E2B\u306E\u5FDC\u6025\u624B\u5F53",
+  SKILL_014: "\u7159\u5E55\u306E\u5B88\u9663",
+  SKILL_015: "\u7834\u7532\u306E\u706B\u85AC\u7389",
+  SKILL_016: "\u4EC1\u738B\u7ACB\u3061\u30FB\u7AF9\u675F\u76FE",
+  SKILL_017: "\u9B28\u306E\u58F0",
+  SKILL_018: "\u91D1\u7815\u68D2\u30FB\u8133\u5929\u6483\u3061",
+  SKILL_019: "\u8840\u5438\u3044\u306E\u9023\u5203",
+  SKILL_020: "\u65E9\u99C6\u3051\u306E\u53F7\u4EE4",
+  SKILL_021: "\u6025\u6240\u5C04\u3061",
+  SKILL_022: "\u5927\u8599\u5200\u30FB\u93A7\u5D29\u3057",
+  SKILL_023: "\u79D8\u85AC\u30FB\u91D1\u5275\u818F",
+  SKILL_024: "\u7AF9\u675F\u30FB\u9244\u58C1\u9663",
+  SKILL_025: "\u5FCD\u6CD5\u30FB\u7159\u7389\u4E71\u821E",
+  SKILL_026: "\u6C7A\u8D77\u306E\u5927\u53F7\u4EE4",
+  SKILL_027: "\u8840\u98A8\u65AC\u308A",
+  SKILL_028: "\u93A7\u901A\u3057",
+  SKILL_029: "\u85AC\u5E2B\u306E\u6D3B\u547D\u8853",
+  SKILL_030: "\u4E71\u7834\u30FB\u4F1D\u4EE4\u5C01\u3058",
+  SKILL_031: "\u653B\u9632\u4E00\u4F53\u30FB\u69CD\u887E",
+  SKILL_032: "\u5FCD\u6CD5\u30FB\u6BD2\u5203",
+  SKILL_033: "\u660E\u93E1\u6B62\u6C34",
+  SKILL_034: "\u5FCD\u6CD5\u30FB\u9583\u5149\u7389",
+  SKILL_035: "\u80CC\u6C34\u306E\u9663",
+  SKILL_036: "\u5965\u7FA9\u30FB\u4E00\u5200\u4E21\u65AD",
+  SKILL_037: "\u5965\u7FA9\u30FB\u5343\u5203\u4E71\u821E",
+  SKILL_038: "\u91D1\u57CE\u9244\u58C1",
+  SKILL_039: "\u79D8\u5965\u7FA9\u30FB\u795E\u533B\u306E\u9663",
+  SKILL_040: "\u5996\u8853\u30FB\u8755\u307F\u306E\u9ED2\u9727",
+  SKILL_041: "\u8987\u9053\u306E\u5927\u53F7\u4EE4",
+  SKILL_042: "\u79D8\u5965\u7FA9\u30FB\u8840\u685C\u4E71\u821E",
+  SKILL_043: "\u5965\u7FA9\u30FB\u5730\u88C2\u5927\u69CC",
+  SKILL_044: "\u80CC\u6C34\u30FB\u4FEE\u7F85\u8FD4\u3057",
+  SKILL_045: "\u8ECD\u7565\u30FB\u7DCF\u653B\u3081\u306E\u53F7\u4EE4",
+  SKILL_046: "\u5996\u8853\u30FB\u6BD2\u8718\u86DB\u306E\u9663",
+  SKILL_047: "\u5805\u9663\u30FB\u53CD\u6483\u306E\u69CD\u887E",
+  SKILL_048: "\u4E0D\u5C48\u30FB\u547D\u8108\u306E\u7948\u308A",
+  SKILL_049: "\u5FCD\u6CD5\u30FB\u5BB5\u95C7\u5C01\u3058",
+  SKILL_050: "\u79D8\u5965\u7FA9\u30FB\u93A7\u65AD\u3061",
+  SKILL_051: "\u525B\u62F3\u30FB\u4E00\u6483\u5FC5\u5012",
+  SKILL_052: "\u4FEE\u7F85\u306E\u731B\u653B",
+  SKILL_053: "\u4EC1\u738B\u7ACB\u3061",
+  SKILL_054: "\u8987\u738B\u306E\u5A01\u5727",
+  SKILL_055: "\u75BE\u98A8\u8FC5\u96F7",
+  SKILL_056: "\u98A8\u5207\u308A\u306E\u592A\u5200",
+  SKILL_057: "\u72D0\u706B\u306E\u622F\u308C",
+  SKILL_058: "\u5BB5\u95C7\u306E\u5E7B\u60D1",
+  SKILL_059: "\u6226\u59EB\u306E\u5A01\u5149",
+  SKILL_060: "\u79D8\u5965\u7FA9\u30FB\u547D\u7E4B\u304E",
+  SKILL_061: "\u91D1\u525B\u5D29\u3057",
+  SKILL_062: "\u80CC\u6C34\u306E\u4E00\u592A\u5200",
+  SKILL_063: "\u8001\u7DF4\u306E\u5B88\u308A",
+  SKILL_064: "\u6D41\u6C34\u53CD\u6483",
+  SKILL_065: "\u97CB\u99C4\u5929\u306E\u5148\u99C6\u3051",
+  SKILL_066: "\u75BE\u98A8\u9023\u65AC",
+  SKILL_067: "\u5FCD\u6CD5\u30FB\u53E3\u5C01\u3058",
+  SKILL_068: "\u4E7E\u5764\u4E00\u64F2",
+  SKILL_069: "\u7D05\u84EE\u306E\u4E00\u6483",
+  SKILL_070: "\u5BB5\u95C7\u306E\u546A\u8A5B",
+  SKILL_MANUAL: "\u5965\u7FA9\u6307\u5357\u66F8",
+  SPECIAL_TICKET_CHARACTER: "\u7279\u9078\u30FB\u59EB\u6B66\u5C06\u53EC\u559A\u672D",
+  SPECIAL_TICKET_EQUIPMENT: "\u7279\u9078\u30FB\u6B66\u5177\u53EC\u559A\u672D",
+  SPECIAL_TICKET_SKILL: "\u7279\u9078\u30FB\u6226\u6280\u53EC\u559A\u672D",
+  WEAPON_001: "\u5C0F\u5200",
+  WEAPON_002: "\u706B\u7E04\u77ED\u7B52",
+  WEAPON_003: "\u91D1\u7815\u68D2",
+  WEAPON_004: "\u5C71\u5200",
+  WEAPON_005: "\u5341\u624B",
+  WEAPON_006: "\u5C0F\u67C4",
+  WEAPON_007: "\u9244\u68D2",
+  WEAPON_008: "\u9244\u62F3",
+  WEAPON_009: "\u9244\u9264\u68D2",
+  WEAPON_010: "\u5927\u53E3\u5F84\u77ED\u7B52",
+  WEAPON_011: "\u77ED\u5200",
+  WEAPON_012: "\u6539\u826F\u706B\u7E04\u77ED\u7B52",
+  WEAPON_013: "\u6563\u5F3E\u706B\u7E04\u9283",
+  WEAPON_014: "\u6226\u5834\u5C0F\u5200",
+  WEAPON_015: "\u9244\u5341\u624B",
+  WEAPON_016: "\u5FCD\u3073\u9023\u5F29",
+  WEAPON_017: "\u5927\u69CC",
+  WEAPON_018: "\u53CC\u5203\u5C0F\u5200",
+  WEAPON_019: "\u92FC\u7CF8",
+  WEAPON_020: "\u5F37\u5F13",
+  WEAPON_021: "\u9264\u722A",
+  WEAPON_022: "\u5357\u86EE\u5927\u7B52",
+  WEAPON_023: "\u75FA\u308C\u6BD2\u306E\u77ED\u5200",
+  WEAPON_024: "\u9023\u5F29\u30FB\u75BE\u98A8",
+  WEAPON_025: "\u7834\u57CE\u5927\u69CC",
+  WEAPON_026: "\u4ED5\u8FBC\u307F\u5200\u300E\u9ED2\u66DC\u300F",
+  WEAPON_027: "\u9244\u7832\u300E\u70C8\u706B\u300F",
+  WEAPON_028: "\u5996\u5200\u300E\u5438\u8840\u300F",
+  WEAPON_029: "\u6BD2\u4ED5\u8FBC\u307F\u77ED\u5200",
+  WEAPON_030: "\u6563\u5F3E\u706B\u7E04\u9283\u300E\u96F7\u5EA7\u300F",
+  WEAPON_031: "\u5927\u7B52\u300E\u68FA\u300F",
+  WEAPON_032: "\u53CC\u77ED\u7B52",
+  WEAPON_033: "\u5341\u624B\u300E\u91D1\u525B\u300F",
+  WEAPON_034: "\u5FCD\u5200",
+  WEAPON_035: "\u96A0\u3057\u77ED\u7B52",
+  WEAPON_036: "\u5200\u300E\u5F71\u6253\u3061\u300F",
+  WEAPON_037: "\u72D9\u6483\u706B\u7E04\u9283",
+  WEAPON_038: "\u9244\u9264\u722A",
+  WEAPON_039: "\u5FCD\u5F13\u300E\u9759\u5BC2\u300F",
+  WEAPON_040: "\u86C7\u8179\u5263",
+  WEAPON_041: "\u5927\u8EAB\u69CD",
+  WEAPON_042: "\u9244\u62F3\u300E\u963F\u4FEE\u7F85\u300F",
+  WEAPON_043: "\u5996\u5200\u300E\u6BD2\u86C7\u300F",
+  WEAPON_044: "\u5200\u300E\u96FB\u5149\u77F3\u706B\u300F",
+  WEAPON_045: "\u5927\u7B52\u300E\u7D42\u672B\u306E\u9418\u300F",
+  WEAPON_046: "\u91D1\u7259\u306E\u77ED\u5200",
+  WEAPON_047: "\u8C6A\u5263\u300E\u70B9\u706B\u300F",
+  WEAPON_048: "\u75BE\u98A8\u5200",
+  WEAPON_049: "\u6BD2\u86C7\u306E\u9ED2\u5203",
+  WEAPON_050: "\u652F\u914D\u8005\u306E\u9244\u6247"
+};
+
+// src/domain/redesign/formalGrowthMasters.ts
+var slots = { WEAPON: "weapon", HEAD: "head", BODY: "body", LEGS: "legs", ACCESSORY: "accessory1" };
+function getFormalEquipmentStats(id, level) {
+  if (!Number.isInteger(level) || level < 1 || level > 100) throw new Error("\u88C5\u5099Lv\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+  const row = formal_growth_equipment_default.equipment.find((e) => e.id === id);
+  if (!row) throw new Error("\u6B63\u5F0F\u88C5\u5099\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002");
+  const factor = 0.03 + 0.97 * ((level - 1) / 99) ** 1.5;
+  return { hp: row.level100.hp * factor, atk: row.level100.atk * factor, def: row.level100.def * factor, luk: row.level100.luk * factor, sp: 0 };
+}
+var FORMAL_GROWTH_EQUIPMENT_MASTERS = formal_growth_equipment_default.equipment.map((row) => {
+  const asset = game04_master_assets_default.assets.find((a) => a.id === row.id);
+  if (!asset || !slots[row.slot]) throw new Error(`\u6B63\u5F0F\u88C5\u5099\u306E\u7D20\u6750\u30FB\u90E8\u4F4D\u304C\u3042\u308A\u307E\u305B\u3093: ${row.id}`);
+  return { id: row.id, rarity: row.rarity, slot: slots[row.slot], name: sengoku_masters_default[row.id] ?? row.id, image: asset.path, stats: getFormalEquipmentStats(row.id, 1) };
+});
+var FORMAL_GROWTH_SKILL_IDS = raid_skill_values_default.filter((row) => row.lb === 0).map((row) => row.design_id);
+
+// src/domain/redesign/data/formal-character-stats.json
+var formal_character_stats_default = {
+  version: "GAME04_CHARACTER_NUMERIC_20260921",
+  source: "docs/product/master_sources_20260921/numeric.md",
+  sourceSha256: "749fbb58f0719ab495e6f7e8966c9da03d5db1781a483d3ba12cb9caaa7d8b39",
+  levels: [
+    1,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100
+  ],
+  anchors: {
+    N: {
+      atk: [
+        100,
+        200,
+        380,
+        600,
+        850,
+        1150,
+        1500,
+        1880,
+        2290,
+        2730,
+        3200
+      ],
+      hp: [
+        600,
+        1e3,
+        1600,
+        2400,
+        3400,
+        4600,
+        6e3,
+        7600,
+        9400,
+        11400,
+        13600
+      ],
+      def: [
+        30,
+        60,
+        110,
+        180,
+        270,
+        380,
+        510,
+        660,
+        830,
+        1020,
+        1230
+      ]
+    },
+    R: {
+      atk: [
+        150,
+        300,
+        550,
+        880,
+        1300,
+        1800,
+        2400,
+        3080,
+        3850,
+        4720,
+        5700
+      ],
+      hp: [
+        750,
+        1300,
+        2100,
+        3200,
+        4600,
+        6300,
+        8300,
+        10600,
+        13200,
+        16100,
+        19300
+      ],
+      def: [
+        40,
+        80,
+        150,
+        250,
+        380,
+        550,
+        750,
+        980,
+        1240,
+        1530,
+        1850
+      ]
+    },
+    SR: {
+      atk: [
+        300,
+        520,
+        900,
+        1450,
+        2200,
+        3150,
+        4300,
+        5650,
+        7200,
+        8950,
+        10900
+      ],
+      hp: [
+        1050,
+        1900,
+        3100,
+        4800,
+        7e3,
+        9700,
+        12900,
+        16600,
+        20800,
+        25500,
+        30700
+      ],
+      def: [
+        60,
+        120,
+        230,
+        390,
+        600,
+        880,
+        1220,
+        1620,
+        2080,
+        2600,
+        3180
+      ]
+    },
+    SSR: {
+      atk: [
+        500,
+        800,
+        1350,
+        2100,
+        3050,
+        4250,
+        5850,
+        7800,
+        10150,
+        12900,
+        16e3
+      ],
+      hp: [
+        1500,
+        2700,
+        4500,
+        7e3,
+        10200,
+        14200,
+        19e3,
+        24700,
+        31300,
+        38800,
+        47200
+      ],
+      def: [
+        90,
+        180,
+        350,
+        600,
+        950,
+        1400,
+        1950,
+        2600,
+        3350,
+        4200,
+        5150
+      ]
+    }
+  },
+  roles: {
+    \u653B\u6483: {
+      hp: 1,
+      atk: 1,
+      def: 1
+    },
+    \u5B88\u5099: {
+      hp: 1.4,
+      atk: 0.65,
+      def: 1.3
+    },
+    \u653B\u5B88: {
+      hp: 1.2,
+      atk: 0.85,
+      def: 1.15
+    },
+    "\u56DE\u5FA9\u30FB\u4FDD\u8B77": {
+      hp: 1.1,
+      atk: 0.9,
+      def: 1.05
+    },
+    \u652F\u63F4: {
+      hp: 1.2,
+      atk: 0.75,
+      def: 1.15
+    }
+  },
+  profiles: {
+    \u653B\u6483\u5BC4\u308A: {
+      hp: 0.97,
+      atk: 1.05,
+      def: 0.98,
+      luk: 0
+    },
+    HP\u5BC4\u308A: {
+      hp: 1.05,
+      atk: 0.97,
+      def: 0.98,
+      luk: 0
+    },
+    DEF\u5BC4\u308A: {
+      hp: 0.98,
+      atk: 0.97,
+      def: 1.05,
+      luk: 0
+    },
+    \u653B\u5B88\u5BC4\u308A: {
+      hp: 0.96,
+      atk: 1.02,
+      def: 1.02,
+      luk: 0
+    },
+    \u8010\u4E45\u5BC4\u308A: {
+      hp: 1.03,
+      atk: 0.95,
+      def: 1.02,
+      luk: 0
+    },
+    LUK\u5BC4\u308A: {
+      hp: 0.98,
+      atk: 0.97,
+      def: 1,
+      luk: 3
+    }
+  },
+  characters: [
+    {
+      id: "char_ageha_01",
+      name: "\u8C4A\u81E3\u79C0\u5409",
+      rarity: "SSR",
+      element: "\u5149",
+      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
+      profile: "HP\u5BC4\u308A",
+      expected100: {
+        hp: 54516,
+        atk: 13968,
+        def: 5299.35,
+        luk: 30
+      }
+    },
+    {
+      id: "char_alice_01",
+      name: "\u304F\u30CE\u4E00",
+      rarity: "N",
+      element: "\u6C34",
+      role: "\u653B\u6483",
+      profile: "LUK\u5BC4\u308A",
+      expected100: {
+        hp: 13328,
+        atk: 3104,
+        def: 1230,
+        luk: 33
+      }
+    },
+    {
+      id: "char_aoi_01",
+      name: "\u304A\u5E02\u306E\u65B9",
+      rarity: "R",
+      element: "\u706B",
+      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
+      profile: "\u653B\u6483\u5BC4\u308A",
+      expected100: {
+        hp: 20593.1,
+        atk: 5386.5,
+        def: 1903.65,
+        luk: 30
+      }
+    },
+    {
+      id: "char_cecile_01",
+      name: "\u4E95\u4F0A\u76F4\u864E",
+      rarity: "SR",
+      element: "\u6C34",
+      role: "\u5B88\u5099",
+      profile: "HP\u5BC4\u308A",
+      expected100: {
+        hp: 45129,
+        atk: 6872.45,
+        def: 4051.32,
+        luk: 30
+      }
+    },
+    {
+      id: "char_chang_01",
+      name: "\u4E0A\u6749\u666F\u52DD",
+      rarity: "R",
+      element: "\u6C34",
+      role: "\u652F\u63F4",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 23854.8,
+        atk: 4061.25,
+        def: 2170.05,
+        luk: 30
+      }
+    },
+    {
+      id: "char_daimon_01",
+      name: "\u4E95\u4F0A\u76F4\u653F",
+      rarity: "R",
+      element: "\u706B",
+      role: "\u653B\u6483",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 18528,
+        atk: 5814,
+        def: 1887,
+        luk: 30
+      }
+    },
+    {
+      id: "char_genji_01",
+      name: "\u4ECA\u5DDD\u7FA9\u5143",
+      rarity: "SR",
+      element: "\u98A8",
+      role: "\u652F\u63F4",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 37945.2,
+        atk: 7766.25,
+        def: 3730.14,
+        luk: 30
+      }
+    },
+    {
+      id: "char_go_01",
+      name: "\u6B66\u7530\u4FE1\u7384",
+      rarity: "SSR",
+      element: "\u706B",
+      role: "\u653B\u5B88",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 58339.2,
+        atk: 12920,
+        def: 6040.95,
+        luk: 30
+      }
+    },
+    {
+      id: "char_gou_01",
+      name: "\u4F1D\u4EE4",
+      rarity: "N",
+      element: "\u571F",
+      role: "\u652F\u63F4",
+      profile: "LUK\u5BC4\u308A",
+      expected100: {
+        hp: 15993.6,
+        atk: 2328,
+        def: 1414.5,
+        luk: 33
+      }
+    },
+    {
+      id: "char_jihoon_01",
+      name: "\u524D\u7530\u5229\u5BB6",
+      rarity: "R",
+      element: "\u571F",
+      role: "\u653B\u5B88",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 22233.6,
+        atk: 4941.9,
+        def: 2170.05,
+        luk: 30
+      }
+    },
+    {
+      id: "char_joe_01",
+      name: "\u5317\u6761\u6C0F\u5EB7",
+      rarity: "R",
+      element: "\u571F",
+      role: "\u5B88\u5099",
+      profile: "DEF\u5BC4\u308A",
+      expected100: {
+        hp: 26479.6,
+        atk: 3593.85,
+        def: 2525.25,
+        luk: 30
+      }
+    },
+    {
+      id: "char_kaede_01",
+      name: "\u771F\u7530\u5E78\u6751",
+      rarity: "SSR",
+      element: "\u706B",
+      role: "\u653B\u6483",
+      profile: "\u653B\u6483\u5BC4\u308A",
+      expected100: {
+        hp: 45784,
+        atk: 16800,
+        def: 5047,
+        luk: 30
+      }
+    },
+    {
+      id: "char_kageyama_01",
+      name: "\u50E7\u5175",
+      rarity: "N",
+      element: "\u706B",
+      role: "\u5B88\u5099",
+      profile: "HP\u5BC4\u308A",
+      expected100: {
+        hp: 19992,
+        atk: 2017.6,
+        def: 1567.02,
+        luk: 30
+      }
+    },
+    {
+      id: "char_kaito_01",
+      name: "\u5927\u53CB\u5B97\u9E9F",
+      rarity: "R",
+      element: "\u5149",
+      role: "\u652F\u63F4",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 23854.8,
+        atk: 4061.25,
+        def: 2170.05,
+        luk: 30
+      }
+    },
+    {
+      id: "char_karen_01",
+      name: "\u5FB3\u5DDD\u5BB6\u5EB7",
+      rarity: "SSR",
+      element: "\u571F",
+      role: "\u652F\u63F4",
+      profile: "DEF\u5BC4\u308A",
+      expected100: {
+        hp: 55507.2,
+        atk: 11640,
+        def: 6218.625,
+        luk: 30
+      }
+    },
+    {
+      id: "char_kengo_01",
+      name: "\u672C\u591A\u5FE0\u52DD",
+      rarity: "SSR",
+      element: "\u571F",
+      role: "\u653B\u5B88",
+      profile: "DEF\u5BC4\u308A",
+      expected100: {
+        hp: 55507.2,
+        atk: 13192,
+        def: 6218.625,
+        luk: 30
+      }
+    },
+    {
+      id: "char_kenji_01",
+      name: "\u5C71\u4F0F",
+      rarity: "N",
+      element: "\u5149",
+      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
+      profile: "HP\u5BC4\u308A",
+      expected100: {
+        hp: 15708,
+        atk: 2793.6,
+        def: 1265.67,
+        luk: 30
+      }
+    },
+    {
+      id: "char_koharu_01",
+      name: "\u4E0A\u6749\u8B19\u4FE1",
+      rarity: "SSR",
+      element: "\u6C34",
+      role: "\u653B\u6483",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 45312,
+        atk: 16320,
+        def: 5253,
+        luk: 30
+      }
+    },
+    {
+      id: "char_leo_01",
+      name: "\u4F0A\u9054\u653F\u5B97",
+      rarity: "SSR",
+      element: "\u98A8",
+      role: "\u653B\u6483",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 45312,
+        atk: 16320,
+        def: 5253,
+        luk: 30
+      }
+    },
+    {
+      id: "char_leon_01",
+      name: "\u52A0\u85E4\u6E05\u6B63",
+      rarity: "SR",
+      element: "\u571F",
+      role: "\u5B88\u5099",
+      profile: "DEF\u5BC4\u308A",
+      expected100: {
+        hp: 42120.4,
+        atk: 6872.45,
+        def: 4340.7,
+        luk: 30
+      }
+    },
+    {
+      id: "char_long_01",
+      name: "\u5973\u4F8D",
+      rarity: "N",
+      element: "\u571F",
+      role: "\u653B\u5B88",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 15667.2,
+        atk: 2774.4,
+        def: 1442.79,
+        luk: 30
+      }
+    },
+    {
+      id: "char_lucas_01",
+      name: "\u5CF6\u6D25\u7FA9\u5F18",
+      rarity: "SR",
+      element: "\u706B",
+      role: "\u653B\u6483",
+      profile: "\u653B\u6483\u5BC4\u308A",
+      expected100: {
+        hp: 29779,
+        atk: 11445,
+        def: 3116.4,
+        luk: 30
+      }
+    },
+    {
+      id: "char_makoto_01",
+      name: "\u5C0F\u65E9\u5DDD\u9686\u666F",
+      rarity: "R",
+      element: "\u6C34",
+      role: "\u653B\u6483",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 18528,
+        atk: 5814,
+        def: 1887,
+        luk: 30
+      }
+    },
+    {
+      id: "char_mark_01",
+      name: "\u5C0F\u677E\u59EB",
+      rarity: "R",
+      element: "\u706B",
+      role: "\u653B\u5B88",
+      profile: "DEF\u5BC4\u308A",
+      expected100: {
+        hp: 22696.8,
+        atk: 4699.65,
+        def: 2233.875,
+        luk: 30
+      }
+    },
+    {
+      id: "char_martina_01",
+      name: "\u6226\u5DEB\u5973",
+      rarity: "N",
+      element: "\u706B",
+      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 15408.8,
+        atk: 2736,
+        def: 1317.33,
+        luk: 30
+      }
+    },
+    {
+      id: "char_masato_01",
+      name: "\u5F13\u5175",
+      rarity: "N",
+      element: "\u6C34",
+      role: "\u653B\u6483",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 13056,
+        atk: 3264,
+        def: 1254.6,
+        luk: 30
+      }
+    },
+    {
+      id: "char_maya_01",
+      name: "\u670D\u90E8\u534A\u8535",
+      rarity: "SR",
+      element: "\u95C7",
+      role: "\u653B\u6483",
+      profile: "LUK\u5BC4\u308A",
+      expected100: {
+        hp: 30086,
+        atk: 10573,
+        def: 3180,
+        luk: 33
+      }
+    },
+    {
+      id: "char_mei_01",
+      name: "\u5C71\u672C\u52D8\u52A9",
+      rarity: "R",
+      element: "\u706B",
+      role: "\u653B\u6483",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 19879,
+        atk: 5415,
+        def: 1887,
+        luk: 30
+      }
+    },
+    {
+      id: "char_minami_01",
+      name: "\u5CF6\u5DE6\u8FD1",
+      rarity: "R",
+      element: "\u571F",
+      role: "\u653B\u5B88",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 23854.8,
+        atk: 4602.75,
+        def: 2170.05,
+        luk: 30
+      }
+    },
+    {
+      id: "char_mio_01",
+      name: "\u524D\u7530\u6176\u6B21",
+      rarity: "SSR",
+      element: "\u98A8",
+      role: "\u653B\u5B88",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 54374.4,
+        atk: 13872,
+        def: 6040.95,
+        luk: 30
+      }
+    },
+    {
+      id: "char_miyabi_01",
+      name: "\u660E\u667A\u5149\u79C0",
+      rarity: "SSR",
+      element: "\u95C7",
+      role: "\u653B\u6483",
+      profile: "LUK\u5BC4\u308A",
+      expected100: {
+        hp: 46256,
+        atk: 15520,
+        def: 5150,
+        luk: 33
+      }
+    },
+    {
+      id: "char_momoko_01",
+      name: "\u5CF6\u6D25\u7FA9\u4E45",
+      rarity: "R",
+      element: "\u706B",
+      role: "\u652F\u63F4",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 23854.8,
+        atk: 4061.25,
+        def: 2170.05,
+        luk: 30
+      }
+    },
+    {
+      id: "char_naoto_01",
+      name: "\u6F01\u5E2B",
+      rarity: "N",
+      element: "\u571F",
+      role: "\u653B\u5B88",
+      profile: "HP\u5BC4\u308A",
+      expected100: {
+        hp: 17136,
+        atk: 2638.4,
+        def: 1386.21,
+        luk: 30
+      }
+    },
+    {
+      id: "char_noa_01",
+      name: "\u67F4\u7530\u52DD\u5BB6",
+      rarity: "SR",
+      element: "\u571F",
+      role: "\u653B\u5B88",
+      profile: "HP\u5BC4\u308A",
+      expected100: {
+        hp: 38682,
+        atk: 8987.05,
+        def: 3583.86,
+        luk: 30
+      }
+    },
+    {
+      id: "char_reiji_01",
+      name: "\u7E54\u7530\u4FE1\u9577",
+      rarity: "SSR",
+      element: "\u706B",
+      role: "\u652F\u63F4",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 54374.4,
+        atk: 12240,
+        def: 6040.95,
+        luk: 30
+      }
+    },
+    {
+      id: "char_reina_01",
+      name: "\u6BDB\u5229\u5143\u5C31",
+      rarity: "SR",
+      element: "\u98A8",
+      role: "\u653B\u6483",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 31621,
+        atk: 10355,
+        def: 3243.6,
+        luk: 30
+      }
+    },
+    {
+      id: "char_ren_01",
+      name: "\u658E\u85E4\u9053\u4E09",
+      rarity: "R",
+      element: "\u95C7",
+      role: "\u653B\u6483",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 18528,
+        atk: 5814,
+        def: 1887,
+        luk: 30
+      }
+    },
+    {
+      id: "char_ren_male_01",
+      name: "\u672C\u9858\u5BFA\u9855\u5982",
+      rarity: "R",
+      element: "\u571F",
+      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 21866.9,
+        atk: 4873.5,
+        def: 1981.35,
+        luk: 30
+      }
+    },
+    {
+      id: "char_riki_01",
+      name: "\u6FC3\u59EB",
+      rarity: "SR",
+      element: "\u95C7",
+      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 34783.1,
+        atk: 9319.5,
+        def: 3405.78,
+        luk: 30
+      }
+    },
+    {
+      id: "char_rin_01",
+      name: "\u6B66\u7530\u52DD\u983C",
+      rarity: "R",
+      element: "\u706B",
+      role: "\u653B\u6483",
+      profile: "\u653B\u6483\u5BC4\u308A",
+      expected100: {
+        hp: 18721,
+        atk: 5985,
+        def: 1813,
+        luk: 30
+      }
+    },
+    {
+      id: "char_rui_01",
+      name: "\u76F4\u6C5F\u517C\u7D9A",
+      rarity: "SR",
+      element: "\u6C34",
+      role: "\u652F\u63F4",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 37945.2,
+        atk: 7766.25,
+        def: 3730.14,
+        luk: 30
+      }
+    },
+    {
+      id: "char_sakura_01",
+      name: "\u771F\u7530\u660C\u5E78",
+      rarity: "SR",
+      element: "\u706B",
+      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 34783.1,
+        atk: 9319.5,
+        def: 3405.78,
+        luk: 30
+      }
+    },
+    {
+      id: "char_sawat_01",
+      name: "\u706B\u85AC\u5E2B",
+      rarity: "N",
+      element: "\u706B",
+      role: "\u653B\u6483",
+      profile: "\u653B\u6483\u5BC4\u308A",
+      expected100: {
+        hp: 13192,
+        atk: 3360,
+        def: 1205.4,
+        luk: 30
+      }
+    },
+    {
+      id: "char_seiya_01",
+      name: "\u77F3\u7530\u4E09\u6210",
+      rarity: "SR",
+      element: "\u5149",
+      role: "\u5B88\u5099",
+      profile: "DEF\u5BC4\u308A",
+      expected100: {
+        hp: 42120.4,
+        atk: 6872.45,
+        def: 4340.7,
+        luk: 30
+      }
+    },
+    {
+      id: "char_serika_01",
+      name: "\u6D45\u4E95\u9577\u653F",
+      rarity: "R",
+      element: "\u98A8",
+      role: "\u5B88\u5099",
+      profile: "HP\u5BC4\u308A",
+      expected100: {
+        hp: 28371,
+        atk: 3593.85,
+        def: 2356.9,
+        luk: 30
+      }
+    },
+    {
+      id: "char_shin_01",
+      name: "\u7247\u5009\u666F\u7DB1",
+      rarity: "R",
+      element: "\u98A8",
+      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 21866.9,
+        atk: 4873.5,
+        def: 1981.35,
+        luk: 30
+      }
+    },
+    {
+      id: "char_shion_01",
+      name: "\u7532\u6590\u59EB",
+      rarity: "R",
+      element: "\u6C34",
+      role: "\u653B\u5B88",
+      profile: "HP\u5BC4\u308A",
+      expected100: {
+        hp: 24318,
+        atk: 4699.65,
+        def: 2084.95,
+        luk: 30
+      }
+    },
+    {
+      id: "char_shun_01",
+      name: "\u753A\u5A18",
+      rarity: "N",
+      element: "\u95C7",
+      role: "\u652F\u63F4",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 16809.6,
+        atk: 2280,
+        def: 1442.79,
+        luk: 30
+      }
+    },
+    {
+      id: "char_sora_01",
+      name: "\u7ACB\u82B1\u8ABE\u5343\u4EE3",
+      rarity: "SR",
+      element: "\u5149",
+      role: "\u653B\u6483",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 29472,
+        atk: 11118,
+        def: 3243.6,
+        luk: 30
+      }
+    },
+    {
+      id: "char_souta_01",
+      name: "\u8336\u5C4B\u306E\u5A18",
+      rarity: "N",
+      element: "\u6C34",
+      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
+      profile: "HP\u5BC4\u308A",
+      expected100: {
+        hp: 15708,
+        atk: 2793.6,
+        def: 1265.67,
+        luk: 30
+      }
+    },
+    {
+      id: "char_taiga_01",
+      name: "\u9577\u5B97\u6211\u90E8\u5143\u89AA",
+      rarity: "SR",
+      element: "\u6C34",
+      role: "\u653B\u5B88",
+      profile: "\u653B\u5B88\u5BC4\u308A",
+      expected100: {
+        hp: 35366.4,
+        atk: 9450.3,
+        def: 3730.14,
+        luk: 30
+      }
+    },
+    {
+      id: "char_takeshi_01",
+      name: "\u9670\u967D\u5E2B",
+      rarity: "N",
+      element: "\u98A8",
+      role: "\u652F\u63F4",
+      profile: "LUK\u5BC4\u308A",
+      expected100: {
+        hp: 15993.6,
+        atk: 2328,
+        def: 1414.5,
+        luk: 33
+      }
+    },
+    {
+      id: "char_takuro_01",
+      name: "\u96D1\u8CC0\u5B6B\u5E02",
+      rarity: "SR",
+      element: "\u98A8",
+      role: "\u653B\u6483",
+      profile: "\u653B\u6483\u5BC4\u308A",
+      expected100: {
+        hp: 29779,
+        atk: 11445,
+        def: 3116.4,
+        luk: 30
+      }
+    },
+    {
+      id: "char_tatsuya_01",
+      name: "\u884C\u5546\u4EBA",
+      rarity: "N",
+      element: "\u95C7",
+      role: "\u652F\u63F4",
+      profile: "LUK\u5BC4\u308A",
+      expected100: {
+        hp: 15993.6,
+        atk: 2328,
+        def: 1414.5,
+        luk: 33
+      }
+    },
+    {
+      id: "char_tetsu_01",
+      name: "\u9ED2\u7530\u5B98\u5175\u885B",
+      rarity: "SR",
+      element: "\u95C7",
+      role: "\u653B\u6483",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 31621,
+        atk: 10355,
+        def: 3243.6,
+        luk: 30
+      }
+    },
+    {
+      id: "char_tomoya_01",
+      name: "\u9244\u7832\u5175",
+      rarity: "N",
+      element: "\u6C34",
+      role: "\u653B\u6483",
+      profile: "\u653B\u6483\u5BC4\u308A",
+      expected100: {
+        hp: 13192,
+        atk: 3360,
+        def: 1205.4,
+        luk: 30
+      }
+    },
+    {
+      id: "char_yoshihiko_01",
+      name: "\u935B\u51B6\u5E2B",
+      rarity: "N",
+      element: "\u571F",
+      role: "\u5B88\u5099",
+      profile: "DEF\u5BC4\u308A",
+      expected100: {
+        hp: 18659.2,
+        atk: 2017.6,
+        def: 1678.95,
+        luk: 30
+      }
+    },
+    {
+      id: "char_yuji_01",
+      name: "\u7ACB\u82B1\u5B97\u8302",
+      rarity: "R",
+      element: "\u5149",
+      role: "\u653B\u6483",
+      profile: "\u653B\u6483\u5BC4\u308A",
+      expected100: {
+        hp: 18721,
+        atk: 5985,
+        def: 1813,
+        luk: 30
+      }
+    },
+    {
+      id: "char_yuki_01",
+      name: "\u7AF9\u4E2D\u534A\u5175\u885B",
+      rarity: "R",
+      element: "\u5149",
+      role: "\u5B88\u5099",
+      profile: "\u8010\u4E45\u5BC4\u308A",
+      expected100: {
+        hp: 27830.6,
+        atk: 3519.75,
+        def: 2453.1,
+        luk: 30
+      }
+    },
+    {
+      id: "char_yukina_01",
+      name: "\u7D30\u5DDD\u30AC\u30E9\u30B7\u30E3",
+      rarity: "R",
+      element: "\u5149",
+      role: "\u56DE\u5FA9\u30FB\u4FDD\u8B77",
+      profile: "LUK\u5BC4\u308A",
+      expected100: {
+        hp: 20805.4,
+        atk: 4976.1,
+        def: 1942.5,
+        luk: 33
+      }
+    }
+  ]
+};
+
+// src/domain/redesign/formalCharacterStats.ts
+var FORMAL_CHARACTER_STATS_VERSION = formal_character_stats_default.version;
+var elements = { \u706B: "fire", \u6C34: "water", \u571F: "earth", \u98A8: "wind", \u5149: "light", \u95C7: "dark" };
+var FORMAL_CHARACTER_ASSIGNMENTS = formal_character_stats_default.characters.map((row) => ({ ...row, rarity: row.rarity, element: elements[row.element] }));
+function interpolate(level, values) {
+  for (let i = 1; i < formal_character_stats_default.levels.length; i++) if (level <= formal_character_stats_default.levels[i]) return values[i - 1] + (values[i] - values[i - 1]) * (level - formal_character_stats_default.levels[i - 1]) / (formal_character_stats_default.levels[i] - formal_character_stats_default.levels[i - 1]);
+  return values[values.length - 1];
+}
+function getFormalCharacterStats(characterId, level, baseSp) {
+  if (!Number.isInteger(level) || level < 1 || level > 100) throw Error("\u6B66\u5C06Lv\u306F1\u301C100\u3067\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
+  const character2 = formal_character_stats_default.characters.find((row) => row.id === characterId);
+  if (!character2) throw Error(`\u6B63\u5F0F\u6B66\u5C06\u80FD\u529B\u304C\u3042\u308A\u307E\u305B\u3093: ${characterId}`);
+  const anchors = formal_character_stats_default.anchors[character2.rarity];
+  const role = formal_character_stats_default.roles[character2.role], profile = formal_character_stats_default.profiles[character2.profile];
+  const body = (key2) => interpolate(level, anchors[key2]) * role[key2] * profile[key2];
+  const luk = (level <= 50 ? 10 + 10 * (level - 1) / 49 : 20 + 10 * (level - 50) / 50) + profile.luk;
+  return { hp: body("hp"), atk: body("atk"), def: body("def"), luk, sp: baseSp };
+}
+
+// src/domain/redesign/growthMaster.ts
+var GROWTH_VERSION = "APPROVED_GROWTH_V1_20260921";
+var EXP_SIZES = ["small", "medium", "large", "xlarge"];
+var EXP_VALUES = { small: 100, medium: 1e3, large: 5e3, xlarge: 2e4 };
+var SOUL_UNLOCK = { N: 20, R: 40, SR: 60, SSR: 80 };
+var AWAKENING_SOULS = { N: [4, 6, 8, 10, 12], R: [8, 12, 16, 20, 24], SR: [12, 18, 24, 30, 36], SSR: [20, 30, 40, 50, 60] };
+var LB_STEPS = [1, 2, 3, 4, 5, 6, 8, 10, 12, 15];
+var SKILL_LB_FACTORS = { N: 1, R: 2, SR: 4, SSR: 8 };
+var EQUIPMENT_LB_FACTORS = { N: 1, R: 2, SR: 3, SSR: 6 };
+var DUPLICATE_SKILL_MATERIALS = { N: 1, R: 2, SR: 5, SSR: 20 };
+var DISMANTLE_MATERIALS = DUPLICATE_SKILL_MATERIALS;
+var EXP_TOTALS = { character: { N: 3e5, R: 45e4, SR: 75e4, SSR: 12e5 }, equipment: { N: 18e4, R: 27e4, SR: 45e4, SSR: 72e4 } };
+function cumulativeExp(kind, rarity, level) {
+  if (!Number.isInteger(level) || level < 1 || level > 100) throw new Error("Lv\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+  return level === 100 ? EXP_TOTALS[kind][rarity] : 10 * Math.floor(EXP_TOTALS[kind][rarity] * Math.pow((level - 1) / 99, 2.2) / 10 + 0.5);
+}
+function cumulativeCash(kind, rarity, level) {
+  const exp2 = cumulativeExp(kind, rarity, level);
+  return kind === "character" ? exp2 : Math.floor(exp2 / 2);
+}
+function playerCumulativeExp(level) {
+  let exp2 = 0;
+  for (let l = 1; l < Math.min(100, level); l++) exp2 += (l + 9) ** 2;
+  return exp2;
+}
+function applyPlayerExperience(level, exp2, gain, energy, energyMax) {
+  if (!Number.isSafeInteger(gain) || gain < 0) throw new Error("\u30D7\u30EC\u30A4\u30E4\u30FCEXP\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+  const nextExp = level >= 100 ? exp2 : Math.min(playerCumulativeExp(100), exp2 + gain);
+  let nextLevel = level;
+  while (nextLevel < 100 && nextExp >= playerCumulativeExp(nextLevel + 1)) nextLevel++;
+  return { level: nextLevel, exp: nextExp, energy: nextLevel > level ? Math.max(energy, energyMax) : energy };
+}
+function emptyGrowthInventory() {
+  return { expItems: { character: { small: 0, medium: 0, large: 0, xlarge: 0 }, equipment: { small: 0, medium: 0, large: 0, xlarge: 0 } }, carryExp: { character: 0, equipment: 0 }, genericSouls: { N: 0, R: 0, SR: 0, SSR: 0 }, soulSelectors: { N: 0, R: 0, SR: 0, SSR: 0 } };
+}
+
+// src/domain/redesign/growthReward.ts
+var RARITIES = ["N", "R", "SR", "SSR"];
+function isGrowthRewardKind(kind) {
+  return ["character_exp_item", "equipment_exp_item", "generic_soul", "soul_selector"].includes(kind);
+}
+function grantGrowthReward(original, reward) {
+  if (!Number.isSafeInteger(reward.amount) || reward.amount < 0) throw new Error("\u5831\u916C\u6570\u91CF\u304C\u4E0D\u6B63\u3067\u3059");
+  const state = structuredClone(original);
+  state.growthInventory ??= emptyGrowthInventory();
+  const inventory = state.growthInventory;
+  const add = (old) => {
+    const total = old + reward.amount;
+    if (!Number.isSafeInteger(old) || old < 0 || !Number.isSafeInteger(total)) throw new Error("\u80B2\u6210\u30A2\u30A4\u30C6\u30E0\u6B8B\u9AD8\u304C\u4E0D\u6B63\u3067\u3059");
+    return total;
+  };
+  if (reward.kind === "character_exp_item" || reward.kind === "equipment_exp_item") {
+    if (!EXP_SIZES.includes(reward.id)) throw new Error("EXP\u30A2\u30A4\u30C6\u30E0\u306E\u7A2E\u985E\u304C\u4E0D\u6B63\u3067\u3059");
+    const target = reward.kind === "character_exp_item" ? "character" : "equipment";
+    const size = reward.id;
+    inventory.expItems[target][size] = add(inventory.expItems[target][size]);
+  } else if (reward.kind === "generic_soul" || reward.kind === "soul_selector") {
+    if (!RARITIES.includes(reward.id)) throw new Error("\u9B42\u30A2\u30A4\u30C6\u30E0\u306E\u30EC\u30A2\u30EA\u30C6\u30A3\u304C\u4E0D\u6B63\u3067\u3059");
+    const target = reward.kind === "generic_soul" ? "genericSouls" : "soulSelectors";
+    const rarity = reward.id;
+    inventory[target][rarity] = add(inventory[target][rarity]);
+  } else throw new Error("\u80B2\u6210\u5831\u916C\u306E\u7A2E\u985E\u304C\u4E0D\u6B63\u3067\u3059");
+  return state;
+}
+
 // src/domain/redesign/acquisitions.ts
 var APPROVED_ACQUISITION_MASTER = {
   characterDuplicateSouls: 20,
@@ -20112,7 +20514,7 @@ function applyAcquisitionEvents(original, events, master) {
         state.souls[event.masterId] = (state.souls[event.masterId] ?? 0) + amount;
       }
     } else if (event.kind === "skill") {
-      const skillMaster = SKILL_MASTERS.find((m) => m.id === event.masterId);
+      const skillMaster = OWNABLE_SKILL_MASTERS.find((m) => m.id === event.masterId);
       if (!skillMaster) {
         defer("master_missing");
         continue;
@@ -25156,6 +25558,7 @@ function commonPreviewSkill(skill2) {
 }
 var SKILL_MASTERS = LEGACY_SKILL_MASTERS.map(commonPreviewSkill);
 var COMMON_SKILL_MASTERS = SKILL_MASTERS;
+var OWNABLE_SKILL_MASTERS = [...SKILL_MASTERS, ...FORMAL_SKILL_MASTERS];
 function prepareBattleWaves(waves, rules) {
   const frozen = structuredClone(waves);
   if (rules.version !== "common-v2-20260920" && rules.version !== "balance-v2-20260920") return frozen;
@@ -25200,7 +25603,9 @@ function buildBattleParty(state, rules = BATTLE_RULES) {
       }
     }
     return { id: master.id, name: master.name, image: master.image, level: owned.level, element: master.element, stats, skills: member.skillIds.slice(0, getSkillSlots(owned.awakening)).map((id) => {
-      const s = (rules.version === "common-v2-20260920" || rules.version === "balance-v2-20260920" ? SKILL_MASTERS : LEGACY_SKILL_MASTERS).find((s2) => s2.id === id), o = state.skills.find((s2) => s2.id === id);
+      const o = state.skills.find((s2) => s2.id === id);
+      if (o && isFormalSkillId(id)) return getFormalOwnedSkill(id, o.level);
+      const s = (rules.version === "common-v2-20260920" || rules.version === "balance-v2-20260920" ? SKILL_MASTERS : LEGACY_SKILL_MASTERS).find((s2) => s2.id === id);
       if (!s || !o) throw new Error("\u672A\u6240\u6301\u306E\u30B9\u30AD\u30EB\u3067\u3059");
       return { ...s, effects: s.effects.map((e) => ({ ...e, power: e.power * (1 + o.level * 0.05) })) };
     }), passives: rules.version === "balance-v2-20260920" ? getCharacterPassive(master, owned.awakening) ? [getCharacterPassive(master, owned.awakening)] : [] : master.passive && (rules.version !== "common-v2-20260920" || master.passive.stat === "atk" || master.passive.stat === "def") ? [{ ...master.passive, level: owned.awakening * 2, percent: master.passive.percent * (1 + owned.awakening * 2) }] : [] };
@@ -25208,7 +25613,7 @@ function buildBattleParty(state, rules = BATTLE_RULES) {
 }
 function createInitialState(userId) {
   const starters = CHARACTER_MASTERS.filter((c) => c.rarity === "N").slice(0, 5);
-  return { userId, version: 0, cash: 0, diamonds: 0, energy: 0, energyMax: 50, energyDrinks: 0, souls: {}, characters: starters.map((c) => ({ id: c.id, level: 1, awakening: 0, exp: 0, growthVersion: GROWTH_VERSION })), skills: SKILL_MASTERS.slice(0, 8).map((s) => ({ id: s.id, level: 0 })), equipment: [], deck: starters.slice(0, 3).map((c, i) => ({ characterId: c.id, skillIds: [SKILL_MASTERS[i % SKILL_MASTERS.length].id], equipment: {} })), materials: { character: 20, skill: 10, equipment: 20, equipmentLb: 5, unlock: 1 }, clearedStages: [], vipExpiresAt: null };
+  return { userId, version: 0, cash: 0, diamonds: 0, energy: 0, energyMax: 100, energyDrinks: 0, souls: {}, characters: starters.map((c) => ({ id: c.id, level: 1, awakening: 0, exp: 0, growthVersion: GROWTH_VERSION })), skills: SKILL_MASTERS.slice(0, 8).map((s) => ({ id: s.id, level: 0 })), equipment: [], deck: starters.slice(0, 3).map((c, i) => ({ characterId: c.id, skillIds: [SKILL_MASTERS[i % SKILL_MASTERS.length].id], equipment: {} })), materials: { character: 20, skill: 10, equipment: 20, equipmentLb: 5, unlock: 1 }, clearedStages: [], vipExpiresAt: null };
 }
 function importLegacyAssets(original, legacy) {
   const state = structuredClone(original);
@@ -25381,8 +25786,8 @@ function applyNormalGacha(original, payload, pool, requestId, now, policy, rando
 var GROWTH_PREVIEW_RULES = { characterLevelCaps: [50, 60, 70, 80, 90, 100], skillMax: 10, equipmentLevelCap: 100, equipmentLbMax: 10 };
 var EQUIPMENT_SLOTS = ["weapon", "head", "body", "legs", "accessory1", "accessory2"];
 var getCharacterLevelCap = (awakening) => GROWTH_PREVIEW_RULES.characterLevelCaps[Math.max(0, Math.min(5, awakening))];
-function requireValue(condition, message) {
-  if (!condition) throw new Error(message);
+function requireValue(condition2, message) {
+  if (!condition2) throw new Error(message);
 }
 function isEquipmentAssigned(state, id) {
   return state.deck.some((m) => Object.values(m.equipment).includes(id));
@@ -25404,7 +25809,7 @@ function validateDeck(state, deck) {
     requireValue(owned && owned.level > 0, "\u672A\u6240\u6301\u306E\u6B66\u5C06\u3067\u3059\u3002");
     requireValue(Array.isArray(member.skillIds) && member.skillIds.length <= getSkillSlots(owned.awakening), "\u30B9\u30AD\u30EB\u67A0\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002");
     requireValue(new Set(member.skillIds).size === member.skillIds.length, "\u540C\u3058\u6B66\u5C06\u306B\u540C\u4E00\u30B9\u30AD\u30EB\u306F\u88C5\u5099\u3067\u304D\u307E\u305B\u3093\u3002");
-    requireValue(member.skillIds.every((id) => state.skills.some((s) => s.id === id)), "\u672A\u6240\u6301\u306E\u30B9\u30AD\u30EB\u3067\u3059\u3002");
+    requireValue(member.skillIds.every((id) => state.skills.some((s) => s.id === id) && OWNABLE_SKILL_MASTERS.some((s) => s.id === id)), "\u672A\u6240\u6301\u306E\u30B9\u30AD\u30EB\u3067\u3059\u3002");
     requireValue(member.equipment && typeof member.equipment === "object", "\u88C5\u5099\u8A2D\u5B9A\u3092\u78BA\u8A8D\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
     for (const [slot, id] of Object.entries(member.equipment)) {
       requireValue(EQUIPMENT_SLOTS.includes(slot), "\u88C5\u5099\u90E8\u4F4D\u304C\u4E0D\u6B63\u3067\u3059\u3002");
@@ -25518,7 +25923,7 @@ function applyGrowthAction(input, action, payload) {
     return state;
   }
   if (action === "skill_level") {
-    const owned = state.skills.find((s) => s.id === payload.skillId), master = SKILL_MASTERS.find((s) => s.id === payload.skillId);
+    const owned = state.skills.find((s) => s.id === payload.skillId), master = OWNABLE_SKILL_MASTERS.find((s) => s.id === payload.skillId);
     requireValue(owned && master && owned.level < 10, "\u672A\u6240\u6301\u307E\u305F\u306F\u6700\u5927LB\u3067\u3059\u3002");
     const cost = LB_STEPS[owned.level] * SKILL_LB_FACTORS[master.rarity];
     requireValue(state.materials.skill >= cost && state.cash >= cost * 1e3, "\u30B9\u30AD\u30EBLB\u7D20\u6750\u307E\u305F\u306F\u92AD\u304C\u4E0D\u8DB3\u3057\u3066\u3044\u307E\u3059\u3002");
@@ -25560,6 +25965,83 @@ function applyGrowthAction(input, action, payload) {
   }
   throw new Error("\u5BFE\u5FDC\u3057\u3066\u3044\u306A\u3044\u80B2\u6210\u64CD\u4F5C\u3067\u3059\u3002");
 }
+
+// src/domain/redesign/approvedBackgrounds.ts
+var QUEST_BACKGROUND_PATHS = Object.fromEntries(
+  ["mikawa", "owari", "mino", "omi", "kai", "echigo", "kyoto", "izumo", "satsuma", "sekigahara"].map((id) => [id, `/bg/approved-20260925/quest-${id}.webp`])
+);
+var SSR_HOME_BACKGROUNDS = [
+  {
+    "id": "ssr:char_koharu_01",
+    "name": "\u96EA\u306E\u6625\u65E5\u5C71\u57CE",
+    "image": "/bg/approved-20260925/ssr-char_koharu_01.webp",
+    "characterId": "char_koharu_01",
+    "characterName": "\u4E0A\u6749\u8B19\u4FE1"
+  },
+  {
+    "id": "ssr:char_leo_01",
+    "name": "\u9752\u8449\u57CE\u3068\u4ED9\u53F0\u57CE\u4E0B",
+    "image": "/bg/approved-20260925/ssr-char_leo_01.webp",
+    "characterId": "char_leo_01",
+    "characterName": "\u4F0A\u9054\u653F\u5B97"
+  },
+  {
+    "id": "ssr:char_mio_01",
+    "name": "\u7C73\u6CA2\u57CE\u4E0B\u30FB\u82B1\u306E\u5BB4",
+    "image": "/bg/approved-20260925/ssr-char_mio_01.webp",
+    "characterId": "char_mio_01",
+    "characterName": "\u524D\u7530\u6176\u6B21"
+  },
+  {
+    "id": "ssr:char_karen_01",
+    "name": "\u99FF\u5E9C\u57CE\u3068\u57CE\u4E0B",
+    "image": "/bg/approved-20260925/ssr-char_karen_01.webp",
+    "characterId": "char_karen_01",
+    "characterName": "\u5FB3\u5DDD\u5BB6\u5EB7"
+  },
+  {
+    "id": "ssr:char_miyabi_01",
+    "name": "\u7435\u7436\u6E56\u7554\u306E\u5742\u672C\u57CE",
+    "image": "/bg/approved-20260925/ssr-char_miyabi_01.webp",
+    "characterId": "char_miyabi_01",
+    "characterName": "\u660E\u667A\u5149\u79C0"
+  },
+  {
+    "id": "ssr:char_kengo_01",
+    "name": "\u5927\u591A\u559C\u57CE\u3092\u671B\u3080\u5C71\u9053",
+    "image": "/bg/approved-20260925/ssr-char_kengo_01.webp",
+    "characterId": "char_kengo_01",
+    "characterName": "\u672C\u591A\u5FE0\u52DD"
+  },
+  {
+    "id": "ssr:char_go_01",
+    "name": "\u8E91\u8E85\u30F6\u5D0E\u9928\u3068\u7532\u5E9C\u76C6\u5730",
+    "image": "/bg/approved-20260925/ssr-char_go_01.webp",
+    "characterId": "char_go_01",
+    "characterName": "\u6B66\u7530\u4FE1\u7384"
+  },
+  {
+    "id": "ssr:char_kaede_01",
+    "name": "\u4E0A\u7530\u57CE",
+    "image": "/bg/approved-20260925/ssr-char_kaede_01.webp",
+    "characterId": "char_kaede_01",
+    "characterName": "\u771F\u7530\u5E78\u6751"
+  },
+  {
+    "id": "ssr:char_reiji_01",
+    "name": "\u5B89\u571F\u57CE",
+    "image": "/bg/approved-20260925/ssr-char_reiji_01.webp",
+    "characterId": "char_reiji_01",
+    "characterName": "\u7E54\u7530\u4FE1\u9577"
+  },
+  {
+    "id": "ssr:char_ageha_01",
+    "name": "\u9EC4\u91D1\u671F\u306E\u5927\u5742\u57CE",
+    "image": "/bg/approved-20260925/ssr-char_ageha_01.webp",
+    "characterId": "char_ageha_01",
+    "characterName": "\u8C4A\u81E3\u79C0\u5409"
+  }
+];
 
 // src/domain/redesign/data/quest65.json
 var quest65_default = {
@@ -55170,7 +55652,7 @@ function simulateBattle(input) {
   const side = (u) => u.enemy ? enemies : party;
   const opposite = (u) => u.enemy ? party : enemies;
   const stat = (u, key2) => Math.max(1, u.stats[key2] * (1 + u.statuses.reduce((v, s) => v + (s.type === `${key2}_up` ? s.power / 100 : s.type === `${key2}_down` ? -s.power / 100 : 0), 0)));
-  const condition = (u, skill2) => {
+  const condition2 = (u, skill2) => {
     const value = skill2.condition.value ?? 0.5;
     switch (skill2.condition.type) {
       case "hp_below":
@@ -55187,7 +55669,7 @@ function simulateBattle(input) {
         return true;
     }
   };
-  const choose = (u, sp, discount = 1) => u.skills.map((skill2, slot) => ({ skill: skill2, slot })).filter(({ skill: skill2 }) => skill2.spCost > 0 && condition(u, skill2) && Math.ceil(skill2.spCost * discount) <= sp).sort((a, b) => b.skill.spCost - a.skill.spCost || a.slot - b.slot)[0]?.skill;
+  const choose = (u, sp, discount = 1) => u.skills.map((skill2, slot) => ({ skill: skill2, slot })).filter(({ skill: skill2 }) => skill2.spCost > 0 && condition2(u, skill2) && Math.ceil(skill2.spCost * discount) <= sp).sort((a, b) => b.skill.spCost - a.skill.spCost || a.slot - b.slot)[0]?.skill;
   const targets = (u, skill2) => {
     const allies = side(u).filter((t) => t.hp > 0), foes = opposite(u).filter((t) => t.hp > 0);
     switch (skill2.target) {
@@ -55481,7 +55963,7 @@ function simulateCommonBattle(input) {
   const stat = (u, key2) => u.stats[key2] * (1 + u.passive[key2] / 100) * (1 + Math.min(sum(u, `${key2}_up`), key2 === "atk" ? 50 : 100) / 100 - Math.min(sum(u, `${key2}_down`), key2 === "atk" ? 30 : 50) / 100);
   const snapshot = (u) => ({ id: u.id, hp: u.hp, maxHp: u.stats.hp, sp: u.sp, maxSp: u.stats.sp, count: u.count, actions: u.actions, statuses: u.statuses.map((s) => ({ ...s })), phase: u.phase, image: u.image, stunImmune: u.immune, dead: u.dead, effectiveAtk: stat(u, "atk"), effectiveDef: stat(u, "def"), skills: u.phase ? u.skills : void 0 });
   const frame = (kind, text, u, skill2, extra = {}) => frames.push({ index: frames.length, wave: wave + 1, kind, text, actorId: u?.id, skillId: skill2?.id, partySp, maxSp: 400, burst, party: party.map(snapshot), enemies: enemies.map(snapshot), burstGauge: gauge, maxBurstGauge: 200, playerActions, remainingActions: 300 - playerActions, skillStates: Object.fromEntries([...party, ...enemies].map((unit) => [unit.id, unit.skills.map((s) => ({ skillId: s.id, cost: Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)), status: extra.event === "action_start" && unit === u && s === skill2 ? "active" : !alive(unit) || !usable(unit, s) ? "condition_unmet" : Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)) > (unit.enemy ? unit.sp : partySp) ? "insufficient_sp" : "ready", reason: s.unsupportedReason }))])), ...extra });
-  const condition = (u, c) => {
+  const condition2 = (u, c) => {
     const v = c.value ?? 0.5;
     switch (c.type) {
       case "hp_below":
@@ -55502,7 +55984,7 @@ function simulateCommonBattle(input) {
   const passives = (reevaluate = true) => {
     if (reevaluate)
       for (const owner of [...party, ...enemies])
-        passiveConditions.set(owner, new Map(owner.passives.map((p) => [p.id, !p.condition || condition(owner, p.condition)])));
+        passiveConditions.set(owner, new Map(owner.passives.map((p) => [p.id, !p.condition || condition2(owner, p.condition)])));
     for (const list of [party, enemies])
       for (const target of list) {
         const best = /* @__PURE__ */ new Map();
@@ -55569,7 +56051,7 @@ function simulateCommonBattle(input) {
     const all = ["self", "lowest_ally", "all_allies", "dead_ally"].includes(rule) ? side(u) : opposite(u);
     return select(u, rule, all.filter((t) => applicable(t, e, skill2.id)), preview);
   };
-  const usable = (u, s) => !s.unsupportedReason && condition(u, s.condition) && s.effects.some((e) => effectTargets(u, s, e, void 0, true).length > 0);
+  const usable = (u, s) => !s.unsupportedReason && condition2(u, s.condition) && s.effects.some((e) => effectTargets(u, s, e, void 0, true).length > 0);
   const choose = (u, discount = 1) => u.skills.find((s) => usable(u, s) && Math.ceil(s.spCost * discount) <= (u.enemy ? u.sp : partySp));
   const basic = (u) => ({ id: "basic", name: "\u901A\u5E38\u653B\u6483", image: "", rarity: "N", element: u.element, spCost: 0, condition: { type: "always" }, target: "first", effects: [{ type: "damage", power: 100 }], description: "" });
   const applyEffect = (u, targets, e, skill2) => {
@@ -55930,7 +56412,7 @@ function simulateBalanceBattle(input) {
   };
   const party = input.party.map((u) => make(u, false));
   let wave = 0, enemies = input.waves[0].map((u) => make(u, true));
-  let partySp = 0, gauge = 0, playerActions = 0, serial = 0, totalDamage = 0, wavesCleared = 0, burst = false, ended = null, reason = "";
+  let partySp = 0, gauge = 0, playerActions = 0, serial = 0, totalDamage = 0, actualHpDamage = 0, wavesCleared = 0, burst = false, ended = null, reason = "";
   const frames = [];
   const analysis = party.map((u) => ({ id: u.id, name: u.name, damage: 0, healing: 0, spGenerated: 0, actions: 0, skills: 0, bursts: 0 }));
   const side = (u) => u.enemy ? enemies : party;
@@ -55940,8 +56422,8 @@ function simulateBalanceBattle(input) {
   const stat = (u, key2) => u.stats[key2] * (1 + u.passive[key2] / 100) * (1 + Math.min(sum(u, `${key2}_up`), key2 === "atk" ? 50 : 100) / 100 - Math.min(sum(u, `${key2}_down`), key2 === "atk" ? 30 : 50) / 100);
   const extraPassives = /* @__PURE__ */ new WeakMap();
   const snapshot = (u) => ({ id: u.id, hp: u.hp, maxHp: u.stats.hp, sp: u.sp, maxSp: u.stats.sp, count: u.count, actions: u.actions, statuses: u.statuses.map((s) => ({ ...s })), phase: u.phase, image: u.image, stunImmune: u.immune, dead: u.dead, effectiveAtk: stat(u, "atk"), effectiveDef: stat(u, "def"), skills: u.phase ? u.skills : void 0, passiveEffects: u.passives.map((p) => ({ id: p.id, type: p.type, percent: p.percent, targetElement: p.targetElement, active: alive(u) && (passiveConditions.get(u)?.get(p.id) ?? false) })) });
-  const frame = (kind, text, u, skill2, extra = {}) => frames.push({ index: frames.length, wave: wave + 1, kind, text, actorId: u?.id, skillId: skill2?.id, partySp, maxSp: 400, burst, party: party.map(snapshot), enemies: enemies.map(snapshot), burstGauge: gauge, maxBurstGauge: 200, playerActions, remainingActions: 300 - playerActions, skillStates: Object.fromEntries([...party, ...enemies].map((unit) => [unit.id, unit.skills.map((s) => ({ skillId: s.id, cost: Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)), status: extra.event === "action_start" && unit === u && s === skill2 ? "active" : !alive(unit) || !usable(unit, s) ? "condition_unmet" : Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)) > (unit.enemy ? unit.sp : partySp) ? "insufficient_sp" : "ready", reason: s.unsupportedReason ?? (!condition(unit, s.condition) ? "condition_unmet" : !usable(unit, s) ? s.effects.some((e) => ["atk_up", "def_up", "atk_down", "def_down", "dot", "hot", "shield", "taunt", "counter", "stun"].includes(e.type)) && [...party, ...enemies].some((t) => alive(t) && t.statuses.some((effect) => effect.sourceSkillId === s.id)) ? "reapply_unavailable" : "condition_unmet" : void 0) }))])), ...extra });
-  const condition = (u, c) => {
+  const frame = (kind, text, u, skill2, extra = {}) => frames.push({ index: frames.length, wave: wave + 1, kind, text, actorId: u?.id, skillId: skill2?.id, partySp, maxSp: 400, burst, party: party.map(snapshot), enemies: enemies.map(snapshot), burstGauge: gauge, maxBurstGauge: 200, playerActions, remainingActions: 300 - playerActions, skillStates: Object.fromEntries([...party, ...enemies].map((unit) => [unit.id, unit.skills.map((s) => ({ skillId: s.id, cost: Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)), status: extra.event === "action_start" && unit === u && s === skill2 ? "active" : !alive(unit) || !usable(unit, s) ? "condition_unmet" : Math.ceil(s.spCost * (burst && !unit.enemy ? 0.5 : 1)) > (unit.enemy ? unit.sp : partySp) ? "insufficient_sp" : "ready", reason: s.unsupportedReason ?? (!condition2(unit, s.condition) ? "condition_unmet" : !usable(unit, s) ? s.effects.some((e) => ["atk_up", "def_up", "atk_down", "def_down", "dot", "hot", "shield", "taunt", "counter", "stun"].includes(e.type)) && [...party, ...enemies].some((t) => alive(t) && t.statuses.some((effect) => effect.sourceSkillId === s.id)) ? "reapply_unavailable" : "condition_unmet" : void 0) }))])), ...extra });
+  const condition2 = (u, c) => {
     const v = c.value ?? 0.5;
     switch (c.type) {
       case "hp_below":
@@ -55968,7 +56450,7 @@ function simulateBalanceBattle(input) {
       const others = new Set(living.filter((t) => t !== owner).map((t) => t.element)).size;
       passiveConditions.set(owner, new Map(owner.passives.map((p) => [
         p.id,
-        (!p.condition || condition(owner, p.condition)) && (p.type !== "P04" || others >= 2) && (p.type !== "P14" || owner.hp / owner.stats.hp <= config.lowHpThreshold) && (p.type !== "P15" || owner.hp / owner.stats.hp >= config.highHpThreshold) && (p.type !== "P16" || owner.statuses.some((s) => s.type === "atk_up"))
+        (!p.condition || condition2(owner, p.condition)) && (p.type !== "P04" || others >= 2) && (p.type !== "P14" || owner.hp / owner.stats.hp <= config.lowHpThreshold) && (p.type !== "P15" || owner.hp / owner.stats.hp >= config.highHpThreshold) && (p.type !== "P16" || owner.statuses.some((s) => s.type === "atk_up"))
       ])));
       targetConditions.set(owner, { debuff: owner.statuses.some((s) => s.type === "atk_down" || s.type === "def_down"), dot: owner.statuses.some((s) => s.type === "dot") });
     }
@@ -56080,7 +56562,7 @@ function simulateBalanceBattle(input) {
     if (e.type === "hot" && rule === "lowest_ally") return select(u, rule, all.filter((t) => t.hp < t.stats.hp && applicable(t, e, skill2.id)), preview);
     return select(u, rule, all.filter((t) => applicable(t, e, skill2.id)), preview);
   };
-  const usable = (u, s) => !s.unsupportedReason && condition(u, s.condition) && s.effects.some((e) => effectTargets(u, s, e, void 0, true).length > 0);
+  const usable = (u, s) => !s.unsupportedReason && condition2(u, s.condition) && s.effects.some((e) => effectTargets(u, s, e, void 0, true).length > 0);
   const choose = (u, discount = 1) => u.skills.find((s) => usable(u, s) && Math.ceil(s.spCost * discount) <= (u.enemy ? u.sp : partySp));
   const basic = (u) => ({ id: "basic", name: "\u901A\u5E38\u653B\u6483", image: "", rarity: "N", element: u.element, spCost: 0, condition: { type: "always" }, target: "first", effects: [{ type: "damage", power: 100 }], description: "" });
   let hitThisAction = /* @__PURE__ */ new Set();
@@ -56098,6 +56580,8 @@ function simulateBalanceBattle(input) {
     }
     t.statuses = t.statuses.filter((s) => s.type !== "shield" || (s.amount ?? 0) > 0);
     if (remaining < amount) frame("action", `${t.name} \u30B7\u30FC\u30EB\u30C9\u5438\u53CE ${amount - remaining}`, u, skill2, { event: "shield_absorbed", targetIds: [t.id] });
+    const lostHp = Math.min(t.hp, remaining);
+    if (t.enemy && (!u.enemy || u === t)) actualHpDamage += lostHp;
     t.hp = Math.max(0, t.hp - remaining);
     return remaining;
   };
@@ -56418,7 +56902,7 @@ function simulateBalanceBattle(input) {
   if (!enemies.some(alive))
     wavesCleared++;
   frame("end", ended === "win" ? "\u52DD\u5229" : reason === "action_limit" ? "300\u884C\u52D5\u4E0A\u9650\uFF1A\u6557\u5317" : "\u6557\u5317", void 0, void 0, { event: "end", reason });
-  return { seed: input.seed, outcome: ended, totalDamage, playerActions, wavesCleared, party: input.party, waves: input.waves, frames, analysis, rulesVersion: BALANCE_BATTLE_VERSION, ...revisedInput ? { inputVersion: WAVE_SP_INPUT_VERSION, masterVersion: config.version } : {}, reason };
+  return { seed: input.seed, outcome: ended, totalDamage, ...input.raidDamagePolicy === "actual-hp-v1-20260925" ? { actualHpDamage } : {}, playerActions, wavesCleared, party: input.party, waves: input.waves, frames, analysis, rulesVersion: BALANCE_BATTLE_VERSION, ...revisedInput ? { inputVersion: WAVE_SP_INPUT_VERSION, masterVersion: config.version } : {}, reason };
 }
 
 // src/domain/redesign/formalBattleInput.ts
@@ -56481,60 +56965,6 @@ function questVictoryRewards(stage, state, party, seed) {
   return { rewards: rewards2, firstClear, count, guaranteed, encounterRoll: random() };
 }
 
-// src/theme/local-backgrounds.json
-var local_backgrounds_default = [
-  {
-    characterId: "char_koharu_01",
-    name: "\u96EA\u306E\u6625\u65E5\u5C71\u57CE",
-    image: "/creative/backgrounds/char_koharu_01.png"
-  },
-  {
-    characterId: "char_leo_01",
-    name: "\u9752\u8449\u57CE\u3068\u4ED9\u53F0\u57CE\u4E0B",
-    image: "/creative/backgrounds/char_leo_01.png"
-  },
-  {
-    characterId: "char_mio_01",
-    name: "\u7C73\u6CA2\u57CE\u4E0B\u30FB\u82B1\u306E\u5BB4",
-    image: "/creative/backgrounds/char_mio_01.png"
-  },
-  {
-    characterId: "char_karen_01",
-    name: "\u99FF\u5E9C\u57CE\u3068\u57CE\u4E0B",
-    image: "/creative/backgrounds/char_karen_01.png"
-  },
-  {
-    characterId: "char_miyabi_01",
-    name: "\u7435\u7436\u6E56\u7554\u306E\u5742\u672C\u57CE",
-    image: "/creative/backgrounds/char_miyabi_01.png"
-  },
-  {
-    characterId: "char_kengo_01",
-    name: "\u5927\u591A\u559C\u57CE\u3092\u671B\u3080\u5C71\u9053",
-    image: "/creative/backgrounds/char_kengo_01.png"
-  },
-  {
-    characterId: "char_go_01",
-    name: "\u8E91\u8E85\u30F6\u5D0E\u9928\u3068\u7532\u5E9C\u76C6\u5730",
-    image: "/creative/backgrounds/char_go_01.png"
-  },
-  {
-    characterId: "char_kaede_01",
-    name: "\u4E0A\u7530\u57CE",
-    image: "/creative/backgrounds/char_kaede_01.png"
-  },
-  {
-    characterId: "char_reiji_01",
-    name: "\u5B89\u571F\u57CE",
-    image: "/creative/backgrounds/char_reiji_01.png"
-  },
-  {
-    characterId: "char_ageha_01",
-    name: "\u9EC4\u91D1\u671F\u306E\u5927\u5742\u57CE",
-    image: "/creative/backgrounds/char_ageha_01.png"
-  }
-];
-
 // src/domain/redesign/quests.ts
 var AREAS = [
   ["mikawa", "\u4E09\u6CB3\u306E\u5730", "\u6700\u521D\u306E\u4E00\u6B69", "\u6575\u306E\u5C5E\u6027\u3068\u884C\u52D5\u30AB\u30A6\u30F3\u30C8\u3092\u898B\u3066\u3001\u6B66\u5C06\u306E\u4E26\u3073\u3092\u6574\u3048\u3088\u3046\u3002"],
@@ -56548,7 +56978,7 @@ var AREAS = [
   ["satsuma", "\u85A9\u6469\u306E\u708E", "\u4E0D\u5C48\u306E\u9663", "\u9023\u6226\u306B\u5099\u3048\u3066HP\u3068SP\u3092\u6B8B\u3057\u3001\u6575\u9663\u3092\u7A81\u7834\u3057\u3088\u3046\u3002"],
   ["sekigahara", "\u95A2\u30F6\u539F", "\u6681\u306E\u7D04\u675F", "\u5909\u308F\u308A\u3086\u304F\u6575\u306E\u9663\u3092\u8AAD\u307F\u3001\u4E94\u4EBA\u306E\u529B\u3092\u7D50\u96C6\u3057\u3088\u3046\u3002"]
 ];
-var QUEST_AREAS = AREAS.map(([id, name2, , description], area) => ({ id, index: area + 1, name: name2, description, image: local_backgrounds_default[area]?.image ?? `/bg/sengoku/${area % 2 ? "castle-town" : "castle-approach"}.jpg`, stages: FORMAL_QUEST_STAGES.filter((stage) => stage.areaId === id) }));
+var QUEST_AREAS = AREAS.map(([id, name2, , description], area) => ({ id, index: area + 1, name: name2, description, image: QUEST_BACKGROUND_PATHS[id], stages: FORMAL_QUEST_STAGES.filter((stage) => stage.areaId === id) }));
 var QUEST_STAGES = FORMAL_QUEST_STAGES;
 function getQuestStage(id) {
   return QUEST_STAGES.find((stage) => stage.id === id);
@@ -56562,6 +56992,10 @@ function isQuestStageUnlocked(id, clearedStages) {
 var HOME_BACKGROUNDS = [
   { id: "castle-approach", name: "\u5915\u685C\u306E\u57CE\u9580", image: "/bg/sengoku/castle-approach.jpg", conditionLabel: "" },
   { id: "castle-town", name: "\u5915\u685C\u306E\u57CE\u4E0B\u753A", image: "/bg/sengoku/castle-town.jpg", conditionLabel: "" },
+  ...SSR_HOME_BACKGROUNDS.map((background) => ({
+    ...background,
+    conditionLabel: `${background.characterName}\u306E\u5165\u624B\u3067\u9078\u629E\u53EF\u80FD`
+  })),
   ...QUEST_AREAS.map((area) => ({
     id: `area:${area.id}`,
     name: area.name,
@@ -56577,9 +57011,19 @@ var LEGACY_BACKGROUND_IDS = {
 function findHomeBackground(id) {
   return HOME_BACKGROUNDS.find((background) => background.id === (id ? LEGACY_BACKGROUND_IDS[id] ?? id : void 0));
 }
-function isHomeBackgroundUnlocked(background, clearedStages) {
-  if (!background.areaId) return HOME_BACKGROUNDS.some((entry) => entry.id === background.id && !entry.areaId);
-  const area = QUEST_AREAS.find((entry) => entry.id === background.areaId);
+function synchronizeHomeBackgroundUnlocks(state) {
+  const owned = new Set(state.characters.map((character2) => character2.id));
+  const unlocked = new Set(state.unlockedHomeBackgroundIds ?? []);
+  const additions = SSR_HOME_BACKGROUNDS.filter((background) => owned.has(background.characterId) && CHARACTER_MASTERS.some((character2) => character2.id === background.characterId && character2.rarity === "SSR") && !unlocked.has(background.id)).map((background) => background.id);
+  if (!additions.length) return state;
+  return { ...state, unlockedHomeBackgroundIds: [...unlocked, ...additions] };
+}
+function isHomeBackgroundUnlocked(background, clearedStages, unlockedIds = []) {
+  const registered = findHomeBackground(background.id);
+  if (!registered) return false;
+  if (registered.characterId) return unlockedIds.includes(registered.id);
+  if (!registered.areaId) return true;
+  const area = QUEST_AREAS.find((entry) => entry.id === registered.areaId);
   return !!area?.stages[0] && isQuestStageUnlocked(area.stages[0].id, clearedStages);
 }
 function applyHomeSelection(state, payload) {
@@ -56590,7 +57034,7 @@ function applyHomeSelection(state, payload) {
     if (typeof payload.backgroundId !== "string") throw new Error("\u80CC\u666F\u304C\u4E0D\u6B63\u3067\u3059\u3002");
     const background = findHomeBackground(payload.backgroundId);
     if (!background) throw new Error("\u80CC\u666F\u304C\u4E0D\u6B63\u3067\u3059\u3002");
-    if (!isHomeBackgroundUnlocked(background, state.clearedStages)) throw new Error(background.conditionLabel);
+    if (!isHomeBackgroundUnlocked(background, state.clearedStages, state.unlockedHomeBackgroundIds)) throw new Error(background.conditionLabel);
   }
   return {
     ...state,
@@ -56637,6 +57081,7 @@ function applyShopExchange(original, payload) {
     return state;
   }
   if (exchangeId === "raid_unlock") {
+    if (quantity !== 1) throw new Error("\u3053\u306E\u4EA4\u63DB\u306F1\u56DE\u305A\u3064\u884C\u3044\u307E\u3059\u3002");
     if (state.diamonds < 100) throw new Error("\u8F1D\u77F3\u304C\u8DB3\u308A\u307E\u305B\u3093\u3002");
     state.diamonds -= 100;
     state.materials.unlock += 1;
@@ -56653,7 +57098,7 @@ function applyShopExchange(original, payload) {
     state.growthInventory.genericSouls[character2.rarity] += amount / 2;
     return state;
   }
-  if (!(exchangeId in CASH_REWARDS)) throw new Error("\u4EA4\u63DB\u5BFE\u8C61\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+  if (!Object.prototype.hasOwnProperty.call(CASH_REWARDS, exchangeId)) throw new Error("\u4EA4\u63DB\u5BFE\u8C61\u304C\u4E0D\u6B63\u3067\u3059\u3002");
   if (quantity !== 1) throw new Error("\u3053\u306E\u4EA4\u63DB\u306F1\u56DE\u305A\u3064\u884C\u3044\u307E\u3059\u3002");
   const cashId = exchangeId;
   if (state.diamonds < CASH_COSTS[cashId]) throw new Error("\u8F1D\u77F3\u304C\u8DB3\u308A\u307E\u305B\u3093\u3002");
@@ -56666,18 +57111,96 @@ function applyShopEnergyDrink(original) {
   if ((state.energyDrinks ?? 0) < 1) throw new Error("\u6D3B\u529B\u4E38\u304C\u3042\u308A\u307E\u305B\u3093\u3002");
   if (state.energy >= state.energyMax) throw new Error("\u884C\u52D5\u529B\u304C\u4E0A\u9650\u306B\u9054\u3057\u3066\u3044\u307E\u3059\u3002");
   state.energyDrinks = (state.energyDrinks ?? 0) - 1;
-  state.energy = Math.min(state.energyMax, state.energy + 50);
+  state.energy += 50;
+  return state;
+}
+
+// src/domain/redesign/loginBonus.ts
+function jstLoginDate(now) {
+  if (!Number.isFinite(now)) throw new Error("\u30ED\u30B0\u30A4\u30F3\u65E5\u6642\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+  return new Date(now + 9 * 60 * 60 * 1e3).toISOString().slice(0, 10);
+}
+
+// src/domain/redesign/missionProgress.ts
+function captureMissionAssets(original) {
+  const state = structuredClone(original);
+  const p = state.missionProgress ??= { version: "game04-missions-v1", counters: {}, daily: {}, seenEvents: [], character: {}, skill: {}, equipment: {} };
+  for (const c of state.characters) p.character[c.id] = { ...p.character[c.id], level: Math.max(p.character[c.id]?.level ?? 0, c.level), awakening: Math.max(p.character[c.id]?.awakening ?? 0, c.awakening) };
+  for (const s of state.skills) p.skill[s.id] = Math.max(p.skill[s.id] ?? 0, s.level);
+  for (const e of state.equipment) p.equipment[e.instanceId] = { ...p.equipment[e.instanceId], masterId: e.masterId, level: Math.max(p.equipment[e.instanceId]?.level ?? 0, e.level), lb: Math.max(p.equipment[e.instanceId]?.lb ?? 0, e.lb) };
+  return state;
+}
+function recordMissionEvent(original, event) {
+  const state = captureMissionAssets(original), p = state.missionProgress;
+  if (!event.id || event.counters.some((k) => !k || ["__proto__", "constructor", "prototype"].includes(k))) throw new Error("\u4EFB\u52D9\u306E\u9032\u884C\u30A4\u30D9\u30F3\u30C8\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+  if (p.seenEvents.includes(event.id)) return state;
+  const date = jstLoginDate(event.at), daily = p.daily[date] ??= {};
+  for (const key2 of new Set(event.counters)) {
+    p.counters[key2] = (p.counters[key2] ?? 0) + 1;
+    daily[key2] = (daily[key2] ?? 0) + 1;
+  }
+  p.seenEvents.push(event.id);
   return state;
 }
 
 // src/domain/redesign/missions.ts
-function evaluateMissions(state, config) {
+function evaluateMissions(state, config, now = Date.now()) {
   if (!config.enabled) return [];
   const cleared = new Set(state.clearedStages);
   const ids = /* @__PURE__ */ new Set();
+  const progress = captureMissionAssets(state).missionProgress;
   return config.missions.filter((master) => master.enabled).map((master) => {
     if (!master.id || ids.has(master.id)) throw new Error("\u4EFB\u52D9\u30DE\u30B9\u30BF\u30FC\u306EID\u304C\u91CD\u8907\u3057\u3066\u3044\u307E\u3059\u3002");
     ids.add(master.id);
+    if (master.condition.type === "metric") {
+      const c = master.condition, p = progress;
+      let value = 0;
+      if (c.daily) {
+        const daily = p.daily[jstLoginDate(now)] ?? {};
+        value = c.key === "daily_completed" ? [1, 3, 5].filter((n) => (daily.battle ?? 0) >= n).length + [1, 3, 5].filter((n) => (daily.quest_clear ?? 0) >= n).length + Number((daily.normal_gacha ?? 0) >= 1) + Number((daily.growth ?? 0) >= 1) : daily[c.key] ?? 0;
+      } else switch (c.key) {
+        case "quest_clear":
+          value = Object.values(state.questClearCounts ?? {}).reduce((a, b) => a + b, 0);
+          break;
+        case "player_level":
+          value = state.playerProgress?.level ?? 0;
+          break;
+        case "character_count":
+          value = Object.keys(p.character).length;
+          break;
+        case "ssr_character_count":
+          value = Object.keys(p.character).filter((id) => CHARACTER_MASTERS.some((m) => m.id === id && m.rarity === "SSR")).length;
+          break;
+        case "character_level":
+          value = Object.values(p.character).filter((v) => v.level >= (c.threshold ?? 0)).length;
+          break;
+        case "character_awakening":
+          value = Object.values(p.character).filter((v) => v.awakening >= (c.threshold ?? 0)).length;
+          break;
+        case "skill_count":
+          value = Object.keys(p.skill).length;
+          break;
+        case "ssr_skill_count":
+          value = Object.keys(p.skill).filter((id) => OWNABLE_SKILL_MASTERS.some((m) => m.id === id && m.rarity === "SSR")).length;
+          break;
+        case "skill_lb":
+          value = Object.values(p.skill).filter((v) => v >= (c.threshold ?? 0)).length;
+          break;
+        case "ssr_equipment_count":
+          value = new Set(Object.values(p.equipment).filter((v) => EQUIPMENT_MASTERS.some((m) => m.id === v.masterId && m.rarity === "SSR")).map((v) => v.masterId)).size;
+          break;
+        case "equipment_level":
+          value = Object.values(p.equipment).filter((v) => v.level >= (c.threshold ?? 0)).length;
+          break;
+        case "equipment_lb":
+          value = Object.values(p.equipment).filter((v) => v.lb >= (c.threshold ?? 0)).length;
+          break;
+        default:
+          value = p.counters[c.key] ?? 0;
+      }
+      const claimId = c.daily ? `${master.id}:${jstLoginDate(now)}` : master.id;
+      return { id: claimId, name: master.name, description: master.description, rewards: master.rewards, current: Math.min(value, c.target), target: c.target, status: state.claimedMissionIds?.includes(claimId) ? "claimed" : value >= c.target ? "claimable" : "progress" };
+    }
     let stages;
     if (master.condition.type === "stage_clear") {
       const stageId = master.condition.stageId;
@@ -56701,109 +57224,3701 @@ function evaluateMissions(state, config) {
     };
   });
 }
-function getClaimableMission(state, config, id) {
-  const row = evaluateMissions(state, config).find((candidate) => candidate.id === id);
+function getClaimableMission(state, config, id, now = Date.now()) {
+  const row = evaluateMissions(state, config, now).find((candidate) => candidate.id === id);
   if (!row || row.status !== "claimable") throw new Error("\u3053\u306E\u4EFB\u52D9\u306E\u5831\u916C\u306F\u53D7\u3051\u53D6\u308C\u307E\u305B\u3093\u3002");
-  return config.missions.find((master) => master.id === id);
+  const master = config.missions.find((master2) => master2.id === id || master2.condition.type === "metric" && master2.condition.daily && `${master2.id}:${jstLoginDate(now)}` === id);
+  if (!master) throw new Error("\u4EFB\u52D9\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002");
+  return { ...master, id };
 }
 
-// src/domain/redesign/battle.ts
-function simulateBattle3(input) {
-  if (input.rules.version === BALANCE_BATTLE_VERSION) return simulateBalanceBattle(input);
-  return simulateBattle2(input);
-}
-
-// src/domain/redesign/legacyQuests.ts
-var AREAS2 = [
-  ["mikawa", "\u4E09\u6CB3\u306E\u5730", "\u6700\u521D\u306E\u4E00\u6B69", "\u6575\u306E\u5C5E\u6027\u3068\u884C\u52D5\u30AB\u30A6\u30F3\u30C8\u3092\u898B\u3066\u3001\u6B66\u5C06\u306E\u4E26\u3073\u3092\u6574\u3048\u3088\u3046\u3002"],
-  ["owari", "\u5C3E\u5F35\u306E\u65D7", "\u71B1\u304D\u65D7\u5370", "\u8907\u6570\u306E\u6575\u306B\u306F\u5168\u4F53\u653B\u6483\u3068\u72D9\u3046\u9806\u756A\u304C\u529B\u306B\u306A\u308B\u3002"],
-  ["mino", "\u7F8E\u6FC3\u306E\u57CE", "\u5805\u57CE\u3078\u306E\u9053", "\u5805\u3044\u5B88\u308A\u306B\u306F\u5B88\u5099\u3092\u4E0B\u3052\u308B\u6280\u3092\u7D44\u307F\u5408\u308F\u305B\u3088\u3046\u3002"],
-  ["omi", "\u8FD1\u6C5F\u306E\u6E56", "\u6E56\u4E0A\u306E\u76DF\u7D04", "\u50B7\u3064\u3044\u305F\u4EF2\u9593\u3092\u56DE\u5FA9\u3057\u3001\u9023\u6226\u3092\u5207\u308A\u629C\u3051\u3088\u3046\u3002"],
-  ["kai", "\u7532\u6590\u306E\u5C71", "\u98A8\u6797\u306E\u8A66\u7DF4", "\u5F37\u3044\u4E00\u6483\u306B\u5099\u3048\u3001\u5B88\u308A\u3068\u653B\u6483\u306E\u9806\u3092\u8003\u3048\u3088\u3046\u3002"],
-  ["echigo", "\u8D8A\u5F8C\u306E\u96EA", "\u96EA\u89E3\u3051\u306E\u7FA9", "\u6575\u306E\u56DE\u5FA9\u5F79\u3092\u3069\u3046\u5D29\u3059\u304B\u304C\u52DD\u6557\u3092\u5206\u3051\u308B\u3002"],
-  ["kyoto", "\u4EAC\u6D1B\u306E\u5F71", "\u82B1\u3068\u7B56\u8B00", "\u5F31\u4F53\u3068\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u3092\u898B\u6975\u3081\u3001\u65E9\u3081\u306B\u6C7A\u7740\u3092\u3064\u3051\u3088\u3046\u3002"],
-  ["izumo", "\u51FA\u96F2\u306E\u793E", "\u7948\u308A\u306E\u5411\u3053\u3046", "\u5149\u3068\u95C7\u306E\u76F8\u6027\u3001\u652F\u63F4\u6280\u306E\u7D44\u307F\u5408\u308F\u305B\u3092\u898B\u76F4\u305D\u3046\u3002"],
-  ["satsuma", "\u85A9\u6469\u306E\u708E", "\u4E0D\u5C48\u306E\u9663", "\u9023\u6226\u306B\u5099\u3048\u3066HP\u3068SP\u3092\u6B8B\u3057\u3001\u6575\u9663\u3092\u7A81\u7834\u3057\u3088\u3046\u3002"],
-  ["sekigahara", "\u95A2\u30F6\u539F", "\u6681\u306E\u7D04\u675F", "\u5909\u308F\u308A\u3086\u304F\u6575\u306E\u9663\u3092\u8AAD\u307F\u3001\u4E94\u4EBA\u306E\u529B\u3092\u7D50\u96C6\u3057\u3088\u3046\u3002"]
+// src/domain/redesign/data/formalMissions.json
+var formalMissions_default = [
+  {
+    id: "NM001",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "1-1\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM002",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "1-2\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM003",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "1-3\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM004",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "2-1\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 2e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 2
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 2
+      }
+    ]
+  },
+  {
+    id: "NM005",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "2-2\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 2e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 2
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 2
+      }
+    ]
+  },
+  {
+    id: "NM006",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "2-3\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 2e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 2
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 2
+      }
+    ]
+  },
+  {
+    id: "NM007",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "2-4\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 2e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 2
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 2
+      }
+    ]
+  },
+  {
+    id: "NM008",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "3-1\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 3e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 3
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM009",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "3-2\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 3e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 3
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM010",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "3-3\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 3e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 3
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM011",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "3-4\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 3e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 3
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM012",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "3-5\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 3e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 3
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM013",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "4-1\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 4e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 4
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 4
+      }
+    ]
+  },
+  {
+    id: "NM014",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "4-2\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 4e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 4
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 4
+      }
+    ]
+  },
+  {
+    id: "NM015",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "4-3\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 4e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 4
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 4
+      }
+    ]
+  },
+  {
+    id: "NM016",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "4-4\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 4e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 4
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 4
+      }
+    ]
+  },
+  {
+    id: "NM017",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "4-5\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 4e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 4
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 4
+      }
+    ]
+  },
+  {
+    id: "NM018",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "5-1\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 5e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 5
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM019",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "5-2\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 5e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 5
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM020",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "5-3\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 5e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 5
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM021",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "5-4\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 5e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 5
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM022",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "5-5\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 5e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 5
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM023",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "5-6\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 5e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 5
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM024",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "6-1\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 6e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 6
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 6
+      }
+    ]
+  },
+  {
+    id: "NM025",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "6-2\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 6e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 6
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 6
+      }
+    ]
+  },
+  {
+    id: "NM026",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "6-3\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 6e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 6
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 6
+      }
+    ]
+  },
+  {
+    id: "NM027",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "6-4\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 6e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 6
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 6
+      }
+    ]
+  },
+  {
+    id: "NM028",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "6-5\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 6e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 6
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 6
+      }
+    ]
+  },
+  {
+    id: "NM029",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "6-6\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 6e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 6
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 6
+      }
+    ]
+  },
+  {
+    id: "NM030",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "7-1\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 7e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 7
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 7
+      }
+    ]
+  },
+  {
+    id: "NM031",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "7-2\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 7e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 7
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 7
+      }
+    ]
+  },
+  {
+    id: "NM032",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "7-3\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 7e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 7
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 7
+      }
+    ]
+  },
+  {
+    id: "NM033",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "7-4\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 7e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 7
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 7
+      }
+    ]
+  },
+  {
+    id: "NM034",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "7-5\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 7e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 7
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 7
+      }
+    ]
+  },
+  {
+    id: "NM035",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "7-6\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 7e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 7
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 7
+      }
+    ]
+  },
+  {
+    id: "NM036",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "7-7\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 7e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 7
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 7
+      }
+    ]
+  },
+  {
+    id: "NM037",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "7-8\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 7e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 7
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 7
+      }
+    ]
+  },
+  {
+    id: "NM038",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "8-1\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 8e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 8
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 8
+      }
+    ]
+  },
+  {
+    id: "NM039",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "8-2\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 8e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 8
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 8
+      }
+    ]
+  },
+  {
+    id: "NM040",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "8-3\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 8e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 8
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 8
+      }
+    ]
+  },
+  {
+    id: "NM041",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "8-4\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 8e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 8
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 8
+      }
+    ]
+  },
+  {
+    id: "NM042",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "8-5\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 8e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 8
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 8
+      }
+    ]
+  },
+  {
+    id: "NM043",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "8-6\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 8e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 8
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 8
+      }
+    ]
+  },
+  {
+    id: "NM044",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "8-7\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 8e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 8
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 8
+      }
+    ]
+  },
+  {
+    id: "NM045",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "8-8\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 8e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 8
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 8
+      }
+    ]
+  },
+  {
+    id: "NM046",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "9-1\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 9e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 9
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM047",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "9-2\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 9e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 9
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM048",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "9-3\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 9e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 9
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM049",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "9-4\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 9e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 9
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM050",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "9-5\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 9e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 9
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM051",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "9-6\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 9e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 9
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM052",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "9-7\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 9e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 9
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM053",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "9-8\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 9e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 9
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM054",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "9-9\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 9e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 9
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM055",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "9-10\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 9e3
+      },
+      {
+        kind: "character_exp_item",
+        id: "small",
+        amount: 9
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM056",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "10-1\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e4
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM057",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "10-2\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e4
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM058",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "10-3\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e4
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM059",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "10-4\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e4
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM060",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "10-5\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e4
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM061",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "10-6\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e4
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM062",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "10-7\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e4
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM063",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "10-8\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e4
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM064",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "10-9\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e4
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM065",
+    group: "\u30B9\u30C6\u30FC\u30B8\u521D\u30AF\u30EA\u30A2",
+    name: "10-10\u3092\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "cash",
+        amount: 1e4
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM066",
+    group: "\u30A8\u30EA\u30A2\u30AF\u30EA\u30A2",
+    name: "\u30A8\u30EA\u30A21\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "soul",
+        id: "char_rui_01",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM067",
+    group: "\u30A8\u30EA\u30A2\u30AF\u30EA\u30A2",
+    name: "\u30A8\u30EA\u30A22\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "soul",
+        id: "char_takuro_01",
+        amount: 5
+      },
+      {
+        kind: "soul",
+        id: "char_karen_01",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM068",
+    group: "\u30A8\u30EA\u30A2\u30AF\u30EA\u30A2",
+    name: "\u30A8\u30EA\u30A23\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "soul",
+        id: "char_maya_01",
+        amount: 7
+      },
+      {
+        kind: "soul",
+        id: "char_reiji_01",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM069",
+    group: "\u30A8\u30EA\u30A2\u30AF\u30EA\u30A2",
+    name: "\u30A8\u30EA\u30A24\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "soul",
+        id: "char_noa_01",
+        amount: 7
+      },
+      {
+        kind: "soul",
+        id: "char_mio_01",
+        amount: 2
+      }
+    ]
+  },
+  {
+    id: "NM070",
+    group: "\u30A8\u30EA\u30A2\u30AF\u30EA\u30A2",
+    name: "\u30A8\u30EA\u30A25\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "soul",
+        id: "char_reina_01",
+        amount: 8
+      },
+      {
+        kind: "soul",
+        id: "char_karen_01",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM071",
+    group: "\u30A8\u30EA\u30A2\u30AF\u30EA\u30A2",
+    name: "\u30A8\u30EA\u30A26\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "soul",
+        id: "char_riki_01",
+        amount: 8
+      },
+      {
+        kind: "soul",
+        id: "char_go_01",
+        amount: 4
+      }
+    ]
+  },
+  {
+    id: "NM072",
+    group: "\u30A8\u30EA\u30A2\u30AF\u30EA\u30A2",
+    name: "\u30A8\u30EA\u30A27\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "soul",
+        id: "char_genji_01",
+        amount: 7
+      },
+      {
+        kind: "soul",
+        id: "char_ageha_01",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM073",
+    group: "\u30A8\u30EA\u30A2\u30AF\u30EA\u30A2",
+    name: "\u30A8\u30EA\u30A28\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "soul",
+        id: "char_lucas_01",
+        amount: 6
+      },
+      {
+        kind: "soul",
+        id: "char_leo_01",
+        amount: 6
+      }
+    ]
+  },
+  {
+    id: "NM074",
+    group: "\u30A8\u30EA\u30A2\u30AF\u30EA\u30A2",
+    name: "\u30A8\u30EA\u30A29\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "soul",
+        id: "char_seiya_01",
+        amount: 5
+      },
+      {
+        kind: "soul",
+        id: "char_kaede_01",
+        amount: 8
+      }
+    ]
+  },
+  {
+    id: "NM075",
+    group: "\u30A8\u30EA\u30A2\u30AF\u30EA\u30A2",
+    name: "\u30A8\u30EA\u30A210\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "soul",
+        id: "char_tetsu_01",
+        amount: 4
+      },
+      {
+        kind: "soul",
+        id: "char_reiji_01",
+        amount: 10
+      }
+    ]
+  },
+  {
+    id: "NM076",
+    group: "\u30AF\u30A8\u30B9\u30C8\u7D2F\u8A08",
+    name: "10\u56DE\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 2
+      },
+      {
+        kind: "equipment_lb",
+        amount: 2
+      },
+      {
+        kind: "soul",
+        id: "char_rui_01",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM077",
+    group: "\u30AF\u30A8\u30B9\u30C8\u7D2F\u8A08",
+    name: "30\u56DE\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 3
+      },
+      {
+        kind: "equipment_lb",
+        amount: 3
+      },
+      {
+        kind: "soul",
+        id: "char_leon_01",
+        amount: 4
+      }
+    ]
+  },
+  {
+    id: "NM078",
+    group: "\u30AF\u30A8\u30B9\u30C8\u7D2F\u8A08",
+    name: "50\u56DE\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 5
+      },
+      {
+        kind: "equipment_lb",
+        amount: 5
+      },
+      {
+        kind: "soul",
+        id: "char_maya_01",
+        amount: 5
+      },
+      {
+        kind: "soul",
+        id: "char_kengo_01",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM079",
+    group: "\u30AF\u30A8\u30B9\u30C8\u7D2F\u8A08",
+    name: "100\u56DE\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 10
+      },
+      {
+        kind: "equipment_lb",
+        amount: 10
+      },
+      {
+        kind: "soul",
+        id: "char_taiga_01",
+        amount: 5
+      },
+      {
+        kind: "soul",
+        id: "char_koharu_01",
+        amount: 2
+      }
+    ]
+  },
+  {
+    id: "NM080",
+    group: "\u30AF\u30A8\u30B9\u30C8\u7D2F\u8A08",
+    name: "200\u56DE\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 15
+      },
+      {
+        kind: "equipment_lb",
+        amount: 15
+      },
+      {
+        kind: "soul",
+        id: "char_sakura_01",
+        amount: 5
+      },
+      {
+        kind: "soul",
+        id: "char_miyabi_01",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM081",
+    group: "\u30AF\u30A8\u30B9\u30C8\u7D2F\u8A08",
+    name: "500\u56DE\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 25
+      },
+      {
+        kind: "equipment_lb",
+        amount: 25
+      },
+      {
+        kind: "soul",
+        id: "char_cecile_01",
+        amount: 4
+      },
+      {
+        kind: "soul",
+        id: "char_kengo_01",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM082",
+    group: "\u30AF\u30A8\u30B9\u30C8\u7D2F\u8A08",
+    name: "1000\u56DE\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 40
+      },
+      {
+        kind: "equipment_lb",
+        amount: 40
+      },
+      {
+        kind: "soul",
+        id: "char_tetsu_01",
+        amount: 4
+      },
+      {
+        kind: "soul",
+        id: "char_koharu_01",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM083",
+    group: "\u30D7\u30EC\u30A4\u30E4\u30FCLv",
+    name: "Lv5",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "cash",
+        amount: 5e3
+      }
+    ]
+  },
+  {
+    id: "NM084",
+    group: "\u30D7\u30EC\u30A4\u30E4\u30FCLv",
+    name: "Lv10",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "cash",
+        amount: 1e4
+      }
+    ]
+  },
+  {
+    id: "NM085",
+    group: "\u30D7\u30EC\u30A4\u30E4\u30FCLv",
+    name: "Lv20",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "cash",
+        amount: 2e4
+      }
+    ]
+  },
+  {
+    id: "NM086",
+    group: "\u30D7\u30EC\u30A4\u30E4\u30FCLv",
+    name: "Lv30",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "cash",
+        amount: 3e4
+      }
+    ]
+  },
+  {
+    id: "NM087",
+    group: "\u30D7\u30EC\u30A4\u30E4\u30FCLv",
+    name: "Lv40",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "cash",
+        amount: 4e4
+      }
+    ]
+  },
+  {
+    id: "NM088",
+    group: "\u30D7\u30EC\u30A4\u30E4\u30FCLv",
+    name: "Lv50",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "cash",
+        amount: 5e4
+      }
+    ]
+  },
+  {
+    id: "NM089",
+    group: "\u30D7\u30EC\u30A4\u30E4\u30FCLv",
+    name: "Lv60",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "cash",
+        amount: 6e4
+      }
+    ]
+  },
+  {
+    id: "NM090",
+    group: "\u30D7\u30EC\u30A4\u30E4\u30FCLv",
+    name: "Lv80",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "cash",
+        amount: 8e4
+      }
+    ]
+  },
+  {
+    id: "NM091",
+    group: "\u30D7\u30EC\u30A4\u30E4\u30FCLv",
+    name: "Lv100",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "cash",
+        amount: 1e5
+      }
+    ]
+  },
+  {
+    id: "NM092",
+    group: "\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "\u7D2F\u8A085\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM093",
+    group: "\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "\u7D2F\u8A0810\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM094",
+    group: "\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "\u7D2F\u8A0820\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM095",
+    group: "\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "\u7D2F\u8A0830\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM096",
+    group: "\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "\u7D2F\u8A0840\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM097",
+    group: "\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "\u7D2F\u8A0850\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM098",
+    group: "\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "\u7D2F\u8A0860\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 5,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM099",
+    group: "SSR\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "SSR\u30AD\u30E3\u30E9\u7D2F\u8A081\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM100",
+    group: "SSR\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "SSR\u30AD\u30E3\u30E9\u7D2F\u8A083\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM101",
+    group: "SSR\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "SSR\u30AD\u30E3\u30E9\u7D2F\u8A085\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM102",
+    group: "SSR\u30AD\u30E3\u30E9\u7A2E\u985E",
+    name: "SSR\u30AD\u30E3\u30E9\u7D2F\u8A0810\u7A2E\u985E\u3092\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 5,
+        id: "SPECIAL_TICKET_CHARACTER"
+      }
+    ]
+  },
+  {
+    id: "NM103",
+    group: "\u9B42\u89E3\u653E",
+    name: "\u9B42\u3067\u30AD\u30E3\u30E9\u3092\u521D\u89E3\u653E",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "cash",
+        amount: 1e4
+      }
+    ]
+  },
+  {
+    id: "NM104",
+    group: "\u30AD\u30E3\u30E9Lv\u80B2\u6210",
+    name: "Lv20\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 2
+      },
+      {
+        kind: "cash",
+        amount: 4e3
+      }
+    ]
+  },
+  {
+    id: "NM105",
+    group: "\u30AD\u30E3\u30E9Lv\u80B2\u6210",
+    name: "Lv20\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "large",
+        amount: 2
+      },
+      {
+        kind: "cash",
+        amount: 2e4
+      }
+    ]
+  },
+  {
+    id: "NM106",
+    group: "\u30AD\u30E3\u30E9Lv\u80B2\u6210",
+    name: "Lv50\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "large",
+        amount: 1
+      },
+      {
+        kind: "cash",
+        amount: 1e4
+      }
+    ]
+  },
+  {
+    id: "NM107",
+    group: "\u30AD\u30E3\u30E9Lv\u80B2\u6210",
+    name: "Lv50\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "xlarge",
+        amount: 1
+      },
+      {
+        kind: "character_exp_item",
+        id: "large",
+        amount: 1
+      },
+      {
+        kind: "cash",
+        amount: 5e4
+      }
+    ]
+  },
+  {
+    id: "NM108",
+    group: "\u30AD\u30E3\u30E9Lv\u80B2\u6210",
+    name: "Lv80\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "large",
+        amount: 1
+      },
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 3
+      },
+      {
+        kind: "cash",
+        amount: 16e3
+      }
+    ]
+  },
+  {
+    id: "NM109",
+    group: "\u30AD\u30E3\u30E9Lv\u80B2\u6210",
+    name: "Lv80\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "xlarge",
+        amount: 2
+      },
+      {
+        kind: "cash",
+        amount: 8e4
+      }
+    ]
+  },
+  {
+    id: "NM110",
+    group: "\u30AD\u30E3\u30E9Lv\u80B2\u6210",
+    name: "Lv100\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "large",
+        amount: 2
+      },
+      {
+        kind: "cash",
+        amount: 2e4
+      }
+    ]
+  },
+  {
+    id: "NM111",
+    group: "\u30AD\u30E3\u30E9Lv\u80B2\u6210",
+    name: "Lv100\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "xlarge",
+        amount: 2
+      },
+      {
+        kind: "character_exp_item",
+        id: "large",
+        amount: 2
+      },
+      {
+        kind: "cash",
+        amount: 1e5
+      }
+    ]
+  },
+  {
+    id: "NM112",
+    group: "\u899A\u9192",
+    name: "\u899A\u9192+1\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "cash",
+        amount: 5e3
+      }
+    ]
+  },
+  {
+    id: "NM113",
+    group: "\u899A\u9192",
+    name: "\u899A\u9192+1\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "large",
+        amount: 1
+      },
+      {
+        kind: "cash",
+        amount: 25e3
+      }
+    ]
+  },
+  {
+    id: "NM114",
+    group: "\u899A\u9192",
+    name: "\u899A\u9192+3\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "medium",
+        amount: 3
+      },
+      {
+        kind: "cash",
+        amount: 15e3
+      }
+    ]
+  },
+  {
+    id: "NM115",
+    group: "\u899A\u9192",
+    name: "\u899A\u9192+3\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "large",
+        amount: 3
+      },
+      {
+        kind: "cash",
+        amount: 75e3
+      }
+    ]
+  },
+  {
+    id: "NM116",
+    group: "\u899A\u9192",
+    name: "\u899A\u9192+5\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "large",
+        amount: 1
+      },
+      {
+        kind: "cash",
+        amount: 25e3
+      }
+    ]
+  },
+  {
+    id: "NM117",
+    group: "\u899A\u9192",
+    name: "\u899A\u9192+5\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "character_exp_item",
+        id: "xlarge",
+        amount: 1
+      },
+      {
+        kind: "character_exp_item",
+        id: "large",
+        amount: 1
+      },
+      {
+        kind: "cash",
+        amount: 125e3
+      }
+    ]
+  },
+  {
+    id: "NM118",
+    group: "\u30B9\u30AD\u30EB\u7A2E\u985E",
+    name: "\u7D2F\u8A085\u7A2E\u985E\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_SKILL"
+      }
+    ]
+  },
+  {
+    id: "NM119",
+    group: "\u30B9\u30AD\u30EB\u7A2E\u985E",
+    name: "\u7D2F\u8A0810\u7A2E\u985E\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_SKILL"
+      }
+    ]
+  },
+  {
+    id: "NM120",
+    group: "\u30B9\u30AD\u30EB\u7A2E\u985E",
+    name: "\u7D2F\u8A0820\u7A2E\u985E\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      }
+    ]
+  },
+  {
+    id: "NM121",
+    group: "\u30B9\u30AD\u30EB\u7A2E\u985E",
+    name: "\u7D2F\u8A0830\u7A2E\u985E\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      }
+    ]
+  },
+  {
+    id: "NM122",
+    group: "\u30B9\u30AD\u30EB\u7A2E\u985E",
+    name: "\u7D2F\u8A0850\u7A2E\u985E\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_SKILL"
+      }
+    ]
+  },
+  {
+    id: "NM123",
+    group: "\u30B9\u30AD\u30EB\u7A2E\u985E",
+    name: "\u7D2F\u8A0870\u7A2E\u985E\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 5,
+        id: "SPECIAL_TICKET_SKILL"
+      }
+    ]
+  },
+  {
+    id: "NM124",
+    group: "SSR\u30B9\u30AD\u30EB",
+    name: "SSR\u30B9\u30AD\u30EB\u521D\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_SKILL"
+      }
+    ]
+  },
+  {
+    id: "NM125",
+    group: "\u30B9\u30AD\u30EBLB\u80B2\u6210",
+    name: "LB1\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM126",
+    group: "\u30B9\u30AD\u30EBLB\u80B2\u6210",
+    name: "LB1\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM127",
+    group: "\u30B9\u30AD\u30EBLB\u80B2\u6210",
+    name: "LB3\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM128",
+    group: "\u30B9\u30AD\u30EBLB\u80B2\u6210",
+    name: "LB3\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 15
+      }
+    ]
+  },
+  {
+    id: "NM129",
+    group: "\u30B9\u30AD\u30EBLB\u80B2\u6210",
+    name: "LB5\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM130",
+    group: "\u30B9\u30AD\u30EBLB\u80B2\u6210",
+    name: "LB5\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 25
+      }
+    ]
+  },
+  {
+    id: "NM131",
+    group: "\u30B9\u30AD\u30EBLB\u80B2\u6210",
+    name: "LB10\u4EE5\u4E0A\u30921\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 10
+      }
+    ]
+  },
+  {
+    id: "NM132",
+    group: "\u30B9\u30AD\u30EBLB\u80B2\u6210",
+    name: "LB10\u4EE5\u4E0A\u30925\u7A2E\u985E\u80B2\u6210",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 50
+      }
+    ]
+  },
+  {
+    id: "NM133",
+    group: "SSR\u88C5\u5099",
+    name: "SSR\u88C5\u5099\u521D\u5165\u624B",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM134",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv20\u4EE5\u4E0A\u30921\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 1
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM135",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv20\u4EE5\u4E0A\u309210\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "large",
+        amount: 2
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM136",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv20\u4EE5\u4E0A\u309230\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "xlarge",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "large",
+        amount: 2
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM137",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv50\u4EE5\u4E0A\u30921\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 2
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "small",
+        amount: 5
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM138",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv50\u4EE5\u4E0A\u309210\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "xlarge",
+        amount: 1
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "large",
+        amount: 1
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM139",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv50\u4EE5\u4E0A\u309230\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "xlarge",
+        amount: 3
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "large",
+        amount: 3
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM140",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv80\u4EE5\u4E0A\u30921\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "medium",
+        amount: 4
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM141",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv80\u4EE5\u4E0A\u309210\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "xlarge",
+        amount: 2
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM142",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv80\u4EE5\u4E0A\u309230\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "xlarge",
+        amount: 6
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM143",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv100\u4EE5\u4E0A\u30921\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "large",
+        amount: 1
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM144",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv100\u4EE5\u4E0A\u309210\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "xlarge",
+        amount: 2
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "large",
+        amount: 2
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM145",
+    group: "\u88C5\u5099Lv\u80B2\u6210",
+    name: "Lv100\u4EE5\u4E0A\u309230\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_exp_item",
+        id: "xlarge",
+        amount: 7
+      },
+      {
+        kind: "equipment_exp_item",
+        id: "large",
+        amount: 2
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM146",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB1\u4EE5\u4E0A\u30921\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 1
+      }
+    ]
+  },
+  {
+    id: "NM147",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB1\u4EE5\u4E0A\u309210\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM148",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB1\u4EE5\u4E0A\u309230\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM149",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB3\u4EE5\u4E0A\u30921\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM150",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB3\u4EE5\u4E0A\u309210\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 9
+      }
+    ]
+  },
+  {
+    id: "NM151",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB3\u4EE5\u4E0A\u309230\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 15
+      }
+    ]
+  },
+  {
+    id: "NM152",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB5\u4EE5\u4E0A\u30921\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM153",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB5\u4EE5\u4E0A\u309210\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 15
+      }
+    ]
+  },
+  {
+    id: "NM154",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB5\u4EE5\u4E0A\u309230\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 25
+      }
+    ]
+  },
+  {
+    id: "NM155",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB10\u4EE5\u4E0A\u30921\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 10
+      }
+    ]
+  },
+  {
+    id: "NM156",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB10\u4EE5\u4E0A\u309210\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 30
+      }
+    ]
+  },
+  {
+    id: "NM157",
+    group: "\u88C5\u5099LB\u80B2\u6210",
+    name: "LB10\u4EE5\u4E0A\u309230\u500B\u80B2\u6210",
+    rewards: [
+      {
+        kind: "equipment_lb",
+        amount: 50
+      }
+    ]
+  },
+  {
+    id: "NM158",
+    group: "\u7DE8\u6210",
+    name: "5\u4EBA\u7DE8\u6210\u3067\u30AF\u30A8\u30B9\u30C8\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_SKILL"
+      }
+    ]
+  },
+  {
+    id: "NM159",
+    group: "\u8FFD\u52A0\u30B9\u30AD\u30EB\u67A0",
+    name: "\u7B2C2\u67A0\u306B\u30B9\u30AD\u30EB\u3092\u88C5\u5099\u3057\u305F\u30AD\u30E3\u30E9\u3092\u542B\u3081\u30AF\u30A8\u30B9\u30C8\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      }
+    ]
+  },
+  {
+    id: "NM160",
+    group: "\u8FFD\u52A0\u30B9\u30AD\u30EB\u67A0",
+    name: "\u7B2C3\u67A0\u306B\u30B9\u30AD\u30EB\u3092\u88C5\u5099\u3057\u305F\u30AD\u30E3\u30E9\u3092\u542B\u3081\u30AF\u30A8\u30B9\u30C8\u521D\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      }
+    ]
+  },
+  {
+    id: "NM161",
+    group: "\u30A8\u30F3\u30AB\u30A6\u30F3\u30C8\u5C0E\u5165",
+    name: "\u521D\u53C2\u52A0\u30FB\u521D\u500B\u4EBA\u6226\u7D50\u679C\u78BA\u5B9A",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 2
+      },
+      {
+        kind: "equipment_lb",
+        amount: 2
+      },
+      {
+        kind: "cash",
+        amount: 5e3
+      }
+    ]
+  },
+  {
+    id: "NM162",
+    group: "\u30A8\u30F3\u30AB\u30A6\u30F3\u30C8\u5C0E\u5165",
+    name: "\u500B\u4EBA\u6226\u521D\u52DD\u5229",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 3
+      },
+      {
+        kind: "equipment_lb",
+        amount: 3
+      },
+      {
+        kind: "cash",
+        amount: 1e4
+      }
+    ]
+  },
+  {
+    id: "NM163",
+    group: "\u30A8\u30F3\u30AB\u30A6\u30F3\u30C8\u5C0E\u5165",
+    name: "\u4ED6\u8005\u958B\u50AC\u3067\u500B\u4EBA\u6226\u521D\u52DD\u5229",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 5
+      },
+      {
+        kind: "equipment_lb",
+        amount: 5
+      },
+      {
+        kind: "cash",
+        amount: 1e4
+      }
+    ]
+  },
+  {
+    id: "NM164",
+    group: "\u30A8\u30F3\u30AB\u30A6\u30F3\u30C8\u5C0E\u5165",
+    name: "\u81EA\u5206\u306E\u958B\u50AC\u3067\u6551\u63F4\u521D\u9001\u4FE1\u6210\u529F",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 2
+      },
+      {
+        kind: "equipment_lb",
+        amount: 2
+      },
+      {
+        kind: "cash",
+        amount: 5e3
+      }
+    ]
+  },
+  {
+    id: "NM165",
+    group: "\u30A8\u30F3\u30AB\u30A6\u30F3\u30C8\u8A0E\u4F10",
+    name: "\u8CC7\u683C\u3092\u6E80\u305F\u3057\u3066\u7D2F\u8A081\u958B\u50AC\u8A0E\u4F10",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 5
+      },
+      {
+        kind: "equipment_lb",
+        amount: 5
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM166",
+    group: "\u30A8\u30F3\u30AB\u30A6\u30F3\u30C8\u8A0E\u4F10",
+    name: "\u8CC7\u683C\u3092\u6E80\u305F\u3057\u3066\u7D2F\u8A085\u958B\u50AC\u8A0E\u4F10",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 10
+      },
+      {
+        kind: "equipment_lb",
+        amount: 10
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM167",
+    group: "\u30A8\u30F3\u30AB\u30A6\u30F3\u30C8\u8A0E\u4F10",
+    name: "\u8CC7\u683C\u3092\u6E80\u305F\u3057\u3066\u7D2F\u8A0810\u958B\u50AC\u8A0E\u4F10",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 15
+      },
+      {
+        kind: "equipment_lb",
+        amount: 15
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM168",
+    group: "\u30A8\u30F3\u30AB\u30A6\u30F3\u30C8\u8A0E\u4F10",
+    name: "\u8CC7\u683C\u3092\u6E80\u305F\u3057\u3066\u7D2F\u8A0830\u958B\u50AC\u8A0E\u4F10",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 25
+      },
+      {
+        kind: "equipment_lb",
+        amount: 25
+      },
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 3,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM169",
+    group: "\u30A8\u30F3\u30AB\u30A6\u30F3\u30C8\u8A0E\u4F10",
+    name: "\u8CC7\u683C\u3092\u6E80\u305F\u3057\u3066\u7D2F\u8A0850\u958B\u50AC\u8A0E\u4F10",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 40
+      },
+      {
+        kind: "equipment_lb",
+        amount: 40
+      },
+      {
+        kind: "ticket",
+        amount: 5,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 5,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      }
+    ]
+  },
+  {
+    id: "NM170",
+    group: "\u4FB5\u653B\u5C0E\u5165",
+    name: "\u521D\u53C2\u52A0\u30FB\u521D\u500B\u4EBA\u6226\u7D50\u679C\u78BA\u5B9A",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 3
+      },
+      {
+        kind: "equipment_lb",
+        amount: 3
+      }
+    ]
+  },
+  {
+    id: "NM171",
+    group: "\u4FB5\u653B\u5C0E\u5165",
+    name: "\u500B\u4EBA\u6226\u521D\u52DD\u5229",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 5
+      },
+      {
+        kind: "equipment_lb",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM172",
+    group: "\u4FB5\u653B\u95A2\u9580",
+    name: "\u5CA1\u5D0E\u306E\u3044\u305A\u308C\u304B\u306E\u95A2\u9580\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u7A81\u7834",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 10
+      },
+      {
+        kind: "equipment_lb",
+        amount: 10
+      }
+    ]
+  },
+  {
+    id: "NM173",
+    group: "\u4FB5\u653B\u57CE\u4E3B",
+    name: "\u5CA1\u5D0E\u57CE\u4E3B\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u8A0E\u4F10",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "skill_material",
+        amount: 20
+      },
+      {
+        kind: "equipment_lb",
+        amount: 20
+      }
+    ]
+  },
+  {
+    id: "NM174",
+    group: "\u4FB5\u653B\u95A2\u9580",
+    name: "\u9577\u6D5C\u306E\u3044\u305A\u308C\u304B\u306E\u95A2\u9580\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u7A81\u7834",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 10
+      },
+      {
+        kind: "equipment_lb",
+        amount: 10
+      }
+    ]
+  },
+  {
+    id: "NM175",
+    group: "\u4FB5\u653B\u57CE\u4E3B",
+    name: "\u9577\u6D5C\u57CE\u4E3B\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u8A0E\u4F10",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "skill_material",
+        amount: 20
+      },
+      {
+        kind: "equipment_lb",
+        amount: 20
+      }
+    ]
+  },
+  {
+    id: "NM176",
+    group: "\u4FB5\u653B\u95A2\u9580",
+    name: "\u6625\u65E5\u5C71\u306E\u3044\u305A\u308C\u304B\u306E\u95A2\u9580\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u7A81\u7834",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 10
+      },
+      {
+        kind: "equipment_lb",
+        amount: 10
+      }
+    ]
+  },
+  {
+    id: "NM177",
+    group: "\u4FB5\u653B\u57CE\u4E3B",
+    name: "\u6625\u65E5\u5C71\u57CE\u4E3B\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u8A0E\u4F10",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "skill_material",
+        amount: 20
+      },
+      {
+        kind: "equipment_lb",
+        amount: 20
+      }
+    ]
+  },
+  {
+    id: "NM178",
+    group: "\u4FB5\u653B\u95A2\u9580",
+    name: "\u8E91\u8E85\u30F6\u5D0E\u9928\u306E\u3044\u305A\u308C\u304B\u306E\u95A2\u9580\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u7A81\u7834",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 10
+      },
+      {
+        kind: "equipment_lb",
+        amount: 10
+      }
+    ]
+  },
+  {
+    id: "NM179",
+    group: "\u4FB5\u653B\u57CE\u4E3B",
+    name: "\u8E91\u8E85\u30F6\u5D0E\u9928\u57CE\u4E3B\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u8A0E\u4F10",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "skill_material",
+        amount: 20
+      },
+      {
+        kind: "equipment_lb",
+        amount: 20
+      }
+    ]
+  },
+  {
+    id: "NM180",
+    group: "\u4FB5\u653B\u95A2\u9580",
+    name: "\u5B89\u571F\u306E\u3044\u305A\u308C\u304B\u306E\u95A2\u9580\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u7A81\u7834",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 10
+      },
+      {
+        kind: "equipment_lb",
+        amount: 10
+      }
+    ]
+  },
+  {
+    id: "NM181",
+    group: "\u4FB5\u653B\u57CE\u4E3B",
+    name: "\u5B89\u571F\u57CE\u4E3B\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u8A0E\u4F10",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "skill_material",
+        amount: 20
+      },
+      {
+        kind: "equipment_lb",
+        amount: 20
+      }
+    ]
+  },
+  {
+    id: "NM182",
+    group: "\u4FB5\u653B\u4E3B\u50AC",
+    name: "\u521D\u4E3B\u50AC\u6210\u529F",
+    rewards: [
+      {
+        kind: "skill_material",
+        amount: 5
+      },
+      {
+        kind: "equipment_lb",
+        amount: 5
+      }
+    ]
+  },
+  {
+    id: "NM183",
+    group: "\u4FB5\u653B\u4E3B\u50AC",
+    name: "\u4E3B\u50AC\u3057\u305F\u958B\u50AC\u3092\u8CC7\u683C\u4ED8\u304D\u3067\u521D\u6700\u7D42\u30AF\u30EA\u30A2",
+    rewards: [
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_CHARACTER"
+      },
+      {
+        kind: "ticket",
+        amount: 2,
+        id: "SPECIAL_TICKET_SKILL"
+      },
+      {
+        kind: "ticket",
+        amount: 1,
+        id: "SPECIAL_TICKET_EQUIPMENT"
+      },
+      {
+        kind: "skill_material",
+        amount: 10
+      },
+      {
+        kind: "equipment_lb",
+        amount: 10
+      }
+    ]
+  }
 ];
-var STAGE_NAMES = ["\u8857\u9053\u306E\u5148\u3078", "\u65D7\u3092\u63B2\u3052\u3066", "\u6E21\u308A\u306E\u9663", "\u591C\u660E\u3051\u306E\u653B\u9632", "\u5D29\u308C\u306C\u8A93\u3044", "\u6C7A\u6226\u524D\u591C", "\u57CE\u9580\u3092\u8D8A\u3048\u3066"];
-function themeSkills(area, source) {
-  const effect = ["damage", "damage", "def_up", "heal", "atk_up", "heal", "poison", "atk_down", "def_up", "damage"][area];
-  const chosen = COMMON_SKILL_MASTERS.find((s) => s.effects.some((e) => e.type === effect));
-  return chosen ? [chosen, ...source.filter((s) => s.id !== chosen.id)].slice(0, 2) : source.slice(0, 2);
-}
-function enemy(area, stage, wave, slot, boss2) {
-  const master = COMMON_CHARACTER_MASTERS[(area * 6 + stage + wave + slot) % COMMON_CHARACTER_MASTERS.length];
-  const rank = area * 7 + stage;
-  const growth = 1 + rank * 0.09;
-  const skills = themeSkills(area, COMMON_SKILL_MASTERS.filter((s) => s.element === master.element));
-  return {
-    id: `quest-enemy-${area + 1}-${stage + 1}-${wave + 1}-${slot + 1}`,
-    name: master.name,
-    image: master.image,
-    element: master.element,
-    level: 1 + rank,
-    stats: { hp: Math.round((boss2 ? 1100 : 370) * growth), sp: boss2 ? 80 : 40, atk: Math.round((boss2 ? 100 : 55) * growth), def: Math.round((area === 2 ? 55 : 15) * growth), luk: 10 + rank },
-    // Existing provisional quest numbers remain unchanged; formal inputs require their own explicit starts.
-    initialSp: boss2 ? 80 : 40,
-    skills,
-    passives: [],
-    hitSpGain: 5,
-    actionCount: boss2 ? 3 : 4 + slot % 2,
-    order: slot,
-    boss: boss2,
-    ...boss2 ? { phases: [{ hpBelow: 0.45, name: "\u6C7A\u6B7B\u306E\u9663", actionCount: 2, skills: themeSkills((area + 1) % 10, skills) }] } : {}
-  };
-}
-var QUEST_AREAS2 = AREAS2.map(([id, name2, chapter, description], area) => ({
-  id,
-  index: area + 1,
-  name: name2,
-  description,
-  image: `/bg/sengoku/${area % 2 ? "castle-town" : "castle-approach"}.jpg`,
-  stages: STAGE_NAMES.map((stageName, stage) => {
-    const waveCount = Math.min(5, 1 + Math.floor(stage / 2) + (area > 5 ? 1 : 0));
-    return {
-      id: `${id}-${stage + 1}`,
-      areaId: id,
-      index: stage + 1,
-      name: stage === 6 ? chapter : stageName,
-      description,
-      energyCost: 3 + Math.floor(area / 2),
-      waves: Array.from({ length: waveCount }, (_, wave) => {
-        const boss2 = stage === 6 && wave === waveCount - 1;
-        return Array.from({ length: boss2 ? 1 : Math.min(3, 1 + Math.floor(stage / 3) + wave % 2) }, (_2, slot) => enemy(area, stage, wave, slot, boss2));
-      }),
-      firstRewards: [{ kind: "cash", amount: 100 + area * 30 }, { kind: "soul", id: COMMON_CHARACTER_MASTERS[(area * 6 + stage) % COMMON_CHARACTER_MASTERS.length].id, amount: 2 }],
-      rewards: [{ kind: "cash", amount: 20 + area * 10 }, { kind: "character_material", amount: 1 + Math.floor(area / 3) }, { kind: "skill_material", amount: 1 }, { kind: "equipment_material", amount: 1 }],
-      rareRewards: [{ kind: "soul", id: COMMON_CHARACTER_MASTERS[(area * 6 + stage) % COMMON_CHARACTER_MASTERS.length].id, amount: 1, chance: 0.08 }, { kind: "equipment_lb", amount: 1, chance: 0.05 }, { kind: "equipment", id: EQUIPMENT_MASTERS[(area * 7 + stage) % EQUIPMENT_MASTERS.length].id, amount: 1, chance: 0.12 }, ...area >= 2 ? [{ kind: "unlock_item", amount: 1, chance: 0.04 }] : []],
-      encounterChance: 0.08
-    };
-  })
-}));
-var QUEST_STAGES2 = QUEST_AREAS2.flatMap((area) => area.stages);
-function getQuestStage2(id) {
-  return QUEST_STAGES2.find((stage) => stage.id === id);
-}
 
-// src/domain/redesign/raidFormalSkills.ts
-function getFormalRaidSkill(id, lb) {
-  const row = raid_skill_values_default.find((r) => r.design_id === id && r.lb === lb);
-  if (!row) throw Error(`\u6B63\u5F0F\u30EC\u30A4\u30C9\u6280\u80FD\u304C\u3042\u308A\u307E\u305B\u3093: ${id}/${lb}`);
-  const skill2 = getBalanceV2Skill(id, lb), values = {};
-  for (const text of row.performance_text.split("\uFF0F")) {
-    const match = text.match(/^(.+):([\d.]+)/);
-    if (match) values[match[1]] = Number(match[2]);
+// src/domain/redesign/formalMissions.ts
+function condition(row) {
+  const n = Number(row.id.slice(2));
+  if (n <= 65) {
+    const designId = row.name.match(/\d+-\d+/)[0], stage = QUEST_STAGES.find((s) => s.designId === designId);
+    if (!stage) throw Error(`\u4EFB\u52D9\u30B9\u30C6\u30FC\u30B8\u306A\u3057:${row.id}`);
+    return { type: "stage_clear", stageId: stage.id };
   }
-  const labels = { heal: "\u56DE\u5FA9\u500D\u7387", revive: "\u8607\u751FHP\u5272\u5408", dot: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u500D\u7387", hot: "\u7D99\u7D9A\u56DE\u5FA9\u500D\u7387", shield: "\u30B7\u30FC\u30EB\u30C9\u500D\u7387", counter: "\u53CD\u6483\u500D\u7387", atk_up: "ATK\u5F37\u5316", def_up: "DEF\u5F37\u5316", atk_down: "ATK\u4F4E\u4E0B", def_down: "DEF\u4F4E\u4E0B" };
-  for (const effect of skill2.effects) {
-    if (effect.type === "damage") {
-      effect.power = values["\u653B\u6483\u500D\u7387"] ?? values["\u901A\u5E38\u500D\u7387"] ?? effect.power;
-      if (values["\u6761\u4EF6\u500D\u7387"] !== void 0) effect.bonusPower = values["\u6761\u4EF6\u500D\u7387"];
-    } else if (effect.type === "stun" || effect.type === "taunt") effect.chance = (values["\u4ED8\u4E0E\u7387"] ?? effect.chance * 100) / 100;
-    else if (labels[effect.type] && values[labels[effect.type]] !== void 0) effect.power = values[labels[effect.type]];
-  }
-  return { ...skill2, id, name: row.name_provisional, image: "", spCost: row.sp, description: `${id} / LB${lb}` };
+  if (n <= 75) return { type: "area_clear", areaId: QUEST_AREAS[n - 66].id };
+  const nums = (row.name.match(/\d+/g) ?? []).map(Number);
+  let key2, threshold, target = nums[0] ?? 1;
+  if (n <= 82) key2 = "quest_clear";
+  else if (n <= 91) key2 = "player_level";
+  else if (n <= 98) key2 = "character_count";
+  else if (n <= 102) key2 = "ssr_character_count";
+  else if (n === 103) key2 = "soul_unlock";
+  else if (n <= 111) {
+    key2 = "character_level";
+    threshold = nums[0];
+    target = nums[1];
+  } else if (n <= 117) {
+    key2 = "character_awakening";
+    threshold = nums[0];
+    target = nums[1];
+  } else if (n <= 123) key2 = "skill_count";
+  else if (n === 124) key2 = "ssr_skill_count";
+  else if (n <= 132) {
+    key2 = "skill_lb";
+    threshold = nums[0];
+    target = nums[1];
+  } else if (n === 133) key2 = "ssr_equipment_count";
+  else if (n <= 145) {
+    key2 = "equipment_level";
+    threshold = nums[0];
+    target = nums[1];
+  } else if (n <= 157) {
+    key2 = "equipment_lb";
+    threshold = nums[0];
+    target = nums[1];
+  } else if (n === 158) {
+    key2 = "quest_five_party";
+    target = 1;
+  } else if (n === 159) {
+    key2 = "quest_skill_slot2";
+    target = 1;
+  } else if (n === 160) {
+    key2 = "quest_skill_slot3";
+    target = 1;
+  } else if (n === 161) key2 = "encounter_battle";
+  else if (n === 162) key2 = "encounter_win";
+  else if (n === 163) key2 = "encounter_other_win";
+  else if (n === 164) key2 = "encounter_rescue";
+  else if (n <= 169) key2 = "encounter_qualified_defeat";
+  else if (n === 170) key2 = "invasion_battle";
+  else if (n === 171) key2 = "invasion_win";
+  else if (n <= 181) key2 = `invasion_${["okazaki", "nagahama", "kasugayama", "tsutsujigasaki", "azuchi"][Math.floor((n - 172) / 2)]}_${n % 2 === 0 ? "gate" : "lord"}`;
+  else if (n === 182) key2 = "invasion_host";
+  else key2 = "invasion_host_qualified_clear";
+  return { type: "metric", key: key2, target, threshold };
+}
+var FORMAL_NORMAL_MISSIONS = formalMissions_default.map((row) => ({ id: row.id, name: row.name, description: row.group, enabled: true, condition: condition(row), rewards: row.rewards }));
+var FORMAL_DAILY_MISSIONS = [
+  ...[1, 3, 5].map((target, i) => ({ id: `DM00${i + 1}`, name: `\u6226\u95D8\u306B${target}\u56DE\u6311\u6226`, description: "\u30C7\u30A4\u30EA\u30FC", enabled: true, condition: { type: "metric", key: "battle", target, daily: true }, rewards: [{ kind: "cash", amount: [1e3, 2e3, 3e3][i] }, { kind: "character_exp_item", id: "small", amount: [2, 3, 5][i] }] })),
+  ...[1, 3, 5].map((target, i) => ({ id: `DM00${i + 4}`, name: `\u51FA\u9663\u3067${target}\u56DE\u52DD\u5229`, description: "\u30C7\u30A4\u30EA\u30FC", enabled: true, condition: { type: "metric", key: "quest_clear", target, daily: true }, rewards: [{ kind: "cash", amount: [1e3, 2e3, 3e3][i] }, { kind: "equipment_exp_item", id: "small", amount: [2, 3, 5][i] }, ...target === 3 ? [{ kind: "unlock_item", amount: 1 }] : []] })),
+  { id: "DM007", name: "\u30CE\u30FC\u30DE\u30EB\u53EC\u559A\u30921\u56DE\u884C\u3046", description: "\u30C7\u30A4\u30EA\u30FC", enabled: true, condition: { type: "metric", key: "normal_gacha", target: 1, daily: true }, rewards: [{ kind: "cash", amount: 1e3 }] },
+  { id: "DM008", name: "\u80B2\u6210\u30921\u56DE\u884C\u3046", description: "\u30C7\u30A4\u30EA\u30FC", enabled: true, condition: { type: "metric", key: "growth", target: 1, daily: true }, rewards: [{ kind: "cash", amount: 2e3 }] },
+  ...[3, 5].map((target, i) => ({ id: `DM0${i + 9}`, name: `\u30C7\u30A4\u30EA\u30FC\u4EFB\u52D9\u3092${target}\u4EF6\u9054\u6210`, description: "\u30C7\u30A4\u30EA\u30FC", enabled: true, condition: { type: "metric", key: "daily_completed", target, daily: true }, rewards: [{ kind: "cash", amount: [5e3, 1e4][i] }, { kind: i === 0 ? "character_exp_item" : "equipment_exp_item", id: "medium", amount: 1 }] }))
+];
+var INVASION_SUPPLY_MISSIONS = [5, 10, 20, 30].map((target) => ({
+  id: `NM_INVASION_WIN_${target}`,
+  name: `\u9818\u571F\u4FB5\u653B\u306E\u500B\u4EBA\u6226\u3067${target}\u56DE\u52DD\u5229`,
+  description: "\u9818\u571F\u4FB5\u653B",
+  enabled: true,
+  condition: { type: "metric", key: "invasion_win", target },
+  rewards: [{ kind: "unlock_item", amount: 1 }]
+}));
+var FORMAL_MISSION_CONFIG = { enabled: true, missions: [
+  ...FORMAL_NORMAL_MISSIONS.map((m) => m.id === "NM171" ? { ...m, rewards: [...m.rewards, { kind: "unlock_item", amount: 1 }] } : m),
+  ...INVASION_SUPPLY_MISSIONS,
+  ...FORMAL_DAILY_MISSIONS
+] };
+
+// src/domain/redesign/gameplayMeasurement.ts
+var ACTIONS = /* @__PURE__ */ new Set([
+  "save_deck",
+  "character_level",
+  "character_awaken",
+  "equipment_level",
+  "skill_level",
+  "equipment_lb",
+  "soul_exchange",
+  "soul_select",
+  "character_unlock",
+  "use_energy_drink",
+  "claim_mission",
+  "set_home",
+  "raid_join",
+  "raid_leave",
+  "raid_rescue",
+  "encounter_ignore"
+]);
+function gameplayMeasurementReceipt(action, before, after) {
+  if (!ACTIONS.has(action)) return {};
+  return { gameplayMeasurement: {
+    contractVersion: "game04-gameplay-v1",
+    action,
+    stateVersionBefore: before.version,
+    stateVersionAfter: before.version + 1,
+    cashDelta: after.cash - before.cash,
+    energyDelta: after.energy - before.energy
+  } };
+}
+function raidClaimMeasurementReceipt(before, after, prior, next) {
+  const grants = prior.rewardGrants.filter((g) => g.userId === before.userId && !g.claimed && next.rewardGrants.some((n) => n.id === g.id && n.userId === g.userId && n.claimed)).map((g) => ({ grantId: g.id, rewards: g.rewards.map((r) => ({ kind: r.kind, id: r.id ?? null, amount: r.amount })) }));
+  if (!grants.length) return {};
+  return { gameplayMeasurement: {
+    contractVersion: "game04-gameplay-v1",
+    action: "raid_claim",
+    stateVersionBefore: before.version,
+    stateVersionAfter: before.version + 1,
+    cashDelta: after.cash - before.cash,
+    energyDelta: after.energy - before.energy,
+    roomId: prior.id,
+    grants
+  } };
 }
 
 // src/domain/redesign/data/raid-encounter.json
@@ -58289,11 +62404,14 @@ function applyRaidAction(original, originalState, action, payload = {}, now = Da
       if (state.energy < master.energyCost) throw new Error("\u884C\u52D5\u529B\u304C\u8DB3\u308A\u307E\u305B\u3093\u3002");
       state.energy -= master.energyCost;
     }
-    const damage = Math.max(0, Math.floor(payload.result.totalDamage * (payload.result.outcome === "win" ? master.victoryMultiplier : 1)));
+    const actualPolicy = master.type === "unlock" && master.damagePolicy === "actual-hp-v1-20260925";
+    const damageBasis = actualPolicy ? payload.result.actualHpDamage : payload.result.totalDamage;
+    if (actualPolicy && (damageBasis === void 0 || !Number.isFinite(damageBasis) || damageBasis < 0)) throw new Error("\u6226\u95D8\u306E\u5B9FHP\u6E1B\u5C11\u91CF\u3092\u78BA\u8A8D\u3067\u304D\u307E\u305B\u3093\u3002");
+    const damage = Math.max(0, Math.floor((damageBasis ?? Number.NaN) * (payload.result.outcome === "win" ? master.victoryMultiplier : 1)));
     if (!Number.isFinite(damage)) throw new Error("\u6226\u95D8\u7D50\u679C\u304C\u4E0D\u6B63\u3067\u3059\u3002");
     me.attempts++;
     me.wins += payload.result.outcome === "win" ? 1 : 0;
-    me.totalDamage += damage;
+    me.totalDamage += actualPolicy ? appliesToSharedHp ? Math.min(room.hp, damage) : 0 : damage;
     me.lastResult = payload.result.outcome === "win" ? "\u52DD\u5229" : "\u6557\u5317";
     if (appliesToSharedHp) room.hp = Math.max(0, room.hp - damage);
     room.settledBattleIds.push(payload.battleId);
@@ -58324,6 +62442,136 @@ function applyRaidAction(original, originalState, action, payload = {}, now = Da
 }
 function raidEnemies(master, level) {
   return structuredClone(master.stages?.find((stage) => stage.level === level)?.enemies ?? master.enemies ?? [raidEnemy(master, level)]);
+}
+
+// src/domain/redesign/missionRaidProgress.ts
+var castleKeys = { TI01: "okazaki", TI02: "nagahama", TI03: "kasugayama", TI04: "tsutsujigasaki", TI05: "azuchi" };
+function raidBattleMissionEvent(before, after, userId, battleId, outcome, at) {
+  if (before.id !== after.id || before.settledBattleIds.includes(battleId) || !after.settledBattleIds.includes(battleId) || !after.participants.some((p) => p.userId === userId)) return null;
+  const type = getRoomRaidMaster(after).type;
+  const counters = ["battle", type === "encounter" ? "encounter_battle" : "invasion_battle"];
+  if (outcome === "win") {
+    counters.push(type === "encounter" ? "encounter_win" : "invasion_win");
+    if (type === "encounter" && after.ownerId !== userId) counters.push("encounter_other_win");
+  }
+  return { id: `raid-battle:${after.id}:${battleId}:${userId}`, counters, at };
+}
+function raidRescueMissionEvent(room, userId, requestId, at) {
+  if (getRoomRaidMaster(room).type !== "encounter" || room.ownerId !== userId || !room.participants.some((p) => p.userId === userId && !p.leftAt) || room.rescueCount < 1) return null;
+  return { id: `raid-rescue:${room.id}:${requestId}:${userId}`, counters: ["encounter_rescue"], at };
+}
+function raidHostMissionEvent(room, userId) {
+  if (room.ownerId !== userId || getRoomRaidMaster(room).type !== "unlock") return null;
+  const at = Date.parse(room.createdAt);
+  if (!Number.isFinite(at)) return null;
+  return { id: `invasion-host:${room.id}:${userId}`, counters: ["invasion_host"], at };
+}
+function raidQualificationMissionEvents(room, userId, at) {
+  const master = getRoomRaidMaster(room), castle = castleKeys[master.id];
+  const events = [];
+  for (const grant of room.rewardGrants) {
+    if (grant.userId !== userId || grant.id !== `defeat:${grant.level}:${userId}` || !Number.isInteger(grant.level) || grant.level < 1) continue;
+    const defeated = room.level > grant.level || room.status === "defeated" && room.level === grant.level;
+    if (!defeated) continue;
+    const counters = [];
+    if (master.type === "encounter") {
+      if (room.status === "defeated" && grant.level === master.maxLevel) counters.push("encounter_qualified_defeat");
+    } else {
+      if (castle && [3, 6, 9].includes(grant.level)) counters.push(`invasion_${castle}_gate`);
+      if (castle && grant.level === 12 && room.status === "defeated") counters.push(`invasion_${castle}_lord`);
+      if (grant.level === master.maxLevel && room.status === "defeated" && room.ownerId === userId) counters.push("invasion_host_qualified_clear");
+    }
+    if (counters.length) events.push({ id: `raid-qualified:${room.id}:${grant.id}`, counters, at });
+  }
+  return events;
+}
+function reconcileRaidMissionProgress(original, rooms, at) {
+  let state = original;
+  for (const room of rooms) {
+    const hosted = raidHostMissionEvent(room, state.userId);
+    const events = [...hosted ? [hosted] : [], ...raidQualificationMissionEvents(room, state.userId, at)];
+    for (const event of events) state = recordMissionEvent(state, event);
+  }
+  return state;
+}
+
+// src/domain/redesign/battle.ts
+function simulateBattle3(input) {
+  if (input.rules.version === BALANCE_BATTLE_VERSION) return simulateBalanceBattle(input);
+  return simulateBattle2(input);
+}
+
+// src/domain/redesign/legacyQuests.ts
+var AREAS2 = [
+  ["mikawa", "\u4E09\u6CB3\u306E\u5730", "\u6700\u521D\u306E\u4E00\u6B69", "\u6575\u306E\u5C5E\u6027\u3068\u884C\u52D5\u30AB\u30A6\u30F3\u30C8\u3092\u898B\u3066\u3001\u6B66\u5C06\u306E\u4E26\u3073\u3092\u6574\u3048\u3088\u3046\u3002"],
+  ["owari", "\u5C3E\u5F35\u306E\u65D7", "\u71B1\u304D\u65D7\u5370", "\u8907\u6570\u306E\u6575\u306B\u306F\u5168\u4F53\u653B\u6483\u3068\u72D9\u3046\u9806\u756A\u304C\u529B\u306B\u306A\u308B\u3002"],
+  ["mino", "\u7F8E\u6FC3\u306E\u57CE", "\u5805\u57CE\u3078\u306E\u9053", "\u5805\u3044\u5B88\u308A\u306B\u306F\u5B88\u5099\u3092\u4E0B\u3052\u308B\u6280\u3092\u7D44\u307F\u5408\u308F\u305B\u3088\u3046\u3002"],
+  ["omi", "\u8FD1\u6C5F\u306E\u6E56", "\u6E56\u4E0A\u306E\u76DF\u7D04", "\u50B7\u3064\u3044\u305F\u4EF2\u9593\u3092\u56DE\u5FA9\u3057\u3001\u9023\u6226\u3092\u5207\u308A\u629C\u3051\u3088\u3046\u3002"],
+  ["kai", "\u7532\u6590\u306E\u5C71", "\u98A8\u6797\u306E\u8A66\u7DF4", "\u5F37\u3044\u4E00\u6483\u306B\u5099\u3048\u3001\u5B88\u308A\u3068\u653B\u6483\u306E\u9806\u3092\u8003\u3048\u3088\u3046\u3002"],
+  ["echigo", "\u8D8A\u5F8C\u306E\u96EA", "\u96EA\u89E3\u3051\u306E\u7FA9", "\u6575\u306E\u56DE\u5FA9\u5F79\u3092\u3069\u3046\u5D29\u3059\u304B\u304C\u52DD\u6557\u3092\u5206\u3051\u308B\u3002"],
+  ["kyoto", "\u4EAC\u6D1B\u306E\u5F71", "\u82B1\u3068\u7B56\u8B00", "\u5F31\u4F53\u3068\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u3092\u898B\u6975\u3081\u3001\u65E9\u3081\u306B\u6C7A\u7740\u3092\u3064\u3051\u3088\u3046\u3002"],
+  ["izumo", "\u51FA\u96F2\u306E\u793E", "\u7948\u308A\u306E\u5411\u3053\u3046", "\u5149\u3068\u95C7\u306E\u76F8\u6027\u3001\u652F\u63F4\u6280\u306E\u7D44\u307F\u5408\u308F\u305B\u3092\u898B\u76F4\u305D\u3046\u3002"],
+  ["satsuma", "\u85A9\u6469\u306E\u708E", "\u4E0D\u5C48\u306E\u9663", "\u9023\u6226\u306B\u5099\u3048\u3066HP\u3068SP\u3092\u6B8B\u3057\u3001\u6575\u9663\u3092\u7A81\u7834\u3057\u3088\u3046\u3002"],
+  ["sekigahara", "\u95A2\u30F6\u539F", "\u6681\u306E\u7D04\u675F", "\u5909\u308F\u308A\u3086\u304F\u6575\u306E\u9663\u3092\u8AAD\u307F\u3001\u4E94\u4EBA\u306E\u529B\u3092\u7D50\u96C6\u3057\u3088\u3046\u3002"]
+];
+var STAGE_NAMES = ["\u8857\u9053\u306E\u5148\u3078", "\u65D7\u3092\u63B2\u3052\u3066", "\u6E21\u308A\u306E\u9663", "\u591C\u660E\u3051\u306E\u653B\u9632", "\u5D29\u308C\u306C\u8A93\u3044", "\u6C7A\u6226\u524D\u591C", "\u57CE\u9580\u3092\u8D8A\u3048\u3066"];
+function themeSkills(area, source) {
+  const effect = ["damage", "damage", "def_up", "heal", "atk_up", "heal", "poison", "atk_down", "def_up", "damage"][area];
+  const chosen = COMMON_SKILL_MASTERS.find((s) => s.effects.some((e) => e.type === effect));
+  return chosen ? [chosen, ...source.filter((s) => s.id !== chosen.id)].slice(0, 2) : source.slice(0, 2);
+}
+function enemy(area, stage, wave, slot, boss2) {
+  const master = COMMON_CHARACTER_MASTERS[(area * 6 + stage + wave + slot) % COMMON_CHARACTER_MASTERS.length];
+  const rank = area * 7 + stage;
+  const growth = 1 + rank * 0.09;
+  const skills = themeSkills(area, COMMON_SKILL_MASTERS.filter((s) => s.element === master.element));
+  return {
+    id: `quest-enemy-${area + 1}-${stage + 1}-${wave + 1}-${slot + 1}`,
+    name: master.name,
+    image: master.image,
+    element: master.element,
+    level: 1 + rank,
+    stats: { hp: Math.round((boss2 ? 1100 : 370) * growth), sp: boss2 ? 80 : 40, atk: Math.round((boss2 ? 100 : 55) * growth), def: Math.round((area === 2 ? 55 : 15) * growth), luk: 10 + rank },
+    // Existing provisional quest numbers remain unchanged; formal inputs require their own explicit starts.
+    initialSp: boss2 ? 80 : 40,
+    skills,
+    passives: [],
+    hitSpGain: 5,
+    actionCount: boss2 ? 3 : 4 + slot % 2,
+    order: slot,
+    boss: boss2,
+    ...boss2 ? { phases: [{ hpBelow: 0.45, name: "\u6C7A\u6B7B\u306E\u9663", actionCount: 2, skills: themeSkills((area + 1) % 10, skills) }] } : {}
+  };
+}
+var QUEST_AREAS2 = AREAS2.map(([id, name2, chapter, description], area) => ({
+  id,
+  index: area + 1,
+  name: name2,
+  description,
+  image: `/bg/sengoku/${area % 2 ? "castle-town" : "castle-approach"}.jpg`,
+  stages: STAGE_NAMES.map((stageName, stage) => {
+    const waveCount = Math.min(5, 1 + Math.floor(stage / 2) + (area > 5 ? 1 : 0));
+    return {
+      id: `${id}-${stage + 1}`,
+      areaId: id,
+      index: stage + 1,
+      name: stage === 6 ? chapter : stageName,
+      description,
+      energyCost: 3 + Math.floor(area / 2),
+      waves: Array.from({ length: waveCount }, (_, wave) => {
+        const boss2 = stage === 6 && wave === waveCount - 1;
+        return Array.from({ length: boss2 ? 1 : Math.min(3, 1 + Math.floor(stage / 3) + wave % 2) }, (_2, slot) => enemy(area, stage, wave, slot, boss2));
+      }),
+      firstRewards: [{ kind: "cash", amount: 100 + area * 30 }, { kind: "soul", id: COMMON_CHARACTER_MASTERS[(area * 6 + stage) % COMMON_CHARACTER_MASTERS.length].id, amount: 2 }],
+      rewards: [{ kind: "cash", amount: 20 + area * 10 }, { kind: "character_material", amount: 1 + Math.floor(area / 3) }, { kind: "skill_material", amount: 1 }, { kind: "equipment_material", amount: 1 }],
+      rareRewards: [{ kind: "soul", id: COMMON_CHARACTER_MASTERS[(area * 6 + stage) % COMMON_CHARACTER_MASTERS.length].id, amount: 1, chance: 0.08 }, { kind: "equipment_lb", amount: 1, chance: 0.05 }, { kind: "equipment", id: EQUIPMENT_MASTERS[(area * 7 + stage) % EQUIPMENT_MASTERS.length].id, amount: 1, chance: 0.12 }, ...area >= 2 ? [{ kind: "unlock_item", amount: 1, chance: 0.04 }] : []],
+      encounterChance: 0.08
+    };
+  })
+}));
+var QUEST_STAGES2 = QUEST_AREAS2.flatMap((area) => area.stages);
+function getQuestStage2(id) {
+  return QUEST_STAGES2.find((stage) => stage.id === id);
 }
 
 // src/domain/redesign/data/raid-invasion.json
@@ -61014,7 +65262,7 @@ function createFormalInvasionMaster(castleId, random = Math.random) {
     stages.push({ level, enemies, sharedHp, defeatRewards: rewards(ci, level), source });
   }
   const r = rewardRows[ci];
-  return { id: castleId, name: castle.name, type: "unlock", masterVersion: raid_invasion_default.version, characterId: castle.characterId, enemy: stages[0].enemies[0], enemies: stages[0].enemies, stages, energyCost: 20, durationMinutes: 4320, maxParticipants: 20, maxLevel: 12, appearanceLevels: [1], appearanceImages: {}, enemyGrowthPerLevel: 0, sharedHpGrowthPerLevel: 0, victoryMultiplier: 1.5, sharedHp: stages[0].sharedHp, participationRewards: [], defeatRewards: stages[0].defeatRewards, victoryRewards: [{ kind: "cash", amount: r[0] }, ...exp("character_exp_item", r[1]), ...exp("equipment_exp_item", r[2])], playerExp: 0 };
+  return { id: castleId, name: castle.name, type: "unlock", damagePolicy: "actual-hp-v1-20260925", masterVersion: raid_invasion_default.version, characterId: castle.characterId, enemy: stages[0].enemies[0], enemies: stages[0].enemies, stages, energyCost: 20, durationMinutes: 4320, maxParticipants: 20, maxLevel: 12, appearanceLevels: [1], appearanceImages: {}, enemyGrowthPerLevel: 0, sharedHpGrowthPerLevel: 0, victoryMultiplier: 1.5, sharedHp: stages[0].sharedHp, participationRewards: [], defeatRewards: stages[0].defeatRewards, victoryRewards: [{ kind: "cash", amount: r[0] }, ...exp("character_exp_item", r[1]), ...exp("equipment_exp_item", r[2])], playerExp: 0 };
 }
 
 // src/domain/redesign/territory.ts
@@ -61121,12 +65369,12 @@ async function uuidFor(value) {
 async function acquisitionInput(userId) {
   return rpc("game04_acquisition_input", { p_user_id: userId });
 }
-async function stateFor(userId) {
-  const input = await acquisitionInput(userId);
+async function stateFor(userId, acquired) {
+  const input = acquired ?? await acquisitionInput(userId);
   for (let attempt = 0; attempt < 4; attempt++) {
-    const state = await rpc("game04_get_growth_state", { p_user_id: userId, p_initial: buildInitialState(userId, input.legacy) });
+    const state = await rpc("game04_get_session_state", { p_user_id: userId, p_initial: buildInitialState(userId, input.legacy) });
     const migrated = importLegacyAssets(state, input.legacy);
-    const imported = applyAcquisitionEvents(migrated, input.events, input.master);
+    const imported = captureMissionAssets(synchronizeHomeBackgroundUnlocks(applyAcquisitionEvents(migrated, input.events, input.master)));
     if (JSON.stringify(imported) === JSON.stringify(state)) return state;
     try {
       return (await commit(state, imported, crypto.randomUUID())).state;
@@ -61136,11 +65384,12 @@ async function stateFor(userId) {
   }
   throw new ApiError("\u30C7\u30FC\u30BF\u66F4\u65B0\u4E2D\u3067\u3059\u3002\u3082\u3046\u4E00\u5EA6\u304A\u8A66\u3057\u304F\u3060\u3055\u3044\u3002", 409);
 }
-async function commit(before, after, requestId, battle = null, room = null, roomVersion = null, receipt = {}) {
-  return rpc("game04_commit_growth_state", {
+async function commit(before, after, requestId, battle = null, room = null, roomVersion = null, receipt = {}, withSaveContext = false) {
+  const rpcName = withSaveContext ? "game04_commit_deck_with_context" : "game04_commit_growth_state";
+  return rpc(rpcName, {
     p_user_id: before.userId,
     p_expected_version: before.version,
-    p_state: after,
+    p_state: captureMissionAssets(synchronizeHomeBackgroundUnlocks(after)),
     p_cash_delta: after.cash - before.cash,
     p_energy_delta: after.energy - before.energy,
     p_request_id: requestId,
@@ -61157,20 +65406,16 @@ async function roomFor(id) {
   return { ...row.state, version: row.version };
 }
 async function roomsFor(userId) {
-  const rows = await rpc("game04_raid_rooms_for_user", { p_user_id: userId });
-  const ownerIds = [...new Set(rows.map((row) => row.state.ownerId))];
-  const [profiles, players] = ownerIds.length ? await Promise.all([
-    db(`users?id=in.(${ownerIds.join(",")})&select=id,username`),
-    db(`game04_player_state?user_id=in.(${ownerIds.join(",")})&select=user_id,state`)
-  ]) : [[], []];
+  const rows = await rpc("game04_raid_rooms_with_owners", { p_user_id: userId });
+  return projectRooms(rows);
+}
+function projectRooms(rows) {
   return rows.map((row) => {
-    const profile = profiles.find((entry) => entry.id === row.state.ownerId);
-    const player = players.find((entry) => entry.user_id === row.state.ownerId);
-    const leader = CHARACTER_MASTERS.find((entry) => entry.id === player?.state?.deck?.[0]?.characterId);
+    const leader = CHARACTER_MASTERS.find((entry) => entry.id === row.ownerLeaderCharacterId);
     return {
       ...row.state,
       version: row.version,
-      participants: row.state.participants.map((participant) => participant.userId === row.state.ownerId ? { ...participant, name: profile?.username ?? participant.name, portraitUrl: leader ? characterArt(leader, "portrait") : void 0 } : participant),
+      participants: row.state.participants.map((participant) => participant.userId === row.state.ownerId ? { ...participant, name: row.ownerName ?? participant.name, portraitUrl: leader ? characterArt(leader, "portrait") : void 0 } : participant),
       status: row.state.status === "active" && Date.parse(row.state.expiresAt) <= Date.now() ? "expired" : row.state.status
     };
   });
@@ -61184,19 +65429,30 @@ async function rewardPolicy() {
   return row.data;
 }
 async function missionConfig() {
-  const [row] = await db("game04_redesign_master?key=eq.missions&select=data");
-  return row?.data ?? { enabled: false, missions: [] };
+  return FORMAL_MISSION_CONFIG;
 }
-async function responseFor(userId, extra = {}) {
-  const statePromise = stateFor(userId);
-  const [state, rooms, socialEvents, pending, territory, missions] = await Promise.all([
+async function responseFor(userId, extra = {}, committedState, context) {
+  const statePromise = committedState ? Promise.resolve(committedState) : stateFor(userId);
+  const [loadedState, rooms, socialEvents, pending, territory, missions] = await Promise.all([
     statePromise,
-    roomsFor(userId),
-    db("game04_social_events?select=*&order=created_at.desc&limit=30"),
-    db(`game04_battles?user_id=eq.${userId}&status=eq.started&select=id,kind,target_id&order=created_at.asc&limit=1`),
-    statePromise.then(() => territoryContext(userId)),
+    context ? Promise.resolve(projectRooms(context.rooms)) : roomsFor(userId),
+    context ? Promise.resolve(context.socialEvents) : db("game04_social_events?select=*&order=created_at.desc&limit=30"),
+    context ? Promise.resolve(context.pending) : db(`game04_battles?user_id=eq.${userId}&status=eq.started&select=id,kind,target_id&order=created_at.asc&limit=1`),
+    context ? Promise.resolve(context.territory) : statePromise.then(() => territoryContext(userId)),
     missionConfig()
   ]);
+  let state = loadedState;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const reconciled = reconcileRaidMissionProgress(state, rooms, Date.now());
+    if (JSON.stringify(reconciled) === JSON.stringify(state)) break;
+    try {
+      state = (await commit(state, reconciled, crypto.randomUUID())).state;
+      break;
+    } catch (error) {
+      if (!(error instanceof ApiError) || error.status !== 409 || attempt === 2) throw error;
+      state = await stateFor(userId);
+    }
+  }
   return { state, rooms, socialEvents, missions: evaluateMissions(state, missions), territory: projectTerritory(territory.master, territory.progress, territory.items, territory.activeHostingCount), pendingBattle: pending[0] ?? null, ...extra };
 }
 async function runBattle(userId, name2, payload, id, playerName) {
@@ -61234,7 +65490,8 @@ async function runBattle(userId, name2, payload, id, playerName) {
     if (state.energy < cost) throw new ApiError("\u884C\u52D5\u529B\u304C\u8DB3\u308A\u307E\u305B\u3093\u3002");
     const seed = crypto.getRandomValues(new Uint32Array(1))[0];
     const rules = startRoom?.territorySnapshot?.battleRules ?? BATTLE_RULES;
-    const input = questStage ? createQuestBattleInput(seed, buildBattleParty(state, rules), questStage, rules) : startRoom && getRoomRaidMaster(startRoom).masterVersion ? { ...createFormalBattleInput(seed, buildBattleParty(state, rules), waves, rules), raidLevel, raidMasterVersion: getRoomRaidMaster(startRoom).masterVersion, playerExpReward: { amount: getRoomRaidMaster(startRoom).playerExp ?? 0, version: getRoomRaidMaster(startRoom).masterVersion, status: "APPROVED" } } : { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel };
+    const battleInput = questStage ? createQuestBattleInput(seed, buildBattleParty(state, rules), questStage, rules) : startRoom && getRoomRaidMaster(startRoom).masterVersion ? { ...createFormalBattleInput(seed, buildBattleParty(state, rules), waves, rules), raidLevel, raidMasterVersion: getRoomRaidMaster(startRoom).masterVersion, playerExpReward: { amount: getRoomRaidMaster(startRoom).playerExp ?? 0, version: getRoomRaidMaster(startRoom).masterVersion, status: "APPROVED" } } : { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel };
+    const input = startRoom ? { ...battleInput, ...getRoomRaidMaster(startRoom).damagePolicy ? { raidDamagePolicy: getRoomRaidMaster(startRoom).damagePolicy } : {}, raidStartSnapshot: { roomId: startRoom.id, level: startRoom.level, hp: startRoom.hp, maxHp: startRoom.maxHp } } : battleInput;
     preparedBattle = simulateBattle3(input);
     await commit(state, { ...state, energy: state.energy - cost, ...questStage ? { questAttempts: { ...state.questAttempts, [targetId]: (state.questAttempts?.[targetId] ?? 0) + 1 }, questProgressVersion: QUEST_MASTER_VERSION } : {} }, id, { id, kind, targetId, seed, input, status: "started" }, startRoom, startRoom?.version ?? null);
     [record] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=*`);
@@ -61242,7 +65499,8 @@ async function runBattle(userId, name2, payload, id, playerName) {
     if (record.status === "settled") return responseFor(userId, record.result);
     if (JSON.stringify(record.input) !== JSON.stringify(input)) preparedBattle = void 0;
   }
-  const battle = preparedBattle ?? simulateBattle3(record.input);
+  const simulatedBattle = preparedBattle ?? simulateBattle3(record.input);
+  const battle = record.kind === "raid" && record.input.raidStartSnapshot ? { ...simulatedBattle, raidStartSnapshot: record.input.raidStartSnapshot } : simulatedBattle;
   const settlementId = await uuidFor(`settlement:${id}`);
   for (let attempt = 0; attempt < 4; attempt++) {
     const state = await stateFor(userId);
@@ -61309,6 +65567,9 @@ async function runBattle(userId, name2, payload, id, playerName) {
       room = transition.room;
       after = transition.state;
       rewards2.push(...transition.rewards);
+      const raidEvent = raidBattleMissionEvent(currentRoom, transition.room, userId, id, battle.outcome, Date.now());
+      if (raidEvent) after = recordMissionEvent(after, raidEvent);
+      after = reconcileRaidMissionProgress(after, [transition.room], Date.now());
       if (battle.outcome === "win" && record.input.raidMasterVersion && record.input.playerExpReward?.amount) {
         const progress = after.playerProgress, amount = record.input.playerExpReward.amount;
         if (progress?.version === GROWTH_VERSION && progress.status === "active") {
@@ -61320,10 +65581,18 @@ async function runBattle(userId, name2, payload, id, playerName) {
         } else playerGrowth = { status: "MIGRATION_PENDING", offeredExp: amount, gainedExp: 0 };
       }
     }
+    const missionCounters = record.kind === "quest" ? ["battle"] : [];
+    if (record.kind === "quest" && battle.outcome === "win") {
+      missionCounters.push("quest_clear");
+      if (record.input.party.length === 5) missionCounters.push("quest_five_party");
+      if (record.input.party.some((unit) => unit.skills.length >= 2)) missionCounters.push("quest_skill_slot2");
+      if (record.input.party.some((unit) => unit.skills.length >= 3)) missionCounters.push("quest_skill_slot3");
+    }
+    if (missionCounters.length) after = recordMissionEvent(after, { id: `battle:${id}`, at: Date.now(), counters: missionCounters });
     const result = { battle, rewards: rewards2, firstClear, encounterRaidId, ...playerGrowth ? { playerGrowth } : {} };
     try {
       const settled = await commit(state, after, settlementId, { id, status: "settled", result }, room, version);
-      return responseFor(userId, settled.battleResult ?? result);
+      return responseFor(userId, settled.battleResult ?? result, settled.state);
     } catch (error) {
       const [saved] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=status,result`);
       if (saved?.status === "settled") return responseFor(userId, saved.result);
@@ -61341,15 +65610,26 @@ Deno.serve(async (request) => {
     const auth = await fetch(`${url}/auth/v1/user`, { headers: { apikey: key, Authorization: authorization } });
     const user = await auth.json();
     if (!auth.ok || !user.id) throw new ApiError("\u30ED\u30B0\u30A4\u30F3\u3057\u76F4\u3057\u3066\u304F\u3060\u3055\u3044\u3002", 401);
-    const [profile] = await db(`users?id=eq.${user.id}&select=id,username`);
-    if (!profile) throw new ApiError("\u5148\u306B\u30D7\u30EC\u30A4\u30E4\u30FC\u540D\u3092\u767B\u9332\u3057\u3066\u304F\u3060\u3055\u3044\u3002", 409);
     const { action, payload = {}, requestId } = await request.json();
     if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(requestId)) throw new ApiError("\u64CD\u4F5CID\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+    const standardMutation = !["normal_gacha_status", "observe_state_restore", "get_state", "raid_refresh", "quest_battle", "raid_battle", "territory_host", "raid_unlock"].includes(action);
+    const [[profile], priorRows, acquired] = await Promise.all([
+      db(`users?id=eq.${user.id}&select=id,username`),
+      standardMutation ? db(`game04_requests?user_id=eq.${user.id}&request_id=eq.${requestId}&select=request_id,result`) : Promise.resolve([]),
+      standardMutation ? acquisitionInput(user.id).then((input) => ({ input }), (error) => ({ error })) : Promise.resolve(void 0)
+    ]);
+    if (!profile) throw new ApiError("\u5148\u306B\u30D7\u30EC\u30A4\u30E4\u30FC\u540D\u3092\u767B\u9332\u3057\u3066\u304F\u3060\u3055\u3044\u3002", 409);
     if (action === "normal_gacha_status") {
       const state2 = await stateFor(user.id);
       const pool = await db("gacha_items_master?gacha_id=in.(CHAR_NORMAL,SKILL_NORMAL,EQUIP_NORMAL)&select=gacha_id,item_id,item_type,rarity&limit=1000");
       const day = normalGachaDay(Date.now());
       return new Response(JSON.stringify(await responseFor(user.id, { normalGacha: { pool, day, available: state2.dailyNormalGachaDate !== day } })), { headers });
+    }
+    if (action === "observe_state_restore") {
+      const observedVersion = payload.observedVersion;
+      if (!Number.isSafeInteger(observedVersion) || observedVersion < 0) throw new ApiError("\u89B3\u6E2C\u30D0\u30FC\u30B8\u30E7\u30F3\u304C\u4E0D\u6B63\u3067\u3059\u3002");
+      const observation = await rpc("game04_observe_state_restore", { p_user_id: user.id, p_request_id: requestId, p_observed_version: observedVersion });
+      return new Response(JSON.stringify({ observation }), { headers });
     }
     if (action === "get_state" || action === "raid_refresh") return new Response(JSON.stringify(await responseFor(user.id)), { headers });
     if (action === "quest_battle" || action === "raid_battle") return new Response(JSON.stringify(await runBattle(user.id, action, payload, requestId, profile.username)), { headers });
@@ -61367,7 +65647,7 @@ Deno.serve(async (request) => {
       const hosted = formalMaster?.masterVersion ? await rpc("game04_host_formal_territory", { p_user_id: user.id, p_request_id: requestId, p_destination_id: destinationId, p_raid_master: createFormalInvasionMaster(formalMaster.id, () => crypto.getRandomValues(new Uint32Array(1))[0] / 4294967296) }) : await rpc("game04_host_territory", { p_user_id: user.id, p_request_id: requestId, p_destination_id: destinationId });
       return new Response(JSON.stringify(await responseFor(user.id, { territoryRoomId: hosted.room.id })), { headers });
     }
-    const [prior] = await db(`game04_requests?user_id=eq.${user.id}&request_id=eq.${requestId}&select=request_id,result`);
+    const [prior] = priorRows;
     if (prior) {
       const response = await responseFor(user.id, prior.result?.receipt ?? {});
       if (action === "normal_gacha") {
@@ -61377,15 +65657,17 @@ Deno.serve(async (request) => {
       }
       return new Response(JSON.stringify(response), { headers });
     }
-    const state = await stateFor(user.id);
+    if (acquired && "error" in acquired) throw acquired.error;
+    let measurementReceipt;
+    const state = await stateFor(user.id, acquired?.input);
     let after, room = null, version = null;
     if (action === "normal_gacha") {
       const pool = await db("gacha_items_master?gacha_id=in.(CHAR_NORMAL,SKILL_NORMAL,EQUIP_NORMAL)&select=gacha_id,item_id,item_type,rarity&limit=1000");
       const drawn = applyNormalGacha(state, payload, pool, requestId, Date.now(), await rewardPolicy(), () => crypto.getRandomValues(new Uint32Array(1))[0] / 4294967296);
       const receipt = { normalGachaResults: drawn.results, normalGachaCost: drawn.cost, normalGachaMasterVersion: drawn.masterVersion };
-      const saved = await commit(state, drawn.state, requestId, null, null, null, receipt);
+      const saved2 = await commit(state, drawn.state, requestId, null, null, null, receipt);
       const day = normalGachaDay(Date.now());
-      return new Response(JSON.stringify(await responseFor(user.id, { ...saved.receipt ?? receipt, normalGacha: { pool, day, available: saved.state?.dailyNormalGachaDate !== day } })), { headers });
+      return new Response(JSON.stringify(await responseFor(user.id, { ...saved2.receipt ?? receipt, normalGacha: { pool, day, available: saved2.state?.dailyNormalGachaDate !== day } }, saved2.state)), { headers });
     }
     if (action === "claim_mission") {
       const mission = getClaimableMission(state, await missionConfig(), String(payload.missionId));
@@ -61400,7 +65682,9 @@ Deno.serve(async (request) => {
         throw new ApiError(error instanceof Error ? error.message : "\u672C\u9663\u306E\u5909\u66F4\u3092\u4FDD\u5B58\u3067\u304D\u307E\u305B\u3093\u3067\u3057\u305F\u3002");
       }
     } else if (action === "shop_exchange") {
-      after = applyShopExchange(state, payload);
+      after = synchronizeHomeBackgroundUnlocks(applyShopExchange(state, payload));
+      const saved2 = await rpc("game04_commit_shop_exchange", { p_user_id: state.userId, p_expected_version: state.version, p_state: after, p_before_diamonds: state.diamonds, p_diamond_cost: state.diamonds - after.diamonds, p_cash_delta: after.cash - state.cash, p_request_id: requestId });
+      return new Response(JSON.stringify(await responseFor(user.id, {}, saved2?.state)), { headers });
     } else if (action === "use_energy_drink") {
       after = applyShopEnergyDrink(state);
     } else if (["raid_join", "raid_leave", "raid_rescue", "raid_claim", "encounter_ignore"].includes(action)) {
@@ -61410,9 +65694,21 @@ Deno.serve(async (request) => {
       const changed = applyRaidAction(current, state, action, { name: profile.username }, Date.now(), action === "raid_claim" ? await rewardPolicy() : void 0);
       room = changed.room;
       after = changed.state;
-    } else after = applyGrowthAction(state, action, payload);
-    await commit(state, after, requestId, null, room, version);
-    return new Response(JSON.stringify(await responseFor(user.id)), { headers });
+      if (action === "raid_claim") measurementReceipt = raidClaimMeasurementReceipt(state, after, current, room);
+      if (action === "raid_rescue") {
+        const rescueEvent = raidRescueMissionEvent(room, user.id, requestId, Date.now());
+        if (rescueEvent) after = recordMissionEvent(after, rescueEvent);
+      }
+      after = reconcileRaidMissionProgress(after, [room], Date.now());
+    } else {
+      after = applyGrowthAction(state, action, payload);
+      const growthCounters = ["character_level", "character_awaken", "skill_level", "equipment_level", "equipment_lb"].includes(action) ? ["growth"] : [];
+      if (action === "character_unlock") growthCounters.push("soul_unlock");
+      if (growthCounters.length) after = recordMissionEvent(after, { id: `growth:${requestId}`, at: Date.now(), counters: growthCounters });
+    }
+    const withSaveContext = action === "save_deck" && Deno.env.get("GAME04_SAVE_CONTEXT_RPC") === "true";
+    const saved = await commit(state, after, requestId, null, room, version, measurementReceipt ?? gameplayMeasurementReceipt(action, state, after), withSaveContext);
+    return new Response(JSON.stringify(await responseFor(user.id, {}, saved.state, withSaveContext ? saved.responseContext : void 0)), { headers });
   } catch (error) {
     const conflict = error instanceof ApiError && error.status === 409;
     const message = conflict ? "\u4ED6\u306E\u64CD\u4F5C\u3067\u66F4\u65B0\u3055\u308C\u307E\u3057\u305F\u3002\u518D\u8AAD\u307F\u8FBC\u307F\u3057\u3066\u304A\u8A66\u3057\u304F\u3060\u3055\u3044\u3002" : error instanceof Error ? error.message : "\u51E6\u7406\u306B\u5931\u6557\u3057\u307E\u3057\u305F\u3002";

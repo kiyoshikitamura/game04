@@ -1,0 +1,4905 @@
+{
+  "conditions": {
+    "before": "PR30 60762a6f / API v25",
+    "after": "af640e291d3e79e511833dcef1e16f0ff7528b94 / API v26",
+    "browser": "cloud Chrome, 390x568 emulator; not iPhone Safari",
+    "cache": "warm existing same QA-C; first after growth image group reloaded",
+    "notMeasured": [
+      "cold independently empty-cache 5 trials",
+      "iPhone Safari WiFi",
+      "iPhone Safari 4G/5G",
+      "battle start 20",
+      "actual painted press feedback before/after"
+    ]
+  },
+  "samples": {
+    "before-warm": [
+      {
+        "run": 1,
+        "target": "編成",
+        "origin": 1790313917652.7,
+        "start": 248154.8,
+        "end": 248200.3,
+        "duration": 45.5,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 248171.6,
+            "end": 249697.3,
+            "duration": 1525.7,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 248171.6,
+            "end": 249697.3,
+            "duration": 1525.7,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 248176.4,
+            "end": 248185.0,
+            "duration": 8.6,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 2,
+        "target": "切替",
+        "origin": 1790313917652.7,
+        "start": 248736.8,
+        "end": 248767.9,
+        "duration": 31.1,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 248171.6,
+            "end": 249697.3,
+            "duration": 1525.7,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 248745.8,
+            "end": 248749.6,
+            "duration": 3.8,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 3,
+        "target": "編成",
+        "origin": 1790313917652.7,
+        "start": 252122.9,
+        "end": 252148.6,
+        "duration": 25.7,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 252129.7,
+            "end": 253293.7,
+            "duration": 1164.0,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 252129.7,
+            "end": 253293.7,
+            "duration": 1164.0,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 252133.5,
+            "end": 252136.8,
+            "duration": 3.3,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 4,
+        "target": "切替",
+        "origin": 1790313917652.7,
+        "start": 252717.5,
+        "end": 252756.0,
+        "duration": 38.5,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 252129.7,
+            "end": 253293.7,
+            "duration": 1164.0,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 252732.1,
+            "end": 252735.8,
+            "duration": 3.7,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 5,
+        "target": "編成",
+        "origin": 1790313917652.7,
+        "start": 256118.9,
+        "end": 256148.7,
+        "duration": 29.8,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 256126.7,
+            "end": 257454.1,
+            "duration": 1327.4,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 256126.7,
+            "end": 257454.1,
+            "duration": 1327.4,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 256129.6,
+            "end": 256135.6,
+            "duration": 6.0,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 6,
+        "target": "切替",
+        "origin": 1790313917652.7,
+        "start": 256714.9,
+        "end": 256747.6,
+        "duration": 32.7,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 256126.7,
+            "end": 257454.1,
+            "duration": 1327.4,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 256724.5,
+            "end": 256727.7,
+            "duration": 3.2,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 7,
+        "target": "編成",
+        "origin": 1790313917652.7,
+        "start": 260100.9,
+        "end": 260130.2,
+        "duration": 29.3,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 260108.2,
+            "end": 261274.6,
+            "duration": 1166.4,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 260108.2,
+            "end": 261274.6,
+            "duration": 1166.4,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 260112.3,
+            "end": 260115.9,
+            "duration": 3.6,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 8,
+        "target": "切替",
+        "origin": 1790313917652.7,
+        "start": 260681.7,
+        "end": 260716.3,
+        "duration": 34.6,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 260108.2,
+            "end": 261274.6,
+            "duration": 1166.4,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 260692.9,
+            "end": 260696.0,
+            "duration": 3.1,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 9,
+        "target": "編成",
+        "origin": 1790313917652.7,
+        "start": 264064.1,
+        "end": 264095.8,
+        "duration": 31.7,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 264069.8,
+            "end": 265342.0,
+            "duration": 1272.2,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 264069.8,
+            "end": 265342.0,
+            "duration": 1272.2,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 264073.7,
+            "end": 264077.0,
+            "duration": 3.3,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 10,
+        "target": "切替",
+        "origin": 1790313917652.7,
+        "start": 264664.3,
+        "end": 264696.6,
+        "duration": 32.3,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 264069.8,
+            "end": 265342.0,
+            "duration": 1272.2,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 264672.2,
+            "end": 264675.2,
+            "duration": 3.0,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 11,
+        "target": "編成",
+        "origin": 1790313917652.7,
+        "start": 282863.2,
+        "end": 282891.9,
+        "duration": 28.7,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 282870.0,
+            "end": 286505.7,
+            "duration": 3635.7,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 282870.0,
+            "end": 286505.7,
+            "duration": 3635.7,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 282874.0,
+            "end": 282880.9,
+            "duration": 6.9,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 12,
+        "target": "切替",
+        "origin": 1790313917652.7,
+        "start": 283459.4,
+        "end": 283492.1,
+        "duration": 32.7,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 282870.0,
+            "end": 286505.7,
+            "duration": 3635.7,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 283468.4,
+            "end": 283471.1,
+            "duration": 2.7,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 13,
+        "target": "編成",
+        "origin": 1790313917652.7,
+        "start": 286860.0,
+        "end": 286891.6,
+        "duration": 31.6,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 286867.9,
+            "end": 287989.6,
+            "duration": 1121.7,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 286867.9,
+            "end": 287989.6,
+            "duration": 1121.7,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 286870.8,
+            "end": 286873.5,
+            "duration": 2.7,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 14,
+        "target": "切替",
+        "origin": 1790313917652.7,
+        "start": 287459.4,
+        "end": 287491.6,
+        "duration": 32.2,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 286867.9,
+            "end": 287989.6,
+            "duration": 1121.7,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 287467.0,
+            "end": 287469.6,
+            "duration": 2.6,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 15,
+        "target": "編成",
+        "origin": 1790313917652.7,
+        "start": 290859.2,
+        "end": 290892.4,
+        "duration": 33.2,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 290867.8,
+            "end": 292697.1,
+            "duration": 1829.3,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 290867.8,
+            "end": 292697.1,
+            "duration": 1829.3,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 290870.3,
+            "end": 290875.7,
+            "duration": 5.4,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 16,
+        "target": "切替",
+        "origin": 1790313917652.7,
+        "start": 291457.8,
+        "end": 291496.7,
+        "duration": 38.9,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 290867.8,
+            "end": 292697.1,
+            "duration": 1829.3,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 291465.6,
+            "end": 291469.0,
+            "duration": 3.4,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 17,
+        "target": "編成",
+        "origin": 1790313917652.7,
+        "start": 294860.4,
+        "end": 294906.2,
+        "duration": 45.8,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 294875.2,
+            "end": 296132.5,
+            "duration": 1257.3,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 294875.2,
+            "end": 296132.5,
+            "duration": 1257.3,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 294878.8,
+            "end": 294884.2,
+            "duration": 5.4,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 18,
+        "target": "切替",
+        "origin": 1790313917652.7,
+        "start": 295475.3,
+        "end": 295506.9,
+        "duration": 31.6,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 294875.2,
+            "end": 296132.5,
+            "duration": 1257.3,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 295486.4,
+            "end": 295490.3,
+            "duration": 3.9,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 19,
+        "target": "編成",
+        "origin": 1790313917652.7,
+        "start": 308288.0,
+        "end": 308320.4,
+        "duration": 32.4,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 308293.9,
+            "end": 309666.1,
+            "duration": 1372.2,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 308293.9,
+            "end": 309666.1,
+            "duration": 1372.2,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 308297.6,
+            "end": 308300.7,
+            "duration": 3.1,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 20,
+        "target": "切替",
+        "origin": 1790313917652.7,
+        "start": 308890.2,
+        "end": 308921.3,
+        "duration": 31.1,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 308293.9,
+            "end": 309666.1,
+            "duration": 1372.2,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 308900.6,
+            "end": 308903.4,
+            "duration": 2.8,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 21,
+        "target": "編成",
+        "origin": 1790313917652.7,
+        "start": 312275.9,
+        "end": 312319.9,
+        "duration": 44.0,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 312293.7,
+            "end": 313396.6,
+            "duration": 1102.9,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 312293.7,
+            "end": 313396.6,
+            "duration": 1102.9,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 312298.5,
+            "end": 312303.2,
+            "duration": 4.7,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 22,
+        "target": "切替",
+        "origin": 1790313917652.7,
+        "start": 312871.2,
+        "end": 312904.4,
+        "duration": 33.2,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 312293.7,
+            "end": 313396.6,
+            "duration": 1102.9,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 312882.2,
+            "end": 312885.1,
+            "duration": 2.9,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 23,
+        "target": "編成",
+        "origin": 1790313917652.7,
+        "start": 316272.3,
+        "end": 316301.4,
+        "duration": 29.1,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 316277.9,
+            "end": 317717.6,
+            "duration": 1439.7,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 316277.9,
+            "end": 317717.6,
+            "duration": 1439.7,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 316281.6,
+            "end": 316284.7,
+            "duration": 3.1,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 24,
+        "target": "切替",
+        "origin": 1790313917652.7,
+        "start": 316885.8,
+        "end": 316922.2,
+        "duration": 36.4,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 316277.9,
+            "end": 317717.6,
+            "duration": 1439.7,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 316892.9,
+            "end": 316896.0,
+            "duration": 3.1,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 25,
+        "target": "編成",
+        "origin": 1790313917652.7,
+        "start": 320285.9,
+        "end": 320317.8,
+        "duration": 31.9,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 320292.2,
+            "end": 321442.7,
+            "duration": 1150.5,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 320292.2,
+            "end": 321442.7,
+            "duration": 1150.5,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 320294.9,
+            "end": 320299.1,
+            "duration": 4.2,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 26,
+        "target": "切替",
+        "origin": 1790313917652.7,
+        "start": 320902.9,
+        "end": 320940.1,
+        "duration": 37.2,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 320292.2,
+            "end": 321442.7,
+            "duration": 1150.5,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 320909.9,
+            "end": 320913.0,
+            "duration": 3.1,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 27,
+        "target": "編成",
+        "origin": 1790313917652.7,
+        "start": 324303.0,
+        "end": 324335.3,
+        "duration": 32.3,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 324310.0,
+            "end": 325580.7,
+            "duration": 1270.7,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 324310.0,
+            "end": 325580.7,
+            "duration": 1270.7,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 324313.4,
+            "end": 324318.1,
+            "duration": 4.7,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 28,
+        "target": "切替",
+        "origin": 1790313917652.7,
+        "start": 324902.9,
+        "end": 324935.3,
+        "duration": 32.4,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 324310.0,
+            "end": 325580.7,
+            "duration": 1270.7,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 324913.3,
+            "end": 324916.1,
+            "duration": 2.8,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 29,
+        "target": "編成",
+        "origin": 1790313917652.7,
+        "start": 328319.1,
+        "end": 328350.8,
+        "duration": 31.7,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 327848.4,
+            "end": 329001.0,
+            "duration": 1152.6,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 328331.9,
+            "end": 328337.7,
+            "duration": 5.8,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 30,
+        "target": "切替",
+        "origin": 1790313917652.7,
+        "start": 328921.0,
+        "end": 328947.9,
+        "duration": 26.9,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 327848.4,
+            "end": 329001.0,
+            "duration": 1152.6,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 328931.4,
+            "end": 328934.2,
+            "duration": 2.8,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 31,
+        "target": "編成",
+        "origin": 1790313917652.7,
+        "start": 367926.8,
+        "end": 367956.6,
+        "duration": 29.8,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 367933.4,
+            "end": 369340.0,
+            "duration": 1406.6,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 367933.4,
+            "end": 369340.0,
+            "duration": 1406.6,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 367935.9,
+            "end": 367939.3,
+            "duration": 3.4,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 32,
+        "target": "切替",
+        "origin": 1790313917652.7,
+        "start": 368526.1,
+        "end": 368563.1,
+        "duration": 37.0,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 367933.4,
+            "end": 369340.0,
+            "duration": 1406.6,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 368535.7,
+            "end": 368538.8,
+            "duration": 3.1,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 33,
+        "target": "編成",
+        "origin": 1790313917652.7,
+        "start": 371923.4,
+        "end": 371956.7,
+        "duration": 33.3,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 371931.7,
+            "end": 373033.4,
+            "duration": 1101.7,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 371931.7,
+            "end": 373033.4,
+            "duration": 1101.7,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 371934.0,
+            "end": 371936.9,
+            "duration": 2.9,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 34,
+        "target": "切替",
+        "origin": 1790313917652.7,
+        "start": 372523.9,
+        "end": 372562.7,
+        "duration": 38.8,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 371931.7,
+            "end": 373033.4,
+            "duration": 1101.7,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 372532.7,
+            "end": 372535.7,
+            "duration": 3.0,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 35,
+        "target": "編成",
+        "origin": 1790313917652.7,
+        "start": 375939.8,
+        "end": 375972.2,
+        "duration": 32.4,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 375946.6,
+            "end": 377292.1,
+            "duration": 1345.5,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 375946.6,
+            "end": 377292.1,
+            "duration": 1345.5,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 375948.9,
+            "end": 375952.9,
+            "duration": 4.0,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 36,
+        "target": "切替",
+        "origin": 1790313917652.7,
+        "start": 376539.5,
+        "end": 376572.5,
+        "duration": 33.0,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 375946.6,
+            "end": 377292.1,
+            "duration": 1345.5,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 376548.1,
+            "end": 376550.7,
+            "duration": 2.6,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 37,
+        "target": "編成",
+        "origin": 1790313917652.7,
+        "start": 379939.9,
+        "end": 379970.7,
+        "duration": 30.8,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 379945.4,
+            "end": 381074.7,
+            "duration": 1129.3,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 379945.4,
+            "end": 381074.7,
+            "duration": 1129.3,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 379947.8,
+            "end": 379952.2,
+            "duration": 4.4,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 38,
+        "target": "切替",
+        "origin": 1790313917652.7,
+        "start": 380539.3,
+        "end": 380573.3,
+        "duration": 34.0,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 379945.4,
+            "end": 381074.7,
+            "duration": 1129.3,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 380551.1,
+            "end": 380554.0,
+            "duration": 2.9,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 39,
+        "target": "編成",
+        "origin": 1790313917652.7,
+        "start": 383939.4,
+        "end": 383969.8,
+        "duration": 30.4,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 383946.8,
+            "end": 385314.1,
+            "duration": 1367.3,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 383946.8,
+            "end": 385314.1,
+            "duration": 1367.3,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 383950.7,
+            "end": 383955.0,
+            "duration": 4.3,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 40,
+        "target": "切替",
+        "origin": 1790313917652.7,
+        "start": 384538.0,
+        "end": 384569.6,
+        "duration": 31.6,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 383946.8,
+            "end": 385314.1,
+            "duration": 1367.3,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 384546.7,
+            "end": 384550.7,
+            "duration": 4.0,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      }
+    ],
+    "before-save": [
+      {
+        "run": 1,
+        "target": "閉じる",
+        "origin": 1790313917652.7,
+        "start": 421563.9,
+        "end": 423626.8,
+        "duration": 2062.9,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 421571.5,
+            "end": 423606.9,
+            "duration": 2035.4,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 2,
+        "target": "閉じる",
+        "origin": 1790313917652.7,
+        "start": 462970.8,
+        "end": 465403.1,
+        "duration": 2432.3,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 462977.8,
+            "end": 465377.2,
+            "duration": 2399.4,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 3,
+        "target": "閉じる",
+        "origin": 1790313917652.7,
+        "start": 466071.0,
+        "end": 467850.5,
+        "duration": 1779.5,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 466079.2,
+            "end": 467819.6,
+            "duration": 1740.4,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 4,
+        "target": "閉じる",
+        "origin": 1790313917652.7,
+        "start": 468552.5,
+        "end": 470521.2,
+        "duration": 1968.7,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 468560.1,
+            "end": 470492.8,
+            "duration": 1932.7,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 5,
+        "target": "閉じる",
+        "origin": 1790313917652.7,
+        "start": 471151.4,
+        "end": 472901.6,
+        "duration": 1750.2,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 471157.7,
+            "end": 472875.9,
+            "duration": 1718.2,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 6,
+        "target": "閉じる",
+        "origin": 1790313917652.7,
+        "start": 473552.1,
+        "end": 475398.6,
+        "duration": 1846.5,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 473560.8,
+            "end": 475369.6,
+            "duration": 1808.8,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 7,
+        "target": "閉じる",
+        "origin": 1790313917652.7,
+        "start": 476034.7,
+        "end": 478264.9,
+        "duration": 2230.2,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 476042.4,
+            "end": 478243.2,
+            "duration": 2200.8,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 8,
+        "target": "閉じる",
+        "origin": 1790313917652.7,
+        "start": 478934.8,
+        "end": 480683.2,
+        "duration": 1748.4,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 478940.5,
+            "end": 480658.6,
+            "duration": 1718.1,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 9,
+        "target": "閉じる",
+        "origin": 1790313917652.7,
+        "start": 481332.8,
+        "end": 483346.8,
+        "duration": 2014.0,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 481341.6,
+            "end": 483323.8,
+            "duration": 1982.2,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 10,
+        "target": "閉じる",
+        "origin": 1790313917652.7,
+        "start": 484020.9,
+        "end": 485965.8,
+        "duration": 1944.9,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 484027.6,
+            "end": 485939.4,
+            "duration": 1911.8,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 11,
+        "target": "閉じる",
+        "origin": 1790313917652.7,
+        "start": 503330.9,
+        "end": 505275.6,
+        "duration": 1944.7,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 503339.8,
+            "end": 505250.3,
+            "duration": 1910.5,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 12,
+        "target": "閉じる",
+        "origin": 1790313917652.7,
+        "start": 505928.1,
+        "end": 507657.8,
+        "duration": 1729.7,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 505935.4,
+            "end": 507630.6,
+            "duration": 1695.2,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 13,
+        "target": "閉じる",
+        "origin": 1790313917652.7,
+        "start": 508294.2,
+        "end": 509975.1,
+        "duration": 1680.9,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 508302.1,
+            "end": 509956.1,
+            "duration": 1654.0,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 14,
+        "target": "閉じる",
+        "origin": 1790313917652.7,
+        "start": 510660.1,
+        "end": 512773.8,
+        "duration": 2113.7,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 510666.7,
+            "end": 512754.8,
+            "duration": 2088.1,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 15,
+        "target": "閉じる",
+        "origin": 1790313917652.7,
+        "start": 513459.1,
+        "end": 515256.7,
+        "duration": 1797.6,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 513467.9,
+            "end": 515237.5,
+            "duration": 1769.6,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 16,
+        "target": "閉じる",
+        "origin": 1790313917652.7,
+        "start": 515942.1,
+        "end": 517989.0,
+        "duration": 2046.9,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 515948.7,
+            "end": 517963.3,
+            "duration": 2014.6,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 17,
+        "target": "閉じる",
+        "origin": 1790313917652.7,
+        "start": 518641.3,
+        "end": 520671.9,
+        "duration": 2030.6,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 518650.4,
+            "end": 520645.3,
+            "duration": 1994.9,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 18,
+        "target": "閉じる",
+        "origin": 1790313917652.7,
+        "start": 521324.5,
+        "end": 523495.0,
+        "duration": 2170.5,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 521329.8,
+            "end": 523469.1,
+            "duration": 2139.3,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 19,
+        "target": "閉じる",
+        "origin": 1790313917652.7,
+        "start": 524161.0,
+        "end": 526137.6,
+        "duration": 1976.6,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 524182.7,
+            "end": 526107.7,
+            "duration": 1925.0,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 20,
+        "target": "閉じる",
+        "origin": 1790313917652.7,
+        "start": 526856.7,
+        "end": 528973.4,
+        "duration": 2116.7,
+        "outcome": "ready",
+        "clickDuration": null,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 526864.4,
+            "end": 528949.6,
+            "duration": 2085.2,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [],
+        "actionResult": []
+      }
+    ],
+    "after-warm": [
+      {
+        "run": 1,
+        "target": "編成",
+        "origin": 1790314682705.0,
+        "start": 223221.0,
+        "end": 223767.2,
+        "duration": 546.2,
+        "outcome": "ready",
+        "clickDuration": 539.8,
+        "inputToClick": 6.4,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 223227.7,
+            "end": 224535.2,
+            "duration": 1307.5,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 223227.7,
+            "end": 224535.2,
+            "duration": 1307.5,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 223242.4,
+            "end": 223733.1,
+            "duration": 490.7,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 2,
+        "target": "切替",
+        "origin": 1790314682705.0,
+        "start": 224436.6,
+        "end": 224466.9,
+        "duration": 30.3,
+        "outcome": "ready",
+        "clickDuration": 22.1,
+        "inputToClick": 8.2,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 223227.7,
+            "end": 224535.2,
+            "duration": 1307.5,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 224447.3,
+            "end": 224450.8,
+            "duration": 3.5,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 3,
+        "target": "編成",
+        "origin": 1790314682705.0,
+        "start": 228122.2,
+        "end": 228149.0,
+        "duration": 26.8,
+        "outcome": "ready",
+        "clickDuration": 21.4,
+        "inputToClick": 5.4,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 228127.6,
+            "end": 229236.8,
+            "duration": 1109.2,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 228127.6,
+            "end": 229236.8,
+            "duration": 1109.2,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 228130.9,
+            "end": 228133.9,
+            "duration": 3.0,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 4,
+        "target": "切替",
+        "origin": 1790314682705.0,
+        "start": 229002.8,
+        "end": 229033.5,
+        "duration": 30.7,
+        "outcome": "ready",
+        "clickDuration": 22.3,
+        "inputToClick": 8.4,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 228127.6,
+            "end": 229236.8,
+            "duration": 1109.2,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 229014.4,
+            "end": 229017.1,
+            "duration": 2.7,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 5,
+        "target": "編成",
+        "origin": 1790314682705.0,
+        "start": 232735.4,
+        "end": 232765.8,
+        "duration": 30.4,
+        "outcome": "ready",
+        "clickDuration": 22.3,
+        "inputToClick": 8.1,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 232743.6,
+            "end": 234042.2,
+            "duration": 1298.6,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 232743.6,
+            "end": 234042.2,
+            "duration": 1298.6,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 232747.4,
+            "end": 232753.9,
+            "duration": 6.5,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 6,
+        "target": "切替",
+        "origin": 1790314682705.0,
+        "start": 233617.4,
+        "end": 233648.9,
+        "duration": 31.5,
+        "outcome": "ready",
+        "clickDuration": 24.6,
+        "inputToClick": 6.9,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 232743.6,
+            "end": 234042.2,
+            "duration": 1298.6,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 233626.8,
+            "end": 233629.9,
+            "duration": 3.1,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 7,
+        "target": "編成",
+        "origin": 1790314682705.0,
+        "start": 237316.5,
+        "end": 237346.8,
+        "duration": 30.3,
+        "outcome": "ready",
+        "clickDuration": 25.6,
+        "inputToClick": 4.7,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 237321.4,
+            "end": 239520.3,
+            "duration": 2198.9,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 237321.4,
+            "end": 239520.3,
+            "duration": 2198.9,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 237324.1,
+            "end": 237327.2,
+            "duration": 3.1,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 8,
+        "target": "切替",
+        "origin": 1790314682705.0,
+        "start": 238202.2,
+        "end": 238231.0,
+        "duration": 28.8,
+        "outcome": "ready",
+        "clickDuration": 24.4,
+        "inputToClick": 4.4,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 237321.4,
+            "end": 239520.3,
+            "duration": 2198.9,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 238208.9,
+            "end": 238211.4,
+            "duration": 2.5,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 9,
+        "target": "編成",
+        "origin": 1790314682705.0,
+        "start": 241917.2,
+        "end": 241947.0,
+        "duration": 29.8,
+        "outcome": "ready",
+        "clickDuration": 23.6,
+        "inputToClick": 6.2,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 241923.5,
+            "end": 243226.8,
+            "duration": 1303.3,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 241923.5,
+            "end": 243226.8,
+            "duration": 1303.3,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 241926.4,
+            "end": 241932.9,
+            "duration": 6.5,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 10,
+        "target": "切替",
+        "origin": 1790314682705.0,
+        "start": 242798.0,
+        "end": 242828.8,
+        "duration": 30.8,
+        "outcome": "ready",
+        "clickDuration": 24.4,
+        "inputToClick": 6.4,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 241923.5,
+            "end": 243226.8,
+            "duration": 1303.3,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 242806.6,
+            "end": 242809.2,
+            "duration": 2.6,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 11,
+        "target": "編成",
+        "origin": 1790314682705.0,
+        "start": 270842.8,
+        "end": 270874.2,
+        "duration": 31.4,
+        "outcome": "ready",
+        "clickDuration": 23.2,
+        "inputToClick": 8.2,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 270851.1,
+            "end": 272153.4,
+            "duration": 1302.3,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 270851.1,
+            "end": 272153.4,
+            "duration": 1302.3,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 270853.3,
+            "end": 270864.6,
+            "duration": 11.3,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 12,
+        "target": "切替",
+        "origin": 1790314682705.0,
+        "start": 271726.4,
+        "end": 271764.3,
+        "duration": 37.9,
+        "outcome": "ready",
+        "clickDuration": 31.0,
+        "inputToClick": 6.9,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 270851.1,
+            "end": 272153.4,
+            "duration": 1302.3,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 271737.3,
+            "end": 271740.8,
+            "duration": 3.5,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 13,
+        "target": "編成",
+        "origin": 1790314682705.0,
+        "start": 275409.5,
+        "end": 275438.4,
+        "duration": 28.9,
+        "outcome": "ready",
+        "clickDuration": 23.7,
+        "inputToClick": 5.2,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 275414.8,
+            "end": 276520.6,
+            "duration": 1105.8,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 275414.8,
+            "end": 276520.6,
+            "duration": 1105.8,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 275417.9,
+            "end": 275421.8,
+            "duration": 3.9,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 14,
+        "target": "切替",
+        "origin": 1790314682705.0,
+        "start": 276293.5,
+        "end": 276322.7,
+        "duration": 29.2,
+        "outcome": "ready",
+        "clickDuration": 25.0,
+        "inputToClick": 4.2,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 275414.8,
+            "end": 276520.6,
+            "duration": 1105.8,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 276300.2,
+            "end": 276303.7,
+            "duration": 3.5,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 15,
+        "target": "編成",
+        "origin": 1790314682705.0,
+        "start": 279975.8,
+        "end": 280004.3,
+        "duration": 28.5,
+        "outcome": "ready",
+        "clickDuration": 22.0,
+        "inputToClick": 6.5,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 279982.4,
+            "end": 281346.1,
+            "duration": 1363.7,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 279982.4,
+            "end": 281346.1,
+            "duration": 1363.7,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 279985.4,
+            "end": 279990.2,
+            "duration": 4.8,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 16,
+        "target": "切替",
+        "origin": 1790314682705.0,
+        "start": 280857.3,
+        "end": 280890.4,
+        "duration": 33.1,
+        "outcome": "ready",
+        "clickDuration": 24.2,
+        "inputToClick": 8.9,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 279982.4,
+            "end": 281346.1,
+            "duration": 1363.7,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 280868.6,
+            "end": 280872.0,
+            "duration": 3.4,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 17,
+        "target": "編成",
+        "origin": 1790314682705.0,
+        "start": 284540.1,
+        "end": 284569.7,
+        "duration": 29.6,
+        "outcome": "ready",
+        "clickDuration": 22.7,
+        "inputToClick": 6.9,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 284547.0,
+            "end": 285660.6,
+            "duration": 1113.6,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 284547.0,
+            "end": 285660.6,
+            "duration": 1113.6,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 284551.0,
+            "end": 284555.3,
+            "duration": 4.3,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 18,
+        "target": "切替",
+        "origin": 1790314682705.0,
+        "start": 285421.9,
+        "end": 285454.4,
+        "duration": 32.5,
+        "outcome": "ready",
+        "clickDuration": 27.4,
+        "inputToClick": 5.1,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 284547.0,
+            "end": 285660.6,
+            "duration": 1113.6,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 285429.3,
+            "end": 285432.0,
+            "duration": 2.7,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 19,
+        "target": "編成",
+        "origin": 1790314682705.0,
+        "start": 289105.6,
+        "end": 289136.1,
+        "duration": 30.5,
+        "outcome": "ready",
+        "clickDuration": 19.9,
+        "inputToClick": 10.6,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 289116.3,
+            "end": 290449.0,
+            "duration": 1332.7,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 289116.3,
+            "end": 290449.0,
+            "duration": 1332.7,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 289118.7,
+            "end": 289123.0,
+            "duration": 4.3,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 20,
+        "target": "切替",
+        "origin": 1790314682705.0,
+        "start": 289988.5,
+        "end": 290019.9,
+        "duration": 31.4,
+        "outcome": "ready",
+        "clickDuration": 24.6,
+        "inputToClick": 6.8,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 289116.3,
+            "end": 290449.0,
+            "duration": 1332.7,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 289998.7,
+            "end": 290001.7,
+            "duration": 3.0,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 21,
+        "target": "編成",
+        "origin": 1790314682705.0,
+        "start": 310218.1,
+        "end": 310248.5,
+        "duration": 30.4,
+        "outcome": "ready",
+        "clickDuration": 23.7,
+        "inputToClick": 6.7,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 310224.9,
+            "end": 311570.2,
+            "duration": 1345.3,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 310224.9,
+            "end": 311570.2,
+            "duration": 1345.3,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 310227.7,
+            "end": 310234.0,
+            "duration": 6.3,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 22,
+        "target": "切替",
+        "origin": 1790314682705.0,
+        "start": 311102.2,
+        "end": 311133.4,
+        "duration": 31.2,
+        "outcome": "ready",
+        "clickDuration": 26.0,
+        "inputToClick": 5.2,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 310224.9,
+            "end": 311570.2,
+            "duration": 1345.3,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 311109.8,
+            "end": 311115.1,
+            "duration": 5.3,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 23,
+        "target": "編成",
+        "origin": 1790314682705.0,
+        "start": 314782.5,
+        "end": 314813.0,
+        "duration": 30.5,
+        "outcome": "ready",
+        "clickDuration": 22.7,
+        "inputToClick": 7.8,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 314790.4,
+            "end": 315953.6,
+            "duration": 1163.2,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 314790.4,
+            "end": 315953.6,
+            "duration": 1163.2,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 314792.9,
+            "end": 314796.4,
+            "duration": 3.5,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 24,
+        "target": "切替",
+        "origin": 1790314682705.0,
+        "start": 315650.6,
+        "end": 315680.3,
+        "duration": 29.7,
+        "outcome": "ready",
+        "clickDuration": 24.1,
+        "inputToClick": 5.6,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 314790.4,
+            "end": 315953.6,
+            "duration": 1163.2,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 315658.3,
+            "end": 315660.9,
+            "duration": 2.6,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 25,
+        "target": "編成",
+        "origin": 1790314682705.0,
+        "start": 319315.4,
+        "end": 319345.9,
+        "duration": 30.5,
+        "outcome": "ready",
+        "clickDuration": 24.6,
+        "inputToClick": 5.9,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 319324.0,
+            "end": 319327.1,
+            "duration": 3.1,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 26,
+        "target": "切替",
+        "origin": 1790314682705.0,
+        "start": 320198.8,
+        "end": 320234.1,
+        "duration": 35.3,
+        "outcome": "ready",
+        "clickDuration": 28.3,
+        "inputToClick": 7.0,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 320205.9,
+            "end": 322470.0,
+            "duration": 2264.1,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 320205.9,
+            "end": 322470.0,
+            "duration": 2264.1,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 320209.4,
+            "end": 320212.8,
+            "duration": 3.4,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 27,
+        "target": "編成",
+        "origin": 1790314682705.0,
+        "start": 323883.3,
+        "end": 323912.1,
+        "duration": 28.8,
+        "outcome": "ready",
+        "clickDuration": 19.5,
+        "inputToClick": 9.3,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 323892.6,
+            "end": 324972.4,
+            "duration": 1079.8,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 323892.6,
+            "end": 324972.4,
+            "duration": 1079.8,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 323895.3,
+            "end": 323898.7,
+            "duration": 3.4,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 28,
+        "target": "切替",
+        "origin": 1790314682705.0,
+        "start": 324767.5,
+        "end": 324796.2,
+        "duration": 28.7,
+        "outcome": "ready",
+        "clickDuration": 23.2,
+        "inputToClick": 5.5,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 323892.6,
+            "end": 324972.4,
+            "duration": 1079.8,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 324775.1,
+            "end": 324783.0,
+            "duration": 7.9,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 29,
+        "target": "編成",
+        "origin": 1790314682705.0,
+        "start": 328463.7,
+        "end": 328494.1,
+        "duration": 30.4,
+        "outcome": "ready",
+        "clickDuration": 23.7,
+        "inputToClick": 6.7,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 328470.4,
+            "end": 329551.3,
+            "duration": 1080.9,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 328470.4,
+            "end": 329551.3,
+            "duration": 1080.9,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 328472.8,
+            "end": 328475.7,
+            "duration": 2.9,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 30,
+        "target": "切替",
+        "origin": 1790314682705.0,
+        "start": 329346.0,
+        "end": 329376.7,
+        "duration": 30.7,
+        "outcome": "ready",
+        "clickDuration": 24.5,
+        "inputToClick": 6.2,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 328470.4,
+            "end": 329551.3,
+            "duration": 1080.9,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 329355.1,
+            "end": 329358.4,
+            "duration": 3.3,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 31,
+        "target": "編成",
+        "origin": 1790314682705.0,
+        "start": 347026.6,
+        "end": 347057.7,
+        "duration": 31.1,
+        "outcome": "ready",
+        "clickDuration": 22.8,
+        "inputToClick": 8.3,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 347035.0,
+            "end": 348342.0,
+            "duration": 1307.0,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 347035.0,
+            "end": 348342.0,
+            "duration": 1307.0,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 347038.6,
+            "end": 347046.0,
+            "duration": 7.4,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 32,
+        "target": "切替",
+        "origin": 1790314682705.0,
+        "start": 347911.1,
+        "end": 347939.3,
+        "duration": 28.2,
+        "outcome": "ready",
+        "clickDuration": 21.5,
+        "inputToClick": 6.7,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 347035.0,
+            "end": 348342.0,
+            "duration": 1307.0,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 347920.7,
+            "end": 347923.8,
+            "duration": 3.1,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 33,
+        "target": "編成",
+        "origin": 1790314682705.0,
+        "start": 351593.9,
+        "end": 351622.2,
+        "duration": 28.3,
+        "outcome": "ready",
+        "clickDuration": 20.1,
+        "inputToClick": 8.2,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 351602.1,
+            "end": 352761.8,
+            "duration": 1159.7,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 351602.1,
+            "end": 352761.8,
+            "duration": 1159.7,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 351606.8,
+            "end": 351612.7,
+            "duration": 5.9,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 34,
+        "target": "切替",
+        "origin": 1790314682705.0,
+        "start": 352474.7,
+        "end": 352506.9,
+        "duration": 32.2,
+        "outcome": "ready",
+        "clickDuration": 25.5,
+        "inputToClick": 6.7,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 351602.1,
+            "end": 352761.8,
+            "duration": 1159.7,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 352483.5,
+            "end": 352487.7,
+            "duration": 4.2,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 35,
+        "target": "編成",
+        "origin": 1790314682705.0,
+        "start": 356141.8,
+        "end": 356170.6,
+        "duration": 28.8,
+        "outcome": "ready",
+        "clickDuration": 22.1,
+        "inputToClick": 6.7,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 356148.6,
+            "end": 357584.9,
+            "duration": 1436.3,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 356148.6,
+            "end": 357584.9,
+            "duration": 1436.3,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 356151.5,
+            "end": 356155.5,
+            "duration": 4.0,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 36,
+        "target": "切替",
+        "origin": 1790314682705.0,
+        "start": 357043.2,
+        "end": 357074.2,
+        "duration": 31.0,
+        "outcome": "ready",
+        "clickDuration": 24.3,
+        "inputToClick": 6.7,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 356148.6,
+            "end": 357584.9,
+            "duration": 1436.3,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 357052.1,
+            "end": 357055.0,
+            "duration": 2.9,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 37,
+        "target": "編成",
+        "origin": 1790314682705.0,
+        "start": 360723.6,
+        "end": 360752.6,
+        "duration": 29.0,
+        "outcome": "ready",
+        "clickDuration": 20.9,
+        "inputToClick": 8.1,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 360732.0,
+            "end": 361980.3,
+            "duration": 1248.3,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 360732.0,
+            "end": 361980.3,
+            "duration": 1248.3,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 360734.6,
+            "end": 360739.1,
+            "duration": 4.5,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 38,
+        "target": "切替",
+        "origin": 1790314682705.0,
+        "start": 361622.3,
+        "end": 361654.0,
+        "duration": 31.7,
+        "outcome": "ready",
+        "clickDuration": 24.7,
+        "inputToClick": 7.0,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 360732.0,
+            "end": 361980.3,
+            "duration": 1248.3,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 361632.6,
+            "end": 361635.6,
+            "duration": 3.0,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 39,
+        "target": "編成",
+        "origin": 1790314682705.0,
+        "start": 365306.2,
+        "end": 365335.8,
+        "duration": 29.6,
+        "outcome": "ready",
+        "clickDuration": 24.2,
+        "inputToClick": 5.4,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 365311.7,
+            "end": 366665.7,
+            "duration": 1354.0,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 365311.7,
+            "end": 366665.7,
+            "duration": 1354.0,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "growth",
+            "count": 17,
+            "start": 365316.1,
+            "end": 365320.6,
+            "duration": 4.5,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      },
+      {
+        "run": 40,
+        "target": "切替",
+        "origin": 1790314682705.0,
+        "start": 366190.9,
+        "end": 366233.0,
+        "duration": 42.1,
+        "outcome": "ready",
+        "clickDuration": 30.0,
+        "inputToClick": 12.1,
+        "requestsStartedByOperation": [],
+        "requestsStillRunningAtReady": [
+          {
+            "kind": "request",
+            "scope": "get_state",
+            "count": null,
+            "start": 365311.7,
+            "end": 366665.7,
+            "duration": 1354.0,
+            "outcome": "success"
+          }
+        ],
+        "imageGroupsStartedByOperation": [
+          {
+            "kind": "image-group",
+            "scope": "home",
+            "count": 9,
+            "start": 366206.6,
+            "end": 366213.5,
+            "duration": 6.9,
+            "outcome": "success"
+          }
+        ],
+        "feedback": [],
+        "actionResult": []
+      }
+    ],
+    "after-save": [
+      {
+        "run": 1,
+        "target": "閉じる",
+        "origin": 1790314682705.0,
+        "start": 386850.5,
+        "end": 388647.9,
+        "duration": 1797.4,
+        "outcome": "ready",
+        "clickDuration": 1793.0,
+        "inputToClick": 4.4,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 386855.6,
+            "end": 388618.8,
+            "duration": 1763.2,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [
+          {
+            "kind": "action-feedback",
+            "scope": "save_deck",
+            "count": null,
+            "start": 386855.5,
+            "end": 386858.5,
+            "duration": 3.0,
+            "outcome": "success"
+          }
+        ],
+        "actionResult": [
+          {
+            "kind": "action-result",
+            "scope": "save_deck",
+            "count": null,
+            "start": 386855.5,
+            "end": 388621.3,
+            "duration": 1765.8,
+            "outcome": "success"
+          }
+        ]
+      },
+      {
+        "run": 2,
+        "target": "閉じる",
+        "origin": 1790314682705.0,
+        "start": 389633.3,
+        "end": 391280.0,
+        "duration": 1646.7,
+        "outcome": "ready",
+        "clickDuration": 1638.6,
+        "inputToClick": 8.1,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 389641.6,
+            "end": 391248.3,
+            "duration": 1606.7,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [
+          {
+            "kind": "action-feedback",
+            "scope": "save_deck",
+            "count": null,
+            "start": 389641.5,
+            "end": 389645.1,
+            "duration": 3.6,
+            "outcome": "success"
+          }
+        ],
+        "actionResult": [
+          {
+            "kind": "action-result",
+            "scope": "save_deck",
+            "count": null,
+            "start": 389641.5,
+            "end": 391250.9,
+            "duration": 1609.4,
+            "outcome": "success"
+          }
+        ]
+      },
+      {
+        "run": 3,
+        "target": "閉じる",
+        "origin": 1790314682705.0,
+        "start": 392333.3,
+        "end": 394114.5,
+        "duration": 1781.2,
+        "outcome": "ready",
+        "clickDuration": 1775.0,
+        "inputToClick": 6.2,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 392339.7,
+            "end": 394084.2,
+            "duration": 1744.5,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [
+          {
+            "kind": "action-feedback",
+            "scope": "save_deck",
+            "count": null,
+            "start": 392339.7,
+            "end": 392342.4,
+            "duration": 2.7,
+            "outcome": "success"
+          }
+        ],
+        "actionResult": [
+          {
+            "kind": "action-result",
+            "scope": "save_deck",
+            "count": null,
+            "start": 392339.7,
+            "end": 394086.1,
+            "duration": 1746.4,
+            "outcome": "success"
+          }
+        ]
+      },
+      {
+        "run": 4,
+        "target": "閉じる",
+        "origin": 1790314682705.0,
+        "start": 395098.4,
+        "end": 396754.2,
+        "duration": 1655.8,
+        "outcome": "ready",
+        "clickDuration": 1650.0,
+        "inputToClick": 5.8,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 395104.4,
+            "end": 396714.3,
+            "duration": 1609.9,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [
+          {
+            "kind": "action-feedback",
+            "scope": "save_deck",
+            "count": null,
+            "start": 395104.4,
+            "end": 395106.7,
+            "duration": 2.3,
+            "outcome": "success"
+          }
+        ],
+        "actionResult": [
+          {
+            "kind": "action-result",
+            "scope": "save_deck",
+            "count": null,
+            "start": 395104.4,
+            "end": 396716.4,
+            "duration": 1612.0,
+            "outcome": "success"
+          }
+        ]
+      },
+      {
+        "run": 5,
+        "target": "閉じる",
+        "origin": 1790314682705.0,
+        "start": 397765.0,
+        "end": 399511.6,
+        "duration": 1746.6,
+        "outcome": "ready",
+        "clickDuration": 1740.7,
+        "inputToClick": 5.9,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 397771.4,
+            "end": 399479.4,
+            "duration": 1708.0,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [
+          {
+            "kind": "action-feedback",
+            "scope": "save_deck",
+            "count": null,
+            "start": 397771.0,
+            "end": 397773.8,
+            "duration": 2.8,
+            "outcome": "success"
+          }
+        ],
+        "actionResult": [
+          {
+            "kind": "action-result",
+            "scope": "save_deck",
+            "count": null,
+            "start": 397771.0,
+            "end": 399482.0,
+            "duration": 1711.0,
+            "outcome": "success"
+          }
+        ]
+      },
+      {
+        "run": 6,
+        "target": "閉じる",
+        "origin": 1790314682705.0,
+        "start": 414730.6,
+        "end": 416590.9,
+        "duration": 1860.3,
+        "outcome": "ready",
+        "clickDuration": 1855.1,
+        "inputToClick": 5.2,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 414736.1,
+            "end": 416565.8,
+            "duration": 1829.7,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [
+          {
+            "kind": "action-feedback",
+            "scope": "save_deck",
+            "count": null,
+            "start": 414735.9,
+            "end": 414738.9,
+            "duration": 3.0,
+            "outcome": "success"
+          }
+        ],
+        "actionResult": [
+          {
+            "kind": "action-result",
+            "scope": "save_deck",
+            "count": null,
+            "start": 414735.9,
+            "end": 416568.1,
+            "duration": 1832.2,
+            "outcome": "success"
+          }
+        ]
+      },
+      {
+        "run": 7,
+        "target": "閉じる",
+        "origin": 1790314682705.0,
+        "start": 417610.0,
+        "end": 419991.3,
+        "duration": 2381.3,
+        "outcome": "ready",
+        "clickDuration": 2374.9,
+        "inputToClick": 6.4,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 417616.6,
+            "end": 419961.5,
+            "duration": 2344.9,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [
+          {
+            "kind": "action-feedback",
+            "scope": "save_deck",
+            "count": null,
+            "start": 417616.5,
+            "end": 417619.0,
+            "duration": 2.5,
+            "outcome": "success"
+          }
+        ],
+        "actionResult": [
+          {
+            "kind": "action-result",
+            "scope": "save_deck",
+            "count": null,
+            "start": 417616.5,
+            "end": 419963.9,
+            "duration": 2347.4,
+            "outcome": "success"
+          }
+        ]
+      },
+      {
+        "run": 8,
+        "target": "閉じる",
+        "origin": 1790314682705.0,
+        "start": 421010.2,
+        "end": 422789.5,
+        "duration": 1779.3,
+        "outcome": "ready",
+        "clickDuration": 1773.5,
+        "inputToClick": 5.8,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 421016.2,
+            "end": 422755.3,
+            "duration": 1739.1,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [
+          {
+            "kind": "action-feedback",
+            "scope": "save_deck",
+            "count": null,
+            "start": 421016.1,
+            "end": 421020.6,
+            "duration": 4.5,
+            "outcome": "success"
+          }
+        ],
+        "actionResult": [
+          {
+            "kind": "action-result",
+            "scope": "save_deck",
+            "count": null,
+            "start": 421016.1,
+            "end": 422757.8,
+            "duration": 1741.7,
+            "outcome": "success"
+          }
+        ]
+      },
+      {
+        "run": 9,
+        "target": "閉じる",
+        "origin": 1790314682705.0,
+        "start": 423778.5,
+        "end": 425322.8,
+        "duration": 1544.3,
+        "outcome": "ready",
+        "clickDuration": 1536.0,
+        "inputToClick": 8.3,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 423787.0,
+            "end": 425293.7,
+            "duration": 1506.7,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [
+          {
+            "kind": "action-feedback",
+            "scope": "save_deck",
+            "count": null,
+            "start": 423786.9,
+            "end": 423792.6,
+            "duration": 5.7,
+            "outcome": "success"
+          }
+        ],
+        "actionResult": [
+          {
+            "kind": "action-result",
+            "scope": "save_deck",
+            "count": null,
+            "start": 423786.9,
+            "end": 425295.8,
+            "duration": 1508.9,
+            "outcome": "success"
+          }
+        ]
+      },
+      {
+        "run": 10,
+        "target": "閉じる",
+        "origin": 1790314682705.0,
+        "start": 426341.6,
+        "end": 428355.6,
+        "duration": 2014.0,
+        "outcome": "ready",
+        "clickDuration": 2008.1,
+        "inputToClick": 5.9,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 426347.7,
+            "end": 428330.9,
+            "duration": 1983.2,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [
+          {
+            "kind": "action-feedback",
+            "scope": "save_deck",
+            "count": null,
+            "start": 426347.6,
+            "end": 426350.0,
+            "duration": 2.4,
+            "outcome": "success"
+          }
+        ],
+        "actionResult": [
+          {
+            "kind": "action-result",
+            "scope": "save_deck",
+            "count": null,
+            "start": 426347.6,
+            "end": 428332.9,
+            "duration": 1985.3,
+            "outcome": "success"
+          }
+        ]
+      },
+      {
+        "run": 11,
+        "target": "閉じる",
+        "origin": 1790314682705.0,
+        "start": 456501.0,
+        "end": 458368.5,
+        "duration": 1867.5,
+        "outcome": "ready",
+        "clickDuration": 1859.9,
+        "inputToClick": 7.6,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 456508.7,
+            "end": 458336.0,
+            "duration": 1827.3,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [
+          {
+            "kind": "action-feedback",
+            "scope": "save_deck",
+            "count": null,
+            "start": 456508.6,
+            "end": 456511.0,
+            "duration": 2.4,
+            "outcome": "success"
+          }
+        ],
+        "actionResult": [
+          {
+            "kind": "action-result",
+            "scope": "save_deck",
+            "count": null,
+            "start": 456508.6,
+            "end": 458338.3,
+            "duration": 1829.7,
+            "outcome": "success"
+          }
+        ]
+      },
+      {
+        "run": 12,
+        "target": "閉じる",
+        "origin": 1790314682705.0,
+        "start": 459418.3,
+        "end": 461080.9,
+        "duration": 1662.6,
+        "outcome": "ready",
+        "clickDuration": 1656.0,
+        "inputToClick": 6.6,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 459425.2,
+            "end": 461056.7,
+            "duration": 1631.5,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [
+          {
+            "kind": "action-feedback",
+            "scope": "save_deck",
+            "count": null,
+            "start": 459425.0,
+            "end": 459427.4,
+            "duration": 2.4,
+            "outcome": "success"
+          }
+        ],
+        "actionResult": [
+          {
+            "kind": "action-result",
+            "scope": "save_deck",
+            "count": null,
+            "start": 459425.0,
+            "end": 461058.8,
+            "duration": 1633.8,
+            "outcome": "success"
+          }
+        ]
+      },
+      {
+        "run": 13,
+        "target": "閉じる",
+        "origin": 1790314682705.0,
+        "start": 462068.1,
+        "end": 463930.7,
+        "duration": 1862.6,
+        "outcome": "ready",
+        "clickDuration": 1855.7,
+        "inputToClick": 6.9,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 462075.3,
+            "end": 463899.9,
+            "duration": 1824.6,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [
+          {
+            "kind": "action-feedback",
+            "scope": "save_deck",
+            "count": null,
+            "start": 462075.1,
+            "end": 462078.3,
+            "duration": 3.2,
+            "outcome": "success"
+          }
+        ],
+        "actionResult": [
+          {
+            "kind": "action-result",
+            "scope": "save_deck",
+            "count": null,
+            "start": 462075.1,
+            "end": 463901.7,
+            "duration": 1826.6,
+            "outcome": "success"
+          }
+        ]
+      },
+      {
+        "run": 14,
+        "target": "閉じる",
+        "origin": 1790314682705.0,
+        "start": 464933.1,
+        "end": 466480.4,
+        "duration": 1547.3,
+        "outcome": "ready",
+        "clickDuration": 1539.8,
+        "inputToClick": 7.5,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 464940.8,
+            "end": 466448.8,
+            "duration": 1508.0,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [
+          {
+            "kind": "action-feedback",
+            "scope": "save_deck",
+            "count": null,
+            "start": 464940.6,
+            "end": 464944.1,
+            "duration": 3.5,
+            "outcome": "success"
+          }
+        ],
+        "actionResult": [
+          {
+            "kind": "action-result",
+            "scope": "save_deck",
+            "count": null,
+            "start": 464940.6,
+            "end": 466450.7,
+            "duration": 1510.1,
+            "outcome": "success"
+          }
+        ]
+      },
+      {
+        "run": 15,
+        "target": "閉じる",
+        "origin": 1790314682705.0,
+        "start": 467515.9,
+        "end": 469314.7,
+        "duration": 1798.8,
+        "outcome": "ready",
+        "clickDuration": 1794.3,
+        "inputToClick": 4.5,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 467520.7,
+            "end": 469292.9,
+            "duration": 1772.2,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [
+          {
+            "kind": "action-feedback",
+            "scope": "save_deck",
+            "count": null,
+            "start": 467520.5,
+            "end": 467523.8,
+            "duration": 3.3,
+            "outcome": "success"
+          }
+        ],
+        "actionResult": [
+          {
+            "kind": "action-result",
+            "scope": "save_deck",
+            "count": null,
+            "start": 467520.5,
+            "end": 469295.3,
+            "duration": 1774.8,
+            "outcome": "success"
+          }
+        ]
+      },
+      {
+        "run": 16,
+        "target": "閉じる",
+        "origin": 1790314682705.0,
+        "start": 487362.7,
+        "end": 489159.3,
+        "duration": 1796.6,
+        "outcome": "ready",
+        "clickDuration": 1790.4,
+        "inputToClick": 6.2,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 487369.3,
+            "end": 489135.8,
+            "duration": 1766.5,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [
+          {
+            "kind": "action-feedback",
+            "scope": "save_deck",
+            "count": null,
+            "start": 487369.1,
+            "end": 487372.3,
+            "duration": 3.2,
+            "outcome": "success"
+          }
+        ],
+        "actionResult": [
+          {
+            "kind": "action-result",
+            "scope": "save_deck",
+            "count": null,
+            "start": 487369.1,
+            "end": 489138.8,
+            "duration": 1769.7,
+            "outcome": "success"
+          }
+        ]
+      },
+      {
+        "run": 17,
+        "target": "閉じる",
+        "origin": 1790314682705.0,
+        "start": 490144.4,
+        "end": 491790.8,
+        "duration": 1646.4,
+        "outcome": "ready",
+        "clickDuration": 1640.0,
+        "inputToClick": 6.4,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 490151.1,
+            "end": 491766.2,
+            "duration": 1615.1,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [
+          {
+            "kind": "action-feedback",
+            "scope": "save_deck",
+            "count": null,
+            "start": 490151.0,
+            "end": 490154.1,
+            "duration": 3.1,
+            "outcome": "success"
+          }
+        ],
+        "actionResult": [
+          {
+            "kind": "action-result",
+            "scope": "save_deck",
+            "count": null,
+            "start": 490151.0,
+            "end": 491768.3,
+            "duration": 1617.3,
+            "outcome": "success"
+          }
+        ]
+      },
+      {
+        "run": 18,
+        "target": "閉じる",
+        "origin": 1790314682705.0,
+        "start": 492810.6,
+        "end": 494607.4,
+        "duration": 1796.8,
+        "outcome": "ready",
+        "clickDuration": 1788.6,
+        "inputToClick": 8.2,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 492819.0,
+            "end": 494579.1,
+            "duration": 1760.1,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [
+          {
+            "kind": "action-feedback",
+            "scope": "save_deck",
+            "count": null,
+            "start": 492818.9,
+            "end": 492823.2,
+            "duration": 4.3,
+            "outcome": "success"
+          }
+        ],
+        "actionResult": [
+          {
+            "kind": "action-result",
+            "scope": "save_deck",
+            "count": null,
+            "start": 492818.9,
+            "end": 494581.6,
+            "duration": 1762.7,
+            "outcome": "success"
+          }
+        ]
+      },
+      {
+        "run": 19,
+        "target": "閉じる",
+        "origin": 1790314682705.0,
+        "start": 495593.7,
+        "end": 497160.5,
+        "duration": 1566.8,
+        "outcome": "ready",
+        "clickDuration": 1561.2,
+        "inputToClick": 5.6,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 495599.5,
+            "end": 497134.9,
+            "duration": 1535.4,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [
+          {
+            "kind": "action-feedback",
+            "scope": "save_deck",
+            "count": null,
+            "start": 495599.4,
+            "end": 495601.8,
+            "duration": 2.4,
+            "outcome": "success"
+          }
+        ],
+        "actionResult": [
+          {
+            "kind": "action-result",
+            "scope": "save_deck",
+            "count": null,
+            "start": 495599.4,
+            "end": 497137.1,
+            "duration": 1537.7,
+            "outcome": "success"
+          }
+        ]
+      },
+      {
+        "run": 20,
+        "target": "閉じる",
+        "origin": 1790314682705.0,
+        "start": 498176.3,
+        "end": 500274.5,
+        "duration": 2098.2,
+        "outcome": "ready",
+        "clickDuration": 2090.5,
+        "inputToClick": 7.7,
+        "requestsStartedByOperation": [
+          {
+            "kind": "request",
+            "scope": "save_deck",
+            "count": null,
+            "start": 498184.2,
+            "end": 500246.2,
+            "duration": 2062.0,
+            "outcome": "success"
+          }
+        ],
+        "requestsStillRunningAtReady": [],
+        "imageGroupsStartedByOperation": [],
+        "feedback": [
+          {
+            "kind": "action-feedback",
+            "scope": "save_deck",
+            "count": null,
+            "start": 498184.0,
+            "end": 498187.3,
+            "duration": 3.3,
+            "outcome": "success"
+          }
+        ],
+        "actionResult": [
+          {
+            "kind": "action-result",
+            "scope": "save_deck",
+            "count": null,
+            "start": 498184.0,
+            "end": 500248.1,
+            "duration": 2064.1,
+            "outcome": "success"
+          }
+        ]
+      }
+    ]
+  },
+  "summary": {
+    "before-warm-切替": {
+      "ctaObservation": {
+        "n": 20,
+        "median": 32.85,
+        "p95": 38.8,
+        "max": 38.9,
+        "within1s": 20,
+        "within1_5s": 20,
+        "within100ms": 20
+      },
+      "clickCta": null,
+      "api": null,
+      "images": {
+        "n": 20,
+        "median": 3.05,
+        "p95": 3.9,
+        "max": 4.0,
+        "within1s": 20,
+        "within1_5s": 20,
+        "within100ms": 20
+      },
+      "feedbackDomCommit": null,
+      "actionResultDomCommit": null,
+      "readyWhileApiRunning": 20,
+      "allReady": true,
+      "ctaOnly1sRule": true,
+      "ctaOnly1_5sRule": true,
+      "acceptance": "未測定（主要情報正当性・実機条件をCTA観測のみで代替不可）"
+    },
+    "before-warm-編成": {
+      "ctaObservation": {
+        "n": 20,
+        "median": 31.7,
+        "p95": 45.5,
+        "max": 45.8,
+        "within1s": 20,
+        "within1_5s": 20,
+        "within100ms": 20
+      },
+      "clickCta": null,
+      "api": {
+        "n": 19,
+        "median": 1272.2,
+        "p95": 3635.7,
+        "max": 3635.7,
+        "within1s": 0,
+        "within1_5s": 16,
+        "within100ms": 0
+      },
+      "images": {
+        "n": 20,
+        "median": 4.25,
+        "p95": 6.9,
+        "max": 8.6,
+        "within1s": 20,
+        "within1_5s": 20,
+        "within100ms": 20
+      },
+      "feedbackDomCommit": null,
+      "actionResultDomCommit": null,
+      "readyWhileApiRunning": 20,
+      "allReady": true,
+      "ctaOnly1sRule": true,
+      "ctaOnly1_5sRule": true,
+      "acceptance": "未測定（主要情報正当性・実機条件をCTA観測のみで代替不可）"
+    },
+    "before-save-閉じる": {
+      "ctaObservation": {
+        "n": 20,
+        "median": 1972.65,
+        "p95": 2230.2,
+        "max": 2432.3,
+        "within1s": 0,
+        "within1_5s": 0,
+        "within100ms": 0
+      },
+      "clickCta": null,
+      "api": {
+        "n": 20,
+        "median": 1928.85,
+        "p95": 2200.8,
+        "max": 2399.4,
+        "within1s": 0,
+        "within1_5s": 0,
+        "within100ms": 0
+      },
+      "images": null,
+      "feedbackDomCommit": null,
+      "actionResultDomCommit": null,
+      "readyWhileApiRunning": 0,
+      "allReady": true,
+      "ctaOnly1sRule": false,
+      "ctaOnly1_5sRule": false,
+      "acceptance": "未達"
+    },
+    "after-warm-切替": {
+      "ctaObservation": {
+        "n": 20,
+        "median": 31.1,
+        "p95": 37.9,
+        "max": 42.1,
+        "within1s": 20,
+        "within1_5s": 20,
+        "within100ms": 20
+      },
+      "clickCta": {
+        "n": 20,
+        "median": 24.55,
+        "p95": 30.0,
+        "max": 31.0,
+        "within1s": 20,
+        "within1_5s": 20,
+        "within100ms": 20
+      },
+      "api": {
+        "n": 1,
+        "median": 2264.1,
+        "p95": 2264.1,
+        "max": 2264.1,
+        "within1s": 0,
+        "within1_5s": 0,
+        "within100ms": 0
+      },
+      "images": {
+        "n": 20,
+        "median": 3.2,
+        "p95": 6.9,
+        "max": 7.9,
+        "within1s": 20,
+        "within1_5s": 20,
+        "within100ms": 20
+      },
+      "feedbackDomCommit": null,
+      "actionResultDomCommit": null,
+      "readyWhileApiRunning": 20,
+      "allReady": true,
+      "ctaOnly1sRule": true,
+      "ctaOnly1_5sRule": true,
+      "acceptance": "未測定（主要情報正当性・実機条件をCTA観測のみで代替不可）"
+    },
+    "after-warm-編成": {
+      "ctaObservation": {
+        "n": 20,
+        "median": 30.05,
+        "p95": 31.4,
+        "max": 546.2,
+        "within1s": 20,
+        "within1_5s": 20,
+        "within100ms": 19
+      },
+      "clickCta": {
+        "n": 20,
+        "median": 22.75,
+        "p95": 25.6,
+        "max": 539.8,
+        "within1s": 20,
+        "within1_5s": 20,
+        "within100ms": 19
+      },
+      "api": {
+        "n": 19,
+        "median": 1302.3,
+        "p95": 2198.9,
+        "max": 2198.9,
+        "within1s": 0,
+        "within1_5s": 18,
+        "within100ms": 0
+      },
+      "images": {
+        "n": 20,
+        "median": 4.4,
+        "p95": 11.3,
+        "max": 490.7,
+        "within1s": 20,
+        "within1_5s": 20,
+        "within100ms": 19
+      },
+      "feedbackDomCommit": null,
+      "actionResultDomCommit": null,
+      "readyWhileApiRunning": 19,
+      "allReady": true,
+      "ctaOnly1sRule": true,
+      "ctaOnly1_5sRule": true,
+      "acceptance": "未測定（主要情報正当性・実機条件をCTA観測のみで代替不可）"
+    },
+    "after-save-閉じる": {
+      "ctaObservation": {
+        "n": 20,
+        "median": 1788.9,
+        "p95": 2098.2,
+        "max": 2381.3,
+        "within1s": 0,
+        "within1_5s": 0,
+        "within100ms": 0
+      },
+      "clickCta": {
+        "n": 20,
+        "median": 1781.8,
+        "p95": 2090.5,
+        "max": 2374.9,
+        "within1s": 0,
+        "within1_5s": 0,
+        "within100ms": 0
+      },
+      "api": {
+        "n": 20,
+        "median": 1752.3,
+        "p95": 2062.0,
+        "max": 2344.9,
+        "within1s": 0,
+        "within1_5s": 0,
+        "within100ms": 0
+      },
+      "images": null,
+      "feedbackDomCommit": {
+        "n": 20,
+        "median": 3.05,
+        "p95": 4.5,
+        "max": 5.7,
+        "within1s": 20,
+        "within1_5s": 20,
+        "within100ms": 20
+      },
+      "actionResultDomCommit": {
+        "n": 20,
+        "median": 1754.5500000000002,
+        "p95": 2064.1,
+        "max": 2347.4,
+        "within1s": 0,
+        "within1_5s": 0,
+        "within100ms": 0
+      },
+      "readyWhileApiRunning": 0,
+      "allReady": true,
+      "ctaOnly1sRule": false,
+      "ctaOnly1_5sRule": false,
+      "acceptance": "未達"
+    }
+  }
+}

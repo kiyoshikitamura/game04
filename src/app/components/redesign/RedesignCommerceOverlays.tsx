@@ -12,7 +12,8 @@ import "../CommonModals.css";
 import { userFacingErrorMessage } from "../../lib/userFacingError";
 import CharacterGachaPresentation from "../gacha/CharacterGachaPresentation";
 import CanonicalDialog from "../ui/CanonicalDialog";
-import { LoginBonusModal } from "../LoginBonusModal";
+import FormalLoginBonusModal from "./FormalLoginBonusModal";
+import { LOGIN_BONUS_VERSION } from "@/domain/redesign/loginBonus";
 import ConfirmDialog from "../ui/ConfirmDialog";
 import GlobalInteractionBlocker from "../ui/GlobalInteractionBlocker";
 function gachaLocationBackground(result: any): string {
@@ -75,7 +76,7 @@ export default function RedesignCommerceOverlays() {
   };
 
  return <>
- {showLoginBonusModal && <LoginBonusModal masters={loginBonusMasters} currentStep={userLoginBonus?.current_step || 1} claimResult={loginBonusClaimResult} onClose={() => setShowLoginBonusModal(false)} onOpenPresents={() => { setShowLoginBonusModal(false); setInboxPanelTab('presents'); setShowInboxPanel(true); }} />}
+ {showLoginBonusModal && (loginBonusClaimResult as {masterVersion?:string}|null)?.masterVersion === LOGIN_BONUS_VERSION && <FormalLoginBonusModal currentStep={userLoginBonus?.current_step || 1} onClose={() => setShowLoginBonusModal(false)} />}
       {/* 🎰 ガチャ演出モーダル (FLASHING / SHOW_RESULTS) */}
       {scoutAnimationState !== null && isCharacterReveal && (scoutAnimationState === "READY" || scoutAnimationState === "SHOW_RESULTS") ? (
         <CharacterGachaPresentation results={scoutResults} tutorial={false}
