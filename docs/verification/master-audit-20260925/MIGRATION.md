@@ -31,6 +31,7 @@ node scripts/master-audit/live-v31.cjs captured-index.ts evidence/runtime.json
 - 現在のAPIはdev projectを固定している。本番/分離DBへの接続差分はP/G3担当の環境別設定として照合し、dev用bundleをそのまま本番で使わない。今回は本番projectへアクセスしていない。
 
 ```sh
+node scripts/master-audit/verify-names.cjs
 node scripts/master-audit/verify-skill-design.cjs
 node scripts/master-audit/verify-authority.cjs
 node scripts/master-audit/verify-candidates.cjs
@@ -57,3 +58,5 @@ node scripts/master-audit/verify-snapshot.cjs evidence
 `verify-tutorial-grant`は専用統合アカウントのチュートリアル終了直後・ログボ/出陣前のサーバー保存stateを入力する。個人stateはGitへ保存せず比較結果だけ保持する。後続の報酬取得後stateとの比較は行わない。
 
 MA07追加停止条件：本文の未丸め計算と効果値が異なる、または丸め方針の後続明示承認が未確認。表示表一致だけでこの停止を解除しない。
+
+MA08追加停止条件：クエスト名称が攻略コンセプトと同じ、正式名称/承認根拠が欠落、敵名称のID対応不一致。65面の命名決定前に空文字・面番号・推測名で基準を通さない。名称だけでなくgeneratorからの再流入とHome title/出陣一覧/詳細/出撃確認の参照先を再照合。

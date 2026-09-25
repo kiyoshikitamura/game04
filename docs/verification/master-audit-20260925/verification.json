@@ -64,6 +64,14 @@
     {
       "command": "node scripts/master-audit/verify-authority.cjs && node scripts/master-audit/test-compare.cjs",
       "result": "PASS; table equality is not internal unrounded formula compliance"
+    },
+    {
+      "command": "node scripts/master-audit/verify-names.cjs",
+      "result": "STOP exit 1: all 65 titles are strategy concepts in repo/captured v31/captured DB. Enemy name checks report no differences within documented scope."
+    },
+    {
+      "command": "git apply --check docs/verification/master-audit-20260925/quest-name-generator-candidate.patch",
+      "result": "PASS; candidate remains unapplied; all 65 approved names/references pending"
     }
   ],
   "additional": {
