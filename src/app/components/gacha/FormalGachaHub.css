@@ -15,3 +15,11 @@
 .formal-gacha__rates{display:grid;gap:5px;max-height:min(58dvh,500px);overflow:auto}.formal-gacha__rate-totals{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;position:sticky;top:0;z-index:1;padding-bottom:5px;background:var(--ui-bg-surface)}.formal-gacha__rate-totals span{display:flex;flex-direction:column;align-items:center;padding:6px;border:1px solid var(--ui-border);font-size:10px}.formal-gacha__rate-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px;border-bottom:1px solid var(--ui-border);font-size:11px}.formal-gacha__rate-row span{min-width:0;overflow-wrap:anywhere}.formal-gacha__rate-row b{margin-right:7px;color:#d5ad5c}.formal-gacha__rate-row strong{white-space:nowrap;font-variant-numeric:tabular-nums}
 .formal-gacha__exchange{display:grid;gap:6px;max-height:50dvh;overflow:auto}.formal-gacha__exchange button{min-height:44px;padding:9px 11px;border:1px solid rgba(255,255,255,.14);border-radius:5px;color:#eee3d1;background:#241b1c;text-align:left}.formal-gacha__exchange button[aria-pressed=true]{border-color:#d2aa58;background:#44331f;box-shadow:inset 3px 0 #e2ba65}
 @media(max-width:360px){.formal-gacha__card{padding:11px}.formal-gacha__card h2{font-size:17px}.formal-gacha__link{font-size:9px}.formal-gacha__ledger{align-items:flex-start;flex-direction:column}}
+
+/* G3 mobile readability and touch-target acceptance. */
+.formal-gacha__surface button,.formal-gacha__categories button,.formal-gacha__link,.formal-gacha__actions button,.formal-gacha__points,.formal-gacha__primary{min-height:44px}
+.formal-gacha__card>p,.formal-gacha__card header small,.formal-gacha__ledger,.formal-gacha__balance,.formal-gacha__used,.formal-gacha__confirm{font-size:14px;line-height:1.6}
+.formal-gacha__link,.formal-gacha__rate-summary span,.formal-gacha__rate-totals span,.formal-gacha__rate-row{font-size:14px}
+.formal-gacha__actions button b{font-size:16px}.formal-gacha__actions small{font-size:16px;color:#f1dfbd}
+.formal-gacha__primary small{font-size:14px}.formal-gacha__exchange button{min-height:44px;font-size:14px;line-height:1.5}
+@media(max-width:360px){.formal-gacha__link{font-size:14px}}

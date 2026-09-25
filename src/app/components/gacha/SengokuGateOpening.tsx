@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import GachaModalPortal from "./GachaModalPortal";
 import "./SengokuGateOpening.css";
 
 type GateState = "WAITING" | "PLAYING" | "FINISHED";
@@ -18,6 +19,8 @@ export default function SengokuGateOpening({
   const [state, setState] = useState<GateState>("WAITING");
   const completeTimer = useRef<number | null>(null);
   const completed = useRef(false);
+  const openRef = useRef<HTMLButtonElement>(null);
+  const skipRef = useRef<HTMLButtonElement>(null);
 
   const finish = useCallback(() => {
     if (completed.current) return;
@@ -39,19 +42,16 @@ export default function SengokuGateOpening({
     if (completeTimer.current !== null) window.clearTimeout(completeTimer.current);
   }, []);
 
-  useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") finish();
-      if ((event.key === "Enter" || event.key === " ") && state === "WAITING") play();
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [finish, play, state]);
+  useEffect(() => { if (state === "PLAYING") skipRef.current?.focus(); }, [state]);
 
   return (
+    <GachaModalPortal onEscape={finish}>
     <section
       className={`sengoku-gate is-${state.toLowerCase()} rarity-${rarity.toLowerCase()}`}
       aria-label="登用結果の開門演出"
+      aria-modal="true"
+      role="dialog"
+      tabIndex={-1}
       data-gacha-gate-state={state}
     >
       <div className="sengoku-gate__scene" aria-hidden="true">
@@ -65,14 +65,15 @@ export default function SengokuGateOpening({
       </div>
 
       {state === "WAITING" && (
-        <button type="button" className="sengoku-gate__open" onClick={play}>
+        <button ref={openRef} type="button" className="sengoku-gate__open" onClick={play}>
           <b>開門</b><span>タップして結果を見る</span>
         </button>
       )}
-      <button type="button" className="sengoku-gate__skip" onClick={finish}>SKIP</button>
+      <button ref={skipRef} type="button" className="sengoku-gate__skip" onClick={finish}>SKIP</button>
       <p className="sengoku-gate__status" role="status" aria-live="polite">
         {state === "WAITING" ? "開門を待っています" : state === "PLAYING" ? "開門中" : "結果を表示します"}
       </p>
     </section>
+    </GachaModalPortal>
   );
 }

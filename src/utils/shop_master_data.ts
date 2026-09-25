@@ -1,3 +1,4 @@
+import { VIP_PRODUCT } from "@/domain/redesign/vip";
 import { canonicalItemName } from "@/domain/gameplay/canonical/items";
 
 export const SHOP_CATALOG_VERSION = "20260922-game04-shop";
@@ -67,6 +68,9 @@ const sourceProducts: ShopProduct[] = [
       {itemId:"CASH",itemName:"銭",quantity:50000},
     ],
   },
+  { id: VIP_PRODUCT.id, shopType: "LIMITED", category: "VIP", title: VIP_PRODUCT.name,
+    description: "720時間、バトル3倍速・スキップ。無償輝石100個を購入時と以後24時間ごとに合計30回付与。自動更新なし。",
+    priceJpy: VIP_PRODUCT.priceJpy, items: [], sortOrder: 5 },
   ...diaProducts.map(([quantity,priceJpy], index): ShopProduct => ({
     id:`diamond_${quantity}`, shopType:"LIMITED", category:"DIAMOND",
     title:`輝石 ${quantity.toLocaleString("ja-JP")}個`, description:"",

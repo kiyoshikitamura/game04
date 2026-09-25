@@ -14,10 +14,13 @@ export async function POST(request: Request) {
     if (!PAID_PRODUCT_IDS.includes(input.productId)) throw new BillingError("この商品の販売準備中です。", 503);
     const { data: products, error: catalogError } = await billing.db.from("billing_products").select("id,amount_jpy,purchase_limit,validity_days,items");
     if (catalogError || !products || !catalogMatches(products)) throw new BillingError("商品の販売準備中です。", 503);
-    const order = await billing.rpc("billing_reserve_order", {
+    const order = await billing.rpc("game04_billing_reserve_order", {
       p_user_id: userId, p_request_id: requestId, p_product_id: input.productId, p_mode: billing.config.mode,
     });
-    if (order.status === "GRANTED" || order.status === "EXPIRED") return billingResponse({ status: order.status, orderId: order.id });
+    if (order.status === "GRANTED" || order.status === "EXPIRED") {
+      await billing.grantVipForOrder(order);
+      return billingResponse({ status: order.status, orderId: order.id });
+    }
     // 更新前に予約した注文は旧価格・旧内容のまま決済を再開しない。
     const snapshot = { ...order.product_snapshot, id: order.product_id };
     if (!catalogMatches(products.map(item => item.id === order.product_id ? snapshot : item)))
@@ -30,7 +33,7 @@ export async function POST(request: Request) {
         throw new BillingError("この注文は確認が必要です。お問い合わせください。", 409);
       const body = new URLSearchParams({ mode: "payment", "payment_method_types[0]": "card",
         client_reference_id: order.id, "metadata[order_id]": order.id,
-        "metadata[user_id]": userId, "metadata[product_id]": order.product_id,
+        "metadata[application]": "game04", "metadata[user_id]": userId, "metadata[product_id]": order.product_id,
         "line_items[0][price_data][currency]": "jpy",
         "line_items[0][price_data][unit_amount]": String(order.amount_jpy),
         "line_items[0][price_data][product_data][name]": order.product_snapshot.title,
@@ -38,7 +41,7 @@ export async function POST(request: Request) {
         success_url: `${billing.config.origin}/billing/return?order=${order.id}`,
         cancel_url: `${billing.config.origin}/billing/return?order=${order.id}&cancel=1`,
       });
-      session = await billing.stripe("checkout/sessions", body, `tn-${billing.config.mode}-${order.id}`);
+      session = await billing.stripe("checkout/sessions", body, `game04-${billing.config.mode}-${order.id}`);
       validateSession(session, order, billing.config.mode);
       await billing.rpc("billing_attach_session", { p_order_id: order.id, p_session_id: session.id });
     }

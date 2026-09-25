@@ -32,17 +32,19 @@ export function billingService() {
     // Supabase anonymous users use the authenticated Postgres role too. A
     // valid payment subject therefore requires the same binding authority as
     // get_current_onboarding_state, before any order/RPC side effect.
-    const [{ data: profile, error: profileError }, { data: method, error: methodError }] = await Promise.all([
+    const [{ data: profile, error: profileError }, { data: method, error: methodError }, { data: player, error: playerError }] = await Promise.all([
       db.from("users").select("id").eq("id", user.id).maybeSingle(),
       db.from("user_account_auth_methods").select("auth_method").eq("user_id", user.id).maybeSingle(),
+      db.from("game04_player_state").select("user_id").eq("user_id", user.id).maybeSingle(),
     ]);
     const providers = (user.identities ?? []).map((identity: { provider?: string }) => identity.provider?.toLowerCase()).filter(Boolean);
     const provider = providers[0];
-    const bindingValid = !profileError && !methodError
-      && profile?.id === user.id
+    const bindingValid = !profileError && !methodError && !playerError
+      && profile?.id === user.id && player?.user_id === user.id
       && providers.length === 1
       && (provider === "google" || provider === "email")
-      && (!method?.auth_method || method.auth_method.toLowerCase() === provider);
+      && method?.auth_method?.toLowerCase() === provider
+      && (provider !== "email" || !!user.email_confirmed_at);
     if (!bindingValid) authRequired();
     return user.id;
   }
@@ -61,7 +63,8 @@ export function billingService() {
   async function rpc(name: string, args: Record<string, unknown>) {
     const { data, error } = await db.rpc(name, args);
     if (error) {
-      if (error.message.includes("PURCHASE_LIMIT")) throw new BillingError("この商品は購入済み、またはお支払いの途中です。", 409);
+      if (error.message.includes("VIP_ALREADY_ACTIVE")) throw new BillingError("VIPの有効期間中は再購入できません。", 409);
+      if (error.message.includes("PURCHASE_LIMIT") || error.message.includes("VIP_ORDER_PENDING")) throw new BillingError("この商品は購入済み、またはお支払いの途中です。", 409);
       if (error.message.includes("INSUFFICIENT_DIA")) throw new BillingError("DIAが不足しています。", 409);
       throw new BillingError("購入を確認できませんでした。同じ注文から再確認してください。", 503);
     }
@@ -83,8 +86,9 @@ export function billingService() {
   async function order(id: string, userId?: string): Promise<BillingOrder> {
     let query = db.from("billing_orders").select("*").eq("id", id);
     if (userId) query = query.eq("user_id", userId);
-    const { data, error } = await query.single();
-    if (error || !data) throw new BillingError("注文が見つかりません。", 404);
+    const { data, error } = await query.maybeSingle();
+    if (error) throw new BillingError("注文を確認できません。同じ注文から再試行してください。", 503);
+    if (!data) throw new BillingError("注文が見つかりません。", 404);
     return data;
   }
   async function grantVipForOrder(item: BillingOrder) {
@@ -93,7 +97,9 @@ export function billingService() {
     await rpc("game04_grant_vip", { p_user_id: item.user_id, p_order_id: item.id });
   }
   async function reconcile(session: CheckoutSession, existing?: BillingOrder) {
-    const result = await reconcileCheckout(session, { order, rpc, validate: (value, item) => validateSession(value, item, config.mode) }, existing);
+    const grantRpc = (name: string, args: Record<string, unknown>) =>
+      rpc(name === "billing_grant_order" ? "game04_billing_grant_order" : name, args);
+    const result = await reconcileCheckout(session, { order, rpc: grantRpc, validate: (value, item) => validateSession(value, item, config.mode) }, existing);
     // Re-read the persisted order after payment validation and ordinary fulfillment.
     // Do not infer entitlement from the redirect or the incoming event payload.
     const latest = await order(existing?.id ?? session.client_reference_id);

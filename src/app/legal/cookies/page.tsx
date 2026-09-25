@@ -9,7 +9,7 @@ type PageProps = { searchParams: Promise<{ from?: string }> };
 export default async function Page({ searchParams }: PageProps) {
   const { from } = await searchParams;
   return (
-    <LegalPage title="Cookie・アクセス解析" updatedAt="2026年9月18日" returnToGame={from === "settings"}>
+    <LegalPage title="Cookie・アクセス解析" updatedAt="2026年9月24日" returnToGame={from === "settings"}>
       <h2>利用する目的</h2>
       <p>ログイン状態の維持、ゲーム設定の保存、二重操作の防止、利用状況の把握のため、Cookieやブラウザの保存領域を利用します。</p>
       <ul>

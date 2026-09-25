@@ -2,7 +2,8 @@ import fs from 'node:fs';
 import crypto from 'node:crypto';
 const sourcePath=new URL('../supabase/functions/game04-redesign-api/source.ts',import.meta.url);
 const bundlePath=new URL('../supabase/functions/game04-redesign-api/index.ts',import.meta.url);
-const expected=crypto.createHash('sha256').update(fs.readFileSync(sourcePath)).digest('hex');
+// Git checkouts may use CRLF on Windows; the source marker identifies LF content.
+const expected=crypto.createHash('sha256').update(fs.readFileSync(sourcePath,'utf8').replace(/\r\n/g,'\n')).digest('hex');
 const firstLine=fs.readFileSync(bundlePath,'utf8').split(/\r?\n/,1)[0];
 const actual=firstLine.match(/^\/\/ game04-redesign-api source-sha256:([0-9a-f]{64})$/)?.[1];
 if(actual!==expected)throw new Error(`game04-redesign-api bundle is stale: expected ${expected}, found ${actual??'no source hash'}`);

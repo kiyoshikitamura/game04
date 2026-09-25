@@ -3,6 +3,7 @@
 import { useState } from "react";
 import FormalGachaHub, { type FormalGachaCategory, type FormalGachaPoolItem } from "@/app/components/gacha/FormalGachaHub";
 import SengokuGateOpening from "@/app/components/gacha/SengokuGateOpening";
+import { GameContext } from "@/app/context/GameContext";
 import "./g3-gacha.css";
 
 const specialRates: Record<FormalGachaCategory, readonly [number, number, number]> = {
@@ -21,7 +22,7 @@ const normal: FormalGachaPoolItem[] = [
 export default function G3GachaHarness() {
   const [gate, setGate] = useState(false);
   const [lastAction, setLastAction] = useState("未実行");
-  return <main className="g3-gacha-harness">
+  return <GameContext.Provider value={{ playCyberSe: () => {} }}><main className="g3-gacha-harness">
     <header><h1>G3 ガチャUI確認</h1><p>保存を行わない表示・操作確認用です。</p></header>
     <FormalGachaHub
       balances={{ coin: 120000, diamond: 8000, tickets: { CHARACTER: 3, SKILL: 2, EQUIPMENT: 5 }, points: { CHARACTER: 184, SKILL: 100, EQUIPMENT: 76 } }}
@@ -34,5 +35,5 @@ export default function G3GachaHarness() {
     <output>直近操作：{lastAction}</output>
     <button className="g3-gacha-harness__gate" onClick={() => setGate(true)}>開門演出だけ確認</button>
     {gate && <SengokuGateOpening onComplete={() => setGate(false)} />}
-  </main>;
+  </main></GameContext.Provider>;
 }

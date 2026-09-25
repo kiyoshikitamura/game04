@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState, useRef, type CSSProperties } from 'react';
+import { beginQaImageGroup } from '@/utils/redesignQaTelemetry';
 import { useRecordedBattlePlayback } from '@/hooks/redesign/useRecordedBattlePlayback';
 import { projectRaidBattleHp } from '../../../domain/presentation/raidBattleHpPresentation';
 import { projectRecordedBattleFrame } from '../../../domain/presentation/recordedBattlePresentation';
@@ -48,6 +49,7 @@ export function BattleView({ result, vipActive, onComplete, title = '合戦', ba
   const [retry, setRetry] = useState(0);
   const loadingDialog = useRef<HTMLDialogElement>(null);
   const recoveredResult = useRef<BattleResult | null>(null);
+  const measuredImageResult = useRef<BattleResult | null>(null);
   const detailDialog = useRef<HTMLDialogElement>(null);
   const assetsBlocked = assetState.result !== result || assetState.status !== 'ready';
   const { index, frame, finished, speed, paused, playbackPaused, setPaused, cycleSpeed, skip } = useRecordedBattlePlayback({ result, initialFrame, initialPaused, vipActive, blocked: !!detail || showLog || assetsBlocked });
@@ -66,12 +68,15 @@ export function BattleView({ result, vipActive, onComplete, title = '合戦', ba
   };
   useEffect(() => {
     let cancelled = false;
+    const finishImageTiming = measuredImageResult.current !== result ? beginQaImageGroup('battle', (JSON.parse(imageKey) as string[]).length) : null;
+    measuredImageResult.current = result;
     if ((JSON.parse(imageKey) as string[]).every(isBattleImageReady)) {
       setAssetState({ result, key: imageKey, status: 'ready' });
+      finishImageTiming?.('success');
       return;
     }
     setAssetState({ result, key: imageKey, status: 'loading' });
-    Promise.all((JSON.parse(imageKey) as string[]).map(preloadBattleImage)).then(() => { if (!cancelled) setAssetState({ result, key: imageKey, status: 'ready' }); }, () => { if (!cancelled) setAssetState({ result, key: imageKey, status: 'error' }); });
+    Promise.all((JSON.parse(imageKey) as string[]).map(preloadBattleImage)).then(() => { if (!cancelled) { setAssetState({ result, key: imageKey, status: 'ready' }); finishImageTiming?.('success'); } }, () => { if (!cancelled) { setAssetState({ result, key: imageKey, status: 'error' }); finishImageTiming?.('error'); } });
     return () => { cancelled = true; };
   }, [result, imageKey, retry]);
   useEffect(() => {
@@ -133,7 +138,7 @@ export function BattleView({ result, vipActive, onComplete, title = '合戦', ba
       {impact && <div key={`${frame.index}-${state.id}`} className={`${styles.impact} ${impact.type === 'heal' ? styles.healing : ''}`} data-impact-target={state.id}><strong>{impact.type === 'miss' ? 'MISS' : impact.type === 'status' ? ({effect_applied:'付与',effect_miss:'不成立',cleanse:'解除',shield_absorbed:'吸収'}[frame.event ?? ''] ?? '') : `${impact.type === 'heal' ? '+' : ''}${Math.abs(impact.amount).toLocaleString()}`}</strong>{impact.hits && impact.hits.length > 1 && <small>{impact.hits.length} HITS</small>}</div>}
     </div>;
   };
-  return <section className={styles.battle} aria-label={title} data-playback-paused={playbackPaused} style={{ '--battle-speed': speed, '--battle-background': `url(${JSON.stringify(backgroundSrc)})` } as CSSProperties}>
+  return <section className={styles.battle} aria-label={title} data-playback-paused={playbackPaused} data-playback-frame={index} style={{ '--battle-speed': speed, '--battle-background': `url(${JSON.stringify(backgroundSrc)})` } as CSSProperties}>
     <dialog ref={loadingDialog} className={styles.loading} onCancel={event => event.preventDefault()} aria-label="戦闘画面の読み込み"><img src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" />{assetError ? <><p>戦闘画像を読み込めませんでした。</p><button onClick={() => { setAssetState({ result, key: imageKey, status: 'loading' }); setRetry(value => value + 1); }}>再試行</button><button onClick={leaveFailedPlayback}>再生を終了する</button></> : <><span className={styles.spinner} /><p>戦闘の準備中</p></>}</dialog>
     <div className={visibleLoading ? styles.loadingContent : undefined}>
     <header className={styles.header}><img src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" /><strong>WAVE <b>{frame.wave}</b>/{result.waves.length}</strong><div><button onClick={cycleSpeed} aria-label={`再生速度 ${speed}倍`}>▶▶ ×{speed}</button><button onClick={() => setPaused(p => !p)} disabled={finished} aria-label={paused ? '再開' : '一時停止'}>{paused ? '▶' : 'Ⅱ'}</button>{vipActive && <button className={styles.skip} disabled={finished} onClick={skip}>SKIP</button>}</div></header>

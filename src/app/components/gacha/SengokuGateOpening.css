@@ -60,9 +60,9 @@
 }
 
 .sengoku-gate__open b { font-size: 19px; letter-spacing: .24em; text-indent: .24em; }
-.sengoku-gate__open span { color: #d8c9a2; font-size: 11px; font-weight: 800; letter-spacing: .08em; }
-.sengoku-gate__skip { position: absolute; z-index: 12; top: max(12px, env(safe-area-inset-top)); right: max(12px, env(safe-area-inset-right)); min-width: 68px; min-height: 38px; padding: 7px 12px; border: 1px solid rgba(219, 195, 123, .55); border-radius: 999px; color: #f2dfaf; background: rgba(9, 5, 6, .72); font-size: 11px; font-weight: 900; letter-spacing: .1em; }
-.sengoku-gate__status { position: absolute; z-index: 10; right: 0; bottom: max(12px, env(safe-area-inset-bottom)); left: 0; margin: 0; color: rgba(255, 241, 204, .76); font-size: 11px; font-weight: 800; text-align: center; letter-spacing: .08em; text-shadow: 0 2px 6px #000; }
+.sengoku-gate__open span { color: #d8c9a2; font-size: 14px; font-weight: 800; letter-spacing: .08em; }
+.sengoku-gate__skip { position: absolute; z-index: 12; top: max(12px, env(safe-area-inset-top)); right: max(12px, env(safe-area-inset-right)); min-width: 72px; min-height: 44px; padding: 8px 12px; border: 1px solid rgba(219, 195, 123, .55); border-radius: 999px; color: #f2dfaf; background: rgba(9, 5, 6, .72); font-size: 14px; font-weight: 900; letter-spacing: .1em; }
+.sengoku-gate__status { position: absolute; z-index: 10; right: 0; bottom: max(12px, env(safe-area-inset-bottom)); left: 0; margin: 0; color: rgba(255, 241, 204, .76); font-size: 14px; font-weight: 800; text-align: center; letter-spacing: .08em; text-shadow: 0 2px 6px #000; }
 
 .sengoku-gate.is-playing .sengoku-gate__door--left { animation: sengoku-left-open 1.65s cubic-bezier(.4,0,.15,1) forwards; }
 .sengoku-gate.is-playing .sengoku-gate__door--right { animation: sengoku-right-open 1.65s cubic-bezier(.4,0,.15,1) forwards; }

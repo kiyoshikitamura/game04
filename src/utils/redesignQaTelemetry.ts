@@ -19,13 +19,13 @@ export function emitQaTiming(metric: QaMetric) {
   const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
   const message: QaTimingMessage = {
     type: 'game04-qa-timing', timeOrigin: performance.timeOrigin,
-    metric: { kind: metric.kind, scope: (metric.kind !== 'image-group' ? requestScopes : new Set(['home','growth','quest'])).has(metric.scope) ? metric.scope : 'other', ...(metric.count === undefined ? {} : { count: metric.count }), startedAt: metric.startedAt, settledAt: metric.settledAt, durationMs: metric.durationMs, outcome: metric.outcome },
+    metric: { kind: metric.kind, scope: (metric.kind !== 'image-group' ? requestScopes : new Set(['home','growth','quest','battle'])).has(metric.scope) ? metric.scope : 'other', ...(metric.count === undefined ? {} : { count: metric.count }), startedAt: metric.startedAt, settledAt: metric.settledAt, durationMs: metric.durationMs, outcome: metric.outcome },
     navigation: navigation ? { type: navigation.type, responseStart: navigation.responseStart, responseEnd: navigation.responseEnd, domContentLoaded: navigation.domContentLoadedEventEnd } : null,
     paints: performance.getEntriesByType('paint').filter(entry => entry.name === 'first-paint' || entry.name === 'first-contentful-paint').map(({ name, startTime }) => ({ name, startTime })),
   };
   window.parent.postMessage(message, window.location.origin);
 }
-export function beginQaImageGroup(scope: 'home' | 'growth' | 'quest', count: number) {
+export function beginQaImageGroup(scope: 'home' | 'growth' | 'quest' | 'battle', count: number) {
   const startedAt = typeof performance === 'undefined' ? 0 : performance.now();
   return (outcome: 'success' | 'error') => {
     if (typeof performance === 'undefined' || count === 0) return;

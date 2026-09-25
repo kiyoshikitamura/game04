@@ -2,6 +2,7 @@
 "use strict";
 
 const fs = require("node:fs");
+const path = require("node:path");
 const assert = require("node:assert/strict");
 const ts = require("typescript");
 require.extensions[".ts"] = (module, filename) => module._compile(ts.transpileModule(fs.readFileSync(filename, "utf8"), {
@@ -17,6 +18,7 @@ function state(id) {
   value.cash = 100000;
   value.diamonds = 10000;
   value.questTicketGrants = { SPECIAL_TICKET_CHARACTER: 10, SPECIAL_TICKET_SKILL: 10, SPECIAL_TICKET_EQUIPMENT: 10 };
+  value.gachaTicketBalances = { SPECIAL_TICKET_CHARACTER: 10, SPECIAL_TICKET_SKILL: 10, SPECIAL_TICKET_EQUIPMENT: 10 };
   return value;
 }
 const always = (value) => () => value;
@@ -47,10 +49,14 @@ assert.equal(naturalSsr.state.specialGachaPoints.skill, 100);
 
 // Replay is DB-authoritative so the player state does not grow an unbounded
 // receipt ledger. The atomic RPC binds both operation and normalized payload.
-const atomicSql = fs.readFileSync(new URL("../supabase/manual/game04_g3_gacha_atomic_commit.sql", `file://${__dirname}/`).pathname, "utf8");
+const atomicSql = fs.readFileSync(path.join(__dirname, "../supabase/manual/game04_g3_gacha_atomic_commit.sql"), "utf8");
 assert.match(atomicSql, /prior->>'operation' is distinct from p_operation/);
 assert.match(atomicSql, /prior->'requestPayload' is distinct from p_request_payload/);
 assert.match(atomicSql, /return prior/);
+assert.match(atomicSql, /from public\.user_items[\s\S]*for update/);
+assert.match(atomicSql, /update public\.user_items set quantity=quantity-v_ticket_cost/);
+assert.match(atomicSql, /p_state \? 'gachaTicketBalances'/);
+assert.match(atomicSql, /normalGachaJstDay'[\s\S]*dailyNormalGachaDate'[\s\S]*GACHA_DAY_CHANGED/);
 assert.ok(!("formalGachaReceipts" in naturalSsr.state));
 
 // Exact JST boundary and failed operations leave their input untouched.

@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import CanonicalDialog from "../ui/CanonicalDialog";
+import GachaModalPortal from "./GachaModalPortal";
 import "./FormalGachaHub.css";
 
 export type FormalGachaCategory = "CHARACTER" | "SKILL" | "EQUIPMENT";
@@ -120,24 +121,24 @@ export default function FormalGachaHub({
         </>
       )}
 
-      {confirm && <CanonicalDialog title="登用確認" onClose={pending ? undefined : () => setConfirm(null)} actions={[
+      {confirm && <GachaModalPortal onEscape={pending ? undefined : () => setConfirm(null)}><CanonicalDialog title="登用確認" onClose={pending ? undefined : () => setConfirm(null)} actions={[
         { label: "戻る", disabled: pending, onClick: () => setConfirm(null) },
         { label: `${confirm.count === 10 ? "10連" : "1回"}引く`, semantic: "primary", disabled: pending || !canPay(confirm), onClick: async () => { const request = confirm; setConfirm(null); await onDraw(request); } },
-      ]}><p className="formal-gacha__confirm"><b>{paymentText(confirm)}</b>を消費します。<br />別の支払方法へ自動で切り替わることはありません。</p></CanonicalDialog>}
+      ]}><p className="formal-gacha__confirm"><b>{paymentText(confirm)}</b>を消費します。<br />別の支払方法へ自動で切り替わることはありません。</p></CanonicalDialog></GachaModalPortal>}
 
-      {ratesOpen && <CanonicalDialog title={surface === "NORMAL" ? "通常登用 提供割合" : `${meta.label}特選 提供割合`} onClose={() => setRatesOpen(false)} actions={[{ label: "閉じる", semantic: "primary", onClick: () => setRatesOpen(false) }]}>
+      {ratesOpen && <GachaModalPortal onEscape={() => setRatesOpen(false)}><CanonicalDialog title={surface === "NORMAL" ? "通常登用 提供割合" : `${meta.label}特選 提供割合`} onClose={() => setRatesOpen(false)} actions={[{ label: "閉じる", semantic: "primary", onClick: () => setRatesOpen(false) }]}>
         <div className="formal-gacha__rates custom-scrollbar" tabIndex={0} role="region" aria-label="提供割合と排出一覧">
           <div className="formal-gacha__rate-totals">{groupedRates.map(([rarity, value]) => <span key={rarity}><b>{rarity}</b>{value.toFixed(2)}%</span>)}</div>
           {rates.map(item => <div className="formal-gacha__rate-row" key={`${item.category}:${item.id}`}><span><b>{item.rarity}</b>{item.name}</span><strong>{item.probability.toFixed(4)}%</strong></div>)}
         </div>
-      </CanonicalDialog>}
+      </CanonicalDialog></GachaModalPortal>}
 
-      {exchangeOpen && <CanonicalDialog title={`${meta.label} SSR選択交換`} onClose={pending ? undefined : () => setExchangeOpen(false)} actions={exchangeTarget ? [
+      {exchangeOpen && <GachaModalPortal onEscape={pending ? undefined : () => setExchangeOpen(false)}><CanonicalDialog title={`${meta.label} SSR選択交換`} onClose={pending ? undefined : () => setExchangeOpen(false)} actions={exchangeTarget ? [
         { label: `${meta.pity}Ptで交換`, semantic: "primary", disabled: pending || balances.points[category] < meta.pity, onClick: async () => { const target = exchangeTarget; setExchangeOpen(false); setExchangeTarget(null); await onExchange(category, target); } },
       ] : []}>
         <p>所持 {balances.points[category]}Pt / 必要 {meta.pity}Pt</p>
         <div className="formal-gacha__exchange custom-scrollbar">{exchangeItems[category].map(item => <button key={item.id} aria-pressed={exchangeTarget === item.id} onClick={() => setExchangeTarget(item.id)}>{item.name}</button>)}</div>
-      </CanonicalDialog>}
+      </CanonicalDialog></GachaModalPortal>}
     </section>
   );
 }

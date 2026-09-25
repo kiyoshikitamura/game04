@@ -13,12 +13,12 @@ for(const category of master.GACHA_CATEGORIES){
 }
 assert.equal(master.FORMAL_GACHA_POOL.length,292);assert.equal(new Set(master.FORMAL_GACHA_POOL.map(row=>`${row.category}:${row.id}`)).size,292);
 assert.ok(Math.abs(master.normalGachaPool().reduce((sum,row)=>sum+master.formalGachaProbability(row,'normal'),0)-100)<1e-9);
-const baseState=masters.createInitialState('g3-unit');baseState.cash=100000;baseState.diamonds=10000;baseState.questTicketGrants={SPECIAL_TICKET_CHARACTER:10,SPECIAL_TICKET_SKILL:10,SPECIAL_TICKET_EQUIPMENT:10};
+const baseState=masters.createInitialState('g3-unit');baseState.cash=100000;baseState.diamonds=10000;baseState.questTicketGrants={SPECIAL_TICKET_CHARACTER:10,SPECIAL_TICKET_SKILL:10,SPECIAL_TICKET_EQUIPMENT:10};baseState.gachaTicketBalances={SPECIAL_TICKET_CHARACTER:10,SPECIAL_TICKET_SKILL:10,SPECIAL_TICKET_EQUIPMENT:10};
 const sequence=(...values)=>{let i=0;return()=>values[i++%values.length]};
 let draw=gacha.applyFormalSpecialGacha(baseState,{requestId:'special-char-10',category:'character',count:10,payment:'DIAMONDS'},sequence(.999,.1,.7,.2,.95,.3,.5,.4,.2,.5,.4,.6,.3,.7,.6,.8,.8,.9,.1,.99));
 assert.equal(draw.state.diamonds,7000);assert.equal(draw.state.specialGachaPoints.character,10);assert.equal(draw.receipt.results.length,10);assert.equal(baseState.diamonds,10000);
 let ticket=gacha.applyFormalSpecialGacha(draw.state,{requestId:'ticket-skill',category:'skill',count:1,payment:'TICKET'},sequence(.99,.1));
-assert.equal(ticket.state.questTicketGrants.SPECIAL_TICKET_SKILL,9);assert.equal(ticket.state.specialGachaPoints.skill,1);
+assert.equal(ticket.state.gachaTicketBalances.SPECIAL_TICKET_SKILL,9);assert.equal(ticket.state.questTicketGrants.SPECIAL_TICKET_SKILL,10);assert.equal(ticket.state.specialGachaPoints.skill,1);
 assert.throws(()=>gacha.applyFormalSpecialGacha(ticket.state,{requestId:'ticket-ten',category:'skill',count:10,payment:'TICKET'},Math.random));
 const beforeFailure=structuredClone(ticket.state);assert.throws(()=>gacha.applyFormalSpecialGacha({...ticket.state,diamonds:0},{requestId:'fail',category:'equipment',count:10,payment:'DIAMONDS'},Math.random));assert.deepEqual(ticket.state,beforeFailure);
 for(const payment of ['CASH','ARBITRARY']){const before=structuredClone(ticket.state);assert.throws(()=>gacha.applyFormalSpecialGacha(ticket.state,{requestId:`bad-special-${payment}`,category:'character',count:1,payment},Math.random));assert.deepEqual(ticket.state,before);}

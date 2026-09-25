@@ -163,10 +163,19 @@ function auditRuntimeConnection() {
   check(/applyFormalNormalGacha/.test(apiSource) && /applyFormalSpecialGacha/.test(apiSource) && /special_gacha_status/.test(apiSource), "runtime: authenticated API uses the formal manifest for normal/special draw and status");
   check(/game04_commit_gacha/.test(apiSource), "runtime: special draw/exchange uses an atomic DB commit");
   check(/recordMissionEvent\(drawn\.state,[\s\S]*normal_gacha/.test(apiSource), "runtime: paid/free normal draw records the normal-gacha daily mission once");
+  check(/user_items\?user_id=eq\./.test(apiSource) && /gachaTicketBalances/.test(apiSource), "runtime: ticket status/domain projection reads canonical user_items balances");
+  check(/delete persistentState\.gachaTicketBalances/.test(apiSource), "runtime: transient ticket balances are never persisted in player state");
+  check(/canonicalJson\(prior\.result\?\.requestPayload\)/.test(apiSource), "runtime: replay payload equality is independent of jsonb key order");
+
+  const atomicSql = fs.readFileSync(path.join(root, "supabase/manual/game04_g3_gacha_atomic_commit.sql"), "utf8");
+  check(/from public\.user_items[\s\S]*for update/.test(atomicSql) && /update public\.user_items set quantity=quantity-v_ticket_cost/.test(atomicSql), "runtime: ticket stock is locked and consumed atomically from user_items");
+  check(/questTicketGrants/.test(atomicSql) && /INVALID_GACHA_TICKET_STATE/.test(atomicSql), "runtime: G2 quest ticket grant ledger cannot be spent or rewritten by gacha");
+  check(/normalGachaJstDay/.test(atomicSql) && /GACHA_DAY_CHANGED/.test(atomicSql) && /Asia\/Tokyo/.test(atomicSql), "runtime: every normal draw rejects a crossed JST settlement boundary");
 
   const formalSource = fs.readFileSync(path.join(root, "src/domain/redesign/formalGacha.ts"), "utf8");
   check(/input\.payment\s*!==\s*['"]DIAMONDS['"][\s\S]{0,100}input\.payment\s*!==\s*['"]TICKET['"]/.test(formalSource), "runtime: special draw rejects unknown payment modes");
   check(/input\.payment\s*!==\s*['"]CASH['"][\s\S]{0,100}input\.payment\s*!==\s*['"]FREE['"]/.test(formalSource), "runtime: normal draw rejects unknown payment modes");
+  check(/state\.gachaTicketBalances/.test(formalSource) && !/state\.questTicketGrants\[rule\.ticketId\]/.test(formalSource), "runtime: formal ticket draw spends only projected inventory, never the grant ledger");
 
   const appSource = fs.readFileSync(path.join(root, "src/app/components/redesign/RedesignApp.tsx"), "utf8");
   const formalViewSource = fs.readFileSync(path.join(root, "src/app/components/redesign/FormalGachaView.tsx"), "utf8");

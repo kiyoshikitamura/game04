@@ -3,8 +3,8 @@ import { BATTLE_RULES, prepareBattleWaves, buildBattleParty, buildInitialState, 
 import { applyAcquisitionEvents, type AcquisitionEvent, type AcquisitionMaster } from '../../../src/domain/redesign/acquisitions.ts';
 import { applyPlayerExperience, GROWTH_VERSION } from '../../../src/domain/redesign/growthMaster.ts';
 import { normalGachaDay } from '../../../src/domain/redesign/normalGacha.ts';
-import { applyFormalNormalGacha, applyFormalSpecialGacha, applyFormalSsrExchange, formalGachaDisplayRates } from '../../../src/domain/redesign/formalGacha.ts';
-import { FORMAL_GACHA_VERSION, GACHA_CATEGORIES, NORMAL_GACHA_RULE, SPECIAL_GACHA_RULES, normalGachaPool, specialGachaPool } from '../../../src/domain/redesign/formalGachaMaster.ts';
+import { applyFormalNormalGacha, applyFormalSpecialGacha, applyFormalSsrExchange, formalGachaDisplayRates, type FormalGachaReceipt } from '../../../src/domain/redesign/formalGacha.ts';
+import { FORMAL_GACHA_VERSION, GACHA_CATEGORIES, NORMAL_GACHA_RULE, SPECIAL_GACHA_RULES, SPECIAL_GACHA_TICKET_IDS, normalGachaPool, specialGachaPool } from '../../../src/domain/redesign/formalGachaMaster.ts';
 import { applyGrowthAction, validateDeck } from '../../../src/domain/redesign/growth.ts';
 import { applyHomeSelection, synchronizeHomeBackgroundUnlocks } from '../../../src/domain/redesign/home.ts';
 import { applyShopExchange, applyShopEnergyDrink } from '../../../src/domain/redesign/shop.ts';
@@ -43,6 +43,9 @@ async function db(path: string, body?: unknown): Promise<any> {
       TERRITORY_ITEM_REQUIRED: '開催アイテムが不足しています。',
       TERRITORY_DESTINATION_NOT_FOUND: '侵攻先が見つかりません。再読み込みしてください。',
       REQUEST_ID_REUSED: 'この操作は処理済みです。再読み込みしてください。',
+      GACHA_DAY_CHANGED: '日付が変わりました。同じ操作でもう一度お試しください。',
+      EXPIRED_ASSET_BALANCE: '有効なアイテムが不足しています。',
+      INSUFFICIENT_RESOURCE: '所持数が不足しています。',
     };
     throw new ApiError(messages[result.message] ?? result.message ?? 'データを保存できませんでした。', result.code === '40001' ? 409 : response.status >= 500 ? 503 : 400);
   }
@@ -58,8 +61,8 @@ async function uuidFor(value: string) {
 async function acquisitionInput(userId: string): Promise<{legacy: LegacyAssets; events: AcquisitionEvent[]; master: AcquisitionMaster}> {
   return rpc('game04_acquisition_input', { p_user_id: userId });
 }
-async function stateFor(userId: string): Promise<RedesignState> {
-  const input = await acquisitionInput(userId);
+async function stateFor(userId: string, acquired?: Awaited<ReturnType<typeof acquisitionInput>>): Promise<RedesignState> {
+  const input = acquired ?? await acquisitionInput(userId);
   for (let attempt = 0; attempt < 4; attempt++) {
     const state: RedesignState = await rpc('game04_get_session_state', { p_user_id: userId, p_initial: buildInitialState(userId, input.legacy) });
     const migrated = importLegacyAssets(state, input.legacy);
@@ -76,7 +79,9 @@ async function commit(before: RedesignState, after: RedesignState, requestId: st
     p_battle: battle, p_raid: room, p_raid_expected_version: roomVersion, p_receipt: receipt });
 }
 async function commitGacha(before: RedesignState, after: RedesignState, requestId: string, diamondCost: number, operation: string, requestPayload: Record<string, unknown>, receipt: Record<string, unknown>) {
- return rpc('game04_commit_gacha', {p_user_id:before.userId,p_expected_version:before.version,p_state:captureMissionAssets(synchronizeHomeBackgroundUnlocks(after)),p_cash_delta:after.cash-before.cash,p_before_diamonds:before.diamonds,p_diamond_cost:diamondCost,p_request_id:requestId,p_operation:operation,p_request_payload:requestPayload,p_receipt:receipt});
+ const persistentState = captureMissionAssets(synchronizeHomeBackgroundUnlocks(structuredClone(after)));
+ delete persistentState.gachaTicketBalances;
+ return rpc('game04_commit_gacha', {p_user_id:before.userId,p_expected_version:before.version,p_state:persistentState,p_cash_delta:after.cash-before.cash,p_before_diamonds:before.diamonds,p_diamond_cost:diamondCost,p_request_id:requestId,p_operation:operation,p_request_payload:requestPayload,p_receipt:receipt});
 }
 async function roomFor(id: string): Promise<RaidRoom & {version: number}> {
   if (!/^[0-9a-f-]{36}$/i.test(id)) throw new ApiError('レイドが不正です。');
@@ -123,6 +128,54 @@ async function missionConfig(): Promise<MissionConfig> { return FORMAL_MISSION_C
 function normalGachaCompatibilityPool() {
   const ids={character:'CHAR_NORMAL',skill:'SKILL_NORMAL',equipment:'EQUIP_NORMAL'} as const;
   return normalGachaPool().map(row=>({gacha_id:ids[row.category],item_id:row.id,item_type:row.category.toUpperCase(),rarity:row.rarity}));
+}
+const formalTicketIds = Object.values(SPECIAL_GACHA_TICKET_IDS);
+async function gachaTicketBalances(userId: string): Promise<Record<string, number>> {
+  const rows = await db(`user_items?user_id=eq.${userId}&item_id=in.(${formalTicketIds.join(',')})&select=item_id,quantity`);
+  const balances = Object.fromEntries(formalTicketIds.map((id) => [id, 0]));
+  for (const row of rows) {
+    if (!formalTicketIds.includes(row.item_id) || !Number.isSafeInteger(Number(row.quantity)) || Number(row.quantity) < 0) throw new ApiError('ガチャ券残数を確認できません。', 503);
+    balances[row.item_id] = Number(row.quantity);
+  }
+  return balances;
+}
+function formalGachaCatalog(state: RedesignState, tickets: Record<string, number>, now: number) {
+  const day = normalGachaDay(now);
+  const categories = Object.fromEntries(GACHA_CATEGORIES.map(category=>[category,{rule:SPECIAL_GACHA_RULES[category],pool:specialGachaPool(category),rates:formalGachaDisplayRates('special',category)}]));
+  return {masterVersion:FORMAL_GACHA_VERSION,normal:{rule:NORMAL_GACHA_RULE,pool:normalGachaPool(),rates:formalGachaDisplayRates('normal'),day,freeAvailable:state.dailyNormalGachaDate!==day},special:{categories,points:state.specialGachaPoints??{},tickets}};
+}
+function normalizedGachaRequestPayload(action: string, payload: any): Record<string, unknown> {
+  if (action === 'normal_gacha') return {count:Number(payload.count),payment:String(payload.currency??payload.payment).toUpperCase()};
+  if (action === 'special_gacha') return {category:String(payload.category??''),count:Number(payload.count),payment:String(payload.payment??'').toUpperCase()};
+  return {category:String(payload.category??''),itemId:String(payload.itemId??'')};
+}
+function canonicalJson(value: unknown): string {
+  if (value === undefined) return '"__undefined__"';
+  if (Array.isArray(value)) return `[${value.map(canonicalJson).join(',')}]`;
+  if (value !== null && typeof value === 'object') return `{${Object.entries(value as Record<string, unknown>).sort(([a],[b])=>a.localeCompare(b)).map(([key,item])=>`${JSON.stringify(key)}:${canonicalJson(item)}`).join(',')}}`;
+  return JSON.stringify(value);
+}
+function gachaMeasurementReceipt(action: 'normal_gacha'|'special_gacha'|'special_gacha_exchange', before: RedesignState, after: RedesignState, receipt: FormalGachaReceipt) {
+  const category = receipt.category ?? 'mixed';
+  const pointsAfter = receipt.category ? after.specialGachaPoints?.[receipt.category] ?? 0 : 0;
+  const resultSummary = [...new Map(receipt.results.map(result => {
+    const key = `${result.category}:${result.rarity}:${result.acquisition}`;
+    return [key, { category:result.category, rarity:result.rarity, acquisition:result.acquisition,
+      count:receipt.results.filter(candidate => `${candidate.category}:${candidate.rarity}:${candidate.acquisition}` === key).length,
+      convertedAmount:receipt.results.filter(candidate => `${candidate.category}:${candidate.rarity}:${candidate.acquisition}` === key).reduce((sum,candidate) => sum+candidate.convertedAmount,0) }];
+  })).values()];
+  return { gameplayMeasurement: {
+    contractVersion:'game04-gameplay-v1', action,
+    stateVersionBefore:before.version, stateVersionAfter:before.version+1,
+    cashDelta:after.cash-before.cash, energyDelta:0,
+    gacha:{ masterVersion:receipt.masterVersion, category, count:receipt.count, payment:receipt.payment,
+      diamondCost:receipt.payment==='DIAMONDS'?receipt.cost:0,
+      cashCost:receipt.payment==='CASH'?receipt.cost:0,
+      ticketCost:receipt.payment==='TICKET'?receipt.cost:0,
+      pointsAdded:receipt.pointsAdded, pointsSpent:receipt.kind==='exchange'?receipt.cost:0, pointsAfter,
+      exchangeItemId:receipt.kind==='exchange'?receipt.results[0]?.id??null:null,
+      resultSummary },
+  } };
 }
 async function responseFor(userId: string, extra: Record<string, unknown> = {}, committedState?: RedesignState) {
   // Reuse the authoritative state returned by this request's atomic commit.
@@ -288,11 +341,18 @@ Deno.serve(async (request: Request) => {
     const auth = await fetch(`${url}/auth/v1/user`, { headers: { apikey: key, Authorization: authorization } });
     const user = await auth.json();
     if (!auth.ok || !user.id) throw new ApiError('ログインし直してください。', 401);
-    const [profile] = await db(`users?id=eq.${user.id}&select=id,username`);
-    if (!profile) throw new ApiError('先にプレイヤー名を登録してください。', 409);
     const { action:requestedAction, payload = {}, requestId } = await request.json();
     const action=requestedAction==='formal_gacha'?(payload.mode==='normal'?'normal_gacha':'special_gacha'):requestedAction==='formal_gacha_exchange'?'special_gacha_exchange':requestedAction;
     if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(requestId)) throw new ApiError('操作IDが不正です。');
+    // Only read-only preparation overlaps. Never run session initialization, login
+    // rewards or a commit before profile validation and the request replay check.
+    const standardMutation = !['normal_gacha_status','special_gacha_status','formal_gacha_status','observe_state_restore','get_state','raid_refresh','quest_battle','raid_battle','territory_host','raid_unlock'].includes(action);
+    const [[profile], priorRows, acquired] = await Promise.all([
+      db(`users?id=eq.${user.id}&select=id,username`),
+      standardMutation ? db(`game04_requests?user_id=eq.${user.id}&request_id=eq.${requestId}&select=request_id,result`) : Promise.resolve([]),
+      standardMutation ? acquisitionInput(user.id).then(input => ({input}), error => ({error})) : Promise.resolve(undefined),
+    ]);
+    if (!profile) throw new ApiError('先にプレイヤー名を登録してください。', 409);
     if (action === "normal_gacha_status") {
       const state2 = await stateFor(user.id);
       const pool = normalGachaCompatibilityPool();
@@ -300,14 +360,13 @@ Deno.serve(async (request: Request) => {
       return new Response(JSON.stringify(await responseFor(user.id, { normalGacha: { pool, day, available: state2.dailyNormalGachaDate !== day, masterVersion:FORMAL_GACHA_VERSION, rule:NORMAL_GACHA_RULE, rates:formalGachaDisplayRates('normal') } })), { headers });
     }
     if (action === 'special_gacha_status') {
-      const state2=await stateFor(user.id);
+      const [state2,tickets]=await Promise.all([stateFor(user.id),gachaTicketBalances(user.id)]);
       const categories=Object.fromEntries(GACHA_CATEGORIES.map(category=>[category,{rule:SPECIAL_GACHA_RULES[category],pool:specialGachaPool(category),rates:formalGachaDisplayRates('special',category)}]));
-      return new Response(JSON.stringify(await responseFor(user.id,{specialGacha:{masterVersion:FORMAL_GACHA_VERSION,categories,points:state2.specialGachaPoints??{},tickets:state2.questTicketGrants??{}}})),{headers});
+      return new Response(JSON.stringify(await responseFor(user.id,{specialGacha:{masterVersion:FORMAL_GACHA_VERSION,categories,points:state2.specialGachaPoints??{},tickets}},state2)),{headers});
     }
     if (action === 'formal_gacha_status') {
-      const state2=await stateFor(user.id),day=normalGachaDay(Date.now());
-      const categories=Object.fromEntries(GACHA_CATEGORIES.map(category=>[category,{rule:SPECIAL_GACHA_RULES[category],pool:specialGachaPool(category),rates:formalGachaDisplayRates('special',category)}]));
-      return new Response(JSON.stringify(await responseFor(user.id,{formalGacha:{masterVersion:FORMAL_GACHA_VERSION,normal:{rule:NORMAL_GACHA_RULE,pool:normalGachaPool(),rates:formalGachaDisplayRates('normal'),day,freeAvailable:state2.dailyNormalGachaDate!==day},special:{categories,points:state2.specialGachaPoints??{},tickets:state2.questTicketGrants??{}}}})),{headers});
+      const [state2,tickets]=await Promise.all([stateFor(user.id),gachaTicketBalances(user.id)]),now=Date.now();
+      return new Response(JSON.stringify(await responseFor(user.id,{formalGacha:formalGachaCatalog(state2,tickets,now)},state2)),{headers});
     }
     if (action === 'observe_state_restore') {
       const observedVersion = payload.observedVersion;
@@ -333,41 +392,52 @@ Deno.serve(async (request: Request) => {
         : await rpc('game04_host_territory', {p_user_id: user.id, p_request_id: requestId, p_destination_id: destinationId});
       return new Response(JSON.stringify(await responseFor(user.id, {territoryRoomId: hosted.room.id})), {headers});
     }
-    const [prior] = await db(`game04_requests?user_id=eq.${user.id}&request_id=eq.${requestId}&select=request_id,result`);
+    const [prior] = priorRows;
     if (prior) {
       if (['normal_gacha','special_gacha','special_gacha_exchange'].includes(action)) {
-        const requestPayload=action==='normal_gacha'?{count:Number(payload.count),payment:String(payload.currency??payload.payment).toUpperCase()}:action==='special_gacha'?{category:payload.category,count:Number(payload.count),payment:payload.payment}:{category:payload.category,itemId:String(payload.itemId??'')};
-        if(prior.result?.operation!==action||JSON.stringify(prior.result?.requestPayload)!==JSON.stringify(requestPayload))throw new ApiError('操作IDが別の操作ですでに使用されています。',409);
+        const requestPayload=normalizedGachaRequestPayload(action,payload);
+        if(prior.result?.operation!==action||canonicalJson(prior.result?.requestPayload)!==canonicalJson(requestPayload))throw new ApiError('操作IDが別の操作ですでに使用されています。',409);
+      } else {
+        return new Response(JSON.stringify(await responseFor(user.id, prior.result?.receipt ?? {})), { headers });
       }
       const response = await responseFor(user.id, prior.result?.receipt ?? {});
+      const replayNow=Date.now(),tickets=await gachaTicketBalances(user.id);
+      const responseWithCatalog={...response,replayed:true,formalGacha:formalGachaCatalog(response.state,tickets,replayNow)};
       if (action === "normal_gacha") {
         const pool = normalGachaCompatibilityPool();
-        const day = normalGachaDay(Date.now());
-        return new Response(JSON.stringify({ ...response, normalGacha: { pool, day, available: response.state.dailyNormalGachaDate !== day } }), { headers });
+        const day = normalGachaDay(replayNow);
+        return new Response(JSON.stringify({ ...responseWithCatalog, normalGacha: { pool, day, available: response.state.dailyNormalGachaDate !== day } }), { headers });
       }
-      return new Response(JSON.stringify(response), { headers });
+      return new Response(JSON.stringify(responseWithCatalog), { headers });
     }
+    // A replay above deliberately ignores this speculative read and reloads current
+    // state via the existing response path. Read failures cannot bypass mutation safety.
+    if (acquired && 'error' in acquired) throw acquired.error;
     let measurementReceipt: Record<string, unknown> | undefined;
-    const state = await stateFor(user.id); let after: RedesignState, room: RaidRoom | null = null, version: number | null = null;
+    const state = await stateFor(user.id, acquired?.input); let after: RedesignState, room: RaidRoom | null = null, version: number | null = null;
     if (action === "normal_gacha") {
       const pool = normalGachaCompatibilityPool();
       const payment=String(payload.currency??payload.payment).toUpperCase();
-      const drawn=applyFormalNormalGacha(state,{requestId,count:Number(payload.count) as 1|10,payment:payment as 'CASH'|'FREE',now:Date.now()},()=>crypto.getRandomValues(new Uint32Array(1))[0]/4294967296);
-      drawn.state=recordMissionEvent(drawn.state,{id:`normal-gacha:${requestId}`,counters:['normal_gacha'],at:Date.now()});
+      const now=Date.now();
+      const drawn=applyFormalNormalGacha(state,{requestId,count:Number(payload.count) as 1|10,payment:payment as 'CASH'|'FREE',now},()=>crypto.getRandomValues(new Uint32Array(1))[0]/4294967296);
+      drawn.state=recordMissionEvent(drawn.state,{id:`normal-gacha:${requestId}`,counters:['normal_gacha'],at:now});
       const normalGachaResults=drawn.receipt.results.map(result=>({id:result.id,kind:result.category,rarity:result.rarity,name:result.name,image:result.image,outcome:result.acquisition==='instance'?'装備を個体で獲得':result.acquisition==='new'?'新規獲得':result.category==='character'?`固有魂 +${result.convertedAmount}`:`スキルLB素材 +${result.convertedAmount}`}));
-      const receipt = { operation:action,formalGachaReceipt:drawn.receipt,formalGachaResults:drawn.receipt.results,normalGachaResults,normalGachaCost:drawn.receipt.cost,normalGachaMasterVersion:drawn.receipt.masterVersion };
-      const saved = await commitGacha(state, drawn.state, requestId, 0, action, {count:Number(payload.count),payment}, receipt);
-      const day = normalGachaDay(Date.now());
-      return new Response(JSON.stringify(await responseFor(user.id, { ...saved.receipt ?? receipt, normalGacha: { pool, day, available: saved.state?.dailyNormalGachaDate !== day } }, saved.state)), { headers });
+      const receipt = { operation:action,...gachaMeasurementReceipt(action,state,drawn.state,drawn.receipt),formalGachaReceipt:drawn.receipt,formalGachaResults:drawn.receipt.results,normalGachaResults,normalGachaCost:drawn.receipt.cost,normalGachaMasterVersion:drawn.receipt.masterVersion,normalGachaJstDay:normalGachaDay(now) };
+      const saved = await commitGacha(state, drawn.state, requestId, 0, action, normalizedGachaRequestPayload(action,payload), receipt);
+      const [tickets,settledNow]=[await gachaTicketBalances(user.id),Date.now()],day=normalGachaDay(settledNow);
+      return new Response(JSON.stringify(await responseFor(user.id, { ...(saved.receipt ?? receipt), replayed:Boolean(saved.replayed), normalGacha: { pool, day, available: saved.state?.dailyNormalGachaDate !== day }, formalGacha:formalGachaCatalog(saved.state,tickets,settledNow) }, saved.state)), { headers });
     }
     if(action==='special_gacha'||action==='special_gacha_exchange'){
+      const ticketBalances=await gachaTicketBalances(user.id);
+      const projectedState={...state,gachaTicketBalances:ticketBalances};
       const resolved=action==='special_gacha'
-       ?applyFormalSpecialGacha(state,{requestId,category:payload.category,count:Number(payload.count) as 1|10,payment:payload.payment},()=>crypto.getRandomValues(new Uint32Array(1))[0]/4294967296)
-       :applyFormalSsrExchange(state,{requestId,category:payload.category,itemId:String(payload.itemId??'')});
-      const receipt={operation:action,formalGachaReceipt:resolved.receipt,formalGachaResults:resolved.receipt.results,specialGachaResults:resolved.receipt.results,specialGachaCost:resolved.receipt.payment==='DIAMONDS'?resolved.receipt.cost:0,specialGachaPoints:resolved.state.specialGachaPoints??{},specialGachaMasterVersion:resolved.receipt.masterVersion,specialGachaCategory:payload.category,specialGachaItemId:payload.itemId??null,specialGachaPayment:payload.payment??null};
-      const requestPayload=action==='special_gacha'?{category:payload.category,count:Number(payload.count),payment:payload.payment}:{category:payload.category,itemId:String(payload.itemId??'')};
+       ?applyFormalSpecialGacha(projectedState,{requestId,category:payload.category,count:Number(payload.count) as 1|10,payment:String(payload.payment??'').toUpperCase() as 'DIAMONDS'|'TICKET'},()=>crypto.getRandomValues(new Uint32Array(1))[0]/4294967296)
+       :applyFormalSsrExchange(projectedState,{requestId,category:payload.category,itemId:String(payload.itemId??'')});
+      const receipt={operation:action,...gachaMeasurementReceipt(action,state,resolved.state,resolved.receipt),formalGachaReceipt:resolved.receipt,formalGachaResults:resolved.receipt.results,specialGachaResults:resolved.receipt.results,specialGachaCost:resolved.receipt.payment==='DIAMONDS'?resolved.receipt.cost:0,specialGachaPoints:resolved.state.specialGachaPoints??{},specialGachaMasterVersion:resolved.receipt.masterVersion,specialGachaCategory:payload.category,specialGachaItemId:payload.itemId??null,specialGachaPayment:payload.payment??null};
+      const requestPayload=normalizedGachaRequestPayload(action,payload);
       const saved=await commitGacha(state,resolved.state,requestId,resolved.receipt.payment==='DIAMONDS'?resolved.receipt.cost:0,action,requestPayload,receipt);
-      return new Response(JSON.stringify(await responseFor(user.id,saved.receipt??receipt,saved.state)),{headers});
+      const updatedTickets=await gachaTicketBalances(user.id);
+      return new Response(JSON.stringify(await responseFor(user.id,{...(saved.receipt??receipt),replayed:Boolean(saved.replayed),formalGacha:formalGachaCatalog(saved.state,updatedTickets,Date.now())},saved.state)),{headers});
     }
     if (action === 'claim_mission') {
       const mission = getClaimableMission(state, await missionConfig(), String(payload.missionId));

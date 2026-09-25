@@ -10,7 +10,7 @@ type PageProps = { searchParams: Promise<{ from?: string }> };
 export default async function Page({ searchParams }: PageProps) {
   const { from } = await searchParams;
   return (
-    <LegalPage title="権利表記・運営者情報" updatedAt="2026年9月18日" returnToGame={from === "settings"}>
+    <LegalPage title="権利表記・運営者情報" updatedAt="2026年9月24日" returnToGame={from === "settings"}>
       <h2>コンテンツの権利</h2>
       <p>本サービスの画像、文章、音声、プログラム等に関する権利は、運営者または正当な権利を有する第三者に帰属します。利用規約で認められる範囲を超えて利用することはできません。</p>
       <h2>運営主体</h2>

@@ -37,7 +37,13 @@ export default function InteractionProbe({ frame }: { frame: RefObject<HTMLIFram
         if (pending) {
           const now = win.performance.now();
           const candidates = Array.from(doc.querySelectorAll<HTMLElement>('button, a, [role="button"]'));
-          const ready = pending.activated && candidates.some(el => {
+          const battle = doc.querySelector<HTMLElement>('section[data-playback-paused="false"][data-playback-frame]');
+          const battleRect = battle?.getBoundingClientRect();
+          const battleHit = battleRect && doc.elementFromPoint(battleRect.left + Math.min(battleRect.width, win.innerWidth) / 2, battleRect.top + Math.min(battleRect.height, win.innerHeight) / 2);
+          const battleReady = !!battle && Number(battle.dataset.playbackFrame) >= 0 && !doc.querySelector('dialog[open]')
+            && !!battleRect && battleRect.width > 0 && win.getComputedStyle(battle).visibility === 'visible'
+            && !!battleHit && battle.contains(battleHit);
+          const ready = pending.activated && (pending.target.trim() === '戦闘再生開始' ? battleReady : candidates.some(el => {
             if ((el.getAttribute('aria-label') || el.textContent || '').trim() !== pending!.target.trim() || !pending!.target.trim()) return false;
             if (el.matches(':disabled, [aria-disabled="true"]') || el.closest('[inert], [aria-busy="true"]')) return false;
             const rect = el.getBoundingClientRect(), style = win.getComputedStyle(el);
@@ -46,7 +52,7 @@ export default function InteractionProbe({ frame }: { frame: RefObject<HTMLIFram
             if (x < 0 || y < 0 || x >= win.innerWidth || y >= win.innerHeight) return false;
             const hit = doc.elementFromPoint(x, y);
             return hit === el || !!hit && el.contains(hit);
-          });
+          }));
           pending.stable = ready ? pending.stable + 1 : 0;
           // Wait for click dispatch (not merely pointerdown), then two rendered frames.
           if (pending.stable >= 2 || now - pending.start >= 60000) {
@@ -64,7 +70,7 @@ export default function InteractionProbe({ frame }: { frame: RefObject<HTMLIFram
   if (!qaTimingEnabled()) return null;
   return <section aria-label="QA対象CTA操作可能計測" style={{ background: '#151515', color: '#fff', padding: 12, fontSize: 12 }}>
     <h2>対象CTAの操作可能時刻</h2>
-    <p>対象の完全一致名・可視・非disabled/inert・中央点の遮蔽物なしを2描画frameで観測。画面全体のTTIや保存完了ではありません。遷移先固有CTAを指定し、準備後に次の本体操作を計測してください。</p>
+    <p>対象の完全一致名・可視・非disabled/inert・中央点の遮蔽物なしを2描画frameで観測。画面全体のTTIや保存完了ではありません。遷移先固有CTAを指定し、準備後に次の本体操作を計測してください。「戦闘再生開始」は保存済み戦闘のフレーム表示・非停止・画像ダイアログ無しを2frameで観測します。</p>
     <label>対象CTA <input value={target} onChange={event => { targetRef.current = event.target.value; setTarget(event.target.value); }} /></label>
     <button onClick={() => { armedRef.current = true; setArmed(true); }}>次の本体操作を計測</button><span>{armed ? ' 操作待ち' : ''}</span>
     <button onClick={() => setSamples([])}>操作計測履歴を消去</button>

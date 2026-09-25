@@ -93,10 +93,10 @@ export function applyFormalSpecialGacha(
     if (state.diamonds < cost) throw new Error('輝石が不足しています。');
     state.diamonds -= cost;
   } else {
-    state.questTicketGrants ??= {};
-    const owned = state.questTicketGrants[rule.ticketId] ?? 0;
+    state.gachaTicketBalances ??= {};
+    const owned = state.gachaTicketBalances[rule.ticketId] ?? 0;
     if (owned < cost) throw new Error('対応するガチャ券が不足しています。');
-    state.questTicketGrants[rule.ticketId] = owned - cost;
+    state.gachaTicketBalances[rule.ticketId] = owned - cost;
   }
   const results: FormalGachaResult[] = [];
   const pool = specialGachaPool(input.category);
