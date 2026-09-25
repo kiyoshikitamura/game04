@@ -15,6 +15,7 @@ import { getCharacterLocationBackground } from "@/utils/characterVisualAssets";
 import "./CommonModals.css";
 import { userFacingErrorMessage } from "../lib/userFacingError";
 import CharacterGachaPresentation from "./gacha/CharacterGachaPresentation";
+import SengokuGateOpening from "./gacha/SengokuGateOpening";
 import CanonicalDialog from "./ui/CanonicalDialog";
 import PublicUserProfile from "./profile/PublicUserProfile";
 import UserIdentityRow from "./profile/UserIdentityRow";
@@ -201,6 +202,13 @@ export default function CommonModals() {
       ) : scoutAnimationState !== null && (
         <div className={`modal-overlay background-black-95 ${isCommonOpening ? "gacha-processing-overlay gacha-common-opening-overlay" : ""}`} style={{ zIndex: 20000 }} data-gacha-transition-state={scoutAnimationState.toLowerCase()} data-gacha-visual={isCommonOpening ? "tokyo-night-opening" : undefined}>
           {scoutAnimationState === "PROCESSING" || scoutAnimationState === "FLASHING" || scoutAnimationState === "READY" ? (
+            scoutAnimationState === "READY" ? (
+              <SengokuGateOpening
+                rarity={scoutFlashingColor === "GOLD" ? "SSR" : scoutFlashingColor === "PURPLE" ? "SR" : "R"}
+                onBegin={() => playCyberSe("click")}
+                onComplete={() => setScoutAnimationState("SHOW_RESULTS")}
+              />
+            ) : (
             <div className={`gacha-opening-stage rarity-${scoutFlashingColor.toLowerCase()} ${scoutAnimationState === "READY" ? "is-ready" : "is-processing"} ${tutorialPullStarted ? "is-pull-started" : ""} ${tutorialPullStarted && scoutFlashingColor === "GOLD" && !isCharacterReveal ? "is-ssr-presence" : ""}`} data-gacha-common-opening>
               <div className="gacha-opening-city" aria-hidden="true" />
               <div className="gacha-opening-neon" aria-hidden="true"><i /><i /><i /></div>
@@ -229,6 +237,7 @@ export default function CommonModals() {
                 </div>
               )}
             </div>
+            )
           ) : (
             <div className="gacha-result-panel">
               {onboardingState?.tutorial_step === "AUTO_FORMATION" && (

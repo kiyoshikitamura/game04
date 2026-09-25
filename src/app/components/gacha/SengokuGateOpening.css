@@ -1,0 +1,91 @@
+.sengoku-gate {
+  position: fixed;
+  z-index: 20010;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #080303;
+  color: #fff4d1;
+  isolation: isolate;
+}
+
+.sengoku-gate__scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  perspective: 1100px;
+  background: #080303;
+}
+
+.sengoku-gate__scene img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+.sengoku-gate__background { z-index: 0; }
+.sengoku-gate__rays { z-index: 1; opacity: 0; transform: scale(.62) rotate(-8deg); mix-blend-mode: screen; }
+.sengoku-gate__particles { z-index: 2; opacity: 0; transform: scale(.76); mix-blend-mode: screen; }
+.sengoku-gate__light { z-index: 3; opacity: 0; mix-blend-mode: screen; }
+.sengoku-gate__door { z-index: 5; transform-style: preserve-3d; will-change: transform; }
+.sengoku-gate__door--left { transform-origin: 13% 50%; }
+.sengoku-gate__door--right { transform-origin: 87% 50%; }
+.sengoku-gate__flash { z-index: 8; opacity: 0; mix-blend-mode: screen; }
+
+.sengoku-gate__open {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  min-width: min(72vw, 270px);
+  min-height: 68px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 11px 24px;
+  border: 1px solid #e2bd63;
+  border-radius: 999px;
+  color: #ffe7a3;
+  background: rgba(25, 7, 5, .84);
+  box-shadow: 0 0 0 1px rgba(255, 226, 139, .12) inset, 0 0 34px rgba(224, 165, 55, .35);
+  text-shadow: 0 2px 7px #000;
+  cursor: pointer;
+  animation: sengoku-gate-pulse 1.55s ease-in-out infinite;
+}
+
+.sengoku-gate__open b { font-size: 19px; letter-spacing: .24em; text-indent: .24em; }
+.sengoku-gate__open span { color: #d8c9a2; font-size: 11px; font-weight: 800; letter-spacing: .08em; }
+.sengoku-gate__skip { position: absolute; z-index: 12; top: max(12px, env(safe-area-inset-top)); right: max(12px, env(safe-area-inset-right)); min-width: 68px; min-height: 38px; padding: 7px 12px; border: 1px solid rgba(219, 195, 123, .55); border-radius: 999px; color: #f2dfaf; background: rgba(9, 5, 6, .72); font-size: 11px; font-weight: 900; letter-spacing: .1em; }
+.sengoku-gate__status { position: absolute; z-index: 10; right: 0; bottom: max(12px, env(safe-area-inset-bottom)); left: 0; margin: 0; color: rgba(255, 241, 204, .76); font-size: 11px; font-weight: 800; text-align: center; letter-spacing: .08em; text-shadow: 0 2px 6px #000; }
+
+.sengoku-gate.is-playing .sengoku-gate__door--left { animation: sengoku-left-open 1.65s cubic-bezier(.4,0,.15,1) forwards; }
+.sengoku-gate.is-playing .sengoku-gate__door--right { animation: sengoku-right-open 1.65s cubic-bezier(.4,0,.15,1) forwards; }
+.sengoku-gate.is-playing .sengoku-gate__light { animation: sengoku-light-rise 1.75s ease-out forwards; }
+.sengoku-gate.is-playing .sengoku-gate__rays { animation: sengoku-rays 2s ease-out .7s forwards; }
+.sengoku-gate.is-playing .sengoku-gate__particles { animation: sengoku-particles 2.2s ease-out .65s forwards; }
+.sengoku-gate.is-playing .sengoku-gate__flash { animation: sengoku-flash .65s ease-out 1.55s forwards; }
+
+@keyframes sengoku-left-open { 0% { transform: rotateY(0); } 24%,43% { transform: rotateY(-9deg); } 100% { transform: rotateY(-76deg); } }
+@keyframes sengoku-right-open { 0% { transform: rotateY(0); } 24%,43% { transform: rotateY(9deg); } 100% { transform: rotateY(76deg); } }
+@keyframes sengoku-light-rise { 0% { opacity: 0; filter: brightness(.4); } 20% { opacity: .36; filter: brightness(.7); } 43% { opacity: .46; filter: brightness(.85); } 100% { opacity: 1; filter: brightness(1.4); } }
+@keyframes sengoku-rays { 0% { opacity: 0; transform: scale(.62) rotate(-8deg); } 40% { opacity: .9; } 100% { opacity: .68; transform: scale(1.18) rotate(6deg); } }
+@keyframes sengoku-particles { 0% { opacity: 0; transform: scale(.76) translateY(3%); } 35% { opacity: 1; } 100% { opacity: .72; transform: scale(1.08) translateY(-2%); } }
+@keyframes sengoku-flash { 0% { opacity: 0; } 35% { opacity: 1; } 68% { opacity: .95; } 100% { opacity: 0; } }
+@keyframes sengoku-gate-pulse { 50% { box-shadow: 0 0 0 1px rgba(255,226,139,.22) inset, 0 0 46px rgba(232,173,66,.66); transform: scale(1.035); } }
+
+@media (min-width: 700px) {
+  .sengoku-gate__scene { left: 50%; width: min(100%, 768px); transform: translateX(-50%); box-shadow: 0 0 80px #000; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sengoku-gate__open { animation: none; }
+  .sengoku-gate.is-playing .sengoku-gate__door--left { animation-duration: .01ms; }
+  .sengoku-gate.is-playing .sengoku-gate__door--right { animation-duration: .01ms; }
+  .sengoku-gate.is-playing :is(.sengoku-gate__light,.sengoku-gate__rays,.sengoku-gate__particles,.sengoku-gate__flash) { animation-duration: .01ms; animation-delay: 0s; }
+}
