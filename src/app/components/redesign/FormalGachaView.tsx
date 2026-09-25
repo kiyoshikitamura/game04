@@ -1,5 +1,6 @@
 "use client";
 
+import { useAudio } from '@/audio/AudioProvider';
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import type { RedesignResponse } from "@/utils/redesignApi";
@@ -58,6 +59,16 @@ export default function FormalGachaView({ data, onAction }: {
   const [error, setError] = useState("");
   const [results, setResults] = useState<FormalResult[] | null>(null);
   const [opening, setOpening] = useState(false);
+  const { playSe, setBgmDucked, stopSe } = useAudio();
+  const soundedResults = useRef<FormalResult[] | null>(null);
+  useEffect(() => { setBgmDucked(opening); return () => setBgmDucked(false); }, [opening, setBgmDucked]);
+  useEffect(() => { if (opening) playSe('GACHA_START'); }, [opening, playSe]);
+  useEffect(() => {
+    if (opening || !results || soundedResults.current === results) return;
+    soundedResults.current = results;
+    playSe(results.some(result => result.rarity === 'SSR') ? 'GACHA_SSR' : 'GACHA_REVEAL');
+  }, [opening, results, playSe]);
+  useEffect(() => () => stopSe(), [stopSe]);
   const [recoveryPending, setRecoveryPending] = useState<PendingGachaIntent | null>(null);
   const [storageBlocked, setStorageBlocked] = useState(false);
   const [jstDay, setJstDay] = useState(() => getJstDateString());

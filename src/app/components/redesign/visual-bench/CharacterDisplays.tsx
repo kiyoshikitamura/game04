@@ -55,7 +55,7 @@ const artworkBoxes = new Map<string, Box>();
 const preparingArtwork = new Map<string, Promise<Box>>();
 function artworkDefinition(subject: DisplaySubject, variant: 'card'|'battle') {
   const source = art.find(row => row.id === subject.id)?.[variant];
-  const background = backgrounds.find(row => row.characterId === subject.id)?.background;
+  const background = variant === 'card' ? '/creative/card-backgrounds/' + subject.rarity + '.png' : backgrounds.find(row => row.characterId === subject.id)?.background;
   const frame = '/creative/ui/frame-' + subject.rarity + '.png';
   const element = '/creative/ui/element-' + subject.element + '.png';
   return { source, background, frame, element, key: [source, background, frame, element, variant].join('|'), variant };

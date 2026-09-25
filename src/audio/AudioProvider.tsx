@@ -28,6 +28,8 @@ type AudioContextValue = AudioSettings & {
   stopBgm: () => void;
   playSe: (event: SeEvent) => void;
   playLegacySe: (event: string) => void;
+  stopSe: () => void;
+  setBgmDucked: (ducked: boolean) => void;
   preloadAudio: (options: { scene?: BgmScene; events?: SeEvent[] }) => void;
   setBgmVolume: (volume: number) => void;
   setSeVolume: (volume: number) => void;
@@ -63,6 +65,9 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
   const [settings, setSettings] = useState<AudioSettings>(AUDIO_DEFAULTS);
   const [currentScene, setCurrentScene] = useState<BgmScene | null>(null);
   const [unlocked, setUnlocked] = useState(false);
+  const duckedRef = useRef(false);
+  const seGenerationRef = useRef(0);
+  const seSourcesRef = useRef(new Set<AudioBufferSourceNode>());
   const settingsRef = useRef(settings);
   const desiredSceneRef = useRef<BgmScene | null>(null);
   const contextRef = useRef<AudioContext | null>(null);
@@ -191,7 +196,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
     gain.connect(context.destination);
     const now = context.currentTime;
     gain.gain.setValueAtTime(0, now);
-    gain.gain.linearRampToValueAtTime(settingsRef.current.bgmVolume, now + FADE_SECONDS);
+    gain.gain.linearRampToValueAtTime(settingsRef.current.bgmVolume * (duckedRef.current ? .3 : 1), now + FADE_SECONDS);
     source.start();
     bgmSourceRef.current = source;
     bgmGainRef.current = gain;
@@ -269,7 +274,26 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
     if (hadBgm) recordAudioTrace({ type: "BGM_STOPPED" });
   }, [stopActiveBgm]);
 
+  const stopSe = useCallback(() => {
+    seGenerationRef.current += 1;
+    for (const source of seSourcesRef.current) { try { source.stop(); } catch { /* already ended */ } }
+    seSourcesRef.current.clear();
+    recentPriorityRef.current = { priority: -1, at: 0, event: null };
+  }, []);
+  const setBgmDucked = useCallback((ducked: boolean) => {
+    duckedRef.current = ducked;
+    const context = contextRef.current, gain = bgmGainRef.current;
+    if (context && gain) {
+      gain.gain.cancelScheduledValues(context.currentTime);
+      gain.gain.setValueAtTime(gain.gain.value, context.currentTime);
+      gain.gain.linearRampToValueAtTime(settingsRef.current.bgmVolume * (ducked ? .3 : 1), context.currentTime + .15);
+    }
+  }, []);
   const playSe = useCallback((event: SeEvent) => {
+    const path = SE_ASSETS[event];
+    if (!path) return;
+    const generation = seGenerationRef.current;
+    const requestedAt = performance.now();
     if (!settingsRef.current.seEnabled || document.hidden) return;
     const context = contextRef.current;
     if (!context || context.state !== "running") return;
@@ -283,7 +307,8 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
     lastSeAtRef.current.set(event, nowMs);
     if (isActionResolutionBeat || priority >= recent.priority || nowMs - recent.at >= 180) recentPriorityRef.current = { priority, at: nowMs, event };
     recordAudioTrace({ type: "SE_REQUESTED", event, contextState: context.state });
-    void loadBuffer(SE_ASSETS[event]).then((buffer) => {
+    void loadBuffer(path).then((buffer) => {
+      if (generation !== seGenerationRef.current || performance.now() - requestedAt > 250) return;
       if (!buffer || !settingsRef.current.seEnabled || document.hidden || context.state !== "running") return;
       try {
         const source = context.createBufferSource();
@@ -292,6 +317,8 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
         gain.gain.value = settingsRef.current.seVolume;
         source.connect(gain);
         gain.connect(context.destination);
+        seSourcesRef.current.add(source);
+        source.onended = () => { seSourcesRef.current.delete(source); source.disconnect(); gain.disconnect(); };
         source.start();
         recordAudioTrace({ type: "SE_STARTED", event, path: SE_ASSETS[event], contextState: context.state });
       } catch { /* a single unavailable sound never blocks the UI */ }
@@ -305,13 +332,14 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
 
   const preloadAudio = useCallback(({ scene, events = [] }: { scene?: BgmScene; events?: SeEvent[] }) => {
     if (scene) void loadBuffer(BGM_ASSETS[scene]);
-    events.forEach((event) => { void loadBuffer(SE_ASSETS[event]); });
+    events.forEach((event) => { const path = SE_ASSETS[event]; if (path) void loadBuffer(path); });
   }, [loadBuffer]);
 
   useEffect(() => {
     const suspendForBackground = (reason: string) => {
       const context = contextRef.current;
       if (!context || context.state === "closed") return;
+      stopSe();
       needsBgmRecoveryRef.current = true;
       recoveryPendingRef.current = true;
       recordAudioTrace({ type: "AUDIO_BACKGROUND", reason, contextState: context.state });
@@ -357,7 +385,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
       window.removeEventListener("touchend", onForegroundGesture, true);
       window.removeEventListener("keydown", onForegroundGesture, true);
     };
-  }, [finishAudioRecovery, recoverAudio]);
+  }, [finishAudioRecovery, recoverAudio, stopSe]);
 
   useEffect(() => {
     if (!settings.bgmEnabled) {
@@ -373,14 +401,17 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
     const gain = bgmGainRef.current;
     if (!context || !gain) return;
     gain.gain.cancelScheduledValues(context.currentTime);
-    gain.gain.linearRampToValueAtTime(settings.bgmVolume, context.currentTime + 0.08);
+    gain.gain.linearRampToValueAtTime(settings.bgmVolume * (duckedRef.current ? .3 : 1), context.currentTime + 0.08);
   }, [settings.bgmVolume]);
 
+  useEffect(() => { if (!settings.seEnabled) stopSe(); }, [settings.seEnabled, stopSe]);
+
   useEffect(() => () => {
+    stopSe();
     transitionRef.current += 1;
     stopActiveBgm(false);
     void contextRef.current?.close().catch(() => undefined);
-  }, [stopActiveBgm]);
+  }, [stopActiveBgm, stopSe]);
 
   const value = useMemo<AudioContextValue>(() => ({
     ...settings,
@@ -391,12 +422,14 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
     stopBgm,
     playSe,
     playLegacySe,
+    stopSe,
+    setBgmDucked,
     preloadAudio,
     setBgmVolume: (volume) => setSettings((current) => ({ ...current, bgmVolume: clampVolume(volume) })),
     setSeVolume: (volume) => setSettings((current) => ({ ...current, seVolume: clampVolume(volume) })),
     setBgmEnabled: (enabled) => setSettings((current) => ({ ...current, bgmEnabled: enabled })),
     setSeEnabled: (enabled) => setSettings((current) => ({ ...current, seEnabled: enabled })),
-  }), [currentScene, playBgm, playLegacySe, playSe, preloadAudio, settings, stopBgm, unlockAudio, unlocked]);
+  }), [currentScene, playBgm, playLegacySe, playSe, stopSe, setBgmDucked, preloadAudio, settings, stopBgm, unlockAudio, unlocked]);
 
   return <AudioContextState.Provider value={value}>{children}</AudioContextState.Provider>;
 }

@@ -1,4 +1,5 @@
 'use client';
+import { useAudio } from '@/audio/AudioProvider';
 import { raidDisplayTitle, raidDisplaySubtitle, raidDisplayLabel, enemyRoleLabel } from '@/domain/redesign/contextNames';
 import { raidBackground } from '@/domain/redesign/approvedBackgrounds';
 import { displaySkillDescription } from './battleLabels';
@@ -28,6 +29,9 @@ export default function RaidView({state,rooms,party,onAction,onOpenDeck,initialR
  useEffect(()=>{const timer=setInterval(()=>setNow(Date.now()),1000);return()=>clearInterval(timer);},[]);
  const room=rooms.find(r=>r.id===selected),master=room?getRoomRaidMaster(room):null,me=room?.participants.find(p=>p.userId===state.userId),enemy=master&&room?raidEnemy(master,room.level):null;
  const game=useGame();
+ const { playBgm } = useAudio();
+ const invasion = !!room?.territorySnapshot;
+ useEffect(() => { playBgm(invasion ? 'GVG' : 'RAID'); }, [invasion, playBgm]);
  const profiles=useCommunityProfiles(state.userId,[...rooms.map(r=>r.ownerId),...(room?.participants.map(p=>p.userId)??[])],game.session?.user?.id===state.userId,`${selected}:${modal}:${game.session?.access_token}`);
  const active=(r:RaidRoom)=>r.status==='active'&&Date.parse(r.expiresAt)>now;
  const live=rooms.filter(active).filter(r=>filter==='all'||getRoomRaidMaster(r).type===filter).sort((a,b)=>Date.parse(a.expiresAt)-Date.parse(b.expiresAt));
