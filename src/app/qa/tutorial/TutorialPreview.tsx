@@ -19,13 +19,14 @@ import { createTutorialBattle } from '@/domain/redesign/tutorial/battle';
 import { openTutorial, persistTutorial } from './store';
 import '@/app/components/redesign/redesign.css';
 import './tutorial.css';
+import Modal from '@/app/components/redesign/Modal';
+import TutorialSceneAssets from './TutorialSceneAssets';
 
 function Notice({ text, button, onClick, busy }: { text: string; button: string; onClick: () => void; busy: boolean }) {
-  const ref = useRef<HTMLDialogElement>(null);
-  useEffect(() => { ref.current?.showModal(); }, []);
-  return <dialog ref={ref} className="tutorial-notice" onCancel={e => e.preventDefault()} aria-label={text.split('\n')[0]}>
-    <p>{text}</p><button className="rd-button" disabled={busy} onClick={onClick}>{button}</button>
-  </dialog>;
+  return <Modal title="ご案内" onClose={() => undefined} hideCloseButton closeDisabled className="tutorial-notice"
+    footer={<button className="rd-button tutorial-next" disabled={busy} onClick={onClick}>{button}</button>}>
+    <p>{text}</p>
+  </Modal>;
 }
 const noop = () => undefined;
 const castMember = (id: string) => CHARACTER_MASTERS.find(c => c.id === id)!;
@@ -124,10 +125,14 @@ export default function TutorialPreview() {
   const acquisition = scene?.id === 'characters' || scene?.id === 'skills';
   const background = world ? scene.background : BACKGROUNDS.guide;
   const cast = world ? scene.cast : ['char_ageha_01'];
+  const sceneAssets = [background, ...(scene?.id === 'characters'
+    ? STARTERS.map(id => characterArt(castMember(id), 'card')!)
+    : scene?.id === 'skills' ? STARTER_SKILLS.map(id => getFormalOwnedSkill(id, 0).image)
+    : cast.map(id => characterArt(castMember(id), 'full')!))];
   const errorView = error && <div className="tutorial-error" role="alert">{error}<button onClick={() => window.location.reload()}>再読み込み</button></div>;
   return <GameContext.Provider value={gameContext}><div ref={shell} className={`rd-shell tutorial-shell ${scene ? '' : 'is-complete'}`}>
     {scene ? scene.id === 'battle' && practice ? <BattleView requirePlaybackCompletion result={practice} vipActive={false} onComplete={next} title="模擬戦" backgroundSrc={BACKGROUNDS.battle} /> :
-      <main className={`tutorial-scene ${world ? 'is-world' : ''}`} style={{ backgroundImage: `linear-gradient(0deg, #160f0beb, transparent 65%), url('${background}')` }} data-scene={scene.id}>
+      <TutorialSceneAssets key={scene.id} assets={sceneAssets}><main className={`tutorial-scene ${world ? 'is-world' : ''}`} style={{ backgroundImage: `linear-gradient(0deg, #160f0beb, transparent 65%), url('${background}')` }} data-scene={scene.id}>
         <div className={`tutorial-cast count-${cast.length}`} aria-label={world ? '乱世の武将たち' : '豊臣秀吉'}>
           {!acquisition && cast.map(id => <img key={id} src={characterArt(castMember(id), 'full')} alt={castMember(id).name} />)}
           {scene.id === 'characters' && <div className="tutorial-rewards">{STARTERS.map(id => <figure key={id}><img src={characterArt(castMember(id), 'card')} alt={castMember(id).name} /><figcaption><b>{id === 'char_aoi_01' ? 'お市' : castMember(id).name}</b><span>R　Lv.1・覚醒0</span></figcaption></figure>)}</div>}
@@ -140,7 +145,7 @@ export default function TutorialPreview() {
           {world && <div className="tutorial-progress" aria-label={`${save.step + 1} / 3`}>{[0, 1, 2].map(i => <i key={i} data-active={save.step === i} />)}</div>}
           <button className="rd-button tutorial-next" disabled={busy || (scene.id === 'name' && (!name.trim() || [...name.trim()].length > 8))} onClick={next}>{busy ? '保存中…' : 'button' in scene ? scene.button : '次へ'}</button>
         </section>
-      </main> : <>
+      </main></TutorialSceneAssets> : <>
       <header className="tutorial-header"><strong>{save.name}</strong><span>Lv.1</span><span>銭 {save.game.cash.toLocaleString()}</span><span>行動力 {save.game.energy}</span></header>
       <main className="rd-main" inert={!save.departed && tab === 'home' ? true : undefined}>
         {tab === 'home' && <HomeView state={save.game} onAction={action} onNavigate={navigate} previewOnly />}
