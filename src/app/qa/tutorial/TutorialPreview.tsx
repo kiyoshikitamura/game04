@@ -22,6 +22,8 @@ import '@/app/components/redesign/redesign.css';
 import './tutorial.css';
 import Modal from '@/app/components/redesign/Modal';
 import TutorialSceneAssets from './TutorialSceneAssets';
+import { TUTORIAL_ASSETS } from './assets';
+import { preloadBattleImage } from '@/app/components/battle/battleAssetPreload';
 
 function Notice({ text, button, onClick, busy, title = 'ご案内' }: { text: string; button: string; onClick: () => void; busy: boolean; title?: string }) {
   return <Modal title={title} onClose={() => undefined} hideCloseButton closeDisabled className="tutorial-notice"
@@ -49,6 +51,8 @@ export default function TutorialPreview() {
   const practice = useMemo(() => save?.game.deck.length ? createTutorialBattle(save.game) : null, [save]);
   useEffect(() => {
     let cancelled = false;
+    // Start the full image bundle in parallel with the saved-progress request.
+    void Promise.all(TUTORIAL_ASSETS.map(preloadBattleImage)).catch(noop);
     document.body.classList.add('rd-active');
     entryReceipt.current ||= crypto.randomUUID();
     void openTutorial().then(async state => {
@@ -126,14 +130,10 @@ export default function TutorialPreview() {
   const acquisition = scene?.id === 'characters' || scene?.id === 'skills';
   const background = world ? scene.background : BACKGROUNDS.guide;
   const cast = world ? scene.cast : ['char_ageha_01'];
-  const sceneAssets = [background, ...(scene?.id === 'characters'
-    ? STARTERS.map(id => characterArt(castMember(id), 'card')!)
-    : scene?.id === 'skills' ? STARTER_SKILLS.map(id => getFormalOwnedSkill(id, 0).image)
-    : cast.map(id => characterArt(castMember(id), 'full')!))];
   const errorView = error && <Notice title="保存できませんでした" text={error} button="再読み込み" busy={false} onClick={() => window.location.reload()} />;
-  return <GameContext.Provider value={gameContext}><div ref={shell} className={`rd-shell tutorial-shell ${scene ? '' : 'is-complete'}`}>
+  return <TutorialSceneAssets assets={scene ? TUTORIAL_ASSETS : []}><GameContext.Provider value={gameContext}><div ref={shell} className={`rd-shell tutorial-shell ${scene ? '' : 'is-complete'}`}>
     {scene ? scene.id === 'battle' && practice ? <BattleView requirePlaybackCompletion result={practice} vipActive={false} onComplete={next} title="模擬戦" backgroundSrc={BACKGROUNDS.battle} /> :
-      <TutorialSceneAssets key={scene.id} assets={sceneAssets}><main className={`tutorial-scene ${world ? 'is-world' : ''}`} style={{ backgroundImage: `linear-gradient(0deg, #160f0beb, transparent 65%), url('${background}')` }} data-scene={scene.id}>
+      <main key={scene.id} className={`tutorial-scene ${world ? 'is-world' : ''}`} style={{ backgroundImage: `linear-gradient(0deg, #160f0beb, transparent 65%), url('${background}')` }} data-scene={scene.id}>
         {world && <HomeEffect effectId={scene.effectId} />}
         <div className={`tutorial-cast count-${cast.length}`} aria-label={world ? '乱世の武将たち' : '豊臣秀吉'}>
           {!acquisition && cast.map(id => <img key={id} src={characterArt(castMember(id), 'full')} alt={castMember(id).name} />)}
@@ -145,9 +145,9 @@ export default function TutorialPreview() {
           <p>{scene.text.replace('〇〇', save.name)}</p>
           {scene.id === 'name' && <label>名前（1〜8文字）<input autoComplete="off" placeholder="名前を入力" value={name} onChange={e => setName(e.target.value)} maxLength={16} /></label>}
           {world && <div className="tutorial-progress" aria-label={`${save.step + 1} / 3`}>{[0, 1, 2].map(i => <i key={i} data-active={save.step === i} />)}</div>}
-          <button className="rd-button tutorial-next" disabled={busy || (scene.id === 'name' && (!name.trim() || [...name.trim()].length > 8))} onClick={next}>{busy ? '保存中…' : 'button' in scene ? scene.button : '次へ'}</button>
+          <button className="rd-button tutorial-next" disabled={busy || (scene.id === 'name' && (!name.trim() || [...name.trim()].length > 8))} onClick={next}>{'button' in scene ? scene.button : '次へ'}</button>
         </section>
-      </main></TutorialSceneAssets> : <>
+      </main> : <>
       <header className="tutorial-header"><strong>{save.name}</strong><span>Lv.1</span><span>銭 {save.game.cash.toLocaleString()}</span><span>行動力 {save.game.energy}</span></header>
       <main className="rd-main" inert={!save.departed && tab === 'home' ? true : undefined}>
         {tab === 'home' && <HomeView state={save.game} onAction={action} onNavigate={navigate} previewOnly />}
@@ -168,5 +168,5 @@ export default function TutorialPreview() {
       const reset = newTutorial(save.game.userId); reset.revision = save.revision + 1;
       void persistTutorial(save, reset).then(state => { current.current = state; setSave(state); setName(''); setTab('home'); setToolsOpen(false); }).catch(e => setError(e.message)).finally(() => { inFlight.current = false; setBusy(false); });
     }}>最初から確認する</button>{!scene && <button disabled={busy} onClick={() => act([{ type: 'defeat' }])}>初敗北の案内を確認する</button>}</details>
-  </div></GameContext.Provider>;
+  </div></GameContext.Provider></TutorialSceneAssets>;
 }
