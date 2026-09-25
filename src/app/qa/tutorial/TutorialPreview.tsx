@@ -22,8 +22,8 @@ import './tutorial.css';
 import Modal from '@/app/components/redesign/Modal';
 import TutorialSceneAssets from './TutorialSceneAssets';
 
-function Notice({ text, button, onClick, busy }: { text: string; button: string; onClick: () => void; busy: boolean }) {
-  return <Modal title="ご案内" onClose={() => undefined} hideCloseButton closeDisabled className="tutorial-notice"
+function Notice({ text, button, onClick, busy, title = 'ご案内' }: { text: string; button: string; onClick: () => void; busy: boolean; title?: string }) {
+  return <Modal title={title} onClose={() => undefined} hideCloseButton closeDisabled className="tutorial-notice"
     footer={<button className="rd-button tutorial-next" disabled={busy} onClick={onClick}>{button}</button>}>
     <p>{text}</p>
   </Modal>;
@@ -129,7 +129,7 @@ export default function TutorialPreview() {
     ? STARTERS.map(id => characterArt(castMember(id), 'card')!)
     : scene?.id === 'skills' ? STARTER_SKILLS.map(id => getFormalOwnedSkill(id, 0).image)
     : cast.map(id => characterArt(castMember(id), 'full')!))];
-  const errorView = error && <div className="tutorial-error" role="alert">{error}<button onClick={() => window.location.reload()}>再読み込み</button></div>;
+  const errorView = error && <Notice title="保存できませんでした" text={error} button="再読み込み" busy={false} onClick={() => window.location.reload()} />;
   return <GameContext.Provider value={gameContext}><div ref={shell} className={`rd-shell tutorial-shell ${scene ? '' : 'is-complete'}`}>
     {scene ? scene.id === 'battle' && practice ? <BattleView requirePlaybackCompletion result={practice} vipActive={false} onComplete={next} title="模擬戦" backgroundSrc={BACKGROUNDS.battle} /> :
       <TutorialSceneAssets key={scene.id} assets={sceneAssets}><main className={`tutorial-scene ${world ? 'is-world' : ''}`} style={{ backgroundImage: `linear-gradient(0deg, #160f0beb, transparent 65%), url('${background}')` }} data-scene={scene.id}>
@@ -155,9 +155,9 @@ export default function TutorialPreview() {
         {!['home', 'quest', 'character', 'missions'].includes(tab) && <section className="rd-panel"><h1>{tab === 'shop' ? '商店' : tab === 'gacha' ? '雇用' : '共闘'}</h1><p>チュートリアルによるロックは解除されています。この確認環境では通常機能への接続を省いています。</p><button className="rd-button" onClick={() => navigate('home')}>マイページへ</button></section>}
       </main>
       {!playing && <nav className="rd-footer" aria-label="メインナビゲーション">{[['home', 'ホーム'], ['quest', '出陣'], ['character', '武将'], ['raid', '共闘'], ['gacha', '雇用']].map(([id, label]) => <button key={id} disabled={busy || (!save.departed && id !== 'quest')} aria-current={tab === id ? 'page' : undefined} onClick={() => navigate(id)}>{label}</button>)}</nav>}
-      {!save.departed && !save.loginPending && tab === 'home' && <Notice text={FIRST_SORTIE_TEXT} button="出陣へ" busy={busy} onClick={() => navigate('quest')} />}
-      {save.loginPending && tab === 'home' && <Notice text={`ログインボーナス ${save.loginDays % 30 || 30}日目\n本日の報酬を受け取りました。`} button="閉じる" busy={busy} onClick={() => act([{ type: 'dismiss-login' }])} />}
-      {save.defeatPending && !playing && <Notice text={FIRST_DEFEAT_TEXT} button="任務へ" busy={busy} onClick={() => act([{ type: 'dismiss-defeat' }], () => setTab('missions'))} />}
+      {!error && !save.departed && !save.loginPending && tab === 'home' && <Notice text={FIRST_SORTIE_TEXT} button="出陣へ" busy={busy} onClick={() => navigate('quest')} />}
+      {!error && save.loginPending && tab === 'home' && <Notice text={`ログインボーナス ${save.loginDays % 30 || 30}日目\n本日の報酬を受け取りました。`} button="閉じる" busy={busy} onClick={() => act([{ type: 'dismiss-login' }])} />}
+      {!error && save.defeatPending && !playing && !(save.loginPending && tab === 'home') && <Notice text={FIRST_DEFEAT_TEXT} button="任務へ" busy={busy} onClick={() => act([{ type: 'dismiss-defeat' }], () => setTab('missions'))} />}
     </>}
     {errorView}
     <details className="tutorial-review" open={toolsOpen} onToggle={e => setToolsOpen(e.currentTarget.open)}><summary>確認メニュー</summary><p>通常プレイと独立した確認用データです。</p><button disabled={busy} onClick={() => {
