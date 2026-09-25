@@ -44,3 +44,7 @@
 .tutorial-card-art{position:relative;background:url('/creative/card-backgrounds/R.png') center/cover}.tutorial-card-art>img:not(.tutorial-card-frame){display:block;width:100%;height:auto}.tutorial-card-art .tutorial-card-frame{position:absolute;inset:-8%;width:116%;height:116%;max-width:none;object-fit:fill;pointer-events:none}.tutorial-rewards figure{overflow:visible}.tutorial-copy>p{min-height:4.5em}
 
 .tutorial-rewards.is-skills .tutorial-card-frame{padding:0;aspect-ratio:auto}.tutorial-cast:has(.tutorial-rewards){overflow:visible}
+
+/* B03: extend only the background beneath the external frame, preserving art geometry. */
+.tutorial-card-art{background:none;isolation:isolate}.tutorial-card-art:before{content:"";position:absolute;inset:-8%;z-index:-1;background:url("/creative/card-backgrounds/R.png") center/cover}
+.tutorial-rewards.is-skills figure{border:0;background:transparent}.tutorial-skill-art{background:none}

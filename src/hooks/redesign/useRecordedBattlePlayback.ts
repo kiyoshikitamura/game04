@@ -21,7 +21,7 @@ export function useRecordedBattlePlayback({ result, initialFrame = 0, initialPau
   const clock = useRef<{ result: BattleResult; index: number; remaining: number } | null>(null);
   const generation = useRef(0);
   const frame = result.frames[clampFrame(index, result)];
-  const effectiveSpeed = speed / (frame?.burst ? 1 : 1.3);
+  const effectiveSpeed = speed;
   const finished = !frame || index >= result.frames.length - 1;
   const playbackPaused = paused || blocked || finished;
 
