@@ -20,3 +20,6 @@
 MA07の記録は`observed/skill-design-comparison.json`、再現は`node scripts/master-audit/verify-skill-design.cjs`（現状終了1が正しい）。全差分666件を省略せず保存。候補patchは未適用。共有API/DB更新なし。
 
 名称の独立検査を追加：`NAMES.md`。クエスト65面すべて攻略文の名称流用（MA08）、名称承認待ち。敵の明示ID対応/正式名称集合/侵攻固定敵本文との比較は今回範囲で差0。
+
+
+2026-09-25 20:24 JST追記：名称案はユーザー採用済み。名称承認待ちは解消。実装・検証・統合残件は `NAMING_ADOPTION.md` を優先。旧「未確定/未承認」記述は当時の記録。MA08は配信・統合照合待ちとして維持。

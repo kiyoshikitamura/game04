@@ -1,4 +1,5 @@
 'use client';
+import { raidDisplayLabel } from '@/domain/redesign/contextNames';
 import { raidBattleBackground } from '@/domain/redesign/approvedBackgrounds';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useGame } from '../../context/GameContext';
@@ -232,7 +233,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   const battleRoom = battle && battleKind === 'raid' && raidId ? data.rooms.find(room => room.id === raidId) : undefined;
   const encounter = data.rooms.find(r => getRoomRaidMaster(r).type === 'encounter' && r.status === 'active' && Date.parse(r.expiresAt) > encounterNow && r.participants.some(p => p.userId === state.userId && !p.leftAt));
   return <RedesignShell state={state} activeTab={tab} navigationBusy={busy} onNavigate={navigate} onAction={action} hideChrome={!!battle || questPlaying} socialEvents={data.socialEvents} missions={data.missions}
-    encounterRaid={encounter ? { id: encounter.id, name: getRoomRaidMaster(encounter).name, expiresAt: encounter.expiresAt } : null}
+    encounterRaid={encounter ? { id: encounter.id, name: raidDisplayLabel(getRoomRaidMaster(encounter), encounter.level), expiresAt: encounter.expiresAt } : null}
     notifications={<>
     {state.tutorial&&!state.tutorial.departed&&tab==='home'&&<Modal title="ご案内" hideCloseButton closeDisabled onClose={()=>{}} footer={<button className="rd-button" disabled={busy} onClick={()=>navigate('quest')}>出陣へ</button>}><p>{FIRST_SORTIE_TEXT}</p></Modal>}
     {state.tutorial?.defeatPending&&!battle&&!questPlaying&&<Modal title="ご案内" hideCloseButton closeDisabled onClose={()=>{}} footer={<button className="rd-button" disabled={busy} onClick={()=>void action('tutorial_dismiss_defeat').then(()=>game.setShowMissionPanel(true))}>任務へ</button>}><p>{FIRST_DEFEAT_TEXT}</p></Modal>}

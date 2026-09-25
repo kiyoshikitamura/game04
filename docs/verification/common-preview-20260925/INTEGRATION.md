@@ -10,11 +10,11 @@ Dedicated branch: work/game04-common-preview-20260925. No main merge, production
 | Tutorial PR34 | ec35f6f205045f72748f14ad7932892867658daf | approved scenes, text, effects preserved; authoritative tutorial actions added |
 | Community PR35 | 9f72a1fb6088dc108e4eaffeafe9631e8461b7e5 | retained identity/read UI; approved extra activities connected atomically |
 | P02–04 PR31 | 3ca2e73ccca1a816bef6d8aa3a3dbecca3494a79 | prior G2 integration retained; no duplicate implementation |
-| Audit PR36 | 4b649667340efe69054fcf2a59dc53d43e997a93 | confirmed precision fix + formal 72 skill registry; quest-name proposals excluded |
+| Audit PR36 | b4e3f8cf7f866f388bea881142a82f63f364b44e | confirmed precision fix + formal 72 skill registry + newly approved names received at 20:24 JST |
 
 ## Ownership / environment
 G3 isolated write window ended 19:34 JST; G2 received deployment ownership in PR33 comment 5831429757. Old-G2 stop checks are not restarted.
-Only isolated project `znakrkaazliexzwihxge` updated. API game04-redesign-api v4, verify_jwt=true, management sha256 `444b9619b33a7b3b8833ab84bc503de1f211dc739b1215c4d939653db1b10f22`.
+Only isolated project `znakrkaazliexzwihxge` updated. API game04-redesign-api v5, verify_jwt=true, management sha256 `beac40e04475ed6fa9871de8641367d177c06128465f88c518f2d019df8560c0`.
 Six existing G3 Vercel branch-scoped variables moved to this integration branch without changing values. Production and other branch variables untouched. Existing immutable G3 deployment remains available; future G3 rebuild would require reassignment.
 
 ## Integrated connections
@@ -27,5 +27,5 @@ Six existing G3 Vercel branch-scoped variables moved to this integration branch 
 ## Remaining acceptance
 G2 incomplete; no G5 pass. Midnight/free gacha/login/daily missions/notices, complete performance (including missing battle-start), final auth/payment acceptance and unfinished master audit remain on the common candidate.
 G2 saved 80 measurements and v31 recovery stay complete; final 20 battle logs unrecoverable, no browser recovery repeated.
-MA08: 65 quest names lack approved replacement authority; no invented names. Sound handoff still being checked; existing sound retained.
+MA08: b4e3f8c records user approval of all 65 quest names, 85 encounter contexts, 356 enemy placements and 60 invasion stages. Imported approved helpers, preserved current profile/badges, connected rescue display. DB quest65 added and release_manifest names synchronized; old snapshots/post bodies unchanged. Sound: no newer handoff found in sound branches or Japanese sound commit search; existing saved assets/functions retained, separate new sound delivery remains residual.
 Browser-through-root acceptance and common deployment URL will be appended after deployment.

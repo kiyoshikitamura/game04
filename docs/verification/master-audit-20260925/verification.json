@@ -72,6 +72,22 @@
     {
       "command": "git apply --check docs/verification/master-audit-20260925/quest-name-generator-candidate.patch",
       "result": "PASS; candidate remains unapplied; all 65 approved names/references pending"
+    },
+    {
+      "command": "node scripts/master-audit/verify-context-names.cjs",
+      "result": "PASS: 65/356/85/60 explicit mappings, only quest names changed, no identity/snapshot mutation"
+    },
+    {
+      "command": "npx tsc --noEmit --incremental false",
+      "result": "PASS after approved name implementation"
+    },
+    {
+      "command": "generator with intercepted writeFileSync; compare emitted quest65 against current JSON",
+      "result": "PASS: full data difference 0; no generated writes applied"
+    },
+    {
+      "command": "node scripts/master-audit/verify-names.cjs",
+      "result": "repository 0 name issues; captured v31/DB each 65; STOP pending integration"
     }
   ],
   "additional": {

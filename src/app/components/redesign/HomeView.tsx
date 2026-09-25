@@ -1,9 +1,11 @@
 'use client';
+import { questDisplayName, raidDisplayLabel } from '@/domain/redesign/contextNames';
 import React, { useEffect, useRef, useState } from 'react';
 import type { MissionProjection } from '@/domain/redesign/missions';
 import type { RedesignState } from '@/domain/redesign/types';
 import { CHARACTER_MASTERS, OWNABLE_SKILL_MASTERS, EQUIPMENT_MASTERS } from '@/domain/redesign/masters';
 import { QUEST_AREAS, nextQuestStage } from '@/domain/redesign/quests';
+import { getRaidMaster } from '@/domain/redesign/raid';
 import { raidTimeRemaining, raidRewardLabel } from '@/domain/redesign/raidPresentation';
 import { supabase } from '@/utils/supabase';
 import { describeHomeActivity } from '@/domain/presentation/homeInitialGuide';
@@ -24,7 +26,7 @@ export { HOME_BACKGROUNDS } from '@/domain/redesign/home';
 // read-only recovery, not a timeout that unlocks unresolved mutations.
 const HOME_ACTIVITY_READ_TIMEOUT_MS = 12_000;
 
-export type HomeSocialEvent = { id: string; room_id: string; author_id: string; kind: 'raid_rescue'; body: string; created_at: string };
+export type HomeSocialEvent = { id: string; room_id: string; author_id: string; kind: 'raid_rescue'; body: string | {masterId?:string;level?:number}; created_at: string };
 export type HomeEncounter = { id: string; name: string; expiresAt: string };
 export type HomeAction = (action: string, payload?: Record<string, unknown>) => Promise<unknown>;
 
@@ -118,7 +120,7 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
       const legacy: { id: string; createdAt: string; author: string; body: string; userId?: string }[] = community === 'activity'
         ? activities.map(a => ({ id: a.id, createdAt: a.created_at ?? '', author: profileName(a.actor_user_id, a.actor_display_name || '戦国便り'), userId: a.actor_user_id, body: activityBody(a) }))
         : (game.guildChats ?? []).map((m: { id: string; created_at?: string; author_name?: string; content?: string; user_id?: string }) => ({ id: m.id, createdAt: m.created_at ?? '', author: profileName(m.user_id, m.author_name || 'プレイヤー'), body: m.content ?? '', userId: m.user_id }));
-      const merged = uniqueCommunityRows([...legacy.map(m => ({ ...m, roomId: '' })), ...socialEvents.map(e => ({ id: e.id, createdAt: e.created_at, author: profileName(e.author_id, '援軍要請'), body: homeSystemText(typeof e.body === 'string' ? e.body : '共闘の援軍を求めています。'), roomId: e.room_id, userId: e.author_id }))]).sort((a,b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
+      const merged = uniqueCommunityRows([...legacy.map(m => ({ ...m, roomId: '' })), ...socialEvents.map(e => ({ id: e.id, createdAt: e.created_at, author: profileName(e.author_id, '援軍要請'), body: rescueActivityBody(e.body), roomId: e.room_id, userId: e.author_id }))]).sort((a,b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
       return merged.length ? merged.slice(0, full ? merged.length : 3).map(m => <div className="rd-message" key={m.id}>{m.userId && profileFaces[m.userId] && <img className="g4-home-message-face" src={profileFaces[m.userId]} alt="" />}<button className="rd-text-button" disabled={!homeImages.ready} onClick={() => { if (m.userId) setProfileId(m.userId); }}>{m.author}{badges(m.userId)}</button><div>{m.roomId ? <button className="g4-home-rescue-body" disabled={!homeImages.ready} aria-label={`${m.body} 共闘を確認`} onClick={() => { setExpanded(false); onNavigate(`raid:${m.roomId}`); }}>{m.body}<span aria-hidden="true"> ›</span></button> : <span>{m.body}</span>}</div>{m.createdAt && <time className="g4-home-message-time" dateTime={m.createdAt}>{activityTime(m.createdAt, now)}</time>}{m.userId && m.userId !== state.userId && <button className="g4-home-message-open" disabled={!homeImages.ready} aria-label={`${m.author}にDM`} onClick={() => { game.setDmRecipientId(m.userId!); setCommunity('dm'); setExpanded(true); }}><img src="/ui/sengoku/09-chat.png" alt="" /></button>}</div>) : <p className="rd-muted">{community === 'activity' ? activityLoading || activityError ? '' : '新しい活動はまだありません' : '全体にひとこと送ってみましょう'}</p>;
     }
     if (full && game.dmRecipientId) return <><button className="rd-button" onClick={() => game.setDmRecipientId(null)}>会話一覧へ</button><h3>{profileName(game.dmRecipientId, activeDm?.userName || 'プレイヤー')}{badges(game.dmRecipientId)}</h3>{direct.map((m: {id:string;sender_id:string;sender_name?:string;message?:string;content?:string}) => <p className="rd-message" key={m.id}><button className="rd-text-button" onClick={() => setProfileId(m.sender_id)}>{profileName(m.sender_id, m.sender_name || 'プレイヤー')}{badges(m.sender_id)}</button><span>{m.message || m.content}</span></p>)}</>;
@@ -141,7 +143,7 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
       <div className="g4-home-bottom">
         {encounterActive && encounterRaid && <button className="g4-home-encounter g4-home-gold-frame" disabled={!homeImages.ready} onClick={() => onNavigate(`raid:${encounterRaid.id}`)}><img src="/ui/sengoku/05-crossed-swords.png" alt="" /><strong>共闘発生</strong><span className="g4-home-boss">{encounterRaid.name}</span><time>残り {raidTimeRemaining(encounterRaid.expiresAt, now)}</time><span className="g4-home-confirm">確認 ›</span></button>}
         <div className="g4-home-actions">
-          <button className="g4-home-quest g4-home-gold-frame" disabled={!homeImages.ready} title={`${area.name} ${area.index}-${stage.index} ${stage.name}`} onClick={() => onNavigate('quest:resume')}><img src="/ui/sengoku/04-fan-sakura.png" alt="" /><strong>出陣の続き</strong></button>
+          <button className="g4-home-quest g4-home-gold-frame" disabled={!homeImages.ready} title={`${area.name} ${area.index}-${stage.index} ${questDisplayName(stage)}`} onClick={() => onNavigate('quest:resume')}><img src="/ui/sengoku/04-fan-sakura.png" alt="" /><strong>出陣の続き</strong></button>
           <button className="g4-home-territory g4-home-gold-frame" disabled={!homeImages.ready} onClick={() => onNavigate('territory')}><img src="/ui/sengoku/05-crossed-swords.png" alt="" /><strong>領土侵攻</strong></button>
         </div>
         <section className="g4-home-community" aria-label="交流">{tabs}<div className="g4-home-community-lines">{activityStatus}{messages(false)}</div><button className="g4-home-community-open" disabled={!homeImages.ready} onClick={() => setExpanded(true)}>交流を開く ›</button></section>
@@ -188,4 +190,10 @@ function activityBody(activity: Activity) {
     if (name) return `SSR「${name}」を獲得`;
   }
   return homeSystemText(activity.display_payload?.title || describeHomeActivity(type));
+}
+
+function rescueActivityBody(body: HomeSocialEvent['body']) {
+ if(typeof body==='string')return homeSystemText(body);
+ if(body?.masterId)try{return `${raidDisplayLabel(getRaidMaster(body.masterId),body.level??1)} の援軍を求めています。`;}catch{/* old or retired master keeps generic fallback */}
+ return '共闘の援軍を求めています。';
 }

@@ -28262,7 +28262,7 @@ var quest65_default = {
       designId: "1-1",
       areaId: "mikawa",
       index: 1,
-      name: "\u521D\u671F3\u4EBA\u3067\u6226\u95D8\u3092\u5B66\u3076",
+      name: "\u521D\u9663\u306E\u91CE",
       description: "\u521D\u671F3\u4EBA\u3067\u6226\u95D8\u3092\u5B66\u3076",
       energyCost: 5,
       waves: [
@@ -28369,7 +28369,7 @@ var quest65_default = {
       designId: "1-2",
       areaId: "mikawa",
       index: 2,
-      name: "\u53D7\u3051\u308B\u5F79\u3092\u6C7A\u3081\u308B",
+      name: "\u8857\u9053\u306E\u95A2\u6240",
       description: "\u53D7\u3051\u308B\u5F79\u3092\u6C7A\u3081\u308B",
       energyCost: 5,
       waves: [
@@ -28518,7 +28518,7 @@ var quest65_default = {
       designId: "1-3",
       areaId: "mikawa",
       index: 3,
-      name: "\u4E00\u3064\u5909\u3048\u3066\u7A81\u7834\u3059\u308B",
+      name: "\u5915\u6620\u3048\u306E\u9663",
       description: "\u4E00\u3064\u5909\u3048\u3066\u7A81\u7834\u3059\u308B",
       energyCost: 5,
       waves: [
@@ -28764,7 +28764,7 @@ var quest65_default = {
       designId: "2-1",
       areaId: "owari",
       index: 1,
-      name: "\u307E\u305A1\u4F53\u6E1B\u3089\u3059",
+      name: "\u671D\u9727\u306E\u8857\u9053",
       description: "\u307E\u305A1\u4F53\u6E1B\u3089\u3059",
       energyCost: 5,
       waves: [
@@ -29025,7 +29025,7 @@ var quest65_default = {
       designId: "2-2",
       areaId: "owari",
       index: 2,
-      name: "\u4E26\u3093\u3060\u6575\u3092\u524A\u308B",
+      name: "\u91CC\u5883\u306E\u72FC\u7159",
       description: "\u4E26\u3093\u3060\u6575\u3092\u524A\u308B",
       energyCost: 5,
       waves: [
@@ -29306,7 +29306,7 @@ var quest65_default = {
       designId: "2-3",
       areaId: "owari",
       index: 3,
-      name: "\u5F8C\u308D\u306E\u652F\u63F4\u3092\u6B62\u3081\u308B",
+      name: "\u6708\u4E0B\u306E\u7826",
       description: "\u5F8C\u308D\u306E\u652F\u63F4\u3092\u6B62\u3081\u308B",
       energyCost: 5,
       waves: [
@@ -29585,7 +29585,7 @@ var quest65_default = {
       designId: "2-4",
       areaId: "owari",
       index: 4,
-      name: "\u5012\u3059\u9806\u3092\u7D44\u307F\u7ACB\u3066\u308B",
+      name: "\u5C3E\u5F35\u306E\u65D7\u98A8",
       description: "\u5012\u3059\u9806\u3092\u7D44\u307F\u7ACB\u3066\u308B",
       energyCost: 5,
       waves: [
@@ -29933,7 +29933,7 @@ var quest65_default = {
       designId: "3-1",
       areaId: "mino",
       index: 1,
-      name: "\u5F31\u4F53\u306E\u5F8C\u306B\u653B\u3081\u308B",
+      name: "\u5DDD\u9727\u306E\u6E21\u3057",
       description: "\u5F31\u4F53\u306E\u5F8C\u306B\u653B\u3081\u308B",
       energyCost: 5,
       waves: [
@@ -30132,7 +30132,7 @@ var quest65_default = {
       designId: "3-2",
       areaId: "mino",
       index: 2,
-      name: "\u5F37\u5316\u3092\u653B\u6483\u3078\u3064\u306A\u3050",
+      name: "\u7A32\u7A42\u306E\u5C0F\u5F84",
       description: "\u5F37\u5316\u3092\u653B\u6483\u3078\u3064\u306A\u3050",
       energyCost: 5,
       waves: [
@@ -30373,7 +30373,7 @@ var quest65_default = {
       designId: "3-3",
       areaId: "mino",
       index: 3,
-      name: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u3092\u8DB3\u5834\u306B\u3059\u308B",
+      name: "\u5C71\u3042\u3044\u306E\u5F71",
       description: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u3092\u8DB3\u5834\u306B\u3059\u308B",
       energyCost: 5,
       waves: [
@@ -30577,7 +30577,7 @@ var quest65_default = {
       designId: "3-4",
       areaId: "mino",
       index: 4,
-      name: "SP\u3092\u4F7F\u3046\u5F79\u3068\u8CAF\u3081\u308B\u5F79",
+      name: "\u5CE0\u306B\u7ACB\u3064\u65D7",
       description: "SP\u3092\u4F7F\u3046\u5F79\u3068\u8CAF\u3081\u308B\u5F79",
       energyCost: 5,
       waves: [
@@ -30760,7 +30760,7 @@ var quest65_default = {
       designId: "3-5",
       areaId: "mino",
       index: 5,
-      name: "\u4E3B\u8EF8\u3092\u4E00\u3064\u9078\u3076",
+      name: "\u7F8E\u6FC3\u306E\u5915\u5D50",
       description: "\u4E3B\u8EF8\u3092\u4E00\u3064\u9078\u3076",
       energyCost: 5,
       waves: [
@@ -31123,7 +31123,7 @@ var quest65_default = {
       designId: "4-1",
       areaId: "omi",
       index: 1,
-      name: "\u96C6\u4E2D\u653B\u6483\u3092\u53D7\u3051\u308B",
+      name: "\u6E56\u7554\u306E\u756A\u6240",
       description: "\u96C6\u4E2D\u653B\u6483\u3092\u53D7\u3051\u308B",
       energyCost: 6,
       waves: [
@@ -31367,7 +31367,7 @@ var quest65_default = {
       designId: "4-2",
       areaId: "omi",
       index: 2,
-      name: "\u53D7\u3051\u305F\u653B\u6483\u3092\u8FD4\u3059",
+      name: "\u6E56\u98A8\u306E\u5F80\u6765",
       description: "\u53D7\u3051\u305F\u653B\u6483\u3092\u8FD4\u3059",
       energyCost: 6,
       waves: [
@@ -31607,7 +31607,7 @@ var quest65_default = {
       designId: "4-3",
       areaId: "omi",
       index: 3,
-      name: "\u5168\u54E1\u306E\u88AB\u5BB3\u3092\u623B\u3059",
+      name: "\u5BB5\u306E\u6C34\u8FBA",
       description: "\u5168\u54E1\u306E\u88AB\u5BB3\u3092\u623B\u3059",
       energyCost: 6,
       waves: [
@@ -31949,7 +31949,7 @@ var quest65_default = {
       designId: "4-4",
       areaId: "omi",
       index: 4,
-      name: "\u5927\u304D\u306A\u4E00\u6483\u306B\u5099\u3048\u308B",
+      name: "\u5C71\u9580\u306E\u304B\u304C\u308A\u706B",
       description: "\u5927\u304D\u306A\u4E00\u6483\u306B\u5099\u3048\u308B",
       energyCost: 6,
       waves: [
@@ -32144,7 +32144,7 @@ var quest65_default = {
       designId: "4-5",
       areaId: "omi",
       index: 5,
-      name: "\u5B88\u308A\u3059\u304E\u305A\u306B\u52DD\u3064",
+      name: "\u8FD1\u6C5F\u306E\u591C\u660E\u3051",
       description: "\u5B88\u308A\u3059\u304E\u305A\u306B\u52DD\u3064",
       energyCost: 6,
       waves: [
@@ -32416,7 +32416,7 @@ var quest65_default = {
       designId: "5-1",
       areaId: "kai",
       index: 1,
-      name: "\u540C\u5C5E\u6027\u3067\u653B\u3081\u308B",
+      name: "\u8D64\u304D\u65D7\u306E\u9053",
       description: "\u540C\u5C5E\u6027\u3067\u653B\u3081\u308B",
       energyCost: 6,
       waves: [
@@ -32846,7 +32846,7 @@ var quest65_default = {
       designId: "5-2",
       areaId: "kai",
       index: 2,
-      name: "\u540C\u5C5E\u6027\u3067\u5B88\u308B",
+      name: "\u5C71\u88FE\u306E\u9663\u5C4B",
       description: "\u540C\u5C5E\u6027\u3067\u5B88\u308B",
       energyCost: 6,
       waves: [
@@ -33219,7 +33219,7 @@ var quest65_default = {
       designId: "5-3",
       areaId: "kai",
       index: 3,
-      name: "\u653B\u6483\u5C5E\u6027\u3060\u3051\u3092\u66FF\u3048\u308B",
+      name: "\u8C37\u9593\u306E\u6E21\u308A",
       description: "\u653B\u6483\u5C5E\u6027\u3060\u3051\u3092\u66FF\u3048\u308B",
       energyCost: 6,
       waves: [
@@ -33518,7 +33518,7 @@ var quest65_default = {
       designId: "5-4",
       areaId: "kai",
       index: 4,
-      name: "\u6DF7\u6210\u306E\u5F37\u307F\u3092\u4F7F\u3046",
+      name: "\u5CF0\u3092\u3086\u304F\u98A8",
       description: "\u6DF7\u6210\u306E\u5F37\u307F\u3092\u4F7F\u3046",
       energyCost: 6,
       waves: [
@@ -33976,7 +33976,7 @@ var quest65_default = {
       designId: "5-5",
       areaId: "kai",
       index: 5,
-      name: "\u82E6\u624B\u5C5E\u6027\u3092\u8AB0\u304C\u53D7\u3051\u308B\u304B",
+      name: "\u5915\u7ACB\u306E\u5C71\u8DEF",
       description: "\u82E6\u624B\u5C5E\u6027\u3092\u8AB0\u304C\u53D7\u3051\u308B\u304B",
       energyCost: 6,
       waves: [
@@ -34370,7 +34370,7 @@ var quest65_default = {
       designId: "5-6",
       areaId: "kai",
       index: 6,
-      name: "\u4E00\u8272\u306B\u5BC4\u305B\u3059\u304E\u306A\u3044",
+      name: "\u7532\u6590\u306E\u9060\u96F7",
       description: "\u4E00\u8272\u306B\u5BC4\u305B\u3059\u304E\u306A\u3044",
       energyCost: 6,
       waves: [
@@ -34769,7 +34769,7 @@ var quest65_default = {
       designId: "6-1",
       areaId: "echigo",
       index: 1,
-      name: "\u7D99\u7D9A\u88AB\u5BB3\u3092\u6B62\u3081\u308B",
+      name: "\u9727\u6DF1\u304D\u5883",
       description: "\u7D99\u7D9A\u88AB\u5BB3\u3092\u6B62\u3081\u308B",
       energyCost: 6,
       waves: [
@@ -35163,7 +35163,7 @@ var quest65_default = {
       designId: "6-2",
       areaId: "echigo",
       index: 2,
-      name: "\u843D\u3068\u3055\u308C\u305F\u80FD\u529B\u3092\u623B\u3059",
+      name: "\u96EA\u89E3\u3051\u306E\u9053",
       description: "\u843D\u3068\u3055\u308C\u305F\u80FD\u529B\u3092\u623B\u3059",
       energyCost: 6,
       waves: [
@@ -35660,7 +35660,7 @@ var quest65_default = {
       designId: "6-3",
       areaId: "echigo",
       index: 3,
-      name: "\u6B62\u307E\u3063\u305F\u5F79\u5272\u3092\u88DC\u3046",
+      name: "\u6749\u6797\u306E\u5206\u304B\u308C\u9053",
       description: "\u6B62\u307E\u3063\u305F\u5F79\u5272\u3092\u88DC\u3046",
       energyCost: 6,
       waves: [
@@ -35994,7 +35994,7 @@ var quest65_default = {
       designId: "6-4",
       areaId: "echigo",
       index: 4,
-      name: "\u6575\u306E\u4E00\u624B\u3092\u9045\u3089\u305B\u308B",
+      name: "\u5CE0\u306E\u6B8B\u96EA",
       description: "\u6575\u306E\u4E00\u624B\u3092\u9045\u3089\u305B\u308B",
       energyCost: 6,
       waves: [
@@ -36347,7 +36347,7 @@ var quest65_default = {
       designId: "6-5",
       areaId: "echigo",
       index: 5,
-      name: "\u72B6\u614B\u4ED8\u4E0E\u3068\u653B\u6483\u3092\u5206\u62C5\u3059\u308B",
+      name: "\u66AE\u8272\u306E\u5CE1\u8C37",
       description: "\u72B6\u614B\u4ED8\u4E0E\u3068\u653B\u6483\u3092\u5206\u62C5\u3059\u308B",
       energyCost: 6,
       waves: [
@@ -36938,7 +36938,7 @@ var quest65_default = {
       designId: "6-6",
       areaId: "echigo",
       index: 6,
-      name: "\u5BFE\u7B56\u67A0\u3092\u9078\u3076",
+      name: "\u8D8A\u5F8C\u306E\u767D\u5D50",
       description: "\u5BFE\u7B56\u67A0\u3092\u9078\u3076",
       energyCost: 6,
       waves: [
@@ -37570,7 +37570,7 @@ var quest65_default = {
       designId: "7-1",
       areaId: "kyoto",
       index: 1,
-      name: "\u5F37\u5316\u3055\u308C\u305F\u653B\u6483\u3092\u5D29\u3059",
+      name: "\u6D1B\u5916\u306E\u9A12\u304E",
       description: "\u5F37\u5316\u3055\u308C\u305F\u653B\u6483\u3092\u5D29\u3059",
       energyCost: 6,
       waves: [
@@ -38004,7 +38004,7 @@ var quest65_default = {
       designId: "7-2",
       areaId: "kyoto",
       index: 2,
-      name: "\u56FA\u3081\u305F\u5B88\u308A\u3092\u5D29\u3059",
+      name: "\u5FA1\u9580\u306E\u304B\u304C\u308A\u706B",
       description: "\u56FA\u3081\u305F\u5B88\u308A\u3092\u5D29\u3059",
       energyCost: 6,
       waves: [
@@ -38379,7 +38379,7 @@ var quest65_default = {
       designId: "7-3",
       areaId: "kyoto",
       index: 3,
-      name: "\u969C\u58C1\u3092\u53D6\u308A\u9664\u304F",
+      name: "\u77F3\u57A3\u306B\u843D\u3061\u308B\u5F71",
       description: "\u969C\u58C1\u3092\u53D6\u308A\u9664\u304F",
       energyCost: 6,
       waves: [
@@ -38632,7 +38632,7 @@ var quest65_default = {
       designId: "7-4",
       areaId: "kyoto",
       index: 4,
-      name: "\u56DE\u5FA9\u6E90\u3092\u65AD\u3064",
+      name: "\u82B1\u6563\u308B\u8FBB",
       description: "\u56DE\u5FA9\u6E90\u3092\u65AD\u3064",
       energyCost: 6,
       waves: [
@@ -39024,7 +39024,7 @@ var quest65_default = {
       designId: "7-5",
       areaId: "kyoto",
       index: 5,
-      name: "\u53CD\u6483\u306B\u4ED8\u304D\u5408\u3044\u3059\u304E\u306A\u3044",
+      name: "\u591C\u534A\u306E\u9418",
       description: "\u53CD\u6483\u306B\u4ED8\u304D\u5408\u3044\u3059\u304E\u306A\u3044",
       energyCost: 6,
       waves: [
@@ -39230,7 +39230,7 @@ var quest65_default = {
       designId: "7-6",
       areaId: "kyoto",
       index: 6,
-      name: "\u8A98\u5C0E\u3055\u308C\u305F\u653B\u6483\u3092\u901A\u3059",
+      name: "\u706F\u306E\u6D88\u3048\u305F\u901A\u308A",
       description: "\u8A98\u5C0E\u3055\u308C\u305F\u653B\u6483\u3092\u901A\u3059",
       energyCost: 6,
       waves: [
@@ -39665,7 +39665,7 @@ var quest65_default = {
       designId: "7-7",
       areaId: "kyoto",
       index: 7,
-      name: "\u518D\u4ED8\u4E0E\u3088\u308A\u5148\u306B\u6C7A\u7740",
+      name: "\u6681\u3092\u5F85\u3064\u90FD",
       description: "\u518D\u4ED8\u4E0E\u3088\u308A\u5148\u306B\u6C7A\u7740",
       energyCost: 6,
       waves: [
@@ -40124,7 +40124,7 @@ var quest65_default = {
       designId: "7-8",
       areaId: "kyoto",
       index: 8,
-      name: "\u5D29\u3059\u5834\u6240\u3092\u9078\u3076",
+      name: "\u4EAC\u3092\u6E21\u308B\u98A8",
       description: "\u5D29\u3059\u5834\u6240\u3092\u9078\u3076",
       energyCost: 6,
       waves: [
@@ -40671,7 +40671,7 @@ var quest65_default = {
       designId: "8-1",
       areaId: "izumo",
       index: 1,
-      name: "\u524A\u3089\u308C\u305F\u307E\u307E\u6B21\u3078\u9032\u3080",
+      name: "\u6D77\u98A8\u306E\u8857\u9053",
       description: "\u524A\u3089\u308C\u305F\u307E\u307E\u6B21\u3078\u9032\u3080",
       energyCost: 8,
       waves: [
@@ -41076,7 +41076,7 @@ var quest65_default = {
       designId: "8-2",
       areaId: "izumo",
       index: 2,
-      name: "\u5C0F\u6280\u3068\u4E3B\u7832\u3092\u5171\u5B58\u3055\u305B\u308B",
+      name: "\u677E\u6797\u306E\u72FC\u7159",
       description: "\u5C0F\u6280\u3068\u4E3B\u7832\u3092\u5171\u5B58\u3055\u305B\u308B",
       energyCost: 8,
       waves: [
@@ -41409,7 +41409,7 @@ var quest65_default = {
       designId: "8-3",
       areaId: "izumo",
       index: 3,
-      name: "\u5358\u4F53\u3068\u5168\u4F53\u3092\u4E21\u7ACB\u3059\u308B",
+      name: "\u5165\u6C5F\u306B\u7ACB\u3064\u65D7",
       description: "\u5358\u4F53\u3068\u5168\u4F53\u3092\u4E21\u7ACB\u3059\u308B",
       energyCost: 8,
       waves: [
@@ -41964,7 +41964,7 @@ var quest65_default = {
       designId: "8-4",
       areaId: "izumo",
       index: 4,
-      name: "\u6301\u3061\u8D8A\u3057\u305F\u72B6\u614B\u3078\u5BFE\u51E6",
+      name: "\u66AE\u308C\u3086\u304F\u53E4\u9053",
       description: "\u6301\u3061\u8D8A\u3057\u305F\u72B6\u614B\u3078\u5BFE\u51E6",
       energyCost: 8,
       waves: [
@@ -42407,7 +42407,7 @@ var quest65_default = {
       designId: "8-5",
       areaId: "izumo",
       index: 5,
-      name: "\u652F\u63F4\u5F79\u3092\u5B88\u308A\u7D9A\u3051\u308B",
+      name: "\u793E\u306E\u304B\u304C\u308A\u706B",
       description: "\u652F\u63F4\u5F79\u3092\u5B88\u308A\u7D9A\u3051\u308B",
       energyCost: 8,
       waves: [
@@ -42784,7 +42784,7 @@ var quest65_default = {
       designId: "8-6",
       areaId: "izumo",
       index: 6,
-      name: "\u4E00\u4EBA\u5931\u3063\u3066\u3082\u7ACB\u3066\u76F4\u3059",
+      name: "\u96E8\u4E0A\u304C\u308A\u306E\u5742",
       description: "\u4E00\u4EBA\u5931\u3063\u3066\u3082\u7ACB\u3066\u76F4\u3059",
       energyCost: 8,
       waves: [
@@ -43251,7 +43251,7 @@ var quest65_default = {
       designId: "8-7",
       areaId: "izumo",
       index: 7,
-      name: "\u52B9\u679C\u304C\u5207\u308C\u305F\u5F8C\u3082\u6226\u3046",
+      name: "\u96F2\u9593\u306E\u6708",
       description: "\u52B9\u679C\u304C\u5207\u308C\u305F\u5F8C\u3082\u6226\u3046",
       energyCost: 8,
       waves: [
@@ -43530,7 +43530,7 @@ var quest65_default = {
       designId: "8-8",
       areaId: "izumo",
       index: 8,
-      name: "\u9023\u6226\u7528\u306E5\u4EBA\u3092\u5B8C\u6210\u3055\u305B\u308B",
+      name: "\u51FA\u96F2\u306E\u671D\u51EA",
       description: "\u9023\u6226\u7528\u306E5\u4EBA\u3092\u5B8C\u6210\u3055\u305B\u308B",
       energyCost: 8,
       waves: [
@@ -44172,7 +44172,7 @@ var quest65_default = {
       designId: "9-1",
       areaId: "satsuma",
       index: 1,
-      name: "\u5358\u4F53\u7A81\u7834\u306E\u6975\u610F",
+      name: "\u5357\u9053\u306E\u95A2",
       description: "\u5358\u4F53\u7A81\u7834\u306E\u6975\u610F",
       energyCost: 8,
       waves: [
@@ -44455,7 +44455,7 @@ var quest65_default = {
       designId: "9-2",
       areaId: "satsuma",
       index: 2,
-      name: "\u5168\u4F53\u524A\u308A\u306E\u6975\u610F",
+      name: "\u5165\u308A\u6C5F\u306E\u7832\u58F0",
       description: "\u5168\u4F53\u524A\u308A\u306E\u6975\u610F",
       energyCost: 8,
       waves: [
@@ -44984,7 +44984,7 @@ var quest65_default = {
       designId: "9-3",
       areaId: "satsuma",
       index: 3,
-      name: "\u5F8C\u5217\u653B\u7565\u306E\u6975\u610F",
+      name: "\u5BB5\u95C7\u306E\u9663\u5C4B",
       description: "\u5F8C\u5217\u653B\u7565\u306E\u6975\u610F",
       energyCost: 8,
       waves: [
@@ -45411,7 +45411,7 @@ var quest65_default = {
       designId: "9-4",
       areaId: "satsuma",
       index: 4,
-      name: "\u901A\u5E38\u653B\u6483\u306E\u6975\u610F",
+      name: "\u9244\u706B\u306E\u8857\u9053",
       description: "\u901A\u5E38\u653B\u6483\u306E\u6975\u610F",
       energyCost: 8,
       waves: [
@@ -45763,7 +45763,7 @@ var quest65_default = {
       designId: "9-5",
       areaId: "satsuma",
       index: 5,
-      name: "\u5F31\u4F53\u9023\u643A\u306E\u6975\u610F",
+      name: "\u5C71\u8DEF\u306E\u5BC6\u66F8",
       description: "\u5F31\u4F53\u9023\u643A\u306E\u6975\u610F",
       energyCost: 8,
       waves: [
@@ -46231,7 +46231,7 @@ var quest65_default = {
       designId: "9-6",
       areaId: "satsuma",
       index: 6,
-      name: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u306E\u6975\u610F",
+      name: "\u91CE\u306B\u7ACB\u3064\u50BE\u5947\u65D7",
       description: "\u7D99\u7D9A\u30C0\u30E1\u30FC\u30B8\u306E\u6975\u610F",
       energyCost: 8,
       waves: [
@@ -46516,7 +46516,7 @@ var quest65_default = {
       designId: "9-7",
       areaId: "satsuma",
       index: 7,
-      name: "\u53CD\u6483\u306E\u6975\u610F",
+      name: "\u6D5C\u8FBA\u306E\u65D7\u5F71",
       description: "\u53CD\u6483\u306E\u6975\u610F",
       energyCost: 8,
       waves: [
@@ -46825,7 +46825,7 @@ var quest65_default = {
       designId: "9-8",
       areaId: "satsuma",
       index: 8,
-      name: "\u80CC\u6C34\u306E\u6975\u610F",
+      name: "\u7D05\u306B\u67D3\u307E\u308B\u91CE",
       description: "\u80CC\u6C34\u306E\u6975\u610F",
       energyCost: 8,
       waves: [
@@ -47076,7 +47076,7 @@ var quest65_default = {
       designId: "9-9",
       areaId: "satsuma",
       index: 9,
-      name: "\u59A8\u5BB3\u3068\u89E3\u9664\u306E\u6975\u610F",
+      name: "\u9727\u306E\u8ECD\u8B70",
       description: "\u59A8\u5BB3\u3068\u89E3\u9664\u306E\u6975\u610F",
       energyCost: 8,
       waves: [
@@ -47438,7 +47438,7 @@ var quest65_default = {
       designId: "9-10",
       areaId: "satsuma",
       index: 10,
-      name: "\u5F97\u610F\u3068\u4E0D\u5F97\u610F\u3092\u898B\u629C\u304F",
+      name: "\u85A9\u6469\u306E\u5927\u304B\u304C\u308A",
       description: "\u5F97\u610F\u3068\u4E0D\u5F97\u610F\u3092\u898B\u629C\u304F",
       energyCost: 8,
       waves: [
@@ -47903,7 +47903,7 @@ var quest65_default = {
       designId: "10-1",
       areaId: "sekigahara",
       index: 1,
-      name: "\u786C\u3044\u524D\u885B\u3068\u5371\u967A\u306A\u5F8C\u885B",
+      name: "\u9727\u4E2D\u306E\u5E03\u9663",
       description: "\u786C\u3044\u524D\u885B\u3068\u5371\u967A\u306A\u5F8C\u885B",
       energyCost: 8,
       waves: [
@@ -48327,7 +48327,7 @@ var quest65_default = {
       designId: "10-2",
       areaId: "sekigahara",
       index: 2,
-      name: "\u5206\u6563\u88AB\u5BB3\u3068\u96C6\u4E2D\u88AB\u5BB3",
+      name: "\u91CE\u3092\u88C2\u304F\u72FC\u7159",
       description: "\u5206\u6563\u88AB\u5BB3\u3068\u96C6\u4E2D\u88AB\u5BB3",
       energyCost: 8,
       waves: [
@@ -48699,7 +48699,7 @@ var quest65_default = {
       designId: "10-3",
       areaId: "sekigahara",
       index: 3,
-      name: "\u5F37\u5316\u3068\u4FDD\u8B77\u306E\u4E8C\u91CD\u5B88\u5099",
+      name: "\u5E7E\u91CD\u306E\u65D7\u5F71",
       description: "\u5F37\u5316\u3068\u4FDD\u8B77\u306E\u4E8C\u91CD\u5B88\u5099",
       energyCost: 8,
       waves: [
@@ -49153,7 +49153,7 @@ var quest65_default = {
       designId: "10-4",
       areaId: "sekigahara",
       index: 4,
-      name: "\u706B\u529B\u4F4E\u4E0B\u3068\u7D99\u7D9A\u88AB\u5BB3",
+      name: "\u591C\u8972\u306E\u8DB3\u97F3",
       description: "\u706B\u529B\u4F4E\u4E0B\u3068\u7D99\u7D9A\u88AB\u5BB3",
       energyCost: 8,
       waves: [
@@ -49655,7 +49655,7 @@ var quest65_default = {
       designId: "10-5",
       areaId: "sekigahara",
       index: 5,
-      name: "\u540C\u5C5E\u6027\u4E3B\u8EF8\u306E\u5F31\u70B9\u3092\u88DC\u3046",
+      name: "\u6681\u306E\u5148\u9663",
       description: "\u540C\u5C5E\u6027\u4E3B\u8EF8\u306E\u5F31\u70B9\u3092\u88DC\u3046",
       energyCost: 8,
       waves: [
@@ -50106,7 +50106,7 @@ var quest65_default = {
       designId: "10-6",
       areaId: "sekigahara",
       index: 6,
-      name: "\u6761\u4EF6\u706B\u529B\u3092\u7DAD\u6301\u3059\u308B",
+      name: "\u6C7A\u6226\u524D\u591C",
       description: "\u6761\u4EF6\u706B\u529B\u3092\u7DAD\u6301\u3059\u308B",
       energyCost: 8,
       waves: [
@@ -50525,7 +50525,7 @@ var quest65_default = {
       designId: "10-7",
       areaId: "sekigahara",
       index: 7,
-      name: "\u80CC\u6C34\u3068\u751F\u5B58\u3092\u4E21\u7ACB\u3059\u308B",
+      name: "\u7D05\u306E\u8A93\u3044",
       description: "\u80CC\u6C34\u3068\u751F\u5B58\u3092\u4E21\u7ACB\u3059\u308B",
       energyCost: 8,
       waves: [
@@ -50883,7 +50883,7 @@ var quest65_default = {
       designId: "10-8",
       areaId: "sekigahara",
       index: 8,
-      name: "\u30D5\u30A7\u30FC\u30BA\u5F8C\u3082\u5F79\u5272\u3092\u6B8B\u3059",
+      name: "\u8475\u306E\u672C\u9663",
       description: "\u30D5\u30A7\u30FC\u30BA\u5F8C\u3082\u5F79\u5272\u3092\u6B8B\u3059",
       energyCost: 8,
       waves: [
@@ -51348,7 +51348,7 @@ var quest65_default = {
       designId: "10-9",
       areaId: "sekigahara",
       index: 9,
-      name: "\u9577\u3044\u6226\u3044\u3092\u77ED\u304F\u7D42\u3048\u308B",
+      name: "\u9EC4\u91D1\u306E\u672C\u9663",
       description: "\u9577\u3044\u6226\u3044\u3092\u77ED\u304F\u7D42\u3048\u308B",
       energyCost: 8,
       waves: [
@@ -51781,7 +51781,7 @@ var quest65_default = {
       designId: "10-10",
       areaId: "sekigahara",
       index: 10,
-      name: "\u81EA\u5206\u306E\u4E3B\u529B\u3067\u6700\u7D42\u7A81\u7834",
+      name: "\u5929\u4E0B\u306E\u884C\u65B9",
       description: "\u81EA\u5206\u306E\u4E3B\u529B\u3067\u6700\u7D42\u7A81\u7834",
       energyCost: 8,
       waves: [
