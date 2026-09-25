@@ -1,5 +1,6 @@
 import { getFormalRaidSkill } from './raidFormalSkills';
 import data from './data/raid-encounter.json';
+import supply from './data/raid-supply-approved.json';
 import roster from '../../theme/sengoku-characters.json';
 import { characterArt } from '../../theme/creativeAssets';
 import { getCharacterPassive, BALANCE_V2_CHARACTER_ASSIGNMENTS } from './balanceV2Masters';
@@ -28,7 +29,7 @@ export const FORMAL_ENCOUNTER_MASTERS: RaidMaster[]=data.encounters.map(row=>{
   const c=formalRaidCharacter(name),p=getCharacterPassive(c,passiveLevel/2),round10=(value:number)=>Math.round(value/10)*10;
   return {id:`${enemy.id}_escort${index+1}`,name:c.name,image:c.image,element:c.element,level:row.level,stats:{hp:round10(row.hp*.2),atk:round10(row.atk*.45),def:round10(row.def*.5),sp:100,luk:0},initialSp:100,hitSpGain:10,initialCount:9,actionCount:9,order:index+1,skills:skills.map(id=>raidSkill(id,row.lb)),passives:p?[p]:[]};
  })];
- const victoryRewards:Reward[]=[{kind:'cash',amount:[3000,6000,9000,12000][band]},...raidExpItems('character_exp_item',[1000,2500,5000,10000][band]),...raidExpItems('equipment_exp_item',[500,1500,3000,6000][band]),{kind:'soul',id:character.id,amount:character.rarity==='SR'&&band>0?2:1,chance:(character.rarity==='SR'?[.75,.5,.6,.75]:[.3,.4,.6,.7])[band]}];
+ const victoryRewards:Reward[]=[{kind:'cash',amount:[3000,6000,9000,12000][band]},...raidExpItems('character_exp_item',[1000,2500,5000,10000][band]),...raidExpItems('equipment_exp_item',[500,1500,3000,6000][band]),{kind:'soul',id:character.id,amount:(character.rarity==='SR'?supply.srSoulAmount:supply.ssrSoulAmount)[row.area-1],chance:(character.rarity==='SR'?supply.srSoulChance:supply.ssrSoulChance)[row.area-1]}];
  return {id:enemy.id,masterVersion:RAID_MASTER_VERSION,characterId:character.id,area:row.area,name:character.name,type:'encounter',enemy,enemies,energyCost:20,durationMinutes:60,maxParticipants:10,maxLevel:1,appearanceLevels:[1],appearanceImages:{},enemyGrowthPerLevel:0,sharedHpGrowthPerLevel:0,victoryMultiplier:1.5,sharedHp:row.sharedHp,participationRewards:[],victoryRewards,playerExp:[80,100,120,160,200,240,300,360,440,520][row.area-1],defeatRewards:[{kind:'soul',id:character.id,amount:band<2?1:2},...raidExpItems('character_exp_item',[5000,20000,20000,40000][band]),...raidExpItems('equipment_exp_item',[5000,20000,20000,40000][band]),{kind:'skill_material',amount:[2,4,6,8][band]},{kind:'equipment_lb',amount:[2,4,6,8][band]},{kind:'cash',amount:[5000,10000,20000,30000][band]}]};
 });
 /** Call only after the quest's encounter roll succeeds; rarity first, then equal within rarity. */

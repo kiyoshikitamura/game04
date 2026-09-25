@@ -62,3 +62,5 @@ MA07追加停止条件：本文の未丸め計算と効果値が異なる、ま�
 MA08追加停止条件：クエスト名称が攻略コンセプトと同じ、正式名称/承認根拠が欠落、敵名称のID対応不一致。65面の命名決定前に空文字・面番号・推測名で基準を通さない。名称だけでなくgeneratorからの再流入とHome title/出陣一覧/詳細/出撃確認の参照先を再照合。
 
 名称は2026-09-25 20:24 JST採用済み。G5ではNAMING_ADOPTION.mdを優先し、名称の再承認を求めない。旧approved-valuesとの比較はname-authority.jsonを優先するverify-snapshotを使用する。直接比較で旧名へ戻さない。contextNames.tsとcontext-names.jsonの新規依存もG5変更確認対象。
+
+20:50 JST供給FIX追加：RAID_SUPPLY_ADOPTION.mdを優先。遭遇率・共闘勝利魂・侵攻最終魂は新承認本文を期待値にする。旧1/2魂や旧遭遇率への巻き戻りもSTOP。既存snapshotは旧報酬保持、新規開催を対象に照合。

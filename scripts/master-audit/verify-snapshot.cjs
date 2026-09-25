@@ -7,6 +7,19 @@ for(const row of nameAuthority.quests){
  if(expected.runtime.quests[row.id])expected.runtime.quests[row.id].name=row.approvedName;
  const stage=expected.database.quest65.stages.find(s=>s.id===row.id);if(stage)stage.name=row.approvedName;
 }
+// 20:50 JST user-approved supply revision; independent prose is the oracle.
+const supply=require('./supply-authority.cjs');
+for(const q of [...Object.values(expected.runtime.quests),...expected.database.quest65.stages]){
+ const [area,index]=q.designId.split('-').map(Number);q.encounterChance=area===1&&index<3?0:supply.areas[area].encounterChance;
+}
+const roster=JSON.parse(fs.readFileSync(root+'/src/theme/sengoku-characters.json'));
+for(const m of Object.values(expected.runtime.encounters)){
+ const rarity=roster.find(c=>c.characterId===m.characterId).sourceRarity;
+ Object.assign(m.victoryRewards.find(r=>r.kind==='soul'),supply.areas[m.area][rarity]);
+}
+for(const m of [...Object.values(expected.runtime.invasions),...Object.values(expected.database.invasionMasters)]){
+ m.stages.find(s=>s.level===12).defeatRewards.find(r=>r.kind==='soul').amount=supply.castles[m.id];
+}
 for(const [key,value]of Object.entries(expected.runtime))differences.push(...diff(value,actual[key],'/runtime/'+key));
 for(const [key,value]of Object.entries(expected.database))differences.push(...diff(value,db[key],'/database/'+key));
 for(const key of ['sourceSha','apiVersion','apiSha256','databaseProject','capturedAt'])if(!meta[key])differences.push({path:'/metadata/'+key,kind:'missing'});

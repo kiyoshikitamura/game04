@@ -32839,7 +32839,7 @@ var quest65_default = {
       ],
       ticketChance: 0.02,
       playerExp: 60,
-      encounterChance: 0.05
+      encounterChance: 0.1
     },
     {
       id: "kai-2",
@@ -33212,7 +33212,7 @@ var quest65_default = {
       ],
       ticketChance: 0.02,
       playerExp: 60,
-      encounterChance: 0.05
+      encounterChance: 0.1
     },
     {
       id: "kai-3",
@@ -33511,7 +33511,7 @@ var quest65_default = {
       ],
       ticketChance: 0.02,
       playerExp: 60,
-      encounterChance: 0.05
+      encounterChance: 0.1
     },
     {
       id: "kai-4",
@@ -33969,7 +33969,7 @@ var quest65_default = {
       ],
       ticketChance: 0.02,
       playerExp: 60,
-      encounterChance: 0.05
+      encounterChance: 0.1
     },
     {
       id: "kai-5",
@@ -34363,7 +34363,7 @@ var quest65_default = {
       ],
       ticketChance: 0.02,
       playerExp: 60,
-      encounterChance: 0.05
+      encounterChance: 0.1
     },
     {
       id: "kai-6",
@@ -34762,7 +34762,7 @@ var quest65_default = {
       ],
       ticketChance: 0.02,
       playerExp: 60,
-      encounterChance: 0.05
+      encounterChance: 0.1
     },
     {
       id: "echigo-1",
@@ -35156,7 +35156,7 @@ var quest65_default = {
       ],
       ticketChance: 0.02,
       playerExp: 72,
-      encounterChance: 0.06
+      encounterChance: 0.15
     },
     {
       id: "echigo-2",
@@ -35653,7 +35653,7 @@ var quest65_default = {
       ],
       ticketChance: 0.02,
       playerExp: 72,
-      encounterChance: 0.06
+      encounterChance: 0.15
     },
     {
       id: "echigo-3",
@@ -35987,7 +35987,7 @@ var quest65_default = {
       ],
       ticketChance: 0.02,
       playerExp: 72,
-      encounterChance: 0.06
+      encounterChance: 0.15
     },
     {
       id: "echigo-4",
@@ -36340,7 +36340,7 @@ var quest65_default = {
       ],
       ticketChance: 0.02,
       playerExp: 72,
-      encounterChance: 0.06
+      encounterChance: 0.15
     },
     {
       id: "echigo-5",
@@ -36931,7 +36931,7 @@ var quest65_default = {
       ],
       ticketChance: 0.02,
       playerExp: 72,
-      encounterChance: 0.06
+      encounterChance: 0.15
     },
     {
       id: "echigo-6",
@@ -37563,7 +37563,7 @@ var quest65_default = {
       ],
       ticketChance: 0.02,
       playerExp: 72,
-      encounterChance: 0.06
+      encounterChance: 0.15
     },
     {
       id: "kyoto-1",
@@ -37997,7 +37997,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 90,
-      encounterChance: 0.07
+      encounterChance: 0.25
     },
     {
       id: "kyoto-2",
@@ -38372,7 +38372,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 90,
-      encounterChance: 0.07
+      encounterChance: 0.25
     },
     {
       id: "kyoto-3",
@@ -38625,7 +38625,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 90,
-      encounterChance: 0.07
+      encounterChance: 0.25
     },
     {
       id: "kyoto-4",
@@ -39017,7 +39017,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 90,
-      encounterChance: 0.07
+      encounterChance: 0.25
     },
     {
       id: "kyoto-5",
@@ -39223,7 +39223,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 90,
-      encounterChance: 0.07
+      encounterChance: 0.25
     },
     {
       id: "kyoto-6",
@@ -39658,7 +39658,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 90,
-      encounterChance: 0.07
+      encounterChance: 0.25
     },
     {
       id: "kyoto-7",
@@ -40117,7 +40117,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 90,
-      encounterChance: 0.07
+      encounterChance: 0.25
     },
     {
       id: "kyoto-8",
@@ -40664,7 +40664,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 90,
-      encounterChance: 0.07
+      encounterChance: 0.25
     },
     {
       id: "izumo-1",
@@ -41069,7 +41069,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 144,
-      encounterChance: 0.08
+      encounterChance: 0.25
     },
     {
       id: "izumo-2",
@@ -41402,7 +41402,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 144,
-      encounterChance: 0.08
+      encounterChance: 0.25
     },
     {
       id: "izumo-3",
@@ -41957,7 +41957,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 144,
-      encounterChance: 0.08
+      encounterChance: 0.25
     },
     {
       id: "izumo-4",
@@ -42400,7 +42400,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 144,
-      encounterChance: 0.08
+      encounterChance: 0.25
     },
     {
       id: "izumo-5",
@@ -42777,7 +42777,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 144,
-      encounterChance: 0.08
+      encounterChance: 0.25
     },
     {
       id: "izumo-6",
@@ -43244,7 +43244,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 144,
-      encounterChance: 0.08
+      encounterChance: 0.25
     },
     {
       id: "izumo-7",
@@ -43523,7 +43523,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 144,
-      encounterChance: 0.08
+      encounterChance: 0.25
     },
     {
       id: "izumo-8",
@@ -44165,7 +44165,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 144,
-      encounterChance: 0.08
+      encounterChance: 0.25
     },
     {
       id: "satsuma-1",
@@ -44448,7 +44448,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 176,
-      encounterChance: 0.09
+      encounterChance: 0.25
     },
     {
       id: "satsuma-2",
@@ -44977,7 +44977,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 176,
-      encounterChance: 0.09
+      encounterChance: 0.25
     },
     {
       id: "satsuma-3",
@@ -45404,7 +45404,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 176,
-      encounterChance: 0.09
+      encounterChance: 0.25
     },
     {
       id: "satsuma-4",
@@ -45756,7 +45756,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 176,
-      encounterChance: 0.09
+      encounterChance: 0.25
     },
     {
       id: "satsuma-5",
@@ -46224,7 +46224,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 176,
-      encounterChance: 0.09
+      encounterChance: 0.25
     },
     {
       id: "satsuma-6",
@@ -46509,7 +46509,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 176,
-      encounterChance: 0.09
+      encounterChance: 0.25
     },
     {
       id: "satsuma-7",
@@ -46818,7 +46818,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 176,
-      encounterChance: 0.09
+      encounterChance: 0.25
     },
     {
       id: "satsuma-8",
@@ -47069,7 +47069,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 176,
-      encounterChance: 0.09
+      encounterChance: 0.25
     },
     {
       id: "satsuma-9",
@@ -47431,7 +47431,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 176,
-      encounterChance: 0.09
+      encounterChance: 0.25
     },
     {
       id: "satsuma-10",
@@ -47896,7 +47896,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 176,
-      encounterChance: 0.09
+      encounterChance: 0.25
     },
     {
       id: "sekigahara-1",
@@ -48320,7 +48320,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 208,
-      encounterChance: 0.1
+      encounterChance: 0.25
     },
     {
       id: "sekigahara-2",
@@ -48692,7 +48692,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 208,
-      encounterChance: 0.1
+      encounterChance: 0.25
     },
     {
       id: "sekigahara-3",
@@ -49146,7 +49146,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 208,
-      encounterChance: 0.1
+      encounterChance: 0.25
     },
     {
       id: "sekigahara-4",
@@ -49648,7 +49648,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 208,
-      encounterChance: 0.1
+      encounterChance: 0.25
     },
     {
       id: "sekigahara-5",
@@ -50099,7 +50099,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 208,
-      encounterChance: 0.1
+      encounterChance: 0.25
     },
     {
       id: "sekigahara-6",
@@ -50518,7 +50518,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 208,
-      encounterChance: 0.1
+      encounterChance: 0.25
     },
     {
       id: "sekigahara-7",
@@ -50876,7 +50876,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 208,
-      encounterChance: 0.1
+      encounterChance: 0.25
     },
     {
       id: "sekigahara-8",
@@ -51341,7 +51341,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 208,
-      encounterChance: 0.1
+      encounterChance: 0.25
     },
     {
       id: "sekigahara-9",
@@ -51774,7 +51774,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 208,
-      encounterChance: 0.1
+      encounterChance: 0.25
     },
     {
       id: "sekigahara-10",
@@ -52399,7 +52399,7 @@ var quest65_default = {
       ],
       ticketChance: 0.03,
       playerExp: 208,
-      encounterChance: 0.1
+      encounterChance: 0.25
     }
   ],
   bindings: [
@@ -64469,6 +64469,79 @@ var raid_encounter_default = {
   ]
 };
 
+// src/domain/redesign/data/raid-supply-approved.json
+var raid_supply_approved_default = {
+  version: "GAME04_RAID_SUPPLY_FIX_20260925_2050_JST",
+  approval: "User 2026-09-25 20:50 JST: \u3053\u308C\u3067FIX\u3057\u307E\u3059\u3002",
+  encounterChance: [
+    0.01,
+    0.01,
+    0.02,
+    0.04,
+    0.1,
+    0.15,
+    0.25,
+    0.25,
+    0.25,
+    0.25
+  ],
+  srSoulChance: [
+    0.75,
+    0.75,
+    0.75,
+    0.5,
+    0.25,
+    0.4,
+    0.5,
+    0.65,
+    0.8,
+    1
+  ],
+  ssrSoulChance: [
+    0.3,
+    0.3,
+    0.3,
+    0.4,
+    0.2,
+    0.3,
+    0.4,
+    0.6,
+    0.8,
+    1
+  ],
+  srSoulAmount: [
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    3
+  ],
+  ssrSoulAmount: [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    2
+  ],
+  invasionFinalSouls: {
+    TI01: 10,
+    TI02: 15,
+    TI03: 20,
+    TI04: 25,
+    TI05: 30
+  }
+};
+
 // src/domain/redesign/raidFormalMaster.ts
 var RAID_MASTER_VERSION = raid_encounter_default.version;
 function raidExpItems(kind, amount) {
@@ -64504,7 +64577,7 @@ var FORMAL_ENCOUNTER_MASTERS = raid_encounter_default.encounters.map((row) => {
     const c = formalRaidCharacter(name2), p = getCharacterPassive(c, passiveLevel / 2), round102 = (value) => Math.round(value / 10) * 10;
     return { id: `${enemy2.id}_escort${index + 1}`, name: c.name, image: c.image, element: c.element, level: row.level, stats: { hp: round102(row.hp * 0.2), atk: round102(row.atk * 0.45), def: round102(row.def * 0.5), sp: 100, luk: 0 }, initialSp: 100, hitSpGain: 10, initialCount: 9, actionCount: 9, order: index + 1, skills: skills.map((id) => raidSkill(id, row.lb)), passives: p ? [p] : [] };
   })];
-  const victoryRewards = [{ kind: "cash", amount: [3e3, 6e3, 9e3, 12e3][band] }, ...raidExpItems("character_exp_item", [1e3, 2500, 5e3, 1e4][band]), ...raidExpItems("equipment_exp_item", [500, 1500, 3e3, 6e3][band]), { kind: "soul", id: character2.id, amount: character2.rarity === "SR" && band > 0 ? 2 : 1, chance: (character2.rarity === "SR" ? [0.75, 0.5, 0.6, 0.75] : [0.3, 0.4, 0.6, 0.7])[band] }];
+  const victoryRewards = [{ kind: "cash", amount: [3e3, 6e3, 9e3, 12e3][band] }, ...raidExpItems("character_exp_item", [1e3, 2500, 5e3, 1e4][band]), ...raidExpItems("equipment_exp_item", [500, 1500, 3e3, 6e3][band]), { kind: "soul", id: character2.id, amount: (character2.rarity === "SR" ? raid_supply_approved_default.srSoulAmount : raid_supply_approved_default.ssrSoulAmount)[row.area - 1], chance: (character2.rarity === "SR" ? raid_supply_approved_default.srSoulChance : raid_supply_approved_default.ssrSoulChance)[row.area - 1] }];
   return { id: enemy2.id, masterVersion: RAID_MASTER_VERSION, characterId: character2.id, area: row.area, name: character2.name, type: "encounter", enemy: enemy2, enemies, energyCost: 20, durationMinutes: 60, maxParticipants: 10, maxLevel: 1, appearanceLevels: [1], appearanceImages: {}, enemyGrowthPerLevel: 0, sharedHpGrowthPerLevel: 0, victoryMultiplier: 1.5, sharedHp: row.sharedHp, participationRewards: [], victoryRewards, playerExp: [80, 100, 120, 160, 200, 240, 300, 360, 440, 520][row.area - 1], defeatRewards: [{ kind: "soul", id: character2.id, amount: band < 2 ? 1 : 2 }, ...raidExpItems("character_exp_item", [5e3, 2e4, 2e4, 4e4][band]), ...raidExpItems("equipment_exp_item", [5e3, 2e4, 2e4, 4e4][band]), { kind: "skill_material", amount: [2, 4, 6, 8][band] }, { kind: "equipment_lb", amount: [2, 4, 6, 8][band] }, { kind: "cash", amount: [5e3, 1e4, 2e4, 3e4][band] }] };
 });
 function selectEncounterMaster(area, random) {
@@ -67410,12 +67483,12 @@ function exp(kind, amount) {
   if (amount) throw new Error("\u4FB5\u653BEXP\u5831\u916C\u7AEF\u6570");
   return result;
 }
-var rewardRows = [[2500, 1e3, 500, 1e3, 1, 5e3, 5e3, 2, 2e4, 2e4, 6, 1, 2, 1, 1], [4e3, 2e3, 1e3, 2e3, 1, 1e4, 1e4, 4, 4e4, 4e4, 12, 1, 3, 1, 1], [6e3, 3e3, 1500, 3e3, 1, 15e3, 15e3, 6, 6e4, 6e4, 18, 2, 4, 2, 1], [8e3, 4e3, 2e3, 4e3, 1, 2e4, 2e4, 8, 8e4, 8e4, 24, 2, 5, 2, 2], [1e4, 5e3, 2500, 5e3, 1, 25e3, 25e3, 10, 1e5, 1e5, 30, 3, 6, 3, 2]];
+var rewardRows = [[2500, 1e3, 500, 1e3, 1, 5e3, 5e3, 2, 2e4, 2e4, 6, 1, 2, 1], [4e3, 2e3, 1e3, 2e3, 1, 1e4, 1e4, 4, 4e4, 4e4, 12, 1, 3, 1], [6e3, 3e3, 1500, 3e3, 1, 15e3, 15e3, 6, 6e4, 6e4, 18, 2, 4, 2], [8e3, 4e3, 2e3, 4e3, 1, 2e4, 2e4, 8, 8e4, 8e4, 24, 2, 5, 2], [1e4, 5e3, 2500, 5e3, 1, 25e3, 25e3, 10, 1e5, 1e5, 30, 3, 6, 3]];
 function rewards(castle, level) {
   const r = rewardRows[castle], final = level === 12, gate = level % 3 === 0;
   const cash = final ? r[8] : gate ? r[5] : r[3], lb = final ? r[10] : gate ? r[7] : r[4], xp = final ? r[9] : gate ? r[6] : 0;
   const out = [{ kind: "cash", amount: cash }, { kind: "skill_material", amount: lb }, { kind: "equipment_lb", amount: lb }, ...exp("character_exp_item", xp), ...exp("equipment_exp_item", xp)];
-  if (final) out.push(...["SPECIAL_TICKET_CHARACTER", "SPECIAL_TICKET_SKILL", "SPECIAL_TICKET_EQUIPMENT"].map((id, i) => ({ kind: "ticket", id, amount: r[11 + i] })), { kind: "soul", id: FORMAL_CASTLES[castle].characterId, amount: r[14] });
+  if (final) out.push(...["SPECIAL_TICKET_CHARACTER", "SPECIAL_TICKET_SKILL", "SPECIAL_TICKET_EQUIPMENT"].map((id, i) => ({ kind: "ticket", id, amount: r[11 + i] })), { kind: "soul", id: FORMAL_CASTLES[castle].characterId, amount: raid_supply_approved_default.invasionFinalSouls[FORMAL_CASTLES[castle].id] });
   return out;
 }
 function createFormalInvasionMaster(castleId, random = Math.random) {
