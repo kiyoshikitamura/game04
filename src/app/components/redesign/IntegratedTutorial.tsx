@@ -1,5 +1,6 @@
 'use client';
 import { useEffect,useMemo,useState } from 'react';
+import { useAudio } from '@/audio/AudioProvider';
 import { CHARACTER_MASTERS } from '@/domain/redesign/masters';
 import { getFormalOwnedSkill } from '@/domain/redesign/formalOwnedSkills';
 import { characterArt } from '@/theme/creativeAssets';
@@ -18,6 +19,8 @@ export default function IntegratedTutorial({state,busy,onNext}:{state:RedesignSt
  const practice=useMemo(()=>state.deck.length?createTutorialBattle(state):null,[state]);
  useEffect(()=>{document.body.classList.add('rd-active');return()=>document.body.classList.remove('rd-active');},[]);
  const scene=SCENES[save.step];
+ const { playBgm } = useAudio();
+ useEffect(() => { if (scene.id !== 'battle') playBgm('TITLE'); }, [scene.id, playBgm]);
  const world=scene&&'cast' in scene;
  const acquisition=scene?.id==='characters'||scene?.id==='skills';
  const background=world?scene.background:BACKGROUNDS.guide;

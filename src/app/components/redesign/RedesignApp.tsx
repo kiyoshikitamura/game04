@@ -1,4 +1,6 @@
 'use client';
+import { useAudio } from '@/audio/AudioProvider';
+import { SE_ASSETS, type SeEvent } from '@/audio/audioContract';
 import { raidDisplayLabel } from '@/domain/redesign/contextNames';
 import { raidBattleBackground } from '@/domain/redesign/approvedBackgrounds';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
@@ -29,6 +31,8 @@ import { SCENES,FIRST_SORTIE_TEXT,FIRST_DEFEAT_TEXT } from '@/domain/redesign/tu
 
 export default function RedesignApp({ initialTab = 'home' }: { initialTab?: string } = {}) {
   const game = useGame();
+  const { playBgm, playSe, preloadAudio } = useAudio();
+  useEffect(() => { preloadAudio({ events: Object.keys(SE_ASSETS) as SeEvent[] }); }, [preloadAudio]);
   const owner = game.session?.user.id;
   const [data, setData] = useState<RedesignResponse | null>(null);
   const [tab, setTab] = useState(initialTab);
@@ -48,6 +52,12 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   const [questPlaying, setQuestPlaying] = useState(false);
   const [battle, setBattle] = useState<BattleResult | null>(null);
   const [battleBackground, setBattleBackground] = useState<string>();
+  const tutorialActive = !!data?.state.tutorial && data.state.tutorial.step < SCENES.length;
+  useEffect(() => {
+    // Tutorial, quest and raid own their nested screen/BGM transitions.
+    if (tutorialActive || battle || tab === 'quest' || tab === 'raid') return;
+    playBgm(tab === 'territory' ? 'GVG' : 'HOME');
+  }, [tutorialActive, battle, tab, playBgm]);
   const ownerRef = useRef(owner);
   const restoredOwner = useRef<string | null>(null);
   const lock = useRef(false);
@@ -129,10 +139,15 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
       try { requestId = sessionStorage.getItem(storageKey) || requestId; sessionStorage.setItem(storageKey, requestId); } catch { /* API also exposes pending battles for resume. */ }
     }
     try {
+      if (name === 'character_level' || name === 'equipment_level') playSe('GROWTH_START');
       const value = await redesignRequest(name, payload, requestId);
       if (requestOwner !== ownerRef.current) throw new Error('ログイン状態が変更されました。');
       setData(current => current && current.state.userId === value.state.userId && current.state.version > value.state.version ? current : value);
       if (persistentRequest) try { sessionStorage.removeItem(storageKey); } catch { /* no persistent reliance */ }
+      if (['character_awaken', 'skill_level', 'equipment_lb'].includes(name)) playSe('AWAKEN');
+      else if (['character_level', 'equipment_level'].includes(name)) playSe('LEVEL_UP');
+      else if (name === 'save_deck') playSe('FORMATION_CONFIRM');
+      else if (['claim_mission', 'raid_claim', 'shop_exchange', 'soul_exchange', 'soul_select'].includes(name)) playSe('REWARD');
       if (actionTiming.current?.owner === requestOwner) actionTiming.current.outcome = 'success';
       return value;
     } catch (reason) {
@@ -244,7 +259,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
       try { const value = await action(p.kind === 'quest' ? 'quest_battle' : 'raid_battle', p.kind === 'quest' ? { stageId: p.target_id } : { roomId: p.target_id }, p.id); if (value.battle) { setBattleKind(p.kind === 'raid' ? 'raid' : 'quest'); if (p.kind === 'raid') { setRaidId(p.target_id); setTab('raid'); const room = value.rooms.find(entry => entry.id === p.target_id) ?? data.rooms.find(entry => entry.id === p.target_id); setBattleBackground(room ? raidBattleBackground(room, getRoomRaidMaster(room), value.battle.raidStartSnapshot) : undefined); } else { const stage = getQuestStage(p.target_id); setBattleBackground(QUEST_AREAS.find(entry => entry.id === stage?.areaId)?.image); } setBattle(value.battle); } } catch { /* message shown above */ }
     }}>戦闘を再開</button></div>}
     </>}>
-    {battle ? <BattleView result={battle} vipActive={vipActive} backgroundSrc={battleBackground} raidHp={battleRoom ? { current: battleRoom.hp, max: battleRoom.maxHp, level: battleRoom.level } : undefined} onComplete={() => { setBattle(null); setBattleKind(null); setBattleBackground(undefined); void refresh(); }} /> : <>
+    {battle ? <BattleView bgmScene={battleKind === 'raid' ? 'BATTLE_BOSS' : 'BATTLE'} result={battle} vipActive={vipActive} backgroundSrc={battleBackground} raidHp={battleRoom ? { current: battleRoom.hp, max: battleRoom.maxHp, level: battleRoom.level } : undefined} onComplete={() => { setBattle(null); setBattleKind(null); setBattleBackground(undefined); void refresh(); }} /> : <>
       {tab === 'quest' && <QuestView key={questNavigation} onBattlePlayingChange={setQuestPlaying} state={state} party={party} vipActive={vipActive} initialStageId={questStart} initialPreparation={questPreparation} onStart={startQuest} onOpenDeck={openQuestDeck} onOpenRaid={id => { setRaidId(id); setTab('raid'); }} onIgnoreEncounter={async id => { await action('encounter_ignore', { roomId: id }); }} />}
       {tab === 'character' && <>{raidDeckReturn && <button type="button" className="rd-button" disabled={busy} onClick={returnToRaidPreparation}>共闘の出撃準備に戻る</button>}{questDeckReturn && <button type="button" className="rd-button" disabled={busy} onClick={returnToQuestPreparation}>出撃準備に戻る</button>}<GrowthView state={state} onAction={action} /></>}
       {tab === 'territory' && <TerritoryView territory={data.territory} rooms={data.rooms} userId={state.userId} onOpenRoom={id => { setRaidId(id); setTab('raid'); }} onHost={async destinationId => { const value = await action('territory_host', { destinationId }); if (!value.territoryRoomId) throw new Error('侵攻結果を確認できませんでした。'); setRaidId(value.territoryRoomId); setTab('raid'); }} />}

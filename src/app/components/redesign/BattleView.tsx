@@ -1,4 +1,7 @@
 'use client';
+import { useAudio } from '@/audio/AudioProvider';
+import { SE_ASSETS, type BgmScene, type SeEvent } from '@/audio/audioContract';
+import { recordedBattleSounds } from '@/audio/recordedBattleSound';
 import { enemyDisplayName, enemyRoleLabel } from '@/domain/redesign/contextNames';
 import { useEffect, useState, useRef, type CSSProperties } from 'react';
 import { beginQaImageGroup } from '@/utils/redesignQaTelemetry';
@@ -39,10 +42,20 @@ const statusPaths: Record<string, string> = {
   hot:'M9 3H15V9H21V15H15V21H9V15H3V9H9Z', stun:'M4 7 10 9 8 3 14 7 19 3 18 10 23 11 17 15 20 21 12 18 8 22 6 15 1 15 5 11Z',
   counter:'M4 11H15Q21 11 21 17Q21 22 15 22M4 11 10 5M4 11 10 17', taunt:'M12 1V6M12 18V23M1 12H6M18 12H23M20 12A8 8 0 1 1 4 12A8 8 0 1 1 20 12',
 };
-interface Props { requirePlaybackCompletion?: boolean; result: BattleResult; vipActive: boolean; onComplete: () => void; title?: string; backgroundSrc?: string; raidHp?: { current: number; max: number; level?: number }; initialFrame?: number; initialPaused?: boolean; }
+interface Props { bgmScene?: BgmScene; requirePlaybackCompletion?: boolean; result: BattleResult; vipActive: boolean; onComplete: () => void; title?: string; backgroundSrc?: string; raidHp?: { current: number; max: number; level?: number }; initialFrame?: number; initialPaused?: boolean; }
 
 /** Every visible value is projected from the recorded server frame. */
-export function BattleView({ requirePlaybackCompletion = false, result, vipActive, onComplete, title = '合戦', backgroundSrc = '/creative/backgrounds/char_reiji_01.png', raidHp, initialFrame = 0, initialPaused = false }: Props) {
+export function BattleView({ bgmScene = 'BATTLE', requirePlaybackCompletion = false, result, vipActive, onComplete, title = '合戦', backgroundSrc = '/creative/backgrounds/char_reiji_01.png', raidHp, initialFrame = 0, initialPaused = false }: Props) {
+  const { playBgm, stopBgm, playSe, stopSe, preloadAudio } = useAudio();
+  const heardFrame = useRef(-1);
+  const heardAction = useRef(new Set<SeEvent>());
+  useEffect(() => {
+    heardFrame.current = -1;
+    heardAction.current.clear();
+    playBgm(bgmScene);
+    preloadAudio({ scene: bgmScene, events: Object.keys(SE_ASSETS).filter(key => key.startsWith('BATTLE_') || key === 'VICTORY' || key === 'DEFEAT') as SeEvent[] });
+    return () => { stopSe(); stopBgm(); };
+  }, [result, bgmScene, playBgm, stopBgm, stopSe, preloadAudio]);
   const displayedRaidHp = projectRaidBattleHp(result.raidStartSnapshot, raidHp);
   const [detail, setDetail] = useState<{ unit?: BattleUnit; state?: BattleUnitState; skill?: SkillMaster; readiness?: string; cost?: number; reason?: string } | null>(null);
   const [showLog, setShowLog] = useState(false);
@@ -55,6 +68,19 @@ export function BattleView({ requirePlaybackCompletion = false, result, vipActiv
   const assetsBlocked = assetState.result !== result || assetState.status !== 'ready';
   const { index, frame, finished, speed, paused, playbackPaused, setPaused, cycleSpeed, skip } = useRecordedBattlePlayback({ result, initialFrame, initialPaused, vipActive, blocked: !!detail || showLog || assetsBlocked });
   const presentation = projectRecordedBattleFrame(result, index);
+  useEffect(() => { if (finished) stopBgm(); }, [finished, stopBgm]);
+  useEffect(() => {
+    stopSe();
+    if (!frame || assetsBlocked || paused || detail || showLog || heardFrame.current === index) return;
+    if (['action_start', 'phase', 'burst_start', 'start', 'end'].includes(frame.event ?? frame.kind)) heardAction.current.clear();
+    heardFrame.current = index;
+    for (const event of recordedBattleSounds(result, index)) {
+      if (heardAction.current.has(event)) continue;
+      heardAction.current.add(event);
+      playSe(event);
+    }
+    return stopSe;
+  }, [result, index, frame, speed, assetsBlocked, paused, detail, showLog, playSe, stopSe]);
   const imageKey = JSON.stringify([...new Set(['/branding/tribe-neon-logo.png', backgroundSrc, ...(frame ? [...frame.party, ...frame.enemies].flatMap(state => { const unit = result.party.find(item => item.id === state.id) ?? result.waves[frame.wave - 1]?.find(item => item.id === state.id); return [unit ? unitArt(unit, state, 'full') : state.image, unit && frame.party.some(member => member.id === state.id) ? unitArt(unit, state, 'portrait') : undefined, unit ? `/ui/raid/v2/element-${unit.element}.png` : undefined, ...(state.skills ?? unit?.skills ?? []).filter(skill => !isUnassignedSkillImage(skill.image)).map(skill => skill.image)]; }) : [])].filter((src): src is string => !!src))]);
   const decoded = (JSON.parse(imageKey) as string[]).every(isBattleImageReady);
   const visibleLoading = !decoded;

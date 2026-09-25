@@ -1,4 +1,4 @@
-export type BgmScene = "TITLE" | "HOME" | "BATTLE" | "GUILD" | "QUEST" | "PVP" | "RAID" | "GVG";
+export type BgmScene = "TITLE" | "HOME" | "BATTLE_BOSS" | "BATTLE" | "GUILD" | "QUEST" | "PVP" | "RAID" | "GVG";
 
 export type SeEvent =
   | "UI_TAP"
@@ -14,6 +14,12 @@ export type SeEvent =
   | "LEVEL_UP"
   | "QUEST_START"
   | "QUEST_INSTANT"
+  | "AWAKEN"
+  | "BATTLE_IMPACT"
+  | "BATTLE_IMPACT_ALL"
+  | "BATTLE_HEAL"
+  | "BATTLE_BURST"
+  | "BATTLE_PHASE"
   | "BATTLE_START"
   | "BATTLE_ATTACK"
   | "BATTLE_SLASH"
@@ -41,21 +47,28 @@ export const AUDIO_DEFAULTS = {
 export const AUDIO_STORAGE_KEY = "tribe_neon_audio_settings_v1";
 
 export const BGM_ASSETS: Record<BgmScene, string> = {
-  TITLE: "/sounds/bgm/bgm_title.mp3",
-  HOME: "/sounds/bgm/bgm_mypage.mp3",
-  BATTLE: "/sounds/bgm/bgm_battle.mp3",
-  GUILD: "/sounds/bgm/bgm_mypage.mp3",
-  QUEST: "/sounds/bgm/bgm_mypage.mp3",
-  PVP: "/sounds/bgm/bgm_battle.mp3",
-  RAID: "/sounds/bgm/bgm_raid.mp3",
-  GVG: "/sounds/bgm/bgm_gvg.mp3",
+  TITLE: "/sounds/game04/bgm/title.mp3",
+  HOME: "/sounds/game04/bgm/home.mp3",
+  BATTLE: "/sounds/game04/bgm/battle.mp3",
+  GUILD: "/sounds/game04/bgm/home.mp3",
+  QUEST: "/sounds/game04/bgm/quest.mp3",
+  PVP: "/sounds/game04/bgm/battle.mp3",
+  RAID: "/sounds/game04/bgm/raid.mp3",
+  GVG: "/sounds/game04/bgm/invasion.mp3",
+  BATTLE_BOSS: "/sounds/game04/bgm/battle_boss.mp3",
 };
 
-export const SE_ASSETS: Record<SeEvent, string> = {
+export const SE_ASSETS: Record<SeEvent, string | null> = {
+  AWAKEN: "/sounds/game04/se/awaken.mp3",
+  BATTLE_PHASE: "/sounds/game04/se/awaken.mp3",
+  BATTLE_IMPACT: "/sounds/game04/se/impact.mp3",
+  BATTLE_IMPACT_ALL: "/sounds/game04/se/impact_all.mp3",
+  BATTLE_HEAL: "/sounds/game04/se/heal.mp3",
+  BATTLE_BURST: "/sounds/game04/se/burst.mp3",
   UI_TAP: "/sounds/se/se_ui_tap.mp3",
   UI_BACK: "/sounds/se/se_ui_cancel.mp3",
-  UI_MODAL_OPEN: "/sounds/se/se_ui_open.mp3",
-  UI_MODAL_CLOSE: "/sounds/se/se_ui_close.mp3",
+  UI_MODAL_OPEN: "/sounds/se/se_ui_confirm.mp3",
+  UI_MODAL_CLOSE: "/sounds/se/se_ui_cancel.mp3",
   GACHA_START: "/sounds/se/se_gacha_start.mp3",
   GACHA_REVEAL: "/sounds/se/se_gacha_reveal.mp3",
   GACHA_SR: "/sounds/se/se_gacha_reveal.mp3",
@@ -66,17 +79,17 @@ export const SE_ASSETS: Record<SeEvent, string> = {
   QUEST_START: "/sounds/se/se_ui_confirm.mp3",
   QUEST_INSTANT: "/sounds/se/se_ui_confirm.mp3",
   BATTLE_START: "/sounds/se/se_ui_confirm.mp3",
-  BATTLE_ATTACK: "/sounds/se/se_battle_punch.mp3",
-  BATTLE_SLASH: "/sounds/se/se_battle_slash.mp3",
-  BATTLE_GUN: "/sounds/se/se_battle_kick.mp3",
-  BATTLE_SKILL: "/sounds/se/se_battle_skill_start.mp3",
-  BATTLE_DAMAGE: "/sounds/se/se_battle_impact.mp3",
-  BATTLE_CRITICAL: "/sounds/se/se_battle_heavy_hit.mp3",
-  BATTLE_WEAK: "/sounds/se/se_battle_skill_impact.mp3",
-  BATTLE_BUFF: "/sounds/se/se_battle_buff.mp3",
-  BATTLE_DEBUFF: "/sounds/se/se_battle_debuff.mp3",
-  VICTORY: "/sounds/se/se_battle_victory.mp3",
-  DEFEAT: "/sounds/se/se_battle_lose.mp3",
+  BATTLE_ATTACK: "/sounds/game04/se/attack.mp3",
+  BATTLE_SLASH: "/sounds/game04/se/slash.mp3",
+  BATTLE_GUN: "/sounds/game04/se/projectile.mp3",
+  BATTLE_SKILL: "/sounds/game04/se/skill.mp3",
+  BATTLE_DAMAGE: null,
+  BATTLE_CRITICAL: "/sounds/game04/se/critical.mp3",
+  BATTLE_WEAK: null,
+  BATTLE_BUFF: "/sounds/game04/se/buff.mp3",
+  BATTLE_DEBUFF: "/sounds/game04/se/debuff.mp3",
+  VICTORY: "/sounds/game04/se/victory.mp3",
+  DEFEAT: "/sounds/game04/se/defeat.mp3",
   REWARD: "/sounds/se/se_reward_get.mp3",
   MISSION_COMPLETE: "/sounds/se/se_reward_get.mp3",
   MISSION_REWARD: "/sounds/se/se_reward_get.mp3",
@@ -85,13 +98,14 @@ export const SE_ASSETS: Record<SeEvent, string> = {
 
 export const LEGACY_SE_EVENT_MAP: Record<string, SeEvent> = {
   click: "UI_TAP",
-  error: "UI_MODAL_OPEN",
+
   attack: "BATTLE_ATTACK",
   hit: "BATTLE_DAMAGE",
   gacha: "GACHA_START",
 };
 
 export const SE_PRIORITY: Record<SeEvent, number> = {
+  AWAKEN: 4, BATTLE_PHASE: 4, BATTLE_IMPACT: 2, BATTLE_IMPACT_ALL: 2, BATTLE_HEAL: 2, BATTLE_BURST: 4,
   VICTORY: 4,
   DEFEAT: 4,
   GACHA_SSR: 4,

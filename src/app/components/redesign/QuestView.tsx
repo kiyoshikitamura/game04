@@ -1,4 +1,6 @@
 'use client';
+import { useAudio } from '@/audio/AudioProvider';
+import { questBattleBgm } from '@/audio/questBgm';
 import { questDisplayName, enemyDisplayName, enemyRoleLabel } from '@/domain/redesign/contextNames';
 import { growthRewardImage } from '@/domain/redesign/growthAssetPresentation';
 import { useEffect, useRef, useState } from 'react';
@@ -67,6 +69,8 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
   const [detailPanel, setDetailPanel] = useState<'hint' | 'rewards' | null>(null);
   const [settlement, setSettlement] = useState<QuestSettlement | null>(null);
   const [playing, setPlaying] = useState(false);
+  const { playBgm } = useAudio();
+  useEffect(() => { if (!playing) playBgm('QUEST'); }, [playing, playBgm]);
   useEffect(() => { onBattlePlayingChange?.(playing); return () => onBattlePlayingChange?.(false); }, [playing, onBattlePlayingChange]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
@@ -104,7 +108,7 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
   const bossAssets = useArtworkPreload(selectedSubject ? [selectedSubject] : [], 'battle');
   const encounterBackgrounds = useQuestAssets(selectedBoss ? [selectedSubject ? '' : selectedBoss.image, QUEST_AREAS.find(entry => entry.id === selected?.areaId)?.image ?? ''].filter(Boolean) : []);
   const encounterAssets = { ready: bossAssets.ready && encounterBackgrounds.ready, failed: bossAssets.failed || encounterBackgrounds.failed, retry: () => { bossAssets.retry(); encounterBackgrounds.retry(); } };
-  if (playing && settlement) return <BattleView result={settlement.battle} vipActive={vipActive} onComplete={() => setPlaying(false)} title={selected ? `${selectedLabel} ${questDisplayName(selected)}` : selectedLabel} backgroundSrc={QUEST_AREAS.find(entry => entry.id === selected?.areaId)?.image} />;
+  if (playing && settlement) return <BattleView bgmScene={questBattleBgm(selected?.id)} result={settlement.battle} vipActive={vipActive} onComplete={() => setPlaying(false)} title={selected ? `${selectedLabel} ${questDisplayName(selected)}` : selectedLabel} backgroundSrc={QUEST_AREAS.find(entry => entry.id === selected?.areaId)?.image} />;
   return <section className="redesign-quest">
     {!viewAssets.ready && !settlement && !modal && <p role={viewAssets.failed ? "alert" : "status"}>{viewAssets.failed ? <>画像を読み込めませんでした。<button onClick={viewAssets.retry}>再読み込み</button></> : '読み込み中…'}</p>}
     {settlement ? <div className="rq-summary">
