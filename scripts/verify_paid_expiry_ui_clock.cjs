@@ -1,0 +1,50 @@
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const {chromium}=require('@playwright/test');
+const base=process.argv[2]||'http://localhost:3097',out='docs/verification/paid-expiry-20260927/clock';
+const session=JSON.parse(fs.readFileSync(process.env.QA_SESSION_FILE||'.expiry-local/session.json','utf8'));
+const initial=JSON.parse(fs.readFileSync('.expiry-local/initial-state.json','utf8'));
+(async()=>{
+ fs.mkdirSync(out,{recursive:true});const browser=await chromium.launch({headless:true}),report=[];
+ for(const width of [375,390])for(const surface of ['inventory','box','lots']){
+  const ctx=await browser.newContext({viewport:{width,height:844}}),page=await ctx.newPage(),errors=[];
+  page.on('pageerror',e=>errors.push(e.message));
+  await ctx.addInitScript(s=>localStorage.setItem('sb-znakrkaazliexzwihxge-auth-token',JSON.stringify(s)),session);
+  const T=Date.now()+60000;
+  await page.clock.install({time:new Date(T-1000)});await page.clock.pauseAt(new Date(T-1000));
+  await page.route('https://znakrkaazliexzwihxge.supabase.co/**',async route=>{
+   const now=await page.evaluate(()=>Date.now()),expired=now>=T,iso=new Date(T).toISOString();
+   const state={...initial,version:expired?2:1,energyDrinks:expired?14:17};
+   const early={id:'early',item_id:'ENERGY_DRINK',quantity:3,claimed:true,expires_at:iso};
+   const future={id:'future',item_id:'ENERGY_DRINK',quantity:4,claimed:true,expires_at:new Date(T+86400000).toISOString()};
+   const box={id:'box',item_id:'ENERGY_DRINK',quantity:2,claimed:false,expires_at:iso};
+   const url=new URL(route.request().url());let body;
+   if(url.pathname.endsWith('/rpc/billing_refresh_paid_assets'))body={user_id:session.user.id,server_now:new Date(now).toISOString(),state,items:[],dia_paid:0,dia_total:10,lots:expired?[future]:[early,future,box],history:expired?[{id:'early',item_id:'ENERGY_DRINK',expired_quantity:3,expires_at:iso},{id:'box',item_id:'ENERGY_DRINK',expired_quantity:2,expires_at:iso}]:[]};
+   else if(url.pathname.endsWith('/presents'))body=[{id:'box',item_id:'ENERGY_DRINK',quantity:2,status:'UNCLAIMED',expire_at:iso,message:'期限境界QA'}];
+   else if(url.pathname.endsWith('/user_items'))body=[];
+   else if(url.pathname.startsWith('/auth/'))body={};
+   else throw Error('Unexpected fixture request '+url.pathname);
+   await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(body)});
+  });
+  await page.goto(base+'/qa/paid-expiry',{waitUntil:'networkidle'});
+  await page.locator('.g4-inventory-entry').first().waitFor();
+  if(surface==='box')await page.getByRole('button',{name:'プレゼントBOX',exact:true}).click();
+  if(surface==='lots')await page.getByRole('button',{name:'購入分の有効期限',exact:true}).click();
+  if(surface==='lots')await page.locator('.shop-paid-expiry-list li').first().waitFor();
+  await page.clock.runFor(999);
+  const before=surface==='inventory'?await page.locator('.g4-inventory-entry').first().innerText():surface==='box'?await page.getByRole('button',{name:'受け取る',exact:true}).isEnabled():await page.locator('.shop-paid-expiry-list').first().locator('li').count();
+  assert.equal(before,surface==='inventory'?'活力丸\n所持 ×17\n›':surface==='box'?true:3);
+  await page.screenshot({path:path.join(out,surface+'-'+width+'-before.png')});
+  await page.clock.runFor(1);
+  if(surface==='inventory')await page.locator('.g4-inventory-entry').first().filter({hasText:'所持 ×14'}).waitFor();
+  if(surface==='box')await page.getByRole('button',{name:'期限切れ',exact:true}).waitFor();
+  if(surface==='lots')await page.getByRole('dialog').getByText('失効履歴',{exact:true}).waitFor();
+  const at=surface==='inventory'?await page.locator('.g4-inventory-entry').first().innerText():surface==='box'?await page.getByRole('button',{name:'期限切れ',exact:true}).isDisabled():await page.locator('.shop-paid-expiry-list').first().locator('li').count();
+  assert.equal(at,surface==='inventory'?'活力丸\n所持 ×14\n›':surface==='box'?true:1);
+  await page.screenshot({path:path.join(out,surface+'-'+width+'-at.png')});
+  await page.clock.runFor(1);
+  const after=surface==='inventory'?await page.locator('.g4-inventory-entry').first().innerText():surface==='box'?await page.getByRole('button',{name:'期限切れ',exact:true}).isDisabled():await page.locator('.shop-paid-expiry-list').first().locator('li').count();
+  assert.equal(after,at);assert.equal(errors.length,0);report.push({surface,width,before,at,after,after_ms:1,errors});
+  await ctx.close();
+ }
+ await browser.close();fs.writeFileSync(path.join(out,'browser.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report));
+})().catch(e=>{console.error(e.message);process.exit(1)});

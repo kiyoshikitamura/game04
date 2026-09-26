@@ -9,6 +9,8 @@ import CanonicalItemIcon from "./ui/CanonicalItemIcon";
 import { canonicalItemName } from "@/domain/gameplay/canonical/items";
 import { battleDisplayText } from "@/domain/presentation/battleTerminology";
 import "./InboxPanel.css";
+import {usePaidAssetSnapshot} from './redesign/usePaidAssetSnapshot';
+import {isExpired} from '@/domain/redesign/paidExpiry';
 
 // Existing community read recovery bound; never used for present mutations.
 const NEWS_READ_TIMEOUT_MS = 12_000;
@@ -38,6 +40,16 @@ export default function InboxPanel() {
   const [newsLoading, setNewsLoading] = useState(false);
   const [newsError, setNewsError] = useState(false);
   const [newsRetry, setNewsRetry] = useState(0);
+  const paid=usePaidAssetSnapshot(showInboxPanel&&inboxPanelTab==='presents');
+  const [localNow,setLocalNow]=useState(Date.now);
+  useEffect(()=>{
+    if(!showInboxPanel||inboxPanelTab!=='presents')return;
+    const current=paid.data?paid.currentTime():Date.now();
+    const next=(presents||[]).map((p:any)=>Date.parse(p.expire_at)).filter((time:number)=>time>current).sort((a:number,b:number)=>a-b)[0];
+    if(!next)return;
+    const timer=setTimeout(()=>setLocalNow(Date.now()),Math.min(2147483647,Math.max(1,next-current)));
+    return()=>clearTimeout(timer);
+  },[showInboxPanel,inboxPanelTab,presents,localNow,paid.data,paid.currentTime]);
 
   // Refresh on opening so already logged-in players can read a new release.
   // Publication and time-window filtering are enforced by news RLS.
@@ -83,7 +95,7 @@ export default function InboxPanel() {
   };
 
   const unclaimedPresents = (presents || []).filter((p: any) => p.status === "UNCLAIMED");
-  const expired = (p: any) => p.expire_at != null && new Date(p.expire_at).getTime() <= Date.now();
+  const expired = (p: any) => isExpired(p.expire_at,paid.data?paid.currentTime():Date.now());
   const claimableCount = unclaimedPresents.filter((p: any) => !expired(p)).length;
 
   const renderNewsContent = () => (
@@ -138,7 +150,7 @@ export default function InboxPanel() {
               <div className="inbox-present-info">
                 <div className="inbox-present-title">{battleDisplayText(p.title || p.message)}</div>
                 <div className="inbox-present-reward">{(() => { const itemId = String(p.itemId || p.item_id || ""); const quantity = Number(p.qty ?? p.quantity ?? 0); return <><PresentRewardIcon itemId={itemId} /><span>{canonicalItemName(itemId)} <strong>× {quantity.toLocaleString()}</strong></span></>; })()}</div>
-                <div className="inbox-present-expire">{p.expireText || "期限なし"}</div>
+                <div className="inbox-present-expire">{expired(p)?'期限切れ':p.expire_at?new Date(p.expire_at).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'})+' 失効（日本時間）':p.expireText || "期限なし"}</div>
               </div>
               <OutlawButton
                 variant="primary"

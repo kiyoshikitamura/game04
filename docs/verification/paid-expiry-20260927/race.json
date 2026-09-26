@@ -1,0 +1,78 @@
+{
+  "requestId": "22450b64-6f97-4d1d-8d07-d897baa2f4a9",
+  "claimStatuses": [
+    400,
+    200
+  ],
+  "useStatuses": [
+    200,
+    503
+  ],
+  "refreshStatuses": [
+    200,
+    200,
+    200,
+    200
+  ],
+  "replayStatus": 200,
+  "expected": 15,
+  "actual": 15,
+  "history": [
+    {
+      "id": "a4b3b680-6e2d-48ba-b2ac-92ca4292c6d5",
+      "item_id": "ENERGY_DRINK",
+      "issued_at": "2026-05-29T22:46:58.455229+00:00",
+      "claimed_at": null,
+      "expires_at": "2026-09-26T22:46:58.455229+00:00",
+      "issued_quantity": 2,
+      "expired_quantity": 2,
+      "consumed_quantity": 0,
+      "remaining_quantity": 0
+    },
+    {
+      "id": "eb6de598-85f2-4328-b91a-f4e9198b7a66",
+      "item_id": "ENERGY_DRINK",
+      "issued_at": "2026-05-29T22:46:58.455229+00:00",
+      "claimed_at": "2026-09-26T22:45:28.502798+00:00",
+      "expires_at": "2026-09-26T22:46:58.455229+00:00",
+      "issued_quantity": 3,
+      "expired_quantity": 3,
+      "consumed_quantity": 0,
+      "remaining_quantity": 0
+    },
+    {
+      "id": "936e0eef-7e6c-44cb-bc8e-b0aceec0000b",
+      "item_id": "ENERGY_DRINK",
+      "issued_at": "2026-05-29T22:49:01.62511+00:00",
+      "claimed_at": "2026-09-26T22:49:00.649509+00:00",
+      "expires_at": "2026-09-26T22:49:01.62511+00:00",
+      "issued_quantity": 3,
+      "expired_quantity": 3,
+      "consumed_quantity": 0,
+      "remaining_quantity": 0
+    },
+    {
+      "id": "43a544e8-855d-46cb-a398-c8db5e22089a",
+      "item_id": "ENERGY_DRINK",
+      "issued_at": "2026-05-30T22:46:58.455229+00:00",
+      "claimed_at": "2026-09-26T22:45:28.512202+00:00",
+      "expires_at": "2026-09-27T22:46:58.455229+00:00",
+      "issued_quantity": 4,
+      "expired_quantity": 0,
+      "consumed_quantity": 1,
+      "remaining_quantity": 3
+    },
+    {
+      "id": "7b647745-0587-4d03-b7c5-96bfebb8e303",
+      "item_id": "ENERGY_DRINK",
+      "issued_at": "2026-05-30T22:49:00.62511+00:00",
+      "claimed_at": "2026-09-26T22:49:09.747763+00:00",
+      "expires_at": "2026-09-27T22:49:00.62511+00:00",
+      "issued_quantity": 2,
+      "expired_quantity": 0,
+      "consumed_quantity": 0,
+      "remaining_quantity": 2
+    }
+  ],
+  "workerDenied": 403
+}
