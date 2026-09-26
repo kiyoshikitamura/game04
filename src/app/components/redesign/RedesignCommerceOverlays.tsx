@@ -76,7 +76,7 @@ export default function RedesignCommerceOverlays() {
   };
 
  return <>
- {showLoginBonusModal && (loginBonusClaimResult as {masterVersion?:string}|null)?.masterVersion === LOGIN_BONUS_VERSION && <FormalLoginBonusModal currentStep={userLoginBonus?.current_step || 1} onClose={() => setShowLoginBonusModal(false)} />}
+ {showLoginBonusModal && (loginBonusClaimResult as {masterVersion?:string}|null)?.masterVersion === LOGIN_BONUS_VERSION && <FormalLoginBonusModal currentStep={userLoginBonus?.current_step || 1} totalLogins={userLoginBonus?.total_logins} onClose={() => setShowLoginBonusModal(false)} />}
       {/* 🎰 ガチャ演出モーダル (FLASHING / SHOW_RESULTS) */}
       {scoutAnimationState !== null && isCharacterReveal && (scoutAnimationState === "READY" || scoutAnimationState === "SHOW_RESULTS") ? (
         <CharacterGachaPresentation results={scoutResults} tutorial={false}

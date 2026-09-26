@@ -13,9 +13,10 @@ import { useGame } from '../../context/GameContext';
 import { buildDirectMessageConversations } from '../../context/hooks/directMessageConversations';
 import Modal from './Modal';
 import HomeEffect from './HomeEffect';
+import CowboyDisplay from './visual-bench/CowboyDisplay';
 import { useCharacterImageReadiness } from './CharacterImageReadiness';
 import { characterArt, characterBackground } from '@/theme/creativeAssets';
-import { HOME_BACKGROUNDS, isHomeBackgroundUnlocked, resolveHomeBackground } from '@/domain/redesign/home';
+import { HOME_BACKGROUNDS, isHomeBackgroundUnlocked, resolveHomeBackground, sortedHomeBackgrounds } from '@/domain/redesign/home';
 import './HomeView.css';
 import { CommunityBadges, useCommunityProfiles } from './CommunityIdentity';
 import { COMMUNITY_ACTIVITY_TYPES, COMMUNITY_MESSAGE_MAX_LENGTH, uniqueCommunityRows } from '@/domain/redesign/community';
@@ -129,7 +130,7 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
     <div className={`g4-home ${encounterActive ? 'has-encounter' : ''}`} style={{ backgroundImage: `url(${background.image})` }} aria-busy={!homeImages.ready}>
       <div className="g4-home-stage">
         <section className="g4-home-visual" aria-label="お気に入り武将">
-          {homeImages.ready && <><HomeEffect backgroundImage={background.image} /><img className="g4-home-person" src={personImage} alt={favorite.name} /></>}
+          {homeImages.ready && <><HomeEffect backgroundImage={background.image} /><div className="g4-home-cowboy"><CowboyDisplay characterId={favorite.id} name={favorite.name} /></div></>}
           {!homeImages.ready && <div className="g4-home-loading" role="status">{homeImages.error ? <><span>画像を読み込めませんでした</span><button className="rd-button" onClick={homeImages.retry}>再読み込み</button></> : <span className="g4-home-spinner" aria-label="読み込み中" />}</div>}
         </section>
         <nav className="g4-home-shortcuts" aria-label="本陣の操作">
@@ -152,7 +153,7 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
     {selector && <Modal closeDisabled={saving} title="切替" className="g4-home-selector" onClose={() => { if (!saveLock.current) setSelector(false); }} footer={<div className="g4-home-selector-actions"><button className="rd-button" disabled={saving} onClick={() => setSelector(false)}>閉じる</button><button className="rd-button rd-primary" disabled={saving || !dialogImages.ready || !ownedCharacters.some(c => c.id === draftCharacter)} onClick={() => void saveHome()}>{saving ? '保存中…' : '保存'}</button></div>}>
       {!dialogImages.ready ? <div className="g4-home-loading" role="status">{dialogImages.error ? <><p>画像を読み込めませんでした</p><button className="rd-button" onClick={dialogImages.retry}>再読み込み</button></> : <span className="g4-home-spinner" aria-label="読み込み中" />}</div> : <>
         <h3>武将</h3><div className="g4-home-character-choices">{ownedCharacters.map(c => <button key={c.id} disabled={saving} aria-pressed={draftCharacter === c.id} className="g4-home-choice" onClick={() => setDraftCharacter(c.id)}><span className="g4-home-choice-art" style={{ backgroundImage: `url(${characterBackground(c) ?? background.image})` }}><img src={characterArt(c, 'card') ?? c.image} alt="" /></span><strong>{c.name}</strong><small>{draftCharacter === c.id ? '選択中' : '\u00a0'}</small></button>)}</div>
-        <h3>背景</h3><div className="g4-home-background-choices">{HOME_BACKGROUNDS.map(b => { const unlocked = isHomeBackgroundUnlocked(b, state.clearedStages, state.unlockedHomeBackgroundIds,state.earlyProgress); return <button key={b.id} disabled={saving || !unlocked} aria-pressed={draftBackground === b.id} className={`g4-home-choice ${unlocked ? '' : 'is-locked'}`} onClick={() => setDraftBackground(b.id)}><span className="g4-home-background-art"><img src={b.image} alt="" /></span><strong>{b.name}</strong><small>{unlocked ? draftBackground === b.id ? '選択中' : '\u00a0' : b.conditionLabel}</small></button>; })}</div>
+        <h3>背景</h3><div className="g4-home-background-choices">{sortedHomeBackgrounds(state.clearedStages, state.unlockedHomeBackgroundIds, state.earlyProgress).map(b => { const unlocked = isHomeBackgroundUnlocked(b, state.clearedStages, state.unlockedHomeBackgroundIds,state.earlyProgress); return <button key={b.id} disabled={saving || !unlocked} aria-pressed={draftBackground === b.id} className={`g4-home-choice ${unlocked ? '' : 'is-locked'}`} onClick={() => setDraftBackground(b.id)}><span className="g4-home-background-art"><img src={b.image} alt="" /></span><strong>{b.name}</strong><small>{unlocked ? draftBackground === b.id ? '選択中' : '\u00a0' : b.conditionLabel}</small></button>; })}</div>
       </>}{saveError && <p className="g4-home-error" role="alert">{saveError}</p>}
     </Modal>}
     {profileId && <Modal title="プロフィール" onClose={() => setProfileId('')} footer={profileId !== state.userId ? <button className="rd-button" onClick={() => { game.setDmRecipientId(profileId); setProfileId(''); setCommunity('dm'); setExpanded(true); }}>DMを送る</button> : undefined}>

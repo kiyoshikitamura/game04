@@ -10,6 +10,7 @@ import type { RedesignState } from '@/domain/redesign/types';
 import BattleView from './BattleView';
 import HomeEffect from './HomeEffect';
 import TutorialSceneAssets from '@/app/qa/tutorial/TutorialSceneAssets';
+import CowboyDisplay from './visual-bench/CowboyDisplay';
 import TypewriterText from './TypewriterText';
 import { TUTORIAL_ASSETS } from '@/app/qa/tutorial/assets';
 import '@/app/qa/tutorial/tutorial.css';
@@ -34,8 +35,8 @@ export default function IntegratedTutorial({state,busy,onNext}:{state:RedesignSt
  {scene.id === 'battle' && practice ? <BattleView requirePlaybackCompletion result={practice} vipActive={false} onComplete={next} title="模擬戦" backgroundSrc={BACKGROUNDS.battle} /> :
       <main key={scene.id} className={`tutorial-scene ${world ? 'is-world' : ''}`} style={{ backgroundImage: `linear-gradient(0deg, #160f0beb, transparent 65%), url('${background}')` }} data-scene={scene.id}>
         {world && <HomeEffect effectId={scene.effectId} />}
-        <div className={`tutorial-cast count-${cast.length}`} aria-label={world ? '乱世の武将たち' : '豊臣秀吉'}>
-          {!acquisition && cast.map(id => <img key={id} src={characterArt(castMember(id), 'full')} alt={castMember(id).name} />)}
+        <div className={`tutorial-cast count-${cast.length} ${!world && !acquisition ? 'is-cowboy' : ''}`} aria-label={world ? '乱世の武将たち' : '豊臣秀吉'}>
+          {!acquisition && cast.map(id => !world ? <CowboyDisplay key={id} characterId={id} name={castMember(id).name} /> : <img key={id} src={characterArt(castMember(id), 'full')} alt={castMember(id).name} />)}
           {scene.id === 'characters' && <div className="tutorial-rewards">{STARTERS.map(id => <figure key={id}><div className="tutorial-card-art"><img src={characterArt(castMember(id), 'card')} alt={castMember(id).name} /><img className="tutorial-card-frame" src="/creative/ui/frame-R.png" alt="" /></div><figcaption><b>{id === 'char_aoi_01' ? 'お市' : castMember(id).name}</b><span>R　Lv.1・覚醒0</span></figcaption></figure>)}</div>}
           {scene.id === 'skills' && <div className="tutorial-rewards is-skills">{STARTER_SKILLS.map(id => { const skill = getFormalOwnedSkill(id, 0); return <figure key={id}><div className="tutorial-skill-art"><img src={skill.image} alt={skill.name} /></div><figcaption><b>{skill.name}</b><span>{skill.rarity}　LB0</span></figcaption></figure>; })}</div>}
         </div>

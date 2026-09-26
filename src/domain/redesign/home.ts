@@ -12,10 +12,9 @@ export type HomeBackground = {
   conditionLabel: string;
 };
 
-/** Existing saved scenery remains available; area scenery shares the quest authority. */
+/** One initial choice; retired gate IDs resolve to town without deleting the source asset. */
 export const HOME_BACKGROUNDS: HomeBackground[] = [
-  { id: 'castle-approach', name: '夕桜の城門', image: '/bg/sengoku/castle-approach.jpg', conditionLabel: '' },
-  { id: 'castle-town', name: '夕桜の城下町', image: '/bg/sengoku/castle-town.jpg', conditionLabel: '' },
+  { id: 'castle-town', name: '夕桜の城下街', image: '/bg/sengoku/castle-town.jpg', conditionLabel: '' },
   ...SSR_HOME_BACKGROUNDS.map(background => ({
     ...background, conditionLabel: `${background.characterName}の入手で選択可能`,
   })),
@@ -26,7 +25,7 @@ export const HOME_BACKGROUNDS: HomeBackground[] = [
 ];
 
 const LEGACY_BACKGROUND_IDS: Record<string, string> = {
-  bg_default: 'castle-approach', bg_kabukicho: 'castle-town',
+  bg_default: 'castle-town', bg_kabukicho: 'castle-town', 'castle-approach': 'castle-town',
 };
 
 function findHomeBackground(id: string | undefined): HomeBackground | undefined {
@@ -76,4 +75,13 @@ export function applyHomeSelection(state: RedesignState, payload: Record<string,
     // Preserve supplied legacy IDs rather than migrating existing saves implicitly.
     ...(typeof payload.backgroundId === 'string' ? { homeBackgroundId: payload.backgroundId } : {}),
   };
+}
+
+/** Unlock status first; stable master order within initial / quest / SSR groups. */
+export function sortedHomeBackgrounds(clearedStages: readonly string[], unlockedIds: readonly string[] = [], progress?: RedesignState['earlyProgress']): HomeBackground[] {
+  const category = (b: HomeBackground) => b.id === 'castle-town' ? 0 : b.areaId ? 1 : 2;
+  return HOME_BACKGROUNDS.map((background, index) => ({ background, index,
+    unlocked: isHomeBackgroundUnlocked(background, clearedStages, unlockedIds, progress) })).sort((a, b) =>
+      Number(b.unlocked) - Number(a.unlocked) || category(a.background) - category(b.background) || a.index - b.index
+    ).map(row => row.background);
 }
