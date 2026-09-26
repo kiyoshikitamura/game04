@@ -1,7 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import "./OutlawButton.css";
 import ActionButton from "./ActionButton";
-import { useGame } from "../../context/GameContext";
+import { GameContext } from "../../context/GameContext";
 
 type ButtonVariant = "primary" | "secondary" | "ghost" | "danger" | "neon";
 
@@ -23,7 +23,7 @@ export default function OutlawButton({
   children,
   ...restProps
 }: OutlawButtonProps) {
-  const { playCyberSe } = useGame();
+  const game = useContext(GameContext);
   const [actionPending, setActionPending] = useState(false);
   const actionPendingRef = useRef(false);
   const busy = isLoading || actionPending;
@@ -33,7 +33,7 @@ export default function OutlawButton({
     actionPendingRef.current = true;
     setActionPending(true);
     // デフォルトでクリック音を鳴らす（disabledでない場合）
-    playCyberSe("click");
+    game?.playCyberSe?.("click");
 
     let result: unknown;
     try {

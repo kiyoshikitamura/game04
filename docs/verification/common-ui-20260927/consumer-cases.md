@@ -1,9 +1,18 @@
 # 画面・状態の適用確認表
 
-{"適用確認済み":172,"未確認":5,"対象外":1}。静的抽出項目はこの合格数に加算しない。ケースごとに確認範囲を限定し、同じ画面でも合成と実APIは別記録。
+{"適用確認済み":181,"未確認":5,"対象外":1}。静的抽出項目はこの合格数に加算しない。ケースごとに確認範囲を限定し、同じ画面でも合成と実APIは別記録。
 
 |ID / 画面・状態|正本 / 使用部品|確認方法・寸法|状態|証跡 / 限界|
 |---|---|---|---|---|
+|battle-name:battle-pause / 戦闘操作・名前重複 / battle-pause|§19 / BattleView / CanonicalDialog / IntegratedTutorial|合成状態・実部品 375×480, 390×480|適用確認済み|battle-name-report.json 該当画面の表示・横溢れ・導線確認。全分岐を意味しない。|
+|battle-name:battle-retire-confirm / 戦闘操作・名前重複 / battle-retire-confirm|§19 / BattleView / CanonicalDialog / IntegratedTutorial|合成状態・実部品 375×480, 390×480|適用確認済み|battle-name-report.json 該当画面の表示・横溢れ・導線確認。全分岐を意味しない。|
+|battle-name:name-duplicate / 戦闘操作・名前重複 / name-duplicate|§19 / BattleView / CanonicalDialog / IntegratedTutorial|合成状態・実部品 375×480, 390×480|適用確認済み|battle-name-report.json 該当画面の表示・横溢れ・導線確認。全分岐を意味しない。|
+|battle-name:name-reentry / 戦闘操作・名前重複 / name-reentry|§19 / BattleView / CanonicalDialog / IntegratedTutorial|合成状態・実部品 375×480, 390×480|適用確認済み|battle-name-report.json 該当画面の表示・横溢れ・導線確認。全分岐を意味しない。|
+|member-dialogs:raid-member-leave / 他ユーザー関連の確認 / raid-member-leave|§19 / RaidView / HomeView / CanonicalDialog|合成状態・実部品 375×480, 390×480|適用確認済み|member-dialogs-report.json 該当画面の表示・横溢れ・導線確認。全分岐を意味しない。|
+|member-dialogs:raid-member-leave-error / 他ユーザー関連の確認 / raid-member-leave-error|§19 / RaidView / HomeView / CanonicalDialog|合成状態・実部品 375×480, 390×480|適用確認済み|member-dialogs-report.json 該当画面の表示・横溢れ・導線確認。全分岐を意味しない。|
+|member-dialogs:public-profile-failure / 他ユーザー関連の確認 / public-profile-failure|§19 / RaidView / HomeView / CanonicalDialog|合成状態・実部品 375×480, 390×480|適用確認済み|member-dialogs-report.json 該当画面の表示・横溢れ・導線確認。全分岐を意味しない。|
+|member-dialogs:public-profile-retry-long-bio / 他ユーザー関連の確認 / public-profile-retry-long-bio|§19 / RaidView / HomeView / CanonicalDialog|合成状態・実部品 375×480, 390×480|適用確認済み|member-dialogs-report.json 該当画面の表示・横溢れ・導線確認。全分岐を意味しない。|
+|member-dialogs:public-profile-bottom / 他ユーザー関連の確認 / public-profile-bottom|§19 / RaidView / HomeView / CanonicalDialog|合成状態・実部品 375×480, 390×480|適用確認済み|member-dialogs-report.json 該当画面の表示・横溢れ・導線確認。全分岐を意味しない。|
 |entry-consumers:entry-loading / 起動・タイトル・序盤・準備・確認 / entry-loading|§19 / Game04EntryState / TitleView / EarlyRetentionGuide / PreparationModal / ConfirmDialog|合成状態 375×480, 390×480|適用確認済み|consumer-states-report.json 該当画面の表示・横溢れ・導線確認。全分岐を意味しない。|
 |entry-consumers:entry-error / 起動・タイトル・序盤・準備・確認 / entry-error|§19 / Game04EntryState / TitleView / EarlyRetentionGuide / PreparationModal / ConfirmDialog|合成状態 375×480, 390×480|適用確認済み|consumer-states-report.json 該当画面の表示・横溢れ・導線確認。全分岐を意味しない。|
 |entry-consumers:entry-maintenance / 起動・タイトル・序盤・準備・確認 / entry-maintenance|§19 / Game04EntryState / TitleView / EarlyRetentionGuide / PreparationModal / ConfirmDialog|合成状態 375×480, 390×480|適用確認済み|consumer-states-report.json 該当画面の表示・横溢れ・導線確認。全分岐を意味しない。|

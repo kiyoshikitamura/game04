@@ -3,6 +3,8 @@ const fs=require('fs');const dir='docs/verification/common-ui-20260927',ev=dir+'
 const cases=[];
 const add=(id,surface,rule,components,mode,evidence,dimensions,notes='',status='適用確認済み')=>cases.push({id,surface,rule,components,mode,evidence,dimensions,status,notes});
 for(const [group,file,surface,parts,mode] of [
+ ['battle-name','battle-name-report.json','戦闘操作・名前重複','BattleView / CanonicalDialog / IntegratedTutorial','合成状態・実部品'],
+ ['member-dialogs','member-dialogs-report.json','他ユーザー関連の確認','RaidView / HomeView / CanonicalDialog','合成状態・実部品'],
  ['entry-consumers','consumer-states-report.json','起動・タイトル・序盤・準備・確認','Game04EntryState / TitleView / EarlyRetentionGuide / PreparationModal / ConfirmDialog','合成状態'],
  ['storage-states','storage-states-report.json','BOX・お知らせ・所持品の状態','InboxPanel / InventoryView / CanonicalDialog','合成API応答・実部品'],
  ['home-states','home-states-report.json','本陣交流の失敗・回復','HomeView / ActionButton / Modal','合成API応答・実部品'],

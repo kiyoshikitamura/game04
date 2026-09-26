@@ -31,3 +31,5 @@ assert(read("src/app/components/TitleView.tsx").includes('presentation="canonica
 assert(!read("src/app/components/redesign/RedesignCommerceOverlays.tsx").includes("scoutResults"),"Current GAME04 does not mount legacy scout overlays");
 assert(read("src/app/page.tsx").includes("<Game04EntryState error="),"Startup failure has a visible retry state");
 assert(read("src/app/components/ui/ConfirmDialog.tsx").includes("busyLabel: confirmPendingText"),"Confirmation keeps stable action labels during pending");
+
+assert(!read("src/app/components/ui/OutlawButton.tsx").includes("useGame()"),"Shared dialog buttons must render without a GameProvider");

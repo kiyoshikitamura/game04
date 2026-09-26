@@ -1,11 +1,110 @@
 {
   "counts": {
-    "適用確認済み": 172,
+    "適用確認済み": 181,
     "未確認": 5,
     "対象外": 1
   },
   "definition": "画面・状態のケース。幅違いを重複加算せず、全画面数を意味しない。合成/実APIを区別。",
   "cases": [
+    {
+      "id": "battle-name:battle-pause",
+      "surface": "戦闘操作・名前重複 / battle-pause",
+      "rule": "§19",
+      "components": "BattleView / CanonicalDialog / IntegratedTutorial",
+      "mode": "合成状態・実部品",
+      "evidence": "battle-name-report.json",
+      "dimensions": "375×480, 390×480",
+      "status": "適用確認済み",
+      "notes": "該当画面の表示・横溢れ・導線確認。全分岐を意味しない。"
+    },
+    {
+      "id": "battle-name:battle-retire-confirm",
+      "surface": "戦闘操作・名前重複 / battle-retire-confirm",
+      "rule": "§19",
+      "components": "BattleView / CanonicalDialog / IntegratedTutorial",
+      "mode": "合成状態・実部品",
+      "evidence": "battle-name-report.json",
+      "dimensions": "375×480, 390×480",
+      "status": "適用確認済み",
+      "notes": "該当画面の表示・横溢れ・導線確認。全分岐を意味しない。"
+    },
+    {
+      "id": "battle-name:name-duplicate",
+      "surface": "戦闘操作・名前重複 / name-duplicate",
+      "rule": "§19",
+      "components": "BattleView / CanonicalDialog / IntegratedTutorial",
+      "mode": "合成状態・実部品",
+      "evidence": "battle-name-report.json",
+      "dimensions": "375×480, 390×480",
+      "status": "適用確認済み",
+      "notes": "該当画面の表示・横溢れ・導線確認。全分岐を意味しない。"
+    },
+    {
+      "id": "battle-name:name-reentry",
+      "surface": "戦闘操作・名前重複 / name-reentry",
+      "rule": "§19",
+      "components": "BattleView / CanonicalDialog / IntegratedTutorial",
+      "mode": "合成状態・実部品",
+      "evidence": "battle-name-report.json",
+      "dimensions": "375×480, 390×480",
+      "status": "適用確認済み",
+      "notes": "該当画面の表示・横溢れ・導線確認。全分岐を意味しない。"
+    },
+    {
+      "id": "member-dialogs:raid-member-leave",
+      "surface": "他ユーザー関連の確認 / raid-member-leave",
+      "rule": "§19",
+      "components": "RaidView / HomeView / CanonicalDialog",
+      "mode": "合成状態・実部品",
+      "evidence": "member-dialogs-report.json",
+      "dimensions": "375×480, 390×480",
+      "status": "適用確認済み",
+      "notes": "該当画面の表示・横溢れ・導線確認。全分岐を意味しない。"
+    },
+    {
+      "id": "member-dialogs:raid-member-leave-error",
+      "surface": "他ユーザー関連の確認 / raid-member-leave-error",
+      "rule": "§19",
+      "components": "RaidView / HomeView / CanonicalDialog",
+      "mode": "合成状態・実部品",
+      "evidence": "member-dialogs-report.json",
+      "dimensions": "375×480, 390×480",
+      "status": "適用確認済み",
+      "notes": "該当画面の表示・横溢れ・導線確認。全分岐を意味しない。"
+    },
+    {
+      "id": "member-dialogs:public-profile-failure",
+      "surface": "他ユーザー関連の確認 / public-profile-failure",
+      "rule": "§19",
+      "components": "RaidView / HomeView / CanonicalDialog",
+      "mode": "合成状態・実部品",
+      "evidence": "member-dialogs-report.json",
+      "dimensions": "375×480, 390×480",
+      "status": "適用確認済み",
+      "notes": "該当画面の表示・横溢れ・導線確認。全分岐を意味しない。"
+    },
+    {
+      "id": "member-dialogs:public-profile-retry-long-bio",
+      "surface": "他ユーザー関連の確認 / public-profile-retry-long-bio",
+      "rule": "§19",
+      "components": "RaidView / HomeView / CanonicalDialog",
+      "mode": "合成状態・実部品",
+      "evidence": "member-dialogs-report.json",
+      "dimensions": "375×480, 390×480",
+      "status": "適用確認済み",
+      "notes": "該当画面の表示・横溢れ・導線確認。全分岐を意味しない。"
+    },
+    {
+      "id": "member-dialogs:public-profile-bottom",
+      "surface": "他ユーザー関連の確認 / public-profile-bottom",
+      "rule": "§19",
+      "components": "RaidView / HomeView / CanonicalDialog",
+      "mode": "合成状態・実部品",
+      "evidence": "member-dialogs-report.json",
+      "dimensions": "375×480, 390×480",
+      "status": "適用確認済み",
+      "notes": "該当画面の表示・横溢れ・導線確認。全分岐を意味しない。"
+    },
     {
       "id": "entry-consumers:entry-loading",
       "surface": "起動・タイトル・序盤・準備・確認 / entry-loading",
