@@ -11,6 +11,7 @@ import type { BattleResult } from '@/domain/redesign/battle';
 import CanonicalDialog from '../ui/CanonicalDialog';
 import PreparationModal from './PreparationModal';
 import BattleView from './BattleView';
+import '../raid/RaidApprovedVisual.css';
 import './QuestView.css';
 import { useQuestAssets } from './questAssets';
 import { growthRewardLabel } from '@/domain/redesign/growthReward';
@@ -21,7 +22,7 @@ import { characterArt } from '@/theme/creativeAssets';
 import { BossDisplay, useArtworkPreload, type DisplaySubject } from './visual-bench/CharacterDisplays';
 
 export interface QuestSettlement { playerGrowth?: import('@/utils/redesignApi').RedesignResponse['playerGrowth']; battle: BattleResult; rewards: Reward[]; firstClear: boolean; encounterRaidId?: string | null; }
-const REWARD_LABELS: Record<Reward['kind'], string> = {ticket:'スペシャル券', character_exp_item: '武将EXP', equipment_exp_item: '装備EXP', generic_soul: '汎用魂', soul_selector: '魂選択', character: '武将', skill: 'スキル', cash: '銭', character_material: '武将育成素材', skill_material: 'スキルLB素材', equipment_material: '装備育成素材', equipment_lb: '装備LB素材', soul: '武将の魂', equipment: '装備', unlock_item: '侵攻令' };
+const REWARD_LABELS: Record<Reward['kind'] | 'free_diamonds', string> = {free_diamonds:'無償輝石', ticket:'スペシャル券', character_exp_item: '武将EXP', equipment_exp_item: '装備EXP', generic_soul: '汎用魂', soul_selector: '魂選択', character: '武将', skill: 'スキル', cash: '銭', character_material: '武将育成素材', skill_material: 'スキルLB素材', equipment_material: '装備育成素材', equipment_lb: '装備LB素材', soul: '武将の魂', equipment: '装備', unlock_item: '侵攻令' };
 function rewardLabel(reward: Reward) {
   const growthLabel = growthRewardLabel(reward); if(growthLabel) return growthLabel;
   if (reward.kind === 'ticket') return ({SPECIAL_TICKET_CHARACTER:'武将召喚券',SPECIAL_TICKET_SKILL:'スキル召喚券',SPECIAL_TICKET_EQUIPMENT:'装備召喚券'} as Record<string,string>)[reward.id??''] ?? 'スペシャル券';
@@ -45,6 +46,13 @@ function rewardIcon(reward: Reward) {
 }
 function Rewards({ rewards }: { rewards: Reward[] }) {
   return rewards.length ? <ul className="rq-rewards">{rewards.map((reward, index) => <li key={`${reward.kind}-${reward.id ?? ''}-${index}`}><span className="rq-reward-icon">{rewardIcon(reward) && <img src={rewardIcon(reward)!} alt="" />}</span><span>{rewardLabel(reward)}</span><strong>×{reward.amount.toLocaleString()}</strong></li>)}</ul> : <p className="rq-muted">なし</p>;
+}
+export function ResultRewards({settlement,stage}:{settlement:QuestSettlement;stage:QuestStage|null}) {
+ const remaining=new Map<string,number>();
+ if(settlement.firstClear)for(const r of stage?.firstRewards??[])remaining.set(r.kind+':'+(r.id??''),(remaining.get(r.kind+':'+(r.id??''))??0)+r.amount);
+ const rows=settlement.rewards.flatMap(r=>{const key=r.kind+':'+(r.id??''),first=Math.min(r.amount,remaining.get(key)??0);remaining.set(key,(remaining.get(key)??0)-first);return [...(r.amount>first?[{...r,amount:r.amount-first,first:false}]:[]),...(first>0?[{...r,amount:first,first:true}]:[])];});
+ const growth=settlement.playerGrowth;
+ return <><ul className="recorded-rewards">{rows.map((r,i)=><li key={i}>{rewardIcon(r)&&<img src={rewardIcon(r)!} alt=""/>}<span>{rewardLabel(r)} {r.first&&<b className="recorded-first">初回</b>}</span><strong>×{r.amount.toLocaleString()}</strong></li>)}</ul>{!rows.length&&<p>獲得報酬なし</p>}{growth&&<section className="recorded-growth"><small>PLAYER EXP</small><h3>+{growth.gainedExp.toLocaleString()}</h3>{growth.beforeLevel!==undefined&&growth.level!==undefined&&<p>Lv.{growth.beforeLevel} → Lv.{growth.level}</p>}{growth.energyRecovered!==undefined&&<p>行動力回復 +{growth.energyRecovered}（{growth.energy}/{growth.energyMax}）</p>}</section>}</>;
 }
 function bossSubject(enemy: QuestStage['waves'][number][number]): DisplaySubject | null {
   const match = roster.find(candidate => candidate.name === enemy.name);
@@ -109,8 +117,8 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
   const bossAssets = useArtworkPreload(selectedSubject ? [selectedSubject] : [], 'battle');
   const encounterBackgrounds = useQuestAssets(selectedBoss ? [selectedSubject ? '' : selectedBoss.image, QUEST_AREAS.find(entry => entry.id === selected?.areaId)?.image ?? ''].filter(Boolean) : []);
   const encounterAssets = { ready: bossAssets.ready && encounterBackgrounds.ready, failed: bossAssets.failed || encounterBackgrounds.failed, retry: () => { bossAssets.retry(); encounterBackgrounds.retry(); } };
-  if (playing && settlement) return <BattleView bgmScene={questBattleBgm(selected?.id)} result={settlement.battle} vipActive={vipActive} onComplete={() => setPlaying(false)} title={selected ? `${selectedLabel} ${questDisplayName(selected)}` : selectedLabel} backgroundSrc={QUEST_AREAS.find(entry => entry.id === selected?.areaId)?.image} />;
-  return <section className="redesign-quest" style={area ? { backgroundImage: `linear-gradient(#120d0860,#120d0890),url("${area.image}")` } : undefined}>
+  if (playing && settlement) return <BattleView resultRewards={<ResultRewards settlement={settlement} stage={selected}/>} resultActions={settlement.encounterRaidId ? <button onClick={()=>setPlaying(false)}>遭遇した強敵を確認</button> : <>{settlement.battle.outcome==='win'&&followingStage&&isQuestStageUnlocked(followingStage.id,state.clearedStages)&&<button onClick={()=>{setPlaying(false);setSettlement(null);setAreaId(followingStage.areaId);openStage(followingStage);}}>次のステージ</button>}<button onClick={()=>{setPlaying(false);setSettlement(null);setSelected(null);}}>ステージ一覧</button></>}  bgmScene={questBattleBgm(selected?.id)} result={settlement.battle} vipActive={vipActive} onComplete={() => setPlaying(false)} title={selected ? `${selectedLabel} ${questDisplayName(selected)}` : selectedLabel} backgroundSrc={QUEST_AREAS.find(entry => entry.id === selected?.areaId)?.image} />;
+  return <section className="redesign-quest" style={{ backgroundImage: `url("${area?.image ?? QUEST_AREAS[0].image}")` }}>
     {!viewAssets.ready && !settlement && !modal && <p role={viewAssets.failed ? "alert" : "status"}>{viewAssets.failed ? <>画像を読み込めませんでした。<button onClick={viewAssets.retry}>再読み込み</button></> : <LoadingSpinner />}</p>}
     {settlement ? <div className="rq-summary">
       <h2>{settlement.battle.outcome === 'win' ? 'ステージクリア' : '再び、戦場へ'}</h2>
@@ -133,7 +141,8 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
         })}</div></> : <><h2>出陣</h2><div className="rq-scroll rq-area-list" aria-label="エリア一覧">{visibleAreas.map(entry => {
           const cleared = entry.stages.every(stage => state.clearedStages.includes(stage.id));
           const unlocked = isQuestStageUnlocked(entry.stages[0].id, state.clearedStages);
-          return <button key={entry.id} disabled={!unlocked || !viewAssets.ready} className={`rq-area ${entry.id === current.areaId ? 'is-current' : ''}`} style={{ backgroundImage: `linear-gradient(0deg,#0c080690,transparent 72%),url("${entry.image}")` }} onClick={() => setAreaId(entry.id)}><strong>{entry.name}</strong><span className={`rq-area-status ${cleared ? 'is-cleared' : unlocked ? 'is-current' : 'is-locked'}`}>{unlocked && <img src="/ui/sengoku/07-flower-crest.png" alt="" />}<span className="rq-area-status-text">{cleared ? '攻略済' : unlocked ? '攻略中' : '未解放'}</span></span></button>;
+          const last=entry.stages.at(-1)!;const boss=selectRepresentativeBoss(last.waves.at(-1)!);const subject=bossSubject(boss);const bossImage=subject?characterArt(subject,'full'):boss.image;
+          return <button key={entry.id} disabled={!unlocked || !viewAssets.ready} className="raid-approved-card raid-area-card" onClick={()=>setAreaId(entry.id)}><div className="raid-approved-card__art"><img className="raid-approved-card__background" src={entry.image} alt=""/>{bossImage&&<img className="raid-area-character" src={bossImage} alt=""/>}</div><div className="raid-approved-card__copy"><div className="raid-approved-card__badges"><span>{cleared?'攻略済':unlocked?'攻略中':'未解放'}</span></div><h3>{entry.name}</h3><p className="raid-approved-card__attribute">{boss.name} <small>Lv.{boss.level}</small></p><p className="raid-area-progress">{entry.stages.filter(stage=>state.clearedStages.includes(stage.id)).length}/{entry.stages.length} ステージクリア</p></div></button>;
         })}</div></>}
     </>}
     {selected && modal === 'info' && <div className="redesign-quest-dialog"><CanonicalDialog title={`${selectedLabel} ${formalStageName(selected) ?? selected.name}`} onClose={() => setModal(null)} actions={[{ label: '挑戦', semantic: 'primary', onClick: () => setModal('prepare'), disabled: !encounterAssets.ready || !isQuestStageUnlocked(selected.id, state.clearedStages) }]}>

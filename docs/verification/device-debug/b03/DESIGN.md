@@ -63,3 +63,17 @@ GAME04のBattleResult.analysisにはdamage/healingはあるがkills/shieldはな
 第4案の65点・4200ダメージ・2撃破は前案で既存採点関数に通した説明用ログ値。今回も実戦ログ接続済みとは扱わない。実戦adapter、本体組込み、PRpush、新規配信は未実施。
 
 提示ファイル：result-v4-{375,390}.png、result-v4-{375,390}-score.png、result-v4-{375,390}-rewards.png、area-v4-{375,390}.png、result-v4-{375,390}.webm。検証結果review-v4-checks.json。
+
+## 第5回追加修正：承認済みレイド規則の再利用・記録MVPの実装
+
+エリア一覧はRaidApprovedVisual.cssのraid-approved-card見出し19px・明朝系、badgesの12px/金枠、attributeの13pxを再利用。area専用差分は164px高・右側人物・左側copy・進行12pxのみ。独立BOSS下帯を除去し、名前とLvを同じ行に配置。375/390で実レイドと実エリアのcomputed font-family/font-sizeが一致。比較画像は同じアプリ実装のローカルQAから取得（一覧内容はオフライン検証データ）。正式QUEST_AREASの最終ステージからボス/レベルを選出、件数もstages.length。並行マスタ統合後に再確認。
+
+RecordedBattleResultを本体BattleViewの完了表示へ接続。QuestViewはsettlementの既存報酬・playerGrowthを折りたたみへ渡す。仮の正式値・固定65点・集約予定テキスト・再生ボタンは本体に存在しない。報酬展開は表示だけで再付与しない。次ステージは正式解放判定で表示し、遭遇戦がある場合は既存の遭遇確認導線を保持。
+
+採点の実装：recordedBattleMvp(result)。与ダメージと回復は保存済みanalysis.damage/healingを正本にし、記録エンジン同様、ダメージは直接攻撃/反撃（過剰分を含む）、回復は即時回復/蘇生を含む。DOT/HOTの量は誰かへ勝手に再配賦しない。撃破は各派のHPが正から0になった確定記録から集計。DOT撃破は付与者を一意に決められる記録のみ帰属、複数候補時はMVP集計不可を表示。シールドは新規付与の実量だけを加算し、吸収/残量減少を二重計上しない。生存は最後のHPで判定し蘇生後の生存も反映。
+
+配点：与ダメージ40/撃破20/回復20/シールド15/生存5。前4項目はround(本人値÷味方内最大値×配点)、最大値0なら0点。生存5または0、合計最大100。同点は与ダメージ降順→撃破数降順→武将ID昇順。計算に必要なevent/analysisが欠落した旧記録、撃破帰属不明、シールド量欠落は推測MVPを出さない。戦闘ルール・保存済みsnapshot・報酬量は変更なし。
+
+確認：型検査・モック設定build成功。正式1-1マスタをローカルエンジンで記録化した86フレームでMVPくノ一、damage876、kills2、heal0、shield0、生存5、合計65。これは前の説明用4200ダメージ/65点を接続したものではなく、同じBattleResult形式の計算結果。ユーザー保存戦闘を取得した検証ではない。候補の貢献を変えると先頭以外がMVPになること、シールド非二重計上、最終生存、曖昧DOT抑止、旧記録fallback、記録非変更を検証。
+
+詳細パネルは不透明#19141c・本文#f5eee1、summaryは#211923f5、ヘッダーとフッターは本文から分離。375/390×664で二つのdetailsを開き、scrollHeight末尾まで到達・本文下端545px/CTA上端545pxを確認。0から中間値を経て65までの自動カウントをMutationObserverで取得。v5/interaction-checks.jsonに保存。実機は共通Preview配信後の確認。

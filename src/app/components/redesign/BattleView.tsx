@@ -1,4 +1,6 @@
 'use client';
+import RecordedBattleResult from './RecordedBattleResult';
+import type { ReactNode } from 'react';
 import { useAudio } from '@/audio/AudioProvider';
 import { SE_ASSETS, type BgmScene, type SeEvent } from '@/audio/audioContract';
 import { recordedBattleSounds } from '@/audio/recordedBattleSound';
@@ -43,10 +45,10 @@ const statusPaths: Record<string, string> = {
   hot:'M9 3H15V9H21V15H15V21H9V15H3V9H9Z', stun:'M4 7 10 9 8 3 14 7 19 3 18 10 23 11 17 15 20 21 12 18 8 22 6 15 1 15 5 11Z',
   counter:'M4 11H15Q21 11 21 17Q21 22 15 22M4 11 10 5M4 11 10 17', taunt:'M12 1V6M12 18V23M1 12H6M18 12H23M20 12A8 8 0 1 1 4 12A8 8 0 1 1 20 12',
 };
-interface Props { bgmScene?: BgmScene; requirePlaybackCompletion?: boolean; result: BattleResult; vipActive: boolean; onComplete: () => void; title?: string; backgroundSrc?: string; raidHp?: { current: number; max: number; level?: number }; initialFrame?: number; initialPaused?: boolean; }
+interface Props { resultActions?: ReactNode; resultRewards?: ReactNode; bgmScene?: BgmScene; requirePlaybackCompletion?: boolean; result: BattleResult; vipActive: boolean; onComplete: () => void; title?: string; backgroundSrc?: string; raidHp?: { current: number; max: number; level?: number }; initialFrame?: number; initialPaused?: boolean; }
 
 /** Every visible value is projected from the recorded server frame. */
-export function BattleView({ bgmScene = 'BATTLE', requirePlaybackCompletion = false, result, vipActive, onComplete, title = '合戦', backgroundSrc = '/creative/backgrounds/char_reiji_01.png', raidHp, initialFrame = 0, initialPaused = false }: Props) {
+export function BattleView({ resultActions, resultRewards, bgmScene = 'BATTLE', requirePlaybackCompletion = false, result, vipActive, onComplete, title = '合戦', backgroundSrc = '/creative/backgrounds/char_reiji_01.png', raidHp, initialFrame = 0, initialPaused = false }: Props) {
   const { playBgm, stopBgm, playSe, stopSe, preloadAudio } = useAudio();
   const heardFrame = useRef(-1);
   const heardAction = useRef(new Set<SeEvent>());
@@ -192,7 +194,7 @@ export function BattleView({ bgmScene = 'BATTLE', requirePlaybackCompletion = fa
     {frame.remainingActions !== undefined && <p className={styles.actionLimit}>残り味方行動機会 <strong>{frame.remainingActions}</strong> / 300</p>}
     </>}
     {presentation.isSkill && !presentation.cutIn && presentation.actor && presentation.skill && <div className={`${styles.feedback} ${styles.skillFeedback}`}><span>{presentation.actor.name}</span>{presentation.skill.name}</div>}
-    {finished && <div className={styles.result} role="status"><h2>{result.outcome === 'win' ? '勝利' : result.outcome === 'lose' ? '敗北' : '行動上限'}</h2><p>{frame.reason ? reasonText(frame.reason) : eventText(frame.text)}</p><p>第{result.wavesCleared}派まで突破 · 総ダメージ {result.totalDamage.toLocaleString()}</p><details><summary>戦果と編成の分析</summary><div className={styles.tableWrap}><table><thead><tr><th>武将</th><th>与ダメージ</th><th>回復</th><th>SP獲得</th><th>BURST</th></tr></thead><tbody>{result.analysis.map(a => <tr key={a.id}><th>{a.name}</th><td>{a.damage.toLocaleString()}</td><td>{a.healing.toLocaleString()}</td><td>{a.spGenerated}</td><td>{a.bursts}</td></tr>)}</tbody></table></div><p></p></details><button onClick={() => setShowLog(true)}>戦闘ログ</button><button className={styles.primary} onClick={onComplete}>結果へ</button></div>}
+    {finished && <RecordedBattleResult result={result} title={title} backgroundSrc={backgroundSrc} rewards={resultRewards} actions={resultActions ?? <button onClick={onComplete}>結果へ</button>} />}
     </div>
     {!finished && !assetsBlocked && <BattleEffectLayer key={index} effects={effects} partyIds={frame.party.map(unit => unit.id)} paused={playbackPaused} speed={effectiveSpeed} />}
     {(detail || showLog) && <dialog ref={detailDialog} className={styles.backdrop} aria-label={showLog ? '戦闘ログ' : '戦闘詳細'} onCancel={event => { event.preventDefault(); close(); }}><section className={styles.modal}><button className={styles.close} onClick={close} autoFocus>閉じる</button>{showLog ? <>

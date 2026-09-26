@@ -63,3 +63,5 @@ dialog.backdrop{margin:0;width:100%;height:100%;max-width:none;max-height:none;b
 @keyframes burstReady{50%{filter:brightness(1.7);box-shadow:0 0 12px #ffd270}}
 .result{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100svh - 60px);margin:0;border:0;gap:12px;padding:24px 12px}.result h2{font-size:44px}.result .primary{margin:0}.result details{width:100%}
 @media(prefers-reduced-motion:reduce){.hit,.spFull .burst{animation:none}}
+
+.battle:has(:global(.recorded-result)){padding:0;min-height:0;border:0;border-radius:0}
