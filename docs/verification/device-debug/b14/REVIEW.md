@@ -49,3 +49,11 @@
 必要ローカルファイル：正式素材はGit保存済み。元ZIPは再取込が必要な時の原本として保管推奨（配信には不要）。`.env.local`/`.env.preview.local`/`.vercel`設定、Git/Vercelログイン情報はGit除外のまま。秘密値を台帳/画像/コミットへ記録しない。
 
 型検査・Next.js 16.2.10 build成功。ローカルは明示モック、配信は既存Previewブランチ設定を使用する。
+
+### 配信記録（2026-09-27）
+
+- 実装/配信SHA：60a608449490993c28bf533d6316703b148f9b96。PR #37へpush。
+- Ready：dpl_Gcn1VRtab2YFgzeBGtvo6suz6gMi / https://game04-22eapfu38-kiyoshi-kitamura.vercel.app 。Vercel build 58秒。
+- alias割当直前にrefs/pull/37/headを再取得し同SHAを確認。指定共通Previewへ割当後、公開/api/qa/deploymentでSHA/branch/previewを独立照合（deployment.json）。
+- DBG-035既存仕様保持、DBG-003/056〜062/041/063は **配信済み・実機確認待ち**。B13/DBG-053配信成果を保持。解決件数は増やさない。
+- 共通Preview上の375/390×600検証もPASS、pageerror0。画像と結果はdeployed/。ローカルのフォーカス修正を含む最終配信コードで確認。

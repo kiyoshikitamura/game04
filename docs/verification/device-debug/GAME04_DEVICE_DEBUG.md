@@ -7,7 +7,7 @@
 - 共通Preview：https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app/
 - 作業ブランチ：work/game04-common-preview-20260925。PR最新と発生版の一致をGitHubで確認。
 - 修正前配信の独立照合：2026-09-26、公開 /api/qa/deployment が上記SHA・preview・同ブランチを返すことを確認。deploymentId dpl_3CnYeKBqsnCcnaJHKzvMw8GevUWM。
-- 現在の確認SHA：d9abf8b095a9337aaf3424d0001a802b27a62252（2026-09-26、共通Previewの公開識別APIで独立照合済み。新配信のユーザー実機確認待ち）。
+- 現在の確認SHA：60a608449490993c28bf533d6316703b148f9b96（2026-09-27、B14/B15共通Previewの公開識別APIで独立照合済み。実機確認待ち）。
 - 直前のユーザー実機確認基準：d9be130。1-1クリアまでの確認済み12件は保持。
 - 端末はiPhone系との報告。機種・OS・ブラウザー版は未確認。原画像の23:47・4Gは引継ぎ記載であり、本作業で画像の独立閲覧は未実施。
 - 次の番号：DBG-064。削除・再利用・振り直し禁止。
@@ -700,3 +700,8 @@ DBG-014/015/030の統合接続追記：任務確認保存後に予約済み2-1�
 |DBG-063|正式訴求4点接続。R以上/日次無料10連を正式マスター照合、一致・保留なし。|
 
 詳細と限定検証・測定条件は[b14/REVIEW.md](b14/REVIEW.md)、素材原本照合はb15/assets.json。実装/限定検証済み、配信記録は追記する。実機解決への変更はしない。DBG-047/全68面とバランス別担当の範囲を維持。
+
+### B14/B15 共通Preview配信
+
+実装/配信SHA：60a608449490993c28bf533d6316703b148f9b96。Ready dpl_Gcn1VRtab2YFgzeBGtvo6suz6gMi。配信直前PR実HEAD一致、共通URL切替後の公開識別API一致。035は既存仕様保持、003/056〜062/041/063は**配信済み・実機確認待ち**。実機解決12件は維持。型検査/ローカルbuild/Vercel build成功。詳細・残件はb14/REVIEW.md。配信時のコードSHAと後続の証拠保存コミットは区別する。
+配信後375/390×600もPASS、pageerror0。b14/deployedに画像・結果を保存。認証のアカウント変更テストはローカルモック、実認可は実機確認待ち。
