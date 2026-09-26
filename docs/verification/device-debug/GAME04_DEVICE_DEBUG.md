@@ -7,7 +7,7 @@
 - 共通Preview：https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app/
 - 作業ブランチ：work/game04-common-preview-20260925。PR最新と発生版の一致をGitHubで確認。
 - 修正前配信の独立照合：2026-09-26、公開 /api/qa/deployment が上記SHA・preview・同ブランチを返すことを確認。deploymentId dpl_3CnYeKBqsnCcnaJHKzvMw8GevUWM。
-- 現在の確認SHA：0cc01e4141657762b45c690c633f5208031b9924（2026-09-27、DBG-075共通Preview公開識別APIで照合。実機確認待ち）。
+- 現在の確認SHA：10b23685ff4ff6d1d59c18103253169749a60e51（2026-09-27、DBG-054・066正式名称FIX、共通Preview稼働照合。実機確認待ち）。
 - 直前のユーザー実機確認基準：d9be130。1-1クリアまでの確認済み12件は保持。
 - 端末はiPhone系との報告。機種・OS・ブラウザー版は未確認。原画像の23:47・4Gは引継ぎ記載であり、本作業で画像の独立閲覧は未実施。
 - 次の番号：DBG-076。削除・再利用・振り直し禁止。
@@ -768,3 +768,6 @@ DBG-014/015/030の統合接続追記：任務確認保存後に予約済み2-1�
 - 共通参照はsrc/theme/approvedNames.ts。パッシブは正式名を主見出し、種別「パッシブ」、条件・効果・数値は既存マスター／保存記録参照。古い保存結果もtypeによる表示射影で対応し、snapshotは書換えない。
 - 武将詳細／戦闘詳細／出撃準備、育成・分解・獲得結果、所持品、canonicalItemName経由の任務・プレゼント・商店・交換表示、クエスト・領土侵攻報酬へ反映。
 - 名前以外の効果・条件・倍率・費用・数量・ID・保存データは不変。BURST・共通UI・並走成果を保持。
+
+
+2026-09-27配信完了：DBG-054・066は「配信済み・実機確認待ち」。正式名称承認待ちは解除。配信SHA 10b23685ff4ff6d1d59c18103253169749a60e51、Ready dpl_558LStxXcg9eK7Dh7mVNNp4jbVT3。直前PR HEAD一致、共通Preview公開API一致。配信後375/390×600のパッシブ16種・所持品・報酬・育成ダイアログ計8ケースPASS、旧名表示なし・横はみ出しなし・pageerror 0。型検査・ローカルbuild・Vercel build成功。残件は実機受入確認。

@@ -24,3 +24,6 @@ approvedNames.tsを共通参照とし、P01〜P16はtype、素材は既存IDへ�
 旧文字列の残存：theme/sengoku-masters.jsonは旧表示sourceを保持しgetThemedMasterNameで上書き。growth.tsの旧サーバー不足文言はGrowthViewで名称だけ置換。内部ID・計算・数量・条件は変更なし。旧P08案「弱点看破」は製品非採用。
 
 型検査・ローカルbuild成功。最終文言整理後も型検査成功。React確認：既存共通部品と状態更新を保持、名称参照は純粋関数、新規データ取得なし。
+
+
+2026-09-27配信完了：DBG-054・066は「配信済み・実機確認待ち」。正式名称承認待ちは解除。配信SHA 10b23685ff4ff6d1d59c18103253169749a60e51、Ready dpl_558LStxXcg9eK7Dh7mVNNp4jbVT3。直前PR HEAD一致、共通Preview公開API一致。配信後375/390×600のパッシブ16種・所持品・報酬・育成ダイアログ計8ケースPASS、旧名表示なし・横はみ出しなし・pageerror 0。型検査・ローカルbuild・Vercel build成功。残件は実機受入確認。
