@@ -38,6 +38,13 @@ body.game04-theme .redesign-quest .rq-area{aspect-ratio:1.9;min-height:164px}
 body.game04-theme .rd-shell:has(.redesign-quest){display:flex;flex-direction:column;padding-bottom:0}.rd-shell:has(.redesign-quest)>.rd-header{flex-shrink:0}.rd-shell:has(.redesign-quest)>.rd-main{display:flex;flex-direction:column;flex:1;min-height:0}.rd-shell .redesign-quest{flex:1;min-height:0;padding-bottom:calc(90px + env(safe-area-inset-bottom))}
 
 /* Reuse approved raid typography/badges, keeping the B03 164px area surface. */
+/* The list owns scrolling: its final row must remain above the fixed navigation. */
+body.game04-theme .rd-shell:has(.redesign-quest){overflow:hidden}
+.rd-shell:has(.redesign-quest)>.rd-main{overflow:hidden}
+.rd-shell .redesign-quest{display:flex;flex-direction:column;overflow:hidden}
+.redesign-quest>.rq-scroll{flex:1;min-height:0;max-height:none}
+.redesign-quest>.rq-area-head,.redesign-quest>.rq-back,.redesign-quest>h2{flex-shrink:0}
+.redesign-quest>.rq-back{align-self:flex-start}
 /* §18 encounter: art and information share one stage; the dialog owns scrolling. */
 .redesign-quest-dialog .rq-encounter-hero{position:relative;height:290px;overflow:hidden;padding:0}
 .redesign-quest-dialog .rq-kicker{position:absolute;top:8px;left:10px;z-index:3;font-size:var(--g4-raid-secondary,13px);letter-spacing:.12em}
