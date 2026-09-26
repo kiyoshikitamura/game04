@@ -15,7 +15,7 @@
 @keyframes g4-ui-spin{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.g4-loading-wheel{animation-duration:2s}}
 body.game04-theme .canonical-dialog{max-height:var(--g4-dialog-max);height:auto;border-radius:var(--g4-radius);box-shadow:0 18px 54px #000b;background:var(--g4-panel)}
-body.game04-theme .canonical-dialog-close{width:44px;height:44px;flex-basis:44px}
+body.game04-theme .canonical-dialog-close{width:44px;height:44px;flex-basis:44px;border-radius:var(--g4-radius);border-color:var(--g4-rule-border);color:var(--g4-text);background:var(--g4-panel)}
 body.game04-theme .canonical-dialog-body{padding:var(--g4-space-4);text-align:left;white-space:normal;scrollbar-color:var(--g4-gold) var(--g4-bg);scrollbar-width:thin}
 body.game04-theme .canonical-dialog-body.is-loading{min-height:0}
 body.game04-theme .canonical-dialog-actions{display:flex;flex-wrap:wrap;gap:var(--g4-space-2);padding:var(--g4-space-3) var(--g4-space-4) var(--g4-space-4)}

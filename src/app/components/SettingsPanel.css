@@ -12,12 +12,12 @@
 
 .settings-error-message {
   background: rgba(221, 51, 51, 0.1);
-  border: 1px solid var(--neon-magenta);
-  color: var(--neon-magenta);
+  border: 1px solid var(--g4-text);
+  color: var(--g4-text);
   padding: 12px;
   border-radius: 8px;
   margin-bottom: 16px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: bold;
   text-align: center;
 }
@@ -28,7 +28,7 @@
 
 .settings-section-title {
   font-size: 14px;
-  color: var(--text-secondary);
+  color: var(--g4-muted);
   margin-bottom: 12px;
   padding-bottom: 8px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -40,9 +40,9 @@
 
 .settings-field label {
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: bold;
-  color: var(--text-primary);
+  color: var(--g4-text);
   margin-bottom: 8px;
 }
 
@@ -61,16 +61,16 @@
 
 .settings-input:focus, .settings-textarea:focus {
   outline: none;
-  border-color: var(--neon-cyan);
+  border-color: var(--g4-gold);
 }
 
 .settings-textarea {
   min-height: 104px;
   resize: vertical;
 }
-.settings-bio-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:8px;color:var(--text-secondary);font-size:11px}.settings-bio-meta button{min-width:104px}
-.settings-bio-field>span{display:block;margin-top:6px;color:var(--text-secondary);font-size:11px;text-align:right}
-.settings-summary{display:grid;gap:8px;margin:0}.settings-summary>div{display:grid;grid-template-columns:minmax(88px,.42fr) minmax(0,1fr);gap:10px}.settings-summary dt{color:var(--ui-text-secondary);font-size:11px}.settings-summary dd{min-width:0;margin:0;color:#fff;font-size:12px;overflow-wrap:anywhere}.settings-edit-actions{position:sticky;z-index:2;bottom:-1px;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;padding:8px 0 calc(4px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent 0,var(--ui-surface-base) 18%)}.settings-panel-container-inner>.editable-setting-section{width:100%;min-width:0;margin-bottom:12px;box-sizing:border-box}.settings-panel-container-inner .choice-group-options{grid-template-columns:repeat(2,minmax(0,1fr))}.settings-panel-container-inner .outlaw-card,.settings-panel-container-inner .outlaw-card-inner{min-width:0;max-width:100%;box-sizing:border-box}
+.settings-bio-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:8px;color:var(--g4-muted);font-size:14px}.settings-bio-meta button{min-width:104px}
+.settings-bio-field>span{display:block;margin-top:6px;color:var(--g4-muted);font-size:14px;text-align:right}
+.settings-summary{display:grid;gap:8px;margin:0}.settings-summary>div{display:grid;grid-template-columns:minmax(88px,.42fr) minmax(0,1fr);gap:10px}.settings-summary dt{color:var(--g4-muted);font-size:14px}.settings-summary dd{min-width:0;margin:0;color:#fff;font-size:16px;overflow-wrap:anywhere}.settings-edit-actions{position:sticky;z-index:2;bottom:-1px;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;padding:8px 0 calc(4px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent 0,var(--g4-panel) 18%)}.settings-panel-container-inner>.editable-setting-section{width:100%;min-width:0;margin-bottom:12px;box-sizing:border-box}.settings-panel-container-inner .choice-group-options{grid-template-columns:repeat(2,minmax(0,1fr))}.settings-panel-container-inner .outlaw-card,.settings-panel-container-inner .outlaw-card-inner{min-width:0;max-width:100%;box-sizing:border-box}
 
 @media(max-width:412px){.settings-panel-container-inner{width:100%}.settings-summary>div{grid-template-columns:minmax(72px,.38fr) minmax(0,1fr)}.settings-panel-container-inner .choice-group-options{grid-template-columns:repeat(2,minmax(0,1fr))}.settings-edit-actions .outlaw-button{min-width:0;width:100%}}
 
@@ -89,15 +89,16 @@
   flex: 1;
   background: transparent;
   border: none;
-  color: var(--text-secondary);
+  color: var(--g4-muted);
   padding: 10px;
   font-size: 14px;
   font-weight: bold;
+  min-height: 44px;
 }
 
 .settings-toggle-btn.active {
-  background: rgba(0, 240, 255, 0.15);
-  color: var(--neon-cyan);
+  background: var(--g4-primary);
+  color: var(--g4-gold);
 }
 
 .settings-audio-row {
@@ -120,16 +121,16 @@
 }
 
 .settings-audio-heading output {
-  color: var(--neon-cyan);
-  font-size: 12px;
+  color: var(--g4-gold);
+  font-size: 14px;
   font-variant-numeric: tabular-nums;
 }
 
 .settings-volume {
   grid-column: 1 / -1;
   width: 100%;
-  min-height: 32px;
-  accent-color: var(--neon-cyan);
+  min-height: 44px;
+  accent-color: var(--g4-gold);
 }
 
 .settings-volume:disabled {
@@ -150,7 +151,7 @@
   display: flex;
   align-items: center;
   min-height: 44px;
-  color: var(--neon-cyan);
+  color: var(--g4-gold);
   font-size: 14px;
   text-decoration: underline;
   text-underline-offset: 3px;

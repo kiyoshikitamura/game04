@@ -694,13 +694,13 @@ CTAに限らず、読み込み中であることをスピナーで表示する�
 |文言|正式ID→正式マスター名を使用。効果量の105.00%は105%、小数末尾0のみ除去。確率の個別4桁は微小排出率を区別するため保持。効果対象・条件・必要数を省略しない|battleLabels.displaySkillDescription、既存canonicalItemName。未承認の固有名へ置換しない|
 |数値|整数はja-JPの3桁区切り、数値はtabular-nums。必要量は「所持 X / 必要 Y」、進捗は「現在 / 目標」。価格は通貨名・税込の文脈を保持|NumberUnit、StatGrid、InfoRow、RewardList。戦果は§18既存見本|
 |余白・密度|4/8/12/16/24pxを共通段階。商品行は上下12px、列間12px、補助間隔4px、区切り1px。自然高、一覧の全行を最長行へ伸ばさない|ProductRow、game04-ui.css。/qa/common-ui-audit?view=shop|
-|ボタン|主#9E353B＋#F4EFE6、副#262127＋#F4EFE6、無効#262127＋#C3B8AA、処理中は無効面＋#F4EFE6。通常48px高・最小幅104px・横16px、短名1行。44pxはcompact操作。通常と処理中の両ラベルを同一gridセルに置き、幅・高さを保持|ActionButton。OutlawButtonは既存音・連打ロックを保持し表示をActionButtonへ委譲。/qa/common-ui-audit の保存・保存中・取消・条件不足|
+|ボタン|主#9E353B＋#F4EFE6、副#262127＋#F4EFE6、無効#262127＋#C3B8AA、処理中は無効面＋#F4EFE6。通常48px高・最小幅104px・横16px、短名1行。compact操作は44px高・最小幅72px・横10px。通常と処理中の両ラベルを同一gridセルに置き、幅・高さを保持|ActionButton。OutlawButtonは既存音・連打ロックを保持し表示をActionButtonへ委譲。/qa/common-ui-audit の保存・保存中・取消・条件不足|
 |アイコン|一覧・選択48×48、contain、4px内余白、暗色#19141c、金1px、角4px。人物カードは既存専用比率、獲得大型は親の指定枠、戦闘は装飾撤去済みの別用途|AssetIcon/AssetChoice。画像にaspect-ratioを二重指定して長方形の親からはみ出させない|
 |属性|正式画像/creative/ui/element-*.png、標準58×24、小型48×20、比率保持。属性名をaltで保持。画像内意匠へ独自丸背景を追加しない|ElementBadge size=standard/small。戦闘既存表現の全移行は適用確認表で別管理|
-|レアリティ|N/R/SR/SSRの正式マスター値と既存RarityFrame/CharacterDisplays。武将画像と枠の内側マスクは§18.12、独自枠を増やさない|CharacterDisplays、RarityFrame。カード・戦闘の既存用途別サイズ維持|
+|レアリティ|N/R/SR/SSRの正式マスター値とCharacterDisplays/RarityBadge。武将画像と枠の内側マスクは§18.12、独自枠を増やさない|CharacterDisplays、RarityBadge。文字バッジは正式画像48×24px、小型40×20px。旧RarityFrameは利用経路なし|
 |一覧・選択|検索input16px/44px高、絞込・並び順2列minmax(0,1fr)、名称検索、カテゴリに応じ属性/部位/レアリティ、名前/育成値/レア順。件数・装備中・条件一致なしを明示|ListControls、AssetChoice。所持全件を検索対象にし、絞込で所持データを変更しない|
 |報酬・数量|正式画像＋数量、短縮時は代表件＋残件数から全報酬へ。直接付与とBOX送付を区別し、表示側で残高を加算しない|RewardList/CompactRewards/既存正式応答。付与先表は19.4|
-|Dialog|見出し20px、閉じる44×44、max80dvhか安全余白を除いた画面高の小さい方。見出し・操作固定、本文min-height:0/overflow:auto。compactは見出し8/12、本文12、操作8/12px|CanonicalDialog、既存Modal（portal・操作ロック維持）。/qa/common-ui-audit 詳細30行の末尾と閉じる|
+|Dialog|見出し20px、閉じる44×44、max80dvhか安全余白を除いた画面高の小さい方。見出し・操作固定、本文min-height:0/overflow:auto。compactは見出し8/12、本文12、操作8/12px|CanonicalDialog、FullScreenPanel（CanonicalDialogへ委譲）、既存Modal（portal・操作ロック維持）。/qa/common-ui-audit 詳細30行の末尾と閉じる|
 |状態|読込Game04Loading、空/失敗/未解放ScreenState、操作中ActionButton。空は「所持なし」「条件一致なし」「商品未登録」を区別。失敗に再試行、入力・選択を保持。受取済みは既存任務チェック|ScreenState、Game04Loading、ActionButton。合成通信失敗は実API成功と区別|
 
 新しい具体値は既存承認済み範囲内の用途別実装値。カード・戦闘の情報量を通常本文へ機械的に置換しない。短い操作名は改行させず、必要な説明はラベル外へ。長い名称・条件は本文で折り返し、縮小・三点省略で判断材料を消さない。
@@ -744,3 +744,28 @@ CTAに限らず、読み込み中であることをスピナーで表示する�
 
 アカウント連携のGoogle主導線は提供者の白地と識別記号を保持する用途差。その他の操作寸法・無効時文字・本文書体は共通規則を適用する。新しい認証方式や認証ロジックは本作業で追加しない。
 
+
+### 19.6 067fe54以降の全利用先是正（2026-09-27）
+
+- ActionButtonのstandardは104×48px以上、compactは72×44px以上。compactは一括選択/解除など並列補助操作と出陣詳細の説明入口に限る。16px/600、1行、処理中も同じgridで寸法を維持する。カード選択と数量ステッパーは内容・用途が異なるため専用構造を維持する。
+- 育成のページCSSは共有ActionButtonを除外し、40pxや不透明度で上書きしない。数量ステッパーは44px、入力16px、素材は32pxアイコン＋数量情報＋操作の自然高1列。装備6枠・全スキル・全装備カテゴリの利用先を確認する。
+- FullScreenPanelはCanonicalDialog compactへ委譲。BOX/お知らせ/設定で同じ見出し・本文スクロール・固定閉じるを使う。閉じる44×44px、共通4px角・暗色面・1px枠。通常文16px、補助14px以上。受取中は既存ロックを保持し、期限切れは受取不可を明記する。
+- SubTabNavは各ラベル1行、44px以上、横スクロール。プレゼント等を文字単位で折り返さない。
+- RarityBadgeは公式/ui/rarity/rarity-badge-{n,r,sr,ssr}.png、標準48×24/小型40×20、contain。育成の一覧・武将/スキル/装備詳細へ共通使用。人物カードはCharacterDisplaysの正式枠を保持する。旧RarityFrameは全Next入口から未到達であり、別の利用中正本ではない。
+- 出陣詳細のボス領域はclamp(200px,100dvh - 270px,290px)。短高でも名前・能力値へ早く到達でき、本文スクロールと固定挑戦操作を維持する。説明入口は共通compact、文字を12px/10pxに縮めない。
+- 商店は既存承認済みshopマスターに従い、輝石商店に7商品、魂交換は交換所に表示する。VIP効果は商品内容行にまとめ、有効期限を保持。購入APIの準備状態は有償商品にのみ適用する。価格・交換比率・効果は変更しない。
+- 代表見本：/qa/common-ui-audit（状態）、?view=character（292種の所持fixture）、/qa/shop-ui（正式商品）、/qa/redesign?view=quest（出陣）。合成データであり実所持・実接続の証拠にはしない。
+
+### 19.7 実接続と検証台帳の運用
+
+- inventoryの静的項目は画面数ではない。SURFACES.mdは抽出項目と修正先、consumer-cases.mdは実際の画面／状態・適用ルール・部品・確認結果。部品代表成功を未確認の呼出しへ転記しない。
+- auditは既存評価・証跡を保持して位置を更新する。classify_common_ui_reachabilityはTypeScript ASTでvalue import/re-export/literal import/requireを追う。文字列生成importがある場合は未到達の自動除外を止める。旧161項目の根拠はreachability.jsonに保存する。
+- verify:common-uiでパネルの共有、タブラベル改行禁止、BOX/設定の旧cyan・14px未満、育成ボタン上書き、正式レアリティ画像、商店接続を検出する。目視と実利用導線の確認を併用する。
+- DBG-065は専用2ユーザーの実進行→活動保存→相手の表示と、全体/DM送受信で判定する。0件を正常の根拠にしない。検証用一時分類は復元する。
+- DBG-071は孤立Previewでclaim_present/claim_all_presentsを復旧。本人・期限・上限・ユーザー→state→受取行のロックで重複を防止し、既存正式7種はgame04_paid_item_path、召喚券はuser_items、通貨はusersへ反映する。未対応旧資産は勝手に換算しない。有償lotの元期限は変更しない。
+- GAME04の受取再取得では存在しない旧user_equipmentsを呼ばず、確定応答後に正式stateを再取得する。実BOX→受取→所持表示、再取得、二重/他人/期限切れ、7種付与と上限の限定検証を別記録に残す。有償購入や120日経過の実試験を代用したとは扱わない。
+- 命名確定は別作業。開発側で再現可能な未確認は継続し、外部認証/実決済/実端末の未実行は具体的状態と理由を残す。未確認が残る場合は全画面完了としない。
+
+- 登用結果は48px画像＋名称＋40×20レアリティ＋獲得状態の1列自然高。本文16/補助14px。10件でも名前列を極端に狭めず、共通Dialog本文のスクロールだけで末尾へ到達する。読み取りカタログはeffect再実行で同じPromiseを共有し、別の書込ロックに衝突させない。
+
+- 出撃準備のレアリティにも同じRarityBadge smallを使用する。キャンセル/出撃はCanonicalDialog固定操作、出撃中はラベルを置換せずbusy表示。編成変更はActionButton compact。出撃準備→個別スキル/パッシブ、共闘の履歴→受取→再表示の無効、SSR選択交換3カテゴリを375/390×480で確認する。

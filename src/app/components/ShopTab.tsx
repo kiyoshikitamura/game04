@@ -140,7 +140,7 @@ export default function ShopTab({ exchange, hideTitle = false }: { exchange?: Sh
     const price = product.priceJpy !== undefined
       ? `¥${product.priceJpy.toLocaleString("ja-JP")}`
       : `${product.priceDiamond?.toLocaleString("ja-JP")} 輝石`;
-    return <ProductRow key={product.id} icon={<CanonicalItemIcon itemId={product.items[0]?.itemId} fallback={null}/>} name={shopText(product.title)} description={<>{!compact&&<Bundle product={product}/>} {product.category==='DIAMOND'&&<span>有償{product.priceJpy?.toLocaleString('ja-JP')}個＋無償{((product.items[0]?.quantity??0)-(product.priceJpy??0)).toLocaleString('ja-JP')}個</span>}</>} condition={remaining!==null?(soldOut?'購入済み':'残り'+remaining+' / '+product.purchaseLimit+'回'):undefined} action={<OutlawButton variant="primary" aria-label={shopText(product.title)+'を'+price+'で購入'} disabled={disabled||soldOut||disabledProductIds.includes(product.id)} onClick={()=>confirmPurchase(product)}>{soldOut?(vipActive?'有効中':'購入済み'):disabledProductIds.includes(product.id)?'準備中':price}</OutlawButton>}/>;
+    return <ProductRow key={product.id} icon={<CanonicalItemIcon itemId={product.items[0]?.itemId} fallback={null}/>} name={shopText(product.title)} description={<>{!compact&&<Bundle product={product}/>} {product.category==='DIAMOND'&&<span>有償{product.priceJpy?.toLocaleString('ja-JP')}個＋無償{((product.items[0]?.quantity??0)-(product.priceJpy??0)).toLocaleString('ja-JP')}個</span>}</>} condition={vipActive?'有効期限 '+new Date(exchange!.state.vipExpiresAt!).toLocaleString('ja-JP'):remaining!==null?(soldOut?'購入済み':'残り'+remaining+' / '+product.purchaseLimit+'回'):undefined} action={<OutlawButton variant="primary" aria-label={shopText(product.title)+'を'+price+'で購入'} disabled={disabled||soldOut||disabledProductIds.includes(product.id)} onClick={()=>confirmPurchase(product)}>{soldOut?(vipActive?'有効中':'購入済み'):disabledProductIds.includes(product.id)?'準備中':price}</OutlawButton>}/>;
   };
 
   return <div className="view-container shop-tab-container">
@@ -149,9 +149,9 @@ export default function ShopTab({ exchange, hideTitle = false }: { exchange?: Sh
     <div className="shop-account-actions"><BillingHistory /><PaidAssetExpiry /></div>
     <SubTabNav className="shop-sub-tabs" tabs={[{id:"LIMITED",label:"特選商店"},{id:"NORMAL",label:"輝石商店"}, ...(exchange ? [{id:"EXCHANGE",label:"交換所"}] : [])]}
       activeTabId={shopSubTab} onSelect={setShopSubTab} />
-    <p className="shop-tax-note">価格は全て税込み表示です</p>
-    {availability === "loading" && <div className="shop-status"><span className="shop-btn-spinner" aria-label="購入情報を確認中" /></div>}
-    {availability === "unavailable" && <div className="shop-status" role="status">
+    {shopSubTab === 'LIMITED' && <p className="shop-tax-note">価格は全て税込み表示です</p>}
+    {shopSubTab === 'LIMITED' && availability === "loading" && <div className="shop-status"><span className="shop-btn-spinner" aria-label="購入情報を確認中" /></div>}
+    {shopSubTab === 'LIMITED' && availability === "unavailable" && <div className="shop-status" role="status">
       <p>ただいま購入できません。</p>
       <OutlawButton variant="secondary" onClick={() => {
         setAvailability("loading");
@@ -159,7 +159,7 @@ export default function ShopTab({ exchange, hideTitle = false }: { exchange?: Sh
       }}>再確認する</OutlawButton>
     </div>}
     <div className="scroll-container flex-1 shop-scroll-body custom-scrollbar">
-      {shopSubTab === "EXCHANGE" && exchange ? <ShopExchangePanel {...exchange} /> : shopSubTab === "LIMITED" ? <>
+      {shopSubTab === "EXCHANGE" && exchange ? <ShopExchangePanel {...exchange} mode="souls" /> : shopSubTab === "NORMAL" && exchange ? <ShopExchangePanel {...exchange} mode="gems" /> : shopSubTab === "LIMITED" ? <>
         <section className="shop-section" aria-label="パック">
           {packs.map(productCard)}
           <p className="shop-expiry-notice">{PACK_EXPIRY_NOTICE}</p>

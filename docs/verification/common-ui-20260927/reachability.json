@@ -1,0 +1,530 @@
+{
+  "method": "TypeScript AST; value imports/reexports/literal dynamic imports; all Next page/layout/route roots",
+  "dynamicImports": [],
+  "files": [
+    {
+      "file": "src/app/components/AdvView.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/AttributeBadge.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/CardIcon.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/AuthenticationReminderModal.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/AvatarRenderer.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/AvatarTab.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/AvatarTab.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/BagTab.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/battle/ModeBattleResultCard.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/BbsTab.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/CardIcon.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/character/CharacterEquipment.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/character/CharacterSystemV2.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/character/CharacterHome.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/character/CharacterSystemV2.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/character/CharacterParty.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/character/CharacterSystemV2.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/character/CharacterStageHUD.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/character/CharacterStatusBadges.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/character/CharacterEquipment.tsx",
+        "src/app/components/character/CharacterHome.tsx",
+        "src/app/components/character/CharacterParty.tsx",
+        "src/app/components/character/CharacterSystemV2.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/character/CharacterSystemV2.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/CharacterTab.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/character/GrowthExpSummary.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/character/CharacterSystemV2.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/CharacterTab.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/FriendPanel.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/guild/GuildEmblemEditor.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/GuildTab.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/GuildTab.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/GvgMatchStatusPanel.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/GvgTab.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/GvgTab.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/HomeResumeShell.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/LegalPanel.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/LoginBonusModal.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/MenuTab.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/mission/BeginnerMissionRewardCta.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/MissionPanel.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/MonthlyPassBanner.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/PatrolTab.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/PCLeftChat.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/PCRightSidebar.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/presentation/RankPresentation.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/RankingTab.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/presentation/StatusMetric.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/RaidTab.tsx",
+        "src/app/components/RankingTab.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/pvp/BattleTopPresentation.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/PvpTab.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/pvp/PvpBattleRewards.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/PvpTab.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/PvpTab.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/quest/QuestPresentationV2.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/PatrolTab.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/quest/QuestProgressionGuide.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/quest/QuestRaidEncounter.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/quest/QuestTownStory.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/quest/QuestPresentationV2.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/raid/RaidRoomClearRewardPanel.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/raid/RaidRoomConnectedBrowser.tsx",
+        "src/app/qa/raid-detail/RaidDetailHarness.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/raid/RaidRoomConnectedBrowser.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/RaidTab.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/raid/RaidRoomRescueRewardPanel.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/raid/RaidRoomConnectedBrowser.tsx",
+        "src/app/qa/raid-detail/RaidDetailHarness.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/RaidTab.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/ranking/MonthlyPowerRewardContent.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/ranking/RankingRewardDialog.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/ranking/RankingRewardDialog.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/RankingTab.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/ranking/RankingRewardNotificationController.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/RankingTab.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/redesign/BattleEffects.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/redesign/CreativeCharacter.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/redesign/NormalGachaView.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/TribeChatModal.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/TutorialAuthentication.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/TutorialBattlePrompt.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/TutorialFreeInstant.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/TutorialRuleGuide.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/TutorialWorldIntro.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/ui/Badge.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/GvgTab.tsx",
+        "src/app/components/RaidTab.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/ui/HeroPanel.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/GvgTab.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/ui/ListRow.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/ui/ModalShell.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/ui/PeriodStatus.tsx",
+      "routePaths": [],
+      "inbound": [
+        "src/app/components/GvgTab.tsx"
+      ],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/ui/RarityFrame.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/components/ui/ResourceDisplay.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/qa/raid-detail/RaidDetailHarness.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    },
+    {
+      "file": "src/app/qa/raid-top/RaidTopHarness.tsx",
+      "routePaths": [],
+      "inbound": [],
+      "classification": "製品・QA・管理ルートから到達なし",
+      "reason": "全srcの値import・再export・literal import/requireを走査。Next route/layout/routeを起点に到達なし。未使用クラスタ内の参照だけでは利用中としない。"
+    }
+  ]
+}

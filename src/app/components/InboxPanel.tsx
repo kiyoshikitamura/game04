@@ -15,8 +15,6 @@ const NEWS_READ_TIMEOUT_MS = 12_000;
 
 function PresentRewardIcon({ itemId }: { itemId: string }) {
   if (itemId === "PLAYER_XP") return <span className="inbox-present-reward-icon" aria-label="プレイヤー経験値">XP</span>;
-  if (itemId === "CASH") return <img src="/ui/icon_cash.png" alt="" className="inbox-present-reward-icon" />;
-  if (itemId === "DIA" || itemId === "DIAMOND") return <img src="/ui/icon_dia.png" alt="" className="inbox-present-reward-icon" />;
   return <CanonicalItemIcon itemId={itemId} alt="" className="inbox-present-reward-icon" />;
 }
 
@@ -85,6 +83,8 @@ export default function InboxPanel() {
   };
 
   const unclaimedPresents = (presents || []).filter((p: any) => p.status === "UNCLAIMED");
+  const expired = (p: any) => p.expire_at != null && new Date(p.expire_at).getTime() <= Date.now();
+  const claimableCount = unclaimedPresents.filter((p: any) => !expired(p)).length;
 
   const renderNewsContent = () => (
     <div className="inbox-news-list" aria-busy={newsLoading}>
@@ -118,10 +118,10 @@ export default function InboxPanel() {
   const renderPresentsContent = () => (
     <div className="inbox-presents-area">
       <div className="inbox-presents-actions">
-        <span className="inbox-presents-count">未受取: {unclaimedPresents.length}件</span>
+        <span className="inbox-presents-count">受取可能: {claimableCount}件</span>
         <OutlawButton
           variant="primary"
-          disabled={unclaimedPresents.length === 0 || presentClaimLoading}
+          disabled={claimableCount === 0 || presentClaimLoading}
           isLoading={presentClaimLoading}
           loadingLabel="一括受取中…"
           onClick={handleClaimAllPresents}
@@ -142,12 +142,12 @@ export default function InboxPanel() {
               </div>
               <OutlawButton
                 variant="primary"
-                disabled={presentClaimLoading}
+                disabled={presentClaimLoading || expired(p)}
                 isLoading={Boolean(p.loading)}
                 loadingLabel="受取中…"
                 onClick={() => handleClaimPresent(p.id)}
               >
-                受け取る
+                {expired(p) ? '期限切れ' : '受け取る'}
               </OutlawButton>
             </div>
           ))

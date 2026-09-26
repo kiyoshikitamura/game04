@@ -241,11 +241,9 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     (type: string) => playCyberSe(type as any),
     (userId: string) => syncBootstrapData(userId),
     setConfirmDialogConfig,
-    (level: number, xp: number) => { setUserLevel(level); setUserXp(xp); },
-    (rows: any[], owner: string) => {
-      if (currentAuthUserIdRef.current !== owner) return;
-      setUserEquipmentsList(rows);
-    }
+    (level: number, xp: number) => { setUserLevel(level); setUserXp(xp); }
+    // GAME04 equipment lives in RedesignState, refreshed by the reward event.
+    // Do not put the absent legacy user_equipments table on the receipt path.
   );
 
   const {

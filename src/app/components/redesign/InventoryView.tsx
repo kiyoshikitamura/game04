@@ -1,4 +1,5 @@
 'use client';
+import ActionButton from '../ui/ActionButton';
 import { useEffect, useRef, useState } from 'react';
 import { supabase } from '@/utils/supabase';
 import { REDESIGN_REWARD_SYNC_EVENT } from '@/utils/redesignRewardSync';
@@ -34,10 +35,10 @@ export default function InventoryView({state,onAction,onNavigate,fixtureItems}:{
   return <section aria-label="所持品" className="rd-stack">
     <h2>所持品</h2><p>受取済みのアイテムです。未受取分はプレゼントBOXで確認できます。</p>
     <ListControls query={query} onQuery={setQuery} filter={category} onFilter={value=>setCategory(value as InventoryCategory|'')} filters={INVENTORY_CATEGORIES.map(value=>({value,label:value}))} sort={sort} onSort={setSort} sorts={[{value:'name',label:'名前順'},{value:'amount',label:'所持数順'}]} count={visible.length}/>
-    {remote&&loading?<p role="status">所持数を確認中…</p>:remote&&error?<div role="alert"><p>{error}</p><button className="rd-button" onClick={()=>setAttempt(n=>n+1)}>再読み込み</button></div>:visible.length?<div>{visible.map(r=><button type="button" key={r.key} className="g4-inventory-entry" onClick={()=>{setSelected(r.key);setUseError('');}}>{r.image?<img src={r.image} alt=""/>:<span aria-hidden="true">◇</span>}<span>{r.name}<span>所持 ×{r.amount.toLocaleString()}</span></span><b aria-hidden="true">›</b></button>)}</div>:<p role="status">{query?'検索条件に一致する所持品はありません。':'この分類の所持品はありません。'}</p>}
+    {remote&&loading?<p role="status">所持数を確認中…</p>:remote&&error?<div role="alert"><p>{error}</p><ActionButton className="rd-button" onClick={()=>setAttempt(n=>n+1)}>再読み込み</ActionButton></div>:visible.length?<div>{visible.map(r=><button type="button" key={r.key} className="g4-inventory-entry" onClick={()=>{setSelected(r.key);setUseError('');}}>{r.image?<img src={r.image} alt=""/>:<span aria-hidden="true">◇</span>}<span>{r.name}<span>所持 ×{r.amount.toLocaleString()}</span></span><b aria-hidden="true">›</b></button>)}</div>:<p role="status">{query?'検索条件に一致する所持品はありません。':'この分類の所持品はありません。'}</p>}
     {category==='育成'&&<p>繰越EXP：武将 {(state.growthInventory?.carryExp.character??0).toLocaleString()} ／ 装備 {(state.growthInventory?.carryExp.equipment??0).toLocaleString()}</p>}
     {category==='保管品'&&<p>従来の所持分を保持しています。現在の素材とは合算していません。</p>}
-    <button className="rd-button" onClick={()=>onNavigate('character')}>武将・スキル・装備を確認 ›</button>
+    <ActionButton className="rd-button" onClick={()=>onNavigate('character')}>武将・スキル・装備を確認 ›</ActionButton>
     {item&&<CanonicalDialog title={item.name} density="compact" loading={busy} actions={[{label:'閉じる',onClick:()=>setSelected(null),disabled:busy},...(item.use?[{label:'1個使う',onClick:()=>void useItem(),disabled:busy||state.energy>=state.energyMax}]:item.destination?[{label:item.destination==='gacha'?'召喚へ':item.destination==='territory'?'領土侵攻へ':'育成へ',onClick:()=>onNavigate(item.destination!)}]:[])]}>
       <RewardList items={[item]}/><p>{item.detail}</p>{item.use&&<p>行動力 {state.energy} / {state.energyMax}{state.energy>=state.energyMax?'（上限のため使用できません）':''}</p>}{useError&&<p role="alert">{useError}</p>}
     </CanonicalDialog>}

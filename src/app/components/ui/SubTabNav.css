@@ -29,7 +29,7 @@
 
 .sub-tab-item {
   position: relative;
-  flex: 1;
+  flex: 1 0 auto;
   min-width: 80px;
   padding: 12px 16px;
   background: transparent;
@@ -96,3 +96,4 @@
 
 .outlaw-sub-tab-nav{scrollbar-color:var(--g4-gold) var(--g4-bg)}
 .sub-tab-item{min-height:44px}
+body.game04-theme .sub-tab-item{white-space:nowrap!important;word-break:normal;overflow-wrap:normal;flex-shrink:0}

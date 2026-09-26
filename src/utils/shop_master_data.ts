@@ -87,7 +87,7 @@ export const SHOP_PRODUCTS_MASTER: ShopProduct[] = sourceProducts.map((product) 
   const single = items.length === 1 ? items[0] : null;
   return { ...product, items,
     title: packTitles[product.id] ?? (single ? `${single.itemName} ×${single.quantity.toLocaleString("ja-JP")}` : product.title),
-    description: product.category === "DIAMOND" ? "登用や交換所で使用できる輝石です。"
+    description: product.category === "VIP" ? product.description : product.category === "DIAMOND" ? "登用や交換所で使用できる輝石です。"
       : product.id.startsWith("cash_") ? "姫武将の育成や通常登用に使える銭です。"
       : items.map(item => `${item.itemName} ×${item.quantity.toLocaleString("ja-JP")}`).join("／"),
   };

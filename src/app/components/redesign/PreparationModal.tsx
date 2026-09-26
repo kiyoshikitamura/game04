@@ -2,6 +2,8 @@
 import { useState,type ReactNode } from 'react';
 import { useQuestAssets } from './questAssets';
 import type { BattleUnit, OwnedCharacter } from '@/domain/redesign/types';
+import ActionButton from '../ui/ActionButton';
+import RarityBadge from '../ui/RarityBadge';
 import CanonicalDialog from '../ui/CanonicalDialog';
 import './QuestView.css';
 import LoadingSpinner from '../ui/LoadingSpinner';
@@ -31,21 +33,21 @@ export default function PreparationModal({ party, ownedCharacters, title, energy
   return <div className="redesign-quest-dialog">
     <CanonicalDialog title="出撃準備" onClose={busy ? undefined : onBack} actions={[
       { label: 'キャンセル', onClick: onBack, disabled: busy },
-      { label: busy ? '出撃中…' : '出撃する', onClick: onConfirm, semantic: 'primary', disabled: busy || !assets.ready || energy < energyCost || invalidPartySize },
+      { label: '出撃する', busy, busyLabel: '出撃中', onClick: onConfirm, semantic: 'primary', disabled: busy || !assets.ready || energy < energyCost || invalidPartySize },
     ]}>
-      <h3>{title}</h3>{!assets.ready && <p role={assets.failed ? "alert" : "status"}>{assets.failed ? <>画像を読み込めませんでした。<button onClick={assets.retry}>再読み込み</button></> : <LoadingSpinner />}</p>}
+      <h3>{title}</h3>{!assets.ready && <p role={assets.failed ? "alert" : "status"}>{assets.failed ? <>画像を読み込めませんでした。<ActionButton onClick={assets.retry}>再読み込み</ActionButton></> : <LoadingSpinner />}</p>}
       {assets.ready && <div className="rq-party" data-count={party.length}>{party.map((unit, index) => { const master = CHARACTER_MASTERS.find(entry => entry.id === unit.id); const subject = master ? { id: master.id, name: unit.name, rarity: master.rarity, element: unit.element as 'fire'|'water'|'earth'|'wind'|'light'|'dark' } : null; return <button type="button" key={unit.id} className="rq-party-card" disabled={busy || !assets.ready} onClick={() => setDetailId(unit.id)} aria-label={`${index + 1}番 ${unit.name}のスキル・パッシブ`}>
-        <span className="rq-order">{index + 1}</span><div className="rq-party-visual-wrap">{subject ? <CharacterCard subject={subject} compact hideMarks className="rq-party-visual-card" /> : <div className="rq-card-visual"><img className="rq-card-person" src={unit.image} alt={unit.name} /></div>}<div className="rq-party-badges"><span className="rq-rarity">{master?.rarity ?? 'N'}</span><ElementBadge element={unit.element} /></div></div><div className="rq-party-meta"><strong>{unit.name}</strong><span className="rq-rarity-line">Lv.{unit.level}</span><small>HP {Math.floor(unit.stats.hp).toLocaleString()}</small></div>
+        <span className="rq-order">{index + 1}</span><div className="rq-party-visual-wrap">{subject ? <CharacterCard subject={subject} compact hideMarks className="rq-party-visual-card" /> : <div className="rq-card-visual"><img className="rq-card-person" src={unit.image} alt={unit.name} /></div>}<div className="rq-party-badges"><RarityBadge rarity={master?.rarity ?? 'N'} size="small"/><ElementBadge element={unit.element} /></div></div><div className="rq-party-meta"><strong>{unit.name}</strong><span className="rq-rarity-line">Lv.{unit.level}</span><small>HP {Math.floor(unit.stats.hp).toLocaleString()}</small></div>
       </button>; })}</div>}
       <div className="rq-preparation-tools"><p className="rq-total-sp"><img src="/ui/sengoku/07-flower-crest.png" alt="" />共通SP <strong>{commonSpMax === null ? '開催時ルール' : `0 / ${commonSpMax}`}</strong></p>
-      <button type="button" className="rq-edit-button" onClick={onOpenDeck} disabled={busy || !assets.ready}>編成変更</button></div>
+      <ActionButton size="compact" className="rq-edit-button" onClick={onOpenDeck} disabled={busy || !assets.ready}>編成変更</ActionButton></div>
       {children}
       {invalidPartySize && <p role="alert">武将を1〜5人編成してください。</p>}
       {energy < energyCost && <p role="alert">行動力が不足しています。</p>}
       {error && <p role="alert">{error}</p>}
     </CanonicalDialog>
     {detail && <CanonicalDialog title={detail.name} onClose={() => setDetailId(null)} actions={[{ label: '戻る', onClick: () => setDetailId(null) }]}>
-      <div className="rq-detail-profile"><div className="rq-detail-visual"><CharacterCard subject={{id: detail.id, name: detail.name, rarity: CHARACTER_MASTERS.find(entry => entry.id === detail.id)?.rarity ?? 'N', element: detail.element as 'fire'|'water'|'earth'|'wind'|'light'|'dark'}} compact hideMarks className="rq-detail-card" /><div className="rq-detail-badges"><span className="rq-rarity">{CHARACTER_MASTERS.find(entry => entry.id === detail.id)?.rarity ?? 'N'}</span><ElementBadge element={detail.element} /><span>Lv.{detail.level}</span></div></div></div>
+      <div className="rq-detail-profile"><div className="rq-detail-visual"><CharacterCard subject={{id: detail.id, name: detail.name, rarity: CHARACTER_MASTERS.find(entry => entry.id === detail.id)?.rarity ?? 'N', element: detail.element as 'fire'|'water'|'earth'|'wind'|'light'|'dark'}} compact hideMarks className="rq-detail-card" /><div className="rq-detail-badges"><RarityBadge rarity={CHARACTER_MASTERS.find(entry => entry.id === detail.id)?.rarity ?? 'N'} size="small"/><ElementBadge element={detail.element} /><span>Lv.{detail.level}</span></div></div></div>
       <dl className="rq-detail-stats">{Object.entries(detail.stats).filter(([key]) => key !== 'sp').map(([key, value]) => <div key={key}><dt>{key.toUpperCase()}</dt><dd>{(['hp', 'atk', 'def', 'luk'].includes(key) ? Math.floor(value) : value).toLocaleString()}</dd></div>)}</dl>
       <h3>装着スキル</h3><div className="rq-skill-slots">{Array.from({ length: 3 }, (_, index) => { const skill = detail.skills[index]; const asset = skill ? formalSkillAsset(skill) : null; return <article className="rq-detail-item" key={index}><span className="rq-slot-number">{index + 1}</span>{skill && asset ? <>{asset.image && <img className="rq-skill-icon" src={asset.image} alt="" />}<strong>{asset.name}</strong><p className="rq-skill-cost"><ElementBadge element={skill.element} />消費SP {skill.spCost}</p><p>{skillDescription(skill, commonSpMax !== null)}</p></> : <span className="rq-empty-slot">{index < detailSlots ? '未装着' : '未解放'}</span>}</article>; })}</div>
       {detail.passives.length > 0 && <h3>パッシブ</h3>}{detail.passives.map(passive => <article className="rq-detail-item" key={passive.id}><strong>{passive.name} Lv.{passive.level ?? 0}</strong><p>{passiveDescription(passive)}</p></article>)}

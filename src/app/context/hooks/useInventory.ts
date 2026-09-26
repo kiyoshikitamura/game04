@@ -240,7 +240,7 @@ export function useInventory(
       supabase.from("users").select("cash,neon_diamonds,level,xp,vitality").eq("id", owner).single(),
       supabase.from("user_items").select("*").eq("user_id", owner),
       supabase.from("presents").select("*").eq("user_id", owner).order("sent_at", { ascending: false }),
-      supabase.from("user_equipments").select("*").eq("user_id", owner).order("created_at", { ascending: false }),
+      onPresentEquipmentProjection ? supabase.from("user_equipments").select("*").eq("user_id", owner).order("created_at", { ascending: false }) : Promise.resolve({data:[],error:null}),
     ]);
     if (!isCurrent()) return [];
     if (wallet.error) throw wallet.error;

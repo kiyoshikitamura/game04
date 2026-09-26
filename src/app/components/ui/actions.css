@@ -6,5 +6,6 @@ body.game04-theme .g4-action.g4-action:disabled{background:var(--g4-panel);color
 body.game04-theme .g4-action.g4-action[aria-busy=true]{color:var(--g4-text)}
 .g4-action:active:not(:disabled){transform:scale(.98)}
 .g4-action-group{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}
+body.game04-theme .g4-action.g4-action--compact{min-width:72px;min-height:44px;padding:8px 10px}
 
 body.game04-theme .g4-action.g4-action :is(.g4-action-label,.g4-action-pending){font-family:inherit!important}

@@ -11,6 +11,8 @@ import FormalGachaHub, {
 } from "../gacha/FormalGachaHub";
 import SengokuGateOpening from "../gacha/SengokuGateOpening";
 import GachaModalPortal from "../gacha/GachaModalPortal";
+import ActionButton from "../ui/ActionButton";
+import RarityBadge from "../ui/RarityBadge";
 import CanonicalDialog from "../ui/CanonicalDialog";
 import { getJstDateString } from "@/utils/jst_date";
 import { clearPendingIntent, pendingStorageKey, readPendingIntent, savePendingIntent, type PendingGachaIntent } from "./formalGachaPending";
@@ -52,6 +54,8 @@ export default function FormalGachaView({ data, onAction }: {
   const response = data as FormalResponse;
   const [catalog, setCatalog] = useState<FormalCatalog | null>(response.formalGacha ?? null);
   const actionRef = useRef(onAction);
+  // React effect replay shares the read request instead of colliding with the app lock.
+  const catalogRequest = useRef<{owner: string; promise: Promise<RedesignResponse>} | null>(null);
   const requestRef = useRef<PendingGachaIntent | null>(null);
   const lifecycleRef = useRef({ mounted: true, owner: response.state.userId });
   const [loading, setLoading] = useState(!catalog);
@@ -109,7 +113,8 @@ export default function FormalGachaView({ data, onAction }: {
 
   useEffect(() => {
     let active = true;
-    void actionRef.current("formal_gacha_status", {}, crypto.randomUUID()).then(async value => {
+    if (catalogRequest.current?.owner !== response.state.userId) catalogRequest.current = {owner: response.state.userId, promise: actionRef.current("formal_gacha_status", {}, crypto.randomUUID())};
+    void catalogRequest.current.promise.then(async value => {
       if (!active) return;
       const nextCatalog = (value as FormalResponse).formalGacha;
       if (!nextCatalog) throw new Error("登用情報を確認できませんでした。");
@@ -288,13 +293,13 @@ export default function FormalGachaView({ data, onAction }: {
 
   if (!catalog || !mapped) return <section className="rd-panel formal-gacha-view__loading" aria-busy={loading}>
     <p role={error ? "alert" : "status"}>{error || "登用情報を確認中…"}</p>
-    {error && <button className="rd-button" disabled={loading || busy} onClick={() => void retryCatalogAndRecovery()}>再取得</button>}
+    {error && <ActionButton className="rd-button" disabled={loading || busy} onClick={() => void retryCatalogAndRecovery()}>再取得</ActionButton>}
   </section>;
 
   const ticket = (category: ApiCategory) => Number(catalog.special.tickets[catalog.special.categories[category].rule.ticketId] ?? 0);
   return <section className="formal-gacha-view">
     {error && <p className="rd-panel" role="alert">{error}</p>}
-    {(recoveryPending || storageBlocked) && <section className="rd-panel formal-gacha-view__recovery"><p>前回の登用結果を確認しています。新しい登用は、確認後に行えます。</p><button className="rd-button" disabled={busy} onClick={() => void retryRecovery()}>{busy ? "確認中…" : "前回の結果を確認"}</button></section>}
+    {(recoveryPending || storageBlocked) && <section className="rd-panel formal-gacha-view__recovery"><p>前回の登用結果を確認しています。新しい登用は、確認後に行えます。</p><ActionButton className="rd-button" busy={busy} busyLabel="確認中" onClick={() => void retryRecovery()}>前回の結果を確認</ActionButton></section>}
     <div inert={opening || !!results}><FormalGachaHub
       balances={{
         coin: response.state.cash,
@@ -326,7 +331,7 @@ export default function FormalGachaView({ data, onAction }: {
     {results && !opening && <GachaModalPortal onEscape={closeResults}><CanonicalDialog title="登用結果" onClose={closeResults} actions={[{ label: "登用へ戻る", semantic: "primary", onClick: closeResults }]}>
       <div className={`formal-gacha-results ${results.length >= 10 ? "is-ten" : ""}`}>{results.map((result, index) => <article key={`${result.category}:${result.id}:${index}`} data-acquisition={result.acquisition} className={`rarity-${result.rarity.toLowerCase()}`}>
         <div className="formal-gacha-results__art">{result.image ? <Image src={result.image} alt="" width={42} height={42} unoptimized /> : <span>{result.category === "character" ? "姫武将" : result.category === "skill" ? "戦技" : "武具"}</span>}</div>
-        <strong>{result.name}</strong><small>{result.rarity}</small><em>{formatOutcome(result)}</em>
+        <strong>{result.name}</strong><RarityBadge rarity={result.rarity} size="small"/><em>{formatOutcome(result)}</em>
       </article>)}</div>
     </CanonicalDialog></GachaModalPortal>}
   </section>;

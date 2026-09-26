@@ -2,6 +2,8 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { GameContext } from "@/app/context/GameContext";
+import {createInitialState} from '@/domain/redesign/masters';
+import {applyShopExchange} from '@/domain/redesign/shop';
 import ShopTab from "@/app/components/ShopTab";
 import InboxPanel from "@/app/components/InboxPanel";
 import CanonicalDialog from "@/app/components/ui/CanonicalDialog";
@@ -13,6 +15,8 @@ type Dialog = { isOpen: boolean; title?: string; message?: ReactNode; confirmTex
 
 /** Real components with isolated in-memory transport; no sign-in, checkout or DB writes. */
 export default function ShopUiHarness({ embedded = false, exchange }: { embedded?: boolean; exchange?: { state: RedesignState; onExchange: (payload: Record<string, unknown>) => Promise<unknown> } } = {}) {
+  const [fixtureState,setFixtureState]=useState(()=>({...createInitialState('shop-ui-synthetic'),diamonds:10000,cash:100000}));
+  const fixtureExchange={state:fixtureState,onExchange:async(payload:Record<string,unknown>)=>{setFixtureState(previous=>applyShopExchange(previous,payload));}};
   const [ready, setReady] = useState(false);
   const [shopSubTab, setShopSubTab] = useState("LIMITED");
   const [showInboxPanel, setShowInboxPanel] = useState(false);
@@ -61,7 +65,7 @@ export default function ShopUiHarness({ embedded = false, exchange }: { embedded
         <button onClick={() => { setInboxPanelTab("presents"); setShowInboxPanel(true); }}>プレゼントBOX</button>
         <button onClick={() => { setInboxPanelTab("news"); setShowInboxPanel(true); }}>お知らせ</button>
       </div>
-      <ShopTab exchange={exchange} />
+      <ShopTab exchange={exchange??fixtureExchange} />
     </main>
     <InboxPanel />
     {dialog.isOpen && <CanonicalDialog title={dialog.title} onClose={() => setDialog({ isOpen: false })} actions={[{ label: dialog.confirmText ?? "閉じる", onClick: dialog.onConfirm ?? (() => setDialog({ isOpen: false })) }]}>{dialog.message}</CanonicalDialog>}
