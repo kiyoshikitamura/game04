@@ -27,5 +27,14 @@ const summary={newInputCount:inputs,screenTrials:screens,independentTrials:valid
 const index=['# 全68面：採用判断の対応表','','旧入力の結果と追加停滞入力を混ぜない。5帯は保存SHA 77142a4の到達前資産条件付き判定を維持し、9面/残59面を今回の局所実験で変更しない。各面の編成・育成・実測・欠けた帯は既存の面別JSONを直接参照。','','|面|旧5帯|敵43案|技能依存の注意|停滞追加|残件主因|条件・実測|','|---|---|---|---|---|---|---|'];
 for(const r of rows){const p=previous(r.stage),d=deps.find(x=>x.stage===r.stage),rem=remaining.find(x=>x.stage===r.stage),t=tested.find(x=>x.stage===r.stage);index.push(`|${r.stage}|${p.missingWithinBudget.length?'未達':'条件付き充足'}|${enemies.some(e=>e.stage===r.stage)?'未承認変更あり':'変更なし'}|回避未確認 ${d.unresolved.join('/')||'なし'}、60%未満のみ ${d.onlyMarginal.join('/')||'なし'}|${t?.recommendation??'対象外'}|${rem?.principal??'5帯以外の承認・実機確認を保持'}|[面別](../stage68-decision-20260927/stages/${r.stage}.json)|`);}
 fs.writeFileSync(`${OUT}/STAGES68.md`,index.join('\n'));
+const effectName={damage:'直接攻撃',atk_up:'攻撃強化',def_down:'防御低下',heal:'回復',hot:'継続回復',dot:'継続ダメージ',stun:'行動停止',barrier:'障壁',counter:'反撃',remove_buff:'強化解除',remove_protection:'保護解除',cleanse:'弱体解除',protect:'かばう',def_up:'防御強化'};
+const tactics=['# 敵43面の攻略構造と証拠の範囲','','敵の数値案だけでは攻略性の証明にならない。以下は同程度の資産で保存した主/別戦法の効果構成、実発動、順序対照を対応付けたもの。属性補正・BURSTを個別に無効化した因果比較は未実施であり、発生しただけで必須性を断定しない。SP消費なし・攻撃技能最大5回・通常攻撃なしの承認済みBURSTを維持する。',''];
+for(const e of enemies){
+ tactics.push(`## ${e.stage}`,`変更対象敵の属性：${e.enemies.map(x=>`${x.id}=${x.behaviorAfter.element}`).join('、')}。属性攻撃の適合は下記の攻撃技能属性で選べるが、全属性置換の勝率比較は未完。`,'','|攻略|配置順の技能・効果・対象・条件・実発動試行数|','|---|---|');
+ for(const [label,ms]of [['主',e.primaryMechanics],['別',e.alternateMechanics]])tactics.push(`|${label}|${ms.map(m=>`${m.slot}:${m.id} ${m.effects.map(x=>effectName[x.type]??x.type).join('/')}（${m.element}、${m.target}、${JSON.stringify(m.condition)}）${m.casts}/${m.n}`).join('<br>')}|`);
+ const main=new Set(e.primaryMechanics.flatMap(m=>m.effects.map(x=>x.type))),alt=new Set(e.alternateMechanics.flatMap(m=>m.effects.map(x=>x.type)));
+ tactics.push('',`勝ち方の相違：主だけの効果=${[...main].filter(x=>!alt.has(x)).map(x=>effectName[x]??x).join('、')||'効果種別差なし'}／別だけの効果=${[...alt].filter(x=>!main.has(x)).map(x=>effectName[x]??x).join('、')||'効果種別差なし'}。差がない場合も対象・順序・条件の差を上表で確認し、武将名の差だけを別解に数えない。`,`攻撃順：前段の強化/弱体や解除を後段の攻撃へつなぐ配置を検証。対応する保存対照は${e.orderContrasts.length}件。同資産低勝率比較${e.lowerSameBudget?.name??'なし'}。具体勝敗はENEMY43.md。`,`BURST：主${e.primaryBurstRuns}/${e.primary.n}、別${e.alternateBurstRuns}/${e.alternative?.n??0}で発生。中核支援の後に攻撃を集中する利用を維持。支援だけを連発して通常攻撃を混ぜる旧BURSTへ戻さない。`,'');
+}
+fs.writeFileSync(`${OUT}/TACTICS43.md`,tactics.join('\n'));
 console.log(JSON.stringify(summary));
 for(const t of tested.filter(t=>t.selected))console.log(JSON.stringify({stage:t.stage,changes:t.variants.find(v=>v.name===t.selected).changes,results:t.variants.find(v=>v.name===t.selected).records.map(r=>({name:r.name,...metrics(r.validation)}))}));
