@@ -75,6 +75,7 @@ export interface BattleAnalysis {
     bursts: number;
 }
 export interface BattleResult {
+    burstPolicy?: BattleInput['rules']['burstPolicy'];
     /** Server-persisted start context, absent on old recordings. Not a simulated frame value. */
     raidStartSnapshot?: RaidBattleStartSnapshot;
     seed: number;

@@ -30,6 +30,8 @@ interface Unit extends BattleUnit {
     revivedAt: number;
 }
 export function simulateBalanceBattle(input: BattleInput): BattleResult {
+    const attackBurst = input.rules.burstPolicy === 'attack-free-v1-20260926';
+    if (input.rules.burstPolicy !== undefined && !attackBurst) throw new Error('Unsupported BURST policy');
     const revisedInput = input.rules.inputVersion === WAVE_SP_INPUT_VERSION;
     if (input.rules.inputVersion !== undefined && !revisedInput) throw new Error('Unsupported battle input version');
     const config = input.rules.balanceV2;
@@ -118,7 +120,7 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
     const stat = (u: Unit, key: 'atk' | 'def') => u.stats[key] * (1 + u.passive[key] / 100) * (1 + Math.min(sum(u, `${key}_up`), key === 'atk' ? 50 : 100) / 100 - Math.min(sum(u, `${key}_down`), key === 'atk' ? 30 : 50) / 100);
     const extraPassives = new WeakMap<Unit, Map<string, number>>();
     const snapshot = (u: Unit): BattleUnitState => ({ id: u.id, hp: u.hp, maxHp: u.stats.hp, sp: u.sp, maxSp: u.stats.sp, count: u.count, actions: u.actions, statuses: u.statuses.map(s => ({ ...s })), phase: u.phase, image: u.image, stunImmune: u.immune, dead: u.dead, effectiveAtk: stat(u, 'atk'), effectiveDef: stat(u, 'def'), skills: u.phase ? u.skills : undefined, passiveEffects: u.passives.map(p => ({id:p.id,type:p.type,percent:p.percent,targetElement:p.targetElement,active:alive(u) && (passiveConditions.get(u)?.get(p.id) ?? false)})) });
-    const frame = (kind: BattleFrame['kind'], text: string, u?: Unit, skill?: SkillMaster, extra: Partial<BattleFrame> = {}) => frames.push({ index: frames.length, wave: wave + 1, kind, text, actorId: u?.id, skillId: skill?.id, partySp, maxSp: 400, burst, party: party.map(snapshot), enemies: enemies.map(snapshot), burstGauge: gauge, maxBurstGauge: 200, playerActions, remainingActions: 300 - playerActions, skillStates: Object.fromEntries([...party, ...enemies].map(unit => [unit.id, unit.skills.map(s => ({ skillId: s.id, cost: Math.ceil(s.spCost * (burst && !unit.enemy ? .5 : 1)), status: extra.event === 'action_start' && unit === u && s === skill ? 'active' : !alive(unit) || !usable(unit, s) ? 'condition_unmet' : Math.ceil(s.spCost * (burst && !unit.enemy ? .5 : 1)) > (unit.enemy ? unit.sp : partySp) ? 'insufficient_sp' : 'ready', reason: s.unsupportedReason ?? (!condition(unit,s.condition) ? 'condition_unmet' : !usable(unit,s) ? (s.effects.some(e => ['atk_up','def_up','atk_down','def_down','dot','hot','shield','taunt','counter','stun'].includes(e.type)) && [...party,...enemies].some(t => alive(t) && t.statuses.some(effect => effect.sourceSkillId === s.id)) ? 'reapply_unavailable' : 'condition_unmet') : undefined) }))])), ...extra });
+    const frame = (kind: BattleFrame['kind'], text: string, u?: Unit, skill?: SkillMaster, extra: Partial<BattleFrame> = {}) => frames.push({ index: frames.length, wave: wave + 1, kind, text, actorId: u?.id, skillId: skill?.id, partySp, maxSp: 400, burst, party: party.map(snapshot), enemies: enemies.map(snapshot), burstGauge: gauge, maxBurstGauge: 200, playerActions, remainingActions: 300 - playerActions, skillStates: Object.fromEntries([...party, ...enemies].map(unit => [unit.id, unit.skills.map(s => ({ skillId: s.id, cost: Math.ceil(s.spCost * (burst && !unit.enemy ? (attackBurst ? 0 : .5) : 1)), status: extra.event === 'action_start' && unit === u && s === skill ? 'active' : !alive(unit) || (attackBurst && burst && !unit.enemy ? !usableAttack(unit, s) : !usable(unit, s)) ? 'condition_unmet' : Math.ceil(s.spCost * (burst && !unit.enemy ? (attackBurst ? 0 : .5) : 1)) > (unit.enemy ? unit.sp : partySp) ? 'insufficient_sp' : 'ready', reason: s.unsupportedReason ?? (!condition(unit,s.condition) ? 'condition_unmet' : !usable(unit,s) ? (s.effects.some(e => ['atk_up','def_up','atk_down','def_down','dot','hot','shield','taunt','counter','stun'].includes(e.type)) && [...party,...enemies].some(t => alive(t) && t.statuses.some(effect => effect.sourceSkillId === s.id)) ? 'reapply_unavailable' : 'condition_unmet') : undefined) }))])), ...extra });
     const condition = (u: Unit, c: SkillMaster['condition']): boolean => { const v = c.value ?? .5; switch (c.type) {
         case 'hp_below': return u.hp / u.stats.hp <= v;
         case 'ally_hp_below': return side(u).some(t => alive(t) && t.hp / t.stats.hp <= v);
@@ -242,6 +244,9 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
         return select(u, rule, all.filter(t => applicable(t, e, skill.id)), preview);
     };
     const usable = (u: Unit, s: SkillMaster) => !s.unsupportedReason && condition(u, s.condition) && s.effects.some(e => effectTargets(u, s, e, undefined, true).length > 0);
+    // Require a valid damage target, not merely an applicable attached heal/buff.
+    const usableAttack = (u: Unit, s: SkillMaster) => !s.unsupportedReason && condition(u, s.condition) && s.effects.some(e => e.type === 'damage' && effectTargets(u, s, e, undefined, true).length > 0);
+    const chooseAttack = (u: Unit) => u.skills.find(s => usableAttack(u, s));
     const choose = (u: Unit, discount = 1) => u.skills.find(s => usable(u, s) && Math.ceil(s.spCost * discount) <= (u.enemy ? u.sp : partySp));
     const basic = (u: Unit): SkillMaster => ({ id: 'basic', name: '通常攻撃', image: '', rarity: 'N', element: u.element, spCost: 0, condition: { type: 'always' }, target: 'first', effects: [{ type: 'damage', power: 100 }], description: '' });
     let hitThisAction = new Set<Unit>();
@@ -510,7 +515,12 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
                     frame('burst', '行動不能でBURST中断', u, undefined, { event: 'burst_interrupted' });
                     break;
                 }
-                act(u, choose(u, burst ? .5 : 1) ?? basic(u), burst ? .5 : 1);
+                const skill = burst && attackBurst ? chooseAttack(u) : choose(u, burst ? .5 : 1) ?? basic(u);
+                if (!skill) {
+                    frame('burst', '使用可能な攻撃スキルなし', u, undefined, { event: 'burst_interrupted', reason: 'no_usable_attack' });
+                    break;
+                }
+                act(u, skill, burst ? (attackBurst ? 0 : .5) : 1);
                 if (ended || !enemies.some(alive) || playerActions >= 300)
                     break;
                 interrupts();
@@ -545,6 +555,6 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
     if (!enemies.some(alive))
         wavesCleared++;
     frame('end', (ended as BattleOutcome | null) === 'win' ? '勝利' : reason === 'action_limit' ? '300行動上限：敗北' : '敗北', undefined, undefined, { event: 'end', reason });
-    return { seed: input.seed, outcome: ended!, totalDamage, ...(input.raidDamagePolicy==='actual-hp-v1-20260925'?{actualHpDamage}:{}), playerActions, wavesCleared, party: input.party, waves: input.waves, frames, analysis, rulesVersion: BALANCE_BATTLE_VERSION, ...(revisedInput ? { inputVersion: WAVE_SP_INPUT_VERSION, masterVersion: config.version } : {}), reason };
+    return { seed: input.seed, outcome: ended!, totalDamage, ...(input.raidDamagePolicy==='actual-hp-v1-20260925'?{actualHpDamage}:{}), playerActions, wavesCleared, party: input.party, waves: input.waves, frames, analysis, rulesVersion: BALANCE_BATTLE_VERSION, ...(attackBurst ? {burstPolicy: input.rules.burstPolicy} : {}), ...(revisedInput ? { inputVersion: WAVE_SP_INPUT_VERSION, masterVersion: config.version } : {}), reason };
 }
 
