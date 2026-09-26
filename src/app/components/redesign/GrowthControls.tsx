@@ -1,4 +1,5 @@
 'use client';
+import { LB_MATERIAL_NAMES } from '@/theme/approvedNames';
 import ActionButton from '../ui/ActionButton';
 import RarityBadge from '../ui/RarityBadge';
 import ElementBadge from './ElementBadge';
@@ -67,13 +68,13 @@ export function GrowthInventoryView({ state }: { state: RedesignState }) {
   const inventory = state.growthInventory ?? emptyGrowthInventory();
   const [open, setOpen] = useState(false);
   const [category, setCategory] = useState<'character'|'equipment'|'souls'|'materials'>('character');
-  const categories = [['character','武将EXP'],['equipment','装備EXP'],['souls','魂'],['materials','LB素材']] as const;
+  const categories = [['character','武将EXP'],['equipment','装備EXP'],['souls','魂'],['materials','限界突破素材']] as const;
   const items = category === 'character' || category === 'equipment'
     ? EXP_SIZES.map(size => ({key:size,name:`${category==='character'?'武将':'装備'}EXP ${labels[size]}（${EXP_VALUES[size].toLocaleString()} EXP）`,image:growthExpImage(category,size),amount:inventory.expItems[category][size]}))
     : category === 'souls' ? (['N','R','SR','SSR'] as const).flatMap(rarity => [
       {key:`generic-${rarity}`,name:`${rarity}汎用魂`,image:growthSoulImage('generic_soul',rarity),amount:inventory.genericSouls[rarity]},
       {key:`selector-${rarity}`,name:`${rarity}魂選択`,image:growthSoulImage('soul_selector',rarity),amount:inventory.soulSelectors[rarity]},
-    ]) : [{key:'skill',name:'スキルLB素材',image:'/items/skill_manual.png',amount:state.materials.skill},{key:'equipment',name:'装備LB素材',image:'/items/equip_lb_part.png',amount:state.materials.equipmentLb}];
+    ]) : [{key:'skill',name:LB_MATERIAL_NAMES.SKILL_MANUAL,image:'/items/skill_manual.png',amount:state.materials.skill},{key:'equipment',name:LB_MATERIAL_NAMES.EQUIP_LB_PART,image:'/items/equip_lb_part.png',amount:state.materials.equipmentLb}];
   return <><button type="button" className="g4-inventory-entry" onClick={()=>setOpen(true)}><img src={growthExpImage('character','small')} alt=""/><span>育成アイテム<span>所持品を確認</span></span><b aria-hidden="true">›</b></button>
     {open&&<CanonicalDialog title="育成アイテム" density="compact" actions={[{label:'閉じる',onClick:()=>setOpen(false)}]}>
       <nav className="g4-compact-tabs" aria-label="育成アイテムの分類">{categories.map(([key,label])=><button key={key} type="button" aria-pressed={category===key} onClick={()=>setCategory(key)}>{label}</button>)}</nav>

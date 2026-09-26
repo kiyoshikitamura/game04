@@ -1,3 +1,4 @@
+import { approvedMaterialDescription } from '@/theme/approvedNames';
 import type { RedesignState, Rarity } from './types';
 import { EXP_SIZES, emptyGrowthInventory } from './growthMaster';
 import { growthRewardLabel } from './growthReward';
@@ -17,8 +18,8 @@ export function inventoryEntries(state: RedesignState, stored: StoredItem[]): In
   const rows: InventoryEntry[] = [
     {key:'energy',name:canonicalItemName('ENERGY_DRINK'),amount:state.energyDrinks??0,image:'/items/energy_drink.png',category:'回復・侵攻',detail:'行動力を50回復します。',use:'use_energy_drink'},
     {key:'invasion',name:'侵攻令',amount:state.materials.unlock,image:'/creative/items/territory-invasion-ticket.png',category:'回復・侵攻',detail:'領土侵攻の主催に使用します。',destination:'territory'},
-    {key:'skill-lb',name:canonicalItemName('SKILL_MANUAL'),amount:state.materials.skill,image:'/items/skill_manual.png',category:'育成',detail:'スキルのLBに使用します。',destination:'character'},
-    {key:'equipment-lb',name:canonicalItemName('EQUIP_LB_PART'),amount:state.materials.equipmentLb,image:'/items/equip_lb_part.png',category:'育成',detail:'装備のLBに使用します。',destination:'character'},
+    {key:'skill-lb',name:canonicalItemName('SKILL_MANUAL'),amount:state.materials.skill,image:'/items/skill_manual.png',category:'育成',detail:approvedMaterialDescription('SKILL_MANUAL')!,destination:'character'},
+    {key:'equipment-lb',name:canonicalItemName('EQUIP_LB_PART'),amount:state.materials.equipmentLb,image:'/items/equip_lb_part.png',category:'育成',detail:approvedMaterialDescription('EQUIP_LB_PART')!,destination:'character'},
   ];
   for (const kind of ['character','equipment'] as const) for (const size of EXP_SIZES) rows.push({key:`${kind}-${size}`,name:growthRewardLabel({kind:`${kind}_exp_item`,id:size})!,amount:growth.expItems[kind][size],image:growthExpImage(kind,size),category:'育成',detail:`${kind==='character'?'武将':'装備'}のLv育成に使用します。繰越EXP：${growth.carryExp[kind].toLocaleString()}`,destination:'character'});
   for (const rarity of ['N','R','SR','SSR'] as Rarity[]) for (const kind of ['generic_soul','soul_selector'] as const) rows.push({key:`${kind}-${rarity}`,name:growthRewardLabel({kind,id:rarity})!,amount:growth[kind==='generic_soul'?'genericSouls':'soulSelectors'][rarity],image:growthSoulImage(kind,rarity),category:'魂',detail:kind==='generic_soul'?'同じレアリティの武将の覚醒に使用します。':'所持武将の固有魂を選択します。',destination:'character'});

@@ -1,3 +1,4 @@
+import { LB_MATERIAL_NAMES } from '@/theme/approvedNames';
 import type { RedesignState } from './types';
 import { CHARACTER_MASTERS, getSkillSlots, getCharacterStats, getEquipmentStats, EQUIPMENT_MASTERS } from './masters';
 import { getCharacterPassive } from './balanceV2Masters';
@@ -48,8 +49,8 @@ export function getGrowthResult(before: RedesignState, after: RedesignState, act
       for (const stat of ['hp', 'atk', 'def', 'luk'] as const) add(stat.toUpperCase(), Math.floor(a[stat]), Math.floor(b[stat]));
     }
   }
-  add('スキルLB素材', before.materials.skill, after.materials.skill);
-  add('装備LB素材', before.materials.equipmentLb, after.materials.equipmentLb);
+  add(LB_MATERIAL_NAMES.SKILL_MANUAL, before.materials.skill, after.materials.skill);
+  add(LB_MATERIAL_NAMES.EQUIP_LB_PART, before.materials.equipmentLb, after.materials.equipmentLb);
   for (const kind of ['character', 'equipment'] as const) {
     const prefix = kind === 'character' ? '武将' : '装備';
     add(`${prefix}繰越EXP`, aInventory.carryExp[kind], bInventory.carryExp[kind]);

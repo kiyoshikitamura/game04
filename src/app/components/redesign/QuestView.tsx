@@ -1,4 +1,5 @@
 'use client';
+import { LB_MATERIAL_NAMES } from '@/theme/approvedNames';
 import ActionButton from '../ui/ActionButton';
 import PageTitleBanner from './PageTitleBanner';
 import { useAudio } from '@/audio/AudioProvider';
@@ -27,7 +28,7 @@ import { characterArt } from '@/theme/creativeAssets';
 import { BossDisplay, useArtworkPreload, type DisplaySubject } from './visual-bench/CharacterDisplays';
 
 export interface QuestSettlement { playerGrowth?: import('@/utils/redesignApi').RedesignResponse['playerGrowth']; battle: BattleResult; rewards: Reward[]; firstClear: boolean; encounterRaidId?: string | null; }
-const REWARD_LABELS: Record<Reward['kind'] | 'free_diamonds', string> = {free_diamonds:'無償輝石', ticket:'スペシャル券', character_exp_item: '武将EXP', equipment_exp_item: '装備EXP', generic_soul: '汎用魂', soul_selector: '魂選択', character: '武将', skill: 'スキル', cash: '銭', character_material: '武将育成素材', skill_material: 'スキルLB素材', equipment_material: '装備育成素材', equipment_lb: '装備LB素材', soul: '武将の魂', equipment: '装備', unlock_item: '侵攻令' };
+const REWARD_LABELS: Record<Reward['kind'] | 'free_diamonds', string> = {free_diamonds:'無償輝石', ticket:'スペシャル券', character_exp_item: '武将EXP', equipment_exp_item: '装備EXP', generic_soul: '汎用魂', soul_selector: '魂選択', character: '武将', skill: 'スキル', cash: '銭', character_material: '武将育成素材', skill_material: LB_MATERIAL_NAMES.SKILL_MANUAL, equipment_material: '装備育成素材', equipment_lb: LB_MATERIAL_NAMES.EQUIP_LB_PART, soul: '武将の魂', equipment: '装備', unlock_item: '侵攻令' };
 function rewardLabel(reward: Reward) {
   const growthLabel = growthRewardLabel(reward); if(growthLabel) return growthLabel;
   if (reward.kind === 'ticket') return ({SPECIAL_TICKET_CHARACTER:'武将召喚券',SPECIAL_TICKET_SKILL:'スキル召喚券',SPECIAL_TICKET_EQUIPMENT:'装備召喚券'} as Record<string,string>)[reward.id??''] ?? 'スペシャル券';

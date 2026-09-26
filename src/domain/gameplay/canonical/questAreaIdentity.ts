@@ -1,3 +1,4 @@
+import { LB_MATERIAL_NAMES } from "../../../theme/approvedNames";
 /** Approved area intent. Reward bias activation waits for the reviewed probability master. */
 export const QUEST_AREA_IDENTITIES = {
   shinjuku: { enemy: "攻撃型の敵が多い", reward: "キャラクター育成素材 UP" },
@@ -5,7 +6,7 @@ export const QUEST_AREA_IDENTITIES = {
   ikebukuro: { enemy: "防御・HP型の敵が多い", reward: "装備育成素材 UP" },
   roppongi: { enemy: "スキルとバランスを重視した敵", reward: "スキル指南書 UP" },
   akihabara: { enemy: "特殊タイプの敵が多い", reward: "ガチャチケット UP" },
-  kawasaki: { enemy: "高火力の敵が多い", reward: "改造パーツ UP" },
+  kawasaki: { enemy: "高火力の敵が多い", reward: `${LB_MATERIAL_NAMES.EQUIP_LB_PART} UP` },
   yokohama: { enemy: "バランス・耐久型の敵が多い", reward: "キャラ・装備素材 バランス" },
 } as const;
 

@@ -1,4 +1,5 @@
 "use client";
+import { LB_MATERIAL_NAMES } from '@/theme/approvedNames';
 
 import { useAudio } from '@/audio/AudioProvider';
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -37,7 +38,7 @@ const uiCategory = (value: ApiCategory): FormalGachaCategory => ({ character: "C
 const apiCategory = (value: FormalGachaCategory): ApiCategory => ({ CHARACTER: "character", SKILL: "skill", EQUIPMENT: "equipment" })[value] as ApiCategory;
 const formatOutcome = (result: FormalResult) => result.acquisition === "new" ? "初回取得"
   : result.acquisition === "instance" ? "別個体として取得"
-    : result.category === "character" ? `重複 / 固有魂 +${result.convertedAmount}` : `重複 / 共通LB素材 +${result.convertedAmount}`;
+    : result.category === "character" ? `重複 / 固有魂 +${result.convertedAmount}` : `重複 / ${LB_MATERIAL_NAMES.SKILL_MANUAL} +${result.convertedAmount}`;
 function isDefinitePrecommitFailure(message: string): boolean {
   return /不足|利用済み|不正|対象.*(ありません|ではありません)|交換ポイント|ガチャ券|無料10連|抽選条件/.test(message);
 }

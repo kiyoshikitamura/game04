@@ -63,8 +63,8 @@ const sourceProducts: ShopProduct[] = [
     description:"",priceJpy:1000,purchaseLimit:3,sortOrder:4,
     items:[
       {itemId:"SOUL_SELECTOR_SSR",itemName:"SSR選択魂",quantity:3},
-      {itemId:"SKILL_LB_PART",itemName:"スキルLB素材",quantity:100},
-      {itemId:"EQUIP_LB_PART",itemName:"装備LB素材",quantity:150},
+      {itemId:"SKILL_LB_PART",itemName:canonicalItemName("SKILL_LB_PART"),quantity:100},
+      {itemId:"EQUIP_LB_PART",itemName:canonicalItemName("EQUIP_LB_PART"),quantity:150},
       {itemId:"CASH",itemName:"銭",quantity:50000},
     ],
   },

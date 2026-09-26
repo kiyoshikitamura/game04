@@ -1,4 +1,5 @@
 "use client";
+import { LB_MATERIAL_NAMES } from "@/theme/approvedNames";
 import { notifyRedesignRewardChange } from "@/utils/redesignRewardSync";
 import { getThemedCharacterName } from "@/theme/characters";
 import { game04WorldText, game04TownName, game04QuestPresentation } from "@/theme/world";
@@ -3742,7 +3743,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
             if (existSkill.plus_val >= 10) {
               const { data: itemData } = await supabase.from("user_items").select("quantity").eq("user_id", session.user.id).eq("item_id", "SKILL_MANUAL").maybeSingle();
               await supabase.from("user_items").upsert({ user_id: session.user.id, item_id: "SKILL_MANUAL", quantity: (itemData?.quantity || 0) + 2 });
-              results.push({ type: "SKILL", name: selected.name, rarity: selected.rarity, converted: true, convertReward: "指南書 x2" });
+              results.push({ type: "SKILL", name: selected.name, rarity: selected.rarity, converted: true, convertReward: `${LB_MATERIAL_NAMES.SKILL_MANUAL} x2` });
             } else {
               await supabase.from("user_skills").update({ plus_val: existSkill.plus_val + 1 }).eq("id", existSkill.id);
               results.push({ type: "SKILL", name: selected.name, rarity: selected.rarity, converted: false, convertReward: "限界突破+1" });

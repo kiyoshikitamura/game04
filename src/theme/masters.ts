@@ -1,9 +1,10 @@
+import { approvedMaterialName, approvedMaterialDescription } from './approvedNames';
 import masterNames from "./sengoku-masters.json" with { type: "json" };
 import { getThemedCharacterName } from "./characters";
 
 // NAME FIX 2026-09-16。ID・排出条件・効果・価格には触れない表示projection。
 export function getThemedMasterName(id: string, fallback: string): string {
-  return (masterNames as Readonly<Record<string, string>>)[id] ?? fallback;
+  return approvedMaterialName(id) ?? (masterNames as Readonly<Record<string, string>>)[id] ?? fallback;
 }
 
 export function getThemedGachaItemName(type: string, id: string, fallback: string): string {
@@ -22,5 +23,5 @@ export function getThemedItemDescription(id: string, fallback: string): string {
     SPECIAL_TICKET_SKILL: "戦技の特選登用を1回行えます。",
     SPECIAL_TICKET_EQUIPMENT: "武具の特選登用を1回行えます。",
   };
-  return names[id] ?? fallback.replaceAll("Character", "姫武将").replaceAll("Equipment", "武具").replaceAll("Skill", "戦技");
+  return approvedMaterialDescription(id) ?? names[id] ?? fallback.replaceAll("Character", "姫武将").replaceAll("Equipment", "武具").replaceAll("Skill", "戦技");
 }
