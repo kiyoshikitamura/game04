@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+import {rows,stageResults,metrics,hash} from './stage68_implementation_results.mjs';
+import {candidatesFor,write} from './stage68_decision_lib.mjs';
+import {stalls} from './stage68_adoption_lib.mjs';
+export const OUT='docs/verification/stage68-resolution-20260927';
+const result=[];
+for(const row of rows){const x=stageResults(row);if(!x.assessment.stalled.length)continue;const old=candidatesFor(row).cs.filter(c=>c.asset.covered),oldStalled=old.filter(c=>metrics(c.validation).actionLimit>0);
+ const newRecipes=x.assessment.stalled.filter(c=>!old.some(o=>hash(o.input.party)===hash(c.input.party))),sameRecipes=x.assessment.stalled.filter(c=>old.some(o=>hash(o.input.party)===hash(c.input.party)));
+ result.push({stage:row.stage,original14:stalls.includes(row.stage),currentEnemiesChangedFromAdopted43:!!x.selected,oldAnyStallRecipes:oldStalled.map(c=>({name:c.name,...metrics(c.validation)})),newRecipeStalls:newRecipes.map(c=>({name:c.name,...metrics(c.validation)})),sameRecipeStalls:sameRecipes.map(c=>({name:c.name,...metrics(c.validation)})),classification:stalls.includes(row.stage)?'KNOWN_ORIGINAL_STALL':oldStalled.length?'EXPANDED_DETECTION_OF_EXISTING_EVIDENCE':'NEW_RECIPE_EXPOSED_STALL_SAME_ENEMIES',criterionBefore:'low-rate <=10% AND action_limit >50% of runs, d.records only',criterionNow:'any validated funded recipe with at least one action_limit, includes order controls/search',thresholdUnchanged:300,roles:[['primary',x.assessment.primary],['alternative',x.assessment.alternative],...x.assessment.tiers.map((c,i)=>['band'+i,c])].filter(([,c])=>c).map(([role,c])=>({role,name:c.name,...metrics(c.validation)}))});
+}
+const summary={original14Remaining:result.filter(r=>r.original14).length,expandedOldEvidence:result.filter(r=>r.classification==='EXPANDED_DETECTION_OF_EXISTING_EVIDENCE').map(r=>r.stage),newRecipeSameEnemy:result.filter(r=>r.classification==='NEW_RECIPE_EXPOSED_STALL_SAME_ENEMIES').map(r=>r.stage),enemyChangeIntroduced:result.filter(r=>r.currentEnemiesChangedFromAdopted43).map(r=>r.stage),criteriaBroadened:true,formulaOr300LimitChanged:false};write(`${OUT}/discovery.json`,{summary,stages:result});console.log(JSON.stringify(summary));
