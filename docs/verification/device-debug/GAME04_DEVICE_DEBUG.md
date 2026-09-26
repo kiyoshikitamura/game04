@@ -7,7 +7,7 @@
 - 共通Preview：https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app/
 - 作業ブランチ：work/game04-common-preview-20260925。PR最新と発生版の一致をGitHubで確認。
 - 修正前配信の独立照合：2026-09-26、公開 /api/qa/deployment が上記SHA・preview・同ブランチを返すことを確認。deploymentId dpl_3CnYeKBqsnCcnaJHKzvMw8GevUWM。
-- 現在の確認SHA：60a608449490993c28bf533d6316703b148f9b96（2026-09-27、B14/B15共通Previewの公開識別APIで独立照合済み。実機確認待ち）。
+- 現在の確認SHA：ef047228fb2cc2146d52cd1ab243d2b52aa1821f（2026-09-27、DBG-064/071共通Preview公開識別APIで照合。実機確認待ち）。
 - 直前のユーザー実機確認基準：d9be130。1-1クリアまでの確認済み12件は保持。
 - 端末はiPhone系との報告。機種・OS・ブラウザー版は未確認。原画像の23:47・4Gは引継ぎ記載であり、本作業で画像の独立閲覧は未実施。
 - 次の番号：DBG-075。削除・再利用・振り直し禁止。
@@ -713,8 +713,8 @@ DBG-014/015/030の統合接続追記：任務確認保存後に予約済み2-1�
 
 |ID|状態・範囲|
 |---|---|
-|064|実装・限定確認済み、配信準備。現行Preview DBにgame04_update_own_profileが未反映。自己紹介保存RPCを反映し、実HTTP保存→再取得、実ブラウザ失敗時入力保持→再試行→再読込を確認。|
-|071|一覧復元は実装・限定確認済み、配信準備。RedesignShellメニュー/RedesignAppにbag接続が欠落。正式stateとuser_itemsを分類表示、獲得/任務受取/使用/再読込一致。付与ルール整理は未完了・別作業。|
+|064|配信済み・実機確認待ち。現行Preview DBにgame04_update_own_profileが未反映。自己紹介保存RPCを反映し、実HTTP保存→再取得、実ブラウザ失敗時入力保持→再試行→再読込を確認。|
+|071|一覧復元は配信済み・実機確認待ち。RedesignShellメニュー/RedesignAppにbag接続が欠落。正式stateとuser_itemsを分類表示、獲得/任務受取/使用/再読込一致。付与ルール整理は未完了・別作業。|
 |065|受付：アクティビティ・チャット。今回未着手。|
 |066|受付：LB等の正式名称横断統一。今回未着手。|
 |067|受付：ショップ情報設計。今回未着手。|
@@ -726,3 +726,7 @@ DBG-014/015/030の統合接続追記：任務確認保存後に予約済み2-1�
 |074|受付：無料ガチャCTA。今回未着手。|
 
 再指摘048/054〜057および全体デザインは別整理。実機解決12件は維持。詳細/証拠は[独立先行修正記録](dbg064071/REVIEW.md)。
+
+### DBG-064/071 共通Preview配信
+
+修正・配信SHA ef047228fb2cc2146d52cd1ab243d2b52aa1821f。Ready dpl_GKTY1KyxD8K3yHCkXhg4PZdJnU15。切替直前にPR #37実HEAD一致、共通URLの公開識別API一致。375/390×600の配信後表示もPASS、アイコンdecode完了を確認、pageerror 0。型検査/ローカルbuild/Vercel build成功。状態は両件（071は一覧復元部分）「配信済み・実機確認待ち」。付与ルール/全体UIは別整理。
