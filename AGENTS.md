@@ -1,3 +1,5 @@
+> UIの共通正本は `docs/product/GAME04_COMMON_UI_AUTHORITY.md`（§18: 用途別実装契約）。画面追加・修正は共通トークン／部品を使用し、375／390pxの関連状態を視覚確認する。共通正本・部品・統合配信の編集は統合担当へ集約。未指摘全画面の再監査は開始しない。
+
 > 育成必要量・魂・EXP繰越・LB素材・Player Lv回復・ノーマルガチャは `docs/product/GAME04_GROWTH_AUTHORITY_V1_2026-09-21.md` と `docs/product/GAME04_GROWTH_NORMAL_GACHA_HANDOFF_2026-09-21.md` が優先。既存EXP・残高の移行は未合意のまま保持する。
 
 > 育成必要量・魂・EXP繰越・LB素材・Player Lv回復・ノーマルガチャは `docs/product/GAME04_GROWTH_AUTHORITY_V1_2026-09-21.md` と `docs/product/GAME04_GROWTH_NORMAL_GACHA_HANDOFF_2026-09-21.md` が優先。育成以外の戦闘v2・開催snapshot・報酬量・未承認v3は変更しない。旧残高・EXPを黙って換算しない。

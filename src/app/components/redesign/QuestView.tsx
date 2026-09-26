@@ -17,6 +17,7 @@ import { useQuestAssets } from './questAssets';
 import { growthRewardLabel } from '@/domain/redesign/growthReward';
 import ElementBadge from './ElementBadge';
 import LoadingSpinner from '../ui/LoadingSpinner';
+import {RewardList,GrowthDisplay} from '../ui/Game04DataDisplay';
 import roster from '@/theme/sengoku-characters.json';
 import { characterArt } from '@/theme/creativeAssets';
 import { BossDisplay, useArtworkPreload, type DisplaySubject } from './visual-bench/CharacterDisplays';
@@ -45,14 +46,14 @@ function rewardIcon(reward: Reward) {
   return reward.kind === 'unlock_item' ? '/creative/items/territory-invasion-ticket.png' : null;
 }
 function Rewards({ rewards }: { rewards: Reward[] }) {
-  return rewards.length ? <ul className="rq-rewards">{rewards.map((reward, index) => <li key={`${reward.kind}-${reward.id ?? ''}-${index}`}><span className="rq-reward-icon">{rewardIcon(reward) && <img src={rewardIcon(reward)!} alt="" />}</span><span>{rewardLabel(reward)}</span><strong>×{reward.amount.toLocaleString()}</strong></li>)}</ul> : <p className="rq-muted">なし</p>;
+  return rewards.length ? <RewardList items={rewards.map((r,i)=>({key:String(i),name:rewardLabel(r),image:rewardIcon(r),amount:r.amount}))}/> : <p className="rq-muted">なし</p>;
 }
 export function ResultRewards({settlement,stage}:{settlement:QuestSettlement;stage:QuestStage|null}) {
  const remaining=new Map<string,number>();
  if(settlement.firstClear)for(const r of stage?.firstRewards??[])remaining.set(r.kind+':'+(r.id??''),(remaining.get(r.kind+':'+(r.id??''))??0)+r.amount);
  const rows=settlement.rewards.flatMap(r=>{const key=r.kind+':'+(r.id??''),first=Math.min(r.amount,remaining.get(key)??0);remaining.set(key,(remaining.get(key)??0)-first);return [...(r.amount>first?[{...r,amount:r.amount-first,first:false}]:[]),...(first>0?[{...r,amount:first,first:true}]:[])];});
  const growth=settlement.playerGrowth;
- return <><ul className="recorded-rewards">{rows.map((r,i)=><li key={i}>{rewardIcon(r)&&<img src={rewardIcon(r)!} alt=""/>}<span>{rewardLabel(r)} {r.first&&<b className="recorded-first">初回</b>}</span><strong>×{r.amount.toLocaleString()}</strong></li>)}</ul>{!rows.length&&<p>獲得報酬なし</p>}{growth&&<section className="recorded-growth"><small>PLAYER EXP</small><h3>+{growth.gainedExp.toLocaleString()}</h3>{growth.beforeLevel!==undefined&&growth.level!==undefined&&<p>Lv.{growth.beforeLevel} → Lv.{growth.level}</p>}{growth.energyRecovered!==undefined&&<p>行動力回復 +{growth.energyRecovered}（{growth.energy}/{growth.energyMax}）</p>}</section>}</>;
+ return <><RewardList items={rows.map((r,i)=>({key:String(i),name:rewardLabel(r),image:rewardIcon(r),amount:r.amount,first:r.first}))}/>{!rows.length&&<p>獲得報酬なし</p>}{growth&&<GrowthDisplay gain={growth.gainedExp} before={growth.beforeLevel} after={growth.level}>{growth.energyRecovered!==undefined&&<p>行動力回復 +{growth.energyRecovered}（{growth.energy}/{growth.energyMax}）</p>}</GrowthDisplay>}</>;
 }
 function bossSubject(enemy: QuestStage['waves'][number][number]): DisplaySubject | null {
   const match = roster.find(candidate => candidate.name === enemy.name);

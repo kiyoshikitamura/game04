@@ -77,3 +77,5 @@ RecordedBattleResultを本体BattleViewの完了表示へ接続。QuestViewはse
 確認：型検査・モック設定build成功。正式1-1マスタをローカルエンジンで記録化した86フレームでMVPくノ一、damage876、kills2、heal0、shield0、生存5、合計65。これは前の説明用4200ダメージ/65点を接続したものではなく、同じBattleResult形式の計算結果。ユーザー保存戦闘を取得した検証ではない。候補の貢献を変えると先頭以外がMVPになること、シールド非二重計上、最終生存、曖昧DOT抑止、旧記録fallback、記録非変更を検証。
 
 詳細パネルは不透明#19141c・本文#f5eee1、summaryは#211923f5、ヘッダーとフッターは本文から分離。375/390×664で二つのdetailsを開き、scrollHeight末尾まで到達・本文下端545px/CTA上端545pxを確認。0から中間値を経て65までの自動カウントをMutationObserverで取得。v5/interaction-checks.jsonに保存。実機は共通Preview配信後の確認。
+
+共通ルールの更新先は `docs/product/GAME04_COMMON_UI_AUTHORITY.md` §18へ一本化した（2026-09-26）。本ファイルはB03案の来歴・見本を保持する資料とし、共通の値・部品契約を重複更新しない。今回の実装と375/390px見本は `common-ui/README.md`。
