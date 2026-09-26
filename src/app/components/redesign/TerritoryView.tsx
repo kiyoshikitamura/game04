@@ -1,4 +1,5 @@
 'use client';
+import PageTitleBanner from './PageTitleBanner';
 import { invasionSceneName, enemyRoleLabel } from '@/domain/redesign/contextNames';
 import { growthRewardImage } from '@/domain/redesign/growthAssetPresentation';
 import { invasionBackground } from '@/domain/redesign/approvedBackgrounds';
@@ -99,7 +100,7 @@ export default function TerritoryView({ territory, rooms, userId, onHost, onOpen
   }
   return <section ref={root} className="inv-view rd-territory" aria-label="領土侵攻" aria-busy={!imagesReady}>{!imagesReady && <p className="inv-notice" role="status">{imageError ? <>画像を読み込めませんでした。<button className="inv-source" onClick={() => setImageAttempt(value => value + 1)}>再読込</button></> : '画像を読み込んでいます…'}</p>}
     {!destination ? <>
-      <div className="inv-title"><img src="/ui/sengoku/08-castle.png" alt="" /><h1>領土侵攻</h1></div>
+      <PageTitleBanner page="territory"/>
       {territory ? <section className="inv-progress inv-frame" aria-label="侵攻主催者の成長"><div><strong>侵攻Lv. <b>{territory.level}</b></strong><div className="inv-exp"><progress aria-label="主催者EXP" value={territory.experience} max={territory.nextLevelExp ?? Math.max(territory.experience, 1)} /><span>{territory.experience.toLocaleString()} / {territory.nextLevelExp?.toLocaleString() ?? 'MAX'}</span></div></div><p>開催枠 <b>{territory.activeHostingCount} / {territory.hostingSlots}</b></p></section> : <p className="inv-notice" role="status">開催条件を読み込めませんでした。画面を開き直してください。</p>}
       {hosted.length > 0 && <section className="inv-hosted" aria-label="自分の開催中の侵攻">{hosted.map(room => <button key={room.id} className="inv-resume inv-frame" onClick={() => onOpenRoom(room.id)}><span className="inv-resume-art"><Art src={invasionBackground(getRoomRaidMaster(room).id, room.level) ?? CASTLE_ART} alt="" /><b>開催中</b></span><span><strong>{room.territorySnapshot?.destination.castle || getRoomRaidMaster(room).name}</strong><small>ボスLv.{room.level} · 残り {raidTimeRemaining(room.expiresAt, now)}</small><small>侵攻 #{room.id.slice(-6)} · 参加 {room.participants.filter(p => !p.leftAt).length}人</small></span><b className="inv-resume-cta">攻略を再開 ›</b></button>)}</section>}
       <h2 className="inv-section-title">◇ 侵攻先</h2>

@@ -1,4 +1,5 @@
 'use client';
+import PageTitleBanner from './PageTitleBanner';
 import React, { useEffect, useId, useLayoutEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { registerPresentedDialog } from '../ui/dialogPresence';
@@ -30,5 +31,5 @@ export default function Modal({ title, onClose, children, footer, className = ''
     return () => { document.removeEventListener('keydown', key); for (const shell of shells) { const entry = inertShells.get(shell); if (entry && --entry.count === 0) { shell.inert = entry.previous; inertShells.delete(shell); } } previous?.focus(); };
   }, []);
   if (typeof document === 'undefined') return null;
-  return createPortal(<div className="rd-modal-backdrop" onMouseDown={event => { if (event.target === event.currentTarget && !closeDisabled) onClose(); }}><section ref={ref} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby={id} className={`rd-modal ${className}`}><header className="rd-modal-header"><h2 id={id}>{title}</h2>{!hideCloseButton && <button className="rd-button" onClick={onClose} disabled={closeDisabled} aria-label="閉じる">×</button>}</header><div className="rd-modal-body">{children}</div>{footer && <footer className="rd-modal-footer">{footer}</footer>}</section></div>, document.body);
+  return createPortal(<div className="rd-modal-backdrop" onMouseDown={event => { if (event.target === event.currentTarget && !closeDisabled) onClose(); }}><section ref={ref} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby={id} className={`rd-modal ${className}`}><header className="rd-modal-header">{title === '任務' ? <PageTitleBanner page="mission" id={id}/> : <h2 id={id}>{title}</h2>}{!hideCloseButton && <button className="rd-button" onClick={onClose} disabled={closeDisabled} aria-label="閉じる">×</button>}</header><div className="rd-modal-body">{children}</div>{footer && <footer className="rd-modal-footer">{footer}</footer>}</section></div>, document.body);
 }

@@ -1,4 +1,5 @@
 'use client';
+import BattleResourceDisplay, {BATTLE_RESOURCE_ASSETS} from './BattleResourceDisplay';
 import RecordedBattleResult from './RecordedBattleResult';
 import { UI_MOTION } from '../ui/uiMotion';
 import type { ReactNode } from 'react';
@@ -89,7 +90,7 @@ export function BattleView({ resultActions, resultRewards, bgmScene = 'BATTLE', 
   const effects = frame ? resolveBattleFrameEffects(frame, result.frames[index - 1], presentation.skill) : [];
   // A result-wide gate avoids hiding the battle when a later effect first appears.
   const imageKey = useMemo(() => JSON.stringify([...new Set([
-    '/branding/tribe-neon-logo.png', backgroundSrc,
+    '/branding/tribe-neon-logo.png', backgroundSrc, ...BATTLE_RESOURCE_ASSETS,
     ...result.frames.flatMap((record, i) => effectAssetPaths(resolveBattleFrameEffects(record, result.frames[i - 1], projectRecordedBattleFrame(result, i).skill))),
     ...result.frames.flatMap(record => [...record.party, ...record.enemies].flatMap(state => {
       const unit = result.party.find(item => item.id === state.id) ?? result.waves[record.wave - 1]?.find(item => item.id === state.id);
@@ -190,7 +191,7 @@ export function BattleView({ resultActions, resultRewards, bgmScene = 'BATTLE', 
       <div className={styles.enemyZone} data-count={frame.enemies.length}>{frame.enemies.map((u, i) => unitCard(u, true, i))}</div>
       {presentation.cutIn && presentation.actor && <div className={`${styles.cutIn} ${presentation.cutIn === 'burst' ? styles.burstCutIn : styles.skillCutIn}`} key={`cutin-${frame.index}`} aria-label={`${presentation.actor.name} ${presentation.cutIn === 'burst' ? 'BURST' : presentation.skill?.name ?? 'スキル'}`}><div className={styles.cutInLight} /><img src={unitArt(presentation.actor, presentation.actorState, 'full')} alt="" /><strong>{presentation.cutIn === 'burst' ? 'BURST' : presentation.skill?.name}</strong><span>{presentation.actor.name}</span></div>}
     </div>
-    <div className={`${styles.resources} ${frame.maxSp > 0 && frame.partySp >= frame.maxSp ? styles.spFull : ''}`}><div className={styles.spPanel}><span>共通SP</span><div className={styles.sp} role="meter" aria-label="共通SP" aria-valuemin={0} aria-valuemax={frame.maxSp} aria-valuenow={frame.partySp}><span style={{ width: meterWidth(frame.partySp, frame.maxSp) }} /><strong>{frame.partySp} / {frame.maxSp}</strong></div></div><div className={`${styles.burst} ${frame.burst ? styles.burstOn : ''}`} title="BURSTは戦闘記録に従って自動発動します">BURST{frame.burstGauge !== undefined && <small>{frame.burstGauge}/{frame.maxBurstGauge ?? 200}</small>}</div></div>
+    <BattleResourceDisplay key={result.seed+'-'+result.frames.length} frame={frame} startIndex={result.frames.slice(0,index+1).findLast(f=>f.event==='burst_start')?.index??-1} paused={playbackPaused} speed={effectiveSpeed} animate={result.frames.slice(initialFrame,index+1).some(f=>f.event==='burst_start')}/>
     {frame.burstGauge !== undefined && <div className={`${styles.sp} ${styles.gauge}`} role="meter" aria-label="バーストゲージ" aria-valuemin={0} aria-valuemax={frame.maxBurstGauge ?? 200} aria-valuenow={frame.burstGauge}><span style={{ width: meterWidth(frame.burstGauge, frame.maxBurstGauge ?? 200) }} /></div>}
     <div className={styles.party}>{frame.party.map((u, i) => unitCard(u, false, i))}</div>
     {frame.remainingActions !== undefined && <p className={styles.actionLimit}>残り味方行動機会 <strong>{frame.remainingActions}</strong> / 300</p>}

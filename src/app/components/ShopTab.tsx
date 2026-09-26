@@ -5,7 +5,7 @@ import { useGame } from "../context/GameContext";
 import { SHOP_PRODUCTS_MASTER, ShopProduct, ShopProductItem, remainingShopPurchases } from "@/utils/shop_master_data";
 import { loadBillingReadiness, peekBillingReadiness } from "@/utils/billing_config_client";
 import "./ShopTab.css";
-import SectionHeader from "./ui/SectionHeader";
+import PageTitleBanner from "./redesign/PageTitleBanner";
 import SubTabNav from "./ui/SubTabNav";
 import OutlawCard from "./ui/OutlawCard";
 import OutlawButton from "./ui/OutlawButton";
@@ -27,7 +27,7 @@ function Bundle({ product }: { product: ShopProduct }) {
 }
 
 export type ShopExchangeProps = { state: RedesignState; onExchange: (payload: Record<string, unknown>) => Promise<unknown>; onUseEnergyDrink?: () => Promise<unknown> };
-export default function ShopTab({ exchange }: { exchange?: ShopExchangeProps } = {}) {
+export default function ShopTab({ exchange, hideTitle = false }: { exchange?: ShopExchangeProps; hideTitle?: boolean } = {}) {
   const [initialReadiness] = useState(peekBillingReadiness);
   const [availability, setAvailability] = useState<"loading" | "available" | "unavailable">(initialReadiness ? "available" : "loading");
   const [sandbox, setSandbox] = useState(initialReadiness?.mode === "sandbox");
@@ -160,7 +160,7 @@ export default function ShopTab({ exchange }: { exchange?: ShopExchangeProps } =
   };
 
   return <div className="view-container shop-tab-container">
-    <SectionHeader title="商店" />
+    {!hideTitle && <PageTitleBanner page="shop"/>}
     {sandbox && availability === "available" && <p className="shop-billing-notice">テスト決済環境</p>}
     <div className="shop-account-actions"><BillingHistory /><PaidAssetExpiry /></div>
     <SubTabNav className="shop-sub-tabs" tabs={[{id:"LIMITED",label:"特選商店"},{id:"NORMAL",label:"輝石商店"}, ...(exchange ? [{id:"EXCHANGE",label:"交換所"}] : [])]}

@@ -1,4 +1,5 @@
 'use client';
+import PageTitleBanner from './PageTitleBanner';
 import { useAudio } from '@/audio/AudioProvider';
 import { questBattleBgm } from '@/audio/questBgm';
 import { questDisplayName, enemyDisplayName, enemyRoleLabel } from '@/domain/redesign/contextNames';
@@ -143,7 +144,7 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
         <div className="rq-scroll" aria-label={`${area.name}のステージ一覧`}>{area.stages.map(stage => {
           const cleared = hasQuestClear(stage.id,state.clearedStages,state.earlyProgress), unlocked = isQuestStageUnlocked(stage.id, state.clearedStages, state.earlyProgress);
           return <button className={`rq-stage ${current.id === stage.id ? 'is-current' : ''}`} key={stage.id} disabled={!unlocked || !viewAssets.ready} onClick={() => openStage(stage)} style={{ backgroundImage: `linear-gradient(90deg,#302015aa,#14100e88),url("${area.image}")` }}><b className="rq-stage-number">{area.index}-{stage.index}</b><span><strong>{formalStageName(stage) ?? stage.name}</strong><small><img src="/ui/sengoku/14-energy.png" alt="" />消費行動力 {questEnergyCost(stage,state)}</small></span><small className={`rq-state-label ${cleared ? 'is-cleared' : unlocked ? 'is-current' : 'is-locked'}`}>{cleared ? 'クリア済' : unlocked ? '挑戦可能' : '未解放'}</small></button>;
-        })}</div></> : <><h2>出陣</h2><div className="rq-scroll rq-area-list" aria-label="エリア一覧">{visibleAreas.map(entry => {
+        })}</div></> : <><PageTitleBanner page="quest"/><div className="rq-scroll rq-area-list" aria-label="エリア一覧">{visibleAreas.map(entry => {
           const cleared = state.earlyProgress?.completedAreas.includes(entry.id) || entry.stages.every(stage => hasQuestClear(stage.id,state.clearedStages,state.earlyProgress));
           const unlocked = isQuestStageUnlocked(entry.stages[0].id, state.clearedStages, state.earlyProgress);
           const last=entry.stages.at(-1)!;const boss=selectRepresentativeBoss(last.waves.at(-1)!);const subject=bossSubject(boss);const bossImage=subject?characterArt(subject,'full'):boss.image;

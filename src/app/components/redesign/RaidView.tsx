@@ -1,4 +1,5 @@
 'use client';
+import PageTitleBanner from './PageTitleBanner';
 import { useAudio } from '@/audio/AudioProvider';
 import { raidDisplayTitle, raidDisplaySubtitle, raidDisplayLabel, enemyRoleLabel } from '@/domain/redesign/contextNames';
 import { raidBackground } from '@/domain/redesign/approvedBackgrounds';
@@ -54,7 +55,7 @@ export default function RaidView({state,rooms,party,onAction,onOpenDeck,initialR
  const pendingRewards=room?.rewardGrants.filter(grant=>grant.userId===state.userId&&!grant.claimed)??[];
  return <section ref={root} className={`rd-raid ${room?'rd-raid--detail':''}`} aria-busy={busy}>
  {error&&<p role="alert" className="rd-raid-error">{error}</p>}
- {!room||!master||!enemy?<><div className="rd-raid-heading"><h1>共闘</h1><button disabled={busy} onClick={()=>void run('raid_refresh')}>更新</button></div><nav className="rd-raid-tabs" aria-label="共闘種別">{[['all','すべて'],['encounter','エンカウント'],['unlock','領土侵攻']].map(([id,label])=><button key={id} aria-pressed={filter===id} disabled={busy} onClick={()=>setFilter(id)}>{label}</button>)}</nav><div className="rd-raid-cards">{live.length?live.map(renderCard):<p className="rd-panel">開催中の共闘はありません。</p>}</div><button className="rd-raid-history" disabled={busy} onClick={()=>setModal('history')}><RaidApprovedIcon name="chest"/>終了した共闘・未受取報酬<span>›</span></button></>:<>
+ {!room||!master||!enemy?<><div className="rd-raid-heading"><PageTitleBanner page="raid"/><button disabled={busy} onClick={()=>void run('raid_refresh')}>更新</button></div><nav className="rd-raid-tabs" aria-label="共闘種別">{[['all','すべて'],['encounter','エンカウント'],['unlock','領土侵攻']].map(([id,label])=><button key={id} aria-pressed={filter===id} disabled={busy} onClick={()=>setFilter(id)}>{label}</button>)}</nav><div className="rd-raid-cards">{live.length?live.map(renderCard):<p className="rd-panel">開催中の共闘はありません。</p>}</div><button className="rd-raid-history" disabled={busy} onClick={()=>setModal('history')}><RaidApprovedIcon name="chest"/>終了した共闘・未受取報酬<span>›</span></button></>:<>
  <button className="rd-raid-back" disabled={busy} onClick={()=>setSelected(null)}>‹ 共闘一覧</button>
  <div className="rd-raid-detail-stage" style={{paddingTop:compact?Math.max(0,summaryHeight-compactHeight):0}}>
  <RaidApprovedDetailVisual data={visual(room)} compact={compact}
