@@ -4,6 +4,7 @@ import {GameContext} from '@/app/context/GameContext';
 import {AudioProvider} from '@/audio/AudioProvider';
 import {createInitialState,CHARACTER_MASTERS} from '@/domain/redesign/masters';
 import type {RedesignState} from '@/domain/redesign/types';
+import {QUEST_AREAS} from '@/domain/redesign/quests';
 import {applyHomeSelection} from '@/domain/redesign/home';
 import FormalLoginBonusModal from '@/app/components/redesign/FormalLoginBonusModal';
 import IntegratedTutorial from '@/app/components/redesign/IntegratedTutorial';
@@ -19,7 +20,7 @@ export default function Samples(){
     <label>日数<input aria-label="日数" type="number" min="1" max="30" value={day} onChange={e=>setDay(Number(e.target.value))}/></label>
     <label>武将<select aria-label="武将" value={state.homeCharacterId} onChange={e=>setState({...state,homeCharacterId:e.target.value})}>{CHARACTER_MASTERS.map(c=><option key={c.id} value={c.id}>{c.name}</option>)}</select></label>
     <label>背景<select aria-label="背景" onChange={e=>setState({...state,homeBackgroundId:e.target.value})}>
-     <option value="castle-town">初期</option><option value="ssr:char_reiji_01">SSR</option><option value="area:mikawa">三河</option><option value="castle-approach">旧城門</option>
+     <option value="castle-town">初期</option><option value="ssr:char_reiji_01">SSR</option>{QUEST_AREAS.map(area=><option key={area.id} value={`area:${area.id}`}>{area.name}</option>)}<option value="castle-approach">旧城門</option>
     </select></label>
    </nav>
    {mode==='home'&&<RedesignShell state={state} activeTab="home" onNavigate={()=>{}} onAction={async(_,payload)=>{setState(applyHomeSelection(state,payload??{}));return {};}} previewOnly/>}

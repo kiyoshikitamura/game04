@@ -33,7 +33,7 @@ fs.mkdirSync(out,{recursive:true});
    await p.waitForFunction(()=>document.querySelector('.g4-home-effect')?.getAttribute('src')==='/creative/effects/char_reiji_01.html');
    assert.equal(await p.locator('.g4-home-effect').count(),1);
    await p.getByLabel('背景',{exact:true}).selectOption('area:mikawa');
-   await p.waitForFunction(()=>!document.querySelector('.g4-home-effect'));
+   await p.waitForFunction(()=>document.querySelector('.g4-home-effect')?.getAttribute('src')==='/creative/effects/ambient.html?scene=mikawa');
    await p.getByLabel('背景',{exact:true}).selectOption('castle-approach');
    await p.waitForFunction(()=>document.querySelector('.g4-home')?.getAttribute('style')?.includes('castle-town.jpg'));
    await p.locator('.g4-home-effect').waitFor();
