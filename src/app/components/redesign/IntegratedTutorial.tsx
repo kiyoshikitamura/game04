@@ -1,5 +1,5 @@
 'use client';
-import { useEffect,useMemo,useState } from 'react';
+import { useEffect,useRef,useState } from 'react';
 import { useAudio } from '@/audio/AudioProvider';
 import { CHARACTER_MASTERS } from '@/domain/redesign/masters';
 import { getFormalOwnedSkill } from '@/domain/redesign/formalOwnedSkills';
@@ -15,10 +15,16 @@ import TypewriterText from './TypewriterText';
 import { TUTORIAL_ASSETS } from '@/app/qa/tutorial/assets';
 import '@/app/qa/tutorial/tutorial.css';
 const castMember=(id:string)=>CHARACTER_MASTERS.find(c=>c.id===id)!;
+/** A server refresh must not replace the recording and reset its playback clock. */
+function TutorialPractice({state,onComplete}:{state:RedesignState;onComplete:()=>void}) {
+ const [practice]=useState(()=>createTutorialBattle(state));
+ return <BattleView requirePlaybackCompletion result={practice} vipActive={false} onComplete={onComplete} title="模擬戦" backgroundSrc={BACKGROUNDS.battle} />;
+}
 export default function IntegratedTutorial({state,busy,onNext}:{state:RedesignState;busy:boolean;onNext:(step:number,name:string)=>Promise<unknown>}) {
  const save=state.tutorial!;
  const [name,setName]=useState(save.name),[error,setError]=useState('');
- const practice=useMemo(()=>state.deck.length?createTutorialBattle(state):null,[state]);
+ const advancing=useRef(false);
+ useEffect(()=>{advancing.current=false;},[state.userId,save.step]);
  useEffect(()=>{document.body.classList.add('rd-active');return()=>document.body.classList.remove('rd-active');},[]);
  const scene=SCENES[save.step];
  const { playBgm } = useAudio();
@@ -30,9 +36,9 @@ export default function IntegratedTutorial({state,busy,onNext}:{state:RedesignSt
  const [revealedScene,setRevealedScene]=useState('');
  const revealed = revealedScene === scene.id;
  const reveal = () => setRevealedScene(scene.id);
- const next=()=>{setError('');void onNext(save.step,name).catch(e=>setError(e.message));};
+ const next=()=>{if(busy||advancing.current)return;advancing.current=true;setError('');void onNext(save.step,name).catch(e=>{advancing.current=false;setError(e.message);});};
  return <TutorialSceneAssets assets={TUTORIAL_ASSETS}><div className="rd-shell tutorial-shell">
- {scene.id === 'battle' && practice ? <BattleView requirePlaybackCompletion result={practice} vipActive={false} onComplete={next} title="模擬戦" backgroundSrc={BACKGROUNDS.battle} /> :
+ {scene.id === 'battle' && state.deck.length ? <TutorialPractice key={`${state.userId}:${save.step}`} state={state} onComplete={next} /> :
       <main key={scene.id} className={`tutorial-scene ${world ? 'is-world' : ''}`} style={{ backgroundImage: `linear-gradient(0deg, #160f0beb, transparent 65%), url('${background}')` }} data-scene={scene.id}>
         {world && <HomeEffect effectId={scene.effectId} />}
         <div className={`tutorial-cast count-${cast.length} ${!world && !acquisition ? 'is-cowboy' : ''}`} aria-label={world ? '乱世の武将たち' : '豊臣秀吉'}>
