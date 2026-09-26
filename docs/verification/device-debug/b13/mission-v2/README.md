@@ -10,3 +10,5 @@
 - ログインは375/390、30日全表示データ、本文末尾到達、閉じる、pageerror0を確認。報酬/受取日/付与処理の変更なし。全68面の監査は行っていない。
 
 再生成: node scripts/build_b13_mission_v2.cjs。限定検証: モックのlocal:3013起動後 node scripts/verify_b13_mission_v2.cjs。証拠verification.jsonおよびPNG。端末実機の受入は未実施。
+
+配信確定: 修正SHA 694817c954cb367b81d4e1fd69002a9ba0454e27、Vercel Preview dpl_8tSRdavGQfJQkNJ5Ef9uperewJon（Ready）。切替直前のfetchでoriginとの差0/0を確認し、共通Preview aliasへ反映。ローカル型検査/本番ビルド成功。配信対象は共通compactとログインボード、任務は改訂提案のみで製品実装なし。
