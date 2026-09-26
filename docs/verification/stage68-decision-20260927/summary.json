@@ -1,0 +1,299 @@
+{
+  "basis": "c13003991a59f0bb9c2cb4a273b4b62de6fde1e2",
+  "stages": 68,
+  "overlappingTags": {
+    "originalFiveTierGap": 56,
+    "supplyProposal": 58,
+    "early": 10,
+    "actionLimitWait": 14
+  },
+  "originalTierCoverage": [
+    {
+      "label": "全勝",
+      "count": 68
+    },
+    {
+      "label": "約60%",
+      "count": 39
+    },
+    {
+      "label": "約30%",
+      "count": 39
+    },
+    {
+      "label": "0%超～10%",
+      "count": 32
+    },
+    {
+      "label": "観測0%",
+      "count": 46
+    }
+  ],
+  "currentTierCoverage": [
+    {
+      "label": "全勝",
+      "allEvidence": 68,
+      "assetCovered": 68
+    },
+    {
+      "label": "約60%",
+      "allEvidence": 40,
+      "assetCovered": 38
+    },
+    {
+      "label": "約30%",
+      "allEvidence": 40,
+      "assetCovered": 38
+    },
+    {
+      "label": "0%超～10%",
+      "allEvidence": 33,
+      "assetCovered": 28
+    },
+    {
+      "label": "観測0%",
+      "allEvidence": 46,
+      "assetCovered": 44
+    }
+  ],
+  "allTiersAssetCovered": 9,
+  "earlyTwoStrategies": 9,
+  "newTests": [
+    {
+      "stage": "1-1",
+      "name": "starter-buff-first",
+      "inputHash": "e1e160319e02afd326fc6c1ceef84e28f53aab93f6625a34a67a8192fc2dc139",
+      "newTrials": 220,
+      "wins": 200,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/1-1-early.json.gz"
+    },
+    {
+      "stage": "1-2",
+      "name": "starter-rush",
+      "inputHash": "16f26f49bbb4a60da33371f6690fd788c4725583be825f2ed33459261d5d304b",
+      "newTrials": 220,
+      "wins": 200,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/1-2-early.json.gz"
+    },
+    {
+      "stage": "1-5",
+      "name": "starter-area-sp-feed",
+      "inputHash": "2b2f6f0892b8db0af1df6de5054329273ab6ae7e83293ea6cfa2cd34d87e9604",
+      "newTrials": 220,
+      "wins": 200,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/1-5-early.json.gz"
+    },
+    {
+      "stage": "2-1",
+      "name": "starter-area-sp-feed",
+      "inputHash": "ef9e843ed0880d0cd2c0af52c2518324dc002e8cf4d62ec666365b01a6b0469e",
+      "newTrials": 220,
+      "wins": 200,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/2-1-early.json.gz"
+    },
+    {
+      "stage": "2-2",
+      "name": "starter-area-sp-feed",
+      "inputHash": "010e89f16c97e32a4aab3a38914c6f323d5dacc4ade07f97f38664135f4a63c4",
+      "newTrials": 220,
+      "wins": 200,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/2-2-early.json.gz"
+    },
+    {
+      "stage": "2-3",
+      "name": "starter-area-sp-feed",
+      "inputHash": "0770c093894ed3316ddee09a182cb3af4ea6614bc3fce353fc290e01d5ba2961",
+      "newTrials": 220,
+      "wins": 149,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/2-3-early.json.gz"
+    },
+    {
+      "stage": "2-3",
+      "name": "band1-swap13-starter-area-sp-feed",
+      "inputHash": "0bad51ece79109b3eb97d16762267384331fff6c226ee565eefe1c786bc97d70",
+      "newTrials": 220,
+      "wins": 0,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/2-3-order.json.gz"
+    },
+    {
+      "stage": "2-3",
+      "name": "band3-swap12-attack-up-reversed",
+      "inputHash": "23da2bc722047d172251b7cdc312d09ebe13b7fbaeb4356a1fcbb2466f884128",
+      "newTrials": 220,
+      "wins": 0,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/2-3-order.json.gz"
+    },
+    {
+      "stage": "2-4",
+      "name": "starter-area-sp-feed",
+      "inputHash": "d7762c0642156a6417f635b1bf610734f46ee494079003c820e38bc805a06aef",
+      "newTrials": 220,
+      "wins": 196,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/2-4-early.json.gz"
+    },
+    {
+      "stage": "2-4",
+      "name": "band1-swap13-starter-area-sp-feed",
+      "inputHash": "22199de9a46f06ad5cb32f9c8fec365efa25e922c9f6baad2e7e71d0dc03e267",
+      "newTrials": 220,
+      "wins": 31,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/2-4-order.json.gz"
+    },
+    {
+      "stage": "2-4",
+      "name": "band3-swap12-attack-up-reversed",
+      "inputHash": "7fd1ff4fa93478e54faf3f75ccefa5c82bb363b46849a95731780f55325da5de",
+      "newTrials": 220,
+      "wins": 0,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/2-4-order.json.gz"
+    },
+    {
+      "stage": "2-5",
+      "name": "starter-area-sp-feed",
+      "inputHash": "24d65f84133cf9b5a2c8658a8851a5273954635fb4da0b14e638c0f8fea2bb97",
+      "newTrials": 220,
+      "wins": 200,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/2-5-early.json.gz"
+    },
+    {
+      "stage": "2-5",
+      "name": "band1-swap12-attack-up",
+      "inputHash": "c9231bb8a71d2d3d475787ea9320e5e8d3ebf91a69d882f5274fcd14205fd37f",
+      "newTrials": 220,
+      "wins": 200,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/2-5-order.json.gz"
+    },
+    {
+      "stage": "2-5",
+      "name": "band3-swap12-attack-up-reversed",
+      "inputHash": "20efbcf7017787073d0f02ac36db5fb15a4233ac30ee3abaed6efbf39ae0306a",
+      "newTrials": 220,
+      "wins": 0,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/2-5-order.json.gz"
+    },
+    {
+      "stage": "3-1",
+      "name": "starter-single",
+      "inputHash": "1870df7f083e81f787ef77dca3e2330e659cac1f873597143d5c084eee84773e",
+      "newTrials": 200,
+      "wins": 0,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/no-add/3-1.json.gz",
+      "scope": "no-add-feasibility-not-five-tier"
+    },
+    {
+      "stage": "3-1",
+      "name": "starter-area",
+      "inputHash": "6b7fa918b10d135f3cca9a569d972647e454754caaebc21ea0818102ab788ae2",
+      "newTrials": 200,
+      "wins": 0,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/no-add/3-1.json.gz",
+      "scope": "no-add-feasibility-not-five-tier"
+    },
+    {
+      "stage": "3-2",
+      "name": "band2-swap12-attack-up-reversed",
+      "inputHash": "eca7f633bd694b2882111a7c6641a6e005363200b6f85fc79895b67423d5b38e",
+      "newTrials": 220,
+      "wins": 135,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/3-2-order.json.gz"
+    },
+    {
+      "stage": "3-2",
+      "name": "band4-swap13-no-support",
+      "inputHash": "ae30a16235b721a6ebc11033cf096ce360c3a1fec4f1c935611fc8819bedf0eb",
+      "newTrials": 220,
+      "wins": 1,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/3-2-order.json.gz"
+    },
+    {
+      "stage": "6-2",
+      "name": "starter-single",
+      "inputHash": "962f1c5c14c3c01da74c8380d9bac00d25c93ad82e9bdb6e631a4b1bb127c1d4",
+      "newTrials": 200,
+      "wins": 0,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/no-add/6-2.json.gz",
+      "scope": "no-add-feasibility-not-five-tier"
+    },
+    {
+      "stage": "6-2",
+      "name": "starter-area",
+      "inputHash": "27f2a22fb87a59f71380181eec925bc1d1683e391aa7e3f8c2c86d57e0682b11",
+      "newTrials": 200,
+      "wins": 0,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/no-add/6-2.json.gz",
+      "scope": "no-add-feasibility-not-five-tier"
+    },
+    {
+      "stage": "9-4",
+      "name": "band1-swap12-counter-boost",
+      "inputHash": "ba8fb8a4ca8774472a07b33a30bf5507ec1db1dbfae0f79c7efb9a09cacaa214",
+      "newTrials": 220,
+      "wins": 75,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/9-4-order.json.gz"
+    },
+    {
+      "stage": "9-4",
+      "name": "band2-swap12-break-regen-order-54123",
+      "inputHash": "9c1d9c96d0ea4747e15695970878cc6433a7f83680858936bfc0c64a7ac210ec",
+      "newTrials": 220,
+      "wins": 200,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/9-4-order.json.gz"
+    },
+    {
+      "stage": "10-5",
+      "name": "band3-swap12-attack-up-reversed",
+      "inputHash": "86b2ae84052ec30b7d2fe7985838aeefdac315252feca410f884d73770a12367",
+      "newTrials": 220,
+      "wins": 0,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/10-5-order.json.gz"
+    },
+    {
+      "stage": "10-10",
+      "name": "starter-single",
+      "inputHash": "d8b7fb8f73d13221d2f340dcd4c2790256e0398cf577dbe2d03139c5c7d4ef93",
+      "newTrials": 200,
+      "wins": 0,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/no-add/10-10.json.gz",
+      "scope": "no-add-feasibility-not-five-tier"
+    },
+    {
+      "stage": "10-10",
+      "name": "starter-area",
+      "inputHash": "f6cd1a984c94012271bfb6097ed2ad8a0a1dd88f2480df48f298598d63bfdf75",
+      "newTrials": 200,
+      "wins": 0,
+      "n": 200,
+      "path": "docs/verification/stage68-decision-20260927/no-add/10-10.json.gz",
+      "scope": "no-add-feasibility-not-five-tier"
+    }
+  ],
+  "newTrials": 5380,
+  "newEnemyChanges": 0,
+  "supplyDeltaBeyondRecovered": 0,
+  "optionBFarmTotal": 2711,
+  "optionBEnergyTotal": 16695
+}

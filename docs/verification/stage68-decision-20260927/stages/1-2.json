@@ -1,0 +1,2022 @@
+{
+  "stage": "1-2",
+  "id": "mikawa-2",
+  "name": "街道の関所",
+  "status": "現行敵/到達前供給で検証",
+  "tags": {
+    "originalFiveTierGap": true,
+    "supplyProposal": false,
+    "early": true,
+    "actionLimitWait": false
+  },
+  "profile": {
+    "area": 1,
+    "level": 3,
+    "eq": null,
+    "eqLevel": 1,
+    "lb": 0
+  },
+  "primary": {
+    "name": "basic-focus",
+    "wins": 200,
+    "n": 200,
+    "percent": 100,
+    "inputHash": "f62ed6fefb7a9bada28b6b4027f1a0e77db15cabbb4db3cfe5638fb406c9da22",
+    "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+    "assets": {
+      "covered": true,
+      "missing": []
+    },
+    "order": [
+      {
+        "id": "char_joe_01",
+        "skills": [
+          "SKD035"
+        ]
+      },
+      {
+        "id": "char_daimon_01",
+        "skills": [
+          "SKD003"
+        ]
+      },
+      {
+        "id": "char_jihoon_01",
+        "skills": [
+          "SKD003"
+        ]
+      },
+      {
+        "id": "char_aoi_01",
+        "skills": [
+          "SKD039"
+        ]
+      }
+    ],
+    "actions": [
+      16,
+      18
+    ],
+    "meanActions": 16.245,
+    "coreCasts": {
+      "SKD035": 200,
+      "SKD003": 200,
+      "SKD039": 0
+    },
+    "loadout": [
+      {
+        "id": "char_joe_01",
+        "level": 3,
+        "awakening": 0,
+        "exp": 80,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "北条氏康",
+        "skills": [
+          {
+            "id": "SKD035",
+            "lb": 0
+          }
+        ],
+        "equipment": []
+      },
+      {
+        "id": "char_daimon_01",
+        "level": 3,
+        "awakening": 0,
+        "exp": 80,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "井伊直政",
+        "skills": [
+          {
+            "id": "SKD003",
+            "lb": 0
+          }
+        ],
+        "equipment": []
+      },
+      {
+        "id": "char_jihoon_01",
+        "level": 3,
+        "awakening": 0,
+        "exp": 80,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "前田利家",
+        "skills": [
+          {
+            "id": "SKD003",
+            "lb": 0
+          }
+        ],
+        "equipment": []
+      },
+      {
+        "id": "char_aoi_01",
+        "level": 3,
+        "awakening": 0,
+        "exp": 80,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "お市の方",
+        "skills": [
+          {
+            "id": "SKD039",
+            "lb": 0
+          }
+        ],
+        "equipment": []
+      }
+    ]
+  },
+  "alternative": null,
+  "early": {
+    "stage": "1-2",
+    "status": "二戦法の勝利/中核発動確認",
+    "pair": [
+      {
+        "name": "basic-focus",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "f62ed6fefb7a9bada28b6b4027f1a0e77db15cabbb4db3cfe5638fb406c9da22",
+        "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          16,
+          18
+        ],
+        "meanActions": 16.245,
+        "coreCasts": {
+          "SKD035": 200,
+          "SKD003": 200,
+          "SKD039": 0
+        },
+        "meaning": "攻撃強化後に低SP技",
+        "core": "SKD035",
+        "coreName": "鬨の声",
+        "coreRuns": 200
+      },
+      {
+        "name": "starter-rush",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "16f26f49bbb4a60da33371f6690fd788c4725583be825f2ed33459261d5d304b",
+        "evidence": "docs/verification/stage68-decision-20260927/1-2-early.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          17,
+          18
+        ],
+        "meanActions": 17.935,
+        "coreCasts": {
+          "SKD003": 200,
+          "SKD039": 0
+        },
+        "meaning": "強化にSPを使わず低SP技で速攻",
+        "core": "SKD003",
+        "coreName": "土割り",
+        "coreRuns": 200
+      }
+    ],
+    "requiredChange": "敵/配布/育成は変更不要。編成ガイドと勝因説明を修正。",
+    "sourceAtArrival": {
+      "skills": [
+        {
+          "id": "SKD003",
+          "name": "土割り",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD035",
+          "name": "鬨の声",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD039",
+          "name": "応急手当",
+          "where": "チュートリアル完了時"
+        }
+      ],
+      "characters": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "where": "1-1初回クリア後"
+        }
+      ],
+      "gear": [],
+      "resources": {
+        "cash": 3500,
+        "charExp": 700,
+        "eqExp": 200,
+        "skillMaterials": 0,
+        "genericR": 0
+      }
+    }
+  },
+  "enemyChanges": [],
+  "enemyPolicy": "回収済み43面273項目の案を継承。今回新たな敵数値変更なし。beforeが最新値と違う箇所は統合時に停止。",
+  "beforeSameParty": {
+    "name": "basic-focus",
+    "wins": 200,
+    "n": 200,
+    "percent": 100,
+    "inputHash": "f62ed6fefb7a9bada28b6b4027f1a0e77db15cabbb4db3cfe5638fb406c9da22",
+    "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+    "order": [
+      {
+        "id": "char_joe_01",
+        "skills": [
+          "SKD035"
+        ]
+      },
+      {
+        "id": "char_daimon_01",
+        "skills": [
+          "SKD003"
+        ]
+      },
+      {
+        "id": "char_jihoon_01",
+        "skills": [
+          "SKD003"
+        ]
+      },
+      {
+        "id": "char_aoi_01",
+        "skills": [
+          "SKD039"
+        ]
+      }
+    ],
+    "actions": [
+      16,
+      18
+    ],
+    "meanActions": 16.245,
+    "coreCasts": {
+      "SKD035": 200,
+      "SKD003": 200,
+      "SKD039": 0
+    }
+  },
+  "orderContrasts": [
+    {
+      "base": {
+        "name": "basic-focus",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "f62ed6fefb7a9bada28b6b4027f1a0e77db15cabbb4db3cfe5638fb406c9da22",
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          16,
+          18
+        ],
+        "meanActions": 16.245,
+        "coreCasts": {
+          "SKD035": 200,
+          "SKD003": 200,
+          "SKD039": 0
+        }
+      },
+      "changed": {
+        "name": "exact-party-order-reversed",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "58e46caa1cb423b5cbe371d6cb17224592f296d44ceb600c3c24df495b7600f6",
+        "order": [
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          }
+        ],
+        "actions": [
+          15,
+          19
+        ],
+        "meanActions": 17.495,
+        "coreCasts": {
+          "SKD039": 0,
+          "SKD003": 200,
+          "SKD035": 200
+        }
+      },
+      "sameSeedSet": true,
+      "interpretation": "party順だけの対照。勝率差がない場合は勝敗への寄与確認とはしない。"
+    }
+  ],
+  "originalMissing": [
+    "約60%",
+    "約30%",
+    "0%超～10%",
+    "観測0%"
+  ],
+  "missingWithinBudget": [
+    "約60%",
+    "約30%",
+    "0%超～10%",
+    "観測0%"
+  ],
+  "tierRows": [
+    {
+      "label": "全勝",
+      "original": {
+        "name": "basic-focus",
+        "wins": 200,
+        "n": 200
+      },
+      "allSaved": {
+        "name": "basic-focus",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "f62ed6fefb7a9bada28b6b4027f1a0e77db15cabbb4db3cfe5638fb406c9da22",
+        "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          16,
+          18
+        ],
+        "meanActions": 16.245,
+        "coreCasts": {
+          "SKD035": 200,
+          "SKD003": 200,
+          "SKD039": 0
+        }
+      },
+      "withinBudget": {
+        "name": "basic-focus",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "f62ed6fefb7a9bada28b6b4027f1a0e77db15cabbb4db3cfe5638fb406c9da22",
+        "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          16,
+          18
+        ],
+        "meanActions": 16.245,
+        "coreCasts": {
+          "SKD035": 200,
+          "SKD003": 200,
+          "SKD039": 0
+        }
+      },
+      "nearest": [
+        {
+          "name": "basic-focus",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "f62ed6fefb7a9bada28b6b4027f1a0e77db15cabbb4db3cfe5638fb406c9da22",
+          "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            16,
+            18
+          ],
+          "meanActions": 16.245,
+          "coreCasts": {
+            "SKD035": 200,
+            "SKD003": 200,
+            "SKD039": 0
+          }
+        },
+        {
+          "name": "basic-focus-replace-SKD035-SKD038",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "e201c347d1e91cb3935a691708c86f831820db2065dc83f8073fb2041a1965ce",
+          "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+          "assets": {
+            "covered": false,
+            "missing": [
+              "技:SKD038:LB0"
+            ]
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD038"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            16,
+            20
+          ],
+          "meanActions": 17.06,
+          "coreCasts": {
+            "SKD038": 200,
+            "SKD003": 200,
+            "SKD039": 0
+          }
+        },
+        {
+          "name": "basic-focus-replace-SKD003-SKD001",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "7efbcfb60c38334443471075dc8ad54370c2bfe8518e21ed9c1b7a194690a51b",
+          "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+          "assets": {
+            "covered": false,
+            "missing": [
+              "技:SKD001:LB0"
+            ]
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD001"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD001"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            19,
+            19
+          ],
+          "meanActions": 19,
+          "coreCasts": {
+            "SKD035": 200,
+            "SKD001": 200,
+            "SKD039": 0
+          }
+        }
+      ],
+      "proposal": null
+    },
+    {
+      "label": "約60%",
+      "original": null,
+      "allSaved": null,
+      "withinBudget": null,
+      "nearest": [
+        {
+          "name": "basic-focus",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "f62ed6fefb7a9bada28b6b4027f1a0e77db15cabbb4db3cfe5638fb406c9da22",
+          "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            16,
+            18
+          ],
+          "meanActions": 16.245,
+          "coreCasts": {
+            "SKD035": 200,
+            "SKD003": 200,
+            "SKD039": 0
+          }
+        },
+        {
+          "name": "basic-focus-replace-SKD035-SKD038",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "e201c347d1e91cb3935a691708c86f831820db2065dc83f8073fb2041a1965ce",
+          "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+          "assets": {
+            "covered": false,
+            "missing": [
+              "技:SKD038:LB0"
+            ]
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD038"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            16,
+            20
+          ],
+          "meanActions": 17.06,
+          "coreCasts": {
+            "SKD038": 200,
+            "SKD003": 200,
+            "SKD039": 0
+          }
+        },
+        {
+          "name": "basic-focus-replace-SKD003-SKD001",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "7efbcfb60c38334443471075dc8ad54370c2bfe8518e21ed9c1b7a194690a51b",
+          "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+          "assets": {
+            "covered": false,
+            "missing": [
+              "技:SKD001:LB0"
+            ]
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD001"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD001"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            19,
+            19
+          ],
+          "meanActions": 19,
+          "coreCasts": {
+            "SKD035": 200,
+            "SKD001": 200,
+            "SKD039": 0
+          }
+        }
+      ],
+      "proposal": {
+        "name": "band1-swap12-basic-focus",
+        "band": 1,
+        "label": "約60%",
+        "status": "UNTESTED",
+        "base": {
+          "name": "basic-focus",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "f62ed6fefb7a9bada28b6b4027f1a0e77db15cabbb4db3cfe5638fb406c9da22",
+          "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            16,
+            18
+          ],
+          "meanActions": 16.245,
+          "coreCasts": {
+            "SKD035": 200,
+            "SKD003": 200,
+            "SKD039": 0
+          }
+        },
+        "swapPositions": [
+          1,
+          2
+        ],
+        "inputHash": "9e7a5a67cc5c2107d4f1559b60aabe70e7bc4ae939c7d4c199b06e246af1a619",
+        "explanation": "basic-focusの1番と2番を交換。武将・Lv・覚醒・技LB・装備・敵は同一。SPを先に使う技、支援前後、通常攻撃/BURSTへの参加順を変える限定候補。目標勝率になるとの保証はない。"
+      }
+    },
+    {
+      "label": "約30%",
+      "original": null,
+      "allSaved": null,
+      "withinBudget": null,
+      "nearest": [
+        {
+          "name": "basic-focus",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "f62ed6fefb7a9bada28b6b4027f1a0e77db15cabbb4db3cfe5638fb406c9da22",
+          "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            16,
+            18
+          ],
+          "meanActions": 16.245,
+          "coreCasts": {
+            "SKD035": 200,
+            "SKD003": 200,
+            "SKD039": 0
+          }
+        },
+        {
+          "name": "basic-focus-replace-SKD035-SKD038",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "e201c347d1e91cb3935a691708c86f831820db2065dc83f8073fb2041a1965ce",
+          "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+          "assets": {
+            "covered": false,
+            "missing": [
+              "技:SKD038:LB0"
+            ]
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD038"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            16,
+            20
+          ],
+          "meanActions": 17.06,
+          "coreCasts": {
+            "SKD038": 200,
+            "SKD003": 200,
+            "SKD039": 0
+          }
+        },
+        {
+          "name": "basic-focus-replace-SKD003-SKD001",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "7efbcfb60c38334443471075dc8ad54370c2bfe8518e21ed9c1b7a194690a51b",
+          "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+          "assets": {
+            "covered": false,
+            "missing": [
+              "技:SKD001:LB0"
+            ]
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD001"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD001"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            19,
+            19
+          ],
+          "meanActions": 19,
+          "coreCasts": {
+            "SKD035": 200,
+            "SKD001": 200,
+            "SKD039": 0
+          }
+        }
+      ],
+      "proposal": {
+        "name": "band2-swap12-basic-focus",
+        "band": 2,
+        "label": "約30%",
+        "status": "UNTESTED",
+        "base": {
+          "name": "basic-focus",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "f62ed6fefb7a9bada28b6b4027f1a0e77db15cabbb4db3cfe5638fb406c9da22",
+          "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            16,
+            18
+          ],
+          "meanActions": 16.245,
+          "coreCasts": {
+            "SKD035": 200,
+            "SKD003": 200,
+            "SKD039": 0
+          }
+        },
+        "swapPositions": [
+          1,
+          2
+        ],
+        "inputHash": "9e7a5a67cc5c2107d4f1559b60aabe70e7bc4ae939c7d4c199b06e246af1a619",
+        "explanation": "basic-focusの1番と2番を交換。武将・Lv・覚醒・技LB・装備・敵は同一。SPを先に使う技、支援前後、通常攻撃/BURSTへの参加順を変える限定候補。目標勝率になるとの保証はない。"
+      }
+    },
+    {
+      "label": "0%超～10%",
+      "original": null,
+      "allSaved": null,
+      "withinBudget": null,
+      "nearest": [
+        {
+          "name": "basic-focus",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "f62ed6fefb7a9bada28b6b4027f1a0e77db15cabbb4db3cfe5638fb406c9da22",
+          "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            16,
+            18
+          ],
+          "meanActions": 16.245,
+          "coreCasts": {
+            "SKD035": 200,
+            "SKD003": 200,
+            "SKD039": 0
+          }
+        },
+        {
+          "name": "basic-focus-replace-SKD035-SKD038",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "e201c347d1e91cb3935a691708c86f831820db2065dc83f8073fb2041a1965ce",
+          "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+          "assets": {
+            "covered": false,
+            "missing": [
+              "技:SKD038:LB0"
+            ]
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD038"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            16,
+            20
+          ],
+          "meanActions": 17.06,
+          "coreCasts": {
+            "SKD038": 200,
+            "SKD003": 200,
+            "SKD039": 0
+          }
+        },
+        {
+          "name": "basic-focus-replace-SKD003-SKD001",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "7efbcfb60c38334443471075dc8ad54370c2bfe8518e21ed9c1b7a194690a51b",
+          "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+          "assets": {
+            "covered": false,
+            "missing": [
+              "技:SKD001:LB0"
+            ]
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD001"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD001"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            19,
+            19
+          ],
+          "meanActions": 19,
+          "coreCasts": {
+            "SKD035": 200,
+            "SKD001": 200,
+            "SKD039": 0
+          }
+        }
+      ],
+      "proposal": {
+        "name": "band3-swap12-basic-focus",
+        "band": 3,
+        "label": "0%超～10%",
+        "status": "UNTESTED",
+        "base": {
+          "name": "basic-focus",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "f62ed6fefb7a9bada28b6b4027f1a0e77db15cabbb4db3cfe5638fb406c9da22",
+          "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            16,
+            18
+          ],
+          "meanActions": 16.245,
+          "coreCasts": {
+            "SKD035": 200,
+            "SKD003": 200,
+            "SKD039": 0
+          }
+        },
+        "swapPositions": [
+          1,
+          2
+        ],
+        "inputHash": "9e7a5a67cc5c2107d4f1559b60aabe70e7bc4ae939c7d4c199b06e246af1a619",
+        "explanation": "basic-focusの1番と2番を交換。武将・Lv・覚醒・技LB・装備・敵は同一。SPを先に使う技、支援前後、通常攻撃/BURSTへの参加順を変える限定候補。目標勝率になるとの保証はない。"
+      }
+    },
+    {
+      "label": "観測0%",
+      "original": null,
+      "allSaved": null,
+      "withinBudget": null,
+      "nearest": [
+        {
+          "name": "basic-focus",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "f62ed6fefb7a9bada28b6b4027f1a0e77db15cabbb4db3cfe5638fb406c9da22",
+          "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            16,
+            18
+          ],
+          "meanActions": 16.245,
+          "coreCasts": {
+            "SKD035": 200,
+            "SKD003": 200,
+            "SKD039": 0
+          }
+        },
+        {
+          "name": "basic-focus-replace-SKD035-SKD038",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "e201c347d1e91cb3935a691708c86f831820db2065dc83f8073fb2041a1965ce",
+          "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+          "assets": {
+            "covered": false,
+            "missing": [
+              "技:SKD038:LB0"
+            ]
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD038"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            16,
+            20
+          ],
+          "meanActions": 17.06,
+          "coreCasts": {
+            "SKD038": 200,
+            "SKD003": 200,
+            "SKD039": 0
+          }
+        },
+        {
+          "name": "basic-focus-replace-SKD003-SKD001",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "7efbcfb60c38334443471075dc8ad54370c2bfe8518e21ed9c1b7a194690a51b",
+          "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+          "assets": {
+            "covered": false,
+            "missing": [
+              "技:SKD001:LB0"
+            ]
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD001"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD001"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            19,
+            19
+          ],
+          "meanActions": 19,
+          "coreCasts": {
+            "SKD035": 200,
+            "SKD001": 200,
+            "SKD039": 0
+          }
+        }
+      ],
+      "proposal": {
+        "name": "band4-swap12-basic-focus",
+        "band": 4,
+        "label": "観測0%",
+        "status": "UNTESTED",
+        "base": {
+          "name": "basic-focus",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "f62ed6fefb7a9bada28b6b4027f1a0e77db15cabbb4db3cfe5638fb406c9da22",
+          "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            16,
+            18
+          ],
+          "meanActions": 16.245,
+          "coreCasts": {
+            "SKD035": 200,
+            "SKD003": 200,
+            "SKD039": 0
+          }
+        },
+        "swapPositions": [
+          1,
+          2
+        ],
+        "inputHash": "9e7a5a67cc5c2107d4f1559b60aabe70e7bc4ae939c7d4c199b06e246af1a619",
+        "explanation": "basic-focusの1番と2番を交換。武将・Lv・覚醒・技LB・装備・敵は同一。SPを先に使う技、支援前後、通常攻撃/BURSTへの参加順を変える限定候補。目標勝率になるとの保証はない。"
+      }
+    }
+  ],
+  "observedRates": [
+    100
+  ],
+  "cause": "保存済みの到達前資産内編成が全勝に集中。弱編成を作るための育成低下や敵強化は未採用。",
+  "exactProposals": [
+    {
+      "name": "band1-swap12-basic-focus",
+      "band": 1,
+      "label": "約60%",
+      "status": "UNTESTED",
+      "base": {
+        "name": "basic-focus",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "f62ed6fefb7a9bada28b6b4027f1a0e77db15cabbb4db3cfe5638fb406c9da22",
+        "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          16,
+          18
+        ],
+        "meanActions": 16.245,
+        "coreCasts": {
+          "SKD035": 200,
+          "SKD003": 200,
+          "SKD039": 0
+        }
+      },
+      "swapPositions": [
+        1,
+        2
+      ],
+      "inputHash": "9e7a5a67cc5c2107d4f1559b60aabe70e7bc4ae939c7d4c199b06e246af1a619",
+      "explanation": "basic-focusの1番と2番を交換。武将・Lv・覚醒・技LB・装備・敵は同一。SPを先に使う技、支援前後、通常攻撃/BURSTへの参加順を変える限定候補。目標勝率になるとの保証はない。"
+    },
+    {
+      "name": "band2-swap12-basic-focus",
+      "band": 2,
+      "label": "約30%",
+      "status": "UNTESTED",
+      "base": {
+        "name": "basic-focus",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "f62ed6fefb7a9bada28b6b4027f1a0e77db15cabbb4db3cfe5638fb406c9da22",
+        "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          16,
+          18
+        ],
+        "meanActions": 16.245,
+        "coreCasts": {
+          "SKD035": 200,
+          "SKD003": 200,
+          "SKD039": 0
+        }
+      },
+      "swapPositions": [
+        1,
+        2
+      ],
+      "inputHash": "9e7a5a67cc5c2107d4f1559b60aabe70e7bc4ae939c7d4c199b06e246af1a619",
+      "explanation": "basic-focusの1番と2番を交換。武将・Lv・覚醒・技LB・装備・敵は同一。SPを先に使う技、支援前後、通常攻撃/BURSTへの参加順を変える限定候補。目標勝率になるとの保証はない。"
+    },
+    {
+      "name": "band3-swap12-basic-focus",
+      "band": 3,
+      "label": "0%超～10%",
+      "status": "UNTESTED",
+      "base": {
+        "name": "basic-focus",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "f62ed6fefb7a9bada28b6b4027f1a0e77db15cabbb4db3cfe5638fb406c9da22",
+        "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          16,
+          18
+        ],
+        "meanActions": 16.245,
+        "coreCasts": {
+          "SKD035": 200,
+          "SKD003": 200,
+          "SKD039": 0
+        }
+      },
+      "swapPositions": [
+        1,
+        2
+      ],
+      "inputHash": "9e7a5a67cc5c2107d4f1559b60aabe70e7bc4ae939c7d4c199b06e246af1a619",
+      "explanation": "basic-focusの1番と2番を交換。武将・Lv・覚醒・技LB・装備・敵は同一。SPを先に使う技、支援前後、通常攻撃/BURSTへの参加順を変える限定候補。目標勝率になるとの保証はない。"
+    },
+    {
+      "name": "band4-swap12-basic-focus",
+      "band": 4,
+      "label": "観測0%",
+      "status": "UNTESTED",
+      "base": {
+        "name": "basic-focus",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "f62ed6fefb7a9bada28b6b4027f1a0e77db15cabbb4db3cfe5638fb406c9da22",
+        "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          16,
+          18
+        ],
+        "meanActions": 16.245,
+        "coreCasts": {
+          "SKD035": 200,
+          "SKD003": 200,
+          "SKD039": 0
+        }
+      },
+      "swapPositions": [
+        1,
+        2
+      ],
+      "inputHash": "9e7a5a67cc5c2107d4f1559b60aabe70e7bc4ae939c7d4c199b06e246af1a619",
+      "explanation": "basic-focusの1番と2番を交換。武将・Lv・覚醒・技LB・装備・敵は同一。SPを先に使う技、支援前後、通常攻撃/BURSTへの参加順を変える限定候補。目標勝率になるとの保証はない。"
+    }
+  ],
+  "supply": {
+    "requiredAssets": {
+      "characters": [
+        {
+          "id": "char_joe_01",
+          "level": 3,
+          "awakening": 0,
+          "exp": 80,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921",
+          "name": "北条氏康",
+          "source": "チュートリアル完了時"
+        },
+        {
+          "id": "char_daimon_01",
+          "level": 3,
+          "awakening": 0,
+          "exp": 80,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921",
+          "name": "井伊直政",
+          "source": "チュートリアル完了時"
+        },
+        {
+          "id": "char_aoi_01",
+          "level": 3,
+          "awakening": 0,
+          "exp": 80,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921",
+          "name": "お市の方",
+          "source": "チュートリアル完了時"
+        },
+        {
+          "id": "char_jihoon_01",
+          "level": 3,
+          "awakening": 0,
+          "exp": 80,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921",
+          "name": "前田利家",
+          "source": "1-1初回クリア後"
+        }
+      ],
+      "skills": [
+        {
+          "id": "SKD003",
+          "level": 0,
+          "name": "土割り",
+          "source": {
+            "status": "CURRENT",
+            "where": "チュートリアル完了時"
+          }
+        },
+        {
+          "id": "SKD039",
+          "level": 0,
+          "name": "応急手当",
+          "source": {
+            "status": "CURRENT",
+            "where": "チュートリアル完了時"
+          }
+        },
+        {
+          "id": "SKD035",
+          "level": 0,
+          "name": "鬨の声",
+          "source": {
+            "status": "CURRENT",
+            "where": "チュートリアル完了時"
+          }
+        }
+      ],
+      "equipment": [],
+      "awakeningSouls": {
+        "char_joe_01": 0,
+        "char_daimon_01": 0,
+        "char_aoi_01": 0,
+        "char_jihoon_01": 0
+      },
+      "cumulativeTrainingCost": {
+        "fromLevel1": true,
+        "charExp": 320,
+        "eqExp": 0,
+        "cash": 320,
+        "skillMaterials": 0,
+        "equipmentMaterials": 0,
+        "awakeningSouls": {
+          "char_joe_01": 0,
+          "char_daimon_01": 0,
+          "char_aoi_01": 0,
+          "char_jihoon_01": 0
+        },
+        "acquisitionCostsExcluded": true
+      }
+    },
+    "currentBeforeStage": {
+      "skills": [
+        {
+          "id": "SKD003",
+          "name": "土割り",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD035",
+          "name": "鬨の声",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD039",
+          "name": "応急手当",
+          "where": "チュートリアル完了時"
+        }
+      ],
+      "characters": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "where": "1-1初回クリア後"
+        }
+      ],
+      "gear": [],
+      "resources": {
+        "cash": 3500,
+        "charExp": 700,
+        "eqExp": 200,
+        "skillMaterials": 0,
+        "genericR": 0
+      }
+    },
+    "additionsHere": [],
+    "allPreStageAdditions": [],
+    "optionA": {
+      "status": "CURRENT",
+      "cumulativeAdded": {
+        "cash": 0,
+        "charExp": 0,
+        "eqExp": 0,
+        "skillMaterials": 0,
+        "genericR": 0
+      },
+      "mandatoryFarmSuccesses": 0
+    },
+    "optionB": {
+      "status": "UNAPPROVED_CONDITIONAL_ON_ITEM_SUPPLY",
+      "keepKinds": [
+        "skill",
+        "equipment",
+        "skill_material",
+        "generic_soul"
+      ],
+      "priorStage": "1-1",
+      "repeatRewards": [
+        {
+          "kind": "cash",
+          "amount": 500
+        },
+        {
+          "kind": "character_exp_item",
+          "id": "small",
+          "amount": 1
+        },
+        {
+          "kind": "equipment_exp_item",
+          "id": "small",
+          "amount": 1
+        }
+      ],
+      "successfulClears": 0,
+      "energy": 0,
+      "cumulativeSuccessfulClears": 0,
+      "cumulativeEnergy": 0,
+      "farmIncome": {
+        "cash": 0,
+        "charExp": 0,
+        "eqExp": 0
+      },
+      "shortageBeforeFarming": {
+        "cash": 0,
+        "charExp": 0,
+        "eqExp": 0
+      },
+      "note": "累積周回収入を繰越す逐次案。前面の既検証育成だけで周回する。回数は成功回数で、失敗・行動力回復待ち・実時間は含まない。現在面初回報酬は未計上。"
+    },
+    "optionC": {
+      "status": "CURRENT_EARLY_ONLY",
+      "missingCurrentSkills": [],
+      "missingCurrentEquipment": [],
+      "resourceGap": {
+        "cash": 0,
+        "charExp": 0,
+        "eqExp": 0,
+        "skillMaterials": 0,
+        "genericR": 0
+      },
+      "recommendation": "追加しないなら、現行確定スキルだけ・未配布装備なし・初期R覚醒0へ編成を再設計し、その条件で敵を再評価する。現候補の勝率を流用しない。ガチャ/ランダム魂を確定入手としない。",
+      "sameLevelPossible": true,
+      "exactCandidateEvidence": null
+    }
+  },
+  "stall": null,
+  "remaining": [
+    "5段階未達：約60%、約30%、0%超～10%、観測0%",
+    "実機受入・G5未通過"
+  ]
+}

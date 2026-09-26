@@ -1,0 +1,1731 @@
+[
+  {
+    "stage": "1-1",
+    "status": "別戦法未達",
+    "pair": [
+      {
+        "name": "cheap-attacks",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "b2c7159e6fe227a164c791d70d40a5444b55095bffbe9765b62eebfdfa69eb2c",
+        "evidence": "docs/verification/stage68-five-tier-20260926/1-1-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          11,
+          13
+        ],
+        "meanActions": 11.43,
+        "coreCasts": {
+          "SKD003": 200,
+          "SKD039": 0
+        },
+        "meaning": "低SP攻撃で速攻",
+        "core": "SKD003",
+        "coreName": "土割り",
+        "coreRuns": 200
+      },
+      {
+        "name": "starter-buff-first",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "e1e160319e02afd326fc6c1ceef84e28f53aab93f6625a34a67a8192fc2dc139",
+        "evidence": "docs/verification/stage68-decision-20260927/1-1-early.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD003"
+            ]
+          }
+        ],
+        "actions": [
+          11,
+          13
+        ],
+        "meanActions": 11.23,
+        "coreCasts": {
+          "SKD035": 41,
+          "SKD003": 200
+        },
+        "meaning": "攻撃強化を先行する案（中核未達）",
+        "core": "SKD035",
+        "coreName": "鬨の声",
+        "coreRuns": 41
+      }
+    ],
+    "requiredChange": "1-1は短い戦闘で強化SPを確保する前に終了。強化型200/200勝でも発動41/200。初戦は操作習得として複数戦法/5段階の適用開始を1-2以降にする例外案を推奨（未承認）。例外不可なら1-1の敵HP/開始SPを別案として再設計・再検証する必要がある。共通SP式は変更しない。",
+    "sourceAtArrival": {
+      "skills": [
+        {
+          "id": "SKD003",
+          "name": "土割り",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD035",
+          "name": "鬨の声",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD039",
+          "name": "応急手当",
+          "where": "チュートリアル完了時"
+        }
+      ],
+      "characters": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "where": "チュートリアル完了時"
+        }
+      ],
+      "gear": [],
+      "resources": {
+        "cash": 0,
+        "charExp": 0,
+        "eqExp": 0,
+        "skillMaterials": 0,
+        "genericR": 0
+      }
+    }
+  },
+  {
+    "stage": "1-2",
+    "status": "二戦法の勝利/中核発動確認",
+    "pair": [
+      {
+        "name": "basic-focus",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "f62ed6fefb7a9bada28b6b4027f1a0e77db15cabbb4db3cfe5638fb406c9da22",
+        "evidence": "docs/verification/stage68-five-tier-20260926/1-2-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          16,
+          18
+        ],
+        "meanActions": 16.245,
+        "coreCasts": {
+          "SKD035": 200,
+          "SKD003": 200,
+          "SKD039": 0
+        },
+        "meaning": "攻撃強化後に低SP技",
+        "core": "SKD035",
+        "coreName": "鬨の声",
+        "coreRuns": 200
+      },
+      {
+        "name": "starter-rush",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "16f26f49bbb4a60da33371f6690fd788c4725583be825f2ed33459261d5d304b",
+        "evidence": "docs/verification/stage68-decision-20260927/1-2-early.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          17,
+          18
+        ],
+        "meanActions": 17.935,
+        "coreCasts": {
+          "SKD003": 200,
+          "SKD039": 0
+        },
+        "meaning": "強化にSPを使わず低SP技で速攻",
+        "core": "SKD003",
+        "coreName": "土割り",
+        "coreRuns": 200
+      }
+    ],
+    "requiredChange": "敵/配布/育成は変更不要。編成ガイドと勝因説明を修正。",
+    "sourceAtArrival": {
+      "skills": [
+        {
+          "id": "SKD003",
+          "name": "土割り",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD035",
+          "name": "鬨の声",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD039",
+          "name": "応急手当",
+          "where": "チュートリアル完了時"
+        }
+      ],
+      "characters": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "where": "1-1初回クリア後"
+        }
+      ],
+      "gear": [],
+      "resources": {
+        "cash": 3500,
+        "charExp": 700,
+        "eqExp": 200,
+        "skillMaterials": 0,
+        "genericR": 0
+      }
+    }
+  },
+  {
+    "stage": "1-3",
+    "status": "二戦法の勝利/中核発動確認",
+    "pair": [
+      {
+        "name": "basic-focus",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "fdd67ad6477d287b3e7d491358674edae0fb8066cab1c7848a6846d902a9d9f1",
+        "evidence": "docs/verification/stage68-five-tier-20260926/1-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          15,
+          19
+        ],
+        "meanActions": 16.645,
+        "coreCasts": {
+          "SKD035": 200,
+          "SKD003": 200,
+          "SKD039": 0
+        },
+        "meaning": "攻撃強化＋低SP攻撃",
+        "core": "SKD035",
+        "coreName": "鬨の声",
+        "coreRuns": 200
+      },
+      {
+        "name": "attack-up",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "70bb54e4f906d6417ae6127a45b73b230da30acb0e4e11b1fc80865d4459d6eb",
+        "evidence": "docs/verification/stage68-five-tier-20260926/1-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          15,
+          19
+        ],
+        "meanActions": 17.55,
+        "coreCasts": {
+          "SKD003": 200,
+          "SKD009": 200,
+          "SKD039": 0
+        },
+        "meaning": "岩断2役へSPを割り当てる属性単体攻撃",
+        "core": "SKD009",
+        "coreName": "岩断",
+        "coreRuns": 200
+      }
+    ],
+    "requiredChange": "敵/配布/育成は変更不要。編成ガイドと勝因説明を修正。",
+    "sourceAtArrival": {
+      "skills": [
+        {
+          "id": "SKD003",
+          "name": "土割り",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD035",
+          "name": "鬨の声",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD039",
+          "name": "応急手当",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD009",
+          "name": "岩断",
+          "where": "1-2クリア報酬/任務受領後"
+        }
+      ],
+      "characters": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "where": "1-1初回クリア後"
+        }
+      ],
+      "gear": [],
+      "resources": {
+        "cash": 8000,
+        "charExp": 2900,
+        "eqExp": 400,
+        "skillMaterials": 0,
+        "genericR": 0
+      }
+    }
+  },
+  {
+    "stage": "1-4",
+    "status": "二戦法の勝利/中核発動確認",
+    "pair": [
+      {
+        "name": "basic-focus",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "1784d93dbf87896f1dbb7a9b1cdd42092faebd92c41f8653d043e21e09ee847c",
+        "evidence": "docs/verification/stage68-five-tier-20260926/1-4-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          20,
+          23
+        ],
+        "meanActions": 21.14,
+        "coreCasts": {
+          "SKD035": 200,
+          "SKD003": 200,
+          "SKD039": 0
+        },
+        "meaning": "先行強化＋低SP攻撃",
+        "core": "SKD035",
+        "coreName": "鬨の声",
+        "coreRuns": 200
+      },
+      {
+        "name": "all-cheap",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "ef5aec0d61b6ec2a2ad4b73f055fad87a969906b8df350ec6277bb22ca71410f",
+        "evidence": "docs/verification/stage68-five-tier-20260926/1-4-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD003"
+            ]
+          }
+        ],
+        "actions": [
+          18,
+          22
+        ],
+        "meanActions": 19.155,
+        "coreCasts": {
+          "SKD003": 200
+        },
+        "meaning": "全員低SP技で攻撃し、支援SPを不要にする",
+        "core": "SKD003",
+        "coreName": "土割り",
+        "coreRuns": 200
+      }
+    ],
+    "requiredChange": "敵/配布/育成は変更不要。編成ガイドと勝因説明を修正。",
+    "sourceAtArrival": {
+      "skills": [
+        {
+          "id": "SKD003",
+          "name": "土割り",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD035",
+          "name": "鬨の声",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD039",
+          "name": "応急手当",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD009",
+          "name": "岩断",
+          "where": "1-2クリア報酬/任務受領後"
+        }
+      ],
+      "characters": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "where": "1-1初回クリア後"
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "where": "1-3初回クリア後"
+        }
+      ],
+      "gear": [],
+      "resources": {
+        "cash": 14500,
+        "charExp": 6100,
+        "eqExp": 600,
+        "skillMaterials": 0,
+        "genericR": 0
+      }
+    }
+  },
+  {
+    "stage": "1-5",
+    "status": "二戦法の勝利/中核発動確認",
+    "pair": [
+      {
+        "name": "attack-up",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "76de9f2494ad816ca6e041c457b04da5a6cc461ba2c64cb5f15db601f2da8dd4",
+        "evidence": "docs/verification/stage68-five-tier-20260926/1-5-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          15,
+          15
+        ],
+        "meanActions": 15,
+        "coreCasts": {
+          "SKD003": 200,
+          "SKD035": 200,
+          "SKD009": 200,
+          "SKD039": 0
+        },
+        "meaning": "強化＋岩断の単体集中",
+        "core": "SKD035",
+        "coreName": "鬨の声",
+        "coreRuns": 200
+      },
+      {
+        "name": "starter-area-sp-feed",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "2b2f6f0892b8db0af1df6de5054329273ab6ae7e83293ea6cfa2cd34d87e9604",
+        "evidence": "docs/verification/stage68-decision-20260927/1-5-early.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": []
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": []
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD019"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": []
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          17,
+          20
+        ],
+        "meanActions": 19.17,
+        "coreCasts": {
+          "SKD019": 200,
+          "SKD039": 0
+        },
+        "meaning": "通常攻撃でSPを供給して全体攻撃",
+        "core": "SKD019",
+        "coreName": "火の薙ぎ",
+        "coreRuns": 200
+      }
+    ],
+    "requiredChange": "敵/配布/育成は変更不要。編成ガイドと勝因説明を修正。",
+    "sourceAtArrival": {
+      "skills": [
+        {
+          "id": "SKD003",
+          "name": "土割り",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD035",
+          "name": "鬨の声",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD039",
+          "name": "応急手当",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD009",
+          "name": "岩断",
+          "where": "1-2クリア報酬/任務受領後"
+        },
+        {
+          "id": "SKD019",
+          "name": "火の薙ぎ",
+          "where": "1-4クリア報酬/任務受領後"
+        }
+      ],
+      "characters": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "where": "1-1初回クリア後"
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "where": "1-3初回クリア後"
+        }
+      ],
+      "gear": [],
+      "resources": {
+        "cash": 21000,
+        "charExp": 9300,
+        "eqExp": 2800,
+        "skillMaterials": 0,
+        "genericR": 0
+      }
+    }
+  },
+  {
+    "stage": "2-1",
+    "status": "二戦法の勝利/中核発動確認",
+    "pair": [
+      {
+        "name": "cheap-attacks",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "5b7d6e69af8ee3e858aa84e5ff8e787244270bb3bc0c3b7ab8d4b3637ddcb79f",
+        "evidence": "docs/verification/stage68-five-tier-20260926/2-1-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          33,
+          38
+        ],
+        "meanActions": 34.625,
+        "coreCasts": {
+          "SKD003": 200,
+          "SKD035": 197,
+          "SKD039": 1
+        },
+        "meaning": "強化＋低SP技を多数回",
+        "core": "SKD035",
+        "coreName": "鬨の声",
+        "coreRuns": 197
+      },
+      {
+        "name": "starter-area-sp-feed",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "ef9e843ed0880d0cd2c0af52c2518324dc002e8cf4d62ec666365b01a6b0469e",
+        "evidence": "docs/verification/stage68-decision-20260927/2-1-early.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": []
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": []
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD019"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": []
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          31,
+          35
+        ],
+        "meanActions": 33.115,
+        "coreCasts": {
+          "SKD019": 200,
+          "SKD039": 0
+        },
+        "meaning": "通常攻撃でSPを供給して全体攻撃",
+        "core": "SKD019",
+        "coreName": "火の薙ぎ",
+        "coreRuns": 200
+      }
+    ],
+    "requiredChange": "敵/配布/育成は変更不要。編成ガイドと勝因説明を修正。",
+    "sourceAtArrival": {
+      "skills": [
+        {
+          "id": "SKD003",
+          "name": "土割り",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD035",
+          "name": "鬨の声",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD039",
+          "name": "応急手当",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD009",
+          "name": "岩断",
+          "where": "1-2クリア報酬/任務受領後"
+        },
+        {
+          "id": "SKD019",
+          "name": "火の薙ぎ",
+          "where": "1-4クリア報酬/任務受領後"
+        }
+      ],
+      "characters": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "where": "1-1初回クリア後"
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "where": "1-3初回クリア後"
+        }
+      ],
+      "gear": [],
+      "resources": {
+        "cash": 32500,
+        "charExp": 14500,
+        "eqExp": 6000,
+        "skillMaterials": 8,
+        "genericR": 0
+      }
+    }
+  },
+  {
+    "stage": "2-2",
+    "status": "二戦法の勝利/中核発動確認",
+    "pair": [
+      {
+        "name": "cheap-attacks",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "f4835f602603cbad252e6d5516881b1e416647eea53b3e3aa4fbfe30f0557ae7",
+        "evidence": "docs/verification/stage68-five-tier-20260926/2-2-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          36,
+          43
+        ],
+        "meanActions": 39.74,
+        "coreCasts": {
+          "SKD003": 200,
+          "SKD035": 22,
+          "SKD039": 200
+        },
+        "meaning": "単体回復しながら低SP技",
+        "core": "SKD039",
+        "coreName": "応急手当",
+        "coreRuns": 200
+      },
+      {
+        "name": "starter-area-sp-feed",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "010e89f16c97e32a4aab3a38914c6f323d5dacc4ade07f97f38664135f4a63c4",
+        "evidence": "docs/verification/stage68-decision-20260927/2-2-early.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": []
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": []
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD019"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": []
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          31,
+          37
+        ],
+        "meanActions": 34.265,
+        "coreCasts": {
+          "SKD019": 200,
+          "SKD039": 200
+        },
+        "meaning": "通常攻撃でSPを供給して全体攻撃",
+        "core": "SKD019",
+        "coreName": "火の薙ぎ",
+        "coreRuns": 200
+      }
+    ],
+    "requiredChange": "敵/配布/育成は変更不要。編成ガイドと勝因説明を修正。",
+    "sourceAtArrival": {
+      "skills": [
+        {
+          "id": "SKD003",
+          "name": "土割り",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD035",
+          "name": "鬨の声",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD039",
+          "name": "応急手当",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD009",
+          "name": "岩断",
+          "where": "1-2クリア報酬/任務受領後"
+        },
+        {
+          "id": "SKD019",
+          "name": "火の薙ぎ",
+          "where": "1-4クリア報酬/任務受領後"
+        }
+      ],
+      "characters": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "where": "1-1初回クリア後"
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "where": "1-3初回クリア後"
+        }
+      ],
+      "gear": [],
+      "resources": {
+        "cash": 40300,
+        "charExp": 17900,
+        "eqExp": 6300,
+        "skillMaterials": 8,
+        "genericR": 0
+      }
+    }
+  },
+  {
+    "stage": "2-3",
+    "status": "二戦法の勝利/中核発動確認",
+    "pair": [
+      {
+        "name": "attack-up",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "5f203fdf1b4f08ecbccaab9cf16d5ccc26c9931212d6d7d2d4969f33dcea94e7",
+        "evidence": "docs/verification/stage68-five-tier-20260926/2-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          100,
+          133
+        ],
+        "meanActions": 116.175,
+        "coreCasts": {
+          "SKD003": 200,
+          "SKD035": 151,
+          "SKD009": 200,
+          "SKD039": 200
+        },
+        "meaning": "回復継戦＋単体岩断",
+        "core": "SKD039",
+        "coreName": "応急手当",
+        "coreRuns": 200
+      },
+      {
+        "name": "starter-area-sp-feed",
+        "wins": 149,
+        "n": 200,
+        "percent": 74.5,
+        "inputHash": "0770c093894ed3316ddee09a182cb3af4ea6614bc3fce353fc290e01d5ba2961",
+        "evidence": "docs/verification/stage68-decision-20260927/2-3-early.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": []
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": []
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD019"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": []
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          186,
+          300
+        ],
+        "meanActions": 262.315,
+        "coreCasts": {
+          "SKD019": 200,
+          "SKD039": 200
+        },
+        "meaning": "通常攻撃でSPを供給して全体攻撃",
+        "core": "SKD019",
+        "coreName": "火の薙ぎ",
+        "coreRuns": 200
+      }
+    ],
+    "requiredChange": "敵/配布/育成は変更不要。編成ガイドと勝因説明を修正。",
+    "sourceAtArrival": {
+      "skills": [
+        {
+          "id": "SKD003",
+          "name": "土割り",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD035",
+          "name": "鬨の声",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD039",
+          "name": "応急手当",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD009",
+          "name": "岩断",
+          "where": "1-2クリア報酬/任務受領後"
+        },
+        {
+          "id": "SKD019",
+          "name": "火の薙ぎ",
+          "where": "1-4クリア報酬/任務受領後"
+        }
+      ],
+      "characters": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "where": "1-1初回クリア後"
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "where": "1-3初回クリア後"
+        }
+      ],
+      "gear": [],
+      "resources": {
+        "cash": 51100,
+        "charExp": 23300,
+        "eqExp": 6600,
+        "skillMaterials": 8,
+        "genericR": 0
+      }
+    }
+  },
+  {
+    "stage": "2-4",
+    "status": "二戦法の勝利/中核発動確認",
+    "pair": [
+      {
+        "name": "attack-up",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "2dac7446d374556de362f793db31025e370ce14607a5e66713e1cf5553ecd7a2",
+        "evidence": "docs/verification/stage68-five-tier-20260926/2-4-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          92,
+          107
+        ],
+        "meanActions": 98.335,
+        "coreCasts": {
+          "SKD003": 200,
+          "SKD035": 109,
+          "SKD009": 200,
+          "SKD039": 200
+        },
+        "meaning": "回復継戦＋単体岩断",
+        "core": "SKD039",
+        "coreName": "応急手当",
+        "coreRuns": 200
+      },
+      {
+        "name": "starter-area-sp-feed",
+        "wins": 196,
+        "n": 200,
+        "percent": 98,
+        "inputHash": "d7762c0642156a6417f635b1bf610734f46ee494079003c820e38bc805a06aef",
+        "evidence": "docs/verification/stage68-decision-20260927/2-4-early.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": []
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": []
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD019"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": []
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          133,
+          163
+        ],
+        "meanActions": 145.77,
+        "coreCasts": {
+          "SKD019": 200,
+          "SKD039": 200
+        },
+        "meaning": "通常攻撃でSPを供給して全体攻撃",
+        "core": "SKD019",
+        "coreName": "火の薙ぎ",
+        "coreRuns": 200
+      }
+    ],
+    "requiredChange": "敵/配布/育成は変更不要。編成ガイドと勝因説明を修正。",
+    "sourceAtArrival": {
+      "skills": [
+        {
+          "id": "SKD003",
+          "name": "土割り",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD035",
+          "name": "鬨の声",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD039",
+          "name": "応急手当",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD009",
+          "name": "岩断",
+          "where": "1-2クリア報酬/任務受領後"
+        },
+        {
+          "id": "SKD019",
+          "name": "火の薙ぎ",
+          "where": "1-4クリア報酬/任務受領後"
+        }
+      ],
+      "characters": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "where": "1-1初回クリア後"
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "where": "1-3初回クリア後"
+        }
+      ],
+      "gear": [],
+      "resources": {
+        "cash": 63900,
+        "charExp": 33700,
+        "eqExp": 6900,
+        "skillMaterials": 8,
+        "genericR": 0
+      }
+    }
+  },
+  {
+    "stage": "2-5",
+    "status": "二戦法の勝利/中核発動確認",
+    "pair": [
+      {
+        "name": "attack-up",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "483298d468b985d78ebdf6cb2a726eb3f3ce916800cda9bc8aeb5cd67da37bc1",
+        "evidence": "docs/verification/stage68-five-tier-20260926/2-5-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          119,
+          142
+        ],
+        "meanActions": 131.16,
+        "coreCasts": {
+          "SKD003": 200,
+          "SKD035": 197,
+          "SKD009": 200,
+          "SKD039": 200
+        },
+        "meaning": "回復継戦＋単体岩断",
+        "core": "SKD039",
+        "coreName": "応急手当",
+        "coreRuns": 200
+      },
+      {
+        "name": "starter-area-sp-feed",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "24d65f84133cf9b5a2c8658a8851a5273954635fb4da0b14e638c0f8fea2bb97",
+        "evidence": "docs/verification/stage68-decision-20260927/2-5-early.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": []
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": []
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD019"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": []
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          213,
+          258
+        ],
+        "meanActions": 236.305,
+        "coreCasts": {
+          "SKD019": 200,
+          "SKD039": 200
+        },
+        "meaning": "通常攻撃でSPを供給して全体攻撃",
+        "core": "SKD019",
+        "coreName": "火の薙ぎ",
+        "coreRuns": 200
+      }
+    ],
+    "requiredChange": "敵/配布/育成は変更不要。編成ガイドと勝因説明を修正。",
+    "sourceAtArrival": {
+      "skills": [
+        {
+          "id": "SKD003",
+          "name": "土割り",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD035",
+          "name": "鬨の声",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD039",
+          "name": "応急手当",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD009",
+          "name": "岩断",
+          "where": "1-2クリア報酬/任務受領後"
+        },
+        {
+          "id": "SKD019",
+          "name": "火の薙ぎ",
+          "where": "1-4クリア報酬/任務受領後"
+        }
+      ],
+      "characters": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "where": "1-1初回クリア後"
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "where": "1-3初回クリア後"
+        }
+      ],
+      "gear": [],
+      "resources": {
+        "cash": 76700,
+        "charExp": 44100,
+        "eqExp": 7200,
+        "skillMaterials": 8,
+        "genericR": 0
+      }
+    }
+  }
+]

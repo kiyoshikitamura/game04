@@ -1,0 +1,2950 @@
+[
+  {
+    "stage": "3-2",
+    "limit": "味方300行動でaction_limit敗北。計算ジョブのタイムアウトではない",
+    "details": [
+      {
+        "name": "no-support",
+        "wins": 9,
+        "n": 200,
+        "actionLimit": 191,
+        "oneDamageRatio": 0.8266641908829264,
+        "reachedWave": {
+          "1": 52,
+          "2": 139
+        },
+        "waveDamage": {
+          "1": {
+            "one": 34103,
+            "count": 42338,
+            "totalDamage": 698167
+          },
+          "2": {
+            "one": 10417,
+            "count": 11517,
+            "totalDamage": 110509
+          }
+        },
+        "reason": "action_limit",
+        "exampleSeed": 84001,
+        "skills": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD010"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "explanation": "失敗試行の直接攻撃の過半数が1ダメージ。防御/属性/支援の組合せ不足が疑われる。"
+      },
+      {
+        "name": "poison-boost",
+        "wins": 0,
+        "n": 200,
+        "actionLimit": 200,
+        "oneDamageRatio": 0.830198407054473,
+        "reachedWave": {
+          "1": 30,
+          "2": 170
+        },
+        "waveDamage": {
+          "1": {
+            "one": 40300,
+            "count": 49725,
+            "totalDamage": 452030
+          },
+          "2": {
+            "one": 6397,
+            "count": 6523,
+            "totalDamage": 7682
+          }
+        },
+        "reason": "action_limit",
+        "exampleSeed": 84001,
+        "skills": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD029"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "explanation": "失敗試行の直接攻撃の過半数が1ダメージ。防御/属性/支援の組合せ不足が疑われる。"
+      }
+    ],
+    "primary": {
+      "name": "break-and-buff",
+      "wins": 200,
+      "n": 200,
+      "percent": 100,
+      "inputHash": "9129cc8cfbfaa34113e15d889826dedb79c6181bdcb4f4b2e315012ef78faa00",
+      "evidence": "docs/verification/stage68-five-tier-20260926/3-2-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD038"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD010"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        68,
+        148
+      ],
+      "meanActions": 90.07,
+      "coreCasts": {
+        "SKD035": 200,
+        "SKD038": 200,
+        "SKD010": 200,
+        "SKD009": 200,
+        "SKD039": 198
+      }
+    },
+    "alternative": {
+      "name": "attack-up",
+      "wins": 200,
+      "n": 200,
+      "percent": 100,
+      "inputHash": "0b14c9cb03e4ab76bfbd18c7aa3f8c319799e52b30be816dcaa7e4d693ced312",
+      "evidence": "docs/verification/stage68-five-tier-20260926/3-2-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD003"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD010"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        95,
+        207
+      ],
+      "meanActions": 149.1,
+      "coreCasts": {
+        "SKD003": 200,
+        "SKD035": 162,
+        "SKD010": 200,
+        "SKD009": 200,
+        "SKD039": 198
+      }
+    },
+    "continueValidationCloses": false,
+    "recommendation": "敵の追加弱体は現時点で推奨しない。poison-boostからbreak-and-buffまたはattack-upへ、保存済み配置・技へ変更する。HP/DEFを下げて不適合編成まで勝たせると攻略差を消す。",
+    "uxProposal": "未承認：敗北結果にaction_limit専用の説明と同育成の2編成例を表示。既存戦闘ログの最終到達Wave・1ダメージ比率・中核技発動を根拠にする。戦闘中は60行動以降、直近30味方行動の敵合計HP最小値が低下しない場合に1回だけ停滞案内。自動敗北/自動撤退/返金はしない。早期離脱は既存の離脱契約を確認して別途統合担当へ。",
+    "closure": "原因区分と代替攻略の証拠整理は完了。実際の待ち時間短縮はUXの承認・実装・実機確認が必要。追加試行だけでは閉じない。"
+  },
+  {
+    "stage": "3-5",
+    "limit": "味方300行動でaction_limit敗北。計算ジョブのタイムアウトではない",
+    "details": [
+      {
+        "name": "attack-up-reversed",
+        "wins": 0,
+        "n": 200,
+        "actionLimit": 200,
+        "oneDamageRatio": 0.8938734229292375,
+        "reachedWave": {
+          "1": 197,
+          "2": 3
+        },
+        "waveDamage": {
+          "1": {
+            "one": 52088,
+            "count": 58096,
+            "totalDamage": 570725
+          },
+          "2": {
+            "one": 57,
+            "count": 240,
+            "totalDamage": 449
+          }
+        },
+        "reason": "action_limit",
+        "exampleSeed": 86001,
+        "skills": [
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          }
+        ],
+        "explanation": "失敗試行の直接攻撃の過半数が1ダメージ。防御/属性/支援の組合せ不足が疑われる。"
+      },
+      {
+        "name": "break-regen-order-31245",
+        "wins": 0,
+        "n": 200,
+        "actionLimit": 200,
+        "oneDamageRatio": 0.5370885400792441,
+        "reachedWave": {
+          "1": 7,
+          "2": 185,
+          "3": 8
+        },
+        "waveDamage": {
+          "1": {
+            "one": 25910,
+            "count": 39180,
+            "totalDamage": 1206846
+          },
+          "2": {
+            "one": 2230,
+            "count": 13237,
+            "totalDamage": 274433
+          },
+          "3": {
+            "one": 55,
+            "count": 79,
+            "totalDamage": 2479
+          }
+        },
+        "reason": "action_limit",
+        "exampleSeed": 95001,
+        "skills": [
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_joe_01",
+            "skills": []
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD038"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD043"
+            ]
+          }
+        ],
+        "explanation": "失敗試行の直接攻撃の過半数が1ダメージ。防御/属性/支援の組合せ不足が疑われる。"
+      }
+    ],
+    "primary": {
+      "name": "break-regen",
+      "wins": 200,
+      "n": 200,
+      "percent": 100,
+      "inputHash": "ddcc94a6b345bbad65d2e159865dc1ee75cf48478f7fb47021a3090f77b77f0a",
+      "evidence": "docs/verification/stage68-five-tier-20260926/3-5-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": []
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD038"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD043"
+          ]
+        }
+      ],
+      "actions": [
+        116,
+        225
+      ],
+      "meanActions": 162.61,
+      "coreCasts": {
+        "SKD038": 200,
+        "SKD009": 200,
+        "SKD043": 200
+      }
+    },
+    "alternative": {
+      "name": "break-and-buff",
+      "wins": 200,
+      "n": 200,
+      "percent": 100,
+      "inputHash": "87e40893adea2ce4eac299595f087447ffe2559c66b5c7abd17c6f433bff0075",
+      "evidence": "docs/verification/stage68-five-tier-20260926/3-5-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD038"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        128,
+        246
+      ],
+      "meanActions": 165.08,
+      "coreCasts": {
+        "SKD035": 200,
+        "SKD038": 200,
+        "SKD009": 200,
+        "SKD039": 200
+      }
+    },
+    "continueValidationCloses": false,
+    "recommendation": "敵の追加弱体は現時点で推奨しない。attack-up-reversedからbreak-regenまたはbreak-and-buffへ、保存済み配置・技へ変更する。HP/DEFを下げて不適合編成まで勝たせると攻略差を消す。",
+    "uxProposal": "未承認：敗北結果にaction_limit専用の説明と同育成の2編成例を表示。既存戦闘ログの最終到達Wave・1ダメージ比率・中核技発動を根拠にする。戦闘中は60行動以降、直近30味方行動の敵合計HP最小値が低下しない場合に1回だけ停滞案内。自動敗北/自動撤退/返金はしない。早期離脱は既存の離脱契約を確認して別途統合担当へ。",
+    "closure": "原因区分と代替攻略の証拠整理は完了。実際の待ち時間短縮はUXの承認・実装・実機確認が必要。追加試行だけでは閉じない。"
+  },
+  {
+    "stage": "6-2",
+    "limit": "味方300行動でaction_limit敗北。計算ジョブのタイムアウトではない",
+    "details": [
+      {
+        "name": "attack-up-reversed",
+        "wins": 0,
+        "n": 200,
+        "actionLimit": 200,
+        "oneDamageRatio": 0.7532852606277524,
+        "reachedWave": {
+          "2": 115,
+          "3": 71,
+          "4": 14
+        },
+        "waveDamage": {
+          "1": {
+            "one": 13659,
+            "count": 19070,
+            "totalDamage": 4123425
+          },
+          "2": {
+            "one": 26474,
+            "count": 32394,
+            "totalDamage": 3005743
+          },
+          "3": {
+            "one": 2176,
+            "count": 4802,
+            "totalDamage": 733606
+          },
+          "4": {
+            "one": 626,
+            "count": 731,
+            "totalDamage": 26256
+          }
+        },
+        "reason": "action_limit",
+        "exampleSeed": 84001,
+        "skills": [
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD011"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          }
+        ],
+        "explanation": "失敗試行の直接攻撃の過半数が1ダメージ。防御/属性/支援の組合せ不足が疑われる。"
+      },
+      {
+        "name": "break-and-buff-order-35214",
+        "wins": 17,
+        "n": 200,
+        "actionLimit": 183,
+        "oneDamageRatio": 0.5335066060212259,
+        "reachedWave": {
+          "4": 183
+        },
+        "waveDamage": {
+          "1": {
+            "one": 7475,
+            "count": 14662,
+            "totalDamage": 3821879
+          },
+          "2": {
+            "one": 6949,
+            "count": 12603,
+            "totalDamage": 4098336
+          },
+          "3": {
+            "one": 1008,
+            "count": 5742,
+            "totalDamage": 3842782
+          },
+          "4": {
+            "one": 9200,
+            "count": 13163,
+            "totalDamage": 1162821
+          }
+        },
+        "reason": "action_limit",
+        "exampleSeed": 95001,
+        "skills": [
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD011"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD038"
+            ]
+          },
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          }
+        ],
+        "explanation": "失敗試行の直接攻撃の過半数が1ダメージ。防御/属性/支援の組合せ不足が疑われる。"
+      }
+    ],
+    "primary": {
+      "name": "break-and-buff",
+      "wins": 200,
+      "n": 200,
+      "percent": 100,
+      "inputHash": "79e71ae94c72e40b9f5aa3ff31cc3787cbf02d38d8c3975aca6514401bb8130e",
+      "evidence": "docs/verification/stage68-five-tier-20260926/6-2-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD038"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD011"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        153,
+        267
+      ],
+      "meanActions": 203.055,
+      "coreCasts": {
+        "SKD035": 198,
+        "SKD038": 200,
+        "SKD011": 200,
+        "SKD009": 200,
+        "SKD039": 200
+      }
+    },
+    "alternative": {
+      "name": "taunt-counter",
+      "wins": 156,
+      "n": 200,
+      "percent": 78,
+      "inputHash": "9f8d08283d41a29f42ba97515c7a840d6521e70286c05f59bb81e89c98d82b41",
+      "evidence": "docs/verification/stage68-five-tier-20260926/6-2-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD049",
+            "SKD048"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD011"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        204,
+        300
+      ],
+      "meanActions": 274.24,
+      "coreCasts": {
+        "SKD049": 200,
+        "SKD048": 200,
+        "SKD035": 200,
+        "SKD011": 200,
+        "SKD009": 200,
+        "SKD039": 200
+      }
+    },
+    "continueValidationCloses": false,
+    "recommendation": "敵の追加弱体は現時点で推奨しない。attack-up-reversedからbreak-and-buffまたはtaunt-counterへ、保存済み配置・技へ変更する。HP/DEFを下げて不適合編成まで勝たせると攻略差を消す。",
+    "uxProposal": "未承認：敗北結果にaction_limit専用の説明と同育成の2編成例を表示。既存戦闘ログの最終到達Wave・1ダメージ比率・中核技発動を根拠にする。戦闘中は60行動以降、直近30味方行動の敵合計HP最小値が低下しない場合に1回だけ停滞案内。自動敗北/自動撤退/返金はしない。早期離脱は既存の離脱契約を確認して別途統合担当へ。",
+    "closure": "原因区分と代替攻略の証拠整理は完了。実際の待ち時間短縮はUXの承認・実装・実機確認が必要。追加試行だけでは閉じない。"
+  },
+  {
+    "stage": "9-1",
+    "limit": "味方300行動でaction_limit敗北。計算ジョブのタイムアウトではない",
+    "details": [
+      {
+        "name": "poison-control",
+        "wins": 10,
+        "n": 200,
+        "actionLimit": 190,
+        "oneDamageRatio": 0.6943534941646747,
+        "reachedWave": {
+          "2": 190
+        },
+        "waveDamage": {
+          "1": {
+            "one": 4067,
+            "count": 11181,
+            "totalDamage": 13571372
+          },
+          "2": {
+            "one": 30500,
+            "count": 38602,
+            "totalDamage": 6658513
+          }
+        },
+        "reason": "action_limit",
+        "exampleSeed": 84001,
+        "skills": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD037"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD038"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD029"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD010"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD043"
+            ]
+          }
+        ],
+        "explanation": "失敗試行の直接攻撃の過半数が1ダメージ。防御/属性/支援の組合せ不足が疑われる。"
+      }
+    ],
+    "primary": {
+      "name": "break-and-buff",
+      "wins": 200,
+      "n": 200,
+      "percent": 100,
+      "inputHash": "39d2f6377d3e519199a2b66ef0c3c93857ce3c5044f9e9b23a8bd89d7a884dae",
+      "evidence": "docs/verification/stage68-five-tier-20260926/9-1-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD038"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD010"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        88,
+        205
+      ],
+      "meanActions": 119.06,
+      "coreCasts": {
+        "SKD035": 90,
+        "SKD038": 200,
+        "SKD010": 200,
+        "SKD009": 200,
+        "SKD039": 200
+      }
+    },
+    "alternative": {
+      "name": "taunt-counter",
+      "wins": 200,
+      "n": 200,
+      "percent": 100,
+      "inputHash": "5f3cf55840d70c3604c049dbf9cf1d4e30dfdff6ff13107b2d0596bc4ac9ceda",
+      "evidence": "docs/verification/stage68-five-tier-20260926/9-1-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD049",
+            "SKD048"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD010"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        88,
+        202
+      ],
+      "meanActions": 131.15,
+      "coreCasts": {
+        "SKD049": 200,
+        "SKD048": 200,
+        "SKD035": 197,
+        "SKD010": 200,
+        "SKD009": 200,
+        "SKD039": 200
+      }
+    },
+    "continueValidationCloses": false,
+    "recommendation": "敵の追加弱体は現時点で推奨しない。poison-controlからbreak-and-buffまたはtaunt-counterへ、保存済み配置・技へ変更する。HP/DEFを下げて不適合編成まで勝たせると攻略差を消す。",
+    "uxProposal": "未承認：敗北結果にaction_limit専用の説明と同育成の2編成例を表示。既存戦闘ログの最終到達Wave・1ダメージ比率・中核技発動を根拠にする。戦闘中は60行動以降、直近30味方行動の敵合計HP最小値が低下しない場合に1回だけ停滞案内。自動敗北/自動撤退/返金はしない。早期離脱は既存の離脱契約を確認して別途統合担当へ。",
+    "closure": "原因区分と代替攻略の証拠整理は完了。実際の待ち時間短縮はUXの承認・実装・実機確認が必要。追加試行だけでは閉じない。"
+  },
+  {
+    "stage": "9-3",
+    "limit": "味方300行動でaction_limit敗北。計算ジョブのタイムアウトではない",
+    "details": [
+      {
+        "name": "rear-focus-order-43152",
+        "wins": 0,
+        "n": 200,
+        "actionLimit": 110,
+        "oneDamageRatio": 0.8675581684193094,
+        "reachedWave": {
+          "1": 110
+        },
+        "waveDamage": {
+          "1": {
+            "one": 20955,
+            "count": 24154,
+            "totalDamage": 5743596
+          }
+        },
+        "reason": "action_limit",
+        "exampleSeed": 95001,
+        "skills": [
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD027"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD026"
+            ]
+          },
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          }
+        ],
+        "explanation": "失敗試行の直接攻撃の過半数が1ダメージ。防御/属性/支援の組合せ不足が疑われる。"
+      }
+    ],
+    "primary": {
+      "name": "rear-focus",
+      "wins": 200,
+      "n": 200,
+      "percent": 100,
+      "inputHash": "1b7c1221cdcf6a47fb59311056c6b49e4eb41f7dee31e43f8b44d19c00763011",
+      "evidence": "docs/verification/stage68-five-tier-20260926/9-3-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD003"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD026"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD027"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        151,
+        252
+      ],
+      "meanActions": 191.21,
+      "coreCasts": {
+        "SKD003": 200,
+        "SKD035": 199,
+        "SKD026": 200,
+        "SKD027": 200,
+        "SKD039": 200
+      }
+    },
+    "alternative": {
+      "name": "stun",
+      "wins": 171,
+      "n": 200,
+      "percent": 85.5,
+      "inputHash": "ef1211f44ec36aa5f42ec005c86ea90309da75877487e49fc698e5f789e7b72c",
+      "evidence": "docs/verification/stage68-five-tier-20260926/9-3-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD003"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD032"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD010"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD026"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        119,
+        300
+      ],
+      "meanActions": 221.155,
+      "coreCasts": {
+        "SKD003": 200,
+        "SKD032": 156,
+        "SKD010": 200,
+        "SKD026": 200,
+        "SKD039": 200
+      }
+    },
+    "continueValidationCloses": false,
+    "recommendation": "敵の追加弱体は現時点で推奨しない。rear-focus-order-43152からrear-focusまたはstunへ、保存済み配置・技へ変更する。HP/DEFを下げて不適合編成まで勝たせると攻略差を消す。",
+    "uxProposal": "未承認：敗北結果にaction_limit専用の説明と同育成の2編成例を表示。既存戦闘ログの最終到達Wave・1ダメージ比率・中核技発動を根拠にする。戦闘中は60行動以降、直近30味方行動の敵合計HP最小値が低下しない場合に1回だけ停滞案内。自動敗北/自動撤退/返金はしない。早期離脱は既存の離脱契約を確認して別途統合担当へ。",
+    "closure": "原因区分と代替攻略の証拠整理は完了。実際の待ち時間短縮はUXの承認・実装・実機確認が必要。追加試行だけでは閉じない。"
+  },
+  {
+    "stage": "9-4",
+    "limit": "味方300行動でaction_limit敗北。計算ジョブのタイムアウトではない",
+    "details": [
+      {
+        "name": "double-rock",
+        "wins": 0,
+        "n": 200,
+        "actionLimit": 200,
+        "oneDamageRatio": 0.6935175079174792,
+        "reachedWave": {
+          "1": 200
+        },
+        "waveDamage": {
+          "1": {
+            "one": 38760,
+            "count": 55889,
+            "totalDamage": 19389914
+          }
+        },
+        "reason": "action_limit",
+        "exampleSeed": 87001,
+        "skills": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "explanation": "失敗試行の直接攻撃の過半数が1ダメージ。防御/属性/支援の組合せ不足が疑われる。"
+      },
+      {
+        "name": "attack-up",
+        "wins": 2,
+        "n": 200,
+        "actionLimit": 198,
+        "oneDamageRatio": 0.6852360639143952,
+        "reachedWave": {
+          "1": 123,
+          "2": 74,
+          "3": 1
+        },
+        "waveDamage": {
+          "1": {
+            "one": 36963,
+            "count": 53710,
+            "totalDamage": 27958489
+          },
+          "2": {
+            "one": 943,
+            "count": 1609,
+            "totalDamage": 1162821
+          },
+          "3": {
+            "one": 4,
+            "count": 5,
+            "totalDamage": 3564
+          }
+        },
+        "reason": "action_limit",
+        "exampleSeed": 87001,
+        "skills": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD010"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "explanation": "失敗試行の直接攻撃の過半数が1ダメージ。防御/属性/支援の組合せ不足が疑われる。"
+      }
+    ],
+    "primary": {
+      "name": "break-regen",
+      "wins": 200,
+      "n": 200,
+      "percent": 100,
+      "inputHash": "eb113a0de7c0440338116e46b942fc8b3cd4093c39ac3ea89ab995c34d779fdf",
+      "evidence": "docs/verification/stage68-five-tier-20260926/9-4-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": []
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD038"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD010"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD043"
+          ]
+        }
+      ],
+      "actions": [
+        179,
+        278
+      ],
+      "meanActions": 224.93,
+      "coreCasts": {
+        "SKD038": 200,
+        "SKD010": 200,
+        "SKD009": 200,
+        "SKD043": 192
+      }
+    },
+    "alternative": {
+      "name": "break-and-buff",
+      "wins": 199,
+      "n": 200,
+      "percent": 99.5,
+      "inputHash": "a2b93ef804f25023490b7707ecebc16580be5c6192ef18a2b7e8b990571ec380",
+      "evidence": "docs/verification/stage68-five-tier-20260926/9-4-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD038"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD010"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        194,
+        300
+      ],
+      "meanActions": 237.9,
+      "coreCasts": {
+        "SKD035": 200,
+        "SKD038": 200,
+        "SKD010": 200,
+        "SKD009": 200,
+        "SKD039": 200
+      }
+    },
+    "continueValidationCloses": false,
+    "recommendation": "敵の追加弱体は現時点で推奨しない。double-rockからbreak-regenまたはbreak-and-buffへ、保存済み配置・技へ変更する。HP/DEFを下げて不適合編成まで勝たせると攻略差を消す。",
+    "uxProposal": "未承認：敗北結果にaction_limit専用の説明と同育成の2編成例を表示。既存戦闘ログの最終到達Wave・1ダメージ比率・中核技発動を根拠にする。戦闘中は60行動以降、直近30味方行動の敵合計HP最小値が低下しない場合に1回だけ停滞案内。自動敗北/自動撤退/返金はしない。早期離脱は既存の離脱契約を確認して別途統合担当へ。",
+    "closure": "原因区分と代替攻略の証拠整理は完了。実際の待ち時間短縮はUXの承認・実装・実機確認が必要。追加試行だけでは閉じない。"
+  },
+  {
+    "stage": "9-6",
+    "limit": "味方300行動でaction_limit敗北。計算ジョブのタイムアウトではない",
+    "details": [
+      {
+        "name": "attack-up-reversed",
+        "wins": 0,
+        "n": 200,
+        "actionLimit": 173,
+        "oneDamageRatio": 0.8384133031710124,
+        "reachedWave": {
+          "1": 173
+        },
+        "waveDamage": {
+          "1": {
+            "one": 42251,
+            "count": 50394,
+            "totalDamage": 13854523
+          }
+        },
+        "reason": "action_limit",
+        "exampleSeed": 87001,
+        "skills": [
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          }
+        ],
+        "explanation": "失敗試行の直接攻撃の過半数が1ダメージ。防御/属性/支援の組合せ不足が疑われる。"
+      }
+    ],
+    "primary": {
+      "name": "break-and-buff",
+      "wins": 200,
+      "n": 200,
+      "percent": 100,
+      "inputHash": "5ea66d3ef5df65eee2e08952435ff5ca516989771faa53cfed0f734382cc3c66",
+      "evidence": "docs/verification/stage68-five-tier-20260926/9-6-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD038"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        125,
+        194
+      ],
+      "meanActions": 149.79,
+      "coreCasts": {
+        "SKD035": 160,
+        "SKD038": 200,
+        "SKD009": 200,
+        "SKD039": 200
+      }
+    },
+    "alternative": {
+      "name": "counter-boost",
+      "wins": 198,
+      "n": 200,
+      "percent": 99,
+      "inputHash": "5c01ec9383d3c9a379f5445fa147c68c023ba942472f02401a10915306aac292",
+      "evidence": "docs/verification/stage68-five-tier-20260926/9-6-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD049"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        145,
+        300
+      ],
+      "meanActions": 171.89,
+      "coreCasts": {
+        "SKD049": 200,
+        "SKD035": 200,
+        "SKD009": 200,
+        "SKD039": 200
+      }
+    },
+    "continueValidationCloses": false,
+    "recommendation": "敵の追加弱体は現時点で推奨しない。attack-up-reversedからbreak-and-buffまたはcounter-boostへ、保存済み配置・技へ変更する。HP/DEFを下げて不適合編成まで勝たせると攻略差を消す。",
+    "uxProposal": "未承認：敗北結果にaction_limit専用の説明と同育成の2編成例を表示。既存戦闘ログの最終到達Wave・1ダメージ比率・中核技発動を根拠にする。戦闘中は60行動以降、直近30味方行動の敵合計HP最小値が低下しない場合に1回だけ停滞案内。自動敗北/自動撤退/返金はしない。早期離脱は既存の離脱契約を確認して別途統合担当へ。",
+    "closure": "原因区分と代替攻略の証拠整理は完了。実際の待ち時間短縮はUXの承認・実装・実機確認が必要。追加試行だけでは閉じない。"
+  },
+  {
+    "stage": "9-10",
+    "limit": "味方300行動でaction_limit敗北。計算ジョブのタイムアウトではない",
+    "details": [
+      {
+        "name": "poor-element",
+        "wins": 10,
+        "n": 200,
+        "actionLimit": 190,
+        "oneDamageRatio": 0.37491872872604887,
+        "reachedWave": {
+          "3": 65,
+          "4": 125
+        },
+        "waveDamage": {
+          "1": {
+            "one": 10483,
+            "count": 21474,
+            "totalDamage": 18341721
+          },
+          "2": {
+            "one": 4913,
+            "count": 22569,
+            "totalDamage": 32379967
+          },
+          "3": {
+            "one": 3435,
+            "count": 6201,
+            "totalDamage": 3987771
+          },
+          "4": {
+            "one": 775,
+            "count": 2050,
+            "totalDamage": 3348603
+          }
+        },
+        "reason": "action_limit",
+        "exampleSeed": 86001,
+        "skills": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD008"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD008"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "explanation": "攻撃は通るが300行動内に全Waveを処理できない。回復・保護・SP消費順・HP負担の個別因果は保存集計だけでは断定しない。"
+      },
+      {
+        "name": "attack-up-reversed",
+        "wins": 0,
+        "n": 200,
+        "actionLimit": 105,
+        "oneDamageRatio": 0.6413507568896364,
+        "reachedWave": {
+          "2": 97,
+          "3": 8
+        },
+        "waveDamage": {
+          "1": {
+            "one": 4034,
+            "count": 8598,
+            "totalDamage": 10115538
+          },
+          "2": {
+            "one": 15698,
+            "count": 22207,
+            "totalDamage": 11640361
+          },
+          "3": {
+            "one": 96,
+            "count": 111,
+            "totalDamage": 49113
+          }
+        },
+        "reason": "action_limit",
+        "exampleSeed": 86003,
+        "skills": [
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD010"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          }
+        ],
+        "explanation": "失敗試行の直接攻撃の過半数が1ダメージ。防御/属性/支援の組合せ不足が疑われる。"
+      }
+    ],
+    "primary": {
+      "name": "break-regen",
+      "wins": 600,
+      "n": 600,
+      "percent": 100,
+      "inputHash": "d521ec4781db4cd53177ff3c088f763172fe23abe2c000517d38818d288c8b0c",
+      "evidence": "docs/verification/stage68-five-tier-20260926/9-10-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": []
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD038"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD010"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD043"
+          ]
+        }
+      ],
+      "actions": [
+        217,
+        286
+      ],
+      "meanActions": 252.86,
+      "coreCasts": {
+        "SKD038": 600,
+        "SKD010": 600,
+        "SKD009": 600,
+        "SKD043": 594
+      }
+    },
+    "alternative": {
+      "name": "break-and-buff",
+      "wins": 195,
+      "n": 200,
+      "percent": 97.5,
+      "inputHash": "684f0753f19f1fbb995ebe1e5f13c89acf2d30b7939294cb721358297cc6fcd6",
+      "evidence": "docs/verification/stage68-five-tier-20260926/9-10-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD038"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD010"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        225,
+        300
+      ],
+      "meanActions": 258.645,
+      "coreCasts": {
+        "SKD035": 200,
+        "SKD038": 200,
+        "SKD010": 200,
+        "SKD009": 200,
+        "SKD039": 200
+      }
+    },
+    "continueValidationCloses": false,
+    "recommendation": "敵の追加弱体は現時点で推奨しない。poor-elementからbreak-regenまたはbreak-and-buffへ、保存済み配置・技へ変更する。HP/DEFを下げて不適合編成まで勝たせると攻略差を消す。",
+    "uxProposal": "未承認：敗北結果にaction_limit専用の説明と同育成の2編成例を表示。既存戦闘ログの最終到達Wave・1ダメージ比率・中核技発動を根拠にする。戦闘中は60行動以降、直近30味方行動の敵合計HP最小値が低下しない場合に1回だけ停滞案内。自動敗北/自動撤退/返金はしない。早期離脱は既存の離脱契約を確認して別途統合担当へ。",
+    "closure": "原因区分と代替攻略の証拠整理は完了。実際の待ち時間短縮はUXの承認・実装・実機確認が必要。追加試行だけでは閉じない。"
+  },
+  {
+    "stage": "10-1",
+    "limit": "味方300行動でaction_limit敗北。計算ジョブのタイムアウトではない",
+    "details": [
+      {
+        "name": "armor-break",
+        "wins": 14,
+        "n": 200,
+        "actionLimit": 186,
+        "oneDamageRatio": 0.5130512692882031,
+        "reachedWave": {
+          "3": 186
+        },
+        "waveDamage": {
+          "1": {
+            "one": 9274,
+            "count": 20237,
+            "totalDamage": 19175121
+          },
+          "2": {
+            "one": 7867,
+            "count": 14702,
+            "totalDamage": 11155097
+          },
+          "3": {
+            "one": 8627,
+            "count": 15286,
+            "totalDamage": 11618597
+          }
+        },
+        "reason": "action_limit",
+        "exampleSeed": 90001,
+        "skills": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD038"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "explanation": "失敗試行の直接攻撃の過半数が1ダメージ。防御/属性/支援の組合せ不足が疑われる。"
+      },
+      {
+        "name": "attack-up",
+        "wins": 11,
+        "n": 200,
+        "actionLimit": 189,
+        "oneDamageRatio": 0.5584859538223554,
+        "reachedWave": {
+          "3": 189
+        },
+        "waveDamage": {
+          "1": {
+            "one": 11551,
+            "count": 21835,
+            "totalDamage": 19505201
+          },
+          "2": {
+            "one": 9526,
+            "count": 16513,
+            "totalDamage": 11364442
+          },
+          "3": {
+            "one": 8167,
+            "count": 14015,
+            "totalDamage": 10950995
+          }
+        },
+        "reason": "action_limit",
+        "exampleSeed": 90001,
+        "skills": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "explanation": "失敗試行の直接攻撃の過半数が1ダメージ。防御/属性/支援の組合せ不足が疑われる。"
+      }
+    ],
+    "primary": {
+      "name": "break-and-buff",
+      "wins": 600,
+      "n": 600,
+      "percent": 100,
+      "inputHash": "ee077ea8f8c905c3e59154e79a3945d75c9c065a287d4faca317c25a05845329",
+      "evidence": "docs/verification/stage68-five-tier-20260926/10-1-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD038"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        186,
+        295
+      ],
+      "meanActions": 237.20833333333334,
+      "coreCasts": {
+        "SKD035": 600,
+        "SKD038": 600,
+        "SKD009": 600,
+        "SKD039": 600
+      }
+    },
+    "alternative": {
+      "name": "support-feed",
+      "wins": 200,
+      "n": 200,
+      "percent": 100,
+      "inputHash": "0d8968db2c41ad65b7b997991f53cb1b2ae007b7ece766a08ba96d7096b36dc2",
+      "evidence": "docs/verification/stage68-five-tier-20260926/10-1-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": []
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        216,
+        298
+      ],
+      "meanActions": 254.27,
+      "coreCasts": {
+        "SKD035": 200,
+        "SKD009": 200,
+        "SKD039": 200
+      }
+    },
+    "continueValidationCloses": false,
+    "recommendation": "敵の追加弱体は現時点で推奨しない。attack-upからbreak-and-buffまたはsupport-feedへ、保存済み配置・技へ変更する。HP/DEFを下げて不適合編成まで勝たせると攻略差を消す。",
+    "uxProposal": "未承認：敗北結果にaction_limit専用の説明と同育成の2編成例を表示。既存戦闘ログの最終到達Wave・1ダメージ比率・中核技発動を根拠にする。戦闘中は60行動以降、直近30味方行動の敵合計HP最小値が低下しない場合に1回だけ停滞案内。自動敗北/自動撤退/返金はしない。早期離脱は既存の離脱契約を確認して別途統合担当へ。",
+    "closure": "原因区分と代替攻略の証拠整理は完了。実際の待ち時間短縮はUXの承認・実装・実機確認が必要。追加試行だけでは閉じない。"
+  },
+  {
+    "stage": "10-2",
+    "limit": "味方300行動でaction_limit敗北。計算ジョブのタイムアウトではない",
+    "details": [
+      {
+        "name": "attack-up-reversed",
+        "wins": 0,
+        "n": 200,
+        "actionLimit": 114,
+        "oneDamageRatio": 0.8171354711639072,
+        "reachedWave": {
+          "2": 114
+        },
+        "waveDamage": {
+          "1": {
+            "one": 1446,
+            "count": 6971,
+            "totalDamage": 10984160
+          },
+          "2": {
+            "one": 25106,
+            "count": 25523,
+            "totalDamage": 1147100
+          }
+        },
+        "reason": "action_limit",
+        "exampleSeed": 87002,
+        "skills": [
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD008"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          }
+        ],
+        "explanation": "失敗試行の直接攻撃の過半数が1ダメージ。防御/属性/支援の組合せ不足が疑われる。"
+      },
+      {
+        "name": "break-and-buff-order-31245",
+        "wins": 15,
+        "n": 200,
+        "actionLimit": 183,
+        "oneDamageRatio": 0.22334983498349836,
+        "reachedWave": {
+          "3": 183
+        },
+        "waveDamage": {
+          "1": {
+            "one": 211,
+            "count": 9415,
+            "totalDamage": 17884598
+          },
+          "2": {
+            "one": 6605,
+            "count": 24003,
+            "totalDamage": 31720581
+          },
+          "3": {
+            "one": 4012,
+            "count": 15062,
+            "totalDamage": 16381694
+          }
+        },
+        "reason": "action_limit",
+        "exampleSeed": 95001,
+        "skills": [
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD008"
+            ]
+          },
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD038"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "explanation": "攻撃は通るが300行動内に全Waveを処理できない。回復・保護・SP消費順・HP負担の個別因果は保存集計だけでは断定しない。"
+      }
+    ],
+    "primary": {
+      "name": "break-and-buff",
+      "wins": 200,
+      "n": 200,
+      "percent": 100,
+      "inputHash": "18d6b11219ca55c37dc0abfc2515e436c9cca99f925548a78acce68a96777262",
+      "evidence": "docs/verification/stage68-five-tier-20260926/10-2-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD038"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD008"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        187,
+        249
+      ],
+      "meanActions": 214.95,
+      "coreCasts": {
+        "SKD035": 82,
+        "SKD038": 200,
+        "SKD008": 200,
+        "SKD009": 200,
+        "SKD039": 200
+      }
+    },
+    "alternative": {
+      "name": "support-feed",
+      "wins": 197,
+      "n": 200,
+      "percent": 98.5,
+      "inputHash": "31907c709a398e755eff6a115120a559c1ec943a0a67662bfa7b7a72853d6dfa",
+      "evidence": "docs/verification/stage68-five-tier-20260926/10-2-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": []
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD008"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        222,
+        300
+      ],
+      "meanActions": 254.63,
+      "coreCasts": {
+        "SKD035": 200,
+        "SKD008": 200,
+        "SKD009": 200,
+        "SKD039": 200
+      }
+    },
+    "continueValidationCloses": false,
+    "recommendation": "敵の追加弱体は現時点で推奨しない。break-and-buff-order-31245からbreak-and-buffまたはsupport-feedへ、保存済み配置・技へ変更する。HP/DEFを下げて不適合編成まで勝たせると攻略差を消す。",
+    "uxProposal": "未承認：敗北結果にaction_limit専用の説明と同育成の2編成例を表示。既存戦闘ログの最終到達Wave・1ダメージ比率・中核技発動を根拠にする。戦闘中は60行動以降、直近30味方行動の敵合計HP最小値が低下しない場合に1回だけ停滞案内。自動敗北/自動撤退/返金はしない。早期離脱は既存の離脱契約を確認して別途統合担当へ。",
+    "closure": "原因区分と代替攻略の証拠整理は完了。実際の待ち時間短縮はUXの承認・実装・実機確認が必要。追加試行だけでは閉じない。"
+  },
+  {
+    "stage": "10-5",
+    "limit": "味方300行動でaction_limit敗北。計算ジョブのタイムアウトではない",
+    "details": [
+      {
+        "name": "attack-up-reversed",
+        "wins": 0,
+        "n": 200,
+        "actionLimit": 200,
+        "oneDamageRatio": 0.5001148998603525,
+        "reachedWave": {
+          "3": 200
+        },
+        "waveDamage": {
+          "1": {
+            "one": 14939,
+            "count": 34911,
+            "totalDamage": 28465914
+          },
+          "2": {
+            "one": 1905,
+            "count": 4184,
+            "totalDamage": 3798317
+          },
+          "3": {
+            "one": 11448,
+            "count": 17476,
+            "totalDamage": 14122115
+          }
+        },
+        "reason": "action_limit",
+        "exampleSeed": 112001,
+        "skills": [
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD008"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          }
+        ],
+        "explanation": "失敗試行の直接攻撃の過半数が1ダメージ。防御/属性/支援の組合せ不足が疑われる。"
+      }
+    ],
+    "primary": {
+      "name": "break-and-buff",
+      "wins": 600,
+      "n": 600,
+      "percent": 100,
+      "inputHash": "d8547b6109f1e62386d245d3562ed88f95c51e154d3589a78d57dd89d33b9747",
+      "evidence": "docs/verification/stage68-five-tier-20260926/10-5-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD038"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD008"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        182,
+        275
+      ],
+      "meanActions": 219.31666666666666,
+      "coreCasts": {
+        "SKD035": 552,
+        "SKD038": 600,
+        "SKD008": 600,
+        "SKD009": 600,
+        "SKD039": 600
+      }
+    },
+    "alternative": {
+      "name": "support-feed",
+      "wins": 200,
+      "n": 200,
+      "percent": 100,
+      "inputHash": "211bd9646a2976827f30aadee555551e76e393a4c73e42455df2d2db1cb780fe",
+      "evidence": "docs/verification/stage68-five-tier-20260926/10-5-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": []
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD008"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        194,
+        267
+      ],
+      "meanActions": 232.165,
+      "coreCasts": {
+        "SKD035": 200,
+        "SKD008": 200,
+        "SKD009": 200,
+        "SKD039": 200
+      }
+    },
+    "continueValidationCloses": false,
+    "recommendation": "敵の追加弱体は現時点で推奨しない。attack-up-reversedからbreak-and-buffまたはsupport-feedへ、保存済み配置・技へ変更する。HP/DEFを下げて不適合編成まで勝たせると攻略差を消す。",
+    "uxProposal": "未承認：敗北結果にaction_limit専用の説明と同育成の2編成例を表示。既存戦闘ログの最終到達Wave・1ダメージ比率・中核技発動を根拠にする。戦闘中は60行動以降、直近30味方行動の敵合計HP最小値が低下しない場合に1回だけ停滞案内。自動敗北/自動撤退/返金はしない。早期離脱は既存の離脱契約を確認して別途統合担当へ。",
+    "closure": "原因区分と代替攻略の証拠整理は完了。実際の待ち時間短縮はUXの承認・実装・実機確認が必要。追加試行だけでは閉じない。"
+  },
+  {
+    "stage": "10-6",
+    "limit": "味方300行動でaction_limit敗北。計算ジョブのタイムアウトではない",
+    "details": [
+      {
+        "name": "poison-control",
+        "wins": 17,
+        "n": 200,
+        "actionLimit": 183,
+        "oneDamageRatio": 0.4440641842736234,
+        "reachedWave": {
+          "2": 81,
+          "3": 102
+        },
+        "waveDamage": {
+          "1": {
+            "one": 8101,
+            "count": 23086,
+            "totalDamage": 21378211
+          },
+          "2": {
+            "one": 11936,
+            "count": 23762,
+            "totalDamage": 15731280
+          },
+          "3": {
+            "one": 1632,
+            "count": 1949,
+            "totalDamage": 366351
+          }
+        },
+        "reason": "action_limit",
+        "exampleSeed": 87001,
+        "skills": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD037"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD038"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD029"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD010"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD043"
+            ]
+          }
+        ],
+        "explanation": "攻撃は通るが300行動内に全Waveを処理できない。回復・保護・SP消費順・HP負担の個別因果は保存集計だけでは断定しない。"
+      }
+    ],
+    "primary": {
+      "name": "burst-focus",
+      "wins": 200,
+      "n": 200,
+      "percent": 100,
+      "inputHash": "5a1e59ff4c599ee98c1ce484d4f840a4a5fe4de8aaa99519aae4b9d328256c0f",
+      "evidence": "docs/verification/stage68-five-tier-20260926/10-6-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": []
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": []
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD010"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        184,
+        267
+      ],
+      "meanActions": 213.65,
+      "coreCasts": {
+        "SKD010": 200,
+        "SKD009": 200,
+        "SKD039": 200
+      }
+    },
+    "alternative": {
+      "name": "break-and-buff",
+      "wins": 199,
+      "n": 200,
+      "percent": 99.5,
+      "inputHash": "3b66a9a4ca2149fbe4571d2ff9ce4c5479cfc9292a7c143b7cb691ef9d83b81b",
+      "evidence": "docs/verification/stage68-five-tier-20260926/10-6-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD038"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD010"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        163,
+        300
+      ],
+      "meanActions": 207.09,
+      "coreCasts": {
+        "SKD035": 128,
+        "SKD038": 200,
+        "SKD010": 200,
+        "SKD009": 200,
+        "SKD039": 200
+      }
+    },
+    "continueValidationCloses": false,
+    "recommendation": "敵の追加弱体は現時点で推奨しない。poison-controlからburst-focusまたはbreak-and-buffへ、保存済み配置・技へ変更する。HP/DEFを下げて不適合編成まで勝たせると攻略差を消す。",
+    "uxProposal": "未承認：敗北結果にaction_limit専用の説明と同育成の2編成例を表示。既存戦闘ログの最終到達Wave・1ダメージ比率・中核技発動を根拠にする。戦闘中は60行動以降、直近30味方行動の敵合計HP最小値が低下しない場合に1回だけ停滞案内。自動敗北/自動撤退/返金はしない。早期離脱は既存の離脱契約を確認して別途統合担当へ。",
+    "closure": "原因区分と代替攻略の証拠整理は完了。実際の待ち時間短縮はUXの承認・実装・実機確認が必要。追加試行だけでは閉じない。"
+  },
+  {
+    "stage": "10-7",
+    "limit": "味方300行動でaction_limit敗北。計算ジョブのタイムアウトではない",
+    "details": [
+      {
+        "name": "expensive-first",
+        "wins": 11,
+        "n": 200,
+        "actionLimit": 165,
+        "oneDamageRatio": 0.460866780529462,
+        "reachedWave": {
+          "3": 165
+        },
+        "waveDamage": {
+          "1": {
+            "one": 735,
+            "count": 8645,
+            "totalDamage": 14181849
+          },
+          "2": {
+            "one": 10511,
+            "count": 24363,
+            "totalDamage": 6991794
+          },
+          "3": {
+            "one": 10341,
+            "count": 13832,
+            "totalDamage": 1712870
+          }
+        },
+        "reason": "action_limit",
+        "exampleSeed": 86002,
+        "skills": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD020",
+              "SKD008"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD008",
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "explanation": "攻撃は通るが300行動内に全Waveを処理できない。回復・保護・SP消費順・HP負担の個別因果は保存集計だけでは断定しない。"
+      }
+    ],
+    "primary": {
+      "name": "armor-break",
+      "wins": 200,
+      "n": 200,
+      "percent": 100,
+      "inputHash": "c7dfc1797581e2c3d3b0f733a453a410ddb7b6590c7e0d42b73d33cf0303feab",
+      "evidence": "docs/verification/stage68-five-tier-20260926/10-7-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD003"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD038"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD008"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        121,
+        197
+      ],
+      "meanActions": 149.535,
+      "coreCasts": {
+        "SKD003": 0,
+        "SKD038": 200,
+        "SKD008": 200,
+        "SKD009": 200,
+        "SKD039": 199
+      }
+    },
+    "alternative": {
+      "name": "defensive",
+      "wins": 199,
+      "n": 200,
+      "percent": 99.5,
+      "inputHash": "363bfea020c0f863916f572245f2ecbaaf5b6eebbf691e0976579f73ba0a8016",
+      "evidence": "docs/verification/stage68-five-tier-20260926/10-7-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD036"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD037"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD008"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD043"
+          ]
+        }
+      ],
+      "actions": [
+        123,
+        300
+      ],
+      "meanActions": 149.61,
+      "coreCasts": {
+        "SKD036": 0,
+        "SKD037": 200,
+        "SKD008": 200,
+        "SKD009": 200,
+        "SKD043": 194
+      }
+    },
+    "continueValidationCloses": false,
+    "recommendation": "敵の追加弱体は現時点で推奨しない。expensive-firstからarmor-breakまたはdefensiveへ、保存済み配置・技へ変更する。HP/DEFを下げて不適合編成まで勝たせると攻略差を消す。",
+    "uxProposal": "未承認：敗北結果にaction_limit専用の説明と同育成の2編成例を表示。既存戦闘ログの最終到達Wave・1ダメージ比率・中核技発動を根拠にする。戦闘中は60行動以降、直近30味方行動の敵合計HP最小値が低下しない場合に1回だけ停滞案内。自動敗北/自動撤退/返金はしない。早期離脱は既存の離脱契約を確認して別途統合担当へ。",
+    "closure": "原因区分と代替攻略の証拠整理は完了。実際の待ち時間短縮はUXの承認・実装・実機確認が必要。追加試行だけでは閉じない。"
+  },
+  {
+    "stage": "10-8",
+    "limit": "味方300行動でaction_limit敗北。計算ジョブのタイムアウトではない",
+    "details": [
+      {
+        "name": "attack-up-reversed",
+        "wins": 0,
+        "n": 200,
+        "actionLimit": 121,
+        "oneDamageRatio": 0.28329660394417133,
+        "reachedWave": {
+          "2": 121
+        },
+        "waveDamage": {
+          "1": {
+            "one": 3351,
+            "count": 16172,
+            "totalDamage": 17422689
+          },
+          "2": {
+            "one": 6676,
+            "count": 19222,
+            "totalDamage": 4107469
+          }
+        },
+        "reason": "action_limit",
+        "exampleSeed": 86002,
+        "skills": [
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD010"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          }
+        ],
+        "explanation": "攻撃は通るが300行動内に全Waveを処理できない。回復・保護・SP消費順・HP負担の個別因果は保存集計だけでは断定しない。"
+      }
+    ],
+    "primary": {
+      "name": "break-regen",
+      "wins": 600,
+      "n": 600,
+      "percent": 100,
+      "inputHash": "6f6ce98a6808ff0f3221a2e92e6aa79ea837fbdbc43f57557c9de06d358735c7",
+      "evidence": "docs/verification/stage68-five-tier-20260926/10-8-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": []
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD038"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD010"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD043"
+          ]
+        }
+      ],
+      "actions": [
+        205,
+        282
+      ],
+      "meanActions": 240.49666666666667,
+      "coreCasts": {
+        "SKD038": 600,
+        "SKD010": 600,
+        "SKD009": 600,
+        "SKD043": 600
+      }
+    },
+    "alternative": {
+      "name": "remove-buff",
+      "wins": 192,
+      "n": 200,
+      "percent": 96,
+      "inputHash": "0cf32ba7fcb397cb70bab3c67259611cf9a34dced61aecb758b958792a2d2690",
+      "evidence": "docs/verification/stage68-five-tier-20260926/10-8-validated.json.gz",
+      "assets": {
+        "covered": true,
+        "missing": []
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD051"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD010"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "actions": [
+        237,
+        300
+      ],
+      "meanActions": 268.21,
+      "coreCasts": {
+        "SKD051": 200,
+        "SKD035": 200,
+        "SKD010": 200,
+        "SKD009": 200,
+        "SKD039": 200
+      }
+    },
+    "continueValidationCloses": false,
+    "recommendation": "敵の追加弱体は現時点で推奨しない。attack-up-reversedからbreak-regenまたはremove-buffへ、保存済み配置・技へ変更する。HP/DEFを下げて不適合編成まで勝たせると攻略差を消す。",
+    "uxProposal": "未承認：敗北結果にaction_limit専用の説明と同育成の2編成例を表示。既存戦闘ログの最終到達Wave・1ダメージ比率・中核技発動を根拠にする。戦闘中は60行動以降、直近30味方行動の敵合計HP最小値が低下しない場合に1回だけ停滞案内。自動敗北/自動撤退/返金はしない。早期離脱は既存の離脱契約を確認して別途統合担当へ。",
+    "closure": "原因区分と代替攻略の証拠整理は完了。実際の待ち時間短縮はUXの承認・実装・実機確認が必要。追加試行だけでは閉じない。"
+  }
+]
