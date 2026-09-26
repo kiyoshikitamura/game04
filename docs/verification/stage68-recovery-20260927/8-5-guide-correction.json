@@ -1,0 +1,862 @@
+{
+  "stage": "8-5",
+  "status": "UNAPPROVED_ISOLATED_PROPOSAL",
+  "reason": "旧主候補burst-focus-regenのSKD043は0/200試行で発動。継続回復攻略としては不合格。既存保存候補からbarrierを主、burst-focusを別戦法へ選び直す。",
+  "primary": {
+    "name": "barrier",
+    "family": "sustain",
+    "wins": 200,
+    "n": 200,
+    "seedFirst": 86001,
+    "seedLast": 86200,
+    "loadout": [
+      {
+        "id": "char_joe_01",
+        "level": 78,
+        "awakening": 3,
+        "exp": 258880,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "北条氏康",
+        "skills": [
+          {
+            "id": "SKD045",
+            "lb": 4
+          }
+        ],
+        "equipment": [
+          {
+            "instanceId": "audit-0-0",
+            "masterId": "WEAPON_009",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "weapon",
+            "stats": {
+              "hp": 0,
+              "atk": 345.39112654938333,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-0-1",
+            "masterId": "HEAD_008",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "head",
+            "stats": {
+              "hp": 129.52167245601876,
+              "atk": 0,
+              "def": 112.25211612854959,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-0-2",
+            "masterId": "BODY_008",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "body",
+            "stats": {
+              "hp": 1208.8689429228418,
+              "atk": 0,
+              "def": 34.539112654938336,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-0-3",
+            "masterId": "LEGS_006",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "legs",
+            "stats": {
+              "hp": 431.7389081867292,
+              "atk": 0,
+              "def": 103.61733796481501,
+              "luk": 0,
+              "sp": 0
+            }
+          }
+        ]
+      },
+      {
+        "id": "char_yuki_01",
+        "level": 78,
+        "awakening": 3,
+        "exp": 258880,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "竹中半兵衛",
+        "skills": [
+          {
+            "id": "SKD035",
+            "lb": 4
+          }
+        ],
+        "equipment": [
+          {
+            "instanceId": "audit-1-0",
+            "masterId": "WEAPON_009",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "weapon",
+            "stats": {
+              "hp": 0,
+              "atk": 345.39112654938333,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-1-1",
+            "masterId": "HEAD_008",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "head",
+            "stats": {
+              "hp": 129.52167245601876,
+              "atk": 0,
+              "def": 112.25211612854959,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-1-2",
+            "masterId": "BODY_008",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "body",
+            "stats": {
+              "hp": 1208.8689429228418,
+              "atk": 0,
+              "def": 34.539112654938336,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-1-3",
+            "masterId": "LEGS_006",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "legs",
+            "stats": {
+              "hp": 431.7389081867292,
+              "atk": 0,
+              "def": 103.61733796481501,
+              "luk": 0,
+              "sp": 0
+            }
+          }
+        ]
+      },
+      {
+        "id": "char_daimon_01",
+        "level": 78,
+        "awakening": 3,
+        "exp": 258880,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "井伊直政",
+        "skills": [
+          {
+            "id": "SKD007",
+            "lb": 4
+          }
+        ],
+        "equipment": [
+          {
+            "instanceId": "audit-2-0",
+            "masterId": "WEAPON_009",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "weapon",
+            "stats": {
+              "hp": 0,
+              "atk": 345.39112654938333,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-2-1",
+            "masterId": "HEAD_008",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "head",
+            "stats": {
+              "hp": 129.52167245601876,
+              "atk": 0,
+              "def": 112.25211612854959,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-2-2",
+            "masterId": "BODY_008",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "body",
+            "stats": {
+              "hp": 1208.8689429228418,
+              "atk": 0,
+              "def": 34.539112654938336,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-2-3",
+            "masterId": "LEGS_006",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "legs",
+            "stats": {
+              "hp": 431.7389081867292,
+              "atk": 0,
+              "def": 103.61733796481501,
+              "luk": 0,
+              "sp": 0
+            }
+          }
+        ]
+      },
+      {
+        "id": "char_jihoon_01",
+        "level": 78,
+        "awakening": 3,
+        "exp": 258880,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "前田利家",
+        "skills": [
+          {
+            "id": "SKD009",
+            "lb": 4
+          }
+        ],
+        "equipment": [
+          {
+            "instanceId": "audit-3-0",
+            "masterId": "WEAPON_009",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "weapon",
+            "stats": {
+              "hp": 0,
+              "atk": 345.39112654938333,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-3-1",
+            "masterId": "HEAD_008",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "head",
+            "stats": {
+              "hp": 129.52167245601876,
+              "atk": 0,
+              "def": 112.25211612854959,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-3-2",
+            "masterId": "BODY_008",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "body",
+            "stats": {
+              "hp": 1208.8689429228418,
+              "atk": 0,
+              "def": 34.539112654938336,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-3-3",
+            "masterId": "LEGS_006",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "legs",
+            "stats": {
+              "hp": 431.7389081867292,
+              "atk": 0,
+              "def": 103.61733796481501,
+              "luk": 0,
+              "sp": 0
+            }
+          }
+        ]
+      },
+      {
+        "id": "char_aoi_01",
+        "level": 78,
+        "awakening": 3,
+        "exp": 258880,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "お市の方",
+        "skills": [
+          {
+            "id": "SKD039",
+            "lb": 4
+          }
+        ],
+        "equipment": [
+          {
+            "instanceId": "audit-4-0",
+            "masterId": "WEAPON_009",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "weapon",
+            "stats": {
+              "hp": 0,
+              "atk": 345.39112654938333,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-4-1",
+            "masterId": "HEAD_008",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "head",
+            "stats": {
+              "hp": 129.52167245601876,
+              "atk": 0,
+              "def": 112.25211612854959,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-4-2",
+            "masterId": "BODY_008",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "body",
+            "stats": {
+              "hp": 1208.8689429228418,
+              "atk": 0,
+              "def": 34.539112654938336,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-4-3",
+            "masterId": "LEGS_006",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "legs",
+            "stats": {
+              "hp": 431.7389081867292,
+              "atk": 0,
+              "def": 103.61733796481501,
+              "luk": 0,
+              "sp": 0
+            }
+          }
+        ]
+      }
+    ],
+    "inputHash": "c7a225f18b4e0a3ccd597d96eb611b40b69318b5d131b387e97c17bd0081c3ff",
+    "activations": [
+      {
+        "id": "SKD045",
+        "runs": 197
+      },
+      {
+        "id": "SKD035",
+        "runs": 174
+      },
+      {
+        "id": "SKD007",
+        "runs": 200
+      },
+      {
+        "id": "SKD009",
+        "runs": 200
+      },
+      {
+        "id": "SKD039",
+        "runs": 200
+      }
+    ],
+    "burstRuns": 198,
+    "existingProposedTrainingCovers": true
+  },
+  "alternative": {
+    "name": "burst-focus",
+    "family": "sp-feed",
+    "wins": 200,
+    "n": 200,
+    "seedFirst": 86001,
+    "seedLast": 86200,
+    "loadout": [
+      {
+        "id": "char_joe_01",
+        "level": 78,
+        "awakening": 3,
+        "exp": 258880,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "北条氏康",
+        "skills": [],
+        "equipment": [
+          {
+            "instanceId": "audit-0-0",
+            "masterId": "WEAPON_009",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "weapon",
+            "stats": {
+              "hp": 0,
+              "atk": 345.39112654938333,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-0-1",
+            "masterId": "HEAD_008",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "head",
+            "stats": {
+              "hp": 129.52167245601876,
+              "atk": 0,
+              "def": 112.25211612854959,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-0-2",
+            "masterId": "BODY_008",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "body",
+            "stats": {
+              "hp": 1208.8689429228418,
+              "atk": 0,
+              "def": 34.539112654938336,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-0-3",
+            "masterId": "LEGS_006",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "legs",
+            "stats": {
+              "hp": 431.7389081867292,
+              "atk": 0,
+              "def": 103.61733796481501,
+              "luk": 0,
+              "sp": 0
+            }
+          }
+        ]
+      },
+      {
+        "id": "char_yuki_01",
+        "level": 78,
+        "awakening": 3,
+        "exp": 258880,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "竹中半兵衛",
+        "skills": [],
+        "equipment": [
+          {
+            "instanceId": "audit-1-0",
+            "masterId": "WEAPON_009",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "weapon",
+            "stats": {
+              "hp": 0,
+              "atk": 345.39112654938333,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-1-1",
+            "masterId": "HEAD_008",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "head",
+            "stats": {
+              "hp": 129.52167245601876,
+              "atk": 0,
+              "def": 112.25211612854959,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-1-2",
+            "masterId": "BODY_008",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "body",
+            "stats": {
+              "hp": 1208.8689429228418,
+              "atk": 0,
+              "def": 34.539112654938336,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-1-3",
+            "masterId": "LEGS_006",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "legs",
+            "stats": {
+              "hp": 431.7389081867292,
+              "atk": 0,
+              "def": 103.61733796481501,
+              "luk": 0,
+              "sp": 0
+            }
+          }
+        ]
+      },
+      {
+        "id": "char_daimon_01",
+        "level": 78,
+        "awakening": 3,
+        "exp": 258880,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "井伊直政",
+        "skills": [
+          {
+            "id": "SKD007",
+            "lb": 4
+          }
+        ],
+        "equipment": [
+          {
+            "instanceId": "audit-2-0",
+            "masterId": "WEAPON_009",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "weapon",
+            "stats": {
+              "hp": 0,
+              "atk": 345.39112654938333,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-2-1",
+            "masterId": "HEAD_008",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "head",
+            "stats": {
+              "hp": 129.52167245601876,
+              "atk": 0,
+              "def": 112.25211612854959,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-2-2",
+            "masterId": "BODY_008",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "body",
+            "stats": {
+              "hp": 1208.8689429228418,
+              "atk": 0,
+              "def": 34.539112654938336,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-2-3",
+            "masterId": "LEGS_006",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "legs",
+            "stats": {
+              "hp": 431.7389081867292,
+              "atk": 0,
+              "def": 103.61733796481501,
+              "luk": 0,
+              "sp": 0
+            }
+          }
+        ]
+      },
+      {
+        "id": "char_jihoon_01",
+        "level": 78,
+        "awakening": 3,
+        "exp": 258880,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "前田利家",
+        "skills": [
+          {
+            "id": "SKD009",
+            "lb": 4
+          }
+        ],
+        "equipment": [
+          {
+            "instanceId": "audit-3-0",
+            "masterId": "WEAPON_009",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "weapon",
+            "stats": {
+              "hp": 0,
+              "atk": 345.39112654938333,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-3-1",
+            "masterId": "HEAD_008",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "head",
+            "stats": {
+              "hp": 129.52167245601876,
+              "atk": 0,
+              "def": 112.25211612854959,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-3-2",
+            "masterId": "BODY_008",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "body",
+            "stats": {
+              "hp": 1208.8689429228418,
+              "atk": 0,
+              "def": 34.539112654938336,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-3-3",
+            "masterId": "LEGS_006",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "legs",
+            "stats": {
+              "hp": 431.7389081867292,
+              "atk": 0,
+              "def": 103.61733796481501,
+              "luk": 0,
+              "sp": 0
+            }
+          }
+        ]
+      },
+      {
+        "id": "char_aoi_01",
+        "level": 78,
+        "awakening": 3,
+        "exp": 258880,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "お市の方",
+        "skills": [
+          {
+            "id": "SKD039",
+            "lb": 4
+          }
+        ],
+        "equipment": [
+          {
+            "instanceId": "audit-4-0",
+            "masterId": "WEAPON_009",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "weapon",
+            "stats": {
+              "hp": 0,
+              "atk": 345.39112654938333,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-4-1",
+            "masterId": "HEAD_008",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "head",
+            "stats": {
+              "hp": 129.52167245601876,
+              "atk": 0,
+              "def": 112.25211612854959,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-4-2",
+            "masterId": "BODY_008",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "body",
+            "stats": {
+              "hp": 1208.8689429228418,
+              "atk": 0,
+              "def": 34.539112654938336,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-4-3",
+            "masterId": "LEGS_006",
+            "level": 40,
+            "lb": 0,
+            "exp": 34780,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "legs",
+            "stats": {
+              "hp": 431.7389081867292,
+              "atk": 0,
+              "def": 103.61733796481501,
+              "luk": 0,
+              "sp": 0
+            }
+          }
+        ]
+      }
+    ],
+    "inputHash": "64e9d0ee82ee2774ab90b04a8f10e7371bbf65a3c4502b16ad6baf1bf064b2b4",
+    "activations": [
+      {
+        "id": "SKD007",
+        "runs": 200
+      },
+      {
+        "id": "SKD009",
+        "runs": 200
+      },
+      {
+        "id": "SKD039",
+        "runs": 200
+      }
+    ],
+    "burstRuns": 199,
+    "existingProposedTrainingCovers": true
+  },
+  "enemyDeltaChanged": false,
+  "additionalSupplyChanged": false,
+  "newSimulationTrials": 0,
+  "evidence": "../stage68-five-tier-20260926/8-5-validated.json.gz",
+  "supersedes": "旧ガイド8-5の主/別戦法欄のみ。5段階実測値・敵値・旧失敗証拠は保存したまま。"
+}
