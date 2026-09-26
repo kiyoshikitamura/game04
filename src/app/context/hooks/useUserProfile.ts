@@ -140,6 +140,7 @@ export function useUserProfile(
     }
     saveInFlightRef.current = true;
     setProfileLoading(true);
+    setErrorMessage(null);
     playCyberSe("click");
 
     // 🛡️ チート対策: 未解放の背景・称号・装飾の不正設定をバリデーション遮断
@@ -240,6 +241,7 @@ export function useUserProfile(
     }
     saveInFlightRef.current = true;
     setProfileLoading(true);
+    setErrorMessage(null);
     playCyberSe("click");
     try {
       const { data, error } = await supabase.rpc("game04_update_own_profile", { p_bio: nextBio });

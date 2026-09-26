@@ -108,9 +108,9 @@ export default function SettingsPanel({ redesign = false }: { redesign?: boolean
   return (
     <FullScreenPanel title="設定 / プロフィール" onClose={() => { if (!game.profileLoading) close(); }}>
       <div className="settings-panel-container-inner">
-        {!redesign && game.errorMessage && <div className="settings-error-message">{game.errorMessage}</div>}
+        {game.errorMessage && <div role="alert" className="settings-error-message">{game.errorMessage}</div>}
 
-        <EditableSettingSection title="プロフィール" editing={profileEditing} pending={game.profileLoading} onEdit={() => setProfileEditing(true)} summary={<dl className="settings-summary"><div><dt>プレイヤー名</dt><dd>{game.username}</dd></div><div><dt>自己紹介</dt><dd>{game.bio || "未設定"}</dd></div></dl>}>
+        <EditableSettingSection title="プロフィール" editing={profileEditing} pending={game.profileLoading} onEdit={() => { resetDrafts(); game.setErrorMessage(''); setProfileEditing(true); }} summary={<dl className="settings-summary"><div><dt>プレイヤー名</dt><dd>{game.username}</dd></div><div><dt>自己紹介</dt><dd>{game.bio || "未設定"}</dd></div></dl>}>
           <div className="settings-field"><label htmlFor="profile-name">プレイヤー名</label><input id="profile-name" className="settings-input" value={usernameDraft} maxLength={8} disabled={game.profileLoading} onChange={(event) => setUsernameDraft(event.target.value)} /></div>
           <div className="settings-field settings-bio-field"><label htmlFor="profile-bio">自己紹介</label><textarea id="profile-bio" className="settings-textarea" value={bioDraft} maxLength={USER_BIO_MAX_LENGTH} rows={4} placeholder="自己紹介を入力" disabled={game.profileLoading} onChange={(event) => setBioDraft(event.target.value)} /><span>{Array.from(bioDraft).length} / {USER_BIO_MAX_LENGTH}</span></div>
           <div className="settings-edit-actions"><OutlawButton variant="secondary" disabled={game.profileLoading} onClick={() => { resetDrafts(); setProfileEditing(false); }}>キャンセル</OutlawButton><OutlawButton variant="primary" isLoading={game.profileLoading} loadingLabel="保存中…" disabled={!usernameDraft.trim()} onClick={() => void saveProfile()}>保存</OutlawButton></div>
