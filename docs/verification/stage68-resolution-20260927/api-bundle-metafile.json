@@ -1,0 +1,1154 @@
+{
+  "inputs": {
+    "src/domain/redesign/data/raid-skill-values.json": {
+      "bytes": 109213,
+      "imports": []
+    },
+    "src/domain/redesign/data/balance-v2.json": {
+      "bytes": 267071,
+      "imports": []
+    },
+    "src/domain/redesign/data/formal-skill-presentation.json": {
+      "bytes": 7736,
+      "imports": []
+    },
+    "src/domain/redesign/balanceV2Masters.ts": {
+      "bytes": 6837,
+      "imports": [
+        {
+          "path": "src/domain/redesign/data/balance-v2.json",
+          "kind": "import-statement",
+          "original": "./data/balance-v2.json"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/raidFormalSkills.ts": {
+      "bytes": 1218,
+      "imports": [
+        {
+          "path": "src/domain/redesign/data/raid-skill-values.json",
+          "kind": "import-statement",
+          "original": "./data/raid-skill-values.json"
+        },
+        {
+          "path": "src/domain/redesign/data/balance-v2.json",
+          "kind": "import-statement",
+          "original": "./data/balance-v2.json"
+        },
+        {
+          "path": "src/domain/redesign/data/formal-skill-presentation.json",
+          "kind": "import-statement",
+          "original": "./data/formal-skill-presentation.json"
+        },
+        {
+          "path": "src/domain/redesign/balanceV2Masters.ts",
+          "kind": "import-statement",
+          "original": "./balanceV2Masters"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/formalOwnedSkills.ts": {
+      "bytes": 1137,
+      "imports": [
+        {
+          "path": "src/domain/redesign/data/raid-skill-values.json",
+          "kind": "import-statement",
+          "original": "./data/raid-skill-values.json"
+        },
+        {
+          "path": "src/domain/redesign/data/balance-v2.json",
+          "kind": "import-statement",
+          "original": "./data/balance-v2.json"
+        },
+        {
+          "path": "src/domain/redesign/raidFormalSkills.ts",
+          "kind": "import-statement",
+          "original": "./raidFormalSkills"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/data/formal-growth-equipment.json": {
+      "bytes": 38177,
+      "imports": []
+    },
+    "config/game04-master-assets.json": {
+      "bytes": 83974,
+      "imports": []
+    },
+    "src/theme/sengoku-masters.json": {
+      "bytes": 9426,
+      "imports": []
+    },
+    "src/domain/redesign/formalGrowthMasters.ts": {
+      "bytes": 1578,
+      "imports": [
+        {
+          "path": "src/domain/redesign/data/formal-growth-equipment.json",
+          "kind": "import-statement",
+          "original": "./data/formal-growth-equipment.json"
+        },
+        {
+          "path": "config/game04-master-assets.json",
+          "kind": "import-statement",
+          "original": "../../../config/game04-master-assets.json"
+        },
+        {
+          "path": "src/theme/sengoku-masters.json",
+          "kind": "import-statement",
+          "original": "../../theme/sengoku-masters.json"
+        },
+        {
+          "path": "src/domain/redesign/data/raid-skill-values.json",
+          "kind": "import-statement",
+          "original": "./data/raid-skill-values.json"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/data/formal-character-stats.json": {
+      "bytes": 22594,
+      "imports": []
+    },
+    "src/domain/redesign/formalCharacterStats.ts": {
+      "bytes": 1703,
+      "imports": [
+        {
+          "path": "src/domain/redesign/data/formal-character-stats.json",
+          "kind": "import-statement",
+          "original": "./data/formal-character-stats.json"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/growthMaster.ts": {
+      "bytes": 2566,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/domain/redesign/growthReward.ts": {
+      "bytes": 2600,
+      "imports": [
+        {
+          "path": "src/domain/redesign/growthMaster.ts",
+          "kind": "import-statement",
+          "original": "./growthMaster"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/acquisitions.ts": {
+      "bytes": 4186,
+      "imports": [
+        {
+          "path": "src/domain/redesign/masters.ts",
+          "kind": "import-statement",
+          "original": "./masters"
+        },
+        {
+          "path": "src/domain/redesign/growthMaster.ts",
+          "kind": "import-statement",
+          "original": "./growthMaster"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/theme/sengoku-characters.json": {
+      "bytes": 26127,
+      "imports": []
+    },
+    "src/domain/gameplay/canonical/data/skills_20260821.json": {
+      "bytes": 27844,
+      "imports": []
+    },
+    "src/domain/gameplay/canonical/data/equipment_20260821.json": {
+      "bytes": 72277,
+      "imports": []
+    },
+    "src/domain/redesign/masters.ts": {
+      "bytes": 15156,
+      "imports": [
+        {
+          "path": "src/domain/redesign/formalOwnedSkills.ts",
+          "kind": "import-statement",
+          "original": "./formalOwnedSkills"
+        },
+        {
+          "path": "src/domain/redesign/formalGrowthMasters.ts",
+          "kind": "import-statement",
+          "original": "./formalGrowthMasters"
+        },
+        {
+          "path": "src/domain/redesign/formalCharacterStats.ts",
+          "kind": "import-statement",
+          "original": "./formalCharacterStats"
+        },
+        {
+          "path": "src/domain/redesign/growthMaster.ts",
+          "kind": "import-statement",
+          "original": "./growthMaster"
+        },
+        {
+          "path": "src/domain/redesign/growthReward.ts",
+          "kind": "import-statement",
+          "original": "./growthReward"
+        },
+        {
+          "path": "src/domain/redesign/balanceV2Masters.ts",
+          "kind": "import-statement",
+          "original": "./balanceV2Masters"
+        },
+        {
+          "path": "src/domain/redesign/balanceV2Masters.ts",
+          "kind": "import-statement",
+          "original": "./balanceV2Masters"
+        },
+        {
+          "path": "src/domain/redesign/acquisitions.ts",
+          "kind": "import-statement",
+          "original": "./acquisitions"
+        },
+        {
+          "path": "src/theme/sengoku-characters.json",
+          "kind": "import-statement",
+          "original": "../../theme/sengoku-characters.json"
+        },
+        {
+          "path": "src/theme/sengoku-masters.json",
+          "kind": "import-statement",
+          "original": "../../theme/sengoku-masters.json"
+        },
+        {
+          "path": "src/domain/gameplay/canonical/data/skills_20260821.json",
+          "kind": "import-statement",
+          "original": "../gameplay/canonical/data/skills_20260821.json"
+        },
+        {
+          "path": "src/domain/gameplay/canonical/data/equipment_20260821.json",
+          "kind": "import-statement",
+          "original": "../gameplay/canonical/data/equipment_20260821.json"
+        },
+        {
+          "path": "config/game04-master-assets.json",
+          "kind": "import-statement",
+          "original": "../../../config/game04-master-assets.json"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/normalGacha.ts": {
+      "bytes": 6259,
+      "imports": [
+        {
+          "path": "src/domain/redesign/masters.ts",
+          "kind": "import-statement",
+          "original": "./masters"
+        },
+        {
+          "path": "src/domain/redesign/acquisitions.ts",
+          "kind": "import-statement",
+          "original": "./acquisitions"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/data/formalGachaMaster.json": {
+      "bytes": 43941,
+      "imports": []
+    },
+    "src/domain/redesign/formalGachaMaster.ts": {
+      "bytes": 6861,
+      "imports": [
+        {
+          "path": "src/domain/redesign/masters.ts",
+          "kind": "import-statement",
+          "original": "./masters"
+        },
+        {
+          "path": "src/domain/redesign/formalOwnedSkills.ts",
+          "kind": "import-statement",
+          "original": "./formalOwnedSkills"
+        },
+        {
+          "path": "src/domain/redesign/data/formalGachaMaster.json",
+          "kind": "import-statement",
+          "original": "./data/formalGachaMaster.json"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/formalGacha.ts": {
+      "bytes": 8896,
+      "imports": [
+        {
+          "path": "src/domain/redesign/acquisitions.ts",
+          "kind": "import-statement",
+          "original": "./acquisitions"
+        },
+        {
+          "path": "src/domain/redesign/formalGachaMaster.ts",
+          "kind": "import-statement",
+          "original": "./formalGachaMaster"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/growth.ts": {
+      "bytes": 15181,
+      "imports": [
+        {
+          "path": "src/domain/redesign/masters.ts",
+          "kind": "import-statement",
+          "original": "./masters"
+        },
+        {
+          "path": "src/domain/redesign/growthMaster.ts",
+          "kind": "import-statement",
+          "original": "./growthMaster"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/approvedBackgrounds.ts": {
+      "bytes": 3827,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/domain/redesign/data/quest65.json": {
+      "bytes": 822245,
+      "imports": []
+    },
+    "src/domain/redesign/earlyProgress.ts": {
+      "bytes": 5142,
+      "imports": [
+        {
+          "path": "src/domain/redesign/data/quest65.json",
+          "kind": "import-statement",
+          "original": "./data/quest65.json"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/theme/local-characters.json": {
+      "bytes": 22553,
+      "imports": []
+    },
+    "src/theme/character-backgrounds.json": {
+      "bytes": 8762,
+      "imports": []
+    },
+    "src/theme/creativeAssets.ts": {
+      "bytes": 1476,
+      "imports": [
+        {
+          "path": "src/theme/local-characters.json",
+          "kind": "import-statement",
+          "original": "./local-characters.json"
+        },
+        {
+          "path": "src/theme/character-backgrounds.json",
+          "kind": "import-statement",
+          "original": "./character-backgrounds.json"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/battleLegacy.ts": {
+      "bytes": 15207,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/domain/redesign/battleCommonV1.ts": {
+      "bytes": 30639,
+      "imports": [
+        {
+          "path": "src/domain/redesign/battleLegacy.ts",
+          "kind": "import-statement",
+          "original": "./battleLegacy.ts"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/battleBalanceV2.ts": {
+      "bytes": 40015,
+      "imports": [
+        {
+          "path": "src/domain/redesign/battleCommonV1.ts",
+          "kind": "import-statement",
+          "original": "./battleCommonV1.ts"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/formalBattleInput.ts": {
+      "bytes": 1157,
+      "imports": [
+        {
+          "path": "src/domain/redesign/battleBalanceV2.ts",
+          "kind": "import-statement",
+          "original": "./battleBalanceV2.ts"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/questMaster.ts": {
+      "bytes": 4900,
+      "imports": [
+        {
+          "path": "src/domain/redesign/earlyProgress.ts",
+          "kind": "import-statement",
+          "original": "./earlyProgress"
+        },
+        {
+          "path": "src/domain/redesign/data/quest65.json",
+          "kind": "import-statement",
+          "original": "./data/quest65.json"
+        },
+        {
+          "path": "src/theme/sengoku-characters.json",
+          "kind": "import-statement",
+          "original": "../../theme/sengoku-characters.json"
+        },
+        {
+          "path": "src/theme/creativeAssets.ts",
+          "kind": "import-statement",
+          "original": "../../theme/creativeAssets"
+        },
+        {
+          "path": "src/domain/redesign/formalBattleInput.ts",
+          "kind": "import-statement",
+          "original": "./formalBattleInput"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/quests.ts": {
+      "bytes": 2585,
+      "imports": [
+        {
+          "path": "src/domain/redesign/earlyProgress.ts",
+          "kind": "import-statement",
+          "original": "./earlyProgress"
+        },
+        {
+          "path": "src/domain/redesign/earlyProgress.ts",
+          "kind": "import-statement",
+          "original": "./earlyProgress"
+        },
+        {
+          "path": "src/domain/redesign/questMaster.ts",
+          "kind": "import-statement",
+          "original": "./questMaster"
+        },
+        {
+          "path": "src/domain/redesign/approvedBackgrounds.ts",
+          "kind": "import-statement",
+          "original": "./approvedBackgrounds"
+        },
+        {
+          "path": "src/domain/redesign/questMaster.ts",
+          "kind": "import-statement",
+          "original": "./questMaster"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/home.ts": {
+      "bytes": 4796,
+      "imports": [
+        {
+          "path": "src/domain/redesign/masters.ts",
+          "kind": "import-statement",
+          "original": "./masters"
+        },
+        {
+          "path": "src/domain/redesign/approvedBackgrounds.ts",
+          "kind": "import-statement",
+          "original": "./approvedBackgrounds"
+        },
+        {
+          "path": "src/domain/redesign/quests.ts",
+          "kind": "import-statement",
+          "original": "./quests"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/shop.ts": {
+      "bytes": 5218,
+      "imports": [
+        {
+          "path": "src/domain/redesign/masters.ts",
+          "kind": "import-statement",
+          "original": "./masters"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/loginBonus.ts": {
+      "bytes": 2649,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/domain/redesign/missionProgress.ts": {
+      "bytes": 2255,
+      "imports": [
+        {
+          "path": "src/domain/redesign/loginBonus.ts",
+          "kind": "import-statement",
+          "original": "./loginBonus"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/missions.ts": {
+      "bytes": 5671,
+      "imports": [
+        {
+          "path": "src/domain/redesign/earlyProgress.ts",
+          "kind": "import-statement",
+          "original": "./earlyProgress"
+        },
+        {
+          "path": "src/domain/redesign/quests.ts",
+          "kind": "import-statement",
+          "original": "./quests"
+        },
+        {
+          "path": "src/domain/redesign/masters.ts",
+          "kind": "import-statement",
+          "original": "./masters"
+        },
+        {
+          "path": "src/domain/redesign/missionProgress.ts",
+          "kind": "import-statement",
+          "original": "./missionProgress"
+        },
+        {
+          "path": "src/domain/redesign/loginBonus.ts",
+          "kind": "import-statement",
+          "original": "./loginBonus"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/data/formalMissions.json": {
+      "bytes": 71934,
+      "imports": []
+    },
+    "src/domain/redesign/formalMissions.ts": {
+      "bytes": 4844,
+      "imports": [
+        {
+          "path": "src/domain/redesign/data/formalMissions.json",
+          "kind": "import-statement",
+          "original": "./data/formalMissions.json"
+        },
+        {
+          "path": "src/domain/redesign/quests.ts",
+          "kind": "import-statement",
+          "original": "./quests"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/gameplayMeasurement.ts": {
+      "bytes": 1721,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/domain/redesign/data/raid-encounter.json": {
+      "bytes": 26616,
+      "imports": []
+    },
+    "src/domain/redesign/data/raid-supply-approved.json": {
+      "bytes": 855,
+      "imports": []
+    },
+    "src/domain/redesign/raidFormalMaster.ts": {
+      "bytes": 4986,
+      "imports": [
+        {
+          "path": "src/domain/redesign/raidFormalSkills.ts",
+          "kind": "import-statement",
+          "original": "./raidFormalSkills"
+        },
+        {
+          "path": "src/domain/redesign/data/raid-encounter.json",
+          "kind": "import-statement",
+          "original": "./data/raid-encounter.json"
+        },
+        {
+          "path": "src/domain/redesign/data/raid-supply-approved.json",
+          "kind": "import-statement",
+          "original": "./data/raid-supply-approved.json"
+        },
+        {
+          "path": "src/theme/sengoku-characters.json",
+          "kind": "import-statement",
+          "original": "../../theme/sengoku-characters.json"
+        },
+        {
+          "path": "src/theme/creativeAssets.ts",
+          "kind": "import-statement",
+          "original": "../../theme/creativeAssets"
+        },
+        {
+          "path": "src/domain/redesign/balanceV2Masters.ts",
+          "kind": "import-statement",
+          "original": "./balanceV2Masters"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/raid.ts": {
+      "bytes": 10019,
+      "imports": [
+        {
+          "path": "src/domain/redesign/masters.ts",
+          "kind": "import-statement",
+          "original": "./masters"
+        },
+        {
+          "path": "src/domain/redesign/raidFormalMaster.ts",
+          "kind": "import-statement",
+          "original": "./raidFormalMaster"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/missionRaidProgress.ts": {
+      "bytes": 4289,
+      "imports": [
+        {
+          "path": "src/domain/redesign/raid.ts",
+          "kind": "import-statement",
+          "original": "./raid"
+        },
+        {
+          "path": "src/domain/redesign/missionProgress.ts",
+          "kind": "import-statement",
+          "original": "./missionProgress"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/battle.ts": {
+      "bytes": 4706,
+      "imports": [
+        {
+          "path": "src/domain/redesign/battleCommonV1.ts",
+          "kind": "import-statement",
+          "original": "./battleCommonV1.ts"
+        },
+        {
+          "path": "src/domain/redesign/battleBalanceV2.ts",
+          "kind": "import-statement",
+          "original": "./battleBalanceV2.ts"
+        },
+        {
+          "path": "src/domain/redesign/battleBalanceV2.ts",
+          "kind": "import-statement",
+          "original": "./battleBalanceV2.ts"
+        },
+        {
+          "path": "src/domain/redesign/battleLegacy.ts",
+          "kind": "import-statement",
+          "original": "./battleLegacy.ts"
+        },
+        {
+          "path": "src/domain/redesign/battleCommonV1.ts",
+          "kind": "import-statement",
+          "original": "./battleCommonV1.ts"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/legacyQuests.ts": {
+      "bytes": 5632,
+      "imports": [
+        {
+          "path": "src/domain/redesign/masters.ts",
+          "kind": "import-statement",
+          "original": "./masters"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/data/raid-invasion.json": {
+      "bytes": 50490,
+      "imports": []
+    },
+    "src/domain/redesign/raidInvasionMaster.ts": {
+      "bytes": 7517,
+      "imports": [
+        {
+          "path": "src/domain/redesign/raidFormalSkills.ts",
+          "kind": "import-statement",
+          "original": "./raidFormalSkills"
+        },
+        {
+          "path": "src/domain/redesign/data/raid-invasion.json",
+          "kind": "import-statement",
+          "original": "./data/raid-invasion.json"
+        },
+        {
+          "path": "src/domain/redesign/data/raid-supply-approved.json",
+          "kind": "import-statement",
+          "original": "./data/raid-supply-approved.json"
+        },
+        {
+          "path": "src/theme/sengoku-characters.json",
+          "kind": "import-statement",
+          "original": "../../theme/sengoku-characters.json"
+        },
+        {
+          "path": "src/theme/creativeAssets.ts",
+          "kind": "import-statement",
+          "original": "../../theme/creativeAssets"
+        },
+        {
+          "path": "src/domain/redesign/balanceV2Masters.ts",
+          "kind": "import-statement",
+          "original": "./balanceV2Masters"
+        },
+        {
+          "path": "src/domain/redesign/questMaster.ts",
+          "kind": "import-statement",
+          "original": "./questMaster"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/territory.ts": {
+      "bytes": 9520,
+      "imports": [
+        {
+          "path": "src/domain/redesign/masters.ts",
+          "kind": "import-statement",
+          "original": "./masters"
+        },
+        {
+          "path": "src/domain/redesign/raid.ts",
+          "kind": "import-statement",
+          "original": "./raid"
+        },
+        {
+          "path": "src/domain/redesign/raidInvasionMaster.ts",
+          "kind": "import-statement",
+          "original": "./raidInvasionMaster"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/tutorial/content.ts": {
+      "bytes": 4079,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/domain/redesign/tutorial/integration.ts": {
+      "bytes": 1936,
+      "imports": [
+        {
+          "path": "src/domain/redesign/growthMaster.ts",
+          "kind": "import-statement",
+          "original": "../growthMaster"
+        },
+        {
+          "path": "src/domain/redesign/tutorial/content.ts",
+          "kind": "import-statement",
+          "original": "./content"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/earlyLoadout.ts": {
+      "bytes": 3432,
+      "imports": [
+        {
+          "path": "src/domain/redesign/masters.ts",
+          "kind": "import-statement",
+          "original": "./masters"
+        },
+        {
+          "path": "src/domain/redesign/growth.ts",
+          "kind": "import-statement",
+          "original": "./growth"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/earlyActions.ts": {
+      "bytes": 1894,
+      "imports": [
+        {
+          "path": "src/domain/redesign/earlyLoadout.ts",
+          "kind": "import-statement",
+          "original": "./earlyLoadout"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain/redesign/activityEvents.ts": {
+      "bytes": 2601,
+      "imports": [
+        {
+          "path": "src/domain/redesign/masters.ts",
+          "kind": "import-statement",
+          "original": "./masters"
+        },
+        {
+          "path": "src/domain/redesign/quests.ts",
+          "kind": "import-statement",
+          "original": "./quests"
+        },
+        {
+          "path": "src/domain/redesign/raid.ts",
+          "kind": "import-statement",
+          "original": "./raid"
+        }
+      ],
+      "format": "esm"
+    },
+    "supabase/functions/game04-redesign-api/source.ts": {
+      "bytes": 46765,
+      "imports": [
+        {
+          "path": "src/domain/redesign/masters.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/masters.ts"
+        },
+        {
+          "path": "src/domain/redesign/acquisitions.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/acquisitions.ts"
+        },
+        {
+          "path": "src/domain/redesign/growthMaster.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/growthMaster.ts"
+        },
+        {
+          "path": "src/domain/redesign/normalGacha.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/normalGacha.ts"
+        },
+        {
+          "path": "src/domain/redesign/formalGacha.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/formalGacha.ts"
+        },
+        {
+          "path": "src/domain/redesign/formalGachaMaster.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/formalGachaMaster.ts"
+        },
+        {
+          "path": "src/domain/redesign/growth.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/growth.ts"
+        },
+        {
+          "path": "src/domain/redesign/home.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/home.ts"
+        },
+        {
+          "path": "src/domain/redesign/shop.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/shop.ts"
+        },
+        {
+          "path": "src/domain/redesign/missions.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/missions.ts"
+        },
+        {
+          "path": "src/domain/redesign/formalMissions.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/formalMissions.ts"
+        },
+        {
+          "path": "src/domain/redesign/gameplayMeasurement.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/gameplayMeasurement.ts"
+        },
+        {
+          "path": "src/domain/redesign/missionProgress.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/missionProgress.ts"
+        },
+        {
+          "path": "src/domain/redesign/missionRaidProgress.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/missionRaidProgress.ts"
+        },
+        {
+          "path": "src/domain/redesign/battle.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/battle.ts"
+        },
+        {
+          "path": "src/domain/redesign/legacyQuests.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/legacyQuests.ts"
+        },
+        {
+          "path": "src/domain/redesign/questMaster.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/questMaster.ts"
+        },
+        {
+          "path": "src/domain/redesign/quests.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/quests.ts"
+        },
+        {
+          "path": "src/theme/creativeAssets.ts",
+          "kind": "import-statement",
+          "original": "../../../src/theme/creativeAssets.ts"
+        },
+        {
+          "path": "src/domain/redesign/raid.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/raid.ts"
+        },
+        {
+          "path": "src/domain/redesign/formalBattleInput.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/formalBattleInput.ts"
+        },
+        {
+          "path": "src/domain/redesign/raidInvasionMaster.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/raidInvasionMaster.ts"
+        },
+        {
+          "path": "src/domain/redesign/raidFormalMaster.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/raidFormalMaster.ts"
+        },
+        {
+          "path": "src/domain/redesign/territory.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/territory.ts"
+        },
+        {
+          "path": "src/domain/redesign/tutorial/integration.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/tutorial/integration.ts"
+        },
+        {
+          "path": "src/domain/redesign/earlyProgress.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/earlyProgress.ts"
+        },
+        {
+          "path": "src/domain/redesign/earlyActions.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/earlyActions.ts"
+        },
+        {
+          "path": "src/domain/redesign/tutorial/content.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/tutorial/content.ts"
+        },
+        {
+          "path": "src/domain/redesign/activityEvents.ts",
+          "kind": "import-statement",
+          "original": "../../../src/domain/redesign/activityEvents.ts"
+        }
+      ],
+      "format": "esm"
+    }
+  },
+  "outputs": {
+    "supabase/functions/game04-redesign-api/index.ts": {
+      "imports": [],
+      "exports": [],
+      "entryPoint": "supabase/functions/game04-redesign-api/source.ts",
+      "inputs": {
+        "src/domain/redesign/data/raid-skill-values.json": {
+          "bytesInOutput": 124555
+        },
+        "src/domain/redesign/data/balance-v2.json": {
+          "bytesInOutput": 135745
+        },
+        "src/domain/redesign/data/formal-skill-presentation.json": {
+          "bytesInOutput": 5982
+        },
+        "src/domain/redesign/balanceV2Masters.ts": {
+          "bytesInOutput": 5096
+        },
+        "src/domain/redesign/raidFormalSkills.ts": {
+          "bytesInOutput": 631
+        },
+        "src/domain/redesign/formalOwnedSkills.ts": {
+          "bytesInOutput": 201
+        },
+        "src/domain/redesign/data/formal-growth-equipment.json": {
+          "bytesInOutput": 18400
+        },
+        "config/game04-master-assets.json": {
+          "bytesInOutput": 55891
+        },
+        "src/theme/sengoku-masters.json": {
+          "bytesInOutput": 11569
+        },
+        "src/domain/redesign/formalGrowthMasters.ts": {
+          "bytesInOutput": 828
+        },
+        "src/domain/redesign/data/formal-character-stats.json": {
+          "bytesInOutput": 12722
+        },
+        "src/domain/redesign/formalCharacterStats.ts": {
+          "bytesInOutput": 850
+        },
+        "src/domain/redesign/growthMaster.ts": {
+          "bytesInOutput": 1264
+        },
+        "src/domain/redesign/growthReward.ts": {
+          "bytesInOutput": 1214
+        },
+        "src/domain/redesign/masters.ts": {
+          "bytesInOutput": 8996
+        },
+        "src/domain/redesign/acquisitions.ts": {
+          "bytesInOutput": 1806
+        },
+        "src/theme/sengoku-characters.json": {
+          "bytesInOutput": 21939
+        },
+        "src/domain/gameplay/canonical/data/skills_20260821.json": {
+          "bytesInOutput": 18835
+        },
+        "src/domain/gameplay/canonical/data/equipment_20260821.json": {
+          "bytesInOutput": 44021
+        },
+        "src/domain/redesign/normalGacha.ts": {
+          "bytesInOutput": 67
+        },
+        "src/domain/redesign/data/formalGachaMaster.json": {
+          "bytesInOutput": 22458
+        },
+        "src/domain/redesign/formalGachaMaster.ts": {
+          "bytesInOutput": 2115
+        },
+        "src/domain/redesign/formalGacha.ts": {
+          "bytesInOutput": 4698
+        },
+        "src/domain/redesign/growth.ts": {
+          "bytesInOutput": 9199
+        },
+        "src/domain/redesign/approvedBackgrounds.ts": {
+          "bytesInOutput": 2117
+        },
+        "src/domain/redesign/data/quest65.json": {
+          "bytesInOutput": 361212
+        },
+        "src/domain/redesign/earlyProgress.ts": {
+          "bytesInOutput": 2338
+        },
+        "src/domain/redesign/quests.ts": {
+          "bytesInOutput": 2346
+        },
+        "src/theme/local-characters.json": {
+          "bytesInOutput": 18975
+        },
+        "src/theme/creativeAssets.ts": {
+          "bytesInOutput": 231
+        },
+        "src/domain/redesign/battleLegacy.ts": {
+          "bytesInOutput": 8235
+        },
+        "src/domain/redesign/battleCommonV1.ts": {
+          "bytesInOutput": 14876
+        },
+        "src/domain/redesign/battleBalanceV2.ts": {
+          "bytesInOutput": 23096
+        },
+        "src/domain/redesign/formalBattleInput.ts": {
+          "bytesInOutput": 464
+        },
+        "src/domain/redesign/questMaster.ts": {
+          "bytesInOutput": 2104
+        },
+        "src/domain/redesign/home.ts": {
+          "bytesInOutput": 1743
+        },
+        "src/domain/redesign/shop.ts": {
+          "bytesInOutput": 2662
+        },
+        "src/domain/redesign/loginBonus.ts": {
+          "bytesInOutput": 186
+        },
+        "src/domain/redesign/missionProgress.ts": {
+          "bytesInOutput": 1075
+        },
+        "src/domain/redesign/missions.ts": {
+          "bytesInOutput": 3368
+        },
+        "src/domain/redesign/data/formalMissions.json": {
+          "bytesInOutput": 43952
+        },
+        "src/domain/redesign/formalMissions.ts": {
+          "bytesInOutput": 3456
+        },
+        "src/domain/redesign/gameplayMeasurement.ts": {
+          "bytesInOutput": 974
+        },
+        "src/domain/redesign/data/raid-encounter.json": {
+          "bytesInOutput": 14225
+        },
+        "src/domain/redesign/data/raid-supply-approved.json": {
+          "bytesInOutput": 427
+        },
+        "src/domain/redesign/raidFormalMaster.ts": {
+          "bytesInOutput": 3161
+        },
+        "src/domain/redesign/raid.ts": {
+          "bytesInOutput": 7273
+        },
+        "src/domain/redesign/missionRaidProgress.ts": {
+          "bytesInOutput": 1723
+        },
+        "src/domain/redesign/battle.ts": {
+          "bytesInOutput": 55
+        },
+        "src/domain/redesign/legacyQuests.ts": {
+          "bytesInOutput": 4074
+        },
+        "src/domain/redesign/data/raid-invasion.json": {
+          "bytesInOutput": 28035
+        },
+        "src/domain/redesign/raidInvasionMaster.ts": {
+          "bytesInOutput": 5072
+        },
+        "src/domain/redesign/territory.ts": {
+          "bytesInOutput": 5484
+        },
+        "src/domain/redesign/tutorial/content.ts": {
+          "bytesInOutput": 5472
+        },
+        "src/domain/redesign/tutorial/integration.ts": {
+          "bytesInOutput": 1541
+        },
+        "src/domain/redesign/earlyLoadout.ts": {
+          "bytesInOutput": 2217
+        },
+        "src/domain/redesign/earlyActions.ts": {
+          "bytesInOutput": 1738
+        },
+        "src/domain/redesign/activityEvents.ts": {
+          "bytesInOutput": 1769
+        },
+        "supabase/functions/game04-redesign-api/source.ts": {
+          "bytesInOutput": 26096
+        }
+      },
+      "bytes": 1110855
+    }
+  }
+}

@@ -6044,7 +6044,35 @@
   ],
   "unmet": [],
   "enemyHash": "fca8d2641c1ab313d04fd4d7a678c3fdd1080ecc483e44881b6b868213816056",
-  "realPlaybackSeconds": null,
+  "realPlaybackSeconds": [
+    {
+      "case": "resolution-7-7-long",
+      "seconds": 176.8705,
+      "inputHash": "4d2381963fed2d4cf86025d60557cada707ca03f5dc172e955ce23670b1c28a7",
+      "seed": 581155,
+      "fixture": "docs/verification/stage68-resolution-20260927/playback-fixtures/resolution-7-7-long.json.gz",
+      "reason": "party_defeated"
+    }
+  ],
   "realDevice": false,
-  "G5": false
+  "G5": false,
+  "realPlayback": [
+    {
+      "case": "resolution-7-7-long",
+      "seconds": 176.8705,
+      "inputHash": "4d2381963fed2d4cf86025d60557cada707ca03f5dc172e955ce23670b1c28a7",
+      "seed": 581155,
+      "fixture": "docs/verification/stage68-resolution-20260927/playback-fixtures/resolution-7-7-long.json.gz",
+      "reason": "party_defeated"
+    }
+  ],
+  "timeAcceptance": "実機の体感受入は未判定。300行動未到達は短時間保証ではない",
+  "comparisonScope": {
+    "validatedRecipes": 12,
+    "trials": 2400,
+    "actionLimit": 0,
+    "maxActions": 295,
+    "sameCharacterAndEquipmentGrowth": true,
+    "arrivalAssetBasis": "adopted44A; original row.acquisition; no same-stage first clear reward"
+  }
 }

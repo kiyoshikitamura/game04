@@ -1,0 +1,78 @@
+[
+  {
+    "stage": "7-7",
+    "status": "UNTESTED_NOT_APPLIED",
+    "source": "docs/verification/stage68-resolution-20260927/fill-pressure-refined2/7-7.json.gz",
+    "recipe": "exact-party-order-reversed",
+    "seed": 581155,
+    "oldActions": 295,
+    "waveDurations": [
+      {
+        "wave": 4,
+        "actions": 130
+      },
+      {
+        "wave": 2,
+        "actions": 67
+      },
+      {
+        "wave": 1,
+        "actions": 51
+      },
+      {
+        "wave": 3,
+        "actions": 47
+      }
+    ],
+    "candidates": [
+      {
+        "enemy": "7-7/4/1",
+        "path": "skills[0].condition.value",
+        "before": 16,
+        "after": 12,
+        "pairedOptionalHp": {
+          "before": 6908,
+          "after": 5526
+        }
+      }
+    ],
+    "validation": "Changed input: old role cohort + all known stalls + five bands + nondependency, independent200 and actual3x paired replay"
+  },
+  {
+    "stage": "10-3",
+    "status": "UNTESTED_NOT_APPLIED",
+    "source": "docs/verification/stage68-resolution-20260927/fill-pressure-refined2/10-3.json.gz",
+    "recipe": "fill-11-0-2-3-fill-0-0-0-2-attack-up-reversed",
+    "seed": 532112,
+    "oldActions": 297,
+    "waveDurations": [
+      {
+        "wave": 3,
+        "actions": 190
+      },
+      {
+        "wave": 1,
+        "actions": 100
+      },
+      {
+        "wave": 2,
+        "actions": 7
+      }
+    ],
+    "candidates": [
+      {
+        "enemy": "10-3/3/1",
+        "path": "stats.hp",
+        "before": 13873,
+        "after": 11792
+      },
+      {
+        "enemy": "10-3/3/1",
+        "path": "stats.def",
+        "before": 3403,
+        "after": 3131
+      }
+    ],
+    "validation": "Changed input: old role cohort + all known stalls + five bands + nondependency, independent200 and actual3x paired replay"
+  }
+]

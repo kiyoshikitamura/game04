@@ -5116,7 +5116,51 @@
   ],
   "unmet": [],
   "enemyHash": "f943ade505b1443c83a7740bb5b1177467583e8abc5f90a65aac0c4a8f0da836",
-  "realPlaybackSeconds": null,
+  "realPlaybackSeconds": [
+    {
+      "case": "resolution-9-6-after",
+      "seconds": 65.51970000001788,
+      "inputHash": "019fa1e0f6708aaa92ef743481e762d133607d40b8579e31f444df881538f246",
+      "seed": 87001,
+      "fixture": "docs/verification/stage68-resolution-20260927/playback-fixtures/resolution-9-6-after.json.gz",
+      "reason": "party_defeated"
+    },
+    {
+      "case": "resolution-9-6-before",
+      "seconds": 178.20590000000595,
+      "inputHash": "857a6ef16fc97f2b1563fc081691a9bc3514391b31962860324291b7b905584d",
+      "seed": 87001,
+      "fixture": "docs/verification/stage68-resolution-20260927/playback-fixtures/resolution-9-6-before.json.gz",
+      "reason": "action_limit"
+    }
+  ],
   "realDevice": false,
-  "G5": false
+  "G5": false,
+  "realPlayback": [
+    {
+      "case": "resolution-9-6-after",
+      "seconds": 65.51970000001788,
+      "inputHash": "019fa1e0f6708aaa92ef743481e762d133607d40b8579e31f444df881538f246",
+      "seed": 87001,
+      "fixture": "docs/verification/stage68-resolution-20260927/playback-fixtures/resolution-9-6-after.json.gz",
+      "reason": "party_defeated"
+    },
+    {
+      "case": "resolution-9-6-before",
+      "seconds": 178.20590000000595,
+      "inputHash": "857a6ef16fc97f2b1563fc081691a9bc3514391b31962860324291b7b905584d",
+      "seed": 87001,
+      "fixture": "docs/verification/stage68-resolution-20260927/playback-fixtures/resolution-9-6-before.json.gz",
+      "reason": "action_limit"
+    }
+  ],
+  "timeAcceptance": "実機の体感受入は未判定。300行動未到達は短時間保証ではない",
+  "comparisonScope": {
+    "validatedRecipes": 11,
+    "trials": 2200,
+    "actionLimit": 0,
+    "maxActions": 240,
+    "sameCharacterAndEquipmentGrowth": true,
+    "arrivalAssetBasis": "adopted44A; original row.acquisition; no same-stage first clear reward"
+  }
 }

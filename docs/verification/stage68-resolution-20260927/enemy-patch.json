@@ -7055,6 +7055,556 @@
     ]
   },
   {
+    "stage": "10-1",
+    "wave": 1,
+    "position": 1,
+    "enemy": "10-1/1/1",
+    "field": "stats",
+    "before": {
+      "luk": 0,
+      "hp": 62624,
+      "atk": 3974,
+      "def": 4003,
+      "sp": 150
+    },
+    "after": {
+      "luk": 0,
+      "hp": 27053,
+      "atk": 3974,
+      "def": 4003,
+      "sp": 150
+    }
+  },
+  {
+    "stage": "10-1",
+    "wave": 1,
+    "position": 1,
+    "enemy": "10-1/1/1",
+    "field": "skills",
+    "before": [
+      {
+        "id": "SKD034",
+        "name": "身構え",
+        "image": "",
+        "rarity": "N",
+        "element": "earth",
+        "spCost": 30,
+        "condition": {
+          "type": "always"
+        },
+        "target": "self",
+        "effects": [
+          {
+            "type": "def_up",
+            "power": 26.35,
+            "duration": 3
+          }
+        ],
+        "description": "正式表の検証入力"
+      }
+    ],
+    "after": [
+      {
+        "id": "10-1/1/1/pressure-14-last",
+        "name": "長期戦の強打",
+        "image": "",
+        "rarity": "N",
+        "element": "water",
+        "spCost": 1,
+        "condition": {
+          "type": "every_n_actions",
+          "value": 14
+        },
+        "target": "all_enemies",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 1133
+          }
+        ],
+        "description": "自身の14行動ごとに全体へ強打。共通計算式を使用。"
+      },
+      {
+        "id": "SKD034",
+        "name": "身構え",
+        "image": "",
+        "rarity": "N",
+        "element": "earth",
+        "spCost": 30,
+        "condition": {
+          "type": "always"
+        },
+        "target": "self",
+        "effects": [
+          {
+            "type": "def_up",
+            "power": 26.35,
+            "duration": 3
+          }
+        ],
+        "description": "正式表の検証入力"
+      }
+    ]
+  },
+  {
+    "stage": "10-1",
+    "wave": 1,
+    "position": 2,
+    "enemy": "10-1/1/2",
+    "field": "stats",
+    "before": {
+      "luk": 0,
+      "hp": 25160,
+      "atk": 2454,
+      "def": 2800,
+      "sp": 180
+    },
+    "after": {
+      "luk": 0,
+      "hp": 10870,
+      "atk": 2454,
+      "def": 2800,
+      "sp": 180
+    }
+  },
+  {
+    "stage": "10-1",
+    "wave": 1,
+    "position": 2,
+    "enemy": "10-1/1/2",
+    "field": "skills",
+    "before": [
+      {
+        "id": "SKD040",
+        "name": "治癒の祈り",
+        "image": "",
+        "rarity": "SR",
+        "element": "water",
+        "spCost": 90,
+        "condition": {
+          "type": "always"
+        },
+        "target": "lowest_ally",
+        "effects": [
+          {
+            "type": "heal",
+            "power": 131.74,
+            "healingFormula": "caster_atk_percent"
+          }
+        ],
+        "description": "正式表の検証入力"
+      }
+    ],
+    "after": [
+      {
+        "id": "10-1/1/2/pressure-14-last",
+        "name": "長期戦の強打",
+        "image": "",
+        "rarity": "N",
+        "element": "wind",
+        "spCost": 1,
+        "condition": {
+          "type": "every_n_actions",
+          "value": 14
+        },
+        "target": "all_enemies",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 1835
+          }
+        ],
+        "description": "自身の14行動ごとに全体へ強打。共通計算式を使用。"
+      },
+      {
+        "id": "SKD040",
+        "name": "治癒の祈り",
+        "image": "",
+        "rarity": "SR",
+        "element": "water",
+        "spCost": 90,
+        "condition": {
+          "type": "always"
+        },
+        "target": "lowest_ally",
+        "effects": [
+          {
+            "type": "heal",
+            "power": 131.74,
+            "healingFormula": "caster_atk_percent"
+          }
+        ],
+        "description": "正式表の検証入力"
+      }
+    ]
+  },
+  {
+    "stage": "10-1",
+    "wave": 2,
+    "position": 1,
+    "enemy": "10-1/2/1",
+    "field": "stats",
+    "before": {
+      "luk": 0,
+      "hp": 20520,
+      "atk": 2244,
+      "def": 4709,
+      "sp": 110
+    },
+    "after": {
+      "luk": 0,
+      "hp": 8864,
+      "atk": 2244,
+      "def": 4709,
+      "sp": 110
+    }
+  },
+  {
+    "stage": "10-1",
+    "wave": 2,
+    "position": 1,
+    "enemy": "10-1/2/1",
+    "field": "skills",
+    "before": [
+      {
+        "id": "SKD026",
+        "name": "後陣射ち",
+        "image": "",
+        "rarity": "R",
+        "element": "wind",
+        "spCost": 55,
+        "condition": {
+          "type": "always"
+        },
+        "target": "last",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 161.74
+          }
+        ],
+        "description": "正式表の検証入力"
+      }
+    ],
+    "after": [
+      {
+        "id": "10-1/2/1/pressure-14-last",
+        "name": "長期戦の強打",
+        "image": "",
+        "rarity": "N",
+        "element": "wind",
+        "spCost": 1,
+        "condition": {
+          "type": "every_n_actions",
+          "value": 14
+        },
+        "target": "all_enemies",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 2007
+          }
+        ],
+        "description": "自身の14行動ごとに全体へ強打。共通計算式を使用。"
+      },
+      {
+        "id": "SKD026",
+        "name": "後陣射ち",
+        "image": "",
+        "rarity": "R",
+        "element": "wind",
+        "spCost": 55,
+        "condition": {
+          "type": "always"
+        },
+        "target": "last",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 161.74
+          }
+        ],
+        "description": "正式表の検証入力"
+      }
+    ]
+  },
+  {
+    "stage": "10-1",
+    "wave": 2,
+    "position": 2,
+    "enemy": "10-1/2/2",
+    "field": "stats",
+    "before": {
+      "luk": 0,
+      "hp": 25160,
+      "atk": 2786,
+      "def": 2500,
+      "sp": 180
+    },
+    "after": {
+      "luk": 0,
+      "hp": 10870,
+      "atk": 2786,
+      "def": 2500,
+      "sp": 180
+    }
+  },
+  {
+    "stage": "10-1",
+    "wave": 2,
+    "position": 2,
+    "enemy": "10-1/2/2",
+    "field": "skills",
+    "before": [
+      {
+        "id": "SKD040",
+        "name": "治癒の祈り",
+        "image": "",
+        "rarity": "SR",
+        "element": "water",
+        "spCost": 90,
+        "condition": {
+          "type": "always"
+        },
+        "target": "lowest_ally",
+        "effects": [
+          {
+            "type": "heal",
+            "power": 131.74,
+            "healingFormula": "caster_atk_percent"
+          }
+        ],
+        "description": "正式表の検証入力"
+      }
+    ],
+    "after": [
+      {
+        "id": "10-1/2/2/pressure-14-last",
+        "name": "長期戦の強打",
+        "image": "",
+        "rarity": "N",
+        "element": "light",
+        "spCost": 1,
+        "condition": {
+          "type": "every_n_actions",
+          "value": 14
+        },
+        "target": "all_enemies",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 1616
+          }
+        ],
+        "description": "自身の14行動ごとに全体へ強打。共通計算式を使用。"
+      },
+      {
+        "id": "SKD040",
+        "name": "治癒の祈り",
+        "image": "",
+        "rarity": "SR",
+        "element": "water",
+        "spCost": 90,
+        "condition": {
+          "type": "always"
+        },
+        "target": "lowest_ally",
+        "effects": [
+          {
+            "type": "heal",
+            "power": 131.74,
+            "healingFormula": "caster_atk_percent"
+          }
+        ],
+        "description": "正式表の検証入力"
+      }
+    ]
+  },
+  {
+    "stage": "10-1",
+    "wave": 3,
+    "position": 1,
+    "enemy": "10-1/3/1",
+    "field": "stats",
+    "before": {
+      "luk": 0,
+      "hp": 78280,
+      "atk": 2871,
+      "def": 3403,
+      "sp": 150
+    },
+    "after": {
+      "luk": 0,
+      "hp": 20291,
+      "atk": 2871,
+      "def": 3403,
+      "sp": 150
+    }
+  },
+  {
+    "stage": "10-1",
+    "wave": 3,
+    "position": 1,
+    "enemy": "10-1/3/1",
+    "field": "skills",
+    "before": [
+      {
+        "id": "SKD034",
+        "name": "身構え",
+        "image": "",
+        "rarity": "N",
+        "element": "earth",
+        "spCost": 30,
+        "condition": {
+          "type": "always"
+        },
+        "target": "self",
+        "effects": [
+          {
+            "type": "def_up",
+            "power": 26.35,
+            "duration": 3
+          }
+        ],
+        "description": "正式表の検証入力"
+      }
+    ],
+    "after": [
+      {
+        "id": "10-1/3/1/pressure-14-last-wave3hp0.6period10",
+        "name": "長期戦の強打",
+        "image": "",
+        "rarity": "N",
+        "element": "earth",
+        "spCost": 1,
+        "condition": {
+          "type": "every_n_actions",
+          "value": 10
+        },
+        "target": "all_enemies",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 1575
+          }
+        ],
+        "description": "自身の10行動ごとに全体へ強打。共通計算式を使用。"
+      },
+      {
+        "id": "SKD034",
+        "name": "身構え",
+        "image": "",
+        "rarity": "N",
+        "element": "earth",
+        "spCost": 30,
+        "condition": {
+          "type": "always"
+        },
+        "target": "self",
+        "effects": [
+          {
+            "type": "def_up",
+            "power": 26.35,
+            "duration": 3
+          }
+        ],
+        "description": "正式表の検証入力"
+      }
+    ]
+  },
+  {
+    "stage": "10-1",
+    "wave": 3,
+    "position": 2,
+    "enemy": "10-1/3/2",
+    "field": "stats",
+    "before": {
+      "luk": 0,
+      "hp": 25160,
+      "atk": 2853,
+      "def": 4003,
+      "sp": 180
+    },
+    "after": {
+      "luk": 0,
+      "hp": 6522,
+      "atk": 2853,
+      "def": 4003,
+      "sp": 180
+    }
+  },
+  {
+    "stage": "10-1",
+    "wave": 3,
+    "position": 2,
+    "enemy": "10-1/3/2",
+    "field": "skills",
+    "before": [
+      {
+        "id": "SKD040",
+        "name": "治癒の祈り",
+        "image": "",
+        "rarity": "SR",
+        "element": "water",
+        "spCost": 90,
+        "condition": {
+          "type": "always"
+        },
+        "target": "lowest_ally",
+        "effects": [
+          {
+            "type": "heal",
+            "power": 131.74,
+            "healingFormula": "caster_atk_percent"
+          }
+        ],
+        "description": "正式表の検証入力"
+      }
+    ],
+    "after": [
+      {
+        "id": "10-1/3/2/pressure-14-last-wave3hp0.6period10",
+        "name": "長期戦の強打",
+        "image": "",
+        "rarity": "N",
+        "element": "water",
+        "spCost": 1,
+        "condition": {
+          "type": "every_n_actions",
+          "value": 10
+        },
+        "target": "all_enemies",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 1600
+          }
+        ],
+        "description": "自身の10行動ごとに全体へ強打。共通計算式を使用。"
+      },
+      {
+        "id": "SKD040",
+        "name": "治癒の祈り",
+        "image": "",
+        "rarity": "SR",
+        "element": "water",
+        "spCost": 90,
+        "condition": {
+          "type": "always"
+        },
+        "target": "lowest_ally",
+        "effects": [
+          {
+            "type": "heal",
+            "power": 131.74,
+            "healingFormula": "caster_atk_percent"
+          }
+        ],
+        "description": "正式表の検証入力"
+      }
+    ]
+  },
+  {
     "stage": "10-2",
     "wave": 1,
     "position": 1,

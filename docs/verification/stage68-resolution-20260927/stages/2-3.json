@@ -2575,7 +2575,99 @@
   ],
   "unmet": [],
   "enemyHash": "4ec7ec41f90c61fd4a1367f7c88ae8ac1094828b31fe60d68589d3b9da4401ce",
-  "realPlaybackSeconds": null,
+  "realPlaybackSeconds": [
+    {
+      "case": "resolution-2-3-after",
+      "seconds": 192.58409999999404,
+      "inputHash": "b44db3c2634dcca88d08fc4fe73bfced17aa621d19d334c5e146c4eb9701dc1a",
+      "seed": 441003,
+      "fixture": "docs/verification/stage68-resolution-20260927/playback-fixtures/resolution-2-3-after.json.gz",
+      "reason": "party_defeated"
+    },
+    {
+      "case": "resolution-2-3-before",
+      "seconds": 216.86280000001193,
+      "inputHash": "3a3c531dcddce68f18508933d9b1d52f2594c67d8a5d32fd08a5f6a4b2cfe6bb",
+      "seed": 441003,
+      "fixture": "docs/verification/stage68-resolution-20260927/playback-fixtures/resolution-2-3-before.json.gz",
+      "reason": "action_limit"
+    },
+    {
+      "case": "resolution-2-3-final-long",
+      "seconds": 126.58029999998212,
+      "inputHash": "1e9574d62c6b3b4c3e242845e022aace66859d3ea6b5743a6078a055b3dea684",
+      "seed": 521092,
+      "fixture": "docs/verification/stage68-resolution-20260927/playback-fixtures/resolution-2-3-final-long.json.gz",
+      "reason": "final_wave_defeated"
+    },
+    {
+      "case": "resolution-2-3-final",
+      "seconds": 113.0105,
+      "inputHash": "8f9918c439a4c496a88e884bd019188f6094968a44c36ba0225b807f87719294",
+      "seed": 441003,
+      "fixture": "docs/verification/stage68-resolution-20260927/playback-fixtures/resolution-2-3-final.json.gz",
+      "reason": "final_wave_defeated"
+    },
+    {
+      "case": "resolution-2-3-long",
+      "seconds": 189.6957000000179,
+      "inputHash": "e4ead3789a18e2dd26c247c5e49574f6e611011ded018c640c102455846f9c8f",
+      "seed": 521092,
+      "fixture": "docs/verification/stage68-resolution-20260927/playback-fixtures/resolution-2-3-long.json.gz",
+      "reason": "party_defeated"
+    }
+  ],
   "realDevice": false,
-  "G5": false
+  "G5": false,
+  "realPlayback": [
+    {
+      "case": "resolution-2-3-after",
+      "seconds": 192.58409999999404,
+      "inputHash": "b44db3c2634dcca88d08fc4fe73bfced17aa621d19d334c5e146c4eb9701dc1a",
+      "seed": 441003,
+      "fixture": "docs/verification/stage68-resolution-20260927/playback-fixtures/resolution-2-3-after.json.gz",
+      "reason": "party_defeated"
+    },
+    {
+      "case": "resolution-2-3-before",
+      "seconds": 216.86280000001193,
+      "inputHash": "3a3c531dcddce68f18508933d9b1d52f2594c67d8a5d32fd08a5f6a4b2cfe6bb",
+      "seed": 441003,
+      "fixture": "docs/verification/stage68-resolution-20260927/playback-fixtures/resolution-2-3-before.json.gz",
+      "reason": "action_limit"
+    },
+    {
+      "case": "resolution-2-3-final-long",
+      "seconds": 126.58029999998212,
+      "inputHash": "1e9574d62c6b3b4c3e242845e022aace66859d3ea6b5743a6078a055b3dea684",
+      "seed": 521092,
+      "fixture": "docs/verification/stage68-resolution-20260927/playback-fixtures/resolution-2-3-final-long.json.gz",
+      "reason": "final_wave_defeated"
+    },
+    {
+      "case": "resolution-2-3-final",
+      "seconds": 113.0105,
+      "inputHash": "8f9918c439a4c496a88e884bd019188f6094968a44c36ba0225b807f87719294",
+      "seed": 441003,
+      "fixture": "docs/verification/stage68-resolution-20260927/playback-fixtures/resolution-2-3-final.json.gz",
+      "reason": "final_wave_defeated"
+    },
+    {
+      "case": "resolution-2-3-long",
+      "seconds": 189.6957000000179,
+      "inputHash": "e4ead3789a18e2dd26c247c5e49574f6e611011ded018c640c102455846f9c8f",
+      "seed": 521092,
+      "fixture": "docs/verification/stage68-resolution-20260927/playback-fixtures/resolution-2-3-long.json.gz",
+      "reason": "party_defeated"
+    }
+  ],
+  "timeAcceptance": "実機の体感受入は未判定。300行動未到達は短時間保証ではない",
+  "comparisonScope": {
+    "validatedRecipes": 13,
+    "trials": 2600,
+    "actionLimit": 0,
+    "maxActions": 199,
+    "sameCharacterAndEquipmentGrowth": true,
+    "arrivalAssetBasis": "adopted44A; original row.acquisition; no same-stage first clear reward"
+  }
 }

@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import {execFileSync} from 'node:child_process';
-const out='docs/verification/stage68-implementation-20260927',source='supabase/functions/game04-redesign-api/source.ts',bundle='supabase/functions/game04-redesign-api/index.ts';
+const out=process.argv[2]??'docs/verification/stage68-implementation-20260927',source='supabase/functions/game04-redesign-api/source.ts',bundle='supabase/functions/game04-redesign-api/index.ts';
 const args=['--yes','esbuild@0.25.12',source,'--bundle','--format=esm','--platform=neutral','--target=es2022','--minify',`--outfile=${bundle}`,`--metafile=${out}/api-bundle-metafile.json`];
 // Fixed local build command; no deployment, environment fetch, or DB access.
 if(process.platform==='win32')execFileSync('cmd.exe',['/d','/s','/c','npx '+args.join(' ')],{stdio:'inherit'});else execFileSync('npx',args,{stdio:'inherit'});
