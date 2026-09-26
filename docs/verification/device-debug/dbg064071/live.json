@@ -1,0 +1,12 @@
+{
+  "project": "znakrkaazliexzwihxge",
+  "qaUser": "7fd1d995-8e8f-44e2-9111-3764a964e881",
+  "checks": [
+    "real acquisition via shop_exchange; same request retry no double grant",
+    "real browser use_energy_drink; count and energy updated; full reload consistent",
+    "real NM092/NM118 claim; each user_items ticket +1; reward event refresh while open; full reload matches",
+    "profile persisted; idempotent same-value retry; 201 characters rejected without overwrite"
+  ],
+  "pass": true,
+  "testCorrection": "Initial selector used an incorrect display name; corrected to formal master name and resumed read/remaining claim verification."
+}

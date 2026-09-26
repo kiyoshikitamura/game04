@@ -1,5 +1,5 @@
 const KEY = 'game04_account_entry';
-const TABS = ['home','quest','character','raid','gacha','territory','shop'];
+const TABS = ['home','quest','character','raid','gacha','territory','shop','bag'];
 /** Same-tab navigation hint only; never stores player data or credentials. */
 export function openGame04Account(tab?: string) {
   try { sessionStorage.setItem(KEY, JSON.stringify({tab:TABS.includes(tab||'')?tab:'home', returning:false})); } catch { /* Navigation still works if storage is unavailable. */ }

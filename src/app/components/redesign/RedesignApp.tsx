@@ -20,6 +20,7 @@ import type { AcquisitionState } from '@/domain/redesign/acquisitions';
 import type { BattleResult } from '@/domain/redesign/battle';
 import RedesignShell from './RedesignShell';
 import GrowthView from './GrowthView';
+import InventoryView from './InventoryView';
 import {EarlyRetentionGuide,EarlySortiePreparation} from './EarlyRetentionGuide';
 import GuideDialog from '../ui/GuideDialog';
 import QuestView, { type QuestSettlement } from './QuestView';
@@ -270,6 +271,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     </>}>
     {battle ? <BattleView bgmScene={battleKind === 'raid' ? 'BATTLE_BOSS' : 'BATTLE'} result={battle} vipActive={vipActive} backgroundSrc={battleBackground} raidHp={battleRoom ? { current: battleRoom.hp, max: battleRoom.maxHp, level: battleRoom.level } : undefined} onComplete={() => { setBattle(null); setBattleKind(null); setBattleBackground(undefined); void refresh(); }} /> : <>
       {tab === 'quest' && <QuestView key={questNavigation} onBattlePlayingChange={setQuestPlaying} state={state} party={party} vipActive={vipActive} initialStageId={questStart} initialPreparation={questPreparation} onEarlyAction={action} navigationBlocked={!!game.showMissionPanel||earlyLoadoutOpen||game.showLoginBonusModal} onStart={startQuest} onOpenDeck={openQuestDeck} onOpenRaid={id => { setRaidId(id); setTab('raid'); }} onIgnoreEncounter={async id => { await action('encounter_ignore', { roomId: id }); }} />}
+      {tab === 'bag' && <InventoryView key={state.userId} state={state} onAction={action} onNavigate={navigate} />}
       {tab === 'character' && <>{raidDeckReturn && <button type="button" className="rd-button" disabled={busy} onClick={returnToRaidPreparation}>共闘の出撃準備に戻る</button>}{questDeckReturn && <button type="button" className="rd-button" disabled={busy} onClick={returnToQuestPreparation}>出撃準備に戻る</button>}<GrowthView state={state} onAction={action} /></>}
       {tab === 'territory' && <TerritoryView territory={data.territory} rooms={data.rooms} userId={state.userId} onOpenRoom={id => { setRaidId(id); setTab('raid'); }} onHost={async destinationId => { const value = await action('territory_host', { destinationId }); if (!value.territoryRoomId) throw new Error('侵攻結果を確認できませんでした。'); setRaidId(value.territoryRoomId); setTab('raid'); }} />}
       {tab === 'raid' && <RaidView key={`${raidId || 'list'}:${raidNavigation}`} initialPreparationLevel={raidPreparationLevel} state={state} rooms={data.rooms} party={party} initialRoomId={raidId} onAction={raidAction} onOpenDeck={openRaidDeck} />}
