@@ -1,0 +1,4759 @@
+{
+  "stage": "4-5",
+  "name": "近江の夜明け",
+  "inputCondition": "16d45e1 baseline",
+  "changedThisRound": false,
+  "acceptedComparison": true,
+  "primary": {
+    "name": "break-and-buff",
+    "inputHash": "ce974a2516756855d8dc76414a08fdc8212bad7fe0606f00172b569f27c67ae6",
+    "evidence": "docs/verification/stage68-five-tier-20260926/4-5-validated.json.gz",
+    "metrics": {
+      "wins": 200,
+      "n": 200,
+      "rate": 1,
+      "actionLimit": 0,
+      "min": 121,
+      "median": 134,
+      "p90": 145,
+      "max": 156,
+      "mean": 135.045,
+      "reasons": {
+        "final_wave_defeated": 200
+      },
+      "measuredPlaybackSeconds": null
+    },
+    "state": {
+      "userId": "00000000-0000-4000-8000-000000000047",
+      "version": 0,
+      "cash": 0,
+      "diamonds": 0,
+      "energy": 100,
+      "energyMax": 100,
+      "energyDrinks": 0,
+      "souls": {},
+      "characters": [
+        {
+          "id": "char_joe_01",
+          "level": 38,
+          "awakening": 0,
+          "exp": 51620,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "id": "char_yuki_01",
+          "level": 38,
+          "awakening": 0,
+          "exp": 51620,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "id": "char_daimon_01",
+          "level": 38,
+          "awakening": 0,
+          "exp": 51620,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "id": "char_jihoon_01",
+          "level": 38,
+          "awakening": 0,
+          "exp": 51620,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "id": "char_aoi_01",
+          "level": 38,
+          "awakening": 0,
+          "exp": 51620,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        }
+      ],
+      "skills": [
+        {
+          "id": "SKD035",
+          "level": 2
+        },
+        {
+          "id": "SKD038",
+          "level": 2
+        },
+        {
+          "id": "SKD009",
+          "level": 2
+        },
+        {
+          "id": "SKD039",
+          "level": 2
+        }
+      ],
+      "equipment": [
+        {
+          "instanceId": "audit-0-0",
+          "masterId": "WEAPON_001",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "audit-0-2",
+          "masterId": "BODY_002",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "audit-1-0",
+          "masterId": "WEAPON_001",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "audit-1-2",
+          "masterId": "BODY_002",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "audit-2-0",
+          "masterId": "WEAPON_001",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "audit-2-2",
+          "masterId": "BODY_002",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "audit-3-0",
+          "masterId": "WEAPON_001",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "audit-3-2",
+          "masterId": "BODY_002",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "audit-4-0",
+          "masterId": "WEAPON_001",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "audit-4-2",
+          "masterId": "BODY_002",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        }
+      ],
+      "deck": [
+        {
+          "characterId": "char_joe_01",
+          "skillIds": [
+            "SKD035"
+          ],
+          "equipment": {
+            "weapon": "audit-0-0",
+            "body": "audit-0-2"
+          }
+        },
+        {
+          "characterId": "char_yuki_01",
+          "skillIds": [
+            "SKD038"
+          ],
+          "equipment": {
+            "weapon": "audit-1-0",
+            "body": "audit-1-2"
+          }
+        },
+        {
+          "characterId": "char_daimon_01",
+          "skillIds": [
+            "SKD009"
+          ],
+          "equipment": {
+            "weapon": "audit-2-0",
+            "body": "audit-2-2"
+          }
+        },
+        {
+          "characterId": "char_jihoon_01",
+          "skillIds": [
+            "SKD009"
+          ],
+          "equipment": {
+            "weapon": "audit-3-0",
+            "body": "audit-3-2"
+          }
+        },
+        {
+          "characterId": "char_aoi_01",
+          "skillIds": [
+            "SKD039"
+          ],
+          "equipment": {
+            "weapon": "audit-4-0",
+            "body": "audit-4-2"
+          }
+        }
+      ],
+      "materials": {
+        "character": 20,
+        "skill": 10,
+        "equipment": 20,
+        "equipmentLb": 5,
+        "unlock": 1
+      },
+      "clearedStages": [
+        "mikawa-1",
+        "mikawa-2",
+        "mikawa-3",
+        "mikawa-4",
+        "mikawa-5",
+        "owari-1",
+        "owari-2",
+        "owari-3",
+        "owari-4",
+        "owari-5",
+        "mino-1",
+        "mino-2",
+        "mino-3",
+        "mino-4",
+        "mino-5",
+        "omi-1",
+        "omi-2",
+        "omi-3",
+        "omi-4",
+        "omi-5",
+        "kai-1",
+        "kai-2",
+        "kai-3",
+        "kai-4",
+        "kai-5",
+        "kai-6",
+        "echigo-1",
+        "echigo-2",
+        "echigo-3",
+        "echigo-4",
+        "echigo-5",
+        "echigo-6",
+        "kyoto-1",
+        "kyoto-2",
+        "kyoto-3",
+        "kyoto-4",
+        "kyoto-5",
+        "kyoto-6",
+        "kyoto-7",
+        "kyoto-8",
+        "izumo-1",
+        "izumo-2",
+        "izumo-3",
+        "izumo-4",
+        "izumo-5",
+        "izumo-6",
+        "izumo-7",
+        "izumo-8",
+        "satsuma-1",
+        "satsuma-2",
+        "satsuma-3",
+        "satsuma-4",
+        "satsuma-5",
+        "satsuma-6",
+        "satsuma-7",
+        "satsuma-8",
+        "satsuma-9",
+        "satsuma-10",
+        "sekigahara-1",
+        "sekigahara-2",
+        "sekigahara-3",
+        "sekigahara-4",
+        "sekigahara-5",
+        "sekigahara-6",
+        "sekigahara-7",
+        "sekigahara-8",
+        "sekigahara-9",
+        "sekigahara-10"
+      ],
+      "vipExpiresAt": null
+    },
+    "order": [
+      {
+        "id": "char_joe_01",
+        "skills": [
+          "SKD035"
+        ]
+      },
+      {
+        "id": "char_yuki_01",
+        "skills": [
+          "SKD038"
+        ]
+      },
+      {
+        "id": "char_daimon_01",
+        "skills": [
+          "SKD009"
+        ]
+      },
+      {
+        "id": "char_jihoon_01",
+        "skills": [
+          "SKD009"
+        ]
+      },
+      {
+        "id": "char_aoi_01",
+        "skills": [
+          "SKD039"
+        ]
+      }
+    ],
+    "mechanism": "atk_up@all_allies/damage@first/def_down@first/heal@lowest_ally",
+    "coreCasts": {
+      "SKD035": 200,
+      "SKD038": 200,
+      "SKD009": 200,
+      "SKD039": 200
+    },
+    "burstRuns": 200
+  },
+  "alternative": {
+    "name": "defensive",
+    "inputHash": "391a125e1f96489bebd24e79fb5efc7c10e8bad9847c5b6783322de6865fb5df",
+    "evidence": "docs/verification/stage68-five-tier-20260926/4-5-validated.json.gz",
+    "metrics": {
+      "wins": 200,
+      "n": 200,
+      "rate": 1,
+      "actionLimit": 0,
+      "min": 121,
+      "median": 134,
+      "p90": 142,
+      "max": 152,
+      "mean": 134.695,
+      "reasons": {
+        "final_wave_defeated": 200
+      },
+      "measuredPlaybackSeconds": null
+    },
+    "state": {
+      "userId": "00000000-0000-4000-8000-000000000047",
+      "version": 0,
+      "cash": 0,
+      "diamonds": 0,
+      "energy": 100,
+      "energyMax": 100,
+      "energyDrinks": 0,
+      "souls": {},
+      "characters": [
+        {
+          "id": "char_joe_01",
+          "level": 38,
+          "awakening": 0,
+          "exp": 51620,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "id": "char_yuki_01",
+          "level": 38,
+          "awakening": 0,
+          "exp": 51620,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "id": "char_daimon_01",
+          "level": 38,
+          "awakening": 0,
+          "exp": 51620,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "id": "char_jihoon_01",
+          "level": 38,
+          "awakening": 0,
+          "exp": 51620,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "id": "char_aoi_01",
+          "level": 38,
+          "awakening": 0,
+          "exp": 51620,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        }
+      ],
+      "skills": [
+        {
+          "id": "SKD036",
+          "level": 2
+        },
+        {
+          "id": "SKD037",
+          "level": 2
+        },
+        {
+          "id": "SKD009",
+          "level": 2
+        },
+        {
+          "id": "SKD043",
+          "level": 2
+        }
+      ],
+      "equipment": [
+        {
+          "instanceId": "audit-0-0",
+          "masterId": "WEAPON_001",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "audit-0-2",
+          "masterId": "BODY_002",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "audit-1-0",
+          "masterId": "WEAPON_001",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "audit-1-2",
+          "masterId": "BODY_002",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "audit-2-0",
+          "masterId": "WEAPON_001",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "audit-2-2",
+          "masterId": "BODY_002",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "audit-3-0",
+          "masterId": "WEAPON_001",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "audit-3-2",
+          "masterId": "BODY_002",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "audit-4-0",
+          "masterId": "WEAPON_001",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "audit-4-2",
+          "masterId": "BODY_002",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        }
+      ],
+      "deck": [
+        {
+          "characterId": "char_joe_01",
+          "skillIds": [
+            "SKD036"
+          ],
+          "equipment": {
+            "weapon": "audit-0-0",
+            "body": "audit-0-2"
+          }
+        },
+        {
+          "characterId": "char_yuki_01",
+          "skillIds": [
+            "SKD037"
+          ],
+          "equipment": {
+            "weapon": "audit-1-0",
+            "body": "audit-1-2"
+          }
+        },
+        {
+          "characterId": "char_daimon_01",
+          "skillIds": [
+            "SKD009"
+          ],
+          "equipment": {
+            "weapon": "audit-2-0",
+            "body": "audit-2-2"
+          }
+        },
+        {
+          "characterId": "char_jihoon_01",
+          "skillIds": [
+            "SKD009"
+          ],
+          "equipment": {
+            "weapon": "audit-3-0",
+            "body": "audit-3-2"
+          }
+        },
+        {
+          "characterId": "char_aoi_01",
+          "skillIds": [
+            "SKD043"
+          ],
+          "equipment": {
+            "weapon": "audit-4-0",
+            "body": "audit-4-2"
+          }
+        }
+      ],
+      "materials": {
+        "character": 20,
+        "skill": 10,
+        "equipment": 20,
+        "equipmentLb": 5,
+        "unlock": 1
+      },
+      "clearedStages": [
+        "mikawa-1",
+        "mikawa-2",
+        "mikawa-3",
+        "mikawa-4",
+        "mikawa-5",
+        "owari-1",
+        "owari-2",
+        "owari-3",
+        "owari-4",
+        "owari-5",
+        "mino-1",
+        "mino-2",
+        "mino-3",
+        "mino-4",
+        "mino-5",
+        "omi-1",
+        "omi-2",
+        "omi-3",
+        "omi-4",
+        "omi-5",
+        "kai-1",
+        "kai-2",
+        "kai-3",
+        "kai-4",
+        "kai-5",
+        "kai-6",
+        "echigo-1",
+        "echigo-2",
+        "echigo-3",
+        "echigo-4",
+        "echigo-5",
+        "echigo-6",
+        "kyoto-1",
+        "kyoto-2",
+        "kyoto-3",
+        "kyoto-4",
+        "kyoto-5",
+        "kyoto-6",
+        "kyoto-7",
+        "kyoto-8",
+        "izumo-1",
+        "izumo-2",
+        "izumo-3",
+        "izumo-4",
+        "izumo-5",
+        "izumo-6",
+        "izumo-7",
+        "izumo-8",
+        "satsuma-1",
+        "satsuma-2",
+        "satsuma-3",
+        "satsuma-4",
+        "satsuma-5",
+        "satsuma-6",
+        "satsuma-7",
+        "satsuma-8",
+        "satsuma-9",
+        "satsuma-10",
+        "sekigahara-1",
+        "sekigahara-2",
+        "sekigahara-3",
+        "sekigahara-4",
+        "sekigahara-5",
+        "sekigahara-6",
+        "sekigahara-7",
+        "sekigahara-8",
+        "sekigahara-9",
+        "sekigahara-10"
+      ],
+      "vipExpiresAt": null
+    },
+    "order": [
+      {
+        "id": "char_joe_01",
+        "skills": [
+          "SKD036"
+        ]
+      },
+      {
+        "id": "char_yuki_01",
+        "skills": [
+          "SKD037"
+        ]
+      },
+      {
+        "id": "char_daimon_01",
+        "skills": [
+          "SKD009"
+        ]
+      },
+      {
+        "id": "char_jihoon_01",
+        "skills": [
+          "SKD009"
+        ]
+      },
+      {
+        "id": "char_aoi_01",
+        "skills": [
+          "SKD043"
+        ]
+      }
+    ],
+    "mechanism": "atk_down@highest_atk_enemy/damage@first/def_up@all_allies/hot@lowest_ally",
+    "coreCasts": {
+      "SKD036": 200,
+      "SKD037": 200,
+      "SKD009": 200,
+      "SKD043": 200
+    },
+    "burstRuns": 200
+  },
+  "tiers": [
+    {
+      "name": "break-and-buff",
+      "inputHash": "ce974a2516756855d8dc76414a08fdc8212bad7fe0606f00172b569f27c67ae6",
+      "evidence": "docs/verification/stage68-five-tier-20260926/4-5-validated.json.gz",
+      "metrics": {
+        "wins": 200,
+        "n": 200,
+        "rate": 1,
+        "actionLimit": 0,
+        "min": 121,
+        "median": 134,
+        "p90": 145,
+        "max": 156,
+        "mean": 135.045,
+        "reasons": {
+          "final_wave_defeated": 200
+        },
+        "measuredPlaybackSeconds": null
+      },
+      "state": {
+        "userId": "00000000-0000-4000-8000-000000000047",
+        "version": 0,
+        "cash": 0,
+        "diamonds": 0,
+        "energy": 100,
+        "energyMax": 100,
+        "energyDrinks": 0,
+        "souls": {},
+        "characters": [
+          {
+            "id": "char_joe_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "id": "char_yuki_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "id": "char_daimon_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "id": "char_jihoon_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "id": "char_aoi_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          }
+        ],
+        "skills": [
+          {
+            "id": "SKD035",
+            "level": 2
+          },
+          {
+            "id": "SKD038",
+            "level": 2
+          },
+          {
+            "id": "SKD009",
+            "level": 2
+          },
+          {
+            "id": "SKD039",
+            "level": 2
+          }
+        ],
+        "equipment": [
+          {
+            "instanceId": "audit-0-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-0-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-1-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-1-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-2-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-2-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-3-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-3-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-4-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-4-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          }
+        ],
+        "deck": [
+          {
+            "characterId": "char_joe_01",
+            "skillIds": [
+              "SKD035"
+            ],
+            "equipment": {
+              "weapon": "audit-0-0",
+              "body": "audit-0-2"
+            }
+          },
+          {
+            "characterId": "char_yuki_01",
+            "skillIds": [
+              "SKD038"
+            ],
+            "equipment": {
+              "weapon": "audit-1-0",
+              "body": "audit-1-2"
+            }
+          },
+          {
+            "characterId": "char_daimon_01",
+            "skillIds": [
+              "SKD009"
+            ],
+            "equipment": {
+              "weapon": "audit-2-0",
+              "body": "audit-2-2"
+            }
+          },
+          {
+            "characterId": "char_jihoon_01",
+            "skillIds": [
+              "SKD009"
+            ],
+            "equipment": {
+              "weapon": "audit-3-0",
+              "body": "audit-3-2"
+            }
+          },
+          {
+            "characterId": "char_aoi_01",
+            "skillIds": [
+              "SKD039"
+            ],
+            "equipment": {
+              "weapon": "audit-4-0",
+              "body": "audit-4-2"
+            }
+          }
+        ],
+        "materials": {
+          "character": 20,
+          "skill": 10,
+          "equipment": 20,
+          "equipmentLb": 5,
+          "unlock": 1
+        },
+        "clearedStages": [
+          "mikawa-1",
+          "mikawa-2",
+          "mikawa-3",
+          "mikawa-4",
+          "mikawa-5",
+          "owari-1",
+          "owari-2",
+          "owari-3",
+          "owari-4",
+          "owari-5",
+          "mino-1",
+          "mino-2",
+          "mino-3",
+          "mino-4",
+          "mino-5",
+          "omi-1",
+          "omi-2",
+          "omi-3",
+          "omi-4",
+          "omi-5",
+          "kai-1",
+          "kai-2",
+          "kai-3",
+          "kai-4",
+          "kai-5",
+          "kai-6",
+          "echigo-1",
+          "echigo-2",
+          "echigo-3",
+          "echigo-4",
+          "echigo-5",
+          "echigo-6",
+          "kyoto-1",
+          "kyoto-2",
+          "kyoto-3",
+          "kyoto-4",
+          "kyoto-5",
+          "kyoto-6",
+          "kyoto-7",
+          "kyoto-8",
+          "izumo-1",
+          "izumo-2",
+          "izumo-3",
+          "izumo-4",
+          "izumo-5",
+          "izumo-6",
+          "izumo-7",
+          "izumo-8",
+          "satsuma-1",
+          "satsuma-2",
+          "satsuma-3",
+          "satsuma-4",
+          "satsuma-5",
+          "satsuma-6",
+          "satsuma-7",
+          "satsuma-8",
+          "satsuma-9",
+          "satsuma-10",
+          "sekigahara-1",
+          "sekigahara-2",
+          "sekigahara-3",
+          "sekigahara-4",
+          "sekigahara-5",
+          "sekigahara-6",
+          "sekigahara-7",
+          "sekigahara-8",
+          "sekigahara-9",
+          "sekigahara-10"
+        ],
+        "vipExpiresAt": null
+      },
+      "order": [
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD038"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD009"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        }
+      ],
+      "mechanism": "atk_up@all_allies/damage@first/def_down@first/heal@lowest_ally",
+      "coreCasts": {
+        "SKD035": 200,
+        "SKD038": 200,
+        "SKD009": 200,
+        "SKD039": 200
+      },
+      "burstRuns": 200
+    },
+    {
+      "name": "search-3-swap-1-2-band1-swap12-rear-focus-reversed",
+      "inputHash": "bbcfe405f031cb97de7aad435dd57d67588b9ecbccb9e3c0df7d4f337fbe89bb",
+      "evidence": "docs/verification/stage68-implementation-20260927/search/4-5.json.gz",
+      "metrics": {
+        "wins": 131,
+        "n": 200,
+        "rate": 0.655,
+        "actionLimit": 0,
+        "min": 156,
+        "median": 194,
+        "p90": 214,
+        "max": 229,
+        "mean": 194.88,
+        "reasons": {
+          "final_wave_defeated": 131,
+          "party_defeated": 69
+        },
+        "measuredPlaybackSeconds": null
+      },
+      "state": {
+        "userId": "00000000-0000-4000-8000-000000000047",
+        "version": 0,
+        "cash": 0,
+        "diamonds": 0,
+        "energy": 100,
+        "energyMax": 100,
+        "energyDrinks": 0,
+        "souls": {},
+        "characters": [
+          {
+            "id": "char_joe_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "id": "char_yuki_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "id": "char_daimon_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "id": "char_jihoon_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "id": "char_aoi_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          }
+        ],
+        "skills": [
+          {
+            "id": "SKD003",
+            "level": 2
+          },
+          {
+            "id": "SKD035",
+            "level": 2
+          },
+          {
+            "id": "SKD026",
+            "level": 2
+          },
+          {
+            "id": "SKD027",
+            "level": 2
+          },
+          {
+            "id": "SKD039",
+            "level": 2
+          }
+        ],
+        "equipment": [
+          {
+            "instanceId": "audit-0-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-0-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-1-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-1-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-2-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-2-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-3-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-3-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-4-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-4-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          }
+        ],
+        "deck": [
+          {
+            "characterId": "char_jihoon_01",
+            "skillIds": [
+              "SKD027"
+            ],
+            "equipment": {
+              "weapon": "audit-3-0",
+              "body": "audit-3-2"
+            }
+          },
+          {
+            "characterId": "char_daimon_01",
+            "skillIds": [
+              "SKD026"
+            ],
+            "equipment": {
+              "weapon": "audit-2-0",
+              "body": "audit-2-2"
+            }
+          },
+          {
+            "characterId": "char_aoi_01",
+            "skillIds": [
+              "SKD039"
+            ],
+            "equipment": {
+              "weapon": "audit-4-0",
+              "body": "audit-4-2"
+            }
+          },
+          {
+            "characterId": "char_yuki_01",
+            "skillIds": [
+              "SKD035"
+            ],
+            "equipment": {
+              "weapon": "audit-1-0",
+              "body": "audit-1-2"
+            }
+          },
+          {
+            "characterId": "char_joe_01",
+            "skillIds": [
+              "SKD003"
+            ],
+            "equipment": {
+              "weapon": "audit-0-0",
+              "body": "audit-0-2"
+            }
+          }
+        ],
+        "materials": {
+          "character": 20,
+          "skill": 10,
+          "equipment": 20,
+          "equipmentLb": 5,
+          "unlock": 1
+        },
+        "clearedStages": [
+          "mikawa-1",
+          "mikawa-2",
+          "mikawa-3",
+          "mikawa-4",
+          "mikawa-5",
+          "owari-1",
+          "owari-2",
+          "owari-3",
+          "owari-4",
+          "owari-5",
+          "mino-1",
+          "mino-2",
+          "mino-3",
+          "mino-4",
+          "mino-5",
+          "omi-1",
+          "omi-2",
+          "omi-3",
+          "omi-4",
+          "omi-5",
+          "kai-1",
+          "kai-2",
+          "kai-3",
+          "kai-4",
+          "kai-5",
+          "kai-6",
+          "echigo-1",
+          "echigo-2",
+          "echigo-3",
+          "echigo-4",
+          "echigo-5",
+          "echigo-6",
+          "kyoto-1",
+          "kyoto-2",
+          "kyoto-3",
+          "kyoto-4",
+          "kyoto-5",
+          "kyoto-6",
+          "kyoto-7",
+          "kyoto-8",
+          "izumo-1",
+          "izumo-2",
+          "izumo-3",
+          "izumo-4",
+          "izumo-5",
+          "izumo-6",
+          "izumo-7",
+          "izumo-8",
+          "satsuma-1",
+          "satsuma-2",
+          "satsuma-3",
+          "satsuma-4",
+          "satsuma-5",
+          "satsuma-6",
+          "satsuma-7",
+          "satsuma-8",
+          "satsuma-9",
+          "satsuma-10",
+          "sekigahara-1",
+          "sekigahara-2",
+          "sekigahara-3",
+          "sekigahara-4",
+          "sekigahara-5",
+          "sekigahara-6",
+          "sekigahara-7",
+          "sekigahara-8",
+          "sekigahara-9",
+          "sekigahara-10"
+        ],
+        "vipExpiresAt": null
+      },
+      "order": [
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD027"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": [
+            "SKD026"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": [
+            "SKD039"
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD003"
+          ]
+        }
+      ],
+      "mechanism": "atk_up@all_allies/damage@first/damage@last/damage@lowest_hp/heal@lowest_ally",
+      "coreCasts": {
+        "SKD027": 200,
+        "SKD026": 200,
+        "SKD039": 200,
+        "SKD035": 200,
+        "SKD003": 200
+      },
+      "burstRuns": 199
+    },
+    {
+      "name": "search-36-remove-1-0-search-25-remove-2-0-band1-swap12-rear-focus-reversed",
+      "inputHash": "9c899565ee7cc7dabdfa4d6ee34bd1dab5afbf5aa947510d27c58f26324c4538",
+      "evidence": "docs/verification/stage68-implementation-20260927/search/4-5.json.gz",
+      "metrics": {
+        "wins": 79,
+        "n": 200,
+        "rate": 0.395,
+        "actionLimit": 0,
+        "min": 163,
+        "median": 194,
+        "p90": 203,
+        "max": 207,
+        "mean": 190.025,
+        "reasons": {
+          "party_defeated": 121,
+          "final_wave_defeated": 79
+        },
+        "measuredPlaybackSeconds": null
+      },
+      "state": {
+        "userId": "00000000-0000-4000-8000-000000000047",
+        "version": 0,
+        "cash": 0,
+        "diamonds": 0,
+        "energy": 100,
+        "energyMax": 100,
+        "energyDrinks": 0,
+        "souls": {},
+        "characters": [
+          {
+            "id": "char_joe_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "id": "char_yuki_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "id": "char_daimon_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "id": "char_jihoon_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "id": "char_aoi_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          }
+        ],
+        "skills": [
+          {
+            "id": "SKD003",
+            "level": 2
+          },
+          {
+            "id": "SKD035",
+            "level": 2
+          },
+          {
+            "id": "SKD026",
+            "level": 2
+          },
+          {
+            "id": "SKD027",
+            "level": 2
+          },
+          {
+            "id": "SKD039",
+            "level": 2
+          }
+        ],
+        "equipment": [
+          {
+            "instanceId": "audit-0-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-0-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-1-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-1-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-2-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-2-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-3-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-3-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-4-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-4-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          }
+        ],
+        "deck": [
+          {
+            "characterId": "char_jihoon_01",
+            "skillIds": [
+              "SKD027"
+            ],
+            "equipment": {
+              "weapon": "audit-3-0",
+              "body": "audit-3-2"
+            }
+          },
+          {
+            "characterId": "char_aoi_01",
+            "skillIds": [],
+            "equipment": {
+              "weapon": "audit-4-0",
+              "body": "audit-4-2"
+            }
+          },
+          {
+            "characterId": "char_daimon_01",
+            "skillIds": [],
+            "equipment": {
+              "weapon": "audit-2-0",
+              "body": "audit-2-2"
+            }
+          },
+          {
+            "characterId": "char_yuki_01",
+            "skillIds": [
+              "SKD035"
+            ],
+            "equipment": {
+              "weapon": "audit-1-0",
+              "body": "audit-1-2"
+            }
+          },
+          {
+            "characterId": "char_joe_01",
+            "skillIds": [
+              "SKD003"
+            ],
+            "equipment": {
+              "weapon": "audit-0-0",
+              "body": "audit-0-2"
+            }
+          }
+        ],
+        "materials": {
+          "character": 20,
+          "skill": 10,
+          "equipment": 20,
+          "equipmentLb": 5,
+          "unlock": 1
+        },
+        "clearedStages": [
+          "mikawa-1",
+          "mikawa-2",
+          "mikawa-3",
+          "mikawa-4",
+          "mikawa-5",
+          "owari-1",
+          "owari-2",
+          "owari-3",
+          "owari-4",
+          "owari-5",
+          "mino-1",
+          "mino-2",
+          "mino-3",
+          "mino-4",
+          "mino-5",
+          "omi-1",
+          "omi-2",
+          "omi-3",
+          "omi-4",
+          "omi-5",
+          "kai-1",
+          "kai-2",
+          "kai-3",
+          "kai-4",
+          "kai-5",
+          "kai-6",
+          "echigo-1",
+          "echigo-2",
+          "echigo-3",
+          "echigo-4",
+          "echigo-5",
+          "echigo-6",
+          "kyoto-1",
+          "kyoto-2",
+          "kyoto-3",
+          "kyoto-4",
+          "kyoto-5",
+          "kyoto-6",
+          "kyoto-7",
+          "kyoto-8",
+          "izumo-1",
+          "izumo-2",
+          "izumo-3",
+          "izumo-4",
+          "izumo-5",
+          "izumo-6",
+          "izumo-7",
+          "izumo-8",
+          "satsuma-1",
+          "satsuma-2",
+          "satsuma-3",
+          "satsuma-4",
+          "satsuma-5",
+          "satsuma-6",
+          "satsuma-7",
+          "satsuma-8",
+          "satsuma-9",
+          "satsuma-10",
+          "sekigahara-1",
+          "sekigahara-2",
+          "sekigahara-3",
+          "sekigahara-4",
+          "sekigahara-5",
+          "sekigahara-6",
+          "sekigahara-7",
+          "sekigahara-8",
+          "sekigahara-9",
+          "sekigahara-10"
+        ],
+        "vipExpiresAt": null
+      },
+      "order": [
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD027"
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": []
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": []
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD003"
+          ]
+        }
+      ],
+      "mechanism": "atk_up@all_allies/damage@first/damage@lowest_hp",
+      "coreCasts": {
+        "SKD027": 200,
+        "SKD035": 200,
+        "SKD003": 200
+      },
+      "burstRuns": 200
+    },
+    {
+      "name": "search-37-swap-0-1-search-36-remove-1-0-search-25-remove-2-0-band1-swap12-rear-focus-reversed",
+      "inputHash": "c0c8482c4f191ff0b0ad82156efad7fc39b9ef760a875ce5c7e231c5e47dfdd4",
+      "evidence": "docs/verification/stage68-implementation-20260927/search/4-5.json.gz",
+      "metrics": {
+        "wins": 8,
+        "n": 200,
+        "rate": 0.04,
+        "actionLimit": 0,
+        "min": 163,
+        "median": 179,
+        "p90": 194,
+        "max": 203,
+        "mean": 181.64,
+        "reasons": {
+          "party_defeated": 192,
+          "final_wave_defeated": 8
+        },
+        "measuredPlaybackSeconds": null
+      },
+      "state": {
+        "userId": "00000000-0000-4000-8000-000000000047",
+        "version": 0,
+        "cash": 0,
+        "diamonds": 0,
+        "energy": 100,
+        "energyMax": 100,
+        "energyDrinks": 0,
+        "souls": {},
+        "characters": [
+          {
+            "id": "char_joe_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "id": "char_yuki_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "id": "char_daimon_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "id": "char_jihoon_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "id": "char_aoi_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          }
+        ],
+        "skills": [
+          {
+            "id": "SKD003",
+            "level": 2
+          },
+          {
+            "id": "SKD035",
+            "level": 2
+          },
+          {
+            "id": "SKD026",
+            "level": 2
+          },
+          {
+            "id": "SKD027",
+            "level": 2
+          },
+          {
+            "id": "SKD039",
+            "level": 2
+          }
+        ],
+        "equipment": [
+          {
+            "instanceId": "audit-0-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-0-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-1-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-1-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-2-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-2-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-3-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-3-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-4-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-4-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          }
+        ],
+        "deck": [
+          {
+            "characterId": "char_aoi_01",
+            "skillIds": [],
+            "equipment": {
+              "weapon": "audit-4-0",
+              "body": "audit-4-2"
+            }
+          },
+          {
+            "characterId": "char_jihoon_01",
+            "skillIds": [
+              "SKD027"
+            ],
+            "equipment": {
+              "weapon": "audit-3-0",
+              "body": "audit-3-2"
+            }
+          },
+          {
+            "characterId": "char_daimon_01",
+            "skillIds": [],
+            "equipment": {
+              "weapon": "audit-2-0",
+              "body": "audit-2-2"
+            }
+          },
+          {
+            "characterId": "char_yuki_01",
+            "skillIds": [
+              "SKD035"
+            ],
+            "equipment": {
+              "weapon": "audit-1-0",
+              "body": "audit-1-2"
+            }
+          },
+          {
+            "characterId": "char_joe_01",
+            "skillIds": [
+              "SKD003"
+            ],
+            "equipment": {
+              "weapon": "audit-0-0",
+              "body": "audit-0-2"
+            }
+          }
+        ],
+        "materials": {
+          "character": 20,
+          "skill": 10,
+          "equipment": 20,
+          "equipmentLb": 5,
+          "unlock": 1
+        },
+        "clearedStages": [
+          "mikawa-1",
+          "mikawa-2",
+          "mikawa-3",
+          "mikawa-4",
+          "mikawa-5",
+          "owari-1",
+          "owari-2",
+          "owari-3",
+          "owari-4",
+          "owari-5",
+          "mino-1",
+          "mino-2",
+          "mino-3",
+          "mino-4",
+          "mino-5",
+          "omi-1",
+          "omi-2",
+          "omi-3",
+          "omi-4",
+          "omi-5",
+          "kai-1",
+          "kai-2",
+          "kai-3",
+          "kai-4",
+          "kai-5",
+          "kai-6",
+          "echigo-1",
+          "echigo-2",
+          "echigo-3",
+          "echigo-4",
+          "echigo-5",
+          "echigo-6",
+          "kyoto-1",
+          "kyoto-2",
+          "kyoto-3",
+          "kyoto-4",
+          "kyoto-5",
+          "kyoto-6",
+          "kyoto-7",
+          "kyoto-8",
+          "izumo-1",
+          "izumo-2",
+          "izumo-3",
+          "izumo-4",
+          "izumo-5",
+          "izumo-6",
+          "izumo-7",
+          "izumo-8",
+          "satsuma-1",
+          "satsuma-2",
+          "satsuma-3",
+          "satsuma-4",
+          "satsuma-5",
+          "satsuma-6",
+          "satsuma-7",
+          "satsuma-8",
+          "satsuma-9",
+          "satsuma-10",
+          "sekigahara-1",
+          "sekigahara-2",
+          "sekigahara-3",
+          "sekigahara-4",
+          "sekigahara-5",
+          "sekigahara-6",
+          "sekigahara-7",
+          "sekigahara-8",
+          "sekigahara-9",
+          "sekigahara-10"
+        ],
+        "vipExpiresAt": null
+      },
+      "order": [
+        {
+          "id": "char_aoi_01",
+          "skills": []
+        },
+        {
+          "id": "char_jihoon_01",
+          "skills": [
+            "SKD027"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": []
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD003"
+          ]
+        }
+      ],
+      "mechanism": "atk_up@all_allies/damage@first/damage@lowest_hp",
+      "coreCasts": {
+        "SKD027": 200,
+        "SKD035": 200,
+        "SKD003": 200
+      },
+      "burstRuns": 200
+    },
+    {
+      "name": "search-49-remove-0-0-search-40-swap-0-1-search-39-swap-0-3-search-37-swap-0-1-search-36-remove-1-0-search-25-remove-2-0-band1-swap12-rear-focus-reversed",
+      "inputHash": "52ff68a77d7d9c3d7f810570d31469fef2ec0eeb55e2c2745ebe677f69f078f2",
+      "evidence": "docs/verification/stage68-implementation-20260927/search/4-5.json.gz",
+      "metrics": {
+        "wins": 0,
+        "n": 200,
+        "rate": 0,
+        "actionLimit": 0,
+        "min": 160,
+        "median": 172,
+        "p90": 183,
+        "max": 191,
+        "mean": 173.695,
+        "reasons": {
+          "party_defeated": 200
+        },
+        "measuredPlaybackSeconds": null
+      },
+      "state": {
+        "userId": "00000000-0000-4000-8000-000000000047",
+        "version": 0,
+        "cash": 0,
+        "diamonds": 0,
+        "energy": 100,
+        "energyMax": 100,
+        "energyDrinks": 0,
+        "souls": {},
+        "characters": [
+          {
+            "id": "char_joe_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "id": "char_yuki_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "id": "char_daimon_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "id": "char_jihoon_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "id": "char_aoi_01",
+            "level": 38,
+            "awakening": 0,
+            "exp": 51620,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          }
+        ],
+        "skills": [
+          {
+            "id": "SKD003",
+            "level": 2
+          },
+          {
+            "id": "SKD035",
+            "level": 2
+          },
+          {
+            "id": "SKD026",
+            "level": 2
+          },
+          {
+            "id": "SKD027",
+            "level": 2
+          },
+          {
+            "id": "SKD039",
+            "level": 2
+          }
+        ],
+        "equipment": [
+          {
+            "instanceId": "audit-0-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-0-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-1-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-1-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-2-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-2-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-3-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-3-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-4-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          },
+          {
+            "instanceId": "audit-4-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921"
+          }
+        ],
+        "deck": [
+          {
+            "characterId": "char_jihoon_01",
+            "skillIds": [],
+            "equipment": {
+              "weapon": "audit-3-0",
+              "body": "audit-3-2"
+            }
+          },
+          {
+            "characterId": "char_yuki_01",
+            "skillIds": [
+              "SKD035"
+            ],
+            "equipment": {
+              "weapon": "audit-1-0",
+              "body": "audit-1-2"
+            }
+          },
+          {
+            "characterId": "char_daimon_01",
+            "skillIds": [],
+            "equipment": {
+              "weapon": "audit-2-0",
+              "body": "audit-2-2"
+            }
+          },
+          {
+            "characterId": "char_aoi_01",
+            "skillIds": [],
+            "equipment": {
+              "weapon": "audit-4-0",
+              "body": "audit-4-2"
+            }
+          },
+          {
+            "characterId": "char_joe_01",
+            "skillIds": [
+              "SKD003"
+            ],
+            "equipment": {
+              "weapon": "audit-0-0",
+              "body": "audit-0-2"
+            }
+          }
+        ],
+        "materials": {
+          "character": 20,
+          "skill": 10,
+          "equipment": 20,
+          "equipmentLb": 5,
+          "unlock": 1
+        },
+        "clearedStages": [
+          "mikawa-1",
+          "mikawa-2",
+          "mikawa-3",
+          "mikawa-4",
+          "mikawa-5",
+          "owari-1",
+          "owari-2",
+          "owari-3",
+          "owari-4",
+          "owari-5",
+          "mino-1",
+          "mino-2",
+          "mino-3",
+          "mino-4",
+          "mino-5",
+          "omi-1",
+          "omi-2",
+          "omi-3",
+          "omi-4",
+          "omi-5",
+          "kai-1",
+          "kai-2",
+          "kai-3",
+          "kai-4",
+          "kai-5",
+          "kai-6",
+          "echigo-1",
+          "echigo-2",
+          "echigo-3",
+          "echigo-4",
+          "echigo-5",
+          "echigo-6",
+          "kyoto-1",
+          "kyoto-2",
+          "kyoto-3",
+          "kyoto-4",
+          "kyoto-5",
+          "kyoto-6",
+          "kyoto-7",
+          "kyoto-8",
+          "izumo-1",
+          "izumo-2",
+          "izumo-3",
+          "izumo-4",
+          "izumo-5",
+          "izumo-6",
+          "izumo-7",
+          "izumo-8",
+          "satsuma-1",
+          "satsuma-2",
+          "satsuma-3",
+          "satsuma-4",
+          "satsuma-5",
+          "satsuma-6",
+          "satsuma-7",
+          "satsuma-8",
+          "satsuma-9",
+          "satsuma-10",
+          "sekigahara-1",
+          "sekigahara-2",
+          "sekigahara-3",
+          "sekigahara-4",
+          "sekigahara-5",
+          "sekigahara-6",
+          "sekigahara-7",
+          "sekigahara-8",
+          "sekigahara-9",
+          "sekigahara-10"
+        ],
+        "vipExpiresAt": null
+      },
+      "order": [
+        {
+          "id": "char_jihoon_01",
+          "skills": []
+        },
+        {
+          "id": "char_yuki_01",
+          "skills": [
+            "SKD035"
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "skills": []
+        },
+        {
+          "id": "char_aoi_01",
+          "skills": []
+        },
+        {
+          "id": "char_joe_01",
+          "skills": [
+            "SKD003"
+          ]
+        }
+      ],
+      "mechanism": "atk_up@all_allies/damage@first",
+      "coreCasts": {
+        "SKD035": 200,
+        "SKD003": 200
+      },
+      "burstRuns": 200
+    }
+  ],
+  "skillWithout": [
+    {
+      "id": "SKD035",
+      "without": {
+        "name": "defensive",
+        "inputHash": "391a125e1f96489bebd24e79fb5efc7c10e8bad9847c5b6783322de6865fb5df",
+        "evidence": "docs/verification/stage68-five-tier-20260926/4-5-validated.json.gz",
+        "metrics": {
+          "wins": 200,
+          "n": 200,
+          "rate": 1,
+          "actionLimit": 0,
+          "min": 121,
+          "median": 134,
+          "p90": 142,
+          "max": 152,
+          "mean": 134.695,
+          "reasons": {
+            "final_wave_defeated": 200
+          },
+          "measuredPlaybackSeconds": null
+        },
+        "state": {
+          "userId": "00000000-0000-4000-8000-000000000047",
+          "version": 0,
+          "cash": 0,
+          "diamonds": 0,
+          "energy": 100,
+          "energyMax": 100,
+          "energyDrinks": 0,
+          "souls": {},
+          "characters": [
+            {
+              "id": "char_joe_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_yuki_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_daimon_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_jihoon_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_aoi_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            }
+          ],
+          "skills": [
+            {
+              "id": "SKD036",
+              "level": 2
+            },
+            {
+              "id": "SKD037",
+              "level": 2
+            },
+            {
+              "id": "SKD009",
+              "level": 2
+            },
+            {
+              "id": "SKD043",
+              "level": 2
+            }
+          ],
+          "equipment": [
+            {
+              "instanceId": "audit-0-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-0-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-1-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-1-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-2-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-2-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-3-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-3-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-4-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-4-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            }
+          ],
+          "deck": [
+            {
+              "characterId": "char_joe_01",
+              "skillIds": [
+                "SKD036"
+              ],
+              "equipment": {
+                "weapon": "audit-0-0",
+                "body": "audit-0-2"
+              }
+            },
+            {
+              "characterId": "char_yuki_01",
+              "skillIds": [
+                "SKD037"
+              ],
+              "equipment": {
+                "weapon": "audit-1-0",
+                "body": "audit-1-2"
+              }
+            },
+            {
+              "characterId": "char_daimon_01",
+              "skillIds": [
+                "SKD009"
+              ],
+              "equipment": {
+                "weapon": "audit-2-0",
+                "body": "audit-2-2"
+              }
+            },
+            {
+              "characterId": "char_jihoon_01",
+              "skillIds": [
+                "SKD009"
+              ],
+              "equipment": {
+                "weapon": "audit-3-0",
+                "body": "audit-3-2"
+              }
+            },
+            {
+              "characterId": "char_aoi_01",
+              "skillIds": [
+                "SKD043"
+              ],
+              "equipment": {
+                "weapon": "audit-4-0",
+                "body": "audit-4-2"
+              }
+            }
+          ],
+          "materials": {
+            "character": 20,
+            "skill": 10,
+            "equipment": 20,
+            "equipmentLb": 5,
+            "unlock": 1
+          },
+          "clearedStages": [
+            "mikawa-1",
+            "mikawa-2",
+            "mikawa-3",
+            "mikawa-4",
+            "mikawa-5",
+            "owari-1",
+            "owari-2",
+            "owari-3",
+            "owari-4",
+            "owari-5",
+            "mino-1",
+            "mino-2",
+            "mino-3",
+            "mino-4",
+            "mino-5",
+            "omi-1",
+            "omi-2",
+            "omi-3",
+            "omi-4",
+            "omi-5",
+            "kai-1",
+            "kai-2",
+            "kai-3",
+            "kai-4",
+            "kai-5",
+            "kai-6",
+            "echigo-1",
+            "echigo-2",
+            "echigo-3",
+            "echigo-4",
+            "echigo-5",
+            "echigo-6",
+            "kyoto-1",
+            "kyoto-2",
+            "kyoto-3",
+            "kyoto-4",
+            "kyoto-5",
+            "kyoto-6",
+            "kyoto-7",
+            "kyoto-8",
+            "izumo-1",
+            "izumo-2",
+            "izumo-3",
+            "izumo-4",
+            "izumo-5",
+            "izumo-6",
+            "izumo-7",
+            "izumo-8",
+            "satsuma-1",
+            "satsuma-2",
+            "satsuma-3",
+            "satsuma-4",
+            "satsuma-5",
+            "satsuma-6",
+            "satsuma-7",
+            "satsuma-8",
+            "satsuma-9",
+            "satsuma-10",
+            "sekigahara-1",
+            "sekigahara-2",
+            "sekigahara-3",
+            "sekigahara-4",
+            "sekigahara-5",
+            "sekigahara-6",
+            "sekigahara-7",
+            "sekigahara-8",
+            "sekigahara-9",
+            "sekigahara-10"
+          ],
+          "vipExpiresAt": null
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD036"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD037"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD043"
+            ]
+          }
+        ],
+        "mechanism": "atk_down@highest_atk_enemy/damage@first/def_up@all_allies/hot@lowest_ally",
+        "coreCasts": {
+          "SKD036": 200,
+          "SKD037": 200,
+          "SKD009": 200,
+          "SKD043": 200
+        },
+        "burstRuns": 200
+      }
+    },
+    {
+      "id": "SKD038",
+      "without": {
+        "name": "defensive",
+        "inputHash": "391a125e1f96489bebd24e79fb5efc7c10e8bad9847c5b6783322de6865fb5df",
+        "evidence": "docs/verification/stage68-five-tier-20260926/4-5-validated.json.gz",
+        "metrics": {
+          "wins": 200,
+          "n": 200,
+          "rate": 1,
+          "actionLimit": 0,
+          "min": 121,
+          "median": 134,
+          "p90": 142,
+          "max": 152,
+          "mean": 134.695,
+          "reasons": {
+            "final_wave_defeated": 200
+          },
+          "measuredPlaybackSeconds": null
+        },
+        "state": {
+          "userId": "00000000-0000-4000-8000-000000000047",
+          "version": 0,
+          "cash": 0,
+          "diamonds": 0,
+          "energy": 100,
+          "energyMax": 100,
+          "energyDrinks": 0,
+          "souls": {},
+          "characters": [
+            {
+              "id": "char_joe_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_yuki_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_daimon_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_jihoon_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_aoi_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            }
+          ],
+          "skills": [
+            {
+              "id": "SKD036",
+              "level": 2
+            },
+            {
+              "id": "SKD037",
+              "level": 2
+            },
+            {
+              "id": "SKD009",
+              "level": 2
+            },
+            {
+              "id": "SKD043",
+              "level": 2
+            }
+          ],
+          "equipment": [
+            {
+              "instanceId": "audit-0-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-0-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-1-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-1-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-2-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-2-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-3-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-3-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-4-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-4-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            }
+          ],
+          "deck": [
+            {
+              "characterId": "char_joe_01",
+              "skillIds": [
+                "SKD036"
+              ],
+              "equipment": {
+                "weapon": "audit-0-0",
+                "body": "audit-0-2"
+              }
+            },
+            {
+              "characterId": "char_yuki_01",
+              "skillIds": [
+                "SKD037"
+              ],
+              "equipment": {
+                "weapon": "audit-1-0",
+                "body": "audit-1-2"
+              }
+            },
+            {
+              "characterId": "char_daimon_01",
+              "skillIds": [
+                "SKD009"
+              ],
+              "equipment": {
+                "weapon": "audit-2-0",
+                "body": "audit-2-2"
+              }
+            },
+            {
+              "characterId": "char_jihoon_01",
+              "skillIds": [
+                "SKD009"
+              ],
+              "equipment": {
+                "weapon": "audit-3-0",
+                "body": "audit-3-2"
+              }
+            },
+            {
+              "characterId": "char_aoi_01",
+              "skillIds": [
+                "SKD043"
+              ],
+              "equipment": {
+                "weapon": "audit-4-0",
+                "body": "audit-4-2"
+              }
+            }
+          ],
+          "materials": {
+            "character": 20,
+            "skill": 10,
+            "equipment": 20,
+            "equipmentLb": 5,
+            "unlock": 1
+          },
+          "clearedStages": [
+            "mikawa-1",
+            "mikawa-2",
+            "mikawa-3",
+            "mikawa-4",
+            "mikawa-5",
+            "owari-1",
+            "owari-2",
+            "owari-3",
+            "owari-4",
+            "owari-5",
+            "mino-1",
+            "mino-2",
+            "mino-3",
+            "mino-4",
+            "mino-5",
+            "omi-1",
+            "omi-2",
+            "omi-3",
+            "omi-4",
+            "omi-5",
+            "kai-1",
+            "kai-2",
+            "kai-3",
+            "kai-4",
+            "kai-5",
+            "kai-6",
+            "echigo-1",
+            "echigo-2",
+            "echigo-3",
+            "echigo-4",
+            "echigo-5",
+            "echigo-6",
+            "kyoto-1",
+            "kyoto-2",
+            "kyoto-3",
+            "kyoto-4",
+            "kyoto-5",
+            "kyoto-6",
+            "kyoto-7",
+            "kyoto-8",
+            "izumo-1",
+            "izumo-2",
+            "izumo-3",
+            "izumo-4",
+            "izumo-5",
+            "izumo-6",
+            "izumo-7",
+            "izumo-8",
+            "satsuma-1",
+            "satsuma-2",
+            "satsuma-3",
+            "satsuma-4",
+            "satsuma-5",
+            "satsuma-6",
+            "satsuma-7",
+            "satsuma-8",
+            "satsuma-9",
+            "satsuma-10",
+            "sekigahara-1",
+            "sekigahara-2",
+            "sekigahara-3",
+            "sekigahara-4",
+            "sekigahara-5",
+            "sekigahara-6",
+            "sekigahara-7",
+            "sekigahara-8",
+            "sekigahara-9",
+            "sekigahara-10"
+          ],
+          "vipExpiresAt": null
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD036"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD037"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD043"
+            ]
+          }
+        ],
+        "mechanism": "atk_down@highest_atk_enemy/damage@first/def_up@all_allies/hot@lowest_ally",
+        "coreCasts": {
+          "SKD036": 200,
+          "SKD037": 200,
+          "SKD009": 200,
+          "SKD043": 200
+        },
+        "burstRuns": 200
+      }
+    },
+    {
+      "id": "SKD009",
+      "without": {
+        "name": "rear-focus-reversed",
+        "inputHash": "eee48f7bd32a9431b657a7c9fde03d0254bae928b287544e0a73de58684a7d69",
+        "evidence": "docs/verification/stage68-five-tier-20260926/4-5-validated.json.gz",
+        "metrics": {
+          "wins": 152,
+          "n": 200,
+          "rate": 0.76,
+          "actionLimit": 0,
+          "min": 152,
+          "median": 181,
+          "p90": 199,
+          "max": 224,
+          "mean": 182.065,
+          "reasons": {
+            "final_wave_defeated": 152,
+            "party_defeated": 48
+          },
+          "measuredPlaybackSeconds": null
+        },
+        "state": {
+          "userId": "00000000-0000-4000-8000-000000000047",
+          "version": 0,
+          "cash": 0,
+          "diamonds": 0,
+          "energy": 100,
+          "energyMax": 100,
+          "energyDrinks": 0,
+          "souls": {},
+          "characters": [
+            {
+              "id": "char_joe_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_yuki_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_daimon_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_jihoon_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_aoi_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            }
+          ],
+          "skills": [
+            {
+              "id": "SKD003",
+              "level": 2
+            },
+            {
+              "id": "SKD035",
+              "level": 2
+            },
+            {
+              "id": "SKD026",
+              "level": 2
+            },
+            {
+              "id": "SKD027",
+              "level": 2
+            },
+            {
+              "id": "SKD039",
+              "level": 2
+            }
+          ],
+          "equipment": [
+            {
+              "instanceId": "audit-0-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-0-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-1-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-1-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-2-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-2-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-3-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-3-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-4-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-4-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            }
+          ],
+          "deck": [
+            {
+              "characterId": "char_aoi_01",
+              "skillIds": [
+                "SKD039"
+              ],
+              "equipment": {
+                "weapon": "audit-4-0",
+                "body": "audit-4-2"
+              }
+            },
+            {
+              "characterId": "char_jihoon_01",
+              "skillIds": [
+                "SKD027"
+              ],
+              "equipment": {
+                "weapon": "audit-3-0",
+                "body": "audit-3-2"
+              }
+            },
+            {
+              "characterId": "char_daimon_01",
+              "skillIds": [
+                "SKD026"
+              ],
+              "equipment": {
+                "weapon": "audit-2-0",
+                "body": "audit-2-2"
+              }
+            },
+            {
+              "characterId": "char_yuki_01",
+              "skillIds": [
+                "SKD035"
+              ],
+              "equipment": {
+                "weapon": "audit-1-0",
+                "body": "audit-1-2"
+              }
+            },
+            {
+              "characterId": "char_joe_01",
+              "skillIds": [
+                "SKD003"
+              ],
+              "equipment": {
+                "weapon": "audit-0-0",
+                "body": "audit-0-2"
+              }
+            }
+          ],
+          "materials": {
+            "character": 20,
+            "skill": 10,
+            "equipment": 20,
+            "equipmentLb": 5,
+            "unlock": 1
+          },
+          "clearedStages": [
+            "mikawa-1",
+            "mikawa-2",
+            "mikawa-3",
+            "mikawa-4",
+            "mikawa-5",
+            "owari-1",
+            "owari-2",
+            "owari-3",
+            "owari-4",
+            "owari-5",
+            "mino-1",
+            "mino-2",
+            "mino-3",
+            "mino-4",
+            "mino-5",
+            "omi-1",
+            "omi-2",
+            "omi-3",
+            "omi-4",
+            "omi-5",
+            "kai-1",
+            "kai-2",
+            "kai-3",
+            "kai-4",
+            "kai-5",
+            "kai-6",
+            "echigo-1",
+            "echigo-2",
+            "echigo-3",
+            "echigo-4",
+            "echigo-5",
+            "echigo-6",
+            "kyoto-1",
+            "kyoto-2",
+            "kyoto-3",
+            "kyoto-4",
+            "kyoto-5",
+            "kyoto-6",
+            "kyoto-7",
+            "kyoto-8",
+            "izumo-1",
+            "izumo-2",
+            "izumo-3",
+            "izumo-4",
+            "izumo-5",
+            "izumo-6",
+            "izumo-7",
+            "izumo-8",
+            "satsuma-1",
+            "satsuma-2",
+            "satsuma-3",
+            "satsuma-4",
+            "satsuma-5",
+            "satsuma-6",
+            "satsuma-7",
+            "satsuma-8",
+            "satsuma-9",
+            "satsuma-10",
+            "sekigahara-1",
+            "sekigahara-2",
+            "sekigahara-3",
+            "sekigahara-4",
+            "sekigahara-5",
+            "sekigahara-6",
+            "sekigahara-7",
+            "sekigahara-8",
+            "sekigahara-9",
+            "sekigahara-10"
+          ],
+          "vipExpiresAt": null
+        },
+        "order": [
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD027"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD026"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          }
+        ],
+        "mechanism": "atk_up@all_allies/damage@first/damage@last/damage@lowest_hp/heal@lowest_ally",
+        "coreCasts": {
+          "SKD039": 200,
+          "SKD027": 200,
+          "SKD026": 200,
+          "SKD035": 154,
+          "SKD003": 200
+        },
+        "burstRuns": 200
+      }
+    },
+    {
+      "id": "SKD039",
+      "without": {
+        "name": "defensive",
+        "inputHash": "391a125e1f96489bebd24e79fb5efc7c10e8bad9847c5b6783322de6865fb5df",
+        "evidence": "docs/verification/stage68-five-tier-20260926/4-5-validated.json.gz",
+        "metrics": {
+          "wins": 200,
+          "n": 200,
+          "rate": 1,
+          "actionLimit": 0,
+          "min": 121,
+          "median": 134,
+          "p90": 142,
+          "max": 152,
+          "mean": 134.695,
+          "reasons": {
+            "final_wave_defeated": 200
+          },
+          "measuredPlaybackSeconds": null
+        },
+        "state": {
+          "userId": "00000000-0000-4000-8000-000000000047",
+          "version": 0,
+          "cash": 0,
+          "diamonds": 0,
+          "energy": 100,
+          "energyMax": 100,
+          "energyDrinks": 0,
+          "souls": {},
+          "characters": [
+            {
+              "id": "char_joe_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_yuki_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_daimon_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_jihoon_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_aoi_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            }
+          ],
+          "skills": [
+            {
+              "id": "SKD036",
+              "level": 2
+            },
+            {
+              "id": "SKD037",
+              "level": 2
+            },
+            {
+              "id": "SKD009",
+              "level": 2
+            },
+            {
+              "id": "SKD043",
+              "level": 2
+            }
+          ],
+          "equipment": [
+            {
+              "instanceId": "audit-0-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-0-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-1-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-1-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-2-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-2-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-3-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-3-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-4-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-4-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            }
+          ],
+          "deck": [
+            {
+              "characterId": "char_joe_01",
+              "skillIds": [
+                "SKD036"
+              ],
+              "equipment": {
+                "weapon": "audit-0-0",
+                "body": "audit-0-2"
+              }
+            },
+            {
+              "characterId": "char_yuki_01",
+              "skillIds": [
+                "SKD037"
+              ],
+              "equipment": {
+                "weapon": "audit-1-0",
+                "body": "audit-1-2"
+              }
+            },
+            {
+              "characterId": "char_daimon_01",
+              "skillIds": [
+                "SKD009"
+              ],
+              "equipment": {
+                "weapon": "audit-2-0",
+                "body": "audit-2-2"
+              }
+            },
+            {
+              "characterId": "char_jihoon_01",
+              "skillIds": [
+                "SKD009"
+              ],
+              "equipment": {
+                "weapon": "audit-3-0",
+                "body": "audit-3-2"
+              }
+            },
+            {
+              "characterId": "char_aoi_01",
+              "skillIds": [
+                "SKD043"
+              ],
+              "equipment": {
+                "weapon": "audit-4-0",
+                "body": "audit-4-2"
+              }
+            }
+          ],
+          "materials": {
+            "character": 20,
+            "skill": 10,
+            "equipment": 20,
+            "equipmentLb": 5,
+            "unlock": 1
+          },
+          "clearedStages": [
+            "mikawa-1",
+            "mikawa-2",
+            "mikawa-3",
+            "mikawa-4",
+            "mikawa-5",
+            "owari-1",
+            "owari-2",
+            "owari-3",
+            "owari-4",
+            "owari-5",
+            "mino-1",
+            "mino-2",
+            "mino-3",
+            "mino-4",
+            "mino-5",
+            "omi-1",
+            "omi-2",
+            "omi-3",
+            "omi-4",
+            "omi-5",
+            "kai-1",
+            "kai-2",
+            "kai-3",
+            "kai-4",
+            "kai-5",
+            "kai-6",
+            "echigo-1",
+            "echigo-2",
+            "echigo-3",
+            "echigo-4",
+            "echigo-5",
+            "echigo-6",
+            "kyoto-1",
+            "kyoto-2",
+            "kyoto-3",
+            "kyoto-4",
+            "kyoto-5",
+            "kyoto-6",
+            "kyoto-7",
+            "kyoto-8",
+            "izumo-1",
+            "izumo-2",
+            "izumo-3",
+            "izumo-4",
+            "izumo-5",
+            "izumo-6",
+            "izumo-7",
+            "izumo-8",
+            "satsuma-1",
+            "satsuma-2",
+            "satsuma-3",
+            "satsuma-4",
+            "satsuma-5",
+            "satsuma-6",
+            "satsuma-7",
+            "satsuma-8",
+            "satsuma-9",
+            "satsuma-10",
+            "sekigahara-1",
+            "sekigahara-2",
+            "sekigahara-3",
+            "sekigahara-4",
+            "sekigahara-5",
+            "sekigahara-6",
+            "sekigahara-7",
+            "sekigahara-8",
+            "sekigahara-9",
+            "sekigahara-10"
+          ],
+          "vipExpiresAt": null
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD036"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD037"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD043"
+            ]
+          }
+        ],
+        "mechanism": "atk_down@highest_atk_enemy/damage@first/def_up@all_allies/hot@lowest_ally",
+        "coreCasts": {
+          "SKD036": 200,
+          "SKD037": 200,
+          "SKD009": 200,
+          "SKD043": 200
+        },
+        "burstRuns": 200
+      }
+    },
+    {
+      "id": "SKD036",
+      "without": {
+        "name": "break-and-buff",
+        "inputHash": "ce974a2516756855d8dc76414a08fdc8212bad7fe0606f00172b569f27c67ae6",
+        "evidence": "docs/verification/stage68-five-tier-20260926/4-5-validated.json.gz",
+        "metrics": {
+          "wins": 200,
+          "n": 200,
+          "rate": 1,
+          "actionLimit": 0,
+          "min": 121,
+          "median": 134,
+          "p90": 145,
+          "max": 156,
+          "mean": 135.045,
+          "reasons": {
+            "final_wave_defeated": 200
+          },
+          "measuredPlaybackSeconds": null
+        },
+        "state": {
+          "userId": "00000000-0000-4000-8000-000000000047",
+          "version": 0,
+          "cash": 0,
+          "diamonds": 0,
+          "energy": 100,
+          "energyMax": 100,
+          "energyDrinks": 0,
+          "souls": {},
+          "characters": [
+            {
+              "id": "char_joe_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_yuki_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_daimon_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_jihoon_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_aoi_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            }
+          ],
+          "skills": [
+            {
+              "id": "SKD035",
+              "level": 2
+            },
+            {
+              "id": "SKD038",
+              "level": 2
+            },
+            {
+              "id": "SKD009",
+              "level": 2
+            },
+            {
+              "id": "SKD039",
+              "level": 2
+            }
+          ],
+          "equipment": [
+            {
+              "instanceId": "audit-0-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-0-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-1-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-1-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-2-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-2-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-3-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-3-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-4-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-4-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            }
+          ],
+          "deck": [
+            {
+              "characterId": "char_joe_01",
+              "skillIds": [
+                "SKD035"
+              ],
+              "equipment": {
+                "weapon": "audit-0-0",
+                "body": "audit-0-2"
+              }
+            },
+            {
+              "characterId": "char_yuki_01",
+              "skillIds": [
+                "SKD038"
+              ],
+              "equipment": {
+                "weapon": "audit-1-0",
+                "body": "audit-1-2"
+              }
+            },
+            {
+              "characterId": "char_daimon_01",
+              "skillIds": [
+                "SKD009"
+              ],
+              "equipment": {
+                "weapon": "audit-2-0",
+                "body": "audit-2-2"
+              }
+            },
+            {
+              "characterId": "char_jihoon_01",
+              "skillIds": [
+                "SKD009"
+              ],
+              "equipment": {
+                "weapon": "audit-3-0",
+                "body": "audit-3-2"
+              }
+            },
+            {
+              "characterId": "char_aoi_01",
+              "skillIds": [
+                "SKD039"
+              ],
+              "equipment": {
+                "weapon": "audit-4-0",
+                "body": "audit-4-2"
+              }
+            }
+          ],
+          "materials": {
+            "character": 20,
+            "skill": 10,
+            "equipment": 20,
+            "equipmentLb": 5,
+            "unlock": 1
+          },
+          "clearedStages": [
+            "mikawa-1",
+            "mikawa-2",
+            "mikawa-3",
+            "mikawa-4",
+            "mikawa-5",
+            "owari-1",
+            "owari-2",
+            "owari-3",
+            "owari-4",
+            "owari-5",
+            "mino-1",
+            "mino-2",
+            "mino-3",
+            "mino-4",
+            "mino-5",
+            "omi-1",
+            "omi-2",
+            "omi-3",
+            "omi-4",
+            "omi-5",
+            "kai-1",
+            "kai-2",
+            "kai-3",
+            "kai-4",
+            "kai-5",
+            "kai-6",
+            "echigo-1",
+            "echigo-2",
+            "echigo-3",
+            "echigo-4",
+            "echigo-5",
+            "echigo-6",
+            "kyoto-1",
+            "kyoto-2",
+            "kyoto-3",
+            "kyoto-4",
+            "kyoto-5",
+            "kyoto-6",
+            "kyoto-7",
+            "kyoto-8",
+            "izumo-1",
+            "izumo-2",
+            "izumo-3",
+            "izumo-4",
+            "izumo-5",
+            "izumo-6",
+            "izumo-7",
+            "izumo-8",
+            "satsuma-1",
+            "satsuma-2",
+            "satsuma-3",
+            "satsuma-4",
+            "satsuma-5",
+            "satsuma-6",
+            "satsuma-7",
+            "satsuma-8",
+            "satsuma-9",
+            "satsuma-10",
+            "sekigahara-1",
+            "sekigahara-2",
+            "sekigahara-3",
+            "sekigahara-4",
+            "sekigahara-5",
+            "sekigahara-6",
+            "sekigahara-7",
+            "sekigahara-8",
+            "sekigahara-9",
+            "sekigahara-10"
+          ],
+          "vipExpiresAt": null
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD038"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "mechanism": "atk_up@all_allies/damage@first/def_down@first/heal@lowest_ally",
+        "coreCasts": {
+          "SKD035": 200,
+          "SKD038": 200,
+          "SKD009": 200,
+          "SKD039": 200
+        },
+        "burstRuns": 200
+      }
+    },
+    {
+      "id": "SKD037",
+      "without": {
+        "name": "break-and-buff",
+        "inputHash": "ce974a2516756855d8dc76414a08fdc8212bad7fe0606f00172b569f27c67ae6",
+        "evidence": "docs/verification/stage68-five-tier-20260926/4-5-validated.json.gz",
+        "metrics": {
+          "wins": 200,
+          "n": 200,
+          "rate": 1,
+          "actionLimit": 0,
+          "min": 121,
+          "median": 134,
+          "p90": 145,
+          "max": 156,
+          "mean": 135.045,
+          "reasons": {
+            "final_wave_defeated": 200
+          },
+          "measuredPlaybackSeconds": null
+        },
+        "state": {
+          "userId": "00000000-0000-4000-8000-000000000047",
+          "version": 0,
+          "cash": 0,
+          "diamonds": 0,
+          "energy": 100,
+          "energyMax": 100,
+          "energyDrinks": 0,
+          "souls": {},
+          "characters": [
+            {
+              "id": "char_joe_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_yuki_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_daimon_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_jihoon_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_aoi_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            }
+          ],
+          "skills": [
+            {
+              "id": "SKD035",
+              "level": 2
+            },
+            {
+              "id": "SKD038",
+              "level": 2
+            },
+            {
+              "id": "SKD009",
+              "level": 2
+            },
+            {
+              "id": "SKD039",
+              "level": 2
+            }
+          ],
+          "equipment": [
+            {
+              "instanceId": "audit-0-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-0-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-1-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-1-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-2-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-2-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-3-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-3-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-4-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-4-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            }
+          ],
+          "deck": [
+            {
+              "characterId": "char_joe_01",
+              "skillIds": [
+                "SKD035"
+              ],
+              "equipment": {
+                "weapon": "audit-0-0",
+                "body": "audit-0-2"
+              }
+            },
+            {
+              "characterId": "char_yuki_01",
+              "skillIds": [
+                "SKD038"
+              ],
+              "equipment": {
+                "weapon": "audit-1-0",
+                "body": "audit-1-2"
+              }
+            },
+            {
+              "characterId": "char_daimon_01",
+              "skillIds": [
+                "SKD009"
+              ],
+              "equipment": {
+                "weapon": "audit-2-0",
+                "body": "audit-2-2"
+              }
+            },
+            {
+              "characterId": "char_jihoon_01",
+              "skillIds": [
+                "SKD009"
+              ],
+              "equipment": {
+                "weapon": "audit-3-0",
+                "body": "audit-3-2"
+              }
+            },
+            {
+              "characterId": "char_aoi_01",
+              "skillIds": [
+                "SKD039"
+              ],
+              "equipment": {
+                "weapon": "audit-4-0",
+                "body": "audit-4-2"
+              }
+            }
+          ],
+          "materials": {
+            "character": 20,
+            "skill": 10,
+            "equipment": 20,
+            "equipmentLb": 5,
+            "unlock": 1
+          },
+          "clearedStages": [
+            "mikawa-1",
+            "mikawa-2",
+            "mikawa-3",
+            "mikawa-4",
+            "mikawa-5",
+            "owari-1",
+            "owari-2",
+            "owari-3",
+            "owari-4",
+            "owari-5",
+            "mino-1",
+            "mino-2",
+            "mino-3",
+            "mino-4",
+            "mino-5",
+            "omi-1",
+            "omi-2",
+            "omi-3",
+            "omi-4",
+            "omi-5",
+            "kai-1",
+            "kai-2",
+            "kai-3",
+            "kai-4",
+            "kai-5",
+            "kai-6",
+            "echigo-1",
+            "echigo-2",
+            "echigo-3",
+            "echigo-4",
+            "echigo-5",
+            "echigo-6",
+            "kyoto-1",
+            "kyoto-2",
+            "kyoto-3",
+            "kyoto-4",
+            "kyoto-5",
+            "kyoto-6",
+            "kyoto-7",
+            "kyoto-8",
+            "izumo-1",
+            "izumo-2",
+            "izumo-3",
+            "izumo-4",
+            "izumo-5",
+            "izumo-6",
+            "izumo-7",
+            "izumo-8",
+            "satsuma-1",
+            "satsuma-2",
+            "satsuma-3",
+            "satsuma-4",
+            "satsuma-5",
+            "satsuma-6",
+            "satsuma-7",
+            "satsuma-8",
+            "satsuma-9",
+            "satsuma-10",
+            "sekigahara-1",
+            "sekigahara-2",
+            "sekigahara-3",
+            "sekigahara-4",
+            "sekigahara-5",
+            "sekigahara-6",
+            "sekigahara-7",
+            "sekigahara-8",
+            "sekigahara-9",
+            "sekigahara-10"
+          ],
+          "vipExpiresAt": null
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD038"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "mechanism": "atk_up@all_allies/damage@first/def_down@first/heal@lowest_ally",
+        "coreCasts": {
+          "SKD035": 200,
+          "SKD038": 200,
+          "SKD009": 200,
+          "SKD039": 200
+        },
+        "burstRuns": 200
+      }
+    },
+    {
+      "id": "SKD043",
+      "without": {
+        "name": "break-and-buff",
+        "inputHash": "ce974a2516756855d8dc76414a08fdc8212bad7fe0606f00172b569f27c67ae6",
+        "evidence": "docs/verification/stage68-five-tier-20260926/4-5-validated.json.gz",
+        "metrics": {
+          "wins": 200,
+          "n": 200,
+          "rate": 1,
+          "actionLimit": 0,
+          "min": 121,
+          "median": 134,
+          "p90": 145,
+          "max": 156,
+          "mean": 135.045,
+          "reasons": {
+            "final_wave_defeated": 200
+          },
+          "measuredPlaybackSeconds": null
+        },
+        "state": {
+          "userId": "00000000-0000-4000-8000-000000000047",
+          "version": 0,
+          "cash": 0,
+          "diamonds": 0,
+          "energy": 100,
+          "energyMax": 100,
+          "energyDrinks": 0,
+          "souls": {},
+          "characters": [
+            {
+              "id": "char_joe_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_yuki_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_daimon_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_jihoon_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "id": "char_aoi_01",
+              "level": 38,
+              "awakening": 0,
+              "exp": 51620,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            }
+          ],
+          "skills": [
+            {
+              "id": "SKD035",
+              "level": 2
+            },
+            {
+              "id": "SKD038",
+              "level": 2
+            },
+            {
+              "id": "SKD009",
+              "level": 2
+            },
+            {
+              "id": "SKD039",
+              "level": 2
+            }
+          ],
+          "equipment": [
+            {
+              "instanceId": "audit-0-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-0-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-1-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-1-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-2-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-2-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-3-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-3-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-4-0",
+              "masterId": "WEAPON_001",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            },
+            {
+              "instanceId": "audit-4-2",
+              "masterId": "BODY_002",
+              "level": 20,
+              "lb": 0,
+              "exp": 4770,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921"
+            }
+          ],
+          "deck": [
+            {
+              "characterId": "char_joe_01",
+              "skillIds": [
+                "SKD035"
+              ],
+              "equipment": {
+                "weapon": "audit-0-0",
+                "body": "audit-0-2"
+              }
+            },
+            {
+              "characterId": "char_yuki_01",
+              "skillIds": [
+                "SKD038"
+              ],
+              "equipment": {
+                "weapon": "audit-1-0",
+                "body": "audit-1-2"
+              }
+            },
+            {
+              "characterId": "char_daimon_01",
+              "skillIds": [
+                "SKD009"
+              ],
+              "equipment": {
+                "weapon": "audit-2-0",
+                "body": "audit-2-2"
+              }
+            },
+            {
+              "characterId": "char_jihoon_01",
+              "skillIds": [
+                "SKD009"
+              ],
+              "equipment": {
+                "weapon": "audit-3-0",
+                "body": "audit-3-2"
+              }
+            },
+            {
+              "characterId": "char_aoi_01",
+              "skillIds": [
+                "SKD039"
+              ],
+              "equipment": {
+                "weapon": "audit-4-0",
+                "body": "audit-4-2"
+              }
+            }
+          ],
+          "materials": {
+            "character": 20,
+            "skill": 10,
+            "equipment": 20,
+            "equipmentLb": 5,
+            "unlock": 1
+          },
+          "clearedStages": [
+            "mikawa-1",
+            "mikawa-2",
+            "mikawa-3",
+            "mikawa-4",
+            "mikawa-5",
+            "owari-1",
+            "owari-2",
+            "owari-3",
+            "owari-4",
+            "owari-5",
+            "mino-1",
+            "mino-2",
+            "mino-3",
+            "mino-4",
+            "mino-5",
+            "omi-1",
+            "omi-2",
+            "omi-3",
+            "omi-4",
+            "omi-5",
+            "kai-1",
+            "kai-2",
+            "kai-3",
+            "kai-4",
+            "kai-5",
+            "kai-6",
+            "echigo-1",
+            "echigo-2",
+            "echigo-3",
+            "echigo-4",
+            "echigo-5",
+            "echigo-6",
+            "kyoto-1",
+            "kyoto-2",
+            "kyoto-3",
+            "kyoto-4",
+            "kyoto-5",
+            "kyoto-6",
+            "kyoto-7",
+            "kyoto-8",
+            "izumo-1",
+            "izumo-2",
+            "izumo-3",
+            "izumo-4",
+            "izumo-5",
+            "izumo-6",
+            "izumo-7",
+            "izumo-8",
+            "satsuma-1",
+            "satsuma-2",
+            "satsuma-3",
+            "satsuma-4",
+            "satsuma-5",
+            "satsuma-6",
+            "satsuma-7",
+            "satsuma-8",
+            "satsuma-9",
+            "satsuma-10",
+            "sekigahara-1",
+            "sekigahara-2",
+            "sekigahara-3",
+            "sekigahara-4",
+            "sekigahara-5",
+            "sekigahara-6",
+            "sekigahara-7",
+            "sekigahara-8",
+            "sekigahara-9",
+            "sekigahara-10"
+          ],
+          "vipExpiresAt": null
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD038"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "mechanism": "atk_up@all_allies/damage@first/def_down@first/heal@lowest_ally",
+        "coreCasts": {
+          "SKD035": 200,
+          "SKD038": 200,
+          "SKD009": 200,
+          "SKD039": 200
+        },
+        "burstRuns": 200
+      }
+    }
+  ],
+  "unmet": [],
+  "enemyHash": "4dddb6c2d78259360c644ebea97e65a21e8870603d0da7b0349583da12cf210a",
+  "realPlaybackSeconds": null,
+  "realDevice": false,
+  "G5": false,
+  "realPlayback": [],
+  "timeAcceptance": "実機の体感受入は未判定。300行動未到達は短時間保証ではない",
+  "comparisonScope": {
+    "validatedRecipes": 18,
+    "trials": 3600,
+    "actionLimit": 0,
+    "maxActions": 229,
+    "sameCharacterAndEquipmentGrowth": true,
+    "arrivalAssetBasis": "adopted44A; original row.acquisition; no same-stage first clear reward"
+  }
+}

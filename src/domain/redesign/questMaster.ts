@@ -6,6 +6,14 @@ import type { BattleRules, BattleUnit, EnemyUnit, QuestStage, RedesignState, Rew
 import { createFormalBattleInput } from './formalBattleInput';
 
 export const QUEST_MASTER_VERSION = data.version;
+// Already-started battles settle from their snapshot with the same reward/early-progress semantics.
+const EARLY_RETENTION_MASTER_VERSION = 'game04-quest68-early-retention-20260926';
+export function usesCurrentQuestProgress(version: unknown): boolean {
+  return version === QUEST_MASTER_VERSION || version === EARLY_RETENTION_MASTER_VERSION;
+}
+export function usesFormalQuestRewards(version: unknown): boolean {
+  return usesCurrentQuestProgress(version) || version === 'APPROVED_QUEST65_ROUND17_20260922';
+}
 export const QUEST_STAGE_COUNTS = data.counts;
 export const QUEST_ID_MAPPING = data.mapping;
 export interface FormalQuestStage extends QuestStage {

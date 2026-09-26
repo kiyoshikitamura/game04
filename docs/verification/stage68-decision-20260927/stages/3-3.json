@@ -1,0 +1,2426 @@
+{
+  "stage": "3-3",
+  "id": "mino-3",
+  "name": "山あいの影",
+  "status": "未承認の敵/供給案での検証",
+  "tags": {
+    "originalFiveTierGap": true,
+    "supplyProposal": true,
+    "early": false,
+    "actionLimitWait": false
+  },
+  "profile": {
+    "area": 3,
+    "level": 24,
+    "eq": null,
+    "eqLevel": 1,
+    "lb": 2
+  },
+  "primary": {
+    "name": "break-and-buff",
+    "wins": 200,
+    "n": 200,
+    "percent": 100,
+    "inputHash": "ffb03d28dabc8e28f67cc80134085d104c2076afa9311db21a6984a0cee375e3",
+    "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+    "assets": {
+      "covered": true,
+      "missing": []
+    },
+    "order": [
+      {
+        "id": "char_joe_01",
+        "skills": [
+          "SKD035"
+        ]
+      },
+      {
+        "id": "char_yuki_01",
+        "skills": [
+          "SKD038"
+        ]
+      },
+      {
+        "id": "char_daimon_01",
+        "skills": [
+          "SKD009"
+        ]
+      },
+      {
+        "id": "char_jihoon_01",
+        "skills": [
+          "SKD009"
+        ]
+      },
+      {
+        "id": "char_aoi_01",
+        "skills": [
+          "SKD039"
+        ]
+      }
+    ],
+    "actions": [
+      46,
+      72
+    ],
+    "meanActions": 52.045,
+    "coreCasts": {
+      "SKD035": 200,
+      "SKD038": 200,
+      "SKD009": 200,
+      "SKD039": 200
+    },
+    "loadout": [
+      {
+        "id": "char_joe_01",
+        "level": 24,
+        "awakening": 0,
+        "exp": 18140,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "北条氏康",
+        "skills": [
+          {
+            "id": "SKD035",
+            "lb": 2
+          }
+        ],
+        "equipment": []
+      },
+      {
+        "id": "char_yuki_01",
+        "level": 24,
+        "awakening": 0,
+        "exp": 18140,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "竹中半兵衛",
+        "skills": [
+          {
+            "id": "SKD038",
+            "lb": 2
+          }
+        ],
+        "equipment": []
+      },
+      {
+        "id": "char_daimon_01",
+        "level": 24,
+        "awakening": 0,
+        "exp": 18140,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "井伊直政",
+        "skills": [
+          {
+            "id": "SKD009",
+            "lb": 2
+          }
+        ],
+        "equipment": []
+      },
+      {
+        "id": "char_jihoon_01",
+        "level": 24,
+        "awakening": 0,
+        "exp": 18140,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "前田利家",
+        "skills": [
+          {
+            "id": "SKD009",
+            "lb": 2
+          }
+        ],
+        "equipment": []
+      },
+      {
+        "id": "char_aoi_01",
+        "level": 24,
+        "awakening": 0,
+        "exp": 18140,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "お市の方",
+        "skills": [
+          {
+            "id": "SKD039",
+            "lb": 2
+          }
+        ],
+        "equipment": []
+      }
+    ]
+  },
+  "alternative": {
+    "name": "attack-up",
+    "wins": 200,
+    "n": 200,
+    "percent": 100,
+    "inputHash": "b82fdaede7a8aeb3de2337879011d70af468c92509ee538444b1f42a1d980bb2",
+    "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+    "assets": {
+      "covered": true,
+      "missing": []
+    },
+    "order": [
+      {
+        "id": "char_joe_01",
+        "skills": [
+          "SKD003"
+        ]
+      },
+      {
+        "id": "char_yuki_01",
+        "skills": [
+          "SKD035"
+        ]
+      },
+      {
+        "id": "char_daimon_01",
+        "skills": [
+          "SKD009"
+        ]
+      },
+      {
+        "id": "char_jihoon_01",
+        "skills": [
+          "SKD009"
+        ]
+      },
+      {
+        "id": "char_aoi_01",
+        "skills": [
+          "SKD039"
+        ]
+      }
+    ],
+    "actions": [
+      53,
+      159
+    ],
+    "meanActions": 73.765,
+    "coreCasts": {
+      "SKD003": 200,
+      "SKD035": 129,
+      "SKD009": 200,
+      "SKD039": 137
+    }
+  },
+  "early": null,
+  "enemyChanges": [
+    {
+      "enemy": "3-3/W2/1",
+      "name": "服部半蔵",
+      "wave": 2,
+      "position": 1,
+      "path": "waves[1][0].stats.def",
+      "field": "def",
+      "before": 1290,
+      "after": 746,
+      "reasons": [
+        "防御が到達火力を上回る敵のみ突破余地を確保"
+      ]
+    }
+  ],
+  "enemyPolicy": "回収済み43面273項目の案を継承。今回新たな敵数値変更なし。beforeが最新値と違う箇所は統合時に停止。",
+  "beforeSameParty": {
+    "name": "break-and-buff",
+    "wins": 0,
+    "n": 200,
+    "percent": 0,
+    "inputHash": "d4ede92382cedcd39311b7c653df1375c6b5c8fc2bbcbd088e3e934f9fbe3a92",
+    "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+    "order": [
+      {
+        "id": "char_joe_01",
+        "skills": [
+          "SKD035"
+        ]
+      },
+      {
+        "id": "char_yuki_01",
+        "skills": [
+          "SKD038"
+        ]
+      },
+      {
+        "id": "char_daimon_01",
+        "skills": [
+          "SKD009"
+        ]
+      },
+      {
+        "id": "char_jihoon_01",
+        "skills": [
+          "SKD009"
+        ]
+      },
+      {
+        "id": "char_aoi_01",
+        "skills": [
+          "SKD039"
+        ]
+      }
+    ],
+    "actions": [
+      300,
+      300
+    ],
+    "meanActions": 300,
+    "coreCasts": {
+      "SKD035": 200,
+      "SKD038": 200,
+      "SKD009": 200,
+      "SKD039": 200
+    }
+  },
+  "orderContrasts": [
+    {
+      "base": {
+        "name": "break-and-buff",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "ffb03d28dabc8e28f67cc80134085d104c2076afa9311db21a6984a0cee375e3",
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD038"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          46,
+          72
+        ],
+        "meanActions": 52.045,
+        "coreCasts": {
+          "SKD035": 200,
+          "SKD038": 200,
+          "SKD009": 200,
+          "SKD039": 200
+        }
+      },
+      "changed": {
+        "name": "exact-party-order-reversed",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "63894b55496ca55239e8a67712bc6c38d7de3ef3691898057eb9dc92b91182a2",
+        "order": [
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD038"
+            ]
+          },
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          }
+        ],
+        "actions": [
+          52,
+          89
+        ],
+        "meanActions": 70.61,
+        "coreCasts": {
+          "SKD039": 200,
+          "SKD009": 200,
+          "SKD038": 200,
+          "SKD035": 96
+        }
+      },
+      "sameSeedSet": true,
+      "interpretation": "party順だけの対照。勝率差がない場合は勝敗への寄与確認とはしない。"
+    }
+  ],
+  "originalMissing": [
+    "0%超～10%"
+  ],
+  "missingWithinBudget": [
+    "0%超～10%"
+  ],
+  "tierRows": [
+    {
+      "label": "全勝",
+      "original": {
+        "name": "break-and-buff",
+        "wins": 200,
+        "n": 200
+      },
+      "allSaved": {
+        "name": "break-and-buff",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "ffb03d28dabc8e28f67cc80134085d104c2076afa9311db21a6984a0cee375e3",
+        "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD038"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          46,
+          72
+        ],
+        "meanActions": 52.045,
+        "coreCasts": {
+          "SKD035": 200,
+          "SKD038": 200,
+          "SKD009": 200,
+          "SKD039": 200
+        }
+      },
+      "withinBudget": {
+        "name": "break-and-buff",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "ffb03d28dabc8e28f67cc80134085d104c2076afa9311db21a6984a0cee375e3",
+        "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD038"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          46,
+          72
+        ],
+        "meanActions": 52.045,
+        "coreCasts": {
+          "SKD035": 200,
+          "SKD038": 200,
+          "SKD009": 200,
+          "SKD039": 200
+        }
+      },
+      "nearest": [
+        {
+          "name": "break-and-buff",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "ffb03d28dabc8e28f67cc80134085d104c2076afa9311db21a6984a0cee375e3",
+          "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD038"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            46,
+            72
+          ],
+          "meanActions": 52.045,
+          "coreCasts": {
+            "SKD035": 200,
+            "SKD038": 200,
+            "SKD009": 200,
+            "SKD039": 200
+          }
+        },
+        {
+          "name": "attack-up",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "b82fdaede7a8aeb3de2337879011d70af468c92509ee538444b1f42a1d980bb2",
+          "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            53,
+            159
+          ],
+          "meanActions": 73.765,
+          "coreCasts": {
+            "SKD003": 200,
+            "SKD035": 129,
+            "SKD009": 200,
+            "SKD039": 137
+          }
+        },
+        {
+          "name": "armor-break",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "29ad31812dc3f1d1de82ea5a18cb328b56076ff7b4ceec09f1581afcb993124f",
+          "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD038"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            51,
+            101
+          ],
+          "meanActions": 68.91,
+          "coreCasts": {
+            "SKD003": 200,
+            "SKD038": 189,
+            "SKD009": 200,
+            "SKD039": 124
+          }
+        }
+      ],
+      "proposal": null
+    },
+    {
+      "label": "約60%",
+      "original": {
+        "name": "no-support",
+        "wins": 110,
+        "n": 200
+      },
+      "allSaved": {
+        "name": "no-support",
+        "wins": 110,
+        "n": 200,
+        "percent": 55.00000000000001,
+        "inputHash": "8f6260942dea65cb124789f80944fecf25cf3eebd6dae8d1726afa0abeb163f5",
+        "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          92,
+          300
+        ],
+        "meanActions": 206.14,
+        "coreCasts": {
+          "SKD003": 200,
+          "SKD009": 200,
+          "SKD039": 200
+        }
+      },
+      "withinBudget": {
+        "name": "no-support",
+        "wins": 110,
+        "n": 200,
+        "percent": 55.00000000000001,
+        "inputHash": "8f6260942dea65cb124789f80944fecf25cf3eebd6dae8d1726afa0abeb163f5",
+        "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          }
+        ],
+        "actions": [
+          92,
+          300
+        ],
+        "meanActions": 206.14,
+        "coreCasts": {
+          "SKD003": 200,
+          "SKD009": 200,
+          "SKD039": 200
+        }
+      },
+      "nearest": [
+        {
+          "name": "no-support",
+          "wins": 110,
+          "n": 200,
+          "percent": 55.00000000000001,
+          "inputHash": "8f6260942dea65cb124789f80944fecf25cf3eebd6dae8d1726afa0abeb163f5",
+          "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            92,
+            300
+          ],
+          "meanActions": 206.14,
+          "coreCasts": {
+            "SKD003": 200,
+            "SKD009": 200,
+            "SKD039": 200
+          }
+        },
+        {
+          "name": "break-and-buff-order-32541",
+          "wins": 72,
+          "n": 200,
+          "percent": 36,
+          "inputHash": "dd0dc6f55451e09dd502c074ae05e06e5a7252b7bdf5e00370d3a91f76acc1d7",
+          "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD038"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD035"
+              ]
+            }
+          ],
+          "actions": [
+            116,
+            202
+          ],
+          "meanActions": 164.17,
+          "coreCasts": {
+            "SKD009": 200,
+            "SKD038": 200,
+            "SKD039": 200,
+            "SKD035": 194
+          }
+        },
+        {
+          "name": "break-and-buff",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "ffb03d28dabc8e28f67cc80134085d104c2076afa9311db21a6984a0cee375e3",
+          "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD038"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            46,
+            72
+          ],
+          "meanActions": 52.045,
+          "coreCasts": {
+            "SKD035": 200,
+            "SKD038": 200,
+            "SKD009": 200,
+            "SKD039": 200
+          }
+        }
+      ],
+      "proposal": null
+    },
+    {
+      "label": "約30%",
+      "original": {
+        "name": "break-and-buff-order-32541",
+        "wins": 72,
+        "n": 200
+      },
+      "allSaved": {
+        "name": "break-and-buff-order-32541",
+        "wins": 72,
+        "n": 200,
+        "percent": 36,
+        "inputHash": "dd0dc6f55451e09dd502c074ae05e06e5a7252b7bdf5e00370d3a91f76acc1d7",
+        "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD038"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          }
+        ],
+        "actions": [
+          116,
+          202
+        ],
+        "meanActions": 164.17,
+        "coreCasts": {
+          "SKD009": 200,
+          "SKD038": 200,
+          "SKD039": 200,
+          "SKD035": 194
+        }
+      },
+      "withinBudget": {
+        "name": "break-and-buff-order-32541",
+        "wins": 72,
+        "n": 200,
+        "percent": 36,
+        "inputHash": "dd0dc6f55451e09dd502c074ae05e06e5a7252b7bdf5e00370d3a91f76acc1d7",
+        "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD038"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          }
+        ],
+        "actions": [
+          116,
+          202
+        ],
+        "meanActions": 164.17,
+        "coreCasts": {
+          "SKD009": 200,
+          "SKD038": 200,
+          "SKD039": 200,
+          "SKD035": 194
+        }
+      },
+      "nearest": [
+        {
+          "name": "break-and-buff-order-32541",
+          "wins": 72,
+          "n": 200,
+          "percent": 36,
+          "inputHash": "dd0dc6f55451e09dd502c074ae05e06e5a7252b7bdf5e00370d3a91f76acc1d7",
+          "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD038"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD035"
+              ]
+            }
+          ],
+          "actions": [
+            116,
+            202
+          ],
+          "meanActions": 164.17,
+          "coreCasts": {
+            "SKD009": 200,
+            "SKD038": 200,
+            "SKD039": 200,
+            "SKD035": 194
+          }
+        },
+        {
+          "name": "poison-boost",
+          "wins": 38,
+          "n": 200,
+          "percent": 19,
+          "inputHash": "f0be001c108bee6a0db84c4972d091545012ed25587ef78a4473dfcf05669c91",
+          "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+          "assets": {
+            "covered": false,
+            "missing": [
+              "技:SKD029:LB2"
+            ]
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD029"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            148,
+            300
+          ],
+          "meanActions": 284.88,
+          "coreCasts": {
+            "SKD003": 200,
+            "SKD035": 73,
+            "SKD029": 200,
+            "SKD009": 200,
+            "SKD039": 200
+          }
+        },
+        {
+          "name": "no-support",
+          "wins": 110,
+          "n": 200,
+          "percent": 55.00000000000001,
+          "inputHash": "8f6260942dea65cb124789f80944fecf25cf3eebd6dae8d1726afa0abeb163f5",
+          "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            92,
+            300
+          ],
+          "meanActions": 206.14,
+          "coreCasts": {
+            "SKD003": 200,
+            "SKD009": 200,
+            "SKD039": 200
+          }
+        }
+      ],
+      "proposal": null
+    },
+    {
+      "label": "0%超～10%",
+      "original": null,
+      "allSaved": null,
+      "withinBudget": null,
+      "nearest": [
+        {
+          "name": "all-cheap",
+          "wins": 0,
+          "n": 200,
+          "percent": 0,
+          "inputHash": "4934d01eaf7bfe02196fa5894488d19a68274863c4b980ab7fd28b0981136a63",
+          "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD003"
+              ]
+            }
+          ],
+          "actions": [
+            145,
+            151
+          ],
+          "meanActions": 145.625,
+          "coreCasts": {
+            "SKD003": 200
+          }
+        },
+        {
+          "name": "poison-boost",
+          "wins": 38,
+          "n": 200,
+          "percent": 19,
+          "inputHash": "f0be001c108bee6a0db84c4972d091545012ed25587ef78a4473dfcf05669c91",
+          "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+          "assets": {
+            "covered": false,
+            "missing": [
+              "技:SKD029:LB2"
+            ]
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD029"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            148,
+            300
+          ],
+          "meanActions": 284.88,
+          "coreCasts": {
+            "SKD003": 200,
+            "SKD035": 73,
+            "SKD029": 200,
+            "SKD009": 200,
+            "SKD039": 200
+          }
+        },
+        {
+          "name": "break-and-buff-order-32541",
+          "wins": 72,
+          "n": 200,
+          "percent": 36,
+          "inputHash": "dd0dc6f55451e09dd502c074ae05e06e5a7252b7bdf5e00370d3a91f76acc1d7",
+          "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD038"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD035"
+              ]
+            }
+          ],
+          "actions": [
+            116,
+            202
+          ],
+          "meanActions": 164.17,
+          "coreCasts": {
+            "SKD009": 200,
+            "SKD038": 200,
+            "SKD039": 200,
+            "SKD035": 194
+          }
+        }
+      ],
+      "proposal": {
+        "name": "band3-swap12-break-and-buff-order-32541",
+        "band": 3,
+        "label": "0%超～10%",
+        "status": "UNTESTED",
+        "base": {
+          "name": "break-and-buff-order-32541",
+          "wins": 72,
+          "n": 200,
+          "percent": 36,
+          "inputHash": "dd0dc6f55451e09dd502c074ae05e06e5a7252b7bdf5e00370d3a91f76acc1d7",
+          "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD038"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD035"
+              ]
+            }
+          ],
+          "actions": [
+            116,
+            202
+          ],
+          "meanActions": 164.17,
+          "coreCasts": {
+            "SKD009": 200,
+            "SKD038": 200,
+            "SKD039": 200,
+            "SKD035": 194
+          }
+        },
+        "swapPositions": [
+          1,
+          2
+        ],
+        "inputHash": "850953460b8bfbeaff08ddfcc9d676568677c3418f4085bdb41c50b3b3ef4797",
+        "explanation": "break-and-buff-order-32541の1番と2番を交換。武将・Lv・覚醒・技LB・装備・敵は同一。SPを先に使う技、支援前後、通常攻撃/BURSTへの参加順を変える限定候補。目標勝率になるとの保証はない。"
+      }
+    },
+    {
+      "label": "観測0%",
+      "original": {
+        "name": "all-cheap",
+        "wins": 0,
+        "n": 200
+      },
+      "allSaved": {
+        "name": "all-cheap",
+        "wins": 0,
+        "n": 200,
+        "percent": 0,
+        "inputHash": "4934d01eaf7bfe02196fa5894488d19a68274863c4b980ab7fd28b0981136a63",
+        "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD003"
+            ]
+          }
+        ],
+        "actions": [
+          145,
+          151
+        ],
+        "meanActions": 145.625,
+        "coreCasts": {
+          "SKD003": 200
+        }
+      },
+      "withinBudget": {
+        "name": "all-cheap",
+        "wins": 0,
+        "n": 200,
+        "percent": 0,
+        "inputHash": "4934d01eaf7bfe02196fa5894488d19a68274863c4b980ab7fd28b0981136a63",
+        "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD003"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD003"
+            ]
+          }
+        ],
+        "actions": [
+          145,
+          151
+        ],
+        "meanActions": 145.625,
+        "coreCasts": {
+          "SKD003": 200
+        }
+      },
+      "nearest": [
+        {
+          "name": "all-cheap",
+          "wins": 0,
+          "n": 200,
+          "percent": 0,
+          "inputHash": "4934d01eaf7bfe02196fa5894488d19a68274863c4b980ab7fd28b0981136a63",
+          "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD003"
+              ]
+            }
+          ],
+          "actions": [
+            145,
+            151
+          ],
+          "meanActions": 145.625,
+          "coreCasts": {
+            "SKD003": 200
+          }
+        },
+        {
+          "name": "poison-boost",
+          "wins": 38,
+          "n": 200,
+          "percent": 19,
+          "inputHash": "f0be001c108bee6a0db84c4972d091545012ed25587ef78a4473dfcf05669c91",
+          "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+          "assets": {
+            "covered": false,
+            "missing": [
+              "技:SKD029:LB2"
+            ]
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD029"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            148,
+            300
+          ],
+          "meanActions": 284.88,
+          "coreCasts": {
+            "SKD003": 200,
+            "SKD035": 73,
+            "SKD029": 200,
+            "SKD009": 200,
+            "SKD039": 200
+          }
+        },
+        {
+          "name": "break-and-buff-order-32541",
+          "wins": 72,
+          "n": 200,
+          "percent": 36,
+          "inputHash": "dd0dc6f55451e09dd502c074ae05e06e5a7252b7bdf5e00370d3a91f76acc1d7",
+          "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD038"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD035"
+              ]
+            }
+          ],
+          "actions": [
+            116,
+            202
+          ],
+          "meanActions": 164.17,
+          "coreCasts": {
+            "SKD009": 200,
+            "SKD038": 200,
+            "SKD039": 200,
+            "SKD035": 194
+          }
+        }
+      ],
+      "proposal": null
+    }
+  ],
+  "observedRates": [
+    0,
+    36,
+    55.00000000000001,
+    100
+  ],
+  "cause": "限られた編成/攻撃順の標本で、該当帯を挟む中間入力が未検証。区分境界への丸めや未所持技の流用では補わない。",
+  "exactProposals": [
+    {
+      "name": "band3-swap12-break-and-buff-order-32541",
+      "band": 3,
+      "label": "0%超～10%",
+      "status": "UNTESTED",
+      "base": {
+        "name": "break-and-buff-order-32541",
+        "wins": 72,
+        "n": 200,
+        "percent": 36,
+        "inputHash": "dd0dc6f55451e09dd502c074ae05e06e5a7252b7bdf5e00370d3a91f76acc1d7",
+        "evidence": "docs/verification/stage68-five-tier-20260926/3-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD038"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD035"
+            ]
+          }
+        ],
+        "actions": [
+          116,
+          202
+        ],
+        "meanActions": 164.17,
+        "coreCasts": {
+          "SKD009": 200,
+          "SKD038": 200,
+          "SKD039": 200,
+          "SKD035": 194
+        }
+      },
+      "swapPositions": [
+        1,
+        2
+      ],
+      "inputHash": "850953460b8bfbeaff08ddfcc9d676568677c3418f4085bdb41c50b3b3ef4797",
+      "explanation": "break-and-buff-order-32541の1番と2番を交換。武将・Lv・覚醒・技LB・装備・敵は同一。SPを先に使う技、支援前後、通常攻撃/BURSTへの参加順を変える限定候補。目標勝率になるとの保証はない。"
+    }
+  ],
+  "supply": {
+    "requiredAssets": {
+      "characters": [
+        {
+          "id": "char_joe_01",
+          "level": 24,
+          "awakening": 0,
+          "exp": 18140,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921",
+          "name": "北条氏康",
+          "source": "チュートリアル完了時"
+        },
+        {
+          "id": "char_daimon_01",
+          "level": 24,
+          "awakening": 0,
+          "exp": 18140,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921",
+          "name": "井伊直政",
+          "source": "チュートリアル完了時"
+        },
+        {
+          "id": "char_aoi_01",
+          "level": 24,
+          "awakening": 0,
+          "exp": 18140,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921",
+          "name": "お市の方",
+          "source": "チュートリアル完了時"
+        },
+        {
+          "id": "char_jihoon_01",
+          "level": 24,
+          "awakening": 0,
+          "exp": 18140,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921",
+          "name": "前田利家",
+          "source": "1-1初回クリア後"
+        },
+        {
+          "id": "char_yuki_01",
+          "level": 24,
+          "awakening": 0,
+          "exp": 18140,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921",
+          "name": "竹中半兵衛",
+          "source": "1-3初回クリア後"
+        }
+      ],
+      "skills": [
+        {
+          "id": "SKD003",
+          "level": 2,
+          "name": "土割り",
+          "source": {
+            "status": "CURRENT",
+            "where": "チュートリアル完了時"
+          }
+        },
+        {
+          "id": "SKD039",
+          "level": 2,
+          "name": "応急手当",
+          "source": {
+            "status": "CURRENT",
+            "where": "チュートリアル完了時"
+          }
+        },
+        {
+          "id": "SKD035",
+          "level": 2,
+          "name": "鬨の声",
+          "source": {
+            "status": "CURRENT",
+            "where": "チュートリアル完了時"
+          }
+        },
+        {
+          "id": "SKD009",
+          "level": 2,
+          "name": "岩断",
+          "source": {
+            "status": "CURRENT",
+            "where": "1-2クリア報酬/任務受領後"
+          }
+        },
+        {
+          "id": "SKD038",
+          "level": 2,
+          "name": "鎧砕き",
+          "source": {
+            "status": "PROPOSED",
+            "source": "追加提案・前面初回確定",
+            "stage": "2-5"
+          }
+        },
+        {
+          "id": "SKD010",
+          "level": 2,
+          "name": "風断",
+          "source": {
+            "status": "PROPOSED",
+            "source": "追加提案・前面初回確定",
+            "stage": "2-5"
+          }
+        },
+        {
+          "id": "SKD040",
+          "level": 2,
+          "name": "治癒の祈り",
+          "source": {
+            "status": "PROPOSED",
+            "source": "追加提案・前面初回確定",
+            "stage": "2-5"
+          }
+        }
+      ],
+      "equipment": [],
+      "awakeningSouls": {
+        "char_joe_01": 0,
+        "char_daimon_01": 0,
+        "char_aoi_01": 0,
+        "char_jihoon_01": 0,
+        "char_yuki_01": 0
+      },
+      "cumulativeTrainingCost": {
+        "fromLevel1": true,
+        "charExp": 90700,
+        "eqExp": 0,
+        "cash": 132700,
+        "skillMaterials": 42,
+        "equipmentMaterials": 0,
+        "awakeningSouls": {
+          "char_joe_01": 0,
+          "char_daimon_01": 0,
+          "char_aoi_01": 0,
+          "char_jihoon_01": 0,
+          "char_yuki_01": 0
+        },
+        "acquisitionCostsExcluded": true
+      }
+    },
+    "currentBeforeStage": {
+      "skills": [
+        {
+          "id": "SKD003",
+          "name": "土割り",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD035",
+          "name": "鬨の声",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD039",
+          "name": "応急手当",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD009",
+          "name": "岩断",
+          "where": "1-2クリア報酬/任務受領後"
+        },
+        {
+          "id": "SKD019",
+          "name": "火の薙ぎ",
+          "where": "1-4クリア報酬/任務受領後"
+        }
+      ],
+      "characters": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "where": "1-1初回クリア後"
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "where": "1-3初回クリア後"
+        }
+      ],
+      "gear": [],
+      "resources": {
+        "cash": 97900,
+        "charExp": 60700,
+        "eqExp": 11500,
+        "skillMaterials": 16,
+        "genericR": 0
+      }
+    },
+    "additionsHere": [
+      {
+        "beforeStage": "3-3",
+        "grantOn": "3-2",
+        "stageId": "mino-2",
+        "path": "firstRewards append",
+        "status": "UNAPPROVED",
+        "rewards": [
+          {
+            "kind": "cash",
+            "amount": 12250
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "large",
+            "amount": 3
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "small",
+            "amount": 8
+          }
+        ],
+        "reason": "同育成で主経路と別戦法を切替可能にする確定供給。既存報酬は全て保持"
+      }
+    ],
+    "allPreStageAdditions": [
+      {
+        "beforeStage": "3-1",
+        "grantOn": "2-5",
+        "stageId": "owari-5",
+        "path": "firstRewards append",
+        "status": "UNAPPROVED",
+        "rewards": [
+          {
+            "kind": "skill",
+            "id": "SKD038",
+            "amount": 1
+          },
+          {
+            "kind": "skill",
+            "id": "SKD010",
+            "amount": 1
+          },
+          {
+            "kind": "skill",
+            "id": "SKD040",
+            "amount": 1
+          },
+          {
+            "kind": "cash",
+            "amount": 12050
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "small",
+            "amount": 1
+          },
+          {
+            "kind": "skill_material",
+            "amount": 26
+          }
+        ],
+        "reason": "同育成で主経路と別戦法を切替可能にする確定供給。既存報酬は全て保持"
+      },
+      {
+        "beforeStage": "3-2",
+        "grantOn": "3-1",
+        "stageId": "mino-1",
+        "path": "firstRewards append",
+        "status": "UNAPPROVED",
+        "rewards": [
+          {
+            "kind": "cash",
+            "amount": 10500
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "large",
+            "amount": 2
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "medium",
+            "amount": 4
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "small",
+            "amount": 1
+          }
+        ],
+        "reason": "同育成で主経路と別戦法を切替可能にする確定供給。既存報酬は全て保持"
+      },
+      {
+        "beforeStage": "3-3",
+        "grantOn": "3-2",
+        "stageId": "mino-2",
+        "path": "firstRewards append",
+        "status": "UNAPPROVED",
+        "rewards": [
+          {
+            "kind": "cash",
+            "amount": 12250
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "large",
+            "amount": 3
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "small",
+            "amount": 8
+          }
+        ],
+        "reason": "同育成で主経路と別戦法を切替可能にする確定供給。既存報酬は全て保持"
+      }
+    ],
+    "optionA": {
+      "status": "UNAPPROVED_SUPPLY_REQUIRED",
+      "cumulativeAdded": {
+        "cash": 34800,
+        "charExp": 30000,
+        "eqExp": 0,
+        "skillMaterials": 26,
+        "genericR": 0
+      },
+      "mandatoryFarmSuccesses": 0
+    },
+    "optionB": {
+      "status": "UNAPPROVED_CONDITIONAL_ON_ITEM_SUPPLY",
+      "keepKinds": [
+        "skill",
+        "equipment",
+        "skill_material",
+        "generic_soul"
+      ],
+      "priorStage": "3-2",
+      "repeatRewards": [
+        {
+          "kind": "cash",
+          "amount": 1200
+        },
+        {
+          "kind": "character_exp_item",
+          "id": "small",
+          "amount": 3
+        },
+        {
+          "kind": "equipment_exp_item",
+          "id": "small",
+          "amount": 2
+        }
+      ],
+      "successfulClears": 53,
+      "energy": 265,
+      "cumulativeSuccessfulClears": 106,
+      "cumulativeEnergy": 530,
+      "farmIncome": {
+        "cash": 120800,
+        "charExp": 30200,
+        "eqExp": 19600
+      },
+      "shortageBeforeFarming": {
+        "cash": 0,
+        "charExp": 15700,
+        "eqExp": 0
+      },
+      "note": "累積周回収入を繰越す逐次案。前面の既検証育成だけで周回する。回数は成功回数で、失敗・行動力回復待ち・実時間は含まない。現在面初回報酬は未計上。"
+    },
+    "optionC": {
+      "status": "NOT_GUARANTEED",
+      "missingCurrentSkills": [
+        "SKD038"
+      ],
+      "missingCurrentEquipment": [],
+      "resourceGap": {
+        "cash": 34800,
+        "charExp": 30000,
+        "eqExp": 0,
+        "skillMaterials": 26,
+        "genericR": 0
+      },
+      "recommendation": "追加しないなら、現行確定スキルだけ・未配布装備なし・初期R覚醒0へ編成を再設計し、その条件で敵を再評価する。現候補の勝率を流用しない。ガチャ/ランダム魂を確定入手としない。",
+      "sameLevelPossible": true,
+      "exactCandidateEvidence": "docs/verification/stage68-decision-20260927/no-add/3-3.json.gz",
+      "exactCandidates": [
+        {
+          "name": "starter-single",
+          "status": "UNTESTED",
+          "loadout": [
+            {
+              "id": "char_joe_01",
+              "level": 20,
+              "awakening": 0,
+              "exp": 11910,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921",
+              "name": "北条氏康",
+              "skills": [
+                {
+                  "id": "SKD003",
+                  "lb": 0
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "id": "char_yuki_01",
+              "level": 20,
+              "awakening": 0,
+              "exp": 11910,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921",
+              "name": "竹中半兵衛",
+              "skills": [
+                {
+                  "id": "SKD035",
+                  "lb": 0
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "id": "char_daimon_01",
+              "level": 20,
+              "awakening": 0,
+              "exp": 11910,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921",
+              "name": "井伊直政",
+              "skills": [
+                {
+                  "id": "SKD009",
+                  "lb": 0
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "id": "char_jihoon_01",
+              "level": 20,
+              "awakening": 0,
+              "exp": 11910,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921",
+              "name": "前田利家",
+              "skills": [
+                {
+                  "id": "SKD009",
+                  "lb": 0
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "id": "char_aoi_01",
+              "level": 20,
+              "awakening": 0,
+              "exp": 11910,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921",
+              "name": "お市の方",
+              "skills": [
+                {
+                  "id": "SKD039",
+                  "lb": 0
+                }
+              ],
+              "equipment": []
+            }
+          ],
+          "costs": {
+            "fromLevel1": true,
+            "charExp": 59550,
+            "eqExp": 0,
+            "cash": 59550,
+            "skillMaterials": 0,
+            "equipmentMaterials": 0,
+            "awakeningSouls": {
+              "char_joe_01": 0,
+              "char_yuki_01": 0,
+              "char_daimon_01": 0,
+              "char_jihoon_01": 0,
+              "char_aoi_01": 0
+            },
+            "acquisitionCostsExcluded": true
+          },
+          "inputHash": "9e68c5d229aa9ce7ed04004ca6dcc587ea20a2ae2e6e731c013699914ae6b574"
+        },
+        {
+          "name": "starter-area",
+          "status": "UNTESTED",
+          "loadout": [
+            {
+              "id": "char_joe_01",
+              "level": 20,
+              "awakening": 0,
+              "exp": 11910,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921",
+              "name": "北条氏康",
+              "skills": [],
+              "equipment": []
+            },
+            {
+              "id": "char_yuki_01",
+              "level": 20,
+              "awakening": 0,
+              "exp": 11910,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921",
+              "name": "竹中半兵衛",
+              "skills": [],
+              "equipment": []
+            },
+            {
+              "id": "char_daimon_01",
+              "level": 20,
+              "awakening": 0,
+              "exp": 11910,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921",
+              "name": "井伊直政",
+              "skills": [
+                {
+                  "id": "SKD019",
+                  "lb": 0
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "id": "char_jihoon_01",
+              "level": 20,
+              "awakening": 0,
+              "exp": 11910,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921",
+              "name": "前田利家",
+              "skills": [],
+              "equipment": []
+            },
+            {
+              "id": "char_aoi_01",
+              "level": 20,
+              "awakening": 0,
+              "exp": 11910,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921",
+              "name": "お市の方",
+              "skills": [
+                {
+                  "id": "SKD039",
+                  "lb": 0
+                }
+              ],
+              "equipment": []
+            }
+          ],
+          "costs": {
+            "fromLevel1": true,
+            "charExp": 59550,
+            "eqExp": 0,
+            "cash": 59550,
+            "skillMaterials": 0,
+            "equipmentMaterials": 0,
+            "awakeningSouls": {
+              "char_joe_01": 0,
+              "char_yuki_01": 0,
+              "char_daimon_01": 0,
+              "char_jihoon_01": 0,
+              "char_aoi_01": 0
+            },
+            "acquisitionCostsExcluded": true
+          },
+          "inputHash": "d737027a4f9e7eec78db2d04a6cd73d6e70aa60b2e23579ae7ebfb28af27adbc"
+        }
+      ],
+      "note": "既クリア各面1回+ステージ/エリア任務の既存収入だけ。初期確定5名/技5種、装備なし、技LB0、覚醒0、資源内のLvに制限。仮に前面まで到達済でも成立するかの下限比較で、そこまでの連続到達を保証しない。五段階の同育成比較へ混ぜない。敵は回収済み提案入力なので現行敵での勝率とも呼ばない。"
+    }
+  },
+  "stall": null,
+  "remaining": [
+    "5段階未達：0%超～10%",
+    "追加供給案の承認前。現行仕様の成立とはしない",
+    "実機受入・G5未通過"
+  ]
+}

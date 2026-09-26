@@ -15,7 +15,7 @@ import { captureMissionAssets, recordMissionEvent } from '../../../src/domain/re
 import { raidBattleMissionEvent, raidRescueMissionEvent, reconcileRaidMissionProgress } from '../../../src/domain/redesign/missionRaidProgress.ts';
 import { simulateBattle } from '../../../src/domain/redesign/battle.ts';
 import { getQuestStage as getLegacyQuestStage } from '../../../src/domain/redesign/legacyQuests.ts';
-import { createQuestBattleInput, questEnergyCost, questVictoryRewards, QUEST_MASTER_VERSION, type FormalQuestStage } from '../../../src/domain/redesign/questMaster.ts';
+import { createQuestBattleInput, questEnergyCost, questVictoryRewards, QUEST_MASTER_VERSION, usesFormalQuestRewards, usesCurrentQuestProgress, type FormalQuestStage } from '../../../src/domain/redesign/questMaster.ts';
 import { getQuestStage, isQuestStageUnlocked } from '../../../src/domain/redesign/quests.ts';
 import { characterArt } from '../../../src/theme/creativeAssets.ts';
 import { applyRaidAction, createRaidRoom, getRoomRaidMaster, raidEnemies } from '../../../src/domain/redesign/raid.ts';
@@ -262,7 +262,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
       const random = () => { rng = (Math.imul(rng, 1664525) + 1013904223) >>> 0; return rng / 4294967296; };
       const luck = record.input.party.reduce((n: number, p: any) => n + p.stats.luk, 0) / 5;
       let encounterRoll: number | undefined;
-      if ([QUEST_MASTER_VERSION,'APPROVED_QUEST65_ROUND17_20260922'].includes(record.input.questMasterVersion)) {
+      if (usesFormalQuestRewards(record.input.questMasterVersion)) {
         const settlement = questVictoryRewards(stage, state, record.input.party, record.seed);
         rewards.push(...settlement.rewards);
         firstClear = settlement.firstClear;
@@ -274,7 +274,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
       const policy = await rewardPolicy();
       for (let i = 0; i < rewards.length; i++) after = grantReward(after, rewards[i], await uuidFor(`reward:${id}:${i}`), policy);
       if (firstClear && !after.clearedStages.includes(stage.id)) after.clearedStages.push(stage.id);
-      after = recordEarlyQuestClear(state, after, stage.id, record.input.questMasterVersion!==QUEST_MASTER_VERSION);
+      after = recordEarlyQuestClear(state, after, stage.id, !usesCurrentQuestProgress(record.input.questMasterVersion));
       const expReward = record.input.playerExpReward;
       if (expReward) {
         const progress = state.playerProgress;
@@ -298,7 +298,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
       }
       if ((encounterRoll ?? random()) < stage.encounterChance && !(await roomsFor(userId)).some(existing => existing.ownerId === userId && existing.status === 'active' && Date.parse(existing.expiresAt) > Date.now() && !existing.territorySnapshot && getRoomRaidMaster(existing).type === 'encounter')) {
         encounterRaidId = await uuidFor(`encounter:${id}`);
-        const encounterMaster=[QUEST_MASTER_VERSION,'APPROVED_QUEST65_ROUND17_20260922'].includes(record.input.questMasterVersion)?selectEncounterMaster(Number(stage.designId.split('-')[0]),random):null;
+        const encounterMaster=usesFormalQuestRewards(record.input.questMasterVersion)?selectEncounterMaster(Number(stage.designId.split('-')[0]),random):null;
         room = createRaidRoom(encounterMaster?.id??'encounter_flame', userId, encounterRaidId, Date.now()); room.participants[0].name = playerName; version = -1;
       }
     } else if (record.kind === 'raid') {

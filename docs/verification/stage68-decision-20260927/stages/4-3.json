@@ -1,0 +1,2906 @@
+{
+  "stage": "4-3",
+  "id": "omi-3",
+  "name": "宵の水辺",
+  "status": "未承認の敵/供給案での検証",
+  "tags": {
+    "originalFiveTierGap": false,
+    "supplyProposal": true,
+    "early": false,
+    "actionLimitWait": false
+  },
+  "profile": {
+    "area": 4,
+    "level": 34,
+    "eq": "N",
+    "eqLevel": 20,
+    "lb": 2
+  },
+  "primary": {
+    "name": "burst-focus-greater-heal",
+    "wins": 200,
+    "n": 200,
+    "percent": 100,
+    "inputHash": "b6a8dd7fd83877cca5c0f284d5f177d441b09c6b3230e748562102fe50d16f32",
+    "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+    "assets": {
+      "covered": true,
+      "missing": []
+    },
+    "order": [
+      {
+        "id": "char_joe_01",
+        "skills": []
+      },
+      {
+        "id": "char_yuki_01",
+        "skills": []
+      },
+      {
+        "id": "char_daimon_01",
+        "skills": [
+          "SKD007"
+        ]
+      },
+      {
+        "id": "char_jihoon_01",
+        "skills": [
+          "SKD009"
+        ]
+      },
+      {
+        "id": "char_aoi_01",
+        "skills": [
+          "SKD040"
+        ]
+      }
+    ],
+    "actions": [
+      72,
+      92
+    ],
+    "meanActions": 78.215,
+    "coreCasts": {
+      "SKD007": 200,
+      "SKD009": 200,
+      "SKD040": 152
+    },
+    "loadout": [
+      {
+        "id": "char_joe_01",
+        "level": 34,
+        "awakening": 0,
+        "exp": 40140,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "北条氏康",
+        "skills": [],
+        "equipment": [
+          {
+            "instanceId": "audit-0-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "weapon",
+            "stats": {
+              "hp": 0,
+              "atk": 80.31943122714748,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-0-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "body",
+            "stats": {
+              "hp": 281.1180092950162,
+              "atk": 0,
+              "def": 8.031943122714747,
+              "luk": 0,
+              "sp": 0
+            }
+          }
+        ]
+      },
+      {
+        "id": "char_yuki_01",
+        "level": 34,
+        "awakening": 0,
+        "exp": 40140,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "竹中半兵衛",
+        "skills": [],
+        "equipment": [
+          {
+            "instanceId": "audit-1-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "weapon",
+            "stats": {
+              "hp": 0,
+              "atk": 80.31943122714748,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-1-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "body",
+            "stats": {
+              "hp": 281.1180092950162,
+              "atk": 0,
+              "def": 8.031943122714747,
+              "luk": 0,
+              "sp": 0
+            }
+          }
+        ]
+      },
+      {
+        "id": "char_daimon_01",
+        "level": 34,
+        "awakening": 0,
+        "exp": 40140,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "井伊直政",
+        "skills": [
+          {
+            "id": "SKD007",
+            "lb": 2
+          }
+        ],
+        "equipment": [
+          {
+            "instanceId": "audit-2-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "weapon",
+            "stats": {
+              "hp": 0,
+              "atk": 80.31943122714748,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-2-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "body",
+            "stats": {
+              "hp": 281.1180092950162,
+              "atk": 0,
+              "def": 8.031943122714747,
+              "luk": 0,
+              "sp": 0
+            }
+          }
+        ]
+      },
+      {
+        "id": "char_jihoon_01",
+        "level": 34,
+        "awakening": 0,
+        "exp": 40140,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "前田利家",
+        "skills": [
+          {
+            "id": "SKD009",
+            "lb": 2
+          }
+        ],
+        "equipment": [
+          {
+            "instanceId": "audit-3-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "weapon",
+            "stats": {
+              "hp": 0,
+              "atk": 80.31943122714748,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-3-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "body",
+            "stats": {
+              "hp": 281.1180092950162,
+              "atk": 0,
+              "def": 8.031943122714747,
+              "luk": 0,
+              "sp": 0
+            }
+          }
+        ]
+      },
+      {
+        "id": "char_aoi_01",
+        "level": 34,
+        "awakening": 0,
+        "exp": 40140,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "お市の方",
+        "skills": [
+          {
+            "id": "SKD040",
+            "lb": 2
+          }
+        ],
+        "equipment": [
+          {
+            "instanceId": "audit-4-0",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "weapon",
+            "stats": {
+              "hp": 0,
+              "atk": 80.31943122714748,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-4-2",
+            "masterId": "BODY_002",
+            "level": 20,
+            "lb": 0,
+            "exp": 4770,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "body",
+            "stats": {
+              "hp": 281.1180092950162,
+              "atk": 0,
+              "def": 8.031943122714747,
+              "luk": 0,
+              "sp": 0
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "alternative": {
+    "name": "defensive",
+    "wins": 200,
+    "n": 200,
+    "percent": 100,
+    "inputHash": "4625a18529c720f0a958663139bfddf5c55c39959d1c7108e615f832322acefe",
+    "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+    "assets": {
+      "covered": true,
+      "missing": []
+    },
+    "order": [
+      {
+        "id": "char_joe_01",
+        "skills": [
+          "SKD036"
+        ]
+      },
+      {
+        "id": "char_yuki_01",
+        "skills": [
+          "SKD037"
+        ]
+      },
+      {
+        "id": "char_daimon_01",
+        "skills": [
+          "SKD007"
+        ]
+      },
+      {
+        "id": "char_jihoon_01",
+        "skills": [
+          "SKD009"
+        ]
+      },
+      {
+        "id": "char_aoi_01",
+        "skills": [
+          "SKD043"
+        ]
+      }
+    ],
+    "actions": [
+      80,
+      103
+    ],
+    "meanActions": 88.04,
+    "coreCasts": {
+      "SKD036": 200,
+      "SKD037": 200,
+      "SKD007": 200,
+      "SKD009": 200,
+      "SKD043": 200
+    }
+  },
+  "early": null,
+  "enemyChanges": [
+    {
+      "enemy": "4-3/2/1",
+      "name": "立花誾千代",
+      "wave": 2,
+      "position": 1,
+      "path": "waves[1][0].stats.atk",
+      "field": "atk",
+      "before": 2870,
+      "after": 1274,
+      "reasons": [
+        "到達耐久で役割を維持できない主な攻撃源を調整",
+        "全派の実HP損失から主な攻撃・継続被害の発生源を局所調整"
+      ]
+    },
+    {
+      "enemy": "4-3/3/1",
+      "name": "伊達政宗",
+      "wave": 3,
+      "position": 1,
+      "path": "waves[2][0].stats.atk",
+      "field": "atk",
+      "before": 2870,
+      "after": 1274,
+      "reasons": [
+        "到達耐久で役割を維持できない主な攻撃源を調整",
+        "全派の実HP損失から主な攻撃・継続被害の発生源を局所調整"
+      ]
+    }
+  ],
+  "enemyPolicy": "回収済み43面273項目の案を継承。今回新たな敵数値変更なし。beforeが最新値と違う箇所は統合時に停止。",
+  "beforeSameParty": {
+    "name": "burst-focus-greater-heal",
+    "wins": 28,
+    "n": 200,
+    "percent": 14.000000000000002,
+    "inputHash": "393b5bf57d90dfc6fa37b05cf0f0c222b2698251a989c57e584876498d030eba",
+    "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+    "order": [
+      {
+        "id": "char_joe_01",
+        "skills": []
+      },
+      {
+        "id": "char_yuki_01",
+        "skills": []
+      },
+      {
+        "id": "char_daimon_01",
+        "skills": [
+          "SKD007"
+        ]
+      },
+      {
+        "id": "char_jihoon_01",
+        "skills": [
+          "SKD009"
+        ]
+      },
+      {
+        "id": "char_aoi_01",
+        "skills": [
+          "SKD040"
+        ]
+      }
+    ],
+    "actions": [
+      38,
+      97
+    ],
+    "meanActions": 58.83,
+    "coreCasts": {
+      "SKD007": 200,
+      "SKD009": 200,
+      "SKD040": 200
+    }
+  },
+  "orderContrasts": [
+    {
+      "base": {
+        "name": "burst-focus-greater-heal",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "b6a8dd7fd83877cca5c0f284d5f177d441b09c6b3230e748562102fe50d16f32",
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": []
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": []
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD007"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD040"
+            ]
+          }
+        ],
+        "actions": [
+          72,
+          92
+        ],
+        "meanActions": 78.215,
+        "coreCasts": {
+          "SKD007": 200,
+          "SKD009": 200,
+          "SKD040": 152
+        }
+      },
+      "changed": {
+        "name": "exact-party-order-reversed",
+        "wins": 2,
+        "n": 200,
+        "percent": 1,
+        "inputHash": "b3c337a7154d14da347fe982008ec80b688790f3c76d32c58b11a92d91dfd036",
+        "order": [
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD040"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD007"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": []
+          },
+          {
+            "id": "char_joe_01",
+            "skills": []
+          }
+        ],
+        "actions": [
+          81,
+          119
+        ],
+        "meanActions": 91.145,
+        "coreCasts": {
+          "SKD040": 200,
+          "SKD009": 200,
+          "SKD007": 200
+        }
+      },
+      "sameSeedSet": true,
+      "interpretation": "party順だけの対照。勝率差がない場合は勝敗への寄与確認とはしない。"
+    }
+  ],
+  "originalMissing": [],
+  "missingWithinBudget": [],
+  "tierRows": [
+    {
+      "label": "全勝",
+      "original": {
+        "name": "burst-focus-greater-heal",
+        "wins": 200,
+        "n": 200
+      },
+      "allSaved": {
+        "name": "burst-focus-greater-heal",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "b6a8dd7fd83877cca5c0f284d5f177d441b09c6b3230e748562102fe50d16f32",
+        "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": []
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": []
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD007"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD040"
+            ]
+          }
+        ],
+        "actions": [
+          72,
+          92
+        ],
+        "meanActions": 78.215,
+        "coreCasts": {
+          "SKD007": 200,
+          "SKD009": 200,
+          "SKD040": 152
+        }
+      },
+      "withinBudget": {
+        "name": "burst-focus-greater-heal",
+        "wins": 200,
+        "n": 200,
+        "percent": 100,
+        "inputHash": "b6a8dd7fd83877cca5c0f284d5f177d441b09c6b3230e748562102fe50d16f32",
+        "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": []
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": []
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD007"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD040"
+            ]
+          }
+        ],
+        "actions": [
+          72,
+          92
+        ],
+        "meanActions": 78.215,
+        "coreCasts": {
+          "SKD007": 200,
+          "SKD009": 200,
+          "SKD040": 152
+        }
+      },
+      "nearest": [
+        {
+          "name": "burst-focus-greater-heal",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "b6a8dd7fd83877cca5c0f284d5f177d441b09c6b3230e748562102fe50d16f32",
+          "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": []
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": []
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD007"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD040"
+              ]
+            }
+          ],
+          "actions": [
+            72,
+            92
+          ],
+          "meanActions": 78.215,
+          "coreCasts": {
+            "SKD007": 200,
+            "SKD009": 200,
+            "SKD040": 152
+          }
+        },
+        {
+          "name": "defensive",
+          "wins": 200,
+          "n": 200,
+          "percent": 100,
+          "inputHash": "4625a18529c720f0a958663139bfddf5c55c39959d1c7108e615f832322acefe",
+          "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD036"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD037"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD007"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD043"
+              ]
+            }
+          ],
+          "actions": [
+            80,
+            103
+          ],
+          "meanActions": 88.04,
+          "coreCasts": {
+            "SKD036": 200,
+            "SKD037": 200,
+            "SKD007": 200,
+            "SKD009": 200,
+            "SKD043": 200
+          }
+        },
+        {
+          "name": "support-feed",
+          "wins": 197,
+          "n": 200,
+          "percent": 98.5,
+          "inputHash": "1e1dc54cea3a2a44a97b234c08f21db37cc240a1efff325c2462f0253f025f9e",
+          "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": []
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD007"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            76,
+            157
+          ],
+          "meanActions": 99.43,
+          "coreCasts": {
+            "SKD035": 171,
+            "SKD007": 200,
+            "SKD009": 200,
+            "SKD039": 200
+          }
+        }
+      ],
+      "proposal": null
+    },
+    {
+      "label": "約60%",
+      "original": {
+        "name": "burst-focus-greater-heal-order-15342",
+        "wins": 130,
+        "n": 200
+      },
+      "allSaved": {
+        "name": "burst-focus-greater-heal-order-15342",
+        "wins": 130,
+        "n": 200,
+        "percent": 65,
+        "inputHash": "b8458b8e0429661f2abe3ae982e6c64e3c1ac01602a76403c5d46d4c0c873dc6",
+        "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": []
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD040"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD007"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": []
+          }
+        ],
+        "actions": [
+          74,
+          123
+        ],
+        "meanActions": 94.72,
+        "coreCasts": {
+          "SKD040": 199,
+          "SKD007": 200,
+          "SKD009": 200
+        }
+      },
+      "withinBudget": {
+        "name": "burst-focus-greater-heal-order-15342",
+        "wins": 130,
+        "n": 200,
+        "percent": 65,
+        "inputHash": "b8458b8e0429661f2abe3ae982e6c64e3c1ac01602a76403c5d46d4c0c873dc6",
+        "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_joe_01",
+            "skills": []
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD040"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD007"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": []
+          }
+        ],
+        "actions": [
+          74,
+          123
+        ],
+        "meanActions": 94.72,
+        "coreCasts": {
+          "SKD040": 199,
+          "SKD007": 200,
+          "SKD009": 200
+        }
+      },
+      "nearest": [
+        {
+          "name": "burst-focus-greater-heal-order-15342",
+          "wins": 130,
+          "n": 200,
+          "percent": 65,
+          "inputHash": "b8458b8e0429661f2abe3ae982e6c64e3c1ac01602a76403c5d46d4c0c873dc6",
+          "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": []
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD040"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD007"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": []
+            }
+          ],
+          "actions": [
+            74,
+            123
+          ],
+          "meanActions": 94.72,
+          "coreCasts": {
+            "SKD040": 199,
+            "SKD007": 200,
+            "SKD009": 200
+          }
+        },
+        {
+          "name": "cheap-attacks",
+          "wins": 155,
+          "n": 200,
+          "percent": 77.5,
+          "inputHash": "3975e8a35b3801d86ead23a9ed537a9ab5137e4369c7a8c56d9b1a4feef205e4",
+          "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            }
+          ],
+          "actions": [
+            80,
+            178
+          ],
+          "meanActions": 114.74,
+          "coreCasts": {
+            "SKD003": 200,
+            "SKD035": 18,
+            "SKD039": 200
+          }
+        },
+        {
+          "name": "burst-focus-greater-heal-order-35142",
+          "wins": 53,
+          "n": 200,
+          "percent": 26.5,
+          "inputHash": "256f75954546930d88edd5277f33815f41d581c171cc3135fbffc13a82fb52a6",
+          "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD007"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD040"
+              ]
+            },
+            {
+              "id": "char_joe_01",
+              "skills": []
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": []
+            }
+          ],
+          "actions": [
+            79,
+            168
+          ],
+          "meanActions": 103.1,
+          "coreCasts": {
+            "SKD007": 200,
+            "SKD040": 200,
+            "SKD009": 200
+          }
+        }
+      ],
+      "proposal": null
+    },
+    {
+      "label": "約30%",
+      "original": {
+        "name": "burst-focus-greater-heal-order-35142",
+        "wins": 53,
+        "n": 200
+      },
+      "allSaved": {
+        "name": "burst-focus-greater-heal-order-35142",
+        "wins": 53,
+        "n": 200,
+        "percent": 26.5,
+        "inputHash": "256f75954546930d88edd5277f33815f41d581c171cc3135fbffc13a82fb52a6",
+        "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD007"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD040"
+            ]
+          },
+          {
+            "id": "char_joe_01",
+            "skills": []
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": []
+          }
+        ],
+        "actions": [
+          79,
+          168
+        ],
+        "meanActions": 103.1,
+        "coreCasts": {
+          "SKD007": 200,
+          "SKD040": 200,
+          "SKD009": 200
+        }
+      },
+      "withinBudget": {
+        "name": "burst-focus-greater-heal-order-35142",
+        "wins": 53,
+        "n": 200,
+        "percent": 26.5,
+        "inputHash": "256f75954546930d88edd5277f33815f41d581c171cc3135fbffc13a82fb52a6",
+        "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD007"
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD040"
+            ]
+          },
+          {
+            "id": "char_joe_01",
+            "skills": []
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": []
+          }
+        ],
+        "actions": [
+          79,
+          168
+        ],
+        "meanActions": 103.1,
+        "coreCasts": {
+          "SKD007": 200,
+          "SKD040": 200,
+          "SKD009": 200
+        }
+      },
+      "nearest": [
+        {
+          "name": "burst-focus-greater-heal-order-35142",
+          "wins": 53,
+          "n": 200,
+          "percent": 26.5,
+          "inputHash": "256f75954546930d88edd5277f33815f41d581c171cc3135fbffc13a82fb52a6",
+          "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD007"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD040"
+              ]
+            },
+            {
+              "id": "char_joe_01",
+              "skills": []
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": []
+            }
+          ],
+          "actions": [
+            79,
+            168
+          ],
+          "meanActions": 103.1,
+          "coreCasts": {
+            "SKD007": 200,
+            "SKD040": 200,
+            "SKD009": 200
+          }
+        },
+        {
+          "name": "area-boost",
+          "wins": 36,
+          "n": 200,
+          "percent": 18,
+          "inputHash": "1a33893368b610741db5aaa0ae377f87075b33b120ebee5b6d593289ace1e9f7",
+          "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD003"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD019"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD019"
+              ]
+            },
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD041"
+              ]
+            }
+          ],
+          "actions": [
+            76,
+            101
+          ],
+          "meanActions": 88.085,
+          "coreCasts": {
+            "SKD003": 200,
+            "SKD035": 200,
+            "SKD019": 200,
+            "SKD041": 196
+          }
+        },
+        {
+          "name": "burst-focus-greater-heal-order-53421",
+          "wins": 2,
+          "n": 200,
+          "percent": 1,
+          "inputHash": "1c5bfbe783b392aade84524cd4ac19fb9ea3777e0b9ca100e3e964ee282785b1",
+          "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD040"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD007"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": []
+            },
+            {
+              "id": "char_joe_01",
+              "skills": []
+            }
+          ],
+          "actions": [
+            78,
+            116
+          ],
+          "meanActions": 90.375,
+          "coreCasts": {
+            "SKD040": 200,
+            "SKD007": 200,
+            "SKD009": 200
+          }
+        }
+      ],
+      "proposal": null
+    },
+    {
+      "label": "0%超～10%",
+      "original": {
+        "name": "burst-focus-greater-heal-order-53421",
+        "wins": 2,
+        "n": 200
+      },
+      "allSaved": {
+        "name": "burst-focus-greater-heal-order-53421",
+        "wins": 2,
+        "n": 200,
+        "percent": 1,
+        "inputHash": "1c5bfbe783b392aade84524cd4ac19fb9ea3777e0b9ca100e3e964ee282785b1",
+        "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD040"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD007"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": []
+          },
+          {
+            "id": "char_joe_01",
+            "skills": []
+          }
+        ],
+        "actions": [
+          78,
+          116
+        ],
+        "meanActions": 90.375,
+        "coreCasts": {
+          "SKD040": 200,
+          "SKD007": 200,
+          "SKD009": 200
+        }
+      },
+      "withinBudget": {
+        "name": "burst-focus-greater-heal-order-53421",
+        "wins": 2,
+        "n": 200,
+        "percent": 1,
+        "inputHash": "1c5bfbe783b392aade84524cd4ac19fb9ea3777e0b9ca100e3e964ee282785b1",
+        "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD040"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD007"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": []
+          },
+          {
+            "id": "char_joe_01",
+            "skills": []
+          }
+        ],
+        "actions": [
+          78,
+          116
+        ],
+        "meanActions": 90.375,
+        "coreCasts": {
+          "SKD040": 200,
+          "SKD007": 200,
+          "SKD009": 200
+        }
+      },
+      "nearest": [
+        {
+          "name": "burst-focus-greater-heal-order-53421",
+          "wins": 2,
+          "n": 200,
+          "percent": 1,
+          "inputHash": "1c5bfbe783b392aade84524cd4ac19fb9ea3777e0b9ca100e3e964ee282785b1",
+          "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD040"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD007"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": []
+            },
+            {
+              "id": "char_joe_01",
+              "skills": []
+            }
+          ],
+          "actions": [
+            78,
+            116
+          ],
+          "meanActions": 90.375,
+          "coreCasts": {
+            "SKD040": 200,
+            "SKD007": 200,
+            "SKD009": 200
+          }
+        },
+        {
+          "name": "exact-party-order-reversed",
+          "wins": 2,
+          "n": 200,
+          "percent": 1,
+          "inputHash": "b3c337a7154d14da347fe982008ec80b688790f3c76d32c58b11a92d91dfd036",
+          "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD040"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD007"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": []
+            },
+            {
+              "id": "char_joe_01",
+              "skills": []
+            }
+          ],
+          "actions": [
+            81,
+            119
+          ],
+          "meanActions": 91.145,
+          "coreCasts": {
+            "SKD040": 200,
+            "SKD009": 200,
+            "SKD007": 200
+          }
+        },
+        {
+          "name": "attack-up-reversed",
+          "wins": 0,
+          "n": 200,
+          "percent": 0,
+          "inputHash": "97e2187f94ae266bae26090667c5cc62eb25e046ad817f6bf685943b6e16a2f6",
+          "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD007"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD003"
+              ]
+            }
+          ],
+          "actions": [
+            74,
+            98
+          ],
+          "meanActions": 87.86,
+          "coreCasts": {
+            "SKD039": 200,
+            "SKD009": 200,
+            "SKD007": 200,
+            "SKD035": 200,
+            "SKD003": 200
+          }
+        }
+      ],
+      "proposal": null
+    },
+    {
+      "label": "観測0%",
+      "original": {
+        "name": "attack-up-reversed",
+        "wins": 0,
+        "n": 200
+      },
+      "allSaved": {
+        "name": "attack-up-reversed",
+        "wins": 0,
+        "n": 200,
+        "percent": 0,
+        "inputHash": "97e2187f94ae266bae26090667c5cc62eb25e046ad817f6bf685943b6e16a2f6",
+        "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD007"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          }
+        ],
+        "actions": [
+          74,
+          98
+        ],
+        "meanActions": 87.86,
+        "coreCasts": {
+          "SKD039": 200,
+          "SKD009": 200,
+          "SKD007": 200,
+          "SKD035": 200,
+          "SKD003": 200
+        }
+      },
+      "withinBudget": {
+        "name": "attack-up-reversed",
+        "wins": 0,
+        "n": 200,
+        "percent": 0,
+        "inputHash": "97e2187f94ae266bae26090667c5cc62eb25e046ad817f6bf685943b6e16a2f6",
+        "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+        "assets": {
+          "covered": true,
+          "missing": []
+        },
+        "order": [
+          {
+            "id": "char_aoi_01",
+            "skills": [
+              "SKD039"
+            ]
+          },
+          {
+            "id": "char_jihoon_01",
+            "skills": [
+              "SKD009"
+            ]
+          },
+          {
+            "id": "char_daimon_01",
+            "skills": [
+              "SKD007"
+            ]
+          },
+          {
+            "id": "char_yuki_01",
+            "skills": [
+              "SKD035"
+            ]
+          },
+          {
+            "id": "char_joe_01",
+            "skills": [
+              "SKD003"
+            ]
+          }
+        ],
+        "actions": [
+          74,
+          98
+        ],
+        "meanActions": 87.86,
+        "coreCasts": {
+          "SKD039": 200,
+          "SKD009": 200,
+          "SKD007": 200,
+          "SKD035": 200,
+          "SKD003": 200
+        }
+      },
+      "nearest": [
+        {
+          "name": "attack-up-reversed",
+          "wins": 0,
+          "n": 200,
+          "percent": 0,
+          "inputHash": "97e2187f94ae266bae26090667c5cc62eb25e046ad817f6bf685943b6e16a2f6",
+          "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD039"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD007"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": [
+                "SKD035"
+              ]
+            },
+            {
+              "id": "char_joe_01",
+              "skills": [
+                "SKD003"
+              ]
+            }
+          ],
+          "actions": [
+            74,
+            98
+          ],
+          "meanActions": 87.86,
+          "coreCasts": {
+            "SKD039": 200,
+            "SKD009": 200,
+            "SKD007": 200,
+            "SKD035": 200,
+            "SKD003": 200
+          }
+        },
+        {
+          "name": "burst-focus-greater-heal-order-53421",
+          "wins": 2,
+          "n": 200,
+          "percent": 1,
+          "inputHash": "1c5bfbe783b392aade84524cd4ac19fb9ea3777e0b9ca100e3e964ee282785b1",
+          "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD040"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD007"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": []
+            },
+            {
+              "id": "char_joe_01",
+              "skills": []
+            }
+          ],
+          "actions": [
+            78,
+            116
+          ],
+          "meanActions": 90.375,
+          "coreCasts": {
+            "SKD040": 200,
+            "SKD007": 200,
+            "SKD009": 200
+          }
+        },
+        {
+          "name": "exact-party-order-reversed",
+          "wins": 2,
+          "n": 200,
+          "percent": 1,
+          "inputHash": "b3c337a7154d14da347fe982008ec80b688790f3c76d32c58b11a92d91dfd036",
+          "evidence": "docs/verification/stage68-five-tier-20260926/4-3-validated.json.gz",
+          "assets": {
+            "covered": true,
+            "missing": []
+          },
+          "order": [
+            {
+              "id": "char_aoi_01",
+              "skills": [
+                "SKD040"
+              ]
+            },
+            {
+              "id": "char_jihoon_01",
+              "skills": [
+                "SKD009"
+              ]
+            },
+            {
+              "id": "char_daimon_01",
+              "skills": [
+                "SKD007"
+              ]
+            },
+            {
+              "id": "char_yuki_01",
+              "skills": []
+            },
+            {
+              "id": "char_joe_01",
+              "skills": []
+            }
+          ],
+          "actions": [
+            81,
+            119
+          ],
+          "meanActions": 91.145,
+          "coreCasts": {
+            "SKD040": 200,
+            "SKD009": 200,
+            "SKD007": 200
+          }
+        }
+      ],
+      "proposal": null
+    }
+  ],
+  "observedRates": [
+    0,
+    1,
+    18,
+    26.5,
+    65,
+    77.5,
+    95,
+    98.5,
+    100
+  ],
+  "cause": "限られた編成/攻撃順の標本で、該当帯を挟む中間入力が未検証。区分境界への丸めや未所持技の流用では補わない。",
+  "exactProposals": [],
+  "supply": {
+    "requiredAssets": {
+      "characters": [
+        {
+          "id": "char_joe_01",
+          "level": 34,
+          "awakening": 0,
+          "exp": 40140,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921",
+          "name": "北条氏康",
+          "source": "チュートリアル完了時"
+        },
+        {
+          "id": "char_daimon_01",
+          "level": 34,
+          "awakening": 0,
+          "exp": 40140,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921",
+          "name": "井伊直政",
+          "source": "チュートリアル完了時"
+        },
+        {
+          "id": "char_aoi_01",
+          "level": 34,
+          "awakening": 0,
+          "exp": 40140,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921",
+          "name": "お市の方",
+          "source": "チュートリアル完了時"
+        },
+        {
+          "id": "char_jihoon_01",
+          "level": 34,
+          "awakening": 0,
+          "exp": 40140,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921",
+          "name": "前田利家",
+          "source": "1-1初回クリア後"
+        },
+        {
+          "id": "char_yuki_01",
+          "level": 34,
+          "awakening": 0,
+          "exp": 40140,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921",
+          "name": "竹中半兵衛",
+          "source": "1-3初回クリア後"
+        }
+      ],
+      "skills": [
+        {
+          "id": "SKD003",
+          "level": 2,
+          "name": "土割り",
+          "source": {
+            "status": "CURRENT",
+            "where": "チュートリアル完了時"
+          }
+        },
+        {
+          "id": "SKD039",
+          "level": 2,
+          "name": "応急手当",
+          "source": {
+            "status": "CURRENT",
+            "where": "チュートリアル完了時"
+          }
+        },
+        {
+          "id": "SKD035",
+          "level": 2,
+          "name": "鬨の声",
+          "source": {
+            "status": "CURRENT",
+            "where": "チュートリアル完了時"
+          }
+        },
+        {
+          "id": "SKD009",
+          "level": 2,
+          "name": "岩断",
+          "source": {
+            "status": "CURRENT",
+            "where": "1-2クリア報酬/任務受領後"
+          }
+        },
+        {
+          "id": "SKD038",
+          "level": 2,
+          "name": "鎧砕き",
+          "source": {
+            "status": "PROPOSED",
+            "source": "追加提案・前面初回確定",
+            "stage": "2-5"
+          }
+        },
+        {
+          "id": "SKD010",
+          "level": 2,
+          "name": "風断",
+          "source": {
+            "status": "PROPOSED",
+            "source": "追加提案・前面初回確定",
+            "stage": "2-5"
+          }
+        },
+        {
+          "id": "SKD040",
+          "level": 2,
+          "name": "治癒の祈り",
+          "source": {
+            "status": "PROPOSED",
+            "source": "追加提案・前面初回確定",
+            "stage": "2-5"
+          }
+        },
+        {
+          "id": "SKD043",
+          "level": 2,
+          "name": "再生の祈り",
+          "source": {
+            "status": "PROPOSED",
+            "source": "追加提案・前面初回確定",
+            "stage": "3-4"
+          }
+        },
+        {
+          "id": "SKD049",
+          "level": 2,
+          "name": "返し刃",
+          "source": {
+            "status": "PROPOSED",
+            "source": "追加提案・前面初回確定",
+            "stage": "3-5"
+          }
+        },
+        {
+          "id": "SKD036",
+          "level": 2,
+          "name": "守りの陣",
+          "source": {
+            "status": "PROPOSED",
+            "source": "追加提案・前面初回確定",
+            "stage": "3-5"
+          }
+        },
+        {
+          "id": "SKD037",
+          "level": 2,
+          "name": "威圧",
+          "source": {
+            "status": "PROPOSED",
+            "source": "追加提案・前面初回確定",
+            "stage": "3-5"
+          }
+        },
+        {
+          "id": "SKD007",
+          "level": 2,
+          "name": "炎断",
+          "source": {
+            "status": "PROPOSED",
+            "source": "追加提案・前面初回確定",
+            "stage": "4-1"
+          }
+        },
+        {
+          "id": "SKD019",
+          "level": 2,
+          "name": "火の薙ぎ",
+          "source": {
+            "status": "CURRENT",
+            "where": "1-4クリア報酬/任務受領後"
+          }
+        },
+        {
+          "id": "SKD041",
+          "level": 2,
+          "name": "小休止",
+          "source": {
+            "status": "PROPOSED",
+            "source": "追加提案・前面初回確定",
+            "stage": "4-1"
+          }
+        },
+        {
+          "id": "SKD026",
+          "level": 2,
+          "name": "後陣射ち",
+          "source": {
+            "status": "PROPOSED",
+            "source": "追加提案・前面初回確定",
+            "stage": "4-2"
+          }
+        },
+        {
+          "id": "SKD027",
+          "level": 2,
+          "name": "追い討ち",
+          "source": {
+            "status": "PROPOSED",
+            "source": "追加提案・前面初回確定",
+            "stage": "4-2"
+          }
+        }
+      ],
+      "equipment": [
+        {
+          "instanceId": "WEAPON_001:1",
+          "masterId": "WEAPON_001",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "BODY_002:1",
+          "masterId": "BODY_002",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "WEAPON_001:2",
+          "masterId": "WEAPON_001",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "BODY_002:2",
+          "masterId": "BODY_002",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "WEAPON_001:3",
+          "masterId": "WEAPON_001",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "BODY_002:3",
+          "masterId": "BODY_002",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "WEAPON_001:4",
+          "masterId": "WEAPON_001",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "BODY_002:4",
+          "masterId": "BODY_002",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "WEAPON_001:5",
+          "masterId": "WEAPON_001",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        },
+        {
+          "instanceId": "BODY_002:5",
+          "masterId": "BODY_002",
+          "level": 20,
+          "lb": 0,
+          "exp": 4770,
+          "growthVersion": "APPROVED_GROWTH_V1_20260921"
+        }
+      ],
+      "awakeningSouls": {
+        "char_joe_01": 0,
+        "char_daimon_01": 0,
+        "char_aoi_01": 0,
+        "char_jihoon_01": 0,
+        "char_yuki_01": 0
+      },
+      "cumulativeTrainingCost": {
+        "fromLevel1": true,
+        "charExp": 200700,
+        "eqExp": 47700,
+        "cash": 320550,
+        "skillMaterials": 96,
+        "equipmentMaterials": 0,
+        "awakeningSouls": {
+          "char_joe_01": 0,
+          "char_daimon_01": 0,
+          "char_aoi_01": 0,
+          "char_jihoon_01": 0,
+          "char_yuki_01": 0
+        },
+        "acquisitionCostsExcluded": true
+      }
+    },
+    "currentBeforeStage": {
+      "skills": [
+        {
+          "id": "SKD003",
+          "name": "土割り",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD035",
+          "name": "鬨の声",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD039",
+          "name": "応急手当",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "SKD009",
+          "name": "岩断",
+          "where": "1-2クリア報酬/任務受領後"
+        },
+        {
+          "id": "SKD019",
+          "name": "火の薙ぎ",
+          "where": "1-4クリア報酬/任務受領後"
+        }
+      ],
+      "characters": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "where": "チュートリアル完了時"
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "where": "1-1初回クリア後"
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "where": "1-3初回クリア後"
+        }
+      ],
+      "gear": [],
+      "resources": {
+        "cash": 121700,
+        "charExp": 64300,
+        "eqExp": 14400,
+        "skillMaterials": 16,
+        "genericR": 0
+      }
+    },
+    "additionsHere": [
+      {
+        "beforeStage": "4-3",
+        "grantOn": "4-2",
+        "stageId": "omi-2",
+        "path": "firstRewards append",
+        "status": "UNAPPROVED",
+        "rewards": [
+          {
+            "kind": "skill",
+            "id": "SKD026",
+            "amount": 1
+          },
+          {
+            "kind": "skill",
+            "id": "SKD027",
+            "amount": 1
+          },
+          {
+            "kind": "cash",
+            "amount": 32200
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "xlarge",
+            "amount": 1
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "medium",
+            "amount": 4
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "small",
+            "amount": 9
+          },
+          {
+            "kind": "skill_material",
+            "amount": 12
+          }
+        ],
+        "reason": "同育成で主経路と別戦法を切替可能にする確定供給。既存報酬は全て保持"
+      }
+    ],
+    "allPreStageAdditions": [
+      {
+        "beforeStage": "3-1",
+        "grantOn": "2-5",
+        "stageId": "owari-5",
+        "path": "firstRewards append",
+        "status": "UNAPPROVED",
+        "rewards": [
+          {
+            "kind": "skill",
+            "id": "SKD038",
+            "amount": 1
+          },
+          {
+            "kind": "skill",
+            "id": "SKD010",
+            "amount": 1
+          },
+          {
+            "kind": "skill",
+            "id": "SKD040",
+            "amount": 1
+          },
+          {
+            "kind": "cash",
+            "amount": 12050
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "small",
+            "amount": 1
+          },
+          {
+            "kind": "skill_material",
+            "amount": 26
+          }
+        ],
+        "reason": "同育成で主経路と別戦法を切替可能にする確定供給。既存報酬は全て保持"
+      },
+      {
+        "beforeStage": "3-2",
+        "grantOn": "3-1",
+        "stageId": "mino-1",
+        "path": "firstRewards append",
+        "status": "UNAPPROVED",
+        "rewards": [
+          {
+            "kind": "cash",
+            "amount": 10500
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "large",
+            "amount": 2
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "medium",
+            "amount": 4
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "small",
+            "amount": 1
+          }
+        ],
+        "reason": "同育成で主経路と別戦法を切替可能にする確定供給。既存報酬は全て保持"
+      },
+      {
+        "beforeStage": "3-3",
+        "grantOn": "3-2",
+        "stageId": "mino-2",
+        "path": "firstRewards append",
+        "status": "UNAPPROVED",
+        "rewards": [
+          {
+            "kind": "cash",
+            "amount": 12250
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "large",
+            "amount": 3
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "small",
+            "amount": 8
+          }
+        ],
+        "reason": "同育成で主経路と別戦法を切替可能にする確定供給。既存報酬は全て保持"
+      },
+      {
+        "beforeStage": "3-4",
+        "grantOn": "3-3",
+        "stageId": "mino-3",
+        "path": "firstRewards append",
+        "status": "UNAPPROVED",
+        "rewards": [
+          {
+            "kind": "cash",
+            "amount": 14050
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "large",
+            "amount": 3
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "medium",
+            "amount": 2
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "small",
+            "amount": 7
+          }
+        ],
+        "reason": "同育成で主経路と別戦法を切替可能にする確定供給。既存報酬は全て保持"
+      },
+      {
+        "beforeStage": "3-5",
+        "grantOn": "3-4",
+        "stageId": "mino-4",
+        "path": "firstRewards append",
+        "status": "UNAPPROVED",
+        "rewards": [
+          {
+            "kind": "skill",
+            "id": "SKD043",
+            "amount": 1
+          },
+          {
+            "kind": "cash",
+            "amount": 21900
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "large",
+            "amount": 3
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "medium",
+            "amount": 4
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "small",
+            "amount": 5
+          },
+          {
+            "kind": "skill_material",
+            "amount": 6
+          }
+        ],
+        "reason": "同育成で主経路と別戦法を切替可能にする確定供給。既存報酬は全て保持"
+      },
+      {
+        "beforeStage": "4-1",
+        "grantOn": "3-5",
+        "stageId": "mino-5",
+        "path": "firstRewards append",
+        "status": "UNAPPROVED",
+        "rewards": [
+          {
+            "kind": "skill",
+            "id": "SKD049",
+            "amount": 1
+          },
+          {
+            "kind": "skill",
+            "id": "SKD036",
+            "amount": 1
+          },
+          {
+            "kind": "skill",
+            "id": "SKD037",
+            "amount": 1
+          },
+          {
+            "kind": "equipment",
+            "id": "WEAPON_001",
+            "amount": 5
+          },
+          {
+            "kind": "equipment",
+            "id": "BODY_002",
+            "amount": 5
+          },
+          {
+            "kind": "cash",
+            "amount": 59650
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "xlarge",
+            "amount": 1
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "medium",
+            "amount": 1
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "small",
+            "amount": 4
+          },
+          {
+            "kind": "equipment_exp_item",
+            "id": "xlarge",
+            "amount": 1
+          },
+          {
+            "kind": "equipment_exp_item",
+            "id": "large",
+            "amount": 2
+          },
+          {
+            "kind": "equipment_exp_item",
+            "id": "medium",
+            "amount": 4
+          },
+          {
+            "kind": "equipment_exp_item",
+            "id": "small",
+            "amount": 7
+          },
+          {
+            "kind": "skill_material",
+            "amount": 18
+          }
+        ],
+        "reason": "同育成で主経路と別戦法を切替可能にする確定供給。既存報酬は全て保持"
+      },
+      {
+        "beforeStage": "4-2",
+        "grantOn": "4-1",
+        "stageId": "omi-1",
+        "path": "firstRewards append",
+        "status": "UNAPPROVED",
+        "rewards": [
+          {
+            "kind": "skill",
+            "id": "SKD007",
+            "amount": 1
+          },
+          {
+            "kind": "skill",
+            "id": "SKD041",
+            "amount": 1
+          },
+          {
+            "kind": "cash",
+            "amount": 36250
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "xlarge",
+            "amount": 1
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "medium",
+            "amount": 2
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "small",
+            "amount": 9
+          },
+          {
+            "kind": "skill_material",
+            "amount": 18
+          }
+        ],
+        "reason": "同育成で主経路と別戦法を切替可能にする確定供給。既存報酬は全て保持"
+      },
+      {
+        "beforeStage": "4-3",
+        "grantOn": "4-2",
+        "stageId": "omi-2",
+        "path": "firstRewards append",
+        "status": "UNAPPROVED",
+        "rewards": [
+          {
+            "kind": "skill",
+            "id": "SKD026",
+            "amount": 1
+          },
+          {
+            "kind": "skill",
+            "id": "SKD027",
+            "amount": 1
+          },
+          {
+            "kind": "cash",
+            "amount": 32200
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "xlarge",
+            "amount": 1
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "medium",
+            "amount": 4
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "small",
+            "amount": 9
+          },
+          {
+            "kind": "skill_material",
+            "amount": 12
+          }
+        ],
+        "reason": "同育成で主経路と別戦法を切替可能にする確定供給。既存報酬は全て保持"
+      }
+    ],
+    "optionA": {
+      "status": "UNAPPROVED_SUPPLY_REQUIRED",
+      "cumulativeAdded": {
+        "cash": 198850,
+        "charExp": 136400,
+        "eqExp": 34700,
+        "skillMaterials": 80,
+        "genericR": 0
+      },
+      "mandatoryFarmSuccesses": 0
+    },
+    "optionB": {
+      "status": "UNAPPROVED_CONDITIONAL_ON_ITEM_SUPPLY",
+      "keepKinds": [
+        "skill",
+        "equipment",
+        "skill_material",
+        "generic_soul"
+      ],
+      "priorStage": "4-2",
+      "repeatRewards": [
+        {
+          "kind": "cash",
+          "amount": 1600
+        },
+        {
+          "kind": "character_exp_item",
+          "id": "small",
+          "amount": 5
+        },
+        {
+          "kind": "equipment_exp_item",
+          "id": "small",
+          "amount": 3
+        }
+      ],
+      "successfulClears": 50,
+      "energy": 300,
+      "cumulativeSuccessfulClears": 397,
+      "cumulativeEnergy": 2081,
+      "farmIncome": {
+        "cash": 508400,
+        "charExp": 136700,
+        "eqExp": 87400
+      },
+      "shortageBeforeFarming": {
+        "cash": 0,
+        "charExp": 24700,
+        "eqExp": 0
+      },
+      "note": "累積周回収入を繰越す逐次案。前面の既検証育成だけで周回する。回数は成功回数で、失敗・行動力回復待ち・実時間は含まない。現在面初回報酬は未計上。"
+    },
+    "optionC": {
+      "status": "NOT_GUARANTEED",
+      "missingCurrentSkills": [
+        "SKD007",
+        "SKD040",
+        "SKD036",
+        "SKD037",
+        "SKD043"
+      ],
+      "missingCurrentEquipment": [
+        "WEAPON_001",
+        "BODY_002"
+      ],
+      "resourceGap": {
+        "cash": 198850,
+        "charExp": 136400,
+        "eqExp": 33300,
+        "skillMaterials": 80,
+        "genericR": 0
+      },
+      "recommendation": "追加しないなら、現行確定スキルだけ・未配布装備なし・初期R覚醒0へ編成を再設計し、その条件で敵を再評価する。現候補の勝率を流用しない。ガチャ/ランダム魂を確定入手としない。",
+      "sameLevelPossible": true,
+      "exactCandidateEvidence": "docs/verification/stage68-decision-20260927/no-add/4-3.json.gz",
+      "exactCandidates": [
+        {
+          "name": "starter-single",
+          "status": "UNTESTED",
+          "loadout": [
+            {
+              "id": "char_joe_01",
+              "level": 20,
+              "awakening": 0,
+              "exp": 11910,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921",
+              "name": "北条氏康",
+              "skills": [
+                {
+                  "id": "SKD003",
+                  "lb": 0
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "id": "char_yuki_01",
+              "level": 20,
+              "awakening": 0,
+              "exp": 11910,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921",
+              "name": "竹中半兵衛",
+              "skills": [
+                {
+                  "id": "SKD035",
+                  "lb": 0
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "id": "char_daimon_01",
+              "level": 20,
+              "awakening": 0,
+              "exp": 11910,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921",
+              "name": "井伊直政",
+              "skills": [
+                {
+                  "id": "SKD009",
+                  "lb": 0
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "id": "char_jihoon_01",
+              "level": 20,
+              "awakening": 0,
+              "exp": 11910,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921",
+              "name": "前田利家",
+              "skills": [
+                {
+                  "id": "SKD009",
+                  "lb": 0
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "id": "char_aoi_01",
+              "level": 20,
+              "awakening": 0,
+              "exp": 11910,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921",
+              "name": "お市の方",
+              "skills": [
+                {
+                  "id": "SKD039",
+                  "lb": 0
+                }
+              ],
+              "equipment": []
+            }
+          ],
+          "costs": {
+            "fromLevel1": true,
+            "charExp": 59550,
+            "eqExp": 0,
+            "cash": 59550,
+            "skillMaterials": 0,
+            "equipmentMaterials": 0,
+            "awakeningSouls": {
+              "char_joe_01": 0,
+              "char_yuki_01": 0,
+              "char_daimon_01": 0,
+              "char_jihoon_01": 0,
+              "char_aoi_01": 0
+            },
+            "acquisitionCostsExcluded": true
+          },
+          "inputHash": "0c43675af69deed6f663a2370a471b7215070a6a6aa1cd7007f6cc24bd68d386"
+        },
+        {
+          "name": "starter-area",
+          "status": "UNTESTED",
+          "loadout": [
+            {
+              "id": "char_joe_01",
+              "level": 20,
+              "awakening": 0,
+              "exp": 11910,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921",
+              "name": "北条氏康",
+              "skills": [],
+              "equipment": []
+            },
+            {
+              "id": "char_yuki_01",
+              "level": 20,
+              "awakening": 0,
+              "exp": 11910,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921",
+              "name": "竹中半兵衛",
+              "skills": [],
+              "equipment": []
+            },
+            {
+              "id": "char_daimon_01",
+              "level": 20,
+              "awakening": 0,
+              "exp": 11910,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921",
+              "name": "井伊直政",
+              "skills": [
+                {
+                  "id": "SKD019",
+                  "lb": 0
+                }
+              ],
+              "equipment": []
+            },
+            {
+              "id": "char_jihoon_01",
+              "level": 20,
+              "awakening": 0,
+              "exp": 11910,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921",
+              "name": "前田利家",
+              "skills": [],
+              "equipment": []
+            },
+            {
+              "id": "char_aoi_01",
+              "level": 20,
+              "awakening": 0,
+              "exp": 11910,
+              "growthVersion": "APPROVED_GROWTH_V1_20260921",
+              "name": "お市の方",
+              "skills": [
+                {
+                  "id": "SKD039",
+                  "lb": 0
+                }
+              ],
+              "equipment": []
+            }
+          ],
+          "costs": {
+            "fromLevel1": true,
+            "charExp": 59550,
+            "eqExp": 0,
+            "cash": 59550,
+            "skillMaterials": 0,
+            "equipmentMaterials": 0,
+            "awakeningSouls": {
+              "char_joe_01": 0,
+              "char_yuki_01": 0,
+              "char_daimon_01": 0,
+              "char_jihoon_01": 0,
+              "char_aoi_01": 0
+            },
+            "acquisitionCostsExcluded": true
+          },
+          "inputHash": "e05fcf62c8e45f2f9a7656405cdbf274308dabe879609e32c38d4181cb1c6099"
+        }
+      ],
+      "note": "既クリア各面1回+ステージ/エリア任務の既存収入だけ。初期確定5名/技5種、装備なし、技LB0、覚醒0、資源内のLvに制限。仮に前面まで到達済でも成立するかの下限比較で、そこまでの連続到達を保証しない。五段階の同育成比較へ混ぜない。敵は回収済み提案入力なので現行敵での勝率とも呼ばない。"
+    }
+  },
+  "stall": null,
+  "remaining": [
+    "追加供給案の承認前。現行仕様の成立とはしない",
+    "実機受入・G5未通過"
+  ]
+}

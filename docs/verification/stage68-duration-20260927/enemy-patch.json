@@ -1,0 +1,315 @@
+[
+  {
+    "stage": "7-7",
+    "wave": 4,
+    "position": 1,
+    "enemy": "7-7/4/1",
+    "field": "stats",
+    "before": {
+      "luk": 0,
+      "hp": 6908,
+      "atk": 2512,
+      "def": 3120,
+      "sp": 130
+    },
+    "after": {
+      "luk": 0,
+      "hp": 5526,
+      "atk": 2512,
+      "def": 3120,
+      "sp": 130
+    }
+  },
+  {
+    "stage": "7-7",
+    "wave": 4,
+    "position": 1,
+    "enemy": "7-7/4/1",
+    "field": "skills",
+    "before": [
+      {
+        "id": "7-7/4/1/pressure-16-p1.6",
+        "name": "長期戦の強打",
+        "image": "",
+        "rarity": "N",
+        "element": "earth",
+        "spCost": 1,
+        "condition": {
+          "type": "every_n_actions",
+          "value": 16
+        },
+        "target": "all_enemies",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 928
+          }
+        ],
+        "description": "自身の16行動ごとに全体へ強打。共通計算式を使用。"
+      }
+    ],
+    "after": [
+      {
+        "id": "7-7/4/1/pressure-16-p1.6",
+        "name": "長期戦の強打",
+        "image": "",
+        "rarity": "N",
+        "element": "earth",
+        "spCost": 1,
+        "condition": {
+          "type": "every_n_actions",
+          "value": 12
+        },
+        "target": "all_enemies",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 928
+          }
+        ],
+        "description": "自身の12行動ごとに全体へ強打。共通計算式を使用。"
+      }
+    ]
+  },
+  {
+    "stage": "10-3",
+    "wave": 3,
+    "position": 1,
+    "enemy": "10-3/3/1",
+    "field": "stats",
+    "before": {
+      "luk": 0,
+      "hp": 13873,
+      "atk": 2555,
+      "def": 3403,
+      "sp": 150
+    },
+    "after": {
+      "luk": 0,
+      "hp": 9711,
+      "atk": 2555,
+      "def": 2893,
+      "sp": 150
+    }
+  },
+  {
+    "stage": "10-3",
+    "wave": 3,
+    "position": 1,
+    "enemy": "10-3/3/1",
+    "field": "skills",
+    "before": [
+      {
+        "id": "10-3/3/1/pressure-20-p1.6",
+        "name": "長期戦の強打",
+        "image": "",
+        "rarity": "N",
+        "element": "earth",
+        "spCost": 1,
+        "condition": {
+          "type": "every_n_actions",
+          "value": 20
+        },
+        "target": "all_enemies",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 1136
+          }
+        ],
+        "description": "自身の20行動ごとに全体へ強打。共通計算式を使用。"
+      },
+      {
+        "id": "SKD036",
+        "name": "守りの陣",
+        "image": "",
+        "rarity": "R",
+        "element": "light",
+        "spCost": 75,
+        "condition": {
+          "type": "always"
+        },
+        "target": "all_allies",
+        "effects": [
+          {
+            "type": "def_up",
+            "power": 26.35,
+            "duration": 3
+          }
+        ],
+        "description": "正式表の検証入力"
+      },
+      {
+        "id": "SKD009",
+        "name": "標準単体攻撃・土",
+        "image": "",
+        "rarity": "R",
+        "element": "earth",
+        "spCost": 50,
+        "condition": {
+          "type": "always"
+        },
+        "target": "first",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 180.53
+          }
+        ],
+        "description": "正式表の検証入力"
+      }
+    ],
+    "after": [
+      {
+        "id": "10-3/3/1/pressure-20-p1.6",
+        "name": "長期戦の強打",
+        "image": "",
+        "rarity": "N",
+        "element": "earth",
+        "spCost": 1,
+        "condition": {
+          "type": "every_n_actions",
+          "value": 8
+        },
+        "target": "all_enemies",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 1136
+          }
+        ],
+        "description": "自身の8行動ごとに全体へ強打。共通計算式を使用。"
+      },
+      {
+        "id": "SKD036",
+        "name": "守りの陣",
+        "image": "",
+        "rarity": "R",
+        "element": "light",
+        "spCost": 75,
+        "condition": {
+          "type": "always"
+        },
+        "target": "all_allies",
+        "effects": [
+          {
+            "type": "def_up",
+            "power": 26.35,
+            "duration": 3
+          }
+        ],
+        "description": "正式表の検証入力"
+      },
+      {
+        "id": "SKD009",
+        "name": "標準単体攻撃・土",
+        "image": "",
+        "rarity": "R",
+        "element": "earth",
+        "spCost": 50,
+        "condition": {
+          "type": "always"
+        },
+        "target": "first",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 180.53
+          }
+        ],
+        "description": "正式表の検証入力"
+      }
+    ]
+  },
+  {
+    "stage": "10-3",
+    "wave": 3,
+    "position": 2,
+    "enemy": "10-3/3/2",
+    "field": "skills",
+    "before": [
+      {
+        "id": "10-3/3/2/pressure-20-p1.6",
+        "name": "長期戦の強打",
+        "image": "",
+        "rarity": "N",
+        "element": "wind",
+        "spCost": 1,
+        "condition": {
+          "type": "every_n_actions",
+          "value": 20
+        },
+        "target": "all_enemies",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 1008
+          }
+        ],
+        "description": "自身の20行動ごとに全体へ強打。共通計算式を使用。"
+      },
+      {
+        "id": "SKD046",
+        "name": "守護の札",
+        "image": "",
+        "rarity": "SR",
+        "element": "light",
+        "spCost": 75,
+        "condition": {
+          "type": "always"
+        },
+        "target": "lowest_ally",
+        "effects": [
+          {
+            "type": "shield",
+            "power": 114.18,
+            "duration": 3
+          }
+        ],
+        "description": "正式表の検証入力"
+      }
+    ],
+    "after": [
+      {
+        "id": "10-3/3/2/pressure-20-p1.6",
+        "name": "長期戦の強打",
+        "image": "",
+        "rarity": "N",
+        "element": "wind",
+        "spCost": 1,
+        "condition": {
+          "type": "every_n_actions",
+          "value": 8
+        },
+        "target": "all_enemies",
+        "effects": [
+          {
+            "type": "damage",
+            "power": 1008
+          }
+        ],
+        "description": "自身の8行動ごとに全体へ強打。共通計算式を使用。"
+      },
+      {
+        "id": "SKD046",
+        "name": "守護の札",
+        "image": "",
+        "rarity": "SR",
+        "element": "light",
+        "spCost": 75,
+        "condition": {
+          "type": "always"
+        },
+        "target": "lowest_ally",
+        "effects": [
+          {
+            "type": "shield",
+            "power": 114.18,
+            "duration": 3
+          }
+        ],
+        "description": "正式表の検証入力"
+      }
+    ]
+  }
+]
