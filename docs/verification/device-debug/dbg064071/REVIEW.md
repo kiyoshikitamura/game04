@@ -35,3 +35,13 @@
 
 Preview環境変数を明示したnext build成功（39/39ページ）。初回はローカル標準設定の公開接続値不足で失敗したが、コード変更なく既存Preview設定を読込んで解消。秘密値の出力・Git保存なし。
 型検査（npm run typecheck）成功。差分チェック成功。
+
+## 配信記録
+
+- コード保存/配信SHA：ef047228fb2cc2146d52cd1ab243d2b52aa1821f。
+- Vercel Ready：dpl_GKTY1KyxD8K3yHCkXhg4PZdJnU15 / https://game04-fyvil5qn0-kiyoshi-kitamura.vercel.app 。
+- 共通Preview alias切替、公開識別API一致。切替直前のPR #37実HEADも一致。
+- 配信後375/390×600、5分類、メニュー、保存済み自己紹介を再確認。正式アイコン読込後の画像をdeployedへ保存、pageerror 0。
+- 状態：DBG-064 / DBG-071一覧復元は **配信済み・実機確認待ち**。実機受入・071付与ルール整理は残件。
+
+通常ゲーム入口（QA専用画面ではない/）でもTAP TO START→続きから→ログインボード/認証案内を閉じる→メニュー→所持品を確認。同じ通常ゲームから設定を開き、自己紹介の保存値が一致。deployed/root-entry-390.png、root-profile-390.png、entry.jsonに記録。
