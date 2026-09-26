@@ -7,7 +7,7 @@
 - 共通Preview：https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app/
 - 作業ブランチ：work/game04-common-preview-20260925。PR最新と発生版の一致をGitHubで確認。
 - 修正前配信の独立照合：2026-09-26、公開 /api/qa/deployment が上記SHA・preview・同ブランチを返すことを確認。deploymentId dpl_3CnYeKBqsnCcnaJHKzvMw8GevUWM。
-- 現在の確認SHA：b7d34204521bd2225b0e1e926a0592514c1d4f2a（2026-09-26、共通Previewの公開識別APIで独立照合済み。新配信のユーザー実機確認待ち）。
+- 現在の確認SHA：d5914aeff6b530939b36028b18dd34deca2669dd（2026-09-26、共通Previewの公開識別APIで独立照合済み。新配信のユーザー実機確認待ち）。
 - 直前のユーザー実機確認基準：d9be130。1-1クリアまでの確認済み12件は保持。
 - 端末はiPhone系との報告。機種・OS・ブラウザー版は未確認。原画像の23:47・4Gは引継ぎ記載であり、本作業で画像の独立閲覧は未実施。
 - 次の番号：DBG-042。削除・再利用・振り直し禁止。
@@ -548,3 +548,14 @@ DBG-014/015/030の統合接続追記：任務確認保存後に予約済み2-1�
 - 036/037/038/039/041は修正保存済み・統合配信待ち。原因/差分/証拠はb07/REVIEW.mdと検証JSON/画像を参照。元の受付発生版・優先度の追加資料は未受領のため推測しない。
 - 担当検証：375/390×664、5武将、文字送りgeometry、1/3/7/15/30日・81報酬・4状態・末尾・CTA、背景順/切替/離脱/reduced-motion、既存共通UI。統合担当はドメイン再確認、代表画像目視、接続差分レビュー、実Preview設定の型検査を含むbuild成功。
 - 戦闘/BURST関連ファイルとAPI/DBに統合差分なし。DBG-032/035、既確認12件、旧保存/開催snapshotを保持。main/本番/GAME03変更なし。
+
+### B07 配信完了記録
+
+- DBG-036/037/038/039/041：**配信済み・実機確認待ち**。修正SHA f75f430 / 79c733c、統合保存・配信SHA d5914aeff6b530939b36028b18dd34deca2669dd。PR #37対象ブランチへpush済み。
+- 共通Preview：https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app/
+- Deployment dpl_8kxRcyha3hEaQz7RkRMfU8mxudTu、Preview Ready。配信直前のremote更新一致を確認し、共通alias接続後に公開識別APIでSHA/branch/previewを独立照合。
+- 統合検証：21背景・正式81報酬を含む30日ボード・次周期・重複付与防止/保存非変更のドメイン検証成功。実Preview設定の型検査を含むbuild成功。担当の375/390関連状態・代表画像検証を保持。
+- 配信上の既存QA経路で実HomeViewを375/390px確認。カウボーイ表示/背景選択/初期城下街候補を確認、pageerrorなし。合成状態の表示検証であり、実アカウントへのログイン報酬付与を行った検証ではない。証拠：b07/deployment.json、deployed-verification.json、deployed-home-375.png、deployed-home-390.png。
+- DBG-040：提案確認待ち、環境演出は未実装/未接続。今回の配信に機能として含めない。既存SSR演出の正式URL再接続とは区別する。
+- 未確認：ユーザー実機、本番相当の実アカウントでのログイン報酬表示。実機確認順は案内人物→本陣人物/背景切替→背景候補の順序→ログインボードの詳細/末尾CTA。実機確認前に解決にはしない。
+- DBG-032/035の計算/再生/SE修正と既確認12件を保持。今回の統合でAPI/DB更新なし。main・本番・GAME03変更なし。
