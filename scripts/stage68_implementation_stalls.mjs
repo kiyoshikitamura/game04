@@ -6,13 +6,16 @@ import {inputFor,run} from './rebuild_stage68_five_tier.mjs';
 const OUT='docs/verification/stage68-implementation-20260927';
 const pressure=process.argv.includes('--pressure');
 const refine=process.argv.includes('--refine');
+const finisher=process.argv.includes('--finisher');
+const terminal=process.argv.includes('--terminal');
 for(const id of stalls){
  if(process.argv.slice(2).filter(x=>!x.startsWith('--')).length&&!process.argv.slice(2).includes(id))continue;
- if((pressure||refine)&&gz(`${OUT}/stalls/${id}.json.gz`).passed)continue;
- const path=`${OUT}/${refine?'stall-refine':pressure?'stall-pressure':'stalls'}/${id}.json.gz`,p=select(rows.find(r=>r.stage===id));
+ if((pressure||refine||finisher||terminal)&&gz(`${OUT}/stalls/${id}.json.gz`).passed)continue;
+ if(terminal&&gz(`${OUT}/stall-finisher/${id}.json.gz`).passed)continue;
+ const path=`${OUT}/${terminal?'stall-terminal':finisher?'stall-finisher':refine?'stall-refine':pressure?'stall-pressure':'stalls'}/${id}.json.gz`,p=select(rows.find(r=>r.stage===id));
  const roles=[['primary',p.primary],['alternative',p.alt],['near60',p.next],['low',p.low]].filter(([,c])=>c),unique=[...new Map(roles.map(([,c])=>[c.inputHash,c])).values()];
  const result=fs.existsSync(path)?gz(path):{stage:id,roles:roles.map(([role,c])=>({role,name:c.name,old:metrics(c.validation)})),variants:[],complete:false};if(result.complete)continue;
- for(const [hp,def,atk]of (refine?[[.45,.95,1.25],[.45,.9,1.5],[.3,.9,1.5],[.5,.85,1.5]]:pressure?[[.8,1,2],[.65,1,3],[.5,1,4]]:[[.6,.85,1.25],[.45,.7,1.5],[.35,.55,1.75]])){
+ for(const [hp,def,atk]of (terminal?[[.25,1,2.1],[.25,1,2.4],[.2,1,2.1]]:finisher?[[.3,1,1.75],[.2,1,1.75],[.3,.95,1.75],[.3,.95,1.5]]:refine?[[.45,.95,1.25],[.45,.9,1.5],[.3,.9,1.5],[.5,.85,1.5]]:pressure?[[.8,1,2],[.65,1,3],[.5,1,4]]:[[.6,.85,1.25],[.45,.7,1.5],[.35,.55,1.75]])){
   const name=`hp${hp}-def${def}-atk${atk}`;if(result.variants.some(v=>v.name===name))continue;
   const stage=structuredClone(p.d.stageProposal),changes=[];for(const [wi,w]of stage.waves.entries())for(const [ei,e]of w.entries())for(const [field,factor]of Object.entries({hp,def,atk})){const before=e.stats[field],after=Math.max(1,Math.round(before*factor));e.stats[field]=after;changes.push({wave:wi+1,position:ei+1,enemy:e.id,field,before,after});}
   const records=[];for(const c of unique){const input=inputFor(stage,{party:c.input.party});records.push({name:c.name,family:c.family,state:c.state,input,inputHash:hash(input),screen:run(input,430001,12,true)});}
