@@ -1,0 +1,353 @@
+{
+  "source": "synthetic deterministic isolated input; not user battle",
+  "input": {
+    "seed": 1,
+    "party": [
+      {
+        "id": "qa-actor",
+        "name": "調査行動者",
+        "image": "/characters/alice_transparent_asset.png",
+        "level": 1,
+        "element": "water",
+        "stats": {
+          "hp": 1000,
+          "atk": 10,
+          "def": 0,
+          "luk": 0,
+          "sp": 100
+        },
+        "skills": [],
+        "passives": []
+      }
+    ],
+    "waves": [
+      [
+        {
+          "id": "qa-enemy",
+          "name": "調査敵",
+          "image": "/characters/alice_transparent_asset.png",
+          "level": 1,
+          "element": "water",
+          "stats": {
+            "hp": 100000,
+            "atk": 100000,
+            "def": 0,
+            "luk": 0,
+            "sp": 100
+          },
+          "skills": [],
+          "passives": [],
+          "initialSp": 0,
+          "hitSpGain": 0,
+          "actionCount": 11,
+          "initialCount": 11,
+          "order": 0
+        }
+      ]
+    ],
+    "rules": {
+      "defenseFactor": 1,
+      "advantageMultiplier": 1.5,
+      "disadvantageMultiplier": 0.75,
+      "spRecoveryDivisor": 120,
+      "burstLukDivisor": 20,
+      "enemySpRecoveryDivisor": 30,
+      "maxPlayerActions": 300,
+      "initialSpRatio": 0,
+      "version": "balance-v2-20260920",
+      "inputVersion": "wave-sp-v1-20260921",
+      "balanceV2": {
+        "status": "PREVIEW_PROVISIONAL",
+        "version": "PREVIEW_PROVISIONAL_BALANCE_V2_20260920",
+        "damageBonusCap": 50,
+        "healingBonusCap": 80,
+        "shieldBonusCap": 50,
+        "shieldHpCap": 0.5,
+        "periodicCapMultiplier": 2,
+        "lowHpThreshold": 0.4,
+        "highHpThreshold": 0.7,
+        "diversityFactors": [
+          0,
+          0.25,
+          0.5,
+          0.75,
+          1
+        ]
+      }
+    }
+  },
+  "result": {
+    "seed": 1,
+    "outcome": "lose",
+    "rulesVersion": "balance-v2-20260920",
+    "burstStarts": 1,
+    "episodes": [
+      {
+        "id": 1,
+        "start": 41,
+        "actor": "qa-actor",
+        "actions": [
+          {
+            "frame": 42,
+            "skill": "basic",
+            "spBefore": 200,
+            "spAfter": 200,
+            "cost": 0,
+            "candidates": [],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 41,
+            "event": "burst_start",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 42,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 43,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 44,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 45,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 46,
+            "event": "interrupt_start",
+            "actor": "qa-enemy",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          },
+          {
+            "frame": 47,
+            "event": "action_start",
+            "actor": "qa-enemy",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 48,
+            "event": "damage",
+            "actor": "qa-enemy",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-actor"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 49,
+            "event": "death",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 600
+          },
+          {
+            "frame": 50,
+            "event": "action_end",
+            "actor": "qa-enemy",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 51,
+            "event": "interrupt_end",
+            "actor": "qa-enemy",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 52,
+            "event": "burst_end",
+            "actor": "qa-actor",
+            "burst": false,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 52,
+        "endReason": "actor_dead",
+        "burstCutIns": 1,
+        "burstSounds": 1
+      }
+    ],
+    "betweenBursts": []
+  }
+}
