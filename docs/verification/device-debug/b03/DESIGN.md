@@ -1,6 +1,6 @@
-# B03 共通UI 一括提案・第2案（未承認）
+# B03 共通UI 一括提案・第3案（未承認）
 
-基準：PR #37 head 4e34bd88815dbf28c4f3ae5c773a7318d8bcbee4。直前配信 d9be130。375/390×664px見本は review.html / proposal-v2.png。proposal.pngは初回案の履歴。本文の指示に従い、新しいデザインは共通Previewへ配信していない。
+基準：PR #37 head 4e34bd88815dbf28c4f3ae5c773a7318d8bcbee4。直前配信 d9be130。375/390×664px見本は review.html / proposal-v3.png。proposal.pngは初回案の履歴。本文の指示に従い、新しいデザインは共通Previewへ配信していない。
 
 ## 一括承認を求める設計
 
@@ -30,3 +30,18 @@ scripts/serve_b03_review.cjs でローカル見本を起動、scripts/verify_b03
 承認後の共通部品接続順：LoadingState（startup/inline）→ TutorialTextPanel（固定本文と文字送り）→ CharacterCard利用箇所集約 → DialogFrame（案内/挑戦/報酬）→ BattleParty/EnemyFormation/WaveIntro → VictoryScene/RewardSummary/GrowthSummary → AreaBanner。既存の保存済み戦闘記録、再生時計、画像ゲートと成功済み12件を維持し、ゲーム数値・DB・APIは変更しない。
 
 全18件の状態：009/012/023/025/028は修正保存済み、005/019/024/027は確定差分保存済み＋残設計、003/014/015/017/020/022/029/030は設計案提示、026は既存検証と今回の提案検証を別記。承認後に本体へ組み込み、同原因の限定回帰を行いPR37へpush・共通Previewへ配信・DBG別結果と配信SHAを台帳へ記録する。
+
+## 第3案：ユーザー最新指定（第2案と競合時はこちらを優先）
+
+- DBG-027：エリアバナーは最終ステージの代表ボスをカウボーイショット（太もも付近まで）で配置。正式マスタのレベルとボス名を下部に常時表示。三河Lv.7直江兼続、尾張Lv.18徳川家康、美濃Lv.30織田信長。レベルを推測・固定せず正式ステージスナップショットから読む。
+- DBG-014/030：編成先頭を飾る案を撤回し、保存済み戦闘ログに基づくMVPを表示。GAME03由来のBattleResultSummary.tsxとbattleResultScoring.tsをローカルGAME04内で確認した。GAME03リポジトリ・本番への書込みなし。
+- MVP評価案：与ダメージ40、撃破20、回復20、シールド15、生存5。前4項目は味方内の最大値に対する相対評価、四捨五入。項目最大値が0の場合は0点。同点は与ダメージ、撃破、characterId順で決定する既存方式。表示専用の評価で戦闘・報酬計算には使わない。
+- 合計スコアは既存形式の420msカウントアップ、内訳は520ms後から各90msずらして180msで表示。reduced-motionでは確定値へ。見本は合計の動作を実装し内訳は固定表示。本体では既存内訳の時間差演出も適用する。
+- 勝利・MVP・与ダメージ/撃破/回復の要約を表示。その下に戦績/MVP詳細と報酬/EXPをそれぞれ折りたたみ、タップで展開。報酬を別ページへ遷移させる第2案を上書き。最下部は固定の次ステージ/一覧CTA。最終ステージ時は一覧を主CTAへ。実報酬の付与は既存settlementの一回分を表示するだけで、開閉により再付与しない。
+- 報酬の初回バッジ・EXP共通パネルを折りたたみ内へそのまま移す。GAME03固有のRATE/RANK/BP/レイドチケットはGAME04のクエストへ持ち込まない。台詞は既存承認済みの戦国武将台詞が接続できる場合のみ使用し、GAME03台詞を流用しない。
+
+### ログ接続の限定検証項目
+
+GAME04のBattleResult.analysisにはdamage/healingはあるがkills/shieldはなく、GAME03のイベント列と同型ではない。承認後は保存frames/status.sourceId等を表示用adapterで集計し、ゲームを再シミュレーションしない。複数派の敵ID、複数hit、DOT/HOT帰属、シールド付与と消費、蘇生後の最終生存を確認する。欠落した帰属を勝手にactorへ付け替えない。旧ログで確定できないときはMVP集計未対応を表示し、推測したMVPを出さない。
+
+見本65点は2敵へのDAMAGE/DEFEATと生存の説明用イベントを既存analyzeBattleResultへ入力して検証（40+20+0+0+5）。実戦ログの集計完了を意味しない。scripts/verify_b03_result_review.cjsとresult-v3-checks.jsonに記録。375/390pxでタップ開閉とCTA表示を確認。
