@@ -1,4 +1,6 @@
 'use client';
+import { createPortal } from 'react-dom';
+import CanonicalDialog from '../ui/CanonicalDialog';
 import BattleResourceDisplay, {BATTLE_RESOURCE_ASSETS} from './BattleResourceDisplay';
 import RecordedBattleResult from './RecordedBattleResult';
 import { UI_MOTION } from '../ui/uiMotion';
@@ -47,14 +49,20 @@ const statusPaths: Record<string, string> = {
   hot:'M9 3H15V9H21V15H15V21H9V15H3V9H9Z', stun:'M4 7 10 9 8 3 14 7 19 3 18 10 23 11 17 15 20 21 12 18 8 22 6 15 1 15 5 11Z',
   counter:'M4 11H15Q21 11 21 17Q21 22 15 22M4 11 10 5M4 11 10 17', taunt:'M12 1V6M12 18V23M1 12H6M18 12H23M20 12A8 8 0 1 1 4 12A8 8 0 1 1 20 12',
 };
-interface Props { resultActions?: ReactNode; resultRewards?: ReactNode; bgmScene?: BgmScene; requirePlaybackCompletion?: boolean; result: BattleResult; vipActive: boolean; onComplete: () => void; title?: string; backgroundSrc?: string; raidHp?: { current: number; max: number; level?: number }; initialFrame?: number; initialPaused?: boolean; }
+interface Props { onRetire?: () => void; resultActions?: ReactNode; resultRewards?: ReactNode; bgmScene?: BgmScene; requirePlaybackCompletion?: boolean; result: BattleResult; vipActive: boolean; onComplete: () => void; title?: string; backgroundSrc?: string; raidHp?: { current: number; max: number; level?: number }; initialFrame?: number; initialPaused?: boolean; }
 
 /** Every visible value is projected from the recorded server frame. */
-export function BattleView({ resultActions, resultRewards, bgmScene = 'BATTLE', requirePlaybackCompletion = false, result, vipActive, onComplete, title = '合戦', backgroundSrc = '/creative/backgrounds/char_reiji_01.png', raidHp, initialFrame = 0, initialPaused = false }: Props) {
+export function BattleView({ onRetire, resultActions, resultRewards, bgmScene = 'BATTLE', requirePlaybackCompletion = false, result, vipActive, onComplete, title = '合戦', backgroundSrc = '/creative/backgrounds/char_reiji_01.png', raidHp, initialFrame = 0, initialPaused = false }: Props) {
   const { playBgm, stopBgm, playSe, stopSe, preloadAudio } = useAudio();
+  const [pauseMenu, setPauseMenu] = useState(false);
+  const [confirmRetire, setConfirmRetire] = useState(false);
+  const [exited, setExited] = useState(false);
+  const exitLock = useRef(false);
+  const wasPaused = useRef(false);
   const heardFrame = useRef(-1);
   const heardAction = useRef(new Set<SeEvent>());
   useEffect(() => {
+    exitLock.current = false; setExited(false); setPauseMenu(false); setConfirmRetire(false);
     heardFrame.current = -1;
     heardAction.current.clear();
     playBgm(bgmScene);
@@ -71,13 +79,13 @@ export function BattleView({ resultActions, resultRewards, bgmScene = 'BATTLE', 
   const measuredImageResult = useRef<BattleResult | null>(null);
   const detailDialog = useRef<HTMLDialogElement>(null);
   const assetsBlocked = assetState.result !== result || assetState.status !== 'ready';
-  const { index, frame, finished, speed, effectiveSpeed, paused, playbackPaused, waveIntroActive, setPaused, cycleSpeed, skip } = useRecordedBattlePlayback({ result, initialFrame, initialPaused, vipActive, blocked: !!detail || showLog || assetsBlocked, minimumFrameDuration: minimumEffectFrameDuration, waveIntroDuration: UI_MOTION.waveIntroMs });
+  const { index, frame, finished, speed, effectiveSpeed, paused, playbackPaused, waveIntroActive, setPaused, cycleSpeed, skip } = useRecordedBattlePlayback({ result, initialFrame, initialPaused, vipActive, blocked: exited || pauseMenu || confirmRetire || !!detail || showLog || assetsBlocked, minimumFrameDuration: minimumEffectFrameDuration, waveIntroDuration: UI_MOTION.waveIntroMs });
   const presentation = projectRecordedBattleFrame(result, index);
   const battleRoot = useRef<HTMLElement>(null);
   useEffect(() => { if (finished) { stopBgm(); battleRoot.current?.scrollIntoView({ block: 'start' }); } }, [finished, stopBgm]);
   useEffect(() => {
     stopSe();
-    if (!frame || assetsBlocked || paused || waveIntroActive || detail || showLog || heardFrame.current === index) return;
+    if (!frame || exited || pauseMenu || confirmRetire || assetsBlocked || paused || waveIntroActive || detail || showLog || heardFrame.current === index) return;
     if (['action_start', 'phase', 'burst_start', 'start', 'end'].includes(frame.event ?? frame.kind)) heardAction.current.clear();
     heardFrame.current = index;
     for (const event of recordedBattleSounds(result, index)) {
@@ -86,7 +94,16 @@ export function BattleView({ resultActions, resultRewards, bgmScene = 'BATTLE', 
       playSe(event);
     }
     return stopSe;
-  }, [result, index, frame, speed, assetsBlocked, paused, waveIntroActive, detail, showLog, playSe, stopSe]);
+  }, [result, index, frame, speed, exited, pauseMenu, confirmRetire, assetsBlocked, paused, waveIntroActive, detail, showLog, playSe, stopSe]);
+  function openPauseMenu() { wasPaused.current = paused; setPaused(true); stopSe(); setPauseMenu(true); }
+  function cancelRetire() { setConfirmRetire(false); setPauseMenu(false); setPaused(wasPaused.current); }
+  function retire() {
+    if (exitLock.current || finished || requirePlaybackCompletion) return;
+    exitLock.current = true;
+    setPaused(true); setExited(true); setConfirmRetire(false); setPauseMenu(false);
+    stopSe(); stopBgm();
+    (onRetire ?? onComplete)();
+  }
   const effects = frame ? resolveBattleFrameEffects(frame, result.frames[index - 1], presentation.skill) : [];
   // A result-wide gate avoids hiding the battle when a later effect first appears.
   const imageKey = useMemo(() => JSON.stringify([...new Set([
@@ -181,10 +198,12 @@ export function BattleView({ resultActions, resultRewards, bgmScene = 'BATTLE', 
       {impact && <div key={`${frame.index}-${state.id}`} className={`${styles.impact} ${impact.type === 'heal' ? styles.healing : ''}`} data-impact-target={state.id}><strong>{impact.type === 'miss' ? 'MISS' : impact.type === 'status' ? ({effect_applied:'付与',effect_miss:'不成立',cleanse:'解除',shield_absorbed:'吸収'}[frame.event ?? ''] ?? '') : `${impact.type === 'heal' ? '+' : ''}${Math.abs(impact.amount).toLocaleString()}`}</strong>{impact.hits && impact.hits.length > 1 && <small>{impact.hits.length} HITS</small>}</div>}
     </div>;
   };
+  if (exited) return null;
   return <section ref={battleRoot} className={styles.battle} aria-label={title} data-playback-paused={playbackPaused && !waveIntroActive} data-intro-paused={paused || assetsBlocked || !!detail || showLog} data-playback-frame={index} style={{ '--battle-speed': effectiveSpeed, '--wave-intro-ms': `${UI_MOTION.waveIntroMs}ms`, '--battle-background': `url(${JSON.stringify(backgroundSrc)})` } as CSSProperties}>
+    {!finished && (pauseMenu || confirmRetire) && createPortal(<CanonicalDialog title={confirmRetire ? 'リタイアしますか？' : '一時停止'} onClose={cancelRetire} actions={confirmRetire ? [{label:'続ける',semantic:'secondary',onClick:cancelRetire},{label:'リタイア',semantic:'danger',onClick:retire}] : [{label:'バトルを続ける',semantic:'primary',onClick:()=>{setPauseMenu(false);setPaused(false);} },...(!requirePlaybackCompletion ? [{label:'リタイア',semantic:'danger' as const,onClick:()=>{setPauseMenu(false);setConfirmRetire(true);}}] : [])]}>{confirmRetire ? <p>再生を終了して挑戦元へ戻ります。確定した戦績・報酬・消費は変更されません。</p> : <p>バトルの再生を停止しています。</p>}</CanonicalDialog>, document.body)}
     <dialog ref={loadingDialog} className={styles.loading} onCancel={event => event.preventDefault()} aria-label="戦闘画面の読み込み"><img src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" />{assetError ? <><p>戦闘画像を読み込めませんでした。</p><button onClick={() => { setAssetState({ result, key: imageKey, status: 'loading' }); setRetry(value => value + 1); }}>再試行</button>{!requirePlaybackCompletion && <button onClick={leaveFailedPlayback}>再生を終了する</button>}</> : <><span className={styles.spinner} /><p>戦闘の準備中</p></>}</dialog>
     <div className={visibleLoading ? styles.loadingContent : undefined}>
-    {!finished && <><header className={styles.header}><strong>第<b>{frame.wave}</b>派 / 全{result.waves.length}派</strong><div><button onClick={cycleSpeed} aria-label={`再生速度 ${speed}倍`}>▶▶ ×{speed}</button><button onClick={() => setPaused(p => !p)} disabled={finished} aria-label={paused ? '再開' : '一時停止'}>{paused ? '▶' : 'Ⅱ'}</button>{vipActive && <button className={styles.skip} disabled={finished} onClick={skip}>SKIP</button>}</div></header>
+    {!finished && <><header className={styles.header}><strong>第<b>{frame.wave}</b>派 / 全{result.waves.length}派</strong><div><button onClick={cycleSpeed} aria-label={`再生速度 ${speed}倍`}>▶▶ ×{speed}</button><button onClick={() => paused ? setPaused(false) : openPauseMenu()} disabled={finished} aria-label={paused ? '再開' : '一時停止'}>{paused ? '▶' : 'Ⅱ'}</button>{paused && !pauseMenu && !confirmRetire && !requirePlaybackCompletion && <button onClick={() => { wasPaused.current = true; setConfirmRetire(true); }}>リタイア</button>}{vipActive && <button className={styles.skip} disabled={finished} onClick={skip}>SKIP</button>}</div></header>
     {displayedRaidHp && <div className={styles.raidHp}>{displayedRaidHp.label} <span>{Math.floor(displayedRaidHp.current).toLocaleString()} / {Math.floor(displayedRaidHp.max).toLocaleString()}</span></div>}
     <div className={`${styles.arena} ${waveIntroActive ? styles.waveEntering : ''}`} key={`arena-${frame.wave}`}>
       {waveIntroActive && <div className={styles.waveIntro} role="status">第{frame.wave}派</div>}
