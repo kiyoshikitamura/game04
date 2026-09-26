@@ -19,4 +19,13 @@ GAME04保存済み `65d2a4b2dc1ffe9cf4a18a8e73539b6c079d1ff8` の160画像を再
 - 型検査成功。Preview branch設定を使用したNext production build成功。
 - 配信後は同じ160pathのHTTP200と取得バイナリのSHA-256を照合し、代表UIを再確認する。
 
-状態は配信前。稼働SHA/配信確認は完了後追記する。
+## 配信完了
+
+修正・配信SHA `82607dc5f3e2a64ff8936bb0a2b97cf02397f722`。PR #37 push済み。Vercel Preview/Ready `dpl_DDTZrwRn3U3mdWVVUXnF3FgqXP6G`。
+
+共通URL https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app/ の稼働SHAを `deployment.json` に保存。自動buildだけでは旧aliasのままだったため接続を明示更新し、公開APIで照合した。
+
+`assets.json` は配信画像160/160のHTTP200/承認hash一致。`ui.json` と代表画像は共通Preview上の再確認に更新。375/390の一覧・詳細・育成結果・装備選択後表示でpageerrorなし。正式160IDの不足0。
+
+状態：**配信済み・実機確認待ち**。iPhone実機は未確認。main/本番/GAME03/API/DBは変更なし。
+

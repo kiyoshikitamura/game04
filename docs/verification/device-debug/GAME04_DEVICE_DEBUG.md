@@ -7,7 +7,7 @@
 - 共通Preview：https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app/
 - 作業ブランチ：work/game04-common-preview-20260925。PR最新と発生版の一致をGitHubで確認。
 - 修正前配信の独立照合：2026-09-26、公開 /api/qa/deployment が上記SHA・preview・同ブランチを返すことを確認。deploymentId dpl_3CnYeKBqsnCcnaJHKzvMw8GevUWM。
-- 現在の確認SHA：19a638c155a739a33d886045b0ef953f18e28716（2026-09-26、共通Previewの公開識別APIで独立照合済み。新配信のユーザー実機確認待ち）。
+- 現在の確認SHA：82607dc5f3e2a64ff8936bb0a2b97cf02397f722（2026-09-26、共通Previewの公開識別APIで独立照合済み。新配信のユーザー実機確認待ち）。
 - 直前のユーザー実機確認基準：d9be130。1-1クリアまでの確認済み12件は保持。
 - 端末はiPhone系との報告。機種・OS・ブラウザー版は未確認。原画像の23:47・4Gは引継ぎ記載であり、本作業で画像の独立閲覧は未実施。
 - 次の番号：DBG-032。削除・再利用・振り直し禁止。
@@ -453,8 +453,18 @@ DBG-014/015/030の統合接続追記：任務確認保存後に予約済み2-1�
 
 ## DBG-031 装備画像の先行修正（2026-09-26）
 
-- 発生/確認版：19a638c155a739a33d886045b0ef953f18e28716。状態：修正中。優先度は未指定。
+- 発生/確認版：19a638c155a739a33d886045b0ef953f18e28716。状態：配信済み・実機確認待ち。優先度は未指定。
 - 原因：正式ID/pathは一致するが、配信対象のpublic/equipments実ファイル160点がGAME03素材。GAME04素材マニフェストのみ取り込み、バイナリ未反映。キャッシュ原因ではない。
 - 修正：保存済み65d2a4bのGAME04素材160点を正式ID/SHA-256で全件照合して反映。接続マニフェストを更新。別装備代替なし、不足0。数値・効果・共通カードデザイン・API/DBは変更なし。
 - 限定検証：正式160ID/画像hash/寸法一致、排出マスターと10連receiptの参照一致。375/390の一覧・詳細・選択保存後の装備枠・育成結果を本体共通表示で確認。型検査・build成功。
 - 詳細・証拠：[DBG-031](dbg031/README.md)。新配信前の確認SHAは19a638cのまま。修正SHA/配信SHA/配信検証は完了後追記。
+
+### DBG-031 配信完了記録
+
+- 修正・配信SHA：82607dc5f3e2a64ff8936bb0a2b97cf02397f722。PR #37へpush済み。
+- 共通Preview：https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app/
+- Deployment：dpl_DDTZrwRn3U3mdWVVUXnF3FgqXP6G（Preview/Ready）。URL：https://game04-pqamxsvh6-kiyoshi-kitamura.vercel.app
+- 配信直前の他更新なしを確認。自動build完了時に共通aliasの稼働SHAが旧版だったため、上記検証対象へ明示接続。その後、共通URLの公開deployment APIで82607dcを独立照合。
+- 共通URLの正式装備160/160画像をHTTP200・承認済SHA-256一致で確認。375/390で一覧・詳細・育成結果・選択保存後の装備枠を再確認。取得失敗・pageerrorなし。装備選択自体は既存の文字表示を保持。正式獲得receiptはオフライン参照照合（実ガチャ消費なし）。
+- 台帳状態：配信済み・実機確認待ち。実機受入は未実施。確認順：装備一覧→任意装備詳細→武将への装備選択→装備済み枠→獲得時の画像。
+- 全登録31件、未解決19件（B03 18件＋DBG-031）、既確認12件維持。次番号DBG-032。main・本番・GAME03/API/DBへの変更なし。
