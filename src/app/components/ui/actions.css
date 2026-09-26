@@ -1,10 +1,10 @@
 /* Shared action contract; list/card buttons retain their own content layout. */
-body.game04-theme .g4-action{display:inline-grid;grid-template-areas:'label';place-items:center;min-width:104px;min-height:48px;padding:10px 16px;border:1px solid var(--g4-rule-border,#786650);border-radius:var(--g4-radius,4px);background:var(--g4-panel);color:var(--g4-text);font:600 16px/1.4 var(--g4-sans)!important;white-space:nowrap;overflow-wrap:normal;cursor:pointer}
+body.game04-theme .g4-action.g4-action{display:inline-grid;grid-template-areas:'label';place-items:center;min-width:104px;min-height:48px;padding:10px 16px;border:1px solid var(--g4-rule-border,#786650);border-radius:var(--g4-radius,4px);background:var(--g4-panel);color:var(--g4-text);font:600 16px/1.4 var(--g4-sans)!important;white-space:nowrap;overflow-wrap:normal;cursor:pointer}
 .g4-action-label,.g4-action-pending{grid-area:label;white-space:nowrap;min-width:0}
-body.game04-theme .g4-action--primary,body.game04-theme .g4-action--danger{background:var(--g4-primary);color:var(--g4-text)}
-body.game04-theme .g4-action:disabled{background:var(--g4-panel);color:var(--g4-muted);opacity:1;filter:none;cursor:default}
-body.game04-theme .g4-action[aria-busy=true]{color:var(--g4-text)}
+body.game04-theme .g4-action.g4-action--primary,body.game04-theme .g4-action.g4-action--danger{background:var(--g4-primary);color:var(--g4-text)}
+body.game04-theme .g4-action.g4-action:disabled{background:var(--g4-panel);color:var(--g4-muted);opacity:1;filter:none;cursor:default}
+body.game04-theme .g4-action.g4-action[aria-busy=true]{color:var(--g4-text)}
 .g4-action:active:not(:disabled){transform:scale(.98)}
 .g4-action-group{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}
 
-body.game04-theme .g4-action :is(.g4-action-label,.g4-action-pending){font-family:inherit!important}
+body.game04-theme .g4-action.g4-action :is(.g4-action-label,.g4-action-pending){font-family:inherit!important}

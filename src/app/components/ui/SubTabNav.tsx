@@ -76,7 +76,7 @@ export default function SubTabNav({ tabs, activeTabId, onSelect, className = "" 
             <button
               type="button"
               key={tab.id}
-              data-sub-tab-id={tab.id}
+              data-sub-tab-id={tab.id} aria-current={isActive ? "page" : undefined}
               className={`sub-tab-item ${isActive ? "active" : ""} ${tab.disabled ? "disabled" : ""} active-scale-effect`}
               onClick={() => !tab.disabled && handleSelect(tab.id)}
               disabled={tab.disabled}

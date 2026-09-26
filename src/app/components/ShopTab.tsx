@@ -8,7 +8,8 @@ import "./ShopTab.css";
 import PageTitleBanner from "./redesign/PageTitleBanner";
 import SubTabNav from "./ui/SubTabNav";
 import ProductRow from "./ui/ProductRow";
-import CanonicalItemIcon from "./ui/CanonicalItemIcon";
+import CanonicalItemIcon, { canonicalItemAssetPath } from "./ui/CanonicalItemIcon";
+import { RewardList } from "./ui/Game04DataDisplay";
 import OutlawButton from "./ui/OutlawButton";
 import BillingHistory from "./BillingHistory";
 import PaidAssetExpiry from "./PaidAssetExpiry";
@@ -21,10 +22,7 @@ const PACK_EXPIRY_NOTICE = "パックの未使用アイテム・銭は付与か�
 const shopText = (value: string) => value.replaceAll("CASH", "銭").replaceAll("ダイア", "輝石").replaceAll("ダイヤ", "輝石");
 
 function Bundle({ product }: { product: ShopProduct }) {
-  return <p className="shop-bundle-text">
-    {product.category === "VIP" && product.description}
-    {product.items.map(item => `${shopText(item.itemName)} ×${item.quantity.toLocaleString("ja-JP")}`).join(" / ")}
-  </p>;
+  return <>{product.category === "VIP" && <p>{product.description}</p>}<RewardList items={product.items.map(item=>({key:item.itemId,name:shopText(item.itemName),image:canonicalItemAssetPath(item.itemId),amount:item.quantity}))}/></>;
 }
 
 export type ShopExchangeProps = { state: RedesignState; onExchange: (payload: Record<string, unknown>) => Promise<unknown>; onUseEnergyDrink?: () => Promise<unknown> };

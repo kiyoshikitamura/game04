@@ -7,3 +7,5 @@ assert(!read('src/app/sengoku-theme.css').includes('--font-sengoku: "Hiragino Mi
 assert(read('src/app/components/ui/actions.css').includes('grid-template-areas'), 'Stable pending layout');
 const assets=['/ui/sengoku/13-coin.png','/ui/sengoku/16-diamond.png','/creative/items/territory-invasion-ticket.png'];for(const p of assets)assert(fs.existsSync('public'+p),p);
 console.log('PASS common UI static contract (visual comparison still required)');
+for(const file of ['redesign/BattleView.tsx','redesign/GrowthControls.tsx','raid/RaidApprovedVisual.tsx'])assert(read('src/app/components/'+file).includes('ElementBadge'),'Shared element rendering: '+file);
+assert(!read('src/app/components/ui/SubTabNav.css').includes('var(--neon-cyan)'),'Tabs must use common semantic tokens');

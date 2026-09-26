@@ -2,10 +2,10 @@
 
 .outlaw-sub-tab-shell {
   display: grid;
-  grid-template-columns: 28px minmax(0, 1fr) 28px;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
   align-items: stretch;
-  background: rgba(14, 18, 28, 0.9);
-  border: 1px solid rgba(40, 48, 65, 0.72);
+  background: var(--g4-panel);
+  border: 1px solid var(--g4-rule-border);
 }
 
 .outlaw-sub-tab-nav {
@@ -18,13 +18,13 @@
   touch-action: pan-x;
 }
 
-/* スクロールバー非表示 (ナビゲーションタブ用) */
+/* 横スクロールの存在を保持する。 */
 .outlaw-sub-tab-nav::-webkit-scrollbar {
-  display: none;
+  height: 4px;
 }
 .outlaw-sub-tab-nav {
   -ms-overflow-style: none;
-  scrollbar-width: none;
+  scrollbar-width: thin;
 }
 
 .sub-tab-item {
@@ -36,8 +36,8 @@
   border: none;
   font-family: var(--font-inter);
   font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+  font-size: 16px;
+  color: var(--g4-muted);
   cursor: pointer;
   white-space: nowrap;
   transition: color 0.2s ease;
@@ -52,13 +52,13 @@
   place-items: center;
   padding: 0;
   border: 0;
-  background: rgba(5, 9, 17, 0.92);
-  color: var(--neon-cyan);
+  background: var(--g4-bg);
+  color: var(--g4-gold);
   font-size: 20px;
   cursor: pointer;
 }
 
-.sub-tab-scroll-button:disabled { color: rgba(160, 170, 185, 0.25); cursor: default; }
+.sub-tab-scroll-button:disabled { color: var(--g4-muted); cursor: default; }
 .sub-tab-scroll-button.prev { border-right: 1px solid rgba(255, 255, 255, 0.08); }
 .sub-tab-scroll-button.next { border-left: 1px solid rgba(255, 255, 255, 0.08); }
 
@@ -67,18 +67,18 @@
 }
 
 .sub-tab-item.active {
-  color: var(--neon-cyan);
+  color: var(--g4-gold);
   font-weight: 700;
 }
 
 .sub-tab-indicator {
   position: absolute;
-  bottom: -2px; /* 親のborder-bottomの上に被せる */
+  bottom: 0; /* 親のborder-bottomの上に被せる */
   left: 10%;
   right: 10%;
   height: 2px;
-  background: var(--neon-cyan);
-  box-shadow: var(--neon-glow-cyan);
+  background: var(--g4-gold);
+  box-shadow: none;
   border-radius: 2px 2px 0 0;
   animation: tabSlideIn 0.2s ease-out forwards;
 }
@@ -93,3 +93,6 @@
     opacity: 1;
   }
 }
+
+.outlaw-sub-tab-nav{scrollbar-color:var(--g4-gold) var(--g4-bg)}
+.sub-tab-item{min-height:44px}

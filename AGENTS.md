@@ -1,6 +1,6 @@
 > 共通Previewの現接続先（2026-09-27照合）は隔離GAME04検証DB `znakrkaazliexzwihxge`。B03統合記録とbranch環境設定が根拠。下記2026-09-19のlrgy限定記載は当時の環境。共通Previewの修正は現接続先に限定し、main/本番/GAME03は禁止。
 
-> UIの共通正本は `docs/product/GAME04_COMMON_UI_AUTHORITY.md`（§18: 用途別実装契約）。画面追加・修正は共通トークン／部品を使用し、375／390pxの関連状態を視覚確認する。共通正本・部品・統合配信の編集は統合担当へ集約。未指摘全画面の再監査は開始しない。
+> UIの共通正本は `docs/product/GAME04_COMMON_UI_AUTHORITY.md`（§18: 用途別実装契約）。画面追加・修正は共通トークン／部品を使用し、375／390pxの関連状態を視覚確認する。共通正本・部品・統合配信の編集は統合担当へ集約。2026-09-27ユーザー指示により全画面・全状態の棚卸しと共通ルール適用を実施する（正本§19）。未確認を全画面完了としない。
 
 > 育成必要量・魂・EXP繰越・LB素材・Player Lv回復・ノーマルガチャは `docs/product/GAME04_GROWTH_AUTHORITY_V1_2026-09-21.md` と `docs/product/GAME04_GROWTH_NORMAL_GACHA_HANDOFF_2026-09-21.md` が優先。既存EXP・残高の移行は未合意のまま保持する。
 

@@ -1,4 +1,5 @@
 'use client';
+import ElementBadge from './ElementBadge';
 import { createPortal } from 'react-dom';
 import CanonicalDialog from '../ui/CanonicalDialog';
 import BattleResourceDisplay, {BATTLE_RESOURCE_ASSETS} from './BattleResourceDisplay';
@@ -174,7 +175,7 @@ export function BattleView({ onRetire, resultActions, resultRewards, bgmScene = 
       <button key={impact?.type === 'damage' ? `hit-${frame.index}` : 'idle'} className={`${styles.unitButton} ${impact?.type === 'damage' ? styles.hit : ''}`} onClick={() => setDetail({ unit, state })} aria-label={`${enemyDisplayName(unit)}の戦闘詳細`}>
         {enemy ? <img data-effect-anchor src={artSource} alt="" className={styles.enemyImage} /> : <span data-effect-anchor className={styles.memberPortrait}><img src={artSource} alt="" className={styles.memberImage} style={{ '--face-scale': faceCrop.thumbnailScale, '--face-x': `${faceCrop.thumbnailX}%`, '--face-y': `${faceCrop.thumbnailY}%` } as CSSProperties} /></span>}
         <span className={styles.unitInfo}>
-          <span className={styles.unitName}>{enemy && <img className={styles.element} src={`/ui/raid/v2/element-${unit.element}.png`} alt={elements[unit.element]} />}{enemy && <small>Lv.{unit.level} </small>}{enemyDisplayName(unit)}</span>
+          <span className={styles.unitName}>{enemy && <ElementBadge element={unit.element} size="combat" className={styles.element}/>}{enemy && <small>Lv.{unit.level} </small>}{enemyDisplayName(unit)}</span>
           {!enemy && <span className={styles.level}>Lv.{unit.level}</span>}
           <span className={styles.hp}><span style={{ width: meterWidth(state.hp, state.maxHp) }} /></span>
           <span className={styles.hpNumber}><span>{Math.floor(state.hp).toLocaleString()}</span><span> / {Math.floor(state.maxHp).toLocaleString()}</span></span>

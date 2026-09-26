@@ -1,4 +1,6 @@
 'use client';
+import {InfoRow,RewardList} from '../ui/Game04DataDisplay';
+import ActionButton from '../ui/ActionButton';
 import PageTitleBanner from './PageTitleBanner';
 import { enemyRoleLabel } from '@/domain/redesign/contextNames';
 import { growthRewardImage } from '@/domain/redesign/growthAssetPresentation';
@@ -45,6 +47,7 @@ function rewardIcon(reward: Reward): string | undefined {
   return undefined;
 }
 function Rewards({ rewards, compact = false }: { rewards: Reward[]; compact?: boolean }) {
+  if(!compact)return <RewardList items={rewards.map((r,i)=>({key:r.kind+'-'+r.id+'-'+i,name:raidRewardLabel(r).split(' ×')[0],amount:r.amount,image:rewardIcon(r)}))}/>;
   return <ul className={`inv-rewards ${compact ? 'inv-rewards-compact' : ''}`}>{rewards.map((reward, i) => <li key={`${reward.kind}-${reward.id}-${i}`} title={raidRewardLabel(reward)}>{rewardIcon(reward) && <img src={rewardIcon(reward)} alt="" />}<span>{raidRewardLabel(reward)}</span></li>)}</ul>;
 }
 function Castle({ name, castleId, level = 1, className = '' }: { name: string; castleId: string; level?: number; className?: string }) {
@@ -128,18 +131,19 @@ export default function TerritoryView({ territory, rooms, userId, onHost, onOpen
         <section className="inv-enemy-info" aria-live="polite"><Art key={active.enemy.id} src={territoryEnemyArt(active.enemy, 'portrait')} alt="" /><div><h3>{active.enemy.name} <ElementBadge element={active.enemy.element} /><span>敵Lv.{active.enemy.level}</span></h3><dl className="inv-stats"><div><dt>HP</dt><dd>{active.enemy.stats.hp.toLocaleString()}</dd></div><div><dt>ATK</dt><dd>{active.enemy.stats.atk.toLocaleString()}</dd></div><div><dt>DEF</dt><dd>{active.enemy.stats.def.toLocaleString()}</dd></div></dl></div></section>
         {active.isRepresentative && <p className="inv-note">通常戦の敵は侵攻時に決定します。表示は候補の一例です。</p>}
         <details className="inv-enemy-skills"><summary>敵編成・所持スキルを見る（{active.enemies.length}体）</summary>{active.enemies.map(enemy => <div key={enemy.id}><h4>{enemyRoleLabel(enemy)} {enemy.name} · 敵Lv.{enemy.level}</h4><p>HP {enemy.stats.hp.toLocaleString()} / ATK {enemy.stats.atk.toLocaleString()} / DEF {enemy.stats.def.toLocaleString()}</p><ul>{enemy.skills.map((skill, i) => <li key={i}><strong>{skill.name}</strong>：{displaySkillDescription(skill.description)}</li>)}</ul></div>)}</details>
-        <dl className="inv-conditions"><div><dt>開催期間</dt><dd>{territoryDuration(destination.durationMinutes)}</dd></div><div><dt>必要侵攻Lv.</dt><dd>{destination.requiredLevel}</dd></div><div><dt>開催枠</dt><dd>{territory!.activeHostingCount} / {territory!.hostingSlots}</dd></div><div><dt>{destination.itemName}</dt><dd><img className="inv-ticket" src={INVASION_TICKET} alt="" />所持 {destination.ownedItemCount} / 必要 {destination.itemCount}<button className="inv-source" onClick={() => setSource(true)}>入手方法 ›</button></dd></div></dl>
         <section className="inv-prizes"><h2 className="inv-section-title">{active.label}の討伐報酬</h2><Rewards rewards={active.defeatRewards} /><p className="inv-note">個別バトル3勝で資格獲得。その後の討伐報酬が対象です。</p>{destination.raidMaster.participationRewards.length > 0 && <details className="inv-enemy-skills"><summary>参加報酬</summary><Rewards rewards={destination.raidMaster.participationRewards} /></details>}<p className="inv-exp-reward">クリア時：主催者EXP <b>{destination.clearExp.toLocaleString()}</b><small>（主催者・個別3勝が必要）</small></p></section>
+        <dl className="inv-conditions"><InfoRow label={<>開催期間</>} value={<>{territoryDuration(destination.durationMinutes)}</>}/><InfoRow label={<>必要侵攻Lv.</>} value={<>{destination.requiredLevel}</>}/><InfoRow label={<>開催枠</>} value={<>{territory!.activeHostingCount} / {territory!.hostingSlots}</>}/><InfoRow label={<>{destination.itemName}</>} value={<><img className="inv-ticket" src={INVASION_TICKET} alt="" />所持 {destination.ownedItemCount} / 必要 {destination.itemCount}<button className="inv-source" onClick={() => setSource(true)}>入手方法 ›</button></>}/></dl>
+
         {!destination.canHost && <ul className="inv-reasons">{destination.reasons.map(reason => <li key={reason}>{reason}</li>)}</ul>}
-        <button className="inv-button inv-primary" disabled={!destination.canHost || busy || !imagesReady} onClick={() => { setError(''); setConfirm(true); }}>侵攻する <span aria-hidden="true">›</span></button>
+        <ActionButton variant="primary" busy={busy} disabled={!destination.canHost || !imagesReady} onClick={() => { setError(''); setConfirm(true); }}>侵攻する</ActionButton>
       </div>
     </>}
     {source && destination && <Modal title={`${destination.itemName}の入手方法`} className="inv-dialog" onClose={() => setSource(false)} footer={<button className="inv-button" onClick={() => setSource(false)}>閉じる</button>}><p>{destination.itemSource}</p><p>所持 {destination.ownedItemCount} / 必要 {destination.itemCount}</p></Modal>}
-    {confirm && destination && initial && <Modal title="侵攻確認" className="inv-dialog" onClose={() => { if (!busy) setConfirm(false); }} footer={<div className="inv-dialog-actions"><button className="inv-button" disabled={busy} onClick={() => setConfirm(false)}>キャンセル</button><button className="inv-button inv-primary" disabled={busy || !destination.canHost || !imagesReady} onClick={() => void host()}>{busy ? '侵攻準備中…' : '侵攻する'}</button></div>}>
+    {confirm && destination && initial && <Modal title="侵攻確認" className="inv-dialog" onClose={() => { if (!busy) setConfirm(false); }} footer={<div className="g4-action-group"><ActionButton disabled={busy} onClick={() => setConfirm(false)}>キャンセル</ActionButton><ActionButton variant="primary" busy={busy} busyLabel="準備中" disabled={!destination.canHost || !imagesReady} onClick={() => void host()}>侵攻する</ActionButton></div>}>
       <Castle name={destination.castle} castleId={destination.raidMaster.id} />
       <div className="inv-confirm-enemy"><Art key={initial.enemy.id} src={territoryEnemyArt(initial.enemy, 'portrait')} alt={initial.enemy.name} /><div><h3><ElementBadge element={initial.enemy.element} />{enemyRoleLabel(initial.enemy)} {initial.enemy.name}</h3><p><span className="inv-tag">開始</span> ボスLv.{initial.level} · 敵Lv.{initial.enemy.level}</p></div></div>
       {initial.isRepresentative && <p className="inv-note">通常戦の敵は侵攻時に決定します。</p>}
-      <dl className="inv-conditions"><div><dt>開催期間</dt><dd>{territoryDuration(destination.durationMinutes)}</dd></div><div><dt>消費アイテム</dt><dd><img className="inv-ticket" src={INVASION_TICKET} alt="" />{destination.itemName} ×{destination.itemCount}</dd></div><div><dt>所持数</dt><dd>{destination.ownedItemCount} → {Math.max(0, destination.ownedItemCount - destination.itemCount)}</dd></div><div><dt>開催枠</dt><dd>{territory!.activeHostingCount} / {territory!.hostingSlots} → <b>{territory!.activeHostingCount + 1} / {territory!.hostingSlots}</b></dd></div></dl>
+      <dl className="inv-conditions"><InfoRow label={<>開催期間</>} value={<>{territoryDuration(destination.durationMinutes)}</>}/><InfoRow label={<>消費アイテム</>} value={<><img className="inv-ticket" src={INVASION_TICKET} alt="" />{destination.itemName} ×{destination.itemCount}</>}/><InfoRow label={<>所持数</>} value={<>{destination.ownedItemCount} → {Math.max(0, destination.ownedItemCount - destination.itemCount)}</>}/><InfoRow label={<>開催枠</>} value={<>{territory!.activeHostingCount} / {territory!.hostingSlots} → <b>{territory!.activeHostingCount + 1} / {territory!.hostingSlots}</b></>}/></dl>
       {!destination.canHost && <ul className="inv-reasons">{destination.reasons.map(reason => <li key={reason}>{reason}</li>)}</ul>}{error && <p className="inv-reasons" role="alert">{error}</p>}
     </Modal>}
   </section>;
