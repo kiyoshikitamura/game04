@@ -23,3 +23,9 @@
 
 実機受入は未確認。保存・配信SHAは配信記録へ追記。
 - npm run typecheck / Preview環境による next build：PASS。
+
+## 共通Preview配信
+
+修正・配信SHA：0cc01e4141657762b45c690c633f5208031b9924。Ready deployment：dpl_H9sW8Zvvp1SKGRjwiFdAJKDtbLcR。配信直前のPR #37 HEAD一致を確認。共通Preview公開識別APIでSHA/branch/previewを確認。配信後も375/390×600で重複/通信/その他/入力不備、連打抑止、入力保持・フォーカス復帰、訂正後の進行をPASS。pageerror 0。状態：配信済み・実機確認待ち。
+
+共通URL：https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app

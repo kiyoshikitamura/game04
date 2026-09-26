@@ -7,7 +7,7 @@
 - 共通Preview：https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app/
 - 作業ブランチ：work/game04-common-preview-20260925。PR最新と発生版の一致をGitHubで確認。
 - 修正前配信の独立照合：2026-09-26、公開 /api/qa/deployment が上記SHA・preview・同ブランチを返すことを確認。deploymentId dpl_3CnYeKBqsnCcnaJHKzvMw8GevUWM。
-- 現在の確認SHA：ef047228fb2cc2146d52cd1ab243d2b52aa1821f（2026-09-27、DBG-064/071共通Preview公開識別APIで照合。実機確認待ち）。
+- 現在の確認SHA：0cc01e4141657762b45c690c633f5208031b9924（2026-09-27、DBG-075共通Preview公開識別APIで照合。実機確認待ち）。
 - 直前のユーザー実機確認基準：d9be130。1-1クリアまでの確認済み12件は保持。
 - 端末はiPhone系との報告。機種・OS・ブラウザー版は未確認。原画像の23:47・4Gは引継ぎ記載であり、本作業で画像の独立閲覧は未実施。
 - 次の番号：DBG-076。削除・再利用・振り直し禁止。
@@ -734,7 +734,7 @@ DBG-014/015/030の統合接続追記：任務確認保存後に予約済み2-1�
 
 ## DBG-075（P1）：チュートリアル名前重複の案内
 
-全体UI棚卸しを待たず先行。実装・限定検証済み、配信準備。名前登録はgame04_commit_tutorialでusers.usernameを更新し、lower(btrim(username))の一意index users_username_normalized_uidxが重複を拒否。現APIがDBメッセージを返し、IntegratedTutorialがe.messageを直接描画していたことを実APIで確認。
+全体UI棚卸しを待たず先行。配信済み・実機確認待ち。名前登録はgame04_commit_tutorialでusers.usernameを更新し、lower(btrim(username))の一意index users_username_normalized_uidxが重複を拒否。現APIがDBメッセージを返し、IntegratedTutorialがe.messageを直接描画していたことを実APIで確認。
 
 検証済みの名前制約エラー完全一致かつ名前入力段階だけを共通CanonicalDialogへ接続。「この名前は既に登録済です。」「別の名前を入力してください。」「入力し直す」。閉じると入力を保持して同じ入力欄へフォーカス。通信/他制約/入力エラーを区別し内部文言を表示しない。連打抑止、DBの一意性/正規化/文字規則/再送契約は保持。DB・Edgeの仕様変更なし。
 
