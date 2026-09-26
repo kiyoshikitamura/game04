@@ -10,7 +10,7 @@ export function recordedBattleSounds(result: BattleResult, index: number): SeEve
   const event = frame.event ?? frame.kind;
   if (event === 'end') return [result.outcome === 'win' ? 'VICTORY' : 'DEFEAT'];
   if (event === 'phase') return ['BATTLE_PHASE'];
-  if (event === 'burst_start' || event === 'burst_resume') return ['BATTLE_BURST'];
+  if (event === 'burst_start') return ['BATTLE_BURST'];
   const { skill, isSkill } = projectRecordedBattleFrame(result, index);
   if (event === 'action_start') return isSkill ? ['BATTLE_SKILL'] : [];
   if (event === 'critical' || (event === 'damage' && /クリティカル|critical/i.test(frame.text))) return ['BATTLE_CRITICAL'];

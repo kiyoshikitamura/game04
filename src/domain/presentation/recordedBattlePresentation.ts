@@ -59,7 +59,7 @@ export function projectRecordedBattleFrame(result: BattleResult, index: number):
     actor, actorState, skill, isSkill,
     activeActorId: idleEvents.has(event) || frame.kind === 'end' ? undefined : frame.actorId,
     // The cut-in is removed on the first outcome frame, so it cannot cover the impact or HP change.
-    cutIn: frame.kind === 'end' ? null : ['burst_start', 'burst_resume'].includes(event) ? 'burst' : event === 'action_start' && isSkill ? 'skill' : null,
+    cutIn: frame.kind === 'end' ? null : event === 'burst_start' ? 'burst' : event === 'action_start' && isSkill ? 'skill' : null,
     impacts, targets,
   };
 }
@@ -68,8 +68,9 @@ export function projectRecordedBattleFrame(result: BattleResult, index: number):
 export function recordedBattleFrameDuration(frame?: BattleFrame): number {
   if (!frame?.event) return 850;
   const event = frame.event;
-  if (['counts', 'action_end', 'interrupt_end'].includes(event)) return 60;
-  if (['burst_start', 'burst_resume'].includes(event)) return 900;
+  // Resume is bookkeeping within the same BURST, including before a recorded stun skip.
+  if (['counts', 'action_end', 'interrupt_end', 'burst_resume'].includes(event)) return 60;
+  if (event === 'burst_start') return 900;
   if (event === 'action_start') return frame.skillId && !['basic', 'BASIC_ATTACK'].includes(frame.skillId) ? 650 : 350;
   if (['phase', 'burst_failed', 'burst_interrupted', 'wave', 'death', 'revive'].includes(event)) return 600;
   if (damageEvents.has(event) || healEvents.has(event) || event === 'stun_skip') return 450;
