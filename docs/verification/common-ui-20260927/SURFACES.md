@@ -378,8 +378,9 @@
 |state: p "status" |製品導線（静的import）|§2/3/10/18/19|../ui/ActionButton;./Modal;./visual-bench/CowboyDisplay|未照合（静的抽出）|src/app/components/redesign/HomeView.tsx:163|未確認（個別証跡はREVIEW.md参照）|
 |component: IntegratedStart|製品導線（静的import）|§2/3/10/18/19|../ui/BrandedLoading|未照合（静的抽出）|src/app/components/redesign/IntegratedStart.tsx:1|未確認（個別証跡はREVIEW.md参照）|
 |state: p "alert" |製品導線（静的import）|§2/3/10/18/19|../ui/BrandedLoading|未照合（静的抽出）|src/app/components/redesign/IntegratedStart.tsx:11|未確認（個別証跡はREVIEW.md参照）|
-|component: IntegratedTutorial|製品導線（静的import）|§2/3/10/18/19|./BattleView;../ui/AssetChoice;./visual-bench/CharacterDisplays;./visual-bench/CowboyDisplay|未照合（静的抽出）|src/app/components/redesign/IntegratedTutorial.tsx:1|未確認（個別証跡はREVIEW.md参照）|
-|state: p "alert" |製品導線（静的import）|§2/3/10/18/19|./BattleView;../ui/AssetChoice;./visual-bench/CharacterDisplays;./visual-bench/CowboyDisplay|未照合（静的抽出）|src/app/components/redesign/IntegratedTutorial.tsx:59|未確認（個別証跡はREVIEW.md参照）|
+|component: IntegratedTutorial|製品導線（静的import）|§2/3/10/18/19|./BattleView;../ui/AssetChoice;./visual-bench/CharacterDisplays;./visual-bench/CowboyDisplay;../ui/CanonicalDialog|未照合（静的抽出）|src/app/components/redesign/IntegratedTutorial.tsx:1|未確認（個別証跡はREVIEW.md参照）|
+|state: p "alert" |製品導線（静的import）|§2/3/10/18/19|./BattleView;../ui/AssetChoice;./visual-bench/CharacterDisplays;./visual-bench/CowboyDisplay;../ui/CanonicalDialog|未照合（静的抽出）|src/app/components/redesign/IntegratedTutorial.tsx:63|未確認（個別証跡はREVIEW.md参照）|
+|dialog: CanonicalDialog "この名前は既に登録済です。"|製品導線（静的import）|§12/18.13/19|./BattleView;../ui/AssetChoice;./visual-bench/CharacterDisplays;./visual-bench/CowboyDisplay;../ui/CanonicalDialog|未照合（静的抽出）|src/app/components/redesign/IntegratedTutorial.tsx:64|未確認（個別証跡はREVIEW.md参照）|
 |component: InventoryView|製品導線（静的import）|§2/3/10/18/19|../ui/ListControls;../ui/CanonicalDialog;../ui/Game04DataDisplay|未照合（静的抽出）|src/app/components/redesign/InventoryView.tsx:1|未確認（個別証跡はREVIEW.md参照）|
 |state: p "status" |製品導線（静的import）|§2/3/10/18/19|../ui/ListControls;../ui/CanonicalDialog;../ui/Game04DataDisplay|未照合（静的抽出）|src/app/components/redesign/InventoryView.tsx:37|未確認（個別証跡はREVIEW.md参照）|
 |state: div "alert" |製品導線（静的import）|§2/3/10/18/19|../ui/ListControls;../ui/CanonicalDialog;../ui/Game04DataDisplay|未照合（静的抽出）|src/app/components/redesign/InventoryView.tsx:37|未確認（個別証跡はREVIEW.md参照）|
@@ -639,4 +640,6 @@
 |state: p "status" |QA導線|§2/3/10/18/19|@/app/components/redesign/BattleView;@/app/components/redesign/HomeView;@/app/components/redesign/QuestView;@/app/components/redesign/GrowthView;@/app/components/redesign/Modal|未照合（静的抽出）|src/app/qa/tutorial/TutorialPreview.tsx:132|未確認（個別証跡はREVIEW.md参照）|
 |dialog: Modal "任務"|QA導線|§12/18.13/19|@/app/components/redesign/BattleView;@/app/components/redesign/HomeView;@/app/components/redesign/QuestView;@/app/components/redesign/GrowthView;@/app/components/redesign/Modal|未照合（静的抽出）|src/app/qa/tutorial/TutorialPreview.tsx:169|未確認（個別証跡はREVIEW.md参照）|
 |state: div "alert" |製品導線（静的import）|§2/3/10/18/19|@/app/components/ui/BrandedLoading|未照合（静的抽出）|src/app/qa/tutorial/TutorialSceneAssets.tsx:27|未確認（個別証跡はREVIEW.md参照）|
+|state: p "alert" |QA導線|§2/3/10/18/19||未照合（静的抽出）|src/app/qa/tutorial-name/Harness.tsx:15|未確認（個別証跡はREVIEW.md参照）|
+|route: /qa/tutorial-name|QA導線|§2/3/10/18/19||未照合（静的抽出）|src/app/qa/tutorial-name/page.tsx:1|未確認（個別証跡はREVIEW.md参照）|
 |route: /qa/visual-parts|QA導線|§2/3/10/18/19||未照合（静的抽出）|src/app/qa/visual-parts/page.tsx:1|未確認（個別証跡はREVIEW.md参照）|

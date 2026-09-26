@@ -4494,19 +4494,31 @@
     "label": "IntegratedTutorial",
     "scope": "製品導線（静的import）",
     "rules": "2/3/10/18/19",
-    "components": "./BattleView;../ui/AssetChoice;./visual-bench/CharacterDisplays;./visual-bench/CowboyDisplay",
+    "components": "./BattleView;../ui/AssetChoice;./visual-bench/CharacterDisplays;./visual-bench/CowboyDisplay;../ui/CanonicalDialog",
     "problem": "未照合（静的抽出）",
     "fix": "src/app/components/redesign/IntegratedTutorial.tsx",
     "result": "未確認（個別証跡はREVIEW.md参照）"
   },
   {
     "file": "src/app/components/redesign/IntegratedTutorial.tsx",
-    "line": 59,
+    "line": 63,
     "kind": "state",
     "label": "p \"alert\" ",
     "scope": "製品導線（静的import）",
     "rules": "2/3/10/18/19",
-    "components": "./BattleView;../ui/AssetChoice;./visual-bench/CharacterDisplays;./visual-bench/CowboyDisplay",
+    "components": "./BattleView;../ui/AssetChoice;./visual-bench/CharacterDisplays;./visual-bench/CowboyDisplay;../ui/CanonicalDialog",
+    "problem": "未照合（静的抽出）",
+    "fix": "src/app/components/redesign/IntegratedTutorial.tsx",
+    "result": "未確認（個別証跡はREVIEW.md参照）"
+  },
+  {
+    "file": "src/app/components/redesign/IntegratedTutorial.tsx",
+    "line": 64,
+    "kind": "dialog",
+    "label": "CanonicalDialog \"この名前は既に登録済です。\"",
+    "scope": "製品導線（静的import）",
+    "rules": "12/18.13/19",
+    "components": "./BattleView;../ui/AssetChoice;./visual-bench/CharacterDisplays;./visual-bench/CowboyDisplay;../ui/CanonicalDialog",
     "problem": "未照合（静的抽出）",
     "fix": "src/app/components/redesign/IntegratedTutorial.tsx",
     "result": "未確認（個別証跡はREVIEW.md参照）"
@@ -7617,6 +7629,30 @@
     "components": "@/app/components/ui/BrandedLoading",
     "problem": "未照合（静的抽出）",
     "fix": "src/app/qa/tutorial/TutorialSceneAssets.tsx",
+    "result": "未確認（個別証跡はREVIEW.md参照）"
+  },
+  {
+    "file": "src/app/qa/tutorial-name/Harness.tsx",
+    "line": 15,
+    "kind": "state",
+    "label": "p \"alert\" ",
+    "scope": "QA導線",
+    "rules": "2/3/10/18/19",
+    "components": "",
+    "problem": "未照合（静的抽出）",
+    "fix": "src/app/qa/tutorial-name/Harness.tsx",
+    "result": "未確認（個別証跡はREVIEW.md参照）"
+  },
+  {
+    "file": "src/app/qa/tutorial-name/page.tsx",
+    "line": 1,
+    "kind": "route",
+    "label": "/qa/tutorial-name",
+    "scope": "QA導線",
+    "rules": "2/3/10/18/19",
+    "components": "",
+    "problem": "未照合（静的抽出）",
+    "fix": "src/app/qa/tutorial-name/page.tsx",
     "result": "未確認（個別証跡はREVIEW.md参照）"
   },
   {
