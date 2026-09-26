@@ -1,0 +1,40 @@
+/* Authority §18.14: natural-height three-line rows; shared dialog owns focus/close. */
+.g4-mission-modal{width:min(100%,390px);border-radius:4px}
+.g4-mission-modal .rd-modal-header{padding:4px 12px;justify-content:center;border:0}
+.g4-mission-modal .rd-modal-header .g4-page-title{flex:none;width:216px;max-width:100%}
+.g4-mission-modal .rd-modal-body{display:flex;flex-direction:column;padding:0;overflow:hidden}
+.g4-mission-modal .rd-modal-footer,.g4-mission-footer{display:flex;flex-wrap:nowrap;gap:8px;padding:6px 12px}
+.g4-mission-inline{display:flex;flex-direction:column;max-height:65dvh;min-height:0}
+:is(.g4-mission-modal,.g4-mission-inline) button{font:600 14px/1.4 var(--g4-sans,system-ui);min-height:44px;min-width:44px;padding:6px 10px;border:1px solid #9c815a;border-radius:4px;background:#30252c;color:#f4efe6}
+.g4-mission-tabs{display:flex;padding:0 12px;flex:none}
+.g4-mission-tabs button{flex:1;border:0;border-bottom:1px solid #655039;border-radius:0;background:none;padding:6px 4px}
+.g4-mission-tabs button[aria-pressed=true]{color:#f1d28c;border-bottom:2px solid #f1d28c}
+.g4-mission-tabs small{font-size:13px}
+.g4-mission-scroll{min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:0 12px;scrollbar-width:thin;scrollbar-color:#a78b59 #19141c}
+.g4-mission-row{padding:8px 0;border-bottom:1px solid #655039;display:grid;gap:2px;text-align:left}
+.g4-mission-row h3{margin:0;font:600 16px/24px var(--g4-sans,system-ui);overflow-wrap:anywhere}
+.g4-mission-progress{display:flex;align-items:center;gap:8px;min-height:20px;font:400 13px/20px var(--g4-sans,system-ui);font-variant-numeric:tabular-nums}
+.g4-mission-progress>span{white-space:nowrap}
+.g4-mission-track{height:6px;flex:1;min-width:12px;background:#473b43;border-radius:6px;overflow:hidden}
+.g4-mission-track>span{display:block;height:100%;background:#dfbb73}
+.g4-mission-bottom{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.g4-mission-rewards{display:flex;align-items:center;gap:4px;min-width:0;flex-wrap:wrap}
+.g4-mission-rewards .g4-mission-reward{display:flex;align-items:center;gap:3px;border:0;background:none;padding:0 3px;font-size:13px;white-space:nowrap}
+.g4-mission-reward img{width:24px;height:24px;object-fit:contain}
+.g4-mission-rewards .g4-mission-more{border:0;background:none;padding:4px;color:#efd28c;font-size:13px}
+.g4-mission-bottom .g4-mission-action{width:56px;flex:none;padding:6px}
+.g4-mission-action.is-claim,.g4-mission-modal .g4-mission-bulk{background:#8d3024;border-color:#cd8b69}
+.g4-mission-check{display:grid;place-items:center;width:56px;flex:none;min-height:44px;font-size:19px;color:#bdd8ad}
+.g4-mission-modal .g4-mission-bulk,.g4-mission-inline .g4-mission-bulk{flex:1}
+.g4-mission-modal .g4-mission-close{width:64px;flex:none}
+.g4-mission-row .g4-mission-condition,.g4-mission-claimed>button{border:0;background:none;text-align:left;padding:0;color:#d6c6ad;font-size:13px}
+.g4-mission-claimed>button{width:100%;color:#bdd8ad;font-size:14px}
+.g4-mission-notice{font-size:14px;line-height:1.5;margin:8px 0}
+/* Apply the shared data typography above legacy theme-wide button rules. */
+body.game04-theme :is(.g4-mission-modal,.g4-mission-inline) :is(h3,button,span,small,p){font-family:var(--g4-sans)!important}
+body.game04-theme .rd-modal.g4-mission-modal button,body.game04-theme .g4-mission-inline button{font-size:14px;line-height:1.4;white-space:nowrap;overflow-wrap:normal}
+body.game04-theme .rd-modal.g4-mission-modal .g4-mission-rewards button,body.game04-theme .g4-mission-inline .g4-mission-rewards button{font-size:13px}
+body.game04-theme .rd-modal.g4-mission-modal .g4-mission-tabs button{box-shadow:none;background:transparent;border:0;border-bottom:1px solid #655039}
+body.game04-theme .rd-modal.g4-mission-modal .g4-mission-tabs button[aria-pressed=true]{border-bottom:2px solid var(--g4-gold);color:var(--g4-gold)}
+body.game04-theme .rd-modal.g4-mission-modal :is(.g4-mission-bulk,.g4-mission-action.is-claim){background:var(--g4-primary);border-color:var(--g4-gold)}
+body.game04-theme .rd-modal.g4-mission-modal .g4-mission-bulk:disabled{background:var(--g4-panel);border-color:var(--g4-rule-border);color:var(--g4-muted)}

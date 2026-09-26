@@ -253,7 +253,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   const state = data.state, vipActive = isVipActive(state.vipExpiresAt);
   const battleRoom = battle && battleKind === 'raid' && raidId ? data.rooms.find(room => room.id === raidId) : undefined;
   const encounter = data.rooms.find(r => getRoomRaidMaster(r).type === 'encounter' && r.status === 'active' && Date.parse(r.expiresAt) > encounterNow && r.participants.some(p => p.userId === state.userId && !p.leftAt));
-  return <RedesignShell state={state} activeTab={tab} navigationBusy={busy} onNavigate={navigate} onAction={action} hideChrome={!!battle || questPlaying} socialEvents={data.socialEvents} missions={data.missions}
+  return <RedesignShell state={state} activeTab={tab} navigationBusy={busy} onNavigate={navigate} onAction={action} hideChrome={!!battle || questPlaying} socialEvents={data.socialEvents} missions={data.missions} onRefreshMissions={refresh}
     encounterRaid={encounter ? { id: encounter.id, name: raidDisplayLabel(getRoomRaidMaster(encounter), encounter.level), expiresAt: encounter.expiresAt } : null}
     notifications={<>
       {state.tutorial&&!state.tutorial.departed&&tab==='home'&&!game.showLoginBonusModal&&<GuideDialog title="戦支度" message={FIRST_SORTIE_TEXT} actions={[{label:'出陣',semantic:'primary',disabled:busy,onClick:()=>navigate('quest')}]}/>}

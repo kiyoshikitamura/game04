@@ -1,55 +1,34 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
-import type { RedesignState } from '@/domain/redesign/types';
-import type { MissionProjection } from '@/domain/redesign/missions';
-import { raidRewardLabel } from '@/domain/redesign/raidPresentation';
-
-type Props = {
-  state: RedesignState;
-  missions: MissionProjection[];
-  missionBusy: boolean;
-  missionError: string;
-  previewOnly: boolean;
-  onClaim: (id: string) => void;
-};
-
-const STATUS_FILTERS = [
-  ['claimable', '受取可'], ['progress', '進行中'], ['claimed', '受取済み'],
-] as const;
-const PAGE_SIZE = 20;
-// Presentation only: keep accepted master names, IDs and conditions unchanged.
-const missionLabel = (value: string) => value.replace(/キャラクター|キャラ/g, '武将');
-
-/** Formal projections only; legacy daily missions are not substituted for undecided rules. */
-export default function MissionContent({ missions, missionBusy, missionError, previewOnly, onClaim }: Props) {
-  const [filter, setFilter] = useState<MissionProjection['status']>(() => missions.some(m => m.status === 'claimable') ? 'claimable' : 'progress');
-  const [requestedPage, setPage] = useState(0);
-  const filterRef = useRef<HTMLDivElement>(null);
-  const filtered = missions.filter(mission => mission.status === filter);
-  const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-  const page = Math.min(requestedPage, pageCount - 1);
-  const visible = filtered.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
-  useEffect(() => { filterRef.current?.closest('.rd-modal-body')?.scrollTo({ top: 0 }); }, [page, filter]);
-  return <>
-    <div ref={filterRef} className="rd-tabs" role="group" aria-label="任務の状態">
-      {STATUS_FILTERS.map(([status, label]) => <button type="button" key={status} aria-pressed={filter === status} className={filter === status ? 'active' : ''}
-        disabled={missionBusy} onClick={() => { setFilter(status); setPage(0); }}>{label} ({missions.filter(mission => mission.status === status).length})</button>)}
-    </div>
-    {visible.length ? <div className="rd-stack" aria-busy={missionBusy}>{visible.map(mission => <section className="rd-panel" key={mission.id}>
-      <strong>{missionLabel(mission.name)}</strong>
-      {mission.description && mission.description !== mission.name && <p className="rd-muted">{missionLabel(mission.description)}</p>}
-      <p>{mission.current.toLocaleString()} / {mission.target.toLocaleString()}</p>
-      <ul>{mission.rewards.map((reward, index) => <li key={index}>{raidRewardLabel(reward)}</li>)}</ul>
-      <button type="button" className="rd-button rd-primary" disabled={missionBusy || previewOnly || mission.status !== 'claimable'} onClick={() => onClaim(mission.id)}>
-        {mission.status === 'claimed' ? '受取済み' : mission.status === 'claimable' ? '報酬を受け取る' : '進行中'}
-      </button>
-    </section>)}</div> : <p className="rd-muted">{filter === 'claimable' ? '受け取れる任務報酬はありません。' : filter === 'claimed' ? '受取済みの任務はありません。' : '進行中の任務はありません。'}</p>}
-    {pageCount > 1 && <nav className="rd-row" aria-label="任務一覧のページ">
-      <button type="button" className="rd-button" disabled={missionBusy || page === 0} onClick={() => setPage(page - 1)}>前へ</button>
-      <span aria-live="polite">{page + 1} / {pageCount}</span>
-      <button type="button" className="rd-button" disabled={missionBusy || page + 1 >= pageCount} onClick={() => setPage(page + 1)}>次へ</button>
-    </nav>}
-    {missionBusy && <p role="status">報酬を受け取っています…</p>}
-    {missionError && <p role="alert">{missionError}</p>}
-  </>;
+import {useEffect,useRef,useState} from 'react';
+import type {RedesignState} from '@/domain/redesign/types';
+import type {MissionProjection} from '@/domain/redesign/missions';
+import {missionPresentation,missionRewardImage} from '@/domain/presentation/missionPresentation';
+import {raidRewardLabel} from '@/domain/redesign/raidPresentation';
+import {RewardList} from '../ui/Game04DataDisplay';
+import Modal from './Modal';
+import './MissionContent.css';
+type Props={state:RedesignState;missions:MissionProjection[];missionBusy:boolean;missionError:string;previewOnly:boolean;onClaim:(id:string)=>void;onClaimMany?:(ids:string[])=>void;onClose?:()=>void;onNavigate?:(tab:string)=>void;onRetryOpen?:()=>void;missionStatus?:string};
+export default function MissionContent({missions,missionBusy,missionError,previewOnly,onClaim,onClaimMany,onClose,onNavigate,onRetryOpen,missionStatus}:Props){
+ const [daily,setDaily]=useState(true),[expanded,setExpanded]=useState(false);
+ const [detail,setDetail]=useState<{mission:MissionProjection;rewardIndex?:number;rewards?:boolean}|null>(null);
+ const scroll=useRef<HTMLDivElement>(null);
+ useEffect(()=>{scroll.current?.scrollTo({top:0});setExpanded(false)},[daily]);
+ const visible=missions.filter(m=>missionPresentation(m).daily===daily),claimable=visible.filter(m=>m.status==='claimable');
+ const active=visible.filter(m=>m.status!=='claimed').sort((a,b)=>Number(b.status==='claimable')-Number(a.status==='claimable')),claimed=visible.filter(m=>m.status==='claimed');
+ const disabled=missionBusy||previewOnly;
+ const challenge=(m:MissionProjection)=>{const p=missionPresentation(m);if(!onNavigate||!p.destination){setDetail({mission:m});return}if(p.destination==='missions'){setDaily(true);scroll.current?.scrollTo({top:0});return}onClose?.();onNavigate(p.destination)};
+ const row=(m:MissionProjection)=>{const p=missionPresentation(m),complete=m.status!=='progress';return <section className="g4-mission-row" key={m.id} data-mission-id={m.id}>
+ <h3>{p.title}</h3>
+ <div className="g4-mission-progress"><div className="g4-mission-track" role="progressbar" aria-label={p.title} aria-valuemin={0} aria-valuemax={m.target} aria-valuenow={m.current}><span style={{width:`${Math.min(100,m.current/Math.max(1,m.target)*100)}%`}}/></div><span>{m.current.toLocaleString()} / {m.target.toLocaleString()}{p.unit}</span>{complete?(m.status==='claimable'&&<span>達成</span>):<span>あと{Math.max(0,m.target-m.current).toLocaleString()}{p.unit}</span>}</div>
+ <div className="g4-mission-bottom"><div className="g4-mission-rewards">{m.rewards.slice(0,2).map((r,i)=><button type="button" className="g4-mission-reward" key={i} disabled={missionBusy} aria-label={`${raidRewardLabel(r)}の詳細`} onClick={()=>setDetail({mission:m,rewards:true,rewardIndex:i})}>{missionRewardImage(r)?<img src={missionRewardImage(r)} alt=""/>:<span>{raidRewardLabel(r).replace(/ ×[\d,]+$/,'')}</span>}<span>×{r.amount.toLocaleString()}</span></button>)}{m.rewards.length>2&&<button type="button" className="g4-mission-more" disabled={missionBusy} aria-label={`全${m.rewards.length}件の報酬を確認`} onClick={()=>setDetail({mission:m,rewards:true})}>＋{m.rewards.length-2}件</button>}</div>
+ {m.status==='claimed'?<span className="g4-mission-check" role="img" aria-label="受取済み">✓</span>:<button type="button" className={`g4-mission-action ${m.status==='claimable'?'is-claim':''}`} disabled={disabled} onClick={()=>m.status==='claimable'?onClaim(m.id):challenge(m)}>{m.status==='claimable'?'受取':p.destination?'挑戦':'詳細'}</button>}</div>
+ {p.detail!==p.title&&<button type="button" className="g4-mission-condition" disabled={missionBusy} onClick={()=>setDetail({mission:m})}>条件の詳細</button>}
+ </section>};
+ const footer=<><button type="button" className="g4-mission-bulk" disabled={disabled||!claimable.length||!onClaimMany} onClick={()=>{setExpanded(false);onClaimMany?.(claimable.map(m=>m.id))}}>{missionBusy?'受取中…':`一括受取（${claimable.length}件）`}</button>{onClose&&<button type="button" className="g4-mission-close" disabled={missionBusy} onClick={onClose}>閉じる</button>}</>;
+ const content=<><div className="g4-mission-tabs" role="group" aria-label="任務分類">{[true,false].map(d=><button key={String(d)} type="button" aria-pressed={daily===d} disabled={missionBusy} onClick={()=>setDaily(d)}>{d?'デイリー':'ノーマル'} <small>({missions.filter(m=>missionPresentation(m).daily===d&&m.status==='claimable').length})</small></button>)}</div><div ref={scroll} className="g4-mission-scroll" aria-busy={missionBusy}>
+ {previewOnly&&<p className="g4-mission-notice">表示見本です。報酬の受取・挑戦はできません。</p>}{missionStatus&&<p role="status" className="g4-mission-notice">{missionStatus}</p>}{missionError&&<p role="alert" className="g4-mission-notice">{missionError}</p>}{missionError&&onRetryOpen&&<button disabled={missionBusy} onClick={onRetryOpen}>任務の表示を再確認</button>}
+ {active.map(row)}{!active.length&&<p className="g4-mission-notice">未受取の任務はありません。</p>}{claimed.length>0&&<div className="g4-mission-claimed"><button type="button" disabled={missionBusy} aria-expanded={expanded} onClick={()=>setExpanded(!expanded)}>{expanded?'▾':'▸'} 受取済み（{claimed.length}件）</button>{expanded&&claimed.map(row)}</div>}
+ </div></>;
+ return <>{onClose?<Modal title="任務" className="g4-mission-modal" hideCloseButton closeDisabled={missionBusy} onClose={onClose} footer={footer}>{content}</Modal>:<div className="g4-mission-inline">{content}<div className="g4-mission-footer">{footer}</div></div>}
+ {detail&&<Modal title={detail.rewards?'任務の報酬':'任務の条件'} onClose={()=>setDetail(null)} footer={<button type="button" className="rd-button" onClick={()=>setDetail(null)}>戻る</button>}><h3>{missionPresentation(detail.mission).title}</h3>{detail.rewards?<RewardList items={detail.mission.rewards.flatMap((r,i)=>detail.rewardIndex===undefined||detail.rewardIndex===i?[{key:String(i),name:raidRewardLabel(r).replace(/ ×[\d,]+$/,''),amount:r.amount,image:missionRewardImage(r)}]:[])}/>:<p>{missionPresentation(detail.mission).detail}</p>}</Modal>}</>;
 }

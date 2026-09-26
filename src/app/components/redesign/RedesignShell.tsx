@@ -16,7 +16,7 @@ import { CommunityBadges, useCommunityProfiles } from './CommunityIdentity';
 import { characterArt } from '@/theme/creativeAssets';
 
 const FOOTER = [['home','本陣','08-castle'],['quest','出陣','04-fan-sakura'],['character','武将','10-helmet'],['raid','共闘','06-oni-mask'],['gacha','召喚','11-ticket']] as const;
-export default function RedesignShell({ state, onAction, children, notifications, activeTab, onNavigate, navigationBusy = false, hideChrome = false, encounterRaid, socialEvents, missions, previewOnly = false }: { state: RedesignState; onAction: HomeAction; children?: React.ReactNode; notifications?: React.ReactNode; activeTab: string; onNavigate: (tab: string) => void; navigationBusy?: boolean; hideChrome?: boolean; encounterRaid?: HomeEncounter | null; socialEvents?: HomeSocialEvent[]; missions?: MissionProjection[]; previewOnly?: boolean }) {
+export default function RedesignShell({ state, onAction, children, notifications, activeTab, onNavigate, navigationBusy = false, hideChrome = false, encounterRaid, socialEvents, missions, onRefreshMissions, previewOnly = false }: { state: RedesignState; onAction: HomeAction; children?: React.ReactNode; notifications?: React.ReactNode; activeTab: string; onNavigate: (tab: string) => void; navigationBusy?: boolean; hideChrome?: boolean; encounterRaid?: HomeEncounter | null; socialEvents?: HomeSocialEvent[]; missions?: MissionProjection[]; onRefreshMissions?:()=>Promise<unknown>; previewOnly?: boolean }) {
   const game = useGame();
   const scrollRef = useRef<HTMLDivElement>(null);
   useEffect(() => { scrollRef.current?.scrollTo({ top: 0, left: 0 }); }, [activeTab, hideChrome]);
@@ -27,14 +27,30 @@ export default function RedesignShell({ state, onAction, children, notifications
   const ackLock=useRef(false);
   async function acknowledgeMissions(){if(ackLock.current||previewOnly||!state.earlyProgress?.missionNavigationPending)return;ackLock.current=true;setMissionError('');try{await onAction('early_missions_opened',{});}catch(e){setMissionError(e instanceof Error?e.message:'任務の表示を保存できませんでした。');}finally{ackLock.current=false;}}
   useEffect(()=>{if(game.showMissionPanel&&state.earlyProgress?.missionNavigationPending)void acknowledgeMissions();},[game.showMissionPanel,state.earlyProgress?.missionNavigationPending]);
-  async function claimMission(missionId: string) {
+  const [missionStatus,setMissionStatus]=useState('');
+  const latestMissions=useRef(missions??[]);
+  latestMissions.current=missions??[];
+  async function claimMissions(ids: string[]) {
     if (missionLock.current || previewOnly) return;
-    missionLock.current = true; setMissionBusy(true); setMissionError('');
-    try { await onAction('claim_mission', { missionId }); }
-    catch (error) { setMissionError(error instanceof Error ? error.message : '報酬を受け取れませんでした。'); }
+    missionLock.current = true; setMissionBusy(true); setMissionError('');setMissionStatus('');
+    let completed=0;
+    try {
+      for(const missionId of new Set(ids)){
+        if(!latestMissions.current.some(m=>m.id===missionId&&m.status==='claimable'))continue;
+        const response=await onAction('claim_mission',{missionId});
+        if(response&&typeof response==='object'&&'missions' in response&&Array.isArray(response.missions))latestMissions.current=response.missions;
+        completed++;
+      }
+      setMissionStatus(`${completed}件を受け取りました。`);
+    }
+    catch (error) {
+      setMissionError(`受取確認済み${completed}件。${error instanceof Error ? error.message : '報酬を受け取れませんでした。'} 未受取の任務を確認して再試行してください。`);
+      try { await onRefreshMissions?.(); }
+      catch { setMissionError(message=>`${message} 状態の再取得に失敗しました。通信を確認してください。`); }
+    }
     finally { missionLock.current = false; setMissionBusy(false); }
   }
-  function closeMissions() { if (!missionLock.current) { setMissionError(''); game.setShowMissionPanel(false); } }
+  function closeMissions() { if (!missionLock.current) { setMissionError(''); setMissionStatus(''); game.setShowMissionPanel(false); } }
   useEffect(() => { document.body.classList.add('rd-active'); return () => document.body.classList.remove('rd-active'); }, []);
   const leader = CHARACTER_MASTERS.find(c => c.id === state.deck[0]?.characterId);
   const identityProfiles = useCommunityProfiles(game.session?.user?.id, [state.userId], !previewOnly, game.session?.access_token);
@@ -54,10 +70,7 @@ export default function RedesignShell({ state, onAction, children, notifications
     {!hideChrome && <nav className="rd-footer rd-chrome-footer" aria-label="メインナビゲーション" aria-busy={navigationBusy}>{FOOTER.map(([id,label,icon]) => <button disabled={navigationBusy} aria-current={activeTab === id ? 'page' : undefined} key={id} onClick={() => onNavigate(id)}><img src={`/ui/sengoku/${icon}.png`} alt="" />{label}</button>)}</nav>}
     {menu && <Modal title="メニュー" onClose={() => setMenu(false)}><div className="rd-stack"><button className="rd-button" onClick={() => run(() => { game.setInboxPanelTab('news'); game.setShowInboxPanel(true); })}>お知らせ{game.unreadNewsCount ? ` (${game.unreadNewsCount})` : ''}</button><button className="rd-button" onClick={() => run(() => { game.setInboxPanelTab('presents'); game.setShowInboxPanel(true); })}>プレゼントBOX{game.unreadPresentsCount > 0 && <i className="g4-unread" aria-label="未読あり" />}</button><button className="rd-button" onClick={() => run(() => game.setShowSettingsPanel(true))}>設定</button><button className="rd-button" onClick={() => run(() => window.location.assign("/auth/game04"))}>アカウント連携</button></div></Modal>}
     <InboxPanel />
-    {game.showMissionPanel && <Modal title="任務" onClose={closeMissions} closeDisabled={missionBusy}>
-      {state.earlyProgress?.missionNavigationPending&&missionError&&<button className="rd-button" onClick={()=>void acknowledgeMissions()}>任務の表示を再確認</button>}
-      <MissionContent state={state} missions={missions ?? []} missionBusy={missionBusy} missionError={missionError} previewOnly={previewOnly} onClaim={id => void claimMission(id)} />
-    </Modal>}
+    {game.showMissionPanel && <MissionContent state={state} missions={missions ?? []} missionBusy={missionBusy} missionError={missionError} missionStatus={missionStatus} onRetryOpen={state.earlyProgress?.missionNavigationPending?()=>void acknowledgeMissions():undefined} previewOnly={previewOnly} onClaim={id=>void claimMissions([id])} onClaimMany={ids=>void claimMissions(ids)} onClose={closeMissions} onNavigate={onNavigate} />}
     <SettingsPanel redesign />
     {!previewOnly && <CommunityAuthenticationReminder owner={state.userId} eligible={(!state.tutorial || (state.tutorial.departed && !state.tutorial.defeatPending)) && activeTab === 'home' && !hideChrome && !menu && !navigationBusy} />}
   </div>;
