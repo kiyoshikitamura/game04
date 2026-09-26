@@ -1,0 +1,694 @@
+{
+  "seed": 1,
+  "party": [
+    {
+      "id": "char_cecile_01",
+      "name": "井伊直虎",
+      "image": "/characters/cecile_transparent_asset.png",
+      "level": 40,
+      "element": "water",
+      "stats": {
+        "hp": 10290,
+        "atk": 1387.1,
+        "def": 764.4,
+        "luk": 17.95918367346939,
+        "sp": 236
+      },
+      "skills": [
+        {
+          "id": "SKD034",
+          "name": "身構え",
+          "image": "/skills/skill_006_iron_guard.jpg",
+          "rarity": "N",
+          "element": "earth",
+          "spCost": 30,
+          "condition": {
+            "type": "always"
+          },
+          "target": "self",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "def_up",
+              "power": 15,
+              "duration": 3,
+              "carryAcrossWaves": true
+            }
+          ],
+          "description": "自身・DEF強化:15.00%・3ターン"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P11",
+          "type": "P11",
+          "name": "被回復量（蘇生除外）",
+          "stat": "atk",
+          "percent": 12,
+          "level": 0,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_genji_01",
+      "name": "今川義元",
+      "image": "/characters/genji_transparent_asset.png",
+      "level": 40,
+      "element": "wind",
+      "stats": {
+        "hp": 8652,
+        "atk": 1567.5,
+        "def": 703.8000000000001,
+        "luk": 17.95918367346939,
+        "sp": 204
+      },
+      "skills": [
+        {
+          "id": "SKD038",
+          "name": "鎧砕き",
+          "image": "/skills/skill_015_recovery_program.jpg",
+          "rarity": "R",
+          "element": "earth",
+          "spCost": 50,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "def_down",
+              "power": 12,
+              "duration": 3,
+              "carryAcrossWaves": true
+            }
+          ],
+          "description": "配置順最初の付与可能敵・DEF低下:12.00%・3ターン"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P02_wind",
+          "type": "P02",
+          "name": "同属性DEF支援",
+          "stat": "def",
+          "percent": 7.2,
+          "level": 0,
+          "target": "party",
+          "targetElement": "wind"
+        }
+      ]
+    },
+    {
+      "id": "char_takuro_01",
+      "name": "雑賀孫市",
+      "image": "/characters/takuro_transparent_asset.png",
+      "level": 40,
+      "element": "wind",
+      "stats": {
+        "hp": 6790,
+        "atk": 2310,
+        "def": 588,
+        "luk": 17.95918367346939,
+        "sp": 220
+      },
+      "skills": [
+        {
+          "id": "SKD010",
+          "name": "風断",
+          "image": "/skills/formal/SKD010.webp",
+          "rarity": "R",
+          "element": "wind",
+          "spCost": 50,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": true,
+          "effects": [
+            {
+              "type": "damage",
+              "power": 120
+            }
+          ],
+          "description": "先頭敵・攻撃倍率:120.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P06",
+          "type": "P06",
+          "name": "単体攻撃スキルダメージ",
+          "stat": "atk",
+          "percent": 6,
+          "level": 0,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_taiga_01",
+      "name": "長宗我部元親",
+      "image": "/characters/taiga_transparent_asset.png",
+      "level": 40,
+      "element": "water",
+      "stats": {
+        "hp": 8064,
+        "atk": 1907.4,
+        "def": 703.8000000000001,
+        "luk": 17.95918367346939,
+        "sp": 189
+      },
+      "skills": [
+        {
+          "id": "SKD008",
+          "name": "水断",
+          "image": "/skills/formal/SKD008.webp",
+          "rarity": "R",
+          "element": "water",
+          "spCost": 50,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": true,
+          "effects": [
+            {
+              "type": "damage",
+              "power": 120
+            }
+          ],
+          "description": "先頭敵・攻撃倍率:120.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P16",
+          "type": "P16",
+          "name": "能動ATK強化中の自身DEF",
+          "stat": "def",
+          "percent": 12,
+          "level": 0,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_riki_01",
+      "name": "濃姫",
+      "image": "/characters/riki_transparent_asset.png",
+      "level": 40,
+      "element": "dark",
+      "stats": {
+        "hp": 7931.000000000001,
+        "atk": 1881,
+        "def": 642.6,
+        "luk": 17.95918367346939,
+        "sp": 236
+      },
+      "skills": [
+        {
+          "id": "SKD040",
+          "name": "治癒の祈り",
+          "image": "/skills/skill_023_double_drive.jpg",
+          "rarity": "SR",
+          "element": "water",
+          "spCost": 90,
+          "condition": {
+            "type": "ally_hp_below",
+            "value": 0.5
+          },
+          "target": "lowest_ally",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "heal",
+              "power": 75,
+              "healingFormula": "caster_atk_percent"
+            }
+          ],
+          "description": "共通単体回復条件・回復倍率:75.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P12",
+          "type": "P12",
+          "name": "付与シールド量",
+          "stat": "atk",
+          "percent": 12,
+          "level": 0,
+          "target": "self"
+        }
+      ]
+    }
+  ],
+  "waves": [
+    [
+      {
+        "id": "4-1/1/1",
+        "name": "前田利家",
+        "image": "/creative/characters/battle/char_jihoon_01.png",
+        "level": 30,
+        "stats": {
+          "luk": 0,
+          "hp": 22480,
+          "atk": 870,
+          "def": 220,
+          "sp": 100
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "earth",
+        "actionCount": 3,
+        "initialCount": 6,
+        "initialSp": 0,
+        "skills": [],
+        "passives": [
+          {
+            "id": "P05_earth",
+            "type": "P05",
+            "name": "P05",
+            "stat": "atk",
+            "percent": 9.480881270528023,
+            "level": 2,
+            "target": "self",
+            "targetElement": "earth"
+          }
+        ]
+      },
+      {
+        "id": "4-1/1/2",
+        "name": "弓兵",
+        "image": "/creative/characters/battle/char_masato_01.png",
+        "level": 29,
+        "stats": {
+          "luk": 0,
+          "hp": 3100,
+          "atk": 360,
+          "def": 100,
+          "sp": 100
+        },
+        "order": 1,
+        "hitSpGain": 10,
+        "element": "wind",
+        "actionCount": 3,
+        "initialCount": 3,
+        "initialSp": 0,
+        "skills": [],
+        "passives": []
+      }
+    ],
+    [
+      {
+        "id": "4-1/2/1",
+        "name": "井伊直政",
+        "image": "/creative/characters/battle/char_daimon_01.png",
+        "level": 31,
+        "stats": {
+          "luk": 0,
+          "hp": 22480,
+          "atk": 870,
+          "def": 260,
+          "sp": 100
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "fire",
+        "actionCount": 3,
+        "initialCount": 6,
+        "initialSp": 50,
+        "skills": [],
+        "passives": [
+          {
+            "id": "P06_fire",
+            "type": "P06",
+            "name": "P06",
+            "stat": "atk",
+            "percent": 4.740440635264012,
+            "level": 2,
+            "target": "self",
+            "targetElement": "fire"
+          }
+        ]
+      },
+      {
+        "id": "4-1/2/2",
+        "name": "鉄砲兵",
+        "image": "/creative/characters/battle/char_tomoya_01.png",
+        "level": 30,
+        "stats": {
+          "luk": 0,
+          "hp": 3800,
+          "atk": 720,
+          "def": 120,
+          "sp": 100
+        },
+        "order": 1,
+        "hitSpGain": 10,
+        "element": "fire",
+        "actionCount": 6,
+        "initialCount": 6,
+        "initialSp": 50,
+        "skills": [
+          {
+            "id": "SKD007",
+            "name": "標準単体攻撃・火",
+            "image": "",
+            "rarity": "R",
+            "element": "fire",
+            "spCost": 50,
+            "condition": {
+              "type": "always"
+            },
+            "target": "first",
+            "effects": [
+              {
+                "type": "damage",
+                "power": 130.7
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": []
+      }
+    ],
+    [
+      {
+        "id": "4-1/3/1",
+        "name": "柴田勝家",
+        "image": "/creative/characters/battle/char_noa_01.png",
+        "level": 32,
+        "stats": {
+          "luk": 0,
+          "hp": 22480,
+          "atk": 870,
+          "def": 400,
+          "sp": 100
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "earth",
+        "actionCount": 3,
+        "initialCount": 6,
+        "initialSp": 30,
+        "skills": [],
+        "passives": [
+          {
+            "id": "P05_earth",
+            "type": "P05",
+            "name": "P05",
+            "stat": "atk",
+            "percent": 14.221321905792035,
+            "level": 2,
+            "target": "self",
+            "targetElement": "earth"
+          }
+        ]
+      }
+    ]
+  ],
+  "rules": {
+    "defenseFactor": 1,
+    "advantageMultiplier": 1.5,
+    "disadvantageMultiplier": 0.75,
+    "spRecoveryDivisor": 120,
+    "burstLukDivisor": 20,
+    "enemySpRecoveryDivisor": 30,
+    "maxPlayerActions": 300,
+    "initialSpRatio": 0,
+    "version": "balance-v2-20260920",
+    "burstPolicy": "attack-free-v1-20260926",
+    "inputVersion": "wave-sp-v1-20260921",
+    "balanceV2": {
+      "status": "PREVIEW_PROVISIONAL",
+      "version": "PREVIEW_PROVISIONAL_BALANCE_V2_20260920",
+      "damageBonusCap": 50,
+      "healingBonusCap": 80,
+      "shieldBonusCap": 50,
+      "shieldHpCap": 0.5,
+      "periodicCapMultiplier": 2,
+      "lowHpThreshold": 0.4,
+      "highHpThreshold": 0.7,
+      "diversityFactors": [
+        0,
+        0.25,
+        0.5,
+        0.75,
+        1
+      ]
+    }
+  },
+  "questSnapshot": {
+    "id": "omi-1",
+    "designId": "4-1",
+    "areaId": "omi",
+    "index": 1,
+    "name": "湖畔の番所",
+    "description": "集中攻撃を受ける",
+    "energyCost": 6,
+    "waves": [
+      [
+        {
+          "id": "4-1/1/1",
+          "name": "前田利家",
+          "image": "/creative/characters/battle/char_jihoon_01.png",
+          "level": 30,
+          "stats": {
+            "luk": 0,
+            "hp": 22480,
+            "atk": 870,
+            "def": 220,
+            "sp": 100
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "earth",
+          "actionCount": 3,
+          "initialCount": 6,
+          "initialSp": 0,
+          "skills": [],
+          "passives": [
+            {
+              "id": "P05_earth",
+              "type": "P05",
+              "name": "P05",
+              "stat": "atk",
+              "percent": 9.480881270528023,
+              "level": 2,
+              "target": "self",
+              "targetElement": "earth"
+            }
+          ]
+        },
+        {
+          "id": "4-1/1/2",
+          "name": "弓兵",
+          "image": "/creative/characters/battle/char_masato_01.png",
+          "level": 29,
+          "stats": {
+            "luk": 0,
+            "hp": 3100,
+            "atk": 360,
+            "def": 100,
+            "sp": 100
+          },
+          "order": 1,
+          "hitSpGain": 10,
+          "element": "wind",
+          "actionCount": 3,
+          "initialCount": 3,
+          "initialSp": 0,
+          "skills": [],
+          "passives": []
+        }
+      ],
+      [
+        {
+          "id": "4-1/2/1",
+          "name": "井伊直政",
+          "image": "/creative/characters/battle/char_daimon_01.png",
+          "level": 31,
+          "stats": {
+            "luk": 0,
+            "hp": 22480,
+            "atk": 870,
+            "def": 260,
+            "sp": 100
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "fire",
+          "actionCount": 3,
+          "initialCount": 6,
+          "initialSp": 50,
+          "skills": [],
+          "passives": [
+            {
+              "id": "P06_fire",
+              "type": "P06",
+              "name": "P06",
+              "stat": "atk",
+              "percent": 4.740440635264012,
+              "level": 2,
+              "target": "self",
+              "targetElement": "fire"
+            }
+          ]
+        },
+        {
+          "id": "4-1/2/2",
+          "name": "鉄砲兵",
+          "image": "/creative/characters/battle/char_tomoya_01.png",
+          "level": 30,
+          "stats": {
+            "luk": 0,
+            "hp": 3800,
+            "atk": 720,
+            "def": 120,
+            "sp": 100
+          },
+          "order": 1,
+          "hitSpGain": 10,
+          "element": "fire",
+          "actionCount": 6,
+          "initialCount": 6,
+          "initialSp": 50,
+          "skills": [
+            {
+              "id": "SKD007",
+              "name": "標準単体攻撃・火",
+              "image": "",
+              "rarity": "R",
+              "element": "fire",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 130.7
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "passives": []
+        }
+      ],
+      [
+        {
+          "id": "4-1/3/1",
+          "name": "柴田勝家",
+          "image": "/creative/characters/battle/char_noa_01.png",
+          "level": 32,
+          "stats": {
+            "luk": 0,
+            "hp": 22480,
+            "atk": 870,
+            "def": 400,
+            "sp": 100
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "earth",
+          "actionCount": 3,
+          "initialCount": 6,
+          "initialSp": 30,
+          "skills": [],
+          "passives": [
+            {
+              "id": "P05_earth",
+              "type": "P05",
+              "name": "P05",
+              "stat": "atk",
+              "percent": 14.221321905792035,
+              "level": 2,
+              "target": "self",
+              "targetElement": "earth"
+            }
+          ]
+        }
+      ]
+    ],
+    "firstRewards": [
+      {
+        "kind": "soul",
+        "id": "char_noa_01",
+        "amount": 3
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_CHARACTER",
+        "amount": 1
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 1600
+      },
+      {
+        "kind": "character_exp_item",
+        "id": "small",
+        "amount": 5
+      },
+      {
+        "kind": "equipment_exp_item",
+        "id": "small",
+        "amount": 3
+      }
+    ],
+    "rareRewards": [
+      {
+        "kind": "soul",
+        "id": "char_noa_01",
+        "amount": 1,
+        "rarity": "SR",
+        "chance": 0.15,
+        "period": 20
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_CHARACTER",
+        "amount": 1,
+        "chance": 0.005
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_SKILL",
+        "amount": 1,
+        "chance": 0.01
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_EQUIPMENT",
+        "amount": 1,
+        "chance": 0.005
+      }
+    ],
+    "soulDrops": [
+      {
+        "kind": "soul",
+        "id": "char_noa_01",
+        "amount": 1,
+        "rarity": "SR",
+        "chance": 0.15,
+        "period": 20
+      }
+    ],
+    "ticketChance": 0.02,
+    "playerExp": 48,
+    "encounterChance": 0.04
+  },
+  "questMasterVersion": "game04-quest68-early-retention-20260926",
+  "playerExpReward": {
+    "amount": 48,
+    "version": "game04-quest68-early-retention-20260926",
+    "status": "APPROVED"
+  }
+}

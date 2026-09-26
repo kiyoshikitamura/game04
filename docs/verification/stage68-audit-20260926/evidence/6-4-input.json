@@ -1,0 +1,887 @@
+{
+  "seed": 1,
+  "party": [
+    {
+      "id": "char_cecile_01",
+      "name": "井伊直虎",
+      "image": "/characters/cecile_transparent_asset.png",
+      "level": 60,
+      "element": "water",
+      "stats": {
+        "hp": 18963,
+        "atk": 2711.15,
+        "def": 1554.28,
+        "luk": 22,
+        "sp": 318
+      },
+      "skills": [
+        {
+          "id": "SKD034",
+          "name": "身構え",
+          "image": "/skills/skill_006_iron_guard.jpg",
+          "rarity": "N",
+          "element": "earth",
+          "spCost": 30,
+          "condition": {
+            "type": "always"
+          },
+          "target": "self",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "def_up",
+              "power": 15,
+              "duration": 3,
+              "carryAcrossWaves": true
+            }
+          ],
+          "description": "自身・DEF強化:15.00%・3ターン"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P11",
+          "type": "P11",
+          "name": "被回復量（蘇生除外）",
+          "stat": "atk",
+          "percent": 14.221321905792035,
+          "level": 2,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_genji_01",
+      "name": "今川義元",
+      "image": "/characters/genji_transparent_asset.png",
+      "level": 60,
+      "element": "wind",
+      "stats": {
+        "hp": 15944.4,
+        "atk": 3063.75,
+        "def": 1431.06,
+        "luk": 22,
+        "sp": 276
+      },
+      "skills": [
+        {
+          "id": "SKD032",
+          "name": "影縫い",
+          "image": "/skills/formal/SKD032.webp",
+          "rarity": "R",
+          "element": "water",
+          "spCost": 65,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "stun",
+              "power": 1,
+              "duration": 1,
+              "carryAcrossWaves": true,
+              "chance": 0.35
+            }
+          ],
+          "description": "配置順最初の付与可能敵・付与率:35.00%・1ターン"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P02_wind",
+          "type": "P02",
+          "name": "同属性DEF支援",
+          "stat": "def",
+          "percent": 8.53279314347522,
+          "level": 2,
+          "target": "party",
+          "targetElement": "wind"
+        }
+      ]
+    },
+    {
+      "id": "char_taiga_01",
+      "name": "長宗我部元親",
+      "image": "/characters/taiga_transparent_asset.png",
+      "level": 60,
+      "element": "water",
+      "stats": {
+        "hp": 14860.8,
+        "atk": 3728.1,
+        "def": 1431.06,
+        "luk": 22,
+        "sp": 255
+      },
+      "skills": [
+        {
+          "id": "SKD008",
+          "name": "水断",
+          "image": "/skills/formal/SKD008.webp",
+          "rarity": "R",
+          "element": "water",
+          "spCost": 50,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": true,
+          "effects": [
+            {
+              "type": "damage",
+              "power": 120
+            }
+          ],
+          "description": "先頭敵・攻撃倍率:120.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P16",
+          "type": "P16",
+          "name": "能動ATK強化中の自身DEF",
+          "stat": "def",
+          "percent": 14.221321905792035,
+          "level": 2,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_lucas_01",
+      "name": "島津義弘",
+      "image": "/characters/lucas_transparent_asset.png",
+      "level": 60,
+      "element": "fire",
+      "stats": {
+        "hp": 12513,
+        "atk": 4515,
+        "def": 1195.6,
+        "luk": 22,
+        "sp": 276
+      },
+      "skills": [
+        {
+          "id": "SKD026",
+          "name": "後陣射ち",
+          "image": "/skills/skill_008_smart_snipe.jpg",
+          "rarity": "R",
+          "element": "wind",
+          "spCost": 55,
+          "condition": {
+            "type": "always"
+          },
+          "target": "last",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "damage",
+              "power": 105
+            }
+          ],
+          "description": "最後尾の生存敵・攻撃倍率:105.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P14",
+          "type": "P14",
+          "name": "HP40%以下で自身ATK",
+          "stat": "atk",
+          "percent": 16.591542223424042,
+          "level": 2,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_riki_01",
+      "name": "濃姫",
+      "image": "/characters/riki_transparent_asset.png",
+      "level": 60,
+      "element": "dark",
+      "stats": {
+        "hp": 14615.700000000003,
+        "atk": 3676.5,
+        "def": 1306.6200000000001,
+        "luk": 22,
+        "sp": 318
+      },
+      "skills": [
+        {
+          "id": "SKD040",
+          "name": "治癒の祈り",
+          "image": "/skills/skill_023_double_drive.jpg",
+          "rarity": "SR",
+          "element": "water",
+          "spCost": 90,
+          "condition": {
+            "type": "ally_hp_below",
+            "value": 0.5
+          },
+          "target": "lowest_ally",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "heal",
+              "power": 75,
+              "healingFormula": "caster_atk_percent"
+            }
+          ],
+          "description": "共通単体回復条件・回復倍率:75.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P12",
+          "type": "P12",
+          "name": "付与シールド量",
+          "stat": "atk",
+          "percent": 14.221321905792035,
+          "level": 2,
+          "target": "self"
+        }
+      ]
+    }
+  ],
+  "waves": [
+    [
+      {
+        "id": "6-4/1/1",
+        "name": "真田幸村",
+        "image": "/creative/characters/battle/char_kaede_01.png",
+        "level": 56,
+        "stats": {
+          "luk": 0,
+          "hp": 34130,
+          "atk": 8320,
+          "def": 600,
+          "sp": 150
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "fire",
+        "actionCount": 12,
+        "initialCount": 7,
+        "initialSp": 75,
+        "skills": [
+          {
+            "id": "SKD023",
+            "name": "全体攻撃・光",
+            "image": "",
+            "rarity": "R",
+            "element": "light",
+            "spCost": 75,
+            "condition": {
+              "type": "always"
+            },
+            "target": "all_enemies",
+            "effects": [
+              {
+                "type": "damage",
+                "power": 72.72
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P14_fire",
+            "type": "P14",
+            "name": "P14",
+            "stat": "atk",
+            "percent": 21.33198285868805,
+            "level": 2,
+            "target": "self",
+            "targetElement": "fire"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "id": "6-4/2/1",
+        "name": "今川義元",
+        "image": "/creative/characters/battle/char_genji_01.png",
+        "level": 55,
+        "stats": {
+          "luk": 0,
+          "hp": 34130,
+          "atk": 8320,
+          "def": 650,
+          "sp": 100
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "wind",
+        "actionCount": 12,
+        "initialCount": 7,
+        "initialSp": 75,
+        "skills": [
+          {
+            "id": "SKD023",
+            "name": "全体攻撃・光",
+            "image": "",
+            "rarity": "R",
+            "element": "light",
+            "spCost": 75,
+            "condition": {
+              "type": "always"
+            },
+            "target": "all_enemies",
+            "effects": [
+              {
+                "type": "damage",
+                "power": 72.72
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P02_wind",
+            "type": "P02",
+            "name": "P02",
+            "stat": "def",
+            "percent": 8.53279314347522,
+            "level": 2,
+            "target": "party",
+            "targetElement": "wind"
+          }
+        ]
+      },
+      {
+        "id": "6-4/2/2",
+        "name": "井伊直虎",
+        "image": "/creative/characters/battle/char_cecile_01.png",
+        "level": 55,
+        "stats": {
+          "luk": 0,
+          "hp": 16000,
+          "atk": 1500,
+          "def": 600,
+          "sp": 100
+        },
+        "order": 1,
+        "hitSpGain": 10,
+        "element": "water",
+        "actionCount": 6,
+        "initialCount": 6,
+        "initialSp": 0,
+        "skills": [],
+        "passives": [
+          {
+            "id": "P11_water",
+            "type": "P11",
+            "name": "P11",
+            "stat": "atk",
+            "percent": 14.221321905792035,
+            "level": 2,
+            "target": "self",
+            "targetElement": "water"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "id": "6-4/3/1",
+        "name": "真田幸村",
+        "image": "/creative/characters/battle/char_kaede_01.png",
+        "level": 57,
+        "stats": {
+          "luk": 0,
+          "hp": 34130,
+          "atk": 8320,
+          "def": 650,
+          "sp": 150
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "fire",
+        "actionCount": 12,
+        "initialCount": 7,
+        "initialSp": 75,
+        "skills": [
+          {
+            "id": "SKD023",
+            "name": "全体攻撃・光",
+            "image": "",
+            "rarity": "R",
+            "element": "light",
+            "spCost": 75,
+            "condition": {
+              "type": "always"
+            },
+            "target": "all_enemies",
+            "effects": [
+              {
+                "type": "damage",
+                "power": 72.72
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P14_fire",
+            "type": "P14",
+            "name": "P14",
+            "stat": "atk",
+            "percent": 21.33198285868805,
+            "level": 2,
+            "target": "self",
+            "targetElement": "fire"
+          }
+        ]
+      },
+      {
+        "id": "6-4/3/2",
+        "name": "本願寺顕如",
+        "image": "/creative/characters/battle/char_ren_male_01.png",
+        "level": 56,
+        "stats": {
+          "luk": 0,
+          "hp": 11000,
+          "atk": 1900,
+          "def": 400,
+          "sp": 100
+        },
+        "order": 1,
+        "hitSpGain": 10,
+        "element": "earth",
+        "actionCount": 7,
+        "initialCount": 7,
+        "initialSp": 90,
+        "skills": [
+          {
+            "id": "SKD040",
+            "name": "治癒の祈り",
+            "image": "",
+            "rarity": "SR",
+            "element": "water",
+            "spCost": 90,
+            "condition": {
+              "type": "always"
+            },
+            "target": "lowest_ally",
+            "effects": [
+              {
+                "type": "heal",
+                "power": 91.65,
+                "healingFormula": "caster_atk_percent"
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P10_earth",
+            "type": "P10",
+            "name": "P10",
+            "stat": "atk",
+            "percent": 9.480881270528023,
+            "level": 2,
+            "target": "self",
+            "targetElement": "earth"
+          }
+        ]
+      }
+    ]
+  ],
+  "rules": {
+    "defenseFactor": 1,
+    "advantageMultiplier": 1.5,
+    "disadvantageMultiplier": 0.75,
+    "spRecoveryDivisor": 120,
+    "burstLukDivisor": 20,
+    "enemySpRecoveryDivisor": 30,
+    "maxPlayerActions": 300,
+    "initialSpRatio": 0,
+    "version": "balance-v2-20260920",
+    "burstPolicy": "attack-free-v1-20260926",
+    "inputVersion": "wave-sp-v1-20260921",
+    "balanceV2": {
+      "status": "PREVIEW_PROVISIONAL",
+      "version": "PREVIEW_PROVISIONAL_BALANCE_V2_20260920",
+      "damageBonusCap": 50,
+      "healingBonusCap": 80,
+      "shieldBonusCap": 50,
+      "shieldHpCap": 0.5,
+      "periodicCapMultiplier": 2,
+      "lowHpThreshold": 0.4,
+      "highHpThreshold": 0.7,
+      "diversityFactors": [
+        0,
+        0.25,
+        0.5,
+        0.75,
+        1
+      ]
+    }
+  },
+  "questSnapshot": {
+    "id": "echigo-4",
+    "designId": "6-4",
+    "areaId": "echigo",
+    "index": 4,
+    "name": "峠の残雪",
+    "description": "敵の一手を遅らせる",
+    "energyCost": 6,
+    "waves": [
+      [
+        {
+          "id": "6-4/1/1",
+          "name": "真田幸村",
+          "image": "/creative/characters/battle/char_kaede_01.png",
+          "level": 56,
+          "stats": {
+            "luk": 0,
+            "hp": 34130,
+            "atk": 8320,
+            "def": 600,
+            "sp": 150
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "fire",
+          "actionCount": 12,
+          "initialCount": 7,
+          "initialSp": 75,
+          "skills": [
+            {
+              "id": "SKD023",
+              "name": "全体攻撃・光",
+              "image": "",
+              "rarity": "R",
+              "element": "light",
+              "spCost": 75,
+              "condition": {
+                "type": "always"
+              },
+              "target": "all_enemies",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 72.72
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "passives": [
+            {
+              "id": "P14_fire",
+              "type": "P14",
+              "name": "P14",
+              "stat": "atk",
+              "percent": 21.33198285868805,
+              "level": 2,
+              "target": "self",
+              "targetElement": "fire"
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "id": "6-4/2/1",
+          "name": "今川義元",
+          "image": "/creative/characters/battle/char_genji_01.png",
+          "level": 55,
+          "stats": {
+            "luk": 0,
+            "hp": 34130,
+            "atk": 8320,
+            "def": 650,
+            "sp": 100
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "wind",
+          "actionCount": 12,
+          "initialCount": 7,
+          "initialSp": 75,
+          "skills": [
+            {
+              "id": "SKD023",
+              "name": "全体攻撃・光",
+              "image": "",
+              "rarity": "R",
+              "element": "light",
+              "spCost": 75,
+              "condition": {
+                "type": "always"
+              },
+              "target": "all_enemies",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 72.72
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "passives": [
+            {
+              "id": "P02_wind",
+              "type": "P02",
+              "name": "P02",
+              "stat": "def",
+              "percent": 8.53279314347522,
+              "level": 2,
+              "target": "party",
+              "targetElement": "wind"
+            }
+          ]
+        },
+        {
+          "id": "6-4/2/2",
+          "name": "井伊直虎",
+          "image": "/creative/characters/battle/char_cecile_01.png",
+          "level": 55,
+          "stats": {
+            "luk": 0,
+            "hp": 16000,
+            "atk": 1500,
+            "def": 600,
+            "sp": 100
+          },
+          "order": 1,
+          "hitSpGain": 10,
+          "element": "water",
+          "actionCount": 6,
+          "initialCount": 6,
+          "initialSp": 0,
+          "skills": [],
+          "passives": [
+            {
+              "id": "P11_water",
+              "type": "P11",
+              "name": "P11",
+              "stat": "atk",
+              "percent": 14.221321905792035,
+              "level": 2,
+              "target": "self",
+              "targetElement": "water"
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "id": "6-4/3/1",
+          "name": "真田幸村",
+          "image": "/creative/characters/battle/char_kaede_01.png",
+          "level": 57,
+          "stats": {
+            "luk": 0,
+            "hp": 34130,
+            "atk": 8320,
+            "def": 650,
+            "sp": 150
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "fire",
+          "actionCount": 12,
+          "initialCount": 7,
+          "initialSp": 75,
+          "skills": [
+            {
+              "id": "SKD023",
+              "name": "全体攻撃・光",
+              "image": "",
+              "rarity": "R",
+              "element": "light",
+              "spCost": 75,
+              "condition": {
+                "type": "always"
+              },
+              "target": "all_enemies",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 72.72
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "passives": [
+            {
+              "id": "P14_fire",
+              "type": "P14",
+              "name": "P14",
+              "stat": "atk",
+              "percent": 21.33198285868805,
+              "level": 2,
+              "target": "self",
+              "targetElement": "fire"
+            }
+          ]
+        },
+        {
+          "id": "6-4/3/2",
+          "name": "本願寺顕如",
+          "image": "/creative/characters/battle/char_ren_male_01.png",
+          "level": 56,
+          "stats": {
+            "luk": 0,
+            "hp": 11000,
+            "atk": 1900,
+            "def": 400,
+            "sp": 100
+          },
+          "order": 1,
+          "hitSpGain": 10,
+          "element": "earth",
+          "actionCount": 7,
+          "initialCount": 7,
+          "initialSp": 90,
+          "skills": [
+            {
+              "id": "SKD040",
+              "name": "治癒の祈り",
+              "image": "",
+              "rarity": "SR",
+              "element": "water",
+              "spCost": 90,
+              "condition": {
+                "type": "always"
+              },
+              "target": "lowest_ally",
+              "effects": [
+                {
+                  "type": "heal",
+                  "power": 91.65,
+                  "healingFormula": "caster_atk_percent"
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "passives": [
+            {
+              "id": "P10_earth",
+              "type": "P10",
+              "name": "P10",
+              "stat": "atk",
+              "percent": 9.480881270528023,
+              "level": 2,
+              "target": "self",
+              "targetElement": "earth"
+            }
+          ]
+        }
+      ]
+    ],
+    "firstRewards": [
+      {
+        "kind": "soul",
+        "id": "char_cecile_01",
+        "amount": 7
+      },
+      {
+        "kind": "soul",
+        "id": "char_kaede_01",
+        "amount": 4
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_SKILL",
+        "amount": 1
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_EQUIPMENT",
+        "amount": 1
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 2500
+      },
+      {
+        "kind": "character_exp_item",
+        "id": "medium",
+        "amount": 1
+      },
+      {
+        "kind": "equipment_exp_item",
+        "id": "small",
+        "amount": 6
+      }
+    ],
+    "rareRewards": [
+      {
+        "kind": "soul",
+        "id": "char_cecile_01",
+        "amount": 1,
+        "rarity": "SR",
+        "chance": 0.15,
+        "period": 20
+      },
+      {
+        "kind": "soul",
+        "id": "char_kaede_01",
+        "amount": 1,
+        "rarity": "SSR",
+        "chance": 0.05,
+        "period": 50
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_CHARACTER",
+        "amount": 1,
+        "chance": 0.005
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_SKILL",
+        "amount": 1,
+        "chance": 0.01
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_EQUIPMENT",
+        "amount": 1,
+        "chance": 0.005
+      }
+    ],
+    "soulDrops": [
+      {
+        "kind": "soul",
+        "id": "char_cecile_01",
+        "amount": 1,
+        "rarity": "SR",
+        "chance": 0.15,
+        "period": 20
+      },
+      {
+        "kind": "soul",
+        "id": "char_kaede_01",
+        "amount": 1,
+        "rarity": "SSR",
+        "chance": 0.05,
+        "period": 50
+      }
+    ],
+    "ticketChance": 0.02,
+    "playerExp": 72,
+    "encounterChance": 0.15
+  },
+  "questMasterVersion": "game04-quest68-early-retention-20260926",
+  "playerExpReward": {
+    "amount": 72,
+    "version": "game04-quest68-early-retention-20260926",
+    "status": "APPROVED"
+  }
+}

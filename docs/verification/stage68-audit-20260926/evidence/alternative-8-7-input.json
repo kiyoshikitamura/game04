@@ -1,0 +1,732 @@
+{
+  "seed": 1,
+  "party": [
+    {
+      "id": "char_joe_01",
+      "name": "北条氏康",
+      "image": "/characters/joe_transparent_asset.png",
+      "level": 80,
+      "element": "earth",
+      "stats": {
+        "hp": 18110.4,
+        "atk": 2427.4249999999997,
+        "def": 1692.6000000000001,
+        "luk": 26,
+        "sp": 321
+      },
+      "skills": [
+        {
+          "id": "SKD034",
+          "name": "身構え",
+          "image": "/skills/skill_006_iron_guard.jpg",
+          "rarity": "N",
+          "element": "earth",
+          "spCost": 30,
+          "condition": {
+            "type": "always"
+          },
+          "target": "self",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "def_up",
+              "power": 15,
+              "duration": 3,
+              "carryAcrossWaves": true
+            }
+          ],
+          "description": "自身・DEF強化:15.00%・3ターン"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P15",
+          "type": "P15",
+          "name": "HP70%以上で自身DEF",
+          "stat": "def",
+          "percent": 14.177003843197484,
+          "level": 6,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_yuki_01",
+      "name": "竹中半兵衛",
+      "image": "/characters/yuki_transparent_asset.png",
+      "level": 80,
+      "element": "light",
+      "stats": {
+        "hp": 19034.4,
+        "atk": 2377.375,
+        "def": 1644.24,
+        "luk": 26,
+        "sp": 401
+      },
+      "skills": [
+        {
+          "id": "SKD038",
+          "name": "鎧砕き",
+          "image": "/skills/skill_015_recovery_program.jpg",
+          "rarity": "R",
+          "element": "earth",
+          "spCost": 50,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "def_down",
+              "power": 12,
+              "duration": 3,
+              "carryAcrossWaves": true
+            }
+          ],
+          "description": "配置順最初の付与可能敵・DEF低下:12.00%・3ターン"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P04",
+          "type": "P04",
+          "name": "他の生存味方が2属性以上で自身DEF",
+          "stat": "def",
+          "percent": 17.721254803996857,
+          "level": 6,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_daimon_01",
+      "name": "井伊直政",
+      "image": "/characters/daimon_transparent_asset.png",
+      "level": 80,
+      "element": "fire",
+      "stats": {
+        "hp": 12672,
+        "atk": 3927,
+        "def": 1264.8,
+        "luk": 26,
+        "sp": 321
+      },
+      "skills": [
+        {
+          "id": "SKD007",
+          "name": "炎断",
+          "image": "/skills/formal/SKD007.webp",
+          "rarity": "R",
+          "element": "fire",
+          "spCost": 50,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": true,
+          "effects": [
+            {
+              "type": "damage",
+              "power": 120
+            }
+          ],
+          "description": "先頭敵・攻撃倍率:120.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P06",
+          "type": "P06",
+          "name": "単体攻撃スキルダメージ",
+          "stat": "atk",
+          "percent": 7.088501921598742,
+          "level": 6,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_jihoon_01",
+      "name": "前田利家",
+      "image": "/characters/jihoon_transparent_asset.png",
+      "level": 80,
+      "element": "earth",
+      "stats": {
+        "hp": 15206.4,
+        "atk": 3337.9500000000003,
+        "def": 1454.52,
+        "luk": 26,
+        "sp": 428
+      },
+      "skills": [
+        {
+          "id": "SKD012",
+          "name": "影断",
+          "image": "/skills/formal/SKD012.webp",
+          "rarity": "R",
+          "element": "dark",
+          "spCost": 50,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": true,
+          "effects": [
+            {
+              "type": "damage",
+              "power": 120
+            }
+          ],
+          "description": "先頭敵・攻撃倍率:120.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P05",
+          "type": "P05",
+          "name": "通常攻撃ダメージ",
+          "stat": "atk",
+          "percent": 14.177003843197484,
+          "level": 6,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_aoi_01",
+      "name": "お市の方",
+      "image": "/characters/aoi_transparent_asset.png",
+      "level": 80,
+      "element": "fire",
+      "stats": {
+        "hp": 14084.400000000001,
+        "atk": 3638.25,
+        "def": 1275.96,
+        "luk": 26,
+        "sp": 374
+      },
+      "skills": [
+        {
+          "id": "SKD040",
+          "name": "治癒の祈り",
+          "image": "/skills/skill_023_double_drive.jpg",
+          "rarity": "SR",
+          "element": "water",
+          "spCost": 90,
+          "condition": {
+            "type": "ally_hp_below",
+            "value": 0.5
+          },
+          "target": "lowest_ally",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "heal",
+              "power": 75,
+              "healingFormula": "caster_atk_percent"
+            }
+          ],
+          "description": "共通単体回復条件・回復倍率:75.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P10",
+          "type": "P10",
+          "name": "与回復量（蘇生除外）",
+          "stat": "atk",
+          "percent": 14.177003843197484,
+          "level": 6,
+          "target": "self"
+        }
+      ]
+    }
+  ],
+  "waves": [
+    [
+      {
+        "id": "8-7/1/1",
+        "name": "今川義元",
+        "image": "/creative/characters/battle/char_genji_01.png",
+        "level": 78,
+        "stats": {
+          "luk": 0,
+          "hp": 152210,
+          "atk": 4530,
+          "def": 1690,
+          "sp": 300
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "wind",
+        "actionCount": 2,
+        "initialCount": 3,
+        "initialSp": 0,
+        "skills": [],
+        "passives": [
+          {
+            "id": "P02_wind",
+            "type": "P02",
+            "name": "P02",
+            "stat": "def",
+            "percent": 10.481721665467855,
+            "level": 4,
+            "target": "party",
+            "targetElement": "wind"
+          }
+        ]
+      },
+      {
+        "id": "8-7/1/2",
+        "name": "前田利家",
+        "image": "/creative/characters/battle/char_jihoon_01.png",
+        "level": 78,
+        "stats": {
+          "luk": 0,
+          "hp": 22560,
+          "atk": 4320,
+          "def": 850,
+          "sp": 100
+        },
+        "order": 1,
+        "hitSpGain": 10,
+        "element": "earth",
+        "actionCount": 5,
+        "initialCount": 5,
+        "initialSp": 0,
+        "skills": [],
+        "passives": [
+          {
+            "id": "P05_earth",
+            "type": "P05",
+            "name": "P05",
+            "stat": "atk",
+            "percent": 11.646357406075394,
+            "level": 4,
+            "target": "self",
+            "targetElement": "earth"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "id": "8-7/2/1",
+        "name": "立花誾千代",
+        "image": "/creative/characters/battle/char_sora_01.png",
+        "level": 78,
+        "stats": {
+          "luk": 0,
+          "hp": 152210,
+          "atk": 4530,
+          "def": 1880,
+          "sp": 300
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "light",
+        "actionCount": 2,
+        "initialCount": 3,
+        "initialSp": 0,
+        "skills": [],
+        "passives": [
+          {
+            "id": "P07_light",
+            "type": "P07",
+            "name": "P07",
+            "stat": "atk",
+            "percent": 8.734768054556545,
+            "level": 4,
+            "target": "self",
+            "targetElement": "light"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "id": "8-7/3/1",
+        "name": "前田慶次",
+        "image": "/creative/characters/battle/char_mio_01.png",
+        "level": 78,
+        "stats": {
+          "luk": 0,
+          "hp": 152210,
+          "atk": 4530,
+          "def": 1880,
+          "sp": 300
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "wind",
+        "actionCount": 2,
+        "initialCount": 3,
+        "initialSp": 0,
+        "skills": [],
+        "passives": [
+          {
+            "id": "P05_wind",
+            "type": "P05",
+            "name": "P05",
+            "stat": "atk",
+            "percent": 23.292714812150788,
+            "level": 4,
+            "target": "self",
+            "targetElement": "wind"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "id": "8-7/4/1",
+        "name": "武田信玄",
+        "image": "/creative/characters/battle/char_go_01.png",
+        "level": 78,
+        "stats": {
+          "luk": 0,
+          "hp": 152210,
+          "atk": 4530,
+          "def": 1880,
+          "sp": 300
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "fire",
+        "actionCount": 2,
+        "initialCount": 3,
+        "initialSp": 0,
+        "skills": [],
+        "passives": [
+          {
+            "id": "P16_fire",
+            "type": "P16",
+            "name": "P16",
+            "stat": "def",
+            "percent": 23.292714812150788,
+            "level": 4,
+            "target": "self",
+            "targetElement": "fire"
+          }
+        ]
+      }
+    ]
+  ],
+  "rules": {
+    "defenseFactor": 1,
+    "advantageMultiplier": 1.5,
+    "disadvantageMultiplier": 0.75,
+    "spRecoveryDivisor": 120,
+    "burstLukDivisor": 20,
+    "enemySpRecoveryDivisor": 30,
+    "maxPlayerActions": 300,
+    "initialSpRatio": 0,
+    "version": "balance-v2-20260920",
+    "burstPolicy": "attack-free-v1-20260926",
+    "inputVersion": "wave-sp-v1-20260921",
+    "balanceV2": {
+      "status": "PREVIEW_PROVISIONAL",
+      "version": "PREVIEW_PROVISIONAL_BALANCE_V2_20260920",
+      "damageBonusCap": 50,
+      "healingBonusCap": 80,
+      "shieldBonusCap": 50,
+      "shieldHpCap": 0.5,
+      "periodicCapMultiplier": 2,
+      "lowHpThreshold": 0.4,
+      "highHpThreshold": 0.7,
+      "diversityFactors": [
+        0,
+        0.25,
+        0.5,
+        0.75,
+        1
+      ]
+    }
+  },
+  "questSnapshot": {
+    "id": "izumo-7",
+    "designId": "8-7",
+    "areaId": "izumo",
+    "index": 7,
+    "name": "雲間の月",
+    "description": "効果が切れた後も戦う",
+    "energyCost": 8,
+    "waves": [
+      [
+        {
+          "id": "8-7/1/1",
+          "name": "今川義元",
+          "image": "/creative/characters/battle/char_genji_01.png",
+          "level": 78,
+          "stats": {
+            "luk": 0,
+            "hp": 152210,
+            "atk": 4530,
+            "def": 1690,
+            "sp": 300
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "wind",
+          "actionCount": 2,
+          "initialCount": 3,
+          "initialSp": 0,
+          "skills": [],
+          "passives": [
+            {
+              "id": "P02_wind",
+              "type": "P02",
+              "name": "P02",
+              "stat": "def",
+              "percent": 10.481721665467855,
+              "level": 4,
+              "target": "party",
+              "targetElement": "wind"
+            }
+          ]
+        },
+        {
+          "id": "8-7/1/2",
+          "name": "前田利家",
+          "image": "/creative/characters/battle/char_jihoon_01.png",
+          "level": 78,
+          "stats": {
+            "luk": 0,
+            "hp": 22560,
+            "atk": 4320,
+            "def": 850,
+            "sp": 100
+          },
+          "order": 1,
+          "hitSpGain": 10,
+          "element": "earth",
+          "actionCount": 5,
+          "initialCount": 5,
+          "initialSp": 0,
+          "skills": [],
+          "passives": [
+            {
+              "id": "P05_earth",
+              "type": "P05",
+              "name": "P05",
+              "stat": "atk",
+              "percent": 11.646357406075394,
+              "level": 4,
+              "target": "self",
+              "targetElement": "earth"
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "id": "8-7/2/1",
+          "name": "立花誾千代",
+          "image": "/creative/characters/battle/char_sora_01.png",
+          "level": 78,
+          "stats": {
+            "luk": 0,
+            "hp": 152210,
+            "atk": 4530,
+            "def": 1880,
+            "sp": 300
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "light",
+          "actionCount": 2,
+          "initialCount": 3,
+          "initialSp": 0,
+          "skills": [],
+          "passives": [
+            {
+              "id": "P07_light",
+              "type": "P07",
+              "name": "P07",
+              "stat": "atk",
+              "percent": 8.734768054556545,
+              "level": 4,
+              "target": "self",
+              "targetElement": "light"
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "id": "8-7/3/1",
+          "name": "前田慶次",
+          "image": "/creative/characters/battle/char_mio_01.png",
+          "level": 78,
+          "stats": {
+            "luk": 0,
+            "hp": 152210,
+            "atk": 4530,
+            "def": 1880,
+            "sp": 300
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "wind",
+          "actionCount": 2,
+          "initialCount": 3,
+          "initialSp": 0,
+          "skills": [],
+          "passives": [
+            {
+              "id": "P05_wind",
+              "type": "P05",
+              "name": "P05",
+              "stat": "atk",
+              "percent": 23.292714812150788,
+              "level": 4,
+              "target": "self",
+              "targetElement": "wind"
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "id": "8-7/4/1",
+          "name": "武田信玄",
+          "image": "/creative/characters/battle/char_go_01.png",
+          "level": 78,
+          "stats": {
+            "luk": 0,
+            "hp": 152210,
+            "atk": 4530,
+            "def": 1880,
+            "sp": 300
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "fire",
+          "actionCount": 2,
+          "initialCount": 3,
+          "initialSp": 0,
+          "skills": [],
+          "passives": [
+            {
+              "id": "P16_fire",
+              "type": "P16",
+              "name": "P16",
+              "stat": "def",
+              "percent": 23.292714812150788,
+              "level": 4,
+              "target": "self",
+              "targetElement": "fire"
+            }
+          ]
+        }
+      ]
+    ],
+    "firstRewards": [
+      {
+        "kind": "soul",
+        "id": "char_sora_01",
+        "amount": 6
+      },
+      {
+        "kind": "soul",
+        "id": "char_go_01",
+        "amount": 5
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_CHARACTER",
+        "amount": 1
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_SKILL",
+        "amount": 1
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 3500
+      },
+      {
+        "kind": "character_exp_item",
+        "id": "medium",
+        "amount": 2
+      },
+      {
+        "kind": "equipment_exp_item",
+        "id": "medium",
+        "amount": 1
+      },
+      {
+        "kind": "equipment_exp_item",
+        "id": "small",
+        "amount": 2
+      }
+    ],
+    "rareRewards": [
+      {
+        "kind": "soul",
+        "id": "char_sora_01",
+        "amount": 1,
+        "rarity": "SR",
+        "chance": 0.2,
+        "period": 20
+      },
+      {
+        "kind": "soul",
+        "id": "char_go_01",
+        "amount": 1,
+        "rarity": "SSR",
+        "chance": 0.08,
+        "period": 50
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_CHARACTER",
+        "amount": 1,
+        "chance": 0.0075
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_SKILL",
+        "amount": 1,
+        "chance": 0.015
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_EQUIPMENT",
+        "amount": 1,
+        "chance": 0.0075
+      }
+    ],
+    "soulDrops": [
+      {
+        "kind": "soul",
+        "id": "char_sora_01",
+        "amount": 1,
+        "rarity": "SR",
+        "chance": 0.2,
+        "period": 20
+      },
+      {
+        "kind": "soul",
+        "id": "char_go_01",
+        "amount": 1,
+        "rarity": "SSR",
+        "chance": 0.08,
+        "period": 50
+      }
+    ],
+    "ticketChance": 0.03,
+    "playerExp": 144,
+    "encounterChance": 0.25
+  },
+  "questMasterVersion": "game04-quest68-early-retention-20260926",
+  "playerExpReward": {
+    "amount": 144,
+    "version": "game04-quest68-early-retention-20260926",
+    "status": "APPROVED"
+  }
+}
