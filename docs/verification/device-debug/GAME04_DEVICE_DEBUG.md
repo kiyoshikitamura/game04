@@ -7,7 +7,7 @@
 - 共通Preview：https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app/
 - 作業ブランチ：work/game04-common-preview-20260925。PR最新と発生版の一致をGitHubで確認。
 - 修正前配信の独立照合：2026-09-26、公開 /api/qa/deployment が上記SHA・preview・同ブランチを返すことを確認。deploymentId dpl_3CnYeKBqsnCcnaJHKzvMw8GevUWM。
-- 現在の確認SHA：8da91d6f70ed773f73a41c149c3b9e7baf1dc1c9（2026-09-26、共通Previewの公開識別APIで独立照合済み。新配信のユーザー実機確認待ち）。
+- 現在の確認SHA：b7d34204521bd2225b0e1e926a0592514c1d4f2a（2026-09-26、共通Previewの公開識別APIで独立照合済み。新配信のユーザー実機確認待ち）。
 - 直前のユーザー実機確認基準：d9be130。1-1クリアまでの確認済み12件は保持。
 - 端末はiPhone系との報告。機種・OS・ブラウザー版は未確認。原画像の23:47・4Gは引継ぎ記載であり、本作業で画像の独立閲覧は未実施。
 - 次の番号：DBG-036。削除・再利用・振り直し禁止。
@@ -523,3 +523,15 @@ DBG-014/015/030の統合接続追記：任務確認保存後に予約済み2-1�
 - 未装備/回復/補助/条件不成立のゲージ保持、次武将へ無抽選引継ぎ、再充填後の再発動を追加検証。SP0/不足・途中終了等の既存限定検証、旧5戦の完全一致、375/390再生、型検査/build成功。
 - 開発API v8配信・取得bundle完全一致。専用QA実戦1-5で2BURST/10攻撃スキル/SP消費0/ゲージ0、同一requestの結果一致。DB構造変更・旧保存結果の書換えなし。
 - フロント修正保存・共通Preview配信の識別SHAは配信後追記。実機解決にはしない。詳細/証拠はdbg035/README.md。
+
+### DBG-035 配信完了記録
+
+- 状態：**配信済み・実機確認待ち**。修正・配信SHA：b7d34204521bd2225b0e1e926a0592514c1d4f2a（前段ローカル10e2e1bを含む）。PR #37へpush済み。
+- 共通Preview：https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app/
+- Deployment：dpl_7ByPBrqDBRsvmMspuSn4txGWcjqe／Preview Ready。公開deployment APIで上記SHA・branch・Previewを独立照合。配信直前のremote最新一致を確認。
+- 開発API：znakrkaazliexzwihxge / game04-redesign-api v8、verify_jwt=true。生成bundleと取得bundle完全一致、DB構造/旧保存結果は変更なし。専用QAの新規1-5で2BURST/10攻撃スキル、SP固定/ゲージ0/無料、同一リクエスト再取得も一致。
+- 限定検証：SP0/不足5連発、装備順・毎行動条件/対象、付随効果、未装備/回復/補助/条件不成立の非発動、ゲージ保持し次武将へ、5回/全滅/派移行/死亡/行動不能/スキル消失で終了、再充填後再発動。旧保存5戦全フレーム一致。型検査/build成功。
+- 表示：375/390の倍速/SKIP/離脱検証を保持。共通Previewの既存QA実BattleViewで開始frame56はカットイン1、継続61は0、開始直後の攻撃スキルSP0、pageerrorなし。DBG-032の開始SE限定・停止処理を保持。実機の音声聴取は未実施。
+- 証拠：dbg035/deployment.json、api-deployment.json、live-api.json、api-battle.json、regression.json、browser.json、deployed-browser.json。
+- 実機確認順：新規戦闘のBURSTでSP無料/通常攻撃なし→同一武将の連発/開始SE1回→条件消失や敵全滅時終了→回復補助のみの武将から次武将へゲージ保持→再充填後の再発動。旧保存戦闘・旧開催snapshotは旧仕様を維持するため、新規開始で確認。
+- 未確認：ユーザー実機受入/音声、ユーザーが報告した旧033/034発生戦闘。033/034を仕様変更だけで解決にしない。確認済み12件と過去履歴保持。main・本番・GAME03は変更なし。

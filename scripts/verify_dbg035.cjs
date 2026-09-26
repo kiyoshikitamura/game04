@@ -31,5 +31,3 @@ for(let n=1;n<=5;n++){const saved=JSON.parse(fs.readFileSync('docs/verification/
 const {createTutorialBattle}=require('../src/domain/redesign/tutorial/battle.ts');const tutorial=createTutorialBattle(createInitialState('dbg035-test'));const starts=tutorial.frames.filter(f=>f.event==='burst_start');assert.equal(starts.length,1);const tb=tutorial.frames.filter(f=>f.burst);assert(tb.every(f=>f.partySp===starts[0].partySp&&f.burstGauge===0));
 report.push({name:'old-saved-five-battles-and-tutorial',exactOldFrames:true,tutorialFreeSp:true,episodes:[]});
 fs.writeFileSync(out+'/regression.json',JSON.stringify(report,null,2));console.log('PASS DBG-035',report.map(r=>({name:r.name,bursts:r.episodes.length,first:r.episodes[0]?.actions})));
-
-
