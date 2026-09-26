@@ -81,3 +81,4 @@ Gitに含めない必要設定: .env.local、.env.preview.local、.vercel/projec
 ## DBG-053 承認・実装（2026-09-27）
 
 ユーザーの承認により改訂案3を実MissionContentへ反映。3段行/件数タブ/報酬詳細/一括受取/受取済み折りたたみと既存受取経路を接続。375/390、途中失敗/応答切断/日付境界/連打/他タブ保持を合成状態で検証。正式201件の表示対応と画像確認、型検査・ビルド成功。詳細はmission-implemented/README.md。実機確認待ち、054の命名承認は引き続き別件。
+- DBG-053配信確定: 6538d8139b6a2fe95d1c67449487690028f89a88。共通Preview dpl_6EMcFiAXLXgEiDETPn42Sti9uJEM Ready、alias切替後SHA一致。配信375/390限定検証合格（mission-implemented/deployed）。承認済み・実装配信済み・実機確認待ち。

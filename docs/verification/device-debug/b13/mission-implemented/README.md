@@ -17,3 +17,7 @@
 - QAはdevelopment/Previewのみ。本番はnotFound。実DB同時実行試験・端末実機受入は未実施。既存サーバー二重付与防止の契約を変更せず共用している。
 
 共通正本/台帳へ反映。DBG-047/68面監査/main/本番/GAME03は未変更。固有名案DBG-054の承認とは別扱い。
+
+## 共通Preview配信確定
+
+2026-09-27: 6538d8139b6a2fe95d1c67449487690028f89a88、Preview dpl_6EMcFiAXLXgEiDETPn42Sti9uJEM Ready。配信先でも375/390の同一限定検証が合格（deployed/verification.json）。切替前fetchでPRブランチとの差0/0を確認し、共通aliasへ反映。切替後/api/qa/deploymentでもSHA/branch/preview一致。実機確認待ち。
