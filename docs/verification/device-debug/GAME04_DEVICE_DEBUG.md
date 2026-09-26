@@ -7,7 +7,7 @@
 - 共通Preview：https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app/
 - 作業ブランチ：work/game04-common-preview-20260925。PR最新と発生版の一致をGitHubで確認。
 - 修正前配信の独立照合：2026-09-26、公開 /api/qa/deployment が上記SHA・preview・同ブランチを返すことを確認。deploymentId dpl_3CnYeKBqsnCcnaJHKzvMw8GevUWM。
-- 現在の確認SHA：d5914aeff6b530939b36028b18dd34deca2669dd（2026-09-26、共通Previewの公開識別APIで独立照合済み。新配信のユーザー実機確認待ち）。
+- 現在の確認SHA：00828b689f309bee5fafe15faf81b76460bd59c2（2026-09-26、共通Previewの公開識別APIで独立照合済み。新配信のユーザー実機確認待ち）。
 - 直前のユーザー実機確認基準：d9be130。1-1クリアまでの確認済み12件は保持。
 - 端末はiPhone系との報告。機種・OS・ブラウザー版は未確認。原画像の23:47・4Gは引継ぎ記載であり、本作業で画像の独立閲覧は未実施。
 - 次の番号：DBG-044。削除・再利用・振り直し禁止。
@@ -579,3 +579,15 @@ DBG-014/015/030の統合接続追記：任務確認保存後に予約済み2-1�
 - 統合担当は接続差分レビューと共通Preview設定の統合build、配信後の代表本陣/演出を確認する。実機タブ切替/BFCache・動きの強度は実機受入待ち。戦闘/BURST/API/DB/報酬/解放条件は変更なし。
 
 - B08統合検証完了：7ページ375/390接続、SP/BURST独立、装飾点灯/低モーション、5人×3スキル15操作、一時停止/倍速/SKIP/離脱に成功。型検査・共通Preview設定のTurbopack build成功。B08修正保存0404e28、DBG-040統合ca4bc1d。配信識別SHAは以下に追記する。
+
+
+## B08・DBG-040 配信完了（2026-09-26）
+
+- DBG-042/043：**配信済み・実機確認待ち**。B08修正保存0404e28（素材2bd15e6/c77a698を含む）。DBG-040も**配信済み・実機確認待ち**、担当保存989ffbb/統合ca4bc1d。
+- 統合保存・配信SHA：00828b689f309bee5fafe15faf81b76460bd59c2。PR #37対象work/game04-common-preview-20260925へpush済み。Deployment dpl_6SwtEgpEs1zGsn9K9FhghUno1DiC、Preview Ready。
+- URL：https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app/
+- 配信直前にremote最新一致を確認。alias直後は旧識別応答だったが、反映後にクエリなし公開識別APIで新SHA/branch/previewを独立照合。新URLの応答も一致。証拠b08/deployment.json。
+- 配信検証：7見出し＋6戦闘表示派生画像、計13ファイルのSHA256がローカル保存物と一致。375/390の実QA表示で出陣画像、初期桜ambient接続、実BattleViewのBURST開始frame56（強いカットイン1）と継続61（0）、SP/BURST画像の読み込みを確認。pageerror0。b08/deployed.jsonとdeployed-*.png。データはQA合成でありユーザー発生戦闘ではない。
+- ローカル限定検証/型検査/共通Preview設定build成功。戦闘計算・難度・API/DB・保存済み結果に変更なし。旧5戦結果完全一致、DBG-032/035・既確認12件を保持。main/本番/GAME03変更なし。
+- 未確認：iPhone実機受入・音声聴取・実端末のBFCache/タブ復帰と環境演出強度。BURST抽選前の完全適格性はログにないため、充填済みを発動確定と表示しない。覚醒は実開始に接続済み。手動発動・SP満タン連動・SPリセットはなし。
+- 実機確認順：7ページ上部見出し→SPとBURSTの独立表示→開始1回/連発/終了/再充填後の演出→倍速/SKIP/離脱→本陣背景切替とタブ復帰。新規開始戦闘でDBG-035も確認。登録43件/未解決31件/既確認12件、次DBG-044を保持。
