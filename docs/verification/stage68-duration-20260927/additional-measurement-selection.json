@@ -1,0 +1,32 @@
+{
+  "selected": [
+    {
+      "stage": "8-7",
+      "name": "search-40-swap-0-1-attack-up",
+      "inputHash": "0f4ad017121be28f58dc77919e4416e10cf7fb07bbd54bd88a1edc11912883a1",
+      "seed": 441168,
+      "actions": 294,
+      "healingEvents": 121,
+      "skillCasts": 137,
+      "areaCasts": 0,
+      "bursts": 1,
+      "reason": "final_wave_defeated",
+      "evidence": "docs/verification/stage68-implementation-20260927/search/8-7.json.gz"
+    },
+    {
+      "stage": "2-5",
+      "name": "starter-area-sp-feed",
+      "inputHash": "24d65f84133cf9b5a2c8658a8851a5273954635fb4da0b14e638c0f8fea2bb97",
+      "seed": 211166,
+      "actions": 257,
+      "healingEvents": 39,
+      "skillCasts": 113,
+      "areaCasts": 74,
+      "bursts": 10,
+      "reason": "final_wave_defeated",
+      "evidence": "docs/verification/stage68-decision-20260927/2-5-early.json.gz"
+    }
+  ],
+  "reason": "8-7: highest healing repetition and near-highest actions; 2-5: most all-enemy skill casts and burst repetition. Counts are not converted to seconds.",
+  "implementationVersion": "f9a8fd27caac0f19c9180cfe01abe4c26cece9ca/BattleView:37d5d721f070077129f26d6caab769890892e5468fd4ca55cbacf5dc48be274f/engine:974ab11366f1874b71ad003084087febb44e197c64adbb478e7317e2b96f08a9"
+}
