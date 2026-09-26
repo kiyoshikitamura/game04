@@ -26,6 +26,7 @@ const session=JSON.parse(fs.readFileSync(process.env.QA_SESSION_FILE||'.expiry-l
   const dialog=await page.getByRole('dialog').innerText();
   assert.ok(dialog.includes('失効履歴'));assert.ok(dialog.includes('×3'));assert.ok(dialog.includes('×2'));
   assert.ok(!dialog.includes('ダイヤ'));
+  assert.ok(dialog.includes('侵攻令'));assert.ok(!dialog.includes('RAID_UNLOCK_TICKET'));
   await page.reload({waitUntil:'networkidle'});
   await page.getByRole('heading',{name:'所持品',exact:true}).waitFor();
   const reloaded=await page.locator('.g4-inventory-entry').allTextContents();

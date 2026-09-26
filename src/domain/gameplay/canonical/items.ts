@@ -7,6 +7,7 @@ export const CANONICAL_ITEM_VERSION = itemSource.version;
 export const CANONICAL_ITEMS: readonly CanonicalItem[] = Object.freeze(itemSource.items.map((item) => ({ ...item, name: getThemedMasterName(item.id, item.name), description: getThemedItemDescription(item.id, item.description) })));
 export const CANONICAL_ITEM_BY_ID = new Map(CANONICAL_ITEMS.map((item) => [item.id, item]));
 const CANONICAL_REWARD_ALIAS_NAMES: Record<string, string> = {
+  RAID_UNLOCK_TICKET: "侵攻令",
   SKILL_LB_PART: getThemedMasterName("SKILL_LB_PART", "SKILL_LB_PART"),
   CHAR_EXP_XL: "武将EXP素材（特大）",
   EQUIP_EXP_XL: "装備EXP素材（特大）",
