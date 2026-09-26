@@ -500,7 +500,8 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
             skipped = true;
         }
         else {
-            if (gauge >= 200) {
+            // Ineligible actors keep the gauge and consume no BURST random draw.
+            if (gauge >= 200 && (!attackBurst || chooseAttack(u))) {
                 gauge = 0;
                 burst = random() < (input.earlyQuestAssist?.version==='area1-assist-v1-20260926' ? .8 : commonBurstChance(u.stats.luk));
                 if (burst)
