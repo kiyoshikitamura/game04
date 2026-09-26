@@ -58,7 +58,7 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
   const encounterActive = !!encounterRaid && Date.parse(encounterRaid.expiresAt) > now;
   const claimableMissions = missions.filter(m => m.status === 'claimable').length;
   function openSelector() { setDraftCharacter(favorite.id); setDraftBackground(background.id); setSaveError(''); setSelector(true); }
-  const stage = nextQuestStage(state.clearedStages);
+  const stage = nextQuestStage(state.clearedStages,state.earlyProgress);
   const area = QUEST_AREAS.find(a => a.id === stage.areaId)!;
   const conversations = buildDirectMessageConversations(game.directMessages ?? [], game.session?.user?.id ?? '', game.dmUnreadConversations ?? []);
   const activeDm = conversations.find(c => c.userId === game.dmRecipientId);
@@ -106,7 +106,7 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
   async function saveHome() {
     if (saveLock.current || !dialogImages.ready) return;
     const choice = HOME_BACKGROUNDS.find(b => b.id === draftBackground);
-    if (!choice || !isHomeBackgroundUnlocked(choice, state.clearedStages, state.unlockedHomeBackgroundIds) || !ownedCharacters.some(c => c.id === draftCharacter)) return;
+    if (!choice || !isHomeBackgroundUnlocked(choice, state.clearedStages, state.unlockedHomeBackgroundIds,state.earlyProgress) || !ownedCharacters.some(c => c.id === draftCharacter)) return;
     saveLock.current = true; setSaving(true); setSaveError('');
     try { await onAction('set_home', { characterId: draftCharacter, backgroundId: draftBackground }); setSelector(false); }
     catch (error) { setSaveError(error instanceof Error ? error.message : '変更を保存できませんでした'); }
@@ -152,7 +152,7 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
     {selector && <Modal closeDisabled={saving} title="切替" className="g4-home-selector" onClose={() => { if (!saveLock.current) setSelector(false); }} footer={<div className="g4-home-selector-actions"><button className="rd-button" disabled={saving} onClick={() => setSelector(false)}>閉じる</button><button className="rd-button rd-primary" disabled={saving || !dialogImages.ready || !ownedCharacters.some(c => c.id === draftCharacter)} onClick={() => void saveHome()}>{saving ? '保存中…' : '保存'}</button></div>}>
       {!dialogImages.ready ? <div className="g4-home-loading" role="status">{dialogImages.error ? <><p>画像を読み込めませんでした</p><button className="rd-button" onClick={dialogImages.retry}>再読み込み</button></> : <span className="g4-home-spinner" aria-label="読み込み中" />}</div> : <>
         <h3>武将</h3><div className="g4-home-character-choices">{ownedCharacters.map(c => <button key={c.id} disabled={saving} aria-pressed={draftCharacter === c.id} className="g4-home-choice" onClick={() => setDraftCharacter(c.id)}><span className="g4-home-choice-art" style={{ backgroundImage: `url(${characterBackground(c) ?? background.image})` }}><img src={characterArt(c, 'card') ?? c.image} alt="" /></span><strong>{c.name}</strong><small>{draftCharacter === c.id ? '選択中' : '\u00a0'}</small></button>)}</div>
-        <h3>背景</h3><div className="g4-home-background-choices">{HOME_BACKGROUNDS.map(b => { const unlocked = isHomeBackgroundUnlocked(b, state.clearedStages, state.unlockedHomeBackgroundIds); return <button key={b.id} disabled={saving || !unlocked} aria-pressed={draftBackground === b.id} className={`g4-home-choice ${unlocked ? '' : 'is-locked'}`} onClick={() => setDraftBackground(b.id)}><span className="g4-home-background-art"><img src={b.image} alt="" /></span><strong>{b.name}</strong><small>{unlocked ? draftBackground === b.id ? '選択中' : '\u00a0' : b.conditionLabel}</small></button>; })}</div>
+        <h3>背景</h3><div className="g4-home-background-choices">{HOME_BACKGROUNDS.map(b => { const unlocked = isHomeBackgroundUnlocked(b, state.clearedStages, state.unlockedHomeBackgroundIds,state.earlyProgress); return <button key={b.id} disabled={saving || !unlocked} aria-pressed={draftBackground === b.id} className={`g4-home-choice ${unlocked ? '' : 'is-locked'}`} onClick={() => setDraftBackground(b.id)}><span className="g4-home-background-art"><img src={b.image} alt="" /></span><strong>{b.name}</strong><small>{unlocked ? draftBackground === b.id ? '選択中' : '\u00a0' : b.conditionLabel}</small></button>; })}</div>
       </>}{saveError && <p className="g4-home-error" role="alert">{saveError}</p>}
     </Modal>}
     {profileId && <Modal title="プロフィール" onClose={() => setProfileId('')} footer={profileId !== state.userId ? <button className="rd-button" onClick={() => { game.setDmRecipientId(profileId); setProfileId(''); setCommunity('dm'); setExpanded(true); }}>DMを送る</button> : undefined}>

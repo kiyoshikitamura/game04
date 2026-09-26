@@ -10,11 +10,12 @@ interface Options {
   vipActive: boolean;
   blocked?: boolean;
   minimumFrameDuration?: (result: BattleResult, index: number) => number;
+  waveIntroDuration?: number;
 }
 const clampFrame = (index: number, result: BattleResult) => Math.max(0, Math.min(Number.isFinite(index) ? Math.floor(index) : 0, result.frames.length - 1));
 
 /** A single cancellable clock controls all recorded state, including HP, SP and cut-ins. */
-export function useRecordedBattlePlayback({ result, initialFrame = 0, initialPaused = false, vipActive, blocked = false, minimumFrameDuration }: Options) {
+export function useRecordedBattlePlayback({ result, initialFrame = 0, initialPaused = false, vipActive, blocked = false, minimumFrameDuration, waveIntroDuration = 0 }: Options) {
   const [index, setIndex] = useState(() => clampFrame(initialFrame, result));
   const [speed, setSpeed] = useState(1);
   const [paused, setPaused] = useState(initialPaused);
@@ -23,7 +24,21 @@ export function useRecordedBattlePlayback({ result, initialFrame = 0, initialPau
   const frame = result.frames[clampFrame(index, result)];
   const effectiveSpeed = speed;
   const finished = !frame || index >= result.frames.length - 1;
-  const playbackPaused = paused || blocked || finished;
+  const [introduced, setIntroduced] = useState({ result, wave: initialFrame > 0 ? frame?.wave : 0 });
+  const introClock = useRef<{result: BattleResult; wave: number; remaining: number} | null>(null);
+  const waveIntroActive = waveIntroDuration > 0 && !finished && (introduced.result !== result || introduced.wave !== frame.wave);
+  const playbackPaused = paused || blocked || finished || waveIntroActive;
+
+  useEffect(() => {
+    if (!waveIntroActive) return;
+    if (!introClock.current || introClock.current.result !== result || introClock.current.wave !== frame.wave) {
+      introClock.current = {result, wave: frame.wave, remaining: waveIntroDuration};
+    }
+    if (paused || blocked) return;
+    const active = introClock.current, start = performance.now();
+    const timer = setTimeout(() => setIntroduced({result, wave: frame.wave}), active.remaining);
+    return () => {clearTimeout(timer); active.remaining = Math.max(0, active.remaining - (performance.now() - start));};
+  }, [result, frame?.wave, waveIntroActive, waveIntroDuration, paused, blocked]);
 
   useEffect(() => {
     generation.current += 1;
@@ -58,5 +73,5 @@ export function useRecordedBattlePlayback({ result, initialFrame = 0, initialPau
     clock.current = null;
     setIndex(Math.max(0, result.frames.length - 1));
   }, [vipActive, result]);
-  return { index, frame, finished, speed, effectiveSpeed, paused, playbackPaused, setPaused, cycleSpeed, skip };
+  return { index, frame, finished, speed, effectiveSpeed, paused, playbackPaused, waveIntroActive, setPaused, cycleSpeed, skip };
 }

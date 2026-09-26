@@ -1,5 +1,6 @@
 'use client';
 import RecordedBattleResult from './RecordedBattleResult';
+import { UI_MOTION } from '../ui/uiMotion';
 import type { ReactNode } from 'react';
 import { useAudio } from '@/audio/AudioProvider';
 import { SE_ASSETS, type BgmScene, type SeEvent } from '@/audio/audioContract';
@@ -69,13 +70,13 @@ export function BattleView({ resultActions, resultRewards, bgmScene = 'BATTLE', 
   const measuredImageResult = useRef<BattleResult | null>(null);
   const detailDialog = useRef<HTMLDialogElement>(null);
   const assetsBlocked = assetState.result !== result || assetState.status !== 'ready';
-  const { index, frame, finished, speed, effectiveSpeed, paused, playbackPaused, setPaused, cycleSpeed, skip } = useRecordedBattlePlayback({ result, initialFrame, initialPaused, vipActive, blocked: !!detail || showLog || assetsBlocked, minimumFrameDuration: minimumEffectFrameDuration });
+  const { index, frame, finished, speed, effectiveSpeed, paused, playbackPaused, waveIntroActive, setPaused, cycleSpeed, skip } = useRecordedBattlePlayback({ result, initialFrame, initialPaused, vipActive, blocked: !!detail || showLog || assetsBlocked, minimumFrameDuration: minimumEffectFrameDuration, waveIntroDuration: UI_MOTION.waveIntroMs });
   const presentation = projectRecordedBattleFrame(result, index);
   const battleRoot = useRef<HTMLElement>(null);
   useEffect(() => { if (finished) { stopBgm(); battleRoot.current?.scrollIntoView({ block: 'start' }); } }, [finished, stopBgm]);
   useEffect(() => {
     stopSe();
-    if (!frame || assetsBlocked || paused || detail || showLog || heardFrame.current === index) return;
+    if (!frame || assetsBlocked || paused || waveIntroActive || detail || showLog || heardFrame.current === index) return;
     if (['action_start', 'phase', 'burst_start', 'start', 'end'].includes(frame.event ?? frame.kind)) heardAction.current.clear();
     heardFrame.current = index;
     for (const event of recordedBattleSounds(result, index)) {
@@ -84,7 +85,7 @@ export function BattleView({ resultActions, resultRewards, bgmScene = 'BATTLE', 
       playSe(event);
     }
     return stopSe;
-  }, [result, index, frame, speed, assetsBlocked, paused, detail, showLog, playSe, stopSe]);
+  }, [result, index, frame, speed, assetsBlocked, paused, waveIntroActive, detail, showLog, playSe, stopSe]);
   const effects = frame ? resolveBattleFrameEffects(frame, result.frames[index - 1], presentation.skill) : [];
   // A result-wide gate avoids hiding the battle when a later effect first appears.
   const imageKey = useMemo(() => JSON.stringify([...new Set([
@@ -173,18 +174,19 @@ export function BattleView({ resultActions, resultRewards, bgmScene = 'BATTLE', 
         const skillActive = recorded ? recorded.status === 'active' : !frame.skillStates && active && frame.skillId === skill.id;
         const status = skillActive ? '発動中' : recorded?.reason === 'reapply_unavailable' ? '再付与不可' : recorded ? readinessNames[recorded.status] ?? recorded.status : '記録なし';
         return <button key={`${skill.id}-${slot}`} className={`${styles.skill} ${skillActive ? styles.skillActive : recorded?.status === 'condition_unmet' ? styles.condition : recorded?.status === 'insufficient_sp' ? styles.shortSp : ''}`} title={`優先${slot + 1} ${skill.name}：${status}`} aria-label={`優先${slot + 1} ${skill.name}：${status}`} onClick={() => setDetail({ skill, readiness: status, cost: recorded?.cost, reason: recorded?.reason })}>
-          {isUnassignedSkillImage(skill.image) ? <svg className={styles.skillTypeIcon} viewBox="0 0 24 24" aria-hidden="true"><path d={statusPaths[skill.effects[0]?.type] ?? (skill.effects[0]?.type === 'heal' || skill.effects[0]?.type === 'revive' ? statusPaths.hot : statusPaths.atk_up)} /></svg> : <img src={skill.image} alt="" />}<span>{skillActive ? '発動' : recorded?.status === 'insufficient_sp' ? 'SP' : ''}</span>
+          {isUnassignedSkillImage(skill.image) ? <svg className={styles.skillTypeIcon} viewBox="0 0 24 24" aria-hidden="true"><path d={statusPaths[skill.effects[0]?.type] ?? (skill.effects[0]?.type === 'heal' || skill.effects[0]?.type === 'revive' ? statusPaths.hot : statusPaths.atk_up)} /></svg> : <img src={skill.image} alt="" />}<span>{slot + 1}<small>{skillActive ? '発動' : recorded?.status === 'insufficient_sp' ? 'SP' : '詳細'}</small></span>
         </button>;
       })}</span>}
       {impact && <div key={`${frame.index}-${state.id}`} className={`${styles.impact} ${impact.type === 'heal' ? styles.healing : ''}`} data-impact-target={state.id}><strong>{impact.type === 'miss' ? 'MISS' : impact.type === 'status' ? ({effect_applied:'付与',effect_miss:'不成立',cleanse:'解除',shield_absorbed:'吸収'}[frame.event ?? ''] ?? '') : `${impact.type === 'heal' ? '+' : ''}${Math.abs(impact.amount).toLocaleString()}`}</strong>{impact.hits && impact.hits.length > 1 && <small>{impact.hits.length} HITS</small>}</div>}
     </div>;
   };
-  return <section ref={battleRoot} className={styles.battle} aria-label={title} data-playback-paused={playbackPaused} data-playback-frame={index} style={{ '--battle-speed': effectiveSpeed, '--battle-background': `url(${JSON.stringify(backgroundSrc)})` } as CSSProperties}>
+  return <section ref={battleRoot} className={styles.battle} aria-label={title} data-playback-paused={playbackPaused && !waveIntroActive} data-intro-paused={paused || assetsBlocked || !!detail || showLog} data-playback-frame={index} style={{ '--battle-speed': effectiveSpeed, '--wave-intro-ms': `${UI_MOTION.waveIntroMs}ms`, '--battle-background': `url(${JSON.stringify(backgroundSrc)})` } as CSSProperties}>
     <dialog ref={loadingDialog} className={styles.loading} onCancel={event => event.preventDefault()} aria-label="戦闘画面の読み込み"><img src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" />{assetError ? <><p>戦闘画像を読み込めませんでした。</p><button onClick={() => { setAssetState({ result, key: imageKey, status: 'loading' }); setRetry(value => value + 1); }}>再試行</button>{!requirePlaybackCompletion && <button onClick={leaveFailedPlayback}>再生を終了する</button>}</> : <><span className={styles.spinner} /><p>戦闘の準備中</p></>}</dialog>
     <div className={visibleLoading ? styles.loadingContent : undefined}>
     {!finished && <><header className={styles.header}><strong>第<b>{frame.wave}</b>派 / 全{result.waves.length}派</strong><div><button onClick={cycleSpeed} aria-label={`再生速度 ${speed}倍`}>▶▶ ×{speed}</button><button onClick={() => setPaused(p => !p)} disabled={finished} aria-label={paused ? '再開' : '一時停止'}>{paused ? '▶' : 'Ⅱ'}</button>{vipActive && <button className={styles.skip} disabled={finished} onClick={skip}>SKIP</button>}</div></header>
     {displayedRaidHp && <div className={styles.raidHp}>{displayedRaidHp.label} <span>{Math.floor(displayedRaidHp.current).toLocaleString()} / {Math.floor(displayedRaidHp.max).toLocaleString()}</span></div>}
-    <div className={styles.arena}>
+    <div className={`${styles.arena} ${waveIntroActive ? styles.waveEntering : ''}`} key={`arena-${frame.wave}`}>
+      {waveIntroActive && <div className={styles.waveIntro} role="status">第{frame.wave}派</div>}
       <div className={styles.enemyZone} data-count={frame.enemies.length}>{frame.enemies.map((u, i) => unitCard(u, true, i))}</div>
       {presentation.cutIn && presentation.actor && <div className={`${styles.cutIn} ${presentation.cutIn === 'burst' ? styles.burstCutIn : styles.skillCutIn}`} key={`cutin-${frame.index}`} aria-label={`${presentation.actor.name} ${presentation.cutIn === 'burst' ? 'BURST' : presentation.skill?.name ?? 'スキル'}`}><div className={styles.cutInLight} /><img src={unitArt(presentation.actor, presentation.actorState, 'full')} alt="" /><strong>{presentation.cutIn === 'burst' ? 'BURST' : presentation.skill?.name}</strong><span>{presentation.actor.name}</span></div>}
     </div>

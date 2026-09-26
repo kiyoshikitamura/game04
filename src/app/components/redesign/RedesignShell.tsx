@@ -24,6 +24,9 @@ export default function RedesignShell({ state, onAction, children, notifications
   const [missionBusy, setMissionBusy] = useState(false);
   const [missionError, setMissionError] = useState('');
   const missionLock = useRef(false);
+  const ackLock=useRef(false);
+  async function acknowledgeMissions(){if(ackLock.current||previewOnly||!state.earlyProgress?.missionNavigationPending)return;ackLock.current=true;setMissionError('');try{await onAction('early_missions_opened',{});}catch(e){setMissionError(e instanceof Error?e.message:'任務の表示を保存できませんでした。');}finally{ackLock.current=false;}}
+  useEffect(()=>{if(game.showMissionPanel&&state.earlyProgress?.missionNavigationPending)void acknowledgeMissions();},[game.showMissionPanel,state.earlyProgress?.missionNavigationPending]);
   async function claimMission(missionId: string) {
     if (missionLock.current || previewOnly) return;
     missionLock.current = true; setMissionBusy(true); setMissionError('');
@@ -52,6 +55,7 @@ export default function RedesignShell({ state, onAction, children, notifications
     {menu && <Modal title="メニュー" onClose={() => setMenu(false)}><div className="rd-stack"><button className="rd-button" onClick={() => run(() => { game.setInboxPanelTab('news'); game.setShowInboxPanel(true); })}>お知らせ{game.unreadNewsCount ? ` (${game.unreadNewsCount})` : ''}</button><button className="rd-button" onClick={() => run(() => { game.setInboxPanelTab('presents'); game.setShowInboxPanel(true); })}>プレゼントBOX{game.unreadPresentsCount > 0 && <i className="g4-unread" aria-label="未読あり" />}</button><button className="rd-button" onClick={() => run(() => game.setShowSettingsPanel(true))}>設定</button><button className="rd-button" onClick={() => run(() => window.location.assign("/auth/game04"))}>アカウント連携</button></div></Modal>}
     <InboxPanel />
     {game.showMissionPanel && <Modal title="任務" onClose={closeMissions} closeDisabled={missionBusy}>
+      {state.earlyProgress?.missionNavigationPending&&missionError&&<button className="rd-button" onClick={()=>void acknowledgeMissions()}>任務の表示を再確認</button>}
       <MissionContent state={state} missions={missions ?? []} missionBusy={missionBusy} missionError={missionError} previewOnly={previewOnly} onClaim={id => void claimMission(id)} />
     </Modal>}
     <SettingsPanel redesign />

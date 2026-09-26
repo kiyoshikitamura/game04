@@ -27,6 +27,8 @@ import type { TerritoryMaster, TerritoryProgress } from '../../../src/domain/red
 import type { BattleInput, RaidRoom, RedesignState, Reward } from '../../../src/domain/redesign/types.ts';
 
 import { applyTutorialTransition } from '../../../src/domain/redesign/tutorial/integration.ts';
+import { initializeEarlyProgress, recordEarlyQuestClear, recordEarlyQuestAttempt } from '../../../src/domain/redesign/earlyProgress.ts';
+import { applyEarlyAction } from '../../../src/domain/redesign/earlyActions.ts';
 import { SCENES } from '../../../src/domain/redesign/tutorial/content.ts';
 
 import { progressionActivities } from '../../../src/domain/redesign/activityEvents.ts';
@@ -70,7 +72,7 @@ async function stateFor(userId: string, acquired?: Awaited<ReturnType<typeof acq
   const input = acquired ?? await acquisitionInput(userId);
   for (let attempt = 0; attempt < 4; attempt++) {
     const state: RedesignState = await rpc('game04_get_session_state', { p_user_id: userId, p_initial: buildInitialState(userId, input.legacy) });
-    const migrated = importLegacyAssets(state, input.legacy);
+    const migrated = initializeEarlyProgress(importLegacyAssets(state, input.legacy));
     const imported = captureMissionAssets(synchronizeHomeBackgroundUnlocks(applyAcquisitionEvents(migrated, input.events, input.master)));
     if (JSON.stringify(imported) === JSON.stringify(state)) return state;
     try { return (await commit(state, imported, crypto.randomUUID())).state; }
@@ -212,7 +214,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
     let startRoom: (RaidRoom & {version: number}) | null = null;
     if (kind === 'quest') {
       const stage = getQuestStage(String(payload.stageId));
-      if (!stage || !isQuestStageUnlocked(stage.id, state.clearedStages)) throw new ApiError('このステージは未解放です。');
+      if (!stage || !isQuestStageUnlocked(stage.id, state.clearedStages, state.earlyProgress)) throw new ApiError('このステージは未解放です。');
       questStage = stage; waves = stage.waves; cost = questEnergyCost(stage, state); targetId = stage.id;
     } else {
       const room = await roomFor(String(payload.roomId)), master = getRoomRaidMaster(room);
@@ -232,7 +234,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
     const input = startRoom ? { ...battleInput, ...(getRoomRaidMaster(startRoom).damagePolicy ? {raidDamagePolicy:getRoomRaidMaster(startRoom).damagePolicy} : {}), raidStartSnapshot: { roomId: startRoom.id, level: startRoom.level, hp: startRoom.hp, maxHp: startRoom.maxHp } } : battleInput;
     // Validate and simulate before charging. Invalid provisional masters must not strand a paid pending battle.
     preparedBattle = simulateBattle(input);
-    await commit(state, { ...state, energy: state.energy - cost, ...(questStage ? {questAttempts:{...state.questAttempts,[targetId]:(state.questAttempts?.[targetId]??0)+1},questProgressVersion:QUEST_MASTER_VERSION} : {}) }, id, { id, kind, targetId, seed, input, status: 'started' }, startRoom, startRoom?.version ?? null);
+    await commit(state, { ...(questStage ? recordEarlyQuestAttempt(state,targetId) : state), energy: state.energy - cost, ...(questStage ? {questAttempts:{...state.questAttempts,[targetId]:(state.questAttempts?.[targetId]??0)+1},questProgressVersion:QUEST_MASTER_VERSION} : {}) }, id, { id, kind, targetId, seed, input, status: 'started' }, startRoom, startRoom?.version ?? null);
     // A simultaneous retry may have committed another seed under this request ID.
     // Always settle the persisted input, never this caller's discarded candidate.
     [record] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=*`);
@@ -260,7 +262,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
       const random = () => { rng = (Math.imul(rng, 1664525) + 1013904223) >>> 0; return rng / 4294967296; };
       const luck = record.input.party.reduce((n: number, p: any) => n + p.stats.luk, 0) / 5;
       let encounterRoll: number | undefined;
-      if (record.input.questMasterVersion === QUEST_MASTER_VERSION) {
+      if ([QUEST_MASTER_VERSION,'APPROVED_QUEST65_ROUND17_20260922'].includes(record.input.questMasterVersion)) {
         const settlement = questVictoryRewards(stage, state, record.input.party, record.seed);
         rewards.push(...settlement.rewards);
         firstClear = settlement.firstClear;
@@ -271,7 +273,8 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
       }
       const policy = await rewardPolicy();
       for (let i = 0; i < rewards.length; i++) after = grantReward(after, rewards[i], await uuidFor(`reward:${id}:${i}`), policy);
-      if (firstClear) after.clearedStages.push(stage.id);
+      if (firstClear && !after.clearedStages.includes(stage.id)) after.clearedStages.push(stage.id);
+      after = recordEarlyQuestClear(state, after, stage.id, record.input.questMasterVersion!==QUEST_MASTER_VERSION);
       const expReward = record.input.playerExpReward;
       if (expReward) {
         const progress = state.playerProgress;
@@ -295,7 +298,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
       }
       if ((encounterRoll ?? random()) < stage.encounterChance && !(await roomsFor(userId)).some(existing => existing.ownerId === userId && existing.status === 'active' && Date.parse(existing.expiresAt) > Date.now() && !existing.territorySnapshot && getRoomRaidMaster(existing).type === 'encounter')) {
         encounterRaidId = await uuidFor(`encounter:${id}`);
-        const encounterMaster=record.input.questMasterVersion===QUEST_MASTER_VERSION?selectEncounterMaster(Number(stage.designId.split('-')[0]),random):null;
+        const encounterMaster=[QUEST_MASTER_VERSION,'APPROVED_QUEST65_ROUND17_20260922'].includes(record.input.questMasterVersion)?selectEncounterMaster(Number(stage.designId.split('-')[0]),random):null;
         room = createRaidRoom(encounterMaster?.id??'encounter_flame', userId, encounterRaidId, Date.now()); room.participants[0].name = playerName; version = -1;
       }
     } else if (record.kind === 'raid') {
@@ -323,7 +326,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
       if (record.input.party.some((unit: any) => unit.skills.length >= 3)) missionCounters.push('quest_skill_slot3');
     }
     if (missionCounters.length) after = recordMissionEvent(after, { id: `battle:${id}`, at: Date.now(), counters: missionCounters });
-    if(record.kind==='quest'&&battle.outcome!=='win'&&after.tutorial&&!after.tutorial.defeatSeen)after.tutorial={...after.tutorial,defeatSeen:true,defeatPending:true};
+    if(after.tutorial)after.tutorial={...after.tutorial,defeatPending:false};
     const activityEvents=progressionActivities(state,after,record.kind==='quest'?'quest_settle':'raid_settle',activityRoomBefore,room??undefined);
     const result = { battle, rewards, firstClear, encounterRaidId, ...(playerGrowth ? { playerGrowth } : {}) };
     try {
@@ -400,6 +403,8 @@ Deno.serve(async (request: Request) => {
     }
     const [prior] = priorRows;
     if (prior) {
+      if(action.startsWith('early_')&&(prior.result?.receipt?.earlyAction!==action||canonicalJson(prior.result?.receipt?.earlyPayload)!==canonicalJson(payload)))throw new ApiError('操作IDが別の操作ですでに使用されています。',409);
+      if(action==='claim_mission'&&prior.result?.receipt?.missionId!==String(payload.missionId))throw new ApiError('操作IDが別の操作ですでに使用されています。',409);
       if(action.startsWith('tutorial_')&&(prior.result?.receipt?.tutorialAction!==action||canonicalJson(prior.result?.receipt?.tutorialPayload)!==canonicalJson(payload)))throw new ApiError('操作IDが別の操作ですでに使用されています。',409);
       if (['normal_gacha','special_gacha','special_gacha_exchange'].includes(action)) {
         const requestPayload=normalizedGachaRequestPayload(action,payload);
@@ -454,12 +459,19 @@ Deno.serve(async (request: Request) => {
       const [updatedTickets,response]=await Promise.all([gachaTicketBalances(user.id),responseFor(user.id,{...(saved.receipt??receipt),replayed:Boolean(saved.replayed)},saved.state)]);
       return new Response(JSON.stringify({...response,formalGacha:formalGachaCatalog(saved.state,updatedTickets,catalogNow)}),{headers});
     }
+    if(action.startsWith('early_')) {
+      const next=applyEarlyAction(state,action,payload);
+      const saved=await commit(state,next,requestId,null,null,null,{earlyAction:action,earlyPayload:payload});
+      return new Response(JSON.stringify(await responseFor(user.id,{},saved.state)),{headers});
+    }
     if (action === 'claim_mission') {
       const mission = getClaimableMission(state, await missionConfig(), String(payload.missionId));
       after = structuredClone(state);
       const policy = await rewardPolicy();
-      for (let i = 0; i < mission.rewards.length; i++) after = grantReward(after, mission.rewards[i], await uuidFor(`mission:${user.id}:${mission.id}:${i}`), policy);
+      for (let i = 0; i < mission.rewards.length; i++) if(mission.rewards[i].kind!=='free_diamonds') after = grantReward(after, mission.rewards[i], await uuidFor(`mission:${user.id}:${mission.id}:${i}`), policy);
       after.claimedMissionIds = [...(state.claimedMissionIds ?? []), mission.id];
+      const saved=await rpc('game04_commit_mission_reward',{p_user_id:state.userId,p_expected_version:state.version,p_state:after,p_cash_delta:after.cash-state.cash,p_request_id:requestId,p_mission_id:mission.id});
+      return new Response(JSON.stringify(await responseFor(user.id,saved.receipt??{},saved.state)),{headers});
     } else if (action === 'set_home') {
       try { after = applyHomeSelection(state, payload); }
       catch (error) { throw new ApiError(error instanceof Error ? error.message : '本陣の変更を保存できませんでした。'); }

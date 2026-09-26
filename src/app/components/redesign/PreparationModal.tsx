@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState,type ReactNode } from 'react';
 import { useQuestAssets } from './questAssets';
 import type { BattleUnit, OwnedCharacter } from '@/domain/redesign/types';
 import CanonicalDialog from '../ui/CanonicalDialog';
@@ -16,8 +16,8 @@ function formalSkillAsset(skill: { id: string; image: string; name: string }) {
   const entry = localSkills.find(candidate => candidate.sourceId === skill.id);
   return { image: entry?.path ?? skill.image, name: entry?.sourceName ?? skill.name };
 }
-export default function PreparationModal({ party, ownedCharacters, title, energyCost, energy, busy = false, onConfirm, onBack, onOpenDeck, error, commonSpMax = 400 }: {
-  ownedCharacters?: OwnedCharacter[]; commonSpMax?: number | null; party: BattleUnit[]; title: string; energyCost: number; energy: number; busy?: boolean;
+export default function PreparationModal({ party, ownedCharacters, title, energyCost, energy, busy = false, onConfirm, onBack, onOpenDeck, error, commonSpMax = 400, children }: {
+  children?:ReactNode; ownedCharacters?: OwnedCharacter[]; commonSpMax?: number | null; party: BattleUnit[]; title: string; energyCost: number; energy: number; busy?: boolean;
   onConfirm: () => void | Promise<void>; onBack: () => void; onOpenDeck: () => void; error?: string;
 }) {
   const [detailId, setDetailId] = useState<string | null>(null);
@@ -39,6 +39,7 @@ export default function PreparationModal({ party, ownedCharacters, title, energy
       </button>; })}</div>}
       <div className="rq-preparation-tools"><p className="rq-total-sp"><img src="/ui/sengoku/07-flower-crest.png" alt="" />共通SP <strong>{commonSpMax === null ? '開催時ルール' : `0 / ${commonSpMax}`}</strong></p>
       <button type="button" className="rq-edit-button" onClick={onOpenDeck} disabled={busy || !assets.ready}>編成変更</button></div>
+      {children}
       {invalidPartySize && <p role="alert">武将を1〜5人編成してください。</p>}
       {energy < energyCost && <p role="alert">行動力が不足しています。</p>}
       {error && <p role="alert">{error}</p>}

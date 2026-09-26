@@ -18,6 +18,8 @@ import type { AcquisitionState } from '@/domain/redesign/acquisitions';
 import type { BattleResult } from '@/domain/redesign/battle';
 import RedesignShell from './RedesignShell';
 import GrowthView from './GrowthView';
+import {EarlyRetentionGuide,EarlySortiePreparation} from './EarlyRetentionGuide';
+import GuideDialog from '../ui/GuideDialog';
 import QuestView, { type QuestSettlement } from './QuestView';
 import RaidView from './RaidView';
 import TerritoryView from './TerritoryView';
@@ -50,8 +52,11 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   const [raidNavigation, setRaidNavigation] = useState(0);
   const [questNavigation, setQuestNavigation] = useState(0);
   const [questPlaying, setQuestPlaying] = useState(false);
+  const [earlyLoadoutOpen,setEarlyLoadoutOpen]=useState(false);
   const [battle, setBattle] = useState<BattleResult | null>(null);
   const [battleBackground, setBattleBackground] = useState<string>();
+  useEffect(()=>{if(data?.state.earlyProgress?.missionNavigationPending&&!questPlaying&&!battle)game.setShowMissionPanel(true);},[data?.state.earlyProgress?.missionNavigationPending,questPlaying,battle]);
+
   const tutorialActive = !!data?.state.tutorial && data.state.tutorial.step < SCENES.length;
   useEffect(() => {
     // Tutorial, quest and raid own their nested screen/BGM transitions.
@@ -132,7 +137,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     const requestOwner = owner;
     const isBattle = name === 'quest_battle' || name === 'raid_battle';
     const isGrowth = ['save_deck','character_level','character_awaken','character_unlock','soul_exchange','soul_select','skill_level','equipment_level','equipment_lb','equipment_lock','equipment_dismantle'].includes(name);
-    const persistentRequest = name.startsWith('tutorial_') || isBattle || name === 'territory_host' || isGrowth || ['shop_exchange', 'use_energy_drink', 'claim_mission', 'raid_claim'].includes(name);
+    const persistentRequest = name.startsWith('tutorial_') || name.startsWith('early_') || isBattle || name === 'territory_host' || isGrowth || ['shop_exchange', 'use_energy_drink', 'claim_mission', 'raid_claim'].includes(name);
     const storageKey = `game04:request:${owner}:${name}:${!isBattle ? JSON.stringify(payload) : String(payload.stageId || payload.roomId || payload.destinationId || '')}`;
     let requestId = explicitId || crypto.randomUUID();
     if (persistentRequest && !explicitId) {
@@ -170,7 +175,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     setQuestPreparation(false);
     if (next.startsWith('raid:')) { setRaidId(next.slice(5)); next = 'raid'; }
     if (next === 'quest:resume' || next === 'quest') {
-      setQuestStart(next === 'quest:resume' && data ? nextQuestStage(data.state.clearedStages).id : undefined);
+      setQuestStart(next === 'quest:resume' && data ? nextQuestStage(data.state.clearedStages,data.state.earlyProgress).id : undefined);
       setQuestNavigation(value => value + 1);
       next = 'quest';
     }
@@ -250,8 +255,9 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   return <RedesignShell state={state} activeTab={tab} navigationBusy={busy} onNavigate={navigate} onAction={action} hideChrome={!!battle || questPlaying} socialEvents={data.socialEvents} missions={data.missions}
     encounterRaid={encounter ? { id: encounter.id, name: raidDisplayLabel(getRoomRaidMaster(encounter), encounter.level), expiresAt: encounter.expiresAt } : null}
     notifications={<>
-    {state.tutorial&&!state.tutorial.departed&&tab==='home'&&<Modal title="ご案内" hideCloseButton closeDisabled onClose={()=>{}} footer={<button className="rd-button" disabled={busy} onClick={()=>navigate('quest')}>出陣へ</button>}><p>{FIRST_SORTIE_TEXT}</p></Modal>}
-    {state.tutorial?.defeatPending&&!battle&&!questPlaying&&<Modal title="ご案内" hideCloseButton closeDisabled onClose={()=>{}} footer={<button className="rd-button" disabled={busy} onClick={()=>void action('tutorial_dismiss_defeat').then(()=>game.setShowMissionPanel(true))}>任務へ</button>}><p>{FIRST_DEFEAT_TEXT}</p></Modal>}
+      {state.tutorial&&!state.tutorial.departed&&tab==='home'&&!game.showLoginBonusModal&&<GuideDialog title="戦支度" message={FIRST_SORTIE_TEXT} actions={[{label:'出陣',semantic:'primary',disabled:busy,onClick:()=>navigate('quest')}]}/>}
+      <EarlyRetentionGuide state={state} battlePlaying={!!battle||questPlaying||busy} resultOpen={!!battle||questPlaying||!!game.showMissionPanel||game.showLoginBonusModal||earlyLoadoutOpen} save={action} navigate={(destination,options)=>{if(destination==='missions'){game.setShowMissionPanel(true);}else{setEarlyLoadoutOpen(!!options?.earlyLoadout);setTab('character');}}}/>
+    {earlyLoadoutOpen&&!battle&&!questPlaying&&<Modal title="編成・装備" onClose={()=>setEarlyLoadoutOpen(false)}><EarlySortiePreparation state={state} save={action}/></Modal>}
     {!!(state as AcquisitionState).pendingAcquisitions?.length && <p className="rd-panel" role="status">受け取り保留中の獲得物が{(state as AcquisitionState).pendingAcquisitions!.length}件あります。</p>}
     {error && <p className="rd-panel" role="alert">{error}</p>}
     {data.pendingBattle && !battle && <div className="rd-panel"><p>未完了の戦闘があります。</p><button className="rd-button" disabled={busy} onClick={async () => {
@@ -260,7 +266,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     }}>戦闘を再開</button></div>}
     </>}>
     {battle ? <BattleView bgmScene={battleKind === 'raid' ? 'BATTLE_BOSS' : 'BATTLE'} result={battle} vipActive={vipActive} backgroundSrc={battleBackground} raidHp={battleRoom ? { current: battleRoom.hp, max: battleRoom.maxHp, level: battleRoom.level } : undefined} onComplete={() => { setBattle(null); setBattleKind(null); setBattleBackground(undefined); void refresh(); }} /> : <>
-      {tab === 'quest' && <QuestView key={questNavigation} onBattlePlayingChange={setQuestPlaying} state={state} party={party} vipActive={vipActive} initialStageId={questStart} initialPreparation={questPreparation} onStart={startQuest} onOpenDeck={openQuestDeck} onOpenRaid={id => { setRaidId(id); setTab('raid'); }} onIgnoreEncounter={async id => { await action('encounter_ignore', { roomId: id }); }} />}
+      {tab === 'quest' && <QuestView key={questNavigation} onBattlePlayingChange={setQuestPlaying} state={state} party={party} vipActive={vipActive} initialStageId={questStart} initialPreparation={questPreparation} onEarlyAction={action} onStart={startQuest} onOpenDeck={openQuestDeck} onOpenRaid={id => { setRaidId(id); setTab('raid'); }} onIgnoreEncounter={async id => { await action('encounter_ignore', { roomId: id }); }} />}
       {tab === 'character' && <>{raidDeckReturn && <button type="button" className="rd-button" disabled={busy} onClick={returnToRaidPreparation}>共闘の出撃準備に戻る</button>}{questDeckReturn && <button type="button" className="rd-button" disabled={busy} onClick={returnToQuestPreparation}>出撃準備に戻る</button>}<GrowthView state={state} onAction={action} /></>}
       {tab === 'territory' && <TerritoryView territory={data.territory} rooms={data.rooms} userId={state.userId} onOpenRoom={id => { setRaidId(id); setTab('raid'); }} onHost={async destinationId => { const value = await action('territory_host', { destinationId }); if (!value.territoryRoomId) throw new Error('侵攻結果を確認できませんでした。'); setRaidId(value.territoryRoomId); setTab('raid'); }} />}
       {tab === 'raid' && <RaidView key={`${raidId || 'list'}:${raidNavigation}`} initialPreparationLevel={raidPreparationLevel} state={state} rooms={data.rooms} party={party} initialRoomId={raidId} onAction={raidAction} onOpenDeck={openRaidDeck} />}
