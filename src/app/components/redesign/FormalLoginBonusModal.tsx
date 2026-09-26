@@ -11,7 +11,7 @@ export default function FormalLoginBonusModal({currentStep,totalLogins,onClose}:
   const day=Number.isSafeInteger(currentStep)&&currentStep>=1&&currentStep<=30?currentStep:1;
   const next=day%30+1;
   const assets=useCharacterImageReadiness(images,'home');
-  return <CanonicalDialog title="ログインボーナス" loading={!assets.ready&&!assets.failed} actions={[{label:'閉じる',onClick:onClose,semantic:'primary'}]}>
+  return <CanonicalDialog title="ログインボーナス" density="compact" loading={!assets.ready&&!assets.failed} actions={[{label:'閉じる',onClick:onClose,semantic:'primary'}]}>
     {assets.failed?<div role="alert"><p>報酬画像を読み込めませんでした。</p><button type="button" className="rd-button" onClick={assets.retry}>再試行</button></div>:<div className="g4-login-board">
       <section className="g4-login-today" aria-label="本日の報酬">
         <div className="g4-login-heading"><h3>本日の報酬</h3><span>{day}日目</span></div>

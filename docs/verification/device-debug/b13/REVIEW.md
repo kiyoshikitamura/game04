@@ -69,3 +69,7 @@ GAME03参考ファイル: src/app/components/MissionPanel.tsx（読取のみ）�
 - 005/040/048/049/050/051/052/055は配信済み・実機確認待ち。054は表示整理を配信済み、固有名の承認待ち。053は提案のみ。未承認案の製品反映なし。
 
 Gitに含めない必要設定: .env.local、.env.preview.local、.vercel/project.json、Vercel CLI認証、ブラウザーの認証ストレージ。秘密値はコミットしない。Preview設定はVercelからブランチ指定で再取得できる。センシティブな値はpullされないため、実サーバー検証で必要になった場合のみ安全な手段で再設定する。UI限定検証は既存NEXT_PUBLIC_USE_MOCK_DBで実施し、配信設定へモックを持ち込まない。
+
+## DBG-053 再提案・情報量に応じた枠（2026-09-26）
+
+ユーザーは旧案を未承認とし、2段のコンパクト行を指示。改訂案2と4状態×375/390を [mission-v2/README.md](mission-v2/README.md) に保存。実MissionContent未変更。共通ルールを正本18.13へ追記、CanonicalDialogの明示compactとログインボードへ適用。任務は承認待ちのまま。

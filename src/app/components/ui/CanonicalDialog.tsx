@@ -23,6 +23,7 @@ export default function CanonicalDialog({
   size = "standard",
   ariaLabel,
   loading = false,
+  density = "standard",
 }: {
   title?: string;
   children: React.ReactNode;
@@ -31,6 +32,7 @@ export default function CanonicalDialog({
   size?: "standard" | "large";
   ariaLabel?: string;
   loading?: boolean;
+  density?: "standard" | "compact";
 }) {
   const busy = useRef(false);
   const dialog = useRef<HTMLElement>(null);
@@ -74,7 +76,7 @@ export default function CanonicalDialog({
     });
   };
   return <div className="canonical-dialog-overlay">
-    <section ref={dialog} tabIndex={-1} className={`canonical-dialog canonical-dialog--${size}`} role="dialog" aria-modal="true" aria-busy={pending || loading} aria-label={ariaLabel || title || "ダイアログ"}>
+    <section ref={dialog} tabIndex={-1} className={`canonical-dialog canonical-dialog--${size} canonical-dialog--${density}`} role="dialog" aria-modal="true" aria-busy={pending || loading} aria-label={ariaLabel || title || "ダイアログ"}>
       <header className="canonical-dialog-header">
         {title ? <h2>{title}</h2> : <span />}
         {onClose && <button type="button" className="canonical-dialog-close" disabled={pending} onClick={() => runAction(onClose, true)} aria-label="閉じる">×</button>}

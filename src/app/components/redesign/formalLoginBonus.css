@@ -2,18 +2,18 @@
 .g4-login-heading{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
 .g4-login-heading h3{margin:0;font:700 18px/1.4 var(--g4-serif);color:var(--g4-gold)}
 .g4-login-heading>span{font-size:12px;white-space:nowrap}
-.g4-login-today{padding:12px;border:1px solid var(--g4-gold);border-radius:var(--g4-radius);background:linear-gradient(130deg,#57342680,#21171dcc),url('/ui/raid/v2/panel-sakura-overlay.png') center top/100% auto no-repeat}
+.g4-login-today{padding:8px;border:1px solid var(--g4-gold);border-radius:var(--g4-radius);background:linear-gradient(130deg,#57342680,#21171dcc),url('/ui/raid/v2/panel-sakura-overlay.png') center top/100% auto no-repeat}
 .g4-login-today .g4-reward-list>li{grid-template-columns:40px minmax(0,1fr) auto;padding-block:8px}
 .g4-login-today .g4-reward-list img{width:40px;height:40px}
 .g4-login-today .g4-reward-list strong{font-size:20px;color:var(--g4-text)}
 .g4-login-received{margin:8px 0 0;font-size:12px;color:var(--g4-gold);text-align:right}
-.g4-login-next{margin-top:16px;padding:12px;background:var(--g4-reading-surface);border-left:2px solid var(--g4-gold)}
+.g4-login-next{margin-top:12px;padding:8px;background:var(--g4-reading-surface);border-left:2px solid var(--g4-gold)}
 .g4-login-next .g4-login-heading h3{font-size:16px}
 .g4-login-next .g4-reward-list>li{padding-block:4px;border:0}
-.g4-login-board-title{font:700 16px/1.4 var(--g4-serif);margin:24px 0 12px;color:var(--g4-gold)}
-.g4-login-days{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;list-style:none;padding:0;margin:0}
+.g4-login-board-title{font:700 16px/1.4 var(--g4-serif);margin:16px 0 8px;color:var(--g4-gold)}
+.g4-login-days{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:8px;list-style:none;padding:0;margin:0}
 .g4-login-days>li{min-width:0;padding:8px 5px;border:1px solid var(--g4-rule-border);border-radius:var(--g4-radius);background:var(--g4-reading-surface)}
-.g4-login-day-heading{display:grid;gap:4px;margin-bottom:8px;text-align:center;line-height:1.4}
+.g4-login-day-heading{display:grid;gap:2px;margin-bottom:4px;text-align:center;line-height:1.4}
 .g4-login-day-heading b{font-size:14px}.g4-login-day-heading>span{font-size:11px;color:var(--g4-muted)}
 .g4-login-days ul{list-style:none;padding:0;margin:0;display:grid;gap:4px}
 .g4-login-days ul>li{display:flex;align-items:center;justify-content:space-between;gap:2px;min-width:0}
