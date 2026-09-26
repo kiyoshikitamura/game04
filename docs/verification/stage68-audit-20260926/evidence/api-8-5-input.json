@@ -1,0 +1,929 @@
+{
+  "seed": 2806498068,
+  "party": [
+    {
+      "id": "char_cecile_01",
+      "name": "井伊直虎",
+      "image": "/characters/cecile_transparent_asset.png",
+      "level": 80,
+      "element": "water",
+      "stats": {
+        "hp": 30575.999999999996,
+        "atk": 4539.599999999999,
+        "def": 2649.92,
+        "luk": 26,
+        "sp": 401
+      },
+      "skills": [
+        {
+          "id": "SKD034",
+          "name": "身構え",
+          "image": "/skills/skill_006_iron_guard.jpg",
+          "rarity": "N",
+          "element": "earth",
+          "spCost": 30,
+          "condition": {
+            "type": "always"
+          },
+          "target": "self",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "def_up",
+              "power": 15,
+              "duration": 3,
+              "carryAcrossWaves": true
+            }
+          ],
+          "description": "自身・DEF強化:15.00%・3ターン"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P11",
+          "type": "P11",
+          "name": "被回復量（蘇生除外）",
+          "stat": "atk",
+          "percent": 21.265505764796227,
+          "level": 6,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_riki_01",
+      "name": "濃姫",
+      "image": "/characters/riki_transparent_asset.png",
+      "level": 80,
+      "element": "dark",
+      "stats": {
+        "hp": 23566.400000000005,
+        "atk": 6156,
+        "def": 2227.68,
+        "luk": 26,
+        "sp": 401
+      },
+      "skills": [
+        {
+          "id": "SKD040",
+          "name": "治癒の祈り",
+          "image": "/skills/skill_023_double_drive.jpg",
+          "rarity": "SR",
+          "element": "water",
+          "spCost": 90,
+          "condition": {
+            "type": "ally_hp_below",
+            "value": 0.5
+          },
+          "target": "lowest_ally",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "heal",
+              "power": 75,
+              "healingFormula": "caster_atk_percent"
+            }
+          ],
+          "description": "共通単体回復条件・回復倍率:75.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P12",
+          "type": "P12",
+          "name": "付与シールド量",
+          "stat": "atk",
+          "percent": 21.265505764796227,
+          "level": 6,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_genji_01",
+      "name": "今川義元",
+      "image": "/characters/genji_transparent_asset.png",
+      "level": 80,
+      "element": "wind",
+      "stats": {
+        "hp": 25708.8,
+        "atk": 5130,
+        "def": 2439.84,
+        "luk": 26,
+        "sp": 347
+      },
+      "skills": [
+        {
+          "id": "SKD038",
+          "name": "鎧砕き",
+          "image": "/skills/skill_015_recovery_program.jpg",
+          "rarity": "R",
+          "element": "earth",
+          "spCost": 50,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "def_down",
+              "power": 12,
+              "duration": 3,
+              "carryAcrossWaves": true
+            }
+          ],
+          "description": "配置順最初の付与可能敵・DEF低下:12.00%・3ターン"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P02_wind",
+          "type": "P02",
+          "name": "同属性DEF支援",
+          "stat": "def",
+          "percent": 12.759303458877735,
+          "level": 6,
+          "target": "party",
+          "targetElement": "wind"
+        }
+      ]
+    },
+    {
+      "id": "char_lucas_01",
+      "name": "島津義弘",
+      "image": "/characters/lucas_transparent_asset.png",
+      "level": 80,
+      "element": "fire",
+      "stats": {
+        "hp": 20176,
+        "atk": 7560,
+        "def": 2038.3999999999999,
+        "luk": 26,
+        "sp": 347
+      },
+      "skills": [
+        {
+          "id": "SKD007",
+          "name": "炎断",
+          "image": "/skills/formal/SKD007.webp",
+          "rarity": "R",
+          "element": "fire",
+          "spCost": 50,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": true,
+          "effects": [
+            {
+              "type": "damage",
+              "power": 120
+            }
+          ],
+          "description": "先頭敵・攻撃倍率:120.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P14",
+          "type": "P14",
+          "name": "HP40%以下で自身ATK",
+          "stat": "atk",
+          "percent": 24.809756725595598,
+          "level": 6,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_takuro_01",
+      "name": "雑賀孫市",
+      "image": "/characters/takuro_transparent_asset.png",
+      "level": 80,
+      "element": "wind",
+      "stats": {
+        "hp": 20176,
+        "atk": 7560,
+        "def": 2038.3999999999999,
+        "luk": 26,
+        "sp": 374
+      },
+      "skills": [
+        {
+          "id": "SKD010",
+          "name": "風断",
+          "image": "/skills/formal/SKD010.webp",
+          "rarity": "R",
+          "element": "wind",
+          "spCost": 50,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": true,
+          "effects": [
+            {
+              "type": "damage",
+              "power": 120
+            }
+          ],
+          "description": "先頭敵・攻撃倍率:120.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P06",
+          "type": "P06",
+          "name": "単体攻撃スキルダメージ",
+          "stat": "atk",
+          "percent": 10.632752882398114,
+          "level": 6,
+          "target": "self"
+        }
+      ]
+    }
+  ],
+  "waves": [
+    [
+      {
+        "id": "8-5/1/1",
+        "name": "雑賀孫市",
+        "image": "/creative/characters/battle/char_takuro_01.png",
+        "level": 74,
+        "stats": {
+          "luk": 0,
+          "hp": 85280,
+          "atk": 6660,
+          "def": 1640,
+          "sp": 110
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "wind",
+        "actionCount": 7,
+        "initialCount": 5,
+        "initialSp": 55,
+        "skills": [
+          {
+            "id": "SKD026",
+            "name": "後陣射ち",
+            "image": "",
+            "rarity": "R",
+            "element": "wind",
+            "spCost": 55,
+            "condition": {
+              "type": "always"
+            },
+            "target": "last",
+            "effects": [
+              {
+                "type": "damage",
+                "power": 144.61
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P06_wind",
+            "type": "P06",
+            "name": "P06",
+            "stat": "atk",
+            "percent": 8.734768054556545,
+            "level": 4,
+            "target": "self",
+            "targetElement": "wind"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "id": "8-5/2/1",
+        "name": "加藤清正",
+        "image": "/creative/characters/battle/char_leon_01.png",
+        "level": 74,
+        "stats": {
+          "luk": 0,
+          "hp": 40510,
+          "atk": 6660,
+          "def": 1480,
+          "sp": 100
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "earth",
+        "actionCount": 7,
+        "initialCount": 5,
+        "initialSp": 55,
+        "skills": [
+          {
+            "id": "SKD026",
+            "name": "後陣射ち",
+            "image": "",
+            "rarity": "R",
+            "element": "wind",
+            "spCost": 55,
+            "condition": {
+              "type": "always"
+            },
+            "target": "last",
+            "effects": [
+              {
+                "type": "damage",
+                "power": 144.61
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P15_earth",
+            "type": "P15",
+            "name": "P15",
+            "stat": "def",
+            "percent": 17.46953610911309,
+            "level": 4,
+            "target": "self",
+            "targetElement": "earth"
+          }
+        ]
+      },
+      {
+        "id": "8-5/2/2",
+        "name": "毛利元就",
+        "image": "/creative/characters/battle/char_reina_01.png",
+        "level": 74,
+        "stats": {
+          "luk": 0,
+          "hp": 19680,
+          "atk": 3770,
+          "def": 740,
+          "sp": 110
+        },
+        "order": 1,
+        "hitSpGain": 10,
+        "element": "wind",
+        "actionCount": 7,
+        "initialCount": 7,
+        "initialSp": 55,
+        "skills": [
+          {
+            "id": "SKD026",
+            "name": "後陣射ち",
+            "image": "",
+            "rarity": "R",
+            "element": "wind",
+            "spCost": 55,
+            "condition": {
+              "type": "always"
+            },
+            "target": "last",
+            "effects": [
+              {
+                "type": "damage",
+                "power": 144.61
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P03_wind",
+            "type": "P03",
+            "name": "P03",
+            "stat": "atk",
+            "percent": 17.46953610911309,
+            "level": 4,
+            "target": "self",
+            "targetElement": "wind"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "id": "8-5/3/1",
+        "name": "伊達政宗",
+        "image": "/creative/characters/battle/char_leo_01.png",
+        "level": 74,
+        "stats": {
+          "luk": 0,
+          "hp": 85280,
+          "atk": 6660,
+          "def": 1640,
+          "sp": 100
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "wind",
+        "actionCount": 7,
+        "initialCount": 5,
+        "initialSp": 55,
+        "skills": [
+          {
+            "id": "SKD026",
+            "name": "後陣射ち",
+            "image": "",
+            "rarity": "R",
+            "element": "wind",
+            "spCost": 55,
+            "condition": {
+              "type": "always"
+            },
+            "target": "last",
+            "effects": [
+              {
+                "type": "damage",
+                "power": 144.61
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P07_wind",
+            "type": "P07",
+            "name": "P07",
+            "stat": "atk",
+            "percent": 11.646357406075394,
+            "level": 4,
+            "target": "self",
+            "targetElement": "wind"
+          }
+        ]
+      },
+      {
+        "id": "8-5/3/2",
+        "name": "立花宗茂",
+        "image": "/creative/characters/battle/char_yuji_01.png",
+        "level": 74,
+        "stats": {
+          "luk": 0,
+          "hp": 19680,
+          "atk": 3770,
+          "def": 740,
+          "sp": 110
+        },
+        "order": 1,
+        "hitSpGain": 10,
+        "element": "light",
+        "actionCount": 7,
+        "initialCount": 7,
+        "initialSp": 55,
+        "skills": [
+          {
+            "id": "SKD026",
+            "name": "後陣射ち",
+            "image": "",
+            "rarity": "R",
+            "element": "wind",
+            "spCost": 55,
+            "condition": {
+              "type": "always"
+            },
+            "target": "last",
+            "effects": [
+              {
+                "type": "damage",
+                "power": 144.61
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P06_light",
+            "type": "P06",
+            "name": "P06",
+            "stat": "atk",
+            "percent": 5.823178703037697,
+            "level": 4,
+            "target": "self",
+            "targetElement": "light"
+          }
+        ]
+      }
+    ]
+  ],
+  "rules": {
+    "defenseFactor": 1,
+    "advantageMultiplier": 1.5,
+    "disadvantageMultiplier": 0.75,
+    "spRecoveryDivisor": 120,
+    "burstLukDivisor": 20,
+    "enemySpRecoveryDivisor": 30,
+    "maxPlayerActions": 300,
+    "initialSpRatio": 0,
+    "version": "balance-v2-20260920",
+    "burstPolicy": "attack-free-v1-20260926",
+    "inputVersion": "wave-sp-v1-20260921",
+    "balanceV2": {
+      "status": "PREVIEW_PROVISIONAL",
+      "version": "PREVIEW_PROVISIONAL_BALANCE_V2_20260920",
+      "damageBonusCap": 50,
+      "healingBonusCap": 80,
+      "shieldBonusCap": 50,
+      "shieldHpCap": 0.5,
+      "periodicCapMultiplier": 2,
+      "lowHpThreshold": 0.4,
+      "highHpThreshold": 0.7,
+      "diversityFactors": [
+        0,
+        0.25,
+        0.5,
+        0.75,
+        1
+      ]
+    }
+  },
+  "questSnapshot": {
+    "id": "izumo-5",
+    "designId": "8-5",
+    "areaId": "izumo",
+    "index": 5,
+    "name": "社のかがり火",
+    "description": "支援役を守り続ける",
+    "energyCost": 8,
+    "waves": [
+      [
+        {
+          "id": "8-5/1/1",
+          "name": "雑賀孫市",
+          "image": "/creative/characters/battle/char_takuro_01.png",
+          "level": 74,
+          "stats": {
+            "luk": 0,
+            "hp": 85280,
+            "atk": 6660,
+            "def": 1640,
+            "sp": 110
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "wind",
+          "actionCount": 7,
+          "initialCount": 5,
+          "initialSp": 55,
+          "skills": [
+            {
+              "id": "SKD026",
+              "name": "後陣射ち",
+              "image": "",
+              "rarity": "R",
+              "element": "wind",
+              "spCost": 55,
+              "condition": {
+                "type": "always"
+              },
+              "target": "last",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 144.61
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "passives": [
+            {
+              "id": "P06_wind",
+              "type": "P06",
+              "name": "P06",
+              "stat": "atk",
+              "percent": 8.734768054556545,
+              "level": 4,
+              "target": "self",
+              "targetElement": "wind"
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "id": "8-5/2/1",
+          "name": "加藤清正",
+          "image": "/creative/characters/battle/char_leon_01.png",
+          "level": 74,
+          "stats": {
+            "luk": 0,
+            "hp": 40510,
+            "atk": 6660,
+            "def": 1480,
+            "sp": 100
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "earth",
+          "actionCount": 7,
+          "initialCount": 5,
+          "initialSp": 55,
+          "skills": [
+            {
+              "id": "SKD026",
+              "name": "後陣射ち",
+              "image": "",
+              "rarity": "R",
+              "element": "wind",
+              "spCost": 55,
+              "condition": {
+                "type": "always"
+              },
+              "target": "last",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 144.61
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "passives": [
+            {
+              "id": "P15_earth",
+              "type": "P15",
+              "name": "P15",
+              "stat": "def",
+              "percent": 17.46953610911309,
+              "level": 4,
+              "target": "self",
+              "targetElement": "earth"
+            }
+          ]
+        },
+        {
+          "id": "8-5/2/2",
+          "name": "毛利元就",
+          "image": "/creative/characters/battle/char_reina_01.png",
+          "level": 74,
+          "stats": {
+            "luk": 0,
+            "hp": 19680,
+            "atk": 3770,
+            "def": 740,
+            "sp": 110
+          },
+          "order": 1,
+          "hitSpGain": 10,
+          "element": "wind",
+          "actionCount": 7,
+          "initialCount": 7,
+          "initialSp": 55,
+          "skills": [
+            {
+              "id": "SKD026",
+              "name": "後陣射ち",
+              "image": "",
+              "rarity": "R",
+              "element": "wind",
+              "spCost": 55,
+              "condition": {
+                "type": "always"
+              },
+              "target": "last",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 144.61
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "passives": [
+            {
+              "id": "P03_wind",
+              "type": "P03",
+              "name": "P03",
+              "stat": "atk",
+              "percent": 17.46953610911309,
+              "level": 4,
+              "target": "self",
+              "targetElement": "wind"
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "id": "8-5/3/1",
+          "name": "伊達政宗",
+          "image": "/creative/characters/battle/char_leo_01.png",
+          "level": 74,
+          "stats": {
+            "luk": 0,
+            "hp": 85280,
+            "atk": 6660,
+            "def": 1640,
+            "sp": 100
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "wind",
+          "actionCount": 7,
+          "initialCount": 5,
+          "initialSp": 55,
+          "skills": [
+            {
+              "id": "SKD026",
+              "name": "後陣射ち",
+              "image": "",
+              "rarity": "R",
+              "element": "wind",
+              "spCost": 55,
+              "condition": {
+                "type": "always"
+              },
+              "target": "last",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 144.61
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "passives": [
+            {
+              "id": "P07_wind",
+              "type": "P07",
+              "name": "P07",
+              "stat": "atk",
+              "percent": 11.646357406075394,
+              "level": 4,
+              "target": "self",
+              "targetElement": "wind"
+            }
+          ]
+        },
+        {
+          "id": "8-5/3/2",
+          "name": "立花宗茂",
+          "image": "/creative/characters/battle/char_yuji_01.png",
+          "level": 74,
+          "stats": {
+            "luk": 0,
+            "hp": 19680,
+            "atk": 3770,
+            "def": 740,
+            "sp": 110
+          },
+          "order": 1,
+          "hitSpGain": 10,
+          "element": "light",
+          "actionCount": 7,
+          "initialCount": 7,
+          "initialSp": 55,
+          "skills": [
+            {
+              "id": "SKD026",
+              "name": "後陣射ち",
+              "image": "",
+              "rarity": "R",
+              "element": "wind",
+              "spCost": 55,
+              "condition": {
+                "type": "always"
+              },
+              "target": "last",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 144.61
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "passives": [
+            {
+              "id": "P06_light",
+              "type": "P06",
+              "name": "P06",
+              "stat": "atk",
+              "percent": 5.823178703037697,
+              "level": 4,
+              "target": "self",
+              "targetElement": "light"
+            }
+          ]
+        }
+      ]
+    ],
+    "firstRewards": [
+      {
+        "kind": "soul",
+        "id": "char_reina_01",
+        "amount": 4
+      },
+      {
+        "kind": "soul",
+        "id": "char_leo_01",
+        "amount": 4
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_SKILL",
+        "amount": 1
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_EQUIPMENT",
+        "amount": 1
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 3500
+      },
+      {
+        "kind": "character_exp_item",
+        "id": "medium",
+        "amount": 2
+      },
+      {
+        "kind": "equipment_exp_item",
+        "id": "medium",
+        "amount": 1
+      },
+      {
+        "kind": "equipment_exp_item",
+        "id": "small",
+        "amount": 2
+      }
+    ],
+    "rareRewards": [
+      {
+        "kind": "soul",
+        "id": "char_reina_01",
+        "amount": 1,
+        "rarity": "SR",
+        "chance": 0.2,
+        "period": 20
+      },
+      {
+        "kind": "soul",
+        "id": "char_leo_01",
+        "amount": 1,
+        "rarity": "SSR",
+        "chance": 0.08,
+        "period": 50
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_CHARACTER",
+        "amount": 1,
+        "chance": 0.0075
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_SKILL",
+        "amount": 1,
+        "chance": 0.015
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_EQUIPMENT",
+        "amount": 1,
+        "chance": 0.0075
+      }
+    ],
+    "soulDrops": [
+      {
+        "kind": "soul",
+        "id": "char_reina_01",
+        "amount": 1,
+        "rarity": "SR",
+        "chance": 0.2,
+        "period": 20
+      },
+      {
+        "kind": "soul",
+        "id": "char_leo_01",
+        "amount": 1,
+        "rarity": "SSR",
+        "chance": 0.08,
+        "period": 50
+      }
+    ],
+    "ticketChance": 0.03,
+    "playerExp": 144,
+    "encounterChance": 0.25
+  },
+  "questMasterVersion": "game04-quest68-early-retention-20260926",
+  "playerExpReward": {
+    "amount": 144,
+    "version": "game04-quest68-early-retention-20260926",
+    "status": "APPROVED"
+  }
+}

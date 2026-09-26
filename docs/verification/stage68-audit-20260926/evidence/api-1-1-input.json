@@ -1,0 +1,355 @@
+{
+  "seed": 2229457422,
+  "party": [
+    {
+      "id": "char_joe_01",
+      "name": "北条氏康",
+      "image": "/characters/joe_transparent_asset.png",
+      "level": 4,
+      "element": "earth",
+      "stats": {
+        "hp": 1280.5333333333333,
+        "atk": 126.1,
+        "def": 72.80000000000001,
+        "luk": 10.612244897959183,
+        "sp": 70
+      },
+      "skills": [
+        {
+          "id": "SKD035",
+          "name": "鬨の声",
+          "image": "/skills/skill_017_acid_spray.jpg",
+          "rarity": "R",
+          "element": "fire",
+          "spCost": 75,
+          "condition": {
+            "type": "always"
+          },
+          "target": "all_allies",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "atk_up",
+              "power": 8,
+              "duration": 3,
+              "carryAcrossWaves": true
+            }
+          ],
+          "description": "味方全体の付与可能者・ATK強化:8.00%・3ターン"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P15",
+          "type": "P15",
+          "name": "HP70%以上で自身DEF",
+          "stat": "def",
+          "percent": 8,
+          "level": 0,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_daimon_01",
+      "name": "井伊直政",
+      "image": "/characters/daimon_transparent_asset.png",
+      "level": 4,
+      "element": "fire",
+      "stats": {
+        "hp": 896,
+        "atk": 204,
+        "def": 54.400000000000006,
+        "luk": 10.612244897959183,
+        "sp": 70
+      },
+      "skills": [
+        {
+          "id": "SKD003",
+          "name": "土割り",
+          "image": "/skills/formal/SKD003.webp",
+          "rarity": "N",
+          "element": "earth",
+          "spCost": 25,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": true,
+          "effects": [
+            {
+              "type": "damage",
+              "power": 105
+            }
+          ],
+          "description": "先頭敵・攻撃倍率:105.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P06",
+          "type": "P06",
+          "name": "単体攻撃スキルダメージ",
+          "stat": "atk",
+          "percent": 4,
+          "level": 0,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_aoi_01",
+      "name": "お市の方",
+      "image": "/characters/aoi_transparent_asset.png",
+      "level": 4,
+      "element": "fire",
+      "stats": {
+        "hp": 995.8666666666667,
+        "atk": 189,
+        "def": 54.88,
+        "luk": 10.612244897959183,
+        "sp": 82
+      },
+      "skills": [
+        {
+          "id": "SKD039",
+          "name": "応急手当",
+          "image": "/skills/skill_003_noise_heal.jpg",
+          "rarity": "N",
+          "element": "water",
+          "spCost": 35,
+          "condition": {
+            "type": "ally_hp_below",
+            "value": 0.5
+          },
+          "target": "lowest_ally",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "heal",
+              "power": 35,
+              "healingFormula": "caster_atk_percent"
+            }
+          ],
+          "description": "共通単体回復条件・回復倍率:35.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P10",
+          "type": "P10",
+          "name": "与回復量（蘇生除外）",
+          "stat": "atk",
+          "percent": 8,
+          "level": 0,
+          "target": "self"
+        }
+      ]
+    }
+  ],
+  "waves": [
+    [
+      {
+        "id": "1-1/W1/1",
+        "name": "女侍",
+        "image": "/creative/characters/battle/char_long_01.png",
+        "level": 1,
+        "stats": {
+          "luk": 0,
+          "hp": 900,
+          "atk": 35,
+          "def": 10,
+          "sp": 100
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "earth",
+        "actionCount": 6,
+        "initialCount": 6,
+        "initialSp": 0,
+        "skills": [],
+        "passives": []
+      },
+      {
+        "id": "1-1/W1/2",
+        "name": "漁師",
+        "image": "/creative/characters/battle/char_naoto_01.png",
+        "level": 1,
+        "stats": {
+          "luk": 0,
+          "hp": 650,
+          "atk": 30,
+          "def": 10,
+          "sp": 100
+        },
+        "order": 1,
+        "hitSpGain": 10,
+        "element": "water",
+        "actionCount": 8,
+        "initialCount": 8,
+        "initialSp": 0,
+        "skills": [],
+        "passives": []
+      }
+    ]
+  ],
+  "rules": {
+    "defenseFactor": 1,
+    "advantageMultiplier": 1.5,
+    "disadvantageMultiplier": 0.75,
+    "spRecoveryDivisor": 120,
+    "burstLukDivisor": 20,
+    "enemySpRecoveryDivisor": 30,
+    "maxPlayerActions": 300,
+    "initialSpRatio": 0,
+    "version": "balance-v2-20260920",
+    "burstPolicy": "attack-free-v1-20260926",
+    "inputVersion": "wave-sp-v1-20260921",
+    "balanceV2": {
+      "status": "PREVIEW_PROVISIONAL",
+      "version": "PREVIEW_PROVISIONAL_BALANCE_V2_20260920",
+      "damageBonusCap": 50,
+      "healingBonusCap": 80,
+      "shieldBonusCap": 50,
+      "shieldHpCap": 0.5,
+      "periodicCapMultiplier": 2,
+      "lowHpThreshold": 0.4,
+      "highHpThreshold": 0.7,
+      "diversityFactors": [
+        0,
+        0.25,
+        0.5,
+        0.75,
+        1
+      ]
+    }
+  },
+  "earlyQuestAssist": {
+    "version": "area1-assist-v1-20260926",
+    "stageId": "mikawa-1",
+    "actionGainMultiplier": 2,
+    "burstChance": 0.8
+  },
+  "questSnapshot": {
+    "id": "mikawa-1",
+    "designId": "1-1",
+    "areaId": "mikawa",
+    "index": 1,
+    "name": "初陣の野",
+    "description": "初期3人で戦闘を学ぶ",
+    "energyCost": 5,
+    "waves": [
+      [
+        {
+          "id": "1-1/W1/1",
+          "name": "女侍",
+          "image": "/creative/characters/battle/char_long_01.png",
+          "level": 1,
+          "stats": {
+            "luk": 0,
+            "hp": 900,
+            "atk": 35,
+            "def": 10,
+            "sp": 100
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "earth",
+          "actionCount": 6,
+          "initialCount": 6,
+          "initialSp": 0,
+          "skills": [],
+          "passives": []
+        },
+        {
+          "id": "1-1/W1/2",
+          "name": "漁師",
+          "image": "/creative/characters/battle/char_naoto_01.png",
+          "level": 1,
+          "stats": {
+            "luk": 0,
+            "hp": 650,
+            "atk": 30,
+            "def": 10,
+            "sp": 100
+          },
+          "order": 1,
+          "hitSpGain": 10,
+          "element": "water",
+          "actionCount": 8,
+          "initialCount": 8,
+          "initialSp": 0,
+          "skills": [],
+          "passives": []
+        }
+      ]
+    ],
+    "firstRewards": [
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_SKILL",
+        "amount": 1
+      },
+      {
+        "kind": "character",
+        "id": "char_jihoon_01",
+        "amount": 1
+      },
+      {
+        "kind": "cash",
+        "amount": 2000
+      },
+      {
+        "kind": "character_exp_item",
+        "id": "small",
+        "amount": 5
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 500
+      },
+      {
+        "kind": "character_exp_item",
+        "id": "small",
+        "amount": 1
+      },
+      {
+        "kind": "equipment_exp_item",
+        "id": "small",
+        "amount": 1
+      }
+    ],
+    "rareRewards": [
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_CHARACTER",
+        "amount": 1,
+        "chance": 0.0025
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_SKILL",
+        "amount": 1,
+        "chance": 0.005
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_EQUIPMENT",
+        "amount": 1,
+        "chance": 0.0025
+      }
+    ],
+    "soulDrops": [],
+    "ticketChance": 0.01,
+    "playerExp": 20,
+    "encounterChance": 0
+  },
+  "questMasterVersion": "game04-quest68-early-retention-20260926",
+  "playerExpReward": {
+    "amount": 20,
+    "version": "game04-quest68-early-retention-20260926",
+    "status": "APPROVED"
+  }
+}

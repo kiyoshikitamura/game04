@@ -1,0 +1,607 @@
+{
+  "seed": 229033046,
+  "party": [
+    {
+      "id": "char_cecile_01",
+      "name": "井伊直虎",
+      "image": "/characters/cecile_transparent_asset.png",
+      "level": 70,
+      "element": "water",
+      "stats": {
+        "hp": 24402,
+        "atk": 3562.325,
+        "def": 2063.88,
+        "luk": 24,
+        "sp": 360
+      },
+      "skills": [
+        {
+          "id": "SKD034",
+          "name": "身構え",
+          "image": "/skills/skill_006_iron_guard.jpg",
+          "rarity": "N",
+          "element": "earth",
+          "spCost": 30,
+          "condition": {
+            "type": "always"
+          },
+          "target": "self",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "def_up",
+              "power": 15,
+              "duration": 3,
+              "carryAcrossWaves": true
+            }
+          ],
+          "description": "自身・DEF強化:15.00%・3ターン"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P11",
+          "type": "P11",
+          "name": "被回復量（蘇生除外）",
+          "stat": "atk",
+          "percent": 17.46953610911309,
+          "level": 4,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_genji_01",
+      "name": "今川義元",
+      "image": "/characters/genji_transparent_asset.png",
+      "level": 70,
+      "element": "wind",
+      "stats": {
+        "hp": 20517.600000000002,
+        "atk": 4025.625,
+        "def": 1900.2599999999998,
+        "luk": 24,
+        "sp": 312
+      },
+      "skills": [
+        {
+          "id": "SKD052",
+          "name": "破護",
+          "image": "/skills/formal/SKD052.webp",
+          "rarity": "R",
+          "element": "dark",
+          "spCost": 45,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "cleanse",
+              "power": 1,
+              "cleanseCategory": "protection"
+            }
+          ],
+          "description": "保護状態がある配置順最初の敵・解除件数:1.00件"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P02_wind",
+          "type": "P02",
+          "name": "同属性DEF支援",
+          "stat": "def",
+          "percent": 10.481721665467855,
+          "level": 4,
+          "target": "party",
+          "targetElement": "wind"
+        }
+      ]
+    },
+    {
+      "id": "char_takuro_01",
+      "name": "雑賀孫市",
+      "image": "/characters/takuro_transparent_asset.png",
+      "level": 70,
+      "element": "wind",
+      "stats": {
+        "hp": 16102,
+        "atk": 5932.5,
+        "def": 1587.6,
+        "luk": 24,
+        "sp": 336
+      },
+      "skills": [
+        {
+          "id": "SKD010",
+          "name": "風断",
+          "image": "/skills/formal/SKD010.webp",
+          "rarity": "R",
+          "element": "wind",
+          "spCost": 50,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": true,
+          "effects": [
+            {
+              "type": "damage",
+              "power": 120
+            }
+          ],
+          "description": "先頭敵・攻撃倍率:120.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P06",
+          "type": "P06",
+          "name": "単体攻撃スキルダメージ",
+          "stat": "atk",
+          "percent": 8.734768054556545,
+          "level": 4,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_taiga_01",
+      "name": "長宗我部元親",
+      "image": "/characters/taiga_transparent_asset.png",
+      "level": 70,
+      "element": "water",
+      "stats": {
+        "hp": 19123.2,
+        "atk": 4898.55,
+        "def": 1900.2599999999998,
+        "luk": 24,
+        "sp": 288
+      },
+      "skills": [
+        {
+          "id": "SKD008",
+          "name": "水断",
+          "image": "/skills/formal/SKD008.webp",
+          "rarity": "R",
+          "element": "water",
+          "spCost": 50,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": true,
+          "effects": [
+            {
+              "type": "damage",
+              "power": 120
+            }
+          ],
+          "description": "先頭敵・攻撃倍率:120.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P16",
+          "type": "P16",
+          "name": "能動ATK強化中の自身DEF",
+          "stat": "def",
+          "percent": 17.46953610911309,
+          "level": 4,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_riki_01",
+      "name": "濃姫",
+      "image": "/characters/riki_transparent_asset.png",
+      "level": 70,
+      "element": "dark",
+      "stats": {
+        "hp": 18807.8,
+        "atk": 4830.75,
+        "def": 1735.02,
+        "luk": 24,
+        "sp": 360
+      },
+      "skills": [
+        {
+          "id": "SKD040",
+          "name": "治癒の祈り",
+          "image": "/skills/skill_023_double_drive.jpg",
+          "rarity": "SR",
+          "element": "water",
+          "spCost": 90,
+          "condition": {
+            "type": "ally_hp_below",
+            "value": 0.5
+          },
+          "target": "lowest_ally",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "heal",
+              "power": 75,
+              "healingFormula": "caster_atk_percent"
+            }
+          ],
+          "description": "共通単体回復条件・回復倍率:75.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P12",
+          "type": "P12",
+          "name": "付与シールド量",
+          "stat": "atk",
+          "percent": 17.46953610911309,
+          "level": 4,
+          "target": "self"
+        }
+      ]
+    }
+  ],
+  "waves": [
+    [
+      {
+        "id": "7-5/1/1",
+        "name": "小松姫",
+        "image": "/creative/characters/battle/char_mark_01.png",
+        "level": 65,
+        "stats": {
+          "luk": 0,
+          "hp": 48000,
+          "atk": 3720,
+          "def": 1200,
+          "sp": 100
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "fire",
+        "actionCount": 5,
+        "initialCount": 5,
+        "initialSp": 65,
+        "skills": [
+          {
+            "id": "SKD049",
+            "name": "返し刃",
+            "image": "",
+            "rarity": "R",
+            "element": "wind",
+            "spCost": 65,
+            "condition": {
+              "type": "always"
+            },
+            "target": "self",
+            "effects": [
+              {
+                "type": "counter",
+                "power": 56.13,
+                "duration": 3
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P13_fire",
+            "type": "P13",
+            "name": "P13",
+            "stat": "atk",
+            "percent": 14.557946757594243,
+            "level": 4,
+            "target": "self",
+            "targetElement": "fire"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "id": "7-5/2/1",
+        "name": "本多忠勝",
+        "image": "/creative/characters/battle/char_kengo_01.png",
+        "level": 65,
+        "stats": {
+          "luk": 0,
+          "hp": 62400,
+          "atk": 4200,
+          "def": 1320,
+          "sp": 150
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "earth",
+        "actionCount": 7,
+        "initialCount": 7,
+        "initialSp": 110,
+        "skills": [
+          {
+            "id": "SKD050",
+            "name": "迎撃の構え",
+            "image": "",
+            "rarity": "SSR",
+            "element": "earth",
+            "spCost": 110,
+            "condition": {
+              "type": "always"
+            },
+            "target": "self",
+            "effects": [
+              {
+                "type": "taunt",
+                "power": 0,
+                "chance": 1,
+                "duration": 3
+              },
+              {
+                "type": "counter",
+                "power": 69.31,
+                "duration": 3
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P13_earth",
+            "type": "P13",
+            "name": "P13",
+            "stat": "atk",
+            "percent": 26.204304163669637,
+            "level": 4,
+            "target": "self",
+            "targetElement": "earth"
+          }
+        ]
+      }
+    ]
+  ],
+  "rules": {
+    "defenseFactor": 1,
+    "advantageMultiplier": 1.5,
+    "disadvantageMultiplier": 0.75,
+    "spRecoveryDivisor": 120,
+    "burstLukDivisor": 20,
+    "enemySpRecoveryDivisor": 30,
+    "maxPlayerActions": 300,
+    "initialSpRatio": 0,
+    "version": "balance-v2-20260920",
+    "burstPolicy": "attack-free-v1-20260926",
+    "inputVersion": "wave-sp-v1-20260921",
+    "balanceV2": {
+      "status": "PREVIEW_PROVISIONAL",
+      "version": "PREVIEW_PROVISIONAL_BALANCE_V2_20260920",
+      "damageBonusCap": 50,
+      "healingBonusCap": 80,
+      "shieldBonusCap": 50,
+      "shieldHpCap": 0.5,
+      "periodicCapMultiplier": 2,
+      "lowHpThreshold": 0.4,
+      "highHpThreshold": 0.7,
+      "diversityFactors": [
+        0,
+        0.25,
+        0.5,
+        0.75,
+        1
+      ]
+    }
+  },
+  "questSnapshot": {
+    "id": "kyoto-5",
+    "designId": "7-5",
+    "areaId": "kyoto",
+    "index": 5,
+    "name": "夜半の鐘",
+    "description": "反撃に付き合いすぎない",
+    "energyCost": 6,
+    "waves": [
+      [
+        {
+          "id": "7-5/1/1",
+          "name": "小松姫",
+          "image": "/creative/characters/battle/char_mark_01.png",
+          "level": 65,
+          "stats": {
+            "luk": 0,
+            "hp": 48000,
+            "atk": 3720,
+            "def": 1200,
+            "sp": 100
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "fire",
+          "actionCount": 5,
+          "initialCount": 5,
+          "initialSp": 65,
+          "skills": [
+            {
+              "id": "SKD049",
+              "name": "返し刃",
+              "image": "",
+              "rarity": "R",
+              "element": "wind",
+              "spCost": 65,
+              "condition": {
+                "type": "always"
+              },
+              "target": "self",
+              "effects": [
+                {
+                  "type": "counter",
+                  "power": 56.13,
+                  "duration": 3
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "passives": [
+            {
+              "id": "P13_fire",
+              "type": "P13",
+              "name": "P13",
+              "stat": "atk",
+              "percent": 14.557946757594243,
+              "level": 4,
+              "target": "self",
+              "targetElement": "fire"
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "id": "7-5/2/1",
+          "name": "本多忠勝",
+          "image": "/creative/characters/battle/char_kengo_01.png",
+          "level": 65,
+          "stats": {
+            "luk": 0,
+            "hp": 62400,
+            "atk": 4200,
+            "def": 1320,
+            "sp": 150
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "earth",
+          "actionCount": 7,
+          "initialCount": 7,
+          "initialSp": 110,
+          "skills": [
+            {
+              "id": "SKD050",
+              "name": "迎撃の構え",
+              "image": "",
+              "rarity": "SSR",
+              "element": "earth",
+              "spCost": 110,
+              "condition": {
+                "type": "always"
+              },
+              "target": "self",
+              "effects": [
+                {
+                  "type": "taunt",
+                  "power": 0,
+                  "chance": 1,
+                  "duration": 3
+                },
+                {
+                  "type": "counter",
+                  "power": 69.31,
+                  "duration": 3
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "passives": [
+            {
+              "id": "P13_earth",
+              "type": "P13",
+              "name": "P13",
+              "stat": "atk",
+              "percent": 26.204304163669637,
+              "level": 4,
+              "target": "self",
+              "targetElement": "earth"
+            }
+          ]
+        }
+      ]
+    ],
+    "firstRewards": [
+      {
+        "kind": "soul",
+        "id": "char_kengo_01",
+        "amount": 3
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_SKILL",
+        "amount": 1
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_EQUIPMENT",
+        "amount": 1
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 3000
+      },
+      {
+        "kind": "character_exp_item",
+        "id": "medium",
+        "amount": 1
+      },
+      {
+        "kind": "character_exp_item",
+        "id": "small",
+        "amount": 5
+      },
+      {
+        "kind": "equipment_exp_item",
+        "id": "small",
+        "amount": 9
+      }
+    ],
+    "rareRewards": [
+      {
+        "kind": "soul",
+        "id": "char_kengo_01",
+        "amount": 1,
+        "rarity": "SSR",
+        "chance": 0.08,
+        "period": 50
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_CHARACTER",
+        "amount": 1,
+        "chance": 0.0075
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_SKILL",
+        "amount": 1,
+        "chance": 0.015
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_EQUIPMENT",
+        "amount": 1,
+        "chance": 0.0075
+      }
+    ],
+    "soulDrops": [
+      {
+        "kind": "soul",
+        "id": "char_kengo_01",
+        "amount": 1,
+        "rarity": "SSR",
+        "chance": 0.08,
+        "period": 50
+      }
+    ],
+    "ticketChance": 0.03,
+    "playerExp": 90,
+    "encounterChance": 0.25
+  },
+  "questMasterVersion": "game04-quest68-early-retention-20260926",
+  "playerExpReward": {
+    "amount": 90,
+    "version": "game04-quest68-early-retention-20260926",
+    "status": "APPROVED"
+  }
+}

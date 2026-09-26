@@ -1,0 +1,53 @@
+{
+  "checkedAt": "2026-09-26T13:37:29.783Z",
+  "pullRequest": {
+    "number": 37,
+    "head": "d804d2a7a2573e554d4227720d701b675c5abf00",
+    "branch": "work/game04-common-preview-20260925",
+    "base": "main",
+    "updated_at": "2026-09-26T13:22:36Z",
+    "checkedAt": "2026-09-26T13:35:44.508Z"
+  },
+  "database": {
+    "project": "znakrkaazliexzwihxge",
+    "table": "game04_redesign_master",
+    "operation": "SELECT only",
+    "rows": [
+      {
+        "key": "missions",
+        "status": "FORMAL_MASTER_PENDING",
+        "version": null,
+        "stage_count": null,
+        "counts": null,
+        "updated_at": "2026-09-25 09:24:46.139245+00"
+      },
+      {
+        "key": "release_manifest",
+        "status": "PREVIEW_PROVISIONAL",
+        "version": null,
+        "stage_count": null,
+        "counts": null,
+        "updated_at": "2026-09-25 12:01:59.948909+00"
+      },
+      {
+        "key": "quest65",
+        "status": "APPROVED",
+        "version": "APPROVED_QUEST65_ROUND17_20260922",
+        "stage_count": 65,
+        "counts": [
+          3,
+          4,
+          5,
+          5,
+          6,
+          6,
+          8,
+          8,
+          10,
+          10
+        ],
+        "updated_at": "2026-09-25 12:01:59.948909+00"
+      }
+    ]
+  }
+}

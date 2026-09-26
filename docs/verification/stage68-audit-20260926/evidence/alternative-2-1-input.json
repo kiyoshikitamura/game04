@@ -1,0 +1,734 @@
+{
+  "seed": 1,
+  "party": [
+    {
+      "id": "char_joe_01",
+      "name": "北条氏康",
+      "image": "/characters/joe_transparent_asset.png",
+      "level": 9,
+      "element": "earth",
+      "stats": {
+        "hp": 1699.7555555555555,
+        "atk": 178.64166666666668,
+        "def": 103.13333333333334,
+        "luk": 11.63265306122449,
+        "sp": 86
+      },
+      "skills": [
+        {
+          "id": "SKD003",
+          "name": "土割り",
+          "image": "/skills/formal/SKD003.webp",
+          "rarity": "N",
+          "element": "earth",
+          "spCost": 25,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": true,
+          "effects": [
+            {
+              "type": "damage",
+              "power": 105
+            }
+          ],
+          "description": "先頭敵・攻撃倍率:105.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P15",
+          "type": "P15",
+          "name": "HP70%以上で自身DEF",
+          "stat": "def",
+          "percent": 8,
+          "level": 0,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_yuki_01",
+      "name": "竹中半兵衛",
+      "image": "/characters/yuki_transparent_asset.png",
+      "level": 9,
+      "element": "light",
+      "stats": {
+        "hp": 1786.4777777777776,
+        "atk": 174.95833333333334,
+        "def": 100.18666666666668,
+        "luk": 11.63265306122449,
+        "sp": 108
+      },
+      "skills": [
+        {
+          "id": "SKD035",
+          "name": "鬨の声",
+          "image": "/skills/skill_017_acid_spray.jpg",
+          "rarity": "R",
+          "element": "fire",
+          "spCost": 75,
+          "condition": {
+            "type": "always"
+          },
+          "target": "all_allies",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "atk_up",
+              "power": 8,
+              "duration": 3,
+              "carryAcrossWaves": true
+            }
+          ],
+          "description": "味方全体の付与可能者・ATK強化:8.00%・3ターン"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P04",
+          "type": "P04",
+          "name": "他の生存味方が2属性以上で自身DEF",
+          "stat": "def",
+          "percent": 10,
+          "level": 0,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_daimon_01",
+      "name": "井伊直政",
+      "image": "/characters/daimon_transparent_asset.png",
+      "level": 9,
+      "element": "fire",
+      "stats": {
+        "hp": 1189.3333333333333,
+        "atk": 289.00000000000006,
+        "def": 77.06666666666666,
+        "luk": 11.63265306122449,
+        "sp": 86
+      },
+      "skills": [
+        {
+          "id": "SKD019",
+          "name": "火の薙ぎ",
+          "image": "/skills/formal/SKD019.webp",
+          "rarity": "R",
+          "element": "fire",
+          "spCost": 75,
+          "condition": {
+            "type": "always"
+          },
+          "target": "all_enemies",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "damage",
+              "power": 60
+            }
+          ],
+          "description": "敵全体・攻撃倍率:60.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P06",
+          "type": "P06",
+          "name": "単体攻撃スキルダメージ",
+          "stat": "atk",
+          "percent": 4,
+          "level": 0,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_jihoon_01",
+      "name": "前田利家",
+      "image": "/characters/jihoon_transparent_asset.png",
+      "level": 9,
+      "element": "earth",
+      "stats": {
+        "hp": 1427.2,
+        "atk": 245.65000000000003,
+        "def": 88.62666666666667,
+        "luk": 11.63265306122449,
+        "sp": 115
+      },
+      "skills": [
+        {
+          "id": "SKD009",
+          "name": "岩断",
+          "image": "/skills/formal/SKD009.webp",
+          "rarity": "R",
+          "element": "earth",
+          "spCost": 50,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": true,
+          "effects": [
+            {
+              "type": "damage",
+              "power": 120
+            }
+          ],
+          "description": "先頭敵・攻撃倍率:120.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P05",
+          "type": "P05",
+          "name": "通常攻撃ダメージ",
+          "stat": "atk",
+          "percent": 8,
+          "level": 0,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_aoi_01",
+      "name": "お市の方",
+      "image": "/characters/aoi_transparent_asset.png",
+      "level": 9,
+      "element": "fire",
+      "stats": {
+        "hp": 1321.8944444444444,
+        "atk": 267.75000000000006,
+        "def": 77.74666666666667,
+        "luk": 11.63265306122449,
+        "sp": 101
+      },
+      "skills": [
+        {
+          "id": "SKD039",
+          "name": "応急手当",
+          "image": "/skills/skill_003_noise_heal.jpg",
+          "rarity": "N",
+          "element": "water",
+          "spCost": 35,
+          "condition": {
+            "type": "ally_hp_below",
+            "value": 0.5
+          },
+          "target": "lowest_ally",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "heal",
+              "power": 35,
+              "healingFormula": "caster_atk_percent"
+            }
+          ],
+          "description": "共通単体回復条件・回復倍率:35.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P10",
+          "type": "P10",
+          "name": "与回復量（蘇生除外）",
+          "stat": "atk",
+          "percent": 8,
+          "level": 0,
+          "target": "self"
+        }
+      ]
+    }
+  ],
+  "waves": [
+    [
+      {
+        "id": "2-1/W1/1",
+        "name": "女侍",
+        "image": "/creative/characters/battle/char_long_01.png",
+        "level": 9,
+        "stats": {
+          "luk": 0,
+          "hp": 1130,
+          "atk": 580,
+          "def": 40,
+          "sp": 100
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "earth",
+        "actionCount": 9,
+        "initialCount": 5,
+        "initialSp": 0,
+        "skills": [],
+        "passives": []
+      },
+      {
+        "id": "2-1/W1/2",
+        "name": "鉄砲兵",
+        "image": "/creative/characters/battle/char_tomoya_01.png",
+        "level": 9,
+        "stats": {
+          "luk": 0,
+          "hp": 850,
+          "atk": 170,
+          "def": 25,
+          "sp": 100
+        },
+        "order": 1,
+        "hitSpGain": 10,
+        "element": "fire",
+        "actionCount": 8,
+        "initialCount": 8,
+        "initialSp": 50,
+        "skills": [
+          {
+            "id": "SKD007",
+            "name": "標準単体攻撃・火",
+            "image": "",
+            "rarity": "R",
+            "element": "fire",
+            "spCost": 50,
+            "condition": {
+              "type": "always"
+            },
+            "target": "first",
+            "effects": [
+              {
+                "type": "damage",
+                "power": 120
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": []
+      }
+    ],
+    [
+      {
+        "id": "2-1/W2/1",
+        "name": "鉄砲兵",
+        "image": "/creative/characters/battle/char_tomoya_01.png",
+        "level": 9,
+        "stats": {
+          "luk": 0,
+          "hp": 1130,
+          "atk": 580,
+          "def": 35,
+          "sp": 100
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "fire",
+        "actionCount": 9,
+        "initialCount": 5,
+        "initialSp": 50,
+        "skills": [
+          {
+            "id": "SKD007",
+            "name": "標準単体攻撃・火",
+            "image": "",
+            "rarity": "R",
+            "element": "fire",
+            "spCost": 50,
+            "condition": {
+              "type": "always"
+            },
+            "target": "first",
+            "effects": [
+              {
+                "type": "damage",
+                "power": 120
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": []
+      },
+      {
+        "id": "2-1/W2/2",
+        "name": "加藤清正",
+        "image": "/creative/characters/battle/char_leon_01.png",
+        "level": 10,
+        "stats": {
+          "luk": 0,
+          "hp": 2300,
+          "atk": 200,
+          "def": 65,
+          "sp": 100
+        },
+        "order": 1,
+        "hitSpGain": 10,
+        "element": "earth",
+        "actionCount": 6,
+        "initialCount": 6,
+        "initialSp": 0,
+        "skills": [],
+        "passives": [
+          {
+            "id": "P15_earth",
+            "type": "P15",
+            "name": "P15",
+            "stat": "def",
+            "percent": 12,
+            "level": 0,
+            "target": "self",
+            "targetElement": "earth"
+          }
+        ]
+      },
+      {
+        "id": "2-1/W2/3",
+        "name": "伝令",
+        "image": "/creative/characters/battle/char_gou_01.png",
+        "level": 9,
+        "stats": {
+          "luk": 0,
+          "hp": 1100,
+          "atk": 80,
+          "def": 30,
+          "sp": 100
+        },
+        "order": 2,
+        "hitSpGain": 10,
+        "element": "wind",
+        "actionCount": 4,
+        "initialCount": 4,
+        "initialSp": 75,
+        "skills": [
+          {
+            "id": "SKD035",
+            "name": "鬨の声",
+            "image": "",
+            "rarity": "R",
+            "element": "fire",
+            "spCost": 75,
+            "condition": {
+              "type": "always"
+            },
+            "target": "all_allies",
+            "effects": [
+              {
+                "type": "atk_up",
+                "power": 8,
+                "duration": 3
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": []
+      }
+    ]
+  ],
+  "rules": {
+    "defenseFactor": 1,
+    "advantageMultiplier": 1.5,
+    "disadvantageMultiplier": 0.75,
+    "spRecoveryDivisor": 120,
+    "burstLukDivisor": 20,
+    "enemySpRecoveryDivisor": 30,
+    "maxPlayerActions": 300,
+    "initialSpRatio": 0,
+    "version": "balance-v2-20260920",
+    "burstPolicy": "attack-free-v1-20260926",
+    "inputVersion": "wave-sp-v1-20260921",
+    "balanceV2": {
+      "status": "PREVIEW_PROVISIONAL",
+      "version": "PREVIEW_PROVISIONAL_BALANCE_V2_20260920",
+      "damageBonusCap": 50,
+      "healingBonusCap": 80,
+      "shieldBonusCap": 50,
+      "shieldHpCap": 0.5,
+      "periodicCapMultiplier": 2,
+      "lowHpThreshold": 0.4,
+      "highHpThreshold": 0.7,
+      "diversityFactors": [
+        0,
+        0.25,
+        0.5,
+        0.75,
+        1
+      ]
+    }
+  },
+  "questSnapshot": {
+    "id": "owari-1",
+    "designId": "2-1",
+    "areaId": "owari",
+    "index": 1,
+    "name": "朝霧の街道",
+    "description": "まず1体減らす",
+    "energyCost": 5,
+    "waves": [
+      [
+        {
+          "id": "2-1/W1/1",
+          "name": "女侍",
+          "image": "/creative/characters/battle/char_long_01.png",
+          "level": 9,
+          "stats": {
+            "luk": 0,
+            "hp": 1130,
+            "atk": 580,
+            "def": 40,
+            "sp": 100
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "earth",
+          "actionCount": 9,
+          "initialCount": 5,
+          "initialSp": 0,
+          "skills": [],
+          "passives": []
+        },
+        {
+          "id": "2-1/W1/2",
+          "name": "鉄砲兵",
+          "image": "/creative/characters/battle/char_tomoya_01.png",
+          "level": 9,
+          "stats": {
+            "luk": 0,
+            "hp": 850,
+            "atk": 170,
+            "def": 25,
+            "sp": 100
+          },
+          "order": 1,
+          "hitSpGain": 10,
+          "element": "fire",
+          "actionCount": 8,
+          "initialCount": 8,
+          "initialSp": 50,
+          "skills": [
+            {
+              "id": "SKD007",
+              "name": "標準単体攻撃・火",
+              "image": "",
+              "rarity": "R",
+              "element": "fire",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "passives": []
+        }
+      ],
+      [
+        {
+          "id": "2-1/W2/1",
+          "name": "鉄砲兵",
+          "image": "/creative/characters/battle/char_tomoya_01.png",
+          "level": 9,
+          "stats": {
+            "luk": 0,
+            "hp": 1130,
+            "atk": 580,
+            "def": 35,
+            "sp": 100
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "fire",
+          "actionCount": 9,
+          "initialCount": 5,
+          "initialSp": 50,
+          "skills": [
+            {
+              "id": "SKD007",
+              "name": "標準単体攻撃・火",
+              "image": "",
+              "rarity": "R",
+              "element": "fire",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "passives": []
+        },
+        {
+          "id": "2-1/W2/2",
+          "name": "加藤清正",
+          "image": "/creative/characters/battle/char_leon_01.png",
+          "level": 10,
+          "stats": {
+            "luk": 0,
+            "hp": 2300,
+            "atk": 200,
+            "def": 65,
+            "sp": 100
+          },
+          "order": 1,
+          "hitSpGain": 10,
+          "element": "earth",
+          "actionCount": 6,
+          "initialCount": 6,
+          "initialSp": 0,
+          "skills": [],
+          "passives": [
+            {
+              "id": "P15_earth",
+              "type": "P15",
+              "name": "P15",
+              "stat": "def",
+              "percent": 12,
+              "level": 0,
+              "target": "self",
+              "targetElement": "earth"
+            }
+          ]
+        },
+        {
+          "id": "2-1/W2/3",
+          "name": "伝令",
+          "image": "/creative/characters/battle/char_gou_01.png",
+          "level": 9,
+          "stats": {
+            "luk": 0,
+            "hp": 1100,
+            "atk": 80,
+            "def": 30,
+            "sp": 100
+          },
+          "order": 2,
+          "hitSpGain": 10,
+          "element": "wind",
+          "actionCount": 4,
+          "initialCount": 4,
+          "initialSp": 75,
+          "skills": [
+            {
+              "id": "SKD035",
+              "name": "鬨の声",
+              "image": "",
+              "rarity": "R",
+              "element": "fire",
+              "spCost": 75,
+              "condition": {
+                "type": "always"
+              },
+              "target": "all_allies",
+              "effects": [
+                {
+                  "type": "atk_up",
+                  "power": 8,
+                  "duration": 3
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "passives": []
+        }
+      ]
+    ],
+    "firstRewards": [
+      {
+        "kind": "soul",
+        "id": "char_leon_01",
+        "amount": 2
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_CHARACTER",
+        "amount": 1
+      },
+      {
+        "kind": "cash",
+        "amount": 5000
+      },
+      {
+        "kind": "character_exp_item",
+        "id": "medium",
+        "amount": 3
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 800
+      },
+      {
+        "kind": "character_exp_item",
+        "id": "small",
+        "amount": 2
+      },
+      {
+        "kind": "equipment_exp_item",
+        "id": "small",
+        "amount": 1
+      }
+    ],
+    "rareRewards": [
+      {
+        "kind": "soul",
+        "id": "char_leon_01",
+        "amount": 1,
+        "rarity": "SR",
+        "chance": 0.1,
+        "period": 20
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_CHARACTER",
+        "amount": 1,
+        "chance": 0.0025
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_SKILL",
+        "amount": 1,
+        "chance": 0.005
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_EQUIPMENT",
+        "amount": 1,
+        "chance": 0.0025
+      }
+    ],
+    "soulDrops": [
+      {
+        "kind": "soul",
+        "id": "char_leon_01",
+        "amount": 1,
+        "rarity": "SR",
+        "chance": 0.1,
+        "period": 20
+      }
+    ],
+    "ticketChance": 0.01,
+    "playerExp": 25,
+    "encounterChance": 0.01
+  },
+  "questMasterVersion": "game04-quest68-early-retention-20260926",
+  "playerExpReward": {
+    "amount": 25,
+    "version": "game04-quest68-early-retention-20260926",
+    "status": "APPROVED"
+  }
+}
