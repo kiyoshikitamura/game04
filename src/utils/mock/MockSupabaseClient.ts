@@ -61,6 +61,10 @@ export class MockSupabaseClient {
   }
 
   auth = {
+    getUser: async () => {
+      const { data } = await this.auth.getSession();
+      return { data: { user: data.session?.user ?? null }, error: null };
+    },
     getSession: async () => {
       if (typeof window === "undefined") return { data: { session: null } };
       const demoId = localStorage.getItem("tribe_demo_uuid");
@@ -167,7 +171,7 @@ export class MockSupabaseClient {
       localStorage.setItem("tribe_demo_uuid", userId);
       localStorage.setItem("mock_auth_mode", authMode);
       const { data } = await this.auth.getSession();
-      return { data, error: null };
+      return { data: { ...data, user: data.session?.user ?? null }, error: null };
     },
     signUp: async () => {
       return { data: { user: {} }, error: null };

@@ -1,4 +1,5 @@
 'use client';
+import { restoredGame04Tab, clearGame04Return } from '@/utils/game04AccountReturn';
 import PageTitleBanner from './PageTitleBanner';
 import { useAudio } from '@/audio/AudioProvider';
 import { SE_ASSETS, type SeEvent } from '@/audio/audioContract';
@@ -38,7 +39,8 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   useEffect(() => { preloadAudio({ events: Object.keys(SE_ASSETS) as SeEvent[] }); }, [preloadAudio]);
   const owner = game.session?.user.id;
   const [data, setData] = useState<RedesignResponse | null>(null);
-  const [tab, setTab] = useState(initialTab);
+  const [tab, setTab] = useState(()=>restoredGame04Tab(initialTab));
+  useEffect(clearGame04Return, []);
   const [encounterNow, setEncounterNow] = useState(Date.now);
   useEffect(() => { if (tab !== 'home') return; const timer = setInterval(() => setEncounterNow(Date.now()), 1000); return () => clearInterval(timer); }, [tab]);
   const [error, setError] = useState('');

@@ -1,27 +1,13 @@
-.g4-login-board{color:var(--g4-text);font-family:var(--g4-sans)}
-.g4-login-heading{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
-.g4-login-heading h3{margin:0;font:700 18px/1.4 var(--g4-serif);color:var(--g4-gold)}
-.g4-login-heading>span{font-size:12px;white-space:nowrap}
-.g4-login-today{padding:8px;border:1px solid var(--g4-gold);border-radius:var(--g4-radius);background:linear-gradient(130deg,#57342680,#21171dcc),url('/ui/raid/v2/panel-sakura-overlay.png') center top/100% auto no-repeat}
-.g4-login-today .g4-reward-list>li{grid-template-columns:40px minmax(0,1fr) auto;padding-block:8px}
-.g4-login-today .g4-reward-list img{width:40px;height:40px}
-.g4-login-today .g4-reward-list strong{font-size:20px;color:var(--g4-text)}
-.g4-login-received{margin:8px 0 0;font-size:12px;color:var(--g4-gold);text-align:right}
-.g4-login-next{margin-top:12px;padding:8px;background:var(--g4-reading-surface);border-left:2px solid var(--g4-gold)}
-.g4-login-next .g4-login-heading h3{font-size:16px}
-.g4-login-next .g4-reward-list>li{padding-block:4px;border:0}
-.g4-login-board-title{font:700 16px/1.4 var(--g4-serif);margin:16px 0 8px;color:var(--g4-gold)}
-.g4-login-days{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:8px;list-style:none;padding:0;margin:0}
-.g4-login-days>li{min-width:0;padding:8px 5px;border:1px solid var(--g4-rule-border);border-radius:var(--g4-radius);background:var(--g4-reading-surface)}
-.g4-login-day-heading{display:grid;gap:2px;margin-bottom:4px;text-align:center;line-height:1.4}
-.g4-login-day-heading b{font-size:14px}.g4-login-day-heading>span{font-size:11px;color:var(--g4-muted)}
-.g4-login-days ul{list-style:none;padding:0;margin:0;display:grid;gap:4px}
-.g4-login-days ul>li{display:flex;align-items:center;justify-content:space-between;gap:2px;min-width:0}
-.g4-login-days img{width:24px;height:24px;object-fit:contain;flex:none}
-.g4-login-days .g4-number{font-size:11px;letter-spacing:-.03em}
-.g4-login-days>li[data-status='本日']{border:2px solid var(--g4-gold);padding:7px 4px;background:#4d241d}
-.g4-login-days>li[data-status='本日'] .g4-login-day-heading>span{background:var(--g4-gold);color:#19141c;font-weight:700}
-.g4-login-days>li[data-status='次回']{border-color:#bba371;background:#322c25}
-.g4-login-days>li[data-status='次回'] .g4-login-day-heading>span{color:#f3d9a6}
-.g4-login-days>li[data-status='受取済み'] .g4-login-day-heading>span{color:#b7d6b4}
-.g4-login-note{font-size:12px;line-height:1.6;color:var(--g4-muted);margin:16px 0 0}
+.g4-login-board{min-width:0;color:var(--g4-text)}
+.g4-login-summary{display:flex;align-items:center;gap:var(--g4-space-2);width:100%;min-height:44px;padding:var(--g4-space-2) 0;border:0;border-bottom:1px solid var(--g4-rule-border);background:transparent;color:inherit;text-align:left}
+.g4-login-summary>span:first-child{display:grid;gap:4px;flex:none;font-size:13px}.g4-login-summary small{font-size:12px}.g4-login-summary>.g4-compact-rewards{flex:1;justify-content:flex-end}
+.g4-login-received{margin:var(--g4-space-1) 0;font-size:12px;color:var(--g4-muted);text-align:right}
+.g4-login-board-title{font:700 16px/1.4 var(--g4-serif);margin:var(--g4-space-3) 0 var(--g4-space-2);color:var(--g4-gold)}.g4-login-board-title small{font:400 12px/1.4 sans-serif}
+.g4-login-days{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:start;gap:var(--g4-space-1);list-style:none;padding:0;margin:0}
+.g4-login-days>li{min-width:0;border:1px solid var(--g4-rule-border);border-radius:var(--g4-radius);background:var(--g4-reading-surface)}
+.g4-login-days button{width:100%;min-height:44px;padding:var(--g4-space-1) 2px;background:transparent;color:inherit;border:0}
+.g4-login-day-heading{display:grid;gap:2px;margin-bottom:4px;text-align:center;line-height:1.4}.g4-login-day-heading b{font-size:12px}.g4-login-day-heading>span{min-height:17px;font-size:11px;color:var(--g4-muted)}
+.g4-login-days .g4-compact-rewards{display:grid;justify-items:center;gap:2px}.g4-login-days .g4-compact-rewards>span{display:grid;justify-items:center;gap:0}.g4-login-days .g4-compact-rewards img{width:24px;height:24px}.g4-login-days .g4-compact-rewards b,.g4-login-days .g4-compact-rewards small{font-size:11px}
+.g4-login-days>li[data-status='本日']{outline:1px solid var(--g4-gold);border-color:var(--g4-gold);background:#4d241d}.g4-login-days>li[data-status='本日'] .g4-login-day-heading>span{color:var(--g4-gold);font-weight:700}
+.g4-login-days>li[data-status='次回']{border-color:#bba371;background:#322c25}.g4-login-days>li[data-status='受取済み'] .g4-login-day-heading>span{color:#b7d6b4}
+.g4-login-note{font-size:12px;line-height:1.6;color:var(--g4-muted);margin:var(--g4-space-3) 0 0}

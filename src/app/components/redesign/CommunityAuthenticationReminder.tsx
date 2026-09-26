@@ -5,6 +5,7 @@ import CanonicalDialog from '../ui/CanonicalDialog';
 import { authenticationReminderKey } from '@/domain/redesign/community';
 import { usePresentedDialog } from '../ui/dialogPresence';
 import { jstLoginDate } from '@/domain/redesign/loginBonus';
+import { openGame04Account } from '@/utils/game04AccountReturn';
 
 /** Mounted only after the real GAME04 state has loaded. No legacy ranking gate. */
 export default function CommunityAuthenticationReminder({ owner, eligible }: { owner: string; eligible: boolean }) {
@@ -40,6 +41,6 @@ export default function CommunityAuthenticationReminder({ owner, eligible }: { o
   if (!anonymous || !eligible || blocked || shown !== `${owner}:${day}`) return null;
   return <CanonicalDialog title="ゲームデータを保護" ariaLabel="アカウント認証のご案内" actions={[
     { label: '閉じる', semantic: 'secondary', onClick: () => setShown('') },
-    { label: '今すぐ認証', semantic: 'primary', onClick: () => { setShown(''); window.location.assign('/auth/game04'); } },
+    { label: '今すぐ認証', semantic: 'primary', onClick: () => { setShown(''); openGame04Account('home'); } },
   ]}>アカウント認証をすると、ゲームデータを安全に保護し、別の端末へ引き継げます。</CanonicalDialog>;
 }

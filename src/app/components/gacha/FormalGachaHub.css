@@ -23,3 +23,5 @@
 .formal-gacha__actions button b{font-size:16px}.formal-gacha__actions small{font-size:16px;color:#f1dfbd}
 .formal-gacha__primary small{font-size:14px}.formal-gacha__exchange button{min-height:44px;font-size:14px;line-height:1.5}
 @media(max-width:360px){.formal-gacha__link{font-size:14px}}
+/* Approved offer artwork owns its heading; no second surrounding frame. */
+.formal-gacha__card{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;gap:var(--g4-space-2)}.formal-gacha__card header{justify-content:flex-end}.formal-gacha__card header .formal-gacha__link{min-height:44px}

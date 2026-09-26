@@ -14,7 +14,7 @@ import { CharacterCard } from './visual-bench/CharacterDisplays';
 import TutorialSceneAssets from '@/app/qa/tutorial/TutorialSceneAssets';
 import CowboyDisplay from './visual-bench/CowboyDisplay';
 import TypewriterText from './TypewriterText';
-import { TUTORIAL_ASSETS } from '@/app/qa/tutorial/assets';
+import { tutorialSceneAssets } from '@/app/qa/tutorial/assets';
 import '@/app/qa/tutorial/tutorial.css';
 const castMember=(id:string)=>CHARACTER_MASTERS.find(c=>c.id===id)!;
 /** A server refresh must not replace the recording and reset its playback clock. */
@@ -39,7 +39,7 @@ export default function IntegratedTutorial({state,busy,onNext}:{state:RedesignSt
  const revealed = revealedScene === scene.id;
  const reveal = () => setRevealedScene(scene.id);
  const next=()=>{if(busy||advancing.current)return;advancing.current=true;setError('');void onNext(save.step,name).catch(e=>{advancing.current=false;setError(e.message);});};
- return <TutorialSceneAssets assets={TUTORIAL_ASSETS}><div className="rd-shell tutorial-shell">
+ return <TutorialSceneAssets assets={tutorialSceneAssets(save.step)} nextAssets={tutorialSceneAssets(save.step+1)}><div className="rd-shell tutorial-shell">
  {scene.id === 'battle' && state.deck.length ? <TutorialPractice key={`${state.userId}:${save.step}`} state={state} onComplete={next} /> :
       <main key={scene.id} className={`tutorial-scene ${world ? 'is-world' : ''}`} style={{ backgroundImage: `linear-gradient(0deg, #160f0beb, transparent 65%), url('${background}')` }} data-scene={scene.id}>
         {world && <HomeEffect effectId={scene.effectId} />}

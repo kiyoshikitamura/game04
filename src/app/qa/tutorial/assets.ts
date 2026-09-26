@@ -22,3 +22,17 @@ export const TUTORIAL_ASSETS: string[] = [...new Set([
   ...[...STARTER_SKILLS, 'SKD025'].map(id => getFormalOwnedSkill(id, 0).image),
 ].filter((src): src is string => !!src))];
 
+/** Only the current scene blocks entry. The following scene warms after display. */
+export function tutorialSceneAssets(step: number): string[] {
+  const scene=SCENES[step];
+  if(!scene)return [];
+  if('cast' in scene)return [scene.background,...scene.cast.map(id=>characterArt(CHARACTER_MASTERS.find(c=>c.id===id)!,'full'))].filter((src):src is string=>!!src);
+  if(scene.id==='characters')return [BACKGROUNDS.guide,...STARTERS.flatMap(id=>{
+    const c=CHARACTER_MASTERS.find(c=>c.id===id)!;
+    return [characterArt(c,'card'),`/creative/card-backgrounds/${c.rarity}.png`,`/creative/ui/frame-${c.rarity}.png`,`/creative/ui/element-${c.element}.png`];
+  })].filter((src):src is string=>!!src);
+  if(scene.id==='skills')return [BACKGROUNDS.guide,...STARTER_SKILLS.map(id=>getFormalOwnedSkill(id,0).image)].filter((src):src is string=>!!src);
+  if(scene.id==='battle')return [BACKGROUNDS.battle]; // BattleView owns its recording-specific entry gate.
+  return [BACKGROUNDS.guide,characterArt(CHARACTER_MASTERS.find(c=>c.id==='char_ageha_01')!,'full')].filter((src):src is string=>!!src);
+}
+

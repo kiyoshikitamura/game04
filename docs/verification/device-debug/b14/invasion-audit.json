@@ -1,0 +1,605 @@
+{
+  "source": [
+    "src/domain/redesign/territory.ts",
+    "src/domain/redesign/raidInvasionMaster.ts",
+    "src/domain/redesign/data/raid-invasion.json"
+  ],
+  "finding": "開始プレビューは random=0 の共通候補例。新規開催時は制約を満たす組合せを抽選。最終敵は各城主で異なる。",
+  "invasion": [
+    {
+      "castle": "岡崎城",
+      "requiredLevel": 1,
+      "stages": [
+        {
+          "label": "開始",
+          "level": 1,
+          "enemy": "柴田勝家",
+          "representative": true,
+          "enemies": [
+            "柴田勝家"
+          ],
+          "rewards": [
+            {
+              "kind": "cash",
+              "amount": 1000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 1
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "中間",
+          "level": 6,
+          "enemy": "加藤清正",
+          "representative": false,
+          "enemies": [
+            "加藤清正",
+            "雑賀孫市"
+          ],
+          "rewards": [
+            {
+              "kind": "cash",
+              "amount": 5000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 2
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 2
+            },
+            {
+              "kind": "character_exp_item",
+              "id": "large",
+              "amount": 1
+            },
+            {
+              "kind": "equipment_exp_item",
+              "id": "large",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "最終",
+          "level": 12,
+          "enemy": "徳川家康",
+          "representative": false,
+          "enemies": [
+            "徳川家康",
+            "井伊直虎"
+          ],
+          "rewards": [
+            {
+              "kind": "cash",
+              "amount": 20000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 6
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 6
+            },
+            {
+              "kind": "character_exp_item",
+              "id": "xlarge",
+              "amount": 1
+            },
+            {
+              "kind": "equipment_exp_item",
+              "id": "xlarge",
+              "amount": 1
+            },
+            {
+              "kind": "ticket",
+              "id": "SPECIAL_TICKET_CHARACTER",
+              "amount": 1
+            },
+            {
+              "kind": "ticket",
+              "id": "SPECIAL_TICKET_SKILL",
+              "amount": 2
+            },
+            {
+              "kind": "ticket",
+              "id": "SPECIAL_TICKET_EQUIPMENT",
+              "amount": 1
+            },
+            {
+              "kind": "soul",
+              "id": "char_karen_01",
+              "amount": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "castle": "長浜城",
+      "requiredLevel": 2,
+      "stages": [
+        {
+          "label": "開始",
+          "level": 1,
+          "enemy": "柴田勝家",
+          "representative": true,
+          "enemies": [
+            "柴田勝家"
+          ],
+          "rewards": [
+            {
+              "kind": "cash",
+              "amount": 2000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 1
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "中間",
+          "level": 6,
+          "enemy": "今川義元",
+          "representative": false,
+          "enemies": [
+            "今川義元",
+            "黒田官兵衛"
+          ],
+          "rewards": [
+            {
+              "kind": "cash",
+              "amount": 10000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 4
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 4
+            },
+            {
+              "kind": "character_exp_item",
+              "id": "large",
+              "amount": 2
+            },
+            {
+              "kind": "equipment_exp_item",
+              "id": "large",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "label": "最終",
+          "level": 12,
+          "enemy": "豊臣秀吉",
+          "representative": false,
+          "enemies": [
+            "加藤清正",
+            "豊臣秀吉"
+          ],
+          "rewards": [
+            {
+              "kind": "cash",
+              "amount": 40000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 12
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 12
+            },
+            {
+              "kind": "character_exp_item",
+              "id": "xlarge",
+              "amount": 2
+            },
+            {
+              "kind": "equipment_exp_item",
+              "id": "xlarge",
+              "amount": 2
+            },
+            {
+              "kind": "ticket",
+              "id": "SPECIAL_TICKET_CHARACTER",
+              "amount": 1
+            },
+            {
+              "kind": "ticket",
+              "id": "SPECIAL_TICKET_SKILL",
+              "amount": 3
+            },
+            {
+              "kind": "ticket",
+              "id": "SPECIAL_TICKET_EQUIPMENT",
+              "amount": 1
+            },
+            {
+              "kind": "soul",
+              "id": "char_ageha_01",
+              "amount": 15
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "castle": "春日山城",
+      "requiredLevel": 4,
+      "stages": [
+        {
+          "label": "開始",
+          "level": 1,
+          "enemy": "柴田勝家",
+          "representative": true,
+          "enemies": [
+            "柴田勝家"
+          ],
+          "rewards": [
+            {
+              "kind": "cash",
+              "amount": 3000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 1
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "中間",
+          "level": 6,
+          "enemy": "雑賀孫市",
+          "representative": false,
+          "enemies": [
+            "雑賀孫市",
+            "長宗我部元親"
+          ],
+          "rewards": [
+            {
+              "kind": "cash",
+              "amount": 15000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 6
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 6
+            },
+            {
+              "kind": "character_exp_item",
+              "id": "large",
+              "amount": 3
+            },
+            {
+              "kind": "equipment_exp_item",
+              "id": "large",
+              "amount": 3
+            }
+          ]
+        },
+        {
+          "label": "最終",
+          "level": 12,
+          "enemy": "上杉謙信",
+          "representative": false,
+          "enemies": [
+            "上杉謙信"
+          ],
+          "rewards": [
+            {
+              "kind": "cash",
+              "amount": 60000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 18
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 18
+            },
+            {
+              "kind": "character_exp_item",
+              "id": "xlarge",
+              "amount": 3
+            },
+            {
+              "kind": "equipment_exp_item",
+              "id": "xlarge",
+              "amount": 3
+            },
+            {
+              "kind": "ticket",
+              "id": "SPECIAL_TICKET_CHARACTER",
+              "amount": 2
+            },
+            {
+              "kind": "ticket",
+              "id": "SPECIAL_TICKET_SKILL",
+              "amount": 4
+            },
+            {
+              "kind": "ticket",
+              "id": "SPECIAL_TICKET_EQUIPMENT",
+              "amount": 2
+            },
+            {
+              "kind": "soul",
+              "id": "char_koharu_01",
+              "amount": 20
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "castle": "躑躅ヶ崎館",
+      "requiredLevel": 6,
+      "stages": [
+        {
+          "label": "開始",
+          "level": 1,
+          "enemy": "柴田勝家",
+          "representative": true,
+          "enemies": [
+            "柴田勝家"
+          ],
+          "rewards": [
+            {
+              "kind": "cash",
+              "amount": 4000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 1
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "中間",
+          "level": 6,
+          "enemy": "黒田官兵衛",
+          "representative": false,
+          "enemies": [
+            "黒田官兵衛",
+            "直江兼続"
+          ],
+          "rewards": [
+            {
+              "kind": "cash",
+              "amount": 20000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 8
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 8
+            },
+            {
+              "kind": "character_exp_item",
+              "id": "xlarge",
+              "amount": 1
+            },
+            {
+              "kind": "equipment_exp_item",
+              "id": "xlarge",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "最終",
+          "level": 12,
+          "enemy": "武田信玄",
+          "representative": false,
+          "enemies": [
+            "武田信玄",
+            "真田昌幸"
+          ],
+          "rewards": [
+            {
+              "kind": "cash",
+              "amount": 80000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 24
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 24
+            },
+            {
+              "kind": "character_exp_item",
+              "id": "xlarge",
+              "amount": 4
+            },
+            {
+              "kind": "equipment_exp_item",
+              "id": "xlarge",
+              "amount": 4
+            },
+            {
+              "kind": "ticket",
+              "id": "SPECIAL_TICKET_CHARACTER",
+              "amount": 2
+            },
+            {
+              "kind": "ticket",
+              "id": "SPECIAL_TICKET_SKILL",
+              "amount": 5
+            },
+            {
+              "kind": "ticket",
+              "id": "SPECIAL_TICKET_EQUIPMENT",
+              "amount": 2
+            },
+            {
+              "kind": "soul",
+              "id": "char_go_01",
+              "amount": 25
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "castle": "安土城",
+      "requiredLevel": 8,
+      "stages": [
+        {
+          "label": "開始",
+          "level": 1,
+          "enemy": "柴田勝家",
+          "representative": true,
+          "enemies": [
+            "柴田勝家"
+          ],
+          "rewards": [
+            {
+              "kind": "cash",
+              "amount": 5000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 1
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "中間",
+          "level": 6,
+          "enemy": "真田幸村",
+          "representative": false,
+          "enemies": [
+            "真田幸村",
+            "豊臣秀吉"
+          ],
+          "rewards": [
+            {
+              "kind": "cash",
+              "amount": 25000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 10
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 10
+            },
+            {
+              "kind": "character_exp_item",
+              "id": "xlarge",
+              "amount": 1
+            },
+            {
+              "kind": "character_exp_item",
+              "id": "large",
+              "amount": 1
+            },
+            {
+              "kind": "equipment_exp_item",
+              "id": "xlarge",
+              "amount": 1
+            },
+            {
+              "kind": "equipment_exp_item",
+              "id": "large",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "label": "最終",
+          "level": 12,
+          "enemy": "織田信長",
+          "representative": false,
+          "enemies": [
+            "加藤清正",
+            "織田信長",
+            "濃姫"
+          ],
+          "rewards": [
+            {
+              "kind": "cash",
+              "amount": 100000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 30
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 30
+            },
+            {
+              "kind": "character_exp_item",
+              "id": "xlarge",
+              "amount": 5
+            },
+            {
+              "kind": "equipment_exp_item",
+              "id": "xlarge",
+              "amount": 5
+            },
+            {
+              "kind": "ticket",
+              "id": "SPECIAL_TICKET_CHARACTER",
+              "amount": 3
+            },
+            {
+              "kind": "ticket",
+              "id": "SPECIAL_TICKET_SKILL",
+              "amount": 6
+            },
+            {
+              "kind": "ticket",
+              "id": "SPECIAL_TICKET_EQUIPMENT",
+              "amount": 3
+            },
+            {
+              "kind": "soul",
+              "id": "char_reiji_01",
+              "amount": 30
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

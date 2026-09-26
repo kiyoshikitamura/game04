@@ -237,3 +237,4 @@ body.game04-theme .g4g-image-loading .rd-modal-header{position:absolute;width:1p
 .g4g-passive .g4-info-row dd{text-align:left;white-space:normal;flex:1}
 /* Stretched border-image portraits already exclude the border from their content box. */
 body.game04-theme .g4-growth :is(.g4g-party,.g4g-grid) .g4g-portrait{--portrait-top:0%!important;--portrait-right:0%!important;--portrait-bottom:0%!important;--portrait-left:0%!important}
+.g4-soul-list{display:grid;gap:var(--g4-space-1)}.g4-growth .g4-soul-list .g4-inventory-entry{padding:var(--g4-space-2)}body.game04-theme .g4-soul-list .g4g-portrait{width:52px;min-width:52px;max-width:52px;margin:0;flex:none}.g4-soul-icon{width:24px;height:24px;object-fit:cover;border-radius:50%}body.game04-theme .g4g-modal .g4g-growth-controls button:disabled{opacity:.45;filter:grayscale(1);cursor:not-allowed}

@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import CanonicalDialog from "../ui/CanonicalDialog";
 import GachaModalPortal from "./GachaModalPortal";
 import "./FormalGachaHub.css";
+import GachaPromotion from './GachaPromotion';
 
 export type FormalGachaCategory = "CHARACTER" | "SKILL" | "EQUIPMENT";
 export type FormalGachaPayment = "FREE" | "COIN" | "DIAMOND" | "TICKET";
@@ -87,7 +88,8 @@ export default function FormalGachaHub({
 
       {surface === "NORMAL" ? (
         <article className="formal-gacha__card is-normal">
-          <header><div><small>三種混合</small><h2>通常登用</h2></div><button className="formal-gacha__link" onClick={() => setRatesOpen(true)}>提供割合・排出一覧</button></header>
+          <GachaPromotion kind="normal"/>
+          <header><button className="formal-gacha__link" onClick={() => setRatesOpen(true)}>提供割合・排出一覧</button></header>
           <p>姫武将・戦技・武具が排出されます</p>
           <div className="formal-gacha__rate-summary"><span>SSR 1%</span><span>SR 10%</span><span>R 40%</span><span>N 49%</span></div>
           <div className="formal-gacha__balance"><span>所持</span><strong>{balances.coin.toLocaleString("ja-JP")}銭</strong></div>
@@ -103,7 +105,8 @@ export default function FormalGachaHub({
             {(Object.keys(CATEGORY) as FormalGachaCategory[]).map(key => <button key={key} aria-pressed={category === key} onClick={() => setCategory(key)}>{CATEGORY[key].label}</button>)}
           </nav>
           <article className={`formal-gacha__card is-special is-${category.toLowerCase()}`}>
-            <header><div><small>N排出なし</small><h2>{meta.label} 特選登用</h2></div><button className="formal-gacha__link" onClick={() => setRatesOpen(true)}>提供割合・排出一覧</button></header>
+            <GachaPromotion kind={category.toLowerCase() as 'character'|'skill'|'equipment'}/>
+            <header><button className="formal-gacha__link" onClick={() => setRatesOpen(true)}>提供割合・排出一覧</button></header>
             <p>{meta.rates}</p>
             <div className="formal-gacha__ledger">
               <span>輝石 <b>{balances.diamond.toLocaleString("ja-JP")}</b></span>
