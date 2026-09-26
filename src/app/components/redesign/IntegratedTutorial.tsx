@@ -9,6 +9,8 @@ import { createTutorialBattle } from '@/domain/redesign/tutorial/battle';
 import type { RedesignState } from '@/domain/redesign/types';
 import BattleView from './BattleView';
 import HomeEffect from './HomeEffect';
+import { AssetIcon } from '../ui/AssetChoice';
+import { CharacterCard } from './visual-bench/CharacterDisplays';
 import TutorialSceneAssets from '@/app/qa/tutorial/TutorialSceneAssets';
 import CowboyDisplay from './visual-bench/CowboyDisplay';
 import TypewriterText from './TypewriterText';
@@ -43,8 +45,8 @@ export default function IntegratedTutorial({state,busy,onNext}:{state:RedesignSt
         {world && <HomeEffect effectId={scene.effectId} />}
         <div className={`tutorial-cast count-${cast.length} ${!world && !acquisition ? 'is-cowboy' : ''}`} aria-label={world ? '乱世の武将たち' : '豊臣秀吉'}>
           {!acquisition && cast.map(id => !world ? <CowboyDisplay key={id} characterId={id} name={castMember(id).name} /> : <img key={id} src={characterArt(castMember(id), 'full')} alt={castMember(id).name} />)}
-          {scene.id === 'characters' && <div className="tutorial-rewards">{STARTERS.map(id => <figure key={id}><div className="tutorial-card-art"><img src={characterArt(castMember(id), 'card')} alt={castMember(id).name} /><img className="tutorial-card-frame" src="/creative/ui/frame-R.png" alt="" /></div><figcaption><b>{id === 'char_aoi_01' ? 'お市' : castMember(id).name}</b><span>R　Lv.1・覚醒0</span></figcaption></figure>)}</div>}
-          {scene.id === 'skills' && <div className="tutorial-rewards is-skills">{STARTER_SKILLS.map(id => { const skill = getFormalOwnedSkill(id, 0); return <figure key={id}><div className="tutorial-skill-art"><img src={skill.image} alt={skill.name} /></div><figcaption><b>{skill.name}</b><span>{skill.rarity}　LB0</span></figcaption></figure>; })}</div>}
+          {scene.id === 'characters' && <div className="tutorial-rewards">{STARTERS.map(id => <figure key={id}><CharacterCard subject={castMember(id)} compact hideMarks className="tutorial-character-card"/><figcaption><b>{id === 'char_aoi_01' ? 'お市' : castMember(id).name}</b><span>R　Lv.1・覚醒0</span></figcaption></figure>)}</div>}
+          {scene.id === 'skills' && <div className="tutorial-rewards is-skills">{STARTER_SKILLS.map(id => { const skill = getFormalOwnedSkill(id, 0); return <figure key={id}><div className="tutorial-skill-art"><AssetIcon src={skill.image} name={skill.name} /></div><figcaption><b>{skill.name}</b><span>{skill.rarity}　LB0</span></figcaption></figure>; })}</div>}
         </div>
         <section className="tutorial-copy" aria-live="polite">
           {!world && !acquisition && !['name', 'equipped'].includes(scene.id) && <h1>豊臣秀吉</h1>}

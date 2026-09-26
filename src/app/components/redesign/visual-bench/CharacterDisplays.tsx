@@ -138,8 +138,8 @@ export function CharacterCard({subject,compact=false,className,hideMarks=false}:
   return <figure className={[styles.card,compact?styles.compact:'',className??''].filter(Boolean).join(' ')} data-rarity={subject.rarity} data-paused={!visible} aria-label={subject.name+' '+subject.rarity+' '+labels[subject.element]} style={openingStyle}>
     {!asset.box||!asset.source||!asset.background?<Pending error={asset.error} retry={asset.retry}/>:<>
       <div className={styles.cardArt}>
-        <img className={styles.backdrop} src={asset.background} alt=""/>
         <div className={styles.cardOpening}>
+          <img className={styles.backdrop} src={asset.background} alt=""/>
           <div className={styles.cardPerson}><Person src={asset.source} box={asset.box}/></div>
         </div>
         <img className={styles.frame} src={asset.frame} alt=""/>

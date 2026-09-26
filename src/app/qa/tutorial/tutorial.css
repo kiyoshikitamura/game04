@@ -48,3 +48,5 @@
 /* B03: extend only the background beneath the external frame, preserving art geometry. */
 .tutorial-card-art{background:none;isolation:isolate}.tutorial-card-art:before{content:"";position:absolute;inset:-8%;z-index:-1;background:url("/creative/card-backgrounds/R.png") center/cover}
 .tutorial-rewards.is-skills figure{border:0;background:transparent}.tutorial-skill-art{background:none}
+.tutorial-rewards .tutorial-character-card{width:100%;margin:0;padding:0;border:0;background:transparent;min-height:0}
+.tutorial-rewards .tutorial-character-card img{border:0;border-radius:0}

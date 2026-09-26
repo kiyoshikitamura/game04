@@ -134,7 +134,7 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
           {!homeImages.ready && <div className="g4-home-loading" role="status">{homeImages.error ? <><span>画像を読み込めませんでした</span><button className="rd-button" onClick={homeImages.retry}>再読み込み</button></> : <span className="g4-home-spinner" aria-label="読み込み中" />}</div>}
         </section>
         <nav className="g4-home-shortcuts" aria-label="本陣の操作">
-          <button className="g4-home-switch" disabled={!homeImages.ready} onClick={openSelector}>切替</button>
+          <button className="g4-home-switch" disabled={!homeImages.ready} onClick={openSelector}>表示切替</button>
           <button disabled={!homeImages.ready} onClick={() => game.setShowMissionPanel(true)}><img src="/ui/sengoku/02-scroll-top.png" alt="" /><span>任務</span>{claimableMissions > 0 && <i aria-label="未受取の任務報酬" />}</button>
           <button disabled={!homeImages.ready} onClick={() => onNavigate('shop')}><img src="/ui/sengoku/12-shop.png" alt="" /><span>商店</span></button>
           <button disabled aria-label="同盟・未解放" title="今後公開予定"><HomeLock /><span>同盟</span><small>未解放</small></button>

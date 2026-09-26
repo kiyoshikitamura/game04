@@ -16,7 +16,7 @@ body.game04-theme .rd-chrome-header .rd-resources>span+span{padding-left:3px;bor
 body.game04-theme .rd-chrome-header .rd-resources img{width:17px;height:17px}
 body.game04-theme .rd-shell>.rd-footer.rd-chrome-footer{border:1px solid #c69b50;border-radius:5px;background:linear-gradient(#181114f5,#050405fa);padding:0 0 env(safe-area-inset-bottom,0px)}
 body.game04-theme .rd-chrome-footer button{position:relative;min-height:76px;padding:8px 0 7px;gap:3px;font-size:14px;line-height:18px;white-space:nowrap;border-bottom:0}
-body.game04-theme .rd-chrome-footer button>img{width:32px;height:32px;object-fit:contain}
+body.game04-theme .rd-chrome-footer button>img{width:32px;height:32px;min-width:32px;min-height:32px;max-width:32px;max-height:32px;object-fit:contain;flex:none;justify-self:center;align-self:center}
 body.game04-theme .rd-chrome-footer button[aria-current=page]{background:radial-gradient(ellipse at bottom,#7636148f,transparent 80%);box-shadow:inset 0 0 0 1px #f5cf7f,inset 0 0 12px #dba9515e;border-bottom:0;color:#fff0ca}
 body.game04-theme .rd-chrome-header :is(strong,span,b,button),body.game04-theme .rd-chrome-footer button{font-family:var(--font-display,'Noto Serif JP',serif)!important}
 @media(min-width:500px){body.game04-theme .rd-chrome-header .rd-identity strong{font-size:18px}body.game04-theme .rd-chrome-header .rd-resources{font-size:14px}body.game04-theme .rd-chrome-header .rd-menu-button{font-size:13px}}

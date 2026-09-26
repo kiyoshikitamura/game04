@@ -144,12 +144,9 @@ body.game04-theme .g4g-portrait .g4g-portrait-frame{object-fit:contain!important
 @media(prefers-reduced-motion:reduce){.g4g-portrait-sheen{animation:none;opacity:.3}}
 /* Narrow deck slots retain frame corners with nine-slice rather than stretching the artwork. */
 body.game04-theme .g4-growth .g4g-party .g4g-portrait{height:170px;aspect-ratio:auto;border:6px solid transparent;border-image-source:var(--portrait-frame);border-image-slice:100;border-image-width:6px;border-image-repeat:stretch}
-body.game04-theme .g4-growth .g4g-party .g4g-portrait-opening{inset:0}
 body.game04-theme .g4-growth .g4g-party .g4g-portrait-frame{display:none}
 body.game04-theme .g4-growth .g4g-party .g4g-portrait-sheen{inset:0}
 body.game04-theme .g4-growth .g4g-party>button>.g4g-empty-slot{position:relative;min-height:170px;padding-top:48px}
-body.game04-theme .g4-growth .g4g-party>button:disabled .g4g-empty-slot::before{content:"";position:absolute;top:65px;left:calc(50% - 9px);width:18px;height:16px;border-radius:2px;background:#b7b0a7}
-body.game04-theme .g4-growth .g4g-party>button:disabled .g4g-empty-slot::after{content:"";position:absolute;top:54px;left:calc(50% - 7px);width:14px;height:14px;border:3px solid #b7b0a7;border-radius:9px 9px 0 0}
 /* Adopted GAME04 ornament and gold icons, shared with the approved visual language. */
 body.game04-theme .g4-growth .g4g-auto-actions>button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:67px;padding:6px 2px!important}
 body.game04-theme .g4-growth .g4g-auto-actions>button>img{width:28px;height:28px;object-fit:contain}
@@ -212,7 +209,6 @@ body.game04-theme .g4g-modal .g4g-performance span{color:#e4c68c;border-bottom:1
 body.game04-theme .g4g-modal .g4g-skill-note{font-size:11px}
 /* Collection portraits are wider than deck slots; their frame corners remain undistorted. */
 body.game04-theme .g4-growth .g4g-grid>button>.g4g-portrait{aspect-ratio:1.2;border:5px solid transparent;border-image-source:var(--portrait-frame);border-image-slice:100;border-image-width:5px;border-image-repeat:stretch}
-body.game04-theme .g4-growth .g4g-grid>button>.g4g-portrait .g4g-portrait-opening,body.game04-theme .g4-growth .g4g-grid>button>.g4g-portrait .g4g-portrait-sheen{inset:0}
 body.game04-theme .g4-growth .g4g-grid>button>.g4g-portrait .g4g-portrait-frame{display:none}
 body.game04-theme .g4-growth .g4g-grid>button:has(>.g4g-portrait){padding:0 0 5px;gap:3px}
 body.game04-theme .g4-growth .g4g-grid>button:has(>.g4g-portrait)>b{margin:0;font-size:13px;padding:3px 0}
@@ -232,3 +228,12 @@ body.game04-theme .g4g-modal .g4g-growth-note{display:block;margin:5px 0}
 
 /* Spinner-only loading; retain an accessible dialog name, hide disabled close UI. */
 body.game04-theme .g4g-image-loading .rd-modal-header{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%)}
+
+/* B13: only genuinely locked slots show a lock label; masks use CARD_OPENINGS. */
+.g4g-formation-help{font-size:14px;line-height:1.6}
+.g4g-passive h4{margin:8px 0;font-size:16px}
+.g4g-passive dl{margin:8px 0}
+.g4g-passive .g4-info-row{align-items:start}
+.g4g-passive .g4-info-row dd{text-align:left;white-space:normal;flex:1}
+/* Stretched border-image portraits already exclude the border from their content box. */
+body.game04-theme .g4-growth :is(.g4g-party,.g4g-grid) .g4g-portrait{--portrait-top:0%!important;--portrait-right:0%!important;--portrait-bottom:0%!important;--portrait-left:0%!important}
