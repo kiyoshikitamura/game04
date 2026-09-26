@@ -7,7 +7,7 @@
 - 共通Preview：https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app/
 - 作業ブランチ：work/game04-common-preview-20260925。PR最新と発生版の一致をGitHubで確認。
 - 修正前配信の独立照合：2026-09-26、公開 /api/qa/deployment が上記SHA・preview・同ブランチを返すことを確認。deploymentId dpl_3CnYeKBqsnCcnaJHKzvMw8GevUWM。
-- 現在の確認SHA：19c8f285b53c634a954f6f721ef2eaa6b04ab933（2026-09-26、共通Previewの公開識別APIで独立照合済み。新配信のユーザー実機確認待ち）。
+- 現在の確認SHA：d9abf8b095a9337aaf3424d0001a802b27a62252（2026-09-26、共通Previewの公開識別APIで独立照合済み。新配信のユーザー実機確認待ち）。
 - 直前のユーザー実機確認基準：d9be130。1-1クリアまでの確認済み12件は保持。
 - 端末はiPhone系との報告。機種・OS・ブラウザー版は未確認。原画像の23:47・4Gは引継ぎ記載であり、本作業で画像の独立閲覧は未実施。
 - 次の番号：DBG-056。削除・再利用・振り直し禁止。
@@ -653,3 +653,11 @@ DBG-014/015/030の統合接続追記：任務確認保存後に予約済み2-1�
 - 正式スキル72画像のアルファ確認：透過あり32、非透過40。素材の加工・他ゲーム素材への置換なし。戦闘中の装飾復活なし。
 - 型検査・ビルド成功。新PCのローカル既定DB設定は旧参照のため、限定UI検証は既存モックで実行。配信は既存共通Previewのブランチ設定を使用。
 - DBG-047/全68面監査は別担当。API/DB・戦闘計算・報酬・main・本番・GAME03の変更なし。配信済み/実機受入は配信記録の追記後に区別して報告。
+
+
+### B13配信記録（2026-09-26）
+
+- 修正/配信SHA：d9abf8b095a9337aaf3424d0001a802b27a62252。PR #37へpush。配信直前にPR最新を再取得し一致を確認。Ready dpl_7UUCJYyKwrwibadkRXbf9xJWitAX。共通Previewの公開識別APIでSHA/branch/previewを照合。b13/deployment.json。
+- 上の配信前表は保存時の履歴。005/040/048/049/050/051/052/055を配信済み・実機確認待ちへ更新。054は表示整理配信済み・名称案承認待ち、053は提案承認待ち・実装未着手。解決件数は増やさない。
+- 配信375/390限定検証成功、pageerror0。b13/deployed/browser-verification.json/画像。ユーザー実機/実アカウント保存の検証とは区別。
+- main・本番・GAME03、DBG-047/全68面監査は変更なし。秘密設定はGit除外。

@@ -1,6 +1,6 @@
 const {chromium}=require('playwright');
 const fs=require('fs'),assert=require('node:assert/strict');
-const out='docs/verification/device-debug/b13';fs.mkdirSync(out,{recursive:true});
+const out=process.env.B13_OUT||'docs/verification/device-debug/b13';fs.mkdirSync(out,{recursive:true});
 (async()=>{const browser=await chromium.launch({headless:true}),report=[];
 try{for(const width of [375,390]){
  const page=await browser.newPage({viewport:{width,height:664}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
@@ -20,7 +20,7 @@ try{for(const width of [375,390]){
  await show();await page.getByRole('button',{name:'4人初期化'}).click();await ready();await hide();await page.locator('.g4g-party>button').first().click();await page.locator('.g4g-passive').waitFor();await shot('passive');
  await page.locator('.g4g-modal .g4g-skill-row').first().click();await page.locator('.g4-asset-choice').first().waitFor();await shot('skill-selector');assert(await page.locator('.g4-asset-choice:disabled').count()>0);
  await page.getByRole('button',{name:'取消',exact:true}).click();await page.locator('.g4g-equipment-slots>button').first().click();await page.locator('.g4-asset-choice').first().waitFor();await shot('equipment-selector');
- await page.locator('.g4-asset-choice:not(:disabled)').first().click();await ready();if(await page.getByRole('button',{name:'閉じる',exact:true}).count()>1)await page.getByRole('button',{name:'閉じる',exact:true}).last().click();
+ await page.locator('.g4-asset-choice:not(:disabled)').first().click();await ready();if(await page.locator('.g4g-result').count())await page.getByRole('button',{name:'閉じる',exact:true}).last().click();
  if(await page.locator('.g4g-equipment-slots').count()){await page.locator('.g4g-equipment-slots>button').first().click();await page.getByText('この枠に装備中',{exact:true}).waitFor();await shot('equipment-current');await page.getByRole('button',{name:'取消',exact:true}).click();}
  await show();await page.getByRole('button',{name:'装備なし',exact:true}).click();await ready();await hide();await page.locator('.g4g-party>button').first().click();await page.locator('.g4g-equipment-slots>button').first().click();await page.getByText('この部位に装備できる所持品がありません。',{exact:true}).waitFor();await shot('equipment-none');
  await show();await page.getByRole('button',{name:'4人初期化'}).click();await ready();await hide();const footer=[];

@@ -59,4 +59,13 @@ GAME03参考ファイル: src/app/components/MissionPanel.tsx（読取のみ）�
 
 新PCにはGit、Node 22.16.0、npm 10.9.2、Chromium、GitHub取得認証、Vercel CLI認証があり、npm ci成功。追加のユーザーログイン操作は不要だった。agent-browser 0.27.0、Vercel CLI 60.1.3を使用。
 
+## 配信・検証確定（2026-09-26）
+
+- 修正/配信SHA: d9abf8b095a9337aaf3424d0001a802b27a62252。PR #37へpush済み。共通Previewの切替直前に再fetchしてremote一致を確認。
+- Vercel Ready: dpl_7UUCJYyKwrwibadkRXbf9xJWitAX。Git連携によるPreviewビルド成功。既存共通aliasは旧19c8f28を指していたため、ユーザー指定の共通Previewだけを新配信へ切替。切替後のクエリなし/api/qa/deploymentでSHA/branch/previewを確認（deployment.json）。
+- ローカル375/390: browser-verification.json、edge-verification.json、home-verification.json。保存失敗/再試行、取消、変更/解除、3/5人、SSR/初期/クエスト、切替/低モーション/離脱を含む。
+- 配信環境375/390: deployed/browser-verification.json、deployed/*.png。合成状態の実UI操作、装備保存後の装備中表示、Footer32px、pageerror0。ユーザー実アカウントの操作・サーバー保存は実施していない。
+- 型検査・ローカルビルド成功。Reactレビューでhook順序・既存cleanup保持・保存のrefロック・数値非変更・ボタン/スクロール/取消を確認。全画面監査・端末実機受入は実施していない。
+- 005/040/048/049/050/051/052/055は配信済み・実機確認待ち。054は表示整理を配信済み、固有名の承認待ち。053は提案のみ。未承認案の製品反映なし。
+
 Gitに含めない必要設定: .env.local、.env.preview.local、.vercel/project.json、Vercel CLI認証、ブラウザーの認証ストレージ。秘密値はコミットしない。Preview設定はVercelからブランチ指定で再取得できる。センシティブな値はpullされないため、実サーバー検証で必要になった場合のみ安全な手段で再設定する。UI限定検証は既存NEXT_PUBLIC_USE_MOCK_DBで実施し、配信設定へモックを持ち込まない。
