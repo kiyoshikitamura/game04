@@ -621,15 +621,6 @@ DBG-014/015/030の統合接続追記：任務確認保存後に予約済み2-1�
 - DBG-047/P1：調査中。指定戦闘の保存入力/seed/ルールで保存結果完全再現。250hit全て1、300行動敗北、BURST8回。現行正式敵masterは保存snapshotと一致。ガイド120%技に替えても同能力値0/20勝利。固定配置/覚醒0/LB0でLv20＋N装備Lv20も0/20。Lv30＋同装備20/20（111〜172行動）、Lv35/装備なし20/20（87〜123行動）。全条件共通20seedを記録。ガイドLv20は成立せず、Lv35/装備なし等の検証済み候補を提示。EXP/銭供給・元ガイド本文の特定は未完。難度/共通式を無断変更しない。
 - 型検査・Preview設定build・git diff --check成功。模擬戦の本体UI検証と既存tutorial限定ドメイン検証成功。API/DB/戦闘計算/既存保存結果の変更なし、DBG-032/035/043保持。保存・配信SHAは完了後追記。
 
-### DBG-046配信・031/045/047調査記録確定（2026-09-26）
-
-- 修正保存/配信SHA：19c8f285b53c634a954f6f721ef2eaa6b04ab933。PR #37へpushし、remote最新一致を配信直前に再確認。Vercel Preview Ready：dpl_3Dsf2ZNLBJsqiG1PJFh1HdfUL3E6。
-- 共通Preview：https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app/ 。公開識別APIでクエリなし稼働SHA/branch/previewを独立照合。b10/deployment.json。
-- 配信環境で実IntegratedTutorial/BattleView＋隔離合成保存層の375/390検証成功。状態再取得・完了通信失敗/再試行・連打1要求・完了保存後reloadの次ステップを確認。実画像デコード成功、pageerror0。b10/deployed-tutorial-browser.json/画像。初回の自動検証は画像準備前の時計進行で失敗し、検証器を実準備完了条件へ訂正後成功。製品側の追加修正ではない。
-- 本体applyTutorialTransition全17stepの二重進行拒否・武将3/スキル3の一意加入・残高不変も確認（b10/tutorial-state.json）。型検査/ローカルbuild/Vercel build成功。
-- DBG-046のみ「配信済み・実機確認待ち」。DBG-031/045は実報告のアイテム名/画面の照合が残るため「調査中」。DBG-047もガイド/到達育成水準の整理が残るため「調査中」。画像ファイルの追加差替え・戦闘難度/計算/効果・API/DB・既存進捗/報酬の変更なし。
-- 実機確認：模擬戦途中で別画面/タブへ移動→復帰し先頭へ戻らないこと、最後の結果操作で次ステップへ進むこと、完了後reloadで模擬戦へ戻らないこと。未完了状態のページ全体reloadは既存どおり再生開始。過去受入12件/BURST無料攻撃最大5回/開始演出SE1回を保持。main・本番・GAME03変更なし。
-
 ### DBG-047 全68面再監査担当からの返却（2026-09-26）
 
 - 状態：保存戦闘再現・ガイド条件修正完了／正式バランス案は承認待ち。監査基準PR37 d804d2a、配信19c8f28、API v8。専用ブランチ `work/game04-stage68-audit-20260926`。
@@ -655,3 +646,12 @@ DBG-014/015/030の統合接続追記：任務確認保存後に予約済み2-1�
 - 到達前確定供給の追加案：44箇所の前面初回報酬に24種類の技、N/R装備計40個、技素材755、汎用R魂180、銭2,800,500、武将EXP1,251,300、装備EXP1,555,100。既クリア各面1回＋ステージ/エリア任務だけからの保守的予算。既存報酬・無償輝石300は維持。日次等を計上していないため全ユーザーの不足額ではない。魂・ガチャ当選・将来報酬を暗黙の前提にしない。
 - 最終固定候補118,200試行。変更前と逆順対照を含む最終保存記録161,800試行（同一入力/seedの対照再計算を含む）。787編成の最初/最後のseedと68面全フレーム例の再生照合成功。BURST攻撃技のみ・無料最大5回・SP/ゲージ獲得なしを確認。不適合編成の上限待ちは14面に残し、解消済みとしない。
 - 提出先：[サマリーと承認対象](../stage68-five-tier-20260926/ISSUES_AND_PROPOSALS.md)、[68行監査表](../stage68-five-tier-20260926/AUDIT_TABLE.md)、[提案ガイド](../stage68-five-tier-20260926/GAME04_PROPOSED_GUIDE.md)、[TXT](../stage68-five-tier-20260926/GAME04_FIVE_TIER_REPORT.txt)、[統合指示](../stage68-five-tier-20260926/HANDOFF.md)。専用ブランチ/Draft PR39に保存。実ユーザー結果・所持品・進捗の変更なし。他番号の振り直し・画像/模擬戦/UI/音修正の配信待ちを発生させない。
+
+### DBG-046配信・031/045/047調査記録確定（2026-09-26）
+
+- 修正保存/配信SHA：19c8f285b53c634a954f6f721ef2eaa6b04ab933。PR #37へpushし、remote最新一致を配信直前に再確認。Vercel Preview Ready：dpl_3Dsf2ZNLBJsqiG1PJFh1HdfUL3E6。
+- 共通Preview：https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app/ 。公開識別APIでクエリなし稼働SHA/branch/previewを独立照合。b10/deployment.json。
+- 配信環境で実IntegratedTutorial/BattleView＋隔離合成保存層の375/390検証成功。状態再取得・完了通信失敗/再試行・連打1要求・完了保存後reloadの次ステップを確認。実画像デコード成功、pageerror0。b10/deployed-tutorial-browser.json/画像。初回の自動検証は画像準備前の時計進行で失敗し、検証器を実準備完了条件へ訂正後成功。製品側の追加修正ではない。
+- 本体applyTutorialTransition全17stepの二重進行拒否・武将3/スキル3の一意加入・残高不変も確認（b10/tutorial-state.json）。型検査/ローカルbuild/Vercel build成功。
+- DBG-046のみ「配信済み・実機確認待ち」。DBG-031/045は実報告のアイテム名/画面の照合が残るため「調査中」。DBG-047もガイド/到達育成水準の整理が残るため「調査中」。画像ファイルの追加差替え・戦闘難度/計算/効果・API/DB・既存進捗/報酬の変更なし。
+- 実機確認：模擬戦途中で別画面/タブへ移動→復帰し先頭へ戻らないこと、最後の結果操作で次ステップへ進むこと、完了後reloadで模擬戦へ戻らないこと。未完了状態のページ全体reloadは既存どおり再生開始。過去受入12件/BURST無料攻撃最大5回/開始演出SE1回を保持。main・本番・GAME03変更なし。
