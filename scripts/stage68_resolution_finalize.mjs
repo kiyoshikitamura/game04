@@ -4,11 +4,11 @@ import {gz,write,assetCheck} from './stage68_decision_lib.mjs';
 import {inputFor} from './rebuild_stage68_five_tier.mjs';
 const OUT='docs/verification/stage68-resolution-20260927',base='16d45e1abbecfa258f9996e6f297780a1fce5800',path='src/domain/redesign/data/quest65.json';
 const master=JSON.parse(execFileSync('git',['show',`${base}:${path}`],{encoding:'utf8',maxBuffer:20e6})),original=structuredClone(master),index=[],patch=[],combat=x=>hash(JSON.parse(JSON.stringify({party:x.party,waves:x.waves,rules:x.rules,earlyQuestAssist:x.earlyQuestAssist},(k,v)=>['image','name','description'].includes(k)?undefined:v)));
-for(const row of rows){let selected;for(const folder of ['fill-pressure-aoe','fill-pressure-combined','fill-pressure-refined']){const p=`${OUT}/${folder}/${row.stage}.json.gz`;if(fs.existsSync(p)){const d=gz(p);if(d.complete&&d.passed)selected={...d,evidence:p};}}
+for(const row of rows){let selected;for(const folder of ['fill-pressure-aoe','fill-pressure-combined','fill-pressure-refined','first-validation']){const p=`${OUT}/${folder}/${row.stage}.json.gz`;if(fs.existsSync(p)){const d=gz(p);if(d.complete&&d.passed)selected={...d,evidence:p};}}
  const old=stageResults(row);let cs=old.current;if(selected){cs=selected.records.filter(c=>c.validation).map(c=>({...c,evidence:selected.evidence}));const stage=master.stages.find(s=>s.designId===row.stage);
   for(const [wi,w]of stage.waves.entries())for(const [ei,e]of w.entries()){const n=selected.stageProposal.waves[wi][ei];assert.equal(e.id,n.id);for(const field of ['stats','skills','phases'])if(JSON.stringify(e[field])!==JSON.stringify(n[field])){patch.push({stage:row.stage,wave:wi+1,position:ei+1,enemy:e.id,field,before:e[field]??null,after:n[field]??null});if(n[field]===undefined)delete e[field];else e[field]=structuredClone(n[field]);}}
  }
- if(row.stage==='5-4'){const p=`${OUT}/band-gap/5-4.json.gz`;if(fs.existsSync(p)){const d=gz(p);if(d.selected)cs=[...cs,...d.records.filter(c=>c.name===d.selected).map(c=>({...c,evidence:p}))];}}
+ if(row.stage==='5-4'){const p=`${OUT}/band-gap/5-4-focused.json.gz`;if(fs.existsSync(p)){const d=gz(p);if(d.selected)cs=[...cs,...d.records.filter(c=>c.name===d.selected).map(c=>({...c,evidence:p}))];}}
  const a=assess(cs),stage=master.stages.find(s=>s.designId===row.stage);
  for(const c of cs){assert(assetCheck(c,row).covered,`${row.stage}: unfunded ${c.name}`);assert.equal(combat(c.input),combat(inputFor(stage,{party:c.input.party})),`${row.stage}: stale input ${c.name}`);}
  const growth=c=>hash({characters:c.state.characters,equipment:c.state.equipment});assert(new Set(a.tiers.filter(Boolean).map(growth)).size<=1,`${row.stage}: growth gradient`);

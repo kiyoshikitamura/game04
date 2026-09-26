@@ -30,8 +30,8 @@
             "level": 1,
             "stats": {
               "luk": 0,
-              "hp": 900,
-              "atk": 35,
+              "hp": 2700,
+              "atk": 350,
               "def": 10,
               "sp": 100
             },
@@ -51,8 +51,8 @@
             "level": 1,
             "stats": {
               "luk": 0,
-              "hp": 650,
-              "atk": 30,
+              "hp": 1950,
+              "atk": 300,
               "def": 10,
               "sp": 100
             },
@@ -2285,7 +2285,7 @@
             "level": 19,
             "stats": {
               "luk": 0,
-              "hp": 3430,
+              "hp": 2058,
               "atk": 510,
               "def": 550,
               "sp": 100
@@ -2297,6 +2297,26 @@
             "initialCount": 6,
             "initialSp": 30,
             "skills": [
+              {
+                "id": "3-1/W1/1/pressure-12",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "earth",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 12
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 470
+                  }
+                ],
+                "description": "自身の12回目の行動ごとに全体へ強打。通常の属性・防御・乱数・反撃を適用。"
+              },
               {
                 "id": "SKD034",
                 "name": "身構え",
@@ -2327,7 +2347,7 @@
             "level": 19,
             "stats": {
               "luk": 0,
-              "hp": 680,
+              "hp": 408,
               "atk": 180,
               "def": 260,
               "sp": 100
@@ -2338,7 +2358,28 @@
             "actionCount": 7,
             "initialCount": 7,
             "initialSp": 0,
-            "skills": [],
+            "skills": [
+              {
+                "id": "3-1/W1/2/pressure-12",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "earth",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 12
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 1330
+                  }
+                ],
+                "description": "自身の12回目の行動ごとに全体へ強打。通常の属性・防御・乱数・反撃を適用。"
+              }
+            ],
             "passives": []
           }
         ],
@@ -2350,7 +2391,7 @@
             "level": 20,
             "stats": {
               "luk": 0,
-              "hp": 3430,
+              "hp": 2058,
               "atk": 510,
               "def": 550,
               "sp": 100
@@ -2362,6 +2403,26 @@
             "initialCount": 6,
             "initialSp": 50,
             "skills": [
+              {
+                "id": "3-1/W2/1/pressure-12",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "water",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 12
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 470
+                  }
+                ],
+                "description": "自身の12回目の行動ごとに全体へ強打。通常の属性・防御・乱数・反撃を適用。"
+              },
               {
                 "id": "SKD008",
                 "name": "標準単体攻撃・水",
@@ -8295,7 +8356,7 @@
             "level": 52,
             "stats": {
               "luk": 0,
-              "hp": 14630,
+              "hp": 5267,
               "atk": 2280,
               "def": 2067,
               "sp": 150
@@ -8348,7 +8409,7 @@
             "level": 52,
             "stats": {
               "luk": 0,
-              "hp": 4750,
+              "hp": 1710,
               "atk": 1500,
               "def": 400,
               "sp": 100
@@ -8403,7 +8464,7 @@
             "level": 52,
             "stats": {
               "luk": 0,
-              "hp": 14630,
+              "hp": 5267,
               "atk": 2280,
               "def": 2067,
               "sp": 100
@@ -8415,6 +8476,26 @@
             "initialCount": 2,
             "initialSp": 50,
             "skills": [
+              {
+                "id": "6-2/2/1/pressure-12-p1.6",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "water",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 12
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 624
+                  }
+                ],
+                "description": "自身の12行動ごとに全体へ強打。共通計算式を使用。"
+              },
               {
                 "id": "SKD037",
                 "name": "威圧",
@@ -8456,7 +8537,7 @@
             "level": 53,
             "stats": {
               "luk": 0,
-              "hp": 6500,
+              "hp": 2340,
               "atk": 1193,
               "def": 450,
               "sp": 100
@@ -8467,7 +8548,28 @@
             "actionCount": 5,
             "initialCount": 5,
             "initialSp": 0,
-            "skills": [],
+            "skills": [
+              {
+                "id": "6-2/2/2/pressure-12-p1.6",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "earth",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 12
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 1184
+                  }
+                ],
+                "description": "自身の12行動ごとに全体へ強打。共通計算式を使用。"
+              }
+            ],
             "passives": [
               {
                 "id": "P05_earth",
@@ -8490,7 +8592,7 @@
             "level": 53,
             "stats": {
               "luk": 0,
-              "hp": 11704,
+              "hp": 4213,
               "atk": 2280,
               "def": 1493,
               "sp": 100
@@ -8502,6 +8604,26 @@
             "initialCount": 2,
             "initialSp": 50,
             "skills": [
+              {
+                "id": "6-2/3/1/pressure-12-p1.6",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "light",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 12
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 624
+                  }
+                ],
+                "description": "自身の12行動ごとに全体へ強打。共通計算式を使用。"
+              },
               {
                 "id": "SKD037",
                 "name": "威圧",
@@ -8543,7 +8665,7 @@
             "level": 53,
             "stats": {
               "luk": 0,
-              "hp": 8000,
+              "hp": 2880,
               "atk": 2000,
               "def": 450,
               "sp": 100
@@ -8555,6 +8677,26 @@
             "initialCount": 7,
             "initialSp": 50,
             "skills": [
+              {
+                "id": "6-2/3/2/pressure-12-p1.6",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "light",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 12
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 720
+                  }
+                ],
+                "description": "自身の12行動ごとに全体へ強打。共通計算式を使用。"
+              },
               {
                 "id": "SKD011",
                 "name": "標準単体攻撃・光",
@@ -8597,7 +8739,7 @@
             "level": 54,
             "stats": {
               "luk": 0,
-              "hp": 9363,
+              "hp": 3371,
               "atk": 276,
               "def": 2432,
               "sp": 100
@@ -8609,6 +8751,26 @@
             "initialCount": 2,
             "initialSp": 50,
             "skills": [
+              {
+                "id": "6-2/4/1/pressure-12-p1.6",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "fire",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 12
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 5120
+                  }
+                ],
+                "description": "自身の12行動ごとに全体へ強打。共通計算式を使用。"
+              },
               {
                 "id": "SKD037",
                 "name": "威圧",
@@ -8650,7 +8812,7 @@
             "level": 54,
             "stats": {
               "luk": 0,
-              "hp": 9600,
+              "hp": 3456,
               "atk": 201,
               "def": 650,
               "sp": 150
@@ -8662,6 +8824,26 @@
             "initialCount": 8,
             "initialSp": 100,
             "skills": [
+              {
+                "id": "6-2/4/2/pressure-12-p1.6",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "dark",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 12
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 7024
+                  }
+                ],
+                "description": "自身の12行動ごとに全体へ強打。共通計算式を使用。"
+              },
               {
                 "id": "SKD028",
                 "name": "崩し討ち",
@@ -14678,7 +14860,7 @@
             "level": 71,
             "stats": {
               "luk": 0,
-              "hp": 10150,
+              "hp": 6090,
               "atk": 2480,
               "def": 1270,
               "sp": 100
@@ -14710,7 +14892,7 @@
             "level": 71,
             "stats": {
               "luk": 0,
-              "hp": 10150,
+              "hp": 6090,
               "atk": 2480,
               "def": 1270,
               "sp": 100
@@ -14765,7 +14947,7 @@
             "level": 71,
             "stats": {
               "luk": 0,
-              "hp": 20290,
+              "hp": 12174,
               "atk": 5110,
               "def": 4627,
               "sp": 150
@@ -14777,6 +14959,26 @@
             "initialCount": 10,
             "initialSp": 150,
             "skills": [
+              {
+                "id": "8-2/2/1/pressure-16",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "water",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 16
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 310
+                  }
+                ],
+                "description": "自身の16回目の行動ごとに全体へ強打。通常の属性・防御・乱数・反撃を適用。"
+              },
               {
                 "id": "SKD014",
                 "name": "高威力単体攻撃・水",
@@ -14819,7 +15021,7 @@
             "level": 71,
             "stats": {
               "luk": 0,
-              "hp": 10150,
+              "hp": 6090,
               "atk": 2630,
               "def": 1270,
               "sp": 100
@@ -14851,7 +15053,7 @@
             "level": 71,
             "stats": {
               "luk": 0,
-              "hp": 10150,
+              "hp": 6090,
               "atk": 3360,
               "def": 1270,
               "sp": 100
@@ -15044,7 +15246,7 @@
             "level": 72,
             "stats": {
               "luk": 0,
-              "hp": 84560,
+              "hp": 50736,
               "atk": 2644,
               "def": 3360,
               "sp": 100
@@ -15096,7 +15298,7 @@
             "level": 72,
             "stats": {
               "luk": 0,
-              "hp": 3810,
+              "hp": 2286,
               "atk": 3017,
               "def": 0,
               "sp": 100
@@ -15148,7 +15350,7 @@
             "level": 72,
             "stats": {
               "luk": 0,
-              "hp": 3810,
+              "hp": 2286,
               "atk": 3017,
               "def": 0,
               "sp": 100
@@ -15202,7 +15404,7 @@
             "level": 72,
             "stats": {
               "luk": 0,
-              "hp": 25370,
+              "hp": 15222,
               "atk": 1973,
               "def": 2856,
               "sp": 150
@@ -15214,6 +15416,26 @@
             "initialCount": 9,
             "initialSp": 125,
             "skills": [
+              {
+                "id": "8-3/2/1/pressure-12",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "earth",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 12
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 820
+                  }
+                ],
+                "description": "自身の12回目の行動ごとに全体へ強打。通常の属性・防御・乱数・反撃を適用。"
+              },
               {
                 "id": "SKD036",
                 "name": "守りの陣",
@@ -15276,7 +15498,7 @@
             "level": 72,
             "stats": {
               "luk": 0,
-              "hp": 3718,
+              "hp": 2231,
               "atk": 3660,
               "def": 3360,
               "sp": 100
@@ -15328,7 +15550,7 @@
             "level": 72,
             "stats": {
               "luk": 0,
-              "hp": 3810,
+              "hp": 2286,
               "atk": 9410,
               "def": 0,
               "sp": 100
@@ -15380,7 +15602,7 @@
             "level": 72,
             "stats": {
               "luk": 0,
-              "hp": 3810,
+              "hp": 2286,
               "atk": 9410,
               "def": 0,
               "sp": 100
@@ -15434,7 +15656,7 @@
             "level": 72,
             "stats": {
               "luk": 0,
-              "hp": 12990,
+              "hp": 7794,
               "atk": 3213,
               "def": 4650,
               "sp": 100
@@ -15446,6 +15668,26 @@
             "initialCount": 9,
             "initialSp": 75,
             "skills": [
+              {
+                "id": "8-3/4/1/pressure-12",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "wind",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 12
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 510
+                  }
+                ],
+                "description": "自身の12回目の行動ごとに全体へ強打。通常の属性・防御・乱数・反撃を適用。"
+              },
               {
                 "id": "SKD022",
                 "name": "全体攻撃・風",
@@ -17268,7 +17510,7 @@
             "level": 80,
             "stats": {
               "luk": 0,
-              "hp": 24000,
+              "hp": 14400,
               "atk": 4600,
               "def": 900,
               "sp": 100
@@ -17300,7 +17542,7 @@
             "level": 80,
             "stats": {
               "luk": 0,
-              "hp": 38000,
+              "hp": 22800,
               "atk": 3600,
               "def": 1800,
               "sp": 100
@@ -17334,7 +17576,7 @@
             "level": 80,
             "stats": {
               "luk": 0,
-              "hp": 17000,
+              "hp": 10200,
               "atk": 3400,
               "def": 640,
               "sp": 100
@@ -17391,7 +17633,7 @@
             "level": 80,
             "stats": {
               "luk": 0,
-              "hp": 24000,
+              "hp": 14400,
               "atk": 6000,
               "def": 1000,
               "sp": 100
@@ -17446,7 +17688,7 @@
             "level": 80,
             "stats": {
               "luk": 0,
-              "hp": 80000,
+              "hp": 48000,
               "atk": 4480,
               "def": 2000,
               "sp": 100
@@ -17500,7 +17742,7 @@
             "level": 80,
             "stats": {
               "luk": 0,
-              "hp": 24000,
+              "hp": 14400,
               "atk": 4600,
               "def": 900,
               "sp": 110
@@ -17552,7 +17794,7 @@
             "level": 80,
             "stats": {
               "luk": 0,
-              "hp": 22000,
+              "hp": 13200,
               "atk": 5600,
               "def": 900,
               "sp": 100
@@ -17607,7 +17849,7 @@
             "level": 80,
             "stats": {
               "luk": 0,
-              "hp": 80000,
+              "hp": 48000,
               "atk": 2751,
               "def": 2000,
               "sp": 150
@@ -17668,7 +17910,7 @@
             "level": 80,
             "stats": {
               "luk": 0,
-              "hp": 104000,
+              "hp": 62400,
               "atk": 3654,
               "def": 2200,
               "sp": 150
@@ -17680,6 +17922,26 @@
             "initialCount": 9,
             "initialSp": 125,
             "skills": [
+              {
+                "id": "8-8/6/1/pressure-16",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "fire",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 16
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 480
+                  }
+                ],
+                "description": "自身の16回目の行動ごとに全体へ強打。通常の属性・防御・乱数・反撃を適用。"
+              },
               {
                 "id": "SKD035",
                 "name": "鬨の声",
@@ -17740,7 +18002,7 @@
             "level": 80,
             "stats": {
               "luk": 0,
-              "hp": 22000,
+              "hp": 13200,
               "atk": 4046,
               "def": 900,
               "sp": 100
@@ -17752,6 +18014,26 @@
             "initialCount": 7,
             "initialSp": 90,
             "skills": [
+              {
+                "id": "8-8/6/2/pressure-16",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "fire",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 16
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 440
+                  }
+                ],
+                "description": "自身の16回目の行動ごとに全体へ強打。通常の属性・防御・乱数・反撃を適用。"
+              },
               {
                 "id": "SKD040",
                 "name": "治癒の祈り",
@@ -17938,9 +18220,9 @@
             "level": 80,
             "stats": {
               "luk": 0,
-              "hp": 48000,
-              "atk": 3500,
-              "def": 3200,
+              "hp": 14400,
+              "atk": 6125,
+              "def": 3040,
               "sp": 100
             },
             "order": 0,
@@ -17950,6 +18232,26 @@
             "initialCount": 7,
             "initialSp": 30,
             "skills": [
+              {
+                "id": "9-1/1/1/pressure-16",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "earth",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 16
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 300
+                  }
+                ],
+                "description": "自身の16回目の行動ごとに全体へ強打。通常の属性・防御・乱数・反撃を適用。"
+              },
               {
                 "id": "SKD034",
                 "name": "身構え",
@@ -17991,9 +18293,9 @@
             "level": 80,
             "stats": {
               "luk": 0,
-              "hp": 24000,
-              "atk": 4000,
-              "def": 1400,
+              "hp": 7200,
+              "atk": 7000,
+              "def": 1330,
               "sp": 150
             },
             "order": 1,
@@ -18003,6 +18305,26 @@
             "initialCount": 5,
             "initialSp": 75,
             "skills": [
+              {
+                "id": "9-1/1/2/pressure-16",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "wind",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 16
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 260
+                  }
+                ],
+                "description": "自身の16回目の行動ごとに全体へ強打。通常の属性・防御・乱数・反撃を適用。"
+              },
               {
                 "id": "SKD036",
                 "name": "守りの陣",
@@ -18046,9 +18368,9 @@
             "level": 80,
             "stats": {
               "luk": 0,
-              "hp": 56890,
-              "atk": 3697,
-              "def": 4003,
+              "hp": 17067,
+              "atk": 6470,
+              "def": 3803,
               "sp": 180
             },
             "order": 0,
@@ -18058,6 +18380,26 @@
             "initialCount": 9,
             "initialSp": 125,
             "skills": [
+              {
+                "id": "9-1/2/1/pressure-16",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "earth",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 16
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 280
+                  }
+                ],
+                "description": "自身の16回目の行動ごとに全体へ強打。通常の属性・防御・乱数・反撃を適用。"
+              },
               {
                 "id": "SKD036",
                 "name": "守りの陣",
@@ -18771,9 +19113,9 @@
             "level": 82,
             "stats": {
               "luk": 0,
-              "hp": 84720,
-              "atk": 3340,
-              "def": 3403,
+              "hp": 25416,
+              "atk": 5010,
+              "def": 3233,
               "sp": 100
             },
             "order": 0,
@@ -18783,6 +19125,26 @@
             "initialCount": 7,
             "initialSp": 30,
             "skills": [
+              {
+                "id": "9-3/1/1/pressure-16",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "earth",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 16
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 360
+                  }
+                ],
+                "description": "自身の16回目の行動ごとに全体へ強打。通常の属性・防御・乱数・反撃を適用。"
+              },
               {
                 "id": "SKD034",
                 "name": "身構え",
@@ -18824,9 +19186,9 @@
             "level": 82,
             "stats": {
               "luk": 0,
-              "hp": 28620,
-              "atk": 4133,
-              "def": 1910,
+              "hp": 8586,
+              "atk": 6200,
+              "def": 1815,
               "sp": 150
             },
             "order": 1,
@@ -18836,6 +19198,26 @@
             "initialCount": 5,
             "initialSp": 75,
             "skills": [
+              {
+                "id": "9-3/1/2/pressure-16",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "fire",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 16
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 300
+                  }
+                ],
+                "description": "自身の16回目の行動ごとに全体へ強打。通常の属性・防御・乱数・反撃を適用。"
+              },
               {
                 "id": "SKD046",
                 "name": "守護の札",
@@ -18877,9 +19259,9 @@
             "level": 82,
             "stats": {
               "luk": 0,
-              "hp": 21790,
-              "atk": 5692,
-              "def": 1590,
+              "hp": 6537,
+              "atk": 8538,
+              "def": 1511,
               "sp": 180
             },
             "order": 2,
@@ -18889,6 +19271,26 @@
             "initialCount": 3,
             "initialSp": 180,
             "skills": [
+              {
+                "id": "9-3/1/3/pressure-16",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "light",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 16
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 220
+                  }
+                ],
+                "description": "自身の16回目の行動ごとに全体へ強打。通常の属性・防御・乱数・反撃を適用。"
+              },
               {
                 "id": "SKD040",
                 "name": "治癒の祈り",
@@ -18932,9 +19334,9 @@
             "level": 82,
             "stats": {
               "luk": 0,
-              "hp": 17768,
-              "atk": 2751,
-              "def": 4003,
+              "hp": 5330,
+              "atk": 4127,
+              "def": 3803,
               "sp": 150
             },
             "order": 0,
@@ -18944,6 +19346,26 @@
             "initialCount": 8,
             "initialSp": 50,
             "skills": [
+              {
+                "id": "9-3/2/1/pressure-16",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "earth",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 16
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 440
+                  }
+                ],
+                "description": "自身の16回目の行動ごとに全体へ強打。通常の属性・防御・乱数・反撃を適用。"
+              },
               {
                 "id": "SKD009",
                 "name": "標準単体攻撃・土",
@@ -18984,9 +19406,9 @@
             "level": 82,
             "stats": {
               "luk": 0,
-              "hp": 18317,
-              "atk": 2986,
-              "def": 1910,
+              "hp": 5495,
+              "atk": 4479,
+              "def": 1815,
               "sp": 150
             },
             "order": 1,
@@ -18996,6 +19418,26 @@
             "initialCount": 5,
             "initialSp": 75,
             "skills": [
+              {
+                "id": "9-3/2/2/pressure-16",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "dark",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 16
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 410
+                  }
+                ],
+                "description": "自身の16回目の行動ごとに全体へ強打。通常の属性・防御・乱数・反撃を適用。"
+              },
               {
                 "id": "SKD046",
                 "name": "守護の札",
@@ -19037,9 +19479,9 @@
             "level": 82,
             "stats": {
               "luk": 0,
-              "hp": 21790,
-              "atk": 1462,
-              "def": 1590,
+              "hp": 6537,
+              "atk": 2193,
+              "def": 1511,
               "sp": 180
             },
             "order": 2,
@@ -19049,6 +19491,26 @@
             "initialCount": 3,
             "initialSp": 180,
             "skills": [
+              {
+                "id": "9-3/2/3/pressure-16",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "light",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 16
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 830
+                  }
+                ],
+                "description": "自身の16回目の行動ごとに全体へ強打。通常の属性・防御・乱数・反撃を適用。"
+              },
               {
                 "id": "SKD040",
                 "name": "治癒の祈り",
@@ -20620,7 +21082,7 @@
             "level": 87,
             "stats": {
               "luk": 0,
-              "hp": 38720,
+              "hp": 23232,
               "atk": 5450,
               "def": 1940,
               "sp": 100
@@ -20652,7 +21114,7 @@
             "level": 87,
             "stats": {
               "luk": 0,
-              "hp": 38720,
+              "hp": 23232,
               "atk": 5450,
               "def": 1940,
               "sp": 100
@@ -20706,7 +21168,7 @@
             "level": 87,
             "stats": {
               "luk": 0,
-              "hp": 159720,
+              "hp": 95832,
               "atk": 3026,
               "def": 4840,
               "sp": 180
@@ -20718,6 +21180,26 @@
             "initialCount": 10,
             "initialSp": 150,
             "skills": [
+              {
+                "id": "9-8/2/1/pressure-16",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "fire",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 16
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 600
+                  }
+                ],
+                "description": "自身の16回目の行動ごとに全体へ強打。通常の属性・防御・乱数・反撃を適用。"
+              },
               {
                 "id": "SKD013",
                 "name": "高威力単体攻撃・火",
@@ -24328,9 +24810,9 @@
             "level": 96,
             "stats": {
               "luk": 0,
-              "hp": 30750,
-              "atk": 37450,
-              "def": 420,
+              "hp": 18450,
+              "atk": 46813,
+              "def": 357,
               "sp": 100
             },
             "order": 0,
@@ -24360,9 +24842,9 @@
             "level": 96,
             "stats": {
               "luk": 0,
-              "hp": 52900,
-              "atk": 4944,
-              "def": 3220,
+              "hp": 31740,
+              "atk": 6180,
+              "def": 2737,
               "sp": 50
             },
             "order": 1,
@@ -24414,9 +24896,9 @@
             "level": 96,
             "stats": {
               "luk": 0,
-              "hp": 41940,
-              "atk": 1047,
-              "def": 4709,
+              "hp": 25164,
+              "atk": 1309,
+              "def": 4003,
               "sp": 150
             },
             "order": 0,
@@ -24426,6 +24908,26 @@
             "initialCount": 9,
             "initialSp": 50,
             "skills": [
+              {
+                "id": "10-7/2/1/pressure-16",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "earth",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 16
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 1380
+                  }
+                ],
+                "description": "自身の16回目の行動ごとに全体へ強打。通常の属性・防御・乱数・反撃を適用。"
+              },
               {
                 "id": "SKD009",
                 "name": "標準単体攻撃・土",
@@ -24468,9 +24970,9 @@
             "level": 96,
             "stats": {
               "luk": 0,
-              "hp": 21474,
-              "atk": 2776,
-              "def": 4709,
+              "hp": 12884,
+              "atk": 3470,
+              "def": 4003,
               "sp": 180
             },
             "order": 0,
@@ -24480,6 +24982,26 @@
             "initialCount": 9,
             "initialSp": 150,
             "skills": [
+              {
+                "id": "10-7/3/1/pressure-16",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "fire",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 16
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 520
+                  }
+                ],
+                "description": "自身の16回目の行動ごとに全体へ強打。通常の属性・防御・乱数・反撃を適用。"
+              },
               {
                 "id": "SKD013",
                 "name": "高威力単体攻撃・火",
@@ -24520,9 +25042,9 @@
             "level": 96,
             "stats": {
               "luk": 0,
-              "hp": 24730,
-              "atk": 2665,
-              "def": 3450,
+              "hp": 14838,
+              "atk": 3331,
+              "def": 2933,
               "sp": 150
             },
             "order": 1,
@@ -24532,6 +25054,26 @@
             "initialCount": 5,
             "initialSp": 75,
             "skills": [
+              {
+                "id": "10-7/3/2/pressure-16",
+                "name": "長期戦の強打",
+                "image": "",
+                "rarity": "N",
+                "element": "fire",
+                "spCost": 1,
+                "condition": {
+                  "type": "every_n_actions",
+                  "value": 16
+                },
+                "target": "all_enemies",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 550
+                  }
+                ],
+                "description": "自身の16回目の行動ごとに全体へ強打。通常の属性・防御・乱数・反撃を適用。"
+              },
               {
                 "id": "SKD046",
                 "name": "守護の札",
