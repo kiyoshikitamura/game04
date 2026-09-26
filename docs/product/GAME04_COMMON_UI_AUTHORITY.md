@@ -769,3 +769,15 @@ CTAに限らず、読み込み中であることをスピナーで表示する�
 - 登用結果は48px画像＋名称＋40×20レアリティ＋獲得状態の1列自然高。本文16/補助14px。10件でも名前列を極端に狭めず、共通Dialog本文のスクロールだけで末尾へ到達する。読み取りカタログはeffect再実行で同じPromiseを共有し、別の書込ロックに衝突させない。
 
 - 出撃準備のレアリティにも同じRarityBadge smallを使用する。キャンセル/出撃はCanonicalDialog固定操作、出撃中はラベルを置換せずbusy表示。編成変更はActionButton compact。出撃準備→個別スキル/パッシブ、共闘の履歴→受取→再表示の無効、SSR選択交換3カテゴリを375/390×480で確認する。
+
+
+### 19.9 起動・序盤導線と操作行の追加適用（2026-09-27）
+
+- 起動待ちは BrandedLoading、起動失敗・メンテナンスは Game04EntryState → ScreenState。失敗本文を読み込みレイヤーの背後に併記しない。主本文16px、補助14px、再試行は標準 ActionButton。
+- タイトルの開始・再開・アカウント切替、序盤編成保存、メニューのお知らせ/BOXも ActionButton。タイトルの TAP TO START はタイトル演出用の例外。
+- CanonicalDialog の通常/compactとも操作は高さ48px以上・幅104px以上。ラベルは1行。操作行はボタンの内容幅と左右16pxを確保し、複数操作が入らない場合は行を折り返す。均等幅のためにラベルや内側余白を潰さない。本文だけがスクロールし、操作行は本文の外に置く。
+- ConfirmDialog は確定ラベルと処理中ラベルの双方で必要な幅を保持する。現行GAME04からは presentation=canonical を明示する。旧戦闘結果の専用表示は legacy 指定の場合だけ。
+- 代表見本は /qa/common-ui-audit?view=consumer-early&state=equip-fire と consumer-title / consumer-entry / consumer-inventory。実利用部品を直接描画し、合成失敗と実API記録は別証跡とする。
+- 再発確認では操作名の幅だけでなく、左右のpadding領域へ文字が侵入していないことを検出する。実機固有のブラウザーUI・キーボード確認は別記する。
+
+- 本陣の交流本文は16px、名前/補足14px以上。縮小による3件押し込みはせず、自然行高と本文の折返しを使う。RewardReceiptは32pxアイコン、名称/数量16px、補足14px、名称列minmax(0,1fr)の一覧とする。

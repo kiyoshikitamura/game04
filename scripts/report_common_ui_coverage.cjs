@@ -3,6 +3,9 @@ const fs=require('fs');const dir='docs/verification/common-ui-20260927',ev=dir+'
 const cases=[];
 const add=(id,surface,rule,components,mode,evidence,dimensions,notes='',status='適用確認済み')=>cases.push({id,surface,rule,components,mode,evidence,dimensions,status,notes});
 for(const [group,file,surface,parts,mode] of [
+ ['entry-consumers','consumer-states-report.json','起動・タイトル・序盤・準備・確認','Game04EntryState / TitleView / EarlyRetentionGuide / PreparationModal / ConfirmDialog','合成状態'],
+ ['storage-states','storage-states-report.json','BOX・お知らせ・所持品の状態','InboxPanel / InventoryView / CanonicalDialog','合成API応答・実部品'],
+ ['home-states','home-states-report.json','本陣交流の失敗・回復','HomeView / ActionButton / Modal','合成API応答・実部品'],
  ['growth','categories-report.json','育成一覧・選択','GrowthView / ListControls / AssetChoice / ElementBadge / RarityBadge','合成状態'],
  ['growth-detail','growth-states-report.json','育成詳細・処理結果','GrowthView / GrowthControls / Modal / ActionButton','合成状態'],
  ['secondary','secondary-report.json','出撃準備/共闘/SSR選択交換','PreparationModal / RaidView / FormalGachaHub / CanonicalDialog','合成状態'],
@@ -33,4 +36,4 @@ for(const [id,surface,parts,reason] of [
  ])add(id,surface,'§19.7',parts,'未実施','', '',reason,'未確認');
 add('admin','管理KPI認証後の画面','製品UIとは別用途','admin routes','対象外','','','ゲーム内の導線なし。管理権限を取得・迂回せず、認証後の管理業務UIは変更しない。','対象外');
 const counts=cases.reduce((a,r)=>(a[r.status]=(a[r.status]||0)+1,a),{});fs.writeFileSync(dir+'/consumer-cases.json',JSON.stringify({counts,definition:'画面・状態のケース。幅違いを重複加算せず、全画面数を意味しない。合成/実APIを区別。',cases},null,2));
-const esc=v=>String(v).replaceAll('|','\\|').replaceAll('\n',' ');fs.writeFileSync(dir+'/consumer-cases.md','# 画面・状態の適用確認表\n\n'+JSON.stringify(counts)+'。静的642項目はこの合格数に加算しない。ケースごとに確認範囲を限定し、同じ画面でも合成と実APIは別記録。\n\n|ID / 画面・状態|正本 / 使用部品|確認方法・寸法|状態|証跡 / 限界|\n|---|---|---|---|---|\n'+cases.map(r=>`|${esc(r.id+' / '+r.surface)}|${esc(r.rule+' / '+r.components)}|${esc(r.mode+' '+r.dimensions)}|${r.status}|${esc(r.evidence+' '+r.notes)}|`).join('\n')+'\n');console.log(counts);
+const esc=v=>String(v).replaceAll('|','\\|').replaceAll('\n',' ');fs.writeFileSync(dir+'/consumer-cases.md','# 画面・状態の適用確認表\n\n'+JSON.stringify(counts)+'。静的抽出項目はこの合格数に加算しない。ケースごとに確認範囲を限定し、同じ画面でも合成と実APIは別記録。\n\n|ID / 画面・状態|正本 / 使用部品|確認方法・寸法|状態|証跡 / 限界|\n|---|---|---|---|---|\n'+cases.map(r=>`|${esc(r.id+' / '+r.surface)}|${esc(r.rule+' / '+r.components)}|${esc(r.mode+' '+r.dimensions)}|${r.status}|${esc(r.evidence+' '+r.notes)}|`).join('\n')+'\n');console.log(counts);

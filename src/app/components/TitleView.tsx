@@ -1,4 +1,5 @@
 "use client";
+import ActionButton from './ui/ActionButton';
 import BrandedLoading from './ui/BrandedLoading';
 import React, { useEffect, useRef, useState } from "react";
 import { useGame } from "../context/GameContext";
@@ -94,9 +95,9 @@ export default function TitleView() {
             {!entryActivated ? (
               <button type="button" className="title-tap-text blink-animation" onClick={activateEntry}>TAP TO START</button>
             ) : <div className="title-entry-actions">
-              {canStartNewGame && <button className="semantic-cta semantic-cta--primary title-entry-primary" onClick={(event) => void beginNewGame(event)} disabled={setupLoading} aria-busy={setupLoading}>はじめから</button>}
-              {entryReady && <button className={`semantic-cta ${session ? "semantic-cta--primary title-entry-primary" : "semantic-cta--secondary title-entry-secondary"}`} onClick={(event) => void openContinue(event)} disabled={resumeLoading}>{continueLabel}</button>}
-              {entryReady && session && !isAnonymousSession && <button className="semantic-cta semantic-cta--secondary title-entry-secondary" onClick={(event) => { event.stopPropagation(); void handleLogout(); }}>ログアウト／別アカウント</button>}
+              {canStartNewGame && <ActionButton variant="primary" className="title-entry-primary" onClick={(event) => void beginNewGame(event)} disabled={setupLoading} aria-busy={setupLoading}>はじめから</ActionButton>}
+              {entryReady && <ActionButton variant={session ? "primary" : "secondary"} className={session ? "title-entry-primary" : "title-entry-secondary"} onClick={(event) => void openContinue(event)} disabled={resumeLoading}>{continueLabel}</ActionButton>}
+              {entryReady && session && !isAnonymousSession && <ActionButton className="title-entry-secondary" onClick={(event) => { event.stopPropagation(); void handleLogout(); }}>ログアウト／別アカウント</ActionButton>}
               {!entryReady && <small className="title-entry-status" role="status">セッション確認中</small>}
               {errorMessage && <div className="title-entry-error" role="alert">{errorMessage}</div>}
             </div>}
@@ -104,7 +105,7 @@ export default function TitleView() {
         </div>}
 
         <TitleLegalFooter />
-        <ConfirmDialog key={confirmDialogConfig?.dialogId} {...confirmDialogConfig} />
+        <ConfirmDialog key={confirmDialogConfig?.dialogId} {...confirmDialogConfig} presentation="canonical" />
       </div>
     </div>
   );

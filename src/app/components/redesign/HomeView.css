@@ -9,9 +9,9 @@ body.game04-theme .g4-home-person{position:absolute;height:96%;width:100%;max-wi
 body.game04-theme .g4-home .g4-home-effect{z-index:3;pointer-events:none}
 body.game04-theme .g4-home-shortcuts{position:absolute;top:9px;left:9px;z-index:4;display:grid;gap:7px;width:88px}
 body.game04-theme .g4-home-shortcuts button{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:63px;width:88px;border:1px solid #b69a6170;border-radius:3px;background:linear-gradient(120deg,#090909e6,#130c0bbf);padding:5px 2px;color:#fff3d5;font-size:15px;text-shadow:0 1px 3px #000;line-height:1.25;box-shadow:0 2px 4px #0005}
-body.game04-theme .g4-home-shortcuts button.g4-home-switch{min-height:44px;font-size:12px;border-color:transparent;background:#080709b5;padding:7px 0}
+body.game04-theme .g4-home-shortcuts button.g4-home-switch{min-height:44px;font-size:14px;border-color:transparent;background:#080709b5;padding:7px 0}
 body.game04-theme .g4-home-shortcuts img{width:29px;height:28px;object-fit:contain;}
-body.game04-theme .g4-home-shortcuts small{font-size:9px;line-height:1.2;color:#eee1c4}
+body.game04-theme .g4-home-shortcuts small{font-size:14px;line-height:1.2;color:#eee1c4}
 body.game04-theme .g4-home-shortcuts button:disabled{opacity:.7;filter:grayscale(1)}
 body.game04-theme .g4-home-shortcuts i{position:absolute;right:3px;top:3px;width:8px;height:8px;border-radius:50%;background:#e44133;box-shadow:0 0 5px #ffae6c}
 body.game04-theme .g4-home-bottom{position:relative;padding:7px 10px 0;z-index:3}
@@ -25,25 +25,23 @@ body.game04-theme .g4-home-territory{background-color:#091c2b;background-image:u
 body.game04-theme .g4-home-encounter{width:100%;height:54px;margin:0 0 10px;display:flex;align-items:center;gap:6px;padding:6px 8px;background-color:#160a0ae8;text-align:left;white-space:nowrap;}
 body.game04-theme .g4-home-encounter>img{width:28px;height:31px;object-fit:contain;flex:none}
 body.game04-theme .g4-home-encounter strong{font-size:17px;color:#fff1d1;text-shadow:0 0 6px #ff3c16;flex:none}
-body.game04-theme .g4-home-boss{font-size:12px;overflow:hidden;text-overflow:ellipsis;min-width:0;border-left:1px solid #ae8a52;padding-left:6px;}
+body.game04-theme .g4-home-boss{font-size:14px;overflow:hidden;text-overflow:ellipsis;min-width:0;border-left:1px solid #ae8a52;padding-left:6px;}
 body.game04-theme .g4-home-encounter time{font:11px G4NotoSans,sans-serif;margin-left:auto;font-variant-numeric:tabular-nums;flex:none}
-body.game04-theme .g4-home-confirm{border:1px solid #c19b52;background:linear-gradient(#9b311a,#4d0d0b);border-radius:4px;padding:7px 5px;font-size:13px;flex:none}
 body.game04-theme .g4-home-community{background:#0d0b0cdd;border:1px solid #a78a54;border-radius:6px;overflow:hidden;}
 body.game04-theme .g4-home-community .rd-tabs{margin:0;border-bottom:1px solid #a78a5480;height:38px}
 body.game04-theme .g4-home-community .rd-tabs button{padding:5px 2px;font:17px G4NotoSerif,serif;position:relative;border:0;color:#fff5dd}
 body.game04-theme .g4-home-community .rd-tabs button+button:before{content:'';position:absolute;left:0;top:7px;bottom:7px;width:1px;background:linear-gradient(transparent,#b99b5d,transparent)}
 body.game04-theme .g4-home-community .rd-tabs button.active{background:linear-gradient(#72231d,#c9401e);border:1px solid #dbad60;border-radius:5px;box-shadow:inset 0 0 8px #c38c2155}
 body.game04-theme .g4-home-community-lines{padding:0 7px;min-height:122px}
-body.game04-theme .g4-home-community .rd-message{min-height:40px;align-items:center;margin:0;padding:6px 0;font-size:11px;border-bottom:1px solid #9b794745;gap:5px}
+body.game04-theme .g4-home-community .rd-message{min-height:40px;align-items:center;margin:0;padding:6px 0;font-size:14px;border-bottom:1px solid #9b794745;gap:5px}
 body.game04-theme .g4-home-community .rd-message:last-child{border:0}
-body.game04-theme .g4-home-community .rd-message>.rd-text-button{font-size:11px;min-width:62px;max-width:80px;flex:none;padding:0 3px;text-align:left}
+body.game04-theme .g4-home-community .rd-message>.rd-text-button{font-size:14px;min-width:62px;max-width:80px;flex:none;padding:0 3px;text-align:left}
 body.game04-theme .g4-home-community .rd-muted{margin:15px 4px;min-height:83px;font-family:G4NotoSans,sans-serif}
-body.game04-theme .g4-home-community-open{display:block;margin-left:auto;padding:3px 10px 7px;color:#e7c690;border:0;background:none;font-size:11px}
 body.game04-theme .g4-home-banner{position:relative;display:flex;align-items:center;justify-content:flex-end;width:100%;height:61px;margin-top:9px;padding:3px 13px;background-color:#290911;background-image:url('/ui/raid/v2/panel-sakura-overlay.png'),linear-gradient(90deg,#8c2634,#12090edc);gap:24px;text-shadow:0 2px 4px #000}
 body.game04-theme .g4-home-banner-person{position:absolute;left:4%;top:-53%;width:66%;height:280%;object-fit:contain;object-position:center top;pointer-events:none;mask-image:linear-gradient(90deg,transparent,#000 20%,#000 75%,transparent)}
 body.game04-theme .g4-home-banner strong,body.game04-theme .g4-home-banner>span{position:relative;z-index:1;font-size:26px;letter-spacing:.15em}
 body.game04-theme .g4-home-banner>span{font-size:35px}
-body.game04-theme .g4-home-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:180px;height:100%;font-size:13px;color:#eedaa5;background:#190f11b5}
+body.game04-theme .g4-home-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:180px;height:100%;font-size:14px;color:#eedaa5;background:#190f11b5}
 body.game04-theme .g4-home-selector{width:min(88vw,470px);max-height:84dvh;background:#0c0a0bec url('/ui/raid/v2/panel-sakura-overlay.png') center/100% 100%;border:2px solid #ddbc69;border-radius:13px;box-shadow:0 15px 70px #000d,inset 0 0 0 3px #98723455;font-family:G4NotoSerif,'Noto Serif JP',serif;}
 body.game04-theme .g4-home-selector .rd-modal-header{padding:9px 11px;border-bottom:1px solid #b19751;background:#06070844;position:relative;min-height:48px}
 body.game04-theme .g4-home-selector .rd-modal-header h2{font:650 26px G4NotoSerif,serif;letter-spacing:.14em;color:#f6d778;text-align:center;width:100%;padding-left:30px}
@@ -57,22 +55,22 @@ body.game04-theme .g4-home-choice{min-width:0;border:1px solid #b89e5e;border-ra
 body.game04-theme .g4-home-choice[aria-pressed=true]{border:2px solid #ffe7ac;box-shadow:0 0 9px #ffbd4a,inset 0 0 7px #f6ab32}
 body.game04-theme .g4-home-choice-art{width:100%;aspect-ratio: .73;background-position:center;background-size:cover;overflow:hidden}
 body.game04-theme .g4-home-choice-art>img{width:100%;height:100%;object-fit:cover;object-position:center 14%;}
-body.game04-theme .g4-home-choice>strong{display:flex;align-items:center;justify-content:center;width:100%;font-size:13px;line-height:1.35;min-height:34px;padding:4px 2px;border-top:1px solid #b89b5366;font-weight:600;}
-body.game04-theme .g4-home-choice>small{width:100%;min-height:23px;padding:3px 2px;color:#f6d471;font-size:11px;line-height:1.35;border-top:1px solid #a88b5155;background:url('/ui/raid/v2/panel-sakura-overlay.png') center/100% 100%}
+body.game04-theme .g4-home-choice>strong{display:flex;align-items:center;justify-content:center;width:100%;font-size:14px;line-height:1.35;min-height:34px;padding:4px 2px;border-top:1px solid #b89b5366;font-weight:600;}
+body.game04-theme .g4-home-choice>small{width:100%;min-height:23px;padding:3px 2px;color:#f6d471;font-size:14px;line-height:1.35;border-top:1px solid #a88b5155;background:url('/ui/raid/v2/panel-sakura-overlay.png') center/100% 100%}
 body.game04-theme .g4-home-background-art{width:100%;aspect-ratio:1.9;overflow:hidden;display:block}
 body.game04-theme .g4-home-background-art>img{width:100%;height:100%;object-fit:cover;object-position:center 42%}
-body.game04-theme .g4-home-background-choices .g4-home-choice>strong{font-size:12px;min-height:30px}
+body.game04-theme .g4-home-background-choices .g4-home-choice>strong{font-size:14px;min-height:30px}
 body.game04-theme .g4-home-selector .g4-home-choice.is-locked{opacity:.65;filter:grayscale(.65)}
 body.game04-theme .g4-home-selector .rd-modal-footer{padding:10px 12px;border-top:1px solid #c49a5470;background:#0d0a0cc9}
 body.game04-theme .g4-home-error{color:#ffd2b6;font:12px G4NotoSans,sans-serif;margin:10px 0 0}
-@media(max-width:360px){.g4-home-actions strong{font-size:15px}.g4-home-actions img{width:28px;height:28px}.g4-home-encounter{gap:4px;padding-inline:5px}.g4-home-encounter strong{font-size:14px}.g4-home-encounter>img{width:23px}.g4-home-encounter time{font-size:10px}.g4-home-confirm{font-size:11px}.g4-home-choice>strong{font-size:11px}}
+@media(max-width:360px){.g4-home-actions strong{font-size:15px}.g4-home-actions img{width:28px;height:28px}.g4-home-encounter{gap:4px;padding-inline:5px}.g4-home-encounter strong{font-size:14px}.g4-home-encounter>img{width:23px}.g4-home-encounter time{font-size:14px}.g4-home-choice>strong{font-size:14px}}
 @media(prefers-reduced-motion:reduce){.g4-home button{transition:none}}
 body.game04-theme .g4-home-lock{color:#bebdc3;flex:none;margin:1px 0}
 body.game04-theme .g4-home-message-face{width:35px;height:39px;object-fit:cover;object-position:center 12%;border:1px solid #b3915e;border-radius:5px;flex:none}
 body.game04-theme .g4-home-message-time{flex:none;margin-left:auto;font:9px G4NotoSans,sans-serif;color:#bcb6af;white-space:nowrap}
 body.game04-theme .g4-home-message-open{border:0;border-radius:50%;background:#272227b0;padding:5px;width:24px;height:26px;flex:none}
 body.game04-theme .g4-home-message-open img{width:14px;height:14px;object-fit:contain;filter:grayscale(1)}
-body.game04-theme .g4-home-community .rd-message>.rd-text-button{min-width:36px;max-width:58px;font-size:10px}
+body.game04-theme .g4-home-community .rd-message>.rd-text-button{min-width:36px;max-width:58px;font-size:14px}
 body.game04-theme .g4-home-community .rd-message>div{flex:1}
 body.game04-theme .g4-home-spinner{width:26px;height:26px;border:3px solid #c3b8aa55;border-top-color:#d8b56d;border-radius:50%;animation:g4-home-spin .85s linear infinite}
 @keyframes g4-home-spin{to{transform:rotate(360deg)}}
@@ -88,26 +86,25 @@ body.game04-theme .rd-shell .g4-home-actions strong{font-size:clamp(18px,5.6vw,2
 body.game04-theme .rd-shell .g4-home-actions button{min-width:0;white-space:nowrap;text-shadow:0 2px 3px #000}
 body.game04-theme .rd-shell .g4-home-shortcuts button{font-size:15px;min-width:88px;line-height:1.25;border-style:solid}
 body.game04-theme .rd-shell .g4-home-shortcuts button:disabled{opacity:.7}
-body.game04-theme .rd-shell .g4-home-shortcuts small{font-size:9px;line-height:1.2}
+body.game04-theme .rd-shell .g4-home-shortcuts small{font-size:14px;line-height:1.2}
 body.game04-theme .rd-shell .g4-home-shortcuts .g4-home-switch{min-height:44px;white-space:nowrap}
 body.game04-theme .rd-shell .g4-home-community .rd-tabs{background:#100c0de0;flex-wrap:nowrap}
 body.game04-theme .rd-shell .g4-home-community .rd-tabs button{min-width:0;min-height:38px;font-size:17px;color:#fff5dd}
 body.game04-theme .rd-shell .g4-home-community .rd-tabs button.active{background:linear-gradient(#72231d,#c9401e);border:1px solid #dbad60;border-radius:5px;box-shadow:inset 0 0 8px #c38c2155}
-body.game04-theme .rd-shell .g4-home-community .rd-text-button{font-size:10px;min-height:30px;min-width:36px}
+body.game04-theme .rd-shell .g4-home-community .rd-text-button{font-size:14px;min-height:30px;min-width:36px}
 body.game04-theme .rd-shell .g4-home-community .g4-home-message-open{min-width:24px;min-height:26px}
-body.game04-theme .rd-shell .g4-home-community .g4-home-community-open{font-size:11px;min-height:26px}
-body.game04-theme .rd-shell .g4-home-community .rd-muted{font-size:12px;line-height:1.7}
+body.game04-theme .rd-shell .g4-home-community .rd-muted{font-size:14px;line-height:1.7}
 body.game04-theme .rd-modal.g4-home-selector{width:min(88vw,470px);max-height:80dvh;background:#0c0a0bec url('/ui/raid/v2/panel-sakura-overlay.png') center/100% 100%;border:2px solid #ddbc69;border-radius:13px;box-shadow:0 15px 70px #000d,inset 0 0 0 3px #98723455}
 body.game04-theme .rd-modal.g4-home-selector .rd-modal-header h2{font-size:26px;line-height:1.2}
 body.game04-theme .rd-modal.g4-home-selector .rd-modal-header>button{min-width:32px;min-height:32px;font-size:26px;line-height:1;background:#110c12a6;border-color:#dbbc6e}
-body.game04-theme .rd-modal.g4-home-selector .g4-home-choice{min-width:0;font-size:13px;line-height:1.35;white-space:normal}
-body.game04-theme .rd-modal.g4-home-selector .g4-home-choice>small{font-size:11px;line-height:1.35}
+body.game04-theme .rd-modal.g4-home-selector .g4-home-choice{min-width:0;font-size:14px;line-height:1.35;white-space:normal}
+body.game04-theme .rd-modal.g4-home-selector .g4-home-choice>small{font-size:14px;line-height:1.35}
 body.game04-theme .rd-modal.g4-home-selector .g4-home-choice[aria-pressed=true]{background:#0b0a0bef;border:2px solid #ffe7ac;box-shadow:0 0 9px #ffbd4a,inset 0 0 7px #f6ab32}
 body.game04-theme .rd-modal.g4-home-selector .g4-home-choice:disabled{border-style:solid}
 body.game04-theme .rd-modal.g4-home-selector .rd-modal-footer .rd-button{font-size:17px;line-height:1.4;background:#130d11;border-color:#d9b76d}
 body.game04-theme .rd-modal.g4-home-selector .rd-modal-footer .rd-primary{background:linear-gradient(#852718,#3f0e11)}
-body.game04-theme .g4-home-rescue-body{display:inline;background:none;border:0;padding:0;color:#f3e7d1;font:inherit;font-size:12px;font-weight:400;min-height:0;min-width:0;line-height:1.5;text-align:left;white-space:normal;overflow-wrap:anywhere}
-body.game04-theme .rd-shell .g4-home-community .g4-home-rescue-body{min-height:30px;min-width:0;font-size:11px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+body.game04-theme .g4-home-rescue-body{display:inline;background:none;border:0;padding:0;color:#f3e7d1;font:inherit;font-size:14px;font-weight:400;min-height:0;min-width:0;line-height:1.5;text-align:left;white-space:normal;overflow-wrap:anywhere}
+body.game04-theme .rd-shell .g4-home-community .g4-home-rescue-body{min-height:30px;min-width:0;font-size:14px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 body.game04-theme .g4-home-rescue-body>span{color:#e4bd6f}
 /* Preserve the existing sakura overlay's 3:2 ratio inside the taller dialog. */
 body.game04-theme .rd-modal.g4-home-selector{background-size:100% auto;background-repeat:no-repeat;background-position:center top}
@@ -117,3 +114,8 @@ body.game04-theme .g4-home-community .rd-message{flex-wrap:wrap}
 body.game04-theme .g4-home-community .rd-message>div{min-width:0;overflow-wrap:anywhere}
 body.game04-theme .g4-home-community .rd-message>.rd-text-button{overflow-wrap:anywhere;white-space:normal}
 body.game04-theme .g4-home-choice>strong{overflow-wrap:anywhere}
+
+/* Common action labels are owned by ActionButton; preview messages keep readable roles. */
+body.game04-theme .g4-home-community .rd-message{font-size:16px;line-height:1.5;min-height:48px}
+body.game04-theme .rd-shell .g4-home-community .rd-message>.rd-text-button{font-size:14px;min-width:64px;max-width:96px}
+body.game04-theme .rd-shell .g4-home-community .rd-muted{font-size:14px}

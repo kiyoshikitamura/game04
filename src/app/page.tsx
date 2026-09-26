@@ -4,6 +4,7 @@ import { AudioProvider } from "@/audio/AudioProvider";
 import TitleView from "./components/TitleView";
 import AuthView from "./components/AuthView";
 import IntegratedStart from "./components/redesign/IntegratedStart";
+import Game04EntryState from "./components/ui/Game04EntryState";
 import BrandedLoading from "./components/ui/BrandedLoading";
 import RedesignApp from "./components/redesign/RedesignApp";
 import { useCallback, useEffect, useState } from "react";
@@ -22,8 +23,8 @@ function AppContent() {
   if (game.authLoading) return <div className="app-container"><BrandedLoading /></div>;
   if (!game.session) return <div className="app-container"><AuthView /></div>;
   if (game.isSetupRequired) return <div className="app-container"><IntegratedStart /></div>;
-  if (!game.authenticatedProjectionReady) return <div className="app-container"><BrandedLoading />{game.authenticatedProjectionError && <><p role="alert">{game.authenticatedProjectionError}</p><button onClick={() => void game.retryAuthenticatedProjection()}>再試行</button></>}</div>;
-  if (game.maintenanceEnabled) return <div className="app-container"><p>現在メンテナンス中です。</p></div>;
+  if (!game.authenticatedProjectionReady) return <Game04EntryState error={game.authenticatedProjectionError} onRetry={() => void game.retryAuthenticatedProjection()}/>;
+  if (game.maintenanceEnabled) return <Game04EntryState maintenance/>;
   return <><RedesignApp key={`${game.session.user.id}:${initialTab}:${billingRevision}`} initialTab={initialTab} /><RedesignBillingReturn onGranted={billingGranted} onReturn={billingReturn} /><RedesignCommerceOverlays /></>;
 }
 export default function Home() { return <AudioProvider><GameProvider><AppContent /></GameProvider></AudioProvider>; }

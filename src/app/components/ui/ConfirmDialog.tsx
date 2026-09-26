@@ -86,7 +86,7 @@ export default function ConfirmDialog({
   const isBattleResult = title === "バトル結果";
   const isVictory = isBattleResult && typeof message === "string" && message.includes("勝利");
 
-  if (isBattleResult) {
+  if (presentation === "legacy" && isBattleResult) {
     return (
       <div className="outlaw-confirm-overlay">
         <BattleResultSummary victory={isVictory} onContinue={() => runAndDismiss(onConfirm)} />
@@ -101,7 +101,7 @@ export default function ConfirmDialog({
         onClose={pending ? undefined : () => runAndDismiss(onCancel)}
         actions={[
           ...(cancelText ? [{ label: cancelText, semantic: "secondary" as const, disabled: pending, onClick: () => runAndDismiss(onCancel) }] : []),
-          { label: pending ? confirmPendingText : confirmText, semantic: isDanger ? "danger" as const : "primary" as const, disabled: pending, onClick: () => runAndDismiss(onConfirm) },
+          { label: confirmText, busy: pending, busyLabel: confirmPendingText, semantic: isDanger ? "danger" as const : "primary" as const, disabled: pending, onClick: () => runAndDismiss(onConfirm) },
         ]}
       >
         {kind === "reward" && rewards.length > 0

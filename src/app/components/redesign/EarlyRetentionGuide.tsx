@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import ActionButton from '../ui/ActionButton';
 import GuideDialog from '../ui/GuideDialog';
 import type { RedesignState } from '../../../domain/redesign/types';
 import { AREA_ONE_COMPLETE_TEXT, nextEarlyGuide } from '../../../domain/redesign/earlyProgress';
@@ -41,5 +42,5 @@ export function EarlySortiePreparation({state,save}:Pick<EarlyRetentionProps,'st
  const [busy,setBusy]=useState(false),[error,setError]=useState(''),[saved,setSaved]=useState(false);
  const plan=earlyLoadoutPlan(state);
  async function apply(){setBusy(true);setError('');setSaved(false);try{await save('early_auto_loadout',{});setSaved(true);}catch(e){setError(e instanceof Error?e.message:'保存できませんでした。');}finally{setBusy(false);}}
- return <section className={styles.preparation} aria-label="おまかせ編成・装備"><h3>五人の力を揃えよう</h3><p>次の内容で部隊を整えます。育成素材は使いません。</p><ul className={styles.plan}>{plan.map(m=><li key={m.characterId}><strong>{CHARACTER_MASTERS.find(c=>c.id===m.characterId)?.name}</strong><span>{m.skillIds.map(id=>OWNABLE_SKILL_MASTERS.find(s=>s.id===id)?.name??id).join('・')||'スキルなし'}</span><small>{Object.values(m.equipment).map(id=>EQUIPMENT_MASTERS.find(e=>e.id===state.equipment.find(e=>e.instanceId===id)?.masterId)?.name).join('・')||'装備なし'}</small></li>)}</ul><button disabled={busy} onClick={()=>void apply()}>{busy?'保存中…':'おまかせ編成・装備'}</button>{error&&<p role="alert">{error}</p>}{saved&&<p role="status">部隊を保存しました。</p>}<p>編成を変えず、そのまま出撃することもできます。</p></section>;
+ return <section className={styles.preparation} aria-label="おまかせ編成・装備"><h3>五人の力を揃えよう</h3><p>次の内容で部隊を整えます。育成素材は使いません。</p><ul className={styles.plan}>{plan.map(m=><li key={m.characterId}><strong>{CHARACTER_MASTERS.find(c=>c.id===m.characterId)?.name}</strong><span>{m.skillIds.map(id=>OWNABLE_SKILL_MASTERS.find(s=>s.id===id)?.name??id).join('・')||'スキルなし'}</span><small>{Object.values(m.equipment).map(id=>EQUIPMENT_MASTERS.find(e=>e.id===state.equipment.find(e=>e.instanceId===id)?.masterId)?.name).join('・')||'装備なし'}</small></li>)}</ul><ActionButton variant="primary" busy={busy} busyLabel="保存中" onClick={()=>void apply()}>おまかせ編成・装備</ActionButton>{error&&<p role="alert">{error}</p>}{saved&&<p role="status">部隊を保存しました。</p>}<p>編成を変えず、そのまま出撃することもできます。</p></section>;
 }
