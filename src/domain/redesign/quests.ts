@@ -1,5 +1,7 @@
+import { hasQuestClear } from './earlyProgress';
+export { hasQuestClear } from './earlyProgress';
 import { FORMAL_QUEST_STAGES } from './questMaster';
-import type { QuestArea } from './types';
+import type { QuestArea, RedesignState } from './types';
 import { QUEST_BACKGROUND_PATHS } from './approvedBackgrounds';
 export { questEnergyCost } from './questMaster';
 const AREAS = [
@@ -18,8 +20,8 @@ const AREAS = [
 export const QUEST_AREAS: QuestArea[] = AREAS.map(([id, name, , description], area) => ({id,index:area+1,name,description,image:QUEST_BACKGROUND_PATHS[id],stages:FORMAL_QUEST_STAGES.filter(stage=>stage.areaId===id)}));
 export const QUEST_STAGES = FORMAL_QUEST_STAGES;
 export function getQuestStage(id:string) { return QUEST_STAGES.find(stage=>stage.id===id); }
-export function isQuestStageUnlocked(id:string, clearedStages:readonly string[]):boolean {
+export function isQuestStageUnlocked(id:string, clearedStages:readonly string[], progress?: RedesignState['earlyProgress']):boolean {
  const index=QUEST_STAGES.findIndex(stage=>stage.id===id);
- return index>=0 && (index===0 || clearedStages.includes(id) || clearedStages.includes(QUEST_STAGES[index-1].id));
+ return index>=0 && (index===0 || progress?.preservedUnlockedStages.includes(id) || hasQuestClear(id,clearedStages,progress) || hasQuestClear(QUEST_STAGES[index-1].id,clearedStages,progress));
 }
-export function nextQuestStage(clearedStages:readonly string[]) {return QUEST_STAGES.find(stage=>!clearedStages.includes(stage.id)&&isQuestStageUnlocked(stage.id,clearedStages))??QUEST_STAGES[QUEST_STAGES.length-1];}
+export function nextQuestStage(clearedStages:readonly string[], progress?: RedesignState['earlyProgress']) {return QUEST_STAGES.find(stage=>!hasQuestClear(stage.id,clearedStages,progress)&&isQuestStageUnlocked(stage.id,clearedStages,progress))??QUEST_STAGES[QUEST_STAGES.length-1];}

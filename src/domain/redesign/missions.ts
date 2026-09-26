@@ -1,3 +1,4 @@
+import { hasQuestClear } from './earlyProgress';
 import type { RedesignState, Reward } from './types';
 import { QUEST_AREAS, QUEST_STAGES } from './quests';
 import { CHARACTER_MASTERS, OWNABLE_SKILL_MASTERS, EQUIPMENT_MASTERS } from './masters';
@@ -18,7 +19,7 @@ export interface MissionProjection {
 export const EMPTY_MISSION_CONFIG: MissionConfig = { enabled: false, missions: [] };
 export function evaluateMissions(state: RedesignState, config: MissionConfig, now=Date.now()): MissionProjection[] {
   if (!config.enabled) return [];
-  const cleared = new Set(state.clearedStages);
+  const cleared = new Set(state.clearedStages.filter(id=>hasQuestClear(id,state.clearedStages,state.earlyProgress)));
   const ids = new Set<string>();
   const progress = captureMissionAssets(state).missionProgress!;
   return config.missions.filter(master => master.enabled).map(master => {
@@ -59,7 +60,8 @@ export function evaluateMissions(state: RedesignState, config: MissionConfig, no
       if (!area?.stages.length) throw new Error('任務の対象エリアが存在しません。');
       stages = area.stages.map(stage => stage.id);
     } else throw new Error('任務条件が未対応です。');
-    const current = stages.filter(id => cleared.has(id)).length;
+    const preserved=master.condition.type==='area_clear'&&state.earlyProgress?.completedAreas.includes(master.condition.areaId);
+    const current = preserved ? stages.length : stages.filter(id => cleared.has(id)).length;
     return { id: master.id, name: master.name, description: master.description, rewards: master.rewards,
       current, target: stages.length, status: state.claimedMissionIds?.includes(master.id) ? 'claimed' : current === stages.length ? 'claimable' : 'progress' };
   });

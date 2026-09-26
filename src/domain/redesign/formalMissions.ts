@@ -2,9 +2,11 @@ import rows from './data/formalMissions.json';
 import { QUEST_AREAS, QUEST_STAGES } from './quests';
 import type { Reward } from './types';
 import type { MissionConfig, MissionMaster } from './missions';
-export const FORMAL_MISSION_VERSION='game04-missions-v1-20260921';
+export const FORMAL_MISSION_VERSION='game04-missions-v2-20260926';
 function condition(row: typeof rows[number]): MissionMaster['condition'] {
  const n=Number(row.id.slice(2));
+ if(n>=184&&n<=186)return {type:'stage_clear',stageId:({184:'mikawa-4',185:'mikawa-5',186:'owari-5'} as Record<number,string>)[n]};
+ if(n===187)return {type:'metric',key:'character_level',threshold:5,target:5};
  if(n<=65){const designId=row.name.match(/\d+-\d+/)![0],stage=QUEST_STAGES.find(s=>s.designId===designId);if(!stage)throw Error(`任務ステージなし:${row.id}`);return {type:'stage_clear',stageId:stage.id};}
  if(n<=75)return {type:'area_clear',areaId:QUEST_AREAS[n-66].id};
  const nums=(row.name.match(/\d+/g)??[]).map(Number);

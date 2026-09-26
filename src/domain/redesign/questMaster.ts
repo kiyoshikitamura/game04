@@ -1,3 +1,4 @@
+import { hasQuestClear } from './earlyProgress';
 import data from './data/quest65.json';
 import roster from '../../theme/sengoku-characters.json';
 import { characterArt } from '../../theme/creativeAssets';
@@ -25,17 +26,18 @@ export const FORMAL_QUEST_STAGES: FormalQuestStage[] = data.stages.map(source =>
 export function createQuestBattleInput(seed: number, party: BattleUnit[], stage: FormalQuestStage, rules: BattleRules) {
   // Do not pass formal enemies through commonPreviewSkill/prepareBattleWaves.
   const input = createFormalBattleInput(seed, party, stage.waves as (EnemyUnit & {initialSp: number})[][], rules);
-  return {...input, questSnapshot: structuredClone(stage), questMasterVersion: QUEST_MASTER_VERSION,
+  return {...input, ...(stage.areaId==='mikawa' && ['mikawa-1','mikawa-2','mikawa-3','mikawa-4','mikawa-5'].includes(stage.id) ? {earlyQuestAssist:{version:'area1-assist-v1-20260926' as const,stageId:stage.id,actionGainMultiplier:2 as const,burstChance:0.8 as const}} : {}), questSnapshot: structuredClone(stage), questMasterVersion: QUEST_MASTER_VERSION,
     playerExpReward: {amount: stage.playerExp, version: QUEST_MASTER_VERSION, status: 'APPROVED'}};
 }
-export function questEnergyCost(stage: QuestStage, state: Pick<RedesignState, 'clearedStages' | 'questAttempts'>): number {
-  if (state.clearedStages.includes(stage.id)) return stage.energyCost;
-  return (state.questAttempts?.[stage.id] ?? 0) > 0 ? 1 : 0;
+export function questEnergyCost(stage: QuestStage, state: Pick<RedesignState, 'clearedStages' | 'questAttempts' | 'earlyProgress'>): number {
+  if (hasQuestClear(stage.id,state.clearedStages,state.earlyProgress)) return stage.energyCost;
+  const attempts=state.earlyProgress && ['mikawa-4','mikawa-5','owari-5'].includes(stage.id) ? state.earlyProgress.additionalStageAttempts[stage.id] : state.questAttempts?.[stage.id];
+  return (attempts ?? 0) > 0 ? 1 : 0;
 }
-export function questVictoryRewards(stage: FormalQuestStage, state: Pick<RedesignState, 'clearedStages' | 'questClearCounts'>, party: BattleUnit[], seed: number) {
-  const firstClear = !state.clearedStages.includes(stage.id);
+export function questVictoryRewards(stage: FormalQuestStage, state: Pick<RedesignState, 'clearedStages' | 'questClearCounts' | 'earlyProgress'> & Partial<Pick<RedesignState,'characters'>>, party: BattleUnit[], seed: number) {
+  const firstClear = !hasQuestClear(stage.id,state.clearedStages,state.earlyProgress);
   const count = (state.questClearCounts?.[stage.id] ?? (firstClear ? 0 : 1)) + 1;
-  const rewards: Reward[] = structuredClone([...stage.rewards, ...(firstClear ? stage.firstRewards : [])]);
+  const rewards: Reward[] = structuredClone([...stage.rewards, ...(firstClear ? stage.firstRewards.filter(r=>!(stage.id==='mikawa-3'&&r.kind==='character'&&r.id==='char_yuki_01'&&state.characters?.some(c=>c.id===r.id))) : [])]);
   let rng = seed >>> 0;
   const random = () => { rng = (Math.imul(rng, 1664525) + 1013904223) >>> 0; return rng / 4294967296; };
   const luck = party.slice(0, 5).reduce((sum, member) => sum + Math.max(0, Math.min(100, member.stats.luk)), 0) / 5;

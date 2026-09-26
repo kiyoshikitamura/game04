@@ -1,0 +1,28 @@
+const fs=require('fs'),assert=require('assert/strict'),ts=require('typescript');require.extensions['.ts']=(m,f)=>m._compile(ts.transpileModule(fs.readFileSync(f,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true}}).outputText,f);
+const {createInitialState}=require('../src/domain/redesign/masters.ts');const {APPROVED_ACQUISITION_MASTER}=require('../src/domain/redesign/acquisitions.ts');const {TERRITORY_MASTER}=require('../src/domain/redesign/territory.ts');
+let state=createInitialState('00000000-0000-4000-8000-000000000001');state.characters=['char_joe_01','char_daimon_01','char_aoi_01'].map(id=>({id,level:1,awakening:0}));state.skills=['SKD003','SKD039','SKD035'].map(id=>({id,level:0}));state.deck=state.characters.map((c,i)=>({characterId:c.id,skillIds:[state.skills[i].id],equipment:{}}));state.energy=100;
+let handler,records=new Map(),requests=new Map(),starts=[];
+global.Deno={env:{get:k=>k==='SUPABASE_URL'?'https://znakrkaazliexzwihxge.supabase.co':'test-only'},serve:fn=>handler=fn};
+global.fetch=async(input,options)=>{const url=new URL(String(input));assert.equal(url.hostname,'znakrkaazliexzwihxge.supabase.co');const p=url.pathname,b=options?.body?JSON.parse(options.body):{};let result;
+if(p==='/auth/v1/user')result={id:state.userId};
+else if(p.endsWith('/users'))result=[{id:state.userId,username:'test'}];
+else if(p.endsWith('/game04_acquisition_input'))result={legacy:{characters:[],skills:[],equipment:[]},events:[],master:APPROVED_ACQUISITION_MASTER};
+else if(p.endsWith('/game04_get_session_state'))result=structuredClone(state);
+else if(p.endsWith('/game04_requests')){const id=url.searchParams.get('request_id')?.slice(3);result=requests.has(id)?[{result:requests.get(id)}]:[];}
+else if(p.endsWith('/game04_battles')){const id=url.searchParams.get('id')?.slice(3);result=id?(records.has(id)?[records.get(id)]:[]):[...records.values()].filter(r=>r.status==='started');}
+else if(p.endsWith('/game04_redesign_master'))result=[{data:APPROVED_ACQUISITION_MASTER}];
+else if(p.endsWith('/game04_raid_rooms_with_owners')||p.endsWith('/game04_social_events'))result=[];
+else if(p.endsWith('/game04_territory_context'))result={master:TERRITORY_MASTER,progress:{experience:0},items:{},activeHostingCount:0};
+else if(p.endsWith('/game04_commit_growth_state')){
+ if(requests.has(b.p_request_id))result=requests.get(b.p_request_id);else{
+ assert.equal(b.p_expected_version,state.version);state={...b.p_state,version:state.version+1};
+ if(b.p_battle?.status==='started'){const r=b.p_battle;records.set(r.id,{...r,target_id:r.targetId,user_id:state.userId});starts.push(structuredClone(r));}
+ if(b.p_battle?.status==='settled')records.set(b.p_battle.id,{...records.get(b.p_battle.id),...b.p_battle});
+ result={state:structuredClone(state),receipt:b.p_receipt??{},...(b.p_battle?.status==='settled'?{battleResult:b.p_battle.result}:{})};requests.set(b.p_request_id,result);
+ }
+}else throw Error('Unexpected API transport '+p);
+return new Response(JSON.stringify(result));};
+async function call(action,payload={},requestId=crypto.randomUUID()){const r=await handler(new Request('https://test.invalid',{method:'POST',headers:{Authorization:'Bearer test'},body:JSON.stringify({action,payload,requestId})}));const data=await r.json();assert.equal(r.status,200,JSON.stringify(data));return data;}
+(async()=>{await import('../.early-api.mjs');await call('get_state');assert(state.earlyProgress);let result=await call('quest_battle',{stageId:'mikawa-1',earlyQuestAssist:{burstChance:1}});assert.equal(result.battle.outcome,'win');assert.equal(starts[0].input.earlyQuestAssist.burstChance,.8);assert.equal(state.earlyProgress.guides['join-maeda'],'pending');assert(state.characters.some(c=>c.id==='char_jihoon_01'));const cash=state.cash;const saved=records.values().next().value;await call('quest_battle',{stageId:'mikawa-1'},saved.id);assert.equal(state.cash,cash);assert.equal(starts.length,1);
+await call('early_guide',{guide:'join-maeda',choice:'save'});assert.equal(state.deck.length,4);await call('quest_battle',{stageId:'mikawa-2'});await call('early_guide',{guide:'equip-iwadan',choice:'save'});assert.deepEqual(state.deck[3].skillIds,['SKD009']);assert.equal(state.earlyProgress.deckSlots,4);await call('quest_battle',{stageId:'mikawa-3'});assert.equal(state.earlyProgress.deckSlots,5);await call('early_guide',{guide:'join-takenaka',choice:'later'});await call('quest_battle',{stageId:'mikawa-4'});await call('early_guide',{guide:'equip-fire',choice:'later'});await call('early_auto_loadout');assert.equal(state.deck.length,5);await call('quest_battle',{stageId:'mikawa-5'});assert.equal(state.earlyProgress.guides.missions,'pending');await call('early_guide',{guide:'missions',choice:'missions'});assert(state.earlyProgress.missionNavigationPending);await call('early_missions_opened');assert.equal(state.earlyProgress.guides.missions,'completed');await call('quest_battle',{stageId:'owari-1'});assert(!starts.at(-1).input.earlyQuestAssist);assert(!state.tutorial?.defeatPending);
+const report={scope:'actual patched Edge handler + strict in-memory DB transport; no network',checks:['server ignores client assist override','start input saves assist and quest snapshot','settled replay retains result/rewards','1-1/1-2 guides persist deck without character navigation','five slots at1-3; deferred guides; one-action loadout','area completion mandatory mission ack','2-1 has no assist; no defeat guide'],battles:starts.map(r=>({id:r.targetId,assist:!!r.input.earlyQuestAssist}))};fs.writeFileSync('docs/verification/early-retention-20260926/api-results.json',JSON.stringify(report,null,2)+'\n');console.log(report);})().catch(e=>{console.error(e);process.exitCode=1});

@@ -14,8 +14,8 @@ export function equipmentFits(slot: string, masterSlot: string) {
   return slot.startsWith("accessory") ? masterSlot.startsWith("accessory") : slot === masterSlot;
 }
 export function getUnlockedDeckSlots(state: RedesignState): number {
-  const progressSlots = state.clearedStages.includes('mikawa-2') ? 5 : state.clearedStages.includes('mikawa-1') ? 4 : 3;
-  return Math.min(5, Math.max(progressSlots, state.deck.length));
+  const progressSlots = state.clearedStages.includes('mikawa-3') || (!state.earlyProgress && state.clearedStages.includes('mikawa-2')) ? 5 : state.clearedStages.includes('mikawa-1') ? 4 : 3;
+  return Math.min(5, Math.max(progressSlots, state.earlyProgress?.deckSlots??0, state.deck.length));
 }
 export function validateDeck(state: RedesignState, deck: DeckMember[]) {
   requireValue(Array.isArray(deck) && deck.length >= 1 && deck.length <= 5, "武将を1〜5人編成してください。");
