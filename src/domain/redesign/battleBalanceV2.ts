@@ -424,7 +424,7 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
             a.actions++;
             a.skills += Number(skill.id !== 'basic');
             if (!burst) {
-                const gain = commonSpGain(u.stats.luk, skill.id === 'basic');
+                const gain = commonSpGain(u.stats.luk, skill.id === 'basic') * (input.earlyQuestAssist?.version==='area1-assist-v1-20260926' ? 2 : 1);
                 partySp = Math.min(400, partySp + gain);
                 gauge = Math.min(200, gauge + gain);
                 a.spGenerated += gain;
@@ -497,7 +497,7 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
         else {
             if (gauge >= 200) {
                 gauge = 0;
-                burst = random() < commonBurstChance(u.stats.luk);
+                burst = random() < (input.earlyQuestAssist?.version==='area1-assist-v1-20260926' ? .8 : commonBurstChance(u.stats.luk));
                 if (burst)
                     analysis.find(a => a.id === u.id)!.bursts++;
                 frame('burst', burst ? `${u.name} BURST：最大5行動` : `${u.name} BURST抽選失敗`, u, undefined, { event: burst ? 'burst_start' : 'burst_failed' });

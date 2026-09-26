@@ -48,13 +48,13 @@ export function synchronizeHomeBackgroundUnlocks(state: RedesignState): Redesign
   return { ...state, unlockedHomeBackgroundIds: [...unlocked, ...additions] };
 }
 
-export function isHomeBackgroundUnlocked(background: HomeBackground, clearedStages: readonly string[], unlockedIds: readonly string[] = []): boolean {
+export function isHomeBackgroundUnlocked(background: HomeBackground, clearedStages: readonly string[], unlockedIds: readonly string[] = [], progress?: RedesignState['earlyProgress']): boolean {
   const registered = findHomeBackground(background.id);
   if (!registered) return false;
   if (registered.characterId) return unlockedIds.includes(registered.id);
   if (!registered.areaId) return true;
   const area = QUEST_AREAS.find(entry => entry.id === registered.areaId);
-  return !!area?.stages[0] && isQuestStageUnlocked(area.stages[0].id, clearedStages);
+  return !!area?.stages[0] && isQuestStageUnlocked(area.stages[0].id, clearedStages,progress);
 }
 
 /** Validate the complete draft before cloning so a rejected background cannot partially save a character. */
@@ -68,7 +68,7 @@ export function applyHomeSelection(state: RedesignState, payload: Record<string,
     if (typeof payload.backgroundId !== 'string') throw new Error('背景が不正です。');
     const background = findHomeBackground(payload.backgroundId);
     if (!background) throw new Error('背景が不正です。');
-    if (!isHomeBackgroundUnlocked(background, state.clearedStages, state.unlockedHomeBackgroundIds)) throw new Error(background.conditionLabel);
+    if (!isHomeBackgroundUnlocked(background, state.clearedStages, state.unlockedHomeBackgroundIds,state.earlyProgress)) throw new Error(background.conditionLabel);
   }
   return {
     ...state,

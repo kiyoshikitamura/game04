@@ -11,7 +11,7 @@ export function raidTimeRemaining(expiresAt: string, now: number): string {
   return `${Math.floor(seconds / 60)}分 ${seconds % 60}秒`;
 }
 export function raidRewardLabel(reward: Reward): string {
-  const labels: Record<Reward['kind'], string> = {ticket:'スペシャル券',character_exp_item:'武将EXP',equipment_exp_item:'装備EXP',generic_soul:'汎用魂',soul_selector:'魂選択',character:'武将',skill:'スキル',cash:'銭',character_material:'武将育成素材',skill_material:'スキルLB素材',equipment_material:'装備育成素材',equipment_lb:'装備LB素材',soul:'武将の魂',equipment:'装備',unlock_item:'侵攻令'};
+  const labels: Record<Reward['kind'], string> = {free_diamonds:'無償輝石',ticket:'スペシャル券',character_exp_item:'武将EXP',equipment_exp_item:'装備EXP',generic_soul:'汎用魂',soul_selector:'魂選択',character:'武将',skill:'スキル',cash:'銭',character_material:'武将育成素材',skill_material:'スキルLB素材',equipment_material:'装備育成素材',equipment_lb:'装備LB素材',soul:'武将の魂',equipment:'装備',unlock_item:'侵攻令'};
   const tickets: Record<string, string> = { SPECIAL_TICKET_CHARACTER: '武将召喚券', SPECIAL_TICKET_SKILL: 'スキル召喚券', SPECIAL_TICKET_EQUIPMENT: '装備召喚券' };
   const character = (reward.kind === 'soul' || reward.kind === 'character') ? roster.find(row => row.characterId === reward.id) : undefined;
   const name = reward.kind === 'ticket' ? tickets[reward.id ?? '']

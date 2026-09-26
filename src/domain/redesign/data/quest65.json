@@ -1,8 +1,8 @@
 {
-  "version": "APPROVED_QUEST65_ROUND17_20260922",
+  "version": "game04-quest68-early-retention-20260926",
   "counts": [
-    3,
-    4,
+    5,
+    5,
     5,
     5,
     6,
@@ -30,7 +30,7 @@
             "level": 1,
             "stats": {
               "luk": 0,
-              "hp": 650,
+              "hp": 900,
               "atk": 35,
               "def": 10,
               "sp": 100
@@ -51,7 +51,7 @@
             "level": 1,
             "stats": {
               "luk": 0,
-              "hp": 450,
+              "hp": 650,
               "atk": 30,
               "def": 10,
               "sp": 100
@@ -77,6 +77,15 @@
           "kind": "character",
           "id": "char_jihoon_01",
           "amount": 1
+        },
+        {
+          "kind": "cash",
+          "amount": 2000
+        },
+        {
+          "kind": "character_exp_item",
+          "id": "small",
+          "amount": 5
         }
       ],
       "rewards": [
@@ -137,16 +146,16 @@
             "level": 3,
             "stats": {
               "luk": 0,
-              "hp": 800,
-              "atk": 50,
-              "def": 45,
+              "hp": 750,
+              "atk": 55,
+              "def": 20,
               "sp": 100
             },
             "order": 0,
             "hitSpGain": 10,
-            "element": "earth",
-            "actionCount": 6,
-            "initialCount": 6,
+            "element": "fire",
+            "actionCount": 7,
+            "initialCount": 7,
             "initialSp": 0,
             "skills": [],
             "passives": []
@@ -158,61 +167,41 @@
             "level": 3,
             "stats": {
               "luk": 0,
-              "hp": 700,
-              "atk": 40,
+              "hp": 600,
+              "atk": 45,
               "def": 15,
               "sp": 100
             },
             "order": 1,
             "hitSpGain": 10,
-            "element": "wind",
-            "actionCount": 4,
-            "initialCount": 4,
+            "element": "water",
+            "actionCount": 7,
+            "initialCount": 7,
             "initialSp": 0,
             "skills": [],
             "passives": []
           },
           {
             "id": "1-2/W1/3",
-            "name": "町娘",
+            "name": "小松姫",
             "image": "",
             "level": 3,
             "stats": {
               "luk": 0,
-              "hp": 800,
-              "atk": 120,
+              "hp": 1000,
+              "atk": 80,
               "def": 20,
               "sp": 100
             },
             "order": 2,
             "hitSpGain": 10,
-            "element": "water",
-            "actionCount": 6,
-            "initialCount": 6,
-            "initialSp": 35,
-            "skills": [
-              {
-                "id": "SKD039",
-                "name": "応急手当",
-                "image": "",
-                "rarity": "N",
-                "element": "water",
-                "spCost": 35,
-                "condition": {
-                  "type": "always"
-                },
-                "target": "lowest_ally",
-                "effects": [
-                  {
-                    "type": "heal",
-                    "power": 35,
-                    "healingFormula": "caster_atk_percent"
-                  }
-                ],
-                "description": "正式表の検証入力"
-              }
-            ],
-            "passives": []
+            "element": "fire",
+            "actionCount": 7,
+            "initialCount": 7,
+            "initialSp": 0,
+            "skills": [],
+            "passives": [],
+            "boss": true
           }
         ]
       ],
@@ -223,9 +212,18 @@
           "amount": 1
         },
         {
-          "kind": "character",
-          "id": "char_yuki_01",
+          "kind": "skill",
+          "id": "SKD009",
           "amount": 1
+        },
+        {
+          "kind": "cash",
+          "amount": 3000
+        },
+        {
+          "kind": "character_exp_item",
+          "id": "medium",
+          "amount": 2
         }
       ],
       "rewards": [
@@ -287,8 +285,8 @@
             "stats": {
               "luk": 0,
               "hp": 700,
-              "atk": 60,
-              "def": 25,
+              "atk": 50,
+              "def": 15,
               "sp": 100
             },
             "order": 0,
@@ -314,9 +312,9 @@
             },
             "order": 1,
             "hitSpGain": 10,
-            "element": "wind",
-            "actionCount": 5,
-            "initialCount": 5,
+            "element": "water",
+            "actionCount": 7,
+            "initialCount": 7,
             "initialSp": 0,
             "skills": [],
             "passives": []
@@ -325,117 +323,45 @@
         [
           {
             "id": "1-3/W2/1",
-            "name": "鉄砲兵",
+            "name": "直江兼続",
             "image": "",
             "level": 5,
             "stats": {
               "luk": 0,
-              "hp": 3640,
-              "atk": 310,
+              "hp": 1500,
+              "atk": 100,
               "def": 25,
               "sp": 100
             },
             "order": 0,
             "hitSpGain": 10,
-            "element": "fire",
-            "actionCount": 6,
-            "initialCount": 5,
+            "element": "water",
+            "actionCount": 8,
+            "initialCount": 8,
             "initialSp": 0,
             "skills": [],
-            "passives": []
+            "passives": [],
+            "boss": true
           },
           {
             "id": "1-3/W2/2",
-            "name": "直江兼続",
+            "name": "鉄砲兵",
             "image": "",
-            "level": 7,
+            "level": 5,
             "stats": {
               "luk": 0,
-              "hp": 3000,
-              "atk": 150,
-              "def": 60,
+              "hp": 700,
+              "atk": 60,
+              "def": 15,
               "sp": 100
             },
             "order": 1,
             "hitSpGain": 10,
             "element": "water",
-            "actionCount": 6,
-            "initialCount": 6,
-            "initialSp": 50,
-            "skills": [
-              {
-                "id": "SKD008",
-                "name": "標準単体攻撃・水",
-                "image": "",
-                "rarity": "R",
-                "element": "water",
-                "spCost": 50,
-                "condition": {
-                  "type": "always"
-                },
-                "target": "first",
-                "effects": [
-                  {
-                    "type": "damage",
-                    "power": 120
-                  }
-                ],
-                "description": "正式表の検証入力"
-              }
-            ],
-            "passives": [
-              {
-                "id": "P01_water",
-                "type": "P01",
-                "name": "P01",
-                "stat": "atk",
-                "percent": 4.800000000000001,
-                "level": 0,
-                "target": "party",
-                "targetElement": "water"
-              }
-            ]
-          },
-          {
-            "id": "1-3/W2/3",
-            "name": "町娘",
-            "image": "",
-            "level": 5,
-            "stats": {
-              "luk": 0,
-              "hp": 550,
-              "atk": 220,
-              "def": 20,
-              "sp": 100
-            },
-            "order": 2,
-            "hitSpGain": 10,
-            "element": "water",
-            "actionCount": 6,
-            "initialCount": 6,
-            "initialSp": 35,
-            "skills": [
-              {
-                "id": "SKD039",
-                "name": "応急手当",
-                "image": "",
-                "rarity": "N",
-                "element": "water",
-                "spCost": 35,
-                "condition": {
-                  "type": "always"
-                },
-                "target": "lowest_ally",
-                "effects": [
-                  {
-                    "type": "heal",
-                    "power": 35,
-                    "healingFormula": "caster_atk_percent"
-                  }
-                ],
-                "description": "正式表の検証入力"
-              }
-            ],
+            "actionCount": 8,
+            "initialCount": 8,
+            "initialSp": 0,
+            "skills": [],
             "passives": []
           }
         ]
@@ -455,6 +381,20 @@
           "kind": "ticket",
           "id": "SPECIAL_TICKET_EQUIPMENT",
           "amount": 1
+        },
+        {
+          "kind": "character",
+          "id": "char_yuki_01",
+          "amount": 1
+        },
+        {
+          "kind": "cash",
+          "amount": 5000
+        },
+        {
+          "kind": "character_exp_item",
+          "id": "medium",
+          "amount": 3
         }
       ],
       "rewards": [
@@ -516,6 +456,321 @@
       "encounterChance": 0.01
     },
     {
+      "id": "mikawa-4",
+      "designId": "1-4",
+      "areaId": "mikawa",
+      "index": 4,
+      "name": "影走る古道",
+      "description": "仲間の技を整え、影の忍びを迎え撃とう。",
+      "energyCost": 5,
+      "waves": [
+        [
+          {
+            "id": "1-4/W1/1",
+            "name": "僧兵",
+            "image": "",
+            "level": 7,
+            "stats": {
+              "luk": 0,
+              "hp": 700,
+              "atk": 65,
+              "def": 20,
+              "sp": 100
+            },
+            "order": 0,
+            "hitSpGain": 10,
+            "element": "fire",
+            "actionCount": 7,
+            "initialCount": 7,
+            "initialSp": 0,
+            "skills": [],
+            "passives": []
+          },
+          {
+            "id": "1-4/W1/2",
+            "name": "弓兵",
+            "image": "",
+            "level": 7,
+            "stats": {
+              "luk": 0,
+              "hp": 600,
+              "atk": 60,
+              "def": 15,
+              "sp": 100
+            },
+            "order": 1,
+            "hitSpGain": 10,
+            "element": "water",
+            "actionCount": 7,
+            "initialCount": 7,
+            "initialSp": 0,
+            "skills": [],
+            "passives": []
+          }
+        ],
+        [
+          {
+            "id": "1-4/W2/1",
+            "name": "服部半蔵",
+            "image": "",
+            "level": 7,
+            "stats": {
+              "luk": 0,
+              "hp": 1900,
+              "atk": 100,
+              "def": 25,
+              "sp": 100
+            },
+            "order": 0,
+            "hitSpGain": 10,
+            "element": "dark",
+            "actionCount": 8,
+            "initialCount": 8,
+            "initialSp": 0,
+            "skills": [],
+            "passives": [],
+            "boss": true
+          },
+          {
+            "id": "1-4/W2/2",
+            "name": "くノ一",
+            "image": "",
+            "level": 7,
+            "stats": {
+              "luk": 0,
+              "hp": 600,
+              "atk": 65,
+              "def": 15,
+              "sp": 100
+            },
+            "order": 1,
+            "hitSpGain": 10,
+            "element": "water",
+            "actionCount": 8,
+            "initialCount": 8,
+            "initialSp": 0,
+            "skills": [],
+            "passives": []
+          }
+        ]
+      ],
+      "firstRewards": [
+        {
+          "kind": "skill",
+          "id": "SKD019",
+          "amount": 1
+        },
+        {
+          "kind": "cash",
+          "amount": 5000
+        },
+        {
+          "kind": "character_exp_item",
+          "id": "medium",
+          "amount": 3
+        },
+        {
+          "kind": "equipment_exp_item",
+          "id": "medium",
+          "amount": 2
+        }
+      ],
+      "rewards": [
+        {
+          "kind": "cash",
+          "amount": 500
+        },
+        {
+          "kind": "character_exp_item",
+          "id": "small",
+          "amount": 1
+        },
+        {
+          "kind": "equipment_exp_item",
+          "id": "small",
+          "amount": 1
+        }
+      ],
+      "rareRewards": [
+        {
+          "kind": "ticket",
+          "id": "SPECIAL_TICKET_CHARACTER",
+          "amount": 1,
+          "chance": 0.0025
+        },
+        {
+          "kind": "ticket",
+          "id": "SPECIAL_TICKET_SKILL",
+          "amount": 1,
+          "chance": 0.005
+        },
+        {
+          "kind": "ticket",
+          "id": "SPECIAL_TICKET_EQUIPMENT",
+          "amount": 1,
+          "chance": 0.0025
+        }
+      ],
+      "soulDrops": [],
+      "ticketChance": 0.01,
+      "playerExp": 20,
+      "encounterChance": 0
+    },
+    {
+      "id": "mikawa-5",
+      "designId": "1-5",
+      "areaId": "mikawa",
+      "index": 5,
+      "name": "三河の勝鬨",
+      "description": "前衛で力を蓄え、BURSTで敵将へ畳みかけよう。",
+      "energyCost": 5,
+      "waves": [
+        [
+          {
+            "id": "1-5/W1/1",
+            "name": "女侍",
+            "image": "",
+            "level": 9,
+            "stats": {
+              "luk": 0,
+              "hp": 1000,
+              "atk": 60,
+              "def": 20,
+              "sp": 100
+            },
+            "order": 0,
+            "hitSpGain": 10,
+            "element": "earth",
+            "actionCount": 7,
+            "initialCount": 7,
+            "initialSp": 0,
+            "skills": [],
+            "passives": []
+          },
+          {
+            "id": "1-5/W1/2",
+            "name": "弓兵",
+            "image": "",
+            "level": 9,
+            "stats": {
+              "luk": 0,
+              "hp": 800,
+              "atk": 55,
+              "def": 15,
+              "sp": 100
+            },
+            "order": 1,
+            "hitSpGain": 10,
+            "element": "water",
+            "actionCount": 8,
+            "initialCount": 8,
+            "initialSp": 0,
+            "skills": [],
+            "passives": []
+          }
+        ],
+        [
+          {
+            "id": "1-5/W2/1",
+            "name": "柴田勝家",
+            "image": "",
+            "level": 9,
+            "stats": {
+              "luk": 0,
+              "hp": 1400,
+              "atk": 100,
+              "def": 25,
+              "sp": 100
+            },
+            "order": 0,
+            "hitSpGain": 10,
+            "element": "earth",
+            "actionCount": 8,
+            "initialCount": 8,
+            "initialSp": 0,
+            "skills": [],
+            "passives": [],
+            "boss": true
+          }
+        ]
+      ],
+      "firstRewards": [
+        {
+          "kind": "cash",
+          "amount": 10000
+        },
+        {
+          "kind": "character_exp_item",
+          "id": "medium",
+          "amount": 5
+        },
+        {
+          "kind": "equipment_exp_item",
+          "id": "medium",
+          "amount": 3
+        },
+        {
+          "kind": "skill_material",
+          "amount": 8
+        },
+        {
+          "kind": "ticket",
+          "id": "SPECIAL_TICKET_CHARACTER",
+          "amount": 1
+        },
+        {
+          "kind": "ticket",
+          "id": "SPECIAL_TICKET_SKILL",
+          "amount": 1
+        },
+        {
+          "kind": "ticket",
+          "id": "SPECIAL_TICKET_EQUIPMENT",
+          "amount": 1
+        }
+      ],
+      "rewards": [
+        {
+          "kind": "cash",
+          "amount": 500
+        },
+        {
+          "kind": "character_exp_item",
+          "id": "small",
+          "amount": 1
+        },
+        {
+          "kind": "equipment_exp_item",
+          "id": "small",
+          "amount": 1
+        }
+      ],
+      "rareRewards": [
+        {
+          "kind": "ticket",
+          "id": "SPECIAL_TICKET_CHARACTER",
+          "amount": 1,
+          "chance": 0.0025
+        },
+        {
+          "kind": "ticket",
+          "id": "SPECIAL_TICKET_SKILL",
+          "amount": 1,
+          "chance": 0.005
+        },
+        {
+          "kind": "ticket",
+          "id": "SPECIAL_TICKET_EQUIPMENT",
+          "amount": 1,
+          "chance": 0.0025
+        }
+      ],
+      "soulDrops": [],
+      "ticketChance": 0.01,
+      "playerExp": 20,
+      "encounterChance": 0
+    },
+    {
       "id": "owari-1",
       "designId": "2-1",
       "areaId": "owari",
@@ -533,7 +788,7 @@
             "stats": {
               "luk": 0,
               "hp": 1130,
-              "atk": 540,
+              "atk": 580,
               "def": 40,
               "sp": 100
             },
@@ -597,7 +852,7 @@
             "stats": {
               "luk": 0,
               "hp": 1130,
-              "atk": 540,
+              "atk": 580,
               "def": 35,
               "sp": 100
             },
@@ -716,6 +971,15 @@
           "kind": "ticket",
           "id": "SPECIAL_TICKET_CHARACTER",
           "amount": 1
+        },
+        {
+          "kind": "cash",
+          "amount": 5000
+        },
+        {
+          "kind": "character_exp_item",
+          "id": "medium",
+          "amount": 3
         }
       ],
       "rewards": [
@@ -794,7 +1058,7 @@
             "stats": {
               "luk": 0,
               "hp": 2800,
-              "atk": 240,
+              "atk": 550,
               "def": 10,
               "sp": 100
             },
@@ -815,7 +1079,7 @@
             "stats": {
               "luk": 0,
               "hp": 300,
-              "atk": 240,
+              "atk": 550,
               "def": 10,
               "sp": 100
             },
@@ -836,7 +1100,7 @@
             "stats": {
               "luk": 0,
               "hp": 300,
-              "atk": 240,
+              "atk": 550,
               "def": 10,
               "sp": 100
             },
@@ -879,7 +1143,7 @@
             "stats": {
               "luk": 0,
               "hp": 2800,
-              "atk": 240,
+              "atk": 550,
               "def": 10,
               "sp": 100
             },
@@ -900,7 +1164,7 @@
             "stats": {
               "luk": 0,
               "hp": 300,
-              "atk": 240,
+              "atk": 550,
               "def": 10,
               "sp": 100
             },
@@ -940,8 +1204,8 @@
             "level": 12,
             "stats": {
               "luk": 0,
-              "hp": 300,
-              "atk": 240,
+              "hp": 1800,
+              "atk": 550,
               "def": 10,
               "sp": 100
             },
@@ -983,7 +1247,8 @@
                 "target": "self",
                 "targetElement": "wind"
               }
-            ]
+            ],
+            "boss": true
           }
         ]
       ],
@@ -997,6 +1262,15 @@
           "kind": "ticket",
           "id": "SPECIAL_TICKET_SKILL",
           "amount": 1
+        },
+        {
+          "kind": "cash",
+          "amount": 8000
+        },
+        {
+          "kind": "character_exp_item",
+          "id": "medium",
+          "amount": 5
         }
       ],
       "rewards": [
@@ -1074,7 +1348,7 @@
             "level": 14,
             "stats": {
               "luk": 0,
-              "hp": 5530,
+              "hp": 4000,
               "atk": 130,
               "def": 160,
               "sp": 100
@@ -1096,7 +1370,7 @@
             "stats": {
               "luk": 0,
               "hp": 650,
-              "atk": 1610,
+              "atk": 450,
               "def": 35,
               "sp": 180
             },
@@ -1139,7 +1413,7 @@
             "level": 15,
             "stats": {
               "luk": 0,
-              "hp": 5530,
+              "hp": 4000,
               "atk": 160,
               "def": 160,
               "sp": 100
@@ -1214,7 +1488,7 @@
             "stats": {
               "luk": 0,
               "hp": 650,
-              "atk": 1610,
+              "atk": 450,
               "def": 40,
               "sp": 180
             },
@@ -1276,6 +1550,15 @@
           "kind": "ticket",
           "id": "SPECIAL_TICKET_EQUIPMENT",
           "amount": 1
+        },
+        {
+          "kind": "cash",
+          "amount": 10000
+        },
+        {
+          "kind": "character_exp_item",
+          "id": "large",
+          "amount": 2
         }
       ],
       "rewards": [
@@ -1504,9 +1787,9 @@
             "level": 18,
             "stats": {
               "luk": 0,
-              "hp": 8000,
+              "hp": 6000,
               "atk": 300,
-              "def": 300,
+              "def": 140,
               "sp": 100
             },
             "order": 0,
@@ -1556,8 +1839,8 @@
             "level": 17,
             "stats": {
               "luk": 0,
-              "hp": 2100,
-              "atk": 650,
+              "hp": 1200,
+              "atk": 350,
               "def": 60,
               "sp": 100
             },
@@ -1624,6 +1907,15 @@
           "kind": "ticket",
           "id": "SPECIAL_TICKET_EQUIPMENT",
           "amount": 1
+        },
+        {
+          "kind": "cash",
+          "amount": 10000
+        },
+        {
+          "kind": "character_exp_item",
+          "id": "large",
+          "amount": 2
         }
       ],
       "rewards": [
@@ -1680,6 +1972,209 @@
           "period": 50
         }
       ],
+      "ticketChance": 0.01,
+      "playerExp": 25,
+      "encounterChance": 0.01
+    },
+    {
+      "id": "owari-5",
+      "designId": "2-5",
+      "areaId": "owari",
+      "index": 5,
+      "name": "桶狭間への道",
+      "description": "育てた五人の役割を揃え、今川の本陣に挑もう。",
+      "energyCost": 5,
+      "waves": [
+        [
+          {
+            "id": "2-5/W1/1",
+            "name": "女侍",
+            "image": "",
+            "level": 20,
+            "stats": {
+              "luk": 0,
+              "hp": 1800,
+              "atk": 200,
+              "def": 70,
+              "sp": 100
+            },
+            "order": 0,
+            "hitSpGain": 10,
+            "element": "earth",
+            "actionCount": 7,
+            "initialCount": 7,
+            "initialSp": 0,
+            "skills": [],
+            "passives": []
+          },
+          {
+            "id": "2-5/W1/2",
+            "name": "伝令",
+            "image": "",
+            "level": 20,
+            "stats": {
+              "luk": 0,
+              "hp": 1200,
+              "atk": 150,
+              "def": 40,
+              "sp": 100
+            },
+            "order": 1,
+            "hitSpGain": 10,
+            "element": "earth",
+            "actionCount": 7,
+            "initialCount": 7,
+            "initialSp": 0,
+            "skills": [],
+            "passives": []
+          }
+        ],
+        [
+          {
+            "id": "2-5/W2/1",
+            "name": "僧兵",
+            "image": "",
+            "level": 20,
+            "stats": {
+              "luk": 0,
+              "hp": 2500,
+              "atk": 240,
+              "def": 120,
+              "sp": 100
+            },
+            "order": 0,
+            "hitSpGain": 10,
+            "element": "fire",
+            "actionCount": 7,
+            "initialCount": 7,
+            "initialSp": 0,
+            "skills": [],
+            "passives": []
+          },
+          {
+            "id": "2-5/W2/2",
+            "name": "弓兵",
+            "image": "",
+            "level": 20,
+            "stats": {
+              "luk": 0,
+              "hp": 1400,
+              "atk": 220,
+              "def": 50,
+              "sp": 100
+            },
+            "order": 1,
+            "hitSpGain": 10,
+            "element": "water",
+            "actionCount": 7,
+            "initialCount": 7,
+            "initialSp": 0,
+            "skills": [],
+            "passives": []
+          }
+        ],
+        [
+          {
+            "id": "2-5/W3/1",
+            "name": "今川義元",
+            "image": "",
+            "level": 20,
+            "stats": {
+              "luk": 0,
+              "hp": 7500,
+              "atk": 420,
+              "def": 180,
+              "sp": 100
+            },
+            "order": 0,
+            "hitSpGain": 10,
+            "element": "wind",
+            "actionCount": 7,
+            "initialCount": 7,
+            "initialSp": 0,
+            "skills": [],
+            "passives": [],
+            "boss": true
+          }
+        ]
+      ],
+      "firstRewards": [
+        {
+          "kind": "cash",
+          "amount": 10000
+        },
+        {
+          "kind": "character_exp_item",
+          "id": "large",
+          "amount": 3
+        },
+        {
+          "kind": "equipment_exp_item",
+          "id": "medium",
+          "amount": 3
+        },
+        {
+          "kind": "skill_material",
+          "amount": 8
+        },
+        {
+          "kind": "soul",
+          "id": "char_genji_01",
+          "amount": 8
+        },
+        {
+          "kind": "ticket",
+          "id": "SPECIAL_TICKET_CHARACTER",
+          "amount": 1
+        },
+        {
+          "kind": "ticket",
+          "id": "SPECIAL_TICKET_SKILL",
+          "amount": 1
+        },
+        {
+          "kind": "ticket",
+          "id": "SPECIAL_TICKET_EQUIPMENT",
+          "amount": 1
+        }
+      ],
+      "rewards": [
+        {
+          "kind": "cash",
+          "amount": 800
+        },
+        {
+          "kind": "character_exp_item",
+          "id": "small",
+          "amount": 2
+        },
+        {
+          "kind": "equipment_exp_item",
+          "id": "small",
+          "amount": 1
+        }
+      ],
+      "rareRewards": [
+        {
+          "kind": "ticket",
+          "id": "SPECIAL_TICKET_CHARACTER",
+          "amount": 1,
+          "chance": 0.0025
+        },
+        {
+          "kind": "ticket",
+          "id": "SPECIAL_TICKET_SKILL",
+          "amount": 1,
+          "chance": 0.005
+        },
+        {
+          "kind": "ticket",
+          "id": "SPECIAL_TICKET_EQUIPMENT",
+          "amount": 1,
+          "chance": 0.0025
+        }
+      ],
+      "soulDrops": [],
       "ticketChance": 0.01,
       "playerExp": 25,
       "encounterChance": 0.01
@@ -24176,85 +24671,6 @@
       "skills": []
     },
     {
-      "stage": "1-2",
-      "wave": 1,
-      "position": 1,
-      "enemyId": "1-2/W1/1",
-      "characterId": "char_kageyama_01",
-      "skills": []
-    },
-    {
-      "stage": "1-2",
-      "wave": 1,
-      "position": 2,
-      "enemyId": "1-2/W1/2",
-      "characterId": "char_masato_01",
-      "skills": []
-    },
-    {
-      "stage": "1-2",
-      "wave": 1,
-      "position": 3,
-      "enemyId": "1-2/W1/3",
-      "characterId": "char_shun_01",
-      "skills": [
-        {
-          "id": "SKD039",
-          "lb": 0
-        }
-      ]
-    },
-    {
-      "stage": "1-3",
-      "wave": 1,
-      "position": 1,
-      "enemyId": "1-3/W1/1",
-      "characterId": "char_long_01",
-      "skills": []
-    },
-    {
-      "stage": "1-3",
-      "wave": 1,
-      "position": 2,
-      "enemyId": "1-3/W1/2",
-      "characterId": "char_masato_01",
-      "skills": []
-    },
-    {
-      "stage": "1-3",
-      "wave": 2,
-      "position": 1,
-      "enemyId": "1-3/W2/1",
-      "characterId": "char_tomoya_01",
-      "skills": []
-    },
-    {
-      "stage": "1-3",
-      "wave": 2,
-      "position": 2,
-      "enemyId": "1-3/W2/2",
-      "characterId": "char_rui_01",
-      "skills": [
-        {
-          "id": "SKD008",
-          "lb": 0
-        }
-      ]
-    },
-    {
-      "stage": "1-3",
-      "wave": 2,
-      "position": 3,
-      "enemyId": "1-3/W2/3",
-      "characterId": "char_shun_01",
-      "skills": [
-        {
-          "id": "SKD039",
-          "lb": 0
-        }
-      ]
-    },
-    {
       "stage": "2-1",
       "wave": 1,
       "position": 1,
@@ -28519,6 +28935,158 @@
           "lb": 8
         }
       ]
+    },
+    {
+      "stage": "1-2",
+      "wave": 1,
+      "position": 1,
+      "enemyId": "1-2/W1/1",
+      "characterId": "char_kageyama_01",
+      "skills": []
+    },
+    {
+      "stage": "1-2",
+      "wave": 1,
+      "position": 2,
+      "enemyId": "1-2/W1/2",
+      "characterId": "char_masato_01",
+      "skills": []
+    },
+    {
+      "stage": "1-2",
+      "wave": 1,
+      "position": 3,
+      "enemyId": "1-2/W1/3",
+      "characterId": "char_mark_01",
+      "skills": []
+    },
+    {
+      "stage": "1-3",
+      "wave": 1,
+      "position": 1,
+      "enemyId": "1-3/W1/1",
+      "characterId": "char_long_01",
+      "skills": []
+    },
+    {
+      "stage": "1-3",
+      "wave": 1,
+      "position": 2,
+      "enemyId": "1-3/W1/2",
+      "characterId": "char_masato_01",
+      "skills": []
+    },
+    {
+      "stage": "1-3",
+      "wave": 2,
+      "position": 1,
+      "enemyId": "1-3/W2/1",
+      "characterId": "char_rui_01",
+      "skills": []
+    },
+    {
+      "stage": "1-3",
+      "wave": 2,
+      "position": 2,
+      "enemyId": "1-3/W2/2",
+      "characterId": "char_tomoya_01",
+      "skills": []
+    },
+    {
+      "stage": "1-4",
+      "wave": 1,
+      "position": 1,
+      "enemyId": "1-4/W1/1",
+      "characterId": "char_kageyama_01",
+      "skills": []
+    },
+    {
+      "stage": "1-4",
+      "wave": 1,
+      "position": 2,
+      "enemyId": "1-4/W1/2",
+      "characterId": "char_masato_01",
+      "skills": []
+    },
+    {
+      "stage": "1-4",
+      "wave": 2,
+      "position": 1,
+      "enemyId": "1-4/W2/1",
+      "characterId": "char_maya_01",
+      "skills": []
+    },
+    {
+      "stage": "1-4",
+      "wave": 2,
+      "position": 2,
+      "enemyId": "1-4/W2/2",
+      "characterId": "char_alice_01",
+      "skills": []
+    },
+    {
+      "stage": "1-5",
+      "wave": 1,
+      "position": 1,
+      "enemyId": "1-5/W1/1",
+      "characterId": "char_long_01",
+      "skills": []
+    },
+    {
+      "stage": "1-5",
+      "wave": 1,
+      "position": 2,
+      "enemyId": "1-5/W1/2",
+      "characterId": "char_masato_01",
+      "skills": []
+    },
+    {
+      "stage": "1-5",
+      "wave": 2,
+      "position": 1,
+      "enemyId": "1-5/W2/1",
+      "characterId": "char_noa_01",
+      "skills": []
+    },
+    {
+      "stage": "2-5",
+      "wave": 1,
+      "position": 1,
+      "enemyId": "2-5/W1/1",
+      "characterId": "char_long_01",
+      "skills": []
+    },
+    {
+      "stage": "2-5",
+      "wave": 1,
+      "position": 2,
+      "enemyId": "2-5/W1/2",
+      "characterId": "char_gou_01",
+      "skills": []
+    },
+    {
+      "stage": "2-5",
+      "wave": 2,
+      "position": 1,
+      "enemyId": "2-5/W2/1",
+      "characterId": "char_kageyama_01",
+      "skills": []
+    },
+    {
+      "stage": "2-5",
+      "wave": 2,
+      "position": 2,
+      "enemyId": "2-5/W2/2",
+      "characterId": "char_masato_01",
+      "skills": []
+    },
+    {
+      "stage": "2-5",
+      "wave": 3,
+      "position": 1,
+      "enemyId": "2-5/W3/1",
+      "characterId": "char_genji_01",
+      "skills": []
     }
   ],
   "mapping": [
@@ -28542,15 +29110,15 @@
     },
     {
       "legacyId": "mikawa-4",
-      "stageId": null,
+      "stageId": "mikawa-4",
       "designId": "1-4",
-      "disposition": "retain_legacy_record_no_formal_target"
+      "disposition": "added_early_retention_stage"
     },
     {
       "legacyId": "mikawa-5",
-      "stageId": null,
+      "stageId": "mikawa-5",
       "designId": "1-5",
-      "disposition": "retain_legacy_record_no_formal_target"
+      "disposition": "added_early_retention_stage"
     },
     {
       "legacyId": "mikawa-6",
@@ -28590,9 +29158,9 @@
     },
     {
       "legacyId": "owari-5",
-      "stageId": null,
+      "stageId": "owari-5",
       "designId": "2-5",
-      "disposition": "retain_legacy_record_no_formal_target"
+      "disposition": "added_early_retention_stage"
     },
     {
       "legacyId": "owari-6",

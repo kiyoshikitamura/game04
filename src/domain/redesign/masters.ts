@@ -126,6 +126,7 @@ export function grantReward(original:RedesignState,reward:import('./types').Rewa
   if(!reward.id||!['SPECIAL_TICKET_CHARACTER','SPECIAL_TICKET_SKILL','SPECIAL_TICKET_EQUIPMENT'].includes(reward.id))throw new Error('券IDが不正です');
   state.questTicketGrants??={};state.questTicketGrants[reward.id]=(state.questTicketGrants[reward.id]??0)+amount;break;
  case 'cash':state.cash+=amount;break;
+ case 'free_diamonds':throw new Error('無償輝石は任務専用トランザクションで付与してください');
  case 'character_material':state.materials.character+=amount;break;
  case 'skill_material':state.materials.skill+=amount;break;
  case 'equipment_material':state.materials.equipment+=amount;break;
