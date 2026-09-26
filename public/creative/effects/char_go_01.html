@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>戦国姫 艶舞・イチョウエフェクトモック</title>
+  <style>
+    :root{color-scheme:dark;font-family:"Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif}*{box-sizing:border-box}
+    body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at 50% 20%,#66521a,#151006 72%);color:#fffbe8;overflow:hidden}
+    .app{display:grid;grid-template-columns:auto minmax(220px,290px);gap:18px;align-items:center;padding:14px}
+    .stage{position:relative;width:min(52vh,92vw);aspect-ratio:768/1376;overflow:hidden;border:1px solid rgba(255,222,98,.38);border-radius:8px;background:#e2bd43;box-shadow:0 18px 70px rgba(0,0,0,.65),0 0 32px rgba(255,203,45,.14);isolation:isolate}
+    .background,.character,canvas{position:absolute;inset:0;width:100%;height:100%}.background{object-fit:cover}canvas{pointer-events:none}#rearFx{z-index:1}
+    .character{z-index:2;inset:auto auto 4% 50%;width:78%;height:auto;transform:translateX(-50%);object-fit:contain;filter:drop-shadow(0 10px 12px rgba(24,43,70,.34));transition:opacity .18s ease}.character.changing{opacity:0}#frontFx{z-index:3}
+    .panel{padding:16px;border:1px solid rgba(255,222,98,.25);border-radius:10px;background:rgba(29,23,7,.93);box-shadow:0 12px 38px rgba(0,0,0,.38);backdrop-filter:blur(12px);max-height:94vh;overflow:auto}
+    h1{margin:0 0 6px;font-size:17px;letter-spacing:.08em}.sub{margin:0 0 14px;color:#9fb5d2;font-size:12px;line-height:1.6}.characters{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+    button{border:1px solid #405b7d;border-radius:6px;padding:8px 7px;background:linear-gradient(#243a58,#17283f);color:#eaf3ff;cursor:pointer;font:inherit;font-size:12px}button:hover{border-color:#7da9df}button.active{color:#fff;border-color:#a8d0ff;background:linear-gradient(#426991,#294969);box-shadow:inset 0 0 12px rgba(190,224,255,.13)}#toggle{width:100%;margin-top:14px}
+    label{display:block;margin-top:14px;font-size:12px;color:#f2dda0}input{width:100%;accent-color:#e5ba26}.note{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.09);font-size:11px;line-height:1.7;color:#c1a957}
+    @media(max-width:760px){body{overflow:auto}.app{grid-template-columns:1fr;justify-items:center}.stage{width:min(92vw,60vh)}.panel{width:min(92vw,460px);max-height:none}}
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="stage" aria-label="イチョウエフェクトプレビュー">
+      <img class="background" alt="躑躅ヶ崎館と甲府盆地">
+      <canvas id="rearFx"></canvas>
+      <img id="character" class="character" alt="武田信玄">
+      <canvas id="frontFx"></canvas>
+    </section>
+    <aside class="panel">
+      <h1>汎用・イチョウ演出</h1>
+      <p class="sub">黄色と黄緑のイチョウの葉が、扇形を見せながらゆっくり舞い落ちます。</p>
+      <div id="characters" class="characters"></div>
+      <button id="toggle">一時停止</button>
+      <label>イチョウの量 <span id="amountValue">100%</span></label><input id="amount" type="range" min="25" max="170" value="100">
+      <label>舞う速度 <span id="speedValue">100%</span></label><input id="speed" type="range" min="35" max="170" value="100">
+      <label>風向き <span id="windValue">右 24</span></label><input id="wind" type="range" min="-100" max="100" value="24">
+      <div class="note">演出内容：イチョウの落下・回転・表裏の反転・左右の揺らぎ<br>前景は大きく鮮明に、遠景は小さく淡く描画</div>
+    </aside>
+  </main>
+  <style>html,body{color-scheme:normal!important;margin:0!important;padding:0!important;background:transparent!important;overflow:hidden!important;width:100%;height:100%}body>:not(canvas){display:none!important}body>canvas{position:fixed!important;inset:0!important;width:100%!important;height:100%!important;pointer-events:none}</style><script>document.querySelectorAll('canvas').forEach(c=>document.body.appendChild(c));</script><script>
+    const W=768,H=1376;
+    const characters=[['伊達政宗','assets/date_masamune.png'],['上杉謙信','assets/uesugi_kenshin.png'],['織田信長','assets/oda_nobunaga.png'],['真田幸村','assets/sanada_yukimura.png'],['前田慶次','assets/maeda_keiji.png'],['徳川家康','assets/tokugawa_ieyasu.png'],['武田信玄','assets/takeda_shingen.png'],['豊臣秀吉','assets/toyotomi_hideyoshi.png'],['本多忠勝','assets/honda_tadakatsu.png'],['明智光秀','assets/akechi_mitsuhide.png']];
+    const rear=document.querySelector('#rearFx'),front=document.querySelector('#frontFx'),rearCtx=rear.getContext('2d'),frontCtx=front.getContext('2d'),character=document.querySelector('#character'),list=document.querySelector('#characters');
+    const amount=document.querySelector('#amount'),speed=document.querySelector('#speed'),wind=document.querySelector('#wind'),amountValue=document.querySelector('#amountValue'),speedValue=document.querySelector('#speedValue'),windValue=document.querySelector('#windValue'),toggle=document.querySelector('#toggle');
+    let density=1,speedRate=1,windRate=.24,running=true,elapsed=0,previous=performance.now();
+    function setup(canvas,ctx){const dpr=Math.min(devicePixelRatio||1,2);canvas.width=W*dpr;canvas.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}setup(rear,rearCtx);setup(front,frontCtx);
+    characters.forEach(([name,src])=>{const button=document.createElement('button');button.textContent=name;button.className=name==='武田信玄'?'active':'';button.addEventListener('click',()=>{if(character.src.endsWith(src))return;document.querySelectorAll('.characters button').forEach(b=>b.classList.remove('active'));button.classList.add('active');character.classList.add('changing');const next=new Image();next.onload=()=>{character.src=src;character.alt=name;requestAnimationFrame(()=>character.classList.remove('changing'))};next.src=src});list.appendChild(button)});
+    const leaves=Array.from({length:82},(_,i)=>{const front=i%4===0;return{x:(i*173)%W,y:(i*131)%H,front,size:front?8.5+(i%5)*1.5:4+(i%4)*.85,fall:front?27+(i%7)*3.8:14+(i%6)*2.4,sway:front?38+(i%5)*8:18+(i%4)*5,phase:i*.81,spin:.53+(i%7)*.13,alpha:front?.78+(i%3)*.06:.43+(i%4)*.08,hue:i%5}});
+    function ginkgoLeaf(ctx,x,y,p,time){ctx.save();ctx.translate(x,y);ctx.rotate(time*p.spin+p.phase);ctx.scale(.36+Math.abs(Math.sin(time*1.3+p.phase))*.64,1);ctx.globalAlpha=p.alpha;ctx.shadowBlur=p.front?4:2;ctx.shadowColor='rgba(115,82,10,.42)';const colors=['#f5c928','#ffd83f','#eab91c','#d8b627','#c7b637'];ctx.fillStyle=colors[p.hue];ctx.strokeStyle='rgba(142,101,14,.55)';ctx.lineWidth=.65;const s=p.size;ctx.beginPath();ctx.moveTo(0,.95*s);ctx.lineTo(-.16*s,.22*s);ctx.bezierCurveTo(-.92*s,.1*s,-1.04*s,-.55*s,-.72*s,-.9*s);ctx.bezierCurveTo(-.42*s,-1.22*s,-.1*s,-.9*s,0,-.6*s);ctx.bezierCurveTo(.1*s,-.9*s,.42*s,-1.22*s,.72*s,-.9*s);ctx.bezierCurveTo(1.04*s,-.55*s,.92*s,.1*s,.16*s,.22*s);ctx.lineTo(0,.95*s);ctx.closePath();ctx.fill();ctx.stroke();ctx.strokeStyle='rgba(255,241,135,.45)';ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(0,.75*s);ctx.lineTo(0,-.52*s);ctx.moveTo(0,.08*s);ctx.lineTo(-.55*s,-.63*s);ctx.moveTo(0,.08*s);ctx.lineTo(.55*s,-.63*s);ctx.stroke();ctx.restore()}
+    function drawLeaves(ctx,time,frontLayer){const count=Math.round(leaves.length*Math.min(density,1.7));leaves.slice(0,count).forEach(p=>{if(p.front!==frontLayer)return;const moveTime=time*speedRate,y=(p.y+moveTime*p.fall+Math.sin(moveTime*.68+p.phase)*10)%(H+140)-70,x=((p.x+Math.sin(moveTime*.46+p.phase)*p.sway+moveTime*windRate*14+W+120)%(W+120))-60;ginkgoLeaf(ctx,x,y,p,moveTime)})}
+    function render(time){rearCtx.clearRect(0,0,W,H);frontCtx.clearRect(0,0,W,H);drawLeaves(rearCtx,time,false);drawLeaves(frontCtx,time,true)}
+    function frame(now){const dt=Math.min((now-previous)/1000,.05);previous=now;if(running)elapsed+=dt;render(elapsed);requestAnimationFrame(frame)}requestAnimationFrame(frame);
+    toggle.addEventListener('click',()=>{running=!running;toggle.textContent=running?'一時停止':'再生'});amount.addEventListener('input',()=>{density=Number(amount.value)/100;amountValue.textContent=`${amount.value}%`});speed.addEventListener('input',()=>{speedRate=Number(speed.value)/100;speedValue.textContent=`${speed.value}%`});wind.addEventListener('input',()=>{windRate=Number(wind.value)/100;windValue.textContent=wind.value>0?`右 ${wind.value}`:wind.value<0?`左 ${Math.abs(wind.value)}`:'0'});document.addEventListener('visibilitychange',()=>{previous=performance.now()});
+  </script>
+</body>
+</html>

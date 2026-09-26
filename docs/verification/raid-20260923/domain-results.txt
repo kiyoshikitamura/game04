@@ -1,0 +1,5 @@
+PASS adopted encounter tables: 25 bosses / 85 rows, complete HP/ATK/DEF/count, full SP, images, reward bands and PlayerEXP
+PASS invasion: 5 castles × 12 stages × 3 draws, exact gate/lord stats, section10 shared HP, formation constraints and rewards
+PASS local transitions: loss no rewards, victory rewards, 3-win gate, fixed encounter level, snapshot isolation, JSON reload, battle/claim replay, expiry, leave, rescue cap, energy shortage, capacity
+PASS invasion transition: old-stage settlement, 3 wins across stages, no retroactive rewards, all 12 stages, final stop, repeat claim
+LIMIT: deterministic domain transition tests; live API, concurrency transactions, browser flow and battle-balance acceptance are separate.

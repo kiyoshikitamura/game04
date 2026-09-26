@@ -1,0 +1,64 @@
+{
+  "version": "GAME04_G3_FORMAL_20260925",
+  "specialRules": {
+    "character": {
+      "category": "character",
+      "singleCost": 300,
+      "tenCost": 3000,
+      "exchangePoints": 200,
+      "ticketId": "SPECIAL_TICKET_CHARACTER",
+      "rarityWeights": {
+        "R": 65,
+        "SR": 32,
+        "SSR": 3
+      }
+    },
+    "skill": {
+      "category": "skill",
+      "singleCost": 300,
+      "tenCost": 3000,
+      "exchangePoints": 100,
+      "ticketId": "SPECIAL_TICKET_SKILL",
+      "rarityWeights": {
+        "R": 60,
+        "SR": 35,
+        "SSR": 5
+      }
+    },
+    "equipment": {
+      "category": "equipment",
+      "singleCost": 200,
+      "tenCost": 2000,
+      "exchangePoints": 100,
+      "ticketId": "SPECIAL_TICKET_EQUIPMENT",
+      "rarityWeights": {
+        "R": 50,
+        "SR": 40,
+        "SSR": 10
+      }
+    }
+  },
+  "normalRule": {
+    "singleCost": 1000,
+    "tenCost": 10000,
+    "dailyFreeCount": 10,
+    "rarityWeights": {
+      "N": 49,
+      "R": 40,
+      "SR": 10,
+      "SSR": 1
+    },
+    "categoryWeights": {
+      "character": 20,
+      "skill": 30,
+      "equipment": 50
+    }
+  },
+  "assertions": [
+    "全特選プールR以上",
+    "無料10連は0銭・10件",
+    "同日2回目拒否",
+    "翌日利用可能"
+  ],
+  "held": []
+}

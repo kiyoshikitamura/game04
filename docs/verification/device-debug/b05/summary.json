@@ -1,0 +1,5748 @@
+{
+  "cases": {
+    "usable": {
+      "seed": 1,
+      "starts": 7,
+      "first": {
+        "id": 1,
+        "start": 158,
+        "actor": "qa-actor",
+        "actions": [
+          {
+            "frame": 159,
+            "skill": "attack-ready",
+            "spBefore": 362,
+            "spAfter": 361,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 164,
+            "skill": "attack-ready",
+            "spBefore": 361,
+            "spAfter": 360,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 169,
+            "skill": "attack-ready",
+            "spBefore": 360,
+            "spAfter": 359,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 174,
+            "skill": "attack-ready",
+            "spBefore": 359,
+            "spAfter": 358,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 179,
+            "skill": "attack-ready",
+            "spBefore": 358,
+            "spAfter": 357,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 158,
+            "event": "burst_start",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              362,
+              362
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 159,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              362,
+              361
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 160,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              361,
+              361
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 161,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              361,
+              361
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 162,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              361,
+              361
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 163,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              361,
+              361
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 164,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              361,
+              360
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 165,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              360,
+              360
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 166,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              360,
+              360
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 167,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              360,
+              360
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 168,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              360,
+              360
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 169,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              360,
+              359
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 170,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              359,
+              359
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 171,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              359,
+              359
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 172,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              359,
+              359
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 173,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              359,
+              359
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 174,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              359,
+              358
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 175,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              358,
+              358
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 176,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              358,
+              358
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 177,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              358,
+              358
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 178,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              358,
+              358
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 179,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              358,
+              357
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 180,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              357,
+              357
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 181,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              357,
+              357
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 182,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              357,
+              357
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 183,
+            "event": "burst_end",
+            "actor": "qa-actor",
+            "burst": false,
+            "sp": [
+              357,
+              357
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 183,
+        "endReason": "five_actions",
+        "burstCutIns": 5,
+        "burstSounds": 5,
+        "next": "action_start"
+      }
+    },
+    "spShortage": {
+      "seed": 1,
+      "starts": 12,
+      "first": {
+        "id": 1,
+        "start": 41,
+        "actor": "qa-actor",
+        "actions": [
+          {
+            "frame": 42,
+            "skill": "basic",
+            "spBefore": 200,
+            "spAfter": 200,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "too-expensive",
+                "priority": 1,
+                "cost": 500,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "insufficient_sp"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 47,
+            "skill": "basic",
+            "spBefore": 200,
+            "spAfter": 200,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "too-expensive",
+                "priority": 1,
+                "cost": 500,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "insufficient_sp"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 52,
+            "skill": "basic",
+            "spBefore": 200,
+            "spAfter": 200,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "too-expensive",
+                "priority": 1,
+                "cost": 500,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "insufficient_sp"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 57,
+            "skill": "basic",
+            "spBefore": 200,
+            "spAfter": 200,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "too-expensive",
+                "priority": 1,
+                "cost": 500,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "insufficient_sp"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 62,
+            "skill": "basic",
+            "spBefore": 200,
+            "spAfter": 200,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "too-expensive",
+                "priority": 1,
+                "cost": 500,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "insufficient_sp"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 41,
+            "event": "burst_start",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 42,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 43,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 44,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 45,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 46,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 47,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 48,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 49,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 50,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 51,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 52,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 53,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 54,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 55,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 56,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 57,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 58,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 59,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 60,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 61,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 62,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 63,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 64,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 65,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 66,
+            "event": "burst_end",
+            "actor": "qa-actor",
+            "burst": false,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 66,
+        "endReason": "five_actions",
+        "burstCutIns": 5,
+        "burstSounds": 5,
+        "next": "action_start"
+      }
+    },
+    "mixed": {
+      "seed": 1,
+      "starts": 8,
+      "first": {
+        "id": 1,
+        "start": 61,
+        "actor": "qa-actor",
+        "actions": [
+          {
+            "frame": 62,
+            "skill": "cost20",
+            "spBefore": 30,
+            "spAfter": 20,
+            "cost": 10,
+            "candidates": [
+              {
+                "id": "cost20",
+                "priority": 1,
+                "cost": 10,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 67,
+            "skill": "cost20",
+            "spBefore": 20,
+            "spAfter": 10,
+            "cost": 10,
+            "candidates": [
+              {
+                "id": "cost20",
+                "priority": 1,
+                "cost": 10,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 72,
+            "skill": "cost20",
+            "spBefore": 10,
+            "spAfter": 0,
+            "cost": 10,
+            "candidates": [
+              {
+                "id": "cost20",
+                "priority": 1,
+                "cost": 10,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 77,
+            "skill": "basic",
+            "spBefore": 0,
+            "spAfter": 0,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "cost20",
+                "priority": 1,
+                "cost": 10,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "insufficient_sp"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 82,
+            "skill": "basic",
+            "spBefore": 0,
+            "spAfter": 0,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "cost20",
+                "priority": 1,
+                "cost": 10,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "insufficient_sp"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 61,
+            "event": "burst_start",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              30,
+              30
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 62,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "cost20",
+            "burst": true,
+            "sp": [
+              30,
+              20
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 63,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "cost20",
+            "burst": true,
+            "sp": [
+              20,
+              20
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 64,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "cost20",
+            "burst": true,
+            "sp": [
+              20,
+              20
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 65,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              20,
+              20
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 66,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              20,
+              20
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 67,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "cost20",
+            "burst": true,
+            "sp": [
+              20,
+              10
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 68,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "cost20",
+            "burst": true,
+            "sp": [
+              10,
+              10
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 69,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "cost20",
+            "burst": true,
+            "sp": [
+              10,
+              10
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 70,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              10,
+              10
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 71,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              10,
+              10
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 72,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "cost20",
+            "burst": true,
+            "sp": [
+              10,
+              0
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 73,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "cost20",
+            "burst": true,
+            "sp": [
+              0,
+              0
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 74,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "cost20",
+            "burst": true,
+            "sp": [
+              0,
+              0
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 75,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              0,
+              0
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 76,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              0,
+              0
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 77,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              0,
+              0
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 78,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              0,
+              0
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 79,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              0,
+              0
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 80,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              0,
+              0
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 81,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              0,
+              0
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 82,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              0,
+              0
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 83,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              0,
+              0
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 84,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              0,
+              0
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 85,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              0,
+              0
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 86,
+            "event": "burst_end",
+            "actor": "qa-actor",
+            "burst": false,
+            "sp": [
+              0,
+              0
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 86,
+        "endReason": "five_actions",
+        "burstCutIns": 5,
+        "burstSounds": 5,
+        "next": "action_start"
+      }
+    },
+    "condition": {
+      "seed": 1,
+      "starts": 7,
+      "first": {
+        "id": 1,
+        "start": 158,
+        "actor": "qa-actor",
+        "actions": [
+          {
+            "frame": 159,
+            "skill": "attack-ready",
+            "spBefore": 362,
+            "spAfter": 361,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "hp-condition",
+                "priority": 1,
+                "cost": 1,
+                "condition": false,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "condition_unmet"
+              },
+              {
+                "id": "heal-no-target",
+                "priority": 2,
+                "cost": 1,
+                "condition": true,
+                "targets": [],
+                "reason": "no_applicable_target"
+              },
+              {
+                "id": "attack-ready",
+                "priority": 3,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 164,
+            "skill": "attack-ready",
+            "spBefore": 361,
+            "spAfter": 360,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "hp-condition",
+                "priority": 1,
+                "cost": 1,
+                "condition": false,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "condition_unmet"
+              },
+              {
+                "id": "heal-no-target",
+                "priority": 2,
+                "cost": 1,
+                "condition": true,
+                "targets": [],
+                "reason": "no_applicable_target"
+              },
+              {
+                "id": "attack-ready",
+                "priority": 3,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 169,
+            "skill": "attack-ready",
+            "spBefore": 360,
+            "spAfter": 359,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "hp-condition",
+                "priority": 1,
+                "cost": 1,
+                "condition": false,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "condition_unmet"
+              },
+              {
+                "id": "heal-no-target",
+                "priority": 2,
+                "cost": 1,
+                "condition": true,
+                "targets": [],
+                "reason": "no_applicable_target"
+              },
+              {
+                "id": "attack-ready",
+                "priority": 3,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 174,
+            "skill": "attack-ready",
+            "spBefore": 359,
+            "spAfter": 358,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "hp-condition",
+                "priority": 1,
+                "cost": 1,
+                "condition": false,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "condition_unmet"
+              },
+              {
+                "id": "heal-no-target",
+                "priority": 2,
+                "cost": 1,
+                "condition": true,
+                "targets": [],
+                "reason": "no_applicable_target"
+              },
+              {
+                "id": "attack-ready",
+                "priority": 3,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 179,
+            "skill": "attack-ready",
+            "spBefore": 358,
+            "spAfter": 357,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "hp-condition",
+                "priority": 1,
+                "cost": 1,
+                "condition": false,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "condition_unmet"
+              },
+              {
+                "id": "heal-no-target",
+                "priority": 2,
+                "cost": 1,
+                "condition": true,
+                "targets": [],
+                "reason": "no_applicable_target"
+              },
+              {
+                "id": "attack-ready",
+                "priority": 3,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 158,
+            "event": "burst_start",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              362,
+              362
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 159,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              362,
+              361
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 160,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              361,
+              361
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 161,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              361,
+              361
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 162,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              361,
+              361
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 163,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              361,
+              361
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 164,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              361,
+              360
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 165,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              360,
+              360
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 166,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              360,
+              360
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 167,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              360,
+              360
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 168,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              360,
+              360
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 169,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              360,
+              359
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 170,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              359,
+              359
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 171,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              359,
+              359
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 172,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              359,
+              359
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 173,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              359,
+              359
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 174,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              359,
+              358
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 175,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              358,
+              358
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 176,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              358,
+              358
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 177,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              358,
+              358
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 178,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              358,
+              358
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 179,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              358,
+              357
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 180,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              357,
+              357
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 181,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              357,
+              357
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 182,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              357,
+              357
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 183,
+            "event": "burst_end",
+            "actor": "qa-actor",
+            "burst": false,
+            "sp": [
+              357,
+              357
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 183,
+        "endReason": "five_actions",
+        "burstCutIns": 5,
+        "burstSounds": 5,
+        "next": "action_start"
+      }
+    },
+    "priority": {
+      "seed": 1,
+      "starts": 7,
+      "first": {
+        "id": 1,
+        "start": 158,
+        "actor": "qa-actor",
+        "actions": [
+          {
+            "frame": 159,
+            "skill": "priority-first",
+            "spBefore": 362,
+            "spAfter": 361,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "priority-first",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              },
+              {
+                "id": "priority-second",
+                "priority": 2,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "lower_priority"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 164,
+            "skill": "priority-first",
+            "spBefore": 361,
+            "spAfter": 360,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "priority-first",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              },
+              {
+                "id": "priority-second",
+                "priority": 2,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "lower_priority"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 169,
+            "skill": "priority-first",
+            "spBefore": 360,
+            "spAfter": 359,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "priority-first",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              },
+              {
+                "id": "priority-second",
+                "priority": 2,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "lower_priority"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 174,
+            "skill": "priority-first",
+            "spBefore": 359,
+            "spAfter": 358,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "priority-first",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              },
+              {
+                "id": "priority-second",
+                "priority": 2,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "lower_priority"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 179,
+            "skill": "priority-first",
+            "spBefore": 358,
+            "spAfter": 357,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "priority-first",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              },
+              {
+                "id": "priority-second",
+                "priority": 2,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "lower_priority"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 158,
+            "event": "burst_start",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              362,
+              362
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 159,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "priority-first",
+            "burst": true,
+            "sp": [
+              362,
+              361
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 160,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "priority-first",
+            "burst": true,
+            "sp": [
+              361,
+              361
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 161,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "priority-first",
+            "burst": true,
+            "sp": [
+              361,
+              361
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 162,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              361,
+              361
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 163,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              361,
+              361
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 164,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "priority-first",
+            "burst": true,
+            "sp": [
+              361,
+              360
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 165,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "priority-first",
+            "burst": true,
+            "sp": [
+              360,
+              360
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 166,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "priority-first",
+            "burst": true,
+            "sp": [
+              360,
+              360
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 167,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              360,
+              360
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 168,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              360,
+              360
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 169,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "priority-first",
+            "burst": true,
+            "sp": [
+              360,
+              359
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 170,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "priority-first",
+            "burst": true,
+            "sp": [
+              359,
+              359
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 171,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "priority-first",
+            "burst": true,
+            "sp": [
+              359,
+              359
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 172,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              359,
+              359
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 173,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              359,
+              359
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 174,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "priority-first",
+            "burst": true,
+            "sp": [
+              359,
+              358
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 175,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "priority-first",
+            "burst": true,
+            "sp": [
+              358,
+              358
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 176,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "priority-first",
+            "burst": true,
+            "sp": [
+              358,
+              358
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 177,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              358,
+              358
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 178,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              358,
+              358
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 179,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "priority-first",
+            "burst": true,
+            "sp": [
+              358,
+              357
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 180,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "priority-first",
+            "burst": true,
+            "sp": [
+              357,
+              357
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 181,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "priority-first",
+            "burst": true,
+            "sp": [
+              357,
+              357
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 182,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              357,
+              357
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 183,
+            "event": "burst_end",
+            "actor": "qa-actor",
+            "burst": false,
+            "sp": [
+              357,
+              357
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 183,
+        "endReason": "five_actions",
+        "burstCutIns": 5,
+        "burstSounds": 5,
+        "next": "action_start"
+      }
+    },
+    "notEquipped": {
+      "seed": 1,
+      "starts": 12,
+      "first": {
+        "id": 1,
+        "start": 41,
+        "actor": "qa-actor",
+        "actions": [
+          {
+            "frame": 42,
+            "skill": "basic",
+            "spBefore": 200,
+            "spAfter": 200,
+            "cost": 0,
+            "candidates": [],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 47,
+            "skill": "basic",
+            "spBefore": 200,
+            "spAfter": 200,
+            "cost": 0,
+            "candidates": [],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 52,
+            "skill": "basic",
+            "spBefore": 200,
+            "spAfter": 200,
+            "cost": 0,
+            "candidates": [],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 57,
+            "skill": "basic",
+            "spBefore": 200,
+            "spAfter": 200,
+            "cost": 0,
+            "candidates": [],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 62,
+            "skill": "basic",
+            "spBefore": 200,
+            "spAfter": 200,
+            "cost": 0,
+            "candidates": [],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 41,
+            "event": "burst_start",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 42,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 43,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 44,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 45,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 46,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 47,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 48,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 49,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 50,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 51,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 52,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 53,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 54,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 55,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 56,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 57,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 58,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 59,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 60,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 61,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 62,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 63,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 64,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 65,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 66,
+            "event": "burst_end",
+            "actor": "qa-actor",
+            "burst": false,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 66,
+        "endReason": "five_actions",
+        "burstCutIns": 5,
+        "burstSounds": 5,
+        "next": "action_start"
+      }
+    },
+    "death": {
+      "seed": 1,
+      "starts": 1,
+      "first": {
+        "id": 1,
+        "start": 41,
+        "actor": "qa-actor",
+        "actions": [
+          {
+            "frame": 42,
+            "skill": "basic",
+            "spBefore": 200,
+            "spAfter": 200,
+            "cost": 0,
+            "candidates": [],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 41,
+            "event": "burst_start",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 42,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 43,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 44,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 45,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 46,
+            "event": "interrupt_start",
+            "actor": "qa-enemy",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          },
+          {
+            "frame": 47,
+            "event": "action_start",
+            "actor": "qa-enemy",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 48,
+            "event": "damage",
+            "actor": "qa-enemy",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-actor"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 49,
+            "event": "death",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 600
+          },
+          {
+            "frame": 50,
+            "event": "action_end",
+            "actor": "qa-enemy",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 51,
+            "event": "interrupt_end",
+            "actor": "qa-enemy",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 52,
+            "event": "burst_end",
+            "actor": "qa-actor",
+            "burst": false,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 52,
+        "endReason": "actor_dead",
+        "burstCutIns": 1,
+        "burstSounds": 1
+      }
+    },
+    "kill": {
+      "seed": 1,
+      "starts": 1,
+      "first": {
+        "id": 1,
+        "start": 41,
+        "actor": "qa-actor",
+        "actions": [
+          {
+            "frame": 42,
+            "skill": "basic",
+            "spBefore": 200,
+            "spAfter": 200,
+            "cost": 0,
+            "candidates": [],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 47,
+            "skill": "basic",
+            "spBefore": 200,
+            "spAfter": 200,
+            "cost": 0,
+            "candidates": [],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 52,
+            "skill": "basic",
+            "spBefore": 200,
+            "spAfter": 200,
+            "cost": 0,
+            "candidates": [],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 41,
+            "event": "burst_start",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 42,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 43,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 44,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 45,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 46,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 47,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 48,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 49,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 50,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 51,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 52,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 53,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 54,
+            "event": "death",
+            "actor": "qa-enemy",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 600
+          },
+          {
+            "frame": 55,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 56,
+            "event": "burst_end",
+            "actor": "qa-actor",
+            "burst": false,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 56,
+        "endReason": "enemies_defeated",
+        "burstCutIns": 3,
+        "burstSounds": 3
+      }
+    },
+    "stun": {
+      "seed": 1,
+      "starts": 12,
+      "first": {
+        "id": 1,
+        "start": 41,
+        "actor": "qa-actor",
+        "actions": [
+          {
+            "frame": 42,
+            "skill": "basic",
+            "spBefore": 200,
+            "spAfter": 200,
+            "cost": 0,
+            "candidates": [],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 41,
+            "event": "burst_start",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 42,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 43,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 44,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 45,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 46,
+            "event": "interrupt_start",
+            "actor": "qa-enemy",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          },
+          {
+            "frame": 47,
+            "event": "action_start",
+            "actor": "qa-enemy",
+            "skill": "enemy-stun",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 48,
+            "event": "effect_applied",
+            "actor": "qa-enemy",
+            "skill": "enemy-stun",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-actor"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_DEBUFF"
+            ],
+            "duration": 250
+          },
+          {
+            "frame": 49,
+            "event": "action_end",
+            "actor": "qa-enemy",
+            "skill": "enemy-stun",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 50,
+            "event": "interrupt_end",
+            "actor": "qa-enemy",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 51,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 52,
+            "event": "stun_skip",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 450
+          },
+          {
+            "frame": 53,
+            "event": "burst_interrupted",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 600
+          },
+          {
+            "frame": 54,
+            "event": "burst_end",
+            "actor": "qa-actor",
+            "burst": false,
+            "sp": [
+              200,
+              200
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 54,
+        "endReason": "stunned",
+        "burstCutIns": 2,
+        "burstSounds": 2,
+        "next": "action_start"
+      }
+    },
+    "assist": {
+      "seed": 1,
+      "starts": 19,
+      "first": {
+        "id": 1,
+        "start": 78,
+        "actor": "qa-actor",
+        "actions": [
+          {
+            "frame": 79,
+            "skill": "attack-ready",
+            "spBefore": 382,
+            "spAfter": 381,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 84,
+            "skill": "attack-ready",
+            "spBefore": 381,
+            "spAfter": 380,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 89,
+            "skill": "attack-ready",
+            "spBefore": 380,
+            "spAfter": 379,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 94,
+            "skill": "attack-ready",
+            "spBefore": 379,
+            "spAfter": 378,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 99,
+            "skill": "attack-ready",
+            "spBefore": 378,
+            "spAfter": 377,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 78,
+            "event": "burst_start",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              382,
+              382
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 79,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              382,
+              381
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 80,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              381,
+              381
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 81,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              381,
+              381
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 82,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              381,
+              381
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 83,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              381,
+              381
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 84,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              381,
+              380
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 85,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              380,
+              380
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 86,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              380,
+              380
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 87,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              380,
+              380
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 88,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              380,
+              380
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 89,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              380,
+              379
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 90,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              379,
+              379
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 91,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              379,
+              379
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 92,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              379,
+              379
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 93,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              379,
+              379
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 94,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              379,
+              378
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 95,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              378,
+              378
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 96,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              378,
+              378
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 97,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              378,
+              378
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 98,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              378,
+              378
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 99,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              378,
+              377
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 100,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              377,
+              377
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 101,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              377,
+              377
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 102,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              377,
+              377
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 103,
+            "event": "burst_end",
+            "actor": "qa-actor",
+            "burst": false,
+            "sp": [
+              377,
+              377
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 103,
+        "endReason": "five_actions",
+        "burstCutIns": 5,
+        "burstSounds": 5,
+        "next": "action_start"
+      }
+    }
+  },
+  "saved": [
+    {
+      "stage": "mikawa-1",
+      "starts": 1,
+      "episodes": [
+        {
+          "start": 32,
+          "end": 64,
+          "actions": 5,
+          "reason": "five_actions",
+          "cutIns": 5
+        }
+      ]
+    },
+    {
+      "stage": "mikawa-2",
+      "starts": 2,
+      "episodes": [
+        {
+          "start": 28,
+          "end": 70,
+          "actions": 5,
+          "reason": "five_actions",
+          "cutIns": 5
+        },
+        {
+          "start": 103,
+          "end": 134,
+          "actions": 5,
+          "reason": "enemies_defeated",
+          "cutIns": 5
+        }
+      ]
+    },
+    {
+      "stage": "mikawa-3",
+      "starts": 1,
+      "episodes": [
+        {
+          "start": 66,
+          "end": 92,
+          "actions": 5,
+          "reason": "five_actions",
+          "cutIns": 5
+        }
+      ]
+    },
+    {
+      "stage": "mikawa-4",
+      "starts": 2,
+      "episodes": [
+        {
+          "start": 28,
+          "end": 65,
+          "actions": 5,
+          "reason": "five_actions",
+          "cutIns": 5
+        },
+        {
+          "start": 193,
+          "end": 225,
+          "actions": 5,
+          "reason": "five_actions",
+          "cutIns": 5
+        }
+      ]
+    },
+    {
+      "stage": "mikawa-5",
+      "starts": 3,
+      "episodes": [
+        {
+          "start": 38,
+          "end": 70,
+          "actions": 5,
+          "reason": "five_actions",
+          "cutIns": 5
+        },
+        {
+          "start": 105,
+          "end": 131,
+          "actions": 5,
+          "reason": "five_actions",
+          "cutIns": 5
+        },
+        {
+          "start": 168,
+          "end": 173,
+          "actions": 1,
+          "reason": "enemies_defeated",
+          "cutIns": 1
+        }
+      ]
+    }
+  ]
+}

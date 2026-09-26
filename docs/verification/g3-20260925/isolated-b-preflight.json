@@ -1,0 +1,25 @@
+{
+  "candidate": "GAME04 G3 isolated acceptance preflight",
+  "observedAt": "2026-09-25T10:02:53Z",
+  "projectRef": "znakrkaazliexzwihxge",
+  "qaUserId": "912cb2cb-4e2d-48ab-adf3-c17818e9021a",
+  "authentication": "anonymous Auth signup followed by initialize_current_player; session stored outside Git with mode 0600",
+  "getState": {
+    "status": 400,
+    "result": "BLOCKED",
+    "error": "Could not find the function public.game04_raid_rooms_with_owners(p_user_id) in the schema cache"
+  },
+  "formalGachaStatus": {
+    "status": "NOT_RUN",
+    "reason": "get_state dependency failed; no repeated request before dependency repair"
+  },
+  "readOnlyStateCheck": {
+    "rows": 1,
+    "version": 2,
+    "hasG3AcceptanceFixtureMarker": false,
+    "interpretation": "responseFor initialized the ordinary player state in parallel before the rooms dependency rejected"
+  },
+  "requiredRepair": "Apply and verify the reviewed game04_raid_rooms_with_owners RPC in the isolated project, reload the PostgREST schema, then retry once.",
+  "acceptance": false,
+  "containsCredentials": false
+}

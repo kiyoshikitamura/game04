@@ -1,0 +1,37 @@
+- alert
+- region "ゲーム画面":
+  - img "くノ一"
+  - generic: Lv.1
+  - strong: G2QA独立E
+  - generic "将来の同盟表示枠": ◇ 同盟 —
+  - button "アカウント連携": 未認証
+  - button "メニュー"
+  - generic: 銭 3,040
+  - generic: 輝石 0
+  - generic: 行動力 50/50
+  - main:
+    - heading "レイド" [level=1]
+    - button "更新"
+    - navigation "レイド種別":
+      - button "すべて" [pressed]
+      - button "エンカウント"
+      - button "領土侵攻"
+    - article:
+      - generic: 領土侵攻
+      - heading "安土城 Lv.1" [level=3]
+      - paragraph:
+        - generic: 風属性
+      - strong: 開催者 RQAWGst
+      - strong: HP 100%
+      - generic: 2日 1時間
+      - generic: 1/20人
+      - button "安土城の詳細": 詳細へ ›
+    - button "終了したレイド・未受取報酬 ›":
+      - text: 終了したレイド・未受取報酬
+      - generic: ›
+  - navigation "メインナビゲーション":
+    - button "本陣"
+    - button "出陣"
+    - button "武将"
+    - button "共闘" [active]
+    - button "召喚"

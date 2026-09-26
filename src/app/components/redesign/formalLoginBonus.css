@@ -1,0 +1,13 @@
+.g4-login-board{min-width:0;color:var(--g4-text)}
+.g4-login-summary{display:flex;align-items:center;gap:var(--g4-space-2);width:100%;min-height:44px;padding:var(--g4-space-2) 0;border:0;border-bottom:1px solid var(--g4-rule-border);background:transparent;color:inherit;text-align:left}
+.g4-login-summary>span:first-child{display:grid;gap:4px;flex:none;font-size:13px}.g4-login-summary small{font-size:12px}.g4-login-summary>.g4-compact-rewards{flex:1;justify-content:flex-end}
+.g4-login-received{margin:var(--g4-space-1) 0;font-size:12px;color:var(--g4-muted);text-align:right}
+.g4-login-board-title{font:700 16px/1.4 var(--g4-serif);margin:var(--g4-space-3) 0 var(--g4-space-2);color:var(--g4-gold)}.g4-login-board-title small{font:400 12px/1.4 sans-serif}
+.g4-login-days{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:start;gap:var(--g4-space-1);list-style:none;padding:0;margin:0}
+.g4-login-days>li{min-width:0;border:1px solid var(--g4-rule-border);border-radius:var(--g4-radius);background:var(--g4-reading-surface)}
+.g4-login-days button{width:100%;min-height:44px;padding:var(--g4-space-1) 2px;background:transparent;color:inherit;border:0}
+.g4-login-day-heading{display:grid;gap:2px;margin-bottom:4px;text-align:center;line-height:1.4}.g4-login-day-heading b{font-size:12px}.g4-login-day-heading>span{min-height:17px;font-size:11px;color:var(--g4-muted)}
+.g4-login-days .g4-compact-rewards{display:grid;justify-items:center;gap:2px}.g4-login-days .g4-compact-rewards>span{display:grid;justify-items:center;gap:0}.g4-login-days .g4-compact-rewards img{width:24px;height:24px}.g4-login-days .g4-compact-rewards b,.g4-login-days .g4-compact-rewards small{font-size:11px}
+.g4-login-days>li[data-status='本日']{outline:1px solid var(--g4-gold);border-color:var(--g4-gold);background:#4d241d}.g4-login-days>li[data-status='本日'] .g4-login-day-heading>span{color:var(--g4-gold);font-weight:700}
+.g4-login-days>li[data-status='次回']{border-color:#bba371;background:#322c25}.g4-login-days>li[data-status='受取済み'] .g4-login-day-heading>span{color:#b7d6b4}
+.g4-login-note{font-size:12px;line-height:1.6;color:var(--g4-muted);margin:var(--g4-space-3) 0 0}

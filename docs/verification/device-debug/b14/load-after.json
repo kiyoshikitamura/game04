@@ -1,0 +1,74 @@
+{
+  "condition": "375x600; fresh context; cache disabled; 80ms latency; 50Mbps down; 750Kbps up; warm compiler; navigation to first intro",
+  "rows": [
+    {
+      "iteration": 1,
+      "ms": 2146,
+      "imageRequestsBeforeIntro": 6,
+      "imageBytesBeforeIntro": 3083361,
+      "images": [
+        {
+          "url": "http://localhost:3013/branding/tribe-neon-logo.png",
+          "bytes": 1383336,
+          "duration": 927.7000000178814
+        },
+        {
+          "url": "http://localhost:3013/bg/approved-20260925/ssr-char_reiji_01.webp",
+          "bytes": 230688,
+          "duration": 276.09999999403954
+        },
+        {
+          "url": "http://localhost:3013/characters/reiji_transparent_asset.png",
+          "bytes": 1469337,
+          "duration": 1013.6000000238419
+        }
+      ]
+    },
+    {
+      "iteration": 2,
+      "ms": 2165,
+      "imageRequestsBeforeIntro": 6,
+      "imageBytesBeforeIntro": 3083361,
+      "images": [
+        {
+          "url": "http://localhost:3013/branding/tribe-neon-logo.png",
+          "bytes": 1383336,
+          "duration": 913.1999999880791
+        },
+        {
+          "url": "http://localhost:3013/bg/approved-20260925/ssr-char_reiji_01.webp",
+          "bytes": 230688,
+          "duration": 270.40000000596046
+        },
+        {
+          "url": "http://localhost:3013/characters/reiji_transparent_asset.png",
+          "bytes": 1469337,
+          "duration": 1001.4000000059605
+        }
+      ]
+    },
+    {
+      "iteration": 3,
+      "ms": 2147,
+      "imageRequestsBeforeIntro": 6,
+      "imageBytesBeforeIntro": 3083361,
+      "images": [
+        {
+          "url": "http://localhost:3013/branding/tribe-neon-logo.png",
+          "bytes": 1383336,
+          "duration": 956
+        },
+        {
+          "url": "http://localhost:3013/bg/approved-20260925/ssr-char_reiji_01.webp",
+          "bytes": 230688,
+          "duration": 279.19999998807907
+        },
+        {
+          "url": "http://localhost:3013/characters/reiji_transparent_asset.png",
+          "bytes": 1469337,
+          "duration": 1010
+        }
+      ]
+    }
+  ]
+}

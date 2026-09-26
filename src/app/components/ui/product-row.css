@@ -1,0 +1,11 @@
+.g4-product-row{display:grid;grid-template-columns:48px minmax(0,1fr) auto;align-items:center;gap:8px 12px;padding:12px 0;border-bottom:1px solid var(--g4-rule-border);min-width:0}
+.g4-product-icon{width:48px;height:48px;display:grid;place-items:center}.g4-product-icon img{width:48px;height:48px;object-fit:contain}
+.g4-product-copy{min-width:0;overflow-wrap:anywhere}
+body.game04-theme .g4-product-copy h3{margin:0;font:600 16px/1.4 var(--g4-sans);color:var(--g4-text)}
+body.game04-theme .g4-product-copy p,.g4-product-copy>div{margin:4px 0 0;font-size:14px;line-height:1.4;color:var(--g4-muted)}
+.g4-product-action{grid-column:3;grid-row:1;justify-self:end;max-width:100%}
+.g4-product-action button{min-width:104px;white-space:nowrap}
+.g4-product-description{grid-column:1/-1;min-width:0;font-size:14px;line-height:1.4;color:var(--g4-muted)}
+.g4-product-description:empty{display:none}
+.g4-product-description .g4-reward-list>li{padding-block:4px;border:0;grid-template-columns:24px minmax(0,1fr) auto}
+.g4-product-description .g4-reward-list img{width:24px;height:24px}

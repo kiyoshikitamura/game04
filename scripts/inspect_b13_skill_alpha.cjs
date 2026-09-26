@@ -1,0 +1,4 @@
+const fs=require('fs'),sharp=require('sharp');
+(async()=>{const rows=JSON.parse(fs.readFileSync('src/domain/redesign/data/formal-skill-presentation.json','utf8')),result=[];
+for(const row of rows){const image=sharp('public'+row.image),meta=await image.metadata();const {data,info}=await image.ensureAlpha().raw().toBuffer({resolveWithObject:true});let transparent=0,opaqueDark=0;for(let i=0;i<data.length;i+=info.channels){if(data[i+3]<255)transparent++;if(data[i+3]===255&&data[i]<24&&data[i+1]<24&&data[i+2]<24)opaqueDark++;}result.push({id:row.id,image:row.image,width:meta.width,height:meta.height,hasAlpha:meta.hasAlpha,transparentPixels:transparent,opaqueDarkPixels:opaqueDark});}
+fs.writeFileSync('docs/verification/device-debug/b13/skill-alpha.json',JSON.stringify(result,null,2));console.log(JSON.stringify({count:result.length,withTransparentPixels:result.filter(r=>r.transparentPixels).length,opaque:result.filter(r=>!r.transparentPixels).length}));})();

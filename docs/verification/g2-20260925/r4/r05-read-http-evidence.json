@@ -1,0 +1,19 @@
+{
+  "result": "PASS",
+  "scope": "production read effects + installed supabase-js + loopback HTTP fault server",
+  "notCovered": ["live Preview DOM", "development database RLS", "physical device", "battle image failure"],
+  "command": "node scripts/verify_g2_read_http_recovery.cjs",
+  "cases": [
+    {"kind":"news","mode":"HTTP 503","elapsedMs":7030,"retained":true},
+    {"kind":"home activity","mode":"HTTP 503","elapsedMs":23,"retained":true},
+    {"kind":"news","mode":"socket disconnect","elapsedMs":7021,"retained":true},
+    {"kind":"home activity","mode":"socket disconnect","elapsedMs":10,"retained":true},
+    {"kind":"news","mode":"no response","elapsedMs":12002,"retained":true},
+    {"kind":"home activity","mode":"no response","elapsedMs":12002,"retained":true}
+  ],
+  "timeoutAbortClosedHttp":true,
+  "retrySuccesses":6,
+  "profilePendingDoesNotBlockFeed":true,
+  "httpCalls":20,
+  "data":"Isolated artificial response rows and retained component state; no development DB read/write"
+}

@@ -1,0 +1,337 @@
+{
+  "status": "PASS_FOR_BROWSER_DOUBLE_CLICK_DB_READBACK",
+  "project": "lrgyllgzcdcphlbmkknc",
+  "scope": "Read-only SQL restricted to the newly created QA user 出陣検証0924. No user state changed by this verification.",
+  "checks": {
+    "oneBattleRecord": true,
+    "oneQuestAttempt": true,
+    "oneQuestClear": true,
+    "settledWin": true,
+    "cashRewardOnce": true,
+    "initialEnergyCostZero": true
+  },
+  "evidence": {
+    "cash": 3100,
+    "deck": [
+      {
+        "skillIds": [
+          "SKILL_002"
+        ],
+        "equipment": {},
+        "characterId": "char_gou_01"
+      },
+      {
+        "skillIds": [
+          "SKILL_001"
+        ],
+        "equipment": {},
+        "characterId": "char_alice_01"
+      },
+      {
+        "skillIds": [
+          "SKILL_003"
+        ],
+        "equipment": {},
+        "characterId": "char_kageyama_01"
+      },
+      {
+        "skillIds": [
+          "SKILL_004"
+        ],
+        "equipment": {},
+        "characterId": "char_kenji_01"
+      },
+      {
+        "skillIds": [
+          "SKILL_005"
+        ],
+        "equipment": {},
+        "characterId": "char_long_01"
+      }
+    ],
+    "energy": 50,
+    "userId": "ca8de6f5-9c83-4813-9b2d-b0a1a2cb6596",
+    "battles": [
+      {
+        "id": "12adbba3-e822-4048-abd7-6d82e997fe97",
+        "kind": "quest",
+        "status": "settled",
+        "outcome": "win",
+        "rewards": [
+          {
+            "kind": "cash",
+            "amount": 500
+          },
+          {
+            "id": "small",
+            "kind": "character_exp_item",
+            "amount": 1
+          },
+          {
+            "id": "small",
+            "kind": "equipment_exp_item",
+            "amount": 1
+          },
+          {
+            "id": "SPECIAL_TICKET_SKILL",
+            "kind": "ticket",
+            "amount": 1
+          },
+          {
+            "id": "char_jihoon_01",
+            "kind": "character",
+            "amount": 1
+          }
+        ],
+        "targetId": "mikawa-1",
+        "createdAt": "2026-09-23T17:58:47.692264+00:00",
+        "settledAt": "2026-09-23T17:58:48.640063+00:00",
+        "waveCount": 1,
+        "questMasterVersion": "APPROVED_QUEST65_ROUND17_20260922"
+      }
+    ],
+    "diamonds": 0,
+    "requests": [
+      {
+        "id": "12adbba3-e822-4048-abd7-6d82e997fe97",
+        "cash": 2600,
+        "energy": 50,
+        "createdAt": "2026-09-23T17:58:47.692264+00:00",
+        "stateVersion": 3,
+        "questAttempts": {
+          "mikawa-1": 1
+        }
+      },
+      {
+        "id": "984e8ca7-7e2e-4769-9bea-aeefae16eefd",
+        "cash": 2600,
+        "energy": 50,
+        "createdAt": "2026-09-23T17:58:01.089458+00:00",
+        "stateVersion": 2,
+        "questAttempts": null
+      },
+      {
+        "id": "a199394b-956b-4a52-bd5c-b9ad015d9f74",
+        "cash": 3100,
+        "energy": 50,
+        "createdAt": "2026-09-23T17:58:48.640063+00:00",
+        "stateVersion": 4,
+        "questAttempts": {
+          "mikawa-1": 1
+        }
+      },
+      {
+        "id": "bfb392b9-0c87-4860-b8da-2f51b6b22855",
+        "cash": 2600,
+        "energy": 50,
+        "createdAt": "2026-09-23T17:53:06.266417+00:00",
+        "stateVersion": 1,
+        "questAttempts": null
+      }
+    ],
+    "username": "出陣検証0924",
+    "checkedAt": "2026-09-23T17:59:33.647059+00:00",
+    "stateVersion": 4,
+    "clearedStages": [
+      "mikawa-1"
+    ],
+    "questAttempts": {
+      "mikawa-1": 1
+    },
+    "questClearCounts": {
+      "mikawa-1": 1
+    }
+  },
+  "limitations": [
+    "Explicit same-request HTTP replay is not covered; browser double-click is separately confirmed for the zero-cost first challenge and a paid retry."
+  ],
+  "paidRetry": {
+    "status": "PASS_FOR_BROWSER_PAID_RETRY_DOUBLE_CLICK_DB_READBACK",
+    "checks": {
+      "twoTotalBattles": true,
+      "onlyOneNewBattle": true,
+      "energyChargedFiveOnce": true,
+      "questAttemptsTwo": true,
+      "questClearCountsTwo": true,
+      "noFirstClearFlag": true,
+      "noFirstClearTicketOrCharacter": true,
+      "cashRewardOnce": true
+    },
+    "evidence": {
+      "cash": 3600,
+      "deck": [
+        {
+          "skillIds": [
+            "SKILL_002"
+          ],
+          "equipment": {},
+          "characterId": "char_gou_01"
+        },
+        {
+          "skillIds": [
+            "SKILL_001"
+          ],
+          "equipment": {},
+          "characterId": "char_alice_01"
+        },
+        {
+          "skillIds": [
+            "SKILL_003"
+          ],
+          "equipment": {},
+          "characterId": "char_kageyama_01"
+        },
+        {
+          "skillIds": [
+            "SKILL_004"
+          ],
+          "equipment": {},
+          "characterId": "char_kenji_01"
+        },
+        {
+          "skillIds": [
+            "SKILL_005"
+          ],
+          "equipment": {},
+          "characterId": "char_long_01"
+        }
+      ],
+      "energy": 45,
+      "userId": "ca8de6f5-9c83-4813-9b2d-b0a1a2cb6596",
+      "battles": [
+        {
+          "id": "12adbba3-e822-4048-abd7-6d82e997fe97",
+          "status": "settled",
+          "outcome": "win",
+          "rewards": [
+            {
+              "kind": "cash",
+              "amount": 500
+            },
+            {
+              "id": "small",
+              "kind": "character_exp_item",
+              "amount": 1
+            },
+            {
+              "id": "small",
+              "kind": "equipment_exp_item",
+              "amount": 1
+            },
+            {
+              "id": "SPECIAL_TICKET_SKILL",
+              "kind": "ticket",
+              "amount": 1
+            },
+            {
+              "id": "char_jihoon_01",
+              "kind": "character",
+              "amount": 1
+            }
+          ],
+          "targetId": "mikawa-1",
+          "createdAt": "2026-09-23T17:58:47.692264+00:00",
+          "settledAt": "2026-09-23T17:58:48.640063+00:00",
+          "firstClear": true
+        },
+        {
+          "id": "53a6a1f1-c1f4-43a4-a6bc-04e91984fde6",
+          "status": "settled",
+          "outcome": "win",
+          "rewards": [
+            {
+              "kind": "cash",
+              "amount": 500
+            },
+            {
+              "id": "small",
+              "kind": "character_exp_item",
+              "amount": 1
+            },
+            {
+              "id": "small",
+              "kind": "equipment_exp_item",
+              "amount": 1
+            }
+          ],
+          "targetId": "mikawa-1",
+          "createdAt": "2026-09-23T18:04:40.233413+00:00",
+          "settledAt": "2026-09-23T18:04:41.635703+00:00",
+          "firstClear": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "bfb392b9-0c87-4860-b8da-2f51b6b22855",
+          "cash": 2600,
+          "energy": 50,
+          "createdAt": "2026-09-23T17:53:06.266417+00:00",
+          "stateVersion": 1,
+          "questAttempts": null
+        },
+        {
+          "id": "984e8ca7-7e2e-4769-9bea-aeefae16eefd",
+          "cash": 2600,
+          "energy": 50,
+          "createdAt": "2026-09-23T17:58:01.089458+00:00",
+          "stateVersion": 2,
+          "questAttempts": null
+        },
+        {
+          "id": "12adbba3-e822-4048-abd7-6d82e997fe97",
+          "cash": 2600,
+          "energy": 50,
+          "createdAt": "2026-09-23T17:58:47.692264+00:00",
+          "stateVersion": 3,
+          "questAttempts": {
+            "mikawa-1": 1
+          }
+        },
+        {
+          "id": "a199394b-956b-4a52-bd5c-b9ad015d9f74",
+          "cash": 3100,
+          "energy": 50,
+          "createdAt": "2026-09-23T17:58:48.640063+00:00",
+          "stateVersion": 4,
+          "questAttempts": {
+            "mikawa-1": 1
+          }
+        },
+        {
+          "id": "53a6a1f1-c1f4-43a4-a6bc-04e91984fde6",
+          "cash": 3100,
+          "energy": 45,
+          "createdAt": "2026-09-23T18:04:40.233413+00:00",
+          "stateVersion": 5,
+          "questAttempts": {
+            "mikawa-1": 2
+          }
+        },
+        {
+          "id": "b4a5f6f8-7a5f-4fc8-aa38-63c9a7cf20bc",
+          "cash": 3600,
+          "energy": 45,
+          "createdAt": "2026-09-23T18:04:41.635703+00:00",
+          "stateVersion": 6,
+          "questAttempts": {
+            "mikawa-1": 2
+          }
+        }
+      ],
+      "username": "出陣検証0924",
+      "checkedAt": "2026-09-23T18:05:20.053352+00:00",
+      "stateVersion": 6,
+      "clearedStages": [
+        "mikawa-1"
+      ],
+      "questAttempts": {
+        "mikawa-1": 2
+      },
+      "questClearCounts": {
+        "mikawa-1": 2
+      }
+    },
+    "browserObservationReportedByParent": "Page reload retained cash 3100, energy 50, clear mikawa-1 and deck first member 伝令; parent then double-clicked paid retry CTA.",
+    "limitation": "UI double-click and persisted records only; not an explicit same-request HTTP replay."
+  }
+}

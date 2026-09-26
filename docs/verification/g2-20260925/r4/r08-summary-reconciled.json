@@ -1,0 +1,298 @@
+[
+  {
+    "case": "resume",
+    "start": 45424.9,
+    "observed": 48603.1,
+    "ms": 3178.2,
+    "outcome": "ready",
+    "waits": [
+      {
+        "type": "request / get_state",
+        "start": 45736.3,
+        "end": 47446.5,
+        "ms": 1710.2
+      },
+      {
+        "type": "image-group / home",
+        "start": 47482.7,
+        "end": 47940.7,
+        "ms": 458.0
+      }
+    ]
+  },
+  {
+    "case": "pilot-growth-tab-only",
+    "start": 74267.1,
+    "observed": 76429.3,
+    "ms": 2162.2,
+    "outcome": "ready",
+    "waits": [
+      {
+        "type": "image-group / growth",
+        "start": 74289.6,
+        "end": 74998.5,
+        "ms": 708.9
+      },
+      {
+        "type": "request / get_state",
+        "start": 74273.2,
+        "end": 75921.7,
+        "ms": 1648.5
+      }
+    ]
+  },
+  {
+    "case": "warm-home-1",
+    "start": 98795.3,
+    "observed": 100824.6,
+    "ms": 2029.3,
+    "outcome": "ready",
+    "waits": [
+      {
+        "type": "image-group / home",
+        "start": 98803.0,
+        "end": 98806.8,
+        "ms": 3.8
+      },
+      {
+        "type": "request / get_state",
+        "start": 98800.5,
+        "end": 100968.6,
+        "ms": 2168.1,
+        "supplementedFrom": "final cumulative timing"
+      }
+    ]
+  },
+  {
+    "case": "warm-home-2",
+    "start": 155281.9,
+    "observed": 157311.9,
+    "ms": 2030.0,
+    "outcome": "ready",
+    "waits": [
+      {
+        "type": "image-group / home",
+        "start": 155292.1,
+        "end": 155295.9,
+        "ms": 3.8
+      },
+      {
+        "type": "request / get_state",
+        "start": 155288.7,
+        "end": 156966.1,
+        "ms": 1677.4
+      }
+    ]
+  },
+  {
+    "case": "repeat-growth-1",
+    "start": 180427.4,
+    "observed": 182456.4,
+    "ms": 2029.0,
+    "outcome": "ready",
+    "waits": [
+      {
+        "type": "image-group / growth",
+        "start": 180439.6,
+        "end": 180444.7,
+        "ms": 5.1
+      },
+      {
+        "type": "request / get_state",
+        "start": 180433.9,
+        "end": 181905.0,
+        "ms": 1471.1
+      }
+    ]
+  },
+  {
+    "case": "repeat-home-1",
+    "start": 184493.1,
+    "observed": 186521.8,
+    "ms": 2028.7,
+    "outcome": "ready",
+    "waits": [
+      {
+        "type": "image-group / home",
+        "start": 184501.8,
+        "end": 184506.9,
+        "ms": 5.1
+      },
+      {
+        "type": "request / get_state",
+        "start": 184498.6,
+        "end": 185763.8,
+        "ms": 1265.2
+      }
+    ]
+  },
+  {
+    "case": "repeat-growth-2",
+    "start": 188558.0,
+    "observed": 190588.2,
+    "ms": 2030.2,
+    "outcome": "ready",
+    "waits": [
+      {
+        "type": "image-group / growth",
+        "start": 188565.4,
+        "end": 188568.6,
+        "ms": 3.2
+      },
+      {
+        "type": "request / get_state",
+        "start": 188562.5,
+        "end": 190046.2,
+        "ms": 1483.7
+      }
+    ]
+  },
+  {
+    "case": "repeat-home-2",
+    "start": 192624.8,
+    "observed": 194654.4,
+    "ms": 2029.6,
+    "outcome": "ready",
+    "waits": [
+      {
+        "type": "image-group / home",
+        "start": 192634.4,
+        "end": 192637.8,
+        "ms": 3.4
+      },
+      {
+        "type": "request / get_state",
+        "start": 192631.6,
+        "end": 193851.7,
+        "ms": 1220.1
+      }
+    ]
+  },
+  {
+    "case": "repeat-growth-3",
+    "start": 196691.2,
+    "observed": 198719.9,
+    "ms": 2028.7,
+    "outcome": "ready",
+    "waits": [
+      {
+        "type": "image-group / growth",
+        "start": 196699.7,
+        "end": 196703.1,
+        "ms": 3.4
+      },
+      {
+        "type": "request / get_state",
+        "start": 196696.5,
+        "end": 198243.0,
+        "ms": 1546.5
+      }
+    ]
+  },
+  {
+    "case": "repeat-home-3",
+    "start": 200755.8,
+    "observed": 202785.6,
+    "ms": 2029.8,
+    "outcome": "ready",
+    "waits": [
+      {
+        "type": "image-group / home",
+        "start": 200766.0,
+        "end": 200769.0,
+        "ms": 3.0
+      },
+      {
+        "type": "request / get_state",
+        "start": 200762.1,
+        "end": 202005.2,
+        "ms": 1243.1
+      }
+    ]
+  },
+  {
+    "case": "repeat-growth-4",
+    "start": 261311.1,
+    "observed": 262352.1,
+    "ms": 1041.0,
+    "outcome": "ready",
+    "waits": [
+      {
+        "type": "image-group / growth",
+        "start": 261333.2,
+        "end": 261337.9,
+        "ms": 4.7
+      },
+      {
+        "type": "request / get_state",
+        "start": 261323.3,
+        "end": 262828.1,
+        "ms": 1504.8,
+        "supplementedFrom": "final cumulative timing"
+      }
+    ]
+  },
+  {
+    "case": "repeat-home-4",
+    "start": 264376.8,
+    "observed": 266404.8,
+    "ms": 2028.0,
+    "outcome": "ready",
+    "waits": [
+      {
+        "type": "image-group / home",
+        "start": 264388.9,
+        "end": 264393.3,
+        "ms": 4.4
+      },
+      {
+        "type": "request / get_state",
+        "start": 264385.9,
+        "end": 265617.2,
+        "ms": 1231.3
+      }
+    ]
+  },
+  {
+    "case": "repeat-growth-5",
+    "start": 268442.9,
+    "observed": 270471.3,
+    "ms": 2028.4,
+    "outcome": "ready",
+    "waits": [
+      {
+        "type": "image-group / growth",
+        "start": 268453.9,
+        "end": 268458.7,
+        "ms": 4.8
+      },
+      {
+        "type": "request / get_state",
+        "start": 268449.6,
+        "end": 270066.3,
+        "ms": 1616.7
+      }
+    ]
+  },
+  {
+    "case": "repeat-home-5",
+    "start": 272507.5,
+    "observed": 274535.7,
+    "ms": 2028.2,
+    "outcome": "ready",
+    "waits": [
+      {
+        "type": "image-group / home",
+        "start": 272518.1,
+        "end": 272521.6,
+        "ms": 3.5
+      },
+      {
+        "type": "request / get_state",
+        "start": 272515.7,
+        "end": 273660.1,
+        "ms": 1144.4
+      }
+    ]
+  }
+]

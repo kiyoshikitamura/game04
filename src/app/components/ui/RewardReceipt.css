@@ -1,0 +1,9 @@
+.reward-receipt{display:grid;gap:var(--g4-space-3);font:400 16px/1.6 var(--g4-sans)}
+.reward-receipt-list{display:grid;gap:var(--g4-space-2)}
+.reward-receipt-item{display:grid;grid-template-columns:32px minmax(0,1fr) auto;align-items:center;gap:8px;min-height:48px;padding:8px 0;border-bottom:1px solid var(--g4-rule-border);background:var(--g4-panel)}
+.reward-receipt-mark{width:32px;height:32px;object-fit:contain}
+.reward-receipt-item.is-cosmetic{grid-template-columns:48px minmax(0,1fr)}
+.reward-receipt-cosmetic-mark{display:grid;place-items:center;min-height:24px;border:1px solid var(--g4-rule-border);border-radius:var(--g4-radius);color:var(--g4-gold);font-size:14px;font-weight:600}
+.reward-receipt-name{min-width:0;overflow-wrap:anywhere;color:var(--g4-text);font-size:16px;font-weight:600}
+.reward-receipt-quantity{color:var(--g4-gold);white-space:nowrap;font-size:16px;font-variant-numeric:tabular-nums}
+.reward-receipt-note{margin:0;color:var(--g4-muted);font-size:14px;line-height:1.6;text-align:left;white-space:pre-line}

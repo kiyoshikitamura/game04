@@ -1,0 +1,99 @@
+/* SubTabNav.css */
+
+.outlaw-sub-tab-shell {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  align-items: stretch;
+  background: var(--g4-panel);
+  border: 1px solid var(--g4-rule-border);
+}
+
+.outlaw-sub-tab-nav {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  touch-action: pan-x;
+}
+
+/* 横スクロールの存在を保持する。 */
+.outlaw-sub-tab-nav::-webkit-scrollbar {
+  height: 4px;
+}
+.outlaw-sub-tab-nav {
+  -ms-overflow-style: none;
+  scrollbar-width: thin;
+}
+
+.sub-tab-item {
+  position: relative;
+  flex: 1 0 auto;
+  min-width: 80px;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--g4-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  scroll-snap-align: start;
+}
+.sub-tab-badge { display:inline-grid;min-width:18px;height:18px;margin-left:6px;padding:0 5px;place-items:center;border-radius:999px;color:#071016;background:var(--neon-gold);font-size:10px;font-weight:900;line-height:1;vertical-align:middle; }
+
+.sub-tab-scroll-button {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: var(--g4-bg);
+  color: var(--g4-gold);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.sub-tab-scroll-button:disabled { color: var(--g4-muted); cursor: default; }
+.sub-tab-scroll-button.prev { border-right: 1px solid rgba(255, 255, 255, 0.08); }
+.sub-tab-scroll-button.next { border-left: 1px solid rgba(255, 255, 255, 0.08); }
+
+.sub-tab-item:hover {
+  color: #ffffff;
+}
+
+.sub-tab-item.active {
+  color: var(--g4-gold);
+  font-weight: 700;
+}
+
+.sub-tab-indicator {
+  position: absolute;
+  bottom: 0; /* 親のborder-bottomの上に被せる */
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: var(--g4-gold);
+  box-shadow: none;
+  border-radius: 2px 2px 0 0;
+  animation: tabSlideIn 0.2s ease-out forwards;
+}
+
+@keyframes tabSlideIn {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+.outlaw-sub-tab-nav{scrollbar-color:var(--g4-gold) var(--g4-bg)}
+.sub-tab-item{min-height:44px}
+body.game04-theme .sub-tab-item{white-space:nowrap!important;word-break:normal;overflow-wrap:normal;flex-shrink:0}

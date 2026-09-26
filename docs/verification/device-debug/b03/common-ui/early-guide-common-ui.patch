@@ -1,0 +1,41 @@
+diff --git a/src/app/components/redesign/EarlyRetentionGuide.tsx b/src/app/components/redesign/EarlyRetentionGuide.tsx
+index b2df12c..f346cfd 100644
+--- a/src/app/components/redesign/EarlyRetentionGuide.tsx
++++ b/src/app/components/redesign/EarlyRetentionGuide.tsx
+@@ -1,5 +1,6 @@
+ 'use client';
+-import { useEffect, useRef, useState } from 'react';
++import { useState } from 'react';
++import GuideDialog from '../ui/GuideDialog';
+ import type { RedesignState } from '../../../domain/redesign/types';
+ import { AREA_ONE_COMPLETE_TEXT, nextEarlyGuide } from '../../../domain/redesign/earlyProgress';
+ import { earlyLoadoutPlan } from '../../../domain/redesign/earlyLoadout';
+@@ -16,13 +17,6 @@ export interface EarlyRetentionProps {
+ export function EarlyRetentionGuide({state,battlePlaying,resultOpen,save,navigate}: EarlyRetentionProps) {
+  const guide=nextEarlyGuide(state,{battlePlaying,resultOpen});
+  const [busy,setBusy]=useState(false),[error,setError]=useState('');
+- const dialog=useRef<HTMLElement>(null);
+- useEffect(()=>{
+-  if(!guide)return;const previous=document.activeElement as HTMLElement|null;
+-  dialog.current?.querySelector<HTMLButtonElement>('button')?.focus();
+-  const trap=(e:KeyboardEvent)=>{if(e.key!=='Tab')return;const buttons=Array.from(dialog.current?.querySelectorAll<HTMLButtonElement>('button:not(:disabled)')??[]);if(!buttons.length){e.preventDefault();return;}const first=buttons[0],last=buttons[buttons.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}};
+-  document.addEventListener('keydown',trap);return()=>{document.removeEventListener('keydown',trap);previous?.focus();};
+- },[guide]);
+  if(!guide)return null;
+  const content={
+   'join-maeda':{title:'前田利家が仲間に加わった',text:'新たな仲間を部隊に加え、四人で次の戦へ進もう。',cta:'部隊に加える',choice:'save'},
+@@ -37,10 +31,10 @@ export function EarlyRetentionGuide({state,battlePlaying,resultOpen,save,navigat
+   catch(e){setError(e instanceof Error?e.message:'保存できませんでした。もう一度お試しください。');}
+   finally{setBusy(false);}
+  }
+- return <div className={styles.backdrop}><section ref={dialog} className={styles.dialog} role="dialog" aria-modal="true" aria-labelledby="early-guide-title">
+-  <div className={styles.body}><p className={styles.eyebrow}>次の戦へ</p><h2 id="early-guide-title">{content.title}</h2><p className={styles.copy}>{content.text}</p>{error&&<p role="alert">{error}</p>}</div>
+-  <footer className={styles.actions}><button disabled={busy} onClick={()=>void act(content.choice)}>{busy?'保存中…':content.cta}</button>{(guide==='join-takenaka'||guide==='equip-fire')&&<button className={styles.secondary} disabled={busy} onClick={()=>void act('later')}>あとで</button>}</footer>
+- </section></div>;
++ return <GuideDialog title={content.title} message={content.text} blocked={battlePlaying||resultOpen} actions={[
++  {label:content.cta,semantic:'primary',disabled:busy,onClick:()=>act(content.choice)},
++  ...((guide==='join-takenaka'||guide==='equip-fire')?[{label:'あとで',semantic:'secondary' as const,disabled:busy,onClick:()=>act('later')}]:[])
++ ]}>{error&&<p role="alert">{error}</p>}</GuideDialog>;
+ }
+ /** Place beside the existing sortie button for mikawa-5. It never intercepts sortie. */
+ export function EarlySortiePreparation({state,save}:Pick<EarlyRetentionProps,'state'|'save'>){

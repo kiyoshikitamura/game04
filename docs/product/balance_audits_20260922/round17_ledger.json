@@ -1,0 +1,3965 @@
+{
+  "status": "READY_FOR_BULK_NUMERIC_REVIEW_NOT_IMPLEMENTED",
+  "stages": 62,
+  "newlyValidated": 40,
+  "priorCandidateStages": 7,
+  "retainProposals": 15,
+  "unclassified": 0,
+  "newNumericFixApproved": 0,
+  "externalAcceptance": [
+    "actual replay duration",
+    "visual communication of tactics"
+  ],
+  "ledger": [
+    {
+      "stage": "1-1",
+      "concept": "初期3人で戦闘を学ぶ",
+      "status": "既存15面の維持提案",
+      "numericFixApproved": false,
+      "evidence": "基本操作の学習面。通常攻撃でも突破可能とし、ここでは対策の必須化を求めない。",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "1-2",
+      "concept": "受ける役を決める",
+      "status": "既存15面の維持提案",
+      "numericFixApproved": false,
+      "evidence": "前衛を回復役へ変える実配置比較へ訂正。被害の受け役が変わる学習面として維持。旧034除去比較は無効。",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "1-3",
+      "concept": "一つ変えて突破する",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "close-5",
+      "focusSkills": [
+        "SKD008"
+      ],
+      "mainSkills": [
+        [
+          "SKD003"
+        ],
+        [
+          "SKD008"
+        ],
+        [
+          "SKD039"
+        ],
+        [],
+        [
+          "SKD008"
+        ]
+      ],
+      "notes": [
+        "最終候補群。共有スキルの複数装備・単体保護・対象に合う解除を使用"
+      ],
+      "controlNote": "火攻撃装備から水攻撃装備へ交換",
+      "directNote": "火攻撃装備から水攻撃装備へ交換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 57.983333333333334,
+          "hp": 0.6935821511126247,
+          "alive": 4,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 60.833333333333336,
+          "hp": 0.5825151338749848,
+          "alive": 3.1333333333333333,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 60.833333333333336,
+          "hp": 0.5825151338749848,
+          "alive": 3.1333333333333333,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 59.25,
+          "hp": 0.702435045083206,
+          "alive": 4.016666666666667,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 23.933333333333334,
+          "hp": 0.9893149491851735,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "2-1",
+      "concept": "まず1体減らす",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "close-2",
+      "focusSkills": [
+        "SKD008"
+      ],
+      "mainSkills": [
+        [],
+        [
+          "SKD039"
+        ],
+        [],
+        [],
+        [
+          "SKD008"
+        ]
+      ],
+      "notes": [
+        "前後に火力を分散せず先頭へ集中する比較",
+        "最終候補群。共有スキルの複数装備・単体保護・対象に合う解除を使用"
+      ],
+      "controlNote": "同じ火力を先頭/後衛のどちらへ集中するか",
+      "directNote": "同じ火力を先頭/後衛のどちらへ集中するか",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 29.733333333333334,
+          "hp": 0.9723869271405039,
+          "alive": 5,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 33.88333333333333,
+          "hp": 0.9055206008665209,
+          "alive": 5,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 33.88333333333333,
+          "hp": 0.9055206008665209,
+          "alive": 5,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 30.6,
+          "hp": 0.9566326333291096,
+          "alive": 5,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 11.033333333333333,
+          "hp": 1,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "2-2",
+      "concept": "並んだ敵を削る",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "close-1",
+      "focusSkills": [
+        "SKD020"
+      ],
+      "mainSkills": [
+        [],
+        [
+          "SKD020"
+        ],
+        [
+          "SKD020"
+        ],
+        [
+          "SKD020"
+        ],
+        []
+      ],
+      "notes": [
+        "全体攻撃と単体攻撃の比較から別攻撃枠のSP競合を除く",
+        "最終候補群。共有スキルの複数装備・単体保護・対象に合う解除を使用"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 22.3,
+          "hp": 0.929115561450962,
+          "alive": 5,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 27.266666666666666,
+          "hp": 0.9116333881234181,
+          "alive": 5,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 26.116666666666667,
+          "hp": 0.9118683421613059,
+          "alive": 5,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 22.816666666666666,
+          "hp": 0.9249831421328583,
+          "alive": 5,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 11,
+          "hp": 1,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "2-3",
+      "concept": "後ろの支援を止める",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "close-5",
+      "focusSkills": [
+        "SKD026"
+      ],
+      "mainSkills": [
+        [],
+        [
+          "SKD026"
+        ],
+        [
+          "SKD039"
+        ],
+        [
+          "SKD026"
+        ],
+        [
+          "SKD026"
+        ]
+      ],
+      "notes": [
+        "最終候補群。共有スキルの複数装備・単体保護・対象に合う解除を使用"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 63.233333333333334,
+          "hp": 0.8582554151842571,
+          "alive": 4.716666666666667,
+          "skips": 0
+        },
+        "control": {
+          "wins": 0,
+          "n": 60,
+          "actions": 72.41666666666667,
+          "hp": 0,
+          "alive": 0,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 72.55,
+          "hp": 0.32652633964563116,
+          "alive": 1.9,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 66.3,
+          "hp": 0.8403244399806317,
+          "alive": 4.633333333333334,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 28.366666666666667,
+          "hp": 0.9708294805517738,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "2-4",
+      "concept": "倒す順を組み立てる",
+      "status": "既存15面の維持提案",
+      "numericFixApproved": false,
+      "evidence": "後衛攻撃ありで平均生存2.83人、除去2.23人、標準攻撃置換2.37人。短縮と生存の具体的利点。",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "3-1",
+      "concept": "弱体の後に攻める",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "margin-0-tempo",
+      "focusSkills": [
+        "SKD038"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [
+          "SKD038"
+        ],
+        [
+          "SKD009"
+        ],
+        [
+          "SKD039"
+        ]
+      ],
+      "notes": [
+        "支援後の通常攻撃へSPを残す検証編成",
+        "戦闘不能の偶発性を減らすため敵ATKを選択候補比90%へ",
+        "長期化を避けるため候補HPを45%へ。DEF/対策構造は維持"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 117.06666666666666,
+          "hp": 0.9110358004517088,
+          "alive": 5,
+          "skips": 0
+        },
+        "control": {
+          "wins": 59,
+          "n": 60,
+          "actions": 241.81666666666666,
+          "hp": 0.8646832600152119,
+          "alive": 5,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 0,
+          "n": 60,
+          "actions": 300,
+          "hp": 0.8747840195697006,
+          "alive": 5,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 117.06666666666666,
+          "hp": 0.9110358004517088,
+          "alive": 5,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 16.966666666666665,
+          "hp": 0.999931824707133,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          26001,
+          26060
+        ],
+        "control": [
+          26001,
+          26060
+        ],
+        "direct": [
+          26001,
+          26060
+        ],
+        "alternative": [
+          26001,
+          26060
+        ],
+        "farm": [
+          26201,
+          26230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "3-2",
+      "concept": "強化を攻撃へつなぐ",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "1-tempo",
+      "focusSkills": [
+        "SKD035"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [
+          "SKD035"
+        ],
+        [],
+        [
+          "SKD039"
+        ]
+      ],
+      "notes": [
+        "支援後の通常攻撃へSPを残す検証編成",
+        "長期化を避けるため候補HPを55%へ。DEF/対策構造は維持"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 92.4,
+          "hp": 0.964320085689213,
+          "alive": 5,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 146.28333333333333,
+          "hp": 0.9440283218555412,
+          "alive": 5,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 107.75,
+          "hp": 0.9552405164404775,
+          "alive": 5,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 92.4,
+          "hp": 0.964320085689213,
+          "alive": 5,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 11.166666666666666,
+          "hp": 1,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          26001,
+          26060
+        ],
+        "control": [
+          26001,
+          26060
+        ],
+        "direct": [
+          26001,
+          26060
+        ],
+        "alternative": [
+          26001,
+          26060
+        ],
+        "farm": [
+          26201,
+          26230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "3-3",
+      "concept": "継続ダメージを足場にする",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": 2,
+      "focusSkills": [
+        "SKD029",
+        "SKD030"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [
+          "SKD029"
+        ],
+        [
+          "SKD030"
+        ],
+        [
+          "SKD039"
+        ]
+      ],
+      "notes": [],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 80.25,
+          "hp": 0.8457660658303074,
+          "alive": 5,
+          "skips": 0
+        },
+        "control": {
+          "wins": 0,
+          "n": 60,
+          "actions": 300,
+          "hp": 0.8067727240966502,
+          "alive": 4.9,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 0,
+          "n": 60,
+          "actions": 300,
+          "hp": 0.29726707308809425,
+          "alive": 2.25,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 83.96666666666667,
+          "hp": 0.8436752380508066,
+          "alive": 5,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 16.7,
+          "hp": 0.9998674369305367,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "3-4",
+      "concept": "SPを使う役と貯める役",
+      "status": "既存15面の維持提案",
+      "numericFixApproved": false,
+      "evidence": "主砲だけを最適解にしない。主砲93.3、除去130.7、低消費攻撃88.8行動。SPを攻撃へ回す価値と低消費代替の双方を記録。主砲の価格価値を証明する結果ではない。",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "3-5",
+      "concept": "主軸を一つ選ぶ",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "close-2",
+      "focusSkills": [
+        "SKD038",
+        "SKD028"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [
+          "SKD038"
+        ],
+        [
+          "SKD028"
+        ],
+        [
+          "SKD039"
+        ]
+      ],
+      "notes": [
+        "支援後の通常攻撃へSPを残す検証編成",
+        "弱体連携を主軸に選ぶ攻略例へ修正。強化1枚の有無を主軸比較にしない",
+        "最終候補群。共有スキルの複数装備・単体保護・対象に合う解除を使用"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 144.2,
+          "hp": 0.9144551282779877,
+          "alive": 5,
+          "skips": 0
+        },
+        "control": {
+          "wins": 0,
+          "n": 60,
+          "actions": 300,
+          "hp": 0.9973914763221073,
+          "alive": 5,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 1,
+          "n": 60,
+          "actions": 299.96666666666664,
+          "hp": 0.9708625347803154,
+          "alive": 5,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 144.2,
+          "hp": 0.9144551282779877,
+          "alive": 5,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 65.7,
+          "hp": 0.9996117795822878,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "4-1",
+      "concept": "集中攻撃を受ける",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "refine-1",
+      "focusSkills": [
+        "SKD037"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [
+          "SKD037"
+        ],
+        [],
+        [
+          "SKD039"
+        ]
+      ],
+      "notes": [
+        "問題別の第2候補群。味方・スキル倍率は変更しない"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 90,
+          "hp": 0.8770806854011476,
+          "alive": 5,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 77.25,
+          "hp": 0.8263649610690261,
+          "alive": 4.583333333333333,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 74.46666666666667,
+          "hp": 0.8068410651993687,
+          "alive": 4.55,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 89.7,
+          "hp": 0.8999401986599705,
+          "alive": 5,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 39.7,
+          "hp": 0.9997690718549249,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "4-2",
+      "concept": "受けた攻撃を返す",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "close-5",
+      "focusSkills": [
+        "SKD049"
+      ],
+      "mainSkills": [
+        [
+          "SKD049"
+        ],
+        [],
+        [],
+        [],
+        [
+          "SKD039"
+        ]
+      ],
+      "notes": [
+        "攻撃力のある受け役へ反撃を配置",
+        "最終候補群。共有スキルの複数装備・単体保護・対象に合う解除を使用"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 67.15,
+          "hp": 0.9974340904126622,
+          "alive": 5,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 86.48333333333333,
+          "hp": 0.9967561016053252,
+          "alive": 5,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 82.81666666666666,
+          "hp": 0.9969189986675681,
+          "alive": 5,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 65.61666666666666,
+          "hp": 0.9975360651516306,
+          "alive": 5,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 38.333333333333336,
+          "hp": 0.9992592870818363,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "4-3",
+      "concept": "全員の被害を戻す",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": 3,
+      "focusSkills": [
+        "SKD041"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [
+          "SKD039"
+        ],
+        [
+          "SKD008"
+        ],
+        [
+          "SKD041"
+        ]
+      ],
+      "notes": [],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 62.9,
+          "hp": 0.07944210192383123,
+          "alive": 2.0833333333333335,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 63.86666666666667,
+          "hp": 0.07676946218616365,
+          "alive": 1.4,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 59,
+          "n": 60,
+          "actions": 63.766666666666666,
+          "hp": 0.0381333530608356,
+          "alive": 1.1166666666666667,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 62.333333333333336,
+          "hp": 0.08689559145678577,
+          "alive": 2.3333333333333335,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 31.966666666666665,
+          "hp": 0.7540372500300789,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "4-4",
+      "concept": "大きな一撃に備える",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "close-5",
+      "focusSkills": [
+        "SKD045"
+      ],
+      "mainSkills": [
+        [
+          "SKD045"
+        ],
+        [],
+        [],
+        [],
+        [
+          "SKD039"
+        ]
+      ],
+      "notes": [
+        "最終候補群。共有スキルの複数装備・単体保護・対象に合う解除を使用"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 96.33333333333333,
+          "hp": 0.9118597699041273,
+          "alive": 5,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 80.55,
+          "hp": 0.8051050373941849,
+          "alive": 4.15,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 76.53333333333333,
+          "hp": 0.8179740710720556,
+          "alive": 4.35,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 100.25,
+          "hp": 0.9102759452040808,
+          "alive": 5,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 34.9,
+          "hp": 0.9999676327128194,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "4-5",
+      "concept": "守りすぎずに勝つ",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "refine-4",
+      "focusSkills": [
+        "SKD041"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [
+          "SKD039"
+        ],
+        [
+          "SKD041"
+        ],
+        []
+      ],
+      "notes": [
+        "問題別の第2候補群。味方・スキル倍率は変更しない"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 179.96666666666667,
+          "hp": 0.21125129132290316,
+          "alive": 4.016666666666667,
+          "skips": 0
+        },
+        "control": {
+          "wins": 48,
+          "n": 60,
+          "actions": 182.26666666666668,
+          "hp": 0.13032936726786165,
+          "alive": 1.2833333333333334,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 50,
+          "n": 60,
+          "actions": 166.73333333333332,
+          "hp": 0.11537100304746765,
+          "alive": 1.2666666666666666,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 171.3,
+          "hp": 0.21119579397893876,
+          "alive": 4.016666666666667,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 49.46666666666667,
+          "hp": 0.9342502132280767,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "5-1",
+      "concept": "同属性で攻める",
+      "status": "既存15面の維持提案",
+      "numericFixApproved": false,
+      "evidence": "同レア構成の実キャラ比較で水統一27.8、混成31.1、風統一38.1行動。キャラ・パッシブ込みの編成比較として水主体の利点。",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "5-2",
+      "concept": "同属性で守る",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": false,
+      "tier": 0,
+      "focusSkills": [
+        "SKD036"
+      ],
+      "mainSkills": [
+        [
+          "SKD034"
+        ],
+        [],
+        [
+          "SKD036"
+        ],
+        [
+          "SKD009"
+        ],
+        [
+          "SKD039"
+        ]
+      ],
+      "notes": [
+        "土主体3人の実在編成。完全単色5人は前提にしない"
+      ],
+      "controlNote": "同レア守備型の受け属性を土から水へ変更。固有値・パッシブ差も含む",
+      "directNote": "同レア守備型の受け属性を土から水へ変更。固有値・パッシブ差も含む",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 39.95,
+          "hp": 0.9688397865808345,
+          "alive": 5,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 43.46666666666667,
+          "hp": 0.9239081108482442,
+          "alive": 5,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 43.46666666666667,
+          "hp": 0.9239081108482442,
+          "alive": 5,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 41.71666666666667,
+          "hp": 0.9564159114937625,
+          "alive": 5,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 22.366666666666667,
+          "hp": 0.9999866887834465,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "5-3",
+      "concept": "攻撃属性だけを替える",
+      "status": "既存15面の維持提案",
+      "numericFixApproved": false,
+      "evidence": "同レア・同消費SPの風攻撃44.6、水攻撃54.1行動。キャラを変えず攻撃属性を替える価値。",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "5-4",
+      "concept": "混成の強みを使う",
+      "status": "既存15面の維持提案",
+      "numericFixApproved": false,
+      "evidence": "混成45.0、水統一48.8、風統一50.3行動。実キャラの固有差込みの比較であり混成パッシブ単独効果とは断定しない。",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "5-5",
+      "concept": "苦手属性を誰が受けるか",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": 1,
+      "focusSkills": [
+        "SKD012"
+      ],
+      "mainSkills": [
+        [
+          "SKD034"
+        ],
+        [],
+        [
+          "SKD041"
+        ],
+        [
+          "SKD012"
+        ],
+        [
+          "SKD039"
+        ]
+      ],
+      "notes": [],
+      "controlNote": "光を受ける前衛を土守備から闇攻撃へ。実キャラの複合差",
+      "directNote": "光を受ける前衛を土守備から闇攻撃へ。実キャラの複合差",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 39.833333333333336,
+          "hp": 0.8543433780648271,
+          "alive": 5,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 36.333333333333336,
+          "hp": 0.7770370068655725,
+          "alive": 4,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 36.333333333333336,
+          "hp": 0.7770370068655725,
+          "alive": 4,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 40.71666666666667,
+          "hp": 0.8539754639376989,
+          "alive": 5,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 22.266666666666666,
+          "hp": 0.9994804882594075,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "5-6",
+      "concept": "一色に寄せすぎない",
+      "status": "既存15面の維持提案",
+      "numericFixApproved": false,
+      "evidence": "混成68.5、水統一76.4、風統一64.4行動。風統一は速いが残HPが低い。常に混成が最速という基準にはしない。",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "6-1",
+      "concept": "継続被害を止める",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "refine-4",
+      "focusSkills": [
+        "SKD054"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [
+          "SKD054"
+        ],
+        [],
+        [
+          "SKD040"
+        ]
+      ],
+      "notes": [
+        "解除の対象と実際の受け役を合わせ、攻撃スキルとのSP競合を軽減",
+        "問題別の第2候補群。味方・スキル倍率は変更しない"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 55.63333333333333,
+          "hp": 0.6804777223225137,
+          "alive": 4.083333333333333,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 50.05,
+          "hp": 0.5154262733540127,
+          "alive": 3.4833333333333334,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 46.3,
+          "hp": 0.44075540471858055,
+          "alive": 3.15,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 56.9,
+          "hp": 0.6658657217765744,
+          "alive": 4.1,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 30.233333333333334,
+          "hp": 0.859672119995009,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "6-2",
+      "concept": "落とされた能力を戻す",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "close-5-tempo",
+      "focusSkills": [
+        "SKD053"
+      ],
+      "mainSkills": [
+        [
+          "SKD053"
+        ],
+        [
+          "SKD008"
+        ],
+        [],
+        [],
+        [
+          "SKD039"
+        ]
+      ],
+      "notes": [
+        "解除の対象と実際の受け役を合わせ、攻撃スキルとのSP競合を軽減",
+        "最終候補群。共有スキルの複数装備・単体保護・対象に合う解除を使用",
+        "長期化を避けるため候補HPを50%へ。DEF/対策構造は維持"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 112.21666666666667,
+          "hp": 0.897241694966949,
+          "alive": 5,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 140.18333333333334,
+          "hp": 0.8920521901808075,
+          "alive": 5,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 59,
+          "n": 60,
+          "actions": 233.43333333333334,
+          "hp": 0.8996654343870023,
+          "alive": 5,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 124.8,
+          "hp": 0.9087719683445151,
+          "alive": 5,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 36.766666666666666,
+          "hp": 0.9907583737493477,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          26001,
+          26060
+        ],
+        "control": [
+          26001,
+          26060
+        ],
+        "direct": [
+          26001,
+          26060
+        ],
+        "alternative": [
+          26001,
+          26060
+        ],
+        "farm": [
+          26201,
+          26230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "6-3",
+      "concept": "止まった役割を補う",
+      "status": "既存15面の維持提案",
+      "numericFixApproved": false,
+      "evidence": "救済0／逆転敗北0、平均行動短縮+0.1、生存者増0/30、残HP差-0.000",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "6-4",
+      "concept": "敵の一手を遅らせる",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "close-5",
+      "focusSkills": [
+        "SKD032"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [],
+        [
+          "SKD040"
+        ],
+        [
+          "SKD032"
+        ]
+      ],
+      "notes": [
+        "最終候補群。共有スキルの複数装備・単体保護・対象に合う解除を使用"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 48.35,
+          "hp": 0.4516827012083183,
+          "alive": 4.216666666666667,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 41.55,
+          "hp": 0.06851121347439494,
+          "alive": 1.7166666666666666,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 37.68333333333333,
+          "hp": 0.1273264854141424,
+          "alive": 2.1,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 50.35,
+          "hp": 0.4463409802465253,
+          "alive": 4.35,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 28.633333333333333,
+          "hp": 0.8839840202742514,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "6-5",
+      "concept": "状態付与と攻撃を分担する",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": 1,
+      "focusSkills": [
+        "SKD029",
+        "SKD030"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [
+          "SKD029"
+        ],
+        [
+          "SKD030"
+        ],
+        [
+          "SKD040"
+        ]
+      ],
+      "notes": [],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 111.93333333333334,
+          "hp": 0.8909781740655879,
+          "alive": 5,
+          "skips": 0
+        },
+        "control": {
+          "wins": 0,
+          "n": 60,
+          "actions": 300,
+          "hp": 0.8802164034309662,
+          "alive": 5,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 0,
+          "n": 60,
+          "actions": 300,
+          "hp": 0.7654397813114312,
+          "alive": 4.966666666666667,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 116.83333333333333,
+          "hp": 0.8873842935912342,
+          "alive": 5,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 37.1,
+          "hp": 0.9953877216916382,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "6-6",
+      "concept": "対策枠を選ぶ",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": 3,
+      "focusSkills": [
+        "SKD070"
+      ],
+      "mainSkills": [
+        [],
+        [
+          "SKD070"
+        ],
+        [],
+        [],
+        [
+          "SKD040"
+        ]
+      ],
+      "notes": [
+        "3対策必須を避けてDOT対策1枚を主軸にする"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 82.55,
+          "hp": 0.641740381229226,
+          "alive": 4.983333333333333,
+          "skips": 0.45
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 74.5,
+          "hp": 0.3603795280765835,
+          "alive": 4.4,
+          "skips": 0.3333333333333333
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 68.2,
+          "hp": 0.3828957053462026,
+          "alive": 4.816666666666666,
+          "skips": 0.31666666666666665
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 79.08333333333333,
+          "hp": 0.611969321952047,
+          "alive": 4.866666666666666,
+          "skips": 0.4
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 44.3,
+          "hp": 0.9138444998932707,
+          "alive": 5,
+          "skips": 0.1
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "7-1",
+      "concept": "強化された攻撃を崩す",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": 2,
+      "focusSkills": [
+        "SKD051"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [
+          "SKD051"
+        ],
+        [],
+        [
+          "SKD040"
+        ]
+      ],
+      "notes": [],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 43.65,
+          "hp": 0.8697271571303367,
+          "alive": 4.933333333333334,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 39.15,
+          "hp": 0.583850088358781,
+          "alive": 3.433333333333333,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 36.88333333333333,
+          "hp": 0.6342540837320253,
+          "alive": 3.7333333333333334,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 45.63333333333333,
+          "hp": 0.7906969606039814,
+          "alive": 4.583333333333333,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 22.8,
+          "hp": 0.9040786118033194,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "7-2",
+      "concept": "固めた守りを崩す",
+      "status": "既存7面の変更候補を保持",
+      "numericFixApproved": false,
+      "evidence": "救済0／逆転敗北0、平均行動短縮-1.2、生存者増0/30、残HP差-0.001",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "7-3",
+      "concept": "障壁を取り除く",
+      "status": "既存7面の変更候補を保持",
+      "numericFixApproved": false,
+      "evidence": "救済0／逆転敗北0、平均行動短縮+0.8、生存者増0/30、残HP差-0.000",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "7-4",
+      "concept": "回復源を断つ",
+      "status": "既存7面の変更候補を保持",
+      "numericFixApproved": false,
+      "evidence": "救済0／逆転敗北0、平均行動短縮-1.1、生存者増0/30、残HP差-0.014",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "7-5",
+      "concept": "反撃に付き合いすぎない",
+      "status": "既存15面の維持提案",
+      "numericFixApproved": false,
+      "evidence": "保護解除で残HP92.0%、除去74.1%、標準攻撃置換78.7%。速度と被害抑制の交換関係。",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "7-6",
+      "concept": "誘導された攻撃を通す",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "four-4",
+      "focusSkills": [
+        "SKD052"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [],
+        [
+          "SKD052"
+        ],
+        [
+          "SKD040"
+        ]
+      ],
+      "notes": [],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 67.3,
+          "hp": 0.6926382194626298,
+          "alive": 4.683333333333334,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 61.71666666666667,
+          "hp": 0.5487779934758646,
+          "alive": 4.2,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 49,
+          "hp": 0.5490011720985707,
+          "alive": 4.05,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 66.88333333333334,
+          "hp": 0.6300603432487317,
+          "alive": 4.4,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 37,
+          "hp": 0.8628274993228789,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "7-7",
+      "concept": "再付与より先に決着",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "mechanic-4",
+      "focusSkills": [
+        "SKD052"
+      ],
+      "mainSkills": [
+        [],
+        [
+          "SKD014"
+        ],
+        [],
+        [
+          "SKD052"
+        ],
+        [
+          "SKD040"
+        ]
+      ],
+      "notes": [
+        "盾解除は破護052に訂正",
+        "前衛の弱い同一盾が後衛の強い盾を阻害していたため、前衛の盾スキルを外す",
+        "解除後に使う主砲を持ち、DEFのある前衛を窓内に突破する"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 67.63333333333334,
+          "hp": 0.736770967010227,
+          "alive": 4.15,
+          "skips": 0
+        },
+        "control": {
+          "wins": 45,
+          "n": 60,
+          "actions": 93.53333333333333,
+          "hp": 0.42569736705439126,
+          "alive": 2.5166666666666666,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 79.85,
+          "hp": 0.6651946203135366,
+          "alive": 3.8833333333333333,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 75.85,
+          "hp": 0.7439727741596099,
+          "alive": 4.183333333333334,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 36.56666666666667,
+          "hp": 0.9982174540229742,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "7-8",
+      "concept": "崩す場所を選ぶ",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": 1,
+      "focusSkills": [
+        "SKD052"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [
+          "SKD052"
+        ],
+        [],
+        [
+          "SKD040"
+        ]
+      ],
+      "notes": [],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 58.55,
+          "hp": 0.33066145872800157,
+          "alive": 2.783333333333333,
+          "skips": 0
+        },
+        "control": {
+          "wins": 0,
+          "n": 60,
+          "actions": 30.333333333333332,
+          "hp": 0,
+          "alive": 0,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 0,
+          "n": 60,
+          "actions": 30.433333333333334,
+          "hp": 0,
+          "alive": 0,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 58.016666666666666,
+          "hp": 0.2577111678194954,
+          "alive": 2.183333333333333,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 35.36666666666667,
+          "hp": 0.7541498203088154,
+          "alive": 4.9,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "8-1",
+      "concept": "削られたまま次へ進む",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": 4,
+      "focusSkills": [
+        "SKD047"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [
+          "SKD047"
+        ],
+        [],
+        [
+          "SKD040"
+        ]
+      ],
+      "notes": [],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 31.583333333333332,
+          "hp": 0.5206239182999868,
+          "alive": 5,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 31.866666666666667,
+          "hp": 0.3186998547681615,
+          "alive": 4.35,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 29.183333333333334,
+          "hp": 0.40202633027552653,
+          "alive": 4.833333333333333,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 36.1,
+          "hp": 0.42709565064501814,
+          "alive": 4.883333333333334,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 21.866666666666667,
+          "hp": 0.7765339935024046,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "8-2",
+      "concept": "小技と主砲を共存させる",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "2-tempo",
+      "focusSkills": [
+        "SKD014"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [
+          "SKD008"
+        ],
+        [
+          "SKD014"
+        ],
+        [
+          "SKD040"
+        ]
+      ],
+      "notes": [
+        "長期化を避けるため候補HPを60%へ。DEF/対策構造は維持"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 98,
+          "hp": 0.875427665717371,
+          "alive": 5,
+          "skips": 0
+        },
+        "control": {
+          "wins": 0,
+          "n": 60,
+          "actions": 300,
+          "hp": 0.9387690540795995,
+          "alive": 5,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 81.41666666666667,
+          "hp": 0.7543802694040662,
+          "alive": 4.4,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 96.76666666666667,
+          "hp": 0.876421440329795,
+          "alive": 5,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 14.6,
+          "hp": 1,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          26001,
+          26060
+        ],
+        "control": [
+          26001,
+          26060
+        ],
+        "direct": [
+          26001,
+          26060
+        ],
+        "alternative": [
+          26001,
+          26060
+        ],
+        "farm": [
+          26201,
+          26230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "8-3",
+      "concept": "単体と全体を両立する",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "mechanic-2",
+      "focusSkills": [
+        "SKD020",
+        "SKD008"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [
+          "SKD020"
+        ],
+        [],
+        [
+          "SKD008"
+        ]
+      ],
+      "notes": [
+        "全体攻撃と単体攻撃の比較から別攻撃枠のSP競合を除く",
+        "単体は低消費Rを採用し、高消費主砲のSP待ちを解消する",
+        "8行動目の後衛2体の割込み前に全体で落とす。単体はDEFのあるボスで使用"
+      ],
+      "controlNote": "全体攻撃だけに寄せた編成",
+      "directNote": "全体攻撃を標準単体へ交換し単体攻撃だけに寄せた編成",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 77.63333333333334,
+          "hp": 0.7680091401494257,
+          "alive": 4.95,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 109.65,
+          "hp": 0.6478498638466572,
+          "alive": 3.9833333333333334,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 54.016666666666666,
+          "hp": 0.5441530766994088,
+          "alive": 3.45,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 84.53333333333333,
+          "hp": 0.7379332610827363,
+          "alive": 4.5,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 35,
+          "hp": 0.9866490375069653,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "8-4",
+      "concept": "持ち越した状態へ対処",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "refine-5",
+      "focusSkills": [
+        "SKD071"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [
+          "SKD071"
+        ],
+        [],
+        [
+          "SKD039"
+        ]
+      ],
+      "notes": [
+        "問題別の第2候補群。味方・スキル倍率は変更しない"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 45.016666666666666,
+          "hp": 0.8002139363462243,
+          "alive": 4.983333333333333,
+          "skips": 0
+        },
+        "control": {
+          "wins": 3,
+          "n": 60,
+          "actions": 35.766666666666666,
+          "hp": 0.007362070821207698,
+          "alive": 0.05,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 0,
+          "n": 60,
+          "actions": 31.05,
+          "hp": 0,
+          "alive": 0,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 48.733333333333334,
+          "hp": 0.7241035607722253,
+          "alive": 4.9,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 29.633333333333333,
+          "hp": 0.8650042719228838,
+          "alive": 4.933333333333334,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "8-5",
+      "concept": "支援役を守り続ける",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "close-2",
+      "focusSkills": [
+        "SKD046"
+      ],
+      "mainSkills": [
+        [],
+        [
+          "SKD046"
+        ],
+        [],
+        [
+          "SKD026"
+        ],
+        [
+          "SKD040"
+        ]
+      ],
+      "notes": [
+        "最終候補群。共有スキルの複数装備・単体保護・対象に合う解除を使用"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 53.733333333333334,
+          "hp": 0.7267453567627216,
+          "alive": 3.8666666666666667,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 46.36666666666667,
+          "hp": 0.5737333957813573,
+          "alive": 3,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 40.016666666666666,
+          "hp": 0.5916032509935572,
+          "alive": 3,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 54.983333333333334,
+          "hp": 0.7131479405186559,
+          "alive": 3.85,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 32.13333333333333,
+          "hp": 0.9245136715486227,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "8-6",
+      "concept": "一人失っても立て直す",
+      "status": "既存15面の維持提案",
+      "numericFixApproved": false,
+      "evidence": "救済0／逆転敗北0、平均行動短縮+0.0、生存者増0/30、残HP差+0.000",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "8-7",
+      "concept": "効果が切れた後も戦う",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "two-5",
+      "focusSkills": [
+        "SKD036"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [
+          "SKD036"
+        ],
+        [],
+        []
+      ],
+      "notes": [
+        "最終候補群。共有スキルの複数装備・単体保護・対象に合う解除を使用",
+        "回復連打に頼らず、強化の持続と再付与で前衛を保つ編成を比較"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 134.43333333333334,
+          "hp": 0.5344540929506152,
+          "alive": 3.35,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 124.18333333333334,
+          "hp": 0.055314897324251745,
+          "alive": 1,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 113.26666666666667,
+          "hp": 0.1245348484361377,
+          "alive": 1,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 141.28333333333333,
+          "hp": 0.43401441694288845,
+          "alive": 2.7333333333333334,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 80.63333333333334,
+          "hp": 0.9997840116076409,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          25001,
+          25060
+        ],
+        "control": [
+          25001,
+          25060
+        ],
+        "direct": [
+          25001,
+          25060
+        ],
+        "alternative": [
+          25001,
+          25060
+        ],
+        "farm": [
+          25201,
+          25230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "8-8",
+      "concept": "連戦用の5人を完成させる",
+      "status": "既存15面の維持提案",
+      "numericFixApproved": false,
+      "evidence": "全体保護で残HP78.5%、除去66.9%、標準攻撃置換59.9%。行動数増と引き換えの連戦生存維持。",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "9-1",
+      "concept": "単体突破の極意",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": 4,
+      "focusSkills": [
+        "SKD014"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [],
+        [
+          "SKD014"
+        ],
+        [
+          "SKD040"
+        ]
+      ],
+      "notes": [],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 86.83333333333333,
+          "hp": 0.8924337310542882,
+          "alive": 4.883333333333334,
+          "skips": 0
+        },
+        "control": {
+          "wins": 0,
+          "n": 60,
+          "actions": 300,
+          "hp": 0.9301729027314047,
+          "alive": 4.866666666666666,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 47,
+          "n": 60,
+          "actions": 259.1666666666667,
+          "hp": 0.8872717150479302,
+          "alive": 4.833333333333333,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 98.45,
+          "hp": 0.8764094935881197,
+          "alive": 4.85,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 28.4,
+          "hp": 0.9177815472723215,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "9-2",
+      "concept": "全体削りの極意",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "close-5",
+      "focusSkills": [
+        "SKD020"
+      ],
+      "mainSkills": [
+        [],
+        [
+          "SKD020"
+        ],
+        [
+          "SKD020"
+        ],
+        [
+          "SKD020"
+        ],
+        []
+      ],
+      "notes": [
+        "全体攻撃と単体攻撃の比較から別攻撃枠のSP競合を除く",
+        "最終候補群。共有スキルの複数装備・単体保護・対象に合う解除を使用"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 41.55,
+          "hp": 0.48572895651849746,
+          "alive": 3,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 52.733333333333334,
+          "hp": 0.3193391944890002,
+          "alive": 2.433333333333333,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 39.9,
+          "hp": 0.3450603825123199,
+          "alive": 2.8833333333333333,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 42.9,
+          "hp": 0.482004688275072,
+          "alive": 3,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 28.433333333333334,
+          "hp": 0.6014558329456932,
+          "alive": 3.033333333333333,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "9-3",
+      "concept": "後列攻略の極意",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "margin-0",
+      "focusSkills": [
+        "SKD026"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [
+          "SKD038"
+        ],
+        [
+          "SKD026"
+        ],
+        [
+          "SKD040"
+        ]
+      ],
+      "notes": [
+        "戦闘不能の偶発性を減らすため敵ATKを選択候補比90%へ"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 85.85,
+          "hp": 0.5343780858865066,
+          "alive": 3.05,
+          "skips": 0
+        },
+        "control": {
+          "wins": 0,
+          "n": 60,
+          "actions": 299.3,
+          "hp": 0.176635503898971,
+          "alive": 1.0833333333333333,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 24,
+          "n": 60,
+          "actions": 91.18333333333334,
+          "hp": 0.051028822442211366,
+          "alive": 0.43333333333333335,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 90.53333333333333,
+          "hp": 0.4326401599899628,
+          "alive": 2.4833333333333334,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 33.166666666666664,
+          "hp": 0.8646085098821433,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          25001,
+          25060
+        ],
+        "control": [
+          25001,
+          25060
+        ],
+        "direct": [
+          25001,
+          25060
+        ],
+        "alternative": [
+          25001,
+          25060
+        ],
+        "farm": [
+          25201,
+          25230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "9-4",
+      "concept": "通常攻撃の極意",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "close-3",
+      "focusSkills": [
+        "SKD035"
+      ],
+      "mainSkills": [
+        [
+          "SKD035"
+        ],
+        [],
+        [],
+        [],
+        [
+          "SKD041"
+        ]
+      ],
+      "notes": [
+        "支援後の通常攻撃へSPを残す検証編成",
+        "最終候補群。共有スキルの複数装備・単体保護・対象に合う解除を使用"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 86.23333333333333,
+          "hp": 0.48250164202574847,
+          "alive": 3.65,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 95.3,
+          "hp": 0.6136701081022555,
+          "alive": 4,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 59,
+          "n": 60,
+          "actions": 73.95,
+          "hp": 0.34848034222034324,
+          "alive": 3.1333333333333333,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 92.03333333333333,
+          "hp": 0.5816460780798718,
+          "alive": 3.95,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 42.333333333333336,
+          "hp": 0.6434204639924984,
+          "alive": 4,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "9-5",
+      "concept": "弱体連携の極意",
+      "status": "既存7面の変更候補を保持",
+      "numericFixApproved": false,
+      "evidence": "標準攻撃置換0/100→連携100/100。別攻略も100/100。正式採用前",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "9-6",
+      "concept": "継続ダメージの極意",
+      "status": "既存7面の変更候補を保持",
+      "numericFixApproved": false,
+      "evidence": "標準攻撃置換0/100→連携100/100。別攻略も100/100。正式採用前",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "9-7",
+      "concept": "反撃の極意",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "refine-5",
+      "focusSkills": [
+        "SKD049"
+      ],
+      "mainSkills": [
+        [
+          "SKD049"
+        ],
+        [],
+        [],
+        [],
+        [
+          "SKD040"
+        ]
+      ],
+      "notes": [
+        "攻撃力のある受け役へ反撃を配置",
+        "問題別の第2候補群。味方・スキル倍率は変更しない"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 44.85,
+          "hp": 0.969579426276345,
+          "alive": 5,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 58.96666666666667,
+          "hp": 0.960798261521099,
+          "alive": 5,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 50.71666666666667,
+          "hp": 0.9659336782786352,
+          "alive": 5,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 42.65,
+          "hp": 0.9718298434261431,
+          "alive": 5,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 32.46666666666667,
+          "hp": 0.9999252208974052,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "9-8",
+      "concept": "背水の極意",
+      "status": "既存15面の維持提案",
+      "numericFixApproved": false,
+      "evidence": "背水あり平均5.00人生存、除去4.10人。標準攻撃でも4.90人生存する代替経路がある。",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "9-9",
+      "concept": "妨害と解除の極意",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "two-3",
+      "focusSkills": [
+        "SKD032",
+        "SKD055"
+      ],
+      "mainSkills": [
+        [],
+        [
+          "SKD008"
+        ],
+        [
+          "SKD032"
+        ],
+        [
+          "SKD055"
+        ],
+        [
+          "SKD040"
+        ]
+      ],
+      "notes": [
+        "問題別の第2候補群。味方・スキル倍率は変更しない",
+        "敵の行動不能→解除役→対象の次行動の順を合わせ、中間Waveの大技を妨害する"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 43.8,
+          "hp": 0.8826047178337444,
+          "alive": 5,
+          "skips": 0.9
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 43.766666666666666,
+          "hp": 0.7065945057879773,
+          "alive": 5,
+          "skips": 2.2333333333333334
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 37.416666666666664,
+          "hp": 0.6804731804628793,
+          "alive": 5,
+          "skips": 1.6666666666666667
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 44.93333333333333,
+          "hp": 0.894747107574623,
+          "alive": 5,
+          "skips": 0.8666666666666667
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 27.733333333333334,
+          "hp": 0.9236046772430713,
+          "alive": 5,
+          "skips": 0.2
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          25001,
+          25060
+        ],
+        "control": [
+          25001,
+          25060
+        ],
+        "direct": [
+          25001,
+          25060
+        ],
+        "alternative": [
+          25001,
+          25060
+        ],
+        "farm": [
+          25201,
+          25230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "9-10",
+      "concept": "得意と不得意を見抜く",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "margin-3",
+      "focusSkills": [
+        "SKD052"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [
+          "SKD052"
+        ],
+        [
+          "SKD014"
+        ],
+        [
+          "SKD040"
+        ]
+      ],
+      "notes": [
+        "波ごとの保護解除の価値を出すため、反撃役を調整し破勢から破護へ置換"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 89.4,
+          "hp": 0.5971091389932858,
+          "alive": 3.966666666666667,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 91.83333333333333,
+          "hp": 0.3578746775005939,
+          "alive": 2.4,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 79.23333333333333,
+          "hp": 0.34344810165531714,
+          "alive": 2.7,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 92.66666666666667,
+          "hp": 0.6354133841996511,
+          "alive": 4.166666666666667,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 43.63333333333333,
+          "hp": 0.8869368888862006,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          25001,
+          25060
+        ],
+        "control": [
+          25001,
+          25060
+        ],
+        "direct": [
+          25001,
+          25060
+        ],
+        "alternative": [
+          25001,
+          25060
+        ],
+        "farm": [
+          25201,
+          25230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "10-1",
+      "concept": "硬い前衛と危険な後衛",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": 2,
+      "focusSkills": [
+        "SKD026"
+      ],
+      "mainSkills": [
+        [],
+        [],
+        [
+          "SKD038"
+        ],
+        [
+          "SKD026"
+        ],
+        [
+          "SKD040"
+        ]
+      ],
+      "notes": [],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 90.13333333333334,
+          "hp": 0.40131545862804624,
+          "alive": 2.683333333333333,
+          "skips": 0
+        },
+        "control": {
+          "wins": 0,
+          "n": 60,
+          "actions": 183.4,
+          "hp": 0,
+          "alive": 0,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 0,
+          "n": 60,
+          "actions": 88.68333333333334,
+          "hp": 0,
+          "alive": 0,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 90.9,
+          "hp": 0.4144226976312735,
+          "alive": 2.7,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 36.13333333333333,
+          "hp": 0.8382330339474795,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "10-2",
+      "concept": "分散被害と集中被害",
+      "status": "既存7面の変更候補を保持",
+      "numericFixApproved": false,
+      "evidence": "救済10／逆転敗北0、平均行動短縮-10.1、生存者増13/30、残HP差+0.071",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "10-3",
+      "concept": "強化と保護の二重守備",
+      "status": "既存15面の維持提案",
+      "numericFixApproved": false,
+      "evidence": "解除一式で74.6行動・4.67人生存、除去114.9・4.47人。標準攻撃置換は58.7・4.00人。速度と生存の差。",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "10-4",
+      "concept": "火力低下と継続被害",
+      "status": "既存15面の維持提案",
+      "numericFixApproved": false,
+      "evidence": "全体解除で残HP94.6%・5.00人生存、除去83.6%・4.67人、標準攻撃置換76.6%・4.17人。",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "10-5",
+      "concept": "同属性主軸の弱点を補う",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": 2,
+      "focusSkills": [
+        "SKD035"
+      ],
+      "mainSkills": [
+        [
+          "SKD034"
+        ],
+        [],
+        [
+          "SKD035"
+        ],
+        [
+          "SKD008"
+        ],
+        [
+          "SKD040"
+        ]
+      ],
+      "notes": [],
+      "controlNote": "水主砲を風攻守へ交換し風主軸を強める。完全単色は前提にしない",
+      "directNote": "水主砲を風攻守へ交換し風主軸を強める。完全単色は前提にしない",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 62.13333333333333,
+          "hp": 0.5315960969798319,
+          "alive": 3,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 71.38333333333334,
+          "hp": 0.5672982887467272,
+          "alive": 3.15,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 71.38333333333334,
+          "hp": 0.5672982887467272,
+          "alive": 3.15,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 63.483333333333334,
+          "hp": 0.5941600913835025,
+          "alive": 3.216666666666667,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 33.833333333333336,
+          "hp": 0.9063948836560102,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    },
+    {
+      "stage": "10-6",
+      "concept": "条件火力を維持する",
+      "status": "既存7面の変更候補を保持",
+      "numericFixApproved": false,
+      "evidence": "標準攻撃置換0/100→連携100/100。別攻略も100/100。正式採用前",
+      "source": "round15_ledger.json / round16_ledger.json"
+    },
+    {
+      "stage": "10-7",
+      "concept": "背水と生存を両立する",
+      "status": "今回修正・一括FIX候補",
+      "numericFixApproved": false,
+      "enemyChanged": true,
+      "tier": "mechanic-0",
+      "focusSkills": [
+        "SKD031"
+      ],
+      "mainSkills": [
+        [
+          "SKD045",
+          "SKD031"
+        ],
+        [],
+        [],
+        [],
+        []
+      ],
+      "notes": [
+        "背水役本人への保護が先に発動するよう、自己盾ではなく後順位の単体保護を装備",
+        "導入Wave後衛のSP上限を50にして、盾消費直後の2連続攻撃を抑える",
+        "低HPの本人が自己盾→背水の優先順で2枠を使用。他者への盾配布によるSP消費を止める"
+      ],
+      "controlNote": "焦点スキル除去",
+      "directNote": "焦点を同属性の標準攻撃へ置換",
+      "summaries": {
+        "main": {
+          "wins": 60,
+          "n": 60,
+          "actions": 32.95,
+          "hp": 0.771890223344895,
+          "alive": 4,
+          "skips": 0
+        },
+        "control": {
+          "wins": 60,
+          "n": 60,
+          "actions": 51.95,
+          "hp": 0.6649171444231208,
+          "alive": 3.683333333333333,
+          "skips": 0
+        },
+        "direct": {
+          "wins": 60,
+          "n": 60,
+          "actions": 41.3,
+          "hp": 0.6642509464794112,
+          "alive": 3.783333333333333,
+          "skips": 0
+        },
+        "alternative": {
+          "wins": 60,
+          "n": 60,
+          "actions": 57.71666666666667,
+          "hp": 0.3759196131934528,
+          "alive": 2.0166666666666666,
+          "skips": 0
+        },
+        "farm": {
+          "wins": 30,
+          "n": 30,
+          "actions": 16.133333333333333,
+          "hp": 0.9860170244445842,
+          "alive": 5,
+          "skips": 0
+        }
+      },
+      "inputBindingsVerified": true,
+      "seeds": {
+        "main": [
+          22001,
+          22060
+        ],
+        "control": [
+          22001,
+          22060
+        ],
+        "direct": [
+          22001,
+          22060
+        ],
+        "alternative": [
+          22001,
+          22060
+        ],
+        "farm": [
+          22201,
+          22230
+        ]
+      },
+      "source": "round17_evidence/final17-results.json"
+    }
+  ]
+}

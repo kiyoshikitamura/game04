@@ -1,0 +1,57 @@
+{
+  "scope": "same QA-A / urllib HTTP serial calls; not UI timing or iPhone Safari acceptance",
+  "beforeApi": 25,
+  "afterApi": 26,
+  "afterCode": "af640e291d3e79e511833dcef1e16f0ff7528b94",
+  "samples": 80,
+  "http200": 80,
+  "results": [
+    {
+      "action": "set_home",
+      "before": {
+        "n": 20,
+        "medianMs": 8623.35,
+        "p95NearestRankMs": 10300.2,
+        "maxMs": 12169.6,
+        "within1000ms": 0,
+        "within1500ms": 0
+      },
+      "after": {
+        "n": 20,
+        "medianMs": 8126.5,
+        "p95NearestRankMs": 10026.9,
+        "maxMs": 30345.3,
+        "within1000ms": 0,
+        "within1500ms": 0
+      },
+      "medianReductionPercent": 5.76
+    },
+    {
+      "action": "get_state",
+      "before": {
+        "n": 20,
+        "medianMs": 9050.45,
+        "p95NearestRankMs": 11075.4,
+        "maxMs": 27943.9,
+        "within1000ms": 0,
+        "within1500ms": 0
+      },
+      "after": {
+        "n": 20,
+        "medianMs": 7956.3,
+        "p95NearestRankMs": 9804.4,
+        "maxMs": 25651.6,
+        "within1000ms": 0,
+        "within1500ms": 0
+      },
+      "medianReductionPercent": 12.09
+    }
+  ],
+  "limits": [
+    "get_state implementation unchanged by committed-state reuse; its observed speed difference indicates run-to-run variance",
+    "after run overlapped limited separate QA-B SSR API checks and other authorized QA; shared service load was not isolated",
+    "no artificial throttle; actual network conditions not controlled",
+    "outliers retained; no performance PASS or 1.5s exception assigned",
+    "cold cache and iPhone Safari WiFi/mobile unmeasured by this script"
+  ]
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "case": "save-result-left-1",
+    "start": 994665.6,
+    "end": 998060.2,
+    "ms": 3394.6,
+    "outcome": "ready",
+    "waits": [
+      {
+        "type": "request / save_deck",
+        "start": 994674.0,
+        "end": 998038.2,
+        "ms": 3364.2
+      }
+    ]
+  },
+  {
+    "case": "save-result-right-2",
+    "start": 1014378.8,
+    "end": 1016689.3,
+    "ms": 2310.5,
+    "outcome": "ready",
+    "waits": [
+      {
+        "type": "request / save_deck",
+        "start": 1014386.5,
+        "end": 1016665.7,
+        "ms": 2279.2
+      }
+    ]
+  },
+  {
+    "case": "save-result-left-3",
+    "start": 1025876.8,
+    "end": 1028387.5,
+    "ms": 2510.7,
+    "outcome": "ready",
+    "waits": [
+      {
+        "type": "request / save_deck",
+        "start": 1025886.6,
+        "end": 1028365.5,
+        "ms": 2478.9
+      }
+    ]
+  },
+  {
+    "case": "stage-detail-ready-1",
+    "start": 1085795.8,
+    "end": 1085844.1,
+    "ms": 48.3,
+    "outcome": "ready",
+    "waits": [
+      {
+        "type": "image-group / quest",
+        "start": 1085805.5,
+        "end": 1085805.6,
+        "ms": 0.1
+      }
+    ]
+  },
+  {
+    "case": "stage-detail-ready-2",
+    "start": 1100126.7,
+    "end": 1100173.9,
+    "ms": 47.2,
+    "outcome": "ready",
+    "waits": [
+      {
+        "type": "image-group / quest",
+        "start": 1100136.3,
+        "end": 1100136.7,
+        "ms": 0.4
+      }
+    ]
+  },
+  {
+    "case": "stage-detail-ready-3",
+    "start": 1113278.5,
+    "end": 1113318.8,
+    "ms": 40.3,
+    "outcome": "ready",
+    "waits": [
+      {
+        "type": "image-group / quest",
+        "start": 1113287.7,
+        "end": 1113288.2,
+        "ms": 0.5
+      }
+    ]
+  }
+]

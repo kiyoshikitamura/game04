@@ -1,0 +1,224 @@
+{
+  "checkedAt": "2026-09-25T00:33:58.925Z",
+  "userId": "b1b9ee70-39d0-4e55-baef-a3df034dedfe",
+  "checks": [
+    {
+      "name": "R01 skills auto selection / save / reload / unresolved inventory retained",
+      "pass": true,
+      "version": 8
+    },
+    {
+      "name": "R01 equipment auto selection / save / reload / unresolved inventory retained",
+      "pass": true,
+      "version": 12
+    },
+    {
+      "name": "R04 first exchange 34→24, generic 0→5 and same-ID replay",
+      "pass": true,
+      "requestId": "33021f47-70d7-4b9e-a8e7-d1a82c8ee823",
+      "version": 17
+    },
+    {
+      "name": "R04 exchange 12 and same-ID replay",
+      "pass": true,
+      "rarity": "N",
+      "version": 18
+    },
+    {
+      "name": "R04 rejected amount 8 no consumption",
+      "pass": true,
+      "status": 400
+    },
+    {
+      "name": "R04 rejected amount 11 no consumption",
+      "pass": true,
+      "status": 400
+    },
+    {
+      "name": "R04 rejected amount 1000000000 no consumption",
+      "pass": true,
+      "status": 400
+    },
+    {
+      "name": "R04 pre-dispatch transport abort / reload no consumption",
+      "pass": true
+    },
+    {
+      "name": "R04 discarded successful response / reload / same-ID replay consumes once",
+      "pass": true
+    }
+  ],
+  "requests": [
+    {
+      "action": "get_state",
+      "requestId": "d013f559-5cf1-4ae0-8b84-122fea9675a6",
+      "status": 200,
+      "version": 4
+    },
+    {
+      "action": "save_deck",
+      "requestId": "1a1d00d8-c78b-4cec-bcd7-dc404d83020c",
+      "status": 200,
+      "version": 7
+    },
+    {
+      "action": "get_state",
+      "requestId": "6cd7615e-9c6c-42ad-b978-532de8a5d669",
+      "status": 200,
+      "version": 8
+    },
+    {
+      "action": "save_deck",
+      "requestId": "bb1d1017-d4d1-403c-a6ea-347522ff591d",
+      "status": 200,
+      "version": 11
+    },
+    {
+      "action": "get_state",
+      "requestId": "2dda4dcf-9e92-4898-bc7e-38c81aaff84d",
+      "status": 200,
+      "version": 12
+    },
+    {
+      "action": "soul_exchange",
+      "requestId": "33021f47-70d7-4b9e-a8e7-d1a82c8ee823",
+      "status": 200,
+      "version": 15
+    },
+    {
+      "action": "get_state",
+      "requestId": "7e822c94-2e0f-4536-8e14-70921e638c31",
+      "status": 200,
+      "version": 16
+    },
+    {
+      "action": "soul_exchange",
+      "requestId": "33021f47-70d7-4b9e-a8e7-d1a82c8ee823",
+      "status": 200,
+      "version": 17
+    },
+    {
+      "action": "get_state",
+      "requestId": "4ff1ae05-1780-4f0e-bb6c-6f6d30a37b48",
+      "status": 200,
+      "version": 17
+    },
+    {
+      "action": "soul_exchange",
+      "requestId": "33021f47-70d7-4b9e-a8e7-d1a82c8ee823",
+      "status": 200,
+      "version": 17
+    },
+    {
+      "action": "soul_exchange",
+      "requestId": "d7d03b1f-46d5-4d5c-a5fb-0a5d3bce17b9",
+      "status": 200,
+      "version": 18
+    },
+    {
+      "action": "get_state",
+      "requestId": "077b3fd4-da63-4c66-aaeb-b25dc0e94458",
+      "status": 200,
+      "version": 18
+    },
+    {
+      "action": "soul_exchange",
+      "requestId": "d7d03b1f-46d5-4d5c-a5fb-0a5d3bce17b9",
+      "status": 200,
+      "version": 18
+    },
+    {
+      "action": "soul_exchange",
+      "requestId": "13d62667-0365-468a-9602-46389dc0b19e",
+      "status": 400,
+      "error": "固有魂を10個以上・2個単位で指定してください。"
+    },
+    {
+      "action": "get_state",
+      "requestId": "5b01ed78-168a-4f41-9c0d-ad7093409db9",
+      "status": 200,
+      "version": 18
+    },
+    {
+      "action": "soul_exchange",
+      "requestId": "2396a618-ddf2-478d-8ca5-c66680ab6e9c",
+      "status": 400,
+      "error": "固有魂を10個以上・2個単位で指定してください。"
+    },
+    {
+      "action": "get_state",
+      "requestId": "b32b3df1-ee85-4725-88ca-9b65f5fcb1cd",
+      "status": 200,
+      "version": 18
+    },
+    {
+      "action": "soul_exchange",
+      "requestId": "8f05e03b-36a0-464c-9597-d732eaa5d1f4",
+      "status": 400,
+      "error": "固有魂が不足しています。"
+    },
+    {
+      "action": "get_state",
+      "requestId": "f35bcc7b-7087-468c-a967-5773d035cffe",
+      "status": 200,
+      "version": 18
+    },
+    {
+      "action": "get_state",
+      "requestId": "cd4d2f11-4bc0-47d8-8c33-58224efb88ab",
+      "status": 200,
+      "version": 18
+    },
+    {
+      "action": "soul_exchange",
+      "requestId": "a4427f9a-f963-4190-850c-a96fd75d7394",
+      "status": 200,
+      "version": 19
+    },
+    {
+      "action": "get_state",
+      "requestId": "8c6dcd61-6c9a-46b7-b673-c6204529834a",
+      "status": 200,
+      "version": 19
+    },
+    {
+      "action": "soul_exchange",
+      "requestId": "a4427f9a-f963-4190-850c-a96fd75d7394",
+      "status": 200,
+      "version": 19
+    }
+  ],
+  "scope": "Authenticated HTTP and get_state, not browser / physical device verification",
+  "pass": true,
+  "resumedAt": "2026-09-25T00:39:27.420Z",
+  "final": {
+    "version": 19,
+    "characterId": "char_alice_01",
+    "specificSouls": 2,
+    "genericSouls": 16,
+    "rarity": "N",
+    "deck": [
+      {
+        "skillIds": [
+          "SKILL_004"
+        ],
+        "equipment": {},
+        "characterId": "char_alice_01"
+      },
+      {
+        "skillIds": [
+          "SKILL_004"
+        ],
+        "equipment": {},
+        "characterId": "char_gou_01"
+      },
+      {
+        "skillIds": [
+          "SKILL_004"
+        ],
+        "equipment": {},
+        "characterId": "char_kageyama_01"
+      }
+    ]
+  }
+}

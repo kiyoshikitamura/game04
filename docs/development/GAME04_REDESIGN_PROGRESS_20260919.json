@@ -1,0 +1,858 @@
+{
+  "title": "GAME04 全面改修進捗管理",
+  "date": "2026-09-20",
+  "basisSha": "7369f3dbaf3ef454c33932df55ee308e0b7718cb",
+  "previewSha": "b8675e16c325166ae9ff1215eef2795c0017edc9",
+  "previewUrl": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+  "db": "lrgyllgzcdcphlbmkknc",
+  "scope": "2026-09-19全面再設計42件＋2026-09-20領土侵攻TI-01〜05の実装工程サブセット計47件。初期対象外M6-05はexcludedTasksへ分離。全体141件正本の代替ではなく、旧191件・43件の率を全体率へ流用しない。",
+  "tasks": [
+    {
+      "id": "M1-01",
+      "phase": "M1",
+      "title": "共通型・6属性・5能力値",
+      "status": "Preview反映済",
+      "notes": "実装済み。数値は仮Master",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M1-02",
+      "phase": "M1",
+      "title": "Character・Skill・Equipment Master",
+      "status": "Preview反映済",
+      "notes": "60体・50スキル・160装備",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M1-03",
+      "phase": "M1",
+      "title": "旧所持資産の非破壊取込み",
+      "status": "Preview反映済",
+      "notes": "UUID台帳による一度だけの取込み",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M1-04",
+      "phase": "M1",
+      "title": "新DB・CAS・再送冪等",
+      "status": "Preview反映済",
+      "notes": "dev Migration適用、旧users hash維持",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M1-05",
+      "phase": "M1",
+      "title": "サーバー認証・資産更新API",
+      "status": "Preview反映済",
+      "notes": "Edgeサーバーが認証・計算・更新",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M2-01",
+      "phase": "M2",
+      "title": "固定行動順・HP・共通SP",
+      "status": "Preview反映済",
+      "notes": "5キャラ左から右、SPD廃止",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "historicalImplementationScope": "9/19初回実装の配信履歴。9/20共通戦闘ルールの実装受入ではない。",
+      "currentRuleAuthority": "docs/product/GAME04_BALANCE_AUTHORITY_V1_2026-09-20.md",
+      "currentRuleProgress": "battleCommonUpdates.stages を参照"
+    },
+    {
+      "id": "M2-02",
+      "phase": "M2",
+      "title": "条件スキル・対象選択・SP優先",
+      "status": "Preview反映済",
+      "notes": "9/19高消費SP優先の配信履歴。9/20に味方装備枠順・敵設定優先順へ仕様置換。新仕様の適用状態はbattleCommonUpdatesへ分離。",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "historicalImplementationScope": "9/19初回実装の配信履歴。9/20共通戦闘ルールの実装受入ではない。",
+      "currentRuleAuthority": "docs/product/GAME04_BALANCE_AUTHORITY_V1_2026-09-20.md",
+      "currentRuleProgress": "battleCommonUpdates.stages を参照"
+    },
+    {
+      "id": "M2-03",
+      "phase": "M2",
+      "title": "BURST・敵割込み・個別SP",
+      "status": "Preview反映済",
+      "notes": "9/19本人抽選の配信履歴。9/20に独立ゲージ200・次の行動可能者開始時抽選へ仕様置換。新仕様の適用状態はbattleCommonUpdatesへ分離。",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "historicalImplementationScope": "9/19初回実装の配信履歴。9/20共通戦闘ルールの実装受入ではない。",
+      "currentRuleAuthority": "docs/product/GAME04_BALANCE_AUTHORITY_V1_2026-09-20.md",
+      "currentRuleProgress": "battleCommonUpdates.stages を参照"
+    },
+    {
+      "id": "M2-04",
+      "phase": "M2",
+      "title": "Passive・状態変化・Bossフェーズ",
+      "status": "Preview反映済",
+      "notes": "9/19のPassive/状態/Phase配信履歴。9/20の独立持続・上限・死亡時処理・Wave共通引継ぎの適用状態はbattleCommonUpdatesへ分離。",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "historicalImplementationScope": "9/19初回実装の配信履歴。9/20共通戦闘ルールの実装受入ではない。",
+      "currentRuleAuthority": "docs/product/GAME04_BALANCE_AUTHORITY_V1_2026-09-20.md",
+      "currentRuleProgress": "battleCommonUpdates.stages を参照"
+    },
+    {
+      "id": "M2-05",
+      "phase": "M2",
+      "title": "縦型Battle UI・再生・結果分析",
+      "status": "Preview反映済",
+      "notes": "既存画像使用、専用演出は仮",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "historicalImplementationScope": "9/19初回実装の配信履歴。9/20共通戦闘ルールの実装受入ではない。",
+      "currentRuleAuthority": "docs/product/GAME04_BALANCE_AUTHORITY_V1_2026-09-20.md",
+      "currentRuleProgress": "battleCommonUpdates.stages を参照"
+    },
+    {
+      "id": "M3-01",
+      "phase": "M3",
+      "title": "デッキ・編成・自動設定",
+      "status": "Preview反映済",
+      "notes": "5体、スキルと装備の自動設定",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M3-02",
+      "phase": "M3",
+      "title": "キャラ育成・魂・覚醒・収集表示",
+      "status": "Preview反映済",
+      "notes": "魂辞書、+0〜5、スキル枠解放",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M3-03",
+      "phase": "M3",
+      "title": "共有スキル・LB育成",
+      "status": "Preview反映済",
+      "notes": "+0〜10、同キャラ重複不可",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M3-04",
+      "phase": "M3",
+      "title": "装備6枠・Lv・LB",
+      "status": "Preview反映済",
+      "notes": "属性なし、個別所持",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M3-05",
+      "phase": "M3",
+      "title": "装備複数選択・分解・ロック",
+      "status": "Preview反映済",
+      "notes": "中央確認ダイアログ",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M4-01",
+      "phase": "M4",
+      "title": "10エリア・70ステージMaster",
+      "status": "Preview反映済",
+      "notes": "1〜5Wave、攻略テーマ別",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M4-02",
+      "phase": "M4",
+      "title": "エリア・ステージ・情報ダイアログ",
+      "status": "Preview反映済",
+      "notes": "背景2種を仮流用",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M4-03",
+      "phase": "M4",
+      "title": "出撃準備・行動力・Wave接続",
+      "status": "Preview反映済",
+      "notes": "開始時消費、敗北返却なし",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M4-04",
+      "phase": "M4",
+      "title": "順次解放・周回・3種報酬",
+      "status": "Preview反映済",
+      "notes": "初回・通常・レアを分離",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M4-05",
+      "phase": "M4",
+      "title": "クリア時エンカウント・進捗接続",
+      "status": "Preview反映済",
+      "notes": "遭遇抽選・進捗保存。Mission報酬接続はM4-06",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M4-06",
+      "phase": "M4",
+      "title": "ステージ・エリアクリアのMission報酬接続",
+      "status": "Preview反映済",
+      "notes": "接続範囲をPreview反映済。サーバー条件評価・受取CAS・中央UIを接続。正式Mission Masterは空/無効。正式条件・報酬の承認待ちであり運用Missionの完了ではない。",
+      "previewEligible": true,
+      "sha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "completionScope": "接続実装のみ。正式Master待ち"
+    },
+    {
+      "id": "M5-01",
+      "phase": "M5",
+      "title": "エンカウントRaid・参加管理",
+      "status": "Preview反映済",
+      "notes": "60分、最大10人、退出ルール",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M5-02",
+      "phase": "M5",
+      "title": "共通HP・勝敗・討伐資格",
+      "status": "Preview反映済",
+      "notes": "3勝資格、勝利倍率は仮",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M5-03",
+      "phase": "M5",
+      "title": "任意解禁Raid・Lv進行",
+      "status": "Preview反映済",
+      "notes": "解禁アイテム、3日、最大20人",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M5-04",
+      "phase": "M5",
+      "title": "救援・報酬台帳・冪等受取",
+      "status": "Preview反映済",
+      "notes": "6時間窓、全体とActivityへ",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M5-05",
+      "phase": "M5",
+      "title": "レイドUI・準備・結果",
+      "status": "Preview反映済",
+      "notes": "仮FIX UI、仮Boss画像",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M5-06",
+      "phase": "M5",
+      "title": "Unlock途中参加Checkpoint廃止・共有Lv参加への統一",
+      "status": "Preview反映済",
+      "notes": "個人Checkpoint制限・表示を除去。見た目段階分離、旧保存互換・joinedLevel保持。dev実APIでLv14途中参加WIN/LOSE・再送・3勝・非遡及・旧Lv精算・Lv15強化・2参加者並行精算/claimを確認。Preview配信・QA Raid表示確認。全Lvバランス・実機最終受入は未実施。",
+      "previewEligible": true,
+      "sha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "specStatus": "FIX済み",
+      "completionScope": "Checkpoint除去"
+    },
+    {
+      "id": "M6-01",
+      "phase": "M6",
+      "title": "Home Header・背景・キャラ選択",
+      "status": "Preview反映済",
+      "notes": "選択素材は後から交換可能",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M6-02",
+      "phase": "M6",
+      "title": "Quest続き・Footer・ショートカット",
+      "status": "Preview反映済",
+      "notes": "Home/Quest/Character/Raid/Gacha",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M6-03",
+      "phase": "M6",
+      "title": "Activity・全体・DM",
+      "status": "Preview反映済",
+      "notes": "ギルドChat・BBSは非公開",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M6-04",
+      "phase": "M6",
+      "title": "共通運営機能・旧PvP等の非公開",
+      "status": "Preview反映済",
+      "notes": "設定・通知・Present等を継続",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M7-01",
+      "phase": "M7",
+      "title": "VIP権利30日・単発付与基盤",
+      "status": "Preview反映済",
+      "notes": "価格未FIX、販売は無効",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M7-02",
+      "phase": "M7",
+      "title": "VIP速度3倍・既存Skip解放",
+      "status": "Preview反映済",
+      "notes": "非VIPは1倍/2倍のみ",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M8-01",
+      "phase": "M8",
+      "title": "新チュートリアル設計",
+      "status": "未着手",
+      "notes": "未着手: 本体完成後",
+      "previewEligible": false,
+      "sha": "",
+      "url": ""
+    },
+    {
+      "id": "M8-02",
+      "phase": "M8",
+      "title": "新チュートリアル実装・KPI接続",
+      "status": "未着手",
+      "notes": "未着手: 設計後",
+      "previewEligible": false,
+      "sha": "",
+      "url": ""
+    },
+    {
+      "id": "M9-01",
+      "phase": "M9",
+      "title": "Battle・育成・報酬の数値FIX",
+      "status": "未着手",
+      "notes": "未着手: 現数値は開発用",
+      "previewEligible": false,
+      "sha": "",
+      "url": ""
+    },
+    {
+      "id": "M9-02",
+      "phase": "M9",
+      "title": "ガチャPool・確率・価格・天井",
+      "status": "未着手",
+      "notes": "未着手: 旧仕様を正式継承しない",
+      "previewEligible": false,
+      "sha": "",
+      "url": ""
+    },
+    {
+      "id": "M9-03",
+      "phase": "M9",
+      "title": "新資産の獲得・重複変換最終接続",
+      "status": "Preview反映済",
+      "notes": "接続範囲をPreview反映済。初期snapshot/取得event分離・魂/Skill素材/Equipment個体・receipt/CASを実装。正式変換量・上限後扱い・未知Masterは決定待ち。タスク全体の完了ではない。",
+      "previewEligible": true,
+      "sha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "completionScope": "接続実装のみ。正式Master待ち"
+    },
+    {
+      "id": "M9-04",
+      "phase": "M9",
+      "title": "ショップ・VIP商材・Economy",
+      "status": "未着手",
+      "notes": "未着手: 価格・内容量・販売条件",
+      "previewEligible": false,
+      "sha": "",
+      "url": ""
+    },
+    {
+      "id": "M10-01",
+      "phase": "M10",
+      "title": "型・Build・最小回帰・Preview配信",
+      "status": "Preview反映済",
+      "notes": "統合担当が確認後公開",
+      "previewEligible": true,
+      "sha": "93d25673202b1e43297bae338ddfc8033aa8d5f6",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+    },
+    {
+      "id": "M10-02",
+      "phase": "M10",
+      "title": "ユーザー初回統合確認・総合受入",
+      "status": "未着手",
+      "notes": "未着手: dev URL発行後",
+      "previewEligible": false,
+      "sha": "",
+      "url": ""
+    },
+    {
+      "id": "M10-03",
+      "phase": "M10",
+      "title": "Production Release準備・公開",
+      "status": "未着手",
+      "notes": "未着手: 今回Production公開なし",
+      "previewEligible": false,
+      "sha": "",
+      "url": ""
+    },
+    {
+      "id": "TI-01",
+      "phase": "M5",
+      "title": "領土侵攻Home CTA・開催トップ・レイド一覧導線の再編",
+      "status": "Preview反映済",
+      "specStatus": "FIX済み",
+      "notes": "9/20領土侵攻の接続実装と限定統合受入をPreview反映。360px offline fixture UI実操作とdev実APIを別試験で確認。正式Master/素材・物理実機・全Lvバランスの最終受入は未実施。",
+      "previewEligible": true,
+      "sha": "f539ba0c92484c6e2c0e446567555311f6265fd2",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "completionScope": "機構・接続実装と限定統合受入のみ。正式Master/素材/物理実機/全Lvバランスは別工程。"
+    },
+    {
+      "id": "TI-02",
+      "phase": "M5",
+      "title": "ユーザー領土侵攻経験値/レベルと成長・解放マスター接続",
+      "status": "Preview反映済",
+      "specStatus": "FIX済み",
+      "notes": "9/20領土侵攻の接続実装と限定統合受入をPreview反映。360px offline fixture UI実操作とdev実APIを別試験で確認。正式Master/素材・物理実機・全Lvバランスの最終受入は未実施。",
+      "previewEligible": true,
+      "sha": "f539ba0c92484c6e2c0e446567555311f6265fd2",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "completionScope": "機構・接続実装と限定統合受入のみ。正式Master/素材/物理実機/全Lvバランスは別工程。"
+    },
+    {
+      "id": "TI-03",
+      "phase": "M5",
+      "title": "領土侵攻の開催枠/必要Lv/アイテム同時判定・開催時ルール保持",
+      "status": "Preview反映済",
+      "specStatus": "FIX済み",
+      "notes": "9/20領土侵攻の接続実装と限定統合受入をPreview反映。360px offline fixture UI実操作とdev実APIを別試験で確認。正式Master/素材・物理実機・全Lvバランスの最終受入は未実施。",
+      "previewEligible": true,
+      "sha": "f539ba0c92484c6e2c0e446567555311f6265fd2",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "completionScope": "機構・接続実装と限定統合受入のみ。正式Master/素材/物理実機/全Lvバランスは別工程。"
+    },
+    {
+      "id": "TI-04",
+      "phase": "M5",
+      "title": "侵攻クリア時主催者3勝経験値・終了枠解放・結果報酬導線",
+      "status": "Preview反映済",
+      "specStatus": "FIX済み",
+      "notes": "9/20領土侵攻の接続実装と限定統合受入をPreview反映。360px offline fixture UI実操作とdev実APIを別試験で確認。正式Master/素材・物理実機・全Lvバランスの最終受入は未実施。",
+      "previewEligible": true,
+      "sha": "f539ba0c92484c6e2c0e446567555311f6265fd2",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "completionScope": "機構・接続実装と限定統合受入のみ。正式Master/素材/物理実機/全Lvバランスは別工程。"
+    },
+    {
+      "id": "TI-05",
+      "phase": "M5",
+      "title": "領土侵攻の境界条件・並行処理・個別戦闘の統合受入",
+      "status": "Preview反映済",
+      "specStatus": "FIX済み",
+      "notes": "9/20領土侵攻の接続実装と限定統合受入をPreview反映。360px offline fixture UI実操作とdev実APIを別試験で確認。正式Master/素材・物理実機・全Lvバランスの最終受入は未実施。",
+      "previewEligible": true,
+      "sha": "f539ba0c92484c6e2c0e446567555311f6265fd2",
+      "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+      "completionScope": "機構・接続実装と限定統合受入のみ。正式Master/素材/物理実機/全Lvバランスは別工程。"
+    }
+  ],
+  "latestDecision": "2026-09-20 領土侵攻のHome開催導線・主催者経験値/レベル・同時開催枠/侵攻先解放をFIX。詳細: docs/product/GAME04_TERRITORY_INVASION_AUTHORITY_2026-09-20.md",
+  "excludedTasks": [
+    {
+      "id": "M6-05",
+      "phase": "M6",
+      "title": "新ランキング軸・表示",
+      "status": "初期対象外",
+      "notes": "ランキングはリリース時点ではオミット。新評価軸・公開時期は初期未FIXに残さない。",
+      "previewEligible": false,
+      "sha": "",
+      "url": ""
+    }
+  ],
+  "overallAuthority": {
+    "reportedTaskCount": 141,
+    "reportedUnfixedOrApprovalPendingCount": 35,
+    "source": "2026-09-19 ユーザー開発引継ぎ",
+    "verificationStatus": "全体正本の所在・全行未確認。RepositoryとLibraryの確認済み資料には141件版なし。",
+    "verifiedTaskCount": null,
+    "previewRate": null,
+    "completionRate": null
+  },
+  "taskUpdates": {
+    "basisSha": "137c3eccfb6c66a2a001096900e2edee7dc63b37",
+    "status": "Preview反映済",
+    "previewApplied": true,
+    "implementationSha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
+    "previewSha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
+    "previewUrl": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+    "developmentDeployment": {
+      "db": "lrgyllgzcdcphlbmkknc",
+      "migration": "20260919144247_game04_acquisition_events",
+      "applied": true,
+      "edgeFunction": "game04-redesign-api",
+      "edgeVersion": 3,
+      "edgeStatus": "ACTIVE",
+      "verifyJwt": true,
+      "advisor": "追加2テーブルはINFO: RLS enabled no policyのみ。service-only / browser revokeを意図。"
+    },
+    "verification": {
+      "typecheck": "PASS",
+      "build": "PASS",
+      "liveApi": "Raid共有Lv14/15、3勝資格・非遡及・旧Lv精算・2参加者並行処理PASS。取得・Mission実API結果は個別根拠へ追記。",
+      "preview": "Vercel success。branch URLでroot TAP TO START・/qa/redesign Home/Raid表示確認。 /qa/redesign任務中央Dialog・内部スクロール(.rd-modal-body clientHeight682/scrollHeight953, overflowYauto)・末尾「達成報酬準備中」を確認。",
+      "finalAcceptance": "全項目の最終受入は未実施。接続実装と正式Master承認を分離。",
+      "acquisitionApi": "6イベント（新規キャラ1・重複魂20・Skill素材2・装備個体2）の取込みと後続読取の二重付与なしを確認。並行get_stateは片方がDB REST上流非JSON応答による400となり、並行HTTP受入は未PASS。",
+      "missionApi": "正式Masterはmissions=[]。不正claim_missionは400拒否を確認。有効Missionの実API受取は未検証。",
+      "presentApi": "Character/Skill/Equipment各2個のPresentを同時2claimし各[200,400]で一方のみ成功。累計12イベント、新規キャラ+1/魂+40/Skill素材+6/装備個体+4、再取得完全一致。無効Mission claim400後state不変。",
+      "notVerified": [
+        "有効Missionの実API受取",
+        "Login全日程",
+        "実ガチャ抽選",
+        "正式Master・全Lvバランス",
+        "実機最終受入"
+      ],
+      "evidence": [
+        "GAME04_ACQUISITION_ACCEPTANCE_20260919.json",
+        "GAME04_ACQUISITION_CONNECTION_20260919.md",
+        "GAME04_RAID_SHARED_LEVEL_20260919.md"
+      ]
+    },
+    "items": [
+      {
+        "id": "M5-06",
+        "scope": "existingImplementationSubset",
+        "status": "Preview反映済",
+        "notes": "個人Checkpoint制限・表示を除去。見た目段階分離、旧保存互換・joinedLevel保持。dev実APIでLv14途中参加WIN/LOSE・再送・3勝・非遡及・旧Lv精算・Lv15強化・2参加者並行精算/claimを確認。Preview配信・QA Raid表示確認。全Lvバランス・実機最終受入は未実施。",
+        "sha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
+        "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+        "scopeAccepted": "Checkpoint除去"
+      },
+      {
+        "id": "M9-03",
+        "scope": "existingImplementationSubset",
+        "status": "Preview反映済",
+        "notes": "接続範囲をPreview反映済。初期snapshot/取得event分離・魂/Skill素材/Equipment個体・receipt/CASを実装。正式変換量・上限後扱い・未知Masterは決定待ち。タスク全体の完了ではない。",
+        "sha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
+        "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+        "scopeAccepted": "接続実装・既存仮Masterによる確認のみ"
+      },
+      {
+        "id": "M4-06",
+        "scope": "existingImplementationSubset",
+        "status": "Preview反映済",
+        "notes": "接続範囲をPreview反映済。サーバー条件評価・受取CAS・中央UIを接続。正式Mission Masterは空/無効。正式条件・報酬の承認待ちであり運用Missionの完了ではない。",
+        "sha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
+        "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+        "scopeAccepted": "接続実装・既存仮Masterによる確認のみ"
+      },
+      {
+        "id": "MS-03",
+        "scope": "handoffOnly; not added to the 42-task subset",
+        "title": "Login／Presentの新資産接続",
+        "status": "Preview反映済",
+        "notes": "接続範囲をPreview反映済。受取後の新state再読取と明示Master取得を接続。旧Item→新Material対応・正式Login日程/報酬は未確定。全体完了ではない。",
+        "sha": "f75a341cda872f043a3ef564f333e09f7f9f9988",
+        "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+        "scopeAccepted": "接続実装・既存仮Masterによる確認のみ"
+      }
+    ]
+  },
+  "territoryUpdates": {
+    "authority": "docs/product/GAME04_TERRITORY_INVASION_AUTHORITY_2026-09-20.md",
+    "basisSha": "2ebc36a152c91d3edcdfc23e47a108c41a0cc9b7",
+    "status": "Preview反映済（接続実装・限定統合受入）",
+    "taskIds": [
+      "TI-01",
+      "TI-02",
+      "TI-03",
+      "TI-04",
+      "TI-05"
+    ],
+    "formalMasterStatus": "未FIX",
+    "implementationSha": "a74304373f6ee026b50234a879102f1f99b4306e",
+    "developmentDbApplied": true,
+    "edgeApplied": true,
+    "previewApplied": true,
+    "verification": {
+      "typecheck": "PASS",
+      "build": "PASS",
+      "preview": "f539ba0c92484c6e2c0e446567555311f6265fd2 Vercel success。360px iframe内offline fixtureをブラウザ実操作。dev実APIは別試験。",
+      "hostingRollback": "PASS: item0/必要Lv/枠/部分消費なし/同id同room/異payload拒否/snapshot固定/Master更新時不変/expired枠解放・履歴保持/nullMaster拒否",
+      "hostingLiveApi": "PASS: Lv1並行2→200/400枠満杯、同request再送同room・items1→0。Lv2 QAfixture既存1開催/所持3で並行2→200/400、計2開催・所持2。",
+      "clearXpLiveApi": "PASS: 開始済battle入力+seedの専用QA fixtureをEdge自身でsimulate。途中0/主催2勝最終0/主催3勝不在100/主催最終3勝目100/clear後late3勝非遡及/別救援2Room同時clear200/再送重複なし。主催累計400・救援各0。 DB receipts6件（eligible4/ineligible2）計400と照合。3勝報酬/非遡及PASS。",
+      "notAccepted": [
+        "正式Master/数値/素材",
+        "全Lvバランス",
+        "大規模負荷",
+        "物理スマホ実機・最終総合受入"
+      ],
+      "battleLiveApi": "PASS: 期限切れ未受取claim、新規通常開始WIN・行動力5消費・共有Lv1→2、旧Lv1結果確定で新HP不加算、次開始敵HP6500→7475、battleRulesがDBsnapshot一致。専用Lv14で通常LOSE/勝利数不増PASS。",
+      "evidence": [
+        "GAME04_TERRITORY_API_ACCEPTANCE_20260920.json",
+        "GAME04_TERRITORY_ACCEPTANCE_20260920.md",
+        "GAME04_TERRITORY_HOST_ACCEPTANCE_20260920.json"
+      ],
+      "mobileViewportUi": {
+        "home": "CTA各157px・同一top・横overflowなし",
+        "noItem": "0個でもトップ閲覧可・不足理由表示・開催不可",
+        "hostConfirmation": "中央Dialog幅326/高さ330",
+        "battlePreparation": "開催→Raid詳細→出撃準備幅334/高さ614、CTA画面内",
+        "multipleHosting": "複数侵攻をshort IDで識別",
+        "expiredReward": "終了一覧→結果→報酬→受取待ち1→0、受取disabledを実click確認",
+        "scope": "360pxブラウザiframe・offline fixture。物理スマホ実機の受入ではない。"
+      },
+      "edgeVersionScope": "動作境界・DB/実API受入はEdge v4。現行v5は最終Repository bundle（領土侵攻札表示名同期）の再配信のみ。v5 get_state smoke 200、territoryLevel3/experience400/active0/itemName領土侵攻札PASS。"
+    },
+    "audit": "docs/development/GAME04_TERRITORY_IMPLEMENTATION_20260920.md",
+    "developmentDeployment": {
+      "db": "lrgyllgzcdcphlbmkknc",
+      "migrations": [
+        "20260919151837_territory_invasion",
+        "20260919152135_territory_item_label"
+      ],
+      "edgeFunction": "game04-redesign-api",
+      "edgeVersion": 5,
+      "edgeStatus": "ACTIVE",
+      "verifyJwt": true
+    },
+    "previewSha": "f539ba0c92484c6e2c0e446567555311f6265fd2",
+    "previewUrl": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/"
+  },
+  "battleCommonUpdates": {
+    "authority": "docs/product/GAME04_BALANCE_AUTHORITY_V1_2026-09-20.md",
+    "basisSha": "06a9bd8953ab02a475d58abe4efe9e9ee9dde2fc",
+    "authorityIntegrationSha": "9c24e211eeab98030994001078dfcf83f5140f26",
+    "status": "Preview反映済（処理ルール・UI接続の限定受入）",
+    "scope": "47件の既存実装工程を維持し、今回の4段階を別管理する。旧工程の配信履歴・全体141件申告値を今回の受入率へ流用しない。",
+    "implementationSha": "b8675e16c325166ae9ff1215eef2795c0017edc9",
+    "previewSha": "b8675e16c325166ae9ff1215eef2795c0017edc9",
+    "previewApplied": true,
+    "developmentDbApplied": true,
+    "edgeApplied": true,
+    "developmentDb": "lrgyllgzcdcphlbmkknc",
+    "stages": [
+      {
+        "id": "BC-01",
+        "title": "戦闘ルール実装",
+        "status": "Preview反映済",
+        "specStatus": "確定ルールのみFIX",
+        "evidence": [
+          "GAME04_BATTLE_COMMON_ACCEPTANCE_20260920.md",
+          "GAME04_BATTLE_COMMON_INTEGRATION_20260920.md",
+          "GAME04_BATTLE_COMMON_API_ACCEPTANCE_20260920.json"
+        ],
+        "sha": "b8675e16c325166ae9ff1215eef2795c0017edc9",
+        "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+        "completionScope": "仮Masterによる処理ルールと限定代表ケースのみ。正式数値・全Lvバランス・実機総合受入は別工程。"
+      },
+      {
+        "id": "BC-02",
+        "title": "戦闘状態・ログ・UI接続",
+        "status": "Preview反映済",
+        "specStatus": "確定ルールを既存縦型UIへ接続",
+        "evidence": [
+          "GAME04_BATTLE_COMMON_ACCEPTANCE_20260920.md",
+          "GAME04_BATTLE_COMMON_INTEGRATION_20260920.md",
+          "GAME04_BATTLE_COMMON_API_ACCEPTANCE_20260920.json"
+        ],
+        "sha": "b8675e16c325166ae9ff1215eef2795c0017edc9",
+        "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+        "completionScope": "仮Masterによる処理ルールと限定代表ケースのみ。正式数値・全Lvバランス・実機総合受入は別工程。"
+      },
+      {
+        "id": "BC-03",
+        "title": "GAME04開発環境／Preview受入",
+        "status": "Preview反映済",
+        "specStatus": "仮Masterによる処理ルール受入",
+        "evidence": [
+          "GAME04_BATTLE_COMMON_ACCEPTANCE_20260920.md",
+          "GAME04_BATTLE_COMMON_INTEGRATION_20260920.md",
+          "GAME04_BATTLE_COMMON_API_ACCEPTANCE_20260920.json"
+        ],
+        "sha": "b8675e16c325166ae9ff1215eef2795c0017edc9",
+        "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+        "completionScope": "仮Masterによる処理ルールと限定代表ケースのみ。正式数値・全Lvバランス・実機総合受入は別工程。"
+      },
+      {
+        "id": "BC-04",
+        "title": "正式数値・バランス受入",
+        "status": "未FIX",
+        "specStatus": "個別Master・育成・経済は別スレッド。参考試算を昇格しない",
+        "evidence": []
+      }
+    ],
+    "verification": {
+      "typecheck": "PASS",
+      "build": "PASS",
+      "local": "24新検証群＋旧版バトル/共有LvRaid/領土侵攻3回帰スクリプトPASS。TEST_ONLYデータ。",
+      "developmentApi": "旧settled/started fixtureの再現、Quest新規v2同request並行で同seed/同結果/1回消費・再送二重報酬なし。専用QA Raid Lv1の2勝討伐報酬なし、旧Lv1結果3勝目はLv2HP不変/過去報酬なし、Lv2敵HP7475>6500、4勝目Lv2討伐報酬あり、Lv14 LOSE。Lv14 LOSEでwins4維持。raid_claim同一request再送でmaterials/cash/appliedAcquisitionIds一致、全grant claimed確認。専用QAroomはexpiredへ変更、削除なし。",
+      "preview": "Vercel success。/qa/battle-common?scenario=interrupt&viewport=360で横overflowなし、SP400/ゲージ200別表示、BURST中断、中央80vh金色スクロール詳細ログ641件。limit最終1339frame残0/300で敗北理由一致。 main PreviewでTAP TO START/戦国姫艶武表示確認。取得console5件は拡張エラーのみ。",
+      "formalBalance": "未FIX・未実施",
+      "notVerified": [
+        "実多人数並行の今回v2回帰",
+        "全Lvバランス",
+        "正式Master/回復式/数値",
+        "物理スマホ実機最終受入"
+      ],
+      "evidence": [
+        "GAME04_BATTLE_COMMON_ACCEPTANCE_20260920.md",
+        "GAME04_BATTLE_COMMON_API_ACCEPTANCE_20260920.json"
+      ]
+    },
+    "audit": "docs/development/GAME04_BATTLE_COMMON_INTEGRATION_20260920.md",
+    "preservation": [
+      "GAME03・Production変更禁止",
+      "開始済み旧戦闘のルール版保持",
+      "既存進行データの一括初期化なし",
+      "Quest・Raid・領土侵攻・報酬接続は維持"
+    ],
+    "previewUrl": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/",
+    "developmentDeployment": {
+      "db": "lrgyllgzcdcphlbmkknc",
+      "migration": "20260920082351_game04_common_battle_v2_master.sql",
+      "scope": "current territory masterのみPREVIEW_PROVISIONAL_20260920_common_v2へ更新",
+      "existingSnapshotCount": 14,
+      "existingSnapshotDigest": "a32d46f4f218ba4d1e57a4d511204f91",
+      "existingSnapshotPreserved": true,
+      "stateReset": false,
+      "edgeFunction": "game04-redesign-api",
+      "edgeVersion": 7,
+      "edgeStatus": "ACTIVE",
+      "verifyJwt": true,
+      "vercelDeployment": "DDo6LfyppK3yGoCsinvmTc9oXmeV"
+    },
+    "masterStatus": {
+      "version": "PREVIEW_PROVISIONAL_20260920_common_v2",
+      "ruleVersion": "common-v2-20260920",
+      "formalApproval": false,
+      "notes": "既存仮数値を維持。回復casterATK%/蘇生maxHP%/敵被弾SP5は仮値。poison/SP補充と非ATK・DEFパッシブは未採用・保留を明示。既存frozen roomはlegacyを保持。"
+    }
+  },
+  "balanceV2Updates": {
+    "date": "2026-09-21",
+    "basisSha": "a99818906044ddcb41e0236527fbe808e267a5cd",
+    "authoritySha": "472239e42e346294f87b5bc349d5cb9382c53592",
+    "implementationSha": "c3981fb15a8a73fac9f82ebfed2372bd61df3bab",
+    "previewSha": "c3981fb15a8a73fac9f82ebfed2372bd61df3bab",
+    "db": "lrgyllgzcdcphlbmkknc",
+    "edgeVersion": 9,
+    "masterVersion": "PREVIEW_PROVISIONAL_BALANCE_V2_20260920",
+    "evidence": "GAME04_BALANCE_V2_INTEGRATION_20260920.md",
+    "stages": [
+      {
+        "name": "正本統合",
+        "status": "完了"
+      },
+      {
+        "name": "戦闘ルール",
+        "status": "Preview反映済"
+      },
+      {
+        "name": "キャラ・スキル接続",
+        "status": "Preview反映済"
+      },
+      {
+        "name": "UI・ログ",
+        "status": "Preview反映済"
+      },
+      {
+        "name": "Preview受入",
+        "status": "最終確認中"
+      },
+      {
+        "name": "正式バランス受入",
+        "status": "未FIX"
+      }
+    ],
+    "limits": "代表ケース限定受入。72候補はQA接続、正式所持・排出プール追加ではない。最終見送り理由修正の配信は本コミット後に確認。全体進捗率へ流用しない。"
+  },
+  "growthUpdates": {
+    "date": "2026-09-21",
+    "basisSha": "acf7ca53cd10ad79ed3a8e4d3d2c38ab609578cb",
+    "implementationSha": "d6de642bcc9d8dc0f98204dabc6de5b92b5fd804",
+    "previewSha": "5fdb6a9ea9209b827f8ef19e3eff522b0959c13b",
+    "db": "lrgyllgzcdcphlbmkknc",
+    "edgeVersion": 10,
+    "stages": [
+      {
+        "name": "正本統合",
+        "status": "保存済"
+      },
+      {
+        "name": "育成・ガチャ実装",
+        "status": "実装済・代表ローカル検証PASS"
+      },
+      {
+        "name": "関連UI",
+        "status": "接続済・Previewローカル操作確認"
+      },
+      {
+        "name": "Preview受入",
+        "status": "ビルド成功・実API再検証未完了"
+      },
+      {
+        "name": "供給・正式バランス",
+        "status": "未検証"
+      }
+    ],
+    "evidence": "GAME04_GROWTH_RESUME_20260921.md",
+    "limits": [
+      "旧Lv・EXP・素材の移行判断保留",
+      "クエストプレイヤーEXP量UNCONFIGURED",
+      "実API再検証は接続タイムアウト",
+      "最終画像・実機確認未完了"
+    ],
+    "scope": "既存47件や戦闘・領土進捗を置換せず今回を別管理"
+  }
+}

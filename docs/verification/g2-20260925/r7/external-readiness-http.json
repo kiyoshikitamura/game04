@@ -1,0 +1,22 @@
+[
+  {
+    "path": "/api/billing/config",
+    "status": 200,
+    "body": "{\"available\":false,\"diagnostics\":{\"code\":\"ENVIRONMENT_INVALID\",\"commitSha\":\"61e5af88df62ca2cee08626257f0d71cae102577\",\"deploymentUrl\":\"https://game04-j6r08aejw-kiyoshi-kitamura.vercel.app\",\"raidRoomUiEnabled\":true,\"checks\":{\"mode_sandbox\":true,\"sandbox_enabled\":false,\"non_production_runtime\":true,\"preview_database\":false,\"stripe_test_key_present\":false,\"webhook_signing_secret_present\":false,\"service_role_present\":false,\"return_origin_valid\":false,\"return_origin_matches_request\":null}}}"
+  },
+  {
+    "path": "/auth/game04",
+    "status": 200,
+    "body": "HTML length 13312"
+  },
+  {
+    "path": "/legal/tokusho",
+    "status": 200,
+    "body": "HTML length 17588"
+  },
+  {
+    "path": "/api/admin/kpi/v2/gameplay?from=2026-09-25&to=2026-09-25",
+    "status": 503,
+    "body": "KPI authentication is not configured"
+  }
+]

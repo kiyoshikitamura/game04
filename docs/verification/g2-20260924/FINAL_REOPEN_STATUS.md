@@ -1,0 +1,8 @@
+# 再開作業の保存点
+コード182a2a35d4f599f60103e4b8cc64eee6b463c7c1、配信dpl_CdJhdXUce8YEybEeAjcBshUrgsBJはGitHub記録でREADY。最終不変URL未取得、実画面未確認。APIv23 hash1767241b8845188e8c8697d891c5ba06f495e2c142fef067cb987e4f14c18363。
+
+切断前原本保存は完了。再開後発見したUI/BOX/計測/開始HP/旧タイトルを修正・Git保存。独立レビューRV01/RV02を修正し17ケースDB rollback PASS。19ID正規経路・交換/主催再送・CAS等もPASS。実UI検証はAuth Failed to fetch、navigate70秒超、Vercel画面23秒timeoutで未完。コードレビュー成功で代替しない。
+
+既知QA4c888ed3のBOX3件は未受取。既存利用者の状態変更なし。全対象完了・G2合格としない。新規素材採用、旧資産変換、daily/overkill判断も独断で確定していない。侵攻5城共通背景は採用済みとして不要な再承認を撤回。
+
+再開時は最終配信不変URLを既存Vercel画面から取得し、同候補でタイトル→認証到達→設定復帰→BOX受取/素材使用→再読込→武将画像の成功/失敗/復帰→新規侵攻開始snapshot→結果/保存→計測件数を確認する。G1全件再調査不要。G3/G4/P並走の領域を勝手に実装/本番反映しない。

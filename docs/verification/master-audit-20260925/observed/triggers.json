@@ -1,0 +1,74 @@
+[
+  {
+    "tgname": "game04_gacha_acquisition",
+    "table_name": "gacha_execution_history",
+    "proname": "game04_capture_gacha_receipt",
+    "definition": "CREATE TRIGGER game04_gacha_acquisition AFTER INSERT OR UPDATE ON public.gacha_execution_history FOR EACH ROW EXECUTE FUNCTION game04_capture_gacha_receipt()"
+  },
+  {
+    "tgname": "game04_deliver_quest_tickets",
+    "table_name": "game04_player_state",
+    "proname": "game04_deliver_quest_tickets",
+    "definition": "CREATE TRIGGER game04_deliver_quest_tickets AFTER UPDATE OF state ON public.game04_player_state FOR EACH ROW EXECUTE FUNCTION game04_deliver_quest_tickets()"
+  },
+  {
+    "tgname": "game04_formal_paid_lots",
+    "table_name": "game04_player_state",
+    "proname": "game04_formal_paid_balance_trigger",
+    "definition": "CREATE TRIGGER game04_formal_paid_lots BEFORE UPDATE OF state ON public.game04_player_state FOR EACH ROW EXECUTE FUNCTION game04_formal_paid_balance_trigger()"
+  },
+  {
+    "tgname": "game04_territory_unlock_once",
+    "table_name": "game04_player_state",
+    "proname": "game04_capture_territory_unlock",
+    "definition": "CREATE TRIGGER game04_territory_unlock_once BEFORE INSERT OR UPDATE OF state ON public.game04_player_state FOR EACH ROW EXECUTE FUNCTION game04_capture_territory_unlock()"
+  },
+  {
+    "tgname": "game04_territory_clear",
+    "table_name": "game04_raid_rooms",
+    "proname": "game04_capture_territory_clear",
+    "definition": "CREATE TRIGGER game04_territory_clear AFTER UPDATE ON public.game04_raid_rooms FOR EACH ROW EXECUTE FUNCTION game04_capture_territory_clear()"
+  },
+  {
+    "tgname": "game04_territory_snapshot_guard",
+    "table_name": "game04_raid_rooms",
+    "proname": "game04_preserve_territory_snapshot",
+    "definition": "CREATE TRIGGER game04_territory_snapshot_guard BEFORE UPDATE ON public.game04_raid_rooms FOR EACH ROW EXECUTE FUNCTION game04_preserve_territory_snapshot()"
+  },
+  {
+    "tgname": "game04_pity_acquisition",
+    "table_name": "special_gacha_exchange_receipts",
+    "proname": "game04_capture_gacha_receipt",
+    "definition": "CREATE TRIGGER game04_pity_acquisition AFTER INSERT ON public.special_gacha_exchange_receipts FOR EACH ROW EXECUTE FUNCTION game04_capture_gacha_receipt()"
+  },
+  {
+    "tgname": "game04_asset_acquisition",
+    "table_name": "user_characters",
+    "proname": "game04_capture_asset_insert",
+    "definition": "CREATE TRIGGER game04_asset_acquisition AFTER INSERT ON public.user_characters FOR EACH ROW EXECUTE FUNCTION game04_capture_asset_insert()"
+  },
+  {
+    "tgname": "game04_asset_acquisition",
+    "table_name": "user_equipments",
+    "proname": "game04_capture_asset_insert",
+    "definition": "CREATE TRIGGER game04_asset_acquisition AFTER INSERT ON public.user_equipments FOR EACH ROW EXECUTE FUNCTION game04_capture_asset_insert()"
+  },
+  {
+    "tgname": "game04_named_asset_acquisition",
+    "table_name": "user_items",
+    "proname": "game04_capture_named_asset_item",
+    "definition": "CREATE TRIGGER game04_named_asset_acquisition AFTER INSERT OR UPDATE ON public.user_items FOR EACH ROW EXECUTE FUNCTION game04_capture_named_asset_item()"
+  },
+  {
+    "tgname": "game04_capture_login_delivery",
+    "table_name": "user_login_bonuses",
+    "proname": "game04_capture_login_delivery",
+    "definition": "CREATE TRIGGER game04_capture_login_delivery AFTER INSERT OR UPDATE ON public.user_login_bonuses FOR EACH ROW EXECUTE FUNCTION game04_capture_login_delivery()"
+  },
+  {
+    "tgname": "game04_asset_acquisition",
+    "table_name": "user_skills",
+    "proname": "game04_capture_asset_insert",
+    "definition": "CREATE TRIGGER game04_asset_acquisition AFTER INSERT ON public.user_skills FOR EACH ROW EXECUTE FUNCTION game04_capture_asset_insert()"
+  }
+]

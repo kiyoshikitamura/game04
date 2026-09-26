@@ -1,0 +1,74 @@
+{
+  "scope": "Independent targeted local rerun and supply endpoint matcher, not live acceptance",
+  "sha256": {
+    "src/domain/redesign/growth.ts": "866ad76f84b2cc8aaeaba3fa507843dec57d268e86223cf3d95d8140b2f5f733",
+    "src/app/components/redesign/BattleView.tsx": "42d4a7b8044865931b9e21b7b841187dc99830ddc690c4e8b4d90980f25f2eb0",
+    "src/app/components/redesign/HomeView.tsx": "0db6964a0442e24375f8d6a99a94d7b51e24a6ed097858dce06f24187e8f7fe7",
+    "src/app/components/redesign/QuestView.css": "f8a94f2825994b06048167c18bef79d4bbf827b0bcc5a55ea0be7ab22cd815b3",
+    "supabase/manual/game04_g2_kpi_supply.sql": "f87ed5745f45fd04669df4a746bbcf3670fac23c6e85855a005400af10ef53cb",
+    "src/app/api/admin/kpi/v2/supply/route.ts": "19b37f5a220382a2c4f150bc09b820dde09475691e33df20f65e7f15628a9405"
+  },
+  "results": [
+    {
+      "script": "auto_equip_compat.cjs",
+      "exitCode": 0,
+      "stdout": "PASS unknown retained assets excluded from automatic selection; formal sharing, unique equipment, valid save, inventory preservation, empty slots\n",
+      "stderr": ""
+    },
+    {
+      "script": "master_growth.cjs",
+      "exitCode": 0,
+      "stdout": "PASS 72 IDs / 792 LB rows / 122 separate ownership entries / legacy 50 unchanged / shared exact LB / replay idempotence / failure nonconsumption / cumulative cash / 19999 carry / overcap retention\n",
+      "stderr": ""
+    },
+    {
+      "script": "battle_raid.cjs",
+      "exitCode": 0,
+      "stdout": "{\n  \"status\": \"PASS\",\n  \"scope\": \"synthetic domain/cache regression, not live acceptance\",\n  \"checks\": [\n    \"6 Wave and distinct enemy initial/cap SP retained\",\n    \"SKD068 does not spend SP on healthy ally through shield eligibility\",\n    \"same battle settlement and reward claim replay do not charge/grant twice\",\n    \"decoded image cache deduplicates loads and failed loads remain retryable\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "script": "raid_start_snapshot.cjs",
+      "exitCode": 0,
+      "stdout": "PASS: persisted start survives reload, stage advancement and current-room refresh; old snapshot/current fallback and quest absence retained.\n",
+      "stderr": ""
+    },
+    {
+      "script": "existing verify_game04_g2_kpi.cjs with only endpoint URL substituted to /supply in memory",
+      "exitCode": 0,
+      "stdout": "PASS: explicit validated action receipt, state versions/resource deltas, no PII, unknown/purchase/battle actions excluded. DB transaction dedup requires integration test.\nPASS: Next matcher selects gameplay route; unconfigured 503, missing/wrong credentials 401, valid test credentials continue.\n",
+      "stderr": ""
+    }
+  ],
+  "followupE02": {
+    "filesSha256": {
+      "src/app/components/redesign/HomeView.tsx": "9cc90da2af33c4ffcc6c9f9f1dc639a3c11f0bc00b8af219f7af784ec4365821",
+      "scripts/verify_g2_home_activity_async.cjs": "f94a4c231b2b670b1d4d8b6b41a18e0430855ff38a5104f57fef10c35e42d55a"
+    },
+    "exitCode": 0,
+    "stdout": "PASS G2 home activity: first success/filter, optional profile independence, error retention, thrown transport, cancelled response, stalled timeout, late response, retry recovery\n",
+    "stderr": "",
+    "scope": "Actual extracted effect body with stub state setters/transport/timers. Not React component DOM or browser acceptance."
+  },
+  "followupR2UI05": {
+    "filesSha256": {
+      "src/app/components/InboxPanel.tsx": "242c6f85ba4301958f6ac4513b78920d1eefe9c984147d1052c9d3441058739e",
+      "scripts/verify_g2_news_async.cjs": "d714597651ca36d27aab60ce58f9920d378ba66226927539ba254d59acc2a250"
+    },
+    "exitCode": 0,
+    "stdout": "PASS G2 news: success, retained list on error/throw, stalled timeout/retry, late response, cleanup\n",
+    "stderr": "",
+    "scope": "Actual extracted news read effect with stub state setters/transport/timers; not React DOM or live browser acceptance."
+  },
+  "followupShortBattle49177788": {
+    "code": "49177788f9965e72291fb1e27be959b3e544793e",
+    "filesSha256": {
+      "src/app/components/redesign/BattleView.module.css": "1e59a9063f0f1cc47b1a30dac98774ebf12e7a3db66874410c2c1e26b69f7852",
+      "scripts/verify_game04_g2_battle_short_viewport.cjs": "4b4acd4f89e8c5a170402b8513b619f29934ea85870fca2fc3da6f26e0d37a56"
+    },
+    "exitCode": 0,
+    "stdout": "{\n  \"status\": \"PASS\",\n  \"scope\": \"static CSS and formal quest data only; not rendered visibility acceptance\",\n  \"questStages\": 65,\n  \"maxFormalQuestEnemies\": 3,\n  \"viewports\": [\n    {\n      \"width\": 360,\n      \"height\": 568,\n      \"arenaHeight\": 190,\n      \"portraitHeight\": 54,\n      \"partyColumns\": 5\n    },\n    {\n      \"width\": 375,\n      \"height\": 568,\n      \"arenaHeight\": 190,\n      \"portraitHeight\": 54,\n      \"partyColumns\": 5\n    },\n    {\n      \"width\": 390,\n      \"height\": 568,\n      \"arenaHeight\": 190,\n      \"portraitHeight\": 54,\n      \"partyColumns\": 5\n    }\n  ],\n  \"denseLegacyRecords\": \"previous 4–6 enemy two-row height retained; may scroll\"\n}\n",
+    "stderr": "",
+    "scope": "Static PostCSS/formal quest data and independent source review. Not rendered geometry."
+  }
+}

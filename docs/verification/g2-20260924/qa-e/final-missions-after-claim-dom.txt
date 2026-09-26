@@ -1,0 +1,71 @@
+- iframe [active]:
+  - alert
+  - region "ゲーム画面":
+    - img "くノ一"
+    - generic: Lv.1
+    - strong: G2QA終E
+    - generic "将来の同盟表示枠": ◇ 同盟 —
+    - button "アカウント連携": 未認証
+    - button "メニュー"
+    - generic: 銭 12,600
+    - generic: 輝石 200
+    - generic: 行動力 50/100
+    - main:
+      - region "お気に入り武将":
+        - iframe
+        - img "くノ一"
+      - navigation "本陣の操作":
+        - button "切替"
+        - button "任務 未受取の任務報酬":
+          - generic: 任務
+          - generic "未受取の任務報酬"
+        - button "商店":
+          - generic: 商店
+        - button "同盟・未解放" [disabled]:
+          - generic: 同盟
+          - generic: 未解放
+      - button "出陣の続き":
+        - strong: 出陣の続き
+      - button "領土侵攻":
+        - strong: 領土侵攻
+      - region "交流":
+        - button "活動"
+        - button "全体"
+        - button "DM"
+        - button "RQAWGst"
+        - button "共闘 Lv.1の援軍を求めています。 共闘を確認": 共闘 Lv.1の援軍を求めています。 ›
+        - time: 21時間前
+        - button "RQAWGstにDM"
+        - button "RQAPolA"
+        - button "共闘 Lv.12の援軍を求めています。 共闘を確認": 共闘 Lv.12の援軍を求めています。 ›
+        - time: 21時間前
+        - button "RQAPolAにDM"
+        - button "RQAWGst"
+        - button "共闘 Lv.1の援軍を求めています。 共闘を確認": 共闘 Lv.1の援軍を求めています。 ›
+        - time: 23時間前
+        - button "RQAWGstにDM"
+        - button "交流を開く ›"
+      - button "商店 ›":
+        - strong: 商店
+        - generic: ›
+    - navigation "メインナビゲーション":
+      - button "本陣"
+      - button "出陣"
+      - button "武将"
+      - button "共闘"
+      - button "召喚"
+  - dialog "任務":
+    - banner:
+      - heading "任務" [level=2]
+      - button "閉じる": ×
+    - group "任務の状態":
+      - button "受取可 (1)" [pressed]
+      - button "進行中 (185)"
+      - button "受取済み (1)"
+    - strong: 累計5種類入手
+    - paragraph: スキル種類
+    - paragraph: 5 / 5
+    - list:
+      - listitem: スペシャル券 ×1
+    - button "報酬を受け取る"
+- alert

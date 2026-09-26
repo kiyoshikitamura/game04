@@ -1,0 +1,52 @@
+.tutorial-shell{position:relative;padding:0!important;background:#130e09;color:#fff4dc;max-width:480px;margin:auto;overflow-y:auto;height:100dvh;scrollbar-color:#bd975b #201710;scrollbar-width:thin}
+.tutorial-scene{min-height:100%;display:flex;flex-direction:column;background-size:cover;background-position:center;padding:calc(env(safe-area-inset-top) + 20px) 16px calc(env(safe-area-inset-bottom) + 56px);isolation:isolate}
+.tutorial-cast{position:relative;flex:1;min-height:300px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+.tutorial-cast>img{width:100%;height:100%;max-height:60dvh;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 8px 12px #0008);animation:tutorial-reveal .6s ease-out both}
+.tutorial-cast.count-1>img{position:absolute;inset:0;max-height:none}
+.tutorial-cast.count-2{min-height:380px}.tutorial-cast.count-2>img{position:absolute;width:75%;height:83%;object-fit:contain}.tutorial-cast.count-2>img:first-child{left:-12%;top:0}.tutorial-cast.count-2>img:last-child{right:-12%;bottom:0;animation-delay:.2s}
+.tutorial-copy{position:relative;border:1px solid #b28d51;border-radius:9px;background:#1c140ff0;padding:18px;box-shadow:0 8px 24px #0009}
+.tutorial-copy h1{font-size:16px;color:#eecb83;margin:0 0 10px}.tutorial-copy p,.tutorial-notice p{white-space:pre-line;line-height:1.9;margin:0 0 18px;font-size:15px}.tutorial-next{width:100%;min-height:48px!important}.tutorial-copy label{display:grid;gap:8px;font-size:13px;margin-bottom:16px}.tutorial-copy input{width:100%;font-size:16px;background:#100d0a;border:1px solid #ad8e59;color:#fff;padding:12px;border-radius:4px}
+.tutorial-progress{display:flex;justify-content:center;gap:10px;margin:14px}.tutorial-progress i{width:7px;height:7px;border-radius:50%;background:#746447}.tutorial-progress i[data-active=true]{background:#f1d392;box-shadow:0 0 7px #f1d392}
+.tutorial-rewards{width:100%;display:flex;gap:8px;margin:auto;align-items:center}.tutorial-rewards figure{margin:0;flex:1;min-width:0;border:1px solid #ae8e54;background:#1c130de8;border-radius:6px;overflow:hidden}.tutorial-rewards img{display:block;width:100%;aspect-ratio:2/3;object-fit:cover}.tutorial-rewards figcaption{padding:10px 3px;text-align:center;display:grid;gap:5px;font-size:13px}.tutorial-rewards figcaption span{font-size:10px;color:#e1cfa9}.tutorial-rewards.is-skills img{aspect-ratio:1;object-fit:contain;padding:10px}.tutorial-rewards.is-skills{gap:12px}
+.tutorial-header{display:flex;flex-wrap:wrap;gap:14px;padding:18px;border-bottom:1px solid #ab8547;background:#24190f}.tutorial-header strong{flex:1}.tutorial-shell .rd-footer{max-width:480px}.tutorial-shell button:disabled{opacity:.4;cursor:default}.tutorial-shell .rd-main[inert]{filter:brightness(.6)}
+.tutorial-notice{max-width:calc(100vw - 36px);width:390px;max-height:80dvh;overflow:auto;background:#21170f;color:#fff0d4;border:1px solid #bb965a;border-radius:10px;padding:24px;box-shadow:0 15px 60px #0009}.tutorial-notice::backdrop{background:#0009}.tutorial-notice button{width:100%;min-height:46px}
+.tutorial-review{position:fixed;bottom:5px;right:max(8px,calc((100vw - 464px)/2));z-index:50;background:#21170ff5;border:1px solid #9b7b45;border-radius:5px;padding:5px 10px;font-size:11px;max-width:310px}.tutorial-review summary{cursor:pointer}.tutorial-review button{display:block;margin:12px 0;min-height:32px}.tutorial-error{position:fixed;top:12px;left:50%;transform:translateX(-50%);width:min(92vw,430px);z-index:100;background:#471b12;color:#fff;padding:14px;border:1px solid #fa8}.tutorial-error button{display:block;margin-top:8px}.tutorial-loading{display:grid;place-content:center;text-align:center;padding:24px}
+@keyframes tutorial-reveal{from{opacity:0;translate:0 16px}to{opacity:1;translate:0 0}}
+.tutorial-review{z-index:500}.tutorial-shell.is-complete .tutorial-review{bottom:84px}.tutorial-shell.is-complete{padding-bottom:90px!important}
+@media(prefers-reduced-motion:reduce){.tutorial-cast>img{animation:none!important}}
+@media(max-height:700px){.tutorial-cast{min-height:230px}.tutorial-cast.count-2{min-height:280px}.tutorial-copy{padding:13px}.tutorial-copy p{font-size:14px}}
+/* Shared UI authority: body 16px, labels 14px, red primary CTA and 44px targets. */
+.tutorial-shell,.tutorial-notice{font-family:var(--font-ui),sans-serif}
+.tutorial-copy p,.tutorial-notice p{font-size:16px;line-height:1.6}
+.tutorial-copy h1{font-size:18px}
+.tutorial-copy label,.tutorial-rewards figcaption,.tutorial-rewards figcaption span{font-size:14px;line-height:1.4}
+.tutorial-next{font-size:16px!important;font-weight:700;white-space:nowrap;background:#9e353b!important;color:#fff3df!important;border-color:#ba6b59!important}
+.tutorial-notice.rd-modal{position:relative;inset:auto;transform:none;margin:0;width:min(390px,calc(100vw - 32px));max-height:80dvh;padding:0;overflow:hidden;display:flex;flex-direction:column}
+.tutorial-notice .rd-modal-header,.tutorial-notice .rd-modal-footer{flex-shrink:0}
+.tutorial-notice .rd-modal-body{min-height:0;overflow:auto;padding:16px}
+.tutorial-notice .rd-modal-body p{margin:0;white-space:pre-line}
+.tutorial-review{font-size:13px}.tutorial-review summary{min-height:44px;display:flex;align-items:center}.tutorial-review button,.tutorial-error button{min-height:44px;font-size:14px}
+.tutorial-scene{animation:tutorial-scene-fade .35s ease-out both}
+.tutorial-cast>img{animation-name:tutorial-character-fade;animation-duration:.7s}
+.tutorial-cast.count-2>img:last-child{animation-delay:.2s}
+@keyframes tutorial-scene-fade{from{opacity:0}to{opacity:1}}
+@keyframes tutorial-character-fade{from{opacity:0}to{opacity:1}}
+@media(max-width:360px){.tutorial-scene{padding-left:12px;padding-right:12px}.tutorial-notice.rd-modal{width:calc(100vw - 24px)}}
+@media(prefers-reduced-motion:reduce){.tutorial-scene{animation:none}}
+
+/* Keep ambient effects inside the scene, behind all interactive copy. */
+.tutorial-scene{position:relative}
+.tutorial-scene>.g4-home-effect{z-index:1}
+.tutorial-scene>.tutorial-cast{z-index:2}
+.tutorial-scene>.tutorial-copy{z-index:3}
+
+
+.tutorial-card-art{position:relative;background:url('/creative/card-backgrounds/R.png') center/cover}.tutorial-card-art>img:not(.tutorial-card-frame){display:block;width:100%;height:auto}.tutorial-card-art .tutorial-card-frame{position:absolute;inset:-8%;width:116%;height:116%;max-width:none;object-fit:fill;pointer-events:none}.tutorial-rewards figure{overflow:visible}.tutorial-copy>p{min-height:4.5em}
+
+.tutorial-rewards.is-skills .tutorial-card-frame{padding:0;aspect-ratio:auto}.tutorial-cast:has(.tutorial-rewards){overflow:visible}
+
+/* B03: extend only the background beneath the external frame, preserving art geometry. */
+.tutorial-card-art{background:none;isolation:isolate}.tutorial-card-art:before{content:"";position:absolute;inset:-8%;z-index:-1;background:url("/creative/card-backgrounds/R.png") center/cover}
+.tutorial-rewards.is-skills figure{border:0;background:transparent}.tutorial-skill-art{background:none}
+.tutorial-rewards .tutorial-character-card{width:100%;margin:0;padding:0;border:0;background:transparent;min-height:0}
+.tutorial-rewards .tutorial-character-card img{border:0;border-radius:0}

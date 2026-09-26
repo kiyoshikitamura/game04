@@ -1,0 +1,75 @@
+{
+  "checkedAt": "2026-09-25T00:41:23.900Z",
+  "userId": "b1b9ee70-39d0-4e55-baef-a3df034dedfe",
+  "stageId": "izumo-1",
+  "requests": [
+    {
+      "action": "get_state",
+      "requestId": "8915fccb-6d6c-4ebf-9cc3-67419ab9ba13",
+      "status": 200,
+      "version": 23
+    },
+    {
+      "action": "quest_battle",
+      "requestId": "906ecc28-603a-4f1a-ad33-83274733eaf0",
+      "status": 200,
+      "version": 25
+    },
+    {
+      "action": "get_state",
+      "requestId": "29041a20-1245-406e-b1b6-d36ded013a21",
+      "status": 200,
+      "version": 25
+    },
+    {
+      "action": "quest_battle",
+      "requestId": "906ecc28-603a-4f1a-ad33-83274733eaf0",
+      "status": 200,
+      "version": 25
+    }
+  ],
+  "checks": [
+    {
+      "name": "multi-level overcap retained",
+      "pass": true
+    },
+    {
+      "name": "same battle request replay no EXP/recovery duplication",
+      "pass": true
+    }
+  ],
+  "scope": "Authenticated HTTP / reload, QA stage unlock and strong party; not natural G4 progression",
+  "before": {
+    "playerProgress": {
+      "exp": 99,
+      "level": 1,
+      "status": "active",
+      "version": "APPROVED_GROWTH_V1_20260921"
+    },
+    "energy": 149,
+    "version": 23
+  },
+  "receipt": {
+    "exp": 243,
+    "level": 3,
+    "energy": 149,
+    "status": "APPROVED",
+    "energyMax": 100,
+    "gainedExp": 144,
+    "offeredExp": 144,
+    "beforeLevel": 1,
+    "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+    "energyRecovered": 0
+  },
+  "after": {
+    "version": 25,
+    "playerProgress": {
+      "exp": 243,
+      "level": 3,
+      "status": "active",
+      "version": "APPROVED_GROWTH_V1_20260921"
+    },
+    "energy": 149
+  },
+  "pass": true
+}

@@ -1,0 +1,5818 @@
+{
+  "savedReproduced": true,
+  "masterIdentical": true,
+  "hitCount": 250,
+  "allHitsOne": true,
+  "burstStarts": 8,
+  "seeds": [
+    4109474968,
+    2654435761,
+    1013904226,
+    3668339987,
+    2027808452,
+    387276917,
+    3041712678,
+    1401181143,
+    4055616904,
+    2415085369,
+    774553834,
+    3428989595,
+    1788458060,
+    147926525,
+    2802362286,
+    1161830751,
+    3816266512,
+    2175734977,
+    535203442,
+    3189639203
+  ],
+  "rows": [
+    {
+      "label": "saved-input",
+      "conditions": {
+        "source": "saved battle"
+      },
+      "party": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "image": "/characters/joe_transparent_asset.png",
+          "level": 22,
+          "stats": {
+            "hp": 3416.14,
+            "sp": 129,
+            "atk": 422.708,
+            "def": 298.28999999999996,
+            "luk": 14.405714285714286
+          },
+          "skills": [
+            {
+              "id": "SKD034",
+              "name": "身構え",
+              "image": "/skills/skill_006_iron_guard.jpg",
+              "rarity": "N",
+              "spCost": 30,
+              "target": "self",
+              "effects": [
+                {
+                  "type": "def_up",
+                  "power": 15,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "element": "earth",
+              "condition": {
+                "type": "always"
+              },
+              "description": "自身・DEF強化:15.00%・3ターン",
+              "fixedTarget": false
+            }
+          ],
+          "element": "earth",
+          "passives": [
+            {
+              "id": "balance_v2_P15",
+              "name": "HP70%以上で自身DEF",
+              "stat": "def",
+              "type": "P15",
+              "level": 0,
+              "target": "self",
+              "percent": 8
+            }
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "image": "/characters/yuki_transparent_asset.png",
+          "level": 18,
+          "stats": {
+            "hp": 3047.6800000000003,
+            "sp": 145,
+            "atk": 356.03000000000003,
+            "def": 194.31599999999997,
+            "luk": 13.91938775510204
+          },
+          "skills": [
+            {
+              "id": "SKD038",
+              "name": "鎧砕き",
+              "image": "/skills/skill_015_recovery_program.jpg",
+              "rarity": "R",
+              "spCost": 50,
+              "target": "first",
+              "effects": [
+                {
+                  "type": "def_down",
+                  "power": 12,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "element": "earth",
+              "condition": {
+                "type": "always"
+              },
+              "description": "配置順最初の付与可能敵・DEF低下:12.00%・3ターン",
+              "fixedTarget": false
+            }
+          ],
+          "element": "light",
+          "passives": [
+            {
+              "id": "balance_v2_P04",
+              "name": "他の生存味方が2属性以上で自身DEF",
+              "stat": "def",
+              "type": "P04",
+              "level": 0,
+              "target": "self",
+              "percent": 10
+            }
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "image": "/characters/daimon_transparent_asset.png",
+          "level": 18,
+          "stats": {
+            "hp": 2031.2999999999995,
+            "sp": 116,
+            "atk": 539.2799999999999,
+            "def": 159.00000000000003,
+            "luk": 13.73938775510204
+          },
+          "skills": [
+            {
+              "id": "SKD004",
+              "name": "風切り",
+              "image": "/skills/formal/SKD004.webp",
+              "rarity": "N",
+              "spCost": 25,
+              "target": "first",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 105
+                }
+              ],
+              "element": "wind",
+              "condition": {
+                "type": "always"
+              },
+              "description": "先頭敵・攻撃倍率:105.00%",
+              "fixedTarget": true
+            }
+          ],
+          "element": "fire",
+          "passives": [
+            {
+              "id": "balance_v2_P06",
+              "name": "単体攻撃スキルダメージ",
+              "stat": "atk",
+              "type": "P06",
+              "level": 0,
+              "target": "self",
+              "percent": 4
+            }
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "image": "/characters/jihoon_transparent_asset.png",
+          "level": 18,
+          "stats": {
+            "hp": 2354.88,
+            "sp": 155,
+            "atk": 495.41999999999996,
+            "def": 200.56799999999998,
+            "luk": 13.619387755102041
+          },
+          "skills": [
+            {
+              "id": "SKD003",
+              "name": "土割り",
+              "image": "/skills/formal/SKD003.webp",
+              "rarity": "N",
+              "spCost": 25,
+              "target": "first",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 105
+                }
+              ],
+              "element": "earth",
+              "condition": {
+                "type": "always"
+              },
+              "description": "先頭敵・攻撃倍率:105.00%",
+              "fixedTarget": true
+            }
+          ],
+          "element": "earth",
+          "passives": [
+            {
+              "id": "balance_v2_P05",
+              "name": "通常攻撃ダメージ",
+              "stat": "atk",
+              "type": "P05",
+              "level": 0,
+              "target": "self",
+              "percent": 8
+            }
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "image": "/characters/aoi_transparent_asset.png",
+          "level": 18,
+          "stats": {
+            "hp": 2303.38,
+            "sp": 135,
+            "atk": 527.6999999999999,
+            "def": 171.864,
+            "luk": 13.82938775510204
+          },
+          "skills": [
+            {
+              "id": "SKD039",
+              "name": "応急手当",
+              "image": "/skills/skill_003_noise_heal.jpg",
+              "rarity": "N",
+              "spCost": 35,
+              "target": "lowest_ally",
+              "effects": [
+                {
+                  "type": "heal",
+                  "power": 35,
+                  "healingFormula": "caster_atk_percent"
+                }
+              ],
+              "element": "water",
+              "condition": {
+                "type": "ally_hp_below",
+                "value": 0.5
+              },
+              "description": "共通単体回復条件・回復倍率:35.00%",
+              "fixedTarget": false
+            }
+          ],
+          "element": "fire",
+          "passives": [
+            {
+              "id": "balance_v2_P10",
+              "name": "与回復量（蘇生除外）",
+              "stat": "atk",
+              "type": "P10",
+              "level": 0,
+              "target": "self",
+              "percent": 8
+            }
+          ]
+        }
+      ],
+      "runs": [
+        {
+          "seed": 4109474968,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 250
+        },
+        {
+          "seed": 2654435761,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 254
+        },
+        {
+          "seed": 1013904226,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 256
+        },
+        {
+          "seed": 3668339987,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 251
+        },
+        {
+          "seed": 2027808452,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 257
+        },
+        {
+          "seed": 387276917,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 252
+        },
+        {
+          "seed": 3041712678,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 253
+        },
+        {
+          "seed": 1401181143,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 255
+        },
+        {
+          "seed": 4055616904,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 253
+        },
+        {
+          "seed": 2415085369,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 255
+        },
+        {
+          "seed": 774553834,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 252
+        },
+        {
+          "seed": 3428989595,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 254
+        },
+        {
+          "seed": 1788458060,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 253
+        },
+        {
+          "seed": 147926525,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 252
+        },
+        {
+          "seed": 2802362286,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 252
+        },
+        {
+          "seed": 1161830751,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 251
+        },
+        {
+          "seed": 3816266512,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 253
+        },
+        {
+          "seed": 2175734977,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 256
+        },
+        {
+          "seed": 535203442,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 254
+        },
+        {
+          "seed": 3189639203,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 252
+        }
+      ],
+      "wins": 0
+    },
+    {
+      "label": "saved-stats-guide-skills",
+      "conditions": {
+        "stats": "unchanged saved stats",
+        "skills": [
+          "SKD034",
+          "SKD038",
+          "SKD010",
+          "SKD009",
+          "SKD039"
+        ],
+        "lb": 0
+      },
+      "party": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "image": "/characters/joe_transparent_asset.png",
+          "level": 22,
+          "stats": {
+            "hp": 3416.14,
+            "sp": 129,
+            "atk": 422.708,
+            "def": 298.28999999999996,
+            "luk": 14.405714285714286
+          },
+          "skills": [
+            {
+              "id": "SKD034",
+              "name": "身構え",
+              "image": "/skills/skill_006_iron_guard.jpg",
+              "rarity": "N",
+              "element": "earth",
+              "spCost": 30,
+              "condition": {
+                "type": "always"
+              },
+              "target": "self",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_up",
+                  "power": 15,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "自身・DEF強化:15.00%・3ターン"
+            }
+          ],
+          "element": "earth",
+          "passives": [
+            {
+              "id": "balance_v2_P15",
+              "name": "HP70%以上で自身DEF",
+              "stat": "def",
+              "type": "P15",
+              "level": 0,
+              "target": "self",
+              "percent": 8
+            }
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "image": "/characters/yuki_transparent_asset.png",
+          "level": 18,
+          "stats": {
+            "hp": 3047.6800000000003,
+            "sp": 145,
+            "atk": 356.03000000000003,
+            "def": 194.31599999999997,
+            "luk": 13.91938775510204
+          },
+          "skills": [
+            {
+              "id": "SKD038",
+              "name": "鎧砕き",
+              "image": "/skills/skill_015_recovery_program.jpg",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_down",
+                  "power": 12,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "配置順最初の付与可能敵・DEF低下:12.00%・3ターン"
+            }
+          ],
+          "element": "light",
+          "passives": [
+            {
+              "id": "balance_v2_P04",
+              "name": "他の生存味方が2属性以上で自身DEF",
+              "stat": "def",
+              "type": "P04",
+              "level": 0,
+              "target": "self",
+              "percent": 10
+            }
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "image": "/characters/daimon_transparent_asset.png",
+          "level": 18,
+          "stats": {
+            "hp": 2031.2999999999995,
+            "sp": 116,
+            "atk": 539.2799999999999,
+            "def": 159.00000000000003,
+            "luk": 13.73938775510204
+          },
+          "skills": [
+            {
+              "id": "SKD010",
+              "name": "風断",
+              "image": "/skills/formal/SKD010.webp",
+              "rarity": "R",
+              "element": "wind",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "element": "fire",
+          "passives": [
+            {
+              "id": "balance_v2_P06",
+              "name": "単体攻撃スキルダメージ",
+              "stat": "atk",
+              "type": "P06",
+              "level": 0,
+              "target": "self",
+              "percent": 4
+            }
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "image": "/characters/jihoon_transparent_asset.png",
+          "level": 18,
+          "stats": {
+            "hp": 2354.88,
+            "sp": 155,
+            "atk": 495.41999999999996,
+            "def": 200.56799999999998,
+            "luk": 13.619387755102041
+          },
+          "skills": [
+            {
+              "id": "SKD009",
+              "name": "岩断",
+              "image": "/skills/formal/SKD009.webp",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "element": "earth",
+          "passives": [
+            {
+              "id": "balance_v2_P05",
+              "name": "通常攻撃ダメージ",
+              "stat": "atk",
+              "type": "P05",
+              "level": 0,
+              "target": "self",
+              "percent": 8
+            }
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "image": "/characters/aoi_transparent_asset.png",
+          "level": 18,
+          "stats": {
+            "hp": 2303.38,
+            "sp": 135,
+            "atk": 527.6999999999999,
+            "def": 171.864,
+            "luk": 13.82938775510204
+          },
+          "skills": [
+            {
+              "id": "SKD039",
+              "name": "応急手当",
+              "image": "/skills/skill_003_noise_heal.jpg",
+              "rarity": "N",
+              "element": "water",
+              "spCost": 35,
+              "condition": {
+                "type": "ally_hp_below",
+                "value": 0.5
+              },
+              "target": "lowest_ally",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "heal",
+                  "power": 35,
+                  "healingFormula": "caster_atk_percent"
+                }
+              ],
+              "description": "共通単体回復条件・回復倍率:35.00%"
+            }
+          ],
+          "element": "fire",
+          "passives": [
+            {
+              "id": "balance_v2_P10",
+              "name": "与回復量（蘇生除外）",
+              "stat": "atk",
+              "type": "P10",
+              "level": 0,
+              "target": "self",
+              "percent": 8
+            }
+          ]
+        }
+      ],
+      "runs": [
+        {
+          "seed": 4109474968,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 249
+        },
+        {
+          "seed": 2654435761,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 249
+        },
+        {
+          "seed": 1013904226,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 246
+        },
+        {
+          "seed": 3668339987,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 246
+        },
+        {
+          "seed": 2027808452,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 245
+        },
+        {
+          "seed": 387276917,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 247
+        },
+        {
+          "seed": 3041712678,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 246
+        },
+        {
+          "seed": 1401181143,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 246
+        },
+        {
+          "seed": 4055616904,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 243
+        },
+        {
+          "seed": 2415085369,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 247
+        },
+        {
+          "seed": 774553834,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 246
+        },
+        {
+          "seed": 3428989595,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 251
+        },
+        {
+          "seed": 1788458060,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 244
+        },
+        {
+          "seed": 147926525,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 246
+        },
+        {
+          "seed": 2802362286,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 244
+        },
+        {
+          "seed": 1161830751,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 247
+        },
+        {
+          "seed": 3816266512,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 248
+        },
+        {
+          "seed": 2175734977,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 248
+        },
+        {
+          "seed": 535203442,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 247
+        },
+        {
+          "seed": 3189639203,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 246
+        }
+      ],
+      "wins": 0
+    },
+    {
+      "label": "Lv20-gear0",
+      "conditions": {
+        "level": 20,
+        "awakening": 0,
+        "skillIds": [
+          "SKD034",
+          "SKD038",
+          "SKD010",
+          "SKD009",
+          "SKD039"
+        ],
+        "skillLb": 0,
+        "equipment": [],
+        "order": [
+          "char_joe_01",
+          "char_yuki_01",
+          "char_daimon_01",
+          "char_jihoon_01",
+          "char_aoi_01"
+        ]
+      },
+      "party": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "image": "/characters/joe_transparent_asset.png",
+          "level": 20,
+          "element": "earth",
+          "stats": {
+            "hp": 2881.2,
+            "atk": 346.775,
+            "def": 204.75,
+            "luk": 13.877551020408163,
+            "sp": 123
+          },
+          "skills": [
+            {
+              "id": "SKD034",
+              "name": "身構え",
+              "image": "/skills/skill_006_iron_guard.jpg",
+              "rarity": "N",
+              "element": "earth",
+              "spCost": 30,
+              "condition": {
+                "type": "always"
+              },
+              "target": "self",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_up",
+                  "power": 15,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "自身・DEF強化:15.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P15",
+              "type": "P15",
+              "name": "HP70%以上で自身DEF",
+              "stat": "def",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "image": "/characters/yuki_transparent_asset.png",
+          "level": 20,
+          "element": "light",
+          "stats": {
+            "hp": 3028.2000000000003,
+            "atk": 339.625,
+            "def": 198.9,
+            "luk": 13.877551020408163,
+            "sp": 153
+          },
+          "skills": [
+            {
+              "id": "SKD038",
+              "name": "鎧砕き",
+              "image": "/skills/skill_015_recovery_program.jpg",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_down",
+                  "power": 12,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "配置順最初の付与可能敵・DEF低下:12.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P04",
+              "type": "P04",
+              "name": "他の生存味方が2属性以上で自身DEF",
+              "stat": "def",
+              "percent": 10,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "image": "/characters/daimon_transparent_asset.png",
+          "level": 20,
+          "element": "fire",
+          "stats": {
+            "hp": 2016,
+            "atk": 561,
+            "def": 153,
+            "luk": 13.877551020408163,
+            "sp": 123
+          },
+          "skills": [
+            {
+              "id": "SKD010",
+              "name": "風断",
+              "image": "/skills/formal/SKD010.webp",
+              "rarity": "R",
+              "element": "wind",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P06",
+              "type": "P06",
+              "name": "単体攻撃スキルダメージ",
+              "stat": "atk",
+              "percent": 4,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "image": "/characters/jihoon_transparent_asset.png",
+          "level": 20,
+          "element": "earth",
+          "stats": {
+            "hp": 2419.2,
+            "atk": 476.85,
+            "def": 175.95000000000002,
+            "luk": 13.877551020408163,
+            "sp": 164
+          },
+          "skills": [
+            {
+              "id": "SKD009",
+              "name": "岩断",
+              "image": "/skills/formal/SKD009.webp",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P05",
+              "type": "P05",
+              "name": "通常攻撃ダメージ",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "image": "/characters/aoi_transparent_asset.png",
+          "level": 20,
+          "element": "fire",
+          "stats": {
+            "hp": 2240.7,
+            "atk": 519.75,
+            "def": 154.35,
+            "luk": 13.877551020408163,
+            "sp": 143
+          },
+          "skills": [
+            {
+              "id": "SKD039",
+              "name": "応急手当",
+              "image": "/skills/skill_003_noise_heal.jpg",
+              "rarity": "N",
+              "element": "water",
+              "spCost": 35,
+              "condition": {
+                "type": "ally_hp_below",
+                "value": 0.5
+              },
+              "target": "lowest_ally",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "heal",
+                  "power": 35,
+                  "healingFormula": "caster_atk_percent"
+                }
+              ],
+              "description": "共通単体回復条件・回復倍率:35.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P10",
+              "type": "P10",
+              "name": "与回復量（蘇生除外）",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        }
+      ],
+      "runs": [
+        {
+          "seed": 4109474968,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 242
+        },
+        {
+          "seed": 2654435761,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 259
+        },
+        {
+          "seed": 1013904226,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 257
+        },
+        {
+          "seed": 3668339987,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 253
+        },
+        {
+          "seed": 2027808452,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 254
+        },
+        {
+          "seed": 387276917,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 250
+        },
+        {
+          "seed": 3041712678,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 253
+        },
+        {
+          "seed": 1401181143,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 258
+        },
+        {
+          "seed": 4055616904,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 255
+        },
+        {
+          "seed": 2415085369,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 251
+        },
+        {
+          "seed": 774553834,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 249
+        },
+        {
+          "seed": 3428989595,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 258
+        },
+        {
+          "seed": 1788458060,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 258
+        },
+        {
+          "seed": 147926525,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 255
+        },
+        {
+          "seed": 2802362286,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 243
+        },
+        {
+          "seed": 1161830751,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 257
+        },
+        {
+          "seed": 3816266512,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 257
+        },
+        {
+          "seed": 2175734977,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 258
+        },
+        {
+          "seed": 535203442,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 247
+        },
+        {
+          "seed": 3189639203,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 251
+        }
+      ],
+      "wins": 0
+    },
+    {
+      "label": "Lv20-gear20",
+      "conditions": {
+        "level": 20,
+        "awakening": 0,
+        "skillIds": [
+          "SKD034",
+          "SKD038",
+          "SKD010",
+          "SKD009",
+          "SKD039"
+        ],
+        "skillLb": 0,
+        "equipment": [
+          {
+            "instanceId": "qa-0-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          }
+        ],
+        "order": [
+          "char_joe_01",
+          "char_yuki_01",
+          "char_daimon_01",
+          "char_jihoon_01",
+          "char_aoi_01"
+        ]
+      },
+      "party": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "image": "/characters/joe_transparent_asset.png",
+          "level": 20,
+          "element": "earth",
+          "stats": {
+            "hp": 3282.797156135738,
+            "atk": 507.4138624542949,
+            "def": 285.0694312271475,
+            "luk": 14.323770082781206,
+            "sp": 123
+          },
+          "skills": [
+            {
+              "id": "SKD034",
+              "name": "身構え",
+              "image": "/skills/skill_006_iron_guard.jpg",
+              "rarity": "N",
+              "element": "earth",
+              "spCost": 30,
+              "condition": {
+                "type": "always"
+              },
+              "target": "self",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_up",
+                  "power": 15,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "自身・DEF強化:15.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P15",
+              "type": "P15",
+              "name": "HP70%以上で自身DEF",
+              "stat": "def",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "image": "/characters/yuki_transparent_asset.png",
+          "level": 20,
+          "element": "light",
+          "stats": {
+            "hp": 3429.7971561357385,
+            "atk": 500.2638624542949,
+            "def": 279.2194312271475,
+            "luk": 14.323770082781206,
+            "sp": 153
+          },
+          "skills": [
+            {
+              "id": "SKD038",
+              "name": "鎧砕き",
+              "image": "/skills/skill_015_recovery_program.jpg",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_down",
+                  "power": 12,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "配置順最初の付与可能敵・DEF低下:12.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P04",
+              "type": "P04",
+              "name": "他の生存味方が2属性以上で自身DEF",
+              "stat": "def",
+              "percent": 10,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "image": "/characters/daimon_transparent_asset.png",
+          "level": 20,
+          "element": "fire",
+          "stats": {
+            "hp": 2417.5971561357383,
+            "atk": 721.638862454295,
+            "def": 233.31943122714748,
+            "luk": 14.323770082781206,
+            "sp": 123
+          },
+          "skills": [
+            {
+              "id": "SKD010",
+              "name": "風断",
+              "image": "/skills/formal/SKD010.webp",
+              "rarity": "R",
+              "element": "wind",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P06",
+              "type": "P06",
+              "name": "単体攻撃スキルダメージ",
+              "stat": "atk",
+              "percent": 4,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "image": "/characters/jihoon_transparent_asset.png",
+          "level": 20,
+          "element": "earth",
+          "stats": {
+            "hp": 2820.797156135738,
+            "atk": 637.488862454295,
+            "def": 256.2694312271475,
+            "luk": 14.323770082781206,
+            "sp": 164
+          },
+          "skills": [
+            {
+              "id": "SKD009",
+              "name": "岩断",
+              "image": "/skills/formal/SKD009.webp",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P05",
+              "type": "P05",
+              "name": "通常攻撃ダメージ",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "image": "/characters/aoi_transparent_asset.png",
+          "level": 20,
+          "element": "fire",
+          "stats": {
+            "hp": 2642.297156135738,
+            "atk": 680.388862454295,
+            "def": 234.66943122714744,
+            "luk": 14.323770082781206,
+            "sp": 143
+          },
+          "skills": [
+            {
+              "id": "SKD039",
+              "name": "応急手当",
+              "image": "/skills/skill_003_noise_heal.jpg",
+              "rarity": "N",
+              "element": "water",
+              "spCost": 35,
+              "condition": {
+                "type": "ally_hp_below",
+                "value": 0.5
+              },
+              "target": "lowest_ally",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "heal",
+                  "power": 35,
+                  "healingFormula": "caster_atk_percent"
+                }
+              ],
+              "description": "共通単体回復条件・回復倍率:35.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P10",
+              "type": "P10",
+              "name": "与回復量（蘇生除外）",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        }
+      ],
+      "runs": [
+        {
+          "seed": 4109474968,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 249
+        },
+        {
+          "seed": 2654435761,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 253
+        },
+        {
+          "seed": 1013904226,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 247
+        },
+        {
+          "seed": 3668339987,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 247
+        },
+        {
+          "seed": 2027808452,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 248
+        },
+        {
+          "seed": 387276917,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 247
+        },
+        {
+          "seed": 3041712678,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 245
+        },
+        {
+          "seed": 1401181143,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 248
+        },
+        {
+          "seed": 4055616904,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 246
+        },
+        {
+          "seed": 2415085369,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 249
+        },
+        {
+          "seed": 774553834,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 248
+        },
+        {
+          "seed": 3428989595,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 248
+        },
+        {
+          "seed": 1788458060,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 247
+        },
+        {
+          "seed": 147926525,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 249
+        },
+        {
+          "seed": 2802362286,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 245
+        },
+        {
+          "seed": 1161830751,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 248
+        },
+        {
+          "seed": 3816266512,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 249
+        },
+        {
+          "seed": 2175734977,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 247
+        },
+        {
+          "seed": 535203442,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 245
+        },
+        {
+          "seed": 3189639203,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 250
+        }
+      ],
+      "wins": 0
+    },
+    {
+      "label": "Lv25-gear0",
+      "conditions": {
+        "level": 25,
+        "awakening": 0,
+        "skillIds": [
+          "SKD034",
+          "SKD038",
+          "SKD010",
+          "SKD009",
+          "SKD039"
+        ],
+        "skillLb": 0,
+        "equipment": [],
+        "order": [
+          "char_joe_01",
+          "char_yuki_01",
+          "char_daimon_01",
+          "char_jihoon_01",
+          "char_aoi_01"
+        ]
+      },
+      "party": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "image": "/characters/joe_transparent_asset.png",
+          "level": 25,
+          "element": "earth",
+          "stats": {
+            "hp": 3635.7999999999993,
+            "atk": 450.8075,
+            "def": 273,
+            "luk": 14.89795918367347,
+            "sp": 139
+          },
+          "skills": [
+            {
+              "id": "SKD034",
+              "name": "身構え",
+              "image": "/skills/skill_006_iron_guard.jpg",
+              "rarity": "N",
+              "element": "earth",
+              "spCost": 30,
+              "condition": {
+                "type": "always"
+              },
+              "target": "self",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_up",
+                  "power": 15,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "自身・DEF強化:15.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P15",
+              "type": "P15",
+              "name": "HP70%以上で自身DEF",
+              "stat": "def",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "image": "/characters/yuki_transparent_asset.png",
+          "level": 25,
+          "element": "light",
+          "stats": {
+            "hp": 3821.2999999999997,
+            "atk": 441.5125,
+            "def": 265.2,
+            "luk": 14.89795918367347,
+            "sp": 174
+          },
+          "skills": [
+            {
+              "id": "SKD038",
+              "name": "鎧砕き",
+              "image": "/skills/skill_015_recovery_program.jpg",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_down",
+                  "power": 12,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "配置順最初の付与可能敵・DEF低下:12.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P04",
+              "type": "P04",
+              "name": "他の生存味方が2属性以上で自身DEF",
+              "stat": "def",
+              "percent": 10,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "image": "/characters/daimon_transparent_asset.png",
+          "level": 25,
+          "element": "fire",
+          "stats": {
+            "hp": 2544,
+            "atk": 729.3000000000001,
+            "def": 204,
+            "luk": 14.89795918367347,
+            "sp": 139
+          },
+          "skills": [
+            {
+              "id": "SKD010",
+              "name": "風断",
+              "image": "/skills/formal/SKD010.webp",
+              "rarity": "R",
+              "element": "wind",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P06",
+              "type": "P06",
+              "name": "単体攻撃スキルダメージ",
+              "stat": "atk",
+              "percent": 4,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "image": "/characters/jihoon_transparent_asset.png",
+          "level": 25,
+          "element": "earth",
+          "stats": {
+            "hp": 3052.7999999999997,
+            "atk": 619.905,
+            "def": 234.59999999999997,
+            "luk": 14.89795918367347,
+            "sp": 186
+          },
+          "skills": [
+            {
+              "id": "SKD009",
+              "name": "岩断",
+              "image": "/skills/formal/SKD009.webp",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P05",
+              "type": "P05",
+              "name": "通常攻撃ダメージ",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "image": "/characters/aoi_transparent_asset.png",
+          "level": 25,
+          "element": "fire",
+          "stats": {
+            "hp": 2827.55,
+            "atk": 675.6750000000001,
+            "def": 205.79999999999998,
+            "luk": 14.89795918367347,
+            "sp": 162
+          },
+          "skills": [
+            {
+              "id": "SKD039",
+              "name": "応急手当",
+              "image": "/skills/skill_003_noise_heal.jpg",
+              "rarity": "N",
+              "element": "water",
+              "spCost": 35,
+              "condition": {
+                "type": "ally_hp_below",
+                "value": 0.5
+              },
+              "target": "lowest_ally",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "heal",
+                  "power": 35,
+                  "healingFormula": "caster_atk_percent"
+                }
+              ],
+              "description": "共通単体回復条件・回復倍率:35.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P10",
+              "type": "P10",
+              "name": "与回復量（蘇生除外）",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        }
+      ],
+      "runs": [
+        {
+          "seed": 4109474968,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 246
+        },
+        {
+          "seed": 2654435761,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 247
+        },
+        {
+          "seed": 1013904226,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 248
+        },
+        {
+          "seed": 3668339987,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 246
+        },
+        {
+          "seed": 2027808452,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 247
+        },
+        {
+          "seed": 387276917,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 247
+        },
+        {
+          "seed": 3041712678,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 244
+        },
+        {
+          "seed": 1401181143,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 246
+        },
+        {
+          "seed": 4055616904,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 246
+        },
+        {
+          "seed": 2415085369,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 246
+        },
+        {
+          "seed": 774553834,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 247
+        },
+        {
+          "seed": 3428989595,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 250
+        },
+        {
+          "seed": 1788458060,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 249
+        },
+        {
+          "seed": 147926525,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 247
+        },
+        {
+          "seed": 2802362286,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 245
+        },
+        {
+          "seed": 1161830751,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 248
+        },
+        {
+          "seed": 3816266512,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 246
+        },
+        {
+          "seed": 2175734977,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 246
+        },
+        {
+          "seed": 535203442,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 244
+        },
+        {
+          "seed": 3189639203,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 247
+        }
+      ],
+      "wins": 0
+    },
+    {
+      "label": "Lv25-gear20",
+      "conditions": {
+        "level": 25,
+        "awakening": 0,
+        "skillIds": [
+          "SKD034",
+          "SKD038",
+          "SKD010",
+          "SKD009",
+          "SKD039"
+        ],
+        "skillLb": 0,
+        "equipment": [
+          {
+            "instanceId": "qa-0-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          }
+        ],
+        "order": [
+          "char_joe_01",
+          "char_yuki_01",
+          "char_daimon_01",
+          "char_jihoon_01",
+          "char_aoi_01"
+        ]
+      },
+      "party": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "image": "/characters/joe_transparent_asset.png",
+          "level": 25,
+          "element": "earth",
+          "stats": {
+            "hp": 4037.3971561357375,
+            "atk": 611.446362454295,
+            "def": 353.3194312271475,
+            "luk": 15.344178246046512,
+            "sp": 139
+          },
+          "skills": [
+            {
+              "id": "SKD034",
+              "name": "身構え",
+              "image": "/skills/skill_006_iron_guard.jpg",
+              "rarity": "N",
+              "element": "earth",
+              "spCost": 30,
+              "condition": {
+                "type": "always"
+              },
+              "target": "self",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_up",
+                  "power": 15,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "自身・DEF強化:15.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P15",
+              "type": "P15",
+              "name": "HP70%以上で自身DEF",
+              "stat": "def",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "image": "/characters/yuki_transparent_asset.png",
+          "level": 25,
+          "element": "light",
+          "stats": {
+            "hp": 4222.897156135737,
+            "atk": 602.151362454295,
+            "def": 345.5194312271475,
+            "luk": 15.344178246046512,
+            "sp": 174
+          },
+          "skills": [
+            {
+              "id": "SKD038",
+              "name": "鎧砕き",
+              "image": "/skills/skill_015_recovery_program.jpg",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_down",
+                  "power": 12,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "配置順最初の付与可能敵・DEF低下:12.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P04",
+              "type": "P04",
+              "name": "他の生存味方が2属性以上で自身DEF",
+              "stat": "def",
+              "percent": 10,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "image": "/characters/daimon_transparent_asset.png",
+          "level": 25,
+          "element": "fire",
+          "stats": {
+            "hp": 2945.5971561357383,
+            "atk": 889.9388624542951,
+            "def": 284.3194312271475,
+            "luk": 15.344178246046512,
+            "sp": 139
+          },
+          "skills": [
+            {
+              "id": "SKD010",
+              "name": "風断",
+              "image": "/skills/formal/SKD010.webp",
+              "rarity": "R",
+              "element": "wind",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P06",
+              "type": "P06",
+              "name": "単体攻撃スキルダメージ",
+              "stat": "atk",
+              "percent": 4,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "image": "/characters/jihoon_transparent_asset.png",
+          "level": 25,
+          "element": "earth",
+          "stats": {
+            "hp": 3454.397156135738,
+            "atk": 780.543862454295,
+            "def": 314.91943122714747,
+            "luk": 15.344178246046512,
+            "sp": 186
+          },
+          "skills": [
+            {
+              "id": "SKD009",
+              "name": "岩断",
+              "image": "/skills/formal/SKD009.webp",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P05",
+              "type": "P05",
+              "name": "通常攻撃ダメージ",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "image": "/characters/aoi_transparent_asset.png",
+          "level": 25,
+          "element": "fire",
+          "stats": {
+            "hp": 3229.1471561357384,
+            "atk": 836.3138624542951,
+            "def": 286.11943122714746,
+            "luk": 15.344178246046512,
+            "sp": 162
+          },
+          "skills": [
+            {
+              "id": "SKD039",
+              "name": "応急手当",
+              "image": "/skills/skill_003_noise_heal.jpg",
+              "rarity": "N",
+              "element": "water",
+              "spCost": 35,
+              "condition": {
+                "type": "ally_hp_below",
+                "value": 0.5
+              },
+              "target": "lowest_ally",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "heal",
+                  "power": 35,
+                  "healingFormula": "caster_atk_percent"
+                }
+              ],
+              "description": "共通単体回復条件・回復倍率:35.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P10",
+              "type": "P10",
+              "name": "与回復量（蘇生除外）",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        }
+      ],
+      "runs": [
+        {
+          "seed": 4109474968,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 939
+        },
+        {
+          "seed": 2654435761,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 945
+        },
+        {
+          "seed": 1013904226,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1543
+        },
+        {
+          "seed": 3668339987,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1138
+        },
+        {
+          "seed": 2027808452,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1375
+        },
+        {
+          "seed": 387276917,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1270
+        },
+        {
+          "seed": 3041712678,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1465
+        },
+        {
+          "seed": 1401181143,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 756
+        },
+        {
+          "seed": 4055616904,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 2076
+        },
+        {
+          "seed": 2415085369,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1560
+        },
+        {
+          "seed": 774553834,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 866
+        },
+        {
+          "seed": 3428989595,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1517
+        },
+        {
+          "seed": 1788458060,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1267
+        },
+        {
+          "seed": 147926525,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1456
+        },
+        {
+          "seed": 2802362286,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1432
+        },
+        {
+          "seed": 1161830751,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1056
+        },
+        {
+          "seed": 3816266512,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1145
+        },
+        {
+          "seed": 2175734977,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1060
+        },
+        {
+          "seed": 535203442,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 554
+        },
+        {
+          "seed": 3189639203,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1134
+        }
+      ],
+      "wins": 0
+    },
+    {
+      "label": "Lv30-gear0",
+      "conditions": {
+        "level": 30,
+        "awakening": 0,
+        "skillIds": [
+          "SKD034",
+          "SKD038",
+          "SKD010",
+          "SKD009",
+          "SKD039"
+        ],
+        "skillLb": 0,
+        "equipment": [],
+        "order": [
+          "char_joe_01",
+          "char_yuki_01",
+          "char_daimon_01",
+          "char_jihoon_01",
+          "char_aoi_01"
+        ]
+      },
+      "party": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "image": "/characters/joe_transparent_asset.png",
+          "level": 30,
+          "element": "earth",
+          "stats": {
+            "hp": 4390.4,
+            "atk": 554.84,
+            "def": 341.25,
+            "luk": 15.918367346938776,
+            "sp": 156
+          },
+          "skills": [
+            {
+              "id": "SKD034",
+              "name": "身構え",
+              "image": "/skills/skill_006_iron_guard.jpg",
+              "rarity": "N",
+              "element": "earth",
+              "spCost": 30,
+              "condition": {
+                "type": "always"
+              },
+              "target": "self",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_up",
+                  "power": 15,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "自身・DEF強化:15.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P15",
+              "type": "P15",
+              "name": "HP70%以上で自身DEF",
+              "stat": "def",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "image": "/characters/yuki_transparent_asset.png",
+          "level": 30,
+          "element": "light",
+          "stats": {
+            "hp": 4614.400000000001,
+            "atk": 543.4,
+            "def": 331.5,
+            "luk": 15.918367346938776,
+            "sp": 195
+          },
+          "skills": [
+            {
+              "id": "SKD038",
+              "name": "鎧砕き",
+              "image": "/skills/skill_015_recovery_program.jpg",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_down",
+                  "power": 12,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "配置順最初の付与可能敵・DEF低下:12.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P04",
+              "type": "P04",
+              "name": "他の生存味方が2属性以上で自身DEF",
+              "stat": "def",
+              "percent": 10,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "image": "/characters/daimon_transparent_asset.png",
+          "level": 30,
+          "element": "fire",
+          "stats": {
+            "hp": 3072,
+            "atk": 897.6,
+            "def": 255,
+            "luk": 15.918367346938776,
+            "sp": 156
+          },
+          "skills": [
+            {
+              "id": "SKD010",
+              "name": "風断",
+              "image": "/skills/formal/SKD010.webp",
+              "rarity": "R",
+              "element": "wind",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P06",
+              "type": "P06",
+              "name": "単体攻撃スキルダメージ",
+              "stat": "atk",
+              "percent": 4,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "image": "/characters/jihoon_transparent_asset.png",
+          "level": 30,
+          "element": "earth",
+          "stats": {
+            "hp": 3686.3999999999996,
+            "atk": 762.96,
+            "def": 293.25,
+            "luk": 15.918367346938776,
+            "sp": 208
+          },
+          "skills": [
+            {
+              "id": "SKD009",
+              "name": "岩断",
+              "image": "/skills/formal/SKD009.webp",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P05",
+              "type": "P05",
+              "name": "通常攻撃ダメージ",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "image": "/characters/aoi_transparent_asset.png",
+          "level": 30,
+          "element": "fire",
+          "stats": {
+            "hp": 3414.4000000000005,
+            "atk": 831.6,
+            "def": 257.25,
+            "luk": 15.918367346938776,
+            "sp": 182
+          },
+          "skills": [
+            {
+              "id": "SKD039",
+              "name": "応急手当",
+              "image": "/skills/skill_003_noise_heal.jpg",
+              "rarity": "N",
+              "element": "water",
+              "spCost": 35,
+              "condition": {
+                "type": "ally_hp_below",
+                "value": 0.5
+              },
+              "target": "lowest_ally",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "heal",
+                  "power": 35,
+                  "healingFormula": "caster_atk_percent"
+                }
+              ],
+              "description": "共通単体回復条件・回復倍率:35.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P10",
+              "type": "P10",
+              "name": "与回復量（蘇生除外）",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        }
+      ],
+      "runs": [
+        {
+          "seed": 4109474968,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1384
+        },
+        {
+          "seed": 2654435761,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1519
+        },
+        {
+          "seed": 1013904226,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1713
+        },
+        {
+          "seed": 3668339987,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 691
+        },
+        {
+          "seed": 2027808452,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 971
+        },
+        {
+          "seed": 387276917,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1670
+        },
+        {
+          "seed": 3041712678,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1373
+        },
+        {
+          "seed": 1401181143,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 809
+        },
+        {
+          "seed": 4055616904,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 2098
+        },
+        {
+          "seed": 2415085369,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 2221
+        },
+        {
+          "seed": 774553834,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1080
+        },
+        {
+          "seed": 3428989595,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1158
+        },
+        {
+          "seed": 1788458060,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1175
+        },
+        {
+          "seed": 147926525,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1742
+        },
+        {
+          "seed": 2802362286,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1416
+        },
+        {
+          "seed": 1161830751,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1494
+        },
+        {
+          "seed": 3816266512,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 958
+        },
+        {
+          "seed": 2175734977,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1265
+        },
+        {
+          "seed": 535203442,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 711
+        },
+        {
+          "seed": 3189639203,
+          "outcome": "lose",
+          "actions": 300,
+          "waves": 0,
+          "damage": 1149
+        }
+      ],
+      "wins": 0
+    },
+    {
+      "label": "Lv30-gear20",
+      "conditions": {
+        "level": 30,
+        "awakening": 0,
+        "skillIds": [
+          "SKD034",
+          "SKD038",
+          "SKD010",
+          "SKD009",
+          "SKD039"
+        ],
+        "skillLb": 0,
+        "equipment": [
+          {
+            "instanceId": "qa-0-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          }
+        ],
+        "order": [
+          "char_joe_01",
+          "char_yuki_01",
+          "char_daimon_01",
+          "char_jihoon_01",
+          "char_aoi_01"
+        ]
+      },
+      "party": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "image": "/characters/joe_transparent_asset.png",
+          "level": 30,
+          "element": "earth",
+          "stats": {
+            "hp": 4791.997156135736,
+            "atk": 715.478862454295,
+            "def": 421.5694312271475,
+            "luk": 16.364586409311816,
+            "sp": 156
+          },
+          "skills": [
+            {
+              "id": "SKD034",
+              "name": "身構え",
+              "image": "/skills/skill_006_iron_guard.jpg",
+              "rarity": "N",
+              "element": "earth",
+              "spCost": 30,
+              "condition": {
+                "type": "always"
+              },
+              "target": "self",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_up",
+                  "power": 15,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "自身・DEF強化:15.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P15",
+              "type": "P15",
+              "name": "HP70%以上で自身DEF",
+              "stat": "def",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "image": "/characters/yuki_transparent_asset.png",
+          "level": 30,
+          "element": "light",
+          "stats": {
+            "hp": 5015.997156135737,
+            "atk": 704.038862454295,
+            "def": 411.8194312271475,
+            "luk": 16.364586409311816,
+            "sp": 195
+          },
+          "skills": [
+            {
+              "id": "SKD038",
+              "name": "鎧砕き",
+              "image": "/skills/skill_015_recovery_program.jpg",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_down",
+                  "power": 12,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "配置順最初の付与可能敵・DEF低下:12.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P04",
+              "type": "P04",
+              "name": "他の生存味方が2属性以上で自身DEF",
+              "stat": "def",
+              "percent": 10,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "image": "/characters/daimon_transparent_asset.png",
+          "level": 30,
+          "element": "fire",
+          "stats": {
+            "hp": 3473.5971561357383,
+            "atk": 1058.238862454295,
+            "def": 335.3194312271475,
+            "luk": 16.364586409311816,
+            "sp": 156
+          },
+          "skills": [
+            {
+              "id": "SKD010",
+              "name": "風断",
+              "image": "/skills/formal/SKD010.webp",
+              "rarity": "R",
+              "element": "wind",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P06",
+              "type": "P06",
+              "name": "単体攻撃スキルダメージ",
+              "stat": "atk",
+              "percent": 4,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "image": "/characters/jihoon_transparent_asset.png",
+          "level": 30,
+          "element": "earth",
+          "stats": {
+            "hp": 4087.997156135738,
+            "atk": 923.598862454295,
+            "def": 373.5694312271475,
+            "luk": 16.364586409311816,
+            "sp": 208
+          },
+          "skills": [
+            {
+              "id": "SKD009",
+              "name": "岩断",
+              "image": "/skills/formal/SKD009.webp",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P05",
+              "type": "P05",
+              "name": "通常攻撃ダメージ",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "image": "/characters/aoi_transparent_asset.png",
+          "level": 30,
+          "element": "fire",
+          "stats": {
+            "hp": 3815.997156135739,
+            "atk": 992.238862454295,
+            "def": 337.5694312271475,
+            "luk": 16.364586409311816,
+            "sp": 182
+          },
+          "skills": [
+            {
+              "id": "SKD039",
+              "name": "応急手当",
+              "image": "/skills/skill_003_noise_heal.jpg",
+              "rarity": "N",
+              "element": "water",
+              "spCost": 35,
+              "condition": {
+                "type": "ally_hp_below",
+                "value": 0.5
+              },
+              "target": "lowest_ally",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "heal",
+                  "power": 35,
+                  "healingFormula": "caster_atk_percent"
+                }
+              ],
+              "description": "共通単体回復条件・回復倍率:35.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P10",
+              "type": "P10",
+              "name": "与回復量（蘇生除外）",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        }
+      ],
+      "runs": [
+        {
+          "seed": 4109474968,
+          "outcome": "win",
+          "actions": 111,
+          "waves": 2,
+          "damage": 8657
+        },
+        {
+          "seed": 2654435761,
+          "outcome": "win",
+          "actions": 160,
+          "waves": 2,
+          "damage": 8360
+        },
+        {
+          "seed": 1013904226,
+          "outcome": "win",
+          "actions": 119,
+          "waves": 2,
+          "damage": 7939
+        },
+        {
+          "seed": 3668339987,
+          "outcome": "win",
+          "actions": 162,
+          "waves": 2,
+          "damage": 7716
+        },
+        {
+          "seed": 2027808452,
+          "outcome": "win",
+          "actions": 160,
+          "waves": 2,
+          "damage": 7873
+        },
+        {
+          "seed": 387276917,
+          "outcome": "win",
+          "actions": 135,
+          "waves": 2,
+          "damage": 8759
+        },
+        {
+          "seed": 3041712678,
+          "outcome": "win",
+          "actions": 131,
+          "waves": 2,
+          "damage": 8705
+        },
+        {
+          "seed": 1401181143,
+          "outcome": "win",
+          "actions": 139,
+          "waves": 2,
+          "damage": 9093
+        },
+        {
+          "seed": 4055616904,
+          "outcome": "win",
+          "actions": 131,
+          "waves": 2,
+          "damage": 7737
+        },
+        {
+          "seed": 2415085369,
+          "outcome": "win",
+          "actions": 123,
+          "waves": 2,
+          "damage": 8523
+        },
+        {
+          "seed": 774553834,
+          "outcome": "win",
+          "actions": 135,
+          "waves": 2,
+          "damage": 8134
+        },
+        {
+          "seed": 3428989595,
+          "outcome": "win",
+          "actions": 112,
+          "waves": 2,
+          "damage": 8532
+        },
+        {
+          "seed": 1788458060,
+          "outcome": "win",
+          "actions": 137,
+          "waves": 2,
+          "damage": 8467
+        },
+        {
+          "seed": 147926525,
+          "outcome": "win",
+          "actions": 136,
+          "waves": 2,
+          "damage": 7696
+        },
+        {
+          "seed": 2802362286,
+          "outcome": "win",
+          "actions": 135,
+          "waves": 2,
+          "damage": 8862
+        },
+        {
+          "seed": 1161830751,
+          "outcome": "win",
+          "actions": 138,
+          "waves": 2,
+          "damage": 8803
+        },
+        {
+          "seed": 3816266512,
+          "outcome": "win",
+          "actions": 134,
+          "waves": 2,
+          "damage": 7766
+        },
+        {
+          "seed": 2175734977,
+          "outcome": "win",
+          "actions": 138,
+          "waves": 2,
+          "damage": 8116
+        },
+        {
+          "seed": 535203442,
+          "outcome": "win",
+          "actions": 160,
+          "waves": 2,
+          "damage": 8498
+        },
+        {
+          "seed": 3189639203,
+          "outcome": "win",
+          "actions": 172,
+          "waves": 2,
+          "damage": 7647
+        }
+      ],
+      "wins": 20
+    },
+    {
+      "label": "Lv35-gear0",
+      "conditions": {
+        "level": 35,
+        "awakening": 0,
+        "skillIds": [
+          "SKD034",
+          "SKD038",
+          "SKD010",
+          "SKD009",
+          "SKD039"
+        ],
+        "skillLb": 0,
+        "equipment": [],
+        "order": [
+          "char_joe_01",
+          "char_yuki_01",
+          "char_daimon_01",
+          "char_jihoon_01",
+          "char_aoi_01"
+        ]
+      },
+      "party": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "image": "/characters/joe_transparent_asset.png",
+          "level": 35,
+          "element": "earth",
+          "stats": {
+            "hp": 5350.8,
+            "atk": 687.245,
+            "def": 429.975,
+            "luk": 16.93877551020408,
+            "sp": 172
+          },
+          "skills": [
+            {
+              "id": "SKD034",
+              "name": "身構え",
+              "image": "/skills/skill_006_iron_guard.jpg",
+              "rarity": "N",
+              "element": "earth",
+              "spCost": 30,
+              "condition": {
+                "type": "always"
+              },
+              "target": "self",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_up",
+                  "power": 15,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "自身・DEF強化:15.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P15",
+              "type": "P15",
+              "name": "HP70%以上で自身DEF",
+              "stat": "def",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "image": "/characters/yuki_transparent_asset.png",
+          "level": 35,
+          "element": "light",
+          "stats": {
+            "hp": 5623.8,
+            "atk": 673.0749999999999,
+            "def": 417.69,
+            "luk": 16.93877551020408,
+            "sp": 215
+          },
+          "skills": [
+            {
+              "id": "SKD038",
+              "name": "鎧砕き",
+              "image": "/skills/skill_015_recovery_program.jpg",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_down",
+                  "power": 12,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "配置順最初の付与可能敵・DEF低下:12.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P04",
+              "type": "P04",
+              "name": "他の生存味方が2属性以上で自身DEF",
+              "stat": "def",
+              "percent": 10,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "image": "/characters/daimon_transparent_asset.png",
+          "level": 35,
+          "element": "fire",
+          "stats": {
+            "hp": 3744,
+            "atk": 1111.8,
+            "def": 321.3,
+            "luk": 16.93877551020408,
+            "sp": 172
+          },
+          "skills": [
+            {
+              "id": "SKD010",
+              "name": "風断",
+              "image": "/skills/formal/SKD010.webp",
+              "rarity": "R",
+              "element": "wind",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P06",
+              "type": "P06",
+              "name": "単体攻撃スキルダメージ",
+              "stat": "atk",
+              "percent": 4,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "image": "/characters/jihoon_transparent_asset.png",
+          "level": 35,
+          "element": "earth",
+          "stats": {
+            "hp": 4492.8,
+            "atk": 945.03,
+            "def": 369.495,
+            "luk": 16.93877551020408,
+            "sp": 230
+          },
+          "skills": [
+            {
+              "id": "SKD009",
+              "name": "岩断",
+              "image": "/skills/formal/SKD009.webp",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P05",
+              "type": "P05",
+              "name": "通常攻撃ダメージ",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "image": "/characters/aoi_transparent_asset.png",
+          "level": 35,
+          "element": "fire",
+          "stats": {
+            "hp": 4161.3,
+            "atk": 1030.05,
+            "def": 324.135,
+            "luk": 16.93877551020408,
+            "sp": 201
+          },
+          "skills": [
+            {
+              "id": "SKD039",
+              "name": "応急手当",
+              "image": "/skills/skill_003_noise_heal.jpg",
+              "rarity": "N",
+              "element": "water",
+              "spCost": 35,
+              "condition": {
+                "type": "ally_hp_below",
+                "value": 0.5
+              },
+              "target": "lowest_ally",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "heal",
+                  "power": 35,
+                  "healingFormula": "caster_atk_percent"
+                }
+              ],
+              "description": "共通単体回復条件・回復倍率:35.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P10",
+              "type": "P10",
+              "name": "与回復量（蘇生除外）",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        }
+      ],
+      "runs": [
+        {
+          "seed": 4109474968,
+          "outcome": "win",
+          "actions": 87,
+          "waves": 2,
+          "damage": 8979
+        },
+        {
+          "seed": 2654435761,
+          "outcome": "win",
+          "actions": 111,
+          "waves": 2,
+          "damage": 8151
+        },
+        {
+          "seed": 1013904226,
+          "outcome": "win",
+          "actions": 97,
+          "waves": 2,
+          "damage": 9014
+        },
+        {
+          "seed": 3668339987,
+          "outcome": "win",
+          "actions": 123,
+          "waves": 2,
+          "damage": 9015
+        },
+        {
+          "seed": 2027808452,
+          "outcome": "win",
+          "actions": 111,
+          "waves": 2,
+          "damage": 7862
+        },
+        {
+          "seed": 387276917,
+          "outcome": "win",
+          "actions": 90,
+          "waves": 2,
+          "damage": 7945
+        },
+        {
+          "seed": 3041712678,
+          "outcome": "win",
+          "actions": 96,
+          "waves": 2,
+          "damage": 9180
+        },
+        {
+          "seed": 1401181143,
+          "outcome": "win",
+          "actions": 94,
+          "waves": 2,
+          "damage": 8663
+        },
+        {
+          "seed": 4055616904,
+          "outcome": "win",
+          "actions": 109,
+          "waves": 2,
+          "damage": 8207
+        },
+        {
+          "seed": 2415085369,
+          "outcome": "win",
+          "actions": 112,
+          "waves": 2,
+          "damage": 7830
+        },
+        {
+          "seed": 774553834,
+          "outcome": "win",
+          "actions": 87,
+          "waves": 2,
+          "damage": 8929
+        },
+        {
+          "seed": 3428989595,
+          "outcome": "win",
+          "actions": 87,
+          "waves": 2,
+          "damage": 8628
+        },
+        {
+          "seed": 1788458060,
+          "outcome": "win",
+          "actions": 93,
+          "waves": 2,
+          "damage": 9001
+        },
+        {
+          "seed": 147926525,
+          "outcome": "win",
+          "actions": 93,
+          "waves": 2,
+          "damage": 8854
+        },
+        {
+          "seed": 2802362286,
+          "outcome": "win",
+          "actions": 96,
+          "waves": 2,
+          "damage": 8045
+        },
+        {
+          "seed": 1161830751,
+          "outcome": "win",
+          "actions": 90,
+          "waves": 2,
+          "damage": 7891
+        },
+        {
+          "seed": 3816266512,
+          "outcome": "win",
+          "actions": 98,
+          "waves": 2,
+          "damage": 8028
+        },
+        {
+          "seed": 2175734977,
+          "outcome": "win",
+          "actions": 87,
+          "waves": 2,
+          "damage": 7953
+        },
+        {
+          "seed": 535203442,
+          "outcome": "win",
+          "actions": 97,
+          "waves": 2,
+          "damage": 8010
+        },
+        {
+          "seed": 3189639203,
+          "outcome": "win",
+          "actions": 90,
+          "waves": 2,
+          "damage": 7713
+        }
+      ],
+      "wins": 20
+    },
+    {
+      "label": "Lv35-gear20",
+      "conditions": {
+        "level": 35,
+        "awakening": 0,
+        "skillIds": [
+          "SKD034",
+          "SKD038",
+          "SKD010",
+          "SKD009",
+          "SKD039"
+        ],
+        "skillLb": 0,
+        "equipment": [
+          {
+            "instanceId": "qa-0-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          }
+        ],
+        "order": [
+          "char_joe_01",
+          "char_yuki_01",
+          "char_daimon_01",
+          "char_jihoon_01",
+          "char_aoi_01"
+        ]
+      },
+      "party": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "image": "/characters/joe_transparent_asset.png",
+          "level": 35,
+          "element": "earth",
+          "stats": {
+            "hp": 5752.397156135737,
+            "atk": 847.883862454295,
+            "def": 510.2944312271475,
+            "luk": 17.38499457257712,
+            "sp": 172
+          },
+          "skills": [
+            {
+              "id": "SKD034",
+              "name": "身構え",
+              "image": "/skills/skill_006_iron_guard.jpg",
+              "rarity": "N",
+              "element": "earth",
+              "spCost": 30,
+              "condition": {
+                "type": "always"
+              },
+              "target": "self",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_up",
+                  "power": 15,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "自身・DEF強化:15.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P15",
+              "type": "P15",
+              "name": "HP70%以上で自身DEF",
+              "stat": "def",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "image": "/characters/yuki_transparent_asset.png",
+          "level": 35,
+          "element": "light",
+          "stats": {
+            "hp": 6025.397156135737,
+            "atk": 833.7138624542949,
+            "def": 498.0094312271475,
+            "luk": 17.38499457257712,
+            "sp": 215
+          },
+          "skills": [
+            {
+              "id": "SKD038",
+              "name": "鎧砕き",
+              "image": "/skills/skill_015_recovery_program.jpg",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_down",
+                  "power": 12,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "配置順最初の付与可能敵・DEF低下:12.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P04",
+              "type": "P04",
+              "name": "他の生存味方が2属性以上で自身DEF",
+              "stat": "def",
+              "percent": 10,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "image": "/characters/daimon_transparent_asset.png",
+          "level": 35,
+          "element": "fire",
+          "stats": {
+            "hp": 4145.597156135737,
+            "atk": 1272.438862454295,
+            "def": 401.6194312271475,
+            "luk": 17.38499457257712,
+            "sp": 172
+          },
+          "skills": [
+            {
+              "id": "SKD010",
+              "name": "風断",
+              "image": "/skills/formal/SKD010.webp",
+              "rarity": "R",
+              "element": "wind",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P06",
+              "type": "P06",
+              "name": "単体攻撃スキルダメージ",
+              "stat": "atk",
+              "percent": 4,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "image": "/characters/jihoon_transparent_asset.png",
+          "level": 35,
+          "element": "earth",
+          "stats": {
+            "hp": 4894.397156135737,
+            "atk": 1105.668862454295,
+            "def": 449.8144312271475,
+            "luk": 17.38499457257712,
+            "sp": 230
+          },
+          "skills": [
+            {
+              "id": "SKD009",
+              "name": "岩断",
+              "image": "/skills/formal/SKD009.webp",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P05",
+              "type": "P05",
+              "name": "通常攻撃ダメージ",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "image": "/characters/aoi_transparent_asset.png",
+          "level": 35,
+          "element": "fire",
+          "stats": {
+            "hp": 4562.897156135737,
+            "atk": 1190.688862454295,
+            "def": 404.4544312271475,
+            "luk": 17.38499457257712,
+            "sp": 201
+          },
+          "skills": [
+            {
+              "id": "SKD039",
+              "name": "応急手当",
+              "image": "/skills/skill_003_noise_heal.jpg",
+              "rarity": "N",
+              "element": "water",
+              "spCost": 35,
+              "condition": {
+                "type": "ally_hp_below",
+                "value": 0.5
+              },
+              "target": "lowest_ally",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "heal",
+                  "power": 35,
+                  "healingFormula": "caster_atk_percent"
+                }
+              ],
+              "description": "共通単体回復条件・回復倍率:35.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P10",
+              "type": "P10",
+              "name": "与回復量（蘇生除外）",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        }
+      ],
+      "runs": [
+        {
+          "seed": 4109474968,
+          "outcome": "win",
+          "actions": 36,
+          "waves": 2,
+          "damage": 8356
+        },
+        {
+          "seed": 2654435761,
+          "outcome": "win",
+          "actions": 47,
+          "waves": 2,
+          "damage": 8228
+        },
+        {
+          "seed": 1013904226,
+          "outcome": "win",
+          "actions": 60,
+          "waves": 2,
+          "damage": 9223
+        },
+        {
+          "seed": 3668339987,
+          "outcome": "win",
+          "actions": 68,
+          "waves": 2,
+          "damage": 8596
+        },
+        {
+          "seed": 2027808452,
+          "outcome": "win",
+          "actions": 36,
+          "waves": 2,
+          "damage": 8238
+        },
+        {
+          "seed": 387276917,
+          "outcome": "win",
+          "actions": 48,
+          "waves": 2,
+          "damage": 8932
+        },
+        {
+          "seed": 3041712678,
+          "outcome": "win",
+          "actions": 62,
+          "waves": 2,
+          "damage": 8621
+        },
+        {
+          "seed": 1401181143,
+          "outcome": "win",
+          "actions": 36,
+          "waves": 2,
+          "damage": 8330
+        },
+        {
+          "seed": 4055616904,
+          "outcome": "win",
+          "actions": 61,
+          "waves": 2,
+          "damage": 9600
+        },
+        {
+          "seed": 2415085369,
+          "outcome": "win",
+          "actions": 36,
+          "waves": 2,
+          "damage": 8080
+        },
+        {
+          "seed": 774553834,
+          "outcome": "win",
+          "actions": 36,
+          "waves": 2,
+          "damage": 8378
+        },
+        {
+          "seed": 3428989595,
+          "outcome": "win",
+          "actions": 47,
+          "waves": 2,
+          "damage": 8282
+        },
+        {
+          "seed": 1788458060,
+          "outcome": "win",
+          "actions": 52,
+          "waves": 2,
+          "damage": 9478
+        },
+        {
+          "seed": 147926525,
+          "outcome": "win",
+          "actions": 48,
+          "waves": 2,
+          "damage": 9157
+        },
+        {
+          "seed": 2802362286,
+          "outcome": "win",
+          "actions": 36,
+          "waves": 2,
+          "damage": 8279
+        },
+        {
+          "seed": 1161830751,
+          "outcome": "win",
+          "actions": 48,
+          "waves": 2,
+          "damage": 9281
+        },
+        {
+          "seed": 3816266512,
+          "outcome": "win",
+          "actions": 48,
+          "waves": 2,
+          "damage": 9372
+        },
+        {
+          "seed": 2175734977,
+          "outcome": "win",
+          "actions": 41,
+          "waves": 2,
+          "damage": 8706
+        },
+        {
+          "seed": 535203442,
+          "outcome": "win",
+          "actions": 60,
+          "waves": 2,
+          "damage": 9160
+        },
+        {
+          "seed": 3189639203,
+          "outcome": "win",
+          "actions": 36,
+          "waves": 2,
+          "damage": 8084
+        }
+      ],
+      "wins": 20
+    },
+    {
+      "label": "Lv40-gear0",
+      "conditions": {
+        "level": 40,
+        "awakening": 0,
+        "skillIds": [
+          "SKD034",
+          "SKD038",
+          "SKD010",
+          "SKD009",
+          "SKD039"
+        ],
+        "skillLb": 0,
+        "equipment": [],
+        "order": [
+          "char_joe_01",
+          "char_yuki_01",
+          "char_daimon_01",
+          "char_jihoon_01",
+          "char_aoi_01"
+        ]
+      },
+      "party": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "image": "/characters/joe_transparent_asset.png",
+          "level": 40,
+          "element": "earth",
+          "stats": {
+            "hp": 6311.2,
+            "atk": 819.65,
+            "def": 518.7,
+            "luk": 17.95918367346939,
+            "sp": 189
+          },
+          "skills": [
+            {
+              "id": "SKD034",
+              "name": "身構え",
+              "image": "/skills/skill_006_iron_guard.jpg",
+              "rarity": "N",
+              "element": "earth",
+              "spCost": 30,
+              "condition": {
+                "type": "always"
+              },
+              "target": "self",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_up",
+                  "power": 15,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "自身・DEF強化:15.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P15",
+              "type": "P15",
+              "name": "HP70%以上で自身DEF",
+              "stat": "def",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "image": "/characters/yuki_transparent_asset.png",
+          "level": 40,
+          "element": "light",
+          "stats": {
+            "hp": 6633.2,
+            "atk": 802.75,
+            "def": 503.88,
+            "luk": 17.95918367346939,
+            "sp": 236
+          },
+          "skills": [
+            {
+              "id": "SKD038",
+              "name": "鎧砕き",
+              "image": "/skills/skill_015_recovery_program.jpg",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_down",
+                  "power": 12,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "配置順最初の付与可能敵・DEF低下:12.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P04",
+              "type": "P04",
+              "name": "他の生存味方が2属性以上で自身DEF",
+              "stat": "def",
+              "percent": 10,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "image": "/characters/daimon_transparent_asset.png",
+          "level": 40,
+          "element": "fire",
+          "stats": {
+            "hp": 4416,
+            "atk": 1326,
+            "def": 387.6,
+            "luk": 17.95918367346939,
+            "sp": 189
+          },
+          "skills": [
+            {
+              "id": "SKD010",
+              "name": "風断",
+              "image": "/skills/formal/SKD010.webp",
+              "rarity": "R",
+              "element": "wind",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P06",
+              "type": "P06",
+              "name": "単体攻撃スキルダメージ",
+              "stat": "atk",
+              "percent": 4,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "image": "/characters/jihoon_transparent_asset.png",
+          "level": 40,
+          "element": "earth",
+          "stats": {
+            "hp": 5299.2,
+            "atk": 1127.1,
+            "def": 445.73999999999995,
+            "luk": 17.95918367346939,
+            "sp": 252
+          },
+          "skills": [
+            {
+              "id": "SKD009",
+              "name": "岩断",
+              "image": "/skills/formal/SKD009.webp",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P05",
+              "type": "P05",
+              "name": "通常攻撃ダメージ",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "image": "/characters/aoi_transparent_asset.png",
+          "level": 40,
+          "element": "fire",
+          "stats": {
+            "hp": 4908.2,
+            "atk": 1228.5,
+            "def": 391.02,
+            "luk": 17.95918367346939,
+            "sp": 220
+          },
+          "skills": [
+            {
+              "id": "SKD039",
+              "name": "応急手当",
+              "image": "/skills/skill_003_noise_heal.jpg",
+              "rarity": "N",
+              "element": "water",
+              "spCost": 35,
+              "condition": {
+                "type": "ally_hp_below",
+                "value": 0.5
+              },
+              "target": "lowest_ally",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "heal",
+                  "power": 35,
+                  "healingFormula": "caster_atk_percent"
+                }
+              ],
+              "description": "共通単体回復条件・回復倍率:35.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P10",
+              "type": "P10",
+              "name": "与回復量（蘇生除外）",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        }
+      ],
+      "runs": [
+        {
+          "seed": 4109474968,
+          "outcome": "win",
+          "actions": 34,
+          "waves": 2,
+          "damage": 8613
+        },
+        {
+          "seed": 2654435761,
+          "outcome": "win",
+          "actions": 39,
+          "waves": 2,
+          "damage": 8359
+        },
+        {
+          "seed": 1013904226,
+          "outcome": "win",
+          "actions": 47,
+          "waves": 2,
+          "damage": 8336
+        },
+        {
+          "seed": 3668339987,
+          "outcome": "win",
+          "actions": 47,
+          "waves": 2,
+          "damage": 8391
+        },
+        {
+          "seed": 2027808452,
+          "outcome": "win",
+          "actions": 34,
+          "waves": 2,
+          "damage": 8566
+        },
+        {
+          "seed": 387276917,
+          "outcome": "win",
+          "actions": 47,
+          "waves": 2,
+          "damage": 9571
+        },
+        {
+          "seed": 3041712678,
+          "outcome": "win",
+          "actions": 47,
+          "waves": 2,
+          "damage": 8578
+        },
+        {
+          "seed": 1401181143,
+          "outcome": "win",
+          "actions": 34,
+          "waves": 2,
+          "damage": 8495
+        },
+        {
+          "seed": 4055616904,
+          "outcome": "win",
+          "actions": 47,
+          "waves": 2,
+          "damage": 8280
+        },
+        {
+          "seed": 2415085369,
+          "outcome": "win",
+          "actions": 34,
+          "waves": 2,
+          "damage": 8354
+        },
+        {
+          "seed": 774553834,
+          "outcome": "win",
+          "actions": 34,
+          "waves": 2,
+          "damage": 8500
+        },
+        {
+          "seed": 3428989595,
+          "outcome": "win",
+          "actions": 39,
+          "waves": 2,
+          "damage": 8286
+        },
+        {
+          "seed": 1788458060,
+          "outcome": "win",
+          "actions": 50,
+          "waves": 2,
+          "damage": 10050
+        },
+        {
+          "seed": 147926525,
+          "outcome": "win",
+          "actions": 47,
+          "waves": 2,
+          "damage": 9889
+        },
+        {
+          "seed": 2802362286,
+          "outcome": "win",
+          "actions": 34,
+          "waves": 2,
+          "damage": 8451
+        },
+        {
+          "seed": 1161830751,
+          "outcome": "win",
+          "actions": 50,
+          "waves": 2,
+          "damage": 9708
+        },
+        {
+          "seed": 3816266512,
+          "outcome": "win",
+          "actions": 46,
+          "waves": 2,
+          "damage": 9517
+        },
+        {
+          "seed": 2175734977,
+          "outcome": "win",
+          "actions": 34,
+          "waves": 2,
+          "damage": 8418
+        },
+        {
+          "seed": 535203442,
+          "outcome": "win",
+          "actions": 47,
+          "waves": 2,
+          "damage": 8328
+        },
+        {
+          "seed": 3189639203,
+          "outcome": "win",
+          "actions": 34,
+          "waves": 2,
+          "damage": 8232
+        }
+      ],
+      "wins": 20
+    },
+    {
+      "label": "Lv40-gear20",
+      "conditions": {
+        "level": 40,
+        "awakening": 0,
+        "skillIds": [
+          "SKD034",
+          "SKD038",
+          "SKD010",
+          "SKD009",
+          "SKD039"
+        ],
+        "skillLb": 0,
+        "equipment": [
+          {
+            "instanceId": "qa-0-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-0-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-1-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-2-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-3-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-weapon",
+            "masterId": "WEAPON_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-head",
+            "masterId": "HEAD_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-body",
+            "masterId": "BODY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-legs",
+            "masterId": "LEGS_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-accessory1",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          },
+          {
+            "instanceId": "qa-4-accessory2",
+            "masterId": "ACCESSORY_001",
+            "level": 20,
+            "lb": 0
+          }
+        ],
+        "order": [
+          "char_joe_01",
+          "char_yuki_01",
+          "char_daimon_01",
+          "char_jihoon_01",
+          "char_aoi_01"
+        ]
+      },
+      "party": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "image": "/characters/joe_transparent_asset.png",
+          "level": 40,
+          "element": "earth",
+          "stats": {
+            "hp": 6712.797156135736,
+            "atk": 980.288862454295,
+            "def": 599.0194312271474,
+            "luk": 18.40540273584243,
+            "sp": 189
+          },
+          "skills": [
+            {
+              "id": "SKD034",
+              "name": "身構え",
+              "image": "/skills/skill_006_iron_guard.jpg",
+              "rarity": "N",
+              "element": "earth",
+              "spCost": 30,
+              "condition": {
+                "type": "always"
+              },
+              "target": "self",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_up",
+                  "power": 15,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "自身・DEF強化:15.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P15",
+              "type": "P15",
+              "name": "HP70%以上で自身DEF",
+              "stat": "def",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "image": "/characters/yuki_transparent_asset.png",
+          "level": 40,
+          "element": "light",
+          "stats": {
+            "hp": 7034.797156135736,
+            "atk": 963.388862454295,
+            "def": 584.1994312271473,
+            "luk": 18.40540273584243,
+            "sp": 236
+          },
+          "skills": [
+            {
+              "id": "SKD038",
+              "name": "鎧砕き",
+              "image": "/skills/skill_015_recovery_program.jpg",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_down",
+                  "power": 12,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "配置順最初の付与可能敵・DEF低下:12.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P04",
+              "type": "P04",
+              "name": "他の生存味方が2属性以上で自身DEF",
+              "stat": "def",
+              "percent": 10,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "image": "/characters/daimon_transparent_asset.png",
+          "level": 40,
+          "element": "fire",
+          "stats": {
+            "hp": 4817.597156135736,
+            "atk": 1486.6388624542951,
+            "def": 467.9194312271475,
+            "luk": 18.40540273584243,
+            "sp": 189
+          },
+          "skills": [
+            {
+              "id": "SKD010",
+              "name": "風断",
+              "image": "/skills/formal/SKD010.webp",
+              "rarity": "R",
+              "element": "wind",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P06",
+              "type": "P06",
+              "name": "単体攻撃スキルダメージ",
+              "stat": "atk",
+              "percent": 4,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "image": "/characters/jihoon_transparent_asset.png",
+          "level": 40,
+          "element": "earth",
+          "stats": {
+            "hp": 5700.797156135736,
+            "atk": 1287.738862454295,
+            "def": 526.0594312271473,
+            "luk": 18.40540273584243,
+            "sp": 252
+          },
+          "skills": [
+            {
+              "id": "SKD009",
+              "name": "岩断",
+              "image": "/skills/formal/SKD009.webp",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P05",
+              "type": "P05",
+              "name": "通常攻撃ダメージ",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "image": "/characters/aoi_transparent_asset.png",
+          "level": 40,
+          "element": "fire",
+          "stats": {
+            "hp": 5309.797156135736,
+            "atk": 1389.1388624542951,
+            "def": 471.3394312271475,
+            "luk": 18.40540273584243,
+            "sp": 220
+          },
+          "skills": [
+            {
+              "id": "SKD039",
+              "name": "応急手当",
+              "image": "/skills/skill_003_noise_heal.jpg",
+              "rarity": "N",
+              "element": "water",
+              "spCost": 35,
+              "condition": {
+                "type": "ally_hp_below",
+                "value": 0.5
+              },
+              "target": "lowest_ally",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "heal",
+                  "power": 35,
+                  "healingFormula": "caster_atk_percent"
+                }
+              ],
+              "description": "共通単体回復条件・回復倍率:35.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P10",
+              "type": "P10",
+              "name": "与回復量（蘇生除外）",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        }
+      ],
+      "runs": [
+        {
+          "seed": 4109474968,
+          "outcome": "win",
+          "actions": 27,
+          "waves": 2,
+          "damage": 10434
+        },
+        {
+          "seed": 2654435761,
+          "outcome": "win",
+          "actions": 26,
+          "waves": 2,
+          "damage": 9556
+        },
+        {
+          "seed": 1013904226,
+          "outcome": "win",
+          "actions": 30,
+          "waves": 2,
+          "damage": 8250
+        },
+        {
+          "seed": 3668339987,
+          "outcome": "win",
+          "actions": 32,
+          "waves": 2,
+          "damage": 9304
+        },
+        {
+          "seed": 2027808452,
+          "outcome": "win",
+          "actions": 26,
+          "waves": 2,
+          "damage": 9300
+        },
+        {
+          "seed": 387276917,
+          "outcome": "win",
+          "actions": 38,
+          "waves": 2,
+          "damage": 9034
+        },
+        {
+          "seed": 3041712678,
+          "outcome": "win",
+          "actions": 30,
+          "waves": 2,
+          "damage": 8280
+        },
+        {
+          "seed": 1401181143,
+          "outcome": "win",
+          "actions": 27,
+          "waves": 2,
+          "damage": 10279
+        },
+        {
+          "seed": 4055616904,
+          "outcome": "win",
+          "actions": 32,
+          "waves": 2,
+          "damage": 8958
+        },
+        {
+          "seed": 2415085369,
+          "outcome": "win",
+          "actions": 27,
+          "waves": 2,
+          "damage": 10307
+        },
+        {
+          "seed": 774553834,
+          "outcome": "win",
+          "actions": 26,
+          "waves": 2,
+          "damage": 9350
+        },
+        {
+          "seed": 3428989595,
+          "outcome": "win",
+          "actions": 26,
+          "waves": 2,
+          "damage": 9399
+        },
+        {
+          "seed": 1788458060,
+          "outcome": "win",
+          "actions": 32,
+          "waves": 2,
+          "damage": 9468
+        },
+        {
+          "seed": 147926525,
+          "outcome": "win",
+          "actions": 32,
+          "waves": 2,
+          "damage": 9201
+        },
+        {
+          "seed": 2802362286,
+          "outcome": "win",
+          "actions": 26,
+          "waves": 2,
+          "damage": 9279
+        },
+        {
+          "seed": 1161830751,
+          "outcome": "win",
+          "actions": 33,
+          "waves": 2,
+          "damage": 9666
+        },
+        {
+          "seed": 3816266512,
+          "outcome": "win",
+          "actions": 32,
+          "waves": 2,
+          "damage": 9265
+        },
+        {
+          "seed": 2175734977,
+          "outcome": "win",
+          "actions": 26,
+          "waves": 2,
+          "damage": 9254
+        },
+        {
+          "seed": 535203442,
+          "outcome": "win",
+          "actions": 32,
+          "waves": 2,
+          "damage": 9127
+        },
+        {
+          "seed": 3189639203,
+          "outcome": "win",
+          "actions": 27,
+          "waves": 2,
+          "damage": 10286
+        }
+      ],
+      "wins": 20
+    }
+  ]
+}

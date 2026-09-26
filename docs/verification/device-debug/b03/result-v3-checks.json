@@ -1,0 +1,31 @@
+{
+  "fixture": {
+    "participant": {
+      "id": "joe",
+      "characterId": "char_joe_01",
+      "name": "北条氏康",
+      "isEnemy": false
+    },
+    "raw": {
+      "damage": 4200,
+      "kills": 2,
+      "heal": 0,
+      "shield": 0,
+      "survived": true
+    },
+    "score": {
+      "damage": 40,
+      "kills": 20,
+      "heal": 0,
+      "shield": 0,
+      "survival": 5,
+      "total": 65
+    }
+  },
+  "checks": [
+    "420ms count completes to65",
+    "375/390 score and reward panels open",
+    "CTA remains inside viewport"
+  ],
+  "scope": "Proposal only. Not actual saved battle or physical device acceptance."
+}

@@ -1,0 +1,63 @@
+.rd-raid{padding:10px 8px;color:#f5eee1;font-family:var(--font-display,serif)}
+.rd-raid-heading{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.rd-raid-heading h1{font-size:27px;letter-spacing:.12em;color:#efd185;margin:0}
+.rd-raid-heading button,.rd-raid-back{border:1px solid #baac92;border-radius:3px;background:#17151bd9;color:inherit;padding:7px 14px;font:inherit}
+.rd-raid-tabs{display:grid;grid-template-columns:1fr 1.15fr 1.15fr;gap:3px;border-bottom:2px solid #bdb2a0;margin:0 4px 10px}
+.rd-raid-tabs button{min-height:36px;border:1px solid #383239;border-radius:3px 3px 0 0;background:#252127;color:inherit;font:inherit;font-size:13px;white-space:nowrap}
+.rd-raid-tabs button[aria-pressed=true]{border-color:#d4b56c;box-shadow:inset 0 -3px #d4b56c;background:#201c22}
+.rd-raid-cards{display:grid;gap:9px}
+.rd-raid-history{display:flex;align-items:center;gap:12px;margin-top:10px;width:100%;min-height:46px;padding:8px 12px;border:1px solid #b39b6b;border-radius:3px;background:#211b21;color:inherit;font:inherit;font-size:14px;text-align:left}
+.rd-raid-history span{margin-left:auto;font-size:24px}
+.rd-raid-history img{width:32px;height:32px}
+.rd-raid--detail{padding:0;position:relative}
+.rd-raid-back{position:absolute;left:9px;top:8px;z-index:2;min-height:32px;padding:5px 12px}
+.rd-raid-detail-stage{min-height:0}
+/* Keep enough scroll travel to bring the compact summary below the sticky header. */
+.rd-raid-detail-stage>.raid-approved-detail:has(.raid-approved-detail__compact){display:flex;flex-direction:column;min-height:calc(100dvh - 156px)}
+.rd-raid-detail-stage>.raid-approved-detail:has(.raid-approved-detail__compact)>*{flex-shrink:0}
+.rd-raid-detail-stage>.raid-approved-detail:has(.raid-approved-detail__compact)>.raid-approved-detail__contribution{flex:1;display:flex;flex-direction:column;justify-content:space-between}
+@media(min-width:480px){.rd-raid-detail-stage>.raid-approved-detail:has(.raid-approved-detail__compact){min-height:calc(100dvh - 176px)}}
+.rd-raid-error{padding:10px;background:#511a1a;color:#ffe1d5}
+.rd-raid-participants{list-style:none;padding:0}
+.rd-raid-participants li{padding:10px 0;border-bottom:1px solid #795735}
+.rd-raid-participants span{display:block;font-size:13px}
+.rd-shell:has(.rd-raid){scrollbar-width:thin;scrollbar-color:#c9a65d #342c21}
+.rd-shell:has(.rd-raid)::-webkit-scrollbar{width:7px}
+.rd-shell:has(.rd-raid)::-webkit-scrollbar-track{background:#342c21}
+.rd-shell:has(.rd-raid)::-webkit-scrollbar-thumb{background:#c9a65d;border:1px solid #342c21;border-radius:4px}
+
+.rd-shell:has(.rd-raid)>.rd-header{position:sticky;top:0;z-index:20}
+
+.rd-shell:has(.rd-raid)>.rd-header{padding:8px 12px 0}
+.rd-shell:has(.rd-raid) .rd-identity{min-height:44px;gap:8px;padding-bottom:6px}
+.rd-shell:has(.rd-raid) .rd-identity>div{display:grid;gap:2px}
+.rd-shell:has(.rd-raid) .rd-identity strong{font-size:14px}
+.rd-shell:has(.rd-raid) .g4-header-face{position:relative;overflow:visible}
+.rd-shell:has(.rd-raid) .g4-header-face img{clip-path:circle(21% at 50% 30%)}
+.rd-raid-header-level{position:absolute;left:0;bottom:-2px;z-index:1;padding:0 4px;background:#d6b568;border-radius:2px;color:#1b1411;font:11px Georgia,serif}
+.rd-shell:has(.rd-raid) .rd-resources{padding:6px 0;font-size:14px}
+
+/* Raid chrome follows the approved 486px composition at the actual shell width. */
+.rd-shell:has(.rd-raid){--raid-scale:1;padding-bottom:calc(70px + env(safe-area-inset-bottom,0px));scroll-padding-bottom:calc(70px + env(safe-area-inset-bottom,0px))}
+.rd-shell:has(.rd-raid)>.rd-header{padding:6px 10px 0;background:#1b191f}
+.rd-shell:has(.rd-raid) .rd-identity{height:48px;min-height:48px;padding:0;gap:9px}
+.rd-shell:has(.rd-raid) .rd-identity strong{font-size:14px;line-height:1.35}
+.rd-shell:has(.rd-raid) .rd-guild-slot{font-size:11px;line-height:1.3}
+.rd-shell:has(.rd-raid) .g4-header-face{width:45px;height:46px;border:0;border-radius:0;background:none;overflow:hidden}
+.rd-shell:has(.rd-raid) .g4-header-face img{width:100%;height:100%;object-fit:cover;object-position:50% 0;transform:scale(1.6);transform-origin:50% 0;clip-path:none}
+.rd-shell:has(.rd-raid) .rd-raid-header-level{bottom:0;font-size:10px;line-height:13px}
+.rd-shell:has(.rd-raid) .rd-menu-button{font-family:var(--font-display,serif);font-size:14px;line-height:1.3;padding:7px 10px}
+.rd-shell:has(.rd-raid) .rd-resources{margin:2px -10px 0;padding:5px 12px;min-height:29px;line-height:18px;font-size:14px}
+.rd-shell:has(.rd-raid) .rd-resources img{width:17px;height:17px}
+@media(min-width:480px){
+ .rd-shell:has(.rd-raid)>.rd-header{padding-top:8px}
+ .rd-shell:has(.rd-raid) .rd-identity{height:60px;min-height:60px}
+ .rd-shell:has(.rd-raid) .rd-identity strong{font-size:18px}
+ .rd-shell:has(.rd-raid) .g4-header-face{width:54px;height:58px}
+ .rd-shell:has(.rd-raid) .rd-resources{font-size:18px;min-height:35px;padding-block:7px}
+ .rd-shell:has(.rd-raid) .rd-menu-button{font-size:17px}
+}
+body.game04-theme .rd-shell:has(.rd-raid) :is(.rd-header,.rd-footer,.rd-raid-heading,.rd-raid-tabs,.rd-raid-history,.rd-raid-back) :is(strong,span,b,button,small){font-family:var(--g4-sans)!important}
+body.game04-theme .rd-shell:has(.rd-raid) :is(.rd-raid-history,.rd-raid-back){font-family:var(--g4-sans)!important}
+body.game04-theme .rd-shell:has(.rd-raid) .rd-auth-link{min-height:0;min-width:0;font-size:11px;line-height:1.4}
+body.game04-theme .rd-shell:has(.rd-raid){padding-bottom:calc(70px + env(safe-area-inset-bottom,0px));scroll-padding-bottom:calc(70px + env(safe-area-inset-bottom,0px))}

@@ -1,0 +1,77 @@
+- iframe [active]:
+  - alert
+  - region "ゲーム画面":
+    - img "くノ一"
+    - generic: Lv.1
+    - strong: G2QA薬F
+    - generic "将来の同盟表示枠": ◇ 同盟 —
+    - button "アカウント連携": 未認証
+    - button "メニュー"
+    - generic: 銭 12,600
+    - generic: 輝石 100
+    - generic: 行動力 149/100
+    - main:
+      - heading "VIPパス" [level=2]
+      - paragraph: 30日間：バトル速度×3・100無償輝石を30回付与
+      - paragraph: 販売準備中
+      - heading "商店" [level=2]
+      - button "購入履歴":
+        - generic: 購入履歴
+      - button "購入分の有効期限":
+        - generic: 購入分の有効期限
+      - button "特選商店"
+      - button "輝石商店"
+      - button "交換所" [active]: 交換所
+      - paragraph: 価格は全て税込み表示です
+      - status:
+        - paragraph: ただいま購入できません。
+        - button "再確認する":
+          - generic: 再確認する
+      - region "交換所":
+        - generic: 交換所
+        - paragraph: 無償輝石から使用します。
+        - generic: 所持：輝石 100 ／ 銭 12,600
+        - strong: 活力丸：0個
+        - paragraph: 行動力 149 / 100
+        - button "使用する" [disabled]:
+          - generic: 使用する
+        - strong: 回復薬 ×1
+        - paragraph: 50輝石
+        - button "交換":
+          - generic: 交換
+        - strong: 銭 ×3,000
+        - paragraph: 300輝石
+        - button "交換":
+          - generic: 交換
+        - strong: 銭 ×5,000
+        - paragraph: 500輝石
+        - button "交換":
+          - generic: 交換
+        - strong: 銭 ×10,000
+        - paragraph: 1,000輝石
+        - button "交換":
+          - generic: 交換
+        - strong: 銭 ×30,000
+        - paragraph: 3,000輝石
+        - button "交換":
+          - generic: 交換
+        - strong: 銭 ×50,000
+        - paragraph: 5,000輝石
+        - button "交換":
+          - generic: 交換
+        - strong: 侵攻令 ×1
+        - paragraph: 100輝石
+        - button "交換":
+          - generic: 交換
+        - strong: 同一レアリティ魂 → 汎用魂
+        - paragraph: 同一レアリティの武将魂2個につき汎用魂1個
+        - button "交換する":
+          - generic: 交換する
+        - paragraph: 未所持武将の魂も交換できます。逆交換はできません。
+    - navigation "メインナビゲーション":
+      - button "本陣"
+      - button "出陣"
+      - button "武将"
+      - button "共闘"
+      - button "召喚"
+- alert

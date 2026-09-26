@@ -1,0 +1,28 @@
+{
+  "tool": "agent-browser 0.38.1 / local Chromium",
+  "scope": "actual independent React components with local persistence fixture; no shared UI/API connection",
+  "checks": [
+    {
+      "width": 375,
+      "guideFits": true,
+      "joinSaved": true,
+      "skillSaved": true,
+      "deferredSurvivesReload": true,
+      "autoLoadoutSaved": true,
+      "sortieOptional": true,
+      "mandatoryNavigationSurvivesReload": true
+    },
+    {
+      "width": 390,
+      "guideFits": true,
+      "joinSaved": true,
+      "skillSaved": true,
+      "deferredSurvivesReload": true,
+      "autoLoadoutSaved": true,
+      "sortieOptional": true,
+      "mandatoryNavigationSurvivesReload": true
+    }
+  ],
+  "failedSaveRetainsPending": true,
+  "errors": ""
+}

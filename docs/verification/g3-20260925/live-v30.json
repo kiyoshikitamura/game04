@@ -1,0 +1,238 @@
+{
+  "candidate": "GAME04 G3 dev API v30",
+  "deployedProvenance": {
+    "sourceSha256": "b86e10a46b5feeb3dcc6ea999f84805a614ce906c4717c7f0798c4cac8557ac0",
+    "bundleSha256": "224e867d7d6464a1ef0a149e00fe6cec2c6f16b330ab2c753508457cc5dce7cb",
+    "minifiedInputSha256": "0e5d46de",
+    "managementArtifactSha256": "c5e397fb8f33014647032a258be23779bdda361ee4e6a1d342655cd2e8722fc2",
+    "verifyJwt": true,
+    "runtimeObservation": "Parent confirmed v30 before this run, then observed a separate G2 v31 deployment (management hash 70c20710ef9a7a36b103630cd67548da2fa62f314efa2d0797a482db11fb9c6f). No per-request version pin was captured, so these observations must not be represented as final single-candidate acceptance. The local G3 measurement candidate was NOT deployed and must not be confused with G2 v31."
+  },
+  "testedAt": "2026-09-25T06:33:17.472Z",
+  "qaUserId": "9377cd19-4d5b-488a-96f8-71393f20bcf7",
+  "animationMs": 4000,
+  "observations": {
+    "finalVersion": 19,
+    "finalCharacterPoints": 2,
+    "functionalAcceptance": "pass",
+    "performanceAcceptance": "fail",
+    "performanceTargetMs": 1000,
+    "exceptionCeilingMs": 1500,
+    "overTargetCount": 13,
+    "sampleCount": 16,
+    "overTarget": [
+      {
+        "label": "status-cold",
+        "elapsedMs": 1174
+      },
+      {
+        "label": "status-warm",
+        "elapsedMs": 1187
+      },
+      {
+        "label": "special-diamond",
+        "elapsedMs": 1578
+      },
+      {
+        "label": "special-replay",
+        "elapsedMs": 1414
+      },
+      {
+        "label": "ticket-character",
+        "elapsedMs": 1516
+      },
+      {
+        "label": "ticket-skill",
+        "elapsedMs": 1470
+      },
+      {
+        "label": "ticket-expired-rejected",
+        "elapsedMs": 1044
+      },
+      {
+        "label": "parallel-normal-a",
+        "elapsedMs": 1353
+      },
+      {
+        "label": "parallel-normal-b",
+        "elapsedMs": 10957
+      },
+      {
+        "label": "ssr-exchange",
+        "elapsedMs": 1596
+      },
+      {
+        "label": "ssr-exchange-replay",
+        "elapsedMs": 1345
+      },
+      {
+        "label": "set-home-background",
+        "elapsedMs": 1222
+      },
+      {
+        "label": "refresh-token-get-state",
+        "elapsedMs": 1132
+      }
+    ],
+    "overException": [
+      {
+        "label": "special-diamond",
+        "elapsedMs": 1578
+      },
+      {
+        "label": "ticket-character",
+        "elapsedMs": 1516
+      },
+      {
+        "label": "parallel-normal-b",
+        "elapsedMs": 10957
+      },
+      {
+        "label": "ssr-exchange",
+        "elapsedMs": 1596
+      }
+    ]
+  },
+  "databasePostconditions": {
+    "ticketBalances": {
+      "SPECIAL_TICKET_CHARACTER": 0,
+      "SPECIAL_TICKET_SKILL": 0,
+      "SPECIAL_TICKET_EQUIPMENT": 1
+    },
+    "nonExpiredPaidLot": {
+      "itemId": "SPECIAL_TICKET_SKILL",
+      "remaining": 0,
+      "expiredQuantity": 0
+    },
+    "expiredPaidLotRollback": {
+      "itemId": "SPECIAL_TICKET_EQUIPMENT",
+      "remaining": 1,
+      "expiredQuantity": 0,
+      "inventoryQuantity": 1
+    },
+    "transientTicketProjectionPersisted": false,
+    "grantLedger": null,
+    "specialGachaPoints": {
+      "skill": 1,
+      "character": 2
+    },
+    "selectedHomeBackground": "ssr:char_koharu_01"
+  },
+  "timings": [
+    {
+      "label": "status-cold",
+      "status": 200,
+      "elapsedMs": 1174,
+      "replay": false
+    },
+    {
+      "label": "status-warm",
+      "status": 200,
+      "elapsedMs": 1187,
+      "replay": false
+    },
+    {
+      "label": "invalid-payment",
+      "status": 400,
+      "elapsedMs": 862,
+      "replay": false
+    },
+    {
+      "label": "special-diamond",
+      "status": 200,
+      "elapsedMs": 1578,
+      "replay": false
+    },
+    {
+      "label": "special-replay",
+      "status": 200,
+      "elapsedMs": 1414,
+      "replay": true
+    },
+    {
+      "label": "special-replay-mismatch",
+      "status": 409,
+      "elapsedMs": 588,
+      "replay": false
+    },
+    {
+      "label": "ticket-character",
+      "status": 200,
+      "elapsedMs": 1516,
+      "replay": false
+    },
+    {
+      "label": "ticket-skill",
+      "status": 200,
+      "elapsedMs": 1470,
+      "replay": false
+    },
+    {
+      "label": "ticket-expired-rejected",
+      "status": 400,
+      "elapsedMs": 1044,
+      "replay": false
+    },
+    {
+      "label": "parallel-normal-a",
+      "status": 200,
+      "elapsedMs": 1353,
+      "replay": false
+    },
+    {
+      "label": "parallel-normal-b",
+      "status": 200,
+      "elapsedMs": 10957,
+      "replay": true
+    },
+    {
+      "label": "ssr-exchange",
+      "status": 200,
+      "elapsedMs": 1596,
+      "replay": false
+    },
+    {
+      "label": "ssr-exchange-replay",
+      "status": 200,
+      "elapsedMs": 1345,
+      "replay": true
+    },
+    {
+      "label": "ssr-exchange-mismatch",
+      "status": 409,
+      "elapsedMs": 577,
+      "replay": false
+    },
+    {
+      "label": "set-home-background",
+      "status": 200,
+      "elapsedMs": 1222,
+      "replay": false
+    },
+    {
+      "label": "refresh-token-get-state",
+      "status": 200,
+      "elapsedMs": 1132,
+      "replay": false
+    }
+  ],
+  "checks": [
+    "authenticated status and 292-item normal manifest",
+    "invalid payment is non-consuming",
+    "special jsonb DB replay is key-order independent and payload mismatch is rejected",
+    "character user_items ticket decremented; grant ledger unchanged",
+    "skill user_items ticket decremented; grant ledger unchanged",
+    "expired paid-lot ticket rejected with transaction rollback and no state/inventory mutation",
+    "concurrent same request settles exactly once",
+    "SSR exchange spends only threshold, unlocks background, replays over DB jsonb, and rejects mismatch",
+    "refresh-token reauthentication preserves selected SSR background"
+  ],
+  "remainingAcceptance": [
+    "The local G3 gameplay-measurement SQL/API candidate was not deployed; its normal/special/exchange measurement and replay classification were not tested live.",
+    "Refresh-token reauthentication passed; a browser logout and fresh interactive login was not performed and must not be represented as browser relogin acceptance.",
+    "Performance is not accepted: 13 of 16 HTTP observations exceeded 1 second; four exceeded 1.5 seconds, including the parallel same-request replay at 10957 ms.",
+    "The expired-lot draw rolled back without consuming inventory or state. Its raw user_items quantity therefore remained 1 after the rejected transaction; normal billing refresh/display reconciliation still requires integrated-path confirmation.",
+    "A real wall-clock JST-midnight crossing was not performed; the shared timestamp and transaction-day guard remain covered by code/static tests only.",
+    "Final authenticated browser/Preview acceptance remains separate from this API-level run."
+  ]
+}

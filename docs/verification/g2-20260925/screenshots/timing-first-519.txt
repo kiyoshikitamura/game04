@@ -1,0 +1,90 @@
+- iframe [active]:
+  - alert
+  - region "ゲーム画面":
+    - img "くノ一"
+    - generic: Lv.1
+    - strong: G2継続QA
+    - generic "将来の同盟表示枠": ◇ 同盟 —
+    - button "アカウント連携": 未認証
+    - button "メニュー"
+    - generic: 銭 12,720
+    - generic: 輝石 200
+    - generic: 行動力 103/100
+    - main:
+      - region "お気に入り武将":
+        - iframe
+        - img "くノ一"
+      - navigation "本陣の操作":
+        - button "切替"
+        - button "任務 未受取の任務報酬":
+          - generic: 任務
+          - generic "未受取の任務報酬"
+        - button "商店":
+          - generic: 商店
+        - button "同盟・未解放" [disabled]:
+          - generic: 同盟
+          - generic: 未解放
+      - button "出陣の続き":
+        - strong: 出陣の続き
+      - button "領土侵攻":
+        - strong: 領土侵攻
+      - region "交流":
+        - button "活動"
+        - button "全体"
+        - button "DM"
+        - button "RQAWGst"
+        - button "共闘 Lv.1の援軍を求めています。 共闘を確認": 共闘 Lv.1の援軍を求めています。 ›
+        - time: 1日前
+        - button "RQAWGstにDM"
+        - button "RQAPolA"
+        - button "共闘 Lv.12の援軍を求めています。 共闘を確認": 共闘 Lv.12の援軍を求めています。 ›
+        - time: 1日前
+        - button "RQAPolAにDM"
+        - button "RQAWGst"
+        - button "共闘 Lv.1の援軍を求めています。 共闘を確認": 共闘 Lv.1の援軍を求めています。 ›
+        - time: 1日前
+        - button "RQAWGstにDM"
+        - button "交流を開く ›"
+      - button "商店 ›":
+        - strong: 商店
+        - generic: ›
+    - navigation "メインナビゲーション":
+      - button "本陣"
+      - button "出陣"
+      - button "武将"
+      - button "共闘"
+      - button "召喚"
+- region "QA読み込み計測":
+  - heading "QA読み込み計測" [level=2]
+  - paragraph: 本体は上の実寸iframeです。APIは認証・通信・応答確認を含む総待機時間。画像は必須画像グループの待機時間（キャッシュを含む）です。操作可能時刻・TTIは未計測。
+  - button "本体を再読込して計測を消去"
+  - paragraph: 件数：2 / 100
+  - generic "ブラウザ初回表示指標":
+    - paragraph: Navigation：navigate ／ responseStart 995.6 ms ／ responseEnd 998.0 ms ／ DCL 1674.3 ms
+    - paragraph: first-paint：1700.0 ms
+    - paragraph: first-contentful-paint：1700.0 ms
+  - table:
+    - rowgroup:
+      - row "種別 / 対象 枚数 開始ms 完了ms 待機ms 結果":
+        - columnheader "種別 / 対象"
+        - columnheader "枚数"
+        - columnheader "開始ms"
+        - columnheader "完了ms"
+        - columnheader "待機ms"
+        - columnheader "結果"
+    - rowgroup:
+      - row "request / get_state — 31166.1 33275.5 2109.4 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "31166.1"
+        - cell "33275.5"
+        - cell "2109.4"
+        - cell "success"
+      - row "image-group / home 9 33308.9 33738.8 429.9 success":
+        - cell "image-group / home"
+        - cell "9"
+        - cell "33308.9"
+        - cell "33738.8"
+        - cell "429.9"
+        - cell "success"
+- alert

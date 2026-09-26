@@ -1,0 +1,110 @@
+{
+  "scope": "Live authenticated GAME04 dev v23 battle + v24 grant receipt. Encounter room creation is an explicit fixture; participation, 4 victories, claim are real APIs. Not physical-device UI or natural encounter acceptance.",
+  "encounter": {
+    "roomId": "0fed6630-f1fb-42cf-83ef-e88a07766b8d",
+    "battles": [
+      {
+        "requestId": "0c8bf047-5e2c-4feb-bc8b-000f7c435bfd",
+        "status": 200,
+        "startSnapshot": {
+          "hp": 39000,
+          "level": 1,
+          "maxHp": 39000,
+          "roomId": "0fed6630-f1fb-42cf-83ef-e88a07766b8d"
+        },
+        "damage": 6598,
+        "outcome": "win",
+        "roomHpAfter": 29103,
+        "energyAfter": 180,
+        "pendingGrants": 0
+      },
+      {
+        "requestId": "5b205f47-2e54-476a-9539-3af78bdd4282",
+        "status": 200,
+        "startSnapshot": {
+          "hp": 29103,
+          "level": 1,
+          "maxHp": 39000,
+          "roomId": "0fed6630-f1fb-42cf-83ef-e88a07766b8d"
+        },
+        "damage": 6895,
+        "outcome": "win",
+        "roomHpAfter": 18761,
+        "energyAfter": 160,
+        "pendingGrants": 0
+      },
+      {
+        "requestId": "3f6fbc90-b744-4c74-a3b4-46249b212eb2",
+        "status": 200,
+        "startSnapshot": {
+          "hp": 18761,
+          "level": 1,
+          "maxHp": 39000,
+          "roomId": "0fed6630-f1fb-42cf-83ef-e88a07766b8d"
+        },
+        "damage": 6756,
+        "outcome": "win",
+        "roomHpAfter": 8627,
+        "energyAfter": 140,
+        "pendingGrants": 0
+      },
+      {
+        "requestId": "d31162ef-1161-4411-89d8-17f4a698cacc",
+        "status": 200,
+        "startSnapshot": {
+          "hp": 8627,
+          "level": 1,
+          "maxHp": 39000,
+          "roomId": "0fed6630-f1fb-42cf-83ef-e88a07766b8d"
+        },
+        "damage": 6684,
+        "outcome": "win",
+        "roomHpAfter": 0,
+        "energyAfter": 120,
+        "pendingGrants": 1
+      }
+    ],
+    "firstBattleReplayKeepsStartHp": 39000,
+    "firstBattleReplayCurrentHp": 0,
+    "sameReplayStateVersion": 17,
+    "claimRequestId": "82b8a6b3-07eb-4b97-91fb-f01889708ff6",
+    "claimSameId": "82b8a6b3-07eb-4b97-91fb-f01889708ff6",
+    "claimDifferentId": "e86532fc-f886-40d3-9715-33f731b8836e",
+    "claimCounts": {
+      "grants": 1,
+      "rewardLines": 6,
+      "cash": 5000,
+      "characterLarge": 1,
+      "equipmentLarge": 1,
+      "skillMaterial": 2,
+      "equipmentLb": 2,
+      "soulCharNoa": 1
+    },
+    "sameClaimStateUnchanged": true,
+    "differentClaimOnlyVersionChanges": true,
+    "kpiReceiptRoomInventoryAllMatch": true,
+    "kpiClassification": "excluded"
+  },
+  "invasion": {
+    "hostRequestId": "268f4ee3-0d68-4b9f-a3f6-2e51a1e43b6e",
+    "battleRequestId": "bf5055c0-2642-4a63-ad26-2e7f6b5d1ee1",
+    "roomId": "75b670f1-ca4f-482f-b8ea-8f0a5a92cb3f",
+    "startSnapshot": {
+      "hp": 63000,
+      "level": 1,
+      "maxHp": 63000,
+      "roomId": "75b670f1-ca4f-482f-b8ea-8f0a5a92cb3f"
+    },
+    "resultDamage": 1508,
+    "roomHpAfter": 61492,
+    "energyAfter": 100,
+    "sameRequestReplayUnchanged": true
+  },
+  "failure": {
+    "requestId": "80f62a5e-4217-4e40-ab14-9429b74c8a2e",
+    "status": 400,
+    "error": "参加できる開催中レイドを選んでください。",
+    "stateUnchanged": true,
+    "pendingCount": 0
+  }
+}

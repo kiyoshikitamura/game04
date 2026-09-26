@@ -1,0 +1,172 @@
+.title-view-overlay {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 600; /* 最前面 (Authより上) */
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.title-view-container {
+  width: 100%;
+  height: 100%;
+  max-width: 430px;
+  background-color: #02030a;
+  background-image: url('/creative/branding/key-visual.png');
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center top;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 背景を暗くするオーバーレイ */
+.title-view-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 48%, rgba(2,3,10,.35) 67%, rgba(2,3,10,.96) 88%, #02030a 100%);
+  z-index: 1;
+}
+
+.title-view-content {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px 24px 22px;
+}
+
+.title-tap-area {
+  width: 100%;
+  min-height: 72px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-entry-actions {
+  width: min(100%, 320px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.title-entry-actions button {
+  min-height: 50px;
+  border-radius: var(--ui-radius-sm);
+  cursor: pointer;
+}
+
+.title-entry-primary,
+.title-entry-secondary { width: 100%; }
+
+.title-entry-error {
+  color: var(--ui-combat);
+  font-size: var(--ui-font-body);
+  line-height: 1.5;
+  text-align: center;
+}
+
+.title-entry-status {
+  color: var(--ui-text-secondary);
+  font-size: var(--ui-font-caption);
+  text-align: center;
+}
+
+.title-tap-text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  min-height: 50px;
+  padding: 10px 28px;
+  border-radius: var(--ui-radius-sm);
+  font-size: var(--ui-font-heading);
+  font-weight: 900;
+  color: var(--ui-text-primary);
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(255,255,255,.72);
+  border: 1px solid rgba(255,255,255,.38);
+  background: rgba(2,3,10,.62);
+  cursor: pointer;
+}
+
+.title-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.title-loading span {
+  font-size: 14px;
+  color: #888;
+}
+
+.game-start-transition {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  overflow: hidden;
+  background: #050607;
+  cursor: default;
+  animation: gameStartReveal .24s ease-out both;
+}
+
+.game-start-transition::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 48%, rgba(0, 240, 255, .1), transparent 42%);
+  animation: gameStartPulse .8s ease-in-out infinite alternate;
+}
+
+.game-start-transition img {
+  position: relative;
+  width: min(62vw, 230px);
+  height: auto;
+  filter: drop-shadow(0 0 20px rgba(0, 240, 255, .2));
+}
+
+.game-start-transition strong {
+  position: relative;
+  color: var(--ui-text-secondary);
+  font-size: var(--ui-font-caption);
+  font-weight: 900;
+  letter-spacing: .32em;
+  text-indent: .32em;
+}
+
+.game-start-signal { position: relative; display: flex; gap: 6px; }
+.game-start-signal i { width: 26px; height: 2px; background: rgba(0, 240, 255, .2); animation: gameStartSignal .6s ease-in-out infinite alternate; }
+.game-start-signal i:nth-child(2) { animation-delay: .12s; }
+.game-start-signal i:nth-child(3) { animation-delay: .24s; }
+
+@keyframes gameStartReveal { from { opacity: 0; } to { opacity: 1; } }
+@keyframes gameStartPulse { from { opacity: .45; transform: scale(.96); } to { opacity: 1; transform: scale(1.04); } }
+@keyframes gameStartSignal { from { background: rgba(0, 240, 255, .18); } to { background: var(--neon-cyan); box-shadow: 0 0 12px rgba(0, 240, 255, .55); } }
+
+.blink-animation {
+  animation: tapBlink 2s infinite ease-in-out;
+}
+
+@keyframes tapBlink {
+  0% { opacity: 0.65; }
+  50% { opacity: 1; }
+  100% { opacity: 0.65; }
+}
+
+body.game04-theme .title-entry-actions{width:min(260px,72vw);margin-inline:auto;gap:8px}

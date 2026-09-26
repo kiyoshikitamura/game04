@@ -1,0 +1,826 @@
+{
+  "rules": {
+    "version": "balance-v2-20260920",
+    "inputVersion": "wave-sp-v1-20260921",
+    "maxPlayerActions": 300,
+    "initialSpRatio": 0,
+    "balanceV2": {
+      "status": "PREVIEW_PROVISIONAL",
+      "version": "approved-d955239-20260921",
+      "damageBonusCap": 50,
+      "healingBonusCap": 80,
+      "shieldBonusCap": 50,
+      "shieldHpCap": 0.5,
+      "periodicCapMultiplier": 2,
+      "lowHpThreshold": 0.4,
+      "highHpThreshold": 0.7,
+      "diversityFactors": [
+        0,
+        0.25,
+        0.5,
+        0.75,
+        1
+      ]
+    }
+  },
+  "results": [
+    {
+      "id": "7-7",
+      "parties": {
+        "main": [
+          {
+            "id": "char_kengo_01",
+            "name": "本多忠勝",
+            "image": "",
+            "level": 55,
+            "element": "earth",
+            "stats": {
+              "hp": 21766.642322570995,
+              "atk": 5260.341826794291,
+              "def": 2471.570964514198,
+              "luk": 21.809510452850116,
+              "sp": 0
+            },
+            "skills": [],
+            "passives": [
+              {
+                "id": "P13_earth",
+                "type": "P13",
+                "name": "P13",
+                "stat": "atk",
+                "percent": 21.33198285868805,
+                "level": 2,
+                "target": "self",
+                "targetElement": "earth"
+              }
+            ]
+          },
+          {
+            "id": "char_koharu_01",
+            "name": "上杉謙信",
+            "image": "",
+            "level": 55,
+            "element": "water",
+            "stats": {
+              "hp": 18181.042322570993,
+              "atk": 6247.616826794292,
+              "def": 2157.5084645141983,
+              "luk": 21.809510452850116,
+              "sp": 0
+            },
+            "skills": [
+              {
+                "id": "SKD014",
+                "name": "高威力単体攻撃・水",
+                "image": "",
+                "rarity": "SSR",
+                "element": "water",
+                "spCost": 150,
+                "condition": {
+                  "type": "always"
+                },
+                "target": "first",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 229.21
+                  }
+                ],
+                "description": "正式表の検証入力"
+              }
+            ],
+            "passives": [
+              {
+                "id": "P06_water",
+                "type": "P06",
+                "name": "P06",
+                "stat": "atk",
+                "percent": 9.480881270528023,
+                "level": 2,
+                "target": "self",
+                "targetElement": "water"
+              }
+            ]
+          },
+          {
+            "id": "char_rui_01",
+            "name": "直江兼続",
+            "image": "",
+            "level": 55,
+            "element": "water",
+            "stats": {
+              "hp": 16211.842322570994,
+              "atk": 3750.679326794292,
+              "def": 1680.6584645141986,
+              "luk": 21.809510452850116,
+              "sp": 0
+            },
+            "skills": [],
+            "passives": [
+              {
+                "id": "P01_water",
+                "type": "P01",
+                "name": "P01",
+                "stat": "atk",
+                "percent": 5.688528762316814,
+                "level": 2,
+                "target": "party",
+                "targetElement": "water"
+              }
+            ]
+          },
+          {
+            "id": "char_takuro_01",
+            "name": "雑賀孫市",
+            "image": "",
+            "level": 55,
+            "element": "wind",
+            "stats": {
+              "hp": 13206.042322570991,
+              "atk": 5007.866826794292,
+              "def": 1478.0084645141985,
+              "luk": 21.809510452850116,
+              "sp": 0
+            },
+            "skills": [
+              {
+                "id": "SKD052",
+                "name": "破護",
+                "image": "",
+                "rarity": "R",
+                "element": "dark",
+                "spCost": 41,
+                "condition": {
+                  "type": "always"
+                },
+                "target": "first",
+                "effects": [
+                  {
+                    "type": "cleanse",
+                    "power": 1,
+                    "cleanseCategory": "protection"
+                  }
+                ],
+                "description": "正式表の検証入力"
+              }
+            ],
+            "passives": [
+              {
+                "id": "P06_wind",
+                "type": "P06",
+                "name": "P06",
+                "stat": "atk",
+                "percent": 7.110660952896017,
+                "level": 2,
+                "target": "self",
+                "targetElement": "wind"
+              }
+            ]
+          },
+          {
+            "id": "char_aoi_01",
+            "name": "お市の方",
+            "image": "",
+            "level": 55,
+            "element": "fire",
+            "stats": {
+              "hp": 10034.142322570993,
+              "atk": 3081.116826794292,
+              "def": 1117.8584645141984,
+              "luk": 21.809510452850116,
+              "sp": 0
+            },
+            "skills": [
+              {
+                "id": "SKD040",
+                "name": "治癒の祈り",
+                "image": "",
+                "rarity": "SR",
+                "element": "water",
+                "spCost": 90,
+                "condition": {
+                  "type": "always"
+                },
+                "target": "lowest_ally",
+                "effects": [
+                  {
+                    "type": "heal",
+                    "power": 114.61,
+                    "healingFormula": "caster_atk_percent"
+                  }
+                ],
+                "description": "正式表の検証入力"
+              }
+            ],
+            "passives": [
+              {
+                "id": "P10_fire",
+                "type": "P10",
+                "name": "P10",
+                "stat": "atk",
+                "percent": 9.480881270528023,
+                "level": 2,
+                "target": "self",
+                "targetElement": "fire"
+              }
+            ]
+          }
+        ]
+      },
+      "runs": {
+        "main": [
+          {
+            "seed": 22001
+          },
+          {
+            "seed": 22002
+          },
+          {
+            "seed": 22003
+          },
+          {
+            "seed": 22004
+          },
+          {
+            "seed": 22005
+          },
+          {
+            "seed": 22006
+          },
+          {
+            "seed": 22007
+          },
+          {
+            "seed": 22008
+          },
+          {
+            "seed": 22009
+          },
+          {
+            "seed": 22010
+          },
+          {
+            "seed": 22011
+          },
+          {
+            "seed": 22012
+          },
+          {
+            "seed": 22013
+          },
+          {
+            "seed": 22014
+          },
+          {
+            "seed": 22015
+          },
+          {
+            "seed": 22016
+          },
+          {
+            "seed": 22017
+          },
+          {
+            "seed": 22018
+          },
+          {
+            "seed": 22019
+          },
+          {
+            "seed": 22020
+          },
+          {
+            "seed": 22021
+          },
+          {
+            "seed": 22022
+          },
+          {
+            "seed": 22023
+          },
+          {
+            "seed": 22024
+          },
+          {
+            "seed": 22025
+          },
+          {
+            "seed": 22026
+          },
+          {
+            "seed": 22027
+          },
+          {
+            "seed": 22028
+          },
+          {
+            "seed": 22029
+          },
+          {
+            "seed": 22030
+          },
+          {
+            "seed": 22031
+          },
+          {
+            "seed": 22032
+          },
+          {
+            "seed": 22033
+          },
+          {
+            "seed": 22034
+          },
+          {
+            "seed": 22035
+          },
+          {
+            "seed": 22036
+          },
+          {
+            "seed": 22037
+          },
+          {
+            "seed": 22038
+          },
+          {
+            "seed": 22039
+          },
+          {
+            "seed": 22040
+          },
+          {
+            "seed": 22041
+          },
+          {
+            "seed": 22042
+          },
+          {
+            "seed": 22043
+          },
+          {
+            "seed": 22044
+          },
+          {
+            "seed": 22045
+          },
+          {
+            "seed": 22046
+          },
+          {
+            "seed": 22047
+          },
+          {
+            "seed": 22048
+          },
+          {
+            "seed": 22049
+          },
+          {
+            "seed": 22050
+          },
+          {
+            "seed": 22051
+          },
+          {
+            "seed": 22052
+          },
+          {
+            "seed": 22053
+          },
+          {
+            "seed": 22054
+          },
+          {
+            "seed": 22055
+          },
+          {
+            "seed": 22056
+          },
+          {
+            "seed": 22057
+          },
+          {
+            "seed": 22058
+          },
+          {
+            "seed": 22059
+          },
+          {
+            "seed": 22060
+          }
+        ]
+      }
+    },
+    {
+      "id": "9-9",
+      "parties": {
+        "main": [
+          {
+            "id": "char_kengo_01",
+            "name": "本多忠勝",
+            "image": "",
+            "level": 75,
+            "element": "earth",
+            "stats": {
+              "hp": 39017.69553384022,
+              "atk": 10348.582179543686,
+              "def": 4810.251606768044,
+              "luk": 27.136735275031658,
+              "sp": 0
+            },
+            "skills": [],
+            "passives": [
+              {
+                "id": "P13_earth",
+                "type": "P13",
+                "name": "P13",
+                "stat": "atk",
+                "percent": 31.89825864719434,
+                "level": 6,
+                "target": "self",
+                "targetElement": "earth"
+              }
+            ]
+          },
+          {
+            "id": "char_takuro_01",
+            "name": "雑賀孫市",
+            "image": "",
+            "level": 75,
+            "element": "wind",
+            "stats": {
+              "hp": 24228.695533840226,
+              "atk": 9694.944679543689,
+              "def": 3030.9391067680444,
+              "luk": 27.136735275031658,
+              "sp": 0
+            },
+            "skills": [
+              {
+                "id": "SKD008",
+                "name": "標準単体攻撃・水",
+                "image": "",
+                "rarity": "R",
+                "element": "water",
+                "spCost": 50,
+                "condition": {
+                  "type": "always"
+                },
+                "target": "first",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 180.53
+                  }
+                ],
+                "description": "正式表の検証入力"
+              }
+            ],
+            "passives": [
+              {
+                "id": "P06_wind",
+                "type": "P06",
+                "name": "P06",
+                "stat": "atk",
+                "percent": 10.632752882398114,
+                "level": 6,
+                "target": "self",
+                "targetElement": "wind"
+              }
+            ]
+          },
+          {
+            "id": "char_reiji_01",
+            "name": "織田信長",
+            "image": "",
+            "level": 75,
+            "element": "fire",
+            "stats": {
+              "hp": 38345.69553384022,
+              "atk": 9814.569679543689,
+              "def": 4707.614106768045,
+              "luk": 27.136735275031658,
+              "sp": 0
+            },
+            "skills": [
+              {
+                "id": "SKD032",
+                "name": "影縫い",
+                "image": "",
+                "rarity": "R",
+                "element": "water",
+                "spCost": 65,
+                "condition": {
+                  "type": "always"
+                },
+                "target": "first",
+                "effects": [
+                  {
+                    "type": "stun",
+                    "power": 0,
+                    "chance": 0.5013000000000001,
+                    "duration": 1
+                  }
+                ],
+                "description": "正式表の検証入力"
+              }
+            ],
+            "passives": [
+              {
+                "id": "P01_fire",
+                "type": "P01",
+                "name": "P01",
+                "stat": "atk",
+                "percent": 11.341603074557987,
+                "level": 6,
+                "target": "party",
+                "targetElement": "fire"
+              }
+            ]
+          },
+          {
+            "id": "char_koharu_01",
+            "name": "上杉謙信",
+            "image": "",
+            "level": 75,
+            "element": "water",
+            "stats": {
+              "hp": 32969.695533840226,
+              "atk": 12103.194679543689,
+              "def": 4252.439106768045,
+              "luk": 27.136735275031658,
+              "sp": 0
+            },
+            "skills": [
+              {
+                "id": "SKD055",
+                "name": "解縛",
+                "image": "",
+                "rarity": "R",
+                "element": "light",
+                "spCost": 47,
+                "condition": {
+                  "type": "always"
+                },
+                "target": "first_ally",
+                "effects": [
+                  {
+                    "type": "cleanse",
+                    "power": 1,
+                    "cleanseCategory": "stun"
+                  }
+                ],
+                "description": "正式表の検証入力"
+              }
+            ],
+            "passives": [
+              {
+                "id": "P06_water",
+                "type": "P06",
+                "name": "P06",
+                "stat": "atk",
+                "percent": 14.177003843197484,
+                "level": 6,
+                "target": "self",
+                "targetElement": "water"
+              }
+            ]
+          },
+          {
+            "id": "char_ageha_01",
+            "name": "豊臣秀吉",
+            "image": "",
+            "level": 75,
+            "element": "light",
+            "stats": {
+              "hp": 38429.69553384023,
+              "atk": 10783.869679543688,
+              "def": 4279.214106768045,
+              "luk": 27.136735275031658,
+              "sp": 0
+            },
+            "skills": [
+              {
+                "id": "SKD040",
+                "name": "治癒の祈り",
+                "image": "",
+                "rarity": "SR",
+                "element": "water",
+                "spCost": 90,
+                "condition": {
+                  "type": "always"
+                },
+                "target": "lowest_ally",
+                "effects": [
+                  {
+                    "type": "heal",
+                    "power": 131.74,
+                    "healingFormula": "caster_atk_percent"
+                  }
+                ],
+                "description": "正式表の検証入力"
+              }
+            ],
+            "passives": [
+              {
+                "id": "P10_light",
+                "type": "P10",
+                "name": "P10",
+                "stat": "atk",
+                "percent": 28.35400768639497,
+                "level": 6,
+                "target": "self",
+                "targetElement": "light"
+              }
+            ]
+          }
+        ]
+      },
+      "runs": {
+        "main": [
+          {
+            "seed": 25001
+          },
+          {
+            "seed": 25002
+          },
+          {
+            "seed": 25003
+          },
+          {
+            "seed": 25004
+          },
+          {
+            "seed": 25005
+          },
+          {
+            "seed": 25006
+          },
+          {
+            "seed": 25007
+          },
+          {
+            "seed": 25008
+          },
+          {
+            "seed": 25009
+          },
+          {
+            "seed": 25010
+          },
+          {
+            "seed": 25011
+          },
+          {
+            "seed": 25012
+          },
+          {
+            "seed": 25013
+          },
+          {
+            "seed": 25014
+          },
+          {
+            "seed": 25015
+          },
+          {
+            "seed": 25016
+          },
+          {
+            "seed": 25017
+          },
+          {
+            "seed": 25018
+          },
+          {
+            "seed": 25019
+          },
+          {
+            "seed": 25020
+          },
+          {
+            "seed": 25021
+          },
+          {
+            "seed": 25022
+          },
+          {
+            "seed": 25023
+          },
+          {
+            "seed": 25024
+          },
+          {
+            "seed": 25025
+          },
+          {
+            "seed": 25026
+          },
+          {
+            "seed": 25027
+          },
+          {
+            "seed": 25028
+          },
+          {
+            "seed": 25029
+          },
+          {
+            "seed": 25030
+          },
+          {
+            "seed": 25031
+          },
+          {
+            "seed": 25032
+          },
+          {
+            "seed": 25033
+          },
+          {
+            "seed": 25034
+          },
+          {
+            "seed": 25035
+          },
+          {
+            "seed": 25036
+          },
+          {
+            "seed": 25037
+          },
+          {
+            "seed": 25038
+          },
+          {
+            "seed": 25039
+          },
+          {
+            "seed": 25040
+          },
+          {
+            "seed": 25041
+          },
+          {
+            "seed": 25042
+          },
+          {
+            "seed": 25043
+          },
+          {
+            "seed": 25044
+          },
+          {
+            "seed": 25045
+          },
+          {
+            "seed": 25046
+          },
+          {
+            "seed": 25047
+          },
+          {
+            "seed": 25048
+          },
+          {
+            "seed": 25049
+          },
+          {
+            "seed": 25050
+          },
+          {
+            "seed": 25051
+          },
+          {
+            "seed": 25052
+          },
+          {
+            "seed": 25053
+          },
+          {
+            "seed": 25054
+          },
+          {
+            "seed": 25055
+          },
+          {
+            "seed": 25056
+          },
+          {
+            "seed": 25057
+          },
+          {
+            "seed": 25058
+          },
+          {
+            "seed": 25059
+          },
+          {
+            "seed": 25060
+          }
+        ]
+      }
+    }
+  ]
+}

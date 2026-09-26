@@ -1,0 +1,19 @@
+{
+  "candidate": "GAME04 G3 isolated acceptance preflight after rooms projection",
+  "observedAt": "2026-09-25T10:04:57Z",
+  "projectRef": "znakrkaazliexzwihxge",
+  "qaUserId": "912cb2cb-4e2d-48ab-adf3-c17818e9021a",
+  "getState": {
+    "attemptsAfterRoomsRepair": 1,
+    "status": 400,
+    "result": "BLOCKED",
+    "error": "Could not find the function public.game04_territory_context(p_user_id) in the schema cache"
+  },
+  "formalGachaStatus": {
+    "status": "NOT_RUN",
+    "reason": "get_state dependency failed"
+  },
+  "requiredRepair": "Complete and verify all responseFor read dependencies in the isolated runtime, including game04_territory_context, before another Edge retry.",
+  "acceptance": false,
+  "containsCredentials": false
+}

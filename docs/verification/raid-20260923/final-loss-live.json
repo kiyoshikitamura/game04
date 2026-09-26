@@ -1,0 +1,108 @@
+{
+  "apiVersion": 16,
+  "roomId": "52c68c33-b015-490a-9f80-2861a529a039",
+  "scope": "Fresh anonymous QA, unmodified initial N party/resources. Actual server defeat against formal ERB01; no DB edits, enemy edits, resources or stats boost.",
+  "startedAt": "2026-09-23T15:57:04.946Z",
+  "pass": true,
+  "checks": [
+    {
+      "case": "actual formal defeat, zero victory rewards, zero qualification",
+      "pass": true,
+      "outcome": "lose",
+      "damage": 929,
+      "wins": 0,
+      "attempts": 1,
+      "energyBefore": 50,
+      "energyAfter": 30,
+      "hpBefore": 39000,
+      "hpAfter": 38071
+    },
+    {
+      "case": "same-request loss replay: no extra energy/attempt/cash/rewards",
+      "pass": true
+    },
+    {
+      "case": "reload preserves loss and zero qualification",
+      "pass": true
+    }
+  ],
+  "initial": {
+    "energy": 50,
+    "characters": [
+      {
+        "id": "char_alice_01",
+        "exp": 0,
+        "level": 1,
+        "awakening": 0,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "id": "char_gou_01",
+        "exp": 0,
+        "level": 1,
+        "awakening": 0,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "id": "char_kageyama_01",
+        "exp": 0,
+        "level": 1,
+        "awakening": 0,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "id": "char_kenji_01",
+        "exp": 0,
+        "level": 1,
+        "awakening": 0,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "id": "char_long_01",
+        "exp": 0,
+        "level": 1,
+        "awakening": 0,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      }
+    ],
+    "deck": [
+      {
+        "skillIds": [
+          "SKILL_001"
+        ],
+        "equipment": {},
+        "characterId": "char_alice_01"
+      },
+      {
+        "skillIds": [
+          "SKILL_002"
+        ],
+        "equipment": {},
+        "characterId": "char_gou_01"
+      },
+      {
+        "skillIds": [
+          "SKILL_003"
+        ],
+        "equipment": {},
+        "characterId": "char_kageyama_01"
+      },
+      {
+        "skillIds": [
+          "SKILL_004"
+        ],
+        "equipment": {},
+        "characterId": "char_kenji_01"
+      },
+      {
+        "skillIds": [
+          "SKILL_005"
+        ],
+        "equipment": {},
+        "characterId": "char_long_01"
+      }
+    ],
+    "cash": 2600
+  },
+  "finishedAt": "2026-09-23T15:57:34.459Z"
+}

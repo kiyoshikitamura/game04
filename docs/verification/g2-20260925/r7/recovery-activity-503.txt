@@ -1,0 +1,84 @@
+- main:
+  - heading "G2 限定復帰検証" [level=1]
+  - paragraph: read障害は実本体＋SDKに対するQA応答注入。認証・保存・戦闘POSTは通常通信。画像戦闘は保存・報酬なしのfixtureで、実戦DB受入とは別です。
+  - group "読み取り障害":
+    - generic: 読み取り障害
+    - text: 対象
+    - combobox "対象":
+      - option "お知らせ"
+      - option "活動" [selected]
+      - option "補助プロフィール"
+    - text: 障害
+    - combobox "障害":
+      - option "通常"
+      - option "503" [selected]
+      - option "無応答（本体12秒中断）"
+    - button "実本体を表示" [disabled]
+  - group "画像HTTP障害（非VIP fixture）":
+    - generic: 画像HTTP障害（非VIP fixture）
+    - button "画像503"
+    - button "画像15秒無応答"
+    - button "画像障害を解除"
+    - button "画像503を1回だけ"
+    - button "画像無応答を1回だけ"
+    - button "fixture戦闘を表示"
+    - status "画像失敗終了回数": 終了回数：0
+  - generic "障害注入記録": 2026-09-25T06:22:52.409Z activity error
+  - region "ゲーム画面":
+    - img "くノ一"
+    - generic: Lv.1
+    - strong: G2R6表示QA
+    - generic "将来の同盟表示枠": ◇ 同盟 —
+    - button "アカウント連携": 未認証
+    - button "メニュー"
+    - generic: 銭 13,100
+    - generic: 輝石 200
+    - generic: 行動力 61/100
+    - main:
+      - region "お気に入り武将":
+        - iframe
+        - img "くノ一"
+      - navigation "本陣の操作":
+        - button "切替"
+        - button "任務 未受取の任務報酬":
+          - generic: 任務
+          - generic "未受取の任務報酬"
+        - button "商店":
+          - generic: 商店
+        - button "同盟・未解放" [disabled]:
+          - generic: 同盟
+          - generic: 未解放
+      - button "出陣の続き":
+        - strong: 出陣の続き
+      - button "領土侵攻":
+        - strong: 領土侵攻
+      - region "交流":
+        - button "活動"
+        - button "全体"
+        - button "DM"
+        - alert:
+          - paragraph: 活動を取得できませんでした。
+          - button "再読み込み"
+        - button "RQAWGst"
+        - button "共闘 Lv.1の援軍を求めています。 共闘を確認": 共闘 Lv.1の援軍を求めています。 ›
+        - time: 1日前
+        - button "RQAWGstにDM"
+        - button "RQAPolA"
+        - button "共闘 Lv.12の援軍を求めています。 共闘を確認": 共闘 Lv.12の援軍を求めています。 ›
+        - time: 1日前
+        - button "RQAPolAにDM"
+        - button "RQAWGst"
+        - button "共闘 Lv.1の援軍を求めています。 共闘を確認": 共闘 Lv.1の援軍を求めています。 ›
+        - time: 1日前
+        - button "RQAWGstにDM"
+        - button "交流を開く ›"
+      - button "商店 ›":
+        - strong: 商店
+        - generic: ›
+    - navigation "メインナビゲーション":
+      - button "本陣"
+      - button "出陣"
+      - button "武将"
+      - button "共闘"
+      - button "召喚"
+- alert

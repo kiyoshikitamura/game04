@@ -1,0 +1,11 @@
+--- docs/verification/g2-20260925/r7/shared-api/live-v29-original.ts.txt	2026-09-25 15:19:37.886547881 +0900
++++ docs/verification/g2-20260925/r7/shared-api/live-v29-rooms.ts.txt	2026-09-25 15:19:38.306553123 +0900
+@@ -1249,7 +1249,7 @@
+ async function Nu(e) { if (!/^[0-9a-f-]{36}$/i.test(e))
+     throw new ee("\u30EC\u30A4\u30C9\u304C\u4E0D\u6B63\u3067\u3059\u3002"); const [u] = await me(`game04_raid_rooms?id=eq.${e}&select=state,version`); if (!u)
+     throw new ee("\u30EC\u30A4\u30C9\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002", 404); return { ...u.state, version: u.version }; }
+-async function J0(e) { const u = await Ae("game04_raid_rooms_for_user", { p_user_id: e }), t = [...new Set(u.map(n => n.state.ownerId))], [a, s] = t.length ? await Promise.all([me(`users?id=in.(${t.join(",")})&select=id,username`), me(`game04_player_state?user_id=in.(${t.join(",")})&select=user_id,state`)]) : [[], []]; return u.map(n => { const i = a.find(o => o.id === n.state.ownerId), p = s.find(o => o.user_id === n.state.ownerId), l = De.find(o => o.id === p?.state?.deck?.[0]?.characterId); return { ...n.state, version: n.version, participants: n.state.participants.map(o => o.userId === n.state.ownerId ? { ...o, name: i?.username ?? o.name, portraitUrl: l ? iu(l, "portrait") : void 0 } : o), status: n.state.status === "active" && Date.parse(n.state.expiresAt) <= Date.now() ? "expired" : n.state.status }; }); }
++async function J0(e) { const u = await Ae("game04_raid_rooms_with_owners", { p_user_id: e }); return u.map(n => { const l = De.find(o => o.id === n.ownerLeaderCharacterId); return { ...n.state, version: n.version, participants: n.state.participants.map(o => o.userId === n.state.ownerId ? { ...o, name: n.ownerName ?? o.name, portraitUrl: l ? iu(l, "portrait") : void 0 } : o), status: n.state.status === "active" && Date.parse(n.state.expiresAt) <= Date.now() ? "expired" : n.state.status }; }); }
+ async function Tu(e) { return Ae("game04_territory_context", { p_user_id: e }); }
+ async function xu() { const [e] = await me("game04_redesign_master?key=eq.acquisition_conversion&select=data"); if (!e?.data)
+     throw new ee("\u7372\u5F97\u8A2D\u5B9A\u3092\u78BA\u8A8D\u3067\u304D\u307E\u305B\u3093\u3002", 503); return e.data; }
