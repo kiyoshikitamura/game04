@@ -72,8 +72,8 @@ function formalStageHint(stage: QuestStage) {
 function selectRepresentativeBoss(wave: QuestStage['waves'][number]) {
   return wave.find(enemy => enemy.boss) ?? wave.reduce((best, enemy) => enemy.level > best.level || (enemy.level === best.level && enemy.stats.hp > best.stats.hp) ? enemy : best, wave[0]);
 }
-export default function QuestView({ state, party, vipActive, onStart, onOpenDeck, onOpenRaid, onIgnoreEncounter, initialStageId, initialPreparation = false, onBattlePlayingChange, onEarlyAction }: {
-  onEarlyAction?:(action:string,payload:Record<string,unknown>)=>Promise<unknown>; state: RedesignState; party: BattleUnit[]; vipActive: boolean; onStart: (stageId: string) => Promise<QuestSettlement>;
+export default function QuestView({ state, party, vipActive, onStart, onOpenDeck, onOpenRaid, onIgnoreEncounter, initialStageId, initialPreparation = false, onBattlePlayingChange, onEarlyAction, navigationBlocked = false }: {
+  navigationBlocked?:boolean; onEarlyAction?:(action:string,payload:Record<string,unknown>)=>Promise<unknown>; state: RedesignState; party: BattleUnit[]; vipActive: boolean; onStart: (stageId: string) => Promise<QuestSettlement>;
   onOpenDeck: (stageId?: string) => void; onOpenRaid: (raidId: string) => void; onIgnoreEncounter?: (raidId: string) => Promise<void>; initialStageId?: string; initialPreparation?: boolean; onBattlePlayingChange?: (playing: boolean) => void;
 }) {
   const firstStage = initialStageId ? getQuestStage(initialStageId) : undefined;
@@ -84,7 +84,7 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
   const [settlement, setSettlement] = useState<QuestSettlement | null>(null);
   const [playing, setPlaying] = useState(false);
   const [queuedStage,setQueuedStage]=useState<QuestStage|null>(null);
-  useEffect(()=>{if(queuedStage&&!nextEarlyGuide(state,{battlePlaying:false,resultOpen:false})){setAreaId(queuedStage.areaId);setSelected(queuedStage);setModal('info');setQueuedStage(null);}},[queuedStage,state]);
+  useEffect(()=>{if(queuedStage&&!navigationBlocked&&!nextEarlyGuide(state,{battlePlaying:false,resultOpen:false})){setAreaId(queuedStage.areaId);setSelected(queuedStage);setModal('info');setQueuedStage(null);}},[queuedStage,state,navigationBlocked]);
   const { playBgm } = useAudio();
   useEffect(() => { if (!playing) playBgm('QUEST'); }, [playing, playBgm]);
   useEffect(() => { onBattlePlayingChange?.(playing); return () => onBattlePlayingChange?.(false); }, [playing, onBattlePlayingChange]);
