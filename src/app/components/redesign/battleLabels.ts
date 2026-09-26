@@ -16,6 +16,6 @@ export const LEGACY_SKILL_MAPPING_NOTICE = 'このスキルは現在の戦闘で
 // Presentation only: keep master/snapshot values and unresolved skill eligibility intact.
 export function displaySkillDescription(description: string) {
   if (description === '【発動保留・未FIX】継続ダメージ／SP補充の詳細ルール待ち') return LEGACY_SKILL_MAPPING_NOTICE;
-  return description.replace(/（個別倍率・消費SP・回復式は開発仮設定）$/, '');
+  return description.replace(/（個別倍率・消費SP・回復式は開発仮設定）$/, '').replace(/(\d+)\.0+(?=%)/g, '$1').replace(/(\d+\.\d*?[1-9])0+(?=%)/g, '$1');
 }
 export function skillDescription(skill: SkillMaster, latest = true) { return latest && skill.unsupportedReason ? LEGACY_SKILL_MAPPING_NOTICE : displaySkillDescription(skill.description); }

@@ -7,7 +7,8 @@ import { loadBillingReadiness, peekBillingReadiness } from "@/utils/billing_conf
 import "./ShopTab.css";
 import PageTitleBanner from "./redesign/PageTitleBanner";
 import SubTabNav from "./ui/SubTabNav";
-import OutlawCard from "./ui/OutlawCard";
+import ProductRow from "./ui/ProductRow";
+import CanonicalItemIcon from "./ui/CanonicalItemIcon";
 import OutlawButton from "./ui/OutlawButton";
 import BillingHistory from "./BillingHistory";
 import PaidAssetExpiry from "./PaidAssetExpiry";
@@ -141,22 +142,7 @@ export default function ShopTab({ exchange, hideTitle = false }: { exchange?: Sh
     const price = product.priceJpy !== undefined
       ? `¥${product.priceJpy.toLocaleString("ja-JP")}`
       : `${product.priceDiamond?.toLocaleString("ja-JP")} 輝石`;
-    return <OutlawCard key={product.id} glowLine="left" className={`shop-product-card ${compact ? "shop-product-row" : "shop-product-pack"}`}>
-      <div className="shop-product-info">
-        <div className="shop-card-heading">
-          <div className="shop-card-title">{shopText(product.title)}
-            {product.category === "DIAMOND" && <span className="shop-dia-breakdown">（有償{product.priceJpy?.toLocaleString("ja-JP")}個＋無償{((product.items[0]?.quantity ?? 0)-(product.priceJpy ?? 0)).toLocaleString("ja-JP")}個）</span>}
-          </div>
-          {remaining !== null && <span className="shop-limit-badge">{soldOut ? "購入済み" : `残り${remaining} / ${product.purchaseLimit}回`}</span>}
-        </div>
-        {!compact && <Bundle product={product} />}
-      </div>
-      <OutlawButton variant="primary" className="shop-buy-button"
-        aria-label={`${shopText(product.title)}を${price}で購入`}
-        disabled={disabled || soldOut || disabledProductIds.includes(product.id)} onClick={() => confirmPurchase(product)}>
-        {busy ? <span className="shop-btn-spinner" aria-label="処理中" /> : soldOut ? (vipActive ? "有効中" : "購入済み") : disabledProductIds.includes(product.id) ? "準備中" : price}
-      </OutlawButton>
-    </OutlawCard>;
+    return <ProductRow key={product.id} icon={<CanonicalItemIcon itemId={product.items[0]?.itemId} fallback={null}/>} name={shopText(product.title)} description={<>{!compact&&<Bundle product={product}/>} {product.category==='DIAMOND'&&<span>有償{product.priceJpy?.toLocaleString('ja-JP')}個＋無償{((product.items[0]?.quantity??0)-(product.priceJpy??0)).toLocaleString('ja-JP')}個</span>}</>} condition={remaining!==null?(soldOut?'購入済み':'残り'+remaining+' / '+product.purchaseLimit+'回'):undefined} action={<OutlawButton variant="primary" aria-label={shopText(product.title)+'を'+price+'で購入'} disabled={disabled||soldOut||disabledProductIds.includes(product.id)} onClick={()=>confirmPurchase(product)}>{soldOut?(vipActive?'有効中':'購入済み'):disabledProductIds.includes(product.id)?'準備中':price}</OutlawButton>}/>;
   };
 
   return <div className="view-container shop-tab-container">
@@ -184,7 +170,7 @@ export default function ShopTab({ exchange, hideTitle = false }: { exchange?: Sh
           <div className="shop-section-title">輝石</div>
           {diamonds.map(productCard)}
         </section>
-      </> : <section className="shop-section" aria-label="輝石商店">{normal.map(productCard)}</section>}
+      </> : <section className="shop-section" aria-label="輝石商店">{normal.map(productCard)}{normal.length===0&&<div role="status"><p>現在、輝石商店の商品は登録されていません。</p>{exchange&&<OutlawButton onClick={()=>setShopSubTab("EXCHANGE")}>交換所を見る</OutlawButton>}</div>}</section>}
     </div>
   </div>;
 }

@@ -57,7 +57,7 @@
  .rd-shell:has(.rd-raid) .rd-resources{font-size:18px;min-height:35px;padding-block:7px}
  .rd-shell:has(.rd-raid) .rd-menu-button{font-size:17px}
 }
-body.game04-theme .rd-shell:has(.rd-raid) :is(.rd-header,.rd-footer,.rd-raid-heading,.rd-raid-tabs,.rd-raid-history,.rd-raid-back) :is(strong,span,b,button,small){font-family:var(--font-display,'Noto Serif JP',serif)!important}
-body.game04-theme .rd-shell:has(.rd-raid) :is(.rd-raid-history,.rd-raid-back){font-family:var(--font-display,'Noto Serif JP',serif)!important}
+body.game04-theme .rd-shell:has(.rd-raid) :is(.rd-header,.rd-footer,.rd-raid-heading,.rd-raid-tabs,.rd-raid-history,.rd-raid-back) :is(strong,span,b,button,small){font-family:var(--g4-sans)!important}
+body.game04-theme .rd-shell:has(.rd-raid) :is(.rd-raid-history,.rd-raid-back){font-family:var(--g4-sans)!important}
 body.game04-theme .rd-shell:has(.rd-raid) .rd-auth-link{min-height:0;min-width:0;font-size:11px;line-height:1.4}
 body.game04-theme .rd-shell:has(.rd-raid){padding-bottom:calc(70px + env(safe-area-inset-bottom,0px));scroll-padding-bottom:calc(70px + env(safe-area-inset-bottom,0px))}

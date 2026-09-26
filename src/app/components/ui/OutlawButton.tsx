@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import "./OutlawButton.css";
+import ActionButton from "./ActionButton";
 import { useGame } from "../../context/GameContext";
 
 type ButtonVariant = "primary" | "secondary" | "ghost" | "danger" | "neon";
@@ -56,18 +57,5 @@ export default function OutlawButton({
     }
   };
 
-  return (
-    <button
-      className={`outlaw-button semantic-cta semantic-cta--${variant === "danger" ? "danger" : variant === "primary" ? "primary" : "secondary"} variant-${variant} ${fullWidth ? "full-width" : ""} active-scale-effect ${className}`}
-      onClick={handleClick}
-      {...restProps}
-      disabled={disabled || busy}
-      aria-busy={busy}
-    >
-      <span className="outlaw-button-inner">
-        {busy && <span className="spinner outlaw-button-spinner" aria-hidden="true" />}
-        {busy ? (loadingLabel ?? "処理中…") : children}
-      </span>
-    </button>
-  );
+  return <ActionButton {...restProps} className={`outlaw-button ${fullWidth?'full-width':''} ${className}`} variant={variant==='primary'?'primary':variant==='danger'?'danger':'secondary'} onClick={handleClick} disabled={disabled} busy={busy} busyLabel={loadingLabel??'処理中…'}>{children}</ActionButton>;
 }

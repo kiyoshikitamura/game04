@@ -13,6 +13,7 @@ export default function PassiveDisplay({passive,rarity}:{passive?:Passive;rarity
   const specific:Record<string,string>={P03:'生存している味方の属性数に応じて変動',P04:'自身以外の生存味方が2属性以上',P08:'攻撃対象が能力低下中',P09:'攻撃対象が継続ダメージ中',P14:`自身のHPが${BALANCE_V2_CONFIG.lowHpThreshold*100}%以下`,P15:`自身のHPが${BALANCE_V2_CONFIG.highHpThreshold*100}%以上`,P16:'自身が能動的な攻撃力強化を保持中'};
   const condition='所持者が生存中'+(specific[passive.type??'']?'・'+specific[passive.type??'']:'');
   return <section className="g4g-passive"><h3>パッシブ <small>Lv.{passive.level??0}</small></h3>
+    {(passive.level??0)===0&&<p className="rd-muted">Lv.0でも有効です。</p>}
     <h4>{passive.name.replaceAll('ATK','攻撃力').replaceAll('DEF','防御力')}</h4>
     <dl><InfoRow label="種別" value={passive.target==='party'?'味方支援':'自己強化'}/>
       <InfoRow label="発動条件" value={condition}/>

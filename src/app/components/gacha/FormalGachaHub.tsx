@@ -90,8 +90,8 @@ export default function FormalGachaHub({
         <article className="formal-gacha__card is-normal">
           <GachaPromotion kind="normal"/>
           <header><button className="formal-gacha__link" onClick={() => setRatesOpen(true)}>提供割合・排出一覧</button></header>
-          <p>姫武将・戦技・武具が排出されます</p>
-          <div className="formal-gacha__rate-summary"><span>SSR 1%</span><span>SR 10%</span><span>R 40%</span><span>N 49%</span></div>
+
+
           <div className="formal-gacha__balance"><span>所持</span><strong>{balances.coin.toLocaleString("ja-JP")}銭</strong></div>
           {dailyFreeAvailable ? <button className="formal-gacha__primary" disabled={pending} onClick={() => choose({ surface: "NORMAL", count: 10, payment: "FREE" })}><b>本日10連無料</b><small>毎日0時更新</small></button> : <p className="formal-gacha__used">本日の無料10連は利用済みです</p>}
           <div className="formal-gacha__actions">
@@ -107,7 +107,7 @@ export default function FormalGachaHub({
           <article className={`formal-gacha__card is-special is-${category.toLowerCase()}`}>
             <GachaPromotion kind={category.toLowerCase() as 'character'|'skill'|'equipment'}/>
             <header><button className="formal-gacha__link" onClick={() => setRatesOpen(true)}>提供割合・排出一覧</button></header>
-            <p>{meta.rates}</p>
+
             <div className="formal-gacha__ledger">
               <span>輝石 <b>{balances.diamond.toLocaleString("ja-JP")}</b></span>
               <span>特選券 <b>{balances.tickets[category].toLocaleString("ja-JP")}</b></span>
@@ -131,7 +131,7 @@ export default function FormalGachaHub({
 
       {ratesOpen && <GachaModalPortal onEscape={() => setRatesOpen(false)}><CanonicalDialog title={surface === "NORMAL" ? "通常登用 提供割合" : `${meta.label}特選 提供割合`} onClose={() => setRatesOpen(false)} actions={[{ label: "閉じる", semantic: "primary", onClick: () => setRatesOpen(false) }]}>
         <div className="formal-gacha__rates custom-scrollbar" tabIndex={0} role="region" aria-label="提供割合と排出一覧">
-          <div className="formal-gacha__rate-totals">{groupedRates.map(([rarity, value]) => <span key={rarity}><b>{rarity}</b>{value.toFixed(2)}%</span>)}</div>
+          {surface === "NORMAL" && <p>姫武将・戦技・武具が排出されます。</p>}<div className="formal-gacha__rate-totals">{groupedRates.map(([rarity, value]) => <span key={rarity}><b>{rarity}</b>{value.toFixed(2)}%</span>)}</div>
           {rates.map(item => <div className="formal-gacha__rate-row" key={`${item.category}:${item.id}`}><span><b>{item.rarity}</b>{item.name}</span><strong>{item.probability.toFixed(4)}%</strong></div>)}
         </div>
       </CanonicalDialog></GachaModalPortal>}

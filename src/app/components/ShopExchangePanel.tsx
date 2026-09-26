@@ -4,6 +4,8 @@ import { useRef, useState } from "react";
 import type { RedesignState } from "@/domain/redesign/types";
 import { CHARACTER_MASTERS } from "@/domain/redesign/masters";
 import { SHOP_EXCHANGE_OPTIONS, type ShopExchangeId } from "@/domain/redesign/shop";
+import ProductRow from "./ui/ProductRow";
+import CanonicalItemIcon from "./ui/CanonicalItemIcon";
 import CanonicalDialog from "./ui/CanonicalDialog";
 import OutlawButton from "./ui/OutlawButton";
 
@@ -47,7 +49,7 @@ export default function ShopExchangePanel({ state, onExchange, onUseEnergyDrink 
     } catch (cause) { setError(cause instanceof Error ? cause.message : "活力丸を使用できませんでした。"); }
     finally { submitting.current = false; setBusy(false); }
   };
-  const card = (id: ShopExchangeId) => { const current = SHOP_EXCHANGE_OPTIONS.find(entry => entry.id === id)!; return <div key={id} className="shop-exchange-card"><div><strong>{labels[id]}</strong><p>{id === "soul_generic" ? "同一レアリティの武将魂2個につき汎用魂1個" : `${current.cost.toLocaleString("ja-JP")}輝石`}</p></div><OutlawButton variant="primary" disabled={busy} onClick={() => { setSelected(id); setQuantity(1); setError(""); }}>{id === "soul_generic" ? "交換する" : "交換"}</OutlawButton></div>; };
+  const card = (id: ShopExchangeId) => { const current = SHOP_EXCHANGE_OPTIONS.find(entry => entry.id === id)!; return <ProductRow key={id} icon={<CanonicalItemIcon itemId={id.startsWith('cash_')?'CASH':id==='energy_drink'?'ENERGY_DRINK':id==='raid_unlock'?'RAID_UNLOCK':null} fallback={null}/>} name={labels[id]} condition={id === 'soul_generic' ? '固有魂2個 → 汎用魂1個（10個以上・2個単位）' : '必要 '+current.cost.toLocaleString('ja-JP')+'輝石'} action={<OutlawButton variant="primary" disabled={busy} onClick={() => { setSelected(id); setQuantity(1); setError(''); }}>交換</OutlawButton>}/>; };
   return <section className="shop-section" aria-label="交換所">
     <div className="shop-section-title">交換所</div><p className="shop-card-desc">無償輝石から使用します。</p>
     <div className="shop-exchange-balance">所持：輝石 {state.diamonds.toLocaleString("ja-JP")} ／ 銭 {state.cash.toLocaleString("ja-JP")}</div>

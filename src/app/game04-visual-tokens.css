@@ -52,7 +52,7 @@ body.game04-theme .g4g-grid button{font-size:14px}
 body.game04-theme .g4g-party button{min-width:0;font-size:14px}
 body.game04-theme .g4g-filters label{font-size:14px;flex-wrap:wrap;min-width:0}
 body.game04-theme .g4g-tabs button{min-width:0;padding:8px 3px}
-body.game04-theme .g4g-grid .g4-element-badge,body.game04-theme .g4-element-badge{width:58px!important;height:24px!important;object-fit:contain!important}
+body.game04-theme .g4g-grid .g4-element-badge,body.game04-theme .g4-element-badge{width:var(--g4-element-width,58px)!important;height:var(--g4-element-height,24px)!important;object-fit:contain!important}
 body.game04-theme .g4-growth-item-icon{width:48px;height:48px;object-fit:contain}
 body.game04-theme .rq-area :is(strong,span),body.game04-theme .rq-area-head h2{background:var(--g4-panel);padding:3px 6px;color:var(--g4-text)}
 body.game04-theme .rq-area strong{font-size:20px}

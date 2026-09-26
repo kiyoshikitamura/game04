@@ -7,7 +7,7 @@ export function AssetIcon({ src, name, className = '' }: { src: string; name: st
 }
 
 export function AssetChoice({ image, name, metadata, description, status, disabled, onSelect }: {
-  image: string; name: string; metadata: string; description: ReactNode; status?: string;
+  image: string; name: string; metadata: ReactNode; description: ReactNode; status?: string;
   disabled?: boolean; onSelect: () => void;
 }) {
   return <button type="button" className="g4-asset-choice" disabled={disabled} onClick={onSelect}>
