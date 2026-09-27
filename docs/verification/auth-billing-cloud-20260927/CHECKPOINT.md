@@ -1,79 +1,58 @@
-# GAME04 認証・決済クラウド作業 checkpoint 2026-09-27
+# GAME04 authentication / billing cloud checkpoint — 2026-09-27
+Status: implementation and isolated DB acceptance only; real Google/Stripe and production acceptance NOT complete.
 
-状態: 未完了。実装・純粋テスト・開発DB受入まで。Google/Stripe実接続と本番の合格ではない。
+## Current authorities and ownership
+- PR37 fetched again: 811b92b7a631a017186c7472a62d3093beb25feb.
+- Dedicated branch: work/game04-auth-billing-cloud-20260927; PR41 targets PR37 branch, not main.
+- GAME03 latest source 0453fcda56c2f3546b91eb7a073c592988f9cf42 and production function definitions were read only. No GAME03 writes, user copying or setting changes.
+- Shared UI/battle/promotion/dialog/gacha files not modified. Coordination is recorded on PR37 comment 5852890343; no owner reply at last retrieval.
+- Initial pack UI/server still CASH10000 at PR37. DB now DIAMOND100 under user instruction. Catalog comparison deliberately refuses mismatched checkout; incorporate debug owner's product change before opening tests.
+- Special gacha 300/300/200 is a game-currency cost, separate from Stripe JPY prices. Formal cost migration/actual draw acceptance remains with common owner and needs latest saved evidence.
 
-## 追記 2026-09-27 クラウド接続後
-- Vercelブラウザーの既存ログインを利用できた。再ログイン不要。
-- sengoku-hime-ennbu.com の配信先は game04-production-receiver。Git未接続、環境変数一覧は0件。Ready deployment F21SNQXmXdce4wRJ2Y8WELUAkeJR、source bf1309128266f622d15fada810357761e32ccd67。既存受け皿のまま、本件で配信変更なし。
-- game04 common Preview専用branch環境変数は存在。新作業branchは未検証。共通Previewブラウザーで匿名新規開始→導入チュートリアル1/3まで確認。
-- Stripe管理画面はサインインが必要。鍵・Webhookを未取得/未変更。実接続成功とは扱わない。
-- 開発DBへ 33_billing_runtime.sql / 34_billing_catalog.sql を適用。GAME03の既存5 billing RPCを読取取得して再利用、GAME03更新なし。既存有償期限/プレゼント受取関数4個の定義hash不変を確認。
-- 運用状態は販売閉鎖のまま。公開制御解除なし。11販売商品を追加し初陣DIAMOND100・100円・他内容保持。UI/serverは共通担当取込待ちなので不一致はfail closed。
-- VIP: 検証済みGRANTED注文から初回無償100+24h間隔30回、720h期限。active/pending重複拒否、再通知冪等、due worker追加。定期実行の配線は未完了。
-- isolated-db-acceptance.sqlを開発DBで実行して9群PASS: 同一要求、商品競合/上限、live/金額拒否、100円BOX5lot、受取/状態保持/二重受取拒否、遅延重複、未払expire、VIP重複/初回、VIP30回/有償区分。全fixtureはsubtransaction rollback済み。実Stripe請求・Google成功・同時プロセス試験ではない。
-- auth binding routeにも開発URL固定が残っていたため環境別の承認済みDB検証へ統一。
-- API bundleは変更なし。開発v8、本番health v1。プロモ/UI/バトルは変更なし。
+## Migration status
+|Chain|State|Evidence / remaining work|
+|---|---|---|
+|Google start/callback/same-UID binding|Migrated with environment fix|Existing linkIdentity/callback retained; production bridge no longer hardcodes dev. Actual common Preview start displayed failure before Google. Provider/manual-linking and allowlist need authenticated Supabase dashboard inspection.|
+|Anonymous retention / existing login collision|Migrated; DB fixture tested|No merge/delete/legacy replace call. Same UID and single provider required. Actual Google/cancel/tab/session retention remains unverified.|
+|Authentication reward|Missing, now implemented in dev|Approved GAME03 contract confirmed from user continuity and live functions: first 300 free direct, already-bound300 BOX, one shared user PK ledger. Seven fixture checks pass.|
+|Payment start / JPY / Checkout / return|Existing migration retained|Stripe identified. Inline price_data from order snapshot; no fixed Price ID requirement. Requires verified binding, no automatic purchase after login. Real test service configuration pending.|
+|Order/notification/grant/history/limits|Missing DB runtime repaired in dev|GAME03 reserve/attach/expire/grant reused. Dedicated wrapper/event ledger. Nine DB fixture groups pass; real Stripe and simultaneous processes unverified.|
+|Paid/free/120d/BOX claim|Existing implementation preserved|Four live expiry/claim function hashes unchanged; pack test confirms five paid lots, exact wallet/items and retained state.|
+|VIP|Incomplete schedule repaired|480 JPY, no auto-renew; initial100 free +29 every24h; active and pending checkout blocked; due worker and dev minute scheduler added. Scheduled execution status checked separately.|
+|Production schema / API / deployment|Requires GAME04 production adaptation|Receiver is not the game build; only health API; no game/billing schema. Do not apply dev-only migrations unedited.|
 
-以下は着手時checkpoint。上記追記を最新として読む。
+## Cloud checks
+Pure Node tests PASS: independent-billing 8 groups; independent-webhook4; environment separation rejects16 invalid combinations.
+DB billing acceptance: tests/p02-p04/isolated-db-acceptance.sql, all fixture rows rolled back.
+DB authentication acceptance: tests/p02-p04/isolated-auth-acceptance.sql; result auth-db-evidence.json; all Auth and game fixture rows rolled back.
+These are synthetic DB identities/events, not real Google/Stripe. No simulated result is called production success.
+Authentication reward migration preflight found 0 formally bound GAME04 users and 0 legacy auth reward presents, so no existing player reward delivery occurred during installation.
+Build 9309278 was reported Error by Vercel before branch-specific public env was added; inspect build logs and verify the next deployment before browser acceptance.
 
-## 取得基準
-- PR37 HEAD: 811b92b7a631a017186c7472a62d3093beb25feb（着手・保存前再取得一致）
-- PR31 HEAD: 3ca2e73ccca1a816bef6d8aa3a3dbecca3494a79
-- PR32 HEAD: 3e03ca083d1176911fd42a220cc7a0c09393e15f
-- GAME03 default最新: 0453fcda56c2f3546b91eb7a073c592988f9cf42。コード取得のみ。データ・設定変更なし。
-- 開発DB: znakrkaazliexzwihxge、game04-redesign-api v8、verify_jwt=true。
-- 本番DB: soiksqgtmcnspfedmanr、game04-p06-health v1のみ。
-- PR37 botの最新Preview候補: https://game04-1g0e0exbq-kiyoshi-kitamura.vercel.app 。直接受入は未実施、配信SHA未検証。
-- 本番URL: https://sengoku-hime-ennbu.com 。接続受入未実施。
+## Live setting / deployment observations
+- Vercel browser already signed in; no GitHub/Google re-login needed for Vercel.
+- game04 common-preview branch had its own 6 Supabase/app/mock/QA env settings.
+- Added only five public settings to PR41 exact branch: dev URL znakrkaazliexzwihxge, public anon key, APP_ENV preview, mock false, QA true. Production/common scopes were not changed. Server service role and Stripe secrets NOT copied or assumed correct; generic older service key is not accepted as evidence of correct project.
+- Common Preview browser: anonymous start, introduction advanced, /auth/game04 shows current guest binding status. Clicking Google link shows start error without reaching Google. Return path needs verification.
+- Supabase Auth provider UI redirects to sign-in. Stripe dashboard also requires sign-in. Both need secure user login, no passwords in chat.
+- Actual domain sengoku-hime-ennbu.com is assigned to game04-production-receiver, Ready deployment F21SNQXmXdce4wRJ2Y8WELUAkeJR, source bf1309128266f622d15fada810357761e32ccd67. Git disconnected; environment-variable list empty. No change performed.
+- game04-gray.vercel.app belongs to the separate old game04 production deployment and is not the requested production target.
+- Development API game04-redesign-api v8, verify_jwt true, SHA256 0929c17b3de0d75a2454123d369a1b3f0bd96700a1cac6e4c4f31f900e92b239, untouched.
+- Production soiksqgtmcnspfedmanr only game04-p06-health v1, untouched.
 
-## 今回の修正
-GAME03の実績あるtest/live分離を継承し、GAME04本番DB・正式originだけを明示的live設定時に許可する。
-- supabaseUrl: productionの接続先を専用本番refに限定。previewは現行隔離ref限定を保持。
-- billingConfig: BILLING_LIVE_ENABLED=true、VERCEL_ENV=production、APP_ENV=production、本番DB、sk_live、正式originの全一致を要求。
-- sandboxから本番origin、liveから開発DB・別origin、GAME03接続を拒否。
-- 購入運用状態・保守テスター制御は変更なし。liveフラグや外部設定を有効化したわけではない。
-- 既存純粋テストの旧開発refを現行へ修正。
-- UI・商品・API bundle・DB・main・本番配信は変更なし。
+## Production owner package: order and rollback
+1. Re-fetch PR37/PR41 and debug owner's product change; retain common UI/battle/expiry contributions. Record merged source SHA. Do not merge unrelated main work.
+2. Record receiver project/domain/protection and existing deployment. Preserve protection throughout. Confirm actual authenticated Supabase production provider/client/redirect settings and server key project without publishing values.
+3. Foundation owner composes current GAME04 schema/master/identity/bootstrap/reward/claim/expiry migrations for prod soiksqgtmcnspfedmanr. No GAME03 data clone; no isolated QA fixture generator. Existing target lacks prerequisites, so 33–36 cannot be applied standalone.
+4. Adapt 33 runtime to production-only mode checks and actual prod marker (dev wrappers explicitly refuse live). Apply catalog11 with approved initial pack and UI/server match; apply reward shared-ledger logic35 with prior grants preflight; users-first locks retained.
+5. Build API from current integrated source, record source and bundle digests; deploy that regenerated bundle only. Never overwrite with old whole bundle. Apply web build with prod URL/key, production flags, exact return origin and explicit live opt-in only after protected receiver approval.
+6. Confirm Stripe live/test account separation, signature endpoint, webhook delivery through preserved protection, amount/currency/metadata and mode match. Test webhook/restore without real charging first. Scheduling36 must use a separately recorded production job name and owner acceptance; no existing cron replacement.
+7. Owner verifies real-domain Google return, same UID/state and one reward; actual paid final check handed to user only after development acceptance.
+Rollback: keep sales CLOSED/maintenance guard, stop only newly-added named VIP job, revert web/API to recorded pre-change protected deployments. Keep committed orders/events/paid lots/reward ledgers/VIP delivered rows, never erase purchase evidence or subtract delivered assets. Revert function definitions from preflight copies only when compatible with existing data; otherwise forward-fix. Do not remove protection or repoint to GAME03/dev.
 
-## 検証
-クラウド実行環境 Node v24.19.0:
-- independent-billing: 8群 PASS。
-- independent-webhook: 4群 PASS。
-- environment-isolation: 正常test/live、接続対応、混在16条件拒否、maintenance/tester制御 PASS。
-実Stripe請求、DB原子付与、ブラウザ認証成功を意味しない。全体build・型検査は未実施。
-
-## 移行照合で確認した不足
-1. 開発billing_productsはQA商品2件のみ。販売11商品なし。
-2. 開発にbilling_reserve_order、billing_attach_session、billing_grant_order、billing_expire_order、
-game04_billing_reserve_order、game04_billing_grant_order、game04_record_billing_eventがない。
-feature_operating_statesもない。既存P02候補は基礎RPC依存のためそのまま適用不可。
-3. 本番publicにはbilling・game04・商品・feature_operating_statesの対象テーブルなし。
-本番担当へ本体schema/masterを含めて集約が必要。既存候補の丸ごと適用は未実施。
-4. game04_auth_bindingは開発に導入済み。同UID・単一provider・衝突拒否を持ち、報酬付与は行わない。
-初回/既認証報酬の現行接続は未検証。
-5. 初陣応援パックは現行UI masterとserver catalogともCASH10000のまま。
-ユーザー確定はDIAMOND100へ置換（100円・他内容保持）。
-共通商品担当との取込調整未完のため本件から重複編集していない。
-特選ガチャ300/300/200の現行実消費確認も残件。
-6. Stripe Checkoutはinline price_dataで注文snapshotからJPY価格を作る。
-固定price/product ID未設定という理由だけで不足とは判定しない。
-7. 既存P02 SQL候補のwrapper/event tableはsandbox限定。本番化時はDB側のmode分離も必要。
-フロント修正だけで本番課金可能とは判定しない。
-
-## 接続障害
-Vercel list_teamsは成功。list_projectsにtribe-neonしか表示されない。
-PR37が示すgame04 project prj_vV06TC8bU3TEFRpNXFNdONiZmULEへのget_projectは404。
-最新Preview get_deploymentおよび本番/Previewの認証付きURL fetchも権限不足または未発見。
-既存設定が未設定という判定ではない。再設定は依頼していない。
-Git CLI直接取得は到達せず、GitHub connectorで正本を取得・差分保存。
-管理画面へのブラウザ切替はツール規約上ユーザー承認が必要なため未実施。
-
-## 続行順序と保持事項
-1. Vercel対象プロジェクトへのアクセスを確立し、既存の公開制御・env・domain・配信SHAを読む。
-2. 共通商品担当へ上記差分を照合し、UI/server/DBの商品を同一内容にする。画像・プロモはデバッグ担当。
-3. 開発DBの既存構造に対する追加差分を作成、現行有償lot/期限成果を保持。
-4. 開発Stripe test/Webhook・Google実接続、保存前後と再通知を受入。
-5. 本番担当へschema/master/API差分・順序・戻し方を集約。公開制御下の配信と本番実接続。
-6. 本人Googleログインと実決済は実際の画面・商品・金額・完了条件を整えて一度に引渡し。
-本番最終決済候補は初陣応援パック100円。ただし商品DB/表示を修正し認証・テストを通すまで実決済しない。
-本番付与・再読込証拠、配信SHA/API版、購入/付与IDは未取得。
+## User-operation package (not ready for actual charge)
+- First secure login to Supabase dashboard for GAME04 project Auth provider/URL checks and Stripe dashboard for GAME04 test/live configuration inspection. Existing settings are inspected before any request to change them.
+- Development Google: use exact prepared Preview /auth/game04, link current test guest; completion = returns to same origin and UID, assets/deck/progress retained, first free300 only once. Current start fails, so not yet a user login request.
+- Development Stripe: test-only Checkout, success/failure/cancel/duplicate/late delivery and close-before-return; verify DB order/event/grant, BOX/wallet, reload and history.
+- Actual production final purchase candidate: initial pack100 JPY once, DIAMOND100 + special tickets character1/skill3/equipment1 + energy2. Only user operates payment; do not proceed until product UI/server/DB and protected production preflight are accepted.
+- Production Google and actual card operation are still unperformed. Do not ask user to pay now.
