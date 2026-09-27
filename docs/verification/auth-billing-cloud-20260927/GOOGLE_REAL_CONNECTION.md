@@ -1,0 +1,19 @@
+# Google real-connection development evidence — 2026-09-27
+- User reported separate Google dev/prod clients created and saved. Both Supabase Google providers observed Enabled. Production signup/anonymous/manual linking controls left unchanged.
+- Dev manual identity linking enabled and saved; existing anonymous sign-in/email-confirmation retained.
+- Common Preview anonymous user linked through actual Google account selection and OAuth consent, returning to common Preview. Google redirect used current dev Supabase callback, no production/GAME03/localhost return.
+- Persisted user UID unchanged (a68463f9-bd39-421f-bb73-a2c73a43da1d), is_anonymous true→false, one GOOGLE method.
+- Free gems200→500; cash2600→2600; authentication reward ledger1. User-row hash excluding gems/updated_at unchanged1425523ae40992581cb699a53e00a84f. Whole game04_player_state hash unchanged322c73c0695781e796a1eee899d011a1.
+- Browser status linked confirmed after callback, reload, separate tab, and explicit state refresh. Afterwards same hash/currency and reward count1. This validates saved state available in this tutorial-stage account, not every inventory/nonzero paid-lot case.
+- Separate-origin re-login/session recovery, collision, actual Google cancellation and nonzero purchase retention still pending.
+- Saved six server-only secret variables scoped ONLY work/game04-auth-billing-cloud-20260927 Preview: STRIPE_SECRET_KEY(test), STRIPE_WEBHOOK_SECRET, BILLING_MODE=sandbox, BILLING_SANDBOX_ENABLED=true, BILLING_RETURN_ORIGIN=dedicated branch alias, SUPABASE_SERVICE_ROLE_KEY (JWT project ref and role checked; current dev only).
+- .env paste UI initially displayed truncated key and reverted config selection transiently; BEFORE saving replaced with complete key, selected Secret and verified exact branch scope. Save succeeded. No secret data in Git.
+- Latest code still b6cac2d integrated tree, following commits documentation only. This commit also triggers deployment to capture new environment settings. Build/result and payment acceptance must be verified next.
+- Sales gates not opened; production/GAME03 settings and data unchanged by agent. Real money not charged.
+
+Real Google verification extended on dedicated Preview after b957 deployment:
+- Existing Google re-login returned to the same UID a68463f9-bd39-421f-bb73-a2c73a43da1d; reward ledger still1, gems500 and cash2600, player hash322c73c0695781e796a1eee899d011a1.
+- Common Preview reload, second tab and explicit session recheck maintained linked status and same values.
+- One first dedicated-Preview attempt during a long secure user handoff returned to common Preview. A subsequent observed redirect request and actual callback both used dedicated origin and succeeded; cause of first anomaly is unproven, not claimed fixed.
+- Normal tutorial was completed through UI with equipped starter party and name 認証課金検証; later ordinary login bonus added10000 cash. This is distinct from unchanged cash during Google linking and from initial pack content.
+- Anonymous nonzero purchased-item retention and real conflicting-Google account link/cancel scenarios remain unperformed; synthetic collision guard tests passed.

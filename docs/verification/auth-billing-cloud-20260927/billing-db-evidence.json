@@ -1,0 +1,19 @@
+[
+  {
+    "evidence": {
+      "groups": [
+        "same request returns same order",
+        "product conflict and pending purchase limit rejected",
+        "live mode and wrong amount rejected without assets",
+        "100 JPY pack grants 5 lots once; DIAMOND100 replaces CASH; 120 days",
+        "BOX claim persists exact wallet/inventory; deck/progress unchanged; duplicate claim rejected",
+        "duplicate/late notifications retain completed state and granted order",
+        "expired unpaid order grants nothing",
+        "VIP pending/active duplicate purchase rejected; initial free100 once; 30 delivery slots",
+        "VIP due worker retry/catchup: free100x30 exactly; initial paid100 lot retained"
+      ],
+      "passed": true,
+      "fixtureRolledBack": true
+    }
+  }
+]
