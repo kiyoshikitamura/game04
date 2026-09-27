@@ -15,6 +15,7 @@ import TutorialSceneAssets from '@/app/qa/tutorial/TutorialSceneAssets';
 import CowboyDisplay from './visual-bench/CowboyDisplay';
 import TypewriterText from './TypewriterText';
 import CanonicalDialog from '../ui/CanonicalDialog';
+import ActionButton from '../ui/ActionButton';
 import { tutorialFailure } from '@/domain/redesign/tutorial/errors';
 import { tutorialSceneAssets } from '@/app/qa/tutorial/assets';
 import '@/app/qa/tutorial/tutorial.css';
@@ -30,7 +31,8 @@ export default function IntegratedTutorial({state,busy,onNext}:{state:RedesignSt
  const [duplicateName,setDuplicateName]=useState(false);
  const nameInput=useRef<HTMLInputElement>(null);
  const advancing=useRef(false);
- useEffect(()=>{advancing.current=false;},[state.userId,save.step]);
+ const [pending,setPending]=useState(false);
+ useEffect(()=>{advancing.current=false;setPending(false);},[state.userId,save.step]);
  useEffect(()=>{document.body.classList.add('rd-active');return()=>document.body.classList.remove('rd-active');},[]);
  const scene=SCENES[save.step];
  const { playBgm } = useAudio();
@@ -42,7 +44,7 @@ export default function IntegratedTutorial({state,busy,onNext}:{state:RedesignSt
  const [revealedScene,setRevealedScene]=useState('');
  const revealed = revealedScene === scene.id;
  const reveal = () => setRevealedScene(scene.id);
- const next=()=>{if(busy||advancing.current||duplicateName)return;advancing.current=true;setError('');void onNext(save.step,name).catch(e=>{advancing.current=false;console.warn('Tutorial save failed:',e);const failure=tutorialFailure(e,scene.id==='name');setDuplicateName(failure.duplicate);setError(failure.message);});};
+ const next=()=>{if(busy||advancing.current||duplicateName)return;advancing.current=true;setPending(true);setError('');void onNext(save.step,name).catch(e=>{advancing.current=false;setPending(false);console.warn('Tutorial save failed:',e);const failure=tutorialFailure(e,scene.id==='name');setDuplicateName(failure.duplicate);setError(failure.message);});};
  return <TutorialSceneAssets assets={tutorialSceneAssets(save.step)} nextAssets={tutorialSceneAssets(save.step+1)}><div className="rd-shell tutorial-shell">
  {scene.id === 'battle' && state.deck.length ? <TutorialPractice key={`${state.userId}:${save.step}`} state={state} onComplete={next} /> :
       <main key={scene.id} className={`tutorial-scene ${world ? 'is-world' : ''}`} style={{ backgroundImage: `linear-gradient(0deg, #160f0beb, transparent 65%), url('${background}')` }} data-scene={scene.id}>
@@ -57,7 +59,7 @@ export default function IntegratedTutorial({state,busy,onNext}:{state:RedesignSt
           <TypewriterText key={scene.id} text={scene.text.replace('〇〇', save.name)} revealed={revealed} onFinished={reveal} />
           {scene.id === 'name' && <label>名前（1〜8文字）<input ref={nameInput} disabled={busy} autoComplete="off" placeholder="名前を入力" value={name} onChange={e => setName(e.target.value)} maxLength={16} /></label>}
           {world && <div className="tutorial-progress" aria-label={`${save.step + 1} / 3`}>{[0, 1, 2].map(i => <i key={i} data-active={save.step === i} />)}</div>}
-          <button className="rd-button tutorial-next" disabled={busy || (scene.id === 'name' && (!name.trim() || [...name.trim()].length > 8))} onClick={() => revealed ? next() : reveal()}>{'button' in scene ? scene.button : '次へ'}</button>
+          <ActionButton variant="primary" className="rd-button tutorial-next" busy={busy || pending} busyLabel="進行中" disabled={busy || (scene.id === 'name' && (!name.trim() || [...name.trim()].length > 8))} onClick={next}>{'button' in scene ? scene.button : '次へ'}</ActionButton>
         </section>
       </main>}
  {error&&<p className="rd-panel" role="alert">{error}</p>}

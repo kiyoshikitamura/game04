@@ -2,6 +2,7 @@
 
 import { canonicalItemName } from "@/domain/gameplay/canonical/items";
 import { useMemo, useState } from "react";
+import ActionButton from "../ui/ActionButton";
 import CanonicalDialog from "../ui/CanonicalDialog";
 import GachaModalPortal from "./GachaModalPortal";
 import "./FormalGachaHub.css";
@@ -114,7 +115,8 @@ export default function FormalGachaHub({
             <div className="formal-gacha__actions">
               <button disabled={pending || balances.diamond < meta.cost} onClick={() => choose({ surface: "SPECIAL", category, count: 1, payment: "DIAMOND" })}><b>1回</b><small>{meta.cost}輝石</small></button>
               <button disabled={pending || balances.diamond < meta.cost * 10} onClick={() => choose({ surface: "SPECIAL", category, count: 10, payment: "DIAMOND" })}><b>10連</b><small>{(meta.cost * 10).toLocaleString("ja-JP")}輝石</small></button>
-              <button disabled={pending || balances.tickets[category] < 1} onClick={() => choose({ surface: "SPECIAL", category, count: 1, payment: "TICKET" })}><b>{canonicalItemName(`SPECIAL_TICKET_${category}`)}で1回</b><small>所持 {balances.tickets[category]}枚</small></button>
+              <ActionButton disabled={pending || balances.tickets[category] < 1} onClick={() => choose({ surface: "SPECIAL", category, count: 1, payment: "TICKET" })}><b>{canonicalItemName(`SPECIAL_TICKET_${category}`)}で1回</b><small>所持 {balances.tickets[category]}枚</small></ActionButton>
+              <ActionButton disabled={pending || balances.tickets[category] < 10} onClick={() => choose({ surface: "SPECIAL", category, count: 10, payment: "TICKET" })}><b>{canonicalItemName(`SPECIAL_TICKET_${category}`)}10枚で10連</b><small>所持 {balances.tickets[category]}枚</small></ActionButton>
             </div>
           </article>
         </>
