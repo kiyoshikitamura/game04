@@ -44,11 +44,13 @@
 .g4g-stats dt{font-size:14px!important;color:#f3e8d1!important}
 .g4g-stats dd{font-size:16px;margin:0;color:#e5cb8d}
 .g4g-passive{border:1px solid #816a41;border-radius:5px;padding:0 9px}
-.g4g-passive h3{color:#eed39c;margin-top:9px}
-.g4g-skill-stack{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
-.g4g-skill-row{display:flex!important;flex-direction:column;align-items:center;justify-content:center;min-width:0;min-height:110px;margin:0;padding:6px!important;white-space:normal!important}
-.g4g-skill-row img{width:100%;height:auto;aspect-ratio:1.4;object-fit:cover}
-.g4g-skill-row>span:not(.g4g-skill-empty){font-size:14px;line-height:1.5;text-align:center}
+.g4g-passive h3{color:#eed39c;margin:8px 0;font-size:var(--g4-name-font,16px)}
+body.game04-theme .g4g-passive :is(p,dt,dd){font-size:var(--g4-detail-font,14px);line-height:1.45}
+body.game04-theme .g4g-skill-row b{display:block;font-size:var(--g4-name-font,16px);word-break:normal;overflow-wrap:break-word}
+.g4g-skill-stack{grid-template-columns:minmax(0,1fr);gap:6px}
+.g4g-skill-row{display:flex!important;flex-direction:row;align-items:center;justify-content:flex-start;min-width:0;min-height:64px;margin:0;padding:6px!important;white-space:normal!important}
+.g4g-skill-row img{width:48px;height:48px;object-fit:contain}
+.g4g-skill-row>span:not(.g4g-skill-empty){font-size:14px;line-height:1.5;text-align:left}
 .g4g-skill-row small{font-size:14px}
 .g4g-skill-empty{font-size:16px;color:#b7a78d}
 .g4g-equipment-slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
@@ -80,9 +82,10 @@
 .g4g-auto-actions button:not(.g4-action){min-width:0;font-size:14px;min-height:48px;padding:5px 2px!important;white-space:nowrap!important}
 .g4g-selected-skills{border:1px solid #9e7d42;border-radius:5px;padding:9px;margin-top:12px;background:#151115cc}
 .g4g-selected-skills h3{font-size:17px;margin:0 0 10px}
-.g4g-selected-skills .g4g-skill-stack>button:not(.g4-action){display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;min-height:112px;padding:5px;gap:4px;font-size:14px}
+.g4g-selected-skills .g4g-skill-stack>button:not(.g4-action){display:grid;grid-template-columns:48px minmax(0,1fr);align-items:center;justify-content:start;text-align:left;min-width:0;min-height:64px;padding:5px;gap:4px;font-size:14px}
 .g4g-selected-skills img{width:100%;aspect-ratio:1.4;object-fit:contain}
-.g4g-selected-skills b{max-width:100%;white-space:normal;font-size:14px}
+.g4g-selected-skills b{max-width:100%;white-space:normal;font-size:16px;grid-column:2}
+.g4g-selected-skills .g4-asset-icon{grid-column:1;grid-row:1/3}.g4g-selected-skills button:not(.g4-action)>span:not(.g4-asset-icon){grid-column:2}
 .g4g-modal button:not(.g4-action){max-width:100%;min-width:0;font-size:14px}
 .g4g-modal fieldset>button:not(.g4-action){margin:4px 0;width:100%;white-space:nowrap}
 .g4g-material-choice img{width:52px;height:52px;object-fit:contain}
@@ -124,7 +127,7 @@ body.game04-theme .g4-growth .g4g-auto-actions>button:not(.g4-action){font-size:
 body.game04-theme .g4-growth .g4g-section-heading{margin:3px 0 12px}
 body.game04-theme .g4-growth .g4g-section-heading h3{font-size:18px}
 body.game04-theme .g4-growth .g4g-section-heading>button:not(.g4-action){min-height:32px;padding:4px 10px;font-size:14px}
-body.game04-theme .g4-growth .g4g-grid>button:not(.g4-action)>img,body.game04-theme .g4-growth .g4g-equipment>button:not(.g4-action)>img{width:100%!important;height:auto!important;aspect-ratio:1.5;object-fit:contain}
+
 body.game04-theme .g4-growth .g4g-grid>button:not(.g4-action)>span,body.game04-theme .g4-growth .g4g-equipment>button:not(.g4-action)>span{font-size:14px}
 body.game04-theme .g4g-modal .g4g-profile p{font-size:16px;margin:8px 0}
 body.game04-theme .g4g-modal .g4g-result-subject{flex-direction:column;gap:8px;background:radial-gradient(ellipse at center,#9c733a44,transparent 70%)}
@@ -237,3 +240,5 @@ body.game04-theme .g4g-image-loading .rd-modal-header{position:absolute;width:1p
 /* Stretched border-image portraits already exclude the border from their content box. */
 body.game04-theme .g4-growth :is(.g4g-party,.g4g-grid) .g4g-portrait{--portrait-top:0%!important;--portrait-right:0%!important;--portrait-bottom:0%!important;--portrait-left:0%!important}
 .g4-soul-list{display:grid;gap:var(--g4-space-1)}.g4-growth .g4-soul-list .g4-inventory-entry{padding:var(--g4-space-2)}body.game04-theme .g4-soul-list .g4g-portrait{width:52px;min-width:52px;max-width:52px;margin:0;flex:none}.g4-soul-icon{width:24px;height:24px;object-fit:cover;border-radius:50%}body.game04-theme .g4g-modal .g4g-growth-controls button:not(.g4-action):disabled{opacity:.45;filter:grayscale(1);cursor:not-allowed}
+
+.g4-soul-exchange-flow{display:flex;align-items:center;justify-content:center;gap:8px}.g4-soul-exchange-flow>span{display:grid;justify-items:center;gap:4px;font-size:14px}.g4-soul-exchange-flow img,.g4-soul-exchange-flow figure{width:48px;height:60px;margin:0}.g4-soul-exchange-flow b{font-weight:500}

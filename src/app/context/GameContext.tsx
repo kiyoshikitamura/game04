@@ -593,7 +593,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   );
 
   const {
-    guildChats, setGuildChats,
+    guildChats, setGuildChats, setChatLoadedChannel,
     chatChannel, setChatChannel,
     chatInput, setChatInput,
     chatReplyTo, setChatReplyTo,
@@ -2413,6 +2413,8 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
 
   // 💬 チャットフェッチ ＆ Realtime
   useEffect(() => {
+    let cancelled=false;
+    setChatLoadedChannel(null);
     if (!session) return;
     if (chatChannel === "DM") {
       setGuildChats([]);
@@ -2435,10 +2437,12 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
 
       const { data, error } = await query;
       if (error) {
+        if(!cancelled)setChatLoadedChannel(null);
         console.warn("fetchChats error:", error.message);
         return;
       }
-      if (data) {
+      if (data && !cancelled) {
+        setChatLoadedChannel(chatChannel);
         setChatHasMore(data.length === 30);
         setGuildChats(data.reverse());
       }
@@ -2490,6 +2494,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
+      cancelled=true;
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       supabase.removeChannel(channel);
     };

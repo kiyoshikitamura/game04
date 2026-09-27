@@ -57,6 +57,6 @@ export function getGrowthResult(before: RedesignState, after: RedesignState, act
     for (const [size, label] of [['small', '小'], ['medium', '中'], ['large', '大'], ['xlarge', '特大']] as const) add(`${prefix}EXP素材・${label}`, aInventory.expItems[kind][size], bInventory.expItems[kind][size]);
   }
   if (action === 'equipment_dismantle') add('装備所持数', before.equipment.length, after.equipment.length);
-  if (action === 'save_deck' && JSON.stringify(before.deck) !== JSON.stringify(after.deck)) rows.push({ label: '編成', before: '変更前', after: '保存済み' });
+  if (action === 'save_deck') return {title:titles[action], rows:[], changed:JSON.stringify(before.deck)!==JSON.stringify(after.deck)};
   return { title: titles[action] ?? '操作結果', rows, changed: rows.some(row => row.before !== row.after) };
 }

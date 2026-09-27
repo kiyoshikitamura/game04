@@ -1,4 +1,6 @@
 "use client";
+import TextRarityBadge from "@/app/components/ui/RarityBadge";
+
 
 import React, { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useScreenReadiness } from "../../hooks/useScreenReadiness";
@@ -8,7 +10,7 @@ import OutlawButton from "../ui/OutlawButton";
 import { CHARACTERS_MASTER } from "@/utils/game_constants";
 import { getCharacterLocationBackground } from "@/utils/characterVisualAssets";
 import { resolveCharacterGachaQuote } from "@/domain/presentation/characterGachaQuotes";
-import { getRarityBadgeAsset, getAcquisitionBadgeAsset } from "@/utils/rarityAssets";
+import { getAcquisitionBadgeAsset } from "@/utils/rarityAssets";
 import "./CharacterGachaPresentation.css";
 import standingBounds from "./gachaStandingBounds.json";
 
@@ -44,7 +46,7 @@ const acquisitionBadge = (result: CharacterGachaResult) => getAcquisitionBadgeAs
 function ResultBadges({ result }: { result: CharacterGachaResult }) {
   const acquired = acquisitionBadge(result);
   return <span className="cg-existing-badges">
-    <img className="cg-rarity-badge" src={getRarityBadgeAsset(result.rarity)} alt={result.rarity} />
+    <TextRarityBadge rarity={result.rarity}/>
     {acquired && <img className="cg-acquisition-badge" src={acquired} alt={result.convertReward === "新規獲得" ? "NEW" : `覚醒 +${result.awakeningLevel}`} />}
   </span>;
 }
@@ -85,7 +87,7 @@ export default function CharacterGachaPresentation(props: Props) {
   }, []);
   const readiness = useScreenReadiness({ assets: [
     ...CITIES.map((city) => ({ src: getCharacterLocationBackground(city) })),
-    ...props.results.flatMap((result) => [{ src: result.imageUrl }, { src: town(result) }, { src: getRarityBadgeAsset(result.rarity) }, ...(acquisitionBadge(result) ? [{ src: acquisitionBadge(result)! }] : [])]),
+    ...props.results.flatMap((result) => [{ src: result.imageUrl }, { src: town(result) }, ...(acquisitionBadge(result) ? [{ src: acquisitionBadge(result)! }] : [])]),
   ] });
   if (textOnly) return <div className="cg-overlay"><section className="cg-loading custom-scrollbar" role="dialog" aria-modal="true" aria-label="獲得結果">
     <h2>獲得結果</h2><ol>{props.results.map((result, index) => <li key={index}>{result.rarity} {result.name} / {outcome(result)}</li>)}</ol>

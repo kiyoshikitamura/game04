@@ -41,6 +41,7 @@ export function useChat(
   refreshAfterGuildChat: (userId: string) => Promise<void>
 ) {
   const currentUserId = session?.user?.id as string | undefined;
+  const [chatLoadedChannel,setChatLoadedChannel]=useState<string|null>(null);
   const [guildChats, setGuildChats] = useState<any[]>([]);
   const [chatChannel, setChatChannel] = useState<"GLOBAL" | "GUILD" | "DM">("GLOBAL");
   const [chatInput, setChatInput] = useState<string>("");
@@ -135,16 +136,19 @@ export function useChat(
   }, [session?.user?.id, userGuildMember?.guild_id]);
 
   const markChatChannelRead = useCallback(async (targetType: "GLOBAL" | "GUILD") => {
+    if(chatLoadedChannel!==targetType || document.visibilityState!=="visible")return;
+    const seen=guildChats.filter(row=>row.target_type===targetType&&!row.id?.startsWith?.("optimistic")).map(row=>row.created_at).filter(Boolean).sort().at(-1);
+    if(!seen)return;
     if (!session?.user?.id || (targetType === "GUILD" && !userGuildMember?.guild_id)) return;
-    const { error } = await supabase.rpc("mark_chat_channel_read", {
-      p_target_type: targetType
+    const { error } = await supabase.rpc("game04_mark_chat_channel_seen", {
+      p_seen_at: seen, p_target_type: targetType
     });
     if (error) {
       console.warn("chat read update error:", error.message);
       return;
     }
-    setChatUnreadCounts((previous) => ({ ...previous, [targetType]: 0 }));
-  }, [session?.user?.id, userGuildMember?.guild_id]);
+    await refreshChatUnreadCounts();
+  }, [session?.user?.id, userGuildMember?.guild_id,chatLoadedChannel,guildChats,refreshChatUnreadCounts]);
 
   useEffect(() => {
     void refreshChatUnreadCounts();
@@ -525,7 +529,7 @@ export function useChat(
   };
 
   return {
-    guildChats, setGuildChats,
+    guildChats, setGuildChats, setChatLoadedChannel,
     chatChannel, setChatChannel,
     chatInput, setChatInput,
     chatReplyTo, setChatReplyTo,

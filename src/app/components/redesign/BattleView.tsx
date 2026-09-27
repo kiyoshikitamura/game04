@@ -217,7 +217,6 @@ export function BattleView({ onRetire, resultActions, resultRewards, bgmScene = 
     <div className={styles.party}>{frame.party.map((u, i) => unitCard(u, false, i))}</div>
     {frame.remainingActions !== undefined && <p className={styles.actionLimit}>残り味方行動機会 <strong>{frame.remainingActions}</strong> / 300</p>}
     </>}
-    {presentation.isSkill && !presentation.cutIn && presentation.actor && presentation.skill && <div className={`${styles.feedback} ${styles.skillFeedback}`}><span>{presentation.actor.name}</span>{presentation.skill.name}</div>}
     {finished && <RecordedBattleResult result={result} title={title} backgroundSrc={backgroundSrc} rewards={resultRewards} actions={resultActions ?? <button onClick={onComplete}>結果へ</button>} />}
     </div>
     {!finished && !assetsBlocked && <BattleEffectLayer key={index} effects={effects} partyIds={frame.party.map(unit => unit.id)} paused={playbackPaused} speed={effectiveSpeed} />}

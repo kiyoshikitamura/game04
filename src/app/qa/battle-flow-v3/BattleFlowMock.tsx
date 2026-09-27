@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { CHARACTERS_MASTER, getCharacterTransparentImg } from "@/utils/game_constants";
 import { getAttributeBadgeAsset, getAttributeLabel } from "@/utils/attributeAssets";
-import { getRarityBadgeAsset } from "@/utils/rarityAssets";
+import TextRarityBadge from "@/app/components/ui/RarityBadge";
 import { analyzeBattleResult, type BattleResultReplayEvent } from "@/domain/presentation/battleResultScoring";
 import { resolveCharacterGachaQuote } from "@/domain/presentation/characterGachaQuotes";
 import "./flow.css";
@@ -48,7 +48,7 @@ export default function BattleFlowMock(){
   const hero=find(mvp.participant.name);
   useEffect(()=>{
     let cancelled=false;
-    const sources=[...allies,...enemies].flatMap(c=>[art(c),getRarityBadgeAsset(c.rarity),getAttributeBadgeAsset(c.alignment)!]);
+    const sources=[...allies,...enemies].flatMap(c=>[art(c),getAttributeBadgeAsset(c.alignment)!]);
     sources.push("/bg/bg_street_shinjuku.jpg","/ui/icon_cash.png");
     const timer=setTimeout(()=>{if(!cancelled)setError(true);},15000);
     Promise.all([...new Set(sources)].map(src=>new Promise<void>((resolve,reject)=>{const img=new Image();img.onload=()=>{img.decode().then(()=>resolve(),reject);};img.onerror=reject;img.src=src;}))).then(()=>document.fonts.load("20px TNFlow","出撃準備勝利敗北")).then(()=>{clearTimeout(timer);if(!cancelled){setReady(true);setError(false);}}).catch(()=>{clearTimeout(timer);if(!cancelled)setError(true);});
@@ -57,7 +57,7 @@ export default function BattleFlowMock(){
   useEffect(()=>{setVsReady(false);if(screen!=="vs")return;const timer=setTimeout(()=>setVsReady(true),1600);return()=>clearTimeout(timer);},[screen]);
   function change(next:Screen){setScreen(next);setDetails(false);setNotice("");}
   function portrait(c:typeof allies[number]){return <div className="bf-face" data-character={c.name}><img src={art(c)} alt={c.jpName}/></div>;}
-  function team(members:typeof allies,label:string){return <section className="bf-team" aria-label={label}><header><h2>{label}</h2><span>5 / 5</span></header><div className="bf-members">{members.map(c=><div key={c.id}>{portrait(c)}<strong>{c.jpName}</strong><div className="bf-badges"><img src={getRarityBadgeAsset(c.rarity)} alt={c.rarity}/><img src={getAttributeBadgeAsset(c.alignment)!} alt={`属性：${getAttributeLabel(c.alignment)}`}/></div></div>)}</div></section>;}
+  function team(members:typeof allies,label:string){return <section className="bf-team" aria-label={label}><header><h2>{label}</h2><span>5 / 5</span></header><div className="bf-members">{members.map(c=><div key={c.id}>{portrait(c)}<strong>{c.jpName}</strong><div className="bf-badges"><TextRarityBadge rarity={c.rarity}/><img src={getAttributeBadgeAsset(c.alignment)!} alt={`属性：${getAttributeLabel(c.alignment)}`}/></div></div>)}</div></section>;}
   if(!ready)return <main className="bf-loading"><p>{error?"素材を読み込めませんでした":"画面素材を準備中…"}</p>{error&&<button onClick={()=>{setError(false);setLoadKey(k=>k+1);}}>再読み込み</button>}</main>;
   return <main className={`bf-root bf-${screen}`}>
     <nav className="bf-qa" aria-label="画面比較"><small>前後画面モック / 固定データ</small><div>{([['setup','出撃準備'],['vs','VS演出'],['result','Result']] as const).map(([key,label])=><button key={key} aria-pressed={screen===key} onClick={()=>change(key)}>{label}</button>)}</div></nav>

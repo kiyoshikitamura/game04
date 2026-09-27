@@ -22,11 +22,11 @@ const PACK_EXPIRY_NOTICE = "パックの未使用アイテム・銭は付与か�
 const shopText = (value: string) => value.replaceAll("CASH", "銭").replaceAll("ダイア", "輝石").replaceAll("ダイヤ", "輝石");
 
 function Bundle({ product }: { product: ShopProduct }) {
-  return <>{product.category === "VIP" && <p>{product.description}</p>}<RewardList items={product.items.map(item=>({key:item.itemId,name:shopText(item.itemName),image:canonicalItemAssetPath(item.itemId),amount:item.quantity}))}/></>;
+  return <>{product.category === "VIP" && <div className="shop-vip-benefits"><p>⏩ バトル3倍速・スキップ / 720時間</p><p><CanonicalItemIcon itemId="DIAMOND"/>無償輝石100個 ×30回</p><small>購入時と以後24時間ごと。自動更新なし。</small></div>}<RewardList items={product.items.map(item=>({key:item.itemId,name:shopText(item.itemName),image:canonicalItemAssetPath(item.itemId),amount:item.quantity}))}/></>;
 }
 
 export type ShopExchangeProps = { state: RedesignState; onExchange: (payload: Record<string, unknown>) => Promise<unknown>; onUseEnergyDrink?: () => Promise<unknown> };
-export default function ShopTab({ exchange, hideTitle = false }: { exchange?: ShopExchangeProps; hideTitle?: boolean } = {}) {
+export default function ShopTab({ exchange, hideTitle = false, targetProduct }: { targetProduct?: string; exchange?: ShopExchangeProps; hideTitle?: boolean } = {}) {
   const [initialReadiness] = useState(peekBillingReadiness);
   const [availability, setAvailability] = useState<"loading" | "available" | "unavailable">(initialReadiness ? "available" : "loading");
   const [sandbox, setSandbox] = useState(initialReadiness?.mode === "sandbox");
@@ -49,9 +49,10 @@ export default function ShopTab({ exchange, hideTitle = false }: { exchange?: Sh
     profileLoading, upgradeLoading, setConfirmDialogConfig, session,
     onboardingState, handleGoogleLogin
   } = useGame();
+  useEffect(() => { if (!targetProduct) return; setShopSubTab('LIMITED'); const timer=setTimeout(()=>document.getElementById('shop-product-'+targetProduct)?.scrollIntoView({block:'center'}),100); return()=>clearTimeout(timer); },[targetProduct,setShopSubTab]);
   const busy = profileLoading || upgradeLoading;
   const disabled = busy || availability !== "available";
-  const packOrder = ["beginner_pack_01", "growth_pack_01", "awakening_pack_01", "ticket_pack_01", "game04_vip_30d"];
+  const packOrder = ["game04_vip_30d", "beginner_pack_01", "growth_pack_01", "awakening_pack_01", "ticket_pack_01"];
   const packs = SHOP_PRODUCTS_MASTER.filter(p => p.shopType === "LIMITED" && p.category !== "DIAMOND").sort((a,b) => packOrder.indexOf(a.id)-packOrder.indexOf(b.id));
   const diamonds = SHOP_PRODUCTS_MASTER.filter(p => p.category === "DIAMOND").sort((a,b) => a.sortOrder-b.sortOrder);
   const normal = SHOP_PRODUCTS_MASTER.filter(p => p.shopType === "NORMAL").sort((a,b) => a.sortOrder-b.sortOrder);
@@ -120,7 +121,7 @@ export default function ShopTab({ exchange, hideTitle = false }: { exchange?: Sh
         {!paid && <p className="shop-expiry-notice">有償輝石で交換した分は、元の有効期限を引き継ぎます。</p>}
         {remaining !== null && <p className="shop-card-desc">残り{remaining} / {product.purchaseLimit}回</p>}
         {isPack && <p className="shop-expiry-notice">{PACK_EXPIRY_NOTICE}</p>}
-        {paid && !isPack && !vip && <p className="shop-expiry-notice">有償{product.priceJpy?.toLocaleString("ja-JP")}＋無償{((product.items[0]?.quantity ?? 0)-(product.priceJpy ?? 0)).toLocaleString("ja-JP")} 輝石。有償分は付与から120日、無償分は無期限です。</p>}
+        {paid && !isPack && !vip && <p className="shop-expiry-notice">有償{product.priceJpy?.toLocaleString("ja-JP")} 輝石。付与から120日有効です。</p>}
       </div>,
       confirmText: paid ? "お支払いへ" : "購入する",
       onConfirm: async () => {
@@ -140,7 +141,7 @@ export default function ShopTab({ exchange, hideTitle = false }: { exchange?: Sh
     const price = product.priceJpy !== undefined
       ? `¥${product.priceJpy.toLocaleString("ja-JP")}`
       : `${product.priceDiamond?.toLocaleString("ja-JP")} 輝石`;
-    return <ProductRow key={product.id} icon={<CanonicalItemIcon itemId={product.items[0]?.itemId} fallback={null}/>} name={shopText(product.title)} description={<>{!compact&&<Bundle product={product}/>} {product.category==='DIAMOND'&&<span>有償{product.priceJpy?.toLocaleString('ja-JP')}個＋無償{((product.items[0]?.quantity??0)-(product.priceJpy??0)).toLocaleString('ja-JP')}個</span>}</>} condition={vipActive?'有効期限 '+new Date(exchange!.state.vipExpiresAt!).toLocaleString('ja-JP'):remaining!==null?(soldOut?'購入済み':'残り'+remaining+' / '+product.purchaseLimit+'回'):undefined} action={<OutlawButton variant="primary" aria-label={shopText(product.title)+'を'+price+'で購入'} disabled={disabled||soldOut||disabledProductIds.includes(product.id)} onClick={()=>confirmPurchase(product)}>{soldOut?(vipActive?'有効中':'購入済み'):disabledProductIds.includes(product.id)?'準備中':price}</OutlawButton>}/>;
+    return <ProductRow id={"shop-product-"+product.id} key={product.id} icon={<CanonicalItemIcon itemId={product.items[0]?.itemId} fallback={null}/>} name={shopText(product.title)} description={<>{!compact&&<Bundle product={product}/>} {product.category==='DIAMOND'&&<span>有償{product.priceJpy?.toLocaleString('ja-JP')}個</span>}</>} condition={vipActive?'有効期限 '+new Date(exchange!.state.vipExpiresAt!).toLocaleString('ja-JP'):remaining!==null?(soldOut?'購入済み':'残り'+remaining+' / '+product.purchaseLimit+'回'):undefined} action={<OutlawButton variant="primary" aria-label={shopText(product.title)+'を'+price+'で購入'} disabled={disabled||soldOut||disabledProductIds.includes(product.id)} onClick={()=>confirmPurchase(product)}>{soldOut?(vipActive?'有効中':'購入済み'):disabledProductIds.includes(product.id)?'準備中':price}</OutlawButton>}/>;
   };
 
   return <div className="view-container shop-tab-container">
@@ -153,10 +154,10 @@ export default function ShopTab({ exchange, hideTitle = false }: { exchange?: Sh
     {shopSubTab === 'LIMITED' && availability === "loading" && <div className="shop-status"><span className="shop-btn-spinner" aria-label="購入情報を確認中" /></div>}
     {shopSubTab === 'LIMITED' && availability === "unavailable" && <div className="shop-status" role="status">
       <p>ただいま購入できません。</p>
-      <OutlawButton variant="secondary" onClick={() => {
+      <OutlawButton size="compact" variant="secondary" onClick={() => {
         setAvailability("loading");
         setAvailabilityAttempt(attempt => attempt + 1);
-      }}>再確認する</OutlawButton>
+      }}>更新</OutlawButton>
     </div>}
     <div className="scroll-container flex-1 shop-scroll-body custom-scrollbar">
       {shopSubTab === "EXCHANGE" && exchange ? <ShopExchangePanel {...exchange} mode="souls" /> : shopSubTab === "NORMAL" && exchange ? <ShopExchangePanel {...exchange} mode="gems" /> : shopSubTab === "LIMITED" ? <>

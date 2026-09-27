@@ -1,7 +1,7 @@
 import { VIP_PRODUCT } from "@/domain/redesign/vip";
 import { canonicalItemName } from "@/domain/gameplay/canonical/items";
 
-export const SHOP_CATALOG_VERSION = "20260922-game04-shop";
+export const SHOP_CATALOG_VERSION = "20260927-game04-starter-pack";
 
 export interface ShopProductItem {
   itemId: string;
@@ -37,7 +37,7 @@ const sourceProducts: ShopProduct[] = [
       {itemId:"SPECIAL_TICKET_SKILL",itemName:"スキル券",quantity:3},
       {itemId:"SPECIAL_TICKET_EQUIPMENT",itemName:"装備券",quantity:1},
       {itemId:"ENERGY_DRINK",itemName:"活力丸",quantity:2},
-      {itemId:"CASH",itemName:"銭",quantity:10000},
+      {itemId:"DIAMOND",itemName:"輝石",quantity:100},
     ],
   },
   {

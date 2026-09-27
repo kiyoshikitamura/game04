@@ -29,6 +29,7 @@ import TerritoryView from './TerritoryView';
 import BattleView from './BattleView';
 import FormalGachaView from './FormalGachaView';
 import ShopTab from '../ShopTab';
+import HomePromotion from './HomePromotion';
 import BrandedLoading from '../ui/BrandedLoading';
 import IntegratedTutorial from './IntegratedTutorial';
 import Modal from './Modal';
@@ -44,6 +45,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   useEffect(clearGame04Return, []);
   const [encounterNow, setEncounterNow] = useState(Date.now);
   useEffect(() => { if (tab !== 'home') return; const timer = setInterval(() => setEncounterNow(Date.now()), 1000); return () => clearInterval(timer); }, [tab]);
+  const [shopTarget,setShopTarget]=useState<string>();
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
   const [raidId, setRaidId] = useState<string>();
@@ -183,6 +185,8 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
       setQuestNavigation(value => value + 1);
       next = 'quest';
     }
+    setShopTarget(next.startsWith('shop:')?next.slice(5):undefined);
+    if(next.startsWith('shop:')){game.setShopSubTab('LIMITED');next='shop';}
     setTab(next); setError('');
     if (next === 'gacha' || next === 'shop') {
       game.navigateTab(next);
@@ -259,6 +263,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
   return <RedesignShell state={state} activeTab={tab} navigationBusy={busy} onNavigate={navigate} onAction={action} hideChrome={!!battle || questPlaying} socialEvents={data.socialEvents} missions={data.missions} onRefreshMissions={refresh}
     encounterRaid={encounter ? { id: encounter.id, name: raidDisplayLabel(getRoomRaidMaster(encounter), encounter.level), expiresAt: encounter.expiresAt } : null}
     notifications={<>
+      <HomePromotion key={state.userId} owner={state.userId} active={tab==='home'&&!battle&&!questPlaying} blocked={busy||game.showLoginBonusModal||!!game.showMissionPanel||earlyLoadoutOpen||!!game.confirmDialogConfig?.isOpen} onNavigate={navigate}/>
       {state.tutorial&&!state.tutorial.departed&&tab==='home'&&!game.showLoginBonusModal&&<GuideDialog title="戦支度" message={FIRST_SORTIE_TEXT} actions={[{label:'出陣',semantic:'primary',disabled:busy,onClick:()=>navigate('quest')}]}/>}
       <EarlyRetentionGuide state={state} battlePlaying={!!battle||questPlaying||busy} resultOpen={!!battle||questPlaying||!!game.showMissionPanel||game.showLoginBonusModal||earlyLoadoutOpen} save={action} navigate={(destination,options)=>{if(destination==='missions'){game.setShowMissionPanel(true);}else{setEarlyLoadoutOpen(!!options?.earlyLoadout);setTab('character');}}}/>
     {earlyLoadoutOpen&&!battle&&!questPlaying&&<Modal title="編成・装備" onClose={()=>setEarlyLoadoutOpen(false)}><EarlySortiePreparation state={state} save={action}/></Modal>}
@@ -276,7 +281,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
       {tab === 'territory' && <TerritoryView territory={data.territory} rooms={data.rooms} userId={state.userId} onOpenRoom={id => { setRaidId(id); setTab('raid'); }} onHost={async destinationId => { const value = await action('territory_host', { destinationId }); if (!value.territoryRoomId) throw new Error('侵攻結果を確認できませんでした。'); setRaidId(value.territoryRoomId); setTab('raid'); }} />}
       {tab === 'raid' && <RaidView key={`${raidId || 'list'}:${raidNavigation}`} initialPreparationLevel={raidPreparationLevel} state={state} rooms={data.rooms} party={party} initialRoomId={raidId} onAction={raidAction} onOpenDeck={openRaidDeck} />}
       {tab === 'gacha' && <><PageTitleBanner page="gacha"/><FormalGachaView key={state.userId} data={data} onAction={action} /></>}
-      {tab === 'shop' && <><PageTitleBanner page="shop"/><ShopTab hideTitle exchange={{ state, onExchange: (payload) => action('shop_exchange', payload, undefined, false), onUseEnergyDrink: () => action('use_energy_drink', {}, undefined, false) }} /></>}
+      {tab === 'shop' && <><PageTitleBanner page="shop"/><ShopTab hideTitle targetProduct={shopTarget} exchange={{ state, onExchange: (payload) => action('shop_exchange', payload, undefined, false), onUseEnergyDrink: () => action('use_energy_drink', {}, undefined, false) }} /></>}
     </>}
   </RedesignShell>;
 }

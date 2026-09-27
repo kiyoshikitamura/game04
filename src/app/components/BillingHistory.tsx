@@ -31,7 +31,7 @@ export default function BillingHistory() {
     finally { inFlight.current = false; setBusy(false); }
   };
   return <>
-    <OutlawButton variant="secondary" className="shop-account-button" onClick={()=>{setOpen(true); void load();}}>購入履歴</OutlawButton>
+    <OutlawButton size="compact" variant="secondary" className="shop-account-button" onClick={()=>{setOpen(true); void load();}}>購入履歴</OutlawButton>
     {open && <CanonicalDialog title="購入履歴" onClose={()=>setOpen(false)} actions={[{label:"閉じる",onClick:()=>setOpen(false)}]}>
     <OutlawButton variant="secondary" className="shop-account-button" onClick={()=>void load()} disabled={busy}>更新</OutlawButton>
     {busy && <span className="shop-btn-spinner" aria-label="処理中" />}

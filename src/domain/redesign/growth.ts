@@ -1,5 +1,5 @@
 import type { RedesignState, DeckMember, EquipmentSlot, OwnedCharacter, OwnedEquipment, ExpSize } from './types';
-import { CHARACTER_MASTERS, OWNABLE_SKILL_MASTERS as SKILL_MASTERS, EQUIPMENT_MASTERS, getSkillSlots } from './masters';
+import { CHARACTER_MASTERS, OWNABLE_SKILL_MASTERS as SKILL_MASTERS, EQUIPMENT_MASTERS, getSkillSlots, getOwnedSkillMaster } from './masters';
 import { GROWTH_VERSION, EXP_SIZES, EXP_VALUES, SOUL_UNLOCK, AWAKENING_SOULS, LB_STEPS, SKILL_LB_FACTORS, EQUIPMENT_LB_FACTORS, DISMANTLE_MATERIALS, cumulativeExp, cumulativeCash, emptyGrowthInventory, type GrowthKind } from './growthMaster';
 export const GROWTH_PREVIEW_RULES = { characterLevelCaps: [50, 60, 70, 80, 90, 100], skillMax: 10, equipmentLevelCap: 100, equipmentLbMax: 10 };
 export const EQUIPMENT_SLOTS: EquipmentSlot[] = ["weapon", "head", "body", "legs", "accessory1", "accessory2"];
@@ -185,9 +185,10 @@ export function applyGrowthAction(input: RedesignState, action: string, payload:
 }
 
 export function autoEquipSkills(state: RedesignState): DeckMember[] {
-  const masters = new Map(SKILL_MASTERS.map(master => [master.id, master]));
+  // Keep LB → SP priority, but compare the current owned LB's SP, not LB0.
+  const masters = new Map(state.skills.map(owned => [owned.id, getOwnedSkillMaster(owned.id, owned.level)]));
   // Preserve unresolved retained assets in inventory without selecting an invalid deck.
-  const skills = state.skills.filter(skill => masters.has(skill.id)).sort((a, b) =>
+  const skills = state.skills.filter(skill => !!masters.get(skill.id)).sort((a, b) =>
     b.level - a.level || masters.get(b.id)!.spCost - masters.get(a.id)!.spCost);
   return state.deck.map(member => ({ ...member,
     skillIds: skills.slice(0, getSkillSlots(state.characters.find(character => character.id === member.characterId)?.awakening ?? 0)).map(skill => skill.id),

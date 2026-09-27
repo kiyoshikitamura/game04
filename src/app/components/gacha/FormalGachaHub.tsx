@@ -1,5 +1,6 @@
 "use client";
 
+import { canonicalItemName } from "@/domain/gameplay/canonical/items";
 import { useMemo, useState } from "react";
 import CanonicalDialog from "../ui/CanonicalDialog";
 import GachaModalPortal from "./GachaModalPortal";
@@ -67,7 +68,7 @@ export default function FormalGachaHub({
   }, [rates]);
   const paymentText = (request: FormalGachaDrawRequest) => {
     if (request.payment === "FREE") return "消費なし";
-    if (request.payment === "TICKET") return `特選${meta.label}券 ${request.count}枚`;
+    if (request.payment === "TICKET") return `${canonicalItemName(`SPECIAL_TICKET_${request.category ?? category}`)} ${request.count}枚`;
     if (request.payment === "COIN") return `${(1000 * request.count).toLocaleString("ja-JP")}銭`;
     return `${(meta.cost * request.count).toLocaleString("ja-JP")}輝石`;
   };
@@ -92,7 +93,6 @@ export default function FormalGachaHub({
           <header><button className="formal-gacha__link" onClick={() => setRatesOpen(true)}>提供割合・排出一覧</button></header>
 
 
-          <div className="formal-gacha__balance"><span>所持</span><strong>{balances.coin.toLocaleString("ja-JP")}銭</strong></div>
           {dailyFreeAvailable ? <button className="formal-gacha__primary" disabled={pending} onClick={() => choose({ surface: "NORMAL", count: 10, payment: "FREE" })}><b>本日10連無料</b><small>毎日0時更新</small></button> : <p className="formal-gacha__used">本日の無料10連は利用済みです</p>}
           <div className="formal-gacha__actions">
             <button disabled={pending || balances.coin < 1000} onClick={() => choose({ surface: "NORMAL", count: 1, payment: "COIN" })}><b>1回</b><small>1,000銭</small></button>
@@ -108,17 +108,13 @@ export default function FormalGachaHub({
             <GachaPromotion kind={category.toLowerCase() as 'character'|'skill'|'equipment'}/>
             <header><button className="formal-gacha__link" onClick={() => setRatesOpen(true)}>提供割合・排出一覧</button></header>
 
-            <div className="formal-gacha__ledger">
-              <span>輝石 <b>{balances.diamond.toLocaleString("ja-JP")}</b></span>
-              <span>特選券 <b>{balances.tickets[category].toLocaleString("ja-JP")}</b></span>
-            </div>
             <button className="formal-gacha__points" onClick={() => { setExchangeTarget(null); setExchangeOpen(true); }}>
               <span>SSR選択交換</span><strong>{balances.points[category]} / {meta.pity}Pt</strong>
             </button>
             <div className="formal-gacha__actions">
               <button disabled={pending || balances.diamond < meta.cost} onClick={() => choose({ surface: "SPECIAL", category, count: 1, payment: "DIAMOND" })}><b>1回</b><small>{meta.cost}輝石</small></button>
               <button disabled={pending || balances.diamond < meta.cost * 10} onClick={() => choose({ surface: "SPECIAL", category, count: 10, payment: "DIAMOND" })}><b>10連</b><small>{(meta.cost * 10).toLocaleString("ja-JP")}輝石</small></button>
-              <button disabled={pending || balances.tickets[category] < 1} onClick={() => choose({ surface: "SPECIAL", category, count: 1, payment: "TICKET" })}><b>特選券で1回</b><small>所持 {balances.tickets[category]}枚</small></button>
+              <button disabled={pending || balances.tickets[category] < 1} onClick={() => choose({ surface: "SPECIAL", category, count: 1, payment: "TICKET" })}><b>{canonicalItemName(`SPECIAL_TICKET_${category}`)}で1回</b><small>所持 {balances.tickets[category]}枚</small></button>
             </div>
           </article>
         </>

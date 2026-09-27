@@ -13,7 +13,7 @@ import {projectPaidExpiry} from '@/domain/redesign/paidExpiry';
 
 export default function InventoryView({state,onAction,onNavigate,fixtureItems}:{state:RedesignState;onAction:(name:string,payload:Record<string,unknown>)=>Promise<unknown>;onNavigate:(tab:string)=>void;fixtureItems?:StoredItem[]}) {
   const [query,setQuery]=useState(''),[sort,setSort]=useState('name');
-  const [category,setCategory]=useState<InventoryCategory|''>('回復・侵攻');
+  const [category,setCategory]=useState<InventoryCategory|''>('');
   const [stored,setStored]=useState<{owner:string;items:StoredItem[]}|null>(null);
   const [attempt,setAttempt]=useState(0),[loading,setLoading]=useState(true),[error,setError]=useState('');
   const [selected,setSelected]=useState<string|null>(null),[busy,setBusy]=useState(false),[useError,setUseError]=useState('');

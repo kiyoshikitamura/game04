@@ -1,4 +1,6 @@
 "use client";
+import TextRarityBadge from "@/app/components/ui/RarityBadge";
+
 
 import { useLayoutEffect, type ReactNode } from "react";
 import CharacterPresentation from "../character/CharacterPresentation";
@@ -7,7 +9,7 @@ import { battleReactionTone, BattleTargetReaction, BattleUnitApplyOverlay } from
 import type { BattleTargetResolutionGroup } from "@/domain/presentation/battlePresentationUnit";
 import { battleStatusPersistentLabel } from "@/domain/presentation/battleStatusPresentation";
 import "./BattleUnitPortrait.css";
-import { getRarityBadgeAsset } from "@/utils/rarityAssets";
+
 import StreetStatuses from "./StreetStatuses";
 
 export type BattleParticipantView = {
@@ -160,7 +162,7 @@ export default function BattleUnitPortrait({
 
   if (street) return <article id={domId} data-participant-id={participant.id} data-hp={hp} data-max-hp={maxHp} data-hp-percent={hpPercent.toFixed(2)} data-is-dead={participant.isDead ? "true" : "false"} className={`sb-unit ${side} ${actor ? "acting" : ""} ${participant.isDead ? "defeated" : ""}`} aria-label={`${participant.name} HP ${hp} / ${maxHp}`}>
     <div className="sb-face" data-character={imageSrc?.toLowerCase().includes("koharu") ? "koharu" : undefined}>{imageSrc ? <img src={imageSrc} alt={participant.name}/> : <span>{participant.name.slice(0,1)}</span>}</div>
-    <div className="sb-identity"><strong>{participant.name}</strong><div className="sb-badges"><img src={getRarityBadgeAsset(rarity || participant.rarity || "N")} alt={rarity || participant.rarity || "N"}/>{getAttributeBadgeAsset(attribute) && <img src={getAttributeBadgeAsset(attribute)!} alt={`属性：${getAttributeLabel(attribute)}`}/>}</div><div className="battle-unit-hp"><i data-hp-fill style={{width:`${hpPercent}%`}}/></div><small>{hp.toLocaleString()} / {maxHp.toLocaleString()}</small></div>
+    <div className="sb-identity"><strong>{participant.name}</strong><div className="sb-badges"><TextRarityBadge rarity={rarity || participant.rarity || "N"}/>{getAttributeBadgeAsset(attribute) && <img src={getAttributeBadgeAsset(attribute)!} alt={`属性：${getAttributeLabel(attribute)}`}/>}</div><div className="battle-unit-hp"><i data-hp-fill style={{width:`${hpPercent}%`}}/></div><small>{hp.toLocaleString()} / {maxHp.toLocaleString()}</small></div>
     {statuses.length > 0 && <StreetStatuses name={participant.name} statuses={statuses} shield={participant.shield}/>}
     {participant.isDead && <b className="sb-ko">戦闘不能</b>}
     {impactOverlay}

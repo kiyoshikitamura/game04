@@ -12,7 +12,7 @@ export default function PaidAssetExpiry(){
   const lots=data?.lots.filter(l=>!isExpired(l.expires_at,now));
   const expiredDia=data?.lots.filter(l=>l.item_id==='DIAMOND'&&l.claimed&&isExpired(l.expires_at,now)).reduce((n,l)=>n+l.quantity,0)??0;
   return <>
-    <OutlawButton variant="secondary" className="shop-account-button" onClick={()=>setOpen(true)}>購入分の有効期限</OutlawButton>
+    <OutlawButton size="compact" variant="secondary" className="shop-account-button" onClick={()=>setOpen(true)}>購入分の有効期限</OutlawButton>
     {open&&<CanonicalDialog title="購入分の有効期限" onClose={()=>setOpen(false)} actions={[{label:'閉じる',onClick:()=>setOpen(false)}]}>
       <OutlawButton variant="secondary" className="shop-account-button" disabled={busy} onClick={()=>void reload()}>更新</OutlawButton>
       {busy&&<span className="shop-btn-spinner" aria-label="確認中"/>}
