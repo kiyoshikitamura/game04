@@ -15,7 +15,8 @@ state.equipment.unshift({ instanceId: 'retained-unknown-equipment', masterId: 'r
 const original = structuredClone(state);
 const skillDeck = growth.autoEquipSkills(state);
 assert.ok(skillDeck.every(member => !member.skillIds.includes('retained-unknown-skill')));
-assert.ok(skillDeck.every(member => member.skillIds.includes('SKD071')), 'formal skills remain selectable and shareable');
+assert.ok(growth.autoEquipSkills({ ...state, skills: [{ id: 'SKD071', level: 1 }] }).every(member => member.skillIds.includes('SKD071')), 'formal skills remain selectable when they are the only owned kind');
+growth.validateDeck(state, state.deck.map(member => ({ ...member, skillIds: ['SKD071'] }))); // Manual sharing stays valid.
 growth.validateDeck(state, skillDeck);
 const equipmentDeck = growth.autoEquipEquipment(state);
 assert.ok(equipmentDeck.every(member => !Object.values(member.equipment).includes('retained-unknown-equipment')));

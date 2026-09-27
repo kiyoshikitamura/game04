@@ -1,0 +1,543 @@
+{
+  "fixture": "Synthetic five-member ownership using real approved masters; not a read of the reporting user account",
+  "policy": "unique kinds across formation, first slots before extras; attack first, then effect/compatibility/LB/rarity score; fallback only after kinds exhausted",
+  "owned": [
+    {
+      "id": "SKD035",
+      "level": 5
+    },
+    {
+      "id": "SKD001",
+      "level": 0
+    },
+    {
+      "id": "SKD003",
+      "level": 0
+    },
+    {
+      "id": "SKD009",
+      "level": 0
+    },
+    {
+      "id": "SKD019",
+      "level": 0
+    },
+    {
+      "id": "SKD013",
+      "level": 0
+    },
+    {
+      "id": "SKD039",
+      "level": 0
+    },
+    {
+      "id": "SKD042",
+      "level": 0
+    }
+  ],
+  "rows": [
+    {
+      "character": "北条氏康",
+      "before": "鬨の声",
+      "after": [
+        "土割り"
+      ],
+      "reason": {
+        "characterId": "char_joe_01",
+        "skillId": "SKD003",
+        "slot": 0,
+        "duplicateFallback": false,
+        "evaluation": {
+          "attack": true,
+          "effects": 41.5,
+          "compatibility": 13.8915,
+          "growth": 0,
+          "rarity": 0,
+          "availability": 8,
+          "score": 63.3915
+        }
+      }
+    },
+    {
+      "character": "井伊直政",
+      "before": "鬨の声",
+      "after": [
+        "紅蓮一閃"
+      ],
+      "reason": {
+        "characterId": "char_daimon_01",
+        "skillId": "SKD013",
+        "slot": 0,
+        "duplicateFallback": false,
+        "evaluation": {
+          "attack": true,
+          "effects": 55,
+          "compatibility": 35.06,
+          "growth": 0,
+          "rarity": 3,
+          "availability": 8,
+          "score": 116.06
+        }
+      }
+    },
+    {
+      "character": "お市の方",
+      "before": "鬨の声",
+      "after": [
+        "火の薙ぎ"
+      ],
+      "reason": {
+        "characterId": "char_aoi_01",
+        "skillId": "SKD019",
+        "slot": 0,
+        "duplicateFallback": false,
+        "evaluation": {
+          "attack": true,
+          "effects": 42,
+          "compatibility": 14.835,
+          "growth": 0,
+          "rarity": 1,
+          "availability": 8,
+          "score": 70.83500000000001
+        }
+      }
+    },
+    {
+      "character": "前田利家",
+      "before": "鬨の声",
+      "after": [
+        "岩断"
+      ],
+      "reason": {
+        "characterId": "char_jihoon_01",
+        "skillId": "SKD009",
+        "slot": 0,
+        "duplicateFallback": false,
+        "evaluation": {
+          "attack": true,
+          "effects": 46,
+          "compatibility": 14.601,
+          "growth": 0,
+          "rarity": 1,
+          "availability": 8,
+          "score": 74.601
+        }
+      }
+    },
+    {
+      "character": "竹中半兵衛",
+      "before": "鬨の声",
+      "after": [
+        "火走り"
+      ],
+      "reason": {
+        "characterId": "char_yuki_01",
+        "skillId": "SKD001",
+        "slot": 0,
+        "duplicateFallback": false,
+        "evaluation": {
+          "attack": true,
+          "effects": 41.5,
+          "compatibility": 1.8525,
+          "growth": 0,
+          "rarity": 0,
+          "availability": 8,
+          "score": 51.3525
+        }
+      }
+    }
+  ],
+  "shortage": {
+    "deck": [
+      {
+        "characterId": "char_joe_01",
+        "skillIds": [
+          "SKD003"
+        ],
+        "equipment": {}
+      },
+      {
+        "characterId": "char_daimon_01",
+        "skillIds": [
+          "SKD003"
+        ],
+        "equipment": {}
+      },
+      {
+        "characterId": "char_aoi_01",
+        "skillIds": [
+          "SKD035"
+        ],
+        "equipment": {}
+      },
+      {
+        "characterId": "char_jihoon_01",
+        "skillIds": [
+          "SKD039"
+        ],
+        "equipment": {}
+      },
+      {
+        "characterId": "char_yuki_01",
+        "skillIds": [
+          "SKD003"
+        ],
+        "equipment": {}
+      }
+    ],
+    "choices": [
+      {
+        "characterId": "char_daimon_01",
+        "skillId": "SKD003",
+        "slot": 0,
+        "duplicateFallback": false,
+        "evaluation": {
+          "attack": true,
+          "effects": 41.5,
+          "compatibility": 23.06,
+          "growth": 0,
+          "rarity": 0,
+          "availability": 8,
+          "score": 72.56
+        }
+      },
+      {
+        "characterId": "char_aoi_01",
+        "skillId": "SKD035",
+        "slot": 0,
+        "duplicateFallback": false,
+        "evaluation": {
+          "attack": false,
+          "effects": 28.924411854024598,
+          "compatibility": 12,
+          "growth": 15,
+          "rarity": 1,
+          "availability": 8,
+          "score": 69.9244118540246
+        }
+      },
+      {
+        "characterId": "char_jihoon_01",
+        "skillId": "SKD039",
+        "slot": 0,
+        "duplicateFallback": false,
+        "evaluation": {
+          "attack": false,
+          "effects": 20.5,
+          "compatibility": 2.6010000000000004,
+          "growth": 0,
+          "rarity": 0,
+          "availability": 0,
+          "score": 23.101
+        }
+      },
+      {
+        "characterId": "char_joe_01",
+        "skillId": "SKD003",
+        "slot": 0,
+        "duplicateFallback": true,
+        "evaluation": {
+          "attack": true,
+          "effects": 41.5,
+          "compatibility": 13.8915,
+          "growth": 0,
+          "rarity": 0,
+          "availability": 8,
+          "score": 63.3915
+        }
+      },
+      {
+        "characterId": "char_yuki_01",
+        "skillId": "SKD003",
+        "slot": 0,
+        "duplicateFallback": true,
+        "evaluation": {
+          "attack": true,
+          "effects": 41.5,
+          "compatibility": 1.8525,
+          "growth": 0,
+          "rarity": 0,
+          "availability": 8,
+          "score": 51.3525
+        }
+      }
+    ]
+  },
+  "manySlots": {
+    "deck": [
+      {
+        "characterId": "char_joe_01",
+        "skillIds": [
+          "SKD003",
+          "SKD013",
+          "SKD009"
+        ],
+        "equipment": {}
+      },
+      {
+        "characterId": "char_daimon_01",
+        "skillIds": [
+          "SKD013",
+          "SKD035",
+          "SKD007"
+        ],
+        "equipment": {}
+      },
+      {
+        "characterId": "char_aoi_01",
+        "skillIds": [
+          "SKD007",
+          "SKD039",
+          "SKD013"
+        ],
+        "equipment": {}
+      },
+      {
+        "characterId": "char_jihoon_01",
+        "skillIds": [
+          "SKD009",
+          "SKD013",
+          "SKD003"
+        ],
+        "equipment": {}
+      },
+      {
+        "characterId": "char_yuki_01",
+        "skillIds": [
+          "SKD019",
+          "SKD013",
+          "SKD007"
+        ],
+        "equipment": {}
+      }
+    ],
+    "choices": [
+      {
+        "characterId": "char_daimon_01",
+        "skillId": "SKD013",
+        "slot": 0,
+        "duplicateFallback": false,
+        "evaluation": {
+          "attack": true,
+          "effects": 55,
+          "compatibility": 35.06,
+          "growth": 0,
+          "rarity": 3,
+          "availability": 8,
+          "score": 116.06
+        }
+      },
+      {
+        "characterId": "char_aoi_01",
+        "skillId": "SKD007",
+        "slot": 0,
+        "duplicateFallback": false,
+        "evaluation": {
+          "attack": true,
+          "effects": 46,
+          "compatibility": 14.835,
+          "growth": 0,
+          "rarity": 1,
+          "availability": 8,
+          "score": 74.83500000000001
+        }
+      },
+      {
+        "characterId": "char_jihoon_01",
+        "skillId": "SKD009",
+        "slot": 0,
+        "duplicateFallback": false,
+        "evaluation": {
+          "attack": true,
+          "effects": 46,
+          "compatibility": 14.601,
+          "growth": 0,
+          "rarity": 1,
+          "availability": 8,
+          "score": 74.601
+        }
+      },
+      {
+        "characterId": "char_joe_01",
+        "skillId": "SKD003",
+        "slot": 0,
+        "duplicateFallback": false,
+        "evaluation": {
+          "attack": true,
+          "effects": 41.5,
+          "compatibility": 13.8915,
+          "growth": 0,
+          "rarity": 0,
+          "availability": 8,
+          "score": 63.3915
+        }
+      },
+      {
+        "characterId": "char_yuki_01",
+        "skillId": "SKD019",
+        "slot": 0,
+        "duplicateFallback": false,
+        "evaluation": {
+          "attack": true,
+          "effects": 42,
+          "compatibility": 1.8525,
+          "growth": 0,
+          "rarity": 1,
+          "availability": 8,
+          "score": 57.8525
+        }
+      },
+      {
+        "characterId": "char_daimon_01",
+        "skillId": "SKD035",
+        "slot": 1,
+        "duplicateFallback": false,
+        "evaluation": {
+          "attack": false,
+          "effects": 28.924411854024598,
+          "compatibility": 12,
+          "growth": 15,
+          "rarity": 1,
+          "availability": 8,
+          "score": 69.9244118540246
+        }
+      },
+      {
+        "characterId": "char_aoi_01",
+        "skillId": "SKD039",
+        "slot": 1,
+        "duplicateFallback": false,
+        "evaluation": {
+          "attack": false,
+          "effects": 20.5,
+          "compatibility": 22.835,
+          "growth": 0,
+          "rarity": 0,
+          "availability": 0,
+          "score": 43.335
+        }
+      },
+      {
+        "characterId": "char_jihoon_01",
+        "skillId": "SKD013",
+        "slot": 1,
+        "duplicateFallback": true,
+        "evaluation": {
+          "attack": true,
+          "effects": 55,
+          "compatibility": 2.6010000000000004,
+          "growth": 0,
+          "rarity": 3,
+          "availability": 8,
+          "score": 83.601
+        }
+      },
+      {
+        "characterId": "char_joe_01",
+        "skillId": "SKD013",
+        "slot": 1,
+        "duplicateFallback": true,
+        "evaluation": {
+          "attack": true,
+          "effects": 55,
+          "compatibility": 1.8915,
+          "growth": 0,
+          "rarity": 3,
+          "availability": 8,
+          "score": 82.89150000000001
+        }
+      },
+      {
+        "characterId": "char_yuki_01",
+        "skillId": "SKD013",
+        "slot": 1,
+        "duplicateFallback": true,
+        "evaluation": {
+          "attack": true,
+          "effects": 55,
+          "compatibility": 1.8525,
+          "growth": 0,
+          "rarity": 3,
+          "availability": 8,
+          "score": 82.85249999999999
+        }
+      },
+      {
+        "characterId": "char_aoi_01",
+        "skillId": "SKD013",
+        "slot": 2,
+        "duplicateFallback": true,
+        "evaluation": {
+          "attack": true,
+          "effects": 55,
+          "compatibility": 14.835,
+          "growth": 0,
+          "rarity": 3,
+          "availability": 8,
+          "score": 95.83500000000001
+        }
+      },
+      {
+        "characterId": "char_daimon_01",
+        "skillId": "SKD007",
+        "slot": 2,
+        "duplicateFallback": true,
+        "evaluation": {
+          "attack": true,
+          "effects": 46,
+          "compatibility": 35.06,
+          "growth": 0,
+          "rarity": 1,
+          "availability": 8,
+          "score": 95.06
+        }
+      },
+      {
+        "characterId": "char_joe_01",
+        "skillId": "SKD009",
+        "slot": 2,
+        "duplicateFallback": true,
+        "evaluation": {
+          "attack": true,
+          "effects": 46,
+          "compatibility": 13.8915,
+          "growth": 0,
+          "rarity": 1,
+          "availability": 8,
+          "score": 73.89150000000001
+        }
+      },
+      {
+        "characterId": "char_jihoon_01",
+        "skillId": "SKD003",
+        "slot": 2,
+        "duplicateFallback": true,
+        "evaluation": {
+          "attack": true,
+          "effects": 41.5,
+          "compatibility": 14.601,
+          "growth": 0,
+          "rarity": 0,
+          "availability": 8,
+          "score": 64.101
+        }
+      },
+      {
+        "characterId": "char_yuki_01",
+        "skillId": "SKD007",
+        "slot": 2,
+        "duplicateFallback": true,
+        "evaluation": {
+          "attack": true,
+          "effects": 46,
+          "compatibility": 1.8525,
+          "growth": 0,
+          "rarity": 1,
+          "availability": 8,
+          "score": 61.8525
+        }
+      }
+    ]
+  },
+  "checks": "PASS: diversity, shortage, attack priority, SSR, LB/kind identity, repeat/order determinism, slots, owned-only, immutable inventory, save roundtrip, manual sharing"
+}
