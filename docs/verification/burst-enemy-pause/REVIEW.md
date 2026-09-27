@@ -20,6 +20,12 @@
 型検査PASS、共通UI静的契約PASS、Preview設定でビルドPASS（45ページ）。
 
 
-## 配信
-実装5a70090、文字寸法補正cefd9775ad12ae0101b3f68532af69e6d967a3d0。後者を共通Previewへ配信し、/api/qa/deploymentのSHA・branch・previewを照合。
-Deployment dpl_HKJGwS4oGCpFCiSoRp8XYCNLfSmD / https://game04-9r6sah1jm-kiyoshi-kitamura.vercel.app 。Vercelビルド45ページPASS/Ready。共通接続直前にPR/branch先端cefd977一致を再取得。
+
+## 配信済み・実機確認待ち
+- 最終配信SHA f56c1750960e062a7a6ff296614beb6771e56985。
+- 共通Preview: https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app
+- Deployment dpl_87Ntwtf9rqbSgT2iXVnnMYYBiEvN / https://game04-5g5ddiq3z-kiyoshi-kitamura.vercel.app
+- /api/qa/deploymentでSHA/branch/environment=previewを照合。Vercelビルド45ページPASS/Ready。共通URL更新直前にPR/branch先端一致を確認。
+- 375/390pxの実機で、顔・重なり・読みやすさ・操作感の最終受入待ち。全68面の再調整、main/本番/GAME03変更なし。
+
+配信後限定検証PASS：1/2/3体、通常中央、撃破固定slot、情報欄および画像タップの敵詳細一致、カウント保持、5連撃、速度復帰、SKIP。第1派/1連撃は旧CSS実寸との幅・高さ比が各0.70±0.01。deployed/browser.json・画像参照。
