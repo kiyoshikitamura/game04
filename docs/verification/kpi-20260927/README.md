@@ -2,6 +2,7 @@
 
 ## Scope and integration
 
+- User clarification (2026-09-27 20:47 JST): this is an internal tool hosted in development / Preview, not a production-facing dashboard. The KPI proxy returns 404 for every KPI page/API on Vercel Production; Preview retains existing Basic authentication. Hosting environment and aggregate-data source are separate settings.
 - Dedicated branch: `work/game04-kpi-dashboard-20260927`.
 - Base: common Preview `9099e9eafcce090d6b87c064e46ba54a81e37949` on `work/game04-common-preview-20260925`.
 - Entry: `/admin/kpi`; day detail: `/admin/kpi/day/YYYY-MM-DD`.
@@ -69,4 +70,8 @@ Screenshots in this directory use labeled synthetic **display-test data**, not l
 
 Reproduce UI checks by starting local Next on port 3317 with the mock-build flag and local-only Basic auth values documented in the test script, then running `node scripts/verify_game04_kpi_browser.mjs`. Install a normal Playwright Chromium first. An optional `KPI_TEST_CHROMIUM_MODULE` absolute module path supports an alternate local Chromium implementation. The script rejects non-local origins.
 
-Before declaring deployment complete: configure the branch's GAME04 Preview target, deploy the PR head, authenticate at `/admin/kpi`, and verify the browser → API → real RPC path. Do not promote or merge production as part of this branch.
+Before declaring deployment complete: configure the branch's GAME04 Preview target, deploy the PR head, authenticate at `/admin/kpi`, and verify the browser → API → real RPC path. The internal tool itself stays in development / Preview; production deployment is not an outstanding task.
+
+Deployment follow-up (2026-09-27 20:47 JST): GitHub reports failed automatic Preview checks for the PR head (`Vercel – game04` and `Vercel – game04-production-receiver`). The connected Vercel project list exposes only `tribe-neon`; build-log retrieval returns `Tool get_deployment_build_logs not found`. No Vercel CLI authentication is available. Do not repeat these failed connector paths; use an approved Vercel dashboard session or hand off the exact branch deployment/settings to the user.
+
+Internal-hosting follow-up verification: rebuilt successfully; local HTTP checks for `/admin/kpi`, day detail and the KPI API return 404 in Vercel Production even with valid Basic credentials. Preview returns 401 without Basic auth, 200 for authenticated pages, and 503 for the API without its DB credentials. These checks do not claim hosted deployment success.
