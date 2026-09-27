@@ -82,9 +82,10 @@ export default function Game04KpiDashboard({ fixedDate }: { fixedDate?: string }
           {latest && <div className="g4-kpi-cards">
             {[['新規登録', number(latest.new_users)], [activeLabel, number(latest.active_users)], ['売上', yen(latest.revenue)], ['チュートリアル完了率', percent(latest.tutorial_rate)]].map(([label, value]) => <div className="g4-kpi-card" key={label}><p>{label}</p><strong>{value}</strong><small>{latest.date}{latest.partial ? ' · 途中集計' : ''}</small></div>)}
           </div>}
+          <p className="g4-kpi-muted">タイトルUU：同じブラウザーの重複を除いた到達数。{data.title_measured_from ? `計測開始 ${new Date(data.title_measured_from).toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo', hour12: false })} JST（開始日・開始月は開始後のみ）` : '計測記録待ち。開始前の期間は未計測です。'}</p>
           <h2>基本指標・継続率</h2><p className="g4-kpi-muted">{period === 'monthly' ? '月を選ぶと日別の内訳を表示します。' : '日付を選ぶとその日の集計を表示します。'} 継続率は新規登録コホートの D1〜D5。</p>
-          <div className="g4-kpi-table" tabIndex={0} aria-label="基本指標の表（横スクロール）"><table><thead><tr>{['期間', '新規登録', '累計登録', activeLabel, 'チュートリアル完了', '完了率', '課金者', '課金率', '売上', 'ARPPU', 'ARPU', 'D1', 'D2', 'D3', 'D4', 'D5'].map(label => <th key={label} scope="col">{label}</th>)}</tr></thead>
-            <tbody>{data.rows.map(row => <tr key={row.date}><th scope="row">{dateLabel(row.date)}{row.partial && <small>途中集計</small>}</th><td>{number(row.new_users)}</td><td>{number(row.total_registered)}</td><td>{number(row.active_users)}</td><td>{number(row.tutorial_completed)}</td><td>{percent(row.tutorial_rate)}</td><td>{number(row.payers)}</td><td>{percent(row.payer_rate)}</td><td>{yen(row.revenue)}</td><td>{yen(row.arppu)}</td><td>{yen(row.arpu)}</td>{[1, 2, 3, 4, 5].map(day => <td key={day}><RetentionCell value={row.retention.find(item => item.day === day)} /></td>)}</tr>)}</tbody></table></div>
+          <div className="g4-kpi-table" tabIndex={0} aria-label="基本指標の表（横スクロール）"><table><thead><tr>{['期間', 'タイトルUU', '新規登録', '累計登録', activeLabel, 'チュートリアル完了', '完了率', '課金者', '課金率', '売上', 'ARPPU', 'ARPU', 'D1', 'D2', 'D3', 'D4', 'D5'].map(label => <th key={label} scope="col">{label}</th>)}</tr></thead>
+            <tbody>{data.rows.map(row => <tr key={row.date}><th scope="row">{dateLabel(row.date)}{row.partial && <small>途中集計</small>}</th><td>{row.title_uu == null ? '未計測' : number(row.title_uu)}</td><td>{number(row.new_users)}</td><td>{number(row.total_registered)}</td><td>{number(row.active_users)}</td><td>{number(row.tutorial_completed)}</td><td>{percent(row.tutorial_rate)}</td><td>{number(row.payers)}</td><td>{percent(row.payer_rate)}</td><td>{yen(row.revenue)}</td><td>{yen(row.arppu)}</td><td>{yen(row.arpu)}</td>{[1, 2, 3, 4, 5].map(day => <td key={day}><RetentionCell value={row.retention.find(item => item.day === day)} /></td>)}</tr>)}</tbody></table></div>
         </>}
         {section === 'stages' && <>
           <h2>ステージ状況 <span>累計</span></h2><p className="g4-kpi-muted">全68ステージの戦闘開始数と勝利数。再挑戦・再クリアを含みます。期間切替の影響を受けません。</p>
@@ -107,6 +108,7 @@ export default function Game04KpiDashboard({ fixedDate }: { fixedDate?: string }
           <li>売上：本番決済（live）の付与完了（GRANTED）を付与日時で集計。ARPPU = 売上 / 課金者、ARPU = 売上 / {activeLabel}。</li>
           <li>ステージ：実行数は戦闘開始、クリア数は確定済み勝利。クリア率 = クリア数 / 実行数。未確定・撤退・敗北はクリアに含みません。</li>
           <li>レイド：同じルームの段階撃破や報酬受取は追加の撃破に数えません。種別間の参加UUは重複するため合算できません。開催日と撃破日が異なる場合があります。</li>
+          <li>タイトルUUはブラウザー単位です。別端末・別ブラウザー・保存データ削除では別UUになります。識別できたQA・テスト・管理者のブラウザーを除外し、未ログインで紐付けできない訪問は含みます。</li>
           <li>累計は保存されている記録を取得時点まで集計します。過去日を開いてもステージは現在の累計です。自動取得は最大60秒のキャッシュを利用し、「再集計」で最新を取得します。</li>
         </ul></details>
       </>}

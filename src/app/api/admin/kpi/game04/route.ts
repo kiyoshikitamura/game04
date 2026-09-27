@@ -20,9 +20,13 @@ async function readDashboard(origin: string, period: Period, from: string, to: s
   const { data, error } = await db.rpc('game04_kpi_dashboard_v1', { p_from: from, p_to: to, p_period: period, p_stages: stages, p_tutorial_steps: SCENES.length });
   if (error) { console.error('GAME04 KPI RPC failed', { code: error.code }); throw new Error('KPI_QUERY_FAILED'); }
   if (!data || data.stages?.length !== 68 || !Array.isArray(data.rows)) throw new Error('KPI_INVALID_RESPONSE');
-  return { ...data, environment: config.environment };
+  const title = await db.rpc('game04_title_uu_v1', { p_from: from, p_to: to, p_period: period });
+  if (title.error) throw new Error('TITLE_KPI_QUERY_FAILED');
+  const titleRows = new Map<string, number | null>((title.data?.rows || []).map((row: { key: string; title_uu: number | null }) => [row.key, row.title_uu]));
+  return { ...data, rows: data.rows.map((row: DashboardData['rows'][number]) => ({ ...row, title_uu: titleRows.get(row.date) ?? null })),
+    title_measured_from: title.data?.measured_from ?? null, environment: config.environment };
 }
-const cachedRead = unstable_cache(readDashboard, ['game04-kpi-production-v2-20260927', questData.version, String(SCENES.length)], { revalidate: 60 });
+const cachedRead = unstable_cache(readDashboard, ['game04-kpi-title-v3-20260928', questData.version, String(SCENES.length)], { revalidate: 60 });
 function response(body: unknown, status = 200) { return NextResponse.json(body, { status, headers: { 'Cache-Control': 'no-store' } }); }
 // /api/admin/kpi/* is authenticated by the existing Basic-auth proxy.
 export async function GET(request: NextRequest) {
