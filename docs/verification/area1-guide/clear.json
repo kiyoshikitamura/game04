@@ -1,0 +1,86 @@
+{
+  "network": [
+    {
+      "action": "get_state",
+      "url": "https://soiksqgtmcnspfedmanr.supabase.co/functions/v1/game04-redesign-api",
+      "status": 200,
+      "contentType": "application/json",
+      "location": null
+    },
+    {
+      "action": "quest_battle",
+      "url": "https://soiksqgtmcnspfedmanr.supabase.co/functions/v1/game04-redesign-api",
+      "status": 200,
+      "contentType": "application/json",
+      "location": null
+    },
+    {
+      "action": "battle_finish",
+      "url": "https://soiksqgtmcnspfedmanr.supabase.co/functions/v1/game04-redesign-api",
+      "status": 200,
+      "contentType": "application/json",
+      "location": null
+    },
+    {
+      "action": "battle_finish",
+      "url": "https://soiksqgtmcnspfedmanr.supabase.co/functions/v1/game04-redesign-api",
+      "status": 200,
+      "contentType": "application/json",
+      "location": null
+    }
+  ],
+  "battleId": "b47cb658-7217-47bc-aa11-c61950c3ed9d",
+  "firstClear": true,
+  "rewards": [
+    {
+      "kind": "cash",
+      "amount": 500
+    },
+    {
+      "id": "small",
+      "kind": "character_exp_item",
+      "amount": 1
+    },
+    {
+      "id": "small",
+      "kind": "equipment_exp_item",
+      "amount": 1
+    },
+    {
+      "kind": "cash",
+      "amount": 10000
+    },
+    {
+      "id": "medium",
+      "kind": "character_exp_item",
+      "amount": 5
+    },
+    {
+      "id": "medium",
+      "kind": "equipment_exp_item",
+      "amount": 3
+    },
+    {
+      "kind": "skill_material",
+      "amount": 8
+    },
+    {
+      "id": "SPECIAL_TICKET_CHARACTER",
+      "kind": "ticket",
+      "amount": 1
+    },
+    {
+      "id": "SPECIAL_TICKET_SKILL",
+      "kind": "ticket",
+      "amount": 1
+    },
+    {
+      "id": "SPECIAL_TICKET_EQUIPMENT",
+      "kind": "ticket",
+      "amount": 1
+    }
+  ],
+  "clearCount": 1,
+  "replayNoDoubleGrant": true,
+  "guidePending": true
+}

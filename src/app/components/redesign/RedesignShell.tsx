@@ -27,7 +27,7 @@ export default function RedesignShell({ state, onAction, children, notifications
   const [missionError, setMissionError] = useState('');
   const missionLock = useRef(false);
   const ackLock=useRef(false);
-  async function acknowledgeMissions(){if(ackLock.current||previewOnly||!state.earlyProgress?.missionNavigationPending)return;ackLock.current=true;setMissionError('');try{await onAction('early_missions_opened',{});}catch(e){setMissionError(e instanceof Error?e.message:'任務の表示を保存できませんでした。');}finally{ackLock.current=false;}}
+  async function acknowledgeMissions(){if(ackLock.current||previewOnly||!state.earlyProgress?.missionNavigationPending)return;ackLock.current=true;setMissionError('');try{await onAction('early_missions_opened',{});}catch{setMissionError('任務の表示を保存できませんでした。通信状態を確認して、もう一度お試しください。');}finally{ackLock.current=false;}}
   useEffect(()=>{if(game.showMissionPanel&&state.earlyProgress?.missionNavigationPending)void acknowledgeMissions();},[game.showMissionPanel,state.earlyProgress?.missionNavigationPending]);
   const [missionStatus,setMissionStatus]=useState('');
   const latestMissions=useRef(missions??[]);

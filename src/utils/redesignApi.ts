@@ -40,7 +40,9 @@ export async function redesignRequest(action: string, payload: Record<string, un
 async function invokeRedesignRequest(action: string, payload: Record<string, unknown>, requestId: string): Promise<RedesignResponse> {
   const { data, error } = await supabase.functions.invoke('game04-redesign-api', {
     body: { action, payload, requestId },
-    region: FunctionRegion.EuCentral1,
+    // Production follows the platform's nearest healthy region; the isolated
+    // Preview retains its measured regional baseline.
+    ...(process.env.NEXT_PUBLIC_APP_ENV === 'production' ? {} : {region: FunctionRegion.EuCentral1}),
   });
   if (error) {
     let detail = '';

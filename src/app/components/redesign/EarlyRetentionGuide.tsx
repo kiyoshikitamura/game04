@@ -1,7 +1,8 @@
 'use client';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import ActionButton from '../ui/ActionButton';
 import GuideDialog from '../ui/GuideDialog';
+import ScreenState from '../ui/ScreenState';
 import type { RedesignState } from '../../../domain/redesign/types';
 import { AREA_ONE_COMPLETE_TEXT, nextEarlyGuide } from '../../../domain/redesign/earlyProgress';
 import { earlyLoadoutPlan } from '../../../domain/redesign/earlyLoadout';
@@ -16,6 +17,7 @@ export interface EarlyRetentionProps {
  navigate: (destination:'characters'|'missions', options?:{characterId?:string;earlyLoadout?:boolean;tab?:'normal'})=>void;
 }
 export function EarlyRetentionGuide({state,battlePlaying,resultOpen,save,navigate}: EarlyRetentionProps) {
+ const lock=useRef(false);
  const guide=nextEarlyGuide(state,{battlePlaying,resultOpen});
  const [busy,setBusy]=useState(false),[error,setError]=useState('');
  if(!guide)return null;
@@ -27,15 +29,15 @@ export function EarlyRetentionGuide({state,battlePlaying,resultOpen,save,navigat
   missions:{title:'三河を制した',text:AREA_ONE_COMPLETE_TEXT,cta:'任務へ',choice:'missions'},
  }[guide];
  async function act(choice:string){
-  if(busy)return;setBusy(true);setError('');
+  if(lock.current)return;lock.current=true;setBusy(true);setError('');
   try{await save('early_guide',{guide,choice});if(choice==='missions')navigate('missions',{tab:'normal'});else if(choice==='characters')navigate('characters',guide==='equip-fire'?{characterId:'char_daimon_01',earlyLoadout:true}:undefined);}
-  catch(e){setError(e instanceof Error?e.message:'保存できませんでした。もう一度お試しください。');}
-  finally{setBusy(false);}
+  catch{setError('保存を確認できませんでした。通信状態を確認して、もう一度お試しください。');}
+  finally{lock.current=false;setBusy(false);}
  }
- return <GuideDialog title={content.title} message={content.text} blocked={battlePlaying||resultOpen} actions={[
-  {label:content.cta,semantic:'primary',disabled:busy,onClick:()=>act(content.choice)},
+ return <GuideDialog title={content.title} message={error ? <ScreenState kind="error" compact title="保存を確認できませんでした" message={error}/> : content.text} blocked={battlePlaying||resultOpen} actions={[
+  {label:error?'再試行':content.cta,semantic:'primary',disabled:busy,busy,busyLabel:'保存中',onClick:()=>act(content.choice)},
   ...((guide==='join-takenaka'||guide==='equip-fire')?[{label:'あとで',semantic:'secondary' as const,disabled:busy,onClick:()=>act('later')}]:[])
- ]}>{error&&<p role="alert">{error}</p>}</GuideDialog>;
+ ]}/>;
 }
 /** Place beside the existing sortie button for mikawa-5. It never intercepts sortie. */
 export function EarlySortiePreparation({state,save}:Pick<EarlyRetentionProps,'state'|'save'>){
