@@ -64,7 +64,7 @@ Required hosting settings:
 | HTTP guards | Local unauthenticated page/API return 401; invalid inputs 400; missing KPI DB configuration 503 |
 | UI tests | `scripts/verify_game04_kpi_browser.mjs` passed: 68 rows, clear rates, both raid types, month/day navigation, source view, error/retry and absence of removed KPIs |
 | Browser layout | 1440px overview and 375/390px stage/raid views inspected; page does not overflow horizontally, wide tables scroll internally; no page errors |
-| Live hosted end-to-end | Not verified: connected Vercel tooling did not expose the GAME04 project and no hosting/service-role credentials were available in this workspace |
+| Live hosted end-to-end | Preview deployment is Ready and its immutable URL returns HTTP 401 with the expected Basic challenge. Authenticated browser/API/DB verification remains pending because the cloud browser blocks navigation to the KPI page. |
 
 Screenshots in this directory use labeled synthetic **display-test data**, not live production data. The DB tests above separately exercised the actual Preview RPC. Standard Playwright browser download failed in this runtime; tests passed using a temporary `@sparticuz/chromium` installation outside the repository. No browser dependency or package lock was changed.
 
@@ -75,3 +75,14 @@ Before declaring deployment complete: configure the branch's GAME04 Preview targ
 Deployment follow-up (2026-09-27 20:47 JST): GitHub reports failed automatic Preview checks for the PR head (`Vercel – game04` and `Vercel – game04-production-receiver`). The connected Vercel project list exposes only `tribe-neon`; build-log retrieval returns `Tool get_deployment_build_logs not found`. No Vercel CLI authentication is available. Do not repeat these failed connector paths; use an approved Vercel dashboard session or hand off the exact branch deployment/settings to the user.
 
 Internal-hosting follow-up verification: rebuilt successfully; local HTTP checks for `/admin/kpi`, day detail and the KPI API return 404 in Vercel Production even with valid Basic credentials. Preview returns 401 without Basic auth, 200 for authenticated pages, and 503 for the API without its DB credentials. These checks do not claim hosted deployment success.
+
+Deployment follow-up (2026-09-27 21:14 JST): PR #42 was merged into the common Preview branch (merge `651413cc139095630f05985279238e9ed4369434`). The user saved Basic authentication variables; both variables were moved from Production to the specific common Preview branch without entering or revealing their values. Redeployment `CEraPvdQrsyoE7hT44pKyQnZYRJe` is Ready. The URL `https://game04-2yyfj9zac-kiyoshi-kitamura.vercel.app/admin/kpi` returns HTTP 401 and `WWW-Authenticate: Basic`. The branch alias still returns the older authentication-not-configured 503 response, so use this immutable deployment URL. Cloud browser navigation fails with ERR_BLOCKED_BY_CLIENT and a browser URL-policy rejection; no authenticated hosted end-to-end success is claimed. No production deployment was performed. `preview-ready.jpg` records the successful Preview deployment.
+
+
+## Production data correction — 2026-09-27
+
+The original hosted dashboard incorrectly read Preview data (27 registrations, including 25 users classified QA after registration). The internal hosting environment must remain Preview, while the data source must be GAME04 production. The corrected route uses only the dedicated server key GAME04_KPI_SERVICE_ROLE_KEY and the production origin; it never inherits the gameplay Preview connection. The connection validator rejects Preview and GAME03 origins.
+
+QA/test/admin classifications now exclude all historical events, including registration before classification; fraud suspension keeps event-time semantics. A late-QA regression fixture passes and rolls back in Preview. The corrected exclusion leaves 2 eligible Preview users instead of 27, proving the 25-user leak is removed. Production migration game04_kpi_dashboard_production_v2 applied successfully. No GAME03 data or code was changed.
+
+Dedicated production service-key configuration and authenticated hosted verification remain pending. Never treat a Preview Ready state or Basic 401 response as proof of the selected data source.

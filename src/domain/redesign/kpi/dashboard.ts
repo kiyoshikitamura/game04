@@ -31,7 +31,6 @@ export function kpiConnection(config: { url?: string; key?: string }) {
   const key = config.key?.trim();
   // Dedicated server configuration: never inherit GAME03 or alter gameplay connection settings.
   const allowed = new Map([
-    ['https://znakrkaazliexzwihxge.supabase.co', '検証'],
     ['https://soiksqgtmcnspfedmanr.supabase.co', '本番'],
   ]);
   if (!url || !key) throw new Error('KPI_CONFIG_MISSING');

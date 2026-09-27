@@ -10,11 +10,8 @@ export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
 const stages = questData.stages.map(s => ({ id: s.id, design_id: s.designId, name: s.name }));
 function connection() {
-  const dedicatedUrl = process.env.GAME04_KPI_SUPABASE_URL;
-  const dedicatedKey = process.env.GAME04_KPI_SERVICE_ROLE_KEY;
-  const dedicated = Boolean(dedicatedUrl || dedicatedKey);
-  return kpiConnection({ url: dedicated ? dedicatedUrl : process.env.NEXT_PUBLIC_SUPABASE_URL,
-    key: dedicated ? dedicatedKey : process.env.SUPABASE_SERVICE_ROLE_KEY });
+  return kpiConnection({ url: process.env.GAME04_KPI_SUPABASE_URL || 'https://soiksqgtmcnspfedmanr.supabase.co',
+    key: process.env.GAME04_KPI_SERVICE_ROLE_KEY });
 }
 async function readDashboard(origin: string, period: Period, from: string, to: string): Promise<DashboardData> {
   const config = connection();
@@ -25,7 +22,7 @@ async function readDashboard(origin: string, period: Period, from: string, to: s
   if (!data || data.stages?.length !== 68 || !Array.isArray(data.rows)) throw new Error('KPI_INVALID_RESPONSE');
   return { ...data, environment: config.environment };
 }
-const cachedRead = unstable_cache(readDashboard, ['game04-kpi-v1-20260927', questData.version, String(SCENES.length)], { revalidate: 60 });
+const cachedRead = unstable_cache(readDashboard, ['game04-kpi-production-v2-20260927', questData.version, String(SCENES.length)], { revalidate: 60 });
 function response(body: unknown, status = 200) { return NextResponse.json(body, { status, headers: { 'Cache-Control': 'no-store' } }); }
 // /api/admin/kpi/* is authenticated by the existing Basic-auth proxy.
 export async function GET(request: NextRequest) {

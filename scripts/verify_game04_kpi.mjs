@@ -12,7 +12,7 @@ assert.deepEqual(dashboardRange('daily', '2024-02', '2026-09-27'), { from: '2024
 assert.deepEqual(dashboardRange('daily', '2026-09', '2026-09-27'), { from: '2026-09-01', to: '2026-09-27' });
 for (const month of ['2026-13', '2026-10', '2026-02-01', '../2026']) assert.throws(() => dashboardRange('daily', month, '2026-09-27'));
 const preview = 'https://znakrkaazliexzwihxge.supabase.co';
-assert.equal(kpiConnection({ url: preview, key: 'test' }).environment, '検証');
+assert.throws(() => kpiConnection({ url: preview, key: 'test' }));
 assert.equal(kpiConnection({ url: 'https://soiksqgtmcnspfedmanr.supabase.co/', key: 'test' }).environment, '本番');
 for (const url of ['https://ktpolnkyyfkowxdmijww.supabase.co', 'http://znakrkaazliexzwihxge.supabase.co', `${preview}/rest`, `${preview}?x=1`, 'https://user:pass@znakrkaazliexzwihxge.supabase.co', `${preview}.example.com`]) assert.throws(() => kpiConnection({ url, key: 'test' }));
 assert.throws(() => kpiConnection({ url: preview }));

@@ -11,7 +11,7 @@ begin
   insert into public.users(id,username,created_at) values(u,'KPI検証A','2001-01-01 00:00+09'),(u2,'KPI検証B','2001-01-01 00:00+09'),(qa,'KPI検証Q','2001-01-01 00:00+09');
   insert into public.kpi_subjects(source_user_id,registered_at,registration_type) values(qa,'2001-01-01 00:00+09','unknown') on conflict(source_user_id) do nothing;
   select subject_id into sid from public.kpi_subjects where source_user_id=qa;
-  insert into public.kpi_account_classification_periods(subject_id,classification,valid_from,reason) values(sid,'qa','2000-01-01','KPI rollback fixture');
+  insert into public.kpi_account_classification_periods(subject_id,classification,valid_from,reason) values(sid,'qa','2026-09-01','KPI rollback fixture');
   insert into public.game04_battles(id,user_id,kind,target_id,seed,input,result,status,created_at,settled_at)
   select gen_random_uuid(),case when n=6 then qa else u end,'quest',s->0->>'id',1,'{}',
    case when n in(1,2,6) then '{"battle":{"outcome":"win"}}'::jsonb when n=3 then '{"battle":{"outcome":"lose"}}'::jsonb when n=5 then '{"retired":true}'::jsonb else null end,

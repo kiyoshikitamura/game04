@@ -1,11 +1,13 @@
 -- GAME04 KPI only. Additive read-only RPCs; no gameplay hooks, backfill or Cron changes.
--- Apply first to the isolated preview DB. Production application belongs to its migration owner.
+-- Internal Preview hosting reads GAME04 production using dedicated server credentials.
 create or replace function public.game04_kpi_excluded_v1(p_user uuid,p_at timestamptz)
 returns boolean language sql stable security invoker set search_path=public,pg_temp as $$
  select exists(select 1 from public.kpi_subjects s
  join public.kpi_account_classification_periods c using(subject_id)
- where s.source_user_id=p_user and c.classification in ('admin','qa','test','fraud_suspended')
- and c.valid_from<=p_at and (c.valid_to is null or p_at<c.valid_to));
+ where s.source_user_id=p_user and (
+  (c.classification in ('admin','qa','test') and c.valid_from<=statement_timestamp())
+  or (c.classification='fraud_suspended' and c.valid_from<=p_at and (c.valid_to is null or p_at<c.valid_to))
+ ));
 $$;
 revoke all on function public.game04_kpi_excluded_v1(uuid,timestamptz) from public,anon,authenticated;
 grant execute on function public.game04_kpi_excluded_v1(uuid,timestamptz) to service_role;
