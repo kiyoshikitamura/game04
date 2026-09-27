@@ -27,6 +27,7 @@ import { resolveBattleFrameEffects } from './battleEffectPresentation';
 import { isBattleImageReady, preloadBattleImages } from '../battle/battleAssetPreload';
 import { characterArt } from '@/theme/creativeAssets';
 import characterAssets from '@/theme/local-characters.json';
+import enemyArtBounds from '@/theme/enemy-art-bounds.json';
 import { getCharacterPresentationMetadata } from '../character/characterPresentationMetadata';
 import { STATUS_LABELS, TARGET_LABELS, passiveDescription, skillConditionText, READINESS_REASONS, CLEANSE_LABELS, skillDescription, LEGACY_SKILL_MAPPING_NOTICE } from './battleLabels';
 
@@ -172,11 +173,12 @@ export function BattleView({ onRetire, resultActions, resultRewards, bgmScene = 
     const active = presentation.activeActorId === state.id;
     const artSource = unitArt(unit, state, enemy ? 'battle' : 'portrait');
     const faceCrop = getCharacterPresentationMetadata(artSource);
-    return <div data-unit-id={state.id} data-order={order} data-hit={impact?.type === 'damage' ? frame.index : undefined} className={`${enemy ? styles.enemy : styles.member} ${state.hp <= 0 ? styles.dead : ''} ${active ? styles.active : ''}`} key={state.id}>
+    const enemyCrop = enemy ? (enemyArtBounds as Record<string, {width:number;height:number;bounds:number[];rarity:string}>)[artSource] : undefined;
+    return <div data-unit-id={state.id} data-enlarge={!!enemyCrop} data-order={order} data-hit={impact?.type === 'damage' ? frame.index : undefined} className={`${enemy ? styles.enemy : styles.member} ${state.hp <= 0 ? styles.dead : ''} ${active ? styles.active : ''}`} key={state.id}>
       {!enemy && <span className={styles.order}>{order + 1}</span>}
       {!enemy && active && <span className={styles.acting}>行動中</span>}
       <button key={impact?.type === 'damage' ? `hit-${frame.index}` : 'idle'} className={`${styles.unitButton} ${impact?.type === 'damage' ? styles.hit : ''}`} onClick={() => setDetail({ unit, state })} aria-label={`${enemyDisplayName(unit)}の戦闘詳細`}>
-        {enemy ? <img data-effect-anchor src={artSource} alt="" className={styles.enemyImage} /> : <span data-effect-anchor className={styles.memberPortrait}><img src={artSource} alt="" className={styles.memberImage} style={{ '--face-scale': faceCrop.thumbnailScale, '--face-x': `${faceCrop.thumbnailX}%`, '--face-y': `${faceCrop.thumbnailY}%` } as CSSProperties} /></span>}
+        {enemy ? enemyCrop ? <svg data-effect-anchor className={styles.enemyImage} viewBox={`${enemyCrop.bounds[0]} ${enemyCrop.bounds[1]} ${enemyCrop.bounds[2]-enemyCrop.bounds[0]} ${enemyCrop.bounds[3]-enemyCrop.bounds[1]}`} preserveAspectRatio="xMidYMax meet" aria-hidden="true"><image href={artSource} width={enemyCrop.width} height={enemyCrop.height}/></svg> : <img data-effect-anchor src={artSource} alt="" className={styles.enemyImage} /> : <span data-effect-anchor className={styles.memberPortrait}><img src={artSource} alt="" className={styles.memberImage} style={{ '--face-scale': faceCrop.thumbnailScale, '--face-x': `${faceCrop.thumbnailX}%`, '--face-y': `${faceCrop.thumbnailY}%` } as CSSProperties} /></span>}
         <span className={styles.unitInfo}>
           <span className={styles.unitName}>{enemy && <ElementBadge element={unit.element} size="combat" className={styles.element}/>}{enemy && <small>Lv.{unit.level} </small>}{enemyDisplayName(unit)}</span>
           {!enemy && <span className={styles.level}>Lv.{unit.level}</span>}
