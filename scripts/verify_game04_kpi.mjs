@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import { jstDate, addDays, validDate, dashboardRange, kpiConnection } from '../src/domain/redesign/kpi/dashboard.ts';
+
+assert.equal(jstDate(new Date('2026-09-26T14:59:59Z')), '2026-09-26');
+assert.equal(jstDate(new Date('2026-09-26T15:00:00Z')), '2026-09-27');
+assert.equal(addDays('2024-03-01', -1), '2024-02-29');
+assert.equal(validDate('2024-02-29'), true);
+for (const date of ['2026-02-29', '2026-09-31', '2026-9-01', 'invalid']) assert.equal(validDate(date), false);
+assert.deepEqual(dashboardRange('daily', '', '2026-09-27'), { from: '2026-08-29', to: '2026-09-27' });
+assert.deepEqual(dashboardRange('monthly', '', '2026-09-27'), { from: '2025-10-01', to: '2026-09-27' });
+assert.deepEqual(dashboardRange('daily', '2024-02', '2026-09-27'), { from: '2024-02-01', to: '2024-02-29' });
+assert.deepEqual(dashboardRange('daily', '2026-09', '2026-09-27'), { from: '2026-09-01', to: '2026-09-27' });
+for (const month of ['2026-13', '2026-10', '2026-02-01', '../2026']) assert.throws(() => dashboardRange('daily', month, '2026-09-27'));
+const preview = 'https://znakrkaazliexzwihxge.supabase.co';
+assert.equal(kpiConnection({ url: preview, key: 'test' }).environment, '検証');
+assert.equal(kpiConnection({ url: 'https://soiksqgtmcnspfedmanr.supabase.co/', key: 'test' }).environment, '本番');
+for (const url of ['https://ktpolnkyyfkowxdmijww.supabase.co', 'http://znakrkaazliexzwihxge.supabase.co', `${preview}/rest`, `${preview}?x=1`, 'https://user:pass@znakrkaazliexzwihxge.supabase.co', `${preview}.example.com`]) assert.throws(() => kpiConnection({ url, key: 'test' }));
+assert.throws(() => kpiConnection({ url: preview }));
+assert.throws(() => kpiConnection({ key: 'test' }));
+console.log('PASS GAME04 KPI date ranges, JST boundaries, and project isolation');
