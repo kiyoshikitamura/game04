@@ -222,13 +222,26 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     setTab('raid'); setError(''); void refresh();
   }
   async function startQuest(stageId: string): Promise<QuestSettlement> {
-    const value = await action('quest_battle', { stageId });
+    const value = await action('quest_battle', { stageId, deferSettlement:true });
     if (!value.battle) throw new Error('戦闘結果を確認できませんでした。');
     return { battle: value.battle, rewards: value.rewards || [], firstClear: !!value.firstClear, encounterRaidId: value.encounterRaidId, playerGrowth: value.playerGrowth };
   }
+  function leaveBattle() {
+    setBattle(null);setBattleKind(null);setBattleBackground(undefined);
+    // A recovered quest must return to its source, never reopen an old queued stage.
+    setQuestStart(undefined);setQuestPreparation(false);setQuestNavigation(value=>value+1);
+    void refresh();
+  }
+  async function finishRecordedBattle(decision:'complete'|'retire') {
+    if(battle?.pendingSettlementId) {
+      const value=await action('battle_finish',{battleId:battle.pendingSettlementId,decision});
+      if(value.retired&&decision==='complete')leaveBattle();
+    }
+    if(decision==='retire')leaveBattle();
+  }
   async function raidAction(input: Record<string, unknown>) {
     const { action: name, ...payload } = input;
-    const value = await action(String(name), payload);
+    const value = await action(String(name), {...payload,...(name==='raid_battle'?{deferSettlement:true}:{})});
     if (value.battle) {
       setBattleKind(name === 'raid_battle' ? 'raid' : 'quest');
       if (name === 'raid_battle' && typeof payload.roomId === 'string') setRaidId(payload.roomId);
@@ -271,12 +284,12 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     {earlyLoadoutOpen&&!battle&&!questPlaying&&<Modal title="編成・装備" onClose={()=>setEarlyLoadoutOpen(false)}><EarlySortiePreparation state={state} save={action}/></Modal>}
     {!!(state as AcquisitionState).pendingAcquisitions?.length && <p className="rd-panel" role="status">受け取り保留中の獲得物が{(state as AcquisitionState).pendingAcquisitions!.length}件あります。</p>}
     {error && <p className="rd-panel" role="alert">{error}</p>}
-    {data.pendingBattle && !battle && <div className="rd-panel"><p>未完了の戦闘があります。</p><button className="rd-button" disabled={busy} onClick={async () => {
+    {data.pendingBattle && !battle && !questPlaying && <div className="rd-panel"><p>未完了の戦闘があります。</p><button className="rd-button" disabled={busy} onClick={async () => {
       const p = data.pendingBattle!;
-      try { const value = await action(p.kind === 'quest' ? 'quest_battle' : 'raid_battle', p.kind === 'quest' ? { stageId: p.target_id } : { roomId: p.target_id }, p.id); if (value.battle) { setBattleKind(p.kind === 'raid' ? 'raid' : 'quest'); if (p.kind === 'raid') { setRaidId(p.target_id); setTab('raid'); const room = value.rooms.find(entry => entry.id === p.target_id) ?? data.rooms.find(entry => entry.id === p.target_id); setBattleBackground(room ? raidBattleBackground(room, getRoomRaidMaster(room), value.battle.raidStartSnapshot) : undefined); } else { setTab('quest'); setQuestStart(p.target_id); setQuestPreparation(false); setQuestNavigation(n=>n+1); const stage = getQuestStage(p.target_id); setBattleBackground(QUEST_AREAS.find(entry => entry.id === stage?.areaId)?.image); } setBattle(value.battle); } } catch { /* message shown above */ }
+      try { const value = await action(p.kind === 'quest' ? 'quest_battle' : 'raid_battle', p.kind === 'quest' ? { stageId: p.target_id, deferSettlement:true } : { roomId: p.target_id, deferSettlement:true }, p.id); if (value.battle) { setBattleKind(p.kind === 'raid' ? 'raid' : 'quest'); if (p.kind === 'raid') { setRaidId(p.target_id); setTab('raid'); const room = value.rooms.find(entry => entry.id === p.target_id) ?? data.rooms.find(entry => entry.id === p.target_id); setBattleBackground(room ? raidBattleBackground(room, getRoomRaidMaster(room), value.battle.raidStartSnapshot) : undefined); } else { setTab('quest'); setQuestStart(p.target_id); setQuestPreparation(false); setQuestNavigation(n=>n+1); const stage = getQuestStage(p.target_id); setBattleBackground(QUEST_AREAS.find(entry => entry.id === stage?.areaId)?.image); } setBattle(value.battle); } } catch { /* message shown above */ }
     }}>戦闘を再開</button></div>}
     </>}>
-    {battle ? <BattleView bgmScene={battleKind === 'raid' ? 'BATTLE_BOSS' : 'BATTLE'} result={battle} vipActive={vipActive} backgroundSrc={battleBackground} raidHp={battleRoom ? { current: battleRoom.hp, max: battleRoom.maxHp, level: battleRoom.level } : undefined} onComplete={() => { setBattle(null); setBattleKind(null); setBattleBackground(undefined); void refresh(); }} /> : <>
+    {battle ? <BattleView onRetire={()=>finishRecordedBattle('retire')} onPlaybackComplete={()=>finishRecordedBattle('complete')} bgmScene={battleKind === 'raid' ? 'BATTLE_BOSS' : 'BATTLE'} result={battle} vipActive={vipActive} backgroundSrc={battleBackground} raidHp={battleRoom ? { current: battleRoom.hp, max: battleRoom.maxHp, level: battleRoom.level } : undefined} onComplete={leaveBattle} /> : <>
       {tab === 'quest' && <QuestView key={questNavigation} onBattlePlayingChange={setQuestPlaying} state={state} party={party} vipActive={vipActive} initialStageId={questStart} initialPreparation={questPreparation} onEarlyAction={action} navigationBlocked={!!game.showMissionPanel||earlyLoadoutOpen||game.showLoginBonusModal} onStart={startQuest} onOpenDeck={openQuestDeck} onOpenRaid={id => { setRaidId(id); setTab('raid'); }} onIgnoreEncounter={async id => { await action('encounter_ignore', { roomId: id }); }} />}
       {tab === 'bag' && <InventoryView key={state.userId} state={state} onAction={action} onNavigate={navigate} />}
       {tab === 'character' && <>{raidDeckReturn && <button type="button" className="rd-button" disabled={busy} onClick={returnToRaidPreparation}>共闘の出撃準備に戻る</button>}{questDeckReturn && <button type="button" className="rd-button" disabled={busy} onClick={returnToQuestPreparation}>出撃準備に戻る</button>}<GrowthView state={state} onAction={action} /></>}

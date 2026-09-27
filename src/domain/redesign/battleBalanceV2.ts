@@ -371,6 +371,7 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
         }
     } };
     const act = (u: Unit, skill: SkillMaster, discount: number) => {
+        if (pauseEnemiesInBurst && burst && u.enemy) return;
         serial++;
         if (serial > 100000)
             throw new Error('Battle execution safety guard exceeded');
@@ -456,7 +457,7 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
         const due = enemies.filter(e => alive(e) && e.count <= 0).sort((a, b) => a.order - b.order).map(e => ({ e, deaths: e.deaths }));
         for (const entry of due) {
             const u = entry.e;
-            if (!alive(u) || u.deaths !== entry.deaths || ended || !enemies.some(alive))
+            if ((pauseEnemiesInBurst && burst) || !alive(u) || u.deaths !== entry.deaths || ended || !enemies.some(alive))
                 continue;
             frame('enemy', `${u.name} 割込み`, u, undefined, { event: 'interrupt_start' });
             if (stunned(u))
@@ -511,7 +512,7 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
                 burst = random() < (input.earlyQuestAssist?.version==='area1-assist-v1-20260926' ? .8 : commonBurstChance(u.stats.luk));
                 if (burst)
                     analysis.find(a => a.id === u.id)!.bursts++;
-                frame('burst', burst ? `${u.name} BURST：最大5行動` : `${u.name} BURST抽選失敗`, u, undefined, { event: burst ? 'burst_start' : 'burst_failed' });
+                frame('burst', burst ? `${u.name} BURST：最大5行動` : `${u.name} BURST抽選失敗`, u, undefined, { event: burst ? 'burst_start' : 'burst_failed', ...(pauseEnemiesInBurst ? {gaugeDelta:-200, reason:burst?'burst_roll_success_consumed':'burst_roll_failed_consumed'} : {}) });
             }
             const deathCount = u.deaths, count = burst ? 5 : 1;
             for (let n = 0; n < count; n++) {

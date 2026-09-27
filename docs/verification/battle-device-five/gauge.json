@@ -1,0 +1,389 @@
+{
+  "success": [
+    {
+      "index": 0,
+      "wave": 1,
+      "kind": "start",
+      "text": "合戦開始：共通SP 0/400・バーストゲージ 0/200",
+      "partySp": 0,
+      "maxSp": 400,
+      "burst": false,
+      "party": [
+        {
+          "id": "qa-actor",
+          "hp": 1000,
+          "maxHp": 1000,
+          "sp": 0,
+          "maxSp": 100,
+          "count": 0,
+          "actions": 0,
+          "statuses": [],
+          "phase": null,
+          "image": "/characters/alice_transparent_asset.png",
+          "stunImmune": false,
+          "dead": false,
+          "effectiveAtk": 10,
+          "effectiveDef": 0,
+          "passiveEffects": []
+        }
+      ],
+      "enemies": [
+        {
+          "id": "qa-enemy",
+          "hp": 100000,
+          "maxHp": 100000,
+          "sp": 0,
+          "maxSp": 100,
+          "count": 1000,
+          "actions": 0,
+          "statuses": [],
+          "phase": null,
+          "image": "/characters/alice_transparent_asset.png",
+          "stunImmune": false,
+          "dead": false,
+          "effectiveAtk": 1,
+          "effectiveDef": 0,
+          "passiveEffects": []
+        }
+      ],
+      "burstGauge": 200,
+      "maxBurstGauge": 200,
+      "playerActions": 0,
+      "remainingActions": 300,
+      "skillStates": {
+        "qa-actor": [
+          {
+            "skillId": "attack-ready",
+            "cost": 1,
+            "status": "insufficient_sp"
+          }
+        ],
+        "qa-enemy": []
+      },
+      "event": "start"
+    },
+    {
+      "index": 1,
+      "wave": 1,
+      "kind": "burst",
+      "text": "調査行動者 BURST：最大5行動",
+      "actorId": "qa-actor",
+      "partySp": 0,
+      "maxSp": 400,
+      "burst": true,
+      "party": [
+        {
+          "id": "qa-actor",
+          "hp": 1000,
+          "maxHp": 1000,
+          "sp": 0,
+          "maxSp": 100,
+          "count": 0,
+          "actions": 0,
+          "statuses": [],
+          "phase": null,
+          "image": "/characters/alice_transparent_asset.png",
+          "stunImmune": false,
+          "dead": false,
+          "effectiveAtk": 10,
+          "effectiveDef": 0,
+          "passiveEffects": []
+        }
+      ],
+      "enemies": [
+        {
+          "id": "qa-enemy",
+          "hp": 100000,
+          "maxHp": 100000,
+          "sp": 0,
+          "maxSp": 100,
+          "count": 1000,
+          "actions": 0,
+          "statuses": [],
+          "phase": null,
+          "image": "/characters/alice_transparent_asset.png",
+          "stunImmune": false,
+          "dead": false,
+          "effectiveAtk": 1,
+          "effectiveDef": 0,
+          "passiveEffects": []
+        }
+      ],
+      "burstGauge": 0,
+      "maxBurstGauge": 200,
+      "playerActions": 0,
+      "remainingActions": 300,
+      "skillStates": {
+        "qa-actor": [
+          {
+            "skillId": "attack-ready",
+            "cost": 0,
+            "status": "ready"
+          }
+        ],
+        "qa-enemy": []
+      },
+      "event": "burst_start",
+      "gaugeDelta": -200,
+      "reason": "burst_roll_success_consumed"
+    },
+    {
+      "index": 2,
+      "wave": 1,
+      "kind": "action",
+      "text": "調査行動者 · attack-ready SP −0",
+      "actorId": "qa-actor",
+      "skillId": "attack-ready",
+      "partySp": 0,
+      "maxSp": 400,
+      "burst": true,
+      "party": [
+        {
+          "id": "qa-actor",
+          "hp": 1000,
+          "maxHp": 1000,
+          "sp": 0,
+          "maxSp": 100,
+          "count": 0,
+          "actions": 0,
+          "statuses": [],
+          "phase": null,
+          "image": "/characters/alice_transparent_asset.png",
+          "stunImmune": false,
+          "dead": false,
+          "effectiveAtk": 10,
+          "effectiveDef": 0,
+          "passiveEffects": []
+        }
+      ],
+      "enemies": [
+        {
+          "id": "qa-enemy",
+          "hp": 100000,
+          "maxHp": 100000,
+          "sp": 0,
+          "maxSp": 100,
+          "count": 1000,
+          "actions": 0,
+          "statuses": [],
+          "phase": null,
+          "image": "/characters/alice_transparent_asset.png",
+          "stunImmune": false,
+          "dead": false,
+          "effectiveAtk": 1,
+          "effectiveDef": 0,
+          "passiveEffects": []
+        }
+      ],
+      "burstGauge": 0,
+      "maxBurstGauge": 200,
+      "playerActions": 1,
+      "remainingActions": 299,
+      "skillStates": {
+        "qa-actor": [
+          {
+            "skillId": "attack-ready",
+            "cost": 0,
+            "status": "active"
+          }
+        ],
+        "qa-enemy": []
+      },
+      "event": "action_start"
+    }
+  ],
+  "failure": [
+    {
+      "index": 0,
+      "wave": 1,
+      "kind": "start",
+      "text": "合戦開始：共通SP 0/400・バーストゲージ 0/200",
+      "partySp": 0,
+      "maxSp": 400,
+      "burst": false,
+      "party": [
+        {
+          "id": "qa-actor",
+          "hp": 1000,
+          "maxHp": 1000,
+          "sp": 0,
+          "maxSp": 100,
+          "count": 0,
+          "actions": 0,
+          "statuses": [],
+          "phase": null,
+          "image": "/characters/alice_transparent_asset.png",
+          "stunImmune": false,
+          "dead": false,
+          "effectiveAtk": 10,
+          "effectiveDef": 0,
+          "passiveEffects": []
+        }
+      ],
+      "enemies": [
+        {
+          "id": "qa-enemy",
+          "hp": 100000,
+          "maxHp": 100000,
+          "sp": 0,
+          "maxSp": 100,
+          "count": 1000,
+          "actions": 0,
+          "statuses": [],
+          "phase": null,
+          "image": "/characters/alice_transparent_asset.png",
+          "stunImmune": false,
+          "dead": false,
+          "effectiveAtk": 1,
+          "effectiveDef": 0,
+          "passiveEffects": []
+        }
+      ],
+      "burstGauge": 200,
+      "maxBurstGauge": 200,
+      "playerActions": 0,
+      "remainingActions": 300,
+      "skillStates": {
+        "qa-actor": [
+          {
+            "skillId": "attack-ready",
+            "cost": 1,
+            "status": "insufficient_sp"
+          }
+        ],
+        "qa-enemy": []
+      },
+      "event": "start"
+    },
+    {
+      "index": 1,
+      "wave": 1,
+      "kind": "burst",
+      "text": "調査行動者 BURST抽選失敗",
+      "actorId": "qa-actor",
+      "partySp": 0,
+      "maxSp": 400,
+      "burst": false,
+      "party": [
+        {
+          "id": "qa-actor",
+          "hp": 1000,
+          "maxHp": 1000,
+          "sp": 0,
+          "maxSp": 100,
+          "count": 0,
+          "actions": 0,
+          "statuses": [],
+          "phase": null,
+          "image": "/characters/alice_transparent_asset.png",
+          "stunImmune": false,
+          "dead": false,
+          "effectiveAtk": 10,
+          "effectiveDef": 0,
+          "passiveEffects": []
+        }
+      ],
+      "enemies": [
+        {
+          "id": "qa-enemy",
+          "hp": 100000,
+          "maxHp": 100000,
+          "sp": 0,
+          "maxSp": 100,
+          "count": 1000,
+          "actions": 0,
+          "statuses": [],
+          "phase": null,
+          "image": "/characters/alice_transparent_asset.png",
+          "stunImmune": false,
+          "dead": false,
+          "effectiveAtk": 1,
+          "effectiveDef": 0,
+          "passiveEffects": []
+        }
+      ],
+      "burstGauge": 0,
+      "maxBurstGauge": 200,
+      "playerActions": 0,
+      "remainingActions": 300,
+      "skillStates": {
+        "qa-actor": [
+          {
+            "skillId": "attack-ready",
+            "cost": 1,
+            "status": "insufficient_sp"
+          }
+        ],
+        "qa-enemy": []
+      },
+      "event": "burst_failed",
+      "gaugeDelta": -200,
+      "reason": "burst_roll_failed_consumed"
+    },
+    {
+      "index": 2,
+      "wave": 1,
+      "kind": "action",
+      "text": "調査行動者 · 通常攻撃 SP −0",
+      "actorId": "qa-actor",
+      "skillId": "basic",
+      "partySp": 0,
+      "maxSp": 400,
+      "burst": false,
+      "party": [
+        {
+          "id": "qa-actor",
+          "hp": 1000,
+          "maxHp": 1000,
+          "sp": 0,
+          "maxSp": 100,
+          "count": 0,
+          "actions": 0,
+          "statuses": [],
+          "phase": null,
+          "image": "/characters/alice_transparent_asset.png",
+          "stunImmune": false,
+          "dead": false,
+          "effectiveAtk": 10,
+          "effectiveDef": 0,
+          "passiveEffects": []
+        }
+      ],
+      "enemies": [
+        {
+          "id": "qa-enemy",
+          "hp": 100000,
+          "maxHp": 100000,
+          "sp": 0,
+          "maxSp": 100,
+          "count": 1000,
+          "actions": 0,
+          "statuses": [],
+          "phase": null,
+          "image": "/characters/alice_transparent_asset.png",
+          "stunImmune": false,
+          "dead": false,
+          "effectiveAtk": 1,
+          "effectiveDef": 0,
+          "passiveEffects": []
+        }
+      ],
+      "burstGauge": 0,
+      "maxBurstGauge": 200,
+      "playerActions": 1,
+      "remainingActions": 299,
+      "skillStates": {
+        "qa-actor": [
+          {
+            "skillId": "attack-ready",
+            "cost": 1,
+            "status": "insufficient_sp"
+          }
+        ],
+        "qa-enemy": []
+      },
+      "event": "action_start"
+    }
+  ],
+  "checks": "PASS roll-only consumption, approved failed-roll consumption, full-gauge ineligible wait, actual allied action count, old enemy events excluded, wave boundary"
+}

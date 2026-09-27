@@ -123,3 +123,12 @@ dialog.backdrop{margin:0;width:100%;height:100%;max-width:none;max-height:none;b
 .enemyZone:is([data-count='1'],[data-count='2']) .enemy[data-order][data-enlarge='false'] .enemyImage{height:135px;top:auto;bottom:62px}
 
 .enemyZone[data-count='3'] .enemy .unitButton:focus-visible .unitInfo{outline:2px solid #7bd8ff;outline-offset:2px}
+
+/* Enemy information shares one flow: HP, compact statuses, then action count. */
+.infoButton{display:flex;flex-direction:column;align-items:center;width:100%;padding:0;border:0;background:transparent;font:inherit;text-shadow:inherit}
+.enemyZone[data-count] .enemy .unitInfo{background:rgba(0,0,0,.30)}
+.enemyZone[data-count] .enemy[data-order] .unitInfo .status{position:static;inset:auto;width:100%;min-height:0;margin:2px 0 0;gap:3px;justify-content:flex-start;flex-wrap:nowrap}
+.enemyZone[data-count] .enemy .status button{min-width:16px;height:18px;padding:0 1px;gap:1px;flex:0 0 auto;font-size:9px}
+.enemyZone[data-count] .enemy .status svg{width:14px;height:14px}
+.enemyZone[data-count] .enemy .status button>span{font-size:8px;line-height:10px}
+.burstFailure{font:12px/1.4 sans-serif;text-align:right;margin:2px 0;color:#ffe4a2}

@@ -200,10 +200,11 @@ async function responseFor(userId: string, extra: Record<string, unknown> = {}, 
   }
   return { state, rooms, socialEvents, missions: evaluateMissions(state, missions), territory: projectTerritory(territory.master, territory.progress, territory.items, territory.activeHostingCount), pendingBattle: pending[0] ?? null, ...extra };
 }
-async function runBattle(userId: string, name: string, payload: any, id: string, playerName: string) {
+async function runBattle(userId: string, name: string, payload: any, id: string, playerName: string, decision?: 'complete' | 'retire') {
   let preparedBattle: ReturnType<typeof simulateBattle> | undefined;
   let [record] = await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=*`);
   if (record?.status === 'settled') return responseFor(userId, record.result);
+  if (!record && decision) throw new ApiError('戦闘が見つかりません。',404);
   if (!record) {
     const outstanding = await db(`game04_battles?user_id=eq.${userId}&status=eq.started&select=id&limit=1`);
     if (outstanding.length) throw new ApiError('未完了の戦闘を再開してください。', 409);
@@ -229,9 +230,11 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
     if (state.energy < cost) throw new ApiError('行動力が足りません。');
     const seed = crypto.getRandomValues(new Uint32Array(1))[0];
     // Only a new battle receives current rules. Saved started/settled records above are never upgraded.
-    const rules = startRoom?.territorySnapshot?.battleRules ?? BATTLE_RULES;
+    const savedRules = startRoom?.territorySnapshot?.battleRules ?? BATTLE_RULES;
+    const rules = savedRules.version===BATTLE_RULES.version ? {...savedRules,burstPolicy:BATTLE_RULES.burstPolicy} : savedRules;
     const battleInput = questStage ? createQuestBattleInput(seed, buildBattleParty(state, rules), questStage, rules) : startRoom && getRoomRaidMaster(startRoom).masterVersion ? {...createFormalBattleInput(seed,buildBattleParty(state,rules),waves as (import('../../../src/domain/redesign/types.ts').EnemyUnit & {initialSp:number})[][],rules),raidLevel,raidMasterVersion:getRoomRaidMaster(startRoom).masterVersion,playerExpReward:{amount:getRoomRaidMaster(startRoom).playerExp??0,version:getRoomRaidMaster(startRoom).masterVersion,status:'APPROVED'}} : { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel,  };
-    const input = startRoom ? { ...battleInput, ...(getRoomRaidMaster(startRoom).damagePolicy ? {raidDamagePolicy:getRoomRaidMaster(startRoom).damagePolicy} : {}), raidStartSnapshot: { roomId: startRoom.id, level: startRoom.level, hp: startRoom.hp, maxHp: startRoom.maxHp } } : battleInput;
+    const preparedInput = startRoom ? { ...battleInput, ...(getRoomRaidMaster(startRoom).damagePolicy ? {raidDamagePolicy:getRoomRaidMaster(startRoom).damagePolicy} : {}), raidStartSnapshot: { roomId: startRoom.id, level: startRoom.level, hp: startRoom.hp, maxHp: startRoom.maxHp } } : battleInput;
+    const input = {...preparedInput,...(payload.deferSettlement===true ? {settlementPolicy:'playback-confirm-v1-20260927'} : {})};
     // Validate and simulate before charging. Invalid provisional masters must not strand a paid pending battle.
     preparedBattle = simulateBattle(input);
     await commit(state, { ...(questStage ? recordEarlyQuestAttempt(state,targetId) : state), energy: state.energy - cost, ...(questStage ? {questAttempts:{...state.questAttempts,[targetId]:(state.questAttempts?.[targetId]??0)+1},questProgressVersion:QUEST_MASTER_VERSION} : {}) }, id, { id, kind, targetId, seed, input, status: 'started' }, startRoom, startRoom?.version ?? null);
@@ -242,12 +245,30 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
     if (record.status === 'settled') return responseFor(userId, record.result);
     if (JSON.stringify(record.input) !== JSON.stringify(input)) preparedBattle = undefined;
   }
+  const settlementId = await uuidFor(`settlement:${id}`);
+  if (decision === 'retire') {
+    // Same transaction/request identity as completion: only one terminal decision can win.
+    // Energy was charged at start. No clear, loot, growth, raid damage or encounter is committed.
+    for (let attempt=0;attempt<4;attempt++) {
+      const state=await stateFor(userId);
+      const result={retired:true,battleId:id,rewards:[],firstClear:false,encounterRaidId:null};
+      try {
+        const saved=await commit(state,state,settlementId,{id,status:'settled',result});
+        return responseFor(userId,saved.battleResult??result,saved.state);
+      } catch(error) {
+        const [saved]=await db(`game04_battles?id=eq.${id}&user_id=eq.${userId}&select=status,result`);
+        if(saved?.status==='settled')return responseFor(userId,saved.result);
+        if(!(error instanceof ApiError)||error.status!==409||attempt===3)throw error;
+      }
+    }
+  }
   const simulatedBattle = preparedBattle ?? simulateBattle(record.input);
   // Read only persisted start context. Never reconstruct old starts from the settled room.
   const battle = record.kind === 'raid' && record.input.raidStartSnapshot
     ? { ...simulatedBattle, raidStartSnapshot: record.input.raidStartSnapshot }
     : simulatedBattle;
-  const settlementId = await uuidFor(`settlement:${id}`);
+  if(record.input.settlementPolicy==='playback-confirm-v1-20260927'&&!decision)
+    return responseFor(userId,{battle:{...battle,pendingSettlementId:id},rewards:[],firstClear:false});
   for (let attempt = 0; attempt < 4; attempt++) {
     const state = await stateFor(userId); let after = structuredClone(state);
     let room: (RaidRoom & {version?: number}) | null = null, version: number | null = null;
@@ -355,7 +376,7 @@ Deno.serve(async (request: Request) => {
     if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(requestId)) throw new ApiError('操作IDが不正です。');
     // Only read-only preparation overlaps. Never run session initialization, login
     // rewards or a commit before profile validation and the request replay check.
-    const standardMutation = !['normal_gacha_status','special_gacha_status','formal_gacha_status','observe_state_restore','get_state','raid_refresh','quest_battle','raid_battle','territory_host','raid_unlock'].includes(action);
+    const standardMutation = !['normal_gacha_status','special_gacha_status','formal_gacha_status','observe_state_restore','get_state','raid_refresh','quest_battle','raid_battle','battle_finish','territory_host','raid_unlock'].includes(action);
     const [[profile], priorRows, acquired] = await Promise.all([
       db(`users?id=eq.${user.id}&select=id,username`),
       standardMutation ? db(`game04_requests?user_id=eq.${user.id}&request_id=eq.${requestId}&select=request_id,result`) : Promise.resolve([]),
@@ -384,6 +405,10 @@ Deno.serve(async (request: Request) => {
       return new Response(JSON.stringify({ observation }), { headers });
     }
     if (action === 'get_state' || action === 'raid_refresh') return new Response(JSON.stringify(await responseFor(user.id)), { headers });
+    if(action==='battle_finish') {
+      if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(payload.battleId))||!['complete','retire'].includes(payload.decision))throw new ApiError('戦闘の終了操作が不正です。');
+      return new Response(JSON.stringify(await runBattle(user.id,'battle_finish',{},payload.battleId,profile.username,payload.decision)),{headers});
+    }
     if (action === 'quest_battle' || action === 'raid_battle') return new Response(JSON.stringify(await runBattle(user.id, action, payload, requestId, profile.username)), { headers });
     if (action === 'territory_host' || action === 'raid_unlock') {
       const initialState=await stateFor(user.id); if(initialState.tutorial&&initialState.tutorial.step<SCENES.length)throw new ApiError('チュートリアルを完了してください。');

@@ -94,15 +94,19 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const actionRef = useRef(false);
+  const operationGeneration=useRef(0);
+  useEffect(()=>()=>{operationGeneration.current++;},[]);
   const current = nextQuestStage(state.clearedStages, state.earlyProgress);
   const area = QUEST_AREAS.find(entry => entry.id === areaId);
   const selectedLabel = selected ? `${QUEST_AREAS.find(entry => entry.id === selected.areaId)?.index}-${selected.index}` : undefined;
   const followingStage = selected ? QUEST_STAGES[QUEST_STAGES.findIndex(stage => stage.id === selected.id) + 1] : undefined;
   async function start() {
     if (!selected || actionRef.current) return;
+    const generation=++operationGeneration.current;
     actionRef.current = true; setBusy(true); setPlaying(true); setError('');
     try {
       const result = await onStart(selected.id);
+      if(generation!==operationGeneration.current)return;
       setSettlement(result); setPlaying(true); setModal(null);
     } catch (reason) { setPlaying(false); setError(reason instanceof Error ? reason.message : '出撃できませんでした。もう一度お試しください。'); }
     finally { actionRef.current = false; setBusy(false); }
@@ -127,7 +131,20 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
   const bossAssets = useArtworkPreload(selectedSubject ? [selectedSubject] : [], 'battle');
   const encounterBackgrounds = useQuestAssets(selectedBoss ? [selectedSubject ? '' : selectedBoss.image, QUEST_AREAS.find(entry => entry.id === selected?.areaId)?.image ?? ''].filter(Boolean) : []);
   const encounterAssets = { ready: bossAssets.ready && encounterBackgrounds.ready, failed: bossAssets.failed || encounterBackgrounds.failed, retry: () => { bossAssets.retry(); encounterBackgrounds.retry(); } };
-  if (playing && settlement) return <BattleView onRetire={() => { setPlaying(false); setSettlement(null); setQueuedStage(null); setDetailPanel(null); setModal(selected ? 'info' : null); }} resultRewards={<ResultRewards settlement={settlement} stage={selected}/>} resultActions={settlement.encounterRaidId ? <ActionButton onClick={()=>setPlaying(false)}>遭遇した強敵を確認</ActionButton> : <>{settlement.battle.outcome==='win'&&followingStage&&isQuestStageUnlocked(followingStage.id,state.clearedStages, state.earlyProgress)&&<ActionButton onClick={()=>{setPlaying(false);setSettlement(null);setSelected(null);setModal(null);setQueuedStage(followingStage);}}>次のステージ</ActionButton>}<ActionButton onClick={()=>{setPlaying(false);setSettlement(null);setSelected(null);}}>ステージ一覧</ActionButton></>}  bgmScene={questBattleBgm(selected?.id)} result={settlement.battle} vipActive={vipActive} onComplete={() => setPlaying(false)} title={selected ? `${selectedLabel} ${questDisplayName(selected)}` : selectedLabel} backgroundSrc={QUEST_AREAS.find(entry => entry.id === selected?.areaId)?.image} />;
+  async function finishBattle(decision:'complete'|'retire') {
+    const id=settlement?.battle.pendingSettlementId;
+    if(!id)return;
+    if(!onEarlyAction)throw new Error('戦闘結果を保存できません。再読み込みしてください。');
+    const generation=operationGeneration.current;
+    const value=await onEarlyAction('battle_finish',{battleId:id,decision}) as import('@/utils/redesignApi').RedesignResponse;
+    if(generation!==operationGeneration.current)return;
+    if(decision==='complete') {
+      if(value.retired){setPlaying(false);setSettlement(null);setQueuedStage(null);setModal(selected?'info':null);return;}
+      if(!value.battle)throw new Error('戦闘結果を確認できませんでした。');
+      setSettlement(previous=>previous?{...previous,rewards:value.rewards??[],firstClear:!!value.firstClear,encounterRaidId:value.encounterRaidId,playerGrowth:value.playerGrowth}:previous);
+    }
+  }
+  if (playing && settlement) return <BattleView onPlaybackComplete={()=>finishBattle('complete')} onRetire={async () => { await finishBattle('retire'); operationGeneration.current++; setPlaying(false); setSettlement(null); setQueuedStage(null); setDetailPanel(null); setModal(selected ? 'info' : null); }} resultRewards={<ResultRewards settlement={settlement} stage={selected}/>} resultActions={settlement.encounterRaidId ? <ActionButton onClick={()=>setPlaying(false)}>遭遇した強敵を確認</ActionButton> : <>{settlement.battle.outcome==='win'&&followingStage&&isQuestStageUnlocked(followingStage.id,state.clearedStages, state.earlyProgress)&&<ActionButton onClick={()=>{setPlaying(false);setSettlement(null);setSelected(null);setModal(null);setQueuedStage(followingStage);}}>次のステージ</ActionButton>}<ActionButton onClick={()=>{setPlaying(false);setSettlement(null);setSelected(null);}}>ステージ一覧</ActionButton></>}  bgmScene={questBattleBgm(selected?.id)} result={settlement.battle} vipActive={vipActive} onComplete={() => setPlaying(false)} title={selected ? `${selectedLabel} ${questDisplayName(selected)}` : selectedLabel} backgroundSrc={QUEST_AREAS.find(entry => entry.id === selected?.areaId)?.image} />;
   return <section className="redesign-quest" style={{ backgroundImage: `url("${area?.image ?? QUEST_AREAS[0].image}")` }}>
     {!viewAssets.ready && !settlement && !modal && <p role={viewAssets.failed ? "alert" : "status"}>{viewAssets.failed ? <>画像を読み込めませんでした。<ActionButton onClick={viewAssets.retry}>再読み込み</ActionButton></> : <LoadingSpinner />}</p>}
     {settlement ? <div className="rq-summary">

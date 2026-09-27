@@ -75,6 +75,8 @@ export interface BattleAnalysis {
     bursts: number;
 }
 export interface BattleResult {
+    /** Deferred server settlement; absent on historical, already settled replays. */
+    pendingSettlementId?: string;
     burstPolicy?: BattleInput['rules']['burstPolicy'];
     /** Server-persisted start context, absent on old recordings. Not a simulated frame value. */
     raidStartSnapshot?: RaidBattleStartSnapshot;

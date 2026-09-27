@@ -8,5 +8,11 @@ const firstLine=fs.readFileSync(bundlePath,'utf8').split(/\r?\n/,1)[0];
 const actual=firstLine.match(/^\/\/ game04-redesign-api source-sha256:([0-9a-f]{64})$/)?.[1];
 if(actual!==expected)throw new Error(`game04-redesign-api bundle is stale: expected ${expected}, found ${actual??'no source hash'}`);
 const bundle=fs.readFileSync(bundlePath,'utf8');
+// A source-only marker misses changes in imported battle/master modules.
+const manifest=JSON.parse(fs.readFileSync(new URL('../supabase/functions/game04-redesign-api/bundle-manifest.json',import.meta.url),'utf8'));
+const digest=s=>crypto.createHash('sha256').update(s.replace(/\r\n/g,'\n')).digest('hex');
+if(digest(bundle)!==manifest.bundleSha256)throw new Error('Edge bundle content differs from its manifest');
+for(const [name,hash] of Object.entries(manifest.inputs))if(digest(fs.readFileSync(new URL('../'+name,import.meta.url),'utf8'))!==hash)throw new Error(`Edge dependency changed: ${name}; rebuild the Edge bundle`);
+for(const marker of ['attack-free-enemy-pause-v2-20260927','playback-confirm-v1-20260927','battle_finish'])if(!bundle.includes(marker))throw new Error(`Current battle policy missing: ${marker}`);
 for(const marker of ['formal_gacha_status','game04_commit_gacha','GAME04_G3_FORMAL_20260925'])if(!bundle.includes(marker))throw new Error(`bundle marker missing: ${marker}`);
 console.log(`PASS game04-redesign-api bundle ${expected}`);

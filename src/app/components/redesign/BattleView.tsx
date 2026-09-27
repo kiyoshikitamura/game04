@@ -41,7 +41,7 @@ const isUnassignedSkillImage = (src?: string) => !src || src === '/menu/event_ba
 const elements = { fire: '火', water: '水', earth: '土', wind: '風', light: '光', dark: '闇' };
 const statusNames: Record<string, string> = { ...STATUS_LABELS, damage: 'ダメージ', heal: '回復', revive: '蘇生', sp: 'SP回復' };
 const readinessNames: Record<string, string> = { ready: '発動可能', insufficient_sp: 'SP不足', condition_unmet: '条件未達', active: '発動中' };
-const reasonNames: Record<string, string> = { action_limit: '300回の味方行動機会で未決着のため敗北', party_defeated: '味方全員が戦闘不能', mutual_annihilation: '双方全滅のため敗北', final_wave_defeated: '最終派の敵を撃破' };
+const reasonNames: Record<string, string> = { burst_roll_success_consumed:'発動抽選に成功・ゲージ200消費', burst_roll_failed_consumed:'発動抽選不成立・承認済み抽選仕様でゲージ200消費', action_limit: '300回の味方行動機会で未決着のため敗北', party_defeated: '味方全員が戦闘不能', mutual_annihilation: '双方全滅のため敗北', final_wave_defeated: '最終派の敵を撃破' };
 const reasonText = (reason: string) => reasonNames[reason] ?? CLEANSE_LABELS[reason] ?? reason;
 const eventText = (text: string) => text.replace(/(?:Wave|WAVE)\s*(\d+)/g, "第$1派").replace(/Wave|WAVE/g, "派").replace(/\b(atk_up|def_up|atk_down|def_down|stun|dot|hot|shield|taunt|counter|cleanse|protection)\b/g, key => key === 'protection' ? CLEANSE_LABELS.protection : statusNames[key]);
 const signed = (value: number) => `${value > 0 ? '+' : ''}${value}`;
@@ -54,15 +54,21 @@ const statusPaths: Record<string, string> = {
   hot:'M9 3H15V9H21V15H15V21H9V15H3V9H9Z', stun:'M4 7 10 9 8 3 14 7 19 3 18 10 23 11 17 15 20 21 12 18 8 22 6 15 1 15 5 11Z',
   counter:'M4 11H15Q21 11 21 17Q21 22 15 22M4 11 10 5M4 11 10 17', taunt:'M12 1V6M12 18V23M1 12H6M18 12H23M20 12A8 8 0 1 1 4 12A8 8 0 1 1 20 12',
 };
-interface Props { onRetire?: () => void; resultActions?: ReactNode; resultRewards?: ReactNode; bgmScene?: BgmScene; requirePlaybackCompletion?: boolean; result: BattleResult; vipActive: boolean; onComplete: () => void; title?: string; backgroundSrc?: string; raidHp?: { current: number; max: number; level?: number }; initialFrame?: number; initialPaused?: boolean; }
+interface Props { onRetire?: () => void | Promise<void>; onPlaybackComplete?: () => Promise<void>; resultActions?: ReactNode; resultRewards?: ReactNode; bgmScene?: BgmScene; requirePlaybackCompletion?: boolean; result: BattleResult; vipActive: boolean; onComplete: () => void; title?: string; backgroundSrc?: string; raidHp?: { current: number; max: number; level?: number }; initialFrame?: number; initialPaused?: boolean; }
 
 /** Every visible value is projected from the recorded server frame. */
-export function BattleView({ onRetire, resultActions, resultRewards, bgmScene = 'BATTLE', requirePlaybackCompletion = false, result, vipActive, onComplete, title = '合戦', backgroundSrc = '/creative/backgrounds/char_reiji_01.png', raidHp, initialFrame = 0, initialPaused = false }: Props) {
+export function BattleView({ onRetire, onPlaybackComplete, resultActions, resultRewards, bgmScene = 'BATTLE', requirePlaybackCompletion = false, result, vipActive, onComplete, title = '合戦', backgroundSrc = '/creative/backgrounds/char_reiji_01.png', raidHp, initialFrame = 0, initialPaused = false }: Props) {
   const { playBgm, stopBgm, playSe, stopSe, preloadAudio } = useAudio();
   const [pauseMenu, setPauseMenu] = useState(false);
   const [confirmRetire, setConfirmRetire] = useState(false);
   const [exited, setExited] = useState(false);
   const exitLock = useRef(false);
+  const [terminalError,setTerminalError]=useState('');
+  const [completion,setCompletion]=useState<'idle'|'saving'|'done'|'error'>('idle');
+  const completionLock=useRef(false), terminalGeneration=useRef(0);
+  const completionCallback=useRef(onPlaybackComplete);
+  completionCallback.current=onPlaybackComplete;
+  useEffect(()=>{terminalGeneration.current++;completionLock.current=false;setCompletion('idle');setTerminalError('');return()=>{terminalGeneration.current++}},[result]);
   const wasPaused = useRef(false);
   const heardFrame = useRef(-1);
   const heardAction = useRef(new Set<SeEvent>());
@@ -84,7 +90,15 @@ export function BattleView({ onRetire, resultActions, resultRewards, bgmScene = 
   const measuredImageResult = useRef<BattleResult | null>(null);
   const detailDialog = useRef<HTMLDialogElement>(null);
   const assetsBlocked = assetState.result !== result || assetState.status !== 'ready';
-  const { index, frame, finished, speed, effectiveSpeed, paused, playbackPaused, waveIntroActive, presentationPhase, comboNumber, burstActive, setPaused, cycleSpeed, skip } = useRecordedBattlePlayback({ result, initialFrame, initialPaused, vipActive, blocked: exited || pauseMenu || confirmRetire || !!detail || showLog || assetsBlocked, minimumFrameDuration: minimumEffectFrameDuration, waveIntroDuration: UI_MOTION.waveIntroMs });
+  const { index, frame, finished, speed, effectiveSpeed, paused, playbackPaused, waveIntroActive, presentationPhase, comboNumber, burstActive, cancel, setPaused, cycleSpeed, skip } = useRecordedBattlePlayback({ result, initialFrame, initialPaused, vipActive, blocked: exited || pauseMenu || confirmRetire || !!detail || showLog || assetsBlocked, minimumFrameDuration: minimumEffectFrameDuration, waveIntroDuration: UI_MOTION.waveIntroMs });
+  async function completePlayback() {
+    if(exitLock.current||completionLock.current)return;
+    completionLock.current=true;setCompletion('saving');setTerminalError('');
+    const generation=terminalGeneration.current;
+    try { await completionCallback.current?.(); if(generation===terminalGeneration.current&&!exitLock.current)setCompletion('done'); }
+    catch(error) { if(generation===terminalGeneration.current&&!exitLock.current){completionLock.current=false;setCompletion('error');setTerminalError(error instanceof Error?error.message:'結果を保存できませんでした。');} }
+  }
+  useEffect(()=>{if(finished&&!exitLock.current)void completePlayback();},[finished,result]);
   const presentation = projectRecordedBattleFrame(result, index);
   const battleRoot = useRef<HTMLElement>(null);
   useEffect(() => { if (finished) { stopBgm(); battleRoot.current?.scrollIntoView({ block: 'start' }); } }, [finished, stopBgm]);
@@ -102,12 +116,13 @@ export function BattleView({ onRetire, resultActions, resultRewards, bgmScene = 
   }, [result, index, frame, speed, exited, pauseMenu, confirmRetire, assetsBlocked, paused, waveIntroActive, presentationPhase, detail, showLog, playSe, stopSe]);
   function openPauseMenu() { wasPaused.current = paused; setPaused(true); stopSe(); setPauseMenu(true); }
   function cancelRetire() { setConfirmRetire(false); setPauseMenu(false); setPaused(wasPaused.current); }
-  function retire() {
-    if (exitLock.current || finished || requirePlaybackCompletion) return;
-    exitLock.current = true;
-    setPaused(true); setExited(true); setConfirmRetire(false); setPauseMenu(false);
+  async function retire() {
+    if (exitLock.current || finished || requirePlaybackCompletion || !onRetire) return;
+    exitLock.current = true; terminalGeneration.current++; cancel();
+    setExited(true); setConfirmRetire(false); setPauseMenu(false); setTerminalError('');
     stopSe(); stopBgm();
-    (onRetire ?? onComplete)();
+    try { await onRetire(); }
+    catch(error) { exitLock.current=false;setTerminalError(error instanceof Error?error.message:'リタイアを保存できませんでした。'); }
   }
   const effects = frame ? resolveBattleFrameEffects(frame, result.frames[index - 1], presentation.skill) : [];
   // A result-wide gate avoids hiding the battle when a later effect first appears.
@@ -131,7 +146,7 @@ export function BattleView({ onRetire, resultActions, resultRewards, bgmScene = 
     if (!assetError || recoveredResult.current === result) return;
     recoveredResult.current = result;
     loadingDialog.current?.close();
-    onComplete();
+    if(result.pendingSettlementId)void retire();else onComplete();
   };
   useEffect(() => {
     let cancelled = false;
@@ -174,25 +189,29 @@ export function BattleView({ onRetire, resultActions, resultRewards, bgmScene = 
     const artSource = unitArt(unit, state, enemy ? 'battle' : 'portrait');
     const faceCrop = getCharacterPresentationMetadata(artSource);
     const enemyCrop = enemy ? (enemyArtBounds as Record<string, {width:number;height:number;bounds:number[];rarity:string}>)[artSource] : undefined;
+    const statusIcons = (<div className={styles.status} aria-label={`${unit.name}の状態`}>
+        {state.statuses.slice(0, 2).map((s, i) => <button key={`${s.type}-${i}`} data-status={s.type} onClick={() => setDetail({ unit, state })} title={`${statusNames[s.type] ?? s.type} 残り${s.remaining}回${s.type === 'shield' ? `・吸収残量${s.amount ?? 0}` : ''}`} aria-label={`${statusNames[s.type] ?? s.type} 残り${s.remaining}回`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d={statusPaths[s.type] ?? 'M12 3V15M12 19V21'} />{s.type.endsWith('_down') && <path d="M18 2V9M15 6 18 9 21 6" />}</svg><span>{s.remaining}</span></button>)}
+        {state.statuses.length > 2 && <button onClick={() => setDetail({ unit, state })} aria-label={`ほか${state.statuses.length - 2}件の状態を表示`}>+{state.statuses.length - 2}</button>}
+        {state.stunImmune && <button onClick={() => setDetail({ unit, state })} title="実際に1回行動するまで行動不能の再付与を防ぎます">耐</button>}
+      </div>);
     return <div data-unit-id={state.id} data-enlarge={!!enemyCrop} data-order={order} data-hit={impact?.type === 'damage' ? frame.index : undefined} className={`${enemy ? styles.enemy : styles.member} ${state.hp <= 0 ? styles.dead : ''} ${active ? styles.active : ''}`} key={state.id}>
       {!enemy && <span className={styles.order}>{order + 1}</span>}
       {!enemy && active && <span className={styles.acting}>行動中</span>}
       <button key={impact?.type === 'damage' ? `hit-${frame.index}` : 'idle'} className={`${styles.unitButton} ${impact?.type === 'damage' ? styles.hit : ''}`} onClick={() => setDetail({ unit, state })} aria-label={`${enemyDisplayName(unit)}の戦闘詳細`}>
         {enemy ? enemyCrop ? <svg data-effect-anchor className={styles.enemyImage} viewBox={`${enemyCrop.bounds[0]} ${enemyCrop.bounds[1]} ${enemyCrop.bounds[2]-enemyCrop.bounds[0]} ${enemyCrop.bounds[3]-enemyCrop.bounds[1]}`} preserveAspectRatio="xMidYMax meet" aria-hidden="true"><image href={artSource} width={enemyCrop.width} height={enemyCrop.height}/></svg> : <img data-effect-anchor src={artSource} alt="" className={styles.enemyImage} /> : <span data-effect-anchor className={styles.memberPortrait}><img src={artSource} alt="" className={styles.memberImage} style={{ '--face-scale': faceCrop.thumbnailScale, '--face-x': `${faceCrop.thumbnailX}%`, '--face-y': `${faceCrop.thumbnailY}%` } as CSSProperties} /></span>}
-        <span className={styles.unitInfo}>
+      </button>
+        <div className={styles.unitInfo}>
+          <button className={styles.infoButton} onClick={() => setDetail({ unit, state })} aria-label={`${enemyDisplayName(unit)}の能力詳細`}>
           <span className={styles.unitName}>{enemy && <ElementBadge element={unit.element} size="combat" className={styles.element}/>}{enemy && <small>Lv.{unit.level} </small>}{enemyDisplayName(unit)}</span>
           {!enemy && <span className={styles.level}>Lv.{unit.level}</span>}
           <span className={styles.hp}><span style={{ width: meterWidth(state.hp, state.maxHp) }} /></span>
           <span className={styles.hpNumber}><span>{Math.floor(state.hp).toLocaleString()}</span><span> / {Math.floor(state.maxHp).toLocaleString()}</span></span>
+          </button>
+          {enemy && statusIcons}
           {enemy && <span className={styles.count}>{state.hp > 0 ? <>あと <b>{state.count}</b></> : '撃破'}</span>}
           {state.phase && <span className={styles.phase}>{state.phase}</span>}
-        </span>
-      </button>
-      <div className={styles.status} aria-label={`${unit.name}の状態`}>
-        {state.statuses.slice(0, 2).map((s, i) => <button key={`${s.type}-${i}`} data-status={s.type} onClick={() => setDetail({ unit, state })} title={`${statusNames[s.type] ?? s.type} 残り${s.remaining}回${s.type === 'shield' ? `・吸収残量${s.amount ?? 0}` : ''}`} aria-label={`${statusNames[s.type] ?? s.type} 残り${s.remaining}回`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d={statusPaths[s.type] ?? 'M12 3V15M12 19V21'} />{s.type.endsWith('_down') && <path d="M18 2V9M15 6 18 9 21 6" />}</svg><span>{s.remaining}</span></button>)}
-        {state.statuses.length > 2 && <button onClick={() => setDetail({ unit, state })} aria-label={`ほか${state.statuses.length - 2}件の状態を表示`}>+{state.statuses.length - 2}</button>}
-        {state.stunImmune && <button onClick={() => setDetail({ unit, state })} title="実際に1回行動するまで行動不能の再付与を防ぎます">耐</button>}
-      </div>
+        </div>
+      {!enemy && statusIcons}
       {!enemy && <span className={styles.skills}>{(state.skills ?? unit.skills).slice(0, 3).map((skill, slot) => {
         const recorded = frame.skillStates?.[unit.id]?.find(entry => entry.skillId === skill.id);
         const skillActive = recorded ? recorded.status === 'active' : !frame.skillStates && active && frame.skillId === skill.id;
@@ -204,13 +223,13 @@ export function BattleView({ onRetire, resultActions, resultRewards, bgmScene = 
       {impact && <div key={`${frame.index}-${state.id}`} className={`${styles.impact} ${impact.type === 'heal' ? styles.healing : ''}`} data-impact-target={state.id}><strong>{impact.type === 'miss' ? 'MISS' : impact.type === 'status' ? ({effect_applied:'付与',effect_miss:'不成立',cleanse:'解除',shield_absorbed:'吸収'}[frame.event ?? ''] ?? '') : `${impact.type === 'heal' ? '+' : ''}${Math.abs(impact.amount).toLocaleString()}`}</strong>{impact.hits && impact.hits.length > 1 && <small>{impact.hits.length} HITS</small>}</div>}
     </div>;
   };
-  if (exited) return null;
+  if (exited) return <section className={styles.battle} aria-label="戦闘終了"><p>{terminalError||'リタイアを保存しています…'}</p>{terminalError&&<button onClick={()=>void retire()}>再試行</button>}</section>;
   return <section ref={battleRoot} className={styles.battle} aria-label={title} data-playback-paused={paused||pauseMenu||confirmRetire||assetsBlocked||!!detail||showLog||finished} data-intro-paused={paused || assetsBlocked || !!detail || showLog} data-playback-frame={index} data-effective-speed={effectiveSpeed} data-presentation-phase={presentationPhase??'none'} style={{ '--battle-speed': effectiveSpeed, '--wave-intro-ms': `${UI_MOTION.waveIntroMs}ms`, '--battle-background': `url(${JSON.stringify(backgroundSrc)})` } as CSSProperties}>
-    {!finished && (pauseMenu || confirmRetire) && createPortal(<CanonicalDialog title={confirmRetire ? 'リタイアしますか？' : '一時停止'} onClose={cancelRetire} actions={confirmRetire ? [{label:'続ける',semantic:'secondary',onClick:cancelRetire},{label:'リタイア',semantic:'danger',onClick:retire}] : [{label:'バトルを続ける',semantic:'primary',onClick:()=>{setPauseMenu(false);setPaused(false);} },...(!requirePlaybackCompletion ? [{label:'リタイア',semantic:'danger' as const,onClick:()=>{setPauseMenu(false);setConfirmRetire(true);}}] : [])]}>{confirmRetire ? <p>再生を終了して挑戦元へ戻ります。確定した戦績・報酬・消費は変更されません。</p> : <p>バトルの再生を停止しています。</p>}</CanonicalDialog>, document.body)}
+    {!finished && (pauseMenu || confirmRetire) && createPortal(<CanonicalDialog title={confirmRetire ? 'リタイアしますか？' : '一時停止'} onClose={cancelRetire} actions={confirmRetire ? [{label:'続ける',semantic:'secondary',onClick:cancelRetire},{label:'リタイア',semantic:'danger',onClick:retire}] : [{label:'バトルを続ける',semantic:'primary',onClick:()=>{setPauseMenu(false);setPaused(false);} },...(!requirePlaybackCompletion && onRetire ? [{label:'リタイア',semantic:'danger' as const,onClick:()=>{setPauseMenu(false);setConfirmRetire(true);}}] : [])]}>{confirmRetire ? <p>{result.pendingSettlementId?'戦闘を終了して挑戦元へ戻ります。クリア・勝利報酬は獲得できません。消費した行動力は戻りません。':'確定済み戦闘の再生を終了して挑戦元へ戻ります。'}</p> : <p>バトルの再生を停止しています。</p>}</CanonicalDialog>, document.body)}
     <dialog ref={loadingDialog} className={styles.loading} onCancel={event => event.preventDefault()} aria-label="戦闘画面の読み込み"><img src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" />{assetError ? <><p>戦闘画像を読み込めませんでした。</p><button onClick={() => { setAssetState({ result, key: imageKey, status: 'loading' }); setRetry(value => value + 1); }}>再試行</button>{!requirePlaybackCompletion && <button onClick={leaveFailedPlayback}>再生を終了する</button>}</> : <><span className={styles.spinner} /><p>戦闘の準備中</p></>}</dialog>
     <div className={visibleLoading ? styles.loadingContent : undefined}>
     {!finished && !exited && !assetsBlocked && <InkBurst phase={presentationPhase} active={burstActive} count={comboNumber} wave={frame.wave} paused={paused||pauseMenu||confirmRetire||!!detail||showLog}/> }
-    {!finished && <><header className={styles.header}><strong>第<b>{frame.wave}</b>派 / 全{result.waves.length}派</strong><div><button onClick={cycleSpeed} aria-label={`再生速度 ${speed}倍`}>▶▶ ×{speed}</button><button onClick={() => paused ? setPaused(false) : openPauseMenu()} disabled={finished} aria-label={paused ? '再開' : '一時停止'}>{paused ? '▶' : 'Ⅱ'}</button>{paused && !pauseMenu && !confirmRetire && !requirePlaybackCompletion && <button onClick={() => { wasPaused.current = true; setConfirmRetire(true); }}>リタイア</button>}{vipActive && <button className={styles.skip} disabled={finished} onClick={skip}>SKIP</button>}</div></header>
+    {!finished && <><header className={styles.header}><strong>第<b>{frame.wave}</b>派 / 全{result.waves.length}派</strong><div><button onClick={cycleSpeed} aria-label={`再生速度 ${speed}倍`}>▶▶ ×{speed}</button><button onClick={() => paused ? setPaused(false) : openPauseMenu()} disabled={finished} aria-label={paused ? '再開' : '一時停止'}>{paused ? '▶' : 'Ⅱ'}</button>{paused && !pauseMenu && !confirmRetire && !requirePlaybackCompletion && onRetire && <button onClick={() => { wasPaused.current = true; setConfirmRetire(true); }}>リタイア</button>}{vipActive && <button className={styles.skip} disabled={finished} onClick={skip}>SKIP</button>}</div></header>
     {displayedRaidHp && <div className={styles.raidHp}>{displayedRaidHp.label} <span>{Math.floor(displayedRaidHp.current).toLocaleString()} / {Math.floor(displayedRaidHp.max).toLocaleString()}</span></div>}
     <div className={`${styles.arena} ${waveIntroActive ? styles.waveEntering : ''}`} key={`arena-${frame.wave}`}>
 
@@ -218,11 +237,13 @@ export function BattleView({ onRetire, resultActions, resultRewards, bgmScene = 
       {!presentationPhase && presentation.cutIn==='skill' && presentation.actor && <div className={`${styles.cutIn} ${styles.skillCutIn}`} key={`cutin-${frame.index}`} aria-label={`${presentation.actor.name} ${presentation.skill?.name ?? 'スキル'}`}><div className={styles.cutInLight} /><img src={unitArt(presentation.actor, presentation.actorState, 'full')} alt="" /><strong>{presentation.skill?.name}</strong><span>{presentation.actor.name}</span></div>}
     </div>
     <BattleResourceDisplay charging={presentationPhase==='charge'} key={result.seed+'-'+result.frames.length} frame={frame} startIndex={result.frames.slice(0,index+1).findLast(f=>f.event==='burst_start')?.index??-1} paused={paused||pauseMenu||confirmRetire||assetsBlocked||!!detail||showLog} speed={effectiveSpeed} animate={result.frames.slice(initialFrame,index+1).some(f=>f.event==='burst_start')}/>
+    {frame.event==='burst_failed' && <p role="status" className={styles.burstFailure}>BURST抽選不成立 · ゲージ消費</p>}
     {frame.burstGauge !== undefined && <div className={`${styles.sp} ${styles.gauge}`} role="meter" aria-label="バーストゲージ" aria-valuemin={0} aria-valuemax={frame.maxBurstGauge ?? 200} aria-valuenow={frame.burstGauge}><span style={{ width: meterWidth(frame.burstGauge, frame.maxBurstGauge ?? 200) }} /></div>}
     <div className={styles.party}>{frame.party.map((u, i) => unitCard(u, false, i))}</div>
     {frame.remainingActions !== undefined && <p className={styles.actionLimit}>残り味方行動機会 <strong>{frame.remainingActions}</strong> / 300</p>}
     </>}
-    {finished && <RecordedBattleResult result={result} title={title} backgroundSrc={backgroundSrc} rewards={resultRewards} actions={resultActions ?? <button onClick={onComplete}>結果へ</button>} />}
+    {finished && onPlaybackComplete && completion!=='done' && <div role="status"><p>{terminalError||'戦闘結果を保存しています…'}</p>{completion==='error'&&<button onClick={()=>void completePlayback()}>再試行</button>}</div>}
+    {finished && (!onPlaybackComplete || completion==='done') && <RecordedBattleResult result={result} title={title} backgroundSrc={backgroundSrc} rewards={resultRewards} actions={resultActions ?? <button onClick={onComplete}>結果へ</button>} />}
     </div>
     {!finished && !assetsBlocked && !presentationPhase && <BattleEffectLayer key={index} effects={effects} partyIds={frame.party.map(unit => unit.id)} paused={playbackPaused} speed={effectiveSpeed} />}
     {(detail || showLog) && <dialog ref={detailDialog} className={styles.backdrop} aria-label={showLog ? '戦闘ログ' : '戦闘詳細'} onCancel={event => { event.preventDefault(); close(); }}><section className={styles.modal}><button className={styles.close} onClick={close} autoFocus>閉じる</button>{showLog ? <>

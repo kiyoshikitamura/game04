@@ -35,7 +35,8 @@ export function useRecordedBattlePlayback({result,initialFrame=0,initialPaused=f
   const t=setTimeout(()=>{if(g!==generation.current)return;c.remaining=0;setIndex(i=>Math.min(i+1,result.frames.length-1))},Math.max(0,c.remaining/effectiveSpeed));
   return()=>{clearTimeout(t);c.remaining=Math.max(0,c.remaining-(performance.now()-start)*effectiveSpeed)};
  },[result,index,frame,effectiveSpeed,playbackPaused,minimumFrameDuration,burst.active]);
+ const cancel=useCallback(()=>{generation.current++;clock.current=null;leadClock.current=null;setPaused(true)},[]);
  const cycleSpeed=useCallback(()=>setSpeed(s=>s>=(vipActive?3:2)?1:s+1),[vipActive]);
  const skip=useCallback(()=>{if(!vipActive)return;generation.current++;clock.current=null;leadClock.current=null;setIndex(Math.max(0,result.frames.length-1))},[vipActive,result]);
- return {index,frame,finished,speed,effectiveSpeed,paused,playbackPaused,waveIntroActive,presentationPhase:phase,comboNumber:burst.count,burstActive:burst.active&&!finished,setPaused,cycleSpeed,skip};
+ return {index,frame,finished,speed,effectiveSpeed,paused,playbackPaused,waveIntroActive,presentationPhase:phase,comboNumber:burst.count,burstActive:burst.active&&!finished,cancel,setPaused,cycleSpeed,skip};
 }
