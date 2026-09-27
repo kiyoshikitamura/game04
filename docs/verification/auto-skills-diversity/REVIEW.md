@@ -42,4 +42,13 @@
 
 375/390×600pxの既存 `/qa/redesign?view=character` で実際のボタン→保存結果ダイアログ→各武将の表示→再実行を確認。既存3人fixtureは「弓取りの一射／薬師の手当／一文字斬り」と3種になり、再実行で維持、pageerrorなし。検証専用のローカル状態でありDB書込みなし。画像・browser.jsonは作業フォルダ outputs/auto-skills-diversity。
 
-配信結果は後記する。
+## 配信済み・実機確認待ち
+
+- 実装保存・配信SHA：e0916e9a56c30c67d04fe48c7f5360e20e319ed7。
+- 共通Preview：https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app
+- 固有URL：https://game04-i7cjaoqi9-kiyoshi-kitamura.vercel.app
+- Deployment：dpl_47pX3ZpSadHBcuKqve4npt6mLpWz / READY。
+- 配信・alias切替直前にPR #37とブランチ先端の一致を確認。共通URLの `/api/qa/deployment` で同SHA・作業ブランチ・environment=previewを照合。
+- 共通Previewの375/390px操作テストPASS。結果・画像は preview-browser.json、preview-375.png、preview-390.png。初回は素材読み込み中にボタン有効化を待つ30秒タイムアウト。追加診断でHTTP/通信失敗なし・画面の読み込み完了を確認し、再実行は両幅で保存・全3名の装着確認・再実行維持・pageerrorなし。初回待機時間の原因はこの限定検証では断定していない。
+- 残件：利用者本人の所持・5人編成での実機確認。広範囲な性能監査は行っていない。DB変更・本番・main・GAME03変更なし。
+- この配信記録とPreview画像の後続コミットは文書・証拠のみで、配信アプリは上記SHA。
