@@ -10,6 +10,11 @@ function unauthorized() {
 }
 
 export function proxy(request: NextRequest) {
+  // Internal KPI tools are served only from development / Preview deployments.
+  // This does not decide which database supplies the read-only KPI data.
+  if (process.env.VERCEL_ENV === "production") {
+    return new NextResponse("Not found", { status: 404, headers: { "Cache-Control": "no-store" } });
+  }
   const expectedUser = process.env.KPI_BASIC_AUTH_USER;
   const expectedPassword = process.env.KPI_BASIC_AUTH_PASSWORD;
   if (!expectedUser || !expectedPassword) {

@@ -1,0 +1,69 @@
+{
+  "base": "http://localhost:3013",
+  "trace": [
+    {
+      "action": "get_state",
+      "requestId": "f2e05bbd-a969-4a48-b5af-1d0be16ac7f6",
+      "url": "https://soiksqgtmcnspfedmanr.supabase.co/functions/v1/game04-redesign-api",
+      "status": 200,
+      "contentType": "application/json",
+      "redirectTo": null
+    },
+    {
+      "action": "tutorial_home",
+      "requestId": "4918f684-d5ba-435e-b522-41fbaeafc63f",
+      "url": "https://soiksqgtmcnspfedmanr.supabase.co/functions/v1/game04-redesign-api",
+      "status": 200,
+      "contentType": "application/json",
+      "redirectTo": null
+    },
+    {
+      "action": "observe_state_restore",
+      "requestId": "22f89c33-31a9-4891-a770-ccc80e661eb3",
+      "url": "https://soiksqgtmcnspfedmanr.supabase.co/functions/v1/game04-redesign-api?forceFunctionRegion=eu-central-1",
+      "status": 200,
+      "contentType": "application/json",
+      "redirectTo": null
+    },
+    {
+      "action": "early_guide",
+      "requestId": "2a4467fb-25f8-4c81-ba8f-015d46748de9",
+      "injectedFailure": true
+    },
+    {
+      "action": "early_guide",
+      "requestId": "2a4467fb-25f8-4c81-ba8f-015d46748de9",
+      "url": "https://soiksqgtmcnspfedmanr.supabase.co/functions/v1/game04-redesign-api",
+      "status": 503,
+      "contentType": "application/json",
+      "redirectTo": null
+    },
+    {
+      "action": "get_state",
+      "requestId": "91e2a682-bec1-486a-8a4c-8b9522c15fc6",
+      "url": "https://soiksqgtmcnspfedmanr.supabase.co/functions/v1/game04-redesign-api",
+      "status": 200,
+      "contentType": "application/json",
+      "redirectTo": null
+    },
+    {
+      "action": "early_guide",
+      "requestId": "2a4467fb-25f8-4c81-ba8f-015d46748de9",
+      "url": "https://soiksqgtmcnspfedmanr.supabase.co/functions/v1/game04-redesign-api",
+      "status": 200,
+      "contentType": "application/json",
+      "redirectTo": null
+    },
+    {
+      "action": "early_missions_opened",
+      "requestId": "64ccce8b-97b4-4b7d-bd79-5fc3d5711efc",
+      "url": "https://soiksqgtmcnspfedmanr.supabase.co/functions/v1/game04-redesign-api",
+      "status": 200,
+      "contentType": "application/json",
+      "redirectTo": null
+    }
+  ],
+  "normalTab": true,
+  "safeError": true,
+  "retrySameId": true
+}

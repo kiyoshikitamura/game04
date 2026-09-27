@@ -12,9 +12,9 @@ export type HomeBackground = {
   conditionLabel: string;
 };
 
-/** One initial choice; retired gate IDs resolve to town without deleting the source asset. */
+export const DEFAULT_HOME_BACKGROUND_ID = 'area:mikawa';
+/** Retired scenery resolves to Mikawa without deleting assets used elsewhere. */
 export const HOME_BACKGROUNDS: HomeBackground[] = [
-  { id: 'castle-town', name: '夕桜の城下街', image: '/bg/sengoku/castle-town.jpg', conditionLabel: '' },
   ...SSR_HOME_BACKGROUNDS.map(background => ({
     ...background, conditionLabel: `${background.characterName}の入手で選択可能`,
   })),
@@ -25,7 +25,8 @@ export const HOME_BACKGROUNDS: HomeBackground[] = [
 ];
 
 const LEGACY_BACKGROUND_IDS: Record<string, string> = {
-  bg_default: 'castle-town', bg_kabukicho: 'castle-town', 'castle-approach': 'castle-town',
+  bg_default: DEFAULT_HOME_BACKGROUND_ID, bg_kabukicho: DEFAULT_HOME_BACKGROUND_ID,
+  'castle-approach': DEFAULT_HOME_BACKGROUND_ID, 'castle-town': DEFAULT_HOME_BACKGROUND_ID,
 };
 
 function findHomeBackground(id: string | undefined): HomeBackground | undefined {
@@ -33,7 +34,7 @@ function findHomeBackground(id: string | undefined): HomeBackground | undefined 
 }
 
 export function resolveHomeBackground(id?: string): HomeBackground {
-  return findHomeBackground(id) ?? HOME_BACKGROUNDS[0];
+  return findHomeBackground(id) ?? HOME_BACKGROUNDS.find(background => background.id === DEFAULT_HOME_BACKGROUND_ID)!;
 }
 
 /** Append once after acquisition or an existing-owner read; never select a background implicitly. */
@@ -79,7 +80,7 @@ export function applyHomeSelection(state: RedesignState, payload: Record<string,
 
 /** Unlock status first; stable master order within initial / quest / SSR groups. */
 export function sortedHomeBackgrounds(clearedStages: readonly string[], unlockedIds: readonly string[] = [], progress?: RedesignState['earlyProgress']): HomeBackground[] {
-  const category = (b: HomeBackground) => b.id === 'castle-town' ? 0 : b.areaId ? 1 : 2;
+  const category = (b: HomeBackground) => b.id === DEFAULT_HOME_BACKGROUND_ID ? 0 : b.areaId ? 1 : 2;
   return HOME_BACKGROUNDS.map((background, index) => ({ background, index,
     unlocked: isHomeBackgroundUnlocked(background, clearedStages, unlockedIds, progress) })).sort((a, b) =>
       Number(b.unlocked) - Number(a.unlocked) || category(a.background) - category(b.background) || a.index - b.index

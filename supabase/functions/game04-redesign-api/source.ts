@@ -1,3 +1,4 @@
+import { authenticatedUser, AuthCheckError } from './authUser.ts';
 // Bundled with the shared pure gameplay modules before Edge deployment.
 import { BATTLE_RULES, prepareBattleWaves, buildBattleParty, buildInitialState, importLegacyAssets, grantReward, CHARACTER_MASTERS, type LegacyAssets } from '../../../src/domain/redesign/masters.ts';
 import { applyAcquisitionEvents, type AcquisitionEvent, type AcquisitionMaster } from '../../../src/domain/redesign/acquisitions.ts';
@@ -368,9 +369,7 @@ Deno.serve(async (request: Request) => {
     if (request.method !== 'POST') throw new ApiError('Method not allowed', 405);
     const authorization = request.headers.get('authorization') || '';
     if (!/^Bearer \S+$/.test(authorization)) throw new ApiError('ログインしてください。', 401);
-    const auth = await fetch(`${url}/auth/v1/user`, { headers: { apikey: key, Authorization: authorization } });
-    const user = await auth.json();
-    if (!auth.ok || !user.id) throw new ApiError('ログインし直してください。', 401);
+    const user = await authenticatedUser(url, key, authorization);
     const { action:requestedAction, payload = {}, requestId } = await request.json();
     const action=requestedAction==='formal_gacha'?(payload.mode==='normal'?'normal_gacha':'special_gacha'):requestedAction==='formal_gacha_exchange'?'special_gacha_exchange':requestedAction;
     if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(requestId)) throw new ApiError('操作IDが不正です。');
@@ -530,6 +529,6 @@ Deno.serve(async (request: Request) => {
   } catch (error) {
     const conflict = error instanceof ApiError && error.status === 409;
     const message = conflict ? '他の操作で更新されました。再読み込みしてお試しください。' : error instanceof Error ? error.message : '処理に失敗しました。';
-    return new Response(JSON.stringify({ error: message }), { status: error instanceof ApiError ? error.status : 400, headers });
+    return new Response(JSON.stringify({ error: message }), { status: error instanceof ApiError || error instanceof AuthCheckError ? error.status : 400, headers });
   }
 });

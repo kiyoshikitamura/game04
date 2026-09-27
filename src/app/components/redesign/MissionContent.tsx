@@ -8,8 +8,8 @@ import {RewardList} from '../ui/Game04DataDisplay';
 import Modal from './Modal';
 import './MissionContent.css';
 type Props={state:RedesignState;missions:MissionProjection[];missionBusy:boolean;missionError:string;previewOnly:boolean;onClaim:(id:string)=>void;onClaimMany?:(ids:string[])=>void;onClose?:()=>void;onNavigate?:(tab:string)=>void;onRetryOpen?:()=>void;missionStatus?:string};
-export default function MissionContent({missions,missionBusy,missionError,previewOnly,onClaim,onClaimMany,onClose,onNavigate,onRetryOpen,missionStatus}:Props){
- const [daily,setDaily]=useState(true),[expanded,setExpanded]=useState(false);
+export default function MissionContent({state,missions,missionBusy,missionError,previewOnly,onClaim,onClaimMany,onClose,onNavigate,onRetryOpen,missionStatus}:Props){
+ const [daily,setDaily]=useState(()=>!state.earlyProgress?.missionNavigationPending),[expanded,setExpanded]=useState(false);
  const [detail,setDetail]=useState<{mission:MissionProjection;rewardIndex?:number;rewards?:boolean}|null>(null);
  const scroll=useRef<HTMLDivElement>(null);
  useEffect(()=>{scroll.current?.scrollTo({top:0});setExpanded(false)},[daily]);

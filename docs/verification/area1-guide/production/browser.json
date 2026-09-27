@@ -1,0 +1,62 @@
+{
+  "base": "https://sengoku-hime-ennbu.com",
+  "trace": [
+    {
+      "action": "get_state",
+      "requestId": "ab4200a1-39df-4463-8c87-05310defce2d",
+      "url": "https://soiksqgtmcnspfedmanr.supabase.co/functions/v1/game04-redesign-api",
+      "status": 200,
+      "contentType": "application/json",
+      "redirectTo": null
+    },
+    {
+      "action": "observe_state_restore",
+      "requestId": "51844ca8-42d8-4f1f-8c63-1b0c7ebcb004",
+      "url": "https://soiksqgtmcnspfedmanr.supabase.co/functions/v1/game04-redesign-api?forceFunctionRegion=eu-central-1",
+      "status": 200,
+      "contentType": "application/json",
+      "redirectTo": null
+    },
+    {
+      "action": "early_guide",
+      "requestId": "95750fdc-956b-466d-9792-f806759f121f",
+      "injectedFailure": true
+    },
+    {
+      "action": "early_guide",
+      "requestId": "95750fdc-956b-466d-9792-f806759f121f",
+      "url": "https://soiksqgtmcnspfedmanr.supabase.co/functions/v1/game04-redesign-api",
+      "status": 503,
+      "contentType": "application/json",
+      "redirectTo": null
+    },
+    {
+      "action": "get_state",
+      "requestId": "dbe59156-99f1-4070-a745-bfe68bebba12",
+      "url": "https://soiksqgtmcnspfedmanr.supabase.co/functions/v1/game04-redesign-api",
+      "status": 200,
+      "contentType": "application/json",
+      "redirectTo": null
+    },
+    {
+      "action": "early_guide",
+      "requestId": "95750fdc-956b-466d-9792-f806759f121f",
+      "url": "https://soiksqgtmcnspfedmanr.supabase.co/functions/v1/game04-redesign-api",
+      "status": 200,
+      "contentType": "application/json",
+      "redirectTo": null
+    },
+    {
+      "action": "early_missions_opened",
+      "requestId": "28469eef-d102-4585-bb2a-f137f6c0c0bd",
+      "url": "https://soiksqgtmcnspfedmanr.supabase.co/functions/v1/game04-redesign-api",
+      "status": 200,
+      "contentType": "application/json",
+      "redirectTo": null
+    }
+  ],
+  "normalTab": true,
+  "safeError": true,
+  "retrySameId": true,
+  "rewardsAndClearsUnchanged": true
+}
