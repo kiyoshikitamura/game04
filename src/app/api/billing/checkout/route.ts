@@ -34,7 +34,7 @@ export async function POST(request: Request) {
       // Preserve the approved fixed-JPY card checkout even when a new Stripe account
       // defaults to Managed Payments. Do not inherit merchant/tax/currency changes.
       const body = new URLSearchParams({ mode: "payment", "payment_method_types[0]": "card",
-        "managed_payments[enabled]": "false",
+        "managed_payments[enabled]": "false", "adaptive_pricing[enabled]": "false",
         client_reference_id: order.id, "metadata[order_id]": order.id,
         "metadata[application]": "game04", "metadata[user_id]": userId, "metadata[product_id]": order.product_id,
         "line_items[0][price_data][currency]": "jpy",
