@@ -1,5 +1,7 @@
 'use client';
 import { passiveDisplayName } from '@/theme/approvedNames';
+import InkBurst from './InkBurst';
+import { INK_ROOT, INK_ASSETS } from '@/domain/presentation/battleLeadIn';
 import ElementBadge from './ElementBadge';
 import { createPortal } from 'react-dom';
 import CanonicalDialog from '../ui/CanonicalDialog';
@@ -81,13 +83,13 @@ export function BattleView({ onRetire, resultActions, resultRewards, bgmScene = 
   const measuredImageResult = useRef<BattleResult | null>(null);
   const detailDialog = useRef<HTMLDialogElement>(null);
   const assetsBlocked = assetState.result !== result || assetState.status !== 'ready';
-  const { index, frame, finished, speed, effectiveSpeed, paused, playbackPaused, waveIntroActive, setPaused, cycleSpeed, skip } = useRecordedBattlePlayback({ result, initialFrame, initialPaused, vipActive, blocked: exited || pauseMenu || confirmRetire || !!detail || showLog || assetsBlocked, minimumFrameDuration: minimumEffectFrameDuration, waveIntroDuration: UI_MOTION.waveIntroMs });
+  const { index, frame, finished, speed, effectiveSpeed, paused, playbackPaused, waveIntroActive, presentationPhase, comboNumber, burstActive, setPaused, cycleSpeed, skip } = useRecordedBattlePlayback({ result, initialFrame, initialPaused, vipActive, blocked: exited || pauseMenu || confirmRetire || !!detail || showLog || assetsBlocked, minimumFrameDuration: minimumEffectFrameDuration, waveIntroDuration: UI_MOTION.waveIntroMs });
   const presentation = projectRecordedBattleFrame(result, index);
   const battleRoot = useRef<HTMLElement>(null);
   useEffect(() => { if (finished) { stopBgm(); battleRoot.current?.scrollIntoView({ block: 'start' }); } }, [finished, stopBgm]);
   useEffect(() => {
     stopSe();
-    if (!frame || exited || pauseMenu || confirmRetire || assetsBlocked || paused || waveIntroActive || detail || showLog || heardFrame.current === index) return;
+    if (!frame || exited || pauseMenu || confirmRetire || assetsBlocked || paused || (presentationPhase && presentationPhase!=='hit') || detail || showLog || heardFrame.current === index) return;
     if (['action_start', 'phase', 'burst_start', 'start', 'end'].includes(frame.event ?? frame.kind)) heardAction.current.clear();
     heardFrame.current = index;
     for (const event of recordedBattleSounds(result, index)) {
@@ -96,7 +98,7 @@ export function BattleView({ onRetire, resultActions, resultRewards, bgmScene = 
       playSe(event);
     }
     return stopSe;
-  }, [result, index, frame, speed, exited, pauseMenu, confirmRetire, assetsBlocked, paused, waveIntroActive, detail, showLog, playSe, stopSe]);
+  }, [result, index, frame, speed, exited, pauseMenu, confirmRetire, assetsBlocked, paused, waveIntroActive, presentationPhase, detail, showLog, playSe, stopSe]);
   function openPauseMenu() { wasPaused.current = paused; setPaused(true); stopSe(); setPauseMenu(true); }
   function cancelRetire() { setConfirmRetire(false); setPauseMenu(false); setPaused(wasPaused.current); }
   function retire() {
@@ -109,7 +111,7 @@ export function BattleView({ onRetire, resultActions, resultRewards, bgmScene = 
   const effects = frame ? resolveBattleFrameEffects(frame, result.frames[index - 1], presentation.skill) : [];
   // A result-wide gate avoids hiding the battle when a later effect first appears.
   const imageKey = useMemo(() => JSON.stringify([...new Set([
-    '/branding/tribe-neon-logo.png', backgroundSrc, ...BATTLE_RESOURCE_ASSETS,
+    '/branding/tribe-neon-logo.png', backgroundSrc, ...BATTLE_RESOURCE_ASSETS, ...INK_ASSETS.map(n=>INK_ROOT+n), ...result.waves.map((_,i)=>INK_ROOT+`wave-${i+1}.png`),
     ...result.frames.flatMap((record, i) => effectAssetPaths(resolveBattleFrameEffects(record, result.frames[i - 1], projectRecordedBattleFrame(result, i).skill))),
     ...result.frames.flatMap(record => [...record.party, ...record.enemies].flatMap(state => {
       const unit = result.party.find(item => item.id === state.id) ?? result.waves[record.wave - 1]?.find(item => item.id === state.id);
@@ -201,25 +203,26 @@ export function BattleView({ onRetire, resultActions, resultRewards, bgmScene = 
     </div>;
   };
   if (exited) return null;
-  return <section ref={battleRoot} className={styles.battle} aria-label={title} data-playback-paused={playbackPaused && !waveIntroActive} data-intro-paused={paused || assetsBlocked || !!detail || showLog} data-playback-frame={index} style={{ '--battle-speed': effectiveSpeed, '--wave-intro-ms': `${UI_MOTION.waveIntroMs}ms`, '--battle-background': `url(${JSON.stringify(backgroundSrc)})` } as CSSProperties}>
+  return <section ref={battleRoot} className={styles.battle} aria-label={title} data-playback-paused={paused||pauseMenu||confirmRetire||assetsBlocked||!!detail||showLog||finished} data-intro-paused={paused || assetsBlocked || !!detail || showLog} data-playback-frame={index} data-effective-speed={effectiveSpeed} data-presentation-phase={presentationPhase??'none'} style={{ '--battle-speed': effectiveSpeed, '--wave-intro-ms': `${UI_MOTION.waveIntroMs}ms`, '--battle-background': `url(${JSON.stringify(backgroundSrc)})` } as CSSProperties}>
     {!finished && (pauseMenu || confirmRetire) && createPortal(<CanonicalDialog title={confirmRetire ? 'リタイアしますか？' : '一時停止'} onClose={cancelRetire} actions={confirmRetire ? [{label:'続ける',semantic:'secondary',onClick:cancelRetire},{label:'リタイア',semantic:'danger',onClick:retire}] : [{label:'バトルを続ける',semantic:'primary',onClick:()=>{setPauseMenu(false);setPaused(false);} },...(!requirePlaybackCompletion ? [{label:'リタイア',semantic:'danger' as const,onClick:()=>{setPauseMenu(false);setConfirmRetire(true);}}] : [])]}>{confirmRetire ? <p>再生を終了して挑戦元へ戻ります。確定した戦績・報酬・消費は変更されません。</p> : <p>バトルの再生を停止しています。</p>}</CanonicalDialog>, document.body)}
     <dialog ref={loadingDialog} className={styles.loading} onCancel={event => event.preventDefault()} aria-label="戦闘画面の読み込み"><img src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" />{assetError ? <><p>戦闘画像を読み込めませんでした。</p><button onClick={() => { setAssetState({ result, key: imageKey, status: 'loading' }); setRetry(value => value + 1); }}>再試行</button>{!requirePlaybackCompletion && <button onClick={leaveFailedPlayback}>再生を終了する</button>}</> : <><span className={styles.spinner} /><p>戦闘の準備中</p></>}</dialog>
     <div className={visibleLoading ? styles.loadingContent : undefined}>
+    {!finished && !exited && !assetsBlocked && <InkBurst phase={presentationPhase} active={burstActive} count={comboNumber} wave={frame.wave} paused={paused||pauseMenu||confirmRetire||!!detail||showLog}/> }
     {!finished && <><header className={styles.header}><strong>第<b>{frame.wave}</b>派 / 全{result.waves.length}派</strong><div><button onClick={cycleSpeed} aria-label={`再生速度 ${speed}倍`}>▶▶ ×{speed}</button><button onClick={() => paused ? setPaused(false) : openPauseMenu()} disabled={finished} aria-label={paused ? '再開' : '一時停止'}>{paused ? '▶' : 'Ⅱ'}</button>{paused && !pauseMenu && !confirmRetire && !requirePlaybackCompletion && <button onClick={() => { wasPaused.current = true; setConfirmRetire(true); }}>リタイア</button>}{vipActive && <button className={styles.skip} disabled={finished} onClick={skip}>SKIP</button>}</div></header>
     {displayedRaidHp && <div className={styles.raidHp}>{displayedRaidHp.label} <span>{Math.floor(displayedRaidHp.current).toLocaleString()} / {Math.floor(displayedRaidHp.max).toLocaleString()}</span></div>}
     <div className={`${styles.arena} ${waveIntroActive ? styles.waveEntering : ''}`} key={`arena-${frame.wave}`}>
-      {waveIntroActive && <div className={styles.waveIntro} role="status">第{frame.wave}派</div>}
+
       <div className={styles.enemyZone} data-count={frame.enemies.length}>{frame.enemies.map((u, i) => unitCard(u, true, i))}</div>
-      {presentation.cutIn && presentation.actor && <div className={`${styles.cutIn} ${presentation.cutIn === 'burst' ? styles.burstCutIn : styles.skillCutIn}`} key={`cutin-${frame.index}`} aria-label={`${presentation.actor.name} ${presentation.cutIn === 'burst' ? 'BURST' : presentation.skill?.name ?? 'スキル'}`}><div className={styles.cutInLight} /><img src={unitArt(presentation.actor, presentation.actorState, 'full')} alt="" /><strong>{presentation.cutIn === 'burst' ? 'BURST' : presentation.skill?.name}</strong><span>{presentation.actor.name}</span></div>}
+      {!presentationPhase && presentation.cutIn==='skill' && presentation.actor && <div className={`${styles.cutIn} ${styles.skillCutIn}`} key={`cutin-${frame.index}`} aria-label={`${presentation.actor.name} ${presentation.skill?.name ?? 'スキル'}`}><div className={styles.cutInLight} /><img src={unitArt(presentation.actor, presentation.actorState, 'full')} alt="" /><strong>{presentation.skill?.name}</strong><span>{presentation.actor.name}</span></div>}
     </div>
-    <BattleResourceDisplay key={result.seed+'-'+result.frames.length} frame={frame} startIndex={result.frames.slice(0,index+1).findLast(f=>f.event==='burst_start')?.index??-1} paused={playbackPaused} speed={effectiveSpeed} animate={result.frames.slice(initialFrame,index+1).some(f=>f.event==='burst_start')}/>
+    <BattleResourceDisplay charging={presentationPhase==='charge'} key={result.seed+'-'+result.frames.length} frame={frame} startIndex={result.frames.slice(0,index+1).findLast(f=>f.event==='burst_start')?.index??-1} paused={paused||pauseMenu||confirmRetire||assetsBlocked||!!detail||showLog} speed={effectiveSpeed} animate={result.frames.slice(initialFrame,index+1).some(f=>f.event==='burst_start')}/>
     {frame.burstGauge !== undefined && <div className={`${styles.sp} ${styles.gauge}`} role="meter" aria-label="バーストゲージ" aria-valuemin={0} aria-valuemax={frame.maxBurstGauge ?? 200} aria-valuenow={frame.burstGauge}><span style={{ width: meterWidth(frame.burstGauge, frame.maxBurstGauge ?? 200) }} /></div>}
     <div className={styles.party}>{frame.party.map((u, i) => unitCard(u, false, i))}</div>
     {frame.remainingActions !== undefined && <p className={styles.actionLimit}>残り味方行動機会 <strong>{frame.remainingActions}</strong> / 300</p>}
     </>}
     {finished && <RecordedBattleResult result={result} title={title} backgroundSrc={backgroundSrc} rewards={resultRewards} actions={resultActions ?? <button onClick={onComplete}>結果へ</button>} />}
     </div>
-    {!finished && !assetsBlocked && <BattleEffectLayer key={index} effects={effects} partyIds={frame.party.map(unit => unit.id)} paused={playbackPaused} speed={effectiveSpeed} />}
+    {!finished && !assetsBlocked && !presentationPhase && <BattleEffectLayer key={index} effects={effects} partyIds={frame.party.map(unit => unit.id)} paused={playbackPaused} speed={effectiveSpeed} />}
     {(detail || showLog) && <dialog ref={detailDialog} className={styles.backdrop} aria-label={showLog ? '戦闘ログ' : '戦闘詳細'} onCancel={event => { event.preventDefault(); close(); }}><section className={styles.modal}><button className={styles.close} onClick={close} autoFocus>閉じる</button>{showLog ? <>
       <h2>戦闘ログ</h2>{result.frames.map(f => <article className={styles.logEntry} key={f.index}><strong>#{f.index + 1} 第{f.wave}派 {f.actorId ? lookup(f.actorId, f.wave)?.name ?? f.actorId : ''}</strong><p>{eventText(f.text)}</p>{f.targetIds?.length ? <p>対象：{f.targetIds.map(id => lookup(id, f.wave)?.name ?? id).join('、')}</p> : null}<p>SP {f.partySp}/{f.maxSp}{f.spDelta !== undefined ? ` (${signed(f.spDelta)})` : ''}{f.burstGauge !== undefined ? ` · ゲージ ${f.burstGauge}/${f.maxBurstGauge ?? 200}` : ''}{f.gaugeDelta !== undefined ? ` (${signed(f.gaugeDelta)})` : ''}{f.remainingActions !== undefined ? ` · 残り${f.remainingActions}回` : ''}</p><p>敵SP：{f.enemies.map(enemy => `${lookup(enemy.id, f.wave)?.name ?? enemy.id} ${enemy.sp}/${enemy.maxSp}`).join(' · ')}</p>{f.hits && f.hits.length > 1 && <p>ヒット表示：{f.hits.join(' + ')}</p>}{f.reason && <p>{reasonText(f.reason)}</p>}</article>)}
     </> : detail?.skill ? <><h2>{detail.skill.name}</h2><p>{detail.readiness}{detail.cost !== undefined ? ` · 今回の消費SP ${detail.cost}` : ''}</p>{showDetailReason && <p>{detailReason}</p>}<p>基本消費SP {detail.skill.spCost} · {elements[detail.skill.element]}</p><p>{skillDescription(detail.skill, result.rulesVersion === 'balance-v2-20260920')}</p><p>条件：{skillConditionText(detail.skill)}</p><p>対象：{TARGET_LABELS[detail.skill.target] ?? detail.skill.target}</p><p>効果順：{detail.skill.effects.map(effect => `${statusNames[effect.type] ?? '状態効果'}${effect.cleanseCategory ? `（${CLEANSE_LABELS[effect.cleanseCategory]}）` : ''}`).join(' → ')}</p></> : detail?.unit && <><h2>{enemyDisplayName(detail.unit)}</h2>{enemyRoleLabel(detail.unit) && <p>{enemyRoleLabel(detail.unit)}</p>}<p>HP {detail.state ? Math.floor(detail.state.hp).toLocaleString() : undefined} / {detail.state ? Math.floor(detail.state.maxHp).toLocaleString() : undefined}</p>{detail.state && result.waves[frame.wave - 1]?.some(u => u.id === detail.unit?.id) && <p>SP {detail.state.sp} / {detail.state.maxSp} · あと {detail.state.count} 行動で割り込み</p>}{detail.unit.passives.length > 0 && <><h3>パッシブ</h3>{detail.unit.passives.map((p, i) => <p key={`${p.id}-${i}`}><strong>{passiveDisplayName(p)} Lv.{p.level ?? 0}</strong><br />{passiveDescription(p)}{detail.state?.passiveEffects?.find(entry=>entry.id===p.id) && <><br />記録時：{detail.state.passiveEffects.find(entry=>entry.id===p.id)?.active ? '条件成立' : '条件不成立・無効'}</>}</p>)}</>}<h3>スキル発動優先順</h3>{(detail.state?.skills ?? detail.unit.skills).map((s, slot) => <p key={s.id}><strong>優先{slot + 1}：{s.name}</strong>（SP {s.spCost}）<br />{skillConditionText(s)}<br />{skillDescription(s, result.rulesVersion === 'balance-v2-20260920')}</p>)}<h3>状態</h3>{detail.state?.statuses.length ? detail.state.statuses.map((s, i) => <p key={i}>{statusNames[s.type] ?? s.type} {s.type === 'shield' ? `残量 ${(s.amount ?? 0).toLocaleString()}` : ['dot','hot'].includes(s.type) ? `保持基礎量 ${s.amount ?? 0}` : ['stun','taunt'].includes(s.type) ? '' : `${s.power}%`} · 残り{s.remaining}回{s.sourceSkillId ? ` · 付与元 ${[...result.party, ...(result.waves[frame.wave - 1] ?? [])].flatMap(unit => unit.skills).find(skill => skill.id === s.sourceSkillId)?.name ?? '状態付与スキル'}` : ''}</p>) : <p>なし</p>}{detail.state?.stunImmune && <p>行動不能の再付与耐性：次の実行行動完了まで</p>}</>}</section></dialog>}

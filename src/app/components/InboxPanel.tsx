@@ -192,7 +192,7 @@ export default function InboxPanel() {
       </FullScreenPanel>
 
       {selectedNews && (
-        <CanonicalDialog title={selectedNews.title} onClose={() => setSelectedNews(null)} actions={[{ label: "閉じる", semantic: "secondary", onClick: () => setSelectedNews(null) }]}>
+        <CanonicalDialog title={selectedNews.title} onClose={() => setSelectedNews(null)} actions={[...(selectedNews.link_url==='game04:present-box'?[{label:'プレゼントBOXへ',onClick:()=>{setSelectedNews(null);setInboxPanelTab('presents');}}]:[]),{ label: "閉じる", semantic: "secondary", onClick: () => setSelectedNews(null) }]}>
           <p className="inbox-news-modal-text">{selectedNews.content || selectedNews.desc}</p>
         </CanonicalDialog>
       )}
