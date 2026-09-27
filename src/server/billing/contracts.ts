@@ -1,9 +1,10 @@
-import { GAME04_DEV_PROJECT_REF, isValidSupabaseUrl } from "../../utils/supabaseUrl";
+import { GAME04_DEV_PROJECT_REF, GAME04_PRODUCTION_PROJECT_REF, isValidSupabaseUrl } from "../../utils/supabaseUrl";
 import { createHmac, timingSafeEqual } from "node:crypto";
 
 export type BillingMode = "sandbox" | "live";
-export const PRODUCTION_PROJECT_REF = ""; // GAME04 Production未設定
+export const PRODUCTION_PROJECT_REF = GAME04_PRODUCTION_PROJECT_REF;
 export const PREVIEW_PROJECT_REF = GAME04_DEV_PROJECT_REF;
+const GAME04_PRODUCTION_ORIGIN = "https://sengoku-hime-ennbu.com";
 export class BillingError extends Error {
   status: number;
   code: string;
@@ -37,14 +38,15 @@ export function sandboxEnvironmentChecks(env: NodeJS.ProcessEnv = process.env, r
     const origin = new URL(env.BILLING_RETURN_ORIGIN ?? "");
     returnOriginValid = origin.protocol === "https:" && !origin.username && !origin.password &&
       origin.pathname === "/" && !origin.search && !origin.hash &&
-      !["https://tribe-neon.com", "https://www.tribe-neon.com"].includes(origin.origin);
+      !["tribe-neon.com", "www.tribe-neon.com", "api.tribe-neon.com", "sengoku-hime-ennbu.com", "www.sengoku-hime-ennbu.com"].includes(origin.hostname);
     if (requestOrigin) returnOriginMatchesRequest = origin.origin === requestOrigin;
   } catch { /* missing or malformed origin */ }
   return {
     mode_sandbox: (env.BILLING_MODE ?? "sandbox") === "sandbox",
     sandbox_enabled: env.BILLING_SANDBOX_ENABLED === "true",
     non_production_runtime: env.VERCEL_ENV !== "production",
-    preview_database: isValidSupabaseUrl(env.NEXT_PUBLIC_SUPABASE_URL ?? "", env.NEXT_PUBLIC_APP_ENV ?? "development"),
+    preview_database: ["development", "preview"].includes((env.NEXT_PUBLIC_APP_ENV ?? "development").trim().toLowerCase()) &&
+      isValidSupabaseUrl(env.NEXT_PUBLIC_SUPABASE_URL ?? "", env.NEXT_PUBLIC_APP_ENV ?? "development"),
     stripe_test_key_present: !!env.STRIPE_SECRET_KEY?.startsWith("sk_test_"),
     webhook_signing_secret_present: !!env.STRIPE_WEBHOOK_SECRET?.startsWith("whsec_"),
     service_role_present: !!env.SUPABASE_SERVICE_ROLE_KEY,
@@ -63,24 +65,32 @@ export function previewBillingDiagnostics(code: BillingReadinessCode, requestOri
     : {};
 }
 
-/** GAME04初期devはStripe testのみ。live設定は常に拒否する。 */
+/** GAME03の明示的なtest/live分離を継承。GAME04専用DB・本番originだけを許可。 */
 export function billingConfig(env: NodeJS.ProcessEnv = process.env) {
   const mode = env.BILLING_MODE ?? "sandbox";
-  if (mode !== "sandbox") throw new BillingError("決済の準備中です。", 503);
+  if (mode !== "sandbox" && mode !== "live") throw new BillingError("決済の準備中です。", 503);
+  const live = mode === "live";
+  const appEnvironment = (env.NEXT_PUBLIC_APP_ENV ?? "development").trim().toLowerCase();
   const databaseUrl = env.NEXT_PUBLIC_SUPABASE_URL?.trim() ?? "";
-  const validDatabase = isValidSupabaseUrl(databaseUrl, env.NEXT_PUBLIC_APP_ENV ?? "development");
-  const enabled = env.BILLING_SANDBOX_ENABLED === "true" && env.VERCEL_ENV !== "production";
+  const validDatabase = isValidSupabaseUrl(databaseUrl, appEnvironment) &&
+    (live ? appEnvironment === "production" : ["development", "preview"].includes(appEnvironment));
+  const enabled = live
+    ? env.BILLING_LIVE_ENABLED === "true" && env.VERCEL_ENV === "production"
+    : env.BILLING_SANDBOX_ENABLED === "true" && env.VERCEL_ENV !== "production";
   if (!enabled || !validDatabase ||
-      !env.STRIPE_SECRET_KEY?.startsWith("sk_test_") ||
+      !env.STRIPE_SECRET_KEY?.startsWith(live ? "sk_live_" : "sk_test_") ||
       !env.STRIPE_WEBHOOK_SECRET?.startsWith("whsec_") || !env.SUPABASE_SERVICE_ROLE_KEY) {
     throw new BillingError("決済の準備中です。", 503);
   }
   let origin: URL;
   try { origin = new URL(env.BILLING_RETURN_ORIGIN ?? ""); }
   catch { throw new BillingError("決済の戻り先が未設定です。", 503); }
-  const productionOrigin = ["https://tribe-neon.com", "https://www.tribe-neon.com"].includes(origin.origin);
+  const legacyOrigin = ["tribe-neon.com", "www.tribe-neon.com", "api.tribe-neon.com"].includes(origin.hostname);
+  const productionOrigin = origin.origin === GAME04_PRODUCTION_ORIGIN;
+  const productionHostname = ["sengoku-hime-ennbu.com", "www.sengoku-hime-ennbu.com"].includes(origin.hostname);
   if (origin.protocol !== "https:" || origin.username || origin.password ||
-      origin.pathname !== "/" || origin.search || origin.hash || productionOrigin) {
+      origin.pathname !== "/" || origin.search || origin.hash || legacyOrigin ||
+      (live ? !productionOrigin : productionHostname)) {
     throw new BillingError("決済の戻り先が不正です。", 503);
   }
   return { databaseUrl, serviceKey: env.SUPABASE_SERVICE_ROLE_KEY,

@@ -34,7 +34,7 @@ await test('webhook raw body tampering stale signatures and multiple signatures'
  assert.equal(verifyStripeEvent(raw,`t=${t},v1=${'0'.repeat(64)},v1=${sig}`,secret,now).id,'evt_qa');
 });
 await test('sandbox production wrong database and redirect boundary',()=>{
- const env={BILLING_MODE:'sandbox',BILLING_SANDBOX_ENABLED:'true',VERCEL_ENV:'preview',NEXT_PUBLIC_APP_ENV:'preview',NEXT_PUBLIC_SUPABASE_URL:'https://lrgyllgzcdcphlbmkknc.supabase.co',STRIPE_SECRET_KEY:'sk_test_qa_fixture',STRIPE_WEBHOOK_SECRET:'whsec_qa_fixture',SUPABASE_SERVICE_ROLE_KEY:'qa_fixture',BILLING_RETURN_ORIGIN:'https://qa-game04.example.com'};
+ const env={BILLING_MODE:'sandbox',BILLING_SANDBOX_ENABLED:'true',VERCEL_ENV:'preview',NEXT_PUBLIC_APP_ENV:'preview',NEXT_PUBLIC_SUPABASE_URL:'https://znakrkaazliexzwihxge.supabase.co',STRIPE_SECRET_KEY:'sk_test_qa_fixture',STRIPE_WEBHOOK_SECRET:'whsec_qa_fixture',SUPABASE_SERVICE_ROLE_KEY:'qa_fixture',BILLING_RETURN_ORIGIN:'https://qa-game04.example.com'};
  assert.equal(billingConfig(env).mode,'sandbox');
  for(const patch of [{BILLING_MODE:'live'},{VERCEL_ENV:'production'},{NEXT_PUBLIC_SUPABASE_URL:'https://ktpolnkyyfkowxdmijww.supabase.co'},{STRIPE_SECRET_KEY:'sk_live_qa_fixture'},{BILLING_RETURN_ORIGIN:'https://www.tribe-neon.com'},{BILLING_SANDBOX_ENABLED:'false'},{BILLING_RETURN_ORIGIN:'https://qa-game04.example.com/other'}]) assert.throws(()=>billingConfig({...env,...patch}));
  assert.throws(()=>validateCheckoutOrigin(new Request('https://other.example.com/api/billing/checkout'),env.BILLING_RETURN_ORIGIN));

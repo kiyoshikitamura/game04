@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { isValidSupabaseUrl } from '@/utils/supabaseUrl';
 
 export const dynamic = 'force-dynamic';
 export async function POST(request: Request) {
@@ -7,8 +8,8 @@ export async function POST(request: Request) {
   if (!/^Bearer \S+$/.test(authorization)) return Response.json({ error: '認証が必要です。' }, { status: 401, headers });
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || '';
-  // This preview bridge must never address GAME03 or an unapproved live project.
-  if (url.replace(/\/$/, '') !== 'https://znakrkaazliexzwihxge.supabase.co' || !key) {
+  // The bridge must use the approved project for this deployment environment.
+  if (!isValidSupabaseUrl(url, process.env.NEXT_PUBLIC_APP_ENV || '') || !key) {
     return Response.json({ error: '認証環境の設定を確認中です。' }, { status: 503, headers });
   }
   let finalize = false;

@@ -1,0 +1,256 @@
+{
+  "recordedAt": "2026-09-27T07:40:00Z",
+  "reference": "GAME04 development only; no real monetary charge",
+  "testCode": "5e84595282e470489639a0c8251b703e231a76c5",
+  "integratedCode": "a0fc3122b5ea5f25f38afc9713c5ff96dfffa907",
+  "upstream": "cefd9775ad12ae0101b3f68532af69e6d967a3d0",
+  "failure": {
+    "utc": "2026-09-27T07:12:59Z",
+    "request": "req_y7EEHjehDPB750",
+    "order": "0c860e53-b5b8-4e31-b07c-473848320525",
+    "apiVersion": "2026-08-26.dahlia",
+    "http": 400,
+    "reason": "Managed Payments account default rejects payment_method_types",
+    "db": "one sandbox PENDING order; no grant; no session attached",
+    "fix": "managed_payments[enabled]=false per Checkout; existing JPY/card semantics"
+  },
+  "validationOrderClose": {
+    "id": "0c860e53-b5b8-4e31-b07c-473848320525",
+    "reason": "Stripe req_y7EEHjehDPB750 HTTP400 unsupported parameter, no Checkout session; second req_UWwMV5MKGNJjHR HTTP400 idempotency mismatch after code change. Guarded sandbox no-session no-grant order marked EXPIRED; no deletion/no generic key rotation."
+  },
+  "declineCancel": [
+    {
+      "jsonb_build_object": {
+        "lots": 0,
+        "order": {
+          "id": "6122bdf7-5cd7-4007-a61e-01975756c88e",
+          "status": "PENDING"
+        },
+        "wallet": {
+          "cash": 12600,
+          "gems": 500
+        },
+        "grant_count": 0
+      }
+    }
+  ],
+  "normal": [
+    {
+      "jsonb_build_object": {
+        "lots": [
+          {
+            "qty": 1,
+            "item": "SPECIAL_TICKET_CHARACTER",
+            "claimed": false,
+            "valid_days": 120
+          },
+          {
+            "qty": 3,
+            "item": "SPECIAL_TICKET_SKILL",
+            "claimed": false,
+            "valid_days": 120
+          },
+          {
+            "qty": 1,
+            "item": "SPECIAL_TICKET_EQUIPMENT",
+            "claimed": false,
+            "valid_days": 120
+          },
+          {
+            "qty": 2,
+            "item": "ENERGY_DRINK",
+            "claimed": false,
+            "valid_days": 120
+          },
+          {
+            "qty": 100,
+            "item": "DIAMOND",
+            "claimed": false,
+            "valid_days": 120
+          }
+        ],
+        "order": {
+          "id": "6122bdf7-5cd7-4007-a61e-01975756c88e",
+          "status": "GRANTED",
+          "user_id": "a68463f9-bd39-421f-bb73-a2c73a43da1d",
+          "amount_jpy": 100,
+          "created_at": "2026-09-27T07:19:49.272855+00:00",
+          "granted_at": "2026-09-27T07:22:42.675806+00:00",
+          "product_id": "beginner_pack_01",
+          "request_id": "982e917a-69b6-41d6-8211-2e8bc1371188",
+          "billing_mode": "sandbox"
+        },
+        "events": [
+          {
+            "state": "COMPLETED",
+            "attempts": 1,
+            "event_id": "evt_1UKCQ1K2y3LQd7hQ75YBNP7e",
+            "order_id": "6122bdf7-5cd7-4007-a61e-01975756c88e",
+            "event_type": "checkout.session.completed",
+            "session_id": "cs_test_a1SExRSIytcjC8az7ViskYGq72uS4cZb3XBl5jMvYQrGGcGT36cHVctl9u",
+            "updated_at": "2026-09-27T07:22:43.339313+00:00",
+            "received_at": "2026-09-27T07:22:42.472662+00:00",
+            "billing_mode": "sandbox"
+          }
+        ],
+        "grants": 1
+      }
+    }
+  ],
+  "duplicate": [
+    {
+      "jsonb_build_object": {
+        "events": [
+          {
+            "state": "COMPLETED",
+            "attempts": 2,
+            "event_id": "evt_1UKCQ1K2y3LQd7hQ75YBNP7e"
+          }
+        ],
+        "grants": 1,
+        "paid_lots": 5,
+        "purchase_count": 1
+      }
+    }
+  ],
+  "claimed": [
+    {
+      "jsonb_build_object": {
+        "lots": [
+          {
+            "days": 120,
+            "item": "DIAMOND",
+            "issued": 100,
+            "claimed": true,
+            "remaining": 100
+          },
+          {
+            "days": 120,
+            "item": "SPECIAL_TICKET_SKILL",
+            "issued": 3,
+            "claimed": true,
+            "remaining": 3
+          },
+          {
+            "days": 120,
+            "item": "SPECIAL_TICKET_EQUIPMENT",
+            "issued": 1,
+            "claimed": true,
+            "remaining": 1
+          },
+          {
+            "days": 120,
+            "item": "ENERGY_DRINK",
+            "issued": 2,
+            "claimed": true,
+            "remaining": 2
+          },
+          {
+            "days": 120,
+            "item": "SPECIAL_TICKET_CHARACTER",
+            "issued": 1,
+            "claimed": true,
+            "remaining": 1
+          }
+        ],
+        "wallet": {
+          "cash": 12600,
+          "total_gems": 600
+        }
+      }
+    }
+  ],
+  "reload": [
+    {
+      "jsonb_build_object": {
+        "wallet": {
+          "cash": 12600,
+          "total_gems": 600
+        },
+        "free_gems": 500,
+        "paid_gems": 100,
+        "claimed_lots": 5
+      }
+    }
+  ],
+  "purchaseRls": [
+    {
+      "result": "PASS own aggregate readable, other UID invisible, no client mutations"
+    }
+  ],
+  "vipEarlyClose": [
+    {
+      "jsonb_build_object": {
+        "vip": null,
+        "gems": 600,
+        "order": {
+          "id": "09c3be8d-aaea-4dd4-bc6a-cd46dbe28472",
+          "status": "PENDING",
+          "granted_at": null
+        },
+        "events": null,
+        "deliveries": {
+          "last": null,
+          "first": null,
+          "total": 0,
+          "delivered": 0
+        }
+      }
+    }
+  ],
+  "vip": [
+    {
+      "jsonb_build_object": {
+        "vip": {
+          "user_id": "a68463f9-bd39-421f-bb73-a2c73a43da1d",
+          "expires_at": "2026-10-27T07:34:15.082391+00:00"
+        },
+        "gems": 700,
+        "order": {
+          "id": "09c3be8d-aaea-4dd4-bc6a-cd46dbe28472",
+          "status": "GRANTED",
+          "amount_jpy": 480,
+          "granted_at": "2026-09-27T07:34:15.082391+00:00"
+        },
+        "events": [
+          {
+            "id": "evt_1UKCbBK2y3LQd7hQuMJdi5G4",
+            "state": "COMPLETED",
+            "attempts": 1,
+            "received_at": "2026-09-27T07:34:14.681812+00:00"
+          }
+        ],
+        "deliveries": {
+          "last": "2026-10-26T07:34:15.082391+00:00",
+          "first": "2026-09-27T07:34:15.082391+00:00",
+          "total": 30,
+          "delivered": 1
+        }
+      }
+    }
+  ],
+  "gateCleanup": [
+    {
+      "jsonb_build_object": {
+        "gates": [
+          {
+            "state": "MAINTENANCE",
+            "feature_key": "MAINTENANCE",
+            "mutation_allowed": false
+          },
+          {
+            "state": "CLOSED",
+            "feature_key": "PAYMENT",
+            "mutation_allowed": false
+          },
+          {
+            "state": "CLOSED",
+            "feature_key": "SHOP",
+            "mutation_allowed": false
+          }
+        ],
+        "active_testers": 0
+      }
+    }
+  ]
+}
