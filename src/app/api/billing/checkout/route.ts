@@ -31,7 +31,10 @@ export async function POST(request: Request) {
       // Stripeの冪等性保存期限に備え、23時間以上前の未確定注文は再作成しない。
       if (Date.now() - Date.parse(order.created_at) >= 23 * 60 * 60 * 1000)
         throw new BillingError("この注文は確認が必要です。お問い合わせください。", 409);
+      // Preserve the approved fixed-JPY card checkout even when a new Stripe account
+      // defaults to Managed Payments. Do not inherit merchant/tax/currency changes.
       const body = new URLSearchParams({ mode: "payment", "payment_method_types[0]": "card",
+        "managed_payments[enabled]": "false", "adaptive_pricing[enabled]": "false",
         client_reference_id: order.id, "metadata[order_id]": order.id,
         "metadata[application]": "game04", "metadata[user_id]": userId, "metadata[product_id]": order.product_id,
         "line_items[0][price_data][currency]": "jpy",

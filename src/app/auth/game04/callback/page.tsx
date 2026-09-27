@@ -1,10 +1,12 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import CanonicalDialog from '@/app/components/ui/CanonicalDialog';
 import { supabase } from '@/utils/supabase';
 import { acceptOAuthReturn } from '@/utils/oauthReturnSession';
 import { GAME04_AUTH_INTENT, game04Binding, readGame04Intent } from '@/utils/authGame04';
 
 export default function Game04AuthCallback() {
+  const [failed, setFailed] = useState(false);
   const started = useRef(false); const [message, setMessage] = useState('認証結果を確認しています。');
   useEffect(() => {
     if (started.current) return; started.current = true;
@@ -33,8 +35,13 @@ export default function Game04AuthCallback() {
     }
     void complete().catch(() => {
       history.replaceState(null, '', '/auth/game04/callback');
+      setFailed(true);
       setMessage('認証を完了できませんでした。連携済みとは扱っていません。連携画面で状態を再確認してください。ゲームデータの統合・削除は行いません。');
     });
   }, []);
-  return <main style={{ height: '100dvh', boxSizing: 'border-box', overflowY: 'auto', padding: 24, background: '#16130f', color: '#f5eddf' }}><h1>アカウント連携</h1><p role="status">{message}</p><a style={{ color: '#e7c979' }} href="/auth/game04">連携画面へ戻る</a></main>;
+  return <main style={{ minHeight: '100dvh', background: '#16130f', color: '#f5eddf' }}>
+    <CanonicalDialog title="アカウント連携" loading={!failed} actions={failed ? [{ label: '連携画面へ戻る', semantic: 'primary', onClick: () => location.replace('/auth/game04') }] : []}>
+      <p role="status">{message}</p>
+    </CanonicalDialog>
+  </main>;
 }

@@ -30,3 +30,19 @@ const target=master.specialGachaExchangePool('character')[0];const exchangeState
 const exchanged=gacha.applyFormalSsrExchange(exchangeState,{requestId:'exchange-char',category:'character',itemId:target.id});assert.equal(exchanged.state.specialGachaPoints.character,5);assert.equal(exchanged.receipt.results[0].id,target.id);
 assert.throws(()=>gacha.applyFormalSsrExchange(exchangeState,{requestId:'exchange-invalid',category:'character',itemId:master.specialGachaPool('character').find(row=>row.rarity==='R').id}));
 console.log('PASS G3 formal gacha: 60/72/160; special 45/63/125; exact rates; diamond/ticket/points; fail-closed payment; JST free; SSR exchange parity.');
+
+for(const category of master.GACHA_CATEGORIES){
+ const id=`SPECIAL_TICKET_${category.toUpperCase()}`;
+ const before=structuredClone(baseState);
+ const ten=gacha.applyFormalSpecialGacha(baseState,{requestId:`ticket-ten-${category}`,category,count:10,payment:'TICKET'},sequence(.99,.1));
+ assert.equal(ten.state.gachaTicketBalances[id],0);
+ assert.equal(ten.receipt.results.length,10);
+ assert.equal(ten.state.specialGachaPoints[category],10);
+ assert.equal(ten.state.diamonds,baseState.diamonds);
+ assert.deepEqual(baseState,before);
+ const nine={...baseState,gachaTicketBalances:{...baseState.gachaTicketBalances,[id]:9}};
+ const snapshot=structuredClone(nine);
+ assert.throws(()=>gacha.applyFormalSpecialGacha(nine,{requestId:`ticket-nine-${category}`,category,count:10,payment:'TICKET'},Math.random),/不足/);
+ assert.deepEqual(nine,snapshot);
+}
+console.log('PASS ticket ten-pull in all three categories; insufficient balance is atomic.');

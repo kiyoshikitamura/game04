@@ -1,0 +1,14 @@
+{
+  "checks": [
+    "anonymous status is readable; finalize rejected; no reward",
+    "same UID finalization grants direct free300; progress/deck/items/cash unchanged",
+    "repeat finalization/session read and BOX path cannot duplicate direct reward",
+    "multiple identities and mismatched method rejected without overwrite",
+    "existing bound user receives exactly one BOX300; claim and re-login retain balance/state",
+    "overflow rolls back binding and reward ledger atomically",
+    "unconfirmed email cannot finalize or earn reward"
+  ],
+  "status": "PASS",
+  "realGoogle": false,
+  "fixtureRolledBack": true
+}

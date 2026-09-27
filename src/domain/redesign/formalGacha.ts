@@ -85,7 +85,6 @@ export function applyFormalSpecialGacha(
 ): { state: FormalGachaState; receipt: FormalGachaReceipt } {
   if (!GACHA_CATEGORIES.includes(input.category) || ![1, 10].includes(input.count)) throw new Error('抽選条件が不正です。');
   if (input.payment !== 'DIAMONDS' && input.payment !== 'TICKET') throw new Error('支払方法が不正です。');
-  if (input.payment === 'TICKET' && input.count !== 1) throw new Error('ガチャ券は単発で使用してください。');
   const rule = SPECIAL_GACHA_RULES[input.category];
   let state = structuredClone(original);
   const cost = input.payment === 'DIAMONDS' ? (input.count === 10 ? rule.tenCost : rule.singleCost) : input.count;

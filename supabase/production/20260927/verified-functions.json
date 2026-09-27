@@ -1,0 +1,302 @@
+[
+  {
+    "proname": "billing_apply_lot_delta",
+    "args": "p_user uuid, p_item text, p_old bigint, p_new bigint"
+  },
+  {
+    "proname": "billing_asset_balance_trigger",
+    "args": ""
+  },
+  {
+    "proname": "billing_attach_session",
+    "args": "p_order_id uuid, p_session_id text"
+  },
+  {
+    "proname": "billing_dia_balance_trigger",
+    "args": ""
+  },
+  {
+    "proname": "billing_expire_order",
+    "args": "p_order_id uuid, p_session_id text"
+  },
+  {
+    "proname": "billing_grant_order",
+    "args": "p_order_id uuid, p_session_id text, p_amount_jpy integer, p_currency text"
+  },
+  {
+    "proname": "billing_refresh_paid_assets",
+    "args": ""
+  },
+  {
+    "proname": "billing_reserve_order",
+    "args": "p_user_id uuid, p_request_id uuid, p_product_id text, p_mode text"
+  },
+  {
+    "proname": "billing_reserve_order",
+    "args": "p_user_id uuid, p_request_id uuid, p_product_id text"
+  },
+  {
+    "proname": "billing_session_matches",
+    "args": "p_order_id uuid, p_session_id text"
+  },
+  {
+    "proname": "can_initialize_maintenance_google_player",
+    "args": ""
+  },
+  {
+    "proname": "claim_all_presents",
+    "args": ""
+  },
+  {
+    "proname": "claim_present",
+    "args": "p_present_id uuid"
+  },
+  {
+    "proname": "game04_acquisition_input",
+    "args": "p_user_id uuid"
+  },
+  {
+    "proname": "game04_auth_binding",
+    "args": "p_finalize boolean"
+  },
+  {
+    "proname": "game04_begin_tutorial",
+    "args": ""
+  },
+  {
+    "proname": "game04_billing_grant_order",
+    "args": "p_order_id uuid, p_session_id text, p_amount_jpy integer, p_currency text"
+  },
+  {
+    "proname": "game04_billing_reserve_order",
+    "args": "p_user_id uuid, p_request_id uuid, p_product_id text, p_mode text"
+  },
+  {
+    "proname": "game04_capture_login_delivery",
+    "args": ""
+  },
+  {
+    "proname": "game04_capture_named_asset_item",
+    "args": ""
+  },
+  {
+    "proname": "game04_capture_progression_activity",
+    "args": ""
+  },
+  {
+    "proname": "game04_capture_territory_clear",
+    "args": ""
+  },
+  {
+    "proname": "game04_capture_territory_unlock",
+    "args": ""
+  },
+  {
+    "proname": "game04_commit_deck_with_context",
+    "args": "p_user_id uuid, p_expected_version bigint, p_state jsonb, p_cash_delta bigint, p_energy_delta integer, p_request_id uuid, p_battle jsonb, p_raid jsonb, p_raid_expected_version bigint, p_receipt jsonb"
+  },
+  {
+    "proname": "game04_commit_gacha",
+    "args": "p_user_id uuid, p_expected_version bigint, p_state jsonb, p_cash_delta bigint, p_before_diamonds integer, p_diamond_cost integer, p_request_id uuid, p_operation text, p_request_payload jsonb, p_receipt jsonb"
+  },
+  {
+    "proname": "game04_commit_growth_state",
+    "args": "p_user_id uuid, p_expected_version bigint, p_state jsonb, p_cash_delta bigint, p_energy_delta integer, p_request_id uuid, p_battle jsonb, p_raid jsonb, p_raid_expected_version bigint, p_receipt jsonb"
+  },
+  {
+    "proname": "game04_commit_mission_reward",
+    "args": "p_user_id uuid, p_expected_version bigint, p_state jsonb, p_cash_delta bigint, p_request_id uuid, p_mission_id text"
+  },
+  {
+    "proname": "game04_commit_shop_exchange",
+    "args": "p_user_id uuid, p_expected_version bigint, p_state jsonb, p_before_diamonds integer, p_diamond_cost integer, p_cash_delta bigint, p_request_id uuid"
+  },
+  {
+    "proname": "game04_commit_state",
+    "args": "p_user_id uuid, p_expected_version bigint, p_state jsonb, p_cash_delta bigint, p_energy_delta integer, p_request_id uuid, p_battle jsonb, p_raid jsonb, p_raid_expected_version bigint"
+  },
+  {
+    "proname": "game04_commit_tutorial",
+    "args": "p_user_id uuid, p_expected_version bigint, p_state jsonb, p_request_id uuid, p_action text, p_payload jsonb"
+  },
+  {
+    "proname": "game04_deliver_due_vip",
+    "args": ""
+  },
+  {
+    "proname": "game04_deliver_quest_tickets",
+    "args": ""
+  },
+  {
+    "proname": "game04_ensure_release_present",
+    "args": ""
+  },
+  {
+    "proname": "game04_expire_paid_assets_for_user",
+    "args": "p_user_id uuid"
+  },
+  {
+    "proname": "game04_formal_paid_balance_trigger",
+    "args": ""
+  },
+  {
+    "proname": "game04_get_community_activity",
+    "args": "p_limit integer"
+  },
+  {
+    "proname": "game04_get_community_profiles",
+    "args": "p_user_ids uuid[]"
+  },
+  {
+    "proname": "game04_get_growth_state",
+    "args": "p_user_id uuid, p_initial jsonb"
+  },
+  {
+    "proname": "game04_get_session_state",
+    "args": "p_user_id uuid, p_initial jsonb"
+  },
+  {
+    "proname": "game04_get_state",
+    "args": "p_user_id uuid, p_initial jsonb"
+  },
+  {
+    "proname": "game04_grant_auth_reward",
+    "args": "p_user_id uuid, p_delivery text"
+  },
+  {
+    "proname": "game04_grant_release_campaign",
+    "args": "p_user_id uuid"
+  },
+  {
+    "proname": "game04_grant_vip",
+    "args": "p_user_id uuid, p_order_id text"
+  },
+  {
+    "proname": "game04_growth_cumulative_exp",
+    "args": "p_level integer"
+  },
+  {
+    "proname": "game04_home_promotion",
+    "args": "p_visit_id uuid, p_action text"
+  },
+  {
+    "proname": "game04_host_formal_territory",
+    "args": "p_user_id uuid, p_request_id uuid, p_destination_id text, p_raid_master jsonb"
+  },
+  {
+    "proname": "game04_host_territory",
+    "args": "p_user_id uuid, p_request_id uuid, p_destination_id text"
+  },
+  {
+    "proname": "game04_kpi_gameplay_daily",
+    "args": "p_from timestamp with time zone, p_to timestamp with time zone"
+  },
+  {
+    "proname": "game04_kpi_receipt_detail",
+    "args": "p_from timestamp with time zone, p_to timestamp with time zone"
+  },
+  {
+    "proname": "game04_kpi_supply_daily",
+    "args": "p_from timestamp with time zone, p_to timestamp with time zone"
+  },
+  {
+    "proname": "game04_mark_chat_channel_seen",
+    "args": "p_target_type text, p_seen_at timestamp with time zone"
+  },
+  {
+    "proname": "game04_observe_state_restore",
+    "args": "p_user_id uuid, p_request_id uuid, p_observed_version bigint"
+  },
+  {
+    "proname": "game04_paid_item_path",
+    "args": "p_item text"
+  },
+  {
+    "proname": "game04_preserve_territory_snapshot",
+    "args": ""
+  },
+  {
+    "proname": "game04_process_login_bonus",
+    "args": "p_user_id uuid"
+  },
+  {
+    "proname": "game04_raid_rooms_for_user",
+    "args": "p_user_id uuid"
+  },
+  {
+    "proname": "game04_raid_rooms_with_owners",
+    "args": "p_user_id uuid"
+  },
+  {
+    "proname": "game04_record_billing_event",
+    "args": "p_event_id text, p_order_id uuid, p_session_id text, p_event_type text, p_state text, p_mode text"
+  },
+  {
+    "proname": "game04_release_new_player",
+    "args": ""
+  },
+  {
+    "proname": "game04_territory_context",
+    "args": "p_user_id uuid"
+  },
+  {
+    "proname": "game04_territory_guide",
+    "args": "p_visit uuid, p_action text"
+  },
+  {
+    "proname": "game04_update_own_profile",
+    "args": "p_username text, p_bio text, p_title_id text"
+  },
+  {
+    "proname": "game04_validate_territory_master",
+    "args": "cfg jsonb"
+  },
+  {
+    "proname": "get_chat_unread_counts",
+    "args": ""
+  },
+  {
+    "proname": "get_current_onboarding_state",
+    "args": ""
+  },
+  {
+    "proname": "get_direct_message_unread_counts",
+    "args": ""
+  },
+  {
+    "proname": "get_public_profiles",
+    "args": "p_user_ids uuid[]"
+  },
+  {
+    "proname": "initialize_current_player",
+    "args": "p_username text, p_invite_code text"
+  },
+  {
+    "proname": "initialize_current_player",
+    "args": "p_username text"
+  },
+  {
+    "proname": "kpi_is_subject_excluded",
+    "args": "p_subject_id uuid, p_at timestamp with time zone"
+  },
+  {
+    "proname": "mark_chat_channel_read",
+    "args": "p_target_type text"
+  },
+  {
+    "proname": "mark_direct_message_read",
+    "args": "p_message_id uuid"
+  },
+  {
+    "proname": "send_chat_message",
+    "args": "p_target_type text, p_content text"
+  },
+  {
+    "proname": "send_chat_message",
+    "args": "p_target_type text, p_content text, p_reply_to_message_id uuid"
+  },
+  {
+    "proname": "send_direct_message",
+    "args": "p_recipient_id uuid, p_message text"
+  }
+]

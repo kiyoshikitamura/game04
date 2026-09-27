@@ -7,7 +7,7 @@ const {build}=require(process.env.GAME04_ESBUILD||'esbuild');
 const root='supabase/functions/game04-redesign-api';
 const digest=content=>crypto.createHash('sha256').update(content.replace(/\r\n/g,'\n')).digest('hex');
 const sourceDigest=digest(fs.readFileSync(root+'/source.ts','utf8'));
-const result=await build({entryPoints:[root+'/source.ts'],bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',minify:true,metafile:true,banner:{js:`// game04-redesign-api source-sha256:${sourceDigest}`}});
+const result=await build({entryPoints:[root+'/source.ts'],bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',minify:true,charset:'utf8',metafile:true,banner:{js:`// game04-redesign-api source-sha256:${sourceDigest}`}});
 const content=result.outputFiles[0].text;
 fs.writeFileSync(root+'/index.ts',content);
 const inputs=Object.fromEntries(Object.keys(result.metafile.inputs).sort().map(name=>[name.replaceAll('\\','/'),digest(fs.readFileSync(path.resolve(name),'utf8'))]));
