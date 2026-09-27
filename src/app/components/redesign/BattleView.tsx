@@ -5,6 +5,8 @@ import { INK_ROOT, INK_ASSETS } from '@/domain/presentation/battleLeadIn';
 import ElementBadge from './ElementBadge';
 import { createPortal } from 'react-dom';
 import CanonicalDialog from '../ui/CanonicalDialog';
+import Game04Loading from '../ui/Game04Loading';
+import ScreenState from '../ui/ScreenState';
 import BattleResourceDisplay, {BATTLE_RESOURCE_ASSETS} from './BattleResourceDisplay';
 import RecordedBattleResult from './RecordedBattleResult';
 import { UI_MOTION } from '../ui/uiMotion';
@@ -223,7 +225,7 @@ export function BattleView({ onRetire, onPlaybackComplete, resultActions, result
       {impact && <div key={`${frame.index}-${state.id}`} className={`${styles.impact} ${impact.type === 'heal' ? styles.healing : ''}`} data-impact-target={state.id}><strong>{impact.type === 'miss' ? 'MISS' : impact.type === 'status' ? ({effect_applied:'付与',effect_miss:'不成立',cleanse:'解除',shield_absorbed:'吸収'}[frame.event ?? ''] ?? '') : `${impact.type === 'heal' ? '+' : ''}${Math.abs(impact.amount).toLocaleString()}`}</strong>{impact.hits && impact.hits.length > 1 && <small>{impact.hits.length} HITS</small>}</div>}
     </div>;
   };
-  if (exited) return <section className={styles.battle} aria-label="戦闘終了"><p>{terminalError||'リタイアを保存しています…'}</p>{terminalError&&<button onClick={()=>void retire()}>再試行</button>}</section>;
+  if (exited) return <section className={terminalError ? "g4-entry-state" : "branded-loading"} aria-label="戦闘終了" aria-busy={!terminalError}>{terminalError ? <ScreenState kind="error" title="リタイアを保存できませんでした" message={terminalError} actionLabel="再試行" onAction={()=>void retire()}/> : <Game04Loading context="screen" label="出撃元へ戻っています"/>}</section>;
   return <section ref={battleRoot} className={styles.battle} aria-label={title} data-playback-paused={paused||pauseMenu||confirmRetire||assetsBlocked||!!detail||showLog||finished} data-intro-paused={paused || assetsBlocked || !!detail || showLog} data-playback-frame={index} data-effective-speed={effectiveSpeed} data-presentation-phase={presentationPhase??'none'} style={{ '--battle-speed': effectiveSpeed, '--wave-intro-ms': `${UI_MOTION.waveIntroMs}ms`, '--battle-background': `url(${JSON.stringify(backgroundSrc)})` } as CSSProperties}>
     {!finished && (pauseMenu || confirmRetire) && createPortal(<CanonicalDialog title={confirmRetire ? 'リタイアしますか？' : '一時停止'} onClose={cancelRetire} actions={confirmRetire ? [{label:'続ける',semantic:'secondary',onClick:cancelRetire},{label:'リタイア',semantic:'danger',onClick:retire}] : [{label:'バトルを続ける',semantic:'primary',onClick:()=>{setPauseMenu(false);setPaused(false);} },...(!requirePlaybackCompletion && onRetire ? [{label:'リタイア',semantic:'danger' as const,onClick:()=>{setPauseMenu(false);setConfirmRetire(true);}}] : [])]}>{confirmRetire ? <p>{result.pendingSettlementId?'戦闘を終了して挑戦元へ戻ります。クリア・勝利報酬は獲得できません。消費した行動力は戻りません。':'確定済み戦闘の再生を終了して挑戦元へ戻ります。'}</p> : <p>バトルの再生を停止しています。</p>}</CanonicalDialog>, document.body)}
     <dialog ref={loadingDialog} className={styles.loading} onCancel={event => event.preventDefault()} aria-label="戦闘画面の読み込み"><img src="/branding/tribe-neon-logo.png" alt="戦国姫艶武" />{assetError ? <><p>戦闘画像を読み込めませんでした。</p><button onClick={() => { setAssetState({ result, key: imageKey, status: 'loading' }); setRetry(value => value + 1); }}>再試行</button>{!requirePlaybackCompletion && <button onClick={leaveFailedPlayback}>再生を終了する</button>}</> : <><span className={styles.spinner} /><p>戦闘の準備中</p></>}</dialog>
