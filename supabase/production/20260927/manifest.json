@@ -1,0 +1,266 @@
+[
+  {
+    "source": "supabase/isolated/g3/00_schema.sql",
+    "sourceSha256": "42ca87eee97f6cf049a153bafd53b5bce0ae1a2a671a81025c4d8e26324feab2",
+    "file": "00_00_schema.sql",
+    "sha256": "8679b69033f800895ac939657e09578b6ecd37b9ffcf61ce330c6ade548c5299"
+  },
+  {
+    "source": "supabase/isolated/g3/01_core_seed.sql",
+    "sourceSha256": "6648745349fda22de09d25ce82d97c620223b9e88fa3dfedd39b8c65d582a921",
+    "file": "01_01_core_seed.sql",
+    "sha256": "77ce24d8c5eb955dd81c4f621393880ed5d23ed7725aaf72e8a672e9d9b5f239"
+  },
+  {
+    "source": "supabase/manual/game04_g3_formal_gacha_pool.sql",
+    "sourceSha256": "c547aff89a75844d4642fe8a204713caecf75ef0407d0f1cb792f852509fd394",
+    "file": "02_game04_g3_formal_gacha_pool.sql",
+    "sha256": "d6d93ea4454d30ed995f56996496d1d1dd82116ac485aa73ce5376f6a4cec10a"
+  },
+  {
+    "source": "supabase/migrations/20260919123634_game04_redesign_runtime.sql",
+    "sourceSha256": "8d04b02e43eb95cc89a8840a11c23ab0fa67948b9bd7febc9b56a18d8af218af",
+    "file": "03_20260919123634_game04_redesign_runtime.sql",
+    "sha256": "7396d0f443df61030a9acc7035f93505a9094528e7632836c9e3f4065d611d1c"
+  },
+  {
+    "source": "supabase/migrations/20260921023857_game04_growth_v1_runtime.sql",
+    "sourceSha256": "0da0f359ae1c09b8814dbab6060e93a8c71c4c60feb63510c45c5d6a7c83b6eb",
+    "file": "04_20260921023857_game04_growth_v1_runtime.sql",
+    "sha256": "a234bd0b9a23b9072ffdc3b60e7d003cd5018f35493d3d20e32a0d1a53a528a3"
+  },
+  {
+    "source": "supabase/isolated/g3/10_live_runtime_additions.sql",
+    "sourceSha256": "9e1211643b6ecc5ed9b1ca9434fa86f5b943b1c82dcce36877ce8e5d512f1838",
+    "file": "05_10_live_runtime_additions.sql",
+    "sha256": "d5f6f5bd7ad1870b67b4ad64a3fd871d641eff7471f5d738f241c8497cbaf2ce"
+  },
+  {
+    "source": "supabase/isolated/g3/11_auth_and_fixture_generator.sql",
+    "sourceSha256": "db8d22b2aea81b0217f860f68c2bcfd828b10d1623ae44e71cd135882e7422c9",
+    "file": "06_11_auth_and_fixture_generator.sql",
+    "sha256": "386cca2dbb34c5782eb83aee03cbe930ad5823f11e55234c0e4088d72a580dd8"
+  },
+  {
+    "source": "supabase/isolated/g3/13_g3_player_initialization.sql",
+    "sourceSha256": "6ba39be84ba3b16d6eef31364d0eee1cbac45d1177e8a3fe5954a77d045dd023",
+    "file": "07_13_g3_player_initialization.sql",
+    "sha256": "b7b202aa2e072cc62632c4697131333abc796b76a3c6b6e418a2f57cb73e1503"
+  },
+  {
+    "source": "supabase/isolated/g3/14_g3_room_read_projection.sql",
+    "sourceSha256": "034f372c4ddae9502537c94a7f85ac8691c55ab2dd95efe02e11ce6478e3aa1a",
+    "file": "08_14_g3_room_read_projection.sql",
+    "sha256": "fef3d32df22f92a1f22aa2eb01d5e9447ee7dc016d131deb69ee8f17b341743a"
+  },
+  {
+    "source": "supabase/isolated/g3/15_g3_initial_read_runtime.sql",
+    "sourceSha256": "9751eb23ef693e171c26ea296b4b5db64874a572bab4e1e13d2a1b11015f2a44",
+    "file": "09_15_g3_initial_read_runtime.sql",
+    "sha256": "a1d15519f781ff978bda0eab0096e2554e117fc9880f0e8179efeb4c7c9de013"
+  },
+  {
+    "source": "supabase/isolated/g3/16_g3_current_territory_master.sql",
+    "sourceSha256": "6e362769b769a5a6b19b35e3ea9fe05114c7501c0d8a8e2710409826338537fa",
+    "file": "10_16_g3_current_territory_master.sql",
+    "sha256": "d40dac2be755577b410a52c1d18a3291f5fd1dca7de50337d5317d8c05e59760"
+  },
+  {
+    "source": "supabase/isolated/g3/17_g3_territory_validator_reconciliation.sql",
+    "sourceSha256": "f0857e8d3532710148a863ef7d6573332f48f304450bf457a415a848e73c0963",
+    "file": "11_17_g3_territory_validator_reconciliation.sql",
+    "sha256": "2f453e915cccf65cbedb9ba3d75c3ea51aa813aee4fd59b9217c3f8e79a4c3c2"
+  },
+  {
+    "source": "supabase/manual/game04_g3_gacha_atomic_commit.sql",
+    "sourceSha256": "36820a8b2f1d3e715f46b388c6b9ef5b63b18f434a20ac2310309ab1938a4a91",
+    "file": "12_game04_g3_gacha_atomic_commit.sql",
+    "sha256": "dde81e711114d8695462da2c53d3c02a0f75c65c8a663cca9e467b504ca623d9"
+  },
+  {
+    "source": "supabase/manual/game04_g2_kpi_gameplay.sql",
+    "sourceSha256": "6d1ca5c6103444cb2f9cafd2e5d33d5393e2edc9fa05cce7aeea770b6059d48b",
+    "file": "13_game04_g2_kpi_gameplay.sql",
+    "sha256": "bec1bdcb86b9dd1e6a98d31966017ffb4dcd8dd86eab6fc75c89a3f93ef45cf4"
+  },
+  {
+    "source": "supabase/manual/game04_g2_kpi_supply.sql",
+    "sourceSha256": "f87ed5745f45fd04669df4a746bbcf3670fac23c6e85855a005400af10ef53cb",
+    "file": "14_game04_g2_kpi_supply.sql",
+    "sha256": "558f8217472709a5836f8b0f9361c9f8f20d3d7160e7ec045129d26b8c45c192"
+  },
+  {
+    "source": "supabase/manual/game04_g2_kpi_observations.sql",
+    "sourceSha256": "ddd3f1e7b16e9f5f09b356561b9d6f7ffbeb4ef41b159e6f9a106d3e4b15c231",
+    "file": "15_game04_g2_kpi_observations.sql",
+    "sha256": "3b18244a3ca0a6c897ebb1bebdf41cdb590ccb932200db9b881b0593632b1385"
+  },
+  {
+    "source": "supabase/manual/game04_g3_gacha_kpi_connection.sql",
+    "sourceSha256": "ac0ef0b9202b9e59aae6a62660bc1e0d9e27cf8ff4e6dfdef9625c0e1743bf9e",
+    "file": "16_game04_g3_gacha_kpi_connection.sql",
+    "sha256": "5af87ea1116a9933f49117f79bb2dda867b1f08eab8ac0b833b9c69870424443"
+  },
+  {
+    "source": "supabase/isolated/integration/20_tutorial.sql",
+    "sourceSha256": "33be463eed9ded05c57b8bf4dbc256105175244de7ac4e60da802b38704eb73d",
+    "file": "17_20_tutorial.sql",
+    "sha256": "047d7971deadc139a6bcc976eb771896914e92899cfb2457123f97554f30cc71"
+  },
+  {
+    "source": "supabase/isolated/integration/22_runtime.sql",
+    "sourceSha256": "9fe8f0602e169dfc86310393b59d0cf94217664ece0492501fb01558eb88e2b7",
+    "file": "18_22_runtime.sql",
+    "sha256": "05493b713c14d505113119eadefda26c6463abfae28deebe4c715e4e2f849543"
+  },
+  {
+    "source": "supabase/isolated/integration/23_territory_triggers.sql",
+    "sourceSha256": "402f4338fef858cf693ba31b4c9d2170878e1432151fc7cf814f5a2108095062",
+    "file": "19_23_territory_triggers.sql",
+    "sha256": "820b40a1fc30c137c2dc099eabf5fd7ce7d52df61bf69aa2282294d4f9a9981c"
+  },
+  {
+    "source": "supabase/isolated/integration/24_masters.sql",
+    "sourceSha256": "d2575f6c626158455eab26ff50b0e17f1150a80bf0c464fa860faac23fa62a4c",
+    "file": "20_24_masters.sql",
+    "sha256": "afc9062ac9ebaa156aca63ae13957299aedb127710338fe49704722a5c13fe45"
+  },
+  {
+    "source": "supabase/isolated/integration/25_community_schema.sql",
+    "sourceSha256": "d5f3ecd6f5272b958e3c84c280766c394cfc02550003d06d36b831142bc6530a",
+    "file": "21_25_community_schema.sql",
+    "sha256": "cbee1e39bdbd695129207c452a567f57741409589c89f4d9acb0b8771b51f999"
+  },
+  {
+    "source": "supabase/isolated/integration/26_chat_functions.sql",
+    "sourceSha256": "28a263322887336c66137e34e77f89ab7df65d17f637c046653b65945d3d4ed1",
+    "file": "22_26_chat_functions.sql",
+    "sha256": "d96c893e25161ab80d3317e11e1dec9ab774f1478b4ce557d65148072d1f7e76"
+  },
+  {
+    "source": "supabase/isolated/integration/21_activity.sql",
+    "sourceSha256": "f26e7d667127b446818fd6f913afd086cd5a5cb26517d6a4be2309a4f173e8a3",
+    "file": "23_21_activity.sql",
+    "sha256": "a9fcc49071434a9a455381e900495b802d9425c788f2add26fc4ef3df820325a"
+  },
+  {
+    "source": "supabase/candidates/game04_community_public_profiles.sql",
+    "sourceSha256": "e9834dccfdbbf47ccd8c340359fc7aaeb71e0eb50c2a20a89c46edcd8375857d",
+    "file": "24_game04_community_public_profiles.sql",
+    "sha256": "5f83a37439f98e2c02d2f97891da8611209c2e6c3cf70668ebaa32e38f35bd56"
+  },
+  {
+    "source": "supabase/isolated/integration/27_territory_master.sql",
+    "sourceSha256": "6bdb510e8274e3658ce9e15663f467f830019345c786b3b3fb940d5d3ccb79ed",
+    "file": "25_27_territory_master.sql",
+    "sha256": "c1e2a2176225ae238326feaadffd0e15ff366b108493d9f67fbe5416f552a7f1"
+  },
+  {
+    "source": "supabase/isolated/integration/28_approved_quest_names.sql",
+    "sourceSha256": "264ae3c1c0a0f0adab23aa11366fac2151a18c8cf8bd08d4dbac76c793079ca9",
+    "file": "26_28_approved_quest_names.sql",
+    "sha256": "d79ad008eee93459c49e7da1e6010da0de53b4fad4e436e03849a24ff6210454"
+  },
+  {
+    "source": "supabase/isolated/integration/29_approved_raid_supply.sql",
+    "sourceSha256": "8315f5605d9561f474cff7569b5292c4ea49ede5c8ee08ea79c56fa9b6a289a1",
+    "file": "27_29_approved_raid_supply.sql",
+    "sha256": "227d54a8f1fcdf358c29059a8c79c3076464735fe3b038d0d254ff00121905c6"
+  },
+  {
+    "source": "supabase/isolated/integration/30_present_claim.sql",
+    "sourceSha256": "0e6ce0a25ba78d02f3323a2ec8d894ca155d14079d2250362520913b7bab2a2c",
+    "file": "28_30_present_claim.sql",
+    "sha256": "27e475d8f696b25c2e3f91dcbd7a5d47656a6c52a65a94f5672784480044cf51"
+  },
+  {
+    "source": "supabase/isolated/integration/31_paid_expiry.sql",
+    "sourceSha256": "f34ed273ec2eb03a00f5503a5a0e946009d3a2e7d0e050096f5286a18e734bf5",
+    "file": "29_31_paid_expiry.sql",
+    "sha256": "d70c6d9d07f7372a57b6b61ba513cdfadfd15eab951c380de2970a6362b01624"
+  },
+  {
+    "source": "supabase/isolated/integration/33_billing_runtime.sql",
+    "sourceSha256": "b531da6acbdcc105ddc555bdcbff34102b966df105e9d60bac96a3add8d23957",
+    "file": "30_33_billing_runtime.sql",
+    "sha256": "61f0dd01b13acf680c7c35055cc96f73c530d793351ef3729edf09a4ffcf90df"
+  },
+  {
+    "source": "supabase/isolated/integration/34_billing_catalog.sql",
+    "sourceSha256": "f1e5254528807d1622ae9af0514024b2fe91c42f7cecb81531cb68d1cbe0692e",
+    "file": "31_34_billing_catalog.sql",
+    "sha256": "6ae41eed7c909dfdda8a0037c0c7f197376a8c37ec93999658b31a776b36a361"
+  },
+  {
+    "source": "supabase/isolated/integration/35_authentication_reward.sql",
+    "sourceSha256": "bc874886c66c83f01e9c0fb1311644f93cfa8afa6e1fd1d3711ef00a44e9808d",
+    "file": "32_35_authentication_reward.sql",
+    "sha256": "09f61918d420c708191dd6f68b980889e2ff59a1a7807655bdcab3f17ee21c89"
+  },
+  {
+    "source": "supabase/isolated/integration/37_shop_purchase_read.sql",
+    "sourceSha256": "ad03ea5faff63d48dccd49b9062ed5e8cc922f4431a6b14e49af40c59678cd86",
+    "file": "33_37_shop_purchase_read.sql",
+    "sha256": "61054be86eca9d3574c5fc82b0c92cb50a8e6fd70e40db3ea8fb72368484f139"
+  },
+  {
+    "source": "supabase/manual/game04_g2_commit_deck_with_context.sql",
+    "sourceSha256": "7258365a4df30056959d6e9fa737461111c967522ae524369e82ad81f87c2dd6",
+    "file": "34_game04_g2_commit_deck_with_context.sql",
+    "sha256": "56959ece4a1e561563a81ba12f03e76c53850fba6eb5e67610daaf1357170ac8"
+  },
+  {
+    "source": "supabase/manual/game04_g2_raid_rooms_with_owners.sql",
+    "sourceSha256": "03c9af63134f42d5300c628408b3cee6da89a2f5175f1d84411440f7acbe0856",
+    "file": "35_game04_g2_raid_rooms_with_owners.sql",
+    "sha256": "37efa453881b86e64cdb4b5375403a17293900ba9e5aab4c26e07cbc03a325dd"
+  },
+  {
+    "source": "supabase/manual/game04_early_retention_mission_rewards.sql",
+    "sourceSha256": "a557fed1d710f0f821a9867eb71242d20b822d0a33c4850c3dc5723c76441be4",
+    "file": "36_game04_early_retention_mission_rewards.sql",
+    "sha256": "0f1b8771a01f34617d7372d16ab2b2457d473d4c62985ad7ae9156d3498c1457"
+  },
+  {
+    "source": "supabase/migrations/20260926171550_game04_preview_profile_rpc.sql",
+    "sourceSha256": "f00155341cf8c703589ddc68091b0dd3641a52c69031f3282ec62e1087a41e66",
+    "file": "37_20260926171550_game04_preview_profile_rpc.sql",
+    "sha256": "3280b1cea94ac7ff29639194e1eaaa36c6a488e29a101699b58bc518d53c1e57"
+  },
+  {
+    "source": "supabase/migrations/20260927045741_game04_additional29_promotions_campaign_pack.sql",
+    "sourceSha256": "6c867e357070f50392996fab3e25e4d0f88e3e538e7154f3c766019124494b2e",
+    "file": "38_20260927045741_game04_additional29_promotions_campaign_pack.sql",
+    "sha256": "3d25089fedda44154c00dbe661419bd0a83d1228f7e533a472e1da9285c255f6"
+  },
+  {
+    "source": "supabase/migrations/20260927051117_game04_release_present_90_days.sql",
+    "sourceSha256": "110c437f40e70ba5599bcd4b63aa1da7cc95d640fea53586aa1542b7220f33a6",
+    "file": "39_20260927051117_game04_release_present_90_days.sql",
+    "sha256": "05493500d060403deee3ae95fef3bc6fb14e7631c643c7fda641462d071d0368"
+  },
+  {
+    "source": "supabase/migrations/20260927051447_game04_chat_seen_watermark.sql",
+    "sourceSha256": "8dbe00fb2680192f2603642902f4f0f41743073ec8ab14a8b6551d3ef39b7ca9",
+    "file": "40_20260927051447_game04_chat_seen_watermark.sql",
+    "sha256": "29a338bf9ba0863566fe3b9896b64f42f3361fd4a5d241f5c0b549ac482d0b85"
+  },
+  {
+    "source": "supabase/migrations/20260927052409_game04_release_new_player_delivery.sql",
+    "sourceSha256": "4b3f3578103c5cf57f4e59c8ca883d59a409b2af5f5b9bdcd0795b216fd09487",
+    "file": "41_20260927052409_game04_release_new_player_delivery.sql",
+    "sha256": "356a7d5aea19632a9f4b29e7741ea06cfc31bd1cbfb1e97c56039e16b3935866"
+  },
+  {
+    "source": "supabase/migrations/20260927053144_game04_promotion_purchase_ledger_guard.sql",
+    "sourceSha256": "1c1e17fbfe35f28f2d9192e3c7165adcb61d47d19f2b7fe395436ad251b75766",
+    "file": "42_20260927053144_game04_promotion_purchase_ledger_guard.sql",
+    "sha256": "534a905e02c11abd14b6a20c499faf3de650bfd4e8fa6f4c046b97f3e431af7f"
+  },
+  {
+    "source": "supabase/migrations/20260927061009_game04_unlock_guide_and_unread_initialization.sql",
+    "sourceSha256": "67cdac48ff05abb88ad42ad076c7d00fa2d846f35086e6f2415c6298d31d722a",
+    "file": "43_20260927061009_game04_unlock_guide_and_unread_initialization.sql",
+    "sha256": "579f234605e683bef48266f600ca8f2a6b91f9c7954ba3fe73de02a2b3a7f31d"
+  }
+]

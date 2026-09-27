@@ -36,7 +36,7 @@ import { progressionActivities } from '../../../src/domain/redesign/activityEven
 const headers = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'authorization, apikey, content-type, x-client-info, x-region', 'Access-Control-Allow-Methods': 'POST, OPTIONS', 'Content-Type': 'application/json', 'Cache-Control': 'no-store' };
 const url = Deno.env.get('SUPABASE_URL')!;
 const key = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-const EXPECTED_PROJECT = 'znakrkaazliexzwihxge';
+const EXPECTED_PROJECT = 'soiksqgtmcnspfedmanr';
 class ApiError extends Error { constructor(message: string, public status = 400) { super(message); } }
 async function db(path: string, body?: unknown): Promise<any> {
   const response = await fetch(`${url}/rest/v1/${path}`, { method: body === undefined ? 'GET' : 'POST', headers: { apikey: key, Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' }, ...(body === undefined ? {} : { body: JSON.stringify(body) }) });
@@ -364,7 +364,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
 Deno.serve(async (request: Request) => {
   if (request.method === 'OPTIONS') return new Response(null, { headers });
   try {
-    if (new URL(url).hostname !== `${EXPECTED_PROJECT}.supabase.co`) throw new ApiError('開発環境の接続設定を確認してください。', 503);
+    if (new URL(url).hostname !== `${EXPECTED_PROJECT}.supabase.co`) throw new ApiError('接続設定を確認してください。', 503);
     if (request.method !== 'POST') throw new ApiError('Method not allowed', 405);
     const authorization = request.headers.get('authorization') || '';
     if (!/^Bearer \S+$/.test(authorization)) throw new ApiError('ログインしてください。', 401);
