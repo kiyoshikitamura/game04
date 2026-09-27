@@ -52,7 +52,7 @@ PR #37 / work/game04-common-preview-20260925。基準811b92b（後続の有償�
 - gacha-live.json：専用追加29QAで全6価格の実消費。総消費8800輝石、再送で追加消費なし。正式確率/無料JST境界の既存domain検査もPASS。
 - BURST DBG035 domain検査：SP0/不足、装備順・条件/対象再評価、Wave/全滅/死亡/行動不能、対象外の抽選なし・ゲージ保持、再充填、旧保存5戦とtutorial互換PASS。
 - 375/390×600：本陣・交流・召喚・商店・所持品・スキル/装備・矢印・訴求2種・直接/BOX/混在通知。画像をoutputs/additional29とGit内screenshotsへ保存。ブラウザ縮小域はCSS viewport600pxで代替。実Safariのバー伸縮は実機確認待ち。
-- 実表示とDB境界試験は分離。新規ユーザーtrigger→300輝石BOX/90日期限/既存backfill再送も実DB rollbackでPASS。同時配布の実競合試験と実決済は未実施、ロックと一意制約の確認だけで実競合試験済みとは扱わない。
+- 実表示とDB境界試験は分離。新規ユーザーtrigger→300輝石BOX/90日期限/既存backfill再送も実DB rollbackでPASS。同じ配布SQLのQA campaign限定版で2接続競合→BOX1件/300個を確認し、試験関数を削除。正式配布は実行しない。実決済は未実施。
 
 ## リリース設定の引継ぎ（この作業では実行しない）
 
@@ -71,3 +71,9 @@ starter-pack-1500.pngは1774×887、2:1。imagegenに正式special_ticket_charac
 実機受入、初陣パック実決済→BOX付与（決済基盤待ち）、正式release開始日時/配布実行、お知らせ承認公開。新戦略のおまかせ評価は別提案。配信済みの項目は実機確認待ちとし、実機解決数は増やさない。
 
 型検査・Next build結果はDEPLOYMENT.mdへ。変更TSXはReactスキルのhooks順序、非同期取消、安定キー、共通dialog focus/tap、不要な先読みを確認。
+
+DB advisor確認：新規のSECURITY DEFINER RPCはauth.uid()で本人へ限定しsearch_path固定、補助配布関数はservice_role限定。campaignテーブルのRLSポリシーなしはクライアント直接アクセス禁止の意図どおり。匿名ログインの本人read許可もゲーム要件どおり。[RPC advisory](https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable)、[RLS advisory](https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy)。
+
+配信後追加確認：実本陣の通算1/2/3回目とshown RPC永続化は成功、pageerror 0。全武将・全素材の合成QAでは画像期限超過が発生し、スキル/装備は再読み込みで表示、編成は復帰未確認。ローカルの同検証は成功しており、配信環境の大量素材読込を残件として区別する。
+
+配信後最終確認：専用QAの実API獲得済みスキル・装備一覧は375/390pxとも再読み込み後に表示成功（deployed/real-lists.json、real-skills/equipment画像）。訴求2種・商店・所持品・通知も両幅成功（deployed/browser.json）、pageerror 0。本陣・交流・召喚も両幅確認。全素材合成の編成画面は画像待機の残件を維持。
