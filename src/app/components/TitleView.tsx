@@ -8,6 +8,7 @@ import { markTitleAssetReady } from "../lib/screenAssets";
 import ConfirmDialog from "./ui/ConfirmDialog";
 import TitleLegalFooter from "./TitleLegalFooter";
 import HomeEffect from "./redesign/HomeEffect";
+import { recordTitleArrival } from '@/utils/titleArrival';
 import { recordAcquisitionObservation } from "@/utils/kpiInstrumentation";
 
 export default function TitleView() {
@@ -15,6 +16,7 @@ export default function TitleView() {
   const [entryActivated, setEntryActivated] = useState(false);
   const [isGameStartTransition, setIsGameStartTransition] = useState(false);
   const gameStartRef = useRef(false);
+  const titleArrivalId = useRef<string | null>(null);
   const entryReady = !authLoading;
   // A restored session is the recoverable account authority. This includes an
   // anonymous player who has not entered a name yet; it must resume instead of
@@ -43,6 +45,18 @@ export default function TitleView() {
       gameStartRef.current = false;
     }
   }, [showTitleView]);
+
+  useEffect(() => {
+    if (!showTitleView && !titleArrivalId.current) return;
+    const record = () => {
+      if (document.visibilityState !== 'visible') return;
+      titleArrivalId.current ??= crypto.randomUUID();
+      void recordTitleArrival(titleArrivalId.current);
+    };
+    record();
+    if (showTitleView) document.addEventListener('visibilitychange', record);
+    return () => document.removeEventListener('visibilitychange', record);
+  }, [showTitleView, session?.user?.id]);
 
   if (!showTitleView) return null;
 
