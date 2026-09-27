@@ -14,3 +14,11 @@
 
 ビルド環境：通常のnpm run buildは開発用Supabase設定不足で停止。既存.env.preview.localをプロセスへ読み込む従来のPreview環境で再実行（値は保存/出力しない）。
 結果：型検査PASS、共通UI契約PASS、Preview環境ビルドPASS（44ページ）。
+
+## 配信済み・実機確認待ち
+- 実装/配信SHA: bd62e72ab528cd0628fc47cfa1cb0b3bb69df026
+- Preview: https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app
+- Deployment: dpl_2kMbWBLVmD9rpakt6YMvzZFJqrtm / https://game04-24azzb9v8-kiyoshi-kitamura.vercel.app
+- Vercel Ready、共通URLの/api/qa/deploymentでSHA/branch/environment=previewを照合。配信直前のPR/branch先端一致。
+- 配信後にも375/390×600で活動/全体/DM/本陣、名前のnowrap、本文サイズ・省略、両オーバーレイ中央・寸法不変、解放済みCTAを確認してPASS。長い名前+認証バッジもDOM限定で再現（アカウントの認証状態は変更なし）。証拠deployed/results.json・PNG。
+- 残件は実機での最終可読性の受入。main・本番・GAME03の変更なし。
