@@ -10,3 +10,10 @@
 - .env paste UI initially displayed truncated key and reverted config selection transiently; BEFORE saving replaced with complete key, selected Secret and verified exact branch scope. Save succeeded. No secret data in Git.
 - Latest code still b6cac2d integrated tree, following commits documentation only. This commit also triggers deployment to capture new environment settings. Build/result and payment acceptance must be verified next.
 - Sales gates not opened; production/GAME03 settings and data unchanged by agent. Real money not charged.
+
+Real Google verification extended on dedicated Preview after b957 deployment:
+- Existing Google re-login returned to the same UID a68463f9-bd39-421f-bb73-a2c73a43da1d; reward ledger still1, gems500 and cash2600, player hash322c73c0695781e796a1eee899d011a1.
+- Common Preview reload, second tab and explicit session recheck maintained linked status and same values.
+- One first dedicated-Preview attempt during a long secure user handoff returned to common Preview. A subsequent observed redirect request and actual callback both used dedicated origin and succeeded; cause of first anomaly is unproven, not claimed fixed.
+- Normal tutorial was completed through UI with equipped starter party and name 認証課金検証; later ordinary login bonus added10000 cash. This is distinct from unchanged cash during Google linking and from initial pack content.
+- Anonymous nonzero purchased-item retention and real conflicting-Google account link/cancel scenarios remain unperformed; synthetic collision guard tests passed.
