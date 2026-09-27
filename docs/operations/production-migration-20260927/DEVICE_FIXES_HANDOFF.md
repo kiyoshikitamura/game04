@@ -30,3 +30,13 @@
 - 最新本番ブランチの並走差分を確認して統合、JWT検証有効でAPI配信→Vercel本番配信→限定確認。秘密値はログ/文書に出さない。
 - 本番アカウントの特別通過条件やアクセス制限を追加しない。検証アカウントは通常条件、活動除外のみ。
 - ユーザーは長時間の方法探索を望まない。失敗が続く場合は具体的な作業依頼またはCodexへ引継ぐ。
+
+## 続行記録（2026-09-27）
+- 回収基準 a7aefb53acc78a5dc02f12919f93ed27ff11cf28。本番ブランチは85e3417eのまま（GitHub compare identical）。
+- 追加修正：特選チケットの正式名称・所持数をボタン外へ移動し、共通ActionButtonを「1枚で1回」「10枚で10連」に短縮。半幅のnowrapラベルに長い名称と所持数が連結される問題を解消。
+- 型検査用の既存QA JSON fixtureを回収。formal gachaの3カテゴリ10連と不足残高原子性テスト、共通UI static、API bundle整合を再確認。
+- 本番 Supabase soiksqgtmcnspfedmanr / game04-redesign-api を v2 に配信。ACTIVE / verify_jwt=true。配信ファイルを再取得し、保存SHA a7aefb53 の index.ts と全文一致を確認。bundle SHA256は上記5a2145b2…のまま。
+- Web本番反映は未実施。Vercel app get_projectは入力スキーマ不整合の後、既知project IDでも404。deploy_to_vercelはTool not found。CLI認証は見つからず。繰り返し探索しない。
+- 375/390のブラウザ検証は未完了。隔離ブラウザ検証は起動・一時ハーネスの問題を修正後も操作待ちタイムアウト。視覚/CTA二重送信/通信失敗復帰を合格扱いにしない。一時QAページは削除済み、製品に追加しない。
+- 次作業：Vercel game04-production-receiver管理画面から、この専用ブランチの最新SHAをProductionへ配信。Readyと配信SHAを確認し、正式ドメインで4修正を375/390幅にて受入。APIは既にv2なので同じAPIの再配信は不要。
+- Google表示ドメインは別途未着手のまま。本番課金実機テストは再開していない。main/GAME03/共通Previewは変更なし。
