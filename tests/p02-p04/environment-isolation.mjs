@@ -36,3 +36,12 @@ assert.throws(()=>assertPurchaseOperatingStates(states,'PAYMENT',false));
 assert.doesNotThrow(()=>assertPurchaseOperatingStates(states,'PAYMENT',true));
 assert.throws(()=>assertPurchaseOperatingStates([states[0],{...states[1],state:'CLOSED'}],'PAYMENT',true));
 console.log(`PASS sandbox/live contracts; ${rejected} mixed configurations rejected; maintenance/tester gate retained. Pure fixture, not deployed acceptance.`);
+
+// Restricted server keys retain the same live/test isolation; public keys are never accepted.
+for (const [env, mode, key] of [[live, 'live', 'rk_live_fixture'], [sandbox, 'sandbox', 'rk_test_fixture']]) {
+  assert.equal(billingConfig({...env, STRIPE_SECRET_KEY:key}).mode, mode);
+}
+for (const key of ['rk_test_fixture','pk_live_fixture','rk_live_','']) assert.throws(()=>billingConfig({...live,STRIPE_SECRET_KEY:key}));
+for (const key of ['rk_live_fixture','pk_test_fixture','rk_test_','']) assert.throws(()=>billingConfig({...sandbox,STRIPE_SECRET_KEY:key}));
+assert.equal(sandboxEnvironmentChecks({...sandbox,STRIPE_SECRET_KEY:'rk_test_fixture'}).stripe_test_key_present,true);
+console.log('PASS restricted server keys; wrong-mode, public and empty keys rejected.');

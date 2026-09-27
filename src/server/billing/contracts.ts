@@ -47,7 +47,7 @@ export function sandboxEnvironmentChecks(env: NodeJS.ProcessEnv = process.env, r
     non_production_runtime: env.VERCEL_ENV !== "production",
     preview_database: ["development", "preview"].includes((env.NEXT_PUBLIC_APP_ENV ?? "development").trim().toLowerCase()) &&
       isValidSupabaseUrl(env.NEXT_PUBLIC_SUPABASE_URL ?? "", env.NEXT_PUBLIC_APP_ENV ?? "development"),
-    stripe_test_key_present: !!env.STRIPE_SECRET_KEY?.startsWith("sk_test_"),
+    stripe_test_key_present: /^(?:sk|rk)_test_.+/.test(env.STRIPE_SECRET_KEY ?? ""),
     webhook_signing_secret_present: !!env.STRIPE_WEBHOOK_SECRET?.startsWith("whsec_"),
     service_role_present: !!env.SUPABASE_SERVICE_ROLE_KEY,
     return_origin_valid: returnOriginValid,
@@ -78,7 +78,7 @@ export function billingConfig(env: NodeJS.ProcessEnv = process.env) {
     ? env.BILLING_LIVE_ENABLED === "true" && env.VERCEL_ENV === "production"
     : env.BILLING_SANDBOX_ENABLED === "true" && env.VERCEL_ENV !== "production";
   if (!enabled || !validDatabase ||
-      !env.STRIPE_SECRET_KEY?.startsWith(live ? "sk_live_" : "sk_test_") ||
+      !(live ? /^(?:sk|rk)_live_.+/ : /^(?:sk|rk)_test_.+/).test(env.STRIPE_SECRET_KEY ?? "") ||
       !env.STRIPE_WEBHOOK_SECRET?.startsWith("whsec_") || !env.SUPABASE_SERVICE_ROLE_KEY) {
     throw new BillingError("決済の準備中です。", 503);
   }
