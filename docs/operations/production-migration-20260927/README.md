@@ -48,3 +48,13 @@ Status at this checkpoint: candidate saved; production application and web deplo
 - Typecheck passes after fetching the QA JSON files required by the repository build. Environment isolation and billing fixtures pass.
 - Vercel browser: existing GAME04 repository connected; root directory cleared; framework changed to Next.js. Fourteen Production-only public/config settings saved. Deployment protection remains unchanged.
 - Still pending: protected Production web build/deployment, server-only production secrets, Stripe live webhook configuration/reachability, normal Auth registration/linking availability, and real-device acceptance. PAYMENT/SHOP remain CLOSED and maintenance remains active.
+
+## Production Web checkpoint
+
+- Vercel Production deployment `DT2q8aNmZjiHDMvBtgQbJenSji7L` reached Ready in 2m19s at source `6f533c90da6183ca9646d598e3f0edb316089502`.
+- Canonical domain https://sengoku-hime-ennbu.com assigned; browser renders TAP TO START and legal links. No account was created.
+- Earlier automatic Preview failed because Preview env was unset; Production build passes with its own env.
+- Production title/description corrected to remove dev text. Search indexing remains disabled pending publication.
+- Google provider enabled; signups, anonymous sign-in and manual linking are still OFF. Existing deployment protection is unchanged.
+- Stripe live has no existing webhook destination. Prepared exactly four Checkout events (completed, expired, async_payment_succeeded, async_payment_failed) to `/api/billing/webhook`; creation not submitted.
+- Pending browser confirmation: transfer production service_role, Stripe live secret and webhook signing secret to this Vercel project's Production-only server env; enable normal Auth flows; allow signed Stripe webhook delivery through deployment protection. No email allowlist or special gameplay privileges.
