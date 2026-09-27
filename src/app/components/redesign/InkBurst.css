@@ -4,4 +4,4 @@
 @media(prefers-reduced-motion:reduce){.g4-ink-burst *,.g4-sp-art.burst-charge:after{animation:none!important}.g4-ink-burst.active .ink-pulse{opacity:.25}}
 .g4-ink-burst.phase-dark,.g4-ink-burst.phase-start{position:fixed;inset:0;z-index:50}.g4-ink-burst.phase-start .ink-words img{max-width:500px}.g4-ink-burst:is(.phase-charge,.phase-sweep,.phase-pause,.phase-hit) :is(.ink-aura,.ink-pulse,.ink-edge){opacity:0;animation:none}
 
-.g4-ink-burst:is(.phase-wave,.phase-combo) .ink-words img{width:64.4%;max-height:24.5%}
+.g4-ink-burst:is(.phase-wave,.phase-combo) .ink-words img{width:64.4%;max-height:clamp(39.2px,calc((100svh - 410px) * .245),73.5px)}
