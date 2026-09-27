@@ -1,0 +1,105 @@
+{
+  "calls": [
+    {
+      "rpc": "get_chat_unread_counts",
+      "data": {
+        "GUILD": 0,
+        "GLOBAL": 1
+      }
+    },
+    {
+      "rpc": "get_direct_message_unread_counts",
+      "data": [
+        {
+          "sender_id": "9c2cc4d5-218b-4c9e-a161-3efaedc627be",
+          "sender_name": "墨朱送信検証",
+          "unread_count": 1
+        }
+      ]
+    },
+    {
+      "rpc": "get_chat_unread_counts",
+      "data": {
+        "GUILD": 0,
+        "GLOBAL": 1
+      }
+    },
+    {
+      "rpc": "get_direct_message_unread_counts",
+      "data": [
+        {
+          "sender_id": "9c2cc4d5-218b-4c9e-a161-3efaedc627be",
+          "sender_name": "墨朱送信検証",
+          "unread_count": 1
+        }
+      ]
+    },
+    {
+      "rpc": "game04_mark_chat_channel_seen",
+      "request": true
+    },
+    {
+      "rpc": "get_direct_message_unread_counts",
+      "data": [
+        {
+          "sender_id": "9c2cc4d5-218b-4c9e-a161-3efaedc627be",
+          "sender_name": "墨朱送信検証",
+          "unread_count": 1
+        }
+      ]
+    },
+    {
+      "rpc": "get_chat_unread_counts",
+      "data": {
+        "GUILD": 0,
+        "GLOBAL": 0
+      }
+    },
+    {
+      "rpc": "get_direct_message_unread_counts",
+      "data": [
+        {
+          "sender_id": "9c2cc4d5-218b-4c9e-a161-3efaedc627be",
+          "sender_name": "墨朱送信検証",
+          "unread_count": 1
+        }
+      ]
+    },
+    {
+      "rpc": "get_chat_unread_counts",
+      "data": {
+        "GUILD": 0,
+        "GLOBAL": 0
+      }
+    },
+    {
+      "rpc": "get_direct_message_unread_counts",
+      "data": [
+        {
+          "sender_id": "9c2cc4d5-218b-4c9e-a161-3efaedc627be",
+          "sender_name": "墨朱送信検証",
+          "unread_count": 1
+        }
+      ]
+    },
+    {
+      "rpc": "mark_direct_message_read",
+      "request": true
+    },
+    {
+      "rpc": "mark_direct_message_read",
+      "request": true
+    },
+    {
+      "rpc": "get_direct_message_unread_counts",
+      "data": []
+    },
+    {
+      "rpc": "get_direct_message_unread_counts",
+      "data": []
+    }
+  ],
+  "errors": [],
+  "digestNeverRead": true,
+  "independentReads": true
+}

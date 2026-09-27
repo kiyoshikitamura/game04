@@ -7,7 +7,7 @@
 - 共通Preview：https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app/
 - 作業ブランチ：work/game04-common-preview-20260925。PR最新と発生版の一致をGitHubで確認。
 - 修正前配信の独立照合：2026-09-26、公開 /api/qa/deployment が上記SHA・preview・同ブランチを返すことを確認。deploymentId dpl_3CnYeKBqsnCcnaJHKzvMw8GevUWM。
-- 現在の確認SHA：10b23685ff4ff6d1d59c18103253169749a60e51（2026-09-27、DBG-054・066正式名称FIX、共通Preview稼働照合。実機確認待ち）。
+- 現在の確認SHA：3dfdd5daf087fb99bc312d73c2b8cf0700c83078（2026-09-27、墨朱BURST・領土侵攻・Preview記念配布・未読修正。配信済み・実機確認待ち）。
 - 直前のユーザー実機確認基準：d9be130。1-1クリアまでの確認済み12件は保持。
 - 端末はiPhone系との報告。機種・OS・ブラウザー版は未確認。原画像の23:47・4Gは引継ぎ記載であり、本作業で画像の独立閲覧は未実施。
 - 次の番号：DBG-087。削除・再利用・振り直し禁止。
@@ -799,3 +799,5 @@ DBG-014/015/030の統合接続追記：任務確認保存後に予約済み2-1�
 ## 墨朱演出・領土侵攻・記念公開（2026-09-27）
 
 新規085（バトル開始・派・連撃文字）、086（本陣領土侵攻解放CTA・1回ガイド）。既存035/012へBURST演出・速度、065/072へダイジェスト・初回未読不具合、082へ承認済みPreview配布・お知らせ公開を追記。実機解決12件は維持。反映範囲・原因・限定証拠・残件は[ink-burst/REVIEW.md](../ink-burst/REVIEW.md)。
+
+墨朱／解放／記念／交流の配信完了：3dfdd5daf087fb99bc312d73c2b8cf0700c83078、Ready dpl_95gqACbrPSwj9iS4KfSTz3Qsawak。035/012/085/086/065/072/082の今回反映は **配信済み・実機確認待ち**。型・build・配信後375/390・実Previewお知らせ/BOX/未読を確認。実機受入12件は据置。
