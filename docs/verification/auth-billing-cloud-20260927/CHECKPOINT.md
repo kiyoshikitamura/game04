@@ -1,6 +1,20 @@
 # GAME04 認証・決済クラウド作業 checkpoint 2026-09-27
 
-状態: 未完了。実装候補と純粋テストのみ。開発実接続・本番実接続の合格ではない。
+状態: 未完了。実装・純粋テスト・開発DB受入まで。Google/Stripe実接続と本番の合格ではない。
+
+## 追記 2026-09-27 クラウド接続後
+- Vercelブラウザーの既存ログインを利用できた。再ログイン不要。
+- sengoku-hime-ennbu.com の配信先は game04-production-receiver。Git未接続、環境変数一覧は0件。Ready deployment F21SNQXmXdce4wRJ2Y8WELUAkeJR、source bf1309128266f622d15fada810357761e32ccd67。既存受け皿のまま、本件で配信変更なし。
+- game04 common Preview専用branch環境変数は存在。新作業branchは未検証。共通Previewブラウザーで匿名新規開始→導入チュートリアル1/3まで確認。
+- Stripe管理画面はサインインが必要。鍵・Webhookを未取得/未変更。実接続成功とは扱わない。
+- 開発DBへ 33_billing_runtime.sql / 34_billing_catalog.sql を適用。GAME03の既存5 billing RPCを読取取得して再利用、GAME03更新なし。既存有償期限/プレゼント受取関数4個の定義hash不変を確認。
+- 運用状態は販売閉鎖のまま。公開制御解除なし。11販売商品を追加し初陣DIAMOND100・100円・他内容保持。UI/serverは共通担当取込待ちなので不一致はfail closed。
+- VIP: 検証済みGRANTED注文から初回無償100+24h間隔30回、720h期限。active/pending重複拒否、再通知冪等、due worker追加。定期実行の配線は未完了。
+- isolated-db-acceptance.sqlを開発DBで実行して9群PASS: 同一要求、商品競合/上限、live/金額拒否、100円BOX5lot、受取/状態保持/二重受取拒否、遅延重複、未払expire、VIP重複/初回、VIP30回/有償区分。全fixtureはsubtransaction rollback済み。実Stripe請求・Google成功・同時プロセス試験ではない。
+- auth binding routeにも開発URL固定が残っていたため環境別の承認済みDB検証へ統一。
+- API bundleは変更なし。開発v8、本番health v1。プロモ/UI/バトルは変更なし。
+
+以下は着手時checkpoint。上記追記を最新として読む。
 
 ## 取得基準
 - PR37 HEAD: 811b92b7a631a017186c7472a62d3093beb25feb（着手・保存前再取得一致）
