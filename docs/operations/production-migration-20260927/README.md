@@ -31,10 +31,20 @@ Latest integrated Edge source is rebuilt for the production project; its source/
 
 ## Application and recovery
 
-Apply the generated SQL parts together in their manifest order to the confirmed empty production public schema, using a single atomic migration. Do not replay the legacy migration history or QA APPLY_ORDER instructions.
+Apply the generated SQL parts together in their manifest order to the confirmed empty production public schema, using five ordered atomic migrations (the service rejects the full bundle size). Do not replay the legacy migration history or QA APPLY_ORDER instructions.
 
 Deploy the regenerated production Edge bundle with JWT verification. Build the full repository in Production with the production Supabase public key, normal UI, QA/mock disabled, and the canonical origin. The production web must never use the Preview defaults. Configure server-only production Supabase/Stripe secrets in Vercel, never Git. Preserve existing deployment protection until the public-launch decision; do not restrict admission to the device-test email.
 
 If application fails, retain the protected receiver, close purchases, and preserve order/payment/grant records. Avoid destructive rollback after real users or payments exist. GAME03, shared Preview, and main remain unchanged.
 
 Status at this checkpoint: candidate saved; production application and web deployment pending. This file will be updated with actual results.
+
+## Applied checkpoint
+
+- Production DB: five ordered atomic migrations applied successfully. One initial oversized request was rejected before execution; no schema was created by that rejected request.
+- Readback: 50 public tables, all with RLS, zero users/Auth users, no QA fixture RPCs. Approved master JSON hashes match development. Activity-only exclusion is installed.
+- Edge: `game04-redesign-api v1`, ACTIVE, JWT verification enabled. Source SHA256 `8998f640c18b510b69f4532fd4ca085f0e41aa484d03d00a7dafdbd42b2f903a`. UTF-8 bundle SHA256 `a16ab6e725f7e7a1d09dab35ea20bd25f0975614967ebb18fab173e662c04c53`. UTF-8 output avoids upload size limits without changing behavior.
+- Jobs: separate migration `game04_prod_20260927_06_jobs`; VIP every minute and paid expiry every five minutes. No user allowlist. Initial job runs succeeded with zero accounts.
+- Typecheck passes after fetching the QA JSON files required by the repository build. Environment isolation and billing fixtures pass.
+- Vercel browser: existing GAME04 repository connected; root directory cleared; framework changed to Next.js. Fourteen Production-only public/config settings saved. Deployment protection remains unchanged.
+- Still pending: protected Production web build/deployment, server-only production secrets, Stripe live webhook configuration/reachability, normal Auth registration/linking availability, and real-device acceptance. PAYMENT/SHOP remain CLOSED and maintenance remains active.
