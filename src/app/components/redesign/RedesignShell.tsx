@@ -43,7 +43,7 @@ export default function RedesignShell({ state, onAction, children, notifications
         if(response&&typeof response==='object'&&'missions' in response&&Array.isArray(response.missions))latestMissions.current=response.missions;
         completed++;
       }
-      setMissionStatus(`${completed}件を受け取りました。`);
+      setMissionStatus(completed ? `${completed}件の報酬が所持品に入りました。` : '受け取れる報酬はありません。');
     }
     catch (error) {
       setMissionError(`受取確認済み${completed}件。${error instanceof Error ? error.message : '報酬を受け取れませんでした。'} 未受取の任務を確認して再試行してください。`);

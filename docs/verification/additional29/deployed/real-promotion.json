@@ -1,0 +1,58 @@
+{
+  "calls": [
+    {
+      "request": {
+        "p_visit_id": "ff0951da-c989-4506-ba65-935768764b06",
+        "p_action": "enter"
+      },
+      "response": {
+        "visits": 1
+      }
+    },
+    {
+      "request": {
+        "p_visit_id": "7a8d09b9-dee7-4009-bfbb-1251b339009b",
+        "p_action": "enter"
+      },
+      "response": {
+        "day": "2026-09-27",
+        "kind": "daily-free",
+        "visits": 2
+      }
+    },
+    {
+      "request": {
+        "p_visit_id": "7a8d09b9-dee7-4009-bfbb-1251b339009b",
+        "p_action": "reserve"
+      },
+      "response": {
+        "day": "2026-09-27",
+        "kind": "daily-free",
+        "visits": 2
+      }
+    },
+    {
+      "request": {
+        "p_visit_id": "7a8d09b9-dee7-4009-bfbb-1251b339009b",
+        "p_action": "shown"
+      },
+      "response": {
+        "recorded": true
+      }
+    },
+    {
+      "request": {
+        "p_visit_id": "ff86e952-03eb-4f1f-b5bd-96451e7e9851",
+        "p_action": "enter"
+      },
+      "response": {
+        "visits": 3
+      }
+    }
+  ],
+  "errors": [],
+  "firstSuppressed": true,
+  "secondShown": true,
+  "laterPersisted": true,
+  "thirdSuppressed": true
+}

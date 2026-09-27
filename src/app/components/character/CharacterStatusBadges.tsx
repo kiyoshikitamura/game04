@@ -1,9 +1,10 @@
+import TextRarityBadge from "@/app/components/ui/RarityBadge";
 import React from "react";
-import { getAwakeningBadgeAsset, getRarityBadgeAsset, normalizeProductionRarity } from "@/utils/rarityAssets";
+import { getAwakeningBadgeAsset, normalizeProductionRarity } from "@/utils/rarityAssets";
 import "./CharacterStatusBadges.css";
 
 export function RarityBadge({ rarity }: { rarity: string }) {
-  return <img className="character-status-badge is-rarity" src={getRarityBadgeAsset(rarity)} alt={normalizeProductionRarity(rarity)} />;
+  return <TextRarityBadge rarity={normalizeProductionRarity(rarity)}/>;
 }
 
 export function AwakeningBadge({ level, showUnawakened = false }: { level: number; showUnawakened?: boolean }) {

@@ -50,7 +50,7 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
   const [saveError, setSaveError] = useState('');
   const [dmText, setDmText] = useState('');
   const [now, setNow] = useState(Date.now);
-  const [banner, setBanner] = useState(0);
+
   const favorite = CHARACTER_MASTERS.find(c => c.id === state.homeCharacterId) ?? CHARACTER_MASTERS.find(c => c.id === state.deck[0]?.characterId) ?? CHARACTER_MASTERS[0];
   const background = resolveHomeBackground(state.homeBackgroundId);
   const ownedCharacters = state.characters.map(owned => CHARACTER_MASTERS.find(c => c.id === owned.id)).filter((c): c is typeof CHARACTER_MASTERS[number] => !!c);
@@ -102,7 +102,7 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
   for (const profile of Object.values(profiles)) { const character = CHARACTER_MASTERS.find(c => c.id === profile.favorite_character_id); if (character) profileFaces[profile.user_id] = characterArt(character, 'portrait') ?? character.image; }
   const profileName = (id: string | undefined, fallback: string) => id === state.userId ? game.username || fallback : (id && profiles[id]?.username) || fallback;
   const badges = (id?: string) => <CommunityBadges authenticated={id ? profiles[id]?.authenticated : false} vipExpiresAt={id ? profiles[id]?.vip_expires_at : null} now={now} />;
-  useEffect(() => { const timer = window.setInterval(() => setNow(Date.now()), 1000); const rotation = window.setInterval(() => setBanner(i => (i + 1) % 2), 8000); return () => { window.clearInterval(timer); window.clearInterval(rotation); }; }, []);
+  useEffect(() => { const timer = window.setInterval(() => setNow(Date.now()), 1000); return () => { window.clearInterval(timer); }; }, []);
   useEffect(() => { if (!previewOnly) game.setChatChannel(community === 'dm' ? 'DM' : 'GLOBAL'); }, [community, game.setChatChannel, previewOnly]);
   useEffect(() => { if (previewOnly) return; game.setShowTribeChatPanel(expanded && community !== 'activity'); return () => game.setShowTribeChatPanel(false); }, [expanded, community, game.setShowTribeChatPanel, previewOnly]);
   async function saveHome() {
@@ -114,7 +114,7 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
     catch (error) { setSaveError(error instanceof Error ? error.message : '変更を保存できませんでした'); }
     finally { saveLock.current = false; setSaving(false); }
   }
-  const tabs = <div className="rd-tabs">{([['activity','活動'],['global','全体'],['dm',`DM${game.dmUnreadTotal ? ` (${game.dmUnreadTotal})` : ''}`]] as const).map(([id,label]) => <button key={id} className={community === id ? 'active' : ''} disabled={!homeImages.ready} onClick={() => setCommunity(id)}>{label}</button>)}</div>;
+  const tabs = <div className="rd-tabs">{([['activity','活動'],['global',`全体${game.chatUnreadCounts?.GLOBAL ? ' ●' : ''}`],['dm',`DM${game.dmUnreadTotal ? ` (${game.dmUnreadTotal})` : ''}`]] as const).map(([id,label]) => <button key={id} className={community === id ? 'active' : ''} disabled={!homeImages.ready} onClick={() => setCommunity(id)}>{label}</button>)}</div>;
   const activityStatus = community === 'activity' ? <>{activityLoading && <div className="g4-home-spinner" role="status" aria-label="活動を読み込み中" />}{activityError && <div role="alert"><p>{activityError}</p><ActionButton type="button" className="rd-button" disabled={activityLoading} onClick={() => setActivityAttempt(value => value + 1)}>再読み込み</ActionButton></div>}</> : null;
   function messages(full: boolean) {
     if (community !== 'dm') {
@@ -138,6 +138,7 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
           <ActionButton className="g4-home-switch" disabled={!homeImages.ready} onClick={openSelector}>表示切替</ActionButton>
           <button disabled={!homeImages.ready} onClick={() => game.setShowMissionPanel(true)}><img src="/ui/sengoku/02-scroll-top.png" alt="" /><span>任務</span>{claimableMissions > 0 && <i aria-label="未受取の任務報酬" />}</button>
           <button disabled={!homeImages.ready} onClick={() => onNavigate('shop')}><img src="/ui/sengoku/12-shop.png" alt="" /><span>商店</span></button>
+          <button disabled={!homeImages.ready} onClick={() => setExpanded(true)}><img src="/ui/sengoku/09-chat.png" alt=""/><span>交流</span>{(game.dmUnreadTotal>0||game.chatUnreadCounts?.GLOBAL>0)&&<i aria-label="未読の交流"/>}</button>
           <button disabled aria-label="同盟・未解放" title="今後公開予定"><HomeLock /><span>同盟</span><small>未解放</small></button>
         </nav>
       </div>
@@ -148,7 +149,6 @@ export default function HomeView({ state, onAction, onNavigate, encounterRaid, s
           <button className="g4-home-territory g4-home-gold-frame" disabled={!homeImages.ready} onClick={() => onNavigate('territory')}><img src="/ui/sengoku/05-crossed-swords.png" alt="" /><strong>領土侵攻</strong></button>
         </div>
         <section className="g4-home-community" aria-label="交流">{tabs}<div className="g4-home-community-lines">{activityStatus}{messages(false)}</div><ActionButton className="g4-home-community-open" disabled={!homeImages.ready} onClick={() => setExpanded(true)}>交流を開く ›</ActionButton></section>
-        <button className="g4-home-banner g4-home-gold-frame" disabled={!homeImages.ready} onClick={() => onNavigate(banner ? 'shop' : 'gacha')}><img className="g4-home-banner-person" src={characterArt(favorite, 'card') ?? personImage} alt="" /><strong>{banner ? '商店' : '召喚'}</strong><span>›</span></button>
       </div>
     </div>
     {selector && <Modal closeDisabled={saving} title="表示切替" className="g4-home-selector" onClose={() => { if (!saveLock.current) setSelector(false); }} footer={<div className="g4-action-group"><ActionButton disabled={saving} onClick={() => setSelector(false)}>閉じる</ActionButton><ActionButton variant="primary" busy={saving} busyLabel="保存中" disabled={!dialogImages.ready || !ownedCharacters.some(c => c.id === draftCharacter)} onClick={() => void saveHome()}>保存</ActionButton></div>}>

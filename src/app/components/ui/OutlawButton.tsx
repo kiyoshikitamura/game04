@@ -8,6 +8,7 @@ type ButtonVariant = "primary" | "secondary" | "ghost" | "danger" | "neon";
 interface OutlawButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   fullWidth?: boolean;
+  size?: "standard" | "compact";
   isLoading?: boolean;
   loadingLabel?: string;
 }
@@ -15,6 +16,7 @@ interface OutlawButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement
 export default function OutlawButton({
   variant = "secondary",
   fullWidth = false,
+  size = "standard",
   isLoading = false,
   loadingLabel,
   className = "",
@@ -57,5 +59,5 @@ export default function OutlawButton({
     }
   };
 
-  return <ActionButton {...restProps} className={`outlaw-button ${fullWidth?'full-width':''} ${className}`} variant={variant==='primary'?'primary':variant==='danger'?'danger':'secondary'} onClick={handleClick} disabled={disabled} busy={busy} busyLabel={loadingLabel??'処理中…'}>{children}</ActionButton>;
+  return <ActionButton size={size} {...restProps} className={`outlaw-button ${fullWidth?'full-width':''} ${className}`} variant={variant==='primary'?'primary':variant==='danger'?'danger':'secondary'} onClick={handleClick} disabled={disabled} busy={busy} busyLabel={loadingLabel??'処理中…'}>{children}</ActionButton>;
 }

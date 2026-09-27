@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { CHARACTERS_MASTER, getCharacterTransparentImg } from "@/utils/game_constants";
 import { resolveCharacterGachaQuote } from "@/domain/presentation/characterGachaQuotes";
-import { getRarityBadgeAsset } from "@/utils/rarityAssets";
+import TextRarityBadge from "@/app/components/ui/RarityBadge";
 import { getAttributeBadgeAsset, getAttributeLabel } from "@/utils/attributeAssets";
 import { useAudio } from "@/audio/AudioProvider";
 import "./battle-mock.css";
@@ -62,7 +62,7 @@ export default function BattlePresentationMock() {
 
   useEffect(() => {
     let cancelled = false;
-    const sources = [...CHARACTERS_MASTER.map(asset), ...rarities.map(getRarityBadgeAsset), ...["JUSTICE","ORDER","EVIL","CHAOS"].map(v=>getAttributeBadgeAsset(v)!), impactAsset,
+    const sources = [...CHARACTERS_MASTER.map(asset), ...["JUSTICE","ORDER","EVIL","CHAOS"].map(v=>getAttributeBadgeAsset(v)!), impactAsset,
       ["heal","buff","debuff"].map(effectAsset), "/effects/battle-v3/cutin-street.webp", "/bg/bg_street_shinjuku.jpg"].flat();
     Promise.all(sources.map(src => new Promise<void>((resolve,reject)=>{
       const image = new Image(); image.onload=()=>{image.decode().then(()=>resolve(),reject);}; image.onerror=reject; image.src=src;
@@ -130,7 +130,7 @@ export default function BattlePresentationMock() {
     const affected=showImpact && (allyTarget ? !enemy&&(allTargets||index===0) : enemy&&(allTargets||index===target));
     return <div key={`${enemy}-${c.id}`} className={`bm-unit ${enemy?"enemy":"ally"} ${!enemy&&index===0&&busy?"acting":""} ${affected?"affected":""} ${health===0?"defeated":""}`} data-unit={`${enemy?"enemy":"ally"}-${index}`} data-positive={allyTarget} data-has-status={Boolean((statuses[`${enemy?"enemy":"ally"}-${index}`]||[]).length)}>
       <div className="bm-face" data-character={c.name}><img src={asset(c)} alt={c.jpName}/></div>
-      <div className="bm-unit-info"><strong>{c.jpName}</strong><img className="bm-badge" src={getRarityBadgeAsset(c.rarity)} alt={c.rarity}/><img className="bm-attribute" src={getAttributeBadgeAsset(c.alignment)!} alt={`属性：${getAttributeLabel(c.alignment)}`}/><div className="bm-hp" role="progressbar" aria-label={`${c.jpName} HP`} aria-valuenow={health} aria-valuemin={0} aria-valuemax={2400}><i style={{width:`${health/24}%`}}/></div><small>{health.toLocaleString()} / 2,400</small></div>
+      <div className="bm-unit-info"><strong>{c.jpName}</strong><TextRarityBadge rarity={c.rarity}/><img className="bm-attribute" src={getAttributeBadgeAsset(c.alignment)!} alt={`属性：${getAttributeLabel(c.alignment)}`}/><div className="bm-hp" role="progressbar" aria-label={`${c.jpName} HP`} aria-valuenow={health} aria-valuemin={0} aria-valuemax={2400}><i style={{width:`${health/24}%`}}/></div><small>{health.toLocaleString()} / 2,400</small></div>
       {health>0&&<StatusBadges items={statuses[`${enemy?"enemy":"ally"}-${index}`]||[]} onOpen={()=>setDetails(`${enemy?"enemy":"ally"}-${index}`)}/>}
       {health===0&&<b className="bm-ko">撃破</b>}
       {affected&&!stateAction&&<><b className={`bm-damage ${kind==="heal"?"heal":""}`}>{kind==="heal"?"+":"−"}{amount.toLocaleString()}</b>{phase==="impact"&&kind!=="heal"&&kind!=="dot"&&<img className={`bm-impact ${kind==="normal"?"normal":""}`} src={impactAsset} alt=""/>}</>}

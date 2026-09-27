@@ -4,6 +4,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { GameContext } from "@/app/context/GameContext";
 import {createInitialState} from '@/domain/redesign/masters';
 import {applyShopExchange} from '@/domain/redesign/shop';
+import {SHOP_CATALOG_VERSION} from "@/utils/shop_master_data";
 import ShopTab from "@/app/components/ShopTab";
 import InboxPanel from "@/app/components/InboxPanel";
 import CanonicalDialog from "@/app/components/ui/CanonicalDialog";
@@ -37,7 +38,7 @@ export default function ShopUiHarness({ embedded = false, exchange }: { embedded
     }) as unknown as typeof originalRpc;
     window.fetch = async (input, init) => {
       const url = new URL(typeof input === "string" ? input : input instanceof URL ? input.href : input.url, window.location.origin);
-      if (url.pathname === "/api/billing/config") return Response.json({ available: true, mode: "sandbox", catalogVersion: "20260922-game04-shop", disabledProductIds: [] });
+      if (url.pathname === "/api/billing/config") return Response.json({ available: true, mode: "sandbox", catalogVersion: SHOP_CATALOG_VERSION, disabledProductIds: [] });
       if (url.pathname === "/api/billing/history") return Response.json({ orders: [{ id: "qa-order", product_id: "beginner_pack_01", amount_jpy: 100, status: "GRANTED", created_at: "2026-09-15T00:00:00Z" }] });
       if (url.pathname === "/rest/v1/news") return Response.json(newsFixture);
       if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/rest/") || url.pathname.startsWith("/auth/") || url.origin !== window.location.origin) throw new Error("QA harness blocks real API access");

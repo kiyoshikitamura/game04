@@ -309,7 +309,7 @@ export function useInventory(
       };
       receiptOwnsLock = true;
       setConfirmDialogConfig({ isOpen: true, title: count ? "報酬獲得" : "プレゼント",
-        message: count ? (id ? "プレゼントを受け取りました。" : `プレゼントを${count}件受け取りました。`) : "受け取れるプレゼントはありませんでした。",
+        message: count ? (id ? "所持品に入りました。" : `${count}件の報酬が所持品に入りました。`) : "受け取れるプレゼントはありませんでした。",
         kind: rewardByItem.size ? "reward" : undefined,
         rewards: Array.from(rewardByItem, ([itemId, quantity]) => ({ id: itemId, name: canonicalItemName(itemId), quantity })),
         confirmText: "閉じる", cancelText: "", presentation: "canonical", onConfirm: closeReceipt, onCancel: closeReceipt });
@@ -404,7 +404,7 @@ export function useInventory(
         return;
       }
       playCyberSe("MISSION_REWARD");
-      setConfirmDialogConfig({ isOpen: true, title: "報酬獲得", message: targetMission.isCompletion ? "ギルドバトル開幕の準備完了！\n正式オープンに備えよう！" : "報酬を獲得しました。", kind: "reward", delivery: "INVENTORY", rewards, confirmText: onReceiptConfirmed ? "マイページへ" : "OK", cancelText: "", presentation: "canonical", onConfirm: closeReceipt, onCancel: () => setConfirmDialogConfig(null) });
+      setConfirmDialogConfig({ isOpen: true, title: "報酬獲得", message: targetMission.isCompletion ? "ギルドバトル開幕の準備完了！\n正式オープンに備えよう！" : "所持品に入りました。", kind: "reward", delivery: "INVENTORY", rewards, confirmText: onReceiptConfirmed ? "マイページへ" : "OK", cancelText: "", presentation: "canonical", onConfirm: closeReceipt, onCancel: () => setConfirmDialogConfig(null) });
     } catch (err) {
       console.warn(err);
       if (!isCurrent()) return;
@@ -458,7 +458,7 @@ export function useInventory(
         return;
       }
       playCyberSe("MISSION_REWARD");
-      setConfirmDialogConfig({ isOpen: true, title: "クリア報酬", message: "報酬を獲得しました。", kind: "reward", delivery: "INVENTORY", rewards, confirmText: onReceiptConfirmed ? "マイページへ" : "閉じる", cancelText: "", presentation: "canonical", onConfirm: closeReceipt, onCancel: () => setConfirmDialogConfig(null) });
+      setConfirmDialogConfig({ isOpen: true, title: "クリア報酬", message: "所持品に入りました。", kind: "reward", delivery: "INVENTORY", rewards, confirmText: onReceiptConfirmed ? "マイページへ" : "閉じる", cancelText: "", presentation: "canonical", onConfirm: closeReceipt, onCancel: () => setConfirmDialogConfig(null) });
     } catch (err: any) {
       console.warn(err.message);
       if (!isCurrent()) return;

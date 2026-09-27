@@ -1,9 +1,11 @@
 "use client";
+import TextRarityBadge from "@/app/components/ui/RarityBadge";
+
 
 import React, { useMemo, useState } from "react";
 import "./CharacterPresentation.css";
 import { getCharacterPresentationMetadata } from "./characterPresentationMetadata";
-import { getRarityBadgeAsset, getRarityFrameAsset, type RarityFrameKind } from "@/utils/rarityAssets";
+import { getRarityFrameAsset, type RarityFrameKind } from "@/utils/rarityAssets";
 import { getAttributeBadgeAsset, getAttributeLabel } from "@/utils/attributeAssets";
 import { useScreenReadiness } from "../../hooks/useScreenReadiness";
 
@@ -85,11 +87,11 @@ export default function CharacterPresentation({
   } as React.CSSProperties;
   const frameClass = frameKind ? `has-rarity-frame is-frame-${frameKind}` : "";
   const frameSrc = rarity && frameKind ? getRarityFrameAsset(frameKind, rarity) : "";
-  const rarityBadgeSrc = rarity && rarityBadge ? getRarityBadgeAsset(rarity) : "";
+  const showRarityBadge = Boolean(rarity && rarityBadge);
   const attributeBadgeSrc = attributeBadge ? getAttributeBadgeAsset(attribute) || "" : "";
   const visualSources = useMemo(
-    () => [backgroundSrc, src, frameSrc, rarityBadgeSrc, attributeBadgeSrc].filter(Boolean) as string[],
-    [attributeBadgeSrc, backgroundSrc, frameSrc, rarityBadgeSrc, src],
+    () => [backgroundSrc, src, frameSrc, attributeBadgeSrc].filter(Boolean) as string[],
+    [attributeBadgeSrc, backgroundSrc, frameSrc, src],
   );
   const visualReadiness = useScreenReadiness({
     assets: visualSources.map((assetSrc) => ({ src: assetSrc, required: false })),
@@ -103,7 +105,7 @@ export default function CharacterPresentation({
         <span className="character-presentation-light" aria-hidden="true" />
       </div>
       {frameSrc && <img className={`character-presentation-frame is-${frameKind}`} src={frameSrc} alt="" aria-hidden="true" />}
-      {rarityBadgeSrc && <img className="character-presentation-rarity-badge" src={rarityBadgeSrc} alt={rarity} />}
+      {showRarityBadge && <span className="character-presentation-rarity-badge"><TextRarityBadge rarity={rarity??"N"}/></span>}
       {attributeBadgeSrc && <img className="character-presentation-attribute-badge" src={attributeBadgeSrc} alt={getAttributeLabel(attribute)} />}
       {badge && <span className="character-presentation-badge">{badge}</span>}
       {metadata && (name || rarity || typeof level === "number") && (
