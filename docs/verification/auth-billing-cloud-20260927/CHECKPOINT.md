@@ -56,3 +56,15 @@ Rollback: keep sales CLOSED/maintenance guard, stop only newly-added named VIP j
 - Development Stripe: test-only Checkout, success/failure/cancel/duplicate/late delivery and close-before-return; verify DB order/event/grant, BOX/wallet, reload and history.
 - Actual production final purchase candidate: initial pack100 JPY once, DIAMOND100 + special tickets character1/skill3/equipment1 + energy2. Only user operates payment; do not proceed until product UI/server/DB and protected production preflight are accepted.
 - Production Google and actual card operation are still unperformed. Do not ask user to pay now.
+
+## Last verified results before management sign-in handoff
+- Saved implementation and deployed source: 8ef99301241b2ef9ff558ea8d45ffd8eea55311e.
+- Vercel Preview Ready: dpl_8FHgZHwczP8hwJasaiGWgfoM9fNq, build1m12s. https://vercel.com/kiyoshi-kitamura/game04/8FHgZHwczP8hwJasaiGWgfoM9fNq
+- Browser title rendered at https://game04-git-work-game04-auth-billing-clo-927d89-kiyoshi-kitamura.vercel.app/ . This is only a frontend load, not Google/payment success.
+- Separate TypeCheck `npm run typecheck`/`tsc --noEmit`: exit0 (2026-09-27 05:36:41 UTC).
+- Separate repository-wide Lint: exit1, 932 errors /2528 warnings, including unchanged generated API bundle and shared UI/test/scripts. Not fixed wholesale because this task does not own those shared files. No full quality-gate pass claimed.
+- Earlier9309278 build failed because inherited NEXT_PUBLIC_SUPABASE_URL was invalid for preview. Branch-specific public env repaired the build; no false source-code fix was added for an environment failure.
+- Common Preview Google-start failure -> game return -> Continue restored the same Toyotomi introduction screen. This verifies this failure-return path only, not OAuth cancellation or all assets after success.
+- VIP cron succeeded with no due target at 2026-09-27 05:34:00 UTC. Fixture tests separately verify30 deliveries/retries.
+- Actual production domain navigation and direct Preview /api/billing/config navigation were blocked by this cloud browser with ERR_BLOCKED_BY_CLIENT. No bot-detection claim, bypass, or production acceptance claim.
+- Production package submitted to PR32 comment5853049380; implementation ownership remains PR41/common product owner unchanged.
