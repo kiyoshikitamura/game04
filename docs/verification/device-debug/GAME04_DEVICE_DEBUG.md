@@ -831,3 +831,5 @@ BURST敵停止は配信Edge bundleの依存更新漏れを是正し、Preview v9
 
 ### 2026-09-27 リタイア読み込み表示の追補
 リタイア待機を共通Game04Loadingへ統一。成功/失敗で解除、失敗は共通エラー+再試行。無報酬・進行なし・次ステージなしのロジックは不変。375/390で待機/長時間/失敗/再試行を限定確認PASS。証拠 docs/verification/retire-loading。
+
+リタイア共通ローディング修正はb454fcfを共通Previewへ配信、稼働SHA一致。配信後375/390で成功/失敗/再試行/復帰確認PASS。**配信済み・実機確認待ち**。詳細retire-loading/DEPLOYMENT.md。
