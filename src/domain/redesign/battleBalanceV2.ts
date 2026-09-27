@@ -30,7 +30,8 @@ interface Unit extends BattleUnit {
     revivedAt: number;
 }
 export function simulateBalanceBattle(input: BattleInput): BattleResult {
-    const attackBurst = input.rules.burstPolicy === 'attack-free-v1-20260926';
+    const pauseEnemiesInBurst = input.rules.burstPolicy === 'attack-free-enemy-pause-v2-20260927';
+    const attackBurst = pauseEnemiesInBurst || input.rules.burstPolicy === 'attack-free-v1-20260926';
     if (input.rules.burstPolicy !== undefined && !attackBurst) throw new Error('Unsupported BURST policy');
     const revisedInput = input.rules.inputVersion === WAVE_SP_INPUT_VERSION;
     if (input.rules.inputVersion !== undefined && !revisedInput) throw new Error('Unsupported battle input version');
@@ -327,7 +328,8 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
                     for (let index = 0; index < (u.deathEffects?.length ?? 0); index++)
                         if (!u.usedDeath.has(index)) {
                             u.usedDeath.add(index);
-                            queue.push({ u, effect: u.deathEffects![index], index });
+                            // Enemy death-trigger actions are consumed, never queued for later in this policy.
+                            if (!(pauseEnemiesInBurst && burst && u.enemy)) queue.push({ u, effect: u.deathEffects![index], index });
                         }
                 }
         };
@@ -392,7 +394,7 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
         deaths(u);
         const attacked=[...opposite(u)].filter(t=>directTargets.has(t));
         for(const t of attacked) {
-            if(!alive(u)||!alive(t)||t.deaths!==directTargets.get(t)||stunned(t))continue;
+            if((pauseEnemiesInBurst && burst && t.enemy)||!alive(u)||!alive(t)||t.deaths!==directTargets.get(t)||stunned(t))continue;
             const counter=t.statuses.filter(s=>s.type==='counter').sort((a,b)=>b.power-a.power)[0];
             if(!counter)continue;
             isCounter=true;hitThisAction=new Set();
@@ -445,6 +447,8 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
     const skip = (u: Unit) => { serial++; if (!u.enemy)
         playerActions++; u.statuses = u.statuses.filter(s => s.type !== 'stun'); u.immune = true; frame(u.enemy ? 'enemy' : 'action', `${u.name} 行動不能：スキップ・再付与耐性`, u, undefined, { event: 'stun_skip' }); };
     const interrupts = () => {
+        // No count tick, periodic block, or catch-up queue during the allied sequence.
+        if (pauseEnemiesInBurst && burst) return;
         for (const e of enemies.filter(alive))
             if (e.revivedAt !== serial)
                 e.count--;
@@ -495,6 +499,7 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
         if (!alive(u))
             continue;
         let skipped = false;
+        let skippedDuringBurst = false;
         if (stunned(u)) {
             skip(u);
             skipped = true;
@@ -513,6 +518,7 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
                 if (stunned(u)) {
                     skip(u);
                     skipped = true;
+                    skippedDuringBurst = burst;
                     frame('burst', '行動不能でBURST中断', u, undefined, { event: 'burst_interrupted' });
                     break;
                 }
@@ -549,8 +555,8 @@ export function simulateBalanceBattle(input: BattleInput): BattleResult {
             passives();
             frame('wave', `WAVE ${wave + 1}：HP・SP・ゲージ・状態を引継ぎ`, undefined, undefined, { event: 'wave' });
         }
-        // An initial or BURST stun skip still advances enemy counts once.
-        else if (skipped)
+        // Ordinary stun skips tick once; a paused BURST skip never adds a catch-up tick.
+        else if (skipped && !(pauseEnemiesInBurst && skippedDuringBurst))
             interrupts();
     }
     if (!enemies.some(alive))
