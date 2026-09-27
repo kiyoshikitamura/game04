@@ -57,14 +57,19 @@ Rollback: keep sales CLOSED/maintenance guard, stop only newly-added named VIP j
 - Actual production final purchase candidate: initial pack100 JPY once, DIAMOND100 + special tickets character1/skill3/equipment1 + energy2. Only user operates payment; do not proceed until product UI/server/DB and protected production preflight are accepted.
 - Production Google and actual card operation are still unperformed. Do not ask user to pay now.
 
-## Last verified results before management sign-in handoff
-- Saved implementation and deployed source: 8ef99301241b2ef9ff558ea8d45ffd8eea55311e.
-- Vercel Preview Ready: dpl_8FHgZHwczP8hwJasaiGWgfoM9fNq, build1m12s. https://vercel.com/kiyoshi-kitamura/game04/8FHgZHwczP8hwJasaiGWgfoM9fNq
-- Browser title rendered at https://game04-git-work-game04-auth-billing-clo-927d89-kiyoshi-kitamura.vercel.app/ . This is only a frontend load, not Google/payment success.
-- Separate TypeCheck `npm run typecheck`/`tsc --noEmit`: exit0 (2026-09-27 05:36:41 UTC).
-- Separate repository-wide Lint: exit1, 932 errors /2528 warnings, including unchanged generated API bundle and shared UI/test/scripts. Not fixed wholesale because this task does not own those shared files. No full quality-gate pass claimed.
-- Earlier9309278 build failed because inherited NEXT_PUBLIC_SUPABASE_URL was invalid for preview. Branch-specific public env repaired the build; no false source-code fix was added for an environment failure.
-- Common Preview Google-start failure -> game return -> Continue restored the same Toyotomi introduction screen. This verifies this failure-return path only, not OAuth cancellation or all assets after success.
-- VIP cron succeeded with no due target at 2026-09-27 05:34:00 UTC. Fixture tests separately verify30 deliveries/retries.
-- Actual production domain navigation and direct Preview /api/billing/config navigation were blocked by this cloud browser with ERR_BLOCKED_BY_CLIENT. No bot-detection claim, bypass, or production acceptance claim.
-- Production package submitted to PR32 comment5853049380; implementation ownership remains PR41/common product owner unchanged.
+
+## Superseding cloud checkpoint 2026-09-27 06:10 UTC
+This section supersedes earlier pending observations above.
+- PR37 advanced to ae587a7af4d836e4203122e4be41a0c0bcf07ec0. Compared changed files: no overlap with our 15 files. Imported by merge b6cac2d229770382b963cba5d75d2517c10706a9; shared UI/battle/product changes retained.
+- Initial pack current UI/server now DIAMOND100 at100JPY with other items unchanged; matches current dev billing catalog. Gacha owner reports300/300/200 and six liveAPI cases; those separate results not independently rerun here.
+- b6cac2d Preview Ready: deployment 7rrXMDkmtQJ9ZsEUfgXy14spgJv4, 1m10s, https://game04-ozayepfru-kiyoshi-kitamura.vercel.app . Branch alias https://game04-git-work-game04-auth-billing-clo-927d89-kiyoshi-kitamura.vercel.app .
+- Earlier8ef deployment full TypeCheck passed. Separate lint failed932errors/2528warnings including unchanged generated bundle/shared files; do not call whole CI passed. Latest b6cac build success verified; separate TypeCheck result not yet inspected.
+- User completed secure Supabase and Stripe dashboard sign-in; verified signed-in target pages. No further Supabase sign-in request needed.
+- Current dev znakrkaazliexzwihxge: anonymous and new user sign-in ON; manual linking OFF; Google OFF with ClientIDs and secret fields blank. Old GAME04 lrgyllgzcdcphlbmkknc also Google OFF and both fields blank, inspected without writes.
+- Current production soiksqgtmcnspfedmanr: new users OFF, anonymous OFF, manual linking OFF; Google OFF and both config fields blank. Production unchanged.
+- Current dev default SiteURL was localhost:3000, no redirect URLs. Fixed SiteURL to common Preview and saved exactly two callback URLs, common Preview/auth/game04/callback and own branch alias/auth/game04/callback. No wildcard, production or GAME03 destination added. Evidence auth-redirects.jpg.
+- Google Cloud credentials console rendered Site Unavailable in this cloud browser; cannot inspect existing GAME04 OAuth clients. Do not invent clients, reuse GAME03 secrets, weaken nonce checks, or call realGoogle passed.
+- Stripe signed-in account TRIBE NEON (WebGame). Account list contains TRIBE NEON and code:wirth-dawn; sandbox submenu lists TRIBE NEON sandbox and test environment. No GAME04 account identified. Read-only inspection only; no test transactions, webhook creation, key changes, or GAME03 mutation. Need existing GAME04 payment-account designation before using one.
+- Common Preview failed Google-start return path was verified back to title/Continue and same tutorial stage. Limited failure-return evidence only, not complete asset/session Google acceptance.
+- Production remains untested. Real-domain navigation blocked by client in this cloud browser; no production acceptance claimed.
+- Server service-role scope and actual Stripe test/live configurations remain unverified. Sales remain closed; do not ask user for card payment.
