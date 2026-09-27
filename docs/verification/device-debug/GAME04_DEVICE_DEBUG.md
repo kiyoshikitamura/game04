@@ -841,3 +841,5 @@ BURST敵停止は配信Edge bundleの依存更新漏れを是正し、Preview v9
 本番反映確認（2026-09-27）：Web b8fea14088ad0cfbf87d0714725ff8434da5db4c／API v3。正式ドメインで375・390px、ガイド→共通エラー→同一ID再試行→通常任務を確認し、前後のクリア・所持品不変を検証。配信済み・実機確認待ち。詳細 docs/verification/area1-guide/DEPLOYMENT.md。
 
 2026-09-27 本番実機3件: 結果保存待ち共通化/敵1体4:3切り抜き解消/武将切替へ改称。限定検証記録 docs/verification/device-three/REVIEW.md。API変更なし。配信結果は同フォルダDEPLOYMENT.mdへ記録。
+
+本番実機3件 配信完了: 4aad993 / dpl_66npzZnmd5meE3XLYaFLRnn33XrM Ready Production、正式ドメイン照合・本陣375/390確認。配信済み・実機確認待ち。API変更なし。
