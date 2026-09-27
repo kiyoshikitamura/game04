@@ -36,7 +36,7 @@ export default function HomePromotion({ owner, active, blocked, onNavigate }: { 
     return () => { clearInterval(retry); if (!saved) void record(); };
   }, [kind]);
   useEffect(() => {
-    // Campaign is intentionally disabled until release setup. RPC never trusts client dates.
+    // Campaign activation is environment-owned. RPC never trusts client dates.
     void supabase.rpc('game04_ensure_release_present').then(() => {});
   }, [owner]);
   useEffect(() => {
