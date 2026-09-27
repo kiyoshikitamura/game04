@@ -132,3 +132,8 @@ dialog.backdrop{margin:0;width:100%;height:100%;max-width:none;max-height:none;b
 .enemyZone[data-count] .enemy .status svg{width:14px;height:14px}
 .enemyZone[data-count] .enemy .status button>span{font-size:8px;line-height:10px}
 .burstFailure{font:12px/1.4 sans-serif;text-align:right;margin:2px 0;color:#ffe4a2}
+
+/* Single wide art uses its original canvas, fitted inside the battle area.
+   Reserve information space without cropping the character or scaling square art. */
+.enemyZone[data-count="1"] .enemy[data-order][data-enlarge="true"]{max-width:none}
+.enemyZone[data-count="1"] .enemy[data-order][data-enlarge="true"] .enemyImage{left:0;top:0;width:100%;height:calc(100% - 96px);object-fit:contain;object-position:center bottom}

@@ -839,3 +839,5 @@ BURST敵停止は配信Edge bundleの依存更新漏れを是正し、Preview v9
 本番Auth /auth/v1/user の521/522非JSONを無条件解析していた。認証確認の限定再試行・応答検査・安全な503、ガイド共通エラー、通常任務初期タブを修正。クリア/初回報酬は保存済み、ガイド再試行では再付与しない。一般ユーザー状態変更なし。限定証拠 docs/verification/area1-guide。
 
 本番反映確認（2026-09-27）：Web b8fea14088ad0cfbf87d0714725ff8434da5db4c／API v3。正式ドメインで375・390px、ガイド→共通エラー→同一ID再試行→通常任務を確認し、前後のクリア・所持品不変を検証。配信済み・実機確認待ち。詳細 docs/verification/area1-guide/DEPLOYMENT.md。
+
+2026-09-27 本番実機3件: 結果保存待ち共通化/敵1体4:3切り抜き解消/武将切替へ改称。限定検証記録 docs/verification/device-three/REVIEW.md。API変更なし。配信結果は同フォルダDEPLOYMENT.mdへ記録。
