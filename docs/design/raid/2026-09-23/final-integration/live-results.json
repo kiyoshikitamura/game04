@@ -1,0 +1,38 @@
+{
+  "project": "lrgyllgzcdcphlbmkknc",
+  "scope": "Real authenticated Edge + DB with TEST_ONLY battle-strength fixtures; not formal balance acceptance",
+  "checks": [
+    {
+      "name": "owner profile and portrait projection",
+      "pass": true
+    },
+    {
+      "name": "loss increments attempts only",
+      "pass": true
+    },
+    {
+      "name": "join / win / energy20 / same-request replay",
+      "pass": true
+    },
+    {
+      "name": "two wins do not grant defeat qualification",
+      "pass": true,
+      "remainingHp": 111
+    },
+    {
+      "name": "third win / ended history / qualification / reload consistency",
+      "pass": true
+    },
+    {
+      "name": "claim / new-request duplicate claim / persisted inventory",
+      "pass": true
+    }
+  ],
+  "completed": true,
+  "fixtureEnergyRefill": "Disposable guest only, after two wins; excluded from gameplay acceptance",
+  "cleanup": {
+    "remainingQaUsers": 0,
+    "remainingQaRooms": 0
+  },
+  "edgeVersion": 13
+}

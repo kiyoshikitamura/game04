@@ -1,0 +1,100 @@
+/* GAME04: presentation only. Existing navigation and stage geometry are retained. */
+:root {
+  --font-ui: var(--font-sengoku);
+  --font-display: var(--g4-serif, "Noto Serif JP", serif);
+  --font-inter: var(--font-sengoku);
+  --font-outfit: var(--font-sengoku);
+  --font-sengoku: var(--g4-sans, "Noto Sans JP", sans-serif);
+}
+.header-mobile, .footer-mobile, .mypage-view {
+  --neon-cyan: #dbba7d;
+  --neon-magenta: #bb4436;
+  --neon-gold: #e5bf78;
+  --font-ui: var(--font-sengoku);
+  --font-display: var(--g4-serif, "Noto Serif JP", serif);
+  --font-outfit: var(--font-sengoku);
+  --ui-accent: #dbba7d;
+  font-family: var(--font-sengoku);
+  color: #fff4df;
+}
+.header-mobile button, .footer-mobile button, .mypage-view button { font-family: inherit; }
+.header-mobile.header-mobile {
+  background: linear-gradient(90deg,rgba(13,8,7,.96),rgba(28,10,10,.88)),url('/bg/sengoku/castle-town.jpg') center 18%/cover;
+  border-color: #977346;
+}
+/* Identity remains left, menu right; the new logo occupies the upper-right slot. */
+.header-mobile .header-mobile-row1 {
+  grid-template-columns: minmax(0,1fr) 92px 54px;
+  grid-template-rows: auto auto;
+  gap: 2px 5px;
+}
+.header-mobile .header-mobile-user { grid-column:1;grid-row:1; }
+.header-mobile .header-mobile-progression { grid-column:1;grid-row:2;border:0;padding-left:0;gap:1px; }
+.header-mobile .header-game-logo { grid-column:2;grid-row:1 / 3;display:block;width:100%;height:64px;object-fit:contain; }
+.header-mobile .header-mobile-menu-button { grid-column:3;grid-row:1 / 3;background:#130d09;border:1px solid #a68150;color:#ffefd4;border-radius:3px; }
+.header-mobile .header-mobile-level-badge { color:#e7d6b6; }
+.header-mobile .header-level-icon { width:13px;height:13px;object-fit:contain;vertical-align:middle;margin-right:4px; }
+.header-mobile .header-mobile-power small { color:#e4d4ba; }
+.header-mobile .header-mobile-row2 { border:1px solid #a68150;background:rgba(8,6,5,.9);border-radius:3px;padding:5px 3px; }
+.header-mobile .header-mobile-stat-cash { color:#ade28d; }
+.header-mobile .header-mobile-stat-diamond { color:#c9e5ed; }
+.header-mobile .header-mobile-stat-label { color:#e5bf78; }
+.header-mobile .header-mobile-stat-recovery { color:#c8b897; }
+.header-mobile .header-utility-menu { border-color:#a68150;background:#150d0a; }
+.header-mobile .header-utility-menu nav button { background:#251611;color:#fff4df; }
+.mypage-view.mypage-view { background:#100b09; }
+.mypage-view .mypage-lower-content { background:#100b09; }
+.mypage-view .mypage-visual-area { background-position:center 56%;background-color:#150c10; }
+.mypage-view .mypage-visual-overlay { background:linear-gradient(180deg,rgba(16,7,9,.05),transparent 70%,rgba(16,11,9,.6)); }
+.mypage-view .mypage-current-location { border-color:#a97c47;background:linear-gradient(90deg,rgba(95,23,18,.9),rgba(12,8,7,.9));color:#fff2db; }
+.mypage-view .mypage-current-location small { color:#c7ad88; }
+.mypage-view .mypage-live-ticker { border:1px solid #a68150;border-radius:3px;background:linear-gradient(90deg,#631d18 0%,#160c09 25%,#100b09 100%);color:#ffefd6; }
+.mypage-view .mypage-live-ticker-tag, .mypage-view .mypage-live-ticker-label { color:#f2c994; }
+.mypage-view .mypage-sub-icons-left .sub-icon-unit { border:1px solid #b58a53;border-radius:3px;background:linear-gradient(135deg,#21130c,#100b08);box-shadow:inset 0 0 0 2px #39271c,0 3px 8px #0007;color:#fff0d7; }
+.mypage-view .mypage-sub-icons-left .sub-png-icon { filter:none; }
+.mypage-view .mypage-sub-icons-left .sub-icon-label { font-size:9px;font-weight:600; }
+.mypage-view .mypage-circle-menu-area { background:#120b08; }
+.mypage-view .mypage-circle-menu-area > .circle-menu-btn { border:1px solid #a68150 !important;border-radius:3px;background:linear-gradient(145deg,#24150e,#110c09) !important;box-shadow:inset 0 0 0 2px #382219; }
+.mypage-view .mypage-circle-menu-area > .circle-menu-btn.conquest { background:linear-gradient(135deg,#501611,#180c09) !important; }
+.mypage-view .mypage-circle-menu-area > .circle-menu-btn.guild { background:linear-gradient(135deg,#2d1128,#120b11) !important; }
+.mypage-view .mypage-circle-menu-area > .circle-menu-btn.recommended { border-color:#edb078 !important;background:linear-gradient(135deg,#6e2218,#27100c) !important;box-shadow:inset 0 0 0 2px #8e482b; }
+.mypage-view .mypage-circle-menu-area .circle-menu-img { filter:none; }
+.mypage-view .circle-menu-label strong { font-size:13px;color:#fff0d9;font-weight:600; }
+.mypage-view .circle-menu-status { color:#d1ba95; }
+.mypage-view .mypage-primary-cta { display:flex;align-items:center;gap:8px;border:1px solid #bd8153;border-radius:3px;background:linear-gradient(110deg,#741e17,#3d120e 70%,#681e17);color:#ffeed3;box-shadow:inset 0 0 0 2px #923a25; }
+.mypage-view .mypage-primary-cta strong { flex:1; }
+.mypage-view .sengoku-mission-icon { width:26px;height:26px;object-fit:contain; }
+.mypage-view .banner-arrow { border-color:#977346;background:#1d120c; }
+.mypage-view .banner-arrow img { width:22px;height:28px;object-fit:contain; }
+.mypage-view .banner-card { border-color:#977346; }
+.mypage-view .dot.active { background:#e97747;box-shadow:0 0 5px #d44826; }
+.mypage-view .chat-preview-bar { border-color:#715335;background:#1a100c;color:#f3e5ce; }
+.mypage-view .chat-tag, .mypage-view .tribe-app-link { color:#d9b980; }
+.footer-mobile.footer-mobile { background:#110b08;border-top:1px solid #b58a53; }
+.footer-mobile .footer-item { border-right:1px solid #67492f;border-radius:0; }
+.footer-mobile .footer-item:last-child { border-right:0; }
+.footer-mobile .footer-icon { filter:none; }
+.footer-mobile .footer-label { color:#f6e9d4;font-family:var(--font-sengoku);font-size:12px;font-weight:600; }
+.footer-mobile .footer-item.active { background:radial-gradient(ellipse at 50% 100%,#a1391b,#43140e 55%,#210d09);box-shadow:inset 0 0 0 1px #bd6b42; }
+.footer-mobile .footer-item.active .footer-icon { filter:drop-shadow(0 0 5px #e8793b); }
+.footer-mobile .footer-item.active .footer-label { color:#ffedd1; }
+.footer-mobile .footer-notification-badge { background:#9b3020;box-shadow:none; }
+.footer-mobile .footer-item--shop:not(.upcoming):not(.active) { background:#21160b;box-shadow:inset 0 0 0 1px #745632; }
+
+.mypage-view .mypage-live-ticker-arrow { color:#e0bc80; }
+.mypage-view .mypage-live-ticker { box-shadow:inset 3px 0 0 #bd5a32; }
+.mypage-view .mypage-live-ticker-body:focus-visible, .mypage-view .mypage-live-ticker-arrow:focus-visible { outline-color:#e0bc80; }
+.mypage-view .mypage-stage-transition { background:linear-gradient(to bottom,transparent,#100b09); }
+
+/* #30: one GAME04 typography rule, including route-loaded battle/gacha/dialog CSS.
+   Only the typeface is overridden; sizes, geometry and game state are unchanged. */
+body.game04-theme,
+body.game04-theme :where(*):not(:where(pre, code, kbd, samp, pre *, code *)) {
+  font-family: var(--font-sengoku) !important;
+}
+body.game04-theme :where(input, textarea, select, button) {
+  font-kerning: normal;
+}
+body.game04-theme :where(.ui-type-numeric, .cg-stats dd, .header-mobile-stat-value) {
+  font-variant-numeric: tabular-nums;
+}

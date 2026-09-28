@@ -1,0 +1,41 @@
+{
+  "pass": true,
+  "scope": "Real dev API; disposable room initial states for expired/full, formal enemy masters unchanged",
+  "checks": [
+    {
+      "case": "expired",
+      "pass": true,
+      "error": "このレイドは終了しました。"
+    },
+    {
+      "case": "full",
+      "pass": true,
+      "error": "参加人数が上限に達しています。"
+    },
+    {
+      "case": "left:raid_join",
+      "pass": true,
+      "error": "退出済みのレイドには再参加できません。"
+    },
+    {
+      "case": "left:raid_battle",
+      "pass": true,
+      "error": "参加できる開催中レイドを選んでください。"
+    },
+    {
+      "case": "energy shortage",
+      "pass": true,
+      "error": "行動力が足りません。"
+    },
+    {
+      "case": "formal 12-stage hosting and same-request replay",
+      "pass": true,
+      "roomId": "f4a0896a-c777-42e0-b180-3982ea3d7397"
+    },
+    {
+      "case": "host capacity",
+      "pass": true,
+      "error": "同時開催枠が埋まっています。開催中の侵攻を確認してください。"
+    }
+  ]
+}

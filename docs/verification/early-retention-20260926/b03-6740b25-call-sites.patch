@@ -1,0 +1,123 @@
+--- a/src/app/components/redesign/QuestView.tsx
++++ b/src/app/components/redesign/QuestView.tsx
+@@ -5,7 +5,7 @@
+ import { growthRewardImage } from '@/domain/redesign/growthAssetPresentation';
+ import { useEffect, useRef, useState } from 'react';
+ import { CHARACTER_MASTERS, EQUIPMENT_MASTERS, SKILL_MASTERS } from '@/domain/redesign/masters';
+-import { QUEST_AREAS, QUEST_STAGES, getQuestStage, isQuestStageUnlocked, nextQuestStage, questEnergyCost } from '@/domain/redesign/quests';
++import { hasQuestClear, QUEST_AREAS, QUEST_STAGES, getQuestStage, isQuestStageUnlocked, nextQuestStage, questEnergyCost } from '@/domain/redesign/quests';
+ import type { BattleUnit, QuestStage, RedesignState, Reward } from '@/domain/redesign/types';
+ import type { BattleResult } from '@/domain/redesign/battle';
+ import CanonicalDialog from '../ui/CanonicalDialog';
+@@ -84,17 +84,17 @@
+   const [busy, setBusy] = useState(false);
+   const [error, setError] = useState('');
+   const actionRef = useRef(false);
+-  const current = nextQuestStage(state.clearedStages);
++  const current = nextQuestStage(state.clearedStages, state.earlyProgress);
+   const area = QUEST_AREAS.find(entry => entry.id === areaId);
+   const selectedLabel = selected ? `${QUEST_AREAS.find(entry => entry.id === selected.areaId)?.index}-${selected.index}` : undefined;
+   const followingStage = selected ? QUEST_STAGES[QUEST_STAGES.findIndex(stage => stage.id === selected.id) + 1] : undefined;
+   async function start() {
+     if (!selected || actionRef.current) return;
+-    actionRef.current = true; setBusy(true); setError('');
++    actionRef.current = true; setBusy(true); setPlaying(true); setError('');
+     try {
+       const result = await onStart(selected.id);
+       setSettlement(result); setPlaying(true); setModal(null);
+-    } catch (reason) { setError(reason instanceof Error ? reason.message : '出撃できませんでした。もう一度お試しください。'); }
++    } catch (reason) { setPlaying(false); setError(reason instanceof Error ? reason.message : '出撃できませんでした。もう一度お試しください。'); }
+     finally { actionRef.current = false; setBusy(false); }
+   }
+   async function dismissEncounter() {
+@@ -106,9 +106,9 @@
+     finally { actionRef.current = false; setBusy(false); }
+   }
+   function openStage(stage: QuestStage) { setSelected(stage); setModal('info'); setDetailPanel(null); setError(''); }
+-  const firstLockedArea = QUEST_AREAS.findIndex(entry => !isQuestStageUnlocked(entry.stages[0].id, state.clearedStages));
++  const firstLockedArea = QUEST_AREAS.findIndex(entry => !isQuestStageUnlocked(entry.stages[0].id, state.clearedStages, state.earlyProgress));
+   const visibleAreas = QUEST_AREAS.filter((entry, index) => {
+-    const cleared = entry.stages.every(stage => state.clearedStages.includes(stage.id));
++    const cleared = state.earlyProgress?.completedAreas.includes(entry.id) || entry.stages.every(stage => hasQuestClear(stage.id,state.clearedStages,state.earlyProgress));
+     return cleared || firstLockedArea < 0 || index <= firstLockedArea;
+   });
+   const viewAssets = useQuestAssets(area ? [area.image] : visibleAreas.map(entry => entry.image));
+@@ -117,7 +117,7 @@
+   const bossAssets = useArtworkPreload(selectedSubject ? [selectedSubject] : [], 'battle');
+   const encounterBackgrounds = useQuestAssets(selectedBoss ? [selectedSubject ? '' : selectedBoss.image, QUEST_AREAS.find(entry => entry.id === selected?.areaId)?.image ?? ''].filter(Boolean) : []);
+   const encounterAssets = { ready: bossAssets.ready && encounterBackgrounds.ready, failed: bossAssets.failed || encounterBackgrounds.failed, retry: () => { bossAssets.retry(); encounterBackgrounds.retry(); } };
+-  if (playing && settlement) return <BattleView resultRewards={<ResultRewards settlement={settlement} stage={selected}/>} resultActions={settlement.encounterRaidId ? <button onClick={()=>setPlaying(false)}>遭遇した強敵を確認</button> : <>{settlement.battle.outcome==='win'&&followingStage&&isQuestStageUnlocked(followingStage.id,state.clearedStages)&&<button onClick={()=>{setPlaying(false);setSettlement(null);setAreaId(followingStage.areaId);openStage(followingStage);}}>次のステージ</button>}<button onClick={()=>{setPlaying(false);setSettlement(null);setSelected(null);}}>ステージ一覧</button></>}  bgmScene={questBattleBgm(selected?.id)} result={settlement.battle} vipActive={vipActive} onComplete={() => setPlaying(false)} title={selected ? `${selectedLabel} ${questDisplayName(selected)}` : selectedLabel} backgroundSrc={QUEST_AREAS.find(entry => entry.id === selected?.areaId)?.image} />;
++  if (playing && settlement) return <BattleView resultRewards={<ResultRewards settlement={settlement} stage={selected}/>} resultActions={settlement.encounterRaidId ? <button onClick={()=>setPlaying(false)}>遭遇した強敵を確認</button> : <>{settlement.battle.outcome==='win'&&followingStage&&isQuestStageUnlocked(followingStage.id,state.clearedStages, state.earlyProgress)&&<button onClick={()=>{setPlaying(false);setSettlement(null);setAreaId(followingStage.areaId);openStage(followingStage);}}>次のステージ</button>}<button onClick={()=>{setPlaying(false);setSettlement(null);setSelected(null);}}>ステージ一覧</button></>}  bgmScene={questBattleBgm(selected?.id)} result={settlement.battle} vipActive={vipActive} onComplete={() => setPlaying(false)} title={selected ? `${selectedLabel} ${questDisplayName(selected)}` : selectedLabel} backgroundSrc={QUEST_AREAS.find(entry => entry.id === selected?.areaId)?.image} />;
+   return <section className="redesign-quest" style={{ backgroundImage: `url("${area?.image ?? QUEST_AREAS[0].image}")` }}>
+     {!viewAssets.ready && !settlement && !modal && <p role={viewAssets.failed ? "alert" : "status"}>{viewAssets.failed ? <>画像を読み込めませんでした。<button onClick={viewAssets.retry}>再読み込み</button></> : <LoadingSpinner />}</p>}
+     {settlement ? <div className="rq-summary">
+@@ -136,16 +136,16 @@
+     </div> : <>
+       {area ? <><button className="rq-back" onClick={() => setAreaId(null)}>‹ エリア一覧</button><header className="rq-area-head" style={{ backgroundImage: `linear-gradient(90deg,#100a0888,transparent 76%),url("${area.image}")` }}><h2>{area.name}</h2></header>
+         <div className="rq-scroll" aria-label={`${area.name}のステージ一覧`}>{area.stages.map(stage => {
+-          const cleared = state.clearedStages.includes(stage.id), unlocked = isQuestStageUnlocked(stage.id, state.clearedStages);
++          const cleared = hasQuestClear(stage.id,state.clearedStages,state.earlyProgress), unlocked = isQuestStageUnlocked(stage.id, state.clearedStages, state.earlyProgress);
+           return <button className={`rq-stage ${current.id === stage.id ? 'is-current' : ''}`} key={stage.id} disabled={!unlocked || !viewAssets.ready} onClick={() => openStage(stage)} style={{ backgroundImage: `linear-gradient(90deg,#302015aa,#14100e88),url("${area.image}")` }}><b className="rq-stage-number">{area.index}-{stage.index}</b><span><strong>{formalStageName(stage) ?? stage.name}</strong><small><img src="/ui/sengoku/14-energy.png" alt="" />消費行動力 {questEnergyCost(stage,state)}</small></span><small className={`rq-state-label ${cleared ? 'is-cleared' : unlocked ? 'is-current' : 'is-locked'}`}>{cleared ? 'クリア済' : unlocked ? '挑戦可能' : '未解放'}</small></button>;
+         })}</div></> : <><h2>出陣</h2><div className="rq-scroll rq-area-list" aria-label="エリア一覧">{visibleAreas.map(entry => {
+-          const cleared = entry.stages.every(stage => state.clearedStages.includes(stage.id));
+-          const unlocked = isQuestStageUnlocked(entry.stages[0].id, state.clearedStages);
++          const cleared = state.earlyProgress?.completedAreas.includes(entry.id) || entry.stages.every(stage => hasQuestClear(stage.id,state.clearedStages,state.earlyProgress));
++          const unlocked = isQuestStageUnlocked(entry.stages[0].id, state.clearedStages, state.earlyProgress);
+           const last=entry.stages.at(-1)!;const boss=selectRepresentativeBoss(last.waves.at(-1)!);const subject=bossSubject(boss);const bossImage=subject?characterArt(subject,'full'):boss.image;
+-          return <button key={entry.id} disabled={!unlocked || !viewAssets.ready} className="raid-approved-card raid-area-card" onClick={()=>setAreaId(entry.id)}><div className="raid-approved-card__art"><img className="raid-approved-card__background" src={entry.image} alt=""/>{bossImage&&<img className="raid-area-character" src={bossImage} alt=""/>}</div><div className="raid-approved-card__copy"><div className="raid-approved-card__badges"><span>{cleared?'攻略済':unlocked?'攻略中':'未解放'}</span></div><h3>{entry.name}</h3><p className="raid-approved-card__attribute">{boss.name} <small>Lv.{boss.level}</small></p><p className="raid-area-progress">{entry.stages.filter(stage=>state.clearedStages.includes(stage.id)).length}/{entry.stages.length} ステージクリア</p></div></button>;
++          return <button key={entry.id} disabled={!unlocked || !viewAssets.ready} className="raid-approved-card raid-area-card" onClick={()=>setAreaId(entry.id)}><div className="raid-approved-card__art"><img className="raid-approved-card__background" src={entry.image} alt=""/>{bossImage&&<img className="raid-area-character" src={bossImage} alt=""/>}</div><div className="raid-approved-card__copy"><div className="raid-approved-card__badges"><span>{cleared?'攻略済':unlocked?'攻略中':'未解放'}</span></div><h3>{entry.name}</h3><p className="raid-approved-card__attribute">{boss.name} <small>Lv.{boss.level}</small></p><p className="raid-area-progress">{entry.stages.filter(stage=>hasQuestClear(stage.id,state.clearedStages,state.earlyProgress)).length}/{entry.stages.length} ステージクリア</p></div></button>;
+         })}</div></>}
+     </>}
+-    {selected && modal === 'info' && <div className="redesign-quest-dialog"><CanonicalDialog title={`${selectedLabel} ${formalStageName(selected) ?? selected.name}`} onClose={() => setModal(null)} actions={[{ label: '挑戦', semantic: 'primary', onClick: () => setModal('prepare'), disabled: !encounterAssets.ready || !isQuestStageUnlocked(selected.id, state.clearedStages) }]}>
++    {selected && modal === 'info' && <div className="redesign-quest-dialog"><CanonicalDialog title={`${selectedLabel} ${formalStageName(selected) ?? selected.name}`} onClose={() => setModal(null)} actions={[{ label: '挑戦', semantic: 'primary', onClick: () => setModal('prepare'), disabled: !encounterAssets.ready || !isQuestStageUnlocked(selected.id, state.clearedStages, state.earlyProgress) }]}>
+       {!encounterAssets.ready && <p role={encounterAssets.failed ? "alert" : "status"}>{encounterAssets.failed ? <>画像を読み込めませんでした。<button onClick={encounterAssets.retry}>再読み込み</button></> : <LoadingSpinner />}</p>}
+       {encounterAssets.ready && <div className="rq-encounter-hero" style={{ backgroundImage: `linear-gradient(180deg,#2b1c2433,#110c0e77),url("${QUEST_AREAS.find(entry => entry.id === selected.areaId)?.image ?? ''}")` }}><span className="rq-kicker">ステージボス</span>{(() => { const enemy = selectRepresentativeBoss(selected.waves[selected.waves.length - 1]); const subject = bossSubject(enemy); return <article className="rq-boss"><div className="rq-boss-stage">{subject ? <BossDisplay subject={subject} presentation="quest" compact hideCaption className="rq-boss-display" /> : <img className="rq-formal-boss" src={enemy.image} alt={enemyDisplayName(enemy)} />}</div><div className="rq-boss-title"><strong>{enemyRoleLabel(enemy)} {enemyDisplayName(enemy)}</strong><span className="rq-boss-level">Lv.{enemy.level}</span><ElementBadge element={enemy.element} /></div><dl className="rq-boss-stats" aria-label="ステージボスの能力値"><div><dt>HP</dt><dd>{enemy.stats.hp.toLocaleString('ja-JP')}</dd></div><div><dt>ATK</dt><dd>{enemy.stats.atk.toLocaleString('ja-JP')}</dd></div><div><dt>DEF</dt><dd>{enemy.stats.def.toLocaleString('ja-JP')}</dd></div></dl></article>; })()}</div>}
+       <div className="rq-stage-facts"><span><img src="/ui/sengoku/05-crossed-swords.png" alt="" />第1派〜第{selected.waves.length}派</span><span><img src="/ui/sengoku/14-energy.png" alt="" />消費行動力：{questEnergyCost(selected,state)}</span></div>
+--- a/src/app/components/redesign/RedesignApp.tsx
++++ b/src/app/components/redesign/RedesignApp.tsx
+@@ -170,7 +170,7 @@
+     setQuestPreparation(false);
+     if (next.startsWith('raid:')) { setRaidId(next.slice(5)); next = 'raid'; }
+     if (next === 'quest:resume' || next === 'quest') {
+-      setQuestStart(next === 'quest:resume' && data ? nextQuestStage(data.state.clearedStages).id : undefined);
++      setQuestStart(next === 'quest:resume' && data ? nextQuestStage(data.state.clearedStages,data.state.earlyProgress).id : undefined);
+       setQuestNavigation(value => value + 1);
+       next = 'quest';
+     }
+@@ -251,7 +251,6 @@
+     encounterRaid={encounter ? { id: encounter.id, name: raidDisplayLabel(getRoomRaidMaster(encounter), encounter.level), expiresAt: encounter.expiresAt } : null}
+     notifications={<>
+     {state.tutorial&&!state.tutorial.departed&&tab==='home'&&<Modal title="ご案内" hideCloseButton closeDisabled onClose={()=>{}} footer={<button className="rd-button" disabled={busy} onClick={()=>navigate('quest')}>出陣へ</button>}><p>{FIRST_SORTIE_TEXT}</p></Modal>}
+-    {state.tutorial?.defeatPending&&!battle&&!questPlaying&&<Modal title="ご案内" hideCloseButton closeDisabled onClose={()=>{}} footer={<button className="rd-button" disabled={busy} onClick={()=>void action('tutorial_dismiss_defeat').then(()=>game.setShowMissionPanel(true))}>任務へ</button>}><p>{FIRST_DEFEAT_TEXT}</p></Modal>}
+     {!!(state as AcquisitionState).pendingAcquisitions?.length && <p className="rd-panel" role="status">受け取り保留中の獲得物が{(state as AcquisitionState).pendingAcquisitions!.length}件あります。</p>}
+     {error && <p className="rd-panel" role="alert">{error}</p>}
+     {data.pendingBattle && !battle && <div className="rd-panel"><p>未完了の戦闘があります。</p><button className="rd-button" disabled={busy} onClick={async () => {
+--- a/src/app/components/redesign/HomeView.tsx
++++ b/src/app/components/redesign/HomeView.tsx
+@@ -58,7 +58,7 @@
+   const encounterActive = !!encounterRaid && Date.parse(encounterRaid.expiresAt) > now;
+   const claimableMissions = missions.filter(m => m.status === 'claimable').length;
+   function openSelector() { setDraftCharacter(favorite.id); setDraftBackground(background.id); setSaveError(''); setSelector(true); }
+-  const stage = nextQuestStage(state.clearedStages);
++  const stage = nextQuestStage(state.clearedStages,state.earlyProgress);
+   const area = QUEST_AREAS.find(a => a.id === stage.areaId)!;
+   const conversations = buildDirectMessageConversations(game.directMessages ?? [], game.session?.user?.id ?? '', game.dmUnreadConversations ?? []);
+   const activeDm = conversations.find(c => c.userId === game.dmRecipientId);
+@@ -106,7 +106,7 @@
+   async function saveHome() {
+     if (saveLock.current || !dialogImages.ready) return;
+     const choice = HOME_BACKGROUNDS.find(b => b.id === draftBackground);
+-    if (!choice || !isHomeBackgroundUnlocked(choice, state.clearedStages, state.unlockedHomeBackgroundIds) || !ownedCharacters.some(c => c.id === draftCharacter)) return;
++    if (!choice || !isHomeBackgroundUnlocked(choice, state.clearedStages, state.unlockedHomeBackgroundIds,state.earlyProgress) || !ownedCharacters.some(c => c.id === draftCharacter)) return;
+     saveLock.current = true; setSaving(true); setSaveError('');
+     try { await onAction('set_home', { characterId: draftCharacter, backgroundId: draftBackground }); setSelector(false); }
+     catch (error) { setSaveError(error instanceof Error ? error.message : '変更を保存できませんでした'); }
+@@ -152,7 +152,7 @@
+     {selector && <Modal closeDisabled={saving} title="切替" className="g4-home-selector" onClose={() => { if (!saveLock.current) setSelector(false); }} footer={<div className="g4-home-selector-actions"><button className="rd-button" disabled={saving} onClick={() => setSelector(false)}>閉じる</button><button className="rd-button rd-primary" disabled={saving || !dialogImages.ready || !ownedCharacters.some(c => c.id === draftCharacter)} onClick={() => void saveHome()}>{saving ? '保存中…' : '保存'}</button></div>}>
+       {!dialogImages.ready ? <div className="g4-home-loading" role="status">{dialogImages.error ? <><p>画像を読み込めませんでした</p><button className="rd-button" onClick={dialogImages.retry}>再読み込み</button></> : <span className="g4-home-spinner" aria-label="読み込み中" />}</div> : <>
+         <h3>武将</h3><div className="g4-home-character-choices">{ownedCharacters.map(c => <button key={c.id} disabled={saving} aria-pressed={draftCharacter === c.id} className="g4-home-choice" onClick={() => setDraftCharacter(c.id)}><span className="g4-home-choice-art" style={{ backgroundImage: `url(${characterBackground(c) ?? background.image})` }}><img src={characterArt(c, 'card') ?? c.image} alt="" /></span><strong>{c.name}</strong><small>{draftCharacter === c.id ? '選択中' : '\u00a0'}</small></button>)}</div>
+-        <h3>背景</h3><div className="g4-home-background-choices">{HOME_BACKGROUNDS.map(b => { const unlocked = isHomeBackgroundUnlocked(b, state.clearedStages, state.unlockedHomeBackgroundIds); return <button key={b.id} disabled={saving || !unlocked} aria-pressed={draftBackground === b.id} className={`g4-home-choice ${unlocked ? '' : 'is-locked'}`} onClick={() => setDraftBackground(b.id)}><span className="g4-home-background-art"><img src={b.image} alt="" /></span><strong>{b.name}</strong><small>{unlocked ? draftBackground === b.id ? '選択中' : '\u00a0' : b.conditionLabel}</small></button>; })}</div>
++        <h3>背景</h3><div className="g4-home-background-choices">{HOME_BACKGROUNDS.map(b => { const unlocked = isHomeBackgroundUnlocked(b, state.clearedStages, state.unlockedHomeBackgroundIds,state.earlyProgress); return <button key={b.id} disabled={saving || !unlocked} aria-pressed={draftBackground === b.id} className={`g4-home-choice ${unlocked ? '' : 'is-locked'}`} onClick={() => setDraftBackground(b.id)}><span className="g4-home-background-art"><img src={b.image} alt="" /></span><strong>{b.name}</strong><small>{unlocked ? draftBackground === b.id ? '選択中' : '\u00a0' : b.conditionLabel}</small></button>; })}</div>
+       </>}{saveError && <p className="g4-home-error" role="alert">{saveError}</p>}
+     </Modal>}
+     {profileId && <Modal title="プロフィール" onClose={() => setProfileId('')} footer={profileId !== state.userId ? <button className="rd-button" onClick={() => { game.setDmRecipientId(profileId); setProfileId(''); setCommunity('dm'); setExpanded(true); }}>DMを送る</button> : undefined}>

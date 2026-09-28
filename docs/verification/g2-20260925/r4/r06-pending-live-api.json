@@ -1,0 +1,204 @@
+{
+  "scope": "Dedicated QA artificial started checkpoint -> authenticated GAME04 dev v24 API; not natural disconnect or image-failure UI acceptance",
+  "sourceBattleId": "4a51866e-f35b-492a-8b99-7197518ce5b4",
+  "battleId": "3353d3b1-a50a-463e-9aa8-c1e713da1bc6",
+  "userId": "ecd03fa2-b27b-4268-818b-45560c2d2f43",
+  "calls": [
+    {
+      "label": "before",
+      "action": "get_state",
+      "requestId": "1e24e76e-1175-4892-bea2-b508e2ad1c4c",
+      "httpStatus": 200,
+      "elapsedMs": 9625.3,
+      "state": {
+        "userId": "ecd03fa2-b27b-4268-818b-45560c2d2f43",
+        "version": 25,
+        "energy": 99,
+        "cash": 29600,
+        "diamonds": 200,
+        "playerProgress": {
+          "exp": 320,
+          "level": 3,
+          "status": "active",
+          "version": "APPROVED_GROWTH_V1_20260921"
+        },
+        "questAttempts": {
+          "kai-4": 2,
+          "echigo-6": 1
+        },
+        "materials": {
+          "skill": 12,
+          "unlock": 2,
+          "character": 20,
+          "equipment": 20,
+          "equipmentLb": 7
+        }
+      },
+      "pendingBattle": {
+        "id": "3353d3b1-a50a-463e-9aa8-c1e713da1bc6",
+        "kind": "quest",
+        "target_id": "kai-4"
+      },
+      "responseKeys": [
+        "state",
+        "rooms",
+        "socialEvents",
+        "missions",
+        "territory",
+        "pendingBattle"
+      ],
+      "battle": null,
+      "rewards": null,
+      "playerGrowth": null
+    },
+    {
+      "label": "resume",
+      "action": "quest_battle",
+      "requestId": "3353d3b1-a50a-463e-9aa8-c1e713da1bc6",
+      "httpStatus": 200,
+      "elapsedMs": 11623.8,
+      "state": {
+        "userId": "ecd03fa2-b27b-4268-818b-45560c2d2f43",
+        "version": 26,
+        "energy": 99,
+        "cash": 29600,
+        "diamonds": 200,
+        "playerProgress": {
+          "exp": 320,
+          "level": 3,
+          "status": "active",
+          "version": "APPROVED_GROWTH_V1_20260921"
+        },
+        "questAttempts": {
+          "kai-4": 2,
+          "echigo-6": 1
+        },
+        "materials": {
+          "skill": 12,
+          "unlock": 2,
+          "character": 20,
+          "equipment": 20,
+          "equipmentLb": 7
+        }
+      },
+      "pendingBattle": null,
+      "responseKeys": [
+        "state",
+        "rooms",
+        "socialEvents",
+        "missions",
+        "territory",
+        "pendingBattle",
+        "battle",
+        "rewards",
+        "firstClear",
+        "encounterRaidId"
+      ],
+      "battle": {
+        "sha256": "a31f00a3c647ac2a713a778597d68accc4e521b3261881df5de9053a32ef5fe9",
+        "outcome": "lose",
+        "frames": 988,
+        "seed": 1505643650,
+        "rulesVersion": "balance-v2-20260920"
+      },
+      "rewards": [],
+      "playerGrowth": null
+    },
+    {
+      "label": "replay",
+      "action": "quest_battle",
+      "requestId": "3353d3b1-a50a-463e-9aa8-c1e713da1bc6",
+      "httpStatus": 200,
+      "elapsedMs": 9879.4,
+      "state": {
+        "userId": "ecd03fa2-b27b-4268-818b-45560c2d2f43",
+        "version": 26,
+        "energy": 99,
+        "cash": 29600,
+        "diamonds": 200,
+        "playerProgress": {
+          "exp": 320,
+          "level": 3,
+          "status": "active",
+          "version": "APPROVED_GROWTH_V1_20260921"
+        },
+        "questAttempts": {
+          "kai-4": 2,
+          "echigo-6": 1
+        },
+        "materials": {
+          "skill": 12,
+          "unlock": 2,
+          "character": 20,
+          "equipment": 20,
+          "equipmentLb": 7
+        }
+      },
+      "pendingBattle": null,
+      "responseKeys": [
+        "state",
+        "rooms",
+        "socialEvents",
+        "missions",
+        "territory",
+        "pendingBattle",
+        "battle",
+        "rewards",
+        "firstClear",
+        "encounterRaidId"
+      ],
+      "battle": {
+        "sha256": "a31f00a3c647ac2a713a778597d68accc4e521b3261881df5de9053a32ef5fe9",
+        "outcome": "lose",
+        "frames": 988,
+        "seed": 1505643650,
+        "rulesVersion": "balance-v2-20260920"
+      },
+      "rewards": [],
+      "playerGrowth": null
+    },
+    {
+      "label": "reload",
+      "action": "get_state",
+      "requestId": "f470b31e-5eba-4cd1-94e6-c34347bd8e10",
+      "httpStatus": 200,
+      "elapsedMs": 8846.0,
+      "state": {
+        "userId": "ecd03fa2-b27b-4268-818b-45560c2d2f43",
+        "version": 26,
+        "energy": 99,
+        "cash": 29600,
+        "diamonds": 200,
+        "playerProgress": {
+          "exp": 320,
+          "level": 3,
+          "status": "active",
+          "version": "APPROVED_GROWTH_V1_20260921"
+        },
+        "questAttempts": {
+          "kai-4": 2,
+          "echigo-6": 1
+        },
+        "materials": {
+          "skill": 12,
+          "unlock": 2,
+          "character": 20,
+          "equipment": 20,
+          "equipmentLb": 7
+        }
+      },
+      "pendingBattle": null,
+      "responseKeys": [
+        "state",
+        "rooms",
+        "socialEvents",
+        "missions",
+        "territory",
+        "pendingBattle"
+      ],
+      "battle": null,
+      "rewards": null,
+      "playerGrowth": null
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+const fs=require('node:fs'),assert=require('node:assert/strict'),ts=require('typescript');
+require.extensions['.ts']=(module,name)=>module._compile(ts.transpileModule(fs.readFileSync(name,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true}}).outputText,name);
+const base='../src/domain/redesign/',g=require(base+'growth.ts'),m=require(base+'masters.ts'),gm=require(base+'growthMaster.ts'),f=require(base+'formalGrowthMasters.ts'),r=require(base+'growthResult.ts');
+const s=m.createInitialState('character-domain-qa');
+s.deck=s.deck.slice(0,3);s.growthInventory=gm.emptyGrowthInventory();s.cash=10000000;
+assert.equal(g.getUnlockedDeckSlots(s),3);
+s.clearedStages=['mikawa-1'];assert.equal(g.getUnlockedDeckSlots(s),4);
+s.clearedStages=['mikawa-2'];assert.equal(g.getUnlockedDeckSlots(s),5);
+s.clearedStages=[];g.validateDeck(s,s.deck);
+assert.throws(()=>g.validateDeck(s,[]));assert.throws(()=>g.validateDeck(s,Array(6).fill(s.deck[0])));
+const eq=m.EQUIPMENT_MASTERS[0];s.equipment=[{instanceId:'proof-equipment',masterId:eq.id,level:1,lb:0,exp:0,growthVersion:gm.GROWTH_VERSION}];
+const locked=g.applyGrowthAction(s,'equipment_lock',{instanceId:'proof-equipment',locked:true});
+assert.equal(locked.equipment[0].locked,true);assert.equal(s.equipment[0].locked,undefined);
+assert.throws(()=>g.applyGrowthAction(locked,'equipment_dismantle',{instanceIds:['proof-equipment']}));
+assert.throws(()=>g.applyGrowthAction(s,'equipment_lock',{instanceId:'proof-equipment',locked:'true'}));
+const assigned=structuredClone(s);assigned.deck[0].equipment[eq.slot]='proof-equipment';
+assert.throws(()=>g.applyGrowthAction(assigned,'equipment_dismantle',{instanceIds:['proof-equipment']}));
+const id=s.characters[0].id;s.souls[id]=20;
+assert.throws(()=>g.applyGrowthAction(s,'soul_exchange',{characterId:id,amount:8}));
+assert.throws(()=>g.applyGrowthAction(s,'soul_exchange',{characterId:id,amount:11}));
+const exchanged=g.applyGrowthAction(s,'soul_exchange',{characterId:id,amount:10});
+assert.equal(exchanged.souls[id],10);assert.equal(s.souls[id],20);
+const rows=r.getGrowthResult(s,exchanged,'soul_exchange',{characterId:id}).rows;
+assert.ok(rows.some(x=>x.label==='固有魂'&&x.before===20&&x.after===10));
+assert.ok(rows.some(x=>x.label==='汎用魂'&&x.before===0&&x.after===5));
+assert.equal(r.getGrowthResult(s,s,'character_level',{characterId:id}).changed,false);
+assert.equal(f.FORMAL_GROWTH_EQUIPMENT_MASTERS.length,160);
+for(const e of f.FORMAL_GROWTH_EQUIPMENT_MASTERS){
+ const low=f.getFormalEquipmentStats(e.id,1),high=f.getFormalEquipmentStats(e.id,100);
+ for(const stat of ['hp','atk','def','luk']) assert.ok(Math.abs(low[stat]-high[stat]*.03)<1e-8);
+ assert.equal(low.sp,0);
+}
+assert.deepEqual(m.getEquipmentStats(eq,50,0),m.getEquipmentStats(eq,50,10));
+console.log('PASS: 枠3/4/5・最大5・保護/装備中分解拒否・魂交換最低10/偶数・実結果差分・正式装備160/成長曲線/LB倍率なし');

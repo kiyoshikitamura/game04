@@ -1,0 +1,8 @@
+/* Shared compact asset rows; artwork remains recognizable and names wrap naturally. */
+body.game04-theme .g4-asset-list{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}
+body.game04-theme .g4-asset-list>button:not(.g4-action),body.game04-theme .g4-asset-list>div>button:not(.g4-action){display:grid;grid-template-columns:var(--g4-asset-list-icon,48px) minmax(0,1fr);align-items:center;gap:3px 10px;padding:6px 8px;text-align:left;min-height:68px;width:100%}
+body.game04-theme .g4-growth .g4-asset-list>button:not(.g4-action)>img,body.game04-theme .g4-asset-list>div>button>img{width:var(--g4-asset-list-icon,48px)!important;height:var(--g4-asset-list-icon,48px)!important;grid-row:1/5;object-fit:contain;aspect-ratio:auto}
+body.game04-theme .g4-asset-list>button:not(.g4-action)>b,body.game04-theme .g4-asset-list>div>button>b{grid-column:2;font-size:var(--g4-name-font,16px);border:0;padding:0;white-space:normal;word-break:normal;overflow-wrap:break-word}
+body.game04-theme .g4-asset-list>button>span,body.game04-theme .g4-asset-list>button>small,body.game04-theme .g4-asset-list>div>button>span,body.game04-theme .g4-asset-list>div>button>small{grid-column:2;font-size:var(--g4-detail-font,14px)}
+
+body.game04-theme .g4-asset-list>button>.g4-asset-icon{grid-column:1;grid-row:1/5;width:var(--g4-asset-list-icon,48px);height:var(--g4-asset-list-icon,48px)}

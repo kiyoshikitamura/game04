@@ -1,0 +1,125 @@
+- main:
+  - heading "G2 限定復帰検証" [level=1]
+  - paragraph: read障害は実本体＋SDKに対するQA応答注入。認証・保存・戦闘POSTは通常通信。画像戦闘は保存・報酬なしのfixtureで、実戦DB受入とは別です。
+  - group "読み取り障害":
+    - generic: 読み取り障害
+    - text: 対象
+    - combobox "対象":
+      - option "お知らせ" [selected]
+      - option "活動"
+      - option "補助プロフィール"
+    - text: 障害
+    - combobox "障害":
+      - option "通常" [selected]
+      - option "503"
+      - option "無応答（本体12秒中断）"
+    - button "実本体を表示"
+  - group "画像HTTP障害（非VIP fixture）":
+    - generic: 画像HTTP障害（非VIP fixture）
+    - button "画像503"
+    - button "画像15秒無応答"
+    - button "画像障害を解除"
+    - button "画像503を1回だけ"
+    - button "画像無応答を1回だけ"
+    - button "fixture戦闘を表示" [disabled]
+    - status "画像失敗終了回数": 終了回数：0
+  - generic "障害注入記録": image error-once
+  - region "合戦":
+    - img "戦国姫艶武"
+    - strong: WAVE 1/1
+    - button "再生速度 1倍": ▶▶ ×1
+    - button "再開": ▶
+    - button "検証敵 1の戦闘詳細":
+      - img "土"
+      - generic: Lv.1
+      - text: 検証敵 1
+      - text: 5,500
+      - generic: / 5,500
+      - text: あと
+      - generic: "4"
+    - generic "検証敵 1の状態"
+    - button "検証敵 2の戦闘詳細":
+      - img "水"
+      - generic: Lv.1
+      - text: 検証敵 2
+      - text: 3,000
+      - generic: / 3,000
+      - text: あと
+      - generic: "5"
+    - generic "検証敵 2の状態"
+    - button "検証敵 3の戦闘詳細":
+      - img "水"
+      - generic: Lv.1
+      - text: 検証敵 3
+      - text: 3,000
+      - generic: / 3,000
+      - text: あと
+      - generic: "6"
+    - generic "検証敵 3の状態"
+    - generic: 合戦開始：共通SP 0/400・バーストゲージ 0/200
+    - generic: 共通SP
+    - meter "共通SP":
+      - strong: 0 / 400
+    - generic "BURSTは戦闘記録に従って自動発動します":
+      - text: BURST
+      - generic: 0/200
+    - meter "バーストゲージ"
+    - generic: "1"
+    - button "豊臣秀吉の戦闘詳細":
+      - generic: 豊臣秀吉
+      - generic: Lv.50
+      - generic: 1,800
+      - generic: / 1,800
+    - generic "豊臣秀吉の状態"
+    - button "優先1 【検証仮称】標準単体攻撃・水：SP不足":
+      - generic: SP
+    - button "優先2 【検証仮称】標準単体攻撃・火：SP不足":
+      - generic: SP
+    - button "優先3 【検証仮称】毒刃：SP不足":
+      - generic: SP
+    - generic: "2"
+    - button "お市の方の戦闘詳細":
+      - generic: お市の方
+      - generic: Lv.50
+      - generic: 1,800
+      - generic: / 1,800
+    - generic "お市の方の状態"
+    - button "優先1 【検証仮称】全体攻撃・火：SP不足":
+      - generic: SP
+    - button "優先2 【検証仮称】鎧砕き：SP不足":
+      - generic: SP
+    - generic: "3"
+    - button "井伊直虎の戦闘詳細":
+      - generic: 井伊直虎
+      - generic: Lv.50
+      - generic: 1,800
+      - generic: / 1,800
+    - generic "井伊直虎の状態"
+    - button "優先1 【検証仮称】応急手当：条件未達":
+    - button "優先2 【検証仮称】再生の祈り：条件未達":
+    - generic: "4"
+    - button "上杉景勝の戦闘詳細":
+      - generic: 上杉景勝
+      - generic: Lv.50
+      - generic: 1,800
+      - generic: / 1,800
+    - generic "上杉景勝の状態"
+    - button "優先1 【検証仮称】護身障壁：SP不足":
+      - generic: SP
+    - button "優先2 【検証仮称】迎撃の構え：SP不足":
+      - generic: SP
+    - generic: "5"
+    - button "井伊直政の戦闘詳細":
+      - generic: 井伊直政
+      - generic: Lv.50
+      - generic: 1,800
+      - generic: / 1,800
+    - generic "井伊直政の状態"
+    - button "優先1 【検証仮称】大祓い：条件未達":
+    - button "優先2 【検証仮称】影縫い：SP不足":
+      - generic: SP
+    - paragraph:
+      - text: 残り味方行動機会
+      - strong: "300"
+      - text: / 300
+- alert

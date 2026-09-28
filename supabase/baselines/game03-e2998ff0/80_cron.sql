@@ -1,0 +1,10 @@
+SET check_function_bodies = false;
+SET search_path = public, extensions, pg_catalog;
+SELECT cron.schedule('anonymous-onboarding-cleanup-daily','0 18 * * *','select public.cleanup_expired_anonymous_onboarding();');
+SELECT cron.schedule('daily-ranking-reward-finalize-jst-midnight','0 15 * * *','select public.finalize_daily_ranking_rewards();');
+SELECT cron.schedule('ranking-pvp-monthly-jst','0 15 * * *','select public.advance_ranking_season(''PVP'',clock_timestamp());');
+SELECT cron.schedule('ranking-raid-weekly-jst','0 15 * * 0','select public.advance_ranking_season(''RAID'',clock_timestamp());');
+SELECT cron.schedule('kpi-overview-saved-results-half-hourly','7,37 * * * *','set statement_timeout=''120s''; select public.refresh_kpi_overview_saved_results();');
+SELECT cron.schedule('raid-room-expiry-minute','* * * * *','select public.finalize_expired_raid_rooms_v1(100);');
+SELECT cron.schedule('raid-daily-room-start','*/5 * * * *','select public.ensure_daily_raid_rooms_v1();');
+SELECT cron.schedule('ranking-power-monthly-finalize-v1','*/5 * * * *','select public.advance_monthly_power_seasons_v1();');

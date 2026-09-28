@@ -1,0 +1,138 @@
+- alert
+- region "ゲーム画面":
+  - img "くノ一"
+  - generic: Lv.1
+  - strong: G2QA独立E
+  - generic "将来の同盟表示枠": ◇ 同盟 —
+  - button "アカウント連携": 未認証
+  - button "メニュー"
+  - generic: 銭 3,040
+  - generic: 輝石 0
+  - generic: 行動力 50/50
+  - main:
+    - region "領土侵攻":
+      - heading "領土侵攻" [level=1]
+      - region "侵攻主催者の成長":
+        - strong: 侵攻Lv. 1
+        - progressbar "主催者EXP"
+        - generic: 0 / 100
+        - paragraph:
+          - text: 開催枠
+          - generic: 0 / 1
+      - heading "◇ 侵攻先" [level=2]
+      - article:
+        - heading "岡崎城" [level=2]
+        - generic: 条件未達
+        - img "柴田勝家"
+        - img "土属性"
+        - strong: 柴田勝家
+        - generic: 開始 · 敵Lv.35
+        - list:
+          - listitem "銭 ×20,000":
+            - generic: 銭 ×20,000
+          - listitem "スキルLB素材 ×6":
+            - generic: スキルLB素材 ×6
+          - listitem "装備LB素材 ×6":
+            - generic: 装備LB素材 ×6
+        - paragraph:
+          - text: 必要侵攻Lv.
+          - generic: "1"
+          - generic: 期間 3日
+          - generic: 侵攻令 1 / 必要 1
+        - button "詳細を見る":
+          - text: 詳細を見る
+          - generic: ›
+      - article:
+        - heading "長浜城" [level=2]
+        - generic: 侵攻Lv.2で解放
+        - img "柴田勝家"
+        - img "土属性"
+        - strong: 柴田勝家
+        - generic: 開始 · 敵Lv.50
+        - list:
+          - listitem "銭 ×40,000":
+            - generic: 銭 ×40,000
+          - listitem "スキルLB素材 ×12":
+            - generic: スキルLB素材 ×12
+          - listitem "装備LB素材 ×12":
+            - generic: 装備LB素材 ×12
+        - paragraph:
+          - text: 必要侵攻Lv.
+          - generic: "2"
+          - generic: 期間 3日
+          - generic: 侵攻令 1 / 必要 1
+        - button "詳細を見る":
+          - text: 詳細を見る
+          - generic: ›
+      - article:
+        - heading "春日山城" [level=2]
+        - generic: 侵攻Lv.4で解放
+        - img "柴田勝家"
+        - img "土属性"
+        - strong: 柴田勝家
+        - generic: 開始 · 敵Lv.65
+        - list:
+          - listitem "銭 ×60,000":
+            - generic: 銭 ×60,000
+          - listitem "スキルLB素材 ×18":
+            - generic: スキルLB素材 ×18
+          - listitem "装備LB素材 ×18":
+            - generic: 装備LB素材 ×18
+        - paragraph:
+          - text: 必要侵攻Lv.
+          - generic: "4"
+          - generic: 期間 3日
+          - generic: 侵攻令 1 / 必要 1
+        - button "詳細を見る":
+          - text: 詳細を見る
+          - generic: ›
+      - article:
+        - heading "躑躅ヶ崎館" [level=2]
+        - generic: 侵攻Lv.6で解放
+        - img "柴田勝家"
+        - img "土属性"
+        - strong: 柴田勝家
+        - generic: 開始 · 敵Lv.80
+        - list:
+          - listitem "銭 ×80,000":
+            - generic: 銭 ×80,000
+          - listitem "スキルLB素材 ×24":
+            - generic: スキルLB素材 ×24
+          - listitem "装備LB素材 ×24":
+            - generic: 装備LB素材 ×24
+        - paragraph:
+          - text: 必要侵攻Lv.
+          - generic: "6"
+          - generic: 期間 3日
+          - generic: 侵攻令 1 / 必要 1
+        - button "詳細を見る":
+          - text: 詳細を見る
+          - generic: ›
+      - article:
+        - heading "安土城" [level=2]
+        - generic: 侵攻Lv.8で解放
+        - img "柴田勝家"
+        - img "土属性"
+        - strong: 柴田勝家
+        - generic: 開始 · 敵Lv.90
+        - list:
+          - listitem "銭 ×100,000":
+            - generic: 銭 ×100,000
+          - listitem "スキルLB素材 ×30":
+            - generic: スキルLB素材 ×30
+          - listitem "装備LB素材 ×30":
+            - generic: 装備LB素材 ×30
+        - paragraph:
+          - text: 必要侵攻Lv.
+          - generic: "8"
+          - generic: 期間 3日
+          - generic: 侵攻令 1 / 必要 1
+        - button "詳細を見る":
+          - text: 詳細を見る
+          - generic: ›
+  - navigation "メインナビゲーション":
+    - button "本陣"
+    - button "出陣"
+    - button "武将"
+    - button "共闘"
+    - button "召喚"

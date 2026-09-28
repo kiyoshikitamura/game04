@@ -1,0 +1,41 @@
+/** Local domain contract; SQL execution/API/browser acceptance must be verified separately. */
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {createRequire} from 'node:module';
+const require=createRequire(import.meta.url),ts=require('typescript');
+require.extensions['.ts']=(m,f)=>m._compile(ts.transpileModule(fs.readFileSync(f,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true}}).outputText,f);
+const {TERRITORY_MASTER,withFormalTerritoryRaids,TERRITORY_HOST_POLICY_VERSION,TERRITORY_UNLOCK_STAGE_ID,isTerritoryUnlocked,territoryLevel,projectTerritory,createTerritorySnapshot,activeTerritoryCount,validateTerritoryMaster}=require('../src/domain/redesign/territory.ts');
+const {createRaidRoom,getRoomRaidMaster,applyRaidAction}=require('../src/domain/redesign/raid.ts');
+const {createInitialState}=require('../src/domain/redesign/masters.ts');
+const {FORMAL_QUEST_STAGES}=require('../src/domain/redesign/questMaster.ts');
+const source=fs.readFileSync(new URL('../docs/product/master_sources_20260921/numeric.md',import.meta.url),'utf8');
+const hostSection=source.split('|主催者Lv|累計必要EXP|次Lv必要EXP|新規主催解放|')[1];assert.ok(hostSection);
+const expectedLevels=hostSection.split('\n').filter(l=>/^\|\d+\|/.test(l)).slice(0,10).map(l=>{const r=l.split('|');return {level:Number(r[1]),requiredExp:Number(r[2]),hostingSlots:1};});
+const original=structuredClone(TERRITORY_MASTER),master=withFormalTerritoryRaids(original);validateTerritoryMaster(master);assert.deepEqual(original,TERRITORY_MASTER,'projection cannot mutate the existing master');
+assert.equal(master.version,TERRITORY_HOST_POLICY_VERSION);assert.equal(master.status,'PREVIEW_PROVISIONAL');assert.equal(master.levelCap,10);assert.deepEqual(master.levels,expectedLevels);assert.equal(master.initialExp,0);assert.equal(master.legacyMigrationExp,0);
+for(const row of expectedLevels){assert.equal(territoryLevel(master,row.requiredExp),row.level);if(row.level>1)assert.equal(territoryLevel(master,row.requiredExp-1),row.level-1);}
+assert.equal(territoryLevel(master,999999),10);const cap=projectTerritory(master,{experience:999999,unlocked:true},{raid_unlock:1},0);assert.equal(cap.experience,999999);assert.equal(cap.nextLevelExp,null);assert.equal(cap.hostingSlots,1);
+assert.equal(TERRITORY_UNLOCK_STAGE_ID,'mino-5');assert.equal(FORMAL_QUEST_STAGES.find(s=>s.id==='mino-5').designId,'3-5');
+assert.equal(isTerritoryUnlocked({clearedStages:['mino-4']}),false);assert.equal(isTerritoryUnlocked({clearedStages:['mino-5']}),true);assert.equal(isTerritoryUnlocked({clearedStages:['3-5']}),false,'display ID must not masquerade as persisted stage ID');
+const expectedCastles=[['TI01','岡崎城',1,100],['TI02','長浜城',2,150],['TI03','春日山城',4,250],['TI04','躑躅ヶ崎館',6,400],['TI05','安土城',8,600]];
+assert.deepEqual(master.destinations.map(d=>[d.raidMasterId,d.castle,d.requiredLevel,d.clearExp]),expectedCastles);
+for(const d of master.destinations){assert.equal(d.itemId,'raid_unlock');assert.equal(d.itemCount,1);assert.equal(d.durationMinutes,4320);assert.equal(d.unavailableReason,undefined);assert.equal(master.raidMasters.find(r=>r.id===d.raidMasterId).playerExp,0);const xp=expectedLevels[d.requiredLevel-1].requiredExp;
+ const projected=projectTerritory(master,{experience:xp,unlocked:true},{raid_unlock:1},0).destinations.find(x=>x.id===d.id);assert.equal(projected.canHost,true,d.castle);
+ if(xp>0)assert.equal(projectTerritory(master,{experience:xp-1,unlocked:true},{raid_unlock:1},0).destinations.find(x=>x.id===d.id).canHost,false);
+}
+for(const unlocked of [false,undefined])assert.ok(projectTerritory(master,{experience:999999,unlocked},{raid_unlock:100},0).destinations.every(d=>!d.canHost&&d.reasons.some(x=>x.includes('3-5'))));
+assert.ok(projectTerritory(master,{experience:999999,unlocked:true},{raid_unlock:0},0).destinations.every(d=>!d.canHost));
+assert.ok(projectTerritory(master,{experience:999999,unlocked:true},{raid_unlock:100},1).destinations.every(d=>!d.canHost&&d.reasons.some(x=>x.includes('同時開催'))));
+console.log('PASS host policy: adopted 10-level cumulative table, all level boundaries/cap, five castle thresholds/EXP, mino-5 unlock, one order/one hosting slot');
+const now=Date.parse('2026-09-23T12:00:00Z'),destination=master.destinations[0],snapshot=createTerritorySnapshot(master,destination.id);
+const room=createRaidRoom(snapshot.raidMaster.id,'owner','policy-snapshot',now,snapshot),saved=JSON.stringify(room);
+master.destinations[0].clearExp=9999;master.destinations[0].durationMinutes=1;master.raidMasters.find(m=>m.id==='TI01').stages[0].sharedHp=1;master.battleRules.defenseFactor=99;
+assert.equal(JSON.stringify(room),saved);const reloaded=JSON.parse(saved);assert.equal(reloaded.territorySnapshot.destination.clearExp,100);assert.equal(reloaded.territorySnapshot.destination.durationMinutes,4320);assert.equal(getRoomRaidMaster(reloaded).masterVersion,snapshot.raidMaster.masterVersion);
+assert.equal(activeTerritoryCount('owner',[reloaded],now),1);assert.equal(activeTerritoryCount('helper',[reloaded],now),0);assert.equal(activeTerritoryCount('owner',[{...reloaded,status:'expired'}],now),0);
+const state=createInitialState('owner');state.playerProgress={version:'test',level:2,exp:17,status:'active'};state.energy=13;
+const final=structuredClone(reloaded);final.level=12;final.hp=1;final.participants[0].wins=2;
+const payload={battleId:'policy-final',battleLevel:12,energyAlreadyPaid:true,result:{outcome:'win',totalDamage:10}};
+const settled=applyRaidAction(final,state,'raid_battle',payload,now);assert.equal(settled.room.status,'defeated');assert.equal(settled.room.participants[0].wins,3);assert.equal(settled.room.rewardGrants.length,1);assert.deepEqual(settled.state.playerProgress,state.playerProgress);assert.equal(settled.state.energy,13,'hosting progression cannot restore player energy');
+const replay=applyRaidAction(settled.room,settled.state,'raid_battle',payload,now);assert.deepEqual(replay.room,settled.room);assert.deepEqual(replay.state,settled.state);
+console.log('PASS snapshot and separation: saved room retains clear EXP/duration/battle master, player EXP and energy untouched by invasion settlement, final third win and replay');
+console.log('LIMIT: dedicated hosting EXP grant/ledger is implemented in SQL, not this domain. Requires DB transaction verification; no live API/browser acceptance is claimed.');

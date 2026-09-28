@@ -1,0 +1,24 @@
+.inbox-panel-container-inner{display:flex;flex-direction:column;min-width:0;gap:12px}
+.inbox-panel-container-inner>*{flex-shrink:0}
+.inbox-panel-pending{cursor:wait}
+.inbox-empty{padding:24px 0;text-align:center;color:var(--g4-muted);font-size:16px}
+.inbox-news-list,.inbox-presents-list{display:flex;flex-direction:column;gap:8px}
+.inbox-news-item,.inbox-present-item{width:100%;min-width:0;background:var(--g4-panel);border:1px solid var(--g4-rule-border);border-radius:var(--g4-radius,4px);padding:12px;color:var(--g4-text)}
+.inbox-news-item{text-align:left;font:inherit;cursor:pointer}
+.inbox-news-item-header{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.news-badge{font-size:14px;font-weight:600;padding:2px 6px;border-radius:4px;background:var(--g4-primary);color:var(--g4-text)}
+.news-date{font-size:14px;color:var(--g4-muted);margin-left:auto;overflow-wrap:anywhere}
+.inbox-news-item-title,.inbox-present-title{font-size:16px;font-weight:600;line-height:1.4;overflow-wrap:anywhere}
+.inbox-presents-actions{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px}
+.inbox-presents-count{font-size:14px;color:var(--g4-muted)}
+.inbox-present-item{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px}
+.inbox-present-info{min-width:0}
+.inbox-present-title{margin-bottom:8px}
+.inbox-present-reward{font-size:16px;color:var(--g4-text);display:flex;align-items:center;gap:8px;min-width:0;overflow-wrap:anywhere}
+.inbox-present-reward-icon{width:32px;height:32px;flex:none;object-fit:contain}
+.inbox-present-reward>span{min-width:0}
+.inbox-present-reward strong{font-weight:600;white-space:nowrap}
+.inbox-present-expire{font-size:14px;color:var(--g4-muted);margin-top:4px;overflow-wrap:anywhere}
+.inbox-news-modal-text{font-size:16px;color:var(--g4-text);line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+.inbox-news-item:focus-visible{outline:2px solid var(--g4-gold);outline-offset:2px}
+.inbox-news-error{color:var(--g4-text)}

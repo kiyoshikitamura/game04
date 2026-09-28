@@ -1,0 +1,80 @@
+- iframe [active]:
+  - alert: 戦国姫艶武｜dev
+  - region "ゲーム画面":
+    - main:
+      - region "1-1":
+        - img "戦国姫艶武"
+        - strong: WAVE 1/1
+        - button "再生速度 1倍": ▶▶ ×1
+        - button "再開": ▶
+        - button "女侍の戦闘詳細":
+          - img "土"
+          - generic: Lv.1
+          - text: 女侍
+          - text: "0"
+          - generic: / 650
+          - generic: 撃破
+        - generic "女侍の状態"
+        - button "漁師の戦闘詳細":
+          - img "水"
+          - generic: Lv.1
+          - text: 漁師
+          - text: "414"
+          - generic: / 450
+          - text: あと
+          - generic: "4"
+        - generic "漁師の状態"
+        - generic: くノ一 · 通常攻撃 SP −0
+        - generic: 共通SP
+        - meter "共通SP":
+          - strong: 209 / 400
+        - generic "BURSTは戦闘記録に従って自動発動します":
+          - text: BURST
+          - generic: 21/200
+        - meter "バーストゲージ"
+        - generic: "1"
+        - generic: 行動中
+        - button "くノ一の戦闘詳細":
+          - generic: くノ一
+          - generic: Lv.3
+          - generic: "673"
+          - generic: / 675
+        - generic "くノ一の状態":
+          - button "防↑ 残り1回":
+            - generic: "1"
+        - button "優先1 大祓い：条件未達":
+        - generic: "2"
+        - button "伝令の戦闘詳細":
+          - generic: 伝令
+          - generic: Lv.1
+          - generic: "705"
+          - generic: / 705
+        - generic "伝令の状態":
+          - button "防↑ 残り1回":
+            - generic: "1"
+        - button "優先1 竹束の守り：発動可能"
+        - generic: "3"
+        - button "僧兵の戦闘詳細":
+          - generic: 僧兵
+          - generic: Lv.1
+          - generic: "882"
+          - generic: / 882
+        - generic "僧兵の状態"
+        - button "優先1 薬師の手当：条件未達"
+        - paragraph:
+          - text: 残り味方行動機会
+          - strong: "287"
+          - text: / 300
+        - dialog "戦闘詳細":
+          - button "閉じる" [active]
+          - heading "くノ一" [level=2]
+          - paragraph: HP 673 / 675
+          - heading "スキル発動優先順" [level=3]
+          - paragraph:
+            - strong: 優先1：大祓い
+            - text: （SP 139）
+            - text: 常時（対象・効果の付与可否も判定）
+            - text: 味方全体・1人でも該当状態あり・能力低下解除件数:1.00件／継続ダメージ解除件数:1.00件
+          - heading "状態" [level=3]
+          - paragraph: 防↑ 20% · 残り1回 · 付与元 竹束の守り
+- alert

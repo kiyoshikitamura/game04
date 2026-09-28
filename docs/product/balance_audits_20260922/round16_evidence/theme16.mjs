@@ -1,0 +1,12 @@
+import fs from 'node:fs';import{run}from './round16-helper.mjs';import{unit,skill}from './model.mjs';
+const read=p=>JSON.parse(fs.readFileSync(p)),base=read('battle-check/round16-results.json').results,data=read('battle-check/data.json').chars,fx=read('outputs/GAME04_ACCEPTANCE_FIXTURES_V1.json').fixtures;
+const copy=structuredClone;let results=[];
+function mono(p,element){const used=new Set();return p.map(u=>{const c=data[u.name],candidates=Object.entries(data).filter(([n,d])=>!used.has(n)&&d.rarity===c.rarity&&d.element===element).sort(([n,d],[m,e])=>(d.role===c.role?0:1)-(e.role===c.role?0:1)||n.localeCompare(m));if(!candidates.length)throw Error('No mono '+u.name+element);const name=candidates[0][0];used.add(name);const aw=Math.max(0,Math.ceil((u.level-50)/10)),old=unit(u.name,u.level,aw),v=unit(name,u.level,aw);for(const k of ['hp','atk','def','luk'])v.stats[k]+=u.stats[k]-old.stats[k];v.skills=copy(u.skills);return v;});}
+const add=(b,mode,p,note)=>{const runs=run(p,b.waves,15001,60);results.push({id:b.id,mode,note,party:p,waves:b.waves,runs});console.log(b.id,mode,runs.filter(x=>x.win).length);};
+for(const id of ['5-1','5-2','5-4','5-5','5-6','10-5']){const b=base.find(x=>x.id===id),p=b.cases[0].party;add(b,'mixed',p,'既存の混成キャラ・スキル');for(const el of ['水','風']){try{add(b,'mono_'+el,mono(p,el),'実キャラで同レア数・同Lv・同装備・同スキル。キャラ固有差とパッシブも変わる編成全体の比較');}catch(e){if(!e.message.startsWith('No mono'))throw e;results.push({id,mode:'mono_'+el,unavailable:e.message});}}if(id==='5-5'){let q=copy(p);[q[0],q[1]]=[q[1],q[0]];add(b,'front_swap',q,'前衛の受け役を交代。属性・本体・パッシブの合成差');}}
+for(const id of ['6-6','7-7','9-9']){const b=base.find(x=>x.id===id),p=copy(b.cases[0].party),f=fx.find(x=>x.id===b.fixture),lb=f.members[0].skills[0]?.lb??0;let focus;
+ if(id==='6-6'){[p[0].skills,p[4].skills]=[p[4].skills,p[0].skills];focus=['SKD070','SKD053','SKD055'];}
+ if(id==='7-7'){for(const u of p)u.skills=u.skills.map(s=>s.id==='SKD051'?skill('SKD052',lb):s);focus=['SKD052'];}
+ if(id==='9-9'){p[1].skills=[skill('SKD055',lb)];focus=['SKD032','SKD055'];}
+ add(b,'theme_corrected',p,'対応する解除対象・行動順・空き枠を修正。正式スキル値は変更しない');let q=copy(p);for(const u of q)u.skills=u.skills.filter(s=>!focus.includes(s.id));add(b,'omit',q,'対応する対策一式を除去');q=copy(p);for(const u of q)u.skills=u.skills.map(s=>focus.includes(s.id)?skill('SKD008',lb):s);add(b,'direct',q,'対策枠を標準水攻撃へ置換');}
+fs.writeFileSync('battle-check/theme16-results.json',JSON.stringify({status:'INPUT_COMPARISON_NOT_FIX',seedRange:[15001,15060],results}));

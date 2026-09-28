@@ -1,0 +1,107 @@
+- iframe [active]:
+  - alert: 戦国姫艶武｜dev
+  - region "ゲーム画面":
+    - img "くノ一"
+    - generic: Lv.1
+    - strong: G2QA終E
+    - generic "将来の同盟表示枠": ◇ 同盟 —
+    - button "アカウント連携": 未認証
+    - button "メニュー"
+    - generic: 銭 5,040
+    - generic: 輝石 200
+    - generic: 行動力 50/100
+    - main:
+      - navigation "育成":
+        - button "デッキ"
+        - button "編成"
+        - button "武将"
+        - button "スキル" [pressed]
+        - button "装備"
+      - text: 絞り込み
+      - combobox "絞り込み":
+        - option "すべて" [selected]
+        - option "N"
+        - option "R"
+        - option "SR"
+        - option "SSR"
+        - option "火"
+        - option "水"
+        - option "土"
+        - option "風"
+        - option "光"
+        - option "闇"
+      - text: 並び替え
+      - combobox "並び替え":
+        - option "LB" [selected]
+        - option "レアリティ"
+        - option "名前"
+        - option "属性"
+        - option "消費SP"
+      - button "大祓い 大祓い SSR・光 LB+1 消費SP 139":
+        - img "大祓い"
+        - generic: 大祓い
+        - generic: SSR・光 LB+1
+        - generic: 消費SP 139
+      - button "一文字斬り 一文字斬り N・火 LB+0 消費SP 24":
+        - img "一文字斬り"
+        - generic: 一文字斬り
+        - generic: N・火 LB+0
+        - generic: 消費SP 24
+      - button "竹束の守り 竹束の守り N・水 LB+0 消費SP 32":
+        - img "竹束の守り"
+        - generic: 竹束の守り
+        - generic: N・水 LB+0
+        - generic: 消費SP 32
+      - button "薬師の手当 薬師の手当 N・土 LB+0 消費SP 40":
+        - img "薬師の手当"
+        - generic: 薬師の手当
+        - generic: N・土 LB+0
+        - generic: 消費SP 40
+      - button "疾風の足運び 疾風の足運び N・風 LB+0 消費SP 48":
+        - img "疾風の足運び"
+        - generic: 疾風の足運び
+        - generic: N・風 LB+0
+        - generic: 消費SP 48
+      - button "忍法・毒針 忍法・毒針 N・光 LB+0 消費SP 24":
+        - img "忍法・毒針"
+        - generic: 忍法・毒針
+        - generic: N・光 LB+0
+        - generic: 消費SP 24
+      - button "鉄壁の構え 鉄壁の構え N・闇 LB+0 消費SP 32":
+        - img "鉄壁の構え"
+        - generic: 鉄壁の構え
+        - generic: N・闇 LB+0
+        - generic: 消費SP 32
+      - button "挑発の鬨 挑発の鬨 N・火 LB+0 消費SP 40":
+        - img "挑発の鬨"
+        - generic: 挑発の鬨
+        - generic: N・火 LB+0
+        - generic: 消費SP 40
+      - button "弓取りの一射 弓取りの一射 N・水 LB+0 消費SP 48":
+        - img "弓取りの一射"
+        - generic: 弓取りの一射
+        - generic: N・水 LB+0
+        - generic: 消費SP 48
+    - navigation "メインナビゲーション":
+      - button "本陣"
+      - button "出陣"
+      - button "武将"
+      - button "共闘"
+      - button "召喚"
+  - dialog "スキルLB結果" [active]:
+    - banner:
+      - heading "スキルLB結果" [level=2]
+      - button "閉じる": ×
+    - strong: 大祓い
+    - heading "更新しました" [level=3]
+    - generic: 銭
+    - generic: 13,040
+    - strong: → 5,040
+    - generic: LB
+    - generic: "0"
+    - strong: → 1
+    - generic: スキルLB素材
+    - generic: "10"
+    - strong: → 2
+    - button "閉じる"
+- alert

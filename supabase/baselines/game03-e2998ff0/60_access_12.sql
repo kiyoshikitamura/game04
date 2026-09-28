@@ -1,0 +1,15 @@
+SET check_function_bodies = false;
+SET search_path = public, extensions, pg_catalog;
+REVOKE ALL ON FUNCTION "public"."record_post_tutorial_guild_view"() FROM PUBLIC, anon, authenticated, service_role;
+GRANT EXECUTE ON FUNCTION "public"."record_post_tutorial_guild_view"() TO "authenticated";
+GRANT EXECUTE ON FUNCTION "public"."record_post_tutorial_guild_view"() TO "service_role";
+REVOKE ALL ON FUNCTION "public"."on_post_tutorial_quest_complete"() FROM PUBLIC, anon, authenticated, service_role;
+GRANT EXECUTE ON FUNCTION "public"."on_post_tutorial_quest_complete"() TO "service_role";
+REVOKE ALL ON FUNCTION "public"."acknowledge_initial_raid_guide"() FROM PUBLIC, anon, authenticated, service_role;
+GRANT EXECUTE ON FUNCTION "public"."acknowledge_initial_raid_guide"() TO "authenticated";
+GRANT EXECUTE ON FUNCTION "public"."acknowledge_initial_raid_guide"() TO "service_role";
+REVOKE ALL ON FUNCTION "public"."get_current_mission_reward_state"() FROM PUBLIC, anon, authenticated, service_role;
+GRANT EXECUTE ON FUNCTION "public"."get_current_mission_reward_state"() TO "authenticated";
+GRANT EXECUTE ON FUNCTION "public"."get_current_mission_reward_state"() TO "service_role";
+REVOKE ALL ON FUNCTION "public"."on_leader_hometown_base"() FROM PUBLIC, anon, authenticated, service_role;
+GRANT EXECUTE ON FUNCTION "public"."on_leader_hometown_base"() TO "service_role";

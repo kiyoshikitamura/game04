@@ -1,0 +1,49 @@
+{
+  "status": "BULK_NUMERIC_FIX_APPROVED_NOT_IMPLEMENTED",
+  "scopeStages": 62,
+  "coverage": {
+    "comparisonRecorded": 62,
+    "initialClearExampleRecorded": 62,
+    "newlyValidatedStages": 40,
+    "priorCandidateStages": 7,
+    "retainStages": 15,
+    "approvedStageDecisions": 62
+  },
+  "remainingStageJudgment": [],
+  "remainingStageJudgmentCount": 0,
+  "externalAcceptance": [
+    "アプリ実装への差分反映",
+    "実再生時間",
+    "UI上で攻略意図が伝わること"
+  ],
+  "nextCloseoutSteps": [
+    "開発へ承認済み差分を引継ぎ",
+    "実装反映・実再生時間・UI認知の受入"
+  ],
+  "notes": [
+    "全62面の一式をユーザー承認済み。数値変更なし、実装未反映。",
+    "主軸・実キャラ代替は各60回、育成後周回は各30回の観測結果。全ユーザーの勝率保証ではない。",
+    "実再生時間・UI認知は開発受入。"
+  ],
+  "classificationCounts": {
+    "今回修正採用": 40,
+    "既存候補採用": 7,
+    "維持": 15
+  },
+  "designRevisionRequired": 0,
+  "candidateLineage": {
+    "currentEnemyDeltaStages": 39,
+    "currentEnemyDeltaEnemies": 150,
+    "allAuditCandidateStages": 49,
+    "allAuditCandidateEnemies": 175,
+    "note": "監査開始時入力との累計差分。現行DBとの差分ではない。"
+  },
+  "current40Validated": 40,
+  "approval": {
+    "date": "2026-09-22",
+    "userStatement": "FIXします。",
+    "approvedSourceCommit": "f8741827daf9ffbb76b097c6d12a3950434af449",
+    "scopeStages": 62,
+    "record": "round17_approval.md"
+  }
+}

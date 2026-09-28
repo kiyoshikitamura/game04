@@ -1,0 +1,54 @@
+--- live-v28.pretty.ts
++++ live-v28-parallel.ts
+@@ -1232,7 +1232,7 @@
+ var Ae = (e, u) => me(`rpc/${e}`, u);
+ async function cu(e) { const u = new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(e))); u[6] = u[6] & 15 | 64, u[8] = u[8] & 63 | 128; const t = [...u.slice(0, 16)].map(a => a.toString(16).padStart(2, "0")).join(""); return `${t.slice(0, 8)}-${t.slice(8, 12)}-${t.slice(12, 16)}-${t.slice(16, 20)}-${t.slice(20)}`; }
+ async function Zt(e) { return Ae("game04_acquisition_input", { p_user_id: e }); }
+-async function Fe(e) { const u = await Zt(e); for (let t = 0; t < 4; t++) {
++async function Fe(e, g2AcquiredInput) { const u = g2AcquiredInput ?? await Zt(e); for (let t = 0; t < 4; t++) {
+     const a = await Ae("game04_get_session_state", { p_user_id: e, p_initial: va(e, u.legacy) }), s = m0(a, u.legacy), n = je(ru(fu(s, u.events, u.master)));
+     if (JSON.stringify(n) === JSON.stringify(a))
+         return a;
+@@ -1383,12 +1383,18 @@
+     const t = await fetch(`${Pu}/auth/v1/user`, { headers: { apikey: Lu, Authorization: u } }), a = await t.json();
+     if (!t.ok || !a.id)
+         throw new ee("\u30ED\u30B0\u30A4\u30F3\u3057\u76F4\u3057\u3066\u304F\u3060\u3055\u3044\u3002", 401);
+-    const [s] = await me(`users?id=eq.${a.id}&select=id,username`);
+-    if (!s)
+-        throw new ee("\u5148\u306B\u30D7\u30EC\u30A4\u30E4\u30FC\u540D\u3092\u767B\u9332\u3057\u3066\u304F\u3060\u3055\u3044\u3002", 409);
+     const { action: n, payload: i = {}, requestId: p } = await e.json(), l = n === "formal_gacha" ? i.mode === "normal" ? "normal_gacha" : "special_gacha" : n === "formal_gacha_exchange" ? "special_gacha_exchange" : n;
+     if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(p))
+         throw new ee("\u64CD\u4F5CID\u304C\u4E0D\u6B63\u3067\u3059\u3002");
++    // G2: independent reads only, after verified auth and request ID.
++    const g2StandardMutation = !["normal_gacha_status", "special_gacha_status", "formal_gacha_status", "observe_state_restore", "get_state", "raid_refresh", "quest_battle", "raid_battle", "territory_host", "raid_unlock"].includes(l);
++    const [[s], g2PriorRows, g2Acquired] = await Promise.all([
++        me(`users?id=eq.${a.id}&select=id,username`),
++        g2StandardMutation ? me(`game04_requests?user_id=eq.${a.id}&request_id=eq.${p}&select=request_id,result`) : Promise.resolve([]),
++        g2StandardMutation ? Zt(a.id).then(input => ({input}), error => ({error})) : Promise.resolve(undefined)
++    ]);
++    if (!s)
++        throw new ee("\u5148\u306B\u30D7\u30EC\u30A4\u30E4\u30FC\u540D\u3092\u767B\u9332\u3057\u3066\u304F\u3060\u3055\u3044\u3002", 409);
+     if (l === "normal_gacha_status") {
+         const F = await Fe(a.id), N = Gu(), y = eu(Date.now());
+         return new Response(JSON.stringify(await _e(a.id, { normalGacha: { pool: N, day: y, available: F.dailyNormalGachaDate !== y, masterVersion: Ne, rule: Be, rates: tu("normal") } })), { headers: oe });
+@@ -1424,7 +1430,7 @@
+         const K = N.master.raidMasters.find(O => O.id === y.raidMasterId), H = K?.masterVersion ? await Ae("game04_host_formal_territory", { p_user_id: a.id, p_request_id: p, p_destination_id: F, p_raid_master: Qt(K.id, () => crypto.getRandomValues(new Uint32Array(1))[0] / 4294967296) }) : await Ae("game04_host_territory", { p_user_id: a.id, p_request_id: p, p_destination_id: F });
+         return new Response(JSON.stringify(await _e(a.id, { territoryRoomId: H.room.id })), { headers: oe });
+     }
+-    const [o] = await me(`game04_requests?user_id=eq.${a.id}&request_id=eq.${p}&select=request_id,result`);
++    const [o] = g2PriorRows;
+     if (o) {
+         if (["normal_gacha", "special_gacha", "special_gacha_exchange"].includes(l)) {
+             const N = l === "normal_gacha" ? { count: Number(i.count), payment: String(i.currency ?? i.payment).toUpperCase() } : l === "special_gacha" ? { category: i.category, count: Number(i.count), payment: i.payment } : { category: i.category, itemId: String(i.itemId ?? "") };
+@@ -1438,8 +1444,10 @@
+         }
+         return new Response(JSON.stringify(F), { headers: oe });
+     }
++    // G2: saved-request replay above retains its fresh-state response path.
++    if (g2Acquired && 'error' in g2Acquired) throw g2Acquired.error;
+     let f;
+-    const E = await Fe(a.id);
++    const E = await Fe(a.id, g2Acquired?.input);
+     let B, S = null, R = null;
+     if (l === "normal_gacha") {
+         const F = Gu(), N = String(i.currency ?? i.payment).toUpperCase(), y = La(E, { requestId: p, count: Number(i.count), payment: N, now: Date.now() }, () => crypto.getRandomValues(new Uint32Array(1))[0] / 4294967296);

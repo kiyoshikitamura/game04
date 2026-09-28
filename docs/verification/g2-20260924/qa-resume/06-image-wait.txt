@@ -1,0 +1,91 @@
+- iframe [active]:
+  - alert
+  - region "ゲーム画面":
+    - img "くノ一"
+    - generic: Lv.1
+    - strong: G2QA再検
+    - generic "将来の同盟表示枠": ◇ 同盟 —
+    - button "アカウント連携": 未認証
+    - button "メニュー"
+    - generic: 銭 12,600
+    - generic: 輝石 200
+    - generic: 行動力 51/100
+    - main:
+      - navigation "育成":
+        - button "デッキ" [pressed]
+        - button "編成"
+        - button "武将"
+        - button "スキル"
+        - button "装備"
+      - heading "出撃デッキ" [level=3]
+      - button "並び替え ↕"
+      - button "1 くノ一 N 水 くノ一 N 水 Lv.1 +0":
+        - emphasis: "1"
+        - figure "くノ一 N 水"
+        - generic: くノ一
+        - generic: N 水
+        - generic: Lv.1 +0
+      - button "2 伝令 N 土 伝令 N 土 Lv.1 +0":
+        - emphasis: "2"
+        - figure "伝令 N 土"
+        - generic: 伝令
+        - generic: N 土
+        - generic: Lv.1 +0
+      - button "3 僧兵 N 火 僧兵 N 火 Lv.1 +0":
+        - emphasis: "3"
+        - figure "僧兵 N 火"
+        - generic: 僧兵
+        - generic: N 火
+        - generic: Lv.1 +0
+      - button "4 開放前 1-1クリア" [disabled]:
+        - emphasis: "4"
+        - generic: 開放前
+        - generic: 1-1クリア
+      - button "5 開放前 1-2クリア" [disabled]:
+        - emphasis: "5"
+        - generic: 開放前
+        - generic: 1-2クリア
+      - text: 総合HP
+      - generic: 2,175
+      - generic: 火
+      - text: "1"
+      - generic: 水
+      - text: "1"
+      - generic: 土
+      - text: "1"
+      - generic: 風
+      - text: "0"
+      - generic: 光
+      - text: "0"
+      - generic: 闇
+      - text: "0"
+      - text: 共通SP上限
+      - generic: "400"
+      - button "おまかせ編成" [disabled]:
+        - generic: おまかせ編成
+      - button "おまかせ装備" [disabled]:
+        - generic: おまかせ装備
+      - button "おまかせスキル" [disabled]:
+        - generic: おまかせスキル
+      - heading "選択中武将のスキル" [level=3]
+      - button "一文字斬り LB+0":
+        - generic: 一文字斬り
+        - generic: LB+0
+      - button "未解放 未装備":
+        - generic: 未解放
+        - generic: 未装備
+      - button "未解放 未装備":
+        - generic: 未解放
+        - generic: 未装備
+    - navigation "メインナビゲーション":
+      - button "本陣"
+      - button "出陣"
+      - button "武将"
+      - button "共闘"
+      - button "召喚"
+  - dialog "画像を準備中" [active]:
+    - banner:
+      - heading "画像を準備中" [level=2]
+      - button "閉じる": ×
+    - status: 必要な画像を読み込んでいます。
+- alert

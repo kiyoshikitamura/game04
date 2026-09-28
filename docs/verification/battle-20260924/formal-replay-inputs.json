@@ -1,0 +1,108 @@
+[
+  {
+    "stage": "7-7",
+    "seed": 22001,
+    "party": [
+      {
+        "id": "char_kengo_01",
+        "level": 55
+      },
+      {
+        "id": "char_koharu_01",
+        "level": 55
+      },
+      {
+        "id": "char_rui_01",
+        "level": 55
+      },
+      {
+        "id": "char_takuro_01",
+        "level": 55
+      },
+      {
+        "id": "char_aoi_01",
+        "level": 55
+      }
+    ],
+    "rulesVersion": "balance-v2-20260920",
+    "inputVersion": "wave-sp-v1-20260921",
+    "frames": 375,
+    "waves": 4,
+    "wavesCleared": 4,
+    "outcome": "win",
+    "events": [
+      "start",
+      "action_start",
+      "damage",
+      "action_end",
+      "counts",
+      "interrupt_start",
+      "interrupt_end",
+      "effect_applied",
+      "cleanse",
+      "burst_start",
+      "burst_resume",
+      "burst_end",
+      "death",
+      "wave",
+      "shield_absorbed",
+      "burst_failed",
+      "end"
+    ],
+    "measuredBrowserDuration": null,
+    "note": "Simulation only; final 2x browser playback measurement pending."
+  },
+  {
+    "stage": "9-9",
+    "seed": 25001,
+    "party": [
+      {
+        "id": "char_kengo_01",
+        "level": 75
+      },
+      {
+        "id": "char_takuro_01",
+        "level": 75
+      },
+      {
+        "id": "char_reiji_01",
+        "level": 75
+      },
+      {
+        "id": "char_koharu_01",
+        "level": 75
+      },
+      {
+        "id": "char_ageha_01",
+        "level": 75
+      }
+    ],
+    "rulesVersion": "balance-v2-20260920",
+    "inputVersion": "wave-sp-v1-20260921",
+    "frames": 216,
+    "waves": 3,
+    "wavesCleared": 3,
+    "outcome": "win",
+    "events": [
+      "start",
+      "action_start",
+      "damage",
+      "action_end",
+      "counts",
+      "interrupt_start",
+      "effect_miss",
+      "interrupt_end",
+      "death",
+      "effect_applied",
+      "wave",
+      "burst_start",
+      "burst_resume",
+      "burst_end",
+      "burst_failed",
+      "stun_skip",
+      "end"
+    ],
+    "measuredBrowserDuration": null,
+    "note": "Simulation only; final 2x browser playback measurement pending."
+  }
+]

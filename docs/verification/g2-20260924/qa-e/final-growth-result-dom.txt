@@ -1,0 +1,113 @@
+- iframe [active]:
+  - alert
+  - region "ゲーム画面":
+    - img "くノ一"
+    - generic: Lv.1
+    - strong: G2QA終E
+    - generic "将来の同盟表示枠": ◇ 同盟 —
+    - button "アカウント連携": 未認証
+    - button "メニュー"
+    - generic: 銭 13,040
+    - generic: 輝石 200
+    - generic: 行動力 50/100
+    - main:
+      - navigation "育成":
+        - button "デッキ"
+        - button "編成"
+        - button "武将" [pressed]
+        - button "スキル"
+        - button "装備"
+      - text: 絞り込み
+      - combobox "絞り込み":
+        - option "すべて" [selected]
+        - option "N"
+        - option "R"
+        - option "SR"
+        - option "SSR"
+        - option "火"
+        - option "水"
+        - option "土"
+        - option "風"
+        - option "光"
+        - option "闇"
+      - text: 並び替え
+      - combobox "並び替え":
+        - option "Lv" [selected]
+        - option "レアリティ"
+        - option "名前"
+        - option "属性"
+      - button "くノ一 N 水 くノ一 N・水・攻撃 Lv.3 覚醒+0 編成中":
+        - figure "くノ一 N 水"
+        - generic: くノ一
+        - generic: N・水・攻撃
+        - generic: Lv.3 覚醒+0
+        - generic: 編成中
+      - button "伝令 N 土 伝令 N・土・支援 Lv.1 覚醒+0 編成中":
+        - figure "伝令 N 土"
+        - generic: 伝令
+        - generic: N・土・支援
+        - generic: Lv.1 覚醒+0
+        - generic: 編成中
+      - button "僧兵 N 火 僧兵 N・火・守備 Lv.1 覚醒+0 編成中":
+        - figure "僧兵 N 火"
+        - generic: 僧兵
+        - generic: N・火・守備
+        - generic: Lv.1 覚醒+0
+        - generic: 編成中
+      - button "山伏 N 光 山伏 N・光・回復・保護 Lv.1 覚醒+0":
+        - figure "山伏 N 光"
+        - generic: 山伏
+        - generic: N・光・回復・保護
+        - generic: Lv.1 覚醒+0
+      - button "女侍 N 土 女侍 N・土・攻守 Lv.1 覚醒+0":
+        - figure "女侍 N 土"
+        - generic: 女侍
+        - generic: N・土・攻守
+        - generic: Lv.1 覚醒+0
+      - button "前田利家 R 土 前田利家 R・土・攻守 Lv.1 覚醒+0":
+        - figure "前田利家 R 土"
+        - generic: 前田利家
+        - generic: R・土・攻守
+        - generic: Lv.1 覚醒+0
+      - generic "育成アイテムの所持数"
+      - heading "武将の魂" [level=3]
+      - button "織田信長 固有魂 2 魂の操作":
+        - text: 織田信長
+        - generic: 固有魂 2
+        - text: 魂の操作
+    - navigation "メインナビゲーション":
+      - button "本陣"
+      - button "出陣"
+      - button "武将"
+      - button "共闘"
+      - button "召喚"
+  - dialog "武将育成結果" [active]:
+    - banner:
+      - heading "武将育成結果" [level=2]
+      - button "閉じる": ×
+    - figure "くノ一 N 水"
+    - strong: くノ一
+    - heading "更新しました" [level=3]
+    - generic: 銭
+    - generic: 13,100
+    - strong: → 13,040
+    - generic: Lv
+    - generic: "1"
+    - strong: → 3
+    - generic: 累計EXP
+    - generic: "0"
+    - strong: → 100
+    - generic: HP
+    - generic: "588"
+    - strong: → 675
+    - generic: 攻撃力
+    - generic: "97"
+    - strong: → 118
+    - generic: 防御力
+    - generic: "30"
+    - strong: → 36
+    - generic: 武将EXP素材・小
+    - generic: "1"
+    - strong: → 0
+    - button "閉じる"
+- alert

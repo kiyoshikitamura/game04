@@ -1,0 +1,66 @@
+- iframe [active]:
+  - alert
+  - region "ゲーム画面":
+    - img "くノ一"
+    - generic: Lv.1
+    - strong: G2QA終E
+    - generic "将来の同盟表示枠": ◇ 同盟 —
+    - button "アカウント連携": 未認証
+    - button "メニュー"
+    - generic: 銭 15,540
+    - generic: 輝石 150
+    - generic: 行動力 22/100
+    - main:
+      - button "‹ 共闘一覧"
+      - heading "岡崎城 Lv.3" [level=2]
+      - generic: 土属性
+      - strong: 開催者 G2QA終E
+      - meter "共通HP"
+      - strong: HP 137,000 / 137,000（100%）
+      - generic: 2日 22時間
+      - generic: 1/20人
+      - navigation "レイド操作":
+        - button "敵情報"
+        - button "参加者"
+        - button "報酬" [active]
+        - button "救援"
+      - heading "自分の貢献" [level=2]
+      - text: 累計ダメージ
+      - strong: 135,279
+      - generic "直近 勝利": 勝利
+      - generic: 挑戦 5戦
+      - generic: 勝利 4勝
+      - generic: 討伐報酬資格 取得済み
+      - paragraph: 参加時の共通進行 Lv.1
+      - button "挑む 消費行動力 20":
+        - strong: 挑む
+        - generic: 消費行動力 20
+      - dialog "報酬":
+        - heading "報酬" [level=2]
+        - button "閉じる": ×
+        - heading "個別バトル勝利報酬" [level=3]
+        - list:
+          - listitem: 銭 ×2,500
+          - listitem: 武将EXP中（1,000 EXP） ×1
+          - listitem: 装備EXP小（100 EXP） ×5
+        - paragraph: 確率付きの報酬は抽選です。LUKにより獲得率が上がります。
+        - heading "各Lv討伐報酬" [level=3]
+        - list:
+          - listitem: 銭 ×5,000
+          - listitem: スキルLB素材 ×2
+          - listitem: 装備LB素材 ×2
+          - listitem: 武将EXP大（5,000 EXP） ×1
+          - listitem: 装備EXP大（5,000 EXP） ×1
+        - paragraph: 資格取得済み
+        - paragraph: 討伐報酬は資格取得後に討伐された敵が対象です。
+        - paragraph: 参加前・資格取得前に討伐済みのLv報酬は配布されません。次の出撃は現在の共有Lv.3から開始します。
+        - paragraph: 受取待ち 1件
+        - button "受け取る":
+          - generic: 受け取る
+    - navigation "メインナビゲーション":
+      - button "本陣"
+      - button "出陣"
+      - button "武将"
+      - button "共闘"
+      - button "召喚"
+- alert

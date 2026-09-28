@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "scope": "local domain / pending policy guard; not live acceptance",
+  "checks": [
+    "all 10 daily rows hidden even with complete counters",
+    "30 raw/dated claim attempts rejected with state unchanged",
+    "recorded event timestamp follows JST and event replay is idempotent",
+    "TI01 formal Lv1 enemy HP / shared HP / multiplier verified",
+    "current full damage causes Lv2 after 2 wins; no retroactive Lv1 grant",
+    "same battle replay leaves state unchanged"
+  ],
+  "comparison": {
+    "source": "invasion source tables 20260921:4-2/3; section10 H=23040",
+    "enemyNames": [
+      "前田慶次"
+    ],
+    "enemyHp": 23040,
+    "sharedHp": 70000,
+    "displayDamage": 23992,
+    "overkill": 952,
+    "currentContribution": 35988,
+    "proposedContribution": 34560,
+    "proposedRemainingAfterLossAndTwoWins": 872
+  }
+}

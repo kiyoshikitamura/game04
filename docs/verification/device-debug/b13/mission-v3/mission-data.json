@@ -1,0 +1,367 @@
+[
+  {
+    "id": "DM002",
+    "name": "戦闘に3回挑戦",
+    "description": "デイリー",
+    "enabled": true,
+    "condition": {
+      "type": "metric",
+      "key": "battle",
+      "target": 3,
+      "daily": true
+    },
+    "title": "戦闘に3回挑戦",
+    "tab": "daily",
+    "unit": "回",
+    "target": 3,
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 2000,
+        "label": "銭 ×2,000"
+      },
+      {
+        "kind": "character_exp_item",
+        "id": "small",
+        "amount": 3,
+        "label": "武将EXP小（100 EXP） ×3"
+      }
+    ]
+  },
+  {
+    "id": "DM005",
+    "name": "出陣で3回勝利",
+    "description": "デイリー",
+    "enabled": true,
+    "condition": {
+      "type": "metric",
+      "key": "quest_clear",
+      "target": 3,
+      "daily": true
+    },
+    "title": "出陣で3回勝利",
+    "tab": "daily",
+    "unit": "回",
+    "target": 3,
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 2000,
+        "label": "銭 ×2,000"
+      },
+      {
+        "kind": "equipment_exp_item",
+        "id": "small",
+        "amount": 3,
+        "label": "装備EXP小（100 EXP） ×3"
+      },
+      {
+        "kind": "unlock_item",
+        "amount": 1,
+        "label": "侵攻令 ×1"
+      }
+    ]
+  },
+  {
+    "id": "DM007",
+    "name": "ノーマル召喚を1回行う",
+    "description": "デイリー",
+    "enabled": true,
+    "condition": {
+      "type": "metric",
+      "key": "normal_gacha",
+      "target": 1,
+      "daily": true
+    },
+    "title": "ノーマル召喚を1回行う",
+    "tab": "daily",
+    "unit": "回",
+    "target": 1,
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 1000,
+        "label": "銭 ×1,000"
+      }
+    ]
+  },
+  {
+    "id": "DM008",
+    "name": "育成を1回行う",
+    "description": "デイリー",
+    "enabled": true,
+    "condition": {
+      "type": "metric",
+      "key": "growth",
+      "target": 1,
+      "daily": true
+    },
+    "title": "育成を1回行う",
+    "tab": "daily",
+    "unit": "回",
+    "target": 1,
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 2000,
+        "label": "銭 ×2,000"
+      }
+    ]
+  },
+  {
+    "id": "DM003",
+    "name": "戦闘に5回挑戦",
+    "description": "デイリー",
+    "enabled": true,
+    "condition": {
+      "type": "metric",
+      "key": "battle",
+      "target": 5,
+      "daily": true
+    },
+    "title": "戦闘に5回挑戦",
+    "tab": "daily",
+    "unit": "回",
+    "target": 5,
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 3000,
+        "label": "銭 ×3,000"
+      },
+      {
+        "kind": "character_exp_item",
+        "id": "small",
+        "amount": 5,
+        "label": "武将EXP小（100 EXP） ×5"
+      }
+    ]
+  },
+  {
+    "id": "DM006",
+    "name": "出陣で5回勝利",
+    "description": "デイリー",
+    "enabled": true,
+    "condition": {
+      "type": "metric",
+      "key": "quest_clear",
+      "target": 5,
+      "daily": true
+    },
+    "title": "出陣で5回勝利",
+    "tab": "daily",
+    "unit": "回",
+    "target": 5,
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 3000,
+        "label": "銭 ×3,000"
+      },
+      {
+        "kind": "equipment_exp_item",
+        "id": "small",
+        "amount": 5,
+        "label": "装備EXP小（100 EXP） ×5"
+      }
+    ]
+  },
+  {
+    "id": "NM001",
+    "name": "1-1を初クリア",
+    "description": "ステージ初クリア",
+    "enabled": true,
+    "condition": {
+      "type": "stage_clear",
+      "stageId": "mikawa-1"
+    },
+    "title": "1-1を初クリア",
+    "tab": "normal",
+    "unit": "件",
+    "target": 1,
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 1000,
+        "label": "銭 ×1,000"
+      },
+      {
+        "kind": "character_exp_item",
+        "id": "small",
+        "amount": 1,
+        "label": "武将EXP小（100 EXP） ×1"
+      },
+      {
+        "kind": "equipment_exp_item",
+        "id": "small",
+        "amount": 1,
+        "label": "装備EXP小（100 EXP） ×1"
+      }
+    ]
+  },
+  {
+    "id": "NM002",
+    "name": "1-2を初クリア",
+    "description": "ステージ初クリア",
+    "enabled": true,
+    "condition": {
+      "type": "stage_clear",
+      "stageId": "mikawa-2"
+    },
+    "title": "1-2を初クリア",
+    "tab": "normal",
+    "unit": "件",
+    "target": 1,
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 1000,
+        "label": "銭 ×1,000"
+      },
+      {
+        "kind": "character_exp_item",
+        "id": "small",
+        "amount": 1,
+        "label": "武将EXP小（100 EXP） ×1"
+      },
+      {
+        "kind": "equipment_exp_item",
+        "id": "small",
+        "amount": 1,
+        "label": "装備EXP小（100 EXP） ×1"
+      }
+    ]
+  },
+  {
+    "id": "NM003",
+    "name": "1-3を初クリア",
+    "description": "ステージ初クリア",
+    "enabled": true,
+    "condition": {
+      "type": "stage_clear",
+      "stageId": "mikawa-3"
+    },
+    "title": "1-3を初クリア",
+    "tab": "normal",
+    "unit": "件",
+    "target": 1,
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 1000,
+        "label": "銭 ×1,000"
+      },
+      {
+        "kind": "character_exp_item",
+        "id": "small",
+        "amount": 1,
+        "label": "武将EXP小（100 EXP） ×1"
+      },
+      {
+        "kind": "equipment_exp_item",
+        "id": "small",
+        "amount": 1,
+        "label": "装備EXP小（100 EXP） ×1"
+      }
+    ]
+  },
+  {
+    "id": "NM004",
+    "name": "2-1を初クリア",
+    "description": "ステージ初クリア",
+    "enabled": true,
+    "condition": {
+      "type": "stage_clear",
+      "stageId": "owari-1"
+    },
+    "title": "2-1を初クリア",
+    "tab": "normal",
+    "unit": "件",
+    "target": 1,
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 2000,
+        "label": "銭 ×2,000"
+      },
+      {
+        "kind": "character_exp_item",
+        "id": "small",
+        "amount": 2,
+        "label": "武将EXP小（100 EXP） ×2"
+      },
+      {
+        "kind": "equipment_exp_item",
+        "id": "small",
+        "amount": 2,
+        "label": "装備EXP小（100 EXP） ×2"
+      }
+    ]
+  },
+  {
+    "id": "NM005",
+    "name": "2-2を初クリア",
+    "description": "ステージ初クリア",
+    "enabled": true,
+    "condition": {
+      "type": "stage_clear",
+      "stageId": "owari-2"
+    },
+    "title": "2-2を初クリア",
+    "tab": "normal",
+    "unit": "件",
+    "target": 1,
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 2000,
+        "label": "銭 ×2,000"
+      },
+      {
+        "kind": "character_exp_item",
+        "id": "small",
+        "amount": 2,
+        "label": "武将EXP小（100 EXP） ×2"
+      },
+      {
+        "kind": "equipment_exp_item",
+        "id": "small",
+        "amount": 2,
+        "label": "装備EXP小（100 EXP） ×2"
+      }
+    ]
+  },
+  {
+    "id": "NM006",
+    "name": "2-3を初クリア",
+    "description": "ステージ初クリア",
+    "enabled": true,
+    "condition": {
+      "type": "stage_clear",
+      "stageId": "owari-3"
+    },
+    "title": "2-3を初クリア",
+    "tab": "normal",
+    "unit": "件",
+    "target": 1,
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 2000,
+        "label": "銭 ×2,000"
+      },
+      {
+        "kind": "character_exp_item",
+        "id": "small",
+        "amount": 2,
+        "label": "武将EXP小（100 EXP） ×2"
+      },
+      {
+        "kind": "equipment_exp_item",
+        "id": "small",
+        "amount": 2,
+        "label": "装備EXP小（100 EXP） ×2"
+      }
+    ]
+  }
+]

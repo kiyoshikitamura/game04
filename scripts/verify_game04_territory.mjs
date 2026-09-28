@@ -1,0 +1,24 @@
+import assert from 'node:assert/strict';
+import {TERRITORY_MASTER,validateTerritoryMaster,projectTerritory,createTerritorySnapshot,activeTerritoryCount} from '../src/domain/redesign/territory.ts';
+import {createRaidRoom,getRoomRaidMaster,raidEnemy,applyRaidAction} from '../src/domain/redesign/raid.ts';
+import {createInitialState} from '../src/domain/redesign/masters.ts';
+const master=structuredClone(TERRITORY_MASTER),now=Date.now();validateTerritoryMaster(master);
+const zero=projectTerritory(master,{experience:0},{raid_unlock:0},0);assert.equal(zero.destinations[0].canHost,false);assert.ok(zero.destinations[0].reasons.some(s=>s.includes('アイテム')));assert.equal(zero.destinations[1].canHost,false);
+assert.equal(projectTerritory(master,{experience:100},{raid_unlock:1},0).destinations[1].canHost,true);
+assert.equal(projectTerritory(master,{experience:100},{raid_unlock:1},2).destinations[0].canHost,false);
+assert.equal(projectTerritory(master,{experience:999999},{raid_unlock:1},0).level,master.levelCap);
+assert.equal(projectTerritory(master,{experience:999999},{raid_unlock:1},0).nextLevelExp,null);
+for(const mutate of [m=>m.levels[1].requiredExp=0,m=>m.levels[1].hostingSlots=-1,m=>m.destinations[0].raidMasterId='missing',m=>m.raidMasters[0].sharedHp=-1,m=>m.raidMasters[0].enemy.stats.hp=NaN,m=>m.raidMasters[0].participationRewards[0].amount=-1,m=>m.raidMasters[0].maxParticipants=0,m=>m.battleRules.spRecoveryDivisor=0]){const bad=structuredClone(master);mutate(bad);assert.throws(()=>validateTerritoryMaster(bad));}
+const snap=createTerritorySnapshot(master,master.destinations[0].id);
+let room=createRaidRoom(snap.raidMaster.id,'owner','snapshot-room',now,snap);
+const baseline=structuredClone(room),enemy=raidEnemy(getRoomRaidMaster(room),14);
+master.raidMasters[0].enemy.stats.hp=999999;master.raidMasters[0].defeatRewards[0].amount=999;master.raidMasters[0].appearanceImages['10']='changed';master.destinations[0].clearExp=999;master.destinations[0].durationMinutes=1;master.battleRules.defenseFactor=99;
+assert.deepEqual(room,baseline);assert.deepEqual(raidEnemy(getRoomRaidMaster(room),14),enemy);assert.equal(room.territorySnapshot.destination.clearExp,100);assert.equal(room.territorySnapshot.battleRules.defenseFactor,TERRITORY_MASTER.battleRules.defenseFactor);
+assert.equal(activeTerritoryCount('owner',[room],now),1);assert.equal(activeTerritoryCount('helper',[room],now),0);assert.equal(activeTerritoryCount('owner',[{...room,status:'defeated'}],now),0);assert.equal(activeTerritoryCount('owner',[{...room,expiresAt:new Date(now-1).toISOString()}],now),0);
+const encounter=createRaidRoom('encounter_flame','owner','encounter',now);assert.equal(activeTerritoryCount('owner',[encounter],now),0);
+room.territorySnapshot.raidMaster.maxLevel=2;room.territorySnapshot.raidMaster.defeatRewards=[{kind:'cash',amount:7}];
+let state=createInitialState('owner');room.level=2;room.hp=1;room.participants[0].wins=2;
+const settled=applyRaidAction(room,state,'raid_battle',{battleId:'final',battleLevel:room.level,energyAlreadyPaid:true,result:{outcome:'win',totalDamage:1}},now);
+assert.equal(settled.room.status,'defeated');assert.equal(settled.room.participants[0].wins,3);assert.deepEqual(settled.room.rewardGrants.find(g=>g.id==='defeat:2:owner').rewards,[{kind:'cash',amount:7}]);
+assert.deepEqual(applyRaidAction(settled.room,settled.state,'raid_battle',{battleId:'final',battleLevel:room.level,energyAlreadyPaid:true,result:{outcome:'win',totalDamage:1}},now),settled);
+console.log('PASS territory projection, growth cap, item/level/slot reasons, malformed master, snapshot isolation (enemy/image/reward/duration/XP/rules), active slots, final third win and replay');

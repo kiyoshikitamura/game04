@@ -1,61 +1,13 @@
-# GAME04
+# TRIBE: NEON REIGN (トライブ：ネオン・レイン)
 
-GAME04 is a general-audience, identity-first community web game. Its core is:
+架空の首都圏の夜の街を舞台に、厳選された美麗NPCキャラクターにスキルカードや装備を組み合わせて戦う、ブラウザ向け非同期対戦型カードバトルRPG。
 
-`Character → Push / Fandom → Community → Retention`
+## 概要
+- **ジャンル**: 非同期PvP・テリトリー制圧型デッキ構築カードバトルRPG
+- **プラットフォーム**: PC/スマートフォン ブラウザ (レスポンシブ対応)
+- **技術スタック**: Next.js (TypeScript) / Supabase (予定、既存資産 code:wirth-dawn 踏襲)
+- **マネタイズ**: スキルカードガチャ、装備品ガチャ、NPCアンロック直接課金、スタミナ回復アイテム (Stripe決済)
 
-This repository starts as a clean implementation. It is **not** a fork or copy of TRIBE NEON.
+## リポジトリ情報
+- **GitHub Repository**: [https://github.com/kiyoshikitamura/tirbe-neon.git](https://github.com/kiyoshikitamura/tirbe-neon.git)
 
-## Start locally
-
-```powershell
-npm ci
-npm run bootstrap
-npm run doctor
-npm run dev
-```
-
-Open `http://localhost:3000`. The initial shell intentionally contains only Title and Home placeholders until the environment is connected.
-
-The first connected flow is email magic-link authentication. Add `/auth/callback` to the allowed redirect URLs for each Supabase environment before testing it.
-
-The bootstrap command never overwrites `.env.local`, and diagnostics never
-print environment values. See [Engineering bootstrap](docs/development/ENGINEERING_BOOTSTRAP.md)
-for disconnected-shell and connected-service readiness checks.
-
-## Required checks
-
-```powershell
-npm run check
-```
-
-## Milestone progress
-
-Development is managed by accepted exit gates rather than an open-ended task
-list. The current milestone, progress, blockers, and evidence are maintained in
-[GAME04 milestone roadmap](docs/development/MILESTONES.md). GitHub Milestones
-and Issues mirror that repository record for day-to-day tracking.
-
-## Environments
-
-| Environment | Purpose | Supabase project | Vercel behavior |
-| --- | --- | --- | --- |
-| `development` / dev-clean | local development and automated checks | dedicated development project | local only |
-| `preview` | PR human acceptance | dedicated preview project | branch/PR deployment |
-| `production` | release | dedicated production project | `main` only |
-
-Never share a Supabase project, OAuth callback set, or service-role secret between environments. Details are in [Environment and release design](docs/architecture/ENVIRONMENT_RELEASE.md).
-
-## Product boundaries
-
-GAME03-specific masters, Tokyo bases, GvG schedules, competition design, economics, tutorial flow, UI/art, and battle presentation are out of scope. The initial common-core boundary is documented in [Common Game Core boundary](docs/architecture/COMMON_GAME_CORE_BOUNDARY.md).
-
-## Repository conventions
-
-- `src/app/`: routes and UI
-- `src/lib/`: framework-agnostic application helpers
-- `src/domain/`: future game domain modules; keep GAME04 product rules here
-- `supabase/migrations/`: forward-only schema, RLS, RPC, and grants
-- `docs/architecture/`: technical decisions and acceptance rules
-
-Do not put values that are not FIXED in product source or canonical data. Do not allow the client to decide ownership, currency, rewards, draws, battle results, or privileged social actions.

@@ -1,0 +1,334 @@
+[
+  {
+    "claim_receipts": [
+      {
+        "receipt": {
+          "gameplayMeasurement": {
+            "action": "raid_claim",
+            "grants": [
+              {
+                "grantId": "defeat:1:ecd03fa2-b27b-4268-818b-45560c2d2f43",
+                "rewards": [
+                  {
+                    "id": "char_noa_01",
+                    "kind": "soul",
+                    "amount": 1
+                  },
+                  {
+                    "id": "large",
+                    "kind": "character_exp_item",
+                    "amount": 1
+                  },
+                  {
+                    "id": "large",
+                    "kind": "equipment_exp_item",
+                    "amount": 1
+                  },
+                  {
+                    "id": null,
+                    "kind": "skill_material",
+                    "amount": 2
+                  },
+                  {
+                    "id": null,
+                    "kind": "equipment_lb",
+                    "amount": 2
+                  },
+                  {
+                    "id": null,
+                    "kind": "cash",
+                    "amount": 5000
+                  }
+                ]
+              }
+            ],
+            "roomId": "0fed6630-f1fb-42cf-83ef-e88a07766b8d",
+            "cashDelta": 5000,
+            "energyDelta": 0,
+            "contractVersion": "game04-gameplay-v1",
+            "stateVersionAfter": 19,
+            "stateVersionBefore": 18
+          }
+        },
+        "requestId": "82b8a6b3-07eb-4b97-91fb-f01889708ff6"
+      }
+    ],
+    "raid_rewards": [
+      {
+        "kind": "cash",
+        "day_jst": "2026-09-25",
+        "quantity": 5000,
+        "reward_id": null,
+        "user_count": 1,
+        "grant_count": 1,
+        "classification": "excluded",
+        "reward_line_count": 1
+      },
+      {
+        "kind": "character_exp_item",
+        "day_jst": "2026-09-25",
+        "quantity": 1,
+        "reward_id": "large",
+        "user_count": 1,
+        "grant_count": 1,
+        "classification": "excluded",
+        "reward_line_count": 1
+      },
+      {
+        "kind": "equipment_exp_item",
+        "day_jst": "2026-09-25",
+        "quantity": 1,
+        "reward_id": "large",
+        "user_count": 1,
+        "grant_count": 1,
+        "classification": "excluded",
+        "reward_line_count": 1
+      },
+      {
+        "kind": "equipment_lb",
+        "day_jst": "2026-09-25",
+        "quantity": 2,
+        "reward_id": null,
+        "user_count": 1,
+        "grant_count": 1,
+        "classification": "excluded",
+        "reward_line_count": 1
+      },
+      {
+        "kind": "skill_material",
+        "day_jst": "2026-09-25",
+        "quantity": 2,
+        "reward_id": null,
+        "user_count": 1,
+        "grant_count": 1,
+        "classification": "excluded",
+        "reward_line_count": 1
+      },
+      {
+        "kind": "soul",
+        "day_jst": "2026-09-25",
+        "quantity": 1,
+        "reward_id": "char_noa_01",
+        "user_count": 1,
+        "grant_count": 1,
+        "classification": "excluded",
+        "reward_line_count": 1
+      }
+    ],
+    "room": {
+      "hp": 0,
+      "id": "0fed6630-f1fb-42cf-83ef-e88a07766b8d",
+      "level": 1,
+      "maxHp": 39000,
+      "status": "defeated",
+      "ownerId": "b1b9ee70-39d0-4e55-baef-a3df034dedfe",
+      "version": 10,
+      "masterId": "encounter_a1_ERB01",
+      "createdAt": "2026-09-25T00:37:27.084488+00:00",
+      "expiresAt": "2026-09-25T01:37:27.084488+00:00",
+      "rescueCount": 0,
+      "participants": [
+        {
+          "name": "G2R4資源QA",
+          "wins": 0,
+          "userId": "b1b9ee70-39d0-4e55-baef-a3df034dedfe",
+          "attempts": 0,
+          "joinedLevel": 1,
+          "totalDamage": 0
+        },
+        {
+          "name": "G2R4戦闘QA",
+          "wins": 4,
+          "userId": "ecd03fa2-b27b-4268-818b-45560c2d2f43",
+          "attempts": 4,
+          "lastResult": "勝利",
+          "joinedLevel": 1,
+          "totalDamage": 40399
+        }
+      ],
+      "raidSnapshot": {
+        "id": "encounter_a1_ERB01",
+        "area": 1,
+        "name": "柴田勝家",
+        "type": "encounter",
+        "enemy": {
+          "id": "encounter_a1_ERB01",
+          "boss": true,
+          "name": "柴田勝家",
+          "image": "/creative/characters/battle/char_noa_01.png",
+          "level": 10,
+          "order": 0,
+          "stats": {
+            "hp": 6500,
+            "sp": 100,
+            "atk": 480,
+            "def": 80,
+            "luk": 0
+          },
+          "skills": [],
+          "element": "earth",
+          "passives": [
+            {
+              "id": "balance_v2_P05",
+              "name": "通常攻撃ダメージ",
+              "stat": "atk",
+              "type": "P05",
+              "level": 0,
+              "target": "self",
+              "percent": 12
+            }
+          ],
+          "hitSpGain": 10,
+          "initialSp": 100,
+          "actionCount": 7,
+          "initialCount": 7
+        },
+        "enemies": [
+          {
+            "id": "encounter_a1_ERB01",
+            "boss": true,
+            "name": "柴田勝家",
+            "image": "/creative/characters/battle/char_noa_01.png",
+            "level": 10,
+            "order": 0,
+            "stats": {
+              "hp": 6500,
+              "sp": 100,
+              "atk": 480,
+              "def": 80,
+              "luk": 0
+            },
+            "skills": [],
+            "element": "earth",
+            "passives": [
+              {
+                "id": "balance_v2_P05",
+                "name": "通常攻撃ダメージ",
+                "stat": "atk",
+                "type": "P05",
+                "level": 0,
+                "target": "self",
+                "percent": 12
+              }
+            ],
+            "hitSpGain": 10,
+            "initialSp": 100,
+            "actionCount": 7,
+            "initialCount": 7
+          }
+        ],
+        "maxLevel": 1,
+        "sharedHp": 39000,
+        "playerExp": 80,
+        "energyCost": 20,
+        "characterId": "char_noa_01",
+        "defeatRewards": [
+          {
+            "id": "char_noa_01",
+            "kind": "soul",
+            "amount": 1
+          },
+          {
+            "id": "large",
+            "kind": "character_exp_item",
+            "amount": 1
+          },
+          {
+            "id": "large",
+            "kind": "equipment_exp_item",
+            "amount": 1
+          },
+          {
+            "kind": "skill_material",
+            "amount": 2
+          },
+          {
+            "kind": "equipment_lb",
+            "amount": 2
+          },
+          {
+            "kind": "cash",
+            "amount": 5000
+          }
+        ],
+        "masterVersion": "GAME04_RAID_FORMAL_20260923",
+        "victoryRewards": [
+          {
+            "kind": "cash",
+            "amount": 3000
+          },
+          {
+            "id": "medium",
+            "kind": "character_exp_item",
+            "amount": 1
+          },
+          {
+            "id": "small",
+            "kind": "equipment_exp_item",
+            "amount": 5
+          },
+          {
+            "id": "char_noa_01",
+            "kind": "soul",
+            "amount": 1,
+            "chance": 0.75
+          }
+        ],
+        "durationMinutes": 60,
+        "maxParticipants": 10,
+        "appearanceImages": {},
+        "appearanceLevels": [
+          1
+        ],
+        "victoryMultiplier": 1.5,
+        "enemyGrowthPerLevel": 0,
+        "participationRewards": [],
+        "sharedHpGrowthPerLevel": 0
+      },
+      "rewardGrants": [
+        {
+          "id": "defeat:1:ecd03fa2-b27b-4268-818b-45560c2d2f43",
+          "level": 1,
+          "userId": "ecd03fa2-b27b-4268-818b-45560c2d2f43",
+          "claimed": true,
+          "rewards": [
+            {
+              "id": "char_noa_01",
+              "kind": "soul",
+              "amount": 1
+            },
+            {
+              "id": "large",
+              "kind": "character_exp_item",
+              "amount": 1
+            },
+            {
+              "id": "large",
+              "kind": "equipment_exp_item",
+              "amount": 1
+            },
+            {
+              "kind": "skill_material",
+              "amount": 2
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 2
+            },
+            {
+              "kind": "cash",
+              "amount": 5000
+            }
+          ]
+        }
+      ],
+      "settledBattleIds": [
+        "0c8bf047-5e2c-4feb-bc8b-000f7c435bfd",
+        "5b205f47-2e54-476a-9539-3af78bdd4282",
+        "3f6fbc90-b744-4c74-a3b4-46249b212eb2",
+        "d31162ef-1161-4411-89d8-17f4a698cacc"
+      ],
+      "rescueWindowStartedAt": "2026-09-25T00:37:27.084488+00:00"
+    }
+  }
+]

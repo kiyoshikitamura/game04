@@ -1,0 +1,31 @@
+{
+  "g3BaseSha": "12bb7b351efd40db7f404410e486e982ff12ede7",
+  "deployed": false,
+  "files": {
+    "g3BaseSource": {
+      "sha256": "1712993f7eece34aea04ae829499dcf9853fe0c57be6f5087f3f5e3d78b82778",
+      "bytes": 36748
+    },
+    "liveV28Body": {
+      "sha256": "569f8ca34662ca93a58e30bebe340c7e8667fc747214be6c3b2621a164a2736a",
+      "bytes": 1021211
+    },
+    "integratedSource": {
+      "sha256": "608537e9222fa3025fe31126873abd4acb2f82722e27bf96f5c198e81da0f479",
+      "bytes": 37696
+    },
+    "integratedBundle": {
+      "sha256": "fbc21288fbfcfb190fbb6f7e3954319342ea4289adf2d3aa3f2b23838bd58961",
+      "bytes": 1020550
+    },
+    "livePatchedBundle": {
+      "sha256": "fa790b4948dbdb8902bbd40342c84fe798b0ad597b12fe8952b7e014b6a961c8",
+      "bytes": 1165183
+    }
+  },
+  "deploymentCandidate": "live-v28-parallel.ts.txt",
+  "baseline": "live API v28; formatter only before limited patch",
+  "formatAstHash": "e5010c1e868b841184e1c895eac8b6fc0cd8dcf4f0e0b93ed4c12a0a90f4847e",
+  "formatAstMatch": true,
+  "limitedHandlerMock": "PASS"
+}

@@ -1,0 +1,13 @@
+.raid-approved__panel {
+  height: calc(100dvh - 28px);
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #d6b95f #211f26;
+}
+.raid-approved__panel::-webkit-scrollbar { width: 7px; }
+.raid-approved__panel::-webkit-scrollbar-track { background: #211f26; }
+.raid-approved__panel::-webkit-scrollbar-thumb { background: #d6b95f; border: 1px solid #7f672f; border-radius: 3px; }
+.raid-approved__screen { padding-bottom: 90px; }
+.raid-approved__footer { position: sticky; left: auto; right: auto; bottom: 0; z-index: 5; flex-shrink: 0; margin-top: auto; }

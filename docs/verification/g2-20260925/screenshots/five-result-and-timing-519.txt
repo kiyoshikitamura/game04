@@ -1,0 +1,362 @@
+- iframe [active]:
+  - alert
+  - region "ゲーム画面":
+    - img "くノ一"
+    - generic: Lv.1
+    - strong: G2継続QA
+    - generic "将来の同盟表示枠": ◇ 同盟 —
+    - button "アカウント連携": 未認証
+    - button "メニュー"
+    - generic: 銭 13,220
+    - generic: 輝石 200
+    - generic: 行動力 100/100
+    - main:
+      - heading "ステージクリア" [level=2]
+      - paragraph: 1-1
+      - heading "獲得報酬" [level=3]
+      - list:
+        - generic: 銭
+        - strong: ×500
+        - generic: 武将EXP小（100 EXP）
+        - strong: ×1
+        - generic: 装備EXP小（100 EXP）
+        - strong: ×1
+      - paragraph: プレイヤーEXP +20 Lv.1 → 1・行動力回復 +0（98/100）
+      - button "ステージ一覧へ"
+      - button "再挑戦"
+      - button "次のステージへ"
+      - button "編成を見直す"
+    - navigation "メインナビゲーション":
+      - button "本陣"
+      - button "出陣"
+      - button "武将"
+      - button "共闘"
+      - button "召喚"
+- region "QA読み込み計測":
+  - heading "QA読み込み計測" [level=2]
+  - paragraph: 本体は上の実寸iframeです。APIは認証・通信・応答確認を含む総待機時間。画像は必須画像グループの待機時間（キャッシュを含む）です。操作可能時刻・TTIは未計測。
+  - button "本体を再読込して計測を消去"
+  - paragraph: 件数：44 / 100
+  - generic "ブラウザ初回表示指標":
+    - paragraph: Navigation：navigate ／ responseStart 995.6 ms ／ responseEnd 998.0 ms ／ DCL 1674.3 ms
+    - paragraph: first-paint：1700.0 ms
+    - paragraph: first-contentful-paint：1700.0 ms
+  - table:
+    - rowgroup:
+      - row "種別 / 対象 枚数 開始ms 完了ms 待機ms 結果":
+        - columnheader "種別 / 対象"
+        - columnheader "枚数"
+        - columnheader "開始ms"
+        - columnheader "完了ms"
+        - columnheader "待機ms"
+        - columnheader "結果"
+    - rowgroup:
+      - row "request / get_state — 31166.1 33275.5 2109.4 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "31166.1"
+        - cell "33275.5"
+        - cell "2109.4"
+        - cell "success"
+      - row "image-group / home 9 33308.9 33738.8 429.9 success":
+        - cell "image-group / home"
+        - cell "9"
+        - cell "33308.9"
+        - cell "33738.8"
+        - cell "429.9"
+        - cell "success"
+      - row "image-group / growth 17 82103.4 82594.3 490.9 success":
+        - cell "image-group / growth"
+        - cell "17"
+        - cell "82103.4"
+        - cell "82594.3"
+        - cell "490.9"
+        - cell "success"
+      - row "request / get_state — 82079.2 83762.8 1683.6 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "82079.2"
+        - cell "83762.8"
+        - cell "1683.6"
+        - cell "success"
+      - row "request / get_state — 91167.6 92483.6 1316.0 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "91167.6"
+        - cell "92483.6"
+        - cell "1316.0"
+        - cell "success"
+      - row "image-group / home 9 107325.3 107329.6 4.3 success":
+        - cell "image-group / home"
+        - cell "9"
+        - cell "107325.3"
+        - cell "107329.6"
+        - cell "4.3"
+        - cell "success"
+      - row "request / get_state — 107322.6 108849.1 1526.5 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "107322.6"
+        - cell "108849.1"
+        - cell "1526.5"
+        - cell "success"
+      - row "image-group / quest 2 115622.9 115939.9 317.0 success":
+        - cell "image-group / quest"
+        - cell "2"
+        - cell "115622.9"
+        - cell "115939.9"
+        - cell "317.0"
+        - cell "success"
+      - row "request / get_state — 115619.9 117132.1 1512.2 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "115619.9"
+        - cell "117132.1"
+        - cell "1512.2"
+        - cell "success"
+      - row "image-group / growth 17 136967.5 136971.8 4.3 success":
+        - cell "image-group / growth"
+        - cell "17"
+        - cell "136967.5"
+        - cell "136971.8"
+        - cell "4.3"
+        - cell "success"
+      - row "request / get_state — 136964.6 138427.3 1462.7 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "136964.6"
+        - cell "138427.3"
+        - cell "1462.7"
+        - cell "success"
+      - row "image-group / growth 20 145011.9 145441.0 429.1 success":
+        - cell "image-group / growth"
+        - cell "20"
+        - cell "145011.9"
+        - cell "145441.0"
+        - cell "429.1"
+        - cell "success"
+      - row "request / get_state — 151167.4 152750.8 1583.4 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "151167.4"
+        - cell "152750.8"
+        - cell "1583.4"
+        - cell "success"
+      - row "request / save_deck — 160176.3 162287.1 2110.8 success":
+        - cell "request / save_deck"
+        - cell "—"
+        - cell "160176.3"
+        - cell "162287.1"
+        - cell "2110.8"
+        - cell "success"
+      - row "request / save_deck — 210449.7 212669.6 2219.9 success":
+        - cell "request / save_deck"
+        - cell "—"
+        - cell "210449.7"
+        - cell "212669.6"
+        - cell "2219.9"
+        - cell "success"
+      - row "request / get_state — 271167.4 272823.0 1655.6 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "271167.4"
+        - cell "272823.0"
+        - cell "1655.6"
+        - cell "success"
+      - row "image-group / quest 2 305387.0 305393.8 6.8 success":
+        - cell "image-group / quest"
+        - cell "2"
+        - cell "305387.0"
+        - cell "305393.8"
+        - cell "6.8"
+        - cell "success"
+      - row "request / get_state — 305382.4 306855.5 1473.1 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "305382.4"
+        - cell "306855.5"
+        - cell "1473.1"
+        - cell "success"
+      - row "image-group / quest 1 319159.8 319159.9 0.1 success":
+        - cell "image-group / quest"
+        - cell "1"
+        - cell "319159.8"
+        - cell "319159.9"
+        - cell "0.1"
+        - cell "success"
+      - row "image-group / quest 1 325825.5 325826.0 0.5 success":
+        - cell "image-group / quest"
+        - cell "1"
+        - cell "325825.5"
+        - cell "325826.0"
+        - cell "0.5"
+        - cell "success"
+      - row "request / get_state — 331167.4 332732.6 1565.2 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "331167.4"
+        - cell "332732.6"
+        - cell "1565.2"
+        - cell "success"
+      - row "request / quest_battle — 362139.2 365905.2 3766.0 success":
+        - cell "request / quest_battle"
+        - cell "—"
+        - cell "362139.2"
+        - cell "365905.2"
+        - cell "3766.0"
+        - cell "success"
+      - row "request / get_state — 391167.4 392619.0 1451.6 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "391167.4"
+        - cell "392619.0"
+        - cell "1451.6"
+        - cell "success"
+      - row "request / get_state — 451167.5 453020.7 1853.2 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "451167.5"
+        - cell "453020.7"
+        - cell "1853.2"
+        - cell "success"
+      - row "request / get_state — 511167.4 512718.1 1550.7 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "511167.4"
+        - cell "512718.1"
+        - cell "1550.7"
+        - cell "success"
+      - row "request / get_state — 571167.3 572693.5 1526.2 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "571167.3"
+        - cell "572693.5"
+        - cell "1526.2"
+        - cell "success"
+      - row "request / get_state — 631167.3 632822.2 1654.9 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "631167.3"
+        - cell "632822.2"
+        - cell "1654.9"
+        - cell "success"
+      - row "request / get_state — 691167.4 692738.3 1570.9 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "691167.4"
+        - cell "692738.3"
+        - cell "1570.9"
+        - cell "success"
+      - row "request / get_state — 751167.4 752717.2 1549.8 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "751167.4"
+        - cell "752717.2"
+        - cell "1549.8"
+        - cell "success"
+      - row "request / get_state — 811167.3 812823.1 1655.8 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "811167.3"
+        - cell "812823.1"
+        - cell "1655.8"
+        - cell "success"
+      - row "request / get_state — 871167.3 872938.9 1771.6 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "871167.3"
+        - cell "872938.9"
+        - cell "1771.6"
+        - cell "success"
+      - row "request / get_state — 931167.3 932586.5 1419.2 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "931167.3"
+        - cell "932586.5"
+        - cell "1419.2"
+        - cell "success"
+      - row "request / get_state — 991167.4 992800.8 1633.4 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "991167.4"
+        - cell "992800.8"
+        - cell "1633.4"
+        - cell "success"
+      - row "request / get_state — 1051167.4 1052708.4 1541.0 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "1051167.4"
+        - cell "1052708.4"
+        - cell "1541.0"
+        - cell "success"
+      - row "request / get_state — 1111167.3 1112864.9 1697.6 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "1111167.3"
+        - cell "1112864.9"
+        - cell "1697.6"
+        - cell "success"
+      - row "request / get_state — 1171167.3 1172656.7 1489.4 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "1171167.3"
+        - cell "1172656.7"
+        - cell "1489.4"
+        - cell "success"
+      - row "request / get_state — 1231167.3 1232561.3 1394.0 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "1231167.3"
+        - cell "1232561.3"
+        - cell "1394.0"
+        - cell "success"
+      - row "request / get_state — 1291167.4 1292658.6 1491.2 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "1291167.4"
+        - cell "1292658.6"
+        - cell "1491.2"
+        - cell "success"
+      - row "request / get_state — 1351167.4 1352678.6 1511.2 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "1351167.4"
+        - cell "1352678.6"
+        - cell "1511.2"
+        - cell "success"
+      - row "request / get_state — 1411167.4 1412690.2 1522.8 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "1411167.4"
+        - cell "1412690.2"
+        - cell "1522.8"
+        - cell "success"
+      - row "request / get_state — 1471167.5 1472610.3 1442.8 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "1471167.5"
+        - cell "1472610.3"
+        - cell "1442.8"
+        - cell "success"
+      - row "request / get_state — 1531167.3 1532608.1 1440.8 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "1531167.3"
+        - cell "1532608.1"
+        - cell "1440.8"
+        - cell "success"
+      - row "request / get_state — 1591167.4 1592632.9 1465.5 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "1591167.4"
+        - cell "1592632.9"
+        - cell "1465.5"
+        - cell "success"
+      - row "request / get_state — 1651167.3 1652674.6 1507.3 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "1651167.3"
+        - cell "1652674.6"
+        - cell "1507.3"
+        - cell "success"
+- alert

@@ -1,0 +1,840 @@
+[
+  {
+    "id": "4a51866e-f35b-492a-8b99-7197518ce5b4",
+    "status": "settled",
+    "target_id": "kai-4",
+    "seed": 1505643650,
+    "master_version": "APPROVED_QUEST65_ROUND17_20260922",
+    "skill": {
+      "id": "SKD071",
+      "name": "大祓い",
+      "image": "",
+      "rarity": "SSR",
+      "spCost": 139,
+      "target": "all_allies",
+      "effects": [
+        {
+          "type": "cleanse",
+          "power": 1,
+          "cleanseCategory": "debuff"
+        },
+        {
+          "type": "cleanse",
+          "power": 1,
+          "cleanseCategory": "dot"
+        }
+      ],
+      "element": "light",
+      "condition": {
+        "type": "always"
+      },
+      "description": "味方全体・1人でも該当状態あり・能力低下解除件数:1.00件／継続ダメージ解除件数:1.00件",
+      "fixedTarget": false
+    },
+    "cleanses": [
+      {
+        "text": "くノ一 debuff 1件解除",
+        "index": 52,
+        "reason": "debuff",
+        "targetIds": [
+          "char_alice_01"
+        ],
+        "partyStatuses": [
+          {
+            "id": "char_alice_01",
+            "statuses": []
+          },
+          {
+            "id": "char_gou_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kageyama_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kenji_01",
+            "statuses": [
+              {
+                "type": "atk_down",
+                "carry": true,
+                "power": 11.34,
+                "sequence": 1,
+                "sourceId": "5-4/1/1",
+                "remaining": 2,
+                "sourceEnemy": true,
+                "appliedAction": 8,
+                "sourceSkillId": "SKD037"
+              }
+            ]
+          },
+          {
+            "id": "char_long_01",
+            "statuses": []
+          }
+        ]
+      },
+      {
+        "text": "山伏 debuff 1件解除",
+        "index": 53,
+        "reason": "debuff",
+        "targetIds": [
+          "char_kenji_01"
+        ],
+        "partyStatuses": [
+          {
+            "id": "char_alice_01",
+            "statuses": []
+          },
+          {
+            "id": "char_gou_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kageyama_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kenji_01",
+            "statuses": []
+          },
+          {
+            "id": "char_long_01",
+            "statuses": []
+          }
+        ]
+      },
+      {
+        "text": "くノ一 debuff 1件解除",
+        "index": 135,
+        "reason": "debuff",
+        "targetIds": [
+          "char_alice_01"
+        ],
+        "partyStatuses": [
+          {
+            "id": "char_alice_01",
+            "statuses": []
+          },
+          {
+            "id": "char_gou_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kageyama_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kenji_01",
+            "statuses": [
+              {
+                "type": "atk_down",
+                "carry": true,
+                "power": 11.34,
+                "sequence": 5,
+                "sourceId": "5-4/1/1",
+                "remaining": 2,
+                "sourceEnemy": true,
+                "appliedAction": 24,
+                "sourceSkillId": "SKD037"
+              }
+            ]
+          },
+          {
+            "id": "char_long_01",
+            "statuses": []
+          }
+        ]
+      },
+      {
+        "text": "山伏 debuff 1件解除",
+        "index": 136,
+        "reason": "debuff",
+        "targetIds": [
+          "char_kenji_01"
+        ],
+        "partyStatuses": [
+          {
+            "id": "char_alice_01",
+            "statuses": []
+          },
+          {
+            "id": "char_gou_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kageyama_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kenji_01",
+            "statuses": []
+          },
+          {
+            "id": "char_long_01",
+            "statuses": []
+          }
+        ]
+      },
+      {
+        "text": "山伏 debuff 1件解除",
+        "index": 196,
+        "reason": "debuff",
+        "targetIds": [
+          "char_kenji_01"
+        ],
+        "partyStatuses": [
+          {
+            "id": "char_alice_01",
+            "statuses": []
+          },
+          {
+            "id": "char_gou_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kageyama_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kenji_01",
+            "statuses": []
+          },
+          {
+            "id": "char_long_01",
+            "statuses": []
+          }
+        ]
+      },
+      {
+        "text": "山伏 debuff 1件解除",
+        "index": 238,
+        "reason": "debuff",
+        "targetIds": [
+          "char_kenji_01"
+        ],
+        "partyStatuses": [
+          {
+            "id": "char_alice_01",
+            "statuses": []
+          },
+          {
+            "id": "char_gou_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kageyama_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kenji_01",
+            "statuses": []
+          },
+          {
+            "id": "char_long_01",
+            "statuses": []
+          }
+        ]
+      },
+      {
+        "text": "山伏 debuff 1件解除",
+        "index": 286,
+        "reason": "debuff",
+        "targetIds": [
+          "char_kenji_01"
+        ],
+        "partyStatuses": [
+          {
+            "id": "char_alice_01",
+            "statuses": []
+          },
+          {
+            "id": "char_gou_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kageyama_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kenji_01",
+            "statuses": []
+          },
+          {
+            "id": "char_long_01",
+            "statuses": [
+              {
+                "type": "atk_down",
+                "carry": true,
+                "power": 11.34,
+                "sequence": 10,
+                "sourceId": "5-4/1/1",
+                "remaining": 3,
+                "sourceEnemy": true,
+                "appliedAction": 63,
+                "sourceSkillId": "SKD037"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "text": "女侍 debuff 1件解除",
+        "index": 287,
+        "reason": "debuff",
+        "targetIds": [
+          "char_long_01"
+        ],
+        "partyStatuses": [
+          {
+            "id": "char_alice_01",
+            "statuses": []
+          },
+          {
+            "id": "char_gou_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kageyama_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kenji_01",
+            "statuses": []
+          },
+          {
+            "id": "char_long_01",
+            "statuses": []
+          }
+        ]
+      },
+      {
+        "text": "山伏 debuff 1件解除",
+        "index": 361,
+        "reason": "debuff",
+        "targetIds": [
+          "char_kenji_01"
+        ],
+        "partyStatuses": [
+          {
+            "id": "char_alice_01",
+            "statuses": []
+          },
+          {
+            "id": "char_gou_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kageyama_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kenji_01",
+            "statuses": []
+          },
+          {
+            "id": "char_long_01",
+            "statuses": [
+              {
+                "type": "atk_down",
+                "carry": true,
+                "power": 11.34,
+                "sequence": 12,
+                "sourceId": "5-4/1/1",
+                "remaining": 3,
+                "sourceEnemy": true,
+                "appliedAction": 79,
+                "sourceSkillId": "SKD037"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "text": "女侍 debuff 1件解除",
+        "index": 362,
+        "reason": "debuff",
+        "targetIds": [
+          "char_long_01"
+        ],
+        "partyStatuses": [
+          {
+            "id": "char_alice_01",
+            "statuses": []
+          },
+          {
+            "id": "char_gou_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kageyama_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kenji_01",
+            "statuses": []
+          },
+          {
+            "id": "char_long_01",
+            "statuses": []
+          }
+        ]
+      },
+      {
+        "text": "山伏 debuff 1件解除",
+        "index": 401,
+        "reason": "debuff",
+        "targetIds": [
+          "char_kenji_01"
+        ],
+        "partyStatuses": [
+          {
+            "id": "char_alice_01",
+            "statuses": []
+          },
+          {
+            "id": "char_gou_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kageyama_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kenji_01",
+            "statuses": []
+          },
+          {
+            "id": "char_long_01",
+            "statuses": []
+          }
+        ]
+      },
+      {
+        "text": "山伏 debuff 1件解除",
+        "index": 436,
+        "reason": "debuff",
+        "targetIds": [
+          "char_kenji_01"
+        ],
+        "partyStatuses": [
+          {
+            "id": "char_alice_01",
+            "statuses": []
+          },
+          {
+            "id": "char_gou_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kageyama_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kenji_01",
+            "statuses": []
+          },
+          {
+            "id": "char_long_01",
+            "statuses": []
+          }
+        ]
+      },
+      {
+        "text": "山伏 debuff 1件解除",
+        "index": 470,
+        "reason": "debuff",
+        "targetIds": [
+          "char_kenji_01"
+        ],
+        "partyStatuses": [
+          {
+            "id": "char_alice_01",
+            "statuses": []
+          },
+          {
+            "id": "char_gou_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kageyama_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kenji_01",
+            "statuses": []
+          },
+          {
+            "id": "char_long_01",
+            "statuses": []
+          }
+        ]
+      },
+      {
+        "text": "山伏 debuff 1件解除",
+        "index": 517,
+        "reason": "debuff",
+        "targetIds": [
+          "char_kenji_01"
+        ],
+        "partyStatuses": [
+          {
+            "id": "char_alice_01",
+            "statuses": []
+          },
+          {
+            "id": "char_gou_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kageyama_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kenji_01",
+            "statuses": []
+          },
+          {
+            "id": "char_long_01",
+            "statuses": []
+          }
+        ]
+      },
+      {
+        "text": "山伏 debuff 1件解除",
+        "index": 592,
+        "reason": "debuff",
+        "targetIds": [
+          "char_kenji_01"
+        ],
+        "partyStatuses": [
+          {
+            "id": "char_alice_01",
+            "statuses": []
+          },
+          {
+            "id": "char_gou_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kageyama_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kenji_01",
+            "statuses": []
+          },
+          {
+            "id": "char_long_01",
+            "statuses": [
+              {
+                "type": "atk_down",
+                "carry": true,
+                "power": 11.34,
+                "sequence": 19,
+                "sourceId": "5-4/1/1",
+                "remaining": 2,
+                "sourceEnemy": true,
+                "appliedAction": 127,
+                "sourceSkillId": "SKD037"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "text": "女侍 debuff 1件解除",
+        "index": 593,
+        "reason": "debuff",
+        "targetIds": [
+          "char_long_01"
+        ],
+        "partyStatuses": [
+          {
+            "id": "char_alice_01",
+            "statuses": []
+          },
+          {
+            "id": "char_gou_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kageyama_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kenji_01",
+            "statuses": []
+          },
+          {
+            "id": "char_long_01",
+            "statuses": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "acea96b5-a06e-4be7-a70e-d4e83a561889",
+    "status": "settled",
+    "target_id": "echigo-6",
+    "seed": 2853931145,
+    "master_version": "APPROVED_QUEST65_ROUND17_20260922",
+    "skill": {
+      "id": "SKD071",
+      "name": "大祓い",
+      "image": "",
+      "rarity": "SSR",
+      "spCost": 139,
+      "target": "all_allies",
+      "effects": [
+        {
+          "type": "cleanse",
+          "power": 1,
+          "cleanseCategory": "debuff"
+        },
+        {
+          "type": "cleanse",
+          "power": 1,
+          "cleanseCategory": "dot"
+        }
+      ],
+      "element": "light",
+      "condition": {
+        "type": "always"
+      },
+      "description": "味方全体・1人でも該当状態あり・能力低下解除件数:1.00件／継続ダメージ解除件数:1.00件",
+      "fixedTarget": false
+    },
+    "cleanses": [
+      {
+        "text": "伝令 dot 1件解除",
+        "index": 53,
+        "reason": "dot",
+        "targetIds": [
+          "char_gou_01"
+        ],
+        "partyStatuses": [
+          {
+            "id": "char_alice_01",
+            "statuses": []
+          },
+          {
+            "id": "char_gou_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kageyama_01",
+            "statuses": [
+              {
+                "type": "dot",
+                "carry": true,
+                "power": 16.14,
+                "amount": 1131.414,
+                "sequence": 2,
+                "sourceId": "6-6/1/1",
+                "remaining": 2,
+                "sourceEnemy": true,
+                "appliedAction": 5,
+                "sourceSkillId": "SKD058"
+              }
+            ]
+          },
+          {
+            "id": "char_kenji_01",
+            "statuses": [
+              {
+                "type": "dot",
+                "carry": true,
+                "power": 16.14,
+                "amount": 1131.414,
+                "sequence": 3,
+                "sourceId": "6-6/1/1",
+                "remaining": 2,
+                "sourceEnemy": true,
+                "appliedAction": 5,
+                "sourceSkillId": "SKD058"
+              }
+            ]
+          },
+          {
+            "id": "char_long_01",
+            "statuses": [
+              {
+                "type": "dot",
+                "carry": true,
+                "power": 16.14,
+                "amount": 1131.414,
+                "sequence": 4,
+                "sourceId": "6-6/1/1",
+                "remaining": 2,
+                "sourceEnemy": true,
+                "appliedAction": 5,
+                "sourceSkillId": "SKD058"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "text": "僧兵 dot 1件解除",
+        "index": 54,
+        "reason": "dot",
+        "targetIds": [
+          "char_kageyama_01"
+        ],
+        "partyStatuses": [
+          {
+            "id": "char_alice_01",
+            "statuses": []
+          },
+          {
+            "id": "char_gou_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kageyama_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kenji_01",
+            "statuses": [
+              {
+                "type": "dot",
+                "carry": true,
+                "power": 16.14,
+                "amount": 1131.414,
+                "sequence": 3,
+                "sourceId": "6-6/1/1",
+                "remaining": 2,
+                "sourceEnemy": true,
+                "appliedAction": 5,
+                "sourceSkillId": "SKD058"
+              }
+            ]
+          },
+          {
+            "id": "char_long_01",
+            "statuses": [
+              {
+                "type": "dot",
+                "carry": true,
+                "power": 16.14,
+                "amount": 1131.414,
+                "sequence": 4,
+                "sourceId": "6-6/1/1",
+                "remaining": 2,
+                "sourceEnemy": true,
+                "appliedAction": 5,
+                "sourceSkillId": "SKD058"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "text": "山伏 dot 1件解除",
+        "index": 55,
+        "reason": "dot",
+        "targetIds": [
+          "char_kenji_01"
+        ],
+        "partyStatuses": [
+          {
+            "id": "char_alice_01",
+            "statuses": []
+          },
+          {
+            "id": "char_gou_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kageyama_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kenji_01",
+            "statuses": []
+          },
+          {
+            "id": "char_long_01",
+            "statuses": [
+              {
+                "type": "dot",
+                "carry": true,
+                "power": 16.14,
+                "amount": 1131.414,
+                "sequence": 4,
+                "sourceId": "6-6/1/1",
+                "remaining": 2,
+                "sourceEnemy": true,
+                "appliedAction": 5,
+                "sourceSkillId": "SKD058"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "text": "女侍 dot 1件解除",
+        "index": 56,
+        "reason": "dot",
+        "targetIds": [
+          "char_long_01"
+        ],
+        "partyStatuses": [
+          {
+            "id": "char_alice_01",
+            "statuses": []
+          },
+          {
+            "id": "char_gou_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kageyama_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kenji_01",
+            "statuses": []
+          },
+          {
+            "id": "char_long_01",
+            "statuses": []
+          }
+        ]
+      },
+      {
+        "text": "女侍 dot 1件解除",
+        "index": 141,
+        "reason": "dot",
+        "targetIds": [
+          "char_long_01"
+        ],
+        "partyStatuses": [
+          {
+            "id": "char_alice_01",
+            "statuses": []
+          },
+          {
+            "id": "char_gou_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kageyama_01",
+            "statuses": []
+          },
+          {
+            "id": "char_kenji_01",
+            "statuses": []
+          },
+          {
+            "id": "char_long_01",
+            "statuses": []
+          }
+        ]
+      }
+    ]
+  }
+]

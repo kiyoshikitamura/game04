@@ -1,0 +1,36 @@
+{
+  "candidate": "GAME04 G3 isolated API v2",
+  "deploymentDigest": "ezbr23fd5b78b26842ad2e29399c4642f1a4ee272ce4a678d71cca737c8448246528",
+  "observedAt": "2026-09-25T10:22:04.350Z",
+  "projectRef": "znakrkaazliexzwihxge",
+  "qaUserId": "912cb2cb-4e2d-48ab-adf3-c17818e9021a",
+  "method": "Authenticated status and replay-only regression against already committed fixed operation IDs. All requests forced eu-central-1. No new draw or fixture mutation.",
+  "observations": [
+    { "label": "status-eu-1-cold", "status": 200, "elapsedMs": 14139, "servedRegion": "eu-central-1", "responseSha256": "c8a9cee245278d65a452ffcb27bffaf109cb845a8db1e71ace853e219ab0bfab", "stateVersion": 9 },
+    { "label": "status-eu-2-warm", "status": 200, "elapsedMs": 947, "servedRegion": "eu-central-1", "responseSha256": "c8a9cee245278d65a452ffcb27bffaf109cb845a8db1e71ace853e219ab0bfab", "stateVersion": 9 },
+    { "label": "status-eu-3-warm", "status": 200, "elapsedMs": 1315, "servedRegion": "eu-central-1", "responseSha256": "c8a9cee245278d65a452ffcb27bffaf109cb845a8db1e71ace853e219ab0bfab", "stateVersion": 9 },
+    { "label": "special-replay-eu-1", "status": 200, "elapsedMs": 924, "servedRegion": "eu-central-1", "replayed": true, "responseSha256": "6c33b3598c7dc27b9736d97a0841cbd4b972d29d30d9299bf4a103ab3f831042", "stateVersion": 9 },
+    { "label": "special-replay-eu-2", "status": 200, "elapsedMs": 832, "servedRegion": "eu-central-1", "replayed": true, "responseSha256": "6c33b3598c7dc27b9736d97a0841cbd4b972d29d30d9299bf4a103ab3f831042", "stateVersion": 9 },
+    { "label": "special-replay-eu-3", "status": 200, "elapsedMs": 764, "servedRegion": "eu-central-1", "replayed": true, "responseSha256": "6c33b3598c7dc27b9736d97a0841cbd4b972d29d30d9299bf4a103ab3f831042", "stateVersion": 9 },
+    { "label": "parallel-replay-1a-cold", "status": 200, "elapsedMs": 9444, "servedRegion": "eu-central-1", "replayed": true, "responseSha256": "7ad46fbb86452f885dcd7c4884f0f501980a003da0694375cc428607b6cca6a7", "stateVersion": 9 },
+    { "label": "parallel-replay-1b-cold", "status": 200, "elapsedMs": 9536, "servedRegion": "eu-central-1", "replayed": true, "responseSha256": "7ad46fbb86452f885dcd7c4884f0f501980a003da0694375cc428607b6cca6a7", "stateVersion": 9 },
+    { "label": "parallel-replay-2a-warm", "status": 200, "elapsedMs": 725, "servedRegion": "eu-central-1", "replayed": true, "responseSha256": "7ad46fbb86452f885dcd7c4884f0f501980a003da0694375cc428607b6cca6a7", "stateVersion": 9 },
+    { "label": "parallel-replay-2b-warm", "status": 200, "elapsedMs": 1234, "servedRegion": "eu-central-1", "replayed": true, "responseSha256": "7ad46fbb86452f885dcd7c4884f0f501980a003da0694375cc428607b6cca6a7", "stateVersion": 9 }
+  ],
+  "serverLogCorrelation": {
+    "source": "Supabase function_edge_logs and function_logs for deployment version 2",
+    "statusExecutionMs": [1610, 834, 1185],
+    "specialReplayExecutionMs": [762, 719, 649],
+    "parallelReplayExecutionMs": [832, 877, 690, 1105],
+    "isolateBootMs": [49, 36, 36, 48, 37, 38, 37, 49, 37, 38],
+    "diagnosis": "The 9.4-14.1 second client outliers occurred before the corresponding isolate boot/function execution. The platform reported 36-49 ms isolate boot and 649-1610 ms function execution. The dominant cold delay is therefore regional Edge scheduling/routing before invocation, not top-level bundle initialization or a long in-handler auth/DB sequence."
+  },
+  "conclusion": {
+    "functionalReplayConsistency": true,
+    "warmRequestsWithinExceptionCeiling": true,
+    "coldRequestsWithinExceptionCeiling": false,
+    "performanceAcceptance": false,
+    "reason": "Warm status/replay observations are at or below 1.5 seconds, but cold status and the first concurrent replay pair took 9.4-14.1 seconds. Supabase logs place the dominant delay before isolate boot; cron warming is not used and the approved ceiling is not relaxed."
+  },
+  "containsCredentials": false
+}

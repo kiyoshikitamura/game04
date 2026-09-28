@@ -1,0 +1,14 @@
+import fs from'node:fs';import{evaluate,judge,swap}from'./repair17-helper.mjs';import{skill}from'./model.mjs';
+const read=p=>JSON.parse(fs.readFileSync(p)),copy=structuredClone,src=read('battle-check/four17-screen.json').results,round=v=>Math.max(1,Math.round(v/10)*10),results=[];
+for(const id of ['7-7','8-3','10-7']){const variants=[];for(let t=0;t<6;t++){const c=copy(src.find(b=>b.id===id).variants[t]),p=c.parties.main,w=c.waves,lb=c.lb,A=Math.max(...p.map(u=>u.stats.atk)),H=p.reduce((s,u)=>s+u.stats.hp,0)/5,D=p.reduce((s,u)=>s+u.stats.def,0)/5,k=t%3,T=Math.floor(t/3);
+ if(id==='7-7'){for(const wave of w){wave[0].skills=[];wave[0].initialSp=0;}c.notes.push('前衛の弱い同一盾が後衛の強い盾を阻害していたため、前衛の盾スキルを外す');}
+ if(id==='8-3'){for(const u of p)u.skills=[];p[1].skills=[skill('SKD020',lb)];p[3].skills=[skill('SKD008',lb)];const order=[p[0],p[2],p[1],p[4],p[3]];c.parties.main=order;for(const wave of w)if(wave.length===1){wave[0].stats.def=round(A*(.45+.12*k));wave[0].stats.hp=round(A*(3+.6*T));}c.focus=['SKD020','SKD008'];c.notes.push('単体は低消費Rを採用し、高消費主砲のSP待ちを解消する');}
+ if(id==='10-7'){w[0][1].stats.sp=50;w[0][1].initialSp=50;c.notes.push('導入Wave後衛のSP上限を50にして、盾消費直後の2連続攻撃を抑える');}
+ const main=c.parties.main;c.parties.control=copy(main);c.parties.direct=copy(main);for(const u of c.parties.control)u.skills=u.skills.filter(s=>!c.focus.includes(s.id));for(const u of c.parties.direct)u.skills=u.skills.map(s=>c.focus.includes(s.id)?skill(({fire:'SKD007',water:'SKD008',earth:'SKD009',wind:'SKD010',light:'SKD011',dark:'SKD012'})[s.element],lb):s);
+ if(id==='8-3'){c.parties.control=copy(main);c.parties.direct=copy(main);for(const u of c.parties.control)u.skills=u.skills.map(s=>s.id==='SKD008'?skill('SKD020',lb):s);for(const u of c.parties.direct)u.skills=u.skills.map(s=>s.id==='SKD020'?skill('SKD008',lb):s);}
+ c.parties.alternative=copy(main);if(id==='7-7'||id==='8-3')swap(c.parties.alternative,c.parties.alternative.findIndex(u=>u.name==='直江兼続'),'今川義元');else swap(c.parties.alternative,0,'上杉謙信');if(id==='10-7'){// avoid duplicated Kenshin: exchange the original Kenshin for Date at the other slot, then restore per-slot skills.
+ const j=c.parties.alternative.findIndex((u,i)=>i>0&&u.name==='上杉謙信');if(j>=0)swap(c.parties.alternative,j,'伊達政宗');}
+ c.tier='last-'+t;const cases={};for(const mode of ['main','control','direct'])cases[mode]=evaluate(c.parties[mode],w,20001,12);variants.push({...c,screen:cases,judgment:judge(cases)});
+ }
+ const best=[...variants].sort((a,b)=>Number(b.judgment.qualifiedScreen)-Number(a.judgment.qualifiedScreen)||b.judgment.score-a.judgment.score)[0];results.push({id,variants,selectedTier:best.tier});console.log(id,best.tier,best.judgment.qualifiedScreen,best.judgment.score);}
+fs.writeFileSync('battle-check/last17-screen.json',JSON.stringify({status:'CANDIDATE_NOT_FIXED',results}));

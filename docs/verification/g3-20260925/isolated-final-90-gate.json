@@ -1,0 +1,57 @@
+{
+  "verifiedAt": "2026-09-25T10:24:18Z",
+  "projectRef": "znakrkaazliexzwihxge",
+  "script": "supabase/isolated/g3/90_verify.sql",
+  "result": "PASS",
+  "fixtureWriters": {
+    "game04_prepare_isolated_g3_qa(uuid,uuid)": null,
+    "game04_finalize_isolated_g3_qa(uuid,text)": null
+  },
+  "environment": {
+    "users": 2,
+    "activeQaPeriods": 2,
+    "guildMemberRows": 0,
+    "cronEnabled": false
+  },
+  "masters": {
+    "acquisition_conversion": {"status": "APPROVED_GROWTH_V1_20260921", "dataMd5": "ea9eafb50e9e6e1d6e317839652f3434"},
+    "formal_gacha": {"status": "GAME04_G3_FORMAL_20260925", "dataMd5": "748bde1a107fc2e37aa0c33a6752561f"},
+    "isolated_environment": {"status": "GAME04_G3_ISOLATED_ACCEPTANCE", "dataMd5": "4a8b7752c0874b4d9b91ce3229445a44"},
+    "runtime": {"status": "PREVIEW_PROVISIONAL", "dataMd5": "b752fd13bf874f3fdf91b0fb870032b0"},
+    "territory": {"status": "PREVIEW_PROVISIONAL_20260923", "dataMd5": "0b6e0f60cf061de410758c15e27bdbf3"}
+  },
+  "functions": {
+    "billing_apply_lot_delta(uuid,text,bigint,bigint)": {"securityDefiner": true, "definitionMd5": "95926d6f5b530f7f547f9e5e22741cd4"},
+    "game04_commit_gacha(uuid,bigint,jsonb,bigint,integer,integer,uuid,text,jsonb,jsonb)": {"securityDefiner": false, "definitionMd5": "c76a73b7e5eefdcae6f7a716c7eacb00"},
+    "game04_commit_growth_state(uuid,bigint,jsonb,bigint,integer,uuid,jsonb,jsonb,bigint,jsonb)": {"securityDefiner": false, "definitionMd5": "4b73c1fc3156e32390c4aadac5cbf398"},
+    "game04_get_session_state(uuid,jsonb)": {"securityDefiner": false, "definitionMd5": "f41f4158a27bfe3540625a75ed1325ab"},
+    "game04_kpi_gameplay_daily(timestamptz,timestamptz)": {"securityDefiner": false, "definitionMd5": "97c2b3b387b071f91326b0cae907bb39"},
+    "game04_kpi_receipt_detail(timestamptz,timestamptz)": {"securityDefiner": false, "definitionMd5": "11494c4b89a78845418902deb03e4a57"}
+  },
+  "receiptReconciliation": {
+    "qaA": {
+      "userId": "39cd3554-dfc7-4781-a71f-da343dbe23c0",
+      "stateVersion": 3,
+      "cash": 12600,
+      "diamonds": 200,
+      "freeDayJst": "2026-09-25",
+      "storedReceipts": 2,
+      "distinctRequestIds": 2,
+      "normalReceipts": 1,
+      "normalDraws": 10,
+      "storedReplayFlags": 0
+    },
+    "qaB": {
+      "userId": "912cb2cb-4e2d-48ab-adf3-c17818e9021a",
+      "stateVersion": 9,
+      "cash": 11600,
+      "diamonds": 0,
+      "freeDayJst": "2026-09-25",
+      "storedReceipts": 7,
+      "distinctRequestIds": 7,
+      "normalReceipts": 2,
+      "normalDraws": 11,
+      "storedReplayFlags": 0
+    }
+  }
+}

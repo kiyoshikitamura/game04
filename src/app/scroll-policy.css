@@ -1,0 +1,64 @@
+/* GAME04 common scroll contract. Scrollbar styling is independent of page assets.
+ * Never hide scrollbars. Only real scroll containers reserve a scrollbar gutter;
+ * decorative clipping (portraits, gauges, effects) must remain clipped.
+ */
+.game04-theme {
+  --scroll-thumb: #c4a16b;
+  --scroll-track: #21171b;
+}
+.game04-theme,
+.game04-theme * {
+  scrollbar-width: thin !important;
+  scrollbar-color: var(--scroll-thumb) var(--scroll-track) !important;
+}
+.game04-theme::-webkit-scrollbar,
+.game04-theme *::-webkit-scrollbar {
+  display: block !important;
+  width: 8px !important;
+  height: 8px !important;
+}
+.game04-theme::-webkit-scrollbar-track,
+.game04-theme *::-webkit-scrollbar-track,
+.game04-theme *::-webkit-scrollbar-corner {
+  background: var(--scroll-track) !important;
+}
+.game04-theme::-webkit-scrollbar-thumb,
+.game04-theme *::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb) !important;
+  border: 1px solid var(--scroll-track) !important;
+  border-radius: 8px !important;
+  min-height: 32px;
+}
+.game04-theme *::-webkit-scrollbar-thumb:hover {
+  background: #e6c78d !important;
+}
+.game04-theme :is(.rd-shell, .app-container, .main-content, .scroll-container,
+  .custom-scrollbar, .canonical-dialog-body, .rd-modal-body, .rd-community-lines,
+  .g4g-modal, .rq-scroll, .legal-page, .auth-container,
+  .setup-container, .setup-preload-screen, .account-auth-scroll-card) {
+  scrollbar-gutter: stable;
+  -webkit-overflow-scrolling: touch;
+  scroll-padding-block: 12px;
+}
+/* Authentication/setup screens also need a fallback scroll owner on short screens. */
+.game04-theme .app-container { overflow-y: auto; }
+/* Shared dialog bodies own scrolling; headers and final actions stay reachable. */
+.game04-theme .canonical-dialog {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  max-height: 80vh;
+  max-height: 80dvh;
+}
+.game04-theme .canonical-dialog-body {
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
+}
+.game04-theme .canonical-dialog-body.is-loading { min-height: min(220px, 30dvh); }
+.game04-theme .canonical-dialog-actions { grid-auto-flow: row; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
+.game04-theme :is(.canonical-dialog-overlay, .rd-modal-backdrop) { overflow-y: auto; }
+
+/* Long headings and the software keyboard must not force the central dialog wider. */
+.game04-theme .rd-modal-header h2{min-width:0;overflow-wrap:anywhere}
+.game04-theme .rd-modal-header>button{flex:none}
+.game04-theme .rd-modal-body{min-width:0;overflow-wrap:anywhere}
+.game04-theme .rd-modal-backdrop{padding-top:max(16px,env(safe-area-inset-top));padding-bottom:max(16px,env(safe-area-inset-bottom))}

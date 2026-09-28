@@ -1,0 +1,7 @@
+import type { ReactNode } from 'react';
+import './game04-ui.css';
+export function NumberUnit({value,unit}:{value:ReactNode;unit?:string}){return <span className="g4-number">{value}{unit&&<small>{unit}</small>}</span>;}
+export function StatGrid({items,className=''}:{items:{label:string;value:number;unit?:string}[];className?:string}){return <dl className={`g4-stats ${className}`}>{items.map(i=><div key={i.label}><dt>{i.label}</dt><dd><NumberUnit value={i.value.toLocaleString()} unit={i.unit}/></dd></div>)}</dl>;}
+export function InfoRow({label,value}:{label:ReactNode;value:ReactNode}){return <div className="g4-info-row"><dt>{label}</dt><dd>{value}</dd></div>;}
+export function RewardList({items}:{items:{key:string;name:string;image?:string|null;amount:number;first?:boolean}[]}){return <ul className="g4-reward-list">{items.map(i=><li key={i.key}>{i.image?<img src={i.image} alt=""/>:<span aria-hidden="true"/>}<span>{i.name}{i.first&&<small className="g4-first-badge">初回</small>}</span><strong>×{i.amount.toLocaleString()}</strong></li>)}</ul>;}
+export function GrowthDisplay({gain,before,after,children,progress}:{gain:number;before?:number;after?:number;children?:ReactNode;progress?:{value:number;max:number}}){return <section className="g4-growth-display"><h3>PLAYER EXP</h3><strong>+{gain.toLocaleString()}</strong>{before!==undefined&&after!==undefined&&<dl><InfoRow label="プレイヤーLv" value={`${before} → ${after}`}/></dl>}{progress&&progress.max>0&&<progress aria-label="次のレベルまで" value={progress.value} max={progress.max}/>} {children}</section>;}

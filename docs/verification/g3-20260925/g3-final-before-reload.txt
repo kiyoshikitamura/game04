@@ -1,0 +1,226 @@
+- iframe [active]:
+  - alert
+  - region "ゲーム画面":
+    - img "くノ一"
+    - generic: Lv.1
+    - strong: G3QA-C
+    - generic "将来の同盟表示枠": ◇ 同盟 —
+    - button "アカウント連携": 未認証
+    - button "メニュー"
+    - generic: 銭 12,600
+    - generic: 輝石 200
+    - generic: 行動力 50/50
+    - main:
+      - region "登用":
+        - tablist "登用種別":
+          - tab "通常登用" [selected]
+          - tab "特選登用"
+        - article:
+          - text: 三種混合
+          - heading "通常登用" [level=2]
+          - button "提供割合・排出一覧"
+          - paragraph: 姫武将・戦技・武具が排出されます
+          - generic: SSR 1%
+          - generic: SR 10%
+          - generic: R 40%
+          - generic: N 49%
+          - generic: 所持
+          - strong: 12,600銭
+          - paragraph: 本日の無料10連は利用済みです
+          - button "1回 1,000銭" [disabled]:
+            - generic: 1回
+            - generic: 1,000銭
+          - button "10連 10,000銭" [disabled]:
+            - generic: 10連
+            - generic: 10,000銭
+    - navigation "メインナビゲーション":
+      - button "本陣"
+      - button "出陣"
+      - button "武将"
+      - button "共闘"
+      - button "召喚"
+  - dialog "登用結果":
+    - banner:
+      - heading "登用結果" [level=2]
+      - button "閉じる" [active]: ×
+    - article:
+      - strong: 軽装袴
+      - generic: "N"
+      - emphasis: 別個体として取得
+    - article:
+      - strong: 島左近
+      - generic: R
+      - emphasis: 初回取得
+      - text: NEW
+    - article:
+      - strong: 大口径短筒
+      - generic: R
+      - emphasis: 別個体として取得
+    - article:
+      - strong: 上杉景勝
+      - generic: R
+      - emphasis: 初回取得
+      - text: NEW
+    - article:
+      - strong: 作業袴
+      - generic: R
+      - emphasis: 別個体として取得
+    - article:
+      - strong: 鉤爪
+      - generic: R
+      - emphasis: 別個体として取得
+    - article:
+      - strong: 井伊直政
+      - generic: R
+      - emphasis: 初回取得
+      - text: NEW
+    - article:
+      - strong: 二枚胴具足
+      - generic: R
+      - emphasis: 別個体として取得
+    - article:
+      - strong: 僧兵
+      - generic: "N"
+      - emphasis: 重複 / 固有魂 +20
+    - article:
+      - strong: 形見の守袋
+      - generic: R
+      - emphasis: 別個体として取得
+    - contentinfo:
+      - button "登用へ戻る":
+        - generic: 登用へ戻る
+- region "QA読み込み計測":
+  - heading "QA読み込み計測" [level=2]
+  - paragraph: 本体は上の実寸iframeです。APIは認証・通信・応答確認を含む総待機時間。画像は必須画像グループの待機時間（キャッシュを含む）です。対象CTAの操作可能時刻は下段で別計測。FCPをTTIとは扱いません。action-feedbackは操作ハンドラ開始からbusy状態のDOM反映、action-resultは応答後にbusy解除と状態反映をReactがcommitした時刻です。描画済み・対象CTA操作可能の確認は下段で別計測します。
+  - button "本体を再読込して計測を消去"
+  - paragraph: 件数：12 / 200
+  - generic "ブラウザ初回表示指標":
+    - paragraph: Navigation：navigate ／ responseStart 717.7 ms ／ responseEnd 728.6 ms ／ DCL 2793.6 ms
+    - paragraph: first-paint：2856.0 ms
+    - paragraph: first-contentful-paint：2856.0 ms
+  - table:
+    - rowgroup:
+      - row "種別 / 対象 枚数 開始ms 完了ms 待機ms 結果":
+        - columnheader "種別 / 対象"
+        - columnheader "枚数"
+        - columnheader "開始ms"
+        - columnheader "完了ms"
+        - columnheader "待機ms"
+        - columnheader "結果"
+    - rowgroup:
+      - row "request / get_state — 80164.3 80451.6 287.3 error":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "80164.3"
+        - cell "80451.6"
+        - cell "287.3"
+        - cell "error"
+      - row "request / get_state — 140165.2 140451.9 286.7 error":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "140165.2"
+        - cell "140451.9"
+        - cell "286.7"
+        - cell "error"
+      - row "request / get_state — 200165.2 200427.8 262.6 error":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "200165.2"
+        - cell "200427.8"
+        - cell "262.6"
+        - cell "error"
+      - row "request / get_state — 226875.7 230001.1 3125.4 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "226875.7"
+        - cell "230001.1"
+        - cell "3125.4"
+        - cell "success"
+      - row "image-group / home 9 230035.7 231225.1 1189.4 success":
+        - cell "image-group / home"
+        - cell "9"
+        - cell "230035.7"
+        - cell "231225.1"
+        - cell "1189.4"
+        - cell "success"
+      - row "action-feedback / other — 246188.1 246191.7 3.6 success":
+        - cell "action-feedback / other"
+        - cell "—"
+        - cell "246188.1"
+        - cell "246191.7"
+        - cell "3.6"
+        - cell "success"
+      - row "request / other — 246188.2 247383.3 1195.1 success":
+        - cell "request / other"
+        - cell "—"
+        - cell "246188.2"
+        - cell "247383.3"
+        - cell "1195.1"
+        - cell "success"
+      - row "action-result / other — 246188.1 247386.3 1198.2 success":
+        - cell "action-result / other"
+        - cell "—"
+        - cell "246188.1"
+        - cell "247386.3"
+        - cell "1198.2"
+        - cell "success"
+      - row "request / get_state — 260165.1 261173.4 1008.3 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "260165.1"
+        - cell "261173.4"
+        - cell "1008.3"
+        - cell "success"
+      - row "action-feedback / other — 267146.3 267150.4 4.1 success":
+        - cell "action-feedback / other"
+        - cell "—"
+        - cell "267146.3"
+        - cell "267150.4"
+        - cell "4.1"
+        - cell "success"
+      - row "request / other — 267146.3 268325.8 1179.5 success":
+        - cell "request / other"
+        - cell "—"
+        - cell "267146.3"
+        - cell "268325.8"
+        - cell "1179.5"
+        - cell "success"
+      - row "action-result / other — 267146.3 268340.5 1194.2 success":
+        - cell "action-result / other"
+        - cell "—"
+        - cell "267146.3"
+        - cell "268340.5"
+        - cell "1194.2"
+        - cell "success"
+- region "QA対象CTA操作可能計測":
+  - heading "対象CTAの操作可能時刻" [level=2]
+  - paragraph: 対象の完全一致名・可視・非disabled/inert・中央点の遮蔽物なしを2描画frameで観測。画面全体のTTIや保存完了ではありません。遷移先固有CTAを指定し、準備後に次の本体操作を計測してください。「戦闘再生開始」は保存済み戦闘のフレーム表示・非停止・画像ダイアログ無しを2frameで観測します。
+  - text: 対象CTA
+  - textbox "対象CTA": 開門 タップして結果を見る
+  - button "次の本体操作を計測"
+  - button "操作計測履歴を消去"
+  - paragraph: navigation開始0はiframe navigation origin。TAP待ち・ログボを閉じる時間も含みます。interactionは本体pointerdown/keydown起点、click発火後に操作可能判定。スクロール等でclickしなかった場合も60秒未成立はtimeoutです。
+  - table:
+    - rowgroup:
+      - row "対象CTA 起点 timeOrigin 開始ms 観測ms 経過ms 入力→click ms click→操作可能 ms 結果":
+        - columnheader "対象CTA"
+        - columnheader "起点"
+        - columnheader "timeOrigin"
+        - columnheader "開始ms"
+        - columnheader "観測ms"
+        - columnheader "経過ms"
+        - columnheader "入力→click ms"
+        - columnheader "click→操作可能 ms"
+        - columnheader "結果"
+    - rowgroup:
+      - row "武将 navigation 1790331992348.2 0.0 60634.7 60634.7 — — timeout":
+        - cell "武将"
+        - cell "navigation"
+        - cell "1790331992348.2"
+        - cell "0.0"
+        - cell "60634.7"
+        - cell "60634.7"
+        - cell "—"
+        - cell "—"
+        - cell "timeout"
+- alert

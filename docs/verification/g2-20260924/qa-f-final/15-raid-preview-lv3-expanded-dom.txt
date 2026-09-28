@@ -1,0 +1,72 @@
+- iframe [active]:
+  - alert
+  - region "ゲーム画面":
+    - img "くノ一"
+    - generic: Lv.1
+    - strong: G2QA薬F
+    - generic "将来の同盟表示枠": ◇ 同盟 —
+    - button "アカウント連携": 未認証
+    - button "メニュー"
+    - generic: 銭 22,600
+    - generic: 輝石 100
+    - generic: 行動力 149/100
+    - main:
+      - button "‹ 共闘一覧"
+      - heading "岡崎城 Lv.3" [level=2]
+      - generic: 土属性
+      - strong: 開催者 G2QA薬F
+      - meter "共通HP"
+      - strong: HP 137,000 / 137,000（100%）
+      - generic: 2日 20時間
+      - generic: 1/20人
+      - navigation "レイド操作":
+        - button "敵情報"
+        - button "参加者"
+        - button "報酬"
+        - button "救援"
+      - heading "自分の貢献" [level=2]
+      - text: 累計ダメージ
+      - strong: 135,279
+      - generic "直近 勝利": 勝利
+      - generic: 挑戦 5戦
+      - generic: 勝利 4勝
+      - generic: 討伐報酬資格 取得済み
+      - paragraph: 参加時の共通進行 Lv.1
+      - button "挑む 消費行動力 20":
+        - strong: 挑む
+        - generic: 消費行動力 20
+      - dialog "報酬":
+        - heading "報酬" [level=2]
+        - button "閉じる": ×
+        - region "受取可能な報酬":
+          - heading "受取可能な報酬（1件）" [level=3]
+          - heading "Lv.2 討伐報酬" [level=4]
+          - list:
+            - listitem: 銭 ×1,000
+            - listitem: スキルLB素材 ×1
+            - listitem: 装備LB素材 ×1
+        - generic "現在のLv.3の報酬・獲得条件" [active]
+        - heading "個別バトル勝利報酬" [level=3]
+        - list:
+          - listitem: 銭 ×2,500
+          - listitem: 武将EXP中（1,000 EXP） ×1
+          - listitem: 装備EXP小（100 EXP） ×5
+        - heading "Lv.3 討伐時の報酬" [level=3]
+        - list:
+          - listitem: 銭 ×5,000
+          - listitem: スキルLB素材 ×2
+          - listitem: 装備LB素材 ×2
+          - listitem: 武将EXP大（5,000 EXP） ×1
+          - listitem: 装備EXP大（5,000 EXP） ×1
+        - paragraph: 討伐報酬資格 取得済み
+        - paragraph: 討伐報酬は資格取得後に討伐された敵が対象です。
+        - paragraph: 参加前・資格取得前に突破済みのLv報酬は配布されません。
+        - button "まとめて受け取る":
+          - generic: まとめて受け取る
+    - navigation "メインナビゲーション":
+      - button "本陣"
+      - button "出陣"
+      - button "武将"
+      - button "共闘"
+      - button "召喚"
+- alert

@@ -1,0 +1,14 @@
+Target exclusively znakrkaazliexzwihxge. G3 00–17 and formal gacha runtime already applied before this integration.
+20_tutorial.sql
+22_runtime.sql
+23_territory_triggers.sql
+24_masters.sql
+25_community_schema.sql
+26_chat_functions.sql
+21_activity.sql
+../../candidates/game04_community_public_profiles.sql
+27_territory_master.sql
+28_approved_quest_names.sql
+29_approved_raid_supply.sql
+Deploy rebuilt game04-redesign-api/index.ts with verify_jwt=true.
+Existing accounts and snapshots are retained. 23 and 25 include first-install triggers/policies; do not blindly re-run the entire bootstrap against an initialized project.

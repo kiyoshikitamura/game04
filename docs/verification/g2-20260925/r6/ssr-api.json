@@ -1,0 +1,150 @@
+{
+  "code": "af640e291d3e79e511833dcef1e16f0ff7528b94",
+  "apiVersion": 26,
+  "qaUserId": "0fe9ead0-f738-4771-977a-9de7d93454af",
+  "steps": [
+    {
+      "step": "ssr-existing",
+      "action": "get_state",
+      "requestId": "ffff5b2a-88bc-446f-b608-f277a0f8c32d",
+      "status": 200,
+      "elapsedMs": 7267.3,
+      "version": 4,
+      "selected": null,
+      "unlocked": [
+        "ssr:char_koharu_01"
+      ],
+      "masamuneSouls": 80,
+      "error": null
+    },
+    {
+      "step": "ssr-existing-repeat",
+      "action": "get_state",
+      "requestId": "edfd5472-4a93-43a5-a7bd-54575f4f7722",
+      "status": 200,
+      "elapsedMs": 7337.1,
+      "version": 4,
+      "selected": null,
+      "unlocked": [
+        "ssr:char_koharu_01"
+      ],
+      "masamuneSouls": 80,
+      "error": null
+    },
+    {
+      "step": "ssr-locked-reject",
+      "action": "set_home",
+      "requestId": "064682fe-54d0-46df-bdc6-ec23a396411a",
+      "status": 400,
+      "elapsedMs": 8613.6,
+      "version": null,
+      "selected": null,
+      "unlocked": null,
+      "masamuneSouls": null,
+      "error": "伊達政宗の入手で選択可能"
+    },
+    {
+      "step": "ssr-existing-select",
+      "action": "set_home",
+      "requestId": "3fae92bc-d2de-45e2-b195-2d478a01c85e",
+      "status": 200,
+      "elapsedMs": 8537.2,
+      "version": 5,
+      "selected": "ssr:char_koharu_01",
+      "unlocked": [
+        "ssr:char_koharu_01"
+      ],
+      "masamuneSouls": 80,
+      "error": null
+    },
+    {
+      "step": "ssr-soul-unlock",
+      "action": "character_unlock",
+      "requestId": "b544e17d-cadf-4206-b3b0-4b2d4756c711",
+      "status": 200,
+      "elapsedMs": 8417.9,
+      "version": 6,
+      "selected": "ssr:char_koharu_01",
+      "unlocked": [
+        "ssr:char_koharu_01",
+        "ssr:char_leo_01"
+      ],
+      "masamuneSouls": 0,
+      "error": null
+    },
+    {
+      "step": "ssr-soul-replay",
+      "action": "character_unlock",
+      "requestId": "b544e17d-cadf-4206-b3b0-4b2d4756c711",
+      "status": 200,
+      "elapsedMs": 8137.3,
+      "version": 6,
+      "selected": "ssr:char_koharu_01",
+      "unlocked": [
+        "ssr:char_koharu_01",
+        "ssr:char_leo_01"
+      ],
+      "masamuneSouls": 0,
+      "error": null
+    },
+    {
+      "step": "ssr-soul-new-request",
+      "action": "character_unlock",
+      "requestId": "403dead1-8717-4758-bd47-09e5cb355d1c",
+      "status": 400,
+      "elapsedMs": 6499.6,
+      "version": null,
+      "selected": null,
+      "unlocked": null,
+      "masamuneSouls": null,
+      "error": "この武将は既に所持しています。"
+    },
+    {
+      "step": "ssr-new-select",
+      "action": "set_home",
+      "requestId": "9ee8e3c5-2531-4b5e-b86b-60f2cfe4c335",
+      "status": 200,
+      "elapsedMs": 6909.0,
+      "version": 7,
+      "selected": "ssr:char_leo_01",
+      "unlocked": [
+        "ssr:char_koharu_01",
+        "ssr:char_leo_01"
+      ],
+      "masamuneSouls": 0,
+      "error": null
+    },
+    {
+      "step": "ssr-reload",
+      "action": "get_state",
+      "requestId": "5fbe8c86-1430-4428-86f0-6578a8eb6263",
+      "status": 200,
+      "elapsedMs": 8225.5,
+      "version": 7,
+      "selected": "ssr:char_leo_01",
+      "unlocked": [
+        "ssr:char_koharu_01",
+        "ssr:char_leo_01"
+      ],
+      "masamuneSouls": 0,
+      "error": null
+    }
+  ],
+  "naturalRecoveryDuringReplay": {
+    "before": 51,
+    "after": 52,
+    "stateVersionUnchanged": true
+  },
+  "status": "PASS",
+  "renewedAuthSession": {
+    "method": "refresh_token; not browser logout/login",
+    "status": 200,
+    "requestId": "1a4cd56b-88c7-4676-9cca-36b705ebba13",
+    "version": 7,
+    "selected": "ssr:char_leo_01",
+    "unlocked": [
+      "ssr:char_koharu_01",
+      "ssr:char_leo_01"
+    ]
+  }
+}

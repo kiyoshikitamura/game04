@@ -1,0 +1,18 @@
+{
+  "engine": "PGlite PostgreSQL",
+  "scope": "candidate SQL + minimal commit fixture; not shared API/DB",
+  "checks": [
+    "formal balance + grant history + mission receipt atomic",
+    "injected save failure rolls back balance and ledger",
+    "same-request replay no duplication",
+    "different request ID cannot reclaim",
+    "request reuse for another mission rejected",
+    "queued competing claims yield one winner",
+    "legacy completed-area eligibility retained",
+    "authenticated ledger access denied"
+  ],
+  "notVerified": [
+    "two independent PostgreSQL connections",
+    "existing production growth/expiry trigger integration"
+  ]
+}

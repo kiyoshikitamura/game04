@@ -1,0 +1,42 @@
+.mission-panel-container-inner{display:flex;flex-direction:column;min-width:0;color:var(--text-primary)}
+.mission-operation-surface{min-inline-size:0;margin:0;padding:0;border:0}
+.mission-overview{margin:14px 0;padding:14px;background:linear-gradient(115deg,#3b2d31,#29202b);border:1px solid #795e4e;border-radius:9px}
+.mission-overview-heading{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.mission-overview-heading strong{font-size:16px;color:#f0ca91}
+.mission-overview small,.mission-overview p{font-size:11px;color:#cdbcc8;line-height:1.6}
+.mission-overview h3{font-size:19px;margin:0 0 8px}
+.mission-overview>progress{display:block;width:100%;height:5px;margin:12px 0}
+.mission-actions{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:12px 0}
+.mission-clear-count{font-size:12px;color:#cdbcc8}
+.mission-item{background:#261d28;border:1px solid #503b4c;border-radius:7px;padding:12px;margin:8px 0}
+.mission-item.CLEAR{border-color:#a57d52;background:linear-gradient(115deg,#34282b,#261e28)}
+.mission-item.CLAIMED{opacity:.7}
+.mission-info{min-width:0}
+.mission-title{font-size:14px;font-weight:500;margin-bottom:9px;overflow-wrap:anywhere}
+.mission-desc{font-size:11px;line-height:1.6;color:#bfaaba;margin-bottom:9px;overflow-wrap:anywhere}
+.mission-row-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.mission-action{flex-shrink:0}
+.mission-action .outlaw-button,.mission-actions .outlaw-button{min-height:44px;font-size:12px;padding:7px 10px}
+.mission-reward{display:flex;align-items:center;flex-wrap:wrap;gap:6px;min-width:0;color:#e0ceda;font-size:12px}
+.mission-reward>span{display:none}
+.mission-reward strong{font-size:11px;font-weight:500;overflow-wrap:anywhere}
+.mission-reward-art{width:28px;height:30px;object-fit:contain;flex-shrink:0}
+.mission-progress-line{display:flex;align-items:center;gap:8px;margin-top:9px;color:#bfaaba;font-size:11px}
+.mission-progress-line progress{flex:1;min-width:0;height:3px}
+.mission-panel-container-inner progress{appearance:none;border:0;background:#50404c;border-radius:3px;overflow:hidden}
+.mission-panel-container-inner progress::-webkit-progress-bar{background:#50404c}
+.mission-panel-container-inner progress::-webkit-progress-value{background:#d8aa70}
+.mission-panel-container-inner progress::-moz-progress-bar{background:#d8aa70}
+.mission-next,.mission-received{border-top:1px solid #493646;margin-top:12px}
+.mission-panel-container-inner summary{padding:12px 0;min-height:44px;cursor:pointer;font-size:12px;color:#bfaebb}
+.mission-panel-container-inner summary:active{transform:scale(.98)}
+.mission-next p{font-size:12px;color:#d6c3d1}
+.mission-current-group h3{font-size:12px;color:#e3bb87;letter-spacing:2px;margin:18px 0 6px;border-left:2px solid #ac8459;padding-left:9px}
+.mission-status{font-size:11px;color:#bcaab7}
+.mission-empty{text-align:center;color:var(--text-secondary);padding:32px 8px;font-size:13px}
+
+
+.mission-daily-progress{display:flex;align-items:center;gap:12px;margin:8px 0 14px}
+.mission-daily-progress progress{flex:1;min-width:0;height:5px}
+.mission-daily-progress span{font-size:12px;color:#e0ceda;white-space:nowrap}
+.mission-actions{scroll-margin-top:8px}

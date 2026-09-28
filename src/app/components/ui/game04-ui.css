@@ -1,0 +1,59 @@
+/* Authority: docs/product/GAME04_COMMON_UI_AUTHORITY.md §18. */
+:root{--g4-space-1:4px;--g4-space-2:8px;--g4-space-3:12px;--g4-space-4:16px;--g4-space-6:24px;--g4-radius:4px;--g4-line-body:1.6;--g4-line-compact:1.4;--g4-raid-heading:19px;--g4-raid-secondary:13px;--g4-caption:12px;--g4-cta-height:48px;--g4-dialog-max:80dvh;--g4-reading-surface:#19141c;--g4-rule-border:#786650;--g4-scroll-size:5px}
+.g4-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--g4-space-2);text-align:center}
+.g4-stats>div{min-width:0;display:grid;gap:var(--g4-space-1)}
+.g4-stats dt{font-size:var(--g4-caption);color:var(--g4-muted)}
+.g4-stats dd{margin:0;font-size:18px;font-weight:700;font-variant-numeric:tabular-nums}
+.g4-number{display:inline-flex;align-items:baseline;gap:var(--g4-space-1);font-variant-numeric:tabular-nums;white-space:nowrap}
+.g4-number small{font-size:var(--g4-caption);font-weight:500;color:inherit}
+.g4-info-row{display:flex;align-items:baseline;justify-content:space-between;gap:var(--g4-space-3);padding-block:var(--g4-space-2);border-bottom:1px solid var(--g4-rule-border);text-align:left}
+.g4-info-row>dt{min-width:0;overflow-wrap:anywhere}.g4-info-row>dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
+.g4-reward-list{list-style:none;margin:0;padding:0}.g4-reward-list>li{display:grid;grid-template-columns:32px minmax(0,1fr) auto;align-items:center;gap:var(--g4-space-2);padding-block:var(--g4-space-3);border-bottom:1px solid var(--g4-rule-border);text-align:left}.g4-reward-list img{width:32px;height:32px;object-fit:contain}.g4-reward-list strong{font-variant-numeric:tabular-nums;white-space:nowrap}.g4-reward-list span{overflow-wrap:anywhere}
+.g4-first-badge{display:inline-block;padding:2px 5px;margin-left:4px;border-radius:var(--g4-radius);background:var(--g4-gold);color:var(--g4-bg);font-size:var(--g4-caption);line-height:var(--g4-line-compact)}
+.g4-growth-display{padding:var(--g4-space-3);margin-top:var(--g4-space-4);border:1px solid var(--g4-rule-border);text-align:left}.g4-growth-display>h3{margin:0;font-size:16px}.g4-growth-display>strong{font-size:24px;color:var(--g4-text)}.g4-growth-display progress{width:100%;accent-color:var(--g4-gold)}
+.g4-loading{display:grid;place-content:center;justify-items:center;gap:var(--g4-space-3);min-height:80px;text-align:center;border:0;background:transparent}.g4-loading img{width:180px;max-width:70vw;height:auto;object-fit:contain}.g4-loading p{margin:0;font-size:14px;color:var(--g4-text)}.g4-loading-wheel{width:28px;height:28px;border:3px solid var(--g4-muted);border-top-color:var(--g4-gold);border-right-color:transparent;border-radius:50%;animation:g4-ui-spin .8s linear infinite}.g4-loading[data-context=screen]{min-height:220px}.g4-loading[data-context=dialog]{min-height:100px}
+@keyframes g4-ui-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.g4-loading-wheel{animation-duration:2s}}
+body.game04-theme .canonical-dialog{max-height:var(--g4-dialog-max);height:auto;border-radius:var(--g4-radius);box-shadow:0 18px 54px #000b;background:var(--g4-panel)}
+body.game04-theme .canonical-dialog-close{width:44px;height:44px;flex-basis:44px;border-radius:var(--g4-radius);border-color:var(--g4-rule-border);color:var(--g4-text);background:var(--g4-panel)}
+body.game04-theme .canonical-dialog-body{padding:var(--g4-space-4);text-align:left;white-space:normal;scrollbar-color:var(--g4-gold) var(--g4-bg);scrollbar-width:thin}
+body.game04-theme .canonical-dialog-body.is-loading{min-height:0}
+body.game04-theme .canonical-dialog-actions{display:flex;flex-wrap:wrap;gap:var(--g4-space-2);padding:var(--g4-space-3) var(--g4-space-4) var(--g4-space-4)}
+body.game04-theme .canonical-dialog-actions button{flex:1 0 auto;width:auto;min-height:var(--g4-cta-height);font-size:16px;line-height:1.4;white-space:nowrap}
+body.game04-theme .recorded-result-stats{margin:0;padding:var(--g4-space-3)}
+body.game04-theme .recorded-result-panel{background:var(--g4-reading-surface);color:var(--g4-text);font-size:14px;line-height:var(--g4-line-body);text-align:left}
+body.game04-theme .recorded-result>footer{gap:var(--g4-space-2)}
+body.game04-theme .recorded-result>footer button{min-height:var(--g4-cta-height);font-size:16px;border-radius:var(--g4-radius);white-space:nowrap}
+body.game04-theme .recorded-result>footer button:disabled{background:var(--g4-panel);color:var(--g4-muted);border:1px solid var(--g4-rule-border);opacity:1;cursor:default}
+body.game04-theme .tutorial-copy>p.g4-typewriter{height:112px;min-height:112px;max-height:112px;overflow:auto;font-size:14px;line-height:1.6;margin:8px 0;scrollbar-width:thin;scrollbar-color:var(--g4-gold) var(--g4-bg);text-align:left}
+.g4-typewriter::-webkit-scrollbar{width:var(--g4-scroll-size)}.g4-typewriter::-webkit-scrollbar-thumb{background:var(--g4-gold)}
+/* Shared data roles override legacy result span/body defaults without restyling raid artwork. */
+body.game04-theme :is(.g4-stats,.g4-info-row,.g4-reward-list,.g4-growth-display,.canonical-dialog-body,.canonical-dialog-actions) :is(span,small,strong,b,dt,dd,p,li,button){font-family:var(--g4-sans)!important}
+body.game04-theme .g4-stats .g4-number{font-size:inherit;color:var(--g4-text)}
+body.game04-theme .g4-stats .g4-number small{font-size:var(--g4-caption);color:var(--g4-muted)}
+body.game04-theme .g4-reward-list,body.game04-theme .g4-reward-list li{font-size:14px;line-height:1.6}
+body.game04-theme .g4-first-badge{font-size:var(--g4-caption);line-height:1.4;color:var(--g4-bg)}
+body.game04-theme .canonical-dialog-actions .outlaw-button:before,body.game04-theme .canonical-dialog-actions .outlaw-button:after{display:none}
+
+body.game04-theme .canonical-dialog-actions{background:var(--g4-panel)}
+
+.g4-loading-label{font-size:14px;color:var(--g4-text)}
+body.game04-theme .recorded-result>footer button{font-family:var(--g4-sans)!important}
+
+/* Content decides height; compact spacing preserves interaction targets. */
+body.game04-theme .canonical-dialog--compact .canonical-dialog-header{min-height:44px;padding:8px 12px;gap:8px}
+body.game04-theme .canonical-dialog--compact .canonical-dialog-header h2{font-size:20px;line-height:1.4}
+body.game04-theme .canonical-dialog--compact .canonical-dialog-body{padding:12px}
+body.game04-theme .canonical-dialog--compact .canonical-dialog-actions{padding:8px 12px;justify-content:flex-end}
+body.game04-theme .canonical-dialog--compact .canonical-dialog-actions button{flex:0 0 auto;width:auto;min-width:104px;min-height:48px;padding-inline:16px}
+/* B14: content-sized rows share spacing, tap targets and detail summaries. */
+.g4-inventory-entry{display:flex;align-items:center;gap:var(--g4-space-2);width:100%;min-height:44px;padding:var(--g4-space-2);border:0;border-bottom:1px solid var(--g4-rule-border);background:var(--g4-reading-surface);color:var(--g4-text);text-align:left}
+.g4-inventory-entry>img{width:40px;height:40px;object-fit:contain}.g4-inventory-entry>span:nth-child(2){flex:1;min-width:0;display:grid;gap:var(--g4-space-1)}.g4-inventory-entry>span>span{display:flex;align-items:center;gap:4px;font-size:12px}.g4-inventory-entry>b{font-size:20px}
+.g4-compact-tabs{display:flex;gap:var(--g4-space-1);margin-bottom:var(--g4-space-2)}.g4-compact-tabs button{flex:1;min-width:0;min-height:44px;background:var(--g4-reading-surface);border:1px solid var(--g4-rule-border);border-radius:var(--g4-radius);color:var(--g4-text);font-size:13px}.g4-compact-tabs button[aria-pressed=true]{border-color:var(--g4-gold);color:var(--g4-gold)}
+.g4-identity-badges{display:flex;gap:var(--g4-space-2);align-items:center}.g4-identity-badges>span{display:inline-flex;align-items:center;gap:4px;padding:2px 6px;background:var(--g4-reading-surface);border:1px solid var(--g4-rule-border);border-radius:var(--g4-radius)}.g4-identity-badges img{width:24px;height:24px;object-fit:contain}
+.g4-compact-rewards{display:flex;align-items:center;flex-wrap:wrap;gap:var(--g4-space-2)}.g4-compact-rewards>span{display:inline-flex;align-items:center;gap:4px}.g4-compact-rewards img{width:28px;height:28px;object-fit:contain}.g4-compact-rewards b{font-size:13px;font-variant-numeric:tabular-nums}.g4-compact-rewards small{font-size:12px}
+.g4-gacha-promotion{display:block;width:100%;height:auto;aspect-ratio:2/1;object-fit:contain;margin:0;border:0}
+
+.g4-list-search{display:grid;gap:4px;margin-block:12px;font-size:14px}.g4-list-search input{width:100%;min-height:44px;padding:8px;border:1px solid var(--g4-rule-border);background:var(--g4-bg);color:var(--g4-text)}
+
+.g4-entry-state{min-height:100dvh;display:grid;place-items:center;padding:16px;box-sizing:border-box}.g4-entry-state .screen-state{width:min(100%,430px)}

@@ -1,0 +1,261 @@
+{
+  "scope": "Dedicated QA setup only; do not replace existing user holdings wholesale. Merge character level/skill/deck fields into a new QA; preserve actual userId/version.",
+  "characterPatches": [
+    {
+      "id": "char_alice_01",
+      "level": 30
+    },
+    {
+      "id": "char_gou_01",
+      "level": 30
+    },
+    {
+      "id": "char_kageyama_01",
+      "level": 30
+    },
+    {
+      "id": "char_kenji_01",
+      "level": 30
+    },
+    {
+      "id": "char_long_01",
+      "level": 30
+    }
+  ],
+  "skill": {
+    "id": "SKD071",
+    "level": 1
+  },
+  "deck": [
+    {
+      "characterId": "char_alice_01",
+      "skillIds": [],
+      "equipment": {}
+    },
+    {
+      "characterId": "char_gou_01",
+      "skillIds": [],
+      "equipment": {}
+    },
+    {
+      "characterId": "char_kageyama_01",
+      "skillIds": [],
+      "equipment": {}
+    },
+    {
+      "characterId": "char_kenji_01",
+      "skillIds": [],
+      "equipment": {}
+    },
+    {
+      "characterId": "char_long_01",
+      "skillIds": [
+        "SKD071"
+      ],
+      "equipment": {}
+    }
+  ],
+  "requests": [
+    {
+      "action": "quest_battle",
+      "payload": {
+        "stageId": "kai-4"
+      }
+    },
+    {
+      "action": "quest_battle",
+      "payload": {
+        "stageId": "echigo-6"
+      }
+    }
+  ],
+  "formalEncounter": {
+    "masterId": "encounter_a1_ERB01",
+    "sharedHp": 39000,
+    "energyCost": 20,
+    "room": {
+      "raidSnapshot": {
+        "id": "encounter_a1_ERB01",
+        "masterVersion": "GAME04_RAID_FORMAL_20260923",
+        "characterId": "char_noa_01",
+        "area": 1,
+        "name": "柴田勝家",
+        "type": "encounter",
+        "enemy": {
+          "id": "encounter_a1_ERB01",
+          "name": "柴田勝家",
+          "image": "/creative/characters/battle/char_noa_01.png",
+          "element": "earth",
+          "level": 10,
+          "stats": {
+            "hp": 6500,
+            "atk": 480,
+            "def": 80,
+            "sp": 100,
+            "luk": 0
+          },
+          "initialSp": 100,
+          "hitSpGain": 10,
+          "initialCount": 7,
+          "actionCount": 7,
+          "order": 0,
+          "boss": true,
+          "skills": [],
+          "passives": [
+            {
+              "id": "balance_v2_P05",
+              "type": "P05",
+              "name": "通常攻撃ダメージ",
+              "stat": "atk",
+              "percent": 12,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        "enemies": [
+          {
+            "id": "encounter_a1_ERB01",
+            "name": "柴田勝家",
+            "image": "/creative/characters/battle/char_noa_01.png",
+            "element": "earth",
+            "level": 10,
+            "stats": {
+              "hp": 6500,
+              "atk": 480,
+              "def": 80,
+              "sp": 100,
+              "luk": 0
+            },
+            "initialSp": 100,
+            "hitSpGain": 10,
+            "initialCount": 7,
+            "actionCount": 7,
+            "order": 0,
+            "boss": true,
+            "skills": [],
+            "passives": [
+              {
+                "id": "balance_v2_P05",
+                "type": "P05",
+                "name": "通常攻撃ダメージ",
+                "stat": "atk",
+                "percent": 12,
+                "level": 0,
+                "target": "self"
+              }
+            ]
+          }
+        ],
+        "energyCost": 20,
+        "durationMinutes": 60,
+        "maxParticipants": 10,
+        "maxLevel": 1,
+        "appearanceLevels": [
+          1
+        ],
+        "appearanceImages": {},
+        "enemyGrowthPerLevel": 0,
+        "sharedHpGrowthPerLevel": 0,
+        "victoryMultiplier": 1.5,
+        "sharedHp": 39000,
+        "participationRewards": [],
+        "victoryRewards": [
+          {
+            "kind": "cash",
+            "amount": 3000
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "medium",
+            "amount": 1
+          },
+          {
+            "kind": "equipment_exp_item",
+            "id": "small",
+            "amount": 5
+          },
+          {
+            "kind": "soul",
+            "id": "char_noa_01",
+            "amount": 1,
+            "chance": 0.75
+          }
+        ],
+        "playerExp": 80,
+        "defeatRewards": [
+          {
+            "kind": "soul",
+            "id": "char_noa_01",
+            "amount": 1
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "large",
+            "amount": 1
+          },
+          {
+            "kind": "equipment_exp_item",
+            "id": "large",
+            "amount": 1
+          },
+          {
+            "kind": "skill_material",
+            "amount": 2
+          },
+          {
+            "kind": "equipment_lb",
+            "amount": 2
+          },
+          {
+            "kind": "cash",
+            "amount": 5000
+          }
+        ]
+      },
+      "id": "DEDICATED_QA_ROOM_UUID",
+      "masterId": "encounter_a1_ERB01",
+      "ownerId": "DEDICATED_QA_OWNER_ID",
+      "level": 1,
+      "hp": 39000,
+      "maxHp": 39000,
+      "createdAt": "REPLACE_WITH_CURRENT_ISO",
+      "expiresAt": "REPLACE_WITH_CURRENT_PLUS_60_MIN_ISO",
+      "status": "active",
+      "rescueCount": 0,
+      "rescueWindowStartedAt": "REPLACE_WITH_CURRENT_ISO",
+      "participants": [
+        {
+          "userId": "DEDICATED_QA_OWNER_ID",
+          "name": "主催者",
+          "wins": 0,
+          "attempts": 0,
+          "totalDamage": 0,
+          "joinedLevel": 1
+        }
+      ],
+      "settledBattleIds": [],
+      "rewardGrants": []
+    }
+  },
+  "raidRequests": [
+    {
+      "action": "raid_join",
+      "payload": {
+        "roomId": "DEDICATED_QA_ROOM_UUID"
+      }
+    },
+    {
+      "action": "raid_battle",
+      "payload": {
+        "roomId": "DEDICATED_QA_ROOM_UUID"
+      }
+    },
+    {
+      "action": "raid_claim",
+      "payload": {
+        "roomId": "DEDICATED_QA_ROOM_UUID"
+      }
+    }
+  ]
+}

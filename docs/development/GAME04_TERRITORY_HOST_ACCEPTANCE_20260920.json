@@ -1,0 +1,70 @@
+{
+  "migration": "20260919151837",
+  "edgeVersion": 4,
+  "database": "lrgyllgzcdcphlbmkknc",
+  "rollbackSql": "PASS",
+  "level1": {
+    "user": "02e386f1-46b1-4517-894a-65969d77fa79",
+    "initialLevel": 1,
+    "initialItems": 1,
+    "blockedLevel": 400,
+    "concurrent": [
+      {
+        "status": 200,
+        "error": null
+      },
+      {
+        "status": 400,
+        "error": "同時開催枠が埋まっています。開催中の侵攻を確認してください。"
+      }
+    ],
+    "room": "8786fec6-6493-41b9-a20c-8f4e8c8725f5",
+    "repeatRoom": "8786fec6-6493-41b9-a20c-8f4e8c8725f5",
+    "finalItems": 0,
+    "activeHostingCount": 1,
+    "differentPayloadReplay": 400
+  },
+  "level2": {
+    "level": 2,
+    "existingHostingCount": 1,
+    "initialItems": 3,
+    "parallel": [
+      {
+        "status": 200,
+        "error": null
+      },
+      {
+        "status": 400,
+        "error": "同時開催枠が埋まっています。開催中の侵攻を確認してください。"
+      }
+    ],
+    "finalItems": 2,
+    "activeHostingCount": 2,
+    "rooms": [
+      "244e272a-9b45-48ae-aeb3-0176b132cbac",
+      "8786fec6-6493-41b9-a20c-8f4e8c8725f5"
+    ]
+  },
+  "scope": "Dedicated new QA user only; level2 XP/items provided as test fixture, no formal Master update",
+  "rollbackCases": [
+    "item_zero",
+    "required_level",
+    "hosting_slots",
+    "same_request_same_room",
+    "different_payload_rejected",
+    "failed_host_no_partial_consume_or_room",
+    "snapshot_immutable",
+    "current_master_change_does_not_change_room",
+    "expired_active_room_releases_slot",
+    "expired_result_retained",
+    "invalid_master_null_rejected"
+  ],
+  "cleanup": {
+    "onlyQaRoomsExpired": [
+      "8786fec6-6493-41b9-a20c-8f4e8c8725f5",
+      "244e272a-9b45-48ae-aeb3-0176b132cbac"
+    ],
+    "recordsPreserved": true,
+    "qaProgressAndItemsRemainFixtures": true
+  }
+}

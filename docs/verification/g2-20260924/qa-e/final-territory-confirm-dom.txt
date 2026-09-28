@@ -1,0 +1,105 @@
+- iframe [active]:
+  - alert
+  - region "ゲーム画面":
+    - img "くノ一"
+    - generic: Lv.1
+    - strong: G2QA終E
+    - generic "将来の同盟表示枠": ◇ 同盟 —
+    - button "アカウント連携": 未認証
+    - button "メニュー"
+    - generic: 銭 5,540
+    - generic: 輝石 200
+    - generic: 行動力 46/100
+    - main:
+      - region "領土侵攻":
+        - button "〈 侵攻先一覧"
+        - heading "岡崎城" [level=2]
+        - heading "◇ 出現する敵" [level=2]
+        - group "敵の進行段階":
+          - button "開始 ボスLv.1":
+            - strong: 開始
+            - img "柴田勝家"
+            - img "土属性"
+            - text: ボスLv.1
+          - generic: ›
+          - button "中間 ボスLv.6" [pressed]:
+            - strong: 中間
+            - img "加藤清正"
+            - img "土属性"
+            - text: ボスLv.6
+          - generic: ›
+          - button "最終 ボスLv.12":
+            - strong: 最終
+            - img "徳川家康"
+            - img "土属性"
+            - text: ボスLv.12
+        - heading "加藤清正 土属性 敵Lv.39" [level=3]:
+          - text: 加藤清正
+          - img "土属性"
+          - generic: 敵Lv.39
+        - term: HP
+        - definition: 17,290
+        - term: ATK
+        - definition: "740"
+        - term: DEF
+        - definition: "580"
+        - generic "敵編成・所持スキルを見る（2体）"
+        - term: 開催期間
+        - definition: 3日
+        - term: 必要侵攻Lv.
+        - definition: "1"
+        - term: 開催枠
+        - definition: 0 / 1
+        - term: 侵攻令
+        - definition:
+          - text: 所持 2 / 必要 1
+          - button "入手方法 ›"
+        - heading "◇ 中間段階の討伐報酬" [level=2]
+        - list:
+          - listitem "銭 ×5,000":
+            - generic: 銭 ×5,000
+          - listitem "スキルLB素材 ×2":
+            - generic: スキルLB素材 ×2
+          - listitem "装備LB素材 ×2":
+            - generic: 装備LB素材 ×2
+          - listitem "武将EXP大（5,000 EXP） ×1":
+            - generic: 武将EXP大（5,000 EXP） ×1
+          - listitem "装備EXP大（5,000 EXP） ×1":
+            - generic: 装備EXP大（5,000 EXP） ×1
+        - paragraph: 個別バトル3勝で討伐報酬の対象になります。資格獲得前の報酬は受け取れません。
+        - paragraph: 侵攻クリア時：主催者EXP 100
+        - paragraph: 主催者のみ、クリア時点で個別バトル3勝が必要です。
+        - button "侵攻する":
+          - text: 侵攻する
+          - generic: ›
+    - navigation "メインナビゲーション":
+      - button "本陣"
+      - button "出陣"
+      - button "武将"
+      - button "共闘"
+      - button "召喚"
+  - dialog "侵攻確認" [active]:
+    - banner:
+      - heading "侵攻確認" [level=2]
+      - button "閉じる": ×
+    - heading "岡崎城" [level=2]
+    - img "柴田勝家"
+    - heading "土属性 柴田勝家" [level=3]:
+      - img "土属性"
+      - text: 柴田勝家
+    - paragraph: 開始 ボスLv.1 · 敵Lv.35
+    - paragraph: 通常戦の敵は侵攻時に決定します。
+    - term: 開催期間
+    - definition: 3日
+    - term: 消費アイテム
+    - definition: 侵攻令 ×1
+    - term: 所持数
+    - definition: 2 → 1
+    - term: 開催枠
+    - definition:
+      - text: 0 / 1 →
+      - generic: 1 / 1
+    - contentinfo:
+      - button "キャンセル"
+      - button "侵攻する"
+- alert

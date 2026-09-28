@@ -1,0 +1,27 @@
+- main:
+  - heading "G2 限定復帰検証" [level=1]
+  - paragraph: read障害は実本体＋SDKに対するQA応答注入。認証・保存・戦闘POSTは通常通信。画像戦闘は保存・報酬なしのfixtureで、実戦DB受入とは別です。
+  - group "読み取り障害":
+    - generic: 読み取り障害
+    - text: 対象
+    - combobox "対象":
+      - option "お知らせ" [selected]
+      - option "活動"
+      - option "補助プロフィール"
+    - text: 障害
+    - combobox "障害":
+      - option "通常" [selected]
+      - option "503"
+      - option "無応答（本体12秒中断）"
+    - button "実本体を表示"
+  - group "画像HTTP障害（非VIP fixture）":
+    - generic: 画像HTTP障害（非VIP fixture）
+    - button "画像503"
+    - button "画像15秒無応答"
+    - button "画像障害を解除"
+    - button "画像503を1回だけ"
+    - button "画像無応答を1回だけ"
+    - button "fixture戦闘を表示"
+    - status "画像失敗終了回数": 終了回数：2
+  - generic "障害注入記録": image error image timeout
+- alert

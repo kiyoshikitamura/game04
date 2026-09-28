@@ -1,0 +1,61 @@
+{
+  "project": "lrgyllgzcdcphlbmkknc",
+  "apiVersion": 18,
+  "checkedAt": "2026-09-23T17:39:23.439Z",
+  "verification": "live authenticated API; not fixture or browser evidence",
+  "userId": "35b326f5-5a93-4532-9619-9c05651269e9",
+  "checks": [
+    {
+      "name": "武将と背景を同時保存しget_stateで復元",
+      "pass": true,
+      "saved": {
+        "characterId": "char_gou_01",
+        "backgroundId": "area:mikawa"
+      }
+    },
+    {
+      "name": "同一requestId再送でversion・選択の二重更新なし",
+      "pass": true
+    },
+    {
+      "name": "旧ID 2件と既存正規ID 2件の保存・再読込",
+      "pass": true
+    },
+    {
+      "name": "未解放背景＋別武将の原子的拒否",
+      "pass": true,
+      "status": 400,
+      "error": "出陣「関ヶ原」解放で選択可能"
+    },
+    {
+      "name": "不正背景ID拒否",
+      "pass": true,
+      "status": 400,
+      "error": "背景が不正です。"
+    },
+    {
+      "name": "未所持武将拒否",
+      "pass": true,
+      "status": 400,
+      "error": "未所持の武将です。"
+    },
+    {
+      "name": "編成・育成・所持品・銭・輝石・出陣進行を保持",
+      "pass": true
+    }
+  ],
+  "patchInputNote": "The reviewed /tmp/home-live-edge-v17.ts input is original get_edge_function tool content plus one trailing newline; SHA256 685a752162156140ee49ee2a63e2f1d0db15f9e666efbdff553e17b9b77956c4 includes that newline.",
+  "originalSelection": {
+    "characterId": null,
+    "backgroundId": null
+  },
+  "pass": true,
+  "restoredSelection": {
+    "characterId": "char_alice_01",
+    "backgroundId": "castle-approach"
+  },
+  "restore": {
+    "pass": true,
+    "mode": "元の表示選択へ復元。元が未設定のためAPIで既定値を明示保存（キー不在への復元ではない）"
+  }
+}

@@ -1,0 +1,7319 @@
+[
+  {
+    "stage": "mikawa-1",
+    "source": "Previously saved dedicated QA real API result (B03), not user-reported battle",
+    "reconstruction": "All reconstructed frames deep-equal original saved API frames; audit reasons are from exact replay, saved result unchanged",
+    "seed": 3827522595,
+    "outcome": "win",
+    "rulesVersion": "balance-v2-20260920",
+    "burstStarts": 1,
+    "episodes": [
+      {
+        "id": 1,
+        "start": 32,
+        "actor": "char_joe_01",
+        "actions": [
+          {
+            "frame": 33,
+            "skill": "SKD003",
+            "spBefore": 108,
+            "spAfter": 95,
+            "cost": 13,
+            "candidates": [
+              {
+                "id": "SKD003",
+                "priority": 1,
+                "cost": 13,
+                "condition": true,
+                "targets": [
+                  "1-1/W1/1"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 38,
+            "skill": "SKD003",
+            "spBefore": 95,
+            "spAfter": 82,
+            "cost": 13,
+            "candidates": [
+              {
+                "id": "SKD003",
+                "priority": 1,
+                "cost": 13,
+                "condition": true,
+                "targets": [
+                  "1-1/W1/1"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 49,
+            "skill": "SKD003",
+            "spBefore": 82,
+            "spAfter": 69,
+            "cost": 13,
+            "candidates": [
+              {
+                "id": "SKD003",
+                "priority": 1,
+                "cost": 13,
+                "condition": true,
+                "targets": [
+                  "1-1/W1/1"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 54,
+            "skill": "SKD003",
+            "spBefore": 69,
+            "spAfter": 56,
+            "cost": 13,
+            "candidates": [
+              {
+                "id": "SKD003",
+                "priority": 1,
+                "cost": 13,
+                "condition": true,
+                "targets": [
+                  "1-1/W1/1"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 60,
+            "skill": "SKD003",
+            "spBefore": 56,
+            "spAfter": 43,
+            "cost": 13,
+            "candidates": [
+              {
+                "id": "SKD003",
+                "priority": 1,
+                "cost": 13,
+                "condition": true,
+                "targets": [
+                  "1-1/W1/2"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 32,
+            "event": "burst_start",
+            "actor": "char_joe_01",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 33,
+            "event": "action_start",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              108,
+              95
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 34,
+            "event": "damage",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              95,
+              95
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-1/W1/1"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 35,
+            "event": "action_end",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              95,
+              95
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 36,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              95,
+              95
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 37,
+            "event": "burst_resume",
+            "actor": "char_joe_01",
+            "burst": true,
+            "sp": [
+              95,
+              95
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 38,
+            "event": "action_start",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              95,
+              82
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 39,
+            "event": "damage",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              82,
+              82
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-1/W1/1"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 40,
+            "event": "effect_expired",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              82,
+              82
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          },
+          {
+            "frame": 41,
+            "event": "action_end",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              82,
+              82
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 42,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              82,
+              82
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 43,
+            "event": "interrupt_start",
+            "actor": "1-1/W1/2",
+            "burst": true,
+            "sp": [
+              82,
+              82
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          },
+          {
+            "frame": 44,
+            "event": "action_start",
+            "actor": "1-1/W1/2",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              82,
+              82
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 45,
+            "event": "damage",
+            "actor": "1-1/W1/2",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              82,
+              82
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "char_joe_01"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 46,
+            "event": "action_end",
+            "actor": "1-1/W1/2",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              82,
+              82
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 47,
+            "event": "interrupt_end",
+            "actor": "1-1/W1/2",
+            "burst": true,
+            "sp": [
+              82,
+              82
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 48,
+            "event": "burst_resume",
+            "actor": "char_joe_01",
+            "burst": true,
+            "sp": [
+              82,
+              82
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 49,
+            "event": "action_start",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              82,
+              69
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 50,
+            "event": "damage",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              69,
+              69
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-1/W1/1"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 51,
+            "event": "action_end",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              69,
+              69
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 52,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              69,
+              69
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 53,
+            "event": "burst_resume",
+            "actor": "char_joe_01",
+            "burst": true,
+            "sp": [
+              69,
+              69
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 54,
+            "event": "action_start",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              69,
+              56
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 55,
+            "event": "damage",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              56,
+              56
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-1/W1/1"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 56,
+            "event": "death",
+            "actor": "1-1/W1/1",
+            "burst": true,
+            "sp": [
+              56,
+              56
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 600
+          },
+          {
+            "frame": 57,
+            "event": "action_end",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              56,
+              56
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 58,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              56,
+              56
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 59,
+            "event": "burst_resume",
+            "actor": "char_joe_01",
+            "burst": true,
+            "sp": [
+              56,
+              56
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 60,
+            "event": "action_start",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              56,
+              43
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 61,
+            "event": "damage",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              43,
+              43
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-1/W1/2"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 62,
+            "event": "action_end",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              43,
+              43
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 63,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              43,
+              43
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 64,
+            "event": "burst_end",
+            "actor": "char_joe_01",
+            "burst": false,
+            "sp": [
+              43,
+              43
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 64,
+        "endReason": "five_actions",
+        "burstCutIns": 5,
+        "burstSounds": 5,
+        "next": "action_start"
+      }
+    ],
+    "betweenBursts": []
+  },
+  {
+    "stage": "mikawa-2",
+    "source": "Previously saved dedicated QA real API result (B03), not user-reported battle",
+    "reconstruction": "All reconstructed frames deep-equal original saved API frames; audit reasons are from exact replay, saved result unchanged",
+    "seed": 3168927653,
+    "outcome": "win",
+    "rulesVersion": "balance-v2-20260920",
+    "burstStarts": 2,
+    "episodes": [
+      {
+        "id": 1,
+        "start": 28,
+        "actor": "char_aoi_01",
+        "actions": [
+          {
+            "frame": 29,
+            "skill": "basic",
+            "spBefore": 108,
+            "spAfter": 108,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD035",
+                "priority": 1,
+                "cost": 38,
+                "condition": true,
+                "targets": [],
+                "reason": "no_applicable_target"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 49,
+            "skill": "basic",
+            "spBefore": 108,
+            "spAfter": 108,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD035",
+                "priority": 1,
+                "cost": 38,
+                "condition": true,
+                "targets": [],
+                "reason": "no_applicable_target"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 55,
+            "skill": "basic",
+            "spBefore": 108,
+            "spAfter": 108,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD035",
+                "priority": 1,
+                "cost": 38,
+                "condition": true,
+                "targets": [],
+                "reason": "no_applicable_target"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 61,
+            "skill": "SKD035",
+            "spBefore": 108,
+            "spAfter": 70,
+            "cost": 38,
+            "candidates": [
+              {
+                "id": "SKD035",
+                "priority": 1,
+                "cost": 38,
+                "condition": true,
+                "targets": [
+                  "char_aoi_01"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 66,
+            "skill": "basic",
+            "spBefore": 70,
+            "spAfter": 70,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD035",
+                "priority": 1,
+                "cost": 38,
+                "condition": true,
+                "targets": [],
+                "reason": "no_applicable_target"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 28,
+            "event": "burst_start",
+            "actor": "char_aoi_01",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 29,
+            "event": "action_start",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 30,
+            "event": "damage",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-2/W1/1"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 31,
+            "event": "action_end",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 32,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 33,
+            "event": "interrupt_start",
+            "actor": "1-2/W1/1",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          },
+          {
+            "frame": 34,
+            "event": "action_start",
+            "actor": "1-2/W1/1",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 35,
+            "event": "damage",
+            "actor": "1-2/W1/1",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "char_joe_01"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 36,
+            "event": "action_end",
+            "actor": "1-2/W1/1",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 37,
+            "event": "interrupt_end",
+            "actor": "1-2/W1/1",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 38,
+            "event": "interrupt_start",
+            "actor": "1-2/W1/2",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          },
+          {
+            "frame": 39,
+            "event": "action_start",
+            "actor": "1-2/W1/2",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 40,
+            "event": "damage",
+            "actor": "1-2/W1/2",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "char_joe_01"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 41,
+            "event": "action_end",
+            "actor": "1-2/W1/2",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 42,
+            "event": "interrupt_end",
+            "actor": "1-2/W1/2",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 43,
+            "event": "interrupt_start",
+            "actor": "1-2/W1/3",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          },
+          {
+            "frame": 44,
+            "event": "action_start",
+            "actor": "1-2/W1/3",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 45,
+            "event": "damage",
+            "actor": "1-2/W1/3",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "char_joe_01"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 46,
+            "event": "action_end",
+            "actor": "1-2/W1/3",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 47,
+            "event": "interrupt_end",
+            "actor": "1-2/W1/3",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 48,
+            "event": "burst_resume",
+            "actor": "char_aoi_01",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 49,
+            "event": "action_start",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 50,
+            "event": "damage",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-2/W1/1"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 51,
+            "event": "death",
+            "actor": "1-2/W1/1",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 600
+          },
+          {
+            "frame": 52,
+            "event": "action_end",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 53,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 54,
+            "event": "burst_resume",
+            "actor": "char_aoi_01",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 55,
+            "event": "action_start",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 56,
+            "event": "damage",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-2/W1/2"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 57,
+            "event": "effect_expired",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          },
+          {
+            "frame": 58,
+            "event": "action_end",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 59,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 60,
+            "event": "burst_resume",
+            "actor": "char_aoi_01",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 61,
+            "event": "action_start",
+            "actor": "char_aoi_01",
+            "skill": "SKD035",
+            "burst": true,
+            "sp": [
+              108,
+              70
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 62,
+            "event": "effect_applied",
+            "actor": "char_aoi_01",
+            "skill": "SKD035",
+            "burst": true,
+            "sp": [
+              70,
+              70
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "char_aoi_01"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_BUFF"
+            ],
+            "duration": 250
+          },
+          {
+            "frame": 63,
+            "event": "action_end",
+            "actor": "char_aoi_01",
+            "skill": "SKD035",
+            "burst": true,
+            "sp": [
+              70,
+              70
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 64,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              70,
+              70
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 65,
+            "event": "burst_resume",
+            "actor": "char_aoi_01",
+            "burst": true,
+            "sp": [
+              70,
+              70
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 66,
+            "event": "action_start",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              70,
+              70
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 67,
+            "event": "damage",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              70,
+              70
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-2/W1/2"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 68,
+            "event": "action_end",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              70,
+              70
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 69,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              70,
+              70
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 70,
+            "event": "burst_end",
+            "actor": "char_aoi_01",
+            "burst": false,
+            "sp": [
+              70,
+              70
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 70,
+        "endReason": "five_actions",
+        "burstCutIns": 5,
+        "burstSounds": 5,
+        "next": "action_start"
+      },
+      {
+        "id": 2,
+        "start": 103,
+        "actor": "char_daimon_01",
+        "actions": [
+          {
+            "frame": 104,
+            "skill": "basic",
+            "spBefore": 228,
+            "spAfter": 228,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD039",
+                "priority": 1,
+                "cost": 18,
+                "condition": false,
+                "targets": [],
+                "reason": "condition_unmet"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 110,
+            "skill": "basic",
+            "spBefore": 228,
+            "spAfter": 228,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD039",
+                "priority": 1,
+                "cost": 18,
+                "condition": false,
+                "targets": [],
+                "reason": "condition_unmet"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 115,
+            "skill": "basic",
+            "spBefore": 228,
+            "spAfter": 228,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD039",
+                "priority": 1,
+                "cost": 18,
+                "condition": false,
+                "targets": [],
+                "reason": "condition_unmet"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 120,
+            "skill": "basic",
+            "spBefore": 228,
+            "spAfter": 228,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD039",
+                "priority": 1,
+                "cost": 18,
+                "condition": false,
+                "targets": [],
+                "reason": "condition_unmet"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 130,
+            "skill": "basic",
+            "spBefore": 228,
+            "spAfter": 228,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD039",
+                "priority": 1,
+                "cost": 18,
+                "condition": false,
+                "targets": [],
+                "reason": "condition_unmet"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 103,
+            "event": "burst_start",
+            "actor": "char_daimon_01",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 104,
+            "event": "action_start",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 105,
+            "event": "damage",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-2/W1/3"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 106,
+            "event": "effect_expired",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          },
+          {
+            "frame": 107,
+            "event": "action_end",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 108,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 109,
+            "event": "burst_resume",
+            "actor": "char_daimon_01",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 110,
+            "event": "action_start",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 111,
+            "event": "damage",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-2/W1/3"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 112,
+            "event": "action_end",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 113,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 114,
+            "event": "burst_resume",
+            "actor": "char_daimon_01",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 115,
+            "event": "action_start",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 116,
+            "event": "damage",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-2/W1/3"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 117,
+            "event": "action_end",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 118,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 119,
+            "event": "burst_resume",
+            "actor": "char_daimon_01",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 120,
+            "event": "action_start",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 121,
+            "event": "damage",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-2/W1/3"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 122,
+            "event": "action_end",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 123,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 124,
+            "event": "interrupt_start",
+            "actor": "1-2/W1/3",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          },
+          {
+            "frame": 125,
+            "event": "action_start",
+            "actor": "1-2/W1/3",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 126,
+            "event": "damage",
+            "actor": "1-2/W1/3",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "char_joe_01"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 127,
+            "event": "action_end",
+            "actor": "1-2/W1/3",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 128,
+            "event": "interrupt_end",
+            "actor": "1-2/W1/3",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 129,
+            "event": "burst_resume",
+            "actor": "char_daimon_01",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 130,
+            "event": "action_start",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 131,
+            "event": "damage",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-2/W1/3"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 132,
+            "event": "death",
+            "actor": "1-2/W1/3",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 600
+          },
+          {
+            "frame": 133,
+            "event": "action_end",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 134,
+            "event": "burst_end",
+            "actor": "char_daimon_01",
+            "burst": false,
+            "sp": [
+              228,
+              228
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 134,
+        "endReason": "enemies_defeated",
+        "burstCutIns": 5,
+        "burstSounds": 5
+      }
+    ],
+    "betweenBursts": [
+      {
+        "from": 1,
+        "to": 2,
+        "frames": [
+          {
+            "frame": 71,
+            "event": "action_start",
+            "sp": 70,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 73,
+            "event": "action_end",
+            "sp": 112,
+            "gauge": 42,
+            "burst": false
+          },
+          {
+            "frame": 75,
+            "event": "action_start",
+            "sp": 87,
+            "gauge": 42,
+            "burst": false
+          },
+          {
+            "frame": 77,
+            "event": "action_end",
+            "sp": 107,
+            "gauge": 62,
+            "burst": false
+          },
+          {
+            "frame": 79,
+            "event": "action_start",
+            "sp": 107,
+            "gauge": 62,
+            "burst": false
+          },
+          {
+            "frame": 82,
+            "event": "action_end",
+            "sp": 149,
+            "gauge": 104,
+            "burst": false
+          },
+          {
+            "frame": 85,
+            "event": "action_start",
+            "sp": 149,
+            "gauge": 104,
+            "burst": false
+          },
+          {
+            "frame": 87,
+            "event": "action_end",
+            "sp": 149,
+            "gauge": 104,
+            "burst": false
+          },
+          {
+            "frame": 89,
+            "event": "action_start",
+            "sp": 149,
+            "gauge": 104,
+            "burst": false
+          },
+          {
+            "frame": 91,
+            "event": "action_end",
+            "sp": 191,
+            "gauge": 146,
+            "burst": false
+          },
+          {
+            "frame": 93,
+            "event": "action_start",
+            "sp": 191,
+            "gauge": 146,
+            "burst": false
+          },
+          {
+            "frame": 96,
+            "event": "action_end",
+            "sp": 233,
+            "gauge": 188,
+            "burst": false
+          },
+          {
+            "frame": 98,
+            "event": "action_start",
+            "sp": 208,
+            "gauge": 188,
+            "burst": false
+          },
+          {
+            "frame": 101,
+            "event": "action_end",
+            "sp": 228,
+            "gauge": 200,
+            "burst": false
+          },
+          {
+            "frame": 103,
+            "event": "burst_start",
+            "sp": 228,
+            "gauge": 0,
+            "burst": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "stage": "mikawa-3",
+    "source": "Previously saved dedicated QA real API result (B03), not user-reported battle",
+    "reconstruction": "All reconstructed frames deep-equal original saved API frames; audit reasons are from exact replay, saved result unchanged",
+    "seed": 2667616042,
+    "outcome": "win",
+    "rulesVersion": "balance-v2-20260920",
+    "burstStarts": 1,
+    "episodes": [
+      {
+        "id": 1,
+        "start": 66,
+        "actor": "char_daimon_01",
+        "actions": [
+          {
+            "frame": 67,
+            "skill": "basic",
+            "spBefore": 164,
+            "spAfter": 164,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD039",
+                "priority": 1,
+                "cost": 18,
+                "condition": false,
+                "targets": [],
+                "reason": "condition_unmet"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 73,
+            "skill": "basic",
+            "spBefore": 164,
+            "spAfter": 164,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD039",
+                "priority": 1,
+                "cost": 18,
+                "condition": false,
+                "targets": [],
+                "reason": "condition_unmet"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 78,
+            "skill": "basic",
+            "spBefore": 164,
+            "spAfter": 164,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD039",
+                "priority": 1,
+                "cost": 18,
+                "condition": false,
+                "targets": [],
+                "reason": "condition_unmet"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 83,
+            "skill": "basic",
+            "spBefore": 164,
+            "spAfter": 164,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD039",
+                "priority": 1,
+                "cost": 18,
+                "condition": false,
+                "targets": [],
+                "reason": "condition_unmet"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 88,
+            "skill": "basic",
+            "spBefore": 164,
+            "spAfter": 164,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD039",
+                "priority": 1,
+                "cost": 18,
+                "condition": false,
+                "targets": [],
+                "reason": "condition_unmet"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 66,
+            "event": "burst_start",
+            "actor": "char_daimon_01",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 67,
+            "event": "action_start",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 68,
+            "event": "damage",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-3/W2/1"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 69,
+            "event": "effect_expired",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          },
+          {
+            "frame": 70,
+            "event": "action_end",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 71,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 72,
+            "event": "burst_resume",
+            "actor": "char_daimon_01",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 73,
+            "event": "action_start",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 74,
+            "event": "damage",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-3/W2/1"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 75,
+            "event": "action_end",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 76,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 77,
+            "event": "burst_resume",
+            "actor": "char_daimon_01",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 78,
+            "event": "action_start",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 79,
+            "event": "damage",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-3/W2/1"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 80,
+            "event": "action_end",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 81,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 82,
+            "event": "burst_resume",
+            "actor": "char_daimon_01",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 83,
+            "event": "action_start",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 84,
+            "event": "damage",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-3/W2/1"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 85,
+            "event": "action_end",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 86,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 87,
+            "event": "burst_resume",
+            "actor": "char_daimon_01",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 88,
+            "event": "action_start",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 89,
+            "event": "damage",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-3/W2/1"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 90,
+            "event": "action_end",
+            "actor": "char_daimon_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 91,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 92,
+            "event": "burst_end",
+            "actor": "char_daimon_01",
+            "burst": false,
+            "sp": [
+              164,
+              164
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 92,
+        "endReason": "five_actions",
+        "burstCutIns": 5,
+        "burstSounds": 5,
+        "next": "action_start"
+      }
+    ],
+    "betweenBursts": []
+  },
+  {
+    "stage": "mikawa-4",
+    "source": "Previously saved dedicated QA real API result (B03), not user-reported battle",
+    "reconstruction": "All reconstructed frames deep-equal original saved API frames; audit reasons are from exact replay, saved result unchanged",
+    "seed": 3845168902,
+    "outcome": "win",
+    "rulesVersion": "balance-v2-20260920",
+    "burstStarts": 2,
+    "episodes": [
+      {
+        "id": 1,
+        "start": 28,
+        "actor": "char_aoi_01",
+        "actions": [
+          {
+            "frame": 29,
+            "skill": "basic",
+            "spBefore": 108,
+            "spAfter": 108,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD035",
+                "priority": 1,
+                "cost": 38,
+                "condition": true,
+                "targets": [],
+                "reason": "no_applicable_target"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 44,
+            "skill": "basic",
+            "spBefore": 108,
+            "spAfter": 108,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD035",
+                "priority": 1,
+                "cost": 38,
+                "condition": true,
+                "targets": [],
+                "reason": "no_applicable_target"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 50,
+            "skill": "basic",
+            "spBefore": 108,
+            "spAfter": 108,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD035",
+                "priority": 1,
+                "cost": 38,
+                "condition": true,
+                "targets": [],
+                "reason": "no_applicable_target"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 56,
+            "skill": "SKD035",
+            "spBefore": 108,
+            "spAfter": 70,
+            "cost": 38,
+            "candidates": [
+              {
+                "id": "SKD035",
+                "priority": 1,
+                "cost": 38,
+                "condition": true,
+                "targets": [
+                  "char_aoi_01"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 61,
+            "skill": "basic",
+            "spBefore": 70,
+            "spAfter": 70,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD035",
+                "priority": 1,
+                "cost": 38,
+                "condition": true,
+                "targets": [],
+                "reason": "no_applicable_target"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 28,
+            "event": "burst_start",
+            "actor": "char_aoi_01",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 29,
+            "event": "action_start",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 30,
+            "event": "damage",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-4/W1/1"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 31,
+            "event": "action_end",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 32,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 33,
+            "event": "interrupt_start",
+            "actor": "1-4/W1/1",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          },
+          {
+            "frame": 34,
+            "event": "action_start",
+            "actor": "1-4/W1/1",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 35,
+            "event": "damage",
+            "actor": "1-4/W1/1",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "char_joe_01"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 36,
+            "event": "action_end",
+            "actor": "1-4/W1/1",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 37,
+            "event": "interrupt_end",
+            "actor": "1-4/W1/1",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 38,
+            "event": "interrupt_start",
+            "actor": "1-4/W1/2",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          },
+          {
+            "frame": 39,
+            "event": "action_start",
+            "actor": "1-4/W1/2",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 40,
+            "event": "damage",
+            "actor": "1-4/W1/2",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "char_joe_01"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 41,
+            "event": "action_end",
+            "actor": "1-4/W1/2",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 42,
+            "event": "interrupt_end",
+            "actor": "1-4/W1/2",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 43,
+            "event": "burst_resume",
+            "actor": "char_aoi_01",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 44,
+            "event": "action_start",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 45,
+            "event": "damage",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-4/W1/1"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 46,
+            "event": "death",
+            "actor": "1-4/W1/1",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 600
+          },
+          {
+            "frame": 47,
+            "event": "action_end",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 48,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 49,
+            "event": "burst_resume",
+            "actor": "char_aoi_01",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 50,
+            "event": "action_start",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 51,
+            "event": "damage",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-4/W1/2"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 52,
+            "event": "effect_expired",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          },
+          {
+            "frame": 53,
+            "event": "action_end",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 54,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 55,
+            "event": "burst_resume",
+            "actor": "char_aoi_01",
+            "burst": true,
+            "sp": [
+              108,
+              108
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 56,
+            "event": "action_start",
+            "actor": "char_aoi_01",
+            "skill": "SKD035",
+            "burst": true,
+            "sp": [
+              108,
+              70
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 57,
+            "event": "effect_applied",
+            "actor": "char_aoi_01",
+            "skill": "SKD035",
+            "burst": true,
+            "sp": [
+              70,
+              70
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "char_aoi_01"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_BUFF"
+            ],
+            "duration": 250
+          },
+          {
+            "frame": 58,
+            "event": "action_end",
+            "actor": "char_aoi_01",
+            "skill": "SKD035",
+            "burst": true,
+            "sp": [
+              70,
+              70
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 59,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              70,
+              70
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 60,
+            "event": "burst_resume",
+            "actor": "char_aoi_01",
+            "burst": true,
+            "sp": [
+              70,
+              70
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 61,
+            "event": "action_start",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              70,
+              70
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 62,
+            "event": "damage",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              70,
+              70
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-4/W1/2"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 63,
+            "event": "action_end",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              70,
+              70
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 64,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              70,
+              70
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 65,
+            "event": "burst_end",
+            "actor": "char_aoi_01",
+            "burst": false,
+            "sp": [
+              70,
+              70
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 65,
+        "endReason": "five_actions",
+        "burstCutIns": 5,
+        "burstSounds": 5,
+        "next": "action_start"
+      },
+      {
+        "id": 2,
+        "start": 193,
+        "actor": "char_aoi_01",
+        "actions": [
+          {
+            "frame": 194,
+            "skill": "basic",
+            "spBefore": 103,
+            "spAfter": 103,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD035",
+                "priority": 1,
+                "cost": 38,
+                "condition": true,
+                "targets": [],
+                "reason": "no_applicable_target"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 200,
+            "skill": "SKD035",
+            "spBefore": 103,
+            "spAfter": 65,
+            "cost": 38,
+            "candidates": [
+              {
+                "id": "SKD035",
+                "priority": 1,
+                "cost": 38,
+                "condition": true,
+                "targets": [
+                  "char_aoi_01"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 205,
+            "skill": "basic",
+            "spBefore": 65,
+            "spAfter": 65,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD035",
+                "priority": 1,
+                "cost": 38,
+                "condition": true,
+                "targets": [],
+                "reason": "no_applicable_target"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 210,
+            "skill": "basic",
+            "spBefore": 65,
+            "spAfter": 65,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD035",
+                "priority": 1,
+                "cost": 38,
+                "condition": true,
+                "targets": [],
+                "reason": "no_applicable_target"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 220,
+            "skill": "basic",
+            "spBefore": 65,
+            "spAfter": 65,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD035",
+                "priority": 1,
+                "cost": 38,
+                "condition": true,
+                "targets": [],
+                "reason": "no_applicable_target"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 193,
+            "event": "burst_start",
+            "actor": "char_aoi_01",
+            "burst": true,
+            "sp": [
+              103,
+              103
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 194,
+            "event": "action_start",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              103,
+              103
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 195,
+            "event": "damage",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              103,
+              103
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-4/W2/2"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 196,
+            "event": "effect_expired",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              103,
+              103
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          },
+          {
+            "frame": 197,
+            "event": "action_end",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              103,
+              103
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 198,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              103,
+              103
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 199,
+            "event": "burst_resume",
+            "actor": "char_aoi_01",
+            "burst": true,
+            "sp": [
+              103,
+              103
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 200,
+            "event": "action_start",
+            "actor": "char_aoi_01",
+            "skill": "SKD035",
+            "burst": true,
+            "sp": [
+              103,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 201,
+            "event": "effect_applied",
+            "actor": "char_aoi_01",
+            "skill": "SKD035",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "char_aoi_01"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_BUFF"
+            ],
+            "duration": 250
+          },
+          {
+            "frame": 202,
+            "event": "action_end",
+            "actor": "char_aoi_01",
+            "skill": "SKD035",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 203,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 204,
+            "event": "burst_resume",
+            "actor": "char_aoi_01",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 205,
+            "event": "action_start",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 206,
+            "event": "damage",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-4/W2/2"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 207,
+            "event": "action_end",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 208,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 209,
+            "event": "burst_resume",
+            "actor": "char_aoi_01",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 210,
+            "event": "action_start",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 211,
+            "event": "damage",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-4/W2/2"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 212,
+            "event": "action_end",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 213,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 214,
+            "event": "interrupt_start",
+            "actor": "1-4/W2/2",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          },
+          {
+            "frame": 215,
+            "event": "action_start",
+            "actor": "1-4/W2/2",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 216,
+            "event": "damage",
+            "actor": "1-4/W2/2",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "char_joe_01"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 217,
+            "event": "action_end",
+            "actor": "1-4/W2/2",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 218,
+            "event": "interrupt_end",
+            "actor": "1-4/W2/2",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 219,
+            "event": "burst_resume",
+            "actor": "char_aoi_01",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 220,
+            "event": "action_start",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 221,
+            "event": "damage",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-4/W2/2"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 222,
+            "event": "effect_expired",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          },
+          {
+            "frame": 223,
+            "event": "action_end",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 224,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 225,
+            "event": "burst_end",
+            "actor": "char_aoi_01",
+            "burst": false,
+            "sp": [
+              65,
+              65
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 225,
+        "endReason": "five_actions",
+        "burstCutIns": 5,
+        "burstSounds": 5,
+        "next": "action_start"
+      }
+    ],
+    "betweenBursts": [
+      {
+        "from": 1,
+        "to": 2,
+        "frames": [
+          {
+            "frame": 66,
+            "event": "action_start",
+            "sp": 20,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 68,
+            "event": "action_end",
+            "sp": 40,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 70,
+            "event": "action_start",
+            "sp": 15,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 72,
+            "event": "action_end",
+            "sp": 35,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 74,
+            "event": "action_start",
+            "sp": 35,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 77,
+            "event": "action_end",
+            "sp": 77,
+            "gauge": 82,
+            "burst": false
+          },
+          {
+            "frame": 79,
+            "event": "action_start",
+            "sp": 77,
+            "gauge": 82,
+            "burst": false
+          },
+          {
+            "frame": 81,
+            "event": "action_end",
+            "sp": 119,
+            "gauge": 124,
+            "burst": false
+          },
+          {
+            "frame": 83,
+            "event": "action_start",
+            "sp": 69,
+            "gauge": 124,
+            "burst": false
+          },
+          {
+            "frame": 86,
+            "event": "action_end",
+            "sp": 89,
+            "gauge": 144,
+            "burst": false
+          },
+          {
+            "frame": 88,
+            "event": "action_start",
+            "sp": 64,
+            "gauge": 144,
+            "burst": false
+          },
+          {
+            "frame": 91,
+            "event": "action_end",
+            "sp": 84,
+            "gauge": 164,
+            "burst": false
+          },
+          {
+            "frame": 93,
+            "event": "action_start",
+            "sp": 84,
+            "gauge": 164,
+            "burst": false
+          },
+          {
+            "frame": 96,
+            "event": "action_end",
+            "sp": 126,
+            "gauge": 200,
+            "burst": false
+          },
+          {
+            "frame": 98,
+            "event": "burst_failed",
+            "sp": 126,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 99,
+            "event": "action_start",
+            "sp": 51,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 104,
+            "event": "action_end",
+            "sp": 71,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 106,
+            "event": "action_start",
+            "sp": 21,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 108,
+            "event": "action_end",
+            "sp": 41,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 110,
+            "event": "action_start",
+            "sp": 16,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 112,
+            "event": "action_end",
+            "sp": 36,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 114,
+            "event": "action_start",
+            "sp": 36,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 116,
+            "event": "action_end",
+            "sp": 78,
+            "gauge": 102,
+            "burst": false
+          },
+          {
+            "frame": 119,
+            "event": "action_start",
+            "sp": 78,
+            "gauge": 102,
+            "burst": false
+          },
+          {
+            "frame": 121,
+            "event": "action_end",
+            "sp": 78,
+            "gauge": 102,
+            "burst": false
+          },
+          {
+            "frame": 124,
+            "event": "action_start",
+            "sp": 78,
+            "gauge": 102,
+            "burst": false
+          },
+          {
+            "frame": 126,
+            "event": "action_end",
+            "sp": 78,
+            "gauge": 102,
+            "burst": false
+          },
+          {
+            "frame": 128,
+            "event": "action_start",
+            "sp": 3,
+            "gauge": 102,
+            "burst": false
+          },
+          {
+            "frame": 130,
+            "event": "action_end",
+            "sp": 23,
+            "gauge": 122,
+            "burst": false
+          },
+          {
+            "frame": 132,
+            "event": "action_start",
+            "sp": 23,
+            "gauge": 122,
+            "burst": false
+          },
+          {
+            "frame": 134,
+            "event": "action_end",
+            "sp": 65,
+            "gauge": 164,
+            "burst": false
+          },
+          {
+            "frame": 136,
+            "event": "action_start",
+            "sp": 40,
+            "gauge": 164,
+            "burst": false
+          },
+          {
+            "frame": 138,
+            "event": "action_end",
+            "sp": 60,
+            "gauge": 184,
+            "burst": false
+          },
+          {
+            "frame": 140,
+            "event": "action_start",
+            "sp": 60,
+            "gauge": 184,
+            "burst": false
+          },
+          {
+            "frame": 142,
+            "event": "action_end",
+            "sp": 102,
+            "gauge": 200,
+            "burst": false
+          },
+          {
+            "frame": 144,
+            "event": "burst_failed",
+            "sp": 102,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 145,
+            "event": "action_start",
+            "sp": 102,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 147,
+            "event": "action_end",
+            "sp": 144,
+            "gauge": 42,
+            "burst": false
+          },
+          {
+            "frame": 149,
+            "event": "action_start",
+            "sp": 94,
+            "gauge": 42,
+            "burst": false
+          },
+          {
+            "frame": 152,
+            "event": "action_end",
+            "sp": 114,
+            "gauge": 62,
+            "burst": false
+          },
+          {
+            "frame": 154,
+            "event": "action_start",
+            "sp": 89,
+            "gauge": 62,
+            "burst": false
+          },
+          {
+            "frame": 157,
+            "event": "action_end",
+            "sp": 109,
+            "gauge": 82,
+            "burst": false
+          },
+          {
+            "frame": 159,
+            "event": "action_start",
+            "sp": 109,
+            "gauge": 82,
+            "burst": false
+          },
+          {
+            "frame": 162,
+            "event": "action_end",
+            "sp": 151,
+            "gauge": 124,
+            "burst": false
+          },
+          {
+            "frame": 165,
+            "event": "action_start",
+            "sp": 151,
+            "gauge": 124,
+            "burst": false
+          },
+          {
+            "frame": 167,
+            "event": "action_end",
+            "sp": 151,
+            "gauge": 124,
+            "burst": false
+          },
+          {
+            "frame": 170,
+            "event": "action_start",
+            "sp": 151,
+            "gauge": 124,
+            "burst": false
+          },
+          {
+            "frame": 172,
+            "event": "action_end",
+            "sp": 151,
+            "gauge": 124,
+            "burst": false
+          },
+          {
+            "frame": 174,
+            "event": "action_start",
+            "sp": 76,
+            "gauge": 124,
+            "burst": false
+          },
+          {
+            "frame": 178,
+            "event": "action_end",
+            "sp": 96,
+            "gauge": 144,
+            "burst": false
+          },
+          {
+            "frame": 180,
+            "event": "action_start",
+            "sp": 46,
+            "gauge": 144,
+            "burst": false
+          },
+          {
+            "frame": 182,
+            "event": "action_end",
+            "sp": 66,
+            "gauge": 164,
+            "burst": false
+          },
+          {
+            "frame": 184,
+            "event": "action_start",
+            "sp": 41,
+            "gauge": 164,
+            "burst": false
+          },
+          {
+            "frame": 187,
+            "event": "action_end",
+            "sp": 61,
+            "gauge": 184,
+            "burst": false
+          },
+          {
+            "frame": 189,
+            "event": "action_start",
+            "sp": 61,
+            "gauge": 184,
+            "burst": false
+          },
+          {
+            "frame": 191,
+            "event": "action_end",
+            "sp": 103,
+            "gauge": 200,
+            "burst": false
+          },
+          {
+            "frame": 193,
+            "event": "burst_start",
+            "sp": 103,
+            "gauge": 0,
+            "burst": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "stage": "mikawa-5",
+    "source": "Previously saved dedicated QA real API result (B03), not user-reported battle",
+    "reconstruction": "All reconstructed frames deep-equal original saved API frames; audit reasons are from exact replay, saved result unchanged",
+    "seed": 3147626036,
+    "outcome": "win",
+    "rulesVersion": "balance-v2-20260920",
+    "burstStarts": 3,
+    "episodes": [
+      {
+        "id": 1,
+        "start": 38,
+        "actor": "char_aoi_01",
+        "actions": [
+          {
+            "frame": 39,
+            "skill": "basic",
+            "spBefore": 78,
+            "spAfter": 78,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD039",
+                "priority": 1,
+                "cost": 18,
+                "condition": false,
+                "targets": [],
+                "reason": "condition_unmet"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 49,
+            "skill": "basic",
+            "spBefore": 78,
+            "spAfter": 78,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD039",
+                "priority": 1,
+                "cost": 18,
+                "condition": false,
+                "targets": [],
+                "reason": "condition_unmet"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 54,
+            "skill": "basic",
+            "spBefore": 78,
+            "spAfter": 78,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD039",
+                "priority": 1,
+                "cost": 18,
+                "condition": false,
+                "targets": [],
+                "reason": "condition_unmet"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 61,
+            "skill": "basic",
+            "spBefore": 78,
+            "spAfter": 78,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD039",
+                "priority": 1,
+                "cost": 18,
+                "condition": false,
+                "targets": [],
+                "reason": "condition_unmet"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 66,
+            "skill": "basic",
+            "spBefore": 78,
+            "spAfter": 78,
+            "cost": 0,
+            "candidates": [
+              {
+                "id": "SKD039",
+                "priority": 1,
+                "cost": 18,
+                "condition": false,
+                "targets": [],
+                "reason": "condition_unmet"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 38,
+            "event": "burst_start",
+            "actor": "char_aoi_01",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 39,
+            "event": "action_start",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 40,
+            "event": "damage",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-5/W1/1"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 41,
+            "event": "action_end",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 42,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 43,
+            "event": "interrupt_start",
+            "actor": "1-5/W1/2",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          },
+          {
+            "frame": 44,
+            "event": "action_start",
+            "actor": "1-5/W1/2",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 45,
+            "event": "damage",
+            "actor": "1-5/W1/2",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "char_joe_01"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 46,
+            "event": "action_end",
+            "actor": "1-5/W1/2",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 47,
+            "event": "interrupt_end",
+            "actor": "1-5/W1/2",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 48,
+            "event": "burst_resume",
+            "actor": "char_aoi_01",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 49,
+            "event": "action_start",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 50,
+            "event": "damage",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-5/W1/1"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 51,
+            "event": "action_end",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 52,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 53,
+            "event": "burst_resume",
+            "actor": "char_aoi_01",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 54,
+            "event": "action_start",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 55,
+            "event": "damage",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-5/W1/1"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 56,
+            "event": "death",
+            "actor": "1-5/W1/1",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 600
+          },
+          {
+            "frame": 57,
+            "event": "effect_expired",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          },
+          {
+            "frame": 58,
+            "event": "action_end",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 59,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 60,
+            "event": "burst_resume",
+            "actor": "char_aoi_01",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 61,
+            "event": "action_start",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 62,
+            "event": "damage",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-5/W1/2"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 63,
+            "event": "action_end",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 64,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 65,
+            "event": "burst_resume",
+            "actor": "char_aoi_01",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 66,
+            "event": "action_start",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 350
+          },
+          {
+            "frame": 67,
+            "event": "damage",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-5/W1/2"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_ATTACK"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 68,
+            "event": "action_end",
+            "actor": "char_aoi_01",
+            "skill": "basic",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 69,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 70,
+            "event": "burst_end",
+            "actor": "char_aoi_01",
+            "burst": false,
+            "sp": [
+              78,
+              78
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 70,
+        "endReason": "five_actions",
+        "burstCutIns": 5,
+        "burstSounds": 5,
+        "next": "action_start"
+      },
+      {
+        "id": 2,
+        "start": 105,
+        "actor": "char_joe_01",
+        "actions": [
+          {
+            "frame": 106,
+            "skill": "SKD003",
+            "spBefore": 84,
+            "spAfter": 71,
+            "cost": 13,
+            "candidates": [
+              {
+                "id": "SKD003",
+                "priority": 1,
+                "cost": 13,
+                "condition": true,
+                "targets": [
+                  "1-5/W2/1"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 112,
+            "skill": "SKD003",
+            "spBefore": 71,
+            "spAfter": 58,
+            "cost": 13,
+            "candidates": [
+              {
+                "id": "SKD003",
+                "priority": 1,
+                "cost": 13,
+                "condition": true,
+                "targets": [
+                  "1-5/W2/1"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 117,
+            "skill": "SKD003",
+            "spBefore": 58,
+            "spAfter": 45,
+            "cost": 13,
+            "candidates": [
+              {
+                "id": "SKD003",
+                "priority": 1,
+                "cost": 13,
+                "condition": true,
+                "targets": [
+                  "1-5/W2/1"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 122,
+            "skill": "SKD003",
+            "spBefore": 45,
+            "spAfter": 32,
+            "cost": 13,
+            "candidates": [
+              {
+                "id": "SKD003",
+                "priority": 1,
+                "cost": 13,
+                "condition": true,
+                "targets": [
+                  "1-5/W2/1"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 127,
+            "skill": "SKD003",
+            "spBefore": 32,
+            "spAfter": 19,
+            "cost": 13,
+            "candidates": [
+              {
+                "id": "SKD003",
+                "priority": 1,
+                "cost": 13,
+                "condition": true,
+                "targets": [
+                  "1-5/W2/1"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 105,
+            "event": "burst_start",
+            "actor": "char_joe_01",
+            "burst": true,
+            "sp": [
+              84,
+              84
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 106,
+            "event": "action_start",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              84,
+              71
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 107,
+            "event": "damage",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              71,
+              71
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-5/W2/1"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 108,
+            "event": "effect_expired",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              71,
+              71
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          },
+          {
+            "frame": 109,
+            "event": "action_end",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              71,
+              71
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 110,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              71,
+              71
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 111,
+            "event": "burst_resume",
+            "actor": "char_joe_01",
+            "burst": true,
+            "sp": [
+              71,
+              71
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 112,
+            "event": "action_start",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              71,
+              58
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 113,
+            "event": "damage",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              58,
+              58
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-5/W2/1"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 114,
+            "event": "action_end",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              58,
+              58
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 115,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              58,
+              58
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 116,
+            "event": "burst_resume",
+            "actor": "char_joe_01",
+            "burst": true,
+            "sp": [
+              58,
+              58
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 117,
+            "event": "action_start",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              58,
+              45
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 118,
+            "event": "damage",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              45,
+              45
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-5/W2/1"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 119,
+            "event": "action_end",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              45,
+              45
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 120,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              45,
+              45
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 121,
+            "event": "burst_resume",
+            "actor": "char_joe_01",
+            "burst": true,
+            "sp": [
+              45,
+              45
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 122,
+            "event": "action_start",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              45,
+              32
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 123,
+            "event": "damage",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              32,
+              32
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-5/W2/1"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 124,
+            "event": "action_end",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              32,
+              32
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 125,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              32,
+              32
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 126,
+            "event": "burst_resume",
+            "actor": "char_joe_01",
+            "burst": true,
+            "sp": [
+              32,
+              32
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 127,
+            "event": "action_start",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              32,
+              19
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 128,
+            "event": "damage",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              19,
+              19
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-5/W2/1"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 129,
+            "event": "action_end",
+            "actor": "char_joe_01",
+            "skill": "SKD003",
+            "burst": true,
+            "sp": [
+              19,
+              19
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 130,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              19,
+              19
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 131,
+            "event": "burst_end",
+            "actor": "char_joe_01",
+            "burst": false,
+            "sp": [
+              19,
+              19
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 131,
+        "endReason": "five_actions",
+        "burstCutIns": 5,
+        "burstSounds": 5,
+        "next": "action_start"
+      },
+      {
+        "id": 3,
+        "start": 168,
+        "actor": "char_jihoon_01",
+        "actions": [
+          {
+            "frame": 169,
+            "skill": "SKD009",
+            "spBefore": 97,
+            "spAfter": 72,
+            "cost": 25,
+            "candidates": [
+              {
+                "id": "SKD009",
+                "priority": 1,
+                "cost": 25,
+                "condition": true,
+                "targets": [
+                  "1-5/W2/1"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 168,
+            "event": "burst_start",
+            "actor": "char_jihoon_01",
+            "burst": true,
+            "sp": [
+              97,
+              97
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 169,
+            "event": "action_start",
+            "actor": "char_jihoon_01",
+            "skill": "SKD009",
+            "burst": true,
+            "sp": [
+              97,
+              72
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 170,
+            "event": "damage",
+            "actor": "char_jihoon_01",
+            "skill": "SKD009",
+            "burst": true,
+            "sp": [
+              72,
+              72
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "1-5/W2/1"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 171,
+            "event": "death",
+            "actor": "1-5/W2/1",
+            "burst": true,
+            "sp": [
+              72,
+              72
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 600
+          },
+          {
+            "frame": 172,
+            "event": "action_end",
+            "actor": "char_jihoon_01",
+            "skill": "SKD009",
+            "burst": true,
+            "sp": [
+              72,
+              72
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 173,
+            "event": "burst_end",
+            "actor": "char_jihoon_01",
+            "burst": false,
+            "sp": [
+              72,
+              72
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 173,
+        "endReason": "enemies_defeated",
+        "burstCutIns": 1,
+        "burstSounds": 1
+      }
+    ],
+    "betweenBursts": [
+      {
+        "from": 1,
+        "to": 2,
+        "frames": [
+          {
+            "frame": 71,
+            "event": "action_start",
+            "sp": 28,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 73,
+            "event": "action_end",
+            "sp": 48,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 75,
+            "event": "action_start",
+            "sp": 48,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 77,
+            "event": "action_end",
+            "sp": 90,
+            "gauge": 62,
+            "burst": false
+          },
+          {
+            "frame": 79,
+            "event": "action_start",
+            "sp": 65,
+            "gauge": 62,
+            "burst": false
+          },
+          {
+            "frame": 81,
+            "event": "action_end",
+            "sp": 85,
+            "gauge": 82,
+            "burst": false
+          },
+          {
+            "frame": 83,
+            "event": "action_start",
+            "sp": 10,
+            "gauge": 82,
+            "burst": false
+          },
+          {
+            "frame": 85,
+            "event": "action_end",
+            "sp": 30,
+            "gauge": 102,
+            "burst": false
+          },
+          {
+            "frame": 88,
+            "event": "action_start",
+            "sp": 30,
+            "gauge": 102,
+            "burst": false
+          },
+          {
+            "frame": 90,
+            "event": "action_end",
+            "sp": 30,
+            "gauge": 102,
+            "burst": false
+          },
+          {
+            "frame": 92,
+            "event": "action_start",
+            "sp": 30,
+            "gauge": 102,
+            "burst": false
+          },
+          {
+            "frame": 95,
+            "event": "action_end",
+            "sp": 72,
+            "gauge": 144,
+            "burst": false
+          },
+          {
+            "frame": 97,
+            "event": "action_start",
+            "sp": 22,
+            "gauge": 144,
+            "burst": false
+          },
+          {
+            "frame": 99,
+            "event": "action_end",
+            "sp": 42,
+            "gauge": 164,
+            "burst": false
+          },
+          {
+            "frame": 101,
+            "event": "action_start",
+            "sp": 42,
+            "gauge": 164,
+            "burst": false
+          },
+          {
+            "frame": 103,
+            "event": "action_end",
+            "sp": 84,
+            "gauge": 200,
+            "burst": false
+          },
+          {
+            "frame": 105,
+            "event": "burst_start",
+            "sp": 84,
+            "gauge": 0,
+            "burst": true
+          }
+        ]
+      },
+      {
+        "from": 2,
+        "to": 3,
+        "frames": [
+          {
+            "frame": 132,
+            "event": "action_start",
+            "sp": 19,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 135,
+            "event": "action_end",
+            "sp": 61,
+            "gauge": 42,
+            "burst": false
+          },
+          {
+            "frame": 138,
+            "event": "action_start",
+            "sp": 61,
+            "gauge": 42,
+            "burst": false
+          },
+          {
+            "frame": 140,
+            "event": "action_end",
+            "sp": 61,
+            "gauge": 42,
+            "burst": false
+          },
+          {
+            "frame": 142,
+            "event": "action_start",
+            "sp": 61,
+            "gauge": 42,
+            "burst": false
+          },
+          {
+            "frame": 144,
+            "event": "action_end",
+            "sp": 103,
+            "gauge": 84,
+            "burst": false
+          },
+          {
+            "frame": 146,
+            "event": "action_start",
+            "sp": 53,
+            "gauge": 84,
+            "burst": false
+          },
+          {
+            "frame": 149,
+            "event": "action_end",
+            "sp": 73,
+            "gauge": 104,
+            "burst": false
+          },
+          {
+            "frame": 151,
+            "event": "action_start",
+            "sp": 73,
+            "gauge": 104,
+            "burst": false
+          },
+          {
+            "frame": 154,
+            "event": "action_end",
+            "sp": 115,
+            "gauge": 146,
+            "burst": false
+          },
+          {
+            "frame": 156,
+            "event": "action_start",
+            "sp": 90,
+            "gauge": 146,
+            "burst": false
+          },
+          {
+            "frame": 158,
+            "event": "action_end",
+            "sp": 110,
+            "gauge": 166,
+            "burst": false
+          },
+          {
+            "frame": 160,
+            "event": "action_start",
+            "sp": 35,
+            "gauge": 166,
+            "burst": false
+          },
+          {
+            "frame": 162,
+            "event": "action_end",
+            "sp": 55,
+            "gauge": 186,
+            "burst": false
+          },
+          {
+            "frame": 164,
+            "event": "action_start",
+            "sp": 55,
+            "gauge": 186,
+            "burst": false
+          },
+          {
+            "frame": 166,
+            "event": "action_end",
+            "sp": 97,
+            "gauge": 200,
+            "burst": false
+          },
+          {
+            "frame": 168,
+            "event": "burst_start",
+            "sp": 97,
+            "gauge": 0,
+            "burst": true
+          }
+        ]
+      }
+    ]
+  }
+]

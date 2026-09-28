@@ -1,0 +1,77 @@
+{
+  "scope": "Offline fixture of production components, not real API or persistence acceptance",
+  "url": "http://127.0.0.1:3106",
+  "results": [
+    {
+      "check": "initial",
+      "geometry": {
+        "width": 380,
+        "scrollWidth": 380,
+        "headerTop": 0,
+        "footerBottom": 844,
+        "viewport": 844
+      }
+    },
+    {
+      "check": "stage 0",
+      "level": 35,
+      "stats": {
+        "luk": 0,
+        "hp": 20780,
+        "atk": 1210,
+        "def": 460,
+        "sp": 100
+      },
+      "pass": true
+    },
+    {
+      "check": "stage 1",
+      "level": 39,
+      "stats": {
+        "hp": 17290,
+        "atk": 740,
+        "def": 580,
+        "sp": 100,
+        "luk": 0
+      },
+      "pass": true
+    },
+    {
+      "check": "stage 2",
+      "level": 45,
+      "stats": {
+        "hp": 54240,
+        "atk": 1830,
+        "def": 630,
+        "sp": 150,
+        "luk": 0
+      },
+      "pass": true
+    },
+    {
+      "check": "zero item still enters detail",
+      "pass": true
+    },
+    {
+      "check": "low level still enters detail; hosting disabled",
+      "pass": true
+    },
+    {
+      "check": "failed fixture request does not consume",
+      "pass": true
+    },
+    {
+      "check": "double click runs once and opens existing RaidView",
+      "pass": true
+    },
+    {
+      "check": "multiple room resumes correct ID",
+      "pass": true
+    },
+    {
+      "check": "ended room frees slot and opens existing result path",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

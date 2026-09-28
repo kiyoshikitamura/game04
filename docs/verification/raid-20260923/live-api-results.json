@@ -1,0 +1,101 @@
+{
+  "project": "lrgyllgzcdcphlbmkknc",
+  "apiVersion": 14,
+  "fixture": {
+    "owner": "06f6e29c-5ef2-4968-9b67-61f9c5e1f10f",
+    "guest": "35b326f5-5a93-4532-9619-9c05651269e9",
+    "roomId": "e5545f8c-5406-4cdc-b070-1efd36af44eb",
+    "masterId": "encounter_a1_ERB01",
+    "enemyHp": 6500,
+    "sharedHp": 39000,
+    "firstBattleId": "ab328a81-adfb-42a4-88a1-22cbf1c08475",
+    "preparation": "Disposable QA only; guest initial N party Lv50 with matching cumulative EXP; formal enemy/shared HP unchanged; energy not refilled during operations"
+  },
+  "checks": [
+    {
+      "name": "formal loss, no personal victory reward",
+      "pass": true
+    },
+    {
+      "name": "join/rescue/formal win/same request replay",
+      "pass": true,
+      "damage": 7502,
+      "energy": 30,
+      "playerGrowth": {
+        "exp": 80,
+        "level": 1,
+        "energy": 30,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 80,
+        "offeredExp": 80,
+        "beforeLevel": 1,
+        "rewardVersion": "GAME04_RAID_FORMAL_20260923",
+        "energyRecovered": 0
+      }
+    },
+    {
+      "name": "formal successive win",
+      "wins": 2,
+      "hp": 14111,
+      "energy": 50,
+      "playerGrowth": {
+        "exp": 160,
+        "level": 2,
+        "energy": 50,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 80,
+        "offeredExp": 80,
+        "beforeLevel": 1,
+        "rewardVersion": "GAME04_RAID_FORMAL_20260923",
+        "energyRecovered": 40
+      }
+    },
+    {
+      "name": "formal successive win",
+      "wins": 3,
+      "hp": 4082,
+      "energy": 50,
+      "playerGrowth": {
+        "exp": 240,
+        "level": 3,
+        "energy": 50,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 80,
+        "offeredExp": 80,
+        "beforeLevel": 2,
+        "rewardVersion": "GAME04_RAID_FORMAL_20260923",
+        "energyRecovered": 20
+      }
+    },
+    {
+      "name": "formal successive win",
+      "wins": 4,
+      "hp": 0,
+      "energy": 30,
+      "playerGrowth": {
+        "exp": 320,
+        "level": 3,
+        "energy": 30,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 80,
+        "offeredExp": 80,
+        "beforeLevel": 3,
+        "rewardVersion": "GAME04_RAID_FORMAL_20260923",
+        "energyRecovered": 0
+      }
+    },
+    {
+      "name": "qualification/defeat/history/reload",
+      "pass": true
+    },
+    {
+      "name": "claim/reload/new request duplicate claim",
+      "pass": true
+    }
+  ],
+  "pass": true
+}

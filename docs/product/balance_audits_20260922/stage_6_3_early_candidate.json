@@ -1,0 +1,270 @@
+{
+  "status": "CANDIDATE_NOT_FIXED",
+  "basis": "6ddb9f86848614e3663bce249a56957bdbd78218",
+  "changes": [
+    {
+      "enemyId": "6-3/1/1",
+      "field": "initialCount",
+      "before": 6,
+      "candidate": 3
+    },
+    {
+      "enemyId": "6-3/2/1",
+      "field": "initialCount",
+      "before": 7,
+      "candidate": 3
+    }
+  ],
+  "candidateWaves": [
+    [
+      {
+        "id": "6-3/1/1",
+        "name": "竹中半兵衛",
+        "image": "",
+        "level": 54,
+        "stats": {
+          "luk": 0,
+          "hp": 16000,
+          "atk": 1450,
+          "def": 600,
+          "sp": 100
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "light",
+        "actionCount": 6,
+        "initialCount": 3,
+        "initialSp": 65,
+        "skills": [
+          {
+            "id": "SKD032",
+            "name": "影縫い",
+            "image": "",
+            "rarity": "R",
+            "element": "water",
+            "spCost": 65,
+            "condition": {
+              "type": "always"
+            },
+            "target": "first",
+            "effects": [
+              {
+                "type": "stun",
+                "power": 0,
+                "chance": 0.3944,
+                "duration": 1
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P04_light",
+            "type": "P04",
+            "name": "P04",
+            "stat": "def",
+            "percent": 11.851101588160029,
+            "level": 2,
+            "target": "self",
+            "targetElement": "light"
+          }
+        ]
+      },
+      {
+        "id": "6-3/1/2",
+        "name": "雑賀孫市",
+        "image": "",
+        "level": 54,
+        "stats": {
+          "luk": 0,
+          "hp": 15000,
+          "atk": 1850,
+          "def": 460,
+          "sp": 100
+        },
+        "order": 1,
+        "hitSpGain": 10,
+        "element": "wind",
+        "actionCount": 7,
+        "initialCount": 7,
+        "initialSp": 50,
+        "skills": [
+          {
+            "id": "SKD010",
+            "name": "標準単体攻撃・風",
+            "image": "",
+            "rarity": "R",
+            "element": "wind",
+            "spCost": 50,
+            "condition": {
+              "type": "always"
+            },
+            "target": "first",
+            "effects": [
+              {
+                "type": "damage",
+                "power": 137.76
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P06_wind",
+            "type": "P06",
+            "name": "P06",
+            "stat": "atk",
+            "percent": 7.110660952896017,
+            "level": 2,
+            "target": "self",
+            "targetElement": "wind"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "id": "6-3/2/1",
+        "name": "真田昌幸",
+        "image": "",
+        "level": 55,
+        "stats": {
+          "luk": 0,
+          "hp": 34000,
+          "atk": 2100,
+          "def": 700,
+          "sp": 100
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "fire",
+        "actionCount": 7,
+        "initialCount": 3,
+        "initialSp": 65,
+        "skills": [
+          {
+            "id": "SKD032",
+            "name": "影縫い",
+            "image": "",
+            "rarity": "R",
+            "element": "water",
+            "spCost": 65,
+            "condition": {
+              "type": "always"
+            },
+            "target": "first",
+            "effects": [
+              {
+                "type": "stun",
+                "power": 0,
+                "chance": 0.3944,
+                "duration": 1
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P12_fire",
+            "type": "P12",
+            "name": "P12",
+            "stat": "atk",
+            "percent": 14.221321905792035,
+            "level": 2,
+            "target": "self",
+            "targetElement": "fire"
+          }
+        ]
+      },
+      {
+        "id": "6-3/2/2",
+        "name": "甲斐姫",
+        "image": "",
+        "level": 55,
+        "stats": {
+          "luk": 0,
+          "hp": 14000,
+          "atk": 1600,
+          "def": 650,
+          "sp": 100
+        },
+        "order": 1,
+        "hitSpGain": 10,
+        "element": "water",
+        "actionCount": 6,
+        "initialCount": 6,
+        "initialSp": 0,
+        "skills": [],
+        "passives": [
+          {
+            "id": "P13_water",
+            "type": "P13",
+            "name": "P13",
+            "stat": "atk",
+            "percent": 11.851101588160029,
+            "level": 2,
+            "target": "self",
+            "targetElement": "water"
+          }
+        ]
+      },
+      {
+        "id": "6-3/2/3",
+        "name": "細川ガラシャ",
+        "image": "",
+        "level": 54,
+        "stats": {
+          "luk": 0,
+          "hp": 10000,
+          "atk": 1750,
+          "def": 380,
+          "sp": 100
+        },
+        "order": 2,
+        "hitSpGain": 10,
+        "element": "light",
+        "actionCount": 7,
+        "initialCount": 7,
+        "initialSp": 90,
+        "skills": [
+          {
+            "id": "SKD040",
+            "name": "治癒の祈り",
+            "image": "",
+            "rarity": "SR",
+            "element": "water",
+            "spCost": 90,
+            "condition": {
+              "type": "always"
+            },
+            "target": "lowest_ally",
+            "effects": [
+              {
+                "type": "heal",
+                "power": 91.65,
+                "healingFormula": "caster_atk_percent"
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P10_light",
+            "type": "P10",
+            "name": "P10",
+            "stat": "atk",
+            "percent": 9.480881270528023,
+            "level": 2,
+            "target": "self",
+            "targetElement": "light"
+          }
+        ]
+      }
+    ]
+  ],
+  "accepted": false
+}

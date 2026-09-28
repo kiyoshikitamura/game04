@@ -1,0 +1,253 @@
+.tribe-modal-container-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tribe-community-secondary-nav {
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: flex-end;
+  margin: -4px 0 8px;
+}
+
+.tribe-bbs-link.outlaw-button {
+  min-height: 34px;
+  padding: 5px 12px;
+  font-size: 10px;
+}
+
+/* Chat can be opened after horizontally scrollable tabs/details. Anchor the
+   modal to the viewport instead of inheriting a shifted containing block. */
+.modal-shell.tribe-chat-panel {
+  z-index: 11000;
+  position: fixed;
+  top: var(--app-safe-top, 0px);
+  right: auto;
+  bottom: var(--app-safe-bottom, 0px);
+  left: 50%;
+  width: min(100vw, 430px);
+  transform: translateX(-50%);
+  animation: none;
+}
+
+.tribe-dm-thread-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 4px 10px;
+  background: rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+.tribe-dm-thread-header strong {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ui-text-primary);
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tribe-dm-back.outlaw-button {
+  min-height: 36px;
+  padding: 6px 14px;
+  font-size: 11px;
+}
+
+.tribe-dm-conversation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.tribe-dm-conversation {
+  display: flex;
+  width: 100%;
+  min-height: 64px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(160, 160, 170, 0.26);
+  border-radius: var(--ui-radius-sm);
+  background: linear-gradient(180deg, rgba(35, 40, 51, 0.94), rgba(17, 19, 28, 0.96));
+  color: var(--ui-text-primary);
+  text-align: left;
+  cursor: pointer;
+}
+
+.tribe-dm-conversation-main {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tribe-dm-conversation-main strong {
+  overflow: hidden;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tribe-dm-conversation-main > span {
+  overflow: hidden;
+  color: var(--ui-text-secondary);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tribe-dm-conversation-meta {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tribe-dm-conversation-meta time {
+  color: var(--ui-text-secondary);
+  font-size: 9px;
+}
+
+.tribe-dm-conversation-meta b {
+  display: inline-flex;
+  min-width: 22px;
+  height: 22px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--ui-combat);
+  color: #fff;
+  font-size: 10px;
+}
+
+/* メッセージログ表示領域 */
+.tribe-modal-body {
+  flex: 1;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.tribe-modal-empty {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-align: center;
+  margin: auto;
+}
+
+.tribe-msg-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 80%;
+}
+
+.tribe-msg-row.self {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.tribe-msg-row.other {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.tribe-msg-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  color: var(--text-secondary);
+}
+
+.tribe-msg-identity { min-width: 0; max-width: min(230px, 62vw); }
+.tribe-msg-identity .user-identity-row { grid-template-columns: 30px minmax(0,1fr); gap: 6px; }
+.tribe-msg-identity .user-identity-row > .character-presentation { width: 30px; height: 30px; }
+.tribe-msg-identity .user-identity-row strong { font-size: 10px; }
+.tribe-msg-identity .user-identity-row small { font-size: 7px; }
+.tribe-msg-row.self .tribe-msg-header { justify-content: flex-end; }
+
+.tribe-msg-author {
+  font-weight: 700;
+  color: #a0aec0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.tribe-msg-author:hover {
+  color: var(--neon-cyan);
+}
+
+.tribe-msg-time {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.tribe-msg-bubble {
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 11px;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.tribe-msg-row.self .tribe-msg-bubble {
+  background: rgba(0, 240, 255, 0.15);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  color: #ffffff;
+  border-top-right-radius: 2px;
+}
+
+.tribe-msg-row.other .tribe-msg-bubble {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e0e0e0;
+  border-top-left-radius: 2px;
+}
+
+.tribe-modal-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 0 0 0;
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+.tribe-modal-composer-row {
+  display: flex;
+  gap: 8px;
+}
+
+.tribe-modal-input {
+  min-width: 0;
+  flex: 1;
+}
+
+.tribe-modal-send.outlaw-button {
+  width: 80px;
+  padding-inline: 12px;
+}
+
+@media (max-width: 412px) {
+  .tribe-modal-body { padding-inline: 8px; }
+  .tribe-msg-row { max-width: 88%; }
+  .tribe-modal-footer { padding-bottom: max(4px, env(safe-area-inset-bottom)); }
+  .tribe-modal-input { min-width: 0; }
+}
+.tribe-msg-reply-source{margin:0 0 4px;padding:5px 7px;border-left:2px solid var(--color-cyan,#00f4ff);background:rgba(0,244,255,.06);font-size:10px;color:rgba(255,255,255,.6)}
+.tribe-msg-reply{margin-top:3px;border:0;background:transparent;color:var(--color-cyan,#00f4ff);font-size:11px;padding:4px 0}.tribe-reply-composer{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px;padding:8px 10px;border-left:3px solid var(--color-cyan,#00f4ff);background:rgba(255,255,255,.05)}.tribe-reply-composer div{min-width:0}.tribe-reply-composer b,.tribe-reply-composer span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.tribe-reply-composer b{font-size:10px;color:var(--color-cyan,#00f4ff)}.tribe-reply-composer span{font-size:11px;color:rgba(255,255,255,.7)}.tribe-reply-composer button{border:0;background:transparent;color:#fff;font-size:20px}
+.tribe-chat-action-status { display: block; min-height: 16px; margin-top: 4px; color: var(--ui-text-secondary); font-size: 10px; text-align: right; }

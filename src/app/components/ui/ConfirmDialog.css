@@ -1,0 +1,104 @@
+/* ConfirmDialog.css */
+
+.outlaw-confirm-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fadeIn 0.2s ease;
+}
+
+.outlaw-confirm-dialog {
+  width: 90%;
+  max-width: 380px;
+  background: var(--ui-bg-raised);
+  border-radius: var(--ui-radius-lg);
+  overflow: hidden;
+  animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 通常モード（例えばシアンやマゼンタ、画像に寄せるなら全体的にマゼンタ） */
+.outlaw-confirm-dialog.neon-mode {
+  border: 1px solid var(--ui-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, .72);
+}
+.outlaw-confirm-dialog.neon-mode .confirm-title {
+  color: var(--ui-text-primary);
+  text-shadow: none;
+}
+.outlaw-confirm-dialog.kind-reward { border-color: rgba(247, 196, 72, .66); box-shadow: 0 8px 32px rgba(0, 0, 0, .78), 0 0 22px rgba(247, 196, 72, .12); }
+.outlaw-confirm-dialog.kind-reward .confirm-title { color: var(--neon-gold); }
+
+/* 危険モード（赤など） */
+.outlaw-confirm-dialog.danger-mode {
+  border: 1px solid rgba(255, 51, 51, 0.8);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 51, 51, 0.3);
+}
+.outlaw-confirm-dialog.danger-mode .confirm-title {
+  color: #ff3333;
+  text-shadow: 0 0 10px rgba(255, 51, 51, 0.8);
+}
+
+.confirm-content-wrapper {
+  padding: 32px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.confirm-title {
+  font-family: var(--font-inter);
+  font-weight: 800;
+  font-size: var(--ui-font-heading);
+  letter-spacing: 0.1em;
+  margin: 0;
+  text-align: center;
+}
+
+.confirm-body {
+  font-family: var(--font-inter);
+  font-size: var(--ui-font-body);
+  color: var(--ui-text-secondary);
+  line-height: 1.6;
+  text-align: left;
+  white-space: pre-wrap;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.confirm-btn {
+  flex: 1;
+}
+
+@media (max-width: 412px) {
+  .outlaw-confirm-overlay { align-items: flex-end; padding: 16px 12px calc(16px + env(safe-area-inset-bottom)); }
+  .outlaw-confirm-overlay:has(.kind-result) { align-items: center; }
+  .outlaw-confirm-dialog { width: 100%; max-height: min(78dvh, 620px); overflow-y: auto; }
+  .confirm-content-wrapper { padding: 24px 18px 18px; gap: 16px; }
+  .confirm-actions { position: sticky; bottom: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

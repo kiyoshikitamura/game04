@@ -1,0 +1,428 @@
+- iframe [active]:
+  - alert
+  - region "ゲーム画面":
+    - img "くノ一"
+    - generic: Lv.1
+    - strong: G2継続QA
+    - generic "将来の同盟表示枠": ◇ 同盟 —
+    - button "アカウント連携": 未認証
+    - button "メニュー"
+    - generic: 銭 13,220
+    - generic: 輝石 200
+    - generic: 行動力 100/100
+    - main:
+      - navigation "育成":
+        - button "デッキ" [pressed]
+        - button "編成"
+        - button "武将"
+        - button "スキル"
+        - button "装備"
+      - heading "出撃デッキ" [level=3]
+      - button "並び替え ↕"
+      - button "1 くノ一 N 水 くノ一 N 水 Lv.8 +0":
+        - emphasis: "1"
+        - figure "くノ一 N 水"
+        - generic: くノ一
+        - generic: N 水
+        - generic: Lv.8 +0
+      - button "2 伝令 N 土 伝令 N 土 Lv.1 +0":
+        - emphasis: "2"
+        - figure "伝令 N 土"
+        - generic: 伝令
+        - generic: N 土
+        - generic: Lv.1 +0
+      - button "3 僧兵 N 火 僧兵 N 火 Lv.1 +0":
+        - emphasis: "3"
+        - figure "僧兵 N 火"
+        - generic: 僧兵
+        - generic: N 火
+        - generic: Lv.1 +0
+      - button "4 竹中半兵衛 R 光 竹中半兵衛 R 光 Lv.1 +0":
+        - emphasis: "4"
+        - figure "竹中半兵衛 R 光"
+        - generic: 竹中半兵衛
+        - generic: R 光
+        - generic: Lv.1 +0
+      - button "5 前田利家 R 土 前田利家 R 土 Lv.1 +0":
+        - emphasis: "5"
+        - figure "前田利家 R 土"
+        - generic: 前田利家
+        - generic: R 土
+        - generic: Lv.1 +0
+      - text: 総合HP
+      - generic: 4,425
+      - generic: 火
+      - text: "1"
+      - generic: 水
+      - text: "1"
+      - generic: 土
+      - text: "2"
+      - generic: 風
+      - text: "0"
+      - generic: 光
+      - text: "1"
+      - generic: 闇
+      - text: "0"
+      - text: 共通SP上限
+      - generic: "400"
+      - button "おまかせ編成":
+        - generic: おまかせ編成
+      - button "おまかせ装備":
+        - generic: おまかせ装備
+      - button "おまかせスキル":
+        - generic: おまかせスキル
+      - heading "選択中武将のスキル" [level=3]
+      - button "一文字斬り LB+0":
+        - generic: 一文字斬り
+        - generic: LB+0
+      - button "未解放 未装備":
+        - generic: 未解放
+        - generic: 未装備
+      - button "未解放 未装備":
+        - generic: 未解放
+        - generic: 未装備
+    - navigation "メインナビゲーション":
+      - button "本陣"
+      - button "出陣"
+      - button "武将"
+      - button "共闘"
+      - button "召喚"
+  - dialog "スキルを変更" [active]:
+    - banner:
+      - heading "スキルを変更" [level=2]
+      - button "閉じる": ×
+    - button "外す"
+    - button "一文字斬り LB+0 SP 24" [disabled]
+    - button "竹束の守り LB+0 SP 32"
+    - button "薬師の手当 LB+0 SP 40"
+    - button "疾風の足運び LB+0 SP 48"
+    - button "忍法・毒針 LB+0 SP 24"
+    - button "鉄壁の構え LB+0 SP 32"
+    - button "挑発の鬨 LB+0 SP 40"
+    - button "弓取りの一射 LB+0 SP 48"
+    - button "火走り LB+0 SP 25"
+    - button "水走り LB+0 SP 25"
+    - button "土割り LB+0 SP 25"
+    - button "風切り LB+0 SP 25"
+    - button "光差し LB+0 SP 25"
+    - button "影切り LB+0 SP 25"
+    - button "炎断 LB+0 SP 50"
+    - button "水断 LB+0 SP 50"
+    - button "岩断 LB+0 SP 50"
+    - button "風断 LB+0 SP 50"
+    - button "光断 LB+0 SP 50"
+    - button "影断 LB+0 SP 50"
+    - button "紅蓮一閃 LB+0 SP 150"
+    - button "蒼波一閃 LB+0 SP 150"
+    - button "地裂一閃 LB+0 SP 150"
+    - button "天嵐一閃 LB+0 SP 150"
+    - button "天光一閃 LB+0 SP 150"
+    - button "宵闇一閃 LB+0 SP 150"
+    - button "火の薙ぎ LB+0 SP 75"
+    - button "水の薙ぎ LB+0 SP 75"
+    - button "薙ぎ払い LB+0 SP 75"
+    - button "風の薙ぎ LB+0 SP 75"
+    - button "光の薙ぎ LB+0 SP 75"
+    - button "闇の薙ぎ LB+0 SP 75"
+    - button "紅蓮の大計 LB+0 SP 170"
+    - button "後陣射ち LB+0 SP 55"
+    - button "追い討ち LB+0 SP 50"
+    - button "崩し討ち LB+0 SP 100"
+    - button "毒刃 LB+0 SP 65"
+    - button "蝕み討ち LB+0 SP 100"
+    - button "背水斬り LB+0 SP 100"
+    - button "影縫い LB+0 SP 65"
+    - button "気合 LB+0 SP 30"
+    - button "身構え LB+0 SP 30"
+    - button "鬨の声 LB+0 SP 75"
+    - button "守りの陣 LB+0 SP 75"
+    - button "威圧 LB+0 SP 50"
+    - button "鎧砕き LB+0 SP 50"
+    - button "応急手当 LB+0 SP 35"
+    - button "治癒の祈り LB+0 SP 90"
+    - button "小休止 LB+0 SP 90"
+    - button "慈愛の大祈祷 LB+0 SP 190"
+    - button "再生の祈り LB+0 SP 65"
+    - button "蘇生の祈り LB+0 SP 180"
+    - button "護身障壁 LB+0 SP 55"
+    - button "守護の札 LB+0 SP 75"
+    - button "結界の陣 LB+0 SP 180"
+    - button "挑発 LB+0 SP 40"
+    - button "返し刃 LB+0 SP 65"
+    - button "迎撃の構え LB+0 SP 110"
+    - button "破勢 LB+0 SP 45"
+    - button "破護 LB+0 SP 45"
+    - button "奮起 LB+0 SP 40"
+    - button "浄毒 LB+0 SP 40"
+    - button "解縛 LB+0 SP 55"
+    - button "破陣撃 LB+0 SP 135"
+    - button "後陣崩し LB+0 SP 115"
+    - button "蝕みの陣 LB+0 SP 110"
+    - button "崩陣の波 LB+0 SP 130"
+    - button "背水の薙ぎ LB+0 SP 130"
+    - button "奮戦の檄 LB+0 SP 45"
+    - button "堅守の札 LB+0 SP 45"
+    - button "破甲の陣 LB+0 SP 100"
+    - button "威圧の陣 LB+0 SP 100"
+    - button "封陣 LB+0 SP 135"
+    - button "軍神の号令 LB+0 SP 150"
+    - button "再生の陣 LB+0 SP 135"
+    - button "救護の札 LB+0 SP 120"
+    - button "返しの号令 LB+0 SP 80"
+    - button "清めの手当 LB+0 SP 65"
+    - button "大祓い LB+0 SP 140"
+    - button "破勢の一閃 LB+0 SP 135"
+- region "QA読み込み計測":
+  - heading "QA読み込み計測" [level=2]
+  - paragraph: 本体は上の実寸iframeです。APIは認証・通信・応答確認を含む総待機時間。画像は必須画像グループの待機時間（キャッシュを含む）です。対象CTAの操作可能時刻は下段で別計測。FCPをTTIとは扱いません。
+  - button "本体を再読込して計測を消去"
+  - paragraph: 件数：30 / 100
+  - generic "ブラウザ初回表示指標":
+    - paragraph: Navigation：navigate ／ responseStart 1328.5 ms ／ responseEnd 1330.7 ms ／ DCL 2076.4 ms
+    - paragraph: first-paint：2116.0 ms
+    - paragraph: first-contentful-paint：2116.0 ms
+  - table:
+    - rowgroup:
+      - row "種別 / 対象 枚数 開始ms 完了ms 待機ms 結果":
+        - columnheader "種別 / 対象"
+        - columnheader "枚数"
+        - columnheader "開始ms"
+        - columnheader "完了ms"
+        - columnheader "待機ms"
+        - columnheader "結果"
+    - rowgroup:
+      - row "request / get_state — 59363.4 61128.6 1765.2 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "59363.4"
+        - cell "61128.6"
+        - cell "1765.2"
+        - cell "success"
+      - row "image-group / home 9 61172.8 61600.2 427.4 success":
+        - cell "image-group / home"
+        - cell "9"
+        - cell "61172.8"
+        - cell "61600.2"
+        - cell "427.4"
+        - cell "success"
+      - row "image-group / quest 2 84239.4 85346.8 1107.4 success":
+        - cell "image-group / quest"
+        - cell "2"
+        - cell "84239.4"
+        - cell "85346.8"
+        - cell "1107.4"
+        - cell "success"
+      - row "request / get_state — 84235.8 86024.1 1788.3 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "84235.8"
+        - cell "86024.1"
+        - cell "1788.3"
+        - cell "success"
+      - row "image-group / quest 1 95148.9 95149.0 0.1 success":
+        - cell "image-group / quest"
+        - cell "1"
+        - cell "95148.9"
+        - cell "95149.0"
+        - cell "0.1"
+        - cell "success"
+      - row "request / get_state — 119364.6 120802.5 1437.9 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "119364.6"
+        - cell "120802.5"
+        - cell "1437.9"
+        - cell "success"
+      - row "request / get_state — 179364.2 182465.3 3101.1 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "179364.2"
+        - cell "182465.3"
+        - cell "3101.1"
+        - cell "success"
+      - row "image-group / growth 22 220571.8 221216.0 644.2 success":
+        - cell "image-group / growth"
+        - cell "22"
+        - cell "220571.8"
+        - cell "221216.0"
+        - cell "644.2"
+        - cell "success"
+      - row "request / get_state — 220554.8 222872.9 2318.1 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "220554.8"
+        - cell "222872.9"
+        - cell "2318.1"
+        - cell "success"
+      - row "image-group / growth 65 230874.8 232884.5 2009.7 success":
+        - cell "image-group / growth"
+        - cell "65"
+        - cell "230874.8"
+        - cell "232884.5"
+        - cell "2009.7"
+        - cell "success"
+      - row "request / get_state — 239364.3 241145.8 1781.5 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "239364.3"
+        - cell "241145.8"
+        - cell "1781.5"
+        - cell "success"
+      - row "request / get_state — 299364.2 301025.6 1661.4 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "299364.2"
+        - cell "301025.6"
+        - cell "1661.4"
+        - cell "success"
+      - row "request / get_state — 359364.3 361187.8 1823.5 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "359364.3"
+        - cell "361187.8"
+        - cell "1823.5"
+        - cell "success"
+      - row "request / get_state — 419364.3 420779.0 1414.7 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "419364.3"
+        - cell "420779.0"
+        - cell "1414.7"
+        - cell "success"
+      - row "image-group / quest 10 465934.5 466453.7 519.2 success":
+        - cell "image-group / quest"
+        - cell "10"
+        - cell "465934.5"
+        - cell "466453.7"
+        - cell "519.2"
+        - cell "success"
+      - row "request / get_state — 465931.1 467284.4 1353.3 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "465931.1"
+        - cell "467284.4"
+        - cell "1353.3"
+        - cell "success"
+      - row "request / get_state — 479364.3 480828.1 1463.8 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "479364.3"
+        - cell "480828.1"
+        - cell "1463.8"
+        - cell "success"
+      - row "image-group / home 9 489129.9 489142.0 12.1 success":
+        - cell "image-group / home"
+        - cell "9"
+        - cell "489129.9"
+        - cell "489142.0"
+        - cell "12.1"
+        - cell "success"
+      - row "request / get_state — 489127.4 490789.0 1661.6 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "489127.4"
+        - cell "490789.0"
+        - cell "1661.6"
+        - cell "success"
+      - row "request / get_state — 504615.2 507026.2 2411.0 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "504615.2"
+        - cell "507026.2"
+        - cell "2411.0"
+        - cell "success"
+      - row "request / get_state — 539364.2 541102.7 1738.5 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "539364.2"
+        - cell "541102.7"
+        - cell "1738.5"
+        - cell "success"
+      - row "request / get_state — 599364.3 600792.4 1428.1 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "599364.3"
+        - cell "600792.4"
+        - cell "1428.1"
+        - cell "success"
+      - row "request / get_state — 659364.4 660840.4 1476.0 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "659364.4"
+        - cell "660840.4"
+        - cell "1476.0"
+        - cell "success"
+      - row "request / get_state — 719364.2 720731.7 1367.5 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "719364.2"
+        - cell "720731.7"
+        - cell "1367.5"
+        - cell "success"
+      - row "image-group / growth 22 759206.7 759215.4 8.7 success":
+        - cell "image-group / growth"
+        - cell "22"
+        - cell "759206.7"
+        - cell "759215.4"
+        - cell "8.7"
+        - cell "success"
+      - row "request / get_state — 759201.6 760784.1 1582.5 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "759201.6"
+        - cell "760784.1"
+        - cell "1582.5"
+        - cell "success"
+      - row "image-group / growth 20 767452.7 767827.5 374.8 success":
+        - cell "image-group / growth"
+        - cell "20"
+        - cell "767452.7"
+        - cell "767827.5"
+        - cell "374.8"
+        - cell "success"
+      - row "image-group / growth 22 775236.7 775237.1 0.4 success":
+        - cell "image-group / growth"
+        - cell "22"
+        - cell "775236.7"
+        - cell "775237.1"
+        - cell "0.4"
+        - cell "success"
+      - row "request / get_state — 779364.1 780720.7 1356.6 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "779364.1"
+        - cell "780720.7"
+        - cell "1356.6"
+        - cell "success"
+      - row "image-group / growth 83 786593.5 786593.7 0.2 success":
+        - cell "image-group / growth"
+        - cell "83"
+        - cell "786593.5"
+        - cell "786593.7"
+        - cell "0.2"
+        - cell "success"
+- region "QA対象CTA操作可能計測":
+  - heading "対象CTAの操作可能時刻" [level=2]
+  - paragraph: 対象の完全一致名・可視・非disabled/inert・中央点の遮蔽物なしを2描画frameで観測。画面全体のTTIや保存完了ではありません。遷移先固有CTAを指定し、準備後に次の本体操作を計測してください。
+  - text: 対象CTA
+  - textbox "対象CTA": 武将
+  - button "次の本体操作を計測"
+  - paragraph: navigation開始0はiframe navigation origin。TAP待ち・ログボを閉じる時間も含みます。interactionは本体pointerdown/keydown起点、click発火後に操作可能判定。スクロール等でclickしなかった場合も60秒未成立はtimeoutです。
+  - table:
+    - rowgroup:
+      - row "起点 timeOrigin 開始ms 観測ms 経過ms 結果":
+        - columnheader "起点"
+        - columnheader "timeOrigin"
+        - columnheader "開始ms"
+        - columnheader "観測ms"
+        - columnheader "経過ms"
+        - columnheader "結果"
+    - rowgroup:
+      - row "navigation 1790310696583.5 0.0 60532.0 60532.0 timeout":
+        - cell "navigation"
+        - cell "1790310696583.5"
+        - cell "0.0"
+        - cell "60532.0"
+        - cell "60532.0"
+        - cell "timeout"
+- alert

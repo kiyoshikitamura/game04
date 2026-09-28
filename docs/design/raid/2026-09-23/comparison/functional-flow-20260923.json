@@ -1,0 +1,38 @@
+{
+  "implementationSha": "9fff68a",
+  "branch": "codex/game04-raid-approved-implementation-20260923",
+  "preview": "https://game04-hw5o3q6l4-kiyoshi-kitamura.vercel.app",
+  "deployment": "dpl_G7nr6yhparC4uijAzb1idm7m7GVE",
+  "checks": {
+    "redesignDomainFlow": {
+      "participate": "PASS",
+      "defeatDoesNotIncrementVictoryCount": "PASS",
+      "victoryCountAfterWins": 3,
+      "endedRoom": "PASS",
+      "rewardGrantCreated": "PASS",
+      "rewardClaimed": "PASS"
+    },
+    "bodyRpcFlow": {
+      "migrationAppliedToPreviewDatabase": "PASS",
+      "readProjectionRpc": "PASS",
+      "participateToBattleToReturn": "NOT_VERIFIED",
+      "reloadConsistency": "NOT_VERIFIED",
+      "reason": "GAME04 dev migration is applied and authenticated read RPCs return 200 with empty results. No active/ended room or approved GAME04 master exists in the database, and create_raid_room_v1 rejected the disposable anonymous user as user unavailable; no old GAME03-ID test room was created."
+    },
+    "visual": {
+      "comparisonImage": "raid-approved-mock-full-shell-vs-body-1536.png",
+      "previewQaScreenshots": [
+        "raid-approved-preview-qa-1536.png",
+        "raid-detail-preview-qa-1536.png"
+      ],
+      "sameWidth": 1536,
+      "loadingCapture": "NOT_CAPTURED",
+      "note": "The QA screenshots were captured after network idle on the fixed Preview; no loading-state image was submitted."
+    }
+  },
+  "externalRequired": [
+    "Populate the latest approved GAME04 raid master and migrate canonical room IDs; the repository currently contains only PREVIEW_PROVISIONAL_20260920_v1 and legacy RAID_*_V1 data.",
+    "Provide an authorized disposable GAME04 QA account and an executable room/battle fixture for the body-RPC end-to-end test.",
+    "Supply and approve the nine unapproved raid SVG assets and any mock-only backgrounds."
+  ]
+}

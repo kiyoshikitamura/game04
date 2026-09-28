@@ -1,0 +1,122 @@
+# UI リリース監査バックログ
+
+正本: [ui_ux_benchmark_strategy.md](ui_ux_benchmark_strategy.md)
+
+共通UIの受入基準: [ui_design_system.md](ui_design_system.md)
+
+段階実装計画: [ui_implementation_plan.md](ui_implementation_plan.md)
+
+Stage 0監査台帳: [ui_stage0_audit.md](ui_stage0_audit.md)
+
+## 段階進捗
+
+| Stage | 状態 | 結果 |
+| --- | --- | --- |
+| UI-0A 現状監査・移行設計 | 完了 | 画面対応、共通部品、状態、ロード、セキュリティ、アセット、変更ファイルを確定 |
+| UI-0B 共通基盤 | 未着手 | UI-0Aの台帳に従って実装する |
+| UI-1以降 | 未着手 | 各画面群の品質ゲート単位で進行する |
+
+## 管理方法
+
+各画面は、機能・情報設計・デザイン・演出・状態・操作・性能の7観点を確認するまで完了にしない。
+
+| 状態 | 意味 |
+| --- | --- |
+| 未監査 | 画面実機確認とギャップ記録が未実施 |
+| 監査中 | ギャップと受入条件を記録中 |
+| 実装中 | ギャップに対応する変更を実装中 |
+| 検証待ち | 操作・表示・状態の確認待ち |
+| 完了 | 7観点と回帰確認を通過 |
+
+## 現状認識
+
+| 領域 | 対象画面 | 現状 | 優先度 |
+| --- | --- | --- | --- |
+| ホーム | HomeTab、Header、Footer | UIは約90%。全画面との統一監査・必要な再設計・演出改修の対象 | 中 |
+| キャラクター | CharacterTab、CommonModals | UIは約70〜80%。全画面との統一監査・必要な再設計・演出改修の対象 | 中 |
+| 主ゲームループ | PatrolTab、MoveBaseModal、CardBattleView | PatrolTab／MoveBaseModalはコード監査完了。CardBattleViewはBATTLE工程 | 最優先 |
+| 抗争・協力・ランキング | PvpTab、GvgTab、GvgMatchStatusPanel、RaidTab、RankingTab、GuildTab | コード監査完了。UI-1〜2で実装 | 最優先 |
+| 成長・収集・経済 | GachaTab、ShopTab、BagTab、MissionPanel、InboxPanel | Stage 0対象はコード監査完了。UI-3で実装 | 高 |
+| ソーシャル・補助 | BbsTab、TribeChatModal、FriendPanel、SettingsPanel、MenuTab、LegalPanel | Stage 0対象はコード監査完了。MenuTab／LegalPanelは現行Stage対象外 | 高 |
+| 初回体験 | TitleView、AuthView、SetupView、Tutorial* | 他画面完成後に監査 | 最後 |
+
+## 監査順序
+
+### 1. 共通UI基盤
+
+- デザイントークン
+- 共通画面テンプレート
+- 共通ボタン、カード、一覧、モーダル、状態表示
+- 画面単位アセットローダー、スピナー、キャッシュ
+
+確認重点: 共通化、画像の一括表示、安全領域、信頼境界。
+
+### 2. 主ゲームハブ
+
+- PatrolTab
+- MoveBaseModal
+
+確認重点: 目的の明確さ、AP／報酬／再挑戦、編成、再開・失敗導線。バトル中画面はこの段階に含めない。
+
+### 3. 抗争・協力・ランキング
+
+- PvpTab
+- GvgTab / GvgMatchStatusPanel
+- RaidTab
+- RankingTab
+- GuildTab
+
+確認重点: 開催前・開催中・結果・非参加、個人貢献、組織貢献、次の行動、集計期間、確定時刻、権限状態。
+
+### 4. 成長・収集・経済
+
+- GachaTab
+- ShopTab
+- BagTab
+- MissionPanel
+- InboxPanel
+
+確認重点: 受取、獲得、成長、上限、残高不足、空状態、高レア演出。Stripe決済確定処理は対象外とする。
+
+### 5. ソーシャル・補助
+
+- BbsTab
+- TribeChatModal
+- FriendPanel
+- SettingsPanel
+- MenuTab
+- LegalPanel
+
+確認重点: 投稿なし、友達なし、読み込み、失敗、通知、モーダルの閉鎖、文字量。
+
+### 6. マスタ・アセット
+
+- UI表示契約に沿ったマスタデータ作成
+- 不足画像生成、圧縮、アセットマニフェスト登録
+
+### 7. バトル中画面
+
+- CardBattleView（準備、再生、スキル、決定イベント、リザルト）
+
+確認重点: サーバー確定結果、再生テンポ、途中復帰、改ざん耐性、バトル演出。
+
+### 8. ホーム・キャラクターを含む最終調整
+
+- HomeTab
+- CharacterTab
+
+確認重点: 背景、立ち絵、通知、報酬、レアリティ、成長結果、画面遷移、他画面との情報階層・操作・演出の統一。不整合があれば既存構造も改修する。
+
+### 9. 初回体験
+
+- TitleView
+- AuthView
+- SetupView
+- TutorialWorldIntro
+- TutorialFreeInstant
+- TutorialRuleGuide
+- TutorialBattlePrompt
+- TutorialAuthentication
+- TutorialNavigator
+
+確認重点: 完成済みの本編導線との一貫性、離脱防止、認証前後の状態遷移。

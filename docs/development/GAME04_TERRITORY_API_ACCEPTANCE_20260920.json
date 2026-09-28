@@ -1,0 +1,136 @@
+{
+  "project": "lrgyllgzcdcphlbmkknc",
+  "edgeVersion": 4,
+  "migration": "20260919151837",
+  "scope": "QA専用snapshot・保存済戦闘入力→実Edgeシミュレーションと結果確定。正式バランス受入ではない。",
+  "cases": [
+    {
+      "case": "intermediate",
+      "apiSuccess": true,
+      "ownerExperience": 0,
+      "ownerLevel": 1,
+      "hostingSlots": 1,
+      "activeHostingCount": 7
+    },
+    {
+      "case": "intermediate_replay",
+      "apiSuccess": true,
+      "ownerExperience": 0,
+      "ownerLevel": 1,
+      "hostingSlots": 1,
+      "activeHostingCount": 7
+    },
+    {
+      "case": "two_wins",
+      "apiSuccess": true,
+      "ownerExperience": 0,
+      "ownerLevel": 1,
+      "hostingSlots": 1,
+      "activeHostingCount": 6
+    },
+    {
+      "case": "two_wins_replay",
+      "apiSuccess": true,
+      "ownerExperience": 0,
+      "ownerLevel": 1,
+      "hostingSlots": 1,
+      "activeHostingCount": 6
+    },
+    {
+      "case": "absent_owner",
+      "apiSuccess": true,
+      "ownerExperience": 100,
+      "ownerLevel": 2,
+      "hostingSlots": 2,
+      "activeHostingCount": 5
+    },
+    {
+      "case": "absent_owner_replay",
+      "apiSuccess": true,
+      "ownerExperience": 100,
+      "ownerLevel": 2,
+      "hostingSlots": 2,
+      "activeHostingCount": 5
+    },
+    {
+      "case": "third_win",
+      "apiSuccess": true,
+      "ownerExperience": 200,
+      "ownerLevel": 2,
+      "hostingSlots": 2,
+      "activeHostingCount": 4
+    },
+    {
+      "case": "third_win_replay",
+      "apiSuccess": true,
+      "ownerExperience": 200,
+      "ownerLevel": 2,
+      "hostingSlots": 2,
+      "activeHostingCount": 4
+    },
+    {
+      "case": "late_clear",
+      "apiSuccess": true,
+      "ownerExperience": 200,
+      "ownerLevel": 2,
+      "hostingSlots": 2,
+      "activeHostingCount": 3
+    },
+    {
+      "case": "late_third",
+      "apiSuccess": true,
+      "ownerExperience": 200,
+      "ownerLevel": 2,
+      "hostingSlots": 2,
+      "activeHostingCount": 3
+    },
+    {
+      "case": "parallel_clear",
+      "apiSuccess": true,
+      "ownerExperience": 400,
+      "ownerLevel": 3,
+      "hostingSlots": 3,
+      "activeHostingCount": 1
+    },
+    {
+      "case": "expired_claim",
+      "apiSuccess": true,
+      "ownerExperience": 400,
+      "ownerLevel": 3,
+      "hostingSlots": 3,
+      "activeHostingCount": 1
+    }
+  ],
+  "ownerFinalExperience": 400,
+  "helperExperience": [
+    0,
+    0
+  ],
+  "clearReceipts": {
+    "total": 6,
+    "eligible": 4,
+    "ineligible": 2,
+    "grantedExperience": 400
+  },
+  "rewardEligibilityAndNonretro": "PASS",
+  "normalStart": {
+    "outcome": "win",
+    "energyConsumed": 5,
+    "sharedLevelFrom": 1,
+    "sharedLevelTo": 2,
+    "enemyHpFrom": 6500,
+    "enemyHpTo": 7475,
+    "oldLevelBattleSharedDamage": 0,
+    "frozenBattleRulesMatchesDatabase": true
+  },
+  "normalLose": {
+    "enemyLevel": 14,
+    "outcome": "lose",
+    "winsUnchanged": true
+  },
+  "testFixtureNotes": [
+    "QAキャラLv1000は勝利経路固定用。Lv1編成はLv2敵には勝利し、Lv14敵で敗北を確認。",
+    "保存済battle fixtureは挑戦開始の受入と区別。normalStartは新規要求で行動力消費・戦闘生成から検証。",
+    "XP receipt確定と同時rooms加算は実DB triggerの結果を照合。"
+  ]
+}

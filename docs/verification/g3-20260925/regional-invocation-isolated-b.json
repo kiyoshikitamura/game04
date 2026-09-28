@@ -1,0 +1,51 @@
+{
+  "candidate": "GAME04 G3 isolated API v1 / implementation a14f",
+  "observedAt": "2026-09-25T10:14:31.281Z",
+  "projectRef": "znakrkaazliexzwihxge",
+  "qaUserId": "912cb2cb-4e2d-48ab-adf3-c17818e9021a",
+  "method": "Authenticated read-only status and replay of an already committed special-diamond request. No new draw or resource mutation.",
+  "officialReferences": [
+    "https://supabase.com/docs/guides/functions/regional-invocation",
+    "https://supabase.com/changelog/36850-update-to-edge-functions-regional-invocations"
+  ],
+  "observations": [
+    {
+      "label": "status-default",
+      "status": 200,
+      "elapsedMs": 7133,
+      "servedRegion": "us-east-2",
+      "responseSha256": "c8a9cee245278d65a452ffcb27bffaf109cb845a8db1e71ace853e219ab0bfab"
+    },
+    {
+      "label": "status-eu-central-1",
+      "status": 200,
+      "elapsedMs": 1974,
+      "servedRegion": "eu-central-1",
+      "responseSha256": "c8a9cee245278d65a452ffcb27bffaf109cb845a8db1e71ace853e219ab0bfab"
+    },
+    {
+      "label": "receipt-replay-default",
+      "status": 200,
+      "elapsedMs": 1375,
+      "servedRegion": "us-east-2",
+      "replayed": true,
+      "responseSha256": "6c33b3598c7dc27b9736d97a0841cbd4b972d29d30d9299bf4a103ab3f831042"
+    },
+    {
+      "label": "receipt-replay-eu-central-1",
+      "status": 200,
+      "elapsedMs": 968,
+      "servedRegion": "eu-central-1",
+      "replayed": true,
+      "responseSha256": "6c33b3598c7dc27b9736d97a0841cbd4b972d29d30d9299bf4a103ab3f831042"
+    }
+  ],
+  "conclusion": {
+    "sameResponseHashes": true,
+    "receiptReplayMeetsOneSecondTargetWhenPinned": true,
+    "statusStillExceedsOnePointFiveSecondsWhenPinned": true,
+    "clientChange": "Use @supabase/supabase-js FunctionRegion.EuCentral1 for both GAME04 redesign API invocation paths.",
+    "performanceAcceptance": false
+  },
+  "containsCredentials": false
+}

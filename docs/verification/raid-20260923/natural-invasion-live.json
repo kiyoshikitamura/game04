@@ -1,0 +1,4366 @@
+{
+  "version": 1,
+  "status": "failed",
+  "startedAt": "2026-09-23T15:29:33.193Z",
+  "conditions": "Pre-grown legal SR5 party is a QA prerequisite. Starting vitality50, PlayerLv1/EXP0, mino-5 cleared, hostLv2; no manual refill after start. Quest first-clear battles award real PlayerEXP and level-up energy. Formal enemies/snapshots unchanged. This verifies resource/API flow, not new-player balance.",
+  "steps": [
+    {
+      "requestId": "2e9fc356-ad19-449f-96c8-b3bb81ca9964",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 1,
+      "endedRaidLevel": 1,
+      "outcome": "win",
+      "damage": 21192,
+      "raidHp": 31212,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 50,
+      "energy": 30,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 0,
+        "level": 1,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:29:50.619Z"
+    },
+    {
+      "requestId": "d6b48485-06d8-416f-99f1-d4b6b306ade7",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 1,
+      "endedRaidLevel": 2,
+      "outcome": "win",
+      "damage": 31920,
+      "raidHp": 60000,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 30,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 0,
+        "level": 1,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:29:53.521Z"
+    },
+    {
+      "requestId": "3417bc60-c1ba-4eea-ba19-555e4300d690",
+      "action": "quest_battle",
+      "target": "mikawa-1",
+      "startedRaidLevel": 2,
+      "endedRaidLevel": 2,
+      "outcome": "win",
+      "damage": 22678,
+      "raidHp": 60000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 20,
+        "level": 1,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 20,
+        "offeredExp": 20,
+        "beforeLevel": 1,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 20,
+        "level": 1,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:30:46.475Z"
+    },
+    {
+      "requestId": "7ad33978-0ef0-4dc0-bc80-2a622011d008",
+      "action": "quest_battle",
+      "target": "mikawa-2",
+      "startedRaidLevel": 2,
+      "endedRaidLevel": 2,
+      "outcome": "win",
+      "damage": 37542,
+      "raidHp": 60000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 40,
+        "level": 1,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 20,
+        "offeredExp": 20,
+        "beforeLevel": 1,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 40,
+        "level": 1,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:30:49.326Z"
+    },
+    {
+      "requestId": "152049e7-53e6-46cf-909b-7095d6d4def6",
+      "action": "quest_battle",
+      "target": "mikawa-3",
+      "startedRaidLevel": 2,
+      "endedRaidLevel": 2,
+      "outcome": "win",
+      "damage": 56509,
+      "raidHp": 60000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 60,
+        "level": 1,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 20,
+        "offeredExp": 20,
+        "beforeLevel": 1,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 60,
+        "level": 1,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:30:52.127Z"
+    },
+    {
+      "requestId": "7e591d45-6556-4537-a5f3-60b7308456a9",
+      "action": "quest_battle",
+      "target": "owari-1",
+      "startedRaidLevel": 2,
+      "endedRaidLevel": 2,
+      "outcome": "win",
+      "damage": 62962,
+      "raidHp": 60000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 85,
+        "level": 1,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 25,
+        "offeredExp": 25,
+        "beforeLevel": 1,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 85,
+        "level": 1,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:30:54.885Z"
+    },
+    {
+      "requestId": "84afa3fb-d63c-4594-894b-a797d12d449d",
+      "action": "quest_battle",
+      "target": "owari-2",
+      "startedRaidLevel": 2,
+      "endedRaidLevel": 2,
+      "outcome": "win",
+      "damage": 73345,
+      "raidHp": 60000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 50,
+      "energyRecovered": 40,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 110,
+        "level": 2,
+        "energy": 50,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 25,
+        "offeredExp": 25,
+        "beforeLevel": 1,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 40
+      },
+      "playerProgress": {
+        "exp": 110,
+        "level": 2,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:30:57.681Z"
+    },
+    {
+      "requestId": "9edc932f-dd0d-4e1c-9137-b078b5090780",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 2,
+      "endedRaidLevel": 2,
+      "outcome": "win",
+      "damage": 26284,
+      "raidHp": 20574,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 50,
+      "energy": 30,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 110,
+        "level": 2,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:31:00.742Z"
+    },
+    {
+      "requestId": "6c5e732e-434c-4657-a459-a0813f82305e",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 2,
+      "endedRaidLevel": 3,
+      "outcome": "win",
+      "damage": 26472,
+      "raidHp": 137000,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 30,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 110,
+        "level": 2,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:31:03.953Z"
+    },
+    {
+      "requestId": "03390c2f-4101-4725-8892-bb2a173e5544",
+      "action": "quest_battle",
+      "target": "owari-3",
+      "startedRaidLevel": 3,
+      "endedRaidLevel": 3,
+      "outcome": "win",
+      "damage": 61905,
+      "raidHp": 137000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 135,
+        "level": 2,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 25,
+        "offeredExp": 25,
+        "beforeLevel": 2,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 135,
+        "level": 2,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:31:06.678Z"
+    },
+    {
+      "requestId": "3a09f574-9c98-4053-8277-f2052c24dbdf",
+      "action": "quest_battle",
+      "target": "owari-4",
+      "startedRaidLevel": 3,
+      "endedRaidLevel": 3,
+      "outcome": "win",
+      "damage": 75761,
+      "raidHp": 137000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 160,
+        "level": 2,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 25,
+        "offeredExp": 25,
+        "beforeLevel": 2,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 160,
+        "level": 2,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:31:09.648Z"
+    },
+    {
+      "requestId": "12d029fa-8915-4723-a276-fe5d01714a7f",
+      "action": "quest_battle",
+      "target": "mino-1",
+      "startedRaidLevel": 3,
+      "endedRaidLevel": 3,
+      "outcome": "win",
+      "damage": 34418,
+      "raidHp": 137000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 190,
+        "level": 2,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 30,
+        "offeredExp": 30,
+        "beforeLevel": 2,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 190,
+        "level": 2,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:31:12.460Z"
+    },
+    {
+      "requestId": "4557dc1c-525d-4528-b629-44886cbb5066",
+      "action": "quest_battle",
+      "target": "mino-2",
+      "startedRaidLevel": 3,
+      "endedRaidLevel": 3,
+      "outcome": "win",
+      "damage": 44346,
+      "raidHp": 137000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 220,
+        "level": 2,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 30,
+        "offeredExp": 30,
+        "beforeLevel": 2,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 220,
+        "level": 2,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:31:15.537Z"
+    },
+    {
+      "requestId": "40a92e9c-316d-4500-a262-f297cc4ffd1d",
+      "action": "quest_battle",
+      "target": "mino-3",
+      "startedRaidLevel": 3,
+      "endedRaidLevel": 3,
+      "outcome": "win",
+      "damage": 31343,
+      "raidHp": 137000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 50,
+      "energyRecovered": 40,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 250,
+        "level": 3,
+        "energy": 50,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 30,
+        "offeredExp": 30,
+        "beforeLevel": 2,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 40
+      },
+      "playerProgress": {
+        "exp": 250,
+        "level": 3,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:31:18.279Z"
+    },
+    {
+      "requestId": "36e637fb-a0d3-4da2-a7d1-5f2e44fc6938",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 3,
+      "endedRaidLevel": 3,
+      "outcome": "win",
+      "damage": 39396,
+      "raidHp": 77906,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 50,
+      "energy": 30,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 250,
+        "level": 3,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:31:24.703Z"
+    },
+    {
+      "requestId": "0a6464f6-d36e-49fc-8aa6-496113f67216",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 3,
+      "endedRaidLevel": 3,
+      "outcome": "win",
+      "damage": 39019,
+      "raidHp": 19378,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 30,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 250,
+        "level": 3,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:31:27.433Z"
+    },
+    {
+      "requestId": "4ab29e00-d6ce-474b-9483-6010fc94f123",
+      "action": "quest_battle",
+      "target": "mino-4",
+      "startedRaidLevel": 3,
+      "endedRaidLevel": 3,
+      "outcome": "win",
+      "damage": 50193,
+      "raidHp": 19378,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 280,
+        "level": 3,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 30,
+        "offeredExp": 30,
+        "beforeLevel": 3,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 280,
+        "level": 3,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:31:30.357Z"
+    },
+    {
+      "requestId": "6627fb84-cfc7-42b5-a55c-b8c121b2eca3",
+      "action": "quest_battle",
+      "target": "omi-1",
+      "startedRaidLevel": 3,
+      "endedRaidLevel": 3,
+      "outcome": "win",
+      "damage": 110762,
+      "raidHp": 19378,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 328,
+        "level": 3,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 48,
+        "offeredExp": 48,
+        "beforeLevel": 3,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 328,
+        "level": 3,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:31:33.149Z"
+    },
+    {
+      "requestId": "ce8fdab5-cb72-4e1a-9ed0-f217efee80a0",
+      "action": "quest_battle",
+      "target": "omi-2",
+      "startedRaidLevel": 3,
+      "endedRaidLevel": 3,
+      "outcome": "win",
+      "damage": 143647,
+      "raidHp": 19378,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 50,
+      "energyRecovered": 40,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 376,
+        "level": 4,
+        "energy": 50,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 48,
+        "offeredExp": 48,
+        "beforeLevel": 3,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 40
+      },
+      "playerProgress": {
+        "exp": 376,
+        "level": 4,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:31:36.082Z"
+    },
+    {
+      "requestId": "1b3a48c8-06f3-41f2-87a7-ddcf67ec548d",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 3,
+      "endedRaidLevel": 4,
+      "outcome": "win",
+      "damage": 35740,
+      "raidHp": 40000,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 50,
+      "energy": 30,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 376,
+        "level": 4,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:31:39.300Z"
+    },
+    {
+      "requestId": "eed2aeda-991f-4407-b2c6-d5dbadfda342",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 4,
+      "endedRaidLevel": 5,
+      "outcome": "win",
+      "damage": 32506,
+      "raidHp": 41000,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 30,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 376,
+        "level": 4,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:31:42.076Z"
+    },
+    {
+      "requestId": "0b0111bd-5484-4317-9890-f0715c1b62a3",
+      "action": "quest_battle",
+      "target": "omi-3",
+      "startedRaidLevel": 5,
+      "endedRaidLevel": 5,
+      "outcome": "win",
+      "damage": 101757,
+      "raidHp": 41000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 424,
+        "level": 4,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 48,
+        "offeredExp": 48,
+        "beforeLevel": 4,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 424,
+        "level": 4,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:31:44.994Z"
+    },
+    {
+      "requestId": "8f3bfc5a-feb3-4003-b5a7-cbb9e59352a5",
+      "action": "quest_battle",
+      "target": "omi-4",
+      "startedRaidLevel": 5,
+      "endedRaidLevel": 5,
+      "outcome": "win",
+      "damage": 96655,
+      "raidHp": 41000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 472,
+        "level": 4,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 48,
+        "offeredExp": 48,
+        "beforeLevel": 4,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 472,
+        "level": 4,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:31:47.726Z"
+    },
+    {
+      "requestId": "7afeef33-5176-4e85-973d-446cd76b3d72",
+      "action": "quest_battle",
+      "target": "omi-5",
+      "startedRaidLevel": 5,
+      "endedRaidLevel": 5,
+      "outcome": "win",
+      "damage": 117718,
+      "raidHp": 41000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 520,
+        "level": 4,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 48,
+        "offeredExp": 48,
+        "beforeLevel": 4,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 520,
+        "level": 4,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:31:51.147Z"
+    },
+    {
+      "requestId": "3eac34f6-c52e-4528-b3a3-58b4f50a435e",
+      "action": "quest_battle",
+      "target": "kai-1",
+      "startedRaidLevel": 5,
+      "endedRaidLevel": 5,
+      "outcome": "win",
+      "damage": 96758,
+      "raidHp": 41000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 50,
+      "energyRecovered": 40,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 580,
+        "level": 5,
+        "energy": 50,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 60,
+        "offeredExp": 60,
+        "beforeLevel": 4,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 40
+      },
+      "playerProgress": {
+        "exp": 580,
+        "level": 5,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:31:53.869Z"
+    },
+    {
+      "requestId": "07913320-bb61-49dc-b3d8-35ad41e9bf00",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 5,
+      "endedRaidLevel": 6,
+      "outcome": "win",
+      "damage": 42636,
+      "raidHp": 173000,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 50,
+      "energy": 30,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 580,
+        "level": 5,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:31:56.800Z"
+    },
+    {
+      "requestId": "5c028611-f674-416a-a6cc-1c07fc4d6d20",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 6,
+      "endedRaidLevel": 6,
+      "outcome": "win",
+      "damage": 41715,
+      "raidHp": 110428,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 30,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 580,
+        "level": 5,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:31:59.734Z"
+    },
+    {
+      "requestId": "06a8e092-504a-4f6f-9a2d-df3451cba8f6",
+      "action": "quest_battle",
+      "target": "kai-2",
+      "startedRaidLevel": 6,
+      "endedRaidLevel": 6,
+      "outcome": "win",
+      "damage": 119015,
+      "raidHp": 110428,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 640,
+        "level": 5,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 60,
+        "offeredExp": 60,
+        "beforeLevel": 5,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 640,
+        "level": 5,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:32:03.275Z"
+    },
+    {
+      "requestId": "510a8bbd-5a38-4f6a-8793-0b2d5983419d",
+      "action": "quest_battle",
+      "target": "kai-3",
+      "startedRaidLevel": 6,
+      "endedRaidLevel": 6,
+      "outcome": "win",
+      "damage": 90019,
+      "raidHp": 110428,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 700,
+        "level": 5,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 60,
+        "offeredExp": 60,
+        "beforeLevel": 5,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 700,
+        "level": 5,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:32:06.513Z"
+    },
+    {
+      "requestId": "6069e6ec-5f8d-4e34-ba93-c1d41d8b53b8",
+      "action": "quest_battle",
+      "target": "kai-4",
+      "startedRaidLevel": 6,
+      "endedRaidLevel": 6,
+      "outcome": "win",
+      "damage": 117848,
+      "raidHp": 110428,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 50,
+      "energyRecovered": 40,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 760,
+        "level": 6,
+        "energy": 50,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 60,
+        "offeredExp": 60,
+        "beforeLevel": 5,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 40
+      },
+      "playerProgress": {
+        "exp": 760,
+        "level": 6,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:32:09.350Z"
+    },
+    {
+      "requestId": "506268da-8265-4f66-bf56-40ee4779ff4b",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 6,
+      "endedRaidLevel": 6,
+      "outcome": "win",
+      "damage": 40218,
+      "raidHp": 50101,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 50,
+      "energy": 30,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 760,
+        "level": 6,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:32:12.256Z"
+    },
+    {
+      "requestId": "63c0abbd-5d5f-426d-9bd2-f7e2d71c9859",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 6,
+      "endedRaidLevel": 7,
+      "outcome": "win",
+      "damage": 40322,
+      "raidHp": 53000,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 30,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 760,
+        "level": 6,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:32:15.243Z"
+    },
+    {
+      "requestId": "0bfbe151-e4a0-47e0-940c-5cf0a10a07de",
+      "action": "quest_battle",
+      "target": "kai-5",
+      "startedRaidLevel": 7,
+      "endedRaidLevel": 7,
+      "outcome": "win",
+      "damage": 108104,
+      "raidHp": 53000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 820,
+        "level": 6,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 60,
+        "offeredExp": 60,
+        "beforeLevel": 6,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 820,
+        "level": 6,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:32:18.016Z"
+    },
+    {
+      "requestId": "ce1ac253-7c1b-4f53-abe6-f577bdd72d71",
+      "action": "quest_battle",
+      "target": "kai-6",
+      "startedRaidLevel": 7,
+      "endedRaidLevel": 7,
+      "outcome": "win",
+      "damage": 140792,
+      "raidHp": 53000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 880,
+        "level": 6,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 60,
+        "offeredExp": 60,
+        "beforeLevel": 6,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 880,
+        "level": 6,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:32:21.073Z"
+    },
+    {
+      "requestId": "88cb3989-5c48-4881-ac46-edbdd8e5bb28",
+      "action": "quest_battle",
+      "target": "echigo-1",
+      "startedRaidLevel": 7,
+      "endedRaidLevel": 7,
+      "outcome": "win",
+      "damage": 192561,
+      "raidHp": 53000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 952,
+        "level": 6,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 72,
+        "offeredExp": 72,
+        "beforeLevel": 6,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 952,
+        "level": 6,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:32:24.604Z"
+    },
+    {
+      "requestId": "34afbb56-c870-4859-892e-17e067985fff",
+      "action": "quest_battle",
+      "target": "echigo-2",
+      "startedRaidLevel": 7,
+      "endedRaidLevel": 7,
+      "outcome": "win",
+      "damage": 119618,
+      "raidHp": 53000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 50,
+      "energyRecovered": 40,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 1024,
+        "level": 7,
+        "energy": 50,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 72,
+        "offeredExp": 72,
+        "beforeLevel": 6,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 40
+      },
+      "playerProgress": {
+        "exp": 1024,
+        "level": 7,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:32:27.756Z"
+    },
+    {
+      "requestId": "be61676b-25b3-4673-a30e-c2c2138ecef1",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 7,
+      "endedRaidLevel": 7,
+      "outcome": "win",
+      "damage": 35107,
+      "raidHp": 340,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 50,
+      "energy": 30,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 1024,
+        "level": 7,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:32:30.815Z"
+    },
+    {
+      "requestId": "ffe07741-5aa7-403f-9b2d-874575964cff",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 7,
+      "endedRaidLevel": 8,
+      "outcome": "win",
+      "damage": 36825,
+      "raidHp": 77000,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 30,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 1024,
+        "level": 7,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:32:33.875Z"
+    },
+    {
+      "requestId": "9f246db1-70c5-4797-ac90-a0d11124e6fa",
+      "action": "quest_battle",
+      "target": "echigo-3",
+      "startedRaidLevel": 8,
+      "endedRaidLevel": 8,
+      "outcome": "win",
+      "damage": 127927,
+      "raidHp": 77000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 1096,
+        "level": 7,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 72,
+        "offeredExp": 72,
+        "beforeLevel": 7,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 1096,
+        "level": 7,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:32:38.627Z"
+    },
+    {
+      "requestId": "1138a4cf-ff4b-41bd-97eb-52bd80fcb05f",
+      "action": "quest_battle",
+      "target": "echigo-4",
+      "startedRaidLevel": 8,
+      "endedRaidLevel": 8,
+      "outcome": "win",
+      "damage": 160741,
+      "raidHp": 77000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 1168,
+        "level": 7,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 72,
+        "offeredExp": 72,
+        "beforeLevel": 7,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 1168,
+        "level": 7,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:32:41.613Z"
+    },
+    {
+      "requestId": "5cd7e9ed-f151-48aa-b3e5-622bd1ae71ff",
+      "action": "quest_battle",
+      "target": "echigo-5",
+      "startedRaidLevel": 8,
+      "endedRaidLevel": 8,
+      "outcome": "win",
+      "damage": 183429,
+      "raidHp": 77000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 50,
+      "energyRecovered": 40,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 1240,
+        "level": 8,
+        "energy": 50,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 72,
+        "offeredExp": 72,
+        "beforeLevel": 7,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 40
+      },
+      "playerProgress": {
+        "exp": 1240,
+        "level": 8,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:32:44.661Z"
+    },
+    {
+      "requestId": "f9256f83-5670-4a80-affe-ee6ebd5709a2",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 8,
+      "endedRaidLevel": 8,
+      "outcome": "win",
+      "damage": 38828,
+      "raidHp": 18758,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 50,
+      "energy": 30,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 1240,
+        "level": 8,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:32:47.884Z"
+    },
+    {
+      "requestId": "208bc00e-dd00-47a4-a1f4-609b330e8d48",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 8,
+      "endedRaidLevel": 9,
+      "outcome": "win",
+      "damage": 40322,
+      "raidHp": 154000,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 30,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 1240,
+        "level": 8,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:32:50.783Z"
+    },
+    {
+      "requestId": "62955e60-675c-4cd3-86de-866b78a85e4c",
+      "action": "quest_battle",
+      "target": "echigo-6",
+      "startedRaidLevel": 9,
+      "endedRaidLevel": 9,
+      "outcome": "win",
+      "damage": 282017,
+      "raidHp": 154000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 1312,
+        "level": 8,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 72,
+        "offeredExp": 72,
+        "beforeLevel": 8,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 1312,
+        "level": 8,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:32:54.172Z"
+    },
+    {
+      "requestId": "5e3276a4-1927-43bd-82cf-3260c7cd77dd",
+      "action": "quest_battle",
+      "target": "kyoto-1",
+      "startedRaidLevel": 9,
+      "endedRaidLevel": 9,
+      "outcome": "win",
+      "damage": 163884,
+      "raidHp": 154000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 1402,
+        "level": 8,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 90,
+        "offeredExp": 90,
+        "beforeLevel": 8,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 1402,
+        "level": 8,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:32:57.119Z"
+    },
+    {
+      "requestId": "2165124e-ab3f-48fe-8d29-aa415ac310f9",
+      "action": "quest_battle",
+      "target": "kyoto-2",
+      "startedRaidLevel": 9,
+      "endedRaidLevel": 9,
+      "outcome": "win",
+      "damage": 108643,
+      "raidHp": 154000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 1492,
+        "level": 8,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 90,
+        "offeredExp": 90,
+        "beforeLevel": 8,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 1492,
+        "level": 8,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:32:59.918Z"
+    },
+    {
+      "requestId": "f676b51f-1fd2-45ed-ae30-e3cf1a54639b",
+      "action": "quest_battle",
+      "target": "kyoto-3",
+      "startedRaidLevel": 9,
+      "endedRaidLevel": 9,
+      "outcome": "win",
+      "damage": 115043,
+      "raidHp": 154000,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 50,
+      "energyRecovered": 40,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 1582,
+        "level": 9,
+        "energy": 50,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 90,
+        "offeredExp": 90,
+        "beforeLevel": 8,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 40
+      },
+      "playerProgress": {
+        "exp": 1582,
+        "level": 9,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:33:03.001Z"
+    },
+    {
+      "requestId": "e436201c-da2c-4821-be86-dac59ebd9f64",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 9,
+      "endedRaidLevel": 9,
+      "outcome": "win",
+      "damage": 37566,
+      "raidHp": 97651,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 50,
+      "energy": 30,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 1582,
+        "level": 9,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:33:05.980Z"
+    },
+    {
+      "requestId": "452191d5-f7af-4b00-940b-b1ea53867713",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 9,
+      "endedRaidLevel": 9,
+      "outcome": "win",
+      "damage": 39328,
+      "raidHp": 38659,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 30,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 1582,
+        "level": 9,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:33:08.904Z"
+    },
+    {
+      "requestId": "a276368b-9ccf-4771-94f0-80d61241658c",
+      "action": "quest_battle",
+      "target": "kyoto-4",
+      "startedRaidLevel": 9,
+      "endedRaidLevel": 9,
+      "outcome": "win",
+      "damage": 180864,
+      "raidHp": 38659,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 1672,
+        "level": 9,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 90,
+        "offeredExp": 90,
+        "beforeLevel": 9,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 1672,
+        "level": 9,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:33:11.746Z"
+    },
+    {
+      "requestId": "266ddedc-3e38-4f76-bc2e-60f7be975d5b",
+      "action": "quest_battle",
+      "target": "kyoto-5",
+      "startedRaidLevel": 9,
+      "endedRaidLevel": 9,
+      "outcome": "win",
+      "damage": 111081,
+      "raidHp": 38659,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 1762,
+        "level": 9,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 90,
+        "offeredExp": 90,
+        "beforeLevel": 9,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 1762,
+        "level": 9,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:33:14.525Z"
+    },
+    {
+      "requestId": "d575ba59-a3dc-4a1b-bf5b-db84501fb209",
+      "action": "quest_battle",
+      "target": "kyoto-6",
+      "startedRaidLevel": 9,
+      "endedRaidLevel": 9,
+      "outcome": "win",
+      "damage": 228955,
+      "raidHp": 38659,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 50,
+      "energyRecovered": 40,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 1852,
+        "level": 10,
+        "energy": 50,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 90,
+        "offeredExp": 90,
+        "beforeLevel": 9,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 40
+      },
+      "playerProgress": {
+        "exp": 1852,
+        "level": 10,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:33:17.564Z"
+    },
+    {
+      "requestId": "155886e8-4fa5-4482-a193-8cd0a16be0d8",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 9,
+      "endedRaidLevel": 10,
+      "outcome": "win",
+      "damage": 38703,
+      "raidHp": 103000,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 50,
+      "energy": 30,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 1852,
+        "level": 10,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:33:20.348Z"
+    },
+    {
+      "requestId": "8024ff2e-4d95-404d-9692-e2d8c427dfc2",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 10,
+      "endedRaidLevel": 10,
+      "outcome": "win",
+      "damage": 36191,
+      "raidHp": 48714,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 30,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 1852,
+        "level": 10,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:33:23.655Z"
+    },
+    {
+      "requestId": "8bdb35ee-f1d1-4111-ad1f-00b8eee8d0e3",
+      "action": "quest_battle",
+      "target": "kyoto-7",
+      "startedRaidLevel": 10,
+      "endedRaidLevel": 10,
+      "outcome": "win",
+      "damage": 188235,
+      "raidHp": 48714,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 1942,
+        "level": 10,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 90,
+        "offeredExp": 90,
+        "beforeLevel": 10,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 1942,
+        "level": 10,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:33:27.238Z"
+    },
+    {
+      "requestId": "3b9a6476-d3c9-4842-9a33-b55bbe4173b4",
+      "action": "quest_battle",
+      "target": "kyoto-8",
+      "startedRaidLevel": 10,
+      "endedRaidLevel": 10,
+      "outcome": "win",
+      "damage": 242972,
+      "raidHp": 48714,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 2032,
+        "level": 10,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 90,
+        "offeredExp": 90,
+        "beforeLevel": 10,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 2032,
+        "level": 10,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:33:30.999Z"
+    },
+    {
+      "requestId": "05ef8b78-d9f5-440d-a87e-7e0b46f0340d",
+      "action": "quest_battle",
+      "target": "izumo-1",
+      "startedRaidLevel": 10,
+      "endedRaidLevel": 10,
+      "outcome": "win",
+      "damage": 222547,
+      "raidHp": 48714,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 2176,
+        "level": 10,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 144,
+        "offeredExp": 144,
+        "beforeLevel": 10,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 2176,
+        "level": 10,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:33:34.207Z"
+    },
+    {
+      "requestId": "12c0ae3f-022c-483d-a20d-364b21b15743",
+      "action": "quest_battle",
+      "target": "izumo-2",
+      "startedRaidLevel": 10,
+      "endedRaidLevel": 10,
+      "outcome": "win",
+      "damage": 109346,
+      "raidHp": 48714,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 50,
+      "energyRecovered": 40,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 2320,
+        "level": 11,
+        "energy": 50,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 144,
+        "offeredExp": 144,
+        "beforeLevel": 10,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 40
+      },
+      "playerProgress": {
+        "exp": 2320,
+        "level": 11,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:33:37.102Z"
+    },
+    {
+      "requestId": "54279c24-13ae-4ac1-9397-1a1b9339ddd8",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 10,
+      "endedRaidLevel": 11,
+      "outcome": "win",
+      "damage": 48102,
+      "raidHp": 114000,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 50,
+      "energy": 30,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 2320,
+        "level": 11,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:33:40.224Z"
+    },
+    {
+      "requestId": "6d8b521b-1470-41dd-9b44-4a55fe7b278d",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 11,
+      "endedRaidLevel": 11,
+      "outcome": "win",
+      "damage": 59761,
+      "raidHp": 24359,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 30,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 2320,
+        "level": 11,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:33:43.284Z"
+    },
+    {
+      "requestId": "20ec701b-7e32-4b3d-b939-1264365b9519",
+      "action": "quest_battle",
+      "target": "izumo-3",
+      "startedRaidLevel": 11,
+      "endedRaidLevel": 11,
+      "outcome": "win",
+      "damage": 278930,
+      "raidHp": 24359,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 2464,
+        "level": 11,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 144,
+        "offeredExp": 144,
+        "beforeLevel": 11,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 2464,
+        "level": 11,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:33:46.486Z"
+    },
+    {
+      "requestId": "4da51df5-e693-428d-808e-699cb81b43ea",
+      "action": "quest_battle",
+      "target": "izumo-4",
+      "startedRaidLevel": 11,
+      "endedRaidLevel": 11,
+      "outcome": "win",
+      "damage": 276240,
+      "raidHp": 24359,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 50,
+      "energyRecovered": 40,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 2608,
+        "level": 12,
+        "energy": 50,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 144,
+        "offeredExp": 144,
+        "beforeLevel": 11,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 40
+      },
+      "playerProgress": {
+        "exp": 2608,
+        "level": 12,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:33:50.346Z"
+    },
+    {
+      "requestId": "b3afd555-ef62-49d5-80d2-caf0a3656834",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 11,
+      "endedRaidLevel": 12,
+      "outcome": "win",
+      "damage": 57441,
+      "raidHp": 782000,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 50,
+      "energy": 30,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 2608,
+        "level": 12,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:33:53.240Z"
+    },
+    {
+      "requestId": "de1883d4-a3c6-405e-ab5f-d90d11f3ea3e",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 12,
+      "endedRaidLevel": 12,
+      "outcome": "win",
+      "damage": 76071,
+      "raidHp": 667894,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 30,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 2608,
+        "level": 12,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:33:56.112Z"
+    },
+    {
+      "requestId": "a662089a-f24c-402f-994c-3cf49ca76136",
+      "action": "quest_battle",
+      "target": "izumo-5",
+      "startedRaidLevel": 12,
+      "endedRaidLevel": 12,
+      "outcome": "win",
+      "damage": 290940,
+      "raidHp": 667894,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 2752,
+        "level": 12,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 144,
+        "offeredExp": 144,
+        "beforeLevel": 12,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 2752,
+        "level": 12,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:33:59.363Z"
+    },
+    {
+      "requestId": "0df391ec-e850-47f8-acbd-35fce42924e3",
+      "action": "quest_battle",
+      "target": "izumo-6",
+      "startedRaidLevel": 12,
+      "endedRaidLevel": 12,
+      "outcome": "win",
+      "damage": 282907,
+      "raidHp": 667894,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 2896,
+        "level": 12,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 144,
+        "offeredExp": 144,
+        "beforeLevel": 12,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 2896,
+        "level": 12,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:34:02.790Z"
+    },
+    {
+      "requestId": "401162f6-4551-4964-a220-588f7d8e1a90",
+      "action": "quest_battle",
+      "target": "izumo-7",
+      "startedRaidLevel": 12,
+      "endedRaidLevel": 12,
+      "outcome": "win",
+      "damage": 663195,
+      "raidHp": 667894,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 50,
+      "energyRecovered": 40,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 3040,
+        "level": 13,
+        "energy": 50,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 144,
+        "offeredExp": 144,
+        "beforeLevel": 12,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 40
+      },
+      "playerProgress": {
+        "exp": 3040,
+        "level": 13,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:34:06.767Z"
+    },
+    {
+      "requestId": "2047b804-1529-41bc-ae9e-5fdcddc91238",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 12,
+      "endedRaidLevel": 12,
+      "outcome": "win",
+      "damage": 78345,
+      "raidHp": 550377,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 50,
+      "energy": 30,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 3040,
+        "level": 13,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:34:09.601Z"
+    },
+    {
+      "requestId": "77c2fbf7-9a4b-4c42-ba0d-2754374bd2d1",
+      "action": "raid_battle",
+      "target": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+      "startedRaidLevel": 12,
+      "endedRaidLevel": 12,
+      "outcome": "win",
+      "damage": 75812,
+      "raidHp": 436659,
+      "raidStatus": "active",
+      "cost": 20,
+      "beforeEnergy": 30,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 3040,
+        "level": 13,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:34:12.444Z"
+    },
+    {
+      "requestId": "d439b9ed-a48e-4fd1-9826-ecdf2e3588f7",
+      "action": "quest_battle",
+      "target": "izumo-8",
+      "startedRaidLevel": 12,
+      "endedRaidLevel": 12,
+      "outcome": "win",
+      "damage": 507285,
+      "raidHp": 436659,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": {
+        "exp": 3184,
+        "level": 13,
+        "energy": 10,
+        "status": "APPROVED",
+        "energyMax": 50,
+        "gainedExp": 144,
+        "offeredExp": 144,
+        "beforeLevel": 13,
+        "rewardVersion": "APPROVED_QUEST65_ROUND17_20260922",
+        "energyRecovered": 0
+      },
+      "playerProgress": {
+        "exp": 3184,
+        "level": 13,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": true,
+      "at": "2026-09-23T15:34:15.623Z"
+    },
+    {
+      "requestId": "000ae8ce-c6fe-4caa-9440-91dc20600891",
+      "action": "quest_battle",
+      "target": "satsuma-1",
+      "startedRaidLevel": 12,
+      "endedRaidLevel": 12,
+      "outcome": "lose",
+      "damage": 75254,
+      "raidHp": 436659,
+      "raidStatus": "active",
+      "cost": 0,
+      "beforeEnergy": 10,
+      "energy": 10,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 3184,
+        "level": 13,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:34:19.778Z"
+    },
+    {
+      "requestId": "bb77fda5-ac4d-4231-94f0-c7f7c5741ab8",
+      "action": "quest_battle",
+      "target": "satsuma-1",
+      "startedRaidLevel": 12,
+      "endedRaidLevel": 12,
+      "outcome": "lose",
+      "damage": 79519,
+      "raidHp": 436659,
+      "raidStatus": "active",
+      "cost": 1,
+      "beforeEnergy": 10,
+      "energy": 9,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 3184,
+        "level": 13,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:34:24.087Z"
+    },
+    {
+      "requestId": "c73644f3-f1ca-465f-adcd-d889877760aa",
+      "action": "quest_battle",
+      "target": "satsuma-1",
+      "startedRaidLevel": 12,
+      "endedRaidLevel": 12,
+      "outcome": "lose",
+      "damage": 77901,
+      "raidHp": 436659,
+      "raidStatus": "active",
+      "cost": 1,
+      "beforeEnergy": 9,
+      "energy": 8,
+      "energyRecovered": 0,
+      "naturalRecovery": 0,
+      "playerGrowth": null,
+      "playerProgress": {
+        "exp": 3184,
+        "level": 13,
+        "status": "active",
+        "version": "APPROVED_GROWTH_V1_20260921"
+      },
+      "hostExp": 100,
+      "firstClear": false,
+      "at": "2026-09-23T15:34:28.012Z"
+    }
+  ],
+  "checks": [],
+  "pending": null,
+  "baseline": {
+    "energy": 50,
+    "energyMax": 50,
+    "playerProgress": {
+      "exp": 0,
+      "level": 1,
+      "status": "active",
+      "version": "APPROVED_GROWTH_V1_20260921"
+    },
+    "hostExp": 100,
+    "characters": [
+      {
+        "id": "char_lucas_01",
+        "exp": 750000,
+        "level": 100,
+        "awakening": 5,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "id": "char_maya_01",
+        "exp": 750000,
+        "level": 100,
+        "awakening": 5,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "id": "char_noa_01",
+        "exp": 750000,
+        "level": 100,
+        "awakening": 5,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "id": "char_reina_01",
+        "exp": 750000,
+        "level": 100,
+        "awakening": 5,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "id": "char_rui_01",
+        "exp": 750000,
+        "level": 100,
+        "awakening": 5,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      }
+    ],
+    "deck": [
+      {
+        "skillIds": [],
+        "equipment": {},
+        "characterId": "char_lucas_01"
+      },
+      {
+        "skillIds": [],
+        "equipment": {},
+        "characterId": "char_maya_01"
+      },
+      {
+        "skillIds": [],
+        "equipment": {},
+        "characterId": "char_noa_01"
+      },
+      {
+        "skillIds": [],
+        "equipment": {},
+        "characterId": "char_reina_01"
+      },
+      {
+        "skillIds": [],
+        "equipment": {},
+        "characterId": "char_rui_01"
+      }
+    ],
+    "clearedStages": [
+      "mino-5"
+    ]
+  },
+  "hostRequestId": "5ad8de76-7389-4a58-a403-8a59c401867f",
+  "roomId": "0323de19-dd7d-413a-b8b2-ac1c6c658028",
+  "snapshot": {
+    "status": "PREVIEW_PROVISIONAL",
+    "raidMaster": {
+      "id": "TI01",
+      "name": "岡崎城",
+      "type": "unlock",
+      "enemy": {
+        "id": "TI01/1/1",
+        "name": "柴田勝家",
+        "image": "/creative/characters/battle/char_noa_01.png",
+        "level": 35,
+        "order": 0,
+        "stats": {
+          "hp": 20780,
+          "sp": 100,
+          "atk": 1210,
+          "def": 460,
+          "luk": 0
+        },
+        "skills": [
+          {
+            "id": "SKD034",
+            "name": "身構え",
+            "image": "",
+            "rarity": "N",
+            "spCost": 30,
+            "target": "self",
+            "effects": [
+              {
+                "type": "def_up",
+                "power": 17.01,
+                "duration": 3,
+                "carryAcrossWaves": true
+              }
+            ],
+            "element": "earth",
+            "condition": {
+              "type": "always"
+            },
+            "description": "SKD034 / LB2",
+            "fixedTarget": false
+          }
+        ],
+        "element": "earth",
+        "passives": [
+          {
+            "id": "balance_v2_P05",
+            "name": "通常攻撃ダメージ",
+            "stat": "atk",
+            "type": "P05",
+            "level": 2,
+            "target": "self",
+            "percent": 14.221321905792035
+          }
+        ],
+        "hitSpGain": 10,
+        "initialSp": 100,
+        "actionCount": 5,
+        "initialCount": 5
+      },
+      "stages": [
+        {
+          "level": 1,
+          "source": "invasion source tables 20260921:4-1/3; section10 H=20780",
+          "enemies": [
+            {
+              "id": "TI01/1/1",
+              "name": "柴田勝家",
+              "image": "/creative/characters/battle/char_noa_01.png",
+              "level": 35,
+              "order": 0,
+              "stats": {
+                "hp": 20780,
+                "sp": 100,
+                "atk": 1210,
+                "def": 460,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD034",
+                  "name": "身構え",
+                  "image": "",
+                  "rarity": "N",
+                  "spCost": 30,
+                  "target": "self",
+                  "effects": [
+                    {
+                      "type": "def_up",
+                      "power": 17.01,
+                      "duration": 3,
+                      "carryAcrossWaves": true
+                    }
+                  ],
+                  "element": "earth",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "description": "SKD034 / LB2",
+                  "fixedTarget": false
+                }
+              ],
+              "element": "earth",
+              "passives": [
+                {
+                  "id": "balance_v2_P05",
+                  "name": "通常攻撃ダメージ",
+                  "stat": "atk",
+                  "type": "P05",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 14.221321905792035
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 100,
+              "actionCount": 5,
+              "initialCount": 5
+            }
+          ],
+          "sharedHp": 63000,
+          "defeatRewards": [
+            {
+              "kind": "cash",
+              "amount": 1000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 1
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "level": 2,
+          "source": "invasion source tables 20260921:10-5/1; section10 H=19820",
+          "enemies": [
+            {
+              "id": "TI01/2/1",
+              "name": "今川義元",
+              "image": "/creative/characters/battle/char_genji_01.png",
+              "level": 35,
+              "order": 0,
+              "stats": {
+                "hp": 12220,
+                "sp": 150,
+                "atk": 940,
+                "def": 590,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD036",
+                  "name": "守りの陣",
+                  "image": "",
+                  "rarity": "R",
+                  "spCost": 75,
+                  "target": "all_allies",
+                  "effects": [
+                    {
+                      "type": "def_up",
+                      "power": 17.01,
+                      "duration": 3,
+                      "carryAcrossWaves": true
+                    }
+                  ],
+                  "element": "light",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "description": "SKD036 / LB2",
+                  "fixedTarget": false
+                }
+              ],
+              "element": "wind",
+              "passives": [
+                {
+                  "id": "balance_v2_P02_wind",
+                  "name": "同属性DEF支援",
+                  "stat": "def",
+                  "type": "P02",
+                  "level": 2,
+                  "target": "party",
+                  "percent": 8.53279314347522,
+                  "targetElement": "wind"
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 150,
+              "actionCount": 7,
+              "initialCount": 7
+            },
+            {
+              "id": "TI01/2/2",
+              "name": "雑賀孫市",
+              "image": "/creative/characters/battle/char_takuro_01.png",
+              "level": 35,
+              "order": 1,
+              "stats": {
+                "hp": 7600,
+                "sp": 150,
+                "atk": 1200,
+                "def": 300,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD010",
+                  "name": "標準単体攻撃・風",
+                  "image": "",
+                  "rarity": "R",
+                  "spCost": 50,
+                  "target": "first",
+                  "effects": [
+                    {
+                      "type": "damage",
+                      "power": 130.7
+                    }
+                  ],
+                  "element": "wind",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "description": "SKD010 / LB2",
+                  "fixedTarget": true
+                }
+              ],
+              "element": "wind",
+              "passives": [
+                {
+                  "id": "balance_v2_P06",
+                  "name": "単体攻撃スキルダメージ",
+                  "stat": "atk",
+                  "type": "P06",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 7.110660952896017
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 150,
+              "actionCount": 7,
+              "initialCount": 7
+            }
+          ],
+          "sharedHp": 60000,
+          "defeatRewards": [
+            {
+              "kind": "cash",
+              "amount": 1000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 1
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "level": 3,
+          "source": "invasion-20260921-section10:TI01/3",
+          "enemies": [
+            {
+              "id": "TI01/3/1",
+              "boss": false,
+              "name": "柴田勝家",
+              "image": "/creative/characters/battle/char_noa_01.png",
+              "level": 36,
+              "order": 0,
+              "stats": {
+                "hp": 15210,
+                "sp": 100,
+                "atk": 650,
+                "def": 510,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD034",
+                  "name": "身構え",
+                  "image": "",
+                  "rarity": "N",
+                  "spCost": 30,
+                  "target": "self",
+                  "effects": [
+                    {
+                      "type": "def_up",
+                      "power": 17.01,
+                      "duration": 3,
+                      "carryAcrossWaves": true
+                    }
+                  ],
+                  "element": "earth",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "description": "SKD034 / LB2",
+                  "fixedTarget": false
+                }
+              ],
+              "element": "earth",
+              "passives": [
+                {
+                  "id": "balance_v2_P05",
+                  "name": "通常攻撃ダメージ",
+                  "stat": "atk",
+                  "type": "P05",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 14.221321905792035
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 100,
+              "actionCount": 6,
+              "initialCount": 6
+            },
+            {
+              "id": "TI01/3/2",
+              "boss": false,
+              "name": "井伊直虎",
+              "image": "/creative/characters/battle/char_cecile_01.png",
+              "level": 36,
+              "order": 1,
+              "stats": {
+                "hp": 7600,
+                "sp": 100,
+                "atk": 1070,
+                "def": 220,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD039",
+                  "name": "応急手当",
+                  "image": "",
+                  "rarity": "N",
+                  "spCost": 35,
+                  "target": "lowest_ally",
+                  "effects": [
+                    {
+                      "type": "heal",
+                      "power": 39.01,
+                      "healingFormula": "caster_atk_percent"
+                    }
+                  ],
+                  "element": "water",
+                  "condition": {
+                    "type": "ally_hp_below",
+                    "value": 0.5
+                  },
+                  "description": "SKD039 / LB2",
+                  "fixedTarget": false
+                }
+              ],
+              "element": "water",
+              "passives": [
+                {
+                  "id": "balance_v2_P11",
+                  "name": "被回復量（蘇生除外）",
+                  "stat": "atk",
+                  "type": "P11",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 14.221321905792035
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 100,
+              "actionCount": 7,
+              "initialCount": 7
+            }
+          ],
+          "sharedHp": 137000,
+          "defeatRewards": [
+            {
+              "kind": "cash",
+              "amount": 5000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 2
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 2
+            },
+            {
+              "id": "large",
+              "kind": "character_exp_item",
+              "amount": 1
+            },
+            {
+              "id": "large",
+              "kind": "equipment_exp_item",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "level": 4,
+          "source": "invasion source tables 20260921:7-4/1; section10 H=13210",
+          "enemies": [
+            {
+              "id": "TI01/4/1",
+              "name": "浅井長政",
+              "image": "/creative/characters/battle/char_serika_01.png",
+              "level": 37,
+              "order": 0,
+              "stats": {
+                "hp": 8370,
+                "sp": 100,
+                "atk": 820,
+                "def": 360,
+                "luk": 0
+              },
+              "skills": [],
+              "element": "wind",
+              "passives": [
+                {
+                  "id": "balance_v2_P11",
+                  "name": "被回復量（蘇生除外）",
+                  "stat": "atk",
+                  "type": "P11",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 9.480881270528023
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 100,
+              "actionCount": 6,
+              "initialCount": 6
+            },
+            {
+              "id": "TI01/4/2",
+              "name": "細川ガラシャ",
+              "image": "/creative/characters/battle/char_yukina_01.png",
+              "level": 37,
+              "order": 1,
+              "stats": {
+                "hp": 4840,
+                "sp": 100,
+                "atk": 1270,
+                "def": 180,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD040",
+                  "name": "治癒の祈り",
+                  "image": "",
+                  "rarity": "SR",
+                  "spCost": 90,
+                  "target": "lowest_ally",
+                  "effects": [
+                    {
+                      "type": "heal",
+                      "power": 85.03,
+                      "healingFormula": "caster_atk_percent"
+                    }
+                  ],
+                  "element": "water",
+                  "condition": {
+                    "type": "ally_hp_below",
+                    "value": 0.5
+                  },
+                  "description": "SKD040 / LB2",
+                  "fixedTarget": false
+                }
+              ],
+              "element": "light",
+              "passives": [
+                {
+                  "id": "balance_v2_P10",
+                  "name": "与回復量（蘇生除外）",
+                  "stat": "atk",
+                  "type": "P10",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 9.480881270528023
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 100,
+              "actionCount": 7,
+              "initialCount": 7
+            }
+          ],
+          "sharedHp": 40000,
+          "defeatRewards": [
+            {
+              "kind": "cash",
+              "amount": 1000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 1
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "level": 5,
+          "source": "invasion source tables 20260921:9-2/1; section10 H=13410",
+          "enemies": [
+            {
+              "id": "TI01/5/1",
+              "name": "井伊直政",
+              "image": "/creative/characters/battle/char_daimon_01.png",
+              "level": 38,
+              "order": 0,
+              "stats": {
+                "hp": 4470,
+                "sp": 100,
+                "atk": 810,
+                "def": 230,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD007",
+                  "name": "標準単体攻撃・火",
+                  "image": "",
+                  "rarity": "R",
+                  "spCost": 50,
+                  "target": "first",
+                  "effects": [
+                    {
+                      "type": "damage",
+                      "power": 130.7
+                    }
+                  ],
+                  "element": "fire",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "description": "SKD007 / LB2",
+                  "fixedTarget": true
+                }
+              ],
+              "element": "fire",
+              "passives": [
+                {
+                  "id": "balance_v2_P06",
+                  "name": "単体攻撃スキルダメージ",
+                  "stat": "atk",
+                  "type": "P06",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 4.740440635264012
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 100,
+              "actionCount": 7,
+              "initialCount": 7
+            },
+            {
+              "id": "TI01/5/2",
+              "name": "立花宗茂",
+              "image": "/creative/characters/battle/char_yuji_01.png",
+              "level": 38,
+              "order": 1,
+              "stats": {
+                "hp": 4470,
+                "sp": 100,
+                "atk": 810,
+                "def": 230,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD011",
+                  "name": "標準単体攻撃・光",
+                  "image": "",
+                  "rarity": "R",
+                  "spCost": 50,
+                  "target": "first",
+                  "effects": [
+                    {
+                      "type": "damage",
+                      "power": 130.7
+                    }
+                  ],
+                  "element": "light",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "description": "SKD011 / LB2",
+                  "fixedTarget": true
+                }
+              ],
+              "element": "light",
+              "passives": [
+                {
+                  "id": "balance_v2_P06",
+                  "name": "単体攻撃スキルダメージ",
+                  "stat": "atk",
+                  "type": "P06",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 4.740440635264012
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 100,
+              "actionCount": 7,
+              "initialCount": 7
+            },
+            {
+              "id": "TI01/5/3",
+              "name": "小早川隆景",
+              "image": "/creative/characters/battle/char_makoto_01.png",
+              "level": 38,
+              "order": 2,
+              "stats": {
+                "hp": 4470,
+                "sp": 100,
+                "atk": 810,
+                "def": 230,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD008",
+                  "name": "標準単体攻撃・水",
+                  "image": "",
+                  "rarity": "R",
+                  "spCost": 50,
+                  "target": "first",
+                  "effects": [
+                    {
+                      "type": "damage",
+                      "power": 130.7
+                    }
+                  ],
+                  "element": "water",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "description": "SKD008 / LB2",
+                  "fixedTarget": true
+                }
+              ],
+              "element": "water",
+              "passives": [
+                {
+                  "id": "balance_v2_P03",
+                  "name": "生存味方の属性数で自身ATK",
+                  "stat": "atk",
+                  "type": "P03",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 9.480881270528023
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 100,
+              "actionCount": 7,
+              "initialCount": 7
+            }
+          ],
+          "sharedHp": 41000,
+          "defeatRewards": [
+            {
+              "kind": "cash",
+              "amount": 1000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 1
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "level": 6,
+          "source": "invasion-20260921-section10:TI01/6",
+          "enemies": [
+            {
+              "id": "TI01/6/1",
+              "boss": false,
+              "name": "加藤清正",
+              "image": "/creative/characters/battle/char_leon_01.png",
+              "level": 39,
+              "order": 0,
+              "stats": {
+                "hp": 17290,
+                "sp": 100,
+                "atk": 740,
+                "def": 580,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD034",
+                  "name": "身構え",
+                  "image": "",
+                  "rarity": "N",
+                  "spCost": 30,
+                  "target": "self",
+                  "effects": [
+                    {
+                      "type": "def_up",
+                      "power": 17.01,
+                      "duration": 3,
+                      "carryAcrossWaves": true
+                    }
+                  ],
+                  "element": "earth",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "description": "SKD034 / LB2",
+                  "fixedTarget": false
+                }
+              ],
+              "element": "earth",
+              "passives": [
+                {
+                  "id": "balance_v2_P15",
+                  "name": "HP70%以上で自身DEF",
+                  "stat": "def",
+                  "type": "P15",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 14.221321905792035
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 100,
+              "actionCount": 7,
+              "initialCount": 7
+            },
+            {
+              "id": "TI01/6/2",
+              "boss": false,
+              "name": "雑賀孫市",
+              "image": "/creative/characters/battle/char_takuro_01.png",
+              "level": 39,
+              "order": 1,
+              "stats": {
+                "hp": 11520,
+                "sp": 110,
+                "atk": 1160,
+                "def": 310,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD026",
+                  "name": "後陣射ち",
+                  "image": "",
+                  "rarity": "R",
+                  "spCost": 55,
+                  "target": "last",
+                  "effects": [
+                    {
+                      "type": "damage",
+                      "power": 115.03
+                    }
+                  ],
+                  "element": "wind",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "description": "SKD026 / LB2",
+                  "fixedTarget": false
+                }
+              ],
+              "element": "wind",
+              "passives": [
+                {
+                  "id": "balance_v2_P06",
+                  "name": "単体攻撃スキルダメージ",
+                  "stat": "atk",
+                  "type": "P06",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 7.110660952896017
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 110,
+              "actionCount": 8,
+              "initialCount": 8
+            }
+          ],
+          "sharedHp": 173000,
+          "defeatRewards": [
+            {
+              "kind": "cash",
+              "amount": 5000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 2
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 2
+            },
+            {
+              "id": "large",
+              "kind": "character_exp_item",
+              "amount": 1
+            },
+            {
+              "id": "large",
+              "kind": "equipment_exp_item",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "level": 7,
+          "source": "invasion source tables 20260921:6-1/2; section10 H=17340",
+          "enemies": [
+            {
+              "id": "TI01/7/1",
+              "name": "長宗我部元親",
+              "image": "/creative/characters/battle/char_taiga_01.png",
+              "level": 40,
+              "order": 0,
+              "stats": {
+                "hp": 10140,
+                "sp": 100,
+                "atk": 1210,
+                "def": 370,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD029",
+                  "name": "毒刃",
+                  "image": "",
+                  "rarity": "R",
+                  "spCost": 65,
+                  "target": "first",
+                  "effects": [
+                    {
+                      "type": "damage",
+                      "power": 86.69
+                    },
+                    {
+                      "type": "dot",
+                      "power": 11.34,
+                      "duration": 3,
+                      "carryAcrossWaves": true
+                    }
+                  ],
+                  "element": "dark",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "description": "SKD029 / LB2",
+                  "fixedTarget": true
+                }
+              ],
+              "element": "water",
+              "passives": [
+                {
+                  "id": "balance_v2_P16",
+                  "name": "能動ATK強化中の自身DEF",
+                  "stat": "def",
+                  "type": "P16",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 14.221321905792035
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 100,
+              "actionCount": 7,
+              "initialCount": 7
+            },
+            {
+              "id": "TI01/7/2",
+              "name": "小早川隆景",
+              "image": "/creative/characters/battle/char_makoto_01.png",
+              "level": 40,
+              "order": 1,
+              "stats": {
+                "hp": 7200,
+                "sp": 100,
+                "atk": 1080,
+                "def": 280,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD008",
+                  "name": "標準単体攻撃・水",
+                  "image": "",
+                  "rarity": "R",
+                  "spCost": 50,
+                  "target": "first",
+                  "effects": [
+                    {
+                      "type": "damage",
+                      "power": 130.7
+                    }
+                  ],
+                  "element": "water",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "description": "SKD008 / LB2",
+                  "fixedTarget": true
+                }
+              ],
+              "element": "water",
+              "passives": [
+                {
+                  "id": "balance_v2_P03",
+                  "name": "生存味方の属性数で自身ATK",
+                  "stat": "atk",
+                  "type": "P03",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 9.480881270528023
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 100,
+              "actionCount": 7,
+              "initialCount": 7
+            }
+          ],
+          "sharedHp": 53000,
+          "defeatRewards": [
+            {
+              "kind": "cash",
+              "amount": 1000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 1
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "level": 8,
+          "source": "invasion source tables 20260921:10-1/1; section10 H=25540",
+          "enemies": [
+            {
+              "id": "TI01/8/1",
+              "name": "井伊直虎",
+              "image": "/creative/characters/battle/char_cecile_01.png",
+              "level": 41,
+              "order": 0,
+              "stats": {
+                "hp": 15750,
+                "sp": 150,
+                "atk": 1200,
+                "def": 770,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD034",
+                  "name": "身構え",
+                  "image": "",
+                  "rarity": "N",
+                  "spCost": 30,
+                  "target": "self",
+                  "effects": [
+                    {
+                      "type": "def_up",
+                      "power": 17.01,
+                      "duration": 3,
+                      "carryAcrossWaves": true
+                    }
+                  ],
+                  "element": "earth",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "description": "SKD034 / LB2",
+                  "fixedTarget": false
+                }
+              ],
+              "element": "water",
+              "passives": [
+                {
+                  "id": "balance_v2_P11",
+                  "name": "被回復量（蘇生除外）",
+                  "stat": "atk",
+                  "type": "P11",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 14.221321905792035
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 150,
+              "actionCount": 7,
+              "initialCount": 7
+            },
+            {
+              "id": "TI01/8/2",
+              "name": "雑賀孫市",
+              "image": "/creative/characters/battle/char_takuro_01.png",
+              "level": 41,
+              "order": 1,
+              "stats": {
+                "hp": 9790,
+                "sp": 110,
+                "atk": 1520,
+                "def": 390,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD026",
+                  "name": "後陣射ち",
+                  "image": "",
+                  "rarity": "R",
+                  "spCost": 55,
+                  "target": "last",
+                  "effects": [
+                    {
+                      "type": "damage",
+                      "power": 115.03
+                    }
+                  ],
+                  "element": "wind",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "description": "SKD026 / LB2",
+                  "fixedTarget": false
+                }
+              ],
+              "element": "wind",
+              "passives": [
+                {
+                  "id": "balance_v2_P06",
+                  "name": "単体攻撃スキルダメージ",
+                  "stat": "atk",
+                  "type": "P06",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 7.110660952896017
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 110,
+              "actionCount": 8,
+              "initialCount": 8
+            }
+          ],
+          "sharedHp": 77000,
+          "defeatRewards": [
+            {
+              "kind": "cash",
+              "amount": 1000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 1
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "level": 9,
+          "source": "invasion-20260921-section10:TI01/9",
+          "enemies": [
+            {
+              "id": "TI01/9/1",
+              "boss": false,
+              "name": "長宗我部元親",
+              "image": "/creative/characters/battle/char_taiga_01.png",
+              "level": 42,
+              "order": 0,
+              "stats": {
+                "hp": 12820,
+                "sp": 130,
+                "atk": 1290,
+                "def": 340,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD033",
+                  "name": "気合",
+                  "image": "",
+                  "rarity": "N",
+                  "spCost": 30,
+                  "target": "self",
+                  "effects": [
+                    {
+                      "type": "atk_up",
+                      "power": 8.94,
+                      "duration": 3,
+                      "carryAcrossWaves": true
+                    }
+                  ],
+                  "element": "fire",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "description": "SKD033 / LB2",
+                  "fixedTarget": false
+                },
+                {
+                  "id": "SKD008",
+                  "name": "標準単体攻撃・水",
+                  "image": "",
+                  "rarity": "R",
+                  "spCost": 50,
+                  "target": "first",
+                  "effects": [
+                    {
+                      "type": "damage",
+                      "power": 130.7
+                    }
+                  ],
+                  "element": "water",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "description": "SKD008 / LB2",
+                  "fixedTarget": true
+                }
+              ],
+              "element": "water",
+              "passives": [
+                {
+                  "id": "balance_v2_P16",
+                  "name": "能動ATK強化中の自身DEF",
+                  "stat": "def",
+                  "type": "P16",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 14.221321905792035
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 130,
+              "actionCount": 9,
+              "initialCount": 9
+            },
+            {
+              "id": "TI01/9/2",
+              "boss": false,
+              "name": "島津義弘",
+              "image": "/creative/characters/battle/char_lucas_01.png",
+              "level": 42,
+              "order": 1,
+              "stats": {
+                "hp": 12820,
+                "sp": 100,
+                "atk": 1290,
+                "def": 340,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD007",
+                  "name": "標準単体攻撃・火",
+                  "image": "",
+                  "rarity": "R",
+                  "spCost": 50,
+                  "target": "first",
+                  "effects": [
+                    {
+                      "type": "damage",
+                      "power": 130.7
+                    }
+                  ],
+                  "element": "fire",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "description": "SKD007 / LB2",
+                  "fixedTarget": true
+                }
+              ],
+              "element": "fire",
+              "passives": [
+                {
+                  "id": "balance_v2_P14",
+                  "name": "HP40%以下で自身ATK",
+                  "stat": "atk",
+                  "type": "P14",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 16.591542223424042
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 100,
+              "actionCount": 8,
+              "initialCount": 8
+            }
+          ],
+          "sharedHp": 154000,
+          "defeatRewards": [
+            {
+              "kind": "cash",
+              "amount": 5000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 2
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 2
+            },
+            {
+              "id": "large",
+              "kind": "character_exp_item",
+              "amount": 1
+            },
+            {
+              "id": "large",
+              "kind": "equipment_exp_item",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "level": 10,
+          "source": "invasion source tables 20260921:4-3/3; section10 H=34200",
+          "enemies": [
+            {
+              "id": "TI01/10/1",
+              "name": "伊達政宗",
+              "image": "/creative/characters/battle/char_leo_01.png",
+              "level": 43,
+              "order": 0,
+              "stats": {
+                "hp": 34200,
+                "sp": 100,
+                "atk": 2610,
+                "def": 550,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD022",
+                  "name": "全体攻撃・風",
+                  "image": "",
+                  "rarity": "R",
+                  "spCost": 75,
+                  "target": "all_enemies",
+                  "effects": [
+                    {
+                      "type": "damage",
+                      "power": 65.35
+                    }
+                  ],
+                  "element": "wind",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "description": "SKD022 / LB2",
+                  "fixedTarget": false
+                }
+              ],
+              "element": "wind",
+              "passives": [
+                {
+                  "id": "balance_v2_P07",
+                  "name": "全体攻撃スキルダメージ",
+                  "stat": "atk",
+                  "type": "P07",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 9.480881270528023
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 100,
+              "actionCount": 8,
+              "initialCount": 8
+            }
+          ],
+          "sharedHp": 103000,
+          "defeatRewards": [
+            {
+              "kind": "cash",
+              "amount": 1000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 1
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "level": 11,
+          "source": "invasion source tables 20260921:5-4/3; section10 H=37890",
+          "enemies": [
+            {
+              "id": "TI01/11/1",
+              "name": "石田三成",
+              "image": "/creative/characters/battle/char_seiya_01.png",
+              "level": 44,
+              "order": 0,
+              "stats": {
+                "hp": 15050,
+                "sp": 100,
+                "atk": 1030,
+                "def": 710,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD034",
+                  "name": "身構え",
+                  "image": "",
+                  "rarity": "N",
+                  "spCost": 30,
+                  "target": "self",
+                  "effects": [
+                    {
+                      "type": "def_up",
+                      "power": 17.01,
+                      "duration": 3,
+                      "carryAcrossWaves": true
+                    }
+                  ],
+                  "element": "earth",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "description": "SKD034 / LB2",
+                  "fixedTarget": false
+                }
+              ],
+              "element": "light",
+              "passives": [
+                {
+                  "id": "balance_v2_P04",
+                  "name": "他の生存味方が2属性以上で自身DEF",
+                  "stat": "def",
+                  "type": "P04",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 16.591542223424042
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 100,
+              "actionCount": 6,
+              "initialCount": 6
+            },
+            {
+              "id": "TI01/11/2",
+              "name": "毛利元就",
+              "image": "/creative/characters/battle/char_reina_01.png",
+              "level": 44,
+              "order": 1,
+              "stats": {
+                "hp": 15930,
+                "sp": 100,
+                "atk": 1470,
+                "def": 370,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD010",
+                  "name": "標準単体攻撃・風",
+                  "image": "",
+                  "rarity": "R",
+                  "spCost": 50,
+                  "target": "first",
+                  "effects": [
+                    {
+                      "type": "damage",
+                      "power": 130.7
+                    }
+                  ],
+                  "element": "wind",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "description": "SKD010 / LB2",
+                  "fixedTarget": true
+                }
+              ],
+              "element": "wind",
+              "passives": [
+                {
+                  "id": "balance_v2_P03",
+                  "name": "生存味方の属性数で自身ATK",
+                  "stat": "atk",
+                  "type": "P03",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 14.221321905792035
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 100,
+              "actionCount": 7,
+              "initialCount": 7
+            },
+            {
+              "id": "TI01/11/3",
+              "name": "お市の方",
+              "image": "/creative/characters/battle/char_aoi_01.png",
+              "level": 44,
+              "order": 2,
+              "stats": {
+                "hp": 6910,
+                "sp": 100,
+                "atk": 1480,
+                "def": 290,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD040",
+                  "name": "治癒の祈り",
+                  "image": "",
+                  "rarity": "SR",
+                  "spCost": 90,
+                  "target": "lowest_ally",
+                  "effects": [
+                    {
+                      "type": "heal",
+                      "power": 85.03,
+                      "healingFormula": "caster_atk_percent"
+                    }
+                  ],
+                  "element": "water",
+                  "condition": {
+                    "type": "ally_hp_below",
+                    "value": 0.5
+                  },
+                  "description": "SKD040 / LB2",
+                  "fixedTarget": false
+                }
+              ],
+              "element": "fire",
+              "passives": [
+                {
+                  "id": "balance_v2_P10",
+                  "name": "与回復量（蘇生除外）",
+                  "stat": "atk",
+                  "type": "P10",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 9.480881270528023
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 100,
+              "actionCount": 6,
+              "initialCount": 6
+            }
+          ],
+          "sharedHp": 114000,
+          "defeatRewards": [
+            {
+              "kind": "cash",
+              "amount": 1000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 1
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "level": 12,
+          "source": "invasion-20260921-section10:TI01/12",
+          "enemies": [
+            {
+              "id": "TI01/12/1",
+              "boss": true,
+              "name": "徳川家康",
+              "image": "/creative/characters/battle/char_karen_01.png",
+              "level": 45,
+              "order": 0,
+              "stats": {
+                "hp": 54240,
+                "sp": 150,
+                "atk": 1830,
+                "def": 630,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD036",
+                  "name": "守りの陣",
+                  "image": "",
+                  "rarity": "R",
+                  "spCost": 75,
+                  "target": "all_allies",
+                  "effects": [
+                    {
+                      "type": "def_up",
+                      "power": 17.01,
+                      "duration": 3,
+                      "carryAcrossWaves": true
+                    }
+                  ],
+                  "element": "light",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "description": "SKD036 / LB2",
+                  "fixedTarget": false
+                },
+                {
+                  "id": "SKD009",
+                  "name": "標準単体攻撃・土",
+                  "image": "",
+                  "rarity": "R",
+                  "spCost": 50,
+                  "target": "first",
+                  "effects": [
+                    {
+                      "type": "damage",
+                      "power": 130.7
+                    }
+                  ],
+                  "element": "earth",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "description": "SKD009 / LB2",
+                  "fixedTarget": true
+                }
+              ],
+              "element": "earth",
+              "passives": [
+                {
+                  "id": "balance_v2_P02_earth",
+                  "name": "同属性DEF支援",
+                  "stat": "def",
+                  "type": "P02",
+                  "level": 2,
+                  "target": "party",
+                  "percent": 11.377057524633628,
+                  "targetElement": "earth"
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 150,
+              "actionCount": 10,
+              "initialCount": 10
+            },
+            {
+              "id": "TI01/12/2",
+              "boss": false,
+              "name": "井伊直虎",
+              "image": "/creative/characters/battle/char_cecile_01.png",
+              "level": 45,
+              "order": 1,
+              "stats": {
+                "hp": 10850,
+                "sp": 100,
+                "atk": 1500,
+                "def": 320,
+                "luk": 0
+              },
+              "skills": [
+                {
+                  "id": "SKD039",
+                  "name": "応急手当",
+                  "image": "",
+                  "rarity": "N",
+                  "spCost": 35,
+                  "target": "lowest_ally",
+                  "effects": [
+                    {
+                      "type": "heal",
+                      "power": 39.01,
+                      "healingFormula": "caster_atk_percent"
+                    }
+                  ],
+                  "element": "water",
+                  "condition": {
+                    "type": "ally_hp_below",
+                    "value": 0.5
+                  },
+                  "description": "SKD039 / LB2",
+                  "fixedTarget": false
+                }
+              ],
+              "element": "water",
+              "passives": [
+                {
+                  "id": "balance_v2_P11",
+                  "name": "被回復量（蘇生除外）",
+                  "stat": "atk",
+                  "type": "P11",
+                  "level": 2,
+                  "target": "self",
+                  "percent": 14.221321905792035
+                }
+              ],
+              "hitSpGain": 10,
+              "initialSp": 100,
+              "actionCount": 7,
+              "initialCount": 7
+            }
+          ],
+          "sharedHp": 782000,
+          "defeatRewards": [
+            {
+              "kind": "cash",
+              "amount": 20000
+            },
+            {
+              "kind": "skill_material",
+              "amount": 6
+            },
+            {
+              "kind": "equipment_lb",
+              "amount": 6
+            },
+            {
+              "id": "xlarge",
+              "kind": "character_exp_item",
+              "amount": 1
+            },
+            {
+              "id": "xlarge",
+              "kind": "equipment_exp_item",
+              "amount": 1
+            },
+            {
+              "id": "SPECIAL_TICKET_CHARACTER",
+              "kind": "ticket",
+              "amount": 1
+            },
+            {
+              "id": "SPECIAL_TICKET_SKILL",
+              "kind": "ticket",
+              "amount": 2
+            },
+            {
+              "id": "SPECIAL_TICKET_EQUIPMENT",
+              "kind": "ticket",
+              "amount": 1
+            },
+            {
+              "id": "char_karen_01",
+              "kind": "soul",
+              "amount": 1
+            }
+          ]
+        }
+      ],
+      "enemies": [
+        {
+          "id": "TI01/1/1",
+          "name": "柴田勝家",
+          "image": "/creative/characters/battle/char_noa_01.png",
+          "level": 35,
+          "order": 0,
+          "stats": {
+            "hp": 20780,
+            "sp": 100,
+            "atk": 1210,
+            "def": 460,
+            "luk": 0
+          },
+          "skills": [
+            {
+              "id": "SKD034",
+              "name": "身構え",
+              "image": "",
+              "rarity": "N",
+              "spCost": 30,
+              "target": "self",
+              "effects": [
+                {
+                  "type": "def_up",
+                  "power": 17.01,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "element": "earth",
+              "condition": {
+                "type": "always"
+              },
+              "description": "SKD034 / LB2",
+              "fixedTarget": false
+            }
+          ],
+          "element": "earth",
+          "passives": [
+            {
+              "id": "balance_v2_P05",
+              "name": "通常攻撃ダメージ",
+              "stat": "atk",
+              "type": "P05",
+              "level": 2,
+              "target": "self",
+              "percent": 14.221321905792035
+            }
+          ],
+          "hitSpGain": 10,
+          "initialSp": 100,
+          "actionCount": 5,
+          "initialCount": 5
+        }
+      ],
+      "maxLevel": 12,
+      "sharedHp": 63000,
+      "playerExp": 0,
+      "energyCost": 20,
+      "characterId": "char_karen_01",
+      "defeatRewards": [
+        {
+          "kind": "cash",
+          "amount": 1000
+        },
+        {
+          "kind": "skill_material",
+          "amount": 1
+        },
+        {
+          "kind": "equipment_lb",
+          "amount": 1
+        }
+      ],
+      "masterVersion": "invasion-20260921-section10",
+      "victoryRewards": [
+        {
+          "kind": "cash",
+          "amount": 2500
+        },
+        {
+          "id": "medium",
+          "kind": "character_exp_item",
+          "amount": 1
+        },
+        {
+          "id": "small",
+          "kind": "equipment_exp_item",
+          "amount": 5
+        }
+      ],
+      "durationMinutes": 4320,
+      "maxParticipants": 20,
+      "appearanceImages": {},
+      "appearanceLevels": [
+        1
+      ],
+      "victoryMultiplier": 1.5,
+      "enemyGrowthPerLevel": 0,
+      "participationRewards": [],
+      "sharedHpGrowthPerLevel": 0
+    },
+    "battleRules": {
+      "version": "balance-v2-20260920",
+      "balanceV2": {
+        "status": "PREVIEW_PROVISIONAL",
+        "version": "PREVIEW_PROVISIONAL_BALANCE_V2_20260920",
+        "shieldHpCap": 0.5,
+        "damageBonusCap": 50,
+        "lowHpThreshold": 0.4,
+        "shieldBonusCap": 50,
+        "healingBonusCap": 80,
+        "highHpThreshold": 0.7,
+        "diversityFactors": [
+          0,
+          0.25,
+          0.5,
+          0.75,
+          1
+        ],
+        "periodicCapMultiplier": 2
+      },
+      "defenseFactor": 1,
+      "initialSpRatio": 0,
+      "burstLukDivisor": 20,
+      "maxPlayerActions": 300,
+      "spRecoveryDivisor": 120,
+      "advantageMultiplier": 1.5,
+      "disadvantageMultiplier": 0.75,
+      "enemySpRecoveryDivisor": 30
+    },
+    "destination": {
+      "id": "TI01",
+      "name": "岡崎城への侵攻",
+      "castle": "岡崎城",
+      "itemId": "raid_unlock",
+      "clearExp": 100,
+      "itemName": "侵攻令",
+      "itemCount": 1,
+      "difficulty": "正式12段階",
+      "itemSource": "交換所・報酬",
+      "raidMasterId": "TI01",
+      "requiredLevel": 1,
+      "durationMinutes": 4320
+    },
+    "masterVersion": "GAME04_TERRITORY_HOST_PROVISIONAL_20260923"
+  },
+  "pass": false,
+  "error": "3 failures at quest_battle satsuma-1; stop without altering party/enemies/energy",
+  "blockedState": {
+    "energy": 8,
+    "energyMax": 50,
+    "playerProgress": {
+      "exp": 3184,
+      "level": 13,
+      "status": "active",
+      "version": "APPROVED_GROWTH_V1_20260921"
+    },
+    "clearedStages": [
+      "mino-5",
+      "mikawa-1",
+      "mikawa-2",
+      "mikawa-3",
+      "owari-1",
+      "owari-2",
+      "owari-3",
+      "owari-4",
+      "mino-1",
+      "mino-2",
+      "mino-3",
+      "mino-4",
+      "omi-1",
+      "omi-2",
+      "omi-3",
+      "omi-4",
+      "omi-5",
+      "kai-1",
+      "kai-2",
+      "kai-3",
+      "kai-4",
+      "kai-5",
+      "kai-6",
+      "echigo-1",
+      "echigo-2",
+      "echigo-3",
+      "echigo-4",
+      "echigo-5",
+      "echigo-6",
+      "kyoto-1",
+      "kyoto-2",
+      "kyoto-3",
+      "kyoto-4",
+      "kyoto-5",
+      "kyoto-6",
+      "kyoto-7",
+      "kyoto-8",
+      "izumo-1",
+      "izumo-2",
+      "izumo-3",
+      "izumo-4",
+      "izumo-5",
+      "izumo-6",
+      "izumo-7",
+      "izumo-8"
+    ],
+    "raid": {
+      "level": 12,
+      "hp": 436659,
+      "maxHp": 782000,
+      "status": "active"
+    }
+  }
+}

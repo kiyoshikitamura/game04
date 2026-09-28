@@ -1,0 +1,4 @@
+const fs=require('fs'),path=require('path'),crypto=require('crypto'),sharp=require('sharp');
+const source=path.resolve('../b15-assets'),out='public/assets/promotions/b15';fs.mkdirSync(out,{recursive:true});
+const map={'姫武将登用.png':'character','武具_特選登用_1280x640.png':'equipment','戦技_特選登用_1280x640 (1).png':'skill','通常登用_1280x640.png':'normal'};
+(async()=>{const rows=[];for(const [name,id] of Object.entries(map)){const data=fs.readFileSync(path.join(source,name)),meta=await sharp(data).metadata();if(meta.width!==1280||meta.height!==640)throw Error(name+' must be 1280x640');fs.writeFileSync(path.join(out,id+'.png'),data);rows.push({original:name,path:out+'/'+id+'.png',width:1280,height:640,sha256:crypto.createHash('sha256').update(data).digest('hex')})}fs.mkdirSync('docs/verification/device-debug/b15',{recursive:true});fs.writeFileSync('docs/verification/device-debug/b15/assets.json',JSON.stringify(rows,null,2));console.log(rows.map(r=>r.original));})();

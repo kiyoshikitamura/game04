@@ -1,0 +1,7621 @@
+{
+  "source": "synthetic deterministic isolated input; not user battle",
+  "input": {
+    "seed": 1,
+    "party": [
+      {
+        "id": "qa-actor",
+        "name": "調査行動者",
+        "image": "/characters/alice_transparent_asset.png",
+        "level": 1,
+        "element": "water",
+        "stats": {
+          "hp": 1000,
+          "atk": 10,
+          "def": 0,
+          "luk": 0,
+          "sp": 100
+        },
+        "skills": [
+          {
+            "id": "attack-ready",
+            "name": "attack-ready",
+            "image": "",
+            "rarity": "N",
+            "element": "fire",
+            "spCost": 1,
+            "condition": {
+              "type": "always"
+            },
+            "target": "first",
+            "effects": [
+              {
+                "type": "damage",
+                "power": 100
+              }
+            ],
+            "description": "investigation fixture"
+          }
+        ],
+        "passives": []
+      }
+    ],
+    "waves": [
+      [
+        {
+          "id": "qa-enemy",
+          "name": "調査敵",
+          "image": "/characters/alice_transparent_asset.png",
+          "level": 1,
+          "element": "water",
+          "stats": {
+            "hp": 100000,
+            "atk": 1,
+            "def": 0,
+            "luk": 0,
+            "sp": 100
+          },
+          "skills": [],
+          "passives": [],
+          "initialSp": 0,
+          "hitSpGain": 0,
+          "actionCount": 1000,
+          "initialCount": 1000,
+          "order": 0
+        }
+      ]
+    ],
+    "rules": {
+      "defenseFactor": 1,
+      "advantageMultiplier": 1.5,
+      "disadvantageMultiplier": 0.75,
+      "spRecoveryDivisor": 120,
+      "burstLukDivisor": 20,
+      "enemySpRecoveryDivisor": 30,
+      "maxPlayerActions": 300,
+      "initialSpRatio": 0,
+      "version": "balance-v2-20260920",
+      "inputVersion": "wave-sp-v1-20260921",
+      "balanceV2": {
+        "status": "PREVIEW_PROVISIONAL",
+        "version": "PREVIEW_PROVISIONAL_BALANCE_V2_20260920",
+        "damageBonusCap": 50,
+        "healingBonusCap": 80,
+        "shieldBonusCap": 50,
+        "shieldHpCap": 0.5,
+        "periodicCapMultiplier": 2,
+        "lowHpThreshold": 0.4,
+        "highHpThreshold": 0.7,
+        "diversityFactors": [
+          0,
+          0.25,
+          0.5,
+          0.75,
+          1
+        ]
+      }
+    }
+  },
+  "result": {
+    "seed": 1,
+    "outcome": "lose",
+    "rulesVersion": "balance-v2-20260920",
+    "burstStarts": 7,
+    "episodes": [
+      {
+        "id": 1,
+        "start": 158,
+        "actor": "qa-actor",
+        "actions": [
+          {
+            "frame": 159,
+            "skill": "attack-ready",
+            "spBefore": 362,
+            "spAfter": 361,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 164,
+            "skill": "attack-ready",
+            "spBefore": 361,
+            "spAfter": 360,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 169,
+            "skill": "attack-ready",
+            "spBefore": 360,
+            "spAfter": 359,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 174,
+            "skill": "attack-ready",
+            "spBefore": 359,
+            "spAfter": 358,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 179,
+            "skill": "attack-ready",
+            "spBefore": 358,
+            "spAfter": 357,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 158,
+            "event": "burst_start",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              362,
+              362
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 159,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              362,
+              361
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 160,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              361,
+              361
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 161,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              361,
+              361
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 162,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              361,
+              361
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 163,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              361,
+              361
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 164,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              361,
+              360
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 165,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              360,
+              360
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 166,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              360,
+              360
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 167,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              360,
+              360
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 168,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              360,
+              360
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 169,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              360,
+              359
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 170,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              359,
+              359
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 171,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              359,
+              359
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 172,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              359,
+              359
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 173,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              359,
+              359
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 174,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              359,
+              358
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 175,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              358,
+              358
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 176,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              358,
+              358
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 177,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              358,
+              358
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 178,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              358,
+              358
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 179,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              358,
+              357
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 180,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              357,
+              357
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 181,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              357,
+              357
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 182,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              357,
+              357
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 183,
+            "event": "burst_end",
+            "actor": "qa-actor",
+            "burst": false,
+            "sp": [
+              357,
+              357
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 183,
+        "endReason": "five_actions",
+        "burstCutIns": 5,
+        "burstSounds": 5,
+        "next": "action_start"
+      },
+      {
+        "id": 2,
+        "start": 345,
+        "actor": "qa-actor",
+        "actions": [
+          {
+            "frame": 346,
+            "skill": "attack-ready",
+            "spBefore": 400,
+            "spAfter": 399,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 351,
+            "skill": "attack-ready",
+            "spBefore": 399,
+            "spAfter": 398,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 356,
+            "skill": "attack-ready",
+            "spBefore": 398,
+            "spAfter": 397,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 361,
+            "skill": "attack-ready",
+            "spBefore": 397,
+            "spAfter": 396,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 366,
+            "skill": "attack-ready",
+            "spBefore": 396,
+            "spAfter": 395,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 345,
+            "event": "burst_start",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              400,
+              400
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 346,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              400,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 347,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 348,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 349,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 350,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 351,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              399,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 352,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 353,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 354,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 355,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 356,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              398,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 357,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 358,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 359,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 360,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 361,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              397,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 362,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 363,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 364,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 365,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 366,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              396,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 367,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 368,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 369,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 370,
+            "event": "burst_end",
+            "actor": "qa-actor",
+            "burst": false,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 370,
+        "endReason": "five_actions",
+        "burstCutIns": 5,
+        "burstSounds": 5,
+        "next": "action_start"
+      },
+      {
+        "id": 3,
+        "start": 532,
+        "actor": "qa-actor",
+        "actions": [
+          {
+            "frame": 533,
+            "skill": "attack-ready",
+            "spBefore": 400,
+            "spAfter": 399,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 538,
+            "skill": "attack-ready",
+            "spBefore": 399,
+            "spAfter": 398,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 543,
+            "skill": "attack-ready",
+            "spBefore": 398,
+            "spAfter": 397,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 548,
+            "skill": "attack-ready",
+            "spBefore": 397,
+            "spAfter": 396,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 553,
+            "skill": "attack-ready",
+            "spBefore": 396,
+            "spAfter": 395,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 532,
+            "event": "burst_start",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              400,
+              400
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 533,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              400,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 534,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 535,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 536,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 537,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 538,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              399,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 539,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 540,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 541,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 542,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 543,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              398,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 544,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 545,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 546,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 547,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 548,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              397,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 549,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 550,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 551,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 552,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 553,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              396,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 554,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 555,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 556,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 557,
+            "event": "burst_end",
+            "actor": "qa-actor",
+            "burst": false,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 557,
+        "endReason": "five_actions",
+        "burstCutIns": 5,
+        "burstSounds": 5,
+        "next": "action_start"
+      },
+      {
+        "id": 4,
+        "start": 638,
+        "actor": "qa-actor",
+        "actions": [
+          {
+            "frame": 639,
+            "skill": "attack-ready",
+            "spBefore": 400,
+            "spAfter": 399,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 644,
+            "skill": "attack-ready",
+            "spBefore": 399,
+            "spAfter": 398,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 649,
+            "skill": "attack-ready",
+            "spBefore": 398,
+            "spAfter": 397,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 654,
+            "skill": "attack-ready",
+            "spBefore": 397,
+            "spAfter": 396,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 659,
+            "skill": "attack-ready",
+            "spBefore": 396,
+            "spAfter": 395,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 638,
+            "event": "burst_start",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              400,
+              400
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 639,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              400,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 640,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 641,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 642,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 643,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 644,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              399,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 645,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 646,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 647,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 648,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 649,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              398,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 650,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 651,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 652,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 653,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 654,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              397,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 655,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 656,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 657,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 658,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 659,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              396,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 660,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 661,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 662,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 663,
+            "event": "burst_end",
+            "actor": "qa-actor",
+            "burst": false,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 663,
+        "endReason": "five_actions",
+        "burstCutIns": 5,
+        "burstSounds": 5,
+        "next": "action_start"
+      },
+      {
+        "id": 5,
+        "start": 825,
+        "actor": "qa-actor",
+        "actions": [
+          {
+            "frame": 826,
+            "skill": "attack-ready",
+            "spBefore": 400,
+            "spAfter": 399,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 831,
+            "skill": "attack-ready",
+            "spBefore": 399,
+            "spAfter": 398,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 836,
+            "skill": "attack-ready",
+            "spBefore": 398,
+            "spAfter": 397,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 841,
+            "skill": "attack-ready",
+            "spBefore": 397,
+            "spAfter": 396,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 846,
+            "skill": "attack-ready",
+            "spBefore": 396,
+            "spAfter": 395,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 825,
+            "event": "burst_start",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              400,
+              400
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 826,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              400,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 827,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 828,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 829,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 830,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 831,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              399,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 832,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 833,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 834,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 835,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 836,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              398,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 837,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 838,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 839,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 840,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 841,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              397,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 842,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 843,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 844,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 845,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 846,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              396,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 847,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 848,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 849,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 850,
+            "event": "burst_end",
+            "actor": "qa-actor",
+            "burst": false,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 850,
+        "endReason": "five_actions",
+        "burstCutIns": 5,
+        "burstSounds": 5,
+        "next": "action_start"
+      },
+      {
+        "id": 6,
+        "start": 1012,
+        "actor": "qa-actor",
+        "actions": [
+          {
+            "frame": 1013,
+            "skill": "attack-ready",
+            "spBefore": 400,
+            "spAfter": 399,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 1018,
+            "skill": "attack-ready",
+            "spBefore": 399,
+            "spAfter": 398,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 1023,
+            "skill": "attack-ready",
+            "spBefore": 398,
+            "spAfter": 397,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 1028,
+            "skill": "attack-ready",
+            "spBefore": 397,
+            "spAfter": 396,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 1033,
+            "skill": "attack-ready",
+            "spBefore": 396,
+            "spAfter": 395,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 1012,
+            "event": "burst_start",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              400,
+              400
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 1013,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              400,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 1014,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 1015,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 1016,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 1017,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 1018,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              399,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 1019,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 1020,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 1021,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 1022,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 1023,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              398,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 1024,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 1025,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 1026,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 1027,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 1028,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              397,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 1029,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 1030,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 1031,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 1032,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 1033,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              396,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 1034,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 1035,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 1036,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 1037,
+            "event": "burst_end",
+            "actor": "qa-actor",
+            "burst": false,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 1037,
+        "endReason": "five_actions",
+        "burstCutIns": 5,
+        "burstSounds": 5,
+        "next": "action_start"
+      },
+      {
+        "id": 7,
+        "start": 1118,
+        "actor": "qa-actor",
+        "actions": [
+          {
+            "frame": 1119,
+            "skill": "attack-ready",
+            "spBefore": 400,
+            "spAfter": 399,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 1124,
+            "skill": "attack-ready",
+            "spBefore": 399,
+            "spAfter": 398,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 1129,
+            "skill": "attack-ready",
+            "spBefore": 398,
+            "spAfter": 397,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 1134,
+            "skill": "attack-ready",
+            "spBefore": 397,
+            "spAfter": 396,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          },
+          {
+            "frame": 1139,
+            "skill": "attack-ready",
+            "spBefore": 396,
+            "spAfter": 395,
+            "cost": 1,
+            "candidates": [
+              {
+                "id": "attack-ready",
+                "priority": 1,
+                "cost": 1,
+                "condition": true,
+                "targets": [
+                  "qa-enemy"
+                ],
+                "reason": "selected"
+              }
+            ],
+            "candidateSource": "instrumented pre-choice"
+          }
+        ],
+        "timeline": [
+          {
+            "frame": 1118,
+            "event": "burst_start",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              400,
+              400
+            ],
+            "gauge": [
+              200,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 0,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 1119,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              400,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 1120,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 1121,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 1122,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 1123,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              399,
+              399
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 1,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 1124,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              399,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 1125,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 1126,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 1127,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 1128,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              398,
+              398
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 2,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 1129,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              398,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 1130,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 1131,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 1132,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 1133,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              397,
+              397
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 3,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 1134,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              397,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 1135,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 1136,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 1137,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 1138,
+            "event": "burst_resume",
+            "actor": "qa-actor",
+            "burst": true,
+            "sp": [
+              396,
+              396
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 4,
+            "cutIn": "burst",
+            "sounds": [
+              "BATTLE_BURST"
+            ],
+            "duration": 900
+          },
+          {
+            "frame": 1139,
+            "event": "action_start",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              396,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": "skill",
+            "sounds": [
+              "BATTLE_SKILL"
+            ],
+            "duration": 650
+          },
+          {
+            "frame": 1140,
+            "event": "damage",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [
+              "qa-enemy"
+            ],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [
+              "BATTLE_SLASH"
+            ],
+            "duration": 450
+          },
+          {
+            "frame": 1141,
+            "event": "action_end",
+            "actor": "qa-actor",
+            "skill": "attack-ready",
+            "burst": true,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 1142,
+            "event": "counts",
+            "burst": true,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 60
+          },
+          {
+            "frame": 1143,
+            "event": "burst_end",
+            "actor": "qa-actor",
+            "burst": false,
+            "sp": [
+              395,
+              395
+            ],
+            "gauge": [
+              0,
+              0
+            ],
+            "targets": [],
+            "actionNumber": 5,
+            "cutIn": null,
+            "sounds": [],
+            "duration": 250
+          }
+        ],
+        "end": 1143,
+        "endReason": "five_actions",
+        "burstCutIns": 5,
+        "burstSounds": 5,
+        "next": "action_start"
+      }
+    ],
+    "betweenBursts": [
+      {
+        "from": 1,
+        "to": 2,
+        "frames": [
+          {
+            "frame": 184,
+            "event": "action_start",
+            "sp": 356,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 186,
+            "event": "action_end",
+            "sp": 366,
+            "gauge": 10,
+            "burst": false
+          },
+          {
+            "frame": 188,
+            "event": "action_start",
+            "sp": 365,
+            "gauge": 10,
+            "burst": false
+          },
+          {
+            "frame": 190,
+            "event": "action_end",
+            "sp": 375,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 192,
+            "event": "action_start",
+            "sp": 374,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 194,
+            "event": "action_end",
+            "sp": 384,
+            "gauge": 30,
+            "burst": false
+          },
+          {
+            "frame": 196,
+            "event": "action_start",
+            "sp": 383,
+            "gauge": 30,
+            "burst": false
+          },
+          {
+            "frame": 198,
+            "event": "action_end",
+            "sp": 393,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 200,
+            "event": "action_start",
+            "sp": 392,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 202,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 50,
+            "burst": false
+          },
+          {
+            "frame": 204,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 50,
+            "burst": false
+          },
+          {
+            "frame": 206,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 208,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 210,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 70,
+            "burst": false
+          },
+          {
+            "frame": 212,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 70,
+            "burst": false
+          },
+          {
+            "frame": 214,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 80,
+            "burst": false
+          },
+          {
+            "frame": 216,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 80,
+            "burst": false
+          },
+          {
+            "frame": 218,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 90,
+            "burst": false
+          },
+          {
+            "frame": 220,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 90,
+            "burst": false
+          },
+          {
+            "frame": 222,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 100,
+            "burst": false
+          },
+          {
+            "frame": 224,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 100,
+            "burst": false
+          },
+          {
+            "frame": 226,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 110,
+            "burst": false
+          },
+          {
+            "frame": 228,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 110,
+            "burst": false
+          },
+          {
+            "frame": 230,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 120,
+            "burst": false
+          },
+          {
+            "frame": 232,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 120,
+            "burst": false
+          },
+          {
+            "frame": 234,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 130,
+            "burst": false
+          },
+          {
+            "frame": 236,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 130,
+            "burst": false
+          },
+          {
+            "frame": 238,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 140,
+            "burst": false
+          },
+          {
+            "frame": 240,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 140,
+            "burst": false
+          },
+          {
+            "frame": 242,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 150,
+            "burst": false
+          },
+          {
+            "frame": 244,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 150,
+            "burst": false
+          },
+          {
+            "frame": 246,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 160,
+            "burst": false
+          },
+          {
+            "frame": 248,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 160,
+            "burst": false
+          },
+          {
+            "frame": 250,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 170,
+            "burst": false
+          },
+          {
+            "frame": 252,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 170,
+            "burst": false
+          },
+          {
+            "frame": 254,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 180,
+            "burst": false
+          },
+          {
+            "frame": 256,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 180,
+            "burst": false
+          },
+          {
+            "frame": 258,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 190,
+            "burst": false
+          },
+          {
+            "frame": 260,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 190,
+            "burst": false
+          },
+          {
+            "frame": 262,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 200,
+            "burst": false
+          },
+          {
+            "frame": 264,
+            "event": "burst_failed",
+            "sp": 400,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 265,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 267,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 10,
+            "burst": false
+          },
+          {
+            "frame": 269,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 10,
+            "burst": false
+          },
+          {
+            "frame": 271,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 273,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 275,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 30,
+            "burst": false
+          },
+          {
+            "frame": 277,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 30,
+            "burst": false
+          },
+          {
+            "frame": 279,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 281,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 283,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 50,
+            "burst": false
+          },
+          {
+            "frame": 285,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 50,
+            "burst": false
+          },
+          {
+            "frame": 287,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 289,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 291,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 70,
+            "burst": false
+          },
+          {
+            "frame": 293,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 70,
+            "burst": false
+          },
+          {
+            "frame": 295,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 80,
+            "burst": false
+          },
+          {
+            "frame": 297,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 80,
+            "burst": false
+          },
+          {
+            "frame": 299,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 90,
+            "burst": false
+          },
+          {
+            "frame": 301,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 90,
+            "burst": false
+          },
+          {
+            "frame": 303,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 100,
+            "burst": false
+          },
+          {
+            "frame": 305,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 100,
+            "burst": false
+          },
+          {
+            "frame": 307,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 110,
+            "burst": false
+          },
+          {
+            "frame": 309,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 110,
+            "burst": false
+          },
+          {
+            "frame": 311,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 120,
+            "burst": false
+          },
+          {
+            "frame": 313,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 120,
+            "burst": false
+          },
+          {
+            "frame": 315,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 130,
+            "burst": false
+          },
+          {
+            "frame": 317,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 130,
+            "burst": false
+          },
+          {
+            "frame": 319,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 140,
+            "burst": false
+          },
+          {
+            "frame": 321,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 140,
+            "burst": false
+          },
+          {
+            "frame": 323,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 150,
+            "burst": false
+          },
+          {
+            "frame": 325,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 150,
+            "burst": false
+          },
+          {
+            "frame": 327,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 160,
+            "burst": false
+          },
+          {
+            "frame": 329,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 160,
+            "burst": false
+          },
+          {
+            "frame": 331,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 170,
+            "burst": false
+          },
+          {
+            "frame": 333,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 170,
+            "burst": false
+          },
+          {
+            "frame": 335,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 180,
+            "burst": false
+          },
+          {
+            "frame": 337,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 180,
+            "burst": false
+          },
+          {
+            "frame": 339,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 190,
+            "burst": false
+          },
+          {
+            "frame": 341,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 190,
+            "burst": false
+          },
+          {
+            "frame": 343,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 200,
+            "burst": false
+          },
+          {
+            "frame": 345,
+            "event": "burst_start",
+            "sp": 400,
+            "gauge": 0,
+            "burst": true
+          }
+        ]
+      },
+      {
+        "from": 2,
+        "to": 3,
+        "frames": [
+          {
+            "frame": 371,
+            "event": "action_start",
+            "sp": 394,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 373,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 10,
+            "burst": false
+          },
+          {
+            "frame": 375,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 10,
+            "burst": false
+          },
+          {
+            "frame": 377,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 379,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 381,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 30,
+            "burst": false
+          },
+          {
+            "frame": 383,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 30,
+            "burst": false
+          },
+          {
+            "frame": 385,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 387,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 389,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 50,
+            "burst": false
+          },
+          {
+            "frame": 391,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 50,
+            "burst": false
+          },
+          {
+            "frame": 393,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 395,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 397,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 70,
+            "burst": false
+          },
+          {
+            "frame": 399,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 70,
+            "burst": false
+          },
+          {
+            "frame": 401,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 80,
+            "burst": false
+          },
+          {
+            "frame": 403,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 80,
+            "burst": false
+          },
+          {
+            "frame": 405,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 90,
+            "burst": false
+          },
+          {
+            "frame": 407,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 90,
+            "burst": false
+          },
+          {
+            "frame": 409,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 100,
+            "burst": false
+          },
+          {
+            "frame": 411,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 100,
+            "burst": false
+          },
+          {
+            "frame": 413,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 110,
+            "burst": false
+          },
+          {
+            "frame": 415,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 110,
+            "burst": false
+          },
+          {
+            "frame": 417,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 120,
+            "burst": false
+          },
+          {
+            "frame": 419,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 120,
+            "burst": false
+          },
+          {
+            "frame": 421,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 130,
+            "burst": false
+          },
+          {
+            "frame": 423,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 130,
+            "burst": false
+          },
+          {
+            "frame": 425,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 140,
+            "burst": false
+          },
+          {
+            "frame": 427,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 140,
+            "burst": false
+          },
+          {
+            "frame": 429,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 150,
+            "burst": false
+          },
+          {
+            "frame": 431,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 150,
+            "burst": false
+          },
+          {
+            "frame": 433,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 160,
+            "burst": false
+          },
+          {
+            "frame": 435,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 160,
+            "burst": false
+          },
+          {
+            "frame": 437,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 170,
+            "burst": false
+          },
+          {
+            "frame": 439,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 170,
+            "burst": false
+          },
+          {
+            "frame": 441,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 180,
+            "burst": false
+          },
+          {
+            "frame": 443,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 180,
+            "burst": false
+          },
+          {
+            "frame": 445,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 190,
+            "burst": false
+          },
+          {
+            "frame": 447,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 190,
+            "burst": false
+          },
+          {
+            "frame": 449,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 200,
+            "burst": false
+          },
+          {
+            "frame": 451,
+            "event": "burst_failed",
+            "sp": 400,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 452,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 454,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 10,
+            "burst": false
+          },
+          {
+            "frame": 456,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 10,
+            "burst": false
+          },
+          {
+            "frame": 458,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 460,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 462,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 30,
+            "burst": false
+          },
+          {
+            "frame": 464,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 30,
+            "burst": false
+          },
+          {
+            "frame": 466,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 468,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 470,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 50,
+            "burst": false
+          },
+          {
+            "frame": 472,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 50,
+            "burst": false
+          },
+          {
+            "frame": 474,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 476,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 478,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 70,
+            "burst": false
+          },
+          {
+            "frame": 480,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 70,
+            "burst": false
+          },
+          {
+            "frame": 482,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 80,
+            "burst": false
+          },
+          {
+            "frame": 484,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 80,
+            "burst": false
+          },
+          {
+            "frame": 486,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 90,
+            "burst": false
+          },
+          {
+            "frame": 488,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 90,
+            "burst": false
+          },
+          {
+            "frame": 490,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 100,
+            "burst": false
+          },
+          {
+            "frame": 492,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 100,
+            "burst": false
+          },
+          {
+            "frame": 494,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 110,
+            "burst": false
+          },
+          {
+            "frame": 496,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 110,
+            "burst": false
+          },
+          {
+            "frame": 498,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 120,
+            "burst": false
+          },
+          {
+            "frame": 500,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 120,
+            "burst": false
+          },
+          {
+            "frame": 502,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 130,
+            "burst": false
+          },
+          {
+            "frame": 504,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 130,
+            "burst": false
+          },
+          {
+            "frame": 506,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 140,
+            "burst": false
+          },
+          {
+            "frame": 508,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 140,
+            "burst": false
+          },
+          {
+            "frame": 510,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 150,
+            "burst": false
+          },
+          {
+            "frame": 512,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 150,
+            "burst": false
+          },
+          {
+            "frame": 514,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 160,
+            "burst": false
+          },
+          {
+            "frame": 516,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 160,
+            "burst": false
+          },
+          {
+            "frame": 518,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 170,
+            "burst": false
+          },
+          {
+            "frame": 520,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 170,
+            "burst": false
+          },
+          {
+            "frame": 522,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 180,
+            "burst": false
+          },
+          {
+            "frame": 524,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 180,
+            "burst": false
+          },
+          {
+            "frame": 526,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 190,
+            "burst": false
+          },
+          {
+            "frame": 528,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 190,
+            "burst": false
+          },
+          {
+            "frame": 530,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 200,
+            "burst": false
+          },
+          {
+            "frame": 532,
+            "event": "burst_start",
+            "sp": 400,
+            "gauge": 0,
+            "burst": true
+          }
+        ]
+      },
+      {
+        "from": 3,
+        "to": 4,
+        "frames": [
+          {
+            "frame": 558,
+            "event": "action_start",
+            "sp": 394,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 560,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 10,
+            "burst": false
+          },
+          {
+            "frame": 562,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 10,
+            "burst": false
+          },
+          {
+            "frame": 564,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 566,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 568,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 30,
+            "burst": false
+          },
+          {
+            "frame": 570,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 30,
+            "burst": false
+          },
+          {
+            "frame": 572,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 574,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 576,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 50,
+            "burst": false
+          },
+          {
+            "frame": 578,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 50,
+            "burst": false
+          },
+          {
+            "frame": 580,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 582,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 584,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 70,
+            "burst": false
+          },
+          {
+            "frame": 586,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 70,
+            "burst": false
+          },
+          {
+            "frame": 588,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 80,
+            "burst": false
+          },
+          {
+            "frame": 590,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 80,
+            "burst": false
+          },
+          {
+            "frame": 592,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 90,
+            "burst": false
+          },
+          {
+            "frame": 594,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 90,
+            "burst": false
+          },
+          {
+            "frame": 596,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 100,
+            "burst": false
+          },
+          {
+            "frame": 598,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 100,
+            "burst": false
+          },
+          {
+            "frame": 600,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 110,
+            "burst": false
+          },
+          {
+            "frame": 602,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 110,
+            "burst": false
+          },
+          {
+            "frame": 604,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 120,
+            "burst": false
+          },
+          {
+            "frame": 606,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 120,
+            "burst": false
+          },
+          {
+            "frame": 608,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 130,
+            "burst": false
+          },
+          {
+            "frame": 610,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 130,
+            "burst": false
+          },
+          {
+            "frame": 612,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 140,
+            "burst": false
+          },
+          {
+            "frame": 614,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 140,
+            "burst": false
+          },
+          {
+            "frame": 616,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 150,
+            "burst": false
+          },
+          {
+            "frame": 618,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 150,
+            "burst": false
+          },
+          {
+            "frame": 620,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 160,
+            "burst": false
+          },
+          {
+            "frame": 622,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 160,
+            "burst": false
+          },
+          {
+            "frame": 624,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 170,
+            "burst": false
+          },
+          {
+            "frame": 626,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 170,
+            "burst": false
+          },
+          {
+            "frame": 628,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 180,
+            "burst": false
+          },
+          {
+            "frame": 630,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 180,
+            "burst": false
+          },
+          {
+            "frame": 632,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 190,
+            "burst": false
+          },
+          {
+            "frame": 634,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 190,
+            "burst": false
+          },
+          {
+            "frame": 636,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 200,
+            "burst": false
+          },
+          {
+            "frame": 638,
+            "event": "burst_start",
+            "sp": 400,
+            "gauge": 0,
+            "burst": true
+          }
+        ]
+      },
+      {
+        "from": 4,
+        "to": 5,
+        "frames": [
+          {
+            "frame": 664,
+            "event": "action_start",
+            "sp": 394,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 666,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 10,
+            "burst": false
+          },
+          {
+            "frame": 668,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 10,
+            "burst": false
+          },
+          {
+            "frame": 670,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 672,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 674,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 30,
+            "burst": false
+          },
+          {
+            "frame": 676,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 30,
+            "burst": false
+          },
+          {
+            "frame": 678,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 680,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 682,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 50,
+            "burst": false
+          },
+          {
+            "frame": 684,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 50,
+            "burst": false
+          },
+          {
+            "frame": 686,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 688,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 690,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 70,
+            "burst": false
+          },
+          {
+            "frame": 692,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 70,
+            "burst": false
+          },
+          {
+            "frame": 694,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 80,
+            "burst": false
+          },
+          {
+            "frame": 696,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 80,
+            "burst": false
+          },
+          {
+            "frame": 698,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 90,
+            "burst": false
+          },
+          {
+            "frame": 700,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 90,
+            "burst": false
+          },
+          {
+            "frame": 702,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 100,
+            "burst": false
+          },
+          {
+            "frame": 704,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 100,
+            "burst": false
+          },
+          {
+            "frame": 706,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 110,
+            "burst": false
+          },
+          {
+            "frame": 708,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 110,
+            "burst": false
+          },
+          {
+            "frame": 710,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 120,
+            "burst": false
+          },
+          {
+            "frame": 712,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 120,
+            "burst": false
+          },
+          {
+            "frame": 714,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 130,
+            "burst": false
+          },
+          {
+            "frame": 716,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 130,
+            "burst": false
+          },
+          {
+            "frame": 718,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 140,
+            "burst": false
+          },
+          {
+            "frame": 720,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 140,
+            "burst": false
+          },
+          {
+            "frame": 722,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 150,
+            "burst": false
+          },
+          {
+            "frame": 724,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 150,
+            "burst": false
+          },
+          {
+            "frame": 726,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 160,
+            "burst": false
+          },
+          {
+            "frame": 728,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 160,
+            "burst": false
+          },
+          {
+            "frame": 730,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 170,
+            "burst": false
+          },
+          {
+            "frame": 732,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 170,
+            "burst": false
+          },
+          {
+            "frame": 734,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 180,
+            "burst": false
+          },
+          {
+            "frame": 736,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 180,
+            "burst": false
+          },
+          {
+            "frame": 738,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 190,
+            "burst": false
+          },
+          {
+            "frame": 740,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 190,
+            "burst": false
+          },
+          {
+            "frame": 742,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 200,
+            "burst": false
+          },
+          {
+            "frame": 744,
+            "event": "burst_failed",
+            "sp": 400,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 745,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 747,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 10,
+            "burst": false
+          },
+          {
+            "frame": 749,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 10,
+            "burst": false
+          },
+          {
+            "frame": 751,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 753,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 755,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 30,
+            "burst": false
+          },
+          {
+            "frame": 757,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 30,
+            "burst": false
+          },
+          {
+            "frame": 759,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 761,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 763,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 50,
+            "burst": false
+          },
+          {
+            "frame": 765,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 50,
+            "burst": false
+          },
+          {
+            "frame": 767,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 769,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 771,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 70,
+            "burst": false
+          },
+          {
+            "frame": 773,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 70,
+            "burst": false
+          },
+          {
+            "frame": 775,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 80,
+            "burst": false
+          },
+          {
+            "frame": 777,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 80,
+            "burst": false
+          },
+          {
+            "frame": 779,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 90,
+            "burst": false
+          },
+          {
+            "frame": 781,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 90,
+            "burst": false
+          },
+          {
+            "frame": 783,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 100,
+            "burst": false
+          },
+          {
+            "frame": 785,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 100,
+            "burst": false
+          },
+          {
+            "frame": 787,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 110,
+            "burst": false
+          },
+          {
+            "frame": 789,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 110,
+            "burst": false
+          },
+          {
+            "frame": 791,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 120,
+            "burst": false
+          },
+          {
+            "frame": 793,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 120,
+            "burst": false
+          },
+          {
+            "frame": 795,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 130,
+            "burst": false
+          },
+          {
+            "frame": 797,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 130,
+            "burst": false
+          },
+          {
+            "frame": 799,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 140,
+            "burst": false
+          },
+          {
+            "frame": 801,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 140,
+            "burst": false
+          },
+          {
+            "frame": 803,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 150,
+            "burst": false
+          },
+          {
+            "frame": 805,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 150,
+            "burst": false
+          },
+          {
+            "frame": 807,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 160,
+            "burst": false
+          },
+          {
+            "frame": 809,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 160,
+            "burst": false
+          },
+          {
+            "frame": 811,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 170,
+            "burst": false
+          },
+          {
+            "frame": 813,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 170,
+            "burst": false
+          },
+          {
+            "frame": 815,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 180,
+            "burst": false
+          },
+          {
+            "frame": 817,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 180,
+            "burst": false
+          },
+          {
+            "frame": 819,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 190,
+            "burst": false
+          },
+          {
+            "frame": 821,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 190,
+            "burst": false
+          },
+          {
+            "frame": 823,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 200,
+            "burst": false
+          },
+          {
+            "frame": 825,
+            "event": "burst_start",
+            "sp": 400,
+            "gauge": 0,
+            "burst": true
+          }
+        ]
+      },
+      {
+        "from": 5,
+        "to": 6,
+        "frames": [
+          {
+            "frame": 851,
+            "event": "action_start",
+            "sp": 394,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 853,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 10,
+            "burst": false
+          },
+          {
+            "frame": 855,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 10,
+            "burst": false
+          },
+          {
+            "frame": 857,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 859,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 861,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 30,
+            "burst": false
+          },
+          {
+            "frame": 863,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 30,
+            "burst": false
+          },
+          {
+            "frame": 865,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 867,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 869,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 50,
+            "burst": false
+          },
+          {
+            "frame": 871,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 50,
+            "burst": false
+          },
+          {
+            "frame": 873,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 875,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 877,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 70,
+            "burst": false
+          },
+          {
+            "frame": 879,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 70,
+            "burst": false
+          },
+          {
+            "frame": 881,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 80,
+            "burst": false
+          },
+          {
+            "frame": 883,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 80,
+            "burst": false
+          },
+          {
+            "frame": 885,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 90,
+            "burst": false
+          },
+          {
+            "frame": 887,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 90,
+            "burst": false
+          },
+          {
+            "frame": 889,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 100,
+            "burst": false
+          },
+          {
+            "frame": 891,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 100,
+            "burst": false
+          },
+          {
+            "frame": 893,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 110,
+            "burst": false
+          },
+          {
+            "frame": 895,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 110,
+            "burst": false
+          },
+          {
+            "frame": 897,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 120,
+            "burst": false
+          },
+          {
+            "frame": 899,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 120,
+            "burst": false
+          },
+          {
+            "frame": 901,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 130,
+            "burst": false
+          },
+          {
+            "frame": 903,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 130,
+            "burst": false
+          },
+          {
+            "frame": 905,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 140,
+            "burst": false
+          },
+          {
+            "frame": 907,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 140,
+            "burst": false
+          },
+          {
+            "frame": 909,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 150,
+            "burst": false
+          },
+          {
+            "frame": 911,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 150,
+            "burst": false
+          },
+          {
+            "frame": 913,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 160,
+            "burst": false
+          },
+          {
+            "frame": 915,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 160,
+            "burst": false
+          },
+          {
+            "frame": 917,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 170,
+            "burst": false
+          },
+          {
+            "frame": 919,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 170,
+            "burst": false
+          },
+          {
+            "frame": 921,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 180,
+            "burst": false
+          },
+          {
+            "frame": 923,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 180,
+            "burst": false
+          },
+          {
+            "frame": 925,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 190,
+            "burst": false
+          },
+          {
+            "frame": 927,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 190,
+            "burst": false
+          },
+          {
+            "frame": 929,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 200,
+            "burst": false
+          },
+          {
+            "frame": 931,
+            "event": "burst_failed",
+            "sp": 400,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 932,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 934,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 10,
+            "burst": false
+          },
+          {
+            "frame": 936,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 10,
+            "burst": false
+          },
+          {
+            "frame": 938,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 940,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 942,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 30,
+            "burst": false
+          },
+          {
+            "frame": 944,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 30,
+            "burst": false
+          },
+          {
+            "frame": 946,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 948,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 950,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 50,
+            "burst": false
+          },
+          {
+            "frame": 952,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 50,
+            "burst": false
+          },
+          {
+            "frame": 954,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 956,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 958,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 70,
+            "burst": false
+          },
+          {
+            "frame": 960,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 70,
+            "burst": false
+          },
+          {
+            "frame": 962,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 80,
+            "burst": false
+          },
+          {
+            "frame": 964,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 80,
+            "burst": false
+          },
+          {
+            "frame": 966,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 90,
+            "burst": false
+          },
+          {
+            "frame": 968,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 90,
+            "burst": false
+          },
+          {
+            "frame": 970,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 100,
+            "burst": false
+          },
+          {
+            "frame": 972,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 100,
+            "burst": false
+          },
+          {
+            "frame": 974,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 110,
+            "burst": false
+          },
+          {
+            "frame": 976,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 110,
+            "burst": false
+          },
+          {
+            "frame": 978,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 120,
+            "burst": false
+          },
+          {
+            "frame": 980,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 120,
+            "burst": false
+          },
+          {
+            "frame": 982,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 130,
+            "burst": false
+          },
+          {
+            "frame": 984,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 130,
+            "burst": false
+          },
+          {
+            "frame": 986,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 140,
+            "burst": false
+          },
+          {
+            "frame": 988,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 140,
+            "burst": false
+          },
+          {
+            "frame": 990,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 150,
+            "burst": false
+          },
+          {
+            "frame": 992,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 150,
+            "burst": false
+          },
+          {
+            "frame": 994,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 160,
+            "burst": false
+          },
+          {
+            "frame": 996,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 160,
+            "burst": false
+          },
+          {
+            "frame": 998,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 170,
+            "burst": false
+          },
+          {
+            "frame": 1000,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 170,
+            "burst": false
+          },
+          {
+            "frame": 1002,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 180,
+            "burst": false
+          },
+          {
+            "frame": 1004,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 180,
+            "burst": false
+          },
+          {
+            "frame": 1006,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 190,
+            "burst": false
+          },
+          {
+            "frame": 1008,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 190,
+            "burst": false
+          },
+          {
+            "frame": 1010,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 200,
+            "burst": false
+          },
+          {
+            "frame": 1012,
+            "event": "burst_start",
+            "sp": 400,
+            "gauge": 0,
+            "burst": true
+          }
+        ]
+      },
+      {
+        "from": 6,
+        "to": 7,
+        "frames": [
+          {
+            "frame": 1038,
+            "event": "action_start",
+            "sp": 394,
+            "gauge": 0,
+            "burst": false
+          },
+          {
+            "frame": 1040,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 10,
+            "burst": false
+          },
+          {
+            "frame": 1042,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 10,
+            "burst": false
+          },
+          {
+            "frame": 1044,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 1046,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 20,
+            "burst": false
+          },
+          {
+            "frame": 1048,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 30,
+            "burst": false
+          },
+          {
+            "frame": 1050,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 30,
+            "burst": false
+          },
+          {
+            "frame": 1052,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 1054,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 40,
+            "burst": false
+          },
+          {
+            "frame": 1056,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 50,
+            "burst": false
+          },
+          {
+            "frame": 1058,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 50,
+            "burst": false
+          },
+          {
+            "frame": 1060,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 1062,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 60,
+            "burst": false
+          },
+          {
+            "frame": 1064,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 70,
+            "burst": false
+          },
+          {
+            "frame": 1066,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 70,
+            "burst": false
+          },
+          {
+            "frame": 1068,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 80,
+            "burst": false
+          },
+          {
+            "frame": 1070,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 80,
+            "burst": false
+          },
+          {
+            "frame": 1072,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 90,
+            "burst": false
+          },
+          {
+            "frame": 1074,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 90,
+            "burst": false
+          },
+          {
+            "frame": 1076,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 100,
+            "burst": false
+          },
+          {
+            "frame": 1078,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 100,
+            "burst": false
+          },
+          {
+            "frame": 1080,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 110,
+            "burst": false
+          },
+          {
+            "frame": 1082,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 110,
+            "burst": false
+          },
+          {
+            "frame": 1084,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 120,
+            "burst": false
+          },
+          {
+            "frame": 1086,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 120,
+            "burst": false
+          },
+          {
+            "frame": 1088,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 130,
+            "burst": false
+          },
+          {
+            "frame": 1090,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 130,
+            "burst": false
+          },
+          {
+            "frame": 1092,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 140,
+            "burst": false
+          },
+          {
+            "frame": 1094,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 140,
+            "burst": false
+          },
+          {
+            "frame": 1096,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 150,
+            "burst": false
+          },
+          {
+            "frame": 1098,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 150,
+            "burst": false
+          },
+          {
+            "frame": 1100,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 160,
+            "burst": false
+          },
+          {
+            "frame": 1102,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 160,
+            "burst": false
+          },
+          {
+            "frame": 1104,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 170,
+            "burst": false
+          },
+          {
+            "frame": 1106,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 170,
+            "burst": false
+          },
+          {
+            "frame": 1108,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 180,
+            "burst": false
+          },
+          {
+            "frame": 1110,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 180,
+            "burst": false
+          },
+          {
+            "frame": 1112,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 190,
+            "burst": false
+          },
+          {
+            "frame": 1114,
+            "event": "action_start",
+            "sp": 399,
+            "gauge": 190,
+            "burst": false
+          },
+          {
+            "frame": 1116,
+            "event": "action_end",
+            "sp": 400,
+            "gauge": 200,
+            "burst": false
+          },
+          {
+            "frame": 1118,
+            "event": "burst_start",
+            "sp": 400,
+            "gauge": 0,
+            "burst": true
+          }
+        ]
+      }
+    ]
+  }
+}

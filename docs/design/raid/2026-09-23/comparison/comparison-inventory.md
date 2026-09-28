@@ -1,0 +1,29 @@
+# レイド承認モック比較・検証対象
+
+指示SHA: `20f87f9a81b235a15eab6111237d8d18c665e569`
+
+| 対象 | 固定画像 | 確認内容 |
+|---|---|---|
+| 承認3面 desktop | `raid-approved-preview-1536.png` | 一覧・詳細・詳細下部の配置、余白、画像サイズ、装飾 |
+| 承認3面 mobile | `raid-approved-preview-390.png` | 390px幅での折返し、カード画像、下部ナビ |
+| 本体一覧 | `raid-body-top-390.png` | 正式敵・開催者・属性・HP・参加者・残り時間順・分類タブ |
+| 本体詳細 | `raid-body-detail-390.png` | 開催者、HP、参加者、詳細アクション、挑む導線 |
+| 本体詳細下部 | `raid-body-detail-lower-390.png` | 貢献、報酬資格、行動力CTA、下部余白 |
+
+画像はこのコミットにバイナリとして保存し、実装・検証記録と同一SHAで参照できる状態にする。属性画像は `public/ui/rarity/attribute-badge-*.png` の正式既存素材を使用し、レイド専用9 SVGは未承認制作物として扱う。
+
+## 今回の相違点対応
+
+| 相違点 | 対応結果 | 確認方法 |
+|---|---|---|
+| 説明文「残り時間が短い順」 | 本体Approved一覧、承認Preview、Redesign一覧から表示を削除。期限順ソートは維持 | ソース検索で対象文言なし、一覧画像で余白を再確認 |
+| 詳細スクロール | QA詳細の実スクロール領域を `.ui-hub-page-scroll` に統一し、幅7px・金色トラック／つまみを適用 | `scrollHeight=1045`、`clientHeight=844`、`scrollTop=201`、最下部到達を確認 |
+| 承認Previewスクロール | 3面パネルを固定ビューポート内の縦スクロール領域に変更。フッターは不透明stickyナビとしてカード内容を隠さない | 390px／desktop比較画像を更新 |
+| 詳細構図 | Heroを330pxから370pxへ変更し、画像表示領域・HP・アクション・下部CTAの縦比率を再調整 | 本体詳細／詳細下部画像を更新 |
+
+## 未修正点
+
+- ボス・背景など正式素材の差分は素材供給・正本マッピング待ち。簡易図形や別用途素材には置換していない。
+- 今回の比較では、ボス名・武将・属性・背景は `src/domain/redesign/raid.ts` の `RAID_MASTERS`（`encounter_flame` / `unlock_shadow`）を起点にした同一表示経路で確認した。旧 `raid_production_20260830.json` をGAME04正本とした前回記録は誤記として訂正済み。
+- マスターの全variant／武将IDは [master-connection.md](./master-connection.md) に固定記録した。
+- レイド専用SVG9種は未承認素材のまま。正式採用扱いにはしていない。

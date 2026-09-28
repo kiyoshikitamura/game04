@@ -1,0 +1,99 @@
+- iframe [active]:
+  - alert
+  - region "ゲーム画面":
+    - img "くノ一"
+    - generic: Lv.1
+    - strong: G2QA表示F
+    - generic "将来の同盟表示枠": ◇ 同盟 —
+    - button "アカウント連携": 未認証
+    - button "メニュー"
+    - generic: 銭 12,600
+    - generic: 輝石 200
+    - generic: 行動力 50/100
+    - main:
+      - region "お気に入り武将":
+        - iframe
+        - img "くノ一"
+      - navigation "本陣の操作":
+        - button "切替"
+        - button "任務 未受取の任務報酬":
+          - generic: 任務
+          - generic "未受取の任務報酬"
+        - button "商店":
+          - generic: 商店
+        - button "同盟・未解放" [disabled]:
+          - generic: 同盟
+          - generic: 未解放
+      - button "出陣の続き":
+        - strong: 出陣の続き
+      - button "領土侵攻":
+        - strong: 領土侵攻
+      - region "交流":
+        - button "活動"
+        - button "全体"
+        - button "DM"
+        - button "RQAWGst"
+        - button "共闘 Lv.1の援軍を求めています。 共闘を確認": 共闘 Lv.1の援軍を求めています。 ›
+        - time: 22時間前
+        - button "RQAWGstにDM"
+        - button "RQAPolA"
+        - button "共闘 Lv.12の援軍を求めています。 共闘を確認": 共闘 Lv.12の援軍を求めています。 ›
+        - time: 22時間前
+        - button "RQAPolAにDM"
+        - button "RQAWGst"
+        - button "共闘 Lv.1の援軍を求めています。 共闘を確認": 共闘 Lv.1の援軍を求めています。 ›
+        - time: 1日前
+        - button "RQAWGstにDM"
+        - button "交流を開く ›"
+      - button "商店 ›":
+        - strong: 商店
+        - generic: ›
+    - navigation "メインナビゲーション":
+      - button "本陣"
+      - button "出陣"
+      - button "武将"
+      - button "共闘"
+      - button "召喚"
+  - dialog "ログインボーナス" [active]:
+    - banner:
+      - heading "ログインボーナス" [level=2]
+      - button "閉じる": ×
+    - paragraph: 累計 1 日目の報酬を獲得しました。
+    - generic "累計30日ログイン報酬":
+      - button "1日目 ✓" [pressed]
+      - button "2日目"
+      - button "3日目"
+      - button "4日目"
+      - button "5日目"
+      - button "6日目"
+      - button "7日目"
+      - button "8日目"
+      - button "9日目"
+      - button "10日目"
+      - button "11日目"
+      - button "12日目"
+      - button "13日目"
+      - button "14日目"
+      - button "15日目"
+      - button "16日目"
+      - button "17日目"
+      - button "18日目"
+      - button "19日目"
+      - button "20日目"
+      - button "21日目"
+      - button "22日目"
+      - button "23日目"
+      - button "24日目"
+      - button "25日目"
+      - button "26日目"
+      - button "27日目"
+      - button "28日目"
+      - button "29日目"
+      - button "30日目"
+    - heading "1日目" [level=3]
+    - list:
+      - listitem: 織田信長の魂 ×2
+      - listitem: 銭 ×10,000
+    - paragraph: 30日で一巡します。ログインしなかった日は進みません。
+    - button "閉じる"
+- alert

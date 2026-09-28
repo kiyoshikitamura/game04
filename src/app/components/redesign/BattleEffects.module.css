@@ -1,0 +1,64 @@
+.effect {position:absolute;inset:12% -12% 13%;z-index:5;pointer-events:none;display:grid;place-items:center;color:#a9edff;isolation:isolate;}
+.effect svg {width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 5px currentColor);}
+.effect svg * {transform-box:fill-box;transform-origin:center;animation-duration:var(--effect-duration,400ms);animation-fill-mode:both;animation-timing-function:ease-out;}
+.effect[data-paused='true'] svg * {animation-play-state:paused;}
+.effect path,.effect circle,.effect ellipse {stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+.slashMark {animation-name:slashIn;}
+.slashMark path {fill:#d6f9ff;stroke:#63cfff;}
+.slashMark .edge {fill:none;stroke:white;stroke-width:3;}
+.slash_all {color:#73cfff;}
+.slash_all .slashMark {animation-name:sweep;}
+.impact,.impact_all {color:#ffd184;}
+.shock {animation-name:shock;}
+.shock path {fill:#fff1be;stroke:#ffc45a;}
+.shock circle {stroke-width:5;}
+.fracture {animation-name:spread;}
+.fracture path {stroke-width:3;}
+.flight {animation-name:flight;}
+.flight path {stroke-width:3;}
+.flight path:last-child {fill:white;}
+.landing {animation-name:landing;stroke-width:4!important;}
+.heal,.heal_all {color:#b1ffbb;}
+.healLight {animation-name:rise;}
+.healLight path {fill:#deffe4;stroke:#7efca1;}
+.healLight circle {fill:white;}
+.healSeal {animation-name:spread;}
+.atk_up {color:#ffaf5b;}.atk_down {color:#ef78a5;}.def_up {color:#7dceff;}.def_down {color:#b499fa;}.spd_up {color:#d7ff82;}
+.emblem {animation-name:emblem;}
+.emblem path {stroke-width:4;fill:#16243888;}
+.arrows {animation-name:rise;}
+.arrows path {stroke-width:4;}
+.atk_down .arrows,.def_down .arrows {animation-name:fall;}
+.def_down .emblem {animation-name:shatter;}
+.wind {animation-name:sweep;}
+.wind path {stroke-width:4;}
+.poison {color:#c999ff;}
+.poisonMist {animation-name:rise;}
+.poisonMist circle {fill:#883ec880;stroke:#d5f79b;}
+.poisonMist path {fill:#b969e2bb;stroke:#dcf5ab;}
+.blind {color:#967aae;}
+.darkMist {animation-name:smoke;}
+.darkMist ellipse,.darkMist circle {fill:#100d22b3;stroke:none;}
+.darkMist path {stroke:#c7b4e9;stroke-width:3;}
+.silence {color:#ffdb93;}
+.seal {animation-name:seal;}
+.seal path:first-child {fill:#eed8a6;stroke:#a54945;}
+.seal circle,.seal path:last-child {stroke:#a1334b;stroke-width:3;}
+.stun {color:#fff5a4;}
+.stars {animation-name:stagger;}
+.stars path {fill:#ffe87a;stroke:white;}
+@keyframes slashIn {0%{opacity:1;transform:scale(.5) translate(-15%,15%)}20%{opacity:1;transform:scale(1)}75%{opacity:1}100%{opacity:0;transform:scale(1.1)}}
+@keyframes sweep {0%{opacity:1;transform:translateX(-25%) scaleX(.6)}25%{opacity:1;transform:translateX(0) scaleX(1)}100%{opacity:0;transform:translateX(12%) scaleX(1.1)}}
+@keyframes shock {0%{opacity:1;transform:scale(.3)}16%{opacity:1;transform:scale(1.1)}40%{transform:scale(.93)}100%{opacity:0;transform:scale(1.15)}}
+@keyframes spread {0%{opacity:1;transform:scale(.2)}25%{opacity:1}100%{opacity:0;transform:scale(1.15)}}
+@keyframes flight {0%{opacity:1;transform:translate(-35%,35%)}20%{opacity:1}55%{opacity:1;transform:translate(0,0)}100%{opacity:0;transform:translate(5%,-5%)}}
+@keyframes landing {0%,40%{opacity:1;transform:scale(.2)}60%{opacity:1}100%{opacity:0;transform:scale(1.3)}}
+@keyframes rise {0%{opacity:1;transform:translateY(18%) scale(.8)}22%{opacity:1}75%{opacity:1}100%{opacity:0;transform:translateY(-12%) scale(1)}}
+@keyframes fall {0%{opacity:1;transform:translateY(-18%)}25%{opacity:1}100%{opacity:0;transform:translateY(15%)}}
+@keyframes emblem {0%{opacity:1;transform:scale(.6)}25%{opacity:1;transform:scale(1.08)}75%{opacity:1;transform:scale(1)}100%{opacity:0}}
+@keyframes shatter {0%{opacity:1;transform:scale(.8)}20%{opacity:1;transform:rotate(-5deg)}40%{transform:rotate(5deg)}100%{opacity:0;transform:scale(1.25) rotate(-8deg)}}
+@keyframes smoke {0%{opacity:1;transform:scale(.5)}30%{opacity:1}75%{opacity:.9}100%{opacity:0;transform:scale(1.12)}}
+@keyframes seal {0%{opacity:1;transform:translateY(-25%) rotate(-15deg)}25%{opacity:1;transform:translateY(0) rotate(5deg)}75%{opacity:1;transform:rotate(0)}100%{opacity:0}}
+@keyframes stagger {0%{opacity:1;transform:rotate(-15deg)}20%{opacity:1;transform:rotate(12deg)}40%{transform:rotate(-8deg)}65%{transform:rotate(5deg)}100%{opacity:0;transform:rotate(0)}}
+@media(prefers-reduced-motion:reduce){.effect svg * {animation-name:reducedFade!important;}}
+@keyframes reducedFade {0%{opacity:.85}80%{opacity:.85}100%{opacity:0}}

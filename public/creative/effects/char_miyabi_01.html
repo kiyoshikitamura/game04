@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>戦国姫 艶舞・黄緑光エフェクトモック</title>
+  <style>
+    :root { color-scheme: dark; font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100vh; display:grid; place-items:center; background:radial-gradient(circle at 50% 20%,#263326,#080d0a 72%); color:#f1f7e9; overflow:hidden; }
+    .app { display:grid; grid-template-columns:auto minmax(220px,290px); gap:18px; align-items:center; padding:14px; }
+    .stage { position:relative; width:min(52vh,92vw); aspect-ratio:768/1376; overflow:hidden; border:1px solid rgba(193,232,116,.3); border-radius:8px; background:#0d130f; box-shadow:0 18px 70px rgba(0,0,0,.65),0 0 32px rgba(164,218,74,.11); isolation:isolate; }
+    .background,.character,canvas { position:absolute; inset:0; width:100%; height:100%; }
+    .background { object-fit:cover; }
+    canvas { pointer-events:none; }
+    #rearFx { z-index:1; }
+    .character { z-index:2; inset:auto auto 4% 50%; width:78%; height:auto; transform:translateX(-50%); object-fit:contain; filter:drop-shadow(0 10px 12px rgba(0,0,0,.36)); transition:opacity .18s ease; }
+    .character.changing { opacity:0; }
+    #frontFx { z-index:3; }
+    .panel { padding:16px; border:1px solid rgba(193,232,116,.22); border-radius:10px; background:rgba(9,17,11,.92); box-shadow:0 12px 38px rgba(0,0,0,.38); backdrop-filter:blur(12px); max-height:94vh; overflow:auto; }
+    h1 { margin:0 0 6px; font-size:17px; letter-spacing:.08em; }
+    .sub { margin:0 0 14px; color:#ad9b7c; font-size:12px; line-height:1.6; }
+    .characters { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+    button { border:1px solid #6d5734; border-radius:6px; padding:8px 7px; background:linear-gradient(#33271a,#211910); color:#f0e5cf; cursor:pointer; font:inherit; font-size:12px; }
+    button:hover { border-color:#b38b4e; }
+    button.active { color:#fff7dc; border-color:#e0ad52; background:linear-gradient(#664a21,#3c2b18); box-shadow:inset 0 0 12px rgba(255,201,96,.12); }
+    #toggle { width:100%; margin-top:14px; }
+    label { display:block; margin-top:14px; font-size:12px; color:#c7b797; }
+    input { width:100%; accent-color:#a5d84c; }
+    .note { margin-top:14px; padding-top:12px; border-top:1px solid rgba(255,255,255,.09); font-size:11px; line-height:1.7; color:#8e806a; }
+    @media(max-width:760px) { body{overflow:auto}.app{grid-template-columns:1fr;justify-items:center}.stage{width:min(92vw,60vh)}.panel{width:min(92vw,460px);max-height:none} }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="stage" aria-label="黄緑色の光エフェクトプレビュー">
+      <img class="background" alt="琵琶湖畔の坂本城">
+      <canvas id="rearFx"></canvas>
+      <img id="character" class="character" alt="明智光秀">
+      <canvas id="frontFx"></canvas>
+    </section>
+    <aside class="panel">
+      <h1>汎用・黄緑光の漂い演出</h1>
+      <p class="sub">黄緑色のやわらかな光が画面全体をゆっくり漂い、それぞれ異なる周期で明滅します。</p>
+      <div id="characters" class="characters"></div>
+      <button id="toggle">一時停止</button>
+      <label>光の量 <span id="amountValue">100%</span></label>
+      <input id="amount" type="range" min="30" max="160" value="100">
+      <label>漂う速度 <span id="speedValue">100%</span></label>
+      <input id="speed" type="range" min="40" max="170" value="100">
+      <label>横方向の流れ <span id="windValue">0</span></label>
+      <input id="wind" type="range" min="-100" max="100" value="0">
+      <div class="note">演出内容：黄緑光の緩やかな漂い・個別明滅・自然な出現と消滅<br>画面上部にも常時見えるよう、全高に分散配置</div>
+    </aside>
+  </main>
+  <style>html,body{color-scheme:normal!important;margin:0!important;padding:0!important;background:transparent!important;overflow:hidden!important;width:100%;height:100%}body>:not(canvas){display:none!important}body>canvas{position:fixed!important;inset:0!important;width:100%!important;height:100%!important;pointer-events:none}</style><script>document.querySelectorAll('canvas').forEach(c=>document.body.appendChild(c));</script><script>
+    const W=768,H=1376,LOOP=18;
+    const characters=[
+      ['伊達政宗','assets/date_masamune.png'],['上杉謙信','assets/uesugi_kenshin.png'],
+      ['織田信長','assets/oda_nobunaga.png'],['真田幸村','assets/sanada_yukimura.png'],
+      ['前田慶次','assets/maeda_keiji.png'],['徳川家康','assets/tokugawa_ieyasu.png'],
+      ['武田信玄','assets/takeda_shingen.png'],['豊臣秀吉','assets/toyotomi_hideyoshi.png'],
+      ['本多忠勝','assets/honda_tadakatsu.png'],['明智光秀','assets/akechi_mitsuhide.png']
+    ];
+    const rear=document.querySelector('#rearFx'),front=document.querySelector('#frontFx');
+    const rearCtx=rear.getContext('2d'),frontCtx=front.getContext('2d');
+    const character=document.querySelector('#character'),list=document.querySelector('#characters');
+    const amount=document.querySelector('#amount'),speed=document.querySelector('#speed'),wind=document.querySelector('#wind');
+    const amountValue=document.querySelector('#amountValue'),speedValue=document.querySelector('#speedValue'),windValue=document.querySelector('#windValue'),toggle=document.querySelector('#toggle');
+    let intensity=1,speedRate=1,windRate=0,running=true,elapsed=0,previous=performance.now();
+    function setup(canvas,ctx){const dpr=Math.min(devicePixelRatio||1,2);canvas.width=W*dpr;canvas.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
+    setup(rear,rearCtx);setup(front,frontCtx);
+    characters.forEach(([name,src])=>{const button=document.createElement('button');button.textContent=name;button.className=name==='明智光秀'?'active':'';button.addEventListener('click',()=>{if(character.src.endsWith(src))return;document.querySelectorAll('.characters button').forEach(b=>b.classList.remove('active'));button.classList.add('active');character.classList.add('changing');const next=new Image();next.onload=()=>{character.src=src;character.alt=name;requestAnimationFrame(()=>character.classList.remove('changing'))};next.src=src});list.appendChild(button)});
+    const lights=Array.from({length:48},(_,i)=>({
+      x:42+((i*173)%684),y:52+((i*257)%1260),size:1.2+(i%6)*.42,
+      phase:(i*.79)%LOOP,driftX:18+(i%7)*5,driftY:12+(i%5)*4,
+      wobble:.22+(i%5)*.035,twinkle:.48+(i%6)*.075,offset:i*1.47
+    }));
+    function drawLights(ctx,time,foreground){ctx.save();ctx.globalCompositeOperation='lighter';const visibleCount=Math.round(lights.length*Math.min(intensity,1.6));lights.slice(0,visibleCount).forEach((p,i)=>{if((i%4===0)!==foreground)return;const t=(time*speedRate+p.phase)%LOOP;const appear=.34+.66*Math.pow(Math.max(0,Math.sin(t*p.twinkle+p.offset)),1.7);const breathe=.86+Math.sin(t*.52+p.offset)*.14;const alpha=appear*breathe*(foreground?.9:.6)*Math.min(intensity,1.18);let x=p.x+Math.sin(t*p.wobble+p.offset)*p.driftX+Math.sin(t*.13+i)*10+time*windRate*10;let y=p.y+Math.cos(t*(p.wobble*.77)+p.offset)*p.driftY+Math.sin(t*.11+i*.5)*7;x=((x+32)%W+W)%W-16;const radius=p.size*(foreground?5.6:4.7);const glow=ctx.createRadialGradient(x,y,0,x,y,radius);glow.addColorStop(0,`rgba(250,255,215,${alpha})`);glow.addColorStop(.16,`rgba(214,255,126,${alpha*.96})`);glow.addColorStop(.42,`rgba(158,224,65,${alpha*.56})`);glow.addColorStop(1,'rgba(91,168,36,0)');ctx.fillStyle=glow;ctx.beginPath();ctx.arc(x,y,radius,0,Math.PI*2);ctx.fill();ctx.fillStyle=`rgba(239,255,188,${Math.min(1,alpha*1.08)})`;ctx.beginPath();ctx.arc(x,y,Math.max(.8,p.size*.62),0,Math.PI*2);ctx.fill()});ctx.restore()}
+    function render(time){rearCtx.clearRect(0,0,W,H);frontCtx.clearRect(0,0,W,H);drawLights(rearCtx,time,false);drawLights(frontCtx,time,true)}
+    function frame(now){const dt=Math.min((now-previous)/1000,.05);previous=now;if(running)elapsed=(elapsed+dt)%LOOP;render(elapsed);requestAnimationFrame(frame)}
+    requestAnimationFrame(frame);
+    toggle.addEventListener('click',()=>{running=!running;toggle.textContent=running?'一時停止':'再生'});
+    amount.addEventListener('input',()=>{intensity=Number(amount.value)/100;amountValue.textContent=`${amount.value}%`});
+    speed.addEventListener('input',()=>{speedRate=Number(speed.value)/100;speedValue.textContent=`${speed.value}%`});
+    wind.addEventListener('input',()=>{windRate=Number(wind.value)/100;windValue.textContent=wind.value>0?`右 ${wind.value}`:wind.value<0?`左 ${Math.abs(wind.value)}`:'0'});
+    document.addEventListener('visibilitychange',()=>{previous=performance.now()});
+  </script>
+</body>
+</html>

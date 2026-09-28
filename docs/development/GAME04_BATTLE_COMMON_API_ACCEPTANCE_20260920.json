@@ -1,0 +1,193 @@
+{
+  "date": "2026-09-20",
+  "projectRef": "lrgyllgzcdcphlbmkknc",
+  "implementationSha": "b8675e16c325166ae9ff1215eef2795c0017edc9",
+  "edgeVersion": 7,
+  "masterVersion": "PREVIEW_PROVISIONAL_20260920_common_v2",
+  "qaUserId": "405319d7-c329-4074-bde3-52f8a3501ced",
+  "qaRoomId": "1a1d3bff-c495-4fea-b545-82f30d2d36fc",
+  "fixtureNotice": "QA専用ユーザー・ルーム。共有HP、Lv、保存済みstarted戦闘をSQLで設定した境界検証。正式バランス受入・実多人数競合の証明ではない。",
+  "results": [
+    {
+      "case": "raid-first",
+      "outcome": "win",
+      "rulesVersion": "common-v2-20260920",
+      "playerActions": 70,
+      "roomLevel": 1,
+      "sharedHp": 190240,
+      "wins": 1,
+      "rewardGrants": [
+        {
+          "id": "participation:405319d7-c329-4074-bde3-52f8a3501ced",
+          "level": 1,
+          "userId": "405319d7-c329-4074-bde3-52f8a3501ced",
+          "claimed": false,
+          "rewards": [
+            {
+              "kind": "skill_material",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "raid-second",
+      "outcome": "win",
+      "rulesVersion": "common-v2-20260920",
+      "playerActions": 62,
+      "roomLevel": 2,
+      "sharedHp": 240000,
+      "wins": 2,
+      "rewardGrants": [
+        {
+          "id": "participation:405319d7-c329-4074-bde3-52f8a3501ced",
+          "level": 1,
+          "userId": "405319d7-c329-4074-bde3-52f8a3501ced",
+          "claimed": false,
+          "rewards": [
+            {
+              "kind": "skill_material",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "raid-stale",
+      "outcome": "win",
+      "rulesVersion": "common-v2-20260920",
+      "playerActions": 70,
+      "roomLevel": 2,
+      "sharedHp": 240000,
+      "wins": 3,
+      "rewardGrants": [
+        {
+          "id": "participation:405319d7-c329-4074-bde3-52f8a3501ced",
+          "level": 1,
+          "userId": "405319d7-c329-4074-bde3-52f8a3501ced",
+          "claimed": false,
+          "rewards": [
+            {
+              "kind": "skill_material",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "raid-qualified",
+      "outcome": "win",
+      "rulesVersion": "common-v2-20260920",
+      "playerActions": 75,
+      "roomLevel": 3,
+      "sharedHp": 280000,
+      "wins": 4,
+      "rewardGrants": [
+        {
+          "id": "participation:405319d7-c329-4074-bde3-52f8a3501ced",
+          "level": 1,
+          "userId": "405319d7-c329-4074-bde3-52f8a3501ced",
+          "claimed": false,
+          "rewards": [
+            {
+              "kind": "skill_material",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "id": "defeat:2:405319d7-c329-4074-bde3-52f8a3501ced",
+          "level": 2,
+          "userId": "405319d7-c329-4074-bde3-52f8a3501ced",
+          "claimed": false,
+          "rewards": [
+            {
+              "kind": "skill_material",
+              "amount": 15
+            },
+            {
+              "kind": "equipment_material",
+              "amount": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "raid-lose",
+      "outcome": "lose",
+      "rulesVersion": "common-v2-20260920",
+      "playerActions": 4,
+      "roomLevel": 14,
+      "sharedHp": 279996,
+      "wins": 4,
+      "rewardGrants": [
+        {
+          "id": "participation:405319d7-c329-4074-bde3-52f8a3501ced",
+          "level": 1,
+          "userId": "405319d7-c329-4074-bde3-52f8a3501ced",
+          "claimed": false,
+          "rewards": [
+            {
+              "kind": "skill_material",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "id": "defeat:2:405319d7-c329-4074-bde3-52f8a3501ced",
+          "level": 2,
+          "userId": "405319d7-c329-4074-bde3-52f8a3501ced",
+          "claimed": false,
+          "rewards": [
+            {
+              "kind": "skill_material",
+              "amount": 15
+            },
+            {
+              "kind": "equipment_material",
+              "amount": 5
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "claimReplay": {
+    "pass": true,
+    "sameRequestId": "2a89fae3-80dd-4ea4-94d0-b3e008f24310",
+    "compared": [
+      "materials",
+      "cash",
+      "appliedAcquisitionIds"
+    ]
+  },
+  "questChecks": [
+    "旧確定結果の完全一致",
+    "旧started保存入力を同じ結果で再開",
+    "新Quest同一requestの並行2要求で同一seed・結果・1回消費",
+    "再送時の報酬二重付与なし"
+  ],
+  "questConcurrentRequestId": "5d7b0fe1-c7a8-4642-98ad-19d6ddfa6b08",
+  "existing14SnapshotDigestUnchanged": "a32d46f4f218ba4d1e57a4d511204f91",
+  "cleanup": "専用ルームのみexpired。既存進行・報酬履歴は削除しない。",
+  "browser": {
+    "url": "https://game04-git-codex-game04-upstream-20260918-kiyoshi-kitamura.vercel.app/qa/battle-common?scenario=interrupt&viewport=360",
+    "viewport": [
+      360,
+      780
+    ],
+    "checks": [
+      "SP400・独立ゲージ200",
+      "BURST中断フレーム149",
+      "横overflowなし326/326",
+      "中央ログ622.39px高・金色scrollbar・641件",
+      "limitシナリオ1339最終フレーム残0/300・敗北理由",
+      "main TAP TO START表示"
+    ],
+    "limitations": "Chromium代表ケース。実機Safari・全画面・ログインからの全操作は未検証。"
+  }
+}

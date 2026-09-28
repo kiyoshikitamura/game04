@@ -1,0 +1,924 @@
+{
+  "timestamp": "2026-09-24T01:42:42.573Z",
+  "project": "lrgyllgzcdcphlbmkknc",
+  "qaUserId": "8aab5b69-efc8-4b8e-9e9c-147a2102c2dc",
+  "checks": [
+    {
+      "label": "character level",
+      "action": "character_level",
+      "payload": {
+        "characterId": "char_alice_01",
+        "items": {
+          "small": 1
+        }
+      },
+      "status": 200,
+      "replay": true,
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "character awakening",
+      "action": "character_awaken",
+      "payload": {
+        "characterId": "char_alice_01"
+      },
+      "status": 200,
+      "replay": true,
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "character unlock",
+      "action": "character_unlock",
+      "payload": {
+        "characterId": "char_ageha_01"
+      },
+      "status": 200,
+      "replay": true,
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "soul exchange minimum ten",
+      "action": "soul_exchange",
+      "payload": {
+        "characterId": "char_alice_01",
+        "amount": 10
+      },
+      "status": 200,
+      "replay": true,
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "soul selection",
+      "action": "soul_select",
+      "payload": {
+        "characterId": "char_alice_01",
+        "amount": 1
+      },
+      "status": 200,
+      "replay": true,
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "skill LB",
+      "action": "skill_level",
+      "payload": {
+        "skillId": "SKILL_001"
+      },
+      "status": 200,
+      "replay": true,
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "equipment level",
+      "action": "equipment_level",
+      "payload": {
+        "instanceId": "character-qa-0924-0",
+        "items": {
+          "small": 1
+        }
+      },
+      "status": 200,
+      "replay": true,
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "equipment LB",
+      "action": "equipment_lb",
+      "payload": {
+        "instanceId": "character-qa-0924-0"
+      },
+      "status": 200,
+      "replay": true,
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "equipment protect",
+      "action": "equipment_lock",
+      "payload": {
+        "instanceId": "character-qa-0924-1",
+        "locked": true
+      },
+      "status": 200,
+      "replay": true,
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "protected dismantle rejected",
+      "action": "equipment_dismantle",
+      "payload": {
+        "instanceIds": [
+          "character-qa-0924-1"
+        ]
+      },
+      "status": 400,
+      "expectedError": "装備中・ロック中の装備は分解できません。",
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "deck persistence",
+      "action": "save_deck",
+      "payload": {
+        "deck": [
+          {
+            "skillIds": [
+              "SKILL_001"
+            ],
+            "equipment": {
+              "accessory1": "character-qa-0924-2"
+            },
+            "characterId": "char_alice_01"
+          },
+          {
+            "skillIds": [
+              "SKILL_002"
+            ],
+            "equipment": {},
+            "characterId": "char_gou_01"
+          },
+          {
+            "skillIds": [
+              "SKILL_003"
+            ],
+            "equipment": {},
+            "characterId": "char_kageyama_01"
+          }
+        ]
+      },
+      "status": 200,
+      "replay": true,
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "assigned dismantle rejected",
+      "action": "equipment_dismantle",
+      "payload": {
+        "instanceIds": [
+          "character-qa-0924-2"
+        ]
+      },
+      "status": 400,
+      "expectedError": "装備中・ロック中の装備は分解できません。",
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "trained confirmation required",
+      "action": "equipment_dismantle",
+      "payload": {
+        "instanceIds": [
+          "character-qa-0924-0"
+        ]
+      },
+      "status": 400,
+      "expectedError": "育成済み装備の分解確認が必要です。投入資源は返還されません。",
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "trained confirmed dismantle",
+      "action": "equipment_dismantle",
+      "payload": {
+        "instanceIds": [
+          "character-qa-0924-0"
+        ],
+        "confirmTrained": true
+      },
+      "status": 200,
+      "replay": true,
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "single dismantle",
+      "action": "equipment_dismantle",
+      "payload": {
+        "instanceIds": [
+          "character-qa-0924-3"
+        ]
+      },
+      "status": 200,
+      "replay": true,
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "bulk dismantle",
+      "action": "equipment_dismantle",
+      "payload": {
+        "instanceIds": [
+          "character-qa-0924-4",
+          "character-qa-0924-5"
+        ]
+      },
+      "status": 200,
+      "replay": true,
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "insufficient EXP rejected",
+      "action": "character_level",
+      "payload": {
+        "characterId": "char_alice_01",
+        "items": {
+          "small": 999999
+        }
+      },
+      "status": 400,
+      "expectedError": "EXPアイテムが不足しています。",
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "insufficient souls rejected",
+      "action": "soul_exchange",
+      "payload": {
+        "characterId": "char_alice_01",
+        "amount": 1000000
+      },
+      "status": 400,
+      "expectedError": "固有魂が不足しています。",
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "invalid exchange below ten",
+      "action": "soul_exchange",
+      "payload": {
+        "characterId": "char_alice_01",
+        "amount": 2
+      },
+      "status": 400,
+      "expectedError": "固有魂を10個以上・2個単位で指定してください。",
+      "actualError": "固有魂を10個以上、2個単位で指定してください。",
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "already owned unlock rejected",
+      "action": "character_unlock",
+      "payload": {
+        "characterId": "char_alice_01"
+      },
+      "status": 400,
+      "expectedError": "この武将は既に所持しています。",
+      "actualError": "この武将は既に所持しています。",
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "character reach unlocked cap",
+      "action": "character_level",
+      "payload": {
+        "characterId": "char_gou_01",
+        "items": {
+          "xlarge": 200
+        }
+      },
+      "status": 200,
+      "replay": true,
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "character level cap rejected",
+      "action": "character_level",
+      "payload": {
+        "characterId": "char_gou_01",
+        "items": {
+          "small": 1
+        }
+      },
+      "status": 400,
+      "expectedError": "解放済みLv上限です。",
+      "actualError": "解放済みLv上限です。",
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "equipment reach unlocked cap",
+      "action": "equipment_level",
+      "payload": {
+        "instanceId": "character-qa-0924-1",
+        "items": {
+          "xlarge": 200
+        }
+      },
+      "status": 200,
+      "replay": true,
+      "reload": true,
+      "pass": true
+    },
+    {
+      "label": "equipment level cap rejected",
+      "action": "equipment_level",
+      "payload": {
+        "instanceId": "character-qa-0924-1",
+        "items": {
+          "small": 1
+        }
+      },
+      "status": 400,
+      "expectedError": "解放済みLv上限です。",
+      "actualError": "解放済みLv上限です。",
+      "reload": true,
+      "pass": true
+    }
+  ],
+  "initial": {
+    "cash": 2000000,
+    "characters": [
+      {
+        "id": "char_alice_01",
+        "exp": 0,
+        "level": 1,
+        "awakening": 0,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "id": "char_gou_01",
+        "exp": 0,
+        "level": 1,
+        "awakening": 0,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "id": "char_kageyama_01",
+        "exp": 0,
+        "level": 1,
+        "awakening": 0,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "id": "char_kenji_01",
+        "exp": 0,
+        "level": 1,
+        "awakening": 0,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "id": "char_long_01",
+        "exp": 0,
+        "level": 1,
+        "awakening": 0,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      }
+    ],
+    "souls": {
+      "char_go_01": 500,
+      "char_aoi_01": 500,
+      "char_gou_01": 500,
+      "char_joe_01": 500,
+      "char_leo_01": 500,
+      "char_mei_01": 500,
+      "char_mio_01": 500,
+      "char_noa_01": 500,
+      "char_ren_01": 500,
+      "char_rin_01": 500,
+      "char_rui_01": 500,
+      "char_leon_01": 500,
+      "char_long_01": 500,
+      "char_mark_01": 500,
+      "char_maya_01": 500,
+      "char_riki_01": 500,
+      "char_shin_01": 500,
+      "char_shun_01": 500,
+      "char_sora_01": 500,
+      "char_yuji_01": 500,
+      "char_yuki_01": 500,
+      "char_ageha_01": 500,
+      "char_alice_01": 500,
+      "char_chang_01": 500,
+      "char_genji_01": 500,
+      "char_kaede_01": 500,
+      "char_kaito_01": 500,
+      "char_karen_01": 500,
+      "char_kengo_01": 500,
+      "char_kenji_01": 500,
+      "char_lucas_01": 500,
+      "char_naoto_01": 500,
+      "char_reiji_01": 500,
+      "char_reina_01": 500,
+      "char_sawat_01": 500,
+      "char_seiya_01": 500,
+      "char_shion_01": 500,
+      "char_souta_01": 500,
+      "char_taiga_01": 500,
+      "char_tetsu_01": 500,
+      "char_cecile_01": 500,
+      "char_daimon_01": 500,
+      "char_jihoon_01": 500,
+      "char_koharu_01": 500,
+      "char_makoto_01": 500,
+      "char_masato_01": 500,
+      "char_minami_01": 500,
+      "char_miyabi_01": 500,
+      "char_momoko_01": 500,
+      "char_sakura_01": 500,
+      "char_serika_01": 500,
+      "char_takuro_01": 500,
+      "char_tomoya_01": 500,
+      "char_yukina_01": 500,
+      "char_martina_01": 500,
+      "char_takeshi_01": 500,
+      "char_tatsuya_01": 500,
+      "char_kageyama_01": 500,
+      "char_ren_male_01": 500,
+      "char_yoshihiko_01": 500
+    },
+    "skills": [
+      {
+        "id": "SKILL_001",
+        "level": 0
+      },
+      {
+        "id": "SKILL_002",
+        "level": 0
+      },
+      {
+        "id": "SKILL_003",
+        "level": 0
+      },
+      {
+        "id": "SKILL_004",
+        "level": 0
+      },
+      {
+        "id": "SKILL_005",
+        "level": 0
+      },
+      {
+        "id": "SKILL_006",
+        "level": 0
+      },
+      {
+        "id": "SKILL_007",
+        "level": 0
+      },
+      {
+        "id": "SKILL_008",
+        "level": 0
+      }
+    ],
+    "equipment": [
+      {
+        "lb": 0,
+        "exp": 0,
+        "level": 1,
+        "masterId": "ACCESSORY_001",
+        "instanceId": "character-qa-0924-0",
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "lb": 0,
+        "exp": 0,
+        "level": 1,
+        "masterId": "ACCESSORY_002",
+        "instanceId": "character-qa-0924-1",
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "lb": 0,
+        "exp": 0,
+        "level": 1,
+        "masterId": "ACCESSORY_003",
+        "instanceId": "character-qa-0924-2",
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "lb": 0,
+        "exp": 0,
+        "level": 1,
+        "masterId": "ACCESSORY_004",
+        "instanceId": "character-qa-0924-3",
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "lb": 0,
+        "exp": 0,
+        "level": 1,
+        "masterId": "ACCESSORY_005",
+        "instanceId": "character-qa-0924-4",
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "lb": 0,
+        "exp": 0,
+        "level": 1,
+        "masterId": "ACCESSORY_006",
+        "instanceId": "character-qa-0924-5",
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "lb": 0,
+        "exp": 0,
+        "level": 1,
+        "masterId": "ACCESSORY_007",
+        "instanceId": "character-qa-0924-6",
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "lb": 0,
+        "exp": 0,
+        "level": 1,
+        "masterId": "ACCESSORY_008",
+        "instanceId": "character-qa-0924-7",
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "lb": 0,
+        "exp": 0,
+        "level": 1,
+        "masterId": "ACCESSORY_009",
+        "instanceId": "character-qa-0924-8",
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "lb": 0,
+        "exp": 0,
+        "level": 1,
+        "masterId": "ACCESSORY_010",
+        "instanceId": "character-qa-0924-9",
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "lb": 0,
+        "exp": 0,
+        "level": 1,
+        "masterId": "ACCESSORY_011",
+        "instanceId": "character-qa-0924-10",
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "lb": 0,
+        "exp": 0,
+        "level": 1,
+        "masterId": "ACCESSORY_012",
+        "instanceId": "character-qa-0924-11",
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      }
+    ],
+    "materials": {
+      "skill": 1000,
+      "unlock": 1,
+      "character": 20,
+      "equipment": 20,
+      "equipmentLb": 1000
+    },
+    "growthInventory": {
+      "carryExp": {
+        "character": 0,
+        "equipment": 0
+      },
+      "expItems": {
+        "character": {
+          "large": 200,
+          "small": 200,
+          "medium": 200,
+          "xlarge": 200
+        },
+        "equipment": {
+          "large": 200,
+          "small": 200,
+          "medium": 200,
+          "xlarge": 200
+        }
+      },
+      "genericSouls": {
+        "N": 500,
+        "R": 500,
+        "SR": 500,
+        "SSR": 500
+      },
+      "soulSelectors": {
+        "N": 5,
+        "R": 5,
+        "SR": 5,
+        "SSR": 5
+      }
+    },
+    "deck": [
+      {
+        "skillIds": [
+          "SKILL_001"
+        ],
+        "equipment": {},
+        "characterId": "char_alice_01"
+      },
+      {
+        "skillIds": [
+          "SKILL_002"
+        ],
+        "equipment": {},
+        "characterId": "char_gou_01"
+      },
+      {
+        "skillIds": [
+          "SKILL_003"
+        ],
+        "equipment": {},
+        "characterId": "char_kageyama_01"
+      }
+    ]
+  },
+  "previousFailures": [
+    {
+      "label": "invalid exchange below ten",
+      "action": "soul_exchange",
+      "payload": {
+        "characterId": "char_alice_01",
+        "amount": 2
+      },
+      "status": 400,
+      "expectedError": "固有魂を10個以上・2個単位で指定してください。",
+      "pass": false,
+      "failure": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '固有魂を10個以上、2個単位で指定してください。'\n- '固有魂を10個以上・2個単位で指定してください。'\n            ^\n"
+    }
+  ],
+  "final": {
+    "cash": 1907395,
+    "characters": [
+      {
+        "id": "char_alice_01",
+        "exp": 100,
+        "level": 3,
+        "awakening": 1,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "id": "char_gou_01",
+        "exp": 63850,
+        "level": 50,
+        "awakening": 0,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "id": "char_kageyama_01",
+        "exp": 0,
+        "level": 1,
+        "awakening": 0,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "id": "char_kenji_01",
+        "exp": 0,
+        "level": 1,
+        "awakening": 0,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "id": "char_long_01",
+        "exp": 0,
+        "level": 1,
+        "awakening": 0,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "id": "char_ageha_01",
+        "exp": 0,
+        "level": 1,
+        "awakening": 0,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      }
+    ],
+    "souls": {
+      "char_go_01": 500,
+      "char_aoi_01": 500,
+      "char_gou_01": 500,
+      "char_joe_01": 500,
+      "char_leo_01": 500,
+      "char_mei_01": 500,
+      "char_mio_01": 500,
+      "char_noa_01": 500,
+      "char_ren_01": 500,
+      "char_rin_01": 500,
+      "char_rui_01": 500,
+      "char_leon_01": 500,
+      "char_long_01": 500,
+      "char_mark_01": 500,
+      "char_maya_01": 500,
+      "char_riki_01": 500,
+      "char_shin_01": 500,
+      "char_shun_01": 500,
+      "char_sora_01": 500,
+      "char_yuji_01": 500,
+      "char_yuki_01": 500,
+      "char_ageha_01": 420,
+      "char_alice_01": 496,
+      "char_chang_01": 500,
+      "char_genji_01": 500,
+      "char_kaede_01": 500,
+      "char_kaito_01": 500,
+      "char_karen_01": 500,
+      "char_kengo_01": 500,
+      "char_kenji_01": 500,
+      "char_lucas_01": 500,
+      "char_naoto_01": 500,
+      "char_reiji_01": 500,
+      "char_reina_01": 500,
+      "char_sawat_01": 500,
+      "char_seiya_01": 500,
+      "char_shion_01": 500,
+      "char_souta_01": 500,
+      "char_taiga_01": 500,
+      "char_tetsu_01": 500,
+      "char_cecile_01": 500,
+      "char_daimon_01": 500,
+      "char_jihoon_01": 500,
+      "char_koharu_01": 500,
+      "char_makoto_01": 500,
+      "char_masato_01": 500,
+      "char_minami_01": 500,
+      "char_miyabi_01": 500,
+      "char_momoko_01": 500,
+      "char_sakura_01": 500,
+      "char_serika_01": 500,
+      "char_takuro_01": 500,
+      "char_tomoya_01": 500,
+      "char_yukina_01": 500,
+      "char_martina_01": 500,
+      "char_takeshi_01": 500,
+      "char_tatsuya_01": 500,
+      "char_kageyama_01": 500,
+      "char_ren_male_01": 500,
+      "char_yoshihiko_01": 500
+    },
+    "skills": [
+      {
+        "id": "SKILL_001",
+        "level": 1
+      },
+      {
+        "id": "SKILL_002",
+        "level": 0
+      },
+      {
+        "id": "SKILL_003",
+        "level": 0
+      },
+      {
+        "id": "SKILL_004",
+        "level": 0
+      },
+      {
+        "id": "SKILL_005",
+        "level": 0
+      },
+      {
+        "id": "SKILL_006",
+        "level": 0
+      },
+      {
+        "id": "SKILL_007",
+        "level": 0
+      },
+      {
+        "id": "SKILL_008",
+        "level": 0
+      }
+    ],
+    "equipment": [
+      {
+        "lb": 0,
+        "exp": 38310,
+        "level": 50,
+        "locked": true,
+        "masterId": "ACCESSORY_002",
+        "instanceId": "character-qa-0924-1",
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "lb": 0,
+        "exp": 0,
+        "level": 1,
+        "masterId": "ACCESSORY_003",
+        "instanceId": "character-qa-0924-2",
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "lb": 0,
+        "exp": 0,
+        "level": 1,
+        "masterId": "ACCESSORY_007",
+        "instanceId": "character-qa-0924-6",
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "lb": 0,
+        "exp": 0,
+        "level": 1,
+        "masterId": "ACCESSORY_008",
+        "instanceId": "character-qa-0924-7",
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "lb": 0,
+        "exp": 0,
+        "level": 1,
+        "masterId": "ACCESSORY_009",
+        "instanceId": "character-qa-0924-8",
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "lb": 0,
+        "exp": 0,
+        "level": 1,
+        "masterId": "ACCESSORY_010",
+        "instanceId": "character-qa-0924-9",
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "lb": 0,
+        "exp": 0,
+        "level": 1,
+        "masterId": "ACCESSORY_011",
+        "instanceId": "character-qa-0924-10",
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      },
+      {
+        "lb": 0,
+        "exp": 0,
+        "level": 1,
+        "masterId": "ACCESSORY_012",
+        "instanceId": "character-qa-0924-11",
+        "growthVersion": "APPROVED_GROWTH_V1_20260921"
+      }
+    ],
+    "materials": {
+      "skill": 999,
+      "unlock": 1,
+      "character": 20,
+      "equipment": 20,
+      "equipmentLb": 1003
+    },
+    "growthInventory": {
+      "carryExp": {
+        "character": 16150,
+        "equipment": 1690
+      },
+      "expItems": {
+        "character": {
+          "large": 200,
+          "small": 199,
+          "medium": 200,
+          "xlarge": 196
+        },
+        "equipment": {
+          "large": 200,
+          "small": 199,
+          "medium": 200,
+          "xlarge": 198
+        }
+      },
+      "genericSouls": {
+        "N": 505,
+        "R": 500,
+        "SR": 500,
+        "SSR": 500
+      },
+      "soulSelectors": {
+        "N": 4,
+        "R": 5,
+        "SR": 5,
+        "SSR": 5
+      }
+    },
+    "deck": [
+      {
+        "skillIds": [
+          "SKILL_001"
+        ],
+        "equipment": {
+          "accessory1": "character-qa-0924-2"
+        },
+        "characterId": "char_alice_01"
+      },
+      {
+        "skillIds": [
+          "SKILL_002"
+        ],
+        "equipment": {},
+        "characterId": "char_gou_01"
+      },
+      {
+        "skillIds": [
+          "SKILL_003"
+        ],
+        "equipment": {},
+        "characterId": "char_kageyama_01"
+      }
+    ]
+  },
+  "completed": true
+}

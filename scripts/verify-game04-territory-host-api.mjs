@@ -1,0 +1,17 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+const dir='/tmp/game04-territory-host-qa/';const c=JSON.parse(fs.readFileSync(new URL('../config/game04-preview-public.json',import.meta.url)));assert.equal(c.supabaseUrl,'https://lrgyllgzcdcphlbmkknc.supabase.co');
+let session;if(fs.existsSync(dir+'session.json'))session=JSON.parse(fs.readFileSync(dir+'session.json'));else{const r=await fetch(c.supabaseUrl+'/auth/v1/signup',{method:'POST',headers:{apikey:c.supabaseAnonKey,'Content-Type':'application/json'},body:JSON.stringify({data:{qa:true,purpose:'game04-territory-host-20260920'}}),signal:AbortSignal.timeout(60000)});session=await r.json();assert.equal(r.status,200);fs.writeFileSync(dir+'session.json',JSON.stringify(session),{mode:0o600});}
+const headers={apikey:c.supabaseAnonKey,Authorization:`Bearer ${session.access_token}`,'Content-Type':'application/json'};
+const call=async(path,body)=>{const r=await fetch(c.supabaseUrl+path,{method:'POST',headers,body:JSON.stringify(body),signal:AbortSignal.timeout(60000)});const text=await r.text();let data;try{data=JSON.parse(text)}catch{data={error:'non-json upstream'};}return {status:r.status,body:data};};
+const api=(action,payload={},requestId=crypto.randomUUID())=>call('/functions/v1/game04-redesign-api',{action,payload,requestId});
+const init=await call('/rest/v1/rpc/initialize_current_player',{p_username:'QA領土主催20',p_invite_code:null});assert.equal(init.status,200);console.log('initialized',session.user.id);
+const initial=await api('get_state');assert.equal(initial.status,200,JSON.stringify(initial));fs.writeFileSync(dir+'initial.json',JSON.stringify(initial.body));console.log('initial',initial.body.territory?.level,initial.body.state?.materials?.unlock);
+if(process.argv.includes('--init-only'))process.exit(0);
+const blocked=await api('territory_host',{destinationId:'gifu'});assert.equal(blocked.status,400);console.log('level blocked',blocked.status);
+const requests=[crypto.randomUUID(),crypto.randomUUID()];fs.writeFileSync(dir+'requests.json',JSON.stringify(requests));
+const concurrent=await Promise.all(requests.map(id=>api('territory_host',{destinationId:'azuchi'},id)));console.log('concurrent',concurrent.map(r=>r.status));assert.equal(concurrent.filter(r=>r.status===200).length,1,JSON.stringify(concurrent.map(r=>({status:r.status,error:r.body.error}))));
+const successfulIndex=concurrent.findIndex(r=>r.status===200);const result=concurrent[successfulIndex];const room=result.body.territoryRoomId;assert.ok(room);
+const retry=await api('territory_host',{destinationId:'azuchi'},requests[successfulIndex]);assert.equal(retry.status,200);assert.equal(retry.body.territoryRoomId,room);
+const final=await api('get_state');assert.equal(final.status,200);assert.equal(final.body.state.materials.unlock,initial.body.state.materials.unlock-1);assert.equal(final.body.territory.activeHostingCount,1);
+const wrong=await api('territory_host',{destinationId:'gifu'},requests[successfulIndex]);assert.equal(wrong.status,400);
+const report={user:session.user.id,initialLevel:initial.body.territory.level,initialItems:initial.body.state.materials.unlock,blockedLevel:blocked.status,concurrent:concurrent.map(r=>({status:r.status,error:r.body.error??null})),room,repeatRoom:retry.body.territoryRoomId,finalItems:final.body.state.materials.unlock,activeHostingCount:final.body.territory.activeHostingCount,differentPayloadReplay:wrong.status};fs.writeFileSync(dir+'acceptance.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));

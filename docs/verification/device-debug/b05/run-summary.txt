@@ -1,0 +1,169 @@
+{
+  "cases": {
+    "usable": {
+      "seed": 1,
+      "starts": 7,
+      "actions": 5,
+      "end": "five_actions",
+      "cutIns": 5
+    },
+    "spShortage": {
+      "seed": 1,
+      "starts": 12,
+      "actions": 5,
+      "end": "five_actions",
+      "cutIns": 5
+    },
+    "mixed": {
+      "seed": 1,
+      "starts": 8,
+      "actions": 5,
+      "end": "five_actions",
+      "cutIns": 5
+    },
+    "condition": {
+      "seed": 1,
+      "starts": 7,
+      "actions": 5,
+      "end": "five_actions",
+      "cutIns": 5
+    },
+    "priority": {
+      "seed": 1,
+      "starts": 7,
+      "actions": 5,
+      "end": "five_actions",
+      "cutIns": 5
+    },
+    "notEquipped": {
+      "seed": 1,
+      "starts": 12,
+      "actions": 5,
+      "end": "five_actions",
+      "cutIns": 5
+    },
+    "death": {
+      "seed": 1,
+      "starts": 1,
+      "actions": 1,
+      "end": "actor_dead",
+      "cutIns": 1
+    },
+    "kill": {
+      "seed": 1,
+      "starts": 1,
+      "actions": 3,
+      "end": "enemies_defeated",
+      "cutIns": 3
+    },
+    "stun": {
+      "seed": 1,
+      "starts": 12,
+      "actions": 1,
+      "end": "stunned",
+      "cutIns": 2
+    },
+    "assist": {
+      "seed": 1,
+      "starts": 19,
+      "actions": 5,
+      "end": "five_actions",
+      "cutIns": 5
+    }
+  },
+  "saved": [
+    {
+      "stage": "mikawa-1",
+      "starts": 1,
+      "episodes": [
+        {
+          "start": 32,
+          "end": 64,
+          "actions": 5,
+          "reason": "five_actions",
+          "cutIns": 5
+        }
+      ]
+    },
+    {
+      "stage": "mikawa-2",
+      "starts": 2,
+      "episodes": [
+        {
+          "start": 28,
+          "end": 70,
+          "actions": 5,
+          "reason": "five_actions",
+          "cutIns": 5
+        },
+        {
+          "start": 103,
+          "end": 134,
+          "actions": 5,
+          "reason": "enemies_defeated",
+          "cutIns": 5
+        }
+      ]
+    },
+    {
+      "stage": "mikawa-3",
+      "starts": 1,
+      "episodes": [
+        {
+          "start": 66,
+          "end": 92,
+          "actions": 5,
+          "reason": "five_actions",
+          "cutIns": 5
+        }
+      ]
+    },
+    {
+      "stage": "mikawa-4",
+      "starts": 2,
+      "episodes": [
+        {
+          "start": 28,
+          "end": 65,
+          "actions": 5,
+          "reason": "five_actions",
+          "cutIns": 5
+        },
+        {
+          "start": 193,
+          "end": 225,
+          "actions": 5,
+          "reason": "five_actions",
+          "cutIns": 5
+        }
+      ]
+    },
+    {
+      "stage": "mikawa-5",
+      "starts": 3,
+      "episodes": [
+        {
+          "start": 38,
+          "end": 70,
+          "actions": 5,
+          "reason": "five_actions",
+          "cutIns": 5
+        },
+        {
+          "start": 105,
+          "end": 131,
+          "actions": 5,
+          "reason": "five_actions",
+          "cutIns": 5
+        },
+        {
+          "start": 168,
+          "end": 173,
+          "actions": 1,
+          "reason": "enemies_defeated",
+          "cutIns": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const ts = require('typescript');
+const React = require('react');
+const source = fs.readFileSync('src/app/components/redesign/GrowthView.tsx','utf8');
+const start=source.indexOf('function Modal({title,'); const end=source.indexOf('\nexport default function GrowthView',start);
+const js=ts.transpile(source.slice(start,end),{jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2020,module:ts.ModuleKind.CommonJS});
+const local=new Function('require','CentralModal','exports',js+'\nreturn Modal;')(require, 'central-dialog', {});
+const props={title:'育成',onClose:()=>{},children:React.createElement('button',null,'戻る')};
+const pending=local({...props,pending:true});
+assert.equal(pending.props.closeDisabled,true);
+assert.equal(pending.props.children[1].props.inert,true);
+assert.equal(pending.props.hideCloseButton,false);
+const settled=local(props); assert.equal(settled.props.closeDisabled,false); assert.equal(settled.props.children[1].props.inert,false);
+const result=local({...props,resultOnly:true}); assert.equal(result.props.hideCloseButton,true); assert.equal(result.props.closeDisabled,true); assert.equal(result.props.children[1].props.inert,false);
+const calls=[...source.matchAll(/<Modal\s([^>]+)/g)]; assert.ok(calls.length>5); assert.ok(calls.every(call=>call[1].includes('pending={saving}')),'all local dialogs guard saving');
+const centralSource=fs.readFileSync('src/app/components/redesign/Modal.tsx','utf8');
+const centralJs=ts.transpile(centralSource,{jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2020,module:ts.ModuleKind.CommonJS,esModuleInterop:true});
+const mockReact={...React,useId:()=> 'qa',useRef:value=>({current:value}),useEffect:()=>{},useLayoutEffect:()=>{}};
+const moduleExports={};
+new Function('require','exports','document',centralJs)(name=>name==='react'?mockReact:name==='react-dom'?{createPortal:node=>node}:name.includes('dialogPresence')?{registerPresentedDialog:()=>{}}:require(name),moduleExports,{body:{}});
+const central=moduleExports.default;
+function buttons(node){ if(!node||typeof node!=='object')return []; return [...(node.type==='button'?[node]:[]),...React.Children.toArray(node.props?.children).flatMap(buttons)]; }
+let closed=0; const normal=central({...props,onClose:()=>closed++}); assert.equal(buttons(normal).length,2,'default header close preserved');
+normal.props.onMouseDown({target:1,currentTarget:1}); assert.equal(closed,1);
+const locked=central({...props,onClose:()=>closed++,closeDisabled:true}); locked.props.onMouseDown({target:1,currentTarget:1}); assert.equal(closed,1); assert.equal(buttons(locked)[0].props.disabled,true);
+const resultTree=central({...props,onClose:()=>closed++,closeDisabled:true,hideCloseButton:true}); assert.equal(buttons(resultTree).length,1,'result header close absent from DOM, lower CTA remains'); resultTree.props.onMouseDown({target:1,currentTarget:1}); assert.equal(closed,1);
+console.log('PASS G2 growth dialog: saving inert/close lock, settled recovery, all callers, result header DOM removal, default modal compatibility');

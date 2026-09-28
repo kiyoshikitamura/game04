@@ -1,0 +1,33 @@
+{
+  "candidate": "GAME04 G3 isolated API v3",
+  "deploymentDigest": "f0e4aa527baf6cf0cf0c49cb81f154486ff5d4b1170ba45f1feea388dfadc679",
+  "observedAt": "2026-09-25T10:30:53.153Z",
+  "projectRef": "znakrkaazliexzwihxge",
+  "method": "One browser-equivalent CORS preflight containing x-region, followed by one authenticated read-only status request. No draw or fixture mutation.",
+  "preflight": {
+    "status": 200,
+    "elapsedMs": 8668,
+    "allowOrigin": "*",
+    "allowHeaders": "authorization, apikey, content-type, x-client-info, x-region",
+    "allowMethods": "POST, OPTIONS",
+    "servedRegion": "us-east-2"
+  },
+  "readback": {
+    "status": 200,
+    "elapsedMs": 9064,
+    "servedRegion": "eu-central-1",
+    "masterVersion": "GAME04_G3_FORMAL_20260925",
+    "stateVersion": 9
+  },
+  "conclusion": {
+    "corsAllowsOfficialSdkRegionHeader": true,
+    "authenticatedReadSucceeded": true,
+    "performanceAcceptance": false,
+    "outstanding": [
+      "Fresh interactive credential relogin remains NOT_TESTED; refresh-token restoration is not equivalent.",
+      "A post-v3 mutating browser flow remains owned by the final browser candidate; this evidence is read-only.",
+      "The JST boundary was verified by domain/DB guards and the isolated free-ten success, but no test intentionally crossed the real JST midnight boundary end to end."
+    ]
+  },
+  "containsCredentials": false
+}

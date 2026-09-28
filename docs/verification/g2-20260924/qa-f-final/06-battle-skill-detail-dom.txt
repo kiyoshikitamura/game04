@@ -1,0 +1,79 @@
+- iframe [active]:
+  - alert
+  - region "ゲーム画面":
+    - main:
+      - region "1-1":
+        - img "戦国姫艶武"
+        - strong: WAVE 1/1
+        - button "再生速度 1倍": ▶▶ ×1
+        - button "再開": ▶
+        - button "女侍の戦闘詳細":
+          - img "土"
+          - generic: Lv.1
+          - text: 女侍
+          - text: "142"
+          - generic: / 650
+          - text: あと
+          - generic: "4"
+        - generic "女侍の状態"
+        - strong: "48"
+        - button "漁師の戦闘詳細":
+          - img "水"
+          - generic: Lv.1
+          - text: 漁師
+          - text: "0"
+          - generic: / 450
+          - generic: 撃破
+        - generic "漁師の状態"
+        - generic: 女侍 −48
+        - generic: 共通SP
+        - meter "共通SP":
+          - strong: 68 / 400
+        - generic "BURSTは戦闘記録に従って自動発動します":
+          - text: BURST
+          - generic: 20/200
+        - meter "バーストゲージ"
+        - generic: "1"
+        - button "くノ一の戦闘詳細":
+          - generic: くノ一
+          - generic: Lv.1
+          - generic: "585"
+          - generic: / 588
+        - generic "くノ一の状態":
+          - button "防↑ 残り3回":
+            - generic: "3"
+        - button "優先1 一文字斬り：発動可能"
+        - generic: "2"
+        - button "伝令の戦闘詳細":
+          - generic: 伝令
+          - generic: Lv.1
+          - generic: "705"
+          - generic: / 705
+        - generic "伝令の状態"
+        - button "優先1 竹束の守り：発動可能"
+        - generic: "3"
+        - generic: 行動中
+        - button "僧兵の戦闘詳細":
+          - generic: 僧兵
+          - generic: Lv.1
+          - generic: "882"
+          - generic: / 882
+        - generic "僧兵の状態":
+          - button "防↑ 残り3回":
+            - generic: "3"
+        - button "優先1 薬師の手当：条件未達"
+        - paragraph:
+          - text: 残り味方行動機会
+          - strong: "285"
+          - text: / 300
+        - dialog "戦闘詳細":
+          - button "閉じる" [active]
+          - heading "薬師の手当" [level=2]
+          - paragraph: 条件未達 · 今回の消費SP 40
+          - paragraph: 条件未達
+          - paragraph: 基本消費SP 40 · 土
+          - paragraph: 傷ついた味方を回復
+          - paragraph: 条件：味方のHP 65%以下
+          - paragraph: 対象：残HP割合が低い味方
+          - paragraph: 効果順：回復
+- alert

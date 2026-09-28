@@ -1,0 +1,612 @@
+{
+  "battleId": "37d26538-5cc2-44ce-a961-bcfda7dad601",
+  "input": {
+    "seed": 4109474968,
+    "party": [
+      {
+        "id": "char_joe_01",
+        "name": "北条氏康",
+        "image": "/characters/joe_transparent_asset.png",
+        "level": 22,
+        "stats": {
+          "hp": 3416.14,
+          "sp": 129,
+          "atk": 422.708,
+          "def": 298.28999999999996,
+          "luk": 14.405714285714286
+        },
+        "skills": [
+          {
+            "id": "SKD034",
+            "name": "身構え",
+            "image": "/skills/skill_006_iron_guard.jpg",
+            "rarity": "N",
+            "spCost": 30,
+            "target": "self",
+            "effects": [
+              {
+                "type": "def_up",
+                "power": 15,
+                "duration": 3,
+                "carryAcrossWaves": true
+              }
+            ],
+            "element": "earth",
+            "condition": {
+              "type": "always"
+            },
+            "description": "自身・DEF強化:15.00%・3ターン",
+            "fixedTarget": false
+          }
+        ],
+        "element": "earth",
+        "passives": [
+          {
+            "id": "balance_v2_P15",
+            "name": "HP70%以上で自身DEF",
+            "stat": "def",
+            "type": "P15",
+            "level": 0,
+            "target": "self",
+            "percent": 8
+          }
+        ]
+      },
+      {
+        "id": "char_yuki_01",
+        "name": "竹中半兵衛",
+        "image": "/characters/yuki_transparent_asset.png",
+        "level": 18,
+        "stats": {
+          "hp": 3047.6800000000003,
+          "sp": 145,
+          "atk": 356.03000000000003,
+          "def": 194.31599999999997,
+          "luk": 13.91938775510204
+        },
+        "skills": [
+          {
+            "id": "SKD038",
+            "name": "鎧砕き",
+            "image": "/skills/skill_015_recovery_program.jpg",
+            "rarity": "R",
+            "spCost": 50,
+            "target": "first",
+            "effects": [
+              {
+                "type": "def_down",
+                "power": 12,
+                "duration": 3,
+                "carryAcrossWaves": true
+              }
+            ],
+            "element": "earth",
+            "condition": {
+              "type": "always"
+            },
+            "description": "配置順最初の付与可能敵・DEF低下:12.00%・3ターン",
+            "fixedTarget": false
+          }
+        ],
+        "element": "light",
+        "passives": [
+          {
+            "id": "balance_v2_P04",
+            "name": "他の生存味方が2属性以上で自身DEF",
+            "stat": "def",
+            "type": "P04",
+            "level": 0,
+            "target": "self",
+            "percent": 10
+          }
+        ]
+      },
+      {
+        "id": "char_daimon_01",
+        "name": "井伊直政",
+        "image": "/characters/daimon_transparent_asset.png",
+        "level": 18,
+        "stats": {
+          "hp": 2031.2999999999995,
+          "sp": 116,
+          "atk": 539.2799999999999,
+          "def": 159.00000000000003,
+          "luk": 13.73938775510204
+        },
+        "skills": [
+          {
+            "id": "SKD004",
+            "name": "風切り",
+            "image": "/skills/formal/SKD004.webp",
+            "rarity": "N",
+            "spCost": 25,
+            "target": "first",
+            "effects": [
+              {
+                "type": "damage",
+                "power": 105
+              }
+            ],
+            "element": "wind",
+            "condition": {
+              "type": "always"
+            },
+            "description": "先頭敵・攻撃倍率:105.00%",
+            "fixedTarget": true
+          }
+        ],
+        "element": "fire",
+        "passives": [
+          {
+            "id": "balance_v2_P06",
+            "name": "単体攻撃スキルダメージ",
+            "stat": "atk",
+            "type": "P06",
+            "level": 0,
+            "target": "self",
+            "percent": 4
+          }
+        ]
+      },
+      {
+        "id": "char_jihoon_01",
+        "name": "前田利家",
+        "image": "/characters/jihoon_transparent_asset.png",
+        "level": 18,
+        "stats": {
+          "hp": 2354.88,
+          "sp": 155,
+          "atk": 495.41999999999996,
+          "def": 200.56799999999998,
+          "luk": 13.619387755102041
+        },
+        "skills": [
+          {
+            "id": "SKD003",
+            "name": "土割り",
+            "image": "/skills/formal/SKD003.webp",
+            "rarity": "N",
+            "spCost": 25,
+            "target": "first",
+            "effects": [
+              {
+                "type": "damage",
+                "power": 105
+              }
+            ],
+            "element": "earth",
+            "condition": {
+              "type": "always"
+            },
+            "description": "先頭敵・攻撃倍率:105.00%",
+            "fixedTarget": true
+          }
+        ],
+        "element": "earth",
+        "passives": [
+          {
+            "id": "balance_v2_P05",
+            "name": "通常攻撃ダメージ",
+            "stat": "atk",
+            "type": "P05",
+            "level": 0,
+            "target": "self",
+            "percent": 8
+          }
+        ]
+      },
+      {
+        "id": "char_aoi_01",
+        "name": "お市の方",
+        "image": "/characters/aoi_transparent_asset.png",
+        "level": 18,
+        "stats": {
+          "hp": 2303.38,
+          "sp": 135,
+          "atk": 527.6999999999999,
+          "def": 171.864,
+          "luk": 13.82938775510204
+        },
+        "skills": [
+          {
+            "id": "SKD039",
+            "name": "応急手当",
+            "image": "/skills/skill_003_noise_heal.jpg",
+            "rarity": "N",
+            "spCost": 35,
+            "target": "lowest_ally",
+            "effects": [
+              {
+                "type": "heal",
+                "power": 35,
+                "healingFormula": "caster_atk_percent"
+              }
+            ],
+            "element": "water",
+            "condition": {
+              "type": "ally_hp_below",
+              "value": 0.5
+            },
+            "description": "共通単体回復条件・回復倍率:35.00%",
+            "fixedTarget": false
+          }
+        ],
+        "element": "fire",
+        "passives": [
+          {
+            "id": "balance_v2_P10",
+            "name": "与回復量（蘇生除外）",
+            "stat": "atk",
+            "type": "P10",
+            "level": 0,
+            "target": "self",
+            "percent": 8
+          }
+        ]
+      }
+    ],
+    "rules": {
+      "version": "balance-v2-20260920",
+      "balanceV2": {
+        "status": "PREVIEW_PROVISIONAL",
+        "version": "PREVIEW_PROVISIONAL_BALANCE_V2_20260920",
+        "shieldHpCap": 0.5,
+        "damageBonusCap": 50,
+        "lowHpThreshold": 0.4,
+        "shieldBonusCap": 50,
+        "healingBonusCap": 80,
+        "highHpThreshold": 0.7,
+        "diversityFactors": [
+          0,
+          0.25,
+          0.5,
+          0.75,
+          1
+        ],
+        "periodicCapMultiplier": 2
+      },
+      "burstPolicy": "attack-free-v1-20260926",
+      "inputVersion": "wave-sp-v1-20260921",
+      "defenseFactor": 1,
+      "initialSpRatio": 0,
+      "burstLukDivisor": 20,
+      "maxPlayerActions": 300,
+      "spRecoveryDivisor": 120,
+      "advantageMultiplier": 1.5,
+      "disadvantageMultiplier": 0.75,
+      "enemySpRecoveryDivisor": 30
+    },
+    "waves": [
+      [
+        {
+          "id": "3-1/W1/1",
+          "name": "鍛冶師",
+          "image": "/creative/characters/battle/char_yoshihiko_01.png",
+          "level": 19,
+          "order": 0,
+          "stats": {
+            "hp": 3430,
+            "sp": 100,
+            "atk": 510,
+            "def": 1140,
+            "luk": 0
+          },
+          "skills": [
+            {
+              "id": "SKD034",
+              "name": "身構え",
+              "image": "",
+              "rarity": "N",
+              "spCost": 30,
+              "target": "self",
+              "effects": [
+                {
+                  "type": "def_up",
+                  "power": 15,
+                  "duration": 3
+                }
+              ],
+              "element": "earth",
+              "condition": {
+                "type": "always"
+              },
+              "description": "正式表の検証入力"
+            }
+          ],
+          "element": "earth",
+          "passives": [],
+          "hitSpGain": 10,
+          "initialSp": 30,
+          "actionCount": 7,
+          "initialCount": 6
+        },
+        {
+          "id": "3-1/W1/2",
+          "name": "僧兵",
+          "image": "/creative/characters/battle/char_kageyama_01.png",
+          "level": 19,
+          "order": 1,
+          "stats": {
+            "hp": 680,
+            "sp": 100,
+            "atk": 180,
+            "def": 260,
+            "luk": 0
+          },
+          "skills": [],
+          "element": "earth",
+          "passives": [],
+          "hitSpGain": 10,
+          "initialSp": 0,
+          "actionCount": 7,
+          "initialCount": 7
+        }
+      ],
+      [
+        {
+          "id": "3-1/W2/1",
+          "name": "直江兼続",
+          "image": "/creative/characters/battle/char_rui_01.png",
+          "level": 20,
+          "order": 0,
+          "stats": {
+            "hp": 3430,
+            "sp": 100,
+            "atk": 510,
+            "def": 1140,
+            "luk": 0
+          },
+          "skills": [
+            {
+              "id": "SKD008",
+              "name": "標準単体攻撃・水",
+              "image": "",
+              "rarity": "R",
+              "spCost": 50,
+              "target": "first",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "element": "water",
+              "condition": {
+                "type": "always"
+              },
+              "description": "正式表の検証入力"
+            }
+          ],
+          "element": "water",
+          "passives": [
+            {
+              "id": "P01_water",
+              "name": "P01",
+              "stat": "atk",
+              "type": "P01",
+              "level": 0,
+              "target": "party",
+              "percent": 4.800000000000001,
+              "targetElement": "water"
+            }
+          ],
+          "hitSpGain": 10,
+          "initialSp": 50,
+          "actionCount": 7,
+          "initialCount": 6
+        }
+      ]
+    ],
+    "questSnapshot": {
+      "id": "mino-1",
+      "name": "川霧の渡し",
+      "index": 1,
+      "waves": [
+        [
+          {
+            "id": "3-1/W1/1",
+            "name": "鍛冶師",
+            "image": "/creative/characters/battle/char_yoshihiko_01.png",
+            "level": 19,
+            "order": 0,
+            "stats": {
+              "hp": 3430,
+              "sp": 100,
+              "atk": 510,
+              "def": 1140,
+              "luk": 0
+            },
+            "skills": [
+              {
+                "id": "SKD034",
+                "name": "身構え",
+                "image": "",
+                "rarity": "N",
+                "spCost": 30,
+                "target": "self",
+                "effects": [
+                  {
+                    "type": "def_up",
+                    "power": 15,
+                    "duration": 3
+                  }
+                ],
+                "element": "earth",
+                "condition": {
+                  "type": "always"
+                },
+                "description": "正式表の検証入力"
+              }
+            ],
+            "element": "earth",
+            "passives": [],
+            "hitSpGain": 10,
+            "initialSp": 30,
+            "actionCount": 7,
+            "initialCount": 6
+          },
+          {
+            "id": "3-1/W1/2",
+            "name": "僧兵",
+            "image": "/creative/characters/battle/char_kageyama_01.png",
+            "level": 19,
+            "order": 1,
+            "stats": {
+              "hp": 680,
+              "sp": 100,
+              "atk": 180,
+              "def": 260,
+              "luk": 0
+            },
+            "skills": [],
+            "element": "earth",
+            "passives": [],
+            "hitSpGain": 10,
+            "initialSp": 0,
+            "actionCount": 7,
+            "initialCount": 7
+          }
+        ],
+        [
+          {
+            "id": "3-1/W2/1",
+            "name": "直江兼続",
+            "image": "/creative/characters/battle/char_rui_01.png",
+            "level": 20,
+            "order": 0,
+            "stats": {
+              "hp": 3430,
+              "sp": 100,
+              "atk": 510,
+              "def": 1140,
+              "luk": 0
+            },
+            "skills": [
+              {
+                "id": "SKD008",
+                "name": "標準単体攻撃・水",
+                "image": "",
+                "rarity": "R",
+                "spCost": 50,
+                "target": "first",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 120
+                  }
+                ],
+                "element": "water",
+                "condition": {
+                  "type": "always"
+                },
+                "description": "正式表の検証入力"
+              }
+            ],
+            "element": "water",
+            "passives": [
+              {
+                "id": "P01_water",
+                "name": "P01",
+                "stat": "atk",
+                "type": "P01",
+                "level": 0,
+                "target": "party",
+                "percent": 4.800000000000001,
+                "targetElement": "water"
+              }
+            ],
+            "hitSpGain": 10,
+            "initialSp": 50,
+            "actionCount": 7,
+            "initialCount": 6
+          }
+        ]
+      ],
+      "areaId": "mino",
+      "rewards": [
+        {
+          "kind": "cash",
+          "amount": 1200
+        },
+        {
+          "id": "small",
+          "kind": "character_exp_item",
+          "amount": 3
+        },
+        {
+          "id": "small",
+          "kind": "equipment_exp_item",
+          "amount": 2
+        }
+      ],
+      "designId": "3-1",
+      "playerExp": 30,
+      "soulDrops": [
+        {
+          "id": "char_rui_01",
+          "kind": "soul",
+          "amount": 1,
+          "chance": 0.1,
+          "period": 20,
+          "rarity": "SR"
+        }
+      ],
+      "energyCost": 5,
+      "description": "弱体の後に攻める",
+      "rareRewards": [
+        {
+          "id": "char_rui_01",
+          "kind": "soul",
+          "amount": 1,
+          "chance": 0.1,
+          "period": 20,
+          "rarity": "SR"
+        },
+        {
+          "id": "SPECIAL_TICKET_CHARACTER",
+          "kind": "ticket",
+          "amount": 1,
+          "chance": 0.0025
+        },
+        {
+          "id": "SPECIAL_TICKET_SKILL",
+          "kind": "ticket",
+          "amount": 1,
+          "chance": 0.005
+        },
+        {
+          "id": "SPECIAL_TICKET_EQUIPMENT",
+          "kind": "ticket",
+          "amount": 1,
+          "chance": 0.0025
+        }
+      ],
+      "firstRewards": [
+        {
+          "id": "char_rui_01",
+          "kind": "soul",
+          "amount": 3
+        },
+        {
+          "id": "SPECIAL_TICKET_CHARACTER",
+          "kind": "ticket",
+          "amount": 1
+        }
+      ],
+      "ticketChance": 0.01,
+      "encounterChance": 0.02
+    },
+    "playerExpReward": {
+      "amount": 30,
+      "status": "APPROVED",
+      "version": "game04-quest68-early-retention-20260926"
+    },
+    "questMasterVersion": "game04-quest68-early-retention-20260926"
+  },
+  "expected": {
+    "fnv1aStable": 897575299,
+    "outcome": "lose",
+    "playerActions": 300,
+    "frames": 1723
+  }
+}

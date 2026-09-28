@@ -1,0 +1,57 @@
+# GAME04 正式65面接続・round17反映
+
+## 基準と保存
+
+- 作業基準: codex/game04-upstream-20260918 @ 60fe2f382c56c4902ca5eecaf38401a491d02c0e。実装前・保存前に同ブランチの最新値を再確認。main不使用。
+- 既存PRを確認したが65面接続の並走実装はなかったため、この専用ブランチで実装。
+- dd4572eb5245ac3c1b0c368c67ce4563499ea64a の検証コード・600戦一致・阻害報告はGitHubへ保存済み。600戦は再実行していない。
+- 実装コミットb59805da227745c16ac64236a216ba968149ecb6、Preview可搬性修正5dd9abe2c61ce40893ed0c86da760d0d7b0613d6。対象ブランチ: codex/game04-round17-acceptance-20260922。
+- 固定Preview: https://game04-bo45ls7em-kiyoshi-kitamura.vercel.app / 配信SHA5dd9abe2c61ce40893ed0c86da760d0d7b0613d6 / Vercel Ready確認済み / 接続DB lrgyllgzcdcphlbmkknc。
+- PR: https://github.com/kiyoshikitamura/game04/pull/22 （指定upstream向けDraft）。最初のPreview失敗は検証コードのscratch静的importが原因で、5dd9abeで修正して再配信成功。
+
+## 65面接続
+
+エリア件数3/4/5/5/6/6/8/8/10/10、計65面。57件のID維持、新規8件、仮13件の一覧除外。詳細は GAME04_QUEST65_ID_MAPPING_20260922.md。
+仮13件の保存進行は削除も別面への転用もしない。反映前の10プレイヤーには該当クリア・未決着戦闘なし。旧開始済み戦闘は保存入力・旧報酬で決着する互換経路を残した。
+一覧・順次解放・戦闘生成・初回判定・体力・報酬・Home達成数を接続。初回0/未クリア再挑戦1/周回5,6,8。エリア条件ミッションは正式件数を使用。
+報酬は最新索引＋quest_rewards＋equipment_drops。初回魂SR240/SSR160、券40/50/30、侵攻令7枚を照合。券は状態確定と同じDBトランザクションでuser_itemsへ付与する。既存クリアの初回報酬を遡及支給しない。
+
+## 62面数値・最終3面
+
+- round17全62面336体、終盤正本3面20体、合計356体。
+- stage/Wave/配置/敵ID/正式characterIdを保持。スキル順、LB対応、開始SP、SP上限、初期・再設定カウント、能力、効果列を保持。画像のみ明示的characterIdから解決。
+- 展開済み正式入力を旧preview変換へ通さず直接正式戦闘入力へ接続。戦闘エンジン・共通味方/スキル/装備値は変更なし。
+- 65面全てで本番用Edgeのバンドル済みハンドラを通し、保存直前のinput.wavesを正本と照合して一致。画像以外を除外せず比較。
+- 10-8〜10-10はendgame_approved_handoffの承認済み値に一致。仮70面値を保持せず、数値再調整もしていない。
+
+## 開発DB/API受入
+
+対象は lrgyllgzcdcphlbmkknc のみ。Edge game04-redesign-api v12、verify_jwt=true。
+DBへquest65承認マスターと旧questAreasの保管を追加し、release_manifestのquestAreasだけを更新。変更前値のmd5ガードを用いたSQL履歴は scripts/quest65_master_applied.sql。
+questAreas以外のmanifestハッシュは前後とも16cfa3ae5be577a91c6f994f402fe9d1。
+状態の試行・勝利件数移行と券付与トリガーのmigrationを適用。DB側適用番号20260922113054。ローカルファイル名も20260922113054_game04_quest65_connection.sqlへ合わせ、二重適用を避けた。
+新規QAアカウントのみで実APIの1-1→1-2クリア、初回0体力、初回報酬、同requestId再送の重複付与なしを確認。両戦闘の保存wavesとDBマスターも一致。GAME04_QUEST65_LIVE_20260922.json参照。
+Supabase security advisor前後127項目、新規指摘なし。既存指摘の仕様変更は実施していない。
+
+## 実再生・UI受入
+
+localhost:3104、現在のBattleView、保存済みmain編成/seed、倍速2、SKIPなし。開始クリックから勝利見出しDOM出現までperformance.nowで実測:
+
+|面|seed|秒|
+|---|---:|---:|
+|7-7|22001|50.6611|
+|9-9|25001|30.0065|
+
+一覧→1-1出撃→勝利→結果→次のステージで1-2の解放と詳細表示をブラウザ確認。
+7-7保護解除は「片倉景綱 protection 1件解除」と表示される。英語内部カテゴリが残り、最終的な認知品質の合格とはしない。
+現在のBattleViewにはカットインの接続がなく、最終演出込みの所要時間は未確認。9-9 seed25001では解除イベントが出ないため、保存済みseed25003を追加確認し「本多忠勝 行動不能1件解除」を視認。7-7の割込みでは対象枠の強調と「片倉景綱 割込み」を視認。スクリーンショットはquest65-ui/に保存。
+QAルートは存在しないeventを指定すると404を返し、先頭画面で成功扱いしない。
+並走演出のコンポーネント・CSS・素材は変更していない。最終カットイン接続後の倍速実測、状態解除・割込みを含む認知受入は残件。確定数値は変更しない。
+
+## 共有参照・変更範囲
+
+レイド/領土侵攻は独立したraid masterを参照し、通常クエスト敵への共有参照なし。独自敵値を変更していない。通常クエスト側の侵攻令・エンカウント入口は正本設定へ接続したが、既存の独自レイド設計を上書きしていない。
+ミッションのエリアクリア件数は正式65面へ追従。仮13面への外部保存参照が今後見つかった場合、正式対応先を推測せず保持して報告する。
+主な変更: quests/questMaster/data、旧戦闘互換legacyQuests、必要なUI体力/券/達成数表示、Edge sourceとbundle、DB migration、生成・検証・QA表示コード。
+TypeScriptとNext production build成功、差分空白チェック成功。生成物の入力・進行・報酬・Edge経路の検証結果は GAME04_QUEST65_ACCEPTANCE_20260922.json。
+GAME03・Productionへの変更なし。検証パーティを初期付与・自動編成へ転用していない。

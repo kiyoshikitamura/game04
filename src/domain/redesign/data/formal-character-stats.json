@@ -1,0 +1,1091 @@
+{
+  "version": "GAME04_CHARACTER_NUMERIC_20260921",
+  "source": "docs/product/master_sources_20260921/numeric.md",
+  "sourceSha256": "749fbb58f0719ab495e6f7e8966c9da03d5db1781a483d3ba12cb9caaa7d8b39",
+  "levels": [
+    1,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100
+  ],
+  "anchors": {
+    "N": {
+      "atk": [
+        100.0,
+        200.0,
+        380.0,
+        600.0,
+        850.0,
+        1150.0,
+        1500.0,
+        1880.0,
+        2290.0,
+        2730.0,
+        3200.0
+      ],
+      "hp": [
+        600.0,
+        1000.0,
+        1600.0,
+        2400.0,
+        3400.0,
+        4600.0,
+        6000.0,
+        7600.0,
+        9400.0,
+        11400.0,
+        13600.0
+      ],
+      "def": [
+        30.0,
+        60.0,
+        110.0,
+        180.0,
+        270.0,
+        380.0,
+        510.0,
+        660.0,
+        830.0,
+        1020.0,
+        1230.0
+      ]
+    },
+    "R": {
+      "atk": [
+        150.0,
+        300.0,
+        550.0,
+        880.0,
+        1300.0,
+        1800.0,
+        2400.0,
+        3080.0,
+        3850.0,
+        4720.0,
+        5700.0
+      ],
+      "hp": [
+        750.0,
+        1300.0,
+        2100.0,
+        3200.0,
+        4600.0,
+        6300.0,
+        8300.0,
+        10600.0,
+        13200.0,
+        16100.0,
+        19300.0
+      ],
+      "def": [
+        40.0,
+        80.0,
+        150.0,
+        250.0,
+        380.0,
+        550.0,
+        750.0,
+        980.0,
+        1240.0,
+        1530.0,
+        1850.0
+      ]
+    },
+    "SR": {
+      "atk": [
+        300.0,
+        520.0,
+        900.0,
+        1450.0,
+        2200.0,
+        3150.0,
+        4300.0,
+        5650.0,
+        7200.0,
+        8950.0,
+        10900.0
+      ],
+      "hp": [
+        1050.0,
+        1900.0,
+        3100.0,
+        4800.0,
+        7000.0,
+        9700.0,
+        12900.0,
+        16600.0,
+        20800.0,
+        25500.0,
+        30700.0
+      ],
+      "def": [
+        60.0,
+        120.0,
+        230.0,
+        390.0,
+        600.0,
+        880.0,
+        1220.0,
+        1620.0,
+        2080.0,
+        2600.0,
+        3180.0
+      ]
+    },
+    "SSR": {
+      "atk": [
+        500.0,
+        800.0,
+        1350.0,
+        2100.0,
+        3050.0,
+        4250.0,
+        5850.0,
+        7800.0,
+        10150.0,
+        12900.0,
+        16000.0
+      ],
+      "hp": [
+        1500.0,
+        2700.0,
+        4500.0,
+        7000.0,
+        10200.0,
+        14200.0,
+        19000.0,
+        24700.0,
+        31300.0,
+        38800.0,
+        47200.0
+      ],
+      "def": [
+        90.0,
+        180.0,
+        350.0,
+        600.0,
+        950.0,
+        1400.0,
+        1950.0,
+        2600.0,
+        3350.0,
+        4200.0,
+        5150.0
+      ]
+    }
+  },
+  "roles": {
+    "攻撃": {
+      "hp": 1.0,
+      "atk": 1.0,
+      "def": 1.0
+    },
+    "守備": {
+      "hp": 1.4,
+      "atk": 0.65,
+      "def": 1.3
+    },
+    "攻守": {
+      "hp": 1.2,
+      "atk": 0.85,
+      "def": 1.15
+    },
+    "回復・保護": {
+      "hp": 1.1,
+      "atk": 0.9,
+      "def": 1.05
+    },
+    "支援": {
+      "hp": 1.2,
+      "atk": 0.75,
+      "def": 1.15
+    }
+  },
+  "profiles": {
+    "攻撃寄り": {
+      "hp": 0.97,
+      "atk": 1.05,
+      "def": 0.98,
+      "luk": 0.0
+    },
+    "HP寄り": {
+      "hp": 1.05,
+      "atk": 0.97,
+      "def": 0.98,
+      "luk": 0.0
+    },
+    "DEF寄り": {
+      "hp": 0.98,
+      "atk": 0.97,
+      "def": 1.05,
+      "luk": 0.0
+    },
+    "攻守寄り": {
+      "hp": 0.96,
+      "atk": 1.02,
+      "def": 1.02,
+      "luk": 0.0
+    },
+    "耐久寄り": {
+      "hp": 1.03,
+      "atk": 0.95,
+      "def": 1.02,
+      "luk": 0.0
+    },
+    "LUK寄り": {
+      "hp": 0.98,
+      "atk": 0.97,
+      "def": 1.0,
+      "luk": 3.0
+    }
+  },
+  "characters": [
+    {
+      "id": "char_ageha_01",
+      "name": "豊臣秀吉",
+      "rarity": "SSR",
+      "element": "光",
+      "role": "回復・保護",
+      "profile": "HP寄り",
+      "expected100": {
+        "hp": 54516.0,
+        "atk": 13968.0,
+        "def": 5299.35,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_alice_01",
+      "name": "くノ一",
+      "rarity": "N",
+      "element": "水",
+      "role": "攻撃",
+      "profile": "LUK寄り",
+      "expected100": {
+        "hp": 13328.0,
+        "atk": 3104.0,
+        "def": 1230.0,
+        "luk": 33.0
+      }
+    },
+    {
+      "id": "char_aoi_01",
+      "name": "お市の方",
+      "rarity": "R",
+      "element": "火",
+      "role": "回復・保護",
+      "profile": "攻撃寄り",
+      "expected100": {
+        "hp": 20593.1,
+        "atk": 5386.5,
+        "def": 1903.65,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_cecile_01",
+      "name": "井伊直虎",
+      "rarity": "SR",
+      "element": "水",
+      "role": "守備",
+      "profile": "HP寄り",
+      "expected100": {
+        "hp": 45129.0,
+        "atk": 6872.45,
+        "def": 4051.32,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_chang_01",
+      "name": "上杉景勝",
+      "rarity": "R",
+      "element": "水",
+      "role": "支援",
+      "profile": "耐久寄り",
+      "expected100": {
+        "hp": 23854.8,
+        "atk": 4061.25,
+        "def": 2170.05,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_daimon_01",
+      "name": "井伊直政",
+      "rarity": "R",
+      "element": "火",
+      "role": "攻撃",
+      "profile": "攻守寄り",
+      "expected100": {
+        "hp": 18528.0,
+        "atk": 5814.0,
+        "def": 1887.0,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_genji_01",
+      "name": "今川義元",
+      "rarity": "SR",
+      "element": "風",
+      "role": "支援",
+      "profile": "耐久寄り",
+      "expected100": {
+        "hp": 37945.2,
+        "atk": 7766.25,
+        "def": 3730.14,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_go_01",
+      "name": "武田信玄",
+      "rarity": "SSR",
+      "element": "火",
+      "role": "攻守",
+      "profile": "耐久寄り",
+      "expected100": {
+        "hp": 58339.2,
+        "atk": 12920.0,
+        "def": 6040.95,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_gou_01",
+      "name": "伝令",
+      "rarity": "N",
+      "element": "土",
+      "role": "支援",
+      "profile": "LUK寄り",
+      "expected100": {
+        "hp": 15993.6,
+        "atk": 2328.0,
+        "def": 1414.5,
+        "luk": 33.0
+      }
+    },
+    {
+      "id": "char_jihoon_01",
+      "name": "前田利家",
+      "rarity": "R",
+      "element": "土",
+      "role": "攻守",
+      "profile": "攻守寄り",
+      "expected100": {
+        "hp": 22233.6,
+        "atk": 4941.9,
+        "def": 2170.05,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_joe_01",
+      "name": "北条氏康",
+      "rarity": "R",
+      "element": "土",
+      "role": "守備",
+      "profile": "DEF寄り",
+      "expected100": {
+        "hp": 26479.6,
+        "atk": 3593.85,
+        "def": 2525.25,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_kaede_01",
+      "name": "真田幸村",
+      "rarity": "SSR",
+      "element": "火",
+      "role": "攻撃",
+      "profile": "攻撃寄り",
+      "expected100": {
+        "hp": 45784.0,
+        "atk": 16800.0,
+        "def": 5047.0,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_kageyama_01",
+      "name": "僧兵",
+      "rarity": "N",
+      "element": "火",
+      "role": "守備",
+      "profile": "HP寄り",
+      "expected100": {
+        "hp": 19992.0,
+        "atk": 2017.6,
+        "def": 1567.02,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_kaito_01",
+      "name": "大友宗麟",
+      "rarity": "R",
+      "element": "光",
+      "role": "支援",
+      "profile": "耐久寄り",
+      "expected100": {
+        "hp": 23854.8,
+        "atk": 4061.25,
+        "def": 2170.05,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_karen_01",
+      "name": "徳川家康",
+      "rarity": "SSR",
+      "element": "土",
+      "role": "支援",
+      "profile": "DEF寄り",
+      "expected100": {
+        "hp": 55507.2,
+        "atk": 11640.0,
+        "def": 6218.625,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_kengo_01",
+      "name": "本多忠勝",
+      "rarity": "SSR",
+      "element": "土",
+      "role": "攻守",
+      "profile": "DEF寄り",
+      "expected100": {
+        "hp": 55507.2,
+        "atk": 13192.0,
+        "def": 6218.625,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_kenji_01",
+      "name": "山伏",
+      "rarity": "N",
+      "element": "光",
+      "role": "回復・保護",
+      "profile": "HP寄り",
+      "expected100": {
+        "hp": 15708.0,
+        "atk": 2793.6,
+        "def": 1265.67,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_koharu_01",
+      "name": "上杉謙信",
+      "rarity": "SSR",
+      "element": "水",
+      "role": "攻撃",
+      "profile": "攻守寄り",
+      "expected100": {
+        "hp": 45312.0,
+        "atk": 16320.0,
+        "def": 5253.0,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_leo_01",
+      "name": "伊達政宗",
+      "rarity": "SSR",
+      "element": "風",
+      "role": "攻撃",
+      "profile": "攻守寄り",
+      "expected100": {
+        "hp": 45312.0,
+        "atk": 16320.0,
+        "def": 5253.0,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_leon_01",
+      "name": "加藤清正",
+      "rarity": "SR",
+      "element": "土",
+      "role": "守備",
+      "profile": "DEF寄り",
+      "expected100": {
+        "hp": 42120.4,
+        "atk": 6872.45,
+        "def": 4340.7,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_long_01",
+      "name": "女侍",
+      "rarity": "N",
+      "element": "土",
+      "role": "攻守",
+      "profile": "攻守寄り",
+      "expected100": {
+        "hp": 15667.2,
+        "atk": 2774.4,
+        "def": 1442.79,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_lucas_01",
+      "name": "島津義弘",
+      "rarity": "SR",
+      "element": "火",
+      "role": "攻撃",
+      "profile": "攻撃寄り",
+      "expected100": {
+        "hp": 29779.0,
+        "atk": 11445.0,
+        "def": 3116.4,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_makoto_01",
+      "name": "小早川隆景",
+      "rarity": "R",
+      "element": "水",
+      "role": "攻撃",
+      "profile": "攻守寄り",
+      "expected100": {
+        "hp": 18528.0,
+        "atk": 5814.0,
+        "def": 1887.0,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_mark_01",
+      "name": "小松姫",
+      "rarity": "R",
+      "element": "火",
+      "role": "攻守",
+      "profile": "DEF寄り",
+      "expected100": {
+        "hp": 22696.8,
+        "atk": 4699.65,
+        "def": 2233.875,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_martina_01",
+      "name": "戦巫女",
+      "rarity": "N",
+      "element": "火",
+      "role": "回復・保護",
+      "profile": "耐久寄り",
+      "expected100": {
+        "hp": 15408.8,
+        "atk": 2736.0,
+        "def": 1317.33,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_masato_01",
+      "name": "弓兵",
+      "rarity": "N",
+      "element": "水",
+      "role": "攻撃",
+      "profile": "攻守寄り",
+      "expected100": {
+        "hp": 13056.0,
+        "atk": 3264.0,
+        "def": 1254.6,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_maya_01",
+      "name": "服部半蔵",
+      "rarity": "SR",
+      "element": "闇",
+      "role": "攻撃",
+      "profile": "LUK寄り",
+      "expected100": {
+        "hp": 30086.0,
+        "atk": 10573.0,
+        "def": 3180.0,
+        "luk": 33.0
+      }
+    },
+    {
+      "id": "char_mei_01",
+      "name": "山本勘助",
+      "rarity": "R",
+      "element": "火",
+      "role": "攻撃",
+      "profile": "耐久寄り",
+      "expected100": {
+        "hp": 19879.0,
+        "atk": 5415.0,
+        "def": 1887.0,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_minami_01",
+      "name": "島左近",
+      "rarity": "R",
+      "element": "土",
+      "role": "攻守",
+      "profile": "耐久寄り",
+      "expected100": {
+        "hp": 23854.8,
+        "atk": 4602.75,
+        "def": 2170.05,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_mio_01",
+      "name": "前田慶次",
+      "rarity": "SSR",
+      "element": "風",
+      "role": "攻守",
+      "profile": "攻守寄り",
+      "expected100": {
+        "hp": 54374.4,
+        "atk": 13872.0,
+        "def": 6040.95,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_miyabi_01",
+      "name": "明智光秀",
+      "rarity": "SSR",
+      "element": "闇",
+      "role": "攻撃",
+      "profile": "LUK寄り",
+      "expected100": {
+        "hp": 46256.0,
+        "atk": 15520.0,
+        "def": 5150.0,
+        "luk": 33.0
+      }
+    },
+    {
+      "id": "char_momoko_01",
+      "name": "島津義久",
+      "rarity": "R",
+      "element": "火",
+      "role": "支援",
+      "profile": "耐久寄り",
+      "expected100": {
+        "hp": 23854.8,
+        "atk": 4061.25,
+        "def": 2170.05,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_naoto_01",
+      "name": "漁師",
+      "rarity": "N",
+      "element": "土",
+      "role": "攻守",
+      "profile": "HP寄り",
+      "expected100": {
+        "hp": 17136.0,
+        "atk": 2638.4,
+        "def": 1386.21,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_noa_01",
+      "name": "柴田勝家",
+      "rarity": "SR",
+      "element": "土",
+      "role": "攻守",
+      "profile": "HP寄り",
+      "expected100": {
+        "hp": 38682.0,
+        "atk": 8987.05,
+        "def": 3583.86,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_reiji_01",
+      "name": "織田信長",
+      "rarity": "SSR",
+      "element": "火",
+      "role": "支援",
+      "profile": "攻守寄り",
+      "expected100": {
+        "hp": 54374.4,
+        "atk": 12240.0,
+        "def": 6040.95,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_reina_01",
+      "name": "毛利元就",
+      "rarity": "SR",
+      "element": "風",
+      "role": "攻撃",
+      "profile": "耐久寄り",
+      "expected100": {
+        "hp": 31621.0,
+        "atk": 10355.0,
+        "def": 3243.6,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_ren_01",
+      "name": "斎藤道三",
+      "rarity": "R",
+      "element": "闇",
+      "role": "攻撃",
+      "profile": "攻守寄り",
+      "expected100": {
+        "hp": 18528.0,
+        "atk": 5814.0,
+        "def": 1887.0,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_ren_male_01",
+      "name": "本願寺顕如",
+      "rarity": "R",
+      "element": "土",
+      "role": "回復・保護",
+      "profile": "耐久寄り",
+      "expected100": {
+        "hp": 21866.9,
+        "atk": 4873.5,
+        "def": 1981.35,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_riki_01",
+      "name": "濃姫",
+      "rarity": "SR",
+      "element": "闇",
+      "role": "回復・保護",
+      "profile": "耐久寄り",
+      "expected100": {
+        "hp": 34783.1,
+        "atk": 9319.5,
+        "def": 3405.78,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_rin_01",
+      "name": "武田勝頼",
+      "rarity": "R",
+      "element": "火",
+      "role": "攻撃",
+      "profile": "攻撃寄り",
+      "expected100": {
+        "hp": 18721.0,
+        "atk": 5985.0,
+        "def": 1813.0,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_rui_01",
+      "name": "直江兼続",
+      "rarity": "SR",
+      "element": "水",
+      "role": "支援",
+      "profile": "耐久寄り",
+      "expected100": {
+        "hp": 37945.2,
+        "atk": 7766.25,
+        "def": 3730.14,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_sakura_01",
+      "name": "真田昌幸",
+      "rarity": "SR",
+      "element": "火",
+      "role": "回復・保護",
+      "profile": "耐久寄り",
+      "expected100": {
+        "hp": 34783.1,
+        "atk": 9319.5,
+        "def": 3405.78,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_sawat_01",
+      "name": "火薬師",
+      "rarity": "N",
+      "element": "火",
+      "role": "攻撃",
+      "profile": "攻撃寄り",
+      "expected100": {
+        "hp": 13192.0,
+        "atk": 3360.0,
+        "def": 1205.4,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_seiya_01",
+      "name": "石田三成",
+      "rarity": "SR",
+      "element": "光",
+      "role": "守備",
+      "profile": "DEF寄り",
+      "expected100": {
+        "hp": 42120.4,
+        "atk": 6872.45,
+        "def": 4340.7,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_serika_01",
+      "name": "浅井長政",
+      "rarity": "R",
+      "element": "風",
+      "role": "守備",
+      "profile": "HP寄り",
+      "expected100": {
+        "hp": 28371.0,
+        "atk": 3593.85,
+        "def": 2356.9,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_shin_01",
+      "name": "片倉景綱",
+      "rarity": "R",
+      "element": "風",
+      "role": "回復・保護",
+      "profile": "耐久寄り",
+      "expected100": {
+        "hp": 21866.9,
+        "atk": 4873.5,
+        "def": 1981.35,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_shion_01",
+      "name": "甲斐姫",
+      "rarity": "R",
+      "element": "水",
+      "role": "攻守",
+      "profile": "HP寄り",
+      "expected100": {
+        "hp": 24318.0,
+        "atk": 4699.65,
+        "def": 2084.95,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_shun_01",
+      "name": "町娘",
+      "rarity": "N",
+      "element": "闇",
+      "role": "支援",
+      "profile": "耐久寄り",
+      "expected100": {
+        "hp": 16809.6,
+        "atk": 2280.0,
+        "def": 1442.79,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_sora_01",
+      "name": "立花誾千代",
+      "rarity": "SR",
+      "element": "光",
+      "role": "攻撃",
+      "profile": "攻守寄り",
+      "expected100": {
+        "hp": 29472.0,
+        "atk": 11118.0,
+        "def": 3243.6,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_souta_01",
+      "name": "茶屋の娘",
+      "rarity": "N",
+      "element": "水",
+      "role": "回復・保護",
+      "profile": "HP寄り",
+      "expected100": {
+        "hp": 15708.0,
+        "atk": 2793.6,
+        "def": 1265.67,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_taiga_01",
+      "name": "長宗我部元親",
+      "rarity": "SR",
+      "element": "水",
+      "role": "攻守",
+      "profile": "攻守寄り",
+      "expected100": {
+        "hp": 35366.4,
+        "atk": 9450.3,
+        "def": 3730.14,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_takeshi_01",
+      "name": "陰陽師",
+      "rarity": "N",
+      "element": "風",
+      "role": "支援",
+      "profile": "LUK寄り",
+      "expected100": {
+        "hp": 15993.6,
+        "atk": 2328.0,
+        "def": 1414.5,
+        "luk": 33.0
+      }
+    },
+    {
+      "id": "char_takuro_01",
+      "name": "雑賀孫市",
+      "rarity": "SR",
+      "element": "風",
+      "role": "攻撃",
+      "profile": "攻撃寄り",
+      "expected100": {
+        "hp": 29779.0,
+        "atk": 11445.0,
+        "def": 3116.4,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_tatsuya_01",
+      "name": "行商人",
+      "rarity": "N",
+      "element": "闇",
+      "role": "支援",
+      "profile": "LUK寄り",
+      "expected100": {
+        "hp": 15993.6,
+        "atk": 2328.0,
+        "def": 1414.5,
+        "luk": 33.0
+      }
+    },
+    {
+      "id": "char_tetsu_01",
+      "name": "黒田官兵衛",
+      "rarity": "SR",
+      "element": "闇",
+      "role": "攻撃",
+      "profile": "耐久寄り",
+      "expected100": {
+        "hp": 31621.0,
+        "atk": 10355.0,
+        "def": 3243.6,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_tomoya_01",
+      "name": "鉄砲兵",
+      "rarity": "N",
+      "element": "水",
+      "role": "攻撃",
+      "profile": "攻撃寄り",
+      "expected100": {
+        "hp": 13192.0,
+        "atk": 3360.0,
+        "def": 1205.4,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_yoshihiko_01",
+      "name": "鍛冶師",
+      "rarity": "N",
+      "element": "土",
+      "role": "守備",
+      "profile": "DEF寄り",
+      "expected100": {
+        "hp": 18659.2,
+        "atk": 2017.6,
+        "def": 1678.95,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_yuji_01",
+      "name": "立花宗茂",
+      "rarity": "R",
+      "element": "光",
+      "role": "攻撃",
+      "profile": "攻撃寄り",
+      "expected100": {
+        "hp": 18721.0,
+        "atk": 5985.0,
+        "def": 1813.0,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_yuki_01",
+      "name": "竹中半兵衛",
+      "rarity": "R",
+      "element": "光",
+      "role": "守備",
+      "profile": "耐久寄り",
+      "expected100": {
+        "hp": 27830.6,
+        "atk": 3519.75,
+        "def": 2453.1,
+        "luk": 30.0
+      }
+    },
+    {
+      "id": "char_yukina_01",
+      "name": "細川ガラシャ",
+      "rarity": "R",
+      "element": "光",
+      "role": "回復・保護",
+      "profile": "LUK寄り",
+      "expected100": {
+        "hp": 20805.4,
+        "atk": 4976.1,
+        "def": 1942.5,
+        "luk": 33.0
+      }
+    }
+  ]
+}

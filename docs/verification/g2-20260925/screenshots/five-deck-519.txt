@@ -1,0 +1,251 @@
+- iframe [active]:
+  - alert
+  - region "ゲーム画面":
+    - img "くノ一"
+    - generic: Lv.1
+    - strong: G2継続QA
+    - generic "将来の同盟表示枠": ◇ 同盟 —
+    - button "アカウント連携": 未認証
+    - button "メニュー"
+    - generic: 銭 12,720
+    - generic: 輝石 200
+    - generic: 行動力 103/100
+    - main:
+      - navigation "育成":
+        - button "デッキ"
+        - button "編成" [pressed]
+        - button "武将"
+        - button "スキル"
+        - button "装備"
+      - heading "出撃メンバー" [level=3]
+      - generic "選択武将の行動順":
+        - button "← 移動"
+        - button "移動 →" [disabled]
+      - button "1 くノ一 N 水 くノ一 N 水 Lv.8 +0":
+        - emphasis: "1"
+        - figure "くノ一 N 水"
+        - generic: くノ一
+        - generic: N 水
+        - generic: Lv.8 +0
+      - button "2 伝令 N 土 伝令 N 土 Lv.1 +0":
+        - emphasis: "2"
+        - figure "伝令 N 土"
+        - generic: 伝令
+        - generic: N 土
+        - generic: Lv.1 +0
+      - button "3 僧兵 N 火 僧兵 N 火 Lv.1 +0":
+        - emphasis: "3"
+        - figure "僧兵 N 火"
+        - generic: 僧兵
+        - generic: N 火
+        - generic: Lv.1 +0
+      - button "4 前田利家 R 土 前田利家 R 土 Lv.1 +0":
+        - emphasis: "4"
+        - figure "前田利家 R 土"
+        - generic: 前田利家
+        - generic: R 土
+        - generic: Lv.1 +0
+      - button "5 竹中半兵衛 R 光 竹中半兵衛 R 光 Lv.1 +0":
+        - emphasis: "5"
+        - figure "竹中半兵衛 R 光"
+        - generic: 竹中半兵衛
+        - generic: R 光
+        - generic: Lv.1 +0
+      - text: 絞り込み
+      - combobox "絞り込み":
+        - option "すべて" [selected]
+        - option "N"
+        - option "R"
+        - option "SR"
+        - option "SSR"
+        - option "火"
+        - option "水"
+        - option "土"
+        - option "風"
+        - option "光"
+        - option "闇"
+      - text: 並び替え
+      - combobox "並び替え":
+        - option "Lv" [selected]
+        - option "レアリティ"
+        - option "名前"
+        - option "属性"
+      - button "くノ一 N 水 くノ一 N・水・攻撃 Lv.8 覚醒+0 編成中":
+        - figure "くノ一 N 水"
+        - generic: くノ一
+        - generic: N・水・攻撃
+        - generic: Lv.8 覚醒+0
+        - generic: 編成中
+      - button "伝令 N 土 伝令 N・土・支援 Lv.1 覚醒+0 編成中":
+        - figure "伝令 N 土"
+        - generic: 伝令
+        - generic: N・土・支援
+        - generic: Lv.1 覚醒+0
+        - generic: 編成中
+      - button "僧兵 N 火 僧兵 N・火・守備 Lv.1 覚醒+0 編成中":
+        - figure "僧兵 N 火"
+        - generic: 僧兵
+        - generic: N・火・守備
+        - generic: Lv.1 覚醒+0
+        - generic: 編成中
+      - button "山伏 N 光 山伏 N・光・回復・保護 Lv.1 覚醒+0":
+        - figure "山伏 N 光"
+        - generic: 山伏
+        - generic: N・光・回復・保護
+        - generic: Lv.1 覚醒+0
+      - button "女侍 N 土 女侍 N・土・攻守 Lv.1 覚醒+0":
+        - figure "女侍 N 土"
+        - generic: 女侍
+        - generic: N・土・攻守
+        - generic: Lv.1 覚醒+0
+      - button "前田利家 R 土 前田利家 R・土・攻守 Lv.1 覚醒+0 編成中":
+        - figure "前田利家 R 土"
+        - generic: 前田利家
+        - generic: R・土・攻守
+        - generic: Lv.1 覚醒+0
+        - generic: 編成中
+      - button "竹中半兵衛 R 光 竹中半兵衛 R・光・守備 Lv.1 覚醒+0 編成中":
+        - figure "竹中半兵衛 R 光"
+        - generic: 竹中半兵衛
+        - generic: R・光・守備
+        - generic: Lv.1 覚醒+0
+        - generic: 編成中
+    - navigation "メインナビゲーション":
+      - button "本陣"
+      - button "出陣"
+      - button "武将"
+      - button "共闘"
+      - button "召喚"
+  - dialog "編成保存結果" [active]:
+    - banner:
+      - heading "編成保存結果" [level=2]
+    - heading "更新しました" [level=3]
+    - generic: 編成
+    - generic: 変更前
+    - strong: → 保存済み
+    - button "閉じる"
+- region "QA読み込み計測":
+  - heading "QA読み込み計測" [level=2]
+  - paragraph: 本体は上の実寸iframeです。APIは認証・通信・応答確認を含む総待機時間。画像は必須画像グループの待機時間（キャッシュを含む）です。操作可能時刻・TTIは未計測。
+  - button "本体を再読込して計測を消去"
+  - paragraph: 件数：15 / 100
+  - generic "ブラウザ初回表示指標":
+    - paragraph: Navigation：navigate ／ responseStart 995.6 ms ／ responseEnd 998.0 ms ／ DCL 1674.3 ms
+    - paragraph: first-paint：1700.0 ms
+    - paragraph: first-contentful-paint：1700.0 ms
+  - table:
+    - rowgroup:
+      - row "種別 / 対象 枚数 開始ms 完了ms 待機ms 結果":
+        - columnheader "種別 / 対象"
+        - columnheader "枚数"
+        - columnheader "開始ms"
+        - columnheader "完了ms"
+        - columnheader "待機ms"
+        - columnheader "結果"
+    - rowgroup:
+      - row "request / get_state — 31166.1 33275.5 2109.4 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "31166.1"
+        - cell "33275.5"
+        - cell "2109.4"
+        - cell "success"
+      - row "image-group / home 9 33308.9 33738.8 429.9 success":
+        - cell "image-group / home"
+        - cell "9"
+        - cell "33308.9"
+        - cell "33738.8"
+        - cell "429.9"
+        - cell "success"
+      - row "image-group / growth 17 82103.4 82594.3 490.9 success":
+        - cell "image-group / growth"
+        - cell "17"
+        - cell "82103.4"
+        - cell "82594.3"
+        - cell "490.9"
+        - cell "success"
+      - row "request / get_state — 82079.2 83762.8 1683.6 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "82079.2"
+        - cell "83762.8"
+        - cell "1683.6"
+        - cell "success"
+      - row "request / get_state — 91167.6 92483.6 1316.0 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "91167.6"
+        - cell "92483.6"
+        - cell "1316.0"
+        - cell "success"
+      - row "image-group / home 9 107325.3 107329.6 4.3 success":
+        - cell "image-group / home"
+        - cell "9"
+        - cell "107325.3"
+        - cell "107329.6"
+        - cell "4.3"
+        - cell "success"
+      - row "request / get_state — 107322.6 108849.1 1526.5 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "107322.6"
+        - cell "108849.1"
+        - cell "1526.5"
+        - cell "success"
+      - row "image-group / quest 2 115622.9 115939.9 317.0 success":
+        - cell "image-group / quest"
+        - cell "2"
+        - cell "115622.9"
+        - cell "115939.9"
+        - cell "317.0"
+        - cell "success"
+      - row "request / get_state — 115619.9 117132.1 1512.2 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "115619.9"
+        - cell "117132.1"
+        - cell "1512.2"
+        - cell "success"
+      - row "image-group / growth 17 136967.5 136971.8 4.3 success":
+        - cell "image-group / growth"
+        - cell "17"
+        - cell "136967.5"
+        - cell "136971.8"
+        - cell "4.3"
+        - cell "success"
+      - row "request / get_state — 136964.6 138427.3 1462.7 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "136964.6"
+        - cell "138427.3"
+        - cell "1462.7"
+        - cell "success"
+      - row "image-group / growth 20 145011.9 145441.0 429.1 success":
+        - cell "image-group / growth"
+        - cell "20"
+        - cell "145011.9"
+        - cell "145441.0"
+        - cell "429.1"
+        - cell "success"
+      - row "request / get_state — 151167.4 152750.8 1583.4 success":
+        - cell "request / get_state"
+        - cell "—"
+        - cell "151167.4"
+        - cell "152750.8"
+        - cell "1583.4"
+        - cell "success"
+      - row "request / save_deck — 160176.3 162287.1 2110.8 success":
+        - cell "request / save_deck"
+        - cell "—"
+        - cell "160176.3"
+        - cell "162287.1"
+        - cell "2110.8"
+        - cell "success"
+      - row "request / save_deck — 210449.7 212669.6 2219.9 success":
+        - cell "request / save_deck"
+        - cell "—"
+        - cell "210449.7"
+        - cell "212669.6"
+        - cell "2219.9"
+        - cell "success"
+- alert

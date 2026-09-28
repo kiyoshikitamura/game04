@@ -1,0 +1,451 @@
+/* ====================================================================
+   TRIBE: NEON REIGN - PatrolTab (クエスト) CSS
+   ==================================================================== */
+
+/* 親コンテナ設定: Matte Outlaw のキャンバス構造（全画面背景対応用） */
+.patrol-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex: 1; /* 親のFlexコンテナ内で高さを確保するため追加 */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.patrol-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  transition: background-image 0.5s ease;
+}
+
+/* マットなダークフィルターをかけてUIの視認性を確保 */
+.patrol-background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(17, 19, 28, 0.7) 0%, rgba(17, 19, 28, 0.95) 100%);
+  z-index: 1;
+}
+
+.patrol-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 24px;
+}
+
+/* M9-X tutorial quest: the six wireframe states intentionally do not reuse
+   the normal quest-management information architecture. */
+.tutorial-quest-shell > .ui-page-header { display: none; }
+.tutorial-quest-shell .ui-hub-page-scroll { overflow: hidden; }
+.tutorial-quest-shell .ui-hub-page-content { gap: 0; padding: 0; }
+.tutorial-quest-wire { position: relative; display: grid; align-content: center; gap: 14px; min-height: 100%; padding: calc(env(safe-area-inset-top) + 24px) 18px calc(env(safe-area-inset-bottom) + 24px); overflow: hidden; background-position: center; background-size: cover; color: var(--ui-text-primary); isolation: isolate; }
+.tutorial-quest-wire::before { position: absolute; inset: 0; z-index: -1; content: ""; background: radial-gradient(circle at 50% 35%, rgba(135, 74, 255, .18), transparent 36%), linear-gradient(180deg, transparent 20%, rgba(1, 2, 9, .9)); }
+.tutorial-wire-heading { display: grid; gap: 5px; padding: 18px; border: 1px solid rgba(178, 116, 255, .45); border-radius: var(--ui-radius-lg); background: rgba(4, 5, 16, .72); }
+.tutorial-wire-heading span,.tutorial-wire-progress-title span { font-size: clamp(28px, 8vw, 38px); font-weight: 950; }
+.tutorial-wire-heading strong { font-size: var(--ui-font-screen-title); }
+.tutorial-wire-heading small,.tutorial-wire-progress-title small,.tutorial-wire-complete small,.tutorial-wire-encounter small { color: #c78dff; font-size: var(--ui-font-caption); font-weight: 900; letter-spacing: .14em; }
+.tutorial-wire-rewards { display: grid; grid-template-columns: repeat(auto-fit, minmax(76px, 1fr)); gap: 6px; padding: 10px; border: 1px solid rgba(255,255,255,.12); border-radius: var(--ui-radius-md); background: rgba(3,5,13,.82); }
+.tutorial-wire-rewards span { display: grid; min-height: 48px; place-items: center; color: #e9e1ff; font-size: 9px; font-weight: 800; text-align: center; }
+.tutorial-wire-reward-item{gap:3px;padding:6px;border:1px solid rgba(255,255,255,.08);border-radius:5px;background:rgba(0,0,0,.28)}
+.tutorial-wire-reward-icon{width:34px;height:34px;object-fit:contain}.tutorial-wire-reward-xp{display:grid;width:34px;height:34px;place-items:center;border-radius:50%;color:#061319;background:var(--ui-accent);font-size:11px}
+.tutorial-wire-reward-item small{color:var(--ui-text-secondary);font-size:7px}.tutorial-wire-reward-item strong{color:#fff1af;font-size:10px}
+.tutorial-wire-member { display: grid; grid-template-columns: 112px 1fr; align-items: center; gap: 14px; padding: 12px; border: 1px solid rgba(209, 104, 255, .5); border-radius: var(--ui-radius-lg); background: linear-gradient(135deg,rgba(18,8,32,.94),rgba(5,6,15,.9)); }
+.tutorial-wire-member > div:last-child { display: grid; gap: 6px; }
+.tutorial-wire-member small { color: var(--ui-text-muted); }
+.tutorial-wire-member b { font-size: var(--ui-font-section-heading); }
+.tutorial-wire-member span { color: #ff70df; font-weight: 900; }
+.tutorial-wire-progress-title,.tutorial-wire-complete { display: grid; justify-items: center; gap: 4px; text-align: center; }
+.tutorial-wire-progress-character,.tutorial-wire-return-character { width: min(62vw, 246px); height: min(42vh, 330px); justify-self: center; overflow: hidden; border: 1px solid rgba(181, 111, 255, .52); border-radius: var(--ui-radius-lg); background: rgba(4,4,13,.58); box-shadow: 0 0 32px rgba(142,67,255,.2); }
+.tutorial-wire-progress-character .character-presentation,.tutorial-wire-return-character .character-presentation { width: 100%; height: 100%; border: 0; }
+.tutorial-wire-course { justify-self: center; font-size: var(--ui-font-section-heading); }
+.tutorial-wire-time { justify-self: center; color: var(--ui-text-muted); }
+.tutorial-wire-time b { color: #fff; font-size: var(--ui-font-numeric); }
+.tutorial-wire-progress { position: relative; width: 100%; height: 8px; overflow: hidden; border: 1px solid rgba(191,126,255,.4); border-radius: 99px; background: rgba(4,4,14,.9); }
+.tutorial-wire-progress i { display: block; width: 24%; height: 100%; border-radius: inherit; background: linear-gradient(90deg,#692cff,#f4d5ff); box-shadow: 0 0 16px #9e5cff; transition: width .45s ease; }
+.tutorial-wire-speedup { display: grid; place-items: center; gap: 20px; text-align: center; }
+.tutorial-wire-speed-icon { display: grid; width: 112px; height: 112px; place-items: center; border: 4px solid #b971ff; border-radius: 50%; color: #fff; font-size: 72px; font-weight: 950; line-height: 1; box-shadow: 0 0 34px #7432ff; animation: tutorial-speedup-pulse .5s ease-in-out infinite alternate; }
+.tutorial-wire-speedup .tutorial-wire-progress i { width: 100%; animation: tutorial-speedup-sweep .56s ease both; }
+.tutorial-wire-complete h2,.tutorial-wire-encounter h2 { margin: 0; font-size: clamp(30px,9vw,42px); }
+.tutorial-wire-rewards.is-return { margin-top: 4px; }
+.tutorial-wire-encounter { position:relative;display:grid;min-height:70vh;align-content:center;justify-items:center;gap:12px;overflow:hidden;text-align:center;animation:encounter-tension-in .25s ease-out both; }
+.tutorial-wire-encounter::before{position:absolute;inset:0;content:"";pointer-events:none;background:radial-gradient(circle at 50% 43%,rgba(255,28,104,.22),transparent 36%),linear-gradient(180deg,rgba(1,2,8,.18),rgba(1,2,8,.7));animation:encounter-tension-pulse .72s ease-out both}
+.tutorial-wire-encounter .tutorial-wire-glitch{position:relative;z-index:1;color:#ff3f78;font-size:clamp(58px,19vw,82px);line-height:1;text-shadow:0 0 10px rgba(255,35,105,.95),0 0 36px rgba(255,35,105,.58);animation:encounter-icon-impact .42s .14s cubic-bezier(.18,.88,.22,1.25) both}
+.tutorial-wire-encounter h2{position:relative;z-index:1;opacity:0;text-shadow:0 0 20px rgba(255,48,112,.58);animation:encounter-title-in .3s .34s ease-out forwards}
+.tutorial-wire-encounter small{position:relative;z-index:1;opacity:0;animation:encounter-subtitle-in .28s .5s ease-out forwards}
+.tutorial-wire-encounter .semantic-cta{position:relative;z-index:1;transition:opacity .2s ease,filter .2s ease}
+.tutorial-wire-encounter.is-ready .semantic-cta{opacity:1;filter:drop-shadow(0 0 12px rgba(255,38,106,.3))}
+.tutorial-wire-glitch { display: grid; width: 132px; height: 118px; place-items: center; border: 3px solid #ff2780; color: #ff4d99; font-size: 58px; clip-path: polygon(50% 0,100% 100%,0 100%); filter: drop-shadow(0 0 18px rgba(255,32,128,.7)); }
+.tutorial-wire-encounter .semantic-cta { align-self: end; width: 100%; margin-top: min(18vh,130px); }
+@keyframes encounter-tension-in{from{filter:brightness(.72)}to{filter:brightness(1)}}
+@keyframes encounter-tension-pulse{0%{opacity:0}44%{opacity:1;filter:brightness(1.65)}100%{opacity:1;filter:brightness(1)}}
+@keyframes encounter-icon-impact{0%{opacity:0;transform:scale(.8)}58%{opacity:1;transform:scale(1.12);filter:brightness(1.8)}100%{opacity:1;transform:scale(1);filter:brightness(1)}}
+@keyframes encounter-title-in{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes encounter-subtitle-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.tutorial-wire-encounter,.tutorial-wire-encounter::before,.tutorial-wire-encounter .tutorial-wire-glitch,.tutorial-wire-encounter h2,.tutorial-wire-encounter small{animation:none;opacity:1;transform:none}}
+@keyframes tutorial-speedup-pulse { to { transform: scale(1.06); filter: brightness(1.3); } }
+@keyframes tutorial-speedup-sweep { from { width: 8%; } to { width: 100%; } }
+@media (max-height: 720px) { .tutorial-quest-wire { gap: 9px; padding-top: calc(env(safe-area-inset-top) + 12px); } .tutorial-wire-progress-character,.tutorial-wire-return-character { height: 230px; } }
+@media (prefers-reduced-motion: reduce) { .tutorial-wire-speed-icon,.tutorial-wire-speedup .tutorial-wire-progress i { animation: none; } }
+
+.patrol-hero {
+  min-height: 126px;
+  margin-bottom: 12px;
+}
+
+.patrol-hero-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.patrol-hero-status strong {
+  color: var(--color-yellow, #ffd83d);
+  font-size: 34px;
+  line-height: 1;
+}
+
+.patrol-hero-status small { font-size: 12px; color: var(--text-secondary); }
+.patrol-hero p { margin: 12px 0 0; color: var(--text-secondary); font-size: 11px; }
+
+.ui-hub-page .patrol-content {
+  position: relative;
+  z-index: auto;
+  padding-bottom: 0;
+}
+
+.tutorial-quest-city { position:relative;min-height:220px;margin:-4px 0 12px;overflow:hidden;border:1px solid rgba(0,240,255,.28);border-radius:var(--ui-radius-lg);background-position:center;background-size:cover;box-shadow:inset 0 -48px 70px rgba(0,0,0,.65); }
+.tutorial-quest-city > div { position:absolute;right:16px;bottom:15px;left:16px; }
+.tutorial-quest-city span { color:var(--ui-accent);font-size:8px;font-weight:900;letter-spacing:.18em; }
+.tutorial-quest-city h2 { margin:2px 0 0;color:#fff;font-size:30px;line-height:1;text-shadow:0 3px 18px #000; }
+.tutorial-quest-city p { margin:6px 0 0;color:#d6e2e8;font-size:11px;font-weight:800; }
+.tutorial-quest-guidance { display:grid;gap:8px;margin-bottom:12px; }
+.tutorial-quest-guidance .tutorial-navigator { margin:0;animation:tutorial-quest-guidance-in .28s ease both; }
+.tutorial-quest-guidance.is-return .tutorial-navigator:last-child { animation-delay:.16s; }
+
+/* ----------------------------------------------------
+   コース選択グリッド
+   ---------------------------------------------------- */
+.patrol-courses-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.patrol-course-item {
+  background: rgba(30, 30, 35, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.patrol-course-item.locked {
+  opacity: .58;
+  cursor: not-allowed;
+}
+
+.patrol-town-clear-progress {
+  grid-column: 1 / -1;
+  color: var(--color-cyan, #43f2ff);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.course-clear {
+  margin-top: .35rem;
+  color: var(--color-green, #57f59b);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.course-lock {
+  margin-top: .35rem;
+  color: var(--color-warning, #ffca5c);
+  font-size: .65rem;
+  line-height: 1.3;
+}
+
+.quest-hard-recovery-actions {
+  flex-wrap: wrap;
+}
+
+.quest-hard-recovery-actions button {
+  flex: 1 1 8rem;
+}
+
+.patrol-course-item:hover {
+  background: rgba(40, 40, 45, 0.85);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.patrol-course-item.active {
+  border-color: var(--color-green, #00ff66);
+  background: rgba(35, 45, 38, 0.85);
+  box-shadow: inset 0 1px 0 rgba(0, 255, 102, 0.1), 0 0 12px rgba(0, 255, 102, 0.15);
+}
+
+.patrol-course-item .course-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+}
+
+.course-badge {
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.badge-short { background: rgba(0, 255, 102, 0.15); color: #00ff66; border: 1px solid rgba(0, 255, 102, 0.3); }
+.badge-medium { background: rgba(0, 153, 255, 0.15); color: #0099ff; border: 1px solid rgba(0, 153, 255, 0.3); }
+.badge-long { background: rgba(255, 153, 0, 0.15); color: #ff9900; border: 1px solid rgba(255, 153, 0, 0.3); }
+.badge-idle { background: rgba(255, 51, 102, 0.15); color: #ff3366; border: 1px solid rgba(255, 51, 102, 0.3); }
+
+/* ----------------------------------------------------
+   キャラクター選択グリッド
+   ---------------------------------------------------- */
+.patrol-char-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 8px;
+  max-height: 160px;
+  overflow-y: auto;
+  padding: 4px;
+  background: rgba(17, 19, 28, 0.6);
+  border-radius: 8px;
+  border: 1px inset rgba(255, 255, 255, 0.05);
+}
+
+.patrol-char-grid::-webkit-scrollbar { width: 4px; }
+.patrol-char-grid::-webkit-scrollbar-thumb { background: rgba(160, 160, 170, 0.3); border-radius: 2px; }
+
+.patrol-char-item {
+  background: rgba(30, 30, 35, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 5px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.patrol-char-portrait {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin-bottom: 4px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: radial-gradient(circle at 50% 75%, rgba(0, 220, 255, 0.16), rgba(5, 8, 15, 0.92) 68%);
+}
+
+.patrol-char-portrait .character-presentation { margin: 0; }
+
+.quest-stage-track {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 3px;
+  margin: 0 0 12px;
+  padding: 9px 7px;
+  border: 1px solid rgba(0, 240, 255, .2);
+  border-radius: var(--ui-radius-md, 8px);
+  background: rgba(4, 8, 14, .88);
+}
+
+.quest-stage-track div { min-width: 0; color: #667685; text-align: center; }
+.quest-stage-track span {
+  display: grid;
+  width: 21px;
+  height: 21px;
+  margin: 0 auto 4px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 50%;
+  font-size: 8px;
+  font-weight: 900;
+}
+.quest-stage-track b { display: block; overflow: hidden; font-size: 7px; white-space: nowrap; text-overflow: ellipsis; }
+.quest-stage-track .is-complete { color: #67ffc0; }
+.quest-stage-track .is-current { color: #fff; }
+.quest-stage-track .is-current span { border-color: var(--neon-cyan); color: #061018; background: var(--neon-cyan); box-shadow: 0 0 12px rgba(0, 240, 255, .35); }
+
+.quest-v0-summary { margin-bottom: 12px; padding: 11px; border: 1px solid rgba(0, 240, 255, .24); border-radius: 7px; background: linear-gradient(120deg, rgba(0, 240, 255, .08), rgba(5, 10, 18, .78)); }
+.quest-v0-summary > div { display: flex; flex-direction: column; gap: 2px; }
+.quest-v0-summary > div span { color: var(--neon-cyan); font-size: 7px; font-weight: 900; letter-spacing: .2em; }
+.quest-v0-summary > div strong { color: #fff; font-size: 15px; }
+.quest-v0-summary dl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin: 10px 0 0; }
+.quest-v0-summary dl div { padding: 6px 4px; border: 1px solid rgba(255, 255, 255, .08); border-radius: 4px; background: rgba(0, 0, 0, .28); text-align: center; }
+.quest-v0-summary dt { color: #7f92a2; font-size: 7px; }
+.quest-v0-summary dd { margin: 2px 0 0; color: #fff1af; font-size: 9px; font-weight: 900; }
+.quest-v0-section-label { margin-bottom: 7px; color: #a9b7c4; font-size: 10px; font-weight: 800; }
+.quest-v0-section-label b { color: #fff; }
+
+.patrol-container:has(.tutorial-quest-city) .patrol-char-grid { grid-template-columns:minmax(0,112px);max-height:none;overflow:visible;background:transparent;border:0;padding:0; }
+.patrol-container:has(.tutorial-quest-city) .patrol-char-item { min-height:126px; }
+.patrol-container:has(.tutorial-quest-city) .active-patrol-card { border-color:rgba(0,240,255,.32);background:linear-gradient(155deg,rgba(9,17,28,.98),rgba(4,8,14,.98)); }
+.patrol-container:has(.tutorial-quest-city) .battle-alert { padding:12px!important;border:1px solid rgba(242,201,95,.56)!important;background:radial-gradient(circle at 50% 0,rgba(242,201,95,.12),transparent 62%); }
+
+@keyframes tutorial-quest-guidance-in { from{opacity:0;transform:translateY(7px)} to{opacity:1;transform:none} }
+
+.patrol-char-item:hover:not(.locked):not(.deployed) {
+  background: rgba(40, 40, 45, 0.9);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.patrol-char-item.selected {
+  border-color: var(--color-cyan, #00ffff);
+  background: rgba(0, 255, 255, 0.1);
+  box-shadow: inset 0 0 8px rgba(0, 255, 255, 0.2);
+}
+
+.patrol-char-item.locked {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.patrol-char-item.deployed {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: rgba(255, 51, 102, 0.3);
+}
+
+.char-name {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.char-bonus-badge {
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #ffd700;
+  margin-top: 4px;
+  text-shadow: 0 0 4px rgba(255, 215, 0, 0.5);
+}
+
+.char-deployed-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  background: rgba(255, 51, 102, 0.85);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #ff3366;
+  white-space: nowrap;
+}
+
+/* ----------------------------------------------------
+   進行中クエスト一覧
+   ---------------------------------------------------- */
+.active-patrols-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.active-patrol-card {
+  padding: 12px;
+}
+
+.patrol-result-v0 { width: min(calc(100% - 28px), 390px); max-height: min(720px, calc(100dvh - 40px)); padding: 16px; border-color: rgba(242, 201, 95, .58); background: linear-gradient(155deg, rgba(20, 21, 25, .99), rgba(6, 9, 14, .99)); box-shadow: 0 22px 70px rgba(0, 0, 0, .72), 0 0 26px rgba(242, 201, 95, .15); }
+.patrol-result-heading { position: relative; margin: -16px -16px 14px; padding: 19px 16px 16px; overflow: hidden; border-bottom: 1px solid rgba(242, 201, 95, .35); background: radial-gradient(circle at 50% 110%, rgba(242, 201, 95, .28), transparent 55%), #090b0f; text-align: center; }
+.patrol-result-heading span { color: #d8bc71; font-size: 8px; font-weight: 900; letter-spacing: .2em; }
+.patrol-result-heading h3 { margin: 4px 0 2px; color: #fff2b7; font-size: 30px; letter-spacing: .22em; text-indent: .22em; text-shadow: 0 0 22px rgba(242, 201, 95, .42); }
+.patrol-result-heading p { margin: 0; color: #9ca8b4; font-size: 10px; }
+.patrol-result-primary-reward { display: flex; flex-direction: column; align-items: center; padding: 12px; border: 1px solid rgba(0, 240, 255, .24); background: radial-gradient(circle, rgba(0, 240, 255, .12), transparent 70%); }
+.patrol-result-primary-reward span { color: #99adba; font-size: 8px; font-weight: 900; letter-spacing: .16em; }
+.patrol-result-primary-reward strong { margin-top: 3px; color: #67ffc0; font-size: 20px; text-shadow: 0 0 14px rgba(103, 255, 192, .34); }
+.patrol-result-primary-reward small { color: #71808d; font-size: 8px; }
+.patrol-result-row { min-height: 30px; color: #aab6c1; font-size: 10px; }
+.patrol-result-row strong { color: #fff; }
+.patrol-result-growth { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 9px; border: 1px solid rgba(242, 201, 95, .26); color: #fff3b8; background: rgba(242, 201, 95, .07); text-align: center; }
+.patrol-result-growth span { color: var(--neon-gold); font-size: 8px; font-weight: 900; letter-spacing: .22em; }
+.patrol-result-growth strong { font-size: 11px; }
+
+.patrol-card-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 8px;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 18px;
+  background: rgba(17, 19, 28, 0.8);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0099ff 0%, #00ff66 100%);
+  transition: width 1s linear;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+  white-space: nowrap;
+}
+
+.progress-bar-container.full .progress-bar-fill {
+  background: linear-gradient(90deg, #ff8800 0%, #ffd700 100%);
+}
+.tutorial-wire-sync{display:block;margin-top:8px;color:var(--ui-text-secondary);font-size:10px;text-align:center}
+
+/* Canonical mobile quest grammar: context, enemy, duration and reward before dispatch. */
+.quest-canonical-context {
+  display:flex;align-items:flex-end;justify-content:space-between;min-height:86px;margin:0 0 10px;padding:12px;
+  border:1px solid rgba(0,240,255,.28);border-radius:var(--ui-radius-md,8px);background-position:center;background-size:cover;
+  box-shadow:inset 0 -30px 50px rgba(0,0,0,.22)
+}
+.quest-canonical-context div{display:grid;gap:2px;min-width:0}.quest-canonical-context span{color:var(--neon-cyan);font-size:8px;font-weight:900;letter-spacing:.14em}
+.quest-canonical-context strong{overflow:hidden;color:#fff;font-size:19px;text-overflow:ellipsis;white-space:nowrap}.quest-canonical-context p{margin:0;color:#b7c5d0;font-size:10px}.quest-canonical-context b{color:#fff;font-size:16px}
+.quest-canonical-brief{margin-bottom:11px;overflow:hidden;border:1px solid rgba(0,240,255,.24);border-radius:8px;background:linear-gradient(145deg,rgba(0,240,255,.08),rgba(5,10,18,.9))}
+.quest-canonical-brief header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px;border-bottom:1px solid rgba(255,255,255,.08)}
+.quest-canonical-brief header div{display:grid;gap:1px;min-width:0}.quest-canonical-brief header span{color:var(--neon-cyan);font-size:7px;font-weight:900;letter-spacing:.14em}
+.quest-canonical-brief header strong{overflow:hidden;color:#fff;font-size:15px;text-overflow:ellipsis;white-space:nowrap}.quest-canonical-brief header>b{flex:0 0 auto;padding:3px 7px;border:1px solid rgba(242,201,95,.42);border-radius:999px;color:#fff1af;font-size:8px}
+.quest-canonical-metrics,.quest-canonical-rewards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;padding:8px}
+.quest-canonical-metrics>span,.quest-canonical-rewards>span{display:grid;align-content:center;min-width:0;min-height:42px;padding:5px;border:1px solid rgba(255,255,255,.08);border-radius:5px;background:rgba(0,0,0,.25);text-align:center}
+.quest-canonical-brief small{color:#8799a8;font-size:7px}.quest-canonical-brief strong{overflow-wrap:anywhere;color:#fff;font-size:10px}
+.quest-canonical-enemy{display:grid;gap:3px;margin:0 8px;padding:8px;border-left:2px solid var(--neon-cyan);background:rgba(0,0,0,.25)}.quest-canonical-enemy>strong{font-size:11px}
+.quest-canonical-enemy p{display:flex;flex-wrap:wrap;gap:4px 8px;margin:2px 0 0;color:#aebac4;font-size:8px}.quest-canonical-rewards strong{color:#fff1af}
+.quest-first-clear{margin:0 8px 8px;padding:6px 8px;border:1px solid rgba(242,201,95,.24);color:#dbc77e;background:rgba(242,201,95,.06);font-size:8px}
+
+@media(max-width:420px){
+  .quest-canonical-context{min-height:76px;padding:10px}.quest-canonical-context strong{font-size:17px}
+  .quest-canonical-metrics,.quest-canonical-rewards{gap:4px;padding:7px}.quest-canonical-metrics>span,.quest-canonical-rewards>span{min-height:38px;padding:4px 2px}
+  .quest-canonical-brief strong{font-size:9px}.patrol-char-grid{grid-template-columns:repeat(4,minmax(0,1fr));max-height:145px}
+}

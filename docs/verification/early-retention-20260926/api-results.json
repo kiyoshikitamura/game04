@@ -1,0 +1,38 @@
+{
+  "scope": "actual patched Edge handler + strict in-memory DB transport; no network",
+  "checks": [
+    "server ignores client assist override",
+    "start input saves assist and quest snapshot",
+    "settled replay retains result/rewards",
+    "1-1/1-2 guides persist deck without character navigation",
+    "five slots at1-3; deferred guides; one-action loadout",
+    "area completion mandatory mission ack",
+    "2-1 has no assist; no defeat guide"
+  ],
+  "battles": [
+    {
+      "id": "mikawa-1",
+      "assist": true
+    },
+    {
+      "id": "mikawa-2",
+      "assist": true
+    },
+    {
+      "id": "mikawa-3",
+      "assist": true
+    },
+    {
+      "id": "mikawa-4",
+      "assist": true
+    },
+    {
+      "id": "mikawa-5",
+      "assist": true
+    },
+    {
+      "id": "owari-1",
+      "assist": false
+    }
+  ]
+}

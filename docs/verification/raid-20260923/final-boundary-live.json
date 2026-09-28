@@ -1,0 +1,56 @@
+{
+  "apiVersion": 16,
+  "project": "lrgyllgzcdcphlbmkknc",
+  "startedAt": "2026-09-23T15:54:24.108Z",
+  "scope": "Fresh disposable formal ERB01 room snapshots. Initial expired/full/left fixture states; existing player assets and energy preserved. API boundary evidence, not visual/balance acceptance.",
+  "checks": [
+    {
+      "case": "expired:raid_join",
+      "roomId": "ae59fa95-6047-48aa-9a30-7f937f5edf6e",
+      "pass": true,
+      "status": 400,
+      "error": "このレイドは終了しました。"
+    },
+    {
+      "case": "full:raid_join",
+      "roomId": "95f2fec1-d113-4363-9015-0092a6cab8e3",
+      "pass": true,
+      "status": 400,
+      "error": "参加人数が上限に達しています。"
+    },
+    {
+      "case": "left:raid_join",
+      "roomId": "e1476fb0-ba55-4c3d-b80f-4da1a7739851",
+      "pass": true,
+      "status": 400,
+      "error": "退出済みのレイドには再参加できません。"
+    },
+    {
+      "case": "left:raid_battle",
+      "roomId": "e1476fb0-ba55-4c3d-b80f-4da1a7739851",
+      "pass": true,
+      "status": 400,
+      "error": "参加できる開催中レイドを選んでください。"
+    },
+    {
+      "case": "energy:raid_battle",
+      "roomId": "52c68c33-b015-490a-9f80-2861a529a039",
+      "pass": true,
+      "status": 400,
+      "error": "行動力が足りません。"
+    },
+    {
+      "case": "shortage leaves attempts/HP/energy unchanged",
+      "pass": true,
+      "beforeEnergy": 7,
+      "afterEnergy": 7
+    },
+    {
+      "case": "same-request join/rescue replay once",
+      "pass": true,
+      "roomId": "52c68c33-b015-490a-9f80-2861a529a039"
+    }
+  ],
+  "pass": true,
+  "finishedAt": "2026-09-23T15:54:52.052Z"
+}

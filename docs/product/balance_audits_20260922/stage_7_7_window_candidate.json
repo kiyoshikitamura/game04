@@ -1,0 +1,579 @@
+{
+  "status": "CANDIDATE_NOT_FIXED",
+  "basisCommit": "06fe0d1a8dfa91a79d7225afaf71f86d86b298ca",
+  "base": "previous 16 enemy initial-count candidates",
+  "stage": "7-7",
+  "enemyId": "7-7/4/1",
+  "changes": {
+    "name": {
+      "before": "武田信玄",
+      "candidate": "徳川家康"
+    },
+    "element": {
+      "before": "fire",
+      "candidate": "earth"
+    },
+    "stats": {
+      "before": {
+        "luk": 0,
+        "hp": 52800,
+        "atk": 4090,
+        "def": 1320,
+        "sp": 130
+      },
+      "candidate": {
+        "luk": 0,
+        "hp": 52800,
+        "atk": 4090,
+        "def": 3000,
+        "sp": 130
+      }
+    },
+    "skills": {
+      "before": [
+        {
+          "id": "SKD033",
+          "name": "気合",
+          "image": "",
+          "rarity": "N",
+          "element": "fire",
+          "spCost": 30,
+          "condition": {
+            "type": "always"
+          },
+          "target": "self",
+          "effects": [
+            {
+              "type": "atk_up",
+              "power": 10.23,
+              "duration": 3
+            }
+          ],
+          "description": "正式表の検証入力"
+        },
+        {
+          "id": "SKD007",
+          "name": "標準単体攻撃・火",
+          "image": "",
+          "rarity": "R",
+          "element": "fire",
+          "spCost": 50,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "effects": [
+            {
+              "type": "damage",
+              "power": 145.45
+            }
+          ],
+          "description": "正式表の検証入力"
+        }
+      ],
+      "candidate": [
+        {
+          "id": "SKD034",
+          "name": "身構え",
+          "image": "",
+          "rarity": "N",
+          "element": "earth",
+          "spCost": 30,
+          "condition": {
+            "type": "always"
+          },
+          "target": "self",
+          "effects": [
+            {
+              "type": "def_up",
+              "power": 19.77,
+              "duration": 3
+            }
+          ],
+          "description": "正式表の検証入力"
+        },
+        {
+          "id": "SKD009",
+          "name": "標準単体攻撃・土",
+          "image": "",
+          "rarity": "R",
+          "element": "earth",
+          "spCost": 50,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "effects": [
+            {
+              "type": "damage",
+              "power": 145.45
+            }
+          ],
+          "description": "正式表の検証入力"
+        }
+      ]
+    },
+    "passives": {
+      "before": [
+        {
+          "id": "P16_fire",
+          "type": "P16",
+          "name": "P16",
+          "stat": "def",
+          "percent": 23.292714812150788,
+          "level": 4,
+          "target": "self",
+          "targetElement": "fire"
+        }
+      ],
+      "candidate": [
+        {
+          "id": "P02_earth",
+          "type": "P02",
+          "name": "P02",
+          "stat": "def",
+          "percent": 13.975628887290473,
+          "level": 4,
+          "target": "party",
+          "targetElement": "earth"
+        }
+      ]
+    },
+    "initialCount": {
+      "before": 8,
+      "candidate": 2
+    }
+  },
+  "candidateWaves": [
+    [
+      {
+        "id": "7-7/1/1",
+        "name": "片倉景綱",
+        "image": "",
+        "level": 68,
+        "stats": {
+          "luk": 0,
+          "hp": 15840,
+          "atk": 3960,
+          "def": 660,
+          "sp": 100
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "wind",
+        "actionCount": 5,
+        "initialCount": 3,
+        "initialSp": 75,
+        "skills": [
+          {
+            "id": "SKD046",
+            "name": "守護の札",
+            "image": "",
+            "rarity": "SR",
+            "element": "light",
+            "spCost": 75,
+            "condition": {
+              "type": "always"
+            },
+            "target": "lowest_ally",
+            "effects": [
+              {
+                "type": "shield",
+                "power": 85.68,
+                "duration": 3
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P12_wind",
+            "type": "P12",
+            "name": "P12",
+            "stat": "atk",
+            "percent": 11.646357406075394,
+            "level": 4,
+            "target": "self",
+            "targetElement": "wind"
+          }
+        ]
+      },
+      {
+        "id": "7-7/1/2",
+        "name": "前田利家",
+        "image": "",
+        "level": 68,
+        "stats": {
+          "luk": 0,
+          "hp": 15840,
+          "atk": 3040,
+          "def": 590,
+          "sp": 100
+        },
+        "order": 1,
+        "hitSpGain": 10,
+        "element": "earth",
+        "actionCount": 6,
+        "initialCount": 6,
+        "initialSp": 0,
+        "skills": [],
+        "passives": [
+          {
+            "id": "P05_earth",
+            "type": "P05",
+            "name": "P05",
+            "stat": "atk",
+            "percent": 11.646357406075394,
+            "level": 4,
+            "target": "self",
+            "targetElement": "earth"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "id": "7-7/2/1",
+        "name": "真田昌幸",
+        "image": "",
+        "level": 68,
+        "stats": {
+          "luk": 0,
+          "hp": 15840,
+          "atk": 3960,
+          "def": 660,
+          "sp": 100
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "fire",
+        "actionCount": 5,
+        "initialCount": 5,
+        "initialSp": 75,
+        "skills": [
+          {
+            "id": "SKD046",
+            "name": "守護の札",
+            "image": "",
+            "rarity": "SR",
+            "element": "light",
+            "spCost": 75,
+            "condition": {
+              "type": "always"
+            },
+            "target": "lowest_ally",
+            "effects": [
+              {
+                "type": "shield",
+                "power": 85.68,
+                "duration": 3
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P12_fire",
+            "type": "P12",
+            "name": "P12",
+            "stat": "atk",
+            "percent": 17.46953610911309,
+            "level": 4,
+            "target": "self",
+            "targetElement": "fire"
+          }
+        ]
+      },
+      {
+        "id": "7-7/2/2",
+        "name": "島津義弘",
+        "image": "",
+        "level": 68,
+        "stats": {
+          "luk": 0,
+          "hp": 15840,
+          "atk": 3040,
+          "def": 590,
+          "sp": 100
+        },
+        "order": 1,
+        "hitSpGain": 10,
+        "element": "fire",
+        "actionCount": 6,
+        "initialCount": 6,
+        "initialSp": 50,
+        "skills": [
+          {
+            "id": "SKD007",
+            "name": "標準単体攻撃・火",
+            "image": "",
+            "rarity": "R",
+            "element": "fire",
+            "spCost": 50,
+            "condition": {
+              "type": "always"
+            },
+            "target": "first",
+            "effects": [
+              {
+                "type": "damage",
+                "power": 145.45
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P14_fire",
+            "type": "P14",
+            "name": "P14",
+            "stat": "atk",
+            "percent": 20.38112546063194,
+            "level": 4,
+            "target": "self",
+            "targetElement": "fire"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "id": "7-7/3/1",
+        "name": "直江兼続",
+        "image": "",
+        "level": 68,
+        "stats": {
+          "luk": 0,
+          "hp": 13200,
+          "atk": 2770,
+          "def": 530,
+          "sp": 100
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "water",
+        "actionCount": 5,
+        "initialCount": 2,
+        "initialSp": 75,
+        "skills": [
+          {
+            "id": "SKD035",
+            "name": "鬨の声",
+            "image": "",
+            "rarity": "R",
+            "element": "fire",
+            "spCost": 75,
+            "condition": {
+              "type": "always"
+            },
+            "target": "all_allies",
+            "effects": [
+              {
+                "type": "atk_up",
+                "power": 10.23,
+                "duration": 3
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P01_water",
+            "type": "P01",
+            "name": "P01",
+            "stat": "atk",
+            "percent": 6.987814443645236,
+            "level": 4,
+            "target": "party",
+            "targetElement": "water"
+          }
+        ]
+      },
+      {
+        "id": "7-7/3/2",
+        "name": "上杉景勝",
+        "image": "",
+        "level": 68,
+        "stats": {
+          "luk": 0,
+          "hp": 25080,
+          "atk": 2380,
+          "def": 1190,
+          "sp": 100
+        },
+        "order": 1,
+        "hitSpGain": 10,
+        "element": "water",
+        "actionCount": 6,
+        "initialCount": 6,
+        "initialSp": 75,
+        "skills": [
+          {
+            "id": "SKD036",
+            "name": "守りの陣",
+            "image": "",
+            "rarity": "R",
+            "element": "light",
+            "spCost": 75,
+            "condition": {
+              "type": "always"
+            },
+            "target": "all_allies",
+            "effects": [
+              {
+                "type": "def_up",
+                "power": 19.77,
+                "duration": 3
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P02_water",
+            "type": "P02",
+            "name": "P02",
+            "stat": "def",
+            "percent": 6.987814443645236,
+            "level": 4,
+            "target": "party",
+            "targetElement": "water"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "id": "7-7/4/1",
+        "name": "徳川家康",
+        "image": "",
+        "level": 68,
+        "stats": {
+          "luk": 0,
+          "hp": 52800,
+          "atk": 4090,
+          "def": 3000,
+          "sp": 130
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "earth",
+        "actionCount": 8,
+        "initialCount": 2,
+        "initialSp": 80,
+        "skills": [
+          {
+            "id": "SKD034",
+            "name": "身構え",
+            "image": "",
+            "rarity": "N",
+            "element": "earth",
+            "spCost": 30,
+            "condition": {
+              "type": "always"
+            },
+            "target": "self",
+            "effects": [
+              {
+                "type": "def_up",
+                "power": 19.77,
+                "duration": 3
+              }
+            ],
+            "description": "正式表の検証入力"
+          },
+          {
+            "id": "SKD009",
+            "name": "標準単体攻撃・土",
+            "image": "",
+            "rarity": "R",
+            "element": "earth",
+            "spCost": 50,
+            "condition": {
+              "type": "always"
+            },
+            "target": "first",
+            "effects": [
+              {
+                "type": "damage",
+                "power": 145.45
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P02_earth",
+            "type": "P02",
+            "name": "P02",
+            "stat": "def",
+            "percent": 13.975628887290473,
+            "level": 4,
+            "target": "party",
+            "targetElement": "earth"
+          }
+        ]
+      },
+      {
+        "id": "7-7/4/2",
+        "name": "濃姫",
+        "image": "",
+        "level": 68,
+        "stats": {
+          "luk": 0,
+          "hp": 15840,
+          "atk": 3960,
+          "def": 660,
+          "sp": 100
+        },
+        "order": 1,
+        "hitSpGain": 10,
+        "element": "dark",
+        "actionCount": 5,
+        "initialCount": 5,
+        "initialSp": 75,
+        "skills": [
+          {
+            "id": "SKD046",
+            "name": "守護の札",
+            "image": "",
+            "rarity": "SR",
+            "element": "light",
+            "spCost": 75,
+            "condition": {
+              "type": "always"
+            },
+            "target": "lowest_ally",
+            "effects": [
+              {
+                "type": "shield",
+                "power": 85.68,
+                "duration": 3
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P12_dark",
+            "type": "P12",
+            "name": "P12",
+            "stat": "atk",
+            "percent": 17.46953610911309,
+            "level": 4,
+            "target": "self",
+            "targetElement": "dark"
+          }
+        ]
+      }
+    ]
+  ],
+  "note": "Candidate only. Dedicated R dispel role still not accepted; do not overwrite formal concept or master."
+}

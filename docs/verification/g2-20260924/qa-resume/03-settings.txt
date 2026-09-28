@@ -1,0 +1,101 @@
+- iframe [active]:
+  - alert
+  - region "ゲーム画面":
+    - img "くノ一"
+    - generic: Lv.1
+    - strong: G2QA再検
+    - generic "将来の同盟表示枠": ◇ 同盟 —
+    - button "アカウント連携": 未認証
+    - button "メニュー" [active]
+    - generic: 銭 12,600
+    - generic: 輝石 200
+    - generic: 行動力 50/100
+    - main:
+      - region "お気に入り武将":
+        - iframe
+        - img "くノ一"
+      - navigation "本陣の操作":
+        - button "切替"
+        - button "任務 未受取の任務報酬":
+          - generic: 任務
+          - generic "未受取の任務報酬"
+        - button "商店":
+          - generic: 商店
+        - button "同盟・未解放" [disabled]:
+          - generic: 同盟
+          - generic: 未解放
+      - button "出陣の続き":
+        - strong: 出陣の続き
+      - button "領土侵攻":
+        - strong: 領土侵攻
+      - region "交流":
+        - button "活動"
+        - button "全体"
+        - button "DM"
+        - button "RQAWGst"
+        - button "共闘 Lv.1の援軍を求めています。 共闘を確認": 共闘 Lv.1の援軍を求めています。 ›
+        - time: 1日前
+        - button "RQAWGstにDM"
+        - button "RQAPolA"
+        - button "共闘 Lv.12の援軍を求めています。 共闘を確認": 共闘 Lv.12の援軍を求めています。 ›
+        - time: 1日前
+        - button "RQAPolAにDM"
+        - button "RQAWGst"
+        - button "共闘 Lv.1の援軍を求めています。 共闘を確認": 共闘 Lv.1の援軍を求めています。 ›
+        - time: 1日前
+        - button "RQAWGstにDM"
+        - button "交流を開く ›"
+      - button "召喚 ›":
+        - strong: 召喚
+        - generic: ›
+    - navigation "メインナビゲーション":
+      - button "本陣"
+      - button "出陣"
+      - button "武将"
+      - button "共闘"
+      - button "召喚"
+    - dialog "設定 / プロフィール":
+      - heading "設定 / プロフィール" [level=2]
+      - strong: プロフィール
+      - button "編集":
+        - generic: 編集
+      - term: プレイヤー名
+      - definition: G2QA再検
+      - term: 自己紹介
+      - definition: 未設定
+      - heading "サウンド設定" [level=4]
+      - generic: BGM
+      - status: 45%
+      - button "ON"
+      - button "OFF"
+      - slider "BGM"
+      - generic: SE
+      - status: 70%
+      - button "ON"
+      - button "OFF"
+      - slider "SE"
+      - paragraph: この端末のブラウザに保存されます。
+      - region "法的情報":
+        - heading "法的情報" [level=4]
+        - navigation "法的情報":
+          - link "利用規約":
+            - /url: /legal/terms?from=settings
+          - link "プライバシーポリシー":
+            - /url: /legal/privacy?from=settings
+          - link "特定商取引法に基づく表記":
+            - /url: /legal/tokusho?from=settings
+          - link "資金決済法に関する表示":
+            - /url: /legal/payments?from=settings
+          - link "Cookie・アクセス解析":
+            - /url: /legal/cookies?from=settings
+          - link "年齢・購入について":
+            - /url: /legal/age-rating?from=settings
+          - link "権利表記":
+            - /url: /legal/rights?from=settings
+          - link "お問い合わせ・不具合報告":
+            - /url: /legal/contact?from=settings
+      - button "ログアウト":
+        - generic: ログアウト
+      - button "閉じる":
+        - generic: 閉じる
+- alert

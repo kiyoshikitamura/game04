@@ -1,0 +1,31 @@
+# DBG-031 装備画像の先行修正
+
+## 原因・範囲
+
+発生/稼働確認版 `19a638c155a739a33d886045b0ef953f18e28716`。着手時PR #37/headと対象branchは `384d0ca` で一致。B03/初期継続成果を保持。
+
+正式160装備のID→画像pathは一致していたが、public/equipments の実ファイル160点がGAME03旧画像のままだった。保存済みGAME04素材のマニフェストは取り込まれていたが、該当バイナリは未反映。キャッシュを原因とした修正ではない。
+
+GAME04保存済み `65d2a4b2dc1ffe9cf4a18a8e73539b6c079d1ff8` の160画像を再利用。ローカル保存元を `config/game04-local-other-assets.json` の正式ID/既存path/SHA-256で160/160照合してコピーした。全画像512×512。異なる装備による代替なし、正式160IDの不足なし。旧専用装備10点は正式160母集団外であり未変更。
+
+`config/game04-master-assets.json` の対象160件を接続済み・現寸法・SHA-256へ更新。画像URLを変えずバイナリを正すため、正式マスター/排出結果/既存受領記録が同じIDの正しい画像を取得する。共通resolverに別装備fallbackはなく、装備数値・効果・カードCSS/コンポーネント・API/DBを変更していない。
+
+## 限定確認
+
+- `verify_dbg031_equipment_assets.cjs`: 正式160IDと素材160IDの集合一致、重複pathなし、名前/寸法/承認hash一致。不足0。正式排出160件の画像参照、およびオフライン正式10連receiptの参照一致。
+- `verify_dbg031_equipment_ui.cjs`: 本体GrowthViewを使用する既存QAで375/390px。一覧14件・詳細・装備育成結果・選択保存後の武将装備枠。画像デコード512px、pageerrorなし。装備選択一覧自体は既存の文字表示であり、デザイン変更なし。QAは検証用状態のみでDB書込なし。
+- list/detail/growth-result/equipped 各2幅の画像を保存し目視確認。ローディング完了後と、装備枠までスクロールした表示を採用。
+- 既存正式ガチャドメイン検証成功。抽選の数値変更なし。新規の実課金/実ガチャは行っていない。
+- 型検査成功。Preview branch設定を使用したNext production build成功。
+- 配信後は同じ160pathのHTTP200と取得バイナリのSHA-256を照合し、代表UIを再確認する。
+
+## 配信完了
+
+修正・配信SHA `82607dc5f3e2a64ff8936bb0a2b97cf02397f722`。PR #37 push済み。Vercel Preview/Ready `dpl_DDTZrwRn3U3mdWVVUXnF3FgqXP6G`。
+
+共通URL https://game04-git-work-game04-common-preview-20260925-kiyoshi-kitamura.vercel.app/ の稼働SHAを `deployment.json` に保存。自動buildだけでは旧aliasのままだったため接続を明示更新し、公開APIで照合した。
+
+`assets.json` は配信画像160/160のHTTP200/承認hash一致。`ui.json` と代表画像は共通Preview上の再確認に更新。375/390の一覧・詳細・育成結果・装備選択後表示でpageerrorなし。正式160IDの不足0。
+
+状態：**配信済み・実機確認待ち**。iPhone実機は未確認。main/本番/GAME03/API/DBは変更なし。
+

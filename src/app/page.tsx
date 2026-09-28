@@ -1,30 +1,30 @@
-import Link from "next/link";
-import { AuthPanel } from "./components/AuthPanel";
-import { LifecycleState } from "./components/LifecycleState";
-import { authNavigationMessage, safeInternalPath } from "@/lib/auth/navigation";
+"use client";
+import { GameProvider, useGame } from "./context/GameContext";
+import { AudioProvider } from "@/audio/AudioProvider";
+import TitleView from "./components/TitleView";
+import AuthView from "./components/AuthView";
+import IntegratedStart from "./components/redesign/IntegratedStart";
+import Game04EntryState from "./components/ui/Game04EntryState";
+import BrandedLoading from "./components/ui/BrandedLoading";
+import RedesignApp from "./components/redesign/RedesignApp";
+import { useCallback, useEffect, useState } from "react";
+import RedesignBillingReturn from "./components/redesign/RedesignBillingReturn";
+import RedesignCommerceOverlays from "./components/redesign/RedesignCommerceOverlays";
+import { initializeAcquisitionAttribution } from "@/utils/acquisitionAttribution";
 
-type TitlePageProps = {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
-};
-
-function first(value: string | string[] | undefined) {
-  return Array.isArray(value) ? value[0] : value;
+function AppContent() {
+  const game = useGame();
+  const [billingRevision, setBillingRevision] = useState(0);
+  const [initialTab, setInitialTab] = useState('home');
+  const billingGranted = useCallback(() => { setInitialTab('shop'); setBillingRevision(value => value + 1); }, []);
+  const billingReturn = useCallback(() => { setInitialTab('shop'); }, []);
+  useEffect(() => { void initializeAcquisitionAttribution(); }, []);
+  if (game.showTitleView) return <div className="app-container"><TitleView /></div>;
+  if (game.authLoading) return <div className="app-container"><BrandedLoading /></div>;
+  if (!game.session) return <div className="app-container"><AuthView /></div>;
+  if (game.isSetupRequired) return <div className="app-container"><IntegratedStart /></div>;
+  if (!game.authenticatedProjectionReady) return <Game04EntryState error={game.authenticatedProjectionError} onRetry={() => void game.retryAuthenticatedProjection()}/>;
+  if (game.maintenanceEnabled) return <Game04EntryState maintenance/>;
+  return <><RedesignApp key={`${game.session.user.id}:${initialTab}:${billingRevision}`} initialTab={initialTab} /><RedesignBillingReturn onGranted={billingGranted} onReturn={billingReturn} /><RedesignCommerceOverlays /></>;
 }
-
-export default async function TitlePage({ searchParams }: TitlePageProps) {
-  const params = await searchParams;
-  const message = authNavigationMessage(first(params.reason));
-  const nextPath = safeInternalPath(first(params.next), "/home");
-
-  return (
-    <main className="shell title-shell">
-      <p className="eyebrow">GAME04 · BASE ENVIRONMENT</p>
-      <h1>GAME04</h1>
-      <p className="lede">キャラクターを推し、同じ感覚を持つ人と一緒に活動するためのゲーム。</p>
-      {message && <LifecycleState kind="notice" title="ログイン状態のお知らせ" message={message} compact />}
-      <AuthPanel nextPath={nextPath} />
-      <Link className="primary-action" href="/home">開発用ホームへ</Link>
-      <p className="notice">認証後、GAME04共通のプレイヤー状態だけを安全に初期化します。</p>
-    </main>
-  );
-}
+export default function Home() { return <AudioProvider><GameProvider><AppContent /></GameProvider></AudioProvider>; }

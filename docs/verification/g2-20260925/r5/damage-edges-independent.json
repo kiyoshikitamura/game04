@@ -1,0 +1,72 @@
+{
+  "status": "PASS",
+  "scope": "synthetic local combat edge cases; no DB changes or balance approval",
+  "results": [
+    {
+      "name": "multihit",
+      "events": [
+        "damage"
+      ],
+      "outcome": "win",
+      "displayDamage": 10095,
+      "actualHpDamage": 500,
+      "reconstructedHpLoss": 500,
+      "displayAndFramesUnchanged": true
+    },
+    {
+      "name": "shield",
+      "events": [
+        "shield_absorbed"
+      ],
+      "outcome": "win",
+      "displayDamage": 203,
+      "actualHpDamage": 200,
+      "reconstructedHpLoss": 200,
+      "displayAndFramesUnchanged": true
+    },
+    {
+      "name": "dot",
+      "events": [
+        "dot"
+      ],
+      "outcome": "win",
+      "displayDamage": 201,
+      "actualHpDamage": 200,
+      "reconstructedHpLoss": 200,
+      "displayAndFramesUnchanged": true
+    },
+    {
+      "name": "counter",
+      "events": [
+        "counter"
+      ],
+      "outcome": "win",
+      "displayDamage": 201,
+      "actualHpDamage": 200,
+      "reconstructedHpLoss": 200,
+      "displayAndFramesUnchanged": true
+    },
+    {
+      "name": "heal",
+      "events": [
+        "heal"
+      ],
+      "outcome": "lose",
+      "displayDamage": 11807,
+      "actualHpDamage": 11807,
+      "reconstructedHpLoss": 11807,
+      "displayAndFramesUnchanged": true
+    },
+    {
+      "name": "revive",
+      "events": [
+        "revive"
+      ],
+      "outcome": "win",
+      "displayDamage": 10654,
+      "actualHpDamage": 4920,
+      "reconstructedHpLoss": 4920,
+      "displayAndFramesUnchanged": true
+    }
+  ]
+}

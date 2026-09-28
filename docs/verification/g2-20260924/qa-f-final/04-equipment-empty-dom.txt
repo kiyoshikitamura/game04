@@ -1,0 +1,47 @@
+- iframe [active]:
+  - alert
+  - region "ゲーム画面":
+    - img "くノ一"
+    - generic: Lv.1
+    - strong: G2QA表示F
+    - generic "将来の同盟表示枠": ◇ 同盟 —
+    - button "アカウント連携": 未認証
+    - button "メニュー"
+    - generic: 銭 12,600
+    - generic: 輝石 200
+    - generic: 行動力 50/100
+    - main:
+      - navigation "育成":
+        - button "デッキ"
+        - button "編成"
+        - button "武将"
+        - button "スキル"
+        - button "装備" [active] [pressed]
+      - text: 絞り込み
+      - combobox "絞り込み":
+        - option "すべて" [selected]
+        - option "N"
+        - option "R"
+        - option "SR"
+        - option "SSR"
+        - option "武器"
+        - option "頭"
+        - option "身体"
+        - option "脚"
+        - option "アクセ1"
+      - text: 並び替え
+      - combobox "並び替え":
+        - option "Lv" [selected]
+        - option "レアリティ"
+        - option "名前"
+        - option "LB"
+        - option "部位"
+      - button "一括分解" [disabled]
+      - status: 所持している装備はありません。
+    - navigation "メインナビゲーション":
+      - button "本陣"
+      - button "出陣"
+      - button "武将"
+      - button "共闘"
+      - button "召喚"
+- alert

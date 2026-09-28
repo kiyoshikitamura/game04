@@ -1,0 +1,229 @@
+{
+  "candidate": "GAME04 G3 isolated API v1 / implementation a14f",
+  "testedAt": "2026-09-25T10:11:12.798Z",
+  "projectRef": "znakrkaazliexzwihxge",
+  "qaUserId": "912cb2cb-4e2d-48ab-adf3-c17818e9021a",
+  "fixtureTag": "g3-isolated-b-20260925-1900",
+  "fixtureAttestation": {
+    "sha256": "46d7b4322d7e21ff0ee85b16de51a4cf5261a1c35699c0107657547b7eea4dc9",
+    "kpiClassification": "qa",
+    "expiresAt": "2026-09-25T12:07:47.340Z"
+  },
+  "checkpoint": {
+    "path": "/tmp/game04-g3-isolated-b-checkpoint.json",
+    "attempt": 1,
+    "resumed": false
+  },
+  "animationMs": 4000,
+  "observations": {
+    "finalVersion": 9,
+    "finalCharacterPoints": 1,
+    "performanceTargetMs": 1000,
+    "exceptionCeilingMs": 1500,
+    "overTarget": [
+      {
+        "label": "status-cold",
+        "elapsedMs": 1235
+      },
+      {
+        "label": "status-warm",
+        "elapsedMs": 1200
+      },
+      {
+        "label": "normal-free-ten",
+        "elapsedMs": 1563
+      },
+      {
+        "label": "normal-free-replay",
+        "elapsedMs": 1341
+      },
+      {
+        "label": "invalid-payment",
+        "elapsedMs": 1114
+      },
+      {
+        "label": "special-diamond",
+        "elapsedMs": 1662
+      },
+      {
+        "label": "special-replay",
+        "elapsedMs": 1484
+      },
+      {
+        "label": "ticket-skill",
+        "elapsedMs": 1581
+      },
+      {
+        "label": "parallel-normal-a",
+        "elapsedMs": 1658
+      },
+      {
+        "label": "parallel-normal-b",
+        "elapsedMs": 7381
+      },
+      {
+        "label": "ssr-exchange",
+        "elapsedMs": 1663
+      },
+      {
+        "label": "ssr-exchange-replay",
+        "elapsedMs": 1405
+      },
+      {
+        "label": "set-home-background",
+        "elapsedMs": 1421
+      },
+      {
+        "label": "refresh-token-get-state",
+        "elapsedMs": 1134
+      }
+    ],
+    "overException": [
+      {
+        "label": "normal-free-ten",
+        "elapsedMs": 1563
+      },
+      {
+        "label": "special-diamond",
+        "elapsedMs": 1662
+      },
+      {
+        "label": "ticket-skill",
+        "elapsedMs": 1581
+      },
+      {
+        "label": "parallel-normal-a",
+        "elapsedMs": 1658
+      },
+      {
+        "label": "parallel-normal-b",
+        "elapsedMs": 7381
+      },
+      {
+        "label": "ssr-exchange",
+        "elapsedMs": 1663
+      }
+    ]
+  },
+  "timings": [
+    {
+      "label": "status-cold",
+      "status": 200,
+      "elapsedMs": 1235,
+      "replay": false
+    },
+    {
+      "label": "status-warm",
+      "status": 200,
+      "elapsedMs": 1200,
+      "replay": false
+    },
+    {
+      "label": "normal-free-ten",
+      "status": 200,
+      "elapsedMs": 1563,
+      "replay": false
+    },
+    {
+      "label": "normal-free-replay",
+      "status": 200,
+      "elapsedMs": 1341,
+      "replay": true
+    },
+    {
+      "label": "normal-free-mismatch",
+      "status": 409,
+      "elapsedMs": 606,
+      "replay": false
+    },
+    {
+      "label": "invalid-payment",
+      "status": 400,
+      "elapsedMs": 1114,
+      "replay": false
+    },
+    {
+      "label": "special-diamond",
+      "status": 200,
+      "elapsedMs": 1662,
+      "replay": false
+    },
+    {
+      "label": "special-replay",
+      "status": 200,
+      "elapsedMs": 1484,
+      "replay": true
+    },
+    {
+      "label": "special-replay-mismatch",
+      "status": 409,
+      "elapsedMs": 563,
+      "replay": false
+    },
+    {
+      "label": "ticket-skill",
+      "status": 200,
+      "elapsedMs": 1581,
+      "replay": false
+    },
+    {
+      "label": "ticket-expired-rejected",
+      "status": 400,
+      "elapsedMs": 981,
+      "replay": false
+    },
+    {
+      "label": "parallel-normal-a",
+      "status": 200,
+      "elapsedMs": 1658,
+      "replay": false
+    },
+    {
+      "label": "parallel-normal-b",
+      "status": 200,
+      "elapsedMs": 7381,
+      "replay": true
+    },
+    {
+      "label": "ssr-exchange",
+      "status": 200,
+      "elapsedMs": 1663,
+      "replay": false
+    },
+    {
+      "label": "ssr-exchange-replay",
+      "status": 200,
+      "elapsedMs": 1405,
+      "replay": true
+    },
+    {
+      "label": "ssr-exchange-mismatch",
+      "status": 409,
+      "elapsedMs": 513,
+      "replay": false
+    },
+    {
+      "label": "set-home-background",
+      "status": 200,
+      "elapsedMs": 1421,
+      "replay": false
+    },
+    {
+      "label": "refresh-token-get-state",
+      "status": 200,
+      "elapsedMs": 1134,
+      "replay": false
+    }
+  ],
+  "checks": [
+    "authenticated status and 292-item normal manifest",
+    "JST free ten, normal KPI receipt, canonical replay, and mismatch rejection",
+    "invalid payment is non-consuming",
+    "special jsonb DB replay is key-order independent and payload mismatch is rejected",
+    "skill user_items ticket decremented; grant ledger unchanged",
+    "expired paid-lot ticket rejected with transaction rollback and no state/inventory mutation",
+    "concurrent same request settles exactly once",
+    "SSR exchange spends only threshold, unlocks background, replays over DB jsonb, and rejects mismatch",
+    "refresh-token reauthentication preserves selected SSR background"
+  ]
+}

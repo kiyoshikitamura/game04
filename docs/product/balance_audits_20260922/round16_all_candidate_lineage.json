@@ -1,0 +1,1077 @@
+{
+  "status": "NOT_APPROVED_NOT_AUTHORITY_PATCH",
+  "baseline": "audit62-results.json original audit inputs, source document hashes retained in archive; not a newly exported current master",
+  "candidate": "integrated8 plus round15 seven-stage delta",
+  "stageCount": 17,
+  "enemyCount": 38,
+  "changes": [
+    {
+      "stage": "4-3",
+      "wave": 1,
+      "position": 1,
+      "sourceEnemyId": "4-3/1/1",
+      "candidateEnemyId": "4-3/1/1",
+      "fields": {
+        "initialCount": {
+          "before": 7,
+          "candidate": 3
+        },
+        "stats": {
+          "before": {
+            "luk": 0,
+            "hp": 4600,
+            "atk": 1600,
+            "def": 100,
+            "sp": 100
+          },
+          "candidate": {
+            "luk": 0,
+            "hp": 4600,
+            "atk": 2000,
+            "def": 100,
+            "sp": 100
+          }
+        }
+      }
+    },
+    {
+      "stage": "4-3",
+      "wave": 2,
+      "position": 1,
+      "sourceEnemyId": "4-3/2/1",
+      "candidateEnemyId": "4-3/2/1",
+      "fields": {
+        "initialCount": {
+          "before": 7,
+          "candidate": 3
+        },
+        "stats": {
+          "before": {
+            "luk": 0,
+            "hp": 12000,
+            "atk": 1700,
+            "def": 350,
+            "sp": 100
+          },
+          "candidate": {
+            "luk": 0,
+            "hp": 12000,
+            "atk": 2125,
+            "def": 350,
+            "sp": 100
+          }
+        }
+      }
+    },
+    {
+      "stage": "4-3",
+      "wave": 3,
+      "position": 1,
+      "sourceEnemyId": "4-3/3/1",
+      "candidateEnemyId": "4-3/3/1",
+      "fields": {
+        "initialCount": {
+          "before": 8,
+          "candidate": 3
+        },
+        "stats": {
+          "before": {
+            "luk": 0,
+            "hp": 26000,
+            "atk": 2000,
+            "def": 420,
+            "sp": 100
+          },
+          "candidate": {
+            "luk": 0,
+            "hp": 26000,
+            "atk": 2500,
+            "def": 420,
+            "sp": 100
+          }
+        }
+      }
+    },
+    {
+      "stage": "6-1",
+      "wave": 1,
+      "position": 1,
+      "sourceEnemyId": "6-1/1/1",
+      "candidateEnemyId": "6-1/1/1",
+      "fields": {
+        "initialCount": {
+          "before": 6,
+          "candidate": 3
+        }
+      }
+    },
+    {
+      "stage": "6-1",
+      "wave": 2,
+      "position": 1,
+      "sourceEnemyId": "6-1/2/1",
+      "candidateEnemyId": "6-1/2/1",
+      "fields": {
+        "initialCount": {
+          "before": 7,
+          "candidate": 4
+        }
+      }
+    },
+    {
+      "stage": "6-2",
+      "wave": 2,
+      "position": 1,
+      "sourceEnemyId": "6-2/2/1",
+      "candidateEnemyId": "6-2/2/1",
+      "fields": {
+        "initialCount": {
+          "before": 6,
+          "candidate": 3
+        }
+      }
+    },
+    {
+      "stage": "6-2",
+      "wave": 3,
+      "position": 1,
+      "sourceEnemyId": "6-2/3/1",
+      "candidateEnemyId": "6-2/3/1",
+      "fields": {
+        "initialCount": {
+          "before": 7,
+          "candidate": 3
+        }
+      }
+    },
+    {
+      "stage": "6-3",
+      "wave": 1,
+      "position": 1,
+      "sourceEnemyId": "6-3/1/1",
+      "candidateEnemyId": "6-3/1/1",
+      "fields": {
+        "initialCount": {
+          "before": 6,
+          "candidate": 3
+        }
+      }
+    },
+    {
+      "stage": "6-3",
+      "wave": 2,
+      "position": 1,
+      "sourceEnemyId": "6-3/2/1",
+      "candidateEnemyId": "6-3/2/1",
+      "fields": {
+        "initialCount": {
+          "before": 7,
+          "candidate": 3
+        }
+      }
+    },
+    {
+      "stage": "6-6",
+      "wave": 1,
+      "position": 1,
+      "sourceEnemyId": "6-6/1/1",
+      "candidateEnemyId": "6-6/1/1",
+      "fields": {
+        "initialCount": {
+          "before": 7,
+          "candidate": 3
+        }
+      }
+    },
+    {
+      "stage": "6-6",
+      "wave": 1,
+      "position": 2,
+      "sourceEnemyId": "6-6/1/2",
+      "candidateEnemyId": "6-6/1/2",
+      "fields": {
+        "initialCount": {
+          "before": 6,
+          "candidate": 5
+        },
+        "initialSp": {
+          "before": 0,
+          "candidate": 100
+        },
+        "stats": {
+          "before": {
+            "luk": 0,
+            "hp": 16000,
+            "atk": 1550,
+            "def": 620,
+            "sp": 100
+          },
+          "candidate": {
+            "luk": 0,
+            "hp": 16000,
+            "atk": 2325,
+            "def": 620,
+            "sp": 100
+          }
+        },
+        "skills": {
+          "before": [],
+          "candidate": [
+            {
+              "id": "SKD030",
+              "name": "蝕み討ち",
+              "image": "",
+              "rarity": "SR",
+              "element": "dark",
+              "spCost": 100,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 125.54,
+                  "bonusCondition": "dot",
+                  "bonusPower": 170.53,
+                  "hpThreshold": 0.4
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "stage": "6-6",
+      "wave": 2,
+      "position": 1,
+      "sourceEnemyId": "6-6/2/1",
+      "candidateEnemyId": "6-6/2/1",
+      "fields": {
+        "initialCount": {
+          "before": 6,
+          "candidate": 3
+        },
+        "initialSp": {
+          "before": 50,
+          "candidate": 100
+        },
+        "skills": {
+          "before": [
+            {
+              "id": "SKD037",
+              "name": "威圧",
+              "image": "",
+              "rarity": "R",
+              "element": "dark",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "highest_atk_enemy",
+              "effects": [
+                {
+                  "type": "atk_down",
+                  "power": 12.22,
+                  "duration": 3
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "candidate": [
+            {
+              "id": "SKD064",
+              "name": "威圧の陣",
+              "image": "",
+              "rarity": "SR",
+              "element": "water",
+              "spCost": 100,
+              "condition": {
+                "type": "always"
+              },
+              "target": "all_enemies",
+              "effects": [
+                {
+                  "type": "atk_down",
+                  "power": 12.22,
+                  "duration": 3
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "stage": "6-6",
+      "wave": 3,
+      "position": 1,
+      "sourceEnemyId": "6-6/3/1",
+      "candidateEnemyId": "6-6/3/1",
+      "fields": {
+        "initialCount": {
+          "before": 6,
+          "candidate": 3
+        }
+      }
+    },
+    {
+      "stage": "6-6",
+      "wave": 5,
+      "position": 1,
+      "sourceEnemyId": "6-6/5/1",
+      "candidateEnemyId": "6-6/5/1",
+      "fields": {
+        "initialSp": {
+          "before": 80,
+          "candidate": 130
+        },
+        "stats": {
+          "before": {
+            "luk": 0,
+            "hp": 45000,
+            "atk": 2700,
+            "def": 850,
+            "sp": 130
+          },
+          "candidate": {
+            "luk": 0,
+            "hp": 45000,
+            "atk": 4050,
+            "def": 850,
+            "sp": 130
+          }
+        },
+        "skills": {
+          "before": [
+            {
+              "id": "SKD033",
+              "name": "気合",
+              "image": "",
+              "rarity": "N",
+              "element": "fire",
+              "spCost": 30,
+              "condition": {
+                "type": "always"
+              },
+              "target": "self",
+              "effects": [
+                {
+                  "type": "atk_up",
+                  "power": 10.23,
+                  "duration": 3
+                }
+              ],
+              "description": "正式表の検証入力"
+            },
+            {
+              "id": "SKD007",
+              "name": "標準単体攻撃・火",
+              "image": "",
+              "rarity": "R",
+              "element": "fire",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 145.45
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "candidate": [
+            {
+              "id": "SKD033",
+              "name": "気合",
+              "image": "",
+              "rarity": "N",
+              "element": "fire",
+              "spCost": 30,
+              "condition": {
+                "type": "always"
+              },
+              "target": "self",
+              "effects": [
+                {
+                  "type": "atk_up",
+                  "power": 10.23,
+                  "duration": 3
+                }
+              ],
+              "description": "正式表の検証入力"
+            },
+            {
+              "id": "SKD030",
+              "name": "蝕み討ち",
+              "image": "",
+              "rarity": "SR",
+              "element": "dark",
+              "spCost": 100,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 132.27,
+                  "bonusCondition": "dot",
+                  "bonusPower": 181.58,
+                  "hpThreshold": 0.4
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "stage": "6-6",
+      "wave": 5,
+      "position": 2,
+      "sourceEnemyId": "6-6/5/2",
+      "candidateEnemyId": "6-6/5/2",
+      "fields": {
+        "initialCount": {
+          "before": 6,
+          "candidate": 3
+        }
+      }
+    },
+    {
+      "stage": "7-2",
+      "wave": 1,
+      "position": 1,
+      "sourceEnemyId": "7-2/1/1",
+      "candidateEnemyId": "7-2/1/1",
+      "fields": {
+        "stats": {
+          "before": {
+            "luk": 0,
+            "hp": 20520,
+            "atk": 1940,
+            "def": 970,
+            "sp": 100
+          },
+          "candidate": {
+            "luk": 0,
+            "hp": 12312,
+            "atk": 1940,
+            "def": 4000,
+            "sp": 100
+          }
+        }
+      }
+    },
+    {
+      "stage": "7-2",
+      "wave": 2,
+      "position": 1,
+      "sourceEnemyId": "7-2/2/1",
+      "candidateEnemyId": "7-2/2/1",
+      "fields": {
+        "stats": {
+          "before": {
+            "luk": 0,
+            "hp": 20520,
+            "atk": 1940,
+            "def": 970,
+            "sp": 100
+          },
+          "candidate": {
+            "luk": 0,
+            "hp": 12312,
+            "atk": 1940,
+            "def": 4000,
+            "sp": 100
+          }
+        }
+      }
+    },
+    {
+      "stage": "7-2",
+      "wave": 3,
+      "position": 1,
+      "sourceEnemyId": "7-2/3/1",
+      "candidateEnemyId": "7-2/3/1",
+      "fields": {
+        "stats": {
+          "before": {
+            "luk": 0,
+            "hp": 43200,
+            "atk": 3350,
+            "def": 1080,
+            "sp": 150
+          },
+          "candidate": {
+            "luk": 0,
+            "hp": 25920,
+            "atk": 3350,
+            "def": 4000,
+            "sp": 150
+          }
+        }
+      }
+    },
+    {
+      "stage": "7-3",
+      "wave": 1,
+      "position": 1,
+      "sourceEnemyId": "7-3/1/1",
+      "candidateEnemyId": "7-3/1/1",
+      "fields": {
+        "actionCount": {
+          "before": 5,
+          "candidate": 8
+        },
+        "initialCount": {
+          "before": 5,
+          "candidate": 3
+        },
+        "stats": {
+          "before": {
+            "luk": 0,
+            "hp": 44800,
+            "atk": 3470,
+            "def": 1120,
+            "sp": 110
+          },
+          "candidate": {
+            "luk": 0,
+            "hp": 44800,
+            "atk": 18000,
+            "def": 1120,
+            "sp": 110
+          }
+        }
+      }
+    },
+    {
+      "stage": "7-3",
+      "wave": 2,
+      "position": 2,
+      "sourceEnemyId": "7-3/2/2",
+      "candidateEnemyId": "7-3/2/2",
+      "fields": {
+        "actionCount": {
+          "before": 5,
+          "candidate": 8
+        },
+        "initialCount": {
+          "before": 5,
+          "candidate": 3
+        },
+        "stats": {
+          "before": {
+            "luk": 0,
+            "hp": 13440,
+            "atk": 3360,
+            "def": 560,
+            "sp": 100
+          },
+          "candidate": {
+            "luk": 0,
+            "hp": 13440,
+            "atk": 18000,
+            "def": 560,
+            "sp": 100
+          }
+        }
+      }
+    },
+    {
+      "stage": "7-4",
+      "wave": 1,
+      "position": 2,
+      "sourceEnemyId": "7-4/1/2",
+      "candidateEnemyId": "7-4/1/2",
+      "fields": {
+        "initialCount": {
+          "before": 7,
+          "candidate": 3
+        },
+        "stats": {
+          "before": {
+            "luk": 0,
+            "hp": 12760,
+            "atk": 3250,
+            "def": 520,
+            "sp": 100
+          },
+          "candidate": {
+            "luk": 0,
+            "hp": 12760,
+            "atk": 12000,
+            "def": 520,
+            "sp": 100
+          }
+        }
+      }
+    },
+    {
+      "stage": "7-4",
+      "wave": 2,
+      "position": 2,
+      "sourceEnemyId": "7-4/2/2",
+      "candidateEnemyId": "7-4/2/2",
+      "fields": {
+        "initialCount": {
+          "before": 7,
+          "candidate": 3
+        },
+        "stats": {
+          "before": {
+            "luk": 0,
+            "hp": 12760,
+            "atk": 3250,
+            "def": 520,
+            "sp": 100
+          },
+          "candidate": {
+            "luk": 0,
+            "hp": 12760,
+            "atk": 12000,
+            "def": 520,
+            "sp": 100
+          }
+        }
+      }
+    },
+    {
+      "stage": "7-4",
+      "wave": 3,
+      "position": 2,
+      "sourceEnemyId": "7-4/3/2",
+      "candidateEnemyId": "7-4/3/2",
+      "fields": {
+        "initialCount": {
+          "before": 7,
+          "candidate": 3
+        },
+        "stats": {
+          "before": {
+            "luk": 0,
+            "hp": 12760,
+            "atk": 3250,
+            "def": 520,
+            "sp": 100
+          },
+          "candidate": {
+            "luk": 0,
+            "hp": 12760,
+            "atk": 12000,
+            "def": 520,
+            "sp": 100
+          }
+        }
+      }
+    },
+    {
+      "stage": "7-7",
+      "wave": 1,
+      "position": 1,
+      "sourceEnemyId": "7-7/1/1",
+      "candidateEnemyId": "7-7/1/1",
+      "fields": {
+        "initialCount": {
+          "before": 5,
+          "candidate": 3
+        }
+      }
+    },
+    {
+      "stage": "7-7",
+      "wave": 3,
+      "position": 1,
+      "sourceEnemyId": "7-7/3/1",
+      "candidateEnemyId": "7-7/3/1",
+      "fields": {
+        "initialCount": {
+          "before": 5,
+          "candidate": 2
+        }
+      }
+    },
+    {
+      "stage": "7-7",
+      "wave": 4,
+      "position": 1,
+      "sourceEnemyId": "7-7/4/1",
+      "candidateEnemyId": "7-7/4/1",
+      "fields": {
+        "initialCount": {
+          "before": 8,
+          "candidate": 2
+        },
+        "passives": {
+          "before": [
+            {
+              "id": "P16_fire",
+              "type": "P16",
+              "name": "P16",
+              "stat": "def",
+              "percent": 23.292714812150788,
+              "level": 4,
+              "target": "self",
+              "targetElement": "fire"
+            }
+          ],
+          "candidate": [
+            {
+              "id": "P02_earth",
+              "type": "P02",
+              "name": "P02",
+              "stat": "def",
+              "percent": 13.975628887290473,
+              "level": 4,
+              "target": "party",
+              "targetElement": "earth"
+            }
+          ]
+        },
+        "stats": {
+          "before": {
+            "luk": 0,
+            "hp": 52800,
+            "atk": 4090,
+            "def": 1320,
+            "sp": 130
+          },
+          "candidate": {
+            "luk": 0,
+            "hp": 52800,
+            "atk": 4090,
+            "def": 3000,
+            "sp": 130
+          }
+        },
+        "skills": {
+          "before": [
+            {
+              "id": "SKD033",
+              "name": "気合",
+              "image": "",
+              "rarity": "N",
+              "element": "fire",
+              "spCost": 30,
+              "condition": {
+                "type": "always"
+              },
+              "target": "self",
+              "effects": [
+                {
+                  "type": "atk_up",
+                  "power": 10.23,
+                  "duration": 3
+                }
+              ],
+              "description": "正式表の検証入力"
+            },
+            {
+              "id": "SKD007",
+              "name": "標準単体攻撃・火",
+              "image": "",
+              "rarity": "R",
+              "element": "fire",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 145.45
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "candidate": [
+            {
+              "id": "SKD034",
+              "name": "身構え",
+              "image": "",
+              "rarity": "N",
+              "element": "earth",
+              "spCost": 30,
+              "condition": {
+                "type": "always"
+              },
+              "target": "self",
+              "effects": [
+                {
+                  "type": "def_up",
+                  "power": 19.77,
+                  "duration": 3
+                }
+              ],
+              "description": "正式表の検証入力"
+            },
+            {
+              "id": "SKD009",
+              "name": "標準単体攻撃・土",
+              "image": "",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 145.45
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ]
+        },
+        "element": {
+          "before": "fire",
+          "candidate": "earth"
+        },
+        "name": {
+          "before": "武田信玄",
+          "candidate": "徳川家康"
+        }
+      }
+    },
+    {
+      "stage": "8-4",
+      "wave": 1,
+      "position": 1,
+      "sourceEnemyId": "8-4/1/1",
+      "candidateEnemyId": "8-4/1/1",
+      "fields": {
+        "initialCount": {
+          "before": 6,
+          "candidate": 3
+        }
+      }
+    },
+    {
+      "stage": "8-4",
+      "wave": 3,
+      "position": 1,
+      "sourceEnemyId": "8-4/3/1",
+      "candidateEnemyId": "8-4/3/1",
+      "fields": {
+        "initialCount": {
+          "before": 5,
+          "candidate": 3
+        }
+      }
+    },
+    {
+      "stage": "8-8",
+      "wave": 2,
+      "position": 1,
+      "sourceEnemyId": "8-8/2/1",
+      "candidateEnemyId": "8-8/2/1",
+      "fields": {
+        "initialCount": {
+          "before": 7,
+          "candidate": 3
+        }
+      }
+    },
+    {
+      "stage": "8-8",
+      "wave": 4,
+      "position": 1,
+      "sourceEnemyId": "8-8/4/1",
+      "candidateEnemyId": "8-8/4/1",
+      "fields": {
+        "initialCount": {
+          "before": 8,
+          "candidate": 3
+        }
+      }
+    },
+    {
+      "stage": "9-5",
+      "wave": 3,
+      "position": 1,
+      "sourceEnemyId": "9-5/3/1",
+      "candidateEnemyId": "9-5/3/1",
+      "fields": {
+        "stats": {
+          "before": {
+            "luk": 0,
+            "hp": 145600,
+            "atk": 7280,
+            "def": 4030,
+            "sp": 150
+          },
+          "candidate": {
+            "luk": 0,
+            "hp": 22000,
+            "atk": 7280,
+            "def": 22000,
+            "sp": 150
+          }
+        }
+      }
+    },
+    {
+      "stage": "9-6",
+      "wave": 2,
+      "position": 1,
+      "sourceEnemyId": "9-6/2/1",
+      "candidateEnemyId": "9-6/2/1",
+      "fields": {
+        "stats": {
+          "before": {
+            "luk": 0,
+            "hp": 149500,
+            "atk": 7470,
+            "def": 4140,
+            "sp": 100
+          },
+          "candidate": {
+            "luk": 0,
+            "hp": 22000,
+            "atk": 7470,
+            "def": 22000,
+            "sp": 100
+          }
+        }
+      }
+    },
+    {
+      "stage": "10-1",
+      "wave": 2,
+      "position": 1,
+      "sourceEnemyId": "10-1/2/1",
+      "candidateEnemyId": "10-1/2/1",
+      "fields": {
+        "initialCount": {
+          "before": 8,
+          "candidate": 3
+        }
+      }
+    },
+    {
+      "stage": "10-2",
+      "wave": 1,
+      "position": 1,
+      "sourceEnemyId": "10-2/1/1",
+      "candidateEnemyId": "10-2/1/1",
+      "fields": {
+        "initialCount": {
+          "before": 8,
+          "candidate": 3
+        },
+        "stats": {
+          "before": {
+            "luk": 0,
+            "hp": 47150,
+            "atk": 7170,
+            "def": 2870,
+            "sp": 150
+          },
+          "candidate": {
+            "luk": 0,
+            "hp": 47150,
+            "atk": 12548,
+            "def": 2870,
+            "sp": 150
+          }
+        }
+      }
+    },
+    {
+      "stage": "10-2",
+      "wave": 3,
+      "position": 1,
+      "sourceEnemyId": "10-2/3/1",
+      "candidateEnemyId": "10-2/3/1",
+      "fields": {
+        "initialCount": {
+          "before": 9,
+          "candidate": 3
+        },
+        "stats": {
+          "before": {
+            "luk": 0,
+            "hp": 215250,
+            "atk": 10760,
+            "def": 6660,
+            "sp": 150
+          },
+          "candidate": {
+            "luk": 0,
+            "hp": 215250,
+            "atk": 16000,
+            "def": 6660,
+            "sp": 150
+          }
+        }
+      }
+    },
+    {
+      "stage": "10-4",
+      "wave": 1,
+      "position": 1,
+      "sourceEnemyId": "10-4/1/1",
+      "candidateEnemyId": "10-4/1/1",
+      "fields": {
+        "initialCount": {
+          "before": 5,
+          "candidate": 2
+        }
+      }
+    },
+    {
+      "stage": "10-4",
+      "wave": 2,
+      "position": 1,
+      "sourceEnemyId": "10-4/2/1",
+      "candidateEnemyId": "10-4/2/1",
+      "fields": {
+        "initialCount": {
+          "before": 7,
+          "candidate": 3
+        }
+      }
+    },
+    {
+      "stage": "10-6",
+      "wave": 3,
+      "position": 1,
+      "sourceEnemyId": "10-6/3/1",
+      "candidateEnemyId": "10-6/3/1",
+      "fields": {
+        "stats": {
+          "before": {
+            "luk": 0,
+            "hp": 236250,
+            "atk": 11810,
+            "def": 7310,
+            "sp": 100
+          },
+          "candidate": {
+            "luk": 0,
+            "hp": 24000,
+            "atk": 11810,
+            "def": 28000,
+            "sp": 100
+          }
+        }
+      }
+    }
+  ]
+}

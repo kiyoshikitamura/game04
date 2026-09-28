@@ -1,0 +1,432 @@
+[
+  {
+    "row": {
+      "item_id": "AWAKENING_BOOK",
+      "version": "2026-08-22",
+      "category": "CHARACTER_AWAKENING",
+      "max_stack": null,
+      "stackable": true,
+      "asset_path": "/items/awakening_book.png",
+      "usage_type": "CHARACTER_AWAKENING",
+      "description": "任意キャラクターへ1 copy-equivalentを加算する限定供給素材です。",
+      "display_name": "覚醒の秘巻",
+      "expiry_policy": "NO_EXPIRY",
+      "runtime_usage": {
+        "cashCost": 0,
+        "copyEquivalentValue": 1,
+        "manualAwakeningCost": 1,
+        "duplicateOverflowQuantity": 1
+      },
+      "source_categories": [
+        "LOGIN",
+        "ACHIEVEMENT",
+        "EVENT"
+      ],
+      "is_production_enabled": true
+    }
+  },
+  {
+    "row": {
+      "item_id": "CHAR_EXP_L",
+      "version": "2026-08-22",
+      "category": "CHARACTER_EXP",
+      "max_stack": null,
+      "stackable": true,
+      "asset_path": "/items/char_exp_l.png",
+      "usage_type": "CHARACTER_EXP",
+      "description": "キャラクターEXPを2,000獲得します。",
+      "display_name": "修練の兵糧丸・大",
+      "expiry_policy": "NO_EXPIRY",
+      "runtime_usage": {
+        "effectValue": 2000
+      },
+      "source_categories": [
+        "QUEST",
+        "LOGIN",
+        "MISSION",
+        "RAID",
+        "RANKING"
+      ],
+      "is_production_enabled": true
+    }
+  },
+  {
+    "row": {
+      "item_id": "CHAR_EXP_M",
+      "version": "2026-08-22",
+      "category": "CHARACTER_EXP",
+      "max_stack": null,
+      "stackable": true,
+      "asset_path": "/items/char_exp_m.png",
+      "usage_type": "CHARACTER_EXP",
+      "description": "キャラクターEXPを500獲得します。",
+      "display_name": "修練の兵糧丸・中",
+      "expiry_policy": "NO_EXPIRY",
+      "runtime_usage": {
+        "effectValue": 500
+      },
+      "source_categories": [
+        "QUEST",
+        "LOGIN",
+        "MISSION",
+        "RAID",
+        "RANKING"
+      ],
+      "is_production_enabled": true
+    }
+  },
+  {
+    "row": {
+      "item_id": "CHAR_EXP_S",
+      "version": "2026-08-22",
+      "category": "CHARACTER_EXP",
+      "max_stack": null,
+      "stackable": true,
+      "asset_path": "/items/char_exp_s.png",
+      "usage_type": "CHARACTER_EXP",
+      "description": "キャラクターEXPを100獲得します。",
+      "display_name": "修練の兵糧丸・小",
+      "expiry_policy": "NO_EXPIRY",
+      "runtime_usage": {
+        "effectValue": 100
+      },
+      "source_categories": [
+        "QUEST",
+        "LOGIN",
+        "MISSION",
+        "RAID"
+      ],
+      "is_production_enabled": true
+    }
+  },
+  {
+    "row": {
+      "item_id": "ENERGY_DRINK",
+      "version": "2026-08-22",
+      "category": "RESOURCE_RECOVERY",
+      "max_stack": null,
+      "stackable": true,
+      "asset_path": "/items/energy_drink.png",
+      "usage_type": "VITALITY_RECOVERY",
+      "description": "Quest/GvG共通Vitalityを50回復します。",
+      "display_name": "活力丸",
+      "expiry_policy": "NO_EXPIRY",
+      "runtime_usage": {
+        "effectValue": 50
+      },
+      "source_categories": [
+        "LOGIN",
+        "EVENT",
+        "SHOP"
+      ],
+      "is_production_enabled": true
+    }
+  },
+  {
+    "row": {
+      "item_id": "EQUIP_EXP_L",
+      "version": "2026-08-22",
+      "category": "EQUIPMENT_EXP",
+      "max_stack": null,
+      "stackable": true,
+      "asset_path": "/items/equip_exp_l.png",
+      "usage_type": "EQUIPMENT_EXP",
+      "description": "装備EXPを2,500獲得します。",
+      "display_name": "鍛錬の砥石・大",
+      "expiry_policy": "NO_EXPIRY",
+      "runtime_usage": {
+        "effectValue": 2500
+      },
+      "source_categories": [
+        "QUEST",
+        "LOGIN",
+        "MISSION",
+        "RAID",
+        "RANKING"
+      ],
+      "is_production_enabled": true
+    }
+  },
+  {
+    "row": {
+      "item_id": "EQUIP_EXP_M",
+      "version": "2026-08-22",
+      "category": "EQUIPMENT_EXP",
+      "max_stack": null,
+      "stackable": true,
+      "asset_path": "/items/equip_exp_m.png",
+      "usage_type": "EQUIPMENT_EXP",
+      "description": "装備EXPを500獲得します。",
+      "display_name": "鍛錬の砥石・中",
+      "expiry_policy": "NO_EXPIRY",
+      "runtime_usage": {
+        "effectValue": 500
+      },
+      "source_categories": [
+        "QUEST",
+        "LOGIN",
+        "MISSION",
+        "RAID",
+        "RANKING"
+      ],
+      "is_production_enabled": true
+    }
+  },
+  {
+    "row": {
+      "item_id": "EQUIP_EXP_S",
+      "version": "2026-08-22",
+      "category": "EQUIPMENT_EXP",
+      "max_stack": null,
+      "stackable": true,
+      "asset_path": "/items/equip_exp_s.png",
+      "usage_type": "EQUIPMENT_EXP",
+      "description": "装備EXPを100獲得します。",
+      "display_name": "鍛錬の砥石・小",
+      "expiry_policy": "NO_EXPIRY",
+      "runtime_usage": {
+        "effectValue": 100
+      },
+      "source_categories": [
+        "QUEST",
+        "LOGIN",
+        "MISSION",
+        "RAID"
+      ],
+      "is_production_enabled": true
+    }
+  },
+  {
+    "row": {
+      "item_id": "EQUIP_LB_PART",
+      "version": "2026-08-22",
+      "category": "EQUIPMENT_LIMIT_BREAK",
+      "max_stack": null,
+      "stackable": true,
+      "asset_path": "/items/equip_lb_part.png",
+      "usage_type": "EQUIPMENT_LIMIT_BREAK",
+      "description": "任意の装備の限界突破に使用できます。",
+      "display_name": "鍛冶の秘鋼",
+      "expiry_policy": "NO_EXPIRY",
+      "runtime_usage": {
+        "pointValue": 1
+      },
+      "source_categories": [
+        "LOGIN",
+        "MISSION",
+        "QUEST",
+        "RAID",
+        "RANKING"
+      ],
+      "is_production_enabled": true
+    }
+  },
+  {
+    "row": {
+      "item_id": "NORMAL_GACHA_TICKET_CHARACTER",
+      "version": "2026-08-22",
+      "category": "GACHA_TICKET",
+      "max_stack": null,
+      "stackable": true,
+      "asset_path": "/items/normal_gacha_ticket_character.png",
+      "usage_type": "NORMAL_CHARACTER_GACHA",
+      "description": "Character Normal Gachaを1回引けます。",
+      "display_name": "姫武将召喚札",
+      "expiry_policy": "NO_EXPIRY",
+      "runtime_usage": {
+        "pullCount": 1
+      },
+      "source_categories": [
+        "MISSION",
+        "CAMPAIGN",
+        "COMPENSATION"
+      ],
+      "is_production_enabled": true
+    }
+  },
+  {
+    "row": {
+      "item_id": "NORMAL_GACHA_TICKET_EQUIPMENT",
+      "version": "2026-08-22",
+      "category": "GACHA_TICKET",
+      "max_stack": null,
+      "stackable": true,
+      "asset_path": "/items/normal_gacha_ticket_equipment.png",
+      "usage_type": "NORMAL_EQUIPMENT_GACHA",
+      "description": "Equipment Normal Gachaを1回引けます。",
+      "display_name": "武具召喚札",
+      "expiry_policy": "NO_EXPIRY",
+      "runtime_usage": {
+        "pullCount": 1
+      },
+      "source_categories": [
+        "CAMPAIGN",
+        "COMPENSATION"
+      ],
+      "is_production_enabled": true
+    }
+  },
+  {
+    "row": {
+      "item_id": "NORMAL_GACHA_TICKET_SKILL",
+      "version": "2026-08-22",
+      "category": "GACHA_TICKET",
+      "max_stack": null,
+      "stackable": true,
+      "asset_path": "/items/normal_gacha_ticket_skill.png",
+      "usage_type": "NORMAL_SKILL_GACHA",
+      "description": "Skill Normal Gachaを1回引けます。",
+      "display_name": "戦技召喚札",
+      "expiry_policy": "NO_EXPIRY",
+      "runtime_usage": {
+        "pullCount": 1
+      },
+      "source_categories": [
+        "CAMPAIGN",
+        "COMPENSATION"
+      ],
+      "is_production_enabled": true
+    }
+  },
+  {
+    "row": {
+      "item_id": "PVP_POINT_TICKET",
+      "version": "2026-08-22",
+      "category": "RESOURCE_RECOVERY",
+      "max_stack": null,
+      "stackable": true,
+      "asset_path": "/items/pvp_point_ticket.png",
+      "usage_type": "PVP_POINT_RECOVERY",
+      "description": "PvP Pointを1回復します。",
+      "display_name": "決闘状",
+      "expiry_policy": "NO_EXPIRY",
+      "runtime_usage": {
+        "effectValue": 1
+      },
+      "source_categories": [
+        "EVENT",
+        "SHOP"
+      ],
+      "is_production_enabled": true
+    }
+  },
+  {
+    "row": {
+      "item_id": "RAID_POINT_TICKET",
+      "version": "2026-08-22",
+      "category": "RESOURCE_RECOVERY",
+      "max_stack": null,
+      "stackable": true,
+      "asset_path": "/items/raid_point_ticket.png",
+      "usage_type": "RAID_POINT_RECOVERY",
+      "description": "Raid Pointを1回復します。",
+      "display_name": "討伐令",
+      "expiry_policy": "NO_EXPIRY",
+      "runtime_usage": {
+        "effectValue": 1
+      },
+      "source_categories": [
+        "EVENT",
+        "SHOP"
+      ],
+      "is_production_enabled": true
+    }
+  },
+  {
+    "row": {
+      "item_id": "SKILL_MANUAL",
+      "version": "2026-08-22",
+      "category": "SKILL_AWAKENING",
+      "max_stack": null,
+      "stackable": true,
+      "asset_path": "/items/skill_manual.png",
+      "usage_type": "SKILL_AWAKENING",
+      "description": "任意の解放済みスキル覚醒に使用できます。",
+      "display_name": "奥義指南書",
+      "expiry_policy": "NO_EXPIRY",
+      "runtime_usage": {
+        "pointValue": 1
+      },
+      "source_categories": [
+        "LOGIN",
+        "MISSION",
+        "QUEST",
+        "RAID",
+        "RANKING"
+      ],
+      "is_production_enabled": true
+    }
+  },
+  {
+    "row": {
+      "item_id": "SPECIAL_TICKET_CHARACTER",
+      "version": "2026-08-22",
+      "category": "GACHA_TICKET",
+      "max_stack": null,
+      "stackable": true,
+      "asset_path": "/items/special_ticket_character.png",
+      "usage_type": "SPECIAL_CHARACTER_GACHA",
+      "description": "Character Special Gachaを1回引けます。",
+      "display_name": "特選・姫武将召喚札",
+      "expiry_policy": "NO_EXPIRY",
+      "runtime_usage": {
+        "pullCount": 1,
+        "countsTowardPity": true
+      },
+      "source_categories": [
+        "LOGIN",
+        "EVENT",
+        "RANKING"
+      ],
+      "is_production_enabled": true
+    }
+  },
+  {
+    "row": {
+      "item_id": "SPECIAL_TICKET_EQUIPMENT",
+      "version": "2026-08-22",
+      "category": "GACHA_TICKET",
+      "max_stack": null,
+      "stackable": true,
+      "asset_path": "/items/special_ticket_equipment.png",
+      "usage_type": "SPECIAL_EQUIPMENT_GACHA",
+      "description": "Equipment Special Gachaを1回引けます。",
+      "display_name": "特選・武具召喚札",
+      "expiry_policy": "NO_EXPIRY",
+      "runtime_usage": {
+        "pullCount": 1,
+        "countsTowardPity": true
+      },
+      "source_categories": [
+        "LOGIN",
+        "EVENT",
+        "RANKING"
+      ],
+      "is_production_enabled": true
+    }
+  },
+  {
+    "row": {
+      "item_id": "SPECIAL_TICKET_SKILL",
+      "version": "2026-08-22",
+      "category": "GACHA_TICKET",
+      "max_stack": null,
+      "stackable": true,
+      "asset_path": "/items/special_ticket_skill.png",
+      "usage_type": "SPECIAL_SKILL_GACHA",
+      "description": "Skill Special Gachaを1回引けます。",
+      "display_name": "特選・戦技召喚札",
+      "expiry_policy": "NO_EXPIRY",
+      "runtime_usage": {
+        "pullCount": 1,
+        "countsTowardPity": true
+      },
+      "source_categories": [
+        "LOGIN",
+        "EVENT",
+        "RANKING"
+      ],
+      "is_production_enabled": true
+    }
+  }
+]

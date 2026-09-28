@@ -1,0 +1,178 @@
+/* Mock layer geometry/keyframes, scoped per family. Missing closing braces in 04/06/11 source repaired. */
+.battleFx16[data-family="slash"] .effect-root{
+  position: absolute;
+  z-index: 4;
+  left: var(--target-x);
+  top: var(--target-y);
+  width: var(--effect-size);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%) rotate(var(--effect-angle));
+  transform-origin: center;
+  pointer-events: none;
+  filter: drop-shadow(0 0 10px rgba(255, 92, 12, .28));
+}
+.battleFx16[data-family="slash"] .fx-sprite{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  will-change: opacity, filter;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.battleFx16[data-family="slash"] .effect-root.is-playing .fx-sprite{ opacity: 1; }
+.battleFx16[data-family="heal"] .fx{position:absolute;left:var(--x);top:var(--y);width:var(--size);aspect-ratio:1;transform:translate(-50%,-50%);z-index:3;pointer-events:none;overflow:visible}
+.battleFx16[data-family="heal"] .fx img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;user-select:none}
+.battleFx16[data-family="heal"] .fx .aura{mix-blend-mode:screen;filter:drop-shadow(0 0 7px #44f88a55)}
+.battleFx16[data-family="heal"] .fx.playing .aura{animation:g4-heal-mist var(--duration) ease-out both}
+.battleFx16[data-family="heal"] .fx.playing .rise{animation:g4-heal-rise var(--duration) ease-out both}
+.battleFx16[data-family="heal"] .fx.playing .sparks{animation:g4-heal-sparks var(--duration) ease-out both}
+.battleFx16[data-family="heal"] .fx.playing .crosses{animation:g4-heal-arrows var(--duration) ease-out both}
+@keyframes g4-heal-mist{0%{opacity:0;transform:scale(.76)}25%{opacity:var(--mist-opacity);transform:scale(.98)}55%{opacity:var(--mist-opacity);transform:scale(1.08)}100%{opacity:0;transform:scale(1.16)}}
+@keyframes g4-heal-rise{0%,12%{opacity:0;transform:translateY(34%) scaleY(.48)}35%{opacity:.85}75%{opacity:.72}100%{opacity:0;transform:translateY(-25%) scaleY(1.08)}}
+@keyframes g4-heal-sparks{0%,15%{opacity:0;transform:translateY(25%) scale(.8)}36%{opacity:1}100%{opacity:0;transform:translateY(-29%) scale(1.06)}}
+@keyframes g4-heal-arrows{0%,20%{opacity:0;transform:translateY(41%) scale(.8)}42%{opacity:.95}83%{opacity:.83}100%{opacity:0;transform:translateY(-37%) scale(1.05)}}
+.battleFx16[data-family="atk_up"] .fx{position:absolute;left:var(--x);top:var(--y);width:var(--size);aspect-ratio:1;transform:translate(-50%,-50%);z-index:3;pointer-events:none;overflow:visible}
+.battleFx16[data-family="atk_up"] .fx img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;user-select:none}
+.battleFx16[data-family="atk_up"] .fx .aura{mix-blend-mode:screen;filter:drop-shadow(0 0 7px #fa362b55)}
+.battleFx16[data-family="atk_up"] .fx.playing .aura{animation:g4-atk_up-mist var(--duration) ease-out both}
+.battleFx16[data-family="atk_up"] .fx.playing .rise{animation:g4-atk_up-rise var(--duration) ease-out both}
+.battleFx16[data-family="atk_up"] .fx.playing .sparks{animation:g4-atk_up-sparks var(--duration) ease-out both}
+.battleFx16[data-family="atk_up"] .fx.playing .arrow{animation:g4-atk_up-arrows var(--duration) ease-out both}
+@keyframes g4-atk_up-mist{0%{opacity:0;transform:scale(.76)}25%{opacity:var(--mist-opacity);transform:scale(.98)}55%{opacity:var(--mist-opacity);transform:scale(1.08)}100%{opacity:0;transform:scale(1.16)}}
+@keyframes g4-atk_up-rise{0%,12%{opacity:0;transform:translateY(34%) scaleY(.48)}35%{opacity:.85}75%{opacity:.72}100%{opacity:0;transform:translateY(-25%) scaleY(1.08)}}
+@keyframes g4-atk_up-sparks{0%,15%{opacity:0;transform:translateY(25%) scale(.8)}36%{opacity:1}100%{opacity:0;transform:translateY(-29%) scale(1.06)}}
+@keyframes g4-atk_up-arrows{0%,20%{opacity:0;transform:translateY(41%) scale(.8)}42%{opacity:.95}83%{opacity:.83}100%{opacity:0;transform:translateY(-37%) scale(1.05)}}
+.battleFx16[data-family="poison"] .fx{position:absolute;left:var(--x);top:var(--y);width:var(--size);aspect-ratio:1;transform:translate(-50%,-50%);z-index:3;pointer-events:none;overflow:visible}
+.battleFx16[data-family="poison"] .fx img{position:absolute;width:100%;height:100%;object-fit:contain;opacity:0;user-select:none}
+.battleFx16[data-family="poison"] .fx .mist{inset:0;mask-image:radial-gradient(ellipse 42% 39% at center,#000 28%,#0009 61%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 42% 39% at center,#000 28%,#0009 61%,transparent 100%)}
+.battleFx16[data-family="poison"] .fx .skull{left:28%;top:27%;width:44%;height:44%;filter:drop-shadow(0 0 4px #8c36c7)}
+.battleFx16[data-family="poison"] .fx .drops{left:12%;top:16%;width:76%;height:76%}
+.battleFx16[data-family="poison"] .fx .drops.second{transform:scale(.76) translateX(13%)}
+.battleFx16[data-family="poison"] .fx.playing .mist{animation:g4-poison-mist var(--duration) ease-in-out both}
+.battleFx16[data-family="poison"] .fx.playing .skull{animation:g4-poison-skull var(--duration) ease-out both}
+.battleFx16[data-family="poison"] .fx.playing .drops.first{animation:g4-poison-drops var(--duration) ease-out both}
+.battleFx16[data-family="poison"] .fx.playing .drops.second{animation:g4-poison-drops2 var(--duration) ease-out both}
+@keyframes g4-poison-mist{0%{opacity:0;transform:translateY(20%) scale(.72)}24%{opacity:var(--mist-opacity)}58%{opacity:var(--mist-opacity);transform:translateY(-6%) scale(1.04)}100%{opacity:0;transform:translateY(-24%) scale(1.18)}}
+@keyframes g4-poison-skull{0%,14%{opacity:0;transform:translateY(40%) scale(.72)}36%{opacity:var(--skull-opacity)}72%{opacity:var(--skull-opacity)}100%{opacity:0;transform:translateY(-58%) scale(1.05)}}
+@keyframes g4-poison-drops{0%,15%{opacity:0;transform:translateY(35%) scale(.75)}38%{opacity:var(--drops-opacity)}100%{opacity:0;transform:translateY(-55%) scale(1.03)}}
+@keyframes g4-poison-drops2{0%,30%{opacity:0;transform:translate(12%,38%) scale(.58)}52%{opacity:calc(var(--drops-opacity) * .55)}100%{opacity:0;transform:translate(-9%,-65%) scale(.8)}}
+.battleFx16[data-family="projectile"] .fx{position:absolute;left:var(--x);top:var(--y);width:var(--size);aspect-ratio:1;transform:translate(-50%,-50%);z-index:4;pointer-events:none;opacity:0;will-change:opacity}
+.battleFx16[data-family="projectile"] .sprite{position:absolute;inset:0;transform:translate(var(--dx,0%),var(--dy,0%));background-image:url("/battle-effects/projectile/yellow-arrow-local-8frame.png");background-repeat:no-repeat;background-size:400% 200%;filter:drop-shadow(0 0 3px #ffce69);mask-image:radial-gradient(ellipse 50% 50% at center,#000 64%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 50% 50% at center,#000 64%,transparent 100%)}
+.battleFx16[data-family="impact"] .fx{position:absolute;left:var(--x);top:var(--y);width:var(--size);aspect-ratio:1;transform:translate(-50%,-50%);z-index:4;pointer-events:none;overflow:visible}
+.battleFx16[data-family="impact"] .fx img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;user-select:none}
+.battleFx16[data-family="impact"] .fx .mist{mask-image:radial-gradient(ellipse 43% 43% at center,#000 20%,#0009 65%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 43% 43% at center,#000 20%,#0009 65%,transparent 100%)}
+.battleFx16[data-family="impact"] .fx .burst{filter:drop-shadow(0 0 3px #ffad37)}
+.battleFx16[data-family="impact"] .fx.playing .mist{animation:g4-impact-mist var(--duration) ease-out both}
+.battleFx16[data-family="impact"] .fx.playing .burst{animation:g4-impact-burst var(--duration) cubic-bezier(.15,.72,.32,1) both}
+.battleFx16[data-family="impact"] .fx.playing .particles{animation:g4-impact-particles var(--duration) ease-out both}
+@keyframes g4-impact-mist{0%{opacity:0;transform:scale(.58)}18%{opacity:var(--mist-opacity)}56%{opacity:calc(var(--mist-opacity)*.8);transform:scale(1.08)}100%{opacity:0;transform:scale(1.25)}}
+@keyframes g4-impact-burst{0%,10%{opacity:0;transform:scale(.24)}22%{opacity:var(--burst-opacity);transform:scale(.53)}43%{opacity:var(--burst-opacity);transform:scale(1.05)}67%{opacity:.25;transform:scale(1.26)}100%{opacity:0;transform:scale(1.4)}}
+@keyframes g4-impact-particles{0%,22%{opacity:0;transform:scale(.28) rotate(-5deg)}36%{opacity:var(--particles-opacity)}78%{opacity:.5;transform:scale(1.12) rotate(3deg)}100%{opacity:0;transform:scale(1.32) rotate(6deg)}}
+.battleFx16[data-family="def_up"] .fx{position:absolute;left:var(--x);top:var(--y);width:var(--size);aspect-ratio:1;transform:translate(-50%,-50%);z-index:3;pointer-events:none;overflow:visible}
+.battleFx16[data-family="def_up"] .fx img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;user-select:none}
+.battleFx16[data-family="def_up"] .fx .aura{mix-blend-mode:screen;filter:drop-shadow(0 0 7px #35b4ff55)}
+.battleFx16[data-family="def_up"] .fx.playing .aura{animation:g4-def_up-mist var(--duration) ease-out both}
+.battleFx16[data-family="def_up"] .fx.playing .rise{animation:g4-def_up-rise var(--duration) ease-out both}
+.battleFx16[data-family="def_up"] .fx.playing .sparks{animation:g4-def_up-sparks var(--duration) ease-out both}
+.battleFx16[data-family="def_up"] .fx.playing .arrow{animation:g4-def_up-arrows var(--duration) ease-out both}
+@keyframes g4-def_up-mist{0%{opacity:0;transform:scale(.76)}25%{opacity:var(--mist-opacity);transform:scale(.98)}55%{opacity:var(--mist-opacity);transform:scale(1.08)}100%{opacity:0;transform:scale(1.16)}}
+@keyframes g4-def_up-rise{0%,12%{opacity:0;transform:translateY(34%) scaleY(.48)}35%{opacity:.85}75%{opacity:.72}100%{opacity:0;transform:translateY(-25%) scaleY(1.08)}}
+@keyframes g4-def_up-sparks{0%,15%{opacity:0;transform:translateY(25%) scale(.8)}36%{opacity:1}100%{opacity:0;transform:translateY(-29%) scale(1.06)}}
+@keyframes g4-def_up-arrows{0%,20%{opacity:0;transform:translateY(41%) scale(.8)}42%{opacity:.95}83%{opacity:.83}100%{opacity:0;transform:translateY(-37%) scale(1.05)}}
+.battleFx16[data-family="spd_up"] .fx{position:absolute;left:var(--x);top:var(--y);width:var(--size);aspect-ratio:1;transform:translate(-50%,-50%);z-index:3;pointer-events:none;overflow:visible}
+.battleFx16[data-family="spd_up"] .fx img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;user-select:none}
+.battleFx16[data-family="spd_up"] .fx .aura{mix-blend-mode:screen;filter:drop-shadow(0 0 7px #ffe16b55)}
+.battleFx16[data-family="spd_up"] .fx.playing .aura{animation:g4-spd_up-mist var(--duration) ease-out both}
+.battleFx16[data-family="spd_up"] .fx.playing .rise{animation:g4-spd_up-rise var(--duration) ease-out both}
+.battleFx16[data-family="spd_up"] .fx.playing .sparks{animation:g4-spd_up-sparks var(--duration) ease-out both}
+.battleFx16[data-family="spd_up"] .fx.playing .arrow{animation:g4-spd_up-arrows var(--duration) ease-out both}
+@keyframes g4-spd_up-mist{0%{opacity:0;transform:scale(.76)}25%{opacity:var(--mist-opacity);transform:scale(.98)}55%{opacity:var(--mist-opacity);transform:scale(1.08)}100%{opacity:0;transform:scale(1.16)}}
+@keyframes g4-spd_up-rise{0%,12%{opacity:0;transform:translateY(34%) scaleY(.48)}35%{opacity:.85}75%{opacity:.72}100%{opacity:0;transform:translateY(-25%) scaleY(1.08)}}
+@keyframes g4-spd_up-sparks{0%,15%{opacity:0;transform:translateY(25%) scale(.8)}36%{opacity:1}100%{opacity:0;transform:translateY(-29%) scale(1.06)}}
+@keyframes g4-spd_up-arrows{0%,20%{opacity:0;transform:translateY(41%) scale(.8)}42%{opacity:.95}83%{opacity:.83}100%{opacity:0;transform:translateY(-37%) scale(1.05)}}
+.battleFx16[data-family="atk_down"] .fx{position:absolute;left:var(--x);top:var(--y);width:var(--size);aspect-ratio:1;transform:translate(-50%,-50%);z-index:3;pointer-events:none;overflow:visible}
+.battleFx16[data-family="atk_down"] .fx img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;user-select:none}
+.battleFx16[data-family="atk_down"] .fx .aura{mix-blend-mode:normal;filter:drop-shadow(0 0 5px #873a4566)}
+.battleFx16[data-family="atk_down"] .fx.playing .aura{animation:g4-atk_down-mist var(--duration) ease-out both}
+.battleFx16[data-family="atk_down"] .fx.playing .rise{animation:g4-atk_down-rise var(--duration) ease-out both}
+.battleFx16[data-family="atk_down"] .fx.playing .sparks{animation:g4-atk_down-sparks var(--duration) ease-out both}
+.battleFx16[data-family="atk_down"] .fx.playing .arrow{animation:g4-atk_down-arrows var(--duration) ease-out both}
+@keyframes g4-atk_down-mist{0%{opacity:0;transform:scale(.76)}25%{opacity:var(--mist-opacity);transform:scale(.98)}55%{opacity:var(--mist-opacity);transform:scale(1.08)}100%{opacity:0;transform:scale(1.16)}}
+@keyframes g4-atk_down-rise{0%,12%{opacity:0;transform:translateY(-34%) scaleY(.48)}35%{opacity:.85}75%{opacity:.72}100%{opacity:0;transform:translateY(25%) scaleY(1.08)}}
+@keyframes g4-atk_down-sparks{0%,15%{opacity:0;transform:translateY(-25%) scale(.8)}36%{opacity:1}100%{opacity:0;transform:translateY(29%) scale(1.06)}}
+@keyframes g4-atk_down-arrows{0%,20%{opacity:0;transform:translateY(-41%) scale(.8)}42%{opacity:.95}83%{opacity:.83}100%{opacity:0;transform:translateY(37%) scale(1.05)}}
+.battleFx16[data-family="def_down"] .fx{position:absolute;left:var(--x);top:var(--y);width:var(--size);aspect-ratio:1;transform:translate(-50%,-50%);z-index:3;pointer-events:none;overflow:visible}
+.battleFx16[data-family="def_down"] .fx img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;user-select:none}
+.battleFx16[data-family="def_down"] .fx .aura{mix-blend-mode:normal;filter:drop-shadow(0 0 5px #46718a66)}
+.battleFx16[data-family="def_down"] .fx.playing .aura{animation:g4-def_down-mist var(--duration) ease-out both}
+.battleFx16[data-family="def_down"] .fx.playing .rise{animation:g4-def_down-rise var(--duration) ease-out both}
+.battleFx16[data-family="def_down"] .fx.playing .sparks{animation:g4-def_down-sparks var(--duration) ease-out both}
+.battleFx16[data-family="def_down"] .fx.playing .arrow{animation:g4-def_down-arrows var(--duration) ease-out both}
+@keyframes g4-def_down-mist{0%{opacity:0;transform:scale(.76)}25%{opacity:var(--mist-opacity);transform:scale(.98)}55%{opacity:var(--mist-opacity);transform:scale(1.08)}100%{opacity:0;transform:scale(1.16)}}
+@keyframes g4-def_down-rise{0%,12%{opacity:0;transform:translateY(-34%) scaleY(.48)}35%{opacity:.85}75%{opacity:.72}100%{opacity:0;transform:translateY(25%) scaleY(1.08)}}
+@keyframes g4-def_down-sparks{0%,15%{opacity:0;transform:translateY(-25%) scale(.8)}36%{opacity:1}100%{opacity:0;transform:translateY(29%) scale(1.06)}}
+@keyframes g4-def_down-arrows{0%,20%{opacity:0;transform:translateY(-41%) scale(.8)}42%{opacity:.95}83%{opacity:.83}100%{opacity:0;transform:translateY(37%) scale(1.05)}}
+.battleFx16[data-family="blind"] .fx{position:absolute;left:var(--x);top:var(--y);width:var(--size);aspect-ratio:1;transform:translate(-50%,-50%);z-index:4;pointer-events:none;overflow:visible}
+.battleFx16[data-family="blind"] .fx img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;user-select:none}
+.battleFx16[data-family="blind"] .fx .bank{mask-image:radial-gradient(ellipse 51% 47% at 50% 61%,#000 40%,#000c 68%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 51% 47% at 50% 61%,#000 40%,#000c 68%,transparent 100%)}
+.battleFx16[data-family="blind"] .fx .wisps{mask-image:radial-gradient(ellipse 46% 47% at center,#000 53%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 46% 47% at center,#000 53%,transparent 100%)}
+.battleFx16[data-family="blind"] .fx.playing .bank{animation:g4-blind-bank var(--duration) ease-in-out both}
+.battleFx16[data-family="blind"] .fx.playing .wisps{animation:g4-blind-wisps var(--duration) ease-in-out both}
+@keyframes g4-blind-bank{0%{opacity:0;transform:translateY(34%) scale(.74)}28%{opacity:var(--bank-opacity);transform:translateY(12%) scale(.94)}68%{opacity:var(--bank-opacity);transform:translateY(-4%) scale(1.09)}100%{opacity:0;transform:translateY(-14%) scale(1.17)}}
+@keyframes g4-blind-wisps{0%,15%{opacity:0;transform:translate(-8%,32%) scale(.82)}40%{opacity:var(--wisps-opacity);transform:translate(3%,8%) scale(.97)}73%{opacity:var(--wisps-opacity);transform:translate(-3%,-15%) scale(1.06)}100%{opacity:0;transform:translate(8%,-35%) scale(1.16)}}
+.battleFx16[data-family="silence"] .fx{position:absolute;left:var(--x);top:var(--y);width:var(--size);aspect-ratio:1;transform:translate(-50%,-50%);z-index:4;pointer-events:none}
+.battleFx16[data-family="silence"] .fx img{position:absolute;display:block;object-fit:contain;user-select:none}
+.battleFx16[data-family="silence"] .crest{inset:0;width:100%;height:100%;opacity:0}
+.battleFx16[data-family="silence"] .talisman{height:84%;width:42%;left:29%;top:8%;opacity:0;filter:drop-shadow(0 2px 8px #190907)}
+.battleFx16[data-family="silence"] .ring{position:absolute;inset:20%;border:1px solid #ffdb9b;border-radius:50%;box-shadow:0 0 12px #ef7447, inset 0 0 12px #e55d34;opacity:0}
+.battleFx16[data-family="silence"] .fx.playing .crest{animation:g4-silence-crest var(--time) linear both}
+.battleFx16[data-family="silence"] .fx.playing .talisman{animation:g4-silence-talisman var(--time) ease-out both}
+.battleFx16[data-family="silence"] .fx.playing .ring{animation:g4-silence-pulse var(--time) ease-out both}
+@keyframes g4-silence-crest{0%,9%{opacity:0;transform:rotate(-55deg) scale(.48)}24%{opacity:var(--crest-alpha);transform:rotate(-10deg) scale(1.08)}53%{opacity:var(--crest-alpha);transform:rotate(56deg) scale(1)}78%{opacity:calc(var(--crest-alpha)*.8);transform:rotate(105deg) scale(.91)}100%{opacity:0;transform:rotate(135deg) scale(.84)}}
+@keyframes g4-silence-talisman{0%,20%{opacity:0;transform:translateY(-56%) scale(1.38) rotate(-12deg)}36%{opacity:var(--seal-alpha);transform:translateY(3%) scale(.92) rotate(3deg)}47%{opacity:var(--seal-alpha);transform:translateY(0) scale(1.03) rotate(0)}76%{opacity:var(--seal-alpha);transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(0) scale(.94)}}
+@keyframes g4-silence-pulse{0%,34%{opacity:0;transform:scale(.4)}45%{opacity:.9;transform:scale(1)}67%{opacity:0;transform:scale(1.7)}100%{opacity:0}}
+.battleFx16[data-family="stun"] .fx{position:absolute;left:var(--x);top:var(--y);width:var(--size);aspect-ratio:1;transform:translate(-50%,-50%);z-index:4;pointer-events:none;opacity:var(--alpha);overflow:hidden}
+.battleFx16[data-family="stun"] .sprite{width:100%;height:100%;background-image:url('/battle-effects/stun/stun-electric-12frames.png');background-size:400% 300%;background-repeat:no-repeat;background-position:0 0}
+.battleFx16[data-family="stun"] .flash{position:absolute;inset:18%;background:radial-gradient(circle,#fffbc75c 0%,#ffc13a25 36%,transparent 72%);opacity:0;pointer-events:none}
+.battleFx16[data-family="stun"] .fx.flash-on .flash{animation:g4-stun-flash .25s ease-out}
+@keyframes g4-stun-flash{0%{opacity:0;transform:scale(.65)}35%{opacity:.9}100%{opacity:0;transform:scale(1.4)}}
+.battleFx16[data-family="slash_all"] .effect-layer{position:absolute;inset:0;z-index:4;pointer-events:none;overflow:hidden}
+.battleFx16[data-family="slash_all"] .slash{position:absolute;width:var(--width);aspect-ratio:1;left:var(--x);top:var(--y);transform:translate(-50%,-50%) scale(var(--scale)) rotate(var(--angle));opacity:var(--alpha);overflow:hidden}
+.battleFx16[data-family="slash_all"] .sprite{width:100%;height:100%;background-size:300% 200%;background-repeat:no-repeat}
+.battleFx16[data-family="slash_all"] .slash.a .sprite{background-image:url('/battle-effects/slash_all/slash-a-descending-6f.png')}
+.battleFx16[data-family="slash_all"] .slash.b .sprite{background-image:url('/battle-effects/slash_all/slash-b-rising-6f.png')}
+.battleFx16[data-family="slash_all"] .slash.c .sprite{background-image:url('/battle-effects/slash_all/slash-c-sweep-6f.png')}
+.battleFx16[data-family="impact_all"] .mist-layer,.battleFx16[data-family="impact_all"] .impact-layer{position:absolute;inset:0;pointer-events:none}
+.battleFx16[data-family="impact_all"] .mist-layer{z-index:2}
+.battleFx16[data-family="impact_all"] .impact-layer{z-index:4;mix-blend-mode:screen}
+.battleFx16[data-family="impact_all"] .mist{position:absolute;width:var(--width);aspect-ratio:2/1;left:var(--x);top:var(--y);transform:translate(-50%,-50%);background:url('/battle-effects/impact_all/impact-back-haze.png') center/contain no-repeat;opacity:0;filter:blur(3px);mask-image:radial-gradient(ellipse at center,#000 32%,transparent 76%);-webkit-mask-image:radial-gradient(ellipse at center,#000 32%,transparent 76%);animation:g4-impact_all-mist-grow var(--duration) ease-out both}
+@keyframes g4-impact_all-mist-grow{0%{opacity:0;transform:translate(-50%,-50%) scale(.62)}35%{opacity:var(--mist-opacity)}75%{opacity:var(--mist-opacity)}100%{opacity:0;transform:translate(-50%,-55%) scale(1.12)}}
+.battleFx16[data-family="impact_all"] .wave{position:absolute;left:var(--x);top:var(--y);width:var(--width);aspect-ratio:1;transform:translate(-50%,-50%) scale(.2);background:url('/battle-effects/impact_all/impact-wave-yellow-reference.png') center/100% 100% no-repeat;mask-image:url('/battle-effects/impact_all/impact-wave-yellow-reference.png');mask-mode:luminance;mask-size:100% 100%;mask-repeat:no-repeat;-webkit-mask-image:url('/battle-effects/impact_all/impact-wave-yellow-reference.png');-webkit-mask-mode:luminance;-webkit-mask-size:100% 100%;-webkit-mask-repeat:no-repeat;opacity:0;animation:g4-impact_all-wave var(--duration) cubic-bezier(.14,.57,.23,1) both;filter:saturate(1.15)}
+@keyframes g4-impact_all-wave{0%{transform:translate(-50%,-50%) scale(.22);opacity:0}15%{opacity:var(--ring-opacity)}50%{opacity:calc(var(--ring-opacity)*.9)}100%{transform:translate(-50%,-50%) scale(1.3);opacity:0}}
+.battleFx16[data-family="impact_all"] .core{position:absolute;left:var(--x);top:var(--y);width:var(--width);aspect-ratio:1;transform:translate(-50%,-50%) scale(.55);background:url('/battle-effects/impact_all/impact-core-sparks.png') center/contain no-repeat;opacity:0;mix-blend-mode:screen;animation:g4-impact_all-core var(--duration) ease-out both}
+@keyframes g4-impact_all-core{0%{opacity:0;transform:translate(-50%,-50%) scale(.35)}16%{opacity:var(--core-opacity)}42%{opacity:calc(var(--core-opacity)*.56)}75%,100%{opacity:0;transform:translate(-50%,-50%) scale(1.12)}}
+.battleFx16[data-family="heal_all"] .fx{position:absolute;inset:0;z-index:4;pointer-events:none;overflow:hidden}
+.battleFx16[data-family="heal_all"] .field{position:absolute;left:50%;top:var(--field-y);width:var(--field-width);aspect-ratio:3/1;transform:translate(-50%,-50%) scale(.8);background:url('/battle-effects/heal_all/group-heal-back-aura.png') center/contain no-repeat;opacity:0;filter:blur(2px);mask-image:radial-gradient(ellipse at center,#000 43%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse at center,#000 43%,transparent 80%)}
+.battleFx16[data-family="heal_all"] .fx.playing .field{animation:g4-heal_all-field var(--duration) ease-in-out both}
+@keyframes g4-heal_all-field{0%{opacity:0;transform:translate(-50%,-50%) scale(.7)}28%{opacity:var(--field-alpha);transform:translate(-50%,-50%) scale(1)}72%{opacity:var(--field-alpha)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.13)}}
+.battleFx16[data-family="heal_all"] .unit{position:absolute;left:var(--x);top:var(--y);width:var(--width);aspect-ratio:1;transform:translate(-50%,-50%) scale(var(--size));opacity:0}
+.battleFx16[data-family="heal_all"] .unit img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0}
+.battleFx16[data-family="heal_all"] .unit .aura{mix-blend-mode:screen;mask-image:radial-gradient(circle,#000 36%,transparent 72%);-webkit-mask-image:radial-gradient(circle,#000 36%,transparent 72%)}
+.battleFx16[data-family="heal_all"] .unit .rise{filter:drop-shadow(0 0 4px #8bffab77)}
+.battleFx16[data-family="heal_all"] .cross-group{position:absolute;left:50%;top:var(--cross-top);width:100%;height:auto;transform:translate(-50%,10%) scale(.9);opacity:0;filter:drop-shadow(0 0 4px #76ffa4)}
+.battleFx16[data-family="heal_all"] .fx.playing .unit{animation:g4-heal_all-show var(--duration) linear both;animation-delay:var(--delay)}
+@keyframes g4-heal_all-show{0%,99%{opacity:1}100%{opacity:0}}
+.battleFx16[data-family="heal_all"] .fx.playing .unit .aura{animation:g4-heal_all-aura var(--duration) ease-out both;animation-delay:var(--delay)}
+.battleFx16[data-family="heal_all"] .fx.playing .unit .rise{animation:g4-heal_all-rise var(--duration) ease-out both;animation-delay:var(--delay)}
+.battleFx16[data-family="heal_all"] .fx.playing .unit .sparks{animation:g4-heal_all-sparks var(--duration) ease-out both;animation-delay:var(--delay)}
+.battleFx16[data-family="heal_all"] .fx.playing .cross-group{animation:g4-heal_all-cross-group var(--duration) ease-out both}
+@keyframes g4-heal_all-aura{0%{opacity:0;transform:scale(.7)}25%,72%{opacity:var(--aura-alpha);transform:scale(1.1)}100%{opacity:0;transform:scale(1.25)}}
+@keyframes g4-heal_all-rise{0%,10%{opacity:0;transform:translateY(35%) scaleY(.4)}32%{opacity:.65}76%{opacity:.5}100%{opacity:0;transform:translateY(-65%) scaleY(1.2)}}
+@keyframes g4-heal_all-sparks{0%,18%{opacity:0;transform:translateY(30%) scale(.75)}38%{opacity:.85}100%{opacity:0;transform:translateY(-68%) scale(1.05)}}
+@keyframes g4-heal_all-cross-group{0%,18%{opacity:0;transform:translate(-50%,10%) scale(.9)}42%{opacity:var(--cross-alpha)}75%{opacity:calc(var(--cross-alpha)*.8)}100%{opacity:0;transform:translate(-50%,-14%) scale(1.04)}}
+
+.battleFx16{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:5}.battleFx16 *{box-sizing:border-box}.battleFx16[data-family="projectile"] .fx{opacity:1}.battleFx16[data-family="stun"] .flash{animation:g4-stun-flash 250ms ease-out both;animation-delay:630ms}
+@media(prefers-reduced-motion:reduce){.battleFx16{display:none}}

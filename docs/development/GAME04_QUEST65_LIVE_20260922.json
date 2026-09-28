@@ -1,0 +1,51 @@
+{
+  "project": "lrgyllgzcdcphlbmkknc",
+  "qaUserId": "2bba0d32-d216-4e75-b1b5-5be0d7cadeb4",
+  "firstBattleId": "257db942-5362-4c58-8da3-1fc0ed572a8c",
+  "firstStage": {
+    "outcome": "win",
+    "firstClear": true,
+    "energyBefore": 50,
+    "energyAfter": 50,
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 500
+      },
+      {
+        "id": "small",
+        "kind": "character_exp_item",
+        "amount": 1
+      },
+      {
+        "id": "small",
+        "kind": "equipment_exp_item",
+        "amount": 1
+      },
+      {
+        "id": "SPECIAL_TICKET_SKILL",
+        "kind": "ticket",
+        "amount": 1
+      },
+      {
+        "id": "char_jihoon_01",
+        "kind": "character",
+        "amount": 1
+      }
+    ]
+  },
+  "repeatedRequest": {
+    "sameRewards": true,
+    "sameTicketBalance": true,
+    "attempts": 1
+  },
+  "nextStage": {
+    "outcome": "win",
+    "firstClear": true,
+    "cleared": [
+      "mikawa-1",
+      "mikawa-2"
+    ]
+  },
+  "scope": "New QA account only; no existing player edits"
+}
