@@ -12,7 +12,7 @@ fs.mkdirSync(out,{recursive:true});
    window.vfxEvents=[];const seen=new WeakSet();
    new MutationObserver(()=>document.querySelectorAll('[data-tutorial-cutin],[data-tutorial-combo],[data-vfx-id]').forEach(n=>{if(seen.has(n))return;seen.add(n);window.vfxEvents.push({run:n.closest('[data-run]')?.dataset.run,kind:n.dataset.vfxId?'vfx':n.dataset.tutorialCombo?'combo':'cutin',id:n.dataset.vfxId,phase:n.dataset.vfxPhase,lead:n.dataset.vfxLead,side:n.dataset.targetSide,frame:n.closest('[data-playback-frame]')?.dataset.playbackFrame});})).observe(document,{subtree:true,childList:true});
  });
- await page.goto(base+'/qa/skill-vfx24');
+ await page.goto(process.env.QA_SHARE_URL||base+'/qa/skill-vfx24');
  await page.locator('[data-playback-frame]').waitFor();
  for(const side of ['ally','enemy'])for(const [index,effect] of catalog.entries()) {
    await page.getByLabel('演出',{exact:true}).selectOption(effect.id);
@@ -75,19 +75,19 @@ fs.mkdirSync(out,{recursive:true});
  assert.equal(await page.locator('[data-vfx-id]').count(),0);
  report.controls.push('no-op cleanse preserves attack; retire disposes VFX');
  // SR and single-enemy mobile/desktop fit, on the same BattleView.
- for(const width of [375,1280]) {
+ for(const width of [375,1280]) for(const effectId of ['heavy-cleave','water-wave','barrier-field','grand-healing','formation-break','purification']) {
    await page.setViewportSize({width,height:844});
    await page.getByLabel('敵の配置',{exact:true}).selectOption('1');
    await page.getByLabel('カットイン',{exact:true}).selectOption('SR');
-   await page.getByLabel('演出',{exact:true}).selectOption('grand-healing');
+   await page.getByLabel('演出',{exact:true}).selectOption(effectId);
    await page.getByLabel('付与・解除が成立',{exact:true}).check();
    await page.getByRole('button',{name:'再生する',exact:true}).click();
    await page.locator('[data-vfx-id]').first().waitFor({state:'visible'});
    await page.waitForTimeout(200);
-   await page.screenshot({path:`${out}/healing-${width}.jpg`,type:'jpeg',quality:85,fullPage:true});
+   await page.screenshot({path:`${out}/${effectId}-${width}.jpg`,type:'jpeg',quality:85,fullPage:true});
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
  }
- report.controls.push('375px/390px/1280px, SR cutin and single-enemy layout');
+ report.controls.push('375px/390px/1280px, SR cutin and single-enemy layout; six single/area/support/cleanse representatives at 375px and desktop');
  assert.deepEqual(report.errors,[]);assert.deepEqual(report.failed,[]);assert.deepEqual(report.writes,[]);
  report.status='PASS';fs.writeFileSync(out+'/report.json',JSON.stringify(report,null,2));await browser.close();console.log('PASS 48 effect/side cases and playback controls');
 })().catch(error=>{console.error(error);process.exit(1)});

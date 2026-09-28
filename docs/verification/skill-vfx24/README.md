@@ -29,6 +29,14 @@ Fixtures are explicitly synthetic display samples, with formal skill effect orde
 - `scripts/skill-vfx24/verify.cjs`: 80 formal-ID/side fixtures; 40 real-engine recordings; success/failure/dead/fallback/order/immutability assertions PASS (`unit-report.json`).
 - Common UI and unchanged API bundle checks PASS.
 - Preview-environment full Next build (webpack): PASS, including new QA route. Existing prebuild generates display-image derivatives; generated manifest drift is not part of this change.
-- Browser development pass confirmed representative effects; an HMR during the matrix invalidated a cutin-count assertion. The complete matrix is rerun against an immutable build and subsequently checked on Preview; see final report when added.
+- Immutable local build: all 48 effect/side combinations and playback controls PASS (`browser/report.json`). Existing shared battle browser regression PASS (`existing-regression/`). An earlier development run was invalidated by HMR and superseded by this immutable-build run.
 
 Final look/timing approval belongs to the user on Preview. Physical iPhone testing has not been performed by the agent.
+
+## Deployment and final verification
+- Immutable Preview: https://game04-production-receiver-q854a2e3o-kiyoshi-kitamura.vercel.app/qa/skill-vfx24
+- Runtime commit: `49f5fbbbcbac170d0e82de774ba06766f6cf30aa`; deployment `dpl_Dxwn9XJVzEaPLpGZfEcfUBrJiZ5k` READY, target Preview. Subsequent commits only save verification scripts/evidence.
+- Existing Vercel Authentication remains enabled. A deployment-scoped seven-day share link was generated for user review; its token is deliberately not stored in Git. Browser verification enters through that link using a fresh browser context.
+- Deployed texture verification: all 48 WebP files HTTP 200 and byte-identical SHA256; title and QA HTTP 200, 24 choices, no eager VFX loading at title and no Production DB requests (`preview/assets-and-title.json`).
+- Latest Production rechecked at completion: `9964cb260c9cc887bb803eb7850d7c08b75ebb82`, `dpl_HQW3SdBsz4MzDipAiRz6ejT5syjt`, independently promoted by parallel work. This commit is already an ancestor of our baseline. This task did not change main or Production.
+- Deployed Preview: all 48 effect/side cases, cutin/combo ordering, pause/resume/speed/SKIP/retire and no-op removal PASS (preview/report.json); no page errors, failed HTTP responses or write requests. 375/390/1280px layouts checked. Separate paused screenshots preserve the actual VFX instead of racing the short animation (preview/layouts.json).

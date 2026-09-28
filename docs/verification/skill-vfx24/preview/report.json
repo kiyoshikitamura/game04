@@ -1,0 +1,2618 @@
+{
+  "base": "https://game04-production-receiver-q854a2e3o-kiyoshi-kitamura.vercel.app",
+  "cases": [
+    {
+      "id": "heavy-cleave",
+      "side": "ally",
+      "observed": {
+        "side": "enemy",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/heavy-cleave/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(-7.2517deg) scale(0.869821, 0.869821)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/heavy-cleave/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.3, 0.3)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "3",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "3",
+          "kind": "vfx",
+          "id": "heavy-cleave",
+          "phase": "strike",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        }
+      ]
+    },
+    {
+      "id": "water-wave",
+      "side": "ally",
+      "observed": {
+        "side": "enemy",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/water-wave/lead.webp",
+            "loaded": true,
+            "opacity": 0.529703,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(1.09601, 0.871463)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/water-wave/hit.webp",
+            "loaded": true,
+            "opacity": 0.638649,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(1.09995, 1.14995)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "6",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "6",
+          "kind": "vfx",
+          "id": "water-wave",
+          "phase": "strike",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        },
+        {
+          "run": "6",
+          "kind": "vfx",
+          "id": "water-wave",
+          "phase": "strike",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "3"
+        },
+        {
+          "run": "6",
+          "kind": "vfx",
+          "id": "water-wave",
+          "phase": "strike",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "4"
+        }
+      ]
+    },
+    {
+      "id": "earth-rupture",
+      "side": "ally",
+      "observed": {
+        "side": "enemy",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/earth-rupture/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.778077, 0.644303)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/earth-rupture/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.3, 0.1)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "9",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "9",
+          "kind": "vfx",
+          "id": "earth-rupture",
+          "phase": "strike",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        },
+        {
+          "run": "9",
+          "kind": "vfx",
+          "id": "earth-rupture",
+          "phase": "strike",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "3"
+        },
+        {
+          "run": "9",
+          "kind": "vfx",
+          "id": "earth-rupture",
+          "phase": "strike",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "4"
+        }
+      ]
+    },
+    {
+      "id": "crimson-flash",
+      "side": "ally",
+      "observed": {
+        "side": "enemy",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/crimson-flash/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(-9.94272deg) scale(0.834502, 0.834502)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/crimson-flash/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.3, 0.3)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "12",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "12",
+          "kind": "vfx",
+          "id": "crimson-flash",
+          "phase": "strike",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        }
+      ]
+    },
+    {
+      "id": "grand-crimson",
+      "side": "ally",
+      "observed": {
+        "side": "enemy",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/grand-crimson/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(1.41789deg) scale(0.654431, 0.677216)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/grand-crimson/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.3, 0.1)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "15",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "15",
+          "kind": "vfx",
+          "id": "grand-crimson",
+          "phase": "strike",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        },
+        {
+          "run": "15",
+          "kind": "vfx",
+          "id": "grand-crimson",
+          "phase": "strike",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "3"
+        },
+        {
+          "run": "15",
+          "kind": "vfx",
+          "id": "grand-crimson",
+          "phase": "strike",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "4"
+        }
+      ]
+    },
+    {
+      "id": "barrier-field",
+      "side": "ally",
+      "observed": {
+        "side": "ally",
+        "phase": "support",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/barrier-field/lead.webp",
+            "loaded": true,
+            "opacity": 0.6045,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(1.0667, 0.65)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/barrier-field/hit.webp",
+            "loaded": true,
+            "opacity": 0.5525,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(1.07606, 1.02456)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "18",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "18",
+          "kind": "vfx",
+          "id": "barrier-field",
+          "phase": "support",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        },
+        {
+          "run": "18",
+          "kind": "vfx",
+          "id": "barrier-field",
+          "phase": "support",
+          "lead": "false",
+          "side": "ally",
+          "frame": "3"
+        },
+        {
+          "run": "18",
+          "kind": "vfx",
+          "id": "barrier-field",
+          "phase": "support",
+          "lead": "false",
+          "side": "ally",
+          "frame": "4"
+        },
+        {
+          "run": "18",
+          "kind": "vfx",
+          "id": "barrier-field",
+          "phase": "support",
+          "lead": "false",
+          "side": "ally",
+          "frame": "5"
+        },
+        {
+          "run": "18",
+          "kind": "vfx",
+          "id": "barrier-field",
+          "phase": "support",
+          "lead": "false",
+          "side": "ally",
+          "frame": "6"
+        }
+      ]
+    },
+    {
+      "id": "iaido-flash",
+      "side": "ally",
+      "observed": {
+        "side": "enemy",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/iaido-flash/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.727021, 0.65)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/iaido-flash/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.5, 0.8)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "21",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "21",
+          "kind": "vfx",
+          "id": "iaido-flash",
+          "phase": "strike",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        }
+      ]
+    },
+    {
+      "id": "cross-slash",
+      "side": "ally",
+      "observed": {
+        "side": "enemy",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/cross-slash/lead.webp",
+            "loaded": true,
+            "opacity": 0.602647,
+            "transform": "translate(-50%, -50%) rotate(-28deg) scale(1.04305, 1.04305)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/cross-slash/lead.webp",
+            "loaded": true,
+            "opacity": 0.661312,
+            "transform": "translate(-50%, -50%) rotate(65deg) scale(1.04081, 1.04081)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/cross-slash/hit.webp",
+            "loaded": true,
+            "opacity": 0.726596,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(1.09935, 1.09935)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "24",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "24",
+          "kind": "vfx",
+          "id": "cross-slash",
+          "phase": "strike",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        }
+      ]
+    },
+    {
+      "id": "poison-slash",
+      "side": "ally",
+      "observed": {
+        "side": "enemy",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/poison-slash/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(0.315745deg) scale(0.804385, 0.804385)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/poison-slash/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.3, 0.3)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "27",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "27",
+          "kind": "vfx",
+          "id": "poison-slash",
+          "phase": "strike",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        }
+      ]
+    },
+    {
+      "id": "fire-sweep",
+      "side": "ally",
+      "observed": {
+        "side": "enemy",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/fire-sweep/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(0.681259deg) scale(0.81987, 0.811354)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/fire-sweep/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.3, 0.3)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "30",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "30",
+          "kind": "vfx",
+          "id": "fire-sweep",
+          "phase": "strike",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        },
+        {
+          "run": "30",
+          "kind": "vfx",
+          "id": "fire-sweep",
+          "phase": "strike",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "3"
+        },
+        {
+          "run": "30",
+          "kind": "vfx",
+          "id": "fire-sweep",
+          "phase": "strike",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "4"
+        }
+      ]
+    },
+    {
+      "id": "wind-spiral",
+      "side": "ally",
+      "observed": {
+        "side": "enemy",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/wind-spiral/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(3.9528deg) scale(0.632967, 0.632967)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/wind-spiral/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.3, 0.3)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "33",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "33",
+          "kind": "vfx",
+          "id": "wind-spiral",
+          "phase": "strike",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        },
+        {
+          "run": "33",
+          "kind": "vfx",
+          "id": "wind-spiral",
+          "phase": "strike",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "3"
+        },
+        {
+          "run": "33",
+          "kind": "vfx",
+          "id": "wind-spiral",
+          "phase": "strike",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "4"
+        }
+      ]
+    },
+    {
+      "id": "light-rain",
+      "side": "ally",
+      "observed": {
+        "side": "enemy",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/light-rain/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(1, 0.794212)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/light-rain/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(1, 0.695936)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/light-rain/lead.webp",
+            "loaded": true,
+            "opacity": 0.422451,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(1, 0.550605)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/light-rain/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.3, 0.65)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "36",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "36",
+          "kind": "vfx",
+          "id": "light-rain",
+          "phase": "strike",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        },
+        {
+          "run": "36",
+          "kind": "vfx",
+          "id": "light-rain",
+          "phase": "strike",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "3"
+        },
+        {
+          "run": "36",
+          "kind": "vfx",
+          "id": "light-rain",
+          "phase": "strike",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "4"
+        }
+      ]
+    },
+    {
+      "id": "dark-sweep",
+      "side": "ally",
+      "observed": {
+        "side": "enemy",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/dark-sweep/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(-1.79769deg) scale(0.769665, 0.769665)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/dark-sweep/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.3, 0.3)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "39",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "39",
+          "kind": "vfx",
+          "id": "dark-sweep",
+          "phase": "strike",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        },
+        {
+          "run": "39",
+          "kind": "vfx",
+          "id": "dark-sweep",
+          "phase": "strike",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "3"
+        },
+        {
+          "run": "39",
+          "kind": "vfx",
+          "id": "dark-sweep",
+          "phase": "strike",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "4"
+        }
+      ]
+    },
+    {
+      "id": "azure-flash",
+      "side": "ally",
+      "observed": {
+        "side": "enemy",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/azure-flash/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.800817, 0.863669)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/azure-flash/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.3, 0.35)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "42",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "42",
+          "kind": "vfx",
+          "id": "azure-flash",
+          "phase": "strike",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        }
+      ]
+    },
+    {
+      "id": "earth-flash",
+      "side": "ally",
+      "observed": {
+        "side": "enemy",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/earth-flash/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.707418, 0.595725)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/earth-flash/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.3, 0.1)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "45",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "45",
+          "kind": "vfx",
+          "id": "earth-flash",
+          "phase": "strike",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        }
+      ]
+    },
+    {
+      "id": "tempest-flash",
+      "side": "ally",
+      "observed": {
+        "side": "enemy",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/tempest-flash/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(96.1526deg) scale(0.556191, 0.556191)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/tempest-flash/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.2, 0.7)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "48",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "48",
+          "kind": "vfx",
+          "id": "tempest-flash",
+          "phase": "strike",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        }
+      ]
+    },
+    {
+      "id": "heavenly-flash",
+      "side": "ally",
+      "observed": {
+        "side": "enemy",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/heavenly-flash/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(8.90789deg) scale(0.528172, 0.528172)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/heavenly-flash/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(-20deg) scale(0.3, 0.3)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "51",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "51",
+          "kind": "vfx",
+          "id": "heavenly-flash",
+          "phase": "strike",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        }
+      ]
+    },
+    {
+      "id": "twilight-flash",
+      "side": "ally",
+      "observed": {
+        "side": "enemy",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/twilight-flash/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(-3.7842deg) scale(0.714042, 0.714042)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/twilight-flash/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.3, 0.3)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "54",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "54",
+          "kind": "vfx",
+          "id": "twilight-flash",
+          "phase": "strike",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        }
+      ]
+    },
+    {
+      "id": "grand-healing",
+      "side": "ally",
+      "observed": {
+        "side": "ally",
+        "phase": "support",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/grand-healing/lead.webp",
+            "loaded": true,
+            "opacity": 0.651,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.767744, 0.8)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/grand-healing/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.3, 0.4)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "57",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "57",
+          "kind": "vfx",
+          "id": "grand-healing",
+          "phase": "support",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        },
+        {
+          "run": "57",
+          "kind": "vfx",
+          "id": "grand-healing",
+          "phase": "support",
+          "lead": "false",
+          "side": "ally",
+          "frame": "3"
+        },
+        {
+          "run": "57",
+          "kind": "vfx",
+          "id": "grand-healing",
+          "phase": "support",
+          "lead": "false",
+          "side": "ally",
+          "frame": "4"
+        },
+        {
+          "run": "57",
+          "kind": "vfx",
+          "id": "grand-healing",
+          "phase": "support",
+          "lead": "false",
+          "side": "ally",
+          "frame": "5"
+        },
+        {
+          "run": "57",
+          "kind": "vfx",
+          "id": "grand-healing",
+          "phase": "support",
+          "lead": "false",
+          "side": "ally",
+          "frame": "6"
+        }
+      ]
+    },
+    {
+      "id": "counter-stance",
+      "side": "ally",
+      "observed": {
+        "side": "ally",
+        "phase": "support",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/counter-stance/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(-27.9927deg) scale(0.715328, 0.715328)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/counter-stance/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.3, 0.3)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "60",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "60",
+          "kind": "vfx",
+          "id": "counter-stance",
+          "phase": "support",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        },
+        {
+          "run": "60",
+          "kind": "vfx",
+          "id": "counter-stance",
+          "phase": "support",
+          "lead": "false",
+          "side": "ally",
+          "frame": "3"
+        }
+      ]
+    },
+    {
+      "id": "formation-break",
+      "side": "ally",
+      "observed": {
+        "side": "enemy",
+        "phase": "cleanse",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/formation-break/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(3.57054deg) scale(1.03457, 1.03457)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "63",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "63",
+          "kind": "vfx",
+          "id": "formation-break",
+          "phase": "cleanse",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        },
+        {
+          "run": "63",
+          "kind": "vfx",
+          "id": "formation-break",
+          "phase": "strike",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "3"
+        }
+      ]
+    },
+    {
+      "id": "war-god-rally",
+      "side": "ally",
+      "observed": {
+        "side": "ally",
+        "phase": "support",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/war-god-rally/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(-10.8409deg) scale(1.01861, 1.01861)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/war-god-rally/hit.webp",
+            "loaded": true,
+            "opacity": 0.85,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(1.06738, 0.8)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "66",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "66",
+          "kind": "vfx",
+          "id": "war-god-rally",
+          "phase": "support",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        },
+        {
+          "run": "66",
+          "kind": "vfx",
+          "id": "war-god-rally",
+          "phase": "support",
+          "lead": "false",
+          "side": "ally",
+          "frame": "3"
+        },
+        {
+          "run": "66",
+          "kind": "vfx",
+          "id": "war-god-rally",
+          "phase": "support",
+          "lead": "false",
+          "side": "ally",
+          "frame": "4"
+        },
+        {
+          "run": "66",
+          "kind": "vfx",
+          "id": "war-god-rally",
+          "phase": "support",
+          "lead": "false",
+          "side": "ally",
+          "frame": "5"
+        },
+        {
+          "run": "66",
+          "kind": "vfx",
+          "id": "war-god-rally",
+          "phase": "support",
+          "lead": "false",
+          "side": "ally",
+          "frame": "6"
+        }
+      ]
+    },
+    {
+      "id": "purification",
+      "side": "ally",
+      "observed": {
+        "side": "ally",
+        "phase": "cleanse",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/purification/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(7.44deg) scale(1.02874, 1.02874)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/purification/hit.webp",
+            "loaded": true,
+            "opacity": 0.68,
+            "transform": "translate(-50%, -50%) rotate(7.44deg) scale(1.02874, 1.02874)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "69",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "69",
+          "kind": "vfx",
+          "id": "purification",
+          "phase": "cleanse",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        },
+        {
+          "run": "69",
+          "kind": "vfx",
+          "id": "purification",
+          "phase": "cleanse",
+          "lead": "false",
+          "side": "ally",
+          "frame": "3"
+        },
+        {
+          "run": "69",
+          "kind": "vfx",
+          "id": "purification",
+          "phase": "cleanse",
+          "lead": "false",
+          "side": "ally",
+          "frame": "4"
+        },
+        {
+          "run": "69",
+          "kind": "vfx",
+          "id": "purification",
+          "phase": "cleanse",
+          "lead": "false",
+          "side": "ally",
+          "frame": "5"
+        },
+        {
+          "run": "69",
+          "kind": "vfx",
+          "id": "purification",
+          "phase": "cleanse",
+          "lead": "false",
+          "side": "ally",
+          "frame": "6"
+        },
+        {
+          "run": "69",
+          "kind": "vfx",
+          "id": "purification",
+          "phase": "cleanse",
+          "lead": "false",
+          "side": "ally",
+          "frame": "7"
+        },
+        {
+          "run": "69",
+          "kind": "vfx",
+          "id": "purification",
+          "phase": "cleanse",
+          "lead": "false",
+          "side": "ally",
+          "frame": "8"
+        },
+        {
+          "run": "69",
+          "kind": "vfx",
+          "id": "purification",
+          "phase": "cleanse",
+          "lead": "false",
+          "side": "ally",
+          "frame": "9"
+        },
+        {
+          "run": "69",
+          "kind": "vfx",
+          "id": "purification",
+          "phase": "cleanse",
+          "lead": "false",
+          "side": "ally",
+          "frame": "10"
+        },
+        {
+          "run": "69",
+          "kind": "vfx",
+          "id": "purification",
+          "phase": "cleanse",
+          "lead": "false",
+          "side": "ally",
+          "frame": "11"
+        }
+      ]
+    },
+    {
+      "id": "power-break-flash",
+      "side": "ally",
+      "observed": {
+        "side": "enemy",
+        "phase": "cleanse",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/power-break-flash/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(3.57321deg) scale(1.03475, 1.03475)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "72",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "72",
+          "kind": "vfx",
+          "id": "power-break-flash",
+          "phase": "cleanse",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        },
+        {
+          "run": "72",
+          "kind": "vfx",
+          "id": "power-break-flash",
+          "phase": "strike",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "3"
+        }
+      ]
+    },
+    {
+      "id": "heavy-cleave",
+      "side": "enemy",
+      "observed": {
+        "side": "ally",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/heavy-cleave/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(7.0448deg) scale(-0.872537, 0.872537)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/heavy-cleave/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(-0.3, 0.3)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "75",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "75",
+          "kind": "vfx",
+          "id": "heavy-cleave",
+          "phase": "strike",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        }
+      ]
+    },
+    {
+      "id": "water-wave",
+      "side": "enemy",
+      "observed": {
+        "side": "ally",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/water-wave/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(-0.846691, 0.896792)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/water-wave/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(-0.3, 0.35)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "78",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "78",
+          "kind": "vfx",
+          "id": "water-wave",
+          "phase": "strike",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        },
+        {
+          "run": "78",
+          "kind": "vfx",
+          "id": "water-wave",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "3"
+        },
+        {
+          "run": "78",
+          "kind": "vfx",
+          "id": "water-wave",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "4"
+        },
+        {
+          "run": "78",
+          "kind": "vfx",
+          "id": "water-wave",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "5"
+        },
+        {
+          "run": "78",
+          "kind": "vfx",
+          "id": "water-wave",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "6"
+        }
+      ]
+    },
+    {
+      "id": "earth-rupture",
+      "side": "enemy",
+      "observed": {
+        "side": "ally",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/earth-rupture/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.763011, 0.633945)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/earth-rupture/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.3, 0.1)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "81",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "81",
+          "kind": "vfx",
+          "id": "earth-rupture",
+          "phase": "strike",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        },
+        {
+          "run": "81",
+          "kind": "vfx",
+          "id": "earth-rupture",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "3"
+        },
+        {
+          "run": "81",
+          "kind": "vfx",
+          "id": "earth-rupture",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "4"
+        },
+        {
+          "run": "81",
+          "kind": "vfx",
+          "id": "earth-rupture",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "5"
+        },
+        {
+          "run": "81",
+          "kind": "vfx",
+          "id": "earth-rupture",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "6"
+        }
+      ]
+    },
+    {
+      "id": "crimson-flash",
+      "side": "enemy",
+      "observed": {
+        "side": "ally",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/crimson-flash/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(10.193deg) scale(-0.831217, 0.831217)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/crimson-flash/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(-0.3, 0.3)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "84",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "84",
+          "kind": "vfx",
+          "id": "crimson-flash",
+          "phase": "strike",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        }
+      ]
+    },
+    {
+      "id": "grand-crimson",
+      "side": "enemy",
+      "observed": {
+        "side": "ally",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/grand-crimson/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(-1.40381deg) scale(0.651565, 0.675783)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/grand-crimson/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.3, 0.1)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "87",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "87",
+          "kind": "vfx",
+          "id": "grand-crimson",
+          "phase": "strike",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        },
+        {
+          "run": "87",
+          "kind": "vfx",
+          "id": "grand-crimson",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "3"
+        },
+        {
+          "run": "87",
+          "kind": "vfx",
+          "id": "grand-crimson",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "4"
+        },
+        {
+          "run": "87",
+          "kind": "vfx",
+          "id": "grand-crimson",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "5"
+        },
+        {
+          "run": "87",
+          "kind": "vfx",
+          "id": "grand-crimson",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "6"
+        }
+      ]
+    },
+    {
+      "id": "barrier-field",
+      "side": "enemy",
+      "observed": {
+        "side": "enemy",
+        "phase": "support",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/barrier-field/lead.webp",
+            "loaded": true,
+            "opacity": 0.6045,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.656353, 0.65)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/barrier-field/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.3, 0.2)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "90",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "90",
+          "kind": "vfx",
+          "id": "barrier-field",
+          "phase": "support",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        },
+        {
+          "run": "90",
+          "kind": "vfx",
+          "id": "barrier-field",
+          "phase": "support",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "3"
+        },
+        {
+          "run": "90",
+          "kind": "vfx",
+          "id": "barrier-field",
+          "phase": "support",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "4"
+        }
+      ]
+    },
+    {
+      "id": "iaido-flash",
+      "side": "enemy",
+      "observed": {
+        "side": "ally",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/iaido-flash/lead.webp",
+            "loaded": true,
+            "opacity": 0.069021,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(-1.23819, 0.65)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/iaido-flash/hit.webp",
+            "loaded": true,
+            "opacity": 0.727479,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(-1.29934, 0.8)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "93",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "93",
+          "kind": "vfx",
+          "id": "iaido-flash",
+          "phase": "strike",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        }
+      ]
+    },
+    {
+      "id": "cross-slash",
+      "side": "enemy",
+      "observed": {
+        "side": "ally",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/cross-slash/lead.webp",
+            "loaded": true,
+            "opacity": 0.544412,
+            "transform": "translate(-50%, -50%) rotate(28deg) scale(-1.04488, 1.04488)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/cross-slash/lead.webp",
+            "loaded": true,
+            "opacity": 0.597408,
+            "transform": "translate(-50%, -50%) rotate(-65deg) scale(-1.04323, 1.04323)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/cross-slash/hit.webp",
+            "loaded": true,
+            "opacity": 0.656383,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(-1.0999, 1.0999)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "96",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "96",
+          "kind": "vfx",
+          "id": "cross-slash",
+          "phase": "strike",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        }
+      ]
+    },
+    {
+      "id": "poison-slash",
+      "side": "enemy",
+      "observed": {
+        "side": "ally",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/poison-slash/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(-1.15872deg) scale(-0.816093, 0.816093)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/poison-slash/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(-0.3, 0.3)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "99",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "99",
+          "kind": "vfx",
+          "id": "poison-slash",
+          "phase": "strike",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        }
+      ]
+    },
+    {
+      "id": "fire-sweep",
+      "side": "enemy",
+      "observed": {
+        "side": "ally",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/fire-sweep/lead.webp",
+            "loaded": true,
+            "opacity": 0.689559,
+            "transform": "translate(-50%, -50%) rotate(-11.6155deg) scale(-1.13878, 0.993591)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/fire-sweep/hit.webp",
+            "loaded": true,
+            "opacity": 0.831383,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(-1.09686, 1.09686)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "102",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "102",
+          "kind": "vfx",
+          "id": "fire-sweep",
+          "phase": "strike",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        },
+        {
+          "run": "102",
+          "kind": "vfx",
+          "id": "fire-sweep",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "3"
+        },
+        {
+          "run": "102",
+          "kind": "vfx",
+          "id": "fire-sweep",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "4"
+        },
+        {
+          "run": "102",
+          "kind": "vfx",
+          "id": "fire-sweep",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "5"
+        },
+        {
+          "run": "102",
+          "kind": "vfx",
+          "id": "fire-sweep",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "6"
+        }
+      ]
+    },
+    {
+      "id": "wind-spiral",
+      "side": "enemy",
+      "observed": {
+        "side": "ally",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/wind-spiral/lead.webp",
+            "loaded": true,
+            "opacity": 0.539118,
+            "transform": "translate(-50%, -50%) rotate(-78.8132deg) scale(1.04349, 1.04349)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/wind-spiral/hit.webp",
+            "loaded": true,
+            "opacity": 0.65,
+            "transform": "translate(-50%, -50%) rotate(-79.9921deg) scale(1.09992, 1.09992)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "105",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "105",
+          "kind": "vfx",
+          "id": "wind-spiral",
+          "phase": "strike",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        },
+        {
+          "run": "105",
+          "kind": "vfx",
+          "id": "wind-spiral",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "3"
+        },
+        {
+          "run": "105",
+          "kind": "vfx",
+          "id": "wind-spiral",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "4"
+        },
+        {
+          "run": "105",
+          "kind": "vfx",
+          "id": "wind-spiral",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "5"
+        },
+        {
+          "run": "105",
+          "kind": "vfx",
+          "id": "wind-spiral",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "6"
+        }
+      ]
+    },
+    {
+      "id": "light-rain",
+      "side": "enemy",
+      "observed": {
+        "side": "ally",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/light-rain/lead.webp",
+            "loaded": true,
+            "opacity": 0.543088,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(1, 1.09491)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/light-rain/lead.webp",
+            "loaded": true,
+            "opacity": 0.595955,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(1, 1.09328)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/light-rain/lead.webp",
+            "loaded": true,
+            "opacity": 0.660225,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(1, 1.09086)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/light-rain/hit.webp",
+            "loaded": true,
+            "opacity": 0.654787,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(1.09991, 0.65)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "108",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "108",
+          "kind": "vfx",
+          "id": "light-rain",
+          "phase": "strike",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        },
+        {
+          "run": "108",
+          "kind": "vfx",
+          "id": "light-rain",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "3"
+        },
+        {
+          "run": "108",
+          "kind": "vfx",
+          "id": "light-rain",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "4"
+        },
+        {
+          "run": "108",
+          "kind": "vfx",
+          "id": "light-rain",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "5"
+        },
+        {
+          "run": "108",
+          "kind": "vfx",
+          "id": "light-rain",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "6"
+        }
+      ]
+    },
+    {
+      "id": "dark-sweep",
+      "side": "enemy",
+      "observed": {
+        "side": "ally",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/dark-sweep/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(2.09834deg) scale(-0.761247, 0.761247)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/dark-sweep/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(-0.3, 0.3)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "111",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "111",
+          "kind": "vfx",
+          "id": "dark-sweep",
+          "phase": "strike",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        },
+        {
+          "run": "111",
+          "kind": "vfx",
+          "id": "dark-sweep",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "3"
+        },
+        {
+          "run": "111",
+          "kind": "vfx",
+          "id": "dark-sweep",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "4"
+        },
+        {
+          "run": "111",
+          "kind": "vfx",
+          "id": "dark-sweep",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "5"
+        },
+        {
+          "run": "111",
+          "kind": "vfx",
+          "id": "dark-sweep",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "6"
+        }
+      ]
+    },
+    {
+      "id": "azure-flash",
+      "side": "enemy",
+      "observed": {
+        "side": "ally",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/azure-flash/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(-0.792642, 0.857806)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/azure-flash/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(-0.3, 0.35)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "114",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "114",
+          "kind": "vfx",
+          "id": "azure-flash",
+          "phase": "strike",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        }
+      ]
+    },
+    {
+      "id": "earth-flash",
+      "side": "enemy",
+      "observed": {
+        "side": "ally",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/earth-flash/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.708906, 0.596748)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/earth-flash/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.3, 0.1)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "117",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "117",
+          "kind": "vfx",
+          "id": "earth-flash",
+          "phase": "strike",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        }
+      ]
+    },
+    {
+      "id": "tempest-flash",
+      "side": "enemy",
+      "observed": {
+        "side": "ally",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/tempest-flash/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(-201.582deg) scale(-0.771786, 0.771786)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/tempest-flash/hit.webp",
+            "loaded": true,
+            "opacity": 0.85,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(-1.22104, 0.7)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "120",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "120",
+          "kind": "vfx",
+          "id": "tempest-flash",
+          "phase": "strike",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        }
+      ]
+    },
+    {
+      "id": "heavenly-flash",
+      "side": "enemy",
+      "observed": {
+        "side": "ally",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/heavenly-flash/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(-9.125deg) scale(-0.535611, 0.535611)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/heavenly-flash/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(20deg) scale(-0.3, 0.3)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "123",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "123",
+          "kind": "vfx",
+          "id": "heavenly-flash",
+          "phase": "strike",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        }
+      ]
+    },
+    {
+      "id": "twilight-flash",
+      "side": "enemy",
+      "observed": {
+        "side": "ally",
+        "phase": "strike",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/twilight-flash/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(3.47468deg) scale(-0.722709, 0.722709)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/twilight-flash/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(-0.3, 0.3)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "126",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "126",
+          "kind": "vfx",
+          "id": "twilight-flash",
+          "phase": "strike",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        }
+      ]
+    },
+    {
+      "id": "grand-healing",
+      "side": "enemy",
+      "observed": {
+        "side": "enemy",
+        "phase": "support",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/grand-healing/lead.webp",
+            "loaded": true,
+            "opacity": 0.63412,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(1.0782, 0.8)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/grand-healing/hit.webp",
+            "loaded": true,
+            "opacity": 0.527,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(1.08226, 1.03558)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "129",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "129",
+          "kind": "vfx",
+          "id": "grand-healing",
+          "phase": "support",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        },
+        {
+          "run": "129",
+          "kind": "vfx",
+          "id": "grand-healing",
+          "phase": "support",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "3"
+        },
+        {
+          "run": "129",
+          "kind": "vfx",
+          "id": "grand-healing",
+          "phase": "support",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "4"
+        }
+      ]
+    },
+    {
+      "id": "counter-stance",
+      "side": "enemy",
+      "observed": {
+        "side": "enemy",
+        "phase": "support",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/counter-stance/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(28.1862deg) scale(0.716817, 0.716817)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/counter-stance/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.3, 0.3)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "132",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "132",
+          "kind": "vfx",
+          "id": "counter-stance",
+          "phase": "support",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        },
+        {
+          "run": "132",
+          "kind": "vfx",
+          "id": "counter-stance",
+          "phase": "support",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "3"
+        }
+      ]
+    },
+    {
+      "id": "formation-break",
+      "side": "enemy",
+      "observed": {
+        "side": "ally",
+        "phase": "cleanse",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/formation-break/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(-3.70179deg) scale(-1.04361, 1.04361)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "135",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "135",
+          "kind": "vfx",
+          "id": "formation-break",
+          "phase": "cleanse",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        },
+        {
+          "run": "135",
+          "kind": "vfx",
+          "id": "formation-break",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "3"
+        }
+      ]
+    },
+    {
+      "id": "war-god-rally",
+      "side": "enemy",
+      "observed": {
+        "side": "enemy",
+        "phase": "support",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/war-god-rally/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(-1.25195deg) scale(0.691093, 0.691093)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/war-god-rally/hit.webp",
+            "loaded": true,
+            "opacity": 0,
+            "transform": "translate(-50%, -50%) rotate(0deg) scale(0.3, 0.8)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "138",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "138",
+          "kind": "vfx",
+          "id": "war-god-rally",
+          "phase": "support",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        },
+        {
+          "run": "138",
+          "kind": "vfx",
+          "id": "war-god-rally",
+          "phase": "support",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "3"
+        },
+        {
+          "run": "138",
+          "kind": "vfx",
+          "id": "war-god-rally",
+          "phase": "support",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "4"
+        }
+      ]
+    },
+    {
+      "id": "purification",
+      "side": "enemy",
+      "observed": {
+        "side": "enemy",
+        "phase": "cleanse",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/purification/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(7.61337deg) scale(1.03444, 1.03444)"
+          },
+          {
+            "src": "/battle-effects/skill-vfx24/purification/hit.webp",
+            "loaded": true,
+            "opacity": 0.68,
+            "transform": "translate(-50%, -50%) rotate(7.61337deg) scale(1.03444, 1.03444)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "141",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "141",
+          "kind": "vfx",
+          "id": "purification",
+          "phase": "cleanse",
+          "lead": "true",
+          "side": "enemy",
+          "frame": "2"
+        },
+        {
+          "run": "141",
+          "kind": "vfx",
+          "id": "purification",
+          "phase": "cleanse",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "3"
+        },
+        {
+          "run": "141",
+          "kind": "vfx",
+          "id": "purification",
+          "phase": "cleanse",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "4"
+        },
+        {
+          "run": "141",
+          "kind": "vfx",
+          "id": "purification",
+          "phase": "cleanse",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "5"
+        },
+        {
+          "run": "141",
+          "kind": "vfx",
+          "id": "purification",
+          "phase": "cleanse",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "6"
+        },
+        {
+          "run": "141",
+          "kind": "vfx",
+          "id": "purification",
+          "phase": "cleanse",
+          "lead": "false",
+          "side": "enemy",
+          "frame": "7"
+        }
+      ]
+    },
+    {
+      "id": "power-break-flash",
+      "side": "enemy",
+      "observed": {
+        "side": "ally",
+        "phase": "cleanse",
+        "lead": "true",
+        "parts": [
+          {
+            "src": "/battle-effects/skill-vfx24/power-break-flash/lead.webp",
+            "loaded": true,
+            "opacity": 0.93,
+            "transform": "translate(-50%, -50%) rotate(-3.49554deg) scale(-1.02931, 1.02931)"
+          }
+        ]
+      },
+      "events": [
+        {
+          "run": "144",
+          "kind": "cutin",
+          "frame": "1"
+        },
+        {
+          "run": "144",
+          "kind": "vfx",
+          "id": "power-break-flash",
+          "phase": "cleanse",
+          "lead": "true",
+          "side": "ally",
+          "frame": "2"
+        },
+        {
+          "run": "144",
+          "kind": "vfx",
+          "id": "power-break-flash",
+          "phase": "strike",
+          "lead": "false",
+          "side": "ally",
+          "frame": "3"
+        }
+      ]
+    }
+  ],
+  "controls": [
+    "cutin -> combo -> VFX; mid-VFX pause, resume, speed, SKIP cleanup",
+    "no-op cleanse preserves attack; retire disposes VFX",
+    "375px/390px/1280px, SR cutin and single-enemy layout; six single/area/support/cleanse representatives at 375px and desktop"
+  ],
+  "errors": [],
+  "failed": [],
+  "writes": [],
+  "status": "PASS"
+}
