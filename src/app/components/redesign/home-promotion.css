@@ -1,3 +1,19 @@
 .g4-home-promotion img{display:block;width:100%;height:auto;aspect-ratio:2/1;object-fit:contain}
-.g4-home-promotion p{font-size:14px;line-height:1.6;margin:8px 0}
-.g4-home-promotion strong{font-size:18px}
+.g4-home-promotion p{font-size:16px;line-height:1.6;margin:8px 0}
+body.game04-theme .g4-home-promotion .canonical-dialog-actions{display:grid;grid-template-columns:1fr 2fr}
+body.game04-theme .g4-home-promotion .canonical-dialog-actions button{min-width:0;padding-inline:8px;white-space:normal}
+/* Reserve header and 48px controls; fit the complete portrait into the remaining viewport. */
+body.game04-theme .canonical-dialog.g4-home-promotion--artwork{
+ width:min(100%,420px);
+ height:min(760px,calc(100dvh - 32px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px)));
+ max-height:calc(100dvh - 32px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));
+ grid-template-rows:auto minmax(0,1fr) auto;
+ box-sizing:border-box;
+}
+body.game04-theme .g4-home-promotion--artwork .canonical-dialog-body{
+ display:grid;grid-template-rows:minmax(0,1fr) auto;gap:6px;padding:8px;min-height:0;overflow:hidden;
+}
+body.game04-theme .g4-home-promotion--artwork img.g4-starter-artwork{
+ width:100%;height:100%;min-height:0;max-height:100%;aspect-ratio:auto;object-fit:contain;object-position:center;
+}
+body.game04-theme .g4-home-promotion--artwork .g4-starter-note{margin:0;text-align:center;font-size:14px;line-height:1.4;color:var(--g4-muted)}

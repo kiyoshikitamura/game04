@@ -1,0 +1,139 @@
+
+> game04-sengoku@0.1.0 prebuild
+> node scripts/verify_common_ui_contract.cjs && node scripts/verify_game04_redesign_api_bundle.mjs
+
+PASS common UI static contract (visual comparison still required)
+PASS game04-redesign-api bundle 75ce9df2905da01dc638fd9e1bfc38d006bb28697795a71210ac222d51d792ed
+
+> game04-sengoku@0.1.0 build
+> next build
+
+▲ Next.js 16.2.10 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 5.9s
+  Running TypeScript ...
+  Finished TypeScript in 17.3s ...
+  Collecting page data using 15 workers ...
+  Generating static pages using 15 workers (0/49) ...
+  Generating static pages using 15 workers (12/49) 
+  Generating static pages using 15 workers (24/49) 
+  Generating static pages using 15 workers (36/49) 
+✓ Generating static pages using 15 workers (49/49) in 803ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /admin/kpi
+├ ƒ /admin/kpi/day/[date]
+├ ƒ /admin/kpi/game04
+├ ƒ /api/admin/kpi/game04
+├ ƒ /api/admin/kpi/marketing
+├ ƒ /api/admin/kpi/refresh
+├ ƒ /api/admin/kpi/snapshots
+├ ƒ /api/admin/kpi/timeseries
+├ ƒ /api/admin/kpi/v2/acquisition
+├ ƒ /api/admin/kpi/v2/community
+├ ƒ /api/admin/kpi/v2/daily
+├ ƒ /api/admin/kpi/v2/gameplay
+├ ƒ /api/admin/kpi/v2/guild
+├ ƒ /api/admin/kpi/v2/marketing
+├ ƒ /api/admin/kpi/v2/post-tutorial
+├ ƒ /api/admin/kpi/v2/retention
+├ ƒ /api/admin/kpi/v2/supply
+├ ƒ /api/admin/kpi/v2/tutorial
+├ ƒ /api/admin/kpi/v2/validation
+├ ƒ /api/auth/game04-binding
+├ ƒ /api/auth/replace-google
+├ ƒ /api/billing/checkout
+├ ƒ /api/billing/config
+├ ƒ /api/billing/history
+├ ƒ /api/billing/restore
+├ ƒ /api/billing/shop
+├ ƒ /api/billing/webhook
+├ ƒ /api/kpi/identity-transition
+├ ƒ /api/portal/activity
+├ ƒ /api/qa/activity
+├ ƒ /api/qa/deployment
+├ ƒ /api/qa/quest-deployment
+├ ƒ /api/qa/recovery-image
+├ ○ /auth/callback
+├ ○ /auth/game04
+├ ○ /auth/game04/callback
+├ ƒ /billing/return
+├ ƒ /legal/age-rating
+├ ƒ /legal/commercial
+├ ƒ /legal/contact
+├ ƒ /legal/cookies
+├ ƒ /legal/payments
+├ ƒ /legal/privacy
+├ ƒ /legal/rights
+├ ƒ /legal/terms
+├ ƒ /legal/tokusho
+├ ○ /manifest.webmanifest
+├ ○ /open
+├ ○ /qa/additional29
+├ ƒ /qa/audio
+├ ƒ /qa/b03-integration
+├ ƒ /qa/b03-result
+├ ○ /qa/b07
+├ ○ /qa/b08-local
+├ ○ /qa/b09-local
+├ ○ /qa/b10-local
+├ ○ /qa/b13-local
+├ ○ /qa/b13-missions
+├ ○ /qa/b14-local
+├ ○ /qa/b14-ui
+├ ƒ /qa/battle-additions
+├ ƒ /qa/battle-common
+├ ○ /qa/battle-device-five
+├ ƒ /qa/battle-effects16
+├ ƒ /qa/battle-flow-v3
+├ ƒ /qa/battle-full-skill-load
+├ ƒ /qa/battle-live
+├ ƒ /qa/battle-presentation-v3
+├ ○ /qa/burst-enemy-pause
+├ ○ /qa/common-ui
+├ ○ /qa/common-ui-audit
+├ ƒ /qa/community
+├ ○ /qa/device-debug
+├ ○ /qa/formal-names
+├ ƒ /qa/g3-gacha
+├ ƒ /qa/home-live-viewport
+├ ƒ /qa/home-state
+├ ○ /qa/identity
+├ ○ /qa/ink-burst
+├ ƒ /qa/invasion-approved
+├ ƒ /qa/paid-expiry
+├ ƒ /qa/presentation
+├ ○ /qa/profile-inventory
+├ ƒ /qa/quest-live-viewport
+├ ƒ /qa/quest65
+├ ƒ /qa/raid-approved
+├ ƒ /qa/raid-detail
+├ ƒ /qa/raid-integrated
+├ ƒ /qa/raid-live-viewport
+├ ƒ /qa/raid-pages
+├ ƒ /qa/raid-room
+├ ƒ /qa/raid-top
+├ ƒ /qa/recovery-live
+├ ƒ /qa/redesign
+├ ƒ /qa/shop-ui
+├ ○ /qa/sr-cutins
+├ ○ /qa/starter-promotion
+├ ƒ /qa/tutorial
+├ ○ /qa/tutorial-name
+├ ƒ /qa/tutorial-opening
+├ ○ /qa/tutorial-opening-live
+├ ƒ /qa/tutorial-trailer
+├ ƒ /qa/visual-parts
+├ ○ /robots.txt
+└ ○ /sitemap.xml
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
