@@ -26,3 +26,6 @@ Preview origin observed in deployment UI: https://game04-production-receiver-4jg
 Existing read-only QA fixture: /qa/common-ui-audit?view=character (all skills, synthetic state; no API writes).
 
 After visual review: Deployment Actions -> Redeploy -> Environment Production -> verify sengoku-hime-ennbu.com -> Redeploy. Recheck current production lineage first if another deployment intervened. Do not force-promote Preview because environment differs. Last observed live production before this change: 2Vcry54NXYJJpmHC53o4Ebz2gW5i / e08f4d9.
+
+## Production follow-up — 2026-09-29
+User supplied screenshots of Production selected in the redeploy dialog and the original Preview detail page. Independent public HTTP verification: https://sengoku-hime-ennbu.com/ returns 200 and identifies dpl_HQW3SdBsz4MzDipAiRz6ejT5syjt. Its referenced /_next/static/chunks/2jzp8gugaxb1q.js contains the new ATK/DEF-down, DOT, HP50%, half-of-living-allies HP60%, and DOT-first fallback condition text. Production delivery of the copy fix is confirmed. The original Preview remaining Preview/Stale does not indicate failure. Production authenticated UI visual review remains unperformed.
