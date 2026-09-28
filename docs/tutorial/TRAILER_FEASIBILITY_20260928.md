@@ -65,7 +65,7 @@ Once the visual trailer is accepted:
 - No final dialogue copy beyond the approved key line `「……軍師が必要だ。」`.
 
 ## Remaining verification
-The branch proves the implementation route in code, but build/Preview/device verification has not yet been run from this connector session. Before integration, run:
+Vercel build for the GAME04 project succeeded on the feasibility branch. Production is unchanged. Visual/device acceptance is still pending. Before integration, run:
 - typecheck/build
 - `/qa/tutorial-trailer` at 360px and 390px
 - confirm 5 allies + 1 Oda render correctly
