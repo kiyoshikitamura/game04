@@ -22,21 +22,22 @@ export function EarlyRetentionGuide({state,battlePlaying,resultOpen,save,navigat
  const [busy,setBusy]=useState(false),[error,setError]=useState('');
  if(!guide)return null;
  const content={
-  'join-maeda':{title:'前田利家が仲間に加わった',text:'新たな仲間を部隊に加え、四人で次の戦へ進もう。',cta:'部隊に加える',choice:'save'},
-  'equip-iwadan':{title:'岩断を獲得',text:'前田利家に岩断を装備しよう。ここで部隊に保存できます。',cta:'前田利家に装備する',choice:'save'},
+  'join-maeda':{title:'前田利家が仲間に加わった',text:'新たな仲間を部隊に加え、四人で次の戦へ進もう。編成はあとで変更することもできます。',cta:'部隊に加える',choice:'save'},
+  'equip-iwadan':{title:'岩断を獲得',text:'前田利家に岩断を装備しよう。部隊にいない場合は「武将・編成へ」で編成を変更できます。装備はあとでも行えます。',cta:'前田利家に装備する',choice:'save'},
   'join-takenaka':{title:'竹中半兵衛が仲間に加わった',text:'五人の編成枠が解放されました。武将と役割を整えよう。',cta:'武将・編成へ',choice:'characters'},
   'equip-fire':{title:'火の薙ぎを獲得',text:'井伊直政に全体攻撃を。応急手当をお市の方へ、鬨の声を竹中半兵衛へ整えられます。',cta:'井伊直政に装備する',choice:'characters'},
   missions:{title:'三河を制した',text:AREA_ONE_COMPLETE_TEXT,cta:'任務へ',choice:'missions'},
  }[guide];
  async function act(choice:string){
   if(lock.current)return;lock.current=true;setBusy(true);setError('');
-  try{await save('early_guide',{guide,choice});if(choice==='missions')navigate('missions',{tab:'normal'});else if(choice==='characters')navigate('characters',guide==='equip-fire'?{characterId:'char_daimon_01',earlyLoadout:true}:undefined);}
+  try{await save('early_guide',{guide,choice});if(choice==='missions')navigate('missions',{tab:'normal'});else if(choice==='characters')navigate('characters',guide==='equip-fire'?{characterId:'char_daimon_01',earlyLoadout:true}:guide==='join-maeda'||guide==='equip-iwadan'?{characterId:'char_jihoon_01'}:undefined);}
   catch{setError('保存を確認できませんでした。通信状態を確認して、もう一度お試しください。');}
   finally{lock.current=false;setBusy(false);}
  }
  return <GuideDialog title={content.title} message={error ? <ScreenState kind="error" compact title="保存を確認できませんでした" message={error}/> : content.text} blocked={battlePlaying||resultOpen} actions={[
   {label:error?'再試行':content.cta,semantic:'primary',disabled:busy,busy,busyLabel:'保存中',onClick:()=>act(content.choice)},
-  ...((guide==='join-takenaka'||guide==='equip-fire')?[{label:'あとで',semantic:'secondary' as const,disabled:busy,onClick:()=>act('later')}]:[])
+  ...((guide==='join-maeda'||guide==='equip-iwadan')?[{label:'武将・編成へ',semantic:'secondary' as const,disabled:busy,onClick:()=>act('characters')}]:[]),
+  ...(guide!=='missions'?[{label:'あとで',semantic:'secondary' as const,disabled:busy,onClick:()=>act('later')}]:[])
  ]}/>;
 }
 /** Place beside the existing sortie button for mikawa-5. It never intercepts sortie. */

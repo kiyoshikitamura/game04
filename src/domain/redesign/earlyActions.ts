@@ -13,7 +13,9 @@ export function applyEarlyAction(before: RedesignState, action: string, payload:
  const guide=String(payload.guide) as EarlyGuideId,choice=String(payload.choice);
  if(state.earlyProgress.guides[guide]!=='pending')throw Error('ガイドは処理済みです。再読み込みしてください。');
  if(guide==='join-maeda'||guide==='equip-iwadan'){
-  if(choice!=='save')throw Error('部隊への保存が必要です。');state.deck=earlyGuideDeck(state,guide);
+  if(!['save','later','characters'].includes(choice))throw Error('操作を選んでください。');
+  if(choice==='save')state.deck=earlyGuideDeck(state,guide);
+  else {state.earlyProgress.guides[guide]='deferred';return state;}
  }else if(guide==='missions'){
   if(choice!=='missions')throw Error('任務へ進んでください。');state.earlyProgress.missionNavigationPending=true;
  }else if(guide==='join-takenaka'||guide==='equip-fire'){
