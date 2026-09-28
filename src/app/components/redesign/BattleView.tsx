@@ -102,7 +102,8 @@ export function BattleView({ onRetire, onPlaybackComplete, autoCompleteOnFinish 
     try { await completionCallback.current?.(); if(generation===terminalGeneration.current&&!exitLock.current)setCompletion('done'); }
     catch(error) { if(generation===terminalGeneration.current&&!exitLock.current){completionLock.current=false;setCompletion('error');setTerminalError(error instanceof Error?error.message:'結果を保存できませんでした。');} }
   }
-  useEffect(()=>{if(finished&&!exitLock.current)void completePlayback();},[finished,result]);\n  useEffect(()=>{if(finished&&autoCompleteOnFinish&&!onPlaybackComplete&&!autoCompleteLock.current){autoCompleteLock.current=true;onComplete();}},[finished,autoCompleteOnFinish,onPlaybackComplete,onComplete]);
+  useEffect(()=>{if(finished&&!exitLock.current)void completePlayback();},[finished,result]);
+  useEffect(()=>{if(finished&&autoCompleteOnFinish&&!onPlaybackComplete&&!autoCompleteLock.current){autoCompleteLock.current=true;onComplete();}},[finished,autoCompleteOnFinish,onPlaybackComplete,onComplete]);
   const presentation = projectRecordedBattleFrame(result, index);
   const battleRoot = useRef<HTMLElement>(null);
   useEffect(() => { if (finished) { stopBgm(); battleRoot.current?.scrollIntoView({ block: 'start' }); } }, [finished, stopBgm]);
