@@ -1,6 +1,13 @@
 export type PendingGachaIntent = { id: string; key: string; action: "formal_gacha" | "formal_gacha_exchange"; payload: Record<string, unknown>; animate: boolean };
 export type PendingIntentRead = { intent: PendingGachaIntent | null; unreadable: boolean };
 
+// Only known pre-commit rejections may release an intent. Unknown/transport
+// failures retain the request ID so a committed draw can never be charged twice.
+export function isDefinitePrecommitFailure(message: string): boolean {
+  if (/^(INVALID_GACHA_TICKET_COUNT|INVALID_GACHA_TICKET_CATEGORY|INVALID_GACHA_TICKET_OPERATION|INSUFFICIENT_RESOURCE|GACHA_DAY_CHANGED)$/.test(message.trim())) return true;
+  return /不足|利用済み|不正|対象.*(ありません|ではありません)|交換ポイント|ガチャ券|無料10連|抽選条件/.test(message);
+}
+
 export const pendingStorageKey = (userId: string) => `game04:gacha-pending:${userId}`;
 const isUuid = (value: unknown) => typeof value === "string" && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value);
 

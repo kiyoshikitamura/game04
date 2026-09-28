@@ -16,7 +16,7 @@ import ActionButton from "../ui/ActionButton";
 import RarityBadge from "../ui/RarityBadge";
 import CanonicalDialog from "../ui/CanonicalDialog";
 import { getJstDateString } from "@/utils/jst_date";
-import { clearPendingIntent, pendingStorageKey, readPendingIntent, savePendingIntent, type PendingGachaIntent } from "./formalGachaPending";
+import { clearPendingIntent, isDefinitePrecommitFailure, pendingStorageKey, readPendingIntent, savePendingIntent, type PendingGachaIntent } from "./formalGachaPending";
 import "./FormalGachaView.css";
 
 type ApiCategory = "character" | "skill" | "equipment";
@@ -39,9 +39,6 @@ const apiCategory = (value: FormalGachaCategory): ApiCategory => ({ CHARACTER: "
 const formatOutcome = (result: FormalResult) => result.acquisition === "new" ? "初回取得"
   : result.acquisition === "instance" ? "別個体として取得"
     : result.category === "character" ? `重複 / 固有魂 +${result.convertedAmount}` : `重複 / ${LB_MATERIAL_NAMES.SKILL_MANUAL} +${result.convertedAmount}`;
-function isDefinitePrecommitFailure(message: string): boolean {
-  return /不足|利用済み|不正|対象.*(ありません|ではありません)|交換ポイント|ガチャ券|無料10連|抽選条件/.test(message);
-}
 function millisecondsUntilNextJstDay(now = Date.now()): number {
   const shifted = new Date(now + 9 * 60 * 60 * 1_000);
   const next = Date.UTC(shifted.getUTCFullYear(), shifted.getUTCMonth(), shifted.getUTCDate() + 1) - 9 * 60 * 60 * 1_000;
