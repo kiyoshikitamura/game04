@@ -1,0 +1,6538 @@
+[
+  {
+    "id": "mino-1",
+    "designId": "3-1",
+    "name": "川霧の渡し",
+    "intent": "弱体の後に攻める",
+    "baselineLevel": 20,
+    "baselineInput": {
+      "seed": 1,
+      "party": [
+        {
+          "id": "char_joe_01",
+          "name": "北条氏康",
+          "image": "/characters/joe_transparent_asset.png",
+          "level": 20,
+          "element": "earth",
+          "stats": {
+            "hp": 2881.2,
+            "atk": 346.775,
+            "def": 204.75,
+            "luk": 13.877551020408163,
+            "sp": 123
+          },
+          "skills": [
+            {
+              "id": "SKD034",
+              "name": "身構え",
+              "image": "/skills/skill_006_iron_guard.jpg",
+              "rarity": "N",
+              "element": "earth",
+              "spCost": 30,
+              "condition": {
+                "type": "always"
+              },
+              "target": "self",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_up",
+                  "power": 15,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "自身・DEF強化:15.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P15",
+              "type": "P15",
+              "name": "HP70%以上で自身DEF",
+              "stat": "def",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_yuki_01",
+          "name": "竹中半兵衛",
+          "image": "/characters/yuki_transparent_asset.png",
+          "level": 20,
+          "element": "light",
+          "stats": {
+            "hp": 3028.2000000000003,
+            "atk": 339.625,
+            "def": 198.9,
+            "luk": 13.877551020408163,
+            "sp": 153
+          },
+          "skills": [
+            {
+              "id": "SKD038",
+              "name": "鎧砕き",
+              "image": "/skills/skill_015_recovery_program.jpg",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "def_down",
+                  "power": 12,
+                  "duration": 3,
+                  "carryAcrossWaves": true
+                }
+              ],
+              "description": "配置順最初の付与可能敵・DEF低下:12.00%・3ターン"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P04",
+              "type": "P04",
+              "name": "他の生存味方が2属性以上で自身DEF",
+              "stat": "def",
+              "percent": 10,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_daimon_01",
+          "name": "井伊直政",
+          "image": "/characters/daimon_transparent_asset.png",
+          "level": 20,
+          "element": "fire",
+          "stats": {
+            "hp": 2016,
+            "atk": 561,
+            "def": 153,
+            "luk": 13.877551020408163,
+            "sp": 123
+          },
+          "skills": [
+            {
+              "id": "SKD010",
+              "name": "風断",
+              "image": "/skills/formal/SKD010.webp",
+              "rarity": "R",
+              "element": "wind",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P06",
+              "type": "P06",
+              "name": "単体攻撃スキルダメージ",
+              "stat": "atk",
+              "percent": 4,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_jihoon_01",
+          "name": "前田利家",
+          "image": "/characters/jihoon_transparent_asset.png",
+          "level": 20,
+          "element": "earth",
+          "stats": {
+            "hp": 2419.2,
+            "atk": 476.85,
+            "def": 175.95000000000002,
+            "luk": 13.877551020408163,
+            "sp": 164
+          },
+          "skills": [
+            {
+              "id": "SKD009",
+              "name": "岩断",
+              "image": "/skills/formal/SKD009.webp",
+              "rarity": "R",
+              "element": "earth",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "fixedTarget": true,
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 120
+                }
+              ],
+              "description": "先頭敵・攻撃倍率:120.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P05",
+              "type": "P05",
+              "name": "通常攻撃ダメージ",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "id": "char_aoi_01",
+          "name": "お市の方",
+          "image": "/characters/aoi_transparent_asset.png",
+          "level": 20,
+          "element": "fire",
+          "stats": {
+            "hp": 2240.7,
+            "atk": 519.75,
+            "def": 154.35,
+            "luk": 13.877551020408163,
+            "sp": 143
+          },
+          "skills": [
+            {
+              "id": "SKD039",
+              "name": "応急手当",
+              "image": "/skills/skill_003_noise_heal.jpg",
+              "rarity": "N",
+              "element": "water",
+              "spCost": 35,
+              "condition": {
+                "type": "ally_hp_below",
+                "value": 0.5
+              },
+              "target": "lowest_ally",
+              "fixedTarget": false,
+              "effects": [
+                {
+                  "type": "heal",
+                  "power": 35,
+                  "healingFormula": "caster_atk_percent"
+                }
+              ],
+              "description": "共通単体回復条件・回復倍率:35.00%"
+            }
+          ],
+          "passives": [
+            {
+              "id": "balance_v2_P10",
+              "type": "P10",
+              "name": "与回復量（蘇生除外）",
+              "stat": "atk",
+              "percent": 8,
+              "level": 0,
+              "target": "self"
+            }
+          ]
+        }
+      ],
+      "waves": [
+        [
+          {
+            "id": "3-1/W1/1",
+            "name": "鍛冶師",
+            "image": "/creative/characters/battle/char_yoshihiko_01.png",
+            "level": 19,
+            "stats": {
+              "luk": 0,
+              "hp": 3430,
+              "atk": 510,
+              "def": 1140,
+              "sp": 100
+            },
+            "order": 0,
+            "hitSpGain": 10,
+            "element": "earth",
+            "actionCount": 7,
+            "initialCount": 6,
+            "initialSp": 30,
+            "skills": [
+              {
+                "id": "SKD034",
+                "name": "身構え",
+                "image": "",
+                "rarity": "N",
+                "element": "earth",
+                "spCost": 30,
+                "condition": {
+                  "type": "always"
+                },
+                "target": "self",
+                "effects": [
+                  {
+                    "type": "def_up",
+                    "power": 15,
+                    "duration": 3
+                  }
+                ],
+                "description": "正式表の検証入力"
+              }
+            ],
+            "passives": []
+          },
+          {
+            "id": "3-1/W1/2",
+            "name": "僧兵",
+            "image": "/creative/characters/battle/char_kageyama_01.png",
+            "level": 19,
+            "stats": {
+              "luk": 0,
+              "hp": 680,
+              "atk": 180,
+              "def": 260,
+              "sp": 100
+            },
+            "order": 1,
+            "hitSpGain": 10,
+            "element": "earth",
+            "actionCount": 7,
+            "initialCount": 7,
+            "initialSp": 0,
+            "skills": [],
+            "passives": []
+          }
+        ],
+        [
+          {
+            "id": "3-1/W2/1",
+            "name": "直江兼続",
+            "image": "/creative/characters/battle/char_rui_01.png",
+            "level": 20,
+            "stats": {
+              "luk": 0,
+              "hp": 3430,
+              "atk": 510,
+              "def": 1140,
+              "sp": 100
+            },
+            "order": 0,
+            "hitSpGain": 10,
+            "element": "water",
+            "actionCount": 7,
+            "initialCount": 6,
+            "initialSp": 50,
+            "skills": [
+              {
+                "id": "SKD008",
+                "name": "標準単体攻撃・水",
+                "image": "",
+                "rarity": "R",
+                "element": "water",
+                "spCost": 50,
+                "condition": {
+                  "type": "always"
+                },
+                "target": "first",
+                "effects": [
+                  {
+                    "type": "damage",
+                    "power": 120
+                  }
+                ],
+                "description": "正式表の検証入力"
+              }
+            ],
+            "passives": [
+              {
+                "id": "P01_water",
+                "type": "P01",
+                "name": "P01",
+                "stat": "atk",
+                "percent": 4.800000000000001,
+                "level": 0,
+                "target": "party",
+                "targetElement": "water"
+              }
+            ]
+          }
+        ]
+      ],
+      "rules": {
+        "defenseFactor": 1,
+        "advantageMultiplier": 1.5,
+        "disadvantageMultiplier": 0.75,
+        "spRecoveryDivisor": 120,
+        "burstLukDivisor": 20,
+        "enemySpRecoveryDivisor": 30,
+        "maxPlayerActions": 300,
+        "initialSpRatio": 0,
+        "version": "balance-v2-20260920",
+        "burstPolicy": "attack-free-v1-20260926",
+        "inputVersion": "wave-sp-v1-20260921",
+        "balanceV2": {
+          "status": "PREVIEW_PROVISIONAL",
+          "version": "PREVIEW_PROVISIONAL_BALANCE_V2_20260920",
+          "damageBonusCap": 50,
+          "healingBonusCap": 80,
+          "shieldBonusCap": 50,
+          "shieldHpCap": 0.5,
+          "periodicCapMultiplier": 2,
+          "lowHpThreshold": 0.4,
+          "highHpThreshold": 0.7,
+          "diversityFactors": [
+            0,
+            0.25,
+            0.5,
+            0.75,
+            1
+          ]
+        }
+      },
+      "questSnapshot": {
+        "id": "mino-1",
+        "designId": "3-1",
+        "areaId": "mino",
+        "index": 1,
+        "name": "川霧の渡し",
+        "description": "弱体の後に攻める",
+        "energyCost": 5,
+        "waves": [
+          [
+            {
+              "id": "3-1/W1/1",
+              "name": "鍛冶師",
+              "image": "/creative/characters/battle/char_yoshihiko_01.png",
+              "level": 19,
+              "stats": {
+                "luk": 0,
+                "hp": 3430,
+                "atk": 510,
+                "def": 1140,
+                "sp": 100
+              },
+              "order": 0,
+              "hitSpGain": 10,
+              "element": "earth",
+              "actionCount": 7,
+              "initialCount": 6,
+              "initialSp": 30,
+              "skills": [
+                {
+                  "id": "SKD034",
+                  "name": "身構え",
+                  "image": "",
+                  "rarity": "N",
+                  "element": "earth",
+                  "spCost": 30,
+                  "condition": {
+                    "type": "always"
+                  },
+                  "target": "self",
+                  "effects": [
+                    {
+                      "type": "def_up",
+                      "power": 15,
+                      "duration": 3
+                    }
+                  ],
+                  "description": "正式表の検証入力"
+                }
+              ],
+              "passives": []
+            },
+            {
+              "id": "3-1/W1/2",
+              "name": "僧兵",
+              "image": "/creative/characters/battle/char_kageyama_01.png",
+              "level": 19,
+              "stats": {
+                "luk": 0,
+                "hp": 680,
+                "atk": 180,
+                "def": 260,
+                "sp": 100
+              },
+              "order": 1,
+              "hitSpGain": 10,
+              "element": "earth",
+              "actionCount": 7,
+              "initialCount": 7,
+              "initialSp": 0,
+              "skills": [],
+              "passives": []
+            }
+          ],
+          [
+            {
+              "id": "3-1/W2/1",
+              "name": "直江兼続",
+              "image": "/creative/characters/battle/char_rui_01.png",
+              "level": 20,
+              "stats": {
+                "luk": 0,
+                "hp": 3430,
+                "atk": 510,
+                "def": 1140,
+                "sp": 100
+              },
+              "order": 0,
+              "hitSpGain": 10,
+              "element": "water",
+              "actionCount": 7,
+              "initialCount": 6,
+              "initialSp": 50,
+              "skills": [
+                {
+                  "id": "SKD008",
+                  "name": "標準単体攻撃・水",
+                  "image": "",
+                  "rarity": "R",
+                  "element": "water",
+                  "spCost": 50,
+                  "condition": {
+                    "type": "always"
+                  },
+                  "target": "first",
+                  "effects": [
+                    {
+                      "type": "damage",
+                      "power": 120
+                    }
+                  ],
+                  "description": "正式表の検証入力"
+                }
+              ],
+              "passives": [
+                {
+                  "id": "P01_water",
+                  "type": "P01",
+                  "name": "P01",
+                  "stat": "atk",
+                  "percent": 4.800000000000001,
+                  "level": 0,
+                  "target": "party",
+                  "targetElement": "water"
+                }
+              ]
+            }
+          ]
+        ],
+        "firstRewards": [
+          {
+            "kind": "soul",
+            "id": "char_rui_01",
+            "amount": 3
+          },
+          {
+            "kind": "ticket",
+            "id": "SPECIAL_TICKET_CHARACTER",
+            "amount": 1
+          }
+        ],
+        "rewards": [
+          {
+            "kind": "cash",
+            "amount": 1200
+          },
+          {
+            "kind": "character_exp_item",
+            "id": "small",
+            "amount": 3
+          },
+          {
+            "kind": "equipment_exp_item",
+            "id": "small",
+            "amount": 2
+          }
+        ],
+        "rareRewards": [
+          {
+            "kind": "soul",
+            "id": "char_rui_01",
+            "amount": 1,
+            "rarity": "SR",
+            "chance": 0.1,
+            "period": 20
+          },
+          {
+            "kind": "ticket",
+            "id": "SPECIAL_TICKET_CHARACTER",
+            "amount": 1,
+            "chance": 0.0025
+          },
+          {
+            "kind": "ticket",
+            "id": "SPECIAL_TICKET_SKILL",
+            "amount": 1,
+            "chance": 0.005
+          },
+          {
+            "kind": "ticket",
+            "id": "SPECIAL_TICKET_EQUIPMENT",
+            "amount": 1,
+            "chance": 0.0025
+          }
+        ],
+        "soulDrops": [
+          {
+            "kind": "soul",
+            "id": "char_rui_01",
+            "amount": 1,
+            "rarity": "SR",
+            "chance": 0.1,
+            "period": 20
+          }
+        ],
+        "ticketChance": 0.01,
+        "playerExp": 30,
+        "encounterChance": 0.02
+      },
+      "questMasterVersion": "game04-quest68-early-retention-20260926",
+      "playerExpReward": {
+        "amount": 30,
+        "version": "game04-quest68-early-retention-20260926",
+        "status": "APPROVED"
+      }
+    },
+    "baseline": {
+      "n": 20,
+      "wins": 0,
+      "winRate": 0,
+      "actions": [
+        300,
+        300
+      ],
+      "meanActions": 300,
+      "allOneRuns": 20,
+      "reasons": {
+        "action_limit": 20
+      },
+      "runs": [
+        {
+          "seed": 47001,
+          "outcome": "lose",
+          "reason": "action_limit",
+          "actions": 300,
+          "wavesCleared": 0,
+          "damage": 256,
+          "damageMin": 1,
+          "damageMax": 1,
+          "damageEvents": 256,
+          "oneDamage": 256,
+          "allOne": true,
+          "bursts": 8,
+          "spMin": 0,
+          "spMax": 129,
+          "spGenerated": 4404,
+          "casts": {
+            "basic": 164,
+            "SKD009": 28,
+            "SKD034": 7,
+            "SKD038": 16,
+            "SKD010": 64,
+            "SKD039": 21
+          },
+          "enemyCasts": {
+            "SKD034": 11,
+            "basic": 73
+          },
+          "effects": {
+            "SKD034:effect_applied": 7,
+            "SKD038:effect_applied": 16,
+            "SKD039:heal": 21
+          },
+          "minEnemyEffectiveDef": 228.8,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 4,
+          "resultHash": "e6f5aebf0c125b700969cd421351e8e74b8a11c457d215e4b5f5f6ed8229692c"
+        },
+        {
+          "seed": 47002,
+          "outcome": "lose",
+          "reason": "action_limit",
+          "actions": 300,
+          "wavesCleared": 0,
+          "damage": 260,
+          "damageMin": 1,
+          "damageMax": 1,
+          "damageEvents": 260,
+          "oneDamage": 260,
+          "allOne": true,
+          "bursts": 10,
+          "spMin": 0,
+          "spMax": 100,
+          "spGenerated": 4238,
+          "casts": {
+            "basic": 158,
+            "SKD009": 33,
+            "SKD034": 6,
+            "SKD038": 15,
+            "SKD010": 69,
+            "SKD039": 19
+          },
+          "enemyCasts": {
+            "SKD034": 11,
+            "basic": 73
+          },
+          "effects": {
+            "SKD034:effect_applied": 6,
+            "SKD038:effect_applied": 15,
+            "SKD039:heal": 19
+          },
+          "minEnemyEffectiveDef": 228.8,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 4,
+          "resultHash": "f93914609de5fb69f631ae349eb7c0d6184c62ed6aa16f71c3ff7e4e79be850c"
+        },
+        {
+          "seed": 47003,
+          "outcome": "lose",
+          "reason": "action_limit",
+          "actions": 300,
+          "wavesCleared": 0,
+          "damage": 258,
+          "damageMin": 1,
+          "damageMax": 1,
+          "damageEvents": 258,
+          "oneDamage": 258,
+          "allOne": true,
+          "bursts": 9,
+          "spMin": 0,
+          "spMax": 108,
+          "spGenerated": 4321,
+          "casts": {
+            "basic": 161,
+            "SKD009": 29,
+            "SKD034": 6,
+            "SKD038": 15,
+            "SKD010": 68,
+            "SKD039": 21
+          },
+          "enemyCasts": {
+            "SKD034": 11,
+            "basic": 73
+          },
+          "effects": {
+            "SKD034:effect_applied": 6,
+            "SKD038:effect_applied": 15,
+            "SKD039:heal": 21
+          },
+          "minEnemyEffectiveDef": 228.8,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 4,
+          "resultHash": "e10ad34c1c060702ac216483c0fd8b6790496e7becc302b79cc350f26dd9c466"
+        },
+        {
+          "seed": 47004,
+          "outcome": "lose",
+          "reason": "action_limit",
+          "actions": 300,
+          "wavesCleared": 0,
+          "damage": 260,
+          "damageMin": 1,
+          "damageMax": 1,
+          "damageEvents": 260,
+          "oneDamage": 260,
+          "allOne": true,
+          "bursts": 10,
+          "spMin": 0,
+          "spMax": 108,
+          "spGenerated": 4238,
+          "casts": {
+            "basic": 158,
+            "SKD009": 28,
+            "SKD034": 6,
+            "SKD038": 17,
+            "SKD010": 74,
+            "SKD039": 17
+          },
+          "enemyCasts": {
+            "SKD034": 11,
+            "basic": 73
+          },
+          "effects": {
+            "SKD034:effect_applied": 6,
+            "SKD038:effect_applied": 17,
+            "SKD039:heal": 17
+          },
+          "minEnemyEffectiveDef": 228.8,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 4,
+          "resultHash": "31fad842303dc32569f62d9bfb8691602da5981a47fc2b6ebf0cf6ade33bec14"
+        },
+        {
+          "seed": 47005,
+          "outcome": "lose",
+          "reason": "action_limit",
+          "actions": 300,
+          "wavesCleared": 0,
+          "damage": 253,
+          "damageMin": 1,
+          "damageMax": 1,
+          "damageEvents": 253,
+          "oneDamage": 253,
+          "allOne": true,
+          "bursts": 11,
+          "spMin": 0,
+          "spMax": 115,
+          "spGenerated": 4196,
+          "casts": {
+            "basic": 156,
+            "SKD009": 30,
+            "SKD034": 8,
+            "SKD038": 19,
+            "SKD010": 67,
+            "SKD039": 20
+          },
+          "enemyCasts": {
+            "SKD034": 11,
+            "basic": 73
+          },
+          "effects": {
+            "SKD034:effect_applied": 8,
+            "SKD038:effect_applied": 19,
+            "SKD039:heal": 20
+          },
+          "minEnemyEffectiveDef": 228.8,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 4,
+          "resultHash": "ac5fbaebb9340bab4830800c8dab7619f017ee42a19028df72fb59f1c7d12cd0"
+        },
+        {
+          "seed": 47006,
+          "outcome": "lose",
+          "reason": "action_limit",
+          "actions": 300,
+          "wavesCleared": 0,
+          "damage": 247,
+          "damageMin": 1,
+          "damageMax": 1,
+          "damageEvents": 247,
+          "oneDamage": 247,
+          "allOne": true,
+          "bursts": 7,
+          "spMin": 0,
+          "spMax": 116,
+          "spGenerated": 4476,
+          "casts": {
+            "basic": 166,
+            "SKD009": 17,
+            "SKD034": 9,
+            "SKD038": 19,
+            "SKD010": 64,
+            "SKD039": 25
+          },
+          "enemyCasts": {
+            "SKD034": 11,
+            "basic": 73
+          },
+          "effects": {
+            "SKD034:effect_applied": 9,
+            "SKD038:effect_applied": 19,
+            "SKD039:heal": 25
+          },
+          "minEnemyEffectiveDef": 228.8,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 4,
+          "resultHash": "fe4f2fa2e37972e19df67ddf8fce37578823207034232706e3dd5c9d7de5ad27"
+        },
+        {
+          "seed": 47007,
+          "outcome": "lose",
+          "reason": "action_limit",
+          "actions": 300,
+          "wavesCleared": 0,
+          "damage": 254,
+          "damageMin": 1,
+          "damageMax": 1,
+          "damageEvents": 254,
+          "oneDamage": 254,
+          "allOne": true,
+          "bursts": 10,
+          "spMin": 0,
+          "spMax": 108,
+          "spGenerated": 4227,
+          "casts": {
+            "basic": 157,
+            "SKD009": 29,
+            "SKD034": 8,
+            "SKD038": 19,
+            "SKD010": 68,
+            "SKD039": 19
+          },
+          "enemyCasts": {
+            "SKD034": 11,
+            "basic": 73
+          },
+          "effects": {
+            "SKD034:effect_applied": 8,
+            "SKD038:effect_applied": 19,
+            "SKD039:heal": 19
+          },
+          "minEnemyEffectiveDef": 228.8,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 4,
+          "resultHash": "dc1b1713581fe69c1204b2ffa7c811777ccdaab53322171cc199919f909dc3a5"
+        },
+        {
+          "seed": 47008,
+          "outcome": "lose",
+          "reason": "action_limit",
+          "actions": 300,
+          "wavesCleared": 0,
+          "damage": 255,
+          "damageMin": 1,
+          "damageMax": 1,
+          "damageEvents": 255,
+          "oneDamage": 255,
+          "allOne": true,
+          "bursts": 10,
+          "spMin": 0,
+          "spMax": 116,
+          "spGenerated": 4238,
+          "casts": {
+            "basic": 158,
+            "SKD009": 27,
+            "SKD034": 6,
+            "SKD038": 21,
+            "SKD010": 70,
+            "SKD039": 18
+          },
+          "enemyCasts": {
+            "SKD034": 11,
+            "basic": 73
+          },
+          "effects": {
+            "SKD034:effect_applied": 6,
+            "SKD038:effect_applied": 21,
+            "SKD039:heal": 18
+          },
+          "minEnemyEffectiveDef": 228.8,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 4,
+          "resultHash": "531c4226a8b386ae5a8ebf1f13832e54594d9f34160cd19cbe1069d2ff7c4765"
+        },
+        {
+          "seed": 47009,
+          "outcome": "lose",
+          "reason": "action_limit",
+          "actions": 300,
+          "wavesCleared": 0,
+          "damage": 256,
+          "damageMin": 1,
+          "damageMax": 1,
+          "damageEvents": 256,
+          "oneDamage": 256,
+          "allOne": true,
+          "bursts": 11,
+          "spMin": 0,
+          "spMax": 108,
+          "spGenerated": 4144,
+          "casts": {
+            "basic": 154,
+            "SKD009": 29,
+            "SKD034": 8,
+            "SKD038": 17,
+            "SKD010": 73,
+            "SKD039": 19
+          },
+          "enemyCasts": {
+            "SKD034": 11,
+            "basic": 73
+          },
+          "effects": {
+            "SKD034:effect_applied": 8,
+            "SKD038:effect_applied": 17,
+            "SKD039:heal": 19
+          },
+          "minEnemyEffectiveDef": 228.8,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 4,
+          "resultHash": "8ddbdd3f68c385081ffa08161a77ee751eb1e56cb5affe545ad0b706c01fd421"
+        },
+        {
+          "seed": 47010,
+          "outcome": "lose",
+          "reason": "action_limit",
+          "actions": 300,
+          "wavesCleared": 0,
+          "damage": 255,
+          "damageMin": 1,
+          "damageMax": 1,
+          "damageEvents": 255,
+          "oneDamage": 255,
+          "allOne": true,
+          "bursts": 10,
+          "spMin": 0,
+          "spMax": 116,
+          "spGenerated": 4238,
+          "casts": {
+            "basic": 158,
+            "SKD009": 28,
+            "SKD034": 6,
+            "SKD038": 21,
+            "SKD010": 69,
+            "SKD039": 18
+          },
+          "enemyCasts": {
+            "SKD034": 11,
+            "basic": 73
+          },
+          "effects": {
+            "SKD034:effect_applied": 6,
+            "SKD038:effect_applied": 21,
+            "SKD039:heal": 18
+          },
+          "minEnemyEffectiveDef": 228.8,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 4,
+          "resultHash": "55fc9b042f7211a980d4510daa3d5a5200d62cfdb0551058f71b2b45386a7fcd"
+        },
+        {
+          "seed": 47011,
+          "outcome": "lose",
+          "reason": "action_limit",
+          "actions": 300,
+          "wavesCleared": 0,
+          "damage": 256,
+          "damageMin": 1,
+          "damageMax": 1,
+          "damageEvents": 256,
+          "oneDamage": 256,
+          "allOne": true,
+          "bursts": 11,
+          "spMin": 0,
+          "spMax": 108,
+          "spGenerated": 4144,
+          "casts": {
+            "basic": 154,
+            "SKD009": 28,
+            "SKD034": 7,
+            "SKD038": 18,
+            "SKD010": 74,
+            "SKD039": 19
+          },
+          "enemyCasts": {
+            "SKD034": 11,
+            "basic": 73
+          },
+          "effects": {
+            "SKD034:effect_applied": 7,
+            "SKD038:effect_applied": 18,
+            "SKD039:heal": 19
+          },
+          "minEnemyEffectiveDef": 228.8,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 4,
+          "resultHash": "1c7f1dca551e97a1f4c81b6ed7c0b3870a3833adcc2caefab5722b85e50f1d56"
+        },
+        {
+          "seed": 47012,
+          "outcome": "lose",
+          "reason": "action_limit",
+          "actions": 300,
+          "wavesCleared": 0,
+          "damage": 238,
+          "damageMin": 1,
+          "damageMax": 1,
+          "damageEvents": 238,
+          "oneDamage": 238,
+          "allOne": true,
+          "bursts": 8,
+          "spMin": 0,
+          "spMax": 100,
+          "spGenerated": 4360,
+          "casts": {
+            "basic": 160,
+            "SKD009": 15,
+            "SKD034": 10,
+            "SKD038": 20,
+            "SKD010": 63,
+            "SKD039": 32
+          },
+          "enemyCasts": {
+            "SKD034": 11,
+            "basic": 73
+          },
+          "effects": {
+            "SKD034:effect_applied": 10,
+            "SKD038:effect_applied": 20,
+            "SKD039:heal": 32
+          },
+          "minEnemyEffectiveDef": 228.8,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "37b4990b404bba3fa037deb4036d9bc83d2f86c991e8c84b3a05a117731b5b20"
+        },
+        {
+          "seed": 47013,
+          "outcome": "lose",
+          "reason": "action_limit",
+          "actions": 300,
+          "wavesCleared": 0,
+          "damage": 244,
+          "damageMin": 1,
+          "damageMax": 1,
+          "damageEvents": 244,
+          "oneDamage": 244,
+          "allOne": true,
+          "bursts": 8,
+          "spMin": 0,
+          "spMax": 129,
+          "spGenerated": 4382,
+          "casts": {
+            "basic": 162,
+            "SKD009": 17,
+            "SKD034": 9,
+            "SKD038": 23,
+            "SKD010": 65,
+            "SKD039": 24
+          },
+          "enemyCasts": {
+            "SKD034": 11,
+            "basic": 73
+          },
+          "effects": {
+            "SKD034:effect_applied": 9,
+            "SKD038:effect_applied": 23,
+            "SKD039:heal": 24
+          },
+          "minEnemyEffectiveDef": 228.8,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 4,
+          "resultHash": "ae2cf40c32fb189e474e956036de8981046b594202b56022f8ef303876378507"
+        },
+        {
+          "seed": 47014,
+          "outcome": "lose",
+          "reason": "action_limit",
+          "actions": 300,
+          "wavesCleared": 0,
+          "damage": 256,
+          "damageMin": 1,
+          "damageMax": 1,
+          "damageEvents": 256,
+          "oneDamage": 256,
+          "allOne": true,
+          "bursts": 12,
+          "spMin": 0,
+          "spMax": 116,
+          "spGenerated": 4061,
+          "casts": {
+            "basic": 151,
+            "SKD009": 25,
+            "SKD034": 7,
+            "SKD038": 18,
+            "SKD010": 80,
+            "SKD039": 19
+          },
+          "enemyCasts": {
+            "SKD034": 11,
+            "basic": 73
+          },
+          "effects": {
+            "SKD034:effect_applied": 7,
+            "SKD038:effect_applied": 18,
+            "SKD039:heal": 19
+          },
+          "minEnemyEffectiveDef": 228.8,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 4,
+          "resultHash": "7f728cd7c20a2f8c7554f48e89b0cf83c5526f9e8f4f276133abc735cc80b9f1"
+        },
+        {
+          "seed": 47015,
+          "outcome": "lose",
+          "reason": "action_limit",
+          "actions": 300,
+          "wavesCleared": 0,
+          "damage": 255,
+          "damageMin": 1,
+          "damageMax": 1,
+          "damageEvents": 255,
+          "oneDamage": 255,
+          "allOne": true,
+          "bursts": 11,
+          "spMin": 0,
+          "spMax": 129,
+          "spGenerated": 4144,
+          "casts": {
+            "basic": 154,
+            "SKD009": 30,
+            "SKD034": 7,
+            "SKD038": 18,
+            "SKD010": 71,
+            "SKD039": 20
+          },
+          "enemyCasts": {
+            "SKD034": 11,
+            "basic": 73
+          },
+          "effects": {
+            "SKD034:effect_applied": 7,
+            "SKD038:effect_applied": 18,
+            "SKD039:heal": 20
+          },
+          "minEnemyEffectiveDef": 228.8,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 4,
+          "resultHash": "adbb6368b092173bc38f68bf07c33aaa36f35c3907179358e08edfb4fd984e95"
+        },
+        {
+          "seed": 47016,
+          "outcome": "lose",
+          "reason": "action_limit",
+          "actions": 300,
+          "wavesCleared": 0,
+          "damage": 258,
+          "damageMin": 1,
+          "damageMax": 1,
+          "damageEvents": 258,
+          "oneDamage": 258,
+          "allOne": true,
+          "bursts": 11,
+          "spMin": 0,
+          "spMax": 100,
+          "spGenerated": 4217,
+          "casts": {
+            "basic": 157,
+            "SKD009": 23,
+            "SKD034": 6,
+            "SKD038": 16,
+            "SKD010": 78,
+            "SKD039": 20
+          },
+          "enemyCasts": {
+            "SKD034": 11,
+            "basic": 73
+          },
+          "effects": {
+            "SKD034:effect_applied": 6,
+            "SKD038:effect_applied": 16,
+            "SKD039:heal": 20
+          },
+          "minEnemyEffectiveDef": 228.8,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 4,
+          "resultHash": "422312ec2cede4cbaf35ab4d51abec4e13f9f52cd86325d89af6c77189869287"
+        },
+        {
+          "seed": 47017,
+          "outcome": "lose",
+          "reason": "action_limit",
+          "actions": 300,
+          "wavesCleared": 0,
+          "damage": 258,
+          "damageMin": 1,
+          "damageMax": 1,
+          "damageEvents": 258,
+          "oneDamage": 258,
+          "allOne": true,
+          "bursts": 10,
+          "spMin": 0,
+          "spMax": 100,
+          "spGenerated": 4238,
+          "casts": {
+            "basic": 158,
+            "SKD009": 28,
+            "SKD034": 6,
+            "SKD038": 16,
+            "SKD010": 72,
+            "SKD039": 20
+          },
+          "enemyCasts": {
+            "SKD034": 11,
+            "basic": 73
+          },
+          "effects": {
+            "SKD034:effect_applied": 6,
+            "SKD038:effect_applied": 16,
+            "SKD039:heal": 20
+          },
+          "minEnemyEffectiveDef": 228.8,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 4,
+          "resultHash": "0e92e619788470d5587cf0b0291a905f16071188c4b6854c48dd36594d83e423"
+        },
+        {
+          "seed": 47018,
+          "outcome": "lose",
+          "reason": "action_limit",
+          "actions": 300,
+          "wavesCleared": 0,
+          "damage": 244,
+          "damageMin": 1,
+          "damageMax": 1,
+          "damageEvents": 244,
+          "oneDamage": 244,
+          "allOne": true,
+          "bursts": 8,
+          "spMin": 0,
+          "spMax": 129,
+          "spGenerated": 4371,
+          "casts": {
+            "basic": 161,
+            "SKD009": 22,
+            "SKD034": 9,
+            "SKD038": 19,
+            "SKD010": 61,
+            "SKD039": 28
+          },
+          "enemyCasts": {
+            "SKD034": 11,
+            "basic": 73
+          },
+          "effects": {
+            "SKD034:effect_applied": 9,
+            "SKD038:effect_applied": 19,
+            "SKD039:heal": 28
+          },
+          "minEnemyEffectiveDef": 228.8,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 4,
+          "resultHash": "13a3f178fa4f516c2372992c957831af38fdb80357533ef2a4ca534680e1dbfa"
+        },
+        {
+          "seed": 47019,
+          "outcome": "lose",
+          "reason": "action_limit",
+          "actions": 300,
+          "wavesCleared": 0,
+          "damage": 247,
+          "damageMin": 1,
+          "damageMax": 1,
+          "damageEvents": 247,
+          "oneDamage": 247,
+          "allOne": true,
+          "bursts": 4,
+          "spMin": 0,
+          "spMax": 111,
+          "spGenerated": 4736,
+          "casts": {
+            "basic": 176,
+            "SKD009": 24,
+            "SKD034": 9,
+            "SKD038": 23,
+            "SKD010": 47,
+            "SKD039": 21
+          },
+          "enemyCasts": {
+            "SKD034": 11,
+            "basic": 73
+          },
+          "effects": {
+            "SKD034:effect_applied": 9,
+            "SKD038:effect_applied": 23,
+            "SKD039:heal": 21
+          },
+          "minEnemyEffectiveDef": 228.8,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 4,
+          "resultHash": "510edf35c32bcddb94d20d72c187159cc6b5fdf3be2ca1fb1c455e19e95bbcce"
+        },
+        {
+          "seed": 47020,
+          "outcome": "lose",
+          "reason": "action_limit",
+          "actions": 300,
+          "wavesCleared": 0,
+          "damage": 257,
+          "damageMin": 1,
+          "damageMax": 1,
+          "damageEvents": 257,
+          "oneDamage": 257,
+          "allOne": true,
+          "bursts": 10,
+          "spMin": 0,
+          "spMax": 116,
+          "spGenerated": 4227,
+          "casts": {
+            "basic": 157,
+            "SKD009": 30,
+            "SKD034": 7,
+            "SKD038": 16,
+            "SKD010": 70,
+            "SKD039": 20
+          },
+          "enemyCasts": {
+            "SKD034": 11,
+            "basic": 73
+          },
+          "effects": {
+            "SKD034:effect_applied": 7,
+            "SKD038:effect_applied": 16,
+            "SKD039:heal": 20
+          },
+          "minEnemyEffectiveDef": 228.8,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 4,
+          "resultHash": "510df909ea613dbe9f0d7ee75cf1e0945ade09543a1fd6d1f9e58f0ec2b1efb3"
+        }
+      ]
+    },
+    "screens": [
+      {
+        "condition": {
+          "level": 20,
+          "eq": "R",
+          "el": 20,
+          "lb": 1
+        },
+        "n": 12,
+        "wins": 0,
+        "winRate": 0,
+        "actions": [
+          300,
+          300
+        ],
+        "meanActions": 300,
+        "allOneRuns": 0,
+        "reasons": {
+          "action_limit": 12
+        },
+        "runs": [
+          {
+            "seed": 48001,
+            "outcome": "lose",
+            "reason": "action_limit",
+            "actions": 300,
+            "wavesCleared": 1,
+            "damage": 6003,
+            "damageMin": 1,
+            "damageMax": 1435,
+            "damageEvents": 252,
+            "oneDamage": 221,
+            "allOne": false,
+            "bursts": 10,
+            "spMin": 0,
+            "spMax": 129,
+            "spGenerated": 4279,
+            "casts": {
+              "basic": 159,
+              "SKD009": 22,
+              "SKD034": 13,
+              "SKD038": 23,
+              "SKD010": 71,
+              "SKD039": 12
+            },
+            "enemyCasts": {
+              "SKD034": 9,
+              "basic": 63,
+              "SKD008": 7
+            },
+            "effects": {
+              "SKD034:effect_applied": 13,
+              "SKD038:effect_applied": 23,
+              "SKD039:heal": 12
+            },
+            "minEnemyEffectiveDef": 226.89928632085665,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "9a82cabc9869181f3fefdb8d003d19b33ae03f4854dc8db8ceb30deca4e8e41f"
+          },
+          {
+            "seed": 48002,
+            "outcome": "lose",
+            "reason": "action_limit",
+            "actions": 300,
+            "wavesCleared": 1,
+            "damage": 8303,
+            "damageMin": 1,
+            "damageMax": 1363,
+            "damageEvents": 249,
+            "oneDamage": 208,
+            "allOne": false,
+            "bursts": 8,
+            "spMin": 0,
+            "spMax": 129,
+            "spGenerated": 4393,
+            "casts": {
+              "basic": 163,
+              "SKD009": 20,
+              "SKD034": 14,
+              "SKD038": 23,
+              "SKD010": 66,
+              "SKD039": 14
+            },
+            "enemyCasts": {
+              "SKD034": 7,
+              "basic": 49,
+              "SKD008": 16
+            },
+            "effects": {
+              "SKD034:effect_applied": 14,
+              "SKD038:effect_applied": 23,
+              "SKD039:heal": 14
+            },
+            "minEnemyEffectiveDef": 226.89928632085665,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "cc189a20ae81ba1cc23b5ae21d9c531f094daa4d5de0a451248cd9e413f99a7d"
+          },
+          {
+            "seed": 48003,
+            "outcome": "lose",
+            "reason": "action_limit",
+            "actions": 300,
+            "wavesCleared": 1,
+            "damage": 5045,
+            "damageMin": 1,
+            "damageMax": 672,
+            "damageEvents": 251,
+            "oneDamage": 226,
+            "allOne": false,
+            "bursts": 6,
+            "spMin": 0,
+            "spMax": 129,
+            "spGenerated": 4581,
+            "casts": {
+              "basic": 171,
+              "SKD009": 25,
+              "SKD034": 13,
+              "SKD038": 26,
+              "SKD010": 55,
+              "SKD039": 10
+            },
+            "enemyCasts": {
+              "SKD034": 10,
+              "basic": 70,
+              "SKD008": 3
+            },
+            "effects": {
+              "SKD034:effect_applied": 13,
+              "SKD038:effect_applied": 26,
+              "SKD039:heal": 10
+            },
+            "minEnemyEffectiveDef": 226.89928632085665,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "310afdc1d746d31b7dafb0e4126d3ff479d9bec3d0252cf47a9a07f6307ae1ab"
+          },
+          {
+            "seed": 48004,
+            "outcome": "lose",
+            "reason": "action_limit",
+            "actions": 300,
+            "wavesCleared": 0,
+            "damage": 2267,
+            "damageMin": 1,
+            "damageMax": 268,
+            "damageEvents": 251,
+            "oneDamage": 240,
+            "allOne": false,
+            "bursts": 7,
+            "spMin": 0,
+            "spMax": 131,
+            "spGenerated": 4487,
+            "casts": {
+              "basic": 167,
+              "SKD009": 26,
+              "SKD034": 14,
+              "SKD038": 25,
+              "SKD010": 58,
+              "SKD039": 10
+            },
+            "enemyCasts": {
+              "SKD034": 11,
+              "basic": 73
+            },
+            "effects": {
+              "SKD034:effect_applied": 14,
+              "SKD038:effect_applied": 25,
+              "SKD039:heal": 10
+            },
+            "minEnemyEffectiveDef": 226.89928632085665,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "44b7143309416347ad161bc0be70695a5aed30636d30511777f2898f65cd04f4"
+          },
+          {
+            "seed": 48005,
+            "outcome": "lose",
+            "reason": "action_limit",
+            "actions": 300,
+            "wavesCleared": 0,
+            "damage": 2557,
+            "damageMin": 1,
+            "damageMax": 276,
+            "damageEvents": 254,
+            "oneDamage": 235,
+            "allOne": false,
+            "bursts": 12,
+            "spMin": 0,
+            "spMax": 128,
+            "spGenerated": 4083,
+            "casts": {
+              "basic": 153,
+              "SKD009": 21,
+              "SKD034": 13,
+              "SKD038": 24,
+              "SKD010": 80,
+              "SKD039": 9
+            },
+            "enemyCasts": {
+              "SKD034": 11,
+              "basic": 73
+            },
+            "effects": {
+              "SKD034:effect_applied": 13,
+              "SKD038:effect_applied": 24,
+              "SKD039:heal": 9
+            },
+            "minEnemyEffectiveDef": 226.89928632085665,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "2e477e6647b779961d0a862d147fbacf60f1db4efbde23e492f5c96ed18dbfc1"
+          },
+          {
+            "seed": 48006,
+            "outcome": "lose",
+            "reason": "action_limit",
+            "actions": 300,
+            "wavesCleared": 1,
+            "damage": 5382,
+            "damageMin": 1,
+            "damageMax": 1501,
+            "damageEvents": 252,
+            "oneDamage": 231,
+            "allOne": false,
+            "bursts": 11,
+            "spMin": 0,
+            "spMax": 129,
+            "spGenerated": 4155,
+            "casts": {
+              "basic": 155,
+              "SKD009": 22,
+              "SKD034": 13,
+              "SKD038": 25,
+              "SKD010": 75,
+              "SKD039": 10
+            },
+            "enemyCasts": {
+              "SKD034": 10,
+              "basic": 71,
+              "SKD008": 2
+            },
+            "effects": {
+              "SKD034:effect_applied": 13,
+              "SKD038:effect_applied": 25,
+              "SKD039:heal": 10
+            },
+            "minEnemyEffectiveDef": 226.89928632085665,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "fb7cce3b0a015368a8cdd4d0f6838d68abeab0cac79b5f5d82eaf54ee5f18084"
+          },
+          {
+            "seed": 48007,
+            "outcome": "lose",
+            "reason": "action_limit",
+            "actions": 300,
+            "wavesCleared": 0,
+            "damage": 2655,
+            "damageMin": 1,
+            "damageMax": 280,
+            "damageEvents": 253,
+            "oneDamage": 240,
+            "allOne": false,
+            "bursts": 6,
+            "spMin": 0,
+            "spMax": 121,
+            "spGenerated": 4592,
+            "casts": {
+              "basic": 172,
+              "SKD009": 22,
+              "SKD034": 13,
+              "SKD038": 25,
+              "SKD010": 59,
+              "SKD039": 9
+            },
+            "enemyCasts": {
+              "SKD034": 11,
+              "basic": 73
+            },
+            "effects": {
+              "SKD034:effect_applied": 13,
+              "SKD038:effect_applied": 25,
+              "SKD039:heal": 9
+            },
+            "minEnemyEffectiveDef": 226.89928632085665,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "ab721ee995cc0c952cce885b93d44dca0b82369c7152cecb4bf1e68143737ea1"
+          },
+          {
+            "seed": 48008,
+            "outcome": "lose",
+            "reason": "action_limit",
+            "actions": 300,
+            "wavesCleared": 0,
+            "damage": 2984,
+            "damageMin": 1,
+            "damageMax": 283,
+            "damageEvents": 253,
+            "oneDamage": 235,
+            "allOne": false,
+            "bursts": 10,
+            "spMin": 0,
+            "spMax": 127,
+            "spGenerated": 4238,
+            "casts": {
+              "basic": 158,
+              "SKD009": 23,
+              "SKD034": 13,
+              "SKD038": 25,
+              "SKD010": 72,
+              "SKD039": 9
+            },
+            "enemyCasts": {
+              "SKD034": 11,
+              "basic": 73
+            },
+            "effects": {
+              "SKD034:effect_applied": 13,
+              "SKD038:effect_applied": 25,
+              "SKD039:heal": 9
+            },
+            "minEnemyEffectiveDef": 226.89928632085665,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "1936d509ff39f242d41e5b96f5605e13f2c80aa68318c8cc3a9d8ebffdf7e781"
+          },
+          {
+            "seed": 48009,
+            "outcome": "lose",
+            "reason": "action_limit",
+            "actions": 300,
+            "wavesCleared": 0,
+            "damage": 1946,
+            "damageMin": 1,
+            "damageMax": 277,
+            "damageEvents": 254,
+            "oneDamage": 238,
+            "allOne": false,
+            "bursts": 9,
+            "spMin": 0,
+            "spMax": 132,
+            "spGenerated": 4321,
+            "casts": {
+              "basic": 161,
+              "SKD009": 21,
+              "SKD034": 13,
+              "SKD038": 24,
+              "SKD010": 72,
+              "SKD039": 9
+            },
+            "enemyCasts": {
+              "SKD034": 11,
+              "basic": 73
+            },
+            "effects": {
+              "SKD034:effect_applied": 13,
+              "SKD038:effect_applied": 24,
+              "SKD039:heal": 9
+            },
+            "minEnemyEffectiveDef": 226.89928632085665,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "81e973a29f956f222f4a2c4322d59b007174c64b380ae99e4ef095d541dfb642"
+          },
+          {
+            "seed": 48010,
+            "outcome": "lose",
+            "reason": "action_limit",
+            "actions": 300,
+            "wavesCleared": 0,
+            "damage": 2355,
+            "damageMin": 1,
+            "damageMax": 280,
+            "damageEvents": 254,
+            "oneDamage": 239,
+            "allOne": false,
+            "bursts": 12,
+            "spMin": 0,
+            "spMax": 126,
+            "spGenerated": 4072,
+            "casts": {
+              "basic": 152,
+              "SKD009": 21,
+              "SKD034": 13,
+              "SKD038": 23,
+              "SKD010": 81,
+              "SKD039": 10
+            },
+            "enemyCasts": {
+              "SKD034": 11,
+              "basic": 73
+            },
+            "effects": {
+              "SKD034:effect_applied": 13,
+              "SKD038:effect_applied": 23,
+              "SKD039:heal": 10
+            },
+            "minEnemyEffectiveDef": 226.89928632085665,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "b8cf1c4d5d8a07ea57e985e1b80d99ce4b090ffc05a77a4d5b871cc7e4bdf6d3"
+          },
+          {
+            "seed": 48011,
+            "outcome": "lose",
+            "reason": "action_limit",
+            "actions": 300,
+            "wavesCleared": 0,
+            "damage": 1435,
+            "damageMin": 1,
+            "damageMax": 279,
+            "damageEvents": 254,
+            "oneDamage": 236,
+            "allOne": false,
+            "bursts": 10,
+            "spMin": 0,
+            "spMax": 132,
+            "spGenerated": 4238,
+            "casts": {
+              "basic": 158,
+              "SKD009": 24,
+              "SKD034": 13,
+              "SKD038": 24,
+              "SKD010": 72,
+              "SKD039": 9
+            },
+            "enemyCasts": {
+              "SKD034": 11,
+              "basic": 73
+            },
+            "effects": {
+              "SKD034:effect_applied": 13,
+              "SKD038:effect_applied": 24,
+              "SKD039:heal": 9
+            },
+            "minEnemyEffectiveDef": 226.89928632085665,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "2a02bb8ce566e7c65d43360d81e32b871e74e57ddda0c81e7a4b240f192afef7"
+          },
+          {
+            "seed": 48012,
+            "outcome": "lose",
+            "reason": "action_limit",
+            "actions": 300,
+            "wavesCleared": 1,
+            "damage": 5701,
+            "damageMin": 1,
+            "damageMax": 1466,
+            "damageEvents": 250,
+            "oneDamage": 221,
+            "allOne": false,
+            "bursts": 7,
+            "spMin": 0,
+            "spMax": 129,
+            "spGenerated": 4539,
+            "casts": {
+              "basic": 169,
+              "SKD009": 23,
+              "SKD034": 14,
+              "SKD038": 25,
+              "SKD010": 58,
+              "SKD039": 11
+            },
+            "enemyCasts": {
+              "SKD034": 9,
+              "basic": 63,
+              "SKD008": 6
+            },
+            "effects": {
+              "SKD034:effect_applied": 14,
+              "SKD038:effect_applied": 25,
+              "SKD039:heal": 11
+            },
+            "minEnemyEffectiveDef": 226.89928632085665,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "e72db21c96ffdd1689e29aa2ad79b1084fc5c1dc00204814e5b177c2f4b3c7a6"
+          }
+        ]
+      },
+      {
+        "condition": {
+          "level": 30,
+          "eq": "R",
+          "el": 30,
+          "lb": 3
+        },
+        "n": 12,
+        "wins": 12,
+        "winRate": 1,
+        "actions": [
+          23,
+          28
+        ],
+        "meanActions": 25.583333333333332,
+        "allOneRuns": 0,
+        "reasons": {
+          "final_wave_defeated": 12
+        },
+        "runs": [
+          {
+            "seed": 48001,
+            "outcome": "win",
+            "reason": "final_wave_defeated",
+            "actions": 24,
+            "wavesCleared": 2,
+            "damage": 11170,
+            "damageMin": 1,
+            "damageMax": 3012,
+            "damageEvents": 21,
+            "oneDamage": 2,
+            "allOne": false,
+            "bursts": 1,
+            "spMin": 0,
+            "spMax": 95,
+            "spGenerated": 385,
+            "casts": {
+              "basic": 15,
+              "SKD009": 2,
+              "SKD034": 1,
+              "SKD038": 2,
+              "SKD010": 4
+            },
+            "enemyCasts": {
+              "SKD034": 1,
+              "basic": 1,
+              "SKD008": 2
+            },
+            "effects": {
+              "SKD034:effect_applied": 1,
+              "SKD038:effect_applied": 2
+            },
+            "minEnemyEffectiveDef": 260,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "fb2fb47939ca3175ceb95429910ef0d9e8a879311ad5e458c1195394b550158e"
+          },
+          {
+            "seed": 48002,
+            "outcome": "win",
+            "reason": "final_wave_defeated",
+            "actions": 28,
+            "wavesCleared": 2,
+            "damage": 10026,
+            "damageMin": 1,
+            "damageMax": 1499,
+            "damageEvents": 23,
+            "oneDamage": 2,
+            "allOne": false,
+            "bursts": 1,
+            "spMin": 0,
+            "spMax": 112,
+            "spGenerated": 468,
+            "casts": {
+              "basic": 18,
+              "SKD009": 2,
+              "SKD034": 2,
+              "SKD038": 3,
+              "SKD010": 3
+            },
+            "enemyCasts": {
+              "SKD034": 1,
+              "basic": 3,
+              "SKD008": 2
+            },
+            "effects": {
+              "SKD034:effect_applied": 2,
+              "SKD038:effect_applied": 3
+            },
+            "minEnemyEffectiveDef": 221.2955603624482,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "16fd493a2ec12a172edaaf182898d2c135d143d8de73d87c3e07ca4d62487adf"
+          },
+          {
+            "seed": 48003,
+            "outcome": "win",
+            "reason": "final_wave_defeated",
+            "actions": 28,
+            "wavesCleared": 2,
+            "damage": 9916,
+            "damageMin": 1,
+            "damageMax": 1544,
+            "damageEvents": 23,
+            "oneDamage": 2,
+            "allOne": false,
+            "bursts": 1,
+            "spMin": 0,
+            "spMax": 112,
+            "spGenerated": 468,
+            "casts": {
+              "basic": 18,
+              "SKD009": 2,
+              "SKD034": 2,
+              "SKD038": 3,
+              "SKD010": 3
+            },
+            "enemyCasts": {
+              "SKD034": 1,
+              "basic": 3,
+              "SKD008": 2
+            },
+            "effects": {
+              "SKD034:effect_applied": 2,
+              "SKD038:effect_applied": 3
+            },
+            "minEnemyEffectiveDef": 221.2955603624482,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "4b02549806d731671ddc6606207e52fe546e558c3a4c15c8c8f008213546bdc9"
+          },
+          {
+            "seed": 48004,
+            "outcome": "win",
+            "reason": "final_wave_defeated",
+            "actions": 23,
+            "wavesCleared": 2,
+            "damage": 10223,
+            "damageMin": 1,
+            "damageMax": 2810,
+            "damageEvents": 20,
+            "oneDamage": 2,
+            "allOne": false,
+            "bursts": 1,
+            "spMin": 0,
+            "spMax": 95,
+            "spGenerated": 375,
+            "casts": {
+              "basic": 15,
+              "SKD009": 2,
+              "SKD034": 1,
+              "SKD038": 2,
+              "SKD010": 3
+            },
+            "enemyCasts": {
+              "SKD034": 1,
+              "basic": 1,
+              "SKD008": 2
+            },
+            "effects": {
+              "SKD034:effect_applied": 1,
+              "SKD038:effect_applied": 2
+            },
+            "minEnemyEffectiveDef": 260,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "804b22d5d6ce6430229b9e96769c81d15f2fe233cf8a02ef9d218e0b31daca31"
+          },
+          {
+            "seed": 48005,
+            "outcome": "win",
+            "reason": "final_wave_defeated",
+            "actions": 28,
+            "wavesCleared": 2,
+            "damage": 10105,
+            "damageMin": 1,
+            "damageMax": 1542,
+            "damageEvents": 23,
+            "oneDamage": 2,
+            "allOne": false,
+            "bursts": 0,
+            "spMin": 0,
+            "spMax": 112,
+            "spGenerated": 478,
+            "casts": {
+              "basic": 18,
+              "SKD009": 2,
+              "SKD034": 2,
+              "SKD038": 3,
+              "SKD010": 3
+            },
+            "enemyCasts": {
+              "SKD034": 1,
+              "basic": 3,
+              "SKD008": 2
+            },
+            "effects": {
+              "SKD034:effect_applied": 2,
+              "SKD038:effect_applied": 3
+            },
+            "minEnemyEffectiveDef": 221.2955603624482,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "5b382bee0fe22e5e60dec9ae847567876ec38f32f697bc5955a0b5831454ac65"
+          },
+          {
+            "seed": 48006,
+            "outcome": "win",
+            "reason": "final_wave_defeated",
+            "actions": 28,
+            "wavesCleared": 2,
+            "damage": 9903,
+            "damageMin": 1,
+            "damageMax": 1527,
+            "damageEvents": 23,
+            "oneDamage": 2,
+            "allOne": false,
+            "bursts": 1,
+            "spMin": 0,
+            "spMax": 112,
+            "spGenerated": 468,
+            "casts": {
+              "basic": 18,
+              "SKD009": 2,
+              "SKD034": 2,
+              "SKD038": 3,
+              "SKD010": 3
+            },
+            "enemyCasts": {
+              "SKD034": 1,
+              "basic": 3,
+              "SKD008": 2
+            },
+            "effects": {
+              "SKD034:effect_applied": 2,
+              "SKD038:effect_applied": 3
+            },
+            "minEnemyEffectiveDef": 221.2955603624482,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "d53e69fba33ce11e31f754eb366f2b3f26d3f5062e77002624313129eb9d8564"
+          },
+          {
+            "seed": 48007,
+            "outcome": "win",
+            "reason": "final_wave_defeated",
+            "actions": 24,
+            "wavesCleared": 2,
+            "damage": 11013,
+            "damageMin": 1,
+            "damageMax": 3059,
+            "damageEvents": 21,
+            "oneDamage": 2,
+            "allOne": false,
+            "bursts": 1,
+            "spMin": 0,
+            "spMax": 95,
+            "spGenerated": 385,
+            "casts": {
+              "basic": 15,
+              "SKD009": 2,
+              "SKD034": 1,
+              "SKD038": 2,
+              "SKD010": 4
+            },
+            "enemyCasts": {
+              "SKD034": 1,
+              "basic": 1,
+              "SKD008": 2
+            },
+            "effects": {
+              "SKD034:effect_applied": 1,
+              "SKD038:effect_applied": 2
+            },
+            "minEnemyEffectiveDef": 260,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "c27ee3a4adfdd6ae3064ff94cc978a56ccaffacb6ea48fbb8ec184d2b1b2db7f"
+          },
+          {
+            "seed": 48008,
+            "outcome": "win",
+            "reason": "final_wave_defeated",
+            "actions": 24,
+            "wavesCleared": 2,
+            "damage": 11415,
+            "damageMin": 1,
+            "damageMax": 2987,
+            "damageEvents": 21,
+            "oneDamage": 2,
+            "allOne": false,
+            "bursts": 1,
+            "spMin": 0,
+            "spMax": 95,
+            "spGenerated": 385,
+            "casts": {
+              "basic": 15,
+              "SKD009": 2,
+              "SKD034": 1,
+              "SKD038": 2,
+              "SKD010": 4
+            },
+            "enemyCasts": {
+              "SKD034": 1,
+              "basic": 1,
+              "SKD008": 2
+            },
+            "effects": {
+              "SKD034:effect_applied": 1,
+              "SKD038:effect_applied": 2
+            },
+            "minEnemyEffectiveDef": 260,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "8e3270dd039acc1f35f85c0bbd762c2279fed843fcf5d500857bdb4bfff61898"
+          },
+          {
+            "seed": 48009,
+            "outcome": "win",
+            "reason": "final_wave_defeated",
+            "actions": 24,
+            "wavesCleared": 2,
+            "damage": 11230,
+            "damageMin": 1,
+            "damageMax": 3014,
+            "damageEvents": 21,
+            "oneDamage": 2,
+            "allOne": false,
+            "bursts": 1,
+            "spMin": 0,
+            "spMax": 95,
+            "spGenerated": 385,
+            "casts": {
+              "basic": 15,
+              "SKD009": 2,
+              "SKD034": 1,
+              "SKD038": 2,
+              "SKD010": 4
+            },
+            "enemyCasts": {
+              "SKD034": 1,
+              "basic": 1,
+              "SKD008": 2
+            },
+            "effects": {
+              "SKD034:effect_applied": 1,
+              "SKD038:effect_applied": 2
+            },
+            "minEnemyEffectiveDef": 260,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "0ef9655590447ef5090b73fc70a6a29545956b66ab4931978cd567e86c7e535d"
+          },
+          {
+            "seed": 48010,
+            "outcome": "win",
+            "reason": "final_wave_defeated",
+            "actions": 24,
+            "wavesCleared": 2,
+            "damage": 10759,
+            "damageMin": 1,
+            "damageMax": 2568,
+            "damageEvents": 21,
+            "oneDamage": 2,
+            "allOne": false,
+            "bursts": 1,
+            "spMin": 0,
+            "spMax": 95,
+            "spGenerated": 385,
+            "casts": {
+              "basic": 15,
+              "SKD009": 2,
+              "SKD034": 1,
+              "SKD038": 2,
+              "SKD010": 4
+            },
+            "enemyCasts": {
+              "SKD034": 1,
+              "basic": 1,
+              "SKD008": 2
+            },
+            "effects": {
+              "SKD034:effect_applied": 1,
+              "SKD038:effect_applied": 2
+            },
+            "minEnemyEffectiveDef": 260,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "27f7caceb985563e1a5a0824993a8ba4dd4e13d32f2fbb6afe66006fb2a794da"
+          },
+          {
+            "seed": 48011,
+            "outcome": "win",
+            "reason": "final_wave_defeated",
+            "actions": 24,
+            "wavesCleared": 2,
+            "damage": 10948,
+            "damageMin": 1,
+            "damageMax": 2612,
+            "damageEvents": 21,
+            "oneDamage": 2,
+            "allOne": false,
+            "bursts": 1,
+            "spMin": 0,
+            "spMax": 95,
+            "spGenerated": 385,
+            "casts": {
+              "basic": 15,
+              "SKD009": 2,
+              "SKD034": 1,
+              "SKD038": 2,
+              "SKD010": 4
+            },
+            "enemyCasts": {
+              "SKD034": 1,
+              "basic": 1,
+              "SKD008": 2
+            },
+            "effects": {
+              "SKD034:effect_applied": 1,
+              "SKD038:effect_applied": 2
+            },
+            "minEnemyEffectiveDef": 260,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "95521a29ce5ba73b850368e9d64501b216b65604bd8aa846e19d601618dec302"
+          },
+          {
+            "seed": 48012,
+            "outcome": "win",
+            "reason": "final_wave_defeated",
+            "actions": 28,
+            "wavesCleared": 2,
+            "damage": 9632,
+            "damageMin": 1,
+            "damageMax": 1504,
+            "damageEvents": 23,
+            "oneDamage": 2,
+            "allOne": false,
+            "bursts": 1,
+            "spMin": 0,
+            "spMax": 112,
+            "spGenerated": 468,
+            "casts": {
+              "basic": 18,
+              "SKD009": 2,
+              "SKD034": 2,
+              "SKD038": 3,
+              "SKD010": 3
+            },
+            "enemyCasts": {
+              "SKD034": 1,
+              "basic": 3,
+              "SKD008": 2
+            },
+            "effects": {
+              "SKD034:effect_applied": 2,
+              "SKD038:effect_applied": 3
+            },
+            "minEnemyEffectiveDef": 221.2955603624482,
+            "maxEnemyEffectiveDef": 1311,
+            "alive": 5,
+            "resultHash": "e3041740cf100b7f40b2d302a97a3076fe50487d4e6c6a2df7d762e95bfef034"
+          }
+        ]
+      }
+    ],
+    "validation": {
+      "n": 60,
+      "wins": 60,
+      "winRate": 1,
+      "actions": [
+        23,
+        28
+      ],
+      "meanActions": 25.933333333333334,
+      "allOneRuns": 0,
+      "reasons": {
+        "final_wave_defeated": 60
+      },
+      "runs": [
+        {
+          "seed": 49001,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9655,
+          "damageMin": 1,
+          "damageMax": 1344,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "1e730ef725f47e052012acdb8dda84963403721c80fae09970309d5f54a01498"
+        },
+        {
+          "seed": 49002,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 11366,
+          "damageMin": 1,
+          "damageMax": 2906,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "7819e0512c6a305421952e7e7ab9d277e6064c324102c98cefff5d731d05e2d9"
+        },
+        {
+          "seed": 49003,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9920,
+          "damageMin": 1,
+          "damageMax": 1359,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "9187a3f095f243a5d6e45831c12d8af5ad288abf508fcfb3ea304d320a665fb3"
+        },
+        {
+          "seed": 49004,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9830,
+          "damageMin": 1,
+          "damageMax": 1404,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 478,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "999d94396b04ca49d705b793736ce0230af7034d4aa74bea9286178bc356fd6b"
+        },
+        {
+          "seed": 49005,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9661,
+          "damageMin": 1,
+          "damageMax": 1334,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "8a651bfad2a5d2102b2127851f4f33f93597a2064b0fd928729341e4bb6028f1"
+        },
+        {
+          "seed": 49006,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9730,
+          "damageMin": 1,
+          "damageMax": 1513,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 478,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "72918274afbf7b9335f59bbf18cbfa133c77be7863ab712abf5919d8d8a2c379"
+        },
+        {
+          "seed": 49007,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 10946,
+          "damageMin": 1,
+          "damageMax": 2695,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "09e3c7387c22dd2ff67325e10ee904773d04db6dd9986e76afff4ca9ae351c08"
+        },
+        {
+          "seed": 49008,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9691,
+          "damageMin": 1,
+          "damageMax": 1392,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "74a131484d5c806a0c17ab070b9ec989e13b3ab69e8e12c7dabf44437b9826a2"
+        },
+        {
+          "seed": 49009,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9859,
+          "damageMin": 1,
+          "damageMax": 1434,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "834d936083137248612d546c892e61e9b579db63b8c0e80713797db4ace20462"
+        },
+        {
+          "seed": 49010,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9746,
+          "damageMin": 1,
+          "damageMax": 1509,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "8a28de035d914fa2b90e0fc918d6b75d25e838d994614594b65c6b3cac6ce158"
+        },
+        {
+          "seed": 49011,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9915,
+          "damageMin": 1,
+          "damageMax": 1456,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "bbe4496f52730da497e1e9b4eb3f04e3cbe75675e4c84cbc3e42556f6fceb889"
+        },
+        {
+          "seed": 49012,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 23,
+          "wavesCleared": 2,
+          "damage": 8354,
+          "damageMin": 1,
+          "damageMax": 1256,
+          "damageEvents": 20,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 116,
+          "spGenerated": 406,
+          "casts": {
+            "basic": 16,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 2
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "b112d87ac5b63ab3bbad7928a19c4fd025bbc6af9acd998ec16416aca3301fe5"
+        },
+        {
+          "seed": 49013,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 10041,
+          "damageMin": 1,
+          "damageMax": 1531,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "8d58c22bab9d68c377aecc0be2533ed6404f0918e939de47b846a462ad5558af"
+        },
+        {
+          "seed": 49014,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 23,
+          "wavesCleared": 2,
+          "damage": 8153,
+          "damageMin": 1,
+          "damageMax": 1191,
+          "damageEvents": 20,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 116,
+          "spGenerated": 406,
+          "casts": {
+            "basic": 16,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 2
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "5b10980e943476f54175fac3042f25831635788752c3aca4d0c1197b503635c0"
+        },
+        {
+          "seed": 49015,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 10848,
+          "damageMin": 1,
+          "damageMax": 2595,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "9bd702c43e5c9fe31421a02b05bb3ae9d0dd26d72c0b4dc346c958da0834e835"
+        },
+        {
+          "seed": 49016,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9727,
+          "damageMin": 1,
+          "damageMax": 1419,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 478,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "1f6311398887bd67f8eaa4d1e1b85da25dd672a6a50ad6a0b05b938b3a907d27"
+        },
+        {
+          "seed": 49017,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9889,
+          "damageMin": 1,
+          "damageMax": 1490,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 478,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "c2c16c979b3884325aa294dbcebc04abe190e23778ef84c3f0e0538dc4693bbb"
+        },
+        {
+          "seed": 49018,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9867,
+          "damageMin": 1,
+          "damageMax": 1585,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 478,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "ad236bb1704eb943a7d314275e0f3593b1cd873120e55e6489f5775083034e87"
+        },
+        {
+          "seed": 49019,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 10772,
+          "damageMin": 1,
+          "damageMax": 2633,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "06404eff34024a7e999b2096ff60d2453b34ea3b7e2c4d411ebe5fd7960b7cf0"
+        },
+        {
+          "seed": 49020,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9741,
+          "damageMin": 1,
+          "damageMax": 1544,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 478,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "151c74db371ff068fda84c834edbcf7148d2f4ea1daeb1badc169f77be87d3f8"
+        },
+        {
+          "seed": 49021,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9893,
+          "damageMin": 1,
+          "damageMax": 1590,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "e7c1dc1717f4aaf4f54a523168fd02895fa666a7161aaa322e965ee3c0984efe"
+        },
+        {
+          "seed": 49022,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9960,
+          "damageMin": 1,
+          "damageMax": 1504,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 478,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "e21c7af9e0f6ae0d28c4fa9e63c425053fc4a95e3fabdf6f29769c0325047204"
+        },
+        {
+          "seed": 49023,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 11043,
+          "damageMin": 1,
+          "damageMax": 2572,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "9e78dfeff70a353ff8a6ade77810de7b5c6ffaacc94084f71190fc9564733167"
+        },
+        {
+          "seed": 49024,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9892,
+          "damageMin": 1,
+          "damageMax": 1342,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "209a6140b07c3b7141d157691790c057cfee1b2122244a0dd513be40d8bd48f2"
+        },
+        {
+          "seed": 49025,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 11016,
+          "damageMin": 1,
+          "damageMax": 3019,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "30b76ba958573e8ae6cc8f8f70fe71621802aa3f1e01618da59bdecc83518958"
+        },
+        {
+          "seed": 49026,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9951,
+          "damageMin": 1,
+          "damageMax": 1552,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 478,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "722d871148dc508a94b7cafe298621856b91cd313e2fdf5595cf3ea110b60c33"
+        },
+        {
+          "seed": 49027,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 11007,
+          "damageMin": 1,
+          "damageMax": 2917,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "578b54d19b500654c2944c16a1fe83a0577105da0b28b5179cfff5d562373ad5"
+        },
+        {
+          "seed": 49028,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 11184,
+          "damageMin": 1,
+          "damageMax": 2907,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "1e60352dfa683b8a9a070a0cce7c3c6385c4c2df0c0266ed0309cd0dd1466408"
+        },
+        {
+          "seed": 49029,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 11415,
+          "damageMin": 1,
+          "damageMax": 3080,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "c3b24bb57f4498df7fd09c813432dbc85157cd4b2e21e4dc09c2ff18088fe18e"
+        },
+        {
+          "seed": 49030,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9934,
+          "damageMin": 1,
+          "damageMax": 1559,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "eb79c27a6f9951aff2dadc29834c745b2710f79e509a4507a3c4c2798011373f"
+        },
+        {
+          "seed": 49031,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 11322,
+          "damageMin": 1,
+          "damageMax": 2998,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "5412d8f79998c509dc5df37efe06a11cb74fdf2637c67c382d89cc03fec467f5"
+        },
+        {
+          "seed": 49032,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 10859,
+          "damageMin": 1,
+          "damageMax": 2730,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "4e39e91c11ecbaae17ad5deef0a2afc9d79a9daccc930219c11055eb51443460"
+        },
+        {
+          "seed": 49033,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 10919,
+          "damageMin": 1,
+          "damageMax": 2735,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "7b4e4723c8cb8b711ea0917b5445c4bd3365eeff835c371d0e9318a187015d82"
+        },
+        {
+          "seed": 49034,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 10008,
+          "damageMin": 1,
+          "damageMax": 1578,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 478,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "75f55263e43f3e5b8cd45c19ff5e168f24ae48a8dd1801f931c93d5d5b49ba5f"
+        },
+        {
+          "seed": 49035,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9660,
+          "damageMin": 1,
+          "damageMax": 1360,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "015905021d8b077c737334206c5505d75ef43c3e89c64ac52ed3d413ae6fbd6a"
+        },
+        {
+          "seed": 49036,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9641,
+          "damageMin": 1,
+          "damageMax": 1329,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 478,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "dda81fa6d36930bbc96d735c8e347f85fc535667b066ce70543990322e79a050"
+        },
+        {
+          "seed": 49037,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 10836,
+          "damageMin": 1,
+          "damageMax": 2626,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "c408010c12f84f043312b9d383a51565a1f984e7fefc8b43aabeebee1535bd2d"
+        },
+        {
+          "seed": 49038,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 11208,
+          "damageMin": 1,
+          "damageMax": 2721,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "298fb953d8cfe4f44e3f08cae754ac1ac2de03011ef5284800f6c31d69dd687b"
+        },
+        {
+          "seed": 49039,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9719,
+          "damageMin": 1,
+          "damageMax": 1398,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "ac0a2e7480c60f91a4357cc63bcffda2512c4f54f885dc2ed88e79a3b6d94c07"
+        },
+        {
+          "seed": 49040,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 11022,
+          "damageMin": 1,
+          "damageMax": 3086,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "fc699b10a457f948395567f9b4ef2eca528cf88b813e3180d1c65ee32ef726f7"
+        },
+        {
+          "seed": 49041,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 11215,
+          "damageMin": 1,
+          "damageMax": 3036,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "5aa784a2fca2299b8a1eaa241af0118e46b0790021c6141407c2e77451756b69"
+        },
+        {
+          "seed": 49042,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 23,
+          "wavesCleared": 2,
+          "damage": 10004,
+          "damageMin": 1,
+          "damageMax": 2654,
+          "damageEvents": 20,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 375,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "fe3600b095963aef6d915441cfdb999ce6b164d79c84a1cb99bc74fd13e812ee"
+        },
+        {
+          "seed": 49043,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 10994,
+          "damageMin": 1,
+          "damageMax": 2656,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "eba50719ccb6dea2c34ae5823fb5790f115d481a4beee44cdbf159f129869926"
+        },
+        {
+          "seed": 49044,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9942,
+          "damageMin": 1,
+          "damageMax": 1578,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "c2205475ac58f9741fe7e65a27fd1d2824a957ecc2135e8080b681ba551a3b51"
+        },
+        {
+          "seed": 49045,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9540,
+          "damageMin": 1,
+          "damageMax": 1403,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "9882c8fcfcad6513e4cff879f5059936c7a907b7e4c188c2e8643fda38c424bf"
+        },
+        {
+          "seed": 49046,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 11009,
+          "damageMin": 1,
+          "damageMax": 2762,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "d52417e0324c2eb8c86a1ddbb477da32ef6a23c16a329a97bb2924447452d978"
+        },
+        {
+          "seed": 49047,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 10775,
+          "damageMin": 1,
+          "damageMax": 2562,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "3d30f13ceaec875bdfdbbb00d1e98b566a84751a1fe6d3b23c4675002963f646"
+        },
+        {
+          "seed": 49048,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9785,
+          "damageMin": 1,
+          "damageMax": 1606,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "c6ea83514d21f9902cf38fe97ff9b5b3b364e8cb245b4db0cc296225c6333c39"
+        },
+        {
+          "seed": 49049,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 10658,
+          "damageMin": 1,
+          "damageMax": 2622,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "fb55144bcb46ead62d79b3a4a540182adfb17c81ed932115220a09eed0f89007"
+        },
+        {
+          "seed": 49050,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 11314,
+          "damageMin": 1,
+          "damageMax": 3089,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "24c883cb2ffc5a60584b7825cf3d70eefffea161093cc99ad373af5e94de3b70"
+        },
+        {
+          "seed": 49051,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 10696,
+          "damageMin": 1,
+          "damageMax": 2602,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "eea351262fdddc4a0b26e3e1d7fa7da45ac00e438d50f3f78cd19344b5224dd0"
+        },
+        {
+          "seed": 49052,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 11402,
+          "damageMin": 1,
+          "damageMax": 2939,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "4baf92b55651e6e07d7cf764e55517359a2cf905f3fcbb7fe26cf9991f86d6d6"
+        },
+        {
+          "seed": 49053,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 11107,
+          "damageMin": 1,
+          "damageMax": 2887,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "2671e323da34a7e758aff27c806d7daf34a1cae6dc066e135274cdb45b1f4788"
+        },
+        {
+          "seed": 49054,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9821,
+          "damageMin": 1,
+          "damageMax": 1407,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "edaab0dee46429ba77a7a83c54116ba2392e6c6d0f40ac826fdab0334683a8ae"
+        },
+        {
+          "seed": 49055,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 10938,
+          "damageMin": 1,
+          "damageMax": 2957,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "2df7fd12f449b7f5ca4758893bceb1035fa295ef9f564f10e340c0d49563155a"
+        },
+        {
+          "seed": 49056,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 23,
+          "wavesCleared": 2,
+          "damage": 8102,
+          "damageMin": 1,
+          "damageMax": 1112,
+          "damageEvents": 20,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 116,
+          "spGenerated": 406,
+          "casts": {
+            "basic": 16,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 2
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "8afbe78beb82efbab303181a008be5f042a3d78a9f0f0b2fc453af347524d6d6"
+        },
+        {
+          "seed": 49057,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9945,
+          "damageMin": 1,
+          "damageMax": 1590,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "27e9f9fd0e16a8080e57f28a771e42a6bfe40697e9f59139c52eb297be4c34fb"
+        },
+        {
+          "seed": 49058,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9762,
+          "damageMin": 1,
+          "damageMax": 1500,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "1aaa5d8f39e720bd26991cfe5aa2e252b08c4499dbc5543721801ced52bf0644"
+        },
+        {
+          "seed": 49059,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 24,
+          "wavesCleared": 2,
+          "damage": 10980,
+          "damageMin": 1,
+          "damageMax": 3049,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 95,
+          "spGenerated": 385,
+          "casts": {
+            "basic": 15,
+            "SKD009": 2,
+            "SKD034": 1,
+            "SKD038": 2,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "f3880b08fa8baf0be90e834807daceab6f80e5f789d1e23ac0450515c56bdd2b"
+        },
+        {
+          "seed": 49060,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 9849,
+          "damageMin": 1,
+          "damageMax": 1468,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 2,
+            "SKD034": 2,
+            "SKD038": 3,
+            "SKD010": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "934773629361252d523827807a305b4b3532740b6709643e2523c8139bcd21ca"
+        }
+      ]
+    },
+    "control": {
+      "n": 20,
+      "wins": 20,
+      "winRate": 1,
+      "actions": [
+        20,
+        23
+      ],
+      "meanActions": 21.5,
+      "allOneRuns": 0,
+      "reasons": {
+        "final_wave_defeated": 20
+      },
+      "runs": [
+        {
+          "seed": 50001,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 20,
+          "wavesCleared": 2,
+          "damage": 10229,
+          "damageMin": 1,
+          "damageMax": 2807,
+          "damageEvents": 20,
+          "oneDamage": 3,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 153,
+          "spGenerated": 323,
+          "casts": {
+            "basic": 13,
+            "SKD009": 3,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1
+          },
+          "effects": {},
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "bc323a4f80303dbfef1efc31b3ad58901d58374f3a04bdb889da23b869b830e9"
+        },
+        {
+          "seed": 50002,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 23,
+          "wavesCleared": 2,
+          "damage": 9446,
+          "damageMin": 1,
+          "damageMax": 1672,
+          "damageEvents": 23,
+          "oneDamage": 3,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 130,
+          "spGenerated": 406,
+          "casts": {
+            "basic": 16,
+            "SKD009": 3,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {},
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "7ce57263b7d2f28193c8876dbd91331b675d344162b5e664880774ab5699799f"
+        },
+        {
+          "seed": 50003,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 23,
+          "wavesCleared": 2,
+          "damage": 9175,
+          "damageMin": 1,
+          "damageMax": 1477,
+          "damageEvents": 23,
+          "oneDamage": 3,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 130,
+          "spGenerated": 406,
+          "casts": {
+            "basic": 16,
+            "SKD009": 3,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {},
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "042af53b44cb7777612d17ebfeb557b65207f0dd9a3082c924464c2275a636c6"
+        },
+        {
+          "seed": 50004,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 21,
+          "wavesCleared": 2,
+          "damage": 10519,
+          "damageMin": 1,
+          "damageMax": 2682,
+          "damageEvents": 21,
+          "oneDamage": 3,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 153,
+          "spGenerated": 344,
+          "casts": {
+            "basic": 14,
+            "SKD009": 3,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {},
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "472ab7aa7fa72bd119c3e64b6c50ca6daa482da0a53697e32bc2722f1fff3b88"
+        },
+        {
+          "seed": 50005,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 23,
+          "wavesCleared": 2,
+          "damage": 9256,
+          "damageMin": 1,
+          "damageMax": 1627,
+          "damageEvents": 23,
+          "oneDamage": 3,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 130,
+          "spGenerated": 406,
+          "casts": {
+            "basic": 16,
+            "SKD009": 3,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {},
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "1c622c5e85757e8313dd76aa554c392e8dd1efecf30b5c364d6384749e4a9e8d"
+        },
+        {
+          "seed": 50006,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 23,
+          "wavesCleared": 2,
+          "damage": 9549,
+          "damageMin": 1,
+          "damageMax": 1541,
+          "damageEvents": 23,
+          "oneDamage": 3,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 130,
+          "spGenerated": 406,
+          "casts": {
+            "basic": 16,
+            "SKD009": 3,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {},
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "65b36a938e1fa56319a510730c759d33e6faa06eb1ac8e58a1e91567a3e2473a"
+        },
+        {
+          "seed": 50007,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 23,
+          "wavesCleared": 2,
+          "damage": 9543,
+          "damageMin": 1,
+          "damageMax": 1506,
+          "damageEvents": 23,
+          "oneDamage": 3,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 130,
+          "spGenerated": 406,
+          "casts": {
+            "basic": 16,
+            "SKD009": 3,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {},
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "21d0409453a09cd5de34d4784eba883b57f8aa5bf8bec74d73076d340e4af233"
+        },
+        {
+          "seed": 50008,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 21,
+          "wavesCleared": 2,
+          "damage": 10371,
+          "damageMin": 1,
+          "damageMax": 2727,
+          "damageEvents": 21,
+          "oneDamage": 3,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 153,
+          "spGenerated": 344,
+          "casts": {
+            "basic": 14,
+            "SKD009": 3,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {},
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "c0797520011ad2a68d5e244902b425ab19b583ac709311844ede7e947d327132"
+        },
+        {
+          "seed": 50009,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 20,
+          "wavesCleared": 2,
+          "damage": 10251,
+          "damageMin": 1,
+          "damageMax": 2687,
+          "damageEvents": 20,
+          "oneDamage": 3,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 153,
+          "spGenerated": 323,
+          "casts": {
+            "basic": 13,
+            "SKD009": 3,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1
+          },
+          "effects": {},
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "b852175ab925f9a3cc25e3972671d305293539c3c531713677485fbf9198dd1a"
+        },
+        {
+          "seed": 50010,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 23,
+          "wavesCleared": 2,
+          "damage": 9532,
+          "damageMin": 1,
+          "damageMax": 1782,
+          "damageEvents": 23,
+          "oneDamage": 3,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 130,
+          "spGenerated": 406,
+          "casts": {
+            "basic": 16,
+            "SKD009": 3,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {},
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "ef21ddb4a61e72bfd7dc24c94f2411ebac0ce300e5b03eac7c16b930c939c14d"
+        },
+        {
+          "seed": 50011,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 20,
+          "wavesCleared": 2,
+          "damage": 10398,
+          "damageMin": 1,
+          "damageMax": 2742,
+          "damageEvents": 20,
+          "oneDamage": 3,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 153,
+          "spGenerated": 323,
+          "casts": {
+            "basic": 13,
+            "SKD009": 3,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1
+          },
+          "effects": {},
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "d98d74bfeb9147c2f8ce943c297c569ce129266ab6d76d126410fa15d6a0f0ce"
+        },
+        {
+          "seed": 50012,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 23,
+          "wavesCleared": 2,
+          "damage": 9584,
+          "damageMin": 1,
+          "damageMax": 1789,
+          "damageEvents": 23,
+          "oneDamage": 3,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 130,
+          "spGenerated": 406,
+          "casts": {
+            "basic": 16,
+            "SKD009": 3,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {},
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "c51439c8eb033f77f37c748bbbb09d6831410a6a8780531da5c4bc43bd3a179f"
+        },
+        {
+          "seed": 50013,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 20,
+          "wavesCleared": 2,
+          "damage": 10142,
+          "damageMin": 1,
+          "damageMax": 2674,
+          "damageEvents": 20,
+          "oneDamage": 3,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 153,
+          "spGenerated": 323,
+          "casts": {
+            "basic": 13,
+            "SKD009": 3,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1
+          },
+          "effects": {},
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "dc7a56a7b99c0ae722dc76c7a45401d861851be0fbd463fc6d95a30cd1e6acc0"
+        },
+        {
+          "seed": 50014,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 20,
+          "wavesCleared": 2,
+          "damage": 10431,
+          "damageMin": 1,
+          "damageMax": 2611,
+          "damageEvents": 20,
+          "oneDamage": 3,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 153,
+          "spGenerated": 323,
+          "casts": {
+            "basic": 13,
+            "SKD009": 3,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1
+          },
+          "effects": {},
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "4c2bb93105c5a99f51ff434334b803b5c130256ca70ead083b8f3a18c461895e"
+        },
+        {
+          "seed": 50015,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 23,
+          "wavesCleared": 2,
+          "damage": 9333,
+          "damageMin": 1,
+          "damageMax": 1607,
+          "damageEvents": 23,
+          "oneDamage": 3,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 130,
+          "spGenerated": 406,
+          "casts": {
+            "basic": 16,
+            "SKD009": 3,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {},
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "04507aaf76bada42ae851b4dd5ab46fc23052c9feb1986f8cd079fffc66733f2"
+        },
+        {
+          "seed": 50016,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 21,
+          "wavesCleared": 2,
+          "damage": 10803,
+          "damageMin": 1,
+          "damageMax": 2934,
+          "damageEvents": 21,
+          "oneDamage": 3,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 153,
+          "spGenerated": 344,
+          "casts": {
+            "basic": 14,
+            "SKD009": 3,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {},
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "b2ec57560183dcf4a5fc5b764ad159c7317389d431a77ca2404f106e0a7673ef"
+        },
+        {
+          "seed": 50017,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 20,
+          "wavesCleared": 2,
+          "damage": 10471,
+          "damageMin": 1,
+          "damageMax": 2664,
+          "damageEvents": 20,
+          "oneDamage": 3,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 153,
+          "spGenerated": 323,
+          "casts": {
+            "basic": 13,
+            "SKD009": 3,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1
+          },
+          "effects": {},
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "88e3a374f4d01051f3e1cf1cea4dbedc9f306fc29777ede1d58ce71f0bfbf027"
+        },
+        {
+          "seed": 50018,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 20,
+          "wavesCleared": 2,
+          "damage": 10590,
+          "damageMin": 1,
+          "damageMax": 2902,
+          "damageEvents": 20,
+          "oneDamage": 3,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 153,
+          "spGenerated": 323,
+          "casts": {
+            "basic": 13,
+            "SKD009": 3,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1
+          },
+          "effects": {},
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "4f26aa4af22ccb787ffa6957315cb9892a9c6645a15554116620304fbb3c25ee"
+        },
+        {
+          "seed": 50019,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 20,
+          "wavesCleared": 2,
+          "damage": 10734,
+          "damageMin": 1,
+          "damageMax": 2777,
+          "damageEvents": 20,
+          "oneDamage": 3,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 153,
+          "spGenerated": 323,
+          "casts": {
+            "basic": 13,
+            "SKD009": 3,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1
+          },
+          "effects": {},
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "7758980e990a67495787b4178fe22d16dcd72e5c4990ef5c13cb7966002196be"
+        },
+        {
+          "seed": 50020,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 23,
+          "wavesCleared": 2,
+          "damage": 9551,
+          "damageMin": 1,
+          "damageMax": 1576,
+          "damageEvents": 23,
+          "oneDamage": 3,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 130,
+          "spGenerated": 406,
+          "casts": {
+            "basic": 16,
+            "SKD009": 3,
+            "SKD010": 4
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {},
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "e212d75915b26f13bffd1adfbc3a4b97ba0169c000e993087c37afff70b7f0f5"
+        }
+      ]
+    },
+    "alternative": {
+      "n": 20,
+      "wins": 20,
+      "winRate": 1,
+      "actions": [
+        21,
+        28
+      ],
+      "meanActions": 24.6,
+      "allOneRuns": 0,
+      "reasons": {
+        "final_wave_defeated": 20
+      },
+      "runs": [
+        {
+          "seed": 50001,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 10467,
+          "damageMin": 1,
+          "damageMax": 1822,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 5,
+            "SKD034": 2,
+            "SKD038": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "a84d19ef70173abd045564dcc2a45a2b63a2ed90798b238e1185055089eb83a5"
+        },
+        {
+          "seed": 50002,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 23,
+          "wavesCleared": 2,
+          "damage": 10002,
+          "damageMin": 1,
+          "damageMax": 2051,
+          "damageEvents": 20,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 91,
+          "spGenerated": 354,
+          "casts": {
+            "basic": 14,
+            "SKD009": 6,
+            "SKD034": 1,
+            "SKD038": 2
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "c5a9175aed5b91f1842f87322deb7b9709502558976e67247f70d6eadeae1327"
+        },
+        {
+          "seed": 50003,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 10534,
+          "damageMin": 1,
+          "damageMax": 1726,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 478,
+          "casts": {
+            "basic": 18,
+            "SKD009": 5,
+            "SKD034": 2,
+            "SKD038": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "9bee1939585bff11cb40a03928d7bc51b4d4443ecbba1daeb5e4be696697d17c"
+        },
+        {
+          "seed": 50004,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 22,
+          "wavesCleared": 2,
+          "damage": 8805,
+          "damageMin": 1,
+          "damageMax": 1724,
+          "damageEvents": 19,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 91,
+          "spGenerated": 354,
+          "casts": {
+            "basic": 14,
+            "SKD009": 5,
+            "SKD034": 1,
+            "SKD038": 2
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "b4b9b93fb1677eb9825e57e9bdacc714bd357bbdf23d153bf59078118f9388a4"
+        },
+        {
+          "seed": 50005,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 10057,
+          "damageMin": 1,
+          "damageMax": 1585,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 5,
+            "SKD034": 2,
+            "SKD038": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "446f12d71073bc84d3b31f1d28eb8c180c12f30937c4498c19697b4c0721b81b"
+        },
+        {
+          "seed": 50006,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 21,
+          "wavesCleared": 2,
+          "damage": 8979,
+          "damageMin": 1,
+          "damageMax": 2017,
+          "damageEvents": 18,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 91,
+          "spGenerated": 333,
+          "casts": {
+            "basic": 13,
+            "SKD009": 5,
+            "SKD034": 1,
+            "SKD038": 2
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "f25fe9492c8ea87ec75c72a8f76585c041b5a460f5000a68137f0eaa3281af31"
+        },
+        {
+          "seed": 50007,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 23,
+          "wavesCleared": 2,
+          "damage": 9343,
+          "damageMin": 1,
+          "damageMax": 1697,
+          "damageEvents": 20,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 116,
+          "spGenerated": 406,
+          "casts": {
+            "basic": 16,
+            "SKD009": 4,
+            "SKD034": 1,
+            "SKD038": 2
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "26ac1521f71b10378360f0c7f70d35bcea048a0fea4a4455e3046f137c2d392d"
+        },
+        {
+          "seed": 50008,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 22,
+          "wavesCleared": 2,
+          "damage": 8916,
+          "damageMin": 1,
+          "damageMax": 1883,
+          "damageEvents": 19,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 91,
+          "spGenerated": 354,
+          "casts": {
+            "basic": 14,
+            "SKD009": 5,
+            "SKD034": 1,
+            "SKD038": 2
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "ebb3b82e1d3ba1f1b8f2a12392ce51c403707449a18142d7f28c33b8c53a16af"
+        },
+        {
+          "seed": 50009,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 22,
+          "wavesCleared": 2,
+          "damage": 8984,
+          "damageMin": 1,
+          "damageMax": 1895,
+          "damageEvents": 19,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 91,
+          "spGenerated": 354,
+          "casts": {
+            "basic": 14,
+            "SKD009": 5,
+            "SKD034": 1,
+            "SKD038": 2
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "58790ae15375c3fa3d1d5d27f5ab94bd69fd4e6b2290b72a5bb56824aa5271f6"
+        },
+        {
+          "seed": 50010,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 22,
+          "wavesCleared": 2,
+          "damage": 9891,
+          "damageMin": 1,
+          "damageMax": 2035,
+          "damageEvents": 19,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 91,
+          "spGenerated": 333,
+          "casts": {
+            "basic": 13,
+            "SKD009": 6,
+            "SKD034": 1,
+            "SKD038": 2
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "5fa817b4d6f1e371cb0b9a5ec7a4e3a3dd94a05ec20e17064a4bb062202736d5"
+        },
+        {
+          "seed": 50011,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 10588,
+          "damageMin": 1,
+          "damageMax": 1804,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 478,
+          "casts": {
+            "basic": 18,
+            "SKD009": 5,
+            "SKD034": 2,
+            "SKD038": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "1dc051f2edd801e3841db9e8ccfa1397e2312313f1de5a6948d718cd1c30ecc8"
+        },
+        {
+          "seed": 50012,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 23,
+          "wavesCleared": 2,
+          "damage": 9848,
+          "damageMin": 1,
+          "damageMax": 1991,
+          "damageEvents": 20,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 91,
+          "spGenerated": 354,
+          "casts": {
+            "basic": 14,
+            "SKD009": 6,
+            "SKD034": 1,
+            "SKD038": 2
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "c76b7087156cee9e295ddeb96596ec7674616dc41a1f84ceadf2cd5e276c41a0"
+        },
+        {
+          "seed": 50013,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 10377,
+          "damageMin": 1,
+          "damageMax": 1849,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 478,
+          "casts": {
+            "basic": 18,
+            "SKD009": 5,
+            "SKD034": 2,
+            "SKD038": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "46210f0247e75d3bb9f934dca7d7fcc433a468b0adf1b20eee293c259863ec24"
+        },
+        {
+          "seed": 50014,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 22,
+          "wavesCleared": 2,
+          "damage": 8859,
+          "damageMin": 1,
+          "damageMax": 1802,
+          "damageEvents": 19,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 91,
+          "spGenerated": 354,
+          "casts": {
+            "basic": 14,
+            "SKD009": 5,
+            "SKD034": 1,
+            "SKD038": 2
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 1,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "7c6688a6313c4fe7f5ce85c2758b0512b11db8bfb9d9074ee04b197c88b927a3"
+        },
+        {
+          "seed": 50015,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 22,
+          "wavesCleared": 2,
+          "damage": 10082,
+          "damageMin": 1,
+          "damageMax": 2074,
+          "damageEvents": 19,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 91,
+          "spGenerated": 333,
+          "casts": {
+            "basic": 13,
+            "SKD009": 6,
+            "SKD034": 1,
+            "SKD038": 2
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "3b9ec84d54ed67d0dea3581e30d8b60f6f2e2dd9ff5b3cead37590149d947e90"
+        },
+        {
+          "seed": 50016,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 27,
+          "wavesCleared": 2,
+          "damage": 8759,
+          "damageMin": 1,
+          "damageMax": 1856,
+          "damageEvents": 22,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 4,
+            "SKD034": 2,
+            "SKD038": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "4d030fd5b3eefd2a32505b055aaee50b37776e2252f7339e11449780df736f1a"
+        },
+        {
+          "seed": 50017,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 25,
+          "wavesCleared": 2,
+          "damage": 8955,
+          "damageMin": 1,
+          "damageMax": 2021,
+          "damageEvents": 21,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 437,
+          "casts": {
+            "basic": 17,
+            "SKD009": 4,
+            "SKD034": 1,
+            "SKD038": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "e473a03c61309456e951f3a906ef6df4901ff624dbd0bd2b0f218ec662725dc6"
+        },
+        {
+          "seed": 50018,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 10442,
+          "damageMin": 1,
+          "damageMax": 1773,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 468,
+          "casts": {
+            "basic": 18,
+            "SKD009": 5,
+            "SKD034": 2,
+            "SKD038": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "201a9a55a7349c29ee70ca22592c3e14b4165cb4cf33ce36e9ec8cee42c55209"
+        },
+        {
+          "seed": 50019,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 28,
+          "wavesCleared": 2,
+          "damage": 10706,
+          "damageMin": 1,
+          "damageMax": 1819,
+          "damageEvents": 23,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 0,
+          "spMin": 0,
+          "spMax": 112,
+          "spGenerated": 478,
+          "casts": {
+            "basic": 18,
+            "SKD009": 5,
+            "SKD034": 2,
+            "SKD038": 3
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 2,
+            "SKD038:effect_applied": 3
+          },
+          "minEnemyEffectiveDef": 221.2955603624482,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "f283380b911f22ab71e05e2d2cec7b064cf7f64655d9b3a8c4c3f1d81b54067b"
+        },
+        {
+          "seed": 50020,
+          "outcome": "win",
+          "reason": "final_wave_defeated",
+          "actions": 22,
+          "wavesCleared": 2,
+          "damage": 9668,
+          "damageMin": 1,
+          "damageMax": 1853,
+          "damageEvents": 19,
+          "oneDamage": 2,
+          "allOne": false,
+          "bursts": 1,
+          "spMin": 0,
+          "spMax": 91,
+          "spGenerated": 333,
+          "casts": {
+            "basic": 13,
+            "SKD009": 6,
+            "SKD034": 1,
+            "SKD038": 2
+          },
+          "enemyCasts": {
+            "SKD034": 1,
+            "basic": 3,
+            "SKD008": 2
+          },
+          "effects": {
+            "SKD034:effect_applied": 1,
+            "SKD038:effect_applied": 2
+          },
+          "minEnemyEffectiveDef": 260,
+          "maxEnemyEffectiveDef": 1311,
+          "alive": 5,
+          "resultHash": "c776748b49321430d6afed57d1cd1005f1ae0145eb34813d52028bba4673a7c4"
+        }
+      ]
+    },
+    "loadout": [
+      {
+        "id": "char_joe_01",
+        "level": 30,
+        "awakening": 0,
+        "exp": 30210,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "北条氏康",
+        "skills": [
+          {
+            "id": "SKD034",
+            "lb": 3
+          }
+        ],
+        "equipment": [
+          {
+            "instanceId": "audit-0-0",
+            "masterId": "WEAPON_009",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "weapon",
+            "stats": {
+              "hp": 0,
+              "atk": 235.24568938988057,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-0-1",
+            "masterId": "HEAD_008",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "head",
+            "stats": {
+              "hp": 88.21713352120521,
+              "atk": 0,
+              "def": 76.4548490517112,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-0-2",
+            "masterId": "BODY_008",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "body",
+            "stats": {
+              "hp": 823.359912864582,
+              "atk": 0,
+              "def": 23.524568938988057,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-0-3",
+            "masterId": "LEGS_006",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "legs",
+            "stats": {
+              "hp": 294.05711173735074,
+              "atk": 0,
+              "def": 70.57370681696418,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-0-4",
+            "masterId": "ACCESSORY_013",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "accessory1",
+            "stats": {
+              "hp": 29.40571117373507,
+              "atk": 188.19655151190446,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-0-5",
+            "masterId": "ACCESSORY_013",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "accessory2",
+            "stats": {
+              "hp": 29.40571117373507,
+              "atk": 188.19655151190446,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          }
+        ]
+      },
+      {
+        "id": "char_yuki_01",
+        "level": 30,
+        "awakening": 0,
+        "exp": 30210,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "竹中半兵衛",
+        "skills": [
+          {
+            "id": "SKD038",
+            "lb": 3
+          }
+        ],
+        "equipment": [
+          {
+            "instanceId": "audit-1-0",
+            "masterId": "WEAPON_009",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "weapon",
+            "stats": {
+              "hp": 0,
+              "atk": 235.24568938988057,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-1-1",
+            "masterId": "HEAD_008",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "head",
+            "stats": {
+              "hp": 88.21713352120521,
+              "atk": 0,
+              "def": 76.4548490517112,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-1-2",
+            "masterId": "BODY_008",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "body",
+            "stats": {
+              "hp": 823.359912864582,
+              "atk": 0,
+              "def": 23.524568938988057,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-1-3",
+            "masterId": "LEGS_006",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "legs",
+            "stats": {
+              "hp": 294.05711173735074,
+              "atk": 0,
+              "def": 70.57370681696418,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-1-4",
+            "masterId": "ACCESSORY_013",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "accessory1",
+            "stats": {
+              "hp": 29.40571117373507,
+              "atk": 188.19655151190446,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-1-5",
+            "masterId": "ACCESSORY_013",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "accessory2",
+            "stats": {
+              "hp": 29.40571117373507,
+              "atk": 188.19655151190446,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          }
+        ]
+      },
+      {
+        "id": "char_daimon_01",
+        "level": 30,
+        "awakening": 0,
+        "exp": 30210,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "井伊直政",
+        "skills": [
+          {
+            "id": "SKD010",
+            "lb": 3
+          }
+        ],
+        "equipment": [
+          {
+            "instanceId": "audit-2-0",
+            "masterId": "WEAPON_009",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "weapon",
+            "stats": {
+              "hp": 0,
+              "atk": 235.24568938988057,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-2-1",
+            "masterId": "HEAD_008",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "head",
+            "stats": {
+              "hp": 88.21713352120521,
+              "atk": 0,
+              "def": 76.4548490517112,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-2-2",
+            "masterId": "BODY_008",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "body",
+            "stats": {
+              "hp": 823.359912864582,
+              "atk": 0,
+              "def": 23.524568938988057,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-2-3",
+            "masterId": "LEGS_006",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "legs",
+            "stats": {
+              "hp": 294.05711173735074,
+              "atk": 0,
+              "def": 70.57370681696418,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-2-4",
+            "masterId": "ACCESSORY_013",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "accessory1",
+            "stats": {
+              "hp": 29.40571117373507,
+              "atk": 188.19655151190446,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-2-5",
+            "masterId": "ACCESSORY_013",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "accessory2",
+            "stats": {
+              "hp": 29.40571117373507,
+              "atk": 188.19655151190446,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          }
+        ]
+      },
+      {
+        "id": "char_jihoon_01",
+        "level": 30,
+        "awakening": 0,
+        "exp": 30210,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "前田利家",
+        "skills": [
+          {
+            "id": "SKD009",
+            "lb": 3
+          }
+        ],
+        "equipment": [
+          {
+            "instanceId": "audit-3-0",
+            "masterId": "WEAPON_009",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "weapon",
+            "stats": {
+              "hp": 0,
+              "atk": 235.24568938988057,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-3-1",
+            "masterId": "HEAD_008",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "head",
+            "stats": {
+              "hp": 88.21713352120521,
+              "atk": 0,
+              "def": 76.4548490517112,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-3-2",
+            "masterId": "BODY_008",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "body",
+            "stats": {
+              "hp": 823.359912864582,
+              "atk": 0,
+              "def": 23.524568938988057,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-3-3",
+            "masterId": "LEGS_006",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "legs",
+            "stats": {
+              "hp": 294.05711173735074,
+              "atk": 0,
+              "def": 70.57370681696418,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-3-4",
+            "masterId": "ACCESSORY_013",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "accessory1",
+            "stats": {
+              "hp": 29.40571117373507,
+              "atk": 188.19655151190446,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-3-5",
+            "masterId": "ACCESSORY_013",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "accessory2",
+            "stats": {
+              "hp": 29.40571117373507,
+              "atk": 188.19655151190446,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          }
+        ]
+      },
+      {
+        "id": "char_aoi_01",
+        "level": 30,
+        "awakening": 0,
+        "exp": 30210,
+        "growthVersion": "APPROVED_GROWTH_V1_20260921",
+        "name": "お市の方",
+        "skills": [
+          {
+            "id": "SKD039",
+            "lb": 3
+          }
+        ],
+        "equipment": [
+          {
+            "instanceId": "audit-4-0",
+            "masterId": "WEAPON_009",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "weapon",
+            "stats": {
+              "hp": 0,
+              "atk": 235.24568938988057,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-4-1",
+            "masterId": "HEAD_008",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "head",
+            "stats": {
+              "hp": 88.21713352120521,
+              "atk": 0,
+              "def": 76.4548490517112,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-4-2",
+            "masterId": "BODY_008",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "body",
+            "stats": {
+              "hp": 823.359912864582,
+              "atk": 0,
+              "def": 23.524568938988057,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-4-3",
+            "masterId": "LEGS_006",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "legs",
+            "stats": {
+              "hp": 294.05711173735074,
+              "atk": 0,
+              "def": 70.57370681696418,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-4-4",
+            "masterId": "ACCESSORY_013",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "accessory1",
+            "stats": {
+              "hp": 29.40571117373507,
+              "atk": 188.19655151190446,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          },
+          {
+            "instanceId": "audit-4-5",
+            "masterId": "ACCESSORY_013",
+            "level": 30,
+            "lb": 0,
+            "exp": 18120,
+            "growthVersion": "APPROVED_GROWTH_V1_20260921",
+            "slot": "accessory2",
+            "stats": {
+              "hp": 29.40571117373507,
+              "atk": 188.19655151190446,
+              "def": 0,
+              "luk": 0,
+              "sp": 0
+            }
+          }
+        ]
+      }
+    ],
+    "costs": {
+      "fromLevel1": true,
+      "charExp": 151050,
+      "eqExp": 543600,
+      "cash": 470850,
+      "skillMaterials": 48,
+      "equipmentMaterials": 0,
+      "awakeningSouls": {
+        "char_joe_01": 0,
+        "char_yuki_01": 0,
+        "char_daimon_01": 0,
+        "char_jihoon_01": 0,
+        "char_aoi_01": 0
+      },
+      "acquisitionCostsExcluded": true
+    },
+    "status": "conditional"
+  }
+]

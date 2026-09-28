@@ -1,0 +1,7 @@
+import fs from'node:fs';import zlib from'node:zlib';import{buildBattleParty}from'../src/domain/redesign/masters.ts';import{OUT,save,run,inputFor,alter,candidates}from'./rebuild_stage68_five_tier.mjs';
+const x=JSON.parse(zlib.gunzipSync(fs.readFileSync(OUT+'/10-10-screen.json.gz')));save('10-10-exploration-v1.json.gz',x);const p=x.stageProposal;
+// Six waves remain. Allocate the latter bosses a finite action budget under the shared Lv80/R profile.
+const edits=[['10-10/2/1','atk',5000],['10-10/4/1','atk',5000],['10-10/5/1','hp',90000],['10-10/5/1','atk',6500],['10-10/5/1','def',4200],['10-10/6/1','hp',110000],['10-10/6/1','atk',6500],['10-10/6/1','def',4200],['10-10/6/2','hp',60000],['10-10/6/2','atk',4200],['10-10/6/2','def',3200]];
+for(const [id,k,v]of edits){let e=p.waves.flat().find(e=>e.id===id);x.history.push({enemy:id,field:'stats.'+k,before:e.stats[k],after:v,reason:'6派を維持したLv80/R装備の行動・耐久予算候補。独立試行で採否判定'});e.stats[k]=v;}
+const cs=candidates(x.stageOriginal);for(let n=0;n<45;n++){const vs=cs.map(c=>run(inputFor(p,c),81001,6,true));cs.forEach((c,i)=>c.screen=vs[i]);const w=cs.find(c=>c.screen.wins===6);if(w&&cs.some(c=>c.family!==w.family&&!['raw','order-error'].includes(c.family)&&c.screen.wins>=4)||n===44)break;x.history.push(...alter(p,vs,cs,n));}
+x.candidates=cs.map(c=>({name:c.name,family:c.family,state:c.state,costs:c.costs,screen:c.screen,original:run(inputFor(x.stageOriginal,c),81001,6)}));save('10-10-screen.json.gz',x);console.log('10-10',x.history.length,cs.map(c=>[c.name,c.screen.wins]));

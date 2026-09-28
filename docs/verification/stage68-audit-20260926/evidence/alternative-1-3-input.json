@@ -1,0 +1,519 @@
+{
+  "seed": 1,
+  "party": [
+    {
+      "id": "char_joe_01",
+      "name": "北条氏康",
+      "image": "/characters/joe_transparent_asset.png",
+      "level": 5,
+      "element": "earth",
+      "stats": {
+        "hp": 1364.3777777777777,
+        "atk": 136.60833333333335,
+        "def": 78.86666666666667,
+        "luk": 10.816326530612244,
+        "sp": 73
+      },
+      "skills": [
+        {
+          "id": "SKD035",
+          "name": "鬨の声",
+          "image": "/skills/skill_017_acid_spray.jpg",
+          "rarity": "R",
+          "element": "fire",
+          "spCost": 75,
+          "condition": {
+            "type": "always"
+          },
+          "target": "all_allies",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "atk_up",
+              "power": 8,
+              "duration": 3,
+              "carryAcrossWaves": true
+            }
+          ],
+          "description": "味方全体の付与可能者・ATK強化:8.00%・3ターン"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P15",
+          "type": "P15",
+          "name": "HP70%以上で自身DEF",
+          "stat": "def",
+          "percent": 8,
+          "level": 0,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_daimon_01",
+      "name": "井伊直政",
+      "image": "/characters/daimon_transparent_asset.png",
+      "level": 5,
+      "element": "fire",
+      "stats": {
+        "hp": 954.6666666666666,
+        "atk": 221.00000000000003,
+        "def": 58.93333333333334,
+        "luk": 10.816326530612244,
+        "sp": 73
+      },
+      "skills": [
+        {
+          "id": "SKD003",
+          "name": "土割り",
+          "image": "/skills/formal/SKD003.webp",
+          "rarity": "N",
+          "element": "earth",
+          "spCost": 25,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": true,
+          "effects": [
+            {
+              "type": "damage",
+              "power": 105
+            }
+          ],
+          "description": "先頭敵・攻撃倍率:105.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P06",
+          "type": "P06",
+          "name": "単体攻撃スキルダメージ",
+          "stat": "atk",
+          "percent": 4,
+          "level": 0,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_aoi_01",
+      "name": "お市の方",
+      "image": "/characters/aoi_transparent_asset.png",
+      "level": 5,
+      "element": "fire",
+      "stats": {
+        "hp": 1061.0722222222223,
+        "atk": 204.75000000000003,
+        "def": 59.45333333333334,
+        "luk": 10.816326530612244,
+        "sp": 85
+      },
+      "skills": [
+        {
+          "id": "SKD039",
+          "name": "応急手当",
+          "image": "/skills/skill_003_noise_heal.jpg",
+          "rarity": "N",
+          "element": "water",
+          "spCost": 35,
+          "condition": {
+            "type": "ally_hp_below",
+            "value": 0.5
+          },
+          "target": "lowest_ally",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "heal",
+              "power": 35,
+              "healingFormula": "caster_atk_percent"
+            }
+          ],
+          "description": "共通単体回復条件・回復倍率:35.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P10",
+          "type": "P10",
+          "name": "与回復量（蘇生除外）",
+          "stat": "atk",
+          "percent": 8,
+          "level": 0,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_jihoon_01",
+      "name": "前田利家",
+      "image": "/characters/jihoon_transparent_asset.png",
+      "level": 5,
+      "element": "earth",
+      "stats": {
+        "hp": 1145.6,
+        "atk": 187.85000000000002,
+        "def": 67.77333333333333,
+        "luk": 10.816326530612244,
+        "sp": 98
+      },
+      "skills": [
+        {
+          "id": "SKD009",
+          "name": "岩断",
+          "image": "/skills/formal/SKD009.webp",
+          "rarity": "R",
+          "element": "earth",
+          "spCost": 50,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": true,
+          "effects": [
+            {
+              "type": "damage",
+              "power": 120
+            }
+          ],
+          "description": "先頭敵・攻撃倍率:120.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P05",
+          "type": "P05",
+          "name": "通常攻撃ダメージ",
+          "stat": "atk",
+          "percent": 8,
+          "level": 0,
+          "target": "self"
+        }
+      ]
+    }
+  ],
+  "waves": [
+    [
+      {
+        "id": "1-3/W1/1",
+        "name": "女侍",
+        "image": "/creative/characters/battle/char_long_01.png",
+        "level": 5,
+        "stats": {
+          "luk": 0,
+          "hp": 700,
+          "atk": 50,
+          "def": 15,
+          "sp": 100
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "earth",
+        "actionCount": 7,
+        "initialCount": 7,
+        "initialSp": 0,
+        "skills": [],
+        "passives": []
+      },
+      {
+        "id": "1-3/W1/2",
+        "name": "弓兵",
+        "image": "/creative/characters/battle/char_masato_01.png",
+        "level": 5,
+        "stats": {
+          "luk": 0,
+          "hp": 500,
+          "atk": 45,
+          "def": 15,
+          "sp": 100
+        },
+        "order": 1,
+        "hitSpGain": 10,
+        "element": "water",
+        "actionCount": 7,
+        "initialCount": 7,
+        "initialSp": 0,
+        "skills": [],
+        "passives": []
+      }
+    ],
+    [
+      {
+        "id": "1-3/W2/1",
+        "name": "直江兼続",
+        "image": "/creative/characters/battle/char_rui_01.png",
+        "level": 5,
+        "stats": {
+          "luk": 0,
+          "hp": 1500,
+          "atk": 100,
+          "def": 25,
+          "sp": 100
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "water",
+        "actionCount": 8,
+        "initialCount": 8,
+        "initialSp": 0,
+        "skills": [],
+        "passives": [],
+        "boss": true
+      },
+      {
+        "id": "1-3/W2/2",
+        "name": "鉄砲兵",
+        "image": "/creative/characters/battle/char_tomoya_01.png",
+        "level": 5,
+        "stats": {
+          "luk": 0,
+          "hp": 700,
+          "atk": 60,
+          "def": 15,
+          "sp": 100
+        },
+        "order": 1,
+        "hitSpGain": 10,
+        "element": "water",
+        "actionCount": 8,
+        "initialCount": 8,
+        "initialSp": 0,
+        "skills": [],
+        "passives": []
+      }
+    ]
+  ],
+  "rules": {
+    "defenseFactor": 1,
+    "advantageMultiplier": 1.5,
+    "disadvantageMultiplier": 0.75,
+    "spRecoveryDivisor": 120,
+    "burstLukDivisor": 20,
+    "enemySpRecoveryDivisor": 30,
+    "maxPlayerActions": 300,
+    "initialSpRatio": 0,
+    "version": "balance-v2-20260920",
+    "burstPolicy": "attack-free-v1-20260926",
+    "inputVersion": "wave-sp-v1-20260921",
+    "balanceV2": {
+      "status": "PREVIEW_PROVISIONAL",
+      "version": "PREVIEW_PROVISIONAL_BALANCE_V2_20260920",
+      "damageBonusCap": 50,
+      "healingBonusCap": 80,
+      "shieldBonusCap": 50,
+      "shieldHpCap": 0.5,
+      "periodicCapMultiplier": 2,
+      "lowHpThreshold": 0.4,
+      "highHpThreshold": 0.7,
+      "diversityFactors": [
+        0,
+        0.25,
+        0.5,
+        0.75,
+        1
+      ]
+    }
+  },
+  "earlyQuestAssist": {
+    "version": "area1-assist-v1-20260926",
+    "stageId": "mikawa-3",
+    "actionGainMultiplier": 2,
+    "burstChance": 0.8
+  },
+  "questSnapshot": {
+    "id": "mikawa-3",
+    "designId": "1-3",
+    "areaId": "mikawa",
+    "index": 3,
+    "name": "夕映えの陣",
+    "description": "一つ変えて突破する",
+    "energyCost": 5,
+    "waves": [
+      [
+        {
+          "id": "1-3/W1/1",
+          "name": "女侍",
+          "image": "/creative/characters/battle/char_long_01.png",
+          "level": 5,
+          "stats": {
+            "luk": 0,
+            "hp": 700,
+            "atk": 50,
+            "def": 15,
+            "sp": 100
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "earth",
+          "actionCount": 7,
+          "initialCount": 7,
+          "initialSp": 0,
+          "skills": [],
+          "passives": []
+        },
+        {
+          "id": "1-3/W1/2",
+          "name": "弓兵",
+          "image": "/creative/characters/battle/char_masato_01.png",
+          "level": 5,
+          "stats": {
+            "luk": 0,
+            "hp": 500,
+            "atk": 45,
+            "def": 15,
+            "sp": 100
+          },
+          "order": 1,
+          "hitSpGain": 10,
+          "element": "water",
+          "actionCount": 7,
+          "initialCount": 7,
+          "initialSp": 0,
+          "skills": [],
+          "passives": []
+        }
+      ],
+      [
+        {
+          "id": "1-3/W2/1",
+          "name": "直江兼続",
+          "image": "/creative/characters/battle/char_rui_01.png",
+          "level": 5,
+          "stats": {
+            "luk": 0,
+            "hp": 1500,
+            "atk": 100,
+            "def": 25,
+            "sp": 100
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "water",
+          "actionCount": 8,
+          "initialCount": 8,
+          "initialSp": 0,
+          "skills": [],
+          "passives": [],
+          "boss": true
+        },
+        {
+          "id": "1-3/W2/2",
+          "name": "鉄砲兵",
+          "image": "/creative/characters/battle/char_tomoya_01.png",
+          "level": 5,
+          "stats": {
+            "luk": 0,
+            "hp": 700,
+            "atk": 60,
+            "def": 15,
+            "sp": 100
+          },
+          "order": 1,
+          "hitSpGain": 10,
+          "element": "water",
+          "actionCount": 8,
+          "initialCount": 8,
+          "initialSp": 0,
+          "skills": [],
+          "passives": []
+        }
+      ]
+    ],
+    "firstRewards": [
+      {
+        "kind": "soul",
+        "id": "char_rui_01",
+        "amount": 8
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_CHARACTER",
+        "amount": 1
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_EQUIPMENT",
+        "amount": 1
+      },
+      {
+        "kind": "character",
+        "id": "char_yuki_01",
+        "amount": 1
+      },
+      {
+        "kind": "cash",
+        "amount": 5000
+      },
+      {
+        "kind": "character_exp_item",
+        "id": "medium",
+        "amount": 3
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 500
+      },
+      {
+        "kind": "character_exp_item",
+        "id": "small",
+        "amount": 1
+      },
+      {
+        "kind": "equipment_exp_item",
+        "id": "small",
+        "amount": 1
+      }
+    ],
+    "rareRewards": [
+      {
+        "kind": "soul",
+        "id": "char_rui_01",
+        "amount": 1,
+        "rarity": "SR",
+        "chance": 0.1,
+        "period": 20
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_CHARACTER",
+        "amount": 1,
+        "chance": 0.0025
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_SKILL",
+        "amount": 1,
+        "chance": 0.005
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_EQUIPMENT",
+        "amount": 1,
+        "chance": 0.0025
+      }
+    ],
+    "soulDrops": [
+      {
+        "kind": "soul",
+        "id": "char_rui_01",
+        "amount": 1,
+        "rarity": "SR",
+        "chance": 0.1,
+        "period": 20
+      }
+    ],
+    "ticketChance": 0.01,
+    "playerExp": 20,
+    "encounterChance": 0.01
+  },
+  "questMasterVersion": "game04-quest68-early-retention-20260926",
+  "playerExpReward": {
+    "amount": 20,
+    "version": "game04-quest68-early-retention-20260926",
+    "status": "APPROVED"
+  }
+}

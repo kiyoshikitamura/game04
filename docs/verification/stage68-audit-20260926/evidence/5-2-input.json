@@ -1,0 +1,946 @@
+{
+  "seed": 1,
+  "party": [
+    {
+      "id": "char_cecile_01",
+      "name": "井伊直虎",
+      "image": "/characters/cecile_transparent_asset.png",
+      "level": 50,
+      "element": "water",
+      "stats": {
+        "hp": 14259,
+        "atk": 1986.075,
+        "def": 1121.12,
+        "luk": 20,
+        "sp": 277
+      },
+      "skills": [
+        {
+          "id": "SKD034",
+          "name": "身構え",
+          "image": "/skills/skill_006_iron_guard.jpg",
+          "rarity": "N",
+          "element": "earth",
+          "spCost": 30,
+          "condition": {
+            "type": "always"
+          },
+          "target": "self",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "def_up",
+              "power": 15,
+              "duration": 3,
+              "carryAcrossWaves": true
+            }
+          ],
+          "description": "自身・DEF強化:15.00%・3ターン"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P11",
+          "type": "P11",
+          "name": "被回復量（蘇生除外）",
+          "stat": "atk",
+          "percent": 12,
+          "level": 0,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_genji_01",
+      "name": "今川義元",
+      "image": "/characters/genji_transparent_asset.png",
+      "level": 50,
+      "element": "wind",
+      "stats": {
+        "hp": 11989.2,
+        "atk": 2244.375,
+        "def": 1032.24,
+        "luk": 20,
+        "sp": 240
+      },
+      "skills": [
+        {
+          "id": "SKD051",
+          "name": "破勢",
+          "image": "/skills/formal/SKD051.webp",
+          "rarity": "R",
+          "element": "wind",
+          "spCost": 45,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "cleanse",
+              "power": 1,
+              "cleanseCategory": "buff"
+            }
+          ],
+          "description": "能力強化がある配置順最初の敵・解除件数:1.00件"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P02_wind",
+          "type": "P02",
+          "name": "同属性DEF支援",
+          "stat": "def",
+          "percent": 7.2,
+          "level": 0,
+          "target": "party",
+          "targetElement": "wind"
+        }
+      ]
+    },
+    {
+      "id": "char_noa_01",
+      "name": "柴田勝家",
+      "image": "/characters/noa_transparent_asset.png",
+      "level": 50,
+      "element": "earth",
+      "stats": {
+        "hp": 12222,
+        "atk": 2597.1749999999997,
+        "def": 991.7599999999999,
+        "luk": 20,
+        "sp": 277
+      },
+      "skills": [
+        {
+          "id": "SKD009",
+          "name": "岩断",
+          "image": "/skills/formal/SKD009.webp",
+          "rarity": "R",
+          "element": "earth",
+          "spCost": 50,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": true,
+          "effects": [
+            {
+              "type": "damage",
+              "power": 120
+            }
+          ],
+          "description": "先頭敵・攻撃倍率:120.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P05",
+          "type": "P05",
+          "name": "通常攻撃ダメージ",
+          "stat": "atk",
+          "percent": 12,
+          "level": 0,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_taiga_01",
+      "name": "長宗我部元親",
+      "image": "/characters/taiga_transparent_asset.png",
+      "level": 50,
+      "element": "water",
+      "stats": {
+        "hp": 11174.4,
+        "atk": 2731.05,
+        "def": 1032.24,
+        "luk": 20,
+        "sp": 222
+      },
+      "skills": [
+        {
+          "id": "SKD008",
+          "name": "水断",
+          "image": "/skills/formal/SKD008.webp",
+          "rarity": "R",
+          "element": "water",
+          "spCost": 50,
+          "condition": {
+            "type": "always"
+          },
+          "target": "first",
+          "fixedTarget": true,
+          "effects": [
+            {
+              "type": "damage",
+              "power": 120
+            }
+          ],
+          "description": "先頭敵・攻撃倍率:120.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P16",
+          "type": "P16",
+          "name": "能動ATK強化中の自身DEF",
+          "stat": "def",
+          "percent": 12,
+          "level": 0,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "id": "char_riki_01",
+      "name": "濃姫",
+      "image": "/characters/riki_transparent_asset.png",
+      "level": 50,
+      "element": "dark",
+      "stats": {
+        "hp": 10990.1,
+        "atk": 2693.25,
+        "def": 942.48,
+        "luk": 20,
+        "sp": 277
+      },
+      "skills": [
+        {
+          "id": "SKD040",
+          "name": "治癒の祈り",
+          "image": "/skills/skill_023_double_drive.jpg",
+          "rarity": "SR",
+          "element": "water",
+          "spCost": 90,
+          "condition": {
+            "type": "ally_hp_below",
+            "value": 0.5
+          },
+          "target": "lowest_ally",
+          "fixedTarget": false,
+          "effects": [
+            {
+              "type": "heal",
+              "power": 75,
+              "healingFormula": "caster_atk_percent"
+            }
+          ],
+          "description": "共通単体回復条件・回復倍率:75.00%"
+        }
+      ],
+      "passives": [
+        {
+          "id": "balance_v2_P12",
+          "type": "P12",
+          "name": "付与シールド量",
+          "stat": "atk",
+          "percent": 12,
+          "level": 0,
+          "target": "self"
+        }
+      ]
+    }
+  ],
+  "waves": [
+    [
+      {
+        "id": "5-2/1/1",
+        "name": "上杉景勝",
+        "image": "/creative/characters/battle/char_chang_01.png",
+        "level": 42,
+        "stats": {
+          "luk": 0,
+          "hp": 9500,
+          "atk": 900,
+          "def": 500,
+          "sp": 100
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "water",
+        "actionCount": 6,
+        "initialCount": 6,
+        "initialSp": 75,
+        "skills": [
+          {
+            "id": "SKD036",
+            "name": "守りの陣",
+            "image": "",
+            "rarity": "R",
+            "element": "light",
+            "spCost": 75,
+            "condition": {
+              "type": "always"
+            },
+            "target": "all_allies",
+            "effects": [
+              {
+                "type": "def_up",
+                "power": 17.01,
+                "duration": 3
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P02_water",
+            "type": "P02",
+            "name": "P02",
+            "stat": "def",
+            "percent": 5.688528762316814,
+            "level": 2,
+            "target": "party",
+            "targetElement": "water"
+          }
+        ]
+      },
+      {
+        "id": "5-2/1/2",
+        "name": "小早川隆景",
+        "image": "/creative/characters/battle/char_makoto_01.png",
+        "level": 42,
+        "stats": {
+          "luk": 0,
+          "hp": 7500,
+          "atk": 1400,
+          "def": 280,
+          "sp": 100
+        },
+        "order": 1,
+        "hitSpGain": 10,
+        "element": "water",
+        "actionCount": 6,
+        "initialCount": 6,
+        "initialSp": 50,
+        "skills": [
+          {
+            "id": "SKD008",
+            "name": "標準単体攻撃・水",
+            "image": "",
+            "rarity": "R",
+            "element": "water",
+            "spCost": 50,
+            "condition": {
+              "type": "always"
+            },
+            "target": "first",
+            "effects": [
+              {
+                "type": "damage",
+                "power": 130.7
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P03_water",
+            "type": "P03",
+            "name": "P03",
+            "stat": "atk",
+            "percent": 9.480881270528023,
+            "level": 2,
+            "target": "self",
+            "targetElement": "water"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "id": "5-2/2/1",
+        "name": "井伊直虎",
+        "image": "/creative/characters/battle/char_cecile_01.png",
+        "level": 43,
+        "stats": {
+          "luk": 0,
+          "hp": 14000,
+          "atk": 1050,
+          "def": 580,
+          "sp": 100
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "water",
+        "actionCount": 6,
+        "initialCount": 6,
+        "initialSp": 30,
+        "skills": [
+          {
+            "id": "SKD034",
+            "name": "身構え",
+            "image": "",
+            "rarity": "N",
+            "element": "earth",
+            "spCost": 30,
+            "condition": {
+              "type": "always"
+            },
+            "target": "self",
+            "effects": [
+              {
+                "type": "def_up",
+                "power": 17.01,
+                "duration": 3
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P11_water",
+            "type": "P11",
+            "name": "P11",
+            "stat": "atk",
+            "percent": 14.221321905792035,
+            "level": 2,
+            "target": "self",
+            "targetElement": "water"
+          }
+        ]
+      },
+      {
+        "id": "5-2/2/2",
+        "name": "直江兼続",
+        "image": "/creative/characters/battle/char_rui_01.png",
+        "level": 43,
+        "stats": {
+          "luk": 0,
+          "hp": 10500,
+          "atk": 1450,
+          "def": 360,
+          "sp": 100
+        },
+        "order": 1,
+        "hitSpGain": 10,
+        "element": "water",
+        "actionCount": 7,
+        "initialCount": 7,
+        "initialSp": 50,
+        "skills": [
+          {
+            "id": "SKD008",
+            "name": "標準単体攻撃・水",
+            "image": "",
+            "rarity": "R",
+            "element": "water",
+            "spCost": 50,
+            "condition": {
+              "type": "always"
+            },
+            "target": "first",
+            "effects": [
+              {
+                "type": "damage",
+                "power": 130.7
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P01_water",
+            "type": "P01",
+            "name": "P01",
+            "stat": "atk",
+            "percent": 5.688528762316814,
+            "level": 2,
+            "target": "party",
+            "targetElement": "water"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "id": "5-2/3/1",
+        "name": "長宗我部元親",
+        "image": "/creative/characters/battle/char_taiga_01.png",
+        "level": 44,
+        "stats": {
+          "luk": 0,
+          "hp": 37000,
+          "atk": 1900,
+          "def": 680,
+          "sp": 100
+        },
+        "order": 0,
+        "hitSpGain": 10,
+        "element": "water",
+        "actionCount": 8,
+        "initialCount": 8,
+        "initialSp": 80,
+        "skills": [
+          {
+            "id": "SKD033",
+            "name": "気合",
+            "image": "",
+            "rarity": "N",
+            "element": "fire",
+            "spCost": 30,
+            "condition": {
+              "type": "always"
+            },
+            "target": "self",
+            "effects": [
+              {
+                "type": "atk_up",
+                "power": 8.94,
+                "duration": 3
+              }
+            ],
+            "description": "正式表の検証入力"
+          },
+          {
+            "id": "SKD008",
+            "name": "標準単体攻撃・水",
+            "image": "",
+            "rarity": "R",
+            "element": "water",
+            "spCost": 50,
+            "condition": {
+              "type": "always"
+            },
+            "target": "first",
+            "effects": [
+              {
+                "type": "damage",
+                "power": 130.7
+              }
+            ],
+            "description": "正式表の検証入力"
+          }
+        ],
+        "passives": [
+          {
+            "id": "P16_water",
+            "type": "P16",
+            "name": "P16",
+            "stat": "def",
+            "percent": 14.221321905792035,
+            "level": 2,
+            "target": "self",
+            "targetElement": "water"
+          }
+        ]
+      }
+    ]
+  ],
+  "rules": {
+    "defenseFactor": 1,
+    "advantageMultiplier": 1.5,
+    "disadvantageMultiplier": 0.75,
+    "spRecoveryDivisor": 120,
+    "burstLukDivisor": 20,
+    "enemySpRecoveryDivisor": 30,
+    "maxPlayerActions": 300,
+    "initialSpRatio": 0,
+    "version": "balance-v2-20260920",
+    "burstPolicy": "attack-free-v1-20260926",
+    "inputVersion": "wave-sp-v1-20260921",
+    "balanceV2": {
+      "status": "PREVIEW_PROVISIONAL",
+      "version": "PREVIEW_PROVISIONAL_BALANCE_V2_20260920",
+      "damageBonusCap": 50,
+      "healingBonusCap": 80,
+      "shieldBonusCap": 50,
+      "shieldHpCap": 0.5,
+      "periodicCapMultiplier": 2,
+      "lowHpThreshold": 0.4,
+      "highHpThreshold": 0.7,
+      "diversityFactors": [
+        0,
+        0.25,
+        0.5,
+        0.75,
+        1
+      ]
+    }
+  },
+  "questSnapshot": {
+    "id": "kai-2",
+    "designId": "5-2",
+    "areaId": "kai",
+    "index": 2,
+    "name": "山裾の陣屋",
+    "description": "同属性で守る",
+    "energyCost": 6,
+    "waves": [
+      [
+        {
+          "id": "5-2/1/1",
+          "name": "上杉景勝",
+          "image": "/creative/characters/battle/char_chang_01.png",
+          "level": 42,
+          "stats": {
+            "luk": 0,
+            "hp": 9500,
+            "atk": 900,
+            "def": 500,
+            "sp": 100
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "water",
+          "actionCount": 6,
+          "initialCount": 6,
+          "initialSp": 75,
+          "skills": [
+            {
+              "id": "SKD036",
+              "name": "守りの陣",
+              "image": "",
+              "rarity": "R",
+              "element": "light",
+              "spCost": 75,
+              "condition": {
+                "type": "always"
+              },
+              "target": "all_allies",
+              "effects": [
+                {
+                  "type": "def_up",
+                  "power": 17.01,
+                  "duration": 3
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "passives": [
+            {
+              "id": "P02_water",
+              "type": "P02",
+              "name": "P02",
+              "stat": "def",
+              "percent": 5.688528762316814,
+              "level": 2,
+              "target": "party",
+              "targetElement": "water"
+            }
+          ]
+        },
+        {
+          "id": "5-2/1/2",
+          "name": "小早川隆景",
+          "image": "/creative/characters/battle/char_makoto_01.png",
+          "level": 42,
+          "stats": {
+            "luk": 0,
+            "hp": 7500,
+            "atk": 1400,
+            "def": 280,
+            "sp": 100
+          },
+          "order": 1,
+          "hitSpGain": 10,
+          "element": "water",
+          "actionCount": 6,
+          "initialCount": 6,
+          "initialSp": 50,
+          "skills": [
+            {
+              "id": "SKD008",
+              "name": "標準単体攻撃・水",
+              "image": "",
+              "rarity": "R",
+              "element": "water",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 130.7
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "passives": [
+            {
+              "id": "P03_water",
+              "type": "P03",
+              "name": "P03",
+              "stat": "atk",
+              "percent": 9.480881270528023,
+              "level": 2,
+              "target": "self",
+              "targetElement": "water"
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "id": "5-2/2/1",
+          "name": "井伊直虎",
+          "image": "/creative/characters/battle/char_cecile_01.png",
+          "level": 43,
+          "stats": {
+            "luk": 0,
+            "hp": 14000,
+            "atk": 1050,
+            "def": 580,
+            "sp": 100
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "water",
+          "actionCount": 6,
+          "initialCount": 6,
+          "initialSp": 30,
+          "skills": [
+            {
+              "id": "SKD034",
+              "name": "身構え",
+              "image": "",
+              "rarity": "N",
+              "element": "earth",
+              "spCost": 30,
+              "condition": {
+                "type": "always"
+              },
+              "target": "self",
+              "effects": [
+                {
+                  "type": "def_up",
+                  "power": 17.01,
+                  "duration": 3
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "passives": [
+            {
+              "id": "P11_water",
+              "type": "P11",
+              "name": "P11",
+              "stat": "atk",
+              "percent": 14.221321905792035,
+              "level": 2,
+              "target": "self",
+              "targetElement": "water"
+            }
+          ]
+        },
+        {
+          "id": "5-2/2/2",
+          "name": "直江兼続",
+          "image": "/creative/characters/battle/char_rui_01.png",
+          "level": 43,
+          "stats": {
+            "luk": 0,
+            "hp": 10500,
+            "atk": 1450,
+            "def": 360,
+            "sp": 100
+          },
+          "order": 1,
+          "hitSpGain": 10,
+          "element": "water",
+          "actionCount": 7,
+          "initialCount": 7,
+          "initialSp": 50,
+          "skills": [
+            {
+              "id": "SKD008",
+              "name": "標準単体攻撃・水",
+              "image": "",
+              "rarity": "R",
+              "element": "water",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 130.7
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "passives": [
+            {
+              "id": "P01_water",
+              "type": "P01",
+              "name": "P01",
+              "stat": "atk",
+              "percent": 5.688528762316814,
+              "level": 2,
+              "target": "party",
+              "targetElement": "water"
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "id": "5-2/3/1",
+          "name": "長宗我部元親",
+          "image": "/creative/characters/battle/char_taiga_01.png",
+          "level": 44,
+          "stats": {
+            "luk": 0,
+            "hp": 37000,
+            "atk": 1900,
+            "def": 680,
+            "sp": 100
+          },
+          "order": 0,
+          "hitSpGain": 10,
+          "element": "water",
+          "actionCount": 8,
+          "initialCount": 8,
+          "initialSp": 80,
+          "skills": [
+            {
+              "id": "SKD033",
+              "name": "気合",
+              "image": "",
+              "rarity": "N",
+              "element": "fire",
+              "spCost": 30,
+              "condition": {
+                "type": "always"
+              },
+              "target": "self",
+              "effects": [
+                {
+                  "type": "atk_up",
+                  "power": 8.94,
+                  "duration": 3
+                }
+              ],
+              "description": "正式表の検証入力"
+            },
+            {
+              "id": "SKD008",
+              "name": "標準単体攻撃・水",
+              "image": "",
+              "rarity": "R",
+              "element": "water",
+              "spCost": 50,
+              "condition": {
+                "type": "always"
+              },
+              "target": "first",
+              "effects": [
+                {
+                  "type": "damage",
+                  "power": 130.7
+                }
+              ],
+              "description": "正式表の検証入力"
+            }
+          ],
+          "passives": [
+            {
+              "id": "P16_water",
+              "type": "P16",
+              "name": "P16",
+              "stat": "def",
+              "percent": 14.221321905792035,
+              "level": 2,
+              "target": "self",
+              "targetElement": "water"
+            }
+          ]
+        }
+      ]
+    ],
+    "firstRewards": [
+      {
+        "kind": "soul",
+        "id": "char_taiga_01",
+        "amount": 4
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_SKILL",
+        "amount": 1
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_EQUIPMENT",
+        "amount": 1
+      }
+    ],
+    "rewards": [
+      {
+        "kind": "cash",
+        "amount": 2000
+      },
+      {
+        "kind": "character_exp_item",
+        "id": "small",
+        "amount": 7
+      },
+      {
+        "kind": "equipment_exp_item",
+        "id": "small",
+        "amount": 4
+      }
+    ],
+    "rareRewards": [
+      {
+        "kind": "soul",
+        "id": "char_taiga_01",
+        "amount": 1,
+        "rarity": "SR",
+        "chance": 0.15,
+        "period": 20
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_CHARACTER",
+        "amount": 1,
+        "chance": 0.005
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_SKILL",
+        "amount": 1,
+        "chance": 0.01
+      },
+      {
+        "kind": "ticket",
+        "id": "SPECIAL_TICKET_EQUIPMENT",
+        "amount": 1,
+        "chance": 0.005
+      }
+    ],
+    "soulDrops": [
+      {
+        "kind": "soul",
+        "id": "char_taiga_01",
+        "amount": 1,
+        "rarity": "SR",
+        "chance": 0.15,
+        "period": 20
+      }
+    ],
+    "ticketChance": 0.02,
+    "playerExp": 60,
+    "encounterChance": 0.1
+  },
+  "questMasterVersion": "game04-quest68-early-retention-20260926",
+  "playerExpReward": {
+    "amount": 60,
+    "version": "game04-quest68-early-retention-20260926",
+    "status": "APPROVED"
+  }
+}
