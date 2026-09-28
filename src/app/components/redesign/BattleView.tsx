@@ -29,6 +29,7 @@ import { BattleEffectLayer } from './battle-effects/BattleEffectLayer';
 import { effectAssetPaths } from './battle-effects/recordedEffects';
 import { resolveBattleFrameEffects } from './battleEffectPresentation';
 import { isBattleImageReady, preloadBattleImages } from '../battle/battleAssetPreload';
+import { displayImage } from '@/theme/displayImages';
 import { characterArt } from '@/theme/creativeAssets';
 import characterAssets from '@/theme/local-characters.json';
 import enemyArtBounds from '@/theme/enemy-art-bounds.json';
@@ -39,7 +40,7 @@ const knownCharacterImages = new Set(characterAssets.flatMap(entry => Object.ent
 function unitArt(unit: BattleUnit, state: BattleUnitState | undefined, variant: 'full' | 'portrait' | 'battle') {
   const source = state?.image || unit.image;
   // Unknown phase art remains authoritative; only known variants use the existing character mapping.
-  return knownCharacterImages.has(source) ? characterArt({ id: unit.id, name: unit.name, image: source }, variant) ?? source : source;
+  return displayImage(knownCharacterImages.has(source) ? characterArt({ id: unit.id, name: unit.name, image: source }, variant) ?? source : source);
 }
 const isUnassignedSkillImage = (src?: string) => !src || src === '/menu/event_banner_placeholder.png';
 const elements = { fire: '火', water: '水', earth: '土', wind: '風', light: '光', dark: '闇' };
