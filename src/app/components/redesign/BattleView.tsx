@@ -70,6 +70,8 @@ export function BattleView({ onRetire, onPlaybackComplete, autoCompleteOnFinish 
   const completionLock=useRef(false), terminalGeneration=useRef(0);
   const completionCallback=useRef(onPlaybackComplete);
   completionCallback.current=onPlaybackComplete;
+  const autoCompleteLock=useRef(false);
+  useEffect(()=>{autoCompleteLock.current=false;},[result]);
   useEffect(()=>{terminalGeneration.current++;completionLock.current=false;setCompletion('idle');setTerminalError('');return()=>{terminalGeneration.current++}},[result]);
   const wasPaused = useRef(false);
   const heardFrame = useRef(-1);
