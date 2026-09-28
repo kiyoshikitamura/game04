@@ -7,7 +7,21 @@ export function passiveDescription(passive: Passive) {
   const effect = passive.type ? passiveEffects[passive.type] : `${passive.target === 'party' ? '味方全体' : '自身'}の${passive.stat.toUpperCase()}`;
   return `所持者が生存中：${effect}${passive.targetElement ? `（${elements[passive.targetElement]}属性・本人を含む／同型・同属性は最強1つ）` : ''} +${Number(passive.percent.toFixed(2))}%${passive.type ? '。条件は行動開始時に参照' : ''}`;
 }
-export function skillConditionText(skill: SkillMaster) { const value = skill.condition.value ?? .5; switch(skill.condition.type) { case 'hp_below': return `自身のHP ${value*100}%以下`; case 'ally_hp_below': return `味方のHP ${value*100}%以下`; case 'enemy_count': return `敵が${value}体以上`; case 'ally_dead': return '戦闘不能の味方がいる'; case 'every_n_actions': return `${value}行動ごと`; default: return '常時（対象・効果の付与可否も判定）'; } }
+// Display only. Keep battle masters, eligibility, and recorded snapshots unchanged.
+function recoveryCondition(skill: SkillMaster): string | undefined {
+  if (['SKD039', 'SKD040', 'SKD068'].includes(skill.id)) return '生存味方にHP50%以下の武将がいるとき';
+  if (['SKD041', 'SKD042'].includes(skill.id)) return '生存味方の半数以上（端数切り上げ）がHP60%以下のとき';
+  if (skill.id === 'SKD070') return '継続ダメージ状態の生存味方がいるとき。いなければHP50%以下の生存味方がいるとき';
+}
+function damageBonusCondition(skill: SkillMaster): string | undefined {
+  const effect = skill.effects.find(effect => effect.type === 'damage' && effect.bonusCondition);
+  switch (effect?.bonusCondition) {
+    case 'debuff': return '攻撃対象がATK低下またはDEF低下中';
+    case 'dot': return '攻撃対象が継続ダメージ状態';
+    case 'hp_below': return `使用者自身のHP${(effect.hpThreshold ?? .4) * 100}%以下`;
+  }
+}
+export function skillConditionText(skill: SkillMaster) { const recovery = recoveryCondition(skill); if (recovery) return recovery; const value = skill.condition.value ?? .5; switch(skill.condition.type) { case 'hp_below': return `自身のHP ${value*100}%以下`; case 'ally_hp_below': return `味方のHP ${value*100}%以下`; case 'enemy_count': return `敵が${value}体以上`; case 'ally_dead': return '戦闘不能の味方がいる'; case 'every_n_actions': return `${value}行動ごと`; default: return '常時（対象・効果の付与可否も判定）'; } }
 export const READINESS_REASONS: Record<string,string> = { reapply_unavailable: '同じスキルの効果が残っているため再付与不可', condition_unmet: '条件未達', insufficient_sp: 'SP不足' };
 
 export const CLEANSE_LABELS: Record<string,string> = { buff:'能力強化', protection:'保護効果', debuff:'能力低下', dot:'継続ダメージ', stun:'行動不能' };
@@ -18,4 +32,15 @@ export function displaySkillDescription(description: string) {
   if (description === '【発動保留・未FIX】継続ダメージ／SP補充の詳細ルール待ち') return LEGACY_SKILL_MAPPING_NOTICE;
   return description.replace(/（個別倍率・消費SP・回復式は開発仮設定）$/, '').replace(/(\d+)\.0+(?=%)/g, '$1').replace(/(\d+\.\d*?[1-9])0+(?=%)/g, '$1');
 }
-export function skillDescription(skill: SkillMaster, latest = true) { return latest && skill.unsupportedReason ? LEGACY_SKILL_MAPPING_NOTICE : displaySkillDescription(skill.description); }
+export function skillPerformanceDescription(skill: SkillMaster, description: string): string {
+  const bonus = damageBonusCondition(skill);
+  let text = description;
+  if (bonus) text = text.replace(/条件倍率/g, `条件倍率（${bonus}）`);
+  text = text.replace(/共通単体回復条件で選んだ同じ味方/g, 'HP50%以下で残HP割合が最も低い生存味方1人に回復とシールド')
+    .replace(/共通単体回復条件/g, 'HP50%以下で残HP割合が最も低い生存味方1人')
+    .replace(/共通全体回復条件/g, '生存味方全体');
+  const recovery = recoveryCondition(skill);
+  if (recovery) text += `。発動条件：${recovery}`;
+  return displaySkillDescription(text);
+}
+export function skillDescription(skill: SkillMaster, latest = true) { return latest && skill.unsupportedReason ? LEGACY_SKILL_MAPPING_NOTICE : latest ? skillPerformanceDescription(skill, skill.description) : displaySkillDescription(skill.description); }
