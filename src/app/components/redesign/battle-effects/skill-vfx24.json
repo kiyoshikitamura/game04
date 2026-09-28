@@ -1,0 +1,514 @@
+[
+  {
+    "id": "heavy-cleave",
+    "name": "重い断ち斬り",
+    "category": "normal",
+    "profile": "cleave",
+    "skillIds": [
+      "SKD007",
+      "SKD008",
+      "SKD009",
+      "SKD010",
+      "SKD011",
+      "SKD012",
+      "SKD028",
+      "SKD031",
+      "SKD057"
+    ],
+    "skills": [
+      {
+        "id": "SKD007",
+        "name": "炎断"
+      },
+      {
+        "id": "SKD008",
+        "name": "水断"
+      },
+      {
+        "id": "SKD009",
+        "name": "岩断"
+      },
+      {
+        "id": "SKD010",
+        "name": "風断"
+      },
+      {
+        "id": "SKD011",
+        "name": "光断"
+      },
+      {
+        "id": "SKD012",
+        "name": "影断"
+      },
+      {
+        "id": "SKD028",
+        "name": "崩し討ち"
+      },
+      {
+        "id": "SKD031",
+        "name": "背水斬り"
+      },
+      {
+        "id": "SKD057",
+        "name": "後陣崩し"
+      }
+    ],
+    "motion": "短い溜め→重い斜め斬り→着弾",
+    "lead": "/battle-effects/skill-vfx24/heavy-cleave/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/heavy-cleave/hit.webp"
+  },
+  {
+    "id": "water-wave",
+    "name": "水波",
+    "category": "area",
+    "profile": "wave",
+    "skillIds": [
+      "SKD020",
+      "SKD059"
+    ],
+    "skills": [
+      {
+        "id": "SKD020",
+        "name": "水の薙ぎ"
+      },
+      {
+        "id": "SKD059",
+        "name": "崩陣の波"
+      }
+    ],
+    "motion": "横方向に波を通過→飛沫",
+    "lead": "/battle-effects/skill-vfx24/water-wave/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/water-wave/hit.webp"
+  },
+  {
+    "id": "earth-rupture",
+    "name": "地割れ",
+    "category": "area",
+    "profile": "ground",
+    "skillIds": [
+      "SKD021",
+      "SKD060"
+    ],
+    "skills": [
+      {
+        "id": "SKD021",
+        "name": "薙ぎ払い"
+      },
+      {
+        "id": "SKD060",
+        "name": "背水の薙ぎ"
+      }
+    ],
+    "motion": "足元の亀裂拡張→岩片の噴出",
+    "lead": "/battle-effects/skill-vfx24/earth-rupture/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/earth-rupture/hit.webp"
+  },
+  {
+    "id": "crimson-flash",
+    "name": "紅蓮一閃",
+    "category": "ssr",
+    "profile": "cleave",
+    "skillIds": [
+      "SKD013"
+    ],
+    "skills": [
+      {
+        "id": "SKD013",
+        "name": "紅蓮一閃"
+      }
+    ],
+    "motion": "刃が一閃→切り口から炎",
+    "lead": "/battle-effects/skill-vfx24/crimson-flash/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/crimson-flash/hit.webp"
+  },
+  {
+    "id": "grand-crimson",
+    "name": "紅蓮の大計",
+    "category": "ssr",
+    "profile": "flame",
+    "skillIds": [
+      "SKD025"
+    ],
+    "skills": [
+      {
+        "id": "SKD025",
+        "name": "紅蓮の大計"
+      }
+    ],
+    "motion": "対象側の火種→一斉炎上",
+    "lead": "/battle-effects/skill-vfx24/grand-crimson/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/grand-crimson/hit.webp"
+  },
+  {
+    "id": "barrier-field",
+    "name": "結界の陣",
+    "category": "ssr",
+    "profile": "barrier",
+    "skillIds": [
+      "SKD047"
+    ],
+    "skills": [
+      {
+        "id": "SKD047",
+        "name": "結界の陣"
+      }
+    ],
+    "motion": "陣が広がる→成功対象に障壁",
+    "lead": "/battle-effects/skill-vfx24/barrier-field/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/barrier-field/hit.webp"
+  },
+  {
+    "id": "iaido-flash",
+    "name": "細い居合一閃",
+    "category": "normal",
+    "profile": "iaido",
+    "skillIds": [
+      "SKD001",
+      "SKD002",
+      "SKD003",
+      "SKD004",
+      "SKD005",
+      "SKD006"
+    ],
+    "skills": [
+      {
+        "id": "SKD001",
+        "name": "火走り"
+      },
+      {
+        "id": "SKD002",
+        "name": "水走り"
+      },
+      {
+        "id": "SKD003",
+        "name": "土割り"
+      },
+      {
+        "id": "SKD004",
+        "name": "風切り"
+      },
+      {
+        "id": "SKD005",
+        "name": "光差し"
+      },
+      {
+        "id": "SKD006",
+        "name": "影切り"
+      }
+    ],
+    "motion": "細い一閃→短い残光",
+    "lead": "/battle-effects/skill-vfx24/iaido-flash/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/iaido-flash/hit.webp"
+  },
+  {
+    "id": "cross-slash",
+    "name": "交差斬り",
+    "category": "normal",
+    "profile": "cross",
+    "skillIds": [
+      "SKD027",
+      "SKD030"
+    ],
+    "skills": [
+      {
+        "id": "SKD027",
+        "name": "追い討ち"
+      },
+      {
+        "id": "SKD030",
+        "name": "蝕み討ち"
+      }
+    ],
+    "motion": "弧を複製回転して交差→中央閃光",
+    "lead": "/battle-effects/skill-vfx24/cross-slash/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/cross-slash/hit.webp"
+  },
+  {
+    "id": "poison-slash",
+    "name": "毒を引く斬撃",
+    "category": "normal",
+    "profile": "poison",
+    "skillIds": [
+      "SKD029"
+    ],
+    "skills": [
+      {
+        "id": "SKD029",
+        "name": "毒刃"
+      }
+    ],
+    "motion": "斬撃→毒霧。毒成功表示は実記録に従う",
+    "lead": "/battle-effects/skill-vfx24/poison-slash/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/poison-slash/hit.webp"
+  },
+  {
+    "id": "fire-sweep",
+    "name": "炎の横薙ぎ",
+    "category": "area",
+    "profile": "sweep",
+    "skillIds": [
+      "SKD019"
+    ],
+    "skills": [
+      {
+        "id": "SKD019",
+        "name": "火の薙ぎ"
+      }
+    ],
+    "motion": "横薙ぎ→火の粉",
+    "lead": "/battle-effects/skill-vfx24/fire-sweep/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/fire-sweep/hit.webp"
+  },
+  {
+    "id": "wind-spiral",
+    "name": "風刃の旋回",
+    "category": "area",
+    "profile": "spiral",
+    "skillIds": [
+      "SKD022"
+    ],
+    "skills": [
+      {
+        "id": "SKD022",
+        "name": "風の薙ぎ"
+      }
+    ],
+    "motion": "対象側の旋回→流線消失",
+    "lead": "/battle-effects/skill-vfx24/wind-spiral/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/wind-spiral/hit.webp"
+  },
+  {
+    "id": "light-rain",
+    "name": "光刃の降下",
+    "category": "area",
+    "profile": "rain",
+    "skillIds": [
+      "SKD023"
+    ],
+    "skills": [
+      {
+        "id": "SKD023",
+        "name": "光の薙ぎ"
+      }
+    ],
+    "motion": "複製した光刃を上から降下→対象位置で着弾",
+    "lead": "/battle-effects/skill-vfx24/light-rain/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/light-rain/hit.webp"
+  },
+  {
+    "id": "dark-sweep",
+    "name": "闇の侵食",
+    "category": "area",
+    "profile": "dark",
+    "skillIds": [
+      "SKD024"
+    ],
+    "skills": [
+      {
+        "id": "SKD024",
+        "name": "闇の薙ぎ"
+      }
+    ],
+    "motion": "闇の帯が横切る→残滓",
+    "lead": "/battle-effects/skill-vfx24/dark-sweep/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/dark-sweep/hit.webp"
+  },
+  {
+    "id": "azure-flash",
+    "name": "蒼波一閃",
+    "category": "ssr",
+    "profile": "wave",
+    "skillIds": [
+      "SKD014"
+    ],
+    "skills": [
+      {
+        "id": "SKD014",
+        "name": "蒼波一閃"
+      }
+    ],
+    "motion": "水刃通過→集中飛沫",
+    "lead": "/battle-effects/skill-vfx24/azure-flash/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/azure-flash/hit.webp"
+  },
+  {
+    "id": "earth-flash",
+    "name": "地裂一閃",
+    "category": "ssr",
+    "profile": "ground",
+    "skillIds": [
+      "SKD015"
+    ],
+    "skills": [
+      {
+        "id": "SKD015",
+        "name": "地裂一閃"
+      }
+    ],
+    "motion": "縦斬り→対象足元の亀裂",
+    "lead": "/battle-effects/skill-vfx24/earth-flash/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/earth-flash/hit.webp"
+  },
+  {
+    "id": "tempest-flash",
+    "name": "天嵐一閃",
+    "category": "ssr",
+    "profile": "thrust",
+    "skillIds": [
+      "SKD016"
+    ],
+    "skills": [
+      {
+        "id": "SKD016",
+        "name": "天嵐一閃"
+      }
+    ],
+    "motion": "渦が収束→風刃が貫く",
+    "lead": "/battle-effects/skill-vfx24/tempest-flash/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/tempest-flash/hit.webp"
+  },
+  {
+    "id": "heavenly-flash",
+    "name": "天光一閃",
+    "category": "ssr",
+    "profile": "light",
+    "skillIds": [
+      "SKD017"
+    ],
+    "skills": [
+      {
+        "id": "SKD017",
+        "name": "天光一閃"
+      }
+    ],
+    "motion": "集光→光の斬撃",
+    "lead": "/battle-effects/skill-vfx24/heavenly-flash/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/heavenly-flash/hit.webp"
+  },
+  {
+    "id": "twilight-flash",
+    "name": "宵闇一閃",
+    "category": "ssr",
+    "profile": "dark",
+    "skillIds": [
+      "SKD018"
+    ],
+    "skills": [
+      {
+        "id": "SKD018",
+        "name": "宵闇一閃"
+      }
+    ],
+    "motion": "裂け目が開く→収束消失",
+    "lead": "/battle-effects/skill-vfx24/twilight-flash/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/twilight-flash/hit.webp"
+  },
+  {
+    "id": "grand-healing",
+    "name": "慈愛の大祈祷",
+    "category": "ssr",
+    "profile": "healing",
+    "skillIds": [
+      "SKD042"
+    ],
+    "skills": [
+      {
+        "id": "SKD042",
+        "name": "慈愛の大祈祷"
+      }
+    ],
+    "motion": "光輪→回復対象を包む光",
+    "lead": "/battle-effects/skill-vfx24/grand-healing/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/grand-healing/hit.webp"
+  },
+  {
+    "id": "counter-stance",
+    "name": "迎撃の構え",
+    "category": "ssr",
+    "profile": "counter",
+    "skillIds": [
+      "SKD050"
+    ],
+    "skills": [
+      {
+        "id": "SKD050",
+        "name": "迎撃の構え"
+      }
+    ],
+    "motion": "自身に守りと構え。実際の反撃は反撃記録時のみ",
+    "lead": "/battle-effects/skill-vfx24/counter-stance/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/counter-stance/hit.webp"
+  },
+  {
+    "id": "formation-break",
+    "name": "破陣撃",
+    "category": "ssr",
+    "profile": "break",
+    "skillIds": [
+      "SKD056"
+    ],
+    "skills": [
+      {
+        "id": "SKD056",
+        "name": "破陣撃"
+      }
+    ],
+    "motion": "保護解除が成功した場合の剥離→攻撃",
+    "lead": "/battle-effects/skill-vfx24/formation-break/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/formation-break/hit.webp"
+  },
+  {
+    "id": "war-god-rally",
+    "name": "軍神の号令",
+    "category": "ssr",
+    "profile": "rally",
+    "skillIds": [
+      "SKD066"
+    ],
+    "skills": [
+      {
+        "id": "SKD066",
+        "name": "軍神の号令"
+      }
+    ],
+    "motion": "軍配→強化が成功した対象への波動",
+    "lead": "/battle-effects/skill-vfx24/war-god-rally/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/war-god-rally/hit.webp"
+  },
+  {
+    "id": "purification",
+    "name": "大祓い",
+    "category": "ssr",
+    "profile": "purify",
+    "skillIds": [
+      "SKD071"
+    ],
+    "skills": [
+      {
+        "id": "SKD071",
+        "name": "大祓い"
+      }
+    ],
+    "motion": "輪が通過→解除成功対象の濁りが消える",
+    "lead": "/battle-effects/skill-vfx24/purification/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/purification/hit.webp"
+  },
+  {
+    "id": "power-break-flash",
+    "name": "破勢の一閃",
+    "category": "ssr",
+    "profile": "break",
+    "skillIds": [
+      "SKD072"
+    ],
+    "skills": [
+      {
+        "id": "SKD072",
+        "name": "破勢の一閃"
+      }
+    ],
+    "motion": "能力強化の解除成功→一閃",
+    "lead": "/battle-effects/skill-vfx24/power-break-flash/lead.webp",
+    "hit": "/battle-effects/skill-vfx24/power-break-flash/hit.webp"
+  }
+]

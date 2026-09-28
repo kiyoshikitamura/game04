@@ -1,0 +1,594 @@
+[
+  {
+    "effect_id": "heavy-cleave",
+    "name": "重い断ち斬り",
+    "category": "normal",
+    "file": "assets/01_heavy-cleave.png",
+    "source_file": "exec-e124a0d9-e8f3-424a-bb63-01cc1c7b5cbe.png",
+    "sha256": "cb425409fcc3a9c680feddd46b8ef950305ee7e635ca108a1685b567072ca19f",
+    "width": 1774,
+    "height": 887,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "proposed_skill_ids": [
+      "SKD007",
+      "SKD008",
+      "SKD009",
+      "SKD010",
+      "SKD011",
+      "SKD012",
+      "SKD028",
+      "SKD031",
+      "SKD057"
+    ],
+    "left_component": "斜めの太い刃",
+    "right_component": "着弾の破片",
+    "motion": "短い溜め→重い斜め斬り→着弾",
+    "initial_art_approved": true,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "water-wave",
+    "name": "水波",
+    "category": "area",
+    "file": "assets/02_water-wave.png",
+    "source_file": "exec-db1eac9f-dbc0-4c26-b2f3-859db5a09fec.png",
+    "sha256": "c70839d2681a5cc74ed165acbaa58e9efb2741effc260c836402df7d61bec196",
+    "width": 2172,
+    "height": 724,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "proposed_skill_ids": [
+      "SKD020",
+      "SKD059"
+    ],
+    "left_component": "波頭",
+    "right_component": "水飛沫",
+    "motion": "横方向に波を通過→飛沫",
+    "initial_art_approved": true,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "earth-rupture",
+    "name": "地割れ",
+    "category": "area",
+    "file": "assets/03_earth-rupture.png",
+    "source_file": "exec-dd192bf2-7dce-4a72-90d9-33a352f5b9ae.png",
+    "sha256": "6ae3926f170bffd7594b164facc69d464f21df1ebce9a606443d44bb7032cc84",
+    "width": 1821,
+    "height": 864,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "proposed_skill_ids": [
+      "SKD021",
+      "SKD060"
+    ],
+    "left_component": "地割れ",
+    "right_component": "岩片と砂塵",
+    "motion": "足元の亀裂拡張→岩片の噴出",
+    "initial_art_approved": true,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "crimson-flash",
+    "name": "紅蓮一閃",
+    "category": "ssr",
+    "file": "assets/04_crimson-flash.png",
+    "source_file": "exec-1aca0daa-2b2e-4f89-8b83-0faf2e64574f.png",
+    "sha256": "a9444932b3bfebe4c12cb75ae81910fe7a1e6cac4731a351c196a7a05d14754e",
+    "width": 1774,
+    "height": 887,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "proposed_skill_ids": [
+      "SKD013"
+    ],
+    "left_component": "炎の刃",
+    "right_component": "噴出する炎",
+    "motion": "刃が一閃→切り口から炎",
+    "initial_art_approved": true,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "grand-crimson",
+    "name": "紅蓮の大計",
+    "category": "ssr",
+    "file": "assets/05_grand-crimson.png",
+    "source_file": "exec-090b3723-1ded-4853-b239-862007c53926.png",
+    "sha256": "d7fd84e9c672910e1735e12230a8d8ef2701317578ef841806783baba810f4ef",
+    "width": 1962,
+    "height": 801,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "proposed_skill_ids": [
+      "SKD025"
+    ],
+    "left_component": "火種の紋様",
+    "right_component": "炎柱",
+    "motion": "対象側の火種→一斉炎上",
+    "initial_art_approved": true,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "barrier-field",
+    "name": "結界の陣",
+    "category": "ssr",
+    "file": "assets/06_barrier-field.png",
+    "source_file": "exec-17189a2b-29d4-48a0-a1e7-94b42f3d300e.png",
+    "sha256": "c280aa3270c5ad7d0ee371174361439d3be111d6cfcbdbaf194b37e45da08341",
+    "width": 1983,
+    "height": 793,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      253
+    ],
+    "proposed_skill_ids": [
+      "SKD047"
+    ],
+    "left_component": "結界陣",
+    "right_component": "半透明障壁",
+    "motion": "陣が広がる→成功対象に障壁",
+    "initial_art_approved": true,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "iaido-flash",
+    "name": "細い居合一閃",
+    "category": "normal",
+    "file": "assets/07_iaido-flash.png",
+    "source_file": "exec-f50d867b-1384-466b-8110-c8f89c7ea51d.png",
+    "sha256": "97d19eca76ee28fdc73a095cd05b1ec396f13c213869915e52384b6265191fe1",
+    "width": 2125,
+    "height": 740,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      253
+    ],
+    "proposed_skill_ids": [
+      "SKD001",
+      "SKD002",
+      "SKD003",
+      "SKD004",
+      "SKD005",
+      "SKD006"
+    ],
+    "left_component": "直線の刃",
+    "right_component": "細い残光",
+    "motion": "細い一閃→短い残光",
+    "initial_art_approved": false,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "cross-slash",
+    "name": "交差斬り",
+    "category": "normal",
+    "file": "assets/08_cross-slash.png",
+    "source_file": "exec-07bd5081-01d8-4bec-8021-74a9085298e4.png",
+    "sha256": "8bdae4025b64985f77e2118f738d67f89b3fd444b6b352ab5f5ceb0bab49731f",
+    "width": 1774,
+    "height": 887,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "proposed_skill_ids": [
+      "SKD027",
+      "SKD030"
+    ],
+    "left_component": "交差用の弧",
+    "right_component": "交点の閃光",
+    "motion": "弧を複製回転して交差→中央閃光",
+    "initial_art_approved": false,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "poison-slash",
+    "name": "毒を引く斬撃",
+    "category": "normal",
+    "file": "assets/09_poison-slash.png",
+    "source_file": "exec-9a98aff1-fe2a-4a68-951d-3e8d3281a30a.png",
+    "sha256": "9c0a4101ee153d309ec051ac6fc333c016731300ccccfd3a23a70c4bcf8a5990",
+    "width": 1774,
+    "height": 887,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "proposed_skill_ids": [
+      "SKD029"
+    ],
+    "left_component": "毒の刃",
+    "right_component": "尾を引く霧",
+    "motion": "斬撃→毒霧。毒成功表示は実記録に従う",
+    "initial_art_approved": false,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "fire-sweep",
+    "name": "炎の横薙ぎ",
+    "category": "area",
+    "file": "assets/10_fire-sweep.png",
+    "source_file": "exec-d59be93f-0157-44fe-8afd-1800e74f9b24.png",
+    "sha256": "fba62e0e608d848c8396a40e86d61c7089a0d2e14b3bda6e492b5c2b845d3a62",
+    "width": 2126,
+    "height": 740,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "proposed_skill_ids": [
+      "SKD019"
+    ],
+    "left_component": "炎の弧",
+    "right_component": "火の粉",
+    "motion": "横薙ぎ→火の粉",
+    "initial_art_approved": false,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "wind-spiral",
+    "name": "風刃の旋回",
+    "category": "area",
+    "file": "assets/11_wind-spiral.png",
+    "source_file": "exec-07021bb1-a74f-4634-92c1-5c7893d0a893.png",
+    "sha256": "e80fc47ca0b71114caa3dc6d63e755cc0a783c77e9adffc7cd859108bc0bbb42",
+    "width": 1774,
+    "height": 887,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      253
+    ],
+    "proposed_skill_ids": [
+      "SKD022"
+    ],
+    "left_component": "風の弧",
+    "right_component": "流線",
+    "motion": "対象側の旋回→流線消失",
+    "initial_art_approved": false,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "light-rain",
+    "name": "光刃の降下",
+    "category": "area",
+    "file": "assets/12_light-rain.png",
+    "source_file": "exec-051266fb-cbaa-4dbc-a273-303065340534.png",
+    "sha256": "0d6cd16a66e65f22b03dd25d5acef3d336d99e4aa9597f5e7ba5c6982ba75f98",
+    "width": 1774,
+    "height": 887,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "proposed_skill_ids": [
+      "SKD023"
+    ],
+    "left_component": "光刃",
+    "right_component": "着弾光",
+    "motion": "複製した光刃を上から降下→対象位置で着弾",
+    "initial_art_approved": false,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "dark-sweep",
+    "name": "闇の侵食",
+    "category": "area",
+    "file": "assets/13_dark-sweep.png",
+    "source_file": "exec-0b17da4b-bbed-41e4-bb58-5b0d24a0abbb.png",
+    "sha256": "d17c4db4fa9b969cdcfd1e782044e5d657584f6ae9cfad4e9a6738f1e5c23c94",
+    "width": 1774,
+    "height": 887,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "proposed_skill_ids": [
+      "SKD024"
+    ],
+    "left_component": "闇の帯",
+    "right_component": "墨の粒子",
+    "motion": "闇の帯が横切る→残滓",
+    "initial_art_approved": false,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "azure-flash",
+    "name": "蒼波一閃",
+    "category": "ssr",
+    "file": "assets/14_azure-flash.png",
+    "source_file": "exec-78e867ca-1efd-4f67-b874-c9737ab4c6b1.png",
+    "sha256": "dd1d2393ae749cc3b06e1eb8ee51ae30e44114d139f10946b063d0f3bb37826a",
+    "width": 1947,
+    "height": 808,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "proposed_skill_ids": [
+      "SKD014"
+    ],
+    "left_component": "水の三日月",
+    "right_component": "飛沫",
+    "motion": "水刃通過→集中飛沫",
+    "initial_art_approved": false,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "earth-flash",
+    "name": "地裂一閃",
+    "category": "ssr",
+    "file": "assets/15_earth-flash.png",
+    "source_file": "exec-21feb1f6-4468-4217-8aea-8543e204e21e.png",
+    "sha256": "b7d072f0cc265ad315c85f1853b32f8873b6598d02f0e04b79a6449edc17fe78",
+    "width": 1774,
+    "height": 887,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "proposed_skill_ids": [
+      "SKD015"
+    ],
+    "left_component": "縦の重い刃",
+    "right_component": "亀裂",
+    "motion": "縦斬り→対象足元の亀裂",
+    "initial_art_approved": false,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "tempest-flash",
+    "name": "天嵐一閃",
+    "category": "ssr",
+    "file": "assets/16_tempest-flash.png",
+    "source_file": "exec-9dc2fedb-83cc-46f7-a563-29ca08ae35b4.png",
+    "sha256": "b78454a9067e5892b143a03256622c6bbbeb3504356a4d93c60357fef27e4a80",
+    "width": 2172,
+    "height": 724,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "proposed_skill_ids": [
+      "SKD016"
+    ],
+    "left_component": "収束する風",
+    "right_component": "長い風刃",
+    "motion": "渦が収束→風刃が貫く",
+    "initial_art_approved": false,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "heavenly-flash",
+    "name": "天光一閃",
+    "category": "ssr",
+    "file": "assets/17_heavenly-flash.png",
+    "source_file": "exec-4fcd95ed-f10d-40c2-9016-a36ef2a58f02.png",
+    "sha256": "f7b872fbec263a85309ccd4b7c09be809c7f1bcc9de45f20b5bb412f82daf3e7",
+    "width": 1774,
+    "height": 887,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "proposed_skill_ids": [
+      "SKD017"
+    ],
+    "left_component": "集光",
+    "right_component": "白金の刃",
+    "motion": "集光→光の斬撃",
+    "initial_art_approved": false,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "twilight-flash",
+    "name": "宵闇一閃",
+    "category": "ssr",
+    "file": "assets/18_twilight-flash.png",
+    "source_file": "exec-a1a1b654-bb2c-4e45-a007-59b44c752616.png",
+    "sha256": "23b69df8e0e81a7725d2e97f7ffb9b0b65354da0799f6232756949ada0dc791b",
+    "width": 1774,
+    "height": 887,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "proposed_skill_ids": [
+      "SKD018"
+    ],
+    "left_component": "闇の裂け目",
+    "right_component": "紫の残光",
+    "motion": "裂け目が開く→収束消失",
+    "initial_art_approved": false,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "grand-healing",
+    "name": "慈愛の大祈祷",
+    "category": "ssr",
+    "file": "assets/19_grand-healing.png",
+    "source_file": "exec-5d58277c-4d8c-4892-812f-6fd1908d1dc6.png",
+    "sha256": "e5f649b471e959cbbbd9236013d0cd093a2f52b423e20f8c5869b37d723928bd",
+    "width": 2048,
+    "height": 768,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      253
+    ],
+    "proposed_skill_ids": [
+      "SKD042"
+    ],
+    "left_component": "光輪",
+    "right_component": "降り注ぐ光",
+    "motion": "光輪→回復対象を包む光",
+    "initial_art_approved": false,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "counter-stance",
+    "name": "迎撃の構え",
+    "category": "ssr",
+    "file": "assets/20_counter-stance.png",
+    "source_file": "exec-279b0bb9-e422-4b74-a6a5-1d7c286ae738.png",
+    "sha256": "6eed232fb5eeaf944396e973a9f1a8db88679a9829029fbee3dfe212857b940f",
+    "width": 1774,
+    "height": 887,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "proposed_skill_ids": [
+      "SKD050"
+    ],
+    "left_component": "守りの輪",
+    "right_component": "返し刃の紋様",
+    "motion": "自身に守りと構え。実際の反撃は反撃記録時のみ",
+    "initial_art_approved": false,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "formation-break",
+    "name": "破陣撃",
+    "category": "ssr",
+    "file": "assets/21_formation-break.png",
+    "source_file": "exec-08998a64-406f-4385-b6a1-8a1eb8f33133.png",
+    "sha256": "c71d6e9fc51851ce7906217d9999b797a0ba599f39fee56ad53bdc840e42104b",
+    "width": 1983,
+    "height": 793,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "proposed_skill_ids": [
+      "SKD056"
+    ],
+    "left_component": "剥離する破片",
+    "right_component": "貫く風刃",
+    "motion": "保護解除が成功した場合の剥離→攻撃",
+    "initial_art_approved": false,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "war-god-rally",
+    "name": "軍神の号令",
+    "category": "ssr",
+    "file": "assets/22_war-god-rally.png",
+    "source_file": "exec-39162f81-c09d-4371-a636-4659ef3ed7bf.png",
+    "sha256": "4b48abac4d973d5ae03fb4f51424a5fb682e6c3fe6b166e1a139ccd08b87cfa2",
+    "width": 1983,
+    "height": 793,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "proposed_skill_ids": [
+      "SKD066"
+    ],
+    "left_component": "軍配の光影",
+    "right_component": "鼓舞の波動",
+    "motion": "軍配→強化が成功した対象への波動",
+    "initial_art_approved": false,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "purification",
+    "name": "大祓い",
+    "category": "ssr",
+    "file": "assets/23_purification.png",
+    "source_file": "exec-78ff1765-e747-436a-8bc5-0c26f28263f0.png",
+    "sha256": "309319bb6d6476b8e28aca77135422503e8934ae6eed28664ad54fe7f49a8da4",
+    "width": 1983,
+    "height": 793,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "proposed_skill_ids": [
+      "SKD071"
+    ],
+    "left_component": "清めの輪",
+    "right_component": "浄化粒子",
+    "motion": "輪が通過→解除成功対象の濁りが消える",
+    "initial_art_approved": false,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  },
+  {
+    "effect_id": "power-break-flash",
+    "name": "破勢の一閃",
+    "category": "ssr",
+    "file": "assets/24_power-break-flash.png",
+    "source_file": "exec-0627dec5-03a4-4381-963d-3745201257ce.png",
+    "sha256": "e4f34464d2eaf85a1ba35fee0904fe3bffed3530e13b1bddd6a8fc8b3e9407ef",
+    "width": 1774,
+    "height": 887,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "proposed_skill_ids": [
+      "SKD072"
+    ],
+    "left_component": "断ち切る光",
+    "right_component": "鋭い残光",
+    "motion": "能力強化の解除成功→一閃",
+    "initial_art_approved": false,
+    "status": "GENERATED_NOT_INTEGRATED",
+    "split_note": "左右の境界は目視で確定。中央50%分割を前提にしない"
+  }
+]

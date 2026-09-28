@@ -26,8 +26,7 @@ import type { BattleResult, BattleUnitState } from '../../../domain/redesign/bat
 import type { BattleUnit, SkillMaster } from '../../../domain/redesign/types';
 import styles from './BattleView.module.css';
 import { BattleEffectLayer } from './battle-effects/BattleEffectLayer';
-import { effectAssetPaths } from './battle-effects/recordedEffects';
-import { resolveBattleFrameEffects } from './battleEffectPresentation';
+import { effectAssetPaths, recordedEffects } from './battle-effects/recordedEffects';
 import { isBattleImageReady, preloadBattleImages } from '../battle/battleAssetPreload';
 import { displayImage } from '@/theme/displayImages';
 import { characterArt } from '@/theme/creativeAssets';
@@ -136,12 +135,12 @@ export function BattleView({ onRetire, onPlaybackComplete, autoCompleteOnFinish 
     try { await onRetire(); }
     catch(error) { exitLock.current=false;setTerminalError(error instanceof Error?error.message:'リタイアを保存できませんでした。'); }
   }
-  const effects = frame ? resolveBattleFrameEffects(frame, result.frames[index - 1], presentation.skill) : [];
+  const effects = recordedEffects(result, index);
   // A result-wide gate avoids hiding the battle when a later effect first appears.
   const imageKey = useMemo(() => JSON.stringify([...new Set([
     ...tutorialEffectAssets(result),
     '/creative/branding/sengoku-hime-enbu-logo-20260928-v2.png', backgroundSrc, ...BATTLE_RESOURCE_ASSETS, ...INK_ASSETS.map(n=>INK_ROOT+n), ...result.waves.map((_,i)=>INK_ROOT+`wave-${i+1}.png`),
-    ...result.frames.flatMap((record, i) => effectAssetPaths(resolveBattleFrameEffects(record, result.frames[i - 1], projectRecordedBattleFrame(result, i).skill))),
+    ...result.frames.flatMap((_, i) => effectAssetPaths(recordedEffects(result, i))),
     ...result.frames.flatMap(record => [...record.party, ...record.enemies].flatMap(state => {
       const unit = result.party.find(item => item.id === state.id) ?? result.waves[record.wave - 1]?.find(item => item.id === state.id);
       return [unit ? unitArt(unit, state, 'battle') : state.image, unit ? unitArt(unit, state, 'full') : undefined,

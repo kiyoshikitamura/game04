@@ -1,9 +1,10 @@
 import type { BattleFrame } from '../../../domain/redesign/battle';
 import type { SkillMaster } from '../../../domain/redesign/types';
+import { skillVfxForId, type SkillVfxEvent } from './battle-effects/skillVfx24.ts';
 
 export const BATTLE_EFFECT_FAMILIES = ['slash', 'slash_all', 'impact', 'impact_all', 'projectile', 'heal', 'heal_all', 'atk_up', 'def_up', 'spd_up', 'atk_down', 'def_down', 'poison', 'blind', 'silence', 'stun'] as const;
 export type BattleEffectFamily = typeof BATTLE_EFFECT_FAMILIES[number];
-export interface RecordedBattleEffect { targetId: string; family: BattleEffectFamily }
+export interface RecordedBattleEffect { targetId: string; family: BattleEffectFamily; vfx?: SkillVfxEvent }
 const statusFamilies: Readonly<Record<string, BattleEffectFamily>> = { atk_up: 'atk_up', def_up: 'def_up', spd_up: 'spd_up', atk_down: 'atk_down', def_down: 'def_down', poison: 'poison', dot: 'poison', blind: 'blind', darkness: 'blind', silence: 'silence', stun: 'stun', hot: 'heal' };
 
 /** Visual classification only. Never changes targeting, damage, or skill eligibility. */
@@ -18,6 +19,38 @@ export function classifyBattleDamageEffect(skill?: SkillMaster): BattleEffectFam
 /** Only recorded successful events can cause a success effect. Statuses use a multiset delta
  * so pre-existing effects from the same skill are not flashed again. */
 export function resolveBattleFrameEffects(frame: BattleFrame, previous: BattleFrame | undefined, skill?: SkillMaster): RecordedBattleEffect[] {
+  const mapped = skillVfxForId(frame.skillId);
+  const event = frame.event;
+  const successfulTargets = (frame.targetIds ?? []).filter(id => {
+    const old = [...(previous?.party ?? []), ...(previous?.enemies ?? [])].find(u => u.id === id);
+    const current = [...frame.party, ...frame.enemies].find(u => u.id === id);
+    return current && (!old || previous?.wave !== frame.wave || (old.hp > 0 && !old.dead));
+  });
+  const vfx = (targetId: string, family: BattleEffectFamily, phase: SkillVfxEvent['phase']): RecordedBattleEffect => ({targetId, family, vfx: {id: mapped!.id, phase, leadIn: true, areaTargetIds: [targetId], element: skill?.element}});
+  if (mapped && event === 'damage') return successfulTargets.map(id => vfx(id, classifyBattleDamageEffect(skill), 'strike'));
+  if (mapped?.id === 'grand-healing' && event === 'heal') return successfulTargets.map(id => vfx(id, 'heal_all', 'support'));
+  if (mapped && ['formation-break', 'power-break-flash', 'purification'].includes(mapped.id) && event === 'cleanse' && previous?.wave === frame.wave) {
+    return successfulTargets.filter(id => {
+      const before = [...previous.party, ...previous.enemies].find(u => u.id === id)?.statuses ?? [];
+      const after = [...frame.party, ...frame.enemies].find(u => u.id === id)?.statuses ?? [];
+      // A recorded event without an actual removal is not a successful cleanse.
+      const remaining = after.map(statusFingerprint);
+      return before.some(status => { const i = remaining.indexOf(statusFingerprint(status)); if(i < 0) return true; remaining.splice(i,1); return false; });
+    }).map(id => vfx(id, 'def_down', 'cleanse'));
+  }
+  if (mapped && ['barrier-field','counter-stance','war-god-rally'].includes(mapped.id) && event === 'effect_applied' && previous?.wave === frame.wave) {
+    const accepted = mapped.id === 'barrier-field' ? ['shield','def_up'] : mapped.id === 'counter-stance' ? ['counter','taunt'] : ['atk_up','taunt'];
+    return successfulTargets.filter(id => addedStatuses(frame,previous,id).some(status => accepted.includes(status.type)))
+      .map(id => vfx(id, mapped.id === 'war-god-rally' ? 'atk_up' : 'def_up', 'support'));
+  }
+  return resolveLegacyBattleFrameEffects(frame,previous,skill);
+}
+const statusFingerprint = (status: BattleFrame['party'][number]['statuses'][number]) => JSON.stringify([status.type,status.sourceId,status.sourceSkillId,status.appliedAction,status.power,status.sequence]);
+function addedStatuses(frame: BattleFrame, previous: BattleFrame, id: string) {
+  const old = ([...previous.party,...previous.enemies].find(u=>u.id===id)?.statuses??[]).map(statusFingerprint);
+  return ([...frame.party,...frame.enemies].find(u=>u.id===id)?.statuses??[]).filter(status=>{const i=old.indexOf(statusFingerprint(status));if(i<0)return true;old.splice(i,1);return false;});
+}
+function resolveLegacyBattleFrameEffects(frame: BattleFrame, previous: BattleFrame | undefined, skill?: SkillMaster): RecordedBattleEffect[] {
   const targets = frame.targetIds ?? [];
   if (['damage', 'counter'].includes(frame.event ?? '')) return targets.map(targetId => ({ targetId, family: classifyBattleDamageEffect(skill) }));
   if (['heal', 'revive', 'hot'].includes(frame.event ?? '')) return targets.map(targetId => ({ targetId, family: frame.event === 'heal' && (skill?.target === 'all_allies' || skill?.effects.some(effect => effect.type === 'heal' && effect.target === 'all_allies')) ? 'heal_all' : 'heal' }));
