@@ -3,17 +3,17 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { BattleResult } from '../../domain/redesign/battle';
 import { recordedBattleFrameDuration } from '../../domain/presentation/recordedBattlePresentation';
 import { battleLeadIn, burstPresentation } from '../../domain/presentation/battleLeadIn';
-interface Options {result:BattleResult;initialFrame?:number;initialPaused?:boolean;vipActive:boolean;blocked?:boolean;minimumFrameDuration?:(result:BattleResult,index:number)=>number;waveIntroDuration?:number;}
+interface Options {result:BattleResult;initialFrame?:number;initialPaused?:boolean;vipActive:boolean;blocked?:boolean;minimumFrameDuration?:(result:BattleResult,index:number)=>number;waveIntroDuration?:number;omitWaveIntro?:boolean;}
 const clampFrame=(i:number,r:BattleResult)=>Math.max(0,Math.min(Number.isFinite(i)?Math.floor(i):0,r.frames.length-1));
 /** Presentation clocks never modify recorded combat. Every timer is cancelled on pause, skip and unmount. */
-export function useRecordedBattlePlayback({result,initialFrame=0,initialPaused=false,vipActive,blocked=false,minimumFrameDuration,waveIntroDuration=0}:Options){
+export function useRecordedBattlePlayback({result,initialFrame=0,initialPaused=false,vipActive,blocked=false,minimumFrameDuration,waveIntroDuration=0,omitWaveIntro=false}:Options){
  const [index,setIndex]=useState(()=>clampFrame(initialFrame,result)),[speed,setSpeed]=useState(1),[paused,setPaused]=useState(initialPaused);
  const generation=useRef(0),clock=useRef<{result:BattleResult;index:number;remaining:number}|null>(null);
  const [lead,setLead]=useState({result,index:-1,step:0});
  const leadClock=useRef<{result:BattleResult;index:number;step:number;remaining:number}|null>(null);
  const frame=result.frames[clampFrame(index,result)],finished=!frame||index>=result.frames.length-1;
  const burst=burstPresentation(result,index),effectiveSpeed=speed*(burst.active&&!finished?1.5:1);
- const plan=waveIntroDuration>0?battleLeadIn(result,index,initialFrame):[];
+ const plan=waveIntroDuration>0?battleLeadIn(result,index,initialFrame).filter(part=>!omitWaveIntro||part.phase!=='wave'):[];
  const step=lead.result===result&&lead.index===index?lead.step:0;
  const phase=!finished?plan[step]?.phase:undefined,phaseMs=plan[step]?.ms??0;
  const waveIntroActive=phase==='dark'||phase==='start'||phase==='wave';

@@ -28,6 +28,7 @@ export default function TutorialTrailerPreview() {
       result={result}
       vipActive={false}
       requirePlaybackCompletion
+      hideWaveDisplay
       autoCompleteOnFinish
       title="魔王・織田信長 Lv.100"
       backgroundSrc="/bg/approved-20260925/ssr-char_reiji_01.webp"

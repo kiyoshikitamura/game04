@@ -1,0 +1,24 @@
+/* Opening-only composition; existing tutorial and normal battle contracts are preserved. */
+.opening-shell{max-width:480px;height:100dvh}
+.opening-scene{padding:env(safe-area-inset-top) 16px max(16px,env(safe-area-inset-bottom));min-height:100dvh;gap:12px}
+.opening-black{background:#020205}
+.opening-spacer{flex:1;min-height:160px}
+.opening-copy{flex-shrink:0}
+.opening-copy>p{min-height:0;line-height:1.6;margin-bottom:16px}
+.opening-cast{min-height:240px}
+.opening-world-copy{flex:1;display:grid;place-content:center;text-align:center}
+.opening-world-copy p{white-space:pre-line;font-family:var(--font-title),serif;font-size:24px;line-height:2.2;margin:0}
+.opening-world-action{border:0;background:transparent;box-shadow:none}
+.opening-copy input{display:block;width:100%;box-sizing:border-box;margin:8px 0 16px;font-size:16px;padding:12px}
+.opening-roster{flex:1;display:flex;flex-direction:column;justify-content:center;gap:16px;padding-top:20px}
+.opening-characters,.opening-skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.opening-roster figure{margin:0;min-width:0;text-align:center}
+.opening-roster figcaption{font-size:14px;line-height:1.4;margin-top:8px;color:#fff4dc;text-shadow:0 1px 4px #000}
+.opening-characters .tutorial-character-card{width:100%;min-height:0}
+.opening-skills figure{display:flex;align-items:center;flex-direction:column}
+.opening-skills img{width:48px;height:48px;object-fit:contain}
+.opening-complete{min-height:100dvh;padding:32px 20px;display:flex;flex-direction:column;justify-content:center;gap:20px;background:#020205}
+.opening-complete h1{font-size:24px}
+.opening-note{font-size:14px;line-height:1.6}
+@media(max-height:700px){.opening-cast{min-height:180px}.opening-roster{padding-top:12px;gap:12px}.opening-copy{padding:12px}.opening-copy>p{margin-bottom:12px}.opening-scene{gap:8px}}
+@media(max-width:360px){.opening-scene{padding-left:12px;padding-right:12px}}
