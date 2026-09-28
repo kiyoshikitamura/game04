@@ -56,10 +56,10 @@ const statusPaths: Record<string, string> = {
   hot:'M9 3H15V9H21V15H15V21H9V15H3V9H9Z', stun:'M4 7 10 9 8 3 14 7 19 3 18 10 23 11 17 15 20 21 12 18 8 22 6 15 1 15 5 11Z',
   counter:'M4 11H15Q21 11 21 17Q21 22 15 22M4 11 10 5M4 11 10 17', taunt:'M12 1V6M12 18V23M1 12H6M18 12H23M20 12A8 8 0 1 1 4 12A8 8 0 1 1 20 12',
 };
-interface Props { onRetire?: () => void | Promise<void>; onPlaybackComplete?: () => Promise<void>; resultActions?: ReactNode; resultRewards?: ReactNode; bgmScene?: BgmScene; requirePlaybackCompletion?: boolean; result: BattleResult; vipActive: boolean; onComplete: () => void; title?: string; backgroundSrc?: string; raidHp?: { current: number; max: number; level?: number }; initialFrame?: number; initialPaused?: boolean; }
+interface Props { onRetire?: () => void | Promise<void>; onPlaybackComplete?: () => Promise<void>; autoCompleteOnFinish?: boolean; resultActions?: ReactNode; resultRewards?: ReactNode; bgmScene?: BgmScene; requirePlaybackCompletion?: boolean; result: BattleResult; vipActive: boolean; onComplete: () => void; title?: string; backgroundSrc?: string; raidHp?: { current: number; max: number; level?: number }; initialFrame?: number; initialPaused?: boolean; }
 
 /** Every visible value is projected from the recorded server frame. */
-export function BattleView({ onRetire, onPlaybackComplete, resultActions, resultRewards, bgmScene = 'BATTLE', requirePlaybackCompletion = false, result, vipActive, onComplete, title = '合戦', backgroundSrc = '/creative/backgrounds/char_reiji_01.png', raidHp, initialFrame = 0, initialPaused = false }: Props) {
+export function BattleView({ onRetire, onPlaybackComplete, autoCompleteOnFinish = false, resultActions, resultRewards, bgmScene = 'BATTLE', requirePlaybackCompletion = false, result, vipActive, onComplete, title = '合戦', backgroundSrc = '/creative/backgrounds/char_reiji_01.png', raidHp, initialFrame = 0, initialPaused = false }: Props) {
   const { playBgm, stopBgm, playSe, stopSe, preloadAudio } = useAudio();
   const [pauseMenu, setPauseMenu] = useState(false);
   const [confirmRetire, setConfirmRetire] = useState(false);
@@ -100,7 +100,7 @@ export function BattleView({ onRetire, onPlaybackComplete, resultActions, result
     try { await completionCallback.current?.(); if(generation===terminalGeneration.current&&!exitLock.current)setCompletion('done'); }
     catch(error) { if(generation===terminalGeneration.current&&!exitLock.current){completionLock.current=false;setCompletion('error');setTerminalError(error instanceof Error?error.message:'結果を保存できませんでした。');} }
   }
-  useEffect(()=>{if(finished&&!exitLock.current)void completePlayback();},[finished,result]);
+  useEffect(()=>{if(finished&&!exitLock.current)void completePlayback();},[finished,result]);\n  useEffect(()=>{if(finished&&autoCompleteOnFinish&&!onPlaybackComplete&&!autoCompleteLock.current){autoCompleteLock.current=true;onComplete();}},[finished,autoCompleteOnFinish,onPlaybackComplete,onComplete]);
   const presentation = projectRecordedBattleFrame(result, index);
   const battleRoot = useRef<HTMLElement>(null);
   useEffect(() => { if (finished) { stopBgm(); battleRoot.current?.scrollIntoView({ block: 'start' }); } }, [finished, stopBgm]);
@@ -245,7 +245,7 @@ export function BattleView({ onRetire, onPlaybackComplete, resultActions, result
     <div className={styles.party}>{frame.party.map((u, i) => unitCard(u, false, i))}</div>
     {frame.remainingActions !== undefined && <p className={styles.actionLimit}>残り味方行動機会 <strong>{frame.remainingActions}</strong> / 300</p>}
     </>}
-    {finished && (!onPlaybackComplete || completion==='done') && <RecordedBattleResult result={result} title={title} backgroundSrc={backgroundSrc} rewards={resultRewards} actions={resultActions ?? <button onClick={onComplete}>結果へ</button>} />}
+    {finished && !autoCompleteOnFinish && (!onPlaybackComplete || completion==='done') && <RecordedBattleResult result={result} title={title} backgroundSrc={backgroundSrc} rewards={resultRewards} actions={resultActions ?? <button onClick={onComplete}>結果へ</button>} />}
     </div>
     {!finished && !assetsBlocked && !presentationPhase && <BattleEffectLayer key={index} effects={effects} partyIds={frame.party.map(unit => unit.id)} paused={playbackPaused} speed={effectiveSpeed} />}
     {(detail || showLog) && <dialog ref={detailDialog} className={styles.backdrop} aria-label={showLog ? '戦闘ログ' : '戦闘詳細'} onCancel={event => { event.preventDefault(); close(); }}><section className={styles.modal}><button className={styles.close} onClick={close} autoFocus>閉じる</button>{showLog ? <>
