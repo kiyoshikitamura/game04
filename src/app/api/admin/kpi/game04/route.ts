@@ -28,7 +28,7 @@ async function readDashboard(origin: string, period: Period, from: string, to: s
 }
 const cachedRead = unstable_cache(readDashboard, ['game04-kpi-title-v3-20260928', questData.version, String(SCENES.length)], { revalidate: 60 });
 function response(body: unknown, status = 200) { return NextResponse.json(body, { status, headers: { 'Cache-Control': 'no-store' } }); }
-// /api/admin/kpi/* is authenticated by the existing Basic-auth proxy.
+// Public read-only KPI endpoint; proxy restricts hosting to development / Preview.
 export async function GET(request: NextRequest) {
   const q = request.nextUrl.searchParams;
   const period = q.get('period') || 'daily';
