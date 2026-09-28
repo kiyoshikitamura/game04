@@ -1,5 +1,7 @@
 # チュートリアル演出接続 — 2026-09-28
 
+追加指示によるフォント・時間・連撃順の更新は [REVISION.md](./REVISION.md) を参照。以下は初回配信時の記録。
+
 ## 1 素材確認・復旧（完了）
 - 元Preview: https://game04-czlj0ozdr-kiyoshi-kitamura.vercel.app/qa/tutorial-opening
 - 保存SHA: 536db8e15853971da652bc5a5f008b1f9e020262 / work/game04-tutorial-trailer-20260928。

@@ -2,7 +2,7 @@ const {chromium}=require('@playwright/test');
 const fs=require('node:fs');
 const assert=require('node:assert/strict');
 const base=process.env.QA_URL||'http://localhost:3040';
-const out='docs/verification/tutorial-effects-20260928/recovery';
+const out=process.env.QA_OUTPUT||'docs/verification/tutorial-effects-20260928/recovery';
 fs.mkdirSync(out,{recursive:true});
 (async()=>{
  const browser=await chromium.launch();const page=await browser.newPage({viewport:{width:375,height:664}});

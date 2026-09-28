@@ -45,7 +45,7 @@ async function main(){
   assert.equal(after.frame,before.frame);after.times.forEach((n,i)=>assert.ok(Math.abs(n-before.times[i])<50));
   report.checks.push('pause freezes frame and cutin animation');
   await page.getByRole('button',{name:'バトルを続ける',exact:true}).click();
-  await page.waitForTimeout(1050);
+  await page.waitForTimeout(600);
   await noOverflow();await page.screenshot({path:path.join(out,`${width}-cutin.png`)});
   const bounds=await page.locator('.tutorial-skill-fx').evaluate(n=>{
    const a=n.querySelector('.tutorial-skill-art'),s=n.querySelector('.tutorial-skill-name');
@@ -53,6 +53,11 @@ async function main(){
   });
   assert.ok(Math.abs(bounds.width-1.15)<.01);assert.ok(Math.abs(bounds.top-.17)<.01);assert.ok(Math.abs(bounds.skillTop-.45)<.01);assert.ok(bounds.loaded);report.bounds=bounds;assert.ok(bounds.fontSize>=22);if(!reduced)assert.equal(bounds.duration,'1.6s');
   await page.getByRole('button',{name:'再生速度 1倍',exact:true}).click();
+  // updatePlaybackRate takes effect on the next browser animation frame.
+  await page.waitForFunction(()=>{
+   const effect=document.querySelector('[data-tutorial-cutin]');
+   return effect&&effect.getAnimations({subtree:true}).every(animation=>animation.playbackRate===2);
+  });
   const animations=await page.locator('[data-tutorial-cutin]').evaluate(n=>n.getAnimations({subtree:true}).map(a=>a.playbackRate));
   assert.ok(animations.every(n=>n===2));report.checks.push('speed change preserves mounted cutin and sets rate 2');
   await page.locator('[data-tutorial-combo="1"]').waitFor({timeout:60000});
