@@ -1,4 +1,5 @@
-import { CHARACTER_MASTERS, getCharacterStats } from '../masters';\nimport { FORMAL_SKILL_MASTERS } from '../formalOwnedSkills';
+import { CHARACTER_MASTERS, getCharacterStats } from '../masters';
+import { FORMAL_SKILL_MASTERS } from '../formalOwnedSkills';
 import type { BattleFrame, BattleResult, BattleUnitState } from '../battle';
 import type { BattleUnit, EnemyUnit, SkillMaster } from '../types';
 
