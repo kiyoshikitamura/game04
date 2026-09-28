@@ -9,3 +9,14 @@ Local scene/name drafts are scoped to the account. Server progress controls resu
 Verification: npm run check (explicit local mock environment) passes. Approved QA opening regression passes. 390px IntegratedTutorial fixture invokes the real transition function: full opening, partial save failure at step5, reload/retry, exactly three characters/skills/deck entries, practice, duplicate-name recovery, step17/home return and no browser exceptions pass. Fixture is isolated and does not create accounts or call Production writes. Browser initially selected the Next route-announcer alert in the test; assertions were scoped to the actual error text and rerun successfully. Actual authenticated fresh-user acceptance remains separate from these synthetic transition checks.
 
 Production environment confirmed: app env production, mock false, Supabase soiksqgtmcnspfedmanr, canonical site URL. Monitoring corrected to the actual canonical project and set for 24 hours after deployment, hourly. No main/GAME03 changes.
+
+## Deployed
+
+- Runtime/source SHA `d2e10e5e0629353d66bbb71be2fd5194f2d7955f`.
+- Production build READY: `dpl_8ttBnDcFtMWVP4gMCMwr83QpgSAe`, https://game04-production-receiver-j7opg12jg-kiyoshi-kitamura.vercel.app.
+- Staged with Production configuration and domain assignment held. Protected URL required authenticated CLI bypass; protection was preserved. Mobile browser smoke then passed with a scoped bypass header.
+- Promoted successfully. `vercel inspect sengoku-hime-ennbu.com` resolves to this deployment. Canonical domain smoke passed unauthenticated: title/start, all 15 SSR/combo assets, intended QA 404, no page exceptions.
+- Existing baseline issue: `record_kpi_acquisition_landing_v1` returns 404 in both previous Production and this build. Recorded separately, not treated as a new gameplay regression.
+- Runtime logs are unavailable via current credentials: CLI fetch failed; connector error aggregation returned 403. HTTP/assets/browser monitoring remains available. Live authenticated new-user onboarding was not executed; isolated full progression/failure/retry tests passed.
+- Hourly monitor `game04` points to the correct production receiver and canonical domain. Its initial state/start/deadline are in the workspace work/production-monitor/state.json; it stops after 24 hours.
+- Database, Edge API, main, GAME03, billing and authentication settings were not changed by this release. Parallel maeda-guide/pochi-online branches were detected but are not deployed to the canonical domain and were not overwritten or merged.
