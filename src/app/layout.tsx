@@ -31,8 +31,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: SOCIAL_IMAGE_PATH,
-        width: 1200,
-        height: 630,
+        width: 1983,
+        height: 793,
         alt: "戦国姫艶武",
       },
     ],
