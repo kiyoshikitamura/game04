@@ -11,7 +11,7 @@ import './home-promotion.css';
 export function HomePromotionDialog({ kind, purchased = false, onClose, onNavigate }: { kind: HomePromotionKind; purchased?: boolean; onClose: () => void; onNavigate: (destination: string) => void }) {
   const offer = HOME_PROMOTIONS[kind];
   return <CanonicalDialog title={offer.title} onClose={onClose} density="compact" className="g4-home-promotion"
-    actions={[{ label: '閉じる', onClick: onClose }, { label: purchased ? 'ショップを見る' : offer.action, semantic: 'primary', onClick: () => { onClose(); onNavigate(offer.destination); } }]}>
+    actions={[{ label: '閉じる', onClick: onClose }, { label: kind === 'starter' && purchased ? 'ショップを見る' : offer.action, semantic: 'primary', onClick: () => { onClose(); onNavigate(offer.destination); } }]}>
     {kind === 'starter' ? <div className="g4-starter-offer">
       <p className="g4-starter-lead">{offer.message}</p>
       <div className="g4-starter-ticket">

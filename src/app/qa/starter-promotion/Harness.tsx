@@ -10,7 +10,7 @@ import '@/app/components/redesign/redesign.css';
 export default function Harness() {
  const [ready,setReady]=useState(false),[blocked,setBlocked]=useState(true),[active,setActive]=useState(true);
  const [destination,setDestination]=useState(''),[recorded,setRecorded]=useState(0);
- const fixture=useRef({time:Date.parse('2026-09-28T14:59:50Z'),shownDay:'',visit:'',purchased:false,failOnce:false});
+ const fixture=useRef({time:Date.parse('2026-09-28T14:59:50Z'),shownDay:'',visit:'',purchased:false,failOnce:false,kind:'starter'});
  useEffect(()=>{
   const originalRpc=supabase.rpc,originalNow=Date.now;
   Date.now=()=>fixture.current.time;
@@ -25,7 +25,7 @@ export default function Harness() {
    if(args?.p_action==='release'){f.visit='';return {data:{},error:null};}
    if(f.shownDay===day)return {data:{},error:null};
    f.visit=args?.p_visit_id??'';
-   return {data:{kind:'starter',day,purchased:f.purchased},error:null};
+   return {data:{kind:f.kind,day,purchased:f.purchased},error:null};
   }) as unknown as typeof supabase.rpc;
   setReady(true);
   return()=>{supabase.rpc=originalRpc;Date.now=originalNow;};
@@ -38,6 +38,7 @@ export default function Harness() {
    <button onClick={()=>{fixture.current.time+=86400000;}}>翌日へ</button>
    <button onClick={()=>{fixture.current.purchased=true;}}>購入済みにする</button>
    <button onClick={()=>{fixture.current.failOnce=true;}}>表示記録を1回失敗</button>
+   <button onClick={()=>{fixture.current.kind='daily-free';fixture.current.time+=86400000;}}>翌日の無料召喚</button>
    <p role="status">表示記録 {recorded}回 / {destination}</p>
   </main>
   <HomePromotion owner="synthetic-starter" active={active} blocked={blocked} onNavigate={setDestination}/>

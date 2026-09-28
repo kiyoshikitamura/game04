@@ -24,8 +24,10 @@ for(const width of [375,390]){
  click('購入済みにする');click('ガイド終了');run('wait','--text','このパックは購入済みです。');
  run('wait','--text','表示記録 2回');run('screenshot',`${output}/purchased-${width}.png`);
  click('ショップを見る');run('wait','--text','shop:beginner_pack_01');
+ click('翌日の無料召喚');run('wait','--text','毎日1回10連無料！');click('召喚する');
+ assert(evaluate('document.querySelector("[role=status]").textContent.includes("/ gacha")'));
  assert(!run('errors').trim());
- checks.push({width,initialGuideSuppressed:true,shownAfterGuide:true,acknowledgementRetried:true,ctaTarget:true,sameDaySuppressed:true,nextDayGuideSuppressed:true,nextDayPurchasedVisible:true,buttonsFit:true});
+ checks.push({width,initialGuideSuppressed:true,shownAfterGuide:true,acknowledgementRetried:true,ctaTarget:true,sameDaySuppressed:true,nextDayGuideSuppressed:true,nextDayPurchasedVisible:true,freeGachaCtaPreserved:true,buttonsFit:true});
 }
 fs.writeFileSync(`${output}/browser-results.json`,JSON.stringify({tool:'agent-browser',scope:'real React components with in-memory RPC; DB rules tested separately',checks},null,2)+'\n');
 console.log(JSON.stringify(checks));
