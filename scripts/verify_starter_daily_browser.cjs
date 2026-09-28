@@ -13,7 +13,7 @@ for(const width of [375,390]){
  run('set','viewport',String(width),'664');
  run('open','http://localhost:3188/qa/starter-promotion');run('wait','--text','ガイド終了');
  run('wait','2200');assert(evaluate('!document.querySelector("[role=dialog]")'));
- click('表示記録を1回失敗');click('ガイド終了');run('wait','--text','キャラガチャ券');
+ click('表示記録を1回失敗');click('ガイド終了');run('wait','--fn','document.querySelector(".g4-starter-artwork")?.naturalWidth === 1024');
  run('wait','--text','表示記録 1回');
  assert(evaluate('document.documentElement.scrollWidth<=innerWidth'));
  assert(evaluate('Array.from(document.querySelectorAll("[role=dialog] button")).every(b=>{const r=b.getBoundingClientRect();return r.height>=44&&r.bottom<=innerHeight&&r.left>=0&&r.right<=innerWidth})'));
@@ -21,7 +21,7 @@ for(const width of [375,390]){
  click('100円パックを見る');run('wait','--text','shop:beginner_pack_01');
  click('ホームを離れる');click('ホームへ戻る');run('wait','2200');assert(evaluate('!document.querySelector("[role=dialog]")'));
  click('ガイド開始');click('翌日へ');run('wait','2200');assert(evaluate('!document.querySelector("[role=dialog]")'));
- click('購入済みにする');click('ガイド終了');run('wait','--text','このパックは購入済みです。');
+ click('購入済みにする');click('ガイド終了');run('wait','--text','購入済みです。再購入はできません。');
  run('wait','--text','表示記録 2回');run('screenshot',`${output}/purchased-${width}.png`);
  click('ショップを見る');run('wait','--text','shop:beginner_pack_01');
  click('翌日の無料召喚');run('wait','--text','毎日1回10連無料！');click('召喚する');

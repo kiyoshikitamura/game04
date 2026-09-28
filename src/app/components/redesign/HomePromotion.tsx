@@ -10,19 +10,12 @@ import './home-promotion.css';
 
 export function HomePromotionDialog({ kind, purchased = false, onClose, onNavigate }: { kind: HomePromotionKind; purchased?: boolean; onClose: () => void; onNavigate: (destination: string) => void }) {
   const offer = HOME_PROMOTIONS[kind];
-  return <CanonicalDialog title={offer.title} onClose={onClose} density="compact" className="g4-home-promotion"
+  return <CanonicalDialog title={offer.title} onClose={onClose} density="compact" className={`g4-home-promotion${kind === 'starter' ? ' g4-home-promotion--artwork' : ''}`}
     actions={[{ label: '閉じる', onClick: onClose }, { label: kind === 'starter' && purchased ? 'ショップを見る' : offer.action, semantic: 'primary', onClick: () => { onClose(); onNavigate(offer.destination); } }]}>
-    {kind === 'starter' ? <div className="g4-starter-offer">
-      <p className="g4-starter-lead">{offer.message}</p>
-      <div className="g4-starter-ticket">
-        <span className="g4-starter-tag">キャラガチャ10回分</span>
-        <p>キャラガチャ券</p>
-        <strong>10<span>枚</span></strong>
-      </div>
-      <div className="g4-starter-diamonds"><span>さらに 輝石</span><strong>500</strong></div>
-      <div className="g4-starter-price"><span>おひとり様1回限り</span><strong>100<span>円（税込）</span></strong></div>
-      <p className="g4-starter-note">{purchased ? 'このパックは購入済みです。再購入はできません。' : 'ショップで内容を確認して購入できます。'}</p>
-    </div> : <><img src={offer.image} width={1280} height={640} alt={offer.title} decoding="async" /><p>{offer.message}</p></>}
+    {kind === 'starter' ? <>
+      <img className="g4-starter-artwork" src={offer.image} width={1024} height={1536} alt="初回限定・特選 姫武将召喚札10枚＋輝石500、100円（税込）" decoding="async" fetchPriority="high" />
+      {purchased && <p className="g4-starter-note">購入済みです。再購入はできません。</p>}
+    </> : <><img src={offer.image} width={1280} height={640} alt={offer.title} decoding="async" /><p>{offer.message}</p></>}
   </CanonicalDialog>;
 }
 

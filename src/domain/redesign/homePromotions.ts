@@ -1,7 +1,7 @@
 /** Presentation configuration only. Eligibility is decided by the authenticated RPC. */
 export const HOME_PROMOTIONS = {
   starter: {
-    title: '初陣応援パック', image: '',
+    title: '初陣応援パック', image: '/creative/promotions/starter-pack-100-20260928.png',
     message: '新たな仲間と、次の戦へ。', value: '100円（税込）',
     action: '100円パックを見る', destination: 'shop:beginner_pack_01',
   },
