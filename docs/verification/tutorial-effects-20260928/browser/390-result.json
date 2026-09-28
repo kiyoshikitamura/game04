@@ -1,0 +1,135 @@
+{
+  "base": "http://localhost:3040",
+  "width": 390,
+  "reduced": false,
+  "errors": [],
+  "failedRequests": [],
+  "checks": [
+    "pause freezes frame and cutin animation",
+    "speed change preserves mounted cutin and sets rate 2",
+    "trailer: 9 cutins exactly once, combos 1/2/3, defeat advances automatically",
+    "practice: Date cutin once, no SSR art on R starters, combos 1/2/3, victory/farewell/complete",
+    "restart starts a fresh trailer, no lingering overlays"
+  ],
+  "bounds": {
+    "width": 1.1499690721649485,
+    "top": 0.1700197889182058,
+    "skillTop": 0.4500540897097626,
+    "loaded": true
+  },
+  "events": [
+    {
+      "scene": "trailer",
+      "frame": 1,
+      "kind": "cutin",
+      "value": "char_ageha_01",
+      "time": 3370.100000000559
+    },
+    {
+      "scene": "trailer",
+      "frame": 4,
+      "kind": "cutin",
+      "value": "char_karen_01",
+      "time": 6768.4000000003725
+    },
+    {
+      "scene": "trailer",
+      "frame": 7,
+      "kind": "cutin",
+      "value": "char_leo_01",
+      "time": 8703.600000000559
+    },
+    {
+      "scene": "trailer",
+      "frame": 10,
+      "kind": "cutin",
+      "value": "char_koharu_01",
+      "time": 10754.200000000186
+    },
+    {
+      "scene": "trailer",
+      "frame": 13,
+      "kind": "cutin",
+      "value": "char_go_01",
+      "time": 12684.600000000559
+    },
+    {
+      "scene": "trailer",
+      "frame": 17,
+      "kind": "combo",
+      "value": "1",
+      "time": 16982.900000000373
+    },
+    {
+      "scene": "trailer",
+      "frame": 17,
+      "kind": "cutin",
+      "value": "char_ageha_01",
+      "time": 17652.400000000373
+    },
+    {
+      "scene": "trailer",
+      "frame": 20,
+      "kind": "combo",
+      "value": "2",
+      "time": 18964.60000000056
+    },
+    {
+      "scene": "trailer",
+      "frame": 20,
+      "kind": "cutin",
+      "value": "char_ageha_01",
+      "time": 19648.200000000186
+    },
+    {
+      "scene": "trailer",
+      "frame": 23,
+      "kind": "combo",
+      "value": "3",
+      "time": 20952.300000000745
+    },
+    {
+      "scene": "trailer",
+      "frame": 23,
+      "kind": "cutin",
+      "value": "char_ageha_01",
+      "time": 21624.700000000186
+    },
+    {
+      "scene": "trailer",
+      "frame": 26,
+      "kind": "cutin",
+      "value": "char_reiji_01",
+      "time": 23008.5
+    },
+    {
+      "scene": "practice",
+      "frame": 10,
+      "kind": "cutin",
+      "value": "char_leo_01",
+      "time": 33251.60000000056
+    },
+    {
+      "scene": "practice",
+      "frame": 14,
+      "kind": "combo",
+      "value": "1",
+      "time": 37752.90000000037
+    },
+    {
+      "scene": "practice",
+      "frame": 17,
+      "kind": "combo",
+      "value": "2",
+      "time": 39088.300000000745
+    },
+    {
+      "scene": "practice",
+      "frame": 20,
+      "kind": "combo",
+      "value": "3",
+      "time": 40426.40000000037
+    }
+  ],
+  "status": "PASS"
+}

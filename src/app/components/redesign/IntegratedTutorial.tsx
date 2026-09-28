@@ -1,68 +1,35 @@
 'use client';
-import { useEffect,useRef,useState } from 'react';
-import { useAudio } from '@/audio/AudioProvider';
-import { CHARACTER_MASTERS } from '@/domain/redesign/masters';
-import { getFormalOwnedSkill } from '@/domain/redesign/formalOwnedSkills';
-import { characterArt } from '@/theme/creativeAssets';
-import { BACKGROUNDS,SCENES,STARTERS,STARTER_SKILLS } from '@/domain/redesign/tutorial/content';
-import { createTutorialBattle } from '@/domain/redesign/tutorial/battle';
+import { useEffect, useRef, useState } from 'react';
+import TutorialOpening, { type OpeningScene } from '@/app/qa/tutorial-opening/TutorialOpeningPreview';
 import type { RedesignState } from '@/domain/redesign/types';
-import BattleView from './BattleView';
-import HomeEffect from './HomeEffect';
-import { AssetIcon } from '../ui/AssetChoice';
-import { CharacterCard } from './visual-bench/CharacterDisplays';
-import TutorialSceneAssets from '@/app/qa/tutorial/TutorialSceneAssets';
-import CowboyDisplay from './visual-bench/CowboyDisplay';
-import TypewriterText from './TypewriterText';
-import CanonicalDialog from '../ui/CanonicalDialog';
-import ActionButton from '../ui/ActionButton';
-import { tutorialFailure } from '@/domain/redesign/tutorial/errors';
-import { tutorialSceneAssets } from '@/app/qa/tutorial/assets';
-import '@/app/qa/tutorial/tutorial.css';
-const castMember=(id:string)=>CHARACTER_MASTERS.find(c=>c.id===id)!;
-/** A server refresh must not replace the recording and reset its playback clock. */
-function TutorialPractice({state,onComplete}:{state:RedesignState;onComplete:()=>void}) {
- const [practice]=useState(()=>createTutorialBattle(state));
- return <BattleView requirePlaybackCompletion result={practice} vipActive={false} onComplete={onComplete} title="模擬戦" backgroundSrc={BACKGROUNDS.battle} />;
-}
-export default function IntegratedTutorial({state,busy,onNext}:{state:RedesignState;busy:boolean;onNext:(step:number,name:string)=>Promise<unknown>}) {
- const save=state.tutorial!;
- const [name,setName]=useState(save.name),[error,setError]=useState('');
- const [duplicateName,setDuplicateName]=useState(false);
- const nameInput=useRef<HTMLInputElement>(null);
- const advancing=useRef(false);
- const [pending,setPending]=useState(false);
- useEffect(()=>{advancing.current=false;setPending(false);},[state.userId,save.step]);
- useEffect(()=>{document.body.classList.add('rd-active');return()=>document.body.classList.remove('rd-active');},[]);
- const scene=SCENES[save.step];
- const { playBgm } = useAudio();
- useEffect(() => { if (scene.id !== 'battle') playBgm('TITLE'); }, [scene.id, playBgm]);
- const world=scene&&'cast' in scene;
- const acquisition=scene?.id==='characters'||scene?.id==='skills';
- const background=world?scene.background:BACKGROUNDS.guide;
- const cast=world?scene.cast:['char_ageha_01'];
- const [revealedScene,setRevealedScene]=useState('');
- const revealed = revealedScene === scene.id;
- const reveal = () => setRevealedScene(scene.id);
- const next=()=>{if(busy||advancing.current||duplicateName)return;advancing.current=true;setPending(true);setError('');void onNext(save.step,name).catch(e=>{advancing.current=false;setPending(false);console.warn('Tutorial save failed:',e);const failure=tutorialFailure(e,scene.id==='name');setDuplicateName(failure.duplicate);setError(failure.message);});};
- return <TutorialSceneAssets assets={tutorialSceneAssets(save.step)} nextAssets={tutorialSceneAssets(save.step+1)}><div className="rd-shell tutorial-shell">
- {scene.id === 'battle' && state.deck.length ? <TutorialPractice key={`${state.userId}:${save.step}`} state={state} onComplete={next} /> :
-      <main key={scene.id} className={`tutorial-scene ${world ? 'is-world' : ''}`} style={{ backgroundImage: `linear-gradient(0deg, #160f0beb, transparent 65%), url('${background}')` }} data-scene={scene.id}>
-        {world && <HomeEffect effectId={scene.effectId} />}
-        <div className={`tutorial-cast count-${cast.length} ${!world && !acquisition ? 'is-cowboy' : ''}`} aria-label={world ? '乱世の武将たち' : '豊臣秀吉'}>
-          {!acquisition && cast.map(id => !world ? <CowboyDisplay key={id} characterId={id} name={castMember(id).name} /> : <img key={id} src={characterArt(castMember(id), 'full')} alt={castMember(id).name} />)}
-          {scene.id === 'characters' && <div className="tutorial-rewards">{STARTERS.map(id => <figure key={id}><CharacterCard subject={castMember(id)} compact hideMarks className="tutorial-character-card"/><figcaption><b>{id === 'char_aoi_01' ? 'お市' : castMember(id).name}</b><span>R　Lv.1・覚醒0</span></figcaption></figure>)}</div>}
-          {scene.id === 'skills' && <div className="tutorial-rewards is-skills">{STARTER_SKILLS.map(id => { const skill = getFormalOwnedSkill(id, 0); return <figure key={id}><div className="tutorial-skill-art"><AssetIcon src={skill.image} name={skill.name} /></div><figcaption><b>{skill.name}</b><span>{skill.rarity}　LB0</span></figcaption></figure>; })}</div>}
-        </div>
-        <section className="tutorial-copy" aria-live="polite">
-          {!world && !acquisition && !['name', 'equipped'].includes(scene.id) && <h1>豊臣秀吉</h1>}
-          <TypewriterText key={scene.id} text={scene.text.replace('〇〇', save.name)} revealed={revealed} onFinished={reveal} />
-          {scene.id === 'name' && <label>名前（1〜8文字）<input ref={nameInput} disabled={busy} autoComplete="off" placeholder="名前を入力" value={name} onChange={e => setName(e.target.value)} maxLength={16} /></label>}
-          {world && <div className="tutorial-progress" aria-label={`${save.step + 1} / 3`}>{[0, 1, 2].map(i => <i key={i} data-active={save.step === i} />)}</div>}
-          <ActionButton variant="primary" className="rd-button tutorial-next" busy={busy || pending} busyLabel="進行中" disabled={busy || (scene.id === 'name' && (!name.trim() || [...name.trim()].length > 8))} onClick={next}>{'button' in scene ? scene.button : '次へ'}</ActionButton>
-        </section>
-      </main>}
- {error&&<p className="rd-panel" role="alert">{error}</p>}
- {duplicateName&&<CanonicalDialog title="この名前は既に登録済です。" density="compact" actions={[{label:'入力し直す',semantic:'primary',onClick:()=>{setDuplicateName(false);requestAnimationFrame(()=>nameInput.current?.focus());}}]}><p>別の名前を入力してください。</p></CanonicalDialog>}
- </div></TutorialSceneAssets>;
+import { SCENES } from '@/domain/redesign/tutorial/content';
+
+/** Presentation checkpoints use the existing atomic, idempotent server transitions. */
+export default function IntegratedTutorial({state,onNext}:{state:RedesignState;busy:boolean;onNext:(step:number,name:string)=>Promise<unknown>}) {
+ const step=useRef(state.tutorial!.step);
+ step.current=Math.max(step.current,state.tutorial!.step);
+ const storageKey=`game04:opening:v1:${state.userId}`;
+ const [initial,setInitial]=useState<{scene:OpeningScene;name:string}|null>(null);
+ useEffect(()=>{
+  let saved:{scene?:OpeningScene;name?:string}|null=null;
+  try{saved=JSON.parse(localStorage.getItem(storageKey)||'null');}catch{/* Server progress remains authoritative. */}
+  const name=state.tutorial!.name||saved?.name||'';
+  const n=state.tutorial!.step;
+  const allowed:OpeningScene[]=n>=14?['name','farewell']:n>=13?['practice']:n>=10?['ready','practice']:['world','challenge','oda','trailer','need','blackout','osaka','name','recruit','test','formation'];
+  const fallback:OpeningScene=n>=14?(name?'farewell':'name'):n>=13?'practice':n>=10?'ready':'world';
+  setInitial({scene:saved?.scene&&allowed.includes(saved.scene)?saved.scene:fallback,name});
+ },[storageKey]);
+ if(!initial)return null;
+ const advance=async(scene:OpeningScene,name:string)=>{
+  const target=scene==='formation'?10:scene==='ready'?13:scene==='practice'?14:scene==='farewell'?SCENES.length:step.current;
+  while(step.current<target){
+   const submitted=step.current;
+   const value=await onNext(submitted,name) as {state:RedesignState};
+   const next=value.state.tutorial?.step;
+   if(next===undefined||next<=submitted)throw Error('進行が更新されています。再読み込みしてください。');
+   step.current=Math.max(step.current,next);
+  }
+  if(target===SCENES.length)try{localStorage.removeItem(storageKey);}catch{/* No reliance on browser storage for grants. */}
+ };
+ return <TutorialOpening live={{state,initialScene:initial.scene,initialName:initial.name,advance,onSceneChange:(scene,name)=>{try{localStorage.setItem(storageKey,JSON.stringify({scene,name}));}catch{/* Replay from the saved server checkpoint if storage is unavailable. */}}}}/>;
 }

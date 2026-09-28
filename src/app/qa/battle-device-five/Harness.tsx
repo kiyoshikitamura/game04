@@ -7,6 +7,7 @@ import one from '../../../../docs/verification/burst-enemy-pause/layout-1.json';
 import two from '../../../../docs/verification/burst-enemy-pause/layout-2.json';
 import three from '../../../../docs/verification/burst-enemy-pause/layout-3.json';
 import wave from '../../../../docs/verification/battle-device-five/wave.json';
+import characters from '@/theme/local-characters.json';
 import '@/app/components/redesign/redesign.css';
 export default function Harness(){
  const [fixture,setFixture]=useState<{result:BattleResult;index:number;mode:string}|null>(null);
@@ -14,6 +15,9 @@ export default function Harness(){
  const [left,setLeft]=useState(false),[completed,setCompleted]=useState(0),[next,setNext]=useState(0);
  useEffect(()=>{const q=new URLSearchParams(location.search),mode=q.get('mode')??'layout';const r=structuredClone((mode==='wave'?wave:q.get('count')==='1'?one:q.get('count')==='2'?two:three)) as unknown as BattleResult;r.pendingSettlementId='qa-local-only';
   if(q.get('art')==='shibata'){for(const w of r.waves)for(const e of w){e.name='柴田勝家';e.image='/creative/characters/battle/char_noa_01.png';}for(const f of r.frames)for(const e of f.enemies)e.image='/creative/characters/battle/char_noa_01.png';}
+  // Preview-only display fixture: keep the recorded actions, substitute explicit catalog art.
+  const skillCharacter=characters.find(c=>c.id===q.get('skillCharacter'));
+  if(skillCharacter){const actor=r.party[0];actor.name=skillCharacter.name;actor.image=skillCharacter.battle||skillCharacter.full;for(const f of r.frames)for(const unit of f.party)if(unit.id===actor.id)unit.image=actor.image;}
   for(const f of r.frames)for(const e of f.enemies)e.statuses=(['atk_up','def_down','dot','shield','counter'] as const).map(type=>({type,power:10,remaining:3,sourceId:e.id,carry:true}));
   const index=mode==='wave'?r.frames.findIndex(f=>f.event==='wave'):mode==='burst'?r.frames.findIndex(f=>f.event==='action_start'&&f.burst):mode.startsWith('complete')?r.frames.length-2:r.frames.findIndex(f=>f.event==='burst_end');setFixture({result:r,index:Math.max(0,index),mode});
  },[]);

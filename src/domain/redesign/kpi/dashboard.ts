@@ -1,10 +1,10 @@
 export type Period = 'daily' | 'monthly';
 export type Retention = { day: number; numerator: number | null; denominator: number | null; value?: number | null; immature?: number };
-export type OverviewRow = { date: string; new_users: number; total_registered: number; active_users: number; tutorial_completed: number; tutorial_rate: number | null; payers: number; revenue: number; payer_rate: number | null; arppu: number | null; arpu: number | null; partial: boolean; retention: Retention[] };
+export type OverviewRow = { date: string; title_uu?: number | null; new_users: number; total_registered: number; active_users: number; tutorial_completed: number; tutorial_rate: number | null; payers: number; revenue: number; payer_rate: number | null; arppu: number | null; arpu: number | null; partial: boolean; retention: Retention[] };
 export type StageRow = { id: string; design_id: string; name: string; executions: number; clears: number; clear_rate: number | null };
 export type RaidRow = { key: string; kind: 'encounter' | 'unlock'; hosted: number; defeated: number; participants: number };
 export type SourceRow = { key: string; source: string; landings: number; landing_starts: number; new_users: number; tutorial_completed: number; retention: Retention[] };
-export type DashboardData = { definition_version: string; timezone: string; updated_at: string; environment: string; period: Period; from: string; to: string; rows: OverviewRow[]; stages: StageRow[]; raids: RaidRow[]; sources: SourceRow[]; coverage: { raid_defeat_without_receipt: number; raid_unknown_type: number; stage_unknown_id: number } };
+export type DashboardData = { definition_version: string; timezone: string; updated_at: string; environment: string; title_measured_from?: string | null; period: Period; from: string; to: string; rows: OverviewRow[]; stages: StageRow[]; raids: RaidRow[]; sources: SourceRow[]; coverage: { raid_defeat_without_receipt: number; raid_unknown_type: number; stage_unknown_id: number } };
 export function jstDate(now = new Date()): string {
   return new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now);
 }

@@ -1,6 +1,8 @@
 'use client';
 import { passiveDisplayName } from '@/theme/approvedNames';
 import InkBurst from './InkBurst';
+import { TutorialSkillCutin, TutorialCombo } from './battle-effects/TutorialSkillEffects';
+import { tutorialCutin, tutorialEffectAssets, minimumTutorialEffectDuration } from './battle-effects/tutorialEffects';
 import { INK_ROOT, INK_ASSETS } from '@/domain/presentation/battleLeadIn';
 import ElementBadge from './ElementBadge';
 import { createPortal } from 'react-dom';
@@ -24,7 +26,7 @@ import type { BattleResult, BattleUnitState } from '../../../domain/redesign/bat
 import type { BattleUnit, SkillMaster } from '../../../domain/redesign/types';
 import styles from './BattleView.module.css';
 import { BattleEffectLayer } from './battle-effects/BattleEffectLayer';
-import { effectAssetPaths, minimumEffectFrameDuration } from './battle-effects/recordedEffects';
+import { effectAssetPaths } from './battle-effects/recordedEffects';
 import { resolveBattleFrameEffects } from './battleEffectPresentation';
 import { isBattleImageReady, preloadBattleImages } from '../battle/battleAssetPreload';
 import { characterArt } from '@/theme/creativeAssets';
@@ -56,10 +58,10 @@ const statusPaths: Record<string, string> = {
   hot:'M9 3H15V9H21V15H15V21H9V15H3V9H9Z', stun:'M4 7 10 9 8 3 14 7 19 3 18 10 23 11 17 15 20 21 12 18 8 22 6 15 1 15 5 11Z',
   counter:'M4 11H15Q21 11 21 17Q21 22 15 22M4 11 10 5M4 11 10 17', taunt:'M12 1V6M12 18V23M1 12H6M18 12H23M20 12A8 8 0 1 1 4 12A8 8 0 1 1 20 12',
 };
-interface Props { onRetire?: () => void | Promise<void>; onPlaybackComplete?: () => Promise<void>; resultActions?: ReactNode; resultRewards?: ReactNode; bgmScene?: BgmScene; requirePlaybackCompletion?: boolean; result: BattleResult; vipActive: boolean; onComplete: () => void; title?: string; backgroundSrc?: string; raidHp?: { current: number; max: number; level?: number }; initialFrame?: number; initialPaused?: boolean; }
+interface Props { onRetire?: () => void | Promise<void>; onPlaybackComplete?: () => Promise<void>; autoCompleteOnFinish?: boolean; hideWaveDisplay?: boolean; resultActions?: ReactNode; resultRewards?: ReactNode; bgmScene?: BgmScene; requirePlaybackCompletion?: boolean; result: BattleResult; vipActive: boolean; onComplete: () => void; title?: string; backgroundSrc?: string; raidHp?: { current: number; max: number; level?: number }; initialFrame?: number; initialPaused?: boolean; }
 
 /** Every visible value is projected from the recorded server frame. */
-export function BattleView({ onRetire, onPlaybackComplete, resultActions, resultRewards, bgmScene = 'BATTLE', requirePlaybackCompletion = false, result, vipActive, onComplete, title = '合戦', backgroundSrc = '/creative/backgrounds/char_reiji_01.png', raidHp, initialFrame = 0, initialPaused = false }: Props) {
+export function BattleView({ onRetire, onPlaybackComplete, autoCompleteOnFinish = false, hideWaveDisplay = false, resultActions, resultRewards, bgmScene = 'BATTLE', requirePlaybackCompletion = false, result, vipActive, onComplete, title = '合戦', backgroundSrc = '/creative/backgrounds/char_reiji_01.png', raidHp, initialFrame = 0, initialPaused = false }: Props) {
   const { playBgm, stopBgm, playSe, stopSe, preloadAudio } = useAudio();
   const [pauseMenu, setPauseMenu] = useState(false);
   const [confirmRetire, setConfirmRetire] = useState(false);
@@ -70,6 +72,8 @@ export function BattleView({ onRetire, onPlaybackComplete, resultActions, result
   const completionLock=useRef(false), terminalGeneration=useRef(0);
   const completionCallback=useRef(onPlaybackComplete);
   completionCallback.current=onPlaybackComplete;
+  const autoCompleteLock=useRef(false);
+  useEffect(()=>{autoCompleteLock.current=false;},[result]);
   useEffect(()=>{terminalGeneration.current++;completionLock.current=false;setCompletion('idle');setTerminalError('');return()=>{terminalGeneration.current++}},[result]);
   const wasPaused = useRef(false);
   const heardFrame = useRef(-1);
@@ -92,7 +96,7 @@ export function BattleView({ onRetire, onPlaybackComplete, resultActions, result
   const measuredImageResult = useRef<BattleResult | null>(null);
   const detailDialog = useRef<HTMLDialogElement>(null);
   const assetsBlocked = assetState.result !== result || assetState.status !== 'ready';
-  const { index, frame, finished, speed, effectiveSpeed, paused, playbackPaused, waveIntroActive, presentationPhase, comboNumber, burstActive, cancel, setPaused, cycleSpeed, skip } = useRecordedBattlePlayback({ result, initialFrame, initialPaused, vipActive, blocked: exited || pauseMenu || confirmRetire || !!detail || showLog || assetsBlocked, minimumFrameDuration: minimumEffectFrameDuration, waveIntroDuration: UI_MOTION.waveIntroMs });
+  const { index, frame, finished, speed, effectiveSpeed, paused, playbackPaused, waveIntroActive, presentationPhase, comboNumber, burstActive, cancel, setPaused, cycleSpeed, skip } = useRecordedBattlePlayback({ result, initialFrame, initialPaused, vipActive, blocked: exited || pauseMenu || confirmRetire || !!detail || showLog || assetsBlocked, minimumFrameDuration: minimumTutorialEffectDuration, waveIntroDuration: UI_MOTION.waveIntroMs, comboAfterAction: true, omitWaveIntro: hideWaveDisplay });
   async function completePlayback() {
     if(exitLock.current||completionLock.current)return;
     completionLock.current=true;setCompletion('saving');setTerminalError('');
@@ -101,6 +105,7 @@ export function BattleView({ onRetire, onPlaybackComplete, resultActions, result
     catch(error) { if(generation===terminalGeneration.current&&!exitLock.current){completionLock.current=false;setCompletion('error');setTerminalError(error instanceof Error?error.message:'結果を保存できませんでした。');} }
   }
   useEffect(()=>{if(finished&&!exitLock.current)void completePlayback();},[finished,result]);
+  useEffect(()=>{if(finished&&autoCompleteOnFinish&&!onPlaybackComplete&&!autoCompleteLock.current){autoCompleteLock.current=true;onComplete();}},[finished,autoCompleteOnFinish,onPlaybackComplete,onComplete]);
   const presentation = projectRecordedBattleFrame(result, index);
   const battleRoot = useRef<HTMLElement>(null);
   useEffect(() => { if (finished) { stopBgm(); battleRoot.current?.scrollIntoView({ block: 'start' }); } }, [finished, stopBgm]);
@@ -129,6 +134,7 @@ export function BattleView({ onRetire, onPlaybackComplete, resultActions, result
   const effects = frame ? resolveBattleFrameEffects(frame, result.frames[index - 1], presentation.skill) : [];
   // A result-wide gate avoids hiding the battle when a later effect first appears.
   const imageKey = useMemo(() => JSON.stringify([...new Set([
+    ...tutorialEffectAssets(result),
     '/creative/branding/sengoku-hime-enbu-logo-20260928-v2.png', backgroundSrc, ...BATTLE_RESOURCE_ASSETS, ...INK_ASSETS.map(n=>INK_ROOT+n), ...result.waves.map((_,i)=>INK_ROOT+`wave-${i+1}.png`),
     ...result.frames.flatMap((record, i) => effectAssetPaths(resolveBattleFrameEffects(record, result.frames[i - 1], projectRecordedBattleFrame(result, i).skill))),
     ...result.frames.flatMap(record => [...record.party, ...record.enemies].flatMap(state => {
@@ -227,17 +233,21 @@ export function BattleView({ onRetire, onPlaybackComplete, resultActions, result
   };
   if (exited) return <section className={terminalError ? "g4-entry-state" : "branded-loading"} aria-label="戦闘終了" aria-busy={!terminalError}>{terminalError ? <ScreenState kind="error" title="リタイアを保存できませんでした" message={terminalError} actionLabel="再試行" onAction={()=>void retire()}/> : <Game04Loading context="screen" label="出撃元へ戻っています"/>}</section>;
   if (finished && onPlaybackComplete && completion !== 'done') return <section className={completion === 'error' ? "g4-entry-state" : "branded-loading"} aria-label="戦闘結果の保存" aria-busy={completion !== 'error'}>{completion === 'error' ? <ScreenState kind="error" title="戦闘結果を保存できませんでした" message={terminalError} actionLabel="再試行" onAction={() => void completePlayback()}/> : <Game04Loading context="screen" label="戦闘結果を保存しています"/>}</section>;
-  return <section ref={battleRoot} className={styles.battle} aria-label={title} data-playback-paused={paused||pauseMenu||confirmRetire||assetsBlocked||!!detail||showLog||finished} data-intro-paused={paused || assetsBlocked || !!detail || showLog} data-playback-frame={index} data-effective-speed={effectiveSpeed} data-presentation-phase={presentationPhase??'none'} style={{ '--battle-speed': effectiveSpeed, '--wave-intro-ms': `${UI_MOTION.waveIntroMs}ms`, '--battle-background': `url(${JSON.stringify(backgroundSrc)})` } as CSSProperties}>
+  return <section ref={battleRoot} className={styles.battle} aria-label={title} data-playback-paused={paused||pauseMenu||confirmRetire||assetsBlocked||!!detail||showLog||finished} data-intro-paused={paused || assetsBlocked || !!detail || showLog} data-playback-frame={index} data-frame-event={frame.event} data-effective-speed={effectiveSpeed} data-presentation-phase={presentationPhase??'none'} style={{ '--battle-speed': effectiveSpeed, '--wave-intro-ms': `${UI_MOTION.waveIntroMs}ms`, '--battle-background': `url(${JSON.stringify(backgroundSrc)})` } as CSSProperties}>
     {!finished && (pauseMenu || confirmRetire) && createPortal(<CanonicalDialog title={confirmRetire ? 'リタイアしますか？' : '一時停止'} onClose={cancelRetire} actions={confirmRetire ? [{label:'続ける',semantic:'secondary',onClick:cancelRetire},{label:'リタイア',semantic:'danger',onClick:retire}] : [{label:'バトルを続ける',semantic:'primary',onClick:()=>{setPauseMenu(false);setPaused(false);} },...(!requirePlaybackCompletion && onRetire ? [{label:'リタイア',semantic:'danger' as const,onClick:()=>{setPauseMenu(false);setConfirmRetire(true);}}] : [])]}>{confirmRetire ? <p>{result.pendingSettlementId?'戦闘を終了して挑戦元へ戻ります。クリア・勝利報酬は獲得できません。消費した行動力は戻りません。':'確定済み戦闘の再生を終了して挑戦元へ戻ります。'}</p> : <p>バトルの再生を停止しています。</p>}</CanonicalDialog>, document.body)}
     <dialog ref={loadingDialog} className={styles.loading} onCancel={event => event.preventDefault()} aria-label="戦闘画面の読み込み"><img src="/creative/branding/sengoku-hime-enbu-logo-20260928-v2.png" alt="戦国姫艶武" />{assetError ? <><p>戦闘画像を読み込めませんでした。</p><button onClick={() => { setAssetState({ result, key: imageKey, status: 'loading' }); setRetry(value => value + 1); }}>再試行</button>{!requirePlaybackCompletion && <button onClick={leaveFailedPlayback}>再生を終了する</button>}</> : <><span className={styles.spinner} /><p>戦闘の準備中</p></>}</dialog>
     <div className={visibleLoading ? styles.loadingContent : undefined}>
-    {!finished && !exited && !assetsBlocked && <InkBurst phase={presentationPhase} active={burstActive} count={comboNumber} wave={frame.wave} paused={paused||pauseMenu||confirmRetire||!!detail||showLog}/> }
-    {!finished && <><header className={styles.header}><strong>第<b>{frame.wave}</b>派 / 全{result.waves.length}派</strong><div><button onClick={cycleSpeed} aria-label={`再生速度 ${speed}倍`}>▶▶ ×{speed}</button><button onClick={() => paused ? setPaused(false) : openPauseMenu()} disabled={finished} aria-label={paused ? '再開' : '一時停止'}>{paused ? '▶' : 'Ⅱ'}</button>{paused && !pauseMenu && !confirmRetire && !requirePlaybackCompletion && onRetire && <button onClick={() => { wasPaused.current = true; setConfirmRetire(true); }}>リタイア</button>}{vipActive && <button className={styles.skip} disabled={finished} onClick={skip}>SKIP</button>}</div></header>
+    {!finished && !exited && !assetsBlocked && <InkBurst hideComboWords phase={presentationPhase} active={burstActive} count={comboNumber} wave={frame.wave} paused={paused||pauseMenu||confirmRetire||!!detail||showLog}/> }
+    {!finished && !exited && !assetsBlocked && <>
+      {presentationPhase === 'combo' && comboNumber > 0 && <TutorialCombo key={`tutorial-combo-${index}`} count={comboNumber} index={index} targetId={frame.targetIds?.[0]} paused={paused||pauseMenu||confirmRetire||!!detail||showLog}/> }
+      {!presentationPhase && tutorialCutin(result,index) && <TutorialSkillCutin key={`tutorial-cutin-${index}`} result={result} index={index} paused={paused||pauseMenu||confirmRetire||!!detail||showLog} speed={effectiveSpeed}/> }
+    </>}
+    {!finished && <><header className={styles.header}>{!hideWaveDisplay && <strong>第<b>{frame.wave}</b>派 / 全{result.waves.length}派</strong>}<div><button onClick={cycleSpeed} aria-label={`再生速度 ${speed}倍`}>▶▶ ×{speed}</button><button onClick={() => paused ? setPaused(false) : openPauseMenu()} disabled={finished} aria-label={paused ? '再開' : '一時停止'}>{paused ? '▶' : 'Ⅱ'}</button>{paused && !pauseMenu && !confirmRetire && !requirePlaybackCompletion && onRetire && <button onClick={() => { wasPaused.current = true; setConfirmRetire(true); }}>リタイア</button>}{vipActive && <button className={styles.skip} disabled={finished} onClick={skip}>SKIP</button>}</div></header>
     {displayedRaidHp && <div className={styles.raidHp}>{displayedRaidHp.label} <span>{Math.floor(displayedRaidHp.current).toLocaleString()} / {Math.floor(displayedRaidHp.max).toLocaleString()}</span></div>}
     <div className={`${styles.arena} ${waveIntroActive ? styles.waveEntering : ''}`} key={`arena-${frame.wave}`}>
 
       <div className={styles.enemyZone} data-count={frame.enemies.length}>{frame.enemies.map((u, i) => unitCard(u, true, i))}</div>
-      {!presentationPhase && presentation.cutIn==='skill' && presentation.actor && <div className={`${styles.cutIn} ${styles.skillCutIn}`} key={`cutin-${frame.index}`} aria-label={`${presentation.actor.name} ${presentation.skill?.name ?? 'スキル'}`}><div className={styles.cutInLight} /><img src={unitArt(presentation.actor, presentation.actorState, 'full')} alt="" /><strong>{presentation.skill?.name}</strong><span>{presentation.actor.name}</span></div>}
+      {!tutorialCutin(result,index) && !presentationPhase && presentation.cutIn==='skill' && presentation.actor && <div className={`${styles.cutIn} ${styles.skillCutIn}`} key={`cutin-${frame.index}`} aria-label={`${presentation.actor.name} ${presentation.skill?.name ?? 'スキル'}`}><div className={styles.cutInLight} /><img src={unitArt(presentation.actor, presentation.actorState, 'full')} alt="" /><strong>{presentation.skill?.name}</strong><span>{presentation.actor.name}</span></div>}
     </div>
     <BattleResourceDisplay charging={presentationPhase==='charge'} key={result.seed+'-'+result.frames.length} frame={frame} startIndex={result.frames.slice(0,index+1).findLast(f=>f.event==='burst_start')?.index??-1} paused={paused||pauseMenu||confirmRetire||assetsBlocked||!!detail||showLog} speed={effectiveSpeed} animate={result.frames.slice(initialFrame,index+1).some(f=>f.event==='burst_start')}/>
     {frame.event==='burst_failed' && <p role="status" className={styles.burstFailure}>BURST抽選不成立 · ゲージ消費</p>}
@@ -245,7 +255,7 @@ export function BattleView({ onRetire, onPlaybackComplete, resultActions, result
     <div className={styles.party}>{frame.party.map((u, i) => unitCard(u, false, i))}</div>
     {frame.remainingActions !== undefined && <p className={styles.actionLimit}>残り味方行動機会 <strong>{frame.remainingActions}</strong> / 300</p>}
     </>}
-    {finished && (!onPlaybackComplete || completion==='done') && <RecordedBattleResult result={result} title={title} backgroundSrc={backgroundSrc} rewards={resultRewards} actions={resultActions ?? <button onClick={onComplete}>結果へ</button>} />}
+    {finished && !autoCompleteOnFinish && (!onPlaybackComplete || completion==='done') && <RecordedBattleResult result={result} title={title} backgroundSrc={backgroundSrc} rewards={resultRewards} actions={resultActions ?? <button onClick={onComplete}>結果へ</button>} />}
     </div>
     {!finished && !assetsBlocked && !presentationPhase && <BattleEffectLayer key={index} effects={effects} partyIds={frame.party.map(unit => unit.id)} paused={playbackPaused} speed={effectiveSpeed} />}
     {(detail || showLog) && <dialog ref={detailDialog} className={styles.backdrop} aria-label={showLog ? '戦闘ログ' : '戦闘詳細'} onCancel={event => { event.preventDefault(); close(); }}><section className={styles.modal}><button className={styles.close} onClick={close} autoFocus>閉じる</button>{showLog ? <>

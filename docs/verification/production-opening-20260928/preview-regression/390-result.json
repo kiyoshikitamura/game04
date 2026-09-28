@@ -1,0 +1,453 @@
+{
+  "base": "http://localhost:3040",
+  "width": 390,
+  "reduced": false,
+  "errors": [],
+  "failedRequests": [],
+  "checks": [
+    "pause freezes frame and cutin animation",
+    "speed change preserves mounted cutin and sets rate 2",
+    "trailer: 9 cutins once; 800ms baseline; skill then combo then damage for all 3 combos; automatic defeat transition",
+    "practice has no wave announcement",
+    "practice: Date cutin once, no SSR art on R starters, combos 1/2/3, victory/farewell/complete",
+    "restart starts a fresh trailer, no lingering overlays"
+  ],
+  "worldFont": {
+    "family": "G4NotoSerif, \"Yu Mincho\", \"Hiragino Mincho ProN\", serif",
+    "weight": "900"
+  },
+  "bounds": {
+    "width": 1.1499690721649485,
+    "top": 0.1700197889182058,
+    "skillTop": 0.4500540897097626,
+    "fontSize": 23.79,
+    "duration": "0.8s",
+    "loaded": true
+  },
+  "timeline": [
+    {
+      "scene": "trailer",
+      "frame": 0,
+      "phase": "dark",
+      "event": "battle_start",
+      "time": 1009.5999999996275
+    },
+    {
+      "scene": "trailer",
+      "frame": 0,
+      "phase": "start",
+      "event": "battle_start",
+      "time": 2285.5
+    },
+    {
+      "scene": "trailer",
+      "frame": 0,
+      "phase": "none",
+      "event": "battle_start",
+      "time": 3308.300000000745
+    },
+    {
+      "scene": "trailer",
+      "frame": 1,
+      "phase": "none",
+      "event": "action_start",
+      "time": 3593
+    },
+    {
+      "scene": "trailer",
+      "frame": 2,
+      "phase": "none",
+      "event": "damage",
+      "time": 5199.700000001118
+    },
+    {
+      "scene": "trailer",
+      "frame": 3,
+      "phase": "none",
+      "event": "action_end",
+      "time": 5673.200000001118
+    },
+    {
+      "scene": "trailer",
+      "frame": 4,
+      "phase": "none",
+      "event": "action_start",
+      "time": 5757.9000000003725
+    },
+    {
+      "scene": "trailer",
+      "frame": 5,
+      "phase": "none",
+      "event": "damage",
+      "time": 6345.800000000745
+    },
+    {
+      "scene": "trailer",
+      "frame": 6,
+      "phase": "none",
+      "event": "action_end",
+      "time": 6591.700000001118
+    },
+    {
+      "scene": "trailer",
+      "frame": 7,
+      "phase": "none",
+      "event": "action_start",
+      "time": 6641
+    },
+    {
+      "scene": "trailer",
+      "frame": 8,
+      "phase": "none",
+      "event": "damage",
+      "time": 7061
+    },
+    {
+      "scene": "trailer",
+      "frame": 9,
+      "phase": "none",
+      "event": "action_end",
+      "time": 7425.200000001118
+    },
+    {
+      "scene": "trailer",
+      "frame": 10,
+      "phase": "none",
+      "event": "action_start",
+      "time": 7476.700000001118
+    },
+    {
+      "scene": "trailer",
+      "frame": 11,
+      "phase": "none",
+      "event": "damage",
+      "time": 7901.5
+    },
+    {
+      "scene": "trailer",
+      "frame": 12,
+      "phase": "none",
+      "event": "action_end",
+      "time": 8154.4000000003725
+    },
+    {
+      "scene": "trailer",
+      "frame": 13,
+      "phase": "none",
+      "event": "action_start",
+      "time": 8208.800000000745
+    },
+    {
+      "scene": "trailer",
+      "frame": 14,
+      "phase": "none",
+      "event": "damage",
+      "time": 8632.700000001118
+    },
+    {
+      "scene": "trailer",
+      "frame": 15,
+      "phase": "none",
+      "event": "action_end",
+      "time": 8874.5
+    },
+    {
+      "scene": "trailer",
+      "frame": 16,
+      "phase": "charge",
+      "event": "burst_start",
+      "time": 8925.200000001118
+    },
+    {
+      "scene": "trailer",
+      "frame": 16,
+      "phase": "sweep",
+      "event": "burst_start",
+      "time": 9301.5
+    },
+    {
+      "scene": "trailer",
+      "frame": 16,
+      "phase": "pause",
+      "event": "burst_start",
+      "time": 9661.099999999627
+    },
+    {
+      "scene": "trailer",
+      "frame": 16,
+      "phase": "hit",
+      "event": "burst_start",
+      "time": 9835
+    },
+    {
+      "scene": "trailer",
+      "frame": 16,
+      "phase": "release",
+      "event": "burst_start",
+      "time": 10559.200000001118
+    },
+    {
+      "scene": "trailer",
+      "frame": 16,
+      "phase": "none",
+      "event": "burst_start",
+      "time": 11286.599999999627
+    },
+    {
+      "scene": "trailer",
+      "frame": 17,
+      "phase": "none",
+      "event": "action_start",
+      "time": 11311.599999999627
+    },
+    {
+      "scene": "trailer",
+      "frame": 17,
+      "phase": "combo",
+      "event": "action_start",
+      "time": 11797.700000001118
+    },
+    {
+      "scene": "trailer",
+      "frame": 18,
+      "phase": "none",
+      "event": "damage",
+      "time": 12482.599999999627
+    },
+    {
+      "scene": "trailer",
+      "frame": 19,
+      "phase": "none",
+      "event": "action_end",
+      "time": 12657
+    },
+    {
+      "scene": "trailer",
+      "frame": 20,
+      "phase": "none",
+      "event": "action_start",
+      "time": 12707.099999999627
+    },
+    {
+      "scene": "trailer",
+      "frame": 20,
+      "phase": "combo",
+      "event": "action_start",
+      "time": 13180.700000001118
+    },
+    {
+      "scene": "trailer",
+      "frame": 21,
+      "phase": "none",
+      "event": "damage",
+      "time": 13851.599999999627
+    },
+    {
+      "scene": "trailer",
+      "frame": 22,
+      "phase": "none",
+      "event": "action_end",
+      "time": 14021.700000001118
+    },
+    {
+      "scene": "trailer",
+      "frame": 23,
+      "phase": "none",
+      "event": "action_start",
+      "time": 14073.5
+    },
+    {
+      "scene": "trailer",
+      "frame": 23,
+      "phase": "combo",
+      "event": "action_start",
+      "time": 14547.200000001118
+    },
+    {
+      "scene": "trailer",
+      "frame": 24,
+      "phase": "none",
+      "event": "damage",
+      "time": 15225.5
+    },
+    {
+      "scene": "trailer",
+      "frame": 25,
+      "phase": "none",
+      "event": "action_end",
+      "time": 15480.300000000745
+    },
+    {
+      "scene": "trailer",
+      "frame": 26,
+      "phase": "none",
+      "event": "action_start",
+      "time": 15533.700000001118
+    },
+    {
+      "scene": "trailer",
+      "frame": 27,
+      "phase": "none",
+      "event": "damage",
+      "time": 15963.5
+    },
+    {
+      "scene": "trailer",
+      "frame": 28,
+      "phase": "none",
+      "event": "death",
+      "time": 16473
+    },
+    {
+      "scene": "trailer",
+      "frame": 29,
+      "phase": "none",
+      "event": "death",
+      "time": 16798.5
+    },
+    {
+      "scene": "trailer",
+      "frame": 30,
+      "phase": "none",
+      "event": "death",
+      "time": 17130.700000001118
+    },
+    {
+      "scene": "trailer",
+      "frame": 31,
+      "phase": "none",
+      "event": "death",
+      "time": 17456.900000000373
+    },
+    {
+      "scene": "trailer",
+      "frame": 32,
+      "phase": "none",
+      "event": "death",
+      "time": 17786
+    },
+    {
+      "scene": "trailer",
+      "frame": 33,
+      "phase": "none",
+      "event": "battle_end",
+      "time": 18090.800000000745
+    }
+  ],
+  "normalCutinAt2xMs": 587.8000000007451,
+  "events": [
+    {
+      "scene": "trailer",
+      "frame": 1,
+      "kind": "cutin",
+      "value": "char_ageha_01",
+      "time": 3593.0999999996275
+    },
+    {
+      "scene": "trailer",
+      "frame": 4,
+      "kind": "cutin",
+      "value": "char_karen_01",
+      "time": 5758
+    },
+    {
+      "scene": "trailer",
+      "frame": 7,
+      "kind": "cutin",
+      "value": "char_leo_01",
+      "time": 6641
+    },
+    {
+      "scene": "trailer",
+      "frame": 10,
+      "kind": "cutin",
+      "value": "char_koharu_01",
+      "time": 7476.800000000745
+    },
+    {
+      "scene": "trailer",
+      "frame": 13,
+      "kind": "cutin",
+      "value": "char_go_01",
+      "time": 8208.800000000745
+    },
+    {
+      "scene": "trailer",
+      "frame": 17,
+      "kind": "cutin",
+      "value": "char_ageha_01",
+      "time": 11311.800000000745
+    },
+    {
+      "scene": "trailer",
+      "frame": 17,
+      "kind": "combo",
+      "value": "1",
+      "time": 11798.099999999627
+    },
+    {
+      "scene": "trailer",
+      "frame": 20,
+      "kind": "cutin",
+      "value": "char_ageha_01",
+      "time": 12707.099999999627
+    },
+    {
+      "scene": "trailer",
+      "frame": 20,
+      "kind": "combo",
+      "value": "2",
+      "time": 13180.800000000745
+    },
+    {
+      "scene": "trailer",
+      "frame": 23,
+      "kind": "cutin",
+      "value": "char_ageha_01",
+      "time": 14073.599999999627
+    },
+    {
+      "scene": "trailer",
+      "frame": 23,
+      "kind": "combo",
+      "value": "3",
+      "time": 14547.200000001118
+    },
+    {
+      "scene": "trailer",
+      "frame": 26,
+      "kind": "cutin",
+      "value": "char_reiji_01",
+      "time": 15533.800000000745
+    },
+    {
+      "scene": "practice",
+      "frame": 10,
+      "kind": "cutin",
+      "value": "char_leo_01",
+      "time": 23827.5
+    },
+    {
+      "scene": "practice",
+      "frame": 14,
+      "kind": "combo",
+      "value": "1",
+      "time": 27599.599999999627
+    },
+    {
+      "scene": "practice",
+      "frame": 17,
+      "kind": "combo",
+      "value": "2",
+      "time": 28925.200000001118
+    },
+    {
+      "scene": "practice",
+      "frame": 20,
+      "kind": "combo",
+      "value": "3",
+      "time": 30262.599999999627
+    }
+  ],
+  "status": "PASS"
+}
