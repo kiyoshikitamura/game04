@@ -37,10 +37,14 @@ import { getCharacterPresentationMetadata } from '../character/characterPresenta
 import { STATUS_LABELS, TARGET_LABELS, passiveDescription, skillConditionText, READINESS_REASONS, CLEANSE_LABELS, skillDescription, LEGACY_SKILL_MAPPING_NOTICE } from './battleLabels';
 
 const knownCharacterImages = new Set(characterAssets.flatMap(entry => Object.entries(entry).filter(([key]) => !['id', 'name'].includes(key)).map(([, value]) => value)));
-function unitArt(unit: BattleUnit, state: BattleUnitState | undefined, variant: 'full' | 'portrait' | 'battle') {
+function unitArtSource(unit: BattleUnit, state: BattleUnitState | undefined, variant: 'full' | 'portrait' | 'battle') {
   const source = state?.image || unit.image;
   // Unknown phase art remains authoritative; only known variants use the existing character mapping.
-  return displayImage(knownCharacterImages.has(source) ? characterArt({ id: unit.id, name: unit.name, image: source }, variant) ?? source : source);
+  return knownCharacterImages.has(source) ? characterArt({ id: unit.id, name: unit.name, image: source }, variant) ?? source : source;
+}
+// Layout metadata is keyed by original artwork, independently of delivery format.
+function unitArt(unit: BattleUnit, state: BattleUnitState | undefined, variant: 'full' | 'portrait' | 'battle') {
+  return displayImage(unitArtSource(unit, state, variant));
 }
 const isUnassignedSkillImage = (src?: string) => !src || src === '/menu/event_banner_placeholder.png';
 const elements = { fire: '火', water: '水', earth: '土', wind: '風', light: '光', dark: '闇' };
@@ -195,9 +199,10 @@ export function BattleView({ onRetire, onPlaybackComplete, autoCompleteOnFinish 
     const unit = lookup(state.id); if (!unit) return null;
     const impact = presentation.impacts.find(item => item.targetId === state.id);
     const active = presentation.activeActorId === state.id;
-    const artSource = unitArt(unit, state, enemy ? 'battle' : 'portrait');
-    const faceCrop = getCharacterPresentationMetadata(artSource);
-    const enemyCrop = enemy ? (enemyArtBounds as Record<string, {width:number;height:number;bounds:number[];rarity:string}>)[artSource] : undefined;
+    const originalArtSource = unitArtSource(unit, state, enemy ? 'battle' : 'portrait');
+    const artSource = displayImage(originalArtSource);
+    const faceCrop = getCharacterPresentationMetadata(originalArtSource);
+    const enemyCrop = enemy ? (enemyArtBounds as Record<string, {width:number;height:number;bounds:number[];rarity:string}>)[originalArtSource] : undefined;
     const statusIcons = (<div className={styles.status} aria-label={`${unit.name}の状態`}>
         {state.statuses.slice(0, 2).map((s, i) => <button key={`${s.type}-${i}`} data-status={s.type} onClick={() => setDetail({ unit, state })} title={`${statusNames[s.type] ?? s.type} 残り${s.remaining}回${s.type === 'shield' ? `・吸収残量${s.amount ?? 0}` : ''}`} aria-label={`${statusNames[s.type] ?? s.type} 残り${s.remaining}回`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d={statusPaths[s.type] ?? 'M12 3V15M12 19V21'} />{s.type.endsWith('_down') && <path d="M18 2V9M15 6 18 9 21 6" />}</svg><span>{s.remaining}</span></button>)}
         {state.statuses.length > 2 && <button onClick={() => setDetail({ unit, state })} aria-label={`ほか${state.statuses.length - 2}件の状態を表示`}>+{state.statuses.length - 2}</button>}
