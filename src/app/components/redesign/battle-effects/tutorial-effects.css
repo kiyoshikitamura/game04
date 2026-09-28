@@ -1,6 +1,6 @@
 .tutorial-skill-fx{position:absolute;inset:0;z-index:8;pointer-events:none;overflow:hidden}
 .tutorial-skill-veil{position:absolute;inset:7.15% 0 11.4%;background:#090313;animation:tutorial-skill-dim var(--cutin-ms) ease both}
-.tutorial-skill-art{position:absolute;left:50%;top:17%;width:115%;aspect-ratio:2/1;transform:translateX(-50%);animation:tutorial-skill-enter var(--cutin-ms) ease both}
+.tutorial-skill-art{position:absolute;left:50%;top:17%;width:var(--cutin-width,115%);aspect-ratio:2/1;transform:translateX(-50%);animation:tutorial-skill-enter var(--cutin-ms) ease both}
 .tutorial-skill-art img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:contain}
 .tutorial-skill-aura{filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 12px var(--cutin-inner)) drop-shadow(0 0 24px var(--cutin-outer));animation:tutorial-skill-glow var(--cutin-ms) ease both}
 .tutorial-skill-image{filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 8px var(--cutin-inner))}

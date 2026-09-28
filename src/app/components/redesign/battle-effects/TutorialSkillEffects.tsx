@@ -18,7 +18,7 @@ export function TutorialSkillCutin({ result, index, paused, speed }: { result: B
     }
   }, [paused, speed]);
   if (!asset) return null;
-  return <div ref={root} className="tutorial-skill-fx" data-tutorial-cutin={presentation.actor?.id} data-effect-frame={index} data-paused={paused} style={{ '--cutin-ms': `${TUTORIAL_CUTIN_MS}ms`, '--cutin-inner': asset.inner, '--cutin-outer': asset.outer } as CSSProperties} role="status" aria-label={`${asset.name} ${presentation.skill?.name ?? 'スキル'}`}>
+  return <div ref={root} className="tutorial-skill-fx" data-tutorial-cutin={presentation.actor?.id} data-effect-frame={index} data-paused={paused} style={{ '--cutin-width': 'width' in asset ? asset.width : '115%', '--cutin-ms': `${TUTORIAL_CUTIN_MS}ms`, '--cutin-inner': asset.inner, '--cutin-outer': asset.outer } as CSSProperties} role="status" aria-label={`${asset.name} ${presentation.skill?.name ?? 'スキル'}`}>
     <div className="tutorial-skill-veil" />
     <div className="tutorial-skill-art"><img className="tutorial-skill-aura" src={asset.src} alt="" /><img className="tutorial-skill-image" src={asset.src} alt={asset.name} /></div>
     <div className="tutorial-skill-name">{presentation.skill?.name}</div>

@@ -1,0 +1,295 @@
+{
+  "base": "http://localhost:3040",
+  "checks": [
+    "shared default SSR: five actions once each",
+    "skill -> combos 1..5 -> damage",
+    "pause/resume",
+    "completion callback once",
+    "wave retained",
+    "VIP skip clears effects and completes",
+    "nonSSR fallback and retire clears effects",
+    "mobile no overflow"
+  ],
+  "errors": [],
+  "events": [
+    {
+      "kind": "frame",
+      "frame": 2,
+      "phase": "none",
+      "event": "action_start",
+      "time": 550.8000000000466
+    },
+    {
+      "kind": "skill",
+      "frame": 2,
+      "time": 1533.3000000000466
+    },
+    {
+      "kind": "frame",
+      "frame": 2,
+      "phase": "combo",
+      "event": "action_start",
+      "time": 2814.1999999999534
+    },
+    {
+      "kind": "combo",
+      "frame": 2,
+      "value": "1",
+      "time": 2814.1999999999534
+    },
+    {
+      "kind": "frame",
+      "frame": 3,
+      "phase": "none",
+      "event": "damage",
+      "time": 3480.5999999998603
+    },
+    {
+      "kind": "frame",
+      "frame": 4,
+      "phase": "none",
+      "event": "action_end",
+      "time": 3795.6999999999534
+    },
+    {
+      "kind": "frame",
+      "frame": 5,
+      "phase": "none",
+      "event": "burst_resume",
+      "time": 3844
+    },
+    {
+      "kind": "frame",
+      "frame": 6,
+      "phase": "none",
+      "event": "action_start",
+      "time": 3906.5999999998603
+    },
+    {
+      "kind": "skill",
+      "frame": 6,
+      "time": 3906.6999999999534
+    },
+    {
+      "kind": "frame",
+      "frame": 6,
+      "phase": "combo",
+      "event": "action_start",
+      "time": 4452.59999999986
+    },
+    {
+      "kind": "combo",
+      "frame": 6,
+      "value": "2",
+      "time": 4452.699999999953
+    },
+    {
+      "kind": "frame",
+      "frame": 7,
+      "phase": "none",
+      "event": "damage",
+      "time": 5112
+    },
+    {
+      "kind": "frame",
+      "frame": 8,
+      "phase": "none",
+      "event": "action_end",
+      "time": 5430.300000000047
+    },
+    {
+      "kind": "frame",
+      "frame": 9,
+      "phase": "none",
+      "event": "burst_resume",
+      "time": 5478.899999999907
+    },
+    {
+      "kind": "frame",
+      "frame": 10,
+      "phase": "none",
+      "event": "action_start",
+      "time": 5527.699999999953
+    },
+    {
+      "kind": "skill",
+      "frame": 10,
+      "time": 5527.800000000047
+    },
+    {
+      "kind": "frame",
+      "frame": 10,
+      "phase": "combo",
+      "event": "action_start",
+      "time": 6076.59999999986
+    },
+    {
+      "kind": "combo",
+      "frame": 10,
+      "value": "3",
+      "time": 6076.59999999986
+    },
+    {
+      "kind": "frame",
+      "frame": 11,
+      "phase": "none",
+      "event": "damage",
+      "time": 6746.5
+    },
+    {
+      "kind": "frame",
+      "frame": 12,
+      "phase": "none",
+      "event": "action_end",
+      "time": 7057.899999999907
+    },
+    {
+      "kind": "frame",
+      "frame": 13,
+      "phase": "none",
+      "event": "burst_resume",
+      "time": 7104.899999999907
+    },
+    {
+      "kind": "frame",
+      "frame": 14,
+      "phase": "none",
+      "event": "action_start",
+      "time": 7161.5
+    },
+    {
+      "kind": "skill",
+      "frame": 14,
+      "time": 7161.5
+    },
+    {
+      "kind": "frame",
+      "frame": 14,
+      "phase": "combo",
+      "event": "action_start",
+      "time": 7708
+    },
+    {
+      "kind": "combo",
+      "frame": 14,
+      "value": "4",
+      "time": 7708.09999999986
+    },
+    {
+      "kind": "frame",
+      "frame": 15,
+      "phase": "none",
+      "event": "damage",
+      "time": 8375.699999999953
+    },
+    {
+      "kind": "frame",
+      "frame": 16,
+      "phase": "none",
+      "event": "action_end",
+      "time": 8692.699999999953
+    },
+    {
+      "kind": "frame",
+      "frame": 17,
+      "phase": "none",
+      "event": "burst_resume",
+      "time": 8746.59999999986
+    },
+    {
+      "kind": "frame",
+      "frame": 18,
+      "phase": "none",
+      "event": "action_start",
+      "time": 8799.199999999953
+    },
+    {
+      "kind": "skill",
+      "frame": 18,
+      "time": 8799.59999999986
+    },
+    {
+      "kind": "frame",
+      "frame": 18,
+      "phase": "combo",
+      "event": "action_start",
+      "time": 9346.09999999986
+    },
+    {
+      "kind": "combo",
+      "frame": 18,
+      "value": "5",
+      "time": 9346.09999999986
+    },
+    {
+      "kind": "frame",
+      "frame": 19,
+      "phase": "none",
+      "event": "damage",
+      "time": 10011.59999999986
+    },
+    {
+      "kind": "frame",
+      "frame": 20,
+      "phase": "none",
+      "event": "action_end",
+      "time": 10323.09999999986
+    },
+    {
+      "kind": "frame",
+      "frame": 21,
+      "phase": "none",
+      "event": "burst_end",
+      "time": 10384.800000000047
+    },
+    {
+      "kind": "frame",
+      "frame": 22,
+      "phase": "none",
+      "event": "action_start",
+      "time": 10641.699999999953
+    },
+    {
+      "kind": "frame",
+      "frame": 23,
+      "phase": "none",
+      "event": "damage",
+      "time": 11003.300000000047
+    },
+    {
+      "kind": "frame",
+      "frame": 24,
+      "phase": "none",
+      "event": "action_end",
+      "time": 11461
+    },
+    {
+      "kind": "frame",
+      "frame": 25,
+      "phase": "none",
+      "event": "counts",
+      "time": 11532.699999999953
+    },
+    {
+      "kind": "frame",
+      "frame": 26,
+      "phase": "none",
+      "event": "action_start",
+      "time": 11602.199999999953
+    },
+    {
+      "kind": "frame",
+      "frame": 27,
+      "phase": "none",
+      "event": "damage",
+      "time": 11976.09999999986
+    },
+    {
+      "kind": "frame",
+      "frame": 28,
+      "phase": "none",
+      "event": "action_end",
+      "time": 12532.399999999907
+    }
+  ]
+}

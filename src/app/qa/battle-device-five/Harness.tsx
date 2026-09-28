@@ -8,6 +8,7 @@ import two from '../../../../docs/verification/burst-enemy-pause/layout-2.json';
 import three from '../../../../docs/verification/burst-enemy-pause/layout-3.json';
 import wave from '../../../../docs/verification/battle-device-five/wave.json';
 import characters from '@/theme/local-characters.json';
+import {getFormalOwnedSkill} from '@/domain/redesign/formalOwnedSkills';
 import '@/app/components/redesign/redesign.css';
 export default function Harness(){
  const [fixture,setFixture]=useState<{result:BattleResult;index:number;mode:string}|null>(null);
@@ -18,6 +19,7 @@ export default function Harness(){
   // Preview-only display fixture: keep the recorded actions, substitute explicit catalog art.
   const skillCharacter=characters.find(c=>c.id===q.get('skillCharacter'));
   if(skillCharacter){const actor=r.party[0];actor.name=skillCharacter.name;actor.image=skillCharacter.battle||skillCharacter.full;for(const f of r.frames)for(const unit of f.party)if(unit.id===actor.id)unit.image=actor.image;}
+  if(q.get('skill')==='SKD003'){const skill=getFormalOwnedSkill('SKD003',0);r.party[0].skills=[skill];for(const f of r.frames){if(f.skillId==='attack-ready')f.skillId=skill.id;for(const u of f.party)if(u.skills)u.skills=[skill];}}
   for(const f of r.frames)for(const e of f.enemies)e.statuses=(['atk_up','def_down','dot','shield','counter'] as const).map(type=>({type,power:10,remaining:3,sourceId:e.id,carry:true}));
   const index=mode==='wave'?r.frames.findIndex(f=>f.event==='wave'):mode==='burst'?r.frames.findIndex(f=>f.event==='action_start'&&f.burst):mode.startsWith('complete')?r.frames.length-2:r.frames.findIndex(f=>f.event==='burst_end');setFixture({result:r,index:Math.max(0,index),mode});
  },[]);

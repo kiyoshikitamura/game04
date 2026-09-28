@@ -2,10 +2,12 @@ import type { BattleResult } from '@/domain/redesign/battle';
 import { projectRecordedBattleFrame } from '@/domain/presentation/recordedBattlePresentation';
 import { burstPresentation } from '@/domain/presentation/battleLeadIn';
 import { minimumEffectFrameDuration } from './recordedEffects';
-import cutins from './tutorial-cutins.json';
+import ssrCutins from './tutorial-cutins.json';
+import srCutins from './sr-cutins.json';
 import characters from '@/theme/local-characters.json';
 
 export const TUTORIAL_CUTIN_MS = 800;
+const cutins = { ...ssrCutins, ...srCutins };
 /** Match enemy instance IDs through the existing explicit name + image catalog. */
 export function resolveSkillCutin(actor: { id: string; name: string; image: string }, stateImage?: string) {
   const image = stateImage || actor.image;
