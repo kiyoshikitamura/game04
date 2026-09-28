@@ -7,3 +7,7 @@
 - /qa/sr-cutins is a Preview-only selector for all 15 characters. It uses a recorded five-action fixture with the explicit test skill 土割り, and does not alter player inventories. Battle outcomes/damage in the fixture are not balance tests.
 - Mapping verification covers 25 supplied characters plus all quest/encounter and a deterministic sample of every invasion castle. Mobile tests verify all 15 SR assets, labels, decoded dimensions, pause and viewport bounds. Shared playback test covers five cutins/combos, ordering, completion once, wave header, skip, unknown-character fallback and retirement cleanup. Frozen-clock screenshot is a visual inspection aid; timing is tested separately at normal clock speed.
 - Initial short-cutin tests lost the overlay while waiting for Playwright pointer actionability. Pausing immediately after appearance via the same button click handler resolved the test race; the separate normal-pointer shared playback test passes.
+
+## Saved and deployed
+
+Runtime SHA: bb6d694d8d98d3bf05d4d7c01eac064065cf6602. Preview READY at https://game04-a50rbpgv0-kiyoshi-kitamura.vercel.app/qa/sr-cutins, deployment dpl_4rxTn1CPJgAyL2Wwu8B4uwpQ6s5H. Deployment metadata SHA matched. npm run check passed. Deployed 375px tests passed for all 15 SRs (including natural image dimensions and contained layout width); deployed full SR playback, pause, combos1–5, completion, skip and retirement checks passed. Existing SSR playback regression passed locally. No Production deployment or database change performed.
