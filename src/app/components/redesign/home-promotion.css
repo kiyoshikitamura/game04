@@ -1,3 +1,17 @@
 .g4-home-promotion img{display:block;width:100%;height:auto;aspect-ratio:2/1;object-fit:contain}
-.g4-home-promotion p{font-size:14px;line-height:1.6;margin:8px 0}
-.g4-home-promotion strong{font-size:18px}
+.g4-home-promotion p{font-size:16px;line-height:1.6;margin:8px 0}
+.g4-starter-offer{display:grid;gap:12px;text-align:center;color:var(--g4-text,#f4efe6)}
+.g4-starter-offer .g4-starter-lead{margin:0;font-size:18px;font-weight:700}
+.g4-starter-ticket{padding:16px 12px 12px;border:2px solid var(--g4-gold,#d8b56d);border-radius:var(--g4-radius,4px);background:linear-gradient(135deg,#49361f,var(--g4-reading-surface,#19141c) 65%);box-shadow:inset 0 0 0 4px #d8b56d16}
+.g4-starter-tag{display:inline-block;border-bottom:1px solid var(--g4-gold,#d8b56d);padding-bottom:4px;font-size:14px;color:var(--g4-gold,#d8b56d)}
+.g4-starter-ticket p{margin:8px 0 0;font-size:20px;font-weight:700}
+.g4-starter-ticket>strong{display:block;font-size:72px;line-height:1.1;color:var(--g4-gold,#d8b56d);font-variant-numeric:tabular-nums}
+.g4-starter-ticket>strong>span{font-size:22px;margin-left:4px}
+.g4-starter-diamonds{display:flex;justify-content:center;align-items:center;gap:16px;padding:8px;background:var(--g4-reading-surface,#19141c);border:1px solid var(--g4-rule-border,#786650);border-radius:var(--g4-radius,4px);font-size:16px}
+.g4-starter-diamonds strong{font-size:28px;color:var(--g4-gold,#d8b56d)}
+.g4-starter-price{display:grid;gap:2px;font-size:14px}
+.g4-starter-price strong{font-size:36px;line-height:1.2}
+.g4-starter-price strong span{font-size:16px;margin-left:4px}
+.g4-starter-offer .g4-starter-note{font-size:14px;color:var(--g4-muted,#c3b8aa);margin:0}
+body.game04-theme .g4-home-promotion .canonical-dialog-actions{display:grid;grid-template-columns:1fr 2fr}
+body.game04-theme .g4-home-promotion .canonical-dialog-actions button{min-width:0;padding-inline:8px;white-space:normal}

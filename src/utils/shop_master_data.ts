@@ -1,7 +1,7 @@
 import { VIP_PRODUCT } from "@/domain/redesign/vip";
 import { canonicalItemName } from "@/domain/gameplay/canonical/items";
 
-export const SHOP_CATALOG_VERSION = "20260927-game04-starter-pack";
+export const SHOP_CATALOG_VERSION = "20260928-game04-starter-ten-tickets";
 
 export interface ShopProductItem {
   itemId: string;
@@ -33,11 +33,8 @@ const sourceProducts: ShopProduct[] = [
     id: "beginner_pack_01", shopType: "LIMITED", category: "BEGINNER",
     title: "ビギナーパック", description: "", priceJpy: 100, purchaseLimit: 1, sortOrder: 1,
     items: [
-      {itemId:"SPECIAL_TICKET_CHARACTER",itemName:"キャラ券",quantity:1},
-      {itemId:"SPECIAL_TICKET_SKILL",itemName:"スキル券",quantity:3},
-      {itemId:"SPECIAL_TICKET_EQUIPMENT",itemName:"装備券",quantity:1},
-      {itemId:"ENERGY_DRINK",itemName:"活力丸",quantity:2},
-      {itemId:"DIAMOND",itemName:"輝石",quantity:100},
+      {itemId:"SPECIAL_TICKET_CHARACTER",itemName:"キャラガチャ券",quantity:10},
+      {itemId:"DIAMOND",itemName:"輝石",quantity:500},
     ],
   },
   {

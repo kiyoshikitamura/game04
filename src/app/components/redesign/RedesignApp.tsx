@@ -31,6 +31,7 @@ import FormalGachaView from './FormalGachaView';
 import ShopTab from '../ShopTab';
 import TerritoryUnlockGuide from './TerritoryUnlockGuide';
 import HomePromotion from './HomePromotion';
+import { nextEarlyGuide } from '@/domain/redesign/earlyProgress';
 import BrandedLoading from '../ui/BrandedLoading';
 import IntegratedTutorial from './IntegratedTutorial';
 import Modal from './Modal';
@@ -278,7 +279,7 @@ export default function RedesignApp({ initialTab = 'home' }: { initialTab?: stri
     encounterRaid={encounter ? { id: encounter.id, name: raidDisplayLabel(getRoomRaidMaster(encounter), encounter.level), expiresAt: encounter.expiresAt } : null}
     notifications={<>
       <TerritoryUnlockGuide key={'territory-guide-'+state.userId} state={state} blocked={busy||!!battle||questPlaying||game.showLoginBonusModal||!!game.showMissionPanel||earlyLoadoutOpen||!!game.confirmDialogConfig?.isOpen}/>
-      <HomePromotion key={state.userId} owner={state.userId} active={tab==='home'&&!battle&&!questPlaying} blocked={busy||game.showLoginBonusModal||!!game.showMissionPanel||earlyLoadoutOpen||!!game.confirmDialogConfig?.isOpen} onNavigate={navigate}/>
+      <HomePromotion key={state.userId} owner={state.userId} active={tab==='home'&&!battle&&!questPlaying} blocked={busy||!!data.pendingBattle||!!(state.tutorial&&!state.tutorial.departed)||!!nextEarlyGuide(state,{battlePlaying:false,resultOpen:false})||game.showLoginBonusModal||!!game.showMissionPanel||earlyLoadoutOpen||!!game.confirmDialogConfig?.isOpen} onNavigate={navigate}/>
       {state.tutorial&&!state.tutorial.departed&&tab==='home'&&!game.showLoginBonusModal&&<GuideDialog title="戦支度" message={FIRST_SORTIE_TEXT} actions={[{label:'出陣',semantic:'primary',disabled:busy,onClick:()=>navigate('quest')}]}/>}
       <EarlyRetentionGuide state={state} battlePlaying={!!battle||questPlaying||busy} resultOpen={!!battle||questPlaying||!!game.showMissionPanel||game.showLoginBonusModal||earlyLoadoutOpen} save={(name,payload)=>action(name,payload,undefined,false)} navigate={(destination,options)=>{if(destination==='missions'){game.setShowMissionPanel(true);}else{setEarlyLoadoutOpen(!!options?.earlyLoadout);setTab('character');}}}/>
     {earlyLoadoutOpen&&!battle&&!questPlaying&&<Modal title="編成・装備" onClose={()=>setEarlyLoadoutOpen(false)}><EarlySortiePreparation state={state} save={action}/></Modal>}
