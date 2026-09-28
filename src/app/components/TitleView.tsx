@@ -10,6 +10,7 @@ import TitleLegalFooter from "./TitleLegalFooter";
 import HomeEffect from "./redesign/HomeEffect";
 import { recordTitleArrival } from '@/utils/titleArrival';
 import { recordAcquisitionObservation } from "@/utils/kpiInstrumentation";
+import { recordPortalEntry } from '@/utils/portalActivity';
 
 export default function TitleView() {
   const { showTitleView, setShowTitleView, authLoading, setupLoading, resumeLoading, resumeCurrentSession, session, onboardingState, errorMessage, playBgm, playCyberSe, handleFirstUserInteraction, handleStartNewGame, handleLogout, confirmDialogConfig } = useGame();
@@ -74,7 +75,7 @@ export default function TitleView() {
     if (resumeLoading) return;
     handleFirstUserInteraction();
     playCyberSe("click");
-    if (session) await resumeCurrentSession();
+    if (session) { void recordPortalEntry(); await resumeCurrentSession(); }
     else window.location.assign("/auth/game04");
   };
 
@@ -89,6 +90,7 @@ export default function TitleView() {
     setIsGameStartTransition(true);
     const succeeded = await handleStartNewGame();
     if (succeeded) {
+      void recordPortalEntry();
       setShowTitleView(false);
       return;
     }

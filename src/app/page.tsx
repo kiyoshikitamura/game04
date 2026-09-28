@@ -11,9 +11,11 @@ import { useCallback, useEffect, useState } from "react";
 import RedesignBillingReturn from "./components/redesign/RedesignBillingReturn";
 import RedesignCommerceOverlays from "./components/redesign/RedesignCommerceOverlays";
 import { initializeAcquisitionAttribution } from "@/utils/acquisitionAttribution";
+import { usePortalActivity } from './components/redesign/usePortalActivity';
 
 function AppContent() {
   const game = useGame();
+  usePortalActivity(game.session?.user.id, game.session?.access_token, !game.showTitleView && !game.maintenanceEnabled);
   const [billingRevision, setBillingRevision] = useState(0);
   const [initialTab, setInitialTab] = useState('home');
   const billingGranted = useCallback(() => { setInitialTab('shop'); setBillingRevision(value => value + 1); }, []);

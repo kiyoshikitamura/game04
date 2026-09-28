@@ -22,3 +22,7 @@ enabled = true
 
 [functions.resolve-battle]
 verify_jwt = true
+
+[functions.game04-portal-online]
+# Custom internal job authentication is checked against Vault by service-only RPC.
+verify_jwt = false
