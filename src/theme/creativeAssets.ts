@@ -1,3 +1,4 @@
+import { displayImage } from './displayImages';
 import characters from './local-characters.json';
 import characterBackgrounds from './character-backgrounds.json';
 
@@ -10,14 +11,14 @@ export function characterArt(subject: { id?: string; name?: string; image?: stri
   const match = art.find(c => c.id === subject.id)
     ?? art.find(c => c.name === subject.name)
     ?? art.find(c => c.legacyImage === subject.image || Object.values(c).includes(subject.image ?? ''));
-  if (variant === 'battle') return match?.battle;
-  return match?.[variant] ?? match?.portrait ?? match?.full ?? subject.image;
+  if (variant === 'battle') return displayImage(match?.battle);
+  return displayImage(match?.[variant] ?? match?.portrait ?? match?.full ?? subject.image);
 }
 
 export function characterBackground(subject: { id?: string; name?: string }): string | undefined {
   const match = characterBackgrounds.find(entry => entry.characterId === subject.id)
     ?? characterBackgrounds.find(entry => characters.find(c => c.id === entry.characterId)?.name === subject.name);
-  return match?.background;
+  return displayImage(match?.background);
 }
 
 export function characterFrame(rarity: unknown): string {

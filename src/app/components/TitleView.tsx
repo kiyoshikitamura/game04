@@ -1,4 +1,5 @@
 "use client";
+import { displayImage } from '@/theme/displayImages';
 import ActionButton from './ui/ActionButton';
 import BrandedLoading from './ui/BrandedLoading';
 import React, { useEffect, useRef, useState } from "react";
@@ -100,7 +101,7 @@ export default function TitleView() {
 
   return (
     <div className="title-view-overlay">
-      <div className="title-view-container">
+      <div className="title-view-container" style={{backgroundImage: `url("${displayImage('/creative/branding/sengoku-hime-enbu-key-visual-20260928-v4.png')}")`}}>
         {/* 桜_上田城：既存の透過演出をタイトル背景の上へ重ねる。 */}
         <HomeEffect effectId="char_kaede_01" />
         

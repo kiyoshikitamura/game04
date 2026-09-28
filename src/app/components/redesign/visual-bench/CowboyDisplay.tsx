@@ -1,6 +1,6 @@
 'use client';
 import {useId} from 'react';
-import art from '@/theme/local-characters.json';
+import { displayCharacters as art } from '@/theme/displayImages';
 import crops from '@/theme/character-cowboy-crops.json';
 import './CowboyDisplay.css';
 /** Shared head-to-thigh framing; measured source bounds are independent of text. */

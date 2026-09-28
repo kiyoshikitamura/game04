@@ -1,10 +1,14 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import ScreenState from '@/app/components/ui/ScreenState';
+import BrandedLoading from '@/app/components/ui/BrandedLoading';
+import { useCharacterImageReadiness } from '@/app/components/redesign/CharacterImageReadiness';
+import { displayImage, displayCharacters } from '@/theme/displayImages';
 import { useAudio } from '@/audio/AudioProvider';
 import BattleView from '@/app/components/redesign/BattleView';
 import ActionButton from '@/app/components/ui/ActionButton';
 import CowboyDisplay from '@/app/components/redesign/visual-bench/CowboyDisplay';
-import { CharacterCard } from '@/app/components/redesign/visual-bench/CharacterDisplays';
+import { CharacterCard, useArtworkPreload } from '@/app/components/redesign/visual-bench/CharacterDisplays';
 import { AssetIcon } from '@/app/components/ui/AssetChoice';
 import { CHARACTER_MASTERS } from '@/domain/redesign/masters';
 import { getFormalOwnedSkill } from '@/domain/redesign/formalOwnedSkills';
@@ -22,7 +26,7 @@ const IDS=['world','challenge','oda','trailer','need','blackout','osaka','name',
 export type OpeningScene=typeof IDS[number];
 type Scene=OpeningScene;
 interface LiveOpening { state:RedesignState; initialScene:Scene; initialName:string; onSceneChange:(scene:Scene,name:string)=>void; advance:(scene:Scene,name:string)=>Promise<void>; }
-const OSAKA='/creative/backgrounds/char_ageha_01.png';
+const OSAKA=displayImage('/creative/backgrounds/char_ageha_01.png');
 const member=(id:string)=>CHARACTER_MASTERS.find(c=>c.id===id)!;
 /** Exercise the existing grants and equipment transition, only in an isolated preview object. */
 function preparation() {
@@ -49,19 +53,32 @@ export default function TutorialOpeningPreview({live}:{live?:LiveOpening}={}) {
   useEffect(()=>{if(live&&scene==='practice'&&!livePractice&&practiceState.deck.length)setLivePractice(createTutorialBattle(practiceState));},[live,scene,livePractice,practiceState]);
   useEffect(()=>{live?.onSceneChange(scene,name);},[scene,name,live]);
   const battle=scene==='trailer'||scene==='practice';
+  const black=['world','need','blackout','complete'].includes(scene);
+  const cast=scene==='oda'?'char_reiji_01':'char_ageha_01';
+  const showCast=!black&&!battle&&scene!=='osaka'&&scene!=='formation';
+  const background=displayImage(['challenge','oda'].includes(scene)?BACKGROUNDS.oda:OSAKA);
+  const sceneSources=[
+    ...(!black&&!battle?[background]:[]),
+    ...(showCast?[displayCharacters.find(row=>row.id===cast)?.full]:[]),
+    ...(scene==='formation'?STARTER_SKILLS.map(id=>getFormalOwnedSkill(id,0).image):[]),
+  ].filter((src):src is string=>Boolean(src));
+  const sceneImages=useCharacterImageReadiness(sceneSources);
+  const rosterImages=useArtworkPreload(scene==='formation'?STARTERS.map(member):[],'card');
+  const imagesReady=sceneImages.ready&&rosterImages.ready;
+  const imagesFailed=sceneImages.failed||rosterImages.failed;
   useEffect(()=>{document.body.classList.add('rd-active');return()=>document.body.classList.remove('rd-active');},[]);
   useEffect(()=>{
     if(battle)return;
     if(scene==='need'||scene==='blackout') stopBgm(); else playBgm('TITLE');
   },[scene,battle,playBgm,stopBgm]);
   useEffect(()=>{
-    if(scene!=='blackout'&&scene!=='osaka')return;
+    if(!imagesReady||(scene!=='blackout'&&scene!=='osaka'))return;
     const timer=setTimeout(()=>setScene(scene==='blackout'?'osaka':'name'),scene==='blackout'?400:1400);
     return()=>clearTimeout(timer);
-  },[scene]);
+  },[scene,imagesReady]);
 
   async function next() {
-    if(advancing.current)return;
+    if(advancing.current||!imagesReady)return;
     void unlockAudio(); playLegacySe('click'); setError('');
     const trimmed=name.trim();
     if(scene==='name'&&(!trimmed||[...trimmed].length>8||/[\p{Cc}\p{Cf}]/u.test(trimmed))) {
@@ -97,17 +114,14 @@ export default function TutorialOpeningPreview({live}:{live?:LiveOpening}={}) {
     ready:'見事な編成じゃ。じゃが、相手の伊達は手強い。\n戦中に「バースト」が発動すれば、攻撃の戦技を連発できる。その力、見届けるのじゃ。さぁ、開戦じゃ！',
     farewell:'見事であった！これなら戦を任せられるであろう。\nまずは三河の地の平定に向かってくれ。'+name+'よ！戦果を楽しみにしておるぞ！'
   };
-  const black=['world','need','blackout','complete'].includes(scene);
-  const cast=scene==='oda'?'char_reiji_01':'char_ageha_01';
-  const showCast=!black&&scene!=='osaka'&&scene!=='formation';
   const auto=scene==='blackout'||scene==='osaka';
   const label=scene==='name'?'この名で軍師になる':scene==='formation'?'おまかせ編成・戦技':scene==='ready'?'模擬戦を始める':scene==='farewell'?'チュートリアルを終える':'次へ';
 
   return <div className="rd-shell tutorial-shell opening-shell" data-opening-scene={scene} key={run}>
-    {scene==='trailer'?<BattleView result={trailer} vipActive={false} requirePlaybackCompletion autoCompleteOnFinish hideWaveDisplay title="魔王・織田信長 Lv.100" backgroundSrc={BACKGROUNDS.oda} onComplete={()=>setScene('need')}/>:
-     scene==='practice'&&practice?<BattleView result={practice} vipActive={false} requirePlaybackCompletion hideWaveDisplay title="模擬戦" onPlaybackComplete={live?()=>live.advance('practice',name):undefined} backgroundSrc={BACKGROUNDS.battle} onComplete={()=>setScene('farewell')}/>:
+    {!imagesReady?<main className="tutorial-scene opening-scene opening-black">{imagesFailed?<ScreenState kind="error" title="画像を読み込めませんでした" message="通信状況を確認して、もう一度お試しください。" actionLabel="再試行" onAction={()=>{sceneImages.retry();rosterImages.retry();}}/>:<BrandedLoading label="チュートリアルを準備中"/>}</main>:scene==='trailer'?<BattleView result={trailer} vipActive={false} requirePlaybackCompletion autoCompleteOnFinish hideWaveDisplay title="魔王・織田信長 Lv.100" backgroundSrc={displayImage(BACKGROUNDS.oda)} onComplete={()=>setScene('need')}/>:
+     scene==='practice'&&practice?<BattleView result={practice} vipActive={false} requirePlaybackCompletion hideWaveDisplay title="模擬戦" onPlaybackComplete={live?()=>live.advance('practice',name):undefined} backgroundSrc={displayImage(BACKGROUNDS.battle)} onComplete={()=>setScene('farewell')}/>:
      scene==='complete'?<main className="opening-complete"><h1>チュートリアル終了</h1><p>{name}の軍師としての旅が始まります。</p><p className="opening-note">ここまでが今回の確認範囲です。確認用の名前・武将・戦技は通常プレイには反映されません。</p><ActionButton variant="primary" onClick={restart}>最初から確認する</ActionButton></main>:
-     <main key={scene} className={'tutorial-scene opening-scene'+(black?' opening-black':'')+(scene==='world'?' opening-world':'')} style={black?undefined:{backgroundImage:"linear-gradient(0deg, #160f0baa, transparent 65%), url('"+(['challenge','oda'].includes(scene)?BACKGROUNDS.oda:OSAKA)+"')"}}>
+     <main key={scene} className={'tutorial-scene opening-scene'+(black?' opening-black':'')+(scene==='world'?' opening-world':'')} style={black?undefined:{backgroundImage:"linear-gradient(0deg, #160f0baa, transparent 65%), url('"+background+"')"}}>
        {scene==='world'?<div className="opening-world-copy"><p>{texts.world}</p></div>:
         showCast?<div className="tutorial-cast is-cowboy opening-cast"><CowboyDisplay characterId={cast} name={member(cast).name}/></div>:
         scene==='formation'?<div className="opening-roster">

@@ -2,8 +2,8 @@
 import { useEffect, useState } from 'react';
 import { beginQaImageGroup } from '@/utils/redesignQaTelemetry';
 import { preloadAsset } from '@/app/lib/screenAssets';
-import characterArt from '@/theme/local-characters.json';
-import backgrounds from '@/theme/character-backgrounds.json';
+import { displayCharacters as characterArt } from '@/theme/displayImages';
+import { displayBackgrounds as backgrounds } from '@/theme/displayImages';
 import type { CharacterMaster } from '@/domain/redesign/types';
 
 const decoded = new Map<string, Promise<void>>();

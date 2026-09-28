@@ -29,6 +29,7 @@ const nextConfig: NextConfig = {
   devIndicators: false,
   async headers() {
     return [
+      { source: "/display-images/:path*", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
       {
         source: "/(.*)",
         headers: [

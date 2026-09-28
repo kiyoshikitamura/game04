@@ -27,8 +27,8 @@ import { skillDescription } from './battleLabels';
 import { getGrowthResult, type GrowthResult } from '@/domain/redesign/growthResult';
 import { characterImageSources, useCharacterImageReadiness } from './CharacterImageReadiness';
 import { CARD_OPENINGS } from './visual-bench/CharacterDisplays';
-import characterArtwork from '@/theme/local-characters.json';
-import characterBackgrounds from '@/theme/character-backgrounds.json';
+import { displayCharacters as characterArtwork } from '@/theme/displayImages';
+import { displayBackgrounds as characterBackgrounds } from '@/theme/displayImages';
 const ELEMENTS:Record<string,string>={fire:'火',water:'水',earth:'土',wind:'風',light:'光',dark:'闇'};
 const RARITIES=['N','R','SR','SSR'];
 function CharacterCard({subject}:{subject:typeof CHARACTER_MASTERS[number];compact?:boolean;hideMarks?:boolean}) {

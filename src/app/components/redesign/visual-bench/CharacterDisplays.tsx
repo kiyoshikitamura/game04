@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState, type CSSProperties } from 'react';
-import art from '@/theme/local-characters.json';
-import backgrounds from '@/theme/character-backgrounds.json';
+import { displayCharacters as art } from '@/theme/displayImages';
+import { displayBackgrounds as backgrounds } from '@/theme/displayImages';
 import styles from './CharacterDisplays.module.css';
 
 type Element = 'fire'|'water'|'earth'|'wind'|'light'|'dark';
@@ -22,8 +22,10 @@ function readImage(src:string) {
   if(!task) {
     task=new Promise<HTMLImageElement>((resolve,reject)=>{
       const image=new window.Image();
-      image.onload=()=>image.decode().then(()=>resolve(image),reject);
-      image.onerror=()=>reject(new Error(src));
+      const timer=window.setTimeout(()=>fail(),12000);
+      const fail=()=>{window.clearTimeout(timer);reject(new Error('画像を読み込めませんでした'));};
+      image.onload=()=>image.decode().then(()=>{window.clearTimeout(timer);resolve(image);},fail);
+      image.onerror=fail;
       image.src=src;
     });
     pending.set(src,task);
