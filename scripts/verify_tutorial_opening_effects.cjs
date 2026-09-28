@@ -45,13 +45,13 @@ async function main(){
   assert.equal(after.frame,before.frame);after.times.forEach((n,i)=>assert.ok(Math.abs(n-before.times[i])<50));
   report.checks.push('pause freezes frame and cutin animation');
   await page.getByRole('button',{name:'バトルを続ける',exact:true}).click();
-  await page.waitForTimeout(600);
+  await page.waitForTimeout(300);
   await noOverflow();await page.screenshot({path:path.join(out,`${width}-cutin.png`)});
   const bounds=await page.locator('.tutorial-skill-fx').evaluate(n=>{
    const a=n.querySelector('.tutorial-skill-art'),s=n.querySelector('.tutorial-skill-name');
    return {width:parseFloat(getComputedStyle(a).width)/n.clientWidth,top:parseFloat(getComputedStyle(a).top)/n.clientHeight,skillTop:parseFloat(getComputedStyle(s).top)/n.clientHeight,fontSize:parseFloat(getComputedStyle(s).fontSize),duration:getComputedStyle(a).animationDuration,loaded:Array.from(n.querySelectorAll('img')).every(i=>i.complete&&i.naturalWidth>0)};
   });
-  assert.ok(Math.abs(bounds.width-1.15)<.01);assert.ok(Math.abs(bounds.top-.17)<.01);assert.ok(Math.abs(bounds.skillTop-.45)<.01);assert.ok(bounds.loaded);report.bounds=bounds;assert.ok(bounds.fontSize>=22);if(!reduced)assert.equal(bounds.duration,'1.6s');
+  assert.ok(Math.abs(bounds.width-1.15)<.01);assert.ok(Math.abs(bounds.top-.17)<.01);assert.ok(Math.abs(bounds.skillTop-.45)<.01);assert.ok(bounds.loaded);report.bounds=bounds;assert.ok(bounds.fontSize>=22);if(!reduced)assert.equal(bounds.duration,'0.8s');
   await page.getByRole('button',{name:'再生速度 1倍',exact:true}).click();
   // updatePlaybackRate takes effect on the next browser animation frame.
   await page.waitForFunction(()=>{
@@ -77,8 +77,8 @@ async function main(){
   const second=trailerEvents.find(e=>e.value==='char_karen_01');
   const nextDamage=report.timeline.find(e=>e.scene==='trailer'&&e.frame===second.frame+1&&e.event==='damage');
   report.normalCutinAt2xMs=nextDamage.time-second.time;
-  assert.ok(report.normalCutinAt2xMs>=650&&report.normalCutinAt2xMs<1050);
-  report.checks.push('trailer: 9 cutins once; 1600ms baseline; skill then combo then damage for all 3 combos; automatic defeat transition');
+  assert.ok(report.normalCutinAt2xMs>=350&&report.normalCutinAt2xMs<650);
+  report.checks.push('trailer: 9 cutins once; 800ms baseline; skill then combo then damage for all 3 combos; automatic defeat transition');
   await next();await scene('name');await page.getByLabel('軍師名（1〜8文字）').fill('軍師確認');
   await page.getByRole('button',{name:'この名で軍師になる'}).click();await scene('recruit');await next();await scene('test');await next();await scene('formation');
   await noOverflow();await page.screenshot({path:path.join(out,`${width}-formation.png`)});
@@ -86,6 +86,9 @@ async function main(){
   await page.getByRole('button',{name:'再生速度 1倍',exact:true}).click();
   await page.getByRole('region',{name:'戦闘リザルト',exact:true}).waitFor({timeout:90000});
   const practiceEvents=await page.evaluate(()=>window.effectEvents.filter(e=>e.scene==='practice'));
+  const practiceTimeline=await page.evaluate(()=>window.battleTimeline.filter(e=>e.scene==='practice'));
+  assert.ok(practiceTimeline.length>0);assert.ok(practiceTimeline.every(e=>e.phase!=='wave'));
+  report.checks.push('practice has no wave announcement');
   assert.deepEqual(practiceEvents.filter(e=>e.kind==='cutin').map(e=>e.value),['char_leo_01']);
   assert.deepEqual(practiceEvents.filter(e=>e.kind==='combo').map(e=>e.value),['1','2','3']);
   assert.equal(await page.locator('[data-tutorial-cutin],[data-tutorial-combo]').count(),0);

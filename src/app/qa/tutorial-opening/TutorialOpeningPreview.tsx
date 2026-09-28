@@ -87,7 +87,7 @@ export default function TutorialOpeningPreview() {
 
   return <div className="rd-shell tutorial-shell opening-shell" data-opening-scene={scene} key={run}>
     {scene==='trailer'?<BattleView tutorialEffects result={trailer} vipActive={false} requirePlaybackCompletion autoCompleteOnFinish hideWaveDisplay title="魔王・織田信長 Lv.100" backgroundSrc={BACKGROUNDS.oda} onComplete={()=>setScene('need')}/>:
-     scene==='practice'&&practice?<BattleView tutorialEffects result={practice} vipActive={false} requirePlaybackCompletion title="模擬戦" backgroundSrc={BACKGROUNDS.battle} onComplete={()=>setScene('farewell')}/>:
+     scene==='practice'&&practice?<BattleView tutorialEffects result={practice} vipActive={false} requirePlaybackCompletion hideWaveDisplay title="模擬戦" backgroundSrc={BACKGROUNDS.battle} onComplete={()=>setScene('farewell')}/>:
      scene==='complete'?<main className="opening-complete"><h1>チュートリアル終了</h1><p>{name}の軍師としての旅が始まります。</p><p className="opening-note">ここまでが今回の確認範囲です。確認用の名前・武将・戦技は通常プレイには反映されません。</p><ActionButton variant="primary" onClick={restart}>最初から確認する</ActionButton></main>:
      <main key={scene} className={'tutorial-scene opening-scene'+(black?' opening-black':'')+(scene==='world'?' opening-world':'')} style={black?undefined:{backgroundImage:"linear-gradient(0deg, #160f0baa, transparent 65%), url('"+(['challenge','oda'].includes(scene)?BACKGROUNDS.oda:OSAKA)+"')"}}>
        {scene==='world'?<div className="opening-world-copy"><p>{texts.world}</p></div>:
