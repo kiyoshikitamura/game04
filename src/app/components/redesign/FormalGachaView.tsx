@@ -133,6 +133,7 @@ export default function FormalGachaView({ data, onAction }: {
       try {
         const recovered = await actionRef.current(pendingIntent.action, pendingIntent.payload, pendingIntent.id) as FormalResponse;
         if (!active) return;
+        if (recovered.formalGacha) setCatalog(recovered.formalGacha);
         const recoveredResults = recovered.formalGachaResults ?? [];
         if (!recoveredResults.length) throw new Error("前回の登用結果を確認できませんでした。");
         setResults(recoveredResults);
