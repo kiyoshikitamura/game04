@@ -1,0 +1,16 @@
+.tutorial-skill-fx{position:absolute;inset:0;z-index:8;pointer-events:none;overflow:hidden}
+.tutorial-skill-veil{position:absolute;inset:7.15% 0 11.4%;background:#090313;animation:tutorial-skill-dim 3.2s ease both}
+.tutorial-skill-art{position:absolute;left:50%;top:17%;width:115%;aspect-ratio:2/1;transform:translateX(-50%);animation:tutorial-skill-enter 3.2s ease both}
+.tutorial-skill-art img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:contain}
+.tutorial-skill-aura{filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 12px var(--cutin-inner)) drop-shadow(0 0 24px var(--cutin-outer));animation:tutorial-skill-glow 3.2s ease both}
+.tutorial-skill-image{filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 8px var(--cutin-inner))}
+.tutorial-skill-name{position:absolute;left:6%;right:6%;top:45%;min-height:8.6%;display:flex;align-items:center;justify-content:center;text-align:center;font:900 clamp(19px,5.3vw,30px)/1.25 var(--g4-serif,serif);letter-spacing:.075em;color:#fff7fa;text-shadow:0 3px 2px #220018,0 0 8px var(--cutin-inner),0 0 18px var(--cutin-outer),2px 3px 0 #14000b;animation:tutorial-skill-letter 3.2s ease both}
+@keyframes tutorial-skill-dim{0%{opacity:0}13%,100%{opacity:.43}}
+@keyframes tutorial-skill-enter{0%{opacity:0;transform:translate(-38%,-4%) scale(1.08)}15%,100%{opacity:1;transform:translate(-50%,0) scale(1)}}
+@keyframes tutorial-skill-glow{0%{opacity:0}20%,76%{opacity:.96}50%{opacity:.66}100%{opacity:.85}}
+@keyframes tutorial-skill-letter{0%,20%{opacity:0;transform:translateY(12px)}32%,100%{opacity:1;transform:translateY(0)}}
+.tutorial-combo-fx{position:absolute;z-index:9;pointer-events:none;aspect-ratio:2.25;animation:tutorial-combo-pop .36s ease-out both}
+.tutorial-combo-fx img{display:block;width:100%;height:100%;object-fit:contain;transform:rotate(-20deg);transform-origin:center}
+.tutorial-combo-fx[data-paused=true]{animation-play-state:paused}
+@keyframes tutorial-combo-pop{0%{opacity:0;transform:translate(-50%,-145%) scale(.78)}22%{opacity:1;transform:translate(-50%,-155%) scale(1.07)}55%{opacity:1;transform:translate(-50%,-155%) scale(1)}100%{opacity:0;transform:translate(-50%,-165%) scale(.98)}}
+@media(prefers-reduced-motion:reduce){.tutorial-skill-fx *,.tutorial-combo-fx{animation:none!important}.tutorial-skill-veil{opacity:.43}.tutorial-skill-aura{opacity:.85}.tutorial-combo-fx{transform:translate(-50%,-155%)}}
