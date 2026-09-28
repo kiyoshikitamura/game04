@@ -4,7 +4,7 @@ import CandidateHint from '../ui/CandidateHint';
 import { LB_MATERIAL_NAMES, materialDiagnostic } from '@/theme/approvedNames';
 import ActionButton from '../ui/ActionButton';
 import RarityBadge from '../ui/RarityBadge';
-import { characterArt } from '@/theme/creativeAssets';
+import { characterArt } from '@/theme/displayCreativeAssets';
 import PageTitleBanner from './PageTitleBanner';
 import ListControls from '../ui/ListControls';
 import ElementBadge from './ElementBadge';
