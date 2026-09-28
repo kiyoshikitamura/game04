@@ -13,3 +13,7 @@ Verification:
 - Initial wave QA assertion expected an intro at an already-seeked initial frame. The existing hook intentionally suppresses that intro; corrected the assertion to the normal wave header. No playback behavior changed for this test.
 
 Git base checked: origin/main a83a94ad, shared Preview 2c8bb1a8; already included in this dedicated branch. No main/Production write.
+
+Deployment completed: https://game04-5rimhhzm2-kiyoshi-kitamura.vercel.app
+Runtime SHA: c520fc402c8c51c4470ac020dcc7b235f86d0cd7
+Vercel READY confirmed and commit metadata matched. Deployed mobile shared-battle tests passed (preview/report.json); local asset-failure/retry and reload cancellation tests also passed (recovery). `npm run check` passed with explicit local mock environment. Production/main unchanged. Verification records are committed separately after deployment; the immutable tested URL above contains the runtime SHA.
