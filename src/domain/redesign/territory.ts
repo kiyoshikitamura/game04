@@ -19,6 +19,9 @@ export const TERRITORY_MASTER:TerritoryMaster={
 export const TERRITORY_HOST_POLICY_VERSION='GAME04_TERRITORY_HOST_PROVISIONAL_20260923';
 export const TERRITORY_UNLOCK_STAGE_ID='mino-5';
 export function isTerritoryUnlocked(state:Pick<RedesignState,'clearedStages'>):boolean{return state.clearedStages.includes(TERRITORY_UNLOCK_STAGE_ID);}
+export const TERRITORY_RESCUE_UNLOCK_STAGE_ID='owari-4';
+/** Rescue access is independent of hosting progression; preserve existing 3-5 access. */
+export function isTerritoryRescueUnlocked(state:Pick<RedesignState,'clearedStages'>):boolean{return state.clearedStages.includes(TERRITORY_RESCUE_UNLOCK_STAGE_ID)||isTerritoryUnlocked(state);}
 export const TERRITORY_HOST_LEVELS=Array.from({length:10},(_,index)=>({level:index+1,requiredExp:index*(index+1)*50,hostingSlots:1}));
 export const TERRITORY_CASTLE_HOST_POLICY=[
  {id:'TI01',requiredLevel:1,clearExp:100},
