@@ -4,7 +4,7 @@ import { burstPresentation } from '@/domain/presentation/battleLeadIn';
 import { minimumEffectFrameDuration } from './recordedEffects';
 import cutins from './tutorial-cutins.json';
 
-export const TUTORIAL_CUTIN_MS = 3200;
+export const TUTORIAL_CUTIN_MS = 1600;
 export function tutorialCutin(result: BattleResult, index: number) {
   const presentation = projectRecordedBattleFrame(result, index);
   if (presentation.cutIn !== 'skill' || !presentation.actor) return undefined;

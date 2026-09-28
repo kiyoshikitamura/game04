@@ -2,7 +2,7 @@
 import { useLayoutEffect, useRef, type CSSProperties } from 'react';
 import type { BattleResult } from '@/domain/redesign/battle';
 import { projectRecordedBattleFrame } from '@/domain/presentation/recordedBattlePresentation';
-import { tutorialCutin, tutorialComboAsset } from './tutorialEffects';
+import { tutorialCutin, tutorialComboAsset, TUTORIAL_CUTIN_MS } from './tutorialEffects';
 import './tutorial-effects.css';
 
 /** Keyed by recorded frame. There is no independent completion callback or sound. */
@@ -18,7 +18,7 @@ export function TutorialSkillCutin({ result, index, paused, speed }: { result: B
     }
   }, [paused, speed]);
   if (!asset) return null;
-  return <div ref={root} className="tutorial-skill-fx" data-tutorial-cutin={presentation.actor?.id} data-effect-frame={index} data-paused={paused} style={{ '--cutin-inner': asset.inner, '--cutin-outer': asset.outer } as CSSProperties} role="status" aria-label={`${asset.name} ${presentation.skill?.name ?? 'スキル'}`}>
+  return <div ref={root} className="tutorial-skill-fx" data-tutorial-cutin={presentation.actor?.id} data-effect-frame={index} data-paused={paused} style={{ '--cutin-ms': `${TUTORIAL_CUTIN_MS}ms`, '--cutin-inner': asset.inner, '--cutin-outer': asset.outer } as CSSProperties} role="status" aria-label={`${asset.name} ${presentation.skill?.name ?? 'スキル'}`}>
     <div className="tutorial-skill-veil" />
     <div className="tutorial-skill-art"><img className="tutorial-skill-aura" src={asset.src} alt="" /><img className="tutorial-skill-image" src={asset.src} alt={asset.name} /></div>
     <div className="tutorial-skill-name">{presentation.skill?.name}</div>

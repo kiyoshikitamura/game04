@@ -15,21 +15,27 @@ async function main(){
  page.on('pageerror',e=>report.errors.push(e.message));
  page.on('response',r=>{if(r.status()>=400)report.failedRequests.push({url:r.url(),status:r.status()})});
  await page.addInitScript(()=>{
-  window.effectEvents=[];window.effectSeen=new WeakSet();window.maxCutins=0;window.duplicateCombo=false;
+  window.battleTimeline=[];window.lastBattleState="";window.effectEvents=[];window.effectSeen=new WeakSet();window.maxCutins=0;window.duplicateCombo=false;
   new MutationObserver(()=>{
+   const battle=document.querySelector('[data-playback-frame]');
+   const state=battle&&[document.querySelector('[data-opening-scene]')?.dataset.openingScene,battle.dataset.playbackFrame,battle.dataset.presentationPhase].join(':');
+   if(battle&&state!==window.lastBattleState){window.lastBattleState=state;window.battleTimeline.push({scene:document.querySelector('[data-opening-scene]')?.dataset.openingScene,frame:Number(battle.dataset.playbackFrame),phase:battle.dataset.presentationPhase,event:battle.dataset.frameEvent,time:performance.now()});}
    window.maxCutins=Math.max(window.maxCutins,document.querySelectorAll('[data-tutorial-cutin]').length);
    if(document.querySelector('[data-tutorial-combo]')&&document.querySelector('.phase-combo .ink-words'))window.duplicateCombo=true;
    document.querySelectorAll('[data-tutorial-cutin],[data-tutorial-combo]').forEach(n=>{
     if(window.effectSeen.has(n))return;window.effectSeen.add(n);
     window.effectEvents.push({scene:document.querySelector('[data-opening-scene]')?.dataset.openingScene,frame:Number(n.dataset.effectFrame),kind:n.dataset.tutorialCutin?'cutin':'combo',value:n.dataset.tutorialCutin||n.dataset.tutorialCombo,time:performance.now()});
    });
-  }).observe(document,{childList:true,subtree:true});
+  }).observe(document,{childList:true,subtree:true,attributes:true,attributeFilter:['data-playback-frame','data-presentation-phase']});
  });
  const scene=async name=>page.locator(`[data-opening-scene="${name}"]`).waitFor({timeout:90000});
  const next=async()=>page.getByRole('button',{name:'次へ',exact:true}).click();
  const noOverflow=async()=>assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
  try{
   await page.goto(base+'/qa/tutorial-opening');await scene('world');await noOverflow();
+  const font=await page.locator('.opening-world-copy p').evaluate(n=>({family:getComputedStyle(n).fontFamily,weight:getComputedStyle(n).fontWeight}));
+  assert.ok(font.family.includes('G4NotoSerif'));assert.equal(font.weight,'900');report.worldFont=font;
+  await page.screenshot({path:path.join(out,`${width}-world.png`)});
   await next();await scene('challenge');await next();await scene('oda');await next();await scene('trailer');
   const cutin=page.locator('[data-tutorial-cutin]').first();await cutin.waitFor({timeout:60000});
   await page.getByRole('button',{name:'一時停止',exact:true}).click();
@@ -43,9 +49,9 @@ async function main(){
   await noOverflow();await page.screenshot({path:path.join(out,`${width}-cutin.png`)});
   const bounds=await page.locator('.tutorial-skill-fx').evaluate(n=>{
    const a=n.querySelector('.tutorial-skill-art'),s=n.querySelector('.tutorial-skill-name');
-   return {width:parseFloat(getComputedStyle(a).width)/n.clientWidth,top:parseFloat(getComputedStyle(a).top)/n.clientHeight,skillTop:parseFloat(getComputedStyle(s).top)/n.clientHeight,loaded:Array.from(n.querySelectorAll('img')).every(i=>i.complete&&i.naturalWidth>0)};
+   return {width:parseFloat(getComputedStyle(a).width)/n.clientWidth,top:parseFloat(getComputedStyle(a).top)/n.clientHeight,skillTop:parseFloat(getComputedStyle(s).top)/n.clientHeight,fontSize:parseFloat(getComputedStyle(s).fontSize),duration:getComputedStyle(a).animationDuration,loaded:Array.from(n.querySelectorAll('img')).every(i=>i.complete&&i.naturalWidth>0)};
   });
-  assert.ok(Math.abs(bounds.width-1.15)<.01);assert.ok(Math.abs(bounds.top-.17)<.01);assert.ok(Math.abs(bounds.skillTop-.45)<.01);assert.ok(bounds.loaded);report.bounds=bounds;
+  assert.ok(Math.abs(bounds.width-1.15)<.01);assert.ok(Math.abs(bounds.top-.17)<.01);assert.ok(Math.abs(bounds.skillTop-.45)<.01);assert.ok(bounds.loaded);report.bounds=bounds;assert.ok(bounds.fontSize>=22);if(!reduced)assert.equal(bounds.duration,'1.6s');
   await page.getByRole('button',{name:'再生速度 1倍',exact:true}).click();
   const animations=await page.locator('[data-tutorial-cutin]').evaluate(n=>n.getAnimations({subtree:true}).map(a=>a.playbackRate));
   assert.ok(animations.every(n=>n===2));report.checks.push('speed change preserves mounted cutin and sets rate 2');
@@ -56,7 +62,18 @@ async function main(){
   assert.deepEqual(trailerEvents.filter(e=>e.kind==='cutin').map(e=>e.value),['char_ageha_01','char_karen_01','char_leo_01','char_koharu_01','char_go_01','char_ageha_01','char_ageha_01','char_ageha_01','char_reiji_01']);
   assert.deepEqual(trailerEvents.filter(e=>e.kind==='combo').map(e=>e.value),['1','2','3']);
   assert.equal(new Set(trailerEvents.map(e=>e.kind+e.frame)).size,trailerEvents.length);
-  report.checks.push('trailer: 9 cutins exactly once, combos 1/2/3, defeat advances automatically');
+  report.timeline=await page.evaluate(()=>window.battleTimeline);
+  for(const combo of trailerEvents.filter(e=>e.kind==='combo')){
+   const skill=trailerEvents.find(e=>e.kind==='cutin'&&e.frame===combo.frame);
+   const damage=report.timeline.find(e=>e.scene==='trailer'&&e.frame===combo.frame+1&&e.event==='damage');
+   assert.ok(skill&&damage);assert.ok(skill.time<combo.time&&combo.time<damage.time);
+   assert.ok(combo.time-skill.time>=450&&combo.time-skill.time<900);
+  }
+  const second=trailerEvents.find(e=>e.value==='char_karen_01');
+  const nextDamage=report.timeline.find(e=>e.scene==='trailer'&&e.frame===second.frame+1&&e.event==='damage');
+  report.normalCutinAt2xMs=nextDamage.time-second.time;
+  assert.ok(report.normalCutinAt2xMs>=650&&report.normalCutinAt2xMs<1050);
+  report.checks.push('trailer: 9 cutins once; 1600ms baseline; skill then combo then damage for all 3 combos; automatic defeat transition');
   await next();await scene('name');await page.getByLabel('軍師名（1〜8文字）').fill('軍師確認');
   await page.getByRole('button',{name:'この名で軍師になる'}).click();await scene('recruit');await next();await scene('test');await next();await scene('formation');
   await noOverflow();await page.screenshot({path:path.join(out,`${width}-formation.png`)});

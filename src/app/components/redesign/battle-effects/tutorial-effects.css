@@ -1,10 +1,10 @@
 .tutorial-skill-fx{position:absolute;inset:0;z-index:8;pointer-events:none;overflow:hidden}
-.tutorial-skill-veil{position:absolute;inset:7.15% 0 11.4%;background:#090313;animation:tutorial-skill-dim 3.2s ease both}
-.tutorial-skill-art{position:absolute;left:50%;top:17%;width:115%;aspect-ratio:2/1;transform:translateX(-50%);animation:tutorial-skill-enter 3.2s ease both}
+.tutorial-skill-veil{position:absolute;inset:7.15% 0 11.4%;background:#090313;animation:tutorial-skill-dim var(--cutin-ms) ease both}
+.tutorial-skill-art{position:absolute;left:50%;top:17%;width:115%;aspect-ratio:2/1;transform:translateX(-50%);animation:tutorial-skill-enter var(--cutin-ms) ease both}
 .tutorial-skill-art img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:contain}
-.tutorial-skill-aura{filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 12px var(--cutin-inner)) drop-shadow(0 0 24px var(--cutin-outer));animation:tutorial-skill-glow 3.2s ease both}
+.tutorial-skill-aura{filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 12px var(--cutin-inner)) drop-shadow(0 0 24px var(--cutin-outer));animation:tutorial-skill-glow var(--cutin-ms) ease both}
 .tutorial-skill-image{filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 8px var(--cutin-inner))}
-.tutorial-skill-name{position:absolute;left:6%;right:6%;top:45%;min-height:8.6%;display:flex;align-items:center;justify-content:center;text-align:center;font:900 clamp(19px,5.3vw,30px)/1.25 var(--g4-serif,serif);letter-spacing:.075em;color:#fff7fa;text-shadow:0 3px 2px #220018,0 0 8px var(--cutin-inner),0 0 18px var(--cutin-outer),2px 3px 0 #14000b;animation:tutorial-skill-letter 3.2s ease both}
+.tutorial-skill-name{position:absolute;left:6%;right:6%;top:45%;min-height:8.6%;display:flex;align-items:center;justify-content:center;text-align:center;font:900 clamp(22px,6.1vw,34px)/1.25 var(--g4-serif,serif);letter-spacing:.075em;color:#fff7fa;text-shadow:0 3px 2px #220018,0 0 8px var(--cutin-inner),0 0 18px var(--cutin-outer),2px 3px 0 #14000b;animation:tutorial-skill-letter var(--cutin-ms) ease both}
 @keyframes tutorial-skill-dim{0%{opacity:0}13%,100%{opacity:.43}}
 @keyframes tutorial-skill-enter{0%{opacity:0;transform:translate(-38%,-4%) scale(1.08)}15%,100%{opacity:1;transform:translate(-50%,0) scale(1)}}
 @keyframes tutorial-skill-glow{0%{opacity:0}20%,76%{opacity:.96}50%{opacity:.66}100%{opacity:.85}}

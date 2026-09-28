@@ -1,4 +1,6 @@
 /* Opening-only composition; existing tutorial and normal battle contracts are preserved. */
+/* The global theme forces sans on all elements; this requested title is an exception. */
+body.game04-theme .opening-world-copy p{font-family:G4NotoSerif,"Yu Mincho","Hiragino Mincho ProN",serif!important}
 .opening-shell{max-width:480px;height:100dvh}
 .opening-scene{padding:env(safe-area-inset-top) 16px max(16px,env(safe-area-inset-bottom));min-height:100dvh;gap:12px}
 .opening-black{background:#020205}
@@ -7,7 +9,7 @@
 .opening-copy>p{min-height:0;line-height:1.6;margin-bottom:16px}
 .opening-cast{min-height:240px}
 .opening-world-copy{flex:1;display:grid;place-content:center;text-align:center}
-.opening-world-copy p{white-space:pre-line;font-family:var(--font-title),serif;font-size:24px;line-height:2.2;margin:0}
+.opening-world-copy p{white-space:pre-line;font-family:G4NotoSerif,"Yu Mincho","Hiragino Mincho ProN",serif;font-weight:900;font-size:24px;line-height:2.2;margin:0}
 .opening-world-action{border:0;background:transparent;box-shadow:none}
 .opening-copy input{display:block;width:100%;box-sizing:border-box;margin:8px 0 16px;font-size:16px;padding:12px}
 .opening-roster{flex:1;display:flex;flex-direction:column;justify-content:center;gap:16px;padding-top:20px}
