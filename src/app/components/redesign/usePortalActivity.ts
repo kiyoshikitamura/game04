@@ -1,11 +1,11 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 import { createActivityBuffer, isManualGameInput } from '@/domain/redesign/portalActivity';
 import { sendPortalActivity } from '@/utils/portalActivity';
 
 export function usePortalActivity(userId: string | undefined, token: string | undefined, enabled: boolean) {
   const current = useRef({ userId, token });
-  current.current = { userId, token };
+  useLayoutEffect(() => { current.current = { userId, token }; }, [userId, token]);
   useEffect(() => {
     if (!enabled || !userId) return;
     const buffer = createActivityBuffer({
