@@ -10,6 +10,7 @@ try {
  for (const width of [360,375,390]) {
   const context=await browser.newContext({viewport:{width,height:780},deviceScaleFactor:1});
   const page=await context.newPage();
+  let baselineCta;
   const errors=[]; page.on('pageerror',e=>errors.push(e.message));
   for (const count of [29,30,39,40,99,100,127]) {
    const responseReady = page.waitForResponse(r=>r.url().includes('/api/title/online'));
@@ -19,6 +20,9 @@ try {
    await responseReady;
    await page.getByRole('button',{name:'TAP TO START',exact:true}).click();
    await page.getByRole('button',{name:'はじめから',exact:true}).waitFor();
+   const ctaBox=await page.getByRole('button',{name:'はじめから',exact:true}).boundingBox();
+   if(count===29) baselineCta=ctaBox;
+   else assert.deepEqual(ctaBox,baselineCta,'Count must not move the existing CTA');
    const badge=page.locator('.title-online-proof');
    if(count<30) assert.equal(await badge.count(),0);
    else {
@@ -60,6 +64,16 @@ try {
  await fail.screenshot({path:`${output}/failure-start.png`});
  results.push({failureStart:'Game started; title overlay closed'});
  await failContext.close();
+ const continueContext=await browser.newContext({viewport:{width:375,height:780}});
+ const continued=await continueContext.newPage();
+ await continued.goto(`${base}/?titleOnline=30`);
+ await continued.getByRole('button',{name:'TAP TO START',exact:true}).click();
+ const observation=continued.waitForResponse(r=>r.url().includes('game04_record_title_proof_event_v1') && r.request().postData()?.includes('CONTINUE_TAPPED'));
+ await continued.getByRole('button',{name:'データをお持ちの方',exact:true}).click();
+ assert((await observation).ok(),'Continue telemetry must survive navigation');
+ await continued.waitForURL('**/auth/game04');
+ results.push({continueNavigation:'PASS',keepaliveObservation:'PASS'});
+ await continueContext.close();
  await fs.writeFile(`${output}/browser-results.json`,JSON.stringify({base,results},null,2));
  console.log(JSON.stringify({passed:true,checks:results.length,base}));
 } finally {await browser.close();}
