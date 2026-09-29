@@ -1,5 +1,5 @@
 export type Period = 'daily' | 'monthly';
-export type Retention = { day: number; numerator: number | null; denominator: number | null; value?: number | null; immature?: number };
+export type Retention = { day: number; numerator: number | null; denominator: number | null; value?: number | null; immature?: number; status: 'provisional' | 'final' | 'not_reached' | 'no_subjects' };
 export type OverviewRow = { date: string; title_uu?: number | null; new_users: number; total_registered: number; active_users: number; tutorial_completed: number; tutorial_rate: number | null; payers: number; revenue: number; payer_rate: number | null; arppu: number | null; arpu: number | null; partial: boolean; retention: Retention[] };
 export type StageRow = { id: string; design_id: string; name: string; executions: number; clears: number; clear_rate: number | null };
 export type RaidRow = { key: string; kind: 'encounter' | 'unlock'; hosted: number; defeated: number; participants: number };

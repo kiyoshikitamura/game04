@@ -26,7 +26,7 @@ async function readDashboard(origin: string, period: Period, from: string, to: s
   return { ...data, rows: data.rows.map((row: DashboardData['rows'][number]) => ({ ...row, title_uu: titleRows.get(row.date) ?? null })),
     title_measured_from: title.data?.measured_from ?? null, environment: config.environment };
 }
-const cachedRead = unstable_cache(readDashboard, ['game04-kpi-title-v3-20260928', questData.version, String(SCENES.length)], { revalidate: 60 });
+const cachedRead = unstable_cache(readDashboard, ['game04-kpi-retention-progress-20260930', questData.version, String(SCENES.length)], { revalidate: 60 });
 function response(body: unknown, status = 200) { return NextResponse.json(body, { status, headers: { 'Cache-Control': 'no-store' } }); }
 // Public read-only KPI endpoint; proxy restricts hosting to development / Preview.
 export async function GET(request: NextRequest) {

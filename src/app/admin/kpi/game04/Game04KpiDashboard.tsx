@@ -16,9 +16,10 @@ const sections: { id: Section; name: string }[] = [
   { id: 'overview', name: '概況' }, { id: 'stages', name: 'ステージ状況' }, { id: 'raids', name: 'レイド' }, { id: 'sources', name: '流入元' },
 ];
 function RetentionCell({ value }: { value?: Retention }) {
-  if (!value?.denominator) return <span title="観測期間未到達、または対象者なし">—</span>;
-  return <span title={`${number(value.numerator)} / ${number(value.denominator)}人${value.immature ? `（未確定 ${value.immature}人を除外）` : ''}`}>
-    {percent((value.numerator ?? 0) / value.denominator)}<small>{number(value.numerator)} / {number(value.denominator)}</small>
+  if (!value?.denominator) return <span>—<small>{value?.status === 'not_reached' ? '未到達' : '対象者なし'}</small></span>;
+  const label = value.status === 'final' ? '確定' : '未確定';
+  return <span title={`${label}：${number(value.numerator)} / ${number(value.denominator)}人`}>
+    {percent((value.numerator ?? 0) / value.denominator)}<small>{number(value.numerator)} / {number(value.denominator)}人</small><small>{label}</small>
   </span>;
 }
 
@@ -61,7 +62,7 @@ export default function Game04KpiDashboard({ fixedDate }: { fixedDate?: string }
   return <main className="g4-kpi">
     <div className="g4-kpi-shell">
       <header className="g4-kpi-header">
-        <div><p className="g4-kpi-eyebrow">GAME04 / 戦国姫艶武</p><h1>KPIダッシュボード</h1><p className="g4-kpi-muted">JST（日本時間）・管理 / QA / テスト / 不正停止アカウントを集計時点の区分で除外</p></div>
+        <div><p className="g4-kpi-eyebrow">GAME04 / 戦国姫艶武</p><h1>KPIダッシュボード</h1><p className="g4-kpi-muted">JST（日本時間）・管理 / QA / テスト / 不正停止 / 確認済みリセマラを集計時点の区分で除外</p></div>
         <div className="g4-kpi-header-actions">{data && <span className="g4-kpi-badge">{data.environment}データ</span>}<ActionButton size="compact" busy={loading} busyLabel="集計中" onClick={() => setRevision(value => value + 1)}>再集計</ActionButton></div>
       </header>
       {fixedDate && <p><Link href="/admin/kpi">← KPI一覧へ</Link><span className="g4-kpi-date">{fixedDate} の集計</span></p>}
@@ -104,7 +105,7 @@ export default function Game04KpiDashboard({ fixedDate }: { fixedDate?: string }
         </>}
         <details className="g4-kpi-definitions"><summary>集計の定義・注意点</summary><ul>
           <li>DAU / MAU：操作保存・画面復元の確認・戦闘開始または確定が記録されたユーザーを期間内で重複排除。ページ表示のみで確認記録のないアクセスは含みません。</li>
-          <li>チュートリアル：登録期間内のユーザーのうち、取得時点までに全手順を完了した人数。継続率：登録日から N 日後の活動人数 / 観測日が終了した登録人数。分母なし・観測待ちは「—」。</li>
+          <li>チュートリアル：登録期間内のユーザーのうち、取得時点までに全手順を完了した人数。継続率：登録日から N 日後の活動人数 / 観測日が今日以前の登録人数。当日の途中経過も含め、対象者全員の観測日が終了するまでは「未確定」、終了後は「確定」。観測日がまだ来ていない場合は「未到達」。月別は観測日を迎えた対象者が順次分母に加わります。判定・更新時刻はJSTで、再集計時に更新します。</li>
           <li>売上：本番決済（live）の付与完了（GRANTED）を付与日時で集計。ARPPU = 売上 / 課金者、ARPU = 売上 / {activeLabel}。</li>
           <li>ステージ：実行数は戦闘開始、クリア数は確定済み勝利。クリア率 = クリア数 / 実行数。未確定・撤退・敗北はクリアに含みません。</li>
           <li>レイド：同じルームの段階撃破や報酬受取は追加の撃破に数えません。種別間の参加UUは重複するため合算できません。開催日と撃破日が異なる場合があります。</li>
