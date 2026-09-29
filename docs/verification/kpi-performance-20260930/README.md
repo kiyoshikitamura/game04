@@ -47,7 +47,8 @@ All three indexes are valid and ready. RPC execution privileges verified: anon=f
 - Refresh revision is consumed once by a ref. Period/month/date navigation no longer keeps adding `refresh=1` after an explicit refresh.
 - `node scripts/verify_kpi_refresh_once.mjs`: 8 actual-effect request transitions passed, including initial/replayed mount, explicit refresh, month/period/date changes, and another refresh.
 - Full app build and hosted browser behavior are not yet verified in this workspace. The source subset has no installed app dependencies.
-- GitHub commit statuses triggered new Preview builds. Do not claim existing immutable URL's JavaScript has changed.
+- GitHub commit statuses for implementation commit `28602b81495e61449bdf634a3e7fbe18fd44fdfe` report failed Preview builds on both game04 and game04-production-receiver. The Vercel build-log connector returned `Tool get_deployment_build_logs not found`. The build error itself is unverified; do not guess an environment-variable cause.
+- Do not claim existing immutable URL's JavaScript has changed. Browser fallback needs user approval before continuing hosted recovery.
 
 ## Rollback
 
