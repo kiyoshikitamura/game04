@@ -4,7 +4,7 @@ import Link from 'next/link';
 import ActionButton from '@/app/components/ui/ActionButton';
 import Game04Loading from '@/app/components/ui/Game04Loading';
 import ScreenState from '@/app/components/ui/ScreenState';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { DashboardData, Period, Retention } from '@/domain/redesign/kpi/dashboard';
 
 const number = (value: number | null) => value == null ? '—' : value.toLocaleString('ja-JP', { maximumFractionDigits: 0 });
@@ -27,6 +27,7 @@ export default function Game04KpiDashboard({ fixedDate }: { fixedDate?: string }
   const [period, setPeriod] = useState<Period>('daily');
   const [month, setMonth] = useState('');
   const [revision, setRevision] = useState(0);
+  const lastRequestedRevision = useRef(0);
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -35,7 +36,10 @@ export default function Game04KpiDashboard({ fixedDate }: { fixedDate?: string }
     const params = new URLSearchParams({ period });
     if (fixedDate) params.set('date', fixedDate);
     else if (month) params.set('month', month);
-    if (revision) params.set('refresh', '1');
+    // Only the explicit refresh action bypasses the server cache. Changing
+    // period/month/date after that action must return to normal cached reads.
+    if (revision !== lastRequestedRevision.current) params.set('refresh', '1');
+    lastRequestedRevision.current = revision;
     async function load() {
       setLoading(true); setError(''); setData(null);
       try {
