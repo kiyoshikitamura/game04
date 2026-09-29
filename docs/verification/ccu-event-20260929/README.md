@@ -32,3 +32,17 @@
 - Preview Edgeは最新本番を基準にしたbundleのEXPECTED_PROJECTのみPreviewへ置換して配信する。
 - 本番配信前に最新Production/並走成果を再確認。migration→Edge→本番環境でフロント再ビルド。Vercel connectorのreceiver取得は404だったため同一探索を反復しない。
 - 告知・広告操作はマーケ側。勝ちクリエイティブや広告予算は変更していない。
+
+## Preview実接続結果（2026-09-29 11:18 JST）
+- 実装SHA c89d0a63455083beb3429685604974474f16a726、PR #46。
+- game04 / receiverのVercelビルドはいずれもsuccess。
+- Preview: https://game04-git-work-game04-ccu-event-20260929-kiyoshi-kitamura.vercel.app
+- Preview Edge v10、APIの型検査PASS（Deno環境型補助を指定）。
+- 新規の匿名検証ユーザーを作成し、初期化→get_stateで開催前の時刻設定を確認。
+- Preview開催時間だけを一時変更し、同時3リクエストでガチャ券残数3・台帳1件。
+- 実戦: mikawa-3を再出撃。開催中100→97、開始再送97、勝利決済97、決済再送97。保存snapshotはbase5/cost3/chance1。共闘1件発生。
+- 終了後: 97→92、再送/決済後92。snapshotはbase5/cost5/chance0.01。
+- 検証終了後、DB設定を正式開催時間21:00〜24:00 JSTへ復帰。
+- RLS無ポリシーのAdvisor情報は新2テーブルのクライアント直接アクセス拒否を意図したもの。service_role専用。
+- 画面レイアウトの変更なし。ブラウザでの実画面通し確認は未実施。本番DB/API/フロントは未反映。
+- Vercel接続でreceiver取得404のため、本番配信には承認済みブラウザ経路への切替または担当者の操作が必要。
