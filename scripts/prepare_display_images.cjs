@@ -15,6 +15,9 @@ async function main() {
   for (const row of backgrounds) if (row.background?.startsWith('/')) inputs.set(row.background, 1080);
   inputs.set('/creative/backgrounds/char_ageha_01.png', 1080);
   inputs.set('/creative/branding/sengoku-hime-enbu-key-visual-20260928-v4.png', 1080);
+  // Promotion artwork keeps its exact canvas dimensions; no resize/crop.
+  inputs.set('/creative/promotions/starter-pack-100-20260928.png', null);
+  inputs.set('/assets/promotions/b15/normal.png', null);
   const output = path.join(root, 'public/display-images');
   await fs.mkdir(output, { recursive: true });
   const manifest = {};
@@ -24,7 +27,9 @@ async function main() {
     while (queue.length) {
       const [src, width] = queue.shift();
       const original = await fs.readFile(path.join(root, 'public', src));
-      const bytes = await sharp(original).rotate().resize({ width, withoutEnlargement: true }).webp({ quality: 82, alphaQuality: 100, effort: 4 }).toBuffer();
+      const pipeline = sharp(original).rotate();
+      if (width !== null) pipeline.resize({ width, withoutEnlargement: true });
+      const bytes = await pipeline.webp({ quality: 82, alphaQuality: 100, effort: 4 }).toBuffer();
       const hash = crypto.createHash('sha256').update(bytes).digest('hex').slice(0, 24);
       const filename = `${hash}.webp`;
       await fs.writeFile(path.join(output, filename), bytes);
