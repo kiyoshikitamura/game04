@@ -17,7 +17,7 @@ export function ccuEventEnergyCost(base: number, event?: CcuEventContext | null,
   return ccuEventActive(event, now) ? Math.ceil(base / 2) : base;
 }
 
-export function ccuEventEncounterChance(base: number, event?: CcuEventContext | null): number {
-  // Keep stages with no encounter eligibility excluded.
-  return base > 0 && ccuEventActive(event) ? 1 : base;
+export function ccuEventEncounterChance(base: number, event: CcuEventContext | null | undefined, areaOneCleared: boolean): number {
+  // Preserve normal rates through the first area guide and in ineligible stages.
+  return areaOneCleared && base > 0 && ccuEventActive(event) ? 1 : base;
 }
