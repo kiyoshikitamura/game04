@@ -7,6 +7,7 @@ import { jstLoginDate } from '@/domain/redesign/loginBonus';
 import { hasPresentedDialog } from '../ui/dialogPresence';
 import CanonicalDialog from '../ui/CanonicalDialog';
 import './home-promotion.css';
+import { useEventPromotion } from './EventPromotion';
 
 export function HomePromotionDialog({ kind, purchased = false, onClose, onNavigate }: { kind: HomePromotionKind; purchased?: boolean; onClose: () => void; onNavigate: (destination: string) => void }) {
   const offer = HOME_PROMOTIONS[kind];
@@ -20,8 +21,9 @@ export function HomePromotionDialog({ kind, purchased = false, onClose, onNaviga
 }
 
 /** One instance per authenticated owner. Count real home entries, never data refreshes. */
-export default function HomePromotion({ owner, active, blocked, onNavigate }: { owner: string; active: boolean; blocked: boolean; onNavigate: (destination: string) => void }) {
+export default function HomePromotion({ owner, active, blocked, eventEligible = false, onNavigate }: { owner: string; active: boolean; blocked: boolean; eventEligible?: boolean; onNavigate: (destination: string) => void }) {
   const [offer, setOffer] = useState<{kind: HomePromotionKind; visitId: string; purchased: boolean} | null>(null);
+  const eventPromotion = useEventPromotion({ owner, active, blocked: blocked || !!offer, eligible: eventEligible });
   const [day, setDay] = useState(() => jstLoginDate(Date.now()));
   const latest = useRef({ active, blocked });
   useLayoutEffect(() => { latest.current = {active, blocked}; }, [active, blocked]);
@@ -52,7 +54,7 @@ export default function HomePromotion({ owner, active, blocked, onNavigate }: { 
   }, [owner]);
   useEffect(() => {
     if (!active) { visit.current = null; setOffer(null); return; }
-    if (offer) return;
+    if (offer || eventPromotion.pending) return;
     if (!visit.current || visit.current.day !== day) visit.current = {id: crypto.randomUUID(), day};
     const id = visit.current.id;
     let cancelled = false, entered = false, pending = false, nextAttempt = 0;
@@ -84,6 +86,6 @@ export default function HomePromotion({ owner, active, blocked, onNavigate }: { 
     // Let login/receipt/retention dialogs commit first. Re-evaluate after they close.
     const timer = setInterval(() => void check(), 1500);
     return () => { cancelled = true; clearInterval(timer); };
-  }, [active, owner, day, offer, blocked]);
-  return offer && active && !blocked ? <HomePromotionDialog kind={offer.kind} purchased={offer.purchased} onClose={() => setOffer(null)} onNavigate={onNavigate} /> : null;
+  }, [active, owner, day, offer, blocked, eventPromotion.pending]);
+  return <>{eventPromotion.dialog}{offer && active && !blocked ? <HomePromotionDialog kind={offer.kind} purchased={offer.purchased} onClose={() => setOffer(null)} onNavigate={onNavigate} /> : null}</>;
 }
