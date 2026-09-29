@@ -1,3 +1,4 @@
+import { synchronizeCcuEvent } from './ccuEventClock';
 import { getRoomRaidMaster } from '@/domain/redesign/raid';
 import { FunctionRegion } from '@supabase/supabase-js';
 import { supabase } from './supabase';
@@ -6,6 +7,7 @@ import type { RedesignState, RaidRoom } from '@/domain/redesign/types';
 import type { BattleResult } from '@/domain/redesign/battle';
 
 export interface RedesignResponse {
+  ccuEvent?: import('../domain/redesign/ccuEvent').CcuEventContext;
   retired?: boolean;
   battleId?: string;
   normalGacha?: {pool: import('@/domain/redesign/normalGacha').NormalPoolRow[]; day: string; available: boolean};
@@ -66,5 +68,7 @@ async function invokeRedesignRequest(action: string, payload: Record<string, unk
     const level = Number(event.body?.level);
     return { ...event, body: `${label}${Number.isFinite(level) && level > 0 ? ` Lv.${level}` : ''}の援軍を求めています。` };
   });
+  synchronizeCcuEvent(data.ccuEvent);
   return data as RedesignResponse;
 }
+

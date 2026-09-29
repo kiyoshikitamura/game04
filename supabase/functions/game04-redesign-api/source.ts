@@ -1,3 +1,4 @@
+import { ccuEventEnergyCost, ccuEventEncounterChance, type CcuEventContext } from '../../../src/domain/redesign/ccuEvent.ts';
 import { authenticatedUser, AuthCheckError } from './authUser.ts';
 // Bundled with the shared pure gameplay modules before Edge deployment.
 import { BATTLE_RULES, prepareBattleWaves, buildBattleParty, buildInitialState, importLegacyAssets, grantReward, CHARACTER_MASTERS, type LegacyAssets } from '../../../src/domain/redesign/masters.ts';
@@ -187,10 +188,10 @@ async function responseFor(userId: string, extra: Record<string, unknown> = {}, 
   // Reuse the authoritative state returned by this request's atomic commit.
   // Conflict/replay/read paths still load current state; never substitute a client draft.
   const statePromise = committedState ? Promise.resolve(committedState) : stateFor(userId);
-  const [loadedState, rooms, socialEvents, pending, territory, missions] = await Promise.all([statePromise, context ? Promise.resolve(projectRooms(context.rooms)) : roomsFor(userId),
+  const [loadedState, rooms, socialEvents, pending, territory, missions, ccuEvent] = await Promise.all([statePromise, context ? Promise.resolve(projectRooms(context.rooms)) : roomsFor(userId),
     context ? Promise.resolve(context.socialEvents) : db('game04_social_events?select=*&order=created_at.desc&limit=30'),
     context ? Promise.resolve(context.pending) : db(`game04_battles?user_id=eq.${userId}&status=eq.started&select=id,kind,target_id&order=created_at.asc&limit=1`),
-    context ? Promise.resolve(context.territory) : statePromise.then(() => territoryContext(userId)), missionConfig(),
+    context ? Promise.resolve(context.territory) : statePromise.then(() => territoryContext(userId)), missionConfig(), rpc('game04_ccu_event_status', {}),
   ]);
   let state = loadedState;
   for (let attempt = 0; attempt < 3; attempt++) {
@@ -199,7 +200,7 @@ async function responseFor(userId: string, extra: Record<string, unknown> = {}, 
     try { state = (await commit(state, reconciled, crypto.randomUUID())).state; break; }
     catch (error) { if (!(error instanceof ApiError) || error.status !== 409 || attempt === 2) throw error; state = await stateFor(userId); }
   }
-  return { state, rooms, socialEvents, missions: evaluateMissions(state, missions), territory: projectTerritory(territory.master, territory.progress, territory.items, territory.activeHostingCount), pendingBattle: pending[0] ?? null, ...extra };
+  return { state, rooms, socialEvents, ccuEvent, missions: evaluateMissions(state, missions), territory: projectTerritory(territory.master, territory.progress, territory.items, territory.activeHostingCount), pendingBattle: pending[0] ?? null, ...extra };
 }
 async function runBattle(userId: string, name: string, payload: any, id: string, playerName: string, decision?: 'complete' | 'retire') {
   let preparedBattle: ReturnType<typeof simulateBattle> | undefined;
@@ -228,6 +229,9 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
       if(!Number.isInteger(raidLevel)||raidLevel<me.joinedLevel||raidLevel>room.level||(master.type!=='unlock'&&raidLevel!==room.level))throw new ApiError('この段階には挑戦できません。');
       waves = [raidEnemies(master, raidLevel)]; cost = master.energyCost; targetId = room.id;
     }
+    const ccuEvent: CcuEventContext = await rpc('game04_ccu_event_status', {});
+    const baseEnergyCost = cost;
+    cost = ccuEventEnergyCost(cost, ccuEvent);
     if (state.energy < cost) throw new ApiError('行動力が足りません。');
     const seed = crypto.getRandomValues(new Uint32Array(1))[0];
     // Only a new battle receives current rules. Saved started/settled records above are never upgraded.
@@ -235,7 +239,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
     const rules = savedRules.version===BATTLE_RULES.version ? {...savedRules,burstPolicy:BATTLE_RULES.burstPolicy} : savedRules;
     const battleInput = questStage ? createQuestBattleInput(seed, buildBattleParty(state, rules), questStage, rules) : startRoom && getRoomRaidMaster(startRoom).masterVersion ? {...createFormalBattleInput(seed,buildBattleParty(state,rules),waves as (import('../../../src/domain/redesign/types.ts').EnemyUnit & {initialSp:number})[][],rules),raidLevel,raidMasterVersion:getRoomRaidMaster(startRoom).masterVersion,playerExpReward:{amount:getRoomRaidMaster(startRoom).playerExp??0,version:getRoomRaidMaster(startRoom).masterVersion,status:'APPROVED'}} : { seed, party: buildBattleParty(state, rules), waves: startRoom?.territorySnapshot ? structuredClone(waves) : prepareBattleWaves(waves, rules), rules, raidLevel,  };
     const preparedInput = startRoom ? { ...battleInput, ...(getRoomRaidMaster(startRoom).damagePolicy ? {raidDamagePolicy:getRoomRaidMaster(startRoom).damagePolicy} : {}), raidStartSnapshot: { roomId: startRoom.id, level: startRoom.level, hp: startRoom.hp, maxHp: startRoom.maxHp } } : battleInput;
-    const input = {...preparedInput,...(payload.deferSettlement===true ? {settlementPolicy:'playback-confirm-v1-20260927'} : {})};
+    const input = {...preparedInput, ccuEventSnapshot: {eventId:ccuEvent.id,startedAt:ccuEvent.serverNow,baseEnergyCost,energyCost:cost,...(questStage?{encounterChance:ccuEventEncounterChance(questStage.encounterChance,ccuEvent)}:{})},...(payload.deferSettlement===true ? {settlementPolicy:'playback-confirm-v1-20260927'} : {})};
     // Validate and simulate before charging. Invalid provisional masters must not strand a paid pending battle.
     preparedBattle = simulateBattle(input);
     await commit(state, { ...(questStage ? recordEarlyQuestAttempt(state,targetId) : state), energy: state.energy - cost, ...(questStage ? {questAttempts:{...state.questAttempts,[targetId]:(state.questAttempts?.[targetId]??0)+1},questProgressVersion:QUEST_MASTER_VERSION} : {}) }, id, { id, kind, targetId, seed, input, status: 'started' }, startRoom, startRoom?.version ?? null);
@@ -318,7 +322,7 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
           };
         } else playerGrowth = { status: "MIGRATION_PENDING", offeredExp: expReward.amount, gainedExp: 0 };
       }
-      if ((encounterRoll ?? random()) < stage.encounterChance && !(await roomsFor(userId)).some(existing => existing.ownerId === userId && existing.status === 'active' && Date.parse(existing.expiresAt) > Date.now() && !existing.territorySnapshot && getRoomRaidMaster(existing).type === 'encounter')) {
+      if ((encounterRoll ?? random()) < (record.input.ccuEventSnapshot?.encounterChance ?? stage.encounterChance) && !(await roomsFor(userId)).some(existing => existing.ownerId === userId && existing.status === 'active' && Date.parse(existing.expiresAt) > Date.now() && !existing.territorySnapshot && getRoomRaidMaster(existing).type === 'encounter')) {
         encounterRaidId = await uuidFor(`encounter:${id}`);
         const encounterMaster=[QUEST_MASTER_VERSION,'APPROVED_QUEST65_ROUND17_20260922'].includes(record.input.questMasterVersion)?selectEncounterMaster(Number(stage.designId.split('-')[0]),random):null;
         room = createRaidRoom(encounterMaster?.id??'encounter_flame', userId, encounterRaidId, Date.now()); room.participants[0].name = playerName; version = -1;
@@ -382,6 +386,8 @@ Deno.serve(async (request: Request) => {
       standardMutation ? acquisitionInput(user.id).then(input => ({input}), error => ({error})) : Promise.resolve(undefined),
     ]);
     if (!profile) throw new ApiError('先にプレイヤー名を登録してください。', 409);
+    // The database clock gates the grant; user locking + event/user PK make retries atomic.
+    await rpc('game04_claim_ccu_event_reward', {p_user_id:user.id});
     if (action === "normal_gacha_status") {
       const response = await responseFor(user.id),state2=response.state;
       const pool = normalGachaCompatibilityPool();
