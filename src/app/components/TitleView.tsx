@@ -27,6 +27,7 @@ export default function TitleView() {
   const proofState = useRef('');
   const online = useTitleOnline(showTitleView && !isGameStartTransition && !resumeLoading);
   const proof = onlinePresentation(online.count);
+  const [proofPrefix, proofNumber, proofSuffix] = proof.text.split(/(\d+)/);
   const entryReady = !authLoading;
   // A restored session is the recoverable account authority. This includes an
   // anonymous player who has not entered a name yet; it must resume instead of
@@ -141,7 +142,7 @@ export default function TitleView() {
             {!entryActivated ? (
               <button type="button" className="title-tap-text blink-animation" onClick={activateEntry}>TAP TO START</button>
             ) : <div className="title-entry-actions">
-              {proof.visible && <div className="title-online-proof" role="status"><span aria-hidden="true">● </span>{proof.text}</div>}
+              {proof.visible && <div className="title-online-proof" role="status"><span aria-hidden="true">● </span>{proofPrefix}<span className="title-online-number">{proofNumber}</span>{proofSuffix}</div>}
               {canStartNewGame && <ActionButton variant="primary" className="title-entry-primary" onClick={(event) => void beginNewGame(event)} disabled={setupLoading} aria-busy={setupLoading}>はじめから</ActionButton>}
               {entryReady && <ActionButton variant={session ? "primary" : "secondary"} className={session ? "title-entry-primary" : "title-entry-secondary"} onClick={(event) => void openContinue(event)} disabled={resumeLoading}>{continueLabel}</ActionButton>}
               {entryReady && session && !isAnonymousSession && <ActionButton className="title-entry-secondary" onClick={(event) => { event.stopPropagation(); void handleLogout(); }}>ログアウト／別アカウント</ActionButton>}
