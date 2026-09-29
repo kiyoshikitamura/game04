@@ -6,5 +6,9 @@ export const SITE_DESCRIPTION =
 export const SOCIAL_IMAGE_PATH = "/ogp-image.png?v=20260928-v2";
 
 export function isVercelProduction(): boolean {
-  return false; // GAME04 devは検索対象にしない
+  // Vercel's deployment environment wins over copied application settings.
+  // Preview must remain non-indexable even when it uses production-like data.
+  const deploymentEnv = process.env.VERCEL_ENV?.trim().toLowerCase();
+  if (deploymentEnv) return deploymentEnv === "production";
+  return process.env.NEXT_PUBLIC_APP_ENV?.trim().toLowerCase() === "production";
 }
