@@ -30,7 +30,7 @@ try {
     assert.equal(await badge.innerText(),`● 現在${count>=100?count:Math.floor(count/10)*10}人${count>=100?'':'以上'}がプレイ中`);
     const b=await badge.boundingBox(),c=await page.getByRole('button',{name:'はじめから',exact:true}).boundingBox();
     assert(b.y+b.height<=c.y && b.x>=0 && b.x+b.width<=width);
-    assert.equal(await badge.evaluate(el=>getComputedStyle(el).animationDuration),'4s');
+    assert.equal(await badge.evaluate(el=>getComputedStyle(el).animationDuration),'2s');
    }
    await page.screenshot({path:`${output}/${width}-${count}.png`});
    results.push({width,count,passed:true});
