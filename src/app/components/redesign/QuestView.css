@@ -65,3 +65,7 @@ body.game04-theme .redesign-quest .raid-area-card{height:164px;min-height:164px;
 
 /* Shared count treatment for area and stage cards; no box or extra explanation. */
 body.game04-theme .redesign-quest .rq-invasion-count{display:block;margin-top:4px;font-size:var(--g4-caption,12px);font-weight:500;line-height:1.4;color:var(--g4-gold,#d8bd89);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.rq-invasion-number{animation:rq-invasion-blink 1.8s ease-in-out infinite}
+@keyframes rq-invasion-blink{0%,100%{opacity:1}50%{opacity:.2}}
+@media(prefers-reduced-motion:reduce){.rq-invasion-number{animation:none}}

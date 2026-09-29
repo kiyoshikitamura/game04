@@ -29,7 +29,7 @@ import { characterArt } from '@/theme/creativeAssets';
 import { BossDisplay, useArtworkPreload, type DisplaySubject } from './visual-bench/CharacterDisplays';
 
 function InvasionCount({ count }: { count?: number }) {
-  return count && count > 0 ? <span className="rq-invasion-count">{count.toLocaleString('ja-JP')}人が侵攻中</span> : null;
+  return count && count > 0 ? <span className="rq-invasion-count"><span className="rq-invasion-number">{count.toLocaleString('ja-JP')}</span>人が侵攻中</span> : null;
 }
 
 export interface QuestSettlement { playerGrowth?: import('@/utils/redesignApi').RedesignResponse['playerGrowth']; battle: BattleResult; rewards: Reward[]; firstClear: boolean; encounterRaidId?: string | null; }

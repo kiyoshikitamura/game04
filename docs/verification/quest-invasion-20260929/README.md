@@ -47,3 +47,7 @@ The normal game route uses the live Preview DB RPC. QA snapshot values must not 
 - Area → stage → area navigation verified. Existing list scroll remains intact.
 - New hook and QA page ESLint: PASS. Repository-wide legacy lint was not rerun for this scoped change.
 - Static snapshot harness only verifies appearance; live Preview aggregate RPC verified separately as above. Production rollout not performed.
+
+## Numeric blink revision (2026-09-29)
+
+User requested blinking only the number. The number now has its own inline span with a 1.8-second opacity cycle (1 → .2 → 1). The suffix and parent remain static. Layout and counts are unchanged. Reduced-motion preferences disable the animation. Preview only.
