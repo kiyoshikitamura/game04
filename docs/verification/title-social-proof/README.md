@@ -55,6 +55,8 @@ Previewゲーム接続・イベント保存先は隔離DB、Online Countだけ�
 - 変更コードlintエラー0。TitleView既存初期化effectのsetState warningは既存部分を保持。
 - 隔離DBの匿名RPC保存・ロール権限確認 PASS。RLS有効／ポリシーなしのAdvisor情報は直接アクセスを禁止する意図的な構成（既存Title到達と同じ）。[Advisor説明](https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy)。
 - 実データ照合: 2026-09-29 09:30:02 JSTの送信履歴3人と、Preview APIの3人／同一集計時刻が一致。UIは非表示。
+- 配信先で27チェックPASS。各幅で人数の有無によるCTA座標の変化なし、ページJS例外0。続行遷移後のCONTINUE_TAPPED保存も確認。APIを503にした状態で新規開始し、既存導入画面の「次へ」まで到達（`failure-start-ready.png`）。
+- 最終確認時もProductionは `7b7f0e51` のまま。
 - Tutorial、新規ユーザー生成、認証、Battle等の処理は変更していない。隔離Previewの開始確認でテスト匿名ユーザーを作成した。
 
 ## 変更ファイル
