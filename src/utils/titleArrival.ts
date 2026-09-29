@@ -2,7 +2,7 @@ import { supabase, usingMockSupabase } from './supabase';
 
 const STORAGE_KEY = 'game04_title_visitor_v1';
 let memoryId: string | undefined;
-function visitorId(): string {
+export function titleVisitorId(): string {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved && /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(saved)) return saved;
@@ -16,7 +16,7 @@ function visitorId(): string {
 export async function recordTitleArrival(eventId: string): Promise<void> {
   if (typeof window === 'undefined' || usingMockSupabase) return;
   try {
-    const id = visitorId();
+    const id = titleVisitorId();
     for (let attempt = 0; attempt < 3; attempt++) {
       const { error } = await supabase.rpc('game04_record_title_arrival_v1', {
         p_event_id: eventId, p_visitor_id: id,

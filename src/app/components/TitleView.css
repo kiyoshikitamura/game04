@@ -52,6 +52,7 @@
 }
 
 .title-entry-actions {
+  position: relative;
   width: min(100%, 320px);
   display: flex;
   flex-direction: column;
@@ -169,3 +170,24 @@
 }
 
 body.game04-theme .title-entry-actions{width:min(260px,72vw);margin-inline:auto;gap:8px}
+
+.title-online-proof {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100vw - 48px);
+  pointer-events: none;
+  text-align: center;
+  color: var(--ui-text-primary);
+  font-size: var(--ui-font-caption);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.6;
+  text-shadow: 0 1px 4px #000, 0 0 8px #000;
+  animation: titleOnlinePulse 4s ease-in-out infinite;
+}
+.title-online-proof span { color: var(--ui-text-secondary); }
+@keyframes titleOnlinePulse { 0%, 100% { opacity: .78; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .title-online-proof { animation: none; opacity: 1; } }
