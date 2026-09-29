@@ -1,4 +1,5 @@
 'use client';
+import { useQuestInvasionCounts, type QuestInvasionCounts } from '@/hooks/useQuestInvasionCounts';
 import { LB_MATERIAL_NAMES } from '@/theme/approvedNames';
 import ActionButton from '../ui/ActionButton';
 import PageTitleBanner from './PageTitleBanner';
@@ -26,6 +27,10 @@ import {RewardList,GrowthDisplay} from '../ui/Game04DataDisplay';
 import roster from '@/theme/sengoku-characters.json';
 import { characterArt } from '@/theme/creativeAssets';
 import { BossDisplay, useArtworkPreload, type DisplaySubject } from './visual-bench/CharacterDisplays';
+
+function InvasionCount({ count }: { count?: number }) {
+  return count && count > 0 ? <span className="rq-invasion-count">{count.toLocaleString('ja-JP')}人が侵攻中</span> : null;
+}
 
 export interface QuestSettlement { playerGrowth?: import('@/utils/redesignApi').RedesignResponse['playerGrowth']; battle: BattleResult; rewards: Reward[]; firstClear: boolean; encounterRaidId?: string | null; }
 const REWARD_LABELS: Record<Reward['kind'] | 'free_diamonds', string> = {free_diamonds:'無償輝石', ticket:'スペシャル券', character_exp_item: '武将EXP', equipment_exp_item: '装備EXP', generic_soul: '汎用魂', soul_selector: '魂選択', character: '武将', skill: 'スキル', cash: '銭', character_material: '武将育成素材', skill_material: LB_MATERIAL_NAMES.SKILL_MANUAL, equipment_material: '装備育成素材', equipment_lb: LB_MATERIAL_NAMES.EQUIP_LB_PART, soul: '武将の魂', equipment: '装備', unlock_item: '侵攻令' };
@@ -75,17 +80,19 @@ function formalStageHint(stage: QuestStage) {
 function selectRepresentativeBoss(wave: QuestStage['waves'][number]) {
   return wave.find(enemy => enemy.boss) ?? wave.reduce((best, enemy) => enemy.level > best.level || (enemy.level === best.level && enemy.stats.hp > best.stats.hp) ? enemy : best, wave[0]);
 }
-export default function QuestView({ state, party, vipActive, onStart, onOpenDeck, onOpenRaid, onIgnoreEncounter, initialStageId, initialPreparation = false, onBattlePlayingChange, onEarlyAction, navigationBlocked = false }: {
+export default function QuestView({ state, party, vipActive, onStart, onOpenDeck, onOpenRaid, onIgnoreEncounter, initialStageId, initialPreparation = false, initialAreaId, invasionCounts: suppliedInvasionCounts, onBattlePlayingChange, onEarlyAction, navigationBlocked = false }: {
+  initialAreaId?: string; invasionCounts?: QuestInvasionCounts;
   navigationBlocked?:boolean; onEarlyAction?:(action:string,payload:Record<string,unknown>)=>Promise<unknown>; state: RedesignState; party: BattleUnit[]; vipActive: boolean; onStart: (stageId: string) => Promise<QuestSettlement>;
   onOpenDeck: (stageId?: string) => void; onOpenRaid: (raidId: string) => void; onIgnoreEncounter?: (raidId: string) => Promise<void>; initialStageId?: string; initialPreparation?: boolean; onBattlePlayingChange?: (playing: boolean) => void;
 }) {
   const firstStage = initialStageId ? getQuestStage(initialStageId) : undefined;
-  const [areaId, setAreaId] = useState<string | null>(firstStage?.areaId ?? null);
+  const [areaId, setAreaId] = useState<string | null>(firstStage?.areaId ?? initialAreaId ?? null);
   const [selected, setSelected] = useState<QuestStage | null>(firstStage ?? null);
   const [modal, setModal] = useState<'info' | 'prepare' | null>(firstStage ? (initialPreparation ? 'prepare' : 'info') : null);
   const [detailPanel, setDetailPanel] = useState<'hint' | 'rewards' | null>(null);
   const [settlement, setSettlement] = useState<QuestSettlement | null>(null);
   const [playing, setPlaying] = useState(false);
+  const invasionCounts = useQuestInvasionCounts(!playing && !settlement && !modal, areaId, suppliedInvasionCounts);
   const [queuedStage,setQueuedStage]=useState<QuestStage|null>(null);
   useEffect(()=>{if(queuedStage&&!navigationBlocked&&!nextEarlyGuide(state,{battlePlaying:false,resultOpen:false})){setAreaId(queuedStage.areaId);setSelected(queuedStage);setModal('info');setQueuedStage(null);}},[queuedStage,state,navigationBlocked]);
   const { playBgm } = useAudio();
@@ -162,12 +169,12 @@ export default function QuestView({ state, party, vipActive, onStart, onOpenDeck
       {area ? <><button className="rq-back" onClick={() => setAreaId(null)}>‹ エリア一覧</button><header className="rq-area-head" style={{ backgroundImage: `linear-gradient(90deg,#100a0888,transparent 76%),url("${area.image}")` }}><h2>{area.name}</h2></header>
         <div className="rq-scroll" aria-label={`${area.name}のステージ一覧`}>{area.stages.map(stage => {
           const cleared = hasQuestClear(stage.id,state.clearedStages,state.earlyProgress), unlocked = isQuestStageUnlocked(stage.id, state.clearedStages, state.earlyProgress);
-          return <button className={`rq-stage ${current.id === stage.id ? 'is-current' : ''}`} key={stage.id} disabled={!unlocked || !viewAssets.ready} onClick={() => openStage(stage)} style={{ backgroundImage: `linear-gradient(90deg,#302015aa,#14100e88),url("${area.image}")` }}><b className="rq-stage-number">{area.index}-{stage.index}</b><span><strong>{formalStageName(stage) ?? stage.name}</strong><small><img src="/ui/sengoku/14-energy.png" alt="" />消費行動力 {questEnergyCost(stage,state)}</small></span><small className={`rq-state-label ${cleared ? 'is-cleared' : unlocked ? 'is-current' : 'is-locked'}`}>{cleared ? 'クリア済' : unlocked ? '挑戦可能' : '未解放'}</small></button>;
+          return <button className={`rq-stage ${current.id === stage.id ? 'is-current' : ''}`} key={stage.id} disabled={!unlocked || !viewAssets.ready} onClick={() => openStage(stage)} style={{ backgroundImage: `linear-gradient(90deg,#302015aa,#14100e88),url("${area.image}")` }}><b className="rq-stage-number">{area.index}-{stage.index}</b><span><strong>{formalStageName(stage) ?? stage.name}</strong><small><img src="/ui/sengoku/14-energy.png" alt="" />消費行動力 {questEnergyCost(stage,state)}</small><InvasionCount count={invasionCounts?.stages[stage.id]} /></span><small className={`rq-state-label ${cleared ? 'is-cleared' : unlocked ? 'is-current' : 'is-locked'}`}>{cleared ? 'クリア済' : unlocked ? '挑戦可能' : '未解放'}</small></button>;
         })}</div></> : <><PageTitleBanner page="quest"/><div className="rq-scroll rq-area-list" aria-label="エリア一覧">{visibleAreas.map(entry => {
           const cleared = state.earlyProgress?.completedAreas.includes(entry.id) || entry.stages.every(stage => hasQuestClear(stage.id,state.clearedStages,state.earlyProgress));
           const unlocked = isQuestStageUnlocked(entry.stages[0].id, state.clearedStages, state.earlyProgress);
           const last=entry.stages.at(-1)!;const boss=selectRepresentativeBoss(last.waves.at(-1)!);const subject=bossSubject(boss);const bossImage=subject?characterArt(subject,'full'):boss.image;
-          return <button key={entry.id} disabled={!unlocked || !viewAssets.ready} className="raid-approved-card raid-area-card" onClick={()=>setAreaId(entry.id)}><div className="raid-approved-card__art"><img className="raid-approved-card__background" src={entry.image} alt=""/>{bossImage&&<img className="raid-area-character" src={bossImage} alt=""/>}</div><div className="raid-approved-card__copy"><div className="raid-approved-card__badges"><span>{cleared?'攻略済':unlocked?'攻略中':'未解放'}</span></div><h3>{entry.name}</h3><p className="raid-approved-card__attribute">{boss.name} <small>Lv.{boss.level}</small></p><p className="raid-area-progress">{entry.stages.filter(stage=>hasQuestClear(stage.id,state.clearedStages,state.earlyProgress)).length}/{entry.stages.length} ステージクリア</p></div></button>;
+          return <button key={entry.id} disabled={!unlocked || !viewAssets.ready} className="raid-approved-card raid-area-card" onClick={()=>setAreaId(entry.id)}><div className="raid-approved-card__art"><img className="raid-approved-card__background" src={entry.image} alt=""/>{bossImage&&<img className="raid-area-character" src={bossImage} alt=""/>}</div><div className="raid-approved-card__copy"><div className="raid-approved-card__badges"><span>{cleared?'攻略済':unlocked?'攻略中':'未解放'}</span></div><h3>{entry.name}</h3><p className="raid-approved-card__attribute">{boss.name} <small>Lv.{boss.level}</small></p><p className="raid-area-progress">{entry.stages.filter(stage=>hasQuestClear(stage.id,state.clearedStages,state.earlyProgress)).length}/{entry.stages.length} ステージクリア</p><InvasionCount count={invasionCounts?.areas[entry.id]} /></div></button>;
         })}</div></>}
     </>}
     {selected && modal === 'info' && <div className="redesign-quest-dialog"><CanonicalDialog title={`${selectedLabel} ${formalStageName(selected) ?? selected.name}`} onClose={() => setModal(null)} actions={[{ label: '挑戦', semantic: 'primary', onClick: () => setModal('prepare'), disabled: !encounterAssets.ready || !isQuestStageUnlocked(selected.id, state.clearedStages, state.earlyProgress) }]}>
