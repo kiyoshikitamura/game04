@@ -5,6 +5,11 @@ import type { RedesignState, RaidRoom } from '@/domain/redesign/types';
 import type { BattleResult } from '@/domain/redesign/battle';
 
 export interface RedesignResponse {
+  gacha?: { day: string; freeAvailable: boolean; tickets: Record<'character' | 'skill' | 'equipment', number>; points: Record<'character' | 'skill' | 'equipment', number> };
+  gachaReceipt?: GachaReceipt | null;
+  gachaReceiptStatus?: 'committed' | 'not_found';
+  gachaRejected?: boolean;
+  gachaError?: string;
   normalGacha?: {pool: import('@/domain/redesign/normalGacha').NormalPoolRow[]; day: string; available: boolean};
   normalGachaResults?: import('@/domain/redesign/normalGacha').NormalGachaResult[];
   playerGrowth?: {status: string; gainedExp: number; beforeLevel?: number; level?: number; energyRecovered?: number; energy?: number; energyMax?: number};
@@ -20,6 +25,18 @@ export interface RedesignResponse {
   firstClear?: boolean;
   socialEvents?: import('@/app/components/redesign/HomeView').HomeSocialEvent[];
   pendingBattle?: { id: string; kind: 'quest' | 'raid'; target_id: string } | null;
+}
+
+export interface GachaReceipt {
+  requestId: string;
+  category: 'normal' | 'character' | 'skill' | 'equipment';
+  payment: 'cash' | 'free' | 'gems' | 'ticket' | 'points';
+  count: number;
+  results: Array<import('@/domain/redesign/normalGacha').NormalGachaResult & { isNew?: boolean; conversion?: { kind: 'soul' | 'skill_material'; amount: number } }>;
+  cost: number;
+  pointGain: number;
+  pointsAfter: number;
+  masterVersion: string;
 }
 
 export async function redesignRequest(action: string, payload: Record<string, unknown> = {}, requestId = crypto.randomUUID()): Promise<RedesignResponse> {

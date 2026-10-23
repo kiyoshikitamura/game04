@@ -3,6 +3,8 @@ import { BATTLE_RULES, prepareBattleWaves, buildBattleParty, buildInitialState, 
 import { applyAcquisitionEvents, type AcquisitionEvent, type AcquisitionMaster } from '../../../src/domain/redesign/acquisitions.ts';
 import { applyPlayerExperience, GROWTH_VERSION } from '../../../src/domain/redesign/growthMaster.ts';
 import { applyNormalGacha, normalGachaDay } from '../../../src/domain/redesign/normalGacha.ts';
+import { applyGachaDraw, applyGachaExchange } from '../../../src/domain/redesign/gacha.ts';
+import { jstLoginDate } from '../../../src/domain/redesign/loginBonus.ts';
 import { applyGrowthAction, validateDeck } from '../../../src/domain/redesign/growth.ts';
 import { applyHomeSelection, synchronizeHomeBackgroundUnlocks } from '../../../src/domain/redesign/home.ts';
 import { applyShopExchange, applyShopEnergyDrink } from '../../../src/domain/redesign/shop.ts';
@@ -269,6 +271,75 @@ async function runBattle(userId: string, name: string, payload: any, id: string,
   }
 }
 
+const gachaSpecialCategories = ['character', 'skill', 'equipment'] as const;
+async function gachaStatus(state: RedesignState) {
+  const rows = await db(`user_items?user_id=eq.${state.userId}&item_id=in.(SPECIAL_TICKET_CHARACTER,SPECIAL_TICKET_SKILL,SPECIAL_TICKET_EQUIPMENT)&select=item_id,quantity`);
+  const day = jstLoginDate(Date.now());
+  return { day, freeAvailable: state.dailyNormalGachaDate !== day,
+    tickets: Object.fromEntries(gachaSpecialCategories.map(category => [category, rows.find((r: any) => r.item_id === `SPECIAL_TICKET_${category.toUpperCase()}`)?.quantity ?? 0])),
+    points: Object.fromEntries(gachaSpecialCategories.map(category => [category, state.gachaPoints?.[category] ?? 0])) };
+}
+// A request receives the same server-secret random stream even after a CAS retry.
+// Only the atomic DB receipt is ever returned as a successful draw.
+async function gachaRandom(userId: string, requestId: string) {
+  const secret = await crypto.subtle.importKey('raw', new TextEncoder().encode(key), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+  const bytes = new Uint8Array(128);
+  for (let block = 0; block < 4; block++) {
+    const digest = new Uint8Array(await crypto.subtle.sign('HMAC', secret, new TextEncoder().encode(`game04-g3:${userId}:${requestId}:${block}`)));
+    bytes.set(digest, block * 32);
+  }
+  const view = new DataView(bytes.buffer); let offset = 0;
+  return () => { if (offset >= bytes.length) throw new ApiError('抽選を確認できません。', 503); const value = view.getUint32(offset) / 4294967296; offset += 4; return value; };
+}
+function gachaFingerprint(action: string, payload: any) {
+  return JSON.stringify(action === 'gacha_exchange'
+    ? { action, category: payload.category, count: 1, payment: 'points', masterId: payload.masterId }
+    : { action: 'gacha_draw', category: payload.category, count: payload.count, payment: payload.payment });
+}
+async function gachaResponse(userId: string, saved: any, replayed: boolean) {
+  const state = replayed ? await stateFor(userId) : saved.state;
+  return responseFor(userId, { ...saved.receipt, gachaReceiptStatus: 'committed', gachaReplayed: replayed, gacha: await gachaStatus(state) }, state);
+}
+async function runGacha(userId: string, action: string, payload: any, requestId: string) {
+  const fingerprint = gachaFingerprint(action, payload);
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const [prior] = await db(`game04_requests?user_id=eq.${userId}&request_id=eq.${requestId}&select=result`);
+    if (prior) {
+      if (prior.result?.receipt?.gachaFingerprint !== fingerprint) throw new ApiError('この操作IDは別の操作に使用されています。', 409);
+      return gachaResponse(userId, prior.result, true);
+    }
+    const state = await stateFor(userId), status = await gachaStatus(state);
+    let drawn;
+    try {
+      drawn = action === 'gacha_exchange'
+        ? applyGachaExchange(state, payload, requestId, Date.now())
+        : applyGachaDraw(state, payload, requestId, Date.now(), await gachaRandom(userId, requestId), { ticketBalance: status.tickets[payload.category] ?? 0 });
+    } catch (error) {
+      const [settled] = await db(`game04_requests?user_id=eq.${userId}&request_id=eq.${requestId}&select=result`);
+      if (settled?.result?.receipt?.gachaFingerprint === fingerprint) return gachaResponse(userId, settled.result, true);
+      return responseFor(userId, { gachaRejected: true, gachaError: error instanceof Error ? error.message : '登用内容を確認してください。', gacha: status }, state);
+    }
+    const after = captureMissionAssets(synchronizeHomeBackgroundUnlocks(drawn.state));
+    const { state: _state, ...detail } = drawn;
+    const receipt = { gachaFingerprint: fingerprint, gachaReceipt: { ...detail, requestId, operation: action === 'gacha_exchange' ? 'exchange' : 'draw' },
+      gameplayMeasurement: { contractVersion: 'game04-gameplay-v1', action, stateVersionBefore: state.version, stateVersionAfter: state.version + 1,
+        category: drawn.category, payment: drawn.payment, count: drawn.count, diamondCost: state.diamonds - after.diamonds,
+        cashDelta: after.cash - state.cash, pointGain: drawn.pointGain, pointsAfter: drawn.pointsAfter } };
+    try {
+      const saved = await rpc('game04_commit_gacha', { p_user_id: userId, p_expected_version: state.version, p_state: after,
+        p_before_diamonds: state.diamonds, p_diamond_cost: state.diamonds - after.diamonds, p_cash_delta: after.cash - state.cash,
+        p_ticket_id: drawn.payment === 'ticket' ? drawn.ticketId : null, p_ticket_cost: drawn.payment === 'ticket' ? 1 : 0,
+        p_request_id: requestId, p_receipt: receipt });
+      if (!saved?.receipt?.gachaReceipt) throw new ApiError('保存結果を確認できません。同じ操作を再試行してください。', 503);
+      return gachaResponse(userId, saved, false);
+    } catch (error) {
+      if (error instanceof ApiError && error.status === 409 && attempt < 3) continue;
+      throw error;
+    }
+  }
+  throw new ApiError('他の操作の完了後に再試行してください。', 409);
+}
+
 Deno.serve(async (request: Request) => {
   if (request.method === 'OPTIONS') return new Response(null, { headers });
   try {
@@ -283,6 +354,23 @@ Deno.serve(async (request: Request) => {
     if (!profile) throw new ApiError('先にプレイヤー名を登録してください。', 409);
     const { action, payload = {}, requestId } = await request.json();
     if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(requestId)) throw new ApiError('操作IDが不正です。');
+    if (payload.userId !== undefined && payload.userId !== user.id) throw new ApiError('他のプレイヤーは操作できません。', 403);
+    if (action === 'gacha_status') {
+      const state = await stateFor(user.id);
+      return new Response(JSON.stringify(await responseFor(user.id, { gacha: await gachaStatus(state) }, state)), { headers });
+    }
+    if (action === 'gacha_receipt') {
+      const id = String(payload.requestId ?? '');
+      if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)) throw new ApiError('操作IDが不正です。');
+      const [saved] = await db(`game04_requests?user_id=eq.${user.id}&request_id=eq.${id}&select=result`);
+      const state = await stateFor(user.id);
+      return new Response(JSON.stringify(await responseFor(user.id, { gacha: await gachaStatus(state), gachaReceipt: saved?.result?.receipt?.gachaReceipt ?? null,
+        gachaReceiptStatus: saved?.result?.receipt?.gachaReceipt ? 'committed' : 'not_found', gachaReplayed: true }, state)), { headers });
+    }
+    if (action === 'gacha_draw' || action === 'gacha_exchange' || action === 'normal_gacha') {
+      const normalized = action === 'normal_gacha' ? { category: 'normal', count: payload.count, payment: payload.currency === 'FREE' ? 'free' : payload.currency === 'CASH' ? 'cash' : '' } : payload;
+      return new Response(JSON.stringify(await runGacha(user.id, action === 'normal_gacha' ? 'gacha_draw' : action, normalized, requestId)), { headers });
+    }
     if (action === "normal_gacha_status") {
       const state2 = await stateFor(user.id);
       const pool = await db("gacha_items_master?gacha_id=in.(CHAR_NORMAL,SKILL_NORMAL,EQUIP_NORMAL)&select=gacha_id,item_id,item_type,rarity&limit=1000");

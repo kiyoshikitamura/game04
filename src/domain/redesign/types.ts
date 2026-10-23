@@ -49,4 +49,5 @@ export interface TerritoryProjection { unlocked?: boolean; masterVersion: string
 
 
 export type ExpSize = "small" | "medium" | "large" | "xlarge";
+export interface RedesignState { gachaPoints?: Partial<Record<'character' | 'skill' | 'equipment', number>>; }
 export interface GrowthInventory { expItems: {character: Record<ExpSize,number>; equipment: Record<ExpSize,number>}; carryExp: {character:number;equipment:number}; genericSouls: Record<Rarity,number>; soulSelectors: Record<Rarity,number>; }
